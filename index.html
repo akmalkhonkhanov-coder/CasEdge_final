@@ -1111,7 +1111,15 @@ const state = {
   firm: null, caseType: null,
   userName: '', userEmail: '',
   messages: [], msgCount: 0,
+  seenCases: JSON.parse(localStorage.getItem('caseedge_seen') || '[]'),
 };
+
+function rememberCase(summary) {
+  state.seenCases.push(summary);
+  // keep last 30 to avoid bloating the prompt
+  if (state.seenCases.length > 30) state.seenCases = state.seenCases.slice(-30);
+  try { localStorage.setItem('caseedge_seen', JSON.stringify(state.seenCases)); } catch(e){}
+}
 
 /* ────────────────────────────────────────────────────
    SCREEN NAV
@@ -1487,11 +1495,20 @@ Format:
 - After 6-8 exchanges: "We are running short on time. Please give your final recommendation."
 - Be demanding. Create real pressure. This is a ${state.firm} first-round interview.`;
 
+  // Tell the model which cases this user already saw, so it never repeats
+  const avoidList = state.seenCases.length
+    ? '\n\n════ DO NOT REPEAT ════\nThis candidate has ALREADY done these cases. Generate something COMPLETELY different — different company, industry, problem, and numbers:\n' + state.seenCases.map((c,i) => (i+1)+'. '+c).join('\n')
+    : '';
+  const FULL_SYSTEM = SYSTEM + avoidList;
+
   try {
-    const opening = await callAI(SYSTEM.replace('${state.firm}', state.firm).replace('${state.caseType}', state.caseType).replace('${state.firm}', state.firm), [
+    const opening = await callAI(FULL_SYSTEM.replace('${state.firm}', state.firm).replace('${state.caseType}', state.caseType).replace('${state.firm}', state.firm), [
       { role: 'user', content: 'Begin the interview now.' }
     ]);
     state.messages.push({ role: 'assistant', content: opening });
+    // Remember this case so it's never repeated for this user
+    const firstLines = opening.split('\n').filter(l => l.trim()).slice(0, 4).join(' ');
+    rememberCase(state.firm + '/' + state.caseType + ': ' + firstLines.slice(0, 150));
     setTimeout(() => { setTyping(false); addMsg('ai', opening, true); }, 800);
   } catch(e) {
     setTyping(false);
