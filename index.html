@@ -840,6 +840,61 @@
 <!-- ═══════════════════════════════════════════════════
      SETUP
 ═══════════════════════════════════════════════════ -->
+<div id="screen-mode" class="screen" data-screen-label="Mode">
+  <nav class="top-nav">
+    <span class="wordmark">Cas<span class="wm-accent">Edge</span></span>
+    <div id="mode-user-pill"></div>
+  </nav>
+  <div class="setup-body">
+    <div class="setup-sec">
+      <div class="sec-eyebrow">Choose your practice</div>
+      <div class="sec-title">How do you want to train today?</div>
+      <div class="firm-grid">
+        <div class="firm-card" onclick="chooseMode('case')" tabindex="0" role="button">
+          <div class="firm-initial" style="background:rgba(204,120,92,.15);color:var(--coral);">F</div>
+          <div>
+            <div class="firm-name">Full Case Interview</div>
+            <div class="firm-desc">Complete 40-min simulation — structure, math, exhibits, recommendation. Like the real thing.</div>
+          </div>
+          <div class="firm-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div>
+        </div>
+        <div class="firm-card" onclick="chooseMode('drill')" tabindex="0" role="button">
+          <div class="firm-initial" style="background:rgba(93,184,166,.15);color:var(--accent-teal);">D</div>
+          <div>
+            <div class="firm-name">Skill Drills</div>
+            <div class="firm-desc">Targeted reps on one skill — market sizing, structuring, math, charts, brainstorm. Fast feedback.</div>
+          </div>
+          <div class="firm-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="screen-drill" class="screen" data-screen-label="Drill">
+  <nav class="top-nav">
+    <span class="wordmark">Cas<span class="wm-accent">Edge</span></span>
+    <div id="drill-user-pill"></div>
+  </nav>
+  <div class="setup-body">
+    <div class="setup-sec">
+      <div class="sec-eyebrow">Skill Drills</div>
+      <div class="sec-title">Pick a skill to drill</div>
+      <div class="firm-grid">
+        <div class="firm-card drill-card" onclick="selectDrill('Market Sizing', this)" tabindex="0" role="button"><div><div class="firm-name">Market Sizing</div><div class="firm-desc">Estimate market sizes from first principles with clean structure.</div></div></div>
+        <div class="firm-card drill-card" onclick="selectDrill('Structuring', this)" tabindex="0" role="button"><div><div class="firm-name">Structuring</div><div class="firm-desc">Build MECE, hypothesis-driven frameworks under time.</div></div></div>
+        <div class="firm-card drill-card" onclick="selectDrill('Case Math', this)" tabindex="0" role="button"><div><div class="firm-name">Case Math</div><div class="firm-desc">Multi-step business math — breakeven, ROI, margins.</div></div></div>
+        <div class="firm-card drill-card" onclick="selectDrill('Chart Interpretation', this)" tabindex="0" role="button"><div><div class="firm-name">Chart Interpretation</div><div class="firm-desc">Read exhibits and extract the insight that matters.</div></div></div>
+        <div class="firm-card drill-card" onclick="selectDrill('Brainstorm', this)" tabindex="0" role="button"><div><div class="firm-name">Brainstorm</div><div class="firm-desc">Generate 6+ MECE ideas with creativity and structure.</div></div></div>
+        <div class="firm-card drill-card" onclick="selectDrill('Calculation', this)" tabindex="0" role="button"><div><div class="firm-name">Mental Math</div><div class="firm-desc">Rapid-fire arithmetic for speed and accuracy.</div></div></div>
+        <div class="firm-card drill-card" onclick="selectDrill('Synthesis', this)" tabindex="0" role="button"><div><div class="firm-name">Synthesis</div><div class="firm-desc">Deliver an answer-first recommendation under 90 seconds (Minto Pyramid).</div></div></div>
+        <div class="firm-card drill-card" onclick="selectDrill('Behavioral', this)" tabindex="0" role="button"><div><div class="firm-name">Behavioral / Fit</div><div class="firm-desc">PEI-style fit questions scored on STAR structure.</div></div></div>
+      </div>
+      <button id="drill-start-btn" class="btn btn-primary btn-cta" disabled onclick="startDrill()" style="margin-top:24px;">Start Drill</button>
+    </div>
+  </div>
+</div>
+
 <div id="screen-setup" class="screen" data-screen-label="Setup">
   <nav class="top-nav">
     <span class="wordmark">Cas<span class="wm-accent">Edge</span></span>
@@ -1086,6 +1141,112 @@
 /* ────────────────────────────────────────────────────
    PLACEHOLDER FUNCTIONS  (fill in later)
 ──────────────────────────────────────────────────── */
+// ════════ DRILL MODE ════════
+// Shared drill engine: every drill is a SERIES of 5 adaptive reps with instant
+// per-rep feedback, then a summary scorecard. This mirrors the market standard
+// (CaseCoach / RocketBlocks rapid-fire format) but adds the thing they lack:
+// an explanation of the THINKING, not just a model answer to copy.
+const DRILL_ENGINE = `
+You run drills as a SERIES, never a single question. Follow this loop exactly:
+
+FORMAT — SERIES OF 5 REPS:
+- The drill is 5 reps total. Internally track "Rep 1 of 5 ... Rep 5 of 5" and always show it as a header on each new rep.
+- Present ONE rep. Then STOP and wait for the candidate's answer. Never reveal the answer before they respond.
+- After EACH answer, give INSTANT micro-feedback (3-5 lines, in Russian):
+   • Верно / Частично / Неверно
+   • The single most important thing they did well or missed
+   • THE LOGIC: why the right approach is right — the mental model, not just the number. (This is the differentiator: never just hand a model answer to copy; teach how to think.)
+   • The fast partner-level move in one line.
+- Then immediately present the NEXT rep. Keep momentum — rapid-fire.
+
+ADAPTIVE DIFFICULTY:
+- Start Rep 1 at medium difficulty.
+- If the previous rep was answered well → make the next rep HARDER (bigger numbers, more segments, a trap, tighter logic).
+- If answered poorly → hold difficulty and tighten the teaching, do not pile on.
+- By Rep 5, a candidate on a hot streak should be at genuine MBB-final difficulty.
+
+DIFFICULTY FLOOR (this is NOT a walk in the park — never serve comfortable reps):
+- Even Rep 1 is at real MBB first-round level, not warm-up level.
+- Any math must be multi-step (3+ linked operations) with non-round numbers; include a red-herring number the candidate must ignore where it fits.
+- Any structuring/brainstorm must have a non-obvious angle, not the textbook answer.
+- Any exhibit must contain a second, hidden insight beyond the obvious one.
+- If a candidate would call this rep "easy", you have failed the floor. Raise it.
+
+PARTNER PUSHBACK (where the rep involves a recommendation, an estimate, or a judgement call):
+- After the candidate answers, CHALLENGE once like a real partner: "Why should the CEO trust that?" / "What if your key assumption is wrong?" / "I disagree — convince me."
+- Then judge the RESPONSE: if they defend with data and hold firm → reward. If they CAVE just because you pushed → mark it a failure and say so (a strong candidate defends a right answer under pressure). If they were genuinely wrong and adapt → reward the adaptation.
+- Never reward folding under pressure on a correct answer, and never reward stubbornly clinging to a broken one.
+
+VARIETY (hard rule):
+- Every rep must use a DIFFERENT industry/context. Rotate across Healthcare, Airlines, Banking, Pharma, Logistics, Telecom, Insurance, Semiconductors, Retail, Energy, SaaS, CPG, Automotive, etc.
+- BANNED defaults: coffee shops, cafés, generic "premium retailer with falling margins", t-shirts.
+
+NUMBERS ARE FIXED — DO NOT BEND TO THE CANDIDATE: Whatever numbers you state in a rep are locked. If the candidate claims a figure is different or that you made an error, you do NOT change it to match them — restate the original value and have them work with it. A candidate questioning a number never makes it wrong. (Pushback above flexes only your JUDGEMENT call when they defend a better answer with logic — never the DATA.) Design each rep's numbers to cross-check before you present it, so you never have to improvise a correction mid-rep.
+
+AFTER REP 5 — SUMMARY SCORECARD (in Russian):
+- Общий счёт серии: X/10
+- Best rep / weakest rep
+- The ONE pattern to fix (the recurring weakness across the 5 reps — this is what makes the drill worth more than 5 random questions)
+- One concrete next action.
+
+LANGUAGE: questions and prompts in English; all feedback, logic and scorecard in Russian. Be blunt, partner-level, zero filler.
+`;
+
+const DRILL_PROMPTS = {
+  'Market Sizing': DRILL_ENGINE + `\n\nDRILL TYPE: MARKET SIZING. Each rep is one estimation question (e.g. "How many MRI scans are performed in Canada per year?"). Evaluate per rep: (1) clear equation stated FIRST, (2) reasonable assumptions, (3) logical segmentation, (4) clean calculation, (5) sanity-check. Harder reps = trickier populations, nested segments, or a unit trap. Teach the structuring logic, not just the final figure.`,
+  'Structuring': DRILL_ENGINE + `\n\nDRILL TYPE: STRUCTURING. Each rep is one case prompt (2-3 sentences, named company, specific problem). Candidate builds a MECE framework — do NOT run the full case. Evaluate per rep: MECE? tailored to THIS case (not a generic template)? hypothesis-driven? prioritized? Harder reps = less obvious problem types (org, M&A synergy, pricing, non-profit). Teach WHY a branch belongs, not just the tree.`,
+  'Case Math': DRILL_ENGINE + `\n\nDRILL TYPE: CASE MATH. Each rep is one multi-step business math problem with exact, internally consistent numbers (profit, breakeven, ROI, margin, NPV, contribution). Candidate requests missing data, states approach, then calculates. Every number must cross-check (Revenue × Margin = Profit). Harder reps = more steps, a red-herring number, or a breakeven/elasticity twist. Teach the setup logic and the shortcut.`,
+  'Chart Interpretation': DRILL_ENGINE + `\n\nDRILL TYPE: CHART INTERPRETATION. Each rep describes one exhibit in detail (specific numbers, e.g. "Bar chart: Revenue by segment — A €40M, B €25M, C €15M; line overlay: A declining 8%/yr, C growing 20%/yr"). Ask "What are your takeaways?" Evaluate: does the candidate extract the KEY insight (not just describe), connect to business implication, and propose a next step? Harder reps = charts with a hidden second insight or a misleading axis. Teach how to read for the "so what".`,
+  'Brainstorm': DRILL_ENGINE + `\n\nDRILL TYPE: CREATIVITY / BRAINSTORM. Each rep is one open question (e.g. "What factors before a beverage company launches a protein drink?"). Require 6+ ideas in a MECE structure; push if fewer than 4. Evaluate breadth, structure, non-obvious ideas. Harder reps = more constrained or two-sided prompts (revenue AND cost, internal AND external). Teach the MECE buckets to generate from, not just a list.`,
+  'Calculation': DRILL_ENGINE + `\n\nDRILL TYPE: RAPID MENTAL MATH. Each rep is one quick arithmetic problem with realistic business framing (percentages, large multiplications, fractions, weighted averages, growth rates). No data requests — just fast computation. Confirm correct/incorrect instantly and show the mental-math shortcut. Harder reps = uglier numbers and chained operations. Score speed AND accuracy. Don't round when teaching — show the precise path then the rounding shortcut.`,
+  'Synthesis': DRILL_ENGINE + `\n\nDRILL TYPE: SYNTHESIS / RECOMMENDATION. This is the single most-tested skill in a BCG final round. Each rep: present ONE compact case situation — named client, the decision they face, and 4-6 concrete, internally consistent data points already "discovered" (market size, margins, breakeven, investment, growth, one risk signal). Cross-check the numbers. Then instruct: "You have 90 seconds. Give me your recommendation." STOP and wait. Do NOT hint at the answer.
+
+Evaluate each rep strictly against the Minto Pyramid:
+1. CONCLUSION FIRST — a clear action verb ("We recommend / Client should enter / Do not acquire"). Building to the conclusion at the end = automatic structural fail, call it out hard.
+2. 2-3 supporting facts USING THE SPECIFIC NUMBERS from the prompt.
+3. At least 2 risks — one internal, one external/regulatory.
+4. 2-3 specific, time-bound next steps.
+Harder reps = noisier data, a number that argues the OTHER way, or a closer call. In feedback quote their exact weak phrasing and show the flawless partner-level version in English (verb → number-backed reasons → MECE risks → next steps). Conclusion-first is non-negotiable. NOTE: these reps are full mini-recommendations, not rapid-fire — give each room, but still run all 5 and end with the summary scorecard on the recurring weakness.`,
+  'Behavioral': DRILL_ENGINE + `\n\nDRILL TYPE: BEHAVIORAL / FIT (PEI). Fit is roughly half the hiring decision and almost nobody trains it. Each rep: ask ONE realistic PEI-style question, rotating themes across the 5 reps (personal leadership, conflict/disagreement with a senior, driving impact against resistance, a failure and what changed, "why consulting / why this firm", entrepreneurial drive). Ask only the question, then STOP and wait.
+
+After each answer you MAY ask 1-2 sharp probing follow-ups like a real interviewer ("What was YOUR specific contribution?", "What would you do differently?", "How did they react?") before scoring that rep.
+
+Evaluate each rep against STAR (Situation, Task, Action, Result): brief context without rambling? ACTION clearly THEIRS ("I", not "we") and specific? a QUANTIFIED result? genuine self-awareness? In feedback flag missing STAR elements, every "we" that should be "I", quote vague lines, and show a tightened model structure in English. Harder reps = themes candidates dodge (real failure, real conflict). NOTE: these are full answers, not rapid-fire — but still run all 5 themes and close with the summary scorecard on the recurring pattern.`
+};
+
+async function startDrill() {
+  if (!state.drillType) return;
+  state.messages = [];
+  state.msgCount = 0;
+  const chat = document.getElementById('chat-area');
+  document.getElementById('b-firm').textContent = 'Drill';
+  document.getElementById('b-type').textContent = state.drillType;
+  document.getElementById('b-user').textContent = state.userName.split(' ')[0] || 'You';
+  chat.innerHTML = '<div class="typing" id="typing-ind"><div class="msg-av" style="background:rgba(204,120,92,.14);color:var(--coral);font-family:var(--font-display);">I</div><div class="typing-bbl"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>';
+  setProgress(10);
+  showScreen('interview');
+  setTyping(true);
+  const seed = Math.random().toString(36).substring(2,8);
+  const sys = DRILL_PROMPTS[state.drillType] + '\n\nUniqueness seed: ' + seed + ' — make this drill different from any previous one. Avoid coffee/café topics.';
+  try {
+    const opening = await callAI(sys, [{ role:'user', content:'Begin the drill now.' }]);
+    state.messages.push({ role:'assistant', content: opening });
+    state.drillSystem = sys;
+    setTimeout(() => { setTyping(false); addMsg('ai', opening, true); }, 600);
+  } catch(e) {
+    setTyping(false);
+    addMsg('ai', 'Connection error. Please try again.');
+  }
+}
+
+function selectDrill(type, el) {
+  document.querySelectorAll('.drill-card').forEach(c => { c.classList.remove('selected'); });
+  if (el) el.classList.add('selected');
+  state.drillType = type;
+  const btn = document.getElementById('drill-start-btn');
+  if (btn) btn.disabled = false;
+}
+
 async function callAI(system, messages, model) {
   const response = await fetch('/api/claude', {
     method: 'POST',
@@ -1112,6 +1273,7 @@ const state = {
   userName: '', userEmail: '',
   messages: [], msgCount: 0,
   seenCases: JSON.parse(localStorage.getItem('caseedge_seen') || '[]'),
+  drillType: null, drillSystem: null, mode: null,
 };
 
 function rememberCase(summary) {
@@ -1147,12 +1309,18 @@ function handleLandingSubmit(e) {
 }
 
 function goToSetup() {
-  const pill = document.getElementById('setup-user-pill');
-  if (pill) {
-    const first = state.userName.split(' ')[0];
-    pill.innerHTML = `<span class="pill pill-coral">${esc(first)}</span>`;
-  }
-  showScreen('setup');
+  const first = state.userName.split(' ')[0];
+  const pillHtml = `<span class="pill pill-coral">${esc(first)}</span>`;
+  ['setup-user-pill','mode-user-pill','drill-user-pill'].forEach(id => {
+    const p = document.getElementById(id); if (p) p.innerHTML = pillHtml;
+  });
+  showScreen('mode');
+}
+
+function chooseMode(mode) {
+  state.mode = mode;
+  if (mode === 'case') showScreen('setup');
+  else showScreen('drill');
 }
 
 /* ────────────────────────────────────────────────────
@@ -1277,6 +1445,17 @@ HARD RULES:
 5. You are allowed to invent realistic business context freely (company names, industries, stories). You are NOT allowed to be loose with NUMBERS — those must form one coherent, pre-verified system.
 
 A real casebook is written and checked before the interview. You must operate the same way: fully designed up front, perfectly consistent throughout, never improvised.
+
+════ TWO NON-NEGOTIABLE REQUIREMENTS EVERY CASE MUST CONTAIN ════
+Real MBB cases ALWAYS have these two. A case missing either is INCOMPLETE and feels fake. Verify both are present before you start:
+
+REQUIREMENT 1 — A CHART/EXHIBIT INTERPRETATION QUESTION (mandatory):
+Every case MUST include at least one moment where you present DATA as an exhibit (a table, or a described chart like "a bar chart showing revenue by segment: Segment A €40M, B €25M, C €20M") and ASK THE CANDIDATE TO INTERPRET IT: "What do you take away from this?" / "What stands out?" The candidate must extract the insight themselves. Reading a chart and pulling the key insight is a CORE tested skill — never skip it. Present the exhibit, pause, and make them analyze it.
+
+REQUIREMENT 2 — REAL CALCULATION THE CANDIDATE MUST DO (mandatory):
+NEVER let the candidate just "estimate" or "ballpark." Every case MUST have at least one point where you give exact numbers and the candidate must actually COMPUTE a specific answer — market size, breakeven, NPV, profit impact, ROI. Give the inputs, then say "Walk me through the math — what's the number?" Make them calculate, then check their answer against your pre-computed answer key. If a candidate tries to hand-wave ("it would be roughly positive"), push back: "Give me the actual number. Show me the calculation." Testing real math is non-negotiable — it's half of what MBB screens for.
+
+For MARKET ENTRY specifically: the math is usually MARKET SIZING (top-down or bottom-up) plus a profitability/breakeven calc for entry. Always include: market size estimation with real numbers AND a "is it worth entering?" calculation (investment vs expected return). Never let market entry become a purely qualitative "yes the market looks attractive" discussion — force the numbers.
 
 ════ MATH RIGOR & OPERATIONAL LOGIC (cases must be HARD, not surface-level) ════
 The #1 complaint about weak cases: math is too easy and the business logic doesn't hold up. Fix both:
@@ -1499,6 +1678,8 @@ For BCG: respond to candidate's requests, challenge weak assumptions.
 
 STEP 5 — MATH:
 DATA CONSISTENCY RULE (CRITICAL): Once you set a number at the start of the case, it NEVER changes. If candidate asks for revenue and you said $22.8M, every later calculation must use exactly that. Before giving ANY new number, mentally check it against all numbers already given — they must cross-check (Revenue×Margin=Profit, Price×Volume=Revenue). If you ever notice your own numbers don't add up, do NOT improvise — recalculate from the original figures. NEVER present contradictory data.
+
+NUMBERS DO NOT BEND TO THE CANDIDATE (absolute rule): The facts and figures of this case are fixed in your answer key and are NOT negotiable. If the candidate asserts a different number ("isn't revenue actually $30M?", "I think the margin is higher", "that can't be right"), you do NOT change your data to match them. Hold the original figure firmly: "No — the figure is $22.8M, as I gave you. Work with that." A candidate questioning a number does not make the number wrong. You only restate the answer-key value; you never adopt the candidate's substitute. This is true even if the candidate is confident, repeats themselves, or claims you made an error — the casebook number stands. (The ONLY thing that can flex is your JUDGEMENT on an open recommendation when the candidate defends a genuinely better answer with logic — never the underlying DATA.)
 State exact numbers. Ask: "Walk me through your approach before you calculate."
 If math is wrong, don't correct immediately — ask: "Does that figure make sense given what we know about the business?"
 
@@ -1606,6 +1787,20 @@ async function sendMessage() {
   setProgress(Math.min(92, 8 + state.msgCount * 13));
   setTyping(true);
 
+  // Drill mode uses the drill's own system prompt
+  if (state.drillType && state.drillSystem) {
+    try {
+      // Wider window than cases: a 5-rep series must keep the running rep counter in context
+      const reply = await callAI(state.drillSystem, state.messages.slice(-24), 'claude-sonnet-4-5');
+      state.messages.push({ role:'assistant', content: reply });
+      setTimeout(() => { setTyping(false); addMsg('ai', reply, true); }, 500);
+    } catch(_) {
+      setTyping(false);
+      addMsg('ai', 'Apologies — something went wrong. Please try again.');
+    }
+    return;
+  }
+
   const sys = `You are a senior ${state.firm} Partner. You are ${state.msgCount} exchanges into a ${state.caseType} case interview.
 
 SCORING DIMENSIONS you are silently tracking:
@@ -1622,6 +1817,20 @@ YOUR ROLE NOW:
 - If candidate ${state.msgCount >= 6 ? 'has given enough exchanges, signal wrap-up: "We are running short on time — please give me your final recommendation."' : 'skips structuring and jumps to solutions, redirect: "Before we go there — walk me through your overall framework first."'}
 - If candidate gives a generic framework without customisation, challenge it: "That structure applies to many cases. How would you tailor it specifically to [company/situation]?"
 - If candidate hedges ("it could be X or Y"), push: "Which one do you think is more likely, and why?"
+
+PARTNER PRESSURE (critical — this is what makes it not a walk in the park):
+- When the candidate states a recommendation or a key conclusion, CHALLENGE it at least once, the way a real partner does: "Why should the CEO trust that answer?" / "What if your core assumption is wrong?" / "A board member says you're wrong — defend it."
+- Then judge the RESPONSE, not the pushback:
+   • If the candidate defends with DATA and sound logic and holds firm → reward it ("Good — you held your ground with evidence"). Do NOT keep badgering a correctly-defended position.
+   • If the candidate CAVES without new reason just because you pushed → that is a FAILURE. Call it out: a strong candidate defends a right answer under pressure.
+   • If the candidate was genuinely WRONG and your challenge exposes a real flaw → they should ADAPT, not stubbornly defend. Reward the adaptation; penalise stubbornness on a truly broken point.
+- You do NOT change the underlying facts of the case to whatever the candidate wishes. The numbers are fixed. Talking you out of a real constraint by assertion alone does not work.
+
+MATH FLOOR (no easy arithmetic):
+- Any quantitative ask must be genuinely multi-step (3+ linked operations), use non-round numbers, and include at least one number the candidate must recognise as a red herring or must NOT use.
+- Where the case type allows, force a real breakeven, NPV, contribution-margin, or elasticity calculation — not a one-line multiplication.
+- Make the candidate state the approach before you give the final inputs. Verify every figure cross-checks (Revenue × Margin = Profit).
+
 - Keep your response to 2-4 sentences. One focused question maximum.
 - Provide data ONLY when the candidate asks for it specifically.`;
 
