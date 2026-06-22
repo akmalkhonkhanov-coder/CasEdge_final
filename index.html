@@ -176,6 +176,106 @@
     .nav-link.active { color: var(--coral); }
     @media (max-width: 560px) { .nav-link { padding: 7px 8px; font-size: 13px; } }
 
+    /* ── Footer ── */
+    .land-footer {
+      border-top: 1px solid rgba(255,255,255,.08); padding: 48px 24px 32px;
+      position: relative; z-index: 1;
+    }
+    [data-theme="light"] .land-footer { border-color: rgba(31,41,55,.10); }
+    .lf-inner {
+      max-width: 860px; margin: 0 auto; display: flex; justify-content: space-between;
+      align-items: flex-start; gap: 32px; flex-wrap: wrap;
+    }
+    .lf-tag { font-size: 13px; color: var(--on-dark-soft); margin-top: 10px; max-width: 280px; line-height: 1.5; }
+    .lf-links { display: flex; flex-direction: column; gap: 10px; }
+    .lf-link {
+      background: none; border: none; cursor: pointer; font-family: inherit;
+      font-size: 14px; color: var(--on-dark-soft); text-align: left; padding: 0;
+      transition: color .2s;
+    }
+    .lf-link:hover { color: var(--coral); }
+    .lf-copy { max-width: 860px; margin: 32px auto 0; font-size: 12px; color: var(--on-dark-soft); opacity: .7; }
+
+    /* ── Info pages (FAQ / Contact / Cookies) ── */
+    .info-body { max-width: 720px; margin: 0 auto; padding: 56px 24px 80px; width: 100%; }
+    .info-eyebrow {
+      font-size: 11px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--coral); margin-bottom: 16px;
+    }
+    .info-title {
+      font-family: var(--font-display); font-size: clamp(30px, 5vw, 44px); font-weight: 400;
+      line-height: 1.1; letter-spacing: -1px; color: var(--on-dark); margin-bottom: 18px;
+    }
+    .info-lead { font-size: 17px; line-height: 1.7; color: var(--on-dark-soft); margin-bottom: 36px; }
+    .info-note {
+      font-size: 13px; color: var(--on-dark-soft); margin-top: 36px; padding: 14px 16px;
+      background: rgba(204,120,92,.08); border-radius: 10px; border: 1px solid rgba(204,120,92,.15);
+      line-height: 1.5;
+    }
+    .faq-list { display: flex; flex-direction: column; gap: 4px; }
+    .faq-item { padding: 22px 0; border-bottom: 1px solid rgba(255,255,255,.07); }
+    [data-theme="light"] .faq-item { border-color: rgba(31,41,55,.08); }
+    .faq-q { font-size: 16px; font-weight: 600; color: var(--on-dark); margin-bottom: 10px; }
+    .faq-a { font-size: 14.5px; line-height: 1.7; color: var(--on-dark-soft); }
+    .contact-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    @media (max-width: 560px) { .contact-cards { grid-template-columns: 1fr; } }
+    .contact-card {
+      display: flex; align-items: center; gap: 14px; padding: 20px;
+      background: var(--surface-dark-elevated); border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--radius-lg); text-decoration: none; transition: border-color .2s, transform .2s;
+    }
+    [data-theme="light"] .contact-card { border-color: rgba(31,41,55,.10); }
+    .contact-card:hover { border-color: rgba(204,120,92,.35); transform: translateY(-2px); }
+    .contact-ic {
+      width: 42px; height: 42px; border-radius: 10px; flex-shrink: 0;
+      background: rgba(204,120,92,.12); color: var(--coral);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .contact-ic svg { width: 22px; height: 22px; }
+    .contact-h { font-size: 13px; color: var(--on-dark-soft); }
+    .contact-v { font-size: 15px; color: var(--on-dark); font-weight: 500; margin-top: 2px; }
+    .legal-block h3 { font-size: 16px; font-weight: 600; color: var(--on-dark); margin: 26px 0 8px; }
+    .legal-block p { font-size: 14.5px; line-height: 1.7; color: var(--on-dark-soft); }
+
+    /* ── Cookie consent banner ── */
+    .cookie-banner {
+      position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%);
+      max-width: 560px; width: calc(100% - 32px); z-index: 1000;
+      background: var(--surface-dark-elevated); border: 1px solid rgba(255,255,255,.12);
+      border-radius: 14px; padding: 16px 18px; box-shadow: 0 12px 40px rgba(0,0,0,.4);
+      display: none; align-items: center; gap: 16px; flex-wrap: wrap;
+    }
+    [data-theme="light"] .cookie-banner { border-color: rgba(31,41,55,.14); box-shadow: 0 12px 40px rgba(31,41,55,.15); }
+    .cookie-banner.show { display: flex; animation: fadeUp .4s ease both; }
+    .cookie-text { font-size: 13px; color: var(--on-dark-soft); line-height: 1.5; flex: 1; min-width: 220px; }
+    .cookie-text a { color: var(--coral); cursor: pointer; text-decoration: underline; }
+    .cookie-btn {
+      background: var(--coral); color: #fff; border: none; border-radius: 9px;
+      padding: 9px 20px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: inherit;
+      white-space: nowrap;
+    }
+    .cookie-btn:hover { filter: brightness(1.06); }
+
+    /* ── Auth screen ── */
+    .auth-body { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 24px; }
+    .auth-card {
+      width: 100%; max-width: 400px; background: var(--surface-dark-elevated);
+      border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius-lg); padding: 32px;
+    }
+    [data-theme="light"] .auth-card { border-color: rgba(31,41,55,.10); }
+    .auth-tabs { display: flex; gap: 4px; margin-bottom: 26px; background: rgba(128,128,128,.1); padding: 4px; border-radius: 10px; }
+    .auth-tab {
+      flex: 1; background: none; border: none; cursor: pointer; font-family: inherit;
+      font-size: 14px; font-weight: 500; color: var(--on-dark-soft); padding: 9px; border-radius: 7px;
+      transition: all .2s;
+    }
+    .auth-tab.active { background: var(--coral); color: #fff; }
+    .auth-fields { display: flex; flex-direction: column; gap: 8px; }
+    .auth-label { font-size: 13px; color: var(--on-dark-soft); margin-top: 8px; }
+    .auth-error { font-size: 13px; color: #e06c5c; min-height: 18px; margin-top: 4px; }
+    .auth-foot { text-align: center; font-size: 13px; color: var(--on-dark-soft); margin-top: 18px; }
+    .auth-foot a { color: var(--coral); cursor: pointer; }
+
     /* ── Buttons ──────────────────────────────────────── */
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
@@ -605,6 +705,8 @@
   </style>
   <!-- Bundler thumbnail -->
   
+  <!-- Supabase client (auth + database) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -752,6 +854,136 @@
     </button>
   </div>
   </div><!-- /land-story-wrap -->
+
+  <footer class="land-footer">
+    <div class="lf-inner">
+      <div class="lf-brand">
+        <span class="wordmark">Cas<span class="wm-bridge">e</span>dge</span>
+        <p class="lf-tag">MBB case interview prep — cases, drills, and partner-level feedback.</p>
+      </div>
+      <div class="lf-links">
+        <button class="lf-link" onclick="goToPage('faq')">FAQ</button>
+        <button class="lf-link" onclick="goToPage('contact')">Contact</button>
+        <button class="lf-link" onclick="goToPage('cookies')">Cookies</button>
+      </div>
+    </div>
+    <div class="lf-copy">© 2026 CasEdge. All rights reserved.</div>
+  </footer>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     INFO PAGES — FAQ / CONTACT / COOKIES
+═══════════════════════════════════════════════════ -->
+<div id="screen-faq" class="screen" data-screen-label="FAQ">
+  <nav class="top-nav">
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-bridge">e</span>dge</span>
+    <button class="btn btn-ghost" onclick="showScreen('landing')">← Back</button>
+  </nav>
+  <div class="info-body">
+    <div class="info-eyebrow">Help</div>
+    <h1 class="info-title">Frequently asked questions</h1>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">What is a case interview?</div>
+        <div class="faq-a">A case interview is a live business problem you solve out loud with an interviewer. It's the core of how McKinsey, BCG, and Bain assess candidates — testing structure, quantitative skill, business judgment, and communication.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What's the difference between cases and drills?</div>
+        <div class="faq-a">A full case is a complete ~40-minute simulation — structure, math, exhibits, and a final recommendation. Drills isolate a single skill (math, structuring, synthesis, and more) into a fast 5-rep series so you can build that one muscle quickly.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How is the feedback different from other tools?</div>
+        <div class="faq-a">Most tools hand you a sample answer to compare against. CasEdge coaches the way a partner would — it pushes back on weak logic, holds the numbers firm under pressure, and shows you how to think, not just what the answer was.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Which firms and case types are covered?</div>
+        <div class="faq-a">Cases follow real MBB patterns across firms (McKinsey, BCG, Bain) and types — profitability, market entry, M&A, pricing, market sizing, and more. Drills cover eight distinct skills tested in real interviews.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What languages are supported?</div>
+        <div class="faq-a">The platform is expanding to English, Russian, and Spanish — with the same case difficulty and depth across every language.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is my progress saved?</div>
+        <div class="faq-a">Yes — your progress is currently saved on your device. Account-based sign-in with cloud sync across devices is coming soon.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="screen-contact" class="screen" data-screen-label="Contact">
+  <nav class="top-nav">
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-bridge">e</span>dge</span>
+    <button class="btn btn-ghost" onclick="showScreen('landing')">← Back</button>
+  </nav>
+  <div class="info-body">
+    <div class="info-eyebrow">Get in touch</div>
+    <h1 class="info-title">Contact us</h1>
+    <p class="info-lead">Questions, feedback, or partnership ideas? We'd love to hear from you.</p>
+    <div class="contact-cards">
+      <a class="contact-card" id="contactEmail" href="mailto:support@casedge.io">
+        <div class="contact-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div>
+        <div><div class="contact-h">Email</div><div class="contact-v">support@casedge.io</div></div>
+      </a>
+      <a class="contact-card" id="contactTelegram" href="#" onclick="return false;">
+        <div class="contact-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4L3 11l6 2 2 6 3-4 5 4 2-15z"/></svg></div>
+        <div><div class="contact-h">Telegram</div><div class="contact-v">@your_handle</div></div>
+      </a>
+    </div>
+    <p class="info-note">Note: replace the email and Telegram handle above with your real details once your CasEdge domain and channel are set up.</p>
+  </div>
+</div>
+
+<div id="screen-cookies" class="screen" data-screen-label="Cookies">
+  <nav class="top-nav">
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-bridge">e</span>dge</span>
+    <button class="btn btn-ghost" onclick="showScreen('landing')">← Back</button>
+  </nav>
+  <div class="info-body">
+    <div class="info-eyebrow">Legal</div>
+    <h1 class="info-title">Cookie Policy</h1>
+    <p class="info-lead">This page explains how CasEdge uses cookies and local storage.</p>
+    <div class="legal-block">
+      <h3>What we store</h3>
+      <p>CasEdge uses your browser's local storage to remember your theme preference (light or dark) and to track your practice progress on this device. This data stays in your browser and is not sent to a server.</p>
+      <h3>Essential cookies</h3>
+      <p>When account sign-in and payments are added, we will use essential cookies required to keep you logged in and to process transactions securely. These are necessary for the service to function.</p>
+      <h3>Analytics</h3>
+      <p>We may use privacy-respecting analytics to understand how the product is used and improve it. Any such tracking will be disclosed here and, where required, subject to your consent.</p>
+      <h3>Managing cookies</h3>
+      <p>You can clear local storage and cookies at any time through your browser settings. Note that clearing them will reset your saved progress and preferences on this device.</p>
+      <h3>Contact</h3>
+      <p>Questions about this policy? Reach us via the Contact page.</p>
+    </div>
+    <p class="info-note">This is a general template, not legal advice. Have it reviewed before launch, especially once payments and accounts go live.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     AUTH (sign in / sign up)
+═══════════════════════════════════════════════════ -->
+<div id="screen-auth" class="screen" data-screen-label="Auth">
+  <nav class="top-nav">
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-bridge">e</span>dge</span>
+    <button class="btn btn-ghost" onclick="showScreen('landing')">← Back</button>
+  </nav>
+  <div class="auth-body">
+    <div class="auth-card">
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tabSignin" onclick="switchAuthTab('signin')">Sign in</button>
+        <button class="auth-tab" id="tabSignup" onclick="switchAuthTab('signup')">Create account</button>
+      </div>
+      <div class="auth-fields">
+        <label class="auth-label">Email</label>
+        <input class="input-el" type="email" id="authEmail" placeholder="you@email.com" autocomplete="email">
+        <label class="auth-label">Password</label>
+        <input class="input-el" type="password" id="authPassword" placeholder="••••••••" autocomplete="current-password">
+        <div class="auth-error" id="authError"></div>
+        <button class="btn btn-primary" id="authSubmitBtn" onclick="handleAuthSubmit()" style="width:100%;margin-top:6px;">Sign in</button>
+      </div>
+      <p class="auth-foot" id="authFoot">New here? <a onclick="switchAuthTab('signup')">Create an account</a></p>
+    </div>
+  </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════
@@ -1106,6 +1338,106 @@
 ═══════════════════════════════════════════════════ -->
 <script>
 /* ────────────────────────────────────────────────────
+   SUPABASE — auth + cloud progress
+──────────────────────────────────────────────────── */
+const SUPABASE_URL = 'https://owyjiizhtrqpzlzawrjn.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_qIPY90nBEuvsjGfnQCICbQ_cZlP3vEc';
+let sb = null;
+let currentUser = null;
+try {
+  if (window.supabase && window.supabase.createClient) {
+    sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  }
+} catch (e) { console.warn('Supabase init failed', e); }
+
+// Sign up with email + password
+async function authSignUp(email, password) {
+  if (!sb) return { error: 'Auth unavailable' };
+  const { data, error } = await sb.auth.signUp({ email, password });
+  if (error) return { error: error.message };
+  // create profile row (best-effort)
+  if (data.user) {
+    try {
+      await sb.from('profiles').insert({
+        id: data.user.id,
+        referral_code: 'CE' + data.user.id.slice(0, 6).toUpperCase()
+      });
+    } catch (e) { /* row may already exist */ }
+  }
+  return { data };
+}
+// Sign in
+async function authSignIn(email, password) {
+  if (!sb) return { error: 'Auth unavailable' };
+  const { data, error } = await sb.auth.signInWithPassword({ email, password });
+  if (error) return { error: error.message };
+  return { data };
+}
+// Sign out
+async function authSignOut() {
+  if (sb) await sb.auth.signOut();
+  currentUser = null;
+  updateAuthUI();
+  showScreen('landing');
+}
+// Check session on load
+async function checkAuthSession() {
+  if (!sb) return;
+  const { data } = await sb.auth.getSession();
+  currentUser = data.session ? data.session.user : null;
+  updateAuthUI();
+  if (currentUser) await syncProgressFromCloud();
+}
+// Reflect auth state in UI (swap Sign in ⇄ account)
+function updateAuthUI() {
+  document.querySelectorAll('.auth-signin-btn').forEach(b => {
+    b.style.display = currentUser ? 'none' : '';
+  });
+  document.querySelectorAll('.auth-account-btn').forEach(b => {
+    b.style.display = currentUser ? '' : 'none';
+  });
+  document.querySelectorAll('[id$="-user-pill"]').forEach(p => {
+    if (currentUser) {
+      p.textContent = currentUser.email;
+      p.style.cssText = 'font-size:13px;color:var(--on-dark-soft);padding:6px 12px;background:rgba(204,120,92,.1);border-radius:20px;';
+    } else { p.textContent = ''; p.style.cssText = ''; }
+  });
+}
+// Pull progress from cloud → merge into local view
+async function syncProgressFromCloud() {
+  if (!sb || !currentUser) return;
+  try {
+    const { data, error } = await sb.from('profiles').select('*').eq('id', currentUser.id).single();
+    if (data) {
+      const local = {
+        cases: data.cases_completed || 0,
+        drills: data.drills_completed || 0,
+        drillsByType: data.drills_by_type || {},
+        scores: data.scores || [],
+        days: data.streak_days || [],
+        lastDay: (data.streak_days && data.streak_days.length) ? data.streak_days[data.streak_days.length-1] : null
+      };
+      saveProgress(local);
+    }
+  } catch (e) { console.warn('cloud sync failed', e); }
+}
+// Push local progress → cloud
+async function pushProgressToCloud() {
+  if (!sb || !currentUser) return;
+  const p = loadProgress();
+  try {
+    await sb.from('profiles').update({
+      cases_completed: p.cases,
+      drills_completed: p.drills,
+      drills_by_type: p.drillsByType,
+      scores: p.scores,
+      streak_days: p.days,
+      updated_at: new Date().toISOString()
+    }).eq('id', currentUser.id);
+  } catch (e) { console.warn('cloud push failed', e); }
+}
+
+/* ────────────────────────────────────────────────────
    PLACEHOLDER FUNCTIONS  (fill in later)
 ──────────────────────────────────────────────────── */
 // ════════ DRILL MODE ════════
@@ -1289,8 +1621,43 @@ window.addEventListener('DOMContentLoaded', function () {
    LANDING
 ──────────────────────────────────────────────────── */
 function handleSignIn() {
-  if (!state.userName) state.userName = 'Candidate';
-  goToSetup();
+  if (currentUser) { goToProgress(); return; }
+  switchAuthTab('signin');
+  showScreen('auth');
+}
+let authMode = 'signin';
+function switchAuthTab(mode) {
+  authMode = mode;
+  document.getElementById('tabSignin').classList.toggle('active', mode === 'signin');
+  document.getElementById('tabSignup').classList.toggle('active', mode === 'signup');
+  document.getElementById('authSubmitBtn').textContent = mode === 'signin' ? 'Sign in' : 'Create account';
+  const foot = document.getElementById('authFoot');
+  foot.innerHTML = mode === 'signin'
+    ? 'New here? <a onclick="switchAuthTab(\'signup\')">Create an account</a>'
+    : 'Already have an account? <a onclick="switchAuthTab(\'signin\')">Sign in</a>';
+  document.getElementById('authError').textContent = '';
+}
+async function handleAuthSubmit() {
+  const email = document.getElementById('authEmail').value.trim();
+  const pw = document.getElementById('authPassword').value;
+  const errEl = document.getElementById('authError');
+  const btn = document.getElementById('authSubmitBtn');
+  errEl.textContent = '';
+  if (!email || !pw) { errEl.textContent = 'Enter email and password.'; return; }
+  if (pw.length < 6) { errEl.textContent = 'Password must be at least 6 characters.'; return; }
+  btn.disabled = true; btn.textContent = 'Please wait…';
+  const res = authMode === 'signin' ? await authSignIn(email, pw) : await authSignUp(email, pw);
+  btn.disabled = false; btn.textContent = authMode === 'signin' ? 'Sign in' : 'Create account';
+  if (res.error) { errEl.textContent = res.error; return; }
+  if (authMode === 'signup') {
+    errEl.style.color = '#5db8a6';
+    errEl.textContent = 'Account created! Check your email to confirm, then sign in.';
+    switchAuthTab('signin');
+    return;
+  }
+  // signed in
+  await checkAuthSession();
+  showScreen('mode');
 }
 
 function handleLandingSubmit(e) {
@@ -1347,6 +1714,7 @@ function recordSession(kind, label, score) {
     p.lastDay = today;
   }
   saveProgress(p);
+  if (currentUser) pushProgressToCloud();
 }
 function computeStreak(days) {
   if (!days || !days.length) return 0;
@@ -1389,6 +1757,33 @@ function renderProgress() {
   }
 }
 function goToProgress() { renderProgress(); showScreen('progress'); }
+function goToPage(page) { showScreen(page); }
+
+// Check auth session on load (restores login across visits)
+(function () {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => { if (typeof checkAuthSession === 'function') checkAuthSession(); });
+  } else {
+    if (typeof checkAuthSession === 'function') checkAuthSession();
+  }
+})();
+function acceptCookies() {
+  try { localStorage.setItem('casedge-cookies', 'accepted'); } catch (e) {}
+  const b = document.getElementById('cookieBanner');
+  if (b) b.classList.remove('show');
+}
+(function initCookieBanner() {
+  function show() {
+    let accepted = false;
+    try { accepted = localStorage.getItem('casedge-cookies') === 'accepted'; } catch (e) {}
+    if (!accepted) {
+      const b = document.getElementById('cookieBanner');
+      if (b) setTimeout(() => b.classList.add('show'), 1200);
+    }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', show);
+  else show();
+})();
 
 
 function selectFirm(firm, el) {
@@ -2268,4 +2663,9 @@ document.addEventListener('keydown', e => {
 </script>
 
 
+<!-- Cookie consent banner -->
+<div class="cookie-banner" id="cookieBanner">
+  <div class="cookie-text">We use local storage and essential cookies to run CasEdge and remember your preferences. See our <a onclick="goToPage('cookies')">Cookie Policy</a>.</div>
+  <button class="cookie-btn" onclick="acceptCookies()">Got it</button>
+</div>
 </body></html>
