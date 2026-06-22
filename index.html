@@ -7,385 +7,8 @@
   <!-- CasEdge Design System tokens — inlined for portability -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-  <style>/* cyrillic-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("c76a2ce0-fa4c-4a88-9e14-2ce11ccc604a") format('woff2');
-  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-/* cyrillic */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("1863aa79-62c1-44ab-a15a-58c57a8ba799") format('woff2');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* greek-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("db3978b7-2a0d-4225-a923-a134616850b1") format('woff2');
-  unicode-range: U+1F00-1FFF;
-}
-/* greek */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("fb4df9d1-44d1-47dc-a4d2-5b1294bf0b18") format('woff2');
-  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("671fa100-5211-4b44-b43e-5cc6340fa039") format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("ee85af26-1976-4b6a-b331-4136a3061270") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("898baf9e-7e27-4983-b9bc-938fc8dcd2ec") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* cyrillic-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("c76a2ce0-fa4c-4a88-9e14-2ce11ccc604a") format('woff2');
-  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-/* cyrillic */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("1863aa79-62c1-44ab-a15a-58c57a8ba799") format('woff2');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* greek-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("db3978b7-2a0d-4225-a923-a134616850b1") format('woff2');
-  unicode-range: U+1F00-1FFF;
-}
-/* greek */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("fb4df9d1-44d1-47dc-a4d2-5b1294bf0b18") format('woff2');
-  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("671fa100-5211-4b44-b43e-5cc6340fa039") format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("ee85af26-1976-4b6a-b331-4136a3061270") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("898baf9e-7e27-4983-b9bc-938fc8dcd2ec") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* cyrillic-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("c76a2ce0-fa4c-4a88-9e14-2ce11ccc604a") format('woff2');
-  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-/* cyrillic */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("1863aa79-62c1-44ab-a15a-58c57a8ba799") format('woff2');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* greek-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("db3978b7-2a0d-4225-a923-a134616850b1") format('woff2');
-  unicode-range: U+1F00-1FFF;
-}
-/* greek */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("fb4df9d1-44d1-47dc-a4d2-5b1294bf0b18") format('woff2');
-  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("671fa100-5211-4b44-b43e-5cc6340fa039") format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("ee85af26-1976-4b6a-b331-4136a3061270") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("898baf9e-7e27-4983-b9bc-938fc8dcd2ec") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* cyrillic-ext */
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("29cad24a-2399-4801-9c42-49b7d491c22a") format('woff2');
-  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-/* cyrillic */
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("143e4574-7cd9-4ee3-936a-55d65c83aad3") format('woff2');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* greek */
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("f593a731-3a27-4da2-87b5-eaa1790eab8c") format('woff2');
-  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("013e8757-12fc-4923-8d3d-a19f9c5e8dc5") format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("1648bc06-cf2b-4067-85f6-d95436feb0ed") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("261f1f69-5464-4658-b94f-f3dda496ab8a") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* cyrillic-ext */
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("29cad24a-2399-4801-9c42-49b7d491c22a") format('woff2');
-  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-}
-/* cyrillic */
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("143e4574-7cd9-4ee3-936a-55d65c83aad3") format('woff2');
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* greek */
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("f593a731-3a27-4da2-87b5-eaa1790eab8c") format('woff2');
-  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("013e8757-12fc-4923-8d3d-a19f9c5e8dc5") format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("1648bc06-cf2b-4067-85f6-d95436feb0ed") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("261f1f69-5464-4658-b94f-f3dda496ab8a") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url("92faf419-19a2-48f2-aafd-77d93a136d96") format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url("044bac22-a527-4d63-9b28-9c1241aa771d") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url("770ddb8d-1d19-4b6d-bc58-168e179166da") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("2a636115-4ec7-44c5-bbba-1854a7108223") format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("bb36177f-d3d6-4579-a9f4-5899a07fe879") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("3ba8efb7-eacd-4a79-90a5-3a13a58db95a") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-/* vietnamese */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("2a636115-4ec7-44c5-bbba-1854a7108223") format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("bb36177f-d3d6-4579-a9f4-5899a07fe879") format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Newsreader';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("3ba8efb7-eacd-4a79-90a5-3a13a58db95a") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-</style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
   <style>
     /* CasEdge DS — Colors */
     :root {
@@ -407,6 +30,52 @@
       --text-muted: var(--muted); --text-on-dark: var(--on-dark);
       --text-on-dark-soft: var(--on-dark-soft);
     }
+
+    /* ── LIGHT THEME (warm beige) ──
+       Re-maps the "dark surface" and "on-dark text" tokens to light values,
+       so the whole UI inverts cleanly without rewriting components. */
+    [data-theme="light"] {
+      --surface-dark: #f4efe6;          /* main background → warm beige */
+      --surface-dark-elevated: #fbf8f2; /* cards → near-cream */
+      --surface-dark-soft: #efe9dd;
+      --on-dark: #1f2937;               /* primary text → dark slate-blue */
+      --on-dark-soft: #5b6472;          /* secondary text → muted slate */
+      --ink: #1f2937;
+      --body: #3d4451;
+      --body-strong: #1f2937;
+      --hairline: #e0d8ca;
+    }
+    /* Hairlines/borders that were white-on-dark need to flip to dark-on-light */
+    [data-theme="light"] .top-nav,
+    [data-theme="light"] .land-section,
+    [data-theme="light"] .land-cta-wrap { border-color: rgba(31,41,55,.10); }
+    [data-theme="light"] .ls-card,
+    [data-theme="light"] .firm-card,
+    [data-theme="light"] .msg-bbl.ai-bbl,
+    [data-theme="light"] .input-el { border-color: rgba(31,41,55,.12); }
+    [data-theme="light"] .stat-sep { background: rgba(31,41,55,.15); }
+    [data-theme="light"] .ai .msg-bbl { background: #fbf8f2; border-color: rgba(31,41,55,.12); }
+    [data-theme="light"] .msg-bbl .md-table { border-color: rgba(31,41,55,.15); }
+    [data-theme="light"] .msg-bbl .md-table td { border-color: rgba(31,41,55,.08); }
+    [data-theme="light"] .feat-pill { border-color: rgba(31,41,55,.12); color: rgba(31,41,55,.5); }
+    [data-theme="light"] .input-el { background: #fbf8f2; }
+    [data-theme="light"] .landing-screen,
+    [data-theme="light"] #screen-landing {
+      background:
+        radial-gradient(ellipse 75% 55% at 50% -8%, rgba(204,120,92,.10) 0%, transparent 65%),
+        #f4efe6;
+    }
+    /* Theme toggle button */
+    .theme-toggle {
+      background: transparent; border: none; cursor: pointer; padding: 8px;
+      color: var(--on-dark-soft); display: inline-flex; align-items: center;
+      border-radius: 8px; transition: color .2s, background .2s;
+    }
+    .theme-toggle:hover { color: var(--on-dark); background: rgba(128,128,128,.1); }
+    .theme-toggle svg { width: 19px; height: 19px; }
+    .theme-toggle .icon-sun { display: none; }
+    [data-theme="light"] .theme-toggle .icon-sun { display: inline; }
+    [data-theme="light"] .theme-toggle .icon-moon { display: none; }
     /* CasEdge DS — Typography */
     :root {
       --font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
@@ -455,8 +124,57 @@
     .wordmark {
       font-family: var(--font-display); font-size: 22px; font-weight: 400;
       letter-spacing: -.3px; color: var(--on-dark); text-decoration: none; user-select: none;
+      position: relative; display: inline-flex; align-items: baseline;
+    }
+    /* The shared "e" bridges Case + Edge — it belongs to both words */
+    .wm-bridge {
+      color: var(--coral); position: relative; font-style: italic;
+      padding: 0 1px;
+    }
+    .wm-bridge::after {
+      content: ""; position: absolute; left: -1px; right: -1px; bottom: -2px;
+      height: 6px; border: 1.4px solid var(--coral); border-top: none;
+      border-radius: 0 0 6px 6px; opacity: .55;
     }
     .wm-accent { color: var(--coral); }
+
+    /* ── Progress screen ── */
+    .prog-stats-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 28px 0 36px;
+    }
+    @media (max-width: 640px) { .prog-stats-grid { grid-template-columns: repeat(2, 1fr); } }
+    .prog-stat {
+      background: var(--surface-dark-elevated); border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--radius-lg); padding: 22px 18px; text-align: center;
+    }
+    [data-theme="light"] .prog-stat { border-color: rgba(31,41,55,.10); }
+    .prog-stat-num {
+      font-family: var(--font-display); font-size: 38px; font-weight: 400;
+      color: var(--coral); line-height: 1;
+    }
+    .prog-stat-lbl { font-size: 12px; color: var(--on-dark-soft); margin-top: 8px; letter-spacing: .3px; }
+    .prog-breakdown { margin-bottom: 28px; }
+    .prog-bd-title { font-size: 14px; font-weight: 600; color: var(--on-dark); margin-bottom: 14px; }
+    .prog-bd-list { display: flex; flex-direction: column; gap: 10px; }
+    .prog-bd-row { display: flex; align-items: center; gap: 12px; }
+    .prog-bd-name { font-size: 13px; color: var(--on-dark-soft); width: 150px; flex-shrink: 0; }
+    .prog-bd-bar { flex: 1; height: 8px; background: rgba(128,128,128,.15); border-radius: 4px; overflow: hidden; }
+    .prog-bd-fill { height: 100%; background: var(--coral); border-radius: 4px; transition: width .6s cubic-bezier(.16,1,.3,1); }
+    .prog-bd-count { font-size: 13px; color: var(--on-dark); width: 28px; text-align: right; flex-shrink: 0; font-variant-numeric: tabular-nums; }
+    .prog-empty { text-align: center; padding: 30px 0; color: var(--on-dark-soft); }
+    .prog-empty p { margin-bottom: 18px; }
+    .prog-note { font-size: 12px; color: var(--on-dark-soft); text-align: center; margin-top: 30px; opacity: .8; }
+
+    /* ── Top nav menu links ── */
+    .nav-menu { display: flex; align-items: center; gap: 4px; }
+    .nav-link {
+      background: none; border: none; cursor: pointer; font-family: inherit;
+      font-size: 14px; color: var(--on-dark-soft); padding: 7px 12px; border-radius: 8px;
+      transition: color .2s, background .2s;
+    }
+    .nav-link:hover { color: var(--on-dark); background: rgba(128,128,128,.1); }
+    .nav-link.active { color: var(--coral); }
+    @media (max-width: 560px) { .nav-link { padding: 7px 8px; font-size: 13px; } }
 
     /* ── Buttons ──────────────────────────────────────── */
     .btn {
@@ -509,8 +227,98 @@
     }
     .landing-main {
       flex: 1; display: flex; flex-direction: column; align-items: center;
-      justify-content: center; text-align: center; padding: 72px 24px 64px;
+      justify-content: center; text-align: center;
+      min-height: calc(100vh - 64px); padding: 72px 24px 48px;
     }
+    /* Scroll-down hint under hero */
+    .scroll-hint {
+      margin-top: 40px; display: flex; flex-direction: column; align-items: center;
+      gap: 6px; color: var(--on-dark-soft); font-size: 12px; letter-spacing: 1px;
+      text-transform: uppercase; cursor: pointer; opacity: .7;
+      transition: opacity .2s; background: none; border: none;
+    }
+    .scroll-hint:hover { opacity: 1; }
+    .scroll-hint svg { width: 20px; height: 20px; animation: bounce 1.8s infinite; }
+    @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(5px)} }
+
+    /* ── Scroll-reveal (Apple-style) ── */
+    .reveal {
+      opacity: 0; transform: translateY(34px) scale(.985);
+      transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
+      will-change: opacity, transform;
+    }
+    .reveal.in { opacity: 1; transform: translateY(0) scale(1); }
+    .reveal .ls-card { opacity: 0; transform: translateY(26px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+    .reveal.in .ls-card { opacity: 1; transform: translateY(0); }
+    .reveal.in .ls-card:nth-child(1) { transition-delay: .08s; }
+    .reveal.in .ls-card:nth-child(2) { transition-delay: .20s; }
+    .reveal.in .ls-card:nth-child(3) { transition-delay: .32s; }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .reveal .ls-card { opacity: 1 !important; transform: none !important; transition: none !important; }
+    }
+    /* Floating ambient shapes behind story sections (pure-CSS depth) */
+    .ambient-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+    .ambient-bg span {
+      position: absolute; border-radius: 50%; filter: blur(60px); opacity: .5;
+      background: radial-gradient(circle, rgba(204,120,92,.5), transparent 70%);
+      animation: drift 18s ease-in-out infinite;
+    }
+    .ambient-bg span:nth-child(1) { width: 340px; height: 340px; top: 8%; left: -6%; }
+    .ambient-bg span:nth-child(2) { width: 260px; height: 260px; top: 52%; right: -4%;
+      background: radial-gradient(circle, rgba(93,184,166,.35), transparent 70%); animation-delay: -6s; }
+    .ambient-bg span:nth-child(3) { width: 300px; height: 300px; bottom: 4%; left: 30%; animation-delay: -11s; }
+    @keyframes drift {
+      0%,100% { transform: translate(0,0) scale(1); }
+      33% { transform: translate(40px,-30px) scale(1.08); }
+      66% { transform: translate(-30px,20px) scale(.95); }
+    }
+    .land-story-wrap { position: relative; }
+    .land-story-wrap > section, .land-story-wrap > .land-cta-wrap { position: relative; z-index: 1; }
+    /* Smooth scrolling for the whole landing */
+    html { scroll-behavior: smooth; }
+    /* 3D tilt on story cards — they react to cursor with real perspective */
+    .ls-cards { perspective: 900px; }
+    .ls-card {
+      transform-style: preserve-3d; transition: transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s, border-color .25s;
+      will-change: transform;
+    }
+    .ls-card:hover {
+      box-shadow: 0 18px 50px rgba(0,0,0,.35), 0 2px 8px rgba(204,120,92,.12);
+      border-color: rgba(204,120,92,.3);
+    }
+    [data-theme="light"] .ls-card:hover { box-shadow: 0 18px 50px rgba(31,41,55,.12); }
+    /* Story sections below the fold */
+    .land-section {
+      max-width: 860px; margin: 0 auto; padding: 84px 24px;
+      border-top: 1px solid rgba(255,255,255,.07);
+    }
+    .land-section .ls-eyebrow {
+      font-size: 11px; font-weight: 500; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--coral); margin-bottom: 18px; text-align: center;
+    }
+    .land-section .ls-title {
+      font-family: var(--font-display); font-size: clamp(30px, 4.5vw, 44px);
+      font-weight: 400; line-height: 1.1; letter-spacing: -1px;
+      color: var(--on-dark); margin-bottom: 20px; text-align: center;
+    }
+    .land-section .ls-lead {
+      font-size: 17px; line-height: 1.7; color: var(--on-dark-soft);
+      max-width: 600px; margin: 0 auto 40px; text-align: center; text-wrap: pretty;
+    }
+    .ls-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    @media (max-width: 720px) { .ls-cards { grid-template-columns: 1fr; } }
+    .ls-card {
+      background: var(--surface-dark-elevated); border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--radius-lg); padding: 26px 22px; text-align: left;
+    }
+    .ls-card-h {
+      font-size: 15px; font-weight: 600; color: var(--on-dark); margin-bottom: 8px;
+      display: flex; align-items: center; gap: 9px;
+    }
+    .ls-card-h .ls-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--coral); flex-shrink: 0; }
+    .ls-card-p { font-size: 14px; line-height: 1.6; color: var(--on-dark-soft); }
+    .land-cta-wrap { text-align: center; padding: 72px 24px 96px; border-top: 1px solid rgba(255,255,255,.07); }
+    .land-cta-wrap .ls-title { margin-bottom: 28px; }
     .eyebrow {
       font-size: 11px; font-weight: 500; letter-spacing: 2.5px;
       text-transform: uppercase; color: var(--coral); margin-bottom: 28px;
@@ -654,6 +462,20 @@
     .msg-bbl em { font-style: italic; }
     .msg-bbl hr { border: none; border-top: 1px solid rgba(255,255,255,.14); margin: 10px 0; }
     .msg-bbl .md-bullet { color: var(--coral); margin-right: 7px; }
+    .msg-bbl .md-table {
+      border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 13.5px;
+      border: 1px solid rgba(255,255,255,.12); border-radius: 8px; overflow: hidden;
+    }
+    .msg-bbl .md-table th {
+      background: rgba(204,120,92,.14); color: var(--on-dark); font-weight: 600;
+      text-align: left; padding: 9px 12px; border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+    .msg-bbl .md-table td {
+      padding: 8px 12px; color: var(--on-dark-soft);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+    .msg-bbl .md-table tr:last-child td { border-bottom: none; }
+    .msg-bbl .md-table tbody tr:hover td { background: rgba(255,255,255,.03); }
     .ai .msg-bbl {
       background: var(--surface-dark-elevated); color: var(--on-dark);
       border: 1px solid rgba(255,255,255,.07); border-top-left-radius: 4px;
@@ -791,34 +613,40 @@
 ═══════════════════════════════════════════════════ -->
 <div id="screen-landing" class="screen active" data-screen-label="Landing">
   <nav class="top-nav">
-    <span class="wordmark">Cas<span class="wm-accent">Edge</span></span>
-    <button class="btn btn-ghost" onclick="handleSignIn()">Sign in →</button>
+    <span class="wordmark">Cas<span class="wm-bridge">e</span>dge</span>
+    <div style="display:flex;align-items:center;gap:6px;">
+      <div class="nav-menu">
+        <button class="nav-link" onclick="chooseMode('case')">Cases</button>
+        <button class="nav-link" onclick="chooseMode('drill')">Drills</button>
+        <button class="nav-link" onclick="goToProgress()">Progress</button>
+      </div>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" title="Switch light / dark">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
+      </button>
+      <button class="btn btn-ghost" onclick="handleSignIn()">Sign in →</button>
+    </div>
   </nav>
 
   <main class="landing-main">
-    <div class="eyebrow">AI-Powered MBB Prep</div>
+    <div class="eyebrow">MBB Interview Prep</div>
 
     <h1 class="hero-hl">Master the case.<br><em>Land the offer.</em></h1>
 
     <p class="hero-sub">
-      Practice real consulting frameworks with an AI coach built on
+      Practice real consulting frameworks with a coach built on
       McKinsey, BCG, and Bain interview patterns.
     </p>
 
     <div class="stats-row">
       <div class="stat">
-        <div class="stat-num">10k+</div>
-        <div class="stat-lbl">Cases practiced</div>
+        <div class="stat-num">Real</div>
+        <div class="stat-lbl">MBB casebooks</div>
       </div>
       <div class="stat-sep"></div>
       <div class="stat">
-        <div class="stat-num">3</div>
-        <div class="stat-lbl">MBB firms</div>
-      </div>
-      <div class="stat-sep"></div>
-      <div class="stat">
-        <div class="stat-num">2,400</div>
-        <div class="stat-lbl">Users trained</div>
+        <div class="stat-num">8</div>
+        <div class="stat-lbl">Drill types</div>
       </div>
     </div>
 
@@ -841,12 +669,89 @@
 
     <div class="feat-pills">
       <span class="feat-pill">Structured Frameworks</span>
-      <span class="feat-pill">Real-time AI Coaching</span>
+      <span class="feat-pill">Instant Feedback</span>
       <span class="feat-pill">Firm-specific Cases</span>
       <span class="feat-pill">Expert-level Feedback</span>
       <span class="feat-pill">No credit card needed</span>
     </div>
+
+    <button class="scroll-hint" onclick="document.getElementById('land-story').scrollIntoView({behavior:'smooth'})">
+      Learn more
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
+    </button>
   </main>
+
+  <!-- Scroll story sections -->
+  <div class="land-story-wrap">
+  <div class="ambient-bg" aria-hidden="true"><span></span><span></span><span></span></div>
+  <section id="land-story" class="land-section reveal">
+    <div class="ls-eyebrow">The Case Interview</div>
+    <h2 class="ls-title">What top firms actually test</h2>
+    <p class="ls-lead">A case interview is a live business problem you solve out loud with the interviewer. It's how McKinsey, BCG, and Bain decide who gets the offer — and it rewards structure, sharp math, and clear communication over memorized answers.</p>
+    <div class="ls-cards">
+      <div class="ls-card">
+        <div class="ls-card-h"><span class="ls-dot"></span>Structure</div>
+        <div class="ls-card-p">Break an open-ended problem into clean, MECE buckets — and lead with your hypothesis, not a generic framework.</div>
+      </div>
+      <div class="ls-card">
+        <div class="ls-card-h"><span class="ls-dot"></span>Quant</div>
+        <div class="ls-card-p">Run multi-step business math under pressure — breakeven, margins, market sizing — and tie every number back to the decision.</div>
+      </div>
+      <div class="ls-card">
+        <div class="ls-card-h"><span class="ls-dot"></span>Synthesis</div>
+        <div class="ls-card-p">Deliver an answer-first recommendation with the conclusion up front, supporting data, and the risks that come with it.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="land-section reveal">
+    <div class="ls-eyebrow">Targeted Drills</div>
+    <h2 class="ls-title">Train one skill at a time</h2>
+    <p class="ls-lead">Cases test everything at once. Drills isolate a single skill so you can build it fast — each one is a 5-rep adaptive series that gets harder as you improve, with instant feedback and a full model answer after every rep.</p>
+    <div class="ls-cards">
+      <div class="ls-card">
+        <div class="ls-card-h"><span class="ls-dot"></span>Math &amp; Sizing</div>
+        <div class="ls-card-p">Mental math, case math, and market sizing — speed and accuracy under real time pressure.</div>
+      </div>
+      <div class="ls-card">
+        <div class="ls-card-h"><span class="ls-dot"></span>Structure &amp; Charts</div>
+        <div class="ls-card-p">Framework building, chart reading, and brainstorming — the core of any case.</div>
+      </div>
+      <div class="ls-card">
+        <div class="ls-card-h"><span class="ls-dot"></span>Synthesis &amp; Fit</div>
+        <div class="ls-card-p">Answer-first recommendations and behavioral (PEI) questions — the half most candidates never train.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="land-section reveal">
+    <div class="ls-eyebrow">Why CasEdge</div>
+    <h2 class="ls-title">Built on the real thing</h2>
+    <p class="ls-lead">Most prep tools give you a sample answer to compare against. CasEdge coaches the way a partner would — pushing back on weak logic, holding the numbers firm, and showing you exactly how to think, not just what the answer was.</p>
+    <div class="ls-cards">
+      <div class="ls-card">
+        <div class="ls-card-h"><span class="ls-dot"></span>Real casebooks</div>
+        <div class="ls-card-p">Cases drawn from genuine MBB casebook patterns — Wharton, Darden, Kellogg, Stern — not made-up scenarios.</div>
+      </div>
+      <div class="ls-card">
+        <div class="ls-card-h"><span class="ls-dot"></span>Partner-level pushback</div>
+        <div class="ls-card-p">The coach challenges your recommendation and only backs down when you defend it with data — like the real room.</div>
+      </div>
+      <div class="ls-card">
+        <div class="ls-card-h"><span class="ls-dot"></span>Feedback in your language</div>
+        <div class="ls-card-p">Practice in English, get your debrief and scorecard in clear, direct feedback you can act on immediately.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="land-cta-wrap reveal">
+    <h2 class="ls-title">Ready to start?</h2>
+    <button class="btn btn-primary btn-cta" style="max-width:280px;margin:0 auto;" onclick="document.getElementById('screen-landing').scrollIntoView({behavior:'smooth'}); setTimeout(()=>document.getElementById('nameInput')?.focus(),400)">
+      Begin Free Session
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+    </button>
+  </div>
+  </div><!-- /land-story-wrap -->
 </div>
 
 <!-- ═══════════════════════════════════════════════════
@@ -854,8 +759,11 @@
 ═══════════════════════════════════════════════════ -->
 <div id="screen-mode" class="screen" data-screen-label="Mode">
   <nav class="top-nav">
-    <span class="wordmark">Cas<span class="wm-accent">Edge</span></span>
-    <div id="mode-user-pill"></div>
+    <span class="wordmark">Cas<span class="wm-bridge">e</span>dge</span>
+    <div style="display:flex;align-items:center;gap:6px;">
+      <button class="nav-link" onclick="goToProgress()">Progress</button>
+      <div id="mode-user-pill"></div>
+    </div>
   </nav>
   <div class="setup-body">
     <div class="setup-sec">
@@ -883,9 +791,56 @@
   </div>
 </div>
 
+<!-- ═══════════════════════════════════════════════════
+     PROGRESS
+═══════════════════════════════════════════════════ -->
+<div id="screen-progress" class="screen" data-screen-label="Progress">
+  <nav class="top-nav">
+    <span class="wordmark">Cas<span class="wm-bridge">e</span>dge</span>
+    <div id="progress-user-pill"></div>
+  </nav>
+  <div class="setup-body">
+    <div class="setup-sec">
+      <div class="sec-eyebrow">Your progress</div>
+      <div class="sec-title">How your training is going</div>
+
+      <div class="prog-stats-grid" id="progStatsGrid">
+        <div class="prog-stat">
+          <div class="prog-stat-num" id="progTotalCases">0</div>
+          <div class="prog-stat-lbl">Cases completed</div>
+        </div>
+        <div class="prog-stat">
+          <div class="prog-stat-num" id="progTotalDrills">0</div>
+          <div class="prog-stat-lbl">Drills completed</div>
+        </div>
+        <div class="prog-stat">
+          <div class="prog-stat-num" id="progStreak">0</div>
+          <div class="prog-stat-lbl">Day streak</div>
+        </div>
+        <div class="prog-stat">
+          <div class="prog-stat-num" id="progAvgScore">—</div>
+          <div class="prog-stat-lbl">Avg score</div>
+        </div>
+      </div>
+
+      <div class="prog-breakdown">
+        <div class="prog-bd-title">Drills by type</div>
+        <div id="progDrillBreakdown" class="prog-bd-list"></div>
+      </div>
+
+      <div class="prog-empty" id="progEmpty" style="display:none;">
+        <p>No sessions yet. Once you complete a case or drill, your progress shows up here.</p>
+        <button class="btn btn-primary" style="max-width:240px;" onclick="goToMode()">Start training</button>
+      </div>
+
+      <p class="prog-note">Progress is saved on this device. Sign-in with cloud sync is coming soon.</p>
+    </div>
+  </div>
+</div>
+
 <div id="screen-drill" class="screen" data-screen-label="Drill">
   <nav class="top-nav">
-    <span class="wordmark">Cas<span class="wm-accent">Edge</span></span>
+    <span class="wordmark">Cas<span class="wm-bridge">e</span>dge</span>
     <div id="drill-user-pill"></div>
   </nav>
   <div class="setup-body">
@@ -909,7 +864,7 @@
 
 <div id="screen-setup" class="screen" data-screen-label="Setup">
   <nav class="top-nav">
-    <span class="wordmark">Cas<span class="wm-accent">Edge</span></span>
+    <span class="wordmark">Cas<span class="wm-bridge">e</span>dge</span>
     <div id="setup-user-pill"></div>
   </nav>
 
@@ -1040,7 +995,7 @@
 ═══════════════════════════════════════════════════ -->
 <div id="screen-interview" class="screen" data-screen-label="Interview">
   <div class="int-nav">
-    <span class="wordmark">Cas<span class="wm-accent">Edge</span></span>
+    <span class="wordmark">Cas<span class="wm-bridge">e</span>dge</span>
     <div class="int-badges">
       <span class="pill pill-neutral" id="b-firm">McKinsey</span>
       <span class="pill pill-neutral" id="b-type">Profitability</span>
@@ -1083,7 +1038,7 @@
 ═══════════════════════════════════════════════════ -->
 <div id="screen-feedback" class="screen" data-screen-label="Feedback">
   <nav class="top-nav">
-    <span class="wordmark">Cas<span class="wm-accent">Edge</span></span>
+    <span class="wordmark">Cas<span class="wm-bridge">e</span>dge</span>
     <div class="int-badges">
       <span class="pill pill-neutral" id="fb-firm">McKinsey</span>
       <span class="pill pill-neutral" id="fb-type">Profitability</span>
@@ -1229,6 +1184,7 @@ Evaluate each rep against STAR (Situation, Task, Action, Result): brief context 
 
 async function startDrill() {
   if (!state.drillType) return;
+  recordSession('drill', state.drillType);
   state.messages = [];
   state.msgCount = 0;
   const chat = document.getElementById('chat-area');
@@ -1358,10 +1314,83 @@ function chooseMode(mode) {
   if (mode === 'case') showScreen('setup');
   else showScreen('drill');
 }
+function goToMode() { showScreen('mode'); }
 
 /* ────────────────────────────────────────────────────
-   SETUP
+   PROGRESS TRACKING (localStorage — device-local for now)
 ──────────────────────────────────────────────────── */
+const PROG_KEY = 'casedge-progress';
+function loadProgress() {
+  try {
+    const raw = localStorage.getItem(PROG_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch (e) { /* sandbox or corrupt */ }
+  return { cases: 0, drills: 0, drillsByType: {}, scores: [], days: [], lastDay: null };
+}
+function saveProgress(p) {
+  try { localStorage.setItem(PROG_KEY, JSON.stringify(p)); } catch (e) { /* sandbox */ }
+}
+// Call when a session finishes. type='case' or a drill type name. score optional (0-100).
+function recordSession(kind, label, score) {
+  const p = loadProgress();
+  if (kind === 'case') p.cases++;
+  else {
+    p.drills++;
+    p.drillsByType[label] = (p.drillsByType[label] || 0) + 1;
+  }
+  if (typeof score === 'number' && !isNaN(score)) p.scores.push(score);
+  // streak tracking by calendar day
+  const today = new Date().toISOString().slice(0, 10);
+  if (p.lastDay !== today) {
+    p.days = p.days || [];
+    p.days.push(today);
+    p.lastDay = today;
+  }
+  saveProgress(p);
+}
+function computeStreak(days) {
+  if (!days || !days.length) return 0;
+  const set = new Set(days);
+  let streak = 0;
+  let d = new Date();
+  // count back from today (or yesterday) while consecutive days exist
+  for (let i = 0; i < 400; i++) {
+    const key = d.toISOString().slice(0, 10);
+    if (set.has(key)) { streak++; d.setDate(d.getDate() - 1); }
+    else if (i === 0) { d.setDate(d.getDate() - 1); } // allow today-not-yet
+    else break;
+  }
+  return streak;
+}
+const ALL_DRILL_TYPES = ['Market Sizing','Structuring','Case Math','Chart Interpretation','Brainstorm','Calculation','Synthesis','Behavioral'];
+function renderProgress() {
+  const p = loadProgress();
+  const total = p.cases + p.drills;
+  setText('progTotalCases', p.cases);
+  setText('progTotalDrills', p.drills);
+  setText('progStreak', computeStreak(p.days));
+  const avg = p.scores.length ? Math.round(p.scores.reduce((a,b)=>a+b,0)/p.scores.length) : null;
+  setText('progAvgScore', avg !== null ? avg : '—');
+  // breakdown bars
+  const bd = document.getElementById('progDrillBreakdown');
+  if (bd) {
+    const maxCount = Math.max(1, ...ALL_DRILL_TYPES.map(t => p.drillsByType[t] || 0));
+    bd.innerHTML = ALL_DRILL_TYPES.map(t => {
+      const c = p.drillsByType[t] || 0;
+      const pct = Math.round((c / maxCount) * 100);
+      return `<div class="prog-bd-row"><div class="prog-bd-name">${t}</div><div class="prog-bd-bar"><div class="prog-bd-fill" style="width:${c?pct:0}%"></div></div><div class="prog-bd-count">${c}</div></div>`;
+    }).join('');
+  }
+  const empty = document.getElementById('progEmpty');
+  const grid = document.getElementById('progStatsGrid');
+  if (empty && grid) {
+    const isEmpty = total === 0;
+    empty.style.display = isEmpty ? 'block' : 'none';
+  }
+}
+function goToProgress() { renderProgress(); showScreen('progress'); }
+
+
 function selectFirm(firm, el) {
   document.querySelectorAll('.firm-card').forEach(c => {
     c.classList.remove('selected');
@@ -1421,6 +1450,7 @@ const OPENERS = {
 ──────────────────────────────────────────────────── */
 async function startInterview() {
   if (!state.firm || !state.caseType) return;
+  recordSession('case', state.caseType);
   state.messages = [];
   state.msgCount = 0;
 
@@ -1854,6 +1884,13 @@ YOUR ROLE NOW:
 - If candidate gives a generic framework without customisation, challenge it: "That structure applies to many cases. How would you tailor it specifically to [company/situation]?"
 - If candidate hedges ("it could be X or Y"), push: "Which one do you think is more likely, and why?"
 
+KEEP THE CANDIDATE IN THE CASE (important):
+- This is THEIR interview — they must do the thinking. If the candidate asks YOU to solve it ("what's the answer?", "just tell me", "what would you do?", "give me the framework"), do NOT solve it. Redirect: "That's for you to work through — what's your thinking?" or "Take a structured guess first, then I'll react."
+- If the candidate drifts off-topic, rambles, or goes vague/incoherent, pull them back to the live question: "Let's stay with the case — [restate the exact question on the table]."
+- If the candidate goes silent or says "I don't know", don't rescue them with the answer. Give a small nudge toward the next step and let them attempt: "What's the first bucket you'd look at, and why?"
+- If they ask to skip a step (math, structure) to get to the end, hold the line: "We'll get there — but walk me through this part first."
+- Never lecture or hand over your model thinking mid-case. The full model answer comes only at the debrief, not during the case.
+
 PARTNER PRESSURE (critical — this is what makes it not a walk in the park):
 - When the candidate states a recommendation or a key conclusion, CHALLENGE it at least once, the way a real partner does: "Why should the CEO trust that answer?" / "What if your core assumption is wrong?" / "A board member says you're wrong — defend it."
 - Then judge the RESPONSE, not the pushback:
@@ -2080,22 +2117,47 @@ function esc(str) {
 // HTML this ever produces is the small set of tags we add ourselves.
 function mdToHtml(raw) {
   let t = esc(raw);
-  // Horizontal rule: a line that is only --- or *** (this was showing as the
-  // "dotted line" / stray dashes the user reported)
+
+  // ── Tables first (before hr/br rules touch the pipes) ──
+  // Detect blocks of consecutive lines that look like a markdown table:
+  //   | A | B |
+  //   |---|---|
+  //   | 1 | 2 |
+  t = t.replace(/(?:^\|.*\|[ \t]*\n?)+/gm, function (block) {
+    const lines = block.trim().split('\n').filter(l => l.trim().startsWith('|'));
+    if (lines.length < 2) return block; // not a real table
+    // second line must be the separator (---|---)
+    const sep = lines[1].replace(/[^|\-: \t]/g, '');
+    if (!/\|?\s*:?-+:?\s*(\|\s*:?-+:?\s*)+\|?/.test(lines[1])) return block;
+    const cells = l => l.replace(/^\||\|$/g, '').split('|').map(c => c.trim());
+    const head = cells(lines[0]);
+    const rows = lines.slice(2).map(cells);
+    let html = '<table class="md-table"><thead><tr>' +
+      head.map(h => '<th>' + h + '</th>').join('') + '</tr></thead><tbody>';
+    rows.forEach(r => {
+      html += '<tr>' + head.map((_, i) => '<td>' + (r[i] || '') + '</td>').join('') + '</tr>';
+    });
+    html += '</tbody></table>';
+    return html;
+  });
+
+  // Horizontal rule: a line that is only --- or *** 
   t = t.replace(/^\s*([-*_])\1\1+\s*$/gm, '<hr>');
   // Headings ### / ## / #  →  bold line
   t = t.replace(/^\s*#{1,6}\s+(.+)$/gm, '<strong>$1</strong>');
   // Bold **text** and __text__
   t = t.replace(/\*\*([^*]+?)\*\*/g, '<strong>$1</strong>');
   t = t.replace(/__([^_]+?)__/g, '<strong>$1</strong>');
-  // Italic *text* (avoid touching the ** already handled) and _text_
+  // Italic *text* and _text_
   t = t.replace(/(^|[^*])\*([^*\n]+?)\*([^*]|$)/g, '$1<em>$2</em>$3');
   t = t.replace(/(^|[^_])_([^_\n]+?)_([^_]|$)/g, '$1<em>$2</em>$3');
-  // Bullet markers at line start: -, *, • → a real bullet
+  // Bullet markers at line start
   t = t.replace(/^\s*[-*•]\s+(.+)$/gm, '<span class="md-bullet">•</span>$1');
-  // Numbered list markers stay as-is (they read fine), just keep the line
-  // Line breaks
+  // Line breaks — but NOT inside the <table> blocks we just built
+  t = t.replace(/<\/table>\s*\n?/g, '</table>'); // strip trailing newline after table
   t = t.replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
+  // Remove stray <br> immediately around tables
+  t = t.replace(/(<br>\s*)*<table/g, '<table').replace(/<\/table>(\s*<br>)*/g, '</table>');
   return t;
 }
 
@@ -2103,6 +2165,96 @@ function setText(id, val) {
   const el = document.getElementById(id);
   if (el) el.textContent = val;
 }
+
+// ── Theme toggle (dark ⇄ light beige) ──
+function toggleTheme() {
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  applyTheme(isLight ? 'dark' : 'light');
+}
+function applyTheme(theme) {
+  if (theme === 'light') document.documentElement.setAttribute('data-theme', 'light');
+  else document.documentElement.removeAttribute('data-theme');
+  try { localStorage.setItem('casedge-theme', theme); } catch (e) { /* sandbox */ }
+}
+// Restore saved theme on load (defaults to dark)
+(function () {
+  try {
+    const saved = localStorage.getItem('casedge-theme');
+    if (saved === 'light') document.documentElement.setAttribute('data-theme', 'light');
+  } catch (e) { /* sandbox blocks storage — stay on default dark */ }
+})();
+
+// ── Scroll-reveal: add .in when a .reveal element scrolls into view ──
+(function () {
+  function initReveal() {
+    const els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) {
+      // Fallback: no observer support → just show everything
+      els.forEach(el => el.classList.add('in'));
+      return;
+    }
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          obs.unobserve(entry.target); // animate once
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+    els.forEach(el => obs.observe(el));
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initReveal);
+  } else {
+    initReveal();
+  }
+})();
+
+// ── 3D tilt on cards + parallax ambient background ──
+(function () {
+  function initTiltAndParallax() {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return;
+
+    // 3D tilt: cards lean toward the cursor
+    document.querySelectorAll('.ls-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;   // -0.5 .. 0.5
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        const max = 7; // degrees
+        card.style.transform = `rotateY(${px * max}deg) rotateX(${-py * max}deg) translateZ(6px)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+
+    // Parallax: ambient shapes drift slower than scroll (depth)
+    const amb = document.querySelector('.ambient-bg');
+    if (amb) {
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          const wrap = document.querySelector('.land-story-wrap');
+          if (wrap) {
+            const rect = wrap.getBoundingClientRect();
+            const offset = rect.top * -0.15; // slower than scroll
+            amb.style.transform = `translateY(${offset}px)`;
+          }
+          ticking = false;
+        });
+      }, { passive: true });
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTiltAndParallax);
+  } else {
+    initTiltAndParallax();
+  }
+})();
 
 // Keyboard nav for selection cards
 document.addEventListener('keydown', e => {
