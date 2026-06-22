@@ -444,6 +444,7 @@
     .stat-sep { width: 1px; height: 40px; background: rgba(255,255,255,.1); }
     /* Form */
     .landing-form { width: 100%; max-width: 460px; display: flex; flex-direction: column; gap: 12px; }
+    .landing-form-note { font-size: 13px; color: var(--on-dark-soft); text-align: center; margin-top: 2px; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .btn-cta { width: 100%; height: 52px; font-size: 15px; }
     /* Feature pills */
@@ -752,22 +753,13 @@
       </div>
     </div>
 
-    <form class="landing-form" onsubmit="handleLandingSubmit(event)">
-      <div class="form-row">
-        <div class="input-wrap">
-          <label class="input-label" for="nameInput">Your name</label>
-          <input class="input-el" id="nameInput" type="text" placeholder="Alex Chen" autocomplete="given-name">
-        </div>
-        <div class="input-wrap">
-          <label class="input-label" for="emailInput">Work email</label>
-          <input class="input-el" id="emailInput" type="email" placeholder="you@university.edu" autocomplete="email">
-        </div>
-      </div>
-      <button type="submit" class="btn btn-primary btn-cta">
+    <div class="landing-form">
+      <button class="btn btn-primary btn-cta" onclick="handleBeginSession()">
         Begin Free Session
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
       </button>
-    </form>
+      <p class="landing-form-note" id="landingAuthNote">Free to start — create an account to save your progress.</p>
+    </div>
 
     <div class="feat-pills">
       <span class="feat-pill">Structured Frameworks</span>
@@ -848,7 +840,7 @@
 
   <div class="land-cta-wrap reveal">
     <h2 class="ls-title">Ready to start?</h2>
-    <button class="btn btn-primary btn-cta" style="max-width:280px;margin:0 auto;" onclick="document.getElementById('screen-landing').scrollIntoView({behavior:'smooth'}); setTimeout(()=>document.getElementById('nameInput')?.focus(),400)">
+    <button class="btn btn-primary btn-cta" style="max-width:280px;margin:0 auto;" onclick="handleBeginSession()">
       Begin Free Session
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
     </button>
@@ -1516,6 +1508,7 @@ Evaluate each rep against STAR (Situation, Task, Action, Result): brief context 
 
 async function startDrill() {
   if (!state.drillType) return;
+  if (!requireAuth()) return;
   recordSession('drill', state.drillType);
   state.messages = [];
   state.msgCount = 0;
@@ -1625,6 +1618,22 @@ function handleSignIn() {
   switchAuthTab('signin');
   showScreen('auth');
 }
+// Soft wall: anyone can browse, but starting practice requires an account
+function handleBeginSession() {
+  if (currentUser) {
+    showScreen('mode');
+  } else {
+    switchAuthTab('signup');
+    showScreen('auth');
+  }
+}
+// Guard used before starting a case or drill
+function requireAuth() {
+  if (currentUser) return true;
+  switchAuthTab('signup');
+  showScreen('auth');
+  return false;
+}
 let authMode = 'signin';
 function switchAuthTab(mode) {
   authMode = mode;
@@ -1668,7 +1677,8 @@ function handleLandingSubmit(e) {
 }
 
 function goToSetup() {
-  const first = state.userName.split(' ')[0];
+  const name = state.userName || (currentUser && currentUser.email ? currentUser.email.split('@')[0] : 'Candidate');
+  const first = name.split(' ')[0];
   const pillHtml = `<span class="pill pill-coral">${esc(first)}</span>`;
   ['setup-user-pill','mode-user-pill','drill-user-pill'].forEach(id => {
     const p = document.getElementById(id); if (p) p.innerHTML = pillHtml;
@@ -1845,6 +1855,7 @@ const OPENERS = {
 ──────────────────────────────────────────────────── */
 async function startInterview() {
   if (!state.firm || !state.caseType) return;
+  if (!requireAuth()) return;
   recordSession('case', state.caseType);
   state.messages = [];
   state.msgCount = 0;
