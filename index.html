@@ -275,6 +275,14 @@
     .auth-error { font-size: 13px; color: #e06c5c; min-height: 18px; margin-top: 4px; }
     .auth-foot { text-align: center; font-size: 13px; color: var(--on-dark-soft); margin-top: 18px; }
     .auth-foot a { color: var(--coral); cursor: pointer; }
+    .pw-wrap { position: relative; }
+    .pw-toggle {
+      position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer; color: var(--on-dark-soft);
+      padding: 4px; display: flex;
+    }
+    .pw-toggle svg { width: 19px; height: 19px; }
+    .pw-toggle:hover { color: var(--coral); }
 
     /* ── Buttons ──────────────────────────────────────── */
     .btn {
@@ -341,20 +349,31 @@
     .scroll-hint svg { width: 20px; height: 20px; animation: bounce 1.8s infinite; }
     @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(5px)} }
 
-    /* ── Scroll-reveal (Apple-style) ── */
+    /* ── Scroll-reveal (Apple-style, 3D, two-way) ── */
+    .land-story-wrap { perspective: 1400px; }
     .reveal {
-      opacity: 0; transform: translateY(34px) scale(.985);
-      transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
-      will-change: opacity, transform;
+      opacity: 0;
+      transform: translateY(60px) scale(.94) rotateX(8deg);
+      filter: blur(6px);
+      transform-origin: center bottom;
+      transition: opacity 1s cubic-bezier(.16,1,.3,1),
+                  transform 1.05s cubic-bezier(.16,1,.3,1),
+                  filter .9s ease;
+      will-change: opacity, transform, filter;
     }
-    .reveal.in { opacity: 1; transform: translateY(0) scale(1); }
-    .reveal .ls-card { opacity: 0; transform: translateY(26px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
-    .reveal.in .ls-card { opacity: 1; transform: translateY(0); }
-    .reveal.in .ls-card:nth-child(1) { transition-delay: .08s; }
-    .reveal.in .ls-card:nth-child(2) { transition-delay: .20s; }
-    .reveal.in .ls-card:nth-child(3) { transition-delay: .32s; }
+    .reveal.in {
+      opacity: 1; transform: translateY(0) scale(1) rotateX(0deg); filter: blur(0);
+    }
+    .reveal .ls-card {
+      opacity: 0; transform: translateY(40px) rotateX(12deg) scale(.96);
+      transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .95s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.in .ls-card { opacity: 1; transform: translateY(0) rotateX(0) scale(1); }
+    .reveal.in .ls-card:nth-child(1) { transition-delay: .10s; }
+    .reveal.in .ls-card:nth-child(2) { transition-delay: .24s; }
+    .reveal.in .ls-card:nth-child(3) { transition-delay: .38s; }
     @media (prefers-reduced-motion: reduce) {
-      .reveal, .reveal .ls-card { opacity: 1 !important; transform: none !important; transition: none !important; }
+      .reveal, .reveal .ls-card { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; }
     }
     /* Floating ambient shapes behind story sections (pure-CSS depth) */
     .ambient-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
@@ -612,13 +631,17 @@
     .hint-chip:hover { color: var(--coral); border-color: rgba(204,120,92,.35); background: rgba(204,120,92,.05); }
     .input-row { display: flex; gap: 10px; align-items: flex-end; }
     .chat-ta {
-      flex: 1; background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.09); border-radius: var(--radius-md);
+      flex: 1; background: rgba(255,255,255,.06);
+      border: 1.5px solid rgba(255,255,255,.18); border-radius: var(--radius-md);
       padding: 12px 16px; font-family: var(--font-sans); font-size: 15px;
       color: var(--on-dark); outline: none; resize: none;
       min-height: 48px; max-height: 160px; line-height: 1.55;
       transition: border-color .18s, box-shadow .18s;
     }
+    [data-theme="light"] .chat-ta {
+      background: #fbf8f2; border-color: rgba(31,41,55,.22);
+    }
+    [data-theme="light"] .chat-ta::placeholder { color: rgba(31,41,55,.4); }
     .chat-ta::placeholder { color: rgba(255,255,255,.18); }
     .chat-ta:focus { border-color: var(--coral); box-shadow: 0 0 0 3px rgba(204,120,92,.1); }
     .send-btn {
@@ -657,7 +680,7 @@
     .score-title { font-family: var(--font-display); font-size: 28px; font-weight: 400; letter-spacing: -.3px; color: var(--on-dark); margin-bottom: 6px; }
     .score-sub { font-size: 14px; color: var(--on-dark-soft); }
     /* Metrics */
-    .metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 32px; }
+    .metrics-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 32px; }
     .m-card {
       background: var(--surface-dark-elevated); border: 1px solid rgba(255,255,255,.08);
       border-radius: var(--radius-lg); padding: 22px 20px;
@@ -966,10 +989,19 @@
         <button class="auth-tab" id="tabSignup" onclick="switchAuthTab('signup')">Create account</button>
       </div>
       <div class="auth-fields">
+        <div id="nameField" style="display:none;">
+          <label class="auth-label">Name</label>
+          <input class="input-el" type="text" id="authName" placeholder="Your name" autocomplete="given-name">
+        </div>
         <label class="auth-label">Email</label>
         <input class="input-el" type="email" id="authEmail" placeholder="you@email.com" autocomplete="email">
         <label class="auth-label">Password</label>
-        <input class="input-el" type="password" id="authPassword" placeholder="••••••••" autocomplete="current-password">
+        <div class="pw-wrap">
+          <input class="input-el" type="password" id="authPassword" placeholder="••••••••" autocomplete="current-password">
+          <button type="button" class="pw-toggle" onclick="togglePw()" aria-label="Show password">
+            <svg id="pwEye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
         <div class="auth-error" id="authError"></div>
         <button class="btn btn-primary" id="authSubmitBtn" onclick="handleAuthSubmit()" style="width:100%;margin-top:6px;">Sign in</button>
       </div>
@@ -1064,7 +1096,7 @@
 
 <div id="screen-drill" class="screen" data-screen-label="Drill">
   <nav class="top-nav">
-    <span class="wordmark">Cas<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-bridge">e</span>dge</span>
     <div id="drill-user-pill"></div>
   </nav>
   <div class="setup-body">
@@ -1219,7 +1251,7 @@
 ═══════════════════════════════════════════════════ -->
 <div id="screen-interview" class="screen" data-screen-label="Interview">
   <div class="int-nav">
-    <span class="wordmark">Cas<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark" onclick="confirmExitSession()" style="cursor:pointer;" title="Back to home">Cas<span class="wm-bridge">e</span>dge</span>
     <div class="int-badges">
       <span class="pill pill-neutral" id="b-firm">McKinsey</span>
       <span class="pill pill-neutral" id="b-type">Profitability</span>
@@ -1242,12 +1274,7 @@
   </div>
 
   <div class="chat-footer">
-    <div class="hints">
-      <button class="hint-chip" onclick="useHint('I\'d like to clarify the objective before structuring.')">Clarify objective</button>
-      <button class="hint-chip" onclick="useHint('Could you share the revenue and cost breakdown?')">Request data</button>
-      <button class="hint-chip" onclick="useHint('Let me take a moment to structure my approach.')">Take a moment</button>
-      <button class="hint-chip" onclick="useHint('Let me walk you through my framework.')">Share framework</button>
-    </div>
+    <div class="hints" id="chatHints"></div>
     <div class="input-row">
       <textarea id="chat-ta" class="chat-ta" placeholder="Share your thinking…" rows="1" onkeydown="handleKeydown(event)" oninput="autoResize(this)"></textarea>
       <button class="send-btn" onclick="sendMessage()">
@@ -1279,7 +1306,7 @@
         </svg>
         <div class="ring-inner">
           <div class="ring-val" id="ring-val">0</div>
-          <div class="ring-denom">/100</div>
+          <div class="ring-denom">/10</div>
         </div>
       </div>
       <div class="score-title" id="score-title">Good start</div>
@@ -1291,25 +1318,31 @@
         <div class="m-lbl">Structure</div>
         <div class="m-val" id="mv-structure">—</div>
         <div class="m-bar"><div class="m-fill" id="mb-structure" style="width:0%;background:var(--coral);"></div></div>
-        <div class="m-note">Framework clarity &amp; MECE-ness</div>
-      </div>
-      <div class="m-card">
-        <div class="m-lbl">Logic</div>
-        <div class="m-val" id="mv-logic">—</div>
-        <div class="m-bar"><div class="m-fill" id="mb-logic" style="width:0%;background:var(--accent-teal);"></div></div>
-        <div class="m-note">Reasoning &amp; hypothesis quality</div>
-      </div>
-      <div class="m-card">
-        <div class="m-lbl">Communication</div>
-        <div class="m-val" id="mv-comm">—</div>
-        <div class="m-bar"><div class="m-fill" id="mb-comm" style="width:0%;background:var(--accent-amber);"></div></div>
-        <div class="m-note">Clarity, concision, confidence</div>
+        <div class="m-note">MECE &amp; hypothesis-first</div>
       </div>
       <div class="m-card">
         <div class="m-lbl">Quantitative</div>
         <div class="m-val" id="mv-quant">—</div>
         <div class="m-bar"><div class="m-fill" id="mb-quant" style="width:0%;background:#a78bfa;"></div></div>
-        <div class="m-note">Data use &amp; mental math</div>
+        <div class="m-note">Math &amp; numbers tied to decision</div>
+      </div>
+      <div class="m-card">
+        <div class="m-lbl">Business Logic</div>
+        <div class="m-val" id="mv-logic">—</div>
+        <div class="m-bar"><div class="m-fill" id="mb-logic" style="width:0%;background:var(--accent-teal);"></div></div>
+        <div class="m-note">Insight &amp; root-cause depth</div>
+      </div>
+      <div class="m-card">
+        <div class="m-lbl">Communication</div>
+        <div class="m-val" id="mv-comm">—</div>
+        <div class="m-bar"><div class="m-fill" id="mb-comm" style="width:0%;background:var(--accent-amber);"></div></div>
+        <div class="m-note">Minto, concision, confidence</div>
+      </div>
+      <div class="m-card">
+        <div class="m-lbl">Case Ownership</div>
+        <div class="m-val" id="mv-ownership">—</div>
+        <div class="m-bar"><div class="m-fill" id="mb-ownership" style="width:0%;background:#6ea8fe;"></div></div>
+        <div class="m-note">Drove the case &amp; sharp questions</div>
       </div>
     </div>
 
@@ -1343,11 +1376,13 @@ try {
 } catch (e) { console.warn('Supabase init failed', e); }
 
 // Sign up with email + password
-async function authSignUp(email, password) {
+async function authSignUp(email, password, name) {
   if (!sb) return { error: 'Auth unavailable' };
-  const { data, error } = await sb.auth.signUp({ email, password });
+  const { data, error } = await sb.auth.signUp({
+    email, password,
+    options: { data: { full_name: name || '' } }
+  });
   if (error) return { error: error.message };
-  // create profile row (best-effort)
   if (data.user) {
     try {
       await sb.from('profiles').insert({
@@ -1519,6 +1554,7 @@ async function startDrill() {
   chat.innerHTML = '<div class="typing" id="typing-ind"><div class="msg-av" style="background:rgba(204,120,92,.14);color:var(--coral);font-family:var(--font-display);">I</div><div class="typing-bbl"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>';
   setProgress(10);
   showScreen('interview');
+  renderHints();
   setTyping(true);
   const seed = Math.random().toString(36).substring(2,8);
   const sys = DRILL_PROMPTS[state.drillType] + '\n\nUniqueness seed: ' + seed + ' — make this drill different from any previous one. Avoid coffee/café topics.';
@@ -1640,22 +1676,38 @@ function switchAuthTab(mode) {
   document.getElementById('tabSignin').classList.toggle('active', mode === 'signin');
   document.getElementById('tabSignup').classList.toggle('active', mode === 'signup');
   document.getElementById('authSubmitBtn').textContent = mode === 'signin' ? 'Sign in' : 'Create account';
+  const nameField = document.getElementById('nameField');
+  if (nameField) nameField.style.display = mode === 'signup' ? 'block' : 'none';
   const foot = document.getElementById('authFoot');
   foot.innerHTML = mode === 'signin'
     ? 'New here? <a onclick="switchAuthTab(\'signup\')">Create an account</a>'
     : 'Already have an account? <a onclick="switchAuthTab(\'signin\')">Sign in</a>';
   document.getElementById('authError').textContent = '';
 }
+function togglePw() {
+  const inp = document.getElementById('authPassword');
+  const eye = document.getElementById('pwEye');
+  if (inp.type === 'password') {
+    inp.type = 'text';
+    eye.innerHTML = '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/><line x1="3" y1="3" x2="21" y2="21"/>';
+  } else {
+    inp.type = 'password';
+    eye.innerHTML = '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/>';
+  }
+}
 async function handleAuthSubmit() {
   const email = document.getElementById('authEmail').value.trim();
   const pw = document.getElementById('authPassword').value;
+  const name = (document.getElementById('authName')?.value || '').trim();
   const errEl = document.getElementById('authError');
   const btn = document.getElementById('authSubmitBtn');
+  errEl.style.color = '#e06c5c';
   errEl.textContent = '';
+  if (authMode === 'signup' && !name) { errEl.textContent = 'Enter your name.'; return; }
   if (!email || !pw) { errEl.textContent = 'Enter email and password.'; return; }
   if (pw.length < 6) { errEl.textContent = 'Password must be at least 6 characters.'; return; }
   btn.disabled = true; btn.textContent = 'Please wait…';
-  const res = authMode === 'signin' ? await authSignIn(email, pw) : await authSignUp(email, pw);
+  const res = authMode === 'signin' ? await authSignIn(email, pw) : await authSignUp(email, pw, name);
   btn.disabled = false; btn.textContent = authMode === 'signin' ? 'Sign in' : 'Create account';
   if (res.error) { errEl.textContent = res.error; return; }
   if (authMode === 'signup') {
@@ -1664,7 +1716,6 @@ async function handleAuthSubmit() {
     switchAuthTab('signin');
     return;
   }
-  // signed in
   await checkAuthSession();
   showScreen('mode');
 }
@@ -1747,8 +1798,8 @@ function renderProgress() {
   setText('progTotalCases', p.cases);
   setText('progTotalDrills', p.drills);
   setText('progStreak', computeStreak(p.days));
-  const avg = p.scores.length ? Math.round(p.scores.reduce((a,b)=>a+b,0)/p.scores.length) : null;
-  setText('progAvgScore', avg !== null ? avg : '—');
+  const avg = p.scores.length ? (p.scores.reduce((a,b)=>a+b,0)/p.scores.length) : null;
+  setText('progAvgScore', avg !== null ? avg.toFixed(1) : '—');
   // breakdown bars
   const bd = document.getElementById('progDrillBreakdown');
   if (bd) {
@@ -1771,11 +1822,24 @@ function goToPage(page) { showScreen(page); }
 
 // Check auth session on load (restores login across visits)
 (function () {
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => { if (typeof checkAuthSession === 'function') checkAuthSession(); });
-  } else {
+  function afterLoad() {
     if (typeof checkAuthSession === 'function') checkAuthSession();
+    // If user just confirmed their email, Supabase redirects back with a hash/param.
+    // Show the sign-in screen with a success note.
+    try {
+      const h = window.location.hash + window.location.search;
+      if (h.includes('type=signup') || h.includes('type=email') || h.includes('access_token')) {
+        if (typeof switchAuthTab === 'function') {
+          switchAuthTab('signin');
+          showScreen('auth');
+          const errEl = document.getElementById('authError');
+          if (errEl) { errEl.style.color = '#5db8a6'; errEl.textContent = 'Email confirmed! You can sign in now.'; }
+        }
+      }
+    } catch (e) {}
   }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', afterLoad);
+  else afterLoad();
 })();
 function acceptCookies() {
   try { localStorage.setItem('casedge-cookies', 'accepted'); } catch (e) {}
@@ -1877,6 +1941,7 @@ async function startInterview() {
 
   setProgress(8);
   showScreen('interview');
+  renderHints();
   setTyping(true);
 
   // Generate uniqueness seed so every case is different
@@ -2339,17 +2404,72 @@ function useHint(text) {
   ta.focus();
 }
 
+// Render context-appropriate hint chips for the current session
+function renderHints() {
+  const box = document.getElementById('chatHints');
+  if (!box) return;
+  let hints;
+  if (state.drillType === 'Synthesis') {
+    hints = [['Give recommendation', 'My recommendation is']];
+  } else if (state.drillType === 'Behavioral') {
+    hints = [['Take a moment', 'Let me take a moment to think about a specific example.']];
+  } else if (state.drillType) {
+    // quantitative / structuring drills
+    hints = [
+      ['State approach', 'Let me state my approach first.'],
+      ['Walk through math', 'Let me walk through the calculation step by step.']
+    ];
+  } else {
+    // full case
+    hints = [
+      ['Clarify objective', "I'd like to clarify the objective before structuring."],
+      ['Request data', 'Could you share the relevant data for this part?'],
+      ['Take a moment', 'Let me take a moment to structure my approach.'],
+      ['Give recommendation', 'My recommendation is']
+    ];
+  }
+  box.innerHTML = hints.map(([label, text]) =>
+    `<button class="hint-chip" onclick="useHint(${JSON.stringify(text).replace(/"/g, '&quot;')})">${label}</button>`
+  ).join('');
+}
+
 function setProgress(val) {
   const el = document.getElementById('prog-fill');
   if (el) el.style.width = val + '%';
 }
 
+function confirmExitSession() {
+  if (confirm('Leave this session and return home? Your progress in this session will not be saved.')) {
+    showScreen('landing');
+  }
+}
+
 function endInterview() {
   showScreen('feedback');
-  setTimeout(() => {
-    animateFeedback();
-    generateAIFeedback();
-  }, 300);
+  // Count the candidate's own substantive answers (not the interviewer's messages)
+  const userMsgs = state.messages.filter(m => m.role === 'user');
+  const substantive = userMsgs.filter(m => (m.content || '').trim().length >= 15);
+  const totalWords = substantive.reduce((n, m) => n + m.content.trim().split(/\s+/).length, 0);
+
+  // Guard: if the candidate barely engaged, do NOT fabricate a score
+  if (substantive.length < 2 || totalWords < 25) {
+    showInsufficientFeedback();
+    return;
+  }
+  setTimeout(() => { generateAIFeedback(); }, 300);
+}
+
+// Shown when there isn't enough of a transcript to fairly evaluate
+function showInsufficientFeedback() {
+  const valEl = document.getElementById('ring-val');
+  if (valEl) valEl.textContent = '—';
+  const arc = document.getElementById('ring-arc');
+  if (arc) arc.style.strokeDashoffset = 439.82; // empty ring
+  setText('score-title', 'Not enough to evaluate');
+  setText('score-sub', 'Give it a real attempt to get scored');
+  ['structure','quant','logic','comm','ownership'].forEach(k => setMetric(k, null));
+  const fbEl = document.getElementById('fb-text');
+  if (fbEl) fbEl.innerHTML = `You ended the session before working through the problem, so there's nothing to score yet. <br><br>To get real partner-level feedback, walk through the case or drill: state your approach, ask for data, do the math, and give a recommendation. Then end the session and you'll get a full scorecard based on what you actually did.`;
 }
 
 /* ────────────────────────────────────────────────────
@@ -2360,78 +2480,116 @@ async function generateAIFeedback() {
     .map(m => (m.role === 'user' ? (state.userName || 'CANDIDATE') : 'INTERVIEWER') + ': ' + m.content)
     .join('\n\n');
 
-  const EVAL_SYSTEM = `You are a McKinsey/BCG/Bain Senior Partner evaluating a candidate's case interview performance.
+  const EVAL_SYSTEM = `You are a McKinsey/BCG/Bain Senior Partner giving a candidate their honest post-case debrief. You are demanding and you do NOT sugarcoat. Score on a 1.0–10.0 scale with ONE decimal (e.g. 6.5, 7.8). Most real candidates land 5.0–7.0; a 7.5+ is genuinely strong and a 9.0+ is rare and exceptional. Do not inflate. A vague or incomplete answer scores low, not "encouraging". Kindness here means honesty, not praise.
 
-EVALUATION FRAMEWORK (score each 0-100):
-1. STRUCTURE (MECE, custom, hypothesis-driven, case-specific buckets)
-2. BUSINESS LOGIC (root cause identification, hypothesis quality, insight depth)  
-3. COMMUNICATION (Pyramid Principle, conciseness, executive presence, no hedging)
-4. QUANTITATIVE (math approach, accuracy, data interpretation, estimates)
+CALIBRATION (anchor every score):
+- 8.5–10: ready for a real MBB final round — answer-first, MECE, numbers tied to the decision, risks named.
+- 7.0–8.4: promising but with clear gaps — likely would NOT pass as-is.
+- 5.0–6.9: significant problems — unstructured, buried conclusion, or weak math.
+- 1.0–4.9: did not really engage with the problem.
+Score ONLY what they actually said in the transcript. Give no credit for things they didn't do. Thin transcript = low scores.
 
-OVERALL VERDICT: Strong Hire / Hire / Borderline / No Hire
+FIVE DIMENSIONS (these mirror the real Wharton/Darden grading rubrics — score each 1.0–10.0):
+1. STRUCTURE — MECE, custom to THIS case, hypothesis-first (not a generic template)
+2. QUANTITATIVE — correct math, steps shown, numbers linked to the business implication
+3. BUSINESS LOGIC & INSIGHT — root cause, hypothesis quality, creativity, non-obvious connections, 80/20
+4. COMMUNICATION — Minto Pyramid (conclusion FIRST), conciseness, confidence, no hedging/filler
+5. CASE OWNERSHIP — did they drive the case, recover from wrong turns, ask sharp questions (for interviewer-led, weight this less)
 
-Return ONLY valid JSON (no markdown, no backticks):
+OVERALL = a holistic 1.0–10.0 (not a strict average — judgment call). Be strict; most candidates are below 7.
+
+VERDICT: Strong Hire / Hire / Borderline / No Hire (most are Borderline or No Hire).
+
+Return ONLY valid JSON (no markdown, no backticks). All five scores are 1.0–10.0 with one decimal:
 {
-  "structure": 72,
-  "logic": 68,
-  "communication": 75,
-  "quant": 65,
-  "overall": 70,
-  "verdict": "Hire",
-  "structure_detail": "2-3 sentences: what was good + what was missing in their framework",
-  "logic_detail": "2-3 sentences: hypothesis quality, root cause analysis",
-  "comm_detail": "2-3 sentences: answer-first discipline, conciseness, executive presence",
-  "quant_detail": "2-3 sentences: math approach, data usage",
-  "strengths": "2-3 specific things the candidate did well (with examples from their actual words)",
-  "improvements": "2-3 specific gaps with EXACT alternative phrasing they should use next time",
-  "verdict_reason": "1-2 sentences: would they advance to Round 2? Why or why not?"
+  "structure": 6.5,
+  "quant": 5.8,
+  "logic": 6.0,
+  "communication": 5.5,
+  "ownership": 6.2,
+  "overall": 6.0,
+  "verdict": "Borderline",
+  "structure_detail": "2-3 sentences, blunt: exactly what was weak in their framework",
+  "quant_detail": "2-3 sentences: math approach, errors, whether numbers connected to the decision",
+  "logic_detail": "2-3 sentences: hypothesis quality and what root cause they missed",
+  "comm_detail": "2-3 sentences: did they lead with the conclusion or bury it? quote a weak phrase",
+  "ownership_detail": "2-3 sentences: did they drive or wait to be led?",
+  "strengths": "What genuinely worked — specific, with examples from their actual words. If little worked, say so plainly and keep it short.",
+  "improvements": "The 2-3 biggest gaps, each with the EXACT better phrasing or move they should have used.",
+  "critical": "The single most important thing that would have failed them in a real interview — stated directly.",
+  "cut": "A filler phrase, redundancy, or wrong move they should STOP doing — quote it.",
+  "add": "The one habit they must START doing next case to move up.",
+  "verdict_reason": "1-2 sentences: would they advance to Round 2? Be honest — usually not yet, and why."
 }`;
 
   try {
+    const evalCtx = state.drillType
+      ? `${state.drillType} drill`
+      : `${state.firm || ''} ${state.caseType || ''} case interview`;
     const raw = await callAI(EVAL_SYSTEM, [
-      { role: 'user', content: `Evaluate this ${state.firm} ${state.caseType} case interview:\n\n${transcript}` }
+      { role: 'user', content: `Evaluate this ${evalCtx}:\n\n${transcript}` }
     ], 'claude-sonnet-4-5');
     const clean = raw.replace(/```json|"```"/g, '').trim();
     const d = JSON.parse(clean);
 
-    // Animate score ring
+    // Record the overall score into progress (for the avg-score stat)
+    const ov = parseFloat(d.overall);
+    if (!isNaN(ov)) {
+      const p = loadProgress();
+      p.scores.push(Math.round(ov * 10) / 10);
+      saveProgress(p);
+      if (currentUser) pushProgressToCloud();
+    }
+
+    // Animate score ring (1.0–10.0 scale)
     const C = 439.82;
-    const overall = d.overall || 70;
+    const overall = parseFloat(d.overall) || 6.0;
+    const pct = overall / 10;
     setTimeout(() => {
       const arc = document.getElementById('ring-arc');
-      if (arc) arc.style.strokeDashoffset = C - (C * overall / 100);
+      if (arc) arc.style.strokeDashoffset = C - (C * pct);
     }, 200);
 
+    // Count up with one decimal
     let cur = 0;
     const valEl = document.getElementById('ring-val');
+    const step = overall / 22;
     const t = setInterval(() => {
-      cur = Math.min(cur + 2, overall);
-      if (valEl) valEl.textContent = cur;
-      if (cur >= overall) clearInterval(t);
+      cur = Math.min(cur + step, overall);
+      if (valEl) valEl.textContent = cur.toFixed(1);
+      if (cur >= overall) { clearInterval(t); if (valEl) valEl.textContent = overall.toFixed(1); }
     }, 28);
 
-    const heading = overall >= 85 ? 'Strong Hire — Excellent performance'
-                  : overall >= 72 ? 'Hire — Solid performance'
-                  : overall >= 60 ? 'Borderline — Needs improvement'
+    const heading = overall >= 8.5 ? 'Strong Hire — Excellent performance'
+                  : overall >= 7.0 ? 'Hire — Solid performance'
+                  : overall >= 5.0 ? 'Borderline — Needs improvement'
                   : 'No Hire — Significant gaps';
     setText('score-title', heading);
-    setText('score-sub', `${state.firm} · ${state.caseType} · ${d.verdict || 'Evaluated'}`);
+    const ctx = state.drillType
+      ? `${state.drillType} drill · ${d.verdict || 'Evaluated'}`
+      : `${state.firm || 'Case'} · ${state.caseType || 'Interview'} · ${d.verdict || 'Evaluated'}`;
+    setText('score-sub', ctx);
 
     setTimeout(() => {
-      setMetric('structure', d.structure || 70);
-      setMetric('logic',     d.logic     || 68);
-      setMetric('comm',      d.communication || 72);
-      setMetric('quant',     d.quant     || 65);
+      setMetric('structure', d.structure);
+      setMetric('quant',     d.quant);
+      setMetric('logic',     d.logic);
+      setMetric('comm',      d.communication);
+      setMetric('ownership', d.ownership);
     }, 380);
 
     const fbEl = document.getElementById('fb-text');
     if (fbEl) fbEl.innerHTML = `
       <strong>🏗 Structure:</strong> ${d.structure_detail || ''}<br><br>
-      <strong>🧠 Business Logic:</strong> ${d.logic_detail || ''}<br><br>
-      <strong>💬 Communication:</strong> ${d.comm_detail || ''}<br><br>
       <strong>📐 Quantitative:</strong> ${d.quant_detail || ''}<br><br>
-      <strong>✅ What you did well:</strong> ${d.strengths || ''}<br><br>
-      <strong>⚠️ What to improve (with exact phrasing):</strong> ${d.improvements || ''}<br><br>
+      <strong>🧠 Business Logic &amp; Insight:</strong> ${d.logic_detail || ''}<br><br>
+      <strong>💬 Communication:</strong> ${d.comm_detail || ''}<br><br>
+      <strong>🎯 Case Ownership:</strong> ${d.ownership_detail || ''}<br><br>
+      <strong>✅ What worked:</strong> ${d.strengths || ''}<br><br>
+      <strong>⚠️ What to improve (exact phrasing):</strong> ${d.improvements || ''}<br><br>
+      ${d.critical ? `<strong>🔴 Critical — would fail you in a real interview:</strong> ${d.critical}<br><br>` : ''}
+      ${d.cut ? `<strong>✂️ Stop doing this:</strong> ${d.cut}<br><br>` : ''}
+      ${d.add ? `<strong>➕ Start doing this:</strong> ${d.add}<br><br>` : ''}
       <strong>🎯 Partner verdict:</strong> ${d.verdict_reason || ''}`;
   } catch(e) {
     setText('score-title', 'Feedback generated');
@@ -2491,10 +2649,12 @@ function animateFeedback() {
 }
 
 function setMetric(key, score) {
+  const s = parseFloat(score);
+  const val = isNaN(s) ? null : s;
   const v = document.getElementById('mv-' + key);
   const b = document.getElementById('mb-' + key);
-  if (v) v.textContent = score;
-  if (b) b.style.width = score + '%';
+  if (v) v.textContent = val === null ? '—' : val.toFixed(1);
+  if (b) b.style.width = (val === null ? 0 : val * 10) + '%'; // 1-10 → 0-100% bar width
 }
 
 function restartPractice() {
@@ -2601,12 +2761,14 @@ function applyTheme(theme) {
     }
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
+        // Two-way: reveal when entering view, hide again when leaving
         if (entry.isIntersecting) {
           entry.target.classList.add('in');
-          obs.unobserve(entry.target); // animate once
+        } else {
+          entry.target.classList.remove('in');
         }
       });
-    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+    }, { threshold: 0.18, rootMargin: '0px 0px -12% 0px' });
     els.forEach(el => obs.observe(el));
   }
   if (document.readyState === 'loading') {
@@ -2628,8 +2790,8 @@ function applyTheme(theme) {
         const r = card.getBoundingClientRect();
         const px = (e.clientX - r.left) / r.width - 0.5;   // -0.5 .. 0.5
         const py = (e.clientY - r.top) / r.height - 0.5;
-        const max = 7; // degrees
-        card.style.transform = `rotateY(${px * max}deg) rotateX(${-py * max}deg) translateZ(6px)`;
+        const max = 11; // degrees — stronger 3D tilt
+        card.style.transform = `perspective(700px) rotateY(${px * max}deg) rotateX(${-py * max}deg) translateZ(14px)`;
       });
       card.addEventListener('mouseleave', () => {
         card.style.transform = '';
@@ -2647,7 +2809,7 @@ function applyTheme(theme) {
           const wrap = document.querySelector('.land-story-wrap');
           if (wrap) {
             const rect = wrap.getBoundingClientRect();
-            const offset = rect.top * -0.15; // slower than scroll
+            const offset = rect.top * -0.28; // stronger parallax depth
             amb.style.transform = `translateY(${offset}px)`;
           }
           ticking = false;
