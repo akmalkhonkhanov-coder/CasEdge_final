@@ -97,12 +97,17 @@
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; }
+    html, body {
+      height: 100%;
+      overscroll-behavior: none;
+      background: var(--surface-dark);
+    }
     body {
       background: var(--surface-dark);
       color: var(--on-dark);
       font-family: var(--font-sans);
       line-height: 1.5;
+      min-height: 100%;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
@@ -181,6 +186,35 @@
     .nav-link:hover { color: var(--on-dark); background: rgba(128,128,128,.1); }
     .nav-link.active { color: var(--coral); }
     @media (max-width: 560px) { .nav-link { padding: 7px 8px; font-size: 13px; } }
+    .lang-btn {
+      background: none; border: 1px solid rgba(128,128,128,.25); cursor: pointer;
+      font-family: inherit; font-size: 13px; color: var(--on-dark-soft);
+      padding: 6px 10px; border-radius: 8px; transition: all .2s;
+    }
+    .lang-btn:hover { color: var(--on-dark); border-color: var(--coral); }
+    .lang-modal-bg {
+      position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 2000;
+      display: none; align-items: center; justify-content: center; padding: 24px;
+    }
+    .lang-modal-bg.show { display: flex; }
+    .lang-modal {
+      background: var(--surface-dark-elevated); border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--radius-lg); padding: 26px; max-width: 380px; width: 100%;
+    }
+    [data-theme="light"] .lang-modal { border-color: rgba(31,41,55,.12); }
+    .lang-modal h3 { font-size: 16px; color: var(--on-dark); margin-bottom: 4px; }
+    .lang-modal .lm-sub { font-size: 13px; color: var(--on-dark-soft); margin: 14px 0 8px; }
+    .lang-opts { display: flex; gap: 8px; flex-wrap: wrap; }
+    .lang-opt {
+      flex: 1; min-width: 80px; background: rgba(128,128,128,.08); border: 1.5px solid transparent;
+      border-radius: 9px; padding: 10px; cursor: pointer; font-family: inherit; font-size: 14px;
+      color: var(--on-dark); transition: all .2s;
+    }
+    .lang-opt.sel { border-color: var(--coral); background: rgba(204,120,92,.1); color: var(--coral); }
+    .lang-modal .lm-close {
+      margin-top: 20px; width: 100%; background: var(--coral); color: #fff; border: none;
+      border-radius: 9px; padding: 11px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: inherit;
+    }
 
     /* ── Footer ── */
     .land-footer {
@@ -261,6 +295,12 @@
       white-space: nowrap;
     }
     .cookie-btn:hover { filter: brightness(1.06); }
+    .cookie-actions { display: flex; gap: 8px; flex-shrink: 0; }
+    .cookie-btn-ghost {
+      background: transparent; color: var(--on-dark-soft);
+      border: 1px solid rgba(128,128,128,.3);
+    }
+    .cookie-btn-ghost:hover { color: var(--on-dark); filter: none; }
 
     /* ── Auth screen ── */
     .auth-body { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 24px; }
@@ -463,6 +503,11 @@
       color: var(--on-dark); margin-bottom: 22px;
     }
     .hero-hl em { font-style: italic; color: var(--coral); }
+    .repel-letter {
+      display: inline-block;
+      transition: transform .28s cubic-bezier(.22,1,.36,1), opacity .28s ease;
+      will-change: transform;
+    }
     .hero-sub {
       font-size: 17px; line-height: 1.65; color: var(--on-dark-soft);
       max-width: 460px; margin: 0 auto 52px; text-wrap: pretty;
@@ -475,6 +520,11 @@
       letter-spacing: -.5px; color: var(--on-dark); line-height: 1;
     }
     .stat-lbl { font-size: 11px; color: var(--on-dark-soft); margin-top: 5px; letter-spacing: .5px; text-transform: uppercase; }
+    .stat-text {
+      font-size: 19px; line-height: 1.15; letter-spacing: -.2px;
+      max-width: 200px; text-align: center;
+    }
+    .stat-wide { padding: 0 28px; }
     .stat-sep { width: 1px; height: 40px; background: rgba(255,255,255,.1); }
     /* Form */
     .landing-form { width: 100%; max-width: 460px; display: flex; flex-direction: column; gap: 12px; }
@@ -525,6 +575,19 @@
       display: none; align-items: center; justify-content: center; margin-left: auto; margin-top: auto;
     }
     .firm-card.selected .firm-check { display: flex; }
+    .firm-card.mode-soon { opacity: .72; }
+    .firm-card.mode-soon:hover { border-color: rgba(255,255,255,.12); transform: translateY(-1px); }
+    .firm-check.soon-lock {
+      display: flex; background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12); width: 22px; height: 22px;
+    }
+    .firm-check.soon-lock svg { opacity: .55; }
+    .soon-badge {
+      display: inline-block; margin-left: 7px; padding: 1px 7px; border-radius: 999px;
+      font-size: 9.5px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+      vertical-align: middle; background: rgba(124,140,232,.16); color: #9aa6ee;
+      border: 1px solid rgba(124,140,232,.28);
+    }
     .firm-name { font-size: 15px; font-weight: 500; color: var(--on-dark); }
     .firm-desc { font-size: 13px; color: var(--on-dark-soft); line-height: 1.5; margin-top: 4px; }
     .drill-icon {
@@ -757,54 +820,55 @@
     <span class="wordmark">Cas<span class="wm-bridge">e</span>dge</span>
     <div style="display:flex;align-items:center;gap:6px;">
       <div class="nav-menu">
-        <button class="nav-link" onclick="chooseMode('case')">Cases</button>
-        <button class="nav-link" onclick="chooseMode('drill')">Drills</button>
-        <button class="nav-link" onclick="goToProgress()">Progress</button>
+        <button class="nav-link" onclick="chooseMode('case')" data-i18n="nav.cases">Cases</button>
+        <button class="nav-link" onclick="chooseMode('drill')" data-i18n="nav.drills">Drills</button>
+        <button class="nav-link" onclick="goToProgress()" data-i18n="nav.progress">Progress</button>
       </div>
+      <button class="lang-btn" onclick="openLangMenu()"><span class="lang-current">EN</span> ▾</button>
       <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" title="Switch light / dark">
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
         <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
       </button>
-      <button class="btn btn-ghost" onclick="handleSignIn()">Sign in →</button>
+      <button class="btn btn-ghost" onclick="handleSignIn()" data-i18n="common.signin">Sign in →</button>
     </div>
   </nav>
 
   <main class="landing-main">
-    <div class="eyebrow">MBB Interview Prep</div>
+    <div class="eyebrow" data-i18n="hero.eyebrow">MBB Interview Prep</div>
 
-    <h1 class="hero-hl">Master the case.<br><em>Land the offer.</em></h1>
+    <h1 class="hero-hl" data-i18n-html="hero.title">Master the case.<br><em>Land the offer.</em></h1>
 
-    <p class="hero-sub">
-      Practice real consulting frameworks with a coach built on
-      McKinsey, BCG, and Bain interview patterns.
+    <p class="hero-sub" data-i18n="hero.sub">
+      Every case is built on real MBB casebooks — Wharton, Darden, Kellogg, Stern —
+      and the actual cases candidates were given in interviews.
     </p>
 
     <div class="stats-row">
-      <div class="stat">
-        <div class="stat-num">Real</div>
-        <div class="stat-lbl">MBB casebooks</div>
+      <div class="stat stat-wide">
+        <div class="stat-num stat-text" data-i18n="hero.stat1.top">Real cases &amp; casebooks</div>
+        <div class="stat-lbl" data-i18n="hero.stat1.lbl">Wharton · Darden · Kellogg · Stern</div>
       </div>
       <div class="stat-sep"></div>
       <div class="stat">
         <div class="stat-num">8</div>
-        <div class="stat-lbl">Drill types</div>
+        <div class="stat-lbl" data-i18n="hero.stat2.lbl">Drill types</div>
       </div>
     </div>
 
     <div class="landing-form">
       <button class="btn btn-primary btn-cta" onclick="handleBeginSession()">
-        Begin Free Session
+        <span data-i18n="hero.cta">Begin Free Session</span>
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
       </button>
-      <p class="landing-form-note" id="landingAuthNote">Free to start — create an account to save your progress.</p>
+      <p class="landing-form-note" id="landingAuthNote" data-i18n="hero.note">Create an account to save your progress.</p>
     </div>
 
     <div class="feat-pills">
-      <span class="feat-pill">Structured Frameworks</span>
-      <span class="feat-pill">Instant Feedback</span>
-      <span class="feat-pill">Firm-specific Cases</span>
-      <span class="feat-pill">Expert-level Feedback</span>
-      <span class="feat-pill">No credit card needed</span>
+      <span class="feat-pill" data-i18n="pill.frameworks">Structured Frameworks</span>
+      <span class="feat-pill" data-i18n="pill.feedback">Instant Feedback</span>
+      <span class="feat-pill" data-i18n="pill.firm">Firm-specific Cases</span>
+      <span class="feat-pill" data-i18n="pill.expert">Expert-level Feedback</span>
+      <span class="feat-pill" data-i18n="pill.nocard">Instant access</span>
     </div>
 
     <button class="scroll-hint" onclick="document.getElementById('land-story').scrollIntoView({behavior:'smooth'})">
@@ -817,69 +881,69 @@
   <div class="land-story-wrap">
   <div class="ambient-bg" aria-hidden="true"><span></span><span></span><span></span></div>
   <section id="land-story" class="land-section reveal">
-    <div class="ls-eyebrow">The Case Interview</div>
-    <h2 class="ls-title">What top firms actually test</h2>
-    <p class="ls-lead">A case interview is a live business problem you solve out loud with the interviewer. It's how McKinsey, BCG, and Bain decide who gets the offer — and it rewards structure, sharp math, and clear communication over memorized answers.</p>
+    <div class="ls-eyebrow" data-i18n="s1.eyebrow">The Case Interview</div>
+    <h2 class="ls-title" data-i18n="s1.title">What top firms actually test</h2>
+    <p class="ls-lead" data-i18n="s1.lead">A case interview is a live business problem you solve out loud with the interviewer. It's how McKinsey, BCG, and Bain decide who gets the offer — and it rewards structure, sharp math, and clear communication over memorized answers.</p>
     <div class="ls-cards">
       <div class="ls-card">
-        <div class="ls-card-h"><span class="ls-dot"></span>Structure</div>
-        <div class="ls-card-p">Break an open-ended problem into clean, MECE buckets — and lead with your hypothesis, not a generic framework.</div>
+        <div class="ls-card-h" data-i18n-html="s1.c1.h"><span class="ls-dot"></span>Structure</div>
+        <div class="ls-card-p" data-i18n="s1.c1.p">Break an open-ended problem into clean, MECE buckets — and lead with your hypothesis, not a generic framework.</div>
       </div>
       <div class="ls-card">
-        <div class="ls-card-h"><span class="ls-dot"></span>Quant</div>
-        <div class="ls-card-p">Run multi-step business math under pressure — breakeven, margins, market sizing — and tie every number back to the decision.</div>
+        <div class="ls-card-h" data-i18n-html="s1.c2.h"><span class="ls-dot"></span>Quant</div>
+        <div class="ls-card-p" data-i18n="s1.c2.p">Run multi-step business math under pressure — breakeven, margins, market sizing — and tie every number back to the decision.</div>
       </div>
       <div class="ls-card">
-        <div class="ls-card-h"><span class="ls-dot"></span>Synthesis</div>
-        <div class="ls-card-p">Deliver an answer-first recommendation with the conclusion up front, supporting data, and the risks that come with it.</div>
+        <div class="ls-card-h" data-i18n-html="s1.c3.h"><span class="ls-dot"></span>Synthesis</div>
+        <div class="ls-card-p" data-i18n="s1.c3.p">Deliver an answer-first recommendation with the conclusion up front, supporting data, and the risks that come with it.</div>
       </div>
     </div>
   </section>
 
   <section class="land-section reveal">
-    <div class="ls-eyebrow">Targeted Drills</div>
-    <h2 class="ls-title">Train one skill at a time</h2>
-    <p class="ls-lead">Cases test everything at once. Drills isolate a single skill so you can build it fast — each one is a 5-rep adaptive series that gets harder as you improve, with instant feedback and a full model answer after every rep.</p>
+    <div class="ls-eyebrow" data-i18n="s2.eyebrow">Targeted Drills</div>
+    <h2 class="ls-title" data-i18n="s2.title">Train one skill at a time</h2>
+    <p class="ls-lead" data-i18n="s2.lead">Cases test everything at once. Drills isolate a single skill so you can build it fast — each one is a 5-rep adaptive series that gets harder as you improve, with instant feedback and a full model answer after every rep.</p>
     <div class="ls-cards">
       <div class="ls-card">
-        <div class="ls-card-h"><span class="ls-dot"></span>Math &amp; Sizing</div>
-        <div class="ls-card-p">Mental math, case math, and market sizing — speed and accuracy under real time pressure.</div>
+        <div class="ls-card-h" data-i18n-html="s2.c1.h"><span class="ls-dot"></span>Math &amp; Sizing</div>
+        <div class="ls-card-p" data-i18n="s2.c1.p">Mental math, case math, and market sizing — speed and accuracy under real time pressure.</div>
       </div>
       <div class="ls-card">
-        <div class="ls-card-h"><span class="ls-dot"></span>Structure &amp; Charts</div>
-        <div class="ls-card-p">Framework building, chart reading, and brainstorming — the core of any case.</div>
+        <div class="ls-card-h" data-i18n-html="s2.c2.h"><span class="ls-dot"></span>Structure &amp; Charts</div>
+        <div class="ls-card-p" data-i18n="s2.c2.p">Framework building, chart reading, and brainstorming — the core of any case.</div>
       </div>
       <div class="ls-card">
-        <div class="ls-card-h"><span class="ls-dot"></span>Synthesis &amp; Fit</div>
-        <div class="ls-card-p">Answer-first recommendations and behavioral (PEI) questions — the half most candidates never train.</div>
+        <div class="ls-card-h" data-i18n-html="s2.c3.h"><span class="ls-dot"></span>Synthesis &amp; Fit</div>
+        <div class="ls-card-p" data-i18n="s2.c3.p">Answer-first recommendations and behavioral (PEI) questions — the half most candidates never train.</div>
       </div>
     </div>
   </section>
 
   <section class="land-section reveal">
-    <div class="ls-eyebrow">Why CasEdge</div>
-    <h2 class="ls-title">Built on the real thing</h2>
-    <p class="ls-lead">Most prep tools give you a sample answer to compare against. CasEdge coaches the way a partner would — pushing back on weak logic, holding the numbers firm, and showing you exactly how to think, not just what the answer was.</p>
+    <div class="ls-eyebrow" data-i18n="s3.eyebrow">Why CasEdge</div>
+    <h2 class="ls-title" data-i18n="s3.title">Built on the real thing</h2>
+    <p class="ls-lead" data-i18n="s3.lead">Most prep tools give you a sample answer to compare against. CasEdge coaches the way a partner would — pushing back on weak logic, holding the numbers firm, and showing you exactly how to think, not just what the answer was.</p>
     <div class="ls-cards">
       <div class="ls-card">
-        <div class="ls-card-h"><span class="ls-dot"></span>Real casebooks</div>
-        <div class="ls-card-p">Cases drawn from genuine MBB casebook patterns — Wharton, Darden, Kellogg, Stern — not made-up scenarios.</div>
+        <div class="ls-card-h" data-i18n-html="s3.c1.h"><span class="ls-dot"></span>Real casebooks, real cases</div>
+        <div class="ls-card-p" data-i18n="s3.c1.p">Every case is grounded in the official Wharton, Darden, Kellogg and Stern casebooks — and the actual cases candidates faced in MBB interviews. Named clients, consistent numbers, hidden insights.</div>
       </div>
       <div class="ls-card">
-        <div class="ls-card-h"><span class="ls-dot"></span>Partner-level pushback</div>
-        <div class="ls-card-p">The coach challenges your recommendation and only backs down when you defend it with data — like the real room.</div>
+        <div class="ls-card-h" data-i18n-html="s3.c2.h"><span class="ls-dot"></span>Partner-level pushback</div>
+        <div class="ls-card-p" data-i18n="s3.c2.p">The coach challenges your recommendation and only backs down when you defend it with data — like the real room.</div>
       </div>
       <div class="ls-card">
-        <div class="ls-card-h"><span class="ls-dot"></span>Feedback in your language</div>
-        <div class="ls-card-p">Practice in English, get your debrief and scorecard in clear, direct feedback you can act on immediately.</div>
+        <div class="ls-card-h" data-i18n-html="s3.c3.h"><span class="ls-dot"></span>Feedback in your language</div>
+        <div class="ls-card-p" data-i18n="s3.c3.p">Practice in English, get your debrief and scorecard in clear, direct feedback you can act on immediately.</div>
       </div>
     </div>
   </section>
 
   <div class="land-cta-wrap reveal">
-    <h2 class="ls-title">Ready to start?</h2>
+    <h2 class="ls-title" data-i18n="cta.title">Ready to start?</h2>
     <button class="btn btn-primary btn-cta" style="max-width:280px;margin:0 auto;" onclick="handleBeginSession()">
-      Begin Free Session
+      <span data-i18n="hero.cta">Begin Free Session</span>
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
     </button>
   </div>
@@ -889,15 +953,15 @@
     <div class="lf-inner">
       <div class="lf-brand">
         <span class="wordmark">Cas<span class="wm-bridge">e</span>dge</span>
-        <p class="lf-tag">MBB case interview prep — cases, drills, and partner-level feedback.</p>
+        <p class="lf-tag" data-i18n="foot.tagline">MBB case interview prep — cases, drills, and partner-level feedback.</p>
       </div>
       <div class="lf-links">
-        <button class="lf-link" onclick="goToPage('faq')">FAQ</button>
-        <button class="lf-link" onclick="goToPage('contact')">Contact</button>
-        <button class="lf-link" onclick="goToPage('cookies')">Cookies</button>
+        <button class="lf-link" onclick="goToPage('faq')" data-i18n="nav.faq">FAQ</button>
+        <button class="lf-link" onclick="goToPage('contact')" data-i18n="foot.contact">Contact</button>
+        <button class="lf-link" onclick="goToPage('cookies')" data-i18n="foot.cookies">Cookies</button>
       </div>
     </div>
-    <div class="lf-copy">© 2026 CasEdge. All rights reserved.</div>
+    <div class="lf-copy" data-i18n="foot.rights">© 2026 CasEdge. All rights reserved.</div>
   </footer>
 </div>
 
@@ -907,7 +971,7 @@
 <div id="screen-faq" class="screen" data-screen-label="FAQ">
   <nav class="top-nav">
     <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-bridge">e</span>dge</span>
-    <button class="btn btn-ghost" onclick="showScreen('landing')">← Back</button>
+    <button class="btn btn-ghost" onclick="showScreen('landing')" data-i18n="common.back">← Back</button>
   </nav>
   <div class="info-body">
     <div class="info-eyebrow">Help</div>
@@ -931,11 +995,11 @@
       </div>
       <div class="faq-item">
         <div class="faq-q">What languages are supported?</div>
-        <div class="faq-a">The platform is expanding to English, Russian, and Spanish — with the same case difficulty and depth across every language.</div>
+        <div class="faq-a">The platform supports English and Russian — with the same case difficulty, depth, and rigor across both languages.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Is my progress saved?</div>
-        <div class="faq-a">Yes — your progress is currently saved on your device. Account-based sign-in with cloud sync across devices is coming soon.</div>
+        <div class="faq-a">Yes — your progress is saved on your device, and account-based cloud sync keeps it consistent across all your devices.</div>
       </div>
     </div>
   </div>
@@ -944,7 +1008,7 @@
 <div id="screen-contact" class="screen" data-screen-label="Contact">
   <nav class="top-nav">
     <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-bridge">e</span>dge</span>
-    <button class="btn btn-ghost" onclick="showScreen('landing')">← Back</button>
+    <button class="btn btn-ghost" onclick="showScreen('landing')" data-i18n="common.back">← Back</button>
   </nav>
   <div class="info-body">
     <div class="info-eyebrow">Get in touch</div>
@@ -967,7 +1031,7 @@
 <div id="screen-cookies" class="screen" data-screen-label="Cookies">
   <nav class="top-nav">
     <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-bridge">e</span>dge</span>
-    <button class="btn btn-ghost" onclick="showScreen('landing')">← Back</button>
+    <button class="btn btn-ghost" onclick="showScreen('landing')" data-i18n="common.back">← Back</button>
   </nav>
   <div class="info-body">
     <div class="info-eyebrow">Legal</div>
@@ -995,7 +1059,7 @@
 <div id="screen-auth" class="screen" data-screen-label="Auth">
   <nav class="top-nav">
     <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-bridge">e</span>dge</span>
-    <button class="btn btn-ghost" onclick="showScreen('landing')">← Back</button>
+    <button class="btn btn-ghost" onclick="showScreen('landing')" data-i18n="common.back">← Back</button>
   </nav>
   <div class="auth-body">
     <div class="auth-card">
@@ -1033,35 +1097,52 @@
     <span class="wordmark">Cas<span class="wm-bridge">e</span>dge</span>
     <div style="display:flex;align-items:center;gap:6px;">
       <div class="nav-menu">
-        <button class="nav-link" onclick="chooseMode('case')">Cases</button>
-        <button class="nav-link" onclick="chooseMode('drill')">Drills</button>
-        <button class="nav-link" onclick="goToProgress()">Progress</button>
-        <button class="nav-link" onclick="goToPage('faq')">FAQ</button>
-        <button class="nav-link" onclick="goToPage('contact')">Contact</button>
+        <button class="nav-link" onclick="chooseMode('case')" data-i18n="nav.cases">Cases</button>
+        <button class="nav-link" onclick="chooseMode('drill')" data-i18n="nav.drills">Drills</button>
+        <button class="nav-link" onclick="goToProgress()" data-i18n="nav.progress">Progress</button>
+        <button class="nav-link" onclick="goToPage('faq')" data-i18n="nav.faq">FAQ</button>
+        <button class="nav-link" onclick="goToPage('contact')" data-i18n="nav.contact">Contact</button>
       </div>
+      <button class="lang-btn" onclick="openLangMenu()"><span class="lang-current">EN</span> ▾</button>
       <div id="mode-user-pill"></div>
     </div>
   </nav>
   <div class="setup-body">
     <div class="setup-sec">
-      <div class="sec-eyebrow">Choose your practice</div>
-      <div class="sec-title">How do you want to train today?</div>
+      <div class="sec-eyebrow" data-i18n="mode.eyebrow">Choose your practice</div>
+      <div class="sec-title" data-i18n="mode.title">How do you want to train today?</div>
       <div class="firm-grid">
         <div class="firm-card" onclick="chooseMode('case')" tabindex="0" role="button">
           <div class="firm-initial" style="background:rgba(204,120,92,.15);color:var(--coral);">F</div>
           <div>
-            <div class="firm-name">Full Case Interview</div>
-            <div class="firm-desc">Complete 40-min simulation — structure, math, exhibits, recommendation. Like the real thing.</div>
+            <div class="firm-name" data-i18n="mode.case.name">Full Case Interview</div>
+            <div class="firm-desc" data-i18n="mode.case.desc">Complete 40-minute simulation — structure, math, exhibits, recommendation. As demanding as the real interview.</div>
           </div>
           <div class="firm-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div>
         </div>
         <div class="firm-card" onclick="chooseMode('drill')" tabindex="0" role="button">
           <div class="firm-initial" style="background:rgba(93,184,166,.15);color:var(--accent-teal);">D</div>
           <div>
-            <div class="firm-name">Skill Drills</div>
-            <div class="firm-desc">Targeted reps on one skill — market sizing, structuring, math, charts, brainstorm. Fast feedback.</div>
+            <div class="firm-name" data-i18n="mode.drill.name">Skill Drills</div>
+            <div class="firm-desc" data-i18n="mode.drill.desc">Targeted reps on one skill — market sizing, structuring, math, charts, brainstorm. Fast feedback.</div>
           </div>
           <div class="firm-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div>
+        </div>
+        <div class="firm-card mode-soon" onclick="comingSoon('Solve Game')" tabindex="0" role="button">
+          <div class="firm-initial" style="background:rgba(124,140,232,.15);color:#7c8ce8;">S</div>
+          <div>
+            <div class="firm-name">Solve Game <span class="soon-badge">In Progress</span></div>
+            <div class="firm-desc" data-i18n="mode.solve.desc">McKinsey-style problem-solving game — ecosystem builds, redistribution, scenario logic. Tests data fluency under structure. Premium track.</div>
+          </div>
+          <div class="firm-check soon-lock"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
+        </div>
+        <div class="firm-card mode-soon" onclick="comingSoon('Chat Game')" tabindex="0" role="button">
+          <div class="firm-initial" style="background:rgba(232,168,124,.15);color:#e8a87c;">C</div>
+          <div>
+            <div class="firm-name">Chat Game <span class="soon-badge">In Progress</span></div>
+            <div class="firm-desc" data-i18n="mode.chat.desc">Solve-style questions run conversationally in chat — same logic engine, no game UI. Build the reasoning muscle the real assessment rewards. Premium track.</div>
+          </div>
+          <div class="firm-check soon-lock"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
         </div>
       </div>
     </div>
@@ -1076,19 +1157,20 @@
     <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-bridge">e</span>dge</span>
     <div style="display:flex;align-items:center;gap:6px;">
       <div class="nav-menu">
-        <button class="nav-link" onclick="chooseMode('case')">Cases</button>
-        <button class="nav-link" onclick="chooseMode('drill')">Drills</button>
-        <button class="nav-link active" onclick="goToProgress()">Progress</button>
-        <button class="nav-link" onclick="goToPage('faq')">FAQ</button>
-        <button class="nav-link" onclick="goToPage('contact')">Contact</button>
+        <button class="nav-link" onclick="chooseMode('case')" data-i18n="nav.cases">Cases</button>
+        <button class="nav-link" onclick="chooseMode('drill')" data-i18n="nav.drills">Drills</button>
+        <button class="nav-link active" onclick="goToProgress()" data-i18n="nav.progress">Progress</button>
+        <button class="nav-link" onclick="goToPage('faq')" data-i18n="nav.faq">FAQ</button>
+        <button class="nav-link" onclick="goToPage('contact')" data-i18n="nav.contact">Contact</button>
       </div>
+      <button class="lang-btn" onclick="openLangMenu()"><span class="lang-current">EN</span> ▾</button>
       <div id="progress-user-pill"></div>
     </div>
   </nav>
   <div class="setup-body">
     <div class="setup-sec">
-      <div class="sec-eyebrow">Your progress</div>
-      <div class="sec-title">How your training is going</div>
+      <div class="sec-eyebrow" data-i18n="prog.eyebrow">Your progress</div>
+      <div class="sec-title" data-i18n="prog.title">How your training is going</div>
 
       <div class="prog-stats-grid" id="progStatsGrid">
         <div class="prog-stat">
@@ -1132,8 +1214,8 @@
   </nav>
   <div class="setup-body">
     <div class="setup-sec">
-      <div class="sec-eyebrow">Skill Drills</div>
-      <div class="sec-title">Pick a skill to drill</div>
+      <div class="sec-eyebrow" data-i18n="drill.eyebrow">Skill Drills</div>
+      <div class="sec-title" data-i18n="drill.title">Pick a skill to drill</div>
       <div class="firm-grid">
         <div class="firm-card drill-card" onclick="selectDrill('Market Sizing', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15 0 18M12 3c-2.5 2.5-2.5 15 0 18"/></svg></div><div><div class="firm-name">Market Sizing</div><div class="firm-desc">Estimate market sizes from first principles with clean structure.</div></div></div>
         <div class="firm-card drill-card" onclick="selectDrill('Structuring', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v4M12 12H6v4M12 12h6v4"/></svg></div><div><div class="firm-name">Structuring</div><div class="firm-desc">Build MECE, hypothesis-driven frameworks under time.</div></div></div>
@@ -1144,22 +1226,30 @@
         <div class="firm-card drill-card" onclick="selectDrill('Synthesis', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><path d="M12 3 3 20h18L12 3z"/><path d="M7.5 13h9M9.5 8.5h5"/></svg></div><div><div class="firm-name">Synthesis</div><div class="firm-desc">Deliver an answer-first recommendation under 90 seconds (Minto Pyramid).</div></div></div>
         <div class="firm-card drill-card" onclick="selectDrill('Behavioral', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg></div><div><div class="firm-name">Behavioral / Fit</div><div class="firm-desc">PEI-style fit questions scored on STAR structure.</div></div></div>
       </div>
-      <button id="drill-start-btn" class="btn btn-primary btn-cta" disabled onclick="startDrill()" style="margin-top:24px;">Start Drill</button>
+      <button id="drill-start-btn" class="btn btn-primary btn-cta" disabled onclick="startDrill()" style="margin-top:24px;" data-i18n="drill.start">Start Drill</button>
     </div>
   </div>
 </div>
 
 <div id="screen-setup" class="screen" data-screen-label="Setup">
   <nav class="top-nav">
-    <span class="wordmark">Cas<span class="wm-bridge">e</span>dge</span>
-    <div id="setup-user-pill"></div>
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-bridge">e</span>dge</span>
+    <div style="display:flex;align-items:center;gap:6px;">
+      <div class="nav-menu">
+        <button class="nav-link" onclick="chooseMode('case')" data-i18n="nav.cases">Cases</button>
+        <button class="nav-link" onclick="chooseMode('drill')" data-i18n="nav.drills">Drills</button>
+        <button class="nav-link" onclick="goToProgress()" data-i18n="nav.progress">Progress</button>
+      </div>
+      <button class="lang-btn" onclick="openLangMenu()"><span class="lang-current">EN</span> ▾</button>
+      <div id="setup-user-pill"></div>
+    </div>
   </nav>
 
   <div class="setup-body">
     <!-- Firm selection -->
     <div class="setup-sec">
-      <div class="sec-eyebrow">Step 1 of 2</div>
-      <div class="sec-title">Choose your target firm</div>
+      <div class="sec-eyebrow" data-i18n="setup.step1">Step 1 of 2</div>
+      <div class="sec-title" data-i18n="setup.firm">Choose your target firm</div>
       <div class="firm-grid">
 
         <div class="firm-card" onclick="selectFirm('McKinsey', this)" tabindex="0" role="button" aria-pressed="false">
@@ -1200,8 +1290,8 @@
 
     <!-- Case type selection -->
     <div class="setup-sec">
-      <div class="sec-eyebrow">Step 2 of 2</div>
-      <div class="sec-title">Choose your case type</div>
+      <div class="sec-eyebrow" data-i18n="setup.step2">Step 2 of 2</div>
+      <div class="sec-title" data-i18n="setup.casetype">Choose your case type</div>
       <div class="case-grid">
 
         <div class="case-card" onclick="selectCase('Profitability', this)" tabindex="0" role="button" aria-pressed="false">
@@ -1269,7 +1359,7 @@
   </div>
 
   <div class="setup-footer">
-    <button class="btn btn-ghost" onclick="showScreen('landing')">← Back</button>
+    <button class="btn btn-ghost" onclick="showScreen('landing')" data-i18n="common.back">← Back</button>
     <button id="start-btn" class="btn btn-primary" onclick="startInterview()" disabled="">
       Start Interview
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
@@ -1592,7 +1682,7 @@ async function startDrill() {
   renderHints();
   setTyping(true);
   const seed = Math.random().toString(36).substring(2,8);
-  const sys = DRILL_PROMPTS[state.drillType] + '\n\nUniqueness seed: ' + seed + ' — make this drill different from any previous one. Avoid coffee/café topics.';
+  const sys = DRILL_PROMPTS[state.drillType] + '\n\nUniqueness seed: ' + seed + ' — make this drill different from any previous one. Avoid coffee/café topics.' + langInstruction();
   try {
     const opening = await callAI(sys, [{ role:'user', content:'Begin the drill now.' }]);
     state.messages.push({ role:'assistant', content: opening });
@@ -1639,7 +1729,281 @@ const state = {
   messages: [], msgCount: 0,
   seenCases: JSON.parse(localStorage.getItem('caseedge_seen') || '[]'),
   drillType: null, drillSystem: null, mode: null,
+  // Language: aiLang drives the language of cases/drills; fbLang drives feedback.
+  // fbLang 'same' = follow aiLang. uiLang drives the interface chrome (independent).
+  aiLang: localStorage.getItem('caseedge_ailang') || 'en',
+  fbLang: localStorage.getItem('caseedge_fblang') || 'same',
+  uiLang: localStorage.getItem('caseedge_uilang') || 'en',
 };
+
+const LANG_NAMES = { en: 'English', ru: 'Russian (Русский)' };
+function setAiLang(code) {
+  state.aiLang = code;
+  try { localStorage.setItem('caseedge_ailang', code); } catch(e){}
+  updateLangUI();
+}
+function setFbLang(code) {
+  state.fbLang = code;
+  try { localStorage.setItem('caseedge_fblang', code); } catch(e){}
+  updateLangUI();
+}
+// Returns an instruction line to append to any AI system prompt
+function langInstruction() {
+  const caseLang = LANG_NAMES[state.aiLang] || 'English';
+  const fb = state.fbLang === 'same' ? state.aiLang : state.fbLang;
+  const fbLang = LANG_NAMES[fb] || caseLang;
+  return `\n\nLANGUAGE: Conduct the case/drill entirely in ${caseLang}. Deliver all feedback, scoring, and debrief in ${fbLang}. CRITICAL: the difficulty, depth, rigor, and quality must be IDENTICAL regardless of language — never simplify or shorten because of the language. Numbers, traps, and structure stay exactly as hard.`;
+}
+function updateLangUI() {
+  document.querySelectorAll('.lang-current').forEach(el => {
+    el.textContent = (state.aiLang || 'en').toUpperCase();
+  });
+}
+
+/* ────────────────────────────────────────────────────
+   UI INTERNATIONALIZATION (independent of case/feedback lang)
+   Every translatable node carries data-i18n="key".
+   applyUiLang() swaps textContent from the I18N dictionary.
+──────────────────────────────────────────────────── */
+const I18N = {
+  en: {
+    'nav.cases': 'Cases',
+    'nav.drills': 'Drills',
+    'nav.progress': 'Progress',
+    'nav.faq': 'FAQ',
+    'nav.contact': 'Contact',
+    'nav.signin': 'Sign in',
+    // Hero
+    'hero.eyebrow': 'MBB Interview Prep',
+    'hero.title': 'Master the case.<br><em>Land the offer.</em>',
+    'hero.sub': 'Every case is built on real MBB casebooks — Wharton, Darden, Kellogg, Stern — and the actual cases candidates were given in interviews.',
+    'hero.stat1.top': 'Real cases &amp; casebooks',
+    'hero.stat1.lbl': 'Wharton · Darden · Kellogg · Stern',
+    'hero.stat2.lbl': 'Drill types',
+    'hero.cta': 'Begin Free Session',
+    'hero.note': 'Create an account to save your progress.',
+    'pill.frameworks': 'Structured Frameworks',
+    'pill.feedback': 'Instant Feedback',
+    'pill.firm': 'Firm-specific Cases',
+    'pill.expert': 'Expert-level Feedback',
+    'pill.nocard': 'Instant access',
+    // Section 1
+    's1.eyebrow': 'The Case Interview',
+    's1.title': 'What top firms actually test',
+    's1.lead': "A case interview is a live business problem you solve out loud with the interviewer. It's how McKinsey, BCG, and Bain decide who gets the offer — and it rewards structure, sharp math, and clear communication over memorized answers.",
+    's1.c1.h': '<span class="ls-dot"></span>Structure',
+    's1.c1.p': 'Break an open-ended problem into clean, MECE buckets — and lead with your hypothesis, not a generic framework.',
+    's1.c2.h': '<span class="ls-dot"></span>Quant',
+    's1.c2.p': 'Run multi-step business math under pressure — breakeven, margins, market sizing — and tie every number back to the decision.',
+    's1.c3.h': '<span class="ls-dot"></span>Synthesis',
+    's1.c3.p': 'Deliver an answer-first recommendation with the conclusion up front, supporting data, and the risks that come with it.',
+    // Section 2
+    's2.eyebrow': 'Targeted Drills',
+    's2.title': 'Train one skill at a time',
+    's2.lead': 'Cases test everything at once. Drills isolate a single skill so you can build it fast — each one is a 5-rep adaptive series that gets harder as you improve, with instant feedback and a full model answer after every rep.',
+    's2.c1.h': '<span class="ls-dot"></span>Math &amp; Sizing',
+    's2.c1.p': 'Mental math, case math, and market sizing — speed and accuracy under real time pressure.',
+    's2.c2.h': '<span class="ls-dot"></span>Structure &amp; Charts',
+    's2.c2.p': 'Framework building, chart reading, and brainstorming — the core of any case.',
+    's2.c3.h': '<span class="ls-dot"></span>Synthesis &amp; Fit',
+    's2.c3.p': 'Answer-first recommendations and behavioral (PEI) questions — the half most candidates never train.',
+    // Section 3
+    's3.eyebrow': 'Why CasEdge',
+    's3.title': 'Built on the real thing',
+    's3.lead': 'Most prep tools give you a sample answer to compare against. CasEdge coaches the way a partner would — pushing back on weak logic, holding the numbers firm, and showing you exactly how to think, not just what the answer was.',
+    's3.c1.h': '<span class="ls-dot"></span>Real casebooks, real cases',
+    's3.c1.p': 'Every case is grounded in the official Wharton, Darden, Kellogg and Stern casebooks — and the actual cases candidates faced in MBB interviews. Named clients, consistent numbers, hidden insights.',
+    's3.c2.h': '<span class="ls-dot"></span>Partner-level pushback',
+    's3.c2.p': 'The coach challenges your recommendation and only backs down when you defend it with data — like the real room.',
+    's3.c3.h': '<span class="ls-dot"></span>Feedback in your language',
+    's3.c3.p': 'Practice in English, get your debrief and scorecard in clear, direct feedback you can act on immediately.',
+    // CTA + footer
+    'cta.title': 'Ready to start?',
+    'foot.tagline': 'MBB case interview prep — cases, drills, and partner-level feedback.',
+    'foot.contact': 'Contact',
+    'foot.cookies': 'Cookies',
+    'foot.rights': '© 2026 CasEdge. All rights reserved.',
+    // Mode screen
+    'mode.eyebrow': 'Choose your practice',
+    'mode.title': 'How do you want to train today?',
+    'mode.case.name': 'Full Case Interview',
+    'mode.case.desc': 'Complete 40-minute simulation — structure, math, exhibits, recommendation. As demanding as the real interview.',
+    'mode.drill.name': 'Skill Drills',
+    'mode.drill.desc': 'Targeted reps on one skill — market sizing, structuring, math, charts, brainstorm. Fast feedback.',
+    'mode.solve.desc': 'McKinsey-style problem-solving game — ecosystem builds, redistribution, scenario logic. Tests data fluency under structure. Premium track.',
+    'mode.chat.desc': 'Solve-style questions run conversationally in chat — same logic engine, no game UI. Build the reasoning muscle the real assessment rewards. Premium track.',
+    // Setup screen
+    'setup.step1': 'Step 1 of 2',
+    'setup.firm': 'Choose your target firm',
+    'setup.step2': 'Step 2 of 2',
+    'setup.casetype': 'Choose your case type',
+    // Drill screen
+    'drill.eyebrow': 'Skill Drills',
+    'drill.title': 'Pick a skill to drill',
+    'drill.start': 'Start Drill',
+    // Progress screen
+    'prog.eyebrow': 'Your progress',
+    'prog.title': 'How your training is going',
+    // Misc
+    'common.signin': 'Sign in →',
+    'common.back': '← Back',
+    'lang.settings': 'Language settings',
+    'lang.interface': 'Interface language',
+    'lang.casedrill': 'Case & drill language',
+    'lang.feedback': 'Feedback language',
+    'lang.same': 'Same',
+    'lang.done': 'Done',
+  },
+  ru: {
+    'nav.cases': 'Кейсы',
+    'nav.drills': 'Дриллы',
+    'nav.progress': 'Прогресс',
+    'nav.faq': 'Вопросы',
+    'nav.contact': 'Контакты',
+    'nav.signin': 'Войти',
+    // Hero
+    'hero.eyebrow': 'Подготовка к интервью MBB',
+    'hero.title': 'Освой кейс.<br><em>Получи оффер.</em>',
+    'hero.sub': 'Каждый кейс построен на реальных сборниках кейсов MBB — Wharton, Darden, Kellogg, Stern — и на настоящих задачах, которые давали кандидатам на интервью.',
+    'hero.stat1.top': 'Реальные кейсы и сборники',
+    'hero.stat1.lbl': 'Wharton · Darden · Kellogg · Stern',
+    'hero.stat2.lbl': 'Типов дриллов',
+    'hero.cta': 'Начать бесплатно',
+    'hero.note': 'Создай аккаунт, чтобы сохранять прогресс.',
+    'pill.frameworks': 'Структурные фреймворки',
+    'pill.feedback': 'Мгновенный фидбэк',
+    'pill.firm': 'Кейсы под фирму',
+    'pill.expert': 'Фидбэк уровня партнёра',
+    'pill.nocard': 'Мгновенный доступ',
+    // Section 1
+    's1.eyebrow': 'Кейс-интервью',
+    's1.title': 'Что на самом деле проверяют топ-фирмы',
+    's1.lead': 'Кейс-интервью — это живая бизнес-задача, которую ты решаешь вслух вместе с интервьюером. Именно так McKinsey, BCG и Bain решают, кому дать оффер — и здесь ценят структуру, точную математику и ясную коммуникацию, а не заученные ответы.',
+    's1.c1.h': '<span class="ls-dot"></span>Структура',
+    's1.c1.p': 'Разбей открытую задачу на чистые MECE-блоки — и веди с гипотезы, а не с шаблонного фреймворка.',
+    's1.c2.h': '<span class="ls-dot"></span>Расчёты',
+    's1.c2.p': 'Считай многошаговую бизнес-математику под давлением — точка безубыточности, маржа, оценка рынка — и привязывай каждое число к решению.',
+    's1.c3.h': '<span class="ls-dot"></span>Синтез',
+    's1.c3.p': 'Дай рекомендацию по принципу «вывод сначала»: заключение вперёд, опорные данные и связанные с ними риски.',
+    // Section 2
+    's2.eyebrow': 'Точечные дриллы',
+    's2.title': 'Тренируй по одному навыку за раз',
+    's2.lead': 'Кейсы проверяют всё сразу. Дриллы изолируют один навык, чтобы прокачать его быстро — каждый — это адаптивная серия из 5 повторов, которая усложняется по мере роста, с мгновенным фидбэком и полным разбором после каждого повтора.',
+    's2.c1.h': '<span class="ls-dot"></span>Математика и оценка рынка',
+    's2.c1.p': 'Устный счёт, кейс-математика и оценка рынка — скорость и точность под реальным давлением времени.',
+    's2.c2.h': '<span class="ls-dot"></span>Структура и графики',
+    's2.c2.p': 'Построение фреймворков, чтение графиков и брейншторм — ядро любого кейса.',
+    's2.c3.h': '<span class="ls-dot"></span>Синтез и Fit',
+    's2.c3.p': 'Рекомендации «вывод сначала» и поведенческие (PEI) вопросы — половина, которую большинство кандидатов не тренирует.',
+    // Section 3
+    's3.eyebrow': 'Почему CasEdge',
+    's3.title': 'Построено на реальном материале',
+    's3.lead': 'Большинство тренажёров просто дают образец ответа для сравнения. CasEdge коучит как партнёр — давит на слабую логику, держит числа жёстко и показывает, как именно думать, а не просто каким был ответ.',
+    's3.c1.h': '<span class="ls-dot"></span>Реальные сборники, реальные кейсы',
+    's3.c1.p': 'Каждый кейс опирается на официальные сборники кейсов Wharton, Darden, Kellogg и Stern — и на настоящие задачи, с которыми кандидаты сталкивались на интервью MBB. Реальные клиенты, согласованные цифры, скрытые инсайты.',
+    's3.c2.h': '<span class="ls-dot"></span>Давление уровня партнёра',
+    's3.c2.p': 'Коуч оспаривает твою рекомендацию и отступает, только когда ты защищаешь её данными — как в реальной комнате.',
+    's3.c3.h': '<span class="ls-dot"></span>Фидбэк на твоём языке',
+    's3.c3.p': 'Тренируйся на английском, а разбор и скоркарту получай в ясном, прямом фидбэке, который можно применить сразу.',
+    // CTA + footer
+    'cta.title': 'Готов начать?',
+    'foot.tagline': 'Подготовка к кейс-интервью MBB — кейсы, дриллы и фидбэк уровня партнёра.',
+    'foot.contact': 'Контакты',
+    'foot.cookies': 'Cookies',
+    'foot.rights': '© 2026 CasEdge. Все права защищены.',
+    // Mode screen
+    'mode.eyebrow': 'Выбери формат',
+    'mode.title': 'Как хочешь тренироваться сегодня?',
+    'mode.case.name': 'Полное кейс-интервью',
+    'mode.case.desc': 'Полная 40-минутная симуляция — структура, математика, графики, рекомендация. Жёстче настоящего интервью.',
+    'mode.drill.name': 'Дриллы навыков',
+    'mode.drill.desc': 'Точечные повторы на один навык — оценка рынка, структура, математика, графики, брейншторм. Быстрый фидбэк.',
+    'mode.solve.desc': 'Игра-решение в стиле McKinsey — построение экосистем, перераспределение, сценарная логика. Проверяет работу с данными в структуре. Премиум-трек.',
+    'mode.chat.desc': 'Вопросы в стиле Solve, но в формате чата — тот же логический движок, без игрового интерфейса. Качай мышление, которое реально ценит ассессмент. Премиум-трек.',
+    // Setup screen
+    'setup.step1': 'Шаг 1 из 2',
+    'setup.firm': 'Выбери целевую фирму',
+    'setup.step2': 'Шаг 2 из 2',
+    'setup.casetype': 'Выбери тип кейса',
+    // Drill screen
+    'drill.eyebrow': 'Дриллы навыков',
+    'drill.title': 'Выбери навык для дрилла',
+    'drill.start': 'Начать дрилл',
+    // Progress screen
+    'prog.eyebrow': 'Твой прогресс',
+    'prog.title': 'Как идёт тренировка',
+    // Misc
+    'common.signin': 'Войти →',
+    'common.back': '← Назад',
+    'lang.settings': 'Настройки языка',
+    'lang.interface': 'Язык интерфейса',
+    'lang.casedrill': 'Язык кейсов и дриллов',
+    'lang.feedback': 'Язык фидбэка',
+    'lang.same': 'Как у кейса',
+    'lang.done': 'Готово',
+  },
+};
+function t(key) {
+  const lang = state.uiLang || 'en';
+  return (I18N[lang] && I18N[lang][key]) || (I18N.en[key]) || key;
+}
+function applyUiLang() {
+  const lang = state.uiLang || 'en';
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const val = (I18N[lang] && I18N[lang][key]) || I18N.en[key];
+    if (val != null) el.textContent = val;
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.getAttribute('data-i18n-html');
+    const val = (I18N[lang] && I18N[lang][key]) || I18N.en[key];
+    if (val != null) el.innerHTML = val;
+  });
+  document.querySelectorAll('.ui-lang-current').forEach(el => {
+    el.textContent = lang.toUpperCase();
+  });
+  document.documentElement.setAttribute('lang', lang);
+  if (typeof window.setupRepel === 'function') {
+    try { window.setupRepel(); } catch (e) {}
+  }
+}
+function setUiLang(code) {
+  state.uiLang = code;
+  try { localStorage.setItem('caseedge_uilang', code); } catch(e){}
+  applyUiLang();
+}
+function pickUiLang(code) {
+  setUiLang(code);
+  document.querySelectorAll('#langOptsUi .lang-opt').forEach((b, i) => {
+    b.classList.toggle('sel', ['en','ru'][i] === code);
+  });
+}
+function openLangMenu() {
+  // highlight current selections
+  document.querySelectorAll('#langOptsUi .lang-opt').forEach((b, i) => {
+    b.classList.toggle('sel', ['en','ru'][i] === state.uiLang);
+  });
+  document.querySelectorAll('#langOptsAi .lang-opt').forEach((b, i) => {
+    b.classList.toggle('sel', ['en','ru'][i] === state.aiLang);
+  });
+  document.querySelectorAll('#langOptsFb .lang-opt').forEach((b, i) => {
+    b.classList.toggle('sel', ['same','en','ru'][i] === state.fbLang);
+  });
+  document.getElementById('langModal').classList.add('show');
+}
+function closeLangMenu() { document.getElementById('langModal').classList.remove('show'); }
+function pickAiLang(code) {
+  setAiLang(code);
+  document.querySelectorAll('#langOptsAi .lang-opt').forEach((b, i) => {
+    b.classList.toggle('sel', ['en','ru'][i] === code);
+  });
+}
+function pickFbLang(code) {
+  setFbLang(code);
+  document.querySelectorAll('#langOptsFb .lang-opt').forEach((b, i) => {
+    b.classList.toggle('sel', ['same','en','ru'][i] === code);
+  });
+}
 
 function rememberCase(summary) {
   state.seenCases.push(summary);
@@ -1778,6 +2142,31 @@ function chooseMode(mode) {
   else showScreen('drill');
 }
 function goToMode() { showScreen('mode'); }
+
+function comingSoon(name) {
+  let t = document.getElementById('soon-toast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'soon-toast';
+    t.style.cssText = 'position:fixed;left:50%;bottom:32px;transform:translateX(-50%) translateY(20px);'
+      + 'background:rgba(20,22,30,.96);color:#e9ecf5;border:1px solid rgba(124,140,232,.35);'
+      + 'padding:13px 20px;border-radius:14px;font-size:13.5px;font-weight:500;z-index:9999;'
+      + 'box-shadow:0 10px 40px rgba(0,0,0,.45);opacity:0;transition:opacity .25s,transform .25s;'
+      + 'max-width:340px;text-align:center;backdrop-filter:blur(8px);';
+    document.body.appendChild(t);
+  }
+  t.innerHTML = '<strong>' + esc(name) + '</strong> — in development. '
+    + 'Launching on the premium track soon.';
+  requestAnimationFrame(() => {
+    t.style.opacity = '1';
+    t.style.transform = 'translateX(-50%) translateY(0)';
+  });
+  clearTimeout(comingSoon._t);
+  comingSoon._t = setTimeout(() => {
+    t.style.opacity = '0';
+    t.style.transform = 'translateX(-50%) translateY(20px)';
+  }, 2600);
+}
 
 /* ────────────────────────────────────────────────────
    PROGRESS TRACKING (localStorage — device-local for now)
@@ -1918,7 +2307,7 @@ function goToPage(page) { showScreen(page); }
 function acceptCookies() {
   try { localStorage.setItem('casedge-cookies', 'accepted'); } catch (e) {}
   const b = document.getElementById('cookieBanner');
-  if (b) b.classList.remove('show');
+  if (b) { b.classList.remove('show'); b.style.display = 'none'; }
 }
 (function initCookieBanner() {
   function show() {
@@ -2332,7 +2721,7 @@ Format:
   const avoidList = state.seenCases.length
     ? '\n\n════ DO NOT REPEAT ════\nThis candidate has ALREADY done these cases. Generate something COMPLETELY different — different company, industry, problem, and numbers:\n' + state.seenCases.map((c,i) => (i+1)+'. '+c).join('\n')
     : '';
-  const FULL_SYSTEM = SYSTEM + avoidList;
+  const FULL_SYSTEM = SYSTEM + avoidList + langInstruction();
 
   try {
     const opening = await callAI(FULL_SYSTEM.replace('${state.firm}', state.firm).replace('${state.caseType}', state.caseType).replace('${state.firm}', state.firm), [
@@ -2600,7 +2989,7 @@ Return ONLY valid JSON (no markdown, no backticks). All five scores are 1.0–10
     const evalCtx = state.drillType
       ? `${state.drillType} drill`
       : `${state.firm || ''} ${state.caseType || ''} case interview`;
-    const raw = await callAI(EVAL_SYSTEM, [
+    const raw = await callAI(EVAL_SYSTEM + langInstruction(), [
       { role: 'user', content: `Evaluate this ${evalCtx}:\n\n${transcript}` }
     ], 'claude-sonnet-4-5');
     const clean = raw.replace(/```json|"```"/g, '').trim();
@@ -2822,6 +3211,14 @@ function applyTheme(theme) {
     const saved = localStorage.getItem('casedge-theme');
     if (saved === 'light') document.documentElement.setAttribute('data-theme', 'light');
   } catch (e) { /* sandbox blocks storage — stay on default dark */ }
+  if (typeof updateLangUI === 'function') {
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', updateLangUI);
+    else updateLangUI();
+  }
+  if (typeof applyUiLang === 'function') {
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', applyUiLang);
+    else applyUiLang();
+  }
 })();
 
 // ── Scroll-reveal: add .in when a .reveal element scrolls into view ──
@@ -2907,12 +3304,155 @@ document.addEventListener('keydown', e => {
     }
   }
 });
+
+/* ────────────────────────────────────────────────────
+   MAGNETIC REPEL — letters flee the cursor on the hero
+   Applies to .hero-hl and the stat numbers (.stat-num).
+   Re-runs after language switch (innerHTML changes).
+──────────────────────────────────────────────────── */
+(function () {
+  const REPEL_RADIUS = 80;   // px — how close before a letter reacts
+  const REPEL_FORCE  = 32;   // px — max push distance
+  let letters = [];          // [{el, cx, cy}]
+  let rafPending = false;
+  let lastEvt = null;
+
+  function wrapLetters(root) {
+    // Split text nodes into per-letter spans, preserving <br>/<em>.
+    root.querySelectorAll('.repel-letter').forEach(s => {
+      s.replaceWith(document.createTextNode(s.textContent));
+    });
+    root.normalize();
+    const walk = (node) => {
+      const kids = Array.from(node.childNodes);
+      kids.forEach(child => {
+        if (child.nodeType === 3) { // text
+          const frag = document.createDocumentFragment();
+          for (const ch of child.textContent) {
+            if (ch === ' ') { frag.appendChild(document.createTextNode(' ')); continue; }
+            const s = document.createElement('span');
+            s.className = 'repel-letter';
+            s.textContent = ch;
+            frag.appendChild(s);
+          }
+          child.replaceWith(frag);
+        } else if (child.nodeType === 1 && child.tagName !== 'BR') {
+          walk(child); // recurse into <em> etc.
+        }
+      });
+    };
+    walk(root);
+  }
+
+  function indexLetters() {
+    letters = [];
+    document.querySelectorAll('.hero-hl .repel-letter, .stat-num:not(.stat-text) .repel-letter').forEach(el => {
+      letters.push(el);
+    });
+    measure();
+  }
+
+  function measure() {
+    letters.forEach(el => {
+      const r = el.getBoundingClientRect();
+      el._cx = r.left + r.width / 2;
+      el._cy = r.top + r.height / 2;
+    });
+  }
+
+  function onMove(e) {
+    lastEvt = e;
+    if (!rafPending) {
+      rafPending = true;
+      requestAnimationFrame(applyRepel);
+    }
+  }
+
+  function applyRepel() {
+    rafPending = false;
+    if (!lastEvt) return;
+    const mx = lastEvt.clientX, my = lastEvt.clientY;
+    for (const el of letters) {
+      const dx = el._cx - mx;
+      const dy = el._cy - my;
+      const dist = Math.hypot(dx, dy);
+      if (dist < REPEL_RADIUS && dist > 0.01) {
+        const f = (1 - dist / REPEL_RADIUS);
+        const push = f * REPEL_FORCE;
+        const tx = (dx / dist) * push;
+        const ty = (dy / dist) * push;
+        el.style.transform = `translate(${tx.toFixed(1)}px, ${ty.toFixed(1)}px)`;
+        el.style.opacity = (1 - f * 0.25).toFixed(2);
+      } else {
+        el.style.transform = '';
+        el.style.opacity = '';
+      }
+    }
+  }
+
+  function reset() {
+    letters.forEach(el => { el.style.transform = ''; el.style.opacity = ''; });
+  }
+
+  function setupRepel() {
+    const title = document.querySelector('.hero-hl');
+    if (!title) return;
+    wrapLetters(title);
+    document.querySelectorAll('.stat-num:not(.stat-text)').forEach(wrapLetters);
+    indexLetters();
+  }
+
+  // expose so applyUiLang() can re-split after translation swaps innerHTML
+  window.setupRepel = setupRepel;
+
+  function boot() {
+    setupRepel();
+    window.addEventListener('mousemove', onMove, { passive: true });
+    window.addEventListener('scroll', () => { measure(); reset(); }, { passive: true });
+    window.addEventListener('resize', () => { measure(); reset(); });
+    const hero = document.querySelector('.landing-hero, .hero, .hero-hl');
+    (hero || window).addEventListener('mouseleave', reset);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+})();
 </script>
 
+
+<!-- Language selection modal -->
+<div class="lang-modal-bg" id="langModal">
+  <div class="lang-modal">
+    <h3 data-i18n="lang.settings">Language settings</h3>
+    <div class="lm-sub" data-i18n="lang.interface">Interface language</div>
+    <div class="lang-opts" id="langOptsUi">
+      <button class="lang-opt" onclick="pickUiLang('en')">English</button>
+      <button class="lang-opt" onclick="pickUiLang('ru')">Русский</button>
+    </div>
+    <div class="lm-sub" data-i18n="lang.casedrill">Case &amp; drill language</div>
+    <div class="lang-opts" id="langOptsAi">
+      <button class="lang-opt" onclick="pickAiLang('en')">English</button>
+      <button class="lang-opt" onclick="pickAiLang('ru')">Русский</button>
+    </div>
+    <div class="lm-sub" data-i18n="lang.feedback">Feedback language</div>
+    <div class="lang-opts" id="langOptsFb">
+      <button class="lang-opt" onclick="pickFbLang('same')" data-i18n="lang.same">Same</button>
+      <button class="lang-opt" onclick="pickFbLang('en')">English</button>
+      <button class="lang-opt" onclick="pickFbLang('ru')">Русский</button>
+    </div>
+    <button class="lm-close" onclick="closeLangMenu()" data-i18n="lang.done">Done</button>
+  </div>
+</div>
 
 <!-- Cookie consent banner -->
 <div class="cookie-banner" id="cookieBanner">
   <div class="cookie-text">We use local storage and essential cookies to run CasEdge and remember your preferences. See our <a onclick="goToPage('cookies')">Cookie Policy</a>.</div>
-  <button class="cookie-btn" onclick="acceptCookies()">Got it</button>
+  <div class="cookie-actions">
+    <button class="cookie-btn cookie-btn-ghost" onclick="acceptCookies()">Decline</button>
+    <button class="cookie-btn" onclick="acceptCookies()">Accept</button>
+  </div>
 </div>
 </body></html>
