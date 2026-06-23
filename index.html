@@ -164,6 +164,12 @@
     .prog-empty { text-align: center; padding: 30px 0; color: var(--on-dark-soft); }
     .prog-empty p { margin-bottom: 18px; }
     .prog-note { font-size: 12px; color: var(--on-dark-soft); text-align: center; margin-top: 30px; opacity: .8; }
+    .prog-identity { text-align: center; margin-top: 24px; font-size: 14px; color: var(--on-dark-soft); }
+    .prog-identity .pi-name { color: var(--on-dark); font-weight: 500; }
+    .prog-identity button {
+      background: none; border: none; color: var(--coral); cursor: pointer;
+      font-family: inherit; font-size: 13px; margin-left: 8px; text-decoration: underline;
+    }
 
     /* ── Top nav menu links ── */
     .nav-menu { display: flex; align-items: center; gap: 4px; }
@@ -348,6 +354,15 @@
     .scroll-hint:hover { opacity: 1; }
     .scroll-hint svg { width: 20px; height: 20px; animation: bounce 1.8s infinite; }
     @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(5px)} }
+    /* Playful "nudge" shake for non-interactive boxes when tapped */
+    @keyframes nudgeShake {
+      0%,100% { transform: translateX(0); }
+      20% { transform: translateX(-4px) rotate(-.4deg); }
+      40% { transform: translateX(4px) rotate(.4deg); }
+      60% { transform: translateX(-3px) rotate(-.3deg); }
+      80% { transform: translateX(3px) rotate(.3deg); }
+    }
+    .nudge { animation: nudgeShake .42s cubic-bezier(.36,.07,.19,.97); }
 
     /* ── Scroll-reveal (Apple-style, 3D, two-way) ── */
     .land-story-wrap { perspective: 1400px; }
@@ -1104,7 +1119,8 @@
         <button class="btn btn-primary" style="max-width:240px;" onclick="goToMode()">Start training</button>
       </div>
 
-      <p class="prog-note">Progress is saved on this device. Sign-in with cloud sync is coming soon.</p>
+      <div class="prog-identity" id="progIdentity"></div>
+      <p class="prog-note">Progress is saved to your account and syncs across devices.</p>
     </div>
   </div>
 </div>
@@ -1836,7 +1852,32 @@ function renderProgress() {
     empty.style.display = isEmpty ? 'block' : 'none';
   }
 }
-function goToProgress() { renderProgress(); updateAuthUI(); showScreen('progress'); }
+function goToProgress() { renderProgress(); updateAuthUI(); renderIdentity(); showScreen('progress'); }
+
+function renderIdentity() {
+  const box = document.getElementById('progIdentity');
+  if (!box) return;
+  if (!currentUser) { box.innerHTML = ''; return; }
+  const meta = currentUser.user_metadata || {};
+  const name = meta.full_name || (currentUser.email ? currentUser.email.split('@')[0] : 'You');
+  box.innerHTML = `Signed in as <span class="pi-name">${esc(name)}</span><button onclick="changeName()">Edit name</button>`;
+}
+
+async function changeName() {
+  const current = (currentUser?.user_metadata?.full_name) || '';
+  const newName = prompt('Enter your name:', current);
+  if (newName === null) return;
+  const trimmed = newName.trim();
+  if (!trimmed) { alert('Name cannot be empty.'); return; }
+  if (!sb) return;
+  try {
+    const { data, error } = await sb.auth.updateUser({ data: { full_name: trimmed } });
+    if (error) { alert('Could not update name: ' + error.message); return; }
+    if (data.user) currentUser = data.user;
+    updateAuthUI();
+    renderIdentity();
+  } catch (e) { alert('Could not update name.'); }
+}
 function goToPage(page) { showScreen(page); }
 
 // Check auth session on load (restores login across visits)
@@ -1860,6 +1901,20 @@ function goToPage(page) { showScreen(page); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', afterLoad);
   else afterLoad();
 })();
+// ── "Nudge" shake: tapping a non-interactive box gives playful feedback
+// that there's nothing to click there — interaction happens through the chat.
+(function () {
+  const NUDGE_TARGETS = '.msg-bbl, .m-card, .ls-card, .prog-stat, .info-note, .faq-item';
+  const INTERACTIVE = 'button, a, input, textarea, select, .hint-chip, .nav-link, [onclick], [role="button"]';
+  document.addEventListener('click', function (e) {
+    if (e.target.closest(INTERACTIVE)) return;
+    const box = e.target.closest(NUDGE_TARGETS);
+    if (!box || box.classList.contains('nudge')) return;
+    box.classList.add('nudge');
+    setTimeout(() => box.classList.remove('nudge'), 450);
+  });
+})();
+
 function acceptCookies() {
   try { localStorage.setItem('casedge-cookies', 'accepted'); } catch (e) {}
   const b = document.getElementById('cookieBanner');
