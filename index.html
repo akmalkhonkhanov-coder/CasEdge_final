@@ -2,16 +2,16 @@
 <html lang="en"><head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CasEdge — AI Case Interview Trainer</title>
+  <title>CasEdge - AI Case Interview Trainer</title>
 
-  <!-- CasEdge Design System tokens — inlined for portability -->
+  <!-- CasEdge Design System tokens - inlined for portability -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%20%3Cpath%20d%3D%22M58%2024%20a30%2030%200%201%200%200%2052%22%20fill%3D%22none%22%20stroke%3D%22%235db8a6%22%20stroke-width%3D%2213%22%20stroke-linecap%3D%22round%22/%3E%20%3Ctext%20x%3D%2262%22%20y%3D%2268%22%20font-family%3D%22Georgia%2C%20%27Times%20New%20Roman%27%2C%20serif%22%20font-style%3D%22italic%22%20font-size%3D%2252%22%20font-weight%3D%22500%22%20fill%3D%22%23cc785c%22%3Ee%3C/text%3E%20%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
-    /* CasEdge DS — Colors */
+    /* CasEdge DS - Colors */
     :root {
       --coral: #cc785c; --coral-active: #a9583e; --coral-disabled: #e6dfd8;
       --accent-teal: #5db8a6; --accent-amber: #e8a55a;
@@ -82,13 +82,13 @@
     .theme-toggle .icon-sun { display: none; }
     [data-theme="light"] .theme-toggle .icon-sun { display: inline; }
     [data-theme="light"] .theme-toggle .icon-moon { display: none; }
-    /* CasEdge DS — Typography */
+    /* CasEdge DS - Typography */
     :root {
       --font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       --font-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
     }
-    /* CasEdge DS — Spacing & radius */
+    /* CasEdge DS - Spacing & radius */
     :root {
       --space-xxs:4px; --space-xs:8px; --space-sm:12px; --space-md:16px;
       --space-lg:24px; --space-xl:32px; --space-xxl:48px; --space-section:96px;
@@ -138,7 +138,7 @@
       letter-spacing: -.3px; color: var(--on-dark); text-decoration: none; user-select: none;
       position: relative; display: inline-flex; align-items: baseline;
     }
-    /* The shared "e" bridges Case + Edge — it belongs to both words */
+    /* The shared "e" bridges Case + Edge - it belongs to both words */
     .wm-bridge {
       color: var(--coral); position: relative; font-style: italic;
       padding: 0 1px;
@@ -399,7 +399,6 @@
     ══════════════════════════════════════════════════ */
     #screen-landing {
       position: relative;
-      overflow-x: clip;
       background:
         radial-gradient(ellipse 75% 55% at 50% -8%, rgba(204,120,92,.14) 0%, transparent 65%),
         var(--surface-dark);
@@ -475,7 +474,7 @@
     .land-story-wrap > section, .land-story-wrap > .land-cta-wrap { position: relative; z-index: 1; }
     /* Smooth scrolling for the whole landing */
     html { scroll-behavior: smooth; }
-    /* 3D tilt on story cards — they react to cursor with real perspective */
+    /* 3D tilt on story cards - they react to cursor with real perspective */
     .ls-cards { perspective: 900px; }
     .ls-card {
       transform-style: preserve-3d; transition: transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s, border-color .25s;
@@ -547,8 +546,9 @@
     .stat-lbl { font-size: 11px; color: var(--on-dark-soft); margin-top: 5px; letter-spacing: .5px; text-transform: uppercase; }
     .stat-text {
       font-size: 19px; line-height: 1.15; letter-spacing: -.2px;
-      max-width: 200px; text-align: center;
+      max-width: 240px; text-align: center; word-break: normal; overflow-wrap: normal;
     }
+    .stat-text .repel-word { display: inline-block; white-space: nowrap; }
     .stat-wide { padding: 0 28px; }
     .stat-sep { width: 1px; height: 40px; background: rgba(255,255,255,.1); }
     /* Form */
@@ -928,13 +928,13 @@
     <h1 class="hero-hl" data-i18n-html="hero.title">Master the case.<br><em>Land the offer.</em></h1>
 
     <p class="hero-sub" data-i18n="hero.sub">
-      Every case is built on real MBB casebooks — Wharton, Darden, Kellogg, Stern —
+      Every case is built on real MBB casebooks - Wharton, Darden, Kellogg, Stern -
       and the actual cases candidates were given in interviews.
     </p>
 
     <div class="stats-row">
       <div class="stat stat-wide">
-        <div class="stat-num stat-text" data-i18n="hero.stat1.top">Real cases &amp; casebooks</div>
+        <div class="stat-num stat-text" data-i18n="hero.stat1.top">Real cases & casebooks</div>
         <div class="stat-lbl" data-i18n="hero.stat1.lbl">Wharton · Darden · Kellogg · Stern</div>
       </div>
       <div class="stat-sep"></div>
@@ -972,15 +972,15 @@
   <section id="land-story" class="land-section reveal">
     <div class="ls-eyebrow" data-i18n="s1.eyebrow">The Case Interview</div>
     <h2 class="ls-title" data-i18n="s1.title">What top firms actually test</h2>
-    <p class="ls-lead" data-i18n="s1.lead">A case interview is a live business problem you solve out loud with the interviewer. It's how McKinsey, BCG, and Bain decide who gets the offer — and it rewards structure, sharp math, and clear communication over memorized answers.</p>
+    <p class="ls-lead" data-i18n="s1.lead">A case interview is a live business problem you solve out loud with the interviewer. It's how McKinsey, BCG, and Bain decide who gets the offer - and it rewards structure, sharp math, and clear communication over memorized answers.</p>
     <div class="ls-cards">
       <div class="ls-card">
         <div class="ls-card-h" data-i18n-html="s1.c1.h"><span class="ls-dot"></span>Structure</div>
-        <div class="ls-card-p" data-i18n="s1.c1.p">Break an open-ended problem into clean, MECE buckets — and lead with your hypothesis, not a generic framework.</div>
+        <div class="ls-card-p" data-i18n="s1.c1.p">Break an open-ended problem into clean, MECE buckets - and lead with your hypothesis, not a generic framework.</div>
       </div>
       <div class="ls-card">
         <div class="ls-card-h" data-i18n-html="s1.c2.h"><span class="ls-dot"></span>Quant</div>
-        <div class="ls-card-p" data-i18n="s1.c2.p">Run multi-step business math under pressure — breakeven, margins, market sizing — and tie every number back to the decision.</div>
+        <div class="ls-card-p" data-i18n="s1.c2.p">Run multi-step business math under pressure - breakeven, margins, market sizing - and tie every number back to the decision.</div>
       </div>
       <div class="ls-card">
         <div class="ls-card-h" data-i18n-html="s1.c3.h"><span class="ls-dot"></span>Synthesis</div>
@@ -992,19 +992,19 @@
   <section class="land-section reveal">
     <div class="ls-eyebrow" data-i18n="s2.eyebrow">Targeted Drills</div>
     <h2 class="ls-title" data-i18n="s2.title">Train one skill at a time</h2>
-    <p class="ls-lead" data-i18n="s2.lead">Cases test everything at once. Drills isolate a single skill so you can build it fast — each one is a 5-rep adaptive series that gets harder as you improve, with instant feedback and a full model answer after every rep.</p>
+    <p class="ls-lead" data-i18n="s2.lead">Cases test everything at once. Drills isolate a single skill so you can build it fast - each one is a 5-rep adaptive series that gets harder as you improve, with instant feedback and a full model answer after every rep.</p>
     <div class="ls-cards">
       <div class="ls-card">
         <div class="ls-card-h" data-i18n-html="s2.c1.h"><span class="ls-dot"></span>Math &amp; Sizing</div>
-        <div class="ls-card-p" data-i18n="s2.c1.p">Mental math, case math, and market sizing — speed and accuracy under real time pressure.</div>
+        <div class="ls-card-p" data-i18n="s2.c1.p">Mental math, case math, and market sizing - speed and accuracy under real time pressure.</div>
       </div>
       <div class="ls-card">
         <div class="ls-card-h" data-i18n-html="s2.c2.h"><span class="ls-dot"></span>Structure &amp; Charts</div>
-        <div class="ls-card-p" data-i18n="s2.c2.p">Framework building, chart reading, and brainstorming — the core of any case.</div>
+        <div class="ls-card-p" data-i18n="s2.c2.p">Framework building, chart reading, and brainstorming - the core of any case.</div>
       </div>
       <div class="ls-card">
         <div class="ls-card-h" data-i18n-html="s2.c3.h"><span class="ls-dot"></span>Synthesis &amp; Fit</div>
-        <div class="ls-card-p" data-i18n="s2.c3.p">Answer-first recommendations and behavioral (PEI) questions — the half most candidates never train.</div>
+        <div class="ls-card-p" data-i18n="s2.c3.p">Answer-first recommendations and behavioral (PEI) questions - the half most candidates never train.</div>
       </div>
     </div>
   </section>
@@ -1012,15 +1012,15 @@
   <section class="land-section reveal">
     <div class="ls-eyebrow" data-i18n="s3.eyebrow">Why CasEdge</div>
     <h2 class="ls-title" data-i18n="s3.title">Built on the real thing</h2>
-    <p class="ls-lead" data-i18n="s3.lead">Most prep tools give you a sample answer to compare against. CasEdge coaches the way a partner would — pushing back on weak logic, holding the numbers firm, and showing you exactly how to think, not just what the answer was.</p>
+    <p class="ls-lead" data-i18n="s3.lead">Most prep tools give you a sample answer to compare against. CasEdge coaches the way a partner would - pushing back on weak logic, holding the numbers firm, and showing you exactly how to think, not just what the answer was.</p>
     <div class="ls-cards">
       <div class="ls-card">
         <div class="ls-card-h" data-i18n-html="s3.c1.h"><span class="ls-dot"></span>Real casebooks, real cases</div>
-        <div class="ls-card-p" data-i18n="s3.c1.p">Every case is grounded in the official Wharton, Darden, Kellogg and Stern casebooks — and the actual cases candidates faced in MBB interviews. Named clients, consistent numbers, hidden insights.</div>
+        <div class="ls-card-p" data-i18n="s3.c1.p">Every case is grounded in the official Wharton, Darden, Kellogg and Stern casebooks - and the actual cases candidates faced in MBB interviews. Named clients, consistent numbers, hidden insights.</div>
       </div>
       <div class="ls-card">
         <div class="ls-card-h" data-i18n-html="s3.c2.h"><span class="ls-dot"></span>Partner-level pushback</div>
-        <div class="ls-card-p" data-i18n="s3.c2.p">The coach challenges your recommendation and only backs down when you defend it with data — like the real room.</div>
+        <div class="ls-card-p" data-i18n="s3.c2.p">The coach challenges your recommendation and only backs down when you defend it with data - like the real room.</div>
       </div>
       <div class="ls-card">
         <div class="ls-card-h" data-i18n-html="s3.c3.h"><span class="ls-dot"></span>Feedback in your language</div>
@@ -1042,7 +1042,7 @@
     <div class="lf-inner">
       <div class="lf-brand">
         <span class="wordmark"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
-        <p class="lf-tag" data-i18n="foot.tagline">MBB case interview prep — cases, drills, and partner-level feedback.</p>
+        <p class="lf-tag" data-i18n="foot.tagline">MBB case interview prep - cases, drills, and partner-level feedback.</p>
       </div>
       <div class="lf-links">
         <button class="lf-link" onclick="goToPage('faq')" data-i18n="nav.faq">FAQ</button>
@@ -1055,7 +1055,7 @@
 </div>
 
 <!-- ═══════════════════════════════════════════════════
-     INFO PAGES — FAQ / CONTACT / COOKIES
+     INFO PAGES - FAQ / CONTACT / COOKIES
 ═══════════════════════════════════════════════════ -->
 <div id="screen-faq" class="screen" data-screen-label="FAQ">
   <nav class="top-nav">
@@ -1068,27 +1068,27 @@
     <div class="faq-list">
       <div class="faq-item">
         <div class="faq-q">What is a case interview?</div>
-        <div class="faq-a">A case interview is a live business problem you solve out loud with an interviewer. It's the core of how McKinsey, BCG, and Bain assess candidates — testing structure, quantitative skill, business judgment, and communication.</div>
+        <div class="faq-a">A case interview is a live business problem you solve out loud with an interviewer. It's the core of how McKinsey, BCG, and Bain assess candidates - testing structure, quantitative skill, business judgment, and communication.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">What's the difference between cases and drills?</div>
-        <div class="faq-a">A full case is a complete ~40-minute simulation — structure, math, exhibits, and a final recommendation. Drills isolate a single skill (math, structuring, synthesis, and more) into a fast 5-rep series so you can build that one muscle quickly.</div>
+        <div class="faq-a">A full case is a complete ~40-minute simulation - structure, math, exhibits, and a final recommendation. Drills isolate a single skill (math, structuring, synthesis, and more) into a fast 5-rep series so you can build that one muscle quickly.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">How is the feedback different from other tools?</div>
-        <div class="faq-a">Most tools hand you a sample answer to compare against. CasEdge coaches the way a partner would — it pushes back on weak logic, holds the numbers firm under pressure, and shows you how to think, not just what the answer was.</div>
+        <div class="faq-a">Most tools hand you a sample answer to compare against. CasEdge coaches the way a partner would - it pushes back on weak logic, holds the numbers firm under pressure, and shows you how to think, not just what the answer was.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Which firms and case types are covered?</div>
-        <div class="faq-a">Cases follow real MBB patterns across firms (McKinsey, BCG, Bain) and types — profitability, market entry, M&A, pricing, market sizing, and more. Drills cover eight distinct skills tested in real interviews.</div>
+        <div class="faq-a">Cases follow real MBB patterns across firms (McKinsey, BCG, Bain) and types - profitability, market entry, M&A, pricing, market sizing, and more. Drills cover eight distinct skills tested in real interviews.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">What languages are supported?</div>
-        <div class="faq-a">The platform supports English and Russian — with the same case difficulty, depth, and rigor across both languages.</div>
+        <div class="faq-a">The platform supports English and Russian - with the same case difficulty, depth, and rigor across both languages.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Is my progress saved?</div>
-        <div class="faq-a">Yes — your progress is saved on your device, and account-based cloud sync keeps it consistent across all your devices.</div>
+        <div class="faq-a">Yes - your progress is saved on your device, and account-based cloud sync keeps it consistent across all your devices.</div>
       </div>
     </div>
   </div>
@@ -1205,7 +1205,7 @@
           <div class="firm-initial" style="background:rgba(204,120,92,.15);color:var(--coral);">F</div>
           <div>
             <div class="firm-name" data-i18n="mode.case.name">Full Case Interview</div>
-            <div class="firm-desc" data-i18n="mode.case.desc">Complete 40-minute simulation — structure, math, exhibits, recommendation. As demanding as the real interview.</div>
+            <div class="firm-desc" data-i18n="mode.case.desc">Complete 40-minute simulation - structure, math, exhibits, recommendation. As demanding as the real interview.</div>
           </div>
           <div class="firm-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div>
         </div>
@@ -1213,7 +1213,7 @@
           <div class="firm-initial" style="background:rgba(93,184,166,.15);color:var(--accent-teal);">D</div>
           <div>
             <div class="firm-name" data-i18n="mode.drill.name">Skill Drills</div>
-            <div class="firm-desc" data-i18n="mode.drill.desc">Targeted reps on one skill — market sizing, structuring, math, charts, brainstorm. Fast feedback.</div>
+            <div class="firm-desc" data-i18n="mode.drill.desc">Targeted reps on one skill - market sizing, structuring, math, charts, brainstorm. Fast feedback.</div>
           </div>
           <div class="firm-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div>
         </div>
@@ -1221,7 +1221,7 @@
           <div class="firm-initial" style="background:rgba(124,140,232,.15);color:#7c8ce8;">B</div>
           <div>
             <div class="firm-name">BCG Chat Game <span class="soon-badge" style="background:rgba(93,184,166,.18);color:var(--accent-teal);">Premium</span></div>
-            <div class="firm-desc">The real BCG online-assessment format — 8 linked questions, exhibits, expected-value math, select-fewest traps. The screening barrier you must pass before the live interview.</div>
+            <div class="firm-desc">The real BCG online-assessment format - 8 linked questions, exhibits, expected-value math, select-fewest traps. The screening barrier you must pass before the live interview.</div>
           </div>
           <div class="firm-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div>
         </div>
@@ -1229,7 +1229,7 @@
           <div class="firm-initial" style="background:rgba(232,168,124,.15);color:#e8a87c;">S</div>
           <div>
             <div class="firm-name">Solve Game <span class="soon-badge">In Progress</span></div>
-            <div class="firm-desc">McKinsey-style problem-solving game — ecosystem builds, redistribution, scenario logic. Coming next.</div>
+            <div class="firm-desc">McKinsey-style problem-solving game - ecosystem builds, redistribution, scenario logic. Coming next.</div>
           </div>
           <div class="firm-check soon-lock"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
         </div>
@@ -1275,7 +1275,7 @@
           <div class="prog-stat-lbl">Day streak</div>
         </div>
         <div class="prog-stat">
-          <div class="prog-stat-num" id="progAvgScore">—</div>
+          <div class="prog-stat-num" id="progAvgScore">-</div>
           <div class="prog-stat-lbl">Avg score</div>
         </div>
       </div>
@@ -1331,7 +1331,7 @@
       <div class="firm-grid">
         <div class="firm-card drill-card" onclick="selectDrill('Market Sizing', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15 0 18M12 3c-2.5 2.5-2.5 15 0 18"/></svg></div><div><div class="firm-name">Market Sizing</div><div class="firm-desc">Estimate market sizes from first principles with clean structure.</div></div></div>
         <div class="firm-card drill-card" onclick="selectDrill('Structuring', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v4M12 12H6v4M12 12h6v4"/></svg></div><div><div class="firm-name">Structuring</div><div class="firm-desc">Build MECE, hypothesis-driven frameworks under time.</div></div></div>
-        <div class="firm-card drill-card" onclick="selectDrill('Case Math', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h2M8 15h2M14 11h2M14 15h2"/></svg></div><div><div class="firm-name">Case Math</div><div class="firm-desc">Multi-step business math — breakeven, ROI, margins.</div></div></div>
+        <div class="firm-card drill-card" onclick="selectDrill('Case Math', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h2M8 15h2M14 11h2M14 15h2"/></svg></div><div><div class="firm-name">Case Math</div><div class="firm-desc">Multi-step business math - breakeven, ROI, margins.</div></div></div>
         <div class="firm-card drill-card" onclick="selectDrill('Chart Interpretation', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg></div><div><div class="firm-name">Chart Interpretation</div><div class="firm-desc">Read exhibits and extract the insight that matters.</div></div></div>
         <div class="firm-card drill-card" onclick="selectDrill('Brainstorm', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 4 10.5c-.7.7-1 1.5-1 2.5H9c0-1-.3-1.8-1-2.5A6 6 0 0 1 12 3z"/></svg></div><div><div class="firm-name">Brainstorm</div><div class="firm-desc">Generate 6+ MECE ideas with creativity and structure.</div></div></div>
         <div class="firm-card drill-card" onclick="selectDrill('Calculation', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></div><div><div class="firm-name">Mental Math</div><div class="firm-desc">Rapid-fire arithmetic for speed and accuracy.</div></div></div>
@@ -1554,31 +1554,31 @@
     <div class="metrics-grid">
       <div class="m-card">
         <div class="m-lbl">Structure</div>
-        <div class="m-val" id="mv-structure">—</div>
+        <div class="m-val" id="mv-structure">-</div>
         <div class="m-bar"><div class="m-fill" id="mb-structure" style="width:0%;background:var(--coral);"></div></div>
         <div class="m-note">MECE &amp; hypothesis-first</div>
       </div>
       <div class="m-card">
         <div class="m-lbl">Quantitative</div>
-        <div class="m-val" id="mv-quant">—</div>
+        <div class="m-val" id="mv-quant">-</div>
         <div class="m-bar"><div class="m-fill" id="mb-quant" style="width:0%;background:#a78bfa;"></div></div>
         <div class="m-note">Math &amp; numbers tied to decision</div>
       </div>
       <div class="m-card">
         <div class="m-lbl">Business Logic</div>
-        <div class="m-val" id="mv-logic">—</div>
+        <div class="m-val" id="mv-logic">-</div>
         <div class="m-bar"><div class="m-fill" id="mb-logic" style="width:0%;background:var(--accent-teal);"></div></div>
         <div class="m-note">Insight &amp; root-cause depth</div>
       </div>
       <div class="m-card">
         <div class="m-lbl">Communication</div>
-        <div class="m-val" id="mv-comm">—</div>
+        <div class="m-val" id="mv-comm">-</div>
         <div class="m-bar"><div class="m-fill" id="mb-comm" style="width:0%;background:var(--accent-amber);"></div></div>
         <div class="m-note">Minto, concision, confidence</div>
       </div>
       <div class="m-card">
         <div class="m-lbl">Case Ownership</div>
-        <div class="m-val" id="mv-ownership">—</div>
+        <div class="m-val" id="mv-ownership">-</div>
         <div class="m-bar"><div class="m-fill" id="mb-ownership" style="width:0%;background:#6ea8fe;"></div></div>
         <div class="m-note">Drove the case &amp; sharp questions</div>
       </div>
@@ -1601,7 +1601,7 @@
 ═══════════════════════════════════════════════════ -->
 <script>
 /* ────────────────────────────────────────────────────
-   SUPABASE — auth + cloud progress
+   SUPABASE - auth + cloud progress
 ──────────────────────────────────────────────────── */
 const SUPABASE_URL = 'https://owyjiizhtrqpzlzawrjn.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_qIPY90nBEuvsjGfnQCICbQ_cZlP3vEc';
@@ -1715,20 +1715,20 @@ async function pushProgressToCloud() {
 // Shared drill engine: every drill is a SERIES of 5 adaptive reps with instant
 // per-rep feedback, then a summary scorecard. This mirrors the market standard
 // (CaseCoach / RocketBlocks rapid-fire format) but adds the thing they lack:
-// an explanation of the THINKING *plus* a full model answer to aim at — both, every rep.
+// an explanation of the THINKING *plus* a full model answer to aim at - both, every rep.
 const DRILL_ENGINE = `
 You run drills as a SERIES, never a single question. Follow this loop exactly:
 
-FORMAT — SERIES OF 5 REPS:
+FORMAT - SERIES OF 5 REPS:
 - The drill is 5 reps total. Internally track "Rep 1 of 5 ... Rep 5 of 5" and always show it as a header on each new rep.
 - Present ONE rep. Then STOP and wait for the candidate's answer. Never reveal the answer before they respond.
 - After EACH answer, give INSTANT micro-feedback in Russian, in this exact order:
    • Верно / Частично / Неверно + score /10
    • The single most important thing they did well or missed
-   • THE LOGIC (in Russian): the mental model — why the right approach is right, so they understand the "how to think", not just the answer.
-   • MODEL ANSWER (mandatory, in English): then show the FULL flawless answer to THIS rep, written exactly as a top candidate would deliver it out loud — complete, not a hint list. For a brainstorm rep that means the entire MECE structure with all buckets AND the factors inside each. For a math rep, the full worked solution. For sizing, the full equation and numbers. The candidate must be able to read your model answer and see the complete target they were aiming for. Never give only "the angles you missed" — give the whole answer assembled.
+   • THE LOGIC (in Russian): the mental model - why the right approach is right, so they understand the "how to think", not just the answer.
+   • MODEL ANSWER (mandatory, in English): then show the FULL flawless answer to THIS rep, written exactly as a top candidate would deliver it out loud - complete, not a hint list. For a brainstorm rep that means the entire MECE structure with all buckets AND the factors inside each. For a math rep, the full worked solution. For sizing, the full equation and numbers. The candidate must be able to read your model answer and see the complete target they were aiming for. Never give only "the angles you missed" - give the whole answer assembled.
    • The one-line partner move that ties it together.
-- Then immediately present the NEXT rep. Keep momentum — rapid-fire.
+- Then immediately present the NEXT rep. Keep momentum - rapid-fire.
 
 ADAPTIVE DIFFICULTY:
 - Start Rep 1 at medium difficulty.
@@ -1736,7 +1736,7 @@ ADAPTIVE DIFFICULTY:
 - If answered poorly → hold difficulty and tighten the teaching, do not pile on.
 - By Rep 5, a candidate on a hot streak should be at genuine MBB-final difficulty.
 
-DIFFICULTY FLOOR (this is NOT a walk in the park — never serve comfortable reps):
+DIFFICULTY FLOOR (this is NOT a walk in the park - never serve comfortable reps):
 - Even Rep 1 is at real MBB first-round level, not warm-up level.
 - Any math must be multi-step (3+ linked operations) with non-round numbers; include a red-herring number the candidate must ignore where it fits.
 - Any structuring/brainstorm must have a non-obvious angle, not the textbook answer.
@@ -1744,7 +1744,7 @@ DIFFICULTY FLOOR (this is NOT a walk in the park — never serve comfortable rep
 - If a candidate would call this rep "easy", you have failed the floor. Raise it.
 
 PARTNER PUSHBACK (where the rep involves a recommendation, an estimate, or a judgement call):
-- After the candidate answers, CHALLENGE once like a real partner: "Why should the CEO trust that?" / "What if your key assumption is wrong?" / "I disagree — convince me."
+- After the candidate answers, CHALLENGE once like a real partner: "Why should the CEO trust that?" / "What if your key assumption is wrong?" / "I disagree - convince me."
 - Then judge the RESPONSE: if they defend with data and hold firm → reward. If they CAVE just because you pushed → mark it a failure and say so (a strong candidate defends a right answer under pressure). If they were genuinely wrong and adapt → reward the adaptation.
 - Never reward folding under pressure on a correct answer, and never reward stubbornly clinging to a broken one.
 
@@ -1752,12 +1752,12 @@ VARIETY (hard rule):
 - Every rep must use a DIFFERENT industry/context. Rotate across Healthcare, Airlines, Banking, Pharma, Logistics, Telecom, Insurance, Semiconductors, Retail, Energy, SaaS, CPG, Automotive, etc.
 - BANNED defaults: coffee shops, cafés, generic "premium retailer with falling margins", t-shirts.
 
-NUMBERS ARE FIXED — DO NOT BEND TO THE CANDIDATE: Whatever numbers you state in a rep are locked. If the candidate claims a figure is different or that you made an error, you do NOT change it to match them — restate the original value and have them work with it. A candidate questioning a number never makes it wrong. (Pushback above flexes only your JUDGEMENT call when they defend a better answer with logic — never the DATA.) Design each rep's numbers to cross-check before you present it, so you never have to improvise a correction mid-rep.
+NUMBERS ARE FIXED - DO NOT BEND TO THE CANDIDATE: Whatever numbers you state in a rep are locked. If the candidate claims a figure is different or that you made an error, you do NOT change it to match them - restate the original value and have them work with it. A candidate questioning a number never makes it wrong. (Pushback above flexes only your JUDGEMENT call when they defend a better answer with logic - never the DATA.) Design each rep's numbers to cross-check before you present it, so you never have to improvise a correction mid-rep.
 
-AFTER REP 5 — SUMMARY SCORECARD (in Russian):
+AFTER REP 5 - SUMMARY SCORECARD (in Russian):
 - Общий счёт серии: X/10
 - Best rep / weakest rep
-- The ONE pattern to fix (the recurring weakness across the 5 reps — this is what makes the drill worth more than 5 random questions)
+- The ONE pattern to fix (the recurring weakness across the 5 reps - this is what makes the drill worth more than 5 random questions)
 - One concrete next action.
 
 LANGUAGE: questions and prompts in English; all feedback, logic and scorecard in Russian. Be blunt, partner-level, zero filler.
@@ -1765,24 +1765,24 @@ LANGUAGE: questions and prompts in English; all feedback, logic and scorecard in
 
 const DRILL_PROMPTS = {
   'Market Sizing': DRILL_ENGINE + `\n\nDRILL TYPE: MARKET SIZING. Each rep is one estimation question (e.g. "How many MRI scans are performed in Canada per year?"). Evaluate per rep: (1) clear equation stated FIRST, (2) reasonable assumptions, (3) logical segmentation, (4) clean calculation, (5) sanity-check. Harder reps = trickier populations, nested segments, or a unit trap. Teach the structuring logic, not just the final figure.`,
-  'Structuring': DRILL_ENGINE + `\n\nDRILL TYPE: STRUCTURING. Each rep is one case prompt (2-3 sentences, named company, specific problem). Candidate builds a MECE framework — do NOT run the full case. Evaluate per rep: MECE? tailored to THIS case (not a generic template)? hypothesis-driven? prioritized? Harder reps = less obvious problem types (org, M&A synergy, pricing, non-profit). Teach WHY a branch belongs, not just the tree.`,
+  'Structuring': DRILL_ENGINE + `\n\nDRILL TYPE: STRUCTURING. Each rep is one case prompt (2-3 sentences, named company, specific problem). Candidate builds a MECE framework - do NOT run the full case. Evaluate per rep: MECE? tailored to THIS case (not a generic template)? hypothesis-driven? prioritized? Harder reps = less obvious problem types (org, M&A synergy, pricing, non-profit). Teach WHY a branch belongs, not just the tree.`,
   'Case Math': DRILL_ENGINE + `\n\nDRILL TYPE: CASE MATH. Each rep is one multi-step business math problem with exact, internally consistent numbers (profit, breakeven, ROI, margin, NPV, contribution). Candidate requests missing data, states approach, then calculates. Every number must cross-check (Revenue × Margin = Profit). Harder reps = more steps, a red-herring number, or a breakeven/elasticity twist. Teach the setup logic and the shortcut.`,
-  'Chart Interpretation': DRILL_ENGINE + `\n\nDRILL TYPE: CHART INTERPRETATION. Each rep describes one exhibit in detail (specific numbers, e.g. "Bar chart: Revenue by segment — A €40M, B €25M, C €15M; line overlay: A declining 8%/yr, C growing 20%/yr"). Ask "What are your takeaways?" Evaluate: does the candidate extract the KEY insight (not just describe), connect to business implication, and propose a next step? Harder reps = charts with a hidden second insight or a misleading axis. Teach how to read for the "so what".`,
+  'Chart Interpretation': DRILL_ENGINE + `\n\nDRILL TYPE: CHART INTERPRETATION. Each rep describes one exhibit in detail (specific numbers, e.g. "Bar chart: Revenue by segment - A €40M, B €25M, C €15M; line overlay: A declining 8%/yr, C growing 20%/yr"). Ask "What are your takeaways?" Evaluate: does the candidate extract the KEY insight (not just describe), connect to business implication, and propose a next step? Harder reps = charts with a hidden second insight or a misleading axis. Teach how to read for the "so what".`,
   'Brainstorm': DRILL_ENGINE + `\n\nDRILL TYPE: CREATIVITY / BRAINSTORM. Each rep is one open question (e.g. "What factors before a beverage company launches a protein drink?"). Require 6+ ideas in a MECE structure; push if fewer than 4. Evaluate breadth, structure, non-obvious ideas. Harder reps = more constrained or two-sided prompts (revenue AND cost, internal AND external). Teach the MECE buckets to generate from, not just a list.`,
-  'Calculation': DRILL_ENGINE + `\n\nDRILL TYPE: RAPID MENTAL MATH. Each rep is one quick arithmetic problem with realistic business framing (percentages, large multiplications, fractions, weighted averages, growth rates). No data requests — just fast computation. Confirm correct/incorrect instantly and show the mental-math shortcut. Harder reps = uglier numbers and chained operations. Score speed AND accuracy. Don't round when teaching — show the precise path then the rounding shortcut.`,
-  'Synthesis': DRILL_ENGINE + `\n\nDRILL TYPE: SYNTHESIS / RECOMMENDATION. This is the single most-tested skill in a BCG final round. Each rep: present ONE compact case situation — named client, the decision they face, and 4-6 concrete, internally consistent data points already "discovered" (market size, margins, breakeven, investment, growth, one risk signal). Cross-check the numbers. Then instruct: "You have 90 seconds. Give me your recommendation." STOP and wait. Do NOT hint at the answer.
+  'Calculation': DRILL_ENGINE + `\n\nDRILL TYPE: RAPID MENTAL MATH. Each rep is one quick arithmetic problem with realistic business framing (percentages, large multiplications, fractions, weighted averages, growth rates). No data requests - just fast computation. Confirm correct/incorrect instantly and show the mental-math shortcut. Harder reps = uglier numbers and chained operations. Score speed AND accuracy. Don't round when teaching - show the precise path then the rounding shortcut.`,
+  'Synthesis': DRILL_ENGINE + `\n\nDRILL TYPE: SYNTHESIS / RECOMMENDATION. This is the single most-tested skill in a BCG final round. Each rep: present ONE compact case situation - named client, the decision they face, and 4-6 concrete, internally consistent data points already "discovered" (market size, margins, breakeven, investment, growth, one risk signal). Cross-check the numbers. Then instruct: "You have 90 seconds. Give me your recommendation." STOP and wait. Do NOT hint at the answer.
 
 Evaluate each rep strictly against the Minto Pyramid:
-1. CONCLUSION FIRST — a clear action verb ("We recommend / Client should enter / Do not acquire"). Building to the conclusion at the end = automatic structural fail, call it out hard.
+1. CONCLUSION FIRST - a clear action verb ("We recommend / Client should enter / Do not acquire"). Building to the conclusion at the end = automatic structural fail, call it out hard.
 2. 2-3 supporting facts USING THE SPECIFIC NUMBERS from the prompt.
-3. At least 2 risks — one internal, one external/regulatory.
+3. At least 2 risks - one internal, one external/regulatory.
 4. 2-3 specific, time-bound next steps.
-Harder reps = noisier data, a number that argues the OTHER way, or a closer call. In feedback quote their exact weak phrasing and show the flawless partner-level version in English (verb → number-backed reasons → MECE risks → next steps). Conclusion-first is non-negotiable. NOTE: these reps are full mini-recommendations, not rapid-fire — give each room, but still run all 5 and end with the summary scorecard on the recurring weakness.`,
+Harder reps = noisier data, a number that argues the OTHER way, or a closer call. In feedback quote their exact weak phrasing and show the flawless partner-level version in English (verb → number-backed reasons → MECE risks → next steps). Conclusion-first is non-negotiable. NOTE: these reps are full mini-recommendations, not rapid-fire - give each room, but still run all 5 and end with the summary scorecard on the recurring weakness.`,
   'Behavioral': DRILL_ENGINE + `\n\nDRILL TYPE: BEHAVIORAL / FIT (PEI). Fit is roughly half the hiring decision and almost nobody trains it. Each rep: ask ONE realistic PEI-style question, rotating themes across the 5 reps (personal leadership, conflict/disagreement with a senior, driving impact against resistance, a failure and what changed, "why consulting / why this firm", entrepreneurial drive). Ask only the question, then STOP and wait.
 
 After each answer you MAY ask 1-2 sharp probing follow-ups like a real interviewer ("What was YOUR specific contribution?", "What would you do differently?", "How did they react?") before scoring that rep.
 
-Evaluate each rep against STAR (Situation, Task, Action, Result): brief context without rambling? ACTION clearly THEIRS ("I", not "we") and specific? a QUANTIFIED result? genuine self-awareness? In feedback flag missing STAR elements, every "we" that should be "I", quote vague lines, and show a tightened model structure in English. Harder reps = themes candidates dodge (real failure, real conflict). NOTE: these are full answers, not rapid-fire — but still run all 5 themes and close with the summary scorecard on the recurring pattern.`
+Evaluate each rep against STAR (Situation, Task, Action, Result): brief context without rambling? ACTION clearly THEIRS ("I", not "we") and specific? a QUANTIFIED result? genuine self-awareness? In feedback flag missing STAR elements, every "we" that should be "I", quote vague lines, and show a tightened model structure in English. Harder reps = themes candidates dodge (real failure, real conflict). NOTE: these are full answers, not rapid-fire - but still run all 5 themes and close with the summary scorecard on the recurring pattern.`
 };
 
 async function startDrill() {
@@ -1802,7 +1802,7 @@ async function startDrill() {
   renderHints();
   setTyping(true);
   const seed = Math.random().toString(36).substring(2,8);
-  const sys = DRILL_PROMPTS[state.drillType] + '\n\nUniqueness seed: ' + seed + ' — make this drill different from any previous one. Avoid coffee/café topics.' + langInstruction();
+  const sys = DRILL_PROMPTS[state.drillType] + '\n\nUniqueness seed: ' + seed + ' - make this drill different from any previous one. Avoid coffee/café topics.' + langInstruction();
   try {
     const opening = await callAI(sys, [{ role:'user', content:'Begin the drill now.' }]);
     state.messages.push({ role:'assistant', content: opening });
@@ -1872,7 +1872,7 @@ function langInstruction() {
   const caseLang = LANG_NAMES[state.aiLang] || 'English';
   const fb = state.fbLang === 'same' ? state.aiLang : state.fbLang;
   const fbLang = LANG_NAMES[fb] || caseLang;
-  return `\n\nLANGUAGE: Conduct the case/drill entirely in ${caseLang}. Deliver all feedback, scoring, and debrief in ${fbLang}. CRITICAL: the difficulty, depth, rigor, and quality must be IDENTICAL regardless of language — never simplify or shorten because of the language. Numbers, traps, and structure stay exactly as hard.`;
+  return `\n\nLANGUAGE: Conduct the case/drill entirely in ${caseLang}. Deliver all feedback, scoring, and debrief in ${fbLang}. CRITICAL: the difficulty, depth, rigor, and quality must be IDENTICAL regardless of language - never simplify or shorten because of the language. Numbers, traps, and structure stay exactly as hard.`;
 }
 function updateLangUI() {
   document.querySelectorAll('.lang-current').forEach(el => {
@@ -1896,8 +1896,8 @@ const I18N = {
     // Hero
     'hero.eyebrow': 'MBB Interview Prep',
     'hero.title': 'Master the case.<br><em>Land the offer.</em>',
-    'hero.sub': 'Every case is built on real MBB casebooks — Wharton, Darden, Kellogg, Stern — and the actual cases candidates were given in interviews.',
-    'hero.stat1.top': 'Real cases &amp; casebooks',
+    'hero.sub': 'Every case is built on real MBB casebooks - Wharton, Darden, Kellogg, Stern - and the actual cases candidates were given in interviews.',
+    'hero.stat1.top': 'Real cases & casebooks',
     'hero.stat1.lbl': 'Wharton · Darden · Kellogg · Stern',
     'hero.stat2.lbl': 'Drill types',
     'hero.cta': 'Begin Free Session',
@@ -1910,36 +1910,36 @@ const I18N = {
     // Section 1
     's1.eyebrow': 'The Case Interview',
     's1.title': 'What top firms actually test',
-    's1.lead': "A case interview is a live business problem you solve out loud with the interviewer. It's how McKinsey, BCG, and Bain decide who gets the offer — and it rewards structure, sharp math, and clear communication over memorized answers.",
+    's1.lead': "A case interview is a live business problem you solve out loud with the interviewer. It's how McKinsey, BCG, and Bain decide who gets the offer - and it rewards structure, sharp math, and clear communication over memorized answers.",
     's1.c1.h': '<span class="ls-dot"></span>Structure',
-    's1.c1.p': 'Break an open-ended problem into clean, MECE buckets — and lead with your hypothesis, not a generic framework.',
+    's1.c1.p': 'Break an open-ended problem into clean, MECE buckets - and lead with your hypothesis, not a generic framework.',
     's1.c2.h': '<span class="ls-dot"></span>Quant',
-    's1.c2.p': 'Run multi-step business math under pressure — breakeven, margins, market sizing — and tie every number back to the decision.',
+    's1.c2.p': 'Run multi-step business math under pressure - breakeven, margins, market sizing - and tie every number back to the decision.',
     's1.c3.h': '<span class="ls-dot"></span>Synthesis',
     's1.c3.p': 'Deliver an answer-first recommendation with the conclusion up front, supporting data, and the risks that come with it.',
     // Section 2
     's2.eyebrow': 'Targeted Drills',
     's2.title': 'Train one skill at a time',
-    's2.lead': 'Cases test everything at once. Drills isolate a single skill so you can build it fast — each one is a 5-rep adaptive series that gets harder as you improve, with instant feedback and a full model answer after every rep.',
+    's2.lead': 'Cases test everything at once. Drills isolate a single skill so you can build it fast - each one is a 5-rep adaptive series that gets harder as you improve, with instant feedback and a full model answer after every rep.',
     's2.c1.h': '<span class="ls-dot"></span>Math &amp; Sizing',
-    's2.c1.p': 'Mental math, case math, and market sizing — speed and accuracy under real time pressure.',
+    's2.c1.p': 'Mental math, case math, and market sizing - speed and accuracy under real time pressure.',
     's2.c2.h': '<span class="ls-dot"></span>Structure &amp; Charts',
-    's2.c2.p': 'Framework building, chart reading, and brainstorming — the core of any case.',
+    's2.c2.p': 'Framework building, chart reading, and brainstorming - the core of any case.',
     's2.c3.h': '<span class="ls-dot"></span>Synthesis &amp; Fit',
-    's2.c3.p': 'Answer-first recommendations and behavioral (PEI) questions — the half most candidates never train.',
+    's2.c3.p': 'Answer-first recommendations and behavioral (PEI) questions - the half most candidates never train.',
     // Section 3
     's3.eyebrow': 'Why CasEdge',
     's3.title': 'Built on the real thing',
-    's3.lead': 'Most prep tools give you a sample answer to compare against. CasEdge coaches the way a partner would — pushing back on weak logic, holding the numbers firm, and showing you exactly how to think, not just what the answer was.',
+    's3.lead': 'Most prep tools give you a sample answer to compare against. CasEdge coaches the way a partner would - pushing back on weak logic, holding the numbers firm, and showing you exactly how to think, not just what the answer was.',
     's3.c1.h': '<span class="ls-dot"></span>Real casebooks, real cases',
-    's3.c1.p': 'Every case is grounded in the official Wharton, Darden, Kellogg and Stern casebooks — and the actual cases candidates faced in MBB interviews. Named clients, consistent numbers, hidden insights.',
+    's3.c1.p': 'Every case is grounded in the official Wharton, Darden, Kellogg and Stern casebooks - and the actual cases candidates faced in MBB interviews. Named clients, consistent numbers, hidden insights.',
     's3.c2.h': '<span class="ls-dot"></span>Partner-level pushback',
-    's3.c2.p': 'The coach challenges your recommendation and only backs down when you defend it with data — like the real room.',
+    's3.c2.p': 'The coach challenges your recommendation and only backs down when you defend it with data - like the real room.',
     's3.c3.h': '<span class="ls-dot"></span>Feedback in your language',
     's3.c3.p': 'Practice in English, get your debrief and scorecard in clear, direct feedback you can act on immediately.',
     // CTA + footer
     'cta.title': 'Ready to start?',
-    'foot.tagline': 'MBB case interview prep — cases, drills, and partner-level feedback.',
+    'foot.tagline': 'MBB case interview prep - cases, drills, and partner-level feedback.',
     'foot.contact': 'Contact',
     'foot.cookies': 'Cookies',
     'foot.rights': '© 2026 CasEdge. All rights reserved.',
@@ -1947,11 +1947,11 @@ const I18N = {
     'mode.eyebrow': 'Choose your practice',
     'mode.title': 'How do you want to train today?',
     'mode.case.name': 'Full Case Interview',
-    'mode.case.desc': 'Complete 40-minute simulation — structure, math, exhibits, recommendation. As demanding as the real interview.',
+    'mode.case.desc': 'Complete 40-minute simulation - structure, math, exhibits, recommendation. As demanding as the real interview.',
     'mode.drill.name': 'Skill Drills',
-    'mode.drill.desc': 'Targeted reps on one skill — market sizing, structuring, math, charts, brainstorm. Fast feedback.',
-    'mode.solve.desc': 'McKinsey-style problem-solving game — ecosystem builds, redistribution, scenario logic. Tests data fluency under structure. Premium track.',
-    'mode.chat.desc': 'Solve-style questions run conversationally in chat — same logic engine, no game UI. Build the reasoning muscle the real assessment rewards. Premium track.',
+    'mode.drill.desc': 'Targeted reps on one skill - market sizing, structuring, math, charts, brainstorm. Fast feedback.',
+    'mode.solve.desc': 'McKinsey-style problem-solving game - ecosystem builds, redistribution, scenario logic. Tests data fluency under structure. Premium track.',
+    'mode.chat.desc': 'Solve-style questions run conversationally in chat - same logic engine, no game UI. Build the reasoning muscle the real assessment rewards. Premium track.',
     // Setup screen
     'setup.step1': 'Step 1 of 2',
     'setup.firm': 'Choose your target firm',
@@ -1986,7 +1986,7 @@ const I18N = {
     // Hero
     'hero.eyebrow': 'Подготовка к интервью MBB',
     'hero.title': 'Освой кейс.<br><em>Получи оффер.</em>',
-    'hero.sub': 'Каждый кейс построен на реальных сборниках кейсов MBB — Wharton, Darden, Kellogg, Stern — и на настоящих задачах, которые давали кандидатам на интервью.',
+    'hero.sub': 'Каждый кейс построен на реальных сборниках кейсов MBB - Wharton, Darden, Kellogg, Stern - и на настоящих задачах, которые давали кандидатам на интервью.',
     'hero.stat1.top': 'Реальные кейсы и сборники',
     'hero.stat1.lbl': 'Wharton · Darden · Kellogg · Stern',
     'hero.stat2.lbl': 'Типов дриллов',
@@ -2000,36 +2000,36 @@ const I18N = {
     // Section 1
     's1.eyebrow': 'Кейс-интервью',
     's1.title': 'Что на самом деле проверяют топ-фирмы',
-    's1.lead': 'Кейс-интервью — это живая бизнес-задача, которую ты решаешь вслух вместе с интервьюером. Именно так McKinsey, BCG и Bain решают, кому дать оффер — и здесь ценят структуру, точную математику и ясную коммуникацию, а не заученные ответы.',
+    's1.lead': 'Кейс-интервью - это живая бизнес-задача, которую ты решаешь вслух вместе с интервьюером. Именно так McKinsey, BCG и Bain решают, кому дать оффер - и здесь ценят структуру, точную математику и ясную коммуникацию, а не заученные ответы.',
     's1.c1.h': '<span class="ls-dot"></span>Структура',
-    's1.c1.p': 'Разбей открытую задачу на чистые MECE-блоки — и веди с гипотезы, а не с шаблонного фреймворка.',
+    's1.c1.p': 'Разбей открытую задачу на чистые MECE-блоки - и веди с гипотезы, а не с шаблонного фреймворка.',
     's1.c2.h': '<span class="ls-dot"></span>Расчёты',
-    's1.c2.p': 'Считай многошаговую бизнес-математику под давлением — точка безубыточности, маржа, оценка рынка — и привязывай каждое число к решению.',
+    's1.c2.p': 'Считай многошаговую бизнес-математику под давлением - точка безубыточности, маржа, оценка рынка - и привязывай каждое число к решению.',
     's1.c3.h': '<span class="ls-dot"></span>Синтез',
     's1.c3.p': 'Дай рекомендацию по принципу «вывод сначала»: заключение вперёд, опорные данные и связанные с ними риски.',
     // Section 2
     's2.eyebrow': 'Точечные дриллы',
     's2.title': 'Тренируй по одному навыку за раз',
-    's2.lead': 'Кейсы проверяют всё сразу. Дриллы изолируют один навык, чтобы прокачать его быстро — каждый — это адаптивная серия из 5 повторов, которая усложняется по мере роста, с мгновенным фидбэком и полным разбором после каждого повтора.',
+    's2.lead': 'Кейсы проверяют всё сразу. Дриллы изолируют один навык, чтобы прокачать его быстро - каждый - это адаптивная серия из 5 повторов, которая усложняется по мере роста, с мгновенным фидбэком и полным разбором после каждого повтора.',
     's2.c1.h': '<span class="ls-dot"></span>Математика и оценка рынка',
-    's2.c1.p': 'Устный счёт, кейс-математика и оценка рынка — скорость и точность под реальным давлением времени.',
+    's2.c1.p': 'Устный счёт, кейс-математика и оценка рынка - скорость и точность под реальным давлением времени.',
     's2.c2.h': '<span class="ls-dot"></span>Структура и графики',
-    's2.c2.p': 'Построение фреймворков, чтение графиков и брейншторм — ядро любого кейса.',
+    's2.c2.p': 'Построение фреймворков, чтение графиков и брейншторм - ядро любого кейса.',
     's2.c3.h': '<span class="ls-dot"></span>Синтез и Fit',
-    's2.c3.p': 'Рекомендации «вывод сначала» и поведенческие (PEI) вопросы — половина, которую большинство кандидатов не тренирует.',
+    's2.c3.p': 'Рекомендации «вывод сначала» и поведенческие (PEI) вопросы - половина, которую большинство кандидатов не тренирует.',
     // Section 3
     's3.eyebrow': 'Почему CasEdge',
     's3.title': 'Построено на реальном материале',
-    's3.lead': 'Большинство тренажёров просто дают образец ответа для сравнения. CasEdge коучит как партнёр — давит на слабую логику, держит числа жёстко и показывает, как именно думать, а не просто каким был ответ.',
+    's3.lead': 'Большинство тренажёров просто дают образец ответа для сравнения. CasEdge коучит как партнёр - давит на слабую логику, держит числа жёстко и показывает, как именно думать, а не просто каким был ответ.',
     's3.c1.h': '<span class="ls-dot"></span>Реальные сборники, реальные кейсы',
-    's3.c1.p': 'Каждый кейс опирается на официальные сборники кейсов Wharton, Darden, Kellogg и Stern — и на настоящие задачи, с которыми кандидаты сталкивались на интервью MBB. Реальные клиенты, согласованные цифры, скрытые инсайты.',
+    's3.c1.p': 'Каждый кейс опирается на официальные сборники кейсов Wharton, Darden, Kellogg и Stern - и на настоящие задачи, с которыми кандидаты сталкивались на интервью MBB. Реальные клиенты, согласованные цифры, скрытые инсайты.',
     's3.c2.h': '<span class="ls-dot"></span>Давление уровня партнёра',
-    's3.c2.p': 'Коуч оспаривает твою рекомендацию и отступает, только когда ты защищаешь её данными — как в реальной комнате.',
+    's3.c2.p': 'Коуч оспаривает твою рекомендацию и отступает, только когда ты защищаешь её данными - как в реальной комнате.',
     's3.c3.h': '<span class="ls-dot"></span>Фидбэк на твоём языке',
     's3.c3.p': 'Тренируйся на английском, а разбор и скоркарту получай в ясном, прямом фидбэке, который можно применить сразу.',
     // CTA + footer
     'cta.title': 'Готов начать?',
-    'foot.tagline': 'Подготовка к кейс-интервью MBB — кейсы, дриллы и фидбэк уровня партнёра.',
+    'foot.tagline': 'Подготовка к кейс-интервью MBB - кейсы, дриллы и фидбэк уровня партнёра.',
     'foot.contact': 'Контакты',
     'foot.cookies': 'Cookies',
     'foot.rights': '© 2026 CasEdge. Все права защищены.',
@@ -2037,11 +2037,11 @@ const I18N = {
     'mode.eyebrow': 'Выбери формат',
     'mode.title': 'Как хочешь тренироваться сегодня?',
     'mode.case.name': 'Полное кейс-интервью',
-    'mode.case.desc': 'Полная 40-минутная симуляция — структура, математика, графики, рекомендация. Жёстче настоящего интервью.',
+    'mode.case.desc': 'Полная 40-минутная симуляция - структура, математика, графики, рекомендация. Жёстче настоящего интервью.',
     'mode.drill.name': 'Дриллы навыков',
-    'mode.drill.desc': 'Точечные повторы на один навык — оценка рынка, структура, математика, графики, брейншторм. Быстрый фидбэк.',
-    'mode.solve.desc': 'Игра-решение в стиле McKinsey — построение экосистем, перераспределение, сценарная логика. Проверяет работу с данными в структуре. Премиум-трек.',
-    'mode.chat.desc': 'Вопросы в стиле Solve, но в формате чата — тот же логический движок, без игрового интерфейса. Качай мышление, которое реально ценит ассессмент. Премиум-трек.',
+    'mode.drill.desc': 'Точечные повторы на один навык - оценка рынка, структура, математика, графики, брейншторм. Быстрый фидбэк.',
+    'mode.solve.desc': 'Игра-решение в стиле McKinsey - построение экосистем, перераспределение, сценарная логика. Проверяет работу с данными в структуре. Премиум-трек.',
+    'mode.chat.desc': 'Вопросы в стиле Solve, но в формате чата - тот же логический движок, без игрового интерфейса. Качай мышление, которое реально ценит ассессмент. Премиум-трек.',
     // Setup screen
     'setup.step1': 'Шаг 1 из 2',
     'setup.firm': 'Выбери целевую фирму',
@@ -2148,13 +2148,13 @@ function showScreen(id, fromPop) {
   window.scrollTo(0, 0);
   // Register this screen in browser history so the browser back/forward arrows
   // work. Wrapped in try/catch because sandboxed previews (about:srcdoc) block
-  // history changes with a SecurityError — on the real deployed site it works.
+  // history changes with a SecurityError - on the real deployed site it works.
   if (!fromPop) {
     try {
       if (!(history.state && history.state.screen === id)) {
         history.pushState({ screen: id }, '', '#' + id);
       }
-    } catch (e) { /* history unavailable in sandbox — navigation still works */ }
+    } catch (e) { /* history unavailable in sandbox - navigation still works */ }
   }
 }
 
@@ -2168,7 +2168,7 @@ window.addEventListener('popstate', function (e) {
 window.addEventListener('DOMContentLoaded', function () {
   try {
     history.replaceState({ screen: 'landing' }, '', '#landing');
-  } catch (e) { /* sandbox blocks this — safe to ignore */ }
+  } catch (e) { /* sandbox blocks this - safe to ignore */ }
 });
 
 /* ────────────────────────────────────────────────────
@@ -2283,7 +2283,7 @@ const BCG_CASES = [{
   client: 'Technoplast',
   intro: "Please note that all region and company names in this case are fictional. Unless otherwise stated, assume real-world events have not taken place and are to be ignored.\n\nOur client, Technoplast, is one of the world's leading green plastic compounders. It blends recycled plastic resins with additives to create plastic compounds, which it sells to plastic converters that turn them into finished products.",
   steps: [
-    { type:'say', text:"Last week, Technoplast's CEO was told that Simkin, a producer of recycled plastic resins, is being put up for acquisition for USD 30 Million. Simkin accounts for ~10% of the global market for recycled LDPE and HDPE — both key inputs for Technoplast. The CEO wants to assess whether Technoplast should bid for Simkin and, if so, how much." },
+    { type:'say', text:"Last week, Technoplast's CEO was told that Simkin, a producer of recycled plastic resins, is being put up for acquisition for USD 30 Million. Simkin accounts for ~10% of the global market for recycled LDPE and HDPE - both key inputs for Technoplast. The CEO wants to assess whether Technoplast should bid for Simkin and, if so, how much." },
     { type:'q', id:'q1', label:'Question 1', widget:'text',
       text:"Let's think about the right structure. What are the 3 key questions you would need to answer to help Technoplast decide how much to bid for Simkin? Please summarize in 3 lines maximum.",
       grade:'open' },
@@ -2296,8 +2296,8 @@ const BCG_CASES = [{
         ['Global resin price (USD/ton)','1,000','1,100'],
         ["Cost of Simkin's raw materials (USD/ton)",'350','400'],
         ['Cost of energy for processing (USD/ton)','50','100'],
-        ["Depreciation, Simkin's plant (USD/yr)",'400,000','—'],
-        ['Manpower to operate plant (USD/yr)','100,000','—'] ]} },
+        ["Depreciation, Simkin's plant (USD/yr)",'400,000','-'],
+        ['Manpower to operate plant (USD/yr)','100,000','-'] ]} },
     { type:'q', id:'q2a', label:'Question 2a', widget:'number',
       text:"Scenario 1: Given the data in the exhibit, what is the maximum that Technoplast should be willing to pay for Simkin? Please provide your answer rounded to the nearest whole number (e.g. 1111 or 123456), without further explanation or working.",
       grade:'number', answer:31600000, tolerance:0,
@@ -2307,18 +2307,18 @@ const BCG_CASES = [{
       options:[
         "Simkin's spare capacity may not cover Technoplast's full future resin needs",
         "Integration and operational risk of merging the two businesses",
-        "Customer concentration — Simkin depends on a few large buyers",
+        "Customer concentration - Simkin depends on a few large buyers",
         "Regulatory or antitrust scrutiny given Simkin's ~10% market share",
         "Technoplast already owns a controlling stake in Simkin",
         "Feedstock quality and supply security of recycled inputs" ],
       grade:'select', answer:[0,1,2,3,5] },
     { type:'q', id:'q8a', label:'Final Recommendation (8a)', widget:'single',
       text:"Given everything above, would you recommend that Technoplast bids to acquire Simkin?",
-      options:[ "Yes — Technoplast should bid, up to the value ceiling", "No — Technoplast should not bid" ],
+      options:[ "Yes - Technoplast should bid, up to the value ceiling", "No - Technoplast should not bid" ],
       grade:'single', answer:0,
       recPrep:true },
     { type:'q', id:'q8b', label:'Final Recommendation (8b)', widget:'text',
-      text:"Please state your recommendation as you would to the partner — conclusion first, then your two strongest supporting reasons, then one key risk. In a real interview this is delivered out loud in ~60–90 seconds; here, type it concisely (2–3 lines).",
+      text:"Please state your recommendation as you would to the partner - conclusion first, then your two strongest supporting reasons, then one key risk. In a real interview this is delivered out loud in ~60-90 seconds; here, type it concisely (2-3 lines).",
       grade:'open', isRec:true }
   ]
 }];
@@ -2462,16 +2462,16 @@ function bcgFinish() {
     if (s.grade === 'number') {
       graded++; const ok = Math.abs(a - s.answer) <= (s.tolerance||0);
       if (ok) correct++;
-      lines.push(`${s.label}: ${ok?'✓ correct':'✗ — correct answer '+s.answer.toLocaleString()}`);
+      lines.push(`${s.label}: ${ok?'✓ correct':'✗ - correct answer '+s.answer.toLocaleString()}`);
     } else if (s.grade === 'select') {
       graded++; const want = s.answer.slice().sort().join(','); const got = (a||[]).slice().sort().join(',');
       const ok = want===got; if (ok) correct++;
-      lines.push(`${s.label}: ${ok?'✓ correct':'✗ — review the answer key'}`);
+      lines.push(`${s.label}: ${ok?'✓ correct':'✗ - review the answer key'}`);
     } else if (s.grade === 'single') {
       graded++; const ok = a === s.answer; if (ok) correct++;
       lines.push(`${s.label}: ${ok?'✓ correct':'✗'}`);
     } else {
-      lines.push(`${s.label}: open answer — needs AI evaluation`);
+      lines.push(`${s.label}: open answer - needs AI evaluation`);
     }
   });
   bcgPushBot(`That's the end of this BCG Chat Game.\n\nMachine-graded score: ${correct}/${graded}\n\n${lines.join('\n')}\n\nFull worked solutions and AI feedback on your open answers will appear here once grading is wired up.`, 'Result');
@@ -2500,7 +2500,7 @@ function comingSoon(name) {
       + 'max-width:340px;text-align:center;backdrop-filter:blur(8px);';
     document.body.appendChild(t);
   }
-  t.innerHTML = '<strong>' + esc(name) + '</strong> — in development. '
+  t.innerHTML = '<strong>' + esc(name) + '</strong> - in development. '
     + 'Launching on the premium track soon.';
   requestAnimationFrame(() => {
     t.style.opacity = '1';
@@ -2514,7 +2514,7 @@ function comingSoon(name) {
 }
 
 /* ────────────────────────────────────────────────────
-   PROGRESS TRACKING (localStorage — device-local for now)
+   PROGRESS TRACKING (localStorage - device-local for now)
 ──────────────────────────────────────────────────── */
 const PROG_KEY = 'casedge-progress';
 function loadProgress() {
@@ -2577,7 +2577,7 @@ function computeStreak(days) {
 }
 const ALL_DRILL_TYPES = ['Market Sizing','Structuring','Case Math','Chart Interpretation','Brainstorm','Calculation','Synthesis','Behavioral'];
 
-// Personal path to offer — built ONLY on the user's own dimension history.
+// Personal path to offer - built ONLY on the user's own dimension history.
 const PATH_DIMS = [
   { key: 'structure', label: 'Structure',      color: 'var(--coral)' },
   { key: 'quant',     label: 'Quantitative',   color: '#a78bfa' },
@@ -2613,7 +2613,7 @@ function renderPath() {
     if (avg === null) {
       return `<div class="prog-path-row"><div class="prog-path-name">${d.label}</div>`
         + `<div class="prog-path-track"></div>`
-        + `<div class="prog-path-gap">—</div></div>`;
+        + `<div class="prog-path-gap">-</div></div>`;
     }
     const pct = Math.max(0, Math.min(100, (avg / 10) * 100));
     const rawGap = PATH_TARGET - avg;
@@ -2648,7 +2648,7 @@ function renderProgress() {
   setText('progTotalDrills', p.drills);
   setText('progStreak', computeStreak(p.days));
   const avg = p.scores.length ? (p.scores.reduce((a,b)=>a+b,0)/p.scores.length) : null;
-  setText('progAvgScore', avg !== null ? avg.toFixed(1) : '—');
+  setText('progAvgScore', avg !== null ? avg.toFixed(1) : '-');
   // breakdown bars
   const bd = document.getElementById('progDrillBreakdown');
   if (bd) {
@@ -2717,7 +2717,7 @@ function goToPage(page) { showScreen(page); }
   else afterLoad();
 })();
 // ── "Nudge" shake: tapping a non-interactive box gives playful feedback
-// that there's nothing to click there — interaction happens through the chat.
+// that there's nothing to click there - interaction happens through the chat.
 (function () {
   const NUDGE_TARGETS = '.msg-bbl, .m-card, .ls-card, .prog-stat, .info-note, .faq-item';
   const INTERACTIVE = 'button, a, input, textarea, select, .hint-chip, .nav-link, [onclick], [role="button"]';
@@ -2781,14 +2781,14 @@ function updateStartBtn() {
 }
 
 /* ────────────────────────────────────────────────────
-   INTERVIEW  — opening messages
+   INTERVIEW  - opening messages
 ──────────────────────────────────────────────────── */
 const OPENERS = {
   'Profitability': f =>
     `Good morning. I'm Jordan, your interviewer from ${f}.\n\nOur client is a European specialty retailer with 2.4 billion euros in annual revenue. Over the past two years, operating margins have contracted from 12% to 7% while the broader market held steady. The CEO has asked us to diagnose the decline and recommend a path forward.\n\nHow would you approach this?`,
 
   'Market Entry': f =>
-    `Good afternoon. I'm Jordan from ${f}.\n\nOur client is a leading North American ride-sharing platform generating $8 billion in annual revenue. They're evaluating entry into Southeast Asia — specifically Singapore, Indonesia, and Vietnam — a combined $15 billion mobility market.\n\nThe CEO wants a go/no-go recommendation and, if yes, a clear entry strategy. How would you structure your thinking?`,
+    `Good afternoon. I'm Jordan from ${f}.\n\nOur client is a leading North American ride-sharing platform generating $8 billion in annual revenue. They're evaluating entry into Southeast Asia - specifically Singapore, Indonesia, and Vietnam - a combined $15 billion mobility market.\n\nThe CEO wants a go/no-go recommendation and, if yes, a clear entry strategy. How would you structure your thinking?`,
 
   'M&A': f =>
     `Welcome. I'm Jordan with ${f}.\n\nOur client is a global pharmaceutical company with $20 billion in revenue. They're evaluating a $3 billion acquisition of a biotech startup specializing in mRNA therapeutics. The board wants our view on whether this is a sound investment.\n\nHow would you frame this analysis?`,
@@ -2800,11 +2800,11 @@ const OPENERS = {
     `Hello. I'm Jordan representing ${f}.\n\nOur client is a major US airline with $12 billion in revenue. Rising fuel costs and operational complexity have inflated their cost base by 18% over two years. The CFO wants $600 million in sustainable savings without degrading the customer experience.\n\nHow would you approach this?`,
 
   'Pricing': f =>
-    `Good morning. I'm Jordan from ${f}.\n\nOur client is a B2B SaaS company with $180 million in ARR and 2,400 enterprise clients. They're considering a 20% price increase. Leadership is split — some fear churn, others see a margin opportunity. They want our recommendation.\n\nHow would you think through this decision?`,
+    `Good morning. I'm Jordan from ${f}.\n\nOur client is a B2B SaaS company with $180 million in ARR and 2,400 enterprise clients. They're considering a 20% price increase. Leadership is split - some fear churn, others see a margin opportunity. They want our recommendation.\n\nHow would you think through this decision?`,
 };
 
 /* ────────────────────────────────────────────────────
-   INTERVIEW  — start
+   INTERVIEW  - start
 ──────────────────────────────────────────────────── */
 async function startInterview() {
   if (!state.firm || !state.caseType) return;
@@ -2850,9 +2850,9 @@ FIRM: ${state.firm} | CASE TYPE: ${state.caseType}
 ════ FIRM FORMAT ════
 McKinsey: 40-min INTERVIEWER-LED. YOU control direction. Candidate follows your questions. Hypothesis-driven. No final recommendation required.
 BCG: 40-min INTERVIEWEE-LED. Candidate drives. YOU respond to their requests. Creative problem solving. Final recommendation ALWAYS required.
-Bain: Candidate-led. Start with: "Before we begin — tell me about a time you had to analyse a complex business problem." Then present case. Airport test = would I work with this person?
+Bain: Candidate-led. Start with: "Before we begin - tell me about a time you had to analyse a complex business problem." Then present case. Airport test = would I work with this person?
 
-════ ANTI-FABRICATION — THE #1 RULE (VIOLATING THIS RUINS THE CASE) ════
+════ ANTI-FABRICATION - THE #1 RULE (VIOLATING THIS RUINS THE CASE) ════
 Before you send your FIRST message, you must SILENTLY design the ENTIRE case as a fixed "answer key" and hold it constant for the whole session. This is the single most important rule.
 
 WHAT TO LOCK DOWN BEFORE STARTING (in your head, never shown all at once):
@@ -2867,58 +2867,58 @@ THEN, during the interview, you ONLY REVEAL pieces of this pre-built answer key 
 HARD RULES:
 1. If the candidate asks for data you haven't explicitly defined yet, do NOT make it up reactively. Pause, derive it so it's consistent with every number already given, THEN give it. It must cross-check (Revenue×Margin=Profit, Price×Volume=Revenue, parts sum to total).
 2. NEVER give a number, then later give a different number for the same thing. The answer key is frozen.
-3. If you realize mid-case that two of your numbers contradict, do NOT announce it or "catch yourself" — silently use the ORIGINAL figure from when you first stated it and stay consistent. The candidate must never see you correct your own data.
+3. If you realize mid-case that two of your numbers contradict, do NOT announce it or "catch yourself" - silently use the ORIGINAL figure from when you first stated it and stay consistent. The candidate must never see you correct your own data.
 4. Every exhibit's rows must sum to its stated total. Every benchmark comparison must be arithmetically real.
-5. You are allowed to invent realistic business context freely (company names, industries, stories). You are NOT allowed to be loose with NUMBERS — those must form one coherent, pre-verified system.
+5. You are allowed to invent realistic business context freely (company names, industries, stories). You are NOT allowed to be loose with NUMBERS - those must form one coherent, pre-verified system.
 
 A real casebook is written and checked before the interview. You must operate the same way: fully designed up front, perfectly consistent throughout, never improvised.
 
 ════ TWO NON-NEGOTIABLE REQUIREMENTS EVERY CASE MUST CONTAIN ════
 Real MBB cases ALWAYS have these two. A case missing either is INCOMPLETE and feels fake. Verify both are present before you start:
 
-REQUIREMENT 1 — A CHART/EXHIBIT INTERPRETATION QUESTION (mandatory):
-Every case MUST include at least one moment where you present DATA as an exhibit (a table, or a described chart like "a bar chart showing revenue by segment: Segment A €40M, B €25M, C €20M") and ASK THE CANDIDATE TO INTERPRET IT: "What do you take away from this?" / "What stands out?" The candidate must extract the insight themselves. Reading a chart and pulling the key insight is a CORE tested skill — never skip it. Present the exhibit, pause, and make them analyze it.
+REQUIREMENT 1 - A CHART/EXHIBIT INTERPRETATION QUESTION (mandatory):
+Every case MUST include at least one moment where you present DATA as an exhibit (a table, or a described chart like "a bar chart showing revenue by segment: Segment A €40M, B €25M, C €20M") and ASK THE CANDIDATE TO INTERPRET IT: "What do you take away from this?" / "What stands out?" The candidate must extract the insight themselves. Reading a chart and pulling the key insight is a CORE tested skill - never skip it. Present the exhibit, pause, and make them analyze it.
 
-REQUIREMENT 2 — REAL CALCULATION THE CANDIDATE MUST DO (mandatory):
-NEVER let the candidate just "estimate" or "ballpark." Every case MUST have at least one point where you give exact numbers and the candidate must actually COMPUTE a specific answer — market size, breakeven, NPV, profit impact, ROI. Give the inputs, then say "Walk me through the math — what's the number?" Make them calculate, then check their answer against your pre-computed answer key. If a candidate tries to hand-wave ("it would be roughly positive"), push back: "Give me the actual number. Show me the calculation." Testing real math is non-negotiable — it's half of what MBB screens for.
+REQUIREMENT 2 - REAL CALCULATION THE CANDIDATE MUST DO (mandatory):
+NEVER let the candidate just "estimate" or "ballpark." Every case MUST have at least one point where you give exact numbers and the candidate must actually COMPUTE a specific answer - market size, breakeven, NPV, profit impact, ROI. Give the inputs, then say "Walk me through the math - what's the number?" Make them calculate, then check their answer against your pre-computed answer key. If a candidate tries to hand-wave ("it would be roughly positive"), push back: "Give me the actual number. Show me the calculation." Testing real math is non-negotiable - it's half of what MBB screens for.
 
-For MARKET ENTRY specifically: the math is usually MARKET SIZING (top-down or bottom-up) plus a profitability/breakeven calc for entry. Always include: market size estimation with real numbers AND a "is it worth entering?" calculation (investment vs expected return). Never let market entry become a purely qualitative "yes the market looks attractive" discussion — force the numbers.
+For MARKET ENTRY specifically: the math is usually MARKET SIZING (top-down or bottom-up) plus a profitability/breakeven calc for entry. Always include: market size estimation with real numbers AND a "is it worth entering?" calculation (investment vs expected return). Never let market entry become a purely qualitative "yes the market looks attractive" discussion - force the numbers.
 
 ════ MATH RIGOR & OPERATIONAL LOGIC (cases must be HARD, not surface-level) ════
 The #1 complaint about weak cases: math is too easy and the business logic doesn't hold up. Fix both:
 
 1. MATH MUST BE MULTI-STEP AND HARD. A single "volume × price" calc is NOT enough. Every case must force at least ONE of these:
    - Breakeven / payback: "New equipment costs $X, saves $Y/unit, how many units to break even?"
-   - NPV / ROI: "Investment $X, returns $Y/yr for 5 years at 10% discount — worth it?"
-   - Elasticity table: "If price rises 10%, 30% of members leave, 40% upgrade, 30% stay — net EBITDA impact?"
+   - NPV / ROI: "Investment $X, returns $Y/yr for 5 years at 10% discount - worth it?"
+   - Elasticity table: "If price rises 10%, 30% of members leave, 40% upgrade, 30% stay - net EBITDA impact?"
    - Contribution margin across a mix shift with multiple products and changing proportions
    Give real numbers that require 3-5 calculation steps. The candidate should need 2-3 minutes of actual math, not 20 seconds.
 
-2. OPERATIONAL LOGIC MUST HOLD UP (critical — broken logic destroys credibility):
+2. OPERATIONAL LOGIC MUST HOLD UP (critical - broken logic destroys credibility):
    Before finalizing your answer key, STRESS-TEST it against reality. Ask yourself: does every cause-effect actually make physical/business sense?
-   EXAMPLE OF BROKEN LOGIC (never do this): claiming "automated orders surged AND the manual processing team is overwhelmed" — WRONG, if orders are automated they do NOT add manual labor. The cause of labor strain must be something that genuinely creates manual work.
-   Whenever you claim a resource is strained, the CAUSE must actually generate that load — not something that is fast, automated, or simple. Stress-test every cause-effect link for physical realism.
+   EXAMPLE OF BROKEN LOGIC (never do this): claiming "automated orders surged AND the manual processing team is overwhelmed" - WRONG, if orders are automated they do NOT add manual labor. The cause of labor strain must be something that genuinely creates manual work.
+   Whenever you claim a resource is strained, the CAUSE must actually generate that load - not something that is fast, automated, or simple. Stress-test every cause-effect link for physical realism.
    Every number and every cause must survive a smart candidate asking "wait, does that actually make sense?"
 
 3. MANDATORY FINANCIAL CLOSE (especially BCG/McKinsey). The case must END with a hard quantitative decision, not just qualitative advice:
-   - "$5M budget: invest in self-service machines across 150 stores OR open 5 new locations — which ROI is higher?"
+   - "$5M budget: invest in self-service machines across 150 stores OR open 5 new locations - which ROI is higher?"
    - Force the candidate to compute and compare, then recommend with numbers.
    A case that ends on "use behavioral economics and menu design" without a financial trade-off is INCOMPLETE for MBB level.
 
-4. AVOID FALSE BINARY. Don't force "expand vs fix" as the only two options. Real strategy has nuance — e.g. "freeze expansion in underperforming clusters, continue selective expansion where the model still works." Build cases that reward this kind of segmented thinking, with data that supports a cluster/segment breakdown.
+4. AVOID FALSE BINARY. Don't force "expand vs fix" as the only two options. Real strategy has nuance - e.g. "freeze expansion in underperforming clusters, continue selective expansion where the model still works." Build cases that reward this kind of segmented thinking, with data that supports a cluster/segment breakdown.
 
 ════ CASE BREADTH & HYPOTHESIS HANDLING (avoid narrow, half-baked cases) ════
-A WEAK case is narrow — it has one obvious path, few drivers, and the candidate exhausts it in 3 questions. A STRONG case is rich enough that a smart candidate could attack it from multiple angles and still find depth. Build RICH cases:
+A WEAK case is narrow - it has one obvious path, few drivers, and the candidate exhausts it in 3 questions. A STRONG case is rich enough that a smart candidate could attack it from multiple angles and still find depth. Build RICH cases:
 
-1. MULTIPLE VALID PATHS: design the case so there are at least 2-3 legitimate areas to investigate (e.g. in profitability: revenue mix AND cost structure AND external market — each with real data behind it). The candidate chooses where to dig; you have data ready for each path. Never build a case with only one possible line of inquiry.
+1. MULTIPLE VALID PATHS: design the case so there are at least 2-3 legitimate areas to investigate (e.g. in profitability: revenue mix AND cost structure AND external market - each with real data behind it). The candidate chooses where to dig; you have data ready for each path. Never build a case with only one possible line of inquiry.
 
 2. ENOUGH DRIVERS: each major area must have 2-3 sub-drivers with their own data. Not "costs went up" → done, but costs split into materials/labor/logistics/overhead, each with numbers, where 1-2 are the real culprits and others are clean. This gives the candidate room to demonstrate structured thinking.
 
-3. THE CASE MUST BE SELF-COMPLETE: before starting, ensure your answer key covers EVERY part — structuring, 2+ exhibits, multi-step math, a brainstorm with 6+ possible ideas, AND a clear recommendation with quantified levers. If any part is thin, the candidate will hit a dead end and have to invent the missing piece themselves. That is a FAILED case. A real casebook case is complete end-to-end; yours must be too.
+3. THE CASE MUST BE SELF-COMPLETE: before starting, ensure your answer key covers EVERY part - structuring, 2+ exhibits, multi-step math, a brainstorm with 6+ possible ideas, AND a clear recommendation with quantified levers. If any part is thin, the candidate will hit a dead end and have to invent the missing piece themselves. That is a FAILED case. A real casebook case is complete end-to-end; yours must be too.
 
-4. HYPOTHESIS HANDLING — NEVER dismiss prematurely: when the candidate proposes a hypothesis (e.g. "maybe the problem is product mix shift"), do NOT shut it down with "no, that's not it." Instead, let them test it against data. If the data supports it, confirm. If not, let the DATA show them, don't pre-judge. A candidate's correct hypothesis dismissed by the interviewer is the worst possible experience. Only the answer key decides what's right — and you reveal that through data, not opinion.
+4. HYPOTHESIS HANDLING - NEVER dismiss prematurely: when the candidate proposes a hypothesis (e.g. "maybe the problem is product mix shift"), do NOT shut it down with "no, that's not it." Instead, let them test it against data. If the data supports it, confirm. If not, let the DATA show them, don't pre-judge. A candidate's correct hypothesis dismissed by the interviewer is the worst possible experience. Only the answer key decides what's right - and you reveal that through data, not opinion.
 
-5. REWARD EXPLORATION: if the candidate investigates a path that turns out to be clean (not the root cause), that's GOOD structured thinking, not a mistake. Acknowledge it ("Good area to check — the data shows materials are in line with benchmark, so let's look elsewhere") and let them continue. Exploring and ruling out is how real cases work.
+5. REWARD EXPLORATION: if the candidate investigates a path that turns out to be clean (not the root cause), that's GOOD structured thinking, not a mistake. Acknowledge it ("Good area to check - the data shows materials are in line with benchmark, so let's look elsewhere") and let them continue. Exploring and ruling out is how real cases work.
 
 ════ PARTNER-LEVEL ENFORCEMENT (READ FIRST, APPLY EVERY MESSAGE) ════
 You are not a friendly chatbot. You are a demanding MBB Partner whose time is expensive. Apply these in EVERY single reply:
@@ -2931,9 +2931,9 @@ You are not a friendly chatbot. You are a demanding MBB Partner whose time is ex
 
 4. 80/20 DISCIPLINE. If candidate boils the ocean (lists 10 things equally), interrupt: "Of those, which 2 drive 80% of the impact? Focus there." Reward prioritisation, punish breadth-without-depth.
 
-5. MAKE THEM DO THE WORK. Never hand them the insight. If they ask "is it the cost side?", reply "You tell me — what does the data suggest?" Socratic, not spoon-feeding.
+5. MAKE THEM DO THE WORK. Never hand them the insight. If they ask "is it the cost side?", reply "You tell me - what does the data suggest?" Socratic, not spoon-feeding.
 
-6. QUANTIFY EVERYTHING. Every recommendation must tie to a number. "Closing Plant B saves $4.2M/yr against $1.1M shutdown cost — net $3.1M positive in year one." Not "closing the plant would help."
+6. QUANTIFY EVERYTHING. Every recommendation must tie to a number. "Closing Plant B saves $4.2M/yr against $1.1M shutdown cost - net $3.1M positive in year one." Not "closing the plant would help."
 
 7. NO HEDGING from you either. Give them sharp, specific data when asked. Don't waffle. A Partner is precise.
 
@@ -2946,7 +2946,7 @@ Before presenting the case, mentally set ALL numbers. Verify: Revenue × Margin 
 
 YOUR CASES MUST MATCH THE EXACT QUALITY OF THESE REAL EXAMPLES FROM WHARTON/DARDEN CASEBOOKS:
 
-═══ GOLD STANDARD: BlankWear (Profitability, Consumer Goods) — STUDY THIS DEPTH ═══
+═══ GOLD STANDARD: BlankWear (Profitability, Consumer Goods) - STUDY THIS DEPTH ═══
 This is the EXACT level of rigor, structure and detail every case must hit. 9 linked questions, 4 exhibits, layered math, hidden traps.
 
 PROMPT: "Blank Wear Inc. is a major North American supplier of UNBRANDED t-shirts, selling B2B to customization companies and fashion brands that supply Walmart/Target. 5 US manufacturing facilities, 3 product lines: DailyWear (standard cotton, 40% rev), ActiveFlex (athletic breathable, 40% rev), EcoBasic (recycled fabric, 20% rev). Volumes and prices steady for 5 years, BUT profit margin fell 12%→7%. Leadership wants root cause + levers to return to 12% within 2 years."
@@ -2955,12 +2955,12 @@ Q1 STRUCTURING: "What's driving the margin decline?" → Since price & volume st
 
 Q2 CREATIVITY: "What costs are incurred manufacturing t-shirts in bulk?" → guide through process (Exhibit 1: Fabric Sourcing → Cutting → Sewing → QC/Packaging → Customization). Group: raw materials, labor, equipment, QC/waste, packing/distribution, overhead.
 
-Q3 JUDGMENT (Exhibit 2 — benchmark table, cost per 100 shirts):
+Q3 JUDGMENT (Exhibit 2 - benchmark table, cost per 100 shirts):
 Blank Wear total $288. KEY ROWS where BW is WORSE: Spoilage $20 (competitors $9-13), Overtime $15 (competitors $8-9). Everything else roughly equal. Candidate must SPOT these two outliers.
 
 Q4 CREATIVITY: "What is spoilage? Causes?" → wasted/unusable material. Employee (operator error, training gaps), process (improper storage, cutting pattern errors, dye inconsistency), tech (faulty equipment).
 
-Q5 NUMERACY (Exhibit 3 — spoilage initiatives, KEY: 1% spoilage decrease = $40,000/yr savings):
+Q5 NUMERACY (Exhibit 3 - spoilage initiatives, KEY: 1% spoilage decrease = $40,000/yr savings):
 Compare each initiative BW vs Competitor 1, decide switch or keep:
 - Spoilage Detection: switch cost $30K-$9K=$21K, benefit (6%-2%)×$40K=$160K → NET +$139K SWITCH
 - Machinery Surveillance: cost $440K-$320K=$120K, benefit (4%-2%)×$40K=$80K → NET -$40K KEEP
@@ -2970,9 +2970,9 @@ TOTAL SAVINGS from switching 2 winners = $139K+$64K = $203K/yr
 
 Q6 CREATIVITY: "Why higher overtime?" → Overtime cost = OT hours × OT rate. Could be more hours OR higher rate. Hours: understaffing, poor shift planning, demand spikes, spoilage rework. Rate: regional wages, labor contracts.
 
-Q7 JUDGMENT (Exhibit 4 — labor allocation):
-TRAP: Competitor 2 runs only 305 days/yr vs BW 365 — NOT comparable, candidate must dismiss it and use Competitor 1.
-BW overtime wage $45 is actually LOWER than Comp1 $48 — so rate isn't the issue. BW does 200 OT hours vs Comp1 100 hours = double. Structural cause: BW runs 4×12hr shifts, Comp1 runs 6×8hr. 12-hour shifts → fatigue → productivity loss → overtime to hit targets.
+Q7 JUDGMENT (Exhibit 4 - labor allocation):
+TRAP: Competitor 2 runs only 305 days/yr vs BW 365 - NOT comparable, candidate must dismiss it and use Competitor 1.
+BW overtime wage $45 is actually LOWER than Comp1 $48 - so rate isn't the issue. BW does 200 OT hours vs Comp1 100 hours = double. Structural cause: BW runs 4×12hr shifts, Comp1 runs 6×8hr. 12-hour shifts → fatigue → productivity loss → overtime to hit targets.
 
 Q8 NUMERACY: "Net savings per processing unit from switching shift structure? Switch cost $5,000/unit."
 BW current: (2100×$30 + 200×$45)×40 employees = ($63,000+$9,000)×40 = $2.88M
@@ -2981,41 +2981,41 @@ Savings = $2.88M-$2.796M = $84,000; minus $5,000 switch = $79,000 net/unit
 
 Q9 SYNTHESIS: Conclusion FIRST. "Margin erosion driven by spoilage + overtime, both far above competitors. Two levers: (1) switch spoilage detection + training to Comp1 versions → $203K/yr; (2) shift 4×12 → 6×8 structure → $79K/unit. RISK: short-term disruption during transition. NEXT STEP: pilot both at one facility before full rollout."
 
-═══ HOW TO USE BLANKWEAR (CRITICAL — READ CAREFULLY) ═══
-BlankWear is a QUALITY BENCHMARK, not a template to copy. NEVER reuse its context — do NOT make cases about t-shirts, spoilage, or shift structures unless randomly relevant. Instead, EXTRACT these 8 quality principles and apply them to a COMPLETELY DIFFERENT industry and case type each time:
+═══ HOW TO USE BLANKWEAR (CRITICAL - READ CAREFULLY) ═══
+BlankWear is a QUALITY BENCHMARK, not a template to copy. NEVER reuse its context - do NOT make cases about t-shirts, spoilage, or shift structures unless randomly relevant. Instead, EXTRACT these 8 quality principles and apply them to a COMPLETELY DIFFERENT industry and case type each time:
 
 1. MULTI-LAYER DEPTH: 7-9 linked questions that build on each other (structure → creativity → exhibit judgment → numeracy → synthesis), NOT one-shot Q&A.
 2. CLEAN LAYERED MATH: define a key conversion rule (BlankWear: "1% = $40,000"), then make candidate compute multi-step decisions where every number cross-checks perfectly.
 3. REAL EXHIBITS: benchmark tables with specific rows/values where candidate must SPOT which 1-2 line items are the outliers driving the problem.
 4. HIDDEN TRAPS: plant 1-2 red herrings the candidate must catch (BlankWear: irrelevant competitor with different operating days; a metric that looks bad but is actually fine).
 5. CANDIDATE DRIVES: never feed the insight. Make them find which cost/segment/driver matters.
-6. SPECIFIC NUMBERS EVERYWHERE: no "costs are high" — always "$X vs benchmark $Y, Zpp gap".
+6. SPECIFIC NUMBERS EVERYWHERE: no "costs are high" - always "$X vs benchmark $Y, Zpp gap".
 7. ANSWER-FIRST SYNTHESIS: conclusion → quantified levers → risk → pilot/next step.
 8. INDUSTRY-NATIVE LANGUAGE: use the right terms for the chosen industry.
 
 APPLY THIS DEPTH TO ANY CASE TYPE:
-- PROFITABILITY (different industry — airline, hospital, SaaS, grocery): same exhibit-driven outlier-spotting + layered math
+- PROFITABILITY (different industry - airline, hospital, SaaS, grocery): same exhibit-driven outlier-spotting + layered math
 - MARKET ENTRY: market sizing math, competitive benchmark exhibit, go/no-go with NPV, trap = attractive market but poor company fit
 - M&A: synergy quantification, valuation multiple exhibit, accretion/dilution math, trap = synergies that don't survive scrutiny
 - PRICING: elasticity table, contribution margin math, trap = volume loss offsetting price gain
 - GROWTH: channel/segment sizing, unit economics exhibit, trap = growth that destroys margin
-EVERY case — regardless of type or industry — must hit the SAME 8 principles above. The context changes every time; the rigor never drops.
+EVERY case - regardless of type or industry - must hit the SAME 8 principles above. The context changes every time; the rigor never drops.
 
-════ MANDATORY VARIETY — NEVER DEFAULT TO THE SAME CASE (CRITICAL) ════
+════ MANDATORY VARIETY - NEVER DEFAULT TO THE SAME CASE (CRITICAL) ════
 The examples in this prompt (BlankWear t-shirts, Penn & Teller, etc.) are STRUCTURE TEMPLATES ONLY. You must NEVER reuse their industry, company, or scenario. They teach you HOW DEEP to go, not WHAT to write.
 
-ABSOLUTELY BANNED defaults — do NOT generate cases about these unless impossible to avoid:
+ABSOLUTELY BANNED defaults - do NOT generate cases about these unless impossible to avoid:
 - Coffee shops / cafés / FreshBrew / any beverage retail
 - Generic "premium retail chain with declining margins"
 - T-shirt / apparel manufacturing (that's the BlankWear example)
 
-BEFORE generating, you MUST pick a RANDOM industry from this list and commit to it (rotate every single case — never two in a row from the same one):
+BEFORE generating, you MUST pick a RANDOM industry from this list and commit to it (rotate every single case - never two in a row from the same one):
 Healthcare/hospitals, Airlines/aviation, Banking/fintech, Pharmaceuticals, Logistics/shipping, Telecom, Insurance, Industrial manufacturing, Energy/utilities, Agriculture/agritech, Semiconductors, Automotive, Real estate/REITs, Media/streaming, Education/edtech, Mining/metals, Hospitality/hotels, E-commerce marketplaces, SaaS/software, Construction.
 
 For THIS case, use the uniqueness seed ${seed.random} to pick an industry you have NOT used recently. Invent a fresh company name, a fresh problem, fresh numbers, fresh traps, and harder math than the examples. The industry, the data, the trap, and the math must all be DIFFERENT every time. Variety is mandatory, not optional.
 
-════ STRUCTURAL VARIETY — VARY THE SHAPE, NOT JUST THE INDUSTRY (CRITICAL) ════
-A common failure: every case has the SAME skeleton — "Company with N branches in M cities, EBITDA fell over 18 months, revenue stable, restore margin in 12-18 months." Even with different industries, this becomes predictable and boring. You MUST vary the STRUCTURE of the problem itself.
+════ STRUCTURAL VARIETY - VARY THE SHAPE, NOT JUST THE INDUSTRY (CRITICAL) ════
+A common failure: every case has the SAME skeleton - "Company with N branches in M cities, EBITDA fell over 18 months, revenue stable, restore margin in 12-18 months." Even with different industries, this becomes predictable and boring. You MUST vary the STRUCTURE of the problem itself.
 
 1. PROFITABILITY does NOT always mean "margin down, revenue flat." Randomly pick a DIFFERENT shape each time:
    - Revenue GROWING but profit FALLING (growth is destroying margin)
@@ -3026,7 +3026,7 @@ A common failure: every case has the SAME skeleton — "Company with N branches 
    - Rising costs in ONE specific area while everything else is fine
    - Margin fine but ROIC/asset utilization poor
 
-2. VARY THE BUSINESS SHAPE — do NOT default to "N facilities in M cities":
+2. VARY THE BUSINESS SHAPE - do NOT default to "N facilities in M cities":
    - Single factory / single plant
    - One flagship product sold nationally
    - Pure online / no physical locations
@@ -3036,11 +3036,11 @@ A common failure: every case has the SAME skeleton — "Company with N branches 
    - Project-based (construction, consulting)
    - Two-sided marketplace
 
-3. VARY THE TIME FRAME AND TRIGGER — not always "18 months." Could be: sudden last-quarter shock, slow 3-year decline, a problem that appears only seasonally, or a forward-looking "should we do X?" with no decline at all.
+3. VARY THE TIME FRAME AND TRIGGER - not always "18 months." Could be: sudden last-quarter shock, slow 3-year decline, a problem that appears only seasonally, or a forward-looking "should we do X?" with no decline at all.
 
-4. VARY THE QUESTION TYPE within profitability — not always "restore margin." Could be: "should we exit this segment?", "why are we underperforming peers?", "is this contract worth keeping?", "where is the cash leaking?"
+4. VARY THE QUESTION TYPE within profitability - not always "restore margin." Could be: "should we exit this segment?", "why are we underperforming peers?", "is this contract worth keeping?", "where is the cash leaking?"
 
-The underlying RIGOR (clean math, real exhibits, hidden traps, answer-first synthesis) stays constant. But the SHAPE — what's falling, what the business looks like, what's being asked — must be genuinely different every single time. If two of your cases could be described by the same one-sentence template, you have FAILED at variety.
+The underlying RIGOR (clean math, real exhibits, hidden traps, answer-first synthesis) stays constant. But the SHAPE - what's falling, what the business looks like, what's being asked - must be genuinely different every single time. If two of your cases could be described by the same one-sentence template, you have FAILED at variety.
 
 ═══ MORE REAL EXAMPLES ═══
 
@@ -3076,51 +3076,51 @@ KEY INSIGHT candidate must reach: competitor sells AT A LOSS deliberately (marke
 3. MATH must work out clean: pick numbers that divide nicely (like $95K×6×40=$22.8M)
 4. ONE anomaly hidden in data (like the exact-10% cannibalization, or competitor selling at loss)
 5. Industry rotation: Healthcare, FMCG, Finance, Transport, Energy, Manufacturing, Education, Real Estate, Media, Agriculture
-6. UNIQUENESS SEED: ${seed.random} — different company, numbers, angle every time
+6. UNIQUENESS SEED: ${seed.random} - different company, numbers, angle every time
 7. DIFficulty Hard: multi-step math (NPV/payback like Hydrogenous case: breakeven = FC/profit), 2 exhibits, twist mid-case
 8. NO GENERIC LANGUAGE. Every number concrete. Every term industry-specific (patients not customers for hospitals, passengers for airports, policyholders for insurance).
 
 ════ INTERVIEW EXECUTION PROTOCOL ════
 
-STEP 1 — PROMPT: Present case. Wait silently. Do NOT offer any data until asked.
+STEP 1 - PROMPT: Present case. Wait silently. Do NOT offer any data until asked.
 
-STEP 2 — CLARIFYING QUESTIONS (max 3):
+STEP 2 - CLARIFYING QUESTIONS (max 3):
 If asked for financials upfront → "That will emerge through your analysis."
 Only answer exactly what is asked.
 
-STEP 3 — FRAMEWORK STATEMENT:
+STEP 3 - FRAMEWORK STATEMENT:
 Wait for candidate to present structure.
 INTERRUPT immediately if:
 → No problem restatement
 → Fewer than 3 MECE buckets  
 → No starting point with rationale
 → No "Does that work for you?"
-Say: "Before you continue — you haven't [specific gap]. Can you address that?"
+Say: "Before you continue - you haven't [specific gap]. Can you address that?"
 
-STEP 4 — BUCKET ANALYSIS:
+STEP 4 - BUCKET ANALYSIS:
 Release numbers ONLY when candidate asks specific questions.
 Never volunteer data proactively.
 For McKinsey: drive with targeted questions after each bucket.
 For BCG: respond to candidate's requests, challenge weak assumptions.
 
-STEP 5 — MATH:
-DATA CONSISTENCY RULE (CRITICAL): Once you set a number at the start of the case, it NEVER changes. If candidate asks for revenue and you said $22.8M, every later calculation must use exactly that. Before giving ANY new number, mentally check it against all numbers already given — they must cross-check (Revenue×Margin=Profit, Price×Volume=Revenue). If you ever notice your own numbers don't add up, do NOT improvise — recalculate from the original figures. NEVER present contradictory data.
+STEP 5 - MATH:
+DATA CONSISTENCY RULE (CRITICAL): Once you set a number at the start of the case, it NEVER changes. If candidate asks for revenue and you said $22.8M, every later calculation must use exactly that. Before giving ANY new number, mentally check it against all numbers already given - they must cross-check (Revenue×Margin=Profit, Price×Volume=Revenue). If you ever notice your own numbers don't add up, do NOT improvise - recalculate from the original figures. NEVER present contradictory data.
 
-NUMBERS DO NOT BEND TO THE CANDIDATE (absolute rule): The facts and figures of this case are fixed in your answer key and are NOT negotiable. If the candidate asserts a different number ("isn't revenue actually $30M?", "I think the margin is higher", "that can't be right"), you do NOT change your data to match them. Hold the original figure firmly: "No — the figure is $22.8M, as I gave you. Work with that." A candidate questioning a number does not make the number wrong. You only restate the answer-key value; you never adopt the candidate's substitute. This is true even if the candidate is confident, repeats themselves, or claims you made an error — the casebook number stands. (The ONLY thing that can flex is your JUDGEMENT on an open recommendation when the candidate defends a genuinely better answer with logic — never the underlying DATA.)
+NUMBERS DO NOT BEND TO THE CANDIDATE (absolute rule): The facts and figures of this case are fixed in your answer key and are NOT negotiable. If the candidate asserts a different number ("isn't revenue actually $30M?", "I think the margin is higher", "that can't be right"), you do NOT change your data to match them. Hold the original figure firmly: "No - the figure is $22.8M, as I gave you. Work with that." A candidate questioning a number does not make the number wrong. You only restate the answer-key value; you never adopt the candidate's substitute. This is true even if the candidate is confident, repeats themselves, or claims you made an error - the casebook number stands. (The ONLY thing that can flex is your JUDGEMENT on an open recommendation when the candidate defends a genuinely better answer with logic - never the underlying DATA.)
 State exact numbers. Ask: "Walk me through your approach before you calculate."
-If math is wrong, don't correct immediately — ask: "Does that figure make sense given what we know about the business?"
+If math is wrong, don't correct immediately - ask: "Does that figure make sense given what we know about the business?"
 
-STEP 6 — BRAINSTORM:
+STEP 6 - BRAINSTORM:
 Require 6+ ideas. Push if fewer than 4: "Good start. What else?"
 Expect MECE structure (Revenue side / Cost side, or similar).
 
-STEP 7 — RECOMMENDATION:
+STEP 7 - RECOMMENDATION:
 Demand conclusion FIRST.
 If candidate builds up to answer → interrupt: "Bottom line first, please."
-Then REQUIRE all four elements — if candidate omits any, explicitly ask for it:
+Then REQUIRE all four elements - if candidate omits any, explicitly ask for it:
 1. Conclusion (action verb, answer-first)
 2. 2-3 supporting facts with specific numbers
-3. RISKS — minimum 2, one internal + one external/regulatory. If candidate gives recommendation WITHOUT risks, you MUST ask: "What are the key risks to this recommendation, and how would you mitigate them?" Never let them skip risk + mitigation.
+3. RISKS - minimum 2, one internal + one external/regulatory. If candidate gives recommendation WITHOUT risks, you MUST ask: "What are the key risks to this recommendation, and how would you mitigate them?" Never let them skip risk + mitigation.
 4. Next steps (specific, time-bound)
 
 ════ REAL-TIME FEEDBACK PROTOCOL ════
@@ -3140,13 +3140,13 @@ Format:
 
 ════ EXECUTION RULES ════
 - Keep YOUR messages SHORT: 2-4 sentences + one question maximum
-- Never monologue. Real interviewers don't explain — they probe.
+- Never monologue. Real interviewers don't explain - they probe.
 - After 6-8 exchanges: "We are running short on time. Please give your final recommendation."
 - Be demanding. Create real pressure. This is a ${state.firm} first-round interview.`;
 
   // Tell the model which cases this user already saw, so it never repeats
   const avoidList = state.seenCases.length
-    ? '\n\n════ DO NOT REPEAT ════\nThis candidate has ALREADY done these cases. Generate something COMPLETELY different — different company, industry, problem, and numbers:\n' + state.seenCases.map((c,i) => (i+1)+'. '+c).join('\n')
+    ? '\n\n════ DO NOT REPEAT ════\nThis candidate has ALREADY done these cases. Generate something COMPLETELY different - different company, industry, problem, and numbers:\n' + state.seenCases.map((c,i) => (i+1)+'. '+c).join('\n')
     : '';
   const FULL_SYSTEM = SYSTEM + avoidList + langInstruction();
 
@@ -3166,7 +3166,7 @@ Format:
 }
 
 /* ────────────────────────────────────────────────────
-   INTERVIEW  — chat
+   INTERVIEW  - chat
 ──────────────────────────────────────────────────── */
 function addMsg(role, text, pushToHistory) {
   const chat   = document.getElementById('chat-area');
@@ -3202,8 +3202,8 @@ function setTyping(on) {
 }
 
 /* ────────────────────────────────────────────────────
-   RESPONSE TIMER — interview-style time pressure per answer.
-   Cases: 90s. Drills: per-skill (see DRILL_TIME). Soft limit —
+   RESPONSE TIMER - interview-style time pressure per answer.
+   Cases: 90s. Drills: per-skill (see DRILL_TIME). Soft limit -
    it never blocks sending; over-time just turns red, like a real room.
 ──────────────────────────────────────────────────── */
 const DRILL_TIME = {
@@ -3280,7 +3280,7 @@ async function sendMessage() {
       setTimeout(() => { setTyping(false); addMsg('ai', reply, true); startRespTimer(); }, 500);
     } catch(_) {
       setTyping(false);
-      addMsg('ai', 'Apologies — something went wrong. Please try again.');
+      addMsg('ai', 'Apologies - something went wrong. Please try again.');
     }
     return;
   }
@@ -3297,29 +3297,29 @@ SCORING DIMENSIONS you are silently tracking:
 7. Communication (concise? confident? no hedging?)
 
 YOUR ROLE NOW:
-- You are ${state.firm === 'McKinsey' ? 'DRIVING the interview — ask a specific targeted question about the most important unexplored area' : state.firm === 'BCG' ? 'FOLLOWING the candidate — respond to their analysis, provide data they request, challenge weak assumptions' : 'MIXING both — respond then probe one specific dimension'}.
-- If candidate ${state.msgCount >= 6 ? 'has given enough exchanges, signal wrap-up: "We are running short on time — please give me your final recommendation."' : 'skips structuring and jumps to solutions, redirect: "Before we go there — walk me through your overall framework first."'}
+- You are ${state.firm === 'McKinsey' ? 'DRIVING the interview - ask a specific targeted question about the most important unexplored area' : state.firm === 'BCG' ? 'FOLLOWING the candidate - respond to their analysis, provide data they request, challenge weak assumptions' : 'MIXING both - respond then probe one specific dimension'}.
+- If candidate ${state.msgCount >= 6 ? 'has given enough exchanges, signal wrap-up: "We are running short on time - please give me your final recommendation."' : 'skips structuring and jumps to solutions, redirect: "Before we go there - walk me through your overall framework first."'}
 - If candidate gives a generic framework without customisation, challenge it: "That structure applies to many cases. How would you tailor it specifically to [company/situation]?"
 - If candidate hedges ("it could be X or Y"), push: "Which one do you think is more likely, and why?"
 
 KEEP THE CANDIDATE IN THE CASE (important):
-- This is THEIR interview — they must do the thinking. If the candidate asks YOU to solve it ("what's the answer?", "just tell me", "what would you do?", "give me the framework"), do NOT solve it. Redirect: "That's for you to work through — what's your thinking?" or "Take a structured guess first, then I'll react."
-- If the candidate drifts off-topic, rambles, or goes vague/incoherent, pull them back to the live question: "Let's stay with the case — [restate the exact question on the table]."
+- This is THEIR interview - they must do the thinking. If the candidate asks YOU to solve it ("what's the answer?", "just tell me", "what would you do?", "give me the framework"), do NOT solve it. Redirect: "That's for you to work through - what's your thinking?" or "Take a structured guess first, then I'll react."
+- If the candidate drifts off-topic, rambles, or goes vague/incoherent, pull them back to the live question: "Let's stay with the case - [restate the exact question on the table]."
 - If the candidate goes silent or says "I don't know", don't rescue them with the answer. Give a small nudge toward the next step and let them attempt: "What's the first bucket you'd look at, and why?"
-- If they ask to skip a step (math, structure) to get to the end, hold the line: "We'll get there — but walk me through this part first."
+- If they ask to skip a step (math, structure) to get to the end, hold the line: "We'll get there - but walk me through this part first."
 - Never lecture or hand over your model thinking mid-case. The full model answer comes only at the debrief, not during the case.
 
-PARTNER PRESSURE (critical — this is what makes it not a walk in the park):
-- When the candidate states a recommendation or a key conclusion, CHALLENGE it at least once, the way a real partner does: "Why should the CEO trust that answer?" / "What if your core assumption is wrong?" / "A board member says you're wrong — defend it."
+PARTNER PRESSURE (critical - this is what makes it not a walk in the park):
+- When the candidate states a recommendation or a key conclusion, CHALLENGE it at least once, the way a real partner does: "Why should the CEO trust that answer?" / "What if your core assumption is wrong?" / "A board member says you're wrong - defend it."
 - Then judge the RESPONSE, not the pushback:
-   • If the candidate defends with DATA and sound logic and holds firm → reward it ("Good — you held your ground with evidence"). Do NOT keep badgering a correctly-defended position.
+   • If the candidate defends with DATA and sound logic and holds firm → reward it ("Good - you held your ground with evidence"). Do NOT keep badgering a correctly-defended position.
    • If the candidate CAVES without new reason just because you pushed → that is a FAILURE. Call it out: a strong candidate defends a right answer under pressure.
    • If the candidate was genuinely WRONG and your challenge exposes a real flaw → they should ADAPT, not stubbornly defend. Reward the adaptation; penalise stubbornness on a truly broken point.
 - You do NOT change the underlying facts of the case to whatever the candidate wishes. The numbers are fixed. Talking you out of a real constraint by assertion alone does not work.
 
 MATH FLOOR (no easy arithmetic):
 - Any quantitative ask must be genuinely multi-step (3+ linked operations), use non-round numbers, and include at least one number the candidate must recognise as a red herring or must NOT use.
-- Where the case type allows, force a real breakeven, NPV, contribution-margin, or elasticity calculation — not a one-line multiplication.
+- Where the case type allows, force a real breakeven, NPV, contribution-margin, or elasticity calculation - not a one-line multiplication.
 - Make the candidate state the approach before you give the final inputs. Verify every figure cross-checks (Revenue × Margin = Profit).
 
 - Keep your response to 2-4 sentences. One focused question maximum.
@@ -3331,7 +3331,7 @@ MATH FLOOR (no easy arithmetic):
     setTimeout(() => { setTyping(false); addMsg('ai', reply, true); startRespTimer(); }, 700);
   } catch (_) {
     setTyping(false);
-    addMsg('ai', 'Apologies — something went wrong. Please try again.');
+    addMsg('ai', 'Apologies - something went wrong. Please try again.');
   }
 }
 
@@ -3410,7 +3410,7 @@ function endInterview() {
 // Shown when there isn't enough of a transcript to fairly evaluate
 function showInsufficientFeedback() {
   const valEl = document.getElementById('ring-val');
-  if (valEl) valEl.textContent = '—';
+  if (valEl) valEl.textContent = '-';
   const arc = document.getElementById('ring-arc');
   if (arc) arc.style.strokeDashoffset = 439.82; // empty ring
   setText('score-title', 'Not enough to evaluate');
@@ -3428,7 +3428,7 @@ async function generateAIFeedback() {
     .map(m => (m.role === 'user' ? (state.userName || 'CANDIDATE') : 'INTERVIEWER') + ': ' + m.content)
     .join('\n\n');
 
-  // Timing summary — how the candidate managed time pressure per answer.
+  // Timing summary - how the candidate managed time pressure per answer.
   let timingNote = '';
   const ots = state.overtimes || [];
   if (ots.length) {
@@ -3436,34 +3436,34 @@ async function generateAIFeedback() {
     const totalOver = ots.reduce((n, o) => n + o.over, 0);
     const worst = ots.reduce((m, o) => Math.max(m, o.over), 0);
     if (!lateOnes.length) {
-      timingNote = `\n\nTIMING: The candidate answered all ${ots.length} responses within the time limit. Good time discipline — factor this positively into Communication.`;
+      timingNote = `\n\nTIMING: The candidate answered all ${ots.length} responses within the time limit. Good time discipline - factor this positively into Communication.`;
     } else {
       const pct = Math.round((lateOnes.length / ots.length) * 100);
       timingNote = `\n\nTIMING: The candidate ran over the response time limit on ${lateOnes.length} of ${ots.length} answers (${pct}%), totalling ${totalOver}s of overtime, with the worst single answer ${worst}s over. In a real interview, dwelling too long signals weak structuring under pressure. Reflect this in the COMMUNICATION score: minor occasional overruns are a small deduction; frequent or severe overruns (30s+) are a real weakness that should pull Communication down.`;
     }
   }
 
-  const EVAL_SYSTEM = `You are a McKinsey/BCG/Bain Senior Partner giving a candidate their honest post-case debrief. You are demanding and you do NOT sugarcoat. Score on a 1.0–10.0 scale with ONE decimal (e.g. 6.5, 7.8). Most real candidates land 5.0–7.0; a 7.5+ is genuinely strong and a 9.0+ is rare and exceptional. Do not inflate. A vague or incomplete answer scores low, not "encouraging". Kindness here means honesty, not praise.
+  const EVAL_SYSTEM = `You are a McKinsey/BCG/Bain Senior Partner giving a candidate their honest post-case debrief. You are demanding and you do NOT sugarcoat. Score on a 1.0-10.0 scale with ONE decimal (e.g. 6.5, 7.8). Most real candidates land 5.0-7.0; a 7.5+ is genuinely strong and a 9.0+ is rare and exceptional. Do not inflate. A vague or incomplete answer scores low, not "encouraging". Kindness here means honesty, not praise.
 
 CALIBRATION (anchor every score):
-- 8.5–10: ready for a real MBB final round — answer-first, MECE, numbers tied to the decision, risks named.
-- 7.0–8.4: promising but with clear gaps — likely would NOT pass as-is.
-- 5.0–6.9: significant problems — unstructured, buried conclusion, or weak math.
-- 1.0–4.9: did not really engage with the problem.
+- 8.5-10: ready for a real MBB final round - answer-first, MECE, numbers tied to the decision, risks named.
+- 7.0-8.4: promising but with clear gaps - likely would NOT pass as-is.
+- 5.0-6.9: significant problems - unstructured, buried conclusion, or weak math.
+- 1.0-4.9: did not really engage with the problem.
 Score ONLY what they actually said in the transcript. Give no credit for things they didn't do. Thin transcript = low scores.
 
-FIVE DIMENSIONS (these mirror the real Wharton/Darden grading rubrics — score each 1.0–10.0):
-1. STRUCTURE — MECE, custom to THIS case, hypothesis-first (not a generic template)
-2. QUANTITATIVE — correct math, steps shown, numbers linked to the business implication
-3. BUSINESS LOGIC & INSIGHT — root cause, hypothesis quality, creativity, non-obvious connections, 80/20
-4. COMMUNICATION — Minto Pyramid (conclusion FIRST), conciseness, confidence, no hedging/filler
-5. CASE OWNERSHIP — did they drive the case, recover from wrong turns, ask sharp questions (for interviewer-led, weight this less)
+FIVE DIMENSIONS (these mirror the real Wharton/Darden grading rubrics - score each 1.0-10.0):
+1. STRUCTURE - MECE, custom to THIS case, hypothesis-first (not a generic template)
+2. QUANTITATIVE - correct math, steps shown, numbers linked to the business implication
+3. BUSINESS LOGIC & INSIGHT - root cause, hypothesis quality, creativity, non-obvious connections, 80/20
+4. COMMUNICATION - Minto Pyramid (conclusion FIRST), conciseness, confidence, no hedging/filler
+5. CASE OWNERSHIP - did they drive the case, recover from wrong turns, ask sharp questions (for interviewer-led, weight this less)
 
-OVERALL = a holistic 1.0–10.0 (not a strict average — judgment call). Be strict; most candidates are below 7.
+OVERALL = a holistic 1.0-10.0 (not a strict average - judgment call). Be strict; most candidates are below 7.
 
 VERDICT: Strong Hire / Hire / Borderline / No Hire (most are Borderline or No Hire).
 
-Return ONLY valid JSON (no markdown, no backticks). All five scores are 1.0–10.0 with one decimal:
+Return ONLY valid JSON (no markdown, no backticks). All five scores are 1.0-10.0 with one decimal:
 {
   "structure": 6.5,
   "quant": 5.8,
@@ -3477,12 +3477,12 @@ Return ONLY valid JSON (no markdown, no backticks). All five scores are 1.0–10
   "logic_detail": "2-3 sentences: hypothesis quality and what root cause they missed",
   "comm_detail": "2-3 sentences: did they lead with the conclusion or bury it? quote a weak phrase",
   "ownership_detail": "2-3 sentences: did they drive or wait to be led?",
-  "strengths": "What genuinely worked — specific, with examples from their actual words. If little worked, say so plainly and keep it short.",
+  "strengths": "What genuinely worked - specific, with examples from their actual words. If little worked, say so plainly and keep it short.",
   "improvements": "The 2-3 biggest gaps, each with the EXACT better phrasing or move they should have used.",
-  "critical": "The single most important thing that would have failed them in a real interview — stated directly.",
-  "cut": "A filler phrase, redundancy, or wrong move they should STOP doing — quote it.",
+  "critical": "The single most important thing that would have failed them in a real interview - stated directly.",
+  "cut": "A filler phrase, redundancy, or wrong move they should STOP doing - quote it.",
   "add": "The one habit they must START doing next case to move up.",
-  "verdict_reason": "1-2 sentences: would they advance to Round 2? Be honest — usually not yet, and why."
+  "verdict_reason": "1-2 sentences: would they advance to Round 2? Be honest - usually not yet, and why."
 }`;
 
   try {
@@ -3500,7 +3500,7 @@ Return ONLY valid JSON (no markdown, no backticks). All five scores are 1.0–10
     if (!isNaN(ov)) {
       const p = loadProgress();
       p.scores.push(Math.round(ov * 10) / 10);
-      // per-dimension history — the foundation for the personal path
+      // per-dimension history - the foundation for the personal path
       const dimMap = { structure: d.structure, quant: d.quant, logic: d.logic, comm: d.communication, ownership: d.ownership };
       Object.keys(dimMap).forEach(k => {
         const dv = parseFloat(dimMap[k]);
@@ -3510,7 +3510,7 @@ Return ONLY valid JSON (no markdown, no backticks). All five scores are 1.0–10
       if (currentUser) pushProgressToCloud();
     }
 
-    // Animate score ring (1.0–10.0 scale)
+    // Animate score ring (1.0-10.0 scale)
     const C = 439.82;
     const overall = parseFloat(d.overall) || 6.0;
     const pct = overall / 10;
@@ -3529,10 +3529,10 @@ Return ONLY valid JSON (no markdown, no backticks). All five scores are 1.0–10
       if (cur >= overall) { clearInterval(t); if (valEl) valEl.textContent = overall.toFixed(1); }
     }, 28);
 
-    const heading = overall >= 8.5 ? 'Strong Hire — Excellent performance'
-                  : overall >= 7.0 ? 'Hire — Solid performance'
-                  : overall >= 5.0 ? 'Borderline — Needs improvement'
-                  : 'No Hire — Significant gaps';
+    const heading = overall >= 8.5 ? 'Strong Hire - Excellent performance'
+                  : overall >= 7.0 ? 'Hire - Solid performance'
+                  : overall >= 5.0 ? 'Borderline - Needs improvement'
+                  : 'No Hire - Significant gaps';
     setText('score-title', heading);
     const ctx = state.drillType
       ? `${state.drillType} drill · ${d.verdict || 'Evaluated'}`
@@ -3556,7 +3556,7 @@ Return ONLY valid JSON (no markdown, no backticks). All five scores are 1.0–10
       <strong>🎯 Case Ownership:</strong> ${d.ownership_detail || ''}<br><br>
       <strong>✅ What worked:</strong> ${d.strengths || ''}<br><br>
       <strong>⚠️ What to improve (exact phrasing):</strong> ${d.improvements || ''}<br><br>
-      ${d.critical ? `<strong>🔴 Critical — would fail you in a real interview:</strong> ${d.critical}<br><br>` : ''}
+      ${d.critical ? `<strong>🔴 Critical - would fail you in a real interview:</strong> ${d.critical}<br><br>` : ''}
       ${d.cut ? `<strong>✂️ Stop doing this:</strong> ${d.cut}<br><br>` : ''}
       ${d.add ? `<strong>➕ Start doing this:</strong> ${d.add}<br><br>` : ''}
       <strong>🎯 Partner verdict:</strong> ${d.verdict_reason || ''}`;
@@ -3576,7 +3576,7 @@ function animateFeedback() {
   };
   const overall = Math.round((s.structure + s.logic + s.comm + s.quant) / 4);
 
-  // Ring animation — r=70, C = 2π×70 ≈ 439.82
+  // Ring animation - r=70, C = 2π×70 ≈ 439.82
   const C = 439.82;
   setTimeout(() => {
     const arc = document.getElementById('ring-arc');
@@ -3595,7 +3595,7 @@ function animateFeedback() {
   // Labels
   const heading = overall >= 85 ? 'Excellent performance'
                 : overall >= 72 ? 'Solid performance'
-                : 'Good start — keep at it';
+                : 'Good start - keep at it';
   setText('score-title', heading);
   setText('score-sub',   `${state.firm} · ${state.caseType}`);
 
@@ -3612,7 +3612,7 @@ function animateFeedback() {
   const weakest  = overall < 75 ? 'quantitative analysis' : 'synthesis and recommendation';
   const fbEl     = document.getElementById('fb-text');
   if (fbEl) fbEl.innerHTML = `
-    <strong>Strengths:</strong> Your response showed clear logical instincts and a structured approach to identifying core drivers. You asked relevant clarifying questions early — a mark of strong consulting judgment — and demonstrated good awareness of the ${state.caseType} framework.<br><br>
+    <strong>Strengths:</strong> Your response showed clear logical instincts and a structured approach to identifying core drivers. You asked relevant clarifying questions early - a mark of strong consulting judgment - and demonstrated good awareness of the ${state.caseType} framework.<br><br>
     <strong>Areas for improvement:</strong> ${state.firm} interviewers expect candidates to drive the ${weakest} proactively. Rather than waiting for data to be offered, request it early and work through the math live. Aim to land a crisp, one-sentence recommendation before expanding your rationale.<br><br>
     <strong>Next step:</strong> Practice a <strong>${nextCase}</strong> case to broaden your repertoire and reinforce your synthesis instincts.`;
 }
@@ -3622,7 +3622,7 @@ function setMetric(key, score) {
   const val = isNaN(s) ? null : s;
   const v = document.getElementById('mv-' + key);
   const b = document.getElementById('mb-' + key);
-  if (v) v.textContent = val === null ? '—' : val.toFixed(1);
+  if (v) v.textContent = val === null ? '-' : val.toFixed(1);
   if (b) b.style.width = (val === null ? 0 : val * 10) + '%'; // 1-10 → 0-100% bar width
 }
 
@@ -3688,7 +3688,7 @@ function mdToHtml(raw) {
   t = t.replace(/(^|[^_])_([^_\n]+?)_([^_]|$)/g, '$1<em>$2</em>$3');
   // Bullet markers at line start
   t = t.replace(/^\s*[-*•]\s+(.+)$/gm, '<span class="md-bullet">•</span>$1');
-  // Line breaks — but NOT inside the <table> blocks we just built
+  // Line breaks - but NOT inside the <table> blocks we just built
   t = t.replace(/<\/table>\s*\n?/g, '</table>'); // strip trailing newline after table
   t = t.replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
   // Remove stray <br> immediately around tables
@@ -3716,7 +3716,7 @@ function applyTheme(theme) {
   try {
     const saved = localStorage.getItem('casedge-theme');
     if (saved === 'light') document.documentElement.setAttribute('data-theme', 'light');
-  } catch (e) { /* sandbox blocks storage — stay on default dark */ }
+  } catch (e) { /* sandbox blocks storage - stay on default dark */ }
   if (typeof updateLangUI === 'function') {
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', updateLangUI);
     else updateLangUI();
@@ -3767,7 +3767,7 @@ function applyTheme(theme) {
         const r = card.getBoundingClientRect();
         const px = (e.clientX - r.left) / r.width - 0.5;   // -0.5 .. 0.5
         const py = (e.clientY - r.top) / r.height - 0.5;
-        const max = 11; // degrees — stronger 3D tilt
+        const max = 11; // degrees - stronger 3D tilt
         card.style.transform = `perspective(700px) rotateY(${px * max}deg) rotateX(${-py * max}deg) translateZ(14px)`;
       });
       card.addEventListener('mouseleave', () => {
@@ -3812,13 +3812,13 @@ document.addEventListener('keydown', e => {
 });
 
 /* ────────────────────────────────────────────────────
-   MAGNETIC REPEL — letters flee the cursor on the hero
+   MAGNETIC REPEL - letters flee the cursor on the hero
    Applies to .hero-hl and the stat numbers (.stat-num).
    Re-runs after language switch (innerHTML changes).
 ──────────────────────────────────────────────────── */
 (function () {
-  const REPEL_RADIUS = 80;   // px — how close before a letter reacts
-  const REPEL_FORCE  = 32;   // px — max push distance
+  const REPEL_RADIUS = 80;   // px - how close before a letter reacts
+  const REPEL_FORCE  = 32;   // px - max push distance
   let letters = [];          // [{el, cx, cy}]
   let rafPending = false;
   let lastEvt = null;
@@ -3834,12 +3834,22 @@ document.addEventListener('keydown', e => {
       kids.forEach(child => {
         if (child.nodeType === 3) { // text
           const frag = document.createDocumentFragment();
+          // Group letters into per-word wrappers so lines only ever break
+          // between words, never mid-word - keeps "casebooks" intact.
+          let word = null;
+          const flushSpace = () => { word = null; };
           for (const ch of child.textContent) {
-            if (ch === ' ') { frag.appendChild(document.createTextNode(' ')); continue; }
+            if (ch === ' ') { frag.appendChild(document.createTextNode(' ')); flushSpace(); continue; }
+            if (!word) {
+              word = document.createElement('span');
+              word.className = 'repel-word';
+              word.style.whiteSpace = 'nowrap';
+              frag.appendChild(word);
+            }
             const s = document.createElement('span');
             s.className = 'repel-letter';
             s.textContent = ch;
-            frag.appendChild(s);
+            word.appendChild(s);
           }
           child.replaceWith(frag);
         } else if (child.nodeType === 1 && child.tagName !== 'BR') {
@@ -3852,7 +3862,7 @@ document.addEventListener('keydown', e => {
 
   function indexLetters() {
     letters = [];
-    document.querySelectorAll('.hero-hl .repel-letter, .stat-num:not(.stat-text) .repel-letter').forEach(el => {
+    document.querySelectorAll('.hero-hl .repel-letter, .stat-num .repel-letter').forEach(el => {
       letters.push(el);
     });
     measure();
@@ -3904,7 +3914,7 @@ document.addEventListener('keydown', e => {
     const title = document.querySelector('.hero-hl');
     if (!title) return;
     wrapLetters(title);
-    document.querySelectorAll('.stat-num:not(.stat-text)').forEach(wrapLetters);
+    document.querySelectorAll('.stat-num').forEach(wrapLetters);
     indexLetters();
   }
 
