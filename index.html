@@ -5,7 +5,7 @@
   <title>CasEdge — AI Case Interview Trainer</title>
 
   <!-- CasEdge Design System tokens — inlined for portability -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%20%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2222%22%20fill%3D%22%23181715%22/%3E%20%3Cpath%20d%3D%22M67%2032%20a23%2023%200%201%200%200%2036%22%20fill%3D%22none%22%20stroke%3D%22%235db8a6%22%20stroke-width%3D%2211%22%20stroke-linecap%3D%22round%22/%3E%20%3Ccircle%20cx%3D%2270%22%20cy%3D%2250%22%20r%3D%226.5%22%20fill%3D%22%23cc785c%22/%3E%20%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%20%3Cpath%20d%3D%22M58%2024%20a30%2030%200%201%200%200%2052%22%20fill%3D%22none%22%20stroke%3D%22%235db8a6%22%20stroke-width%3D%2213%22%20stroke-linecap%3D%22round%22/%3E%20%3Ctext%20x%3D%2262%22%20y%3D%2268%22%20font-family%3D%22Georgia%2C%20%27Times%20New%20Roman%27%2C%20serif%22%20font-style%3D%22italic%22%20font-size%3D%2252%22%20font-weight%3D%22500%22%20fill%3D%22%23cc785c%22%3Ee%3C/text%3E%20%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -149,6 +149,7 @@
       border-radius: 0 0 6px 6px; opacity: .55;
     }
     .wm-accent { color: var(--coral); }
+    .wm-c { color: var(--accent-teal); }
 
     /* ── Progress screen ── */
     .prog-stats-grid {
@@ -398,7 +399,7 @@
     ══════════════════════════════════════════════════ */
     #screen-landing {
       position: relative;
-      overflow: hidden;
+      overflow-x: clip;
       background:
         radial-gradient(ellipse 75% 55% at 50% -8%, rgba(204,120,92,.14) 0%, transparent 65%),
         var(--surface-dark);
@@ -905,7 +906,7 @@
 ═══════════════════════════════════════════════════ -->
 <div id="screen-landing" class="screen active" data-screen-label="Landing">
   <nav class="top-nav">
-    <span class="wordmark">Cas<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
     <div style="display:flex;align-items:center;gap:6px;">
       <div class="nav-menu">
         <button class="nav-link" onclick="chooseMode('case')" data-i18n="nav.cases">Cases</button>
@@ -1040,7 +1041,7 @@
   <footer class="land-footer">
     <div class="lf-inner">
       <div class="lf-brand">
-        <span class="wordmark">Cas<span class="wm-bridge">e</span>dge</span>
+        <span class="wordmark"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
         <p class="lf-tag" data-i18n="foot.tagline">MBB case interview prep — cases, drills, and partner-level feedback.</p>
       </div>
       <div class="lf-links">
@@ -1058,7 +1059,7 @@
 ═══════════════════════════════════════════════════ -->
 <div id="screen-faq" class="screen" data-screen-label="FAQ">
   <nav class="top-nav">
-    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
     <button class="btn btn-ghost" onclick="showScreen('landing')" data-i18n="common.back">← Back</button>
   </nav>
   <div class="info-body">
@@ -1095,7 +1096,7 @@
 
 <div id="screen-contact" class="screen" data-screen-label="Contact">
   <nav class="top-nav">
-    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
     <button class="btn btn-ghost" onclick="showScreen('landing')" data-i18n="common.back">← Back</button>
   </nav>
   <div class="info-body">
@@ -1118,7 +1119,7 @@
 
 <div id="screen-cookies" class="screen" data-screen-label="Cookies">
   <nav class="top-nav">
-    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
     <button class="btn btn-ghost" onclick="showScreen('landing')" data-i18n="common.back">← Back</button>
   </nav>
   <div class="info-body">
@@ -1146,7 +1147,7 @@
 ═══════════════════════════════════════════════════ -->
 <div id="screen-auth" class="screen" data-screen-label="Auth">
   <nav class="top-nav">
-    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
     <button class="btn btn-ghost" onclick="showScreen('landing')" data-i18n="common.back">← Back</button>
   </nav>
   <div class="auth-body">
@@ -1182,7 +1183,7 @@
 ═══════════════════════════════════════════════════ -->
 <div id="screen-mode" class="screen" data-screen-label="Mode">
   <nav class="top-nav">
-    <span class="wordmark">Cas<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
     <div style="display:flex;align-items:center;gap:6px;">
       <div class="nav-menu">
         <button class="nav-link" onclick="chooseMode('case')" data-i18n="nav.cases">Cases</button>
@@ -1242,7 +1243,7 @@
 ═══════════════════════════════════════════════════ -->
 <div id="screen-progress" class="screen" data-screen-label="Progress">
   <nav class="top-nav">
-    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
     <div style="display:flex;align-items:center;gap:6px;">
       <div class="nav-menu">
         <button class="nav-link" onclick="chooseMode('case')" data-i18n="nav.cases">Cases</button>
@@ -1320,7 +1321,7 @@
 
 <div id="screen-drill" class="screen" data-screen-label="Drill">
   <nav class="top-nav">
-    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
     <div id="drill-user-pill"></div>
   </nav>
   <div class="setup-body">
@@ -1344,7 +1345,7 @@
 
 <div id="screen-setup" class="screen" data-screen-label="Setup">
   <nav class="top-nav">
-    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
     <div style="display:flex;align-items:center;gap:6px;">
       <div class="nav-menu">
         <button class="nav-link" onclick="chooseMode('case')" data-i18n="nav.cases">Cases</button>
@@ -1483,7 +1484,7 @@
 ═══════════════════════════════════════════════════ -->
 <div id="screen-interview" class="screen" data-screen-label="Interview">
   <div class="int-nav">
-    <span class="wordmark" onclick="confirmExitSession()" style="cursor:pointer;" title="Back to home">Cas<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark" onclick="confirmExitSession()" style="cursor:pointer;" title="Back to home"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
     <div class="int-badges">
       <span class="pill pill-neutral" id="b-firm">McKinsey</span>
       <span class="pill pill-neutral" id="b-type">Profitability</span>
@@ -1526,7 +1527,7 @@
 ═══════════════════════════════════════════════════ -->
 <div id="screen-feedback" class="screen" data-screen-label="Feedback">
   <nav class="top-nav">
-    <span class="wordmark">Cas<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
     <div class="int-badges">
       <span class="pill pill-neutral" id="fb-firm">McKinsey</span>
       <span class="pill pill-neutral" id="fb-type">Profitability</span>
