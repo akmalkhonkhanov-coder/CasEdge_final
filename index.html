@@ -45,6 +45,11 @@
       --body-strong: #1f2937;
       --hairline: #e0d8ca;
     }
+    /* Root element background follows the theme so any overscroll/rubber-band
+       area shows the theme colour, never the black webview underneath. */
+    html { background: #181715; }
+    [data-theme="light"] { background: #f4efe6; }
+    [data-theme="light"] html, html[data-theme="light"] { background: #f4efe6; }
     /* Hairlines/borders that were white-on-dark need to flip to dark-on-light */
     [data-theme="light"] .top-nav,
     [data-theme="light"] .land-section,
@@ -98,8 +103,8 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
-      height: 100%;
       overscroll-behavior: none;
+      overflow-x: hidden;
       background: var(--surface-dark);
     }
     body {
@@ -107,13 +112,13 @@
       color: var(--on-dark);
       font-family: var(--font-sans);
       line-height: 1.5;
-      min-height: 100%;
+      min-height: 100dvh;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
 
     /* ── Screen system ────────────────────────────────── */
-    .screen { display: none; min-height: 100vh; flex-direction: column; }
+    .screen { display: none; min-height: 100vh; min-height: 100dvh; flex-direction: column; background: var(--surface-dark); }
     .screen.active { display: flex; animation: fadeUp .32s ease both; }
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(10px); }
@@ -159,6 +164,21 @@
     }
     .prog-stat-lbl { font-size: 12px; color: var(--on-dark-soft); margin-top: 8px; letter-spacing: .3px; }
     .prog-breakdown { margin-bottom: 28px; }
+    .prog-path { margin-bottom: 32px; padding: 20px; border-radius: 16px;
+      background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07); }
+    [data-theme="light"] .prog-path { background: rgba(31,41,55,.03); border-color: rgba(31,41,55,.08); }
+    .prog-path-head { margin-bottom: 16px; }
+    .prog-path-sub { font-size: 12.5px; color: var(--on-dark-soft); margin-top: 4px; }
+    .prog-path-list { display: flex; flex-direction: column; gap: 14px; }
+    .prog-path-row { display: flex; align-items: center; gap: 12px; }
+    .prog-path-name { width: 116px; flex-shrink: 0; font-size: 12.5px; color: var(--on-dark); }
+    .prog-path-track { flex: 1; height: 7px; border-radius: 4px; background: rgba(255,255,255,.08); position: relative; overflow: hidden; }
+    [data-theme="light"] .prog-path-track { background: rgba(31,41,55,.1); }
+    .prog-path-fill { height: 100%; border-radius: 4px; transition: width .6s cubic-bezier(.22,1,.36,1); }
+    .prog-path-gap { width: 52px; flex-shrink: 0; text-align: right; font-size: 12.5px; font-weight: 600; }
+    .prog-path-gap.met { color: var(--accent-teal); }
+    .prog-path-gap.need { color: var(--coral); }
+    .prog-path-foot { margin-top: 16px; font-size: 12.5px; color: var(--on-dark-soft); line-height: 1.5; }
     .prog-bd-title { font-size: 14px; font-weight: 600; color: var(--on-dark); margin-bottom: 14px; }
     .prog-bd-list { display: flex; flex-direction: column; gap: 10px; }
     .prog-bd-row { display: flex; align-items: center; gap: 12px; }
@@ -375,6 +395,8 @@
        LANDING
     ══════════════════════════════════════════════════ */
     #screen-landing {
+      position: relative;
+      overflow: hidden;
       background:
         radial-gradient(ellipse 75% 55% at 50% -8%, rgba(204,120,92,.14) 0%, transparent 65%),
         var(--surface-dark);
@@ -382,7 +404,7 @@
     .landing-main {
       flex: 1; display: flex; flex-direction: column; align-items: center;
       justify-content: center; text-align: center;
-      min-height: calc(100vh - 64px); padding: 72px 24px 48px;
+      min-height: calc(100vh - 64px); min-height: calc(100dvh - 64px); padding: 72px 24px 48px;
     }
     /* Scroll-down hint under hero */
     .scroll-hint {
@@ -626,7 +648,61 @@
     /* ══════════════════════════════════════════════════
        INTERVIEW
     ══════════════════════════════════════════════════ */
-    #screen-interview { height: 100vh; overflow: hidden; }
+    #screen-interview { height: 100vh; height: 100dvh; overflow: hidden; }
+
+    /* ══════════ BCG CHAT GAME ══════════ */
+    #screen-bcg { height: 100vh; height: 100dvh; overflow: hidden; background: var(--surface-dark); }
+    .bcg-topbar { display: flex; align-items: center; gap: 16px; padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,.07); flex-shrink: 0; }
+    [data-theme="light"] .bcg-topbar { border-color: rgba(31,41,55,.1); }
+    .bcg-exit { width: 30px; height: 30px; border-radius: 50%; border: none; background: rgba(255,255,255,.08); color: var(--on-dark); font-size: 19px; line-height: 1; cursor: pointer; flex-shrink: 0; transition: background .2s; }
+    .bcg-exit:hover { background: rgba(255,255,255,.16); }
+    [data-theme="light"] .bcg-exit { background: rgba(31,41,55,.08); }
+    .bcg-progress-wrap { flex: 1; }
+    .bcg-progress-track { height: 6px; border-radius: 4px; background: rgba(255,255,255,.1); overflow: hidden; }
+    [data-theme="light"] .bcg-progress-track { background: rgba(31,41,55,.1); }
+    .bcg-progress-fill { height: 100%; width: 0%; border-radius: 4px; background: var(--accent-teal); transition: width .5s cubic-bezier(.22,1,.36,1); }
+    .bcg-progress-label { font-size: 11px; color: var(--on-dark-soft); margin-top: 4px; }
+    .bcg-timer { font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--on-dark); flex-shrink: 0; padding: 5px 12px; border-radius: 8px; background: rgba(255,255,255,.06); }
+    [data-theme="light"] .bcg-timer { background: rgba(31,41,55,.06); }
+    .bcg-timer.warn { color: var(--accent-amber); }
+    .bcg-timer.over { color: var(--coral); }
+    .bcg-feed { flex: 1; overflow-y: auto; padding: 24px 22px 16px; display: flex; flex-direction: column; gap: 14px; }
+    .bcg-msg { display: flex; gap: 10px; max-width: 760px; }
+    .bcg-msg.bot { align-self: flex-start; }
+    .bcg-msg.me { align-self: flex-end; flex-direction: row-reverse; }
+    .bcg-avatar { width: 30px; height: 30px; border-radius: 8px; background: #4a6cf7; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 15px; }
+    .bcg-bubble { padding: 13px 16px; border-radius: 14px; font-size: 14px; line-height: 1.55; white-space: pre-wrap; }
+    .bcg-msg.bot .bcg-bubble { background: var(--surface-dark-elevated); color: var(--on-dark); border-top-left-radius: 4px; }
+    .bcg-msg.me .bcg-bubble { background: #4a6cf7; color: #fff; border-top-right-radius: 4px; }
+    .bcg-qlabel { font-weight: 700; margin-bottom: 6px; }
+    .bcg-exhibit { align-self: flex-start; max-width: 760px; width: 100%; background: var(--surface-dark-elevated); border: 1px solid rgba(255,255,255,.08); border-radius: 14px; padding: 16px; overflow-x: auto; }
+    [data-theme="light"] .bcg-exhibit { border-color: rgba(31,41,55,.1); }
+    .bcg-exhibit-title { font-size: 13px; font-weight: 700; text-align: center; margin-bottom: 12px; color: var(--on-dark); }
+    .bcg-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .bcg-table th, .bcg-table td { padding: 7px 10px; text-align: right; border-bottom: 1px solid rgba(255,255,255,.07); }
+    [data-theme="light"] .bcg-table th, [data-theme="light"] .bcg-table td { border-color: rgba(31,41,55,.08); }
+    .bcg-table th:first-child, .bcg-table td:first-child { text-align: left; color: var(--on-dark-soft); }
+    .bcg-table thead th { background: #5a7a52; color: #fff; font-weight: 600; }
+    .bcg-table thead th:first-child { background: transparent; }
+    .bcg-inputzone { flex-shrink: 0; padding: 16px 22px 22px; border-top: 1px solid rgba(255,255,255,.07); }
+    [data-theme="light"] .bcg-inputzone { border-color: rgba(31,41,55,.1); }
+    .bcg-number-row, .bcg-text-row { display: flex; gap: 10px; }
+    .bcg-num-input, .bcg-text-input { flex: 1; padding: 13px 16px; border-radius: 12px; border: 1.5px solid rgba(255,255,255,.14); background: var(--surface-dark-soft); color: var(--on-dark); font-size: 14px; font-family: inherit; outline: none; }
+    [data-theme="light"] .bcg-num-input, [data-theme="light"] .bcg-text-input { border-color: rgba(31,41,55,.15); }
+    .bcg-num-input:focus, .bcg-text-input:focus { border-color: var(--accent-teal); }
+    .bcg-text-input { resize: none; min-height: 48px; }
+    .bcg-send { padding: 0 22px; border: none; border-radius: 12px; background: var(--accent-teal); color: #fff; font-weight: 600; font-size: 14px; cursor: pointer; flex-shrink: 0; }
+    .bcg-send:disabled { opacity: .4; cursor: not-allowed; }
+    .bcg-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+    @media (max-width: 560px) { .bcg-options { grid-template-columns: 1fr; } }
+    .bcg-opt { display: flex; gap: 11px; align-items: flex-start; padding: 13px 14px; border-radius: 12px; border: 1.5px solid rgba(255,255,255,.12); background: var(--surface-dark-soft); cursor: pointer; font-size: 13.5px; line-height: 1.45; color: var(--on-dark); transition: border-color .15s, background .15s; }
+    [data-theme="light"] .bcg-opt { border-color: rgba(31,41,55,.12); }
+    .bcg-opt:hover { border-color: rgba(93,184,166,.5); }
+    .bcg-opt.sel { border-color: var(--accent-teal); background: rgba(93,184,166,.1); }
+    .bcg-opt-mark { width: 19px; height: 19px; border-radius: 50%; border: 2px solid var(--on-dark-soft); flex-shrink: 0; margin-top: 1px; position: relative; transition: border-color .15s; }
+    .bcg-opt.sel .bcg-opt-mark { border-color: var(--accent-teal); }
+    .bcg-opt.sel .bcg-opt-mark::after { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: var(--accent-teal); }
+    .bcg-opt-hint { font-size: 11.5px; color: var(--on-dark-soft); margin-bottom: 10px; }
     .int-nav {
       display: flex; align-items: center; justify-content: space-between;
       padding: 14px 28px; border-bottom: 1px solid rgba(255,255,255,.06); flex-shrink: 0;
@@ -699,6 +775,16 @@
     @keyframes blink { 0%,80%,100%{opacity:.22;transform:scale(.8);} 40%{opacity:1;transform:scale(1);} }
     /* Chat input */
     .chat-footer { padding: 14px 28px 20px; border-top: 1px solid rgba(255,255,255,.06); flex-shrink: 0; }
+    .resp-timer { display: flex; align-items: center; gap: 8px; margin-bottom: 11px; color: var(--on-dark-soft); font-size: 12px; }
+    .rt-icon { flex-shrink: 0; opacity: .8; }
+    .rt-time { font-variant-numeric: tabular-nums; font-weight: 600; min-width: 34px; letter-spacing: .3px; }
+    .rt-bar { flex: 1; height: 3px; border-radius: 2px; background: rgba(255,255,255,.08); overflow: hidden; }
+    [data-theme="light"] .rt-bar { background: rgba(31,41,55,.1); }
+    .rt-fill { height: 100%; width: 100%; border-radius: 2px; background: var(--accent-teal); transition: width 1s linear, background .4s ease; }
+    .resp-timer.warn .rt-fill { background: var(--accent-amber); }
+    .resp-timer.over .rt-fill { background: var(--coral); }
+    .resp-timer.warn .rt-time { color: var(--accent-amber); }
+    .resp-timer.over .rt-time { color: var(--coral); }
     .hints { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
     .hint-chip {
       font-size: 12px; font-weight: 500; color: var(--on-dark-soft);
@@ -1128,19 +1214,19 @@
           </div>
           <div class="firm-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div>
         </div>
+        <div class="firm-card" onclick="startBcgGame()" tabindex="0" role="button">
+          <div class="firm-initial" style="background:rgba(124,140,232,.15);color:#7c8ce8;">B</div>
+          <div>
+            <div class="firm-name">BCG Chat Game <span class="soon-badge" style="background:rgba(93,184,166,.18);color:var(--accent-teal);">Premium</span></div>
+            <div class="firm-desc">The real BCG online-assessment format — 8 linked questions, exhibits, expected-value math, select-fewest traps. The screening barrier you must pass before the live interview.</div>
+          </div>
+          <div class="firm-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div>
+        </div>
         <div class="firm-card mode-soon" onclick="comingSoon('Solve Game')" tabindex="0" role="button">
-          <div class="firm-initial" style="background:rgba(124,140,232,.15);color:#7c8ce8;">S</div>
+          <div class="firm-initial" style="background:rgba(232,168,124,.15);color:#e8a87c;">S</div>
           <div>
             <div class="firm-name">Solve Game <span class="soon-badge">In Progress</span></div>
-            <div class="firm-desc" data-i18n="mode.solve.desc">McKinsey-style problem-solving game — ecosystem builds, redistribution, scenario logic. Tests data fluency under structure. Premium track.</div>
-          </div>
-          <div class="firm-check soon-lock"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
-        </div>
-        <div class="firm-card mode-soon" onclick="comingSoon('Chat Game')" tabindex="0" role="button">
-          <div class="firm-initial" style="background:rgba(232,168,124,.15);color:#e8a87c;">C</div>
-          <div>
-            <div class="firm-name">Chat Game <span class="soon-badge">In Progress</span></div>
-            <div class="firm-desc" data-i18n="mode.chat.desc">Solve-style questions run conversationally in chat — same logic engine, no game UI. Build the reasoning muscle the real assessment rewards. Premium track.</div>
+            <div class="firm-desc">McKinsey-style problem-solving game — ecosystem builds, redistribution, scenario logic. Coming next.</div>
           </div>
           <div class="firm-check soon-lock"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
         </div>
@@ -1191,8 +1277,17 @@
         </div>
       </div>
 
+      <div class="prog-path" id="progPath" style="display:none;">
+        <div class="prog-path-head">
+          <div class="prog-bd-title" data-i18n="path.title">Your path to the offer</div>
+          <div class="prog-path-sub" id="progPathSub"></div>
+        </div>
+        <div id="progPathList" class="prog-path-list"></div>
+        <div class="prog-path-foot" id="progPathFoot"></div>
+      </div>
+
       <div class="prog-breakdown">
-        <div class="prog-bd-title">Drills by type</div>
+        <div class="prog-bd-title" data-i18n="prog.drillsByType">Drills by type</div>
         <div id="progDrillBreakdown" class="prog-bd-list"></div>
       </div>
 
@@ -1205,6 +1300,20 @@
       <p class="prog-note">Progress is saved to your account and syncs across devices.</p>
     </div>
   </div>
+</div>
+
+<!-- ══════════ BCG CHAT GAME ══════════ -->
+<div id="screen-bcg" class="screen" data-screen-label="BCG Chat Game">
+  <div class="bcg-topbar">
+    <button class="bcg-exit" onclick="confirmExitBcg()" title="Exit">&times;</button>
+    <div class="bcg-progress-wrap">
+      <div class="bcg-progress-track"><div class="bcg-progress-fill" id="bcgProgFill"></div></div>
+      <div class="bcg-progress-label" id="bcgProgLabel">Test Completed 0%</div>
+    </div>
+    <div class="bcg-timer" id="bcgTimer">Time Left 30:00</div>
+  </div>
+  <div class="bcg-feed" id="bcgFeed"></div>
+  <div class="bcg-inputzone" id="bcgInputZone"><!-- widget injected per question --></div>
 </div>
 
 <div id="screen-drill" class="screen" data-screen-label="Drill">
@@ -1395,6 +1504,11 @@
   </div>
 
   <div class="chat-footer">
+    <div class="resp-timer" id="respTimer" style="display:none;">
+      <svg class="rt-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2 2M9 2h6"></path></svg>
+      <span class="rt-time" id="respTimerTime">1:30</span>
+      <div class="rt-bar"><div class="rt-fill" id="respTimerFill"></div></div>
+    </div>
     <div class="hints" id="chatHints"></div>
     <div class="input-row">
       <textarea id="chat-ta" class="chat-ta" placeholder="Share your thinking…" rows="1" onkeydown="handleKeydown(event)" oninput="autoResize(this)"></textarea>
@@ -1567,7 +1681,8 @@ async function syncProgressFromCloud() {
         drillsByType: data.drills_by_type || {},
         scores: data.scores || [],
         days: data.streak_days || [],
-        lastDay: (data.streak_days && data.streak_days.length) ? data.streak_days[data.streak_days.length-1] : null
+        lastDay: (data.streak_days && data.streak_days.length) ? data.streak_days[data.streak_days.length-1] : null,
+        dims: data.dims || { structure: [], quant: [], logic: [], comm: [], ownership: [] }
       };
       saveProgress(local);
     }
@@ -1584,6 +1699,7 @@ async function pushProgressToCloud() {
       drills_by_type: p.drillsByType,
       scores: p.scores,
       streak_days: p.days,
+      dims: p.dims,
       updated_at: new Date().toISOString()
     }).eq('id', currentUser.id);
   } catch (e) { console.warn('cloud push failed', e); }
@@ -1672,6 +1788,7 @@ async function startDrill() {
   recordSession('drill', state.drillType);
   state.messages = [];
   state.msgCount = 0;
+  state.overtimes = [];
   const chat = document.getElementById('chat-area');
   document.getElementById('b-firm').textContent = 'Drill';
   document.getElementById('b-type').textContent = state.drillType;
@@ -1687,7 +1804,7 @@ async function startDrill() {
     const opening = await callAI(sys, [{ role:'user', content:'Begin the drill now.' }]);
     state.messages.push({ role:'assistant', content: opening });
     state.drillSystem = sys;
-    setTimeout(() => { setTyping(false); addMsg('ai', opening, true); }, 600);
+    setTimeout(() => { setTyping(false); addMsg('ai', opening, true); startRespTimer(); }, 600);
   } catch(e) {
     setTyping(false);
     addMsg('ai', 'Connection error. Please try again.');
@@ -1844,6 +1961,8 @@ const I18N = {
     // Progress screen
     'prog.eyebrow': 'Your progress',
     'prog.title': 'How your training is going',
+    'prog.drillsByType': 'Drills by type',
+    'path.title': 'Your path to the offer',
     // Misc
     'common.signin': 'Sign in →',
     'common.back': '← Back',
@@ -1932,6 +2051,8 @@ const I18N = {
     // Progress screen
     'prog.eyebrow': 'Твой прогресс',
     'prog.title': 'Как идёт тренировка',
+    'prog.drillsByType': 'Дриллы по типам',
+    'path.title': 'Твой путь к офферу',
     // Misc
     'common.signin': 'Войти →',
     'common.back': '← Назад',
@@ -2016,6 +2137,8 @@ function rememberCase(summary) {
    SCREEN NAV
 ──────────────────────────────────────────────────── */
 function showScreen(id, fromPop) {
+  // Stop the response timer whenever we leave the live interview/drill screens
+  if (id !== 'interview' && id !== 'drill' && typeof hideRespTimer === 'function') hideRespTimer();
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   const el = document.getElementById('screen-' + id);
   if (el) el.classList.add('active');
@@ -2141,6 +2264,225 @@ function chooseMode(mode) {
   if (mode === 'case') showScreen('setup');
   else showScreen('drill');
 }
+
+/* ══════════════════════════════════════════════════════════
+   BCG CHAT GAME ENGINE
+   Real BCG online-assessment format: scenario + linked questions,
+   exhibits, 4 input widget types, machine-graded numbers, ~30-min
+   overall timer. Library cases are data objects (below); this is a
+   scaffold built on ONE verified case (Technoplast/Simkin) so the
+   format can be reviewed before the full library is generated.
+══════════════════════════════════════════════════════════ */
+
+// ---- Case data. Each step is one chat turn. Math verified. ----
+const BCG_CASES = [{
+  id: 'technoplast',
+  client: 'Technoplast',
+  intro: "Please note that all region and company names in this case are fictional. Unless otherwise stated, assume real-world events have not taken place and are to be ignored.\n\nOur client, Technoplast, is one of the world's leading green plastic compounders. It blends recycled plastic resins with additives to create plastic compounds, which it sells to plastic converters that turn them into finished products.",
+  steps: [
+    { type:'say', text:"Last week, Technoplast's CEO was told that Simkin, a producer of recycled plastic resins, is being put up for acquisition for USD 30 Million. Simkin accounts for ~10% of the global market for recycled LDPE and HDPE — both key inputs for Technoplast. The CEO wants to assess whether Technoplast should bid for Simkin and, if so, how much." },
+    { type:'q', id:'q1', label:'Question 1', widget:'text',
+      text:"Let's think about the right structure. What are the 3 key questions you would need to answer to help Technoplast decide how much to bid for Simkin? Please summarize in 3 lines maximum.",
+      grade:'open' },
+    { type:'say', text:"Assume that Technoplast values Simkin at ten times its annual profit impact to Technoplast. This includes Simkin's standalone profits plus potential savings if Technoplast buys resin from Simkin at cost price (if Simkin has spare capacity). Our client is looking at two scenarios." },
+    { type:'exhibit', title:'Scenario 1: Key facts and figures for Simkin',
+      table:{ cols:['', 'LDPE','HDPE'], rows:[
+        ['Max production capacity (tons/yr)','4,000','2,100'],
+        ['Resin volume sold by Simkin (tons/yr)','3,800','1,900'],
+        ['Resin volume demanded by Technoplast (tons/yr)','200','200'],
+        ['Global resin price (USD/ton)','1,000','1,100'],
+        ["Cost of Simkin's raw materials (USD/ton)",'350','400'],
+        ['Cost of energy for processing (USD/ton)','50','100'],
+        ["Depreciation, Simkin's plant (USD/yr)",'400,000','—'],
+        ['Manpower to operate plant (USD/yr)','100,000','—'] ]} },
+    { type:'q', id:'q2a', label:'Question 2a', widget:'number',
+      text:"Scenario 1: Given the data in the exhibit, what is the maximum that Technoplast should be willing to pay for Simkin? Please provide your answer rounded to the nearest whole number (e.g. 1111 or 123456), without further explanation or working.",
+      grade:'number', answer:31600000, tolerance:0,
+      solution:"Standalone profit = revenue − variable − fixed.\nRevenue = 3,800×1,000 + 1,900×1,100 = 5,890,000.\nVariable = 3,800×(350+50) + 1,900×(400+100) = 2,470,000.\nFixed = 400,000 + 100,000 = 500,000.\nStandalone = 2,920,000.\nSavings: Technoplast buys 200 LDPE + 200 HDPE at cost instead of global price. Spare capacity = 200 each (just enough). Savings = 200×(1,000−400) + 200×(1,100−500) = 240,000.\nAnnual impact = 2,920,000 + 240,000 = 3,160,000. ×10 = 31,600,000." },
+    { type:'q', id:'q3', label:'Question 3', widget:'select-all',
+      text:"What are the key risks and deal constraints that could cap the price Technoplast should pay? Please select all that apply.",
+      options:[
+        "Simkin's spare capacity may not cover Technoplast's full future resin needs",
+        "Integration and operational risk of merging the two businesses",
+        "Customer concentration — Simkin depends on a few large buyers",
+        "Regulatory or antitrust scrutiny given Simkin's ~10% market share",
+        "Technoplast already owns a controlling stake in Simkin",
+        "Feedstock quality and supply security of recycled inputs" ],
+      grade:'select', answer:[0,1,2,3,5] },
+    { type:'q', id:'q8a', label:'Final Recommendation (8a)', widget:'single',
+      text:"Given everything above, would you recommend that Technoplast bids to acquire Simkin?",
+      options:[ "Yes — Technoplast should bid, up to the value ceiling", "No — Technoplast should not bid" ],
+      grade:'single', answer:0,
+      recPrep:true },
+    { type:'q', id:'q8b', label:'Final Recommendation (8b)', widget:'text',
+      text:"Please state your recommendation as you would to the partner — conclusion first, then your two strongest supporting reasons, then one key risk. In a real interview this is delivered out loud in ~60–90 seconds; here, type it concisely (2–3 lines).",
+      grade:'open', isRec:true }
+  ]
+}];
+
+let bcg = null; // active session state
+
+function startBcgGame() {
+  const c = BCG_CASES[0];
+  bcg = { case:c, idx:-1, answers:{}, startMs:Date.now(), limitS:30*60, timerId:null, recPrepUntil:0 };
+  document.getElementById('bcgFeed').innerHTML = '';
+  document.getElementById('bcgInputZone').innerHTML = '';
+  showScreen('bcg');
+  bcgPushBot(c.intro);
+  startBcgTimer();
+  bcgNext();
+}
+
+function startBcgTimer() {
+  const el = document.getElementById('bcgTimer');
+  if (bcg.timerId) clearInterval(bcg.timerId);
+  bcg.timerId = setInterval(() => {
+    const elapsed = Math.floor((Date.now() - bcg.startMs)/1000);
+    let left = bcg.limitS - elapsed;
+    const over = left < 0;
+    const a = Math.abs(left);
+    const m = Math.floor(a/60), s = a%60;
+    el.textContent = (over?'Overtime ':'Time Left ') + m + ':' + String(s).padStart(2,'0');
+    el.classList.toggle('warn', !over && left <= 300);
+    el.classList.toggle('over', over);
+  }, 1000);
+}
+
+function bcgPushBot(text, label) {
+  const feed = document.getElementById('bcgFeed');
+  const wrap = document.createElement('div');
+  wrap.className = 'bcg-msg bot';
+  const inner = (label ? `<div class="bcg-qlabel">${label}</div>` : '') + escapeHtml(text);
+  wrap.innerHTML = `<div class="bcg-avatar">☺</div><div class="bcg-bubble">${inner}</div>`;
+  feed.appendChild(wrap);
+  feed.scrollTop = feed.scrollHeight;
+}
+function bcgPushMe(text) {
+  const feed = document.getElementById('bcgFeed');
+  const wrap = document.createElement('div');
+  wrap.className = 'bcg-msg me';
+  wrap.innerHTML = `<div class="bcg-bubble">${escapeHtml(text)}</div>`;
+  feed.appendChild(wrap);
+  feed.scrollTop = feed.scrollHeight;
+}
+function bcgPushExhibit(ex) {
+  const feed = document.getElementById('bcgFeed');
+  const wrap = document.createElement('div');
+  wrap.className = 'bcg-exhibit';
+  let html = `<div class="bcg-exhibit-title">${escapeHtml(ex.title)}</div><table class="bcg-table">`;
+  html += '<thead><tr>' + ex.table.cols.map(c=>`<th>${escapeHtml(c)}</th>`).join('') + '</tr></thead><tbody>';
+  ex.table.rows.forEach(r => { html += '<tr>' + r.map(c=>`<td>${escapeHtml(c)}</td>`).join('') + '</tr>'; });
+  html += '</tbody></table>';
+  wrap.innerHTML = html;
+  feed.appendChild(wrap);
+  feed.scrollTop = feed.scrollHeight;
+}
+function escapeHtml(s){ return String(s).replace(/[&<>"]/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m])); }
+
+function bcgSetProgress() {
+  const total = bcg.case.steps.length;
+  const done = Math.max(0, bcg.idx);
+  const pct = Math.round((done/total)*100);
+  document.getElementById('bcgProgFill').style.width = pct + '%';
+  document.getElementById('bcgProgLabel').textContent = 'Test Completed ' + pct + '%';
+}
+
+function bcgNext() {
+  bcg.idx++;
+  bcgSetProgress();
+  if (bcg.idx >= bcg.case.steps.length) return bcgFinish();
+  const step = bcg.case.steps[bcg.idx];
+  if (step.type === 'say') { bcgPushBot(step.text); return bcgNext(); }
+  if (step.type === 'exhibit') { bcgPushExhibit(step); return bcgNext(); }
+  if (step.type === 'q') { bcgPushBot(step.text, step.label); bcgRenderWidget(step); }
+}
+
+function bcgRenderWidget(step) {
+  const zone = document.getElementById('bcgInputZone');
+  if (step.widget === 'number') {
+    zone.innerHTML = `<div class="bcg-number-row">
+      <input id="bcgIn" class="bcg-num-input" type="text" inputmode="numeric" placeholder="Enter a number" autocomplete="off">
+      <button class="bcg-send" id="bcgSend" onclick="bcgSubmit()">Send</button></div>`;
+    const inp = document.getElementById('bcgIn');
+    inp.focus();
+    inp.addEventListener('keydown', e=>{ if(e.key==='Enter') bcgSubmit(); });
+  } else if (step.widget === 'text') {
+    zone.innerHTML = `<div class="bcg-text-row">
+      <textarea id="bcgIn" class="bcg-text-input" placeholder="Enter Your Text" rows="2"></textarea>
+      <button class="bcg-send" id="bcgSend" onclick="bcgSubmit()">Send</button></div>`;
+    document.getElementById('bcgIn').focus();
+  } else if (step.widget === 'select-all' || step.widget === 'single') {
+    const multi = step.widget === 'select-all';
+    let html = `<div class="bcg-opt-hint">${multi?'Choose any number of options from above':'Choose one option from the list above'}</div><div class="bcg-options">`;
+    step.options.forEach((o,i)=>{ html += `<div class="bcg-opt" data-i="${i}" onclick="bcgToggleOpt(this,${multi})"><span class="bcg-opt-mark"></span><span>${escapeHtml(o)}</span></div>`; });
+    html += `</div><div class="bcg-number-row" style="justify-content:flex-end"><button class="bcg-send" id="bcgSend" onclick="bcgSubmit()">Confirm</button></div>`;
+    zone.innerHTML = html;
+  }
+}
+function bcgToggleOpt(el, multi) {
+  if (!multi) el.parentElement.querySelectorAll('.bcg-opt').forEach(o=>{ if(o!==el) o.classList.remove('sel'); });
+  el.classList.toggle('sel');
+}
+
+function bcgSubmit() {
+  const step = bcg.case.steps[bcg.idx];
+  let display, stored;
+  if (step.widget === 'number') {
+    const raw = document.getElementById('bcgIn').value.trim().replace(/[, ]/g,'');
+    if (raw === '' || isNaN(Number(raw))) return;
+    stored = Number(raw); display = raw;
+  } else if (step.widget === 'text') {
+    const raw = document.getElementById('bcgIn').value.trim();
+    if (!raw) return;
+    stored = raw; display = raw;
+  } else {
+    const sel = [...document.querySelectorAll('#bcgInputZone .bcg-opt.sel')].map(o=>Number(o.dataset.i));
+    if (!sel.length) return;
+    stored = sel; display = sel.map(i=>step.options[i]).join('  •  ');
+  }
+  bcg.answers[step.id] = stored;
+  bcgPushMe(display);
+  document.getElementById('bcgInputZone').innerHTML = '';
+  bcgPushBot('Thanks');
+  setTimeout(bcgNext, 350);
+}
+
+function bcgFinish() {
+  if (bcg.timerId) clearInterval(bcg.timerId);
+  document.getElementById('bcgProgFill').style.width = '100%';
+  document.getElementById('bcgProgLabel').textContent = 'Test Completed 100%';
+  // Grade machine-checkable answers locally; show a quick scorecard.
+  let lines = [], correct = 0, graded = 0;
+  bcg.case.steps.forEach(s => {
+    if (s.type!=='q') return;
+    const a = bcg.answers[s.id];
+    if (s.grade === 'number') {
+      graded++; const ok = Math.abs(a - s.answer) <= (s.tolerance||0);
+      if (ok) correct++;
+      lines.push(`${s.label}: ${ok?'✓ correct':'✗ — correct answer '+s.answer.toLocaleString()}`);
+    } else if (s.grade === 'select') {
+      graded++; const want = s.answer.slice().sort().join(','); const got = (a||[]).slice().sort().join(',');
+      const ok = want===got; if (ok) correct++;
+      lines.push(`${s.label}: ${ok?'✓ correct':'✗ — review the answer key'}`);
+    } else if (s.grade === 'single') {
+      graded++; const ok = a === s.answer; if (ok) correct++;
+      lines.push(`${s.label}: ${ok?'✓ correct':'✗'}`);
+    } else {
+      lines.push(`${s.label}: open answer — needs AI evaluation`);
+    }
+  });
+  bcgPushBot(`That's the end of this BCG Chat Game.\n\nMachine-graded score: ${correct}/${graded}\n\n${lines.join('\n')}\n\nFull worked solutions and AI feedback on your open answers will appear here once grading is wired up.`, 'Result');
+  document.getElementById('bcgInputZone').innerHTML =
+    `<div class="bcg-number-row" style="justify-content:flex-end">
+      <button class="bcg-send" onclick="showScreen('mode')">Back to modes</button></div>`;
+}
+
+function confirmExitBcg() {
+  if (confirm('Leave the BCG Chat Game? Your progress in this session will be lost.')) {
+    if (bcg && bcg.timerId) clearInterval(bcg.timerId);
+    showScreen('mode');
+  }
+}
 function goToMode() { showScreen('mode'); }
 
 function comingSoon(name) {
@@ -2173,17 +2515,25 @@ function comingSoon(name) {
 ──────────────────────────────────────────────────── */
 const PROG_KEY = 'casedge-progress';
 function loadProgress() {
+  let p;
   try {
     const raw = localStorage.getItem(PROG_KEY);
-    if (raw) return JSON.parse(raw);
+    p = raw ? JSON.parse(raw) : null;
   } catch (e) { /* sandbox or corrupt */ }
-  return { cases: 0, drills: 0, drillsByType: {}, scores: [], days: [], lastDay: null };
+  if (!p) p = { cases: 0, drills: 0, drillsByType: {}, scores: [], days: [], lastDay: null };
+  // backward-compat: ensure per-dimension history exists for existing users
+  if (!p.dims) p.dims = { structure: [], quant: [], logic: [], comm: [], ownership: [] };
+  ['structure','quant','logic','comm','ownership'].forEach(k => {
+    if (!Array.isArray(p.dims[k])) p.dims[k] = [];
+  });
+  return p;
 }
 function saveProgress(p) {
   try { localStorage.setItem(PROG_KEY, JSON.stringify(p)); } catch (e) { /* sandbox */ }
 }
 // Call when a session finishes. type='case' or a drill type name. score optional (0-100).
-function recordSession(kind, label, score) {
+// dims optional: { structure, quant, logic, comm, ownership } each 1-10.
+function recordSession(kind, label, score, dims) {
   const p = loadProgress();
   if (kind === 'case') p.cases++;
   else {
@@ -2191,6 +2541,13 @@ function recordSession(kind, label, score) {
     p.drillsByType[label] = (p.drillsByType[label] || 0) + 1;
   }
   if (typeof score === 'number' && !isNaN(score)) p.scores.push(score);
+  // per-dimension history (only push valid numbers)
+  if (dims) {
+    ['structure','quant','logic','comm','ownership'].forEach(k => {
+      const v = parseFloat(dims[k]);
+      if (!isNaN(v)) p.dims[k].push(Math.round(v * 10) / 10);
+    });
+  }
   // streak tracking by calendar day
   const today = new Date().toISOString().slice(0, 10);
   if (p.lastDay !== today) {
@@ -2216,6 +2573,71 @@ function computeStreak(days) {
   return streak;
 }
 const ALL_DRILL_TYPES = ['Market Sizing','Structuring','Case Math','Chart Interpretation','Brainstorm','Calculation','Synthesis','Behavioral'];
+
+// Personal path to offer — built ONLY on the user's own dimension history.
+const PATH_DIMS = [
+  { key: 'structure', label: 'Structure',      color: 'var(--coral)' },
+  { key: 'quant',     label: 'Quantitative',   color: '#a78bfa' },
+  { key: 'logic',     label: 'Business Logic', color: 'var(--accent-teal)' },
+  { key: 'comm',      label: 'Communication',  color: 'var(--accent-amber)' },
+  { key: 'ownership', label: 'Case Ownership', color: '#6ea8fe' },
+];
+const PATH_TARGET = 8.0; // MBB hire bar (1-10), aligned to Wharton/Darden calibration
+
+// recent average: last up to 5 scores for a dimension
+function dimAverage(arr) {
+  if (!arr || !arr.length) return null;
+  const recent = arr.slice(-5);
+  return recent.reduce((a, b) => a + b, 0) / recent.length;
+}
+
+function renderPath() {
+  const p = loadProgress();
+  const pathEl = document.getElementById('progPath');
+  const listEl = document.getElementById('progPathList');
+  const subEl  = document.getElementById('progPathSub');
+  const footEl = document.getElementById('progPathFoot');
+  if (!pathEl || !listEl) return;
+
+  // need at least one scored dimension to show an honest path
+  const anyData = PATH_DIMS.some(d => (p.dims[d.key] || []).length > 0);
+  if (!anyData) { pathEl.style.display = 'none'; return; }
+  pathEl.style.display = 'block';
+
+  let gaps = [];
+  listEl.innerHTML = PATH_DIMS.map(d => {
+    const avg = dimAverage(p.dims[d.key]);
+    if (avg === null) {
+      return `<div class="prog-path-row"><div class="prog-path-name">${d.label}</div>`
+        + `<div class="prog-path-track"></div>`
+        + `<div class="prog-path-gap">—</div></div>`;
+    }
+    const pct = Math.max(0, Math.min(100, (avg / 10) * 100));
+    const rawGap = PATH_TARGET - avg;
+    const gap = Math.round(rawGap * 2) / 2; // round to nearest 0.5
+    const met = gap <= 0;
+    if (!met) gaps.push({ label: d.label, gap });
+    const gapTxt = met ? '✓' : '+' + gap.toFixed(1);
+    return `<div class="prog-path-row">`
+      + `<div class="prog-path-name">${d.label}</div>`
+      + `<div class="prog-path-track"><div class="prog-path-fill" style="width:${pct}%;background:${d.color};"></div></div>`
+      + `<div class="prog-path-gap ${met ? 'met' : 'need'}">${gapTxt}</div></div>`;
+  }).join('');
+
+  // headline + footer guidance
+  const targetFirm = state.firm || 'MBB';
+  if (subEl) subEl.textContent = `Target level for ${targetFirm}: ${PATH_TARGET.toFixed(1)}/10 on every dimension`;
+  if (footEl) {
+    if (!gaps.length) {
+      footEl.innerHTML = `<strong style="color:var(--accent-teal);">You're at offer level across the board.</strong> Keep your reps consistent to stay sharp.`;
+    } else {
+      gaps.sort((a, b) => b.gap - a.gap);
+      const top = gaps.slice(0, 3).map(g => `<strong>${g.label} +${g.gap.toFixed(1)}</strong>`).join(', ');
+      footEl.innerHTML = `Biggest gaps to close: ${top}. Focus your next drills here.`;
+    }
+  }
+}
+
 function renderProgress() {
   const p = loadProgress();
   const total = p.cases + p.drills;
@@ -2240,6 +2662,7 @@ function renderProgress() {
     const isEmpty = total === 0;
     empty.style.display = isEmpty ? 'block' : 'none';
   }
+  renderPath();
 }
 function goToProgress() { renderProgress(); updateAuthUI(); renderIdentity(); showScreen('progress'); }
 
@@ -2386,6 +2809,7 @@ async function startInterview() {
   recordSession('case', state.caseType);
   state.messages = [];
   state.msgCount = 0;
+  state.overtimes = [];
 
   document.getElementById('b-firm').textContent  = state.firm;
   document.getElementById('b-type').textContent  = state.caseType;
@@ -2731,7 +3155,7 @@ Format:
     // Remember this case so it's never repeated for this user
     const firstLines = opening.split('\n').filter(l => l.trim()).slice(0, 4).join(' ');
     rememberCase(state.firm + '/' + state.caseType + ': ' + firstLines.slice(0, 150));
-    setTimeout(() => { setTyping(false); addMsg('ai', opening, true); }, 800);
+    setTimeout(() => { setTyping(false); addMsg('ai', opening, true); startRespTimer(); }, 800);
   } catch(e) {
     setTyping(false);
     addMsg('ai', 'Connection error. Please check your network and try again.');
@@ -2774,11 +3198,68 @@ function setTyping(on) {
   }, 40);
 }
 
+/* ────────────────────────────────────────────────────
+   RESPONSE TIMER — interview-style time pressure per answer.
+   Cases: 90s. Drills: per-skill (see DRILL_TIME). Soft limit —
+   it never blocks sending; over-time just turns red, like a real room.
+──────────────────────────────────────────────────── */
+const DRILL_TIME = {
+  'Market Sizing': 120, 'Structuring': 90, 'Case Math': 120,
+  'Chart Interpretation': 90, 'Brainstorm': 90, 'Calculation': 90,
+  'Synthesis': 75, 'Behavioral': 120
+};
+const CASE_RESP_TIME = 90; // 1.5 min per answer
+let _rt = { id: null, left: 0, limit: 0 };
+
+function fmtTime(s) {
+  const neg = s < 0; s = Math.abs(s);
+  const m = Math.floor(s / 60), ss = s % 60;
+  return (neg ? '+' : '') + m + ':' + String(ss).padStart(2, '0');
+}
+function startRespTimer() {
+  const limit = state.drillType ? (DRILL_TIME[state.drillType] || 90) : CASE_RESP_TIME;
+  const wrap = document.getElementById('respTimer');
+  const timeEl = document.getElementById('respTimerTime');
+  const fill = document.getElementById('respTimerFill');
+  if (!wrap || !timeEl || !fill) return;
+  stopRespTimer();
+  _rt.left = limit; _rt.limit = limit;
+  wrap.style.display = 'flex';
+  wrap.classList.remove('warn', 'over');
+  timeEl.textContent = fmtTime(limit);
+  fill.style.width = '100%';
+  _rt.id = setInterval(() => {
+    _rt.left--;
+    timeEl.textContent = fmtTime(_rt.left);
+    const pct = Math.max(0, (_rt.left / _rt.limit) * 100);
+    fill.style.width = pct + '%';
+    if (_rt.left <= 0) { wrap.classList.add('over'); wrap.classList.remove('warn'); }
+    else if (_rt.left <= _rt.limit * 0.33) { wrap.classList.add('warn'); }
+    // stop counting down past -60 to avoid silly numbers
+    if (_rt.left <= -60) stopRespTimer();
+  }, 1000);
+}
+function stopRespTimer() {
+  if (_rt.id) { clearInterval(_rt.id); _rt.id = null; }
+}
+function hideRespTimer() {
+  stopRespTimer();
+  const wrap = document.getElementById('respTimer');
+  if (wrap) wrap.style.display = 'none';
+}
+
 async function sendMessage() {
   const ta   = document.getElementById('chat-ta');
   const text = ta.value.trim();
   if (!text) return;
 
+  // Capture how late this answer was (timer counts down; negative left = overtime seconds)
+  if (_rt.limit > 0) {
+    const overtime = _rt.left < 0 ? Math.abs(_rt.left) : 0;
+    if (!state.overtimes) state.overtimes = [];
+    state.overtimes.push({ limit: _rt.limit, over: overtime });
+  }
+  stopRespTimer();
   ta.value = '';
   autoResize(ta);
   addMsg('user', text);
@@ -2793,7 +3274,7 @@ async function sendMessage() {
       // Wider window than cases: a 5-rep series must keep the running rep counter in context
       const reply = await callAI(state.drillSystem, state.messages.slice(-24), 'claude-sonnet-4-5');
       state.messages.push({ role:'assistant', content: reply });
-      setTimeout(() => { setTyping(false); addMsg('ai', reply, true); }, 500);
+      setTimeout(() => { setTyping(false); addMsg('ai', reply, true); startRespTimer(); }, 500);
     } catch(_) {
       setTyping(false);
       addMsg('ai', 'Apologies — something went wrong. Please try again.');
@@ -2844,7 +3325,7 @@ MATH FLOOR (no easy arithmetic):
   try {
     const reply = await callAI(sys, state.messages.slice(-12));
     state.messages.push({ role: 'assistant', content: reply });
-    setTimeout(() => { setTyping(false); addMsg('ai', reply, true); }, 700);
+    setTimeout(() => { setTyping(false); addMsg('ai', reply, true); startRespTimer(); }, 700);
   } catch (_) {
     setTyping(false);
     addMsg('ai', 'Apologies — something went wrong. Please try again.');
@@ -2908,6 +3389,7 @@ function confirmExitSession() {
 }
 
 function endInterview() {
+  hideRespTimer();
   showScreen('feedback');
   // Count the candidate's own substantive answers (not the interviewer's messages)
   const userMsgs = state.messages.filter(m => m.role === 'user');
@@ -2942,6 +3424,21 @@ async function generateAIFeedback() {
   const transcript = state.messages
     .map(m => (m.role === 'user' ? (state.userName || 'CANDIDATE') : 'INTERVIEWER') + ': ' + m.content)
     .join('\n\n');
+
+  // Timing summary — how the candidate managed time pressure per answer.
+  let timingNote = '';
+  const ots = state.overtimes || [];
+  if (ots.length) {
+    const lateOnes = ots.filter(o => o.over > 0);
+    const totalOver = ots.reduce((n, o) => n + o.over, 0);
+    const worst = ots.reduce((m, o) => Math.max(m, o.over), 0);
+    if (!lateOnes.length) {
+      timingNote = `\n\nTIMING: The candidate answered all ${ots.length} responses within the time limit. Good time discipline — factor this positively into Communication.`;
+    } else {
+      const pct = Math.round((lateOnes.length / ots.length) * 100);
+      timingNote = `\n\nTIMING: The candidate ran over the response time limit on ${lateOnes.length} of ${ots.length} answers (${pct}%), totalling ${totalOver}s of overtime, with the worst single answer ${worst}s over. In a real interview, dwelling too long signals weak structuring under pressure. Reflect this in the COMMUNICATION score: minor occasional overruns are a small deduction; frequent or severe overruns (30s+) are a real weakness that should pull Communication down.`;
+    }
+  }
 
   const EVAL_SYSTEM = `You are a McKinsey/BCG/Bain Senior Partner giving a candidate their honest post-case debrief. You are demanding and you do NOT sugarcoat. Score on a 1.0–10.0 scale with ONE decimal (e.g. 6.5, 7.8). Most real candidates land 5.0–7.0; a 7.5+ is genuinely strong and a 9.0+ is rare and exceptional. Do not inflate. A vague or incomplete answer scores low, not "encouraging". Kindness here means honesty, not praise.
 
@@ -2990,7 +3487,7 @@ Return ONLY valid JSON (no markdown, no backticks). All five scores are 1.0–10
       ? `${state.drillType} drill`
       : `${state.firm || ''} ${state.caseType || ''} case interview`;
     const raw = await callAI(EVAL_SYSTEM + langInstruction(), [
-      { role: 'user', content: `Evaluate this ${evalCtx}:\n\n${transcript}` }
+      { role: 'user', content: `Evaluate this ${evalCtx}:\n\n${transcript}${timingNote}` }
     ], 'claude-sonnet-4-5');
     const clean = raw.replace(/```json|"```"/g, '').trim();
     const d = JSON.parse(clean);
@@ -3000,6 +3497,12 @@ Return ONLY valid JSON (no markdown, no backticks). All five scores are 1.0–10
     if (!isNaN(ov)) {
       const p = loadProgress();
       p.scores.push(Math.round(ov * 10) / 10);
+      // per-dimension history — the foundation for the personal path
+      const dimMap = { structure: d.structure, quant: d.quant, logic: d.logic, comm: d.communication, ownership: d.ownership };
+      Object.keys(dimMap).forEach(k => {
+        const dv = parseFloat(dimMap[k]);
+        if (!isNaN(dv)) p.dims[k].push(Math.round(dv * 10) / 10);
+      });
       saveProgress(p);
       if (currentUser) pushProgressToCloud();
     }
