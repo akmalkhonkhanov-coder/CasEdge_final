@@ -103,18 +103,11 @@
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body {
-      overscroll-behavior: none;
-      overflow-x: clip;
-      overflow-y: auto;
-      background: var(--surface-dark);
-    }
     body {
       background: var(--surface-dark);
       color: var(--on-dark);
       font-family: var(--font-sans);
       line-height: 1.5;
-      min-height: 100dvh;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
@@ -473,7 +466,7 @@
     .land-story-wrap { position: relative; }
     .land-story-wrap > section, .land-story-wrap > .land-cta-wrap { position: relative; z-index: 1; }
     /* Smooth scrolling for the whole landing */
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: auto; }
     /* 3D tilt on story cards - they react to cursor with real perspective */
     .ls-cards { perspective: 900px; }
     .ls-card {
