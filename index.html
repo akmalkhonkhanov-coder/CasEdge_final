@@ -457,7 +457,7 @@
     .ambient-bg span:nth-child(1) { width: 340px; height: 340px; top: 8%; left: -6%; }
     .ambient-bg span:nth-child(2) { width: 260px; height: 260px; top: 52%; right: -4%;
       background: radial-gradient(circle, rgba(93,184,166,.35), transparent 70%); animation-delay: -6s; }
-    .ambient-bg span:nth-child(3) { width: 300px; height: 300px; bottom: 4%; left: 30%; animation-delay: -11s; }
+    .ambient-bg span:nth-child(3) { width: 300px; height: 300px; top: 78%; left: 30%; animation-delay: -11s; }
     @keyframes drift {
       0%,100% { transform: translate(0,0) scale(1); }
       33% { transform: translate(40px,-30px) scale(1.08); }
@@ -953,7 +953,7 @@
       <span class="feat-pill" data-i18n="pill.nocard">Instant access</span>
     </div>
 
-    <button class="scroll-hint" onclick="document.getElementById('land-story').scrollIntoView({behavior:'smooth'})">
+    <button class="scroll-hint" onclick="scrollToStory()">
       Learn more
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
     </button>
@@ -1034,7 +1034,7 @@
   <footer class="land-footer">
     <div class="lf-inner">
       <div class="lf-brand">
-        <span class="wordmark"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
+        <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
         <p class="lf-tag" data-i18n="foot.tagline">MBB case interview prep - cases, drills, and partner-level feedback.</p>
       </div>
       <div class="lf-links">
@@ -1176,7 +1176,7 @@
 ═══════════════════════════════════════════════════ -->
 <div id="screen-mode" class="screen" data-screen-label="Mode">
   <nav class="top-nav">
-    <span class="wordmark"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
     <div style="display:flex;align-items:center;gap:6px;">
       <div class="nav-menu">
         <button class="nav-link" onclick="chooseMode('case')" data-i18n="nav.cases">Cases</button>
@@ -1187,6 +1187,7 @@
       </div>
       <button class="lang-btn" onclick="openLangMenu()"><span class="lang-current">EN</span> ▾</button>
       <div id="mode-user-pill"></div>
+      <button class="btn btn-ghost" onclick="showScreen('landing')" data-i18n="common.back">← Back</button>
     </div>
   </nav>
   <div class="setup-body">
@@ -1520,7 +1521,7 @@
 ═══════════════════════════════════════════════════ -->
 <div id="screen-feedback" class="screen" data-screen-label="Feedback">
   <nav class="top-nav">
-    <span class="wordmark"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
     <div class="int-badges">
       <span class="pill pill-neutral" id="fb-firm">McKinsey</span>
       <span class="pill pill-neutral" id="fb-type">Profitability</span>
@@ -2259,6 +2260,16 @@ function chooseMode(mode) {
   state.mode = mode;
   if (mode === 'case') showScreen('setup');
   else showScreen('drill');
+}
+
+// Smooth-scroll down to reveal the story section. We scroll by one viewport
+// height rather than to the element, because the .reveal sections use 3D
+// transforms that make getBoundingClientRect unreliable mid-animation.
+function scrollToStory() {
+  const main = document.querySelector('.landing-main');
+  const target = main ? main.getBoundingClientRect().height + window.scrollY - 40
+                      : window.innerHeight - 40;
+  window.scrollTo({ top: target, behavior: 'smooth' });
 }
 
 /* ══════════════════════════════════════════════════════════
