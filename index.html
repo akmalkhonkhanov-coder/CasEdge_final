@@ -253,7 +253,7 @@
     .lf-copy { max-width: 860px; margin: 32px auto 0; font-size: 12px; color: var(--on-dark-soft); opacity: .7; }
 
     /* ── Info pages (FAQ / Contact / Cookies) ── */
-    .info-body { max-width: 720px; margin: 0 auto; padding: 56px 24px 80px; width: 100%; }
+    .info-body { max-width: 720px; margin: 0 auto; padding: 56px 24px 80px; width: 100%; flex: 1 0 auto; }
     .info-eyebrow {
       font-size: 11px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase;
       color: var(--coral); margin-bottom: 16px;
@@ -422,10 +422,10 @@
     .nudge { animation: nudgeShake .42s cubic-bezier(.36,.07,.19,.97); }
 
     /* ── Scroll-reveal (Apple-style, 3D, two-way) ── */
-    .land-story-wrap { perspective: 1400px; }
+    .land-story-wrap { perspective: 1400px; overflow: clip; }
     .reveal {
       opacity: 0;
-      transform: translateY(60px) scale(.94) rotateX(8deg);
+      transform: scale(.94) rotateX(8deg);
       filter: blur(6px);
       transform-origin: center bottom;
       transition: opacity 1s cubic-bezier(.16,1,.3,1),
@@ -886,6 +886,63 @@
       .metrics-grid { grid-template-columns: repeat(2, 1fr); }
       .fb-block { padding: 20px; }
     }
+      /* ══════════ McKINSEY SOLVE GAME ══════════ */
+    #screen-solve { height: 100vh; height: 100dvh; overflow: hidden; background: var(--surface-dark); display: flex; flex-direction: column; }
+    .sv-topbar { display: flex; align-items: center; gap: 14px; padding: 11px 20px; border-bottom: 1px solid rgba(255,255,255,.07); flex-shrink: 0; }
+    [data-theme="light"] .sv-topbar { border-color: rgba(31,41,55,.1); }
+    .sv-exit { width: 30px; height: 30px; border-radius: 50%; border: none; background: rgba(255,255,255,.08); color: var(--on-dark); font-size: 19px; line-height: 1; cursor: pointer; flex-shrink: 0; transition: background .2s; }
+    .sv-exit:hover { background: rgba(255,255,255,.16); }
+    [data-theme="light"] .sv-exit { background: rgba(31,41,55,.08); }
+    .sv-phasewrap { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+    .sv-phases { display: flex; gap: 6px; align-items: center; }
+    .sv-phase { font-size: 11px; font-weight: 600; color: var(--on-dark-soft); padding: 3px 9px; border-radius: 20px; background: rgba(255,255,255,.06); letter-spacing: .02em; }
+    .sv-phase.active { background: var(--accent-teal); color: #04201b; }
+    .sv-phase.done { color: var(--accent-teal); }
+    .sv-progress-track { height: 5px; border-radius: 4px; background: rgba(255,255,255,.1); overflow: hidden; }
+    [data-theme="light"] .sv-progress-track { background: rgba(31,41,55,.1); }
+    .sv-progress-fill { height: 100%; width: 0%; border-radius: 4px; background: var(--accent-teal); transition: width .5s cubic-bezier(.22,1,.36,1); }
+    .sv-timer { font-size: 12.5px; font-weight: 700; color: var(--on-dark); font-variant-numeric: tabular-nums; flex-shrink: 0; }
+    .sv-timer.warn { color: var(--accent-coral); }
+    .sv-body { flex: 1; overflow-y: auto; padding: 26px 22px 120px; }
+    .sv-inner { max-width: 760px; margin: 0 auto; }
+    .sv-h { font-family: var(--serif); font-size: 21px; font-weight: 600; color: var(--on-dark); margin: 0 0 6px; }
+    .sv-sub { font-size: 13.5px; color: var(--on-dark-soft); margin: 0 0 22px; line-height: 1.5; }
+    .sv-prose { font-size: 15px; line-height: 2.05; color: var(--on-dark); }
+    .sv-inp { display: inline-block; min-width: 64px; width: 64px; text-align: center; background: rgba(93,184,166,.1); border: 1px solid rgba(93,184,166,.4); color: var(--on-dark); border-radius: 6px; padding: 2px 6px; font-size: 14px; font-family: var(--mono); margin: 0 2px; }
+    .sv-inp:focus { outline: none; border-color: var(--accent-teal); background: rgba(93,184,166,.18); }
+    .sv-exhibit { margin: 24px 0; border: 1px solid rgba(255,255,255,.12); border-radius: 12px; overflow: hidden; }
+    .sv-exhibit-t { font-size: 12.5px; font-weight: 700; color: var(--accent-teal); padding: 10px 14px; background: rgba(93,184,166,.07); letter-spacing: .03em; }
+    .sv-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+    .sv-table th, .sv-table td { padding: 9px 13px; text-align: left; border-top: 1px solid rgba(255,255,255,.07); color: var(--on-dark); }
+    .sv-table th { color: var(--on-dark-soft); font-weight: 600; font-size: 12px; }
+    .sv-table td.num { text-align: right; font-family: var(--mono); }
+    .sv-q { margin: 26px 0 0; padding: 18px 0 0; border-top: 1px solid rgba(255,255,255,.08); }
+    .sv-q-label { font-size: 12px; font-weight: 700; color: var(--accent-teal); letter-spacing: .04em; margin-bottom: 7px; }
+    .sv-q-text { font-size: 14.5px; color: var(--on-dark); line-height: 1.55; margin-bottom: 14px; }
+    .sv-field { display: flex; align-items: center; gap: 10px; margin: 10px 0; flex-wrap: wrap; }
+    .sv-field label { font-size: 13.5px; color: var(--on-dark-soft); min-width: 210px; }
+    .sv-numin { width: 130px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.18); color: var(--on-dark); border-radius: 8px; padding: 8px 11px; font-size: 14px; font-family: var(--mono); }
+    .sv-numin:focus { outline: none; border-color: var(--accent-teal); }
+    .sv-unit { font-size: 13px; color: var(--on-dark-soft); }
+    .sv-graphpick { display: flex; gap: 14px; margin: 8px 0 4px; flex-wrap: wrap; }
+    .sv-gcard { flex: 1; min-width: 130px; border: 1.5px solid rgba(255,255,255,.14); border-radius: 12px; padding: 16px; cursor: pointer; text-align: center; transition: border-color .2s, background .2s; background: rgba(255,255,255,.02); }
+    .sv-gcard:hover { border-color: rgba(93,184,166,.5); }
+    .sv-gcard.sel { border-color: var(--accent-teal); background: rgba(93,184,166,.1); }
+    .sv-gcard svg { width: 56px; height: 42px; margin-bottom: 8px; }
+    .sv-gcard .gl { font-size: 13px; font-weight: 600; color: var(--on-dark); }
+    .sv-select { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.18); color: var(--on-dark); border-radius: 8px; padding: 8px 11px; font-size: 13.5px; min-width: 180px; }
+    .sv-footer { position: absolute; bottom: 0; left: 0; right: 0; padding: 14px 22px; background: linear-gradient(transparent, var(--surface-dark) 30%); display: flex; justify-content: center; }
+    .sv-foot-inner { max-width: 760px; width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .sv-next { background: var(--accent-teal); color: #04201b; border: none; border-radius: 22px; padding: 11px 26px; font-size: 14px; font-weight: 700; cursor: pointer; transition: transform .15s, box-shadow .2s; }
+    .sv-next:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(93,184,166,.3); }
+    .sv-next:disabled { opacity: .4; cursor: not-allowed; transform: none; box-shadow: none; }
+    .sv-back { background: transparent; color: var(--on-dark-soft); border: 1px solid rgba(255,255,255,.18); border-radius: 22px; padding: 10px 20px; font-size: 13.5px; cursor: pointer; }
+    .sv-grade-ok { color: var(--accent-teal); }
+    .sv-grade-bad { color: var(--accent-coral); }
+    .sv-result-card { border: 1px solid rgba(255,255,255,.12); border-radius: 14px; padding: 20px; margin: 14px 0; }
+    .sv-result-row { display: flex; justify-content: space-between; padding: 9px 0; border-top: 1px solid rgba(255,255,255,.07); font-size: 13.5px; color: var(--on-dark); }
+    .sv-result-row:first-child { border-top: none; }
+
   </style>
   <!-- Bundler thumbnail -->
   
@@ -1219,7 +1276,7 @@
           </div>
           <div class="firm-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div>
         </div>
-        <div class="firm-card mode-soon" onclick="comingSoon('Solve Game')" tabindex="0" role="button">
+        <div class="firm-card mode-soon" onclick="startSolveGame()" tabindex="0" role="button">
           <div class="firm-initial" style="background:rgba(232,168,124,.15);color:#e8a87c;">S</div>
           <div>
             <div class="firm-name">Solve Game <span class="soon-badge">In Progress</span></div>
@@ -1311,6 +1368,26 @@
   </div>
   <div class="bcg-feed" id="bcgFeed"></div>
   <div class="bcg-inputzone" id="bcgInputZone"><!-- widget injected per question --></div>
+</div>
+
+
+<!-- ══════════ McKINSEY SOLVE GAME ══════════ -->
+<div id="screen-solve" class="screen" data-screen-label="Solve Game">
+  <div class="sv-topbar">
+    <button class="sv-exit" onclick="confirmExitSolve()" title="Exit">&times;</button>
+    <div class="sv-phasewrap">
+      <div class="sv-phases">
+        <span class="sv-phase" id="svPhase-study">Study</span>
+        <span class="sv-phase" id="svPhase-analysis">Analysis</span>
+        <span class="sv-phase" id="svPhase-report">Report</span>
+        <span class="sv-phase" id="svPhase-cases">Cases</span>
+      </div>
+      <div class="sv-progress-track"><div class="sv-progress-fill" id="svProgFill"></div></div>
+    </div>
+    <div class="sv-timer" id="svTimer">35:00</div>
+  </div>
+  <div class="sv-body" id="svBody"><div class="sv-inner" id="svInner"></div></div>
+  <div class="sv-footer"><div class="sv-foot-inner" id="svFooter"></div></div>
 </div>
 
 <div id="screen-drill" class="screen" data-screen-label="Drill">
@@ -2491,6 +2568,257 @@ function confirmExitBcg() {
   }
 }
 function goToMode() { showScreen('mode'); }
+
+
+/* ════════════════════════════════════════════════════
+   McKINSEY SOLVE GAME ENGINE
+   Format mirrors the real McKinsey Solve assessment
+   (Study -> Analysis -> Report -> Cases) but the scenario
+   "Veridian Reservoir" is ORIGINAL. Math verified.
+   Built on the BCG engine pattern. CasEdge-branded, not a
+   visual clone of McKinsey's UI.
+──────────────────────────────────────────────────── */
+const SOLVE_CASE = {
+  id: 'veridian',
+  totalMin: 35,
+  // ---- STUDY: fill-in-the-text + exhibit ----
+  study: {
+    title: 'Veridian Reservoir',
+    intro: 'All names in this study are fictional. You are analysing how the land around the Veridian Reservoir is divided between farms, a protective buffer zone, and unclaimed land, and whether the buffer zone grew in step with the three largest farms.',
+    // blanks the user must fill from the text (machine-checked)
+    blanks: [
+      { id:'area', pre:'The Veridian Reservoir basin covers a land area of ', post:' hectares (ha) and supports several agricultural draws as well as independent smallholdings.', ans:4800 },
+      { id:'farmpct', pre:'Three of the largest farms - North, Delta, and Ridge - have steadily expanded and currently occupy about ', post:' % of basin farmland. Several smaller holdings have also claimed land, with combined territory about ', ans:60 },
+      { id:'smallpct', pre:'', post:' % of the total land claimed by the three largest farms.', ans:20 },
+      { id:'bufY1', pre:'In year 1, planners designated ', post:' ha as a protective buffer zone. In year 4, the buffer was expanded to ', ans:245 },
+      { id:'bufY4', pre:'', post:' ha. Land not claimed by farms or dedicated to the buffer is called unclaimed land.', ans:262 },
+    ],
+    exhibit: {
+      title: 'Exhibit 1: Farm Territory Size By Year (ha)',
+      head: ['Farm','Year 1','Year 2','Year 3','Year 4'],
+      rows: [
+        ['North', 820, 845, 868, 902],
+        ['Delta', 410, 428, 447, 463],
+        ['Ridge', 533, 551, 570, 588],
+      ],
+    },
+  },
+  // ---- ANALYSIS: numeric questions ----
+  analysis: [
+    { id:'a1', label:'Question 1', text:'Calculate the year-4 area for each category. Round to one decimal where needed.',
+      fields:[
+        { id:'farms4', label:'Farms - 3 largest:', unit:'ha', ans:1953 },
+        { id:'small4', label:'Smallholdings:', unit:'ha', ans:390.6 },
+        { id:'buf4',  label:'Buffer zone:', unit:'ha', ans:262 },
+        { id:'uncl4', label:'Unclaimed land:', unit:'ha', ans:2194.4 },
+      ] },
+    { id:'a2', label:'Question 2', text:'Is the year-1 to year-4 growth rate of the buffer zone the same as the growth rate of the three largest farms\u2019 combined area? Round to two digits.',
+      fields:[
+        { id:'gbuf',  label:'Growth rate - buffer zone:', unit:'%', ans:6.94 },
+        { id:'gfarm', label:'Growth rate - 3 largest farms:', unit:'%', ans:10.78 },
+      ] },
+    { id:'a3', label:'Question 3', text:'Among North, Delta and Ridge, which farm had the largest average annual growth rate (no compounding)? List the farm and its average annual rate.',
+      fields:[
+        { id:'fastfarm', label:'Farm:', unit:'', ans:'Delta', isText:true },
+        { id:'fastrate', label:'Average annual growth rate:', unit:'%', ans:4.31 },
+      ] },
+  ],
+  // ---- REPORT: graph selection ----
+  report: {
+    prompt: 'Select the chart that best visualises the land breakdown of the Veridian basin in year 4 (a part-to-whole split across four categories).',
+    options: ['bar','line','pie'],
+    correct: 'pie',
+  },
+  // ---- CASES: one mini-case (biomass-style) ----
+  cases: [
+    { id:'c1', title:'Case 1',
+      intro:'Researchers logged plant biomass units (1 unit = 1 tonne) across three reserve zones around Veridian.',
+      exhibit:{ title:'Exhibit 1: Plant Biomass Units by Zone',
+        head:['Plant','Cove','Marsh','Bluff','Total'],
+        rows:[ ['Trees',15,9,8,32], ['Shrubs',5,7,6,18], ['Grasses','n/a',14,16,30], ['Total',20,30,30,80] ] },
+      q:'If tree biomass doubled, what would be the average biomass units per plant type in each zone? Round to two digits.',
+      fields:[
+        { id:'cove', label:'Cove average:', unit:'', ans:11.67 },
+        { id:'marsh', label:'Marsh average:', unit:'', ans:13 },
+        { id:'bluff', label:'Bluff average:', unit:'', ans:12.67 },
+      ] },
+  ],
+};
+
+let solve = null;
+
+function startSolveGame() {
+  if (typeof requireAuth === 'function' && !requireAuth()) return;
+  solve = { phase:'study', qIndex:0, answers:{}, graded:{}, secs: SOLVE_CASE.totalMin*60, timerId:null };
+  showScreen('solve');
+  startSolveTimer();
+  renderSolve();
+}
+
+function startSolveTimer() {
+  const el = document.getElementById('svTimer');
+  const tick = () => {
+    const m = Math.floor(solve.secs/60), s = solve.secs%60;
+    el.textContent = `${m}:${String(s).padStart(2,'0')}`;
+    el.classList.toggle('warn', solve.secs <= 300);
+    if (solve.secs <= 0) { clearInterval(solve.timerId); el.textContent = 'Time up'; }
+    solve.secs--;
+  };
+  tick();
+  solve.timerId = setInterval(tick, 1000);
+}
+
+function svSetPhaseUI() {
+  const order = ['study','analysis','report','cases'];
+  const cur = order.indexOf(solve.phase);
+  order.forEach((p,i) => {
+    const el = document.getElementById('svPhase-'+p);
+    el.classList.toggle('active', i === cur);
+    el.classList.toggle('done', i < cur);
+  });
+  document.getElementById('svProgFill').style.width = ((cur)/order.length*100 + (1/order.length)*50) + '%';
+}
+
+function renderSolve() {
+  svSetPhaseUI();
+  const inner = document.getElementById('svInner');
+  const foot = document.getElementById('svFooter');
+  if (solve.phase === 'study')      renderSolveStudy(inner, foot);
+  else if (solve.phase === 'analysis') renderSolveAnalysis(inner, foot);
+  else if (solve.phase === 'report')   renderSolveReport(inner, foot);
+  else if (solve.phase === 'cases')    renderSolveCases(inner, foot);
+  else if (solve.phase === 'result')   renderSolveResult(inner, foot);
+  document.getElementById('svBody').scrollTop = 0;
+}
+
+function renderSolveStudy(inner, foot) {
+  const s = SOLVE_CASE.study;
+  let prose = '';
+  s.blanks.forEach(b => {
+    prose += esc(b.pre) + `<input class="sv-inp" id="sv-${b.id}" inputmode="numeric" value="${solve.answers[b.id]||''}" oninput="solve.answers['${b.id}']=this.value">` + esc(b.post);
+  });
+  let ex = svExhibitHTML(s.exhibit);
+  inner.innerHTML = `<h2 class="sv-h">${esc(s.title)}</h2>
+    <p class="sv-sub">${esc(s.intro)}</p>
+    <div class="sv-prose">${prose}</div>${ex}`;
+  foot.innerHTML = `<span></span><button class="sv-next" onclick="solvePhaseNext()">Finished collecting &rarr;</button>`;
+}
+
+function svExhibitHTML(ex) {
+  let h = `<div class="sv-exhibit"><div class="sv-exhibit-t">${esc(ex.title)}</div><table class="sv-table"><thead><tr>`;
+  ex.head.forEach((c,i) => h += `<th${i>0?' style="text-align:right"':''}>${esc(c)}</th>`);
+  h += `</tr></thead><tbody>`;
+  ex.rows.forEach(r => {
+    h += '<tr>';
+    r.forEach((c,i) => h += i===0 ? `<td>${esc(String(c))}</td>` : `<td class="num">${esc(String(c))}</td>`);
+    h += '</tr>';
+  });
+  return h + '</tbody></table></div>';
+}
+
+function renderSolveAnalysis(inner, foot) {
+  const q = SOLVE_CASE.analysis[solve.qIndex];
+  let fields = q.fields.map(f =>
+    `<div class="sv-field"><label>${esc(f.label)}</label>
+      <input class="sv-numin" id="sv-${f.id}" value="${solve.answers[f.id]||''}" oninput="solve.answers['${f.id}']=this.value">
+      <span class="sv-unit">${esc(f.unit)}</span></div>`).join('');
+  inner.innerHTML = `<div class="sv-q-label">${esc(q.label)} of ${SOLVE_CASE.analysis.length} \u00b7 Analysis</div>
+    <div class="sv-q-text">${esc(q.text)}</div>${fields}`;
+  const last = solve.qIndex === SOLVE_CASE.analysis.length - 1;
+  foot.innerHTML = `<button class="sv-back" onclick="solvePhasePrev()">&larr; Back</button>
+    <button class="sv-next" onclick="solveAnalysisNext()">${last?'Go to Report':'Next question'} &rarr;</button>`;
+}
+
+function solveAnalysisNext() {
+  if (solve.qIndex < SOLVE_CASE.analysis.length - 1) { solve.qIndex++; renderSolve(); }
+  else { solve.phase = 'report'; solve.qIndex = 0; renderSolve(); }
+}
+
+function renderSolveReport(inner, foot) {
+  const r = SOLVE_CASE.report;
+  const icons = {
+    bar:'<svg viewBox="0 0 56 42"><rect x="6" y="20" width="9" height="18" fill="#5db8a6"/><rect x="20" y="10" width="9" height="28" fill="#e8916b"/><rect x="34" y="24" width="9" height="14" fill="#5db8a6"/></svg>',
+    line:'<svg viewBox="0 0 56 42" fill="none" stroke="#5db8a6" stroke-width="2.5"><path d="M6 30 L20 16 L34 22 L48 8"/></svg>',
+    pie:'<svg viewBox="0 0 56 42"><circle cx="28" cy="21" r="16" fill="#5db8a6"/><path d="M28 21 L28 5 A16 16 0 0 1 44 21 Z" fill="#e8916b"/><path d="M28 21 L44 21 A16 16 0 0 1 36 35 Z" fill="#7c8ce8"/></svg>',
+  };
+  let cards = r.options.map(o =>
+    `<div class="sv-gcard ${solve.answers.graph===o?'sel':''}" onclick="solve.answers.graph='${o}';renderSolve()">
+      ${icons[o]}<div class="gl">${o.charAt(0).toUpperCase()+o.slice(1)} chart</div></div>`).join('');
+  inner.innerHTML = `<div class="sv-q-label">Report \u00b7 Graph selection</div>
+    <div class="sv-q-text">${esc(r.prompt)}</div>
+    <div class="sv-graphpick">${cards}</div>`;
+  foot.innerHTML = `<button class="sv-back" onclick="solvePhasePrev()">&larr; Back</button>
+    <button class="sv-next" ${solve.answers.graph?'':'disabled'} onclick="solve.phase='cases';solve.qIndex=0;renderSolve()">Go to Cases &rarr;</button>`;
+}
+
+function renderSolveCases(inner, foot) {
+  const c = SOLVE_CASE.cases[solve.qIndex];
+  let fields = c.fields.map(f =>
+    `<div class="sv-field"><label>${esc(f.label)}</label>
+      <input class="sv-numin" id="sv-${f.id}" value="${solve.answers[f.id]||''}" oninput="solve.answers['${f.id}']=this.value">
+      <span class="sv-unit">${esc(f.unit)}</span></div>`).join('');
+  inner.innerHTML = `<div class="sv-q-label">${esc(c.title)} \u00b7 Cases</div>
+    <p class="sv-sub">${esc(c.intro)}</p>${svExhibitHTML(c.exhibit)}
+    <div class="sv-q-text">${esc(c.q)}</div>${fields}`;
+  foot.innerHTML = `<button class="sv-back" onclick="solve.phase='report';renderSolve()">&larr; Back</button>
+    <button class="sv-next" onclick="solveFinish()">Submit &amp; see results &rarr;</button>`;
+}
+
+function solvePhaseNext() {
+  if (solve.phase === 'study') { solve.phase = 'analysis'; solve.qIndex = 0; renderSolve(); }
+}
+function solvePhasePrev() {
+  if (solve.phase === 'analysis') {
+    if (solve.qIndex > 0) { solve.qIndex--; renderSolve(); }
+    else { solve.phase = 'study'; renderSolve(); }
+  } else if (solve.phase === 'report') { solve.phase = 'analysis'; solve.qIndex = SOLVE_CASE.analysis.length-1; renderSolve(); }
+}
+
+function svCheck(ans, val, isText) {
+  if (val == null || val === '') return false;
+  if (isText) return String(val).trim().toLowerCase() === String(ans).toLowerCase();
+  const n = parseFloat(String(val).replace(/[, ]/g,''));
+  if (isNaN(n)) return false;
+  return Math.abs(n - ans) <= Math.max(0.05, Math.abs(ans)*0.01); // 1% or 0.05 tolerance
+}
+
+function solveFinish() {
+  if (solve.timerId) clearInterval(solve.timerId);
+  let correct = 0, total = 0, lines = [];
+  // study blanks
+  SOLVE_CASE.study.blanks.forEach(b => { total++; const ok = svCheck(b.ans, solve.answers[b.id]); if(ok)correct++; });
+  // analysis
+  SOLVE_CASE.analysis.forEach(q => q.fields.forEach(f => { total++; const ok = svCheck(f.ans, solve.answers[f.id], f.isText); if(ok)correct++;
+    lines.push(`<div class="sv-result-row"><span>${esc(f.label)}</span><span class="${ok?'sv-grade-ok':'sv-grade-bad'}">${ok?'\u2713':'\u2717'} ${esc(String(f.ans))}${esc(f.unit)}</span></div>`); }));
+  // report
+  total++; const gOk = solve.answers.graph === SOLVE_CASE.report.correct; if(gOk)correct++;
+  lines.push(`<div class="sv-result-row"><span>Best chart</span><span class="${gOk?'sv-grade-ok':'sv-grade-bad'}">${gOk?'\u2713':'\u2717'} ${SOLVE_CASE.report.correct} chart</span></div>`);
+  // cases
+  SOLVE_CASE.cases.forEach(c => c.fields.forEach(f => { total++; const ok = svCheck(f.ans, solve.answers[f.id]); if(ok)correct++;
+    lines.push(`<div class="sv-result-row"><span>${esc(c.title)} \u00b7 ${esc(f.label)}</span><span class="${ok?'sv-grade-ok':'sv-grade-bad'}">${ok?'\u2713':'\u2717'} ${esc(String(f.ans))}</span></div>`); }));
+  solve.phase = 'result'; solve.result = { correct, total, lines };
+  svSetPhaseUI();
+  try { const pctScore = Math.round(correct/total*100); recordSession('case', 'Solve Game', pctScore/10); } catch(e){}
+  renderSolve();
+}
+
+function renderSolveResult(inner, foot) {
+  const r = solve.result;
+  const pct = Math.round(r.correct/r.total*100);
+  inner.innerHTML = `<h2 class="sv-h">Solve Game \u2014 results</h2>
+    <p class="sv-sub">Machine-graded score: <strong>${r.correct} / ${r.total}</strong> (${pct}%). Text-fill and numeric answers are checked against the verified solution within a 1% tolerance.</p>
+    <div class="sv-result-card">${r.lines.join('')}</div>
+    <p class="sv-sub">This is the first verified Solve case (Veridian Reservoir). The full case library and AI feedback on open answers are on the roadmap.</p>`;
+  foot.innerHTML = `<span></span><button class="sv-next" onclick="showScreen('mode')">Back to modes</button>`;
+}
+
+function confirmExitSolve() {
+  if (confirm('Leave the Solve Game? Your progress in this session will be lost.')) {
+    if (solve && solve.timerId) clearInterval(solve.timerId);
+    showScreen('mode');
+  }
+}
+
 
 function comingSoon(name) {
   let t = document.getElementById('soon-toast');
@@ -3790,7 +4118,10 @@ function applyTheme(theme) {
           const wrap = document.querySelector('.land-story-wrap');
           if (wrap) {
             const rect = wrap.getBoundingClientRect();
-            const offset = rect.top * -0.28; // stronger parallax depth
+            // Clamp the parallax offset so the ambient layer never drifts far
+            // enough to add scrollable empty space below the footer.
+            let offset = rect.top * -0.28;
+            offset = Math.max(-120, Math.min(120, offset));
             amb.style.transform = `translateY(${offset}px)`;
           }
           ticking = false;
