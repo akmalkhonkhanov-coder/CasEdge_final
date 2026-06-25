@@ -22,6 +22,7 @@
       --ink: #141413; --body-strong: #252523; --body: #3d3d3a;
       --muted: #6c6a64; --muted-soft: #8e8b82;
       --on-primary: #ffffff; --on-dark: #faf9f5; --on-dark-soft: #a09d96;
+      --sv-line: rgba(255,255,255,.12); --sv-line-soft: rgba(255,255,255,.07); --sv-fill: rgba(255,255,255,.06); --sv-fill-hover: rgba(255,255,255,.16);
       --success: #5db872; --warning: #d4a017; --error: #c64545;
       --color-primary: var(--coral); --color-primary-active: var(--coral-active);
       --bg-canvas: var(--canvas); --bg-dark: var(--surface-dark);
@@ -41,6 +42,7 @@
       --surface-dark-soft: #efe9dd;
       --on-dark: #1f2937;               /* primary text → dark slate-blue */
       --on-dark-soft: #5b6472;          /* secondary text → muted slate */
+      --sv-line: rgba(31,41,55,.14); --sv-line-soft: rgba(31,41,55,.08); --sv-fill: rgba(31,41,55,.05); --sv-fill-hover: rgba(31,41,55,.12);
       --ink: #1f2937;
       --body: #3d4451;
       --body-strong: #1f2937;
@@ -99,7 +101,61 @@
       --shadow-card-hover:0 4px 16px rgba(20,20,19,.08);
       --ring-coral:0 0 0 3px rgba(204,120,92,.15);
     }
-  </style>
+    /* ══════════ GAME INTRO SCREENS ══════════ */
+    #screen-gameintro { min-height: 100vh; min-height: 100dvh; background: var(--surface-dark); flex-direction: column; }
+    #screen-gameintro.active { display: flex; }
+    .gi-body { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 22px; }
+    .gi-card { max-width: 600px; width: 100%; }
+    .gi-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-teal); margin-bottom: 10px; }
+    .gi-title { font-family: var(--serif); font-size: 30px; font-weight: 600; color: var(--on-dark); margin: 0 0 14px; line-height: 1.15; }
+    .gi-lead { font-size: 15px; line-height: 1.6; color: var(--on-dark-soft); margin: 0 0 26px; }
+    .gi-steps { display: flex; flex-direction: column; gap: 14px; margin-bottom: 26px; }
+    .gi-step { display: flex; gap: 14px; align-items: flex-start; }
+    .gi-step-n { flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: rgba(93,184,166,.15); color: var(--accent-teal); font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+    .gi-step-t { font-size: 14px; color: var(--on-dark); line-height: 1.5; }
+    .gi-step-t b { color: var(--on-dark); font-weight: 650; }
+    .gi-meta { display: flex; gap: 22px; flex-wrap: wrap; padding: 16px 0; border-top: 1px solid var(--sv-line-soft); border-bottom: 1px solid var(--sv-line-soft); margin-bottom: 26px; }
+    .gi-meta-item { font-size: 13px; color: var(--on-dark-soft); }
+    .gi-meta-item b { display: block; font-size: 18px; color: var(--on-dark); font-weight: 700; margin-top: 2px; }
+    .gi-actions { display: flex; gap: 12px; align-items: center; }
+    .gi-start { background: var(--accent-teal); color: #04201b; border: none; border-radius: 24px; padding: 13px 30px; font-size: 15px; font-weight: 700; cursor: pointer; transition: transform .15s, box-shadow .2s; }
+    .gi-start:hover { transform: translateY(-1px); box-shadow: 0 8px 26px rgba(93,184,166,.32); }
+    .gi-back { background: transparent; color: var(--on-dark-soft); border: 1px solid var(--sv-line); border-radius: 24px; padding: 12px 22px; font-size: 14px; cursor: pointer; }
+    .gi-note { font-size: 12.5px; color: var(--on-dark-soft); margin-top: 16px; line-height: 1.5; opacity: .85; }
+
+      /* ══════════ CX FEATURES: stats strip, onboarding, resume ══════════ */
+    .cx-stats { display: flex; gap: 14px; flex-wrap: wrap; margin: 0 0 26px; }
+    .cx-stat { flex: 1; min-width: 120px; background: var(--surface-dark-elevated); border: 1px solid var(--sv-line-soft); border-radius: 14px; padding: 16px 18px; }
+    .cx-stat-num { font-family: var(--serif); font-size: 26px; font-weight: 600; color: var(--on-dark); line-height: 1; display: flex; align-items: baseline; gap: 5px; }
+    .cx-stat-num .cx-flame { font-size: 20px; }
+    .cx-stat-lbl { font-size: 12px; color: var(--on-dark-soft); margin-top: 6px; letter-spacing: .01em; }
+    .cx-stat.cx-accent .cx-stat-num { color: var(--accent-teal); }
+    .cx-resume { display: flex; align-items: center; justify-content: space-between; gap: 14px; background: rgba(93,184,166,.09); border: 1px solid rgba(93,184,166,.3); border-radius: 14px; padding: 14px 18px; margin: 0 0 22px; flex-wrap: wrap; }
+    .cx-resume-txt { font-size: 13.5px; color: var(--on-dark); }
+    .cx-resume-txt b { font-weight: 650; }
+    .cx-resume-btns { display: flex; gap: 8px; }
+    .cx-resume-go { background: var(--accent-teal); color: #04201b; border: none; border-radius: 20px; padding: 8px 18px; font-size: 13px; font-weight: 700; cursor: pointer; }
+    .cx-resume-x { background: transparent; color: var(--on-dark-soft); border: 1px solid var(--sv-line); border-radius: 20px; padding: 8px 14px; font-size: 13px; cursor: pointer; }
+    /* Onboarding modal */
+    .cx-ob-overlay { position: fixed; inset: 0; background: rgba(10,11,15,.62); backdrop-filter: blur(4px); z-index: 9000; display: flex; align-items: center; justify-content: center; padding: 22px; opacity: 0; pointer-events: none; transition: opacity .25s; }
+    .cx-ob-overlay.show { opacity: 1; pointer-events: auto; }
+    .cx-ob { background: var(--surface-dark-elevated); border: 1px solid var(--sv-line); border-radius: 20px; max-width: 460px; width: 100%; padding: 30px 28px 24px; box-shadow: 0 30px 80px rgba(0,0,0,.4); transform: translateY(12px); transition: transform .25s; }
+    .cx-ob-overlay.show .cx-ob { transform: translateY(0); }
+    .cx-ob-step { display: none; }
+    .cx-ob-step.active { display: block; animation: fadeUp .3s ease both; }
+    .cx-ob-ic { width: 52px; height: 52px; border-radius: 14px; background: rgba(93,184,166,.14); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+    .cx-ob-ic svg { width: 28px; height: 28px; stroke: var(--accent-teal); fill: none; stroke-width: 2; }
+    .cx-ob-t { font-family: var(--serif); font-size: 22px; font-weight: 600; color: var(--on-dark); margin: 0 0 8px; }
+    .cx-ob-d { font-size: 14.5px; line-height: 1.55; color: var(--on-dark-soft); margin: 0 0 22px; }
+    .cx-ob-foot { display: flex; align-items: center; justify-content: space-between; }
+    .cx-ob-dots { display: flex; gap: 6px; }
+    .cx-ob-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--sv-line); transition: background .2s, width .2s; }
+    .cx-ob-dot.on { background: var(--accent-teal); width: 18px; border-radius: 4px; }
+    .cx-ob-btns { display: flex; gap: 8px; }
+    .cx-ob-skip { background: transparent; color: var(--on-dark-soft); border: none; font-size: 13px; cursor: pointer; padding: 9px 12px; }
+    .cx-ob-next { background: var(--accent-teal); color: #04201b; border: none; border-radius: 20px; padding: 9px 22px; font-size: 13.5px; font-weight: 700; cursor: pointer; }
+
+    </style>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -887,60 +943,62 @@
       .fb-block { padding: 20px; }
     }
       /* ══════════ McKINSEY SOLVE GAME ══════════ */
-    #screen-solve { height: 100vh; height: 100dvh; overflow: hidden; background: var(--surface-dark); display: flex; flex-direction: column; }
-    .sv-topbar { display: flex; align-items: center; gap: 14px; padding: 11px 20px; border-bottom: 1px solid rgba(255,255,255,.07); flex-shrink: 0; }
+    #screen-solve { height: 100vh; height: 100dvh; max-height: 100vh; max-height: 100dvh; min-height: 0; overflow: hidden; background: var(--surface-dark); flex-direction: column; }
+    #screen-solve.active { display: flex; min-height: 0; }
+    .sv-topbar { display: flex; align-items: center; gap: 14px; padding: 11px 20px; border-bottom: 1px solid var(--sv-line-soft); flex-shrink: 0; }
     [data-theme="light"] .sv-topbar { border-color: rgba(31,41,55,.1); }
-    .sv-exit { width: 30px; height: 30px; border-radius: 50%; border: none; background: rgba(255,255,255,.08); color: var(--on-dark); font-size: 19px; line-height: 1; cursor: pointer; flex-shrink: 0; transition: background .2s; }
-    .sv-exit:hover { background: rgba(255,255,255,.16); }
+    .sv-exit { width: 30px; height: 30px; border-radius: 50%; border: none; background: var(--sv-line-soft); color: var(--on-dark); font-size: 19px; line-height: 1; cursor: pointer; flex-shrink: 0; transition: background .2s; }
+    .sv-exit:hover { background: var(--sv-fill-hover); }
     [data-theme="light"] .sv-exit { background: rgba(31,41,55,.08); }
     .sv-phasewrap { flex: 1; display: flex; flex-direction: column; gap: 5px; }
     .sv-phases { display: flex; gap: 6px; align-items: center; }
-    .sv-phase { font-size: 11px; font-weight: 600; color: var(--on-dark-soft); padding: 3px 9px; border-radius: 20px; background: rgba(255,255,255,.06); letter-spacing: .02em; }
+    .sv-phase { font-size: 11px; font-weight: 600; color: var(--on-dark-soft); padding: 3px 9px; border-radius: 20px; background: var(--sv-fill); letter-spacing: .02em; }
     .sv-phase.active { background: var(--accent-teal); color: #04201b; }
     .sv-phase.done { color: var(--accent-teal); }
-    .sv-progress-track { height: 5px; border-radius: 4px; background: rgba(255,255,255,.1); overflow: hidden; }
+    .sv-progress-track { height: 5px; border-radius: 4px; background: var(--sv-fill); overflow: hidden; }
     [data-theme="light"] .sv-progress-track { background: rgba(31,41,55,.1); }
     .sv-progress-fill { height: 100%; width: 0%; border-radius: 4px; background: var(--accent-teal); transition: width .5s cubic-bezier(.22,1,.36,1); }
     .sv-timer { font-size: 12.5px; font-weight: 700; color: var(--on-dark); font-variant-numeric: tabular-nums; flex-shrink: 0; }
     .sv-timer.warn { color: var(--accent-coral); }
-    .sv-body { flex: 1; overflow-y: auto; padding: 26px 22px 120px; }
+    .sv-timer.over { color: var(--accent-coral); }
+    .sv-body { flex: 1; overflow-y: auto; padding: 26px 22px 40px; min-height: 0; }
     .sv-inner { max-width: 760px; margin: 0 auto; }
     .sv-h { font-family: var(--serif); font-size: 21px; font-weight: 600; color: var(--on-dark); margin: 0 0 6px; }
     .sv-sub { font-size: 13.5px; color: var(--on-dark-soft); margin: 0 0 22px; line-height: 1.5; }
     .sv-prose { font-size: 15px; line-height: 2.05; color: var(--on-dark); }
     .sv-inp { display: inline-block; min-width: 64px; width: 64px; text-align: center; background: rgba(93,184,166,.1); border: 1px solid rgba(93,184,166,.4); color: var(--on-dark); border-radius: 6px; padding: 2px 6px; font-size: 14px; font-family: var(--mono); margin: 0 2px; }
     .sv-inp:focus { outline: none; border-color: var(--accent-teal); background: rgba(93,184,166,.18); }
-    .sv-exhibit { margin: 24px 0; border: 1px solid rgba(255,255,255,.12); border-radius: 12px; overflow: hidden; }
+    .sv-exhibit { margin: 24px 0; border: 1px solid var(--sv-line); border-radius: 12px; overflow: hidden; }
     .sv-exhibit-t { font-size: 12.5px; font-weight: 700; color: var(--accent-teal); padding: 10px 14px; background: rgba(93,184,166,.07); letter-spacing: .03em; }
     .sv-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
-    .sv-table th, .sv-table td { padding: 9px 13px; text-align: left; border-top: 1px solid rgba(255,255,255,.07); color: var(--on-dark); }
+    .sv-table th, .sv-table td { padding: 9px 13px; text-align: left; border-top: 1px solid var(--sv-line-soft); color: var(--on-dark); }
     .sv-table th { color: var(--on-dark-soft); font-weight: 600; font-size: 12px; }
     .sv-table td.num { text-align: right; font-family: var(--mono); }
-    .sv-q { margin: 26px 0 0; padding: 18px 0 0; border-top: 1px solid rgba(255,255,255,.08); }
+    .sv-q { margin: 26px 0 0; padding: 18px 0 0; border-top: 1px solid var(--sv-line-soft); }
     .sv-q-label { font-size: 12px; font-weight: 700; color: var(--accent-teal); letter-spacing: .04em; margin-bottom: 7px; }
     .sv-q-text { font-size: 14.5px; color: var(--on-dark); line-height: 1.55; margin-bottom: 14px; }
     .sv-field { display: flex; align-items: center; gap: 10px; margin: 10px 0; flex-wrap: wrap; }
     .sv-field label { font-size: 13.5px; color: var(--on-dark-soft); min-width: 210px; }
-    .sv-numin { width: 130px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.18); color: var(--on-dark); border-radius: 8px; padding: 8px 11px; font-size: 14px; font-family: var(--mono); }
+    .sv-numin { width: 130px; background: var(--sv-fill); border: 1px solid var(--sv-line); color: var(--on-dark); border-radius: 8px; padding: 8px 11px; font-size: 14px; font-family: var(--mono); }
     .sv-numin:focus { outline: none; border-color: var(--accent-teal); }
     .sv-unit { font-size: 13px; color: var(--on-dark-soft); }
     .sv-graphpick { display: flex; gap: 14px; margin: 8px 0 4px; flex-wrap: wrap; }
-    .sv-gcard { flex: 1; min-width: 130px; border: 1.5px solid rgba(255,255,255,.14); border-radius: 12px; padding: 16px; cursor: pointer; text-align: center; transition: border-color .2s, background .2s; background: rgba(255,255,255,.02); }
+    .sv-gcard { flex: 1; min-width: 130px; border: 1.5px solid var(--sv-line); border-radius: 12px; padding: 16px; cursor: pointer; text-align: center; transition: border-color .2s, background .2s; background: var(--sv-fill); }
     .sv-gcard:hover { border-color: rgba(93,184,166,.5); }
     .sv-gcard.sel { border-color: var(--accent-teal); background: rgba(93,184,166,.1); }
     .sv-gcard svg { width: 56px; height: 42px; margin-bottom: 8px; }
     .sv-gcard .gl { font-size: 13px; font-weight: 600; color: var(--on-dark); }
-    .sv-select { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.18); color: var(--on-dark); border-radius: 8px; padding: 8px 11px; font-size: 13.5px; min-width: 180px; }
-    .sv-footer { position: absolute; bottom: 0; left: 0; right: 0; padding: 14px 22px; background: linear-gradient(transparent, var(--surface-dark) 30%); display: flex; justify-content: center; }
+    .sv-select { background: var(--sv-fill); border: 1px solid var(--sv-line); color: var(--on-dark); border-radius: 8px; padding: 8px 11px; font-size: 13.5px; min-width: 180px; }
+    .sv-footer { flex-shrink: 0; padding: 14px 22px; background: var(--surface-dark); border-top: 1px solid var(--sv-line-soft); display: flex; justify-content: center; }
     .sv-foot-inner { max-width: 760px; width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
     .sv-next { background: var(--accent-teal); color: #04201b; border: none; border-radius: 22px; padding: 11px 26px; font-size: 14px; font-weight: 700; cursor: pointer; transition: transform .15s, box-shadow .2s; }
     .sv-next:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(93,184,166,.3); }
     .sv-next:disabled { opacity: .4; cursor: not-allowed; transform: none; box-shadow: none; }
-    .sv-back { background: transparent; color: var(--on-dark-soft); border: 1px solid rgba(255,255,255,.18); border-radius: 22px; padding: 10px 20px; font-size: 13.5px; cursor: pointer; }
+    .sv-back { background: transparent; color: var(--on-dark-soft); border: 1px solid var(--sv-line); border-radius: 22px; padding: 10px 20px; font-size: 13.5px; cursor: pointer; }
     .sv-grade-ok { color: var(--accent-teal); }
     .sv-grade-bad { color: var(--accent-coral); }
-    .sv-result-card { border: 1px solid rgba(255,255,255,.12); border-radius: 14px; padding: 20px; margin: 14px 0; }
-    .sv-result-row { display: flex; justify-content: space-between; padding: 9px 0; border-top: 1px solid rgba(255,255,255,.07); font-size: 13.5px; color: var(--on-dark); }
+    .sv-result-card { border: 1px solid var(--sv-line); border-radius: 14px; padding: 20px; margin: 14px 0; }
+    .sv-result-row { display: flex; justify-content: space-between; padding: 9px 0; border-top: 1px solid var(--sv-line-soft); font-size: 13.5px; color: var(--on-dark); }
     .sv-result-row:first-child { border-top: none; }
 
   </style>
@@ -1251,6 +1309,8 @@
     <div class="setup-sec">
       <div class="sec-eyebrow" data-i18n="mode.eyebrow">Choose your practice</div>
       <div class="sec-title" data-i18n="mode.title">How do you want to train today?</div>
+      <div id="cxResumeHost"></div>
+      <div id="cxStatsHost"></div>
       <div class="firm-grid">
         <div class="firm-card" onclick="chooseMode('case')" tabindex="0" role="button">
           <div class="firm-initial" style="background:rgba(204,120,92,.15);color:var(--coral);">F</div>
@@ -1268,7 +1328,7 @@
           </div>
           <div class="firm-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div>
         </div>
-        <div class="firm-card" onclick="startBcgGame()" tabindex="0" role="button">
+        <div class="firm-card" onclick="openGameIntro('bcg')" tabindex="0" role="button">
           <div class="firm-initial" style="background:rgba(124,140,232,.15);color:#7c8ce8;">B</div>
           <div>
             <div class="firm-name">BCG Chat Game <span class="soon-badge" style="background:rgba(93,184,166,.18);color:var(--accent-teal);">Premium</span></div>
@@ -1276,11 +1336,11 @@
           </div>
           <div class="firm-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div>
         </div>
-        <div class="firm-card mode-soon" onclick="startSolveGame()" tabindex="0" role="button">
+        <div class="firm-card" onclick="openGameIntro('solve')" tabindex="0" role="button">
           <div class="firm-initial" style="background:rgba(232,168,124,.15);color:#e8a87c;">S</div>
           <div>
-            <div class="firm-name">Solve Game <span class="soon-badge">In Progress</span></div>
-            <div class="firm-desc">McKinsey-style problem-solving game - ecosystem builds, redistribution, scenario logic. Coming next.</div>
+            <div class="firm-name">Solve Game <span class="soon-badge" style="background:rgba(93,184,166,.18);color:var(--accent-teal);">Premium</span></div>
+            <div class="firm-desc">McKinsey-style problem-solving game - four phases, ecosystem data, auto-graded. The screening format before the live interview.</div>
           </div>
           <div class="firm-check soon-lock"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
         </div>
@@ -1354,6 +1414,15 @@
       <p class="prog-note">Progress is saved to your account and syncs across devices.</p>
     </div>
   </div>
+</div>
+
+
+<!-- ══════════ GAME INTRO (shared) ══════════ -->
+<div id="screen-gameintro" class="screen" data-screen-label="Game Intro">
+  <nav class="top-nav">
+    <span class="wordmark" onclick="showScreen('mode')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
+  </nav>
+  <div class="gi-body"><div class="gi-card" id="giCard"></div></div>
 </div>
 
 <!-- ══════════ BCG CHAT GAME ══════════ -->
@@ -1894,9 +1963,18 @@ function selectDrill(type, el) {
 }
 
 async function callAI(system, messages, model) {
+  // Attach the logged-in user's Supabase token so the proxy can verify the request.
+  const headers = { 'Content-Type': 'application/json' };
+  try {
+    if (sb) {
+      const { data } = await sb.auth.getSession();
+      const token = data && data.session && data.session.access_token;
+      if (token) headers['Authorization'] = 'Bearer ' + token;
+    }
+  } catch (e) { /* no session - proxy will reject with 401 */ }
   const response = await fetch('/api/claude', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: headers,
     body: JSON.stringify({
       model: model || 'claude-sonnet-4-5',
       max_tokens: 1000,
@@ -2213,6 +2291,10 @@ function rememberCase(summary) {
 function showScreen(id, fromPop) {
   // Stop the response timer whenever we leave the live interview/drill screens
   if (id !== 'interview' && id !== 'drill' && typeof hideRespTimer === 'function') hideRespTimer();
+  // Stop game timers whenever we leave their screens (prevents runaway intervals)
+  if (id !== 'solve' && typeof solve === 'object' && solve && solve.timerId) { clearInterval(solve.timerId); solve.timerId = null; }
+  if (id !== 'bcg' && typeof bcg === 'object' && bcg && bcg.timerId) { clearInterval(bcg.timerId); bcg.timerId = null; }
+  if (id === 'mode' && typeof cxRefreshMode === 'function') { try { cxRefreshMode(); } catch(e){} }
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   const el = document.getElementById('screen-' + id);
   if (el) el.classList.add('active');
@@ -2240,6 +2322,8 @@ window.addEventListener('DOMContentLoaded', function () {
   try {
     history.replaceState({ screen: 'landing' }, '', '#landing');
   } catch (e) { /* sandbox blocks this - safe to ignore */ }
+  // First-visit onboarding (shows once, stored in localStorage)
+  try { setTimeout(function () { if (typeof cxMaybeOnboard === 'function') cxMaybeOnboard(); }, 700); } catch (e) {}
 });
 
 /* ────────────────────────────────────────────────────
@@ -2407,6 +2491,7 @@ const BCG_CASES = [{
 let bcg = null; // active session state
 
 function startBcgGame() {
+  if (typeof cxSetResume === 'function') cxSetResume('bcg', 'BCG Chat Game', 'startBcgGame');
   const c = BCG_CASES[0];
   bcg = { case:c, idx:-1, answers:{}, startMs:Date.now(), limitS:30*60, timerId:null, recPrepUntil:0 };
   document.getElementById('bcgFeed').innerHTML = '';
@@ -2570,6 +2655,66 @@ function confirmExitBcg() {
 function goToMode() { showScreen('mode'); }
 
 
+
+/* ════════════════════════════════════════════════════
+   GAME INTRO SCREENS (shared by Solve + BCG)
+   Explains the format before the game starts, like a
+   real assessment briefing. Then launches the engine.
+──────────────────────────────────────────────────── */
+const GAME_INTROS = {
+  solve: {
+    eyebrow: 'McKinsey-style assessment',
+    title: 'Solve Game',
+    lead: 'This mirrors the McKinsey Solve assessment - a data-driven problem-solving game. You work through an ecosystem scenario in four phases, entering numeric answers that are graded against a verified solution.',
+    steps: [
+      ['1','<b>Study</b> - read the scenario and fill the missing figures into the text, using the exhibit data.'],
+      ['2','<b>Analysis</b> - answer numeric questions: areas, growth rates, and which entity grew fastest.'],
+      ['3','<b>Report</b> - choose the chart type that best visualises the breakdown.'],
+      ['4','<b>Cases</b> - solve a short standalone mini-case with its own exhibit.'],
+    ],
+    meta: [['Time','35 min'],['Phases','4'],['Scoring','Auto-graded']],
+    note: 'Original scenario (Veridian Reservoir). The format mirrors the real assessment; the content is our own. Answers are checked within a 1% tolerance.',
+    start: 'startSolveGame',
+  },
+  bcg: {
+    eyebrow: 'BCG-style assessment',
+    title: 'BCG Chat Game',
+    lead: 'This mirrors BCG\u2019s online case assessment - a single business scenario explored through a chat conversation. The case unfolds in linked questions with data exhibits; you answer using the same widget types the real assessment uses.',
+    steps: [
+      ['1','<b>Read the brief</b> - a real-style client scenario opens the case.'],
+      ['2','<b>Answer in the chat</b> - numbers, single-select, select-all, and short written answers.'],
+      ['3','<b>Use the exhibits</b> - tables of data appear inline; the math matters.'],
+      ['4','<b>Final recommendation</b> - close with a clear, answer-first call, as you would for a partner.'],
+    ],
+    meta: [['Time','30 min'],['Format','Chat'],['Scoring','Auto-graded']],
+    note: 'The case runs in English to mirror the real BCG screening you\u2019ll face. Verified case (Technoplast). Numeric and select answers are machine-graded; open answers are flagged for AI review.',
+    start: 'startBcgGame',
+  },
+};
+
+function openGameIntro(which) {
+  if (typeof requireAuth === 'function' && !requireAuth()) return;
+  const g = GAME_INTROS[which];
+  if (!g) return;
+  const steps = g.steps.map(s =>
+    `<div class="gi-step"><div class="gi-step-n">${s[0]}</div><div class="gi-step-t">${s[1]}</div></div>`).join('');
+  const meta = g.meta.map(m =>
+    `<div class="gi-meta-item">${esc(m[0])}<b>${esc(m[1])}</b></div>`).join('');
+  document.getElementById('giCard').innerHTML =
+    `<div class="gi-eyebrow">${esc(g.eyebrow)}</div>
+     <h1 class="gi-title">${esc(g.title)}</h1>
+     <p class="gi-lead">${esc(g.lead)}</p>
+     <div class="gi-meta">${meta}</div>
+     <div class="gi-steps">${steps}</div>
+     <div class="gi-actions">
+       <button class="gi-start" onclick="${g.start}()">Start &rarr;</button>
+       <button class="gi-back" onclick="showScreen('mode')">Back</button>
+     </div>
+     <p class="gi-note">${esc(g.note)}</p>`;
+  showScreen('gameintro');
+}
+
+
 /* ════════════════════════════════════════════════════
    McKINSEY SOLVE GAME ENGINE
    Format mirrors the real McKinsey Solve assessment
@@ -2649,6 +2794,7 @@ let solve = null;
 
 function startSolveGame() {
   if (typeof requireAuth === 'function' && !requireAuth()) return;
+  if (typeof cxSetResume === 'function') cxSetResume('solve', 'Solve Game', 'startSolveGame');
   solve = { phase:'study', qIndex:0, answers:{}, graded:{}, secs: SOLVE_CASE.totalMin*60, timerId:null };
   showScreen('solve');
   startSolveTimer();
@@ -2657,12 +2803,18 @@ function startSolveGame() {
 
 function startSolveTimer() {
   const el = document.getElementById('svTimer');
+  if (solve.timerId) clearInterval(solve.timerId);
+  solve.startMs = Date.now();
+  solve.limitS = SOLVE_CASE.totalMin * 60;
   const tick = () => {
-    const m = Math.floor(solve.secs/60), s = solve.secs%60;
-    el.textContent = `${m}:${String(s).padStart(2,'0')}`;
-    el.classList.toggle('warn', solve.secs <= 300);
-    if (solve.secs <= 0) { clearInterval(solve.timerId); el.textContent = 'Time up'; }
-    solve.secs--;
+    const elapsed = Math.floor((Date.now() - solve.startMs) / 1000);
+    let left = solve.limitS - elapsed;
+    const over = left < 0;
+    const a = Math.abs(left);
+    const m = Math.floor(a / 60), s = a % 60;
+    el.textContent = (over ? 'Overtime ' : '') + m + ':' + String(s).padStart(2, '0');
+    el.classList.toggle('warn', !over && left <= 300);
+    el.classList.toggle('over', over);
   };
   tick();
   solve.timerId = setInterval(tick, 1000);
@@ -2799,6 +2951,7 @@ function solveFinish() {
   solve.phase = 'result'; solve.result = { correct, total, lines };
   svSetPhaseUI();
   try { const pctScore = Math.round(correct/total*100); recordSession('case', 'Solve Game', pctScore/10); } catch(e){}
+  if (typeof cxClearResume === 'function') cxClearResume();
   renderSolve();
 }
 
@@ -2817,6 +2970,111 @@ function confirmExitSolve() {
     if (solve && solve.timerId) clearInterval(solve.timerId);
     showScreen('mode');
   }
+}
+
+
+
+/* ════════════════════════════════════════════════════
+   CX FEATURES: onboarding, stats strip, resume session
+──────────────────────────────────────────────────── */
+const CX_OB_KEY = 'casedge-onboarded';
+const CX_RESUME_KEY = 'casedge-resume';
+
+/* ---- 1. ONBOARDING (first visit only) ---- */
+let cxObStep = 0;
+function cxMaybeOnboard() {
+  let seen = false;
+  try { seen = localStorage.getItem(CX_OB_KEY) === '1'; } catch (e) {}
+  if (seen) return;
+  cxObStep = 0;
+  cxObRender();
+  const ov = document.getElementById('cxObOverlay');
+  if (ov) requestAnimationFrame(() => ov.classList.add('show'));
+}
+function cxObRender() {
+  document.querySelectorAll('.cx-ob-step').forEach(s =>
+    s.classList.toggle('active', +s.dataset.step === cxObStep));
+  document.querySelectorAll('.cx-ob-dot').forEach((d, i) =>
+    d.classList.toggle('on', i === cxObStep));
+  const nx = document.getElementById('cxObNext');
+  if (nx) nx.textContent = cxObStep >= 2 ? 'Get started' : 'Next';
+}
+function cxObNext() {
+  if (cxObStep >= 2) { cxObClose(); return; }
+  cxObStep++;
+  cxObRender();
+}
+function cxObClose() {
+  try { localStorage.setItem(CX_OB_KEY, '1'); } catch (e) {}
+  const ov = document.getElementById('cxObOverlay');
+  if (ov) ov.classList.remove('show');
+}
+
+/* ---- 2. STATS STRIP on the mode screen ---- */
+function cxRenderStats() {
+  const host = document.getElementById('cxStatsHost');
+  if (!host) return;
+  let p;
+  try { p = loadProgress(); } catch (e) { p = { cases: 0, drills: 0, scores: [], days: [] }; }
+  const streak = (typeof computeStreak === 'function') ? computeStreak(p.days) : 0;
+  const total = (p.cases || 0) + (p.drills || 0);
+  const avg = (p.scores && p.scores.length)
+    ? (p.scores.reduce((a, b) => a + b, 0) / p.scores.length).toFixed(1)
+    : '-';
+  // Only show the strip once the user has done something - keeps first run clean.
+  if (total === 0) { host.innerHTML = ''; return; }
+  host.innerHTML =
+    `<div class="cx-stats">
+       <div class="cx-stat cx-accent"><div class="cx-stat-num"><span class="cx-flame">\u{1F525}</span>${streak}</div><div class="cx-stat-lbl">Day streak</div></div>
+       <div class="cx-stat"><div class="cx-stat-num">${total}</div><div class="cx-stat-lbl">Sessions done</div></div>
+       <div class="cx-stat"><div class="cx-stat-num">${avg}</div><div class="cx-stat-lbl">Average score</div></div>
+     </div>`;
+}
+
+/* ---- 3. RESUME SESSION ---- */
+// Call this when a session starts, to remember where the user was.
+function cxSetResume(kind, label, launcher) {
+  try {
+    localStorage.setItem(CX_RESUME_KEY, JSON.stringify({ kind, label, launcher, at: Date.now() }));
+  } catch (e) {}
+}
+function cxClearResume() {
+  try { localStorage.removeItem(CX_RESUME_KEY); } catch (e) {}
+  const host = document.getElementById('cxResumeHost');
+  if (host) host.innerHTML = '';
+}
+function cxRenderResume() {
+  const host = document.getElementById('cxResumeHost');
+  if (!host) return;
+  let r = null;
+  try { r = JSON.parse(localStorage.getItem(CX_RESUME_KEY) || 'null'); } catch (e) {}
+  // Expire after 24h so it doesn't nag forever.
+  if (!r || !r.launcher || (Date.now() - (r.at || 0)) > 86400000) { host.innerHTML = ''; return; }
+  const safeLabel = (window.esc ? esc(r.label) : r.label);
+  host.innerHTML =
+    `<div class="cx-resume">
+       <div class="cx-resume-txt">Pick up where you left off - <b>${safeLabel}</b></div>
+       <div class="cx-resume-btns">
+         <button class="cx-resume-go" onclick="cxResumeGo()">Resume</button>
+         <button class="cx-resume-x" onclick="cxClearResume()">Dismiss</button>
+       </div>
+     </div>`;
+}
+function cxResumeGo() {
+  let r = null;
+  try { r = JSON.parse(localStorage.getItem(CX_RESUME_KEY) || 'null'); } catch (e) {}
+  if (!r || !r.launcher) return;
+  const fn = window[r.launcher];
+  if (typeof fn === 'function') { try { fn(); return; } catch (e) {} }
+  // Fallback: route by kind
+  if (r.kind === 'solve') openGameIntro('solve');
+  else if (r.kind === 'bcg') openGameIntro('bcg');
+}
+
+/* Refresh mode-screen widgets whenever it is shown. */
+function cxRefreshMode() {
+  cxRenderStats();
+  cxRenderResume();
 }
 
 
@@ -4306,4 +4564,35 @@ document.addEventListener('keydown', e => {
     <button class="cookie-btn" onclick="acceptCookies()">Accept</button>
   </div>
 </div>
+
+<!-- ══════════ ONBOARDING MODAL ══════════ -->
+<div class="cx-ob-overlay" id="cxObOverlay">
+  <div class="cx-ob">
+    <div class="cx-ob-step active" data-step="0">
+      <div class="cx-ob-ic"><svg viewBox="0 0 24 24"><path d="M9 3h6M12 3v5M5 21h14M7 21v-4a5 5 0 0 1 10 0v4"/></svg></div>
+      <div class="cx-ob-t">Welcome to CasEdge</div>
+      <div class="cx-ob-d">Your prep ground for MBB case interviews. Real cases, sharp feedback, and the exact assessment formats firms use - built to make practice harder than the real thing.</div>
+    </div>
+    <div class="cx-ob-step" data-step="1">
+      <div class="cx-ob-ic"><svg viewBox="0 0 24 24"><path d="M12 2 4 7v6c0 5 3.5 7.5 8 9 4.5-1.5 8-4 8-9V7l-8-5z"/><path d="m9 12 2 2 4-4"/></svg></div>
+      <div class="cx-ob-t">Pick how you train</div>
+      <div class="cx-ob-d">Full case interviews, targeted skill drills, or the BCG &amp; McKinsey assessment games. Each one scores you across structure, math, business sense, communication, and ownership.</div>
+    </div>
+    <div class="cx-ob-step" data-step="2">
+      <div class="cx-ob-ic"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg></div>
+      <div class="cx-ob-t">Get partner-level feedback</div>
+      <div class="cx-ob-d">After every session you get a strict, honest scorecard - no sugarcoating - plus the flawless answer to study. Your streak and scores build over time so you can see real progress.</div>
+    </div>
+    <div class="cx-ob-foot">
+      <div class="cx-ob-dots">
+        <span class="cx-ob-dot on"></span><span class="cx-ob-dot"></span><span class="cx-ob-dot"></span>
+      </div>
+      <div class="cx-ob-btns">
+        <button class="cx-ob-skip" onclick="cxObClose()">Skip</button>
+        <button class="cx-ob-next" id="cxObNext" onclick="cxObNext()">Next</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body></html>
