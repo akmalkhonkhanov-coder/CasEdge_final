@@ -155,6 +155,30 @@
     .cx-ob-skip { background: transparent; color: var(--on-dark-soft); border: none; font-size: 13px; cursor: pointer; padding: 9px 12px; }
     .cx-ob-next { background: var(--accent-teal); color: #04201b; border: none; border-radius: 20px; padding: 9px 22px; font-size: 13.5px; font-weight: 700; cursor: pointer; }
 
+      /* ══════════ SESSION BRIEFING MODAL (how it works) ══════════ */
+    .br-overlay { position: fixed; inset: 0; background: rgba(10,11,15,.62); backdrop-filter: blur(4px); z-index: 9100; display: flex; align-items: center; justify-content: center; padding: 22px; opacity: 0; pointer-events: none; transition: opacity .25s; }
+    .br-overlay.show { opacity: 1; pointer-events: auto; }
+    .br { background: var(--surface-dark-elevated); border: 1px solid var(--sv-line); border-radius: 20px; max-width: 520px; width: 100%; max-height: 88vh; overflow-y: auto; padding: 28px 28px 22px; box-shadow: 0 30px 80px rgba(0,0,0,.4); transform: translateY(12px); transition: transform .25s; }
+    .br-overlay.show .br { transform: translateY(0); }
+    .br-eyebrow { font-size: 11.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--accent-teal); margin-bottom: 8px; }
+    .br-title { font-family: var(--serif); font-size: 23px; font-weight: 600; color: var(--on-dark); margin: 0 0 6px; line-height: 1.15; }
+    .br-lead { font-size: 14px; line-height: 1.55; color: var(--on-dark-soft); margin: 0 0 20px; }
+    .br-list { display: flex; flex-direction: column; gap: 13px; margin-bottom: 20px; }
+    .br-item { display: flex; gap: 12px; align-items: flex-start; }
+    .br-ic { flex-shrink: 0; width: 30px; height: 30px; border-radius: 9px; background: rgba(93,184,166,.13); display: flex; align-items: center; justify-content: center; }
+    .br-ic svg { width: 16px; height: 16px; stroke: var(--accent-teal); fill: none; stroke-width: 2; }
+    .br-it-t { font-size: 13.5px; font-weight: 650; color: var(--on-dark); margin-bottom: 2px; }
+    .br-it-d { font-size: 13px; line-height: 1.5; color: var(--on-dark-soft); }
+    .br-tip { font-size: 12.5px; line-height: 1.5; color: var(--on-dark-soft); background: rgba(93,184,166,.07); border: 1px solid rgba(93,184,166,.18); border-radius: 10px; padding: 11px 13px; margin-bottom: 20px; }
+    .br-tip b { color: var(--on-dark); font-weight: 650; }
+    .br-foot { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+    .br-dontshow { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--on-dark-soft); cursor: pointer; user-select: none; }
+    .br-dontshow input { width: 15px; height: 15px; accent-color: var(--accent-teal); cursor: pointer; }
+    .br-btns { display: flex; gap: 8px; }
+    .br-skip { background: transparent; color: var(--on-dark-soft); border: 1px solid var(--sv-line); border-radius: 20px; padding: 9px 16px; font-size: 13px; cursor: pointer; }
+    .br-begin { background: var(--accent-teal); color: #04201b; border: none; border-radius: 20px; padding: 9px 22px; font-size: 13.5px; font-weight: 700; cursor: pointer; transition: transform .15s; }
+    .br-begin:hover { transform: translateY(-1px); }
+
     </style>
 
   <style>
@@ -1925,7 +1949,12 @@ After each answer you MAY ask 1-2 sharp probing follow-ups like a real interview
 Evaluate each rep against STAR (Situation, Task, Action, Result): brief context without rambling? ACTION clearly THEIRS ("I", not "we") and specific? a QUANTIFIED result? genuine self-awareness? In feedback flag missing STAR elements, every "we" that should be "I", quote vague lines, and show a tightened model structure in English. Harder reps = themes candidates dodge (real failure, real conflict). NOTE: these are full answers, not rapid-fire - but still run all 5 themes and close with the summary scorecard on the recurring pattern.`
 };
 
-async function startDrill() {
+function startDrill() {
+  if (!state.drillType) return;
+  if (!requireAuth()) return;
+  brGate('drill', _startDrillReal);
+}
+async function _startDrillReal() {
   if (!state.drillType) return;
   if (!requireAuth()) return;
   recordSession('drill', state.drillType);
@@ -2323,7 +2352,7 @@ window.addEventListener('DOMContentLoaded', function () {
     history.replaceState({ screen: 'landing' }, '', '#landing');
   } catch (e) { /* sandbox blocks this - safe to ignore */ }
   // First-visit onboarding (shows once, stored in localStorage)
-  try { setTimeout(function () { if (typeof cxMaybeOnboard === 'function') cxMaybeOnboard(); }, 700); } catch (e) {}
+  try { setTimeout(function () { var land = document.getElementById('screen-landing'); if (land && land.classList.contains('active') && typeof cxMaybeOnboard === 'function') cxMaybeOnboard(); }, 700); } catch (e) {}
 });
 
 /* ────────────────────────────────────────────────────
@@ -2781,7 +2810,7 @@ const SOLVE_CASE = {
       exhibit:{ title:'Exhibit 1: Plant Biomass Units by Zone',
         head:['Plant','Cove','Marsh','Bluff','Total'],
         rows:[ ['Trees',15,9,8,32], ['Shrubs',5,7,6,18], ['Grasses','n/a',14,16,30], ['Total',20,30,30,80] ] },
-      q:'If tree biomass doubled, what would be the average biomass units per plant type in each zone? Round to two digits.',
+      q:'If tree biomass doubled, what would be the average biomass units per plant type in each zone? Average across all three plant types (treat "n/a" as 0). Round to two digits.',
       fields:[
         { id:'cove', label:'Cove average:', unit:'', ans:11.67 },
         { id:'marsh', label:'Marsh average:', unit:'', ans:13 },
@@ -3075,6 +3104,104 @@ function cxResumeGo() {
 function cxRefreshMode() {
   cxRenderStats();
   cxRenderResume();
+}
+
+
+
+/* ════════════════════════════════════════════════════
+   SESSION BRIEFING - "how it works" before each session.
+   Shown before a case or drill starts. Readable, skippable,
+   with a per-type "don't show again" preference.
+──────────────────────────────────────────────────── */
+const BR_PREF_KEY = 'casedge-brief-hidden';
+let _brPending = null; // function to run when the user clicks Begin
+
+const BR_ICONS = {
+  target: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>',
+  chat: '<svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.2A8.4 8.4 0 0 1 12 3a8.4 8.4 0 0 1 9 8.5z"/></svg>',
+  clock: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  chart: '<svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg>',
+  check: '<svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>',
+  pencil: '<svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>',
+};
+
+const BRIEFINGS = {
+  case: {
+    eyebrow: 'Before you begin',
+    title: 'Full Case Interview',
+    lead: 'A live, end-to-end case run like the real thing - you lead the conversation, the interviewer responds with data, and you close with a recommendation.',
+    items: [
+      ['chat','It is a conversation','Type your answers in the chat, like talking to a real interviewer. Drive the case: ask for data, state your structure, request exhibits.'],
+      ['chart','Real data &amp; math','Exhibits and numbers appear as you go. You will be asked to interpret a chart and to actually calculate - show your working.'],
+      ['clock','Watch your pace','A response timer keeps you honest, like real time pressure. Going long is flagged, not punished.'],
+      ['check','Close with a recommendation','End with an answer-first recommendation: conclusion, 2-3 supporting facts, risks, next steps. You get a strict scorecard after.'],
+    ],
+    tip: '<b>Tip:</b> lead with your answer, then support it. State your structure before diving in, and tie every point to a number.',
+  },
+  drill: {
+    eyebrow: 'Before you begin',
+    title: 'Skill Drill',
+    lead: 'A short, focused rep on one skill - fast reps, fast feedback. Sharpens one muscle at a time.',
+    items: [
+      ['target','One skill, focused','Each drill targets a single skill (market sizing, math, structuring, chart reading, and so on). Quick and intense.'],
+      ['chat','Answer in the chat','Respond directly in the chat. Be structured and specific - the same standards as a full case, just narrower scope.'],
+      ['check','Instant feedback','You get a focused critique right after, with the model answer to study. Repeat to build speed.'],
+    ],
+    tip: '<b>Tip:</b> treat each drill like the real moment - structure first, then numbers. Speed comes from reps.',
+  },
+};
+
+function brShouldShow(kind) {
+  try {
+    const hidden = JSON.parse(localStorage.getItem(BR_PREF_KEY) || '{}');
+    return !hidden[kind];
+  } catch (e) { return true; }
+}
+function brSetHidden(kind) {
+  try {
+    const hidden = JSON.parse(localStorage.getItem(BR_PREF_KEY) || '{}');
+    hidden[kind] = true;
+    localStorage.setItem(BR_PREF_KEY, JSON.stringify(hidden));
+  } catch (e) {}
+}
+
+// Main entry: show briefing for `kind`, then run `proceed` when the user begins.
+// If the user previously ticked "don't show again", run proceed immediately.
+function brGate(kind, proceed) {
+  const b = BRIEFINGS[kind];
+  if (!b || !brShouldShow(kind)) { proceed(); return; }
+  _brPending = proceed;
+  const items = b.items.map(it =>
+    `<div class="br-item"><div class="br-ic">${BR_ICONS[it[0]] || ''}</div>
+       <div><div class="br-it-t">${it[1]}</div><div class="br-it-d">${it[2]}</div></div></div>`).join('');
+  document.getElementById('brCard').innerHTML =
+    `<div class="br-eyebrow">${esc(b.eyebrow)}</div>
+     <h2 class="br-title">${b.title}</h2>
+     <p class="br-lead">${b.lead}</p>
+     <div class="br-list">${items}</div>
+     <div class="br-tip">${b.tip}</div>
+     <div class="br-foot">
+       <label class="br-dontshow"><input type="checkbox" id="brDontShow"> Don\u2019t show this again</label>
+       <div class="br-btns">
+         <button class="br-skip" onclick="brClose(false)">Skip</button>
+         <button class="br-begin" onclick="brBegin('${kind}')">Begin &rarr;</button>
+       </div>
+     </div>`;
+  const ov = document.getElementById('brOverlay');
+  ov.classList.add('show');
+}
+
+function brBegin(kind) {
+  const cb = document.getElementById('brDontShow');
+  if (cb && cb.checked) brSetHidden(kind);
+  brClose(true);
+}
+function brClose(proceed) {
+  const ov = document.getElementById('brOverlay');
+  if (ov) ov.classList.remove('show');
+  const fn = _brPending; _brPending = null;
+  // "Skip" still proceeds into the session (it skips reading, not the session).
+  if (fn) { try { fn(); } catch (e) {} }
 }
 
 
@@ -3396,7 +3523,12 @@ const OPENERS = {
 /* ────────────────────────────────────────────────────
    INTERVIEW  - start
 ──────────────────────────────────────────────────── */
-async function startInterview() {
+function startInterview() {
+  if (!state.firm || !state.caseType) return;
+  if (!requireAuth()) return;
+  brGate('case', _startInterviewReal);
+}
+async function _startInterviewReal() {
   if (!state.firm || !state.caseType) return;
   if (!requireAuth()) return;
   recordSession('case', state.caseType);
@@ -4593,6 +4725,12 @@ document.addEventListener('keydown', e => {
       </div>
     </div>
   </div>
+</div>
+
+
+<!-- ══════════ SESSION BRIEFING MODAL ══════════ -->
+<div class="br-overlay" id="brOverlay">
+  <div class="br" id="brCard"></div>
 </div>
 
 </body></html>
