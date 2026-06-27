@@ -118,6 +118,14 @@
     .gi-meta-item { font-size: 13px; color: var(--on-dark-soft); }
     .gi-meta-item b { display: block; font-size: 18px; color: var(--on-dark); font-weight: 700; margin-top: 2px; }
     .gi-actions { display: flex; gap: 12px; align-items: center; }
+    .gi-timer-toggle { display: flex; align-items: center; gap: 11px; margin: 18px 0 4px; cursor: pointer; user-select: none; }
+    .gi-timer-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+    .gi-toggle-track { flex-shrink: 0; width: 42px; height: 24px; border-radius: 13px; background: rgba(255,255,255,.16); position: relative; transition: background .18s; }
+    .gi-toggle-knob { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; transition: transform .18s; }
+    .gi-timer-toggle input:checked + .gi-toggle-track { background: var(--accent-teal); }
+    .gi-timer-toggle input:checked + .gi-toggle-track .gi-toggle-knob { transform: translateX(18px); }
+    .gi-toggle-label { font-size: 13.5px; font-weight: 600; color: var(--on-dark); }
+    .gi-toggle-sub { font-weight: 400; color: var(--on-dark-soft); font-size: 12.5px; }
     .gi-start { background: var(--accent-teal); color: #04201b; border: none; border-radius: 24px; padding: 13px 30px; font-size: 15px; font-weight: 700; cursor: pointer; transition: transform .15s, box-shadow .2s; }
     .gi-start:hover { transform: translateY(-1px); box-shadow: 0 8px 26px rgba(93,184,166,.32); }
     .gi-back { background: transparent; color: var(--on-dark-soft); border: 1px solid var(--sv-line); border-radius: 24px; padding: 12px 22px; font-size: 14px; cursor: pointer; }
@@ -529,6 +537,9 @@
     }
     /* Floating ambient shapes behind story sections (pure-CSS depth) */
     .ambient-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+    .hero-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; pointer-events: none; z-index: 1; opacity: 0; transition: opacity 1.2s ease; }
+    .hero-canvas.ready { opacity: 1; }
+    .landing-main { position: relative; z-index: 2; }
     .ambient-bg span {
       position: absolute; border-radius: 50%; filter: blur(60px); opacity: .5;
       background: radial-gradient(circle, rgba(204,120,92,.5), transparent 70%);
@@ -739,6 +750,8 @@
     .bcg-progress-fill { height: 100%; width: 0%; border-radius: 4px; background: var(--accent-teal); transition: width .5s cubic-bezier(.22,1,.36,1); }
     .bcg-progress-label { font-size: 11px; color: var(--on-dark-soft); margin-top: 4px; }
     .bcg-timer { font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--on-dark); flex-shrink: 0; padding: 5px 12px; border-radius: 8px; background: rgba(255,255,255,.06); }
+    .bcg-interviewer { font-size: 12.5px; font-weight: 700; color: var(--accent-teal); flex-shrink: 0; padding: 5px 12px; border-radius: 8px; background: rgba(93,184,166,.12); border: 1px solid rgba(93,184,166,.3); letter-spacing: .02em; }
+    .bcg-qtimer { font-size: 11.5px; font-weight: 600; color: var(--on-dark-soft); padding: 4px 14px 0; font-variant-numeric: tabular-nums; text-align: right; }
     [data-theme="light"] .bcg-timer { background: rgba(31,41,55,.06); }
     .bcg-timer.warn { color: var(--accent-amber); }
     .bcg-timer.over { color: var(--coral); }
@@ -747,7 +760,7 @@
     .bcg-msg.bot { align-self: flex-start; }
     .bcg-msg.me { align-self: flex-end; flex-direction: row-reverse; }
     .bcg-avatar { width: 30px; height: 30px; border-radius: 8px; background: #4a6cf7; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 15px; }
-    .bcg-bubble { padding: 13px 16px; border-radius: 14px; font-size: 14px; line-height: 1.55; white-space: pre-wrap; }
+    .bcg-bubble { padding: 13px 16px; border-radius: 14px; font-size: 14px; line-height: 1.55; white-space: normal; word-wrap: break-word; }
     .bcg-msg.bot .bcg-bubble { background: var(--surface-dark-elevated); color: var(--on-dark); border-top-left-radius: 4px; }
     .bcg-msg.me .bcg-bubble { background: #4a6cf7; color: #fff; border-top-right-radius: 4px; }
     .bcg-qlabel { font-weight: 700; margin-bottom: 6px; }
@@ -776,6 +789,9 @@
     .bcg-opt:hover { border-color: rgba(93,184,166,.5); }
     .bcg-opt.sel { border-color: var(--accent-teal); background: rgba(93,184,166,.1); }
     .bcg-opt-mark { width: 19px; height: 19px; border-radius: 50%; border: 2px solid var(--on-dark-soft); flex-shrink: 0; margin-top: 1px; position: relative; transition: border-color .15s; }
+    .bcg-opt-letter { flex-shrink: 0; width: 22px; height: 22px; border-radius: 6px; background: rgba(255,255,255,.08); color: var(--on-dark-soft); font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 0; transition: background .15s, color .15s; }
+    [data-theme="light"] .bcg-opt-letter { background: rgba(31,41,55,.07); }
+    .bcg-opt.sel .bcg-opt-letter { background: var(--accent-teal); color: #04201b; }
     .bcg-opt.sel .bcg-opt-mark { border-color: var(--accent-teal); }
     .bcg-opt.sel .bcg-opt-mark::after { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: var(--accent-teal); }
     .bcg-opt-hint { font-size: 11.5px; color: var(--on-dark-soft); margin-bottom: 10px; }
@@ -1012,7 +1028,58 @@
     .sv-gcard.sel { border-color: var(--accent-teal); background: rgba(93,184,166,.1); }
     .sv-gcard svg { width: 56px; height: 42px; margin-bottom: 8px; }
     .sv-gcard .gl { font-size: 13px; font-weight: 600; color: var(--on-dark); }
+    .sv-gcard.sv-gcard-lg { min-width: 150px; }
+    .sv-gcard.sv-gcard-lg svg { width: 100%; height: 92px; margin-bottom: 10px; }
     .sv-select { background: var(--sv-fill); border: 1px solid var(--sv-line); color: var(--on-dark); border-radius: 8px; padding: 8px 11px; font-size: 13.5px; min-width: 180px; }
+    /* ---- Solve chart panel (combo bar+line, build phase) ---- */
+    .sv-chart { background: var(--sv-fill); border: 1px solid var(--sv-line-soft); border-radius: 14px; padding: 18px 16px 12px; margin: 14px 0 6px; }
+    .sv-chart-t { font-size: 14.5px; font-weight: 700; color: var(--on-dark); margin: 0 0 2px; }
+    .sv-chart-sub { font-size: 12.5px; color: var(--on-dark-soft); margin: 0 0 12px; line-height: 1.45; }
+    .sv-chart svg { width: 100%; height: auto; display: block; }
+    .sv-chart-legend { display: flex; gap: 18px; justify-content: center; margin-top: 8px; flex-wrap: wrap; }
+    .sv-leg { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--on-dark-soft); }
+    .sv-leg i { width: 13px; height: 13px; border-radius: 3px; display: inline-block; }
+    .sv-leg i.ln { height: 3px; border-radius: 2px; }
+    .sv-buildrow { display: flex; align-items: center; gap: 12px; margin: 9px 0; }
+    .sv-buildrow label { flex: 0 0 152px; font-size: 13px; color: var(--on-dark); }
+    .sv-buildrow input { width: 96px; background: var(--sv-fill); border: 1px solid var(--sv-line); color: var(--on-dark); border-radius: 8px; padding: 7px 10px; font-size: 13.5px; }
+    .sv-buildrow .un { font-size: 12px; color: var(--on-dark-soft); }
+    /* ---- Collectible data chips + research journal ---- */
+    .sv-chip { display: inline-flex; align-items: center; gap: 4px; background: rgba(93,184,166,.14); border: 1px solid rgba(93,184,166,.45); color: var(--on-dark); border-radius: 7px; padding: 2px 9px; font-size: 13px; font-weight: 600; cursor: grab; user-select: none; touch-action: none; transition: background .15s, transform .1s, box-shadow .15s; }
+    .sv-chip:hover { background: rgba(93,184,166,.26); }
+    .sv-chip:active { cursor: grabbing; }
+    .sv-chip.collected { opacity: .5; }
+    .sv-chip.sv-dragging { position: fixed; z-index: 9999; pointer-events: none; box-shadow: 0 8px 24px rgba(0,0,0,.4); transform: scale(1.08); background: rgba(93,184,166,.4); }
+    td.num .sv-chip { font-weight: 600; }
+    .sv-layout { display: flex; gap: 16px; align-items: flex-start; }
+    .sv-layout-main { flex: 1; min-width: 0; }
+    .sv-journal { flex: 0 0 178px; position: sticky; top: 8px; background: var(--surface-dark-elevated); border: 1px solid var(--sv-line-soft); border-radius: 12px; padding: 13px 13px 15px; }
+    .sv-journal-t { font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--accent-teal); margin: 0 0 9px; }
+    .sv-journal-empty { font-size: 12px; color: var(--on-dark-soft); line-height: 1.5; }
+    .sv-journal-list { display: flex; flex-wrap: wrap; gap: 6px; }
+    .sv-jchip { background: rgba(93,184,166,.12); border: 1px solid rgba(93,184,166,.4); color: var(--on-dark); border-radius: 6px; padding: 3px 8px; font-size: 12.5px; font-weight: 600; cursor: grab; touch-action: none; }
+    .sv-inp.sv-drop-active, .sv-numin.sv-drop-active, .sv-buildrow input.sv-drop-active { border-color: var(--accent-teal); box-shadow: 0 0 0 2px rgba(93,184,166,.3); background: rgba(93,184,166,.08); }
+    .sv-qual { background: var(--sv-fill); border: 1px solid var(--sv-line); color: var(--on-dark); border-radius: 8px; padding: 6px 10px; font-size: 13.5px; font-weight: 600; min-width: 110px; }
+    @media (max-width: 640px) { .sv-layout { flex-direction: column; } .sv-journal { position: static; flex-basis: auto; width: 100%; } }
+    /* ---- Floating calculator ---- */
+    .sv-calc-btn { background: var(--sv-fill); border: 1px solid var(--sv-line); color: var(--on-dark); width: 34px; height: 34px; border-radius: 9px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: background .15s, border-color .15s; }
+    .sv-calc-btn:hover { background: var(--sv-fill-hover); border-color: var(--accent-teal); }
+    .sv-calc { position: fixed; right: 22px; bottom: 84px; width: 232px; background: var(--surface-dark-elevated); border: 1px solid var(--sv-line); border-radius: 14px; box-shadow: 0 12px 40px rgba(0,0,0,.45); z-index: 600; display: none; overflow: hidden; }
+    .sv-calc.show { display: block; }
+    .sv-calc-head { display: flex; align-items: center; justify-content: space-between; padding: 9px 13px; font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--accent-teal); cursor: move; border-bottom: 1px solid var(--sv-line-soft); user-select: none; }
+    .sv-calc-x { background: none; border: none; color: var(--on-dark-soft); font-size: 18px; cursor: pointer; line-height: 1; padding: 0 2px; }
+    .sv-calc-disp { padding: 12px 14px; font-size: 20px; font-weight: 600; text-align: right; color: var(--on-dark); font-variant-numeric: tabular-nums; word-break: break-all; min-height: 28px; }
+    .sv-calc-log { max-height: 88px; overflow-y: auto; padding: 0 10px; display: flex; flex-direction: column; gap: 4px; }
+    .sv-calc-log:not(:empty) { padding: 4px 10px 8px; }
+    .sv-calc-logrow { display: flex; justify-content: space-between; gap: 8px; font-size: 11.5px; color: var(--on-dark-soft); }
+    .sv-calc-logrow .r { cursor: grab; color: var(--accent-teal); font-weight: 600; touch-action: none; }
+    .sv-calc-keys { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--sv-line-soft); padding-top: 1px; }
+    .sv-calc-keys button { border: none; background: var(--surface-dark-elevated); color: var(--on-dark); padding: 12px 0; font-size: 15px; cursor: pointer; transition: background .12s; }
+    .sv-calc-keys button:hover { background: var(--sv-fill-hover); }
+    .sv-calc-keys .sv-ck-op { color: var(--accent-amber); font-weight: 700; }
+    .sv-calc-keys .sv-ck-fn { color: var(--on-dark-soft); }
+    .sv-calc-keys .sv-ck-eq { background: var(--accent-teal); color: #04201b; font-weight: 700; }
+    .sv-calc-keys .sv-ck-eq:hover { background: #6fc7b5; }
     .sv-footer { flex-shrink: 0; padding: 14px 22px; background: var(--surface-dark); border-top: 1px solid var(--sv-line-soft); display: flex; justify-content: center; }
     .sv-foot-inner { max-width: 760px; width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
     .sv-next { background: var(--accent-teal); color: #04201b; border: none; border-radius: 22px; padding: 11px 26px; font-size: 14px; font-weight: 700; cursor: pointer; transition: transform .15s, box-shadow .2s; }
@@ -1032,11 +1099,13 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
+<canvas id="heroCanvas" class="hero-canvas" aria-hidden="true"></canvas>
 
 <!-- ═══════════════════════════════════════════════════
      LANDING
 ═══════════════════════════════════════════════════ -->
 <div id="screen-landing" class="screen active" data-screen-label="Landing">
+  <div class="ambient-bg" aria-hidden="true"><span></span><span></span><span></span></div>
   <nav class="top-nav">
     <span class="wordmark"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
     <div style="display:flex;align-items:center;gap:6px;">
@@ -1100,7 +1169,6 @@
 
   <!-- Scroll story sections -->
   <div class="land-story-wrap">
-  <div class="ambient-bg" aria-hidden="true"><span></span><span></span><span></span></div>
   <section id="land-story" class="land-section reveal">
     <div class="ls-eyebrow" data-i18n="s1.eyebrow">The Case Interview</div>
     <h2 class="ls-title" data-i18n="s1.title">What top firms actually test</h2>
@@ -1337,7 +1405,7 @@
       <div id="cxStatsHost"></div>
       <div class="firm-grid">
         <div class="firm-card" onclick="chooseMode('case')" tabindex="0" role="button">
-          <div class="firm-initial" style="background:rgba(204,120,92,.15);color:var(--coral);">F</div>
+          <div class="firm-initial" style="background:rgba(204,120,92,.15);color:var(--coral);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="8" y1="13" x2="16" y2="13"></line><line x1="8" y1="17" x2="13" y2="17"></line></svg></div>
           <div>
             <div class="firm-name" data-i18n="mode.case.name">Full Case Interview</div>
             <div class="firm-desc" data-i18n="mode.case.desc">Complete 40-minute simulation - structure, math, exhibits, recommendation. As demanding as the real interview.</div>
@@ -1345,7 +1413,7 @@
           <div class="firm-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div>
         </div>
         <div class="firm-card" onclick="chooseMode('drill')" tabindex="0" role="button">
-          <div class="firm-initial" style="background:rgba(93,184,166,.15);color:var(--accent-teal);">D</div>
+          <div class="firm-initial" style="background:rgba(93,184,166,.15);color:var(--accent-teal);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1.5" fill="currentColor"></circle></svg></div>
           <div>
             <div class="firm-name" data-i18n="mode.drill.name">Skill Drills</div>
             <div class="firm-desc" data-i18n="mode.drill.desc">Targeted reps on one skill - market sizing, structuring, math, charts, brainstorm. Fast feedback.</div>
@@ -1353,7 +1421,7 @@
           <div class="firm-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div>
         </div>
         <div class="firm-card" onclick="openGameIntro('bcg')" tabindex="0" role="button">
-          <div class="firm-initial" style="background:rgba(124,140,232,.15);color:#7c8ce8;">B</div>
+          <div class="firm-initial" style="background:rgba(124,140,232,.15);color:#7c8ce8;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></div>
           <div>
             <div class="firm-name">BCG Chat Game <span class="soon-badge" style="background:rgba(93,184,166,.18);color:var(--accent-teal);">Premium</span></div>
             <div class="firm-desc">The real BCG online-assessment format - 8 linked questions, exhibits, expected-value math, select-fewest traps. The screening barrier you must pass before the live interview.</div>
@@ -1361,7 +1429,7 @@
           <div class="firm-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div>
         </div>
         <div class="firm-card" onclick="openGameIntro('solve')" tabindex="0" role="button">
-          <div class="firm-initial" style="background:rgba(232,168,124,.15);color:#e8a87c;">S</div>
+          <div class="firm-initial" style="background:rgba(232,168,124,.15);color:#e8a87c;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect></svg></div>
           <div>
             <div class="firm-name">Solve Game <span class="soon-badge" style="background:rgba(93,184,166,.18);color:var(--accent-teal);">Premium</span></div>
             <div class="firm-desc">McKinsey-style problem-solving game - four phases, ecosystem data, auto-graded. The screening format before the live interview.</div>
@@ -1457,6 +1525,7 @@
       <div class="bcg-progress-track"><div class="bcg-progress-fill" id="bcgProgFill"></div></div>
       <div class="bcg-progress-label" id="bcgProgLabel">Test Completed 0%</div>
     </div>
+    <div class="bcg-interviewer" title="Your interviewer">Pariw</div>
     <div class="bcg-timer" id="bcgTimer">Time Left 30:00</div>
   </div>
   <div class="bcg-feed" id="bcgFeed"></div>
@@ -1478,9 +1547,25 @@
       <div class="sv-progress-track"><div class="sv-progress-fill" id="svProgFill"></div></div>
     </div>
     <div class="sv-timer" id="svTimer">35:00</div>
+    <button class="sv-calc-btn" onclick="svCalcToggle()" title="Calculator" aria-label="Calculator">
+      <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="11" x2="8" y2="11"/><line x1="12" y1="11" x2="12" y2="11"/><line x1="16" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="8" y2="15"/><line x1="12" y1="15" x2="12" y2="15"/><line x1="16" y1="15" x2="16" y2="18"/></svg>
+    </button>
   </div>
   <div class="sv-body" id="svBody"><div class="sv-inner" id="svInner"></div></div>
   <div class="sv-footer"><div class="sv-foot-inner" id="svFooter"></div></div>
+  <!-- Floating calculator: logs results, results are collectible -->
+  <div class="sv-calc" id="svCalc">
+    <div class="sv-calc-head" id="svCalcHead">Calculator<button class="sv-calc-x" onclick="svCalcToggle()">&times;</button></div>
+    <div class="sv-calc-disp" id="svCalcDisp">0</div>
+    <div class="sv-calc-log" id="svCalcLog"></div>
+    <div class="sv-calc-keys">
+      <button onclick="svCalcKey('C')" class="sv-ck-fn">C</button><button onclick="svCalcKey('(')" class="sv-ck-fn">(</button><button onclick="svCalcKey(')')" class="sv-ck-fn">)</button><button onclick="svCalcKey('/')" class="sv-ck-op">&divide;</button>
+      <button onclick="svCalcKey('7')">7</button><button onclick="svCalcKey('8')">8</button><button onclick="svCalcKey('9')">9</button><button onclick="svCalcKey('*')" class="sv-ck-op">&times;</button>
+      <button onclick="svCalcKey('4')">4</button><button onclick="svCalcKey('5')">5</button><button onclick="svCalcKey('6')">6</button><button onclick="svCalcKey('-')" class="sv-ck-op">&minus;</button>
+      <button onclick="svCalcKey('1')">1</button><button onclick="svCalcKey('2')">2</button><button onclick="svCalcKey('3')">3</button><button onclick="svCalcKey('+')" class="sv-ck-op">+</button>
+      <button onclick="svCalcKey('0')">0</button><button onclick="svCalcKey('.')">.</button><button onclick="svCalcKey('back')" class="sv-ck-fn">&larr;</button><button onclick="svCalcKey('=')" class="sv-ck-eq">=</button>
+    </div>
+  </div>
 </div>
 
 <div id="screen-drill" class="screen" data-screen-label="Drill">
@@ -1873,7 +1958,7 @@ async function pushProgressToCloud() {
 }
 
 /* ────────────────────────────────────────────────────
-   PLACEHOLDER FUNCTIONS  (fill in later)
+   GAME & DRILL ENGINES
 ──────────────────────────────────────────────────── */
 // ════════ DRILL MODE ════════
 // Shared drill engine: every drill is a SERIES of 5 adaptive reps with instant
@@ -2322,7 +2407,7 @@ function showScreen(id, fromPop) {
   if (id !== 'interview' && id !== 'drill' && typeof hideRespTimer === 'function') hideRespTimer();
   // Stop game timers whenever we leave their screens (prevents runaway intervals)
   if (id !== 'solve' && typeof solve === 'object' && solve && solve.timerId) { clearInterval(solve.timerId); solve.timerId = null; }
-  if (id !== 'bcg' && typeof bcg === 'object' && bcg && bcg.timerId) { clearInterval(bcg.timerId); bcg.timerId = null; }
+  if (id !== 'bcg' && typeof bcg === 'object' && bcg && bcg.timerId) { clearInterval(bcg.timerId); bcg.timerId = null; if (bcg.qTimerId) { clearInterval(bcg.qTimerId); bcg.qTimerId = null; } }
   if (id === 'mode' && typeof cxRefreshMode === 'function') { try { cxRefreshMode(); } catch(e){} }
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   const el = document.getElementById('screen-' + id);
@@ -2351,8 +2436,8 @@ window.addEventListener('DOMContentLoaded', function () {
   try {
     history.replaceState({ screen: 'landing' }, '', '#landing');
   } catch (e) { /* sandbox blocks this - safe to ignore */ }
-  // First-visit onboarding (shows once, stored in localStorage)
-  try { setTimeout(function () { var land = document.getElementById('screen-landing'); if (land && land.classList.contains('active') && typeof cxMaybeOnboard === 'function') cxMaybeOnboard(); }, 700); } catch (e) {}
+  // Onboarding is no longer auto-shown on landing (it hurt first impression).
+  // The modal is still available on demand via openOnboarding(); content is preserved.
 });
 
 /* ────────────────────────────────────────────────────
@@ -2467,48 +2552,48 @@ function scrollToStory() {
    Real BCG online-assessment format: scenario + linked questions,
    exhibits, 4 input widget types, machine-graded numbers, ~30-min
    overall timer. Library cases are data objects (below); this is a
-   scaffold built on ONE verified case (Technoplast/Simkin) so the
+   scaffold built on ONE verified original case (Calveron/Brightwell) so the
    format can be reviewed before the full library is generated.
 ══════════════════════════════════════════════════════════ */
 
 // ---- Case data. Each step is one chat turn. Math verified. ----
 const BCG_CASES = [{
-  id: 'technoplast',
-  client: 'Technoplast',
-  intro: "Please note that all region and company names in this case are fictional. Unless otherwise stated, assume real-world events have not taken place and are to be ignored.\n\nOur client, Technoplast, is one of the world's leading green plastic compounders. It blends recycled plastic resins with additives to create plastic compounds, which it sells to plastic converters that turn them into finished products.",
+  id: 'calveron',
+  client: 'Calveron',
+  intro: "Please note that all region and company names in this case are fictional. Unless otherwise stated, assume real-world events have not taken place and are to be ignored.\n\nWelcome. I'm your interviewer from Pariw. Our client, Calveron, is one of the world's leading specialty coffee roasters. It roasts and blends green coffee beans into premium roasted coffee, which it sells to cafe chains and retailers that bring it to consumers.",
   steps: [
-    { type:'say', text:"Last week, Technoplast's CEO was told that Simkin, a producer of recycled plastic resins, is being put up for acquisition for USD 30 Million. Simkin accounts for ~10% of the global market for recycled LDPE and HDPE - both key inputs for Technoplast. The CEO wants to assess whether Technoplast should bid for Simkin and, if so, how much." },
+    { type:'say', text:"Last week, Calveron's CEO learned that Brightwell, a producer of green coffee beans, is being put up for acquisition. Brightwell accounts for ~10% of the global market for premium Arabica and Robusta green beans - both key inputs for Calveron. The CEO wants to assess whether Calveron should bid for Brightwell and, if so, how much." },
     { type:'q', id:'q1', label:'Question 1', widget:'text',
-      text:"Let's think about the right structure. What are the 3 key questions you would need to answer to help Technoplast decide how much to bid for Simkin? Please summarize in 3 lines maximum.",
+      text:"Let's think about the right structure. What are the 3 key questions you would need to answer to help Calveron decide how much to bid for Brightwell? Please summarize in 3 lines maximum.",
       grade:'open' },
-    { type:'say', text:"Assume that Technoplast values Simkin at ten times its annual profit impact to Technoplast. This includes Simkin's standalone profits plus potential savings if Technoplast buys resin from Simkin at cost price (if Simkin has spare capacity). Our client is looking at two scenarios." },
-    { type:'exhibit', title:'Scenario 1: Key facts and figures for Simkin',
-      table:{ cols:['', 'LDPE','HDPE'], rows:[
-        ['Max production capacity (tons/yr)','4,000','2,100'],
-        ['Resin volume sold by Simkin (tons/yr)','3,800','1,900'],
-        ['Resin volume demanded by Technoplast (tons/yr)','200','200'],
-        ['Global resin price (USD/ton)','1,000','1,100'],
-        ["Cost of Simkin's raw materials (USD/ton)",'350','400'],
-        ['Cost of energy for processing (USD/ton)','50','100'],
-        ["Depreciation, Simkin's plant (USD/yr)",'400,000','-'],
-        ['Manpower to operate plant (USD/yr)','100,000','-'] ]} },
+    { type:'say', text:"Assume that Calveron values Brightwell at ten times its annual profit impact to Calveron. This includes Brightwell's standalone profits plus potential savings if Calveron sources beans from Brightwell at cost price (if Brightwell has spare capacity). Our client is looking at one scenario." },
+    { type:'exhibit', title:'Key facts and figures for Brightwell',
+      table:{ cols:['', 'Arabica','Robusta'], rows:[
+        ['Max production capacity (tons/yr)','5,000','2,600'],
+        ['Bean volume sold by Brightwell (tons/yr)','4,600','2,300'],
+        ['Bean volume demanded by Calveron (tons/yr)','300','300'],
+        ['Global bean price (USD/ton)','1,200','900'],
+        ["Cost of Brightwell's raw inputs (USD/ton)",'420','300'],
+        ['Cost of energy for processing (USD/ton)','60','80'],
+        ["Depreciation, Brightwell's plant (USD/yr)",'500,000','-'],
+        ['Manpower to operate plant (USD/yr)','150,000','-'] ]} },
     { type:'q', id:'q2a', label:'Question 2a', widget:'number',
-      text:"Scenario 1: Given the data in the exhibit, what is the maximum that Technoplast should be willing to pay for Simkin? Please provide your answer rounded to the nearest whole number (e.g. 1111 or 123456), without further explanation or working.",
-      grade:'number', answer:31600000, tolerance:0,
-      solution:"Standalone profit = revenue − variable − fixed.\nRevenue = 3,800×1,000 + 1,900×1,100 = 5,890,000.\nVariable = 3,800×(350+50) + 1,900×(400+100) = 2,470,000.\nFixed = 400,000 + 100,000 = 500,000.\nStandalone = 2,920,000.\nSavings: Technoplast buys 200 LDPE + 200 HDPE at cost instead of global price. Spare capacity = 200 each (just enough). Savings = 200×(1,000−400) + 200×(1,100−500) = 240,000.\nAnnual impact = 2,920,000 + 240,000 = 3,160,000. ×10 = 31,600,000." },
+      text:"Given the data in the exhibit, what is the maximum that Calveron should be willing to pay for Brightwell? Please provide your answer rounded to the nearest whole number (e.g. 1111 or 123456), without further explanation or working.",
+      grade:'number', answer:42300000, tolerance:0,
+      solution:"Standalone profit = revenue \u2212 variable \u2212 fixed.\nRevenue = 4,600\u00d71,200 + 2,300\u00d7900 = 7,590,000.\nVariable = 4,600\u00d7(420+60) + 2,300\u00d7(300+80) = 3,082,000.\nFixed = 500,000 + 150,000 = 650,000.\nStandalone = 3,858,000.\nSavings: Calveron sources 300 Arabica + 300 Robusta at cost instead of global price. Spare capacity = 400 Arabica and 300 Robusta (enough). Savings = 300\u00d7(1,200\u2212480) + 300\u00d7(900\u2212380) = 372,000.\nAnnual impact = 3,858,000 + 372,000 = 4,230,000. \u00d710 = 42,300,000." },
     { type:'q', id:'q3', label:'Question 3', widget:'select-all',
-      text:"What are the key risks and deal constraints that could cap the price Technoplast should pay? Please select all that apply.",
+      text:"What are the key risks and deal constraints that could cap the price Calveron should pay? Please select all that apply.",
       options:[
-        "Simkin's spare capacity may not cover Technoplast's full future resin needs",
+        "Brightwell's spare capacity may not cover Calveron's full future bean needs",
         "Integration and operational risk of merging the two businesses",
-        "Customer concentration - Simkin depends on a few large buyers",
-        "Regulatory or antitrust scrutiny given Simkin's ~10% market share",
-        "Technoplast already owns a controlling stake in Simkin",
-        "Feedstock quality and supply security of recycled inputs" ],
+        "Customer concentration - Brightwell depends on a few large buyers",
+        "Regulatory or antitrust scrutiny given Brightwell's ~10% market share",
+        "Calveron already owns a controlling stake in Brightwell",
+        "Crop quality and supply security of green-bean harvests" ],
       grade:'select', answer:[0,1,2,3,5] },
     { type:'q', id:'q8a', label:'Final Recommendation (8a)', widget:'single',
-      text:"Given everything above, would you recommend that Technoplast bids to acquire Simkin?",
-      options:[ "Yes - Technoplast should bid, up to the value ceiling", "No - Technoplast should not bid" ],
+      text:"Given everything above, would you recommend that Calveron bids to acquire Brightwell?",
+      options:[ "Yes - Calveron should bid, up to the value ceiling", "No - Calveron should not bid" ],
       grade:'single', answer:0,
       recPrep:true },
     { type:'q', id:'q8b', label:'Final Recommendation (8b)', widget:'text',
@@ -2522,7 +2607,7 @@ let bcg = null; // active session state
 function startBcgGame() {
   if (typeof cxSetResume === 'function') cxSetResume('bcg', 'BCG Chat Game', 'startBcgGame');
   const c = BCG_CASES[0];
-  bcg = { case:c, idx:-1, answers:{}, startMs:Date.now(), limitS:30*60, timerId:null, recPrepUntil:0 };
+  bcg = { case:c, idx:-1, answers:{}, startMs:Date.now(), limitS:30*60, timerId:null, qTimerId:null, qStartMs:0, recPrepUntil:0 };
   document.getElementById('bcgFeed').innerHTML = '';
   document.getElementById('bcgInputZone').innerHTML = '';
   showScreen('bcg');
@@ -2534,6 +2619,8 @@ function startBcgGame() {
 function startBcgTimer() {
   const el = document.getElementById('bcgTimer');
   if (bcg.timerId) clearInterval(bcg.timerId);
+  if (!gameTimerOn()) { el.style.display = 'none'; return; }
+  el.style.display = '';
   bcg.timerId = setInterval(() => {
     const elapsed = Math.floor((Date.now() - bcg.startMs)/1000);
     let left = bcg.limitS - elapsed;
@@ -2546,11 +2633,38 @@ function startBcgTimer() {
   }, 1000);
 }
 
+// Per-question elapsed timer: shows how long you spend on the current answer.
+function bcgStartQuestionTimer() {
+  if (bcg.qTimerId) clearInterval(bcg.qTimerId);
+  const zone = document.getElementById('bcgInputZone');
+  if (!zone || !gameTimerOn()) return;
+  bcg.qStartMs = Date.now();
+  // Inject a small label above the input zone.
+  let badge = document.getElementById('bcgQTimer');
+  if (!badge) {
+    badge = document.createElement('div');
+    badge.id = 'bcgQTimer';
+    badge.className = 'bcg-qtimer';
+    zone.parentNode.insertBefore(badge, zone);
+  }
+  const tick = () => {
+    const e = Math.floor((Date.now() - bcg.qStartMs)/1000);
+    badge.textContent = 'This answer: ' + Math.floor(e/60) + ':' + String(e%60).padStart(2,'0');
+  };
+  tick();
+  bcg.qTimerId = setInterval(tick, 1000);
+}
+function bcgStopQuestionTimer() {
+  if (bcg.qTimerId) { clearInterval(bcg.qTimerId); bcg.qTimerId = null; }
+  const badge = document.getElementById('bcgQTimer');
+  if (badge) badge.remove();
+}
+
 function bcgPushBot(text, label) {
   const feed = document.getElementById('bcgFeed');
   const wrap = document.createElement('div');
   wrap.className = 'bcg-msg bot';
-  const inner = (label ? `<div class="bcg-qlabel">${label}</div>` : '') + escapeHtml(text);
+  const inner = (label ? `<div class="bcg-qlabel">${label}</div>` : '') + mdToHtml(text);
   wrap.innerHTML = `<div class="bcg-avatar">☺</div><div class="bcg-bubble">${inner}</div>`;
   feed.appendChild(wrap);
   feed.scrollTop = feed.scrollHeight;
@@ -2597,6 +2711,7 @@ function bcgNext() {
 
 function bcgRenderWidget(step) {
   const zone = document.getElementById('bcgInputZone');
+  bcgStartQuestionTimer();
   if (step.widget === 'number') {
     zone.innerHTML = `<div class="bcg-number-row">
       <input id="bcgIn" class="bcg-num-input" type="text" inputmode="numeric" placeholder="Enter a number" autocomplete="off">
@@ -2612,7 +2727,7 @@ function bcgRenderWidget(step) {
   } else if (step.widget === 'select-all' || step.widget === 'single') {
     const multi = step.widget === 'select-all';
     let html = `<div class="bcg-opt-hint">${multi?'Choose any number of options from above':'Choose one option from the list above'}</div><div class="bcg-options">`;
-    step.options.forEach((o,i)=>{ html += `<div class="bcg-opt" data-i="${i}" onclick="bcgToggleOpt(this,${multi})"><span class="bcg-opt-mark"></span><span>${escapeHtml(o)}</span></div>`; });
+    step.options.forEach((o,i)=>{ html += `<div class="bcg-opt" data-i="${i}" onclick="bcgToggleOpt(this,${multi})"><span class="bcg-opt-letter">${String.fromCharCode(65+i)}</span><span class="bcg-opt-mark"></span><span>${escapeHtml(o)}</span></div>`; });
     html += `</div><div class="bcg-number-row" style="justify-content:flex-end"><button class="bcg-send" id="bcgSend" onclick="bcgSubmit()">Confirm</button></div>`;
     zone.innerHTML = html;
   }
@@ -2624,6 +2739,7 @@ function bcgToggleOpt(el, multi) {
 
 function bcgSubmit() {
   const step = bcg.case.steps[bcg.idx];
+  bcgStopQuestionTimer();
   let display, stored;
   if (step.widget === 'number') {
     const raw = document.getElementById('bcgIn').value.trim().replace(/[, ]/g,'');
@@ -2649,30 +2765,62 @@ function bcgFinish() {
   if (bcg.timerId) clearInterval(bcg.timerId);
   document.getElementById('bcgProgFill').style.width = '100%';
   document.getElementById('bcgProgLabel').textContent = 'Test Completed 100%';
-  // Grade machine-checkable answers locally; show a quick scorecard.
-  let lines = [], correct = 0, graded = 0;
+  // Grade machine-checkable answers locally; collect open answers + worked solutions.
+  let lines = [], correct = 0, graded = 0, openItems = [], solutions = [];
   bcg.case.steps.forEach(s => {
     if (s.type!=='q') return;
     const a = bcg.answers[s.id];
     if (s.grade === 'number') {
       graded++; const ok = Math.abs(a - s.answer) <= (s.tolerance||0);
       if (ok) correct++;
-      lines.push(`${s.label}: ${ok?'✓ correct':'✗ - correct answer '+s.answer.toLocaleString()}`);
+      lines.push(`${s.label}: ${ok?'\u2713 correct':'\u2717 - correct answer '+s.answer.toLocaleString()}`);
+      if (s.solution) solutions.push(`**${s.label} - worked solution**\n${s.solution}`);
     } else if (s.grade === 'select') {
       graded++; const want = s.answer.slice().sort().join(','); const got = (a||[]).slice().sort().join(',');
       const ok = want===got; if (ok) correct++;
-      lines.push(`${s.label}: ${ok?'✓ correct':'✗ - review the answer key'}`);
+      lines.push(`${s.label}: ${ok?'\u2713 correct':'\u2717 - review the answer key'}`);
     } else if (s.grade === 'single') {
       graded++; const ok = a === s.answer; if (ok) correct++;
-      lines.push(`${s.label}: ${ok?'✓ correct':'✗'}`);
-    } else {
-      lines.push(`${s.label}: open answer - needs AI evaluation`);
+      lines.push(`${s.label}: ${ok?'\u2713 correct':'\u2717'}`);
+    } else if (s.grade === 'open') {
+      openItems.push({ label: s.label, question: s.text, answer: a || '(no answer given)', isRec: !!s.isRec });
     }
   });
-  bcgPushBot(`That's the end of this BCG Chat Game.\n\nMachine-graded score: ${correct}/${graded}\n\n${lines.join('\n')}\n\nFull worked solutions and AI feedback on your open answers will appear here once grading is wired up.`, 'Result');
+  // 1) Immediate machine scorecard + worked solutions.
+  let msg = `That's the end of this BCG Chat Game.\n\n**Machine-graded score: ${correct}/${graded}**\n\n${lines.join('\n')}`;
+  if (solutions.length) msg += `\n\n---\n\n${solutions.join('\n\n')}`;
+  bcgPushBot(msg, 'Result');
   document.getElementById('bcgInputZone').innerHTML =
     `<div class="bcg-number-row" style="justify-content:flex-end">
       <button class="bcg-send" onclick="showScreen('mode')">Back to modes</button></div>`;
+  // 2) AI grading of the open answers (partner-level rubric). Async, with fallback.
+  if (openItems.length) bcgGradeOpen(openItems);
+}
+
+async function bcgGradeOpen(items) {
+  // Typing indicator while the grader runs.
+  bcgPushBot('Evaluating your written answers\u2026', 'AI feedback');
+  const rubric = `You are a BCG partner giving feedback on a candidate's written case answers. For each answer, judge it on: (1) conclusion-first structure (Minto / answer-first), (2) MECE structure where relevant, (3) tie to the numbers from the case, (4) inclusion of risks (one internal + one external/regulatory in the final recommendation). Be blunt, specific, and concise. For each item give: a score out of 10, one line on what was strong, one line on what was weak, and - only for the final recommendation - a one-sentence partner-level model answer. Do not invent case facts. Keep the whole reply under 250 words. Use markdown bold for the item labels and scores.`;
+  const payload = items.map(it =>
+    `${it.label}${it.isRec?' (FINAL RECOMMENDATION)':''}\nQuestion: ${it.question}\nCandidate answer: ${it.answer}`).join('\n\n---\n\n');
+  try {
+    const out = await callAI(rubric, [{ role:'user', content: payload }]);
+    // remove the "Evaluating..." placeholder (last bot bubble) before showing result
+    bcgReplaceLastBot(out, 'AI feedback');
+  } catch (e) {
+    bcgReplaceLastBot('Your machine-graded score and full worked solutions are above. The written partner-level critique of your open answers is delivered through the live grader - if you are seeing this note, the grader did not respond this time; your structured results remain complete.', 'AI feedback');
+  }
+}
+
+// Replace the most recent bot bubble's content (used to swap the typing placeholder for the result).
+function bcgReplaceLastBot(text, label) {
+  const feed = document.getElementById('bcgFeed');
+  const bots = feed ? feed.querySelectorAll('.bcg-msg.bot') : [];
+  const last = bots[bots.length - 1];
+  if (!last) { bcgPushBot(text, label); return; }
+  const inner = (label ? `<div class="bcg-qlabel">${label}</div>` : '') + mdToHtml(text);
+  last.innerHTML = `<div class="bcg-avatar">\u263a</div><div class="bcg-bubble">${inner}</div>`;
+  feed.scrollTop = feed.scrollHeight;
 }
 
 function confirmExitBcg() {
@@ -2702,7 +2850,7 @@ const GAME_INTROS = {
       ['4','<b>Cases</b> - solve a short standalone mini-case with its own exhibit.'],
     ],
     meta: [['Time','35 min'],['Phases','4'],['Scoring','Auto-graded']],
-    note: 'Original scenario (Veridian Reservoir). The format mirrors the real assessment; the content is our own. Answers are checked within a 1% tolerance.',
+    note: 'Original scenario (Calder Sound Fishery). The format mirrors the real assessment; the content is our own. Answers are checked within a 1% tolerance.',
     start: 'startSolveGame',
   },
   bcg: {
@@ -2716,7 +2864,7 @@ const GAME_INTROS = {
       ['4','<b>Final recommendation</b> - close with a clear, answer-first call, as you would for a partner.'],
     ],
     meta: [['Time','30 min'],['Format','Chat'],['Scoring','Auto-graded']],
-    note: 'The case runs in English to mirror the real BCG screening you\u2019ll face. Verified case (Technoplast). Numeric and select answers are machine-graded; open answers are flagged for AI review.',
+    note: 'The case runs in English to mirror the real BCG screening you\u2019ll face. Original verified case (Calveron). Numeric and select answers are machine-graded; open answers are flagged for AI review.',
     start: 'startBcgGame',
   },
 };
@@ -2735,6 +2883,11 @@ function openGameIntro(which) {
      <p class="gi-lead">${esc(g.lead)}</p>
      <div class="gi-meta">${meta}</div>
      <div class="gi-steps">${steps}</div>
+     <label class="gi-timer-toggle">
+       <input type="checkbox" id="giTimerChk" ${gameTimerOn()?'checked':''} onchange="setGameTimer(this.checked)">
+       <span class="gi-toggle-track"><span class="gi-toggle-knob"></span></span>
+       <span class="gi-toggle-label">Timed mode <span class="gi-toggle-sub">- real assessments are timed; turn off to practise without pressure</span></span>
+     </label>
      <div class="gi-actions">
        <button class="gi-start" onclick="${g.start}()">Start &rarr;</button>
        <button class="gi-back" onclick="showScreen('mode')">Back</button>
@@ -2743,78 +2896,107 @@ function openGameIntro(which) {
   showScreen('gameintro');
 }
 
+// Timer preference (shared by both games), persisted. Default ON (real assessments are timed).
+function gameTimerOn() {
+  try { return localStorage.getItem('casedge-timer') !== 'off'; } catch (e) { return true; }
+}
+function setGameTimer(on) {
+  try { localStorage.setItem('casedge-timer', on ? 'on' : 'off'); } catch (e) {}
+}
+
 
 /* ════════════════════════════════════════════════════
    McKINSEY SOLVE GAME ENGINE
    Format mirrors the real McKinsey Solve assessment
    (Study -> Analysis -> Report -> Cases) but the scenario
-   "Veridian Reservoir" is ORIGINAL. Math verified.
+   "Calder Sound Fishery" is ORIGINAL. Math verified.
    Built on the BCG engine pattern. CasEdge-branded, not a
    visual clone of McKinsey's UI.
 ──────────────────────────────────────────────────── */
 const SOLVE_CASE = {
-  id: 'veridian',
+  id: 'caldersound',
   totalMin: 35,
   // ---- STUDY: fill-in-the-text + exhibit ----
   study: {
-    title: 'Veridian Reservoir',
-    intro: 'All names in this study are fictional. You are analysing how the land around the Veridian Reservoir is divided between farms, a protective buffer zone, and unclaimed land, and whether the buffer zone grew in step with the three largest farms.',
+    title: 'Calder Sound Fishery',
+    intro: 'All names in this study are fictional. You are a marine researcher at the Pariw Institute, assessing the fish stocks of Calder Sound: how the population splits across three commercial species, how much stock can be safely harvested, and whether the protected quota kept pace as the populations grew.',
     // blanks the user must fill from the text (machine-checked)
     blanks: [
-      { id:'area', pre:'The Veridian Reservoir basin covers a land area of ', post:' hectares (ha) and supports several agricultural draws as well as independent smallholdings.', ans:4800 },
-      { id:'farmpct', pre:'Three of the largest farms - North, Delta, and Ridge - have steadily expanded and currently occupy about ', post:' % of basin farmland. Several smaller holdings have also claimed land, with combined territory about ', ans:60 },
-      { id:'smallpct', pre:'', post:' % of the total land claimed by the three largest farms.', ans:20 },
-      { id:'bufY1', pre:'In year 1, planners designated ', post:' ha as a protective buffer zone. In year 4, the buffer was expanded to ', ans:245 },
-      { id:'bufY4', pre:'', post:' ha. Land not claimed by farms or dedicated to the buffer is called unclaimed land.', ans:262 },
+      { id:'area', pre:'By year 4, the three commercial species tracked in Calder Sound - Marlspike, Bluefin, and Coralback - had a combined population of ', post:' thousand fish (sum the year-4 column of the exhibit).', ans:2245 },
+      { id:'farmpct', pre:' Of that year-4 total, Bluefin - the single largest stock - makes up about ', post:' % of all fish (give one decimal place). A juvenile reserve is also set aside, equal to about ', ans:40.2, tol:0.75 },
+      { id:'smallpct', pre:'', post:' % of the year-4 Marlspike population.', ans:15 },
+      { id:'bufY1', pre:' In year 1, regulators set a protected quota of ', post:' thousand fish that may not be harvested. In year 4, the protected quota was raised to ', ans:180 },
+      { id:'bufY4', pre:'', post:' thousand fish. Stock that is neither protected nor held in the juvenile reserve is called harvestable stock.', ans:196 },
     ],
     exhibit: {
-      title: 'Exhibit 1: Farm Territory Size By Year (ha)',
-      head: ['Farm','Year 1','Year 2','Year 3','Year 4'],
+      title: 'Exhibit 1: Population by Species and Year (thousand fish)',
+      head: ['Species','Year 1','Year 2','Year 3','Year 4'],
       rows: [
-        ['North', 820, 845, 868, 902],
-        ['Delta', 410, 428, 447, 463],
-        ['Ridge', 533, 551, 570, 588],
+        ['Marlspike', 620, 658, 691, 724],
+        ['Bluefin', 840, 861, 879, 902],
+        ['Coralback', 510, 548, 583, 619],
       ],
     },
   },
   // ---- ANALYSIS: numeric questions ----
   analysis: [
-    { id:'a1', label:'Question 1', text:'Calculate the year-4 area for each category. Round to one decimal where needed.',
+    { id:'a1', label:'Question 1', text:'Calculate the year-4 figures below. Round to one decimal where needed. (Juvenile reserve = 15% of year-4 Marlspike; harvestable stock = total - protected quota - juvenile reserve.)',
       fields:[
-        { id:'farms4', label:'Farms - 3 largest:', unit:'ha', ans:1953 },
-        { id:'small4', label:'Smallholdings:', unit:'ha', ans:390.6 },
-        { id:'buf4',  label:'Buffer zone:', unit:'ha', ans:262 },
-        { id:'uncl4', label:'Unclaimed land:', unit:'ha', ans:2194.4 },
+        { id:'farms4', label:'Total population (year 4):', unit:'k', ans:2245 },
+        { id:'small4', label:'Juvenile reserve:', unit:'k', ans:108.6 },
+        { id:'buf4',  label:'Protected quota (year 4):', unit:'k', ans:196 },
+        { id:'uncl4', label:'Harvestable stock:', unit:'k', ans:1940.4 },
       ] },
-    { id:'a2', label:'Question 2', text:'Is the year-1 to year-4 growth rate of the buffer zone the same as the growth rate of the three largest farms\u2019 combined area? Round to two digits.',
+    { id:'a2', label:'Question 2', text:'Did the protected quota grow at the same year-1 to year-4 rate as the three species\u2019 combined population? Round to two digits, then state the comparison.',
       fields:[
-        { id:'gbuf',  label:'Growth rate - buffer zone:', unit:'%', ans:6.94 },
-        { id:'gfarm', label:'Growth rate - 3 largest farms:', unit:'%', ans:10.78 },
+        { id:'gbuf',  label:'Growth rate - protected quota:', unit:'%', ans:8.89 },
+        { id:'gfarm', label:'Growth rate - combined population:', unit:'%', ans:13.96 },
+        { id:'gcmp',  label:'Over the 4 years, the protected quota grew', unit:'than the fish population.', ans:'slower', isQual:true, options:['','faster','slower','at the same rate'] },
       ] },
-    { id:'a3', label:'Question 3', text:'Among North, Delta and Ridge, which farm had the largest average annual growth rate (no compounding)? List the farm and its average annual rate.',
+    { id:'a3', label:'Question 3', text:'Among Marlspike, Bluefin and Coralback, which species had the largest average annual growth rate (no compounding)? List the species and its average annual rate.',
       fields:[
-        { id:'fastfarm', label:'Farm:', unit:'', ans:'Delta', isText:true },
-        { id:'fastrate', label:'Average annual growth rate:', unit:'%', ans:4.31 },
+        { id:'fastfarm', label:'Species:', unit:'', ans:'Coralback', isText:true },
+        { id:'fastrate', label:'Average annual growth rate:', unit:'%', ans:7.12 },
       ] },
   ],
-  // ---- REPORT: graph selection ----
+  // ---- REPORT: graph build + selection ----
   report: {
-    prompt: 'Select the chart that best visualises the land breakdown of the Veridian basin in year 4 (a part-to-whole split across four categories).',
+    // --- step 1: user builds the year-4 stock-breakdown bar chart ---
+    build: {
+      prompt: 'Build the year-4 stock breakdown. Enter the figure (thousand fish) for each category from your Analysis answers; the bars update as you type. Values are checked against the verified figures.',
+      axisLabel: 'Thousand fish',
+      max: 2400,
+      bars: [
+        { id:'b_farms', label:'Harvestable stock', ans:1940.4, color:'var(--accent-teal)' },
+        { id:'b_small', label:'Juvenile reserve',  ans:108.6,  color:'var(--accent-teal)' },
+        { id:'b_buf',   label:'Protected quota',   ans:196,    color:'var(--accent-teal)' },
+        { id:'b_uncl',  label:'Bluefin stock',     ans:902,    color:'var(--accent-teal)' },
+      ],
+    },
+    // --- step 2: read a combo chart, then pick best chart type ---
+    combo: {
+      title: 'Fish population vs. protected quota, by year',
+      subtitle: 'The three species\u2019 combined population (bars, left axis) against the protected quota (line, right axis).',
+      categories: ['Year 1','Year 2','Year 3','Year 4'],
+      bars:  { name:'Combined population (k)', axis:'Total k', max:2400, values:[1970,2067,2153,2245] },
+      line:  { name:'Protected quota (k)',     axis:'Quota k', max:240,  values:[180,185,191,196] },
+    },
+    prompt: 'You need a single chart for the report that shows how the year-4 stock splits across the categories as parts of one whole. Which chart type fits best?',
     options: ['bar','line','pie'],
     correct: 'pie',
   },
-  // ---- CASES: one mini-case (biomass-style) ----
+  // ---- CASES: one mini-case (catch-efficiency) ----
   cases: [
     { id:'c1', title:'Case 1',
-      intro:'Researchers logged plant biomass units (1 unit = 1 tonne) across three reserve zones around Veridian.',
-      exhibit:{ title:'Exhibit 1: Plant Biomass Units by Zone',
-        head:['Plant','Cove','Marsh','Bluff','Total'],
-        rows:[ ['Trees',15,9,8,32], ['Shrubs',5,7,6,18], ['Grasses','n/a',14,16,30], ['Total',20,30,30,80] ] },
-      q:'If tree biomass doubled, what would be the average biomass units per plant type in each zone? Average across all three plant types (treat "n/a" as 0). Round to two digits.',
+      intro:'Surveyors logged the catch (tonnes landed) by gear type across three fishing grounds in Calder Sound over one season.',
+      exhibit:{ title:'Exhibit 1: Catch by Gear Type and Ground (tonnes)',
+        head:['Gear','Reef','Shelf','Trench','Total'],
+        rows:[ ['Trawl',18,9,8,35], ['Longline',12,14,16,42], ['Net','n/a',7,6,13], ['Total',30,30,30,90] ] },
+      q:'If longline catch doubled, what would be the average catch (tonnes) per gear type in each ground? Average across all three gear types (treat "n/a" as 0). Round to two digits.',
       fields:[
-        { id:'cove', label:'Cove average:', unit:'', ans:11.67 },
-        { id:'marsh', label:'Marsh average:', unit:'', ans:13 },
-        { id:'bluff', label:'Bluff average:', unit:'', ans:12.67 },
+        { id:'cove', label:'Reef average:', unit:'', ans:14 },
+        { id:'marsh', label:'Shelf average:', unit:'', ans:14.67 },
+        { id:'bluff', label:'Trench average:', unit:'', ans:15.33 },
       ] },
   ],
 };
@@ -2824,7 +3006,9 @@ let solve = null;
 function startSolveGame() {
   if (typeof requireAuth === 'function' && !requireAuth()) return;
   if (typeof cxSetResume === 'function') cxSetResume('solve', 'Solve Game', 'startSolveGame');
-  solve = { phase:'study', qIndex:0, answers:{}, graded:{}, secs: SOLVE_CASE.totalMin*60, timerId:null };
+  solve = { phase:'study', qIndex:0, answers:{}, graded:{}, journal:[], calcLog:[], reportStep:'build', secs: SOLVE_CASE.totalMin*60, timerId:null };
+  svCalcExpr = '';
+  try { const cd=document.getElementById('svCalcDisp'); if(cd)cd.textContent='0'; const cl=document.getElementById('svCalcLog'); if(cl)cl.innerHTML=''; const cc=document.getElementById('svCalc'); if(cc)cc.classList.remove('show'); } catch(e){}
   showScreen('solve');
   startSolveTimer();
   renderSolve();
@@ -2835,6 +3019,8 @@ function startSolveTimer() {
   if (solve.timerId) clearInterval(solve.timerId);
   solve.startMs = Date.now();
   solve.limitS = SOLVE_CASE.totalMin * 60;
+  if (!gameTimerOn()) { el.style.display = 'none'; return; }
+  el.style.display = '';
   const tick = () => {
     const elapsed = Math.floor((Date.now() - solve.startMs) / 1000);
     let left = solve.limitS - elapsed;
@@ -2851,11 +3037,13 @@ function startSolveTimer() {
 
 function svSetPhaseUI() {
   const order = ['study','analysis','report','cases'];
+  const labels = {study:'Study',analysis:'Analysis',report:'Report',cases:'Cases'};
   const cur = order.indexOf(solve.phase);
   order.forEach((p,i) => {
     const el = document.getElementById('svPhase-'+p);
     el.classList.toggle('active', i === cur);
     el.classList.toggle('done', i < cur);
+    el.textContent = (i < cur ? '\u2713 ' : '') + labels[p];
   });
   document.getElementById('svProgFill').style.width = ((cur)/order.length*100 + (1/order.length)*50) + '%';
 }
@@ -2872,26 +3060,160 @@ function renderSolve() {
   document.getElementById('svBody').scrollTop = 0;
 }
 
+/* ════════ Collectible data: drag-and-drop (pointer events = mouse+touch) + Research Journal ════════ */
+// Make a number into a draggable chip. Tap = collect to journal + fill active field. Drag = drop onto a field.
+function svChip(val) {
+  const v = String(val);
+  return `<span class="sv-chip" data-val="${esc(v)}" onpointerdown="svChipDown(event,'${esc(v)}')">${esc(v)}</span>`;
+}
+let svDrag = null;
+function svChipDown(e, val) {
+  if (e.button === 1 || e.button === 2) return;
+  if (e.preventDefault) e.preventDefault();
+  const src = e.currentTarget || (e.target && e.target.closest && e.target.closest('.sv-chip, .sv-jchip'));
+  if (!src) { svCollect(val); return; }
+  const ghost = src.cloneNode(true);
+  ghost.classList.add('sv-dragging');
+  ghost.style.left = (e.clientX - 20) + 'px';
+  ghost.style.top = (e.clientY - 14) + 'px';
+  document.body.appendChild(ghost);
+  svDrag = { val, ghost, src, moved: false, startX: e.clientX, startY: e.clientY };
+  try { src.setPointerCapture && e.pointerId != null && src.setPointerCapture(e.pointerId); } catch (err) {}
+  const move = (ev) => {
+    if (!svDrag) return;
+    if (Math.abs(ev.clientX - svDrag.startX) + Math.abs(ev.clientY - svDrag.startY) > 4) svDrag.moved = true;
+    svDrag.ghost.style.left = (ev.clientX - 20) + 'px';
+    svDrag.ghost.style.top = (ev.clientY - 14) + 'px';
+    document.querySelectorAll('.sv-drop-active').forEach(el => el.classList.remove('sv-drop-active'));
+    const t = document.elementFromPoint(ev.clientX, ev.clientY);
+    const field = t && t.closest && t.closest('input.sv-inp, input.sv-numin, .sv-buildrow input');
+    if (field) field.classList.add('sv-drop-active');
+  };
+  const up = (ev) => {
+    window.removeEventListener('pointermove', move);
+    window.removeEventListener('pointerup', up);
+    const t = document.elementFromPoint(ev.clientX, ev.clientY);
+    const field = t && t.closest && t.closest('input.sv-inp, input.sv-numin, .sv-buildrow input');
+    if (svDrag.moved && field) {
+      svFillField(field, svDrag.val);     // dropped on a field
+    } else if (!svDrag.moved) {
+      svCollect(svDrag.val);              // tap = collect to journal
+    }
+    document.querySelectorAll('.sv-drop-active').forEach(el => el.classList.remove('sv-drop-active'));
+    svDrag.ghost.remove();
+    svDrag = null;
+  };
+  window.addEventListener('pointermove', move);
+  window.addEventListener('pointerup', up);
+}
+function svFillField(field, val) {
+  field.value = val;
+  field.dispatchEvent(new Event('input', { bubbles: true }));
+  svCollect(val);
+}
+function svCollect(val) {
+  if (!solve.journal) solve.journal = [];
+  if (!solve.journal.includes(val)) solve.journal.push(val);
+  svRenderJournal();
+}
+function svRenderJournal() {
+  const el = document.getElementById('svJournal');
+  if (!el) return;
+  const j = solve.journal || [];
+  el.innerHTML = `<div class="sv-journal-t">Research Journal</div>` +
+    (j.length ? `<div class="sv-journal-list">` + j.map(v =>
+      `<span class="sv-jchip" onpointerdown="svChipDown(event,'${esc(String(v))}')">${esc(String(v))}</span>`).join('') + `</div>`
+    : `<div class="sv-journal-empty">Tap any highlighted number to collect it here, or drag it straight into an answer box.</div>`);
+}
+
+/* ════════ Floating calculator (logs every result; results are collectible) ════════ */
+let svCalcExpr = '';
+function svCalcToggle() {
+  const c = document.getElementById('svCalc');
+  if (!c) return;
+  c.classList.toggle('show');
+  if (c.classList.contains('show') && !c._dragInit) { svCalcInitDrag(c); c._dragInit = true; }
+}
+function svCalcKey(k) {
+  const disp = document.getElementById('svCalcDisp');
+  if (k === 'C') { svCalcExpr = ''; disp.textContent = '0'; return; }
+  if (k === 'back') { svCalcExpr = svCalcExpr.slice(0, -1); disp.textContent = svCalcExpr || '0'; return; }
+  if (k === '=') { svCalcEval(); return; }
+  svCalcExpr += k;
+  disp.textContent = svCalcExpr;
+}
+function svCalcEval() {
+  const disp = document.getElementById('svCalcDisp');
+  if (!svCalcExpr) return;
+  // safe: only digits, operators, parens, dot
+  if (!/^[0-9+\-*/(). ]+$/.test(svCalcExpr)) { disp.textContent = 'Error'; return; }
+  let res;
+  try { res = Function('"use strict";return (' + svCalcExpr + ')')(); } catch (e) { disp.textContent = 'Error'; return; }
+  if (res == null || !isFinite(res)) { disp.textContent = 'Error'; return; }
+  const rounded = Math.round(res * 100) / 100;
+  const out = String(rounded);
+  disp.textContent = out;
+  svCalcLogResult(svCalcExpr, out);
+  svCalcExpr = out;          // chain like a real calculator
+}
+function svCalcLogResult(expr, out) {
+  if (!solve.calcLog) solve.calcLog = [];
+  solve.calcLog.unshift({ expr, out });
+  if (solve.calcLog.length > 12) solve.calcLog.pop();
+  const log = document.getElementById('svCalcLog');
+  if (!log) return;
+  log.innerHTML = solve.calcLog.map(r =>
+    `<div class="sv-calc-logrow"><span>${esc(r.expr)} =</span><span class="r" onpointerdown="svChipDown(event,'${esc(r.out)}')">${esc(r.out)}</span></div>`).join('');
+}
+function svCalcInitDrag(panel) {
+  const head = document.getElementById('svCalcHead');
+  if (!head) return;
+  head.addEventListener('pointerdown', (e) => {
+    if (e.target.classList.contains('sv-calc-x')) return;
+    e.preventDefault();
+    const rect = panel.getBoundingClientRect();
+    const offX = e.clientX - rect.left, offY = e.clientY - rect.top;
+    panel.style.right = 'auto'; panel.style.bottom = 'auto';
+    const move = (ev) => {
+      panel.style.left = Math.max(4, Math.min(ev.clientX - offX, window.innerWidth - rect.width - 4)) + 'px';
+      panel.style.top  = Math.max(4, Math.min(ev.clientY - offY, window.innerHeight - 60)) + 'px';
+    };
+    const up = () => { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  });
+}
+
 function renderSolveStudy(inner, foot) {
   const s = SOLVE_CASE.study;
   let prose = '';
   s.blanks.forEach(b => {
     prose += esc(b.pre) + `<input class="sv-inp" id="sv-${b.id}" inputmode="numeric" value="${solve.answers[b.id]||''}" oninput="solve.answers['${b.id}']=this.value">` + esc(b.post);
   });
-  let ex = svExhibitHTML(s.exhibit);
+  let ex = svExhibitHTML(s.exhibit, true);
   inner.innerHTML = `<h2 class="sv-h">${esc(s.title)}</h2>
     <p class="sv-sub">${esc(s.intro)}</p>
-    <div class="sv-prose">${prose}</div>${ex}`;
+    <div class="sv-layout">
+      <div class="sv-layout-main">
+        <div class="sv-prose">${prose}</div>${ex}
+      </div>
+      <div class="sv-journal" id="svJournal"></div>
+    </div>`;
+  svRenderJournal();
   foot.innerHTML = `<span></span><button class="sv-next" onclick="solvePhaseNext()">Finished collecting &rarr;</button>`;
 }
 
-function svExhibitHTML(ex) {
+function svExhibitHTML(ex, collectible) {
   let h = `<div class="sv-exhibit"><div class="sv-exhibit-t">${esc(ex.title)}</div><table class="sv-table"><thead><tr>`;
   ex.head.forEach((c,i) => h += `<th${i>0?' style="text-align:right"':''}>${esc(c)}</th>`);
   h += `</tr></thead><tbody>`;
   ex.rows.forEach(r => {
     h += '<tr>';
-    r.forEach((c,i) => h += i===0 ? `<td>${esc(String(c))}</td>` : `<td class="num">${esc(String(c))}</td>`);
+    r.forEach((c,i) => {
+      if (i === 0) { h += `<td>${esc(String(c))}</td>`; return; }
+      const isNum = collectible && c !== 'n/a' && String(c).trim() !== '' && !isNaN(parseFloat(c));
+      h += isNum ? `<td class="num">${svChip(c)}</td>` : `<td class="num">${esc(String(c))}</td>`;
+    });
     h += '</tr>';
   });
   return h + '</tbody></table></div>';
@@ -2899,12 +3221,22 @@ function svExhibitHTML(ex) {
 
 function renderSolveAnalysis(inner, foot) {
   const q = SOLVE_CASE.analysis[solve.qIndex];
-  let fields = q.fields.map(f =>
-    `<div class="sv-field"><label>${esc(f.label)}</label>
+  let fields = q.fields.map(f => {
+    if (f.isQual) {
+      const opts = f.options.map(o => `<option value="${esc(o)}" ${solve.answers[f.id]===o?'selected':''}>${o?esc(o):'\u2014 select \u2014'}</option>`).join('');
+      return `<div class="sv-field"><label>${esc(f.label)}</label>
+        <select class="sv-qual" id="sv-${f.id}" onchange="solve.answers['${f.id}']=this.value">${opts}</select>
+        <span class="sv-unit">${esc(f.unit)}</span></div>`;
+    }
+    return `<div class="sv-field"><label>${esc(f.label)}</label>
       <input class="sv-numin" id="sv-${f.id}" value="${solve.answers[f.id]||''}" oninput="solve.answers['${f.id}']=this.value">
-      <span class="sv-unit">${esc(f.unit)}</span></div>`).join('');
-  inner.innerHTML = `<div class="sv-q-label">${esc(q.label)} of ${SOLVE_CASE.analysis.length} \u00b7 Analysis</div>
-    <div class="sv-q-text">${esc(q.text)}</div>${fields}`;
+      <span class="sv-unit">${esc(f.unit)}</span></div>`;
+  }).join('');
+  inner.innerHTML = `<div class="sv-layout"><div class="sv-layout-main">
+    <div class="sv-q-label">${esc(q.label)} of ${SOLVE_CASE.analysis.length} \u00b7 Analysis</div>
+    <div class="sv-q-text">${esc(q.text)}</div>${fields}
+    </div><div class="sv-journal" id="svJournal"></div></div>`;
+  svRenderJournal();
   const last = solve.qIndex === SOLVE_CASE.analysis.length - 1;
   foot.innerHTML = `<button class="sv-back" onclick="solvePhasePrev()">&larr; Back</button>
     <button class="sv-next" onclick="solveAnalysisNext()">${last?'Go to Report':'Next question'} &rarr;</button>`;
@@ -2916,20 +3248,119 @@ function solveAnalysisNext() {
 }
 
 function renderSolveReport(inner, foot) {
-  const r = SOLVE_CASE.report;
+  // Two sub-steps: 'build' (user enters values, bars grow) then 'pick' (read combo chart, choose best type).
+  if (!solve.reportStep) solve.reportStep = 'build';
+  if (solve.reportStep === 'build') return renderReportBuild(inner, foot);
+  return renderReportPick(inner, foot);
+}
+
+// --- live bar chart the user builds by typing values ---
+function svBuildChartSVG() {
+  const b = SOLVE_CASE.report.build;
+  const W = 560, H = 230, padL = 48, padB = 38, padT = 14, padR = 12;
+  const plotW = W - padL - padR, plotH = H - padT - padB;
+  const n = b.bars.length, gap = 18, bw = (plotW - gap*(n-1)) / n;
+  let svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(b.axisLabel)}">`;
+  // y gridlines + labels (0, 25, 50, 75, 100% of max)
+  for (let i=0;i<=4;i++){
+    const v = b.max*i/4, y = padT + plotH - (i/4)*plotH;
+    svg += `<line x1="${padL}" y1="${y.toFixed(1)}" x2="${W-padR}" y2="${y.toFixed(1)}" stroke="var(--sv-line-soft)" stroke-width="1"/>`;
+    svg += `<text x="${padL-6}" y="${(y+4).toFixed(1)}" text-anchor="end" font-size="10" fill="var(--on-dark-soft)">${Math.round(v)}</text>`;
+  }
+  b.bars.forEach((bar,i) => {
+    const raw = parseFloat(String(solve.answers[bar.id]||'').replace(/[, ]/g,''));
+    const val = isNaN(raw) ? 0 : Math.max(0, Math.min(raw, b.max));
+    const h = (val/b.max)*plotH, x = padL + i*(bw+gap), y = padT + plotH - h;
+    svg += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="3" fill="${bar.color}" opacity="0.92"/>`;
+    if (!isNaN(raw) && raw>0){
+      const bx = x+bw/2, by = y-6;
+      svg += `<g><rect x="${(bx-20).toFixed(1)}" y="${(by-13).toFixed(1)}" width="40" height="16" rx="3" fill="var(--surface-dark-elevated)" stroke="var(--sv-line)"/><text x="${bx.toFixed(1)}" y="${(by-1).toFixed(1)}" text-anchor="middle" font-size="10" font-weight="700" fill="var(--on-dark)">${raw}</text></g>`;
+    }
+    // category label
+    bar.label.split(' ').slice(0,2).forEach((w,k)=>{ svg += `<text x="${(x+bw/2).toFixed(1)}" y="${(H-padB+13+k*11).toFixed(1)}" text-anchor="middle" font-size="9.5" fill="var(--on-dark-soft)">${esc(w)}</text>`; });
+  });
+  return svg + '</svg>';
+}
+
+function renderReportBuild(inner, foot) {
+  const b = SOLVE_CASE.report.build;
+  const rows = b.bars.map(bar =>
+    `<div class="sv-buildrow"><label>${esc(bar.label)}</label>
+      <input inputmode="decimal" id="sv-${bar.id}" value="${solve.answers[bar.id]||''}"
+        oninput="solve.answers['${bar.id}']=this.value; document.getElementById('svBuildChart').innerHTML = svBuildChartSVG();">
+      <span class="un">ha</span></div>`).join('');
+  inner.innerHTML = `<div class="sv-q-label">Report \u00b7 Build the chart (step 1 of 2)</div>
+    <div class="sv-q-text">${esc(b.prompt)}</div>
+    <div class="sv-chart"><div class="sv-chart-t">${esc(b.axisLabel)} \u00b7 year 4</div>
+      <div id="svBuildChart">${svBuildChartSVG()}</div></div>
+    ${rows}`;
+  foot.innerHTML = `<button class="sv-back" onclick="solvePhasePrev()">&larr; Back</button>
+    <button class="sv-next" onclick="solve.reportStep='pick';renderSolve()">Next: read the chart &rarr;</button>`;
+}
+
+// --- combo bar + line chart (two axes), then pick-best-type ---
+function svComboChartSVG() {
+  const c = SOLVE_CASE.report.combo;
+  const W = 580, H = 250, padL = 46, padR = 46, padT = 18, padB = 40;
+  const plotW = W - padL - padR, plotH = H - padT - padB;
+  const cats = c.categories, n = cats.length;
+  const slot = plotW/n, bw = slot*0.42;
+  let svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(c.title)}">`;
+  // gridlines + left axis (bars)
+  for (let i=0;i<=4;i++){
+    const y = padT + plotH - (i/4)*plotH;
+    svg += `<line x1="${padL}" y1="${y.toFixed(1)}" x2="${W-padR}" y2="${y.toFixed(1)}" stroke="var(--sv-line-soft)" stroke-width="1"/>`;
+    svg += `<text x="${padL-6}" y="${(y+4).toFixed(1)}" text-anchor="end" font-size="9.5" fill="var(--on-dark-soft)">${Math.round(c.bars.max*i/4)}</text>`;
+    svg += `<text x="${W-padR+6}" y="${(y+4).toFixed(1)}" text-anchor="start" font-size="9.5" fill="var(--accent-amber)">${Math.round(c.line.max*i/4)}</text>`;
+  }
+  // bars (left axis)
+  cats.forEach((cat,i) => {
+    const v = c.bars.values[i], h = (v/c.bars.max)*plotH;
+    const x = padL + i*slot + slot/2 - bw/2, y = padT + plotH - h;
+    svg += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="3" fill="var(--accent-teal)" opacity="0.9"/>`;
+    const bx=x+bw/2, by=y-5;
+    svg += `<g><rect x="${(bx-20).toFixed(1)}" y="${(by-13).toFixed(1)}" width="40" height="15" rx="3" fill="var(--surface-dark-elevated)" stroke="var(--sv-line)"/><text x="${bx.toFixed(1)}" y="${(by-2).toFixed(1)}" text-anchor="middle" font-size="9.5" font-weight="700" fill="var(--on-dark)">${v}</text></g>`;
+    svg += `<text x="${(padL+i*slot+slot/2).toFixed(1)}" y="${(H-padB+15).toFixed(1)}" text-anchor="middle" font-size="10" fill="var(--on-dark-soft)">${esc(cat)}</text>`;
+  });
+  // line (right axis)
+  let pts = cats.map((cat,i) => {
+    const v = c.line.values[i];
+    const x = padL + i*slot + slot/2, y = padT + plotH - (v/c.line.max)*plotH;
+    return {x,y,v};
+  });
+  let d = pts.map((p,i)=>`${i?'L':'M'}${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' ');
+  svg += `<path d="${d}" fill="none" stroke="var(--accent-amber)" stroke-width="2.4"/>`;
+  pts.forEach(p => {
+    svg += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3.5" fill="var(--accent-amber)"/>`;
+    svg += `<g><rect x="${(p.x-15).toFixed(1)}" y="${(p.y-20).toFixed(1)}" width="30" height="14" rx="3" fill="var(--surface-dark-elevated)" stroke="var(--sv-line)"/><text x="${p.x.toFixed(1)}" y="${(p.y-9.5).toFixed(1)}" text-anchor="middle" font-size="9" font-weight="700" fill="var(--accent-amber)">${p.v}</text></g>`;
+  });
+  return svg + '</svg>';
+}
+
+function renderReportPick(inner, foot) {
+  const r = SOLVE_CASE.report, c = r.combo;
   const icons = {
-    bar:'<svg viewBox="0 0 56 42"><rect x="6" y="20" width="9" height="18" fill="#5db8a6"/><rect x="20" y="10" width="9" height="28" fill="#e8916b"/><rect x="34" y="24" width="9" height="14" fill="#5db8a6"/></svg>',
-    line:'<svg viewBox="0 0 56 42" fill="none" stroke="#5db8a6" stroke-width="2.5"><path d="M6 30 L20 16 L34 22 L48 8"/></svg>',
-    pie:'<svg viewBox="0 0 56 42"><circle cx="28" cy="21" r="16" fill="#5db8a6"/><path d="M28 21 L28 5 A16 16 0 0 1 44 21 Z" fill="#e8916b"/><path d="M28 21 L44 21 A16 16 0 0 1 36 35 Z" fill="#7c8ce8"/></svg>',
+    bar:'<svg viewBox="0 0 120 80"><rect x="14" y="40" width="18" height="34" fill="var(--accent-teal)"/><rect x="42" y="22" width="18" height="52" fill="var(--accent-teal)"/><rect x="70" y="50" width="18" height="24" fill="var(--accent-teal)"/><rect x="98" y="32" width="14" height="42" fill="var(--accent-teal)"/></svg>',
+    line:'<svg viewBox="0 0 120 80" fill="none" stroke="var(--accent-amber)" stroke-width="3"><path d="M12 60 L44 30 L72 44 L108 16"/></svg>',
+    pie:'<svg viewBox="0 0 120 80"><circle cx="60" cy="40" r="30" fill="var(--accent-teal)"/><path d="M60 40 L60 10 A30 30 0 0 1 86 55 Z" fill="var(--accent-amber)"/><path d="M60 40 L86 55 A30 30 0 0 1 34 58 Z" fill="#7c8ce8"/></svg>',
   };
   let cards = r.options.map(o =>
-    `<div class="sv-gcard ${solve.answers.graph===o?'sel':''}" onclick="solve.answers.graph='${o}';renderSolve()">
+    `<div class="sv-gcard sv-gcard-lg ${solve.answers.graph===o?'sel':''}" onclick="solve.answers.graph='${o}';renderSolve()">
       ${icons[o]}<div class="gl">${o.charAt(0).toUpperCase()+o.slice(1)} chart</div></div>`).join('');
-  inner.innerHTML = `<div class="sv-q-label">Report \u00b7 Graph selection</div>
+  inner.innerHTML = `<div class="sv-q-label">Report \u00b7 Read the chart, then choose (step 2 of 2)</div>
+    <div class="sv-chart">
+      <div class="sv-chart-t">${esc(c.title)}</div>
+      <div class="sv-chart-sub">${esc(c.subtitle)}</div>
+      ${svComboChartSVG()}
+      <div class="sv-chart-legend">
+        <span class="sv-leg"><i style="background:var(--accent-teal)"></i>${esc(c.bars.name)}</span>
+        <span class="sv-leg"><i class="ln" style="background:var(--accent-amber)"></i>${esc(c.line.name)}</span>
+      </div>
+    </div>
     <div class="sv-q-text">${esc(r.prompt)}</div>
     <div class="sv-graphpick">${cards}</div>`;
-  foot.innerHTML = `<button class="sv-back" onclick="solvePhasePrev()">&larr; Back</button>
-    <button class="sv-next" ${solve.answers.graph?'':'disabled'} onclick="solve.phase='cases';solve.qIndex=0;renderSolve()">Go to Cases &rarr;</button>`;
+  foot.innerHTML = `<button class="sv-back" onclick="solve.reportStep='build';renderSolve()">&larr; Back</button>
+    <button class="sv-next" ${solve.answers.graph?'':'disabled'} onclick="solve.phase='cases';solve.reportStep='build';solve.qIndex=0;renderSolve()">Go to Cases &rarr;</button>`;
 }
 
 function renderSolveCases(inner, foot) {
@@ -2939,7 +3370,7 @@ function renderSolveCases(inner, foot) {
       <input class="sv-numin" id="sv-${f.id}" value="${solve.answers[f.id]||''}" oninput="solve.answers['${f.id}']=this.value">
       <span class="sv-unit">${esc(f.unit)}</span></div>`).join('');
   inner.innerHTML = `<div class="sv-q-label">${esc(c.title)} \u00b7 Cases</div>
-    <p class="sv-sub">${esc(c.intro)}</p>${svExhibitHTML(c.exhibit)}
+    <p class="sv-sub">${esc(c.intro)}</p>${svExhibitHTML(c.exhibit, true)}
     <div class="sv-q-text">${esc(c.q)}</div>${fields}`;
   foot.innerHTML = `<button class="sv-back" onclick="solve.phase='report';renderSolve()">&larr; Back</button>
     <button class="sv-next" onclick="solveFinish()">Submit &amp; see results &rarr;</button>`;
@@ -2955,23 +3386,27 @@ function solvePhasePrev() {
   } else if (solve.phase === 'report') { solve.phase = 'analysis'; solve.qIndex = SOLVE_CASE.analysis.length-1; renderSolve(); }
 }
 
-function svCheck(ans, val, isText) {
+function svCheck(ans, val, isText, tol) {
   if (val == null || val === '') return false;
   if (isText) return String(val).trim().toLowerCase() === String(ans).toLowerCase();
   const n = parseFloat(String(val).replace(/[, ]/g,''));
   if (isNaN(n)) return false;
-  return Math.abs(n - ans) <= Math.max(0.05, Math.abs(ans)*0.01); // 1% or 0.05 tolerance
+  const allow = (typeof tol === 'number') ? tol : Math.max(0.05, Math.abs(ans)*0.01); // 1% or 0.05 default
+  return Math.abs(n - ans) <= allow;
 }
 
 function solveFinish() {
   if (solve.timerId) clearInterval(solve.timerId);
   let correct = 0, total = 0, lines = [];
   // study blanks
-  SOLVE_CASE.study.blanks.forEach(b => { total++; const ok = svCheck(b.ans, solve.answers[b.id]); if(ok)correct++; });
+  SOLVE_CASE.study.blanks.forEach(b => { total++; const ok = svCheck(b.ans, solve.answers[b.id], false, b.tol); if(ok)correct++; });
   // analysis
-  SOLVE_CASE.analysis.forEach(q => q.fields.forEach(f => { total++; const ok = svCheck(f.ans, solve.answers[f.id], f.isText); if(ok)correct++;
-    lines.push(`<div class="sv-result-row"><span>${esc(f.label)}</span><span class="${ok?'sv-grade-ok':'sv-grade-bad'}">${ok?'\u2713':'\u2717'} ${esc(String(f.ans))}${esc(f.unit)}</span></div>`); }));
-  // report
+  SOLVE_CASE.analysis.forEach(q => q.fields.forEach(f => { total++; const asText = f.isText || f.isQual; const ok = svCheck(f.ans, solve.answers[f.id], asText); if(ok)correct++;
+    lines.push(`<div class="sv-result-row"><span>${esc(f.label)}</span><span class="${ok?'sv-grade-ok':'sv-grade-bad'}">${ok?'\u2713':'\u2717'} ${esc(String(f.ans))}${f.isQual?'':esc(f.unit)}</span></div>`); }));
+  // report - build phase (4 bars the user entered)
+  SOLVE_CASE.report.build.bars.forEach(bar => { total++; const ok = svCheck(bar.ans, solve.answers[bar.id]); if(ok)correct++;
+    lines.push(`<div class="sv-result-row"><span>Chart \u00b7 ${esc(bar.label)}</span><span class="${ok?'sv-grade-ok':'sv-grade-bad'}">${ok?'\u2713':'\u2717'} ${esc(String(bar.ans))} ha</span></div>`); });
+  // report - best chart type
   total++; const gOk = solve.answers.graph === SOLVE_CASE.report.correct; if(gOk)correct++;
   lines.push(`<div class="sv-result-row"><span>Best chart</span><span class="${gOk?'sv-grade-ok':'sv-grade-bad'}">${gOk?'\u2713':'\u2717'} ${SOLVE_CASE.report.correct} chart</span></div>`);
   // cases
@@ -2990,7 +3425,7 @@ function renderSolveResult(inner, foot) {
   inner.innerHTML = `<h2 class="sv-h">Solve Game \u2014 results</h2>
     <p class="sv-sub">Machine-graded score: <strong>${r.correct} / ${r.total}</strong> (${pct}%). Text-fill and numeric answers are checked against the verified solution within a 1% tolerance.</p>
     <div class="sv-result-card">${r.lines.join('')}</div>
-    <p class="sv-sub">This is the first verified Solve case (Veridian Reservoir). The full case library and AI feedback on open answers are on the roadmap.</p>`;
+    <p class="sv-sub">You just completed a full McKinsey-style Solve assessment (Calder Sound Fishery) - all four phases, machine-graded against a verified solution. More Solve cases are added regularly.</p>`;
   foot.innerHTML = `<span></span><button class="sv-next" onclick="showScreen('mode')">Back to modes</button>`;
 }
 
@@ -3015,6 +3450,13 @@ function cxMaybeOnboard() {
   let seen = false;
   try { seen = localStorage.getItem(CX_OB_KEY) === '1'; } catch (e) {}
   if (seen) return;
+  cxObStep = 0;
+  cxObRender();
+  const ov = document.getElementById('cxObOverlay');
+  if (ov) requestAnimationFrame(() => ov.classList.add('show'));
+}
+// On-demand opener (ignores the seen flag) - for a "How it works" entry point.
+function openOnboarding() {
   cxObStep = 0;
   cxObRender();
   const ov = document.getElementById('cxObOverlay');
@@ -4733,4 +5175,154 @@ document.addEventListener('keydown', e => {
   <div class="br" id="brCard"></div>
 </div>
 
+<script>
+/* ───────── Hero 3D scene: an "idea core" that opens and streams ideas downward on scroll.
+   Self-contained, lazy-loaded, fully guarded: if Three.js fails to load or WebGL is
+   unavailable, nothing breaks - the existing ambient background stays as-is. ───────── */
+(function () {
+  var canvas = document.getElementById('heroCanvas');
+  if (!canvas) return;
+  // Respect reduced-motion and skip on very small screens (keeps mobile light).
+  try { if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; } catch (e) {}
+
+  function load(src) {
+    return new Promise(function (res, rej) {
+      var s = document.createElement('script');
+      s.src = src; s.onload = res; s.onerror = rej;
+      document.head.appendChild(s);
+    });
+  }
+
+  load('https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js')
+    .then(start)
+    .catch(function () { /* CDN blocked - silently keep the static ambient bg */ });
+
+  function start() {
+    var THREE = window.THREE;
+    if (!THREE) return;
+    var renderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+    } catch (e) { return; } // no WebGL - bail quietly
+    var W = canvas.clientWidth || window.innerWidth;
+    var H = canvas.clientHeight || window.innerHeight;
+    renderer.setSize(W, H, false);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(50, W / H, 0.1, 100);
+    camera.position.set(0, 1.2, 6.5);
+    camera.lookAt(0, 1.0, 0);
+
+    // brand colours
+    var teal = new THREE.Color('#5db8a6');
+    var amber = new THREE.Color('#e8a55a');
+
+    // --- the "idea core": a wireframe icosahedron + a solid faceted inner shell ---
+    var coreGroup = new THREE.Group();
+    var ico = new THREE.IcosahedronGeometry(2.0, 1);
+    var wire = new THREE.LineSegments(
+      new THREE.WireframeGeometry(ico),
+      new THREE.LineBasicMaterial({ color: teal, transparent: true, opacity: 0.3 })
+    );
+    var shell = new THREE.Mesh(
+      new THREE.IcosahedronGeometry(1.6, 0),
+      new THREE.MeshBasicMaterial({ color: teal, transparent: true, opacity: 0.05 })
+    );
+    // a second, amber wire layer for richness
+    var wire2 = new THREE.LineSegments(
+      new THREE.WireframeGeometry(new THREE.IcosahedronGeometry(2.0, 0)),
+      new THREE.LineBasicMaterial({ color: amber, transparent: true, opacity: 0.18 })
+    );
+    coreGroup.add(wire); coreGroup.add(wire2); coreGroup.add(shell);
+    coreGroup.position.y = 1.4; // visible in the lower-hero gap, below the headline
+    scene.add(coreGroup);
+
+    // --- the "idea stream": a continuous cascade that fills the whole view ---
+    var COUNT = 240;
+    var pos = new Float32Array(COUNT * 3);
+    var vel = new Float32Array(COUNT);
+    for (var i = 0; i < COUNT; i++) {
+      pos[i*3]   = (Math.random() - 0.5) * 11.0;      // full page width
+      pos[i*3+1] = 7.0 - Math.random() * 14.0;        // full vertical view, top to bottom
+      pos[i*3+2] = (Math.random() - 0.5) * 2.5;
+      vel[i] = 0.006 + Math.random() * 0.015;         // slower, calmer drift
+    }
+    var pg = new THREE.BufferGeometry();
+    pg.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    var pm = new THREE.PointsMaterial({ color: amber, size: 0.03, transparent: true, opacity: 0.4 });
+    var points = new THREE.Points(pg, pm);
+    scene.add(points);
+
+    var scrollN = 0; // 0..1 progress across the WHOLE page
+    function onScroll() {
+      var doc = document.documentElement;
+      var max = (doc.scrollHeight - window.innerHeight) || 1;
+      scrollN = Math.max(0, Math.min(1, (window.scrollY || 0) / max));
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    function onResize() {
+      W = canvas.clientWidth || window.innerWidth;
+      H = canvas.clientHeight || window.innerHeight;
+      renderer.setSize(W, H, false);
+      camera.aspect = W / H; camera.updateProjectionMatrix();
+    }
+    window.addEventListener('resize', onResize, { passive: true });
+
+    canvas.classList.add('ready');
+    var t = 0, sm = 0; // sm = smoothed scroll progress
+    function frame() {
+      t += 0.01;
+      sm += (scrollN - sm) * 0.07; // ease toward target for fluid motion
+
+      // 1) The core travels with you down the page: drifts side-to-side then
+      //    returns to centre near the end, descending slightly, so it
+      //    accompanies every section and lands behind the final CTA.
+      var drift = Math.sin(sm * Math.PI * 2) * 2.6 * (1 - sm); // drift fades to 0 at the bottom
+      coreGroup.position.x = drift;
+      coreGroup.position.y = 1.4 - sm * 1.0;
+
+      // 2) It spins faster and "heats up" (teal -> amber) the deeper you scroll.
+      coreGroup.rotation.y += 0.004 + sm * 0.01;
+      wire2.rotation.y -= 0.006 + sm * 0.008;
+      wire2.rotation.x += 0.002;
+      coreGroup.rotation.x = 0.3 + sm * 1.4;
+      var heat = teal.clone().lerp(amber, sm);
+      wire.material.color.copy(heat);
+      shell.material.color.copy(heat);
+
+      // 3) Near the end it contracts into a brighter, denser point
+      //    ("the idea crystallises") - a payoff at the bottom of the page.
+      var crys = sm > 0.7 ? (sm - 0.7) / 0.3 : 0;
+      coreGroup.scale.setScalar((1 + sm * 0.15) * (1 - crys * 0.35));
+      wire.material.opacity = 0.3 + crys * 0.15;
+      wire2.material.opacity = 0.18 + sm * 0.1;
+
+      // 4) Streams: a continuous full-width cascade that fills the whole
+      //    viewport at every scroll depth, so the flow never stops between
+      //    sections. Particles recycle across the full width and height.
+      var p = pg.attributes.position.array;
+      var speed = 1 + sm * 1.6;
+      for (var i = 0; i < COUNT; i++) {
+        p[i*3+1] -= vel[i] * speed;
+        p[i*3]   += Math.sin(t + i) * 0.003;
+        if (p[i*3+1] < -7.0) { // recycle to the top across the FULL width
+          p[i*3]   = (Math.random() - 0.5) * 11.0; // wide spread = fills the page width
+          p[i*3+1] = 6.5 + Math.random() * 1.5;     // back to the top of the view
+          p[i*3+2] = (Math.random() - 0.5) * 2.5;
+        }
+      }
+      pg.attributes.position.needsUpdate = true;
+      pm.color.copy(amber.clone().lerp(teal, sm * 0.4)); // subtle shift
+      pm.size = 0.03 + sm * 0.01;
+
+      renderer.render(scene, camera);
+      requestAnimationFrame(frame);
+    }
+    frame();
+  }
+})();
+</script>
 </body></html>
