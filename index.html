@@ -556,7 +556,7 @@
     .ambient-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
     .hero-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; pointer-events: none; z-index: 1; opacity: 0; transition: opacity 1.2s ease; }
     .hero-canvas.ready { opacity: 1; }
-    [data-theme="light"] .hero-canvas.ready { opacity: 0.45; }
+    [data-theme="light"] .hero-canvas.ready { opacity: 0.72; }
     .landing-main { position: relative; z-index: 2; }
     .ambient-bg span {
       position: absolute; border-radius: 50%; filter: blur(60px); opacity: .5;
@@ -1338,12 +1338,11 @@
         <div class="contact-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></div>
         <div><div class="contact-h">Email</div><div class="contact-v">support@casedge.io</div></div>
       </a>
-      <a class="contact-card" id="contactTelegram" href="#" onclick="return false;">
+      <a class="contact-card" id="contactTelegram" href="https://t.me/casedge" target="_blank" rel="noopener noreferrer">
         <div class="contact-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4L3 11l6 2 2 6 3-4 5 4 2-15z"/></svg></div>
-        <div><div class="contact-h">Telegram</div><div class="contact-v">@your_handle</div></div>
+        <div><div class="contact-h">Telegram</div><div class="contact-v">@casedge</div></div>
       </a>
     </div>
-    <p class="info-note">Note: replace the email and Telegram handle above with your real details once your CasEdge domain and channel are set up.</p>
   </div>
 </div>
 
@@ -5314,6 +5313,12 @@ document.addEventListener('keydown', e => {
     // brand colours
     var teal = new THREE.Color('#5db8a6');
     var amber = new THREE.Color('#e8a55a');
+    // In light theme the cream background washes the crystal out, so boost the
+    // particle/line brightness and particle size. (Live-read so a theme toggle
+    // mid-session is picked up on the next frame.)
+    function lightBoost() {
+      return document.documentElement.getAttribute('data-theme') === 'light';
+    }
 
     // --- the "idea core": a wireframe icosahedron + a solid faceted inner shell ---
     var coreGroup = new THREE.Group();
@@ -5425,10 +5430,13 @@ document.addEventListener('keydown', e => {
       var crys = sm > 0.7 ? (sm - 0.7) / 0.3 : 0;
       coreGroup.scale.setScalar((1 + sm * 0.15) * (1 - crys * 0.35) * (1 - enter));
       // base opacities are low (background); a small lift as it lands, then full fade
-      wire.material.opacity = (0.16 + crys * 0.1 + enter * 0.25) * (1 - enter * enter);
-      wire2.material.opacity = (0.1 + sm * 0.06 + enter * 0.15) * (1 - enter * enter);
-      shell.material.opacity = 0.04 * (1 - enter);
-      pm.opacity = 0.4 * (1 - enter * 0.6); // streams ease off as the core lands
+      var lb = lightBoost();
+      var lineK = lb ? 2.1 : 1;   // lines need to be darker/stronger on cream
+      var ptK   = lb ? 2.4 : 1;   // particles are the hardest to see on cream
+      wire.material.opacity = (0.16 + crys * 0.1 + enter * 0.25) * (1 - enter * enter) * lineK;
+      wire2.material.opacity = (0.1 + sm * 0.06 + enter * 0.15) * (1 - enter * enter) * lineK;
+      shell.material.opacity = 0.04 * (1 - enter) * (lb ? 1.6 : 1);
+      pm.opacity = 0.4 * (1 - enter * 0.6) * ptK; // streams ease off as the core lands
       if (btn) {
         if (enter > 0.4) btn.classList.add('charged');
         else btn.classList.remove('charged');
@@ -5451,7 +5459,7 @@ document.addEventListener('keydown', e => {
       }
       pg.attributes.position.needsUpdate = true;
       pm.color.copy(amber.clone().lerp(teal, sm * 0.4)); // subtle shift
-      pm.size = 0.03 + sm * 0.01;
+      pm.size = (0.03 + sm * 0.01) * (lb ? 1.7 : 1);
 
       renderer.render(scene, camera);
       requestAnimationFrame(frame);
