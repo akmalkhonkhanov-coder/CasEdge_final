@@ -50,7 +50,7 @@
     }
     /* Root element background follows the theme so any overscroll/rubber-band
        area shows the theme colour, never the black webview underneath. */
-    html { background: #181715; }
+    html { background: #181715; overflow-x: clip; overscroll-behavior: none; }
     [data-theme="light"] { background: #f4efe6; }
     [data-theme="light"] html, html[data-theme="light"] { background: #f4efe6; }
     /* Hairlines/borders that were white-on-dark need to flip to dark-on-light */
@@ -139,6 +139,7 @@
     .cx-stat-lbl { font-size: 12px; color: var(--on-dark-soft); margin-top: 6px; letter-spacing: .01em; }
     .cx-stat.cx-accent .cx-stat-num { color: var(--accent-teal); }
     .cx-resume { display: flex; align-items: center; justify-content: space-between; gap: 14px; background: rgba(93,184,166,.09); border: 1px solid rgba(93,184,166,.3); border-radius: 14px; padding: 14px 18px; margin: 0 0 22px; flex-wrap: wrap; }
+    .cx-resume-welcome { background: linear-gradient(90deg, rgba(232,165,90,.12), rgba(93,184,166,.1)); border-color: rgba(232,165,90,.4); }
     .cx-resume-txt { font-size: 13.5px; color: var(--on-dark); }
     .cx-resume-txt b { font-weight: 650; }
     .cx-resume-btns { display: flex; gap: 8px; }
@@ -196,6 +197,8 @@
       color: var(--on-dark);
       font-family: var(--font-sans);
       line-height: 1.5;
+      overflow-x: clip;
+      overscroll-behavior: none;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
@@ -331,6 +334,9 @@
       align-items: flex-start; gap: 32px; flex-wrap: wrap;
     }
     .lf-tag { font-size: 13px; color: var(--on-dark-soft); margin-top: 10px; max-width: 280px; line-height: 1.5; }
+    .lf-tg { font-size: 13px; color: var(--on-dark-soft); margin-top: 10px; max-width: 320px; line-height: 1.6; }
+    .lf-tg a { color: var(--accent-teal); text-decoration: none; font-weight: 600; white-space: nowrap; }
+    .lf-tg a:hover { text-decoration: underline; }
     .lf-links { display: flex; flex-direction: column; gap: 10px; }
     .lf-link {
       background: none; border: none; cursor: pointer; font-family: inherit;
@@ -339,6 +345,8 @@
     }
     .lf-link:hover { color: var(--coral); }
     .lf-copy { max-width: 860px; margin: 32px auto 0; font-size: 12px; color: var(--on-dark-soft); opacity: .7; }
+    .lf-pariw { max-width: 860px; margin: 8px auto 0; font-size: 12.5px; font-style: italic; font-family: var(--font-display); color: var(--accent-teal); opacity: .85; letter-spacing: .01em; line-height: 1.7; }
+    .lf-pariw-ru { opacity: .7; font-size: 12px; }
 
     /* ── Info pages (FAQ / Contact / Cookies) ── */
     .info-body { max-width: 720px; margin: 0 auto; padding: 56px 24px 80px; width: 100%; flex: 1 0 auto; }
@@ -539,6 +547,7 @@
     .ambient-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
     .hero-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; pointer-events: none; z-index: 1; opacity: 0; transition: opacity 1.2s ease; }
     .hero-canvas.ready { opacity: 1; }
+    [data-theme="light"] .hero-canvas.ready { opacity: 0.45; }
     .landing-main { position: relative; z-index: 2; }
     .ambient-bg span {
       position: absolute; border-radius: 50%; filter: blur(60px); opacity: .5;
@@ -640,6 +649,16 @@
     .landing-form-note { font-size: 13px; color: var(--on-dark-soft); text-align: center; margin-top: 2px; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .btn-cta { width: 100%; height: 52px; font-size: 15px; }
+    /* Final CTA "charged" state - lights up when the crystal lands in it at page end */
+    #ctaFinal { transition: box-shadow .5s ease, transform .5s ease; }
+    #ctaFinal.charged {
+      box-shadow: 0 0 0 1px rgba(93,184,166,.5), 0 0 24px 4px rgba(93,184,166,.45), 0 0 60px 12px rgba(232,165,90,.3);
+      animation: ctaPulse 2.4s ease-in-out infinite;
+    }
+    @keyframes ctaPulse {
+      0%,100% { box-shadow: 0 0 0 1px rgba(93,184,166,.45), 0 0 22px 4px rgba(93,184,166,.4), 0 0 54px 10px rgba(232,165,90,.26); }
+      50%     { box-shadow: 0 0 0 1px rgba(93,184,166,.6), 0 0 34px 6px rgba(93,184,166,.55), 0 0 74px 16px rgba(232,165,90,.38); }
+    }
     /* Feature pills */
     .feat-pills { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 28px; }
     .feat-pill {
@@ -664,7 +683,7 @@
       letter-spacing: -.4px; color: var(--on-dark); margin-bottom: 22px;
     }
     /* Firm cards */
-    .firm-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .firm-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 720px; }
     .firm-card {
       background: var(--surface-dark-elevated); border: 1px solid rgba(255,255,255,.08);
       border-radius: var(--radius-lg); padding: 28px 24px; cursor: pointer;
@@ -1231,7 +1250,7 @@
 
   <div class="land-cta-wrap reveal">
     <h2 class="ls-title" data-i18n="cta.title">Ready to start?</h2>
-    <button class="btn btn-primary btn-cta" style="max-width:280px;margin:0 auto;" onclick="handleBeginSession()">
+    <button id="ctaFinal" class="btn btn-primary btn-cta" style="max-width:280px;margin:0 auto;" onclick="handleBeginSession()">
       <span data-i18n="hero.cta">Begin Free Session</span>
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
     </button>
@@ -1243,6 +1262,7 @@
       <div class="lf-brand">
         <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
         <p class="lf-tag" data-i18n="foot.tagline">MBB case interview prep - cases, drills, and partner-level feedback.</p>
+        <p class="lf-tg">Questions? Reach us on Telegram - <a href="https://t.me/casedge" target="_blank" rel="noopener">@casedge</a> or <a href="https://t.me/+998900002512" target="_blank" rel="noopener">+998&#8209;90&#8209;000&#8209;2512</a></p>
       </div>
       <div class="lf-links">
         <button class="lf-link" onclick="goToPage('faq')" data-i18n="nav.faq">FAQ</button>
@@ -1251,6 +1271,7 @@
       </div>
     </div>
     <div class="lf-copy" data-i18n="foot.rights">© 2026 CasEdge. All rights reserved.</div>
+    <div class="lf-pariw" data-i18n="foot.pariw">With gratitude to Pariw.</div>
   </footer>
 </div>
 
@@ -2206,6 +2227,7 @@ const I18N = {
     'foot.contact': 'Contact',
     'foot.cookies': 'Cookies',
     'foot.rights': '© 2026 CasEdge. All rights reserved.',
+    'foot.pariw': 'With gratitude to Pariw.',
     // Mode screen
     'mode.eyebrow': 'Choose your practice',
     'mode.title': 'How do you want to train today?',
@@ -2296,6 +2318,7 @@ const I18N = {
     'foot.contact': 'Контакты',
     'foot.cookies': 'Cookies',
     'foot.rights': '© 2026 CasEdge. Все права защищены.',
+    'foot.pariw': 'С благодарностью Pariw.',
     // Mode screen
     'mode.eyebrow': 'Выбери формат',
     'mode.title': 'Как хочешь тренироваться сегодня?',
@@ -2438,6 +2461,9 @@ window.addEventListener('DOMContentLoaded', function () {
   } catch (e) { /* sandbox blocks this - safe to ignore */ }
   // Onboarding is no longer auto-shown on landing (it hurt first impression).
   // The modal is still available on demand via openOnboarding(); content is preserved.
+  // Record this visit AFTER a tick, so the "welcome back" banner can read the
+  // previous visit time before we overwrite it.
+  setTimeout(function () { if (typeof cxMarkVisit === 'function') cxMarkVisit(); }, 1500);
 });
 
 /* ────────────────────────────────────────────────────
@@ -3443,6 +3469,18 @@ function confirmExitSolve() {
 ──────────────────────────────────────────────────── */
 const CX_OB_KEY = 'casedge-onboarded';
 const CX_RESUME_KEY = 'casedge-resume';
+const CX_LASTVISIT_KEY = 'casedge-lastvisit';
+// Returns hours since the previous visit (before this session updated it), or null if first ever.
+function cxHoursSinceLastVisit() {
+  try {
+    const prev = parseInt(localStorage.getItem(CX_LASTVISIT_KEY) || '0', 10);
+    if (!prev) return null;
+    return (Date.now() - prev) / 3600000;
+  } catch (e) { return null; }
+}
+function cxMarkVisit() {
+  try { localStorage.setItem(CX_LASTVISIT_KEY, String(Date.now())); } catch (e) {}
+}
 
 /* ---- 1. ONBOARDING (first visit only) ---- */
 let cxObStep = 0;
@@ -3522,9 +3560,23 @@ function cxRenderResume() {
   // Expire after 24h so it doesn't nag forever.
   if (!r || !r.launcher || (Date.now() - (r.at || 0)) > 86400000) { host.innerHTML = ''; return; }
   const safeLabel = (window.esc ? esc(r.label) : r.label);
+
+  // Personalised "Welcome back" if they were away for a while (>20h) and we know who they are.
+  const gap = cxHoursSinceLastVisit();
+  let firstName = '';
+  if (typeof currentUser !== 'undefined' && currentUser) {
+    const meta = currentUser.user_metadata || {};
+    const full = meta.full_name || (currentUser.email ? currentUser.email.split('@')[0] : '');
+    firstName = full ? String(full).split(' ')[0] : '';
+  }
+  const returning = gap !== null && gap >= 20;
+  const heading = returning
+    ? `Welcome back${firstName ? ', ' + (window.esc ? esc(firstName) : firstName) : ''} - you left off here`
+    : 'Pick up where you left off';
+
   host.innerHTML =
-    `<div class="cx-resume">
-       <div class="cx-resume-txt">Pick up where you left off - <b>${safeLabel}</b></div>
+    `<div class="cx-resume${returning ? ' cx-resume-welcome' : ''}">
+       <div class="cx-resume-txt">${heading} - <b>${safeLabel}</b></div>
        <div class="cx-resume-btns">
          <button class="cx-resume-go" onclick="cxResumeGo()">Resume</button>
          <button class="cx-resume-x" onclick="cxClearResume()">Dismiss</button>
@@ -4947,15 +4999,10 @@ function applyTheme(theme) {
         if (ticking) return;
         ticking = true;
         requestAnimationFrame(() => {
-          const wrap = document.querySelector('.land-story-wrap');
-          if (wrap) {
-            const rect = wrap.getBoundingClientRect();
-            // Clamp the parallax offset so the ambient layer never drifts far
-            // enough to add scrollable empty space below the footer.
-            let offset = rect.top * -0.28;
-            offset = Math.max(-120, Math.min(120, offset));
-            amb.style.transform = `translateY(${offset}px)`;
-          }
+          // Parallax translateY was removed: with the 3D layer on top the
+          // ambient shift was barely visible, and shifting an absolutely
+          // positioned full-height layer grew the document (empty space below
+          // the footer). Keeping the ambient static eliminates that at the source.
           ticking = false;
         });
       }, { passive: true });
@@ -5223,16 +5270,16 @@ document.addEventListener('keydown', e => {
     var ico = new THREE.IcosahedronGeometry(2.0, 1);
     var wire = new THREE.LineSegments(
       new THREE.WireframeGeometry(ico),
-      new THREE.LineBasicMaterial({ color: teal, transparent: true, opacity: 0.3 })
+      new THREE.LineBasicMaterial({ color: teal, transparent: true, opacity: 0.16 })
     );
     var shell = new THREE.Mesh(
       new THREE.IcosahedronGeometry(1.6, 0),
-      new THREE.MeshBasicMaterial({ color: teal, transparent: true, opacity: 0.05 })
+      new THREE.MeshBasicMaterial({ color: teal, transparent: true, opacity: 0.04 })
     );
     // a second, amber wire layer for richness
     var wire2 = new THREE.LineSegments(
       new THREE.WireframeGeometry(new THREE.IcosahedronGeometry(2.0, 0)),
-      new THREE.LineBasicMaterial({ color: amber, transparent: true, opacity: 0.18 })
+      new THREE.LineBasicMaterial({ color: amber, transparent: true, opacity: 0.1 })
     );
     coreGroup.add(wire); coreGroup.add(wire2); coreGroup.add(shell);
     coreGroup.position.y = 1.4; // visible in the lower-hero gap, below the headline
@@ -5243,10 +5290,10 @@ document.addEventListener('keydown', e => {
     var pos = new Float32Array(COUNT * 3);
     var vel = new Float32Array(COUNT);
     for (var i = 0; i < COUNT; i++) {
-      pos[i*3]   = (Math.random() - 0.5) * 11.0;      // full page width
-      pos[i*3+1] = 7.0 - Math.random() * 14.0;        // full vertical view, top to bottom
+      pos[i*3]   = (Math.random() - 0.5) * 11.0;
+      pos[i*3+1] = 7.0 - Math.random() * 14.0;
       pos[i*3+2] = (Math.random() - 0.5) * 2.5;
-      vel[i] = 0.006 + Math.random() * 0.015;         // slower, calmer drift
+      vel[i] = 0.006 + Math.random() * 0.015;
     }
     var pg = new THREE.BufferGeometry();
     pg.setAttribute('position', new THREE.BufferAttribute(pos, 3));
@@ -5277,12 +5324,40 @@ document.addEventListener('keydown', e => {
       t += 0.01;
       sm += (scrollN - sm) * 0.07; // ease toward target for fluid motion
 
-      // 1) The core travels with you down the page: drifts side-to-side then
-      //    returns to centre near the end, descending slightly, so it
-      //    accompanies every section and lands behind the final CTA.
-      var drift = Math.sin(sm * Math.PI * 2) * 2.6 * (1 - sm); // drift fades to 0 at the bottom
-      coreGroup.position.x = drift;
-      coreGroup.position.y = 1.4 - sm * 1.0;
+      // 1) The core travels with you down the page: drifts side-to-side then,
+      //    in the final stretch, flies down INTO the "Begin Free Session" button.
+      var drift = Math.sin(sm * Math.PI * 2) * 2.6 * (1 - sm);
+      // "enter" progress: ramps up as the final CTA button comes into view,
+      //    so it works regardless of footer height / exact scroll max.
+      var enter = 0;
+      var btn = document.getElementById('ctaFinal');
+      var btnRect = null;
+      if (btn) {
+        btnRect = btn.getBoundingClientRect();
+        var vh = window.innerHeight;
+        // 0 when button is at the bottom edge, 1 when it has risen to ~40% up the screen
+        var center = btnRect.top + btnRect.height / 2;
+        enter = (vh - center) / (vh * 0.6);
+        enter = Math.max(0, Math.min(1, enter));
+      }
+
+      // target = the on-screen position of the final CTA button, projected into 3D
+      var tx = 0, ty = 1.4 - sm * 1.0;
+      if (btnRect && enter > 0) {
+        // precise screen->world projection at the core's depth (z plane ~0)
+        var ndcX = (btnRect.left + btnRect.width/2) / window.innerWidth * 2 - 1;
+        var ndcY = -((btnRect.top + btnRect.height/2) / window.innerHeight * 2 - 1);
+        var v = new THREE.Vector3(ndcX, ndcY, 0.5).unproject(camera);
+        var dir = v.sub(camera.position).normalize();
+        var dist = -camera.position.z / dir.z; // intersect z=0 plane
+        var world = camera.position.clone().add(dir.multiplyScalar(dist));
+        tx = drift * (1 - enter) + world.x * enter;
+        ty = (1.4 - sm * 1.0) * (1 - enter) + world.y * enter;
+      } else {
+        tx = drift;
+      }
+      coreGroup.position.x = tx;
+      coreGroup.position.y = ty;
 
       // 2) It spins faster and "heats up" (teal -> amber) the deeper you scroll.
       coreGroup.rotation.y += 0.004 + sm * 0.01;
@@ -5293,12 +5368,20 @@ document.addEventListener('keydown', e => {
       wire.material.color.copy(heat);
       shell.material.color.copy(heat);
 
-      // 3) Near the end it contracts into a brighter, denser point
-      //    ("the idea crystallises") - a payoff at the bottom of the page.
+      // 3) As it enters the button it shrinks to a point and fades - it has
+      //    "gone into" the CTA. Then the button lights up (charged).
       var crys = sm > 0.7 ? (sm - 0.7) / 0.3 : 0;
-      coreGroup.scale.setScalar((1 + sm * 0.15) * (1 - crys * 0.35));
-      wire.material.opacity = 0.3 + crys * 0.15;
-      wire2.material.opacity = 0.18 + sm * 0.1;
+      coreGroup.scale.setScalar((1 + sm * 0.15) * (1 - crys * 0.35) * (1 - enter * 0.99));
+      // base opacities are low (background); a small lift as it lands in the button
+      wire.material.opacity = (0.16 + crys * 0.1 + enter * 0.25) * (1 - enter * enter);
+      wire2.material.opacity = (0.1 + sm * 0.06 + enter * 0.15) * (1 - enter * enter);
+      shell.material.opacity = 0.04 * (1 - enter);
+      pm.opacity = 0.4 * (1 - enter * 0.6); // streams ease off as the core lands
+      if (btn) {
+        if (enter > 0.5) btn.classList.add('charged');
+        else btn.classList.remove('charged');
+      }
+
 
       // 4) Streams: a continuous full-width cascade that fills the whole
       //    viewport at every scroll depth, so the flow never stops between
