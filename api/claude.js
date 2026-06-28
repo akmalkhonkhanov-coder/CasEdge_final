@@ -1,6 +1,6 @@
 // CasEdge serverless proxy to the Anthropic API.
 // Hardened: locked CORS, Supabase token verification, body limits,
-// model allow-list, and a simple per-user rate limit.
+// model allow-list, per-user rate limit, upstream timeouts, no error leakage.
 //
 // Required Vercel env vars:
 //   ANTHROPIC_API_KEY   - your Anthropic key (already set)
@@ -15,9 +15,13 @@ const MAX_TOKENS_CAP = 2000;       // hard ceiling regardless of what the client
 const MAX_BODY_BYTES = 200 * 1024; // 200 KB request cap
 const RATE_LIMIT = 30;             // requests per user per window
 const RATE_WINDOW_MS = 60 * 1000;  // 1-minute window
+const UPSTREAM_TIMEOUT_MS = 60 * 1000; // abort Anthropic call if it hangs
+const AUTH_TIMEOUT_MS = 8 * 1000;      // abort Supabase auth check if it hangs
 
-// In-memory rate-limit store. Resets on cold start; fine as a first line of
-// defence. For stronger guarantees use Upstash/Redis later.
+// In-memory rate-limit store. NOTE: this resets on cold start and is per-instance,
+// so on Vercel's multi-instance runtime it only catches accidental bursts, not a
+// determined attacker. Before opening paid/public access, replace this with a
+// shared store (Supabase table or Upstash Redis) so the limit is enforced globally.
 const hits = new Map();
 
 function rateLimited(userId) {
@@ -31,6 +35,18 @@ function rateLimited(userId) {
   return rec.count > RATE_LIMIT;
 }
 
+// fetch() with an abort timeout so a hung upstream cannot keep the function
+// (and its billing) alive indefinitely.
+async function fetchWithTimeout(url, options, timeoutMs) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(url, { ...options, signal: controller.signal });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 export default async function handler(req, res) {
   const origin = process.env.ALLOWED_ORIGIN || FALLBACK_ORIGIN;
   res.setHeader('Access-Control-Allow-Origin', origin);
@@ -42,7 +58,7 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: { message: 'Method not allowed' } });
 
   try {
-    // 1) Require a Supabase bearer token and verify it.
+    // 1) Require a Supabase bearer token (cheap check, no network yet).
     const auth = req.headers['authorization'] || req.headers['Authorization'] || '';
     const token = auth.startsWith('Bearer ') ? auth.slice(7) : null;
     if (!token) return res.status(401).json({ error: { message: 'Authentication required.' } });
@@ -53,9 +69,21 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: { message: 'Server auth not configured.' } });
     }
 
-    const userResp = await fetch(sbUrl + '/auth/v1/user', {
-      headers: { apikey: sbKey, Authorization: 'Bearer ' + token }
-    });
+    // 2) Body size limit BEFORE any network call - reject oversized payloads early.
+    const raw = JSON.stringify(req.body || {});
+    if (raw.length > MAX_BODY_BYTES) {
+      return res.status(413).json({ error: { message: 'Request too large.' } });
+    }
+
+    // 3) Verify the token with Supabase (with a timeout).
+    let userResp;
+    try {
+      userResp = await fetchWithTimeout(sbUrl + '/auth/v1/user', {
+        headers: { apikey: sbKey, Authorization: 'Bearer ' + token }
+      }, AUTH_TIMEOUT_MS);
+    } catch (e) {
+      return res.status(504).json({ error: { message: 'Authentication timed out. Please try again.' } });
+    }
     if (!userResp.ok) {
       return res.status(401).json({ error: { message: 'Invalid or expired session.' } });
     }
@@ -63,15 +91,9 @@ export default async function handler(req, res) {
     const userId = user && user.id;
     if (!userId) return res.status(401).json({ error: { message: 'Invalid session.' } });
 
-    // 2) Per-user rate limit.
+    // 4) Per-user rate limit (after we know who the user is).
     if (rateLimited(userId)) {
       return res.status(429).json({ error: { message: 'Too many requests. Please slow down.' } });
-    }
-
-    // 3) Body size + shape limits.
-    const raw = JSON.stringify(req.body || {});
-    if (raw.length > MAX_BODY_BYTES) {
-      return res.status(413).json({ error: { message: 'Request too large.' } });
     }
 
     const body = req.body || {};
@@ -87,28 +109,35 @@ export default async function handler(req, res) {
       body.max_tokens = Math.min(body.max_tokens || 1000, MAX_TOKENS_CAP);
     }
 
-    // 4) Prompt caching on the system prompt (saves ~70% on input tokens).
+    // 5) Prompt caching on the system prompt (saves ~70% on input tokens).
     if (body.system && typeof body.system === 'string') {
       body.system = [
         { type: 'text', text: body.system, cache_control: { type: 'ephemeral' } }
       ];
     }
 
-    // 5) Forward to Anthropic.
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': process.env.ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
-        'anthropic-beta': 'prompt-caching-2024-07-31'
-      },
-      body: JSON.stringify(body)
-    });
+    // 6) Forward to Anthropic (with a timeout).
+    let response;
+    try {
+      response = await fetchWithTimeout('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': process.env.ANTHROPIC_API_KEY,
+          'anthropic-version': '2023-06-01',
+          'anthropic-beta': 'prompt-caching-2024-07-31'
+        },
+        body: JSON.stringify(body)
+      }, UPSTREAM_TIMEOUT_MS);
+    } catch (e) {
+      return res.status(504).json({ error: { message: 'The grader is taking too long. Please try again.' } });
+    }
 
     const data = await response.json();
     return res.status(response.status).json(data);
   } catch (err) {
-    return res.status(500).json({ error: { message: err.message } });
+    // Log the real error server-side (visible in Vercel logs), never leak it to the client.
+    console.error('CasEdge proxy error:', err);
+    return res.status(500).json({ error: { message: 'Something went wrong. Please try again.' } });
   }
 }
