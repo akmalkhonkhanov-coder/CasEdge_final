@@ -2318,7 +2318,7 @@ const I18N = {
     'foot.contact': 'Контакты',
     'foot.cookies': 'Cookies',
     'foot.rights': '© 2026 CasEdge. Все права защищены.',
-    'foot.pariw': 'С благодарностью Pariw.',
+    'foot.pariw': 'С благодарностью к Pariw.',
     // Mode screen
     'mode.eyebrow': 'Выбери формат',
     'mode.title': 'Как хочешь тренироваться сегодня?',
@@ -5335,9 +5335,11 @@ document.addEventListener('keydown', e => {
       if (btn) {
         btnRect = btn.getBoundingClientRect();
         var vh = window.innerHeight;
-        // 0 when button is at the bottom edge, 1 when it has risen to ~40% up the screen
+        // enter reaches 1 once the button's center is at ~78% of the screen
+        // height (i.e. the button is comfortably in view). This guarantees the
+        // crystal fully arrives and collapses into it instead of stalling below.
         var center = btnRect.top + btnRect.height / 2;
-        enter = (vh - center) / (vh * 0.6);
+        enter = (vh - center) / (vh * 0.30);
         enter = Math.max(0, Math.min(1, enter));
       }
 
@@ -5371,14 +5373,14 @@ document.addEventListener('keydown', e => {
       // 3) As it enters the button it shrinks to a point and fades - it has
       //    "gone into" the CTA. Then the button lights up (charged).
       var crys = sm > 0.7 ? (sm - 0.7) / 0.3 : 0;
-      coreGroup.scale.setScalar((1 + sm * 0.15) * (1 - crys * 0.35) * (1 - enter * 0.99));
-      // base opacities are low (background); a small lift as it lands in the button
+      coreGroup.scale.setScalar((1 + sm * 0.15) * (1 - crys * 0.35) * (1 - enter));
+      // base opacities are low (background); a small lift as it lands, then full fade
       wire.material.opacity = (0.16 + crys * 0.1 + enter * 0.25) * (1 - enter * enter);
       wire2.material.opacity = (0.1 + sm * 0.06 + enter * 0.15) * (1 - enter * enter);
       shell.material.opacity = 0.04 * (1 - enter);
       pm.opacity = 0.4 * (1 - enter * 0.6); // streams ease off as the core lands
       if (btn) {
-        if (enter > 0.5) btn.classList.add('charged');
+        if (enter > 0.4) btn.classList.add('charged');
         else btn.classList.remove('charged');
       }
 
