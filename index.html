@@ -115,9 +115,53 @@
     #screen-gameintro.active { display: flex; }
     .gi-body { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 22px; }
     .gi-card { max-width: 600px; width: 100%; }
+    /* ---- Daily Challenge ---- */
+    .daily-body { flex: 1; display: flex; align-items: flex-start; justify-content: center; padding: 40px 22px; overflow-y: auto; }
+    .daily-card { max-width: 620px; width: 100%; }
+    .daily-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-amber); margin-bottom: 10px; }
+    .daily-title { font-family: 'Newsreader', Georgia, serif; font-size: 30px; font-weight: 600; color: var(--on-dark); margin: 0 0 6px; letter-spacing: -.01em; }
+    .daily-sub { font-size: 15px; color: var(--on-dark-soft); line-height: 1.6; margin-bottom: 22px; }
+    .daily-streakrow { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+    .daily-stat { flex: 1; min-width: 130px; background: var(--surface-dark-elevated); border: 1px solid var(--hairline); border-radius: 14px; padding: 16px 18px; }
+    .daily-stat .n { font-size: 26px; font-weight: 700; color: var(--on-dark); font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 6px; }
+    .daily-stat .l { font-size: 12px; color: var(--on-dark-soft); margin-top: 3px; letter-spacing: .02em; }
+    .daily-flame { filter: saturate(1.2); }
+    .daily-q { background: var(--surface-dark-elevated); border: 1px solid var(--hairline); border-radius: 16px; padding: 22px 22px 20px; margin-bottom: 16px; }
+    .daily-qhead { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .daily-qnum { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--accent-teal); }
+    .daily-qtimer { font-size: 13px; font-family: 'JetBrains Mono', monospace; color: var(--on-dark-soft); }
+    .daily-qtext { font-size: 17px; line-height: 1.55; color: var(--on-dark); margin-bottom: 18px; }
+    .daily-answerrow { display: flex; gap: 10px; align-items: center; }
+    .daily-input { flex: 1; background: var(--surface-dark-soft); border: 1.5px solid var(--hairline); color: var(--on-dark); border-radius: 12px; padding: 13px 15px; font-size: 17px; font-family: 'JetBrains Mono', monospace; outline: none; transition: border-color .15s; }
+    .daily-input:focus { border-color: var(--accent-amber); }
+    .daily-submit { background: var(--coral); color: var(--on-primary); border: none; border-radius: 12px; padding: 13px 24px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background .15s; white-space: nowrap; }
+    .daily-submit:hover { background: var(--coral-active); }
+    .daily-submit:disabled { background: var(--coral-disabled); cursor: default; }
+    .daily-progressdots { display: flex; gap: 7px; justify-content: center; margin-bottom: 22px; }
+    .daily-dot { width: 11px; height: 11px; border-radius: 50%; background: var(--hairline); transition: background .2s, transform .2s; }
+    .daily-dot.correct { background: var(--accent-teal); }
+    .daily-dot.wrong { background: var(--coral); }
+    .daily-dot.current { transform: scale(1.35); box-shadow: 0 0 0 3px rgba(232,165,90,.25); background: var(--accent-amber); }
+    .daily-review-item { background: var(--surface-dark-elevated); border: 1px solid var(--hairline); border-left-width: 3px; border-radius: 12px; padding: 15px 18px; margin-bottom: 11px; }
+    .daily-review-item.ok { border-left-color: var(--accent-teal); }
+    .daily-review-item.no { border-left-color: var(--coral); }
+    .daily-review-q { font-size: 14.5px; color: var(--on-dark); margin-bottom: 8px; line-height: 1.5; }
+    .daily-review-line { font-size: 13.5px; color: var(--on-dark-soft); font-family: 'JetBrains Mono', monospace; }
+    .daily-review-line b { color: var(--on-dark); }
+    .daily-review-work { font-size: 13px; color: var(--on-dark-soft); margin-top: 8px; line-height: 1.5; font-style: italic; }
+    .daily-done-banner { text-align: center; padding: 28px 20px; background: var(--surface-dark-elevated); border: 1px solid var(--hairline); border-radius: 16px; margin-bottom: 22px; }
+    .daily-done-score { font-size: 40px; font-weight: 700; font-family: 'JetBrains Mono', monospace; color: var(--on-dark); }
+    .daily-done-msg { font-size: 15px; color: var(--on-dark-soft); margin-top: 6px; }
+    .daily-badge-pill { font-size: 10px; font-weight: 700; letter-spacing: .04em; background: rgba(232,165,90,.18); color: var(--accent-amber); padding: 2px 7px; border-radius: 6px; vertical-align: middle; }
     .gi-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-teal); margin-bottom: 10px; }
     .gi-title { font-family: var(--serif); font-size: 30px; font-weight: 600; color: var(--on-dark); margin: 0 0 14px; line-height: 1.15; }
     .gi-lead { font-size: 15px; line-height: 1.6; color: var(--on-dark-soft); margin: 0 0 26px; }
+    .gi-story { position: relative; margin: 0 0 22px; padding: 16px 18px 16px 20px; border-left: 3px solid var(--accent-amber); background: rgba(232,165,90,.07); border-radius: 8px; }
+    .gi-story-tag { display: block; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-amber); margin-bottom: 7px; }
+    .gi-story p { margin: 0; font-size: 15.5px; line-height: 1.62; color: var(--on-dark); font-style: italic; }
+    .gi-fade { opacity: 0; transform: translateY(8px); animation: giFadeIn .5s ease forwards; animation-delay: var(--d, 0ms); }
+    @keyframes giFadeIn { to { opacity: 1; transform: translateY(0); } }
+    @media (prefers-reduced-motion: reduce) { .gi-fade { animation: none; opacity: 1; transform: none; } }
     .gi-steps { display: flex; flex-direction: column; gap: 14px; margin-bottom: 26px; }
     .gi-step { display: flex; gap: 14px; align-items: flex-start; }
     .gi-step-n { flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: rgba(93,184,166,.15); color: var(--accent-teal); font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
@@ -440,6 +484,9 @@
     .auth-fields { display: flex; flex-direction: column; gap: 8px; }
     .auth-label { font-size: 13px; color: var(--on-dark-soft); margin-top: 8px; }
     .auth-error { font-size: 13px; color: #e06c5c; min-height: 18px; margin-top: 4px; }
+    .auth-forgot { display: block; font-size: 12.5px; color: var(--accent-teal); cursor: pointer; margin: 2px 0 6px; text-align: right; }
+    .auth-forgot:hover { text-decoration: underline; }
+    .auth-title { font-size: 19px; font-weight: 600; color: var(--on-dark); margin: 0 0 14px; }
     .auth-foot { text-align: center; font-size: 13px; color: var(--on-dark-soft); margin-top: 18px; }
     .auth-foot a { color: var(--coral); cursor: pointer; }
     .pw-wrap { position: relative; }
@@ -783,6 +830,17 @@
     [data-theme="light"] .bcg-timer { background: rgba(31,41,55,.06); }
     .bcg-timer.warn { color: var(--accent-amber); }
     .bcg-timer.over { color: var(--coral); }
+    .bcg-notebar { flex-shrink: 0; border-bottom: 1px solid rgba(255,255,255,.07); background: rgba(93,184,166,.05); }
+    [data-theme="light"] .bcg-notebar { border-color: rgba(31,41,55,.1); background: rgba(93,184,166,.07); }
+    .bcg-note-toggle { width: 100%; display: flex; align-items: center; gap: 10px; padding: 11px 20px; background: none; border: none; cursor: pointer; color: var(--on-dark); font: inherit; }
+    .bcg-note-ic { width: 18px; height: 18px; border-radius: 50%; background: var(--accent-teal); color: #0f1f1c; font-size: 12px; font-weight: 700; font-style: italic; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .bcg-note-title { font-size: 13px; font-weight: 600; letter-spacing: .01em; }
+    .bcg-note-chev { margin-left: auto; font-size: 10px; color: var(--on-dark-soft); transition: transform .2s ease; }
+    .bcg-notebar.collapsed .bcg-note-chev { transform: rotate(180deg); }
+    .bcg-note-body { padding: 0 20px 14px 48px; max-height: 320px; overflow: hidden; transition: max-height .25s ease, padding .25s ease, opacity .2s ease; }
+    .bcg-notebar.collapsed .bcg-note-body { max-height: 0; padding-top: 0; padding-bottom: 0; opacity: 0; }
+    .bcg-note-body p { margin: 0 0 8px; font-size: 13px; line-height: 1.55; color: var(--on-dark-soft); }
+    .bcg-note-body p:last-child { margin-bottom: 0; }
     .bcg-feed { flex: 1; overflow-y: auto; padding: 24px 22px 16px; display: flex; flex-direction: column; gap: 14px; }
     .bcg-msg { display: flex; gap: 10px; max-width: 760px; }
     .bcg-msg.bot { align-self: flex-start; }
@@ -903,6 +961,11 @@
     .rt-fill { height: 100%; width: 100%; border-radius: 2px; background: var(--accent-teal); transition: width 1s linear, background .4s ease; }
     .resp-timer.warn .rt-fill { background: var(--accent-amber); }
     .resp-timer.over .rt-fill { background: var(--coral); }
+    .resp-timer.paused .rt-fill { background: var(--accent-teal); opacity: .5; transition: none; }
+    .help-btn { flex-shrink: 0; padding: 4px 11px; border-radius: 14px; border: 1px solid var(--accent-teal); background: transparent; color: var(--accent-teal); font-size: 11.5px; font-weight: 600; cursor: pointer; transition: all .15s; }
+    .help-btn:hover:not(:disabled) { background: rgba(93,184,166,.12); }
+    .help-btn:disabled { opacity: .65; cursor: default; }
+    .help-hint { margin-bottom: 11px; padding: 11px 14px; border-radius: 9px; background: rgba(232,165,90,.09); border: 1px solid rgba(232,165,90,.25); color: var(--on-dark); font-size: 13px; line-height: 1.55; }
     .resp-timer.warn .rt-time { color: var(--accent-amber); }
     .resp-timer.over .rt-time { color: var(--coral); }
     .hints { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
@@ -1044,6 +1107,19 @@
     .sv-table td.num { text-align: right; font-family: var(--mono); }
     .sv-q { margin: 26px 0 0; padding: 18px 0 0; border-top: 1px solid var(--sv-line-soft); }
     .sv-q-label { font-size: 12px; font-weight: 700; color: var(--accent-teal); letter-spacing: .04em; margin-bottom: 7px; }
+    .sv-hint { display: flex; gap: 9px; align-items: flex-start; margin: 0 0 16px; padding: 11px 14px; background: rgba(232,165,90,.08); border: 1px solid rgba(232,165,90,.22); border-radius: 9px; font-size: 13px; line-height: 1.5; color: var(--on-dark-soft); }
+    .sv-hint-ic { color: var(--accent-amber); font-weight: 700; flex-shrink: 0; }
+    .sv-hint b { color: var(--on-dark); font-weight: 600; }
+    .sv-subnav { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
+    .sv-subnav-item { padding: 7px 14px; border-radius: 8px; border: 1px solid var(--sv-line); background: var(--sv-fill); color: var(--on-dark-soft); font-size: 12.5px; font-weight: 600; cursor: pointer; transition: all .15s; }
+    .sv-subnav-item:hover { border-color: var(--accent-teal); }
+    .sv-subnav-item.active { background: var(--accent-teal); color: #04201b; border-color: var(--accent-teal); }
+    .sv-subnav-item.done:not(.active) { border-color: var(--accent-teal); color: var(--accent-teal); }
+    .sv-qnav { display: flex; gap: 6px; margin-bottom: 14px; }
+    .sv-qnav-item { width: 38px; height: 32px; border-radius: 8px; border: 1px solid var(--sv-line); background: var(--sv-fill); color: var(--on-dark-soft); font-size: 13px; font-weight: 600; cursor: pointer; transition: all .15s; }
+    .sv-qnav-item:hover { border-color: var(--accent-teal); }
+    .sv-qnav-item.active { background: var(--accent-teal); color: #04201b; border-color: var(--accent-teal); }
+    .sv-qnav-item.answered:not(.active) { border-color: var(--accent-teal); color: var(--accent-teal); }
     .sv-q-text { font-size: 14.5px; color: var(--on-dark); line-height: 1.55; margin-bottom: 14px; }
     .sv-field { display: flex; align-items: center; gap: 10px; margin: 10px 0; flex-wrap: wrap; }
     .sv-field label { font-size: 13.5px; color: var(--on-dark-soft); min-width: 210px; }
@@ -1088,6 +1164,7 @@
     .sv-jchip { background: rgba(93,184,166,.12); border: 1px solid rgba(93,184,166,.4); color: var(--on-dark); border-radius: 6px; padding: 3px 8px; font-size: 12.5px; font-weight: 600; cursor: grab; touch-action: none; }
     .sv-inp.sv-drop-active, .sv-numin.sv-drop-active, .sv-buildrow input.sv-drop-active { border-color: var(--accent-teal); box-shadow: 0 0 0 2px rgba(93,184,166,.3); background: rgba(93,184,166,.08); }
     .sv-qual { background: var(--sv-fill); border: 1px solid var(--sv-line); color: var(--on-dark); border-radius: 8px; padding: 6px 10px; font-size: 13.5px; font-weight: 600; min-width: 110px; }
+    .sv-qual-inline { min-width: 90px; margin: 0 2px; padding: 3px 8px; font-size: 14px; }
     @media (max-width: 640px) { .sv-layout { flex-direction: column; } .sv-journal { position: static; flex-basis: auto; width: 100%; } }
     /* ---- Floating calculator ---- */
     .sv-calc-btn { background: var(--sv-fill); border: 1px solid var(--sv-line); color: var(--on-dark); width: 34px; height: 34px; border-radius: 9px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: background .15s, border-color .15s; }
@@ -1117,6 +1194,15 @@
     .sv-grade-ok { color: var(--accent-teal); }
     .sv-grade-bad { color: var(--accent-coral); }
     .sv-result-card { border: 1px solid var(--sv-line); border-radius: 14px; padding: 20px; margin: 14px 0; }
+    .sv-result-sec { margin-bottom: 18px; }
+    .sv-result-sec:last-child { margin-bottom: 0; }
+    .sv-result-sec-h { font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--accent-teal); margin-bottom: 4px; display: flex; justify-content: space-between; }
+    .sv-result-sec-score { color: var(--on-dark-soft); font-weight: 600; }
+    .sv-rr-label { flex: 1; padding-right: 14px; }
+    .sv-rr-ans { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; white-space: nowrap; }
+    .sv-rr-yours.ok { color: var(--accent-teal); font-weight: 600; }
+    .sv-rr-yours.bad { color: #e0816f; font-weight: 600; }
+    .sv-rr-correct { font-size: 12px; color: var(--on-dark-soft); }
     .sv-result-row { display: flex; justify-content: space-between; padding: 9px 0; border-top: 1px solid var(--sv-line-soft); font-size: 13.5px; color: var(--on-dark); }
     .sv-result-row:first-child { border-top: none; }
 
@@ -1380,7 +1466,7 @@
     <button class="btn btn-ghost" onclick="showScreen('landing')" data-i18n="common.back">← Back</button>
   </nav>
   <div class="auth-body">
-    <div class="auth-card">
+    <div class="auth-card" id="authCard">
       <div class="auth-tabs">
         <button class="auth-tab active" id="tabSignin" onclick="switchAuthTab('signin')">Sign in</button>
         <button class="auth-tab" id="tabSignup" onclick="switchAuthTab('signup')">Create account</button>
@@ -1400,6 +1486,7 @@
           </button>
         </div>
         <div class="auth-error" id="authError"></div>
+        <a id="forgotLink" class="auth-forgot" onclick="forgotPassword()">Forgot password?</a>
         <button class="btn btn-primary" id="authSubmitBtn" onclick="handleAuthSubmit()" style="width:100%;margin-top:6px;">Sign in</button>
       </div>
       <p class="auth-foot" id="authFoot">New here? <a onclick="switchAuthTab('signup')">Create an account</a></p>
@@ -1449,6 +1536,14 @@
           </div>
           <div class="firm-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div>
         </div>
+        <div class="firm-card" onclick="openDaily()" tabindex="0" role="button">
+          <div class="firm-initial" style="background:rgba(232,168,124,.15);color:var(--accent-amber);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"></path></svg></div>
+          <div>
+            <div class="firm-name">Daily Challenge <span id="dailyModeBadge"></span></div>
+            <div class="firm-desc">Five quick mental-math problems, fresh every day and the same for everyone. Solve 4 of 5 to keep your streak alive.</div>
+          </div>
+          <div class="firm-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div>
+        </div>
         <div class="firm-card" onclick="openGameIntro('bcg')" tabindex="0" role="button">
           <div class="firm-initial" style="background:rgba(124,140,232,.15);color:#7c8ce8;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></div>
           <div>
@@ -1468,6 +1563,17 @@
       </div>
     </div>
   </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     DAILY CHALLENGE
+═══════════════════════════════════════════════════ -->
+<div id="screen-daily" class="screen" data-screen-label="Daily Challenge">
+  <nav class="top-nav">
+    <span class="wordmark" onclick="showScreen('mode')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
+    <button class="btn btn-ghost" onclick="showScreen('mode')" data-i18n="common.back">← Back</button>
+  </nav>
+  <div class="daily-body"><div class="daily-card" id="dailyCard"></div></div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════
@@ -1557,6 +1663,17 @@
     <div class="bcg-interviewer" title="Your interviewer">Pariw</div>
     <div class="bcg-timer" id="bcgTimer">Time Left 30:00</div>
   </div>
+  <div class="bcg-notebar" id="bcgNoteBar">
+    <button class="bcg-note-toggle" onclick="toggleBcgNote()" aria-expanded="true">
+      <span class="bcg-note-ic">i</span>
+      <span class="bcg-note-title">How this works</span>
+      <span class="bcg-note-chev" id="bcgNoteChev">&#9650;</span>
+    </button>
+    <div class="bcg-note-body" id="bcgNoteBody">
+      <p>This is an <b>interviewee-led case</b> run as a chat. Read each prompt, scroll back through earlier messages and exhibits any time you need to, and answer in the box that appears. Some questions are multiple-choice or select-all; others ask for a number or a short written answer. The data in the exhibits matters &mdash; the math is real.</p>
+      <p>At the very end you&rsquo;ll give a <b>final recommendation</b>. In a real interview you&rsquo;d say this out loud to a partner; here, type it as you would deliver it &mdash; conclusion first, then your supporting numbers and risks.</p>
+    </div>
+  </div>
   <div class="bcg-feed" id="bcgFeed"></div>
   <div class="bcg-inputzone" id="bcgInputZone"><!-- widget injected per question --></div>
 </div>
@@ -1612,7 +1729,6 @@
         <div class="firm-card drill-card" onclick="selectDrill('Case Math', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h2M8 15h2M14 11h2M14 15h2"/></svg></div><div><div class="firm-name">Case Math</div><div class="firm-desc">Multi-step business math - breakeven, ROI, margins.</div></div></div>
         <div class="firm-card drill-card" onclick="selectDrill('Chart Interpretation', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg></div><div><div class="firm-name">Chart Interpretation</div><div class="firm-desc">Read exhibits and extract the insight that matters.</div></div></div>
         <div class="firm-card drill-card" onclick="selectDrill('Brainstorm', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 4 10.5c-.7.7-1 1.5-1 2.5H9c0-1-.3-1.8-1-2.5A6 6 0 0 1 12 3z"/></svg></div><div><div class="firm-name">Brainstorm</div><div class="firm-desc">Generate 6+ MECE ideas with creativity and structure.</div></div></div>
-        <div class="firm-card drill-card" onclick="selectDrill('Calculation', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></div><div><div class="firm-name">Mental Math</div><div class="firm-desc">Rapid-fire arithmetic for speed and accuracy.</div></div></div>
         <div class="firm-card drill-card" onclick="selectDrill('Synthesis', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><path d="M12 3 3 20h18L12 3z"/><path d="M7.5 13h9M9.5 8.5h5"/></svg></div><div><div class="firm-name">Synthesis</div><div class="firm-desc">Deliver an answer-first recommendation under 90 seconds (Minto Pyramid).</div></div></div>
         <div class="firm-card drill-card" onclick="selectDrill('Behavioral', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg></div><div><div class="firm-name">Behavioral / Fit</div><div class="firm-desc">PEI-style fit questions scored on STAR structure.</div></div></div>
       </div>
@@ -1789,7 +1905,9 @@
       <svg class="rt-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2 2M9 2h6"></path></svg>
       <span class="rt-time" id="respTimerTime">1:30</span>
       <div class="rt-bar"><div class="rt-fill" id="respTimerFill"></div></div>
+      <button class="help-btn" id="helpBtn" onclick="requestHelp()" title="Pauses the clock for 10 seconds">Need a hint?</button>
     </div>
+    <div class="help-hint" id="helpHintPanel" style="display:none;"></div>
     <div class="hints" id="chatHints"></div>
     <div class="input-row">
       <textarea id="chat-ta" class="chat-ta" placeholder="Share your thinking…" rows="1" onkeydown="handleKeydown(event)" oninput="autoResize(this)"></textarea>
@@ -1888,6 +2006,13 @@ let currentUser = null;
 try {
   if (window.supabase && window.supabase.createClient) {
     sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    // When the user opens the reset link from their email, Supabase emits
+    // PASSWORD_RECOVERY - show the "set a new password" panel.
+    sb.auth.onAuthStateChange((event) => {
+      if (event === 'PASSWORD_RECOVERY' && typeof showSetNewPassword === 'function') {
+        showSetNewPassword();
+      }
+    });
   }
 } catch (e) { console.warn('Supabase init failed', e); }
 
@@ -2000,13 +2125,9 @@ You run drills as a SERIES, never a single question. Follow this loop exactly:
 FORMAT - SERIES OF 5 REPS:
 - The drill is 5 reps total. Internally track "Rep 1 of 5 ... Rep 5 of 5" and always show it as a header on each new rep.
 - Present ONE rep. Then STOP and wait for the candidate's answer. Never reveal the answer before they respond.
-- After EACH answer, give INSTANT micro-feedback in Russian, in this exact order:
-   • Верно / Частично / Неверно + score /10
-   • The single most important thing they did well or missed
-   • THE LOGIC (in Russian): the mental model - why the right approach is right, so they understand the "how to think", not just the answer.
-   • MODEL ANSWER (mandatory, in English): then show the FULL flawless answer to THIS rep, written exactly as a top candidate would deliver it out loud - complete, not a hint list. For a brainstorm rep that means the entire MECE structure with all buckets AND the factors inside each. For a math rep, the full worked solution. For sizing, the full equation and numbers. The candidate must be able to read your model answer and see the complete target they were aiming for. Never give only "the angles you missed" - give the whole answer assembled.
-   • The one-line partner move that ties it together.
-- Then immediately present the NEXT rep. Keep momentum - rapid-fire.
+- CRITICAL - NO FEEDBACK DURING THE SERIES: After each answer, do NOT grade, do NOT explain, do NOT give the model answer, do NOT teach. The candidate is being timed and must not spend time reading feedback mid-drill. Reply with ONE short neutral acknowledgement only (e.g. "Got it - next one." / "Noted. Rep 3 of 5:") and immediately present the NEXT rep. Keep all judgement to yourself until the end. The ONLY exception is PARTNER PUSHBACK below, which is a single challenge, not feedback.
+- Silently remember every rep's question, the candidate's answer, and how they did - you will deliver the entire analysis at the end.
+- After Rep 5's answer, deliver the FULL DEFERRED REVIEW (see below).
 
 ADAPTIVE DIFFICULTY:
 - Start Rep 1 at medium difficulty.
@@ -2032,7 +2153,13 @@ VARIETY (hard rule):
 
 NUMBERS ARE FIXED - DO NOT BEND TO THE CANDIDATE: Whatever numbers you state in a rep are locked. If the candidate claims a figure is different or that you made an error, you do NOT change it to match them - restate the original value and have them work with it. A candidate questioning a number never makes it wrong. (Pushback above flexes only your JUDGEMENT call when they defend a better answer with logic - never the DATA.) Design each rep's numbers to cross-check before you present it, so you never have to improvise a correction mid-rep.
 
-AFTER REP 5 - SUMMARY SCORECARD (in Russian):
+AFTER REP 5 - FULL DEFERRED REVIEW (this is where ALL teaching happens, in Russian unless noted):
+Open with one line: "Серия завершена. Вот полный разбор." Then, for EACH of the 5 reps in order, give:
+- REP N — Верно / Частично / Неверно + score /10
+- The single most important thing they did well or missed (one line, Russian)
+- THE LOGIC (Russian): the mental model - why the right approach is right, so they learn how to think.
+- MODEL ANSWER (mandatory, in English): the FULL flawless answer to THAT rep, written exactly as a top candidate would deliver it out loud - complete, not a hint list. Brainstorm = the entire MECE structure with all buckets and the factors inside. Math = the full worked solution. Sizing = the full equation and numbers. The candidate reads it and sees the complete target.
+Then close with the SERIES SCORECARD (Russian):
 - Общий счёт серии: X/10
 - Best rep / weakest rep
 - The ONE pattern to fix (the recurring weakness across the 5 reps - this is what makes the drill worth more than 5 random questions)
@@ -2043,11 +2170,10 @@ LANGUAGE: questions and prompts in English; all feedback, logic and scorecard in
 
 const DRILL_PROMPTS = {
   'Market Sizing': DRILL_ENGINE + `\n\nDRILL TYPE: MARKET SIZING. Each rep is one estimation question (e.g. "How many MRI scans are performed in Canada per year?"). Evaluate per rep: (1) clear equation stated FIRST, (2) reasonable assumptions, (3) logical segmentation, (4) clean calculation, (5) sanity-check. Harder reps = trickier populations, nested segments, or a unit trap. Teach the structuring logic, not just the final figure.`,
-  'Structuring': DRILL_ENGINE + `\n\nDRILL TYPE: STRUCTURING. Each rep is one case prompt (2-3 sentences, named company, specific problem). Candidate builds a MECE framework - do NOT run the full case. Evaluate per rep: MECE? tailored to THIS case (not a generic template)? hypothesis-driven? prioritized? Harder reps = less obvious problem types (org, M&A synergy, pricing, non-profit). Teach WHY a branch belongs, not just the tree.`,
+  'Structuring': DRILL_ENGINE + `\n\nDRILL TYPE: STRUCTURING. Each rep is one case prompt (2-3 sentences, named company, specific problem). Candidate builds a MECE framework - do NOT run the full case. Evaluate per rep: MECE? tailored to THIS case (not a generic template)? hypothesis-driven? prioritized? CRITICAL VARIETY RULE: across the 5 reps, each rep MUST be a DIFFERENT problem type - rotate through market entry, pricing, M&A/synergy, capacity/operations, product launch, growth strategy, cost transformation, make-vs-buy, non-profit/public-sector. Do NOT make every rep a profitability problem, and never use the "margin fell from X% to Y%" cliche. Harder reps = less obvious problem types. Teach WHY a branch belongs, not just the tree.`,
   'Case Math': DRILL_ENGINE + `\n\nDRILL TYPE: CASE MATH. Each rep is one multi-step business math problem with exact, internally consistent numbers (profit, breakeven, ROI, margin, NPV, contribution). Candidate requests missing data, states approach, then calculates. Every number must cross-check (Revenue × Margin = Profit). Harder reps = more steps, a red-herring number, or a breakeven/elasticity twist. Teach the setup logic and the shortcut.`,
   'Chart Interpretation': DRILL_ENGINE + `\n\nDRILL TYPE: CHART INTERPRETATION. Each rep describes one exhibit in detail (specific numbers, e.g. "Bar chart: Revenue by segment - A €40M, B €25M, C €15M; line overlay: A declining 8%/yr, C growing 20%/yr"). Ask "What are your takeaways?" Evaluate: does the candidate extract the KEY insight (not just describe), connect to business implication, and propose a next step? Harder reps = charts with a hidden second insight or a misleading axis. Teach how to read for the "so what".`,
   'Brainstorm': DRILL_ENGINE + `\n\nDRILL TYPE: CREATIVITY / BRAINSTORM. Each rep is one open question (e.g. "What factors before a beverage company launches a protein drink?"). Require 6+ ideas in a MECE structure; push if fewer than 4. Evaluate breadth, structure, non-obvious ideas. Harder reps = more constrained or two-sided prompts (revenue AND cost, internal AND external). Teach the MECE buckets to generate from, not just a list.`,
-  'Calculation': DRILL_ENGINE + `\n\nDRILL TYPE: RAPID MENTAL MATH. Each rep is one quick arithmetic problem with realistic business framing (percentages, large multiplications, fractions, weighted averages, growth rates). No data requests - just fast computation. Confirm correct/incorrect instantly and show the mental-math shortcut. Harder reps = uglier numbers and chained operations. Score speed AND accuracy. Don't round when teaching - show the precise path then the rounding shortcut.`,
   'Synthesis': DRILL_ENGINE + `\n\nDRILL TYPE: SYNTHESIS / RECOMMENDATION. This is the single most-tested skill in a BCG final round. Each rep: present ONE compact case situation - named client, the decision they face, and 4-6 concrete, internally consistent data points already "discovered" (market size, margins, breakeven, investment, growth, one risk signal). Cross-check the numbers. Then instruct: "You have 90 seconds. Give me your recommendation." STOP and wait. Do NOT hint at the answer.
 
 Evaluate each rep strictly against the Minto Pyramid:
@@ -2085,7 +2211,7 @@ async function _startDrillReal() {
   renderHints();
   setTyping(true);
   const seed = Math.random().toString(36).substring(2,8);
-  const sys = DRILL_PROMPTS[state.drillType] + '\n\nUniqueness seed: ' + seed + ' - make this drill different from any previous one. Avoid coffee/café topics.' + langInstruction();
+  const sys = DRILL_PROMPTS[state.drillType] + '\n\nUniqueness seed: ' + seed + ' - make this drill genuinely different from any previous one. VARIETY IS MANDATORY: do NOT default to the classic "profits/margin fell from X% to Y%, find out why" profitability-decline setup - that specific framing is overused and banned unless the drill type is explicitly about diagnosing a decline. Rotate hard across sectors (healthcare, logistics, agritech, fintech, education, energy, media, public sector, industrials, retail, SaaS) AND across problem types (market entry, pricing, M&A, capacity, product launch, turnaround, growth strategy, cost transformation, make-vs-buy, non-profit). Avoid coffee/café topics.' + langInstruction();
   try {
     const opening = await callAI(sys, [{ role:'user', content:'Begin the drill now.' }]);
     state.messages.push({ role:'assistant', content: opening });
@@ -2131,7 +2257,7 @@ async function callAI(system, messages, model) {
       method: 'POST',
       headers: headers,
       body: JSON.stringify({
-        model: model || 'claude-sonnet-4-5',
+        model: model || 'claude-sonnet-5',
         max_tokens: 1000,
         system: system,
         messages: messages
@@ -2478,6 +2604,7 @@ function showScreen(id, fromPop) {
   if (id !== 'solve' && typeof solve === 'object' && solve && solve.timerId) { clearInterval(solve.timerId); solve.timerId = null; }
   if (id !== 'bcg' && typeof bcg === 'object' && bcg && bcg.timerId) { clearInterval(bcg.timerId); bcg.timerId = null; if (bcg.qTimerId) { clearInterval(bcg.qTimerId); bcg.qTimerId = null; } }
   if (id === 'mode' && typeof cxRefreshMode === 'function') { try { cxRefreshMode(); } catch(e){} }
+  if (id === 'mode' && typeof refreshDailyBadge === 'function') { try { refreshDailyBadge(); } catch(e){} }
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   const el = document.getElementById('screen-' + id);
   if (el) el.classList.add('active');
@@ -2549,6 +2676,8 @@ function switchAuthTab(mode) {
     ? 'New here? <a onclick="switchAuthTab(\'signup\')">Create an account</a>'
     : 'Already have an account? <a onclick="switchAuthTab(\'signin\')">Sign in</a>';
   document.getElementById('authError').textContent = '';
+  const fl = document.getElementById('forgotLink');
+  if (fl) fl.style.display = mode === 'signin' ? 'block' : 'none';
 }
 function togglePw() {
   const inp = document.getElementById('authPassword');
@@ -2561,6 +2690,64 @@ function togglePw() {
     eye.innerHTML = '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/>';
   }
 }
+// Send a password-reset email. Supabase redirects back to the site with a
+// recovery token in the URL hash, which handleRecoveryLink() picks up.
+async function forgotPassword() {
+  const errEl = document.getElementById('authError');
+  const email = document.getElementById('authEmail').value.trim();
+  errEl.style.color = '#e06c5c';
+  if (!email) { errEl.textContent = 'Enter your email above first, then tap “Forgot password?”.'; return; }
+  if (!sb) { errEl.textContent = 'Auth is still loading, try again in a second.'; return; }
+  try {
+    const { error } = await sb.auth.resetPasswordForEmail(email, {
+      redirectTo: window.location.origin
+    });
+    if (error) { errEl.textContent = error.message; return; }
+    errEl.style.color = '#5db8a6';
+    errEl.textContent = 'If that email has an account, a reset link is on its way. Check your inbox (and spam).';
+  } catch (e) {
+    errEl.textContent = 'Could not send the reset email. Please try again.';
+  }
+}
+
+// When the user returns via the recovery link, Supabase fires a PASSWORD_RECOVERY
+// event. Show a small inline panel to set a new password.
+function showSetNewPassword() {
+  const card = document.getElementById('authCard');
+  if (!card) return;
+  showScreen('auth');
+  card.innerHTML = `
+    <h2 class="auth-title">Set a new password</h2>
+    <label class="auth-label">New password</label>
+    <div class="pw-wrap">
+      <input class="input-el" type="password" id="newPw1" placeholder="••••••••" autocomplete="new-password">
+    </div>
+    <label class="auth-label" style="margin-top:10px;">Confirm new password</label>
+    <div class="pw-wrap">
+      <input class="input-el" type="password" id="newPw2" placeholder="••••••••" autocomplete="new-password">
+    </div>
+    <div class="auth-error" id="authError"></div>
+    <button class="btn btn-primary" onclick="submitNewPassword()" style="width:100%;margin-top:10px;">Update password</button>`;
+}
+
+async function submitNewPassword() {
+  const errEl = document.getElementById('authError');
+  const a = document.getElementById('newPw1').value;
+  const b = document.getElementById('newPw2').value;
+  errEl.style.color = '#e06c5c';
+  if (a.length < 6) { errEl.textContent = 'Password must be at least 6 characters.'; return; }
+  if (a !== b) { errEl.textContent = 'The two passwords do not match.'; return; }
+  try {
+    const { error } = await sb.auth.updateUser({ password: a });
+    if (error) { errEl.textContent = error.message; return; }
+    errEl.style.color = '#5db8a6';
+    errEl.textContent = 'Password updated. You can use it next time you sign in.';
+    setTimeout(() => { showScreen('mode'); }, 1200);
+  } catch (e) {
+    errEl.textContent = 'Could not update the password. Please try again.';
+  }
+}
+
 async function handleAuthSubmit() {
   const email = document.getElementById('authEmail').value.trim();
   const pw = document.getElementById('authPassword').value;
@@ -2675,6 +2862,11 @@ const BCG_CASES = [{
 }];
 
 let bcg = null; // active session state
+
+function toggleBcgNote() {
+  var bar = document.getElementById('bcgNoteBar');
+  if (bar) bar.classList.toggle('collapsed');
+}
 
 function startBcgGame() {
   if (typeof cxSetResume === 'function') cxSetResume('bcg', 'BCG Chat Game', 'startBcgGame');
@@ -2914,6 +3106,7 @@ const GAME_INTROS = {
   solve: {
     eyebrow: 'McKinsey-style assessment',
     title: 'Solve Game',
+    story: 'You\u2019ve been brought in as an analyst for the Calder Sound marine authority. Three commercial fish species in the sound are under pressure, and the regulator must decide how much catch is sustainable before the next season opens. The data is messy and the clock is ticking \u2014 your job is to turn the survey numbers into defensible figures the board can act on.',
     lead: 'This mirrors the McKinsey Solve assessment - a data-driven problem-solving game. You work through an ecosystem scenario in four phases, entering numeric answers that are graded against a verified solution.',
     steps: [
       ['1','<b>Study</b> - read the scenario and fill the missing figures into the text, using the exhibit data.'],
@@ -2928,6 +3121,7 @@ const GAME_INTROS = {
   bcg: {
     eyebrow: 'BCG-style assessment',
     title: 'BCG Chat Game',
+    story: 'Calveron, a mid-sized coffee roaster, has just learned that Brightwell \u2014 one of its key bean suppliers \u2014 is up for sale. Calveron\u2019s CEO needs to know whether acquiring Brightwell makes sense, and if so, what it is worth paying. You\u2019re the consultant on the case: work the numbers, weigh the risks, and land a clear recommendation.',
     lead: 'This mirrors BCG\u2019s online case assessment - a single business scenario explored through a chat conversation. The case unfolds in linked questions with data exhibits; you answer using the same widget types the real assessment uses.',
     steps: [
       ['1','<b>Read the brief</b> - a real-style client scenario opens the case.'],
@@ -2950,11 +3144,12 @@ function openGameIntro(which) {
   const meta = g.meta.map(m =>
     `<div class="gi-meta-item">${esc(m[0])}<b>${esc(m[1])}</b></div>`).join('');
   document.getElementById('giCard').innerHTML =
-    `<div class="gi-eyebrow">${esc(g.eyebrow)}</div>
-     <h1 class="gi-title">${esc(g.title)}</h1>
-     <p class="gi-lead">${esc(g.lead)}</p>
-     <div class="gi-meta">${meta}</div>
-     <div class="gi-steps">${steps}</div>
+    `<div class="gi-eyebrow gi-fade" style="--d:0ms">${esc(g.eyebrow)}</div>
+     <h1 class="gi-title gi-fade" style="--d:80ms">${esc(g.title)}</h1>
+     ${g.story ? `<div class="gi-story gi-fade" style="--d:160ms"><span class="gi-story-tag">The situation</span><p>${esc(g.story)}</p></div>` : ''}
+     <p class="gi-lead gi-fade" style="--d:260ms">${esc(g.lead)}</p>
+     <div class="gi-meta gi-fade" style="--d:340ms">${meta}</div>
+     <div class="gi-steps gi-fade" style="--d:420ms">${steps}</div>
      <label class="gi-timer-toggle">
        <input type="checkbox" id="giTimerChk" ${gameTimerOn()?'checked':''} onchange="setGameTimer(this.checked)">
        <span class="gi-toggle-track"><span class="gi-toggle-knob"></span></span>
@@ -2994,11 +3189,11 @@ const SOLVE_CASE = {
     intro: 'All names in this study are fictional. You are a marine researcher at the Pariw Institute, assessing the fish stocks of Calder Sound: how the population splits across three commercial species, how much stock can be safely harvested, and whether the protected quota kept pace as the populations grew.',
     // blanks the user must fill from the text (machine-checked)
     blanks: [
-      { id:'area', pre:'By year 4, the three commercial species tracked in Calder Sound - Marlspike, Bluefin, and Coralback - had a combined population of ', post:' thousand fish (sum the year-4 column of the exhibit).', ans:2245 },
-      { id:'farmpct', pre:' Of that year-4 total, Bluefin - the single largest stock - makes up about ', post:' % of all fish (give one decimal place). A juvenile reserve is also set aside, equal to about ', ans:40.2, tol:0.75 },
-      { id:'smallpct', pre:'', post:' % of the year-4 Marlspike population.', ans:15 },
-      { id:'bufY1', pre:' In year 1, regulators set a protected quota of ', post:' thousand fish that may not be harvested. In year 4, the protected quota was raised to ', ans:180 },
-      { id:'bufY4', pre:'', post:' thousand fish. Stock that is neither protected nor held in the juvenile reserve is called harvestable stock.', ans:196 },
+      { id:'area', label:'Combined year-4 population', pre:'By year 4, the three commercial species tracked in Calder Sound - Marlspike, Bluefin, and Coralback - had a combined population of ', post:' thousand fish (sum the year-4 column of the exhibit).', ans:2245 },
+      { id:'farmpct', label:'Bluefin share of total (%)', pre:' Of that year-4 total, Bluefin - the single largest stock - makes up about ', post:' % of all fish (give one decimal place). A juvenile reserve is also set aside, equal to about ', ans:40.2, tol:0.75 },
+      { id:'smallpct', label:'Juvenile reserve (% of Marlspike)', pre:'', post:' % of the year-4 Marlspike population.', ans:15 },
+      { id:'bufY1', label:'Protected quota, year 1', pre:' In year 1, regulators set a protected quota of ', post:' thousand fish that may not be harvested. In year 4, the protected quota was raised to ', ans:180 },
+      { id:'bufY4', label:'Protected quota, year 4', pre:'', post:' thousand fish. Stock that is neither protected nor held in the juvenile reserve is called harvestable stock.', ans:196 },
     ],
     exhibit: {
       title: 'Exhibit 1: Population by Species and Year (thousand fish)',
@@ -3031,18 +3226,32 @@ const SOLVE_CASE = {
         { id:'fastrate', label:'Average annual growth rate:', unit:'%', ans:6.67, tol:0.5 },
       ] },
   ],
-  // ---- REPORT: graph build + selection ----
+  // ---- REPORT: written summary + graph selection + visual build ----
   report: {
-    // --- step 1: user builds the year-4 stock-breakdown bar chart ---
-    build: {
-      prompt: 'Build the year-4 stock breakdown. Enter the figure (thousand fish) for each category from your Analysis answers; the bars update as you type. Values are checked against the verified figures.',
+    // --- step 1: Written Report - a Minto-style summary paragraph, fill the figures you already derived ---
+    written: {
+      intro: 'Complete the summary below using the figures you already established in Study and Analysis. This is the write-up a partner would read before the chart.',
+      blanks: [
+        { id:'w_total', pre:'Across Calder Sound, the three commercial species\u2019 combined year-4 population reached ', post:' thousand fish, ', ans:2245 },
+        { id:'w_bfpct', pre:'of which Bluefin represented about ', post:'% of the total. ', ans:40.2, tol:0.75 },
+        { id:'w_q1', pre:'The protected quota grew from ', post:' thousand fish in year 1 ', ans:180 },
+        { id:'w_q4', pre:'to ', post:' thousand fish in year 4, ', ans:196 },
+        { id:'w_cmp', pre:'a rate that was ', post:' than the overall population\u2019s growth. ', ans:'slower', isQual:true, options:['','faster','slower','the same as'] },
+        { id:'w_harv', pre:'After setting aside the juvenile reserve, harvestable stock stood at approximately ', post:' thousand fish. ', ans:1940.4 },
+        { id:'w_species', pre:'The fastest average annual growth was recorded by ', post:', ', ans:'Coralback', isText:true },
+        { id:'w_rate', pre:'at roughly ', post:'% per year.', ans:6.67, tol:0.5 },
+      ],
+    },
+    // --- step 3: Visual Report - build the chosen chart type from an editable data table ---
+    visual: {
+      prompt: 'Build the year-4 stock breakdown as the chart type you selected. Enter the figure (thousand fish) for each category from your Analysis answers \u2014 the visualization updates as you type.',
       axisLabel: 'Thousand fish',
       max: 2400,
       bars: [
         { id:'b_farms', label:'Harvestable stock', ans:1940.4, color:'var(--accent-teal)' },
-        { id:'b_small', label:'Juvenile reserve',  ans:108.6,  color:'var(--accent-teal)' },
-        { id:'b_buf',   label:'Protected quota',   ans:196,    color:'var(--accent-teal)' },
-        { id:'b_uncl',  label:'Bluefin stock',     ans:902,    color:'var(--accent-teal)' },
+        { id:'b_small', label:'Juvenile reserve',  ans:108.6,  color:'var(--accent-amber)' },
+        { id:'b_buf',   label:'Protected quota',   ans:196,    color:'#7c8ce8' },
+        { id:'b_uncl',  label:'Bluefin stock',     ans:902,    color:'#e07a9e' },
       ],
     },
     // --- step 2: read a combo chart, then pick best chart type ---
@@ -3057,7 +3266,7 @@ const SOLVE_CASE = {
     options: ['bar','line','pie'],
     correct: 'pie',
   },
-  // ---- CASES: one mini-case (catch-efficiency) ----
+  // ---- CASES: standalone mini-cases, each self-contained (math verified independently) ----
   cases: [
     { id:'c1', title:'Case 1',
       intro:'Surveyors logged the catch (tonnes landed) by gear type across three fishing grounds in Calder Sound over one season.',
@@ -3070,6 +3279,62 @@ const SOLVE_CASE = {
         { id:'marsh', label:'Shelf average:', unit:'', ans:14.67 },
         { id:'bluff', label:'Trench average:', unit:'', ans:15.33 },
       ] },
+    { id:'c2', title:'Case 2',
+      intro:'Researchers tracked predation by orca pods in Calder Sound. Each pod has a measured kill rate (seals per day per orca), a pod size, and a tracking period. Exhibit 2 collects the data.',
+      exhibit:{ title:'Exhibit 2: Orca Pod Predation Data',
+        head:['Pod','Kill rate (seals/day/orca)','Pod size (orcas)','Tracking period (days)'],
+        rows:[ ['Tide Runners',0.021,14,10], ['Deepwater',0.008,26,9], ['Coastal',0.017,11,8] ] },
+      q:'If the Coastal pod\u2019s local seal population is 120, what would be the percentage loss of that seal population after one month (30 days), based on the Coastal pod\u2019s kill rate and size? Round to two digits.',
+      fields:[
+        { id:'seal_loss', label:'Seal population loss after 1 month:', unit:'%', ans:4.67, tol:0.05 },
+      ] },
+    { id:'c3', title:'Case 3',
+      intro:'As the Calder Sound seal population recovered, new orca pods formed and moved into new waters. Researchers tracked hunting activity in Year 1 for the newly formed pods across two areas.',
+      exhibit:{ title:'Exhibit 3: Year-1 Hunting Activity \u2014 New Pods',
+        head:['New pods','Northreef','Southshoal'],
+        rows:[ ['Pods',13,8], ['Average hunts per pod',40,50], ['Average kills per hunt',4,3], ['Expected % hunt increase after Year 1',25,15] ] },
+      q:'Not including the expected hunt-increase (growth) figure, what is the total number of seals killed by the new pods in Year 1 in each area, and combined? (Pods \u00d7 hunts per pod \u00d7 kills per hunt.)',
+      fields:[
+        { id:'k_north', label:'Northreef Year-1 kills:', unit:'', ans:2080 },
+        { id:'k_south', label:'Southshoal Year-1 kills:', unit:'', ans:1200 },
+        { id:'k_both', label:'Combined kills:', unit:'', ans:3280 },
+      ] },
+    { id:'c4', title:'Case 4',
+      intro:'A restoration program will treat degraded seabed in Calder Sound using three methods. Each method has a number of available treatment teams and a coverage rate (hectares each team can treat).',
+      exhibit:{ title:'Exhibit 4: Treatment Capacity by Method',
+        head:['Treatment','Teams available','Hectares covered per team'],
+        rows:[ ['Physical',7,20], ['Chemical',15,60], ['Biological',25,40] ] },
+      q:'Researchers plan to treat a 5,000-hectare section using all three methods. If the chemical and physical teams were both doubled (biological unchanged), what percentage of the 5,000 hectares would be covered? Round to one digit.',
+      fields:[
+        { id:'coverage', label:'Coverage of the 5,000 ha:', unit:'%', ans:61.6, tol:0.1 },
+      ] },
+    { id:'c5', title:'Case 5',
+      intro:'A Calder Sound reserve is re-allocating its land. The chart shows current land units by use (total 100 units).',
+      chart:{ type:'pie', title:'Exhibit 5: Current Land Allocation (units, total 100)',
+        slices:[
+          { name:'Forest', value:30, color:'var(--accent-teal)' },
+          { name:'Fields', value:35, color:'#5fbf6b' },
+          { name:'Mountains', value:16, color:'var(--accent-amber)' },
+          { name:'Lakes/Rivers', value:12, color:'#7c8ce8' },
+          { name:'Parking/Roads', value:4, color:'#b57ce0' },
+          { name:'Campgrounds', value:3, color:'#e08a3c' },
+        ] },
+      q:'The reserve will increase Campgrounds by 100% and Parking/Roads by 50%, taking all the extra land from Fields. After the change, what is the Forest-to-Fields ratio? Enter it in simplest whole-number form (e.g. for 3:2, enter 3 and 2).',
+      fields:[
+        { id:'ratio_f', label:'Forest part of ratio:', unit:'', ans:1 },
+        { id:'ratio_fi', label:'Fields part of ratio:', unit:'', ans:1 },
+      ] },
+    { id:'c6', title:'Case 6',
+      intro:'Researchers have tracked the populations of several seal colonies in Calder Sound over the past 5 years and want to visualize the trend for each colony over time.',
+      chartChoice:{ prompt:'What is the best chart or plot to graph this data \u2014 several colonies\u2019 populations tracked across 5 years?',
+        options:[
+          { id:'scatter', label:'Scatter plot' },
+          { id:'histogram', label:'Histogram' },
+          { id:'line', label:'Line chart' },
+          { id:'bar', label:'Bar chart' },
+        ], correct:'line' },
+      q:'',
+      fields:[ { id:'chart_pick', label:'', unit:'', ans:'line', isText:true } ] },
   ],
 };
 
@@ -3078,7 +3343,7 @@ let solve = null;
 function startSolveGame() {
   if (typeof requireAuth === 'function' && !requireAuth()) return;
   if (typeof cxSetResume === 'function') cxSetResume('solve', 'Solve Game', 'startSolveGame');
-  solve = { phase:'study', qIndex:0, answers:{}, graded:{}, journal:[], calcLog:[], reportStep:'build', secs: SOLVE_CASE.totalMin*60, timerId:null };
+  solve = { phase:'study', qIndex:0, answers:{}, graded:{}, journal:[], calcLog:[], reportStep:'written', secs: SOLVE_CASE.totalMin*60, timerId:null };
   svCalcExpr = '';
   try { const cd=document.getElementById('svCalcDisp'); if(cd)cd.textContent='0'; const cl=document.getElementById('svCalcLog'); if(cl)cl.innerHTML=''; const cc=document.getElementById('svCalc'); if(cc)cc.classList.remove('show'); } catch(e){}
   showScreen('solve');
@@ -3200,6 +3465,12 @@ function svRenderJournal() {
 
 /* ════════ Floating calculator (logs every result; results are collectible) ════════ */
 let svCalcExpr = '';
+function svCalcOpen() {
+  const c = document.getElementById('svCalc');
+  if (!c || c.classList.contains('show')) return;
+  c.classList.add('show');
+  if (!c._dragInit) { svCalcInitDrag(c); c._dragInit = true; }
+}
 function svCalcToggle() {
   const c = document.getElementById('svCalc');
   if (!c) return;
@@ -3256,6 +3527,10 @@ function svCalcInitDrag(panel) {
   });
 }
 
+function svHint(text) {
+  return `<div class="sv-hint"><span class="sv-hint-ic">\u2192</span><span>${text}</span></div>`;
+}
+
 function renderSolveStudy(inner, foot) {
   const s = SOLVE_CASE.study;
   let prose = '';
@@ -3265,6 +3540,7 @@ function renderSolveStudy(inner, foot) {
   let ex = svExhibitHTML(s.exhibit, true);
   inner.innerHTML = `<h2 class="sv-h">${esc(s.title)}</h2>
     <p class="sv-sub">${esc(s.intro)}</p>
+    ${svHint('<b>Collect everything.</b> Tap or drag every highlighted number into your Research Journal \u2014 it costs nothing and you\u2019ll have the data ready when the questions come. You can rename or delete entries later.')}
     <div class="sv-layout">
       <div class="sv-layout-main">
         <div class="sv-prose">${prose}</div>${ex}
@@ -3292,6 +3568,7 @@ function svExhibitHTML(ex, collectible) {
 }
 
 function renderSolveAnalysis(inner, foot) {
+  if (!solve._calcAutoShown) { solve._calcAutoShown = true; setTimeout(svCalcOpen, 300); }
   const q = SOLVE_CASE.analysis[solve.qIndex];
   let fields = q.fields.map(f => {
     if (f.isQual) {
@@ -3305,8 +3582,11 @@ function renderSolveAnalysis(inner, foot) {
       <span class="sv-unit">${esc(f.unit)}</span></div>`;
   }).join('');
   inner.innerHTML = `<div class="sv-layout"><div class="sv-layout-main">
+    <div class="sv-qnav">${SOLVE_CASE.analysis.map((qq,i)=>`<button class="sv-qnav-item ${i===solve.qIndex?'active':''} ${solve.graded&&solve.answers[qq.fields[0].id]?'answered':''}" onclick="solve.qIndex=${i};renderSolve()">Q${i+1}</button>`).join('')}</div>
     <div class="sv-q-label">${esc(q.label)} of ${SOLVE_CASE.analysis.length} \u00b7 Analysis</div>
-    <div class="sv-q-text">${esc(q.text)}</div>${fields}
+    <div class="sv-q-text">${esc(q.text)}</div>
+    ${solve.qIndex===0 ? svHint('Open the <b>calculator</b> (top-right). Each result is saved to the calc history \u2014 drag a saved result straight into an answer box, or type the number in yourself.') : ''}
+    ${fields}
     </div><div class="sv-journal" id="svJournal"></div></div>`;
   svRenderJournal();
   const last = solve.qIndex === SOLVE_CASE.analysis.length - 1;
@@ -3320,54 +3600,167 @@ function solveAnalysisNext() {
 }
 
 function renderSolveReport(inner, foot) {
-  // Two sub-steps: 'build' (user enters values, bars grow) then 'pick' (read combo chart, choose best type).
-  if (!solve.reportStep) solve.reportStep = 'build';
-  if (solve.reportStep === 'build') return renderReportBuild(inner, foot);
-  return renderReportPick(inner, foot);
+  // Three sub-steps mirroring McKinsey naming:
+  //   'written' -> Written Report  (Minto-style summary paragraph, fill the figures)
+  //   'pick'     -> Graph Selection (read the combo chart, choose the best type)
+  //   'visual'   -> Visual Report   (build the chosen chart type from an editable data table)
+  if (!solve.reportStep) solve.reportStep = 'written';
+  if (solve.reportStep === 'written') return renderReportWritten(inner, foot);
+  if (solve.reportStep === 'pick')    return renderReportPick(inner, foot);
+  return renderReportVisual(inner, foot);
 }
 
-// --- live bar chart the user builds by typing values ---
-function svBuildChartSVG() {
-  const b = SOLVE_CASE.report.build;
+// Vertical sub-nav shown on every Report step (like McKinsey's left rail).
+function svReportNav() {
+  const steps = [['written','Written Report'],['pick','Graph Selection'],['visual','Visual Report']];
+  const order = steps.map(s=>s[0]);
+  const cur = order.indexOf(solve.reportStep);
+  return `<div class="sv-subnav">${steps.map((s,i)=>
+    `<button class="sv-subnav-item ${solve.reportStep===s[0]?'active':''} ${i<cur?'done':''}" onclick="solve.reportStep='${s[0]}';renderSolve()">${i<cur?'\u2713 ':''}${esc(s[1])}</button>`
+  ).join('')}</div>`;
+}
+
+/* ---- Written Report: Minto-style prose with inline blanks (numbers, one dropdown) ---- */
+function renderReportWritten(inner, foot) {
+  const w = SOLVE_CASE.report.written;
+  let prose = '';
+  w.blanks.forEach(b => {
+    if (b.isQual) {
+      const opts = b.options.map(o => `<option value="${esc(o)}" ${solve.answers[b.id]===o?'selected':''}>${o?esc(o):'\u2014 select \u2014'}</option>`).join('');
+      prose += esc(b.pre) + `<select class="sv-qual sv-qual-inline" id="sv-${b.id}" onchange="solve.answers['${b.id}']=this.value">${opts}</select>` + esc(b.post);
+    } else {
+      prose += esc(b.pre) + `<input class="sv-inp" id="sv-${b.id}" inputmode="${b.isText?'text':'decimal'}" value="${esc(solve.answers[b.id]||'')}" oninput="solve.answers['${b.id}']=this.value">` + esc(b.post);
+    }
+  });
+  inner.innerHTML = `${svReportNav()}
+    <div class="sv-q-label">Report \u00b7 Written Report</div>
+    <div class="sv-q-text">${esc(w.intro)}</div>
+    ${svHint('Drag figures straight from your Research Journal into the blanks, or type them in \u2014 every figure here was already established in Study or Analysis.')}
+    <div class="sv-layout"><div class="sv-layout-main">
+    <div class="sv-prose">${prose}</div>
+    </div><div class="sv-journal" id="svJournal"></div></div>`;
+  svRenderJournal();
+  foot.innerHTML = `<button class="sv-back" onclick="solvePhasePrev()">&larr; Back</button>
+    <button class="sv-next" onclick="solve.reportStep='pick';renderSolve()">Next: Graph Selection &rarr;</button>`;
+}
+
+/* ---- Visual Report charts: bar / line / pie, all reading live from the same editable data table ---- */
+function svVisualBarsData() {
+  return SOLVE_CASE.report.visual.bars.map(bar => {
+    const raw = parseFloat(String(solve.answers[bar.id]||'').replace(/[, ]/g,''));
+    return Object.assign({}, bar, { raw: isNaN(raw) ? null : raw, val: isNaN(raw) ? 0 : raw });
+  });
+}
+function svVisualChartSVG() {
+  const type = solve.answers.graph || SOLVE_CASE.report.correct;
+  if (type === 'pie')  return svVisualPieSVG();
+  if (type === 'line') return svVisualLineSVG();
+  return svVisualBarSVG();
+}
+function svVisualBarSVG() {
+  const b = SOLVE_CASE.report.visual;
   const W = 560, H = 230, padL = 48, padB = 38, padT = 14, padR = 12;
   const plotW = W - padL - padR, plotH = H - padT - padB;
   const n = b.bars.length, gap = 18, bw = (plotW - gap*(n-1)) / n;
   let svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(b.axisLabel)}">`;
-  // y gridlines + labels (0, 25, 50, 75, 100% of max)
   for (let i=0;i<=4;i++){
     const v = b.max*i/4, y = padT + plotH - (i/4)*plotH;
     svg += `<line x1="${padL}" y1="${y.toFixed(1)}" x2="${W-padR}" y2="${y.toFixed(1)}" stroke="var(--sv-line-soft)" stroke-width="1"/>`;
     svg += `<text x="${padL-6}" y="${(y+4).toFixed(1)}" text-anchor="end" font-size="10" fill="var(--on-dark-soft)">${Math.round(v)}</text>`;
   }
-  b.bars.forEach((bar,i) => {
-    const raw = parseFloat(String(solve.answers[bar.id]||'').replace(/[, ]/g,''));
-    const val = isNaN(raw) ? 0 : Math.max(0, Math.min(raw, b.max));
+  svVisualBarsData().forEach((bar,i) => {
+    const val = Math.max(0, Math.min(bar.val, b.max));
     const h = (val/b.max)*plotH, x = padL + i*(bw+gap), y = padT + plotH - h;
     svg += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" rx="3" fill="${bar.color}" opacity="0.92"/>`;
-    if (!isNaN(raw) && raw>0){
+    if (bar.raw != null && bar.raw > 0){
       const bx = x+bw/2, by = y-6;
-      svg += `<g><rect x="${(bx-20).toFixed(1)}" y="${(by-13).toFixed(1)}" width="40" height="16" rx="3" fill="var(--surface-dark-elevated)" stroke="var(--sv-line)"/><text x="${bx.toFixed(1)}" y="${(by-1).toFixed(1)}" text-anchor="middle" font-size="10" font-weight="700" fill="var(--on-dark)">${raw}</text></g>`;
+      svg += `<g><rect x="${(bx-20).toFixed(1)}" y="${(by-13).toFixed(1)}" width="40" height="16" rx="3" fill="var(--surface-dark-elevated)" stroke="var(--sv-line)"/><text x="${bx.toFixed(1)}" y="${(by-1).toFixed(1)}" text-anchor="middle" font-size="10" font-weight="700" fill="var(--on-dark)">${bar.raw}</text></g>`;
     }
-    // category label
-    bar.label.split(' ').slice(0,2).forEach((w,k)=>{ svg += `<text x="${(x+bw/2).toFixed(1)}" y="${(H-padB+13+k*11).toFixed(1)}" text-anchor="middle" font-size="9.5" fill="var(--on-dark-soft)">${esc(w)}</text>`; });
+    bar.label.split(' ').slice(0,2).forEach((word,k)=>{ svg += `<text x="${(x+bw/2).toFixed(1)}" y="${(H-padB+13+k*11).toFixed(1)}" text-anchor="middle" font-size="9.5" fill="var(--on-dark-soft)">${esc(word)}</text>`; });
   });
   return svg + '</svg>';
 }
+function svVisualLineSVG() {
+  const b = SOLVE_CASE.report.visual;
+  const W = 560, H = 230, padL = 48, padB = 38, padT = 14, padR = 12;
+  const plotW = W - padL - padR, plotH = H - padT - padB;
+  const bars = svVisualBarsData(), n = bars.length, slot = plotW/n;
+  let svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(b.axisLabel)}">`;
+  for (let i=0;i<=4;i++){
+    const v = b.max*i/4, y = padT + plotH - (i/4)*plotH;
+    svg += `<line x1="${padL}" y1="${y.toFixed(1)}" x2="${W-padR}" y2="${y.toFixed(1)}" stroke="var(--sv-line-soft)" stroke-width="1"/>`;
+    svg += `<text x="${padL-6}" y="${(y+4).toFixed(1)}" text-anchor="end" font-size="10" fill="var(--on-dark-soft)">${Math.round(v)}</text>`;
+  }
+  const pts = bars.map((bar,i) => {
+    const val = Math.max(0, Math.min(bar.val, b.max));
+    const x = padL + i*slot + slot/2, y = padT + plotH - (val/b.max)*plotH;
+    return { x, y, raw: bar.raw, label: bar.label };
+  });
+  const d = pts.map((p,i)=>`${i?'L':'M'}${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' ');
+  svg += `<path d="${d}" fill="none" stroke="var(--accent-amber)" stroke-width="2.4"/>`;
+  pts.forEach(p => {
+    svg += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3.5" fill="var(--accent-amber)"/>`;
+    if (p.raw != null && p.raw > 0) svg += `<g><rect x="${(p.x-18).toFixed(1)}" y="${(p.y-20).toFixed(1)}" width="36" height="15" rx="3" fill="var(--surface-dark-elevated)" stroke="var(--sv-line)"/><text x="${p.x.toFixed(1)}" y="${(p.y-9.5).toFixed(1)}" text-anchor="middle" font-size="9.5" font-weight="700" fill="var(--accent-amber)">${p.raw}</text></g>`;
+    svg += `<text x="${p.x.toFixed(1)}" y="${(H-padB+13).toFixed(1)}" text-anchor="middle" font-size="9.5" fill="var(--on-dark-soft)">${esc(p.label.split(' ')[0])}</text>`;
+  });
+  return svg + '</svg>';
+}
+function svVisualPieSVG() {
+  const bars = svVisualBarsData();
+  const total = bars.reduce((s,b)=>s+Math.max(0,b.val),0);
+  const W = 560, H = 230, cx = 150, cy = 115, r = 92;
+  let svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Stock breakdown pie chart">`;
+  if (total <= 0) {
+    svg += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="var(--sv-line-soft)" stroke-width="1.5"/>`;
+    svg += `<text x="${cx}" y="${cy}" text-anchor="middle" font-size="11.5" fill="var(--on-dark-soft)">Enter values below to build the chart</text>`;
+  } else {
+    let angle = -Math.PI/2;
+    bars.forEach(bar => {
+      const v = Math.max(0, bar.val);
+      if (v <= 0) return;
+      const frac = v/total, theta = frac*Math.PI*2;
+      const x1 = cx + r*Math.cos(angle), y1 = cy + r*Math.sin(angle);
+      const endAngle = angle + theta;
+      const x2 = cx + r*Math.cos(endAngle), y2 = cy + r*Math.sin(endAngle);
+      const large = theta > Math.PI ? 1 : 0;
+      svg += `<path d="M${cx} ${cy} L${x1.toFixed(1)} ${y1.toFixed(1)} A${r} ${r} 0 ${large} 1 ${x2.toFixed(1)} ${y2.toFixed(1)} Z" fill="${bar.color}" opacity="0.92" stroke="var(--surface-dark)" stroke-width="1.5"/>`;
+      const mid = angle + theta/2, pct = Math.round(frac*100);
+      if (pct >= 5) {
+        const lx = cx + (r*0.62)*Math.cos(mid), ly = cy + (r*0.62)*Math.sin(mid);
+        svg += `<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">${pct}%</text>`;
+      }
+      angle = endAngle;
+    });
+  }
+  svg += '</svg>';
+  const legend = `<div class="sv-chart-legend">` + bars.map(bar=>`<span class="sv-leg"><i style="background:${bar.color}"></i>${esc(bar.label)}${bar.raw!=null?(' \u00b7 '+bar.raw):''}</span>`).join('') + `</div>`;
+  return svg + legend;
+}
+function svVisualRefresh() {
+  const el = document.getElementById('svVisualChart');
+  if (el) el.innerHTML = svVisualChartSVG();
+}
 
-function renderReportBuild(inner, foot) {
-  const b = SOLVE_CASE.report.build;
-  const rows = b.bars.map(bar =>
+function renderReportVisual(inner, foot) {
+  const v = SOLVE_CASE.report.visual;
+  const chosen = solve.answers.graph || SOLVE_CASE.report.correct;
+  const correct = chosen === SOLVE_CASE.report.correct;
+  const rows = v.bars.map(bar =>
     `<div class="sv-buildrow"><label>${esc(bar.label)}</label>
-      <input inputmode="decimal" id="sv-${bar.id}" value="${solve.answers[bar.id]||''}"
-        oninput="solve.answers['${bar.id}']=this.value; document.getElementById('svBuildChart').innerHTML = svBuildChartSVG();">
-      <span class="un">ha</span></div>`).join('');
-  inner.innerHTML = `<div class="sv-q-label">Report \u00b7 Build the chart (step 1 of 2)</div>
-    <div class="sv-q-text">${esc(b.prompt)}</div>
-    <div class="sv-chart"><div class="sv-chart-t">${esc(b.axisLabel)} \u00b7 year 4</div>
-      <div id="svBuildChart">${svBuildChartSVG()}</div></div>
+      <input inputmode="decimal" id="sv-${bar.id}" value="${esc(solve.answers[bar.id]||'')}"
+        oninput="solve.answers['${bar.id}']=this.value; svVisualRefresh();">
+      <span class="un">k fish</span></div>`).join('');
+  inner.innerHTML = `${svReportNav()}
+    <div class="sv-q-label">Report \u00b7 Visual Report \u2014 ${chosen.charAt(0).toUpperCase()+chosen.slice(1)} chart</div>
+    <div class="sv-q-text">${esc(v.prompt)}</div>
+    ${svHint(correct
+      ? 'You selected the <b>'+esc(chosen)+' chart</b> \u2014 a strong fit for this data. It updates live as you fill the table below.'
+      : 'You selected the <b>'+esc(chosen)+' chart</b>. Watch how it renders below \u2014 if it doesn\u2019t clearly show parts of a whole, go back to Graph Selection and reconsider.')}
+    <div class="sv-chart"><div class="sv-chart-t">${esc(v.axisLabel)} \u00b7 year 4</div>
+      <div id="svVisualChart">${svVisualChartSVG()}</div></div>
     ${rows}`;
-  foot.innerHTML = `<button class="sv-back" onclick="solvePhasePrev()">&larr; Back</button>
-    <button class="sv-next" onclick="solve.reportStep='pick';renderSolve()">Next: read the chart &rarr;</button>`;
+  foot.innerHTML = `<button class="sv-back" onclick="solve.reportStep='pick';renderSolve()">&larr; Back</button>
+    <button class="sv-next" onclick="solve.phase='cases';solve.qIndex=0;renderSolve()">Go to Cases &rarr;</button>`;
 }
 
 // --- combo bar + line chart (two axes), then pick-best-type ---
@@ -3419,7 +3812,8 @@ function renderReportPick(inner, foot) {
   let cards = r.options.map(o =>
     `<div class="sv-gcard sv-gcard-lg ${solve.answers.graph===o?'sel':''}" onclick="solve.answers.graph='${o}';renderSolve()">
       ${icons[o]}<div class="gl">${o.charAt(0).toUpperCase()+o.slice(1)} chart</div></div>`).join('');
-  inner.innerHTML = `<div class="sv-q-label">Report \u00b7 Read the chart, then choose (step 2 of 2)</div>
+  inner.innerHTML = `${svReportNav()}
+    <div class="sv-q-label">Report \u00b7 Graph Selection</div>
     <div class="sv-chart">
       <div class="sv-chart-t">${esc(c.title)}</div>
       <div class="sv-chart-sub">${esc(c.subtitle)}</div>
@@ -3431,21 +3825,78 @@ function renderReportPick(inner, foot) {
     </div>
     <div class="sv-q-text">${esc(r.prompt)}</div>
     <div class="sv-graphpick">${cards}</div>`;
-  foot.innerHTML = `<button class="sv-back" onclick="solve.reportStep='build';renderSolve()">&larr; Back</button>
-    <button class="sv-next" ${solve.answers.graph?'':'disabled'} onclick="solve.phase='cases';solve.reportStep='build';solve.qIndex=0;renderSolve()">Go to Cases &rarr;</button>`;
+  foot.innerHTML = `<button class="sv-back" onclick="solve.reportStep='written';renderSolve()">&larr; Back</button>
+    <button class="sv-next" ${solve.answers.graph?'':'disabled'} onclick="solve.reportStep='visual';renderSolve()">Next: Visual Report &rarr;</button>`;
 }
 
 function renderSolveCases(inner, foot) {
-  const c = SOLVE_CASE.cases[solve.qIndex];
-  let fields = c.fields.map(f =>
-    `<div class="sv-field"><label>${esc(f.label)}</label>
-      <input class="sv-numin" id="sv-${f.id}" value="${solve.answers[f.id]||''}" oninput="solve.answers['${f.id}']=this.value">
-      <span class="sv-unit">${esc(f.unit)}</span></div>`).join('');
-  inner.innerHTML = `<div class="sv-q-label">${esc(c.title)} \u00b7 Cases</div>
-    <p class="sv-sub">${esc(c.intro)}</p>${svExhibitHTML(c.exhibit, true)}
-    <div class="sv-q-text">${esc(c.q)}</div>${fields}`;
-  foot.innerHTML = `<button class="sv-back" onclick="solve.phase='report';renderSolve()">&larr; Back</button>
-    <button class="sv-next" onclick="solveFinish()">Submit &amp; see results &rarr;</button>`;
+  const cases = SOLVE_CASE.cases;
+  const c = cases[solve.qIndex];
+
+  // Body varies by case shape: data table, pie exhibit, or a chart-type choice.
+  let bodyHTML;
+  if (c.chartChoice) {
+    const cc = c.chartChoice;
+    const icons = {
+      scatter:'<svg viewBox="0 0 120 80"><circle cx="20" cy="55" r="4" fill="var(--accent-teal)"/><circle cx="42" cy="30" r="4" fill="var(--accent-amber)"/><circle cx="55" cy="48" r="4" fill="#7c8ce8"/><circle cx="72" cy="22" r="4" fill="var(--accent-teal)"/><circle cx="90" cy="38" r="4" fill="var(--accent-amber)"/><circle cx="100" cy="18" r="4" fill="#7c8ce8"/></svg>',
+      histogram:'<svg viewBox="0 0 120 80"><rect x="16" y="46" width="16" height="28" fill="var(--accent-amber)"/><rect x="34" y="30" width="16" height="44" fill="var(--accent-amber)"/><rect x="52" y="18" width="16" height="56" fill="var(--accent-amber)"/><rect x="70" y="34" width="16" height="40" fill="var(--accent-amber)"/><rect x="88" y="52" width="16" height="22" fill="var(--accent-amber)"/></svg>',
+      line:'<svg viewBox="0 0 120 80" fill="none" stroke-width="3"><path d="M12 58 L40 34 L64 46 L88 22 L108 30" stroke="var(--accent-teal)"/><path d="M12 66 L40 54 L64 40 L88 44 L108 20" stroke="var(--accent-amber)"/></svg>',
+      bar:'<svg viewBox="0 0 120 80"><rect x="18" y="40" width="14" height="34" fill="var(--accent-teal)"/><rect x="40" y="24" width="14" height="50" fill="var(--accent-amber)"/><rect x="62" y="48" width="14" height="26" fill="#7c8ce8"/><rect x="84" y="32" width="14" height="42" fill="#5fbf6b"/></svg>',
+    };
+    const cards = cc.options.map(o =>
+      `<div class="sv-gcard sv-gcard-lg ${solve.answers[c.fields[0].id]===o.id?'sel':''}" onclick="solve.answers['${c.fields[0].id}']='${o.id}';renderSolve()">
+        ${icons[o.id]||''}<div class="gl">${esc(o.label)}</div></div>`).join('');
+    bodyHTML = `<div class="sv-q-text">${esc(cc.prompt)}</div><div class="sv-graphpick">${cards}</div>`;
+  } else {
+    let fields = c.fields.map(f =>
+      `<div class="sv-field"><label>${esc(f.label)}</label>
+        <input class="sv-numin" id="sv-${f.id}" value="${solve.answers[f.id]||''}" oninput="solve.answers['${f.id}']=this.value">
+        <span class="sv-unit">${esc(f.unit)}</span></div>`).join('');
+    const exhibitHTML = c.chart && c.chart.type === 'pie'
+      ? svCasePieHTML(c.chart)
+      : svExhibitHTML(c.exhibit, true);
+    bodyHTML = `${exhibitHTML}<div class="sv-q-text">${esc(c.q)}</div>${fields}`;
+  }
+
+  inner.innerHTML = `<div class="sv-qnav">${cases.map((cc,i)=>`<button class="sv-qnav-item ${i===solve.qIndex?'active':''}" onclick="solve.qIndex=${i};renderSolve()">${i+1}</button>`).join('')}</div>
+    <div class="sv-q-label">${esc(c.title)} of ${cases.length} \u00b7 Cases</div>
+    <p class="sv-sub">${esc(c.intro)}</p>
+    ${solve.qIndex===0 ? svHint('Each case is a standalone mini-case with its own exhibit \u2014 no carryover from the Study. Use the calculator for any working, and enter your answer.') : ''}
+    <div class="sv-layout"><div class="sv-layout-main">
+    ${bodyHTML}
+    </div><div class="sv-journal" id="svJournal"></div></div>`;
+  svRenderJournal();
+  const last = solve.qIndex === cases.length - 1;
+  foot.innerHTML = `<button class="sv-back" onclick="solveCasesPrev()">&larr; Back</button>
+    <button class="sv-next" onclick="${last ? 'solveFinish()' : 'solveCasesNext()'}">${last ? 'Submit &amp; see results' : 'Next case'} &rarr;</button>`;
+}
+
+// Pie exhibit for a Case (static reference data, values shown as chips on each slice).
+function svCasePieHTML(chart) {
+  const total = chart.slices.reduce((s,x)=>s+x.value,0);
+  const W = 460, H = 300, cx = 155, cy = 150, r = 110;
+  let svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(chart.title)}">`;
+  let angle = -Math.PI/2;
+  chart.slices.forEach(sl => {
+    const frac = sl.value/total, theta = frac*Math.PI*2;
+    const x1 = cx + r*Math.cos(angle), y1 = cy + r*Math.sin(angle);
+    const end = angle + theta;
+    const x2 = cx + r*Math.cos(end), y2 = cy + r*Math.sin(end);
+    const large = theta > Math.PI ? 1 : 0;
+    svg += `<path d="M${cx} ${cy} L${x1.toFixed(1)} ${y1.toFixed(1)} A${r} ${r} 0 ${large} 1 ${x2.toFixed(1)} ${y2.toFixed(1)} Z" fill="${sl.color}" opacity="0.92" stroke="var(--surface-dark)" stroke-width="1.5"/>`;
+    const mid = angle + theta/2;
+    const lx = cx + (r*0.62)*Math.cos(mid), ly = cy + (r*0.62)*Math.sin(mid);
+    svg += `<g><rect x="${(lx-15).toFixed(1)}" y="${(ly-11).toFixed(1)}" width="30" height="18" rx="4" fill="var(--surface-dark-elevated)" stroke="var(--sv-line)"/><text x="${lx.toFixed(1)}" y="${(ly+2).toFixed(1)}" text-anchor="middle" font-size="11" font-weight="700" fill="var(--on-dark)">${sl.value}</text></g>`;
+    angle = end;
+  });
+  svg += '</svg>';
+  const legend = `<div class="sv-chart-legend">` + chart.slices.map(sl=>`<span class="sv-leg"><i style="background:${sl.color}"></i>${esc(sl.name)}</span>`).join('') + `</div>`;
+  return `<div class="sv-exhibit"><div class="sv-exhibit-t">${esc(chart.title)}</div>${svg}${legend}</div>`;
+}
+function solveCasesNext() { if (solve.qIndex < SOLVE_CASE.cases.length - 1) { solve.qIndex++; renderSolve(); } }
+function solveCasesPrev() {
+  if (solve.qIndex > 0) { solve.qIndex--; renderSolve(); }
+  else { solve.phase = 'report'; solve.reportStep = 'visual'; renderSolve(); }
 }
 
 function solvePhaseNext() {
@@ -3467,23 +3918,46 @@ function svCheck(ans, val, isText, tol) {
   return Math.abs(n - ans) <= allow;
 }
 
+function svReviewRow(label, ok, yours, correctTxt) {
+  const your = (yours==null || yours==='') ? '\u2014' : esc(String(yours));
+  return `<div class="sv-result-row"><span class="sv-rr-label">${esc(label)}</span>`
+    + `<span class="sv-rr-ans"><span class="sv-rr-yours ${ok?'ok':'bad'}">${ok?'\u2713':'\u2717'} you: ${your}</span>`
+    + (ok ? '' : `<span class="sv-rr-correct">correct: ${esc(correctTxt)}</span>`)
+    + `</span></div>`;
+}
+
 function solveFinish() {
   if (solve.timerId) clearInterval(solve.timerId);
-  let correct = 0, total = 0, lines = [];
+  let correct = 0, total = 0;
+  const sections = {};
+  const push = (sec, label, ok, yours, correctTxt) => {
+    (sections[sec] = sections[sec] || []).push(svReviewRow(label, ok, yours, correctTxt));
+  };
   // study blanks
-  SOLVE_CASE.study.blanks.forEach(b => { total++; const ok = svCheck(b.ans, solve.answers[b.id], false, b.tol); if(ok)correct++; });
+  SOLVE_CASE.study.blanks.forEach(b => { total++; const ok = svCheck(b.ans, solve.answers[b.id], false, b.tol); if(ok)correct++;
+    push('Study \u00b7 fill the figures', b.label || b.id, ok, solve.answers[b.id], String(b.ans)); });
   // analysis
-  SOLVE_CASE.analysis.forEach(q => q.fields.forEach(f => { total++; const asText = f.isText || f.isQual; const ok = svCheck(f.ans, solve.answers[f.id], asText); if(ok)correct++;
-    lines.push(`<div class="sv-result-row"><span>${esc(f.label)}</span><span class="${ok?'sv-grade-ok':'sv-grade-bad'}">${ok?'\u2713':'\u2717'} ${esc(String(f.ans))}${f.isQual?'':esc(f.unit)}</span></div>`); }));
-  // report - build phase (4 bars the user entered)
-  SOLVE_CASE.report.build.bars.forEach(bar => { total++; const ok = svCheck(bar.ans, solve.answers[bar.id]); if(ok)correct++;
-    lines.push(`<div class="sv-result-row"><span>Chart \u00b7 ${esc(bar.label)}</span><span class="${ok?'sv-grade-ok':'sv-grade-bad'}">${ok?'\u2713':'\u2717'} ${esc(String(bar.ans))} ha</span></div>`); });
+  SOLVE_CASE.analysis.forEach((q,qi) => q.fields.forEach(f => { total++; const asText = f.isText || f.isQual; const ok = svCheck(f.ans, solve.answers[f.id], asText); if(ok)correct++;
+    push('Analysis \u00b7 Q'+(qi+1), f.label, ok, solve.answers[f.id], String(f.ans)+(f.isQual||f.isText?'':' '+f.unit)); }));
+  // report - Written Report (prose blanks)
+  SOLVE_CASE.report.written.blanks.forEach(b => { total++; const asText = b.isText || b.isQual; const ok = svCheck(b.ans, solve.answers[b.id], asText, b.tol); if(ok)correct++;
+    push('Report \u00b7 Written Report', (b.pre||'').slice(-40) || b.id, ok, solve.answers[b.id], String(b.ans)); });
+  // report - Visual Report (bars the user entered)
+  SOLVE_CASE.report.visual.bars.forEach(bar => { total++; const ok = svCheck(bar.ans, solve.answers[bar.id]); if(ok)correct++;
+    push('Report \u00b7 Visual Report', bar.label, ok, solve.answers[bar.id], String(bar.ans)+' k fish'); });
   // report - best chart type
   total++; const gOk = solve.answers.graph === SOLVE_CASE.report.correct; if(gOk)correct++;
-  lines.push(`<div class="sv-result-row"><span>Best chart</span><span class="${gOk?'sv-grade-ok':'sv-grade-bad'}">${gOk?'\u2713':'\u2717'} ${SOLVE_CASE.report.correct} chart</span></div>`);
+  push('Report \u00b7 Graph Selection', 'Best chart type', gOk, solve.answers.graph, SOLVE_CASE.report.correct+' chart');
   // cases
-  SOLVE_CASE.cases.forEach(c => c.fields.forEach(f => { total++; const ok = svCheck(f.ans, solve.answers[f.id]); if(ok)correct++;
-    lines.push(`<div class="sv-result-row"><span>${esc(c.title)} \u00b7 ${esc(f.label)}</span><span class="${ok?'sv-grade-ok':'sv-grade-bad'}">${ok?'\u2713':'\u2717'} ${esc(String(f.ans))}</span></div>`); }));
+  SOLVE_CASE.cases.forEach(c => c.fields.forEach(f => { total++; const ok = svCheck(f.ans, solve.answers[f.id], f.isText, f.tol); if(ok)correct++;
+    push(c.title+' \u00b7 Cases', f.label || 'Best chart type', ok, solve.answers[f.id], String(f.ans)); }));
+  // build grouped HTML
+  let lines = [];
+  Object.keys(sections).forEach(sec => {
+    const rows = sections[sec];
+    const secOk = rows.filter(r=>r.indexOf('sv-rr-yours ok')>-1).length;
+    lines.push(`<div class="sv-result-sec"><div class="sv-result-sec-h">${esc(sec)} <span class="sv-result-sec-score">${secOk}/${rows.length}</span></div>${rows.join('')}</div>`);
+  });
   solve.phase = 'result'; solve.result = { correct, total, lines };
   svSetPhaseUI();
   try { const pctScore = Math.round(correct/total*100); recordSession('case', 'Solve Game', pctScore/10); } catch(e){}
@@ -3774,6 +4248,234 @@ function comingSoon(name) {
    PROGRESS TRACKING (localStorage - device-local for now)
 ──────────────────────────────────────────────────── */
 const PROG_KEY = 'casedge-progress';
+/* ════════════════════════════════════════════════════
+   DAILY CHALLENGE
+   Five mental-math problems, generated deterministically from the
+   calendar date so every user worldwide gets the SAME five each day
+   (good for a shared Telegram streak culture). Solve >=4/5 to keep
+   the streak. Streak is tracked separately from case/drill progress.
+════════════════════════════════════════════════════ */
+const DAILY_KEY = 'caseedge_daily';   // { lastDone, streak, best, history:{date:{score,done}} }
+const DAILY_PASS = 4;                 // >=4 of 5 keeps the streak
+const DAILY_PER_Q = 60;               // soft per-question seconds (informational)
+
+function _mulberry32(a){ return function(){ a|=0; a=a+0x6D2B79F5|0; let t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+function _daySeed(s){ let h=2166136261>>>0; for(let i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,16777619); } return h>>>0; }
+function _dToday(){ return new Date().toISOString().slice(0,10); }
+function _ri(rng,lo,hi){ return Math.floor(rng()*(hi-lo+1))+lo; }
+function _pk(rng,arr){ return arr[Math.floor(rng()*arr.length)]; }
+
+const DAILY_SECTORS = ['a logistics firm','a SaaS company','a hospital network','a retail chain','an agritech startup','a media group','an energy utility','a fintech app','a grocery retailer','an airline'];
+
+function _dailyGen(rng, kind) {
+  if (kind === 'pct') {
+    const base = _ri(rng,4,40)*50, pct = _pk(rng,[5,10,15,20,25,40]);
+    return { q:`${_cap(_pk(rng,DAILY_SECTORS))} has ${base.toLocaleString()} monthly active users. If ${pct}% churn, how many users are lost?`,
+      ans: base*pct/100, work:`${base.toLocaleString()} × ${pct}% = ${(base*pct/100).toLocaleString()}` };
+  }
+  if (kind === 'growth') {
+    const base = _ri(rng,2,20)*100, g = _pk(rng,[10,20,25,50]), out = Math.round(base*Math.pow(1+g/100,2));
+    return { q:`Revenue is $${base}M, growing ${g}% per year. What is revenue after 2 years, compounded ($M)?`,
+      ans: out, work:`${base} × 1.${g<10?'0'+g:g}² = ${out}` };
+  }
+  if (kind === 'weighted') {
+    const w=[50,30,20], v=[_ri(rng,2,9)*10,_ri(rng,2,9)*10,_ri(rng,2,9)*10];
+    const avg=(w[0]*v[0]+w[1]*v[1]+w[2]*v[2])/100;
+    return { q:`Three segments cost $${v[0]}, $${v[1]} and $${v[2]} per unit, making up ${w[0]}%, ${w[1]}% and ${w[2]}% of volume. Weighted-average cost per unit ($)?`,
+      ans: Math.round(avg*10)/10, work:`(${w[0]}×${v[0]} + ${w[1]}×${v[1]} + ${w[2]}×${v[2]}) / 100 = ${Math.round(avg*10)/10}` };
+  }
+  if (kind === 'breakeven') {
+    const price=_ri(rng,20,60), vc=_ri(rng,5,price-5), fixed=(price-vc)*_ri(rng,10,80)*10;
+    return { q:`Fixed costs are $${fixed.toLocaleString()}. Each unit sells for $${price} with $${vc} variable cost. Break-even volume (units)?`,
+      ans: fixed/(price-vc), work:`${fixed.toLocaleString()} / ($${price} − $${vc}) = ${(fixed/(price-vc)).toLocaleString()}` };
+  }
+  if (kind === 'margin') {
+    const rev=_ri(rng,5,50)*20, m=_pk(rng,[5,10,15,20,25]);
+    return { q:`${_cap(_pk(rng,DAILY_SECTORS))} earns $${rev}M revenue at a ${m}% net margin. What is net profit ($M)?`,
+      ans: rev*m/100, work:`${rev} × ${m}% = ${rev*m/100}` };
+  }
+  // ratio
+  const hours=_ri(rng,10,40)*10, events=_ri(rng,4,20);
+  return { q:`Over ${hours} patrol hours, ${events} incidents were logged. What is the incident rate per 100 hours (1 decimal)?`,
+    ans: Math.round(events/hours*100*10)/10, work:`${events} / ${hours} × 100 = ${Math.round(events/hours*100*10)/10}` };
+}
+function _cap(s){ return s.charAt(0).toUpperCase()+s.slice(1); }
+
+const DAILY_KINDS = ['pct','growth','weighted','breakeven','margin','ratio'];
+function dailyProblems(dateStr) {
+  const rng = _mulberry32(_daySeed(dateStr || _dToday()));
+  const pool = DAILY_KINDS.slice(), kinds = [];
+  for (let i=0;i<5;i++){ const idx = Math.floor(rng()*pool.length); kinds.push(pool.length ? pool.splice(idx,1)[0] : _pk(rng,DAILY_KINDS)); }
+  return kinds.map(k => _dailyGen(rng, k));
+}
+
+function loadDaily() {
+  let d;
+  try { d = JSON.parse(localStorage.getItem(DAILY_KEY) || 'null'); } catch(e){}
+  if (!d) d = { lastDone:null, streak:0, best:0, history:{} };
+  if (!d.history) d.history = {};
+  return d;
+}
+function saveDaily(d){ try { localStorage.setItem(DAILY_KEY, JSON.stringify(d)); } catch(e){} }
+
+// Live session state for the current attempt.
+let daily = null;
+
+function dailyModeBadgeHTML() {
+  const d = loadDaily();
+  const doneToday = d.lastDone === _dToday();
+  if (doneToday) return '<span class="daily-badge-pill">✓ Done today</span>';
+  if (d.streak > 0) return '<span class="daily-badge-pill">🔥 ' + d.streak + '</span>';
+  return '';
+}
+function refreshDailyBadge(){ const el = document.getElementById('dailyModeBadge'); if (el) el.innerHTML = dailyModeBadgeHTML(); }
+
+function openDaily() {
+  const d = loadDaily();
+  const today = _dToday();
+  daily = { date: today, probs: dailyProblems(today), idx: 0, results: [], startedAt: Date.now() };
+  showScreen('daily');
+  if (d.lastDone === today) renderDailyReview(true);   // already completed today → show review + streak
+  else renderDailyIntro();
+}
+
+function renderDailyIntro() {
+  const d = loadDaily();
+  const card = document.getElementById('dailyCard');
+  card.innerHTML = `
+    <div class="daily-eyebrow">Daily Challenge · ${daily.date}</div>
+    <h1 class="daily-title">Five problems. Same for everyone. Every day.</h1>
+    <p class="daily-sub">Rapid mental-math under the clock — the arithmetic behind every case. Solve <b>${DAILY_PASS} of 5</b> to keep your streak. New set at midnight, identical for every CasEdge user.</p>
+    <div class="daily-streakrow">
+      <div class="daily-stat"><div class="n"><span class="daily-flame">🔥</span> ${d.streak}</div><div class="l">Current streak (days)</div></div>
+      <div class="daily-stat"><div class="n">🏆 ${d.best}</div><div class="l">Best streak</div></div>
+    </div>
+    <button class="daily-submit" style="width:100%;padding:15px;" onclick="startDailyRun()">Start today’s challenge →</button>`;
+}
+
+function startDailyRun() {
+  daily.idx = 0; daily.results = []; daily.startedAt = Date.now();
+  renderDailyQuestion();
+}
+
+function dailyDots() {
+  return `<div class="daily-progressdots">` + daily.probs.map((_,i)=>{
+    let cls = 'daily-dot';
+    if (i < daily.results.length) cls += daily.results[i].correct ? ' correct' : ' wrong';
+    else if (i === daily.idx) cls += ' current';
+    return `<div class="${cls}"></div>`;
+  }).join('') + `</div>`;
+}
+
+function renderDailyQuestion() {
+  const p = daily.probs[daily.idx];
+  const card = document.getElementById('dailyCard');
+  card.innerHTML = `
+    <div class="daily-eyebrow">Daily Challenge · ${daily.date}</div>
+    ${dailyDots()}
+    <div class="daily-q">
+      <div class="daily-qhead">
+        <span class="daily-qnum">Problem ${daily.idx+1} of 5</span>
+        <span class="daily-qtimer" id="dailyTimer">0:00</span>
+      </div>
+      <div class="daily-qtext">${esc(p.q)}</div>
+      <div class="daily-answerrow">
+        <input class="daily-input" id="dailyInput" inputmode="decimal" autocomplete="off"
+          placeholder="Your answer" onkeydown="if(event.key==='Enter')submitDaily()">
+        <button class="daily-submit" onclick="submitDaily()">Submit</button>
+      </div>
+    </div>`;
+  const inp = document.getElementById('dailyInput'); if (inp) inp.focus();
+  daily._qStart = Date.now();
+  clearInterval(daily._tid);
+  daily._tid = setInterval(() => {
+    const el = document.getElementById('dailyTimer'); if (!el) { clearInterval(daily._tid); return; }
+    const s = Math.floor((Date.now()-daily._qStart)/1000);
+    el.textContent = Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
+    el.style.color = s > DAILY_PER_Q ? 'var(--coral)' : 'var(--on-dark-soft)';
+  }, 1000);
+}
+
+function submitDaily() {
+  const inp = document.getElementById('dailyInput');
+  if (!inp) return;
+  const raw = String(inp.value).replace(/[$,%\s]/g,'');
+  const val = parseFloat(raw);
+  const p = daily.probs[daily.idx];
+  const correct = !isNaN(val) && Math.abs(val - p.ans) <= Math.max(0.05, Math.abs(p.ans)*0.005);
+  daily.results.push({ given: inp.value.trim(), correct, secs: Math.floor((Date.now()-daily._qStart)/1000) });
+  clearInterval(daily._tid);
+  daily.idx++;
+  if (daily.idx < daily.probs.length) renderDailyQuestion();
+  else finishDaily();
+}
+
+function finishDaily() {
+  const score = daily.results.filter(r=>r.correct).length;
+  const passed = score >= DAILY_PASS;
+  const d = loadDaily();
+  const today = _dToday();
+  // Only mutate streak once per day.
+  if (d.lastDone !== today) {
+    if (passed) {
+      // Extend the streak only if the previous PASS was yesterday; otherwise start fresh at 1.
+      const yesterday = new Date(Date.now()-86400000).toISOString().slice(0,10);
+      d.streak = (d.lastPass === yesterday) ? (d.streak || 0) + 1 : 1;
+      d.lastPass = today;
+      if (d.streak > d.best) d.best = d.streak;
+    } else {
+      d.streak = 0;
+    }
+    d.lastDone = today;
+    d.history[today] = { score, passed };
+    saveDaily(d);
+  }
+  renderDailyReview(false);
+}
+
+function renderDailyReview(alreadyDone) {
+  clearInterval(daily && daily._tid);
+  const d = loadDaily();
+  const today = daily ? daily.date : _dToday();
+  // If they already did it earlier, reconstruct the score from history; results may be empty.
+  const hist = d.history[today];
+  const score = daily && daily.results.length === 5 ? daily.results.filter(r=>r.correct).length : (hist ? hist.score : 0);
+  const passed = score >= DAILY_PASS;
+  const card = document.getElementById('dailyCard');
+
+  let reviewHTML = '';
+  if (daily && daily.results.length === 5) {
+    reviewHTML = daily.probs.map((p,i) => {
+      const r = daily.results[i];
+      return `<div class="daily-review-item ${r.correct?'ok':'no'}">
+        <div class="daily-review-q">${i+1}. ${esc(p.q)}</div>
+        <div class="daily-review-line">Your answer: <b>${esc(r.given||'—')}</b> · Correct: <b>${p.ans.toLocaleString()}</b> ${r.correct?'✓':'✗'}</div>
+        <div class="daily-review-work">${esc(p.work)}</div>
+      </div>`;
+    }).join('');
+  } else {
+    reviewHTML = `<p class="daily-sub">You’ve already completed today’s challenge. Come back tomorrow for a fresh set — the streak keeps going as long as you clear ${DAILY_PASS}/5 each day.</p>`;
+  }
+
+  const msg = passed
+    ? (d.streak > 1 ? `Streak extended to ${d.streak} days. 🔥` : `Nice — streak started!`)
+    : `You needed ${DAILY_PASS}/5 to keep the streak. It resets today, but tomorrow’s a fresh set.`;
+
+  card.innerHTML = `
+    <div class="daily-eyebrow">Daily Challenge · ${today}</div>
+    <div class="daily-done-banner">
+      <div class="daily-done-score">${score}/5</div>
+      <div class="daily-done-msg">${msg}</div>
+    </div>
+    <div class="daily-streakrow">
+      <div class="daily-stat"><div class="n"><span class="daily-flame">🔥</span> ${d.streak}</div><div class="l">Current streak (days)</div></div>
+      <div class="daily-stat"><div class="n">🏆 ${d.best}</div><div class="l">Best streak</div></div>
+    </div>
+    ${reviewHTML}
+    <button class="daily-submit" style="width:100%;padding:14px;margin-top:8px;" onclick="showScreen('mode')">Back to menu</button>`;
+  refreshDailyBadge();
+}
+
 function loadProgress() {
   let p;
   try {
@@ -3832,7 +4534,7 @@ function computeStreak(days) {
   }
   return streak;
 }
-const ALL_DRILL_TYPES = ['Market Sizing','Structuring','Case Math','Chart Interpretation','Brainstorm','Calculation','Synthesis','Behavioral'];
+const ALL_DRILL_TYPES = ['Market Sizing','Structuring','Case Math','Chart Interpretation','Brainstorm','Synthesis','Behavioral'];
 
 // Personal path to offer - built ONLY on the user's own dimension history.
 const PATH_DIMS = [
@@ -4277,7 +4979,7 @@ ABSOLUTELY BANNED defaults - do NOT generate cases about these unless impossible
 BEFORE generating, you MUST pick a RANDOM industry from this list and commit to it (rotate every single case - never two in a row from the same one):
 Healthcare/hospitals, Airlines/aviation, Banking/fintech, Pharmaceuticals, Logistics/shipping, Telecom, Insurance, Industrial manufacturing, Energy/utilities, Agriculture/agritech, Semiconductors, Automotive, Real estate/REITs, Media/streaming, Education/edtech, Mining/metals, Hospitality/hotels, E-commerce marketplaces, SaaS/software, Construction.
 
-For THIS case, use the uniqueness seed ${seed.random} to pick an industry you have NOT used recently. Invent a fresh company name, a fresh problem, fresh numbers, fresh traps, and harder math than the examples. The industry, the data, the trap, and the math must all be DIFFERENT every time. Variety is mandatory, not optional.
+For THIS case, use the uniqueness seed ${seed.random} to pick an industry you have NOT used recently. Invent a fresh company - but make it a REALISTIC, RECOGNISABLE ARCHETYPE rather than a bland "ABC Corp": give it a plausible invented name AND a clear real-world-style descriptor that grounds it (e.g. "Meridian Stream, a leading subscription video-streaming service", "Voltan Motors, a major electric-vehicle manufacturer", "Northgate Grocers, the second-largest supermarket chain in its region"). Do NOT use the names of actual real companies (no Google, Netflix, Tesla, etc.) - invent the name, but make the archetype concrete and familiar so the case feels real. Then fresh problem, fresh numbers, fresh traps, and harder math than the examples. The industry, the data, the trap, and the math must all be DIFFERENT every time. Variety is mandatory, not optional.
 
 ════ STRUCTURAL VARIETY - VARY THE SHAPE, NOT JUST THE INDUSTRY (CRITICAL) ════
 A common failure: every case has the SAME skeleton - "Company with N branches in M cities, EBITDA fell over 18 months, revenue stable, restore margin in 12-18 months." Even with different industries, this becomes predictable and boring. You MUST vary the STRUCTURE of the problem itself.
@@ -4388,13 +5090,8 @@ Then REQUIRE all four elements - if candidate omits any, explicitly ask for it:
 3. RISKS - minimum 2, one internal + one external/regulatory. If candidate gives recommendation WITHOUT risks, you MUST ask: "What are the key risks to this recommendation, and how would you mitigate them?" Never let them skip risk + mitigation.
 4. Next steps (specific, time-bound)
 
-════ REAL-TIME FEEDBACK PROTOCOL ════
-Give feedback IN RUSSIAN after each major step.
-Format:
-→ Оценка: X/10
-→ Что сработало: [1-2 конкретных момента]
-→ Что не сработало: [цитата слов кандидата + почему это слабо]
-→ Ответ уровня партнёра: [точная формулировка как надо было сказать]
+════ FEEDBACK PROTOCOL - DEFERRED TO THE END ════
+Do NOT give scored feedback during the case. The candidate is being timed and must not spend time reading evaluation mid-interview - and real interviewers never grade you between questions. Stay fully in character as the interviewer: respond to answers, probe, present the next piece, push back where useful, but do NOT say "Оценка: X/10" or critique their phrasing mid-case. Silently track how they do on each dimension. ALL evaluation, scoring, what-worked / what-didn't, and partner-level model phrasings are delivered ONCE at the end, in the final debrief. During the case your job is to run it realistically, not to coach.
 
 ════ SCORING (1-10 per dimension) ════
 1. STRUCTURE: MECE, custom buckets, hypothesis-driven, starting point justified
@@ -4473,7 +5170,7 @@ function setTyping(on) {
 ──────────────────────────────────────────────────── */
 const DRILL_TIME = {
   'Market Sizing': 120, 'Structuring': 90, 'Case Math': 120,
-  'Chart Interpretation': 90, 'Brainstorm': 90, 'Calculation': 90,
+  'Chart Interpretation': 90, 'Brainstorm': 90,
   'Synthesis': 75, 'Behavioral': 120
 };
 const CASE_RESP_TIME = 90; // 1.5 min per answer
@@ -4491,6 +5188,11 @@ function startRespTimer() {
   const fill = document.getElementById('respTimerFill');
   if (!wrap || !timeEl || !fill) return;
   stopRespTimer();
+  _helpPause = false;
+  const hb = document.getElementById('helpBtn');
+  if (hb) { hb.disabled = false; hb.textContent = 'Need a hint?'; }
+  const hp = document.getElementById('helpHintPanel');
+  if (hp) hp.style.display = 'none';
   _rt.left = limit; _rt.limit = limit;
   wrap.style.display = 'flex';
   wrap.classList.remove('warn', 'over');
@@ -4514,6 +5216,75 @@ function hideRespTimer() {
   stopRespTimer();
   const wrap = document.getElementById('respTimer');
   if (wrap) wrap.style.display = 'none';
+}
+
+// Context-aware help. Each hint nudges the candidate toward the right MOVE,
+// never the answer. Keyed by drill type; falls back to case-type-aware hints.
+const HELP_HINTS = {
+  'Market Sizing': 'Start with an equation, not a number. What population are you starting from, and what segments do you divide it into? State your assumptions out loud as you go.',
+  'Case Math': 'Before calculating: what data do you actually need? Ask for it, state your approach in one line, THEN compute. Make the numbers cross-check (e.g. Revenue × Margin = Profit).',
+  'Structuring': 'Hypothesis first. Build 3+ MECE buckets tailored to THIS company and problem - not a generic profitability template. Say why each branch belongs.',
+  'Chart Interpretation': 'Don\u2019t just describe the chart - extract the ONE key insight, connect it to a business implication, and propose a next step. Look for a second, hidden pattern (an axis trick or an outlier).',
+  'Brainstorm': 'Aim for 6+ ideas in a MECE structure. Split into buckets first (e.g. internal vs external, revenue vs cost), then generate inside each - that beats a flat list.',
+  'Synthesis': 'Conclusion FIRST: a clear action verb ("We recommend / Client should"). Then 2-3 facts using the actual numbers, then 2 risks (one internal, one external), then time-bound next steps.',
+  'Behavioral': 'Use STAR: brief Situation and Task, then spend most of your answer on YOUR specific Action ("I", not "we"), and end with a quantified Result. Pick one concrete example.'
+};
+function helpHintForContext() {
+  if (state.drillType && HELP_HINTS[state.drillType]) return HELP_HINTS[state.drillType];
+  // Full case: nudge by firm format / general case move
+  if (state.firm === 'McKinsey') return 'This is interviewer-led: follow the interviewer\u2019s question, but always structure your answer first and state a hypothesis before diving into numbers.';
+  if (state.firm === 'BCG') return 'This is interviewee-led - YOU drive. Clarify the objective, lay out a MECE structure, ask for the data you need, and remember a final recommendation is required at the end.';
+  return 'Structure before you speak: state your approach or hypothesis first, ask for the data you need, do the math explicitly, and lead every answer with your conclusion.';
+}
+
+// "Need a hint?" - freezes the response timer for ~10s, shows one context hint.
+let _helpPause = false;
+function requestHelp() {
+  if (_helpPause) return; // already paused
+  const hint = helpHintForContext();
+  const panel = document.getElementById('helpHintPanel');
+  if (panel) {
+    panel.textContent = hint;
+    panel.style.display = 'block';
+  }
+  // Freeze the timer for 10 seconds, then resume from where it was.
+  if (_rt.id) {
+    _helpPause = true;
+    const wrap = document.getElementById('respTimer');
+    if (wrap) wrap.classList.add('paused');
+    stopRespTimer();
+    let countdown = 10;
+    const btn = document.getElementById('helpBtn');
+    if (btn) { btn.disabled = true; }
+    const tick = setInterval(() => {
+      countdown--;
+      if (btn) btn.textContent = 'Resuming in ' + countdown + 's';
+      if (countdown <= 0) {
+        clearInterval(tick);
+        _helpPause = false;
+        if (wrap) wrap.classList.remove('paused');
+        if (btn) { btn.disabled = false; btn.textContent = 'Need a hint?'; }
+        if (panel) panel.style.display = 'none';
+        resumeRespTimer();
+      }
+    }, 1000);
+  }
+}
+// Resume the countdown from the frozen value (does not reset the clock).
+function resumeRespTimer() {
+  const wrap = document.getElementById('respTimer');
+  const timeEl = document.getElementById('respTimerTime');
+  const fill = document.getElementById('respTimerFill');
+  if (!wrap || !timeEl || !fill || _rt.id) return;
+  _rt.id = setInterval(() => {
+    _rt.left--;
+    timeEl.textContent = fmtTime(_rt.left);
+    const pct = Math.max(0, (_rt.left / _rt.limit) * 100);
+    fill.style.width = pct + '%';
+    if (_rt.left <= 0) { wrap.classList.add('over'); wrap.classList.remove('warn'); }
+    else if (_rt.left <= _rt.limit * 0.33) { wrap.classList.add('warn'); }
+    if (_rt.left <= -60) stopRespTimer();
+  }, 1000);
 }
 
 async function sendMessage() {
@@ -4540,7 +5311,7 @@ async function sendMessage() {
   if (state.drillType && state.drillSystem) {
     try {
       // Wider window than cases: a 5-rep series must keep the running rep counter in context
-      const reply = await callAI(state.drillSystem, state.messages.slice(-24), 'claude-sonnet-4-5');
+      const reply = await callAI(state.drillSystem, state.messages.slice(-24), 'claude-sonnet-5');
       state.messages.push({ role:'assistant', content: reply });
       setTimeout(() => { setTyping(false); addMsg('ai', reply, true); startRespTimer(); }, 500);
     } catch(_) {
@@ -4756,7 +5527,7 @@ Return ONLY valid JSON (no markdown, no backticks). All five scores are 1.0-10.0
       : `${state.firm || ''} ${state.caseType || ''} case interview`;
     const raw = await callAI(EVAL_SYSTEM + langInstruction(), [
       { role: 'user', content: `Evaluate this ${evalCtx}:\n\n${transcript}${timingNote}` }
-    ], 'claude-sonnet-4-5');
+    ], 'claude-sonnet-5');
     const clean = raw.replace(/```json|"```"/g, '').trim();
     const d = JSON.parse(clean);
 
