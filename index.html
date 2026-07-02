@@ -2567,6 +2567,24 @@ const I18N = {
     'lang.feedback': 'Feedback language',
     'lang.same': 'Same',
     'lang.done': 'Done',
+    'auth.err.emailFirst': 'Enter your email above first, then tap “Forgot password?”.',
+    'auth.err.loading': 'Auth is still loading, try again in a second.',
+    'auth.msg.resetSent': 'If that email has an account, a reset link is on its way. Check your inbox (and spam).',
+    'auth.err.resetFailed': 'Could not send the reset email. Please try again.',
+    'auth.err.pwShort': 'Password must be at least 6 characters.',
+    'auth.err.pwMismatch': 'The two passwords do not match.',
+    'auth.msg.pwUpdated': 'Password updated. You can use it next time you sign in.',
+    'auth.err.pwUpdateFailed': 'Could not update the password. Please try again.',
+    'auth.err.nameRequired': 'Enter your name.',
+    'auth.err.emailPwRequired': 'Enter email and password.',
+    'auth.msg.accountCreated': 'Account created! Check your email to confirm, then sign in.',
+    'auth.msg.emailConfirmed': 'Email confirmed! You can sign in now.',
+    'auth.pleaseWait': 'Please wait…',
+    'bcg.answerTimer': 'This answer: {time}',
+    'bcg.progress': 'Test Completed {pct}%',
+    'solve.calc.error': 'Error',
+    'drill.needHint': 'Need a hint?',
+    'common.resumingIn': 'Resuming in {s}s',
   },
   ru: {
     'nav.cases': 'Кейсы',
@@ -2724,6 +2742,24 @@ const I18N = {
     'lang.feedback': 'Язык фидбэка',
     'lang.same': 'Как у кейса',
     'lang.done': 'Готово',
+    'auth.err.emailFirst': 'Сначала введи email выше, потом нажми «Забыли пароль?».',
+    'auth.err.loading': 'Авторизация ещё загружается, попробуй через секунду.',
+    'auth.msg.resetSent': 'Если такой email зарегистрирован, ссылка для сброса уже отправлена. Проверь почту (и папку спам).',
+    'auth.err.resetFailed': 'Не удалось отправить письмо для сброса пароля. Попробуй ещё раз.',
+    'auth.err.pwShort': 'Пароль должен быть не короче 6 символов.',
+    'auth.err.pwMismatch': 'Пароли не совпадают.',
+    'auth.msg.pwUpdated': 'Пароль обновлён. Используй его при следующем входе.',
+    'auth.err.pwUpdateFailed': 'Не удалось обновить пароль. Попробуй ещё раз.',
+    'auth.err.nameRequired': 'Введи имя.',
+    'auth.err.emailPwRequired': 'Введи email и пароль.',
+    'auth.msg.accountCreated': 'Аккаунт создан! Проверь почту для подтверждения, затем войди.',
+    'auth.msg.emailConfirmed': 'Email подтверждён! Теперь можешь войти.',
+    'auth.pleaseWait': 'Подожди…',
+    'bcg.answerTimer': 'Этот ответ: {time}',
+    'bcg.progress': 'Пройдено {pct}%',
+    'solve.calc.error': 'Ошибка',
+    'drill.needHint': 'Нужна подсказка?',
+    'common.resumingIn': 'Продолжаем через {s}с',
   },
 };
 function t(key, vars) {
@@ -2902,17 +2938,17 @@ async function forgotPassword() {
   const errEl = document.getElementById('authError');
   const email = document.getElementById('authEmail').value.trim();
   errEl.style.color = '#e06c5c';
-  if (!email) { errEl.textContent = 'Enter your email above first, then tap “Forgot password?”.'; return; }
-  if (!sb) { errEl.textContent = 'Auth is still loading, try again in a second.'; return; }
+  if (!email) { errEl.textContent = t('auth.err.emailFirst'); return; }
+  if (!sb) { errEl.textContent = t('auth.err.loading'); return; }
   try {
     const { error } = await sb.auth.resetPasswordForEmail(email, {
       redirectTo: window.location.origin
     });
     if (error) { errEl.textContent = error.message; return; }
     errEl.style.color = '#5db8a6';
-    errEl.textContent = 'If that email has an account, a reset link is on its way. Check your inbox (and spam).';
+    errEl.textContent = t('auth.msg.resetSent');
   } catch (e) {
-    errEl.textContent = 'Could not send the reset email. Please try again.';
+    errEl.textContent = t('auth.err.resetFailed');
   }
 }
 
@@ -2941,16 +2977,16 @@ async function submitNewPassword() {
   const a = document.getElementById('newPw1').value;
   const b = document.getElementById('newPw2').value;
   errEl.style.color = '#e06c5c';
-  if (a.length < 6) { errEl.textContent = 'Password must be at least 6 characters.'; return; }
-  if (a !== b) { errEl.textContent = 'The two passwords do not match.'; return; }
+  if (a.length < 6) { errEl.textContent = t('auth.err.pwShort'); return; }
+  if (a !== b) { errEl.textContent = t('auth.err.pwMismatch'); return; }
   try {
     const { error } = await sb.auth.updateUser({ password: a });
     if (error) { errEl.textContent = error.message; return; }
     errEl.style.color = '#5db8a6';
-    errEl.textContent = 'Password updated. You can use it next time you sign in.';
+    errEl.textContent = t('auth.msg.pwUpdated');
     setTimeout(() => { showScreen('mode'); }, 1200);
   } catch (e) {
-    errEl.textContent = 'Could not update the password. Please try again.';
+    errEl.textContent = t('auth.err.pwUpdateFailed');
   }
 }
 
@@ -2962,16 +2998,16 @@ async function handleAuthSubmit() {
   const btn = document.getElementById('authSubmitBtn');
   errEl.style.color = '#e06c5c';
   errEl.textContent = '';
-  if (authMode === 'signup' && !name) { errEl.textContent = 'Enter your name.'; return; }
-  if (!email || !pw) { errEl.textContent = 'Enter email and password.'; return; }
-  if (pw.length < 6) { errEl.textContent = 'Password must be at least 6 characters.'; return; }
-  btn.disabled = true; btn.textContent = 'Please wait…';
+  if (authMode === 'signup' && !name) { errEl.textContent = t('auth.err.nameRequired'); return; }
+  if (!email || !pw) { errEl.textContent = t('auth.err.emailPwRequired'); return; }
+  if (pw.length < 6) { errEl.textContent = t('auth.err.pwShort'); return; }
+  btn.disabled = true; btn.textContent = t('auth.pleaseWait');
   const res = authMode === 'signin' ? await authSignIn(email, pw) : await authSignUp(email, pw, name);
   btn.disabled = false; btn.textContent = authMode === 'signin' ? 'Sign in' : 'Create account';
   if (res.error) { errEl.textContent = res.error; return; }
   if (authMode === 'signup') {
     errEl.style.color = '#5db8a6';
-    errEl.textContent = 'Account created! Check your email to confirm, then sign in.';
+    errEl.textContent = t('auth.msg.accountCreated');
     switchAuthTab('signin');
     return;
   }
@@ -3171,7 +3207,7 @@ function bcgStartQuestionTimer() {
   }
   const tick = () => {
     const e = Math.floor((Date.now() - bcg.qStartMs)/1000);
-    badge.textContent = 'This answer: ' + Math.floor(e/60) + ':' + String(e%60).padStart(2,'0');
+    badge.textContent = t('bcg.answerTimer', {time: Math.floor(e/60) + ':' + String(e%60).padStart(2,'0')});
   };
   tick();
   bcg.qTimerId = setInterval(tick, 1000);
@@ -3218,7 +3254,7 @@ function bcgSetProgress() {
   const done = Math.max(0, bcg.idx);
   const pct = Math.round((done/total)*100);
   document.getElementById('bcgProgFill').style.width = pct + '%';
-  document.getElementById('bcgProgLabel').textContent = 'Test Completed ' + pct + '%';
+  document.getElementById('bcgProgLabel').textContent = t('bcg.progress', {pct: pct});
 }
 
 function bcgNext() {
@@ -3286,7 +3322,7 @@ function bcgSubmit() {
 function bcgFinish() {
   if (bcg.timerId) clearInterval(bcg.timerId);
   document.getElementById('bcgProgFill').style.width = '100%';
-  document.getElementById('bcgProgLabel').textContent = 'Test Completed 100%';
+  document.getElementById('bcgProgLabel').textContent = t('bcg.progress', {pct: 100});
   // Grade machine-checkable answers locally; collect open answers + worked solutions.
   let lines = [], correct = 0, graded = 0, openItems = [], solutions = [];
   bcg.case.steps.forEach(s => {
@@ -3747,10 +3783,10 @@ function svCalcEval() {
   const disp = document.getElementById('svCalcDisp');
   if (!svCalcExpr) return;
   // safe: only digits, operators, parens, dot
-  if (!/^[0-9+\-*/(). ]+$/.test(svCalcExpr)) { disp.textContent = 'Error'; return; }
+  if (!/^[0-9+\-*/(). ]+$/.test(svCalcExpr)) { disp.textContent = t('solve.calc.error'); return; }
   let res;
-  try { res = Function('"use strict";return (' + svCalcExpr + ')')(); } catch (e) { disp.textContent = 'Error'; return; }
-  if (res == null || !isFinite(res)) { disp.textContent = 'Error'; return; }
+  try { res = Function('"use strict";return (' + svCalcExpr + ')')(); } catch (e) { disp.textContent = t('solve.calc.error'); return; }
+  if (res == null || !isFinite(res)) { disp.textContent = t('solve.calc.error'); return; }
   const rounded = Math.round(res * 100) / 100;
   const out = String(rounded);
   disp.textContent = out;
@@ -4925,7 +4961,7 @@ function goToPage(page) { showScreen(page); }
           switchAuthTab('signin');
           showScreen('auth');
           const errEl = document.getElementById('authError');
-          if (errEl) { errEl.style.color = '#5db8a6'; errEl.textContent = 'Email confirmed! You can sign in now.'; }
+          if (errEl) { errEl.style.color = '#5db8a6'; errEl.textContent = t('auth.msg.emailConfirmed'); }
         }
         // Remove the auth token/params from the URL so they are not left in the
         // address bar or browser history after confirmation.
@@ -5448,7 +5484,7 @@ function startRespTimer() {
   stopRespTimer();
   _helpPause = false;
   const hb = document.getElementById('helpBtn');
-  if (hb) { hb.disabled = false; hb.textContent = 'Need a hint?'; }
+  if (hb) { hb.disabled = false; hb.textContent = t('drill.needHint'); }
   const hp = document.getElementById('helpHintPanel');
   if (hp) hp.style.display = 'none';
   _rt.left = limit; _rt.limit = limit;
@@ -5516,12 +5552,12 @@ function requestHelp() {
     if (btn) { btn.disabled = true; }
     const tick = setInterval(() => {
       countdown--;
-      if (btn) btn.textContent = 'Resuming in ' + countdown + 's';
+      if (btn) btn.textContent = t('common.resumingIn', {s: countdown});
       if (countdown <= 0) {
         clearInterval(tick);
         _helpPause = false;
         if (wrap) wrap.classList.remove('paused');
-        if (btn) { btn.disabled = false; btn.textContent = 'Need a hint?'; }
+        if (btn) { btn.disabled = false; btn.textContent = t('drill.needHint'); }
         if (panel) panel.style.display = 'none';
         resumeRespTimer();
       }
