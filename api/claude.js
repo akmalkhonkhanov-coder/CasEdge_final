@@ -10,7 +10,7 @@
 //                         (optional; falls back to the value below)
 
 const FALLBACK_ORIGIN = 'https://cas-edge-final.vercel.app';
-const ALLOWED_MODELS = ['claude-sonnet-4-5'];
+const ALLOWED_MODELS = ['claude-sonnet-5', 'claude-sonnet-4-5'];
 const MAX_TOKENS_CAP = 2000;       // hard ceiling regardless of what the client asks
 const MAX_BODY_BYTES = 200 * 1024; // 200 KB request cap
 const RATE_LIMIT = 30;             // requests per user per window
