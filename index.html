@@ -602,8 +602,14 @@
     /* Floating ambient shapes behind story sections (pure-CSS depth) */
     .ambient-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
     .hero-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; pointer-events: none; z-index: 1; opacity: 0; transition: opacity 1.2s ease; }
-    .hero-canvas.ready { opacity: 1; }
-    [data-theme="light"] .hero-canvas.ready { opacity: 0.72; }
+    .hero-canvas.ready { opacity: 0.62; }
+    [data-theme="light"] .hero-canvas.ready { opacity: 0.5; }
+    /* Dimming veil between the crystal (z-index 1) and the landing content (z-index 2).
+       Keeps text contrast without washing the crystal out - light touch only. */
+    .hero-scrim { position: fixed; inset: 0; z-index: 1; pointer-events: none;
+      background: radial-gradient(ellipse 60% 45% at 50% 40%, rgba(10,11,15,.38) 0%, rgba(10,11,15,.15) 50%, transparent 78%); }
+    [data-theme="light"] .hero-scrim { background: radial-gradient(ellipse 60% 45% at 50% 40%, rgba(250,249,245,.4) 0%, rgba(250,249,245,.16) 50%, transparent 78%); }
+    body.in-app .hero-canvas, body.in-app .hero-scrim { opacity: 0 !important; visibility: hidden; pointer-events: none; }
     .landing-main { position: relative; z-index: 2; }
     .ambient-bg span {
       position: absolute; border-radius: 50%; filter: blur(60px); opacity: .5;
@@ -1214,6 +1220,7 @@
 </head>
 <body>
 <canvas id="heroCanvas" class="hero-canvas" aria-hidden="true"></canvas>
+<div class="hero-scrim" aria-hidden="true"></div>
 
 <!-- ═══════════════════════════════════════════════════
      LANDING
@@ -1539,8 +1546,8 @@
         <div class="firm-card" onclick="openDaily()" tabindex="0" role="button">
           <div class="firm-initial" style="background:rgba(232,168,124,.15);color:var(--accent-amber);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"></path></svg></div>
           <div>
-            <div class="firm-name">Daily Challenge <span id="dailyModeBadge"></span></div>
-            <div class="firm-desc">Five quick mental-math problems, fresh every day and the same for everyone. Solve 4 of 5 to keep your streak alive.</div>
+            <div class="firm-name"><span data-i18n="mode.daily.name">Daily Challenge</span> <span id="dailyModeBadge"></span></div>
+            <div class="firm-desc" data-i18n="mode.daily.desc">Five quick mental-math problems, fresh every day and the same for everyone. Solve 4 of 5 to keep your streak alive.</div>
           </div>
           <div class="firm-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div>
         </div>
@@ -1724,13 +1731,13 @@
       <div class="sec-eyebrow" data-i18n="drill.eyebrow">Skill Drills</div>
       <div class="sec-title" data-i18n="drill.title">Pick a skill to drill</div>
       <div class="firm-grid">
-        <div class="firm-card drill-card" onclick="selectDrill('Market Sizing', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15 0 18M12 3c-2.5 2.5-2.5 15 0 18"/></svg></div><div><div class="firm-name">Market Sizing</div><div class="firm-desc">Estimate market sizes from first principles with clean structure.</div></div></div>
-        <div class="firm-card drill-card" onclick="selectDrill('Structuring', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v4M12 12H6v4M12 12h6v4"/></svg></div><div><div class="firm-name">Structuring</div><div class="firm-desc">Build MECE, hypothesis-driven frameworks under time.</div></div></div>
-        <div class="firm-card drill-card" onclick="selectDrill('Case Math', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h2M8 15h2M14 11h2M14 15h2"/></svg></div><div><div class="firm-name">Case Math</div><div class="firm-desc">Multi-step business math - breakeven, ROI, margins.</div></div></div>
-        <div class="firm-card drill-card" onclick="selectDrill('Chart Interpretation', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg></div><div><div class="firm-name">Chart Interpretation</div><div class="firm-desc">Read exhibits and extract the insight that matters.</div></div></div>
-        <div class="firm-card drill-card" onclick="selectDrill('Brainstorm', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 4 10.5c-.7.7-1 1.5-1 2.5H9c0-1-.3-1.8-1-2.5A6 6 0 0 1 12 3z"/></svg></div><div><div class="firm-name">Brainstorm</div><div class="firm-desc">Generate 6+ MECE ideas with creativity and structure.</div></div></div>
-        <div class="firm-card drill-card" onclick="selectDrill('Synthesis', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><path d="M12 3 3 20h18L12 3z"/><path d="M7.5 13h9M9.5 8.5h5"/></svg></div><div><div class="firm-name">Synthesis</div><div class="firm-desc">Deliver an answer-first recommendation under 90 seconds (Minto Pyramid).</div></div></div>
-        <div class="firm-card drill-card" onclick="selectDrill('Behavioral', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg></div><div><div class="firm-name">Behavioral / Fit</div><div class="firm-desc">PEI-style fit questions scored on STAR structure.</div></div></div>
+        <div class="firm-card drill-card" onclick="selectDrill('Market Sizing', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15 0 18M12 3c-2.5 2.5-2.5 15 0 18"/></svg></div><div><div class="firm-name" data-i18n="drillcard.sizing.name">Market Sizing</div><div class="firm-desc" data-i18n="drillcard.sizing.desc">Estimate market sizes from first principles with clean structure.</div></div></div>
+        <div class="firm-card drill-card" onclick="selectDrill('Structuring', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="5" rx="1"/><rect x="3" y="16" width="6" height="5" rx="1"/><rect x="15" y="16" width="6" height="5" rx="1"/><path d="M12 8v4M12 12H6v4M12 12h6v4"/></svg></div><div><div class="firm-name" data-i18n="drillcard.structuring.name">Structuring</div><div class="firm-desc" data-i18n="drillcard.structuring.desc">Build MECE, hypothesis-driven frameworks under time.</div></div></div>
+        <div class="firm-card drill-card" onclick="selectDrill('Case Math', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h2M8 15h2M14 11h2M14 15h2"/></svg></div><div><div class="firm-name" data-i18n="drillcard.math.name">Case Math</div><div class="firm-desc" data-i18n="drillcard.math.desc">Multi-step business math - breakeven, ROI, margins.</div></div></div>
+        <div class="firm-card drill-card" onclick="selectDrill('Chart Interpretation', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg></div><div><div class="firm-name" data-i18n="drillcard.chart.name">Chart Interpretation</div><div class="firm-desc" data-i18n="drillcard.chart.desc">Read exhibits and extract the insight that matters.</div></div></div>
+        <div class="firm-card drill-card" onclick="selectDrill('Brainstorm', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 4 10.5c-.7.7-1 1.5-1 2.5H9c0-1-.3-1.8-1-2.5A6 6 0 0 1 12 3z"/></svg></div><div><div class="firm-name" data-i18n="drillcard.brainstorm.name">Brainstorm</div><div class="firm-desc" data-i18n="drillcard.brainstorm.desc">Generate 6+ MECE ideas with creativity and structure.</div></div></div>
+        <div class="firm-card drill-card" onclick="selectDrill('Synthesis', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><path d="M12 3 3 20h18L12 3z"/><path d="M7.5 13h9M9.5 8.5h5"/></svg></div><div><div class="firm-name" data-i18n="drillcard.synthesis.name">Synthesis</div><div class="firm-desc" data-i18n="drillcard.synthesis.desc">Deliver an answer-first recommendation under 90 seconds (Minto Pyramid).</div></div></div>
+        <div class="firm-card drill-card" onclick="selectDrill('Behavioral', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg></div><div><div class="firm-name" data-i18n="drillcard.behavioral.name">Behavioral / Fit</div><div class="firm-desc" data-i18n="drillcard.behavioral.desc">PEI-style fit questions scored on STAR structure.</div></div></div>
       </div>
       <button id="drill-start-btn" class="btn btn-primary btn-cta" disabled onclick="startDrill()" style="margin-top:24px;" data-i18n="drill.start">Start Drill</button>
     </div>
@@ -2407,6 +2414,8 @@ const I18N = {
     'mode.case.desc': 'Complete 40-minute simulation - structure, math, exhibits, recommendation. As demanding as the real interview.',
     'mode.drill.name': 'Skill Drills',
     'mode.drill.desc': 'Targeted reps on one skill - market sizing, structuring, math, charts, brainstorm. Fast feedback.',
+    'mode.daily.name': 'Daily Challenge',
+    'mode.daily.desc': 'Five quick mental-math problems, fresh every day and the same for everyone. Solve 4 of 5 to keep your streak alive.',
     'mode.solve.desc': 'McKinsey-style problem-solving game - ecosystem builds, redistribution, scenario logic. Tests data fluency under structure. Premium track.',
     'mode.chat.desc': 'Solve-style questions run conversationally in chat - same logic engine, no game UI. Build the reasoning muscle the real assessment rewards. Premium track.',
     // Setup screen
@@ -2418,6 +2427,20 @@ const I18N = {
     'drill.eyebrow': 'Skill Drills',
     'drill.title': 'Pick a skill to drill',
     'drill.start': 'Start Drill',
+    'drillcard.sizing.name': 'Market Sizing',
+    'drillcard.sizing.desc': 'Estimate market sizes from first principles with clean structure.',
+    'drillcard.structuring.name': 'Structuring',
+    'drillcard.structuring.desc': 'Build MECE, hypothesis-driven frameworks under time.',
+    'drillcard.math.name': 'Case Math',
+    'drillcard.math.desc': 'Multi-step business math - breakeven, ROI, margins.',
+    'drillcard.chart.name': 'Chart Interpretation',
+    'drillcard.chart.desc': 'Read exhibits and extract the insight that matters.',
+    'drillcard.brainstorm.name': 'Brainstorm',
+    'drillcard.brainstorm.desc': 'Generate 6+ MECE ideas with creativity and structure.',
+    'drillcard.synthesis.name': 'Synthesis',
+    'drillcard.synthesis.desc': 'Deliver an answer-first recommendation under 90 seconds (Minto Pyramid).',
+    'drillcard.behavioral.name': 'Behavioral / Fit',
+    'drillcard.behavioral.desc': 'PEI-style fit questions scored on STAR structure.',
     // Progress screen
     'prog.eyebrow': 'Your progress',
     'prog.title': 'How your training is going',
@@ -2498,6 +2521,8 @@ const I18N = {
     'mode.case.desc': 'Полная 40-минутная симуляция - структура, математика, графики, рекомендация. Жёстче настоящего интервью.',
     'mode.drill.name': 'Дриллы навыков',
     'mode.drill.desc': 'Точечные повторы на один навык - оценка рынка, структура, математика, графики, брейншторм. Быстрый фидбэк.',
+    'mode.daily.name': 'Задание дня',
+    'mode.daily.desc': 'Пять быстрых задач на устный счёт — новые каждый день и одинаковые для всех. Реши 4 из 5, чтобы сохранить серию.',
     'mode.solve.desc': 'Игра-решение в стиле McKinsey - построение экосистем, перераспределение, сценарная логика. Проверяет работу с данными в структуре. Премиум-трек.',
     'mode.chat.desc': 'Вопросы в стиле Solve, но в формате чата - тот же логический движок, без игрового интерфейса. Качай мышление, которое реально ценит ассессмент. Премиум-трек.',
     // Setup screen
@@ -2509,6 +2534,20 @@ const I18N = {
     'drill.eyebrow': 'Дриллы навыков',
     'drill.title': 'Выбери навык для дрилла',
     'drill.start': 'Начать дрилл',
+    'drillcard.sizing.name': 'Оценка рынка',
+    'drillcard.sizing.desc': 'Оценивай размеры рынка с нуля, с чистой структурой.',
+    'drillcard.structuring.name': 'Структурирование',
+    'drillcard.structuring.desc': 'Строй MECE-структуры на основе гипотез в условиях таймера.',
+    'drillcard.math.name': 'Математика кейса',
+    'drillcard.math.desc': 'Многошаговые бизнес-расчёты — окупаемость, ROI, маржа.',
+    'drillcard.chart.name': 'Чтение графиков',
+    'drillcard.chart.desc': 'Читай экзибиты и извлекай ключевой инсайт.',
+    'drillcard.brainstorm.name': 'Брейншторм',
+    'drillcard.brainstorm.desc': 'Генерируй 6+ MECE-идей с креативностью и структурой.',
+    'drillcard.synthesis.name': 'Синтез',
+    'drillcard.synthesis.desc': 'Давай рекомендацию «ответ-сначала» за 90 секунд (пирамида Минто).',
+    'drillcard.behavioral.name': 'Поведенческое / Fit',
+    'drillcard.behavioral.desc': 'PEI-вопросы, оцениваемые по структуре STAR.',
     // Progress screen
     'prog.eyebrow': 'Твой прогресс',
     'prog.title': 'Как идёт тренировка',
@@ -2608,6 +2647,9 @@ function showScreen(id, fromPop) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   const el = document.getElementById('screen-' + id);
   if (el) el.classList.add('active');
+  // The crystal canvas lives on the landing screen only. Mark the body so CSS can
+  // hide it everywhere else (prevents it sitting in front of in-app content).
+  document.body.classList.toggle('in-app', id !== 'landing');
   window.scrollTo(0, 0);
   // Register this screen in browser history so the browser back/forward arrows
   // work. Wrapped in try/catch because sandboxed previews (about:srcdoc) block
@@ -2850,13 +2892,65 @@ const BCG_CASES = [{
         "Calveron already owns a controlling stake in Brightwell",
         "Crop quality and supply security of green-bean harvests" ],
       grade:'select', answer:[0,1,2,3,5] },
-    { type:'q', id:'q8a', label:'Final Recommendation (8a)', widget:'single',
+    { type:'say', text:"Thanks." },
+    { type:'say', text:"Now let's look at Calveron's own operations. Calveron sources a seasonal single-origin blend (one SKU) and is choosing between two origins.\n\u2022 Farlend is far away: orders must be placed four months in advance, and the co-op could deliver anywhere between 800 and 1,200 units (+/- 20% of the actual demand).\n\u2022 Nearport is close: demand is much more certain and Nearport will deliver exactly 1,000 units.\n\nAssume demand for the SKU this season is exactly 1,000 units (consumers will buy exactly 1,000 units if available, and no more). Each unit sells for USD 150. A unit costs USD 90 from Farlend and USD 110 from Nearport." },
+    { type:'say', text:"There are 4 parts to Question 4 (4a, 4b, 4c, 4d)." },
+    { type:'q', id:'q4a', label:'Question 4a', widget:'number',
+      text:"What is Calveron's profit on this SKU this season, if it was sourced from Farlend and exactly the correct amount (1,000 units) was delivered? Please provide your answer rounded to the nearest whole number (for example, 11111 or 123456 or 500885), without further explanation or working.",
+      grade:'number', answer:60000, tolerance:0,
+      solution:"1,000 units \u00d7 (150 \u2212 90) = 60,000." },
+    { type:'say', text:"Thanks." },
+    { type:'q', id:'q4b', label:'Question 4b', widget:'number',
+      text:"What is Calveron's profit on this SKU this season, if only 800 units were delivered from Farlend, and there is no chance to \u201ctop up\u201d the shortfall of 200 units? Please provide your answer rounded to the nearest whole number, without further explanation or working.",
+      grade:'number', answer:48000, tolerance:0,
+      solution:"800 \u00d7 (150 \u2212 90) = 48,000. The 200 unsold units of demand are simply lost." },
+    { type:'say', text:"Thanks." },
+    { type:'q', id:'q4c', label:'Question 4c', widget:'number',
+      text:"What is Calveron's profit on this SKU this season, if 1,200 units were delivered from Farlend (200 more than demand)? Assume that excess inventory at the end of the season is considered worthless. Please provide your answer rounded to the nearest whole number, without further explanation or working.",
+      grade:'number', answer:42000, tolerance:0,
+      solution:"Revenue = 1,000 \u00d7 150 = 150,000. Cost = 1,200 \u00d7 90 = 108,000. Profit = 42,000." },
+    { type:'q', id:'q4d', label:'Question 4d', widget:'single',
+      text:"Given the above information, is it more profitable for Calveron to source the SKU from Farlend or Nearport?",
+      options:[ "Farlend", "Nearport", "It makes no difference", "Not enough information to decide" ],
+      grade:'single', answer:3,
+      solution:"You know the three possible Farlend outcomes but not how likely each one is - without probabilities you cannot compare against Nearport's certain 40,000." },
+    { type:'say', text:"Thanks." },
+    { type:'q', id:'q5', label:'Question 5', widget:'single',
+      text:"Now assume each of the three Farlend outcomes (800, 1,000 and 1,200 units) is equally likely (1/3 each). Based on this, which origin has the higher expected profit for the SKU this season?\n\n(Note: expected profit is defined as the probability-weighted average of all possible profit outcomes. For example, if there is a 40% chance that profit is $10 and a 60% chance that profit is $5, the expected profit is (40% \u00d7 $10) + (60% \u00d7 $5) = $7.)",
+      options:[ "Farlend", "Nearport", "Both origins have the same expected profit" ],
+      grade:'single', answer:0,
+      solution:"Farlend EV = (48,000 + 60,000 + 42,000) / 3 = 50,000. Nearport = 1,000 \u00d7 (150 \u2212 110) = 40,000. Farlend is higher." },
+    { type:'say', text:"Thanks." },
+    { type:'say', text:"Can you name TWO other important advantages of sourcing from Nearport versus Farlend, besides the factors already discussed? Please focus on the advantages you think are most important." },
+    { type:'q', id:'q6a', label:'Question 6a', widget:'text',
+      text:"Please state the FIRST advantage in the space below, in one line only. You will have the chance to state your second advantage in the following question.",
+      grade:'open' },
+    { type:'q', id:'q6b', label:'Question 6b', widget:'text',
+      text:"Please state the SECOND advantage in one line only.",
+      grade:'open' },
+    { type:'say', text:"Thanks." },
+    { type:'q', id:'q7', label:'Question 7', widget:'select-all',
+      text:"Besides switching origins, in what other ways could Calveron address the demand-uncertainty issue at hand? Please select all that apply.",
+      options:[
+        "Hold extra inventory of the blend in Calveron's warehouses",
+        "Discount overproduced units with end-of-season sales to recoup losses",
+        "Engage with the Farlend co-op to understand supply-chain risks that might increase lead times",
+        "Explore a combination of air freight and sea freight to shorten Farlend's effective lead time" ],
+      grade:'select', answer:[0,1,2,3] },
+    { type:'say', text:"However, shortfalls can now be covered by a small local \u201cmicro-roastery\u201d. The cost structure of the micro-roastery is as follows:\n\u2022 Fixed cost of $1,500 allocated to this SKU this season - this will be incurred no matter what happens.\n\u2022 Variable cost of $75 per unit of the SKU produced in the micro-roastery." },
+    { type:'q', id:'q8', label:'Question 8', widget:'number',
+      text:"How much is the micro-roastery expected to increase profits for this SKU this season, taking into account the sourcing strategy and probabilities outlined above (Farlend, three equally likely outcomes)? Please provide your answer rounded to the nearest whole number (for example, 1234 or 55555 or 67000), without further explanation or working.",
+      grade:'number', answer:3500, tolerance:0,
+      solution:"Only the 800-unit outcome (probability 1/3) leaves a 200-unit shortfall to fill. Contribution then = 200 \u00d7 (150 \u2212 75) = 15,000. Expected contribution = 15,000 / 3 = 5,000. The fixed cost of 1,500 is incurred in every scenario. Expected profit increase = 5,000 \u2212 1,500 = 3,500." },
+    { type:'say', text:"Thanks." },
+    { type:'say', text:"There are 2 parts to Question 9 (9a, 9b)." },
+    { type:'q', id:'q8a', label:'Question 9a', widget:'single',
       text:"Given everything above, would you recommend that Calveron bids to acquire Brightwell?",
       options:[ "Yes - Calveron should bid, up to the value ceiling", "No - Calveron should not bid" ],
       grade:'single', answer:0,
       recPrep:true },
-    { type:'q', id:'q8b', label:'Final Recommendation (8b)', widget:'text',
-      text:"Please state your recommendation as you would to the partner - conclusion first, then your two strongest supporting reasons, then one key risk. In a real interview this is delivered out loud in ~60-90 seconds; here, type it concisely (2-3 lines).",
+    { type:'q', id:'q8b', label:'Question 9b', widget:'text',
+      text:"Please explain your answer to Question 9a in two to three lines maximum - conclusion first, then your two strongest supporting reasons, then one key risk. In a real interview this is delivered out loud in ~60-90 seconds.",
       grade:'open', isRec:true }
   ]
 }];
