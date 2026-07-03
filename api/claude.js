@@ -18,21 +18,36 @@ const RATE_WINDOW_MS = 60 * 1000;  // 1-minute window
 const UPSTREAM_TIMEOUT_MS = 60 * 1000; // abort Anthropic call if it hangs
 const AUTH_TIMEOUT_MS = 8 * 1000;      // abort Supabase auth check if it hangs
 
-// In-memory rate-limit store. NOTE: this resets on cold start and is per-instance,
-// so on Vercel's multi-instance runtime it only catches accidental bursts, not a
-// determined attacker. Before opening paid/public access, replace this with a
-// shared store (Supabase table or Upstash Redis) so the limit is enforced globally.
-const hits = new Map();
-
-function rateLimited(userId) {
-  const now = Date.now();
-  const rec = hits.get(userId);
-  if (!rec || now - rec.start > RATE_WINDOW_MS) {
-    hits.set(userId, { start: now, count: 1 });
-    return false;
+// Rate limiting is enforced via a Postgres function in Supabase
+// (check_and_increment_rate_limit), so it's shared across every
+// serverless instance instead of resetting on cold start.
+async function rateLimited(userId, sbUrl, sbKey, token) {
+  try {
+    const resp = await fetchWithTimeout(sbUrl + '/rest/v1/rpc/check_and_increment_rate_limit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        apikey: sbKey,
+        Authorization: 'Bearer ' + token
+      },
+      body: JSON.stringify({
+        p_user_id: userId,
+        p_window_seconds: RATE_WINDOW_MS / 1000,
+        p_limit: RATE_LIMIT
+      })
+    }, AUTH_TIMEOUT_MS);
+    if (!resp.ok) {
+      // If the RPC itself is unreachable/misconfigured, fail OPEN rather than
+      // blocking every request - log it so it gets noticed and fixed.
+      console.error('Rate-limit RPC returned', resp.status);
+      return false;
+    }
+    const withinLimit = await resp.json(); // true = under limit, false = over
+    return withinLimit === false;
+  } catch (e) {
+    console.error('Rate-limit RPC failed:', e);
+    return false; // fail open, same reasoning as above
   }
-  rec.count++;
-  return rec.count > RATE_LIMIT;
 }
 
 // fetch() with an abort timeout so a hung upstream cannot keep the function
@@ -91,8 +106,9 @@ export default async function handler(req, res) {
     const userId = user && user.id;
     if (!userId) return res.status(401).json({ error: { message: 'Invalid session.' } });
 
-    // 4) Per-user rate limit (after we know who the user is).
-    if (rateLimited(userId)) {
+    // 4) Per-user rate limit (after we know who the user is). Shared across
+    // all serverless instances via Supabase - see check_and_increment_rate_limit.
+    if (await rateLimited(userId, sbUrl, sbKey, token)) {
       return res.status(429).json({ error: { message: 'Too many requests. Please slow down.' } });
     }
 
