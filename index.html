@@ -1372,6 +1372,7 @@
         <button class="lf-link" onclick="goToPage('cookies')" data-i18n="foot.cookies">Cookies</button>
         <button class="lf-link" onclick="goToPage('privacy')" data-i18n="legal.privLink">Privacy Policy</button>
         <button class="lf-link" onclick="goToPage('terms')" data-i18n="legal.termsLink">Terms of Service</button>
+        <button class="lf-link" onclick="goToPage('refund')" data-i18n="legal.refundLink">Refund Policy</button>
       </div>
     </div>
     <div class="lf-copy" data-i18n="foot.rights">© 2026 CasEdge. All rights reserved.</div>
@@ -1516,11 +1517,39 @@
       <h3 data-i18n="terms.h5">Content and accuracy</h3>
       <p data-i18n="terms.p5">Practice content is provided for training purposes only. While we work to keep it high quality, we make no guarantee of any particular interview outcome or result.</p>
       <h3 data-i18n="terms.h6">Payments and refunds</h3>
-      <p data-i18n="terms.p6">Paid plans, when available, are billed through our payment processor. Pricing and any refund terms will be shown at the point of purchase.</p>
+      <p data-i18n-html="terms.p6">Paid plans are billed through our payment processor (Paddle, acting as merchant of record). See our <a href="#refund">Refund Policy</a> for details on cancellations and refunds.</p>
       <h3 data-i18n="terms.h7">Liability</h3>
       <p data-i18n="terms.p7">CasEdge is provided "as is". To the extent permitted by law, we are not liable for indirect or consequential damages arising from use of the service.</p>
       <h3 data-i18n="terms.h8">Contact</h3>
       <p data-i18n="terms.p8">Questions about these terms? Reach us at support@casedge.io.</p>
+    </div>
+    <p class="info-note" data-i18n="legal.note">This is a general template, not legal advice. Have it reviewed by a qualified professional before launch, especially once payments and accounts go live.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     REFUND POLICY
+═══════════════════════════════════════════════════ -->
+<div id="screen-refund" class="screen" data-screen-label="Refund">
+  <nav class="top-nav">
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
+    <button class="btn btn-ghost" onclick="showScreen('landing')" data-i18n="common.back">← Back</button>
+  </nav>
+  <div class="info-body">
+    <div class="info-eyebrow" data-i18n="legal.eyebrow">Legal</div>
+    <h1 class="info-title" data-i18n="legal.refundTitle">Refund Policy</h1>
+    <p class="info-lead" data-i18n="refund.lead">When and how refunds work on CasEdge. Last updated 2026.</p>
+    <div class="legal-block">
+      <h3 data-i18n="refund.h1">Subscription plans (case + drill library)</h3>
+      <p data-i18n="refund.p1">You may request a full refund within 48 hours of purchase if you have not started any case or drill during the current billing period. Once a case or drill has been started, that billing period is non-refundable.</p>
+      <h3 data-i18n="refund.h2">Cancelling a subscription</h3>
+      <p data-i18n="refund.p2">You can cancel auto-renewal at any time. Cancelling stops future charges; it does not refund the current, already-active period.</p>
+      <h3 data-i18n="refund.h3">Game passes (Solve Game / BCG Chat Game)</h3>
+      <p data-i18n="refund.p3">Game passes are single-use access to a live, AI-driven session. A refund is available only if the session was never started. Once a session has begun, it is non-refundable, as the underlying resources have already been used to serve it.</p>
+      <h3 data-i18n="refund.h4">How to request a refund</h3>
+      <p data-i18n="refund.p4">Contact us at support@casedge.io or on Telegram (@casedge) with your account email and purchase date. Eligible refunds are processed by Paddle, our payment provider, typically within a few business days.</p>
+      <h3 data-i18n="refund.h5">Chargebacks</h3>
+      <p data-i18n="refund.p5">Please contact us before filing a chargeback with your bank or card provider - we can usually resolve billing issues faster directly.</p>
     </div>
     <p class="info-note" data-i18n="legal.note">This is a general template, not legal advice. Have it reviewed by a qualified professional before launch, especially once payments and accounts go live.</p>
   </div>
@@ -2567,6 +2596,20 @@ const I18N = {
     'lang.feedback': 'Feedback language',
     'lang.same': 'Same',
     'lang.done': 'Done',
+    'legal.refundLink': 'Refund Policy',
+    'legal.refundTitle': 'Refund Policy',
+    'terms.p6': 'Paid plans are billed through our payment processor (Paddle, acting as merchant of record). See our <a href="#refund">Refund Policy</a> for details on cancellations and refunds.',
+    'refund.lead': 'When and how refunds work on CasEdge. Last updated 2026.',
+    'refund.h1': 'Subscription plans (case + drill library)',
+    'refund.p1': 'You may request a full refund within 48 hours of purchase if you have not started any case or drill during the current billing period. Once a case or drill has been started, that billing period is non-refundable.',
+    'refund.h2': 'Cancelling a subscription',
+    'refund.p2': 'You can cancel auto-renewal at any time. Cancelling stops future charges; it does not refund the current, already-active period.',
+    'refund.h3': 'Game passes (Solve Game / BCG Chat Game)',
+    'refund.p3': 'Game passes are single-use access to a live, AI-driven session. A refund is available only if the session was never started. Once a session has begun, it is non-refundable, as the underlying resources have already been used to serve it.',
+    'refund.h4': 'How to request a refund',
+    'refund.p4': 'Contact us at support@casedge.io or on Telegram (@casedge) with your account email and purchase date. Eligible refunds are processed by Paddle, our payment provider, typically within a few business days.',
+    'refund.h5': 'Chargebacks',
+    'refund.p5': 'Please contact us before filing a chargeback with your bank or card provider - we can usually resolve billing issues faster directly.',
     'auth.err.emailFirst': 'Enter your email above first, then tap “Forgot password?”.',
     'auth.err.loading': 'Auth is still loading, try again in a second.',
     'auth.msg.resetSent': 'If that email has an account, a reset link is on its way. Check your inbox (and spam).',
@@ -2742,6 +2785,20 @@ const I18N = {
     'lang.feedback': 'Язык фидбэка',
     'lang.same': 'Как у кейса',
     'lang.done': 'Готово',
+    'legal.refundLink': 'Возврат средств',
+    'legal.refundTitle': 'Политика возврата средств',
+    'terms.p6': 'Платные тарифы оплачиваются через нашего платёжного оператора (Paddle, выступает продавцом по договору). Подробности об отмене и возврате — в нашей <a href="#refund">Политике возврата средств</a>.',
+    'refund.lead': 'Когда и как работают возвраты в CasEdge. Обновлено в 2026.',
+    'refund.h1': 'Подписки (библиотека кейсов и дриллов)',
+    'refund.p1': 'Ты можешь запросить полный возврат в течение 48 часов после оплаты, если за текущий расчётный период не начат ни один кейс или дрилл. Как только кейс или дрилл начат — этот расчётный период возврату не подлежит.',
+    'refund.h2': 'Отмена подписки',
+    'refund.p2': 'Отменить автопродление можно в любой момент. Отмена останавливает будущие списания, но не возвращает деньги за уже активный период.',
+    'refund.h3': 'Игровые пропуски (Solve Game / BCG Chat Game)',
+    'refund.p3': 'Игровой пропуск — это доступ к одной живой AI-сессии для разового использования. Возврат возможен только если сессия ни разу не была начата. После начала сессии возврата нет, так как ресурсы для её проведения уже потрачены.',
+    'refund.h4': 'Как запросить возврат',
+    'refund.p4': 'Напиши нам на support@casedge.io или в Telegram (@casedge), указав email аккаунта и дату покупки. Одобренные возвраты обрабатывает Paddle, наш платёжный провайдер, обычно в течение нескольких рабочих дней.',
+    'refund.h5': 'Чарджбэки',
+    'refund.p5': 'Пожалуйста, свяжись с нами до того, как оформлять чарджбэк через банк или платёжную систему — обычно мы можем решить вопрос с оплатой быстрее напрямую.',
     'auth.err.emailFirst': 'Сначала введи email выше, потом нажми «Забыли пароль?».',
     'auth.err.loading': 'Авторизация ещё загружается, попробуй через секунду.',
     'auth.msg.resetSent': 'Если такой email зарегистрирован, ссылка для сброса уже отправлена. Проверь почту (и папку спам).',
@@ -2869,11 +2926,16 @@ window.addEventListener('popstate', function (e) {
   showScreen(id, true);
 });
 
-// On first load, seed history with the landing screen
+// On first load, honor a deep-link hash if one was given (e.g. someone opens
+// cas-edge-final.vercel.app/#privacy directly - Paddle's verification bot does
+// exactly this for Terms/Privacy). Falls back to landing otherwise.
 window.addEventListener('DOMContentLoaded', function () {
+  const requestedId = (location.hash || '').replace('#', '');
+  const targetId = (requestedId && document.getElementById('screen-' + requestedId)) ? requestedId : 'landing';
   try {
-    history.replaceState({ screen: 'landing' }, '', '#landing');
+    history.replaceState({ screen: targetId }, '', '#' + targetId);
   } catch (e) { /* sandbox blocks this - safe to ignore */ }
+  if (targetId !== 'landing') showScreen(targetId, true);
   // Onboarding is no longer auto-shown on landing (it hurt first impression).
   // The modal is still available on demand via openOnboarding(); content is preserved.
   // Record this visit AFTER a tick, so the "welcome back" banner can read the
