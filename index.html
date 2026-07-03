@@ -672,6 +672,25 @@
     .ls-card-p { font-size: 14px; line-height: 1.6; color: var(--on-dark-soft); }
     .land-cta-wrap { text-align: center; padding: 72px 24px 96px; border-top: 1px solid rgba(255,255,255,.07); }
     .land-cta-wrap .ls-title { margin-bottom: 28px; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 1120px; margin: 0 auto; }
+    @media (max-width: 920px) { .pricing-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .pricing-grid { grid-template-columns: 1fr; } }
+    .price-card {
+      background: var(--surface-dark-elevated); border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--radius-lg); padding: 28px 22px; text-align: left;
+      display: flex; flex-direction: column; transition: border-color .2s, transform .2s;
+    }
+    .price-card:hover { transform: translateY(-3px); }
+    .price-card.featured { border-color: var(--coral); box-shadow: 0 0 0 1px var(--coral); }
+    .price-card-name { font-size: 12.5px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--coral); margin-bottom: 12px; }
+    .price-card-amount { font-family: var(--font-display); font-size: 36px; color: var(--on-dark); line-height: 1; }
+    .price-card-amount sup { font-size: 16px; top: -14px; }
+    .price-card-period { font-size: 13px; color: var(--on-dark-soft); margin: 6px 0 20px; }
+    .price-card-features { list-style: none; padding: 0; margin: 0 0 22px; flex: 1; }
+    .price-card-features li { font-size: 13.5px; line-height: 1.5; color: var(--on-dark-soft); padding: 8px 0; border-top: 1px solid rgba(255,255,255,.06); }
+    .price-card-features li:first-child { border-top: none; }
+    .price-card .btn { width: 100%; justify-content: center; }
+    .pricing-note { text-align: center; font-size: 13px; color: var(--on-dark-soft); max-width: 640px; margin: 28px auto 0; line-height: 1.6; }
     .eyebrow {
       font-size: 11px; font-weight: 500; letter-spacing: 2.5px;
       text-transform: uppercase; color: var(--coral); margin-bottom: 28px;
@@ -1234,6 +1253,7 @@
         <button class="nav-link" onclick="chooseMode('case')" data-i18n="nav.cases">Cases</button>
         <button class="nav-link" onclick="chooseMode('drill')" data-i18n="nav.drills">Drills</button>
         <button class="nav-link" onclick="goToProgress()" data-i18n="nav.progress">Progress</button>
+        <button class="nav-link" onclick="goToPage('pricing')" data-i18n="nav.pricing">Pricing</button>
       </div>
       <button class="lang-btn" onclick="openLangMenu()"><span class="lang-current">EN</span> ▾</button>
       <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" title="Switch light / dark">
@@ -1367,6 +1387,7 @@
         <p class="lf-tg">Questions? Reach us on Telegram - <a href="https://t.me/casedge" target="_blank" rel="noopener">@casedge</a> or <a href="https://t.me/+998900002512" target="_blank" rel="noopener">+998&#8209;90&#8209;000&#8209;2512</a></p>
       </div>
       <div class="lf-links">
+        <button class="lf-link" onclick="goToPage('pricing')" data-i18n="nav.pricing">Pricing</button>
         <button class="lf-link" onclick="goToPage('faq')" data-i18n="nav.faq">FAQ</button>
         <button class="lf-link" onclick="goToPage('contact')" data-i18n="foot.contact">Contact</button>
         <button class="lf-link" onclick="goToPage('cookies')" data-i18n="foot.cookies">Cookies</button>
@@ -1552,6 +1573,76 @@
       <p data-i18n="refund.p5">Please contact us before filing a chargeback with your bank or card provider - we can usually resolve billing issues faster directly.</p>
     </div>
     <p class="info-note" data-i18n="legal.note">This is a general template, not legal advice. Have it reviewed by a qualified professional before launch, especially once payments and accounts go live.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     PRICING
+═══════════════════════════════════════════════════ -->
+<div id="screen-pricing" class="screen" data-screen-label="Pricing">
+  <nav class="top-nav">
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
+    <button class="btn btn-ghost" onclick="showScreen('landing')" data-i18n="common.back">← Back</button>
+  </nav>
+  <div class="land-section" style="padding-top:48px;">
+    <div class="ls-eyebrow" data-i18n="pricing.eyebrow">Pricing</div>
+    <h2 class="ls-title" data-i18n="pricing.title">Simple, honest pricing</h2>
+    <p class="ls-lead" data-i18n="pricing.lead">Pick a library plan to practice at your own pace, or a Game Pass for full live BCG / McKinsey-style simulations. No hidden fees, cancel anytime.</p>
+
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-card-name" data-i18n="pricing.drills.name">Drills Only</div>
+        <div class="price-card-amount"><sup>$</sup>10</div>
+        <div class="price-card-period" data-i18n="pricing.drills.period">one-time, 30 drills</div>
+        <ul class="price-card-features">
+          <li data-i18n="pricing.drills.f1">30 skill drill attempts</li>
+          <li data-i18n="pricing.drills.f2">Instant feedback + model answers</li>
+          <li data-i18n="pricing.drills.f3">All 7 drill types</li>
+        </ul>
+        <button class="btn btn-secondary" onclick="handleBeginSession()" data-i18n="pricing.cta">Get started</button>
+      </div>
+
+      <div class="price-card featured">
+        <div class="price-card-name" data-i18n="pricing.tier1.name">Starter Library</div>
+        <div class="price-card-amount"><sup>$</sup>14</div>
+        <div class="price-card-period" data-i18n="pricing.tier1.period">one-time, 30-day access</div>
+        <ul class="price-card-features">
+          <li data-i18n="pricing.tier1.f1">15 full case attempts</li>
+          <li data-i18n="pricing.tier1.f2">20 skill drill attempts</li>
+          <li data-i18n="pricing.tier1.f3">AI feedback on every attempt</li>
+          <li data-i18n="pricing.tier1.f4">RU / EN interface &amp; feedback</li>
+        </ul>
+        <button class="btn btn-primary" onclick="handleBeginSession()" data-i18n="pricing.cta">Get started</button>
+      </div>
+
+      <div class="price-card">
+        <div class="price-card-name" data-i18n="pricing.tier2.name">Full Library</div>
+        <div class="price-card-amount"><sup>$</sup>18</div>
+        <div class="price-card-period" data-i18n="pricing.tier2.period">one-time, 30-day access</div>
+        <ul class="price-card-features">
+          <li data-i18n="pricing.tier2.f1">20 full case attempts</li>
+          <li data-i18n="pricing.tier2.f2">30 skill drill attempts</li>
+          <li data-i18n="pricing.tier2.f3">AI feedback on every attempt</li>
+          <li data-i18n="pricing.tier2.f4">RU / EN interface &amp; feedback</li>
+        </ul>
+        <button class="btn btn-secondary" onclick="handleBeginSession()" data-i18n="pricing.cta">Get started</button>
+      </div>
+
+      <div class="price-card">
+        <div class="price-card-name" data-i18n="pricing.games.name">Game Pass</div>
+        <div class="price-card-amount"><sup>$</sup>45</div>
+        <div class="price-card-period" data-i18n="pricing.games.period">2 months, up to 20 sessions</div>
+        <ul class="price-card-features">
+          <li data-i18n="pricing.games.f1">McKinsey Solve Game - full simulation</li>
+          <li data-i18n="pricing.games.f2">BCG Chat Game - full simulation</li>
+          <li data-i18n="pricing.games.f3">AI-graded open answers + full solutions</li>
+          <li data-i18n="pricing.games.f4">Up to 20 sessions over 2 months</li>
+        </ul>
+        <button class="btn btn-secondary" onclick="handleBeginSession()" data-i18n="pricing.cta">Get started</button>
+      </div>
+    </div>
+
+    <p class="pricing-note" data-i18n-html="pricing.note">Prices shown in USD. Payments are processed securely by Paddle, our merchant of record. See our <a href="#refund" style="color:inherit;text-decoration:underline;">Refund Policy</a> for cancellation details.</p>
   </div>
 </div>
 
@@ -2444,6 +2535,7 @@ const I18N = {
     'nav.cases': 'Cases',
     'nav.drills': 'Drills',
     'nav.progress': 'Progress',
+    'nav.pricing': 'Pricing',
     'nav.faq': 'FAQ',
     'nav.contact': 'Contact',
     'nav.signin': 'Sign in',
@@ -2610,6 +2702,34 @@ const I18N = {
     'refund.p4': 'Contact us at support@casedge.io or on Telegram (@casedge) with your account email and purchase date. Eligible refunds are processed by Paddle, our payment provider, typically within a few business days.',
     'refund.h5': 'Chargebacks',
     'refund.p5': 'Please contact us before filing a chargeback with your bank or card provider - we can usually resolve billing issues faster directly.',
+    'pricing.eyebrow': 'Pricing',
+    'pricing.title': 'Simple, honest pricing',
+    'pricing.lead': 'Pick a library plan to practice at your own pace, or a Game Pass for full live BCG / McKinsey-style simulations. No hidden fees, cancel anytime.',
+    'pricing.cta': 'Get started',
+    'pricing.drills.name': 'Drills Only',
+    'pricing.drills.period': 'one-time, 30 drills',
+    'pricing.drills.f1': '30 skill drill attempts',
+    'pricing.drills.f2': 'Instant feedback + model answers',
+    'pricing.drills.f3': 'All 7 drill types',
+    'pricing.tier1.name': 'Starter Library',
+    'pricing.tier1.period': 'one-time, 30-day access',
+    'pricing.tier1.f1': '15 full case attempts',
+    'pricing.tier1.f2': '20 skill drill attempts',
+    'pricing.tier1.f3': 'AI feedback on every attempt',
+    'pricing.tier1.f4': 'RU / EN interface & feedback',
+    'pricing.tier2.name': 'Full Library',
+    'pricing.tier2.period': 'one-time, 30-day access',
+    'pricing.tier2.f1': '20 full case attempts',
+    'pricing.tier2.f2': '30 skill drill attempts',
+    'pricing.tier2.f3': 'AI feedback on every attempt',
+    'pricing.tier2.f4': 'RU / EN interface & feedback',
+    'pricing.games.name': 'Game Pass',
+    'pricing.games.period': '2 months, up to 20 sessions',
+    'pricing.games.f1': 'McKinsey Solve Game - full simulation',
+    'pricing.games.f2': 'BCG Chat Game - full simulation',
+    'pricing.games.f3': 'AI-graded open answers + full solutions',
+    'pricing.games.f4': 'Up to 20 sessions over 2 months',
+    'pricing.note': 'Prices shown in USD. Payments are processed securely by Paddle, our merchant of record. See our <a href="#refund" style="color:inherit;text-decoration:underline;">Refund Policy</a> for cancellation details.',
     'auth.err.emailFirst': 'Enter your email above first, then tap “Forgot password?”.',
     'auth.err.loading': 'Auth is still loading, try again in a second.',
     'auth.msg.resetSent': 'If that email has an account, a reset link is on its way. Check your inbox (and spam).',
@@ -2633,6 +2753,7 @@ const I18N = {
     'nav.cases': 'Кейсы',
     'nav.drills': 'Дриллы',
     'nav.progress': 'Прогресс',
+    'nav.pricing': 'Цены',
     'nav.faq': 'Вопросы',
     'nav.contact': 'Контакты',
     'nav.signin': 'Войти',
@@ -2799,6 +2920,34 @@ const I18N = {
     'refund.p4': 'Напиши нам на support@casedge.io или в Telegram (@casedge), указав email аккаунта и дату покупки. Одобренные возвраты обрабатывает Paddle, наш платёжный провайдер, обычно в течение нескольких рабочих дней.',
     'refund.h5': 'Чарджбэки',
     'refund.p5': 'Пожалуйста, свяжись с нами до того, как оформлять чарджбэк через банк или платёжную систему — обычно мы можем решить вопрос с оплатой быстрее напрямую.',
+    'pricing.eyebrow': 'Цены',
+    'pricing.title': 'Простые и честные цены',
+    'pricing.lead': 'Выбери тариф библиотеки, чтобы практиковаться в своём темпе, или Game Pass для полноценных живых симуляций в стиле BCG / McKinsey. Без скрытых платежей, отменить можно в любой момент.',
+    'pricing.cta': 'Начать',
+    'pricing.drills.name': 'Только дриллы',
+    'pricing.drills.period': 'разовая покупка, 30 дриллов',
+    'pricing.drills.f1': '30 попыток дриллов',
+    'pricing.drills.f2': 'Мгновенная обратная связь + разбор ответа',
+    'pricing.drills.f3': 'Все 7 типов дриллов',
+    'pricing.tier1.name': 'Стартовая библиотека',
+    'pricing.tier1.period': 'разовая покупка, доступ на 30 дней',
+    'pricing.tier1.f1': '15 попыток полных кейсов',
+    'pricing.tier1.f2': '20 попыток дриллов',
+    'pricing.tier1.f3': 'AI-фидбек на каждую попытку',
+    'pricing.tier1.f4': 'RU / EN интерфейс и фидбек',
+    'pricing.tier2.name': 'Полная библиотека',
+    'pricing.tier2.period': 'разовая покупка, доступ на 30 дней',
+    'pricing.tier2.f1': '20 попыток полных кейсов',
+    'pricing.tier2.f2': '30 попыток дриллов',
+    'pricing.tier2.f3': 'AI-фидбек на каждую попытку',
+    'pricing.tier2.f4': 'RU / EN интерфейс и фидбек',
+    'pricing.games.name': 'Game Pass',
+    'pricing.games.period': '2 месяца, до 20 сессий',
+    'pricing.games.f1': 'McKinsey Solve Game — полная симуляция',
+    'pricing.games.f2': 'BCG Chat Game — полная симуляция',
+    'pricing.games.f3': 'AI-грейдинг открытых ответов + полные решения',
+    'pricing.games.f4': 'До 20 сессий за 2 месяца',
+    'pricing.note': 'Цены указаны в USD. Платежи обрабатывает Paddle, наш продавец по договору (merchant of record). Подробности об отмене — в нашей <a href="#refund" style="color:inherit;text-decoration:underline;">Политике возврата средств</a>.',
     'auth.err.emailFirst': 'Сначала введи email выше, потом нажми «Забыли пароль?».',
     'auth.err.loading': 'Авторизация ещё загружается, попробуй через секунду.',
     'auth.msg.resetSent': 'Если такой email зарегистрирован, ссылка для сброса уже отправлена. Проверь почту (и папку спам).',
