@@ -1182,15 +1182,26 @@
     td.num .sv-chip { font-weight: 600; }
     .sv-layout { display: flex; gap: 16px; align-items: flex-start; }
     .sv-layout-main { flex: 1; min-width: 0; }
-    .sv-journal { flex: 0 0 178px; position: sticky; top: 8px; background: var(--surface-dark-elevated); border: 1px solid var(--sv-line-soft); border-radius: 12px; padding: 13px 13px 15px; }
-    .sv-journal-t { font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--accent-teal); margin: 0 0 9px; }
-    .sv-journal-empty { font-size: 12px; color: var(--on-dark-soft); line-height: 1.5; }
-    .sv-journal-list { display: flex; flex-wrap: wrap; gap: 6px; }
-    .sv-jchip { background: rgba(93,184,166,.12); border: 1px solid rgba(93,184,166,.4); color: var(--on-dark); border-radius: 6px; padding: 3px 8px; font-size: 12.5px; font-weight: 600; cursor: grab; touch-action: none; }
+    .sv-journal { flex: 0 0 300px; position: sticky; top: 8px; min-height: 420px; background: var(--surface-dark-elevated); border: 1px solid var(--sv-line-soft); border-left: 3px solid var(--accent-teal); border-radius: 12px; padding: 18px 18px 20px; box-shadow: 0 4px 18px rgba(0,0,0,.18); transition: box-shadow .15s, border-color .15s; }
+    .sv-journal.sv-drop-active { border-color: var(--accent-teal); box-shadow: 0 0 0 3px rgba(93,184,166,.35), 0 4px 18px rgba(0,0,0,.18); }
+    .sv-journal-t { font-size: 14px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--accent-teal); margin: 0 0 6px; display: flex; align-items: center; gap: 6px; }
+    .sv-journal-t::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--accent-teal); flex-shrink: 0; }
+    .sv-journal-sub { font-size: 11.5px; color: var(--on-dark-soft); margin: 0 0 16px; }
+    .sv-journal-empty { font-size: 13px; color: var(--on-dark-soft); line-height: 1.6; border: 1.5px dashed var(--sv-line-soft); border-radius: 10px; padding: 22px 14px; text-align: center; }
+    .sv-journal-list { display: flex; flex-direction: column; gap: 8px; }
+    .sv-jchip { background: rgba(93,184,166,.12); border: 1px solid rgba(93,184,166,.4); color: var(--on-dark); border-radius: 8px; padding: 8px 12px; font-size: 13.5px; font-weight: 600; cursor: grab; touch-action: none; display: flex; align-items: center; justify-content: space-between; }
     .sv-inp.sv-drop-active, .sv-numin.sv-drop-active, .sv-buildrow input.sv-drop-active { border-color: var(--accent-teal); box-shadow: 0 0 0 2px rgba(93,184,166,.3); background: rgba(93,184,166,.08); }
     .sv-qual { background: var(--sv-fill); border: 1px solid var(--sv-line); color: var(--on-dark); border-radius: 8px; padding: 6px 10px; font-size: 13.5px; font-weight: 600; min-width: 110px; }
     .sv-qual-inline { min-width: 90px; margin: 0 2px; padding: 3px 8px; font-size: 14px; }
-    @media (max-width: 640px) { .sv-layout { flex-direction: column; } .sv-journal { position: static; flex-basis: auto; width: 100%; } }
+    @media (max-width: 640px) { .sv-layout { flex-direction: column; } .sv-journal { position: static; flex-basis: auto; width: 100%; min-height: 0; } .sv-study-shell { flex-direction: column; } .sv-nav { flex: 0 0 auto !important; flex-direction: row !important; flex-wrap: wrap; position: static !important; } }
+    /* ---- Investigation sidebar (Study phase: Directions/Objective/Study Info/Exhibits) ---- */
+    .sv-study-shell { display: flex; gap: 20px; align-items: flex-start; }
+    .sv-nav { flex: 0 0 168px; display: flex; flex-direction: column; gap: 2px; position: sticky; top: 8px; }
+    .sv-nav-group-title { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--on-dark-soft); padding: 6px 12px 8px; }
+    .sv-nav-item { text-align: left; background: transparent; border: none; border-radius: 8px; padding: 10px 12px; font-size: 13.5px; font-weight: 600; color: var(--on-dark-soft); cursor: pointer; transition: background .15s, color .15s; }
+    .sv-nav-item:hover { background: var(--sv-fill); color: var(--on-dark); }
+    .sv-nav-item.active { background: #fff; color: #0c1420; }
+    .sv-obj-box { background: #fff; color: #0c1420; border-radius: 10px; padding: 18px 20px; font-size: 15px; line-height: 1.5; font-weight: 500; }
     /* ---- Floating calculator ---- */
     .sv-calc-btn { background: var(--sv-fill); border: 1px solid var(--sv-line); color: var(--on-dark); width: 34px; height: 34px; border-radius: 9px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: background .15s, border-color .15s; }
     .sv-calc-btn:hover { background: var(--sv-fill-hover); border-color: var(--accent-teal); }
@@ -1198,7 +1209,7 @@
     .sv-calc.show { display: block; }
     .sv-calc-head { display: flex; align-items: center; justify-content: space-between; padding: 9px 13px; font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--accent-teal); cursor: move; border-bottom: 1px solid var(--sv-line-soft); user-select: none; }
     .sv-calc-x { background: none; border: none; color: var(--on-dark-soft); font-size: 18px; cursor: pointer; line-height: 1; padding: 0 2px; }
-    .sv-calc-disp { padding: 12px 14px; font-size: 20px; font-weight: 600; text-align: right; color: var(--on-dark); font-variant-numeric: tabular-nums; word-break: break-all; min-height: 28px; }
+    .sv-calc-disp { margin: 10px 12px 0; padding: 10px 12px; font-size: 22px; font-weight: 600; text-align: right; color: var(--accent-teal); background: rgba(0,0,0,.22); border: 1px solid var(--sv-line-soft); border-radius: 8px; font-variant-numeric: tabular-nums; word-break: break-all; min-height: 26px; }
     .sv-calc-log { max-height: 88px; overflow-y: auto; padding: 0 10px; display: flex; flex-direction: column; gap: 4px; }
     .sv-calc-log:not(:empty) { padding: 4px 10px 8px; }
     .sv-calc-logrow { display: flex; justify-content: space-between; gap: 8px; font-size: 11.5px; color: var(--on-dark-soft); }
@@ -1890,7 +1901,7 @@
   <div class="sv-footer"><div class="sv-foot-inner" id="svFooter"></div></div>
   <!-- Floating calculator: logs results, results are collectible -->
   <div class="sv-calc" id="svCalc">
-    <div class="sv-calc-head" id="svCalcHead">${t('sv.calculator')}<button class="sv-calc-x" onclick="svCalcToggle()">&times;</button></div>
+    <div class="sv-calc-head" id="svCalcHead"><span data-i18n="sv.calculator">Calculator</span><button class="sv-calc-x" onclick="svCalcToggle()">&times;</button></div>
     <div class="sv-calc-disp" id="svCalcDisp">0</div>
     <div class="sv-calc-log" id="svCalcLog"></div>
     <div class="sv-calc-keys">
@@ -2670,6 +2681,8 @@ const I18N = {
     'sv.writtenReport': 'Written Report', 'sv.graphSelection': 'Graph Selection', 'sv.visualReport': 'Visual Report',
     'sv.nextGraph': 'Next: Graph Selection →', 'sv.nextVisual': 'Next: Visual Report →', 'sv.goToCases': 'Go to Cases →',
     'sv.nextCase': 'Next case', 'sv.submitResults': 'Submit & see results', 'sv.of': 'of',
+    'sv.continue': 'Continue', 'sv.investigation': 'Investigation', 'sv.directions': 'Directions',
+    'sv.objective': 'Objective', 'sv.studyInfo': 'Study Information', 'sv.exhibit1': 'Exhibit 1', 'sv.exhibit2': 'Exhibit 2',
     'bcg.exitGame': 'Exit Game', 'bcg.send': 'Send', 'bcg.enterText': 'Enter Your Text',
     'bcg.enterNumber': 'Enter a number', 'bcg.confirm': 'Confirm', 'bcg.selectAll': 'Choose any number of options from above',
     'bcg.chooseOne': 'Choose one option from above', 'bcg.wordCount': 'Word Count',
@@ -2900,6 +2913,8 @@ const I18N = {
     'sv.writtenReport': 'Текстовый отчёт', 'sv.graphSelection': 'Выбор графика', 'sv.visualReport': 'Визуальный отчёт',
     'sv.nextGraph': 'Далее: выбор графика →', 'sv.nextVisual': 'Далее: визуальный отчёт →', 'sv.goToCases': 'К кейсам →',
     'sv.nextCase': 'Следующий кейс', 'sv.submitResults': 'Завершить и увидеть результат', 'sv.of': 'из',
+    'sv.continue': 'Далее', 'sv.investigation': 'Исследование', 'sv.directions': 'Указания',
+    'sv.objective': 'Цель', 'sv.studyInfo': 'Информация', 'sv.exhibit1': 'Эксгибит 1', 'sv.exhibit2': 'Эксгибит 2',
     'bcg.exitGame': 'Выйти', 'bcg.send': 'Отправить', 'bcg.enterText': 'Введите текст',
     'bcg.enterNumber': 'Введите число', 'bcg.confirm': 'Подтвердить', 'bcg.selectAll': 'Выберите любое число вариантов выше',
     'bcg.chooseOne': 'Выберите один вариант выше', 'bcg.wordCount': 'Слов',
@@ -3386,6 +3401,10 @@ const BCG_CASES = [{
       recPrep:true },
     { type:'q', id:'q8b', label:'Question 9b', widget:'text',
       text:"Please explain your answer to Question 9a in two to three lines maximum - conclusion first, then your two strongest supporting reasons, then one key risk. In a real interview this is delivered out loud in ~60-90 seconds.",
+      grade:'open' },
+    { type:'say', text:"Last thing. The CEO couldn't join this session, so she's asked for a short recorded summary instead - imagine you're speaking directly to camera." },
+    { type:'q', id:'q10', label:'Question 10', widget:'text',
+      text:"Record a 60-90 second executive summary for the CEO covering the whole case: your recommendation on the Brightwell bid (with the value ceiling), the sourcing-strategy finding for the seasonal SKU, and the key risks and next steps. Conclusion first. In a real interview this is delivered on camera; here, type what you would say.",
       grade:'open', isRec:true }
   ]
 }];
@@ -3712,47 +3731,57 @@ function setGameTimer(on) {
 const SOLVE_CASE = {
   id: 'caldersound',
   totalMin: 35,
-  // ---- STUDY: fill-in-the-text + exhibit ----
+  // ---- STUDY: Directions / Objective / Study Information / Exhibit 1 / Exhibit 2 ----
   study: {
-    title: 'Calder Sound Fishery',
-    intro: 'All names in this study are fictional. You are a marine researcher at the Pariw Institute, assessing the fish stocks of Calder Sound: how the population splits across three commercial species, how much stock can be safely harvested, and whether the protected quota kept pace as the populations grew.',
-    // blanks the user must fill from the text (machine-checked)
+    title: 'Calder Sound Fleet Buyback',
+    directions: 'This study investigates fleet economics in Calder Sound, where a prolonged decline in fish stock and reef habitat has prompted regulators to consider retiring part of the active trawler fleet.\n\nYou can drag the information you find useful to the research journal to be used later in the case. Additionally, you can reorganize, rename, and highlight entries as important.',
+    objective: 'Analyze the impact of retiring trawler licenses on Calder Sound\u2019s commercial fish stock and reef habitat coverage.',
+    intro: 'All names in this study are fictional. You are a marine researcher at the Pariw Institute, assessing a proposed trawler buyback program in Calder Sound.',
+    // blanks the user must fill from the Study Information text (machine-checked)
     blanks: [
-      { id:'area', label:'Combined year-4 population', pre:'By year 4, the three commercial species tracked in Calder Sound - Marlspike, Bluefin, and Coralback - had a combined population of ', post:' thousand fish (sum the year-4 column of the exhibit).', ans:2245 },
-      { id:'farmpct', label:'Bluefin share of total (%)', pre:' Of that year-4 total, Bluefin - the single largest stock - makes up about ', post:' % of all fish (give one decimal place). A juvenile reserve is also set aside, equal to about ', ans:40.2, tol:0.75 },
-      { id:'smallpct', label:'Juvenile reserve (% of Marlspike)', pre:'', post:' % of the year-4 Marlspike population.', ans:15 },
-      { id:'bufY1', label:'Protected quota, year 1', pre:' In year 1, regulators set a protected quota of ', post:' thousand fish that may not be harvested. In year 4, the protected quota was raised to ', ans:180 },
-      { id:'bufY4', label:'Protected quota, year 4', pre:'', post:' thousand fish. Stock that is neither protected nor held in the juvenile reserve is called harvestable stock.', ans:196 },
+      { id:'trawlers', label:'Trawlers to be retired', pre:'Decades of overfishing have depleted Calder Sound\u2019s commercial fish stock, and heavy trawl-net activity has also degraded reef habitat that shelters juvenile fish. To address this, regulators are proposing a buyback that retires ', post:' trawlers from the active fleet, monitored over a 5-year period. ', ans:150 },
+      { id:'catchper', label:'Catch removed per trawler/year', pre:'Each active trawler removes ', post:' tonnes of stock per year through catch. ', ans:500 },
+      { id:'stock0', label:'Current fish stock', pre:'The current fish stock in Calder Sound is ', post:' tonnes, and grows at ', ans:500000 },
+      { id:'growth', label:'Natural growth rate', pre:'', post:'% per year through natural recruitment (if no trawlers are retired, this growth is offset by continued catch). ', ans:10 },
+      { id:'reefrec', label:'Reef recovery rate (with buyback)', pre:'If the buyback proceeds, trawls no longer drag across the seafloor in the retired vessels\u2019 fishing grounds, and reef habitat coverage recovers by ', post:' percentage points per year. ', ans:3 },
+      { id:'bycatch0', label:'Current migratory bycatch stock', pre:'In addition, there are currently ', post:' tonnes of migratory bycatch species, and a 10% increase in reef coverage leads to a ', ans:50000 },
+      { id:'bycatchgrow', label:'Bycatch increase per 10pp reef gain', pre:'', post:'-tonne increase in bycatch stock. ', ans:3000 },
+      { id:'certgain', label:'Certification revenue per 5pp reef gain', pre:'Regulators are also investing for economic gain: certification studies show that for every 5 percentage point increase in reef coverage, sustainable-seafood certification premiums grow by $', post:', due to higher-value contracts, improved traceability, and stronger buyer trust. ', ans:25000 },
+      { id:'certloss', label:'Certification revenue lost per 5pp reef loss', pre:'Conversely, every 5 percentage point loss in coverage implies a $', post:' loss.', ans:25000 },
     ],
-    exhibit: {
-      title: 'Exhibit 1: Population by Species and Year (thousand fish)',
-      head: ['Species','Year 1','Year 2','Year 3','Year 4'],
-      rows: [
-        ['Marlspike', 620, 658, 691, 724],
-        ['Bluefin', 840, 861, 879, 902],
-        ['Coralback', 510, 548, 583, 619],
+    // Exhibit 1: dual-line population trajectory, with vs. without the buyback
+    exhibit1: {
+      title: 'Exhibit 1: Projected Fish Stock With and Without Fleet Buyback (tonnes)',
+      axisLabel: 'Fish stock (tonnes)',
+      max: 900000,
+      categories: ['Year 0','Year 1','Year 2','Year 3','Year 4','Year 5'],
+      series: [
+        { name:'With buyback',    color:'var(--accent-teal)',  values:[500000,550000,605000,665500,732050,805255] },
+        { name:'Without buyback', color:'var(--accent-amber)', values:[500000,467500,431750,392425,349168,301585] },
       ],
+    },
+    // Exhibit 2: reef coverage (bars, left axis) + certification revenue (line, right axis), under the buyback
+    exhibit2: {
+      title: 'Exhibit 2: Projected Reef Coverage and Additional Certification Revenue With Buyback',
+      categories: ['Year 0','Year 1','Year 2','Year 3','Year 4','Year 5'],
+      bars: { name:'Reef coverage (%)', axis:'Reef cover %', max:100, values:[80,83,86,89,92,95] },
+      line: { name:'Additional certification revenue ($)', axis:'Revenue $', max:100000, values:[0,15000,30000,45000,60000,75000] },
     },
   },
   // ---- ANALYSIS: numeric questions ----
   analysis: [
-    { id:'a1', label:'Question 1', text:'Calculate the year-4 figures below. Round to one decimal where needed. (Juvenile reserve = 15% of year-4 Marlspike; harvestable stock = total - protected quota - juvenile reserve.)',
+    { id:'a1', label:'Question 1', text:'Using Exhibit 1, what is the difference in Calder Sound\u2019s fish stock at year 5 between the with-buyback scenario and the without-buyback scenario?',
       fields:[
-        { id:'farms4', label:'Total population (year 4):', unit:'k', ans:2245 },
-        { id:'small4', label:'Juvenile reserve:', unit:'k', ans:108.6 },
-        { id:'buf4',  label:'Protected quota (year 4):', unit:'k', ans:196 },
-        { id:'uncl4', label:'Harvestable stock:', unit:'k', ans:1940.4 },
+        { id:'stock_diff', label:'Year-5 stock difference:', unit:'tonnes', ans:503670 },
       ] },
-    { id:'a2', label:'Question 2', text:'Did the protected quota grow at the same year-1 to year-4 rate as the three species\u2019 combined population? Round to two digits, then state the comparison.',
+    { id:'a2', label:'Question 2', text:'If the buyback does not go ahead, how many tonnes of stock would the 150 trawlers remove in total over the 5-year period? (Trawlers \u00d7 catch per trawler per year \u00d7 5 years.)',
       fields:[
-        { id:'gbuf',  label:'Growth rate - protected quota:', unit:'%', ans:8.89 },
-        { id:'gfarm', label:'Growth rate - combined population:', unit:'%', ans:13.96 },
-        { id:'gcmp',  label:'Over the 4 years, the protected quota grew', unit:'than the fish population.', ans:'slower', isQual:true, options:['','faster','slower','at the same rate'] },
+        { id:'total_removed', label:'Total stock removed over 5 years:', unit:'tonnes', ans:375000 },
       ] },
-    { id:'a3', label:'Question 3', text:'Among Marlspike, Bluefin and Coralback, which species had the largest average annual growth rate? Take the three year-over-year growth rates (year 1 to 2, 2 to 3, 3 to 4) and average them, no compounding. List the species and its average annual rate.',
+    { id:'a3', label:'Question 3', text:'Using Exhibit 2, what is the total reef coverage gain from year 0 to year 5 under the buyback, and what additional certification revenue does that generate in year 5?',
       fields:[
-        { id:'fastfarm', label:'Species:', unit:'', ans:'Coralback', isText:true },
-        { id:'fastrate', label:'Average annual growth rate:', unit:'%', ans:6.67, tol:0.5 },
+        { id:'reef_gain', label:'Reef coverage gain (year 0 to year 5):', unit:'pp', ans:15 },
+        { id:'rev_y5', label:'Additional certification revenue (year 5):', unit:'$', ans:75000 },
       ] },
   ],
   // ---- REPORT: written summary + graph selection + visual build ----
@@ -3761,37 +3790,35 @@ const SOLVE_CASE = {
     written: {
       intro: 'Complete the summary below using the figures you already established in Study and Analysis. This is the write-up a partner would read before the chart.',
       blanks: [
-        { id:'w_total', pre:'Across Calder Sound, the three commercial species\u2019 combined year-4 population reached ', post:' thousand fish, ', ans:2245 },
-        { id:'w_bfpct', pre:'of which Bluefin represented about ', post:'% of the total. ', ans:40.2, tol:0.75 },
-        { id:'w_q1', pre:'The protected quota grew from ', post:' thousand fish in year 1 ', ans:180 },
-        { id:'w_q4', pre:'to ', post:' thousand fish in year 4, ', ans:196 },
-        { id:'w_cmp', pre:'a rate that was ', post:' than the overall population\u2019s growth. ', ans:'slower', isQual:true, options:['','faster','slower','the same as'] },
-        { id:'w_harv', pre:'After setting aside the juvenile reserve, harvestable stock stood at approximately ', post:' thousand fish. ', ans:1940.4 },
-        { id:'w_species', pre:'The fastest average annual growth was recorded by ', post:', ', ans:'Coralback', isText:true },
-        { id:'w_rate', pre:'at roughly ', post:'% per year.', ans:6.67, tol:0.5 },
+        { id:'w_with', pre:'Under the proposed buyback, Calder Sound\u2019s fish stock is projected to reach ', post:' tonnes by year 5, ', ans:805255 },
+        { id:'w_without', pre:'compared with just ', post:' tonnes if the fleet continues fishing unchanged \u2014 ', ans:301585 },
+        { id:'w_diff', pre:'a swing of ', post:' tonnes. ', ans:503670 },
+        { id:'w_removed', pre:'The 150 retired trawlers would otherwise have removed ', post:' tonnes of stock over the 5-year period. ', ans:375000 },
+        { id:'w_reef', pre:'Reef habitat coverage is projected to recover from 80% to ', post:'%, ', ans:95 },
+        { id:'w_gain', pre:'a gain of ', post:' percentage points, ', ans:15 },
+        { id:'w_rev', pre:'generating an additional $', post:' in certification premium revenue by year 5.', ans:75000 },
       ],
     },
     // --- step 3: Visual Report - build the chosen chart type from an editable data table ---
     visual: {
-      prompt: 'Build the year-4 stock breakdown as the chart type you selected. Enter the figure (thousand fish) for each category from your Analysis answers \u2014 the visualization updates as you type.',
-      axisLabel: 'Thousand fish',
-      max: 2400,
+      prompt: 'Build the year-5 reef coverage breakdown as the chart type you selected. Enter the figure (percentage points) for each category from your Analysis answers \u2014 the visualization updates as you type.',
+      axisLabel: 'Reef coverage, percentage points',
+      unit: 'pp',
+      max: 100,
       bars: [
-        { id:'b_farms', label:'Harvestable stock', ans:1940.4, color:'var(--accent-teal)' },
-        { id:'b_small', label:'Juvenile reserve',  ans:108.6,  color:'var(--accent-amber)' },
-        { id:'b_buf',   label:'Protected quota',   ans:196,    color:'#7c8ce8' },
-        { id:'b_uncl',  label:'Bluefin stock',     ans:902,    color:'#e07a9e' },
+        { id:'v_base', label:'Baseline reef cover', ans:80, color:'var(--accent-teal)' },
+        { id:'v_recovered', label:'Recovered reef cover', ans:15, color:'var(--accent-amber)' },
       ],
     },
     // --- step 2: read a combo chart, then pick best chart type ---
     combo: {
-      title: 'Fish population vs. protected quota, by year',
-      subtitle: 'The three species\u2019 combined population (bars, left axis) against the protected quota (line, right axis).',
-      categories: ['Year 1','Year 2','Year 3','Year 4'],
-      bars:  { name:'Combined population (k)', axis:'Total k', max:2400, values:[1970,2067,2153,2245] },
-      line:  { name:'Protected quota (k)',     axis:'Quota k', max:240,  values:[180,185,191,196] },
+      title: 'Reef coverage vs. certification revenue, by year',
+      subtitle: 'Reef coverage percentage (bars, left axis) against additional certification revenue (line, right axis).',
+      categories: ['Year 0','Year 1','Year 2','Year 3','Year 4','Year 5'],
+      bars:  { name:'Reef coverage (%)', axis:'Reef cover %', max:100, values:[80,83,86,89,92,95] },
+      line:  { name:'Additional revenue ($)', axis:'Revenue $', max:100000, values:[0,15000,30000,45000,60000,75000] },
     },
-    prompt: 'You need a single chart for the report that shows how the year-4 stock splits across the categories as parts of one whole. Which chart type fits best?',
+    prompt: 'You need a single chart for the report that shows how the year-5 reef coverage splits between baseline and recovered portions, as parts of one whole. Which chart type fits best?',
     options: ['bar','line','pie'],
     correct: 'pie',
   },
@@ -3872,7 +3899,7 @@ let solve = null;
 function startSolveGame() {
   if (typeof requireAuth === 'function' && !requireAuth()) return;
   if (typeof cxSetResume === 'function') cxSetResume('solve', 'Solve Game', 'startSolveGame');
-  solve = { phase:'study', qIndex:0, answers:{}, graded:{}, journal:[], calcLog:[], reportStep:'written', secs: SOLVE_CASE.totalMin*60, timerId:null };
+  solve = { phase:'study', studyTab:'directions', qIndex:0, answers:{}, graded:{}, journal:[], calcLog:[], reportStep:'written', secs: SOLVE_CASE.totalMin*60, timerId:null };
   svCalcExpr = '';
   try { const cd=document.getElementById('svCalcDisp'); if(cd)cd.textContent='0'; const cl=document.getElementById('svCalcLog'); if(cl)cl.innerHTML=''; const cc=document.getElementById('svCalc'); if(cc)cc.classList.remove('show'); } catch(e){}
   showScreen('solve');
@@ -3953,18 +3980,23 @@ function svChipDown(e, val) {
     document.querySelectorAll('.sv-drop-active').forEach(el => el.classList.remove('sv-drop-active'));
     const t = document.elementFromPoint(ev.clientX, ev.clientY);
     const field = t && t.closest && t.closest('input.sv-inp, input.sv-numin, .sv-buildrow input');
+    const journal = t && t.closest && t.closest('.sv-journal');
     if (field) field.classList.add('sv-drop-active');
+    else if (journal) journal.classList.add('sv-drop-active');
   };
   const up = (ev) => {
     window.removeEventListener('pointermove', move);
     window.removeEventListener('pointerup', up);
     const t = document.elementFromPoint(ev.clientX, ev.clientY);
     const field = t && t.closest && t.closest('input.sv-inp, input.sv-numin, .sv-buildrow input');
+    const journal = t && t.closest && t.closest('.sv-journal');
     if (svDrag.moved && field) {
-      svFillField(field, svDrag.val);     // dropped on a field
-    } else if (!svDrag.moved) {
-      svCollect(svDrag.val);              // tap = collect to journal
+      svFillField(field, svDrag.val);      // dropped on an answer field
+    } else if (svDrag.moved && journal) {
+      svCollect(svDrag.val);               // dropped on the Research Journal panel
     }
+    // No-move taps do nothing now - collecting requires an actual drag,
+    // matching the real McKinsey Solve mechanic (drag to journal or drag to field).
     document.querySelectorAll('.sv-drop-active').forEach(el => el.classList.remove('sv-drop-active'));
     svDrag.ghost.remove();
     svDrag = null;
@@ -3989,7 +4021,7 @@ function svRenderJournal() {
   el.innerHTML = `<div class="sv-journal-t">${t('sv.journal')}</div>` +
     (j.length ? `<div class="sv-journal-list">` + j.map(v =>
       `<span class="sv-jchip" onpointerdown="svChipDown(event,'${esc(String(v))}')">${esc(String(v))}</span>`).join('') + `</div>`
-    : `<div class="sv-journal-empty">Tap any highlighted number to collect it here, or drag it straight into an answer box.</div>`);
+    : `<div class="sv-journal-empty">Drag any highlighted number here to collect it, or drag it straight into an answer box.</div>`);
 }
 
 /* ════════ Floating calculator (logs every result; results are collectible) ════════ */
@@ -4060,24 +4092,60 @@ function svHint(text) {
   return `<div class="sv-hint"><span class="sv-hint-ic">\u2192</span><span>${text}</span></div>`;
 }
 
+const SV_STUDY_TABS = ['directions','objective','studyinfo','exhibit1','exhibit2'];
+function svStudyTabLabel(tab) {
+  return { directions:t('sv.directions'), objective:t('sv.objective'), studyinfo:t('sv.studyInfo'), exhibit1:t('sv.exhibit1'), exhibit2:t('sv.exhibit2') }[tab];
+}
+
+function svStudyNavHTML() {
+  return `<div class="sv-nav">
+    <div class="sv-nav-group-title">${t('sv.investigation')}</div>
+    ${SV_STUDY_TABS.map(tab => `<button class="sv-nav-item ${tab===solve.studyTab?'active':''}" onclick="solve.studyTab='${tab}';renderSolve()">${svStudyTabLabel(tab)}</button>`).join('')}
+  </div>`;
+}
+
 function renderSolveStudy(inner, foot) {
   const s = SOLVE_CASE.study;
-  let prose = '';
-  s.blanks.forEach(b => {
-    prose += esc(b.pre) + `<input class="sv-inp" id="sv-${b.id}" inputmode="numeric" value="${solve.answers[b.id]||''}" oninput="solve.answers['${b.id}']=this.value">` + esc(b.post);
-  });
-  let ex = svExhibitHTML(s.exhibit, true);
-  inner.innerHTML = `<h2 class="sv-h">${esc(s.title)}</h2>
-    <p class="sv-sub">${esc(s.intro)}</p>
-    ${svHint('<b>Collect everything.</b> Tap or drag every highlighted number into your Research Journal \u2014 it costs nothing and you\u2019ll have the data ready when the questions come. You can rename or delete entries later.')}
-    <div class="sv-layout">
-      <div class="sv-layout-main">
-        <div class="sv-prose">${prose}</div>${ex}
-      </div>
-      <div class="sv-journal" id="svJournal"></div>
+  if (!solve.studyTab) solve.studyTab = 'directions';
+  const idx = SV_STUDY_TABS.indexOf(solve.studyTab);
+  let content = '';
+
+  if (solve.studyTab === 'directions') {
+    content = `<h2 class="sv-h">${t('sv.directions')}</h2><p class="sv-sub">${esc(s.directions).replace(/\n\n/g,'</p><p class="sv-sub">')}</p>`;
+  } else if (solve.studyTab === 'objective') {
+    content = `<h2 class="sv-h">${t('sv.objective')}</h2><div class="sv-obj-box">${esc(s.objective)}</div>`;
+  } else if (solve.studyTab === 'studyinfo') {
+    let prose = '';
+    s.blanks.forEach(b => {
+      prose += esc(b.pre) + `<input class="sv-inp" id="sv-${b.id}" inputmode="numeric" value="${solve.answers[b.id]||''}" oninput="solve.answers['${b.id}']=this.value">` + esc(b.post);
+    });
+    content = `<h2 class="sv-h">${t('sv.studyInfo')}</h2><div class="sv-prose">${prose}</div>
+      ${svHint('<b>Collect everything.</b> Drag every highlighted number into your Research Journal \u2014 it costs nothing and you\u2019ll have the data ready when the questions come.')}`;
+  } else if (solve.studyTab === 'exhibit1') {
+    const ex = s.exhibit1;
+    const tbl = svExhibitHTML({ title: ex.title, head:['Series',...ex.categories], rows: ex.series.map(sr=>[sr.name, ...sr.values]) }, true);
+    content = `<h2 class="sv-h">${esc(ex.title)}</h2>
+      <div class="sv-chart"><div id="svExhibit1">${svLineChartSVG(ex)}</div>
+        <div class="sv-chart-legend">${ex.series.map(sr=>`<span class="sv-leg"><i class="ln" style="background:${sr.color}"></i>${esc(sr.name)}</span>`).join('')}</div></div>
+      ${tbl}`;
+  } else if (solve.studyTab === 'exhibit2') {
+    const ex = s.exhibit2;
+    const tbl = svExhibitHTML({ title: ex.title, head:['Metric',...ex.categories], rows:[[ex.bars.name, ...ex.bars.values],[ex.line.name, ...ex.line.values]] }, true);
+    content = `<h2 class="sv-h">${esc(ex.title)}</h2>
+      <div class="sv-chart"><div id="svExhibit2">${svComboChartSVG(ex)}</div>
+        <div class="sv-chart-legend"><span class="sv-leg"><i style="background:var(--accent-teal)"></i>${esc(ex.bars.name)}</span><span class="sv-leg"><i class="ln" style="background:var(--accent-amber)"></i>${esc(ex.line.name)}</span></div></div>
+      ${tbl}`;
+  }
+
+  inner.innerHTML = `<div class="sv-study-shell">
+      ${svStudyNavHTML()}
+      <div class="sv-layout"><div class="sv-layout-main">${content}</div>
+        <div class="sv-journal" id="svJournal"></div></div>
     </div>`;
   svRenderJournal();
-  foot.innerHTML = `<span></span><button class="sv-next" onclick="solvePhaseNext()">${t('sv.finishedCollecting')} &rarr;</button>`;
+  const last = idx === SV_STUDY_TABS.length - 1;
+  foot.innerHTML = `${idx>0?'<button class="sv-back" onclick="solve.studyTab=SV_STUDY_TABS[SV_STUDY_TABS.indexOf(solve.studyTab)-1];renderSolve()">&larr; Back</button>':'<span></span>'}
+    <button class="sv-next" onclick="${last?'solvePhaseNext()':"solve.studyTab=SV_STUDY_TABS[SV_STUDY_TABS.indexOf(solve.studyTab)+1];renderSolve()"}">${last?t('sv.finishedCollecting'):t('sv.continue')} &rarr;</button>`;
 }
 
 function svExhibitHTML(ex, collectible) {
@@ -4094,6 +4162,35 @@ function svExhibitHTML(ex, collectible) {
     h += '</tr>';
   });
   return h + '</tbody></table></div>';
+}
+
+// Multi-series line chart (no bars) - used for Exhibit 1 (two population trajectories over time).
+function svLineChartSVG(ex) {
+  const W = 580, H = 250, padL = 54, padR = 16, padT = 18, padB = 40;
+  const plotW = W - padL - padR, plotH = H - padT - padB;
+  const cats = ex.categories, n = cats.length, slot = plotW/(n-1);
+  let svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(ex.title)}">`;
+  for (let i=0;i<=4;i++){
+    const v = ex.max*i/4, y = padT + plotH - (i/4)*plotH;
+    svg += `<line x1="${padL}" y1="${y.toFixed(1)}" x2="${W-padR}" y2="${y.toFixed(1)}" stroke="var(--sv-line-soft)" stroke-width="1"/>`;
+    svg += `<text x="${padL-8}" y="${(y+4).toFixed(1)}" text-anchor="end" font-size="9.5" fill="var(--on-dark-soft)">${Math.round(v).toLocaleString()}</text>`;
+  }
+  cats.forEach((cat,i) => {
+    const x = padL + i*slot;
+    svg += `<text x="${x.toFixed(1)}" y="${(H-padB+15).toFixed(1)}" text-anchor="middle" font-size="10" fill="var(--on-dark-soft)">${esc(cat)}</text>`;
+  });
+  ex.series.forEach((s, si) => {
+    const pts = s.values.map((v,i) => ({ x: padL+i*slot, y: padT+plotH-(Math.min(v,ex.max)/ex.max)*plotH, v }));
+    const d = pts.map((p,i)=>`${i?'L':'M'}${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' ');
+    svg += `<path d="${d}" fill="none" stroke="${s.color}" stroke-width="2.4"/>`;
+    pts.forEach((p) => {
+      svg += `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="3.2" fill="${s.color}"/>`;
+      const above = si === 0; // first series' labels always above its line, second always below - avoids collision where both series share a value (e.g. Year 0)
+      const ly = above ? p.y-19 : p.y+8;
+      svg += `<g><rect x="${(p.x-26).toFixed(1)}" y="${(ly-11).toFixed(1)}" width="52" height="15" rx="3" fill="var(--surface-dark-elevated)" stroke="var(--sv-line)"/><text x="${p.x.toFixed(1)}" y="${(ly).toFixed(1)}" text-anchor="middle" font-size="9" font-weight="700" fill="${s.color}">${p.v.toLocaleString()}</text></g>`;
+    });
+  });
+  return svg + '</svg>';
 }
 
 function renderSolveAnalysis(inner, foot) {
@@ -4278,7 +4375,7 @@ function renderReportVisual(inner, foot) {
     `<div class="sv-buildrow"><label>${esc(bar.label)}</label>
       <input inputmode="decimal" id="sv-${bar.id}" value="${esc(solve.answers[bar.id]||'')}"
         oninput="solve.answers['${bar.id}']=this.value; svVisualRefresh();">
-      <span class="un">k fish</span></div>`).join('');
+      <span class="un">${esc(v.unit||'k fish')}</span></div>`).join('');
   inner.innerHTML = `${svReportNav()}
     <div class="sv-q-label">Report \u00b7 Visual Report \u2014 ${chosen.charAt(0).toUpperCase()+chosen.slice(1)} chart</div>
     <div class="sv-q-text">${esc(v.prompt)}</div>
@@ -4293,8 +4390,8 @@ function renderReportVisual(inner, foot) {
 }
 
 // --- combo bar + line chart (two axes), then pick-best-type ---
-function svComboChartSVG() {
-  const c = SOLVE_CASE.report.combo;
+function svComboChartSVG(dataOverride) {
+  const c = dataOverride || SOLVE_CASE.report.combo;
   const W = 580, H = 250, padL = 46, padR = 46, padT = 18, padB = 40;
   const plotW = W - padL - padR, plotH = H - padT - padB;
   const cats = c.categories, n = cats.length;
@@ -4473,7 +4570,7 @@ function solveFinish() {
     push('Report \u00b7 Written Report', (b.pre||'').slice(-40) || b.id, ok, solve.answers[b.id], String(b.ans)); });
   // report - Visual Report (bars the user entered)
   SOLVE_CASE.report.visual.bars.forEach(bar => { total++; const ok = svCheck(bar.ans, solve.answers[bar.id]); if(ok)correct++;
-    push('Report \u00b7 Visual Report', bar.label, ok, solve.answers[bar.id], String(bar.ans)+' k fish'); });
+    push('Report \u00b7 Visual Report', bar.label, ok, solve.answers[bar.id], String(bar.ans)+' '+(SOLVE_CASE.report.visual.unit||'k fish')); });
   // report - best chart type
   total++; const gOk = solve.answers.graph === SOLVE_CASE.report.correct; if(gOk)correct++;
   push('Report \u00b7 Graph Selection', 'Best chart type', gOk, solve.answers.graph, SOLVE_CASE.report.correct+' chart');
