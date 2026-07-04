@@ -893,6 +893,10 @@
     .bcg-text-input { resize: none; min-height: 48px; }
     .bcg-send { padding: 0 22px; border: none; border-radius: 12px; background: var(--accent-teal); color: #fff; font-weight: 600; font-size: 14px; cursor: pointer; flex-shrink: 0; }
     .bcg-send:disabled { opacity: .4; cursor: not-allowed; }
+    .bcg-mic-row { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+    .bcg-mic-btn { border: 1px solid var(--sv-line); background: var(--sv-fill); color: var(--on-dark); border-radius: 10px; padding: 7px 14px; font-size: 13px; font-weight: 600; cursor: pointer; }
+    .bcg-mic-btn:disabled { opacity: .5; cursor: not-allowed; }
+    .bcg-mic-status { font-size: 12.5px; color: var(--on-dark-soft); }
     .bcg-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
     @media (max-width: 560px) { .bcg-options { grid-template-columns: 1fr; } }
     .bcg-opt { display: flex; gap: 11px; align-items: flex-start; padding: 13px 14px; border-radius: 12px; border: 1.5px solid rgba(255,255,255,.12); background: var(--surface-dark-soft); cursor: pointer; font-size: 13.5px; line-height: 1.45; color: var(--on-dark); transition: border-color .15s, background .15s; }
@@ -1190,6 +1194,15 @@
     .sv-journal-empty { font-size: 13px; color: var(--on-dark-soft); line-height: 1.6; border: 1.5px dashed var(--sv-line-soft); border-radius: 10px; padding: 22px 14px; text-align: center; }
     .sv-journal-list { display: flex; flex-direction: column; gap: 8px; }
     .sv-jchip { background: rgba(93,184,166,.12); border: 1px solid rgba(93,184,166,.4); color: var(--on-dark); border-radius: 8px; padding: 8px 12px; font-size: 13.5px; font-weight: 600; cursor: grab; touch-action: none; display: flex; align-items: center; justify-content: space-between; }
+    .sv-jcard { border: 1px solid var(--sv-line-soft); border-radius: 8px; overflow: hidden; }
+    .sv-jhead { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 8px; background: transparent; border: none; padding: 9px 11px; font-size: 13px; font-weight: 600; color: var(--on-dark); cursor: pointer; text-align: left; }
+    .sv-jhead:hover { background: rgba(93,184,166,.08); }
+    .sv-jlabel { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .sv-jchevron { flex-shrink: 0; color: var(--on-dark-soft); transition: transform .15s; }
+    .sv-jcard.open .sv-jchevron { transform: rotate(180deg); }
+    .sv-jbody { display: none; padding: 0 11px 11px; }
+    .sv-jcard.open .sv-jbody { display: block; }
+    .sv-chip-sec { margin-left: 10px; vertical-align: middle; font-size: 11px; padding: 3px 8px; font-weight: 600; letter-spacing: .02em; }
     .sv-inp.sv-drop-active, .sv-numin.sv-drop-active, .sv-buildrow input.sv-drop-active { border-color: var(--accent-teal); box-shadow: 0 0 0 2px rgba(93,184,166,.3); background: rgba(93,184,166,.08); }
     .sv-qual { background: var(--sv-fill); border: 1px solid var(--sv-line); color: var(--on-dark); border-radius: 8px; padding: 6px 10px; font-size: 13.5px; font-weight: 600; min-width: 110px; }
     .sv-qual-inline { min-width: 90px; margin: 0 2px; padding: 3px 8px; font-size: 14px; }
@@ -2683,7 +2696,11 @@ const I18N = {
     'sv.nextCase': 'Next case', 'sv.submitResults': 'Submit & see results', 'sv.of': 'of',
     'sv.continue': 'Continue', 'sv.investigation': 'Investigation', 'sv.directions': 'Directions',
     'sv.objective': 'Objective', 'sv.studyInfo': 'Study Information', 'sv.exhibit1': 'Exhibit 1', 'sv.exhibit2': 'Exhibit 2',
+    'sv.dragToCollect': 'Drag to collect',
     'bcg.exitGame': 'Exit Game', 'bcg.send': 'Send', 'bcg.enterText': 'Enter Your Text',
+    'bcg.recordAnswer': 'Record answer', 'bcg.stopRecording': 'Stop recording', 'bcg.transcribing': 'Transcribing\u2026',
+    'bcg.transcribed': 'Transcribed \u2014 edit the text below if needed', 'bcg.transcribeFailed': 'Couldn\u2019t transcribe \u2014 please type your answer instead',
+    'bcg.micDenied': 'Microphone access denied \u2014 please type your answer instead', 'bcg.micUnsupported': 'Voice recording isn\u2019t supported in this browser \u2014 please type your answer',
     'bcg.enterNumber': 'Enter a number', 'bcg.confirm': 'Confirm', 'bcg.selectAll': 'Choose any number of options from above',
     'bcg.chooseOne': 'Choose one option from above', 'bcg.wordCount': 'Word Count',
     'legal.privTitle': 'Privacy Policy', 'legal.termsTitle': 'Terms of Service',
@@ -2915,7 +2932,11 @@ const I18N = {
     'sv.nextCase': 'Следующий кейс', 'sv.submitResults': 'Завершить и увидеть результат', 'sv.of': 'из',
     'sv.continue': 'Далее', 'sv.investigation': 'Исследование', 'sv.directions': 'Указания',
     'sv.objective': 'Цель', 'sv.studyInfo': 'Информация', 'sv.exhibit1': 'Эксгибит 1', 'sv.exhibit2': 'Эксгибит 2',
+    'sv.dragToCollect': 'Перетащи, чтобы собрать',
     'bcg.exitGame': 'Выйти', 'bcg.send': 'Отправить', 'bcg.enterText': 'Введите текст',
+    'bcg.recordAnswer': 'Записать ответ', 'bcg.stopRecording': 'Остановить запись', 'bcg.transcribing': 'Расшифровываю\u2026',
+    'bcg.transcribed': 'Расшифровано \u2014 при необходимости поправь текст', 'bcg.transcribeFailed': 'Не удалось распознать \u2014 введи ответ текстом',
+    'bcg.micDenied': 'Доступ к микрофону запрещён \u2014 введи ответ текстом', 'bcg.micUnsupported': 'Запись голоса не поддерживается в этом браузере \u2014 введи ответ текстом',
     'bcg.enterNumber': 'Введите число', 'bcg.confirm': 'Подтвердить', 'bcg.selectAll': 'Выберите любое число вариантов выше',
     'bcg.chooseOne': 'Выберите один вариант выше', 'bcg.wordCount': 'Слов',
     'legal.privTitle': 'Политика конфиденциальности', 'legal.termsTitle': 'Условия использования',
@@ -3534,7 +3555,11 @@ function bcgRenderWidget(step) {
   } else if (step.widget === 'text') {
     zone.innerHTML = `<div class="bcg-text-row">
       <textarea id="bcgIn" class="bcg-text-input" placeholder="${t('bcg.enterText')}" rows="2"></textarea>
-      <button class="bcg-send" id="bcgSend" onclick="bcgSubmit()">${t('bcg.send')}</button></div>`;
+      <button class="bcg-send" id="bcgSend" onclick="bcgSubmit()">${t('bcg.send')}</button></div>
+      ${step.isRec ? `<div class="bcg-mic-row">
+        <button class="bcg-mic-btn" id="bcgMicBtn" onclick="bcgMicToggle()">\u{1F3A4} ${t('bcg.recordAnswer')}</button>
+        <span class="bcg-mic-status" id="bcgMicStatus"></span>
+      </div>` : ''}`;
     document.getElementById('bcgIn').focus();
   } else if (step.widget === 'select-all' || step.widget === 'single') {
     const multi = step.widget === 'select-all';
@@ -3547,6 +3572,95 @@ function bcgRenderWidget(step) {
 function bcgToggleOpt(el, multi) {
   if (!multi) el.parentElement.querySelectorAll('.bcg-opt').forEach(o=>{ if(o!==el) o.classList.remove('sel'); });
   el.classList.toggle('sel');
+}
+
+/* ── Voice answer (final recommendation step only) ──────────────────────
+   Records via MediaRecorder, sends the clip to /api/transcribe, and drops
+   the returned text straight into the existing #bcgIn textarea - the send/
+   grading path below is completely unchanged either way. If the mic is
+   denied or recording/transcription fails at any point, we fall back to
+   the plain textarea, which is already visible and usable. */
+let bcgMic = null; // { recorder, chunks, stream, startMs, timerId }
+const BCG_MIC_MAX_SECONDS = 150;
+
+async function bcgMicToggle() {
+  if (bcgMic) { bcgMicStop(); return; }
+  const statusEl = document.getElementById('bcgMicStatus');
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || typeof MediaRecorder === 'undefined') {
+    if (statusEl) statusEl.textContent = t('bcg.micUnsupported');
+    return;
+  }
+  let stream;
+  try {
+    stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  } catch (e) {
+    if (statusEl) statusEl.textContent = t('bcg.micDenied');
+    return; // textarea stays available - nothing else to do
+  }
+  const recorder = new MediaRecorder(stream);
+  const chunks = [];
+  recorder.ondataavailable = (e) => { if (e.data && e.data.size) chunks.push(e.data); };
+  recorder.onstop = () => bcgMicFinish(chunks, recorder.mimeType || 'audio/webm');
+  recorder.start();
+  bcgMic = { recorder, chunks, stream, startMs: Date.now(), timerId: null };
+  const btn = document.getElementById('bcgMicBtn');
+  if (btn) btn.textContent = '\u23F9 ' + t('bcg.stopRecording');
+  if (statusEl) statusEl.textContent = '0:00';
+  bcgMic.timerId = setInterval(() => {
+    if (!bcgMic) return;
+    const s = Math.floor((Date.now() - bcgMic.startMs) / 1000);
+    if (statusEl) statusEl.textContent = Math.floor(s/60) + ':' + String(s%60).padStart(2,'0');
+    if (s >= BCG_MIC_MAX_SECONDS) bcgMicStop(); // hard cap, matches server-side limit
+  }, 1000);
+}
+function bcgMicStop() {
+  if (!bcgMic) return;
+  clearInterval(bcgMic.timerId);
+  bcgMic.recorder.stop();
+  bcgMic.stream.getTracks().forEach(tr => tr.stop());
+  bcgMic = null;
+  const btn = document.getElementById('bcgMicBtn');
+  if (btn) { btn.textContent = '\u{1F3A4} ' + t('bcg.recordAnswer'); btn.disabled = true; }
+}
+async function bcgMicFinish(chunks, mimeType) {
+  const statusEl = document.getElementById('bcgMicStatus');
+  const btn = document.getElementById('bcgMicBtn');
+  if (!chunks.length) { if (btn) btn.disabled = false; return; }
+  if (statusEl) statusEl.textContent = t('bcg.transcribing');
+  try {
+    const blob = new Blob(chunks, { type: mimeType });
+    const b64 = await new Promise((resolve, reject) => {
+      const r = new FileReader();
+      r.onload = () => resolve(String(r.result).split(',')[1] || '');
+      r.onerror = () => reject(new Error('read failed'));
+      r.readAsDataURL(blob);
+    });
+    const text = await callTranscribe(b64, mimeType);
+    const ta = document.getElementById('bcgIn');
+    if (ta && text) { ta.value = text; ta.dispatchEvent(new Event('input', { bubbles: true })); }
+    if (statusEl) statusEl.textContent = text ? t('bcg.transcribed') : t('bcg.transcribeFailed');
+  } catch (e) {
+    if (statusEl) statusEl.textContent = t('bcg.transcribeFailed'); // textarea is untouched - candidate can just type instead
+  } finally {
+    if (btn) btn.disabled = false;
+  }
+}
+async function callTranscribe(base64Audio, mime) {
+  if (!sb) throw new Error('not signed in');
+  let { data } = await sb.auth.getSession();
+  let session = data && data.session;
+  const expSoon = session && session.expires_at && (session.expires_at * 1000 - Date.now() < 60000);
+  if (!session || expSoon) {
+    const r = await sb.auth.refreshSession();
+    session = (r && r.data && r.data.session) || session;
+  }
+  const token = session ? session.access_token : null;
+  const headers = { 'Content-Type': 'application/json' };
+  if (token) headers['Authorization'] = 'Bearer ' + token;
+  const resp = await fetch('/api/transcribe', { method: 'POST', headers, body: JSON.stringify({ audio: base64Audio, mime }) });
+  const data2 = await resp.json().catch(() => ({}));
+  if (!resp.ok) throw new Error((data2.error && data2.error.message) || 'Transcription failed');
+  return data2.text || '';
 }
 
 function bcgSubmit() {
@@ -3955,22 +4069,34 @@ function renderSolve() {
 
 /* ════════ Collectible data: drag-and-drop (pointer events = mouse+touch) + Research Journal ════════ */
 // Make a number into a draggable chip. Tap = collect to journal + fill active field. Drag = drop onto a field.
-function svChip(val) {
+function svChip(val, label) {
   const v = String(val);
-  return `<span class="sv-chip" data-val="${esc(v)}" onpointerdown="svChipDown(event,'${esc(v)}')">${esc(v)}</span>`;
+  const l = label ? String(label) : '';
+  return `<span class="sv-chip" data-val="${esc(v)}" data-label="${esc(l)}" onpointerdown="svChipDownEl(event)">${esc(v)}</span>`;
+}
+// For dragging a whole block of text (e.g. Directions/Objective) under a short visible label,
+// where the dragged value itself may contain quotes/apostrophes/newlines - unsafe to inline as a
+// JS-string literal, so the payload travels via data-* attributes instead.
+function svChipText(display, fullVal, label) {
+  return `<span class="sv-chip sv-chip-sec" data-val="${esc(String(fullVal))}" data-label="${esc(label||'')}" onpointerdown="svChipDownEl(event)">${esc(display)}</span>`;
+}
+function svChipDownEl(e) {
+  const src = e.currentTarget;
+  svChipDown(e, src.dataset.val, src.dataset.label);
 }
 let svDrag = null;
-function svChipDown(e, val) {
+function svChipDown(e, val, label) {
+  label = label || '';
   if (e.button === 1 || e.button === 2) return;
   if (e.preventDefault) e.preventDefault();
   const src = e.currentTarget || (e.target && e.target.closest && e.target.closest('.sv-chip, .sv-jchip'));
-  if (!src) { svCollect(val); return; }
+  if (!src) { svCollect(val, label); return; }
   const ghost = src.cloneNode(true);
   ghost.classList.add('sv-dragging');
   ghost.style.left = (e.clientX - 20) + 'px';
   ghost.style.top = (e.clientY - 14) + 'px';
   document.body.appendChild(ghost);
-  svDrag = { val, ghost, src, moved: false, startX: e.clientX, startY: e.clientY };
+  svDrag = { val, label, ghost, src, moved: false, startX: e.clientX, startY: e.clientY };
   try { src.setPointerCapture && e.pointerId != null && src.setPointerCapture(e.pointerId); } catch (err) {}
   const move = (ev) => {
     if (!svDrag) return;
@@ -3991,9 +4117,9 @@ function svChipDown(e, val) {
     const field = t && t.closest && t.closest('input.sv-inp, input.sv-numin, .sv-buildrow input');
     const journal = t && t.closest && t.closest('.sv-journal');
     if (svDrag.moved && field) {
-      svFillField(field, svDrag.val);      // dropped on an answer field
+      svFillField(field, svDrag.val, svDrag.label);      // dropped on an answer field
     } else if (svDrag.moved && journal) {
-      svCollect(svDrag.val);               // dropped on the Research Journal panel
+      svCollect(svDrag.val, svDrag.label);               // dropped on the Research Journal panel
     }
     // No-move taps do nothing now - collecting requires an actual drag,
     // matching the real McKinsey Solve mechanic (drag to journal or drag to field).
@@ -4004,23 +4130,29 @@ function svChipDown(e, val) {
   window.addEventListener('pointermove', move);
   window.addEventListener('pointerup', up);
 }
-function svFillField(field, val) {
+function svFillField(field, val, label) {
   field.value = val;
   field.dispatchEvent(new Event('input', { bubbles: true }));
-  svCollect(val);
+  svCollect(val, label);
 }
-function svCollect(val) {
+function svCollect(val, label) {
   if (!solve.journal) solve.journal = [];
-  if (!solve.journal.includes(val)) solve.journal.push(val);
+  if (!solve.journal.some(j => (j.val!==undefined?j.val:j) == val)) solve.journal.push({ val, label: label || '' });
   svRenderJournal();
 }
 function svRenderJournal() {
   const el = document.getElementById('svJournal');
   if (!el) return;
-  const j = solve.journal || [];
+  const j = (solve.journal || []).map(entry => typeof entry === 'object' ? entry : { val: entry, label: '' }); // tolerate legacy string entries
   el.innerHTML = `<div class="sv-journal-t">${t('sv.journal')}</div>` +
-    (j.length ? `<div class="sv-journal-list">` + j.map(v =>
-      `<span class="sv-jchip" onpointerdown="svChipDown(event,'${esc(String(v))}')">${esc(String(v))}</span>`).join('') + `</div>`
+    (j.length ? `<div class="sv-journal-list">` + j.map((entry,i) => `
+      <div class="sv-jcard">
+        <button class="sv-jhead" onclick="this.parentElement.classList.toggle('open')">
+          <span class="sv-jlabel">${esc(entry.label || String(entry.val))}</span>
+          <span class="sv-jchevron">\u2304</span>
+        </button>
+        <div class="sv-jbody"><span class="sv-jchip" data-val="${esc(String(entry.val))}" data-label="${esc(entry.label||'')}" onpointerdown="svChipDownEl(event)">${esc(String(entry.val))}</span></div>
+      </div>`).join('') + `</div>`
     : `<div class="sv-journal-empty">Drag any highlighted number here to collect it, or drag it straight into an answer box.</div>`);
 }
 
@@ -4067,7 +4199,7 @@ function svCalcLogResult(expr, out) {
   const log = document.getElementById('svCalcLog');
   if (!log) return;
   log.innerHTML = solve.calcLog.map(r =>
-    `<div class="sv-calc-logrow"><span>${esc(r.expr)} =</span><span class="r" onpointerdown="svChipDown(event,'${esc(r.out)}')">${esc(r.out)}</span></div>`).join('');
+    `<div class="sv-calc-logrow"><span>${esc(r.expr)} =</span><span class="r" data-val="${esc(r.out)}" data-label="${esc(r.expr)} =" onpointerdown="svChipDownEl(event)">${esc(r.out)}</span></div>`).join('');
 }
 function svCalcInitDrag(panel) {
   const head = document.getElementById('svCalcHead');
@@ -4111,13 +4243,17 @@ function renderSolveStudy(inner, foot) {
   let content = '';
 
   if (solve.studyTab === 'directions') {
-    content = `<h2 class="sv-h">${t('sv.directions')}</h2><p class="sv-sub">${esc(s.directions).replace(/\n\n/g,'</p><p class="sv-sub">')}</p>`;
+    content = `<h2 class="sv-h">${t('sv.directions')}
+        ${svChipText('\u2807\u2807 '+t('sv.dragToCollect'), s.directions, t('sv.directions'))}</h2>
+      <p class="sv-sub">${esc(s.directions).replace(/\n\n/g,'</p><p class="sv-sub">')}</p>`;
   } else if (solve.studyTab === 'objective') {
-    content = `<h2 class="sv-h">${t('sv.objective')}</h2><div class="sv-obj-box">${esc(s.objective)}</div>`;
+    content = `<h2 class="sv-h">${t('sv.objective')}
+        ${svChipText('\u2807\u2807 '+t('sv.dragToCollect'), s.objective, t('sv.objective'))}</h2>
+      <div class="sv-obj-box">${esc(s.objective)}</div>`;
   } else if (solve.studyTab === 'studyinfo') {
     let prose = '';
     s.blanks.forEach(b => {
-      prose += esc(b.pre) + `<input class="sv-inp" id="sv-${b.id}" inputmode="numeric" value="${solve.answers[b.id]||''}" oninput="solve.answers['${b.id}']=this.value">` + esc(b.post);
+      prose += esc(b.pre) + svChip(b.ans, b.label) + esc(b.post);
     });
     content = `<h2 class="sv-h">${t('sv.studyInfo')}</h2><div class="sv-prose">${prose}</div>
       ${svHint('<b>Collect everything.</b> Drag every highlighted number into your Research Journal \u2014 it costs nothing and you\u2019ll have the data ready when the questions come.')}`;
@@ -4154,10 +4290,12 @@ function svExhibitHTML(ex, collectible) {
   h += `</tr></thead><tbody>`;
   ex.rows.forEach(r => {
     h += '<tr>';
+    const rowLabel = String(r[0]);
     r.forEach((c,i) => {
-      if (i === 0) { h += `<td>${esc(String(c))}</td>`; return; }
+      if (i === 0) { h += `<td>${esc(rowLabel)}</td>`; return; }
       const isNum = collectible && c !== 'n/a' && String(c).trim() !== '' && !isNaN(parseFloat(c));
-      h += isNum ? `<td class="num">${svChip(c)}</td>` : `<td class="num">${esc(String(c))}</td>`;
+      const cellLabel = `${rowLabel} \u2014 ${ex.head[i]}`;
+      h += isNum ? `<td class="num">${svChip(c, cellLabel)}</td>` : `<td class="num">${esc(String(c))}</td>`;
     });
     h += '</tr>';
   });
@@ -4559,9 +4697,7 @@ function solveFinish() {
   const push = (sec, label, ok, yours, correctTxt) => {
     (sections[sec] = sections[sec] || []).push(svReviewRow(label, ok, yours, correctTxt));
   };
-  // study blanks
-  SOLVE_CASE.study.blanks.forEach(b => { total++; const ok = svCheck(b.ans, solve.answers[b.id], false, b.tol); if(ok)correct++;
-    push('Study \u00b7 fill the figures', b.label || b.id, ok, solve.answers[b.id], String(b.ans)); });
+  // NOTE: Study Information numbers are given (drag-to-collect), not a fill-in quiz - not scored here.
   // analysis
   SOLVE_CASE.analysis.forEach((q,qi) => q.fields.forEach(f => { total++; const asText = f.isText || f.isQual; const ok = svCheck(f.ans, solve.answers[f.id], asText); if(ok)correct++;
     push('Analysis \u00b7 Q'+(qi+1), f.label, ok, solve.answers[f.id], String(f.ans)+(f.isQual||f.isText?'':' '+f.unit)); }));
