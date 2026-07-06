@@ -14,7 +14,7 @@
 
 
   <!-- CasEdge Design System tokens - inlined for portability -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%20%3Cpath%20d%3D%22M58%2024%20a30%2030%200%201%200%200%2052%22%20fill%3D%22none%22%20stroke%3D%22%235db8a6%22%20stroke-width%3D%2213%22%20stroke-linecap%3D%22round%22/%3E%20%3Ctext%20x%3D%2262%22%20y%3D%2268%22%20font-family%3D%22Georgia%2C%20%27Times%20New%20Roman%27%2C%20serif%22%20font-style%3D%22italic%22%20font-size%3D%2252%22%20font-weight%3D%22500%22%20fill%3D%22%23cc785c%22%3Ee%3C/text%3E%20%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%20%3Cpath%20d%3D%22M58%2024%20a30%2030%200%201%200%200%2052%22%20fill%3D%22none%22%20stroke%3D%22%235db8a6%22%20stroke-width%3D%2213%22%20stroke-linecap%3D%22round%22/%3E%20%3Ctext%20x%3D%2262%22%20y%3D%2268%22%20font-family%3D%22Georgia%2C%20%27Times%20New%20Roman%27%2C%20serif%22%20font-style%3D%22italic%22%20font-size%3D%2252%22%20font-weight%3D%22500%22%20fill%3D%22%235db8a6%22%3Ee%3C/text%3E%20%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -22,7 +22,7 @@
   <style>
     /* CasEdge DS - Colors */
     :root {
-      --coral: #cc785c; --coral-active: #a9583e; --coral-disabled: #e6dfd8;
+      --coral: #5db8a6; --coral-active: #3f8f7e; --coral-disabled: #dbe7e3;
       --accent-teal: #5db8a6; --accent-amber: #e8a55a;
       --canvas: #faf9f5; --surface-soft: #f5f0e8; --surface-card: #efe9de;
       --surface-cream-strong: #e8e0d2;
@@ -76,12 +76,6 @@
     [data-theme="light"] .msg-bbl .md-table td { border-color: rgba(31,41,55,.08); }
     [data-theme="light"] .feat-pill { border-color: rgba(31,41,55,.12); color: rgba(31,41,55,.5); }
     [data-theme="light"] .input-el { background: #fbf8f2; }
-    [data-theme="light"] .landing-screen,
-    [data-theme="light"] #screen-landing {
-      background:
-        radial-gradient(ellipse 75% 55% at 50% -8%, rgba(204,120,92,.10) 0%, transparent 65%),
-        #f4efe6;
-    }
     /* Theme toggle button */
     .theme-toggle {
       background: transparent; border: none; cursor: pointer; padding: 8px;
@@ -108,7 +102,7 @@
       --container-max:1200px;
       --shadow-soft:0 1px 3px rgba(20,20,19,.08);
       --shadow-card-hover:0 4px 16px rgba(20,20,19,.08);
-      --ring-coral:0 0 0 3px rgba(204,120,92,.15);
+      --ring-coral:0 0 0 3px rgba(93,184,166,.15);
     }
     /* ══════════ GAME INTRO SCREENS ══════════ */
     #screen-gameintro { min-height: 100vh; min-height: 100dvh; background: var(--surface-dark); flex-direction: column; }
@@ -370,7 +364,7 @@
       border-radius: 9px; padding: 10px; cursor: pointer; font-family: inherit; font-size: 14px;
       color: var(--on-dark); transition: all .2s;
     }
-    .lang-opt.sel { border-color: var(--coral); background: rgba(204,120,92,.1); color: var(--coral); }
+    .lang-opt.sel { border-color: var(--coral); background: rgba(93,184,166,.1); color: var(--coral); }
     .lang-modal .lm-close {
       margin-top: 20px; width: 100%; background: var(--coral); color: #fff; border: none;
       border-radius: 9px; padding: 11px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: inherit;
@@ -414,7 +408,7 @@
     .info-lead { font-size: 17px; line-height: 1.7; color: var(--on-dark-soft); margin-bottom: 36px; }
     .info-note {
       font-size: 13px; color: var(--on-dark-soft); margin-top: 36px; padding: 14px 16px;
-      background: rgba(204,120,92,.08); border-radius: 10px; border: 1px solid rgba(204,120,92,.15);
+      background: rgba(93,184,166,.08); border-radius: 10px; border: 1px solid rgba(93,184,166,.15);
       line-height: 1.5;
     }
     .faq-list { display: flex; flex-direction: column; gap: 4px; }
@@ -430,10 +424,10 @@
       border-radius: var(--radius-lg); text-decoration: none; transition: border-color .2s, transform .2s;
     }
     [data-theme="light"] .contact-card { border-color: rgba(31,41,55,.10); }
-    .contact-card:hover { border-color: rgba(204,120,92,.35); transform: translateY(-2px); }
+    .contact-card:hover { border-color: rgba(93,184,166,.35); transform: translateY(-2px); }
     .contact-ic {
       width: 42px; height: 42px; border-radius: 10px; flex-shrink: 0;
-      background: rgba(204,120,92,.12); color: var(--coral);
+      background: rgba(93,184,166,.12); color: var(--coral);
       display: flex; align-items: center; justify-content: center;
     }
     .contact-ic svg { width: 22px; height: 22px; }
@@ -453,13 +447,13 @@
     [data-theme="light"] .cookie-banner { border-color: rgba(31,41,55,.14); box-shadow: 0 12px 40px rgba(31,41,55,.15); }
     .cookie-banner.show { display: flex; animation: fadeUp .4s ease both; }
     .cookie-text { font-size: 13px; color: var(--on-dark-soft); line-height: 1.5; flex: 1; min-width: 220px; }
-    .cookie-text a { color: var(--coral); cursor: pointer; text-decoration: underline; }
+    .cookie-text a { color: #5db8a6; cursor: pointer; text-decoration: underline; }
     .cookie-btn {
-      background: var(--coral); color: #fff; border: none; border-radius: 9px;
+      background: #5db8a6; color: #04201b; border: none; border-radius: 9px;
       padding: 9px 20px; font-size: 14px; font-weight: 500; cursor: pointer; font-family: inherit;
       white-space: nowrap;
     }
-    .cookie-btn:hover { filter: brightness(1.06); }
+    .cookie-btn:hover { background: #3f8f7e; filter: none; }
     .cookie-actions { display: flex; gap: 8px; flex-shrink: 0; }
     .cookie-btn-ghost {
       background: transparent; color: var(--on-dark-soft);
@@ -509,7 +503,7 @@
     .btn-primary { background: var(--coral); color: #fff; padding: 13px 26px; font-size: 15px; }
     .btn-primary:hover:not(:disabled) { background: var(--coral-active); transform: translateY(-1px); }
     .btn-primary:active:not(:disabled) { transform: translateY(0); }
-    .btn-primary:disabled { background: rgba(204,120,92,.22); color: rgba(255,255,255,.3); }
+    .btn-primary:disabled { background: rgba(93,184,166,.22); color: rgba(255,255,255,.3); }
     .btn-ghost { background: transparent; color: var(--on-dark-soft); font-size: 14px; padding: 8px 14px; }
     .btn-ghost:hover { color: var(--on-dark); background: rgba(255,255,255,.05); }
     .btn-outline {
@@ -525,7 +519,7 @@
       border-radius: var(--radius-pill); white-space: nowrap;
     }
     .pill-neutral { background: rgba(255,255,255,.06); color: var(--on-dark-soft); border: 1px solid rgba(255,255,255,.08); }
-    .pill-coral   { background: rgba(204,120,92,.15); color: var(--coral); border: 1px solid rgba(204,120,92,.2); }
+    .pill-coral   { background: rgba(93,184,166,.15); color: var(--coral); border: 1px solid rgba(93,184,166,.2); }
 
     /* ── Form inputs ──────────────────────────────────── */
     .input-wrap { display: flex; flex-direction: column; gap: 6px; }
@@ -537,16 +531,14 @@
       color: var(--on-dark); outline: none; transition: border-color .18s, box-shadow .18s;
     }
     .input-el::placeholder { color: rgba(255,255,255,.2); }
-    .input-el:focus { border-color: var(--coral); box-shadow: 0 0 0 3px rgba(204,120,92,.12); }
+    .input-el:focus { border-color: var(--coral); box-shadow: 0 0 0 3px rgba(93,184,166,.12); }
 
     /* ══════════════════════════════════════════════════
        LANDING
     ══════════════════════════════════════════════════ */
     #screen-landing {
       position: relative;
-      background:
-        radial-gradient(ellipse 75% 55% at 50% -8%, rgba(204,120,92,.14) 0%, transparent 65%),
-        var(--surface-dark);
+      background: #faf9f5; /* fixed design canvas - landing has a single theme */
     }
     .landing-main {
       flex: 1; display: flex; flex-direction: column; align-items: center;
@@ -604,16 +596,11 @@
     .hero-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; pointer-events: none; z-index: 1; opacity: 0; transition: opacity 1.2s ease; }
     .hero-canvas.ready { opacity: 0.62; }
     [data-theme="light"] .hero-canvas.ready { opacity: 0.5; }
-    /* Dimming veil between the crystal (z-index 1) and the landing content (z-index 2).
-       Keeps text contrast without washing the crystal out - light touch only. */
-    .hero-scrim { position: fixed; inset: 0; z-index: 1; pointer-events: none;
-      background: radial-gradient(ellipse 60% 45% at 50% 40%, rgba(10,11,15,.38) 0%, rgba(10,11,15,.15) 50%, transparent 78%); }
-    [data-theme="light"] .hero-scrim { background: radial-gradient(ellipse 60% 45% at 50% 40%, rgba(250,249,245,.4) 0%, rgba(250,249,245,.16) 50%, transparent 78%); }
-    body.in-app .hero-canvas, body.in-app .hero-scrim { opacity: 0 !important; visibility: hidden; pointer-events: none; }
+    body.in-app .hero-canvas { opacity: 0 !important; visibility: hidden; pointer-events: none; }
     .landing-main { position: relative; z-index: 2; }
     .ambient-bg span {
       position: absolute; border-radius: 50%; filter: blur(60px); opacity: .5;
-      background: radial-gradient(circle, rgba(204,120,92,.5), transparent 70%);
+      background: radial-gradient(circle, rgba(93,184,166,.5), transparent 70%);
       animation: drift 18s ease-in-out infinite;
     }
     .ambient-bg span:nth-child(1) { width: 340px; height: 340px; top: 8%; left: -6%; }
@@ -636,8 +623,8 @@
       will-change: transform;
     }
     .ls-card:hover {
-      box-shadow: 0 18px 50px rgba(0,0,0,.35), 0 2px 8px rgba(204,120,92,.12);
-      border-color: rgba(204,120,92,.3);
+      box-shadow: 0 18px 50px rgba(0,0,0,.35), 0 2px 8px rgba(93,184,166,.12);
+      border-color: rgba(93,184,166,.3);
     }
     [data-theme="light"] .ls-card:hover { box-shadow: 0 18px 50px rgba(31,41,55,.12); }
     /* Story sections below the fold */
@@ -772,7 +759,7 @@
       display: flex; flex-direction: column; gap: 14px; outline: none;
     }
     .firm-card:hover { border-color: rgba(255,255,255,.18); transform: translateY(-2px); }
-    .firm-card.selected { border-color: var(--coral); background: rgba(204,120,92,.07); }
+    .firm-card.selected { border-color: var(--coral); background: rgba(93,184,166,.07); }
     .firm-card:focus-visible { box-shadow: 0 0 0 2px var(--coral); }
     .firm-initial {
       width: 46px; height: 46px; border-radius: var(--radius-md);
@@ -802,7 +789,7 @@
     .drill-icon {
       width: 44px; height: 44px; border-radius: var(--radius-md);
       display: flex; align-items: center; justify-content: center;
-      background: rgba(204,120,92,.12); color: var(--coral); flex-shrink: 0;
+      background: rgba(93,184,166,.12); color: var(--coral); flex-shrink: 0;
     }
     .drill-icon svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 1.8;
       fill: none; stroke-linecap: round; stroke-linejoin: round; }
@@ -815,7 +802,7 @@
       transition: border-color .18s, transform .18s, background .18s; outline: none;
     }
     .case-card:hover { border-color: rgba(255,255,255,.18); transform: translateY(-2px); }
-    .case-card.selected { border-color: var(--coral); background: rgba(204,120,92,.07); }
+    .case-card.selected { border-color: var(--coral); background: rgba(93,184,166,.07); }
     .case-card:focus-visible { box-shadow: 0 0 0 2px var(--coral); }
     .case-card.c-random { border-style: dashed; border-color: rgba(232,165,90,.28); }
     .case-card.c-random:hover { border-style: solid; border-color: var(--accent-amber); }
@@ -934,7 +921,7 @@
       width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
       display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600;
     }
-    .ai .msg-av   { background: rgba(204,120,92,.14); color: var(--coral); font-family: var(--font-display); }
+    .ai .msg-av   { background: rgba(93,184,166,.14); color: var(--coral); font-family: var(--font-display); }
     .user .msg-av { background: rgba(255,255,255,.07); color: var(--on-dark); }
     .msg-bbl {
       padding: 14px 18px; border-radius: 14px; font-size: 15px; line-height: 1.65;
@@ -948,7 +935,7 @@
       border: 1px solid rgba(255,255,255,.12); border-radius: 8px; overflow: hidden;
     }
     .msg-bbl .md-table th {
-      background: rgba(204,120,92,.14); color: var(--on-dark); font-weight: 600;
+      background: rgba(93,184,166,.14); color: var(--on-dark); font-weight: 600;
       text-align: left; padding: 9px 12px; border-bottom: 1px solid rgba(255,255,255,.12);
     }
     .msg-bbl .md-table td {
@@ -962,8 +949,8 @@
       border: 1px solid rgba(255,255,255,.07); border-top-left-radius: 4px;
     }
     .user .msg-bbl {
-      background: rgba(204,120,92,.16); color: var(--on-dark);
-      border: 1px solid rgba(204,120,92,.18); border-top-right-radius: 4px;
+      background: rgba(93,184,166,.16); color: var(--on-dark);
+      border: 1px solid rgba(93,184,166,.18); border-top-right-radius: 4px;
     }
     /* Typing indicator */
     .typing { display: none; align-self: flex-start; gap: 10px; animation: msgIn .26s ease both; }
@@ -1004,7 +991,7 @@
       border-radius: var(--radius-pill); background: rgba(255,255,255,.02);
       cursor: pointer; transition: all .15s;
     }
-    .hint-chip:hover { color: var(--coral); border-color: rgba(204,120,92,.35); background: rgba(204,120,92,.05); }
+    .hint-chip:hover { color: var(--coral); border-color: rgba(93,184,166,.35); background: rgba(93,184,166,.05); }
     .input-row { display: flex; gap: 10px; align-items: flex-end; }
     .chat-ta {
       flex: 1; background: rgba(255,255,255,.06);
@@ -1019,7 +1006,7 @@
     }
     [data-theme="light"] .chat-ta::placeholder { color: rgba(31,41,55,.4); }
     .chat-ta::placeholder { color: rgba(255,255,255,.18); }
-    .chat-ta:focus { border-color: var(--coral); box-shadow: 0 0 0 3px rgba(204,120,92,.1); }
+    .chat-ta:focus { border-color: var(--coral); box-shadow: 0 0 0 3px rgba(93,184,166,.1); }
     .send-btn {
       width: 44px; height: 44px; border-radius: var(--radius-md); color: white;
       background: var(--coral); border: none; cursor: pointer; flex-shrink: 0;
@@ -1033,7 +1020,7 @@
     ══════════════════════════════════════════════════ */
     #screen-feedback {
       background:
-        radial-gradient(ellipse 65% 48% at 50% -4%, rgba(204,120,92,.12) 0%, transparent 60%),
+        radial-gradient(ellipse 65% 48% at 50% -4%, rgba(93,184,166,.12) 0%, transparent 60%),
         var(--surface-dark);
     }
     .fb-body { flex: 1; padding: 56px 40px; max-width: 920px; margin: 0 auto; width: 100%; }
@@ -1262,168 +1249,625 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-<canvas id="heroCanvas" class="hero-canvas" aria-hidden="true"></canvas>
-<div class="hero-scrim" aria-hidden="true"></div>
 
 <!-- ═══════════════════════════════════════════════════
      LANDING
 ═══════════════════════════════════════════════════ -->
+<style>
+  /* ═════════════════════════════════════════════════════════════
+     CasEdge Landing - exact port of the Claude Design prototype.
+     ALL design tokens are defined ON #screen-landing (not :root),
+     hardcoded to the design's values, so the app-wide light/dark
+     theme toggle can never affect this screen. Single fixed theme.
+     ═════════════════════════════════════════════════════════════ */
+  #screen-landing {
+    /* ---- Brand & accent (teal remap from the design page) ---- */
+    --coral: #5db8a6;
+    --coral-active: #3f8f7e;
+    --coral-disabled: #dbe7e3;
+    --accent-teal: #5db8a6;
+    --accent-amber: #e8a55a;
+    /* ---- Cream surface ramp ---- */
+    --canvas: #faf9f5;
+    --surface-soft: #f5f0e8;
+    --surface-card: #efe9de;
+    --surface-cream-strong: #e8e0d2;
+    /* ---- Dark surface ramp ---- */
+    --surface-dark: #181715;
+    --surface-dark-elevated: #252320;
+    --surface-dark-soft: #1f1e1b;
+    /* ---- Hairlines ---- */
+    --hairline: #e6dfd8;
+    --hairline-soft: #ebe6df;
+    /* ---- Ink / text ramp ---- */
+    --ink: #141413;
+    --body-strong: #252523;
+    --body: #3d3d3a;
+    --muted: #6c6a64;
+    --muted-soft: #8e8b82;
+    /* ---- On-color text ---- */
+    --on-primary: #ffffff;
+    --on-dark: #faf9f5;
+    --on-dark-soft: #a09d96;
+    /* ---- Semantic ---- */
+    --success: #5db872;
+    --warning: #d4a017;
+    --error: #c64545;
+    /* ---- Semantic aliases ---- */
+    --color-primary: #5db8a6;
+    --color-primary-active: #3f8f7e;
+    --color-primary-disabled: #dbe7e3;
+    --bg-canvas: var(--canvas);
+    --bg-soft: var(--surface-soft);
+    --bg-card: var(--surface-card);
+    --bg-cream-strong: var(--surface-cream-strong);
+    --bg-elevated: #e8e0d2;
+    --bg-dark: var(--surface-dark);
+    --bg-dark-elevated: var(--surface-dark-elevated);
+    --bg-dark-soft: var(--surface-dark-soft);
+    --border-hairline: var(--hairline);
+    --border-hairline-soft: var(--hairline-soft);
+    --border-focus: #5db8a6;
+    --text-heading: var(--ink);
+    --text-body: var(--body);
+    --text-body-strong: var(--body-strong);
+    --text-muted: var(--muted);
+    --text-muted-soft: var(--muted-soft);
+    --text-on-primary: var(--on-primary);
+    --text-on-dark: var(--on-dark);
+    --text-on-dark-soft: var(--on-dark-soft);
+    --text-link: #3f8f7e;
+    --ring-coral: 0 0 0 3px rgba(93, 184, 166, 0.18);
+    /* ---- Typography tokens ---- */
+    --font-display: 'Newsreader', 'Tiempos Headline', Garamond, 'Times New Roman', serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --display-xl-size: 64px; --display-xl-ls: -1.5px; --display-xl-lh: 1.05;
+    --display-lg-size: 48px; --display-lg-ls: -1px;   --display-lg-lh: 1.1;
+    --display-md-size: 36px; --display-md-ls: -0.5px; --display-md-lh: 1.15;
+    --display-sm-size: 28px; --display-sm-ls: -0.3px; --display-sm-lh: 1.2;
+    --title-lg-size: 22px; --title-lg-lh: 1.3;
+    --title-md-size: 18px; --title-md-lh: 1.4;
+    --title-sm-size: 16px; --title-sm-lh: 1.4;
+    --body-md-size: 16px; --body-md-lh: 1.55;
+    --body-sm-size: 14px; --body-sm-lh: 1.55;
+    --caption-size: 13px; --caption-lh: 1.4;
+    --caption-up-size: 12px; --caption-up-ls: 1.5px; --caption-up-lh: 1.4;
+    --code-size: 14px; --code-lh: 1.6;
+    /* ---- Spacing, radii, elevation ---- */
+    --space-xxs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px;
+    --space-lg: 24px; --space-xl: 32px; --space-xxl: 48px; --space-section: 96px;
+    --radius-xs: 4px; --radius-sm: 6px; --radius-md: 8px;
+    --radius-lg: 12px; --radius-xl: 16px; --radius-pill: 9999px; --radius-full: 9999px;
+    --container-max: 1200px;
+    --shadow-soft: 0 1px 3px rgba(20, 20, 19, 0.08);
+    --shadow-card-hover: 0 4px 16px rgba(20, 20, 19, 0.08);
+  }
+  #screen-landing ::selection { background: rgba(93, 184, 166, 0.25); }
+  #screen-landing a { text-decoration: none; }
+
+  /* ---- Type role utility classes (design system, scoped) ---- */
+  #screen-landing .cas-display-xl { font-family: var(--font-display); font-weight: 400; font-size: var(--display-xl-size); line-height: var(--display-xl-lh); letter-spacing: var(--display-xl-ls); color: var(--text-heading); }
+  #screen-landing .cas-display-lg { font-family: var(--font-display); font-weight: 400; font-size: var(--display-lg-size); line-height: var(--display-lg-lh); letter-spacing: var(--display-lg-ls); color: var(--text-heading); }
+  #screen-landing .cas-display-md { font-family: var(--font-display); font-weight: 400; font-size: var(--display-md-size); line-height: var(--display-md-lh); letter-spacing: var(--display-md-ls); color: var(--text-heading); }
+  #screen-landing .cas-display-sm { font-family: var(--font-display); font-weight: 400; font-size: var(--display-sm-size); line-height: var(--display-sm-lh); letter-spacing: var(--display-sm-ls); color: var(--text-heading); }
+  #screen-landing .cas-title-lg { font-family: var(--font-sans); font-weight: 500; font-size: var(--title-lg-size); line-height: var(--title-lg-lh); color: var(--text-heading); }
+  #screen-landing .cas-title-md { font-family: var(--font-sans); font-weight: 500; font-size: var(--title-md-size); line-height: var(--title-md-lh); color: var(--text-heading); }
+  #screen-landing .cas-title-sm { font-family: var(--font-sans); font-weight: 500; font-size: var(--title-sm-size); line-height: var(--title-sm-lh); color: var(--text-heading); }
+  #screen-landing .cas-body-md { font-family: var(--font-sans); font-weight: 400; font-size: var(--body-md-size); line-height: var(--body-md-lh); color: var(--text-body); }
+  #screen-landing .cas-body-sm { font-family: var(--font-sans); font-weight: 400; font-size: var(--body-sm-size); line-height: var(--body-sm-lh); color: var(--text-body); }
+  #screen-landing .cas-caption { font-family: var(--font-sans); font-weight: 500; font-size: var(--caption-size); line-height: var(--caption-lh); }
+  #screen-landing .cas-caption-up { font-family: var(--font-sans); font-weight: 500; font-size: var(--caption-up-size); line-height: var(--caption-up-lh); letter-spacing: var(--caption-up-ls); text-transform: uppercase; }
+  #screen-landing .cas-code { font-family: var(--font-mono); font-weight: 400; font-size: var(--code-size); line-height: var(--code-lh); }
+
+  /* ---- Page layout (design page CSS, scoped + cl- prefixed) ---- */
+  #screen-landing .cl-container { max-width: var(--container-max); margin: 0 auto; padding: 0 64px; box-sizing: border-box; }
+  #screen-landing .cl-section { padding: var(--space-section) 0; }
+  #screen-landing .cl-narrative { padding: 110px 0; }
+  #screen-landing details.cl-faq summary { cursor: pointer; list-style: none; }
+  #screen-landing details.cl-faq summary::-webkit-details-marker { display: none; }
+  /* Reveal-on-scroll: hidden until the section is scrolled into view (IntersectionObserver adds .in) */
+  #screen-landing .cl-reveal { opacity: 0; transform: translateY(44px) scale(0.97); transition: opacity .7s ease, transform .7s ease; }
+  #screen-landing .cl-reveal.in { opacity: 1; transform: translateY(0) scale(1); }
+  @media (prefers-reduced-motion: reduce) { #screen-landing .cl-reveal { opacity: 1; transform: none; transition: none; } }
+  #screen-landing .cl-tilt-frame { perspective: 1400px; }
+  @media (max-width: 860px) {
+    #screen-landing .cl-container { padding: 0 24px; }
+    #screen-landing .cl-hero-grid, #screen-landing .cl-format-grid { grid-template-columns: 1fr !important; }
+    #screen-landing .cl-drills-grid, #screen-landing .cl-pricing-grid, #screen-landing .cl-stats-grid, #screen-landing .cl-library-hero { grid-template-columns: 1fr !important; }
+  }
+
+  /* ---- DS components as static CSS (exact values from Button/Badge/Card/CodeWindow JSX) ---- */
+  #screen-landing .ds-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    font-family: var(--font-sans); font-weight: 500; line-height: 1;
+    border-radius: var(--radius-md); border: 1px solid transparent; cursor: pointer;
+    transition: background-color .15s ease, border-color .15s ease;
+    text-decoration: none; white-space: nowrap; box-sizing: border-box;
+  }
+  #screen-landing .ds-btn-md { font-size: 14px; height: 40px; padding: 12px 20px; }
+  #screen-landing .ds-btn-lg { font-size: 15px; height: 48px; padding: 14px 24px; }
+  #screen-landing .ds-btn-primary { background: var(--color-primary); color: var(--text-on-primary); }
+  #screen-landing .ds-btn-primary:hover { background: var(--color-primary-active); }
+  #screen-landing .ds-btn-secondary { background: var(--bg-canvas); color: var(--text-heading); border-color: var(--border-hairline); }
+  #screen-landing .ds-btn-secondary:hover { background: var(--bg-soft); }
+  #screen-landing .ds-btn-text { background: transparent; color: var(--text-heading); padding: 0 4px; height: auto; }
+  #screen-landing .ds-btn-text.ds-on-dark { color: var(--text-on-dark); }
+  #screen-landing .ds-badge-coral {
+    display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-sans);
+    border-radius: var(--radius-pill); line-height: 1.4; white-space: nowrap;
+    background: var(--color-primary); color: var(--text-on-primary);
+    font-size: 12px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 12px;
+  }
+  #screen-landing .ds-card-outline {
+    background: var(--bg-canvas); color: var(--text-heading); border: 1px solid var(--border-hairline);
+    border-radius: var(--radius-lg); padding: var(--space-xl); font-family: var(--font-sans); box-sizing: border-box;
+  }
+  #screen-landing .ds-card-dark {
+    background: var(--bg-dark); color: var(--text-on-dark); border: none;
+    border-radius: var(--radius-lg); padding: var(--space-xl); font-family: var(--font-sans); box-sizing: border-box;
+  }
+  #screen-landing .ds-card-tilt { transform-style: preserve-3d; transition: transform .15s ease-out; will-change: transform; }
+  /* ---- Format previews: real product UI instead of code windows ---- */
+  #screen-landing .fp-win { background: var(--surface-dark-soft); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-lg); overflow: hidden; }
+  #screen-landing .fp-head { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  #screen-landing .fp-head-title { font-family: var(--font-sans); font-size: 13px; font-weight: 500; color: var(--on-dark-soft); }
+  #screen-landing .fp-head-meta { font-family: var(--font-sans); font-size: 12px; color: var(--on-dark-soft); }
+  #screen-landing .fp-live { color: #5db872; }
+  #screen-landing .fp-body { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+  #screen-landing .fp-journal-card { display: flex; flex-direction: column; gap: 3px; background: var(--surface-dark-elevated); border-left: 3px solid rgba(93,184,166,.45); border-radius: var(--radius-sm); padding: 10px 14px; }
+  #screen-landing .fp-jc-active { border-left-color: #5db8a6; box-shadow: 0 0 0 1px rgba(93,184,166,.18); }
+  #screen-landing .fp-jc-label { font-family: var(--font-sans); font-size: 11px; font-weight: 500; letter-spacing: .8px; text-transform: uppercase; color: var(--on-dark-soft); }
+  #screen-landing .fp-jc-value { font-family: var(--font-sans); font-size: 14px; font-weight: 500; color: var(--on-dark); }
+  #screen-landing .fp-msg { font-family: var(--font-sans); font-size: 14px; line-height: 1.5; padding: 10px 14px; border-radius: var(--radius-lg); max-width: 85%; }
+  #screen-landing .fp-msg-ai { background: var(--surface-dark-elevated); color: var(--on-dark); align-self: flex-start; border-bottom-left-radius: var(--radius-xs); }
+  #screen-landing .fp-msg-user { background: rgba(93,184,166,.14); border: 1px solid rgba(93,184,166,.3); color: var(--on-dark); align-self: flex-end; display: inline-flex; align-items: center; gap: 10px; border-bottom-right-radius: var(--radius-xs); }
+  #screen-landing .fp-mic { font-size: 14px; }
+  #screen-landing .fp-wave { display: inline-flex; align-items: center; gap: 2.5px; height: 16px; }
+  #screen-landing .fp-wave i { width: 2.5px; border-radius: 2px; background: #5db8a6; animation: fpWave 1.1s ease-in-out infinite; }
+  #screen-landing .fp-wave i:nth-child(1){height:6px;animation-delay:0s}#screen-landing .fp-wave i:nth-child(2){height:12px;animation-delay:.12s}#screen-landing .fp-wave i:nth-child(3){height:16px;animation-delay:.24s}#screen-landing .fp-wave i:nth-child(4){height:9px;animation-delay:.36s}#screen-landing .fp-wave i:nth-child(5){height:14px;animation-delay:.48s}#screen-landing .fp-wave i:nth-child(6){height:7px;animation-delay:.6s}#screen-landing .fp-wave i:nth-child(7){height:11px;animation-delay:.72s}
+  @keyframes fpWave { 0%,100% { transform: scaleY(.55); } 50% { transform: scaleY(1); } }
+  @media (prefers-reduced-motion: reduce) { #screen-landing .fp-wave i { animation: none; } }
+  #screen-landing .fp-rec-time { font-family: var(--font-mono); font-size: 12px; color: var(--on-dark-soft); }
+  /* our lang switcher, styled to blend with the design nav */
+  #screen-landing .cl-lang-btn {
+    background: var(--bg-canvas); color: var(--text-heading); border: 1px solid var(--border-hairline);
+    border-radius: var(--radius-md); font-family: var(--font-sans); font-weight: 500; font-size: 13px;
+    height: 34px; padding: 0 12px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;
+    transition: background-color .15s ease;
+  }
+  #screen-landing .cl-lang-btn:hover { background: var(--bg-soft); }
+  /* ---- Click feedback: cards are tappable and physically react ---- */
+  #screen-landing .cl-tap { cursor: pointer; transition: transform .18s cubic-bezier(.34,1.56,.64,1), box-shadow .18s ease; }
+  #screen-landing .cl-tap:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(20,20,19,.12); }
+  #screen-landing .cl-tap:active { transform: scale(.965); box-shadow: 0 2px 8px rgba(20,20,19,.10); }
+  /* ---- 3D idea-core canvases: fill the empty right half of dark sections, never over text ---- */
+  #screen-landing .cl-visual-host { position: absolute; top: 50%; right: 6%; transform: translateY(-50%); width: 40%; max-width: 500px; z-index: 0; pointer-events: none; overflow: hidden; border-radius: 8px; }
+  #screen-landing .cl-visual-host canvas.cl-webgl { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  #screen-landing .cl-visual-host.webgl-on .cl-visual-fallback { visibility: hidden; }
+  #screen-landing .cl-visual-host svg { width: 100%; height: auto; display: block; overflow: visible; }
+  @media (max-width: 860px) { #screen-landing .cl-visual-host { display: none; } }
+  @keyframes clBarGrow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+  @keyframes clLineDraw { from { stroke-dashoffset: 340; } to { stroke-dashoffset: 0; } }
+  @keyframes clDotPop { from { opacity: 0; transform: scale(0); } to { opacity: 1; transform: scale(1); } }
+  @keyframes clPyramidRise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  #screen-landing .cl-bar { transform-origin: bottom; transform-box: fill-box; animation: clBarGrow 1.1s cubic-bezier(.2,.8,.2,1) both; }
+  #screen-landing .cl-trend-line { stroke-dasharray: 340; animation: clLineDraw 1.6s ease-out .3s both; }
+  #screen-landing .cl-trend-dot { animation: clDotPop .4s ease-out both; }
+  #screen-landing .cl-pyr-block { animation: clPyramidRise .7s ease-out both; }
+  @media (prefers-reduced-motion: reduce) { #screen-landing .cl-bar, #screen-landing .cl-trend-line, #screen-landing .cl-trend-dot, #screen-landing .cl-pyr-block { animation: none; } }
+</style>
+
 <div id="screen-landing" class="screen active" data-screen-label="Landing">
-  <div class="ambient-bg" aria-hidden="true"><span></span><span></span><span></span></div>
-  <nav class="top-nav">
-    <span class="wordmark"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
-    <div style="display:flex;align-items:center;gap:6px;">
-      <div class="nav-menu">
-        <button class="nav-link" onclick="chooseMode('case')" data-i18n="nav.cases">Cases</button>
-        <button class="nav-link" onclick="chooseMode('drill')" data-i18n="nav.drills">Drills</button>
-        <button class="nav-link" onclick="goToProgress()" data-i18n="nav.progress">Progress</button>
-        <button class="nav-link" onclick="goToPage('pricing')" data-i18n="nav.pricing">Pricing</button>
+
+  <!-- NAV -->
+  <nav style="position:sticky; top:0; z-index:10; background:var(--bg-canvas); border-bottom:1px solid var(--border-hairline-soft);">
+    <div class="cl-container" style="display:flex; align-items:center; justify-content:space-between; height:76px;">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <svg viewBox="0 0 48 48" fill="none" width="26" height="26"><path d="M13 13 L25 24 L13 35" stroke="#5db8a6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M26 13 L38 24 L26 35" stroke="#141413" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        <span style="font-family:var(--font-display); font-size:22px; letter-spacing:-0.4px; color:var(--ink);">Cas<span style="color:#5db8a6;">Edge</span></span>
       </div>
-      <button class="lang-btn" onclick="openLangMenu()"><span class="lang-current">EN</span> ▾</button>
-      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" title="Switch light / dark">
-        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path></svg>
-      </button>
-      <button class="btn btn-ghost" onclick="handleSignIn()" data-i18n="common.signin">Sign in →</button>
+      <div class="cl-nav-links" style="display:flex; align-items:center; gap:36px;">
+        <a href="#cl-library" class="cas-body-sm" style="color:var(--text-heading);" data-i18n="l2.nav.features">Возможности</a>
+        <a href="#cl-formats" class="cas-body-sm" style="color:var(--text-heading);" data-i18n="l2.nav.formats">Форматы</a>
+        <a href="#cl-pricing" class="cas-body-sm" style="color:var(--text-heading);" data-i18n="l2.nav.pricing">Тарифы</a>
+        <a href="#cl-faq" class="cas-body-sm" style="color:var(--text-heading);">FAQ</a>
+      </div>
+      <div style="display:flex; align-items:center; gap:14px;">
+        <button class="cl-lang-btn" onclick="openLangMenu()"><span class="ui-lang-current">RU</span> ▾</button>
+        <button class="ds-btn ds-btn-md ds-btn-primary" onclick="handleBeginSession()" data-i18n="l2.nav.start">Начать</button>
+      </div>
     </div>
   </nav>
 
-  <main class="landing-main">
-    <div class="eyebrow" data-i18n="hero.eyebrow">MBB Interview Prep</div>
-
-    <h1 class="hero-hl" data-i18n-html="hero.title">Master the case.<br><em>Land the offer.</em></h1>
-
-    <p class="hero-sub" data-i18n="hero.sub">
-      Every case is built on real MBB casebooks - Wharton, Darden, Kellogg, Stern -
-      and the actual cases candidates were given in interviews.
-    </p>
-
-    <div class="stats-row">
-      <div class="stat stat-wide">
-        <div class="stat-num stat-text" data-i18n="hero.stat1.top">Real cases & casebooks</div>
-        <div class="stat-lbl" data-i18n="hero.stat1.lbl">Wharton · Darden · Kellogg · Stern</div>
-      </div>
-      <div class="stat-sep"></div>
-      <div class="stat">
-        <div class="stat-num">7</div>
-        <div class="stat-lbl" data-i18n="hero.stat2.lbl">Drill types</div>
-      </div>
+  <!-- NARRATIVE 1/2 - HERO -->
+  <section class="cl-narrative" style="background:#181715; padding-top:130px; padding-bottom:120px; position:relative; overflow:hidden;">
+    <div class="cl-visual-host" data-scene="bars" aria-hidden="true">
+      <svg class="cl-visual-fallback" viewBox="-10 0 330 230" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="gradFront" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#2a5048"></stop>
+            <stop offset="100%" stop-color="#122b26"></stop>
+          </linearGradient>
+          <linearGradient id="gradTop" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#8fd9c8"></stop>
+            <stop offset="100%" stop-color="#3f8f7e"></stop>
+          </linearGradient>
+          <linearGradient id="gradSide" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#1a3733"></stop>
+            <stop offset="100%" stop-color="#08120f"></stop>
+          </linearGradient>
+          <filter id="clBoxShadow" x="-40%" y="-40%" width="180%" height="180%">
+            <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#000" flood-opacity="0.45"></feDropShadow>
+          </filter>
+          <filter id="clDotGlow" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="2.2" result="glow"></feGaussianBlur>
+            <feMerge><feMergeNode in="glow"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
+          </filter>
+        </defs>
+        <g opacity="0.5">
+        <line x1="0" y1="210" x2="60" y2="174" stroke="rgba(93,184,166,.12)" stroke-width="1"></line>
+<line x1="30" y1="210" x2="90" y2="174" stroke="rgba(93,184,166,.12)" stroke-width="1"></line>
+<line x1="60" y1="210" x2="120" y2="174" stroke="rgba(93,184,166,.12)" stroke-width="1"></line>
+<line x1="90" y1="210" x2="150" y2="174" stroke="rgba(93,184,166,.12)" stroke-width="1"></line>
+<line x1="120" y1="210" x2="180" y2="174" stroke="rgba(93,184,166,.12)" stroke-width="1"></line>
+<line x1="150" y1="210" x2="210" y2="174" stroke="rgba(93,184,166,.12)" stroke-width="1"></line>
+<line x1="180" y1="210" x2="240" y2="174" stroke="rgba(93,184,166,.12)" stroke-width="1"></line>
+<line x1="210" y1="210" x2="270" y2="174" stroke="rgba(93,184,166,.12)" stroke-width="1"></line>
+<line x1="240" y1="210" x2="300" y2="174" stroke="rgba(93,184,166,.12)" stroke-width="1"></line>
+<line x1="270" y1="210" x2="330" y2="174" stroke="rgba(93,184,166,.12)" stroke-width="1"></line>
+<line x1="0" y1="210" x2="290" y2="210" stroke="rgba(93,184,166,.12)" stroke-width="1"></line>
+<line x1="15" y1="201" x2="305" y2="201" stroke="rgba(93,184,166,.12)" stroke-width="1"></line>
+<line x1="30" y1="192" x2="320" y2="192" stroke="rgba(93,184,166,.12)" stroke-width="1"></line>
+<line x1="45" y1="183" x2="335" y2="183" stroke="rgba(93,184,166,.12)" stroke-width="1"></line>
+<line x1="60" y1="174" x2="350" y2="174" stroke="rgba(93,184,166,.12)" stroke-width="1"></line>
+        </g>
+        <g class="cl-bar" style="animation-delay:0.05s; filter:url(#clBoxShadow);">
+          <path d="M40,152 L40,210 L55,201 L55,143 Z"  fill="url(#gradSide)"  stroke="#5db8a6" stroke-width="1" stroke-opacity="0.55"></path>
+          <path d="M10,210 L40,210 L40,152 L10,152 Z" fill="url(#gradFront)" stroke="#7fcdbe" stroke-width="1.4"></path>
+          <path d="M10,152 L40,152 L55,143 L25,143 Z"   fill="url(#gradTop)"   stroke="#a8e0d3" stroke-width="1.2"></path>
+        </g>
+<g class="cl-bar" style="animation-delay:0.15s; filter:url(#clBoxShadow);">
+          <path d="M82,122 L82,210 L97,201 L97,113 Z"  fill="url(#gradSide)"  stroke="#5db8a6" stroke-width="1" stroke-opacity="0.55"></path>
+          <path d="M52,210 L82,210 L82,122 L52,122 Z" fill="url(#gradFront)" stroke="#7fcdbe" stroke-width="1.4"></path>
+          <path d="M52,122 L82,122 L97,113 L67,113 Z"   fill="url(#gradTop)"   stroke="#a8e0d3" stroke-width="1.2"></path>
+        </g>
+<g class="cl-bar" style="animation-delay:0.25s; filter:url(#clBoxShadow);">
+          <path d="M124,136 L124,210 L139,201 L139,127 Z"  fill="url(#gradSide)"  stroke="#5db8a6" stroke-width="1" stroke-opacity="0.55"></path>
+          <path d="M94,210 L124,210 L124,136 L94,136 Z" fill="url(#gradFront)" stroke="#7fcdbe" stroke-width="1.4"></path>
+          <path d="M94,136 L124,136 L139,127 L109,127 Z"   fill="url(#gradTop)"   stroke="#a8e0d3" stroke-width="1.2"></path>
+        </g>
+<g class="cl-bar" style="animation-delay:0.35s; filter:url(#clBoxShadow);">
+          <path d="M166,98 L166,210 L181,201 L181,89 Z"  fill="url(#gradSide)"  stroke="#5db8a6" stroke-width="1" stroke-opacity="0.55"></path>
+          <path d="M136,210 L166,210 L166,98 L136,98 Z" fill="url(#gradFront)" stroke="#7fcdbe" stroke-width="1.4"></path>
+          <path d="M136,98 L166,98 L181,89 L151,89 Z"   fill="url(#gradTop)"   stroke="#a8e0d3" stroke-width="1.2"></path>
+        </g>
+<g class="cl-bar" style="animation-delay:0.45s; filter:url(#clBoxShadow);">
+          <path d="M208,62 L208,210 L223,201 L223,53 Z"  fill="url(#gradSide)"  stroke="#5db8a6" stroke-width="1" stroke-opacity="0.55"></path>
+          <path d="M178,210 L208,210 L208,62 L178,62 Z" fill="url(#gradFront)" stroke="#7fcdbe" stroke-width="1.4"></path>
+          <path d="M178,62 L208,62 L223,53 L193,53 Z"   fill="url(#gradTop)"   stroke="#a8e0d3" stroke-width="1.2"></path>
+        </g>
+<g class="cl-bar" style="animation-delay:0.55s; filter:url(#clBoxShadow);">
+          <path d="M250,38 L250,210 L265,201 L265,29 Z"  fill="url(#gradSide)"  stroke="#5db8a6" stroke-width="1" stroke-opacity="0.55"></path>
+          <path d="M220,210 L250,210 L250,38 L220,38 Z" fill="url(#gradFront)" stroke="#7fcdbe" stroke-width="1.4"></path>
+          <path d="M220,38 L250,38 L265,29 L235,29 Z"   fill="url(#gradTop)"   stroke="#a8e0d3" stroke-width="1.2"></path>
+        </g>
+        <polyline class="cl-trend-line" points="40.0,146.0 82.0,116.0 124.0,130.0 166.0,92.0 208.0,56.0 250.0,32.0" fill="none" stroke="#e8a55a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="filter:drop-shadow(0 0 4px rgba(232,165,90,.5));"></polyline>
+        <circle class="cl-trend-dot" cx="40.0" cy="146.0" r="5" fill="#e8a55a" style="animation-delay:1.0s; filter:url(#clDotGlow);"></circle>
+<circle class="cl-trend-dot" cx="82.0" cy="116.0" r="5" fill="#e8a55a" style="animation-delay:1.1s; filter:url(#clDotGlow);"></circle>
+<circle class="cl-trend-dot" cx="124.0" cy="130.0" r="5" fill="#e8a55a" style="animation-delay:1.2s; filter:url(#clDotGlow);"></circle>
+<circle class="cl-trend-dot" cx="166.0" cy="92.0" r="5" fill="#e8a55a" style="animation-delay:1.3s; filter:url(#clDotGlow);"></circle>
+<circle class="cl-trend-dot" cx="208.0" cy="56.0" r="5" fill="#e8a55a" style="animation-delay:1.4s; filter:url(#clDotGlow);"></circle>
+<circle class="cl-trend-dot" cx="250.0" cy="32.0" r="6" fill="#e8a55a" style="animation-delay:1.5s; filter:url(#clDotGlow);"></circle>
+      </svg>
     </div>
-
-    <div class="landing-form">
-      <button class="btn btn-primary btn-cta" onclick="handleBeginSession()">
-        <span data-i18n="hero.cta">Begin Free Session</span>
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
-      </button>
-      <p class="landing-form-note" id="landingAuthNote" data-i18n="hero.note">Create an account to save your progress.</p>
-    </div>
-
-    <div class="feat-pills">
-      <span class="feat-pill" data-i18n="pill.frameworks">Structured Frameworks</span>
-      <span class="feat-pill" data-i18n="pill.feedback">Instant Feedback</span>
-      <span class="feat-pill" data-i18n="pill.firm">Firm-specific Cases</span>
-      <span class="feat-pill" data-i18n="pill.expert">Expert-level Feedback</span>
-      <span class="feat-pill" data-i18n="pill.nocard">Instant access</span>
-    </div>
-
-    <button class="scroll-hint" onclick="scrollToStory()">
-      Learn more
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg>
-    </button>
-  </main>
-
-  <!-- Scroll story sections -->
-  <div class="land-story-wrap">
-  <section id="land-story" class="land-section reveal">
-    <div class="ls-eyebrow" data-i18n="s1.eyebrow">The Case Interview</div>
-    <h2 class="ls-title" data-i18n="s1.title">What top firms actually test</h2>
-    <p class="ls-lead" data-i18n="s1.lead">A case interview is a live business problem you solve out loud with the interviewer. It's how McKinsey, BCG, and Bain decide who gets the offer - and it rewards structure, sharp math, and clear communication over memorized answers.</p>
-    <div class="ls-cards">
-      <div class="ls-card">
-        <div class="ls-card-h" data-i18n-html="s1.c1.h"><span class="ls-dot"></span>Structure</div>
-        <div class="ls-card-p" data-i18n="s1.c1.p">Break an open-ended problem into clean, MECE buckets - and lead with your hypothesis, not a generic framework.</div>
-      </div>
-      <div class="ls-card">
-        <div class="ls-card-h" data-i18n-html="s1.c2.h"><span class="ls-dot"></span>Quant</div>
-        <div class="ls-card-p" data-i18n="s1.c2.p">Run multi-step business math under pressure - breakeven, margins, market sizing - and tie every number back to the decision.</div>
-      </div>
-      <div class="ls-card">
-        <div class="ls-card-h" data-i18n-html="s1.c3.h"><span class="ls-dot"></span>Synthesis</div>
-        <div class="ls-card-p" data-i18n="s1.c3.p">Deliver an answer-first recommendation with the conclusion up front, supporting data, and the risks that come with it.</div>
-      </div>
-    </div>
-  </section>
-
-  <section class="land-section reveal">
-    <div class="ls-eyebrow" data-i18n="s2.eyebrow">Targeted Drills</div>
-    <h2 class="ls-title" data-i18n="s2.title">Train one skill at a time</h2>
-    <p class="ls-lead" data-i18n="s2.lead">Cases test everything at once. Drills isolate a single skill so you can build it fast - each one is a 5-rep adaptive series that gets harder as you improve, with instant feedback and a full model answer after every rep.</p>
-    <div class="ls-cards">
-      <div class="ls-card">
-        <div class="ls-card-h" data-i18n-html="s2.c1.h"><span class="ls-dot"></span>Math &amp; Sizing</div>
-        <div class="ls-card-p" data-i18n="s2.c1.p">Mental math, case math, and market sizing - speed and accuracy under real time pressure.</div>
-      </div>
-      <div class="ls-card">
-        <div class="ls-card-h" data-i18n-html="s2.c2.h"><span class="ls-dot"></span>Structure &amp; Charts</div>
-        <div class="ls-card-p" data-i18n="s2.c2.p">Framework building, chart reading, and brainstorming - the core of any case.</div>
-      </div>
-      <div class="ls-card">
-        <div class="ls-card-h" data-i18n-html="s2.c3.h"><span class="ls-dot"></span>Synthesis &amp; Fit</div>
-        <div class="ls-card-p" data-i18n="s2.c3.p">Answer-first recommendations and behavioral (PEI) questions - the half most candidates never train.</div>
-      </div>
-    </div>
-  </section>
-
-  <section class="land-section reveal">
-    <div class="ls-eyebrow" data-i18n="s3.eyebrow">Why CasEdge</div>
-    <h2 class="ls-title" data-i18n="s3.title">Built on the real thing</h2>
-    <p class="ls-lead" data-i18n="s3.lead">Most prep tools give you a sample answer to compare against. CasEdge coaches the way a partner would - pushing back on weak logic, holding the numbers firm, and showing you exactly how to think, not just what the answer was.</p>
-    <div class="ls-cards">
-      <div class="ls-card">
-        <div class="ls-card-h" data-i18n-html="s3.c1.h"><span class="ls-dot"></span>Real casebooks, real cases</div>
-        <div class="ls-card-p" data-i18n="s3.c1.p">Every case is grounded in the official Wharton, Darden, Kellogg and Stern casebooks - and the actual cases candidates faced in MBB interviews. Named clients, consistent numbers, hidden insights.</div>
-      </div>
-      <div class="ls-card">
-        <div class="ls-card-h" data-i18n-html="s3.c2.h"><span class="ls-dot"></span>Partner-level pushback</div>
-        <div class="ls-card-p" data-i18n="s3.c2.p">The coach challenges your recommendation and only backs down when you defend it with data - like the real room.</div>
-      </div>
-      <div class="ls-card">
-        <div class="ls-card-h" data-i18n-html="s3.c3.h"><span class="ls-dot"></span>Feedback in your language</div>
-        <div class="ls-card-p" data-i18n="s3.c3.p">Practice in English, get your debrief and scorecard in clear, direct feedback you can act on immediately.</div>
+    <div class="cl-container" style="position:relative; z-index:1; width:100%;">
+      <div style="max-width:640px;">
+        <div class="cas-caption-up" style="color:#7fcdbe; margin-bottom:20px;" data-i18n="l2.hero.eyebrow">AI-тренажёр для кейс-интервью</div>
+        <div class="cas-display-lg" style="margin:0 0 26px; color:#faf9f5;" data-i18n="l2.hero.title">Один шанс на McKinsey. Тренируйся так, будто он уже случился.</div>
+        <p class="cas-body-md" style="max-width:460px; margin:0 0 36px; color:#c8c5be;" data-i18n="l2.hero.sub">Тот самый формат, который тебя ждёт - не общий кейс, а именно McKinsey Solve или BCG Chat.</p>
+        <div style="display:flex; gap:14px; align-items:center;">
+          <button class="ds-btn ds-btn-lg ds-btn-primary" onclick="handleBeginSession()" data-i18n="l2.hero.cta">Начать бесплатный дрилл</button>
+          <a href="#cl-formats" class="ds-btn ds-btn-lg ds-btn-text ds-on-dark" data-i18n="l2.hero.demo">Смотреть демо ↓</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <div class="land-cta-wrap reveal">
-    <h2 class="ls-title" data-i18n="cta.title">Ready to start?</h2>
-    <button id="ctaFinal" class="btn btn-primary btn-cta" style="max-width:280px;margin:0 auto;" onclick="handleBeginSession()">
-      <span data-i18n="hero.cta">Begin Free Session</span>
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
-    </button>
-  </div>
-  </div><!-- /land-story-wrap -->
-
-  <footer class="land-footer">
-    <div class="lf-inner">
-      <div class="lf-brand">
-        <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
-        <p class="lf-tag" data-i18n="foot.tagline">MBB case interview prep - cases, drills, and partner-level feedback.</p>
-        <p class="lf-tg">Questions? Reach us on Telegram - <a href="https://t.me/casedge" target="_blank" rel="noopener">@casedge</a> or <a href="https://t.me/+998900002512" target="_blank" rel="noopener">+998&#8209;90&#8209;000&#8209;2512</a></p>
-      </div>
-      <div class="lf-links">
-        <button class="lf-link" onclick="goToPage('pricing')" data-i18n="nav.pricing">Pricing</button>
-        <button class="lf-link" onclick="goToPage('faq')" data-i18n="nav.faq">FAQ</button>
-        <button class="lf-link" onclick="goToPage('contact')" data-i18n="foot.contact">Contact</button>
-        <button class="lf-link" onclick="goToPage('cookies')" data-i18n="foot.cookies">Cookies</button>
-        <button class="lf-link" onclick="goToPage('privacy')" data-i18n="legal.privLink">Privacy Policy</button>
-        <button class="lf-link" onclick="goToPage('terms')" data-i18n="legal.termsLink">Terms of Service</button>
-        <button class="lf-link" onclick="goToPage('refund')" data-i18n="legal.refundLink">Refund Policy</button>
+  <!-- NARRATIVE 2/2 - CONTRAST -->
+  <section class="cl-narrative" style="background:#141311; padding-top:96px; padding-bottom:96px; position:relative; overflow:hidden;">
+    <div class="cl-visual-host" data-scene="pyramid" aria-hidden="true">
+      <svg class="cl-visual-fallback" viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="gradFrontAmber" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#4a3a1f"></stop><stop offset="100%" stop-color="#2b2010"></stop>
+          </linearGradient>
+          <linearGradient id="gradTopAmber" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#f0c78a"></stop><stop offset="100%" stop-color="#e8a55a"></stop>
+          </linearGradient>
+          <linearGradient id="gradSideAmber" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#332612"></stop><stop offset="100%" stop-color="#170f06"></stop>
+          </linearGradient>
+          <linearGradient id="gradFrontDeep" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1b3934"></stop><stop offset="100%" stop-color="#0a1a17"></stop>
+          </linearGradient>
+          <linearGradient id="gradTopDeep" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#5fa596"></stop><stop offset="100%" stop-color="#2c584f"></stop>
+          </linearGradient>
+          <linearGradient id="gradSideDeep" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#0f211d"></stop><stop offset="100%" stop-color="#050c0a"></stop>
+          </linearGradient>
+        </defs>
+        <line x1="160" y1="83" x2="53.0" y2="99" stroke="rgba(93,184,166,.4)" stroke-width="1.3" stroke-dasharray="3,3"></line>
+<line x1="160" y1="83" x2="160.0" y2="99" stroke="rgba(93,184,166,.4)" stroke-width="1.3" stroke-dasharray="3,3"></line>
+<line x1="160" y1="83" x2="269.0" y2="99" stroke="rgba(93,184,166,.4)" stroke-width="1.3" stroke-dasharray="3,3"></line>
+        <g class="cl-pyr-block" style="animation-delay:0.05s; filter:url(#clBoxShadow);">
+          <path d="M208,47 L208,83 L223,74 L223,38 Z"  fill="url(#gradSideAmber)"  stroke="#5db8a6" stroke-width="1" stroke-opacity="0.55"></path>
+          <path d="M112,83 L208,83 L208,47 L112,47 Z" fill="url(#gradFrontAmber)" stroke="#7fcdbe" stroke-width="1.4"></path>
+          <path d="M112,47 L208,47 L223,38 L127,38 Z"   fill="url(#gradTopAmber)"   stroke="#a8e0d3" stroke-width="1.2"></path>
+          <text x="160.0" y="60.0" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="#f4fbf9" style="filter:drop-shadow(0 1px 2px rgba(0,0,0,.6));">Recommendation</text>
+        </g>
+<g class="cl-pyr-block" style="animation-delay:0.2s; filter:url(#clBoxShadow);">
+          <path d="M90,99 L90,141 L105,132 L105,90 Z"  fill="url(#gradSide)"  stroke="#5db8a6" stroke-width="1" stroke-opacity="0.55"></path>
+          <path d="M16,141 L90,141 L90,99 L16,99 Z" fill="url(#gradFront)" stroke="#7fcdbe" stroke-width="1.4"></path>
+          <path d="M16,99 L90,99 L105,90 L31,90 Z"   fill="url(#gradTop)"   stroke="#a8e0d3" stroke-width="1.2"></path>
+          <text x="53.0" y="115.0" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="#f4fbf9" style="filter:drop-shadow(0 1px 2px rgba(0,0,0,.6));">Fact one</text>
+        </g>
+<g class="cl-pyr-block" style="animation-delay:0.3s; filter:url(#clBoxShadow);">
+          <path d="M205,99 L205,141 L220,132 L220,90 Z"  fill="url(#gradSide)"  stroke="#5db8a6" stroke-width="1" stroke-opacity="0.55"></path>
+          <path d="M115,141 L205,141 L205,99 L115,99 Z" fill="url(#gradFront)" stroke="#7fcdbe" stroke-width="1.4"></path>
+          <path d="M115,99 L205,99 L220,90 L130,90 Z"   fill="url(#gradTop)"   stroke="#a8e0d3" stroke-width="1.2"></path>
+          <text x="160.0" y="115.0" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="#f4fbf9" style="filter:drop-shadow(0 1px 2px rgba(0,0,0,.6));">Fact two</text>
+        </g>
+<g class="cl-pyr-block" style="animation-delay:0.4s; filter:url(#clBoxShadow);">
+          <path d="M306,99 L306,141 L321,132 L321,90 Z"  fill="url(#gradSide)"  stroke="#5db8a6" stroke-width="1" stroke-opacity="0.55"></path>
+          <path d="M232,141 L306,141 L306,99 L232,99 Z" fill="url(#gradFront)" stroke="#7fcdbe" stroke-width="1.4"></path>
+          <path d="M232,99 L306,99 L321,90 L247,90 Z"   fill="url(#gradTop)"   stroke="#a8e0d3" stroke-width="1.2"></path>
+          <text x="269.0" y="115.0" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="#f4fbf9" style="filter:drop-shadow(0 1px 2px rgba(0,0,0,.6));">Fact three</text>
+        </g>
+<g class="cl-pyr-block" style="animation-delay:0.55s; filter:url(#clBoxShadow);">
+          <path d="M314,171 L314,205 L329,196 L329,162 Z"  fill="url(#gradSideDeep)"  stroke="#5db8a6" stroke-width="1" stroke-opacity="0.55"></path>
+          <path d="M8,205 L314,205 L314,171 L8,171 Z" fill="url(#gradFrontDeep)" stroke="#7fcdbe" stroke-width="1.4"></path>
+          <path d="M8,171 L314,171 L329,162 L23,162 Z"   fill="url(#gradTopDeep)"   stroke="#a8e0d3" stroke-width="1.2"></path>
+          <text x="161.0" y="183.0" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="#f4fbf9" style="filter:drop-shadow(0 1px 2px rgba(0,0,0,.6));">Risks + next steps, time-bound</text>
+        </g>
+      </svg>
+    </div>
+    <div class="cl-container" style="position:relative; z-index:1; width:100%;">
+      <div class="cl-reveal" style="max-width:620px;">
+        <div class="cas-caption-up" style="color:#7fcdbe; margin-bottom:18px;" data-i18n="l2.contrast.eyebrow">Обычная подготовка</div>
+        <div class="cas-display-md" style="color:#faf9f5; margin-bottom:20px;" data-i18n="l2.contrast.title">Коуч разбирает с тобой общий кейс. Экзамен проверяет конкретный формат.</div>
+        <p class="cas-body-md" style="color:#a09d96; margin:0;" data-i18n="l2.contrast.body">McKinsey оценивает через Solve Game с Research Journal. BCG - через живой Chat Game с голосовым ответом. Открываешь дрилл → попадаешь в тот же интерфейс → получаешь разбор от AI по каждому решению → повторяешь до результата.</p>
       </div>
     </div>
-    <div class="lf-copy" data-i18n="foot.rights">© 2026 CasEdge. All rights reserved.</div>
-    <div class="lf-pariw" data-i18n="foot.pariw">With gratitude to Pariw.</div>
+  </section>
+
+  <!-- LIBRARY + DRILLS -->
+  <section class="cl-section" id="cl-library" style="background:var(--bg-elevated);">
+    <div class="cl-container">
+      <div style="max-width:640px; margin:0 0 56px;">
+        <div class="cas-caption-up" style="color:#3f8f7e; margin-bottom:16px;" data-i18n="l2.nav.features">Возможности</div>
+        <div class="cas-display-md" data-i18n="l2.library.title">Библиотека кейсов и 7 типов дриллов на каждый навык</div>
+      </div>
+
+      <div class="cl-library-hero cl-reveal cl-tap" onclick="handleBeginSession()" role="button" tabindex="0" style="background:var(--bg-card); border:1px solid rgba(93,184,166,0.3); border-radius:var(--radius-xl); padding:56px 64px; display:grid; grid-template-columns:auto 1fr auto; gap:40px; align-items:center; margin-bottom:64px;">
+        <div style="color:#3f8f7e; flex-shrink:0;"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V6a2 2 0 0 1 2-2h5v17H6a2 2 0 0 1-2-2Z"></path><path d="M11 4h7a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2h-7"></path></svg></div>
+        <div>
+          <div class="cas-caption-up" style="color:#3f8f7e; margin-bottom:12px;" data-i18n="l2.library.card.eyebrow">Контент</div>
+          <div class="cas-display-sm" style="margin-bottom:14px;" data-i18n="l2.library.card.title">Библиотека кейсов</div>
+          <p class="cas-body-md" style="color:var(--text-body); max-width:560px; margin:0;" data-i18n="l2.library.card.body">Полноценные кейсы - не дрилл на отдельный навык, а целое интервью на основе реальных бизнес-школьных casebook'ов.</p>
+        </div>
+        <div style="background:var(--bg-canvas); border:1px solid var(--border-hairline); border-radius:var(--radius-lg); padding:22px; width:240px; flex-shrink:0;">
+          <div class="cas-caption-up" style="color:var(--text-muted); margin-bottom:10px;">Wharton</div>
+          <div class="cas-title-sm" style="margin-bottom:14px;">Retail Market Expansion</div>
+          <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:16px;">
+            <span style="background:var(--bg-soft); color:var(--text-muted); font:500 11px var(--font-sans); padding:4px 10px; border-radius:var(--radius-pill);">Market Sizing</span>
+            <span style="background:var(--bg-soft); color:var(--text-muted); font:500 11px var(--font-sans); padding:4px 10px; border-radius:var(--radius-pill);">Growth</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <div style="flex:1; height:6px; background:var(--border-hairline); border-radius:3px; overflow:hidden;"><div style="width:65%; height:100%; background:#3f8f7e;"></div></div>
+            <span class="cas-caption" style="color:var(--text-muted); white-space:nowrap;" data-i18n="l2.library.preview.diff">Средняя</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cas-caption-up" style="color:var(--text-muted); margin-bottom:18px;" data-i18n="l2.drills.label">Дриллы</div>
+      <div class="cl-drills-grid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:20px;">
+        <div class="cl-reveal" style="animation-delay:0.00s;"><div class="ds-card-outline cl-tap" onclick="handleBeginSession()" role="button" tabindex="0"><div style="color:var(--text-muted); margin-bottom:12px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V13"></path><path d="M12 20V7"></path><path d="M20 20v-5"></path><path d="M2 20h20"></path></svg></div><div class="cas-title-sm" style="margin-bottom:8px;" data-i18n="l2.drill1.title">Market Sizing</div><p class="cas-body-sm" style="color:var(--text-muted); margin:0;" data-i18n="l2.drill1.body">Оценка объёма рынка с нуля.</p></div></div>
+        <div class="cl-reveal" style="animation-delay:0.04s;"><div class="ds-card-outline cl-tap" onclick="handleBeginSession()" role="button" tabindex="0"><div style="color:var(--text-muted); margin-bottom:12px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="1.6"></circle><circle cx="5" cy="19" r="1.6"></circle><circle cx="12" cy="19" r="1.6"></circle><circle cx="19" cy="19" r="1.6"></circle><path d="M12 6v4.5M12 10.5L5 17.3M12 10.5v6.7M12 10.5l7 6.8"></path></svg></div><div class="cas-title-sm" style="margin-bottom:8px;" data-i18n="l2.drill2.title">Structuring</div><p class="cas-body-sm" style="color:var(--text-muted); margin:0;" data-i18n="l2.drill2.body">Декомпозиция проблемы в MECE-дерево.</p></div></div>
+        <div class="cl-reveal" style="animation-delay:0.08s;"><div class="ds-card-outline cl-tap" onclick="handleBeginSession()" role="button" tabindex="0"><div style="color:var(--text-muted); margin-bottom:12px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"></rect><path d="M8 7h8M8 12h2M12 12h2M16 12h2M8 16h2M12 16h2M16 16h2"></path></svg></div><div class="cas-title-sm" style="margin-bottom:8px;" data-i18n="l2.drill3.title">Case Math</div><p class="cas-body-sm" style="color:var(--text-muted); margin:0;" data-i18n="l2.drill3.body">Быстрый устный счёт под давлением.</p></div></div>
+        <div class="cl-reveal" style="animation-delay:0.12s;"><div class="ds-card-outline cl-tap" onclick="handleBeginSession()" role="button" tabindex="0"><div style="color:var(--text-muted); margin-bottom:12px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"></path><path d="M5 16l4-5 4 3 6-8"></path><circle cx="5" cy="16" r="1" fill="currentColor" stroke="none"></circle><circle cx="9" cy="11" r="1" fill="currentColor" stroke="none"></circle><circle cx="13" cy="14" r="1" fill="currentColor" stroke="none"></circle><circle cx="19" cy="6" r="1" fill="currentColor" stroke="none"></circle></svg></div><div class="cas-title-sm" style="margin-bottom:8px;" data-i18n="l2.drill4.title">Chart Interpretation</div><p class="cas-body-sm" style="color:var(--text-muted); margin:0;" data-i18n="l2.drill4.body">Чтение графиков и выводы из данных.</p></div></div>
+        <div class="cl-reveal" style="animation-delay:0.16s;"><div class="ds-card-outline cl-tap" onclick="handleBeginSession()" role="button" tabindex="0"><div style="color:var(--text-muted); margin-bottom:12px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"></path><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.9v.2h5v-.2c0-.8.4-1.5 1-1.9A6 6 0 0 0 12 3Z"></path></svg></div><div class="cas-title-sm" style="margin-bottom:8px;" data-i18n="l2.drill5.title">Brainstorm</div><p class="cas-body-sm" style="color:var(--text-muted); margin:0;" data-i18n="l2.drill5.body">Генерация идей по структуре, не списком.</p></div></div>
+        <div class="cl-reveal" style="animation-delay:0.20s;"><div class="ds-card-outline cl-tap" onclick="handleBeginSession()" role="button" tabindex="0"><div style="color:var(--text-muted); margin-bottom:12px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M8 12.5l2.5 2.5L16 9.5"></path></svg></div><div class="cas-title-sm" style="margin-bottom:8px;" data-i18n="l2.drill6.title">Synthesis</div><p class="cas-body-sm" style="color:var(--text-muted); margin:0;" data-i18n="l2.drill6.body">Итог кейса за 60 секунд, как перед партнёром.</p></div></div>
+        <div class="cl-reveal" style="animation-delay:0.24s;"><div class="ds-card-outline cl-tap" onclick="handleBeginSession()" role="button" tabindex="0"><div style="color:var(--text-muted); margin-bottom:12px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v10H8l-4 4V5Z"></path></svg></div><div class="cas-title-sm" style="margin-bottom:8px;" data-i18n="l2.drill7.title">Behavioral</div><p class="cas-body-sm" style="color:var(--text-muted); margin:0;" data-i18n="l2.drill7.body">Fit-вопросы по формату конкретной фирмы.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="cl-section" style="padding-top:64px; padding-bottom:64px; background:var(--bg-canvas);">
+    <div class="cl-container">
+      <div class="cl-stats-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:32px; text-align:center;">
+        <div class="cl-reveal">
+          <div class="cas-display-lg" style="color:#5db8a6; margin-bottom:8px;">400+</div>
+          <p class="cas-body-sm" style="color:var(--text-muted); margin:0;" data-i18n="l2.stats.lbl1">реальных кейсов в библиотеке</p>
+        </div>
+        <div class="cl-reveal" style="animation-delay:.08s;">
+          <div class="cas-display-lg" style="color:#e8a55a; margin-bottom:8px;">7</div>
+          <p class="cas-body-sm" style="color:var(--text-muted); margin:0;" data-i18n="l2.stats.lbl2">типов дриллов</p>
+        </div>
+        <div class="cl-reveal" style="animation-delay:.16s;">
+          <div class="cas-display-lg" style="color:var(--ink); margin-bottom:8px;">2</div>
+          <p class="cas-body-sm" style="color:var(--text-muted); margin:0;" data-i18n="l2.stats.lbl3">фирменных формата - Solve и Chat Game</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMAT DEMOS -->
+  <section class="cl-narrative" id="cl-formats" style="background:#0f0e0c; padding-top:96px; padding-bottom:80px;">
+    <div class="cl-container">
+      <div class="cas-caption-up" style="color:#7fcdbe; margin-bottom:16px;" data-i18n="l2.formats.eyebrow">Эксклюзив</div>
+      <div class="cas-display-md" style="color:#faf9f5; margin-bottom:56px; max-width:560px;" data-i18n="l2.formats.title">Два формата, воссозданных вплоть до интерфейса</div>
+      <div class="cl-tilt-frame cl-format-grid cl-reveal" style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+        <div class="ds-card-dark ds-card-tilt cl-tap" onclick="handleBeginSession()" role="button" tabindex="0" onmousemove="clTiltMove(event)" onmouseleave="clTiltLeave(event)">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+            <span class="ds-badge-coral">McKinsey</span>
+            <span class="cas-title-md" style="color:var(--text-on-dark);">Solve Game</span>
+          </div>
+          <p class="cas-body-sm" style="color:var(--on-dark-soft); margin:0 0 20px; max-width:420px;" data-i18n="l2.formats.solve.body">Тот же реальный формат: Research Journal, комбо-графики и та же логика подсказок, что на настоящем ассессменте.</p>
+          <div class="fp-win">
+            <div class="fp-head"><span class="fp-head-title">Research Journal</span><span class="fp-head-meta">3 collected</span></div>
+            <div class="fp-body">
+              <div class="fp-journal-card"><span class="fp-jc-label">Fleet size</span><span class="fp-jc-value">150 trawlers</span></div>
+              <div class="fp-journal-card"><span class="fp-jc-label">Annual catch</span><span class="fp-jc-value">500 t / year</span></div>
+              <div class="fp-journal-card fp-jc-active"><span class="fp-jc-label">Exhibit 2</span><span class="fp-jc-value">Quota vs stock — 4 years</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="ds-card-dark ds-card-tilt cl-tap" onclick="handleBeginSession()" role="button" tabindex="0" onmousemove="clTiltMove(event)" onmouseleave="clTiltLeave(event)">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+            <span class="ds-badge-coral">BCG</span>
+            <span class="cas-title-md" style="color:var(--text-on-dark);">Chat Game</span>
+          </div>
+          <p class="cas-body-sm" style="color:var(--on-dark-soft); margin:0 0 20px; max-width:420px;" data-i18n="l2.formats.chat.body">Живой AI-интервьюер ведёт диалог в реальном времени - на финальный вопрос отвечаешь голосом, как на настоящем звонке.</p>
+          <div class="fp-win">
+            <div class="fp-head"><span class="fp-head-title">AI Interviewer — Pariw</span><span class="fp-head-meta fp-live">● live</span></div>
+            <div class="fp-body">
+              <div class="fp-msg fp-msg-ai">How would you prioritize the three markets?</div>
+              <div class="fp-msg fp-msg-user"><span class="fp-mic">🎙</span><span class="fp-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="fp-rec-time">0:42</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="cl-section" id="cl-pricing" style="background:var(--bg-soft);">
+    <div class="cl-container">
+      <div style="max-width:640px; margin:0 0 56px;">
+        <div class="cas-caption-up" style="color:#3f8f7e; margin-bottom:16px;" data-i18n="l2.nav.pricing">Тарифы</div>
+        <div class="cas-display-md" data-i18n="l2.pricing.title">Плати за то, что нужно прямо сейчас</div>
+      </div>
+      <div class="cl-pricing-grid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:20px; align-items:stretch;">
+
+        <div class="cl-reveal cl-tap" onclick="handleBeginSession()" role="button" tabindex="0" style="background:var(--bg-canvas); border:1px solid var(--border-hairline); border-radius:var(--radius-lg); padding:32px; display:flex; flex-direction:column;">
+          <div class="cas-title-md" style="margin-bottom:8px;">Drills Only</div>
+          <div class="cas-display-sm" style="margin-bottom:6px; font-family:var(--font-sans); font-weight:600;">$10</div>
+          <p class="cas-body-sm" style="color:var(--text-muted); margin:0 0 24px;" data-i18n="l2.price.drills.desc1">30 дриллов любого из 7 типов</p>
+          <p class="cas-body-sm" style="color:var(--text-body); margin:0 0 28px; flex:1;" data-i18n="l2.price.drills.desc2">Точечная тренировка перед конкретным этапом собеседования.</p>
+          <button class="ds-btn ds-btn-md ds-btn-secondary" style="width:100%;" onclick="event.stopPropagation();handleBeginSession()" data-i18n="l2.price.cta">Выбрать</button>
+        </div>
+
+        <div class="cl-reveal cl-tap" onclick="handleBeginSession()" role="button" tabindex="0" style="background:var(--bg-canvas); border:1px solid var(--border-hairline); border-radius:var(--radius-lg); padding:32px; display:flex; flex-direction:column; animation-delay:.08s;">
+          <div class="cas-title-md" style="margin-bottom:8px;">Starter Library</div>
+          <div class="cas-display-sm" style="margin-bottom:6px; font-family:var(--font-sans); font-weight:600;">$14</div>
+          <p class="cas-body-sm" style="color:var(--text-muted); margin:0 0 24px;" data-i18n="l2.price.starter.desc1">Базовая библиотека кейсов + все дриллы</p>
+          <p class="cas-body-sm" style="color:var(--text-body); margin:0 0 28px; flex:1;" data-i18n="l2.price.starter.desc2">Хороший старт, если только начинаешь готовиться.</p>
+          <button class="ds-btn ds-btn-md ds-btn-secondary" style="width:100%;" onclick="event.stopPropagation();handleBeginSession()" data-i18n="l2.price.cta">Выбрать</button>
+        </div>
+
+        <div class="cl-reveal cl-tap" onclick="handleBeginSession()" role="button" tabindex="0" style="background:var(--ink); border-radius:var(--radius-lg); padding:32px; display:flex; flex-direction:column; position:relative; animation-delay:.16s;">
+          <div style="position:absolute; top:-12px; left:32px;">
+            <span class="ds-badge-coral" data-i18n="l2.price.popular">Популярный</span>
+          </div>
+          <div class="cas-title-md" style="margin-bottom:8px; color:var(--on-dark);">Full Library</div>
+          <div class="cas-display-sm" style="margin-bottom:6px; color:var(--on-dark); font-family:var(--font-sans); font-weight:600;">$18</div>
+          <p class="cas-body-sm" style="color:var(--on-dark-soft); margin:0 0 24px;" data-i18n="l2.price.full.desc1">Вся библиотека кейсов + все дриллы</p>
+          <p class="cas-body-sm" style="color:var(--on-dark-soft); margin:0 0 28px; flex:1;" data-i18n="l2.price.full.desc2">Полный охват реальных бизнес-школьных кейсов.</p>
+          <button class="ds-btn ds-btn-md ds-btn-primary" style="width:100%;" onclick="event.stopPropagation();handleBeginSession()" data-i18n="l2.price.cta">Выбрать</button>
+        </div>
+
+        <div class="cl-reveal cl-tap" onclick="handleBeginSession()" role="button" tabindex="0" style="background:var(--bg-canvas); border:1px solid var(--border-hairline); border-radius:var(--radius-lg); padding:32px; display:flex; flex-direction:column; animation-delay:.24s;">
+          <div class="cas-title-md" style="margin-bottom:8px;">Game Pass</div>
+          <div class="cas-display-sm" style="margin-bottom:6px; font-family:var(--font-sans); font-weight:600;">$45<span class="cas-body-sm" style="color:var(--text-muted); font-family:var(--font-sans);" data-i18n="l2.price.gamepass.period"> / 2 мес</span></div>
+          <p class="cas-body-sm" style="color:var(--text-muted); margin:0 0 24px;" data-i18n="l2.price.gamepass.desc1">Solve Game + Chat Game, без ограничений</p>
+          <p class="cas-body-sm" style="color:var(--text-body); margin:0 0 28px; flex:1;" data-i18n="l2.price.gamepass.desc2">Неограниченные прогоны и живой AI-интервьюер с голосовым ответом.</p>
+          <button class="ds-btn ds-btn-md ds-btn-secondary" style="width:100%;" onclick="event.stopPropagation();handleBeginSession()" data-i18n="l2.price.cta">Выбрать</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="cl-section" id="cl-faq" style="background:var(--bg-elevated);">
+    <div class="cl-container" style="max-width:760px;">
+      <div style="margin:0 0 48px;">
+        <div class="cas-caption-up" style="color:#3f8f7e; margin-bottom:16px;">FAQ</div>
+        <div class="cas-display-md" data-i18n="l2.faq.title">Частые вопросы</div>
+      </div>
+
+      <details class="cl-faq cl-reveal" style="border-top:1px solid var(--border-hairline);">
+        <summary style="display:flex; justify-content:space-between; align-items:center; padding:22px 0;"><span class="cas-title-sm" data-i18n="l2.faq.q1">Насколько точно повторяется формат McKinsey Solve Game?</span><span style="color:#5db8a6; font-size:20px;">＋</span></summary>
+        <p class="cas-body-md" style="color:var(--text-body); margin:0 0 24px;" data-i18n="l2.faq.a1">Интерфейс, тайминг и логика Research Journal и комбо-графиков воспроизведены по реальному ассессменту - включая формулировки промптов и структуру экрана.</p>
+      </details>
+      <details class="cl-faq cl-reveal" style="border-top:1px solid var(--border-hairline); animation-delay:.06s;">
+        <summary style="display:flex; justify-content:space-between; align-items:center; padding:22px 0;"><span class="cas-title-sm" data-i18n="l2.faq.q2">Что такое BCG Chat Game и как работает голосовой ответ?</span><span style="color:#5db8a6; font-size:20px;">＋</span></summary>
+        <p class="cas-body-md" style="color:var(--text-body); margin:0 0 24px;" data-i18n="l2.faq.a2">Живой AI-интервьюер ведёт диалог текстом в реальном времени, а финальный вопрос ты отвечаешь голосом - так же, как на настоящем звонке с BCG.</p>
+      </details>
+      <details class="cl-faq cl-reveal" style="border-top:1px solid var(--border-hairline); animation-delay:.12s;">
+        <summary style="display:flex; justify-content:space-between; align-items:center; padding:22px 0;"><span class="cas-title-sm" data-i18n="l2.faq.q3">Кейсы реальные или сгенерированы ИИ?</span><span style="color:#5db8a6; font-size:20px;">＋</span></summary>
+        <p class="cas-body-md" style="color:var(--text-body); margin:0 0 24px;" data-i18n="l2.faq.a3">Библиотека собрана на основе реальных бизнес-школьных casebook'ов - это те же кейсы, что разбирают в консалтинг-клубах топовых программ.</p>
+      </details>
+      <details class="cl-faq cl-reveal" style="border-top:1px solid var(--border-hairline); animation-delay:.18s;">
+        <summary style="display:flex; justify-content:space-between; align-items:center; padding:22px 0;"><span class="cas-title-sm" data-i18n="l2.faq.q4">Могу ли я перейти на другой тариф позже?</span><span style="color:#5db8a6; font-size:20px;">＋</span></summary>
+        <p class="cas-body-md" style="color:var(--text-body); margin:0 0 24px;" data-i18n="l2.faq.a4">Да, можно повысить тариф в любой момент - доплачиваешь только разницу за оставшийся период.</p>
+      </details>
+      <details class="cl-faq cl-reveal" style="border-top:1px solid var(--border-hairline); border-bottom:1px solid var(--border-hairline); animation-delay:.24s;">
+        <summary style="display:flex; justify-content:space-between; align-items:center; padding:22px 0;"><span class="cas-title-sm" data-i18n="l2.faq.q5">Есть ли бесплатный пробный дрилл?</span><span style="color:#5db8a6; font-size:20px;">＋</span></summary>
+        <p class="cas-body-md" style="color:var(--text-body); margin:0 0 24px;" data-i18n="l2.faq.a5">Да - один дрилл любого типа доступен бесплатно, без привязки карты.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="cl-section" style="background:var(--bg-canvas);">
+    <div class="cl-container">
+      <div style="background:var(--bg-soft); border:1px solid var(--border-hairline); border-radius:var(--radius-xl); padding:80px 64px; text-align:center; display:flex; flex-direction:column; align-items:center;">
+        <div class="cas-display-lg" style="color:var(--text-heading); margin:0 0 22px; max-width:600px;" data-i18n="l2.cta2.title">Готовься так, будто интервью уже завтра</div>
+        <p class="cas-body-md" style="color:var(--text-muted); max-width:460px; margin:0 0 36px;" data-i18n="l2.cta2.body">Первый дрилл - бесплатно. Дальше плати только за то, что реально нужно.</p>
+        <button id="ctaFinal" class="ds-btn ds-btn-lg ds-btn-primary" onclick="handleBeginSession()" data-i18n="l2.hero.cta">Начать бесплатный дрилл</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="border-top:1px solid var(--border-hairline-soft); background:var(--bg-canvas);">
+    <div class="cl-container" style="padding-top:56px; padding-bottom:40px; display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:32px;">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <svg viewBox="0 0 48 48" fill="none" width="22" height="22"><path d="M13 13 L25 24 L13 35" stroke="#5db8a6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M26 13 L38 24 L26 35" stroke="#141413" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        <span style="font-family:var(--font-display); font-size:18px; color:var(--ink);">Cas<span style="color:#5db8a6;">Edge</span></span>
+      </div>
+      <div style="display:flex; gap:48px; flex-wrap:wrap;">
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <span class="cas-caption-up" style="color:var(--text-muted);" data-i18n="l2.footer.product">Продукт</span>
+          <a href="#cl-library" class="cas-body-sm" style="color:var(--text-body);" data-i18n="l2.nav.features">Возможности</a>
+          <a href="#cl-formats" class="cas-body-sm" style="color:var(--text-body);" data-i18n="l2.nav.formats">Форматы</a>
+          <a href="#cl-pricing" class="cas-body-sm" style="color:var(--text-body);" data-i18n="l2.nav.pricing">Тарифы</a>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <span class="cas-caption-up" style="color:var(--text-muted);" data-i18n="l2.footer.support">Поддержка</span>
+          <a href="#cl-faq" class="cas-body-sm" style="color:var(--text-body);">FAQ</a>
+          <a href="#" class="cas-body-sm" style="color:var(--text-body);" onclick="goToPage('contact');return false;" data-i18n="foot.contact">Контакты</a>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <span class="cas-caption-up" style="color:var(--text-muted);" data-i18n="l2.footer.legal">Документы</span>
+          <a href="#" class="cas-body-sm" style="color:var(--text-body);" onclick="goToPage('privacy');return false;" data-i18n="legal.privLink">Privacy Policy</a>
+          <a href="#" class="cas-body-sm" style="color:var(--text-body);" onclick="goToPage('terms');return false;" data-i18n="legal.termsLink">Terms of Service</a>
+          <a href="#" class="cas-body-sm" style="color:var(--text-body);" onclick="goToPage('refund');return false;" data-i18n="legal.refundLink">Refund Policy</a>
+          <a href="#" class="cas-body-sm" style="color:var(--text-body);" onclick="goToPage('cookies');return false;" data-i18n="foot.cookies">Cookies</a>
+        </div>
+      </div>
+      <p class="cas-caption" style="color:var(--text-muted-soft); margin:0;" data-i18n="l2.footer.copy">© 2026 CasEdge. Независимый тренажёр для подготовки к интервью.</p>
+    </div>
+    <div class="cl-container" style="padding-bottom:32px;">
+      <p class="cas-caption" style="margin:0; font-style:italic; font-family:var(--font-display); color:var(--accent-teal); opacity:.85;" data-i18n="foot.pariw">With gratitude to Pariw.</p>
+    </div>
   </footer>
 </div>
+
 
 <!-- ═══════════════════════════════════════════════════
      INFO PAGES - FAQ / CONTACT / COOKIES
@@ -1734,7 +2178,7 @@
       <div id="cxStatsHost"></div>
       <div class="firm-grid">
         <div class="firm-card" onclick="chooseMode('case')" tabindex="0" role="button">
-          <div class="firm-initial" style="background:rgba(204,120,92,.15);color:var(--coral);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="8" y1="13" x2="16" y2="13"></line><line x1="8" y1="17" x2="13" y2="17"></line></svg></div>
+          <div class="firm-initial" style="background:rgba(93,184,166,.15);color:var(--coral);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="8" y1="13" x2="16" y2="13"></line><line x1="8" y1="17" x2="13" y2="17"></line></svg></div>
           <div>
             <div class="firm-name" data-i18n="mode.case.name">Full Case Interview</div>
             <div class="firm-desc" data-i18n="mode.case.desc">Complete 40-minute simulation - structure, math, exhibits, recommendation. As demanding as the real interview.</div>
@@ -1994,7 +2438,7 @@
         </div>
 
         <div class="firm-card" onclick="selectFirm('Bain', this)" tabindex="0" role="button" aria-pressed="false">
-          <div class="firm-initial" style="background:rgba(204,120,92,.15);color:var(--coral);">B</div>
+          <div class="firm-initial" style="background:rgba(93,184,166,.15);color:var(--coral);">B</div>
           <div>
             <div class="firm-name">Bain &amp; Company</div>
             <div class="firm-desc">Results-focused, pragmatic, team-oriented approach</div>
@@ -2022,7 +2466,7 @@
         </div>
 
         <div class="case-card" onclick="selectCase('Market Entry', this)" tabindex="0" role="button" aria-pressed="false">
-          <div class="c-icon" style="background:rgba(204,120,92,.12);">
+          <div class="c-icon" style="background:rgba(93,184,166,.12);">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--coral)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
           </div>
           <div class="c-name">Market Entry</div>
@@ -2106,7 +2550,7 @@
 
   <div class="chat-area" id="chat-area">
     <div class="typing" id="typing-ind">
-      <div class="msg-av" style="background:rgba(204,120,92,.14);color:var(--coral);font-family:var(--font-display);">I</div>
+      <div class="msg-av" style="background:rgba(93,184,166,.14);color:var(--coral);font-family:var(--font-display);">I</div>
       <div class="typing-bbl">
         <div class="dot"></div><div class="dot"></div><div class="dot"></div>
       </div>
@@ -2282,7 +2726,7 @@ function updateAuthUI() {
       const meta = currentUser.user_metadata || {};
       const display = meta.full_name || (currentUser.email ? currentUser.email.split('@')[0] : 'You');
       p.textContent = display;
-      p.style.cssText = 'font-size:13px;color:var(--on-dark-soft);padding:6px 12px;background:rgba(204,120,92,.1);border-radius:20px;cursor:pointer;';
+      p.style.cssText = 'font-size:13px;color:var(--on-dark-soft);padding:6px 12px;background:rgba(93,184,166,.1);border-radius:20px;cursor:pointer;';
       p.onclick = () => { if (confirm('Sign out?')) authSignOut(); };
       p.title = 'Click to sign out';
     } else { p.textContent = ''; p.style.cssText = ''; p.onclick = null; }
@@ -2418,7 +2862,7 @@ async function _startDrillReal() {
   document.getElementById('b-firm').textContent = 'Drill';
   document.getElementById('b-type').textContent = state.drillType;
   document.getElementById('b-user').textContent = state.userName.split(' ')[0] || 'You';
-  chat.innerHTML = '<div class="typing" id="typing-ind"><div class="msg-av" style="background:rgba(204,120,92,.14);color:var(--coral);font-family:var(--font-display);">I</div><div class="typing-bbl"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>';
+  chat.innerHTML = '<div class="typing" id="typing-ind"><div class="msg-av" style="background:rgba(93,184,166,.14);color:var(--coral);font-family:var(--font-display);">I</div><div class="typing-bbl"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>';
   setProgress(10);
   showScreen('interview');
   renderHints();
@@ -2556,6 +3000,50 @@ function updateLangUI() {
 ──────────────────────────────────────────────────── */
 const I18N = {
   en: {
+    'l2.nav.features': 'Features', 'l2.nav.formats': 'Formats', 'l2.nav.pricing': 'Pricing', 'l2.nav.start': 'Start',
+    'l2.hero.eyebrow': 'AI case interview trainer', 'l2.hero.title': 'One shot at McKinsey. Train like it already happened.',
+    'l2.hero.sub': 'We built the real McKinsey Solve and BCG Chat formats right into the product \u2014 train for the exact same thing, for a lot less.',
+    'l2.hero.cta': 'Start a free drill', 'l2.hero.demo': 'Watch the demo \u2193',
+    'l2.contrast.eyebrow': 'Typical prep', 'l2.contrast.title': 'A coach walks you through a generic case. The real exam tests a specific format.',
+    'l2.contrast.body': 'McKinsey grades through Solve Game with a Research Journal. BCG \u2014 through a live Chat Game with a voice answer. Open a drill \u2192 land in the same interface \u2192 get an AI breakdown of every decision \u2192 repeat until it lands.',
+    'l2.library.title': 'A case library and 7 drill types for every skill',
+    'l2.library.card.eyebrow': 'Content', 'l2.library.card.title': 'Case Library',
+    'l2.library.card.body': 'Full cases \u2014 not a single-skill drill, but a whole interview built on real business-school casebooks.',
+    'l2.library.preview.diff': 'Medium',
+    'l2.drills.label': 'Drills',
+    'l2.drill1.title': 'Market Sizing', 'l2.drill1.body': 'Sizing a market from scratch.',
+    'l2.drill2.title': 'Structuring', 'l2.drill2.body': 'Breaking a problem into a MECE tree.',
+    'l2.drill3.title': 'Case Math', 'l2.drill3.body': 'Fast mental math under pressure.',
+    'l2.drill4.title': 'Chart Interpretation', 'l2.drill4.body': 'Reading charts and drawing conclusions.',
+    'l2.drill5.title': 'Brainstorm', 'l2.drill5.body': 'Generating ideas by structure, not by list.',
+    'l2.drill6.title': 'Synthesis', 'l2.drill6.body': "Wrapping up a case in 60 seconds, like in front of a partner.",
+    'l2.drill7.title': 'Behavioral', 'l2.drill7.body': "Fit questions in a specific firm's format.",
+    'l2.stats.lbl1': 'real cases in the library', 'l2.stats.lbl2': 'drill types', 'l2.stats.lbl3': 'signature formats \u2014 Solve and Chat Game',
+    'l2.formats.eyebrow': 'Exclusive', 'l2.formats.title': 'Two formats, rebuilt down to the interface',
+    'l2.formats.solve.body': 'We built this format into the product: Research Journal, combo charts, and the same hint logic as the real assessment \u2014 train here, not just on interview day.',
+    'l2.formats.chat.body': 'We built the live BCG Chat format into the product: an AI interviewer holds a real-time conversation, and you answer the final question by voice \u2014 just like a real call.',
+    'l2.pricing.title': 'Pay for what you need right now',
+    'l2.price.cta': 'Choose', 'l2.price.popular': 'POPULAR',
+    'l2.price.drills.desc1': '30 drills of any of the 7 types', 'l2.price.drills.desc2': 'Targeted practice before a specific interview stage.',
+    'l2.price.starter.desc1': 'Starter case library + all drills', 'l2.price.starter.desc2': 'A good start if you\u2019re just beginning to prepare.',
+    'l2.price.full.desc1': 'Full case library + all drills', 'l2.price.full.desc2': 'Full coverage of real business-school cases.',
+    'l2.price.gamepass.period': ' / 2 mo', 'l2.price.gamepass.desc1': 'Solve Game + Chat Game, unlimited', 'l2.price.gamepass.desc2': 'Unlimited runs and a live AI interviewer with voice answers.',
+    'l2.faq.title': 'Frequently asked questions',
+    'l2.faq.q1': 'How accurately does the McKinsey Solve Game format match the real thing?',
+    'l2.faq.a1': 'We built the McKinsey Solve format into the product: the interface, timing, and logic of the Research Journal and combo charts work the same way as the real assessment \u2014 including the screen structure.',
+    'l2.faq.q2': 'What is BCG Chat Game and how does the voice answer work?',
+    'l2.faq.a2': 'We built the BCG Chat Game format into the product: a live AI interviewer holds a text conversation in real time, and you answer the final question by voice \u2014 just like a real BCG call.',
+    'l2.faq.q3': 'Are the cases real or AI-generated?',
+    'l2.faq.a3': 'The library is built from real business-school casebooks \u2014 the same cases discussed in top program consulting clubs.',
+    'l2.faq.q4': 'Can I switch to a different plan later?',
+    'l2.faq.a4': 'Yes, you can upgrade any time \u2014 you only pay the difference for the remaining period.',
+    'l2.faq.q5': 'Is there a free trial drill?',
+    'l2.faq.a5': 'Yes \u2014 one drill of any type is free, no card required.',
+    'l2.cta2.title': 'Get ready like the interview is tomorrow', 'l2.cta2.body': 'The first drill is free. After that, pay only for what you actually need.',
+    'l2.footer.tagline': 'An independent trainer for case interview prep.',
+    'l2.footer.product': 'Product', 'l2.footer.support': 'Support', 'l2.footer.legal': 'Legal',
+    'l2.footer.contact': 'Questions? Reach us on Telegram \u2014 <a href="https://t.me/casedge" target="_blank" rel="noopener">@casedge</a> or <a href="https://t.me/+998900002512" target="_blank" rel="noopener">+998&#8209;90&#8209;000&#8209;2512</a>',
+    'l2.footer.copy': '\u00a9 2026 CasEdge. An independent trainer for interview prep.',
     'nav.cases': 'Cases',
     'nav.drills': 'Drills',
     'nav.progress': 'Progress',
@@ -2792,6 +3280,50 @@ const I18N = {
     'common.resumingIn': 'Resuming in {s}s',
   },
   ru: {
+    'l2.nav.features': 'Возможности', 'l2.nav.formats': 'Форматы', 'l2.nav.pricing': 'Тарифы', 'l2.nav.start': 'Начать',
+    'l2.hero.eyebrow': 'AI-тренажёр для кейс-интервью', 'l2.hero.title': 'Один шанс на McKinsey. Тренируйся так, будто он уже случился.',
+    'l2.hero.sub': 'Мы полностью воплотили McKinsey Solve и BCG Chat у себя — готовься к тому же самому формату, только гораздо дешевле.',
+    'l2.hero.cta': 'Начать бесплатный дрилл', 'l2.hero.demo': 'Смотреть демо ↓',
+    'l2.contrast.eyebrow': 'Обычная подготовка', 'l2.contrast.title': 'Коуч разбирает с тобой общий кейс. Экзамен проверяет конкретный формат.',
+    'l2.contrast.body': 'McKinsey оценивает через Solve Game с Research Journal. BCG — через живой Chat Game с голосовым ответом. Открываешь дрилл → попадаешь в тот же интерфейс → получаешь разбор от AI по каждому решению → повторяешь до результата.',
+    'l2.library.title': 'Библиотека кейсов и 7 типов дриллов на каждый навык',
+    'l2.library.card.eyebrow': 'Контент', 'l2.library.card.title': 'Библиотека кейсов',
+    'l2.library.card.body': 'Полноценные кейсы — не дрилл на отдельный навык, а целое интервью на основе реальных бизнес-школьных casebook\u2019ов.',
+    'l2.library.preview.diff': 'Средняя',
+    'l2.drills.label': 'Дриллы',
+    'l2.drill1.title': 'Market Sizing', 'l2.drill1.body': 'Оценка объёма рынка с нуля.',
+    'l2.drill2.title': 'Structuring', 'l2.drill2.body': 'Декомпозиция проблемы в MECE-дерево.',
+    'l2.drill3.title': 'Case Math', 'l2.drill3.body': 'Быстрый устный счёт под давлением.',
+    'l2.drill4.title': 'Chart Interpretation', 'l2.drill4.body': 'Чтение графиков и выводы из данных.',
+    'l2.drill5.title': 'Brainstorm', 'l2.drill5.body': 'Генерация идей по структуре, не списком.',
+    'l2.drill6.title': 'Synthesis', 'l2.drill6.body': 'Итог кейса за 60 секунд, как перед партнёром.',
+    'l2.drill7.title': 'Behavioral', 'l2.drill7.body': 'Fit-вопросы по формату конкретной фирмы.',
+    'l2.stats.lbl1': 'реальных кейсов в библиотеке', 'l2.stats.lbl2': 'типов дриллов', 'l2.stats.lbl3': 'фирменных формата — Solve и Chat Game',
+    'l2.formats.eyebrow': 'Эксклюзив', 'l2.formats.title': 'Два формата, воссозданных вплоть до интерфейса',
+    'l2.formats.solve.body': 'Полностью воплотили этот формат у себя: Research Journal, комбо-графики и та же логика подсказок, что на настоящем ассессменте — готовься здесь, а не только в день интервью.',
+    'l2.formats.chat.body': 'Мы воплотили живой формат BCG Chat у себя: AI-интервьюер ведёт диалог в реальном времени, а на финальный вопрос отвечаешь голосом — как на настоящем звонке.',
+    'l2.pricing.title': 'Плати за то, что нужно прямо сейчас',
+    'l2.price.cta': 'Выбрать', 'l2.price.popular': 'ПОПУЛЯРНЫЙ',
+    'l2.price.drills.desc1': '30 дриллов любого из 7 типов', 'l2.price.drills.desc2': 'Точечная тренировка перед конкретным этапом собеседования.',
+    'l2.price.starter.desc1': 'Базовая библиотека кейсов + все дриллы', 'l2.price.starter.desc2': 'Хороший старт, если только начинаешь готовиться.',
+    'l2.price.full.desc1': 'Вся библиотека кейсов + все дриллы', 'l2.price.full.desc2': 'Полный охват реальных бизнес-школьных кейсов.',
+    'l2.price.gamepass.period': ' / 2 мес', 'l2.price.gamepass.desc1': 'Solve Game + Chat Game, без ограничений', 'l2.price.gamepass.desc2': 'Неограниченные прогоны и живой AI-интервьюер с голосовым ответом.',
+    'l2.faq.title': 'Частые вопросы',
+    'l2.faq.q1': 'Насколько точно повторяется формат McKinsey Solve Game?',
+    'l2.faq.a1': 'Мы полностью воплотили формат McKinsey Solve у себя: интерфейс, тайминг и логика Research Journal и комбо-графиков работают так же, как на настоящем ассессменте — включая структуру экрана.',
+    'l2.faq.q2': 'Что такое BCG Chat Game и как работает голосовой ответ?',
+    'l2.faq.a2': 'Мы воплотили формат BCG Chat Game у себя: живой AI-интервьюер ведёт диалог текстом в реальном времени, а финальный вопрос ты отвечаешь голосом — так же, как на настоящем звонке с BCG.',
+    'l2.faq.q3': 'Кейсы реальные или сгенерированы ИИ?',
+    'l2.faq.a3': 'Библиотека собрана на основе реальных бизнес-школьных casebook\u2019ов — это те же кейсы, что разбирают в консалтинг-клубах топовых программ.',
+    'l2.faq.q4': 'Могу ли я перейти на другой тариф позже?',
+    'l2.faq.a4': 'Да, можно повысить тариф в любой момент — доплачиваешь только разницу за оставшийся период.',
+    'l2.faq.q5': 'Есть ли бесплатный пробный дрилл?',
+    'l2.faq.a5': 'Да — один дрилл любого типа доступен бесплатно, без привязки карты.',
+    'l2.cta2.title': 'Готовься так, будто интервью уже завтра', 'l2.cta2.body': 'Первый дрилл — бесплатно. Дальше плати только за то, что реально нужно.',
+    'l2.footer.tagline': 'Независимый тренажёр для подготовки к кейс-интервью.',
+    'l2.footer.product': 'Продукт', 'l2.footer.support': 'Поддержка', 'l2.footer.legal': 'Документы',
+    'l2.footer.contact': 'Вопросы? Пиши в Telegram — <a href="https://t.me/casedge" target="_blank" rel="noopener">@casedge</a> или <a href="https://t.me/+998900002512" target="_blank" rel="noopener">+998&#8209;90&#8209;000&#8209;2512</a>',
+    'l2.footer.copy': '© 2026 CasEdge. Независимый тренажёр для подготовки к интервью.',
     'nav.cases': 'Кейсы',
     'nav.drills': 'Дриллы',
     'nav.progress': 'Прогресс',
@@ -3033,6 +3565,17 @@ function t(key, vars) {
   let s = (I18N[lang] && I18N[lang][key]) || (I18N.en[key]) || key;
   if (vars) for (const k in vars) s = s.replace(new RegExp('\\{'+k+'\\}','g'), vars[k]);
   return s;
+}
+/* Landing format-card tilt (exact port of the Claude Design prototype logic) */
+function clTiltMove(e) {
+  const el = e.currentTarget;
+  const r = el.getBoundingClientRect();
+  const px = (e.clientX - r.left) / r.width - 0.5;
+  const py = (e.clientY - r.top) / r.height - 0.5;
+  el.style.transform = 'rotateX(' + (py * -6) + 'deg) rotateY(' + (px * 6) + 'deg)';
+}
+function clTiltLeave(e) {
+  e.currentTarget.style.transform = 'rotateX(0deg) rotateY(0deg)';
 }
 function applyUiLang() {
   const lang = state.uiLang || 'en';
@@ -5552,7 +6095,7 @@ async function _startInterviewReal() {
   const chat = document.getElementById('chat-area');
   chat.innerHTML = `
     <div class="typing" id="typing-ind">
-      <div class="msg-av" style="background:rgba(204,120,92,.14);color:var(--coral);font-family:var(--font-display);">I</div>
+      <div class="msg-av" style="background:rgba(93,184,166,.14);color:var(--coral);font-family:var(--font-display);">I</div>
       <div class="typing-bbl">
         <div class="dot"></div><div class="dot"></div><div class="dot"></div>
       </div>
@@ -5900,7 +6443,7 @@ function addMsg(role, text, pushToHistory) {
 
   const initial    = role === 'ai' ? 'I' : (state.userName[0] || 'U').toUpperCase();
   const avStyle    = role === 'ai'
-    ? 'background:rgba(204,120,92,.14);color:var(--coral);font-family:var(--font-display);'
+    ? 'background:rgba(93,184,166,.14);color:var(--coral);font-family:var(--font-display);'
     : 'background:rgba(255,255,255,.07);color:var(--on-dark);';
 
   div.innerHTML = `
@@ -6525,10 +7068,195 @@ function applyTheme(theme) {
   }
 })();
 
+/* ── Landing WebGL visuals: true-perspective 3D bar chart (hero) and stepped pyramid
+   (contrast), confined to .cl-visual-host. Lazy-loaded Three.js; SVG stays as fallback
+   and is hidden only after a successful WebGL init. Skips mobile & reduced motion. ── */
+(function () {
+  var hosts = document.querySelectorAll('#screen-landing .cl-visual-host[data-scene]');
+  if (!hosts.length) return;
+  try { if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; } catch (e) {}
+  if (window.innerWidth <= 860) return;
+
+  function load(u) {
+    return new Promise(function (res, rej) {
+      var s = document.createElement('script');
+      s.src = u; s.onload = res; s.onerror = rej;
+      document.head.appendChild(s);
+    });
+  }
+
+  function edgesBox(w, h, d, faceColor, edgeColor, faceOpacity) {
+    var g = new THREE.Group();
+    var geo = new THREE.BoxGeometry(w, h, d);
+    var mesh = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({
+      color: faceColor, transparent: true, opacity: faceOpacity
+    }));
+    var edges = new THREE.LineSegments(
+      new THREE.EdgesGeometry(geo),
+      new THREE.LineBasicMaterial({ color: edgeColor, transparent: true, opacity: 0.9 })
+    );
+    g.add(mesh); g.add(edges);
+    return g;
+  }
+
+  function makeFloor(scene, size, step, color) {
+    var mat = new THREE.LineBasicMaterial({ color: color, transparent: true, opacity: 0.16 });
+    var pts = [];
+    for (var i = -size; i <= size; i += step) {
+      pts.push(new THREE.Vector3(-size, 0, i), new THREE.Vector3(size, 0, i));
+      pts.push(new THREE.Vector3(i, 0, -size), new THREE.Vector3(i, 0, size));
+    }
+    var geo = new THREE.BufferGeometry().setFromPoints(pts);
+    scene.add(new THREE.LineSegments(geo, mat));
+  }
+
+  function buildBars(scene) {
+    var heights = [1.1, 1.7, 1.45, 2.2, 2.9, 3.4];
+    var xs = [-3.4, -2.0, -0.6, 0.8, 2.2, 3.6];
+    var tops = [];
+    for (var i = 0; i < heights.length; i++) {
+      var h = heights[i];
+      var bar = edgesBox(0.95, h, 0.95, 0x16342e, 0x5db8a6, 0.85);
+      bar.position.set(xs[i], h / 2, 0);
+      scene.add(bar);
+      tops.push(new THREE.Vector3(xs[i], h + 0.45, 0));
+    }
+    var lineGeo = new THREE.BufferGeometry().setFromPoints(tops);
+    scene.add(new THREE.Line(lineGeo, new THREE.LineBasicMaterial({ color: 0xe8a55a })));
+    for (var j = 0; j < tops.length; j++) {
+      var dot = new THREE.Mesh(new THREE.SphereGeometry(0.11, 16, 16),
+        new THREE.MeshBasicMaterial({ color: 0xe8a55a }));
+      dot.position.copy(tops[j]);
+      scene.add(dot);
+    }
+    makeFloor(scene, 6, 1.2, 0x5db8a6);
+  }
+
+  function labelPlane(text, planeW, color) {
+    var c = document.createElement('canvas');
+    c.width = 512; c.height = 128;
+    var ctx = c.getContext('2d');
+    ctx.clearRect(0, 0, 512, 128);
+    ctx.font = '600 44px Inter, sans-serif';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillStyle = color || '#eef7f4';
+    ctx.shadowColor = 'rgba(0,0,0,.7)'; ctx.shadowBlur = 8;
+    ctx.fillText(text, 256, 64);
+    var tex = new THREE.CanvasTexture(c);
+    tex.minFilter = THREE.LinearFilter;
+    var mesh = new THREE.Mesh(
+      new THREE.PlaneGeometry(planeW, planeW * 0.25),
+      new THREE.MeshBasicMaterial({ map: tex, transparent: true })
+    );
+    return mesh;
+  }
+
+  function buildPyramid(scene) {
+    var base = edgesBox(5.4, 0.7, 2.6, 0x0f211d, 0x3f8f7e, 0.9);
+    base.position.set(0, 0.35, 0);
+    scene.add(base);
+    var baseLbl = labelPlane('Risks \u2192 Next steps', 3.4, '#9fd6c9');
+    baseLbl.position.set(0, 0.35, 1.32);
+    scene.add(baseLbl);
+
+    var xs = [-1.8, 0, 1.8];
+    var midLabels = ['Revenue', 'Costs', 'Market'];
+    for (var i = 0; i < 3; i++) {
+      var mid = edgesBox(1.5, 0.85, 1.9, 0x16342e, 0x5db8a6, 0.88);
+      mid.position.set(xs[i], 0.7 + 0.425, 0);
+      scene.add(mid);
+      var ml = labelPlane(midLabels[i], 1.35, '#d9efe9');
+      ml.position.set(xs[i], 0.7 + 0.425, 0.97);
+      scene.add(ml);
+    }
+
+    var apex = edgesBox(1.35, 0.9, 1.5, 0x4a3a1f, 0xe8a55a, 0.92);
+    apex.position.set(0, 0.7 + 0.85 + 0.45, 0);
+    scene.add(apex);
+    var al = labelPlane('Recommendation', 1.6, '#f5d9ae');
+    al.position.set(0, 0.7 + 0.85 + 0.45, 0.77);
+    scene.add(al);
+
+    makeFloor(scene, 5, 1.0, 0x5db8a6);
+  }
+
+  function initScene(host) {
+    var kind = host.getAttribute('data-scene');
+    var canvas = document.createElement('canvas');
+    canvas.className = 'cl-webgl';
+    var renderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+    } catch (e) { return; }
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    host.appendChild(canvas);
+    host.classList.add('webgl-on');
+
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(38, 3 / 2, 0.1, 100);
+    if (kind === 'bars') {
+      camera.position.set(4.0, 3.6, 9.4);
+      camera.lookAt(0, 1.5, 0);
+      buildBars(scene);
+    } else {
+      camera.position.set(3.8, 3.2, 8.2);
+      camera.lookAt(0, 1.2, 0);
+      buildPyramid(scene);
+    }
+
+    function resize() {
+      var w = host.clientWidth, h = Math.max(1, Math.round(w * 2 / 3));
+      host.style.height = h + 'px';
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    window.addEventListener('resize', resize, { passive: true });
+    resize();
+
+    var mx = 0, smx = 0, my = 0, smy = 0;
+    document.addEventListener('mousemove', function (e) {
+      mx = e.clientX / window.innerWidth - 0.5;
+      my = e.clientY / window.innerHeight - 0.5;
+    }, { passive: true });
+
+    var visible = true;
+    try {
+      new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(host);
+    } catch (e) {}
+
+    var t = 0;
+    (function frame() {
+      requestAnimationFrame(frame);
+      if (!visible) return;
+      t += 0.008;
+      smx += (mx - smx) * 0.05;
+      smy += (my - smy) * 0.05;
+      scene.rotation.y = Math.sin(t * 0.5) * 0.12 + smx * 0.35;
+      scene.rotation.x = smy * 0.12;
+      renderer.render(scene, camera);
+    })();
+  }
+
+  function boot() {
+    if (!window.THREE) return;
+    hosts.forEach(initScene);
+  }
+  var started = false;
+  function lazyStart() {
+    if (started) return;
+    started = true;
+    if (window.THREE) { boot(); return; }
+    load('https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js').then(boot).catch(function () {});
+  }
+  if ('requestIdleCallback' in window) requestIdleCallback(lazyStart, { timeout: 2500 });
+  else setTimeout(lazyStart, 600);
+})();
+
 // ── Scroll-reveal: add .in when a .reveal element scrolls into view ──
 (function () {
   function initReveal() {
-    const els = document.querySelectorAll('.reveal');
+    const els = document.querySelectorAll('.reveal, .cl-reveal');
     if (!('IntersectionObserver' in window)) {
       // Fallback: no observer support → just show everything
       els.forEach(el => el.classList.add('in'));
@@ -6560,7 +7288,7 @@ function applyTheme(theme) {
     if (reduce) return;
 
     // 3D tilt: cards lean toward the cursor
-    document.querySelectorAll('.ls-card').forEach(card => {
+    document.querySelectorAll('.ls-card, .cl-tilt-card').forEach(card => {
       card.addEventListener('mousemove', (e) => {
         const r = card.getBoundingClientRect();
         const px = (e.clientX - r.left) / r.width - 0.5;   // -0.5 .. 0.5
@@ -6804,201 +7532,5 @@ document.addEventListener('keydown', e => {
   <div class="br" id="brCard"></div>
 </div>
 
-<script>
-/* ───────── Hero 3D scene: an "idea core" that opens and streams ideas downward on scroll.
-   Self-contained, lazy-loaded, fully guarded: if Three.js fails to load or WebGL is
-   unavailable, nothing breaks - the existing ambient background stays as-is. ───────── */
-(function () {
-  var canvas = document.getElementById('heroCanvas');
-  if (!canvas) return;
-  // Respect reduced-motion and skip on very small screens (keeps mobile light).
-  try { if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; } catch (e) {}
 
-  function load(src) {
-    return new Promise(function (res, rej) {
-      var s = document.createElement('script');
-      s.src = src; s.onload = res; s.onerror = rej;
-      document.head.appendChild(s);
-    });
-  }
-
-  load('https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js')
-    .then(start)
-    .catch(function () { /* CDN blocked - silently keep the static ambient bg */ });
-
-  function start() {
-    var THREE = window.THREE;
-    if (!THREE) return;
-    var renderer;
-    try {
-      renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
-    } catch (e) { return; } // no WebGL - bail quietly
-    var W = canvas.clientWidth || window.innerWidth;
-    var H = canvas.clientHeight || window.innerHeight;
-    renderer.setSize(W, H, false);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-
-    var scene = new THREE.Scene();
-    var camera = new THREE.PerspectiveCamera(50, W / H, 0.1, 100);
-    camera.position.set(0, 1.2, 6.5);
-    camera.lookAt(0, 1.0, 0);
-
-    // brand colours
-    var teal = new THREE.Color('#5db8a6');
-    var amber = new THREE.Color('#e8a55a');
-    // In light theme the cream background washes the crystal out, so boost the
-    // particle/line brightness and particle size. (Live-read so a theme toggle
-    // mid-session is picked up on the next frame.)
-    function lightBoost() {
-      return document.documentElement.getAttribute('data-theme') === 'light';
-    }
-
-    // --- the "idea core": a wireframe icosahedron + a solid faceted inner shell ---
-    var coreGroup = new THREE.Group();
-    var ico = new THREE.IcosahedronGeometry(2.0, 1);
-    var wire = new THREE.LineSegments(
-      new THREE.WireframeGeometry(ico),
-      new THREE.LineBasicMaterial({ color: teal, transparent: true, opacity: 0.16 })
-    );
-    var shell = new THREE.Mesh(
-      new THREE.IcosahedronGeometry(1.6, 0),
-      new THREE.MeshBasicMaterial({ color: teal, transparent: true, opacity: 0.04 })
-    );
-    // a second, amber wire layer for richness
-    var wire2 = new THREE.LineSegments(
-      new THREE.WireframeGeometry(new THREE.IcosahedronGeometry(2.0, 0)),
-      new THREE.LineBasicMaterial({ color: amber, transparent: true, opacity: 0.1 })
-    );
-    coreGroup.add(wire); coreGroup.add(wire2); coreGroup.add(shell);
-    coreGroup.position.y = 1.4; // visible in the lower-hero gap, below the headline
-    scene.add(coreGroup);
-
-    // --- the "idea stream": a continuous cascade that fills the whole view ---
-    var COUNT = 240;
-    var pos = new Float32Array(COUNT * 3);
-    var vel = new Float32Array(COUNT);
-    for (var i = 0; i < COUNT; i++) {
-      pos[i*3]   = (Math.random() - 0.5) * 11.0;
-      pos[i*3+1] = 7.0 - Math.random() * 14.0;
-      pos[i*3+2] = (Math.random() - 0.5) * 2.5;
-      vel[i] = 0.006 + Math.random() * 0.015;
-    }
-    var pg = new THREE.BufferGeometry();
-    pg.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-    var pm = new THREE.PointsMaterial({ color: amber, size: 0.03, transparent: true, opacity: 0.4 });
-    var points = new THREE.Points(pg, pm);
-    scene.add(points);
-
-    var scrollN = 0; // 0..1 progress across the WHOLE page
-    function onScroll() {
-      var doc = document.documentElement;
-      var max = (doc.scrollHeight - window.innerHeight) || 1;
-      scrollN = Math.max(0, Math.min(1, (window.scrollY || 0) / max));
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-
-    function onResize() {
-      W = canvas.clientWidth || window.innerWidth;
-      H = canvas.clientHeight || window.innerHeight;
-      renderer.setSize(W, H, false);
-      camera.aspect = W / H; camera.updateProjectionMatrix();
-    }
-    window.addEventListener('resize', onResize, { passive: true });
-
-    canvas.classList.add('ready');
-    var t = 0, sm = 0; // sm = smoothed scroll progress
-    function frame() {
-      t += 0.01;
-      sm += (scrollN - sm) * 0.07; // ease toward target for fluid motion
-
-      // 1) The core travels with you down the page: drifts side-to-side then,
-      //    in the final stretch, flies down INTO the "Begin Free Session" button.
-      var drift = Math.sin(sm * Math.PI * 2) * 2.6 * (1 - sm);
-      // "enter" progress: ramps up as the final CTA button comes into view,
-      //    so it works regardless of footer height / exact scroll max.
-      var enter = 0;
-      var btn = document.getElementById('ctaFinal');
-      var btnRect = null;
-      if (btn) {
-        btnRect = btn.getBoundingClientRect();
-        var vh = window.innerHeight;
-        // enter reaches 1 once the button's center is at ~78% of the screen
-        // height (i.e. the button is comfortably in view). This guarantees the
-        // crystal fully arrives and collapses into it instead of stalling below.
-        var center = btnRect.top + btnRect.height / 2;
-        enter = (vh - center) / (vh * 0.30);
-        enter = Math.max(0, Math.min(1, enter));
-      }
-
-      // target = the on-screen position of the final CTA button, projected into 3D
-      var tx = 0, ty = 1.4 - sm * 1.0;
-      if (btnRect && enter > 0) {
-        // precise screen->world projection at the core's depth (z plane ~0)
-        var ndcX = (btnRect.left + btnRect.width/2) / window.innerWidth * 2 - 1;
-        var ndcY = -((btnRect.top + btnRect.height/2) / window.innerHeight * 2 - 1);
-        var v = new THREE.Vector3(ndcX, ndcY, 0.5).unproject(camera);
-        var dir = v.sub(camera.position).normalize();
-        var dist = -camera.position.z / dir.z; // intersect z=0 plane
-        var world = camera.position.clone().add(dir.multiplyScalar(dist));
-        tx = drift * (1 - enter) + world.x * enter;
-        ty = (1.4 - sm * 1.0) * (1 - enter) + world.y * enter;
-      } else {
-        tx = drift;
-      }
-      coreGroup.position.x = tx;
-      coreGroup.position.y = ty;
-
-      // 2) It spins faster and "heats up" (teal -> amber) the deeper you scroll.
-      coreGroup.rotation.y += 0.004 + sm * 0.01;
-      wire2.rotation.y -= 0.006 + sm * 0.008;
-      wire2.rotation.x += 0.002;
-      coreGroup.rotation.x = 0.3 + sm * 1.4;
-      var heat = teal.clone().lerp(amber, sm);
-      wire.material.color.copy(heat);
-      shell.material.color.copy(heat);
-
-      // 3) As it enters the button it shrinks to a point and fades - it has
-      //    "gone into" the CTA. Then the button lights up (charged).
-      var crys = sm > 0.7 ? (sm - 0.7) / 0.3 : 0;
-      coreGroup.scale.setScalar((1 + sm * 0.15) * (1 - crys * 0.35) * (1 - enter));
-      // base opacities are low (background); a small lift as it lands, then full fade
-      var lb = lightBoost();
-      var lineK = lb ? 2.1 : 1;   // lines need to be darker/stronger on cream
-      var ptK   = lb ? 2.4 : 1;   // particles are the hardest to see on cream
-      wire.material.opacity = (0.16 + crys * 0.1 + enter * 0.25) * (1 - enter * enter) * lineK;
-      wire2.material.opacity = (0.1 + sm * 0.06 + enter * 0.15) * (1 - enter * enter) * lineK;
-      shell.material.opacity = 0.04 * (1 - enter) * (lb ? 1.6 : 1);
-      pm.opacity = 0.4 * (1 - enter * 0.6) * ptK; // streams ease off as the core lands
-      if (btn) {
-        if (enter > 0.4) btn.classList.add('charged');
-        else btn.classList.remove('charged');
-      }
-
-
-      // 4) Streams: a continuous full-width cascade that fills the whole
-      //    viewport at every scroll depth, so the flow never stops between
-      //    sections. Particles recycle across the full width and height.
-      var p = pg.attributes.position.array;
-      var speed = 1 + sm * 1.6;
-      for (var i = 0; i < COUNT; i++) {
-        p[i*3+1] -= vel[i] * speed;
-        p[i*3]   += Math.sin(t + i) * 0.003;
-        if (p[i*3+1] < -7.0) { // recycle to the top across the FULL width
-          p[i*3]   = (Math.random() - 0.5) * 11.0; // wide spread = fills the page width
-          p[i*3+1] = 6.5 + Math.random() * 1.5;     // back to the top of the view
-          p[i*3+2] = (Math.random() - 0.5) * 2.5;
-        }
-      }
-      pg.attributes.position.needsUpdate = true;
-      pm.color.copy(amber.clone().lerp(teal, sm * 0.4)); // subtle shift
-      pm.size = (0.03 + sm * 0.01) * (lb ? 1.7 : 1);
-
-      renderer.render(scene, camera);
-      requestAnimationFrame(frame);
-    }
-    frame();
-  }
-})();
-</script>
 </body></html>
