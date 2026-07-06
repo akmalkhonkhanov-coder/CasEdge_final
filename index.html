@@ -1371,6 +1371,9 @@
   #screen-landing .cl-reveal.in { opacity: 1; transform: translateY(0) scale(1); }
   @media (prefers-reduced-motion: reduce) { #screen-landing .cl-reveal { opacity: 1; transform: none; transition: none; } }
   #screen-landing .cl-tilt-frame { perspective: 1400px; }
+  #screen-landing .cl-drills-grid { grid-auto-rows: 1fr; }
+  #screen-landing .cl-drills-grid > .cl-reveal { height: 100%; }
+  #screen-landing .cl-drills-grid .ds-card-outline { height: 100%; }
   @media (max-width: 860px) {
     #screen-landing .cl-container { padding: 0 24px; }
     #screen-landing .cl-hero-grid, #screen-landing .cl-format-grid { grid-template-columns: 1fr !important; }
@@ -1440,11 +1443,26 @@
   /* ---- Click feedback: cards are tappable and physically react ---- */
   #screen-landing .cl-tap { cursor: pointer; transition: transform .18s cubic-bezier(.34,1.56,.64,1), box-shadow .18s ease; }
   #screen-landing .cl-tap:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(20,20,19,.12); }
-  #screen-landing .cl-tap:active { transform: scale(.965); box-shadow: 0 2px 8px rgba(20,20,19,.10); }
+  #screen-landing .cl-tap:active { transform: scale(.97); }
+  @keyframes clShake {
+    10% { transform: translateX(-6px) rotate(-1deg); }
+    25% { transform: translateX(5px) rotate(1deg); }
+    40% { transform: translateX(-4px) rotate(-0.6deg); }
+    55% { transform: translateX(3px) rotate(0.5deg); }
+    70% { transform: translateX(-2px) rotate(-0.3deg); }
+    85% { transform: translateX(1px); }
+    100% { transform: translateX(0); }
+  }
+  #screen-landing .cl-tap.shaking { animation: clShake .45s ease both; }
+  @media (prefers-reduced-motion: reduce) { #screen-landing .cl-tap.shaking { animation: none; } }
   /* ---- 3D idea-core canvases: fill the empty right half of dark sections, never over text ---- */
   #screen-landing .cl-visual-host { position: absolute; top: 50%; right: 6%; transform: translateY(-50%); width: 40%; max-width: 500px; z-index: 0; pointer-events: none; overflow: hidden; border-radius: 8px; }
   #screen-landing .cl-visual-host canvas.cl-webgl { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
   #screen-landing .cl-visual-host.webgl-on .cl-visual-fallback { visibility: hidden; }
+  #screen-landing .cl-scene-legend { position: absolute; left: 0; right: 0; bottom: 4px; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; font-family: var(--font-sans); font-size: 12px; font-weight: 500; letter-spacing: .4px; color: var(--on-dark-soft); }
+  #screen-landing .cl-lg-item { display: inline-flex; align-items: center; gap: 6px; background: rgba(10,18,16,.55); border: 1px solid rgba(255,255,255,.07); border-radius: var(--radius-pill); padding: 4px 12px; color: #d8e6e1; }
+  #screen-landing .cl-lg-item i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  #screen-landing .cl-lg-sep { color: var(--on-dark-soft); opacity: .7; }
   #screen-landing .cl-visual-host svg { width: 100%; height: auto; display: block; overflow: visible; }
   @media (max-width: 860px) { #screen-landing .cl-visual-host { display: none; } }
   @keyframes clBarGrow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
@@ -1577,6 +1595,13 @@
   <!-- NARRATIVE 2/2 - CONTRAST -->
   <section class="cl-narrative" style="background:#141311; padding-top:96px; padding-bottom:96px; position:relative; overflow:hidden;">
     <div class="cl-visual-host" data-scene="pyramid" aria-hidden="true">
+      <div class="cl-scene-legend">
+        <span class="cl-lg-item"><i style="background:#e8a55a;"></i>Recommendation</span>
+        <span class="cl-lg-sep">→</span>
+        <span class="cl-lg-item"><i style="background:#5db8a6;"></i>Revenue · Costs · Market</span>
+        <span class="cl-lg-sep">→</span>
+        <span class="cl-lg-item"><i style="background:#3f8f7e;"></i>Risks &amp; next steps</span>
+      </div>
       <svg class="cl-visual-fallback" viewBox="0 0 330 230" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="gradFrontAmber" x1="0" y1="0" x2="0" y2="1">
@@ -3577,6 +3602,18 @@ function clTiltMove(e) {
 function clTiltLeave(e) {
   e.currentTarget.style.transform = 'rotateX(0deg) rotateY(0deg)';
 }
+/* Click shake for landing cards: restart the animation on every click */
+document.addEventListener('click', function (e) {
+  var card = e.target.closest && e.target.closest('#screen-landing .cl-tap');
+  if (!card) return;
+  card.classList.remove('shaking');
+  void card.offsetWidth; /* reflow to restart the animation */
+  card.classList.add('shaking');
+  card.addEventListener('animationend', function h() {
+    card.classList.remove('shaking');
+    card.removeEventListener('animationend', h);
+  });
+});
 function applyUiLang() {
   const lang = state.uiLang || 'en';
   document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -7132,77 +7169,21 @@ function applyTheme(theme) {
     makeFloor(scene, 6, 1.2, 0x5db8a6);
   }
 
-  function labelPlane(text, planeW, color, chipColor) {
-    var W = 1024, H = 256;
-    var c = document.createElement('canvas');
-    c.width = W; c.height = H;
-    var ctx = c.getContext('2d');
-    ctx.clearRect(0, 0, W, H);
-
-    var fontSize = 92;
-    ctx.font = '700 ' + fontSize + 'px Inter, sans-serif';
-    var maxTextW = W - 96;
-    while (ctx.measureText(text).width > maxTextW && fontSize > 40) {
-      fontSize -= 4;
-      ctx.font = '700 ' + fontSize + 'px Inter, sans-serif';
-    }
-    var textW = ctx.measureText(text).width;
-
-    var padX = 44, padY = 26;
-    var pillW = Math.min(W - 20, textW + padX * 2);
-    var pillH = fontSize + padY * 2;
-    var px = (W - pillW) / 2, py = (H - pillH) / 2;
-    var r = pillH / 2;
-    ctx.fillStyle = chipColor || 'rgba(8,14,12,0.55)';
-    ctx.beginPath();
-    ctx.moveTo(px + r, py);
-    ctx.arcTo(px + pillW, py, px + pillW, py + pillH, r);
-    ctx.arcTo(px + pillW, py + pillH, px, py + pillH, r);
-    ctx.arcTo(px, py + pillH, px, py, r);
-    ctx.arcTo(px, py, px + pillW, py, r);
-    ctx.closePath();
-    ctx.fill();
-
-    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    ctx.fillStyle = color || '#eef7f4';
-    ctx.shadowColor = 'rgba(0,0,0,.55)'; ctx.shadowBlur = 6;
-    ctx.fillText(text, W / 2, H / 2 + 2);
-
-    var tex = new THREE.CanvasTexture(c);
-    tex.minFilter = THREE.LinearFilter;
-    tex.anisotropy = 4;
-    var mesh = new THREE.Mesh(
-      new THREE.PlaneGeometry(planeW, planeW * (H / W)),
-      new THREE.MeshBasicMaterial({ map: tex, transparent: true })
-    );
-    return mesh;
-  }
-
   function buildPyramid(scene) {
     var base = edgesBox(5.4, 0.7, 2.6, 0x0f211d, 0x3f8f7e, 0.9);
     base.position.set(0, 0.35, 0);
     scene.add(base);
-    var baseLbl = labelPlane('Risks \u2192 Next steps', 4.2, '#c9ede3', 'rgba(6,20,17,0.6)');
-    baseLbl.position.set(0, 0.35, 1.32);
-    scene.add(baseLbl);
 
     var xs = [-1.8, 0, 1.8];
-    var midLabels = ['Revenue', 'Costs', 'Market'];
     for (var i = 0; i < 3; i++) {
       var mid = edgesBox(1.5, 0.85, 1.9, 0x16342e, 0x5db8a6, 0.88);
       mid.position.set(xs[i], 0.7 + 0.425, 0);
       scene.add(mid);
-      var ml = labelPlane(midLabels[i], 1.7, '#eef8f4', 'rgba(6,20,17,0.55)');
-      ml.position.set(xs[i], 0.7 + 0.425, 0.97);
-      scene.add(ml);
     }
 
     var apex = edgesBox(1.35, 0.9, 1.5, 0x4a3a1f, 0xe8a55a, 0.92);
     apex.position.set(0, 0.7 + 0.85 + 0.45, 0);
     scene.add(apex);
-    var al = labelPlane('Recommendation', 2.0, '#fff2dc', 'rgba(38,26,8,0.6)');
-    al.position.set(0, 0.7 + 0.85 + 0.45, 0.77);
-    scene.add(al);
 
     makeFloor(scene, 5, 1.0, 0x5db8a6);
   }
@@ -7226,8 +7207,8 @@ function applyTheme(theme) {
       camera.lookAt(0, 1.5, 0);
       buildBars(scene);
     } else {
-      camera.position.set(3.8, 3.2, 8.2);
-      camera.lookAt(0, 1.2, 0);
+      camera.position.set(3.8, 3.4, 8.4);
+      camera.lookAt(0, 0.7, 0);
       buildPyramid(scene);
     }
 
