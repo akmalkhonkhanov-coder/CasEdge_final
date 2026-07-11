@@ -8,13 +8,19 @@
 //   SUPABASE_SERVICE_ROLE_KEY - from Supabase > Project Settings > API (the SECRET service_role key,
 //                                never the anon key - keep this out of the frontend entirely)
 //
-// Setup still needed once the Paddle account exists:
-//   1. Create products/prices in Paddle Dashboard for each plan.
-//   2. Fill in PRICE_PLAN_MAP below with the real price IDs (pri_...).
-//   3. Create a webhook destination in Paddle pointing at
-//      https://cas-edge-final.vercel.app/api/paddle-webhook
-//      subscribed to at least: transaction.completed, subscription.canceled, subscription.paused
-//   4. Copy that destination's signing secret into PADDLE_WEBHOOK_SECRET.
+// Setup status (updated 2026-07-09):
+//   [x] Paddle account verified, 4 products/prices created, PRICE_PLAN_MAP filled in below.
+//   [ ] Create a webhook destination in Paddle pointing at
+//       https://cas-edge-final.vercel.app/api/paddle-webhook
+//       subscribed to at least: transaction.completed
+//       (subscription.canceled/paused are handled defensively below but won't fire for
+//       these one-time products - safe to leave subscribed or not, they're a no-op either way)
+//   [ ] Copy that destination's signing secret into PADDLE_WEBHOOK_SECRET.
+//   [ ] IMPORTANT: verify the `user_entitlements.period_end` column in Supabase allows NULL -
+//       the three consumption-based plans (drills/starter/full) now write period_end: null.
+//       If the column is NOT NULL, those inserts will fail silently (logged, not thrown) and
+//       no entitlement will be granted. Run in Supabase SQL editor if needed:
+//         ALTER TABLE user_entitlements ALTER COLUMN period_end DROP NOT NULL;
 
 import crypto from 'crypto';
 
@@ -22,12 +28,17 @@ import crypto from 'crypto';
 // requires the exact raw bytes Paddle sent.
 export const config = { api: { bodyParser: false } };
 
-// Fill these in once real products/prices exist in the Paddle dashboard.
-// periodDays controls how long the grant lasts before it needs renewal.
+// All four prices are ONE-TIME Paddle transactions (confirmed 2026-07-09), not subscriptions -
+// there is no subscription object and Paddle never fires subscription.canceled/paused for these.
+// periodDays is therefore null for the three consumption-based plans: they don't expire by date,
+// they expire when cases_used/drills_used reach their cap (enforced by the app's rate-limit check,
+// NOT by this webhook - this file only grants the initial cap). Game Pass is the one exception:
+// it genuinely is time-boxed (2 months from purchase), so it keeps a real periodDays value.
 const PRICE_PLAN_MAP = {
-  // 'pri_REPLACE_WITH_LIBRARY_15': { plan: 'library_15', casesCap: 15, drillsCap: 20, gamesCap: 0, periodDays: 30 },
-  // 'pri_REPLACE_WITH_LIBRARY_20': { plan: 'library_20', casesCap: 20, drillsCap: 30, gamesCap: 0, periodDays: 30 },
-  // 'pri_REPLACE_WITH_GAMES_2MO':  { plan: 'games_2mo',  casesCap: 0,  drillsCap: 0,  gamesCap: 15, periodDays: 60 },
+  'pri_01kx2wjymz8kv1y8azrf7st8zz': { plan: 'drills',   casesCap: 0,  drillsCap: 30, gamesCap: 0,  periodDays: null }, // Drills Only $10 - 30 drills, no expiry date
+  'pri_01kx2whmgwkjaz0bqcn6g2415h': { plan: 'starter',  casesCap: 15, drillsCap: 20, gamesCap: 0,  periodDays: null }, // Starter Library $14 - 15 cases + 20 drills, no expiry date
+  'pri_01kx2wdq460z7084wnmtebk3w3': { plan: 'full',     casesCap: 20, drillsCap: 30, gamesCap: 0,  periodDays: null }, // Full Library $18 - 20 cases + 30 drills, no expiry date
+  'pri_01kx2wb5fb6r2gkkvsfk58dkd6': { plan: 'gamepass', casesCap: 0,  drillsCap: 0,  gamesCap: 20, periodDays: 60 },   // Game Pass $45 - 2-month window, up to 20 game sessions
 };
 
 function readRawBody(req) {
@@ -121,13 +132,16 @@ async function handleEntitlementGrant(data, sbUrl, sbServiceKey) {
   if (!planCfg) { console.error('Paddle webhook: unrecognized price_id', priceId); return; }
 
   const now = new Date();
-  const periodEnd = new Date(now.getTime() + planCfg.periodDays * 24 * 60 * 60 * 1000);
+  // null periodDays = no calendar expiry (consumption-based plan); period_end stays null in that case.
+  const periodEnd = planCfg.periodDays
+    ? new Date(now.getTime() + planCfg.periodDays * 24 * 60 * 60 * 1000)
+    : null;
 
   const body = {
     user_id: userId,
     plan: planCfg.plan,
     period_start: now.toISOString(),
-    period_end: periodEnd.toISOString(),
+    period_end: periodEnd ? periodEnd.toISOString() : null,
     cases_used: 0,
     cases_cap: planCfg.casesCap || 0,
     drills_used: 0,
