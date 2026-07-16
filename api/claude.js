@@ -11,7 +11,8 @@
 
 const FALLBACK_ORIGIN = 'https://cas-edge-final.vercel.app';
 const ALLOWED_MODELS = ['claude-sonnet-5', 'claude-sonnet-4-5'];
-const MAX_TOKENS_CAP = 2000;       // hard ceiling regardless of what the client asks
+const MAX_TOKENS_CAP = 4000;       // hard ceiling regardless of what the client asks
+const MIN_TOKENS = 3000;           // floor so large JSON outputs (post-case feedback) never truncate
 const MAX_BODY_BYTES = 200 * 1024; // 200 KB request cap
 const RATE_LIMIT = 30;             // requests per user per window
 const RATE_WINDOW_MS = 60 * 1000;  // 1-minute window
@@ -120,10 +121,13 @@ export default async function handler(req, res) {
     }
     body.model = ALLOWED_MODELS.includes(body.model) ? body.model : ALLOWED_MODELS[0];
 
-    // max_tokens ceiling.
-    if (typeof body.max_tokens !== 'number' || body.max_tokens > MAX_TOKENS_CAP || body.max_tokens < 1) {
-      body.max_tokens = Math.min(body.max_tokens || 1000, MAX_TOKENS_CAP);
-    }
+    // max_tokens: give every response room to finish. The post-case feedback
+    // returns a large JSON that was truncating at 1000-2000 tokens and failing
+    // to JSON.parse ("Unterminated string"). Floor at MIN_TOKENS, cap at the
+    // ceiling. Billing is on actual output tokens, so short replies (drills)
+    // are unaffected.
+    const reqTokens = (typeof body.max_tokens === 'number' && body.max_tokens > 0) ? body.max_tokens : 1000;
+    body.max_tokens = Math.min(Math.max(reqTokens, MIN_TOKENS), MAX_TOKENS_CAP);
 
     // 5) Prompt caching on the system prompt (saves ~70% on input tokens).
     if (body.system && typeof body.system === 'string') {

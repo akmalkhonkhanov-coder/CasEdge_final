@@ -184,36 +184,43 @@ function caseGates(caseObj) {
   return { gateMap, unmatchedTopics };
 }
 
+// Returns { stableText, volatileText }. Auto (never-gated) exhibits are STABLE
+// (identical every turn → cacheable). Gated/revealed exhibits and gated topics
+// go in VOLATILE (they depend on revealedSet, which changes mid-case), so the
+// cached prefix stays byte-identical across the whole case.
 function exhibitsBlock(caseObj, revealedSet) {
   const exhibits = Array.isArray(caseObj.exhibits) ? caseObj.exhibits : [];
   const { gateMap, unmatchedTopics } = caseGates(caseObj);
-  const shown = [];
-  const gated = [];
+  const stableShown = [];
+  const volatile = [];
   for (const ex of exhibits) {
     const gate = gateMap.get(ex.id);
-    if (gate && !revealedSet.has(ex.id)) {
+    if (!gate) {
+      stableShown.push(`EXHIBIT id="${ex.id}" — "${ex.title}" (available to share):\n${ex.body_md || ''}`);
+    } else if (revealedSet.has(ex.id)) {
+      volatile.push(`EXHIBIT id="${ex.id}" — "${ex.title}" (revealed — you may share it):\n${ex.body_md || ''}`);
+    } else {
       const triggers = Array.from(gate);
-      gated.push(
+      volatile.push(
         `HIDDEN EXHIBIT id="${ex.id}" — "${ex.title}"\n` +
         `Do NOT mention or describe this exhibit's contents unless the candidate explicitly asks about: ` +
         `${triggers.length ? triggers.map(t => `"${t}"`).join(', ') : 'the specific data it contains'}.\n` +
         `If (and only if) they ask, BEGIN your reply with the marker <reveal>${ex.id}</reveal> and then present it.\n` +
         `Contents (keep hidden until asked):\n${ex.body_md || ''}`
       );
-    } else {
-      shown.push(`EXHIBIT id="${ex.id}" — "${ex.title}" (available to share):\n${ex.body_md || ''}`);
     }
   }
-  let out = '';
-  if (shown.length) out += `\n\n════ EXHIBITS (share when the candidate reaches them) ════\n${shown.join('\n\n')}`;
-  if (gated.length) out += `\n\n════ GATED EXHIBITS (reveal only on request) ════\n${gated.join('\n\n')}`;
+  let stableText = '';
+  if (stableShown.length) stableText += `\n\n════ EXHIBITS (share when the candidate reaches them) ════\n${stableShown.join('\n\n')}`;
+  let volatileText = '';
+  if (volatile.length) volatileText += `\n\n════ GATED / REVEALED EXHIBITS ════\n${volatile.join('\n\n')}`;
   if (unmatchedTopics.length) {
     const lines = unmatchedTopics.map(u =>
       `- "${u.title}": do not volunteer anything about this unless the candidate explicitly asks about ${
         (u.triggers || []).length ? u.triggers.map(t => `"${t}"`).join(', ') : 'it'}.`);
-    out += `\n\n════ GATED TOPICS (do not volunteer; only if asked) ════\n${lines.join('\n')}`;
+    volatileText += `\n\n════ GATED TOPICS (do not volunteer; only if asked) ════\n${lines.join('\n')}`;
   }
-  return out;
+  return { stableText, volatileText };
 }
 
 /* ───────────────────────── firm style ────────────────────────────────────── */
@@ -279,7 +286,7 @@ ${step.candidate_md || step.label || ''}
 ANSWER KEY (hidden — grade against this):
 ${step.interviewer_md || '(No explicit key parsed for this step. Grade using the case prompt, the exhibits, and standard MBB rigor for a step of this type. Any answer text embedded in the question above is interviewer-side — do not read it out.)'}`;
 
-  const exhibits = exhibitsBlock(caseObj, revealedSet);
+  const ex = exhibitsBlock(caseObj, revealedSet);
   const hints = hintsBlock(step, attemptCount);
 
   let flow;
@@ -313,7 +320,14 @@ Rules for every reply:
 `\n\n════ OUTPUT ════
 Conduct the case in English. Keep the hidden markers EXACTLY as written (<verdict>…</verdict>, <reveal>…</reveal>) so the app can parse them; never explain or display them to the candidate.`;
 
-  return header + answerKey + exhibits + hints + flow + language;
+  // Split into a STABLE block (case identity + firm + prompt + auto exhibits +
+  // output rules — identical every turn of this case, so it is prompt-cached)
+  // and a VOLATILE block (current step's question/answer key, gated exhibits,
+  // hint policy, flow — changes each turn). This keeps full accuracy while
+  // making the big re-sent case body a cache hit on every turn after the first.
+  const stable = header + ex.stableText + language;
+  const volatile = answerKey + ex.volatileText + hints + flow;
+  return { stable, volatile };
 }
 
 /* ───────────────────────── infra (shared with claude.js pattern) ─────────── */
@@ -421,11 +435,14 @@ export default async function handler(req, res) {
     const priorRevealed = Array.isArray(body.revealedExhibits) ? body.revealedExhibits.filter(x => typeof x === 'string') : [];
     const revealedSet = new Set(priorRevealed);
 
-    // Client sends only role/content; keep last 16 turns to bound tokens.
+    // Client sends only role/content. Keep the FULL case transcript (cap at 80
+    // messages as a runaway guard) so the interviewer never forgets what the
+    // candidate said earlier in the case — the conversation prefix is prompt-
+    // cached below, so full memory costs almost nothing after the first turn.
     const clientMsgs = Array.isArray(body.messages) ? body.messages : [];
     const messages = clientMsgs
       .filter(m => m && (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string')
-      .slice(-16)
+      .slice(-80)
       .map(m => ({ role: m.role, content: m.content }));
 
     const isOpening = !hasAssistantTurn(messages);
@@ -433,9 +450,18 @@ export default async function handler(req, res) {
     const convo = messages.length ? messages : [{ role: 'user', content: 'Please begin the case.' }];
     if (convo[0].role !== 'user') convo.unshift({ role: 'user', content: 'Please begin the case.' });
 
-    const system = buildSystemPrompt({ caseObj, stepIndex, attemptCount, firm: body.firm, revealedSet, isOpening });
+    // Cache the conversation prefix: mark the last message as a cache breakpoint
+    // so every prior turn is a cache hit on the next request.
+    const lastMsg = convo[convo.length - 1];
+    convo[convo.length - 1] = {
+      role: lastMsg.role,
+      content: [{ type: 'text', text: lastMsg.content, cache_control: { type: 'ephemeral' } }]
+    };
 
-    // 7) Forward to Anthropic (prompt caching on system, timeout).
+    const built = buildSystemPrompt({ caseObj, stepIndex, attemptCount, firm: body.firm, revealedSet, isOpening });
+
+    // 7) Forward to Anthropic. Two system blocks: the STABLE case body is cached
+    // (identical every turn → cache hit); the VOLATILE step block is not.
     let response;
     try {
       response = await fetchWithTimeout('https://api.anthropic.com/v1/messages', {
@@ -449,7 +475,10 @@ export default async function handler(req, res) {
         body: JSON.stringify({
           model: CASE_MODEL,
           max_tokens: MAX_TOKENS,
-          system: [{ type: 'text', text: system, cache_control: { type: 'ephemeral' } }],
+          system: [
+            { type: 'text', text: built.stable, cache_control: { type: 'ephemeral' } },
+            { type: 'text', text: built.volatile }
+          ],
           messages: convo
         })
       }, UPSTREAM_TIMEOUT_MS);
