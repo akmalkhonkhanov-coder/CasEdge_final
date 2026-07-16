@@ -7167,6 +7167,8 @@ async function generateAIFeedback() {
 
   const EVAL_SYSTEM = `You are a McKinsey/BCG/Bain Senior Partner giving a candidate their honest post-case debrief. You are demanding and you do NOT sugarcoat. Score on a 1.0-10.0 scale with ONE decimal (e.g. 6.5, 7.8). Most real candidates land 5.0-7.0; a 7.5+ is genuinely strong and a 9.0+ is rare and exceptional. Do not inflate. A vague or incomplete answer scores low, not "encouraging". Kindness here means honesty, not praise.
 
+GRANULARITY (important): use FINE-GRAINED decimals for the overall AND every dimension — precise values like 7.4, 8.1, 6.7, 5.3. Do NOT round to whole or half numbers (avoid 7.0, 8.0, 7.5) unless the performance is genuinely exactly that. The decimal must carry real signal, so the candidate sees precisely where they stand and small session-to-session progress is visible.
+
 CALIBRATION (anchor every score):
 - 8.5-10: ready for a real MBB final round - answer-first, MECE, numbers tied to the decision, risks named.
 - 7.0-8.4: promising but with clear gaps - likely would NOT pass as-is.
