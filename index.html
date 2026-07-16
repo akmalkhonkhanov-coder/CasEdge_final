@@ -2563,6 +2563,33 @@
 </div>
 
 <!-- ═══════════════════════════════════════════════════
+     CASE LIBRARY PICKER  (Full Case — choose a real case)
+═══════════════════════════════════════════════════ -->
+<div id="screen-caselib" class="screen" data-screen-label="Case Library">
+  <nav class="top-nav">
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
+    <div style="display:flex;align-items:center;gap:6px;">
+      <button class="lang-btn" onclick="openLangMenu()"><span class="lang-current">EN</span> ▾</button>
+      <div id="caselib-user-pill"></div>
+    </div>
+  </nav>
+  <div class="setup-body">
+    <div class="setup-sec">
+      <div class="sec-eyebrow">Full Case Interview</div>
+      <div class="sec-title">Choose a case from the library</div>
+      <p class="br-lead" style="margin:6px 0 0;">Real casebook cases (Wharton / Darden). <span id="caselib-firm-note"></span> Every number and exhibit is fixed — the interviewer never improvises.</p>
+      <div id="caselib-list" style="margin-top:20px;display:flex;flex-direction:column;gap:10px;">
+        <div style="opacity:.6;padding:24px 0;">Loading the case library…</div>
+      </div>
+    </div>
+  </div>
+  <div class="setup-footer">
+    <button class="btn btn-ghost" onclick="showScreen('setup')">← Back</button>
+    <span style="opacity:.5;font-size:13px;" id="caselib-count"></span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
      INTERVIEW
 ═══════════════════════════════════════════════════ -->
 <div id="screen-interview" class="screen" data-screen-label="Interview">
@@ -2982,6 +3009,51 @@ async function callAI(system, messages, model) {
   err.status = res.status;
   throw err;
 }
+// Calls the server-side case engine (/api/case-session). The library, answer
+// keys and exhibit bodies stay on the server; we send only the case pointer,
+// step, attempt count, revealed-exhibit ids and the trimmed transcript.
+async function callCaseSession(payload) {
+  async function freshToken() {
+    if (!sb) return null;
+    try {
+      let { data } = await sb.auth.getSession();
+      let session = data && data.session;
+      const expSoon = session && session.expires_at && (session.expires_at * 1000 - Date.now() < 60000);
+      if (!session || expSoon) {
+        const r = await sb.auth.refreshSession();
+        session = (r && r.data && r.data.session) || session;
+      }
+      return session ? session.access_token : null;
+    } catch (e) { return null; }
+  }
+  async function attempt() {
+    const headers = { 'Content-Type': 'application/json' };
+    const token = await freshToken();
+    if (token) headers['Authorization'] = 'Bearer ' + token;
+    const response = await fetch('/api/case-session', {
+      method: 'POST', headers: headers, body: JSON.stringify(payload)
+    });
+    let data = {};
+    try { data = await response.json(); } catch (e) { data = {}; }
+    return { status: response.status, data: data };
+  }
+  let res = await attempt();
+  if (res.status === 429 || res.status === 503 || res.status === 529 ||
+      (res.data && res.data.error && /overload/i.test(res.data.error.message || ''))) {
+    await new Promise(r => setTimeout(r, 1200));
+    res = await attempt();
+  }
+  if (res.status >= 200 && res.status < 300) return res.data;
+
+  let msg;
+  if (res.status === 401) msg = 'Your session expired. Please sign in again to continue.';
+  else if (res.status === 429) msg = 'You are going a little fast. Please wait a moment and try again.';
+  else if (res.status === 413) msg = 'That request was too large. Try shortening your answer.';
+  else if (res.status >= 500) msg = 'The interviewer is busy right now. Please try again in a moment.';
+  else msg = (res.data && res.data.error && res.data.error.message) || 'Something went wrong. Please try again.';
+  const err = new Error(msg); err.userFacing = true; err.status = res.status;
+  throw err;
+}
 function getUserEmail() { return document.getElementById('emailInput').value; }
 function getUserName()  { return document.getElementById('nameInput').value; }
 
@@ -2994,6 +3066,9 @@ const state = {
   messages: [], msgCount: 0,
   seenCases: JSON.parse(localStorage.getItem('caseedge_seen') || '[]'),
   drillType: null, drillSystem: null, mode: null,
+  // Full Case Interview (library-backed) session state.
+  caseMode: false, caseId: null, caseTitle: '', caseSteps: 0,
+  stepIndex: 0, attemptCount: 0, revealedExhibits: [], caseLibCache: null,
   // Language: aiLang drives the language of cases/drills; fbLang drives feedback.
   // fbLang 'same' = follow aiLang. uiLang drives the interface chrome (independent).
   aiLang: localStorage.getItem('caseedge_ailang') || 'en',
@@ -6122,7 +6197,124 @@ const OPENERS = {
 function startInterview() {
   if (!state.firm || !state.caseType) return;
   if (!requireAuth()) return;
-  brGate('case', _startInterviewReal);
+  brGate('case', openCaseLibrary);
+}
+
+/* ────────────────────────────────────────────────────
+   FULL CASE — LIBRARY PICKER + SESSION (server-driven)
+──────────────────────────────────────────────────── */
+// Map a chosen setup case-type onto library case_type values (loose match).
+function caseTypeMatches(libType, chosen) {
+  const a = (libType || '').toLowerCase();
+  const b = (chosen || '').toLowerCase();
+  if (!b) return true;
+  if (a.includes(b) || b.includes(a)) return true;
+  // a few synonyms so the filter is forgiving, never empty-by-accident
+  const syn = {
+    'profitability': ['profit', 'margin', 'turnaround'],
+    'market entry': ['entry', 'market sizing', 'go-to-market'],
+    'm&a': ['merger', 'acquisition', 'due diligence', 'ma'],
+    'growth strategy': ['growth', 'revenue', 'expansion'],
+    'cost reduction': ['cost', 'operations', 'efficiency'],
+    'pricing': ['price', 'monetization']
+  };
+  return (syn[b] || []).some(s => a.includes(s));
+}
+
+async function openCaseLibrary() {
+  const note = document.getElementById('caselib-firm-note');
+  if (note) note.textContent = state.firm ? ('Interviewer style: ' + state.firm + '.') : '';
+  showScreen('caselib');
+  const listEl = document.getElementById('caselib-list');
+  const countEl = document.getElementById('caselib-count');
+  try {
+    if (!state.caseLibCache) {
+      const data = await callCaseSession({ action: 'list' });
+      state.caseLibCache = (data && Array.isArray(data.cases)) ? data.cases : [];
+    }
+    renderCaseLibrary(state.caseLibCache);
+  } catch (e) {
+    if (listEl) listEl.innerHTML =
+      '<div style="opacity:.7;padding:20px 0;">' + esc(e.userFacing ? e.message : 'Could not load the case library. Please try again.') +
+      '</div><button class="btn btn-primary" onclick="openCaseLibrary()">Retry</button>';
+    if (countEl) countEl.textContent = '';
+  }
+}
+
+function renderCaseLibrary(all) {
+  const listEl = document.getElementById('caselib-list');
+  const countEl = document.getElementById('caselib-count');
+  if (!listEl) return;
+  // Filter by the chosen type; if the filter empties the list, show everything.
+  let cases = all.filter(c => caseTypeMatches(c.case_type, state.caseType));
+  if (!cases.length) cases = all.slice();
+  const seen = new Set(state.seenCases.map(s => (s || '').toLowerCase()));
+  listEl.innerHTML = cases.map(c => {
+    const done = seen.has(('case #' + c.id).toLowerCase()) || seen.has((c.title || '').toLowerCase());
+    return `<button class="firm-card caselib-card" style="width:100%;text-align:left;cursor:pointer;" onclick="startLibraryCase(${c.id})" aria-pressed="false">
+      <div style="flex:1;min-width:0;">
+        <div class="firm-name">${esc(c.title)}${done ? ' <span style="color:var(--accent-teal);font-size:11px;opacity:.85;">✓ done</span>' : ''}</div>
+        <div class="firm-desc">${esc(c.case_type)} · ${esc(c.industry)} · ${esc(c.difficulty)} · ~${esc(String(c.est_minutes || '—'))} min · ${esc(String(c.steps))} steps</div>
+      </div>
+      <div class="firm-check" style="opacity:1;background:transparent;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+      </div>
+    </button>`;
+  }).join('');
+  if (countEl) countEl.textContent = cases.length + ' case' + (cases.length === 1 ? '' : 's') +
+    (cases.length < all.length ? ' · ' + state.caseType : '');
+}
+
+async function startLibraryCase(caseId) {
+  if (!requireAuth()) return;
+  const meta = (state.caseLibCache || []).find(c => c.id === caseId);
+  if (!meta) return;
+  recordSession('case', meta.case_type || state.caseType);
+
+  // Reset session state for the library case.
+  state.messages = [];
+  state.msgCount = 0;
+  state.overtimes = [];
+  state.caseMode = true;
+  state.caseId = caseId;
+  state.caseTitle = meta.title;
+  state.caseSteps = meta.steps || 1;
+  state.stepIndex = 0;
+  state.attemptCount = 0;
+  state.revealedExhibits = [];
+
+  document.getElementById('b-firm').textContent  = state.firm;
+  document.getElementById('b-type').textContent  = meta.case_type || state.caseType;
+  document.getElementById('b-user').textContent  = state.userName.split(' ')[0] || 'You';
+  document.getElementById('fb-firm').textContent = state.firm;
+  document.getElementById('fb-type').textContent = meta.case_type || state.caseType;
+
+  const chat = document.getElementById('chat-area');
+  chat.innerHTML = `
+    <div class="typing" id="typing-ind">
+      <div class="msg-av" style="background:rgba(93,184,166,.14);color:var(--coral);font-family:var(--font-display);">I</div>
+      <div class="typing-bbl"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+    </div>`;
+  setProgress(4);
+  showScreen('interview');
+  renderHints();
+  setTyping(true);
+
+  // Opening turn: server presents the prompt + first question (no verdict).
+  try {
+    const data = await callCaseSession({
+      caseId: state.caseId, stepIndex: 0, attemptCount: 0, firm: state.firm,
+      revealedExhibits: [], messages: []
+    });
+    if (Array.isArray(data.revealedExhibits)) state.revealedExhibits = data.revealedExhibits;
+    const opening = data.reply || 'Let us begin. Please structure your approach to this case.';
+    state.messages.push({ role: 'assistant', content: opening });
+    rememberCase('Case #' + state.caseId + ': ' + state.caseTitle);
+    setTimeout(() => { setTyping(false); addMsg('ai', opening, true); startRespTimer(); }, 600);
+  } catch (e) {
+    setTyping(false);
+    addMsg('ai', (e && e.userFacing) ? e.message : 'Connection error. Please check your network and try again.');
+  }
 }
 async function _startInterviewReal() {
   if (!state.firm || !state.caseType) return;
@@ -6668,6 +6860,45 @@ async function sendMessage() {
     } catch(_) {
       setTyping(false);
       addMsg('ai', 'Apologies - something went wrong. Please try again.');
+    }
+    return;
+  }
+
+  // Full Case (library-backed): the server grades the answer against the hidden
+  // key, gates hints/exhibits, and tells us whether to advance the step.
+  if (state.caseMode && state.caseId != null) {
+    try {
+      const data = await callCaseSession({
+        caseId: state.caseId,
+        stepIndex: state.stepIndex,
+        attemptCount: state.attemptCount,
+        firm: state.firm,
+        revealedExhibits: state.revealedExhibits,
+        messages: state.messages.slice(-16)
+      });
+      if (Array.isArray(data.revealedExhibits)) state.revealedExhibits = data.revealedExhibits;
+      const reply = data.reply || 'Apologies — please try again.';
+      state.messages.push({ role: 'assistant', content: reply });
+
+      const lastIndex = Math.max(0, state.caseSteps - 1);
+      if (data.verdict === 'pass') {
+        if (state.stepIndex >= lastIndex) {
+          // Final step cleared — show the closing line, then the existing feedback flow.
+          setProgress(100);
+          setTimeout(() => { setTyping(false); addMsg('ai', reply, true); }, 500);
+          setTimeout(() => { endInterview(); }, 1500);
+          return;
+        }
+        state.stepIndex++;
+        state.attemptCount = 0;
+      } else if (data.verdict === 'retry') {
+        state.attemptCount++;
+      }
+      setProgress(Math.max(4, Math.min(96, Math.round((state.stepIndex / Math.max(1, state.caseSteps)) * 100))));
+      setTimeout(() => { setTyping(false); addMsg('ai', reply, true); startRespTimer(); }, 500);
+    } catch (e) {
+      setTyping(false);
+      addMsg('ai', (e && e.userFacing) ? e.message : 'Apologies — something went wrong. Please try again.');
     }
     return;
   }

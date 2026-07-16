@@ -1,4 +1,9 @@
 {
+  "functions": {
+    "api/case-session.js": {
+      "includeFiles": "api/_cases.json"
+    }
+  },
   "headers": [
     {
       "source": "/(.*)",
