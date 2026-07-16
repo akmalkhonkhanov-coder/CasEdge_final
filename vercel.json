@@ -1,7 +1,11 @@
 {
   "functions": {
     "api/case-session.js": {
-      "includeFiles": "api/_cases.json"
+      "includeFiles": "api/_cases.json",
+      "maxDuration": 60
+    },
+    "api/claude.js": {
+      "maxDuration": 60
     }
   },
   "headers": [
