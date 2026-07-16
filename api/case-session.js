@@ -1,0 +1,406 @@
+// CasEdge case-session endpoint — server-side driver for the Full Case Interview
+// mode backed by the 100-case library (api/_cases.json).
+//
+// Mirrors api/claude.js security posture: locked CORS, Supabase bearer token
+// verification, shared per-user rate limit, body limits, upstream timeout and
+// no error leakage. The case library and every answer key (interviewer_md,
+// hint text, exhibit bodies) live ONLY on the server: the client receives the
+// interviewer's reply plus a verdict and the list of revealed exhibit ids —
+// never the answer key.
+//
+// Required Vercel env vars (same as api/claude.js):
+//   ANTHROPIC_API_KEY, SUPABASE_URL, SUPABASE_ANON_KEY, ALLOWED_ORIGIN (opt)
+//
+// The library file is read from disk (import.meta.url) and bundled via the
+// includeFiles rule in vercel.json.
+
+import { readFileSync } from 'node:fs';
+
+const FALLBACK_ORIGIN = 'https://cas-edge-final.vercel.app';
+const CASE_MODEL = 'claude-sonnet-5';   // fixed server-side; client cannot choose
+const MAX_TOKENS = 1300;
+const MAX_BODY_BYTES = 200 * 1024;      // 200 KB request cap
+const RATE_LIMIT = 30;                  // requests per user per window
+const RATE_WINDOW_MS = 60 * 1000;
+const UPSTREAM_TIMEOUT_MS = 60 * 1000;
+const AUTH_TIMEOUT_MS = 8 * 1000;
+
+/* ───────────────────────── case library (lazy, cached) ───────────────────── */
+let _lib = null;
+function lib() {
+  if (_lib) return _lib;
+  const raw = readFileSync(new URL('./_cases.json', import.meta.url), 'utf8');
+  const data = JSON.parse(raw);
+  const byId = new Map();
+  for (const c of data.cases) byId.set(String(c.id), c);
+  _lib = { data, byId };
+  return _lib;
+}
+
+/* ───────────────────────── list action (meta only) ──────────────────────────
+   Returns only non-spoiler meta. trap_or_clean and naive_error are the trap
+   signal and the expected wrong answer — withheld so the candidate cannot see
+   the twist before starting. Answer keys, prompts and exhibits are omitted. */
+export function listCases() {
+  const { data } = lib();
+  return data.cases.map(c => ({
+    id: c.id,
+    title: c.title,
+    case_type: c.case_type,
+    industry: c.industry,
+    difficulty: c.difficulty,
+    est_minutes: c.est_minutes,
+    steps: Array.isArray(c.steps) ? c.steps.length : 0
+  }));
+}
+
+/* ───────────────────────── marker parsing ────────────────────────────────────
+   The interviewer is told to append hidden markers. We strip them from the
+   text the client sees and surface them structurally. */
+export function parseMarkers(text, priorRevealed) {
+  const revealed = new Set(priorRevealed || []);
+  let verdict = null;
+
+  const vMatch = text.match(/<verdict>\s*(pass|retry)\s*<\/verdict>/i);
+  if (vMatch) verdict = vMatch[1].toLowerCase();
+
+  const revRe = /<reveal>\s*([a-zA-Z0-9_-]+)\s*<\/reveal>/gi;
+  let m;
+  while ((m = revRe.exec(text)) !== null) revealed.add(m[1]);
+
+  // Remove every marker from the visible reply.
+  const reply = text
+    .replace(/<verdict>[\s\S]*?<\/verdict>/gi, '')
+    .replace(/<reveal>[\s\S]*?<\/reveal>/gi, '')
+    .replace(/[ \t]+\n/g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+
+  return { reply, verdict, revealedExhibits: Array.from(revealed) };
+}
+
+/* ───────────────────────── exhibit gating ────────────────────────────────────
+   Two gating sources, computed once per case (not per step) so a trap exhibit
+   stays hidden across the WHOLE case until the candidate earns it:
+     • exhibit.reveal === 'on_request'         → gated, triggers from exhibit.triggers
+     • any step.conditional_exhibits[].title   → the disclosure layer (#81+):
+       matches a case exhibit by title and gates it with that step's triggers.
+   A matched/on_request exhibit is included with its body but wrapped in a strict
+   gate: the interviewer surfaces it ONLY when the candidate asks about the
+   triggers, prefixing the reply with <reveal>id</reveal>. Once the client reports
+   the id as revealed it is shown ungated. Conditional topics that match no case
+   exhibit become a lightweight "do not volunteer unless asked" instruction. */
+function titleMatch(a, b) {
+  a = (a || '').trim().toLowerCase().replace(/[.\s]+$/, '');
+  b = (b || '').trim().toLowerCase().replace(/[.\s]+$/, '');
+  if (!a || !b) return false;
+  return a.includes(b) || b.includes(a);
+}
+
+// Map<exhibitId, Set<trigger>> plus unmatched conditional topics [{title,triggers}]
+function caseGates(caseObj) {
+  const exhibits = Array.isArray(caseObj.exhibits) ? caseObj.exhibits : [];
+  const gateMap = new Map();
+  const addGate = (id, triggers) => {
+    if (!gateMap.has(id)) gateMap.set(id, new Set());
+    for (const t of (triggers || [])) if (t) gateMap.get(id).add(t);
+  };
+  for (const ex of exhibits) {
+    if (ex.reveal === 'on_request') addGate(ex.id, ex.triggers || []);
+  }
+  const unmatchedTopics = [];
+  for (const s of (caseObj.steps || [])) {
+    for (const ce of (s.conditional_exhibits || [])) {
+      const hit = exhibits.find(ex => titleMatch(ex.title, ce.title));
+      if (hit) addGate(hit.id, ce.triggers || []);
+      else unmatchedTopics.push({ title: (ce.title || '').trim(), triggers: ce.triggers || [] });
+    }
+  }
+  return { gateMap, unmatchedTopics };
+}
+
+function exhibitsBlock(caseObj, revealedSet) {
+  const exhibits = Array.isArray(caseObj.exhibits) ? caseObj.exhibits : [];
+  const { gateMap, unmatchedTopics } = caseGates(caseObj);
+  const shown = [];
+  const gated = [];
+  for (const ex of exhibits) {
+    const gate = gateMap.get(ex.id);
+    if (gate && !revealedSet.has(ex.id)) {
+      const triggers = Array.from(gate);
+      gated.push(
+        `HIDDEN EXHIBIT id="${ex.id}" — "${ex.title}"\n` +
+        `Do NOT mention or describe this exhibit's contents unless the candidate explicitly asks about: ` +
+        `${triggers.length ? triggers.map(t => `"${t}"`).join(', ') : 'the specific data it contains'}.\n` +
+        `If (and only if) they ask, BEGIN your reply with the marker <reveal>${ex.id}</reveal> and then present it.\n` +
+        `Contents (keep hidden until asked):\n${ex.body_md || ''}`
+      );
+    } else {
+      shown.push(`EXHIBIT id="${ex.id}" — "${ex.title}" (available to share):\n${ex.body_md || ''}`);
+    }
+  }
+  let out = '';
+  if (shown.length) out += `\n\n════ EXHIBITS (share when the candidate reaches them) ════\n${shown.join('\n\n')}`;
+  if (gated.length) out += `\n\n════ GATED EXHIBITS (reveal only on request) ════\n${gated.join('\n\n')}`;
+  if (unmatchedTopics.length) {
+    const lines = unmatchedTopics.map(u =>
+      `- "${u.title}": do not volunteer anything about this unless the candidate explicitly asks about ${
+        (u.triggers || []).length ? u.triggers.map(t => `"${t}"`).join(', ') : 'it'}.`);
+    out += `\n\n════ GATED TOPICS (do not volunteer; only if asked) ════\n${lines.join('\n')}`;
+  }
+  return out;
+}
+
+/* ───────────────────────── firm style ────────────────────────────────────── */
+function firmStyle(firm) {
+  const f = (firm || '').toLowerCase();
+  if (f.includes('mckinsey'))
+    return 'McKinsey — INTERVIEWER-LED. You drive the case. Walk the candidate through the steps in order, asking each step\'s question yourself and steering direction. The candidate follows and suggests next moves; you decide when to advance. Hypothesis-driven, structured before each bucket.';
+  if (f.includes('bcg'))
+    return 'BCG — INTERVIEWEE-LED. The candidate drives; you follow and respond to their requests. Still guide them through this case\'s fixed steps, but let them lead the direction and reach each question naturally. A final recommendation is always required at the end.';
+  if (f.includes('bain'))
+    return 'Bain — candidate-led and conversational. Reward creativity and the "airport test". Guide through the fixed steps while letting the candidate drive.';
+  return 'MBB interviewer. Guide the candidate through the fixed steps, balancing structure with letting them drive.';
+}
+
+/* ───────────────────────── hint gating ───────────────────────────────────────
+   attemptCount is the number of failed attempts on the CURRENT step.
+   0  → L0 silence: no hints, no leading.
+   >=2 with L1 → L1 nudge allowed.
+   >=3 with L2 → L2 nudge allowed. */
+function hintsBlock(step, attemptCount) {
+  const h = (step && step.hints) || {};
+  const n = Number(attemptCount) || 0;
+  if (n <= 0) {
+    return '\n\nHINT POLICY: This is the candidate\'s first attempt at this step (L0). Do NOT give any hint, nudge, or leading language. Ask the question and let them work.';
+  }
+  const lines = [];
+  if (n >= 2 && h.L1) lines.push(`Level-1 nudge (offer only as a gentle steer, never the answer): ${h.L1}`);
+  if (n >= 3 && h.L2) lines.push(`Level-2 nudge (a stronger steer, still not the full answer): ${h.L2}`);
+  if (!lines.length) {
+    return `\n\nHINT POLICY: The candidate has struggled (${n} attempt(s)). You may give a light directional nudge toward the right MOVE, but never state the answer.`;
+  }
+  return `\n\nHINT POLICY: The candidate has made ${n} attempt(s) on this step. You may now weave in the following nudge(s) — as a steer toward the right move, never the answer itself:\n- ${lines.join('\n- ')}`;
+}
+
+/* ───────────────────────── system prompt assembly ───────────────────────────
+   Rebuilt for the CURRENT step on every call. interviewer_md is the answer key,
+   used only to grade — never read aloud. */
+export function buildSystemPrompt({ caseObj, stepIndex, attemptCount, firm, revealedSet, isOpening }) {
+  const steps = caseObj.steps || [];
+  const idx = Math.max(0, Math.min(stepIndex, steps.length - 1));
+  const step = steps[idx] || {};
+  const nextStep = steps[idx + 1] || null;
+  const isLast = idx >= steps.length - 1;
+
+  const header =
+`You are an elite MBB case interviewer for CasEdge running a REAL casebook case from the CasEdge library. This case is fully authored in advance — every number, exhibit and answer is fixed. You must NEVER invent, change, or contradict any figure. Only reveal data that appears below, and only when the candidate reaches it.
+
+FIRM STYLE: ${firmStyle(firm)}
+
+CASE: "${caseObj.title}" — ${caseObj.case_type} · ${caseObj.industry} · ${caseObj.difficulty}
+
+CASE PROMPT (the scenario):
+${caseObj.prompt_md || caseObj.header_md || ''}`;
+
+  const answerKey =
+`\n\n════ ANSWER KEY FOR THE CURRENT STEP — NEVER READ THIS ALOUD ════
+This is grading material only. NEVER quote, paraphrase, summarise, or hand any of it to the candidate. If the step text below happens to contain the model answer or a python/solution block, speak ONLY the question part — never the solution.
+
+CURRENT STEP ${idx + 1} of ${steps.length} — "${step.label || ''}"
+QUESTION TO ASK THE CANDIDATE:
+${step.candidate_md || step.label || ''}
+
+ANSWER KEY (hidden — grade against this):
+${step.interviewer_md || '(No explicit key parsed for this step. Grade using the case prompt, the exhibits, and standard MBB rigor for a step of this type. Any answer text embedded in the question above is interviewer-side — do not read it out.)'}`;
+
+  const exhibits = exhibitsBlock(caseObj, revealedSet);
+  const hints = hintsBlock(step, attemptCount);
+
+  let flow;
+  if (isOpening) {
+    flow =
+`\n\n════ WHAT TO DO NOW (OPENING) ════
+This is the start of the case. Do the following, briefly and in character:
+1. Present the case prompt / scenario to the candidate in your own words.
+2. Present any EXHIBITS marked "available to share" above only if this first step calls for them; otherwise hold them.
+3. Ask the CURRENT STEP question above.
+Do NOT evaluate anything yet and do NOT emit a <verdict> marker on this opening turn. Keep it tight and professional — no filler.`;
+  } else {
+    const advance = isLast
+      ? `Since this is the LAST step, do NOT ask a new question — give a brief, professional closing line and stop.`
+      : `Then transition and ask the NEXT step's question:\n"${(nextStep && (nextStep.candidate_md || nextStep.label)) || ''}"`;
+    flow =
+`\n\n════ WHAT TO DO NOW (EVALUATE) ════
+Grade the candidate's latest message against the ANSWER KEY for the current step.
+
+- If the answer meets the bar for this step (captures the key insight / correct math / required structure): end your reply with the hidden marker <verdict>pass</verdict>. ${advance}
+- If it does not yet meet the bar: give a short, demanding, specific nudge toward the right MOVE (obeying the HINT POLICY below — never reveal the answer), then end your reply with the hidden marker <verdict>retry</verdict>. Do NOT advance.
+
+Rules for every reply:
+- Exactly ONE hidden <verdict> marker, on its own, at the very end.
+- Reveal a GATED exhibit only when the candidate asks about its triggers, prefixing with <reveal>id</reveal>.
+- Zero filler ("great question", "let me think"). Be concise, concrete, numeric. 2–5 sentences plus at most one question.
+- Never present a number that is not in the material above. Never change a number you already gave.`;
+  }
+
+  const language =
+`\n\n════ OUTPUT ════
+Conduct the case in English. Keep the hidden markers EXACTLY as written (<verdict>…</verdict>, <reveal>…</reveal>) so the app can parse them; never explain or display them to the candidate.`;
+
+  return header + answerKey + exhibits + hints + flow + language;
+}
+
+/* ───────────────────────── infra (shared with claude.js pattern) ─────────── */
+async function fetchWithTimeout(url, options, timeoutMs) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(url, { ...options, signal: controller.signal });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function rateLimited(userId, sbUrl, sbKey, token) {
+  try {
+    const resp = await fetchWithTimeout(sbUrl + '/rest/v1/rpc/check_and_increment_rate_limit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', apikey: sbKey, Authorization: 'Bearer ' + token },
+      body: JSON.stringify({ p_user_id: userId, p_window_seconds: RATE_WINDOW_MS / 1000, p_limit: RATE_LIMIT })
+    }, AUTH_TIMEOUT_MS);
+    if (!resp.ok) { console.error('Rate-limit RPC returned', resp.status); return false; }
+    const withinLimit = await resp.json();
+    return withinLimit === false;
+  } catch (e) {
+    console.error('Rate-limit RPC failed:', e);
+    return false; // fail open, same as claude.js
+  }
+}
+
+function hasAssistantTurn(messages) {
+  return Array.isArray(messages) && messages.some(m => m && m.role === 'assistant');
+}
+
+/* ───────────────────────── handler ───────────────────────────────────────── */
+export default async function handler(req, res) {
+  const origin = process.env.ALLOWED_ORIGIN || FALLBACK_ORIGIN;
+  res.setHeader('Access-Control-Allow-Origin', origin);
+  res.setHeader('Vary', 'Origin');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+  if (req.method === 'OPTIONS') return res.status(200).end();
+  if (req.method !== 'POST') return res.status(405).json({ error: { message: 'Method not allowed' } });
+
+  try {
+    // 1) Require a Supabase bearer token.
+    const auth = req.headers['authorization'] || req.headers['Authorization'] || '';
+    const token = auth.startsWith('Bearer ') ? auth.slice(7) : null;
+    if (!token) return res.status(401).json({ error: { message: 'Authentication required.' } });
+
+    const sbUrl = process.env.SUPABASE_URL;
+    const sbKey = process.env.SUPABASE_ANON_KEY;
+    if (!sbUrl || !sbKey) return res.status(500).json({ error: { message: 'Server auth not configured.' } });
+
+    // 2) Body size limit before any network call.
+    const raw = JSON.stringify(req.body || {});
+    if (raw.length > MAX_BODY_BYTES) return res.status(413).json({ error: { message: 'Request too large.' } });
+
+    // 3) Verify the token with Supabase.
+    let userResp;
+    try {
+      userResp = await fetchWithTimeout(sbUrl + '/auth/v1/user',
+        { headers: { apikey: sbKey, Authorization: 'Bearer ' + token } }, AUTH_TIMEOUT_MS);
+    } catch (e) {
+      return res.status(504).json({ error: { message: 'Authentication timed out. Please try again.' } });
+    }
+    if (!userResp.ok) return res.status(401).json({ error: { message: 'Invalid or expired session.' } });
+    const user = await userResp.json();
+    const userId = user && user.id;
+    if (!userId) return res.status(401).json({ error: { message: 'Invalid session.' } });
+
+    const body = req.body || {};
+
+    // 4) list action — no model call, meta only.
+    if (body.action === 'list') {
+      return res.status(200).json({ cases: listCases() });
+    }
+
+    // 5) Per-user rate limit (only the model-calling path).
+    if (await rateLimited(userId, sbUrl, sbKey, token)) {
+      return res.status(429).json({ error: { message: 'Too many requests. Please slow down.' } });
+    }
+
+    // 6) Resolve case + step.
+    const caseObj = lib().byId.get(String(body.caseId));
+    if (!caseObj) return res.status(400).json({ error: { message: 'Unknown case.' } });
+    const steps = Array.isArray(caseObj.steps) ? caseObj.steps : [];
+    if (!steps.length) return res.status(400).json({ error: { message: 'Case has no steps.' } });
+
+    let stepIndex = Number(body.stepIndex);
+    if (!Number.isInteger(stepIndex) || stepIndex < 0) stepIndex = 0;
+    if (stepIndex > steps.length - 1) stepIndex = steps.length - 1;
+
+    const attemptCount = Number(body.attemptCount) || 0;
+    const priorRevealed = Array.isArray(body.revealedExhibits) ? body.revealedExhibits.filter(x => typeof x === 'string') : [];
+    const revealedSet = new Set(priorRevealed);
+
+    // Client sends only role/content; keep last 16 turns to bound tokens.
+    const clientMsgs = Array.isArray(body.messages) ? body.messages : [];
+    const messages = clientMsgs
+      .filter(m => m && (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string')
+      .slice(-16)
+      .map(m => ({ role: m.role, content: m.content }));
+
+    const isOpening = !hasAssistantTurn(messages);
+    // Anthropic requires the conversation to start with a user turn.
+    const convo = messages.length ? messages : [{ role: 'user', content: 'Please begin the case.' }];
+    if (convo[0].role !== 'user') convo.unshift({ role: 'user', content: 'Please begin the case.' });
+
+    const system = buildSystemPrompt({ caseObj, stepIndex, attemptCount, firm: body.firm, revealedSet, isOpening });
+
+    // 7) Forward to Anthropic (prompt caching on system, timeout).
+    let response;
+    try {
+      response = await fetchWithTimeout('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': process.env.ANTHROPIC_API_KEY,
+          'anthropic-version': '2023-06-01',
+          'anthropic-beta': 'prompt-caching-2024-07-31'
+        },
+        body: JSON.stringify({
+          model: CASE_MODEL,
+          max_tokens: MAX_TOKENS,
+          system: [{ type: 'text', text: system, cache_control: { type: 'ephemeral' } }],
+          messages: convo
+        })
+      }, UPSTREAM_TIMEOUT_MS);
+    } catch (e) {
+      return res.status(504).json({ error: { message: 'The interviewer is taking too long. Please try again.' } });
+    }
+
+    const data = await response.json();
+    if (response.status < 200 || response.status >= 300) {
+      // Pass through status; never leak upstream internals.
+      return res.status(response.status).json({ error: { message: 'The interviewer is busy right now. Please try again.' } });
+    }
+
+    const text = (data && data.content && data.content[0] && data.content[0].text) || '';
+    const parsed = parseMarkers(text, priorRevealed);
+
+    // On the opening turn we never advance — force verdict null.
+    const verdict = isOpening ? null : parsed.verdict;
+
+    return res.status(200).json({
+      reply: parsed.reply || 'No response was returned. Please try again.',
+      verdict: verdict,
+      revealedExhibits: parsed.revealedExhibits
+    });
+  } catch (err) {
+    console.error('CasEdge case-session error:', err);
+    return res.status(500).json({ error: { message: 'Something went wrong. Please try again.' } });
+  }
+}
