@@ -1038,6 +1038,10 @@
     .ring-svg { transform: rotate(-90deg); }
     .ring-bg  { fill: none; stroke: rgba(255,255,255,.06); stroke-width: 10; }
     .ring-arc { fill: none; stroke: var(--coral); stroke-width: 10; stroke-linecap: round; transition: stroke-dashoffset 1.5s cubic-bezier(.25,.46,.45,.94); }
+    @keyframes casSpin { to { transform: rotate(360deg); } }
+    .cas-ring-spin { animation: casSpin 1.05s linear infinite; transform-origin: 82px 82px; }
+    @keyframes casPulse { 0%,100% { opacity: .4; } 50% { opacity: 1; } }
+    .cas-pulse { animation: casPulse 1.2s ease-in-out infinite; }
     .ring-inner {
       position: absolute; inset: 0; display: flex; flex-direction: column;
       align-items: center; justify-content: center;
@@ -7145,7 +7149,36 @@ function showInsufficientFeedback() {
 /* ────────────────────────────────────────────────────
    FEEDBACK
 ──────────────────────────────────────────────────── */
+// Loading state shown while the (10-15s) partner debrief is being written, so
+// the candidate sees a working spinner instead of a dead "0/10".
+let _fbLoadTimer = null;
+function startFeedbackLoading() {
+  const valEl = document.getElementById('ring-val');
+  const arc = document.getElementById('ring-arc');
+  if (arc) { arc.style.strokeDashoffset = 439.82 * 0.72; arc.classList.add('cas-ring-spin'); }
+  setText('score-title', 'Scoring your case…');
+  setText('score-sub', 'The partner is writing your breakdown — about 10–15 seconds');
+  ['structure','quant','logic','comm','ownership'].forEach(k => {
+    const v = document.getElementById('mv-' + k); if (v) v.textContent = '·';
+    const b = document.getElementById('mb-' + k); if (b) { b.style.width = '26%'; b.classList.add('cas-pulse'); }
+  });
+  const fbEl = document.getElementById('fb-text');
+  if (fbEl) { fbEl.classList.add('cas-pulse'); fbEl.textContent = 'Analysing every answer, checking your math, and writing a partner-level debrief…'; }
+  let n = 0;
+  if (_fbLoadTimer) clearInterval(_fbLoadTimer);
+  _fbLoadTimer = setInterval(() => { n = (n % 3) + 1; if (valEl) valEl.textContent = '·'.repeat(n); }, 380);
+}
+function stopFeedbackLoading() {
+  if (_fbLoadTimer) { clearInterval(_fbLoadTimer); _fbLoadTimer = null; }
+  const arc = document.getElementById('ring-arc'); if (arc) arc.classList.remove('cas-ring-spin');
+  const fbEl = document.getElementById('fb-text'); if (fbEl) fbEl.classList.remove('cas-pulse');
+  ['structure','quant','logic','comm','ownership'].forEach(k => {
+    const b = document.getElementById('mb-' + k); if (b) b.classList.remove('cas-pulse');
+  });
+}
+
 async function generateAIFeedback() {
+  startFeedbackLoading();
   const transcript = state.messages
     .map(m => (m.role === 'user' ? (state.userName || 'CANDIDATE') : 'INTERVIEWER') + ': ' + m.content)
     .join('\n\n');
@@ -7223,6 +7256,7 @@ Return ONLY valid JSON (no markdown, no backticks). All five scores are 1.0-10.0
     const _s = clean.indexOf('{'), _e = clean.lastIndexOf('}');
     if (_s >= 0 && _e > _s) clean = clean.slice(_s, _e + 1);
     const d = JSON.parse(clean);
+    stopFeedbackLoading();
 
     // Record the overall score into progress (for the avg-score stat)
     const ov = parseFloat(d.overall);
@@ -7290,9 +7324,12 @@ Return ONLY valid JSON (no markdown, no backticks). All five scores are 1.0-10.0
       ${d.add ? `<strong>➕ Start doing this:</strong> ${d.add}<br><br>` : ''}
       <strong>🎯 Partner verdict:</strong> ${d.verdict_reason || ''}`;
   } catch(e) {
-    setText('score-title', 'Feedback generated');
+    stopFeedbackLoading();
+    const valEl = document.getElementById('ring-val'); if (valEl) valEl.textContent = '–';
+    setText('score-title', 'Could not generate the scorecard');
+    setText('score-sub', 'The grader was briefly overloaded — tap Practice again to retry');
     const fbEl = document.getElementById('fb-text');
-    if (fbEl) fbEl.textContent = 'Could not load AI feedback. Please check your connection.';
+    if (fbEl) fbEl.textContent = 'The AI grader was momentarily overloaded and could not return your breakdown. Your answers were fine — just run it once more.';
   }
 }
 
