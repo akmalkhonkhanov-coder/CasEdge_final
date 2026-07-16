@@ -11,10 +11,13 @@
 // Required Vercel env vars (same as api/claude.js):
 //   ANTHROPIC_API_KEY, SUPABASE_URL, SUPABASE_ANON_KEY, ALLOWED_ORIGIN (opt)
 //
-// The library file is read from disk (import.meta.url) and bundled via the
-// includeFiles rule in vercel.json.
+// The library file is loaded via require() (bundled into the function at build
+// time); vercel.json also lists it under includeFiles as a belt-and-braces.
 
-import { readFileSync } from 'node:fs';
+// Load the library via require so Vercel's bundler inlines it at build time.
+// (Vercel transpiles this function to CommonJS, so ESM-only features like
+// `import.meta.url` / `import fs` are unavailable — require is the safe path.)
+const CASES_DATA = require('./_cases.json');
 
 const FALLBACK_ORIGIN = 'https://cas-edge-final.vercel.app';
 const CASE_MODEL = 'claude-sonnet-5';   // fixed server-side; client cannot choose
@@ -29,8 +32,7 @@ const AUTH_TIMEOUT_MS = 8 * 1000;
 let _lib = null;
 function lib() {
   if (_lib) return _lib;
-  const raw = readFileSync(new URL('./_cases.json', import.meta.url), 'utf8');
-  const data = JSON.parse(raw);
+  const data = CASES_DATA;
   const byId = new Map();
   for (const c of data.cases) byId.set(String(c.id), c);
   _lib = { data, byId };
