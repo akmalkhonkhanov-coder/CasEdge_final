@@ -387,10 +387,20 @@ export default async function handler(req, res) {
     const data = await response.json();
     if (response.status < 200 || response.status >= 300) {
       // Pass through status; never leak upstream internals.
+      console.error('case-session upstream non-2xx', response.status, JSON.stringify(data).slice(0, 300));
       return res.status(response.status).json({ error: { message: 'The interviewer is busy right now. Please try again.' } });
     }
 
-    const text = (data && data.content && data.content[0] && data.content[0].text) || '';
+    // Concatenate every text block (the model may return thinking/other blocks first).
+    const text = Array.isArray(data && data.content)
+      ? data.content.filter(b => b && b.type === 'text' && typeof b.text === 'string').map(b => b.text).join('\n').trim()
+      : '';
+    if (!text) {
+      const shape = data && typeof data === 'object'
+        ? JSON.stringify({ type: data.type, stop_reason: data.stop_reason, blocks: Array.isArray(data.content) ? data.content.map(b => b && b.type) : typeof data.content, err: data.error && data.error.type }).slice(0, 300)
+        : String(data).slice(0, 200);
+      console.error('case-session empty text from upstream:', shape);
+    }
     const parsed = parseMarkers(text, priorRevealed);
 
     // On the opening turn we never advance — force verdict null.
