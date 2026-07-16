@@ -7214,7 +7214,12 @@ Return ONLY valid JSON (no markdown, no backticks). All five scores are 1.0-10.0
     const raw = await callAI(EVAL_SYSTEM + langInstruction(), [
       { role: 'user', content: `Evaluate this ${evalCtx}:\n\n${transcript}${timingNote}` }
     ], 'claude-sonnet-5');
-    const clean = raw.replace(/```json|"```"/g, '').trim();
+    // The model intermittently wraps its JSON in ```json … ``` fences despite
+    // being told not to. Strip all fences, then slice to the outermost braces
+    // so parsing is robust whether or not it fenced (and ignores any stray prose).
+    let clean = raw.replace(/```json/gi, '').replace(/```/g, '').trim();
+    const _s = clean.indexOf('{'), _e = clean.lastIndexOf('}');
+    if (_s >= 0 && _e > _s) clean = clean.slice(_s, _e + 1);
     const d = JSON.parse(clean);
 
     // Record the overall score into progress (for the avg-score stat)
