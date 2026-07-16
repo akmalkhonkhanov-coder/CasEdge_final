@@ -341,6 +341,26 @@ async function fetchWithTimeout(url, options, timeoutMs) {
   }
 }
 
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+// Retry transient Anthropic overloads (429/529) and 5xx with backoff so a
+// capacity spike never surfaces as a broken interviewer turn.
+const RETRIABLE_STATUS = new Set([429, 500, 502, 503, 529]);
+async function fetchAnthropicWithRetry(url, options, timeoutMs, maxRetries) {
+  let lastErr;
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    if (attempt > 0) await sleep(Math.min(700 * Math.pow(2, attempt - 1), 4000));
+    try {
+      const resp = await fetchWithTimeout(url, options, timeoutMs);
+      if (RETRIABLE_STATUS.has(resp.status) && attempt < maxRetries) continue;
+      return resp;
+    } catch (e) {
+      lastErr = e;
+      if (attempt >= maxRetries) throw e;
+    }
+  }
+  if (lastErr) throw lastErr;
+}
+
 async function rateLimited(userId, sbUrl, sbKey, token) {
   try {
     const resp = await fetchWithTimeout(sbUrl + '/rest/v1/rpc/check_and_increment_rate_limit', {
@@ -464,7 +484,7 @@ export default async function handler(req, res) {
     // (identical every turn → cache hit); the VOLATILE step block is not.
     let response;
     try {
-      response = await fetchWithTimeout('https://api.anthropic.com/v1/messages', {
+      response = await fetchAnthropicWithRetry('https://api.anthropic.com/v1/messages', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -481,7 +501,7 @@ export default async function handler(req, res) {
           ],
           messages: convo
         })
-      }, UPSTREAM_TIMEOUT_MS);
+      }, UPSTREAM_TIMEOUT_MS, 4);
     } catch (e) {
       return res.status(504).json({ error: { message: 'The interviewer is taking too long. Please try again.' } });
     }

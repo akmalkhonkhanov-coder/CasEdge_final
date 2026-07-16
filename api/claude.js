@@ -63,6 +63,27 @@ async function fetchWithTimeout(url, options, timeoutMs) {
   }
 }
 
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+// Anthropic occasionally returns 429/529 ("overloaded") or 5xx during capacity
+// spikes. Retry a few times with backoff so a transient blip never surfaces to
+// the user as a failed scorecard/drill.
+const RETRIABLE_STATUS = new Set([429, 500, 502, 503, 529]);
+async function fetchAnthropicWithRetry(url, options, timeoutMs, maxRetries) {
+  let lastErr;
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    if (attempt > 0) await sleep(Math.min(700 * Math.pow(2, attempt - 1), 4000));
+    try {
+      const resp = await fetchWithTimeout(url, options, timeoutMs);
+      if (RETRIABLE_STATUS.has(resp.status) && attempt < maxRetries) continue;
+      return resp;
+    } catch (e) {
+      lastErr = e;                       // network/abort — retry too
+      if (attempt >= maxRetries) throw e;
+    }
+  }
+  if (lastErr) throw lastErr;
+}
+
 export default async function handler(req, res) {
   const origin = process.env.ALLOWED_ORIGIN || FALLBACK_ORIGIN;
   res.setHeader('Access-Control-Allow-Origin', origin);
@@ -136,10 +157,10 @@ export default async function handler(req, res) {
       ];
     }
 
-    // 6) Forward to Anthropic (with a timeout).
+    // 6) Forward to Anthropic (with a timeout + retry on transient overloads).
     let response;
     try {
-      response = await fetchWithTimeout('https://api.anthropic.com/v1/messages', {
+      response = await fetchAnthropicWithRetry('https://api.anthropic.com/v1/messages', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -148,7 +169,7 @@ export default async function handler(req, res) {
           'anthropic-beta': 'prompt-caching-2024-07-31'
         },
         body: JSON.stringify(body)
-      }, UPSTREAM_TIMEOUT_MS);
+      }, UPSTREAM_TIMEOUT_MS, 4);
     } catch (e) {
       return res.status(504).json({ error: { message: 'The grader is taking too long. Please try again.' } });
     }
