@@ -56,6 +56,69 @@ export function listCases() {
   }));
 }
 
+/* ───────────────────────── adaptive auto-pick ────────────────────────────────
+   The client sends only firm + caseType + the candidate's rolling level + the
+   ids already seen. The server picks ONE unseen case whose difficulty matches
+   the level, widening to neighbouring bands if the target band is exhausted. */
+function normDiff(d) { return (d || '').replace(/\*/g, '').trim(); }
+
+function typeMatchServer(libType, chosen) {
+  const a = (libType || '').toLowerCase();
+  const b = (chosen || '').toLowerCase();
+  if (!b) return true;
+  if (a.includes(b) || b.includes(a)) return true;
+  const syn = {
+    'profitability': ['profit', 'margin', 'turnaround'],
+    'market entry': ['entry', 'market sizing', 'go-to-market'],
+    'm&a': ['merger', 'acquisition', 'due diligence', 'bolt-on', 'sell-side'],
+    'growth strategy': ['growth', 'revenue', 'expansion'],
+    'cost reduction': ['cost', 'operations', 'efficiency'],
+    'pricing': ['price', 'monetization']
+  };
+  return (syn[b] || []).some(s => a.includes(s));
+}
+
+export function levelToBand(level) {
+  const n = Number(level);
+  if (!Number.isFinite(n)) return 'Medium';   // no history yet → start in the middle
+  if (n < 5) return 'Easy';
+  if (n < 7.5) return 'Medium';
+  return 'Hard';
+}
+
+const BAND_FALLBACK = {
+  Easy: ['Easy', 'Medium', 'Hard'],
+  Medium: ['Medium', 'Easy', 'Hard'],
+  Hard: ['Hard', 'Medium', 'Easy']
+};
+
+function pickMeta(c) {
+  return {
+    id: c.id, title: c.title, case_type: c.case_type, industry: c.industry,
+    difficulty: normDiff(c.difficulty), est_minutes: c.est_minutes,
+    steps: Array.isArray(c.steps) ? c.steps.length : 0
+  };
+}
+
+export function pickCase({ caseType, level, seenIds, rand }) {
+  const { data } = lib();
+  const seen = new Set((Array.isArray(seenIds) ? seenIds : []).map(Number));
+  const r = typeof rand === 'number' ? rand : 0.5;   // deterministic unless caller passes Math.random()
+  const pool = data.cases.filter(c => typeMatchServer(c.case_type, caseType) && !seen.has(Number(c.id)));
+  if (!pool.length) {
+    const anyUnseen = data.cases.some(c => !seen.has(Number(c.id)));
+    return { exhausted: true, scope: anyUnseen ? 'type' : 'all' };
+  }
+  const band = levelToBand(level);
+  for (const b of (BAND_FALLBACK[band] || ['Medium', 'Easy', 'Hard'])) {
+    const cands = pool.filter(c => normDiff(c.difficulty) === b);
+    if (cands.length) {
+      return { case: pickMeta(cands[Math.floor(r * cands.length) % cands.length]), band: b, targetBand: band };
+    }
+  }
+  return { case: pickMeta(pool[Math.floor(r * pool.length) % pool.length]), band: 'Medium', targetBand: band };
+}
+
 /* ───────────────────────── marker parsing ────────────────────────────────────
    The interviewer is told to append hidden markers. We strip them from the
    text the client sees and surface them structurally. */
@@ -327,6 +390,16 @@ export default async function handler(req, res) {
     // 4) list action — no model call, meta only.
     if (body.action === 'list') {
       return res.status(200).json({ cases: listCases() });
+    }
+
+    // 4b) pick action — adaptive auto-selection, no model call, meta only.
+    if (body.action === 'pick') {
+      return res.status(200).json(pickCase({
+        caseType: body.caseType,
+        level: body.level,
+        seenIds: body.seenIds,
+        rand: Math.random()
+      }));
     }
 
     // 5) Per-user rate limit (only the model-calling path).
