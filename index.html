@@ -2807,6 +2807,14 @@ async function syncProgressFromCloud() {
         dims: data.dims || { structure: [], quant: [], logic: [], comm: [], ownership: [] }
       };
       saveProgress(local);
+      // Restore seen-case ids (adaptive picker) — union cloud with local so nothing is lost.
+      if (Array.isArray(data.seen_case_ids)) {
+        try {
+          const localSeen = JSON.parse(localStorage.getItem('caseedge_seen_ids') || '[]');
+          const union = Array.from(new Set([...(Array.isArray(localSeen) ? localSeen : []), ...data.seen_case_ids].map(Number)));
+          localStorage.setItem('caseedge_seen_ids', JSON.stringify(union));
+        } catch (e) {}
+      }
     }
   } catch (e) { console.warn('cloud sync failed', e); }
 }
@@ -6197,7 +6205,102 @@ const OPENERS = {
 function startInterview() {
   if (!state.firm || !state.caseType) return;
   if (!requireAuth()) return;
-  brGate('case', openCaseLibrary);
+  brGate('case', autoStartCase);
+}
+
+/* ────────────────────────────────────────────────────
+   ADAPTIVE AUTO-SELECTION
+   Client picks only firm + type. The engine chooses an unseen case whose
+   difficulty matches the candidate's rolling level, so weak performance draws
+   easier cases and strong performance draws harder ones. Seen cases never repeat.
+──────────────────────────────────────────────────── */
+// Seen case ids (never repeat). Kept in localStorage; mirrored to the cloud so
+// it follows the user across devices when the profiles.seen_case_ids column exists.
+function getSeenIds() {
+  try { const a = JSON.parse(localStorage.getItem('caseedge_seen_ids') || '[]'); return Array.isArray(a) ? a : []; }
+  catch (e) { return []; }
+}
+function addSeenId(id) {
+  id = Number(id);
+  const s = getSeenIds();
+  if (!s.includes(id)) {
+    s.push(id);
+    try { localStorage.setItem('caseedge_seen_ids', JSON.stringify(s)); } catch (e) {}
+    syncSeenToCloud(s);
+  }
+}
+// Separate cloud write so a missing column can't break the main progress sync.
+async function syncSeenToCloud(ids) {
+  if (!sb || !currentUser) return;
+  try { await sb.from('profiles').update({ seen_case_ids: ids }).eq('id', currentUser.id); }
+  catch (e) { /* column may not exist yet — localStorage still holds it */ }
+}
+// Rolling level = mean of the last few case scores (0-10). Null when no history.
+function candidateLevel() {
+  try {
+    const p = loadProgress();
+    const sc = (p.scores || []).filter(n => typeof n === 'number' && !isNaN(n)).slice(-3);
+    if (!sc.length) return null;
+    return sc.reduce((a, b) => a + b, 0) / sc.length;
+  } catch (e) { return null; }
+}
+function casToast(msg) {
+  let t = document.getElementById('soon-toast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'soon-toast';
+    t.style.cssText = 'position:fixed;left:50%;bottom:32px;transform:translateX(-50%) translateY(20px);'
+      + 'background:rgba(20,22,30,.96);color:#e9ecf5;border:1px solid rgba(124,140,232,.35);'
+      + 'padding:13px 20px;border-radius:14px;font-size:13.5px;font-weight:500;z-index:9999;'
+      + 'box-shadow:0 10px 40px rgba(0,0,0,.45);max-width:360px;text-align:center;backdrop-filter:blur(8px);'
+      + 'opacity:0;transition:opacity .25s,transform .25s;';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  requestAnimationFrame(() => { t.style.opacity = '1'; t.style.transform = 'translateX(-50%) translateY(0)'; });
+  clearTimeout(casToast._t);
+  casToast._t = setTimeout(() => { t.style.opacity = '0'; t.style.transform = 'translateX(-50%) translateY(20px)'; }, 4200);
+}
+
+async function autoStartCase() {
+  if (!state.firm || !state.caseType) return;
+  if (!requireAuth()) return;
+
+  // Show the interview shell with a typing indicator while we select.
+  const chat = document.getElementById('chat-area');
+  if (chat) chat.innerHTML = `
+    <div class="typing" id="typing-ind">
+      <div class="msg-av" style="background:rgba(93,184,166,.14);color:var(--coral);font-family:var(--font-display);">I</div>
+      <div class="typing-bbl"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+    </div>`;
+  setProgress(2);
+  showScreen('interview');
+  setTyping(true);
+
+  try {
+    const res = await callCaseSession({
+      action: 'pick', firm: state.firm, caseType: state.caseType,
+      level: candidateLevel(), seenIds: getSeenIds()
+    });
+    if (res && res.exhausted) {
+      setTyping(false);
+      showScreen('setup');
+      casToast(res.scope === 'all'
+        ? 'You have completed every case in the library. Impressive.'
+        : 'You have done every ' + state.caseType + ' case. Try another case type.');
+      return;
+    }
+    const m = res && res.case;
+    if (!m) throw new Error('no case');
+    // Cache the meta so startLibraryCase can read it, then run the normal opening.
+    state.caseLibCache = state.caseLibCache || [];
+    const i = state.caseLibCache.findIndex(c => c.id === m.id);
+    if (i < 0) state.caseLibCache.push(m); else state.caseLibCache[i] = m;
+    startLibraryCase(m.id);
+  } catch (e) {
+    setTyping(false);
+    addMsg('ai', (e && e.userFacing) ? e.message : 'Could not start a case right now. Please try again.');
+  }
 }
 
 /* ────────────────────────────────────────────────────
@@ -6270,6 +6373,7 @@ async function startLibraryCase(caseId) {
   const meta = (state.caseLibCache || []).find(c => c.id === caseId);
   if (!meta) return;
   recordSession('case', meta.case_type || state.caseType);
+  addSeenId(caseId);   // mark as done so the adaptive picker never repeats it
 
   // Reset session state for the library case.
   state.messages = [];
