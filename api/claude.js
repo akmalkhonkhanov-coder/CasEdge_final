@@ -150,6 +150,16 @@ export default async function handler(req, res) {
     }
 
     const data = await response.json();
+    // The model can return several content blocks (e.g. a thinking block before
+    // the text). Clients read content[0].text, so collapse all text blocks into
+    // one — otherwise callAI() sees an empty/first non-text block and drills and
+    // the post-case feedback (JSON) silently fail to parse.
+    if (data && Array.isArray(data.content)) {
+      const text = data.content
+        .filter(b => b && b.type === 'text' && typeof b.text === 'string')
+        .map(b => b.text).join('\n');
+      if (text) data.content = [{ type: 'text', text }];
+    }
     return res.status(response.status).json(data);
   } catch (err) {
     // Log the real error server-side (visible in Vercel logs), never leak it to the client.
