@@ -11,8 +11,8 @@
 
 const FALLBACK_ORIGIN = 'https://cas-edge-final.vercel.app';
 const ALLOWED_MODELS = ['claude-sonnet-5', 'claude-sonnet-4-5'];
-const MAX_TOKENS_CAP = 4000;       // hard ceiling regardless of what the client asks
-const MIN_TOKENS = 3000;           // floor so large JSON outputs (post-case feedback) never truncate
+const MAX_TOKENS_CAP = 8000;       // hard ceiling; Russian feedback JSON is ~2x token-heavier than English
+const MIN_TOKENS = 5000;           // floor so large JSON outputs (incl. Russian feedback) never truncate
 const MAX_BODY_BYTES = 200 * 1024; // 200 KB request cap
 const RATE_LIMIT = 30;             // requests per user per window
 const RATE_WINDOW_MS = 60 * 1000;  // 1-minute window
@@ -189,10 +189,12 @@ export default async function handler(req, res) {
     // thinking block and returns no text (stop_reason max_tokens). One
     // automatic retry with extra headroom fixes it.
     const timeLeft = BUDGET_MS - (Date.now() - T0);
-    if (response.status === 200 && !textOf(data) && data && data.stop_reason === 'max_tokens' && timeLeft > 15 * 1000) {
-      console.error('claude.js: thinking consumed budget, retrying with 6000, timeLeft', timeLeft);
+    // ANY max_tokens stop is bad here — the JSON payload is truncated whether
+    // text is empty (thinking ate it all) or partial (thinking ate half).
+    if (response.status === 200 && data && data.stop_reason === 'max_tokens' && timeLeft > 15 * 1000) {
+      console.error('claude.js: max_tokens truncation, retrying with 8000, timeLeft', timeLeft);
       try {
-        const resp2 = await callModel({ ...body, max_tokens: 6000 }, timeLeft - 2000, 0);
+        const resp2 = await callModel({ ...body, max_tokens: 8000 }, timeLeft - 2000, 0);
         if (resp2.status === 200) {
           const data2 = await resp2.json();
           if (textOf(data2)) { data = data2; response = resp2; }
