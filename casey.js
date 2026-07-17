@@ -1,12 +1,6 @@
-/* ═══════════════════════════════════════════════════════════════
-   CasEdge — Casey Simulator (BCG). SELF-CONTAINED, self-injecting.
-   Loaded via a single <script src="/casey.js"> in index.html.
-   Injects its own <style>, #screen-casey, and the mode-menu card at
-   runtime, so it survives rebuilds of index.html by other work.
-   Reuses globals: esc, showScreen, callTranscribe, sb. Data: /casey_cases.json
-   ═══════════════════════════════════════════════════════════════ */
+/* CasEdge — Casey Simulator (BCG). Self-contained, self-injecting. */
+/* Loaded via <script src="/casey.js"> in index.html. */
 
-/* ---- voice grader system prompt + per-case rubrics ---- */
 window.CASEY_VOICE_SYSTEM = [
 "Ты — строгий, но справедливый экзаменатор BCG-кейс-интервью. Тебе дают ТРАНСКРИПТ устной финальной рекомендации кандидата (речь → текст, поэтому в нём БУДУТ ошибки распознавания: числа словами, опечатки, слипшиеся слова, пропущенная пунктуация). Оцени транскрипт против чеклиста из 4 критериев. Каждый критерий — строго pass/fail. Верни ТОЛЬКО JSON, без преамбулы и markdown.",
 "ПРАВИЛА ИНТЕРПРЕТАЦИИ:",
@@ -43,71 +37,95 @@ window.CASEY_RUBRICS = {
   "C15": {"conclusion":"kill the discount / implement","anchor_numbers":["1,543,200","2.7M-vs-1,543,200"],"mechanisms_required":["both paths agree (CFO direction AND cohort model)","≥1 checked-and-cleared reversal: scale/allocation $20→$21.13 OR j*=8,482-vs-12,000"],"internal_examples":["marketing's 12,000 projection is weak joint; pilot"],"external_examples":["competitor weaponizes removed discount in ads"],"clean_special":true}
 };
 
-/* ---- self-injection of style + screen + menu card ---- */
+
+/* ---- on-screen calculator (like the real BCG Casey) ---- */
+window.caseyCalc = (function(){
+  var expr = '';
+  function disp(){ var el=document.getElementById('cyCalcDisp'); if(el) el.value = expr || '0'; }
+  function press(k){
+    if (k==='C'){ expr=''; }
+    else if (k==='DEL'){ expr = expr==='Error' ? '' : expr.slice(0,-1); }
+    else if (k==='='){
+      try {
+        var s = expr.replace(/×/g,'*').replace(/÷/g,'/').replace(/%/g,'/100').replace(/[^0-9+\-*/.() ]/g,'');
+        if (!s){ return; }
+        var r = Function('"use strict";return ('+s+')')();
+        if (r===Infinity || r===-Infinity || (typeof r==='number' && isNaN(r))) { expr='Error'; }
+        else { expr = String(Math.round((r + Number.EPSILON)*1e6)/1e6); }
+      } catch(e){ expr='Error'; }
+    }
+    else { if (expr==='Error') expr=''; expr += k; }
+    disp();
+  }
+  function toggle(){ var el=document.getElementById('cyCalc'); if(!el) return; el.style.display = (el.style.display==='none'||!el.style.display) ? 'block' : 'none'; if(el.style.display==='block') disp(); }
+  return { press:press, toggle:toggle };
+})();
+
+
 (function(){
-  var CSS = `#screen-casey { height:100vh; height:100dvh; overflow:hidden; background:var(--surface-dark); display:flex; flex-direction:column; }
+  var CSS = `#screen-casey { height:100vh; height:100dvh; overflow:hidden; background:#0b1512; display:flex; flex-direction:column; }
 #screen-casey.active { display:flex; }
 #cyFeed { flex:1; overflow-y:auto; padding:20px 16px 28px; }
 .cy-wrap { max-width:760px; margin:0 auto; }
-#cyInputZone { border-top:1px solid var(--sv-line, rgba(255,255,255,.08)); background:var(--surface-dark-elevated,#12201d); padding:14px 16px; }
+#cyInputZone { border-top:1px solid rgba(255,255,255,.08); background:#12201d; padding:14px 16px; }
 .cy-iz-inner { max-width:760px; margin:0 auto; }
 /* chat bubbles */
 .cy-msg { display:flex; gap:11px; margin:0 0 16px; align-items:flex-start; }
 .cy-av { width:30px; height:30px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; }
-.cy-av.ai { background:rgba(93,184,166,.14); color:var(--coral,#5db8a6); font-family:var(--font-display,inherit); }
-.cy-av.me { background:rgba(255,255,255,.07); color:var(--on-dark,#eaf2f0); }
-.cy-bbl { background:var(--surface-dark-elevated,#16241f); border:1px solid var(--sv-line,rgba(255,255,255,.07)); border-radius:4px 14px 14px 14px; padding:11px 15px; color:var(--on-dark,#eaf2f0); font-size:14.5px; line-height:1.6; max-width:calc(100% - 44px); }
+.cy-av.ai { background:rgba(93,184,166,.14); color:#5db8a6; font-family:inherit; }
+.cy-av.me { background:rgba(255,255,255,.07); color:#eaf2f0; }
+.cy-bbl { background:#16241f; border:1px solid rgba(255,255,255,.07); border-radius:4px 14px 14px 14px; padding:11px 15px; color:#eaf2f0; font-size:14.5px; line-height:1.6; max-width:calc(100% - 44px); }
 .cy-msg.me .cy-bbl { background:rgba(93,184,166,.10); border-color:rgba(93,184,166,.22); border-radius:14px 4px 14px 14px; }
 .cy-msg.me { flex-direction:row-reverse; }
 .cy-bbl p { margin:0 0 7px; } .cy-bbl p:last-child { margin:0; }
 .cy-bbl b { color:#fff; } .cy-bbl code { background:rgba(255,255,255,.08); padding:1px 5px; border-radius:4px; font-size:.92em; }
 /* exhibit card */
-.cy-ex { background:var(--surface-dark-elevated,#16241f); border:1px solid var(--sv-line,rgba(255,255,255,.09)); border-radius:12px; padding:16px 16px 14px; margin:0 0 16px; }
-.cy-ex-tag { display:inline-block; font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--coral,#5db8a6); background:rgba(93,184,166,.10); padding:3px 9px; border-radius:999px; margin-bottom:9px; }
+.cy-ex { background:#16241f; border:1px solid rgba(255,255,255,.09); border-radius:12px; padding:16px 16px 14px; margin:0 0 16px; }
+.cy-ex-tag { display:inline-block; font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#5db8a6; background:rgba(93,184,166,.10); padding:3px 9px; border-radius:999px; margin-bottom:9px; }
 .cy-ex-title { font-size:15px; font-weight:700; color:#fff; margin-bottom:12px; }
 .cy-ex-block { margin:0 0 16px; } .cy-ex-block:last-child { margin:0; }
-.cy-ex-bname { font-size:11.5px; font-weight:600; letter-spacing:.02em; text-transform:uppercase; color:var(--on-dark-soft,#9db3ad); margin:0 0 8px; }
-.cy-ex-note { font-size:12px; color:var(--on-dark-soft,#8fa39d); margin-top:10px; font-style:italic; }
+.cy-ex-bname { font-size:11.5px; font-weight:600; letter-spacing:.02em; text-transform:uppercase; color:#9db3ad; margin:0 0 8px; }
+.cy-ex-note { font-size:12px; color:#8fa39d; margin-top:10px; font-style:italic; }
 .cy-tbl { width:100%; border-collapse:collapse; font-size:13.5px; }
-.cy-tbl td { padding:7px 10px; border-bottom:1px solid var(--sv-line,rgba(255,255,255,.06)); color:var(--on-dark,#eaf2f0); }
+.cy-tbl td { padding:7px 10px; border-bottom:1px solid rgba(255,255,255,.06); color:#eaf2f0; }
 .cy-tbl tr:last-child td { border-bottom:none; }
 .cy-tbl td:last-child { text-align:right; font-variant-numeric:tabular-nums; font-weight:600; }
 .cy-tbl tr.cy-tbl-total td { border-top:1.5px solid rgba(93,184,166,.4); font-weight:700; color:#fff; }
-.cy-legend { display:flex; flex-wrap:wrap; gap:14px; margin-top:10px; font-size:11.5px; color:var(--on-dark-soft,#9db3ad); }
+.cy-legend { display:flex; flex-wrap:wrap; gap:14px; margin-top:10px; font-size:11.5px; color:#9db3ad; }
 .cy-legend i { display:inline-block; width:11px; height:11px; border-radius:3px; margin-right:5px; vertical-align:-1px; }
 .cy-chart svg { width:100%; height:auto; display:block; }
 /* input widgets */
-.cy-opt { display:flex; align-items:center; gap:10px; padding:11px 13px; margin:0 0 8px; border:1.5px solid var(--sv-line,rgba(255,255,255,.12)); border-radius:10px; cursor:pointer; color:var(--on-dark,#eaf2f0); font-size:14px; line-height:1.45; transition:border-color .12s, background .12s; }
+.cy-opt { display:flex; align-items:center; gap:10px; padding:11px 13px; margin:0 0 8px; border:1.5px solid rgba(255,255,255,.12); border-radius:10px; cursor:pointer; color:#eaf2f0; font-size:14px; line-height:1.45; transition:border-color .12s, background .12s; }
 .cy-opt:hover { border-color:rgba(93,184,166,.5); }
-.cy-opt.sel { border-color:var(--coral,#5db8a6); background:rgba(93,184,166,.10); }
+.cy-opt.sel { border-color:#5db8a6; background:rgba(93,184,166,.10); }
 .cy-opt .cy-box { width:20px; height:20px; border-radius:5px; border:1.6px solid rgba(255,255,255,.3); flex-shrink:0; display:flex; align-items:center; justify-content:center; }
 .cy-opt.radio .cy-box { border-radius:50%; }
-.cy-opt.sel .cy-box { background:var(--coral,#5db8a6); border-color:var(--coral,#5db8a6); }
+.cy-opt.sel .cy-box { background:#5db8a6; border-color:#5db8a6; }
 .cy-opt.sel .cy-box svg { display:block; } .cy-opt .cy-box svg { display:none; width:12px; height:12px; }
 .cy-opt.correct { border-color:#5fbf6b; background:rgba(95,191,107,.10); }
 .cy-opt.wrong { border-color:#e87c7c; background:rgba(232,124,124,.10); }
 .cy-numrow { display:flex; gap:10px; align-items:center; }
-.cy-numin, .cy-txtin { flex:1; background:rgba(0,0,0,.25); border:1.5px solid var(--sv-line,rgba(255,255,255,.14)); border-radius:10px; padding:12px 14px; color:#fff; font-size:15px; font-family:inherit; }
-.cy-numin:focus, .cy-txtin:focus { outline:none; border-color:var(--coral,#5db8a6); }
+.cy-numin, .cy-txtin { flex:1; background:rgba(0,0,0,.25); border:1.5px solid rgba(255,255,255,.14); border-radius:10px; padding:12px 14px; color:#fff; font-size:15px; font-family:inherit; }
+.cy-numin:focus, .cy-txtin:focus { outline:none; border-color:#5db8a6; }
 .cy-txtin { width:100%; min-height:74px; resize:vertical; line-height:1.5; }
-.cy-hint { font-size:12.5px; color:var(--on-dark-soft,#9db3ad); margin:8px 2px 0; }
-.cy-send { background:var(--coral,#5db8a6); color:#04201b; border:none; border-radius:10px; padding:12px 22px; font-size:14.5px; font-weight:700; cursor:pointer; }
+.cy-hint { font-size:12.5px; color:#9db3ad; margin:8px 2px 0; }
+.cy-send { background:#5db8a6; color:#04201b; border:none; border-radius:10px; padding:12px 22px; font-size:14.5px; font-weight:700; cursor:pointer; }
 .cy-send:disabled { opacity:.45; cursor:default; }
-.cy-send.ghost { background:transparent; color:var(--coral,#5db8a6); border:1.5px solid rgba(93,184,166,.4); }
+.cy-send.ghost { background:transparent; color:#5db8a6; border:1.5px solid rgba(93,184,166,.4); }
 .cy-fb { border-radius:10px; padding:11px 14px; margin:0 0 16px; font-size:13.5px; line-height:1.55; }
 .cy-fb.ok { background:rgba(95,191,107,.10); border:1px solid rgba(95,191,107,.35); color:#bfe9c4; }
 .cy-fb.no { background:rgba(232,124,124,.10); border:1px solid rgba(232,124,124,.35); color:#f0c4c4; }
 .cy-fb b { color:#fff; }
 /* case picker */
 .cy-pick-h { text-align:center; margin:6px 0 22px; }
-.cy-pick-h .eyebrow { font-size:12px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--coral,#5db8a6); }
+.cy-pick-h .eyebrow { font-size:12px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:#5db8a6; }
 .cy-pick-h h2 { font-size:24px; color:#fff; margin:8px 0 6px; }
-.cy-pick-h p { color:var(--on-dark-soft,#9db3ad); font-size:14px; margin:0; }
-.cy-card { background:var(--surface-dark-elevated,#16241f); border:1px solid var(--sv-line,rgba(255,255,255,.09)); border-radius:12px; padding:15px 16px; margin:0 0 10px; cursor:pointer; display:flex; align-items:center; gap:14px; transition:border-color .12s; }
+.cy-pick-h p { color:#9db3ad; font-size:14px; margin:0; }
+.cy-card { background:#16241f; border:1px solid rgba(255,255,255,.09); border-radius:12px; padding:15px 16px; margin:0 0 10px; cursor:pointer; display:flex; align-items:center; gap:14px; transition:border-color .12s; }
 .cy-card:hover { border-color:rgba(93,184,166,.5); }
-.cy-card .cy-num { width:38px; height:38px; border-radius:9px; background:rgba(93,184,166,.13); color:var(--coral,#5db8a6); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px; flex-shrink:0; }
+.cy-card .cy-num { width:38px; height:38px; border-radius:9px; background:rgba(93,184,166,.13); color:#5db8a6; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px; flex-shrink:0; }
 .cy-card .cy-cn { font-size:15px; font-weight:700; color:#fff; }
-.cy-card .cy-cd { font-size:12.5px; color:var(--on-dark-soft,#9db3ad); margin-top:2px; }
+.cy-card .cy-cd { font-size:12.5px; color:#9db3ad; margin-top:2px; }
 .cy-card.done { opacity:.62; }
 .cy-card .cy-badge { margin-left:auto; font-size:11px; font-weight:700; color:#5fbf6b; }
 /* voice */
@@ -115,12 +133,34 @@ window.CASEY_RUBRICS = {
 .cy-recbtn { background:#e87c7c; color:#2a0d0d; border:none; border-radius:999px; padding:12px 20px; font-weight:700; font-size:14px; cursor:pointer; display:flex; align-items:center; gap:8px; }
 .cy-recbtn.recording { background:#c94b4b; color:#fff; animation:cyPulse 1.1s infinite; }
 @keyframes cyPulse { 0%,100%{box-shadow:0 0 0 0 rgba(201,75,75,.5);} 50%{box-shadow:0 0 0 8px rgba(201,75,75,0);} }
-.cy-recstat { font-size:12.5px; color:var(--on-dark-soft,#9db3ad); }
-.cy-grade { background:var(--surface-dark-elevated,#16241f); border:1px solid var(--sv-line,rgba(255,255,255,.1)); border-radius:12px; padding:16px; margin:0 0 16px; }
-.cy-crit { display:flex; gap:9px; align-items:flex-start; margin:0 0 9px; font-size:13px; color:var(--on-dark,#eaf2f0); line-height:1.5; }
+.cy-recstat { font-size:12.5px; color:#9db3ad; }
+.cy-grade { background:#16241f; border:1px solid rgba(255,255,255,.1); border-radius:12px; padding:16px; margin:0 0 16px; }
+.cy-crit { display:flex; gap:9px; align-items:flex-start; margin:0 0 9px; font-size:13px; color:#eaf2f0; line-height:1.5; }
 .cy-crit .ic { width:19px; height:19px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; margin-top:1px; }
 .cy-crit.pass .ic { background:rgba(95,191,107,.2); color:#5fbf6b; } .cy-crit.fail .ic { background:rgba(232,124,124,.2); color:#e87c7c; }
-.cy-score { font-size:13px; font-weight:700; color:#fff; margin:4px 0 12px; }`;
+.cy-score { font-size:13px; font-weight:700; color:#fff; margin:4px 0 12px; }
+
+#screen-casey { position:relative; background:#0b1512; }
+#screen-casey .bcg-topbar { background:#0b1512; border-bottom:1px solid rgba(255,255,255,.08); }
+#screen-casey .bcg-progress-label, #screen-casey .bcg-interviewer, #screen-casey .bcg-timer { color:#9db3ad; }
+#screen-casey .bcg-exit { color:#eaf2f0; }
+#screen-casey .bcg-progress-track { background:rgba(255,255,255,.12); }
+#screen-casey .bcg-progress-fill { background:#5db8a6; }
+#cyInputZone { background:#0e1a17; border-top:1px solid rgba(255,255,255,.09); }
+/* calculator */
+.cy-calc-fab { position:absolute; right:18px; bottom:104px; z-index:30; width:48px; height:48px; border-radius:50%; background:#5db8a6; color:#04201b; border:none; cursor:pointer; box-shadow:0 6px 18px rgba(0,0,0,.45); display:flex; align-items:center; justify-content:center; }
+.cy-calc-fab:hover { background:#6fc7b6; }
+.cy-calc { position:absolute; right:18px; bottom:162px; z-index:31; width:236px; background:#12201d; border:1px solid rgba(255,255,255,.14); border-radius:14px; padding:12px; box-shadow:0 12px 34px rgba(0,0,0,.55); }
+.cy-calc-head { display:flex; justify-content:space-between; align-items:center; color:#eaf2f0; font-size:11px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; margin-bottom:9px; }
+.cy-calc-head button { background:none; border:none; color:#9db3ad; font-size:19px; line-height:1; cursor:pointer; }
+.cy-calc-disp { width:100%; background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.12); border-radius:9px; color:#fff; font-size:22px; text-align:right; padding:9px 11px; margin-bottom:10px; font-variant-numeric:tabular-nums; box-sizing:border-box; }
+.cy-calc-keys { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }
+.cy-calc-keys button { padding:12px 0; border:none; border-radius:9px; background:#1e332d; color:#eaf2f0; font-size:15px; font-weight:600; cursor:pointer; }
+.cy-calc-keys button:hover { background:#274039; }
+.cy-calc-keys button.op { background:rgba(93,184,166,.16); color:#5db8a6; }
+.cy-calc-keys button.eq { background:#5db8a6; color:#04201b; }
+.cy-calc-keys button.wide { grid-column:span 2; }
+`;
   var SCREEN = `  <div class="bcg-topbar">
     <button class="bcg-exit" onclick="Casey.exit()" title="Exit">&times;</button>
     <div class="bcg-progress-wrap">
@@ -131,6 +171,12 @@ window.CASEY_RUBRICS = {
     <div class="bcg-timer" id="cyTimer">BCG &middot; Casey</div>
   </div>
   <div id="cyFeed"><div class="cy-wrap" id="cyWrap"></div></div>
+  <button class="cy-calc-fab" onclick="caseyCalc.toggle()" title="Calculator" aria-label="Calculator"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="8" y1="10" x2="8" y2="10"></line><line x1="12" y1="10" x2="12" y2="10"></line><line x1="16" y1="10" x2="16" y2="10"></line><line x1="8" y1="14" x2="8" y2="14"></line><line x1="12" y1="14" x2="12" y2="14"></line><line x1="16" y1="14" x2="16" y2="18"></line><line x1="8" y1="18" x2="12" y2="18"></line></svg></button>
+  <div class="cy-calc" id="cyCalc" style="display:none">
+    <div class="cy-calc-head"><span>Calculator</span><button onclick="caseyCalc.toggle()" aria-label="Close">&times;</button></div>
+    <input class="cy-calc-disp" id="cyCalcDisp" readonly value="0">
+    <div class="cy-calc-keys"><button onclick="caseyCalc.press('C')">C</button><button onclick="caseyCalc.press('DEL')">&#9003;</button><button class="op" onclick="caseyCalc.press('%')">%</button><button class="op" onclick="caseyCalc.press('÷')">÷</button><button class="" onclick="caseyCalc.press('7')">7</button><button class="" onclick="caseyCalc.press('8')">8</button><button class="" onclick="caseyCalc.press('9')">9</button><button class="op" onclick="caseyCalc.press('×')">×</button><button class="" onclick="caseyCalc.press('4')">4</button><button class="" onclick="caseyCalc.press('5')">5</button><button class="" onclick="caseyCalc.press('6')">6</button><button class="op" onclick="caseyCalc.press('-')">−</button><button class="" onclick="caseyCalc.press('1')">1</button><button class="" onclick="caseyCalc.press('2')">2</button><button class="" onclick="caseyCalc.press('3')">3</button><button class="op" onclick="caseyCalc.press('+')">+</button><button class="wide" onclick="caseyCalc.press('0')">0</button><button onclick="caseyCalc.press('.')">.</button><button class="eq" onclick="caseyCalc.press('=')">=</button></div>
+  </div>
   <div id="cyInputZone" style="display:none"><div class="cy-iz-inner" id="cyIz"></div></div>`;
   var CARD = `          <div class="firm-initial" style="background:rgba(93,184,166,.15);color:var(--accent-teal);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><line x1="8" y1="9" x2="16" y2="9"></line><line x1="8" y1="13" x2="13" y2="13"></line></svg></div>
           <div>
@@ -149,7 +195,6 @@ window.CASEY_RUBRICS = {
   if (document.readyState==='loading') document.addEventListener('DOMContentLoaded',run); else run();
 })();
 
-/* ---- engine ---- */
 (function () {
   "use strict";
   var PALETTE = ['#5db8a6', '#e8a55a', '#7c8ce8', '#5fbf6b', '#e87c7c', '#4fb0c9'];
