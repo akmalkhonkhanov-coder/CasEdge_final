@@ -6274,6 +6274,22 @@ function candidateLevel() {
     return sc.reduce((a, b) => a + b, 0) / sc.length;
   } catch (e) { return null; }
 }
+// Weakness focus: the candidate's weakest dimension from their OWN score
+// history (last-5 average per dimension). Sent to the case engine so the
+// interviewer holds the bar extra high exactly where they are weakest.
+function casWeakestDimension() {
+  try {
+    const p = loadProgress();
+    let worst = null;
+    for (const d of PATH_DIMS) {
+      const avg = dimAverage(p.dims[d.key] || []);
+      if (avg === null) continue;
+      if (!worst || avg < worst.avg) worst = { key: d.key, avg };
+    }
+    return worst ? worst.key : null;
+  } catch (_) { return null; }
+}
+
 function casToast(msg) {
   let t = document.getElementById('soon-toast');
   if (!t) {
@@ -6438,7 +6454,7 @@ async function startLibraryCase(caseId) {
   try {
     const data = await callCaseSession({
       caseId: state.caseId, stepIndex: 0, attemptCount: 0, firm: state.firm,
-      revealedExhibits: [], messages: []
+      revealedExhibits: [], messages: [], focusDimension: casWeakestDimension()
     });
     if (Array.isArray(data.revealedExhibits)) state.revealedExhibits = data.revealedExhibits;
     const opening = data.reply || 'Let us begin. Please structure your approach to this case.';
@@ -6936,7 +6952,11 @@ function casExMiniShape(shape, active) {
   const f = {
     flat: x => 0.52, up: x => x * 0.9 + 0.05, down_mild: x => 1 - 0.35 * x,
     down_steep: x => 1 - 0.92 * x, concave_up: x => Math.sqrt(x), convex_down: x => 1 - x * x,
-    steps: x => [1, 1, 0.7, 0.7, 0.42, 0.42, 0.2, 0.2][Math.min(7, Math.floor(x * 8))]
+    steps: x => [1, 1, 0.7, 0.7, 0.42, 0.42, 0.2, 0.2][Math.min(7, Math.floor(x * 8))],
+    decay: x => Math.exp(-2.2 * x),                                   // convex decline (e.g. eroding synergy)
+    decline_plateau: x => 0.3 + 0.65 * Math.exp(-3 * x),              // decline settling on a lower plateau
+    step_down: x => x < 0.55 ? 0.92 : 0.4,                            // flat, then one step down (contract cliff)
+    flat_cliff: x => x < 0.55 ? 0.85 : 0.06                           // flat, then drops to ~zero (stream ends)
   }[shape] || (x => x);
   let pts = [];
   for (let i = 0; i <= 32; i++) { const x = i / 32; pts.push([pL + x * pw, pT + ph - f(x) * ph]); }
@@ -7181,7 +7201,8 @@ async function sendMessage() {
         attemptCount: state.attemptCount,
         firm: state.firm,
         revealedExhibits: state.revealedExhibits,
-        messages: state.messages.slice(-16)
+        messages: state.messages.slice(-16),
+        focusDimension: casWeakestDimension()
       });
       if (Array.isArray(data.revealedExhibits)) state.revealedExhibits = data.revealedExhibits;
       const reply = data.reply || 'Apologies — please try again.';
