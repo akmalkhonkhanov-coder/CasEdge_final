@@ -1,7 +1,7 @@
 {
- "version": "1.0",
- "source": "CasEdge_Library_MASTER_1-100.md",
- "case_count": 100,
+ "version": "1.1",
+ "source": "CasEdge_Library_MASTER_1130.md",
+ "case_count": 130,
  "cases": [
   {
    "id": 1,
@@ -4603,7 +4603,7 @@
    "est_minutes": 33,
    "naive_error": "#11",
    "generation": "B",
-   "header_md": "| Поле | Значение |\n|---|---|\n| № | 50 · **Alcybio Therapeutics** *(прототипы: Alcyone / Halozyme)* |\n| Индустрия | Фарма-R&D |\n| Тип | **Market Entry** |\n| Difficulty | **Medium** |\n| Trap/Clean | 🔴 Trap |\n| Время | 33 мин · 7 шагов |\n| Формат | **F7** — самоопровержение |\n| Exhibit | Memo + таблица |\n| Naive-error | **#11 — expected value: коррелированные риски** |\n| Твист | **EV идентичен. Меняется хвост, а не среднее** |\n\n---",
+   "header_md": "| Поле | Значение |\n|---|---|\n| № | 50 · **Alcybio Therapeutics** *(прототипы: Alcyone / Halozyme)* |\n| Индустрия | Фарма-R&D |\n| Тип | **Market Entry** |\n| Difficulty | **Hard** |\n| Trap/Clean | 🔴 Trap |\n| Время | 33 мин · 7 шагов |\n| Формат | **F7** — самоопровержение |\n| Exhibit | Memo + таблица |\n| Naive-error | **#11 — expected value: коррелированные риски** |\n| Твист | **EV идентичен. Меняется хвост, а не среднее** |\n\n---",
    "prompt_md": "> **Alcybio Therapeutics** is evaluating an in-licensing deal: a **three-asset portfolio** for **$240 million** upfront.\n>\n> | Asset | P(success) | NPV if success |\n> |---|---|---|\n> | ALC-201 | 34% | $412M |\n> | ALC-330 | 29% | $318M |\n> | ALC-455 | 41% | $266M |\n>\n> **Should Alcybio in-license?**\n\n---",
    "exhibits": [],
    "steps": [
@@ -5764,7 +5764,7 @@
    "est_minutes": 39,
    "naive_error": "#3",
    "generation": "B",
-   "header_md": "| Поле | Значение |\n|---|---|\n| № | 67 · **Falkard Defense** *(прототип: BAE / Leonardo)* |\n| Индустрия | Aerospace & defense |\n| Грунтовка | **Stern p.22 Industrials: aerospace & defense; book-to-bill — колонка exhibit** |\n| Тип | **Market Entry** · 🔴 **Hard** *(единственный в партии)* · 🔴 Trap · **F6** |\n| Naive-error | **#3 — flat vs escalating** *(условие ревьюера: эскалация выведена из вводных, не назначена)* |\n| Слои | 🧠 · 🔄 · Brainstorm |\n| Время | 39 мин · 9 шагов |\n\n---",
+   "header_md": "| Поле | Значение |\n|---|---|\n| № | 67 · **Falkard Defense** *(прототип: BAE / Leonardo)* |\n| Индустрия | Aerospace & defense |\n| Грунтовка | **Stern p.22 Industrials: aerospace & defense; book-to-bill — колонка exhibit** |\n| Тип | **Market Entry** · 🟡 **Medium** · 🔴 Trap · **F6** |\n| Naive-error | **#3 — flat vs escalating** *(условие ревьюера: эскалация выведена из вводных, не назначена)* |\n| Слои | 🧠 · 🔄 · Brainstorm |\n| Время | 39 мин · 9 шагов |\n\n---",
    "prompt_md": "> **Falkard Defense** (tier-2 supplier, avionics) is invited to bid a **6-year fixed-price development + initial-production program**: 40 units, price ceiling **$840M**.\n>\n> Bid team's cost model: labor **2.1M hours × $96**, materials **$328M**, NRE/test **$148M** — total **$677.6M**, margin **19.3%**. Segment book-to-bill: 1.18.\n>\n> **Bid?**\n\n> 🔒 **F6.** Стоимость first-article qualification и типовой learning-curve comparator **выдаются только по запросу**. Не спросить, что fixed-price означает для сертификации, — и есть провал.\n\n---",
    "exhibits": [],
    "steps": [
@@ -9005,7 +9005,7 @@
      "label": "Recommendation (Pyramid).",
      "time_min": null,
      "candidate_md": "*\"Orbwash should price dynamically ($6 peak / $3 off-peak), not flat $5 — expected value across demand states yields $0.58M vs $0.42M, a 37% revenue lift.\"* Facts: flat $5 crashes off-peak utilization to 0.25; tiered lifts off-peak to 0.75 and peak revenue to $6; +$0.16M/yr. Risks: (internal) dynamic pricing needs clear signage/app to avoid customer confusion; (external) competitor flat-pricing could pressure peak rates. Next steps: pilot tiered pricing on a machine subset; measure off-peak elasticity before full rollout.\n\n> **🎬 Interviewer-only disclosure.**\n> - **L0:** распознать, что спрос имеет состояния (peak/off) с разной эластичностью; считать expected value, а не один флэт.\n> - **L1:** «Одна цена подходит и для пикового, и для непикового спроса?»\n> - **L2:** reveal demand states: peak $6 util 0.55 / off $3 util 0.75.",
-     "interviewer_md": "> - **Conditional exhibit — Demand states:** `reveal_on_request`. Триггеры: \"demand by time\" · \"peak vs off-peak\" · \"price elasticity\" · \"utilization by hour\".\n\n---",
+     "interviewer_md": "> - **Conditional exhibit — Demand states:** `reveal_on_request`. Триггеры: \"demand by time\" · \"peak vs off-peak\" · \"price elasticity\" · \"utilization by hour\".\n\n---\n\n---",
      "hints": {},
      "conditional_exhibits": [
       {
@@ -9018,6 +9018,2539 @@
        ]
       }
      ]
+    }
+   ],
+   "qa_checks_md": ""
+  },
+  {
+   "id": 101,
+   "title": "Steadmoor's $17.5M Question",
+   "title_registry": "Steadmoor's $17.5M Question",
+   "industry": "Commercial RE brokerage",
+   "case_type": "M&A",
+   "difficulty": "Medium",
+   "trap_or_clean": "Trap",
+   "est_minutes": 30,
+   "naive_error": "#1",
+   "generation": "D",
+   "header_md": "**Type · Commercial RE brokerage · F1 (interviewee-led) · Ловушка #101 (Trap-flip, naive #1 hist-vs-replacement)**\nDifficulty: Medium · Prototype: CBRE/JLL · IO: Banking/asset-services, Stern p.12 [DEV: contract-book replacement cost замещает asset-mgmt fee spread]",
+   "prompt_md": "Клиент — **Steadmoor Realty**, оператор коммерческого real-estate брокериджа (аренда/продажа офисной недвижимости, плюс управление недвижимостью). Steadmoor рассматривает покупку меньшего конкурента — **Larkhill** — за запрошенные **$17.5M** (100% equity). Партнёр хочет ответ: платить ли $17.5M?\n\n*(Firm-style: BCG/interviewee-led — кандидат сам ведёт, запрашивает данные, формулирует рекомендацию.)*",
+   "exhibits": [],
+   "steps": [
+    {
+     "step": 1,
+     "label": "Framework",
+     "time_min": null,
+     "candidate_md": "Стоит ли Steadmoor платить $17.5M за Larkhill? Структурируй.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза заявлена первой; (2) ≥3 MECE-корзины (stand-alone value / синергии-риски / цена vs стоимость); (3) явно указано, что брокеридж — earning business, ценность в recurring-потоке, не в офисах; (4) закрывающий вопрос интервьюеру.",
+     "hints": {
+      "L1": "Из чего состоит стоимость брокериджа — активы или поток?",
+      "L2": "Ядро — 420 управляющих контрактов (recurring fees)."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 2,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Оцени equity Larkhill по данным баланса.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\n420 контрактов @ historical $18k; прочие активы нетто $5.2M; ask $17.5M\n\nEXPECTED ANSWER:\nbook_contract=$7.56M; naive_equity=$12.76M < $17.5M\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) book_contract=420×18000=7,560,000; (2) equity=+5.2M=12,760,000; (3) вывод при этой базе = WALK.",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "420 контрактов @ historical $18k; прочие активы нетто $5.2M;",
+       "triggers": [
+        "структура активов",
+        "из чего equity",
+        "как оценены контракты",
+        "балансовая стоимость"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 3,
+     "label": "Insight",
+     "time_min": null,
+     "candidate_md": "Отражает ли историческая стоимость экономическую ценность книги?",
+     "interviewer_md": "EXPECTED ANSWER:\nНет; нужна replacement/origination cost — self-built earning-актив занижен исторической амортизацией.\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) кандидат отвергает историческую базу; (2) называет replacement/сегодняшнюю origination cost как верную базу; (3) объясняет ПОЧЕМУ (self-built recurring-актив).",
+     "hints": {
+      "L1": "Историческая стоимость — прошлые затраты; сколько стоит привлечь контракт сегодня?",
+      "L2": "Оцени по 420 × сегодняшний BD-cost."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 4,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Пересчитай equity по replacement cost.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nBD-cost сегодня = $34k/контракт\n\nEXPECTED ANSWER:\nrepl_contract=$14.28M; correct_equity=$19.48M > $17.5M -> BUY\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) 420×34000=14,280,000; (2) equity=19,480,000; (3) вывод BUY; (4) understatement книги назван от replacement-базы (~47%), НЕ от equity.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 5,
+     "label": "Sensitivity",
+     "time_min": null,
+     "candidate_md": "При каком BD-cost решение переворачивается?",
+     "interviewer_md": "EXPECTED ANSWER:\nbreakeven $29,285.71/контракт; ниже — WALK\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) threshold=(17.5M−5.2M)/420=29,285.71; (2) верное направление (ниже→WALK).",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 6,
+     "label": "Synthesis",
+     "time_min": null,
+     "candidate_md": "Дай рекомендацию партнёру.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) вывод (BUY) первым предложением с action verb; (2) ≥2 цифры из кейса ($19.5M equity и/или $14.3M replacement, ask $17.5M); (3) ≥2 риска — 1 internal (attrition менеджеров) + 1 external (падение BD-cost ниже порога); (4) ≥1 конкретный time-bound next step.",
+     "hints": {},
+     "conditional_exhibits": []
+    }
+   ],
+   "qa_checks_md": ""
+  },
+  {
+   "id": 102,
+   "title": "The 30-Basis-Point Mistake",
+   "title_registry": "The 30-Basis-Point Mistake",
+   "industry": "Asset management",
+   "case_type": "Pricing",
+   "difficulty": "Easy",
+   "trap_or_clean": "Trap",
+   "est_minutes": 24,
+   "naive_error": "#12",
+   "generation": "D",
+   "header_md": "**Type · Asset management · F5 (interviewer-led/short) · Ловушка #102 (Trap-flip, naive #12 regulator/fee-cap)**\nDifficulty: Easy · Prototype: BlackRock/Vanguard · IO: Banking — asset-management fees, Stern p.12",
+   "prompt_md": "**Kestermere Capital** управляет розничным фондом с **$2.4B AUM**, беря management fee **0.65%**. Менеджмент хочет поднять fee до **0.95%**, чтобы нарастить выручку. Стоит ли поднимать?",
+   "exhibits": [],
+   "steps": [
+    {
+     "step": 1,
+     "label": "Framework",
+     "time_min": null,
+     "candidate_md": "Поднимать ли fee с 0.65% до 0.95%? Структурируй.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) ≥3 корзины; (3) явно заложена реакция клиентов И регулятора (не только цена×AUM); (4) закрывающий вопрос.",
+     "hints": {
+      "L1": "Есть ли ограничения на fee у розничного фонда?",
+      "L2": "Регуляторный cap 0.90%."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 2,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Наивная выручка при новом fee.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nAUM $2.4B, fee 0.65%→0.95%\n\nEXPECTED ANSWER:\nrev_old $15.6M; rev_naive $22.8M (+46.15%)\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) 2.4B×0.0065=15.6M; (2) 2.4B×0.0095=22.8M; (3) при статике вывод RAISE.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 3,
+     "label": "Insight",
+     "time_min": null,
+     "candidate_md": "Что игнорирует наив?",
+     "interviewer_md": "EXPECTED ANSWER:\nРегуляторный cap 0.90%: откат fee + remediation + отток.\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) назван регуляторный cap/реакция; (2) понятно, что raise запускает откат/штраф/отток.",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "gated data",
+       "triggers": [
+        "регулятор",
+        "ограничение fee",
+        "cap",
+        "value for money",
+        "реакция инвесторов"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 4,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Выручка raise-пути с учётом отката.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\ncap 0.90%; remediation $1.9M; отток 8%\n\nEXPECTED ANSWER:\nrev_raise $12.452M < hold $15.6M -> HOLD\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) aum_after=2.208B; (2) 2.208B×0.0065−1.9M=12,452,000; (3) вывод HOLD; (4) overstate назван от raise-path выручки (~83%).",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 5,
+     "label": "Sensitivity",
+     "time_min": null,
+     "candidate_md": "Устойчив ли HOLD при мягком оттоке 3%?",
+     "interviewer_md": "EXPECTED ANSWER:\nrev_raise@3%=$13.232M < $15.6M -> HOLD устойчив\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) 2.328B×0.0065−1.9M=13,232,000; (2) вывод HOLD сохраняется.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 6,
+     "label": "Synthesis",
+     "time_min": null,
+     "candidate_md": "Рекомендация.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) вывод HOLD первым; (2) ≥2 цифры ($12.5M raise-path vs $15.6M hold и/или cap 0.90%); (3) ≥2 риска (internal comms/legal + external регуляторный cap); (4) ≥1 next step.",
+     "hints": {},
+     "conditional_exhibits": []
+    }
+   ],
+   "qa_checks_md": ""
+  },
+  {
+   "id": 103,
+   "title": "Coalateral",
+   "title_registry": "Coalateral",
+   "industry": "Thermal coal",
+   "case_type": "Cost Reduction",
+   "difficulty": "Medium",
+   "trap_or_clean": "Trap",
+   "est_minutes": 30,
+   "naive_error": "#7",
+   "generation": "D",
+   "header_md": "**Type · Thermal coal · F3 · Ловушка #103 (Trap-action/soft, naive #7 avg-vs-marginal)**\nDifficulty: Medium · Prototype: Peabody/Arch · IO: Oil&Gas cash-cost, Stern p.21 [DEV: coal cash-cost/t замещает barrel price] · Layers: mental-math, hypothesis-update",
+   "prompt_md": "**Ashvale Energy** — производитель энергетического угля, 3 шахты. Спрос падает; нужно сократить добычу на **2.0 Mt** (миллиона тонн). Из какой шахты убирать объём?",
+   "exhibits": [],
+   "steps": [
+    {
+     "step": 1,
+     "label": "Framework",
+     "time_min": null,
+     "candidate_md": "Из какой шахты убрать 2.0 Mt? Структурируй критерий.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) критерий выбора явно про затраты; (3) упомянуто, что сокращение экономит не все затраты; (4) закрывающий вопрос.",
+     "hints": {
+      "L1": "Что экономит остановка — все затраты или часть?",
+      "L2": "Только avoidable/variable."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 2,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Посчитай AVG total cost по шахтам.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nExhibit A: var/fixed_alloc/output ×3\n\nEXPECTED ANSWER:\nNorthseam 63, Deepcut 56, Ridgeline 64\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) все 3 avg верны (var+fixed_alloc); (2) наив-выбор по avg = Ridgeline.",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "Exhibit A: var/fixed_alloc/output ×3",
+       "triggers": [
+        "структура затрат",
+        "cost per tonne",
+        "данные по шахтам"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 3,
+     "label": "Hypothesis_update",
+     "time_min": null,
+     "candidate_md": "Что ждёшь узнать про эти затраты дальше и почему?",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) кандидат хочет понять, какая часть затрат исчезнет при остановке; (2) связывает это с выбором шахты.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 4,
+     "label": "Insight",
+     "time_min": null,
+     "candidate_md": "Исчезает ли аллоцированный fixed при остановке?",
+     "interviewer_md": "EXPECTED ANSWER:\nНет; избегается только variable — ранжируй по var.\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) кандидат говорит fixed_alloc персистит/реаллоцируется; (2) переходит на avoidable=var как критерий.",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "gated data",
+       "triggers": [
+        "fixed исчезает",
+        "avoidable",
+        "overhead остаётся"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 5,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Правильный выбор и экономия.",
+     "interviewer_md": "EXPECTED ANSWER:\nDeepcut (var 47); saving $94M vs Ridgeline $76M; gap $18M (19.15%)\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) выбор Deepcut по max var; (2) 47×2.0M=94,000,000 и 38×2.0M=76,000,000; (3) gap $18M назван как % от оптимальной экономии (19.15%), не от иной базы.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 6,
+     "label": "Synthesis",
+     "time_min": null,
+     "candidate_md": "Рекомендация.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) вывод (curtail Deepcut) первым; (2) ≥2 цифры ($94M vs $76M и/или var $47 vs $38); (3) ≥2 риска (internal take-or-pay + external restart/demand); (4) ≥1 next step.",
+     "hints": {},
+     "conditional_exhibits": []
+    }
+   ],
+   "qa_checks_md": ""
+  },
+  {
+   "id": 104,
+   "title": "There's Something About Dairy",
+   "title_registry": "There's Something About Dairy",
+   "industry": "Dairy CPG",
+   "case_type": "M&A",
+   "difficulty": "Hard",
+   "trap_or_clean": "Trap",
+   "est_minutes": 39,
+   "naive_error": "#3",
+   "generation": "D",
+   "header_md": "**Type · Dairy CPG · F1 (interviewee-led) · Ловушка #104 (Trap-overstate/soft, naive #3 flat-vs-escalating)**\nDifficulty: **Hard** · Prototype: Danone/Lactalis · IO: Non-Durables, Kellogg p.221 · Layers: mental-math, hypothesis-update, open-drive",
+   "prompt_md": "**Creamwright Foods** (dairy CPG) покупает регионального переработчика молока. Запрос — **$105M** за 100%. Главная синергия — экономия на консолидированной закупке сырого молока в течение **6 лет**. Стоит ли платить $105M?",
+   "exhibits": [],
+   "steps": [
+    {
+     "step": 1,
+     "label": "Framework",
+     "time_min": null,
+     "candidate_md": "Платить ли $105M? Структурируй; выбери порядок данных.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) M&A-структура (stand-alone+синергия vs цена); (3) кандидат ставит вопрос о временнóм профиле синергии ИЛИ выбирает порядок с контрактами до расчёта синергии; (4) закрывающий вопрос.",
+     "hints": {
+      "L1": "Постоянна ли годовая синергия все 6 лет?",
+      "L2": "Escalator съедает скидку 8%/год."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 2,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Stand-alone таргета.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nEBITDA $9.2M, мультипликатор 6.0x\n\nEXPECTED ANSWER:\n$55.2M\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если 9.2M×6.0=55,200,000.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 3,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Наивная синергия (flat).",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nгод-1 $14.5M, дисконт 9%, 6 лет\n\nEXPECTED ANSWER:\n$65,045,819.56; deal $120.2M vs ask $105M -> BUY (запас $15.2M)\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) flat PV 6 лет @9% = 65,045,819.56; (2) наив-вывод BUY с запасом ~$15M.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 4,
+     "label": "Hypothesis_update",
+     "time_min": null,
+     "candidate_md": "Что ждёшь в контрактах поставщиков и почему?",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) кандидат ждёт условия, влияющие на устойчивость скидки; (2) связывает с профилем синергии.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 5,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Синергия с убыванием 8%/год.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\ndecay 8%/год\n\nEXPECTED ANSWER:\n$54,456,057.06; deal $109.7M vs ask $105M -> BUY тонко (запас $4.7M)\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) убывающая PV = 54,456,057.06; (2) overstate назван от синергии (~19.45%), НЕ от deal value; (3) отмечено сжатие подушки $15.2M→$4.7M.",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "decay 8%/год",
+       "triggers": [
+        "контракты поставщиков",
+        "escalator",
+        "останется ли скидка",
+        "профиль синергии"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 6,
+     "label": "Sensitivity",
+     "time_min": null,
+     "candidate_md": "Что при decay 12%?",
+     "interviewer_md": "EXPECTED ANSWER:\nsynergy $49.93M; deal $105.13M; запас ~$0.13M; при ~12.1%+ -> WALK\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) decay 12% PV = 49,927,713.05; (2) вывод — подушка почти исчезает, порог хрупкий.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 7,
+     "label": "Synthesis",
+     "time_min": null,
+     "candidate_md": "Рекомендация.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) вывод (BUY тонко / renegotiate) первым; (2) ≥2 цифры (fair $109.7M, запас $4.7M, синергия $54.5M); (3) ≥2 риска (internal задержка интеграции + external escalator/цена молока); (4) ≥1 конкретный next step (cap escalator / target ≤$100M).",
+     "hints": {},
+     "conditional_exhibits": []
+    }
+   ],
+   "qa_checks_md": ""
+  },
+  {
+   "id": 105,
+   "title": "Racket Science",
+   "title_registry": "Racket Science",
+   "industry": "Sporting goods",
+   "case_type": "Growth Strategy",
+   "difficulty": "Easy",
+   "trap_or_clean": "Trap",
+   "est_minutes": 24,
+   "naive_error": "#4",
+   "generation": "D",
+   "header_md": "**Type · Sporting goods · F5 · Ловушка #105 (Trap-flip, naive #4 gross-vs-net)**\nDifficulty: Easy · Prototype: Wilson/Head · IO: Industrial Goods after-sales, Kellogg p.222 · Layer: mental-math",
+   "prompt_md": "**Corbin Racquet** производит теннисные ракетки, продаёт оптом (wholesale) по **$95/шт**. Рассматривает запуск собственного DTC онлайн-канала с розничной ценой **$180/шт**. Запускать ли DTC?",
+   "exhibits": [],
+   "steps": [
+    {
+     "step": 1,
+     "label": "Framework",
+     "time_min": null,
+     "candidate_md": "Запускать ли DTC? Структурируй.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) сравнение по net вкладу на юнит заявлено (не по валовой выручке); (3) упомянута каннибализация опта; (4) закрывающий вопрос.",
+     "hints": {
+      "L1": "Что стоит продать напрямую?",
+      "L2": "Вычти DTC-затраты, сравни net с net."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 2,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Наивный DTC-вклад.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nretail $180, wholesale $95, COGS $62\n\nEXPECTED ANSWER:\nws_net $33; наив DTC $118 -> LAUNCH\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) 95−62=33; (2) 180−62=118; (3) наив-вывод LAUNCH.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 3,
+     "label": "Insight",
+     "time_min": null,
+     "candidate_md": "Какие затраты несёт DTC?",
+     "interviewer_md": "EXPECTED ANSWER:\nfulfillment/returns/payment/CAC/platform = $87.90; DTC net $30.10.\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) кандидат называет ≥3 DTC-специфичные статьи; (2) считает net = 180−62−87.90=30.10.",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "gated data",
+       "triggers": [
+        "затраты DTC",
+        "fulfillment",
+        "CAC",
+        "возвраты",
+        "net вклад"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 4,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Решение.",
+     "interviewer_md": "EXPECTED ANSWER:\nDTC net $30.10 < wholesale $33 -> STAY\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) сравнение net-с-net; (2) вывод STAY WHOLESALE (флип).",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 5,
+     "label": "Sensitivity",
+     "time_min": null,
+     "candidate_md": "При каком CAC DTC выгоден?",
+     "interviewer_md": "EXPECTED ANSWER:\nbreakeven CAC $38.10; ниже -> LAUNCH\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) cac_be=180−62−14−19−5.40−8.50−33=38.10; (2) верное направление.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 6,
+     "label": "Synthesis",
+     "time_min": null,
+     "candidate_md": "Рекомендация.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) вывод STAY первым; (2) ≥2 цифры ($30.10 vs $33 и/или DTC-затраты $88); (3) ≥2 риска (internal каннибализация + external волатильность возвратов); (4) ≥1 next step (CAC-пилот).",
+     "hints": {},
+     "conditional_exhibits": []
+    }
+   ],
+   "qa_checks_md": ""
+  },
+  {
+   "id": 106,
+   "title": "On the Watermark",
+   "title_registry": "On the Watermark",
+   "industry": "Ports/freight",
+   "case_type": "Market Entry",
+   "difficulty": "Medium",
+   "trap_or_clean": "Trap",
+   "est_minutes": 30,
+   "naive_error": "#15",
+   "generation": "D",
+   "header_md": "**Type · Ports/freight · F6 · Ловушка #106 (Trap-flip, naive #15 wrong-ranking)**\nDifficulty: Medium · Prototype: DP World/PSA · IO: Industrials capacity, Stern p.22 [DEV: TEU throughput + incumbent lock-in замещают book-to-bill] · Layer: mental-math, hypothesis-update",
+   "prompt_md": "**Havenmark Ports** выбирает, в какой из 4 региональных портов войти (арендовать терминал). Партнёр: в какой порт заходить?",
+   "exhibits": [],
+   "steps": [
+    {
+     "step": 1,
+     "label": "Framework",
+     "time_min": null,
+     "candidate_md": "В какой порт входить? Структурируй критерий.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) критерий доходности входа явно про выигрываемую долю/маржу, не только объём; (3) ≥3 фактора; (4) закрывающий вопрос.",
+     "hints": {
+      "L1": "Что определяет доход — валовой объём или выигрываемая доля?",
+      "L2": "Ранжируй по winnable × contrib."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 2,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Оцени порты по Exhibit A.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nTEU + contrib ×4\n\nEXPECTED ANSWER:\nнаив по TEU -> Kestrel (2.8M)\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) кандидат видит Kestrel крупнейшим по TEU; (2) фиксирует это как наив-выбор.",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "TEU + contrib ×4",
+       "triggers": [
+        "объём портов",
+        "throughput",
+        "данные по портам"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 3,
+     "label": "Hypothesis_update",
+     "time_min": null,
+     "candidate_md": "Что ждёшь про конкуренцию в портах и почему?",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) кандидат хочет узнать выигрываемую долю/присутствие инкумбентов; (2) связывает с выбором.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 4,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Winnable contribution по Exhibit B.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nlock-in ×4\n\nEXPECTED ANSWER:\nMarlow $59.475M лучший; Kestrel $12.768M; флип Kestrel->Marlow\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) все 4 winnable contribution верны (TEU×(1−lockin)×contrib); (2) выбор Marlow; (3) gap назван как % от winnable contribution (78.5%).",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "lock-in ×4",
+       "triggers": [
+        "инкумбенты",
+        "lock-in",
+        "какую долю выиграем",
+        "конкуренция"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 5,
+     "label": "Synthesis",
+     "time_min": null,
+     "candidate_md": "Рекомендация.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) вывод (enter Marlow) первым; (2) ≥2 цифры ($59.5M vs $12.8M и/или lock-in 88% vs 35%); (3) ≥2 риска (internal ramp-capacity + external timing lock-in); (4) ≥1 next step.",
+     "hints": {},
+     "conditional_exhibits": []
+    }
+   ],
+   "qa_checks_md": ""
+  },
+  {
+   "id": 107,
+   "title": "Frozen Assets",
+   "title_registry": "Frozen Assets",
+   "industry": "Cold storage",
+   "case_type": "Cost Reduction",
+   "difficulty": "Medium",
+   "trap_or_clean": "Clean",
+   "est_minutes": 30,
+   "naive_error": null,
+   "generation": "D",
+   "header_md": "**Type · Cold storage · F7 · Ловушка #107 (CLEAN — validate no reversal)**\nDifficulty: Medium · Prototype: Lineage/Americold · IO: Industrial Goods energy, Kellogg p.222 [DEV: энергозатраты замещают after-sales] · Layer: mental-math, open-drive",
+   "prompt_md": "**Tundralink Storage** (холодные склады) рассматривает переоснащение 3 складов новой системой управления холодильным оборудованием. Поставщик обещает экономию энергии **28%**. Capex — **$1.15M** разово, плюс **$64k/год** на лицензию/обслуживание. Внедрять?\n\n*(Это clean-кейс: наив и correct совпадают. Задача кандидата — проверить, что привлекательная экономия реальна и нет скрытого разворота, и явно это подтвердить.)*",
+   "exhibits": [],
+   "steps": [
+    {
+     "step": 1,
+     "label": "Framework",
+     "time_min": null,
+     "candidate_md": "Внедрять ли систему? Структурируй ROI.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) структура ROI (экономия vs capex+opex, payback/NPV); (3) заявлена проверка sensitivity как обязательный шаг; (4) закрывающий вопрос.",
+     "hints": {
+      "L1": "Зависит ли выгода от цены энергии?",
+      "L2": "Проверь NPV при тарифах −20%."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 2,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Экономия и payback.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\n3 склада кВт·ч×тариф; 28%; capex $1.15M; opex $64k\n\nEXPECTED ANSWER:\nэнергозатраты $1,520,400; net annual $361,712; payback 3.18 года\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) сумма энергозатрат=1,520,400; (2) net=1,520,400×0.28−64,000=361,712; (3) payback≈3.18.",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "3 склада кВт·ч×тариф; 28%; capex $1.15M; opex $64k",
+       "triggers": [
+        "энергозатраты",
+        "расход по складам",
+        "тарифы"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 3,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "7-летний NPV @9%.",
+     "interviewer_md": "EXPECTED ANSWER:\n+$670,479.44\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если NPV = −1,150,000 + Σ(361,712/1.09^t, t=1..7) = 670,479.44 (±$1).",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 4,
+     "label": "Validation",
+     "time_min": null,
+     "candidate_md": "Проверь, нет ли скрытого разворота (sensitivity).",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nтарифы −20%\n\nEXPECTED ANSWER:\nnet $276,569.60; NPV +$241,961.75 -> положителен, разворота нет\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) кандидат САМ инициирует проверку sensitivity; (2) NPV@−20%=241,961.75 положителен; (3) явно заявляет: разворота нет, наив совпадает с correct.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 5,
+     "label": "Synthesis",
+     "time_min": null,
+     "candidate_md": "Рекомендация.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) вывод PROCEED первым; (2) явно сказано, что проверено отсутствие разворота (sensitivity); (3) ≥2 цифры ($361,712 net, payback 3.2, NPV +$670k); (4) ≥2 риска (internal 28%-претензия вендора + external тарифы/срок службы); (5) ≥1 next step (пилот).",
+     "hints": {},
+     "conditional_exhibits": []
+    }
+   ],
+   "qa_checks_md": ""
+  },
+  {
+   "id": 108,
+   "title": "Store Wars",
+   "title_registry": "Store Wars",
+   "industry": "Private-label CPG",
+   "case_type": "Profitability",
+   "difficulty": "Easy",
+   "trap_or_clean": "Trap",
+   "est_minutes": 24,
+   "naive_error": "#2",
+   "generation": "D",
+   "header_md": "**Type · Private-label CPG · F5 · Ловушка #108 (Trap-flip, naive #2 blended-vs-segment)**\nDifficulty: Easy · Prototype: Kraft-Heinz PL · IO: Non-Durables, Kellogg p.221 · Layer: mental-math",
+   "prompt_md": "**Marlcore Labels** выпускает продукцию под собственными марками ритейлеров (private-label) для двух каналов: **Grocery** и **Discount**. Общая маржа выглядит нормально. Менеджмент хочет расширять Discount (он растёт быстрее). Стоит ли?",
+   "exhibits": [],
+   "steps": [
+    {
+     "step": 1,
+     "label": "Framework",
+     "time_min": null,
+     "candidate_md": "Расширять ли Discount? Структурируй.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) явно требуется сегментный разрез (не blended); (3) cost side присутствует; (4) закрывающий вопрос.",
+     "hints": {
+      "L1": "Какая маржа у каждого канала?",
+      "L2": "Разбей по сегментам; проверь contribution Discount."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 2,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Blended маржа.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\ntot rev $100M, tot cost $93M\n\nEXPECTED ANSWER:\n7.0%; наив -> EXPAND Discount\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) (100−93)/100=7%; (2) наив-вывод EXPAND.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 3,
+     "label": "Insight",
+     "time_min": null,
+     "candidate_md": "Сегментная маржа каналов.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nGrocery 62/44/9; Discount 38/33/7\n\nEXPECTED ANSWER:\nGrocery +14.52%, Discount −5.26% (−$2M) -> флип\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) Grocery profit +9M/14.52%; (2) Discount −2M/−5.26%; (3) вывод НЕ расширять.",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "Grocery 62/44/9; Discount 38/33/7",
+       "triggers": [
+        "по сегментам",
+        "маржа каналов",
+        "разбивка Grocery/Discount",
+        "contribution"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 4,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Contribution Discount — закрывать или чинить?",
+     "interviewer_md": "EXPECTED ANSWER:\ncontribution +$5M -> reprice/fix, не закрывать\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) rev−VC=38−33=5,000,000>0; (2) вывод reprice/fix, а не exit.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 5,
+     "label": "Synthesis",
+     "time_min": null,
+     "candidate_md": "Рекомендация.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) вывод (не расширять, reprice) первым; (2) ≥2 цифры (+14.5% vs −5.3%, contribution +$5M); (3) ≥2 риска (internal аллокация fixed + external volume-контракты); (4) ≥1 next step.",
+     "hints": {},
+     "conditional_exhibits": []
+    }
+   ],
+   "qa_checks_md": ""
+  },
+  {
+   "id": 109,
+   "title": "A Fistful of Dosas",
+   "title_registry": "A Fistful of Dosas",
+   "industry": "Fast-casual QSR",
+   "case_type": "M&A",
+   "difficulty": "Medium",
+   "trap_or_clean": "Trap",
+   "est_minutes": 30,
+   "naive_error": "#14",
+   "generation": "D",
+   "header_md": "**Type · Fast-casual QSR · F1 (interviewee-led) · Ловушка #109 (Trap-flip, naive #14 fixed-cost allocation)**\nDifficulty: Medium · Prototype: QSR-сети · IO: Restaurant labor, Kellogg p.227 · Layer: mental-math, hypothesis-update",
+   "prompt_md": "**Tandora Foods** (сеть fast-casual, 40 точек) рассматривает покупку региональной сети из **12 точек**. Партнёр хочет знать, создаёт ли сделка ценность.",
+   "exhibits": [],
+   "steps": [
+    {
+     "step": 1,
+     "label": "Framework",
+     "time_min": null,
+     "candidate_md": "Создаёт ли сделка ценность? Структурируй.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) M&A-структура; (3) заявлено мерить таргет по incremental/avoidable экономике; (4) закрывающий вопрос.",
+     "hints": {
+      "L1": "Снижается ли overhead Tandora реально при реаллокации?",
+      "L2": "Считай инкрементально; commissary таргета не исчезает."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 2,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Наивная оценка gain.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\n12 точек $1.45M/82% var; commissary $4.2M; Tandora 40 точек/overhead $12M\n\nEXPECTED ANSWER:\nunit_contrib $261k; naive gain $3,132,000 -> BUY\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) unit_contrib=1.45M×0.18=261,000; (2) naive_alloc=12M/52=230,769.23; (3) freed=2,769,230.77; (4) naive gain=3,132,000; наив-вывод BUY.",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "12 точек $1.45M/82% var; commissary $4.2M; Tandora 40 точек/",
+       "triggers": [
+        "экономика таргета",
+        "commissary",
+        "overhead Tandora",
+        "incremental"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 3,
+     "label": "Hypothesis_update",
+     "time_min": null,
+     "candidate_md": "Что будет с overhead Tandora после сделки?",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) кандидат ставит под сомнение реальность освобождения overhead; (2) переходит к avoidable/incremental.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 4,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Инкрементальная прибыль таргета.",
+     "interviewer_md": "EXPECTED ANSWER:\n12×261k − 4.2M = −1,068,000 -> WALK\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) 261,000×12=3,132,000; (2) −4,200,000 = −1,068,000; (3) вывод WALK; (4) разница направления (gap flip) названа от gain-метрики (наив $3.132M vs correct −$1.068M).",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 5,
+     "label": "Synthesis",
+     "time_min": null,
+     "candidate_md": "Рекомендация.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) вывод WALK первым; (2) ≥2 цифры (−$1.07M incremental, commissary $4.2M, мираж $3.13M); (3) ≥2 риска (internal — реальная avoidability commissary + external — консолидация конкурентом); (4) ≥1 next step.",
+     "hints": {},
+     "conditional_exhibits": []
+    }
+   ],
+   "qa_checks_md": ""
+  },
+  {
+   "id": 110,
+   "title": "Drugstore Cowboy",
+   "title_registry": "Drugstore Cowboy",
+   "industry": "Generic pharma",
+   "case_type": "Cost Reduction",
+   "difficulty": "Medium",
+   "trap_or_clean": "Trap",
+   "est_minutes": 30,
+   "naive_error": "#9",
+   "generation": "D",
+   "header_md": "**Type · Generic pharma · F1 (interviewee-led) · Ловушка #110 (Trap-flip, naive #9 wrong-discount-horizon)**\nDifficulty: Medium · Prototype: Teva/Mylan · IO: Life Sciences/Pharma, Stern p.18 · Layer: mental-math",
+   "prompt_md": "**Venclar Pharma** (дженерики) решает: инвестировать **$28M capex** в собственное производство ключевого API (активной субстанции) или продолжать закупать у поставщика. Собственное производство даёт экономию **$6.1M/год**. Инвестировать?",
+   "exhibits": [],
+   "steps": [
+    {
+     "step": 1,
+     "label": "Framework",
+     "time_min": null,
+     "candidate_md": "Строить ли своё производство API? Структурируй NPV.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) NPV-структура (экономия×горизонт vs capex); (3) кандидат ставит вопрос о горизонте релевантности API; (4) закрывающий вопрос.",
+     "hints": {
+      "L1": "Сколько лет держится экономия у дженерика?",
+      "L2": "Горизонт ~4 года до biosimilar-обрыва, не 12."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 2,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Наивный PV экономии.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\ncapex $28M; экономия $6.1M/год; дисконт 11%\n\nEXPECTED ANSWER:\n12-лет PV $39,603,372.51 > $28M -> INVEST\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) Σ(6.1M/1.11^t, t=1..12)=39,603,372.51; (2) наив-вывод INVEST.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 3,
+     "label": "Insight",
+     "time_min": null,
+     "candidate_md": "Какой горизонт релевантен?",
+     "interviewer_md": "EXPECTED ANSWER:\n~4 года до biosimilar-обрыва; экономия испаряется после.\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) кандидат называет patent/biosimilar cliff; (2) сокращает горизонт до ~4 лет.",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "gated data",
+       "triggers": [
+        "patent cliff",
+        "biosimilar",
+        "горизонт",
+        "сколько лет экономия",
+        "конкуренты"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 4,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Правильный PV (4 года +salvage).",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nобрыв год-5; salvage $2M год-4\n\nEXPECTED ANSWER:\nPV $18,924,918.71; +salvage $20,242,380.65 < $28M -> KEEP\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) Σ(6.1M/1.11^t, t=1..4)=18,924,918.71; (2) +salvage=20,242,380.65; (3) вывод KEEP; (4) overstate назван от 4-летнего PV (~109%).",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 5,
+     "label": "Sensitivity",
+     "time_min": null,
+     "candidate_md": "Что при горизонте 5 лет?",
+     "interviewer_md": "EXPECTED ANSWER:\nPV+salvage $23,731,874.46 < $28M; нужен ~7+ лет для INVEST\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) 5-лет PV+salvage=23,731,874.46; (2) вывод — флип устойчив, обрыв исключает окупаемость.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 6,
+     "label": "Synthesis",
+     "time_min": null,
+     "candidate_md": "Рекомендация.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) вывод KEEP BUYING первым; (2) ≥2 цифры ($18.9M PV vs $28M capex, ~4 года); (3) ≥2 риска (internal re-use завода + external/regulatory ранний biosimilar); (4) ≥1 next step (подтвердить biosimilar timeline).",
+     "hints": {},
+     "conditional_exhibits": []
+    }
+   ],
+   "qa_checks_md": ""
+  },
+  {
+   "id": 111,
+   "title": "The Chipfather",
+   "title_registry": "The Chipfather",
+   "industry": "Semiconductors",
+   "case_type": "M&A",
+   "difficulty": "Medium",
+   "trap_or_clean": "Trap",
+   "est_minutes": 30,
+   "naive_error": "#5",
+   "generation": "D",
+   "header_md": "**Type · Semiconductors · F1 (interviewee-led) · Ловушка #111 (Trap-flip, naive #5 sunk-cost inclusion)**\nDifficulty: Medium · Prototype: TSMC/GlobalFoundries · IO: Technology (obsolescence/R&D), Stern p.15 · Layers: mental-math, hypothesis-update",
+   "prompt_md": "Клиент — **Nyvertis Systems**, производитель полупроводников. Nyvertis два года разрабатывает собственный чип нового поколения и уже много вложил. Появилась альтернатива: купить стартап с готовым дизайном аналогичного чипа. Партнёр: доделывать своё (build) или покупать (buy)?",
+   "exhibits": [],
+   "steps": [
+    {
+     "step": 1,
+     "label": "Framework",
+     "time_min": null,
+     "candidate_md": "Build свой чип или buy стартап? Структурируй.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) ≥3 корзины (forward build / forward buy / сравнение); (3) явно упомянуто отделить уже потраченное от будущего; (4) закрывающий вопрос.",
+     "hints": {
+      "L1": "Меняются ли уже потраченные суммы от решения?",
+      "L2": "Только forward; sunk $225M игнорируй."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 2,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Наивное сравнение путей.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nsunk $225M; build fwd cost $140M/PV $300M; buy $210M+$25M/PV $430M\n\nEXPECTED ANSWER:\nbuild_naive $160M; buy_naive −$30M (со списанием sunk) -> BUILD\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) build_fwd=300−140=160M; (2) buy со списанием sunk=195−225=−30M; (3) наив-вывод BUILD.",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "sunk $225M; build fwd cost $140M/PV $300M; buy $210M+$25M/PV",
+       "triggers": [
+        "сколько уже потрачено",
+        "структура затрат",
+        "forward costs",
+        "что ещё нужно вложить"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 3,
+     "label": "Insight",
+     "time_min": null,
+     "candidate_md": "Релевантны ли sunk $225M?",
+     "interviewer_md": "EXPECTED ANSWER:\nНет; sunk невозвратны, сравнивать только forward.\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) кандидат называет $225M sunk/нерелевантными; (2) переходит на forward-сравнение.",
+     "hints": {
+      "L1": "Влияют ли потраченные $225M на будущие потоки?",
+      "L2": "Отбрось sunk, сравни forward NPV."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 4,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Forward-сравнение.",
+     "interviewer_md": "EXPECTED ANSWER:\nbuild_fwd $160M vs buy_fwd $195M -> BUY\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) buy_fwd=430−210−25=195M; (2) вывод BUY; (3) занижение buy назван от buy-NPV (~115% = sunk/buy_fwd), НЕ от иной базы.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 5,
+     "label": "Hypothesis_update",
+     "time_min": null,
+     "candidate_md": "Что важнее для решения — потраченное или предстоящее?",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) кандидат отбрасывает sunk-логику; (2) обосновывает forward-подход.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 6,
+     "label": "Sensitivity",
+     "time_min": null,
+     "candidate_md": "При каком PV покупки решение переворачивается?",
+     "interviewer_md": "EXPECTED ANSWER:\nпорог buy PV $395M; ниже -> BUILD\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) порог=160M+235M=395M PV; (2) верное направление (ниже→BUILD).",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 7,
+     "label": "Synthesis",
+     "time_min": null,
+     "candidate_md": "Рекомендация.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) вывод BUY первым; (2) ≥2 цифры ($195M vs $160M forward, sunk $225M); (3) ≥2 риска (internal интеграция + external обсолесценция); (4) ≥1 next step.",
+     "hints": {},
+     "conditional_exhibits": []
+    }
+   ],
+   "qa_checks_md": ""
+  },
+  {
+   "id": 112,
+   "title": "Sweat Expectations",
+   "title_registry": "Sweat Expectations",
+   "industry": "Gym/fitness",
+   "case_type": "Pricing",
+   "difficulty": "Easy",
+   "trap_or_clean": "Trap",
+   "est_minutes": 24,
+   "naive_error": "#8",
+   "generation": "D",
+   "header_md": "**Type · Gym/fitness · F5 · Ловушка #112 (Trap-flip, naive #8 price elasticity)**\nDifficulty: Easy · Prototype: Planet Fitness · IO: Technology (price elasticity of demand), Stern p.15 [DEV membership pricing] · Layer: mental-math",
+   "prompt_md": "**Grithaven Fitness** (сеть залов) хочет поднять членский взнос с **$39** до **$47**/мес. Сейчас **8,200** членов. Поднимать ли цену?",
+   "exhibits": [],
+   "steps": [
+    {
+     "step": 1,
+     "label": "Framework",
+     "time_min": null,
+     "candidate_md": "Поднимать ли взнос $39→$47? Структурируй.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) заложена реакция спроса/эластичность (не только цена×база); (3) ≥3 фактора; (4) закрывающий вопрос.",
+     "hints": {
+      "L1": "Все ли останутся при +20%?",
+      "L2": "Эластичность −1.6, посчитай новое кол-во."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 2,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Наивная выручка.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\n8200 членов, $39→$47\n\nEXPECTED ANSWER:\nrev_old $319,800; rev_naive $385,400 (+20.51%)\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) 8200×39=319,800; (2) 8200×47=385,400; (3) наив-вывод RAISE.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 3,
+     "label": "Insight",
+     "time_min": null,
+     "candidate_md": "Как реагирует спрос?",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nэластичность −1.6\n\nEXPECTED ANSWER:\nобъём −32.8%, members_new≈5,509\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) price_change≈20.5%; (2) qty_change=−1.6×0.205; (3) members_new≈5,509.",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "эластичность −1.6",
+       "triggers": [
+        "эластичность",
+        "уйдут ли члены",
+        "реакция спроса",
+        "отток при повышении"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 4,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Правильная выручка и решение.",
+     "interviewer_md": "EXPECTED ANSWER:\n$258,909.74 < $319,800 -> HOLD\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) rev_correct=5509×47≈258,909.74; (2) вывод HOLD; (3) overstate назван от new-price выручки (~48.85%).",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 5,
+     "label": "Sensitivity",
+     "time_min": null,
+     "candidate_md": "Breakeven эластичность?",
+     "interviewer_md": "EXPECTED ANSWER:\n−0.83; выше (менее эласт) -> RAISE\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) be=(39/47−1)/0.205≈−0.83; (2) верное направление.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 6,
+     "label": "Synthesis",
+     "time_min": null,
+     "candidate_md": "Рекомендация.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) вывод HOLD первым; (2) ≥2 цифры ($258.9k vs $319.8k, эласт −1.6); (3) ≥2 риска (internal оценка эластичности + external конкуренты); (4) ≥1 next step (price-тест).",
+     "hints": {},
+     "conditional_exhibits": []
+    }
+   ],
+   "qa_checks_md": ""
+  },
+  {
+   "id": 113,
+   "title": "Stranger Binges",
+   "title_registry": "Stranger Binges",
+   "industry": "Streaming/TV",
+   "case_type": "Growth Strategy",
+   "difficulty": "Medium",
+   "trap_or_clean": "Trap",
+   "est_minutes": 30,
+   "naive_error": "#11",
+   "generation": "D",
+   "header_md": "**Type · Streaming/TV · F5 · Ловушка #113 (Trap-flip, naive #11 churn-vs-acquisition)**\nDifficulty: Medium · Prototype: Netflix/Hulu · IO: Media (subscriptions), Stern p.20 · Layers: mental-math, hypothesis-update",
+   "prompt_md": "**Vaydell Media** (стриминг) хочет расти. Команда видит **420,000** новых подписчиков за квартал и предлагает влить бюджет в привлечение. Правильный ли это ход?",
+   "exhibits": [],
+   "steps": [
+    {
+     "step": 1,
+     "label": "Framework",
+     "time_min": null,
+     "candidate_md": "Лить ли бюджет в привлечение? Структурируй.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) чистый рост = приток − отток заявлен (не только gross adds); (3) ≥3 фактора; (4) закрывающий вопрос.",
+     "hints": {
+      "L1": "Что с существующей базой — есть отток?",
+      "L2": "Чистый рост = adds − churn."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 2,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Оцени рост по Exhibit A.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\ngross adds 420k, база 3.1M\n\nEXPECTED ANSWER:\nнаив видит +13.55%, рост\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) +420k/3.1M=+13.55%; (2) фиксирует как наив-рост.",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "gross adds 420k, база 3.1M",
+       "triggers": [
+        "новые подписчики",
+        "рост базы"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 3,
+     "label": "Hypothesis_update",
+     "time_min": null,
+     "candidate_md": "Что узнать перед тем как звать это ростом?",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) кандидат хочет churn/удержание; (2) связывает с чистым ростом.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 4,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Чистый рост с churn.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nchurn 5.0%/мес\n\nEXPECTED ANSWER:\nchurned 442,138; net −22,138 -> база сокращается\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) churned=3.1M×(1−0.95^3)=442,138; (2) net=−22,138; (3) вывод — направление перевёрнуто, чинить churn.",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "churn 5.0%/мес",
+       "triggers": [
+        "отток",
+        "churn",
+        "удержание",
+        "сколько уходит"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 5,
+     "label": "Sensitivity",
+     "time_min": null,
+     "candidate_md": "Breakeven churn?",
+     "interviewer_md": "EXPECTED ANSWER:\n≈4.74%/мес; выше -> сокращение\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) breakeven≈4.74%; (2) @4.1% net +54,120 положителен.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 6,
+     "label": "Synthesis",
+     "time_min": null,
+     "candidate_md": "Рекомендация.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) вывод (чинить churn) первым; (2) ≥2 цифры (net −22k, churned 442k, adds 420k); (3) ≥2 риска (internal драйверы churn + external контент-инфляция/конкуренты); (4) ≥1 next step (cohort-анализ).",
+     "hints": {},
+     "conditional_exhibits": []
+    }
+   ],
+   "qa_checks_md": ""
+  },
+  {
+   "id": 114,
+   "title": "Hoop Schemes",
+   "title_registry": "Hoop Schemes",
+   "industry": "Pro basketball (Minneapolis)",
+   "case_type": "Profitability",
+   "difficulty": "Medium",
+   "trap_or_clean": "Trap",
+   "est_minutes": 30,
+   "naive_error": "#7",
+   "generation": "D",
+   "header_md": "**Type · Pro basketball (Minneapolis) · F6 · Ловушка #114 (Trap-action/soft, naive #7 avg-vs-marginal, добор)**\nDifficulty: Medium · Prototype: NBA franchise · IO: Media/Entertainment (gate/venue), Stern p.20 · Layers: mental-math, hypothesis-update",
+   "prompt_md": "**Twin Pines Hoops** — профессиональный баскетбольный клуб из Миннеаполиса, владеет ареной. В межсезонье арена простаивает. Рассматривают три типа доп. событий, чтобы загрузить арену. Какие добавить?",
+   "exhibits": [],
+   "steps": [
+    {
+     "step": 1,
+     "label": "Framework",
+     "time_min": null,
+     "candidate_md": "Какие события добавить? Структурируй критерий.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) критерий отбора про затраты; (3) упомянуто, что арена уже оплачена/fixed; (4) закрывающий вопрос.",
+     "hints": {
+      "L1": "Аренда возникает из-за события или платится всегда?",
+      "L2": "Отбирай по marginal, аренда fixed."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 2,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "AVG-profit по событиям.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nExhibit A: rev/marginal/alloc ×3\n\nEXPECTED ANSWER:\nConcerts +30k, College −75k, Corp −30k; наив -> только Concerts\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) все 3 avg верны; (2) наив-выбор = Concerts.",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "Exhibit A: rev/marginal/alloc ×3",
+       "triggers": [
+        "данные по событиям",
+        "прибыль событий",
+        "стоимость события",
+        "структура затрат события"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 3,
+     "label": "Hypothesis_update",
+     "time_min": null,
+     "candidate_md": "Аренда $140k — из-за события или всегда?",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) кандидат ставит под вопрос аллокацию аренды; (2) переходит к marginal.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 4,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Marginal-profit и выбор.",
+     "interviewer_md": "EXPECTED ANSWER:\nвсе 3 положительны (Concerts 170k/College 65k/Corp 110k); добавить все; $175k left (50.7%)\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) marginal-profit всех 3 верны; (2) выбор — все три; (3) gap $175k назван как % от оптимальной маржи (50.7%).",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 5,
+     "label": "Synthesis",
+     "time_min": null,
+     "candidate_md": "Рекомендация.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) вывод (добавить все 3) первым; (2) ≥2 цифры ($345k vs $170k, marginal значения); (3) ≥2 риска (internal расписание + external спрос от экономики); (4) ≥1 next step.",
+     "hints": {},
+     "conditional_exhibits": []
+    }
+   ],
+   "qa_checks_md": ""
+  },
+  {
+   "id": 115,
+   "title": "The Blood Count of Monte Cristo",
+   "title_registry": "The Blood Count of Monte Cristo",
+   "industry": "Diagnostic labs",
+   "case_type": "Profitability",
+   "difficulty": "Easy",
+   "trap_or_clean": "Trap",
+   "est_minutes": 24,
+   "naive_error": "#13",
+   "generation": "D",
+   "header_md": "**Type · Diagnostic labs · F5 · Ловушка #115 (Trap-flip, naive #13 mix-shift)**\nDifficulty: Easy · Prototype: Labcorp/Quest · IO: Healthcare Providers, Stern p.16 · Layer: mental-math",
+   "prompt_md": "**Verithex Labs** (диагностическая лаборатория) видит рост объёма тестов, но прибыль падает. Объём вырос — почему прибыль вниз, и что делать?",
+   "exhibits": [],
+   "steps": [
+    {
+     "step": 1,
+     "label": "Framework",
+     "time_min": null,
+     "candidate_md": "Объём растёт, прибыль падает — почему? Структурируй.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) заявлена разбивка по миксу тестов (не только общий объём); (3) cost side есть; (4) закрывающий вопрос.",
+     "hints": {
+      "L1": "Одинакова ли маржа у тестов?",
+      "L2": "Разбей по specialty/routine, маржа $130 vs $14."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 2,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Общий объём.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nSpecialty 220/90; Routine 45/31; объёмы old/new\n\nEXPECTED ANSWER:\nобъём +14.13%; наив -> наращивать\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) 460k→525k=+14.13%; (2) наив-вывод рост.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 3,
+     "label": "Insight",
+     "time_min": null,
+     "candidate_md": "Прибыль по миксу.",
+     "interviewer_md": "EXPECTED ANSWER:\nold $20.36M → new $18.37M (−9.77%), mix-shift к routine\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) p_old=20,360,000; (2) p_new=18,370,000; (3) вывод — падение из-за микса, вернуть specialty.",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "gated data",
+       "triggers": [
+        "по типам тестов",
+        "микс",
+        "маржа тестов",
+        "specialty routine"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 4,
+     "label": "Sensitivity",
+     "time_min": null,
+     "candidate_md": "Что если вернуть specialty к 120k?",
+     "interviewer_md": "EXPECTED ANSWER:\nприбыль $21.62M > old\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) 120k×130+430k×14=21,620,000; (2) вывод — рычаг specialty.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 5,
+     "label": "Synthesis",
+     "time_min": null,
+     "candidate_md": "Рекомендация.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) вывод (вернуть specialty) первым; (2) ≥2 цифры ($20.4M→$18.4M, маржа $130 vs $14); (3) ≥2 риска (internal capacity specialty + external reimbursement); (4) ≥1 next step.",
+     "hints": {},
+     "conditional_exhibits": []
+    }
+   ],
+   "qa_checks_md": ""
+  },
+  {
+   "id": 116,
+   "title": "Houston, We Have a Proposal",
+   "title_registry": "Houston, We Have a Proposal",
+   "industry": "Launch services",
+   "case_type": "Market Entry",
+   "difficulty": "Hard",
+   "trap_or_clean": "Trap",
+   "est_minutes": 39,
+   "naive_error": "#10",
+   "generation": "D",
+   "header_md": "**Type · Launch services · F6 · Ловушка #116 (Trap-flip, naive #10 capacity/ramp)**\nDifficulty: **Hard** · Prototype: SpaceX/ULA · IO: Industrials (capital-intensive), Stern p.22 · Layers: mental-math, hypothesis-update, open-drive",
+   "prompt_md": "**Aventyr Launch Systems** решает, входить ли на рынок коммерческих космических запусков со своей новой ракетой. Проектная мощность — 24 запуска/год. Партнёр: входить ли?",
+   "exhibits": [],
+   "steps": [
+    {
+     "step": 1,
+     "label": "Framework",
+     "time_min": null,
+     "candidate_md": "Входить ли на рынок запусков? Структурируй; выбери порядок данных.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) структура (выручка при реальной мощности vs fixed+capex); (3) кандидат ставит вопрос о реальной пропускной способности ИЛИ выбирает порядок с проверкой мощности до NPV; (4) закрывающий вопрос.",
+     "hints": {
+      "L1": "Реально ли 24 запуска сразу?",
+      "L2": "Смоделируй ramp, не nameplate."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 2,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Наивный NPV на проектной мощности.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\ncontrib $24M/запуск; fixed $280M; capex $900M; nameplate 24; disc 12%\n\nEXPECTED ANSWER:\nnaive annual $296M; NPV +$570,421,371 -> ENTER\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) contrib=62−38=24M; (2) naive_annual=24M×24−280M=296M; (3) NPV 8лет=570,421,371; (4) наив-вывод ENTER.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 3,
+     "label": "Hypothesis_update",
+     "time_min": null,
+     "candidate_md": "Реально ли nameplate в первый год?",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) кандидат сомневается в мгновенной мощности; (2) вводит ramp-ограничения.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 4,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "NPV с реальным ramp.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nramp 4,8,13,18,22,24,24,24\n\nEXPECTED ANSWER:\ncorrect NPV −$470,933,584 -> SKIP\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) ramp-NPV=−470,933,584; (2) вывод SKIP; (3) overstate назван от NPV (~221% от |correct|).",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "ramp 4,8,13,18,22,24,24,24",
+       "triggers": [
+        "пропускная способность",
+        "ramp",
+        "сколько запусков в первый год",
+        "производство/лицензии"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 5,
+     "label": "Sensitivity",
+     "time_min": null,
+     "candidate_md": "Когда вход оправдан?",
+     "interviewer_md": "EXPECTED ANSWER:\nfast ramp NPV +$40.3M; price +20% +$469M; base SKIP\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) fast-ramp NPV=+40,337,552; (2) вывод — вход только при ускоренном ramp/премиальной цене.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 6,
+     "label": "Synthesis",
+     "time_min": null,
+     "candidate_md": "Рекомендация.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) вывод SKIP/defer первым; (2) ≥2 цифры (naive +$570M vs correct −$471M, ramp); (3) ≥2 риска (internal ramp/anchor + external лицензии); (4) ≥1 конкретный next step (anchor-контракт / транши capex).",
+     "hints": {},
+     "conditional_exhibits": []
+    }
+   ],
+   "qa_checks_md": ""
+  },
+  {
+   "id": 117,
+   "title": "Bean There, Bean That",
+   "title_registry": "Bean There, Bean That",
+   "industry": "Coffee retail",
+   "case_type": "Growth Strategy",
+   "difficulty": "Easy",
+   "trap_or_clean": "Clean",
+   "est_minutes": 24,
+   "naive_error": null,
+   "generation": "D",
+   "header_md": "**Type · Coffee retail · F7 · Ловушка #117 (CLEAN — validate no reversal)**\nDifficulty: Easy · Prototype: Starbucks/Peet's · IO: Beverages, Kellogg p.231 · Layers: mental-math, open-drive",
+   "prompt_md": "**Broomhill Roasters** (сеть кофеен) рассматривает открытие **5 точек** в новом городе. Экономика выглядит привлекательно. Открывать ли?\n\n*(Clean-кейс: наив и correct совпадают. Задача кандидата — проверить, что нет скрытого подвоха — каннибализация, насыщение — убедиться, что его нет, и явно это сказать.)*",
+   "exhibits": [],
+   "steps": [
+    {
+     "step": 1,
+     "label": "Framework",
+     "time_min": null,
+     "candidate_md": "Открывать ли 5 точек? Структурируй ROI.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) ROI-структура (прибыль точки vs capex, payback/NPV); (3) заявлены проверка sensitivity И каннибализации; (4) закрывающий вопрос.",
+     "hints": {
+      "L1": "Что при выручке −15%? Каннибализация?",
+      "L2": "Пересчитай NPV −15%; проверь географию."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 2,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Экономика точки и payback.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nrev $720k, var 62%, fixed $140k, buildout $240k ×5\n\nEXPECTED ANSWER:\nприбыль/точка $133,600; годовая $668k; payback 1.80\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) contrib=720k×0.38=273,600; (2) store_profit=133,600; (3) payback=1.2M/668k≈1.80.",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "rev $720k, var 62%, fixed $140k, buildout $240k ×5",
+       "triggers": [
+        "экономика точки",
+        "выручка/затраты точки",
+        "capex открытия"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 3,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "7-летний NPV @10%.",
+     "interviewer_md": "EXPECTED ANSWER:\n+$2,052,104\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если NPV=−1,200,000+Σ(668,000/1.10^t, t=1..7)=2,052,104 (±$1).",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 4,
+     "label": "Validation",
+     "time_min": null,
+     "candidate_md": "Проверь sensitivity и каннибализацию.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nвыручка −15%; новый город\n\nEXPECTED ANSWER:\nNPV@−15% +$1,053,104 (положителен); каннибализации нет -> GO, разворота нет\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) кандидат САМ инициирует проверку; (2) NPV@−15%=1,053,104 положителен; (3) каннибализация исключена (новый город); (4) явно: разворота нет, наив=correct.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 5,
+     "label": "Synthesis",
+     "time_min": null,
+     "candidate_md": "Рекомендация.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) вывод GO первым; (2) явно сказано, что проверено отсутствие разворота (sensitivity + каннибализация); (3) ≥2 цифры ($133.6k/точку, payback 1.8, NPV +$2.05M); (4) ≥2 риска (internal ramp + external конкуренция/аренда); (5) ≥1 next step (пилот 2 точки).",
+     "hints": {},
+     "conditional_exhibits": []
+    }
+   ],
+   "qa_checks_md": ""
+  },
+  {
+   "id": 118,
+   "title": "The Broker's New Clothes",
+   "title_registry": "The Broker's New Clothes",
+   "industry": "Retail brokerage",
+   "case_type": "Pricing",
+   "difficulty": "Medium",
+   "trap_or_clean": "Trap",
+   "est_minutes": 30,
+   "naive_error": "#12",
+   "generation": "D",
+   "header_md": "**Type · Retail brokerage · F1 (interviewee-led) · Ловушка #118 (Trap-flip, naive #12 regulator/fee-cap, добор)**\nDifficulty: Medium · Prototype: Charles Schwab · IO: Banking (commissions/pfof), Stern p.12 · Layers: mental-math, hypothesis-update",
+   "prompt_md": "**Kaldwin Securities** — розничный брокер с нулевой комиссией ($0 за сделку). Менеджмент предлагает ввести плату **$0.65** за исполнение сделки, чтобы создать новый поток дохода. Вводить ли плату?",
+   "exhibits": [],
+   "steps": [
+    {
+     "step": 1,
+     "label": "Framework",
+     "time_min": null,
+     "candidate_md": "Вводить ли плату $0.65/сделка? Структурируй.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) заложена реакция клиентов/конкурентов $0 (не только плата×объём); (3) ≥3 фактора; (4) закрывающий вопрос.",
+     "hints": {
+      "L1": "Останется ли объём при $0-конкурентах?",
+      "L2": "50% отток; пересчитай доход + сжатый pfof."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 2,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Наивный доход.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\n48M сделок, fee $0.65, pfof $42M\n\nEXPECTED ANSWER:\nrev_naive $73.2M -> INTRODUCE\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) 0.65×48M=31.2M; (2) +42M=73.2M; (3) наив-вывод INTRODUCE.",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "48M сделок, fee $0.65, pfof $42M",
+       "triggers": [
+        "текущий доход",
+        "объём сделок",
+        "pfof"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 3,
+     "label": "Hypothesis_update",
+     "time_min": null,
+     "candidate_md": "Что при $0-конкурентах с объёмом?",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) кандидат ждёт отток; (2) связывает pfof с объёмом.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 4,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Доход с оттоком.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nотток 50%\n\nEXPECTED ANSWER:\nrev_correct $36.6M < $42M pfof -> KEEP $0\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) trades_after=24M, pfof_after=21M; (2) rev_correct=15.6M+21M=36.6M; (3) вывод KEEP; (4) overstate назван от fee-дохода (100%).",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "отток 50%",
+       "triggers": [
+        "отток",
+        "уйдут ли клиенты",
+        "конкуренты $0",
+        "реакция клиентов"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 5,
+     "label": "Sensitivity",
+     "time_min": null,
+     "candidate_md": "Breakeven отток?",
+     "interviewer_md": "EXPECTED ANSWER:\n42.6%; ниже -> INTRODUCE\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) be=1−42/(31.2+42)=0.4262; (2) верное направление.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 6,
+     "label": "Synthesis",
+     "time_min": null,
+     "candidate_md": "Рекомендация.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) вывод KEEP $0 первым; (2) ≥2 цифры ($36.6M vs $42M, отток 50%); (3) ≥2 риска (internal оценка оттока + external/regulatory best-execution/pfof); (4) ≥1 next step (paid tiers/опрос).",
+     "hints": {},
+     "conditional_exhibits": []
+    }
+   ],
+   "qa_checks_md": ""
+  },
+  {
+   "id": 119,
+   "title": "Steel Yourself",
+   "title_registry": "Steel Yourself",
+   "industry": "Steel mfg",
+   "case_type": "Cost Reduction",
+   "difficulty": "Medium",
+   "trap_or_clean": "Trap",
+   "est_minutes": 30,
+   "naive_error": "#6",
+   "generation": "D",
+   "header_md": "**Type · Steel mfg · F5 · Ловушка #119 (Trap-flip, naive #6 make-vs-buy)**\nDifficulty: Medium · Prototype: Nucor/ArcelorMittal · IO: Industrials/Energy, Stern p.22 / Kellogg p.232 · Layer: mental-math",
+   "prompt_md": "**Voskorn Steel** производит специальный компонент (легирующие электроды) собственными силами. Поставщик предлагает продавать его дешевле, чем внутренняя себестоимость. Переходить ли на закупку (buy) или оставить своё (make)?",
+   "exhibits": [],
+   "steps": [
+    {
+     "step": 1,
+     "label": "Framework",
+     "time_min": null,
+     "candidate_md": "Make или buy компонент? Структурируй критерий.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) критерий про avoidable-стоимость, не full cost; (3) упомянуто, что часть fixed может не исчезнуть; (4) закрывающий вопрос.",
+     "hints": {
+      "L1": "Весь ли fixed исчезнет при переходе?",
+      "L2": "Сравни avoidable make с buy; unavoidable остаётся."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 2,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Наивное сравнение.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nmake var $340 + fixed $180; buy $470; 50k т\n\nEXPECTED ANSWER:\nmake full $520 vs buy $470 -> BUY, 'экономия' $2.5M\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) make_full=340+180=520; (2) наив-экономия=(520−470)×50k=2.5M; (3) наив-вывод BUY.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 3,
+     "label": "Insight",
+     "time_min": null,
+     "candidate_md": "Весь ли fixed avoidable?",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\navoidable $55/т, unavoidable $125/т\n\nEXPECTED ANSWER:\nmake_avoidable $395; buy_total $595 (цена + висящий unavoidable)\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) make_avoidable=340+55=395; (2) unavoidable=125 остаётся; (3) buy_total=470+125=595.",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "avoidable $55/т, unavoidable $125/т",
+       "triggers": [
+        "структура fixed",
+        "что исчезнет при переходе",
+        "avoidable",
+        "можно ли продать печь"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 4,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Правильное сравнение и решение.",
+     "interviewer_md": "EXPECTED ANSWER:\nmake $395 < buy-total $595 -> MAKE; выгода $10M\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) сравнение avoidable make vs buy-total; (2) вывод MAKE (флип); (3) реальная выгода=(595−395)×50k=10M.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 5,
+     "label": "Sensitivity",
+     "time_min": null,
+     "candidate_md": "При какой avoidable-доле buy выгоден?",
+     "interviewer_md": "EXPECTED ANSWER:\nпорог avoidable $155/т (make_avoidable=buy_total); выше -> BUY\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) порог решён из make_avoidable=buy_total с учётом unavoidable=180−x (340+x=650−x -> x=155), НЕ из buy_price; (2) при $130 всё ещё MAKE; (3) верное направление.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 6,
+     "label": "Synthesis",
+     "time_min": null,
+     "candidate_md": "Рекомендация.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) вывод MAKE первым; (2) ≥2 цифры ($395 vs $595, $10M/год); (3) ≥2 риска (internal гибкость печи + external цена поставщика/сырьё); (4) ≥1 next step.",
+     "hints": {},
+     "conditional_exhibits": []
+    }
+   ],
+   "qa_checks_md": ""
+  },
+  {
+   "id": 120,
+   "title": "Fahrenheit -18",
+   "title_registry": "Fahrenheit -18",
+   "industry": "Frozen food processing",
+   "case_type": "Market Entry",
+   "difficulty": "Medium",
+   "trap_or_clean": "Trap",
+   "est_minutes": 30,
+   "naive_error": "#9",
+   "generation": "D",
+   "header_md": "**Type · Frozen food processing · F1 (interviewee-led) · Ловушка #120 (Trap-flip, naive #9 wrong-discount-horizon, добор)**\nDifficulty: Medium · Prototype: McCain/Lamb Weston · IO: Non-Durables/CPG, Kellogg p.221 · Layers: mental-math, hypothesis-update",
+   "prompt_md": "**Tuberno Foods** (переработка замороженных продуктов) рассматривает вход в новый регион, требующий строительства морозильного распредцентра (**$34M capex**). Выгода — маржа с продаж в регионе при контракте с якорным ритейлером. Входить ли?",
+   "exhibits": [],
+   "steps": [
+    {
+     "step": 1,
+     "label": "Framework",
+     "time_min": null,
+     "candidate_md": "Входить ли в регион (capex $34M)? Структурируй NPV.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) NPV-структура (маржа×горизонт vs capex); (3) кандидат ставит вопрос о горизонте контракта; (4) закрывающий вопрос.",
+     "hints": {
+      "L1": "Как долго держится якорный контракт?",
+      "L2": "Горизонт ~5 лет до private-label, не 15."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 2,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Наивный PV маржи.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\ncapex $34M, маржа $5.8M/год, дисконт 11%\n\nEXPECTED ANSWER:\n15-лет PV $41,707,044 > $34M -> ENTER\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) Σ(5.8M/1.11^t, t=1..15)=41,707,044; (2) наив-вывод ENTER.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 3,
+     "label": "Hypothesis_update",
+     "time_min": null,
+     "candidate_md": "Как долго якорь и что после?",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) кандидат ждёт ограниченный горизонт/private-label; (2) связывает с NPV.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 4,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Правильный PV (5 лет + остаточные).",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nконтракт 5 лет; после private-label, остаточная 30% годы 6-8\n\nEXPECTED ANSWER:\nPV $23,959,595 < $34M -> SKIP\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) 5-лет полн + 3×30% остаточных = 23,959,595; (2) вывод SKIP; (3) overstate назван от PV маржи (~74%).",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "контракт 5 лет; после private-label, остаточная 30% годы 6-8",
+       "triggers": [
+        "горизонт контракта",
+        "как долго якорь",
+        "private label",
+        "сколько лет маржа"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 5,
+     "label": "Sensitivity",
+     "time_min": null,
+     "candidate_md": "Что при контракте 7 лет?",
+     "interviewer_md": "EXPECTED ANSWER:\nPV $29,378,781 < $34M; нужен ~9+ лет\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) 7-лет + 3 остаточных = 29,378,781; (2) вывод — флип устойчив.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 6,
+     "label": "Synthesis",
+     "time_min": null,
+     "candidate_md": "Рекомендация.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) вывод SKIP первым; (2) ≥2 цифры ($24.0M PV vs $34M capex, ~5 лет); (3) ≥2 риска (internal длиннее контракт/диверсификация + external/regulatory ускоренный private-label); (4) ≥1 next step (переговоры об эксклюзивности).",
+     "hints": {},
+     "conditional_exhibits": []
+    }
+   ],
+   "qa_checks_md": ""
+  },
+  {
+   "id": 121,
+   "title": "Bitter Pill",
+   "title_registry": "Bitter Pill",
+   "industry": "Pharma/biotech",
+   "case_type": "M&A",
+   "difficulty": "Hard",
+   "trap_or_clean": "Trap",
+   "est_minutes": 39,
+   "naive_error": "#4",
+   "generation": "D",
+   "header_md": "**Type · Pharma/biotech · F1 (interviewee-led) · Ловушка #121 (Trap-flip, naive #4 gross-vs-net synergy)**\nDifficulty: **Hard** · Prototype: Pfizer/Merck M&A · IO: Life Sciences/Pharma (high R&D, off-patent M&A), Stern p.18 · Layers: mental-math, hypothesis-update",
+   "prompt_md": "Клиент — **Nevrantis Pharma**. Рассматривает приобретение target-компании, платя **$820M премии** сверх автономной стоимости. Сделку оправдывают синергиями: заявленная валовая (gross) синергия **$165M/год**. Партнёр: оправдывает ли синергия премию — покупать или уходить?",
+   "exhibits": [],
+   "steps": [
+    {
+     "step": 1,
+     "label": "Framework",
+     "time_min": null,
+     "candidate_md": "Оправдывает ли синергия премию $820M? Структурируй.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) сравнение PV синергий с премией; (3) явно поднят вопрос gross-vs-net / costs-to-achieve; (4) закрывающий вопрос.",
+     "hints": {
+      "L1": "Реализуются ли синергии бесплатно?",
+      "L2": "Вычти upfront CTA и эрозию; сравни net PV с премией."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 2,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Наивный PV синергии.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\ngross $165M/год, премия $820M, disc 10%, n=10\n\nEXPECTED ANSWER:\ngross PV $1,013,853,572 > премия -> BUY\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) A=Σ(1/1.1^t,1..10)≈6.1446; (2) gross_pv=165M×A=1,013,853,572; (3) наив-вывод BUY.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 3,
+     "label": "Hypothesis_update",
+     "time_min": null,
+     "candidate_md": "Что стоит реализовать синергию?",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) кандидат вводит costs-to-achieve; (2) переходит к net.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 4,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Net PV синергии.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nupfront CTA $240M, эрозия $35M/год\n\nEXPECTED ANSWER:\nnet PV $558,793,724 < премия -> WALK/renegotiate\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) net_syn=165−35=130M; (2) net_pv=130M×A−240M=558,793,724; (3) вывод WALK; (4) overstate назван от синергии-PV (~81.44% от net), НЕ от премии/equity.",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "upfront CTA $240M, эрозия $35M/год",
+       "triggers": [
+        "costs to achieve",
+        "стоимость интеграции",
+        "синергия net",
+        "что стоит реализовать синергию"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 5,
+     "label": "Sensitivity",
+     "time_min": null,
+     "candidate_md": "Какие рычаги переворачивают сделку?",
+     "interviewer_md": "EXPECTED ANSWER:\nmax премия $558,793,724 (renegotiate down 31.85%); breakeven gross $207,510,119/год\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) max премия = net PV = 558,793,724; (2) renegotiate% от ТЕКУЩЕЙ премии (31.85%); (3) breakeven gross=(820M+240M)/A+35M=207,510,119; (4) обе — той же net-DCF-моделью.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 6,
+     "label": "Synthesis",
+     "time_min": null,
+     "candidate_md": "Рекомендация.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) вывод WALK/renegotiate первым; (2) ≥2 цифры (net $559M vs премия $820M, overstate 81%); (3) ≥2 риска (internal реализация синергии + external/regulatory антитраст); (4) ≥1 next step.",
+     "hints": {},
+     "conditional_exhibits": []
+    }
+   ],
+   "qa_checks_md": ""
+  },
+  {
+   "id": 122,
+   "title": "Fasten Your Seatbelts",
+   "title_registry": "Fasten Your Seatbelts",
+   "industry": "Airlines",
+   "case_type": "Profitability",
+   "difficulty": "Medium",
+   "trap_or_clean": "Trap",
+   "est_minutes": 30,
+   "naive_error": "#2",
+   "generation": "D",
+   "header_md": "**Type · Airlines · F5 · Ловушка #122 (Trap-flip, naive #2 blended-vs-segment margin)**\nDifficulty: Medium · Prototype: Delta/United · IO: Airlines (load factor, route economics), Stern p.19 · Layers: mental-math, hypothesis-update",
+   "prompt_md": "**Aeronpast Airways** видит здоровую общую маржу и предлагает расширить маршрутную сеть, добавив похожие маршруты. Партнёр: верный ли это ход?",
+   "exhibits": [],
+   "steps": [
+    {
+     "step": 1,
+     "label": "Framework",
+     "time_min": null,
+     "candidate_md": "Расширять ли сеть? Структурируй.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) заявлена сегментация маршрутов (не только blended); (3) cost side; (4) закрывающий вопрос.",
+     "hints": {
+      "L1": "Все ли маршруты прибыльны?",
+      "L2": "Разбей маржу по маршрутам, найди убыточный."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 2,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Blended-маржа.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nrev/cost агрегат\n\nEXPECTED ANSWER:\nblended 8.45%; наив -> расширять\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) blended=(840−769)/840=8.45%; (2) наив-вывод расширять.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 3,
+     "label": "Hypothesis_update",
+     "time_min": null,
+     "candidate_md": "Что скрывает средняя?",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) кандидат хочет сегментацию; (2) связывает с решением.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 4,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Сегментная маржа.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nLonghaul 420/340; Regional 180/171; Shorthaul 240/258\n\nEXPECTED ANSWER:\nShorthaul −$18M(−7.5%); profitable-only $89M vs current $71M -> резать Shorthaul\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) Shorthaul margin=−18M; (2) profitable-only=89M; (3) вывод — резать/фиксить Shorthaul (флип).",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "Longhaul 420/340; Regional 180/171; Shorthaul 240/258",
+       "triggers": [
+        "по маршрутам",
+        "сегменты",
+        "какой маршрут убыточен",
+        "разбивка маржи"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 5,
+     "label": "Sensitivity",
+     "time_min": null,
+     "candidate_md": "Что даёт фикс Shorthaul / Longhaul-фокус?",
+     "interviewer_md": "EXPECTED ANSWER:\nфикс +$18M ->$89M; Longhaul 19% vs blended 8.45%\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) фикс Shorthaul=+18M; (2) Longhaul-маржа 19% > blended.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 6,
+     "label": "Synthesis",
+     "time_min": null,
+     "candidate_md": "Рекомендация.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) вывод (резать/фиксить Shorthaul, Longhaul-фокус) первым; (2) ≥2 цифры ($71M→$89M, Shorthaul −$18M); (3) ≥2 риска (internal feeder-трафик + external топливо/load factor); (4) ≥1 next step.",
+     "hints": {},
+     "conditional_exhibits": []
+    }
+   ],
+   "qa_checks_md": ""
+  },
+  {
+   "id": 123,
+   "title": "Checkout Time",
+   "title_registry": "Checkout Time",
+   "industry": "Retail grocery",
+   "case_type": "Pricing",
+   "difficulty": "Medium",
+   "trap_or_clean": "Trap",
+   "est_minutes": 30,
+   "naive_error": "#8",
+   "generation": "D",
+   "header_md": "**Type · Retail grocery · F5 · Ловушка #123 (Trap-flip, naive #8 price elasticity via basket)**\nDifficulty: Medium · Prototype: Kroger/Tesco · IO: Retail (traffic × basket), Stern p.13 · Layer: mental-math",
+   "prompt_md": "**Halcombe Grocery** хочет поднять цену на молоко (staple) с **$3.20** до **$3.68** для роста маржи. Поднимать ли цену?",
+   "exhibits": [],
+   "steps": [
+    {
+     "step": 1,
+     "label": "Framework",
+     "time_min": null,
+     "candidate_md": "Поднимать ли цену молока $3.20→$3.68? Структурируй.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) заложен basket/traffic-эффект (не только маржа молока); (3) ≥3 фактора; (4) закрывающий вопрос.",
+     "hints": {
+      "L1": "Что берут вместе с молоком?",
+      "L2": "Считай полную корзину; уход теряет $11.40 basket."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 2,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Наивная milk-прибыль.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\n900k покупателей, $3.20→$3.68, cost $3.05\n\nEXPECTED ANSWER:\nnaive milk $567,000 (+320%)\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) m_new=0.63; (2) 0.63×900k=567,000; (3) наив-вывод поднять.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 3,
+     "label": "Insight",
+     "time_min": null,
+     "candidate_md": "Basket-эффект.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nbasket margin $11.40, отток 18%\n\nEXPECTED ANSWER:\nполная old $10,395,000 -> new $8,878,140 (−14.59%) -> HOLD\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) tot_old=(0.15+11.40)×900k=10,395,000; (2) tot_new=(0.63+11.40)×738k=8,878,140; (3) вывод HOLD (флип).",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "basket margin $11.40, отток 18%",
+       "triggers": [
+        "корзина",
+        "basket",
+        "что ещё покупают",
+        "отток покупателей",
+        "loss leader"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 4,
+     "label": "Sensitivity",
+     "time_min": null,
+     "candidate_md": "Breakeven отток?",
+     "interviewer_md": "EXPECTED ANSWER:\n3.99%; выше -> HOLD\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) be=1−(0.15+11.40)/(0.63+11.40)=3.99%; (2) вывод — молоко слишком чувствительно.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 5,
+     "label": "Synthesis",
+     "time_min": null,
+     "candidate_md": "Рекомендация.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) вывод HOLD первым; (2) ≥2 цифры ($10.4M→$8.9M, отток 18%, basket $11.40); (3) ≥2 риска (internal оценка оттока + external конкуренты); (4) ≥1 next step (basket price-тест).",
+     "hints": {},
+     "conditional_exhibits": []
+    }
+   ],
+   "qa_checks_md": ""
+  },
+  {
+   "id": 124,
+   "title": "Under Pressure",
+   "title_registry": "Under Pressure",
+   "industry": "Oil&gas midstream",
+   "case_type": "Cost Reduction",
+   "difficulty": "Medium",
+   "trap_or_clean": "Trap",
+   "est_minutes": 30,
+   "naive_error": "#6",
+   "generation": "D",
+   "header_md": "**Type · Oil&gas midstream · F5 · Ловушка #124 (Trap-flip, naive #6 make-vs-buy avoidable)**\nDifficulty: Medium · Prototype: Kinder Morgan/Enbridge · IO: Oil&Gas midstream (transportation/compression), Stern p.21 · Layer: mental-math",
+   "prompt_md": "**Dornevar Midstream** сама обслуживает **42 компрессорные станции** (in-house maintenance). Поставщик предлагает аутсорс обслуживания дешевле полной внутренней себестоимости. Переходить на аутсорс или оставить своё?",
+   "exhibits": [],
+   "steps": [
+    {
+     "step": 1,
+     "label": "Framework",
+     "time_min": null,
+     "candidate_md": "Аутсорсить обслуживание 42 станций или оставить in-house? Структурируй.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) критерий про avoidable-стоимость, не full cost; (3) упомянуто, что часть fixed может не исчезнуть; (4) закрывающий вопрос.",
+     "hints": {
+      "L1": "Весь ли fixed исчезнет при аутсорсе?",
+      "L2": "Сравни avoidable in-house с buy_total; unavoidable остаётся."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 2,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Наивное сравнение.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nin-house var $520k + fixed $310k; outsource $720k; 42 станции\n\nEXPECTED ANSWER:\nfull $830k vs outsource $720k -> OUTSOURCE, 'экономия' $4.62M\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) full=520+310=830k; (2) наив-экономия=(830−720)×42=4.62M; (3) наив-вывод OUTSOURCE.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 3,
+     "label": "Insight",
+     "time_min": null,
+     "candidate_md": "Весь ли fixed avoidable?",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\navoidable $95k, unavoidable $215k\n\nEXPECTED ANSWER:\ninhouse_avoidable $615k; buy_total $935k\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) inhouse_avoidable=520+95=615k; (2) unavoidable=215k остаётся; (3) buy_total=720+215=935k.",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "avoidable $95k, unavoidable $215k",
+       "triggers": [
+        "структура fixed",
+        "что исчезнет при аутсорсе",
+        "avoidable",
+        "можно ли распустить оборудование/штат"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 4,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Правильное сравнение и решение.",
+     "interviewer_md": "EXPECTED ANSWER:\navoidable $615k < buy_total $935k -> KEEP; выгода $13.44M\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) сравнение avoidable vs buy_total; (2) вывод KEEP (флип); (3) реальная выгода=(935−615)×42=13,440,000 (НЕ '$13.4M' округлённо).",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 5,
+     "label": "Sensitivity",
+     "time_min": null,
+     "candidate_md": "При какой avoidable-доле аутсорс выгоден?",
+     "interviewer_md": "EXPECTED ANSWER:\nпорог $255k/станция (make_avoidable=buy_total); выше -> OUTSOURCE\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) порог решён из make_avoidable=buy_total с unavoidable=310−x (520+x=1030−x -> x=255k), НЕ из цены $720k; (2) при $95k всё ещё KEEP; (3) верное направление.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 6,
+     "label": "Synthesis",
+     "time_min": null,
+     "candidate_md": "Рекомендация.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) вывод KEEP первым; (2) ≥2 цифры ($615k vs $935k, $13.44M/год); (3) ≥2 риска (internal гибкость оборудования/штата + external/regulatory safety-сертификация); (4) ≥1 next step.",
+     "hints": {},
+     "conditional_exhibits": []
+    }
+   ],
+   "qa_checks_md": ""
+  },
+  {
+   "id": 125,
+   "title": "The Suite Life",
+   "title_registry": "The Suite Life",
+   "industry": "Hospitality",
+   "case_type": "Growth Strategy",
+   "difficulty": "Easy",
+   "trap_or_clean": "Trap",
+   "est_minutes": 24,
+   "naive_error": "#15",
+   "generation": "D",
+   "header_md": "**Type · Hospitality · F5 · Ловушка #125 (Trap-flip, naive #15 wrong-ranking criterion)**\nDifficulty: Easy · Prototype: Marriott/Hilton · IO: Airlines-adjacent (RevPAR ≈ load factor, capacity utilization), Stern p.19 [DEV] · Layer: mental-math",
+   "prompt_md": "**Thelmwick Hotels** выбирает город для следующего отеля из трёх кандидатов (A, B, C). Партнёр: в каком городе строить?",
+   "exhibits": [],
+   "steps": [
+    {
+     "step": 1,
+     "label": "Framework",
+     "time_min": null,
+     "candidate_md": "В каком городе строить отель? Структурируй критерий.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) критерий выбора про доходность капитала (не только загрузку); (3) ≥3 фактора; (4) закрывающий вопрос.",
+     "hints": {
+      "L1": "Загрузка = прибыль?",
+      "L2": "Считай ROIC = прибыль/capex по городам."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 2,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "RevPAR и наивное ранжирование.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nocc/ADR/rooms по A/B/C\n\nEXPECTED ANSWER:\nRevPAR A 114.80/B 122.10/C 142.80; наив по occupancy -> A (82%)\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) RevPAR=occ×ADR верны; (2) наив ранжирует по occupancy -> A.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 3,
+     "label": "Insight",
+     "time_min": null,
+     "candidate_md": "ROIC по городам.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\ncapex A $42M/B $40M/C $33M; opcost\n\nEXPECTED ANSWER:\nROIC A 3.20%/B 5.28%/C 8.91% -> C лучший (флип A->C)\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) annual_rev=RevPAR×rooms×365; (2) ROIC через pctf: A 3.20/B 5.28/C 8.91%; (3) вывод C (флип от occupancy).",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "capex A $42M/B $40M/C $33M; opcost",
+       "triggers": [
+        "capex",
+        "стоимость постройки",
+        "ADR",
+        "ROIC",
+        "доходность капитала"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 4,
+     "label": "Sensitivity",
+     "time_min": null,
+     "candidate_md": "Устойчив ли выбор C?",
+     "interviewer_md": "EXPECTED ANSWER:\nдаже @occ A 87% ROIC 3.93% << C 8.91%\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) ROIC A @87%≈3.93%; (2) вывод — C устойчив (разрыв на ADR/capex).",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 5,
+     "label": "Synthesis",
+     "time_min": null,
+     "candidate_md": "Рекомендация.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) вывод (город C) первым; (2) ≥2 цифры (ROIC C 8.91% vs A 3.20%, ADR/capex); (3) ≥2 риска (internal премиум-ADR C + external цикличность); (4) ≥1 next step.",
+     "hints": {},
+     "conditional_exhibits": []
+    }
+   ],
+   "qa_checks_md": ""
+  },
+  {
+   "id": 126,
+   "title": "Actuarial Instinct",
+   "title_registry": "Actuarial Instinct",
+   "industry": "Insurance",
+   "case_type": "Profitability",
+   "difficulty": "Hard",
+   "trap_or_clean": "Trap",
+   "est_minutes": 39,
+   "naive_error": "#14",
+   "generation": "D",
+   "header_md": "**Type · Insurance · F6 · Ловушка #126 (Trap-flip, naive #14 fixed-cost allocation mirage + float)**\nDifficulty: **Hard** · Prototype: Allstate/Progressive · IO: Healthcare Payers (premium/payout) ≈ P&C insurance, Stern p.17 [DEV] · Layers: mental-math, hypothesis-update, open-drive",
+   "prompt_md": "**Verrindale Insurance** (P&C-страховщик) видит, что одна из трёх линий бизнеса — Commercial — имеет combined ratio выше 100% и выглядит убыточной. Менеджмент предлагает закрыть Commercial. Партнёр: закрывать ли линию?",
+   "exhibits": [],
+   "steps": [
+    {
+     "step": 1,
+     "label": "Framework",
+     "time_min": null,
+     "candidate_md": "Закрывать ли Commercial (combined >100%)? Структурируй; выбери порядок.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) реальные insurance-драйверы (loss/expense/combined ratio, contribution, float); (3) кандидат ставит вопрос о природе OH ИЛИ порядок с проверкой OH/float до вердикта; (4) закрывающий вопрос.",
+     "hints": {
+      "L1": "Исчезнет ли $60M OH при закрытии? Кто генерирует float?",
+      "L2": "Считай contribution + float по линиям; OH unavoidable."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 2,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Combined ratios по линиям.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nAuto 480/312/86; Home 300/174/51; Commercial 220/160/44; OH $60M/линия\n\nEXPECTED ANSWER:\nAuto 95.42% / Home 95.00% / Commercial 120.00% (единственная >100%) -> наив закрыть Commercial\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) все 3 combined верны через pctf; (2) Commercial единственная >100%; (3) наив-вывод закрыть.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 3,
+     "label": "Hypothesis_update",
+     "time_min": null,
+     "candidate_md": "Исчезнет ли OH $60M при закрытии?",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) кандидат ставит под вопрос аллокацию OH; (2) вводит unavoidable/перераспределение.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 4,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Contribution + float.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nfloat Auto $14M/Home $9M/Commercial $31M (сумма $54M)\n\nEXPECTED ANSWER:\ncontribution все положит (Commercial +$16M); float Commercial $31M max; закрытие $47M->$0\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) contribution 82/75/16M все положит; (2) float сумма=54M=company inv income; (3) total profit=underwriting −7M + float 54M=47M; (4) закрытие Commercial -> 0 (потеря 16M+31M); (5) вывод — оставить (флип).",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "float Auto $14M/Home $9M/Commercial $31M (сумма $54M)",
+       "triggers": [
+        "contribution",
+        "overhead avoidable",
+        "investment income",
+        "float",
+        "долгосрочные резервы"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 5,
+     "label": "Sensitivity",
+     "time_min": null,
+     "candidate_md": "При какой avoidable OH закрытие оправдано?",
+     "interviewer_md": "EXPECTED ANSWER:\nпорог 78.33% ($47M/$60M), учитывает contribution+float\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) порог=(16M+31M)/60M=78.33%, НЕ 26.67% (которое игнорит float); (2) та же полная модель, что решение ([9b]); (3) верное направление.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 6,
+     "label": "Synthesis",
+     "time_min": null,
+     "candidate_md": "Рекомендация.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) вывод (оставить Commercial) первым; (2) ≥2 цифры (profit $47M→$0, contribution $16M + float $31M, combined 120% мираж); (3) ≥2 риска (internal float/reserve-duration + external/regulatory solvency); (4) ≥1 next step (re-price к 100%).",
+     "hints": {},
+     "conditional_exhibits": []
+    }
+   ],
+   "qa_checks_md": ""
+  },
+  {
+   "id": 127,
+   "title": "Special Delivery",
+   "title_registry": "Special Delivery",
+   "industry": "Parcel logistics",
+   "case_type": "Market Entry",
+   "difficulty": "Medium",
+   "trap_or_clean": "Trap",
+   "est_minutes": 30,
+   "naive_error": "#3",
+   "generation": "D",
+   "header_md": "**Type · Parcel logistics · F1 (interviewee-led) · Ловушка #127 (Trap-flip, naive #3 flat-vs-escalating)**\nDifficulty: Medium · Prototype: FedEx/UPS · IO: Industrials (volume × contract, capital-intensive), Stern p.22 · Layers: mental-math, hypothesis-update",
+   "prompt_md": "**Quillpost Logistics** рассматривает вход в новый регион, требующий лизинга sortation-хаба (**$28M capex**). Партнёр: входить ли?",
+   "exhibits": [],
+   "steps": [
+    {
+     "step": 1,
+     "label": "Framework",
+     "time_min": null,
+     "candidate_md": "Входить ли в регион (capex $28M)? Структурируй NPV.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) NPV-структура; (3) кандидат ставит вопрос о профиле затрат (flat vs растущий); (4) закрывающий вопрос.",
+     "hints": {
+      "L1": "Останутся ли затраты стабильными 8 лет?",
+      "L2": "Costs +6%/год, выручка +2%; пересчитай."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 2,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Наивный flat NPV.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\ncapex $28M, rev $19M, cost $13.2M, disc 11%, n=8\n\nEXPECTED ANSWER:\nflat NPV +$1,847,512 -> ENTER\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) flat NPV=Σ(5.8M/1.11^t,1..8)−28M=1,847,512; (2) наив-вывод ENTER.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 3,
+     "label": "Hypothesis_update",
+     "time_min": null,
+     "candidate_md": "Останутся ли затраты стабильными?",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) кандидат вводит эскалацию; (2) связывает с NPV.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 4,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Escalating NPV.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\ncosts +6%/год, rev +2%/год\n\nEXPECTED ANSWER:\nescalating NPV −$5,634,935 -> SKIP\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) escalating NPV=−5,634,935; (2) вывод SKIP; (3) overstate назван от NPV (~132.79% от |correct|); (4) обе ветки один DCF@11%.",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "costs +6%/год, rev +2%/год",
+       "triggers": [
+        "эскалация",
+        "растут ли затраты",
+        "labor inflation",
+        "rent escalator",
+        "профиль затрат"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 5,
+     "label": "Sensitivity",
+     "time_min": null,
+     "candidate_md": "Когда вход оправдан?",
+     "interviewer_md": "EXPECTED ANSWER:\nесли costs удержать на ~2% (=выручке) NPV>0\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) при равной эскалации NPV возвращается в плюс; (2) рычаг — контроль эскалации.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 6,
+     "label": "Synthesis",
+     "time_min": null,
+     "candidate_md": "Рекомендация.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) вывод SKIP/cap-escalation первым; (2) ≥2 цифры (flat +$1.85M vs escal −$5.63M); (3) ≥2 риска (internal эскалация-допущения + external рынки labor/rent); (4) ≥1 next step (capped-контракт).",
+     "hints": {},
+     "conditional_exhibits": []
+    }
+   ],
+   "qa_checks_md": ""
+  },
+  {
+   "id": 128,
+   "title": "Volt at First Sight",
+   "title_registry": "Volt at First Sight",
+   "industry": "Consumer electronics",
+   "case_type": "Pricing",
+   "difficulty": "Easy",
+   "trap_or_clean": "Trap",
+   "est_minutes": 24,
+   "naive_error": "#1",
+   "generation": "D",
+   "header_md": "**Type · Consumer electronics · F5 · Ловушка #128 (Trap-flip, naive #1 historical-vs-replacement cost)**\nDifficulty: Easy · Prototype: Sony/Samsung · IO: Technology (product obsolescence), Stern p.15 · Layer: mental-math",
+   "prompt_md": "**Voltrayd Electronics** ценообразует продукт, использующий чип-компонент, закупленный давно по низкой цене со склада. Команда считает маржу огромной и предлагает снизить цену для доли рынка. Снижать ли?",
+   "exhibits": [],
+   "steps": [
+    {
+     "step": 1,
+     "label": "Framework",
+     "time_min": null,
+     "candidate_md": "Снижать ли цену? Структурируй.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) поднят вопрос релевантной стоимости (historical vs replacement); (3) ≥3 фактора; (4) закрывающий вопрос.",
+     "hints": {
+      "L1": "По какой цене пополнять склад?",
+      "L2": "Маржа от replacement $39, не historical $22."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 2,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Наивная маржа.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nцена $48, hist cost $22\n\nEXPECTED ANSWER:\nmargin_hist $26 (54.17%) -> снижать\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) margin_hist=48−22=26; (2) наив-вывод снижать.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 3,
+     "label": "Insight",
+     "time_min": null,
+     "candidate_md": "Релевантная стоимость.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nreplacement $39\n\nEXPECTED ANSWER:\nmargin_repl $9 (18.75%) -> держать/поднять (флип)\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) margin_repl=48−39=9; (2) вывод держать; (3) overstate=188.89% от replacement-маржи $9 (искажаемая величина), НЕ от цены/equity.",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "replacement $39",
+       "triggers": [
+        "replacement",
+        "текущая цена чипа",
+        "пополнение склада",
+        "сколько стоит купить сейчас"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 4,
+     "label": "Sensitivity",
+     "time_min": null,
+     "candidate_md": "Когда снижение безопасно?",
+     "interviewer_md": "EXPECTED ANSWER:\nесли replacement падает (напр. $30 -> маржа $18)\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) при меньшем replacement маржа восстанавливается; (2) рычаг — цены на чипы.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 5,
+     "label": "Synthesis",
+     "time_min": null,
+     "candidate_md": "Рекомендация.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) вывод держать/поднять первым; (2) ≥2 цифры (маржа $9 vs $26, replacement $39); (3) ≥2 риска (internal запас склада + external волатильность чипов); (4) ≥1 next step.",
+     "hints": {},
+     "conditional_exhibits": []
+    }
+   ],
+   "qa_checks_md": ""
+  },
+  {
+   "id": 129,
+   "title": "Blowin' in the Windfall",
+   "title_registry": "Blowin' in the Windfall",
+   "industry": "Renewable energy",
+   "case_type": "Market Entry",
+   "difficulty": "Medium",
+   "trap_or_clean": "Trap",
+   "est_minutes": 30,
+   "naive_error": "#5",
+   "generation": "D",
+   "header_md": "**Type · Renewable energy · F1 (interviewee-led) · Ловушка #129 (Trap-flip, naive #5 sunk-cost)**\nDifficulty: Medium · Prototype: NextEra/Ørsted · IO: Oil&Gas/Energy (capex-intensive), Stern p.21 · Layers: mental-math, hypothesis-update",
+   "prompt_md": "**Aurellian Renewables** вложила в изыскания и разрешения для площадки ветропарка. Теперь решает: достроить парк (build) или продать площадку с разрешениями (sell). Партнёр: что выбрать?",
+   "exhibits": [],
+   "steps": [
+    {
+     "step": 1,
+     "label": "Framework",
+     "time_min": null,
+     "candidate_md": "Build ветропарк или sell площадку? Структурируй.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) forward-сравнение build/sell; (3) явно упомянуто отделить sunk от forward; (4) закрывающий вопрос.",
+     "hints": {
+      "L1": "Меняются ли потраченные $18M от решения?",
+      "L2": "Только forward; sunk $18M игнорируй."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 2,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Наивное сравнение.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nsunk $18M; build capex $95M/PV $118M; sell headline $34M\n\nEXPECTED ANSWER:\nbuild_fwd $23M; sell_naive $16M (со списанием sunk) -> BUILD\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) build_fwd=118−95=23M; (2) sell_naive=34−18=16M; (3) наив-вывод BUILD.",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "sunk $18M; build capex $95M/PV $118M; sell headline $34M",
+       "triggers": [
+        "forward",
+        "сколько ещё вложить",
+        "цена продажи",
+        "что уже потрачено"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 3,
+     "label": "Hypothesis_update",
+     "time_min": null,
+     "candidate_md": "Релевантны ли sunk $18M?",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) кандидат называет $18M нерелевантными; (2) переходит на forward.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 4,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Insight 1 — forward-сравнение.",
+     "interviewer_md": "EXPECTED ANSWER:\nbuild $23M vs sell headline $34M -> SELL\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) sell_fwd=34M; (2) вывод SELL (флип по sunk); (3) understate назван от sell-forward (52.94% = sunk/sell_fwd), НЕ от equity.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 5,
+     "label": "Insight",
+     "time_min": null,
+     "candidate_md": "Insight 2 — декомпозируй sell-цену $34M. Всё ли передаётся?",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nland+permits $21M (передаются); grid slot $13M @55% transferable\n\nEXPECTED ANSWER:\nsell_realized $28.15M (grid slot частично непередаваем); всё ещё SELL, запас $5.15M\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) кандидат САМ ставит под вопрос headline-цену; (2) grid_realized=13M×0.55=7.15M; (3) sell_realized=21M+7.15M=28.15M; (4) вывод SELL сохраняется, но запас тоньше.",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "land+permits $21M (передаются); grid slot $13M @55% transfer",
+       "triggers": [
+        "из чего состоит цена",
+        "передаётся ли всё",
+        "grid",
+        "подключение к сети",
+        "transferability"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 6,
+     "label": "Sensitivity",
+     "time_min": null,
+     "candidate_md": "При какой передаваемости grid-слота решение флипает?",
+     "interviewer_md": "EXPECTED ANSWER:\nпорог 15.38%; ниже -> BUILD\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) порог=(23M−21M)/13M=15.38%; (2) верное направление; (3) рычаг = юридическая передаваемость, не рыночная цена.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 7,
+     "label": "Synthesis",
+     "time_min": null,
+     "candidate_md": "Рекомендация.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) вывод SELL (при реалистичных ~$28M) первым; (2) ≥2 цифры (sell realized $28.15M vs build $23M, grid slot 55%); (3) ≥2 риска (internal передаваемость grid-слота + external/regulatory субсидии/queue-rules); (4) ≥1 next step (legal opinion на transfer).",
+     "hints": {},
+     "conditional_exhibits": []
+    }
+   ],
+   "qa_checks_md": ""
+  },
+  {
+   "id": 130,
+   "title": "The Learning Curve",
+   "title_registry": "The Learning Curve",
+   "industry": "Edtech",
+   "case_type": "Growth Strategy",
+   "difficulty": "Easy",
+   "trap_or_clean": "Clean",
+   "est_minutes": 24,
+   "naive_error": null,
+   "generation": "D",
+   "header_md": "**Type · Edtech · F7 · Ловушка #130 (CLEAN — validate no reversal)**\nDifficulty: Easy · Prototype: Coursera/Chegg · IO: Technology (SaaS/subscription), Stern p.15 · Layers: mental-math, open-drive",
+   "prompt_md": "**Skolvantia Learning** (edtech) рассматривает запуск новой курс-вертикали. Экономика выглядит привлекательно. Запускать ли?\n\n*(Clean-кейс: наив и correct совпадают. Задача кандидата — проверить, что нет скрытого разворота — каннибализация, насыщение — убедиться, что его нет, и явно сказать.)*",
+   "exhibits": [],
+   "steps": [
+    {
+     "step": 1,
+     "label": "Framework",
+     "time_min": null,
+     "candidate_md": "Запускать ли новую вертикаль? Структурируй ROI.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) ROI-структура (прибыль vs capex, payback/NPV); (3) заявлены проверка sensitivity И каннибализации; (4) закрывающий вопрос.",
+     "hints": {
+      "L1": "Что при enrollment −20%? Каннибализация?",
+      "L2": "Пересчитай NPV −20%; проверь overlap аудитории."
+     },
+     "conditional_exhibits": []
+    },
+    {
+     "step": 2,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "Экономика вертикали и payback.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nrev $2.2M, var 35%, fixed $480k, capex $1.4M\n\nEXPECTED ANSWER:\nannual profit $950,000; payback 1.47\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) contrib=2.2M×0.65=1,430,000; (2) annual_profit=950,000; (3) payback=1.4M/950k≈1.47.",
+     "hints": {},
+     "conditional_exhibits": [
+      {
+       "title": "rev $2.2M, var 35%, fixed $480k, capex $1.4M",
+       "triggers": [
+        "экономика",
+        "выручка/затраты вертикали",
+        "capex разработки"
+       ]
+      }
+     ]
+    },
+    {
+     "step": 3,
+     "label": "Calculation",
+     "time_min": null,
+     "candidate_md": "5-летний NPV @10%.",
+     "interviewer_md": "EXPECTED ANSWER:\n+$2,201,247\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если NPV=−1,400,000+Σ(950,000/1.10^t,1..5)=2,201,247 (±$1).",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 4,
+     "label": "Validation",
+     "time_min": null,
+     "candidate_md": "Проверь sensitivity и каннибализацию.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nenrollment −20%; новая аудитория\n\nEXPECTED ANSWER:\nNPV@−20% +$1,117,082 (положителен); каннибализации нет -> GO, разворота нет\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) кандидат САМ инициирует проверку; (2) NPV@−20%=1,117,082 положителен; (3) каннибализация исключена (иная аудитория); (4) явно: разворота нет, наив=correct.",
+     "hints": {},
+     "conditional_exhibits": []
+    },
+    {
+     "step": 5,
+     "label": "Synthesis",
+     "time_min": null,
+     "candidate_md": "Рекомендация.",
+     "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) вывод GO первым; (2) явно сказано, что проверено отсутствие разворота (sensitivity + каннибализация); (3) ≥2 цифры ($950k/год, payback 1.47, NPV +$2.2M); (4) ≥2 риска (internal ramp + external конкуренция/коммодитизация); (5) ≥1 next step (soft-launch).",
+     "hints": {},
+     "conditional_exhibits": []
     }
    ],
    "qa_checks_md": ""
