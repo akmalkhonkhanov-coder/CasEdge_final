@@ -1255,6 +1255,27 @@
     .sv-result-row { display: flex; justify-content: space-between; padding: 9px 0; border-top: 1px solid var(--sv-line-soft); font-size: 13.5px; color: var(--on-dark); }
     .sv-result-row:first-child { border-top: none; }
 
+    /* ── Full Case: visual exhibit cards (bar/pie/line/table/select) ── */
+    .cas-ex-card { margin: 6px 0 14px 46px; max-width: 640px; background: var(--surface-dark-elevated, #161d1a); border: 1px solid rgba(93,184,166,.28); border-radius: 14px; padding: 16px 18px; animation: casExIn .35s ease; }
+    @keyframes casExIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    .cas-ex-tag { display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--accent-teal); background: rgba(93,184,166,.1); border: 1px solid rgba(93,184,166,.25); border-radius: 6px; padding: 2px 8px; margin-bottom: 8px; }
+    .cas-ex-title { font-size: 14.5px; font-weight: 700; color: var(--on-dark); margin-bottom: 10px; }
+    .cas-ex-note { font-size: 12px; color: var(--on-dark-soft); margin-top: 10px; border-top: 1px dashed rgba(255,255,255,.09); padding-top: 8px; }
+    .cas-ex-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .cas-ex-table th, .cas-ex-table td { padding: 6px 9px; border-bottom: 1px solid rgba(255,255,255,.06); text-align: right; color: var(--on-dark); }
+    .cas-ex-table th:first-child, .cas-ex-table td:first-child { text-align: left; }
+    .cas-ex-table th { color: var(--on-dark-soft); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .03em; }
+    .cas-ex-legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px; font-size: 12px; color: var(--on-dark-soft); }
+    .cas-ex-legend span { display: inline-flex; align-items: center; gap: 5px; }
+    .cas-ex-legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+    .cas-ex-opts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 4px; }
+    .cas-ex-opt { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.1); border-radius: 10px; padding: 8px 5px 5px; text-align: center; cursor: pointer; transition: .15s; }
+    .cas-ex-opt:hover { border-color: var(--accent-teal); }
+    .cas-ex-opt.picked { border-color: var(--accent-teal); box-shadow: 0 0 0 1px var(--accent-teal) inset; }
+    .cas-ex-opt.dim { opacity: .45; pointer-events: none; }
+    .cas-ex-opt .k { font-weight: 700; font-size: 12.5px; color: var(--on-dark); }
+    .cas-ex-opt .l { font-size: 10.5px; color: var(--on-dark-soft); margin-top: 1px; }
+    @media (max-width: 640px) { .cas-ex-card { margin-left: 0; } .cas-ex-opts { grid-template-columns: repeat(2, 1fr); } }
   </style>
   <!-- Bundler thumbnail -->
   
@@ -6423,7 +6444,7 @@ async function startLibraryCase(caseId) {
     const opening = data.reply || 'Let us begin. Please structure your approach to this case.';
     state.messages.push({ role: 'assistant', content: opening });
     rememberCase('Case #' + state.caseId + ': ' + state.caseTitle);
-    setTimeout(() => { setTyping(false); addMsg('ai', opening, true); startRespTimer(); }, 600);
+    setTimeout(() => { setTyping(false); addMsg('ai', opening, true); casRenderExhibits(data.exhibits); startRespTimer(); }, 600);
   } catch (e) {
     setTyping(false);
     addMsg('ai', (e && e.userFacing) ? e.message : 'Connection error. Please check your network and try again.');
@@ -6809,6 +6830,179 @@ function addMsg(role, text, pushToHistory) {
   setTimeout(() => { chat.scrollTop = chat.scrollHeight; }, 40);
 }
 
+/* ────────────────────────────────────────────────────
+   FULL CASE — visual exhibit cards. The server ships {id,title,render}
+   for exhibits revealed this turn; we draw them as SVG/table cards in
+   the chat. All drawing is client-side (zero tokens). Answer keys and
+   correct chart-select options never reach the client.
+──────────────────────────────────────────────────── */
+const CAS_EX_COLORS = ['#5db8a6', '#e0a458', '#6fa8d6', '#d98b8b', '#9b8fd1'];
+
+function casExSvgOpen(W, H) { return `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img">`; }
+
+function casExBarSVG(r) {
+  const W = 560, H = 230, pL = 52, pR = 14, pT = 18, pB = 42, pw = W - pL - pR, ph = H - pT - pB;
+  const cats = r.categories || [], series = r.series || [];
+  const max = Math.max(...series.flatMap(s => s.values)) * 1.12 || 1;
+  const slot = pw / cats.length, groupW = slot * 0.66, bw = groupW / series.length;
+  let s = casExSvgOpen(W, H);
+  for (let i = 0; i <= 4; i++) {
+    const v = max * i / 4, y = pT + ph - i / 4 * ph;
+    s += `<line x1="${pL}" y1="${y.toFixed(1)}" x2="${W - pR}" y2="${y.toFixed(1)}" stroke="rgba(255,255,255,.07)"/>`;
+    s += `<text x="${pL - 7}" y="${(y + 4).toFixed(1)}" text-anchor="end" font-size="9.5" fill="var(--on-dark-soft)">${v >= 10000 ? Math.round(v / 1000) + 'k' : Math.round(v * 100) / 100}</text>`;
+  }
+  cats.forEach((cat, ci) => {
+    const gx = pL + ci * slot + (slot - groupW) / 2;
+    series.forEach((sr, si) => {
+      const v = sr.values[ci], bh = Math.max(1, v / max * ph), x = gx + si * bw, y = pT + ph - bh;
+      const col = sr.color || CAS_EX_COLORS[si % CAS_EX_COLORS.length];
+      s += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${(bw * 0.88).toFixed(1)}" height="${bh.toFixed(1)}" rx="3.5" fill="${col}"/>`;
+      const lab = v >= 10000 ? (v / 1000).toLocaleString() + 'k' : v.toLocaleString();
+      s += `<text x="${(x + bw * 0.44).toFixed(1)}" y="${(y - 5).toFixed(1)}" text-anchor="middle" font-size="9.5" font-weight="700" fill="${col}">${lab}</text>`;
+    });
+    s += `<text x="${(pL + ci * slot + slot / 2).toFixed(1)}" y="${H - pB + 16}" text-anchor="middle" font-size="10" fill="var(--on-dark-soft)">${esc(String(cat))}</text>`;
+  });
+  s += '</svg>';
+  if (series.length > 1) {
+    s += `<div class="cas-ex-legend">${series.map((sr, si) => `<span><i style="background:${sr.color || CAS_EX_COLORS[si % CAS_EX_COLORS.length]}"></i>${esc(sr.name || '')}${r.unit ? ' (' + esc(r.unit) + ')' : ''}</span>`).join('')}</div>`;
+  } else if (series.length === 1) {
+    s += `<div class="cas-ex-legend"><span><i style="background:${series[0].color || CAS_EX_COLORS[0]}"></i>${esc(series[0].name || '')}${r.unit ? ' (' + esc(r.unit) + ')' : ''}</span></div>`;
+  }
+  return s;
+}
+
+function casExLineSVG(r) {
+  const W = 560, H = 240, pL = 52, pR = 16, pT = 16, pB = 40, pw = W - pL - pR, ph = H - pT - pB;
+  const cats = r.categories || [], series = r.series || [];
+  const all = series.flatMap(s => s.values);
+  const ymin = Math.min(...all) * 0.94, ymax = Math.max(...all) * 1.05;
+  const X = i => pL + i * (pw / Math.max(1, cats.length - 1));
+  const Y = v => pT + ph - (v - ymin) / (ymax - ymin || 1) * ph;
+  let s = casExSvgOpen(W, H);
+  for (let i = 0; i <= 4; i++) {
+    const v = ymin + (ymax - ymin) * i / 4, y = Y(v);
+    s += `<line x1="${pL}" y1="${y.toFixed(1)}" x2="${W - pR}" y2="${y.toFixed(1)}" stroke="rgba(255,255,255,.07)"/>`;
+    s += `<text x="${pL - 7}" y="${(y + 4).toFixed(1)}" text-anchor="end" font-size="9.5" fill="var(--on-dark-soft)">${(Math.round(v * 10) / 10).toLocaleString()}</text>`;
+  }
+  cats.forEach((c, i) => { s += `<text x="${X(i).toFixed(1)}" y="${H - pB + 16}" text-anchor="middle" font-size="9.5" fill="var(--on-dark-soft)">${esc(String(c))}</text>`; });
+  series.forEach((sr, si) => {
+    const col = sr.color || CAS_EX_COLORS[si % CAS_EX_COLORS.length];
+    const d = sr.values.map((v, i) => `${i ? 'L' : 'M'}${X(i).toFixed(1)} ${Y(v).toFixed(1)}`).join(' ');
+    s += `<path d="${d}" fill="none" stroke="${col}" stroke-width="2.4"/>`;
+    sr.values.forEach((v, i) => { s += `<circle cx="${X(i).toFixed(1)}" cy="${Y(v).toFixed(1)}" r="2.8" fill="${col}"/>`; });
+  });
+  s += '</svg>';
+  s += `<div class="cas-ex-legend">${series.map((sr, si) => `<span><i style="background:${sr.color || CAS_EX_COLORS[si % CAS_EX_COLORS.length]};height:3px;border-radius:2px;width:15px"></i>${esc(sr.name || '')}${r.unit ? ' (' + esc(r.unit) + ')' : ''}</span>`).join('')}</div>`;
+  return s;
+}
+
+function casExPieSVG(r) {
+  const W = 560, H = 210, cx = 128, cy = 104, rad = 82;
+  const slices = r.slices || [];
+  const tot = slices.reduce((a, s) => a + s.value, 0) || 1;
+  let a = -Math.PI / 2, s = casExSvgOpen(W, H);
+  slices.forEach((sl, i) => {
+    const frac = sl.value / tot, a2 = a + frac * 2 * Math.PI;
+    const col = sl.color || CAS_EX_COLORS[i % CAS_EX_COLORS.length];
+    const x1 = cx + rad * Math.cos(a), y1 = cy + rad * Math.sin(a);
+    const x2 = cx + rad * Math.cos(a2), y2 = cy + rad * Math.sin(a2);
+    s += `<path d="M${cx} ${cy} L${x1.toFixed(1)} ${y1.toFixed(1)} A${rad} ${rad} 0 ${frac > 0.5 ? 1 : 0} 1 ${x2.toFixed(1)} ${y2.toFixed(1)} Z" fill="${col}"/>`;
+    const mid = (a + a2) / 2, lx = cx + rad * 0.62 * Math.cos(mid), ly = cy + rad * 0.62 * Math.sin(mid);
+    s += `<text x="${lx.toFixed(1)}" y="${(ly + 4).toFixed(1)}" text-anchor="middle" font-size="11.5" font-weight="700" fill="#10241f">${Math.round(frac * 100)}%</text>`;
+    a = a2;
+  });
+  slices.forEach((sl, i) => {
+    const y = 46 + i * 27, col = sl.color || CAS_EX_COLORS[i % CAS_EX_COLORS.length];
+    s += `<rect x="262" y="${y}" width="12" height="12" rx="3" fill="${col}"/><text x="282" y="${y + 10.5}" font-size="12.5" fill="var(--on-dark)">${esc(sl.label)} — ${sl.value}${r.unit === 'subscribers' ? '%' : ''}</text>`;
+  });
+  if (r.total_note) s += `<text x="262" y="${46 + slices.length * 27 + 8}" font-size="11" fill="var(--on-dark-soft)">${esc(r.total_note)}</text>`;
+  return s + '</svg>';
+}
+
+function casExTableHTML(r) {
+  let h = '<table class="cas-ex-table"><thead><tr>';
+  (r.head || []).forEach(c => h += `<th>${esc(String(c))}</th>`);
+  h += '</tr></thead><tbody>';
+  (r.rows || []).forEach(row => {
+    h += '<tr>' + row.map(c => `<td>${esc(String(c))}</td>`).join('') + '</tr>';
+  });
+  return h + '</tbody></table>';
+}
+
+// Mini shape curves for chart-select options. Shapes are generic — the
+// correct option lives only in the server-side answer key.
+function casExMiniShape(shape, active) {
+  const W = 96, H = 62, pL = 12, pR = 5, pT = 7, pB = 12, pw = W - pL - pR, ph = H - pT - pB;
+  const f = {
+    flat: x => 0.52, up: x => x * 0.9 + 0.05, down_mild: x => 1 - 0.35 * x,
+    down_steep: x => 1 - 0.92 * x, concave_up: x => Math.sqrt(x), convex_down: x => 1 - x * x,
+    steps: x => [1, 1, 0.7, 0.7, 0.42, 0.42, 0.2, 0.2][Math.min(7, Math.floor(x * 8))]
+  }[shape] || (x => x);
+  let pts = [];
+  for (let i = 0; i <= 32; i++) { const x = i / 32; pts.push([pL + x * pw, pT + ph - f(x) * ph]); }
+  const d = pts.map((p, i) => `${i ? 'L' : 'M'}${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join(' ');
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%"><line x1="${pL}" y1="${pT}" x2="${pL}" y2="${pT + ph}" stroke="rgba(255,255,255,.25)"/><line x1="${pL}" y1="${pT + ph}" x2="${W - pR}" y2="${pT + ph}" stroke="rgba(255,255,255,.25)"/><path d="${d}" fill="none" stroke="${active ? 'var(--accent-teal)' : 'rgba(255,255,255,.65)'}" stroke-width="2"/></svg>`;
+}
+
+function casExSelectHTML(r, cardId) {
+  const q = r.question ? `<div style="font-size:13px;color:var(--on-dark);margin-bottom:10px">${esc(r.question)}</div>` : '';
+  const opts = (r.options || []).map(o =>
+    `<div class="cas-ex-opt" data-key="${esc(o.key)}" onclick="casPickChartOption('${cardId}','${esc(o.key)}','${esc(o.label || '')}')">
+       <div class="k">${esc(o.key)}</div>${casExMiniShape(o.shape, false)}<div class="l">${esc(o.label || '')}</div>
+     </div>`).join('');
+  return q + `<div class="cas-ex-opts">${opts}</div>`;
+}
+
+function casPickChartOption(cardId, key, label) {
+  const card = document.getElementById(cardId);
+  if (card) {
+    card.querySelectorAll('.cas-ex-opt').forEach(el => {
+      if (el.getAttribute('data-key') === key) el.classList.add('picked');
+      else el.classList.add('dim');
+    });
+  }
+  const ta = document.getElementById('chat-ta');
+  if (ta) {
+    ta.value = `I'd pick option ${key}${label ? ' — ' + label.toLowerCase() : ''}. Here's my reasoning: `;
+    autoResize(ta);
+    ta.focus();
+  }
+}
+
+let _casExSeq = 0;
+function casAddExhibitCard(ex) {
+  if (!ex || !ex.render) return;
+  const chat = document.getElementById('chat-area');
+  const typing = document.getElementById('typing-ind');
+  if (!chat) return;
+  const r = ex.render;
+  const cardId = 'casExCard' + (++_casExSeq);
+  let body = '';
+  try {
+    if (r.type === 'bar') body = casExBarSVG(r);
+    else if (r.type === 'line') body = casExLineSVG(r);
+    else if (r.type === 'pie') {
+      body = casExPieSVG(r);
+      if (r.companion_table) body += `<div style="margin-top:12px">${casExTableHTML(r.companion_table)}</div>`;
+    }
+    else if (r.type === 'table') body = casExTableHTML(r);
+    else if (r.type === 'select') body = casExSelectHTML(r, cardId);
+    else return; // unknown type — the model's text already carries the data
+  } catch (e) { return; } // never let a render bug break the chat
+  const div = document.createElement('div');
+  div.className = 'cas-ex-card';
+  div.id = cardId;
+  const tag = { bar: 'Exhibit · Chart', line: 'Exhibit · Chart', pie: 'Exhibit · Chart', table: 'Exhibit · Table', select: 'Exhibit · Pick one' }[r.type] || 'Exhibit';
+  div.innerHTML = `<span class="cas-ex-tag">${tag}</span><div class="cas-ex-title">${esc(ex.title || 'Exhibit')}</div>${body}${r.note ? `<div class="cas-ex-note">${esc(r.note)}</div>` : ''}`;
+  chat.insertBefore(div, typing);
+  setTimeout(() => { chat.scrollTop = chat.scrollHeight; }, 60);
+}
+
+function casRenderExhibits(list) {
+  if (!Array.isArray(list)) return;
+  list.forEach(ex => casAddExhibitCard(ex));
+}
+
 function setTyping(on) {
   const el = document.getElementById('typing-ind');
   if (!el) return;
@@ -7008,7 +7202,7 @@ async function sendMessage() {
         state.attemptCount++;
       }
       setProgress(Math.max(4, Math.min(96, Math.round((state.stepIndex / Math.max(1, state.caseSteps)) * 100))));
-      setTimeout(() => { setTyping(false); addMsg('ai', reply, true); startRespTimer(); }, 500);
+      setTimeout(() => { setTyping(false); addMsg('ai', reply, true); casRenderExhibits(data.exhibits); startRespTimer(); }, 500);
     } catch (e) {
       setTyping(false);
       addMsg('ai', (e && e.userFacing) ? e.message : 'Apologies — something went wrong. Please try again.');
