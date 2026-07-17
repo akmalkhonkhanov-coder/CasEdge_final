@@ -158,7 +158,7 @@ export default async function handler(req, res) {
     }
 
     // 6) Forward to Anthropic (with a timeout + retry on transient overloads).
-    const callModel = async (payload) => fetchAnthropicWithRetry('https://api.anthropic.com/v1/messages', {
+    const callModel = async (payload, timeoutMs, retries) => fetchAnthropicWithRetry('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -167,14 +167,17 @@ export default async function handler(req, res) {
         'anthropic-beta': 'prompt-caching-2024-07-31'
       },
       body: JSON.stringify(payload)
-    }, UPSTREAM_TIMEOUT_MS, 4);
+    }, timeoutMs != null ? timeoutMs : UPSTREAM_TIMEOUT_MS, retries != null ? retries : 4);
     const textOf = (data) => (data && Array.isArray(data.content))
       ? data.content.filter(b => b && b.type === 'text' && typeof b.text === 'string').map(b => b.text).join('\n')
       : '';
 
     let response;
     try {
-      response = await callModel(body);
+      // First attempt: bounded to 32s with 2 transient retries so the whole
+      // invocation (auth + call + optional thinking-retry) fits in the 60s
+      // Vercel budget. A full second attempt happens CLIENT-side (fresh 60s).
+      response = await callModel(body, 32 * 1000, 2);
     } catch (e) {
       return res.status(504).json({ error: { message: 'The grader is taking too long. Please try again.' } });
     }
@@ -186,7 +189,7 @@ export default async function handler(req, res) {
     if (response.status === 200 && !textOf(data) && data && data.stop_reason === 'max_tokens') {
       console.error('claude.js: thinking consumed budget, retrying with 6000');
       try {
-        const resp2 = await callModel({ ...body, max_tokens: 6000 });
+        const resp2 = await callModel({ ...body, max_tokens: 6000 }, 20 * 1000, 0);
         if (resp2.status === 200) {
           const data2 = await resp2.json();
           if (textOf(data2)) { data = data2; response = resp2; }
