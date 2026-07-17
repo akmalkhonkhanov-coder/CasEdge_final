@@ -180,6 +180,18 @@
         {
          "text": "Valtona",
          "correct": true
+        },
+        {
+         "text": "Herdal",
+         "correct": false
+        },
+        {
+         "text": "It makes no difference",
+         "correct": false
+        },
+        {
+         "text": "Not enough information to decide",
+         "correct": false
         }
        ],
        "validation": "choice == Valtona.",
@@ -190,11 +202,23 @@
     {
      "id": "Q4",
      "type": "single_choice",
-     "prompt": "Forecasters now expect much wider deviation next season: **20,000 L (40%), 10,000 L (30%), 30,000 L (30%)** if produced in Valtona. Herdal is unchanged (exactly 20,000 L at $3.25/L).\n\n(Note: expected profit is the probability-weighted average of all possible profit outcomes.)\n\nBased on this, which location has the higher expected profit next season?\n- Valtona",
+     "prompt": "Forecasters now expect much wider deviation next season: **20,000 L (40%), 10,000 L (30%), 30,000 L (30%)** if produced in Valtona. Herdal is unchanged (exactly 20,000 L at $3.25/L).\n\n(Note: expected profit is the probability-weighted average of all possible profit outcomes.)\n\nBased on this, which location has the higher expected profit next season?",
      "options": [
+      {
+       "text": "Valtona",
+       "correct": false
+      },
       {
        "text": "Herdal",
        "correct": true
+      },
+      {
+       "text": "Both locations have the same expected profit",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
       }
      ],
      "validation": "choice == Herdal.",
@@ -248,8 +272,12 @@
     {
      "id": "Q8",
      "type": "single_choice",
-     "prompt": "Given the previous questions, would you recommend moving all of Wortfield's Winter IPA production from Valtona to Herdal?\n- Yes, Wortfield should move all its production to Herdal",
+     "prompt": "Given the previous questions, would you recommend moving all of Wortfield's Winter IPA production from Valtona to Herdal?",
      "options": [
+      {
+       "text": "Yes, Wortfield should move all its production to Herdal",
+       "correct": false
+      },
       {
        "text": "No, Wortfield should not move all its production to Herdal",
        "correct": true
@@ -402,11 +430,23 @@
     {
      "id": "Q5",
      "type": "single_choice",
-     "prompt": "Given Questions 2–4, how would you characterize the CMO's \"$87,500 obvious win\"?\n- Correct as stated",
+     "prompt": "Given Questions 2–4, how would you characterize the CMO's \"$87,500 obvious win\"?",
      "options": [
+      {
+       "text": "Correct as stated",
+       "correct": false
+      },
       {
        "text": "Right direction, but the gain is far smaller and fragile to the milestone probability",
        "correct": true
+      },
+      {
+       "text": "Wrong direction — the promotion destroys expected profit",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
       }
      ],
      "validation": "choice == 2.",
@@ -456,11 +496,23 @@
     {
      "id": "Q9",
      "type": "single_choice",
-     "prompt": "Would you recommend running the promotion?\n- Yes, uncapped, as the CMO proposed",
+     "prompt": "Would you recommend running the promotion?",
      "options": [
+      {
+       "text": "Yes, uncapped, as the CMO proposed",
+       "correct": false
+      },
       {
        "text": "Yes, but with the 500-unit eligibility cap",
        "correct": true
+      },
+      {
+       "text": "No, do not run the promotion",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
       }
      ],
      "validation": "choice == 2.",
@@ -672,8 +724,20 @@
     {
      "id": "Q4",
      "type": "single_choice",
-     "prompt": "Based only on Questions 3a–3d, should Cartford discontinue the kit?\n- Yes — the kit loses money\n- No — the attached margin outweighs the loss\n- It makes no difference",
+     "prompt": "Based only on Questions 3a–3d, should Cartford discontinue the kit?",
      "options": [
+      {
+       "text": "Yes — the kit loses money",
+       "correct": false
+      },
+      {
+       "text": "No — the attached margin outweighs the loss",
+       "correct": false
+      },
+      {
+       "text": "It makes no difference",
+       "correct": false
+      },
       {
        "text": "Not enough information to decide",
        "correct": true
@@ -717,11 +781,23 @@
     {
      "id": "Q9",
      "type": "single_choice",
-     "prompt": "Your final position for the range review:\n- Discontinue the kit\n- Keep the kit as is",
+     "prompt": "Your final position for the range review:",
      "options": [
+      {
+       "text": "Discontinue the kit",
+       "correct": false
+      },
+      {
+       "text": "Keep the kit as is",
+       "correct": false
+      },
       {
        "text": "Keep the kit and reprice it toward $12",
        "correct": true
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
       }
      ],
      "validation": "choice == 3.",
@@ -971,11 +1047,23 @@
     {
      "id": "Q4",
      "type": "single_choice",
-     "prompt": "Should Larkjet add the 4th daily frequency?\n- No — the route loses $2,700 per flight and a 4th flight makes it worse\n- Yes — the 4th flight adds about $2,500 per departure",
+     "prompt": "Should Larkjet add the 4th daily frequency?",
      "options": [
+      {
+       "text": "No — the route loses $2,700 per flight and a 4th flight makes it worse",
+       "correct": false
+      },
+      {
+       "text": "Yes — the 4th flight adds about $2,500 per departure",
+       "correct": false
+      },
       {
        "text": "Yes — the 4th flight adds about $505 per departure",
        "correct": true
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
       }
      ],
      "validation": "choice == 3.",
@@ -1029,11 +1117,23 @@
     {
      "id": "Q8",
      "type": "single_choice",
-     "prompt": "Given all of the above, your recommendation on the 4th frequency:\n- Reject — the route is loss-making on a fully allocated basis",
+     "prompt": "Given all of the above, your recommendation on the 4th frequency:",
      "options": [
+      {
+       "text": "Reject — the route is loss-making on a fully allocated basis",
+       "correct": false
+      },
       {
        "text": "Add it — and judge it on incremental economics",
        "correct": true
+      },
+      {
+       "text": "Add it only if the route becomes profitable on a fully allocated basis",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
       }
      ],
      "validation": "choice == 2.",
@@ -1283,11 +1383,23 @@
     {
      "id": "Q5",
      "type": "single_choice",
-     "prompt": "Based on the above, Serolith should:\n- Outsource — the reference lab is cheaper per test",
+     "prompt": "Based on the above, Serolith should:",
      "options": [
+      {
+       "text": "Outsource — the reference lab is cheaper per test",
+       "correct": false
+      },
       {
        "text": "Keep the panel in-house",
        "correct": true
+      },
+      {
+       "text": "It makes no difference",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
       }
      ],
      "validation": "choice == 2.",
@@ -1341,11 +1453,23 @@
     {
      "id": "Q9",
      "type": "single_choice",
-     "prompt": "Your recommendation to the CEO:\n- Sign the $38 deal as proposed",
+     "prompt": "Your recommendation to the CEO:",
      "options": [
+      {
+       "text": "Sign the $38 deal as proposed",
+       "correct": false
+      },
       {
        "text": "Decline at $38; revisit only below the walk-away price and with a turnaround SLA",
        "correct": true
+      },
+      {
+       "text": "Outsource half the volume as a compromise",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
       }
      ],
      "validation": "choice == 2.",
@@ -1700,11 +1824,23 @@
     {
      "id": "Q8",
      "type": "single_choice",
-     "prompt": "Your conclusion on the rate cut:\n- No — hidden corporate cannibalization reverses the gain\n- No — the RevPAR gain is a revenue illusion; contribution falls",
+     "prompt": "Your conclusion on the rate cut:",
      "options": [
+      {
+       "text": "No — hidden corporate cannibalization reverses the gain",
+       "correct": false
+      },
+      {
+       "text": "No — the RevPAR gain is a revenue illusion; contribution falls",
+       "correct": false
+      },
       {
        "text": "Yes — the numbers hold on both revenue and contribution views; parity is untriggered at $120; monitor the thin occupancy cushion",
        "correct": true
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
       }
      ],
      "validation": "choice == 3.",
@@ -1868,11 +2004,23 @@
     {
      "id": "Q2",
      "type": "single_choice",
-     "prompt": "Per Exhibit 1: how much of the CFO's \"$2M from day one\" arrives in month 1?\n\n- All of it — the price applies to 1,000,000 subs",
+     "prompt": "Per Exhibit 1: how much of the CFO's \"$2M from day one\" arrives in month 1?",
      "options": [
+      {
+       "text": "All of it — the price applies to 1,000,000 subs",
+       "correct": false
+      },
       {
        "text": "At most $1.2M — only the 600,000 monthly subs are repriced immediately; the annual base is locked until renewal",
        "correct": true
+      },
+      {
+       "text": "None of it",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
       }
      ],
      "validation": "choice == 2.",
@@ -1931,11 +2079,23 @@
     {
      "id": "Q5",
      "type": "single_choice",
-     "prompt": "Comparing month-12 run-rates: what did the hike actually do?\n\n- Added about $2M/month, as claimed\n- Added revenue, but less than claimed",
+     "prompt": "Comparing month-12 run-rates: what did the hike actually do?",
      "options": [
+      {
+       "text": "Added about $2M/month, as claimed",
+       "correct": false
+      },
+      {
+       "text": "Added revenue, but less than claimed",
+       "correct": false
+      },
       {
        "text": "REDUCED the month-12 run-rate by about $169K/month",
        "correct": true
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
       }
      ],
      "validation": "choice == 3.",
@@ -1981,11 +2141,23 @@
     {
      "id": "Q8",
      "type": "single_choice",
-     "prompt": "Your recommendation on the CFO's proposal:\n- Implement the +20% as proposed\n- Reject any price increase",
+     "prompt": "Your recommendation on the CFO's proposal:",
      "options": [
+      {
+       "text": "Implement the +20% as proposed",
+       "correct": false
+      },
+      {
+       "text": "Reject any price increase",
+       "correct": false
+      },
       {
        "text": "Do not implement as proposed — restructure the increase (staged / grandfathered / tiered) to manage the churn and renewal response",
        "correct": true
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
       }
      ],
      "validation": "choice == 3.",
@@ -2244,8 +2416,20 @@
     {
      "id": "Q5",
      "type": "single_choice",
-     "prompt": "Based on Questions 1–4 alone, should Parcelvane close Rural?\n- Yes — it saves $10,000 a week\n- Yes — it saves about $1,000 a week\n- No — closing loses money",
+     "prompt": "Based on Questions 1–4 alone, should Parcelvane close Rural?",
      "options": [
+      {
+       "text": "Yes — it saves $10,000 a week",
+       "correct": false
+      },
+      {
+       "text": "Yes — it saves about $1,000 a week",
+       "correct": false
+      },
+      {
+       "text": "No — closing loses money",
+       "correct": false
+      },
       {
        "text": "Not enough information — the effect of closure on the REST of the network is unexamined",
        "correct": true
@@ -2281,11 +2465,23 @@
     {
      "id": "Q9",
      "type": "single_choice",
-     "prompt": "Your recommendation:\n- Close Rural — the zone is loss-making",
+     "prompt": "Your recommendation:",
      "options": [
+      {
+       "text": "Close Rural — the zone is loss-making",
+       "correct": false
+      },
       {
        "text": "Keep Rural — and treat it as the price of the network contract with anchor clients; fix its variable cost separately",
        "correct": true
+      },
+      {
+       "text": "Close Rural but keep the micro-depot",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
       }
      ],
      "validation": "choice == 2.",
@@ -2608,11 +2804,23 @@
     {
      "id": "Q10",
      "type": "single_choice",
-     "prompt": "Your recommendation:\n- Execute the swap — revenue per member rises",
+     "prompt": "Your recommendation:",
      "options": [
+      {
+       "text": "Execute the swap — revenue per member rises",
+       "correct": false
+      },
       {
        "text": "Reject the swap; solve capacity and compliance without purging (premium at ≥$59.55 against natural attrition, fair-billing program for dormants)",
        "correct": true
+      },
+      {
+       "text": "Purge only half the dormants",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
       }
      ],
      "validation": "choice == 2.",
@@ -2916,11 +3124,23 @@
     {
      "id": "Q8",
      "type": "single_choice",
-     "prompt": "Your recommendation:\n- Migrate everyone, as the board proposed\n- Stay fully on seat pricing",
+     "prompt": "Your recommendation:",
      "options": [
+      {
+       "text": "Migrate everyone, as the board proposed",
+       "correct": false
+      },
+      {
+       "text": "Stay fully on seat pricing",
+       "correct": false
+      },
       {
        "text": "Migrate only above-threshold usage clients (Segment A); keep B and C on seats; revisit the rate before any wider rollout",
        "correct": true
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
       }
      ],
      "validation": "choice == 3.",
@@ -3195,11 +3415,23 @@
     {
      "id": "Q9",
      "type": "single_choice",
-     "prompt": "Your recommendation:\n- Approve the $12 across the board — ticket elasticity supports it\n- Reject any price change",
+     "prompt": "Your recommendation:",
      "options": [
+      {
+       "text": "Approve the $12 across the board — ticket elasticity supports it",
+       "correct": false
+      },
+      {
+       "text": "Reject any price change",
+       "correct": false
+      },
       {
        "text": "Do not approve as proposed — the concession leak makes it value-destroying; use targeted/peak pricing and bundles instead",
        "correct": true
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
       }
      ],
      "validation": "choice == 3.",
@@ -3452,11 +3684,23 @@
     {
      "id": "Q9",
      "type": "single_choice",
-     "prompt": "Your recommendation:\n- Sign all five — free money\n- Reject the offer entirely",
+     "prompt": "Your recommendation:",
      "options": [
+      {
+       "text": "Sign all five — free money",
+       "correct": false
+      },
+      {
+       "text": "Reject the offer entirely",
+       "correct": false
+      },
       {
        "text": "Rent B1 and B3 only; monetize the rest through non-displacing routes (weekends, summer, partial floors)",
        "correct": true
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
       }
      ],
      "validation": "choice == 3.",
@@ -3603,11 +3847,23 @@
     {
      "id": "Q2",
      "type": "single_choice",
-     "prompt": "What is wrong with the director's \"$5,400 × 900 disposals\" frame?\n\n- Nothing — it correctly values the proposal",
+     "prompt": "What is wrong with the director's \"$5,400 × 900 disposals\" frame?",
      "options": [
+      {
+       "text": "Nothing — it correctly values the proposal",
+       "correct": false
+      },
       {
        "text": "It counts only the selling side of the cycle: faster cycles also mean buying new cars sooner and swapping more often",
        "correct": true
+      },
+      {
+       "text": "The resale figures are wrong",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
       }
      ],
      "validation": "choice == 2.",
@@ -3699,11 +3955,23 @@
     {
      "id": "Q8",
      "type": "single_choice",
-     "prompt": "Your recommendation:\n- Approve, and book ~$4.9M of annual benefit",
+     "prompt": "Your recommendation:",
      "options": [
+      {
+       "text": "Approve, and book ~$4.9M of annual benefit",
+       "correct": false
+      },
       {
        "text": "Approve — but plan for ~$384K of annual benefit, with a resale-price trigger at $20,573",
        "correct": true
+      },
+      {
+       "text": "Reject — the faster cycle loses money",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
       }
      ],
      "validation": "choice == 2.",
@@ -3962,11 +4230,23 @@
     {
      "id": "Q8",
      "type": "single_choice",
-     "prompt": "Your recommendation:\n- Accept the exclusivity — commissions fall",
+     "prompt": "Your recommendation:",
      "options": [
+      {
+       "text": "Accept the exclusivity — commissions fall",
+       "correct": false
+      },
       {
        "text": "Decline; keep both channels and counter with a non-exclusive structure",
        "correct": true
+      },
+      {
+       "text": "Shut the own app anyway to save delivery ops",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
       }
      ],
      "validation": "choice == 2.",
@@ -4203,11 +4483,19 @@
       {
        "id": "Q6b",
        "type": "single_choice",
-       "prompt": "- Yes — fixed costs per policy rise",
+       "prompt": "",
        "options": [
+        {
+         "text": "Yes — fixed costs per policy rise",
+         "correct": false
+        },
         {
          "text": "No — total fixed cost is unchanged; the per-policy rise is an allocation artifact, not a cash effect",
          "correct": true
+        },
+        {
+         "text": "Not enough information",
+         "correct": false
         }
        ],
        "validation": "choice == 2.",
@@ -4226,11 +4514,23 @@
     {
      "id": "Q8",
      "type": "single_choice",
-     "prompt": "Your conclusion on killing the discount:\n- No — the scale loss reverses the saving\n- No — losing 8,000 customers outweighs the margin gain",
+     "prompt": "Your conclusion on killing the discount:",
      "options": [
+      {
+       "text": "No — the scale loss reverses the saving",
+       "correct": false
+      },
+      {
+       "text": "No — losing 8,000 customers outweighs the margin gain",
+       "correct": false
+      },
       {
        "text": "Yes — the full cohort model agrees with the CFO's direction: +$1.54M over two years, robust down to 8,482 joiners, and the scale objection is an allocation artifact",
        "correct": true
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
       }
      ],
      "validation": "choice == 3.",
