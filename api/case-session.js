@@ -21,7 +21,8 @@ const CASES_DATA = require('./_cases.json');
 
 const FALLBACK_ORIGIN = 'https://cas-edge-final.vercel.app';
 const CASE_MODEL = 'claude-sonnet-5';   // fixed server-side; client cannot choose
-const MAX_TOKENS = 1300;
+const MAX_TOKENS = 2500;        // headroom: the model may spend a thinking block before the text
+const MAX_TOKENS_RETRY = 4000;  // one automatic retry if thinking ate the whole budget
 const MAX_BODY_BYTES = 200 * 1024;      // 200 KB request cap
 const RATE_LIMIT = 30;                  // requests per user per window
 const RATE_WINDOW_MS = 60 * 1000;
@@ -518,41 +519,56 @@ export default async function handler(req, res) {
 
     // 7) Forward to Anthropic. Two system blocks: the STABLE case body is cached
     // (identical every turn → cache hit); the VOLATILE step block is not.
+    const callModel = async (maxTok) => fetchAnthropicWithRetry('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': process.env.ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01',
+        'anthropic-beta': 'prompt-caching-2024-07-31'
+      },
+      body: JSON.stringify({
+        model: CASE_MODEL,
+        max_tokens: maxTok,
+        system: [
+          { type: 'text', text: built.stable, cache_control: { type: 'ephemeral' } },
+          { type: 'text', text: built.volatile }
+        ],
+        messages: convo
+      })
+    }, UPSTREAM_TIMEOUT_MS, 4);
+
+    const extractText = (data) => Array.isArray(data && data.content)
+      ? data.content.filter(b => b && b.type === 'text' && typeof b.text === 'string').map(b => b.text).join('\n').trim()
+      : '';
+
     let response;
     try {
-      response = await fetchAnthropicWithRetry('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': process.env.ANTHROPIC_API_KEY,
-          'anthropic-version': '2023-06-01',
-          'anthropic-beta': 'prompt-caching-2024-07-31'
-        },
-        body: JSON.stringify({
-          model: CASE_MODEL,
-          max_tokens: MAX_TOKENS,
-          system: [
-            { type: 'text', text: built.stable, cache_control: { type: 'ephemeral' } },
-            { type: 'text', text: built.volatile }
-          ],
-          messages: convo
-        })
-      }, UPSTREAM_TIMEOUT_MS, 4);
+      response = await callModel(MAX_TOKENS);
     } catch (e) {
       return res.status(504).json({ error: { message: 'The interviewer is taking too long. Please try again.' } });
     }
 
-    const data = await response.json();
+    let data = await response.json();
     if (response.status < 200 || response.status >= 300) {
       // Pass through status; never leak upstream internals.
       console.error('case-session upstream non-2xx', response.status, JSON.stringify(data).slice(0, 300));
       return res.status(response.status).json({ error: { message: 'The interviewer is busy right now. Please try again.' } });
     }
 
-    // Concatenate every text block (the model may return thinking/other blocks first).
-    const text = Array.isArray(data && data.content)
-      ? data.content.filter(b => b && b.type === 'text' && typeof b.text === 'string').map(b => b.text).join('\n').trim()
-      : '';
+    let text = extractText(data);
+    // Rare failure mode: the model spends the ENTIRE budget on a thinking block
+    // (stop_reason max_tokens, no text). One automatic retry with more headroom.
+    if (!text && data && data.stop_reason === 'max_tokens') {
+      console.error('case-session: thinking consumed budget, retrying with', MAX_TOKENS_RETRY);
+      try {
+        const resp2 = await callModel(MAX_TOKENS_RETRY);
+        if (resp2.status >= 200 && resp2.status < 300) {
+          data = await resp2.json();
+          text = extractText(data);
+        }
+      } catch (e) { /* fall through to the empty-text log below */ }
+    }
     if (!text) {
       const shape = data && typeof data === 'object'
         ? JSON.stringify({ type: data.type, stop_reason: data.stop_reason, blocks: Array.isArray(data.content) ? data.content.map(b => b && b.type) : typeof data.content, err: data.error && data.error.type }).slice(0, 300)
