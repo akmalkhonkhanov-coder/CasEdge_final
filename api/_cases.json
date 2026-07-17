@@ -10777,7 +10777,85 @@
    "generation": "D",
    "header_md": "**Type · Asset management · F5 (interviewer-led/short) · Ловушка #102 (Trap-flip, naive #12 regulator/fee-cap)**\nDifficulty: Easy · Prototype: BlackRock/Vanguard · IO: Banking — asset-management fees, Stern p.12",
    "prompt_md": "**Kestermere Capital** управляет розничным фондом с **$2.4B AUM**, беря management fee **0.65%**. Менеджмент хочет поднять fee до **0.95%**, чтобы нарастить выручку. Стоит ли поднимать?",
-   "exhibits": [],
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Exhibit — Kestermere fund economics",
+     "body_md": "Retail fund: AUM $2.4B. Current management fee 0.65%. Proposed fee 0.95%.",
+     "reveal": "on_request",
+     "triggers": [
+      "AUM",
+      "data",
+      "exhibit",
+      "fee",
+      "данные",
+      "данные фонда",
+      "сколько зарабатываем",
+      "текущая выручка",
+      "цифры"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Item",
+       "Value"
+      ],
+      "rows": [
+       [
+        "AUM",
+        "$2.4B"
+       ],
+       [
+        "Current management fee",
+        "0.65%"
+       ],
+       [
+        "Proposed fee",
+        "0.95%"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "ex2",
+     "title": "Exhibit — Regulatory framework (retail funds)",
+     "body_md": "Value-for-money cap on retail management fees: 0.90%. Breaching it triggers: fee rollback to the old level for the reporting year, one-off remediation cost $1.9M, reputational AUM outflow 8% (permanent).",
+     "reveal": "on_request",
+     "triggers": [
+      "cap",
+      "data",
+      "exhibit",
+      "value-for-money",
+      "данные",
+      "ограничение",
+      "реакция инвесторов",
+      "регулятор",
+      "цифры",
+      "что будет если поднять"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Item",
+       "Value"
+      ],
+      "rows": [
+       [
+        "Value-for-money cap",
+        "0.90%"
+       ],
+       [
+        "Remediation cost (one-off)",
+        "$1.9M"
+       ],
+       [
+        "Reputational AUM outflow",
+        "8% (permanent)"
+       ]
+      ]
+     }
+    }
+   ],
    "steps": [
     {
      "step": 1,
@@ -10807,18 +10885,7 @@
      "candidate_md": "Что игнорирует наив?",
      "interviewer_md": "EXPECTED ANSWER:\nРегуляторный cap 0.90%: откат fee + remediation + отток.\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) назван регуляторный cap/реакция; (2) понятно, что raise запускает откат/штраф/отток.",
      "hints": {},
-     "conditional_exhibits": [
-      {
-       "title": "gated data",
-       "triggers": [
-        "регулятор",
-        "ограничение fee",
-        "cap",
-        "value for money",
-        "реакция инвесторов"
-       ]
-      }
-     ]
+     "conditional_exhibits": []
     },
     {
      "step": 4,
@@ -10863,7 +10930,57 @@
    "generation": "D",
    "header_md": "**Type · Thermal coal · F3 · Ловушка #103 (Trap-action/soft, naive #7 avg-vs-marginal)**\nDifficulty: Medium · Prototype: Peabody/Arch · IO: Oil&Gas cash-cost, Stern p.21 [DEV: coal cash-cost/t замещает barrel price] · Layers: mental-math, hypothesis-update",
    "prompt_md": "**Ashvale Energy** — производитель энергетического угля, 3 шахты. Спрос падает; нужно сократить добычу на **2.0 Mt** (миллиона тонн). Из какой шахты убирать объём?",
-   "exhibits": [],
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Exhibit A — Cost per tonne by mine",
+     "body_md": "Northseam: var (cash) $41/т, fixed alloc $22/т, AVG total $63/т, output 3.0 Mt. Deepcut: var $47/т, fixed alloc $9/т, AVG $56/т, output 2.5 Mt. Ridgeline: var $38/т, fixed alloc $26/т, AVG $64/т, output 2.0 Mt.",
+     "reveal": "on_request",
+     "triggers": [
+      "cost per tonne",
+      "data",
+      "exhibit",
+      "данные",
+      "данные по шахтам",
+      "по шахтам",
+      "структура затрат",
+      "цифры"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Шахта",
+       "Var (cash) $/т",
+       "Fixed alloc $/т",
+       "AVG total $/т",
+       "Output"
+      ],
+      "rows": [
+       [
+        "Northseam",
+        "41",
+        "22",
+        "63",
+        "3.0 Mt"
+       ],
+       [
+        "Deepcut",
+        "47",
+        "9",
+        "56",
+        "2.5 Mt"
+       ],
+       [
+        "Ridgeline",
+        "38",
+        "26",
+        "64",
+        "2.0 Mt"
+       ]
+      ]
+     }
+    }
+   ],
    "steps": [
     {
      "step": 1,
@@ -10884,16 +11001,7 @@
      "candidate_md": "Посчитай AVG total cost по шахтам.",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nExhibit A: var/fixed_alloc/output ×3\n\nEXPECTED ANSWER:\nNorthseam 63, Deepcut 56, Ridgeline 64\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) все 3 avg верны (var+fixed_alloc); (2) наив-выбор по avg = Ridgeline.",
      "hints": {},
-     "conditional_exhibits": [
-      {
-       "title": "Exhibit A: var/fixed_alloc/output ×3",
-       "triggers": [
-        "структура затрат",
-        "cost per tonne",
-        "данные по шахтам"
-       ]
-      }
-     ]
+     "conditional_exhibits": []
     },
     {
      "step": 3,
@@ -10956,7 +11064,83 @@
    "generation": "D",
    "header_md": "**Type · Dairy CPG · F1 (interviewee-led) · Ловушка #104 (Trap-overstate/soft, naive #3 flat-vs-escalating)**\nDifficulty: **Hard** · Prototype: Danone/Lactalis · IO: Non-Durables, Kellogg p.221 · Layers: mental-math, hypothesis-update, open-drive",
    "prompt_md": "**Creamwright Foods** (dairy CPG) покупает регионального переработчика молока. Запрос — **$105M** за 100%. Главная синергия — экономия на консолидированной закупке сырого молока в течение **6 лет**. Стоит ли платить $105M?",
-   "exhibits": [],
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Exhibit — Deal & synergy inputs",
+     "body_md": "Target EBITDA $9.2M, deal multiple 6.0x. Synergy year-1 $14.5M, discount rate 9%, horizon 6 лет.",
+     "reveal": "on_request",
+     "triggers": [
+      "EBITDA",
+      "data",
+      "exhibit",
+      "данные",
+      "мультипликатор",
+      "синергия",
+      "цифры",
+      "экономика сделки"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Item",
+       "Value"
+      ],
+      "rows": [
+       [
+        "Target EBITDA",
+        "$9.2M"
+       ],
+       [
+        "Multiple",
+        "6.0x"
+       ],
+       [
+        "Synergy, год 1",
+        "$14.5M"
+       ],
+       [
+        "Discount rate",
+        "9%"
+       ],
+       [
+        "Horizon",
+        "6 лет"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "ex2",
+     "title": "Exhibit — Supplier contract profile",
+     "body_md": "Supplier-discount synergy decays 8% per year (contract escalators erode the discount).",
+     "reveal": "on_request",
+     "triggers": [
+      "data",
+      "decay",
+      "escalator",
+      "exhibit",
+      "данные",
+      "контракты поставщиков",
+      "останется ли скидка",
+      "профиль синергии",
+      "цифры"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Item",
+       "Value"
+      ],
+      "rows": [
+       [
+        "Synergy decay",
+        "8% / год"
+       ]
+      ]
+     }
+    }
+   ],
    "steps": [
     {
      "step": 1,
@@ -11004,17 +11188,7 @@
      "candidate_md": "Синергия с убыванием 8%/год.",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\ndecay 8%/год\n\nEXPECTED ANSWER:\n$54,456,057.06; deal $109.7M vs ask $105M -> BUY тонко (запас $4.7M)\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) убывающая PV = 54,456,057.06; (2) overstate назван от синергии (~19.45%), НЕ от deal value; (3) отмечено сжатие подушки $15.2M→$4.7M.",
      "hints": {},
-     "conditional_exhibits": [
-      {
-       "title": "decay 8%/год",
-       "triggers": [
-        "контракты поставщиков",
-        "escalator",
-        "останется ли скидка",
-        "профиль синергии"
-       ]
-      }
-     ]
+     "conditional_exhibits": []
     },
     {
      "step": 6,
@@ -11050,7 +11224,43 @@
    "generation": "D",
    "header_md": "**Type · Sporting goods · F5 · Ловушка #105 (Trap-flip, naive #4 gross-vs-net)**\nDifficulty: Easy · Prototype: Wilson/Head · IO: Industrial Goods after-sales, Kellogg p.222 · Layer: mental-math",
    "prompt_md": "**Corbin Racquet** производит теннисные ракетки, продаёт оптом (wholesale) по **$95/шт**. Рассматривает запуск собственного DTC онлайн-канала с розничной ценой **$180/шт**. Запускать ли DTC?",
-   "exhibits": [],
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Exhibit — Racket unit economics",
+     "body_md": "Retail price $180 · wholesale price $95 · COGS $62 per racket.",
+     "reveal": "on_request",
+     "triggers": [
+      "data",
+      "exhibit",
+      "данные",
+      "каналы",
+      "розница и опт",
+      "цены",
+      "цифры",
+      "экономика ракетки"
+     ],
+     "render": {
+      "type": "bar",
+      "unit": "$",
+      "categories": [
+       "Retail price",
+       "Wholesale price",
+       "COGS"
+      ],
+      "series": [
+       {
+        "name": "$/ракетка",
+        "values": [
+         180,
+         95,
+         62
+        ]
+       }
+      ]
+     }
+    }
+   ],
    "steps": [
     {
      "step": 1,
@@ -11136,7 +11346,91 @@
    "generation": "D",
    "header_md": "**Type · Ports/freight · F6 · Ловушка #106 (Trap-flip, naive #15 wrong-ranking)**\nDifficulty: Medium · Prototype: DP World/PSA · IO: Industrials capacity, Stern p.22 [DEV: TEU throughput + incumbent lock-in замещают book-to-bill] · Layer: mental-math, hypothesis-update",
    "prompt_md": "**Havenmark Ports** выбирает, в какой из 4 региональных портов войти (арендовать терминал). Партнёр: в какой порт заходить?",
-   "exhibits": [],
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Exhibit 1 — Port throughput & contribution",
+     "body_md": "Kestrel: 2,800,000 TEU, вклад $38/TEU. Marlow: 1,500,000 TEU, $61/TEU. Tolbridge: 2,100,000 TEU, $44/TEU. Ashport: 1,900,000 TEU, $52/TEU.",
+     "reveal": "on_request",
+     "triggers": [
+      "data",
+      "exhibit",
+      "throughput",
+      "данные",
+      "данные по портам",
+      "объём портов",
+      "по портам",
+      "цифры"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Порт",
+       "TEU (throughput)",
+       "Вклад $/TEU"
+      ],
+      "rows": [
+       [
+        "Kestrel",
+        "2,800,000",
+        "38"
+       ],
+       [
+        "Marlow",
+        "1,500,000",
+        "61"
+       ],
+       [
+        "Tolbridge",
+        "2,100,000",
+        "44"
+       ],
+       [
+        "Ashport",
+        "1,900,000",
+        "52"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "ex2",
+     "title": "Exhibit 2 — Incumbent lock-in by port",
+     "body_md": "Доля объёма, запертая инкумбентами (долгосрочные контракты): Kestrel 88%, Marlow 35%, Tolbridge 70%, Ashport 55%.",
+     "reveal": "on_request",
+     "triggers": [
+      "data",
+      "exhibit",
+      "lock-in",
+      "данные",
+      "инкумбенты",
+      "какую долю выиграем",
+      "конкуренция",
+      "цифры"
+     ],
+     "render": {
+      "type": "bar",
+      "unit": "%",
+      "categories": [
+       "Kestrel",
+       "Marlow",
+       "Tolbridge",
+       "Ashport"
+      ],
+      "series": [
+       {
+        "name": "Lock-in инкумбентов",
+        "values": [
+         88,
+         35,
+         70,
+         55
+        ]
+       }
+      ]
+     }
+    }
+   ],
    "steps": [
     {
      "step": 1,
@@ -11157,16 +11451,7 @@
      "candidate_md": "Оцени порты по Exhibit A.",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nTEU + contrib ×4\n\nEXPECTED ANSWER:\nнаив по TEU -> Kestrel (2.8M)\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) кандидат видит Kestrel крупнейшим по TEU; (2) фиксирует это как наив-выбор.",
      "hints": {},
-     "conditional_exhibits": [
-      {
-       "title": "TEU + contrib ×4",
-       "triggers": [
-        "объём портов",
-        "throughput",
-        "данные по портам"
-       ]
-      }
-     ]
+     "conditional_exhibits": []
     },
     {
      "step": 3,
@@ -11184,17 +11469,7 @@
      "candidate_md": "Winnable contribution по Exhibit B.",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nlock-in ×4\n\nEXPECTED ANSWER:\nMarlow $59.475M лучший; Kestrel $12.768M; флип Kestrel->Marlow\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) все 4 winnable contribution верны (TEU×(1−lockin)×contrib); (2) выбор Marlow; (3) gap назван как % от winnable contribution (78.5%).",
      "hints": {},
-     "conditional_exhibits": [
-      {
-       "title": "lock-in ×4",
-       "triggers": [
-        "инкумбенты",
-        "lock-in",
-        "какую долю выиграем",
-        "конкуренция"
-       ]
-      }
-     ]
+     "conditional_exhibits": []
     },
     {
      "step": 5,
@@ -11221,7 +11496,50 @@
    "generation": "D",
    "header_md": "**Type · Cold storage · F7 · Ловушка #107 (CLEAN — validate no reversal)**\nDifficulty: Medium · Prototype: Lineage/Americold · IO: Industrial Goods energy, Kellogg p.222 [DEV: энергозатраты замещают after-sales] · Layer: mental-math, open-drive",
    "prompt_md": "**Tundralink Storage** (холодные склады) рассматривает переоснащение 3 складов новой системой управления холодильным оборудованием. Поставщик обещает экономию энергии **28%**. Capex — **$1.15M** разово, плюс **$64k/год** на лицензию/обслуживание. Внедрять?\n\n*(Это clean-кейс: наив и correct совпадают. Задача кандидата — проверить, что привлекательная экономия реальна и нет скрытого разворота, и явно это подтвердить.)*",
-   "exhibits": [],
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Exhibit — Warehouse energy profile",
+     "body_md": "North: 4,200,000 кВт·ч, тариф $0.118. Central: 5,100,000 кВт·ч, $0.124. South: 3,600,000 кВт·ч, $0.109. Предложение вендора: экономия 28% энергозатрат; capex $1.15M; доп. opex $64,000/год.",
+     "reveal": "on_request",
+     "triggers": [
+      "data",
+      "exhibit",
+      "данные",
+      "по складам",
+      "расход по складам",
+      "тарифы",
+      "цифры",
+      "энергозатраты"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Склад",
+       "кВт·ч/год",
+       "Тариф $/кВт·ч"
+      ],
+      "rows": [
+       [
+        "North",
+        "4,200,000",
+        "0.118"
+       ],
+       [
+        "Central",
+        "5,100,000",
+        "0.124"
+       ],
+       [
+        "South",
+        "3,600,000",
+        "0.109"
+       ]
+      ],
+      "note": "Предложение вендора: экономия 28% энергозатрат · capex $1.15M · доп. opex $64,000/год."
+     }
+    }
+   ],
    "steps": [
     {
      "step": 1,
@@ -11242,16 +11560,7 @@
      "candidate_md": "Экономия и payback.",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\n3 склада кВт·ч×тариф; 28%; capex $1.15M; opex $64k\n\nEXPECTED ANSWER:\nэнергозатраты $1,520,400; net annual $361,712; payback 3.18 года\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) сумма энергозатрат=1,520,400; (2) net=1,520,400×0.28−64,000=361,712; (3) payback≈3.18.",
      "hints": {},
-     "conditional_exhibits": [
-      {
-       "title": "3 склада кВт·ч×тариф; 28%; capex $1.15M; opex $64k",
-       "triggers": [
-        "энергозатраты",
-        "расход по складам",
-        "тарифы"
-       ]
-      }
-     ]
+     "conditional_exhibits": []
     },
     {
      "step": 3,
@@ -11296,7 +11605,49 @@
    "generation": "D",
    "header_md": "**Type · Private-label CPG · F5 · Ловушка #108 (Trap-flip, naive #2 blended-vs-segment)**\nDifficulty: Easy · Prototype: Kraft-Heinz PL · IO: Non-Durables, Kellogg p.221 · Layer: mental-math",
    "prompt_md": "**Marlcore Labels** выпускает продукцию под собственными марками ритейлеров (private-label) для двух каналов: **Grocery** и **Discount**. Общая маржа выглядит нормально. Менеджмент хочет расширять Discount (он растёт быстрее). Стоит ли?",
-   "exhibits": [],
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Exhibit — Channel P&L ($M)",
+     "body_md": "Grocery: revenue $62M, variable cost $44M, fixed $9M. Discount: revenue $38M, variable cost $33M, fixed $7M. (Итого: rev $100M, cost $93M.)",
+     "reveal": "on_request",
+     "triggers": [
+      "contribution",
+      "data",
+      "exhibit",
+      "данные",
+      "маржа каналов",
+      "по каналам",
+      "по сегментам",
+      "разбивка Grocery/Discount",
+      "цифры"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Канал",
+       "Revenue",
+       "Variable cost",
+       "Fixed"
+      ],
+      "rows": [
+       [
+        "Grocery",
+        "62,000,000",
+        "44,000,000",
+        "9,000,000"
+       ],
+       [
+        "Discount",
+        "38,000,000",
+        "33,000,000",
+        "7,000,000"
+       ]
+      ],
+      "note": "Итого: revenue $100M · total cost $93M."
+     }
+    }
+   ],
    "steps": [
     {
      "step": 1,
@@ -11326,17 +11677,7 @@
      "candidate_md": "Сегментная маржа каналов.",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nGrocery 62/44/9; Discount 38/33/7\n\nEXPECTED ANSWER:\nGrocery +14.52%, Discount −5.26% (−$2M) -> флип\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) Grocery profit +9M/14.52%; (2) Discount −2M/−5.26%; (3) вывод НЕ расширять.",
      "hints": {},
-     "conditional_exhibits": [
-      {
-       "title": "Grocery 62/44/9; Discount 38/33/7",
-       "triggers": [
-        "по сегментам",
-        "маржа каналов",
-        "разбивка Grocery/Discount",
-        "contribution"
-       ]
-      }
-     ]
+     "conditional_exhibits": []
     },
     {
      "step": 4,
@@ -11372,7 +11713,57 @@
    "generation": "D",
    "header_md": "**Type · Fast-casual QSR · F1 (interviewee-led) · Ловушка #109 (Trap-flip, naive #14 fixed-cost allocation)**\nDifficulty: Medium · Prototype: QSR-сети · IO: Restaurant labor, Kellogg p.227 · Layer: mental-math, hypothesis-update",
    "prompt_md": "**Tandora Foods** (сеть fast-casual, 40 точек) рассматривает покупку региональной сети из **12 точек**. Партнёр хочет знать, создаёт ли сделка ценность.",
-   "exhibits": [],
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Exhibit — Target & Tandora economics",
+     "body_md": "Таргет: 12 точек, выручка $1,450,000/точку, var ratio 82%, собственная центральная кухня (commissary) $4,200,000. Tandora: 40 точек, корпоративный overhead $12,000,000.",
+     "reveal": "on_request",
+     "triggers": [
+      "commissary",
+      "data",
+      "exhibit",
+      "incremental",
+      "overhead Tandora",
+      "данные",
+      "цифры",
+      "экономика таргета"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Item",
+       "Value"
+      ],
+      "rows": [
+       [
+        "Точек у таргета",
+        "12"
+       ],
+       [
+        "Выручка/точку",
+        "$1,450,000"
+       ],
+       [
+        "Var ratio",
+        "82%"
+       ],
+       [
+        "Commissary таргета",
+        "$4,200,000"
+       ],
+       [
+        "Точек у Tandora",
+        "40"
+       ],
+       [
+        "Корп. overhead Tandora",
+        "$12,000,000"
+       ]
+      ]
+     }
+    }
+   ],
    "steps": [
     {
      "step": 1,
@@ -11393,17 +11784,7 @@
      "candidate_md": "Наивная оценка gain.",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\n12 точек $1.45M/82% var; commissary $4.2M; Tandora 40 точек/overhead $12M\n\nEXPECTED ANSWER:\nunit_contrib $261k; naive gain $3,132,000 -> BUY\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) unit_contrib=1.45M×0.18=261,000; (2) naive_alloc=12M/52=230,769.23; (3) freed=2,769,230.77; (4) naive gain=3,132,000; наив-вывод BUY.",
      "hints": {},
-     "conditional_exhibits": [
-      {
-       "title": "12 точек $1.45M/82% var; commissary $4.2M; Tandora 40 точек/",
-       "triggers": [
-        "экономика таргета",
-        "commissary",
-        "overhead Tandora",
-        "incremental"
-       ]
-      }
-     ]
+     "conditional_exhibits": []
     },
     {
      "step": 3,
@@ -11448,7 +11829,79 @@
    "generation": "D",
    "header_md": "**Type · Generic pharma · F1 (interviewee-led) · Ловушка #110 (Trap-flip, naive #9 wrong-discount-horizon)**\nDifficulty: Medium · Prototype: Teva/Mylan · IO: Life Sciences/Pharma, Stern p.18 · Layer: mental-math",
    "prompt_md": "**Venclar Pharma** (дженерики) решает: инвестировать **$28M capex** в собственное производство ключевого API (активной субстанции) или продолжать закупать у поставщика. Собственное производство даёт экономию **$6.1M/год**. Инвестировать?",
-   "exhibits": [],
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Exhibit — Automation proposal",
+     "body_md": "Capex $28M. Экономия $6.1M/год. Ставка дисконта 11%.",
+     "reveal": "on_request",
+     "triggers": [
+      "capex",
+      "data",
+      "exhibit",
+      "данные",
+      "параметры проекта",
+      "цифры",
+      "экономия"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Item",
+       "Value"
+      ],
+      "rows": [
+       [
+        "Capex",
+        "$28M"
+       ],
+       [
+        "Экономия",
+        "$6.1M/год"
+       ],
+       [
+        "Discount rate",
+        "11%"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "ex2",
+     "title": "Exhibit — Technology lifecycle",
+     "body_md": "Платформа устаревает: поток экономии обрывается в год 5 (проект живёт 4 года). Salvage value $2M в год 4.",
+     "reveal": "on_request",
+     "triggers": [
+      "data",
+      "exhibit",
+      "lifecycle",
+      "salvage",
+      "данные",
+      "обрыв",
+      "сколько лет",
+      "срок службы",
+      "устареет",
+      "цифры"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Item",
+       "Value"
+      ],
+      "rows": [
+       [
+        "Обрыв экономии",
+        "год 5 (живёт 4 года)"
+       ],
+       [
+        "Salvage, год 4",
+        "$2M"
+       ]
+      ]
+     }
+    }
+   ],
    "steps": [
     {
      "step": 1,
@@ -11534,7 +11987,45 @@
    "generation": "D",
    "header_md": "**Type · Semiconductors · F1 (interviewee-led) · Ловушка #111 (Trap-flip, naive #5 sunk-cost inclusion)**\nDifficulty: Medium · Prototype: TSMC/GlobalFoundries · IO: Technology (obsolescence/R&D), Stern p.15 · Layers: mental-math, hypothesis-update",
    "prompt_md": "Клиент — **Nyvertis Systems**, производитель полупроводников. Nyvertis два года разрабатывает собственный чип нового поколения и уже много вложил. Появилась альтернатива: купить стартап с готовым дизайном аналогичного чипа. Партнёр: доделывать своё (build) или покупать (buy)?",
-   "exhibits": [],
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Exhibit — Build vs Buy (forward-looking)",
+     "body_md": "Уже потрачено на собственную разработку (sunk): $225M. BUILD: осталось вложить $140M, PV будущих выгод $300M. BUY: цена $210M + интеграция $25M, PV будущих выгод $430M.",
+     "reveal": "on_request",
+     "triggers": [
+      "data",
+      "exhibit",
+      "forward costs",
+      "данные",
+      "сколько уже потрачено",
+      "структура затрат",
+      "цифры",
+      "что ещё нужно вложить"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Опция",
+       "Forward cost",
+       "PV выгод"
+      ],
+      "rows": [
+       [
+        "BUILD (достроить своё)",
+        "$140M",
+        "$300M"
+       ],
+       [
+        "BUY (купить таргет)",
+        "$210M + $25M интеграция",
+        "$430M"
+       ]
+      ],
+      "note": "Уже потрачено на собственную разработку (sunk): $225M."
+     }
+    }
+   ],
    "steps": [
     {
      "step": 1,
@@ -11555,17 +12046,7 @@
      "candidate_md": "Наивное сравнение путей.",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nsunk $225M; build fwd cost $140M/PV $300M; buy $210M+$25M/PV $430M\n\nEXPECTED ANSWER:\nbuild_naive $160M; buy_naive −$30M (со списанием sunk) -> BUILD\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) build_fwd=300−140=160M; (2) buy со списанием sunk=195−225=−30M; (3) наив-вывод BUILD.",
      "hints": {},
-     "conditional_exhibits": [
-      {
-       "title": "sunk $225M; build fwd cost $140M/PV $300M; buy $210M+$25M/PV",
-       "triggers": [
-        "сколько уже потрачено",
-        "структура затрат",
-        "forward costs",
-        "что ещё нужно вложить"
-       ]
-      }
-     ]
+     "conditional_exhibits": []
     },
     {
      "step": 3,
@@ -11750,7 +12231,69 @@
    "generation": "D",
    "header_md": "**Type · Streaming/TV · F5 · Ловушка #113 (Trap-flip, naive #11 churn-vs-acquisition)**\nDifficulty: Medium · Prototype: Netflix/Hulu · IO: Media (subscriptions), Stern p.20 · Layers: mental-math, hypothesis-update",
    "prompt_md": "**Vaydell Media** (стриминг) хочет расти. Команда видит **420,000** новых подписчиков за квартал и предлагает влить бюджет в привлечение. Правильный ли это ход?",
-   "exhibits": [],
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Exhibit — Subscriber acquisition",
+     "body_md": "Gross adds 420,000/год. Текущая база 3,100,000 подписчиков.",
+     "reveal": "on_request",
+     "triggers": [
+      "data",
+      "exhibit",
+      "данные",
+      "новые подписчики",
+      "приток",
+      "рост базы",
+      "цифры"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Item",
+       "Value"
+      ],
+      "rows": [
+       [
+        "Gross adds",
+        "420,000/год"
+       ],
+       [
+        "База",
+        "3,100,000"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "ex2",
+     "title": "Exhibit — Retention",
+     "body_md": "Churn 5.0% в месяц.",
+     "reveal": "on_request",
+     "triggers": [
+      "churn",
+      "data",
+      "exhibit",
+      "данные",
+      "отток",
+      "сколько уходит",
+      "удержание",
+      "цифры"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Item",
+       "Value"
+      ],
+      "rows": [
+       [
+        "Churn",
+        "5.0%/мес"
+       ]
+      ]
+     }
+    }
+   ],
    "steps": [
     {
      "step": 1,
@@ -11771,15 +12314,7 @@
      "candidate_md": "Оцени рост по Exhibit A.",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\ngross adds 420k, база 3.1M\n\nEXPECTED ANSWER:\nнаив видит +13.55%, рост\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) +420k/3.1M=+13.55%; (2) фиксирует как наив-рост.",
      "hints": {},
-     "conditional_exhibits": [
-      {
-       "title": "gross adds 420k, база 3.1M",
-       "triggers": [
-        "новые подписчики",
-        "рост базы"
-       ]
-      }
-     ]
+     "conditional_exhibits": []
     },
     {
      "step": 3,
@@ -11797,17 +12332,7 @@
      "candidate_md": "Чистый рост с churn.",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nchurn 5.0%/мес\n\nEXPECTED ANSWER:\nchurned 442,138; net −22,138 -> база сокращается\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) churned=3.1M×(1−0.95^3)=442,138; (2) net=−22,138; (3) вывод — направление перевёрнуто, чинить churn.",
      "hints": {},
-     "conditional_exhibits": [
-      {
-       "title": "churn 5.0%/мес",
-       "triggers": [
-        "отток",
-        "churn",
-        "удержание",
-        "сколько уходит"
-       ]
-      }
-     ]
+     "conditional_exhibits": []
     },
     {
      "step": 5,
@@ -11952,7 +12477,50 @@
    "generation": "D",
    "header_md": "**Type · Diagnostic labs · F5 · Ловушка #115 (Trap-flip, naive #13 mix-shift)**\nDifficulty: Easy · Prototype: Labcorp/Quest · IO: Healthcare Providers, Stern p.16 · Layer: mental-math",
    "prompt_md": "**Verithex Labs** (диагностическая лаборатория) видит рост объёма тестов, но прибыль падает. Объём вырос — почему прибыль вниз, и что делать?",
-   "exhibits": [],
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Exhibit — Test mix shift",
+     "body_md": "Specialty: цена $220, себестоимость $90, объём 120,000 → 95,000. Routine: цена $45, себестоимость $31, объём 340,000 → 430,000.",
+     "reveal": "on_request",
+     "triggers": [
+      "data",
+      "exhibit",
+      "данные",
+      "маржа тестов",
+      "микс",
+      "объёмы",
+      "по типам тестов",
+      "цифры"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Тип теста",
+       "Цена",
+       "Себестоимость",
+       "Объём old",
+       "Объём new"
+      ],
+      "rows": [
+       [
+        "Specialty",
+        "$220",
+        "$90",
+        "120,000",
+        "95,000"
+       ],
+       [
+        "Routine",
+        "$45",
+        "$31",
+        "340,000",
+        "430,000"
+       ]
+      ]
+     }
+    }
+   ],
    "steps": [
     {
      "step": 1,
@@ -12028,7 +12596,107 @@
    "generation": "D",
    "header_md": "**Type · Launch services · F6 · Ловушка #116 (Trap-flip, naive #10 capacity/ramp)**\nDifficulty: **Hard** · Prototype: SpaceX/ULA · IO: Industrials (capital-intensive), Stern p.22 · Layers: mental-math, hypothesis-update, open-drive",
    "prompt_md": "**Aventyr Launch Systems** решает, входить ли на рынок коммерческих космических запусков со своей новой ракетой. Проектная мощность — 24 запуска/год. Партнёр: входить ли?",
-   "exhibits": [],
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Exhibit — Launch economics",
+     "body_md": "Цена запуска $62M, var cost $38M → contribution $24M/запуск. Годовой fixed $280M. Capex $900M. Nameplate capacity 24 запуска/год. Ставка 12%, горизонт 8 лет.",
+     "reveal": "on_request",
+     "triggers": [
+      "capex",
+      "data",
+      "exhibit",
+      "данные",
+      "данные входа",
+      "цена запуска",
+      "цифры",
+      "экономика запуска"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Item",
+       "Value"
+      ],
+      "rows": [
+       [
+        "Цена запуска",
+        "$62M"
+       ],
+       [
+        "Var cost/запуск",
+        "$38M"
+       ],
+       [
+        "Contribution/запуск",
+        "$24M"
+       ],
+       [
+        "Годовой fixed",
+        "$280M"
+       ],
+       [
+        "Capex",
+        "$900M"
+       ],
+       [
+        "Nameplate capacity",
+        "24/год"
+       ],
+       [
+        "Discount rate",
+        "12%"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "ex2",
+     "title": "Exhibit — Production ramp (launches per year)",
+     "body_md": "Реальный ramp запусков по годам 1–8: 4, 8, 13, 18, 22, 24, 24, 24.",
+     "reveal": "on_request",
+     "triggers": [
+      "data",
+      "exhibit",
+      "ramp",
+      "данные",
+      "производство/лицензии",
+      "пропускная способность",
+      "сколько запусков в первый год",
+      "цифры"
+     ],
+     "render": {
+      "type": "line",
+      "unit": "запусков/год",
+      "categories": [
+       "Y1",
+       "Y2",
+       "Y3",
+       "Y4",
+       "Y5",
+       "Y6",
+       "Y7",
+       "Y8"
+      ],
+      "series": [
+       {
+        "name": "Запуски",
+        "values": [
+         4,
+         8,
+         13,
+         18,
+         22,
+         24,
+         24,
+         24
+        ]
+       }
+      ],
+      "note": "Nameplate 24/год достигается только к году 6."
+     }
+    }
+   ],
    "steps": [
     {
      "step": 1,
@@ -12067,17 +12735,7 @@
      "candidate_md": "NPV с реальным ramp.",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nramp 4,8,13,18,22,24,24,24\n\nEXPECTED ANSWER:\ncorrect NPV −$470,933,584 -> SKIP\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) ramp-NPV=−470,933,584; (2) вывод SKIP; (3) overstate назван от NPV (~221% от |correct|).",
      "hints": {},
-     "conditional_exhibits": [
-      {
-       "title": "ramp 4,8,13,18,22,24,24,24",
-       "triggers": [
-        "пропускная способность",
-        "ramp",
-        "сколько запусков в первый год",
-        "производство/лицензии"
-       ]
-      }
-     ]
+     "conditional_exhibits": []
     },
     {
      "step": 5,
@@ -12113,7 +12771,52 @@
    "generation": "D",
    "header_md": "**Type · Coffee retail · F7 · Ловушка #117 (CLEAN — validate no reversal)**\nDifficulty: Easy · Prototype: Starbucks/Peet's · IO: Beverages, Kellogg p.231 · Layers: mental-math, open-drive",
    "prompt_md": "**Broomhill Roasters** (сеть кофеен) рассматривает открытие **5 точек** в новом городе. Экономика выглядит привлекательно. Открывать ли?\n\n*(Clean-кейс: наив и correct совпадают. Задача кандидата — проверить, что нет скрытого подвоха — каннибализация, насыщение — убедиться, что его нет, и явно это сказать.)*",
-   "exhibits": [],
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Exhibit — Per-store economics",
+     "body_md": "На точку: выручка $720,000/год, var 62%, fixed $140,000/год, buildout (capex открытия) $240,000. План: 5 новых точек.",
+     "reveal": "on_request",
+     "triggers": [
+      "capex открытия",
+      "data",
+      "exhibit",
+      "выручка/затраты точки",
+      "данные",
+      "цифры",
+      "экономика точки"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Item",
+       "Value"
+      ],
+      "rows": [
+       [
+        "Выручка/точку",
+        "$720,000"
+       ],
+       [
+        "Var ratio",
+        "62%"
+       ],
+       [
+        "Fixed/точку",
+        "$140,000"
+       ],
+       [
+        "Buildout/точку",
+        "$240,000"
+       ],
+       [
+        "План",
+        "5 точек"
+       ]
+      ]
+     }
+    }
+   ],
    "steps": [
     {
      "step": 1,
@@ -12134,16 +12837,7 @@
      "candidate_md": "Экономика точки и payback.",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nrev $720k, var 62%, fixed $140k, buildout $240k ×5\n\nEXPECTED ANSWER:\nприбыль/точка $133,600; годовая $668k; payback 1.80\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) contrib=720k×0.38=273,600; (2) store_profit=133,600; (3) payback=1.2M/668k≈1.80.",
      "hints": {},
-     "conditional_exhibits": [
-      {
-       "title": "rev $720k, var 62%, fixed $140k, buildout $240k ×5",
-       "triggers": [
-        "экономика точки",
-        "выручка/затраты точки",
-        "capex открытия"
-       ]
-      }
-     ]
+     "conditional_exhibits": []
     },
     {
      "step": 3,
@@ -12188,7 +12882,73 @@
    "generation": "D",
    "header_md": "**Type · Retail brokerage · F1 (interviewee-led) · Ловушка #118 (Trap-flip, naive #12 regulator/fee-cap, добор)**\nDifficulty: Medium · Prototype: Charles Schwab · IO: Banking (commissions/pfof), Stern p.12 · Layers: mental-math, hypothesis-update",
    "prompt_md": "**Kaldwin Securities** — розничный брокер с нулевой комиссией ($0 за сделку). Менеджмент предлагает ввести плату **$0.65** за исполнение сделки, чтобы создать новый поток дохода. Вводить ли плату?",
-   "exhibits": [],
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Exhibit — Current revenue model",
+     "body_md": "48,000,000 сделок/год. Предлагаемая комиссия $0.65/сделку. Текущий PFOF-доход $42M/год.",
+     "reveal": "on_request",
+     "triggers": [
+      "data",
+      "exhibit",
+      "pfof",
+      "данные",
+      "объём сделок",
+      "текущий доход",
+      "цифры"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Item",
+       "Value"
+      ],
+      "rows": [
+       [
+        "Сделок/год",
+        "48,000,000"
+       ],
+       [
+        "Предлагаемая комиссия",
+        "$0.65"
+       ],
+       [
+        "PFOF-доход сейчас",
+        "$42M/год"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "ex2",
+     "title": "Exhibit — Client reaction estimate",
+     "body_md": "При введении комиссии на фоне конкурентов с $0: ожидаемый отток 50% объёма сделок.",
+     "reveal": "on_request",
+     "triggers": [
+      "data",
+      "exhibit",
+      "данные",
+      "конкуренты $0",
+      "отток",
+      "реакция клиентов",
+      "уйдут ли клиенты",
+      "цифры"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Item",
+       "Value"
+      ],
+      "rows": [
+       [
+        "Ожидаемый отток объёма",
+        "50%"
+       ]
+      ]
+     }
+    }
+   ],
    "steps": [
     {
      "step": 1,
@@ -12209,16 +12969,7 @@
      "candidate_md": "Наивный доход.",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\n48M сделок, fee $0.65, pfof $42M\n\nEXPECTED ANSWER:\nrev_naive $73.2M -> INTRODUCE\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) 0.65×48M=31.2M; (2) +42M=73.2M; (3) наив-вывод INTRODUCE.",
      "hints": {},
-     "conditional_exhibits": [
-      {
-       "title": "48M сделок, fee $0.65, pfof $42M",
-       "triggers": [
-        "текущий доход",
-        "объём сделок",
-        "pfof"
-       ]
-      }
-     ]
+     "conditional_exhibits": []
     },
     {
      "step": 3,
@@ -12236,17 +12987,7 @@
      "candidate_md": "Доход с оттоком.",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nотток 50%\n\nEXPECTED ANSWER:\nrev_correct $36.6M < $42M pfof -> KEEP $0\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) trades_after=24M, pfof_after=21M; (2) rev_correct=15.6M+21M=36.6M; (3) вывод KEEP; (4) overstate назван от fee-дохода (100%).",
      "hints": {},
-     "conditional_exhibits": [
-      {
-       "title": "отток 50%",
-       "triggers": [
-        "отток",
-        "уйдут ли клиенты",
-        "конкуренты $0",
-        "реакция клиентов"
-       ]
-      }
-     ]
+     "conditional_exhibits": []
     },
     {
      "step": 5,
@@ -12282,7 +13023,78 @@
    "generation": "D",
    "header_md": "**Type · Steel mfg · F5 · Ловушка #119 (Trap-flip, naive #6 make-vs-buy)**\nDifficulty: Medium · Prototype: Nucor/ArcelorMittal · IO: Industrials/Energy, Stern p.22 / Kellogg p.232 · Layer: mental-math",
    "prompt_md": "**Voskorn Steel** производит специальный компонент (легирующие электроды) собственными силами. Поставщик предлагает продавать его дешевле, чем внутренняя себестоимость. Переходить ли на закупку (buy) или оставить своё (make)?",
-   "exhibits": [],
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Exhibit — Make vs Buy (per tonne)",
+     "body_md": "MAKE: var $340/т + fixed alloc $180/т. BUY: $470/т. Объём 50,000 т/год.",
+     "reveal": "on_request",
+     "triggers": [
+      "data",
+      "exhibit",
+      "make or buy",
+      "данные",
+      "данные производства",
+      "затраты",
+      "цифры"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Опция",
+       "$/т"
+      ],
+      "rows": [
+       [
+        "MAKE var (cash)",
+        "340"
+       ],
+       [
+        "MAKE fixed alloc",
+        "180"
+       ],
+       [
+        "BUY",
+        "470"
+       ]
+      ],
+      "note": "Объём 50,000 т/год."
+     }
+    },
+    {
+     "id": "ex2",
+     "title": "Exhibit — Fixed cost breakdown",
+     "body_md": "Из $180/т fixed: avoidable (исчезает при переходе на закупку) $55/т, unavoidable $125/т.",
+     "reveal": "on_request",
+     "triggers": [
+      "avoidable",
+      "data",
+      "exhibit",
+      "данные",
+      "можно ли продать печь",
+      "структура fixed",
+      "цифры",
+      "что исчезнет при переходе"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Fixed component",
+       "$/т"
+      ],
+      "rows": [
+       [
+        "Avoidable",
+        "55"
+       ],
+       [
+        "Unavoidable",
+        "125"
+       ]
+      ]
+     }
+    }
+   ],
    "steps": [
     {
      "step": 1,
@@ -12312,17 +13124,7 @@
      "candidate_md": "Весь ли fixed avoidable?",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\navoidable $55/т, unavoidable $125/т\n\nEXPECTED ANSWER:\nmake_avoidable $395; buy_total $595 (цена + висящий unavoidable)\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) make_avoidable=340+55=395; (2) unavoidable=125 остаётся; (3) buy_total=470+125=595.",
      "hints": {},
-     "conditional_exhibits": [
-      {
-       "title": "avoidable $55/т, unavoidable $125/т",
-       "triggers": [
-        "структура fixed",
-        "что исчезнет при переходе",
-        "avoidable",
-        "можно ли продать печь"
-       ]
-      }
-     ]
+     "conditional_exhibits": []
     },
     {
      "step": 4,
@@ -12367,7 +13169,77 @@
    "generation": "D",
    "header_md": "**Type · Frozen food processing · F1 (interviewee-led) · Ловушка #120 (Trap-flip, naive #9 wrong-discount-horizon, добор)**\nDifficulty: Medium · Prototype: McCain/Lamb Weston · IO: Non-Durables/CPG, Kellogg p.221 · Layers: mental-math, hypothesis-update",
    "prompt_md": "**Tuberno Foods** (переработка замороженных продуктов) рассматривает вход в новый регион, требующий строительства морозильного распредцентра (**$34M capex**). Выгода — маржа с продаж в регионе при контракте с якорным ритейлером. Входить ли?",
-   "exhibits": [],
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Exhibit — Entry economics",
+     "body_md": "Capex $34M. Маржа $5.8M/год. Ставка дисконта 11%.",
+     "reveal": "on_request",
+     "triggers": [
+      "capex",
+      "data",
+      "exhibit",
+      "данные",
+      "маржа",
+      "цифры",
+      "экономика входа"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Item",
+       "Value"
+      ],
+      "rows": [
+       [
+        "Capex",
+        "$34M"
+       ],
+       [
+        "Маржа",
+        "$5.8M/год"
+       ],
+       [
+        "Discount rate",
+        "11%"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "ex2",
+     "title": "Exhibit — Anchor contract horizon",
+     "body_md": "Контракт якорного клиента: 5 лет. После — переход на private label; остаточная маржа 30% в годы 6–8.",
+     "reveal": "on_request",
+     "triggers": [
+      "data",
+      "exhibit",
+      "private label",
+      "горизонт контракта",
+      "данные",
+      "как долго якорь",
+      "сколько лет маржа",
+      "цифры"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Item",
+       "Value"
+      ],
+      "rows": [
+       [
+        "Контракт якоря",
+        "5 лет"
+       ],
+       [
+        "Годы 6–8",
+        "остаточная маржа 30%"
+       ]
+      ]
+     }
+    }
+   ],
    "steps": [
     {
      "step": 1,
@@ -12406,17 +13278,7 @@
      "candidate_md": "Правильный PV (5 лет + остаточные).",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nконтракт 5 лет; после private-label, остаточная 30% годы 6-8\n\nEXPECTED ANSWER:\nPV $23,959,595 < $34M -> SKIP\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) 5-лет полн + 3×30% остаточных = 23,959,595; (2) вывод SKIP; (3) overstate назван от PV маржи (~74%).",
      "hints": {},
-     "conditional_exhibits": [
-      {
-       "title": "контракт 5 лет; после private-label, остаточная 30% годы 6-8",
-       "triggers": [
-        "горизонт контракта",
-        "как долго якорь",
-        "private label",
-        "сколько лет маржа"
-       ]
-      }
-     ]
+     "conditional_exhibits": []
     },
     {
      "step": 5,
@@ -12452,7 +13314,81 @@
    "generation": "D",
    "header_md": "**Type · Pharma/biotech · F1 (interviewee-led) · Ловушка #121 (Trap-flip, naive #4 gross-vs-net synergy)**\nDifficulty: **Hard** · Prototype: Pfizer/Merck M&A · IO: Life Sciences/Pharma (high R&D, off-patent M&A), Stern p.18 · Layers: mental-math, hypothesis-update",
    "prompt_md": "Клиент — **Nevrantis Pharma**. Рассматривает приобретение target-компании, платя **$820M премии** сверх автономной стоимости. Сделку оправдывают синергиями: заявленная валовая (gross) синергия **$165M/год**. Партнёр: оправдывает ли синергия премию — покупать или уходить?",
-   "exhibits": [],
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Exhibit — Deal & synergy headline",
+     "body_md": "Gross synergy $165M/год. Премия к цене $820M. Ставка 10%, горизонт 10 лет.",
+     "reveal": "on_request",
+     "triggers": [
+      "data",
+      "exhibit",
+      "данные",
+      "премия",
+      "синергия",
+      "цифры",
+      "экономика сделки"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Item",
+       "Value"
+      ],
+      "rows": [
+       [
+        "Gross synergy",
+        "$165M/год"
+       ],
+       [
+        "Премия",
+        "$820M"
+       ],
+       [
+        "Discount rate",
+        "10%"
+       ],
+       [
+        "Horizon",
+        "10 лет"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "ex2",
+     "title": "Exhibit — Costs to achieve",
+     "body_md": "Upfront costs-to-achieve $240M. Эрозия синергии $35M/год.",
+     "reveal": "on_request",
+     "triggers": [
+      "costs to achieve",
+      "data",
+      "exhibit",
+      "данные",
+      "синергия net",
+      "стоимость интеграции",
+      "цифры",
+      "что стоит реализовать синергию"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Item",
+       "Value"
+      ],
+      "rows": [
+       [
+        "Upfront CTA",
+        "$240M"
+       ],
+       [
+        "Эрозия синергии",
+        "$35M/год"
+       ]
+      ]
+     }
+    }
+   ],
    "steps": [
     {
      "step": 1,
@@ -12491,17 +13427,7 @@
      "candidate_md": "Net PV синергии.",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nupfront CTA $240M, эрозия $35M/год\n\nEXPECTED ANSWER:\nnet PV $558,793,724 < премия -> WALK/renegotiate\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) net_syn=165−35=130M; (2) net_pv=130M×A−240M=558,793,724; (3) вывод WALK; (4) overstate назван от синергии-PV (~81.44% от net), НЕ от премии/equity.",
      "hints": {},
-     "conditional_exhibits": [
-      {
-       "title": "upfront CTA $240M, эрозия $35M/год",
-       "triggers": [
-        "costs to achieve",
-        "стоимость интеграции",
-        "синергия net",
-        "что стоит реализовать синергию"
-       ]
-      }
-     ]
+     "conditional_exhibits": []
     },
     {
      "step": 5,
@@ -12666,7 +13592,82 @@
    "generation": "D",
    "header_md": "**Type · Retail grocery · F5 · Ловушка #123 (Trap-flip, naive #8 price elasticity via basket)**\nDifficulty: Medium · Prototype: Kroger/Tesco · IO: Retail (traffic × basket), Stern p.13 · Layer: mental-math",
    "prompt_md": "**Halcombe Grocery** хочет поднять цену на молоко (staple) с **$3.20** до **$3.68** для роста маржи. Поднимать ли цену?",
-   "exhibits": [],
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Exhibit — Milk pricing",
+     "body_md": "900,000 покупателей. Цена молока $3.20 → предлагается $3.68. Себестоимость $3.05.",
+     "reveal": "on_request",
+     "triggers": [
+      "data",
+      "exhibit",
+      "данные",
+      "данные категории",
+      "молоко",
+      "текущая цена",
+      "цифры"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Item",
+       "Value"
+      ],
+      "rows": [
+       [
+        "Покупателей",
+        "900,000"
+       ],
+       [
+        "Цена сейчас",
+        "$3.20"
+       ],
+       [
+        "Предлагаемая",
+        "$3.68"
+       ],
+       [
+        "Себестоимость",
+        "$3.05"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "ex2",
+     "title": "Exhibit — Basket economics",
+     "body_md": "Маржа полной корзины $11.40/визит. Ожидаемый отток покупателей при повышении: 18%.",
+     "reveal": "on_request",
+     "triggers": [
+      "basket",
+      "data",
+      "exhibit",
+      "loss leader",
+      "данные",
+      "корзина",
+      "отток покупателей",
+      "цифры",
+      "что ещё покупают"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Item",
+       "Value"
+      ],
+      "rows": [
+       [
+        "Маржа корзины",
+        "$11.40/визит"
+       ],
+       [
+        "Отток покупателей",
+        "18%"
+       ]
+      ]
+     }
+    }
+   ],
    "steps": [
     {
      "step": 1,
@@ -12696,18 +13697,7 @@
      "candidate_md": "Basket-эффект.",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nbasket margin $11.40, отток 18%\n\nEXPECTED ANSWER:\nполная old $10,395,000 -> new $8,878,140 (−14.59%) -> HOLD\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) tot_old=(0.15+11.40)×900k=10,395,000; (2) tot_new=(0.63+11.40)×738k=8,878,140; (3) вывод HOLD (флип).",
      "hints": {},
-     "conditional_exhibits": [
-      {
-       "title": "basket margin $11.40, отток 18%",
-       "triggers": [
-        "корзина",
-        "basket",
-        "что ещё покупают",
-        "отток покупателей",
-        "loss leader"
-       ]
-      }
-     ]
+     "conditional_exhibits": []
     },
     {
      "step": 4,
@@ -12743,7 +13733,78 @@
    "generation": "D",
    "header_md": "**Type · Oil&gas midstream · F5 · Ловушка #124 (Trap-flip, naive #6 make-vs-buy avoidable)**\nDifficulty: Medium · Prototype: Kinder Morgan/Enbridge · IO: Oil&Gas midstream (transportation/compression), Stern p.21 · Layer: mental-math",
    "prompt_md": "**Dornevar Midstream** сама обслуживает **42 компрессорные станции** (in-house maintenance). Поставщик предлагает аутсорс обслуживания дешевле полной внутренней себестоимости. Переходить на аутсорс или оставить своё?",
-   "exhibits": [],
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Exhibit — In-house vs outsource",
+     "body_md": "In-house: var $520,000 + fixed $310,000. Outsource: $720,000. Объём: 42 станции.",
+     "reveal": "on_request",
+     "triggers": [
+      "data",
+      "exhibit",
+      "in-house",
+      "outsource",
+      "данные",
+      "затраты обслуживания",
+      "цифры"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Опция",
+       "$/год"
+      ],
+      "rows": [
+       [
+        "In-house var",
+        "520,000"
+       ],
+       [
+        "In-house fixed",
+        "310,000"
+       ],
+       [
+        "Outsource",
+        "720,000"
+       ]
+      ],
+      "note": "Объём обслуживания: 42 станции."
+     }
+    },
+    {
+     "id": "ex2",
+     "title": "Exhibit — Fixed cost breakdown",
+     "body_md": "Из $310k fixed: avoidable $95,000, unavoidable $215,000.",
+     "reveal": "on_request",
+     "triggers": [
+      "avoidable",
+      "data",
+      "exhibit",
+      "данные",
+      "можно ли распустить оборудование/штат",
+      "структура fixed",
+      "цифры",
+      "что исчезнет при аутсорсе"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Fixed component",
+       "$/год"
+      ],
+      "rows": [
+       [
+        "Avoidable",
+        "95,000"
+       ],
+       [
+        "Unavoidable",
+        "215,000"
+       ]
+      ]
+     }
+    }
+   ],
    "steps": [
     {
      "step": 1,
@@ -12773,17 +13834,7 @@
      "candidate_md": "Весь ли fixed avoidable?",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\navoidable $95k, unavoidable $215k\n\nEXPECTED ANSWER:\ninhouse_avoidable $615k; buy_total $935k\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) inhouse_avoidable=520+95=615k; (2) unavoidable=215k остаётся; (3) buy_total=720+215=935k.",
      "hints": {},
-     "conditional_exhibits": [
-      {
-       "title": "avoidable $95k, unavoidable $215k",
-       "triggers": [
-        "структура fixed",
-        "что исчезнет при аутсорсе",
-        "avoidable",
-        "можно ли распустить оборудование/штат"
-       ]
-      }
-     ]
+     "conditional_exhibits": []
     },
     {
      "step": 4,
@@ -12828,7 +13879,95 @@
    "generation": "D",
    "header_md": "**Type · Hospitality · F5 · Ловушка #125 (Trap-flip, naive #15 wrong-ranking criterion)**\nDifficulty: Easy · Prototype: Marriott/Hilton · IO: Airlines-adjacent (RevPAR ≈ load factor, capacity utilization), Stern p.19 [DEV] · Layer: mental-math",
    "prompt_md": "**Thelmwick Hotels** выбирает город для следующего отеля из трёх кандидатов (A, B, C). Партнёр: в каком городе строить?",
-   "exhibits": [],
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Exhibit — City fundamentals",
+     "body_md": "Город A: occupancy 82%, ADR $140, 180 номеров. Город B: 74%, $165, 200. Город C: 68%, $210, 160.",
+     "reveal": "on_request",
+     "triggers": [
+      "ADR",
+      "data",
+      "exhibit",
+      "occupancy",
+      "данные",
+      "номера",
+      "по городам",
+      "цифры"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Город",
+       "Occupancy",
+       "ADR",
+       "Номеров"
+      ],
+      "rows": [
+       [
+        "A",
+        "82%",
+        "$140",
+        "180"
+       ],
+       [
+        "B",
+        "74%",
+        "$165",
+        "200"
+       ],
+       [
+        "C",
+        "68%",
+        "$210",
+        "160"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "ex2",
+     "title": "Exhibit — Capex & operating cost",
+     "body_md": "Capex: A $42M, B $40M, C $33M. Годовой opcost: A $6.2M, B $6.8M, C $5.4M.",
+     "reveal": "on_request",
+     "triggers": [
+      "ROIC",
+      "capex",
+      "data",
+      "exhibit",
+      "opcost",
+      "данные",
+      "доходность капитала",
+      "стоимость постройки",
+      "цифры"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Город",
+       "Capex",
+       "Opcost/год"
+      ],
+      "rows": [
+       [
+        "A",
+        "$42M",
+        "$6.2M"
+       ],
+       [
+        "B",
+        "$40M",
+        "$6.8M"
+       ],
+       [
+        "C",
+        "$33M",
+        "$5.4M"
+       ]
+      ]
+     }
+    }
+   ],
    "steps": [
     {
      "step": 1,
@@ -12858,18 +13997,7 @@
      "candidate_md": "ROIC по городам.",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\ncapex A $42M/B $40M/C $33M; opcost\n\nEXPECTED ANSWER:\nROIC A 3.20%/B 5.28%/C 8.91% -> C лучший (флип A->C)\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) annual_rev=RevPAR×rooms×365; (2) ROIC через pctf: A 3.20/B 5.28/C 8.91%; (3) вывод C (флип от occupancy).",
      "hints": {},
-     "conditional_exhibits": [
-      {
-       "title": "capex A $42M/B $40M/C $33M; opcost",
-       "triggers": [
-        "capex",
-        "стоимость постройки",
-        "ADR",
-        "ROIC",
-        "доходность капитала"
-       ]
-      }
-     ]
+     "conditional_exhibits": []
     },
     {
      "step": 4,
@@ -12905,7 +14033,91 @@
    "generation": "D",
    "header_md": "**Type · Insurance · F6 · Ловушка #126 (Trap-flip, naive #14 fixed-cost allocation mirage + float)**\nDifficulty: **Hard** · Prototype: Allstate/Progressive · IO: Healthcare Payers (premium/payout) ≈ P&C insurance, Stern p.17 [DEV] · Layers: mental-math, hypothesis-update, open-drive",
    "prompt_md": "**Verrindale Insurance** (P&C-страховщик) видит, что одна из трёх линий бизнеса — Commercial — имеет combined ratio выше 100% и выглядит убыточной. Менеджмент предлагает закрыть Commercial. Партнёр: закрывать ли линию?",
-   "exhibits": [],
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Exhibit — Line P&L ($M)",
+     "body_md": "Auto: premium $480M, losses $312M, direct expenses $86M. Home: $300M/$174M/$51M. Commercial: $220M/$160M/$44M. Corporate OH: $60M на линию (аллоцирован поровну).",
+     "reveal": "on_request",
+     "triggers": [
+      "P&L линий",
+      "combined ratio",
+      "data",
+      "exhibit",
+      "данные",
+      "данные линий",
+      "по линиям",
+      "цифры"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Линия",
+       "Premium",
+       "Losses",
+       "Direct exp"
+      ],
+      "rows": [
+       [
+        "Auto",
+        "480",
+        "312",
+        "86"
+       ],
+       [
+        "Home",
+        "300",
+        "174",
+        "51"
+       ],
+       [
+        "Commercial",
+        "220",
+        "160",
+        "44"
+       ]
+      ],
+      "note": "Corporate OH: $60M на линию (аллоцирован поровну). Всё в $M."
+     }
+    },
+    {
+     "id": "ex2",
+     "title": "Exhibit — Investment income (float)",
+     "body_md": "Инвестиционный доход от float: Auto $14M, Home $9M, Commercial $31M (сумма $54M). Commercial держит длинные резервы.",
+     "reveal": "on_request",
+     "triggers": [
+      "contribution",
+      "data",
+      "exhibit",
+      "float",
+      "investment income",
+      "overhead avoidable",
+      "данные",
+      "долгосрочные резервы",
+      "цифры"
+     ],
+     "render": {
+      "type": "bar",
+      "unit": "$M",
+      "categories": [
+       "Auto",
+       "Home",
+       "Commercial"
+      ],
+      "series": [
+       {
+        "name": "Инвест. доход (float)",
+        "values": [
+         14,
+         9,
+         31
+        ]
+       }
+      ],
+      "note": "Сумма $54M. Commercial держит долгосрочные резервы — наибольший float."
+     }
+    }
+   ],
    "steps": [
     {
      "step": 1,
@@ -12944,18 +14156,7 @@
      "candidate_md": "Contribution + float.",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nfloat Auto $14M/Home $9M/Commercial $31M (сумма $54M)\n\nEXPECTED ANSWER:\ncontribution все положит (Commercial +$16M); float Commercial $31M max; закрытие $47M->$0\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) contribution 82/75/16M все положит; (2) float сумма=54M=company inv income; (3) total profit=underwriting −7M + float 54M=47M; (4) закрытие Commercial -> 0 (потеря 16M+31M); (5) вывод — оставить (флип).",
      "hints": {},
-     "conditional_exhibits": [
-      {
-       "title": "float Auto $14M/Home $9M/Commercial $31M (сумма $54M)",
-       "triggers": [
-        "contribution",
-        "overhead avoidable",
-        "investment income",
-        "float",
-        "долгосрочные резервы"
-       ]
-      }
-     ]
+     "conditional_exhibits": []
     },
     {
      "step": 5,
@@ -13127,7 +14328,69 @@
    "generation": "D",
    "header_md": "**Type · Consumer electronics · F5 · Ловушка #128 (Trap-flip, naive #1 historical-vs-replacement cost)**\nDifficulty: Easy · Prototype: Sony/Samsung · IO: Technology (product obsolescence), Stern p.15 · Layer: mental-math",
    "prompt_md": "**Voltrayd Electronics** ценообразует продукт, использующий чип-компонент, закупленный давно по низкой цене со склада. Команда считает маржу огромной и предлагает снизить цену для доли рынка. Снижать ли?",
-   "exhibits": [],
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Exhibit — Chip pricing",
+     "body_md": "Цена продажи устройства-компонента $48. Историческая себестоимость чипа на складе $22.",
+     "reveal": "on_request",
+     "triggers": [
+      "data",
+      "exhibit",
+      "данные",
+      "данные чипа",
+      "себестоимость",
+      "цена",
+      "цифры"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Item",
+       "Value"
+      ],
+      "rows": [
+       [
+        "Цена продажи",
+        "$48"
+       ],
+       [
+        "Историческая себестоимость",
+        "$22"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "ex2",
+     "title": "Exhibit — Replacement cost",
+     "body_md": "Текущая цена закупки такого же чипа (replacement): $39.",
+     "reveal": "on_request",
+     "triggers": [
+      "data",
+      "exhibit",
+      "replacement",
+      "данные",
+      "пополнение склада",
+      "сколько стоит купить сейчас",
+      "текущая цена чипа",
+      "цифры"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Item",
+       "Value"
+      ],
+      "rows": [
+       [
+        "Replacement cost",
+        "$39"
+       ]
+      ]
+     }
+    }
+   ],
    "steps": [
     {
      "step": 1,
@@ -13157,17 +14420,7 @@
      "candidate_md": "Релевантная стоимость.",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nreplacement $39\n\nEXPECTED ANSWER:\nmargin_repl $9 (18.75%) -> держать/поднять (флип)\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) margin_repl=48−39=9; (2) вывод держать; (3) overstate=188.89% от replacement-маржи $9 (искажаемая величина), НЕ от цены/equity.",
      "hints": {},
-     "conditional_exhibits": [
-      {
-       "title": "replacement $39",
-       "triggers": [
-        "replacement",
-        "текущая цена чипа",
-        "пополнение склада",
-        "сколько стоит купить сейчас"
-       ]
-      }
-     ]
+     "conditional_exhibits": []
     },
     {
      "step": 4,
@@ -13203,7 +14456,86 @@
    "generation": "D",
    "header_md": "**Type · Renewable energy · F1 (interviewee-led) · Ловушка #129 (Trap-flip, naive #5 sunk-cost)**\nDifficulty: Medium · Prototype: NextEra/Ørsted · IO: Oil&Gas/Energy (capex-intensive), Stern p.21 · Layers: mental-math, hypothesis-update",
    "prompt_md": "**Aurellian Renewables** вложила в изыскания и разрешения для площадки ветропарка. Теперь решает: достроить парк (build) или продать площадку с разрешениями (sell). Партнёр: что выбрать?",
-   "exhibits": [],
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Exhibit — Project status & offer",
+     "body_md": "Уже потрачено (sunk) $18M. Достроить: capex $95M, PV будущих потоков $118M. Предложение о продаже проекта: $34M (headline).",
+     "reveal": "on_request",
+     "triggers": [
+      "data",
+      "exhibit",
+      "forward",
+      "данные",
+      "сколько ещё вложить",
+      "цена продажи",
+      "цифры",
+      "что уже потрачено"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Item",
+       "Value"
+      ],
+      "rows": [
+       [
+        "Sunk (потрачено)",
+        "$18M"
+       ],
+       [
+        "Достроить: capex",
+        "$95M"
+       ],
+       [
+        "Достроить: PV потоков",
+        "$118M"
+       ],
+       [
+        "Предложение продажи",
+        "$34M headline"
+       ]
+      ]
+     }
+    },
+    {
+     "id": "ex2",
+     "title": "Exhibit — Offer composition",
+     "body_md": "Из $34M: land + permits $21M — передаются полностью. Grid slot $13M — transferable только на 55%.",
+     "reveal": "on_request",
+     "triggers": [
+      "data",
+      "exhibit",
+      "grid",
+      "transferability",
+      "данные",
+      "из чего состоит цена",
+      "передаётся ли всё",
+      "подключение к сети",
+      "цифры"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Компонент",
+       "Сумма",
+       "Передаётся"
+      ],
+      "rows": [
+       [
+        "Land + permits",
+        "$21M",
+        "полностью"
+       ],
+       [
+        "Grid slot",
+        "$13M",
+        "55%"
+       ]
+      ]
+     }
+    }
+   ],
    "steps": [
     {
      "step": 1,
@@ -13224,17 +14556,7 @@
      "candidate_md": "Наивное сравнение.",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nsunk $18M; build capex $95M/PV $118M; sell headline $34M\n\nEXPECTED ANSWER:\nbuild_fwd $23M; sell_naive $16M (со списанием sunk) -> BUILD\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) build_fwd=118−95=23M; (2) sell_naive=34−18=16M; (3) наив-вывод BUILD.",
      "hints": {},
-     "conditional_exhibits": [
-      {
-       "title": "sunk $18M; build capex $95M/PV $118M; sell headline $34M",
-       "triggers": [
-        "forward",
-        "сколько ещё вложить",
-        "цена продажи",
-        "что уже потрачено"
-       ]
-      }
-     ]
+     "conditional_exhibits": []
     },
     {
      "step": 3,
@@ -13261,18 +14583,7 @@
      "candidate_md": "Insight 2 — декомпозируй sell-цену $34M. Всё ли передаётся?",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nland+permits $21M (передаются); grid slot $13M @55% transferable\n\nEXPECTED ANSWER:\nsell_realized $28.15M (grid slot частично непередаваем); всё ещё SELL, запас $5.15M\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) кандидат САМ ставит под вопрос headline-цену; (2) grid_realized=13M×0.55=7.15M; (3) sell_realized=21M+7.15M=28.15M; (4) вывод SELL сохраняется, но запас тоньше.",
      "hints": {},
-     "conditional_exhibits": [
-      {
-       "title": "land+permits $21M (передаются); grid slot $13M @55% transfer",
-       "triggers": [
-        "из чего состоит цена",
-        "передаётся ли всё",
-        "grid",
-        "подключение к сети",
-        "transferability"
-       ]
-      }
-     ]
+     "conditional_exhibits": []
     },
     {
      "step": 6,
@@ -13308,7 +14619,48 @@
    "generation": "D",
    "header_md": "**Type · Edtech · F7 · Ловушка #130 (CLEAN — validate no reversal)**\nDifficulty: Easy · Prototype: Coursera/Chegg · IO: Technology (SaaS/subscription), Stern p.15 · Layers: mental-math, open-drive",
    "prompt_md": "**Skolvantia Learning** (edtech) рассматривает запуск новой курс-вертикали. Экономика выглядит привлекательно. Запускать ли?\n\n*(Clean-кейс: наив и correct совпадают. Задача кандидата — проверить, что нет скрытого разворота — каннибализация, насыщение — убедиться, что его нет, и явно сказать.)*",
-   "exhibits": [],
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Exhibit — New vertical economics",
+     "body_md": "Выручка вертикали $2.2M/год, var 35%, fixed $480,000/год, capex разработки $1.4M.",
+     "reveal": "on_request",
+     "triggers": [
+      "capex разработки",
+      "data",
+      "exhibit",
+      "выручка/затраты вертикали",
+      "данные",
+      "цифры",
+      "экономика"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Item",
+       "Value"
+      ],
+      "rows": [
+       [
+        "Выручка",
+        "$2.2M/год"
+       ],
+       [
+        "Var ratio",
+        "35%"
+       ],
+       [
+        "Fixed",
+        "$480,000/год"
+       ],
+       [
+        "Capex разработки",
+        "$1.4M"
+       ]
+      ]
+     }
+    }
+   ],
    "steps": [
     {
      "step": 1,
@@ -13329,16 +14681,7 @@
      "candidate_md": "Экономика вертикали и payback.",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nrev $2.2M, var 35%, fixed $480k, capex $1.4M\n\nEXPECTED ANSWER:\nannual profit $950,000; payback 1.47\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) contrib=2.2M×0.65=1,430,000; (2) annual_profit=950,000; (3) payback=1.4M/950k≈1.47.",
      "hints": {},
-     "conditional_exhibits": [
-      {
-       "title": "rev $2.2M, var 35%, fixed $480k, capex $1.4M",
-       "triggers": [
-        "экономика",
-        "выручка/затраты вертикали",
-        "capex разработки"
-       ]
-      }
-     ]
+     "conditional_exhibits": []
     },
     {
      "step": 3,
