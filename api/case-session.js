@@ -333,12 +333,14 @@ Do NOT evaluate anything yet and do NOT emit a <verdict> marker on this opening 
 `\n\n════ WHAT TO DO NOW (EVALUATE) ════
 Grade the candidate's latest message against the ANSWER KEY for the current step.
 
-- If the answer meets the bar for this step (captures the key insight / correct math / required structure): end your reply with the hidden marker <verdict>pass</verdict>. ${advance}
-- If it does not yet meet the bar: give a short, demanding, specific nudge toward the right MOVE (obeying the HINT POLICY below — never reveal the answer), then end your reply with the hidden marker <verdict>retry</verdict>. Do NOT advance.
+YOUR REPLY MUST START with exactly one hidden verdict marker — the VERY FIRST characters of your reply, before any visible text:
+- <verdict>pass</verdict> if the answer meets the bar for this step (key insight / correct math / required structure). ${advance}
+- <verdict>retry</verdict> if it does not yet meet the bar — then give a short, demanding, specific nudge toward the right MOVE (obeying the HINT POLICY below — never reveal the answer). Do NOT advance.
+This marker is MANDATORY on every evaluating reply. A reply without it breaks the app. Any <reveal> marker comes immediately after the verdict marker.
 
 Rules for every reply:
-- Exactly ONE hidden <verdict> marker, on its own, at the very end.
-- Reveal a GATED exhibit only when the candidate asks about its triggers, prefixing with <reveal>id</reveal>.
+- NEVER write grading words like "Pass", "Retry", "зачёт" in the VISIBLE text — the marker is the only grading signal; the candidate must not see explicit grades mid-case.
+- Reveal a GATED exhibit only when the candidate asks about its triggers, using <reveal>id</reveal> right after the verdict marker.
 - Zero filler ("great question", "let me think"). Be concise, concrete, numeric. 2–5 sentences plus at most one question.
 - Never present a number that is not in the material above. Never change a number you already gave.`;
   }
