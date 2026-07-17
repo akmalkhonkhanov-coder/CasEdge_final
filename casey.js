@@ -477,7 +477,7 @@ window.caseyCalc = (function(){
 
   function renderGrade(j, q){
     izHide();
-    var labels = { c1_conclusion_first:'Conclusion first (Pyramid)', c2_anchor_number:'Anchor number', c3_mechanisms:'Mechanism(s)', c4_risks_nextstep:'Risks + next step' };
+    var labels = { c1_conclusion_first:'Conclusion first (Pyramid)', c2_anchor_number:'Anchor number', c3_risks:'Risks (internal + external)', c4_nextstep:'Next step' };
     var crit = j.criteria || {};
     var rows = Object.keys(labels).map(function(k){ var c = crit[k] || {}; var pass = !!c.pass; return '<div class="cy-crit ' + (pass?'pass':'fail') + '"><span class="ic">' + (pass?'✓':'✗') + '</span><span><b>' + labels[k] + '</b>' + (c.evidence ? ' — ' + esc2(c.evidence) : '') + '</span></div>'; }).join('');
     var score = typeof j.score === 'number' ? j.score : Object.keys(crit).filter(function(k){ return crit[k] && crit[k].pass; }).length;
