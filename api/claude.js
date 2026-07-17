@@ -158,31 +158,47 @@ export default async function handler(req, res) {
     }
 
     // 6) Forward to Anthropic (with a timeout + retry on transient overloads).
+    const callModel = async (payload) => fetchAnthropicWithRetry('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': process.env.ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01',
+        'anthropic-beta': 'prompt-caching-2024-07-31'
+      },
+      body: JSON.stringify(payload)
+    }, UPSTREAM_TIMEOUT_MS, 4);
+    const textOf = (data) => (data && Array.isArray(data.content))
+      ? data.content.filter(b => b && b.type === 'text' && typeof b.text === 'string').map(b => b.text).join('\n')
+      : '';
+
     let response;
     try {
-      response = await fetchAnthropicWithRetry('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': process.env.ANTHROPIC_API_KEY,
-          'anthropic-version': '2023-06-01',
-          'anthropic-beta': 'prompt-caching-2024-07-31'
-        },
-        body: JSON.stringify(body)
-      }, UPSTREAM_TIMEOUT_MS, 4);
+      response = await callModel(body);
     } catch (e) {
       return res.status(504).json({ error: { message: 'The grader is taking too long. Please try again.' } });
     }
 
-    const data = await response.json();
+    let data = await response.json();
+    // Rare failure mode: the model spends the entire max_tokens budget on a
+    // thinking block and returns no text (stop_reason max_tokens). One
+    // automatic retry with extra headroom fixes it.
+    if (response.status === 200 && !textOf(data) && data && data.stop_reason === 'max_tokens') {
+      console.error('claude.js: thinking consumed budget, retrying with 6000');
+      try {
+        const resp2 = await callModel({ ...body, max_tokens: 6000 });
+        if (resp2.status === 200) {
+          const data2 = await resp2.json();
+          if (textOf(data2)) { data = data2; response = resp2; }
+        }
+      } catch (e) { /* keep original data */ }
+    }
     // The model can return several content blocks (e.g. a thinking block before
     // the text). Clients read content[0].text, so collapse all text blocks into
     // one — otherwise callAI() sees an empty/first non-text block and drills and
     // the post-case feedback (JSON) silently fail to parse.
-    if (data && Array.isArray(data.content)) {
-      const text = data.content
-        .filter(b => b && b.type === 'text' && typeof b.text === 'string')
-        .map(b => b.text).join('\n');
+    {
+      const text = textOf(data);
       if (text) data.content = [{ type: 'text', text }];
     }
     return res.status(response.status).json(data);
