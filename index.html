@@ -7481,9 +7481,21 @@ Return ONLY valid JSON (no markdown, no backticks). All five scores are 1.0-10.0
     const evalCtx = state.drillType
       ? `${state.drillType} drill`
       : `${state.firm || ''} ${state.caseType || ''} case interview`;
-    const raw = await callAI(EVAL_SYSTEM + langInstruction(), [
-      { role: 'user', content: `Evaluate this ${evalCtx}:\n\n${transcript}${timingNote}` }
-    ], 'claude-sonnet-5');
+    // The grader occasionally burns its whole token budget on a thinking pass
+    // or hits a transient overload — a SECOND full attempt (a fresh serverless
+    // invocation with a fresh 60s budget) rescues nearly all of those. Only
+    // after two failed attempts do we show the error state.
+    let raw;
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      try {
+        raw = await callAI(EVAL_SYSTEM + langInstruction(), [
+          { role: 'user', content: `Evaluate this ${evalCtx}:\n\n${transcript}${timingNote}` }
+        ], 'claude-sonnet-5');
+        if (raw && raw.trim()) break;
+      } catch (e) { if (attempt === 2) throw e; }
+      if (attempt === 1) await new Promise(r => setTimeout(r, 1200));
+    }
+    if (!raw || !raw.trim()) throw new Error('empty grader reply');
     // The model intermittently wraps its JSON in ```json … ``` fences despite
     // being told not to. Strip all fences, then slice to the outermost braces
     // so parsing is robust whether or not it fenced (and ignores any stray prose).
