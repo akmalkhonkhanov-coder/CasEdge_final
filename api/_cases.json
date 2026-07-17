@@ -119,8 +119,37 @@
      "id": "ex1",
      "title": "Exhibit (описанный график)",
      "body_md": "### Exhibit (описанный график)\n> *«Столбчатая диаграмма: средний чек по районам, под каждым столбцом — доля района в общем числе заказов. Чиланзар, премиум-центр — самый высокий столбец, около $44.20, но тонкая доля: всего 18% заказов. Юнусабад (средний сегмент) — самая широкая доля, 34%, около $31.60. Сергели (эконом) — 31% заказов при $22.90. Внешние районы — 17% заказов, самый низкий столбец, $18.40. Сноска: пилот по прибыльности проводился **только в Чиланзаре**.»*\n\nTake rate 16% · доставка $2.90 · упаковка $1.35 · базовая ставка курьера $4.15 · 48,000 заказов/день.\nМножители дистанции: Чиланзар 0.9 · Юнусабад 1.0 · Сергели 1.15 · Внешние 1.45. Наценка окна: пик ×1.25 (42%) · непик ×0.95 (58%).",
-     "reveal": "auto",
-     "triggers": []
+     "reveal": "on_request",
+     "triggers": [
+      "по районам",
+      "средний чек",
+      "district",
+      "зоны доставки",
+      "география заказов",
+      "доля заказов"
+     ],
+     "render": {
+      "type": "bar",
+      "unit": "$",
+      "categories": [
+       "Чиланзар (18%)",
+       "Юнусабад (34%)",
+       "Сергели (31%)",
+       "Внешние (17%)"
+      ],
+      "series": [
+       {
+        "name": "Средний чек",
+        "values": [
+         44.2,
+         31.6,
+         22.9,
+         18.4
+        ]
+       }
+      ],
+      "note": "Под каждым районом — его доля в общем числе заказов. Пилот по прибыльности проводился только в Чиланзаре."
+     }
     }
    ],
    "steps": [
@@ -797,15 +826,97 @@
      "id": "ex1",
      "title": "Exhibit 1 — структура базы (480,000 подписчиков)",
      "body_md": "### Exhibit 1 — структура базы (480,000 подписчиков)\n| Сегмент | Доля | Базовый churn | Adoption спорта |\n|---|---|---|---|\n| Спортивные фанаты | 22% | 6.1% | 74% |\n| Casual | 51% | 4.8% | 12% |\n| Kids/Family | 27% | 3.3% | 5% |",
-     "reveal": "auto",
-     "triggers": []
+     "reveal": "on_request",
+     "triggers": [
+      "структура базы",
+      "сегменты",
+      "подписчик",
+      "segment",
+      "subscriber base",
+      "кто смотрит"
+     ],
+     "render": {
+      "type": "pie",
+      "unit": "subscribers",
+      "slices": [
+       {
+        "label": "Спортивные фанаты",
+        "value": 22
+       },
+       {
+        "label": "Casual",
+        "value": 51
+       },
+       {
+        "label": "Kids/Family",
+        "value": 27
+       }
+      ],
+      "total_note": "480,000 подписчиков",
+      "companion_table": {
+       "head": [
+        "Сегмент",
+        "Доля",
+        "Базовый churn",
+        "Adoption спорта"
+       ],
+       "rows": [
+        [
+         "Спортивные фанаты",
+         "22%",
+         "6.1%",
+         "74%"
+        ],
+        [
+         "Casual",
+         "51%",
+         "4.8%",
+         "12%"
+        ],
+        [
+         "Kids/Family",
+         "27%",
+         "3.3%",
+         "5%"
+        ]
+       ]
+      }
+     }
     },
     {
      "id": "ex2",
      "title": "Exhibit 2 — снижение месячного churn от спорта",
      "body_md": "### Exhibit 2 — снижение месячного churn от спорта\n| Сегмент | Снижение |\n|---|---|\n| Спортивные фанаты | 1.9 п.п. |\n| Casual | 0.8 п.п. |\n| Kids/Family | 0.3 п.п. |\n\nЦена add-on $4.00/мес · лицензия контента **$1.10/adopter/мес** · gross margin 58% · базовый ARPU $5.90.",
-     "reveal": "auto",
-     "triggers": []
+     "reveal": "on_request",
+     "triggers": [
+      "снижение churn",
+      "эффект спорта",
+      "churn reduction",
+      "удержание",
+      "retention effect"
+     ],
+     "render": {
+      "type": "table",
+      "head": [
+       "Сегмент",
+       "Снижение churn"
+      ],
+      "rows": [
+       [
+        "Спортивные фанаты",
+        "1.9 п.п."
+       ],
+       [
+        "Casual",
+        "0.8 п.п."
+       ],
+       [
+        "Kids/Family",
+        "0.3 п.п."
+       ]
+      ],
+      "note": "Add-on $4.00/мес · лицензия $1.10/adopter/мес · GM 58% · базовый ARPU $5.90."
+     }
     }
    ],
    "steps": [
@@ -9035,7 +9146,48 @@
    "generation": "D",
    "header_md": "**Type · Commercial RE brokerage · F1 (interviewee-led) · Ловушка #101 (Trap-flip, naive #1 hist-vs-replacement)**\nDifficulty: Medium · Prototype: CBRE/JLL · IO: Banking/asset-services, Stern p.12 [DEV: contract-book replacement cost замещает asset-mgmt fee spread]",
    "prompt_md": "Клиент — **Steadmoor Realty**, оператор коммерческого real-estate брокериджа (аренда/продажа офисной недвижимости, плюс управление недвижимостью). Steadmoor рассматривает покупку меньшего конкурента — **Larkhill** — за запрошенные **$17.5M** (100% equity). Партнёр хочет ответ: платить ли $17.5M?\n\n*(Firm-style: BCG/interviewee-led — кандидат сам ведёт, запрашивает данные, формулирует рекомендацию.)*",
-   "exhibits": [],
+   "exhibits": [
+    {
+     "id": "ex_larkhill",
+     "title": "Exhibit — Larkhill: asset structure & ask",
+     "reveal": "on_request",
+     "triggers": [
+      "структура активов",
+      "из чего equity",
+      "как оценены контракты",
+      "балансовая стоимость",
+      "asset structure",
+      "balance sheet"
+     ],
+     "body_md": "Larkhill: 420 property-management contracts (recurring management fees — core of the business), carried on the balance sheet at historical (amortized) cost of $18,000 per contract. Offices + net working capital (net of debt): $5.2M. Asking price: $17.5M for 100% equity.",
+     "render": {
+      "type": "table",
+      "head": [
+       "Item",
+       "Value"
+      ],
+      "rows": [
+       [
+        "Management contracts",
+        "420"
+       ],
+       [
+        "Carrying value per contract (historical, amortized)",
+        "$18,000"
+       ],
+       [
+        "Offices + net working capital (net of debt)",
+        "$5.2M"
+       ],
+       [
+        "Asking price (100% equity)",
+        "$17.5M"
+       ]
+      ],
+      "note": "Contract book = recurring management fees; carried at historical amortized cost."
+     }
+    }
+   ],
    "steps": [
     {
      "step": 1,
@@ -9056,17 +9208,7 @@
      "candidate_md": "Оцени equity Larkhill по данным баланса.",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\n420 контрактов @ historical $18k; прочие активы нетто $5.2M; ask $17.5M\n\nEXPECTED ANSWER:\nbook_contract=$7.56M; naive_equity=$12.76M < $17.5M\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) book_contract=420×18000=7,560,000; (2) equity=+5.2M=12,760,000; (3) вывод при этой базе = WALK.",
      "hints": {},
-     "conditional_exhibits": [
-      {
-       "title": "420 контрактов @ historical $18k; прочие активы нетто $5.2M;",
-       "triggers": [
-        "структура активов",
-        "из чего equity",
-        "как оценены контракты",
-        "балансовая стоимость"
-       ]
-      }
-     ]
+     "conditional_exhibits": []
     },
     {
      "step": 3,
@@ -9977,7 +10119,51 @@
    "generation": "D",
    "header_md": "**Type · Gym/fitness · F5 · Ловушка #112 (Trap-flip, naive #8 price elasticity)**\nDifficulty: Easy · Prototype: Planet Fitness · IO: Technology (price elasticity of demand), Stern p.15 [DEV membership pricing] · Layer: mental-math",
    "prompt_md": "**Grithaven Fitness** (сеть залов) хочет поднять членский взнос с **$39** до **$47**/мес. Сейчас **8,200** членов. Поднимать ли цену?",
-   "exhibits": [],
+   "exhibits": [
+    {
+     "id": "ex_demand",
+     "title": "Exhibit — How does membership respond to price?",
+     "reveal": "on_request",
+     "triggers": [
+      "эластичность",
+      "уйдут ли члены",
+      "реакция спроса",
+      "отток при повышении",
+      "elasticity",
+      "demand response",
+      "members leave"
+     ],
+     "body_md": "Interactive chart-select: show the candidate four possible shapes of membership response to a price increase and ask which they would expect for a budget-gym membership. After they pick, confirm: demand is highly elastic — measured elasticity is −1.6 (a 1% price increase drives a 1.6% membership decline). Correct pick: the steep downward-sloping option (C). Do not state the elasticity before their pick.",
+     "render": {
+      "type": "select",
+      "question": "Members vs price: which response shape would you expect for a budget-gym membership? Pick one.",
+      "xLabel": "Price",
+      "yLabel": "Members",
+      "options": [
+       {
+        "key": "A",
+        "shape": "flat",
+        "label": "No response"
+       },
+       {
+        "key": "B",
+        "shape": "down_mild",
+        "label": "Mild decline"
+       },
+       {
+        "key": "C",
+        "shape": "down_steep",
+        "label": "Steep decline"
+       },
+       {
+        "key": "D",
+        "shape": "up",
+        "label": "Increase"
+       }
+      ]
+     }
+    }
+   ],
    "steps": [
     {
      "step": 1,
@@ -10005,19 +10191,9 @@
      "label": "Insight",
      "time_min": null,
      "candidate_md": "Как реагирует спрос?",
-     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nэластичность −1.6\n\nEXPECTED ANSWER:\nобъём −32.8%, members_new≈5,509\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) price_change≈20.5%; (2) qty_change=−1.6×0.205; (3) members_new≈5,509.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nэластичность −1.6\n\nEXPECTED ANSWER:\nобъём −32.8%, members_new≈5,509\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) price_change≈20.5%; (2) qty_change=−1.6×0.205; (3) members_new≈5,509.\n\nCHART-SELECT KEY (hidden): correct option = C (steep decline — elastic demand, elasticity −1.6). If the candidate picks A/B/D, do not reveal the number yet; ask them to reconsider what a budget-gym member does when price rises ~20%.",
      "hints": {},
-     "conditional_exhibits": [
-      {
-       "title": "эластичность −1.6",
-       "triggers": [
-        "эластичность",
-        "уйдут ли члены",
-        "реакция спроса",
-        "отток при повышении"
-       ]
-      }
-     ]
+     "conditional_exhibits": []
     },
     {
      "step": 4,
@@ -10155,7 +10331,50 @@
    "generation": "D",
    "header_md": "**Type · Pro basketball (Minneapolis) · F6 · Ловушка #114 (Trap-action/soft, naive #7 avg-vs-marginal, добор)**\nDifficulty: Medium · Prototype: NBA franchise · IO: Media/Entertainment (gate/venue), Stern p.20 · Layers: mental-math, hypothesis-update",
    "prompt_md": "**Twin Pines Hoops** — профессиональный баскетбольный клуб из Миннеаполиса, владеет ареной. В межсезонье арена простаивает. Рассматривают три типа доп. событий, чтобы загрузить арену. Какие добавить?",
-   "exhibits": [],
+   "exhibits": [
+    {
+     "id": "ex_events",
+     "title": "Exhibit A — Off-season events: revenue & costs (per event type)",
+     "reveal": "on_request",
+     "triggers": [
+      "данные по событиям",
+      "прибыль событий",
+      "стоимость события",
+      "структура затрат события",
+      "event data",
+      "cost structure"
+     ],
+     "body_md": "Per event type: Concerts — revenue $380,000, marginal cost $210,000; College games — revenue $160,000, marginal cost $95,000; Corporate events — revenue $240,000, marginal cost $130,000. Allocated arena lease: $140,000 per event (accounting allocation of the fixed lease).",
+     "render": {
+      "type": "bar",
+      "unit": "$",
+      "categories": [
+       "Concerts",
+       "College games",
+       "Corporate"
+      ],
+      "series": [
+       {
+        "name": "Revenue",
+        "values": [
+         380000,
+         160000,
+         240000
+        ]
+       },
+       {
+        "name": "Marginal cost",
+        "values": [
+         210000,
+         95000,
+         130000
+        ]
+       }
+      ],
+      "note": "Allocated arena lease: $140,000 per event (accounting allocation)."
+     }
+    }
+   ],
    "steps": [
     {
      "step": 1,
@@ -10176,17 +10395,7 @@
      "candidate_md": "AVG-profit по событиям.",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nExhibit A: rev/marginal/alloc ×3\n\nEXPECTED ANSWER:\nConcerts +30k, College −75k, Corp −30k; наив -> только Concerts\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) все 3 avg верны; (2) наив-выбор = Concerts.",
      "hints": {},
-     "conditional_exhibits": [
-      {
-       "title": "Exhibit A: rev/marginal/alloc ×3",
-       "triggers": [
-        "данные по событиям",
-        "прибыль событий",
-        "стоимость события",
-        "структура затрат события"
-       ]
-      }
-     ]
+     "conditional_exhibits": []
     },
     {
      "step": 3,
@@ -10816,7 +11025,51 @@
    "generation": "D",
    "header_md": "**Type · Airlines · F5 · Ловушка #122 (Trap-flip, naive #2 blended-vs-segment margin)**\nDifficulty: Medium · Prototype: Delta/United · IO: Airlines (load factor, route economics), Stern p.19 · Layers: mental-math, hypothesis-update",
    "prompt_md": "**Aeronpast Airways** видит здоровую общую маржу и предлагает расширить маршрутную сеть, добавив похожие маршруты. Партнёр: верный ли это ход?",
-   "exhibits": [],
+   "exhibits": [
+    {
+     "id": "ex_routes",
+     "title": "Exhibit — Revenue & cost by route type ($M)",
+     "reveal": "on_request",
+     "triggers": [
+      "разбивка по маршрутам",
+      "сегментация",
+      "маржа по маршрутам",
+      "по типам маршрутов",
+      "route breakdown",
+      "segment margins",
+      "by route"
+     ],
+     "body_md": "By route type ($M): Longhaul — revenue 420, cost 340; Regional — revenue 180, cost 171; Shorthaul — revenue 240, cost 258. (Blended: revenue 840, cost 769.)",
+     "render": {
+      "type": "bar",
+      "unit": "$M",
+      "categories": [
+       "Longhaul",
+       "Regional",
+       "Shorthaul"
+      ],
+      "series": [
+       {
+        "name": "Revenue",
+        "values": [
+         420,
+         180,
+         240
+        ]
+       },
+       {
+        "name": "Cost",
+        "values": [
+         340,
+         171,
+         258
+        ]
+       }
+      ],
+      "note": "Blended: revenue $840M · cost $769M."
+     }
+    }
+   ],
    "steps": [
     {
      "step": 1,
@@ -11226,7 +11479,68 @@
    "generation": "D",
    "header_md": "**Type · Parcel logistics · F1 (interviewee-led) · Ловушка #127 (Trap-flip, naive #3 flat-vs-escalating)**\nDifficulty: Medium · Prototype: FedEx/UPS · IO: Industrials (volume × contract, capital-intensive), Stern p.22 · Layers: mental-math, hypothesis-update",
    "prompt_md": "**Quillpost Logistics** рассматривает вход в новый регион, требующий лизинга sortation-хаба (**$28M capex**). Партнёр: входить ли?",
-   "exhibits": [],
+   "exhibits": [
+    {
+     "id": "ex_escalation",
+     "title": "Exhibit — Projected revenue vs operating cost, years 1–8 ($M)",
+     "reveal": "on_request",
+     "triggers": [
+      "инфляция затрат",
+      "рост затрат",
+      "labor",
+      "аренда",
+      "эскалация",
+      "cost inflation",
+      "cost escalation",
+      "rent escalators",
+      "затраты по годам"
+     ],
+     "body_md": "Regional P&L projection ($M): revenue grows ~2%/yr from $19.0M; operating cost grows ~6%/yr from $13.2M (labor inflation + rent escalators). Revenue by year: Y1 19.0, Y2 19.38, Y3 19.77, Y4 20.16, Y5 20.57, Y6 20.98, Y7 21.4, Y8 21.83. Cost by year: Y1 13.2, Y2 13.99, Y3 14.83, Y4 15.72, Y5 16.66, Y6 17.66, Y7 18.72, Y8 19.85. Capex $28M, discount rate 11%, horizon 8 years.",
+     "render": {
+      "type": "line",
+      "unit": "$M",
+      "categories": [
+       "Y1",
+       "Y2",
+       "Y3",
+       "Y4",
+       "Y5",
+       "Y6",
+       "Y7",
+       "Y8"
+      ],
+      "series": [
+       {
+        "name": "Revenue (+2%/yr)",
+        "values": [
+         19.0,
+         19.38,
+         19.77,
+         20.16,
+         20.57,
+         20.98,
+         21.4,
+         21.83
+        ]
+       },
+       {
+        "name": "Operating cost (+6%/yr)",
+        "values": [
+         13.2,
+         13.99,
+         14.83,
+         15.72,
+         16.66,
+         17.66,
+         18.72,
+         19.85
+        ]
+       }
+      ],
+      "note": "Capex $28M · discount rate 11% · horizon 8 years."
+     }
+    }
+   ],
    "steps": [
     {
      "step": 1,
@@ -11265,18 +11579,7 @@
      "candidate_md": "Escalating NPV.",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\ncosts +6%/год, rev +2%/год\n\nEXPECTED ANSWER:\nescalating NPV −$5,634,935 -> SKIP\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) escalating NPV=−5,634,935; (2) вывод SKIP; (3) overstate назван от NPV (~132.79% от |correct|); (4) обе ветки один DCF@11%.",
      "hints": {},
-     "conditional_exhibits": [
-      {
-       "title": "costs +6%/год, rev +2%/год",
-       "triggers": [
-        "эскалация",
-        "растут ли затраты",
-        "labor inflation",
-        "rent escalator",
-        "профиль затрат"
-       ]
-      }
-     ]
+     "conditional_exhibits": []
     },
     {
      "step": 5,
