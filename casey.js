@@ -1,42 +1,8 @@
 /* CasEdge — Casey Simulator (BCG). Self-contained, self-injecting. */
-/* Uses the app theme variables so it follows the single app theme. */
-
-window.CASEY_VOICE_SYSTEM = [
-"Ты — строгий, но справедливый экзаменатор BCG-кейс-интервью. Тебе дают ТРАНСКРИПТ устной финальной рекомендации кандидата (речь → текст, поэтому в нём БУДУТ ошибки распознавания: числа словами, опечатки, слипшиеся слова, пропущенная пунктуация). Оцени транскрипт против чеклиста из 4 критериев. Каждый критерий — строго pass/fail. Верни ТОЛЬКО JSON, без преамбулы и markdown.",
-"ПРАВИЛА ИНТЕРПРЕТАЦИИ:",
-"1. Смысл важнее точных слов — кандидат говорил вслух, оценивай суть.",
-"2. Числа в любой форме ('fifty five and a half thousand' = 55,500; 'минус сто двадцать тысяч восемьсот' = -120,800). Округления кандидата в пределах ±2% от якоря засчитываются.",
-"3. Порядок высказывания имеет значение ТОЛЬКО для критерия 1 (вывод-первым). Для 2-4 — засчитывай где угодно в транскрипте.",
-"4. Критерий 1 (вывод в первых 1-2 фразах): ищи рекомендацию-действие в первых ~2 предложениях. Если кандидат идёт от фактов к выводу в конце — c1 FAIL, даже если вывод верный.",
-"5. Критерий 2 (anchor): должно прозвучать >=2 чисел, и >=1 из них — из списка anchor_numbers рубрики. Два случайных числа не по делу → c2 FAIL.",
-"6. Критерий 3 (mechanisms): для multi-insight оба названы; для single-insight — один требуемый тезис (см. mechanisms_required).",
-"7. Критерий 4: >=1 internal + >=1 external риск, привязанные к тезису, И >=1 конкретный time-bound следующий шаг.",
-"8. Clean-кейсы (clean_special=true, C6/C15): якорь = подтверждение ОБОИХ путей. Если кандидат 'нашёл разворот', которого нет — c1 И c2 FAIL.",
-"9. НЕ штрафуй за: акцент, грамматику, филлеры, длину, стиль. Только за отсутствие требуемого содержания.",
-"10. НЕ добавляй требований сверх чеклиста.",
-"ФОРМАТ ОТВЕТА (строгий JSON):",
-'{"case_id":"Cxx","criteria":{"c1_conclusion_first":{"pass":true,"evidence":"цитата"},"c2_anchor_number":{"pass":true,"evidence":"цитата"},"c3_mechanisms":{"pass":false,"evidence":"цитата"},"c4_risks_nextstep":{"pass":true,"evidence":"цитата"}},"score":3,"verdict":"partial","coaching":"1-3 предложения по-русски: что засчитано, что провалено, как починить."}',
-"score = число pass (0-4). verdict: 4->strong, 3->partial, <=2->weak. Всегда возвращай evidence-цитату из транскрипта на каждый критерий."
-].join("\n");
-
-window.CASEY_RUBRICS = {
-  "C1":  {"conclusion":"keep Valtona + add Herdal top-up (hybrid); NOT full move","anchor_numbers":["55,500","52,000-vs-55,000"],"mechanisms_required":["cost advantage kept + insurance against shortfall"],"internal_examples":["two-site quality/consistency"],"external_examples":["Valtona deviation/contract, excise"]},
-  "C2":  {"conclusion":"run promo WITH the 500-unit cap (not uncapped, not reject)","anchor_numbers":["27,500","9,500-vs-87,500","33.65%"],"mechanisms_required":["expected refund cost overstated the gain; cap limits exposure"],"internal_examples":["cap communication/backlash"],"external_examples":["consumer-protection regulation; probability drift past breakeven"]},
-  "C3":  {"conclusion":"keep the kit (± reprice); NOT discontinue","anchor_numbers":["−8,400","33.33%-vs-45%"],"mechanisms_required":["basket margin","attribution/defection share"],"internal_examples":["survey overstates true defection; test-store measurement"],"external_examples":["competitor rival kit; food-cost inflation"]},
-  "C4":  {"conclusion":"ADD the 4th flight on incremental/marginal logic","anchor_numbers":["505","184,325","43.86%"],"mechanisms_required":["marginal vs fully-allocated cost","cannibalization/incrementality"],"internal_examples":["crew/maintenance/ops strain"],"external_examples":["competitor frequency match; fuel; slots"]},
-  "C5":  {"conclusion":"decline at $38 / keep in-house","anchor_numbers":["−120,800","34.79","34-35"],"mechanisms_required":["avoidable vs unavoidable fixed","TAT leakage"],"internal_examples":["molecular staff retention/capability"],"external_examples":["reference-lab repricing; payer reimbursement"]},
-  "C6":  {"conclusion":"implement the rate cut / yes","anchor_numbers":["94,900","350,400-vs-94,900"],"mechanisms_required":["both paths agree (revenue AND contribution)","≥1 checked-and-cleared reversal: parity $110 OR breakeven 72.63%-vs-74%"],"internal_examples":["forecast is the weak joint; re-underwrite 74%"],"external_examples":["competitor matching the cut"],"clean_special":true},
-  "C7":  {"conclusion":"do NOT implement flat +20% as proposed (restructure, not reject)","anchor_numbers":["−168,869","−169K","+2M-vs-minus","16.48%"],"mechanisms_required":["annual-lock/mix","churn compounding"],"internal_examples":["churn estimates from one study; A/B first"],"external_examples":["competitor holds price → acquisition"]},
-  "C8":  {"conclusion":"keep Rural","anchor_numbers":["−12,200","0.38%-vs-5%","10,000→1,000→−12,200"],"mechanisms_required":["avoidable vs allocated fixed","network/anchor-client risk"],"internal_examples":["needs variable-cost program"],"external_examples":["anchor client renegotiation"]},
-  "C9":  {"conclusion":"reject the dormant-for-premium swap","anchor_numbers":["−68,250","38.75-vs-35.00","59.55-vs-55"],"mechanisms_required":["usage-cost margin (dormant > premium)","adverse retention on Casual"],"internal_examples":["premium real usage may exceed 8 visits; pilot"],"external_examples":["regulator views mass termination as unfair"]},
-  "C10": {"conclusion":"selective / A-only migration (not everyone, not no one)","anchor_numbers":["−66,600-vs-+18,000","4.13"],"mechanisms_required":["segment winners/losers (only A pays more; B,C get unjustified cut)"],"internal_examples":["two pricing models → fairness pushback; packaging"],"external_examples":["B/C demand cheaper usage model → set rate ≥4.13¢"]},
-  "C11": {"conclusion":"do NOT approve $12 across the board (targeted/peak pricing instead, not reject-all)","anchor_numbers":["−20,960","9.84-15-16.67","4.16"],"mechanisms_required":["naive ticket math is CORRECT within its perimeter but incomplete (concession leak)"],"internal_examples":["validate 15% elasticity via 2-theatre pilot"],"external_examples":["streaming release-window shift moves attendance"]},
-  "C12": {"conclusion":"rent B1 and B3 only (not all five, not reject)","anchor_numbers":["13,000-vs-7,000","$10×participants"],"mechanisms_required":["capacity shadow-price","per-building selection"],"internal_examples":["relocate displaced programs before signing"],"external_examples":["operator demands all-five package → walk/counter"]},
-  "C13": {"conclusion":"approve 24-mo cycle at HONEST size (not reject, not $4.9M)","anchor_numbers":["384,000-vs-4.86M","20,573"],"mechanisms_required":["naive frame counts only the selling side of the cycle"],"internal_examples":["doubled purchasing strains supply/logistics"],"external_examples":["used-car market is the single point of failure; hedge disposals"]},
-  "C14": {"conclusion":"decline exclusivity / counter (not accept)","anchor_numbers":["−47,240","87.99%-vs-55%","88%","8.50-vs-7.16"],"mechanisms_required":["channel margin difference","partial migration/churn"],"internal_examples":["own-channel ops must stay <$4.90/order"],"external_examples":["Mealgate ranking retaliation → placement guarantees"]},
-  "C15": {"conclusion":"kill the discount / implement","anchor_numbers":["1,543,200","2.7M-vs-1,543,200"],"mechanisms_required":["both paths agree (CFO direction AND cohort model)","≥1 checked-and-cleared reversal: scale/allocation $20→$21.13 OR j*=8,482-vs-12,000"],"internal_examples":["marketing's 12,000 projection is weak joint; pilot"],"external_examples":["competitor weaponizes removed discount in ads"],"clean_special":true}
-};
-
+/* Uses the app theme variables so it follows the single app theme.   */
+/* Thin client: the case library, every answer key, and all grading live server-side
+   in /api/casey. The browser only ever receives sanitized cases (no keys) and,
+   per graded step, a verdict. English throughout. */
 
 window.caseyCalc = (function(){
   var expr = '';
@@ -173,7 +139,7 @@ window.caseyCalc = (function(){
   var CARD = `          <div class="firm-initial" style="background:rgba(93,184,166,.15);color:var(--accent-teal);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><line x1="8" y1="9" x2="16" y2="9"></line><line x1="8" y1="13" x2="13" y2="13"></line></svg></div>
           <div>
             <div class="firm-name">Casey Simulator <span class="firm-tag">BCG</span> <span class="soon-badge" style="background:rgba(93,184,166,.18);color:var(--accent-teal);">Premium</span></div>
-            <div class="firm-desc">The real BCG Casey chatbot - 15 interviewee-led cases, live exhibits, expected-value math, and a spoken final recommendation graded on the Pyramid Principle.</div>
+            <div class="firm-desc">The real BCG Casey chatbot - 30 interviewee-led cases, live exhibits, expected-value math, and a spoken final recommendation graded on the Pyramid Principle.</div>
           </div>
           <div class="firm-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div>`;
   function run(){
@@ -190,7 +156,7 @@ window.caseyCalc = (function(){
 (function () {
   "use strict";
   var PALETTE = ['#5db8a6', '#e8a55a', '#7c8ce8', '#5fbf6b', '#e87c7c', '#4fb0c9'];
-  var CASES = null;          // loaded from /casey_cases.json
+  var CASES = null;          // picker meta, loaded from /api/casey {action:'list'}
   var S = null;              // active session state
 
   function E(id){ return document.getElementById(id); }
@@ -335,7 +301,7 @@ window.caseyCalc = (function(){
     feedNode(html);
   }
 
-  // ---------- server grading ----------
+  // ---------- server API (auth'd) ----------
   function freshToken2(){
     if (typeof sb === 'undefined' || !sb) return Promise.resolve(null);
     return sb.auth.getSession().then(function(r){
@@ -344,37 +310,20 @@ window.caseyCalc = (function(){
       return s;
     }).then(function(s){ return s ? s.access_token : null; }).catch(function(){ return null; });
   }
-  function claude(system, userText){
+  // Single entry point to /api/casey. Every answer key and every grade lives there.
+  function apiCasey(payload){
     return freshToken2().then(function(token){
       var headers = { 'Content-Type': 'application/json' };
       if (token) headers['Authorization'] = 'Bearer ' + token;
-      return fetch('/api/claude', { method:'POST', headers: headers, body: JSON.stringify({ model:'claude-sonnet-5', max_tokens:1000, system: system, messages: [{ role:'user', content: userText }] }) });
-    }).then(function(r){ return r.json().catch(function(){ return {}; }); })
-      .then(function(d){ return (d.content && d.content[0] && d.content[0].text) || ''; });
+      return fetch('/api/casey', { method:'POST', headers: headers, body: JSON.stringify(payload) });
+    }).then(function(r){ return r.json().catch(function(){ return {}; }); });
   }
-  function parseJSON(txt){ try { var m = txt.match(/\{[\s\S]*\}/); return m ? JSON.parse(m[0]) : null; } catch (e) { return null; } }
-
-  function gradeOpen(step, answer){
-    var sys = 'Ты — строгий, но справедливый экзаменатор BCG-кейс-интервью. Оцени ответ кандидата по бинарному критерию. Верни ТОЛЬКО JSON: {"pass":true|false,"feedback":"1 короткое предложение по-русски: что засчитано/провалено"}.';
-    var u = 'КРИТЕРИЙ ЗАЧЁТА: ' + (step.validation || 'разумный ответ по существу') +
-      '\nЭТАЛОН: ' + (step.model_answer || '—') +
-      '\nОТВЕТ КАНДИДАТА: ' + answer;
-    return claude(sys, u).then(function(t){ var j = parseJSON(t); return j || { pass:true, feedback:'Ответ принят.' }; });
+  function gradeStep(gid, payload){
+    return apiCasey({ action:'grade', caseId: S.case.id, gid: gid, payload: payload })
+      .catch(function(){ return { _err:true }; });
   }
 
   // ---------- flow ----------
-  function flatten(c){
-    var flat = [];
-    c.steps.forEach(function(st){
-      if (st.type === 'multipart'){
-        (st.parts||[]).forEach(function(p, i){ var q = Object.assign({}, p); if (i === 0){ q._wrap = st.prompt; q._reveal = st.reveal_exhibits_on_enter; } flat.push(q); });
-      } else {
-        var q = Object.assign({}, st); if (st.reveal_exhibits_on_enter) q._reveal = st.reveal_exhibits_on_enter; flat.push(q);
-      }
-    });
-    return flat;
-  }
-
   function progress(){
     var pct = Math.round((S.idx / S.flat.length) * 100);
     var f = E('cyProgFill'); if (f) f.style.width = pct + '%';
@@ -433,45 +382,52 @@ window.caseyCalc = (function(){
     if (t === 'select_all' || t === 'select_fewest' || t === 'single_choice'){
       var sel = [].slice.call(document.querySelectorAll('#cyIz .cy-opt.sel')).map(function(e){ return Number(e.dataset.i); });
       if (!sel.length) return;
-      var req = []; (q.options||[]).forEach(function(o, i){ if (o.correct) req.push(i); });
-      var ok = req.length === sel.length && req.every(function(i){ return sel.indexOf(i) >= 0; });
+      var b = E('cySendBtn'); if (b) b.disabled = true;
       say('me', sel.map(function(i){ return q.options[i].text; }).join('  •  '));
-      // mark options
-      (q.options||[]).forEach(function(o, i){ var el = document.querySelector('#cyIz .cy-opt[data-i="' + i + '"]'); if (!el) return; if (o.correct) el.classList.add('correct'); else if (sel.indexOf(i) >= 0) el.classList.add('wrong'); });
-      if (ok) S.score++;
-      fb(ok, (ok ? '<b>✓ Correct.</b> ' : '<b>Not quite.</b> ') + 'Verified against: ' + esc2(q.validation || ''));
-      return void setTimeout(advance, 500);
+      gradeStep(q.gid, { selected: sel }).then(function(r){
+        if (r._err){ fb(false, '<b>Connection issue.</b> Could not reach the grader — moving on.'); return void setTimeout(advance, 500); }
+        var correct = r.correctIdx || [];
+        (q.options||[]).forEach(function(o, i){ var el = document.querySelector('#cyIz .cy-opt[data-i="' + i + '"]'); if (!el) return; if (correct.indexOf(i) >= 0) el.classList.add('correct'); else if (sel.indexOf(i) >= 0) el.classList.add('wrong'); });
+        if (r.ok) S.score++;
+        fb(!!r.ok, (r.ok ? '<b>✓ Correct.</b> ' : '<b>Not quite.</b> ') + 'Verified against: ' + esc2(r.validation || ''));
+        setTimeout(advance, 500);
+      });
+      return;
     }
     if (t === 'enter_number'){
       var raw = E('cyNumIn').value.trim().replace(/[$,%\s]/g, '');
       if (raw === '' || isNaN(Number(raw))) return;
-      var val = Number(raw), ans = num(q.answer);
-      var tol = Math.max(0.01, Math.abs(ans) * 0.005);
-      var ok = Math.abs(val - ans) <= tol;
-      say('me', raw);
-      if (ok) S.score++;
-      var expl = q.answer_explain ? '<div style="margin-top:6px">' + md(q.answer_explain) + '</div>' : '';
-      fb(ok, (ok ? '<b>✓ ' + fmtVal(ans) + '</b> — correct.' : '<b>Not quite — the answer is ' + fmtVal(ans) + '.</b>') + expl);
-      return void setTimeout(advance, 600);
+      say('me', raw); izBusy();
+      gradeStep(q.gid, { value: raw }).then(function(r){
+        if (r._err){ fb(false, '<b>Connection issue.</b> Could not reach the grader — moving on.'); return void setTimeout(advance, 500); }
+        if (r.ok) S.score++;
+        var expl = r.answer_explain ? '<div style="margin-top:6px">' + md(r.answer_explain) + '</div>' : '';
+        fb(!!r.ok, (r.ok ? '<b>✓ ' + esc2(r.answer) + '</b> — correct.' : '<b>Not quite — the answer is ' + esc2(r.answer) + '.</b>') + expl);
+        setTimeout(advance, 600);
+      });
+      return;
     }
     // text-based
     var el = E('cyTxtIn'); if (!el) return; var answer = el.value.trim(); if (!answer) return;
-    say('me', answer); izHide();
-    // elicitation: fast path via trigger phrases, else LLM
+    say('me', answer); izBusy();
     if (t === 'open_text_elicitation'){
-      var trg = (q.trigger_phrases || []).some(function(p){ return answer.toLowerCase().indexOf(String(p).toLowerCase()) >= 0; });
-      var proceedReveal = function(passed){
-        if (passed){ S.score++; fb(true, '<b>Good ask.</b> ' + esc2(q.validation || 'Right thing to probe.')); }
-        else { fb(false, '<b>Hint:</b> ' + esc2((q.fallback ? '' : '') + 'Think about what you still need to know — revealing the exhibit anyway.')); }
-        if (q.reveal_exhibit){ setTimeout(function(){ say('ai', 'Here is what that surfaces:'); showExhibit(exById(q.reveal_exhibit)); setTimeout(advance, 400); }, 300); }
+      gradeStep(q.gid, { answer: answer }).then(function(r){
+        if (r._err){ fb(false, '<b>Connection issue.</b> Revealing the exhibit anyway.'); }
+        else if (r.pass){ S.score++; fb(true, '<b>Good ask.</b> ' + esc2(r.validation || 'Right thing to probe.')); }
+        else { fb(false, '<b>Hint:</b> Think about what you still need to know — revealing the exhibit anyway.'); }
+        var revId = (r && r.revealExhibit) || null;
+        if (revId){ setTimeout(function(){ say('ai', 'Here is what that surfaces:'); showExhibit(exById(revId)); setTimeout(advance, 400); }, 300); }
         else setTimeout(advance, 400);
-      };
-      if (trg) return proceedReveal(true);
-      return void gradeOpen(q, answer).then(function(r){ proceedReveal(!!r.pass); });
+      });
+      return;
     }
-    // open_text / brainstorm → LLM grade
-    izBusy();
-    gradeOpen(q, answer).then(function(r){ if (r.pass) S.score++; fb(!!r.pass, (r.pass ? '<b>✓ </b>' : '<b>✗ </b>') + esc2(r.feedback || '')); setTimeout(advance, 500); });
+    // open_text / brainstorm → server grade
+    gradeStep(q.gid, { answer: answer }).then(function(r){
+      if (r._err){ fb(false, '<b>Connection issue.</b> Could not reach the grader — moving on.'); return void setTimeout(advance, 500); }
+      if (r.pass) S.score++;
+      fb(!!r.pass, (r.pass ? '<b>✓ </b>' : '<b>✗ </b>') + esc2(r.feedback || ''));
+      setTimeout(advance, 500);
+    });
   }
 
   function izBusy(){ iz('<div class="cy-recstat">Grading your answer…</div>'); }
@@ -513,26 +469,24 @@ window.caseyCalc = (function(){
     var ta = E('cyVoiceTxt'); if (!ta) return; var transcript = ta.value.trim(); if (!transcript) return;
     say('me', transcript); izBusy();
     var q = S.flat[S.idx];
-    var rubric = (window.CASEY_RUBRICS && window.CASEY_RUBRICS[q.rubric_ref]) || null;
-    var sys = window.CASEY_VOICE_SYSTEM || 'You grade a BCG case voice recommendation. Return JSON {criteria:{c1_conclusion_first:{pass},c2_anchor_number:{pass},c3_mechanisms:{pass},c4_risks_nextstep:{pass}},score,verdict,coaching}.';
-    var u = 'case_id: ' + q.rubric_ref + '\nrubric: ' + JSON.stringify(rubric) + '\ntranscript: ' + transcript;
-    claude(sys, u).then(function(t){
-      var j = parseJSON(t) || { criteria:{}, score:0, verdict:'weak', coaching:'Не удалось оценить — попробуйте ещё раз.' };
+    gradeStep(q.gid, { transcript: transcript }).then(function(j){
+      if (!j || j._err || !j.criteria) j = { criteria:{}, score:0, verdict:'weak', coaching:'Could not grade — please try again.' };
       renderGrade(j, q);
     });
   }
 
   function renderGrade(j, q){
     izHide();
-    var labels = { c1_conclusion_first:'Вывод — первым (Пирамида)', c2_anchor_number:'Якорное число', c3_mechanisms:'Механизм(ы)', c4_risks_nextstep:'Риски + next step' };
+    var labels = { c1_conclusion_first:'Conclusion first (Pyramid)', c2_anchor_number:'Anchor number', c3_mechanisms:'Mechanism(s)', c4_risks_nextstep:'Risks + next step' };
     var crit = j.criteria || {};
     var rows = Object.keys(labels).map(function(k){ var c = crit[k] || {}; var pass = !!c.pass; return '<div class="cy-crit ' + (pass?'pass':'fail') + '"><span class="ic">' + (pass?'✓':'✗') + '</span><span><b>' + labels[k] + '</b>' + (c.evidence ? ' — ' + esc2(c.evidence) : '') + '</span></div>'; }).join('');
     var score = typeof j.score === 'number' ? j.score : Object.keys(crit).filter(function(k){ return crit[k] && crit[k].pass; }).length;
     var verdict = j.verdict || (score >= 4 ? 'strong' : score >= 3 ? 'partial' : 'weak');
-    feedNode('<div class="cy-grade"><div class="cy-score">Голосовой финал: ' + score + '/4 · ' + esc2(verdict) + '</div>' + rows + (j.coaching ? '<div class="cy-fb ' + (score>=3?'ok':'no') + '" style="margin-top:12px">' + esc2(j.coaching) + '</div>' : '') + '</div>');
+    feedNode('<div class="cy-grade"><div class="cy-score">Voice finale: ' + score + '/4 · ' + esc2(verdict) + '</div>' + rows + (j.coaching ? '<div class="cy-fb ' + (score>=3?'ok':'no') + '" style="margin-top:12px">' + esc2(j.coaching) + '</div>' : '') + '</div>');
     if (score >= 3) S.score++;
-    // reveal partner model answer
-    if (q.model_answer){ setTimeout(function(){ feedNode('<div class="cy-ex"><span class="cy-ex-tag">Partner-level model answer</span><div class="cy-bbl" style="max-width:100%;margin-top:4px">' + md(q.model_answer) + '</div></div>'); S.idx++; setTimeout(finish, 500); }, 400); }
+    // reveal partner model answer (server returns it with the voice grade)
+    var model = j.model_answer || '';
+    if (model){ setTimeout(function(){ feedNode('<div class="cy-ex"><span class="cy-ex-tag">Partner-level model answer</span><div class="cy-bbl" style="max-width:100%;margin-top:4px">' + md(model) + '</div></div>'); S.idx++; setTimeout(finish, 500); }, 400); }
     else { S.idx++; setTimeout(finish, 500); }
   }
 
@@ -548,7 +502,7 @@ window.caseyCalc = (function(){
   // ---------- case picker / entry ----------
   function loadCases(){
     if (CASES) return Promise.resolve(CASES);
-    return fetch('/casey_cases.json').then(function(r){ return r.json(); }).then(function(d){ CASES = d.cases || []; return CASES; });
+    return apiCasey({ action:'list' }).then(function(d){ if (d && d.error) throw new Error(d.error.message||'load failed'); CASES = (d && d.cases) || []; return CASES; });
   }
 
   function open(){
@@ -560,21 +514,24 @@ window.caseyCalc = (function(){
       var done = []; try { done = JSON.parse(localStorage.getItem('casedge_casey_done') || '[]'); } catch (e) {}
       var cards = cases.map(function(c, i){ var d = done.indexOf(c.id) >= 0;
         return '<div class="cy-card ' + (d?'done':'') + '" onclick="Casey.play(\'' + c.id + '\')"><div class="cy-num">' + (i+1) + '</div><div><div class="cy-cn">' + esc2(c.title) + '</div><div class="cy-cd">' + esc2(c.meta_tag || '') + '</div></div>' + (d?'<span class="cy-badge">✓ done</span>':'') + '</div>'; }).join('');
-      w.innerHTML = '<div class="cy-pick-h"><div class="eyebrow">BCG · Casey Simulator</div><h2>Pick a case</h2><p>15 interviewee-led cases · exhibits · voice recommendation, graded like the real thing.</p></div>' + cards;
+      w.innerHTML = '<div class="cy-pick-h"><div class="eyebrow">BCG · Casey Simulator</div><h2>Pick a case</h2><p>30 interviewee-led cases · exhibits · voice recommendation, graded like the real thing.</p></div>' + cards;
       scrollFeed();
-    }).catch(function(){ w.innerHTML = '<div class="cy-pick-h"><p>Could not load cases. Please try again.</p></div>'; });
+    }).catch(function(){ w.innerHTML = '<div class="cy-pick-h"><h2>Casey</h2><p>Could not load cases — please make sure you are signed in, then try again.</p></div>'; });
   }
 
   function play(id){
-    var c = CASES.filter(function(x){ return x.id === id; })[0]; if (!c) return;
-    S = { case: c, flat: flatten(c), idx: 0, score: 0, shown: {} };
     var w = E('cyWrap'); if (w) w.innerHTML = '';
-    E('cyProgLabel').textContent = 'Test Completed 0%';
-    say('ai', "I'm Casey. Let's work through **" + c.title + "**. Read the brief, use the exhibits — the math is real. You'll close with a spoken recommendation.");
-    say('ai', c.scenario);
-    // auto exhibits
-    (c.exhibits || []).forEach(function(ex){ if (ex.reveal === 'auto') showExhibit(ex); });
-    setTimeout(step, 500);
+    var pl = E('cyProgLabel'); if (pl) pl.textContent = 'Loading…';
+    apiCasey({ action:'case', caseId: id }).then(function(d){
+      var c = d && d.case;
+      if (!c){ if (w) w.innerHTML = '<div class="cy-pick-h"><h2>Casey</h2><p>Could not load this case — please try again.</p></div>'; return; }
+      S = { case: c, flat: c.steps || [], idx: 0, score: 0, shown: {} };
+      if (pl) pl.textContent = 'Test Completed 0%';
+      say('ai', "I'm Casey. Let's work through **" + c.title + "**. Read the brief, use the exhibits — the math is real. You'll close with a spoken recommendation.");
+      say('ai', c.scenario);
+      (c.exhibits || []).forEach(function(ex){ if (ex.reveal === 'auto') showExhibit(ex); });
+      setTimeout(step, 500);
+    }).catch(function(){ if (w) w.innerHTML = '<div class="cy-pick-h"><h2>Casey</h2><p>Could not load this case — please try again.</p></div>'; });
   }
 
   function exit(){ if (typeof showScreen === 'function') showScreen('mode'); }

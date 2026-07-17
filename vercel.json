@@ -6,6 +6,10 @@
     },
     "api/claude.js": {
       "maxDuration": 60
+    },
+    "api/casey.js": {
+      "includeFiles": "api/_casey_cases.json",
+      "maxDuration": 60
     }
   },
   "headers": [
