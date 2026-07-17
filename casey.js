@@ -1,5 +1,5 @@
 /* CasEdge — Casey Simulator (BCG). Self-contained, self-injecting. */
-/* Loaded via <script src="/casey.js"> in index.html. */
+/* Uses the app theme variables so it follows the single app theme. */
 
 window.CASEY_VOICE_SYSTEM = [
 "Ты — строгий, но справедливый экзаменатор BCG-кейс-интервью. Тебе дают ТРАНСКРИПТ устной финальной рекомендации кандидата (речь → текст, поэтому в нём БУДУТ ошибки распознавания: числа словами, опечатки, слипшиеся слова, пропущенная пунктуация). Оцени транскрипт против чеклиста из 4 критериев. Каждый критерий — строго pass/fail. Верни ТОЛЬКО JSON, без преамбулы и markdown.",
@@ -38,7 +38,6 @@ window.CASEY_RUBRICS = {
 };
 
 
-/* ---- on-screen calculator (like the real BCG Casey) ---- */
 window.caseyCalc = (function(){
   var expr = '';
   function disp(){ var el=document.getElementById('cyCalcDisp'); if(el) el.value = expr || '0'; }
@@ -63,102 +62,95 @@ window.caseyCalc = (function(){
 
 
 (function(){
-  var CSS = `#screen-casey { height:100vh; height:100dvh; overflow:hidden; background:#0b1512; display:flex; flex-direction:column; }
+  var CSS = `#screen-casey { position:relative; height:100vh; height:100dvh; overflow:hidden; background:var(--surface-dark); display:flex; flex-direction:column; }
 #screen-casey.active { display:flex; }
 #cyFeed { flex:1; overflow-y:auto; padding:20px 16px 28px; }
 .cy-wrap { max-width:760px; margin:0 auto; }
-#cyInputZone { border-top:1px solid rgba(255,255,255,.08); background:#12201d; padding:14px 16px; }
+#cyInputZone { border-top:1px solid var(--sv-line, rgba(255,255,255,.08)); background:var(--surface-dark-elevated,#12201d); padding:14px 16px; }
 .cy-iz-inner { max-width:760px; margin:0 auto; }
 /* chat bubbles */
 .cy-msg { display:flex; gap:11px; margin:0 0 16px; align-items:flex-start; }
 .cy-av { width:30px; height:30px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; }
-.cy-av.ai { background:rgba(93,184,166,.14); color:#5db8a6; font-family:inherit; }
-.cy-av.me { background:rgba(255,255,255,.07); color:#eaf2f0; }
-.cy-bbl { background:#16241f; border:1px solid rgba(255,255,255,.07); border-radius:4px 14px 14px 14px; padding:11px 15px; color:#eaf2f0; font-size:14.5px; line-height:1.6; max-width:calc(100% - 44px); }
+.cy-av.ai { background:rgba(93,184,166,.14); color:var(--coral,#5db8a6); font-family:var(--font-display,inherit); }
+.cy-av.me { background:rgba(255,255,255,.07); color:var(--on-dark,#eaf2f0); }
+.cy-bbl { background:var(--surface-dark-elevated,#16241f); border:1px solid var(--sv-line,rgba(255,255,255,.07)); border-radius:4px 14px 14px 14px; padding:11px 15px; color:var(--on-dark,#eaf2f0); font-size:14.5px; line-height:1.6; max-width:calc(100% - 44px); }
 .cy-msg.me .cy-bbl { background:rgba(93,184,166,.10); border-color:rgba(93,184,166,.22); border-radius:14px 4px 14px 14px; }
 .cy-msg.me { flex-direction:row-reverse; }
 .cy-bbl p { margin:0 0 7px; } .cy-bbl p:last-child { margin:0; }
-.cy-bbl b { color:#fff; } .cy-bbl code { background:rgba(255,255,255,.08); padding:1px 5px; border-radius:4px; font-size:.92em; }
+.cy-bbl b { color:var(--ink,#1f2937); } .cy-bbl code { background:rgba(255,255,255,.08); padding:1px 5px; border-radius:4px; font-size:.92em; }
 /* exhibit card */
-.cy-ex { background:#16241f; border:1px solid rgba(255,255,255,.09); border-radius:12px; padding:16px 16px 14px; margin:0 0 16px; }
-.cy-ex-tag { display:inline-block; font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#5db8a6; background:rgba(93,184,166,.10); padding:3px 9px; border-radius:999px; margin-bottom:9px; }
-.cy-ex-title { font-size:15px; font-weight:700; color:#fff; margin-bottom:12px; }
+.cy-ex { background:var(--surface-dark-elevated,#16241f); border:1px solid var(--sv-line,rgba(255,255,255,.09)); border-radius:12px; padding:16px 16px 14px; margin:0 0 16px; }
+.cy-ex-tag { display:inline-block; font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--coral,#5db8a6); background:rgba(93,184,166,.10); padding:3px 9px; border-radius:999px; margin-bottom:9px; }
+.cy-ex-title { font-size:15px; font-weight:700; color:var(--ink,#1f2937); margin-bottom:12px; }
 .cy-ex-block { margin:0 0 16px; } .cy-ex-block:last-child { margin:0; }
-.cy-ex-bname { font-size:11.5px; font-weight:600; letter-spacing:.02em; text-transform:uppercase; color:#9db3ad; margin:0 0 8px; }
-.cy-ex-note { font-size:12px; color:#8fa39d; margin-top:10px; font-style:italic; }
+.cy-ex-bname { font-size:11.5px; font-weight:600; letter-spacing:.02em; text-transform:uppercase; color:var(--on-dark-soft,#9db3ad); margin:0 0 8px; }
+.cy-ex-note { font-size:12px; color:var(--on-dark-soft,#8fa39d); margin-top:10px; font-style:italic; }
 .cy-tbl { width:100%; border-collapse:collapse; font-size:13.5px; }
-.cy-tbl td { padding:7px 10px; border-bottom:1px solid rgba(255,255,255,.06); color:#eaf2f0; }
+.cy-tbl td { padding:7px 10px; border-bottom:1px solid var(--sv-line,rgba(255,255,255,.06)); color:var(--on-dark,#eaf2f0); }
 .cy-tbl tr:last-child td { border-bottom:none; }
 .cy-tbl td:last-child { text-align:right; font-variant-numeric:tabular-nums; font-weight:600; }
-.cy-tbl tr.cy-tbl-total td { border-top:1.5px solid rgba(93,184,166,.4); font-weight:700; color:#fff; }
-.cy-legend { display:flex; flex-wrap:wrap; gap:14px; margin-top:10px; font-size:11.5px; color:#9db3ad; }
+.cy-tbl tr.cy-tbl-total td { border-top:1.5px solid rgba(93,184,166,.4); font-weight:700; color:var(--ink,#1f2937); }
+.cy-legend { display:flex; flex-wrap:wrap; gap:14px; margin-top:10px; font-size:11.5px; color:var(--on-dark-soft,#9db3ad); }
 .cy-legend i { display:inline-block; width:11px; height:11px; border-radius:3px; margin-right:5px; vertical-align:-1px; }
 .cy-chart svg { width:100%; height:auto; display:block; }
 /* input widgets */
-.cy-opt { display:flex; align-items:center; gap:10px; padding:11px 13px; margin:0 0 8px; border:1.5px solid rgba(255,255,255,.12); border-radius:10px; cursor:pointer; color:#eaf2f0; font-size:14px; line-height:1.45; transition:border-color .12s, background .12s; }
+.cy-opt { display:flex; align-items:center; gap:10px; padding:11px 13px; margin:0 0 8px; border:1.5px solid var(--sv-line,rgba(255,255,255,.12)); border-radius:10px; cursor:pointer; color:var(--on-dark,#eaf2f0); font-size:14px; line-height:1.45; transition:border-color .12s, background .12s; }
 .cy-opt:hover { border-color:rgba(93,184,166,.5); }
-.cy-opt.sel { border-color:#5db8a6; background:rgba(93,184,166,.10); }
+.cy-opt.sel { border-color:var(--coral,#5db8a6); background:rgba(93,184,166,.10); }
 .cy-opt .cy-box { width:20px; height:20px; border-radius:5px; border:1.6px solid rgba(255,255,255,.3); flex-shrink:0; display:flex; align-items:center; justify-content:center; }
 .cy-opt.radio .cy-box { border-radius:50%; }
-.cy-opt.sel .cy-box { background:#5db8a6; border-color:#5db8a6; }
+.cy-opt.sel .cy-box { background:var(--coral,#5db8a6); border-color:var(--coral,#5db8a6); }
 .cy-opt.sel .cy-box svg { display:block; } .cy-opt .cy-box svg { display:none; width:12px; height:12px; }
 .cy-opt.correct { border-color:#5fbf6b; background:rgba(95,191,107,.10); }
 .cy-opt.wrong { border-color:#e87c7c; background:rgba(232,124,124,.10); }
 .cy-numrow { display:flex; gap:10px; align-items:center; }
-.cy-numin, .cy-txtin { flex:1; background:rgba(0,0,0,.25); border:1.5px solid rgba(255,255,255,.14); border-radius:10px; padding:12px 14px; color:#fff; font-size:15px; font-family:inherit; }
-.cy-numin:focus, .cy-txtin:focus { outline:none; border-color:#5db8a6; }
+.cy-numin, .cy-txtin { flex:1; background:var(--surface-dark-soft,#efe9dd); border:1.5px solid var(--sv-line,rgba(255,255,255,.14)); border-radius:10px; padding:12px 14px; color:var(--ink,#1f2937); font-size:15px; font-family:inherit; }
+.cy-numin:focus, .cy-txtin:focus { outline:none; border-color:var(--coral,#5db8a6); }
 .cy-txtin { width:100%; min-height:74px; resize:vertical; line-height:1.5; }
-.cy-hint { font-size:12.5px; color:#9db3ad; margin:8px 2px 0; }
-.cy-send { background:#5db8a6; color:#04201b; border:none; border-radius:10px; padding:12px 22px; font-size:14.5px; font-weight:700; cursor:pointer; }
+.cy-hint { font-size:12.5px; color:var(--on-dark-soft,#9db3ad); margin:8px 2px 0; }
+.cy-send { background:var(--coral,#5db8a6); color:#04201b; border:none; border-radius:10px; padding:12px 22px; font-size:14.5px; font-weight:700; cursor:pointer; }
 .cy-send:disabled { opacity:.45; cursor:default; }
-.cy-send.ghost { background:transparent; color:#5db8a6; border:1.5px solid rgba(93,184,166,.4); }
+.cy-send.ghost { background:transparent; color:var(--coral,#5db8a6); border:1.5px solid rgba(93,184,166,.4); }
 .cy-fb { border-radius:10px; padding:11px 14px; margin:0 0 16px; font-size:13.5px; line-height:1.55; }
-.cy-fb.ok { background:rgba(95,191,107,.10); border:1px solid rgba(95,191,107,.35); color:#bfe9c4; }
-.cy-fb.no { background:rgba(232,124,124,.10); border:1px solid rgba(232,124,124,.35); color:#f0c4c4; }
-.cy-fb b { color:#fff; }
+.cy-fb.ok { background:rgba(95,191,107,.10); border:1px solid rgba(95,191,107,.35); color:#2f7d3a; }
+.cy-fb.no { background:rgba(232,124,124,.10); border:1px solid rgba(232,124,124,.35); color:#b23b3b; }
+.cy-fb b { color:var(--ink,#1f2937); }
 /* case picker */
 .cy-pick-h { text-align:center; margin:6px 0 22px; }
-.cy-pick-h .eyebrow { font-size:12px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:#5db8a6; }
-.cy-pick-h h2 { font-size:24px; color:#fff; margin:8px 0 6px; }
-.cy-pick-h p { color:#9db3ad; font-size:14px; margin:0; }
-.cy-card { background:#16241f; border:1px solid rgba(255,255,255,.09); border-radius:12px; padding:15px 16px; margin:0 0 10px; cursor:pointer; display:flex; align-items:center; gap:14px; transition:border-color .12s; }
+.cy-pick-h .eyebrow { font-size:12px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--coral,#5db8a6); }
+.cy-pick-h h2 { font-size:24px; color:var(--ink,#1f2937); margin:8px 0 6px; }
+.cy-pick-h p { color:var(--on-dark-soft,#9db3ad); font-size:14px; margin:0; }
+.cy-card { background:var(--surface-dark-elevated,#16241f); border:1px solid var(--sv-line,rgba(255,255,255,.09)); border-radius:12px; padding:15px 16px; margin:0 0 10px; cursor:pointer; display:flex; align-items:center; gap:14px; transition:border-color .12s; }
 .cy-card:hover { border-color:rgba(93,184,166,.5); }
-.cy-card .cy-num { width:38px; height:38px; border-radius:9px; background:rgba(93,184,166,.13); color:#5db8a6; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px; flex-shrink:0; }
-.cy-card .cy-cn { font-size:15px; font-weight:700; color:#fff; }
-.cy-card .cy-cd { font-size:12.5px; color:#9db3ad; margin-top:2px; }
+.cy-card .cy-num { width:38px; height:38px; border-radius:9px; background:rgba(93,184,166,.13); color:var(--coral,#5db8a6); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px; flex-shrink:0; }
+.cy-card .cy-cn { font-size:15px; font-weight:700; color:var(--ink,#1f2937); }
+.cy-card .cy-cd { font-size:12.5px; color:var(--on-dark-soft,#9db3ad); margin-top:2px; }
 .cy-card.done { opacity:.62; }
 .cy-card .cy-badge { margin-left:auto; font-size:11px; font-weight:700; color:#5fbf6b; }
 /* voice */
 .cy-rec { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
 .cy-recbtn { background:#e87c7c; color:#2a0d0d; border:none; border-radius:999px; padding:12px 20px; font-weight:700; font-size:14px; cursor:pointer; display:flex; align-items:center; gap:8px; }
-.cy-recbtn.recording { background:#c94b4b; color:#fff; animation:cyPulse 1.1s infinite; }
+.cy-recbtn.recording { background:#c94b4b; color:var(--ink,#1f2937); animation:cyPulse 1.1s infinite; }
 @keyframes cyPulse { 0%,100%{box-shadow:0 0 0 0 rgba(201,75,75,.5);} 50%{box-shadow:0 0 0 8px rgba(201,75,75,0);} }
-.cy-recstat { font-size:12.5px; color:#9db3ad; }
-.cy-grade { background:#16241f; border:1px solid rgba(255,255,255,.1); border-radius:12px; padding:16px; margin:0 0 16px; }
-.cy-crit { display:flex; gap:9px; align-items:flex-start; margin:0 0 9px; font-size:13px; color:#eaf2f0; line-height:1.5; }
+.cy-recstat { font-size:12.5px; color:var(--on-dark-soft,#9db3ad); }
+.cy-grade { background:var(--surface-dark-elevated,#16241f); border:1px solid var(--sv-line,rgba(255,255,255,.1)); border-radius:12px; padding:16px; margin:0 0 16px; }
+.cy-crit { display:flex; gap:9px; align-items:flex-start; margin:0 0 9px; font-size:13px; color:var(--on-dark,#eaf2f0); line-height:1.5; }
 .cy-crit .ic { width:19px; height:19px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; margin-top:1px; }
 .cy-crit.pass .ic { background:rgba(95,191,107,.2); color:#5fbf6b; } .cy-crit.fail .ic { background:rgba(232,124,124,.2); color:#e87c7c; }
-.cy-score { font-size:13px; font-weight:700; color:#fff; margin:4px 0 12px; }
+.cy-score { font-size:13px; font-weight:700; color:var(--ink,#1f2937); margin:4px 0 12px; }
 
-#screen-casey { position:relative; background:#0b1512; }
-#screen-casey .bcg-topbar { background:#0b1512; border-bottom:1px solid rgba(255,255,255,.08); }
-#screen-casey .bcg-progress-label, #screen-casey .bcg-interviewer, #screen-casey .bcg-timer { color:#9db3ad; }
-#screen-casey .bcg-exit { color:#eaf2f0; }
-#screen-casey .bcg-progress-track { background:rgba(255,255,255,.12); }
-#screen-casey .bcg-progress-fill { background:#5db8a6; }
-#cyInputZone { background:#0e1a17; border-top:1px solid rgba(255,255,255,.09); }
-/* calculator */
-.cy-calc-fab { position:absolute; right:18px; bottom:104px; z-index:30; width:48px; height:48px; border-radius:50%; background:#5db8a6; color:#04201b; border:none; cursor:pointer; box-shadow:0 6px 18px rgba(0,0,0,.45); display:flex; align-items:center; justify-content:center; }
-.cy-calc-fab:hover { background:#6fc7b6; }
-.cy-calc { position:absolute; right:18px; bottom:162px; z-index:31; width:236px; background:#12201d; border:1px solid rgba(255,255,255,.14); border-radius:14px; padding:12px; box-shadow:0 12px 34px rgba(0,0,0,.55); }
-.cy-calc-head { display:flex; justify-content:space-between; align-items:center; color:#eaf2f0; font-size:11px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; margin-bottom:9px; }
-.cy-calc-head button { background:none; border:none; color:#9db3ad; font-size:19px; line-height:1; cursor:pointer; }
-.cy-calc-disp { width:100%; background:rgba(0,0,0,.35); border:1px solid rgba(255,255,255,.12); border-radius:9px; color:#fff; font-size:22px; text-align:right; padding:9px 11px; margin-bottom:10px; font-variant-numeric:tabular-nums; box-sizing:border-box; }
+#cyInputZone { border-top:1px solid var(--sv-line, rgba(31,41,55,.14)); background:var(--surface-dark-elevated,#fbf8f2); }
+.cy-calc-fab { position:absolute; right:18px; bottom:104px; z-index:30; width:48px; height:48px; border-radius:50%; background:var(--coral,#5db8a6); color:#04201b; border:none; cursor:pointer; box-shadow:0 6px 18px rgba(31,41,55,.18); display:flex; align-items:center; justify-content:center; }
+.cy-calc-fab:hover { filter:brightness(1.06); }
+.cy-calc { position:absolute; right:18px; bottom:162px; z-index:31; width:236px; background:var(--surface-dark-elevated,#fbf8f2); border:1px solid var(--sv-line, rgba(31,41,55,.14)); border-radius:14px; padding:12px; box-shadow:0 14px 40px rgba(31,41,55,.22); }
+.cy-calc-head { display:flex; justify-content:space-between; align-items:center; color:var(--ink,#1f2937); font-size:11px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; margin-bottom:9px; }
+.cy-calc-head button { background:none; border:none; color:var(--on-dark-soft,#5b6472); font-size:19px; line-height:1; cursor:pointer; }
+.cy-calc-disp { width:100%; background:var(--surface-dark-soft,#efe9dd); border:1px solid var(--sv-line, rgba(31,41,55,.14)); border-radius:9px; color:var(--ink,#1f2937); font-size:22px; text-align:right; padding:9px 11px; margin-bottom:10px; font-variant-numeric:tabular-nums; box-sizing:border-box; }
 .cy-calc-keys { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }
-.cy-calc-keys button { padding:12px 0; border:none; border-radius:9px; background:#1e332d; color:#eaf2f0; font-size:15px; font-weight:600; cursor:pointer; }
-.cy-calc-keys button:hover { background:#274039; }
-.cy-calc-keys button.op { background:rgba(93,184,166,.16); color:#5db8a6; }
-.cy-calc-keys button.eq { background:#5db8a6; color:#04201b; }
+.cy-calc-keys button { padding:12px 0; border:1px solid var(--sv-line-soft, rgba(31,41,55,.08)); border-radius:9px; background:var(--surface-dark-soft,#efe9dd); color:var(--ink,#1f2937); font-size:15px; font-weight:600; cursor:pointer; }
+.cy-calc-keys button:hover { background:var(--sv-fill-hover, rgba(31,41,55,.12)); }
+.cy-calc-keys button.op { background:rgba(93,184,166,.16); color:var(--coral,#5db8a6); border-color:transparent; }
+.cy-calc-keys button.eq { background:var(--coral,#5db8a6); color:#04201b; border-color:transparent; }
 .cy-calc-keys button.wide { grid-column:span 2; }
 `;
   var SCREEN = `  <div class="bcg-topbar">
@@ -171,11 +163,11 @@ window.caseyCalc = (function(){
     <div class="bcg-timer" id="cyTimer">BCG &middot; Casey</div>
   </div>
   <div id="cyFeed"><div class="cy-wrap" id="cyWrap"></div></div>
-  <button class="cy-calc-fab" onclick="caseyCalc.toggle()" title="Calculator" aria-label="Calculator"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="8" y1="10" x2="8" y2="10"></line><line x1="12" y1="10" x2="12" y2="10"></line><line x1="16" y1="10" x2="16" y2="10"></line><line x1="8" y1="14" x2="8" y2="14"></line><line x1="12" y1="14" x2="12" y2="14"></line><line x1="16" y1="14" x2="16" y2="18"></line><line x1="8" y1="18" x2="12" y2="18"></line></svg></button>
+  <button class="cy-calc-fab" onclick="caseyCalc.toggle()" title="Calculator" aria-label="Calculator"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="8" y1="14" x2="8" y2="14"></line><line x1="12" y1="14" x2="12" y2="14"></line><line x1="16" y1="14" x2="16" y2="18"></line><line x1="8" y1="18" x2="12" y2="18"></line></svg></button>
   <div class="cy-calc" id="cyCalc" style="display:none">
     <div class="cy-calc-head"><span>Calculator</span><button onclick="caseyCalc.toggle()" aria-label="Close">&times;</button></div>
     <input class="cy-calc-disp" id="cyCalcDisp" readonly value="0">
-    <div class="cy-calc-keys"><button onclick="caseyCalc.press('C')">C</button><button onclick="caseyCalc.press('DEL')">&#9003;</button><button class="op" onclick="caseyCalc.press('%')">%</button><button class="op" onclick="caseyCalc.press('÷')">÷</button><button class="" onclick="caseyCalc.press('7')">7</button><button class="" onclick="caseyCalc.press('8')">8</button><button class="" onclick="caseyCalc.press('9')">9</button><button class="op" onclick="caseyCalc.press('×')">×</button><button class="" onclick="caseyCalc.press('4')">4</button><button class="" onclick="caseyCalc.press('5')">5</button><button class="" onclick="caseyCalc.press('6')">6</button><button class="op" onclick="caseyCalc.press('-')">−</button><button class="" onclick="caseyCalc.press('1')">1</button><button class="" onclick="caseyCalc.press('2')">2</button><button class="" onclick="caseyCalc.press('3')">3</button><button class="op" onclick="caseyCalc.press('+')">+</button><button class="wide" onclick="caseyCalc.press('0')">0</button><button onclick="caseyCalc.press('.')">.</button><button class="eq" onclick="caseyCalc.press('=')">=</button></div>
+    <div class="cy-calc-keys"><button onclick="caseyCalc.press('C')">C</button><button onclick="caseyCalc.press('DEL')">&#9003;</button><button class="op" onclick="caseyCalc.press('%')">%</button><button class="op" onclick="caseyCalc.press('÷')">÷</button><button onclick="caseyCalc.press('7')">7</button><button onclick="caseyCalc.press('8')">8</button><button onclick="caseyCalc.press('9')">9</button><button class="op" onclick="caseyCalc.press('×')">×</button><button onclick="caseyCalc.press('4')">4</button><button onclick="caseyCalc.press('5')">5</button><button onclick="caseyCalc.press('6')">6</button><button class="op" onclick="caseyCalc.press('-')">−</button><button onclick="caseyCalc.press('1')">1</button><button onclick="caseyCalc.press('2')">2</button><button onclick="caseyCalc.press('3')">3</button><button class="op" onclick="caseyCalc.press('+')">+</button><button class="wide" onclick="caseyCalc.press('0')">0</button><button onclick="caseyCalc.press('.')">.</button><button class="eq" onclick="caseyCalc.press('=')">=</button></div>
   </div>
   <div id="cyInputZone" style="display:none"><div class="cy-iz-inner" id="cyIz"></div></div>`;
   var CARD = `          <div class="firm-initial" style="background:rgba(93,184,166,.15);color:var(--accent-teal);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><line x1="8" y1="9" x2="16" y2="9"></line><line x1="8" y1="13" x2="13" y2="13"></line></svg></div>
@@ -235,7 +227,7 @@ window.caseyCalc = (function(){
     var maxv = 0; series.forEach(function(s){ (s.values||[]).forEach(function(v){ if (num(v) > maxv) maxv = num(v); }); });
     var mx = niceMax(maxv), slot = pw / n, gap = histogram ? 0.02 : 0.18, groupW = slot * (1 - gap*2), bw = groupW / sc;
     var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc2(b.name||'chart') + '">';
-    for (var i = 0; i <= 4; i++){ var y = pT + ph - (i/4)*ph; svg += '<line x1="'+pL+'" y1="'+y.toFixed(1)+'" x2="'+(W-pR)+'" y2="'+y.toFixed(1)+'" stroke="rgba(255,255,255,.07)"/>'; svg += '<text x="'+(pL-7)+'" y="'+(y+3.5).toFixed(1)+'" text-anchor="end" font-size="9.5" fill="#9db3ad">'+Math.round(mx*i/4).toLocaleString()+'</text>'; }
+    for (var i = 0; i <= 4; i++){ var y = pT + ph - (i/4)*ph; svg += '<line x1="'+pL+'" y1="'+y.toFixed(1)+'" x2="'+(W-pR)+'" y2="'+y.toFixed(1)+'" stroke="var(--sv-line-soft)"/>'; svg += '<text x="'+(pL-7)+'" y="'+(y+3.5).toFixed(1)+'" text-anchor="end" font-size="9.5" fill="var(--on-dark-soft)">'+Math.round(mx*i/4).toLocaleString()+'</text>'; }
     labels.forEach(function(lab, li){
       series.forEach(function(s, si){
         var v = num((s.values||[])[li]); var h = (v/mx)*ph;
@@ -243,9 +235,9 @@ window.caseyCalc = (function(){
         var bwidth = bw * (histogram ? 1 : 0.84);
         var y = pT + ph - h;
         svg += '<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+bwidth.toFixed(1)+'" height="'+Math.max(0,h).toFixed(1)+'" rx="'+(histogram?0:3)+'" fill="'+PALETTE[si % PALETTE.length]+'" opacity="0.92"/>';
-        if (sc <= 2){ svg += '<text x="'+(x+bwidth/2).toFixed(1)+'" y="'+(y-5).toFixed(1)+'" text-anchor="middle" font-size="9.5" font-weight="700" fill="#eaf2f0">'+esc2((s.values||[])[li])+'</text>'; }
+        if (sc <= 2){ svg += '<text x="'+(x+bwidth/2).toFixed(1)+'" y="'+(y-5).toFixed(1)+'" text-anchor="middle" font-size="9.5" font-weight="700" fill="var(--on-dark)">'+esc2((s.values||[])[li])+'</text>'; }
       });
-      svg += '<text x="'+(pL+li*slot+slot/2).toFixed(1)+'" y="'+(H-pB+16).toFixed(1)+'" text-anchor="middle" font-size="10" fill="#9db3ad">'+esc2(lab)+'</text>';
+      svg += '<text x="'+(pL+li*slot+slot/2).toFixed(1)+'" y="'+(H-pB+16).toFixed(1)+'" text-anchor="middle" font-size="10" fill="var(--on-dark-soft)">'+esc2(lab)+'</text>';
     });
     svg += '</svg>';
     return svg + legend(series);
@@ -259,8 +251,8 @@ window.caseyCalc = (function(){
     minv = Math.min(minv, 0); var mx = niceMax(maxv), rng = mx - minv || 1;
     var xw = n > 1 ? pw/(n-1) : pw;
     var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc2(b.name||'chart') + '">';
-    for (var i = 0; i <= 4; i++){ var y = pT + ph - (i/4)*ph; var val = minv + (mx-minv)*i/4; svg += '<line x1="'+pL+'" y1="'+y.toFixed(1)+'" x2="'+(W-pR)+'" y2="'+y.toFixed(1)+'" stroke="rgba(255,255,255,.07)"/>'; svg += '<text x="'+(pL-7)+'" y="'+(y+3.5).toFixed(1)+'" text-anchor="end" font-size="9.5" fill="#9db3ad">'+Math.round(val).toLocaleString()+'</text>'; }
-    labels.forEach(function(lab, li){ var x = pL + li*xw; svg += '<text x="'+x.toFixed(1)+'" y="'+(H-pB+16).toFixed(1)+'" text-anchor="middle" font-size="10" fill="#9db3ad">'+esc2(lab)+'</text>'; });
+    for (var i = 0; i <= 4; i++){ var y = pT + ph - (i/4)*ph; var val = minv + (mx-minv)*i/4; svg += '<line x1="'+pL+'" y1="'+y.toFixed(1)+'" x2="'+(W-pR)+'" y2="'+y.toFixed(1)+'" stroke="var(--sv-line-soft)"/>'; svg += '<text x="'+(pL-7)+'" y="'+(y+3.5).toFixed(1)+'" text-anchor="end" font-size="9.5" fill="var(--on-dark-soft)">'+Math.round(val).toLocaleString()+'</text>'; }
+    labels.forEach(function(lab, li){ var x = pL + li*xw; svg += '<text x="'+x.toFixed(1)+'" y="'+(H-pB+16).toFixed(1)+'" text-anchor="middle" font-size="10" fill="var(--on-dark-soft)">'+esc2(lab)+'</text>'; });
     series.forEach(function(s, si){
       var col = PALETTE[si % PALETTE.length];
       var pts = (s.values||[]).map(function(v, li){ v = num(v); return { x: pL + li*xw, y: pT + ph - ((v-minv)/rng)*ph, v: (s.values||[])[li] }; });
@@ -279,11 +271,11 @@ window.caseyCalc = (function(){
     var totals = labels.map(function(_, li){ var t=0; series.forEach(function(s){ t += num((s.values||[])[li]); }); return t; });
     var mx = niceMax(Math.max.apply(null, totals)), slot = pw/n, bw = slot*0.5;
     var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc2(b.name||'chart') + '">';
-    for (var i = 0; i <= 4; i++){ var y = pT + ph - (i/4)*ph; svg += '<line x1="'+pL+'" y1="'+y.toFixed(1)+'" x2="'+(W-pR)+'" y2="'+y.toFixed(1)+'" stroke="rgba(255,255,255,.07)"/>'; svg += '<text x="'+(pL-7)+'" y="'+(y+3.5).toFixed(1)+'" text-anchor="end" font-size="9.5" fill="#9db3ad">'+Math.round(mx*i/4).toLocaleString()+'</text>'; }
+    for (var i = 0; i <= 4; i++){ var y = pT + ph - (i/4)*ph; svg += '<line x1="'+pL+'" y1="'+y.toFixed(1)+'" x2="'+(W-pR)+'" y2="'+y.toFixed(1)+'" stroke="var(--sv-line-soft)"/>'; svg += '<text x="'+(pL-7)+'" y="'+(y+3.5).toFixed(1)+'" text-anchor="end" font-size="9.5" fill="var(--on-dark-soft)">'+Math.round(mx*i/4).toLocaleString()+'</text>'; }
     labels.forEach(function(lab, li){
       var x = pL + li*slot + slot/2 - bw/2, acc = 0;
       series.forEach(function(s, si){ var v = num((s.values||[])[li]); var h = (v/mx)*ph; var y = pT + ph - ((acc+v)/mx)*ph; svg += '<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+Math.max(0,h).toFixed(1)+'" fill="'+PALETTE[si % PALETTE.length]+'" opacity="0.92"/>'; if (h > 16) svg += '<text x="'+(x+bw/2).toFixed(1)+'" y="'+(y+h/2+3).toFixed(1)+'" text-anchor="middle" font-size="9.5" font-weight="700" fill="#04201b">'+esc2((s.values||[])[li])+'</text>'; acc += v; });
-      svg += '<text x="'+(pL+li*slot+slot/2).toFixed(1)+'" y="'+(H-pB+16).toFixed(1)+'" text-anchor="middle" font-size="10" fill="#9db3ad">'+esc2(lab)+'</text>';
+      svg += '<text x="'+(pL+li*slot+slot/2).toFixed(1)+'" y="'+(H-pB+16).toFixed(1)+'" text-anchor="middle" font-size="10" fill="var(--on-dark-soft)">'+esc2(lab)+'</text>';
     });
     svg += '</svg>';
     return svg + legend(series);
