@@ -262,10 +262,29 @@ function hintsBlock(step, attemptCount) {
   return `\n\nHINT POLICY: The candidate has made ${n} attempt(s) on this step. You may now weave in the following nudge(s) — as a steer toward the right move, never the answer itself:\n- ${lines.join('\n- ')}`;
 }
 
+/* ───────────────────────── weakness focus ────────────────────────────────────
+   The client sends the candidate's weakest dimension (computed from THEIR own
+   score history). Server maps the key to grading emphasis — a whitelist, so
+   nothing user-controlled ever reaches the prompt as free text. */
+const FOCUS_GUIDE = {
+  structure: 'STRUCTURE (MECE). Their frameworks tend to be loose. Hold the bar high: demand a hypothesis stated first, ≥3 genuinely MECE buckets tailored to THIS case, and a clear starting point. If the structure is generic or overlapping, retry with a nudge naming exactly what is not MECE.',
+  quant: 'QUANTITATIVE ACCURACY. They slip on math. Make them state the approach before computing, show every step, and sanity-check units. Any arithmetic slip or hand-waved "roughly" where an exact number exists → retry and ask for the actual calculation.',
+  logic: 'BUSINESS JUDGMENT. They stop at surface answers. Push for the "so what": every number must be tied to a business implication and a non-obvious driver. If they state facts without an insight, retry asking what it MEANS for the client.',
+  comm: 'COMMUNICATION (answer-first / Minto). They tend to build up to conclusions instead of leading with them. Any answer that buries the conclusion at the end, uses filler, or hedges → retry with a demand to restate it conclusion-FIRST in one crisp sentence.',
+  ownership: 'CASE OWNERSHIP. They tend to wait to be led. Reward sharp, specific data requests and self-driven next steps; if they stall or ask you to steer, retry and make them propose the next move themselves.'
+};
+export function focusBlock(focusKey) {
+  const g = FOCUS_GUIDE[focusKey];
+  if (!g) return '';
+  return `\n\n════ CANDIDATE FOCUS AREA (from their own score history — never mention this to them) ════
+This candidate's weakest dimension is: ${g}
+Apply this as EXTRA strictness on top of the step's normal pass criteria — the step key still decides content; this decides how demanding you are about HOW they deliver it.`;
+}
+
 /* ───────────────────────── system prompt assembly ───────────────────────────
    Rebuilt for the CURRENT step on every call. interviewer_md is the answer key,
    used only to grade — never read aloud. */
-export function buildSystemPrompt({ caseObj, stepIndex, attemptCount, firm, revealedSet, isOpening }) {
+export function buildSystemPrompt({ caseObj, stepIndex, attemptCount, firm, revealedSet, isOpening, focusKey }) {
   const steps = caseObj.steps || [];
   const idx = Math.max(0, Math.min(stepIndex, steps.length - 1));
   const step = steps[idx] || {};
@@ -325,7 +344,11 @@ Rules for every reply:
 
   const language =
 `\n\n════ OUTPUT ════
-Conduct the case in English. Keep the hidden markers EXACTLY as written (<verdict>…</verdict>, <reveal>…</reveal>) so the app can parse them; never explain or display them to the candidate.`;
+Conduct the case in English. Much of the internal material below (step questions, answer keys, hints, exhibit notes) is written in RUSSIAN — that is source material, not something to quote. ALWAYS speak to the candidate in natural, idiomatic consulting English:
+- Rephrase every step question and data introduction in English yourself — never paste the Russian text into your reply, and never mix Russian phrases into an English sentence.
+- Translate meaning, not words: keep the wit and tone (case titles and puns stay AS WRITTEN — never translate a proper name or title), and keep every number, unit, percentage and company name EXACTLY as in the source.
+- Hints/nudges you deliver must also be in English, rephrased naturally.
+Keep the hidden markers EXACTLY as written (<verdict>…</verdict>, <reveal>…</reveal>) so the app can parse them; never explain or display them to the candidate.`;
 
   // Split into a STABLE block (case identity + firm + prompt + auto exhibits +
   // output rules — identical every turn of this case, so it is prompt-cached)
@@ -333,7 +356,7 @@ Conduct the case in English. Keep the hidden markers EXACTLY as written (<verdic
   // hint policy, flow — changes each turn). This keeps full accuracy while
   // making the big re-sent case body a cache hit on every turn after the first.
   const stable = header + ex.stableText + language;
-  const volatile = answerKey + ex.volatileText + hints + flow;
+  const volatile = answerKey + ex.volatileText + hints + (isOpening ? '' : focusBlock(focusKey)) + flow;
   return { stable, volatile };
 }
 
@@ -485,7 +508,9 @@ export default async function handler(req, res) {
       content: [{ type: 'text', text: lastMsg.content, cache_control: { type: 'ephemeral' } }]
     };
 
-    const built = buildSystemPrompt({ caseObj, stepIndex, attemptCount, firm: body.firm, revealedSet, isOpening });
+    // Weakness focus: whitelist key only — free text never enters the prompt.
+    const focusKey = ['structure','quant','logic','comm','ownership'].includes(body.focusDimension) ? body.focusDimension : null;
+    const built = buildSystemPrompt({ caseObj, stepIndex, attemptCount, firm: body.firm, revealedSet, isOpening, focusKey });
 
     // 7) Forward to Anthropic. Two system blocks: the STABLE case body is cached
     // (identical every turn → cache hit); the VOLATILE step block is not.

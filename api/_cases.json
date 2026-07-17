@@ -11139,6 +11139,50 @@
        ]
       ]
      }
+    },
+    {
+     "id": "ex_shape",
+     "title": "Exhibit — Synergy stream over the horizon",
+     "body_md": "Interactive chart-select. Show the candidate the shape options and ask them to pick BEFORE you give the companion numbers. After they pick, confirm or correct using the step's answer key. Correct pick: C (supplier-contract escalators erode the discount ~8% per year — gradual decay, not flat and not a cliff). Never state the correct option before their pick.",
+     "reveal": "on_request",
+     "triggers": [
+      "data",
+      "decay",
+      "escalator",
+      "exhibit",
+      "synergy over time",
+      "данные",
+      "контракты поставщиков",
+      "останется ли скидка",
+      "профиль синергии",
+      "цифры"
+     ],
+     "render": {
+      "type": "select",
+      "question": "Supplier-discount synergy over the 6-year horizon — which shape would you expect? Pick one.",
+      "options": [
+       {
+        "key": "A",
+        "shape": "flat",
+        "label": "Flat every year"
+       },
+       {
+        "key": "B",
+        "shape": "up",
+        "label": "Grows over time"
+       },
+       {
+        "key": "C",
+        "shape": "decay",
+        "label": "Gradual decay"
+       },
+       {
+        "key": "D",
+        "shape": "flat_cliff",
+        "label": "Stops abruptly"
+       }
+      ]
+     }
     }
    ],
    "steps": [
@@ -11186,7 +11230,7 @@
      "label": "Calculation",
      "time_min": null,
      "candidate_md": "Синергия с убыванием 8%/год.",
-     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\ndecay 8%/год\n\nEXPECTED ANSWER:\n$54,456,057.06; deal $109.7M vs ask $105M -> BUY тонко (запас $4.7M)\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) убывающая PV = 54,456,057.06; (2) overstate назван от синергии (~19.45%), НЕ от deal value; (3) отмечено сжатие подушки $15.2M→$4.7M.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\ndecay 8%/год\n\nEXPECTED ANSWER:\n$54,456,057.06; deal $109.7M vs ask $105M -> BUY тонко (запас $4.7M)\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) убывающая PV = 54,456,057.06; (2) overstate назван от синергии (~19.45%), НЕ от deal value; (3) отмечено сжатие подушки $15.2M→$4.7M.\n\nCHART-SELECT KEY (hidden): correct option = C — supplier-contract escalators erode the discount ~8% per year — gradual decay, not flat and not a cliff. If they pick another option, do not reveal the numbers yet; ask them to reconsider and re-pick.",
      "hints": {},
      "conditional_exhibits": []
     },
@@ -11900,6 +11944,51 @@
        ]
       ]
      }
+    },
+    {
+     "id": "ex_shape",
+     "title": "Exhibit — Savings stream over time",
+     "body_md": "Interactive chart-select. Show the candidate the shape options and ask them to pick BEFORE you give the companion numbers. After they pick, confirm or correct using the step's answer key. Correct pick: C (the platform is obsolete in year 5 — savings run flat for 4 years then stop (salvage $2M in year 4)). Never state the correct option before their pick.",
+     "reveal": "on_request",
+     "triggers": [
+      "data",
+      "exhibit",
+      "how long",
+      "lifecycle",
+      "salvage",
+      "данные",
+      "обрыв",
+      "сколько лет",
+      "срок службы",
+      "устареет",
+      "цифры"
+     ],
+     "render": {
+      "type": "select",
+      "question": "The $6.1M annual savings from the automation platform — which shape over time? Pick one.",
+      "options": [
+       {
+        "key": "A",
+        "shape": "flat",
+        "label": "Flat, perpetual"
+       },
+       {
+        "key": "B",
+        "shape": "down_mild",
+        "label": "Slow decline"
+       },
+       {
+        "key": "C",
+        "shape": "flat_cliff",
+        "label": "Flat, then stops"
+       },
+       {
+        "key": "D",
+        "shape": "up",
+        "label": "Grows over time"
+       }
+      ]
+     }
     }
    ],
    "steps": [
@@ -11949,7 +12038,7 @@
      "label": "Calculation",
      "time_min": null,
      "candidate_md": "Правильный PV (4 года +salvage).",
-     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nобрыв год-5; salvage $2M год-4\n\nEXPECTED ANSWER:\nPV $18,924,918.71; +salvage $20,242,380.65 < $28M -> KEEP\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) Σ(6.1M/1.11^t, t=1..4)=18,924,918.71; (2) +salvage=20,242,380.65; (3) вывод KEEP; (4) overstate назван от 4-летнего PV (~109%).",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nобрыв год-5; salvage $2M год-4\n\nEXPECTED ANSWER:\nPV $18,924,918.71; +salvage $20,242,380.65 < $28M -> KEEP\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) Σ(6.1M/1.11^t, t=1..4)=18,924,918.71; (2) +salvage=20,242,380.65; (3) вывод KEEP; (4) overstate назван от 4-летнего PV (~109%).\n\nCHART-SELECT KEY (hidden): correct option = C — the platform is obsolete in year 5 — savings run flat for 4 years then stop (salvage $2M in year 4). If they pick another option, do not reveal the numbers yet; ask them to reconsider and re-pick.",
      "hints": {},
      "conditional_exhibits": []
     },
@@ -12292,6 +12381,50 @@
        ]
       ]
      }
+    },
+    {
+     "id": "ex_shape",
+     "title": "Exhibit — Where does the subscriber base head?",
+     "body_md": "Interactive chart-select. Show the candidate the shape options and ask them to pick BEFORE you give the companion numbers. After they pick, confirm or correct using the step's answer key. Correct pick: C (percentage churn on a 3.1M base far exceeds constant gross adds, so the base shrinks toward the equilibrium where adds = churn — a lower plateau, not zero). Never state the correct option before their pick.",
+     "reveal": "on_request",
+     "triggers": [
+      "churn",
+      "data",
+      "exhibit",
+      "long-run",
+      "база со временем",
+      "данные",
+      "отток",
+      "сколько уходит",
+      "удержание",
+      "цифры"
+     ],
+     "render": {
+      "type": "select",
+      "question": "Gross adds are constant; churn is a % of the base. Where does the 3.1M base head long-run? Pick one.",
+      "options": [
+       {
+        "key": "A",
+        "shape": "up",
+        "label": "Keeps growing"
+       },
+       {
+        "key": "B",
+        "shape": "flat",
+        "label": "Stays flat"
+       },
+       {
+        "key": "C",
+        "shape": "decline_plateau",
+        "label": "Declines to a plateau"
+       },
+       {
+        "key": "D",
+        "shape": "down_steep",
+        "label": "Declines to zero"
+       }
+      ]
+     }
     }
    ],
    "steps": [
@@ -12330,7 +12463,7 @@
      "label": "Calculation",
      "time_min": null,
      "candidate_md": "Чистый рост с churn.",
-     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nchurn 5.0%/мес\n\nEXPECTED ANSWER:\nchurned 442,138; net −22,138 -> база сокращается\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) churned=3.1M×(1−0.95^3)=442,138; (2) net=−22,138; (3) вывод — направление перевёрнуто, чинить churn.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nchurn 5.0%/мес\n\nEXPECTED ANSWER:\nchurned 442,138; net −22,138 -> база сокращается\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) churned=3.1M×(1−0.95^3)=442,138; (2) net=−22,138; (3) вывод — направление перевёрнуто, чинить churn.\n\nCHART-SELECT KEY (hidden): correct option = C — percentage churn on a 3.1M base far exceeds constant gross adds, so the base shrinks toward the equilibrium where adds = churn — a lower plateau, not zero. If they pick another option, do not reveal the numbers yet; ask them to reconsider and re-pick.",
      "hints": {},
      "conditional_exhibits": []
     },
@@ -13238,6 +13371,49 @@
        ]
       ]
      }
+    },
+    {
+     "id": "ex_shape",
+     "title": "Exhibit — Margin stream over years 1–8",
+     "body_md": "Interactive chart-select. Show the candidate the shape options and ask them to pick BEFORE you give the companion numbers. After they pick, confirm or correct using the step's answer key. Correct pick: C (the anchor contract holds margin for 5 years; after the switch to private label a residual ~30% remains in years 6–8 — a step down, not zero). Never state the correct option before their pick.",
+     "reveal": "on_request",
+     "triggers": [
+      "data",
+      "exhibit",
+      "margin over time",
+      "private label",
+      "горизонт контракта",
+      "данные",
+      "как долго якорь",
+      "сколько лет маржа",
+      "цифры"
+     ],
+     "render": {
+      "type": "select",
+      "question": "The $5.8M annual margin — which shape over the 8-year horizon? Pick one.",
+      "options": [
+       {
+        "key": "A",
+        "shape": "flat",
+        "label": "Flat all 8 years"
+       },
+       {
+        "key": "B",
+        "shape": "down_mild",
+        "label": "Gradual decline"
+       },
+       {
+        "key": "C",
+        "shape": "step_down",
+        "label": "Flat, then steps down"
+       },
+       {
+        "key": "D",
+        "shape": "flat_cliff",
+        "label": "Flat, then zero"
+       }
+      ]
+     }
     }
    ],
    "steps": [
@@ -13276,7 +13452,7 @@
      "label": "Calculation",
      "time_min": null,
      "candidate_md": "Правильный PV (5 лет + остаточные).",
-     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nконтракт 5 лет; после private-label, остаточная 30% годы 6-8\n\nEXPECTED ANSWER:\nPV $23,959,595 < $34M -> SKIP\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) 5-лет полн + 3×30% остаточных = 23,959,595; (2) вывод SKIP; (3) overstate назван от PV маржи (~74%).",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nконтракт 5 лет; после private-label, остаточная 30% годы 6-8\n\nEXPECTED ANSWER:\nPV $23,959,595 < $34M -> SKIP\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) 5-лет полн + 3×30% остаточных = 23,959,595; (2) вывод SKIP; (3) overstate назван от PV маржи (~74%).\n\nCHART-SELECT KEY (hidden): correct option = C — the anchor contract holds margin for 5 years; after the switch to private label a residual ~30% remains in years 6–8 — a step down, not zero. If they pick another option, do not reveal the numbers yet; ask them to reconsider and re-pick.",
      "hints": {},
      "conditional_exhibits": []
     },
@@ -13387,6 +13563,50 @@
        ]
       ]
      }
+    },
+    {
+     "id": "ex_shape",
+     "title": "Exhibit — Net synergy stream over 10 years",
+     "body_md": "Interactive chart-select. Show the candidate the shape options and ask them to pick BEFORE you give the companion numbers. After they pick, confirm or correct using the step's answer key. Correct pick: B (erosion of $35M per year off a $165M base is a steep straight-line decline that hits zero around year 5-6 — much faster than a slow decay). Never state the correct option before their pick.",
+     "reveal": "on_request",
+     "triggers": [
+      "costs to achieve",
+      "data",
+      "erosion",
+      "exhibit",
+      "synergy over time",
+      "данные",
+      "синергия net",
+      "стоимость интеграции",
+      "цифры",
+      "что стоит реализовать синергию"
+     ],
+     "render": {
+      "type": "select",
+      "question": "Gross synergy is $165M/yr but competitors respond. Net synergy over the 10-year horizon — which shape? Pick one.",
+      "options": [
+       {
+        "key": "A",
+        "shape": "flat",
+        "label": "Flat $165M"
+       },
+       {
+        "key": "B",
+        "shape": "down_steep",
+        "label": "Steep linear decline"
+       },
+       {
+        "key": "C",
+        "shape": "up",
+        "label": "Grows over time"
+       },
+       {
+        "key": "D",
+        "shape": "decay",
+        "label": "Slow gradual decay"
+       }
+      ]
+     }
     }
    ],
    "steps": [
@@ -13425,7 +13645,7 @@
      "label": "Calculation",
      "time_min": null,
      "candidate_md": "Net PV синергии.",
-     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nupfront CTA $240M, эрозия $35M/год\n\nEXPECTED ANSWER:\nnet PV $558,793,724 < премия -> WALK/renegotiate\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) net_syn=165−35=130M; (2) net_pv=130M×A−240M=558,793,724; (3) вывод WALK; (4) overstate назван от синергии-PV (~81.44% от net), НЕ от премии/equity.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nupfront CTA $240M, эрозия $35M/год\n\nEXPECTED ANSWER:\nnet PV $558,793,724 < премия -> WALK/renegotiate\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) net_syn=165−35=130M; (2) net_pv=130M×A−240M=558,793,724; (3) вывод WALK; (4) overstate назван от синергии-PV (~81.44% от net), НЕ от премии/equity.\n\nCHART-SELECT KEY (hidden): correct option = B — erosion of $35M per year off a $165M base is a steep straight-line decline that hits zero around year 5-6 — much faster than a slow decay. If they pick another option, do not reveal the numbers yet; ask them to reconsider and re-pick.",
      "hints": {},
      "conditional_exhibits": []
     },
