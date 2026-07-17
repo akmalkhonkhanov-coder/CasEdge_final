@@ -172,12 +172,14 @@ export default async function handler(req, res) {
       ? data.content.filter(b => b && b.type === 'text' && typeof b.text === 'string').map(b => b.text).join('\n')
       : '';
 
+    // Hard time budget: everything (call + optional thinking-retry) must fit
+    // inside Vercel's 60s. One generous attempt; NO internal transient retries —
+    // the client performs the full second attempt as a fresh invocation.
+    const T0 = Date.now();
+    const BUDGET_MS = 52 * 1000;
     let response;
     try {
-      // First attempt: bounded to 32s with 2 transient retries so the whole
-      // invocation (auth + call + optional thinking-retry) fits in the 60s
-      // Vercel budget. A full second attempt happens CLIENT-side (fresh 60s).
-      response = await callModel(body, 32 * 1000, 2);
+      response = await callModel(body, 50 * 1000, 0);
     } catch (e) {
       return res.status(504).json({ error: { message: 'The grader is taking too long. Please try again.' } });
     }
@@ -186,10 +188,11 @@ export default async function handler(req, res) {
     // Rare failure mode: the model spends the entire max_tokens budget on a
     // thinking block and returns no text (stop_reason max_tokens). One
     // automatic retry with extra headroom fixes it.
-    if (response.status === 200 && !textOf(data) && data && data.stop_reason === 'max_tokens') {
-      console.error('claude.js: thinking consumed budget, retrying with 6000');
+    const timeLeft = BUDGET_MS - (Date.now() - T0);
+    if (response.status === 200 && !textOf(data) && data && data.stop_reason === 'max_tokens' && timeLeft > 15 * 1000) {
+      console.error('claude.js: thinking consumed budget, retrying with 6000, timeLeft', timeLeft);
       try {
-        const resp2 = await callModel({ ...body, max_tokens: 6000 }, 20 * 1000, 0);
+        const resp2 = await callModel({ ...body, max_tokens: 6000 }, timeLeft - 2000, 0);
         if (resp2.status === 200) {
           const data2 = await resp2.json();
           if (textOf(data2)) { data = data2; response = resp2; }

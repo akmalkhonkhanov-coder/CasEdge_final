@@ -521,7 +521,7 @@ export default async function handler(req, res) {
 
     // 7) Forward to Anthropic. Two system blocks: the STABLE case body is cached
     // (identical every turn → cache hit); the VOLATILE step block is not.
-    const callModel = async (maxTok) => fetchAnthropicWithRetry('https://api.anthropic.com/v1/messages', {
+    const callModel = async (maxTok, timeoutMs, retries) => fetchAnthropicWithRetry('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -538,15 +538,17 @@ export default async function handler(req, res) {
         ],
         messages: convo
       })
-    }, UPSTREAM_TIMEOUT_MS, 4);
+    }, timeoutMs != null ? timeoutMs : UPSTREAM_TIMEOUT_MS, retries != null ? retries : 4);
 
     const extractText = (data) => Array.isArray(data && data.content)
       ? data.content.filter(b => b && b.type === 'text' && typeof b.text === 'string').map(b => b.text).join('\n').trim()
       : '';
 
+    const T0 = Date.now();
+    const BUDGET_MS = 52 * 1000;
     let response;
     try {
-      response = await callModel(MAX_TOKENS);
+      response = await callModel(MAX_TOKENS, 45 * 1000, 1);
     } catch (e) {
       return res.status(504).json({ error: { message: 'The interviewer is taking too long. Please try again.' } });
     }
@@ -561,10 +563,11 @@ export default async function handler(req, res) {
     let text = extractText(data);
     // Rare failure mode: the model spends the ENTIRE budget on a thinking block
     // (stop_reason max_tokens, no text). One automatic retry with more headroom.
-    if (!text && data && data.stop_reason === 'max_tokens') {
-      console.error('case-session: thinking consumed budget, retrying with', MAX_TOKENS_RETRY);
+    const timeLeft = BUDGET_MS - (Date.now() - T0);
+    if (!text && data && data.stop_reason === 'max_tokens' && timeLeft > 12 * 1000) {
+      console.error('case-session: thinking consumed budget, retrying with', MAX_TOKENS_RETRY, 'timeLeft', timeLeft);
       try {
-        const resp2 = await callModel(MAX_TOKENS_RETRY);
+        const resp2 = await callModel(MAX_TOKENS_RETRY, timeLeft - 2000, 0);
         if (resp2.status >= 200 && resp2.status < 300) {
           data = await resp2.json();
           text = extractText(data);
