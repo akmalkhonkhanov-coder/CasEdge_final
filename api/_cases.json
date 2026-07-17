@@ -132,14 +132,29 @@
       "type": "bar",
       "unit": "$",
       "categories": [
-       "Чиланзар (18%)",
-       "Юнусабад (34%)",
-       "Сергели (31%)",
-       "Внешние (17%)"
+       {
+        "en": "Chilanzar (18%)",
+        "ru": "Чиланзар (18%)"
+       },
+       {
+        "en": "Yunusabad (34%)",
+        "ru": "Юнусабад (34%)"
+       },
+       {
+        "en": "Sergeli (31%)",
+        "ru": "Сергели (31%)"
+       },
+       {
+        "en": "Outer districts (17%)",
+        "ru": "Внешние (17%)"
+       }
       ],
       "series": [
        {
-        "name": "Средний чек",
+        "name": {
+         "en": "Average order value",
+         "ru": "Средний чек"
+        },
         "values": [
          44.2,
          31.6,
@@ -148,7 +163,14 @@
         ]
        }
       ],
-      "note": "Под каждым районом — его доля в общем числе заказов. Пилот по прибыльности проводился только в Чиланзаре."
+      "note": {
+       "en": "Under each district — its share of total orders. The profitability pilot ran only in Chilanzar.",
+       "ru": "Под каждым районом — его доля в общем числе заказов. Пилот по прибыльности проводился только в Чиланзаре."
+      },
+      "title": {
+       "en": "Exhibit — Chart",
+       "ru": "Exhibit — График"
+      }
      }
     }
    ],
@@ -242,43 +264,101 @@
      "render": {
       "type": "table",
       "head": [
-       "Показатель",
-       "Значение"
+       {
+        "en": "Metric",
+        "ru": "Показатель"
+       },
+       {
+        "en": "Value",
+        "ru": "Значение"
+       }
       ],
       "rows": [
        [
-        "Текущая цена",
-        "$24.80 / паллета / мес"
+        {
+         "en": "Current price",
+         "ru": "Текущая цена"
+        },
+        {
+         "en": "$24.80 / pallet / mo",
+         "ru": "$24.80 / паллета / мес"
+        }
        ],
        [
-        "Текущий объём",
-        "3,400 паллет"
+        {
+         "en": "Current volume",
+         "ru": "Текущий объём"
+        },
+        {
+         "en": "3,400 pallets",
+         "ru": "3,400 паллет"
+        }
        ],
        [
-        "Базовый var cost",
-        "$6.20 / паллета / мес"
+        {
+         "en": "Base var cost",
+         "ru": "Базовый var cost"
+        },
+        {
+         "en": "$6.20 / pallet / mo",
+         "ru": "$6.20 / паллета / мес"
+        }
        ],
        [
-        "Мощность",
-        "5,200 паллет"
+        {
+         "en": "Capacity",
+         "ru": "Мощность"
+        },
+        {
+         "en": "5,200 pallets",
+         "ru": "5,200 паллет"
+        }
        ],
        [
-        "Микс продуктов",
-        "Мясо 42% · Молочка 33% · Овощи 25%"
+        {
+         "en": "Product mix",
+         "ru": "Микс продуктов"
+        },
+        {
+         "en": "Meat 42% · Dairy 33% · Vegetables 25%",
+         "ru": "Мясо 42% · Молочка 33% · Овощи 25%"
+        }
        ],
        [
-        "Корректировка var cost",
-        "Мясо ×1.00 · Молочка ×0.92 · Овощи ×1.15"
+        {
+         "en": "Var cost adjustment",
+         "ru": "Корректировка var cost"
+        },
+        {
+         "en": "Meat ×1.00 · Dairy ×0.92 · Vegetables ×1.15",
+         "ru": "Мясо ×1.00 · Молочка ×0.92 · Овощи ×1.15"
+        }
        ],
        [
-        "Сезонность",
-        "Пик ×1.30 (40% мес.) · Непик ×0.85 (60%)"
+        {
+         "en": "Seasonality",
+         "ru": "Сезонность"
+        },
+        {
+         "en": "Peak ×1.30 (40% of months) · Off-peak ×0.85 (60%)",
+         "ru": "Пик ×1.30 (40% мес.) · Непик ×0.85 (60%)"
+        }
        ],
        [
-        "Ожидаемый прирост объёма от снижения",
-        "+1,400 паллет *(если конкурент не ответит)"
+        {
+         "en": "Expected volume gain from the cut",
+         "ru": "Ожидаемый прирост объёма от снижения"
+        },
+        {
+         "en": "+1,400 pallets *(if the competitor does not respond)",
+         "ru": "+1,400 паллет *(если конкурент не ответит)"
+        }
        ]
-      ]
+      ],
+      "title": {
+       "en": "Exhibit — Table",
+       "ru": "Exhibit — Таблица"
+      }
      }
     }
    ],
@@ -479,10 +559,22 @@
      "render": {
       "type": "table",
       "head": [
-       "Категория",
-       "Маржа",
-       "Микс до loyalty",
-       "Микс после loyalty"
+       {
+        "en": "Category",
+        "ru": "Категория"
+       },
+       {
+        "en": "Margin",
+        "ru": "Маржа"
+       },
+       {
+        "en": "Mix before loyalty",
+        "ru": "Микс до loyalty"
+       },
+       {
+        "en": "Mix after loyalty",
+        "ru": "Микс после loyalty"
+       }
       ],
       "rows": [
        [
@@ -498,13 +590,23 @@
         "25%"
        ],
        [
-        "Косметика",
+        {
+         "en": "Cosmetics",
+         "ru": "Косметика"
+        },
         "33.6%",
         "13%",
         "12%"
        ]
       ],
-      "note": "Годовая выручка $54M · баллы начисляются 3% от покупок."
+      "note": {
+       "en": "Annual revenue $54M · points accrue at 3% of purchases.",
+       "ru": "Годовая выручка $54M · баллы начисляются 3% от покупок."
+      },
+      "title": {
+       "en": "Exhibit 1 — Table",
+       "ru": "Exhibit 1 — Таблица"
+      }
      }
     },
     {
@@ -525,15 +627,30 @@
      ],
      "render": {
       "type": "line",
-      "unit": "% погашено (кумулятивно)",
+      "unit": {
+       "en": "% redeemed (cumulative)",
+       "ru": "% погашено (кумулятивно)"
+      },
       "categories": [
-       "Год 1",
-       "Год 2",
-       "Год 3"
+       {
+        "en": "Year 1",
+        "ru": "Год 1"
+       },
+       {
+        "en": "Year 2",
+        "ru": "Год 2"
+       },
+       {
+        "en": "Year 3",
+        "ru": "Год 3"
+       }
       ],
       "series": [
        {
-        "name": "Погашение баллов",
+        "name": {
+         "en": "Points redemption",
+         "ru": "Погашение баллов"
+        },
         "values": [
          21,
          58,
@@ -541,7 +658,14 @@
         ]
        }
       ],
-      "note": "Год 1: 21% · Год 2: +37% (кумулятивно 58%) · Год 3: +14%, плато ~72%. Первый год льстит — раннее погашение выглядит низким."
+      "note": {
+       "en": "Year 1: 21% · Year 2: +37% (58% cumulative) · Year 3: +14%, plateau ~72%. Year one flatters — early redemption looks low.",
+       "ru": "Год 1: 21% · Год 2: +37% (кумулятивно 58%) · Год 3: +14%, плато ~72%. Первый год льстит — раннее погашение выглядит низким."
+      },
+      "title": {
+       "en": "Exhibit 2 — Chart",
+       "ru": "Exhibit 2 — График"
+      }
      }
     }
    ],
@@ -653,35 +777,60 @@
      "render": {
       "type": "table",
       "head": [
-       "Рынок",
-       "Спрос (кг)",
-       "Цена (local/кг)",
-       "Var cost (local/кг)",
+       {
+        "en": "Market",
+        "ru": "Рынок"
+       },
+       {
+        "en": "Demand (kg)",
+        "ru": "Спрос (кг)"
+       },
+       {
+        "en": "Price (local/kg)",
+        "ru": "Цена (local/кг)"
+       },
+       {
+        "en": "Var cost (local/kg)",
+        "ru": "Var cost (local/кг)"
+       },
        "FX (local/USD)"
       ],
       "rows": [
        [
-        "Казахстан (KZT)",
+        {
+         "en": "Kazakhstan (KZT)",
+         "ru": "Казахстан (KZT)"
+        },
         "520",
         "19,600",
         "10,900",
         "470"
        ],
        [
-        "Грузия (GEL)",
+        {
+         "en": "Georgia (GEL)",
+         "ru": "Грузия (GEL)"
+        },
         "310",
         "112.0",
         "61.5",
         "2.70"
        ],
        [
-        "Армения (AMD)",
+        {
+         "en": "Armenia (AMD)",
+         "ru": "Армения (AMD)"
+        },
         "400",
         "15,900",
         "9,250",
         "390"
        ]
-      ]
+      ],
+      "title": {
+       "en": "Exhibit 1 — Base demand & local economics",
+       "ru": "Exhibit 1 — базовый спрос и локальная экономика"
+      }
      }
     },
     {
@@ -701,15 +850,30 @@
      ],
      "render": {
       "type": "bar",
-      "unit": "индекс",
+      "unit": {
+       "en": "index",
+       "ru": "индекс"
+      },
       "categories": [
-       "Казахстан",
-       "Грузия",
-       "Армения"
+       {
+        "en": "Kazakhstan",
+        "ru": "Казахстан"
+       },
+       {
+        "en": "Georgia",
+        "ru": "Грузия"
+       },
+       {
+        "en": "Armenia",
+        "ru": "Армения"
+       }
       ],
       "series": [
        {
-        "name": "Сезонный индекс",
+        "name": {
+         "en": "Seasonal index",
+         "ru": "Сезонный индекс"
+        },
         "values": [
          1.35,
          0.9,
@@ -717,7 +881,14 @@
         ]
        }
       ],
-      "note": "Импортная упаковка поднимает var cost ТОЛЬКО в Казахстане на 18% в зимний пик."
+      "note": {
+       "en": "Imported packaging raises var cost ONLY in Kazakhstan, by 18% in the winter peak.",
+       "ru": "Импортная упаковка поднимает var cost ТОЛЬКО в Казахстане на 18% в зимний пик."
+      },
+      "title": {
+       "en": "Exhibit 2 — Seasonal index + context footnote",
+       "ru": "Exhibit 2 — сезонный индекс + сноска"
+      }
      }
     }
    ],
@@ -819,7 +990,10 @@
      ],
      "render": {
       "type": "bar",
-      "unit": "заказов/день",
+      "unit": {
+       "en": "orders/day",
+       "ru": "заказов/день"
+      },
       "categories": [
        "Central",
        "Suburban",
@@ -827,7 +1001,10 @@
       ],
       "series": [
        {
-        "name": "Пик",
+        "name": {
+         "en": "Peak",
+         "ru": "Пик"
+        },
         "values": [
          8200.0,
          6100.0,
@@ -835,14 +1012,21 @@
         ]
        },
        {
-        "name": "Непик",
+        "name": {
+         "en": "Off-peak",
+         "ru": "Непик"
+        },
         "values": [
          5400.0,
          7300.0,
          4600.0
         ]
        }
-      ]
+      ],
+      "title": {
+       "en": "Exhibit 1 — Orders/day by zone × period",
+       "ru": "Exhibit 1 — заказы/день по зоне × периоду"
+      }
      }
     },
     {
@@ -870,7 +1054,10 @@
       ],
       "series": [
        {
-        "name": "Пик",
+        "name": {
+         "en": "Peak",
+         "ru": "Пик"
+        },
         "values": [
          28.0,
          16.0,
@@ -878,14 +1065,21 @@
         ]
        },
        {
-        "name": "Непик",
+        "name": {
+         "en": "Off-peak",
+         "ru": "Непик"
+        },
         "values": [
          19.0,
          11.0,
          6.0
         ]
        }
-      ]
+      ],
+      "title": {
+       "en": "Exhibit 2 — Express adoption by zone × period",
+       "ru": "Exhibit 2 — adoption express по зоне × периоду"
+      }
      }
     }
    ],
@@ -1007,7 +1201,10 @@
       ],
       "series": [
        {
-        "name": "Мороженое мясо (маржа 22%)",
+        "name": {
+         "en": "Frozen meat (22% margin)",
+         "ru": "Мороженое мясо (маржа 22%)"
+        },
         "values": [
          5.1,
          6.9,
@@ -1018,7 +1215,10 @@
         ]
        },
        {
-        "name": "Молочка (маржа 31%)",
+        "name": {
+         "en": "Dairy (31% margin)",
+         "ru": "Молочка (маржа 31%)"
+        },
         "values": [
          2.8,
          4.3,
@@ -1029,7 +1229,10 @@
         ]
        },
        {
-        "name": "Готовая еда (маржа 38%)",
+        "name": {
+         "en": "Ready meals (38% margin)",
+         "ru": "Готовая еда (маржа 38%)"
+        },
         "values": [
          0.0,
          1.6,
@@ -1039,7 +1242,11 @@
          8.2
         ]
        }
-      ]
+      ],
+      "title": {
+       "en": "Exhibit 1 — Revenue by product and year ($M)",
+       "ru": "Exhibit 1 — выручка по продуктам и годам ($M)"
+      }
      }
     },
     {
@@ -1070,7 +1277,10 @@
       ],
       "series": [
        {
-        "name": "Ставка дисконта",
+        "name": {
+         "en": "Discount rate",
+         "ru": "Ставка дисконта"
+        },
         "values": [
          12.0,
          13.0,
@@ -1080,7 +1290,11 @@
          21.0
         ]
        }
-      ]
+      ],
+      "title": {
+       "en": "Exhibit 2 — Discount rate with country risk",
+       "ru": "Exhibit 2 — ставка дисконта со страновым риском"
+      }
      }
     }
    ],
@@ -1192,7 +1406,10 @@
       "unit": "subscribers",
       "slices": [
        {
-        "label": "Спортивные фанаты",
+        "label": {
+         "en": "Sports fans",
+         "ru": "Спортивные фанаты"
+        },
         "value": 22
        },
        {
@@ -1204,17 +1421,35 @@
         "value": 27
        }
       ],
-      "total_note": "480,000 подписчиков",
+      "total_note": {
+       "en": "480,000 subscribers",
+       "ru": "480,000 подписчиков"
+      },
       "companion_table": {
        "head": [
-        "Сегмент",
-        "Доля",
-        "Базовый churn",
-        "Adoption спорта"
+        {
+         "en": "Segment",
+         "ru": "Сегмент"
+        },
+        {
+         "en": "Share",
+         "ru": "Доля"
+        },
+        {
+         "en": "Base churn",
+         "ru": "Базовый churn"
+        },
+        {
+         "en": "Sports adoption",
+         "ru": "Adoption спорта"
+        }
        ],
        "rows": [
         [
-         "Спортивные фанаты",
+         {
+          "en": "Sports fans",
+          "ru": "Спортивные фанаты"
+         },
          "22%",
          "6.1%",
          "74%"
@@ -1232,6 +1467,10 @@
          "5%"
         ]
        ]
+      },
+      "title": {
+       "en": "Exhibit 1 — Base structure (480,000 subscribers)",
+       "ru": "Exhibit 1 — структура базы (480,000 подписчиков)"
       }
      }
     },
@@ -1250,24 +1489,49 @@
      "render": {
       "type": "table",
       "head": [
-       "Сегмент",
-       "Снижение churn"
+       {
+        "en": "Segment",
+        "ru": "Сегмент"
+       },
+       {
+        "en": "Churn reduction",
+        "ru": "Снижение churn"
+       }
       ],
       "rows": [
        [
-        "Спортивные фанаты",
-        "1.9 п.п."
+        {
+         "en": "Sports fans",
+         "ru": "Спортивные фанаты"
+        },
+        {
+         "en": "1.9 p.p.",
+         "ru": "1.9 п.п."
+        }
        ],
        [
         "Casual",
-        "0.8 п.п."
+        {
+         "en": "0.8 p.p.",
+         "ru": "0.8 п.п."
+        }
        ],
        [
         "Kids/Family",
-        "0.3 п.п."
+        {
+         "en": "0.3 p.p.",
+         "ru": "0.3 п.п."
+        }
        ]
       ],
-      "note": "Add-on $4.00/мес · лицензия $1.10/adopter/мес · GM 58% · базовый ARPU $5.90."
+      "note": {
+       "en": "Add-on $4.00/mo · content license $1.10/adopter/mo · GM 58% · base ARPU $5.90.",
+       "ru": "Add-on $4.00/мес · лицензия $1.10/adopter/мес · GM 58% · базовый ARPU $5.90."
+      },
+      "title": {
+       "en": "Exhibit 2 — Monthly churn reduction from sports",
+       "ru": "Exhibit 2 — снижение месячного churn от спорта"
+      }
      }
     }
    ],
@@ -1379,15 +1643,33 @@
      "render": {
       "type": "table",
       "head": [
-       "Класс",
-       "Объём (шт)",
-       "Цена",
-       "Историческая себестоимость",
-       "Replacement cost"
+       {
+        "en": "Class",
+        "ru": "Класс"
+       },
+       {
+        "en": "Volume (units)",
+        "ru": "Объём (шт)"
+       },
+       {
+        "en": "Price",
+        "ru": "Цена"
+       },
+       {
+        "en": "Historical cost",
+        "ru": "Историческая себестоимость"
+       },
+       {
+        "en": "Replacement cost",
+        "ru": "Replacement cost (стоимость замещения)"
+       }
       ],
       "rows": [
        [
-        "Дженерики",
+        {
+         "en": "Generics",
+         "ru": "Дженерики"
+        },
         "1,240,000",
         "$3.85",
         "$2.60",
@@ -1407,7 +1689,11 @@
         "$61.00",
         "$79.50"
        ]
-      ]
+      ],
+      "title": {
+       "en": "Exhibit 1 — Drug classes",
+       "ru": "Exhibit 1 — классы препаратов"
+      }
      }
     },
     {
@@ -1430,13 +1716,19 @@
       "type": "bar",
       "unit": "%",
       "categories": [
-       "Дженерики",
+       {
+        "en": "Generics",
+        "ru": "Дженерики"
+       },
        "Branded Rx",
        "Specialty"
       ],
       "series": [
        {
-        "name": "Доля крупных клиник",
+        "name": {
+         "en": "Share to large clinics",
+         "ru": "Доля крупных клиник"
+        },
         "values": [
          55.0,
          70.0,
@@ -1444,7 +1736,14 @@
         ]
        }
       ],
-      "note": "Контрактная скидка крупным клиникам: 11%."
+      "note": {
+       "en": "Contract discount to large clinics: 11%.",
+       "ru": "Контрактная скидка крупным клиникам: 11%."
+      },
+      "title": {
+       "en": "Exhibit 2 — Volume share to large clinics (11% contract discount)",
+       "ru": "Exhibit 2 — доля объёма крупным клиникам (контрактная скидка 11%)"
+      }
      }
     }
    ],
@@ -1654,10 +1953,22 @@
      "render": {
       "type": "table",
       "head": [
-       "Регион",
-       "Выручка ($M)",
-       "Операционная маржа",
-       "Аллоцированный overhead ($M)"
+       {
+        "en": "Region",
+        "ru": "Регион"
+       },
+       {
+        "en": "Revenue ($M)",
+        "ru": "Выручка ($M)"
+       },
+       {
+        "en": "Operating margin",
+        "ru": "Операционная маржа"
+       },
+       {
+        "en": "Allocated overhead ($M)",
+        "ru": "Аллоцированный overhead ($M)"
+       }
       ],
       "rows": [
        [
@@ -1685,12 +1996,19 @@
         "3.1"
        ],
        [
-        "Итого по сводке",
+        {
+         "en": "Summary total",
+         "ru": "Итого по сводке"
+        },
         "298.09",
         "",
         ""
        ]
-      ]
+      ],
+      "title": {
+       "en": "Exhibit — Table",
+       "ru": "Exhibit — Таблица"
+      }
      }
     }
    ],
@@ -1820,10 +2138,22 @@
      "render": {
       "type": "table",
       "head": [
-       "Сегмент",
-       "Ставка/ночь",
-       "Отмены",
-       "Базовый спрос (ном.-ночей)"
+       {
+        "en": "Segment",
+        "ru": "Сегмент"
+       },
+       {
+        "en": "Rate/night",
+        "ru": "Ставка/ночь"
+       },
+       {
+        "en": "Cancellations",
+        "ru": "Отмены"
+       },
+       {
+        "en": "Base demand (room-nights)",
+        "ru": "Базовый спрос (ном.-ночей)"
+       }
       ],
       "rows": [
        [
@@ -1845,12 +2175,19 @@
         "4,100"
        ],
        [
-        "OTA (онлайн)",
+        {
+         "en": "OTA (online)",
+         "ru": "OTA (онлайн)"
+        },
         "$232",
         "41%",
         "3,600"
        ]
-      ]
+      ],
+      "title": {
+       "en": "Exhibit 1 — Table",
+       "ru": "Exhibit 1 — Таблица"
+      }
      }
     },
     {
@@ -1870,7 +2207,10 @@
      ],
      "render": {
       "type": "bar",
-      "unit": "× от базы 1.0",
+      "unit": {
+       "en": "× vs baseline 1.0",
+       "ru": "× от базы 1.0"
+      },
       "categories": [
        "Leisure",
        "Group/Tour",
@@ -1879,7 +2219,10 @@
       ],
       "series": [
        {
-        "name": "Сезонный множитель",
+        "name": {
+         "en": "Seasonal multiplier",
+         "ru": "Сезонный множитель"
+        },
         "values": [
          1.4,
          1.2,
@@ -1888,7 +2231,14 @@
         ]
        }
       ],
-      "note": "База = 1.0. Corporate — единственный сегмент ниже базы: корпоративные поездки проседают в праздничные недели."
+      "note": {
+       "en": "Baseline = 1.0. Corporate is the only segment below baseline: business travel dips in holiday weeks.",
+       "ru": "База = 1.0. Corporate — единственный сегмент ниже базы: корпоративные поездки проседают в праздничные недели."
+      },
+      "title": {
+       "en": "Exhibit 2 — Chart",
+       "ru": "Exhibit 2 — График"
+      }
      }
     }
    ],
@@ -1991,8 +2341,14 @@
      "render": {
       "type": "table",
       "head": [
-       "Параметр",
-       "Значение"
+       {
+        "en": "Parameter",
+        "ru": "Параметр"
+       },
+       {
+        "en": "Value",
+        "ru": "Значение"
+       }
       ],
       "rows": [
        [
@@ -2000,34 +2356,74 @@
         "$100,000,000"
        ],
        [
-        "Генерация в год 1",
-        "210,000 МВт·ч"
+        {
+         "en": "Year-1 generation",
+         "ru": "Генерация в год 1"
+        },
+        {
+         "en": "210,000 MWh",
+         "ru": "210,000 МВт·ч"
+        }
        ],
        [
-        "Деградация панелей",
-        "0.7% / год"
+        {
+         "en": "Panel degradation",
+         "ru": "Деградация панелей"
+        },
+        {
+         "en": "0.7% / yr",
+         "ru": "0.7% / год"
+        }
        ],
        [
-        "Цена по PPA в год 1",
-        "$54.00 / МВт·ч"
+        {
+         "en": "PPA price in year 1",
+         "ru": "Цена по PPA в год 1"
+        },
+        {
+         "en": "$54.00 / MWh",
+         "ru": "$54.00 / МВт·ч"
+        }
        ],
        [
-        "Эскалация цены по PPA",
-        "2.5% / год"
+        {
+         "en": "PPA price escalation",
+         "ru": "Эскалация цены по PPA"
+        },
+        {
+         "en": "2.5% / yr",
+         "ru": "2.5% / год"
+        }
        ],
        [
-        "Годовой opex",
+        {
+         "en": "Annual opex",
+         "ru": "Годовой opex"
+        },
         "$2,400,000"
        ],
        [
-        "Срок жизни",
-        "20 лет"
+        {
+         "en": "Lifetime",
+         "ru": "Срок жизни"
+        },
+        {
+         "en": "20 years",
+         "ru": "20 лет"
+        }
        ],
        [
-        "Ставка дисконта",
+        {
+         "en": "Discount rate",
+         "ru": "Ставка дисконта"
+        },
         "8%"
        ]
-      ]
+      ],
+      "title": {
+       "en": "Exhibit — Table",
+       "ru": "Exhibit — Таблица"
+      }
      }
     }
    ],
@@ -2131,11 +2527,20 @@
      "render": {
       "type": "table",
       "head": [
-       "Сегмент",
+       {
+        "en": "Segment",
+        "ru": "Сегмент"
+       },
        "APR",
-       "Ставка дефолта",
+       {
+        "en": "Default rate",
+        "ru": "Ставка дефолта"
+       },
        "LGD",
-       "Портфель ($M)"
+       {
+        "en": "Portfolio ($M)",
+        "ru": "Портфель ($M)"
+       }
       ],
       "rows": [
        [
@@ -2160,7 +2565,14 @@
         "40"
        ]
       ],
-      "note": "Стоимость фондирования — 8% для всех сегментов."
+      "note": {
+       "en": "Funding cost — 8% for all segments.",
+       "ru": "Стоимость фондирования — 8% для всех сегментов."
+      },
+      "title": {
+       "en": "Exhibit 1 — Table",
+       "ru": "Exhibit 1 — Таблица"
+      }
      }
     },
     {
@@ -2288,7 +2700,10 @@
      "render": {
       "type": "table",
       "head": [
-       "Категория",
+       {
+        "en": "Category",
+        "ru": "Категория"
+       },
        "Cost base"
       ],
       "rows": [
@@ -2312,7 +2727,11 @@
         "Fleet leasing",
         "187.0"
        ]
-      ]
+      ],
+      "title": {
+       "en": "Exhibit 1 — Target cost base ($M/yr)",
+       "ru": "Exhibit 1 — Cost base цели ($M/год)"
+      }
      }
     },
     {
@@ -2343,7 +2762,10 @@
       ],
       "series": [
        {
-        "name": "Доля перекрытия",
+        "name": {
+         "en": "Overlap share",
+         "ru": "Доля перекрытия"
+        },
         "values": [
          88,
          61,
@@ -2353,7 +2775,10 @@
         ]
        },
        {
-        "name": "Достижимая экономия",
+        "name": {
+         "en": "Achievable capture",
+         "ru": "Достижимая экономия"
+        },
         "values": [
          32,
          19,
@@ -2363,7 +2788,14 @@
         ]
        }
       ],
-      "note": "Синергия = cost base (Exhibit 1) × overlap × capture. Ни один exhibit по отдельности ответа не даёт."
+      "note": {
+       "en": "Synergy = cost base (Exhibit 1) × overlap × capture. No single exhibit gives the answer on its own.",
+       "ru": "Синергия = cost base (Exhibit 1) × overlap × capture. Ни один exhibit по отдельности ответа не даёт."
+      },
+      "title": {
+       "en": "Exhibit 2 — Chart (feeds the SAME formula as Exhibit 1)",
+       "ru": "Exhibit 2 — График (числа входят в ту же формулу, что Exhibit 1)"
+      }
      }
     }
    ],
@@ -2700,14 +3132,20 @@
       "type": "bar",
       "unit": "$",
       "categories": [
-       "Chorsu (41,200 пац.)",
+       {
+        "en": "Chorsu (41,200 patients)",
+        "ru": "Chorsu (41,200 пац.)"
+       },
        "Yunusabad (44,800)",
        "Sergeli (35,100)",
        "Mirobod (46,200)"
       ],
       "series": [
        {
-        "name": "Годовые costs",
+        "name": {
+         "en": "Annual costs",
+         "ru": "Годовые costs"
+        },
         "values": [
          4820000,
          5310000,
@@ -2716,7 +3154,14 @@
         ]
        }
       ],
-      "note": "Итого по сети: $19,180,000 и 160,700 пациентов. Сноска мелким шрифтом: Mirobod перешёл на календарную отчётность в этом году; переходный период составил 14 месяцев."
+      "note": {
+       "en": "Network total: $19,180,000 and 160,700 patients. Fine-print footnote: Mirobod switched to calendar-year reporting this year; the transition period covered 14 months.",
+       "ru": "Итого по сети: $19,180,000 и 160,700 пациентов. Сноска мелким шрифтом: Mirobod перешёл на календарную отчётность в этом году; переходный период составил 14 месяцев."
+      },
+      "title": {
+       "en": "Exhibit — Chart",
+       "ru": "Exhibit — График"
+      }
      }
     }
    ],
@@ -2837,13 +3282,34 @@
      "render": {
       "type": "table",
       "head": [
-       "Модель",
-       "Units Y1",
-       "Price Y1",
-       "Cost Y1",
-       "Units Y2",
-       "Price Y2",
-       "Cost Y2"
+       {
+        "en": "Model",
+        "ru": "Модель"
+       },
+       {
+        "en": "Units Y1",
+        "ru": "Штук Y1"
+       },
+       {
+        "en": "Price Y1",
+        "ru": "Цена Y1"
+       },
+       {
+        "en": "Cost Y1",
+        "ru": "Затраты Y1"
+       },
+       {
+        "en": "Units Y2",
+        "ru": "Штук Y2"
+       },
+       {
+        "en": "Price Y2",
+        "ru": "Цена Y2"
+       },
+       {
+        "en": "Cost Y2",
+        "ru": "Затраты Y2"
+       }
       ],
       "rows": [
        [
@@ -2873,7 +3339,11 @@
         "46,100",
         "40,750"
        ]
-      ]
+      ],
+      "title": {
+       "en": "Exhibit 1 — Table",
+       "ru": "Exhibit 1 — Таблица"
+      }
      }
     },
     {
@@ -3010,9 +3480,18 @@
      "render": {
       "type": "table",
       "head": [
-       "Сегмент",
-       "Спрос (TEU/год)",
-       "Выручка/TEU",
+       {
+        "en": "Segment",
+        "ru": "Сегмент"
+       },
+       {
+        "en": "Demand (TEU/yr)",
+        "ru": "Спрос (TEU/год)"
+       },
+       {
+        "en": "Revenue/TEU",
+        "ru": "Выручка/TEU"
+       },
        "Var cost/TEU"
       ],
       "rows": [
@@ -3035,7 +3514,14 @@
         "$131"
        ]
       ],
-      "note": "Номинальная пропускная способность причала — **92,000 TEU/год** при равномерной загрузке."
+      "note": {
+       "en": "Nominal berth capacity — **92,000 TEU/yr** at even utilization.",
+       "ru": "Номинальная пропускная способность причала — **92,000 TEU/год** при равномерной загрузке."
+      },
+      "title": {
+       "en": "Exhibit 1 — Cargo segments",
+       "ru": "Exhibit 1 — Сегменты грузов"
+      }
      }
     },
     {
@@ -3290,13 +3776,25 @@
       "type": "bar",
       "unit": "$",
       "categories": [
-       "North (3,100 рем., TAT 4.2д)",
-       "Central (4,800 рем., TAT 3.1д)",
-       "South (2,050 рем., TAT 5.6д)"
+       {
+        "en": "North (3,100 repairs, TAT 4.2d)",
+        "ru": "North (3,100 рем., TAT 4.2д)"
+       },
+       {
+        "en": "Central (4,800 repairs, TAT 3.1d)",
+        "ru": "Central (4,800 рем., TAT 3.1д)"
+       },
+       {
+        "en": "South (2,050 repairs, TAT 5.6d)",
+        "ru": "South (2,050 рем., TAT 5.6д)"
+       }
       ],
       "series": [
        {
-        "name": "Годовой кост",
+        "name": {
+         "en": "Annual cost",
+         "ru": "Годовой кост"
+        },
         "values": [
          8400000.0,
          11200000.0,
@@ -3304,7 +3802,14 @@
         ]
        }
       ],
-      "note": "Парк 1,840 вагонов · выручка $310/вагон-день в эксплуатации · маржа 34%."
+      "note": {
+       "en": "Fleet of 1,840 railcars · revenue $310 per railcar-day in service · margin 34%.",
+       "ru": "Парк 1,840 вагонов · выручка $310/вагон-день в эксплуатации · маржа 34%."
+      },
+      "title": {
+       "en": "Exhibit — Table",
+       "ru": "Exhibit — Таблица"
+      }
      }
     }
    ],
@@ -3630,43 +4135,77 @@
      "render": {
       "type": "table",
       "head": [
-       "Регион",
-       "Урожай (заявлено)",
-       "Площадь (га)",
-       "Цена ($/тонна)"
+       {
+        "en": "Region",
+        "ru": "Регион"
+       },
+       {
+        "en": "Harvest (reported)",
+        "ru": "Урожай (заявлено)"
+       },
+       {
+        "en": "Area (ha)",
+        "ru": "Площадь (га)"
+       },
+       {
+        "en": "Price ($/tonne)",
+        "ru": "Цена ($/тонна)"
+       }
       ],
       "rows": [
        [
         "Steppe North",
-        "48,200 тонн",
+        {
+         "en": "48,200 tonnes",
+         "ru": "48,200 тонн"
+        },
         "21,400",
         "238"
        ],
        [
         "River Basin",
-        "39,600 тонн",
+        {
+         "en": "39,600 tonnes",
+         "ru": "39,600 тонн"
+        },
         "16,900",
         "245"
        ],
        [
         "Highland",
-        "312,000 центнеров",
+        {
+         "en": "312,000 centners",
+         "ru": "312,000 центнеров"
+        },
         "13,800",
         "231"
        ],
        [
         "Coastal",
-        "27,300 тонн",
+        {
+         "en": "27,300 tonnes",
+         "ru": "27,300 тонн"
+        },
         "11,200",
         "252"
        ],
        [
-        "Итого по сводке",
-        "146,300 тонн",
+        {
+         "en": "Summary total",
+         "ru": "Итого по сводке"
+        },
+        {
+         "en": "146,300 tonnes",
+         "ru": "146,300 тонн"
+        },
         "",
         ""
        ]
-      ]
+      ],
+      "title": {
+       "en": "Exhibit 1 — Table",
+       "ru": "Exhibit 1 — Таблица"
+      }
      }
     },
     {
@@ -3910,7 +4449,10 @@
       ],
       "series": [
        {
-        "name": "Выручка",
+        "name": {
+         "en": "Revenue",
+         "ru": "Выручка"
+        },
         "values": [
          4820000,
          2340000,
@@ -3919,7 +4461,10 @@
         ]
        },
        {
-        "name": "Переменные косты",
+        "name": {
+         "en": "Variable costs",
+         "ru": "Переменные косты"
+        },
         "values": [
          2650000,
          1390000,
@@ -3928,7 +4473,10 @@
         ]
        },
        {
-        "name": "Распределённый OH",
+        "name": {
+         "en": "Allocated OH",
+         "ru": "Распределённый OH"
+        },
         "values": [
          1180000,
          890000,
@@ -3937,7 +4485,14 @@
         ]
        }
       ],
-      "note": "Halo (доля онлайн-выручки от клиентов из магазина): Mall A 22% · Mall B 19% · Outlet 8% · Flagship 0%. Онлайн-выручка $8,600,000, маржа 31%. Сноска: лишь 35% распределённого overhead реально исчезает при закрытии."
+      "note": {
+       "en": "Halo (share of online revenue from in-store customers): Mall A 22% · Mall B 19% · Outlet 8% · Flagship 0%. Online revenue $8,600,000 at 31% margin. Footnote: only 35% of allocated overhead actually disappears on closure.",
+       "ru": "Halo (доля онлайн-выручки от клиентов из магазина): Mall A 22% · Mall B 19% · Outlet 8% · Flagship 0%. Онлайн-выручка $8,600,000, маржа 31%. Сноска: лишь 35% распределённого overhead реально исчезает при закрытии."
+      },
+      "title": {
+       "en": "Exhibit — Chart",
+       "ru": "Exhibit — График"
+      }
      }
     }
    ],
@@ -4067,9 +4622,18 @@
      "render": {
       "type": "table",
       "head": [
-       "Линия",
-       "Прибыль",
-       "RWA (активы, взвешенные по риску)"
+       {
+        "en": "Line",
+        "ru": "Линия"
+       },
+       {
+        "en": "Profit",
+        "ru": "Прибыль"
+       },
+       {
+        "en": "RWA (risk-weighted assets)",
+        "ru": "RWA (активы, взвешенные по риску)"
+       }
       ],
       "rows": [
        [
@@ -4098,7 +4662,14 @@
         "$140,000,000"
        ]
       ],
-      "note": "Требование к капиталу — 12% от RWA."
+      "note": {
+       "en": "Capital requirement — 12% of RWA.",
+       "ru": "Требование к капиталу — 12% от RWA."
+      },
+      "title": {
+       "en": "Exhibit — Table",
+       "ru": "Exhibit — Таблица"
+      }
      }
     }
    ],
@@ -4317,9 +4888,18 @@
      "render": {
       "type": "table",
       "head": [
-       "Объект",
-       "Текущий NOI",
-       "Лет до конца аренды"
+       {
+        "en": "Property",
+        "ru": "Объект"
+       },
+       {
+        "en": "Current NOI",
+        "ru": "Текущий NOI"
+       },
+       {
+        "en": "Years left on lease",
+        "ru": "Лет до конца аренды"
+       }
       ],
       "rows": [
        [
@@ -4343,7 +4923,14 @@
         "3"
        ]
       ],
-      "note": "Текущий NOI **$12,300,000** · cap rate сегодня **7.8%** · просят **$168,000,000** · ставка дисконта 9.5%, горизонт 10 лет."
+      "note": {
+       "en": "Current NOI **$12,300,000** · today's cap rate **7.8%** · asking **$168,000,000** · discount rate 9.5%, 10-year horizon.",
+       "ru": "Текущий NOI **$12,300,000** · cap rate сегодня **7.8%** · просят **$168,000,000** · ставка дисконта 9.5%, горизонт 10 лет."
+      },
+      "title": {
+       "en": "Exhibit (given upfront) — Rent roll",
+       "ru": "Блок 1 (сразу) — Таблица rent roll"
+      }
      }
     }
    ],
@@ -7271,11 +7858,26 @@
      "render": {
       "type": "table",
       "head": [
-       "Division",
-       "Revenue",
-       "Direct cost",
-       "Alloc. distribution OH",
-       "Reported EBIT"
+       {
+        "en": "Division",
+        "ru": "Дивизион"
+       },
+       {
+        "en": "Revenue",
+        "ru": "Выручка"
+       },
+       {
+        "en": "Direct cost",
+        "ru": "Прямые затраты"
+       },
+       {
+        "en": "Alloc. distribution OH",
+        "ru": "Аллоц. OH дистрибуции"
+       },
+       {
+        "en": "Reported EBIT",
+        "ru": "Отчётный EBIT"
+       }
       ],
       "rows": [
        [
@@ -7306,7 +7908,8 @@
         "120",
         "+76"
        ]
-      ]
+      ],
+      "title": "Exhibit A — Divisional P&L (shared distribution OH allocated evenly $40M each)."
      }
     }
    ],
@@ -7418,9 +8021,18 @@
      "render": {
       "type": "table",
       "head": [
-       "Tool line",
-       "Historical build cost ($M)",
-       "Current replacement index"
+       {
+        "en": "Tool line",
+        "ru": "Линейка инструментов"
+       },
+       {
+        "en": "Historical build cost ($M)",
+        "ru": "Историческая стоимость постройки ($M)"
+       },
+       {
+        "en": "Current replacement index",
+        "ru": "Текущий replacement-индекс"
+       }
       ],
       "rows": [
        [
@@ -7449,12 +8061,16 @@
         "1.70"
        ],
        [
-        "Total / weighted",
+        {
+         "en": "Total / weighted",
+         "ru": "Итого / взвешенно"
+        },
         "400",
         "1.4625"
        ]
       ],
-      "note": "Target ships **40 tools/yr** at **$12M/tool**; historical variable cost **$7M/tool**."
+      "note": "Target ships **40 tools/yr** at **$12M/tool**; historical variable cost **$7M/tool**.",
+      "title": "Exhibit A — Target tool-line cost basis."
      }
     },
     {
@@ -7574,12 +8190,27 @@
       "type": "table",
       "head": [
        "Hospital",
-       "Revenue",
-       "Direct cost",
-       "Dedicated OH",
+       {
+        "en": "Revenue",
+        "ru": "Выручка"
+       },
+       {
+        "en": "Direct cost",
+        "ru": "Прямые затраты"
+       },
+       {
+        "en": "Dedicated OH",
+        "ru": "Выделенный OH"
+       },
        "EBIT",
-       "Beds",
-       "Occupancy"
+       {
+        "en": "Beds",
+        "ru": "Коек"
+       },
+       {
+        "en": "Occupancy",
+        "ru": "Загрузка"
+       }
       ],
       "rows": [
        [
@@ -7618,7 +8249,8 @@
         "280",
         "0.61"
        ]
-      ]
+      ],
+      "title": "Exhibit A — Hospital P&L + occupancy."
      }
     }
    ],
@@ -7820,17 +8452,44 @@
      "render": {
       "type": "table",
       "head": [
-       "Plant",
-       "Capacity",
+       {
+        "en": "Plant",
+        "ru": "Завод"
+       },
+       {
+        "en": "Capacity",
+        "ru": "Мощность"
+       },
        "Util.",
-       "Units",
-       "Price/unit",
-       "Var cost/unit",
+       {
+        "en": "Units",
+        "ru": "Штук"
+       },
+       {
+        "en": "Price/unit",
+        "ru": "Цена/шт"
+       },
+       {
+        "en": "Var cost/unit",
+        "ru": "Var cost/шт"
+       },
        "Contribution margin",
-       "Plant fixed",
-       "Contribution (before corp OH)",
-       "Alloc. corp OH",
-       "Reported EBIT"
+       {
+        "en": "Plant fixed",
+        "ru": "Fixed завода"
+       },
+       {
+        "en": "Contribution (before corp OH)",
+        "ru": "Вклад (до корп. OH)"
+       },
+       {
+        "en": "Alloc. corp OH",
+        "ru": "Аллоц. корп. OH"
+       },
+       {
+        "en": "Reported EBIT",
+        "ru": "Отчётный EBIT"
+       }
       ],
       "rows": [
        [
@@ -7873,7 +8532,8 @@
         "−5.50"
        ]
       ],
-      "note": "Corporate OH $75M ($25M each) is **unavoidable at group level** (HQ, R&D, brand). Every contribution above derives from the shown per-plant price/variable-cost/fixed — same formula for all three (exhibit-level metric unity)."
+      "note": "Corporate OH $75M ($25M each) is **unavoidable at group level** (HQ, R&D, brand). Every contribution above derives from the shown per-plant price/variable-cost/fixed — same formula for all three (exhibit-level metric unity).",
+      "title": "Exhibit A — Plant P&L."
      }
     }
    ],
@@ -7985,7 +8645,10 @@
       ],
       "series": [
        {
-        "name": "O&M per MW",
+        "name": {
+         "en": "O&M per MW",
+         "ru": "O&M на MW"
+        },
         "values": [
          0.03,
          0.034,
@@ -7995,7 +8658,11 @@
         ]
        }
       ],
-      "note": "Fleet: 500 MW · O&M $23.0M · avg 0.046 $M/MW. Все площадки по 100 MW."
+      "note": {
+       "en": "Fleet: 500 MW · O&M $23.0M · avg 0.046 $M/MW. All sites are 100 MW each.",
+       "ru": "Fleet: 500 MW · O&M $23.0M · среднее 0.046 $M/MW. Все площадки по 100 MW."
+      },
+      "title": "Exhibit A — Per-site O&M."
      }
     }
    ],
@@ -8098,9 +8765,18 @@
      "render": {
       "type": "table",
       "head": [
-       "Item",
-       "Value",
-       "Derivation"
+       {
+        "en": "Item",
+        "ru": "Показатель"
+       },
+       {
+        "en": "Value",
+        "ru": "Значение"
+       },
+       {
+        "en": "Derivation",
+        "ru": "Вывод"
+       }
       ],
       "rows": [
        [
@@ -8109,22 +8785,34 @@
         "regulated asset value"
        ],
        [
-        "Allowed ROE",
+        {
+         "en": "Allowed ROE",
+         "ru": "Разрешённый ROE"
+        },
         "9%",
         "regulator-set"
        ],
        [
-        "Allowed profit (ceiling)",
+        {
+         "en": "Allowed profit (ceiling)",
+         "ru": "Разрешённая прибыль (потолок)"
+        },
         "$360M",
         "4,000 × 0.09"
        ],
        [
-        "Volume",
+        {
+         "en": "Volume",
+         "ru": "Объём"
+        },
         "20,000 GWh",
         "—"
        ],
        [
-        "Current rate",
+        {
+         "en": "Current rate",
+         "ru": "Текущая ставка"
+        },
         "$100/MWh",
         "→ revenue $2,000M"
        ],
@@ -8134,11 +8822,15 @@
         "—"
        ],
        [
-        "Current profit",
+        {
+         "en": "Current profit",
+         "ru": "Текущая прибыль"
+        },
         "$360M",
         "2,000 − 1,640 = *exactly at the allowed ceiling"
        ]
-      ]
+      ],
+      "title": "Exhibit A — Regulated economics."
      }
     },
     {
@@ -8266,7 +8958,10 @@
       ],
       "rows": [
        [
-        "Probability",
+        {
+         "en": "Probability",
+         "ru": "Вероятность"
+        },
         "0.15",
         "0.25",
         "0.30",
@@ -8274,7 +8969,8 @@
         "0.10"
        ]
       ],
-      "note": "Expected no-shows ≈ **23** (~8% of 300)."
+      "note": "Expected no-shows ≈ **23** (~8% of 300).",
+      "title": "Exhibit A — No-show distribution (nightly)."
      }
     }
    ],
@@ -8377,9 +9073,18 @@
      "render": {
       "type": "table",
       "head": [
-       "Item",
-       "Value",
-       "Derivation"
+       {
+        "en": "Item",
+        "ru": "Показатель"
+       },
+       {
+        "en": "Value",
+        "ru": "Значение"
+       },
+       {
+        "en": "Derivation",
+        "ru": "Вывод"
+       }
       ],
       "rows": [
        [
@@ -8388,27 +9093,42 @@
         "—"
        ],
        [
-        "Winnable @60%",
+        {
+         "en": "Winnable @60%",
+         "ru": "Выигрываемый @60%"
+        },
         "3,000 kt",
         "5,000 × 0.60"
        ],
        [
-        "Plant capacity",
+        {
+         "en": "Plant capacity",
+         "ru": "Мощность завода"
+        },
         "3,500 kt",
         "> winnable → not binding"
        ],
        [
-        "Volume served",
+        {
+         "en": "Volume served",
+         "ru": "Обслуженный объём"
+        },
         "3,000 kt",
         "min(3,000, 3,500)"
        ],
        [
-        "Contribution/ton",
+        {
+         "en": "Contribution/ton",
+         "ru": "Вклад/тонна"
+        },
         "$5",
         "14 − 7 − 2"
        ],
        [
-        "Annual contribution",
+        {
+         "en": "Annual contribution",
+         "ru": "Годовой вклад"
+        },
         "$15M",
         "3,000 kt × $5/ton"
        ],
@@ -8418,11 +9138,15 @@
         "—"
        ],
        [
-        "Annual profit",
+        {
+         "en": "Annual profit",
+         "ru": "Годовая прибыль"
+        },
         "$12M",
         "15 − 3"
        ]
-      ]
+      ],
+      "title": "Exhibit A — Entry economics (all derived)."
      }
     }
    ],
@@ -8525,9 +9249,18 @@
      "render": {
       "type": "table",
       "head": [
-       "Item",
-       "Value",
-       "Derivation"
+       {
+        "en": "Item",
+        "ru": "Показатель"
+       },
+       {
+        "en": "Value",
+        "ru": "Значение"
+       },
+       {
+        "en": "Derivation",
+        "ru": "Вывод"
+       }
       ],
       "rows": [
        [
@@ -8536,7 +9269,10 @@
         "premium niche"
        ],
        [
-        "Trips/rider/mo",
+        {
+         "en": "Trips/rider/mo",
+         "ru": "Поездок/райдер/мес"
+        },
         "3",
         "—"
        ],
@@ -8556,7 +9292,10 @@
         "→ $11.25/trip to platform"
        ],
        [
-        "Annual revenue",
+        {
+         "en": "Annual revenue",
+         "ru": "Годовая выручка"
+        },
         "$2.03M",
         "15,000 × 45 × 0.25 × 12"
        ],
@@ -8566,11 +9305,15 @@
         "—"
        ],
        [
-        "Annual profit",
+        {
+         "en": "Annual profit",
+         "ru": "Годовая прибыль"
+        },
         "$0.83M",
         "2.03 − 1.20"
        ]
-      ]
+      ],
+      "title": "Exhibit A — Entry economics (all derived)."
      }
     }
    ],
@@ -10675,28 +11418,50 @@
      "render": {
       "type": "table",
       "head": [
-       "Item",
-       "Value"
+       {
+        "en": "Item",
+        "ru": "Показатель"
+       },
+       {
+        "en": "Value",
+        "ru": "Значение"
+       }
       ],
       "rows": [
        [
-        "Management contracts",
+        {
+         "en": "Management contracts",
+         "ru": "Управляющие контракты"
+        },
         "420"
        ],
        [
-        "Carrying value per contract (historical, amortized)",
+        {
+         "en": "Carrying value per contract (historical, amortized)",
+         "ru": "Балансовая стоимость контракта (историческая, амортизированная)"
+        },
         "$18,000"
        ],
        [
-        "Offices + net working capital (net of debt)",
+        {
+         "en": "Offices + net working capital (net of debt)",
+         "ru": "Офисы + оборотный капитал (нетто долга)"
+        },
         "$5.2M"
        ],
        [
-        "Asking price (100% equity)",
+        {
+         "en": "Asking price (100% equity)",
+         "ru": "Запрошенная цена (100% equity)"
+        },
         "$17.5M"
        ]
       ],
-      "note": "Contract book = recurring management fees; carried at historical amortized cost."
+      "note": {
+       "en": "Contract book = recurring management fees; carried at historical amortized cost.",
+       "ru": "Контрактная книга = recurring management fees; учтена по исторической амортизированной стоимости."
+      },
+      "title": "Exhibit — Larkhill: asset structure & ask"
      }
     }
    ],
@@ -10797,8 +11562,14 @@
      "render": {
       "type": "table",
       "head": [
-       "Item",
-       "Value"
+       {
+        "en": "Item",
+        "ru": "Показатель"
+       },
+       {
+        "en": "Value",
+        "ru": "Значение"
+       }
       ],
       "rows": [
        [
@@ -10806,14 +11577,21 @@
         "$2.4B"
        ],
        [
-        "Current management fee",
+        {
+         "en": "Current management fee",
+         "ru": "Текущая management fee"
+        },
         "0.65%"
        ],
        [
-        "Proposed fee",
+        {
+         "en": "Proposed fee",
+         "ru": "Предлагаемая fee"
+        },
         "0.95%"
        ]
-      ]
+      ],
+      "title": "Exhibit — Kestermere fund economics"
      }
     },
     {
@@ -10836,23 +11614,42 @@
      "render": {
       "type": "table",
       "head": [
-       "Item",
-       "Value"
+       {
+        "en": "Item",
+        "ru": "Показатель"
+       },
+       {
+        "en": "Value",
+        "ru": "Значение"
+       }
       ],
       "rows": [
        [
-        "Value-for-money cap",
+        {
+         "en": "Value-for-money cap",
+         "ru": "Value-for-money cap (потолок fee)"
+        },
         "0.90%"
        ],
        [
-        "Remediation cost (one-off)",
+        {
+         "en": "Remediation cost (one-off)",
+         "ru": "Remediation-издержки (разово)"
+        },
         "$1.9M"
        ],
        [
-        "Reputational AUM outflow",
-        "8% (permanent)"
+        {
+         "en": "Reputational AUM outflow",
+         "ru": "Репутационный отток AUM"
+        },
+        {
+         "en": "8% (permanent)",
+         "ru": "8% (навсегда)"
+        }
        ]
-      ]
+      ],
+      "title": "Exhibit — Regulatory framework (retail funds)"
      }
     }
    ],
@@ -10949,10 +11746,22 @@
      "render": {
       "type": "table",
       "head": [
-       "Шахта",
-       "Var (cash) $/т",
-       "Fixed alloc $/т",
-       "AVG total $/т",
+       {
+        "en": "Mine",
+        "ru": "Шахта"
+       },
+       {
+        "en": "Var (cash) $/tonne",
+        "ru": "Var (кэш) $/т"
+       },
+       {
+        "en": "Fixed alloc $/tonne",
+        "ru": "Fixed alloc $/т"
+       },
+       {
+        "en": "AVG total $/tonne",
+        "ru": "Средний total $/т"
+       },
        "Output"
       ],
       "rows": [
@@ -10977,7 +11786,8 @@
         "64",
         "2.0 Mt"
        ]
-      ]
+      ],
+      "title": "Exhibit A — Cost per tonne by mine"
      }
     }
    ],
@@ -11083,31 +11893,56 @@
      "render": {
       "type": "table",
       "head": [
-       "Item",
-       "Value"
+       {
+        "en": "Item",
+        "ru": "Показатель"
+       },
+       {
+        "en": "Value",
+        "ru": "Значение"
+       }
       ],
       "rows": [
        [
-        "Target EBITDA",
+        {
+         "en": "Target EBITDA",
+         "ru": "EBITDA таргета"
+        },
         "$9.2M"
        ],
        [
-        "Multiple",
+        {
+         "en": "Multiple",
+         "ru": "Мультипликатор"
+        },
         "6.0x"
        ],
        [
-        "Synergy, год 1",
+        {
+         "en": "Synergy, year 1",
+         "ru": "Синергия, год 1"
+        },
         "$14.5M"
        ],
        [
-        "Discount rate",
+        {
+         "en": "Discount rate",
+         "ru": "Ставка дисконта"
+        },
         "9%"
        ],
        [
-        "Horizon",
-        "6 лет"
+        {
+         "en": "Horizon",
+         "ru": "Горизонт"
+        },
+        {
+         "en": "6 years",
+         "ru": "6 лет"
+        }
        ]
-      ]
+      ],
+      "title": "Exhibit — Deal & synergy inputs"
      }
     },
     {
@@ -11129,15 +11964,28 @@
      "render": {
       "type": "table",
       "head": [
-       "Item",
-       "Value"
+       {
+        "en": "Item",
+        "ru": "Показатель"
+       },
+       {
+        "en": "Value",
+        "ru": "Значение"
+       }
       ],
       "rows": [
        [
-        "Synergy decay",
-        "8% / год"
+        {
+         "en": "Synergy decay",
+         "ru": "Затухание синергии"
+        },
+        {
+         "en": "8% / yr",
+         "ru": "8% / год"
+        }
        ]
-      ]
+      ],
+      "title": "Exhibit — Supplier contract profile"
      }
     },
     {
@@ -11181,7 +12029,8 @@
         "shape": "flat_cliff",
         "label": "Stops abruptly"
        }
-      ]
+      ],
+      "title": "Exhibit — Synergy stream over the horizon"
      }
     }
    ],
@@ -11288,20 +12137,30 @@
       "type": "bar",
       "unit": "$",
       "categories": [
-       "Retail price",
-       "Wholesale price",
+       {
+        "en": "Retail price",
+        "ru": "Розничная цена"
+       },
+       {
+        "en": "Wholesale price",
+        "ru": "Оптовая цена"
+       },
        "COGS"
       ],
       "series": [
        {
-        "name": "$/ракетка",
+        "name": {
+         "en": "$ per racket",
+         "ru": "$/ракетка"
+        },
         "values": [
          180,
          95,
          62
         ]
        }
-      ]
+      ],
+      "title": "Exhibit — Racket unit economics"
      }
     }
    ],
@@ -11409,9 +12268,15 @@
      "render": {
       "type": "table",
       "head": [
-       "Порт",
+       {
+        "en": "Port",
+        "ru": "Порт"
+       },
        "TEU (throughput)",
-       "Вклад $/TEU"
+       {
+        "en": "Contribution $/TEU",
+        "ru": "Вклад $/TEU"
+       }
       ],
       "rows": [
        [
@@ -11434,7 +12299,8 @@
         "1,900,000",
         "52"
        ]
-      ]
+      ],
+      "title": "Exhibit 1 — Port throughput & contribution"
      }
     },
     {
@@ -11463,7 +12329,10 @@
       ],
       "series": [
        {
-        "name": "Lock-in инкумбентов",
+        "name": {
+         "en": "Incumbent lock-in",
+         "ru": "Lock-in инкумбентов"
+        },
         "values": [
          88,
          35,
@@ -11471,7 +12340,8 @@
          55
         ]
        }
-      ]
+      ],
+      "title": "Exhibit 2 — Incumbent lock-in by port"
      }
     }
    ],
@@ -11559,9 +12429,18 @@
      "render": {
       "type": "table",
       "head": [
-       "Склад",
-       "кВт·ч/год",
-       "Тариф $/кВт·ч"
+       {
+        "en": "Warehouse",
+        "ru": "Склад"
+       },
+       {
+        "en": "kWh/yr",
+        "ru": "кВт·ч/год"
+       },
+       {
+        "en": "Tariff $/kWh",
+        "ru": "Тариф $/кВт·ч"
+       }
       ],
       "rows": [
        [
@@ -11580,7 +12459,11 @@
         "0.109"
        ]
       ],
-      "note": "Предложение вендора: экономия 28% энергозатрат · capex $1.15M · доп. opex $64,000/год."
+      "note": {
+       "en": "Vendor proposal: 28% energy-cost saving · capex $1.15M · added opex $64,000/yr.",
+       "ru": "Предложение вендора: экономия 28% энергозатрат · capex $1.15M · доп. opex $64,000/год."
+      },
+      "title": "Exhibit — Warehouse energy profile"
      }
     }
    ],
@@ -11669,9 +12552,18 @@
      "render": {
       "type": "table",
       "head": [
-       "Канал",
-       "Revenue",
-       "Variable cost",
+       {
+        "en": "Channel",
+        "ru": "Канал"
+       },
+       {
+        "en": "Revenue",
+        "ru": "Выручка"
+       },
+       {
+        "en": "Variable cost",
+        "ru": "Переменные затраты"
+       },
        "Fixed"
       ],
       "rows": [
@@ -11688,7 +12580,11 @@
         "7,000,000"
        ]
       ],
-      "note": "Итого: revenue $100M · total cost $93M."
+      "note": {
+       "en": "Total: revenue $100M · total cost $93M.",
+       "ru": "Итого: выручка $100M · затраты $93M."
+      },
+      "title": "Exhibit — Channel P&L ($M)"
      }
     }
    ],
@@ -11776,35 +12672,60 @@
      "render": {
       "type": "table",
       "head": [
-       "Item",
-       "Value"
+       {
+        "en": "Item",
+        "ru": "Показатель"
+       },
+       {
+        "en": "Value",
+        "ru": "Значение"
+       }
       ],
       "rows": [
        [
-        "Точек у таргета",
+        {
+         "en": "Target locations",
+         "ru": "Точек у таргета"
+        },
         "12"
        ],
        [
-        "Выручка/точку",
+        {
+         "en": "Revenue per location",
+         "ru": "Выручка/точку"
+        },
         "$1,450,000"
        ],
        [
-        "Var ratio",
+        {
+         "en": "Var ratio",
+         "ru": "Доля var"
+        },
         "82%"
        ],
        [
-        "Commissary таргета",
+        {
+         "en": "Target's commissary",
+         "ru": "Commissary таргета"
+        },
         "$4,200,000"
        ],
        [
-        "Точек у Tandora",
+        {
+         "en": "Tandora locations",
+         "ru": "Точек у Tandora"
+        },
         "40"
        ],
        [
-        "Корп. overhead Tandora",
+        {
+         "en": "Tandora corporate overhead",
+         "ru": "Корп. overhead Tandora"
+        },
         "$12,000,000"
        ]
-      ]
+      ],
+      "title": "Exhibit — Target & Tandora economics"
      }
     }
    ],
@@ -11891,8 +12812,14 @@
      "render": {
       "type": "table",
       "head": [
-       "Item",
-       "Value"
+       {
+        "en": "Item",
+        "ru": "Показатель"
+       },
+       {
+        "en": "Value",
+        "ru": "Значение"
+       }
       ],
       "rows": [
        [
@@ -11900,14 +12827,24 @@
         "$28M"
        ],
        [
-        "Экономия",
-        "$6.1M/год"
+        {
+         "en": "Savings",
+         "ru": "Экономия"
+        },
+        {
+         "en": "$6.1M/yr",
+         "ru": "$6.1M/год"
+        }
        ],
        [
-        "Discount rate",
+        {
+         "en": "Discount rate",
+         "ru": "Ставка дисконта"
+        },
         "11%"
        ]
-      ]
+      ],
+      "title": "Exhibit — Automation proposal"
      }
     },
     {
@@ -11930,19 +12867,35 @@
      "render": {
       "type": "table",
       "head": [
-       "Item",
-       "Value"
+       {
+        "en": "Item",
+        "ru": "Показатель"
+       },
+       {
+        "en": "Value",
+        "ru": "Значение"
+       }
       ],
       "rows": [
        [
-        "Обрыв экономии",
-        "год 5 (живёт 4 года)"
+        {
+         "en": "Savings cut-off",
+         "ru": "Обрыв экономии"
+        },
+        {
+         "en": "year 5 (runs for 4 years)",
+         "ru": "год 5 (живёт 4 года)"
+        }
        ],
        [
-        "Salvage, год 4",
+        {
+         "en": "Salvage, year 4",
+         "ru": "Salvage, год 4"
+        },
         "$2M"
        ]
-      ]
+      ],
+      "title": "Exhibit — Technology lifecycle"
      }
     },
     {
@@ -11987,7 +12940,8 @@
         "shape": "up",
         "label": "Grows over time"
        }
-      ]
+      ],
+      "title": "Exhibit — Savings stream over time"
      }
     }
    ],
@@ -12095,23 +13049,45 @@
      "render": {
       "type": "table",
       "head": [
-       "Опция",
-       "Forward cost",
-       "PV выгод"
+       {
+        "en": "Option",
+        "ru": "Опция"
+       },
+       {
+        "en": "Forward cost",
+        "ru": "Forward-затраты"
+       },
+       {
+        "en": "PV of benefits",
+        "ru": "PV выгод"
+       }
       ],
       "rows": [
        [
-        "BUILD (достроить своё)",
+        {
+         "en": "BUILD (finish own)",
+         "ru": "BUILD (достроить своё)"
+        },
         "$140M",
         "$300M"
        ],
        [
-        "BUY (купить таргет)",
-        "$210M + $25M интеграция",
+        {
+         "en": "BUY (acquire target)",
+         "ru": "BUY (купить таргет)"
+        },
+        {
+         "en": "$210M + $25M integration",
+         "ru": "$210M + $25M интеграция"
+        },
         "$430M"
        ]
       ],
-      "note": "Уже потрачено на собственную разработку (sunk): $225M."
+      "note": {
+       "en": "Already spent on in-house development (sunk): $225M.",
+       "ru": "Уже потрачено на собственную разработку (sunk): $225M."
+      },
+      "title": "Exhibit — Build vs Buy (forward-looking)"
      }
     }
    ],
@@ -12218,7 +13194,10 @@
      "body_md": "Interactive chart-select: show the candidate four possible shapes of membership response to a price increase and ask which they would expect for a budget-gym membership. After they pick, confirm: demand is highly elastic — measured elasticity is −1.6 (a 1% price increase drives a 1.6% membership decline). Correct pick: the steep downward-sloping option (C). Do not state the elasticity before their pick.",
      "render": {
       "type": "select",
-      "question": "Members vs price: which response shape would you expect for a budget-gym membership? Pick one.",
+      "question": {
+       "en": "Members vs price: which response shape would you expect for a budget-gym membership? Pick one.",
+       "ru": "Члены клуба и цена: какой формы реакцию спроса ты ждёшь для бюджетного фитнеса? Выбери один вариант."
+      },
       "xLabel": "Price",
       "yLabel": "Members",
       "options": [
@@ -12242,7 +13221,8 @@
         "shape": "up",
         "label": "Increase"
        }
-      ]
+      ],
+      "title": "Exhibit — How does membership respond to price?"
      }
     }
    ],
@@ -12338,19 +13318,35 @@
      "render": {
       "type": "table",
       "head": [
-       "Item",
-       "Value"
+       {
+        "en": "Item",
+        "ru": "Показатель"
+       },
+       {
+        "en": "Value",
+        "ru": "Значение"
+       }
       ],
       "rows": [
        [
-        "Gross adds",
-        "420,000/год"
+        {
+         "en": "Gross adds",
+         "ru": "Gross adds (приток)"
+        },
+        {
+         "en": "420,000/yr",
+         "ru": "420,000/год"
+        }
        ],
        [
-        "База",
+        {
+         "en": "Base",
+         "ru": "База"
+        },
         "3,100,000"
        ]
-      ]
+      ],
+      "title": "Exhibit — Subscriber acquisition"
      }
     },
     {
@@ -12371,15 +13367,25 @@
      "render": {
       "type": "table",
       "head": [
-       "Item",
-       "Value"
+       {
+        "en": "Item",
+        "ru": "Показатель"
+       },
+       {
+        "en": "Value",
+        "ru": "Значение"
+       }
       ],
       "rows": [
        [
         "Churn",
-        "5.0%/мес"
+        {
+         "en": "5.0%/mo",
+         "ru": "5.0%/мес"
+        }
        ]
-      ]
+      ],
+      "title": "Exhibit — Retention"
      }
     },
     {
@@ -12423,7 +13429,8 @@
         "shape": "down_steep",
         "label": "Declines to zero"
        }
-      ]
+      ],
+      "title": "Exhibit — Where does the subscriber base head?"
      }
     }
    ],
@@ -12519,13 +13526,22 @@
       "type": "bar",
       "unit": "$",
       "categories": [
-       "Concerts",
-       "College games",
+       {
+        "en": "Concerts",
+        "ru": "Концерты"
+       },
+       {
+        "en": "College games",
+        "ru": "Студенческие игры"
+       },
        "Corporate"
       ],
       "series": [
        {
-        "name": "Revenue",
+        "name": {
+         "en": "Revenue",
+         "ru": "Выручка"
+        },
         "values": [
          380000,
          160000,
@@ -12533,7 +13549,10 @@
         ]
        },
        {
-        "name": "Marginal cost",
+        "name": {
+         "en": "Marginal cost",
+         "ru": "Маржинальные затраты"
+        },
         "values": [
          210000,
          95000,
@@ -12541,7 +13560,11 @@
         ]
        }
       ],
-      "note": "Allocated arena lease: $140,000 per event (accounting allocation)."
+      "note": {
+       "en": "Allocated arena lease: $140,000 per event (accounting allocation).",
+       "ru": "Аллоцированная аренда арены: $140,000 на событие (бухгалтерская аллокация)."
+      },
+      "title": "Exhibit A — Off-season events: revenue & costs (per event type)"
      }
     }
    ],
@@ -12629,11 +13652,26 @@
      "render": {
       "type": "table",
       "head": [
-       "Тип теста",
-       "Цена",
-       "Себестоимость",
-       "Объём old",
-       "Объём new"
+       {
+        "en": "Test type",
+        "ru": "Тип теста"
+       },
+       {
+        "en": "Price",
+        "ru": "Цена"
+       },
+       {
+        "en": "Unit cost",
+        "ru": "Себестоимость"
+       },
+       {
+        "en": "Volume old",
+        "ru": "Объём old"
+       },
+       {
+        "en": "Volume new",
+        "ru": "Объём new"
+       }
       ],
       "rows": [
        [
@@ -12650,7 +13688,8 @@
         "340,000",
         "430,000"
        ]
-      ]
+      ],
+      "title": "Exhibit — Test mix shift"
      }
     }
    ],
@@ -12748,24 +13787,42 @@
      "render": {
       "type": "table",
       "head": [
-       "Item",
-       "Value"
+       {
+        "en": "Item",
+        "ru": "Показатель"
+       },
+       {
+        "en": "Value",
+        "ru": "Значение"
+       }
       ],
       "rows": [
        [
-        "Цена запуска",
+        {
+         "en": "Launch price",
+         "ru": "Цена запуска"
+        },
         "$62M"
        ],
        [
-        "Var cost/запуск",
+        {
+         "en": "Var cost per launch",
+         "ru": "Var cost/запуск"
+        },
         "$38M"
        ],
        [
-        "Contribution/запуск",
+        {
+         "en": "Contribution per launch",
+         "ru": "Вклад/запуск"
+        },
         "$24M"
        ],
        [
-        "Годовой fixed",
+        {
+         "en": "Annual fixed",
+         "ru": "Годовой fixed"
+        },
         "$280M"
        ],
        [
@@ -12773,14 +13830,24 @@
         "$900M"
        ],
        [
-        "Nameplate capacity",
-        "24/год"
+        {
+         "en": "Nameplate capacity",
+         "ru": "Паспортная мощность"
+        },
+        {
+         "en": "24/yr",
+         "ru": "24/год"
+        }
        ],
        [
-        "Discount rate",
+        {
+         "en": "Discount rate",
+         "ru": "Ставка дисконта"
+        },
         "12%"
        ]
-      ]
+      ],
+      "title": "Exhibit — Launch economics"
      }
     },
     {
@@ -12800,7 +13867,10 @@
      ],
      "render": {
       "type": "line",
-      "unit": "запусков/год",
+      "unit": {
+       "en": "launches/yr",
+       "ru": "запусков/год"
+      },
       "categories": [
        "Y1",
        "Y2",
@@ -12813,7 +13883,10 @@
       ],
       "series": [
        {
-        "name": "Запуски",
+        "name": {
+         "en": "Launches",
+         "ru": "Запуски"
+        },
         "values": [
          4,
          8,
@@ -12826,7 +13899,11 @@
         ]
        }
       ],
-      "note": "Nameplate 24/год достигается только к году 6."
+      "note": {
+       "en": "Nameplate capacity of 24/yr is reached only by year 6.",
+       "ru": "Паспортные 24/год достигаются только к году 6."
+      },
+      "title": "Exhibit — Production ramp (launches per year)"
      }
     }
    ],
@@ -12922,31 +13999,56 @@
      "render": {
       "type": "table",
       "head": [
-       "Item",
-       "Value"
+       {
+        "en": "Item",
+        "ru": "Показатель"
+       },
+       {
+        "en": "Value",
+        "ru": "Значение"
+       }
       ],
       "rows": [
        [
-        "Выручка/точку",
+        {
+         "en": "Revenue per location",
+         "ru": "Выручка/точку"
+        },
         "$720,000"
        ],
        [
-        "Var ratio",
+        {
+         "en": "Var ratio",
+         "ru": "Доля var"
+        },
         "62%"
        ],
        [
-        "Fixed/точку",
+        {
+         "en": "Fixed per location",
+         "ru": "Fixed/точку"
+        },
         "$140,000"
        ],
        [
-        "Buildout/точку",
+        {
+         "en": "Buildout per location",
+         "ru": "Buildout/точку"
+        },
         "$240,000"
        ],
        [
-        "План",
-        "5 точек"
+        {
+         "en": "Plan",
+         "ru": "План"
+        },
+        {
+         "en": "5 locations",
+         "ru": "5 точек"
+        }
        ]
-      ]
+      ],
+      "title": "Exhibit — Per-store economics"
      }
     }
    ],
@@ -13033,23 +14135,42 @@
      "render": {
       "type": "table",
       "head": [
-       "Item",
-       "Value"
+       {
+        "en": "Item",
+        "ru": "Показатель"
+       },
+       {
+        "en": "Value",
+        "ru": "Значение"
+       }
       ],
       "rows": [
        [
-        "Сделок/год",
+        {
+         "en": "Trades/yr",
+         "ru": "Сделок/год"
+        },
         "48,000,000"
        ],
        [
-        "Предлагаемая комиссия",
+        {
+         "en": "Proposed commission",
+         "ru": "Предлагаемая комиссия"
+        },
         "$0.65"
        ],
        [
-        "PFOF-доход сейчас",
-        "$42M/год"
+        {
+         "en": "Current PFOF revenue",
+         "ru": "PFOF-доход сейчас"
+        },
+        {
+         "en": "$42M/yr",
+         "ru": "$42M/год"
+        }
        ]
-      ]
+      ],
+      "title": "Exhibit — Current revenue model"
      }
     },
     {
@@ -13070,15 +14191,25 @@
      "render": {
       "type": "table",
       "head": [
-       "Item",
-       "Value"
+       {
+        "en": "Item",
+        "ru": "Показатель"
+       },
+       {
+        "en": "Value",
+        "ru": "Значение"
+       }
       ],
       "rows": [
        [
-        "Ожидаемый отток объёма",
+        {
+         "en": "Expected volume outflow",
+         "ru": "Ожидаемый отток объёма"
+        },
         "50%"
        ]
-      ]
+      ],
+      "title": "Exhibit — Client reaction estimate"
      }
     }
    ],
@@ -13174,16 +14305,28 @@
      "render": {
       "type": "table",
       "head": [
-       "Опция",
-       "$/т"
+       {
+        "en": "Option",
+        "ru": "Опция"
+       },
+       {
+        "en": "$/tonne",
+        "ru": "$/т"
+       }
       ],
       "rows": [
        [
-        "MAKE var (cash)",
+        {
+         "en": "MAKE var (cash)",
+         "ru": "MAKE var (кэш)"
+        },
         "340"
        ],
        [
-        "MAKE fixed alloc",
+        {
+         "en": "MAKE fixed alloc",
+         "ru": "MAKE fixed (аллоц.)"
+        },
         "180"
        ],
        [
@@ -13191,7 +14334,11 @@
         "470"
        ]
       ],
-      "note": "Объём 50,000 т/год."
+      "note": {
+       "en": "Volume: 50,000 t/yr.",
+       "ru": "Объём 50,000 т/год."
+      },
+      "title": "Exhibit — Make vs Buy (per tonne)"
      }
     },
     {
@@ -13212,19 +14359,32 @@
      "render": {
       "type": "table",
       "head": [
-       "Fixed component",
-       "$/т"
+       {
+        "en": "Fixed component",
+        "ru": "Компонент fixed"
+       },
+       {
+        "en": "$/tonne",
+        "ru": "$/т"
+       }
       ],
       "rows": [
        [
-        "Avoidable",
+        {
+         "en": "Avoidable",
+         "ru": "Устранимые (avoidable)"
+        },
         "55"
        ],
        [
-        "Unavoidable",
+        {
+         "en": "Unavoidable",
+         "ru": "Неустранимые (unavoidable)"
+        },
         "125"
        ]
-      ]
+      ],
+      "title": "Exhibit — Fixed cost breakdown"
      }
     }
    ],
@@ -13320,8 +14480,14 @@
      "render": {
       "type": "table",
       "head": [
-       "Item",
-       "Value"
+       {
+        "en": "Item",
+        "ru": "Показатель"
+       },
+       {
+        "en": "Value",
+        "ru": "Значение"
+       }
       ],
       "rows": [
        [
@@ -13329,14 +14495,24 @@
         "$34M"
        ],
        [
-        "Маржа",
-        "$5.8M/год"
+        {
+         "en": "Margin",
+         "ru": "Маржа"
+        },
+        {
+         "en": "$5.8M/yr",
+         "ru": "$5.8M/год"
+        }
        ],
        [
-        "Discount rate",
+        {
+         "en": "Discount rate",
+         "ru": "Ставка дисконта"
+        },
         "11%"
        ]
-      ]
+      ],
+      "title": "Exhibit — Entry economics"
      }
     },
     {
@@ -13357,19 +14533,38 @@
      "render": {
       "type": "table",
       "head": [
-       "Item",
-       "Value"
+       {
+        "en": "Item",
+        "ru": "Показатель"
+       },
+       {
+        "en": "Value",
+        "ru": "Значение"
+       }
       ],
       "rows": [
        [
-        "Контракт якоря",
-        "5 лет"
+        {
+         "en": "Anchor contract",
+         "ru": "Контракт якоря"
+        },
+        {
+         "en": "5 years",
+         "ru": "5 лет"
+        }
        ],
        [
-        "Годы 6–8",
-        "остаточная маржа 30%"
+        {
+         "en": "Years 6–8",
+         "ru": "Годы 6–8"
+        },
+        {
+         "en": "residual margin 30%",
+         "ru": "остаточная маржа 30%"
+        }
        ]
-      ]
+      ],
+      "title": "Exhibit — Anchor contract horizon"
      }
     },
     {
@@ -13412,7 +14607,8 @@
         "shape": "flat_cliff",
         "label": "Flat, then zero"
        }
-      ]
+      ],
+      "title": "Exhibit — Margin stream over years 1–8"
      }
     }
    ],
@@ -13508,27 +14704,52 @@
      "render": {
       "type": "table",
       "head": [
-       "Item",
-       "Value"
+       {
+        "en": "Item",
+        "ru": "Показатель"
+       },
+       {
+        "en": "Value",
+        "ru": "Значение"
+       }
       ],
       "rows": [
        [
-        "Gross synergy",
-        "$165M/год"
+        {
+         "en": "Gross synergy",
+         "ru": "Валовая синергия"
+        },
+        {
+         "en": "$165M/yr",
+         "ru": "$165M/год"
+        }
        ],
        [
-        "Премия",
+        {
+         "en": "Premium (price)",
+         "ru": "Премия"
+        },
         "$820M"
        ],
        [
-        "Discount rate",
+        {
+         "en": "Discount rate",
+         "ru": "Ставка дисконта"
+        },
         "10%"
        ],
        [
-        "Horizon",
-        "10 лет"
+        {
+         "en": "Horizon",
+         "ru": "Горизонт"
+        },
+        {
+         "en": "10 years",
+         "ru": "10 лет"
+        }
        ]
-      ]
+      ],
+      "title": "Exhibit — Deal & synergy headline"
      }
     },
     {
@@ -13549,19 +14770,35 @@
      "render": {
       "type": "table",
       "head": [
-       "Item",
-       "Value"
+       {
+        "en": "Item",
+        "ru": "Показатель"
+       },
+       {
+        "en": "Value",
+        "ru": "Значение"
+       }
       ],
       "rows": [
        [
-        "Upfront CTA",
+        {
+         "en": "Upfront CTA",
+         "ru": "Upfront CTA (затраты на реализацию)"
+        },
         "$240M"
        ],
        [
-        "Эрозия синергии",
-        "$35M/год"
+        {
+         "en": "Synergy erosion",
+         "ru": "Эрозия синергии"
+        },
+        {
+         "en": "$35M/yr",
+         "ru": "$35M/год"
+        }
        ]
-      ]
+      ],
+      "title": "Exhibit — Costs to achieve"
      }
     },
     {
@@ -13605,7 +14842,8 @@
         "shape": "decay",
         "label": "Slow gradual decay"
        }
-      ]
+      ],
+      "title": "Exhibit — Net synergy stream over 10 years"
      }
     }
    ],
@@ -13708,7 +14946,10 @@
       ],
       "series": [
        {
-        "name": "Revenue",
+        "name": {
+         "en": "Revenue",
+         "ru": "Выручка"
+        },
         "values": [
          420,
          180,
@@ -13716,7 +14957,10 @@
         ]
        },
        {
-        "name": "Cost",
+        "name": {
+         "en": "Cost",
+         "ru": "Затраты"
+        },
         "values": [
          340,
          171,
@@ -13724,7 +14968,11 @@
         ]
        }
       ],
-      "note": "Blended: revenue $840M · cost $769M."
+      "note": {
+       "en": "Blended: revenue $840M · cost $769M.",
+       "ru": "Blended: выручка $840M · затраты $769M."
+      },
+      "title": "Exhibit — Revenue & cost by route type ($M)"
      }
     }
    ],
@@ -13830,27 +15078,46 @@
      "render": {
       "type": "table",
       "head": [
-       "Item",
-       "Value"
+       {
+        "en": "Item",
+        "ru": "Показатель"
+       },
+       {
+        "en": "Value",
+        "ru": "Значение"
+       }
       ],
       "rows": [
        [
-        "Покупателей",
+        {
+         "en": "Shoppers",
+         "ru": "Покупателей"
+        },
         "900,000"
        ],
        [
-        "Цена сейчас",
+        {
+         "en": "Price today",
+         "ru": "Цена сейчас"
+        },
         "$3.20"
        ],
        [
-        "Предлагаемая",
+        {
+         "en": "Proposed",
+         "ru": "Предлагаемая"
+        },
         "$3.68"
        ],
        [
-        "Себестоимость",
+        {
+         "en": "Unit cost",
+         "ru": "Себестоимость"
+        },
         "$3.05"
        ]
-      ]
+      ],
+      "title": "Exhibit — Milk pricing"
      }
     },
     {
@@ -13872,19 +15139,35 @@
      "render": {
       "type": "table",
       "head": [
-       "Item",
-       "Value"
+       {
+        "en": "Item",
+        "ru": "Показатель"
+       },
+       {
+        "en": "Value",
+        "ru": "Значение"
+       }
       ],
       "rows": [
        [
-        "Маржа корзины",
-        "$11.40/визит"
+        {
+         "en": "Basket margin",
+         "ru": "Маржа корзины"
+        },
+        {
+         "en": "$11.40/visit",
+         "ru": "$11.40/визит"
+        }
        ],
        [
-        "Отток покупателей",
+        {
+         "en": "Shopper attrition",
+         "ru": "Отток покупателей"
+        },
         "18%"
        ]
-      ]
+      ],
+      "title": "Exhibit — Basket economics"
      }
     }
    ],
@@ -13971,8 +15254,14 @@
      "render": {
       "type": "table",
       "head": [
-       "Опция",
-       "$/год"
+       {
+        "en": "Option",
+        "ru": "Опция"
+       },
+       {
+        "en": "$/yr",
+        "ru": "$/год"
+       }
       ],
       "rows": [
        [
@@ -13988,7 +15277,11 @@
         "720,000"
        ]
       ],
-      "note": "Объём обслуживания: 42 станции."
+      "note": {
+       "en": "Service volume: 42 stations.",
+       "ru": "Объём обслуживания: 42 станции."
+      },
+      "title": "Exhibit — In-house vs outsource"
      }
     },
     {
@@ -14009,19 +15302,32 @@
      "render": {
       "type": "table",
       "head": [
-       "Fixed component",
-       "$/год"
+       {
+        "en": "Fixed component",
+        "ru": "Компонент fixed"
+       },
+       {
+        "en": "$/yr",
+        "ru": "$/год"
+       }
       ],
       "rows": [
        [
-        "Avoidable",
+        {
+         "en": "Avoidable",
+         "ru": "Устранимые (avoidable)"
+        },
         "95,000"
        ],
        [
-        "Unavoidable",
+        {
+         "en": "Unavoidable",
+         "ru": "Неустранимые (unavoidable)"
+        },
         "215,000"
        ]
-      ]
+      ],
+      "title": "Exhibit — Fixed cost breakdown"
      }
     }
    ],
@@ -14118,10 +15424,19 @@
      "render": {
       "type": "table",
       "head": [
-       "Город",
-       "Occupancy",
+       {
+        "en": "City",
+        "ru": "Город"
+       },
+       {
+        "en": "Occupancy",
+        "ru": "Загрузка"
+       },
        "ADR",
-       "Номеров"
+       {
+        "en": "Rooms",
+        "ru": "Номеров"
+       }
       ],
       "rows": [
        [
@@ -14142,7 +15457,8 @@
         "$210",
         "160"
        ]
-      ]
+      ],
+      "title": "Exhibit — City fundamentals"
      }
     },
     {
@@ -14164,9 +15480,15 @@
      "render": {
       "type": "table",
       "head": [
-       "Город",
+       {
+        "en": "City",
+        "ru": "Город"
+       },
        "Capex",
-       "Opcost/год"
+       {
+        "en": "Opcost/yr",
+        "ru": "Opcost/год"
+       }
       ],
       "rows": [
        [
@@ -14184,7 +15506,8 @@
         "$33M",
         "$5.4M"
        ]
-      ]
+      ],
+      "title": "Exhibit — Capex & operating cost"
      }
     }
    ],
@@ -14272,10 +15595,19 @@
      "render": {
       "type": "table",
       "head": [
-       "Линия",
+       {
+        "en": "Line",
+        "ru": "Линия"
+       },
        "Premium",
-       "Losses",
-       "Direct exp"
+       {
+        "en": "Losses",
+        "ru": "Убытки (losses)"
+       },
+       {
+        "en": "Direct exp",
+        "ru": "Прямые расходы"
+       }
       ],
       "rows": [
        [
@@ -14297,7 +15629,11 @@
         "44"
        ]
       ],
-      "note": "Corporate OH: $60M на линию (аллоцирован поровну). Всё в $M."
+      "note": {
+       "en": "Corporate OH: $60M per line (allocated evenly). All in $M.",
+       "ru": "Corporate OH: $60M на линию (аллоцирован поровну). Всё в $M."
+      },
+      "title": "Exhibit — Line P&L ($M)"
      }
     },
     {
@@ -14326,7 +15662,10 @@
       ],
       "series": [
        {
-        "name": "Инвест. доход (float)",
+        "name": {
+         "en": "Investment income (float)",
+         "ru": "Инвест. доход (float)"
+        },
         "values": [
          14,
          9,
@@ -14334,7 +15673,11 @@
         ]
        }
       ],
-      "note": "Сумма $54M. Commercial держит долгосрочные резервы — наибольший float."
+      "note": {
+       "en": "Total $54M. Commercial holds long-tail reserves — the largest float.",
+       "ru": "Сумма $54M. Commercial держит долгосрочные резервы — наибольший float."
+      },
+      "title": "Exhibit — Investment income (float)"
      }
     }
    ],
@@ -14470,7 +15813,11 @@
         ]
        }
       ],
-      "note": "Capex $28M · discount rate 11% · horizon 8 years."
+      "note": {
+       "en": "Capex $28M · discount rate 11% · horizon 8 years.",
+       "ru": "Capex $28M · ставка 11% · горизонт 8 лет."
+      },
+      "title": "Exhibit — Projected revenue vs operating cost, years 1–8 ($M)"
      }
     }
    ],
@@ -14566,19 +15913,32 @@
      "render": {
       "type": "table",
       "head": [
-       "Item",
-       "Value"
+       {
+        "en": "Item",
+        "ru": "Показатель"
+       },
+       {
+        "en": "Value",
+        "ru": "Значение"
+       }
       ],
       "rows": [
        [
-        "Цена продажи",
+        {
+         "en": "Sale price",
+         "ru": "Цена продажи"
+        },
         "$48"
        ],
        [
-        "Историческая себестоимость",
+        {
+         "en": "Historical cost",
+         "ru": "Историческая себестоимость"
+        },
         "$22"
        ]
-      ]
+      ],
+      "title": "Exhibit — Chip pricing"
      }
     },
     {
@@ -14599,15 +15959,25 @@
      "render": {
       "type": "table",
       "head": [
-       "Item",
-       "Value"
+       {
+        "en": "Item",
+        "ru": "Показатель"
+       },
+       {
+        "en": "Value",
+        "ru": "Значение"
+       }
       ],
       "rows": [
        [
-        "Replacement cost",
+        {
+         "en": "Replacement cost",
+         "ru": "Replacement cost (стоимость замещения)"
+        },
         "$39"
        ]
-      ]
+      ],
+      "title": "Exhibit — Replacement cost"
      }
     }
    ],
@@ -14695,27 +16065,49 @@
      "render": {
       "type": "table",
       "head": [
-       "Item",
-       "Value"
+       {
+        "en": "Item",
+        "ru": "Показатель"
+       },
+       {
+        "en": "Value",
+        "ru": "Значение"
+       }
       ],
       "rows": [
        [
-        "Sunk (потрачено)",
+        {
+         "en": "Sunk (already spent)",
+         "ru": "Sunk (потрачено)"
+        },
         "$18M"
        ],
        [
-        "Достроить: capex",
+        {
+         "en": "Finish build: capex",
+         "ru": "Достроить: capex"
+        },
         "$95M"
        ],
        [
-        "Достроить: PV потоков",
+        {
+         "en": "Finish build: PV of cash flows",
+         "ru": "Достроить: PV потоков"
+        },
         "$118M"
        ],
        [
-        "Предложение продажи",
-        "$34M headline"
+        {
+         "en": "Sale offer",
+         "ru": "Предложение продажи"
+        },
+        {
+         "en": "$34M headline",
+         "ru": "$34M (заявленная)"
+        }
        ]
-      ]
+      ],
+      "title": "Exhibit — Project status & offer"
      }
     },
     {
@@ -14737,22 +16129,41 @@
      "render": {
       "type": "table",
       "head": [
-       "Компонент",
-       "Сумма",
-       "Передаётся"
+       {
+        "en": "Component",
+        "ru": "Компонент"
+       },
+       {
+        "en": "Amount",
+        "ru": "Сумма"
+       },
+       {
+        "en": "Transferable",
+        "ru": "Передаётся"
+       }
       ],
       "rows": [
        [
-        "Land + permits",
+        {
+         "en": "Land + permits",
+         "ru": "Земля + разрешения"
+        },
         "$21M",
-        "полностью"
+        {
+         "en": "in full",
+         "ru": "полностью"
+        }
        ],
        [
-        "Grid slot",
+        {
+         "en": "Grid slot",
+         "ru": "Grid slot (подключение)"
+        },
         "$13M",
         "55%"
        ]
-      ]
+      ],
+      "title": "Exhibit — Offer composition"
      }
     }
    ],
@@ -14857,27 +16268,49 @@
      "render": {
       "type": "table",
       "head": [
-       "Item",
-       "Value"
+       {
+        "en": "Item",
+        "ru": "Показатель"
+       },
+       {
+        "en": "Value",
+        "ru": "Значение"
+       }
       ],
       "rows": [
        [
-        "Выручка",
-        "$2.2M/год"
+        {
+         "en": "Revenue",
+         "ru": "Выручка"
+        },
+        {
+         "en": "$2.2M/yr",
+         "ru": "$2.2M/год"
+        }
        ],
        [
-        "Var ratio",
+        {
+         "en": "Var ratio",
+         "ru": "Доля var"
+        },
         "35%"
        ],
        [
         "Fixed",
-        "$480,000/год"
+        {
+         "en": "$480,000/yr",
+         "ru": "$480,000/год"
+        }
        ],
        [
-        "Capex разработки",
+        {
+         "en": "Development capex",
+         "ru": "Capex разработки"
+        },
         "$1.4M"
        ]
-      ]
+      ],
+      "title": "Exhibit — New vertical economics"
      }
     }
    ],

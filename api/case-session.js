@@ -284,7 +284,7 @@ Apply this as EXTRA strictness on top of the step's normal pass criteria — the
 /* ───────────────────────── system prompt assembly ───────────────────────────
    Rebuilt for the CURRENT step on every call. interviewer_md is the answer key,
    used only to grade — never read aloud. */
-export function buildSystemPrompt({ caseObj, stepIndex, attemptCount, firm, revealedSet, isOpening, focusKey }) {
+export function buildSystemPrompt({ caseObj, stepIndex, attemptCount, firm, revealedSet, isOpening, focusKey, lang }) {
   const steps = caseObj.steps || [];
   const idx = Math.max(0, Math.min(stepIndex, steps.length - 1));
   const step = steps[idx] || {};
@@ -342,7 +342,10 @@ Rules for every reply:
 - Never present a number that is not in the material above. Never change a number you already gave.`;
   }
 
-  const language =
+  const languageRu =
+`\n\n════ OUTPUT ════
+Веди кейс ПОЛНОСТЬЮ НА РУССКОМ ЯЗЫКЕ — каждый вопрос, каждая реплика, каждая подсказка. Профессиональный консалтинговый русский: стандартные термины (NPV, EBITDA, churn, capex, MECE) допустимы как есть, но никаких английских ФРАЗ и предложений. Названия кейсов и компаний оставляй как написаны. Все числа, единицы и проценты — в точности из материала. Скрытые маркеры (<verdict>…</verdict>, <reveal>…</reveal>) оставляй ровно как есть; кандидату их не показывай и не объясняй.`;
+  const language = (lang === 'ru') ? languageRu :
 `\n\n════ OUTPUT ════
 Conduct the case in English. Much of the internal material below (step questions, answer keys, hints, exhibit notes) is written in RUSSIAN — that is source material, not something to quote. ALWAYS speak to the candidate in natural, idiomatic consulting English:
 - Rephrase every step question and data introduction in English yourself — never paste the Russian text into your reply, and never mix Russian phrases into an English sentence.
@@ -510,7 +513,8 @@ export default async function handler(req, res) {
 
     // Weakness focus: whitelist key only — free text never enters the prompt.
     const focusKey = ['structure','quant','logic','comm','ownership'].includes(body.focusDimension) ? body.focusDimension : null;
-    const built = buildSystemPrompt({ caseObj, stepIndex, attemptCount, firm: body.firm, revealedSet, isOpening, focusKey });
+    const lang = body.lang === 'ru' ? 'ru' : 'en';   // whitelist
+    const built = buildSystemPrompt({ caseObj, stepIndex, attemptCount, firm: body.firm, revealedSet, isOpening, focusKey, lang });
 
     // 7) Forward to Anthropic. Two system blocks: the STABLE case body is cached
     // (identical every turn → cache hit); the VOLATILE step block is not.
