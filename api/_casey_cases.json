@@ -1,5 +1,5 @@
 {
- "contract_version": "casey-cases-v1",
+ "version": "1.2",
  "cases": [
   {
    "id": "C1",
@@ -8059,6 +8059,4501 @@
      "model_answer": "Hollowfield should repower — but value it at about $11.4 million a year against the capex, not the $29 million the asset manager is quoting. The direction is right: new turbines produce more. But the $29 million assumes turbines run at full nameplate all year, which never happens — wind is intermittent. Using capacity factors, old turbines run at 30% and new ones at 34%, so actual output rises from 210,000 to 417,000 megawatt-hours, an uplift worth $11.4 million, roughly 2.5 times less than the claim. Two risks: internally, the 34% new capacity factor is a manufacturer estimate — validate against comparable sites before committing capex; externally, power prices or subsidy changes could move the payback, and the repower requires downtime during installation. Next step: confirm the new capacity factor with an independent yield assessment and model the payback against the $11.4 million, not $29 million.",
      "checklist": "1. Recommendation first: repower at the honest number (~$11.4M), NOT \"$29M\", NOT \"don't repower\".\n2. ≥2 numbers, ≥1 anchor: **$11.4M true uplift OR the ×2.54 overstatement OR $29M-vs-11.4M contrast**.\n3. ≥1 internal (capacity-factor estimate, install downtime) AND ≥1 external (power price/subsidy) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last or no anchor.",
      "rubric_ref": "C30"
+    }
+   ]
+  },
+  {
+   "id": "C31",
+   "title": "Reserve Judgment",
+   "meta_tag": "Trap-overstate · P&C Commercial Insurance",
+   "scenario": "Grethamer Insurance underwrites commercial P&C in the market of Elstmere. One line runs a combined ratio above 100%. The CFO wants to exit it. Economics in **Exhibit 1**.\nThe CFO: \"Combined ratio is 128% — we lose money on every policy. Exit the line and save $6.6 million a year.\" The CEO asks BCG to size the true benefit of exiting.",
+   "exhibits": [
+    {
+     "id": "C31-E1",
+     "case": "C31",
+     "reveal": "auto",
+     "title": "Loss-making line economics",
+     "blocks": [
+      {
+       "type": "stacked_bar",
+       "name": "Combined ratio vs 100% breakeven",
+       "labels": [
+        "Line"
+       ],
+       "series": [
+        {
+         "name": "Loss ratio",
+         "values": [
+          104
+         ]
+        },
+        {
+         "name": "Expense ratio",
+         "values": [
+          24
+         ]
+        }
+       ],
+       "note": "Stacks to 128% combined ratio, above 100% underwriting breakeven"
+      },
+      {
+       "type": "table",
+       "name": "Line",
+       "rows": [
+        [
+         "Annual premium",
+         "$20,000,000"
+        ],
+        [
+         "Loss ratio",
+         "104%"
+        ],
+        [
+         "Expense ratio",
+         "24%"
+        ],
+        [
+         "Combined ratio",
+         "128%"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "C31-E2",
+     "case": "C31",
+     "reveal": "after_elicitation",
+     "elicitation_step": "C31-Q3c",
+     "trigger_phrases": [
+      "float",
+      "investment income",
+      "reserves",
+      "reserve release",
+      "yield on reserves"
+     ],
+     "fallback": "hint_L1 then reveal",
+     "title": "Reserves and float",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "Reserves",
+       "rows": [
+        [
+         "Investment yield on held reserves",
+         "5%"
+        ],
+        [
+         "Prior-year reserve-release if kept",
+         "$2,800,000"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "id": "Q1",
+     "type": "select_all",
+     "prompt": "Which analyses would you prioritize to size the exit benefit?",
+     "options": [
+      {
+       "text": "Compute the underwriting loss from the combined ratio",
+       "correct": true
+      },
+      {
+       "text": "Estimate investment income (float) earned on held reserves",
+       "correct": true
+      },
+      {
+       "text": "Determine any prior-year reserve-release that would be forfeited if exited",
+       "correct": true
+      },
+      {
+       "text": "Benchmark the CFO's salary",
+       "correct": false
+      },
+      {
+       "text": "Confirm premium and loss/expense ratios",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,3,5}, none of {4}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 5. **Validation:** all of {1,2,3,5}, none of {4}."
+    },
+    {
+     "id": "Q2",
+     "type": "select_all",
+     "prompt": "Genuine concerns for the exit decision?",
+     "options": [
+      {
+       "text": "Combined ratio of 128% means a 28-cent underwriting loss per premium dollar",
+       "correct": true
+      },
+      {
+       "text": "Held reserves earn investment income that stops if the line exits",
+       "correct": true
+      },
+      {
+       "text": "The line was launched three years ago",
+       "correct": false
+      },
+      {
+       "text": "Prior over-reserving may release as profit if kept",
+       "correct": true
+      },
+      {
+       "text": "Grethamer is in Elstmere",
+       "correct": false
+      }
+     ],
+     "validation": "all of {1,2,4}, none of {3,5}.",
+     "answer_explain": "**Answer:** 1, 2, 4. **Validation:** all of {1,2,4}, none of {3,5}."
+    },
+    {
+     "id": "Q3",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q3a",
+       "type": "enter_number",
+       "prompt": "What is the annual underwriting loss? (Premium × (combined ratio − 1).)",
+       "answer": 5600000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 5600000** — 20,000,000 × 0.28 = **$5,600,000**. The CFO's headline exit benefit."
+      },
+      {
+       "id": "Q3b",
+       "type": "enter_number",
+       "prompt": "What annual float income do the held loss reserves earn? (Premium × loss ratio × yield.)",
+       "answer": 1040000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 1040000** — 20,000,000 × 1.04 × 5% = **$1,040,000**."
+      },
+      {
+       "id": "Q3c",
+       "type": "open_text_elicitation",
+       "prompt": "The CFO counts only the underwriting loss. Before ruling: what ONE thing about the line's reserves would you want to know?",
+       "model_answer": "Whether the held reserves earn float income and whether prior over-reserving would release as profit if the line is kept — both forfeited on exit.",
+       "validation": "credit if requests float/investment income on reserves OR reserve-release tail. On credit → reveal Exhibit 2. On fail → L1 (\"Does exiting forfeit anything the reserves are still earning?\"), then reveal.",
+       "answer_explain": null,
+       "reveal_exhibit": "C31-E2",
+       "trigger_phrases": [
+        "float",
+        "investment income",
+        "reserves",
+        "reserve release",
+        "yield on reserves"
+       ],
+       "fallback": "hint_L1 then reveal"
+      },
+      {
+       "id": "Q3d",
+       "type": "enter_number",
+       "prompt": "Using Exhibit 2: what is the reserve-release that would be forfeited if the line exits?",
+       "answer": 2800000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 2800000** — **$2,800,000** (stated)."
+      }
+     ]
+    },
+    {
+     "id": "Q4",
+     "type": "enter_number",
+     "prompt": "Compute the TRUE exit benefit: underwriting loss saved − float income forfeited − reserve-release forfeited.",
+     "answer": 1760000.0,
+     "validation": null,
+     "answer_explain": "**Answer: 1760000** — 5,600,000 − 1,040,000 − 2,800,000 = **$1,760,000**. Exiting is still positive (same direction), but the true benefit is **$1.76M, not $6.6M** — overstated ×3.18."
+    },
+    {
+     "id": "Q5",
+     "type": "enter_number",
+     "prompt": "Express the CFO's headline as a multiple of the true benefit ($5,600,000 ÷ $1,760,000), two decimals.",
+     "answer": 3.18,
+     "validation": null,
+     "answer_explain": "**Answer: 3.18** — **3.18×**."
+    },
+    {
+     "id": "Q6",
+     "type": "enter_number",
+     "prompt": "At what reserve-release figure would exiting become exactly break-even (true benefit = 0)? Answer $, two decimals. (Solve: 5,600,000 − 1,040,000 − x = 0.)",
+     "answer": 4560000.0,
+     "validation": null,
+     "answer_explain": "**Answer: 4560000** — x* = **$4,560,000**. Actual release $2.8M < $4.56M → exit still positive. **[9b].**"
+    },
+    {
+     "id": "Q7",
+     "type": "single_choice",
+     "prompt": "How should the CEO read the \"$6.6 million\" claim?",
+     "options": [
+      {
+       "text": "Correct",
+       "correct": false
+      },
+      {
+       "text": "Roughly right",
+       "correct": false
+      },
+      {
+       "text": "Directionally right but overstated ×3 — true benefit ≈$1.76M",
+       "correct": true
+      },
+      {
+       "text": "Wrong; keep the line",
+       "correct": false
+      }
+     ],
+     "validation": "choice == 3.",
+     "answer_explain": "**Answer:** Overstated ×3.18; true ≈$1.76M. **Validation:** choice == 3."
+    },
+    {
+     "id": "Q8",
+     "type": "voice",
+     "prompt": "\"The CEO wants your recommendation on the line. Record it — about 60–90 seconds.\"",
+     "model_answer": "Grethamer should exit the line — but book about $1.76 million of benefit, not the $6.6 million the CFO is quoting. The direction is right: a 128% combined ratio is a real underwriting loss. But the $6.6 million ignores two things the reserves are still earning — about $1.04 million a year of float income on held reserves, and a $2.8 million prior-year reserve-release that unwinds as profit if we keep the line. Net those out and the true benefit is $1.76 million, a roughly threefold overstatement; in fact if the reserve-release were above $4.56 million, exiting would break even. Two risks: internally, the reserve-release estimate is an actuarial judgment that should be validated before we book it; externally, a regulator could require run-off reserves that delay any capital release. Next step: get the actuary to confirm the reserve-release and model the run-off before exiting.",
+     "checklist": "1. Recommendation first: exit at the honest number (~$1.76M), NOT \"$6.6M\", NOT \"keep\".\n2. ≥2 numbers, ≥1 anchor: **$1.76M true benefit OR ×3.18 overstatement OR $6.6M-vs-$1.76M**.\n3. ≥1 internal (reserve-release actuarial estimate) AND ≥1 external (regulator run-off reserves) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last or no anchor.",
+     "rubric_ref": "C31"
+    }
+   ]
+  },
+  {
+   "id": "C32",
+   "title": "The Load Boat",
+   "meta_tag": "Trap-flip · Cruise Line",
+   "scenario": "Tidepiper Cruises runs sailings in the market of Calmara. One route is under-booked. The revenue director wants to cut it. Economics in **Exhibit 1**.\nThe director: \"This route loses $60 a passenger on tickets. Cut it.\" The CEO asks BCG for a view.",
+   "exhibits": [
+    {
+     "id": "C32-E1",
+     "case": "C32",
+     "reveal": "auto",
+     "title": "Under-booked route: ticket economics",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "Ticket",
+       "rows": [
+        [
+         "Sailings/yr",
+         "120"
+        ],
+        [
+         "Passengers/sailing",
+         "1,500"
+        ],
+        [
+         "Ticket P&L per passenger",
+         "-$60"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "C32-E2",
+     "case": "C32",
+     "reveal": "after_elicitation",
+     "elicitation_step": "C32-Q3c",
+     "trigger_phrases": [
+      "onboard",
+      "casino",
+      "bar",
+      "ancillary",
+      "spend aboard",
+      "excursions"
+     ],
+     "fallback": "hint_L1 then reveal",
+     "title": "Onboard spend",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "Onboard",
+       "rows": [
+        [
+         "Onboard margin per passenger",
+         "$95"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "id": "Q1",
+     "type": "select_all",
+     "prompt": "Which analyses would you prioritize?",
+     "options": [
+      {
+       "text": "Compute the route's ticket profit/loss",
+       "correct": true
+      },
+      {
+       "text": "Measure onboard spend (casino, bar, excursions) per passenger",
+       "correct": true
+      },
+      {
+       "text": "Determine whether onboard margin offsets the ticket loss",
+       "correct": true
+      },
+      {
+       "text": "Benchmark the CEO's cabin",
+       "correct": false
+      },
+      {
+       "text": "Confirm sailings and passenger counts",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,3,5}, none of {4}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 5. **Validation:** all of {1,2,3,5}, none of {4}."
+    },
+    {
+     "id": "Q2",
+     "type": "select_all",
+     "prompt": "Genuine concerns for the cut?",
+     "options": [
+      {
+       "text": "Tickets lose $60 per passenger",
+       "correct": true
+      },
+      {
+       "text": "Passengers may spend heavily onboard once aboard",
+       "correct": true
+      },
+      {
+       "text": "The ship was repainted last year",
+       "correct": false
+      },
+      {
+       "text": "Onboard spend has high margin",
+       "correct": true
+      },
+      {
+       "text": "Tidepiper is in Calmara",
+       "correct": false
+      }
+     ],
+     "validation": "all of {1,2,4}, none of {3,5}.",
+     "answer_explain": "**Answer:** 1, 2, 4. **Validation:** all of {1,2,4}, none of {3,5}."
+    },
+    {
+     "id": "Q3",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q3a",
+       "type": "enter_number",
+       "prompt": "What is the route's annual ticket profit/loss? (Sailings × passengers × per-pax ticket P&L.)",
+       "answer": -10800000.0,
+       "validation": null,
+       "answer_explain": "**Answer: -10800000** — 120 × 1,500 × (−$60) = **−$10,800,000**. The director's cut case."
+      },
+      {
+       "id": "Q3b",
+       "type": "enter_number",
+       "prompt": "How many passenger-trips does the route carry per year?",
+       "answer": 180000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 180000** — 120 × 1,500 = **180,000**."
+      },
+      {
+       "id": "Q3c",
+       "type": "open_text_elicitation",
+       "prompt": "The director counts only tickets. Before ruling: what ONE thing about what passengers do ONCE ABOARD would you want to know?",
+       "model_answer": "How much passengers spend onboard (casino, bar, excursions) and its margin, which the cruise keeps if the sailing runs.",
+       "validation": "credit if requests onboard spend / ancillary revenue / casino-bar margin. On credit → reveal Exhibit 2. On fail → L1 (\"Is the ticket the only money a passenger brings?\"), then reveal.",
+       "answer_explain": null,
+       "reveal_exhibit": "C32-E2",
+       "trigger_phrases": [
+        "onboard",
+        "casino",
+        "bar",
+        "ancillary",
+        "spend aboard",
+        "excursions"
+       ],
+       "fallback": "hint_L1 then reveal"
+      },
+      {
+       "id": "Q3d",
+       "type": "enter_number",
+       "prompt": "Using Exhibit 2: what is the annual onboard margin across all passenger-trips?",
+       "answer": 17100000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 17100000** — 180,000 × $95 = **$17,100,000**."
+      }
+     ]
+    },
+    {
+     "id": "Q4",
+     "type": "enter_number",
+     "prompt": "Compute the route's TRUE annual profit: ticket P&L + onboard margin.",
+     "answer": 6300000.0,
+     "validation": null,
+     "answer_explain": "**Answer: 6300000** — −10,800,000 + 17,100,000 = **+$6,300,000** → the route is PROFITABLE once onboard spend is counted. Naive CUT, correct KEEP — **flip**."
+    },
+    {
+     "id": "Q5",
+     "type": "enter_number",
+     "prompt": "At what onboard margin per passenger would the route be exactly break-even? Answer $, two decimals. (Solve: −60 + x = 0.)",
+     "answer": 60.0,
+     "validation": null,
+     "answer_explain": "**Answer: 60.00** — x* = **$60.00**. Actual $95 > $60 → KEEP robust."
+    },
+    {
+     "id": "Q6",
+     "type": "single_choice",
+     "prompt": "Your recommendation:",
+     "options": [
+      {
+       "text": "Cut the route",
+       "correct": false
+      },
+      {
+       "text": "Keep the route",
+       "correct": true
+      },
+      {
+       "text": "No difference",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
+      }
+     ],
+     "validation": "choice == 2.",
+     "answer_explain": "**Answer:** Keep. **Validation:** choice == 2."
+    },
+    {
+     "id": "Q7",
+     "type": "voice",
+     "prompt": "\"The CEO wants your recommendation on the route. Record it — about 60–90 seconds.\"",
+     "model_answer": "Tidepiper should keep the route — it's actually profitable, earning about $6.3 million a year, once you count what passengers spend onboard. The director's mistake is looking only at tickets, which lose $60 a passenger, or $10.8 million a year. But once aboard, each passenger spends $95 of high-margin casino, bar, and excursion revenue — $17.1 million across the route — which more than offsets the ticket loss. And it's robust: the route only turns negative if onboard margin fell below $60, and it's $95. Two risks: internally, the $95 onboard figure is an average that could soften if we discount fares to fill seats and attract lower-spend passengers — validate the mix; externally, an itinerary or port-fee change could shift the economics. Next step: confirm onboard spend holds at current fares before any decision, and test a small fare adjustment to lift load.",
+     "checklist": "1. Recommendation first: keep the route, NOT cut.\n2. ≥2 numbers, ≥1 anchor: **+6,300,000 true profit OR the $60 breakeven onboard margin OR ticket-vs-onboard contrast**.\n3. ≥1 internal (onboard avg / fare-mix) AND ≥1 external (itinerary/port-fee) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last or no anchor.",
+     "rubric_ref": "C32"
+    }
+   ]
+  },
+  {
+   "id": "C33",
+   "title": "Chip on the Shoulder",
+   "meta_tag": "Trap-action · Semiconductors",
+   "scenario": "Silverquartz Semiconductors runs an older fab node in the market of Denvar. It's setting production volume. Higher output uses lower-yield, higher-cost capacity. Economics in **Exhibit 1**. Each good wafer sells for $8,000.\nThe COO wants full capacity: \"Average economics are fine — run flat out, maximize output.\" The CEO asks BCG to check the plan.",
+   "exhibits": [
+    {
+     "id": "C33-E1",
+     "case": "C33",
+     "reveal": "auto",
+     "title": "Capacity tiers (wafers started)",
+     "blocks": [
+      {
+       "type": "bar",
+       "name": "Yield % by production tier",
+       "labels": [
+        "Base",
+        "Stretch",
+        "Max"
+       ],
+       "series": [
+        {
+         "name": "Yield %",
+         "values": [
+          90,
+          75,
+          55
+         ]
+        }
+       ],
+       "note": "Yield falls as volume is pushed from Base to Max"
+      },
+      {
+       "type": "table",
+       "name": "Tiers (good wafer sells $8,000)",
+       "rows": [
+        [
+         "Base",
+         "10,000",
+         "90%",
+         "$4,000"
+        ],
+        [
+         "Stretch",
+         "6,000",
+         "75%",
+         "$6,500"
+        ],
+        [
+         "Max",
+         "4,000",
+         "55%",
+         "$8,200"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "id": "Q1",
+     "type": "select_all",
+     "prompt": "Which analyses would you prioritize?",
+     "options": [
+      {
+       "text": "Compute effective revenue per wafer (yield × price) for each tier",
+       "correct": true
+      },
+      {
+       "text": "Compare each tier's effective revenue to its marginal cost",
+       "correct": true
+      },
+      {
+       "text": "Find the cutoff where effective revenue equals marginal cost",
+       "correct": true
+      },
+      {
+       "text": "Benchmark the COO's parking",
+       "correct": false
+      },
+      {
+       "text": "Confirm yields and costs per tier",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,3,5}, none of {4}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 5. **Validation:** all of {1,2,3,5}, none of {4}."
+    },
+    {
+     "id": "Q2",
+     "type": "select_all",
+     "prompt": "Genuine concerns for the production plan?",
+     "options": [
+      {
+       "text": "Yield falls from 90% to 55% across tiers",
+       "correct": true
+      },
+      {
+       "text": "Marginal cost rises to $8,200 at the max tier",
+       "correct": true
+      },
+      {
+       "text": "The fab is in Denvar",
+       "correct": false
+      },
+      {
+       "text": "At 55% yield, effective revenue is $4,400 vs $8,200 cost",
+       "correct": true
+      },
+      {
+       "text": "Averaging across tiers can hide loss-making capacity",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,4,5}, none of {3}.",
+     "answer_explain": "**Answer:** 1, 2, 4, 5. **Validation:** all of {1,2,4,5}, none of {3}."
+    },
+    {
+     "id": "Q3",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q3a",
+       "type": "enter_number",
+       "prompt": "Base tier profit: (effective revenue − cost) × wafers. Effective rev/wafer = 90% × $8,000 = $7,200.",
+       "answer": 32000000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 32000000** — 10,000 × ($7,200 − $4,000) = **$32,000,000**."
+      },
+      {
+       "id": "Q3b",
+       "type": "enter_number",
+       "prompt": "Stretch tier profit. Effective rev/wafer = 75% × $8,000 = $6,000.",
+       "answer": -3000000.0,
+       "validation": null,
+       "answer_explain": "**Answer: -3000000** — 6,000 × ($6,000 − $6,500) = 6,000 × (−$500) = **−$3,000,000** (loss)."
+      },
+      {
+       "id": "Q3c",
+       "type": "enter_number",
+       "prompt": "Max tier profit. Effective rev/wafer = 55% × $8,000 = $4,400.",
+       "answer": -15200000.0,
+       "validation": null,
+       "answer_explain": "**Answer: -15200000** — 4,000 × ($4,400 − $8,200) = 4,000 × (−$3,800) = **−$15,200,000** (big loss)."
+      }
+     ]
+    },
+    {
+     "id": "Q4",
+     "type": "enter_number",
+     "prompt": "The COO's \"full capacity\" plan: sum all tiers. Total profit?",
+     "answer": 13800000.0,
+     "validation": null,
+     "answer_explain": "**Answer: 13800000** — 32,000,000 − 3,000,000 − 15,200,000 = **$13,800,000**. Positive, so the COO thinks it's fine — the base tier subsidizes two loss-makers."
+    },
+    {
+     "id": "Q5",
+     "type": "enter_number",
+     "prompt": "Optimal plan: produce only tiers where effective revenue > marginal cost. Optimal total profit?",
+     "answer": 32000000.0,
+     "validation": null,
+     "answer_explain": "**Answer: 32000000** — only Base qualifies (Stretch and Max lose money). Optimal = **$32,000,000** — $18.2M more than full capacity. Naive runs all; optimal runs base only — **action-trap**."
+    },
+    {
+     "id": "Q6",
+     "type": "single_choice",
+     "prompt": "Your recommendation:",
+     "options": [
+      {
+       "text": "Run full capacity",
+       "correct": false
+      },
+      {
+       "text": "Run only the base tier (cutoff at marginal cost)",
+       "correct": true
+      },
+      {
+       "text": "Run base and stretch",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
+      }
+     ],
+     "validation": "choice == 2.",
+     "answer_explain": "**Answer:** Base tier only. **Validation:** choice == 2."
+    },
+    {
+     "id": "Q7",
+     "type": "voice",
+     "prompt": "\"The CEO wants your production recommendation. Record it — about 60–90 seconds.\"",
+     "model_answer": "Silverquartz should run only the base tier, not full capacity — that lifts profit from $13.8 million to $32 million. The COO's full-capacity plan looks positive only because the base tier's $32 million masks two loss-makers: the stretch tier loses $3 million and the max tier loses $15.2 million, because at 75% and 55% yield the good die don't cover the rising marginal cost — at the max tier effective revenue is $4,400 against $8,200 of cost. So anything past the base tier destroys value. Two risks: internally, pulling back capacity means fixed-cost absorption and utilization targets must be reset — idle tools have a cost; externally, if wafer prices rise or yields improve, the stretch tier could re-qualify, so the plan should be re-run against price and yield. Next step: cap production at the base tier and re-evaluate the stretch tier quarterly against price and yield.",
+     "checklist": "1. Recommendation first: base tier only, NOT full capacity.\n2. ≥2 numbers, ≥1 anchor: **$32M-vs-$13.8M OR the max-tier $4,400-vs-$8,200 marginal contrast**.\n3. ≥1 internal (fixed-cost absorption/utilization) AND ≥1 external (wafer price/yield improvement) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last or no anchor.",
+     "rubric_ref": "C33"
+    }
+   ]
+  },
+  {
+   "id": "C34",
+   "title": "The Devil Wears Markdown",
+   "meta_tag": "Trap-overstate · Fashion Retail",
+   "scenario": "Hathwick & Roe is a fashion retailer in the market of Verrick. Merchandising wants to expand the assortment with 500 new SKUs to chase demand. Economics in **Exhibit 1**.\nMerchandising: \"500 new SKUs at 400 units each, $35 margin — that's $7 million. Expand.\" The CEO asks BCG to size the real benefit.",
+   "exhibits": [
+    {
+     "id": "C34-E1",
+     "case": "C34",
+     "reveal": "auto",
+     "title": "New assortment economics",
+     "blocks": [
+      {
+       "type": "bar",
+       "name": "Full price vs unit cost",
+       "labels": [
+        "Full price",
+        "Cost/unit"
+       ],
+       "series": [
+        {
+         "name": "$/unit",
+         "values": [
+          60,
+          25
+         ]
+        }
+       ],
+       "note": "Gross margin gap per unit at full price"
+      },
+      {
+       "type": "table",
+       "name": "Assortment",
+       "rows": [
+        [
+         "New SKUs",
+         "500"
+        ],
+        [
+         "Units/SKU/season",
+         "400"
+        ],
+        [
+         "Full price",
+         "$60"
+        ],
+        [
+         "Cost/unit",
+         "$25"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "C34-E2",
+     "case": "C34",
+     "reveal": "after_elicitation",
+     "elicitation_step": "C34-Q3c",
+     "trigger_phrases": [
+      "sell through",
+      "markdown",
+      "clearance",
+      "full price share",
+      "how much sells"
+     ],
+     "fallback": "hint_L1 then reveal",
+     "title": "Sell-through and markdown",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "Sell-through",
+       "rows": [
+        [
+         "Share selling at full price",
+         "55%"
+        ],
+        [
+         "Clearance price for the rest",
+         "$18 (below $25 cost)"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "id": "Q1",
+     "type": "select_all",
+     "prompt": "Which analyses would you prioritize?",
+     "options": [
+      {
+       "text": "Compute full-price margin on the new SKUs",
+       "correct": true
+      },
+      {
+       "text": "Estimate what share actually sells at full price",
+       "correct": true
+      },
+      {
+       "text": "Quantify the markdown/clearance loss on unsold units",
+       "correct": true
+      },
+      {
+       "text": "Benchmark store music",
+       "correct": false
+      },
+      {
+       "text": "Confirm units per SKU and prices",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,3,5}, none of {4}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 5. **Validation:** all of {1,2,3,5}, none of {4}."
+    },
+    {
+     "id": "Q2",
+     "type": "select_all",
+     "prompt": "Genuine concerns for the expansion?",
+     "options": [
+      {
+       "text": "Full-price margin is $35 per unit",
+       "correct": true
+      },
+      {
+       "text": "Broader assortment often sells through worse",
+       "correct": true
+      },
+      {
+       "text": "Clearance at $18 is below the $25 cost — a loss",
+       "correct": true
+      },
+      {
+       "text": "The brand rebranded last year",
+       "correct": false
+      },
+      {
+       "text": "Hathwick & Roe is in Verrick",
+       "correct": false
+      }
+     ],
+     "validation": "all of {1,2,3}, none of {4,5}.",
+     "answer_explain": "**Answer:** 1, 2, 3. **Validation:** all of {1,2,3}, none of {4,5}."
+    },
+    {
+     "id": "Q3",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q3a",
+       "type": "enter_number",
+       "prompt": "What is the naive benefit if all new units sell at full price? (SKUs × units × full-price margin.)",
+       "answer": 7000000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 7000000** — 500 × 400 × ($60 − $25) = **$7,000,000**. Merchandising's headline."
+      },
+      {
+       "id": "Q3b",
+       "type": "enter_number",
+       "prompt": "How many total new units does the expansion add?",
+       "answer": 200000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 200000** — 500 × 400 = **200,000**."
+      },
+      {
+       "id": "Q3c",
+       "type": "open_text_elicitation",
+       "prompt": "Merchandising assumes 100% full-price sell-through. Before ruling: what ONE thing about how broad assortments actually sell would you want to know?",
+       "model_answer": "The full-price sell-through rate, and what the unsold units clear at (markdown price versus cost).",
+       "validation": "credit if requests sell-through / markdown / clearance economics. On credit → reveal Exhibit 2. On fail → L1 (\"Do all 200,000 units sell at full price?\"), then reveal.",
+       "answer_explain": null,
+       "reveal_exhibit": "C34-E2",
+       "trigger_phrases": [
+        "sell through",
+        "markdown",
+        "clearance",
+        "full price share",
+        "how much sells"
+       ],
+       "fallback": "hint_L1 then reveal"
+      },
+      {
+       "id": "Q3d",
+       "type": "enter_number",
+       "prompt": "Using Exhibit 2: what is the margin on the 45% that clears at $18 (below $25 cost)? (Markdown units × (clearance − cost).)",
+       "answer": -630000.0,
+       "validation": null,
+       "answer_explain": "**Answer: -630000** — 200,000 × 45% × ($18 − $25) = 90,000 × (−$7) = **−$630,000** (a loss)."
+      }
+     ]
+    },
+    {
+     "id": "Q4",
+     "type": "enter_number",
+     "prompt": "Compute the TRUE benefit: full-price margin on the 55% + markdown margin on the 45%.",
+     "answer": 3220000.0,
+     "validation": null,
+     "answer_explain": "**Answer: 3220000** — full-price: 200,000 × 55% × $35 = $3,850,000; markdown: −$630,000; total = **$3,220,000**. Still positive (expand), but overstated: **×2.17** versus the $7M claim."
+    },
+    {
+     "id": "Q5",
+     "type": "enter_number",
+     "prompt": "Express merchandising's claim as a multiple of the true benefit ($7,000,000 ÷ $3,220,000), two decimals.",
+     "answer": 2.17,
+     "validation": null,
+     "answer_explain": "**Answer: 2.17** — **2.17×**."
+    },
+    {
+     "id": "Q6",
+     "type": "open_text_brainstorm",
+     "prompt": "The CEO will expand — but wants to lift sell-through and shrink the markdown tail. Brainstorm at least SIX ways.",
+     "model_answer": "Assortment: (1) expand only proven-demand categories; (2) test SKUs in a few stores before chain-wide; (3) narrower, deeper buys on winners. Buying: (4) smaller initial buys with in-season reorders (chase, don't pre-commit); (5) supplier terms allowing returns of unsold. Pricing: (6) earlier, smaller markdowns to protect margin; (7) full-price online exclusivity before clearance.",
+     "validation": "≥6 ideas, ≥2 named categories, ≥1 assortment AND ≥1 buying/pricing. <4 = fail; 4–5 = push once.",
+     "answer_explain": null
+    },
+    {
+     "id": "Q7",
+     "type": "voice",
+     "prompt": "\"The CEO wants your recommendation on the expansion. Record it — about 60–90 seconds.\"",
+     "model_answer": "Hathwick & Roe should expand — but plan for about $3.2 million, not the $7 million merchandising is quoting. The direction is right, but the $7 million assumes every one of the 200,000 new units sells at full price. In reality only 55% do, at $35 margin — $3.85 million — and the other 45% clear at $18, below the $25 cost, losing $630,000. Net, the true benefit is $3.2 million, roughly half the claim. Two risks: internally, the 55% sell-through is an estimate — a broader assortment often sells through worse, so validate with a test before a full buy; externally, a fashion-cycle miss or a competitor's markdown war could deepen the clearance tail. Next step: test the new SKUs in a subset of stores and use in-season reorders on winners rather than pre-committing the full buy.",
+     "checklist": "1. Recommendation first: expand at the honest number (~$3.2M), NOT \"$7M\", NOT \"don't expand\".\n2. ≥2 numbers, ≥1 anchor: **$3.22M true OR ×2.17 overstatement OR $7M-vs-$3.22M**.\n3. ≥1 internal (sell-through estimate/test) AND ≥1 external (fashion-cycle miss / competitor markdown) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last or no anchor.",
+     "rubric_ref": "C34"
+    }
+   ]
+  },
+  {
+   "id": "C35",
+   "title": "Waste Not",
+   "meta_tag": "CLEAN · Waste Management",
+   "scenario": "Cindervale Waste runs collection routes in the market of Harrowfen. Two under-utilized routes could merge into one. The ops director has run the numbers and recommends consolidating, but the board fears losing the municipal contract on the seams. The CEO asks BCG to validate the consolidation and confirm no hidden reason not to. Economics in **Exhibit 1**.",
+   "exhibits": [
+    {
+     "id": "C35-E1",
+     "case": "C35",
+     "reveal": "auto",
+     "title": "Route consolidation economics",
+     "blocks": [
+      {
+       "type": "bar",
+       "name": "Route cost: standalone vs consolidated",
+       "labels": [
+        "Standalone route",
+        "Consolidated route"
+       ],
+       "series": [
+        {
+         "name": "Cost ($)",
+         "values": [
+          480000,
+          620000
+         ]
+        }
+       ],
+       "note": "Consolidation cost vs two standalone routes"
+      },
+      {
+       "type": "table",
+       "name": "Routes",
+       "rows": [
+        [
+         "Cost per standalone route",
+         "$480,000"
+        ],
+        [
+         "Cost of consolidated route",
+         "$620,000"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "C35-E2",
+     "case": "C35",
+     "reveal": "after_elicitation",
+     "elicitation_step": "C35-Q3c",
+     "trigger_phrases": [
+      "contract",
+      "anchor client",
+      "revenue at risk",
+      "route dependency",
+      "tonnage"
+     ],
+     "fallback": "hint_L1 then reveal",
+     "title": "Contract and service dependencies",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "Dependencies",
+       "rows": [
+        [
+         "Contract basis",
+         "tonnage (route-agnostic)"
+        ],
+        [
+         "Anchor clients tied to route timing",
+         "0"
+        ],
+        [
+         "Revenue at risk from merging",
+         "$0"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "id": "Q1",
+     "type": "select_all",
+     "prompt": "Which analyses would you prioritize to validate consolidation?",
+     "options": [
+      {
+       "text": "Compute the cost saving from merging two routes into one",
+       "correct": true
+      },
+      {
+       "text": "Check whether merging breaches the municipal contract or loses clients",
+       "correct": true
+      },
+      {
+       "text": "Confirm pickup windows stay within the service-level agreement",
+       "correct": true
+      },
+      {
+       "text": "Benchmark the depot canteen",
+       "correct": false
+      },
+      {
+       "text": "Confirm per-route and consolidated costs",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,3,5}, none of {4}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 5. **Validation:** all of {1,2,3,5}, none of {4}."
+    },
+    {
+     "id": "Q2",
+     "type": "select_all",
+     "prompt": "Genuine considerations for THIS decision?",
+     "options": [
+      {
+       "text": "Two routes cost $480,000 each; consolidated costs $620,000",
+       "correct": true
+      },
+      {
+       "text": "The municipal contract may be tied to route structure",
+       "correct": true
+      },
+      {
+       "text": "The ops director has a logistics background",
+       "correct": false
+      },
+      {
+       "text": "Cindervale updated its truck livery",
+       "correct": false
+      },
+      {
+       "text": "A past consolidation elsewhere lost an anchor client",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,5}, none of {3,4}.",
+     "answer_explain": "**Answer:** 1, 2, 5. **Validation:** all of {1,2,5}, none of {3,4}."
+    },
+    {
+     "id": "Q3",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q3a",
+       "type": "enter_number",
+       "prompt": "What do the two standalone routes cost per year in total?",
+       "answer": 960000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 960000** — 2 × $480,000 = **$960,000**."
+      },
+      {
+       "id": "Q3b",
+       "type": "enter_number",
+       "prompt": "What is the annual cost saving from consolidating into one route?",
+       "answer": 340000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 340000** — 960,000 − 620,000 = **$340,000**."
+      },
+      {
+       "id": "Q3c",
+       "type": "open_text_elicitation",
+       "prompt": "The saving is clear — but the board fears a hidden loss. Before confirming: what ONE thing would you check to make sure merging doesn't quietly cost revenue?",
+       "model_answer": "Whether the municipal contract or any anchor clients are tied to the specific route structure, such that merging would breach the contract or lose customers.",
+       "validation": "credit if requests contract dependency / anchor-client / revenue-at-risk from merging. On credit → reveal Exhibit 2. On fail → L1 (\"Could merging cost any revenue, not just save cost?\"), then reveal.",
+       "answer_explain": null,
+       "reveal_exhibit": "C35-E2",
+       "trigger_phrases": [
+        "contract",
+        "anchor client",
+        "revenue at risk",
+        "route dependency",
+        "tonnage"
+       ],
+       "fallback": "hint_L1 then reveal"
+      },
+      {
+       "id": "Q3d",
+       "type": "single_choice",
+       "prompt": "Using Exhibit 2, does merging put any revenue at risk?",
+       "options": [
+        {
+         "text": "Yes — it breaches the route-based contract",
+         "correct": false
+        },
+        {
+         "text": "No — the contract is tonnage-based and route-agnostic, zero clients at risk",
+         "correct": true
+        },
+        {
+         "text": "It makes no difference",
+         "correct": false
+        },
+        {
+         "text": "Not enough information",
+         "correct": false
+        }
+       ],
+       "validation": "choice == 2.",
+       "answer_explain": "**Answer: No revenue at risk.** The contract pays by tonnage regardless of route, no anchor clients, pickup stays within SLA — the C8-style reversal does NOT exist here. **Validation:** choice == 2."
+      }
+     ]
+    },
+    {
+     "id": "Q4",
+     "type": "enter_number",
+     "prompt": "Given no revenue at risk, what is the net annual benefit of consolidating?",
+     "answer": 340000.0,
+     "validation": null,
+     "answer_explain": "**Answer: 340000** — the full $340,000 cost saving, with zero revenue offset → **$340,000/yr**. Naive and full agree — consolidate."
+    },
+    {
+     "id": "Q5",
+     "type": "enter_number",
+     "prompt": "Validation: how much revenue-at-risk would it take to wipe out the consolidation benefit? Answer $.",
+     "answer": 340000.0,
+     "validation": null,
+     "answer_explain": "**Answer: 340000** — any revenue loss above **$340,000** would flip it; actual is $0, so consolidation holds with full margin of safety."
+    },
+    {
+     "id": "Q6",
+     "type": "single_choice",
+     "prompt": "Your validation verdict:",
+     "options": [
+      {
+       "text": "Don't consolidate — too risky",
+       "correct": false
+      },
+      {
+       "text": "Consolidate — saving is real and no hidden contract reversal",
+       "correct": true
+      },
+      {
+       "text": "Consolidate only if a contract effect exists",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
+      }
+     ],
+     "validation": "choice == 2.",
+     "answer_explain": "**Answer:** Consolidate — confirmed clean. **Validation:** choice == 2."
+    },
+    {
+     "id": "Q7",
+     "type": "voice",
+     "prompt": "\"The CEO asks you to validate the consolidation. Record it — about 60–90 seconds.\"",
+     "model_answer": "Cindervale should consolidate the two routes — and I can confirm the ops director's call holds; there's no hidden reason not to. Merging two $480,000 routes into one $620,000 route saves $340,000 a year. The board's worry is that merging could breach the municipal contract or lose clients on the seams, the way a past consolidation did — so I checked, and it doesn't apply here: the contract pays by tonnage regardless of route, there are no anchor clients tied to route timing, and pickup windows stay within the SLA, so revenue at risk is zero. The saving only disappears if we lost more than $340,000 of revenue, and we lose none. Two risks: internally, we should confirm the merged route's pickup schedule holds in practice before finalizing; externally, a future contract renewal could add route-specific terms, so re-check at renewal. Next step: run the merged route on a trial basis for a month to confirm SLA compliance, then make it permanent.",
+     "checklist": "1. Recommendation first: consolidate — framed as CONFIRMING, NOT \"found a reason not to.\" If candidate invents a contract-loss reversal that blocks consolidation, c1 FAILS.\n2. ≥2 numbers, ≥1 anchor: **$340,000 saving (both paths) OR the confirmation that cost-saving AND no-revenue-risk both point to consolidate**. Inventing a false contract loss fails this.\n3. ≥1 internal (schedule/SLA in practice) AND ≥1 external (contract renewal adds route terms) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last, no anchor, OR invents a false contract reversal.",
+     "rubric_ref": "C35"
+    }
+   ]
+  },
+  {
+   "id": "C36",
+   "title": "Power Trip",
+   "meta_tag": "Trap-overstate · Data Centers",
+   "scenario": "Rackmoor Data Centers is evaluating a new colocation hall in the market of Tessport. Economics in **Exhibit 1**.\nThe asset manager is bullish: \"2,000 racks at 5 kW, $180 per kW a month — that's $21.6 million a year. Build it.\" The CEO asks BCG to size the real revenue.",
+   "exhibits": [
+    {
+     "id": "C36-E1",
+     "case": "C36",
+     "reveal": "auto",
+     "title": "New hall: nameplate economics",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "Hall",
+       "rows": [
+        [
+         "Racks",
+         "2,000"
+        ],
+        [
+         "Nameplate IT power/rack",
+         "5 kW"
+        ],
+        [
+         "Billable price",
+         "$180/kW/month"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "C36-E2",
+     "case": "C36",
+     "reveal": "after_elicitation",
+     "elicitation_step": "C36-Q2b",
+     "trigger_phrases": [
+      "cooling",
+      "power cap",
+      "PUE",
+      "usable capacity",
+      "full nameplate at once"
+     ],
+     "fallback": "hint_L1 then reveal",
+     "title": "Cooling/power constraints",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "Cap",
+       "rows": [
+        [
+         "Racks running full nameplate simultaneously",
+         "55%"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "id": "Q1",
+     "type": "select_all",
+     "prompt": "Which analyses would you prioritize?",
+     "options": [
+      {
+       "text": "Compute revenue at full nameplate",
+       "correct": true
+      },
+      {
+       "text": "Determine how much of nameplate the hall can actually deploy (cooling/power cap)",
+       "correct": true
+      },
+      {
+       "text": "Adjust billable capacity for the usable fraction",
+       "correct": true
+      },
+      {
+       "text": "Benchmark the CEO's office",
+       "correct": false
+      },
+      {
+       "text": "Confirm rack count and price",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,3,5}, none of {4}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 5. **Validation:** all of {1,2,3,5}, none of {4}."
+    },
+    {
+     "id": "Q2",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q2a",
+       "type": "enter_number",
+       "prompt": "What annual revenue does the asset manager claim at full nameplate? (Racks × kW × price × 12.)",
+       "answer": 21600000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 21600000** — 2,000 × 5 × $180 × 12 = **$21,600,000**. The headline."
+      },
+      {
+       "id": "Q2b",
+       "type": "open_text_elicitation",
+       "prompt": "The claim assumes every rack runs at full nameplate at once. Before ruling: what ONE constraint on actual deployable capacity would you want to know?",
+       "model_answer": "The cooling/power cap — what fraction of racks can actually run at full nameplate simultaneously, since data halls are cooling-limited.",
+       "validation": "credit if requests cooling/power cap / PUE / usable-vs-nameplate capacity. On credit → reveal Exhibit 2. On fail → L1 (\"Can all 2,000 racks run at full power at once?\"), then reveal.",
+       "answer_explain": null,
+       "reveal_exhibit": "C36-E2",
+       "trigger_phrases": [
+        "cooling",
+        "power cap",
+        "PUE",
+        "usable capacity",
+        "full nameplate at once"
+       ],
+       "fallback": "hint_L1 then reveal"
+      }
+     ]
+    },
+    {
+     "id": "Q3",
+     "type": "enter_number",
+     "prompt": "Using Exhibit 2: what is the TRUE annual revenue at 55% usable capacity?",
+     "answer": 11880000.0,
+     "validation": null,
+     "answer_explain": "**Answer: 11880000** — 2,000 × 5 × $180 × 55% × 12 = **$11,880,000** → still positive (build), but far below $21.6M. Overstated **×1.82**."
+    },
+    {
+     "id": "Q4",
+     "type": "enter_number",
+     "prompt": "Express the manager's claim as a multiple of the true revenue ($21,600,000 ÷ $11,880,000), two decimals.",
+     "answer": 1.82,
+     "validation": null,
+     "answer_explain": "**Answer: 1.82** — **1.82×**."
+    },
+    {
+     "id": "Q5",
+     "type": "single_choice",
+     "prompt": "How should the CEO read the \"$21.6 million\" claim?",
+     "options": [
+      {
+       "text": "Correct",
+       "correct": false
+      },
+      {
+       "text": "Roughly right",
+       "correct": false
+      },
+      {
+       "text": "Directionally right but overstated ×1.8 — true revenue ≈$11.9M",
+       "correct": true
+      },
+      {
+       "text": "Wrong; don't build",
+       "correct": false
+      }
+     ],
+     "validation": "choice == 3.",
+     "answer_explain": "**Answer:** Overstated ×1.82; true ≈$11.9M. **Validation:** choice == 3."
+    },
+    {
+     "id": "Q6",
+     "type": "single_choice",
+     "prompt": "Your recommendation:",
+     "options": [
+      {
+       "text": "Build, valuing it at the honest ~$11.9M against the capex, not $21.6M",
+       "correct": true
+      },
+      {
+       "text": "Build and expect $21.6M",
+       "correct": false
+      },
+      {
+       "text": "Don't build",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
+      }
+     ],
+     "validation": "choice == 1.",
+     "answer_explain": "**Answer:** Build at the honest number. **Validation:** choice == 1."
+    },
+    {
+     "id": "Q7",
+     "type": "voice",
+     "prompt": "\"The CEO wants your recommendation on the hall. Record it — about 60–90 seconds.\"",
+     "model_answer": "Rackmoor should build the hall — but value it at about $11.9 million a year against the capex, not the $21.6 million the asset manager is quoting. The direction is right, but $21.6 million assumes all 2,000 racks run at full nameplate simultaneously, which cooling and power won't allow — only 55% of the hall can run at full load at once. Adjust for that and true billable revenue is $11.9 million, a roughly 1.8-times overstatement. Two risks: internally, the 55% cooling cap is an engineering estimate that should be validated before capex; externally, power prices or a tenant demanding higher density could shift the economics. Next step: confirm the cooling/power cap with an engineering study and model the payback against $11.9 million, not $21.6 million.",
+     "checklist": "1. Recommendation first: build at the honest number (~$11.9M), NOT \"$21.6M\", NOT \"don't build\".\n2. ≥2 numbers, ≥1 anchor: **$11.9M true OR ×1.82 overstatement OR $21.6M-vs-$11.9M**.\n3. ≥1 internal (cooling-cap estimate) AND ≥1 external (power price / tenant density) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last or no anchor.",
+     "rubric_ref": "C36"
+    }
+   ]
+  },
+  {
+   "id": "C37",
+   "title": "Reap What You Sow",
+   "meta_tag": "Trap-flip · Agriculture / Seeds",
+   "scenario": "Thornmeadow Seeds advises a large farm in the market of Grenton on seed variety for next season. Two varieties: A (high yield, disease-prone) and B (lower yield, disease-resistant). Economics in **Exhibit 1**. Corn sells at $6/bushel; 50,000 acres.\nThe agronomist favors A: \"200 bushels an acre versus 175 — pick A, it's 25 bushels more.\" The CEO asks BCG to check.",
+   "exhibits": [
+    {
+     "id": "C37-E1",
+     "case": "C37",
+     "reveal": "auto",
+     "title": "Seed variety yields",
+     "blocks": [
+      {
+       "type": "bar",
+       "name": "Yield by corn variety",
+       "labels": [
+        "A (high-yield)",
+        "B (resistant)"
+       ],
+       "series": [
+        {
+         "name": "bu/acre",
+         "values": [
+          200,
+          175
+         ]
+        }
+       ],
+       "note": "Variety A yields more before disease risk"
+      },
+      {
+       "type": "table",
+       "name": "Varieties (corn $6/bu, 50,000 acres)",
+       "rows": [
+        [
+         "A (high-yield)",
+         "200 bu/acre",
+         "prone"
+        ],
+        [
+         "B (resistant)",
+         "175 bu/acre",
+         "resistant"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "C37-E2",
+     "case": "C37",
+     "reveal": "after_elicitation",
+     "elicitation_step": "C37-Q3c",
+     "trigger_phrases": [
+      "disease probability",
+      "risk adjusted",
+      "expected yield",
+      "chance of disease",
+      "yield loss"
+     ],
+     "fallback": "hint_L1 then reveal",
+     "title": "Disease risk",
+     "blocks": [
+      {
+       "type": "bar",
+       "name": "Disease risk profile by variety",
+       "labels": [
+        "A (high-yield)",
+        "B (resistant)"
+       ],
+       "series": [
+        {
+         "name": "Disease-year chance",
+         "values": [
+          30,
+          5
+         ]
+        },
+        {
+         "name": "Yield loss in disease year",
+         "values": [
+          50,
+          20
+         ]
+        }
+       ],
+       "note": "Both metrics in % across the two varieties"
+      },
+      {
+       "type": "table",
+       "name": "Risk",
+       "rows": [
+        [
+         "A: disease-year chance",
+         "30%"
+        ],
+        [
+         "A: yield loss in disease year",
+         "50%"
+        ],
+        [
+         "B: disease-year chance",
+         "5%"
+        ],
+        [
+         "B: yield loss in disease year",
+         "20%"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "id": "Q1",
+     "type": "select_all",
+     "prompt": "Which analyses would you prioritize?",
+     "options": [
+      {
+       "text": "Compute revenue at nominal yield for each variety",
+       "correct": true
+      },
+      {
+       "text": "Adjust each variety's yield for disease probability and loss",
+       "correct": true
+      },
+      {
+       "text": "Compare disease-adjusted expected revenue",
+       "correct": true
+      },
+      {
+       "text": "Benchmark the CEO's truck",
+       "correct": false
+      },
+      {
+       "text": "Confirm yields and acreage",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,3,5}, none of {4}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 5. **Validation:** all of {1,2,3,5}, none of {4}."
+    },
+    {
+     "id": "Q2",
+     "type": "select_all",
+     "prompt": "Genuine concerns for the variety choice?",
+     "options": [
+      {
+       "text": "Variety A yields 200 nominal vs B's 175",
+       "correct": true
+      },
+      {
+       "text": "Variety A is disease-prone",
+       "correct": true
+      },
+      {
+       "text": "Disease can wipe out a large share of A's yield",
+       "correct": true
+      },
+      {
+       "text": "The farm is in Grenton",
+       "correct": false
+      },
+      {
+       "text": "Seed price is the same for both",
+       "correct": false
+      }
+     ],
+     "validation": "all of {1,2,3}, none of {4,5}.",
+     "answer_explain": "**Answer:** 1, 2, 3. **Validation:** all of {1,2,3}, none of {4,5}."
+    },
+    {
+     "id": "Q3",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q3a",
+       "type": "enter_number",
+       "prompt": "Naive annual revenue for A at nominal yield. (Acres × yield × price.)",
+       "answer": 60000000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 60000000** — 50,000 × 200 × $6 = **$60,000,000**."
+      },
+      {
+       "id": "Q3b",
+       "type": "enter_number",
+       "prompt": "Naive annual revenue for B at nominal yield.",
+       "answer": 52500000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 52500000** — 50,000 × 175 × $6 = **$52,500,000**. On nominal yield A looks better."
+      },
+      {
+       "id": "Q3c",
+       "type": "open_text_elicitation",
+       "prompt": "The agronomist compares nominal yields. Before ruling: what ONE thing about variety A's disease exposure would you want to know?",
+       "model_answer": "The probability of a disease year and the yield loss it causes, to compute disease-adjusted expected yield (and the same for B).",
+       "validation": "credit if requests disease probability / risk-adjusted / expected yield. On credit → reveal Exhibit 2. On fail → L1 (\"Is nominal yield the same as what you actually harvest?\"), then reveal.",
+       "answer_explain": null,
+       "reveal_exhibit": "C37-E2",
+       "trigger_phrases": [
+        "disease probability",
+        "risk adjusted",
+        "expected yield",
+        "chance of disease",
+        "yield loss"
+       ],
+       "fallback": "hint_L1 then reveal"
+      },
+      {
+       "id": "Q3d",
+       "type": "enter_number",
+       "prompt": "Using Exhibit 2: what is variety A's disease-adjusted expected yield? (200 × (1 − 30% × 50%).)",
+       "answer": 170.0,
+       "validation": null,
+       "answer_explain": "**Answer: 170** — 200 × (1 − 0.15) = **170 bu/acre**."
+      }
+     ]
+    },
+    {
+     "id": "Q4",
+     "type": "enter_number",
+     "prompt": "What is variety B's disease-adjusted expected yield? (175 × (1 − 5% × 20%).)",
+     "answer": 173.25,
+     "validation": null,
+     "answer_explain": "**Answer: 173.25** — 175 × (1 − 0.01) = **173.25 bu/acre**. B's adjusted yield now EXCEEDS A's."
+    },
+    {
+     "id": "Q5",
+     "type": "enter_number",
+     "prompt": "Compute disease-adjusted annual revenue for each and the difference (B − A). (Acres × adjusted yield × price.)",
+     "answer": 975000.0,
+     "validation": null,
+     "answer_explain": "**Answer: 975000**\n- A: 50,000 × 170 × $6 = $51,000,000\n- B: 50,000 × 173.25 × $6 = $51,975,000\n- B − A = **+$975,000** → B wins on a risk-adjusted basis. Naive picks A, correct picks B — **flip**."
+    },
+    {
+     "id": "Q6",
+     "type": "single_choice",
+     "prompt": "Your recommendation:",
+     "options": [
+      {
+       "text": "Plant variety A (higher nominal yield)",
+       "correct": false
+      },
+      {
+       "text": "Plant variety B (higher disease-adjusted yield)",
+       "correct": true
+      },
+      {
+       "text": "No difference",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
+      }
+     ],
+     "validation": "choice == 2.",
+     "answer_explain": "**Answer:** Variety B. **Validation:** choice == 2."
+    },
+    {
+     "id": "Q7",
+     "type": "voice",
+     "prompt": "\"The CEO wants your seed recommendation. Record it — about 60–90 seconds.\"",
+     "model_answer": "Thornmeadow should recommend variety B, the resistant one, not the higher-nominal-yield A. The agronomist is right that A yields 200 bushels against B's 175 on paper — but A is disease-prone, and once you weight for a 30% chance of a disease year with 50% loss, A's expected yield drops to 170. B, being resistant, holds at 173.25. So on a disease-adjusted basis B actually earns more — about $52 million versus $51 million, roughly $975,000 more, with far less downside risk. Two risks: internally, the disease probabilities are estimates from historical data that should be validated for this region and season; externally, weather or a new pathogen strain could shift both varieties' risk. Next step: confirm the regional disease history and consider splitting acreage to hedge before committing fully to B.",
+     "checklist": "1. Recommendation first: variety B, NOT A.\n2. ≥2 numbers, ≥1 anchor: **the disease-adjusted 170-vs-173.25 yields OR the +$975,000 revenue difference OR the $52M-vs-$51M contrast**.\n3. ≥1 internal (disease-probability estimate) AND ≥1 external (weather / new pathogen) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last or no anchor.",
+     "rubric_ref": "C37"
+    }
+   ]
+  },
+  {
+   "id": "C38",
+   "title": "Time Is Money",
+   "meta_tag": "Trap-action · Luxury Watches",
+   "scenario": "Kesterly holds unsold inventory of older luxury watch models in the market of Lanmore. The finance team wants to clearance all of it for cash. Economics in **Exhibit 1**.\nFinance: \"Clear it all now, free up $3.64 million of cash.\" The CEO asks BCG whether that's optimal.",
+   "exhibits": [
+    {
+     "id": "C38-E1",
+     "case": "C38",
+     "reveal": "auto",
+     "title": "Old inventory by model",
+     "blocks": [
+      {
+       "type": "bar",
+       "name": "Clear vs Hold by tier",
+       "labels": [
+        "Common",
+        "Mid",
+        "Scarce"
+       ],
+       "series": [
+        {
+         "name": "Clear now",
+         "values": [
+          600,
+          1800,
+          5000
+         ]
+        },
+        {
+         "name": "Hold",
+         "values": [
+          500,
+          2600,
+          11000
+         ]
+        }
+       ],
+       "note": "Per-unit value tradeoff by inventory tier"
+      },
+      {
+       "type": "table",
+       "name": "Inventory",
+       "rows": [
+        [
+         "Common",
+         "2,000",
+         "clear $600",
+         "hold $500"
+        ],
+        [
+         "Mid",
+         "800",
+         "clear $1,800",
+         "hold $2,600"
+        ],
+        [
+         "Scarce",
+         "200",
+         "clear $5,000",
+         "hold $11,000"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "id": "Q1",
+     "type": "select_all",
+     "prompt": "Which analyses would you prioritize?",
+     "options": [
+      {
+       "text": "Compute clearance revenue for each model",
+       "correct": true
+      },
+      {
+       "text": "Compare clearance-now against hold-for-later per model",
+       "correct": true
+      },
+      {
+       "text": "Identify which models appreciate enough to hold",
+       "correct": true
+      },
+      {
+       "text": "Benchmark the CEO's watch",
+       "correct": false
+      },
+      {
+       "text": "Confirm units and prices",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,3,5}, none of {4}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 5. **Validation:** all of {1,2,3,5}, none of {4}."
+    },
+    {
+     "id": "Q2",
+     "type": "select_all",
+     "prompt": "Genuine concerns for the clearance decision?",
+     "options": [
+      {
+       "text": "Common models clear at $600 but only hold at $500 — clearing is right for them",
+       "correct": true
+      },
+      {
+       "text": "Scarce models hold at $11,000 versus $5,000 clearance — holding is far better",
+       "correct": true
+      },
+      {
+       "text": "Kesterly is in Lanmore",
+       "correct": false
+      },
+      {
+       "text": "Mid models hold at $2,600 vs $1,800 clearance",
+       "correct": true
+      },
+      {
+       "text": "All models should be treated the same",
+       "correct": false
+      }
+     ],
+     "validation": "all of {1,2,4}, none of {3,5}.",
+     "answer_explain": "**Answer:** 1, 2, 4. **Validation:** all of {1,2,4}, none of {3,5}."
+    },
+    {
+     "id": "Q3",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q3a",
+       "type": "enter_number",
+       "prompt": "What is the total clearance-now revenue across all models (finance's plan)?",
+       "answer": 3640000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 3640000** — 2,000×$600 + 800×$1,800 + 200×$5,000 = 1,200,000 + 1,440,000 + 1,000,000 = **$3,640,000**."
+      },
+      {
+       "id": "Q3b",
+       "type": "enter_number",
+       "prompt": "For each model, take the better of clearance-now vs hold-for-later. What is the optimal total value? (Common: clear $600 > hold $500; Mid: hold $2,600 > clear $1,800; Scarce: hold $11,000 > clear $5,000.)",
+       "answer": 5480000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 5480000** — 2,000×$600 + 800×$2,600 + 200×$11,000 = 1,200,000 + 2,080,000 + 2,200,000 = **$5,480,000**."
+      },
+      {
+       "id": "Q3c",
+       "type": "enter_number",
+       "prompt": "How much more does the optimal hold-subset strategy yield than clearing everything?",
+       "answer": 1840000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 1840000** — 5,480,000 − 3,640,000 = **$1,840,000** more. Naive clears all; optimal holds mid + scarce, clears common — **action-trap**."
+      }
+     ]
+    },
+    {
+     "id": "Q4",
+     "type": "single_choice",
+     "prompt": "Your recommendation:",
+     "options": [
+      {
+       "text": "Clear all inventory now",
+       "correct": false
+      },
+      {
+       "text": "Hold the mid and scarce models, clear only common",
+       "correct": true
+      },
+      {
+       "text": "Hold everything",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
+      }
+     ],
+     "validation": "choice == 2.",
+     "answer_explain": "**Answer:** Hold mid + scarce, clear common. **Validation:** choice == 2."
+    },
+    {
+     "id": "Q5",
+     "type": "voice",
+     "prompt": "\"The CEO wants your inventory recommendation. Record it — about 60–90 seconds.\"",
+     "model_answer": "Kesterly should hold the mid and scarce models and clear only the common ones — that's worth $5.48 million versus $3.64 million for clearing everything, about $1.84 million more. The finance plan treats all inventory the same, but the economics differ by model: common watches clear at $600 and only hold at $500, so clearing them is right; but mid models hold at $2,600 against $1,800 clearance, and scarce ones at $11,000 against $5,000 — those appreciate enough to be worth holding. Two risks: internally, holding ties up cash and carries storage and insurance cost, so we need the balance sheet to support it; externally, the resale-appreciation estimates could soften if demand for vintage models cools. Next step: hold the mid and scarce models against a defined price target and revisit in six months, clearing common now.",
+     "checklist": "1. Recommendation first: hold mid+scarce / clear common, NOT clear all.\n2. ≥2 numbers, ≥1 anchor: **$5.48M-vs-$3.64M OR the $1.84M uplift**.\n3. ≥1 internal (cash tie-up / storage-insurance carry) AND ≥1 external (vintage demand cools) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last or no anchor.",
+     "rubric_ref": "C38"
+    }
+   ]
+  },
+  {
+   "id": "C39",
+   "title": "Sick as a Dog",
+   "meta_tag": "Trap-flip · Pet Care / Vet Clinics",
+   "scenario": "Pawthorne Veterinary runs clinics in the market of Bellmoor. Routine visits (vaccinations, check-ups) are low-margin. The practice manager wants to cut them to focus capacity on high-margin surgery. Economics in **Exhibit 1**.\nThe manager: \"Routine visits make only $240,000 a year. Cut them, reallocate to surgery worth $400,000 — net $160,000.\" The CEO asks BCG for a view.",
+   "exhibits": [
+    {
+     "id": "C39-E1",
+     "case": "C39",
+     "reveal": "auto",
+     "title": "Routine visit economics",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "Routine",
+       "rows": [
+        [
+         "Routine visits/yr",
+         "30,000"
+        ],
+        [
+         "Margin per routine visit",
+         "$8"
+        ],
+        [
+         "Claimed surgery upside from reallocation",
+         "$400,000"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "C39-E2",
+     "case": "C39",
+     "reveal": "after_elicitation",
+     "elicitation_step": "C39-Q3c",
+     "trigger_phrases": [
+      "referral",
+      "new client",
+      "acquisition",
+      "how clients enter",
+      "word of mouth"
+     ],
+     "fallback": "hint_L1 then reveal",
+     "title": "Referral network from routine care",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "Referral",
+       "rows": [
+        [
+         "New clients/yr via referral",
+         "2,000"
+        ],
+        [
+         "Lifetime margin per referred client",
+         "$350"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "id": "Q1",
+     "type": "select_all",
+     "prompt": "Which analyses would you prioritize?",
+     "options": [
+      {
+       "text": "Compute routine visits' direct contribution",
+       "correct": true
+      },
+      {
+       "text": "Assess the claimed surgery upside from reallocation",
+       "correct": true
+      },
+      {
+       "text": "Determine whether routine care drives new-client acquisition or referrals",
+       "correct": true
+      },
+      {
+       "text": "Benchmark the CEO's dog",
+       "correct": false
+      },
+      {
+       "text": "Confirm visit volume and margin",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,3,5}, none of {4}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 5. **Validation:** all of {1,2,3,5}, none of {4}."
+    },
+    {
+     "id": "Q2",
+     "type": "select_all",
+     "prompt": "Genuine concerns for the cut?",
+     "options": [
+      {
+       "text": "Routine visits directly contribute only $240,000",
+       "correct": true
+      },
+      {
+       "text": "Routine care may be how new pets/clients first enter the practice",
+       "correct": true
+      },
+      {
+       "text": "Existing routine-care clients may refer new clients",
+       "correct": true
+      },
+      {
+       "text": "Pawthorne is in Bellmoor",
+       "correct": false
+      },
+      {
+       "text": "The clinic repainted last year",
+       "correct": false
+      }
+     ],
+     "validation": "all of {1,2,3}, none of {4,5}.",
+     "answer_explain": "**Answer:** 1, 2, 3. **Validation:** all of {1,2,3}, none of {4,5}."
+    },
+    {
+     "id": "Q3",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q3a",
+       "type": "enter_number",
+       "prompt": "What is the direct annual contribution of routine visits? (Visits × margin.)",
+       "answer": 240000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 240000** — 30,000 × $8 = **$240,000**."
+      },
+      {
+       "id": "Q3b",
+       "type": "enter_number",
+       "prompt": "The manager's plan: gain the $400,000 surgery upside, lose the $240,000 routine contribution. What net does the manager claim from cutting?",
+       "answer": 160000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 160000** — 400,000 − 240,000 = **$160,000**. The manager's cut case."
+      },
+      {
+       "id": "Q3c",
+       "type": "open_text_elicitation",
+       "prompt": "The manager counts only direct contribution and surgery. Before ruling: what ONE thing about how routine care affects NEW client flow would you want to know?",
+       "model_answer": "Whether routine care drives new-client acquisition or referrals — i.e. whether cutting it reduces the inflow of new clients (and their lifetime value).",
+       "validation": "credit if requests referral / new-client acquisition / how clients enter the practice. On credit → reveal Exhibit 2. On fail → L1 (\"How do new clients first find the practice?\"), then reveal.",
+       "answer_explain": null,
+       "reveal_exhibit": "C39-E2",
+       "trigger_phrases": [
+        "referral",
+        "new client",
+        "acquisition",
+        "how clients enter",
+        "word of mouth"
+       ],
+       "fallback": "hint_L1 then reveal"
+      },
+      {
+       "id": "Q3d",
+       "type": "enter_number",
+       "prompt": "Using Exhibit 2: what annual referral-network value would be lost if routine care is cut? (Referred clients × lifetime margin.)",
+       "answer": 700000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 700000** — 2,000 × $350 = **$700,000**."
+      }
+     ]
+    },
+    {
+     "id": "Q4",
+     "type": "enter_number",
+     "prompt": "Compute the TRUE net effect of cutting: the manager's claimed net − the referral-network value lost.",
+     "answer": -540000.0,
+     "validation": null,
+     "answer_explain": "**Answer: -540000** — 160,000 − 700,000 = **−$540,000** → cutting DESTROYS value. Naive CUT, correct KEEP — **flip**."
+    },
+    {
+     "id": "Q5",
+     "type": "enter_number",
+     "prompt": "At what referral-network value would cutting be exactly break-even? Answer $. (Solve: 160,000 − x = 0.)",
+     "answer": 160000.0,
+     "validation": null,
+     "answer_explain": "**Answer: 160000** — x* = **$160,000**. Actual referral value $700,000 ≫ $160,000 → KEEP robust."
+    },
+    {
+     "id": "Q6",
+     "type": "single_choice",
+     "prompt": "Your recommendation:",
+     "options": [
+      {
+       "text": "Cut routine visits",
+       "correct": false
+      },
+      {
+       "text": "Keep routine care — it drives the referral network",
+       "correct": true
+      },
+      {
+       "text": "Cut only if referral value is below $160,000",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
+      }
+     ],
+     "validation": "choice == 2.",
+     "answer_explain": "**Answer:** Keep. **Validation:** choice == 2."
+    },
+    {
+     "id": "Q7",
+     "type": "voice",
+     "prompt": "\"The CEO wants your recommendation on routine visits. Record it — about 60–90 seconds.\"",
+     "model_answer": "Pawthorne should keep routine care — cutting it would cost about $540,000 a year, not gain $160,000. The manager's math looks right on the surface: routine visits contribute only $240,000, and reallocating to surgery seems worth $400,000, a net $160,000. But that ignores how new clients enter the practice: the routine-care client base refers about 2,000 new clients a year, each worth $350 of lifetime margin — $700,000 that dries up if routine care goes. Net the two and cutting loses $540,000. And it's robust: cutting would only pay off if the referral network were worth under $160,000, and it's $700,000. Two risks: internally, the referral figure should be validated by tracking how new clients actually find us; externally, a competitor clinic could capture the routine visits and the referral flow with them. Next step: track new-client referral sources for a quarter to confirm the $700,000 before any change.",
+     "checklist": "1. Recommendation first: keep routine care, NOT cut.\n2. ≥2 numbers, ≥1 anchor: **−540,000 true effect OR the $700,000 referral value OR the $160,000 breakeven**.\n3. ≥1 internal (referral tracking / estimate) AND ≥1 external (competitor captures visits + referrals) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last or no anchor.",
+     "rubric_ref": "C39"
+    }
+   ]
+  },
+  {
+   "id": "C40",
+   "title": "Book Smart",
+   "meta_tag": "Trap-flip · Online Travel Agency",
+   "scenario": "Voyenvo Travel is an online travel agency in the market of Corwen. Budget-hotel bookings carry a low take rate. The commercial head wants to drop the budget supplier and reallocate to premium hotels. Economics in **Exhibit 1**.\nThe head: \"Budget hotels take only $8 a booking versus $25 for premium — drop them, focus on premium.\" The CEO asks BCG for a view.",
+   "exhibits": [
+    {
+     "id": "C40-E1",
+     "case": "C40",
+     "reveal": "auto",
+     "title": "Budget-hotel booking economics",
+     "blocks": [
+      {
+       "type": "bar",
+       "name": "Take vs servicing cost",
+       "labels": [
+        "Take/booking",
+        "Servicing cost/booking"
+       ],
+       "series": [
+        {
+         "name": "$ per booking",
+         "values": [
+          8,
+          5
+         ]
+        }
+       ],
+       "note": "Per-booking economics"
+      },
+      {
+       "type": "table",
+       "name": "Budget",
+       "rows": [
+        [
+         "Budget bookings/yr",
+         "200,000"
+        ],
+        [
+         "Take per budget booking",
+         "$8"
+        ],
+        [
+         "Servicing cost/booking",
+         "$5"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "C40-E2",
+     "case": "C40",
+     "reveal": "after_elicitation",
+     "elicitation_step": "C40-Q3c",
+     "trigger_phrases": [
+      "cross-sell",
+      "car rental",
+      "activities",
+      "attached",
+      "also book"
+     ],
+     "fallback": "hint_L1 then reveal",
+     "title": "Cross-sell attached to budget bookings",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "Cross-sell",
+       "rows": [
+        [
+         "Share adding car/activities",
+         "30%"
+        ],
+        [
+         "Cross-sell margin per attached booking",
+         "$22"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "id": "Q1",
+     "type": "select_all",
+     "prompt": "Which analyses would you prioritize?",
+     "options": [
+      {
+       "text": "Compute budget bookings' own margin (take − servicing)",
+       "correct": true
+      },
+      {
+       "text": "Measure cross-sell (car, activities) attached to budget bookings",
+       "correct": true
+      },
+      {
+       "text": "Estimate what's lost if budget customers leave entirely",
+       "correct": true
+      },
+      {
+       "text": "Benchmark the CEO's travel",
+       "correct": false
+      },
+      {
+       "text": "Confirm booking volume and take rate",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,3,5}, none of {4}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 5. **Validation:** all of {1,2,3,5}, none of {4}."
+    },
+    {
+     "id": "Q2",
+     "type": "select_all",
+     "prompt": "Genuine concerns for dropping the supplier?",
+     "options": [
+      {
+       "text": "Budget take is $8 versus $5 servicing — a positive $3 margin",
+       "correct": true
+      },
+      {
+       "text": "Budget bookings may pull car/activity cross-sell",
+       "correct": true
+      },
+      {
+       "text": "Voyenvo is in Corwen",
+       "correct": false
+      },
+      {
+       "text": "Dropping budget loses those customers entirely",
+       "correct": true
+      },
+      {
+       "text": "The app was redesigned last year",
+       "correct": false
+      }
+     ],
+     "validation": "all of {1,2,4}, none of {3,5}.",
+     "answer_explain": "**Answer:** 1, 2, 4. **Validation:** all of {1,2,4}, none of {3,5}."
+    },
+    {
+     "id": "Q3",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q3a",
+       "type": "enter_number",
+       "prompt": "What is budget bookings' own annual margin? (Bookings × (take − servicing).)",
+       "answer": 600000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 600000** — 200,000 × ($8 − $5) = **$600,000**. Budget bookings are already profitable — dropping loses this."
+      },
+      {
+       "id": "Q3b",
+       "type": "enter_number",
+       "prompt": "What is budget bookings' annual take revenue (the number the head focuses on)?",
+       "answer": 1600000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 1600000** — 200,000 × $8 = **$1,600,000**."
+      },
+      {
+       "id": "Q3c",
+       "type": "open_text_elicitation",
+       "prompt": "The head focuses on the low take rate. Before ruling: what ONE thing about what budget bookers ALSO book would you want to know?",
+       "model_answer": "Whether budget bookings pull cross-sell (car rental, activities) that would also be lost if the budget supplier is dropped.",
+       "validation": "credit if requests cross-sell / attached bookings / car-activities basket. On credit → reveal Exhibit 2. On fail → L1 (\"Is the hotel take the only revenue a budget booking brings?\"), then reveal.",
+       "answer_explain": null,
+       "reveal_exhibit": "C40-E2",
+       "trigger_phrases": [
+        "cross-sell",
+        "car rental",
+        "activities",
+        "attached",
+        "also book"
+       ],
+       "fallback": "hint_L1 then reveal"
+      },
+      {
+       "id": "Q3d",
+       "type": "enter_number",
+       "prompt": "Using Exhibit 2: what is the annual cross-sell margin attached to budget bookings? (Bookings × attach × cross-sell margin.)",
+       "answer": 1320000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 1320000** — 200,000 × 30% × $22 = **$1,320,000**."
+      }
+     ]
+    },
+    {
+     "id": "Q4",
+     "type": "enter_number",
+     "prompt": "Compute the TRUE annual impact of dropping the budget supplier: lose the own margin + lose the attached cross-sell (assume dropped customers leave entirely).",
+     "answer": -1920000.0,
+     "validation": null,
+     "answer_explain": "**Answer: -1920000** — −600,000 − 1,320,000 = **−$1,920,000** → dropping DESTROYS value. Naive DROP, correct KEEP — **flip**."
+    },
+    {
+     "id": "Q5",
+     "type": "single_choice",
+     "prompt": "Should Voyenvo drop the budget supplier?",
+     "options": [
+      {
+       "text": "Yes — the take rate is too low",
+       "correct": false
+      },
+      {
+       "text": "No — budget bookings are profitable and pull cross-sell",
+       "correct": true
+      },
+      {
+       "text": "No difference",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
+      }
+     ],
+     "validation": "choice == 2.",
+     "answer_explain": "**Answer:** No — keep. **Validation:** choice == 2."
+    },
+    {
+     "id": "Q6",
+     "type": "enter_number",
+     "prompt": "At what cross-sell attach rate would dropping be exactly break-even? Answer %, two decimals. (Dropping loses own margin $600,000 + attach × 200,000 × $22; break-even where the KEPT value equals zero, i.e. own margin + cross-sell = 0 is already negative — so solve for the attach where total value of budget = 0: 600,000 + a × 200,000 × 22 = 0.)",
+     "answer": -13.64,
+     "validation": null,
+     "answer_explain": "**Answer: -13.64**\n- 600,000 + a × 4,400,000 = 0 → a = −13.64%.\n- A negative breakeven means budget bookings add value at ANY attach rate ≥ 0 — even with zero cross-sell, the $600,000 own margin already makes dropping value-destructive. Cross-sell ($1.32M) only deepens it.\n\n*(Interviewer note: sharpest insight — budget bookings' own $600k margin already makes the drop wrong before cross-sell. The head's \"low take rate\" framing confuses low take with low profit.)*"
+    },
+    {
+     "id": "Q7",
+     "type": "voice",
+     "prompt": "\"The CEO wants your recommendation on the budget supplier. Record it — about 60–90 seconds.\"",
+     "model_answer": "Voyenvo should keep the budget supplier — dropping it would cost about $1.92 million a year. The commercial head confuses a low take rate with low profit. Two layers. First, budget bookings are already profitable on their own: an $8 take against $5 servicing is $3 a booking, $600,000 a year — that's lost if we drop them. Second, budget bookings pull $1.32 million of car and activity cross-sell, which also goes. Together that's minus $1.92 million. In fact, even with zero cross-sell the $600,000 own margin already makes dropping the wrong call. Two risks: internally, the assumption that dropped customers leave entirely should be tested — some might rebook premium; externally, a competitor OTA could capture those budget travelers and their cross-sell. Next step: test whether budget customers migrate to premium or leave before dropping any supplier.",
+     "checklist": "1. Recommendation first: keep the supplier, NOT drop.\n2. ≥2 numbers, ≥1 anchor: **−1,920,000 true impact OR the $600,000 own margin OR the $1.32M cross-sell**.\n3. ≥1 internal (do-customers-migrate assumption) AND ≥1 external (competitor OTA captures them) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last or no anchor.",
+     "rubric_ref": "C40"
+    }
+   ]
+  },
+  {
+   "id": "C41",
+   "title": "Leverage Point",
+   "meta_tag": "Trap-overstate · Private Equity / Buyout",
+   "scenario": "Blackmarsh Capital is evaluating a leveraged buyout in the market of Harnett. Target EBITDA $30M. Economics in **Exhibit 1**.\nThe deal partner is bullish: \"Buy at 8× EBITDA, exit at 10× — that's $60 million of value. Do the deal.\" The CEO asks BCG to size the real equity return.",
+   "exhibits": [
+    {
+     "id": "C41-E1",
+     "case": "C41",
+     "reveal": "auto",
+     "title": "LBO economics",
+     "blocks": [
+      {
+       "type": "bar",
+       "name": "Entry vs exit multiple",
+       "labels": [
+        "Entry",
+        "Exit"
+       ],
+       "series": [
+        {
+         "name": "EBITDA multiple (x)",
+         "values": [
+          8,
+          10
+         ]
+        }
+       ],
+       "note": "Multiple expansion"
+      },
+      {
+       "type": "table",
+       "name": "LBO",
+       "rows": [
+        [
+         "Target EBITDA",
+         "$30,000,000"
+        ],
+        [
+         "Entry multiple",
+         "8x"
+        ],
+        [
+         "Exit multiple",
+         "10x"
+        ],
+        [
+         "Leverage",
+         "60%"
+        ],
+        [
+         "Interest rate",
+         "8%"
+        ],
+        [
+         "Hold period",
+         "5 years"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "C41-E2",
+     "case": "C41",
+     "reveal": "after_elicitation",
+     "elicitation_step": "C41-Q3c",
+     "trigger_phrases": [
+      "debt service",
+      "coverage",
+      "operating cash",
+      "equity return",
+      "how much debt eats"
+     ],
+     "fallback": "hint_L1 then reveal",
+     "title": "Debt service coverage",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "Coverage",
+       "rows": [
+        [
+         "Debt service falling on equity return",
+         "70%"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "id": "Q1",
+     "type": "select_all",
+     "prompt": "Which analyses would you prioritize?",
+     "options": [
+      {
+       "text": "Compute entry and exit enterprise value",
+       "correct": true
+      },
+      {
+       "text": "Quantify debt service over the hold period",
+       "correct": true
+      },
+      {
+       "text": "Determine how much debt service the equity return absorbs",
+       "correct": true
+      },
+      {
+       "text": "Benchmark the partner's carry",
+       "correct": false
+      },
+      {
+       "text": "Confirm EBITDA and multiples",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,3,5}, none of {4}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 5. **Validation:** all of {1,2,3,5}, none of {4}."
+    },
+    {
+     "id": "Q2",
+     "type": "select_all",
+     "prompt": "Genuine concerns for the LBO?",
+     "options": [
+      {
+       "text": "The naive $60M ignores the cost of the debt used to fund it",
+       "correct": true
+      },
+      {
+       "text": "60% leverage means large annual debt service",
+       "correct": true
+      },
+      {
+       "text": "Blackmarsh is in Harnett",
+       "correct": false
+      },
+      {
+       "text": "Debt service may exceed incremental operating cash",
+       "correct": true
+      },
+      {
+       "text": "The target was founded in 2005",
+       "correct": false
+      }
+     ],
+     "validation": "all of {1,2,4}, none of {3,5}.",
+     "answer_explain": "**Answer:** 1, 2, 4. **Validation:** all of {1,2,4}, none of {3,5}."
+    },
+    {
+     "id": "Q3",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q3a",
+       "type": "enter_number",
+       "prompt": "What is the naive gain from multiple expansion? (Exit EV − entry EV.)",
+       "answer": 60000000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 60000000** — 30M×10 − 30M×8 = 300M − 240M = **$60,000,000**. The partner's headline."
+      },
+      {
+       "id": "Q3b",
+       "type": "enter_number",
+       "prompt": "What is total debt service over the hold? (Debt × rate × years; debt = 60% of entry EV.)",
+       "answer": 57600000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 57600000** — (240M × 60%) × 8% × 5 = 144M × 0.08 × 5 = **$57,600,000**."
+      },
+      {
+       "id": "Q3c",
+       "type": "open_text_elicitation",
+       "prompt": "The partner counts only multiple expansion. Before ruling: what ONE thing about the debt's effect on equity return would you want to know?",
+       "model_answer": "How much of the debt service is covered by the target's incremental operating cash versus how much falls on (reduces) the equity return.",
+       "validation": "credit if requests debt-service coverage / cash coverage / how much debt eats equity return. On credit → reveal Exhibit 2. On fail → L1 (\"Does the operating cash cover the debt service, or does the equity?\"), then reveal.",
+       "answer_explain": null,
+       "reveal_exhibit": "C41-E2",
+       "trigger_phrases": [
+        "debt service",
+        "coverage",
+        "operating cash",
+        "equity return",
+        "how much debt eats"
+       ],
+       "fallback": "hint_L1 then reveal"
+      },
+      {
+       "id": "Q3d",
+       "type": "enter_number",
+       "prompt": "Using Exhibit 2: how much debt service falls on the equity return (70% uncovered)?",
+       "answer": 40320000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 40320000** — 57,600,000 × 70% = **$40,320,000**."
+      }
+     ]
+    },
+    {
+     "id": "Q4",
+     "type": "enter_number",
+     "prompt": "Compute the TRUE equity gain: naive multiple-expansion gain − uncovered debt service.",
+     "answer": 19680000.0,
+     "validation": null,
+     "answer_explain": "**Answer: 19680000** — 60,000,000 − 40,320,000 = **$19,680,000**. Still positive (do the deal), but overstated: **×3.05** versus the $60M claim."
+    },
+    {
+     "id": "Q5",
+     "type": "enter_number",
+     "prompt": "Express the partner's claim as a multiple of the true gain ($60,000,000 ÷ $19,680,000), two decimals.",
+     "answer": 3.05,
+     "validation": null,
+     "answer_explain": "**Answer: 3.05** — **3.05×**."
+    },
+    {
+     "id": "Q6",
+     "type": "single_choice",
+     "prompt": "How should the CEO read the \"$60 million\" claim?",
+     "options": [
+      {
+       "text": "Correct",
+       "correct": false
+      },
+      {
+       "text": "Roughly right",
+       "correct": false
+      },
+      {
+       "text": "Directionally right but overstated ×3 — true equity gain ≈$19.7M",
+       "correct": true
+      },
+      {
+       "text": "Wrong; don't do the LBO",
+       "correct": false
+      }
+     ],
+     "validation": "choice == 3.",
+     "answer_explain": "**Answer:** Overstated ×3.05; true ≈$19.7M. **Validation:** choice == 3."
+    },
+    {
+     "id": "Q7",
+     "type": "voice",
+     "prompt": "\"The CEO wants your recommendation on the buyout. Record it — about 60–90 seconds.\"",
+     "model_answer": "Blackmarsh should do the buyout — but underwrite it to about $19.7 million of equity gain, not the $60 million the partner is quoting. The direction is right: buying at 8× and exiting at 10× creates $60 million of enterprise value. But that ignores the cost of the leverage funding it: 60% debt means $57.6 million of debt service over five years, and 70% of that — about $40 million — falls on the equity return rather than being covered by operating cash. Net that out and the true equity gain is $19.7 million, roughly a third of the headline. Two risks: internally, the debt-service coverage assumption is central and should be stress-tested against a downside cash case; externally, a rate rise or a covenant breach could wipe out the return entirely. Next step: build a downside model with rate and covenant sensitivities before committing equity.",
+     "checklist": "1. Recommendation first: do the LBO at the honest number (~$19.7M), NOT \"$60M\", NOT \"don't\".\n2. ≥2 numbers, ≥1 anchor: **$19.68M true gain OR ×3.05 overstatement OR $60M-vs-$19.7M**.\n3. ≥1 internal (debt-coverage/downside stress) AND ≥1 external (rate rise / covenant breach) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last or no anchor.",
+     "rubric_ref": "C41"
+    }
+   ]
+  },
+  {
+   "id": "C42",
+   "title": "Grounds for Divorce",
+   "meta_tag": "Trap-flip · QSR Coffee",
+   "scenario": "Caldermont Coffee runs QSR cafes in the market of Doverton. Marketing wants to launch a cheap value menu to drive traffic. Economics in **Exhibit 1**.\nMarketing: \"A value menu brings 50,000 new customers at $1.50 margin — that's $75,000. Launch it.\" The CEO asks BCG for a view.",
+   "exhibits": [
+    {
+     "id": "C42-E1",
+     "case": "C42",
+     "reveal": "auto",
+     "title": "Value menu economics",
+     "blocks": [
+      {
+       "type": "bar",
+       "name": "Value vs premium margin",
+       "labels": [
+        "Value item",
+        "Premium item"
+       ],
+       "series": [
+        {
+         "name": "Margin per item ($)",
+         "values": [
+          1.5,
+          4.0
+         ]
+        }
+       ],
+       "note": "Per-item margin by segment"
+      },
+      {
+       "type": "table",
+       "name": "Value menu",
+       "rows": [
+        [
+         "New customers/yr",
+         "50,000"
+        ],
+        [
+         "Margin per value item",
+         "$1.50"
+        ],
+        [
+         "Existing premium customers/yr",
+         "200,000"
+        ],
+        [
+         "Margin per premium item",
+         "$4.00"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "C42-E2",
+     "case": "C42",
+     "reveal": "after_elicitation",
+     "elicitation_step": "C42-Q3c",
+     "trigger_phrases": [
+      "trade down",
+      "cannibaliz",
+      "switch to value",
+      "existing customers switch"
+     ],
+     "fallback": "hint_L1 then reveal",
+     "title": "Trade-down behavior",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "Trade-down",
+       "rows": [
+        [
+         "Premium customers who trade down",
+         "25%"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "id": "Q1",
+     "type": "select_all",
+     "prompt": "Which analyses would you prioritize?",
+     "options": [
+      {
+       "text": "Compute the new-customer margin from the value menu",
+       "correct": true
+      },
+      {
+       "text": "Estimate whether existing premium customers trade down",
+       "correct": true
+      },
+      {
+       "text": "Quantify the margin lost when premium buyers switch to value",
+       "correct": true
+      },
+      {
+       "text": "Benchmark the CEO's coffee",
+       "correct": false
+      },
+      {
+       "text": "Confirm customer counts and margins",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,3,5}, none of {4}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 5. **Validation:** all of {1,2,3,5}, none of {4}."
+    },
+    {
+     "id": "Q2",
+     "type": "select_all",
+     "prompt": "Genuine concerns for the launch?",
+     "options": [
+      {
+       "text": "Value items make only $1.50 versus $4.00 on premium",
+       "correct": true
+      },
+      {
+       "text": "Existing customers may trade down to the cheaper menu",
+       "correct": true
+      },
+      {
+       "text": "Caldermont is in Doverton",
+       "correct": false
+      },
+      {
+       "text": "Each trade-down loses $2.50 of margin",
+       "correct": true
+      },
+      {
+       "text": "The cafes were remodeled last year",
+       "correct": false
+      }
+     ],
+     "validation": "all of {1,2,4}, none of {3,5}.",
+     "answer_explain": "**Answer:** 1, 2, 4. **Validation:** all of {1,2,4}, none of {3,5}."
+    },
+    {
+     "id": "Q3",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q3a",
+       "type": "enter_number",
+       "prompt": "What is the naive benefit from new value-menu customers? (New customers × value margin.)",
+       "answer": 75000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 75000** — 50,000 × $1.50 = **$75,000**. Marketing's headline."
+      },
+      {
+       "id": "Q3b",
+       "type": "enter_number",
+       "prompt": "What margin is lost per premium customer who trades down to value? (Premium margin − value margin.)",
+       "answer": 2.5,
+       "validation": null,
+       "answer_explain": "**Answer: 2.50** — $4.00 − $1.50 = **$2.50**."
+      },
+      {
+       "id": "Q3c",
+       "type": "open_text_elicitation",
+       "prompt": "Marketing counts only new customers. Before ruling: what ONE thing about EXISTING customers would you want to know?",
+       "model_answer": "Whether existing premium customers trade down to the cheaper value menu, cannibalizing their higher margin.",
+       "validation": "credit if requests trade-down / cannibalization / premium customers switching. On credit → reveal Exhibit 2. On fail → L1 (\"Do existing customers stay on premium, or switch to the cheaper menu?\"), then reveal.",
+       "answer_explain": null,
+       "reveal_exhibit": "C42-E2",
+       "trigger_phrases": [
+        "trade down",
+        "cannibaliz",
+        "switch to value",
+        "existing customers switch"
+       ],
+       "fallback": "hint_L1 then reveal"
+      },
+      {
+       "id": "Q3d",
+       "type": "enter_number",
+       "prompt": "Using Exhibit 2: what is the annual cannibalization cost? (Premium customers × trade-down share × margin lost per trade-down.)",
+       "answer": 125000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 125000** — 200,000 × 25% × $2.50 = **$125,000**."
+      }
+     ]
+    },
+    {
+     "id": "Q4",
+     "type": "enter_number",
+     "prompt": "Compute the NET annual impact of launching: new-customer benefit − trade-down cannibalization.",
+     "answer": -50000.0,
+     "validation": null,
+     "answer_explain": "**Answer: -50000** — 75,000 − 125,000 = **−$50,000** → launching DESTROYS value. Naive LAUNCH, correct DON'T — **flip**."
+    },
+    {
+     "id": "Q5",
+     "type": "enter_number",
+     "prompt": "At what trade-down share would launching be exactly break-even? Answer %, two decimals. (Solve: 75,000 = share × 200,000 × 2.50.)",
+     "answer": 15.0,
+     "validation": null,
+     "answer_explain": "**Answer: 15.00** — share* = 75,000 / 500,000 = **15.00%**. Actual 25% > 15% → DON'T LAUNCH."
+    },
+    {
+     "id": "Q6",
+     "type": "single_choice",
+     "prompt": "Your recommendation:",
+     "options": [
+      {
+       "text": "Launch the value menu",
+       "correct": false
+      },
+      {
+       "text": "Don't launch — cannibalization outweighs new customers",
+       "correct": true
+      },
+      {
+       "text": "No difference",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
+      }
+     ],
+     "validation": "choice == 2.",
+     "answer_explain": "**Answer:** Don't launch. **Validation:** choice == 2."
+    },
+    {
+     "id": "Q7",
+     "type": "voice",
+     "prompt": "\"The CEO wants your recommendation on the value menu. Record it — about 60–90 seconds.\"",
+     "model_answer": "Caldermont should not launch the value menu — it would cost about $50,000 a year, not gain $75,000. Marketing is right that it brings 50,000 new customers at $1.50 margin. But it also cannibalizes the existing base: 25% of the 200,000 premium customers trade down from $4.00 to $1.50 items, losing $2.50 each — $125,000 of margin, which more than wipes out the new-customer gain. Net, launching loses $50,000. And it's beyond the line: it would only pay off if trade-down stayed below 15%, and it's 25%. Two risks: internally, the 25% trade-down is an estimate that should be tested in a few stores before a chain-wide launch; externally, a competitor's value menu could force the decision regardless. Next step: run a value-menu test in a few stores and measure actual trade-down before scaling.",
+     "checklist": "1. Recommendation first: don't launch, NOT launch.\n2. ≥2 numbers, ≥1 anchor: **−50,000 net OR 15%-vs-25% trade-down comparison**.\n3. ≥1 internal (trade-down estimate/test) AND ≥1 external (competitor value menu) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last or no anchor.",
+     "rubric_ref": "C42"
+    }
+   ]
+  },
+  {
+   "id": "C43",
+   "title": "Heartbreak Hotel",
+   "meta_tag": "Trap-action · Medical Devices",
+   "scenario": "Halvenne Devices makes a medical device in the market of Corleigh. It's deciding its pricing model. Economics in **Exhibit 1**.\nThe sales head wants a high device price: \"Sell the device at $20,000, make $6,000 margin each — $30 million. Done.\" The CEO asks BCG whether that's optimal.",
+   "exhibits": [
+    {
+     "id": "C43-E1",
+     "case": "C43",
+     "reveal": "auto",
+     "title": "Device and consumable economics",
+     "blocks": [
+      {
+       "type": "bar",
+       "name": "Device price vs cost",
+       "labels": [
+        "Price (high-margin)",
+        "Device cost",
+        "Price (razor/blade)"
+       ],
+       "series": [
+        {
+         "name": "$ per device",
+         "values": [
+          20000,
+          14000,
+          15000
+         ]
+        }
+       ],
+       "note": "Pricing models vs unit cost"
+      },
+      {
+       "type": "table",
+       "name": "Device",
+       "rows": [
+        [
+         "Devices/yr",
+         "5,000"
+        ],
+        [
+         "Device price (high-margin)",
+         "$20,000"
+        ],
+        [
+         "Device cost",
+         "$14,000"
+        ],
+        [
+         "Device price (razor/blade)",
+         "$15,000"
+        ],
+        [
+         "Consumable margin/device/yr",
+         "$4,000"
+        ],
+        [
+         "Device life",
+         "5 years"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "id": "Q1",
+     "type": "select_all",
+     "prompt": "Which analyses would you prioritize?",
+     "options": [
+      {
+       "text": "Compute the one-time device margin at the high price",
+       "correct": true
+      },
+      {
+       "text": "Compute the recurring consumable margin over device life",
+       "correct": true
+      },
+      {
+       "text": "Compare the high-price model to a razor/blade model",
+       "correct": true
+      },
+      {
+       "text": "Benchmark the CEO's office",
+       "correct": false
+      },
+      {
+       "text": "Confirm prices, costs, and device life",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,3,5}, none of {4}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 5. **Validation:** all of {1,2,3,5}, none of {4}."
+    },
+    {
+     "id": "Q2",
+     "type": "select_all",
+     "prompt": "Genuine concerns for the pricing model?",
+     "options": [
+      {
+       "text": "A high device price earns $6,000 once",
+       "correct": true
+      },
+      {
+       "text": "Consumables earn $4,000 per device every year for 5 years",
+       "correct": true
+      },
+      {
+       "text": "Halvenne is in Corleigh",
+       "correct": false
+      },
+      {
+       "text": "Selling the device near cost unlocks the recurring stream",
+       "correct": true
+      },
+      {
+       "text": "The device was CE-marked last year",
+       "correct": false
+      }
+     ],
+     "validation": "all of {1,2,4}, none of {3,5}.",
+     "answer_explain": "**Answer:** 1, 2, 4. **Validation:** all of {1,2,4}, none of {3,5}."
+    },
+    {
+     "id": "Q3",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q3a",
+       "type": "enter_number",
+       "prompt": "What is the annual margin under the high-price model? (Devices × device margin.)",
+       "answer": 30000000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 30000000** — 5,000 × ($20,000 − $14,000) = **$30,000,000**. The sales head's plan."
+      },
+      {
+       "id": "Q3b",
+       "type": "enter_number",
+       "prompt": "What is the total margin per device under razor/blade? (Device near-cost margin + consumables over life.)",
+       "answer": 21000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 21000** — ($15,000 − $14,000) + $4,000 × 5 = 1,000 + 20,000 = **$21,000 per device**."
+      },
+      {
+       "id": "Q3c",
+       "type": "enter_number",
+       "prompt": "What is the total annual margin under razor/blade across all devices? (Per-device total × devices.)",
+       "answer": 105000000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 105000000** — 5,000 × $21,000 = **$105,000,000** — $75M more than the high-price model. Naive picks capex-only; optimal picks razor/blade — **action-trap**."
+      }
+     ]
+    },
+    {
+     "id": "Q4",
+     "type": "enter_number",
+     "prompt": "At what annual consumable margin would the two models be equal? Answer $, two decimals. (Solve: 5,000 × (($15,000−$14,000) + c×5) = 30,000,000.)",
+     "answer": 1000.0,
+     "validation": null,
+     "answer_explain": "**Answer: 1000.00** — 1,000 + 5c = 6,000 → c* = **$1,000/yr**. Actual $4,000 ≫ $1,000 → razor/blade wins."
+    },
+    {
+     "id": "Q5",
+     "type": "single_choice",
+     "prompt": "Your recommendation:",
+     "options": [
+      {
+       "text": "Sell the device at the high price",
+       "correct": false
+      },
+      {
+       "text": "Razor/blade: device near cost, earn on consumables",
+       "correct": true
+      },
+      {
+       "text": "No difference",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
+      }
+     ],
+     "validation": "choice == 2.",
+     "answer_explain": "**Answer:** Razor/blade. **Validation:** choice == 2."
+    },
+    {
+     "id": "Q6",
+     "type": "voice",
+     "prompt": "\"The CEO wants your pricing recommendation. Record it — about 60–90 seconds.\"",
+     "model_answer": "Halvenne should adopt a razor/blade model — sell the device near cost and earn on consumables — worth about $105 million a year versus $30 million for the high-price model. The sales head's plan makes $6,000 once per device. But pricing the device near cost at $15,000 unlocks a recurring stream: $4,000 of consumable margin per device every year for five years — $20,000 over its life, plus a $1,000 device margin, is $21,000 per device against $6,000. Across 5,000 devices that's $105 million versus $30 million. It's decisive: razor/blade wins as long as consumable margin beats $1,000, and it's $4,000. Two risks: internally, it shifts revenue from upfront to recurring, so cash flow and the sales incentive model must be redesigned; externally, a third-party consumables maker or a regulator could erode the recurring margin. Next step: model the cash-flow transition and lock in consumable exclusivity before switching.",
+     "checklist": "1. Recommendation first: razor/blade, NOT high device price.\n2. ≥2 numbers, ≥1 anchor: **$105M-vs-$30M OR the $1,000 breakeven consumable margin**.\n3. ≥1 internal (cash-flow/incentive redesign) AND ≥1 external (third-party consumables / regulator) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last or no anchor.",
+     "rubric_ref": "C43"
+    }
+   ]
+  },
+  {
+   "id": "C44",
+   "title": "Driving Miss Crazy",
+   "meta_tag": "Trap-flip · Ride-Hailing",
+   "scenario": "Wrenfield Mobility runs a ride-hailing platform in the market of Aldover. Product wants to cap surge pricing to improve rider satisfaction. Economics in **Exhibit 1**.\nProduct: \"High surge annoys riders. Cap it — happier riders, +5% rides, worth $30,000.\" The CEO asks BCG for a view.",
+   "exhibits": [
+    {
+     "id": "C44-E1",
+     "case": "C44",
+     "reveal": "auto",
+     "title": "Surge and peak economics",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "Surge",
+       "rows": [
+        [
+         "Peak rides/yr at risk",
+         "100,000"
+        ],
+        [
+         "Margin per ride",
+         "$6"
+        ],
+        [
+         "Satisfaction lift from capping",
+         "+5% rides"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "C44-E2",
+     "case": "C44",
+     "reveal": "after_elicitation",
+     "elicitation_step": "C44-Q3c",
+     "trigger_phrases": [
+      "driver supply",
+      "surge signal",
+      "drivers come online",
+      "unfulfilled",
+      "why drivers"
+     ],
+     "fallback": "hint_L1 then reveal",
+     "title": "Surge as a supply signal",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "Supply signal",
+       "rows": [
+        [
+         "Peak rides unfulfilled if surge capped",
+         "18%"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "id": "Q1",
+     "type": "select_all",
+     "prompt": "Which analyses would you prioritize?",
+     "options": [
+      {
+       "text": "Estimate the rider-satisfaction benefit of capping surge",
+       "correct": true
+      },
+      {
+       "text": "Assess whether surge pricing pulls drivers online in peaks",
+       "correct": true
+      },
+      {
+       "text": "Quantify rides lost if fewer drivers come online",
+       "correct": true
+      },
+      {
+       "text": "Benchmark the CEO's commute",
+       "correct": false
+      },
+      {
+       "text": "Confirm peak ride volume and margin",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,3,5}, none of {4}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 5. **Validation:** all of {1,2,3,5}, none of {4}."
+    },
+    {
+     "id": "Q2",
+     "type": "select_all",
+     "prompt": "Genuine concerns for capping surge?",
+     "options": [
+      {
+       "text": "Capping surge may lift rider satisfaction",
+       "correct": true
+      },
+      {
+       "text": "Surge pricing is the signal that pulls drivers online in peaks",
+       "correct": true
+      },
+      {
+       "text": "Wrenfield is in Aldover",
+       "correct": false
+      },
+      {
+       "text": "Without surge, peak demand may go unfulfilled",
+       "correct": true
+      },
+      {
+       "text": "The app was redesigned last year",
+       "correct": false
+      }
+     ],
+     "validation": "all of {1,2,4}, none of {3,5}.",
+     "answer_explain": "**Answer:** 1, 2, 4. **Validation:** all of {1,2,4}, none of {3,5}."
+    },
+    {
+     "id": "Q3",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q3a",
+       "type": "enter_number",
+       "prompt": "What is the naive benefit of capping surge? (Peak rides × satisfaction lift × margin.)",
+       "answer": 30000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 30000** — 100,000 × 5% × $6 = **$30,000**. Product's headline."
+      },
+      {
+       "id": "Q3b",
+       "type": "enter_number",
+       "prompt": "How many peak rides is the satisfaction lift based on adding? (Peak rides × lift.)",
+       "answer": 5000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 5000** — 100,000 × 5% = **5,000 rides**."
+      },
+      {
+       "id": "Q3c",
+       "type": "open_text_elicitation",
+       "prompt": "Product treats surge as pure rider annoyance. Before ruling: what ONE thing about surge's effect on DRIVER supply would you want to know?",
+       "model_answer": "Whether surge pricing is what pulls drivers online during peaks — i.e. whether capping it reduces driver supply and leaves peak demand unfulfilled.",
+       "validation": "credit if requests driver supply / surge-as-signal / unfulfilled demand from capping. On credit → reveal Exhibit 2. On fail → L1 (\"Why do drivers come online during a surge?\"), then reveal.",
+       "answer_explain": null,
+       "reveal_exhibit": "C44-E2",
+       "trigger_phrases": [
+        "driver supply",
+        "surge signal",
+        "drivers come online",
+        "unfulfilled",
+        "why drivers"
+       ],
+       "fallback": "hint_L1 then reveal"
+      },
+      {
+       "id": "Q3d",
+       "type": "enter_number",
+       "prompt": "Using Exhibit 2: what margin is lost from unfulfilled peak rides if surge is capped? (Peak rides × unfulfilled share × margin.)",
+       "answer": 108000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 108000** — 100,000 × 18% × $6 = **$108,000**."
+      }
+     ]
+    },
+    {
+     "id": "Q4",
+     "type": "enter_number",
+     "prompt": "Compute the NET annual impact of capping surge: satisfaction benefit − lost unfulfilled-ride margin.",
+     "answer": -78000.0,
+     "validation": null,
+     "answer_explain": "**Answer: -78000** — 30,000 − 108,000 = **−$78,000** → capping DESTROYS value. Naive CAP, correct DON'T — **flip**."
+    },
+    {
+     "id": "Q5",
+     "type": "enter_number",
+     "prompt": "At what unfulfilled-ride share would capping be exactly break-even? Answer %, two decimals. (Solve: 30,000 = share × 100,000 × 6.)",
+     "answer": 5.0,
+     "validation": null,
+     "answer_explain": "**Answer: 5.00** — share* = 30,000 / 600,000 = **5.00%**. Actual 18% > 5% → DON'T CAP."
+    },
+    {
+     "id": "Q6",
+     "type": "open_text_brainstorm",
+     "prompt": "The CEO agrees not to cap surge — but wants to reduce rider frustration WITHOUT killing the supply signal. Brainstorm at least SIX ways.",
+     "model_answer": "Communication: (1) show riders why surge is active and expected wait without it; (2) surge forecasts so riders can time trips. Product: (3) offer a \"wait 5 min for lower price\" option; (4) fixed-price upfront so surge is less jarring. Loyalty: (5) surge-protection perks for frequent riders; (6) subscription that caps personal surge exposure; (7) queue-and-notify instead of hard surge.",
+     "validation": "≥6 ideas, ≥2 named categories, ≥1 communication AND ≥1 product. <4 = fail; 4–5 = push once.",
+     "answer_explain": null
+    },
+    {
+     "id": "Q7",
+     "type": "single_choice",
+     "prompt": "Your recommendation:",
+     "options": [
+      {
+       "text": "Cap surge pricing",
+       "correct": false
+      },
+      {
+       "text": "Don't cap — surge is the supply signal; reduce frustration other ways",
+       "correct": true
+      },
+      {
+       "text": "Cap only if unfulfilled share is below 5%",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
+      }
+     ],
+     "validation": "choice == 2.",
+     "answer_explain": "**Answer:** Don't cap. **Validation:** choice == 2."
+    },
+    {
+     "id": "Q8",
+     "type": "voice",
+     "prompt": "\"The CEO wants your recommendation on surge pricing. Record it — about 60–90 seconds.\"",
+     "model_answer": "Wrenfield should not cap surge pricing — it would cost about $78,000 a year, not gain $30,000. Product is right that capping surge lifts rider satisfaction, worth about $30,000. But surge isn't just rider annoyance — it's the signal that pulls drivers online in peaks. Cap it, and 18% of peak rides go unfulfilled because drivers don't come, costing $108,000 in lost rides — far more than the satisfaction gain. Net, capping loses $78,000; it would only pay off if unfulfilled demand stayed below 5%, and it's 18%. Two risks: internally, the 18% unfulfilled estimate should be tested with a limited surge-cap trial before any permanent change; externally, a regulator could mandate surge caps regardless, so we should design rider-friendly alternatives now. Next step: run a limited surge-cap trial in one market to measure the real supply response, and pilot rider-frustration fixes that keep the signal intact.",
+     "checklist": "1. Recommendation first: don't cap surge, NOT cap.\n2. ≥2 numbers, ≥1 anchor: **−78,000 net OR 5%-vs-18% unfulfilled comparison**.\n3. ≥1 internal (unfulfilled estimate/trial) AND ≥1 external (regulator mandates caps) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last or no anchor.",
+     "rubric_ref": "C44"
+    }
+   ]
+  },
+  {
+   "id": "C45",
+   "title": "Location, Location, Vacation",
+   "meta_tag": "CLEAN · Commercial Real Estate",
+   "scenario": "Portwell Estates owns an aging office building in the market of Kesmere. It's deciding whether to renovate for higher rent or hold as-is. The asset manager recommends renovating, but the board fears the premium rent won't materialize. The CEO asks BCG to validate the renovation and confirm no hidden reason not to. Economics in **Exhibit 1**.",
+   "exhibits": [
+    {
+     "id": "C45-E1",
+     "case": "C45",
+     "reveal": "auto",
+     "title": "Renovation economics",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "Renovation",
+       "rows": [
+        [
+         "Renovation capex",
+         "$4,000,000"
+        ],
+        [
+         "Rent uplift",
+         "$12/sqft/yr"
+        ],
+        [
+         "Building size",
+         "100,000 sqft"
+        ],
+        [
+         "Hold period",
+         "10 years"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "C45-E2",
+     "case": "C45",
+     "reveal": "after_elicitation",
+     "elicitation_step": "C45-Q3c",
+     "trigger_phrases": [
+      "comparable",
+      "premium realized",
+      "premium holds",
+      "asking vs realized",
+      "comps"
+     ],
+     "fallback": "hint_L1 then reveal",
+     "title": "Premium realization",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "Realization",
+       "rows": [
+        [
+         "Rent uplift realized (comparables)",
+         "100%"
+        ],
+        [
+         "Comparable occupancy",
+         "92%"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "id": "Q1",
+     "type": "select_all",
+     "prompt": "Which analyses would you prioritize to validate the renovation?",
+     "options": [
+      {
+       "text": "Compute the rent uplift over the hold period against the capex",
+       "correct": true
+      },
+      {
+       "text": "Check whether comparable renovated buildings actually command the premium",
+       "correct": true
+      },
+      {
+       "text": "Confirm the premium rent would be realized, not just asked",
+       "correct": true
+      },
+      {
+       "text": "Benchmark the lobby art",
+       "correct": false
+      },
+      {
+       "text": "Confirm renovation cost and uplift",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,3,5}, none of {4}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 5. **Validation:** all of {1,2,3,5}, none of {4}."
+    },
+    {
+     "id": "Q2",
+     "type": "select_all",
+     "prompt": "Genuine considerations for THIS decision?",
+     "options": [
+      {
+       "text": "Renovation costs $4M against $12/sqft/yr uplift on 100,000 sqft",
+       "correct": true
+      },
+      {
+       "text": "The premium rent may not materialize (worth checking)",
+       "correct": true
+      },
+      {
+       "text": "The asset manager has a real-estate background",
+       "correct": false
+      },
+      {
+       "text": "Portwell repainted the lobby last year",
+       "correct": false
+      },
+      {
+       "text": "Comparable buildings' realized premium is the key evidence",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,5}, none of {3,4}.",
+     "answer_explain": "**Answer:** 1, 2, 5. **Validation:** all of {1,2,5}, none of {3,4}."
+    },
+    {
+     "id": "Q3",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q3a",
+       "type": "enter_number",
+       "prompt": "What is the annual rent uplift from renovation? (Uplift/sqft × sqft.)",
+       "answer": 1200000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 1200000** — $12 × 100,000 = **$1,200,000/yr**."
+      },
+      {
+       "id": "Q3b",
+       "type": "enter_number",
+       "prompt": "Over the 10-year hold, what is the naive renovation benefit? (Annual uplift × years − capex.)",
+       "answer": 8000000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 8000000** — 1,200,000 × 10 − 4,000,000 = **$8,000,000**. Renovation looks strongly positive."
+      },
+      {
+       "id": "Q3c",
+       "type": "open_text_elicitation",
+       "prompt": "The benefit is clear on paper — but the board fears the premium won't hold. Before confirming: what ONE thing would you check to make sure the uplift is real?",
+       "model_answer": "Whether comparable renovated buildings in the submarket actually command (and retain) the rent premium — i.e. that the uplift is realized, not just asked.",
+       "validation": "credit if requests comparable-building premium / realized-vs-asking rent / whether premium holds. On credit → reveal Exhibit 2. On fail → L1 (\"Do comparable renovated buildings actually get the higher rent?\"), then reveal.",
+       "answer_explain": null,
+       "reveal_exhibit": "C45-E2",
+       "trigger_phrases": [
+        "comparable",
+        "premium realized",
+        "premium holds",
+        "asking vs realized",
+        "comps"
+       ],
+       "fallback": "hint_L1 then reveal"
+      },
+      {
+       "id": "Q3d",
+       "type": "single_choice",
+       "prompt": "Using Exhibit 2, does the premium-rent reversal (won't materialize) apply here?",
+       "options": [
+        {
+         "text": "Yes — the premium won't hold",
+         "correct": false
+        },
+        {
+         "text": "No — comparables realize 100% of the uplift at 92% occupancy, so the premium holds",
+         "correct": true
+        },
+        {
+         "text": "It makes no difference",
+         "correct": false
+        },
+        {
+         "text": "Not enough information",
+         "correct": false
+        }
+       ],
+       "validation": "choice == 2.",
+       "answer_explain": "**Answer: No — the reversal is absent.** Comparable renovated buildings realize the full uplift at strong occupancy → the \"premium won't hold\" fear does NOT apply. **Validation:** choice == 2."
+      }
+     ]
+    },
+    {
+     "id": "Q4",
+     "type": "enter_number",
+     "prompt": "Given the premium holds, what is the net renovation benefit over the hold?",
+     "answer": 8000000.0,
+     "validation": null,
+     "answer_explain": "**Answer: 8000000** — the full **$8,000,000** — naive and full agree, renovate."
+    },
+    {
+     "id": "Q5",
+     "type": "enter_number",
+     "prompt": "Validation: what share of the uplift would need to be realized for renovation to just break even? Answer %, two decimals. (Solve: 1,200,000 × x × 10 = 4,000,000.)",
+     "answer": 33.33,
+     "validation": null,
+     "answer_explain": "**Answer: 33.33** — x* = 4,000,000 / 12,000,000 = **33.33%**. Comparables realize 100% ≫ 33.33% → renovation robust, no hidden reversal."
+    },
+    {
+     "id": "Q6",
+     "type": "single_choice",
+     "prompt": "Your validation verdict:",
+     "options": [
+      {
+       "text": "Don't renovate — premium too uncertain",
+       "correct": false
+      },
+      {
+       "text": "Renovate — uplift is real and the \"premium won't hold\" fear doesn't apply",
+       "correct": true
+      },
+      {
+       "text": "Renovate only if premium realization exceeds 100%",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
+      }
+     ],
+     "validation": "choice == 2.",
+     "answer_explain": "**Answer:** Renovate — confirmed clean. **Validation:** choice == 2."
+    },
+    {
+     "id": "Q7",
+     "type": "voice",
+     "prompt": "\"The CEO asks you to validate the renovation. Record it — about 60–90 seconds.\"",
+     "model_answer": "Portwell should renovate the building — and I can confirm the asset manager's call holds; there's no hidden reason not to. The renovation costs $4 million and lifts rent by $12 a square foot on 100,000 square feet — $1.2 million a year, or $8 million net over a ten-year hold. The board's worry is that the premium rent won't materialize, so I checked comparable renovated buildings in the submarket: they realize the full uplift at 92% occupancy, so the premium is real, not just asking rent. The renovation only fails if less than a third of the uplift were realized, and comparables show 100%. Two risks: internally, we should confirm our building's tenant mix can absorb the higher rent at renewal; externally, an office-market softening could compress the premium, so time the renovation to the leasing cycle. Next step: confirm renewal timing and lock renovation to the leasing calendar.",
+     "checklist": "1. Recommendation first: renovate — framed as CONFIRMING, NOT \"found a reason not to.\" If candidate invents a premium-won't-hold reversal to block it, c1 FAILS.\n2. ≥2 numbers, ≥1 anchor: **$8M net benefit (both paths) OR the confirmation that uplift is realized (100% vs 33.33% breakeven)**. Inventing a false premium-collapse fails this.\n3. ≥1 internal (tenant mix at renewal) AND ≥1 external (office-market softening) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last, no anchor, OR invents a false reversal.",
+     "rubric_ref": "C45"
+    }
+   ]
+  },
+  {
+   "id": "C46",
+   "title": "Game of Loans",
+   "meta_tag": "Trap-flip · Mobile Gaming",
+   "scenario": "Brackenlight Games runs a mobile game in the market of Venloe. Marketing wants to spend big acquiring \"whale\" (high-spend) players. Economics in **Exhibit 1**.\nMarketing: \"Whales spend $400 a month — over two years that's $9,600 of LTV against a $3,500 acquisition cost. Pour money in.\" The CEO asks BCG to check.",
+   "exhibits": [
+    {
+     "id": "C46-E1",
+     "case": "C46",
+     "reveal": "auto",
+     "title": "Whale economics",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "Whale",
+       "rows": [
+        [
+         "Whale ARPU while active",
+         "$400/month"
+        ],
+        [
+         "Assumed lifetime (naive)",
+         "24 months"
+        ],
+        [
+         "CAC",
+         "$3,500"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "C46-E2",
+     "case": "C46",
+     "reveal": "after_elicitation",
+     "elicitation_step": "C46-Q3c",
+     "trigger_phrases": [
+      "churn",
+      "retention",
+      "actual lifetime",
+      "how long whales stay"
+     ],
+     "fallback": "hint_L1 then reveal",
+     "title": "Whale churn",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "Churn",
+       "rows": [
+        [
+         "Monthly whale churn",
+         "20%"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "id": "Q1",
+     "type": "select_all",
+     "prompt": "Which analyses would you prioritize?",
+     "options": [
+      {
+       "text": "Compute the naive LTV at the assumed lifetime",
+       "correct": true
+      },
+      {
+       "text": "Determine the actual whale churn/retention curve",
+       "correct": true
+      },
+      {
+       "text": "Compute realized LTV from the true lifetime and compare to CAC",
+       "correct": true
+      },
+      {
+       "text": "Benchmark the CEO's high score",
+       "correct": false
+      },
+      {
+       "text": "Confirm ARPU and CAC",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,3,5}, none of {4}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 5. **Validation:** all of {1,2,3,5}, none of {4}."
+    },
+    {
+     "id": "Q2",
+     "type": "select_all",
+     "prompt": "Genuine concerns for the whale-acquisition spend?",
+     "options": [
+      {
+       "text": "The naive LTV assumes a 24-month lifetime",
+       "correct": true
+      },
+      {
+       "text": "Whales may churn far faster than assumed",
+       "correct": true
+      },
+      {
+       "text": "Brackenlight is in Venloe",
+       "correct": false
+      },
+      {
+       "text": "If churn is steep, realized LTV could fall below CAC",
+       "correct": true
+      },
+      {
+       "text": "The game launched last year",
+       "correct": false
+      }
+     ],
+     "validation": "all of {1,2,4}, none of {3,5}.",
+     "answer_explain": "**Answer:** 1, 2, 4. **Validation:** all of {1,2,4}, none of {3,5}."
+    },
+    {
+     "id": "Q3",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q3a",
+       "type": "enter_number",
+       "prompt": "What is the naive whale LTV? (ARPU × assumed lifetime.)",
+       "answer": 9600.0,
+       "validation": null,
+       "answer_explain": "**Answer: 9600** — $400 × 24 = **$9,600**. Marketing's headline (vs $3,500 CAC)."
+      },
+      {
+       "id": "Q3b",
+       "type": "enter_number",
+       "prompt": "The naive LTV exceeds CAC by how much? (Naive LTV − CAC.)",
+       "answer": 6100.0,
+       "validation": null,
+       "answer_explain": "**Answer: 6100** — 9,600 − 3,500 = **$6,100**. Looks like a great return."
+      },
+      {
+       "id": "Q3c",
+       "type": "open_text_elicitation",
+       "prompt": "Marketing assumes a 24-month lifetime. Before ruling: what ONE thing about whale retention would you want to know?",
+       "model_answer": "The actual whale churn rate, since realized lifetime (and LTV) depends on how fast whales stop spending — not an assumed 24 months.",
+       "validation": "credit if requests churn / retention / actual lifetime. On credit → reveal Exhibit 2. On fail → L1 (\"Do whales really stay 24 months?\"), then reveal.",
+       "answer_explain": null,
+       "reveal_exhibit": "C46-E2",
+       "trigger_phrases": [
+        "churn",
+        "retention",
+        "actual lifetime",
+        "how long whales stay"
+       ],
+       "fallback": "hint_L1 then reveal"
+      },
+      {
+       "id": "Q3d",
+       "type": "enter_number",
+       "prompt": "Using Exhibit 2: what is the realized whale LTV? Expected lifetime = 1 ÷ monthly churn; LTV = ARPU × expected lifetime.",
+       "answer": 2000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 2000** — lifetime = 1 ÷ 0.20 = 5 months; LTV = $400 × 5 = **$2,000**."
+      }
+     ]
+    },
+    {
+     "id": "Q4",
+     "type": "enter_number",
+     "prompt": "Compare realized LTV to CAC. What is the per-whale profit or loss of acquisition? (Realized LTV − CAC.)",
+     "answer": -1500.0,
+     "validation": null,
+     "answer_explain": "**Answer: -1500** — 2,000 − 3,500 = **−$1,500 per whale** → acquiring whales LOSES money. Naive INVEST, correct DON'T — **flip**."
+    },
+    {
+     "id": "Q5",
+     "type": "enter_number",
+     "prompt": "At what monthly churn rate would whale LTV exactly equal CAC? Answer %, two decimals. (Solve: 400 × (1÷churn) = 3,500.)",
+     "answer": 11.43,
+     "validation": null,
+     "answer_explain": "**Answer: 11.43** — churn* = 400 / 3,500 = **11.43%**. Actual churn 20% > 11.43% → DON'T INVEST."
+    },
+    {
+     "id": "Q6",
+     "type": "single_choice",
+     "prompt": "Your recommendation:",
+     "options": [
+      {
+       "text": "Invest big in whale acquisition",
+       "correct": false
+      },
+      {
+       "text": "Don't — realized LTV is below CAC after churn",
+       "correct": true
+      },
+      {
+       "text": "No difference",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
+      }
+     ],
+     "validation": "choice == 2.",
+     "answer_explain": "**Answer:** Don't invest. **Validation:** choice == 2."
+    },
+    {
+     "id": "Q7",
+     "type": "voice",
+     "prompt": "\"The CEO wants your recommendation on whale acquisition. Record it — about 60–90 seconds.\"",
+     "model_answer": "Brackenlight should not pour money into whale acquisition — at current churn it loses about $1,500 per whale. Marketing's $9,600 LTV assumes whales stay 24 months, but they churn at 20% a month, which means an expected lifetime of just 5 months and a realized LTV of $2,000 — below the $3,500 acquisition cost. So each whale acquired loses $1,500. It only works if monthly churn were below 11.43%, and it's 20%. Two risks: internally, the 20% churn is an average — some whale segments may retain far better, so we should segment before abandoning the channel entirely; externally, a competitor game could poach whales and steepen churn further. Next step: segment whales by retention and test acquisition only against the highest-retention cohort before scaling spend.",
+     "checklist": "1. Recommendation first: don't invest, NOT invest.\n2. ≥2 numbers, ≥1 anchor: **−$1,500 per whale OR realized LTV $2,000-vs-$3,500 CAC OR the 11.43% breakeven churn**.\n3. ≥1 internal (churn is an average / segment) AND ≥1 external (competitor poaches whales) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last or no anchor.",
+     "rubric_ref": "C46"
+    }
+   ]
+  },
+  {
+   "id": "C47",
+   "title": "Better Living Through Chemistry",
+   "meta_tag": "Trap-flip · Specialty Chemicals",
+   "scenario": "Veranth Chemicals makes a specialty product in the market of Torvane that loses money on a standalone basis. The plant manager wants to drop it. Economics in **Exhibit 1**.\nThe manager: \"This product loses $3 a unit — $300,000 a year. Drop it.\" The CEO asks BCG for a view.",
+   "exhibits": [
+    {
+     "id": "C47-E1",
+     "case": "C47",
+     "reveal": "auto",
+     "title": "Low-margin product economics",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "Product",
+       "rows": [
+        [
+         "Units/yr",
+         "100,000"
+        ],
+        [
+         "Standalone loss per unit",
+         "$3"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "C47-E2",
+     "case": "C47",
+     "reveal": "after_elicitation",
+     "elicitation_step": "C47-Q3c",
+     "trigger_phrases": [
+      "by-product",
+      "joint production",
+      "high-margin line needs",
+      "external premium",
+      "what production yields"
+     ],
+     "fallback": "hint_L1 then reveal",
+     "title": "Joint-production dependency",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "Joint",
+       "rows": [
+        [
+         "By-product yield per unit",
+         "1:1"
+        ],
+        [
+         "Extra cost to buy by-product externally",
+         "$8/unit"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "id": "Q1",
+     "type": "select_all",
+     "prompt": "Which analyses would you prioritize?",
+     "options": [
+      {
+       "text": "Compute the product's standalone loss",
+       "correct": true
+      },
+      {
+       "text": "Determine whether its production yields a by-product used elsewhere",
+       "correct": true
+      },
+      {
+       "text": "Cost the alternative of buying that by-product externally",
+       "correct": true
+      },
+      {
+       "text": "Benchmark the CEO's lab coat",
+       "correct": false
+      },
+      {
+       "text": "Confirm volume and the per-unit loss",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,3,5}, none of {4}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 5. **Validation:** all of {1,2,3,5}, none of {4}."
+    },
+    {
+     "id": "Q2",
+     "type": "select_all",
+     "prompt": "Genuine concerns for dropping the product?",
+     "options": [
+      {
+       "text": "The product loses $3 a unit standalone",
+       "correct": true
+      },
+      {
+       "text": "Its production may yield a by-product a high-margin line needs",
+       "correct": true
+      },
+      {
+       "text": "Veranth is in Torvane",
+       "correct": false
+      },
+      {
+       "text": "Dropping it may force buying the by-product externally at a premium",
+       "correct": true
+      },
+      {
+       "text": "The plant was recertified last year",
+       "correct": false
+      }
+     ],
+     "validation": "all of {1,2,4}, none of {3,5}.",
+     "answer_explain": "**Answer:** 1, 2, 4. **Validation:** all of {1,2,4}, none of {3,5}."
+    },
+    {
+     "id": "Q3",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q3a",
+       "type": "enter_number",
+       "prompt": "What does the manager claim dropping the product saves? (Units × standalone loss.)",
+       "answer": 300000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 300000** — 100,000 × $3 = **$300,000**. The manager's headline."
+      },
+      {
+       "id": "Q3b",
+       "type": "enter_number",
+       "prompt": "How many units of the by-product does production yield per year? (1:1 with the product.)",
+       "answer": 100000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 100000** — **100,000** by-product units."
+      },
+      {
+       "id": "Q3c",
+       "type": "open_text_elicitation",
+       "prompt": "The manager sees only the standalone loss. Before ruling: what ONE thing about what the product's PRODUCTION yields would you want to know?",
+       "model_answer": "Whether its production yields a by-product that a high-margin line depends on, and what it would cost to source that by-product externally if the product is dropped.",
+       "validation": "credit if requests by-product / joint production / what the high-margin line needs. On credit → reveal Exhibit 2. On fail → L1 (\"Does making this product produce anything else the plant uses?\"), then reveal.",
+       "answer_explain": null,
+       "reveal_exhibit": "C47-E2",
+       "trigger_phrases": [
+        "by-product",
+        "joint production",
+        "high-margin line needs",
+        "external premium",
+        "what production yields"
+       ],
+       "fallback": "hint_L1 then reveal"
+      },
+      {
+       "id": "Q3d",
+       "type": "enter_number",
+       "prompt": "Using Exhibit 2: what is the extra annual cost of buying the by-product externally if the product is dropped? (By-product units × external premium.)",
+       "answer": 800000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 800000** — 100,000 × $8 = **$800,000**."
+      }
+     ]
+    },
+    {
+     "id": "Q4",
+     "type": "enter_number",
+     "prompt": "Compute the TRUE net effect of dropping: standalone loss saved − extra cost to source the by-product externally.",
+     "answer": -500000.0,
+     "validation": null,
+     "answer_explain": "**Answer: -500000** — 300,000 − 800,000 = **−$500,000** → dropping DESTROYS value. Naive DROP, correct KEEP — **flip**."
+    },
+    {
+     "id": "Q5",
+     "type": "enter_number",
+     "prompt": "At what external by-product premium would dropping be exactly break-even? Answer $, two decimals. (Solve: 300,000 = 100,000 × p.)",
+     "answer": 3.0,
+     "validation": null,
+     "answer_explain": "**Answer: 3.00** — p* = **$3.00/unit**. Actual $8 > $3 → KEEP."
+    },
+    {
+     "id": "Q6",
+     "type": "single_choice",
+     "prompt": "Your recommendation:",
+     "options": [
+      {
+       "text": "Drop the low-margin product",
+       "correct": false
+      },
+      {
+       "text": "Keep it — its by-product is cheaper to make than to buy",
+       "correct": true
+      },
+      {
+       "text": "No difference",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
+      }
+     ],
+     "validation": "choice == 2.",
+     "answer_explain": "**Answer:** Keep. **Validation:** choice == 2."
+    },
+    {
+     "id": "Q7",
+     "type": "voice",
+     "prompt": "\"The CEO wants your recommendation on the product. Record it — about 60–90 seconds.\"",
+     "model_answer": "Veranth should keep the product — dropping it would cost about $500,000 a year, not save $300,000. The manager is right that it loses $3 a unit standalone, $300,000 a year. But its production yields a by-product, one-to-one, that a high-margin line depends on — and if we drop the product, we'd have to buy that by-product externally at $8 a unit more than it costs to make, $800,000 a year. Net, dropping loses $500,000. It's robust: dropping would only pay off if the external premium were below $3, and it's $8. Two risks: internally, we should confirm the by-product can't be sourced more cheaply elsewhere before locking this in; externally, a supplier of the by-product could change pricing, which would shift the calculus. Next step: get firm external quotes for the by-product to confirm the $8 premium before any decision.",
+     "checklist": "1. Recommendation first: keep the product, NOT drop.\n2. ≥2 numbers, ≥1 anchor: **−500,000 true effect OR the $800,000 by-product cost OR the $3 breakeven premium**.\n3. ≥1 internal (external sourcing check) AND ≥1 external (by-product supplier repricing) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last or no anchor.",
+     "rubric_ref": "C47"
+    }
+   ]
+  },
+  {
+   "id": "C48",
+   "title": "Sour Grapes",
+   "meta_tag": "Trap-overstate · Wine / Vineyard",
+   "scenario": "Vellcrest Vineyards is deciding whether to age a vintage for premium bottling in the market of Brennmoor. Economics in **Exhibit 1**.\nThe winemaker is bullish: \"Aging adds $25 a bottle across 100,000 bottles — that's $2.5 million. Age it.\" The CEO asks BCG to size the real gain.",
+   "exhibits": [
+    {
+     "id": "C48-E1",
+     "case": "C48",
+     "reveal": "auto",
+     "title": "Aging economics",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "Aging",
+       "rows": [
+        [
+         "Bottles",
+         "100,000"
+        ],
+        [
+         "Premium uplift from aging",
+         "$25/bottle"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "C48-E2",
+     "case": "C48",
+     "reveal": "after_elicitation",
+     "elicitation_step": "C48-Q2b",
+     "trigger_phrases": [
+      "carry cost",
+      "storage",
+      "capital tied up",
+      "holding cost",
+      "aging period cost"
+     ],
+     "fallback": "hint_L1 then reveal",
+     "title": "Aging carry cost",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "Carry",
+       "rows": [
+        [
+         "Aging period",
+         "3 years"
+        ],
+        [
+         "Carry cost/bottle/yr",
+         "$4"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "id": "Q1",
+     "type": "select_all",
+     "prompt": "Which analyses would you prioritize?",
+     "options": [
+      {
+       "text": "Compute the premium uplift from aging",
+       "correct": true
+      },
+      {
+       "text": "Quantify the carry cost of holding inventory while it ages",
+       "correct": true
+      },
+      {
+       "text": "Net the carry cost against the premium",
+       "correct": true
+      },
+      {
+       "text": "Benchmark the CEO's cellar",
+       "correct": false
+      },
+      {
+       "text": "Confirm bottle count and uplift",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,3,5}, none of {4}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 5. **Validation:** all of {1,2,3,5}, none of {4}."
+    },
+    {
+     "id": "Q2",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q2a",
+       "type": "enter_number",
+       "prompt": "What premium does the winemaker claim from aging? (Bottles × uplift.)",
+       "answer": 2500000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 2500000** — 100,000 × $25 = **$2,500,000**. The headline."
+      },
+      {
+       "id": "Q2b",
+       "type": "open_text_elicitation",
+       "prompt": "The winemaker counts only the premium. Before ruling: what ONE cost of aging would you want to know?",
+       "model_answer": "The carry cost of holding the inventory while it ages — storage, insurance, and capital tied up over the aging period.",
+       "validation": "credit if requests carry cost / storage / capital tied up / aging period cost. On credit → reveal Exhibit 2. On fail → L1 (\"Does holding the wine for years cost anything?\"), then reveal.",
+       "answer_explain": null,
+       "reveal_exhibit": "C48-E2",
+       "trigger_phrases": [
+        "carry cost",
+        "storage",
+        "capital tied up",
+        "holding cost",
+        "aging period cost"
+       ],
+       "fallback": "hint_L1 then reveal"
+      }
+     ]
+    },
+    {
+     "id": "Q3",
+     "type": "enter_number",
+     "prompt": "Using Exhibit 2: what is the total carry cost over the aging period? (Bottles × carry/bottle/yr × years.)",
+     "answer": 1200000.0,
+     "validation": null,
+     "answer_explain": "**Answer: 1200000** — 100,000 × $4 × 3 = **$1,200,000**."
+    },
+    {
+     "id": "Q4",
+     "type": "enter_number",
+     "prompt": "Compute the TRUE gain from aging: premium − carry cost.",
+     "answer": 1300000.0,
+     "validation": null,
+     "answer_explain": "**Answer: 1300000** — 2,500,000 − 1,200,000 = **$1,300,000**. Still positive (age it), but overstated **×1.92**."
+    },
+    {
+     "id": "Q5",
+     "type": "enter_number",
+     "prompt": "Express the winemaker's claim as a multiple of the true gain ($2,500,000 ÷ $1,300,000), two decimals.",
+     "answer": 1.92,
+     "validation": null,
+     "answer_explain": "**Answer: 1.92** — **1.92×**."
+    },
+    {
+     "id": "Q6",
+     "type": "single_choice",
+     "prompt": "Your recommendation:",
+     "options": [
+      {
+       "text": "Age it, valuing the gain at the honest ~$1.3M, not $2.5M",
+       "correct": true
+      },
+      {
+       "text": "Age it and expect $2.5M",
+       "correct": false
+      },
+      {
+       "text": "Don't age it",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
+      }
+     ],
+     "validation": "choice == 1.",
+     "answer_explain": "**Answer:** Age it at the honest number. **Validation:** choice == 1."
+    },
+    {
+     "id": "Q7",
+     "type": "voice",
+     "prompt": "\"The CEO wants your recommendation on aging the vintage. Record it — about 60–90 seconds.\"",
+     "model_answer": "Vellcrest should age the vintage — but book the gain at about $1.3 million, not the $2.5 million the winemaker is quoting. The direction is right: aging adds a $25-a-bottle premium, $2.5 million across 100,000 bottles. But aging ties up that inventory for three years, carrying storage, insurance, and capital cost of $4 a bottle a year — $1.2 million total. Net that out and the true gain is $1.3 million, roughly half the headline. Two risks: internally, the carry cost should include the opportunity cost of capital, which may push it higher; externally, a vintage-quality or demand shift over three years could erode the premium. Next step: confirm the full carry cost including cost of capital, and hedge the demand risk before committing the full vintage to aging.",
+     "checklist": "1. Recommendation first: age it at the honest number (~$1.3M), NOT \"$2.5M\", NOT \"don't age\".\n2. ≥2 numbers, ≥1 anchor: **$1.3M true gain OR ×1.92 overstatement OR $2.5M-vs-$1.3M**.\n3. ≥1 internal (carry / cost of capital) AND ≥1 external (vintage-quality / demand shift) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last or no anchor.",
+     "rubric_ref": "C48"
+    }
+   ]
+  },
+  {
+   "id": "C49",
+   "title": "Roller Coaster",
+   "meta_tag": "Trap-action · Theme Park",
+   "scenario": "Thundervale Parks runs a theme park in the market of Halcombe. It charges a single ticket price. Pricing wants to keep it uniform. Economics in **Exhibit 1**.\nPricing: \"One price, $80, keeps it simple — $16 million a year.\" The CEO asks BCG whether segmenting would do better.",
+   "exhibits": [
+    {
+     "id": "C49-E1",
+     "case": "C49",
+     "reveal": "auto",
+     "title": "Uniform pricing",
+     "blocks": [
+      {
+       "type": "bar",
+       "name": "Peak vs Off-Peak Visitors",
+       "labels": [
+        "Peak",
+        "Off-peak"
+       ],
+       "series": [
+        {
+         "name": "Visitors/yr",
+         "values": [
+          60000,
+          140000
+         ]
+        }
+       ],
+       "note": "Same unit visitors/yr — peak vs off-peak split"
+      },
+      {
+       "type": "table",
+       "name": "Uniform",
+       "rows": [
+        [
+         "Peak visitors/yr",
+         "60,000"
+        ],
+        [
+         "Off-peak visitors/yr",
+         "140,000"
+        ],
+        [
+         "Uniform price",
+         "$80"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "C49-E2",
+     "case": "C49",
+     "reveal": "after_elicitation",
+     "elicitation_step": "C49-Q2b",
+     "trigger_phrases": [
+      "elasticity",
+      "peak off-peak response",
+      "price sensitivity",
+      "segment response"
+     ],
+     "fallback": "hint_L1 then reveal",
+     "title": "Segmented-pricing response",
+     "blocks": [
+      {
+       "type": "bar",
+       "name": "Volume Change by Segment",
+       "labels": [
+        "Peak $100",
+        "Off-peak $60"
+       ],
+       "series": [
+        {
+         "name": "Volume change %",
+         "values": [
+          -5,
+          40
+         ]
+        }
+       ],
+       "note": "Price-change elasticity tradeoff, same unit % volume change"
+      },
+      {
+       "type": "table",
+       "name": "Segmented",
+       "rows": [
+        [
+         "Peak $100 volume change",
+         "-5%"
+        ],
+        [
+         "Off-peak $60 volume change",
+         "+40%"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "id": "Q1",
+     "type": "select_all",
+     "prompt": "Which analyses would you prioritize?",
+     "options": [
+      {
+       "text": "Compute revenue under uniform pricing",
+       "correct": true
+      },
+      {
+       "text": "Separate peak from off-peak demand elasticity",
+       "correct": true
+      },
+      {
+       "text": "Model revenue under segmented peak/off-peak prices",
+       "correct": true
+      },
+      {
+       "text": "Benchmark the CEO's season pass",
+       "correct": false
+      },
+      {
+       "text": "Confirm visitor counts and price",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,3,5}, none of {4}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 5. **Validation:** all of {1,2,3,5}, none of {4}."
+    },
+    {
+     "id": "Q2",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q2a",
+       "type": "enter_number",
+       "prompt": "What is annual revenue under uniform pricing? (Total visitors × uniform price.)",
+       "answer": 16000000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 16000000** — (60,000 + 140,000) × $80 = 200,000 × $80 = **$16,000,000**. The uniform plan."
+      },
+      {
+       "id": "Q2b",
+       "type": "open_text_elicitation",
+       "prompt": "Uniform pricing charges everyone the same. Before ruling: what ONE thing about how peak versus off-peak visitors respond to price would you want to know?",
+       "model_answer": "The price elasticity of peak versus off-peak visitors — whether peak visitors are inelastic (will pay more) and off-peak elastic (a lower price fills capacity).",
+       "validation": "credit if requests peak/off-peak elasticity / price response by segment. On credit → reveal Exhibit 2. On fail → L1 (\"Do peak and off-peak visitors respond to price the same way?\"), then reveal.",
+       "answer_explain": null,
+       "reveal_exhibit": "C49-E2",
+       "trigger_phrases": [
+        "elasticity",
+        "peak off-peak response",
+        "price sensitivity",
+        "segment response"
+       ],
+       "fallback": "hint_L1 then reveal"
+      }
+     ]
+    },
+    {
+     "id": "Q3",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q3a",
+       "type": "enter_number",
+       "prompt": "Segmented revenue from peak visitors at $100 (−5% volume). (Peak visitors × 0.95 × $100.)",
+       "answer": 5700000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 5700000** — 60,000 × 0.95 × $100 = 57,000 × $100 = **$5,700,000**."
+      },
+      {
+       "id": "Q3b",
+       "type": "enter_number",
+       "prompt": "Segmented revenue from off-peak visitors at $60 (+40% volume). (Off-peak visitors × 1.40 × $60.)",
+       "answer": 11760000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 11760000** — 140,000 × 1.40 × $60 = 196,000 × $60 = **$11,760,000**."
+      }
+     ]
+    },
+    {
+     "id": "Q4",
+     "type": "enter_number",
+     "prompt": "What is total segmented revenue, and how much does it beat uniform pricing?",
+     "answer": 17460000.0,
+     "validation": null,
+     "answer_explain": "**Answer: 17460000** — 5,700,000 + 11,760,000 = **$17,460,000** — that's $1,460,000 more than the $16M uniform plan. Naive uses one price; optimal segments — **action-trap**."
+    },
+    {
+     "id": "Q5",
+     "type": "single_choice",
+     "prompt": "Your recommendation:",
+     "options": [
+      {
+       "text": "Keep uniform pricing",
+       "correct": false
+      },
+      {
+       "text": "Segment peak (higher) and off-peak (lower)",
+       "correct": true
+      },
+      {
+       "text": "Raise the uniform price",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
+      }
+     ],
+     "validation": "choice == 2.",
+     "answer_explain": "**Answer:** Segment. **Validation:** choice == 2."
+    },
+    {
+     "id": "Q6",
+     "type": "voice",
+     "prompt": "\"The CEO wants your pricing recommendation. Record it — about 60–90 seconds.\"",
+     "model_answer": "Thundervale should segment its pricing — peak higher, off-peak lower — worth $17.46 million a year versus $16 million for one uniform price, about $1.46 million more. A single $80 price leaves money on the table at peak and prices out off-peak demand. Peak visitors are inelastic: raising to $100 loses only 5% of them but lifts peak revenue to $5.7 million. Off-peak visitors are elastic: dropping to $60 draws 40% more, filling capacity, for $11.76 million. Together that beats uniform pricing by $1.46 million. Two risks: internally, the elasticity estimates should be validated with a limited pricing test before a full rollout; externally, visitors could perceive peak pricing as unfair, so it needs careful communication. Next step: run a segmented-pricing pilot on a few dates to confirm the elasticities before parkwide rollout.",
+     "checklist": "1. Recommendation first: segment pricing, NOT uniform.\n2. ≥2 numbers, ≥1 anchor: **$17.46M-vs-$16M OR the $1.46M uplift**.\n3. ≥1 internal (elasticity estimate/test) AND ≥1 external (fairness perception) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last or no anchor.",
+     "rubric_ref": "C49"
+    }
+   ]
+  },
+  {
+   "id": "C50",
+   "title": "Plane and Simple",
+   "meta_tag": "Trap-flip · Air Cargo",
+   "scenario": "Freightwing Cargo runs air-freight routes in the market of Grenhaven. Some backhaul routes run half-empty. The network director wants to drop them. Economics in **Exhibit 1**.\nThe director: \"These backhaul flights run half-empty and lose $4,000 each — $8 million a year. Drop them.\" The CEO asks BCG for a view.",
+   "exhibits": [
+    {
+     "id": "C50-E1",
+     "case": "C50",
+     "reveal": "auto",
+     "title": "Backhaul route economics",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "Backhaul",
+       "rows": [
+        [
+         "Backhaul flights/yr",
+         "2,000"
+        ],
+        [
+         "Standalone loss per flight",
+         "$4,000"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "C50-E2",
+     "case": "C50",
+     "reveal": "after_elicitation",
+     "elicitation_step": "C50-Q3c",
+     "trigger_phrases": [
+      "network",
+      "hub link",
+      "connecting routes",
+      "connectivity",
+      "reroute"
+     ],
+     "fallback": "hint_L1 then reveal",
+     "title": "Network connectivity",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "Network",
+       "rows": [
+        [
+         "Connecting-route margin dependent on link",
+         "$14,000,000"
+        ],
+        [
+         "Share lost if link cut",
+         "80%"
+        ]
+       ]
+      }
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "id": "Q1",
+     "type": "select_all",
+     "prompt": "Which analyses would you prioritize?",
+     "options": [
+      {
+       "text": "Compute the backhaul routes' standalone loss",
+       "correct": true
+      },
+      {
+       "text": "Determine whether the backhaul maintains hub connectivity",
+       "correct": true
+      },
+      {
+       "text": "Quantify connecting-route margin that depends on the link",
+       "correct": true
+      },
+      {
+       "text": "Benchmark the director's title",
+       "correct": false
+      },
+      {
+       "text": "Confirm flight count and per-flight loss",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,3,5}, none of {4}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 5. **Validation:** all of {1,2,3,5}, none of {4}."
+    },
+    {
+     "id": "Q2",
+     "type": "select_all",
+     "prompt": "Genuine concerns for dropping the backhaul?",
+     "options": [
+      {
+       "text": "Backhaul flights lose $4,000 each standalone",
+       "correct": true
+      },
+      {
+       "text": "The backhaul may be a hub link connecting other routes",
+       "correct": true
+      },
+      {
+       "text": "Freightwing is in Grenhaven",
+       "correct": false
+      },
+      {
+       "text": "Dropping it could strand cargo on connecting routes",
+       "correct": true
+      },
+      {
+       "text": "The fleet was repainted last year",
+       "correct": false
+      }
+     ],
+     "validation": "all of {1,2,4}, none of {3,5}.",
+     "answer_explain": "**Answer:** 1, 2, 4. **Validation:** all of {1,2,4}, none of {3,5}."
+    },
+    {
+     "id": "Q3",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q3a",
+       "type": "enter_number",
+       "prompt": "What does the director claim dropping the backhaul saves? (Flights × standalone loss.)",
+       "answer": 8000000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 8000000** — 2,000 × $4,000 = **$8,000,000**. The director's headline."
+      },
+      {
+       "id": "Q3b",
+       "type": "enter_number",
+       "prompt": "How many backhaul flights per year are under review?",
+       "answer": 2000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 2000** — **2,000 flights**."
+      },
+      {
+       "id": "Q3c",
+       "type": "open_text_elicitation",
+       "prompt": "The director sees only the half-empty backhaul. Before ruling: what ONE thing about the backhaul's role in the ROUTE NETWORK would you want to know?",
+       "model_answer": "Whether the backhaul is a hub link that connecting routes depend on — i.e. whether dropping it strands cargo on other profitable routes across the network.",
+       "validation": "credit if requests network connectivity / hub link / connecting routes / rerouting. On credit → reveal Exhibit 2. On fail → L1 (\"Does other cargo depend on this route to connect?\"), then reveal.",
+       "answer_explain": null,
+       "reveal_exhibit": "C50-E2",
+       "trigger_phrases": [
+        "network",
+        "hub link",
+        "connecting routes",
+        "connectivity",
+        "reroute"
+       ],
+       "fallback": "hint_L1 then reveal"
+      },
+      {
+       "id": "Q3d",
+       "type": "enter_number",
+       "prompt": "Using Exhibit 2: what connecting-route margin is lost if the link is cut? (Connecting margin × dependency share.)",
+       "answer": 11200000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 11200000** — $14,000,000 × 80% = **$11,200,000**."
+      }
+     ]
+    },
+    {
+     "id": "Q4",
+     "type": "enter_number",
+     "prompt": "Compute the TRUE net effect of dropping the backhaul: standalone loss saved − connecting-network margin lost.",
+     "answer": -3200000.0,
+     "validation": null,
+     "answer_explain": "**Answer: -3200000** — 8,000,000 − 11,200,000 = **−$3,200,000** → dropping DESTROYS value. Naive DROP, correct KEEP — **flip**."
+    },
+    {
+     "id": "Q5",
+     "type": "enter_number",
+     "prompt": "At what dependency share would dropping be exactly break-even? Answer %, two decimals. (Solve: 8,000,000 = share × 14,000,000.)",
+     "answer": 57.14,
+     "validation": null,
+     "answer_explain": "**Answer: 57.14** — share* = 8,000,000 / 14,000,000 = **57.14%**. Actual 80% > 57.14% → KEEP."
+    },
+    {
+     "id": "Q6",
+     "type": "single_choice",
+     "prompt": "Your recommendation:",
+     "options": [
+      {
+       "text": "Drop the backhaul routes",
+       "correct": false
+      },
+      {
+       "text": "Keep them — they maintain the network connectivity feeding profitable routes",
+       "correct": true
+      },
+      {
+       "text": "Drop only if dependency is below 57.14%",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
+      }
+     ],
+     "validation": "choice == 2.",
+     "answer_explain": "**Answer:** Keep. **Validation:** choice == 2."
+    },
+    {
+     "id": "Q7",
+     "type": "voice",
+     "prompt": "\"The CEO wants your recommendation on the backhaul routes. Record it — about 60–90 seconds.\"",
+     "model_answer": "Freightwing should keep the backhaul routes — dropping them would cost about $3.2 million a year, not save $8 million. The director is right that they run half-empty and lose $4,000 a flight, $8 million a year on a standalone basis. But those backhaul flights are hub links: they maintain the connectivity that feeds other profitable routes, and dropping them strands 80% of $14 million in connecting-route margin — $11.2 million — because that cargo can't reroute. Net, dropping loses $3.2 million. It's robust: dropping would only pay off if less than 57% of the connecting margin depended on the link, and it's 80%. Two risks: internally, the 80% dependency should be validated by mapping which cargo actually reroutes versus is lost; externally, a partner carrier or an alliance change could alter the network math. Next step: map the connecting-cargo dependency precisely before touching any backhaul route.",
+     "checklist": "1. Recommendation first: keep the backhaul, NOT drop.\n2. ≥2 numbers, ≥1 anchor: **−3,200,000 true effect OR the $11.2M connecting margin OR the 57.14% breakeven dependency**.\n3. ≥1 internal (dependency mapping / estimate) AND ≥1 external (partner carrier / alliance change) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last or no anchor.",
+     "rubric_ref": "C50"
     }
    ]
   }
