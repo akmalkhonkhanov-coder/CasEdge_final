@@ -499,6 +499,8 @@ window.caseyCalc = (function(){
     say('ai', '**Case complete.** You scored **' + S.score + ' / ' + maxScore + '** on this run. Review the exhibits and the model recommendation above — then try another case.');
     feedNode('<div style="text-align:center;margin:18px 0"><button class="cy-send" onclick="Casey.open()">← Back to case list</button></div>');
     try { var done = JSON.parse(localStorage.getItem('casedge_casey_done') || '[]'); if (done.indexOf(S.case.id) < 0) done.push(S.case.id); localStorage.setItem('casedge_casey_done', JSON.stringify(done)); } catch (e) {}
+    // Record this case in the shared Progress tracker (Cases completed + a 0-10 score from steps nailed, synced to cloud).
+    try { if (typeof recordSession === 'function') recordSession('case', 'BCG Casey', maxScore > 0 ? Math.round((S.score / maxScore) * 100) / 10 : undefined); } catch (e) {}
   }
 
   // ---------- case picker / entry ----------

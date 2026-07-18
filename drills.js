@@ -176,6 +176,8 @@
       feed('<div class="cm-ref"><div class="cm-ref-h">Reference solution</div><div class="cm-ref-body">' + md(ref || '') + '</div>' +
            (prov ? '<div class="cm-trap"><b>Trap:</b> ' + esc2(prov) + '</div>' : '') + '</div>');
       saveDone(d.id);
+      // Record this rep in the shared Progress tracker (Drills completed + "Case Math" by-type + streak, synced to cloud).
+      try { if (typeof recordSession === 'function') recordSession('drill', 'Case Math'); } catch (e) {}
       nextButton();
     }).catch(function () { feed('<div class="cm-fb no"><b>Connection issue.</b> Please try again.</div>'); nextButton(); });
   }
