@@ -1,0 +1,737 @@
+{
+ "version": "slice-10",
+ "drills": [
+  {
+   "id": "CM-001",
+   "title": "Menu Cut",
+   "difficulty": "Medium",
+   "type": "Trap",
+   "focus": "F03(a) contribution vs full-cost",
+   "time": "5 min",
+   "render": {
+    "exhibits": [
+     "table"
+    ],
+    "interactive": [
+     "input_number"
+    ]
+   },
+   "prompt": "Tavriano, a 12-location casual-dining group, reviews menu profitability monthly. The CFO wants to cut the loss-making dish. Monthly overhead of the group ($27,000: rent, management, marketing) is allocated at a flat $3.00 per dish sold. Should Tavriano cut dish C, and what happens to monthly profit if it does?",
+   "exhibit": {
+    "type": "table",
+    "header": [
+     "Dish",
+     "Price, $",
+     "Variable cost (food + direct labor), $",
+     "Volume, units/mo",
+     "Allocated OH, $/unit",
+     "Full-cost margin, $/unit"
+    ],
+    "rows": [
+     [
+      "A",
+      "12.00",
+      "5.00",
+      "4,000",
+      "3.00",
+      "4.00"
+     ],
+     [
+      "B",
+      "9.00",
+      "4.50",
+      "3,000",
+      "3.00",
+      "1.50"
+     ],
+     [
+      "C",
+      "7.00",
+      "5.50",
+      "2,000",
+      "3.00",
+      "−1.50"
+     ]
+    ]
+   },
+   "step_prompts": [
+    "Effect of dropping C on monthly profit, $",
+    "Annualize + one-sentence recommendation"
+   ],
+   "steps": [
+    {
+     "prompt": "Effect of dropping C on monthly profit, $",
+     "kind": "number",
+     "answer": "-3000",
+     "tolerance": "exact"
+    },
+    {
+     "prompt": "Annualize + one-sentence recommendation",
+     "kind": "text",
+     "answer": "-36000; keep C",
+     "tolerance": "exact"
+    }
+   ],
+   "checklist": {
+    "en": "Credit if ALL: (1) C's contribution margin named = $1.50/unit or $3,000/mo; (2) net effect = −$3,000/mo (exact); (3) annual effect −$36,000 stated; (4) recommendation \"keep C\" with reason \"OH does not disappear\".",
+    "ru": "(1) назван contribution margin C = $1.50/unit или $3,000/мес; (2) итоговый эффект = −$3,000/мес, tolerance: exact; (3) годовой эффект −$36,000 назван; (4) рекомендация «не закрывать» с причиной «OH не исчезает»."
+   },
+   "reference": {
+    "en": "- Naive: full-cost margin of C = −$1.50 × 2,000 = a \"$3,000/mo loss\" → cut it and \"save\" $3,000. That is the honest first read of the table.\n- Correct: the $27,000 OH is a FIXED pool; cutting C does not make it disappear — it reallocates onto A and B. Only C's contribution goes away: (7.00 − 5.50) × 2,000 = **−$3,000/mo** to group profit.\n- Naive↔correct gap: $6,000/mo (from \"+3,000\" to \"−3,000\").\n- Last mile: −$3,000 × 12 = **−$36,000/yr**. Recommendation: do NOT cut C; work its price / variable cost or traffic — OH is treated separately.",
+    "ru": "- Naive: full-cost маржа C = −$1.50 × 2,000 = «убыток $3,000/мес» → закрыть и «сэкономить» $3,000. Это честное первое чтение таблицы.\n- Correct: OH $27,000 — фиксированный пул, при закрытии C он не исчезает, а перераспределяется на A и B. Уходит только contribution C: (7.00 − 5.50) × 2,000 = **−$3,000/мес** к прибыли группы.\n- Разрыв naive↔correct: $6,000/мес (от «+3,000» до «−3,000»).\n- Last mile: −$3,000 × 12 = **−$36,000/год**. Рекомендация: не закрывать C; работать с ценой/VC блюда или загрузкой, OH лечится иначе."
+   },
+   "provoked": {
+    "en": "a negative full-cost margin is read as \"the dish generates a loss\".",
+    "ru": "отрицательная full-cost маржа читается как «блюдо генерит убыток»."
+   }
+  },
+  {
+   "id": "CM-002",
+   "title": "Markup Mirage",
+   "difficulty": "Easy",
+   "type": "Trap",
+   "focus": "F13(a) markup vs margin",
+   "time": "3 min",
+   "render": {
+    "exhibits": [
+     "none"
+    ],
+    "interactive": [
+     "input_number"
+    ]
+   },
+   "prompt": "Aislewood buys a private-label kitchen gadget at $40 unit cost and applies its standard 25% markup. Store-level fixed costs attributable to the line are $30,000/month. The category manager says: \"25% of the price covers fixed costs, so breakeven is 30,000 / 12.50 = 2,400 units.\" Check the claim.",
+   "exhibit": null,
+   "step_prompts": [
+    "Correct breakeven, units"
+   ],
+   "steps": [
+    {
+     "prompt": "Correct breakeven, units",
+     "kind": "number",
+     "answer": "3000",
+     "tolerance": "exact"
+    }
+   ],
+   "checklist": {
+    "en": "Credit if ALL: (1) unit margin $10 / 20% named (not 25%); (2) correct breakeven = 3,000 units (exact); (3) markup-vs-margin confusion named as the trap.",
+    "ru": "(1) маржа $10.00 или 20% названа; (2) breakeven = 3,000 units, tolerance: exact; (3) явно сказано, что 2,400 — занижение (≈20%)."
+   },
+   "reference": {
+    "en": "- Price = 40 × 1.25 = $50.00. A 25% markup is taken ON COST, so the margin = $10.00/unit = 10/50 = **20%** of price, not 25%.\n- Naive breakeven (manager's): 30,000 / (0.25 × 50) = 30,000 / 12.50 = 2,400 units.\n- Correct: 30,000 / 10.00 = **3,000 units**. The naive figure understates the threshold by 20.00% (base = the correct 3,000).\n- Last mile: a sales plan built on 2,400 leaves the line loss-making by 600 units × $10 = $6,000/mo.",
+    "ru": "- Цена = 40 × 1.25 = $50.00. Наценка 25% считается ОТ КОСТА, поэтому маржа = $10.00/unit = 10/50 = **20%** от цены, а не 25%.\n- Naive breakeven (менеджера): 30,000 / (0.25 × 50) = 30,000 / 12.50 = 2,400 units.\n- Correct: 30,000 / 10.00 = **3,000 units**. Naive занижает порог на 20.00% (база — корректные 3,000, [11]).\n- Last mile: план продаж, построенный на 2,400, оставит линию убыточной на 600 units × $10 = $6,000/мес."
+   },
+   "provoked": {
+    "en": "markup % is read as margin % of price.",
+    "ru": "markup% и margin% использованы как один процент."
+   }
+  },
+  {
+   "id": "CM-003",
+   "title": "Service Call",
+   "difficulty": "Hard",
+   "type": "Trap",
+   "focus": "F02(a) зависимый порог ([9b-model])",
+   "time": "8 min",
+   "render": {
+    "exhibits": [
+     "table"
+    ],
+    "interactive": [
+     "multi_step_reveal"
+    ]
+   },
+   "prompt": "Boltrava services 1,500 maintenance contracts/year in-house. An outsourcer offers to run them at $780 per contract. In-house cost per contract: $620 variable + $280 allocated fixed. Of the $280, only $90 is avoidable if service is outsourced (dispatch software, contract engineers); the rest (depot depreciation, plant management) stays. Should Boltrava outsource?",
+   "exhibit": {
+    "type": "table",
+    "header": [
+     "Cost line",
+     "$/contract"
+    ],
+    "rows": [
+     [
+      "In-house variable",
+      "620"
+     ],
+     [
+      "Allocated fixed — avoidable",
+      "90"
+     ],
+     [
+      "Allocated fixed — unavoidable",
+      "190"
+     ],
+     [
+      "In-house full cost",
+      "900"
+     ],
+     [
+      "Outsourcer price",
+      "780"
+     ]
+    ]
+   },
+   "step_prompts": [
+    "Naive comparison",
+    "Correct comparison, annual $",
+    "Flip threshold for avoidable fixed"
+   ],
+   "steps": [
+    {
+     "prompt": "Naive comparison",
+     "kind": "text",
+     "answer": "900 vs 780; outsource +180k",
+     "tolerance": "exact"
+    },
+    {
+     "prompt": "Correct comparison, annual $",
+     "kind": "text",
+     "answer": "710 vs 970; -390000",
+     "tolerance": "exact"
+    },
+    {
+     "prompt": "Flip threshold for avoidable fixed",
+     "kind": "number",
+     "answer": "220",
+     "tolerance": "exact"
+    }
+   ],
+   "checklist": {
+    "en": "Credit if ALL: (1) 900 vs 780 and the +180k naive read reproduced; (2) 710 vs 970 and the −390,000 correct read (exact); (3) flip threshold = 220 (exact), solved as a dependency, not the naive value.",
+    "ru": "(1) make_avoidable=$710 и buy_total=$970 названы; (2) годовой эффект −$390,000, tolerance: exact; (3) порог $220 (не $780 и не «780−620=160»), tolerance: exact; (4) минимум одна контрольная точка проверена; (5) last mile: вывод в терминах годового P&L."
+   },
+   "reference": {
+    "en": "- In-house today: cost per service call built from the shown drivers; the naive make-vs-buy read compares the vendor's $780 to a fully-loaded $900, so outsourcing looks like +$180k/yr.\n- Correct: strip the UNAVOIDABLE fixed from the in-house number — the avoidable in-house cost is $710 vs the vendor's true $970 all-in (incl. transition/coordination), so keeping in-house is better; the naive framing flips it to −$390,000.\n- Dependent threshold [9b]: the vendor price at which the decision flips, solved from the tie-equation (not the naive $780), = **$220** — checked against 3 counter-points.",
+    "ru": "- Шаг 1. Naive: full 900 vs 780 → аутсорс «экономит» $120/контракт, 1,500 × 120 = $180,000/год.\n- Шаг 2. Correct: уходит только avoidable-часть: make_avoidable = 620+90 = $710; полная стоимость buy = 780 + 190 (unavoidable остаётся) = $970. Аутсорс ДОРОЖЕ на $260/контракт → **−$390,000/год**. Флип: OUTSOURCE → KEEP.\n- Шаг 3. Порог решается против той же модели ([9b-model]): avoidable x входит в ОБЕ стороны — make_avoidable(x)=620+x, buy_total(x)=780+(280−x)=1060−x. Равенство: 620+x = 1060−x → **x\\* = $220**. Контрольные точки: x=90 → KEEP (710 vs 970); x=220 → tie (840 = 840); x=250 → OUTSOURCE (870 vs 810). Наивный порог «avoidable = цене 780» неверен — он игнорирует, что unavoidable падает при росте avoidable.\n\n**Провоцируемые ошибки (2, связанные):** full-cost vs avoidable; порог против buy_price вместо buy_total с движущимся unavoidable."
+   },
+   "provoked": {
+    "en": "unavoidable fixed cost is left inside the make-vs-buy comparison.",
+    "ru": null
+   }
+  },
+  {
+   "id": "CM-004",
+   "title": "Premium Squeeze",
+   "difficulty": "Medium",
+   "type": "Trap",
+   "focus": "F08(a) % vs $",
+   "time": "5 min",
+   "render": {
+    "exhibits": [
+     "table"
+    ],
+    "interactive": [
+     "input_number"
+    ]
+   },
+   "prompt": "Bevorra shifted marketing to its premium line last year. The CEO's board slide says: \"Blended margin up 2.1pp — the premium strategy works.\" Assess the claim on profit.",
+   "exhibit": {
+    "type": "table",
+    "header": [
+     "SKU · Year",
+     "Units, M",
+     "Price, $/unit",
+     "Margin, %"
+    ],
+    "rows": [
+     [
+      "Core · Y1",
+      "10.0",
+      "2.00",
+      "30%"
+     ],
+     [
+      "Premium · Y1",
+      "2.0",
+      "4.00",
+      "45%"
+     ],
+     [
+      "Core · Y2",
+      "7.0",
+      "2.00",
+      "30%"
+     ],
+     [
+      "Premium · Y2",
+      "2.6",
+      "4.00",
+      "45%"
+     ]
+    ]
+   },
+   "step_prompts": [
+    "Blended margin % and $ profit, both years",
+    "Verdict on the claim"
+   ],
+   "steps": [
+    {
+     "prompt": "Blended margin % and $ profit, both years",
+     "kind": "text",
+     "answer": "9.60/34.29%; 8.88/36.39%",
+     "tolerance": "exact"
+    },
+    {
+     "prompt": "Verdict on the claim",
+     "kind": "text",
+     "answer": "margin up, profit down 0.72M; pure mix effect",
+     "tolerance": "exact"
+    }
+   ],
+   "checklist": {
+    "en": "Credit if ALL: (1) both segment profits exact; (2) the pp margin delta named; (3) \"margin up, profit down $0.72M\" identified as a pure mix effect.",
+    "ru": "(1) profit Y1 = $9.60M и Y2 = $8.88M, tolerance: exact; (2) blended 34.29% → 36.39% (2.10pp), tolerance: exact; (3) явный вердикт «маржа ↑, прибыль ↓ на $0.72M»; (4) причина — mix, ставки неизменны."
+   },
+   "reference": {
+    "en": "- Segment A: margin 9.60 / 34.29%; Segment B: margin 8.88 / 36.39% — computed from the shown price/cost.\n- Trap: the blended margin % rises while total profit FALLS by $0.72M — a pure MIX effect (volume shifts toward the higher-%, lower-$ segment).\n- The % going up is not the same as more money: rank and decide on dollars, not on margin percentage.",
+    "ru": "- Y1: revenue 28.0M; profit = 10×2×0.30 + 2×4×0.45 = 6.00+3.60 = **$9.60M**; blended 34.29%.\n- Y2: revenue 24.4M; profit = 7×2×0.30 + 2.6×4×0.45 = 4.20+4.68 = **$8.88M**; blended 36.39%.\n- Маржа выросла на 2.10pp — И прибыль упала на $0.72M (−7.50%). Микс сдвинулся к premium, но потеря 3M units Core (contribution $1.8M) не покрыта приростом premium (+$1.08M).\n- Last mile: слайд CEO верен по метрике и ложен по деньгам; решение принимать по $-прибыли."
+   },
+   "provoked": {
+    "en": "a rising margin % is read as rising profit.",
+    "ru": "рост маржи % читается как рост прибыли."
+   }
+  },
+  {
+   "id": "CM-005",
+   "title": "Churn Illusion",
+   "difficulty": "Hard",
+   "type": "Trap",
+   "focus": "F10(a)+F13(c) Simpson + база",
+   "time": "8 min",
+   "render": {
+    "exhibits": [
+     "table"
+    ],
+    "interactive": [
+     "multi_step_reveal"
+    ]
+   },
+   "prompt": "Episova's PR: \"Our retention program cut monthly churn from 2.60% to 1.86% — a 28% improvement.\" Q1 vs Q2 data by tier below. Evaluate the claim.",
+   "exhibit": {
+    "type": "table",
+    "header": [
+     "Tier · Quarter",
+     "Subscribers, M",
+     "Monthly churn, %"
+    ],
+    "rows": [
+     [
+      "Basic · Q1",
+      "8.0",
+      "3.0%"
+     ],
+     [
+      "Premium · Q1",
+      "2.0",
+      "1.0%"
+     ],
+     [
+      "Basic · Q2",
+      "3.0",
+      "3.4%"
+     ],
+     [
+      "Premium · Q2",
+      "7.0",
+      "1.2%"
+     ]
+    ]
+   },
+   "step_prompts": [
+    "Verify blended churn Q1/Q2",
+    "Segment-level story",
+    "Like-for-like churn + honest sentence"
+   ],
+   "steps": [
+    {
+     "prompt": "Verify blended churn Q1/Q2",
+     "kind": "text",
+     "answer": "2.60%;1.86%",
+     "tolerance": "exact"
+    },
+    {
+     "prompt": "Segment-level story",
+     "kind": "text",
+     "answer": "both tiers worse; Simpson via mix shift",
+     "tolerance": "exact"
+    },
+    {
+     "prompt": "Like-for-like churn + honest sentence",
+     "kind": "text",
+     "answer": "2.96%; +13.85% deterioration",
+     "tolerance": "exact"
+    }
+   ],
+   "checklist": {
+    "en": "Credit if ALL: (1) 2.96% exact; (2) base = 2.60 named; (3) Simpson/mix-shift mechanism named; (4) blended computed as weighted, not simple average.",
+    "ru": "(1) 2.60% и 1.86% воспроизведены, tolerance: exact; (2) названо ухудшение ОБОИХ сегментов (+0.40pp, +0.20pp); (3) counterfactual 2.96%, tolerance: exact; (4) честная переформулировка: вывод первым предложением, слово «mix» присутствует."
+   },
+   "reference": {
+    "en": "- Per-tier churn: 2.60% and 1.86% on a like-for-like basis.\n- Both tiers get WORSE year on year, yet the blended churn can look flat/better — a Simpson reversal driven by the mix shift between tiers.\n- Correct blended = **2.96%**, a **+13.85%** deterioration versus the 2.60% base — computed as Σ(churned)/Σ(base), not an average of the two ratios.",
+    "ru": "- Шаг 1. Q1: (8×3.0% + 2×1.0%)/10 = 0.260/10 = **2.60%**. Q2: (3×3.4% + 7×1.2%)/10 = 0.186/10 = **1.86%**. Цифры PR арифметически верны.\n- Шаг 2. Basic 3.0→3.4% (+0.40pp), Premium 1.0→1.2% (+0.20pp): **оба сегмента ухудшились**. Blended упал только из-за миграции базы в низко-churn Premium (8/2 → 3/7). Классический Simpson.\n- Шаг 3. Q1-микс × Q2-ставки: (8×3.4% + 2×1.2%)/10 = **2.96%** — like-for-like churn ВЫРОС на 13.85% (база сравнения — исходные 2.60%, [11]; заявленные «−28.46%» меряют смесь эффектов, из них весь «прогресс» — микс). Честная формулировка: «Churn ухудшился в обоих тарифах; blended снизился из-за сдвига базы в Premium».\n\n**Провоцируемые ошибки (2, связанные):** взвешенное среднее прячет ухудшение сегментов; % улучшения меряется от смеси эффектов вместо like-for-like базы."
+   },
+   "provoked": {
+    "en": "the blend is taken as a simple average of the tier ratios.",
+    "ru": null
+   }
+  },
+  {
+   "id": "CM-006",
+   "title": "Declining Well",
+   "difficulty": "Medium",
+   "type": "Trap",
+   "focus": "F05(a) перпетуитет vs decay",
+   "time": "6 min",
+   "render": {
+    "exhibits": [
+     "formula",
+     "table"
+    ],
+    "interactive": [
+     "input_number"
+    ]
+   },
+   "prompt": "Crudemont evaluates buying a producing well. Next-year free cash flow: $6.0M. Production declines linearly: FCF falls $0.5M each year until it reaches zero after year 12 (last positive flow $0.5M in year 12). Discount rate 10%. A junior analyst values the well as a perpetuity: 6.0 / 0.10 = $60.0M. Give the correct value.",
+   "exhibit": {
+    "type": "table",
+    "header": [
+     "t",
+     "1",
+     "2",
+     "…",
+     "12"
+    ],
+    "rows": [
+     [
+      "FCF, $M",
+      "6.0",
+      "5.5",
+      "…",
+      "0.5"
+     ]
+    ]
+   },
+   "step_prompts": [
+    "Correct PV, $M",
+    "% overstatement + drivers"
+   ],
+   "steps": [
+    {
+     "prompt": "Correct PV, $M",
+     "kind": "number",
+     "answer": "25.9",
+     "tolerance": "+-0.1M"
+    },
+    {
+     "prompt": "% overstatement + drivers",
+     "kind": "text",
+     "answer": "131.7% (+-1pp); finite + declining",
+     "tolerance": "+-0.1M"
+    }
+   ],
+   "checklist": {
+    "en": "Credit if ALL: (1) 25.9 (±0.1) via an explicit 12-year sum method; (2) 131.7% (±1pp) with both drivers (finite + declining) named; the perpetuity shortcut rejected.",
+    "ru": "(1) PV = $25.9M, tolerance: ±$0.1M (расчёт от показанных округлённых значений, [5]); (2) overstatement 131.7% от показанного 25.9, tolerance ±1pp ([5]; 131.4 от exact тоже в допуске); (3) названы ОБЕ причины (конечность + затухание); (4) sanity-прикидка суммы потоков присутствует."
+   },
+   "reference": {
+    "en": "- The 12-year sum of a DECLINING production stream (not a flat perpetuity) gives PV ≈ **25.9** (±0.1M) — sum the decaying cash flows, do not capitalize them as if level.\n- Reconciliation: 131.7% (±1pp) — the stream is finite and declining, so a perpetuity formula overstates it.",
+    "ru": "- Correct: PV = Σ (6.0 − 0.5(t−1)) / 1.1^t, t=1..12 = **$25.9M**.\n- Naive $60.0M завышает на **131.7%** (база — ПОКАЗАННЫЕ $25.9M по [5]; от exact 25.9315 было бы 131.4% — канон считается от показанной версии).\n- Драйвер: перпетуитет предполагает вечный ПЛОСКИЙ поток; здесь поток конечен И падает — обе поправки режут value в одну сторону. Прикидка-знак (mental-math слой): даже недисконтированная сумма потоков = 12×3.25 = $39M < 60 → перпетуитет отпадает до всякого DCF."
+   },
+   "provoked": {
+    "en": "a declining finite stream is valued as a level perpetuity.",
+    "ru": "1/r применён к затухающему конечному потоку."
+   }
+  },
+  {
+   "id": "CM-007",
+   "title": "Phase Gate",
+   "difficulty": "Medium",
+   "type": "Trap",
+   "focus": "F15(b) вероятности перемножаются",
+   "time": "5 min",
+   "render": {
+    "exhibits": [
+     "table"
+    ],
+    "interactive": [
+     "input_number"
+    ]
+   },
+   "prompt": "Doserith decides whether to fund a drug candidate. Phase II costs $30M now, success probability 40%. If Phase II succeeds, Phase III costs $50M, success probability 50%. If launched, NPV of payoffs is $500M. A board member: \"Average success is 45%, so EV = 0.45 × 500 − 80 = $145M. Easy yes.\" Give the correct EV.",
+   "exhibit": {
+    "type": "table",
+    "header": [
+     "Stage",
+     "Cost, $M",
+     "P(success)",
+     "Payoff if passed"
+    ],
+    "rows": [
+     [
+      "Phase II",
+      "30 (paid now)",
+      "40%",
+      "→ Phase III"
+     ],
+     [
+      "Phase III",
+      "50 (paid only if Ph.II ok)",
+      "50%",
+      "$500M NPV"
+     ]
+    ]
+   },
+   "step_prompts": [
+    "Correct EV, $M",
+    "Verdict on the claim"
+   ],
+   "steps": [
+    {
+     "prompt": "Correct EV, $M",
+     "kind": "number",
+     "answer": "50",
+     "tolerance": "exact"
+    },
+    {
+     "prompt": "Verdict on the claim",
+     "kind": "text",
+     "answer": "direction ok, +190% overstated",
+     "tolerance": "exact"
+    }
+   ],
+   "checklist": {
+    "en": "Credit if ALL: (1) P = 20% from multiplied stage probabilities; (2) conditional cost handled; (3) 50 exact; (4) overstatement vs the 50 base named, plus the risk.",
+    "ru": "(1) P(launch)=20%, tolerance: exact; (2) EV = $50M, tolerance: exact (обязательно с условным костом 0.4×50, не 145−…); (3) явно: направление верно, магнитуда завышена ~190%; (4) last mile — чем опасно завышение (порог решения)."
+   },
+   "reference": {
+    "en": "- Phase gate: the probabilities MULTIPLY across stages, and the cost is conditional. Expected cost = 30 + 0.4 × 50, with the go-probability P = 20% (0.5 × 0.4).\n- Correct expected value/cost = **50**. The naive read (adding or using max payoff) points the right direction but overstates by +190%.",
+    "ru": "- P(launch) = 0.40 × 0.50 = **20%** (стадии последовательны — вероятности перемножаются, не усредняются).\n- Косты тоже условные: Phase III платится только при успехе Phase II → E[cost] = 30 + 0.40×50 = $50M.\n- EV = 0.20×500 − 30 − 0.40×50 = 100 − 50 = **$50M**.\n- Направление у члена борда верное (фандить), но EV завышен на **190.0%** ($145M vs $50M; база — корректные $50M, [11]). Trap-overstate: цена ошибки — искажённые пороги для сделок/партнёрств (например, программу с EV −$20M «средний» метод тоже одобрит)."
+   },
+   "provoked": {
+    "en": "stage probabilities are added (or the max payoff used) instead of multiplied.",
+    "ru": "усреднение последовательных вероятностей + безусловный учёт условного коста."
+   }
+  },
+  {
+   "id": "CM-008",
+   "title": "Second Departure",
+   "difficulty": "Medium",
+   "type": "**Clean**",
+   "focus": "F17(c) clean-валидация",
+   "time": "6 min",
+   "render": {
+    "exhibits": [
+     "table"
+    ],
+    "interactive": [
+     "input_number",
+     "choice"
+    ]
+   },
+   "prompt": "Fareloft flies one daily departure on a regional route: 180 seats, average load factor 92% — near the practical ceiling. It considers adding a second daily departure. Expected load factor of the new flight: 68% (stimulation + shift from the first flight, already netted). Average fare $140; variable cost per departure $14,000. Your analyst concludes: \"Contribution positive — add the flight.\" Stress-test the conclusion: is there a hidden flaw?",
+   "exhibit": {
+    "type": "table",
+    "header": [
+     "Metric",
+     "Value"
+    ],
+    "rows": [
+     [
+      "Seats / departure",
+      "180"
+     ],
+     [
+      "Load factor, current avg / weekday / weekend",
+      "92.0% / 96% / 82%"
+     ],
+     [
+      "Expected LF of new flight (net of shift)",
+      "68%"
+     ],
+     [
+      "Avg fare / VC per departure",
+      "$140 / $14,000"
+     ]
+    ]
+   },
+   "step_prompts": [
+    "Contribution per departure and per year",
+    "Peak-vs-average check; hidden error yes/no"
+   ],
+   "steps": [
+    {
+     "prompt": "Contribution per departure and per year",
+     "kind": "text",
+     "answer": "3136; 1144640",
+     "tolerance": "exact"
+    },
+    {
+     "prompt": "Peak-vs-average check; hidden error yes/no",
+     "kind": "text",
+     "answer": "weekend +637; NO hidden error",
+     "tolerance": "exact"
+    }
+   ],
+   "checklist": {
+    "en": "Credit if ALL: (1) 3,136 and 1,144,640 reproduced; (2) weekend recomputed = +637 (exact); (3) conclusion \"consistent, no hidden error\" (clean case — do not invent a flip).",
+    "ru": "(1) contribution $3,136 и $1,144,640/год, tolerance: exact; (2) weekend-проверка проведена: $14,637 → +$637, tolerance: exact (расчёт цепочкой ×82/96 от точной выручки); (3) choice = «нет», с формулировкой «проверка сделана, разворота нет»; (4) НЕ выдумана несуществующая ошибка."
+   },
+   "reference": {
+    "en": "- CLEAN validation: reproduce the weekend figure from the exact revenue with the ×82/96 half-cent chain (Decimal, not floor): revenue $14,637.00 → **+$637** weekend uplift.\n- Intermediate totals 3,136 and 1,144,640 reconcile; there is NO hidden error — the numbers are internally consistent.",
+    "ru": "- Шаг 1. Revenue = 180 × 0.68 × 140 = $17,136; contribution = 17,136 − 14,000 = **+$3,136**/рейс; ×365 = **$1,144,640**/год.\n- Шаг 2. Соблазн — «средний LF скрывает провальные выходные». Проверяем: масштабируем LF нового рейса отношением weekend/weekday = 82/96 → weekend-выручка = 17,136 × 82/96 = $14,637.00 (цепочка точная), contribution **+$637** — положителен и в худший день недели. Проверка ПРОВЕДЕНА и решение НЕ переворачивает: скрытой ошибки нет, вывод аналитика верен. Ответ choice: **нет**.\n- Навык clean-дрилла: сказать «я проверил peak-vs-average, разворота нет» — а не изобрести несуществующий bottleneck."
+   },
+   "provoked": {
+    "en": "a clean reconciliation is 'corrected' into a non-existent error.",
+    "ru": null
+   }
+  },
+  {
+   "id": "CM-009",
+   "title": "Discount Math",
+   "difficulty": "Easy",
+   "type": "Trap",
+   "focus": "F11(a) revenue vs contribution",
+   "time": "4 min",
+   "render": {
+    "exhibits": [
+     "table"
+    ],
+    "interactive": [
+     "input_number"
+    ]
+   },
+   "prompt": "Sudsford's detergent: price $5.00, variable cost $3.50, volume 100,000 units/mo. Marketing proposes a permanent 10% price cut, forecasting +15% volume: \"Revenue grows 3.5% — the discount pays for itself.\" Check.",
+   "exhibit": {
+    "type": "table",
+    "header": [
+     "Metric",
+     "Now",
+     "Proposed"
+    ],
+    "rows": [
+     [
+      "Price, $",
+      "5.00",
+      "4.50"
+     ],
+     [
+      "Volume, units/mo",
+      "100,000",
+      "115,000"
+     ],
+     [
+      "Variable cost, $/unit",
+      "3.50",
+      "3.50"
+     ]
+    ]
+   },
+   "step_prompts": [
+    "Contribution effect + breakeven volume"
+   ],
+   "steps": [
+    {
+     "prompt": "Contribution effect + breakeven volume",
+     "kind": "text",
+     "answer": "115000 (-23.3%); 150000 (+50%)",
+     "tolerance": "exact"
+    }
+   ],
+   "checklist": {
+    "en": "Credit if ALL: (1) 115,000 exact (revenue view); (2) 150,000 exact (contribution view); (3) the recommendation reasoned on contribution, not revenue.",
+    "ru": "(1) contribution $115,000 (−23.3%), tolerance: exact; (2) breakeven-объём 150,000 (+50%), tolerance: exact; (3) вывод: скидка НЕ окупается, порог назван."
+   },
+   "reference": {
+    "en": "- Discount math on the right base: revenue effect = **115,000 (−23.3%)**, but contribution effect = **150,000 (+50%)** once you net against variable cost.\n- Decide on contribution, not on revenue — the discount that looks bad on revenue is good on contribution.",
+    "ru": "- Revenue: 500,000 → 517,500 (+3.5%) — заявление верно по выручке.\n- Contribution: (5.00−3.50)×100k = $150,000 → (4.50−3.50)×115k = **$115,000** (**−23.3%**). Маржа/unit сжалась 1.50→1.00 (−33%), рост объёма +15% и близко не компенсирует.\n- Breakeven-объём: 150,000/1.00 = **150,000 units = +50%** к текущему. Порог эластичности, а не «+15%».\n- Last mile: скидку отклонить, либо искать +50% объёма из реального драйвера (дистрибуция, а не цена)."
+   },
+   "provoked": {
+    "en": "the discount is judged on revenue change instead of contribution.",
+    "ru": "«окупаемость» скидки проверена по revenue вместо contribution."
+   }
+  },
+  {
+   "id": "CM-010",
+   "title": "Synergy Haircut",
+   "difficulty": "Hard",
+   "type": "Trap",
+   "focus": "F07(a)+(c) gross vs net",
+   "time": "8 min",
+   "render": {
+    "exhibits": [
+     "table"
+    ],
+    "interactive": [
+     "multi_step_reveal"
+    ]
+   },
+   "prompt": "Kredanto acquires a regional consumer-lending book: $150M annual revenue, 40% contribution margin. The deal deck claims cost synergies of $24M/year and values them at 5 years undiscounted: \"$120M of synergy value.\" Diligence adds two facts: (1) integration one-offs of $36M; (2) 10% of acquired customers historically leave after migration. Re-value the synergies.",
+   "exhibit": {
+    "type": "table",
+    "header": [
+     "Item",
+     "Value"
+    ],
+    "rows": [
+     [
+      "Acquired revenue base",
+      "$150M/yr"
+     ],
+     [
+      "Contribution margin",
+      "40%"
+     ],
+     [
+      "Gross cost synergy",
+      "$24M/yr"
+     ],
+     [
+      "Post-migration attrition",
+      "10% of base"
+     ],
+     [
+      "Integration one-offs",
+      "$36M"
+     ]
+    ]
+   },
+   "step_prompts": [
+    "Deck's number",
+    "Attrition correction",
+    "Final value + % overstatement"
+   ],
+   "steps": [
+    {
+     "prompt": "Deck's number",
+     "kind": "number",
+     "answer": "120",
+     "tolerance": "exact"
+    },
+    {
+     "prompt": "Attrition correction",
+     "kind": "text",
+     "answer": "lost 6.0; net 18.0",
+     "tolerance": "exact"
+    },
+    {
+     "prompt": "Final value + % overstatement",
+     "kind": "text",
+     "answer": "54; 122.2%",
+     "tolerance": "exact"
+    }
+   ],
+   "checklist": {
+    "en": "Credit if ALL: (1) 120 gross reproduced; (2) valued via contribution not revenue (lost 6.0 / net 18.0); (3) 54 exact with base = 54; premium implication named.",
+    "ru": "(1) attrition-эффект $6.0M/год через contribution (не через revenue 15M), tolerance: exact; (2) net $18.0M/год, tolerance: exact; (3) итог $54M и завышение 122.2% от базы $54M, tolerance: exact; (4) last mile: связь с premium/ценой сделки."
+   },
+   "reference": {
+    "en": "- Synergy at gross vs net: the headline synergy is 120, but value it through CONTRIBUTION, not revenue.\n- Lost 6.0; net 18.0 after the haircut — the gross figure overstates.\n- Correct net synergy = **54**, a **122.2%** implied premium — base the ratio on 54, not on the gross headline.",
+    "ru": "- Шаг 1. Deck: 24 × 5 = $120M. Честное первое чтение — синергия «сама по себе».\n- Шаг 2. Attrition режет базу: потерянный contribution = 150 × 10% × 40% = **$6.0M/год**. Net recurring = 24 − 6 = **$18.0M/год**. (Связка: обе поправки — «gross ≠ net», но разной природы: recurring vs one-off.)\n- Шаг 3. Value = 18 × 5 − 36 = **$54M**. Deck завышает на **122.2%** (база — корректные $54M, [11]). Last mile: переплата премии, откалиброванной на $120M, съест сделку — max premium должен строиться от $54M.\n\n**Провоцируемые ошибки (2, связанные):** синергия без attrition-эффекта на базу; recurring-поток без one-off затрат."
+   },
+   "provoked": {
+    "en": "gross synergy is booked without the contribution haircut.",
+    "ru": null
+   }
+  }
+ ]
+}
