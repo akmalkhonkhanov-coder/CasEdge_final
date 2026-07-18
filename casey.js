@@ -28,7 +28,7 @@ window.caseyCalc = (function(){
 
 
 (function(){
-  var CSS = `#screen-casey { position:relative; height:100vh; height:100dvh; overflow:hidden; background:var(--surface-dark); display:flex; flex-direction:column; }
+  var CSS = `#screen-casey { position:fixed; inset:0; z-index:50; height:100vh; height:100dvh; overflow:hidden; background:var(--surface-dark); display:none; flex-direction:column; }
 #screen-casey.active { display:flex; }
 #cyFeed { flex:1; overflow-y:auto; padding:20px 16px 28px; }
 .cy-wrap { max-width:760px; margin:0 auto; }

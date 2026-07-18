@@ -7,7 +7,7 @@
   "use strict";
 
   /* ---------- inject CSS + screen ---------- */
-  var CSS = `#screen-cmdrill { position:relative; height:100vh; height:100dvh; overflow:hidden; background:var(--surface-dark); display:flex; flex-direction:column; }
+  var CSS = `#screen-cmdrill { position:fixed; inset:0; z-index:50; height:100vh; height:100dvh; overflow:hidden; background:var(--surface-dark); display:none; flex-direction:column; }
 #screen-cmdrill.active { display:flex; }
 #cmFeed { flex:1; overflow-y:auto; padding:22px 16px 28px; }
 .cm-wrap { max-width:760px; margin:0 auto; }
