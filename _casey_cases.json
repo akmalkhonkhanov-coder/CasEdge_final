@@ -8075,6 +8075,28 @@
      "title": "Loss-making line economics",
      "blocks": [
       {
+       "type": "stacked_bar",
+       "name": "Combined ratio vs 100% breakeven",
+       "labels": [
+        "Line"
+       ],
+       "series": [
+        {
+         "name": "Loss ratio",
+         "values": [
+          104
+         ]
+        },
+        {
+         "name": "Expense ratio",
+         "values": [
+          24
+         ]
+        }
+       ],
+       "note": "Stacks to 128% combined ratio, above 100% underwriting breakeven"
+      },
+      {
        "type": "table",
        "name": "Line",
        "rows": [
@@ -8529,6 +8551,26 @@
      "title": "Capacity tiers (wafers started)",
      "blocks": [
       {
+       "type": "bar",
+       "name": "Yield % by production tier",
+       "labels": [
+        "Base",
+        "Stretch",
+        "Max"
+       ],
+       "series": [
+        {
+         "name": "Yield %",
+         "values": [
+          90,
+          75,
+          55
+         ]
+        }
+       ],
+       "note": "Yield falls as volume is pushed from Base to Max"
+      },
+      {
        "type": "table",
        "name": "Tiers (good wafer sells $8,000)",
        "rows": [
@@ -8708,6 +8750,24 @@
      "reveal": "auto",
      "title": "New assortment economics",
      "blocks": [
+      {
+       "type": "bar",
+       "name": "Full price vs unit cost",
+       "labels": [
+        "Full price",
+        "Cost/unit"
+       ],
+       "series": [
+        {
+         "name": "$/unit",
+         "values": [
+          60,
+          25
+         ]
+        }
+       ],
+       "note": "Gross margin gap per unit at full price"
+      },
       {
        "type": "table",
        "name": "Assortment",
@@ -8917,6 +8977,24 @@
      "reveal": "auto",
      "title": "Route consolidation economics",
      "blocks": [
+      {
+       "type": "bar",
+       "name": "Route cost: standalone vs consolidated",
+       "labels": [
+        "Standalone route",
+        "Consolidated route"
+       ],
+       "series": [
+        {
+         "name": "Cost ($)",
+         "values": [
+          480000,
+          620000
+         ]
+        }
+       ],
+       "note": "Consolidation cost vs two standalone routes"
+      },
       {
        "type": "table",
        "name": "Routes",
@@ -9355,6 +9433,24 @@
      "title": "Seed variety yields",
      "blocks": [
       {
+       "type": "bar",
+       "name": "Yield by corn variety",
+       "labels": [
+        "A (high-yield)",
+        "B (resistant)"
+       ],
+       "series": [
+        {
+         "name": "bu/acre",
+         "values": [
+          200,
+          175
+         ]
+        }
+       ],
+       "note": "Variety A yields more before disease risk"
+      },
+      {
        "type": "table",
        "name": "Varieties (corn $6/bu, 50,000 acres)",
        "rows": [
@@ -9387,6 +9483,31 @@
      "fallback": "hint_L1 then reveal",
      "title": "Disease risk",
      "blocks": [
+      {
+       "type": "bar",
+       "name": "Disease risk profile by variety",
+       "labels": [
+        "A (high-yield)",
+        "B (resistant)"
+       ],
+       "series": [
+        {
+         "name": "Disease-year chance",
+         "values": [
+          30,
+          5
+         ]
+        },
+        {
+         "name": "Yield loss in disease year",
+         "values": [
+          50,
+          20
+         ]
+        }
+       ],
+       "note": "Both metrics in % across the two varieties"
+      },
       {
        "type": "table",
        "name": "Risk",
@@ -9582,6 +9703,34 @@
      "reveal": "auto",
      "title": "Old inventory by model",
      "blocks": [
+      {
+       "type": "bar",
+       "name": "Clear vs Hold by tier",
+       "labels": [
+        "Common",
+        "Mid",
+        "Scarce"
+       ],
+       "series": [
+        {
+         "name": "Clear now",
+         "values": [
+          600,
+          1800,
+          5000
+         ]
+        },
+        {
+         "name": "Hold",
+         "values": [
+          500,
+          2600,
+          11000
+         ]
+        }
+       ],
+       "note": "Per-unit value tradeoff by inventory tier"
+      },
       {
        "type": "table",
        "name": "Inventory",
@@ -9969,6 +10118,24 @@
      "title": "Budget-hotel booking economics",
      "blocks": [
       {
+       "type": "bar",
+       "name": "Take vs servicing cost",
+       "labels": [
+        "Take/booking",
+        "Servicing cost/booking"
+       ],
+       "series": [
+        {
+         "name": "$ per booking",
+         "values": [
+          8,
+          5
+         ]
+        }
+       ],
+       "note": "Per-booking economics"
+      },
+      {
        "type": "table",
        "name": "Budget",
        "rows": [
@@ -10190,6 +10357,24 @@
      "reveal": "auto",
      "title": "LBO economics",
      "blocks": [
+      {
+       "type": "bar",
+       "name": "Entry vs exit multiple",
+       "labels": [
+        "Entry",
+        "Exit"
+       ],
+       "series": [
+        {
+         "name": "EBITDA multiple (x)",
+         "values": [
+          8,
+          10
+         ]
+        }
+       ],
+       "note": "Multiple expansion"
+      },
       {
        "type": "table",
        "name": "LBO",
@@ -10421,6 +10606,24 @@
      "title": "Value menu economics",
      "blocks": [
       {
+       "type": "bar",
+       "name": "Value vs premium margin",
+       "labels": [
+        "Value item",
+        "Premium item"
+       ],
+       "series": [
+        {
+         "name": "Margin per item ($)",
+         "values": [
+          1.5,
+          4.0
+         ]
+        }
+       ],
+       "note": "Per-item margin by segment"
+      },
+      {
        "type": "table",
        "name": "Value menu",
        "rows": [
@@ -10640,6 +10843,26 @@
      "reveal": "auto",
      "title": "Device and consumable economics",
      "blocks": [
+      {
+       "type": "bar",
+       "name": "Device price vs cost",
+       "labels": [
+        "Price (high-margin)",
+        "Device cost",
+        "Price (razor/blade)"
+       ],
+       "series": [
+        {
+         "name": "$ per device",
+         "values": [
+          20000,
+          14000,
+          15000
+         ]
+        }
+       ],
+       "note": "Pricing models vs unit cost"
+      },
       {
        "type": "table",
        "name": "Device",
@@ -11903,6 +12126,24 @@
      "title": "Uniform pricing",
      "blocks": [
       {
+       "type": "bar",
+       "name": "Peak vs Off-Peak Visitors",
+       "labels": [
+        "Peak",
+        "Off-peak"
+       ],
+       "series": [
+        {
+         "name": "Visitors/yr",
+         "values": [
+          60000,
+          140000
+         ]
+        }
+       ],
+       "note": "Same unit visitors/yr — peak vs off-peak split"
+      },
+      {
        "type": "table",
        "name": "Uniform",
        "rows": [
@@ -11936,6 +12177,24 @@
      "fallback": "hint_L1 then reveal",
      "title": "Segmented-pricing response",
      "blocks": [
+      {
+       "type": "bar",
+       "name": "Volume Change by Segment",
+       "labels": [
+        "Peak $100",
+        "Off-peak $60"
+       ],
+       "series": [
+        {
+         "name": "Volume change %",
+         "values": [
+          -5,
+          40
+         ]
+        }
+       ],
+       "note": "Price-change elasticity tradeoff, same unit % volume change"
+      },
       {
        "type": "table",
        "name": "Segmented",
