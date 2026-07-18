@@ -472,7 +472,16 @@ window.caseyCalc = (function(){
     say('me', transcript); izBusy();
     var q = S.flat[S.idx];
     gradeStep(q.gid, { transcript: transcript }).then(function(j){
-      if (!j || j._err || !j.criteria) j = { criteria:{}, score:0, verdict:'weak', coaching:'Could not grade — please try again.' };
+      // Technical failure (timeout / grader unreachable) — neutral, does NOT
+      // count against the run; let the candidate submit the same recommendation
+      // again. A real grade always carries .criteria.
+      if (!j || j._err || j.graded === false || !j.criteria){
+        izHide();
+        feedNode('<div class="cy-fb no">⚠ Couldn’t grade that — a technical hiccup, not your answer. It doesn’t count. Please submit again.</div>');
+        renderVoice(q);
+        var ta2 = E('cyVoiceTxt'); if (ta2) ta2.value = transcript;
+        return;
+      }
       renderGrade(j, q);
     });
   }

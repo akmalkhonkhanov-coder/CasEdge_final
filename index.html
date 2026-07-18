@@ -1842,8 +1842,8 @@
         <div class="cl-reveal cl-tap" onclick="handleBeginSession()" role="button" tabindex="0" style="background:var(--bg-canvas); border:1px solid var(--border-hairline); border-radius:var(--radius-lg); padding:32px; display:flex; flex-direction:column; animation-delay:.24s;">
           <div class="cas-title-md" style="margin-bottom:8px;">Game Pass</div>
           <div class="cas-display-sm" style="margin-bottom:6px; font-family:var(--font-sans); font-weight:600;">$45<span class="cas-body-sm" style="color:var(--text-muted); font-family:var(--font-sans);" data-i18n="l2.price.gamepass.period"> / 2 мес</span></div>
-          <p class="cas-body-sm" style="color:var(--text-muted); margin:0 0 24px;" data-i18n="l2.price.gamepass.desc1">Solve Game + Chat Game, без ограничений</p>
-          <p class="cas-body-sm" style="color:var(--text-body); margin:0 0 28px; flex:1;" data-i18n="l2.price.gamepass.desc2">Неограниченные прогоны и живой AI-интервьюер с голосовым ответом.</p>
+          <p class="cas-body-sm" style="color:var(--text-muted); margin:0 0 24px;" data-i18n="l2.price.gamepass.desc1">Solve Game + Chat Game, 75 игр</p>
+          <p class="cas-body-sm" style="color:var(--text-body); margin:0 0 28px; flex:1;" data-i18n="l2.price.gamepass.desc2">До 75 прогонов за 2 месяца и живой AI-интервьюер с голосовым ответом.</p>
           <button class="ds-btn ds-btn-md ds-btn-secondary" style="width:100%;" onclick="event.stopPropagation();handleBeginSession()" data-i18n="l2.price.cta">Выбрать</button>
         </div>
 
@@ -2159,12 +2159,12 @@
       <div class="price-card">
         <div class="price-card-name" data-i18n="pricing.games.name">Game Pass</div>
         <div class="price-card-amount"><sup>$</sup>45</div>
-        <div class="price-card-period" data-i18n="pricing.games.period">2 months, up to 20 sessions</div>
+        <div class="price-card-period" data-i18n="pricing.games.period">2 months, up to 75 games</div>
         <ul class="price-card-features">
           <li data-i18n="pricing.games.f1">McKinsey Solve Game - full simulation</li>
           <li data-i18n="pricing.games.f2">BCG Chat Game - full simulation</li>
           <li data-i18n="pricing.games.f3">AI-graded open answers + full solutions</li>
-          <li data-i18n="pricing.games.f4">Up to 20 sessions over 2 months</li>
+          <li data-i18n="pricing.games.f4">Up to 75 games over 2 months</li>
         </ul>
         <button class="btn btn-secondary" onclick="handleBeginSession()" data-i18n="pricing.cta">Get started</button>
       </div>
@@ -3169,7 +3169,7 @@ const I18N = {
     'l2.price.drills.desc1': '30 drills of any of the 7 types', 'l2.price.drills.desc2': 'Targeted practice before a specific interview stage.',
     'l2.price.starter.desc1': 'Starter case library + all drills', 'l2.price.starter.desc2': 'A good start if you\u2019re just beginning to prepare.',
     'l2.price.full.desc1': 'Full case library + all drills', 'l2.price.full.desc2': 'Full coverage of real business-school cases.',
-    'l2.price.gamepass.period': ' / 2 mo', 'l2.price.gamepass.desc1': 'Solve Game + Chat Game, unlimited', 'l2.price.gamepass.desc2': 'Unlimited runs and a live AI interviewer with voice answers.',
+    'l2.price.gamepass.period': ' / 2 mo', 'l2.price.gamepass.desc1': 'Solve Game + Chat Game, 75 games', 'l2.price.gamepass.desc2': 'Up to 75 runs over 2 months and a live AI interviewer with voice answers.',
     'l2.faq.title': 'Frequently asked questions',
     'l2.faq.q1': 'How accurately does the McKinsey Solve Game format match the real thing?',
     'l2.faq.a1': 'We built the McKinsey Solve format into the product: the interface, timing, and logic of the Research Journal and combo charts work the same way as the real assessment \u2014 including the screen structure.',
@@ -3397,11 +3397,11 @@ const I18N = {
     'pricing.tier2.f3': 'AI feedback on every attempt',
     'pricing.tier2.f4': 'RU / EN interface & feedback',
     'pricing.games.name': 'Game Pass',
-    'pricing.games.period': '2 months, up to 20 sessions',
+    'pricing.games.period': '2 months, up to 75 games',
     'pricing.games.f1': 'McKinsey Solve Game - full simulation',
     'pricing.games.f2': 'BCG Chat Game - full simulation',
     'pricing.games.f3': 'AI-graded open answers + full solutions',
-    'pricing.games.f4': 'Up to 20 sessions over 2 months',
+    'pricing.games.f4': 'Up to 75 games over 2 months',
     'pricing.note': 'Prices shown in USD. Payments are processed securely by Paddle, our merchant of record. See our <a href="#refund" style="color:inherit;text-decoration:underline;">Refund Policy</a> for cancellation details.',
     'auth.err.emailFirst': 'Enter your email above first, then tap “Forgot password?”.',
     'auth.err.loading': 'Auth is still loading, try again in a second.',
@@ -3450,7 +3450,7 @@ const I18N = {
     'l2.price.drills.desc1': '30 дриллов любого из 7 типов', 'l2.price.drills.desc2': 'Точечная тренировка перед конкретным этапом собеседования.',
     'l2.price.starter.desc1': 'Базовая библиотека кейсов + все дриллы', 'l2.price.starter.desc2': 'Хороший старт, если только начинаешь готовиться.',
     'l2.price.full.desc1': 'Вся библиотека кейсов + все дриллы', 'l2.price.full.desc2': 'Полный охват реальных бизнес-школьных кейсов.',
-    'l2.price.gamepass.period': ' / 2 мес', 'l2.price.gamepass.desc1': 'Solve Game + Chat Game, без ограничений', 'l2.price.gamepass.desc2': 'Неограниченные прогоны и живой AI-интервьюер с голосовым ответом.',
+    'l2.price.gamepass.period': ' / 2 мес', 'l2.price.gamepass.desc1': 'Solve Game + Chat Game, 75 игр', 'l2.price.gamepass.desc2': 'До 75 прогонов за 2 месяца и живой AI-интервьюер с голосовым ответом.',
     'l2.faq.title': 'Частые вопросы',
     'l2.faq.q1': 'Насколько точно повторяется формат McKinsey Solve Game?',
     'l2.faq.a1': 'Мы полностью воплотили формат McKinsey Solve у себя: интерфейс, тайминг и логика Research Journal и комбо-графиков работают так же, как на настоящем ассессменте — включая структуру экрана.',
@@ -3678,11 +3678,11 @@ const I18N = {
     'pricing.tier2.f3': 'AI-фидбек на каждую попытку',
     'pricing.tier2.f4': 'RU / EN интерфейс и фидбек',
     'pricing.games.name': 'Game Pass',
-    'pricing.games.period': '2 месяца, до 20 сессий',
+    'pricing.games.period': '2 месяца, до 75 игр',
     'pricing.games.f1': 'McKinsey Solve Game — полная симуляция',
     'pricing.games.f2': 'BCG Chat Game — полная симуляция',
     'pricing.games.f3': 'AI-грейдинг открытых ответов + полные решения',
-    'pricing.games.f4': 'До 20 сессий за 2 месяца',
+    'pricing.games.f4': 'До 75 игр за 2 месяца',
     'pricing.note': 'Цены указаны в USD. Платежи обрабатывает Paddle, наш продавец по договору (merchant of record). Подробности об отмене — в нашей <a href="#refund" style="color:inherit;text-decoration:underline;">Политике возврата средств</a>.',
     'auth.err.emailFirst': 'Сначала введи email выше, потом нажми «Забыли пароль?».',
     'auth.err.loading': 'Авторизация ещё загружается, попробуй через секунду.',
