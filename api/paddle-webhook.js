@@ -38,7 +38,7 @@ const PRICE_PLAN_MAP = {
   'pri_01kx2wjymz8kv1y8azrf7st8zz': { plan: 'drills',   casesCap: 0,  drillsCap: 30, gamesCap: 0,  periodDays: null }, // Drills Only $10 - 30 drills, no expiry date
   'pri_01kx2whmgwkjaz0bqcn6g2415h': { plan: 'starter',  casesCap: 15, drillsCap: 20, gamesCap: 0,  periodDays: null }, // Starter Library $14 - 15 cases + 20 drills, no expiry date
   'pri_01kx2wdq460z7084wnmtebk3w3': { plan: 'full',     casesCap: 20, drillsCap: 30, gamesCap: 0,  periodDays: null }, // Full Library $18 - 20 cases + 30 drills, no expiry date
-  'pri_01kx2wb5fb6r2gkkvsfk58dkd6': { plan: 'gamepass', casesCap: 0,  drillsCap: 0,  gamesCap: 20, periodDays: 60 },   // Game Pass $45 - 2-month window, up to 20 game sessions
+  'pri_01kx2wb5fb6r2gkkvsfk58dkd6': { plan: 'gamepass', casesCap: 0,  drillsCap: 0,  gamesCap: 75, periodDays: 60 },   // Game Pass $45 - 2-month window, up to 75 game sessions
 };
 
 function readRawBody(req) {

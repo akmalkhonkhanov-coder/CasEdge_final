@@ -106,14 +106,17 @@ async function graderJSON(system, userText, maxTokens) {
     body: JSON.stringify({ model: GRADER_MODEL, max_tokens: mt, system: [{ type: 'text', text: system }], messages: [{ role: 'user', content: userText }] })
   }, timeoutMs, 0);
   const textOf = dd => (dd && Array.isArray(dd.content)) ? dd.content.filter(b => b && b.type === 'text' && typeof b.text === 'string').map(b => b.text).join('\n') : '';
+  const parse = t => { try { const m = String(t || '').match(/\{[\s\S]*\}/); return m ? JSON.parse(m[0]) : null; } catch (e) { return null; } };
   let resp = await call(maxTokens, 45 * 1000);
   let data = await resp.json();
-  let text = textOf(data);
+  let parsed = parse(textOf(data));
+  // Retry once inside the deadline on truncation OR unparseable output.
+  const needsRetry = !parsed || (data && data.stop_reason === 'max_tokens');
   const timeLeft = BUDGET_MS - (Date.now() - T0);
-  if ((!text || (data && data.stop_reason === 'max_tokens')) && timeLeft > 12 * 1000) {
-    try { const r2 = await call(Math.min(maxTokens * 2, 2000), timeLeft - 2000); if (r2.status === 200) { const d2 = await r2.json(); if (textOf(d2)) { data = d2; text = textOf(d2); } } } catch (e) { /* keep */ }
+  if (needsRetry && timeLeft > 12 * 1000) {
+    try { const r2 = await call(Math.min(maxTokens * 2, 2000), timeLeft - 2000); if (r2.status === 200) { const d2 = await r2.json(); const p2 = parse(textOf(d2)); if (p2) parsed = p2; } } catch (e) { /* keep */ }
   }
-  try { const m = text.match(/\{[\s\S]*\}/); return m ? JSON.parse(m[0]) : null; } catch (e) { return null; }
+  return parsed;
 }
 
 async function gradeDrill(d, answer) {
