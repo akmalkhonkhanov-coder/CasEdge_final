@@ -10,6 +10,10 @@
     "api/casey.js": {
       "includeFiles": "api/_casey_cases.json",
       "maxDuration": 60
+    },
+    "api/drills.js": {
+      "includeFiles": "api/_drills_cm.json",
+      "maxDuration": 60
     }
   },
   "headers": [

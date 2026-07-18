@@ -2942,6 +2942,7 @@ Evaluate each rep against STAR (Situation, Task, Action, Result): brief context 
 function startDrill() {
   if (!state.drillType) return;
   if (!requireAuth()) return;
+  if (state.drillType === 'Case Math' && window.CaseMathDrills) { return window.CaseMathDrills.open(); }
   brGate('drill', _startDrillReal);
 }
 async function _startDrillReal() {
@@ -8177,4 +8178,5 @@ document.addEventListener('keydown', e => {
 
 
 <script src="/casey.js"></script>
+<script src="/drills.js"></script>
 </body></html>
