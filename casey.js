@@ -1,340 +1,540 @@
-// CasEdge — Casey Simulator server endpoint. Owns the case library AND all
-// grading for the BCG Casey game, so answer keys never reach the browser.
-//
-// Mirrors api/claude.js / api/case-session.js security: locked CORS, Supabase
-// bearer verification, shared per-user rate limit, body limits, upstream
-// timeout + no error leakage. The library (_casey_cases.json) and every answer
-// key (option.correct, answer, validation, answer_explain, model_answer,
-// trigger_phrases, rubrics) live ONLY here. The client receives sanitized cases
-// (prompts, option TEXT, exhibits — no keys) and, per graded step, a verdict.
-//
-// Actions:
-//   list   → [{id,title,meta_tag}]                    (picker; no spoilers)
-//   case   → {id,title,meta_tag,scenario,exhibits,steps:[flattened+sanitized]}
-//   grade  → {gid, payload} graded server-side → verdict (+ post-answer explain)
+/* CasEdge — Casey Simulator (BCG). Self-contained, self-injecting. */
+/* Uses the app theme variables so it follows the single app theme.   */
+/* Thin client: the case library, every answer key, and all grading live server-side
+   in /api/casey. The browser only ever receives sanitized cases (no keys) and,
+   per graded step, a verdict. English throughout. */
 
-const CASES_DATA = require('./_casey_cases.json');
+window.caseyCalc = (function(){
+  var expr = '';
+  function disp(){ var el=document.getElementById('cyCalcDisp'); if(el) el.value = expr || '0'; }
+  function press(k){
+    if (k==='C'){ expr=''; }
+    else if (k==='DEL'){ expr = expr==='Error' ? '' : expr.slice(0,-1); }
+    else if (k==='='){
+      try {
+        var s = expr.replace(/×/g,'*').replace(/÷/g,'/').replace(/%/g,'/100').replace(/[^0-9+\-*/.() ]/g,'');
+        if (!s){ return; }
+        var r = Function('"use strict";return ('+s+')')();
+        if (r===Infinity || r===-Infinity || (typeof r==='number' && isNaN(r))) { expr='Error'; }
+        else { expr = String(Math.round((r + Number.EPSILON)*1e6)/1e6); }
+      } catch(e){ expr='Error'; }
+    }
+    else { if (expr==='Error') expr=''; expr += k; }
+    disp();
+  }
+  function toggle(){ var el=document.getElementById('cyCalc'); if(!el) return; el.style.display = (el.style.display==='none'||!el.style.display) ? 'block' : 'none'; if(el.style.display==='block') disp(); }
+  return { press:press, toggle:toggle };
+})();
 
-const FALLBACK_ORIGIN = 'https://cas-edge-final.vercel.app';
-const GRADER_MODEL = 'claude-sonnet-5';
-const MAX_BODY_BYTES = 200 * 1024;
-const RATE_LIMIT = 40;                 // slightly higher: a case has many graded steps
-const RATE_WINDOW_MS = 60 * 1000;
-const UPSTREAM_TIMEOUT_MS = 50 * 1000;
-const AUTH_TIMEOUT_MS = 8 * 1000;
 
-/* ───────────────────────── voice grader (server-side) ─────────────────────── */
-const CASEY_VOICE_SYSTEM = `You are a strict but fair BCG case-interview examiner. You are given the TRANSCRIPT of a candidate's spoken final recommendation (speech-to-text, so it WILL contain recognition errors: numbers as words, run-together words, "fifty five" for 55, missing punctuation) and a case_id. Grade the transcript against this case's rubric on 4 criteria. Each criterion is strictly pass/fail. Return ONLY JSON.
+(function(){
+  var CSS = `#screen-casey { position:fixed; inset:0; z-index:50; height:100vh; height:100dvh; overflow:hidden; background:var(--surface-dark); display:none; flex-direction:column; }
+#screen-casey.active { display:flex; }
+#cyFeed { flex:1; overflow-y:auto; padding:20px 16px 28px; }
+.cy-wrap { max-width:760px; margin:0 auto; }
+#cyInputZone { border-top:1px solid var(--sv-line, rgba(255,255,255,.08)); background:var(--surface-dark-elevated,#12201d); padding:14px 16px; }
+.cy-iz-inner { max-width:760px; margin:0 auto; }
+/* chat bubbles */
+.cy-msg { display:flex; gap:11px; margin:0 0 16px; align-items:flex-start; }
+.cy-av { width:30px; height:30px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; }
+.cy-av.ai { background:rgba(93,184,166,.14); color:var(--coral,#5db8a6); font-family:var(--font-display,inherit); }
+.cy-av.me { background:rgba(255,255,255,.07); color:var(--on-dark,#eaf2f0); }
+.cy-bbl { background:var(--surface-dark-elevated,#16241f); border:1px solid var(--sv-line,rgba(255,255,255,.07)); border-radius:4px 14px 14px 14px; padding:11px 15px; color:var(--on-dark,#eaf2f0); font-size:14.5px; line-height:1.6; max-width:calc(100% - 44px); }
+.cy-msg.me .cy-bbl { background:rgba(93,184,166,.10); border-color:rgba(93,184,166,.22); border-radius:14px 4px 14px 14px; }
+.cy-msg.me { flex-direction:row-reverse; }
+.cy-bbl p { margin:0 0 7px; } .cy-bbl p:last-child { margin:0; }
+.cy-bbl b { color:var(--ink,#1f2937); } .cy-bbl code { background:rgba(255,255,255,.08); padding:1px 5px; border-radius:4px; font-size:.92em; }
+/* exhibit card */
+.cy-ex { background:var(--surface-dark-elevated,#16241f); border:1px solid var(--sv-line,rgba(255,255,255,.09)); border-radius:12px; padding:16px 16px 14px; margin:0 0 16px; }
+.cy-ex-tag { display:inline-block; font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--coral,#5db8a6); background:rgba(93,184,166,.10); padding:3px 9px; border-radius:999px; margin-bottom:9px; }
+.cy-ex-title { font-size:15px; font-weight:700; color:var(--ink,#1f2937); margin-bottom:12px; }
+.cy-ex-block { margin:0 0 16px; } .cy-ex-block:last-child { margin:0; }
+.cy-ex-bname { font-size:11.5px; font-weight:600; letter-spacing:.02em; text-transform:uppercase; color:var(--on-dark-soft,#9db3ad); margin:0 0 8px; }
+.cy-ex-note { font-size:12px; color:var(--on-dark-soft,#8fa39d); margin-top:10px; font-style:italic; }
+.cy-tbl { width:100%; border-collapse:collapse; font-size:13.5px; }
+.cy-tbl td { padding:7px 10px; border-bottom:1px solid var(--sv-line,rgba(255,255,255,.06)); color:var(--on-dark,#eaf2f0); }
+.cy-tbl tr:last-child td { border-bottom:none; }
+.cy-tbl td:last-child { text-align:right; font-variant-numeric:tabular-nums; font-weight:600; }
+.cy-tbl tr.cy-tbl-total td { border-top:1.5px solid rgba(93,184,166,.4); font-weight:700; color:var(--ink,#1f2937); }
+.cy-legend { display:flex; flex-wrap:wrap; gap:14px; margin-top:10px; font-size:11.5px; color:var(--on-dark-soft,#9db3ad); }
+.cy-legend i { display:inline-block; width:11px; height:11px; border-radius:3px; margin-right:5px; vertical-align:-1px; }
+.cy-chart svg { width:100%; height:auto; display:block; }
+/* input widgets */
+.cy-opt { display:flex; align-items:center; gap:10px; padding:11px 13px; margin:0 0 8px; border:1.5px solid var(--sv-line,rgba(255,255,255,.12)); border-radius:10px; cursor:pointer; color:var(--on-dark,#eaf2f0); font-size:14px; line-height:1.45; transition:border-color .12s, background .12s; }
+.cy-opt:hover { border-color:rgba(93,184,166,.5); }
+.cy-opt.sel { border-color:var(--coral,#5db8a6); background:rgba(93,184,166,.10); }
+.cy-opt .cy-box { width:20px; height:20px; border-radius:5px; border:1.6px solid rgba(255,255,255,.3); flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+.cy-opt.radio .cy-box { border-radius:50%; }
+.cy-opt.sel .cy-box { background:var(--coral,#5db8a6); border-color:var(--coral,#5db8a6); }
+.cy-opt.sel .cy-box svg { display:block; } .cy-opt .cy-box svg { display:none; width:12px; height:12px; }
+.cy-opt.correct { border-color:#5fbf6b; background:rgba(95,191,107,.10); }
+.cy-opt.wrong { border-color:#e87c7c; background:rgba(232,124,124,.10); }
+.cy-numrow { display:flex; gap:10px; align-items:center; }
+.cy-numin, .cy-txtin { flex:1; background:var(--surface-dark-soft,#efe9dd); border:1.5px solid var(--sv-line,rgba(255,255,255,.14)); border-radius:10px; padding:12px 14px; color:var(--ink,#1f2937); font-size:15px; font-family:inherit; }
+.cy-numin:focus, .cy-txtin:focus { outline:none; border-color:var(--coral,#5db8a6); }
+.cy-txtin { width:100%; min-height:74px; resize:vertical; line-height:1.5; }
+.cy-hint { font-size:12.5px; color:var(--on-dark-soft,#9db3ad); margin:8px 2px 0; }
+.cy-send { background:var(--coral,#5db8a6); color:#04201b; border:none; border-radius:10px; padding:12px 22px; font-size:14.5px; font-weight:700; cursor:pointer; }
+.cy-send:disabled { opacity:.45; cursor:default; }
+.cy-send.ghost { background:transparent; color:var(--coral,#5db8a6); border:1.5px solid rgba(93,184,166,.4); }
+.cy-fb { border-radius:10px; padding:11px 14px; margin:0 0 16px; font-size:13.5px; line-height:1.55; }
+.cy-fb.ok { background:rgba(95,191,107,.10); border:1px solid rgba(95,191,107,.35); color:#2f7d3a; }
+.cy-fb.no { background:rgba(232,124,124,.10); border:1px solid rgba(232,124,124,.35); color:#b23b3b; }
+.cy-fb b { color:var(--ink,#1f2937); }
+/* case picker */
+.cy-pick-h { text-align:center; margin:6px 0 22px; }
+.cy-pick-h .eyebrow { font-size:12px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--coral,#5db8a6); }
+.cy-pick-h h2 { font-size:24px; color:var(--ink,#1f2937); margin:8px 0 6px; }
+.cy-pick-h p { color:var(--on-dark-soft,#9db3ad); font-size:14px; margin:0; }
+.cy-card { background:var(--surface-dark-elevated,#16241f); border:1px solid var(--sv-line,rgba(255,255,255,.09)); border-radius:12px; padding:15px 16px; margin:0 0 10px; cursor:pointer; display:flex; align-items:center; gap:14px; transition:border-color .12s; }
+.cy-card:hover { border-color:rgba(93,184,166,.5); }
+.cy-card .cy-num { width:38px; height:38px; border-radius:9px; background:rgba(93,184,166,.13); color:var(--coral,#5db8a6); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:15px; flex-shrink:0; }
+.cy-card .cy-cn { font-size:15px; font-weight:700; color:var(--ink,#1f2937); }
+.cy-card .cy-cd { font-size:12.5px; color:var(--on-dark-soft,#9db3ad); margin-top:2px; }
+.cy-card.done { opacity:.62; }
+.cy-card .cy-badge { margin-left:auto; font-size:11px; font-weight:700; color:#5fbf6b; }
+/* voice */
+.cy-rec { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.cy-recbtn { background:#e87c7c; color:#2a0d0d; border:none; border-radius:999px; padding:12px 20px; font-weight:700; font-size:14px; cursor:pointer; display:flex; align-items:center; gap:8px; }
+.cy-recbtn.recording { background:#c94b4b; color:var(--ink,#1f2937); animation:cyPulse 1.1s infinite; }
+@keyframes cyPulse { 0%,100%{box-shadow:0 0 0 0 rgba(201,75,75,.5);} 50%{box-shadow:0 0 0 8px rgba(201,75,75,0);} }
+.cy-recstat { font-size:12.5px; color:var(--on-dark-soft,#9db3ad); }
+.cy-grade { background:var(--surface-dark-elevated,#16241f); border:1px solid var(--sv-line,rgba(255,255,255,.1)); border-radius:12px; padding:16px; margin:0 0 16px; }
+.cy-crit { display:flex; gap:9px; align-items:flex-start; margin:0 0 9px; font-size:13px; color:var(--on-dark,#eaf2f0); line-height:1.5; }
+.cy-crit .ic { width:19px; height:19px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; margin-top:1px; }
+.cy-crit.pass .ic { background:rgba(95,191,107,.2); color:#5fbf6b; } .cy-crit.fail .ic { background:rgba(232,124,124,.2); color:#e87c7c; }
+.cy-score { font-size:13px; font-weight:700; color:var(--ink,#1f2937); margin:4px 0 12px; }
 
-4 CRITERIA (each binary PASS/FAIL):
-1. c1_conclusion_first — an action recommendation in the first 1-2 sentences, with an action verb, in the CORRECT direction (rubric.conclusion / rubric.direction). FAIL if ANY of: (a) the direction is WRONG; (b) CONCLUSION-LAST — the recommendation appears only after a chain of facts/calculations (typically introduced by "so / therefore / thus / meaning / after weighing / conclude that…"), i.e. the first 1-2 sentences carry the reasoning rather than the action itself, even if the final conclusion is correct and well-supported; (c) NAIVE-HEADLINE — rubric.conclusion pins a corrected/honest magnitude and explicitly rejects a naive one (e.g. "…at the honest ~$11.4M, NOT $29M"), and the candidate asserts that rejected naive figure as the benefit — the required correction was not made, so the recommendation does not match rubric.conclusion.
-2. c2_anchor_number — an anchor figure IN THE ROLE of justification. >=2 numbers spoken, and >=1 from rubric.anchor_numbers, used to justify the recommendation (tied to the thesis: contribution / breakeven / EV-gap / direction). See Rule 1.
-3. c3_risks — >=1 internal AND >=1 external risk (from rubric.internal_examples / rubric.external_examples or a meaningful equivalent), tied to the recommendation; generic "market risks" with no tie-in do not count.
-4. c4_nextstep — >=1 concrete, preferably time-bound next step.
-score = number of PASSes (0-4). verdict: 4 -> strong, 3 -> ok, <=2 -> weak.
+#cyInputZone { border-top:1px solid var(--sv-line, rgba(31,41,55,.14)); background:var(--surface-dark-elevated,#fbf8f2); }
+.cy-calc-fab { position:absolute; right:18px; bottom:104px; z-index:30; width:48px; height:48px; border-radius:50%; background:var(--coral,#5db8a6); color:#04201b; border:none; cursor:pointer; box-shadow:0 6px 18px rgba(31,41,55,.18); display:flex; align-items:center; justify-content:center; }
+.cy-calc-fab:hover { filter:brightness(1.06); }
+.cy-calc { position:absolute; right:18px; bottom:162px; z-index:31; width:236px; background:var(--surface-dark-elevated,#fbf8f2); border:1px solid var(--sv-line, rgba(31,41,55,.14)); border-radius:14px; padding:12px; box-shadow:0 14px 40px rgba(31,41,55,.22); }
+.cy-calc-head { display:flex; justify-content:space-between; align-items:center; color:var(--ink,#1f2937); font-size:11px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; margin-bottom:9px; }
+.cy-calc-head button { background:none; border:none; color:var(--on-dark-soft,#5b6472); font-size:19px; line-height:1; cursor:pointer; }
+.cy-calc-disp { width:100%; background:var(--surface-dark-soft,#efe9dd); border:1px solid var(--sv-line, rgba(31,41,55,.14)); border-radius:9px; color:var(--ink,#1f2937); font-size:22px; text-align:right; padding:9px 11px; margin-bottom:10px; font-variant-numeric:tabular-nums; box-sizing:border-box; }
+.cy-calc-keys { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }
+.cy-calc-keys button { padding:12px 0; border:1px solid var(--sv-line-soft, rgba(31,41,55,.08)); border-radius:9px; background:var(--surface-dark-soft,#efe9dd); color:var(--ink,#1f2937); font-size:15px; font-weight:600; cursor:pointer; }
+.cy-calc-keys button:hover { background:var(--sv-fill-hover, rgba(31,41,55,.12)); }
+.cy-calc-keys button.op { background:rgba(93,184,166,.16); color:var(--coral,#5db8a6); border-color:transparent; }
+.cy-calc-keys button.eq { background:var(--coral,#5db8a6); color:#04201b; border-color:transparent; }
+.cy-calc-keys button.wide { grid-column:span 2; }
+`;
+  var SCREEN = `  <div class="bcg-topbar">
+    <button class="bcg-exit" onclick="Casey.exit()" title="Exit">&times;</button>
+    <div class="bcg-progress-wrap">
+      <div class="bcg-progress-track"><div class="bcg-progress-fill" id="cyProgFill" style="width:0%"></div></div>
+      <div class="bcg-progress-label" id="cyProgLabel">Test Completed 0%</div>
+    </div>
+    <div class="bcg-interviewer" title="Your interviewer">Casey</div>
+    <div class="bcg-timer" id="cyTimer">BCG &middot; Casey</div>
+  </div>
+  <div id="cyFeed"><div class="cy-wrap" id="cyWrap"></div></div>
+  <button class="cy-calc-fab" onclick="caseyCalc.toggle()" title="Calculator" aria-label="Calculator"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="8" y1="14" x2="8" y2="14"></line><line x1="12" y1="14" x2="12" y2="14"></line><line x1="16" y1="14" x2="16" y2="18"></line><line x1="8" y1="18" x2="12" y2="18"></line></svg></button>
+  <div class="cy-calc" id="cyCalc" style="display:none">
+    <div class="cy-calc-head"><span>Calculator</span><button onclick="caseyCalc.toggle()" aria-label="Close">&times;</button></div>
+    <input class="cy-calc-disp" id="cyCalcDisp" readonly value="0">
+    <div class="cy-calc-keys"><button onclick="caseyCalc.press('C')">C</button><button onclick="caseyCalc.press('DEL')">&#9003;</button><button class="op" onclick="caseyCalc.press('%')">%</button><button class="op" onclick="caseyCalc.press('÷')">÷</button><button onclick="caseyCalc.press('7')">7</button><button onclick="caseyCalc.press('8')">8</button><button onclick="caseyCalc.press('9')">9</button><button class="op" onclick="caseyCalc.press('×')">×</button><button onclick="caseyCalc.press('4')">4</button><button onclick="caseyCalc.press('5')">5</button><button onclick="caseyCalc.press('6')">6</button><button class="op" onclick="caseyCalc.press('-')">−</button><button onclick="caseyCalc.press('1')">1</button><button onclick="caseyCalc.press('2')">2</button><button onclick="caseyCalc.press('3')">3</button><button class="op" onclick="caseyCalc.press('+')">+</button><button class="wide" onclick="caseyCalc.press('0')">0</button><button onclick="caseyCalc.press('.')">.</button><button class="eq" onclick="caseyCalc.press('=')">=</button></div>
+  </div>
+  <div id="cyInputZone" style="display:none"><div class="cy-iz-inner" id="cyIz"></div></div>`;
+  var CARD = `          <div class="firm-initial" style="background:rgba(93,184,166,.15);color:var(--accent-teal);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><line x1="8" y1="9" x2="16" y2="9"></line><line x1="8" y1="13" x2="13" y2="13"></line></svg></div>
+          <div>
+            <div class="firm-name">Casey Simulator <span class="firm-tag">BCG</span> <span class="soon-badge" style="background:rgba(93,184,166,.18);color:var(--accent-teal);">Premium</span></div>
+            <div class="firm-desc">The real BCG Casey chatbot - 30 interviewee-led cases, live exhibits, expected-value math, and a spoken final recommendation graded on the Pyramid Principle.</div>
+          </div>
+          <div class="firm-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div>`;
+  function run(){
+    if (!document.getElementById('screen-casey')){
+      var st=document.createElement('style'); st.textContent=CSS; document.head.appendChild(st);
+      var d=document.createElement('div'); d.id='screen-casey'; d.className='screen'; d.setAttribute('data-screen-label','Casey Chat'); d.innerHTML=SCREEN; document.body.appendChild(d);
+    }
+    var grid=document.querySelector('#screen-mode .firm-grid');
+    if (grid && !document.getElementById('caseyModeCard')){ var c=document.createElement('div'); c.id='caseyModeCard'; c.className='firm-card'; c.setAttribute('tabindex','0'); c.setAttribute('role','button'); c.setAttribute('onclick','Casey.open()'); c.innerHTML=CARD; grid.appendChild(c); }
+  }
+  if (document.readyState==='loading') document.addEventListener('DOMContentLoaded',run); else run();
+})();
 
-THREE IRON RULES:
-RULE 1 — anchor by MEANING, not by substring. c2 passes ONLY if the figure justifies the decision, not merely if it is spoken. FAIL if: (a) two random off-point numbers are named (raw base size / prices / volume); (b) the correct figure is spoken INSIDE a wrong conclusion. Hard link: if c1 FAILs due to a wrong direction, c2 CANNOT pass. Distinguish the ANCHOR (contribution, net-impact, breakeven, gap, multiple) from RAW size (subscribers / units / price / volume), even when they coincide numerically. Credit only the qualified form (rubric.anchor_numbers are written that way) — match the meaning, not the bare figure.
-RULE 2 — clean_special (C6, C15, C19, C25, C35, C45). In clean cases the correct answer is to CONFIRM that there is NO reversal. If the candidate "finds" an invented reversal (cannibalization / spillover / network-effect / reversal that is NOT in the data) and recommends the OPPOSITE, then c1 FAIL AND c2 FAIL. The flag rubric.clean_special=true turns on this logic.
-RULE 3 — robustness to ASR. Normalize numbers from speech ("fifty five and a half thousand"=55,500, "one point four million"=1.4M, "minus twelve hundred"=-1,200). Roundings within +/-2% of an anchor count. rubric.transcription_variants are ASR forms of the anchors. Use the case CONTEXT to tell similar numbers apart (0.38% vs 38%, $4.13 vs 4.13c, "40,000 a month" vs "40,000 subscribers") — check against the meaning of the phrase, not the bare figure.
+(function () {
+  "use strict";
+  var PALETTE = ['#5db8a6', '#e8a55a', '#7c8ce8', '#5fbf6b', '#e87c7c', '#4fb0c9'];
+  var CASES = null;          // picker meta, loaded from /api/casey {action:'list'}
+  var S = null;              // active session state
 
-Do NOT penalize: accent, grammar, fillers, length, style. Penalize ONLY for missing required content. Do not add requirements beyond the 4 criteria.
+  function E(id){ return document.getElementById(id); }
+  function esc2(s){ return (typeof esc === 'function') ? esc(String(s == null ? '' : s)) : String(s == null ? '' : s).replace(/[&<>"]/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function md(s){
+    s = esc2(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/`(.+?)`/g, '<code>$1</code>');
+    return s.split(/\n{2,}/).map(function(p){ return '<p>' + p.replace(/\n/g, '<br>') + '</p>'; }).join('');
+  }
+  function scrollFeed(){ var f = E('cyFeed'); if (f) setTimeout(function(){ f.scrollTop = f.scrollHeight; }, 40); }
 
-RESPONSE FORMAT (strict JSON, no preamble, no markdown):
-{"case_id":"Cxx","criteria":{"c1_conclusion_first":{"pass":true,"evidence":"quote"},"c2_anchor_number":{"pass":true,"evidence":"quote"},"c3_risks":{"pass":true,"evidence":"quote"},"c4_nextstep":{"pass":true,"evidence":"quote"}},"score":4,"verdict":"strong","coaching":"1-3 sentences IN ENGLISH: what passed, what failed, how to fix. Specific, no platitudes."}
-Always return an evidence quote (even if approximate) from the transcript for each criterion. All prose (evidence, coaching) MUST be in English.`;
+  // ---------- chat / exhibit rendering ----------
+  function say(role, text){
+    var w = E('cyWrap'); if (!w) return;
+    var d = document.createElement('div');
+    d.className = 'cy-msg ' + (role === 'ai' ? 'ai' : 'me');
+    d.innerHTML = '<div class="cy-av ' + (role === 'ai' ? 'ai' : 'me') + '">' + (role === 'ai' ? 'C' : 'You'.charAt(0)) + '</div><div class="cy-bbl">' + md(text) + '</div>';
+    w.appendChild(d); scrollFeed();
+  }
+  function feedNode(html){ var w = E('cyWrap'); if (!w) return; var d = document.createElement('div'); d.innerHTML = html; w.appendChild(d.firstElementChild || d); scrollFeed(); }
 
-const CASEY_RUBRICS = {
-  "C1":  {"conclusion":"keep Valtona + add Herdal top-up (hybrid); NOT full move","anchor_numbers":["55,500","52,000-vs-55,000"],"mechanisms_required":["cost advantage kept + insurance against shortfall"],"internal_examples":["two-site quality/consistency"],"external_examples":["Valtona deviation/contract, excise"]},
-  "C2":  {"conclusion":"run promo WITH the 500-unit cap (not uncapped, not reject)","anchor_numbers":["27,500","9,500-vs-87,500","33.65%"],"mechanisms_required":["expected refund cost overstated the gain; cap limits exposure"],"internal_examples":["cap communication/backlash"],"external_examples":["consumer-protection regulation; probability drift past breakeven"]},
-  "C3":  {"conclusion":"keep the kit (± reprice); NOT discontinue","anchor_numbers":["−8,400","33.33%-vs-45%"],"mechanisms_required":["basket margin","attribution/defection share"],"internal_examples":["survey overstates true defection; test-store measurement"],"external_examples":["competitor rival kit; food-cost inflation"]},
-  "C4":  {"conclusion":"ADD the 4th flight on incremental/marginal logic","anchor_numbers":["505","184,325","43.86%"],"mechanisms_required":["marginal vs fully-allocated cost","cannibalization/incrementality"],"internal_examples":["crew/maintenance/ops strain"],"external_examples":["competitor frequency match; fuel; slots"]},
-  "C5":  {"conclusion":"decline at $38 / keep in-house","anchor_numbers":["−120,800","34.79","34-35"],"mechanisms_required":["avoidable vs unavoidable fixed","TAT leakage"],"internal_examples":["molecular staff retention/capability"],"external_examples":["reference-lab repricing; payer reimbursement"]},
-  "C6":  {"conclusion":"implement the rate cut / yes","anchor_numbers":["94,900","350,400-vs-94,900"],"mechanisms_required":["both paths agree (revenue AND contribution)","≥1 checked-and-cleared reversal: parity $110 OR breakeven 72.63%-vs-74%"],"internal_examples":["forecast is the weak joint; re-underwrite 74%"],"external_examples":["competitor matching the cut"],"clean_special":true},
-  "C7":  {"conclusion":"do NOT implement flat +20% as proposed (restructure, not reject)","anchor_numbers":["−168,869","−169K","+2M-vs-minus","16.48%"],"mechanisms_required":["annual-lock/mix","churn compounding"],"internal_examples":["churn estimates from one study; A/B first"],"external_examples":["competitor holds price → acquisition"]},
-  "C8":  {"conclusion":"keep Rural","anchor_numbers":["−12,200","0.38%-vs-5%","10,000→1,000→−12,200"],"mechanisms_required":["avoidable vs allocated fixed","network/anchor-client risk"],"internal_examples":["needs variable-cost program"],"external_examples":["anchor client renegotiation"]},
-  "C9":  {"conclusion":"reject the dormant-for-premium swap","anchor_numbers":["−68,250","38.75-vs-35.00","59.55-vs-55"],"mechanisms_required":["usage-cost margin (dormant > premium)","adverse retention on Casual"],"internal_examples":["premium real usage may exceed 8 visits; pilot"],"external_examples":["regulator views mass termination as unfair"]},
-  "C10": {"conclusion":"selective / A-only migration (not everyone, not no one)","anchor_numbers":["−66,600-vs-+18,000","4.13"],"mechanisms_required":["segment winners/losers (only A pays more; B,C get unjustified cut)"],"internal_examples":["two pricing models → fairness pushback; packaging"],"external_examples":["B/C demand cheaper usage model → set rate ≥4.13¢"]},
-  "C11": {"conclusion":"do NOT approve $12 across the board (targeted/peak pricing instead, not reject-all)","anchor_numbers":["−20,960","9.84-15-16.67","4.16"],"mechanisms_required":["naive ticket math is CORRECT within its perimeter but incomplete (concession leak)"],"internal_examples":["validate 15% elasticity via 2-theatre pilot"],"external_examples":["streaming release-window shift moves attendance"]},
-  "C12": {"conclusion":"rent B1 and B3 only (not all five, not reject)","anchor_numbers":["13,000-vs-7,000","$10×participants"],"mechanisms_required":["capacity shadow-price","per-building selection"],"internal_examples":["relocate displaced programs before signing"],"external_examples":["operator demands all-five package → walk/counter"]},
-  "C13": {"conclusion":"approve 24-mo cycle at HONEST size (not reject, not $4.9M)","anchor_numbers":["384,000-vs-4.86M","20,573"],"mechanisms_required":["naive frame counts only the selling side of the cycle"],"internal_examples":["doubled purchasing strains supply/logistics"],"external_examples":["used-car market is the single point of failure; hedge disposals"]},
-  "C14": {"conclusion":"decline exclusivity / counter (not accept)","anchor_numbers":["−47,240","87.99%-vs-55%","88%","8.50-vs-7.16"],"mechanisms_required":["channel margin difference","partial migration/churn"],"internal_examples":["own-channel ops must stay <$4.90/order"],"external_examples":["Mealgate ranking retaliation → placement guarantees"]},
-  "C15": {"conclusion":"kill the discount / implement","anchor_numbers":["1,543,200","2.7M-vs-1,543,200"],"mechanisms_required":["both paths agree (CFO direction AND cohort model)","≥1 checked-and-cleared reversal: scale/allocation $20→$21.13 OR j*=8,482-vs-12,000"],"internal_examples":["marketing's 12,000 projection is weak joint; pilot"],"external_examples":["competitor weaponizes removed discount in ads"],"clean_special":true},
-  "C16": {"conclusion":"approve / run the teaser-card campaign (NOT reject)","direction":"approve","anchor_numbers":["+1,530,000 full-lifecycle","1.53 million net","45.78% survival breakeven","45.78%-vs-55%"],"transcription_variants":["one and a half million","forty six percent versus fifty five"],"mechanisms_required":["teaser window is an acquisition investment; lifetime revolving income of survivors flips it positive"],"internal_examples":["55% survival from one cohort; pilot before scaling"],"external_examples":["teaser-rate/affordability regulation; cost-of-funds/rate shock"]},
-  "C17": {"conclusion":"keep the generic program (± fix economics); NOT discontinue","direction":"keep","anchor_numbers":["−26,000 net of cutting","twenty six thousand worse off","47.62% defection breakeven","47.62%-vs-60%"],"transcription_variants":["minus twenty six thousand","forty eight percent versus sixty"],"mechanisms_required":["script margin != visit margin (front-of-store cross-subsidy)","attribution: only defector share takes the basket"],"internal_examples":["survey overstates true defection; A/B a removal in test stores"],"external_examples":["reimbursement tightening; competitor rival generic program"]},
-  "C18": {"conclusion":"discontinue the blade set BUT book the honest ~$32,000 (NOT $480,000, NOT keep)","direction":"discontinue at honest number","anchor_numbers":["$32,000 true benefit","thirty two thousand","×15 overstatement","480,000-vs-32,000"],"transcription_variants":["thirty two thousand a year","fifteen times overstated"],"mechanisms_required":["direction right (overhead avoidable) but magnitude overstated ×15 — forgone after-sales annuity (~$448k) ignored"],"internal_examples":["$11.20 pull-through estimate needs validation; pro-customer reliance"],"external_examples":["cut pushes pro customers to a competitor ecosystem"]},
-  "C19": {"conclusion":"keep Highland — framed as CONFIRMING the CFO (NOT finding a reason to close)","direction":"keep","anchor_numbers":["+40,000 a month contribution","40,000/month","480,000 a year","$17.00 ARPU breakeven"],"transcription_variants":["forty thousand a month","four hundred eighty thousand a year","seventeen dollar arpu breakeven"],"mechanisms_required":["both paths agree KEEP: positive contribution AND no-spillover check","≥1 checked-and-cleared reversal: the C8-style network/anchor effect is ABSENT (standalone lease, zero anchor, $0 spillover)"],"internal_examples":["ARPU drift toward $17 breakeven; avoidable-fixed assumption"],"external_examples":["spectrum-lease repricing; rural-coverage regulation"],"clean_special":true,"anchor_note":"Bare '40,000' is BANNED — collides with 40,000 subscribers (raw size). Only qualified forms count ('40,000 a month', '480,000 a year'). If c1 FAILs by inventing a C8-style reversal (recommends close), c2 CANNOT pass on an anchor."},
-  "C20": {"conclusion":"split mostly on shippers (~$10.80 / ~$1.20); NOT all-carriers, NOT all-shippers","direction":"split shippers-heavy","anchor_numbers":["31.49% optimal-vs-naive gap","31.49 percent","6.04M-vs-4.59M profit","10.80/1.20 split"],"transcription_variants":["thirty one percent better","six million versus four point six","ten eighty one twenty"],"mechanisms_required":["total take rises $12 either way so profit-per-load fixed; winning split minimizes loads lost","carriers far more sensitive (convex): all-on-carrier drops below baseline"],"internal_examples":["load-loss curve is an estimate; validate carrier churn on a fee test"],"external_examples":["rival marketplace poaches carriers; shipper-contract renewals shift sensitivity"]},
-  "C21": {"conclusion":"keep the Fenwick Street branch (NOT close)","direction":"keep","anchor_numbers":["−1,140,000 net of closing","1.14 million cost of closing","12.50% flight breakeven","12.5%-vs-60% flight"],"transcription_variants":["minus one point one four million","one and a fourteen million","twelve and a half percent versus sixty"],"mechanisms_required":["fully-allocated P&L ignores deposit-funding value; departing deposits force costlier wholesale funding"],"internal_examples":["60% flight is an estimate; retention pilot; execution"],"external_examples":["rate-spread shift narrows deposit-vs-wholesale gap"]},
-  "C22": {"conclusion":"keep the shade (NOT discontinue)","direction":"keep","anchor_numbers":["−695,000 true impact","695 thousand destroyed","−200,000 before halo","400,000-vs-695,000 contrast"],"transcription_variants":["six ninety five thousand","minus two hundred thousand before halo","four hundred versus six ninety five"],"mechanisms_required":["shade's own contribution already negative (gross lost > avoidable OH)","range halo/lineup: buyers of the shade drop other-shade purchases"],"internal_examples":["55% halo figure needs basket-data validation"],"external_examples":["competitor launches a similar shade"]},
-  "C23": {"conclusion":"lease systems (NOT sell outright)","direction":"lease","anchor_numbers":["$18M lease margin","eighteen million lease","$18M-vs-$4M","$91.67 breakeven monthly"],"transcription_variants":["eighteen million versus four million","ninety one sixty seven a month","ninety two a month breakeven"],"mechanisms_required":["upfront sale margin hides the 20-year O&M annuity; full lease term dominates"],"internal_examples":["ties up capital; 20-yr O&M obligation; default risk; balance sheet"],"external_examples":["solar-subsidy change or rate shift alters payback"]},
-  "C24": {"conclusion":"mine only the high-grade band (cutoff at marginal cost); NOT all bands","direction":"high band only","anchor_numbers":["$18M-vs-$3.4M","eighteen million versus three point four","1.222% cutoff grade"],"transcription_variants":["eighteen million against three point four million","one point two two two percent cutoff","cutoff around one point two percent"],"mechanisms_required":["averaging hides loss-making bands; mid and low recover less than processing cost; cutoff at marginal grade"],"internal_examples":["fixed-cost absorption / workforce planning with less mined"],"external_examples":["copper price rise lowers the cutoff; reprice with forward curve"]},
-  "C25": {"conclusion":"kill the promo — framed as CONFIRMING the CFO (NOT keep)","direction":"kill","anchor_numbers":["−200,000 net (both paths kill)","two hundred thousand loss","30% incrementality breakeven","30%-vs-10% incrementality"],"transcription_variants":["minus two hundred thousand","thirty percent versus ten percent incremental","would only pay if thirty percent were new"],"mechanisms_required":["both paths agree KILL: cannibalization dominates","≥1 checked-and-cleared reversal: the incrementality is only 10% vs a 30% breakeven — the 'it's all incremental' reversal is FALSE"],"internal_examples":["10% incrementality from one study; pilot the removal on a title cohort"],"external_examples":["competitor weaponizes the removed discount in marketing"],"clean_special":true},
-  "C26": {"conclusion":"keep the brand and grow private label alongside (NOT replace)","direction":"keep brand","anchor_numbers":["−21,000 net weekly","twenty one thousand worse off","41.46% defection breakeven","41.46%-vs-50% defection"],"transcription_variants":["minus twenty one thousand a week","forty one percent versus fifty","breakeven around forty one and a half"],"mechanisms_required":["private-label margin blind to brand traffic effect; departing shoppers take whole basket"],"internal_examples":["50% defection is an estimate; dual-shelf test"],"external_examples":["competitor stocks the dropped brand and pulls shoppers permanently"]},
-  "C27": {"conclusion":"roll out dynamic pricing at the honest ~$1.24M (NOT $4M, NOT don't-roll-out)","direction":"roll out (honest number)","anchor_numbers":["$1.24M true benefit","one point two four million","×3.23 overstatement","$4M-vs-$1.24M"],"transcription_variants":["about one and a quarter million","three times overstated","four million versus one point two four"],"mechanisms_required":["peak uplift extrapolated to whole calendar; off-peak dates barely respond"],"internal_examples":["peak/off-peak split is an estimate; off-peak response could soften"],"external_examples":["resale platforms / competitors undercut peak pricing"]},
-  "C28": {"conclusion":"keep the niche catalog (NOT cut)","direction":"keep","anchor_numbers":["−420,000 true effect","four hundred twenty thousand cost","$580,000 niche contribution","−260,000 before learning-curve"],"transcription_variants":["minus four twenty thousand","five hundred eighty thousand contribution","minus two sixty before the curve"],"mechanisms_required":["niche is profitable (premise false)","catalog learning-curve: cutting raises production cost of the rest"],"internal_examples":["learning-curve estimate needs production-data validation"],"external_examples":["competitor platform out-scales on catalog breadth"]},
-  "C29": {"conclusion":"stock at medium density (NOT maximum, NOT low)","direction":"medium","anchor_numbers":["$628,200 medium profit","six twenty eight thousand","$144,200 gap over high","medium-vs-high $628k-vs-$484k"],"transcription_variants":["six hundred twenty eight thousand","about a hundred forty four thousand more","medium beats high"],"mechanisms_required":["max density != max profit: crowding lowers both survival and per-fish weight"],"internal_examples":["survival/weight factors are estimates; trial-pond validation"],"external_examples":["disease outbreak or feed-price spike shifts the optimum lower"]},
-  "C30": {"conclusion":"repower at the honest ~$11.4M (NOT $29M, NOT don't-repower)","direction":"repower (honest number)","anchor_numbers":["$11.4M true uplift","eleven point four million","×2.54 overstatement","$29M-vs-$11.4M"],"transcription_variants":["about eleven point four million","two and a half times overstated","twenty nine million versus eleven four"],"mechanisms_required":["nameplate uplift assumes full hours; capacity factor is what matters"],"internal_examples":["34% new capacity factor is a manufacturer estimate; install downtime"],"external_examples":["power price / subsidy change moves payback"]},
-  "C31": {"conclusion": "exit the line at the honest ~$1.76M (NOT $6.6M, NOT keep)", "direction": "exit at honest number", "anchor_numbers": ["$1.76M true benefit", "1,760,000", "×3.18 overstatement", "$6.6M-vs-$1.76M", "$4.56M breakeven reserve-release"], "transcription_variants": ["one point seven six million", "one seven six oh oh oh oh", "three point one eight times", "four point five six million"], "mechanisms_required": ["direction right but overstated ×3.18 — float income on reserves + reserve-release tail forfeited on exit"], "internal_examples": ["reserve-release is an actuarial judgment; validate before booking"], "external_examples": ["regulator requires run-off reserves delaying capital release"], "anchor_note": "Bare '$6.6M' (the naive headline) is NOT a valid anchor — it is the error being corrected."},
-  "C32": {"conclusion": "keep the route (NOT cut)", "direction": "keep", "anchor_numbers": ["+6,300,000 true profit", "$6.3 million a year", "$60 breakeven onboard margin", "ticket-vs-onboard contrast"], "transcription_variants": ["six point three million", "sixty dollars breakeven", "ninety five dollars onboard"], "mechanisms_required": ["ticket P&L alone is negative; onboard spend (casino/bar/excursions) of the same passengers more than offsets"], "internal_examples": ["$95 onboard average could soften if fares are discounted to fill seats — validate mix"], "external_examples": ["itinerary or port-fee change shifts economics"]},
-  "C33": {"conclusion": "run base tier only (NOT full capacity)", "direction": "base tier only / cutoff at marginal", "anchor_numbers": ["$32M-vs-$13.8M", "32,000,000", "max-tier $4,400-vs-$8,200", "$18.2M gap"], "transcription_variants": ["thirty two million versus thirteen point eight", "forty four hundred against eighty two hundred"], "mechanisms_required": ["yield-adjusted effective revenue vs marginal cost per tier; base subsidizes two loss-makers"], "internal_examples": ["fixed-cost absorption and utilization targets must be reset for idle tools"], "external_examples": ["wafer price rise or yield improvement could re-qualify the stretch tier"]},
-  "C34": {"conclusion": "expand at the honest ~$3.2M (NOT $7M, NOT don't expand)", "direction": "expand at honest number", "anchor_numbers": ["$3.22M true benefit", "3,220,000", "×2.17 overstatement", "$7M-vs-$3.22M"], "transcription_variants": ["three point two two million", "two point one seven times", "three point two million"], "mechanisms_required": ["55% full-price sell-through; 45% clears at $18 below $25 cost, losing $630,000"], "internal_examples": ["55% sell-through is an estimate — test before a full buy"], "external_examples": ["fashion-cycle miss or competitor markdown war deepens the clearance tail"], "anchor_note": "Bare '$7M' is NOT a valid anchor — it is the naive claim being corrected."},
-  "C35": {"conclusion": "consolidate the routes — framed as CONFIRMING the ops director, NOT finding a reason not to", "direction": "consolidate", "anchor_numbers": ["$340,000 saving", "340,000 a year", "zero revenue at risk", "$340,000 breakeven revenue-at-risk"], "transcription_variants": ["three hundred forty thousand", "three forty k"], "mechanisms_required": ["both paths agree consolidate: cost saving real AND no revenue offset", "≥1 checked-and-cleared reversal: the C8-style anchor-contract loss is ABSENT (contract is tonnage-based, route-agnostic, 0 anchor clients, SLA held)"], "internal_examples": ["confirm merged pickup schedule holds in practice before finalizing"], "external_examples": ["future contract renewal could add route-specific terms"], "clean_special": true, "anchor_note": "If c1 FAILS by inventing a contract-loss reversal that blocks consolidation, c2 CANNOT pass on an anchor."},
-  "C36": {"conclusion": "build the hall at the honest ~$11.9M (NOT $21.6M, NOT don't build)", "direction": "build at honest number", "anchor_numbers": ["$11.9M true revenue", "11,880,000", "×1.82 overstatement", "$21.6M-vs-$11.9M"], "transcription_variants": ["eleven point nine million", "one point eight two times", "eleven point eight eight million"], "mechanisms_required": ["nameplate assumes all racks at full load simultaneously; cooling/power caps usable capacity at 55%"], "internal_examples": ["55% cooling cap is an engineering estimate — validate before capex"], "external_examples": ["power prices or a high-density tenant shift the economics"], "anchor_note": "Bare '$21.6M' is NOT a valid anchor — it is the naive claim."},
-  "C37": {"conclusion": "plant variety B, the resistant one (NOT variety A)", "direction": "variety B", "anchor_numbers": ["disease-adjusted 170-vs-173.25", "173.25 bushels", "+$975,000 revenue difference", "$52M-vs-$51M"], "transcription_variants": ["one seventy versus one seventy three", "nine hundred seventy five thousand", "one seventy three point two five"], "mechanisms_required": ["nominal yield ≠ harvested yield; weight A by 30% disease chance × 50% loss → 170 vs B's 173.25"], "internal_examples": ["disease probabilities are historical estimates — validate for this region/season"], "external_examples": ["weather or a new pathogen strain shifts both varieties' risk"], "anchor_note": "Bare '200' and '175' (nominal yields) are RAW sizes, NOT anchors — the anchor is the disease-adjusted pair."},
-  "C38": {"conclusion": "hold mid + scarce, clear common only (NOT clear all)", "direction": "hold appreciating subset", "anchor_numbers": ["$5.48M-vs-$3.64M", "5,480,000", "$1.84M uplift", "1,840,000"], "transcription_variants": ["five point four eight million", "one point eight four million", "three point six four million"], "mechanisms_required": ["per-model clear-now vs hold-later: common clears ($600>$500), mid and scarce appreciate ($2,600>$1,800; $11,000>$5,000)"], "internal_examples": ["holding ties up cash and carries storage/insurance cost"], "external_examples": ["vintage-model demand could cool, softening resale estimates"]},
-  "C39": {"conclusion": "keep routine care (NOT cut)", "direction": "keep", "anchor_numbers": ["−540,000 true effect", "minus five hundred forty thousand", "$700,000 referral value", "$160,000 breakeven"], "transcription_variants": ["minus five forty thousand", "seven hundred thousand referral", "one sixty thousand breakeven"], "mechanisms_required": ["routine care drives the REFERRAL network (2,000 new clients/yr × $350 lifetime) — network inflow, not just direct contribution"], "internal_examples": ["referral figure should be validated by tracking how new clients actually find the practice"], "external_examples": ["a competitor clinic captures the routine visits and the referral flow with them"], "anchor_note": "Bare '$240,000' (routine contribution) is a RAW size, not the decision anchor."},
-  "C40": {"conclusion": "keep the budget supplier (NOT drop)", "direction": "keep", "anchor_numbers": ["−1,920,000 true impact", "minus one point nine two million", "$600,000 own margin", "$1.32M cross-sell"], "transcription_variants": ["minus one point nine two million", "six hundred thousand own margin", "one point three two million"], "mechanisms_required": ["two layers: budget bookings are ALREADY profitable ($3/booking = $600k) before cross-sell; plus $1.32M attached car/activity margin"], "internal_examples": ["assumption that dropped customers leave entirely should be tested — some may rebook premium"], "external_examples": ["a competitor OTA captures those budget travelers and their cross-sell"], "anchor_note": "Bare '$1.6M' (take revenue) and '200,000 bookings' are RAW sizes, not anchors."},
-  "C41": {"conclusion": "do the LBO at the honest ~$19.7M equity gain (NOT $60M, NOT don't)", "direction": "do the deal at honest number", "anchor_numbers": ["$19.68M true equity gain", "19,680,000", "×3.05 overstatement", "$60M-vs-$19.7M", "$40.3M uncovered debt service"], "transcription_variants": ["nineteen point seven million", "three point oh five times", "forty point three million"], "mechanisms_required": ["multiple expansion ignores the cost of the leverage: $57.6M debt service, 70% of which falls on equity return"], "internal_examples": ["debt-service coverage assumption should be stress-tested against a downside cash case"], "external_examples": ["rate rise or covenant breach could wipe out the return"], "anchor_note": "Bare '$60M' is NOT a valid anchor — it is the naive headline."},
-  "C42": {"conclusion": "do NOT launch the value menu", "direction": "don't launch", "anchor_numbers": ["−50,000 net", "minus fifty thousand", "15%-vs-25% trade-down", "$125,000 cannibalization"], "transcription_variants": ["minus fifty thousand", "fifteen percent versus twenty five", "one twenty five thousand"], "mechanisms_required": ["mix-shift cannibalization: 25% of existing premium buyers trade down, losing $2.50 each — inside the base, not lost traffic"], "internal_examples": ["25% trade-down is an estimate — test in a few stores before chain-wide launch"], "external_examples": ["a competitor's value menu could force the decision regardless"], "anchor_note": "Bare '$75,000' (new-customer benefit) is the naive figure, not a valid standalone anchor."},
-  "C43": {"conclusion": "adopt razor/blade — device near cost, earn on consumables (NOT high device price)", "direction": "razor/blade", "anchor_numbers": ["$105M-vs-$30M", "105,000,000", "$21,000 per device vs $6,000", "$1,000 breakeven consumable margin"], "transcription_variants": ["one hundred five million versus thirty", "twenty one thousand per device", "one thousand breakeven"], "mechanisms_required": ["device margin is one-time ($6,000); consumables recur ($4,000/yr × 5yr = $20,000), so near-cost pricing unlocks the larger stream"], "internal_examples": ["shifts revenue upfront→recurring; cash flow and sales incentives must be redesigned"], "external_examples": ["third-party consumables maker or a regulator erodes the recurring margin"]},
-  "C44": {"conclusion": "do NOT cap surge pricing", "direction": "don't cap", "anchor_numbers": ["−78,000 net", "minus seventy eight thousand", "5%-vs-18% unfulfilled", "$108,000 lost rides"], "transcription_variants": ["minus seventy eight thousand", "five percent versus eighteen", "one hundred eight thousand"], "mechanisms_required": ["surge is the SIGNAL that pulls drivers online in peaks (feedback loop) — capping it leaves 18% of peak demand unfulfilled"], "internal_examples": ["18% unfulfilled estimate should be tested with a limited surge-cap trial"], "external_examples": ["a regulator could mandate surge caps regardless — design rider-friendly alternatives now"], "anchor_note": "Bare '$30,000' (satisfaction benefit) is the naive figure, not a valid standalone anchor."},
-  "C45": {"conclusion": "renovate — framed as CONFIRMING the asset manager, NOT finding a reason not to", "direction": "renovate", "anchor_numbers": ["$8M net benefit", "8,000,000 over ten years", "100% realized vs 33.33% breakeven", "$1.2M annual uplift"], "transcription_variants": ["eight million net", "thirty three point three three percent", "one point two million a year"], "mechanisms_required": ["both paths agree renovate: uplift over hold beats capex AND the premium is realized", "≥1 checked-and-cleared reversal: the 'premium won't hold' fear is ABSENT (comparables realize 100% at 92% occupancy)"], "internal_examples": ["confirm our tenant mix can absorb the higher rent at renewal"], "external_examples": ["office-market softening could compress the premium — time to the leasing cycle"], "clean_special": true, "anchor_note": "If c1 FAILS by inventing a premium-collapse reversal that blocks renovation, c2 CANNOT pass on an anchor."},
-  "C46": {"conclusion": "do NOT pour money into whale acquisition", "direction": "don't invest", "anchor_numbers": ["−$1,500 per whale", "minus fifteen hundred a whale", "realized LTV $2,000-vs-$3,500 CAC", "11.43% breakeven churn"], "transcription_variants": ["minus fifteen hundred", "two thousand versus thirty five hundred", "eleven point four three percent"], "mechanisms_required": ["20%/month churn → expected lifetime 5 months (1÷churn), so realized LTV $2,000 falls below the $3,500 CAC"], "internal_examples": ["20% churn is an average — segment whales by retention before abandoning the channel"], "external_examples": ["a competitor game poaches whales and steepens churn further"], "anchor_note": "Bare '$9,600' (naive LTV) is NOT a valid anchor — it is the error being corrected."},
-  "C47": {"conclusion": "keep the low-margin product (NOT drop)", "direction": "keep", "anchor_numbers": ["−500,000 true effect", "minus five hundred thousand", "$800,000 by-product cost", "$3 breakeven external premium"], "transcription_variants": ["minus five hundred thousand", "eight hundred thousand", "three dollars breakeven"], "mechanisms_required": ["joint production: its output yields a by-product (1:1) a high-margin line needs; sourcing externally costs $8/unit more than making it"], "internal_examples": ["confirm the by-product can't be sourced more cheaply elsewhere"], "external_examples": ["a by-product supplier could reprice, shifting the calculus"], "anchor_note": "Bare '$300,000' (standalone loss) is the naive claim, not a valid standalone anchor."},
-  "C48": {"conclusion": "age the vintage at the honest ~$1.3M (NOT $2.5M, NOT don't age)", "direction": "age at honest number", "anchor_numbers": ["$1.3M true gain", "1,300,000", "×1.92 overstatement", "$2.5M-vs-$1.3M", "$1.2M carry cost"], "transcription_variants": ["one point three million", "one point nine two times", "one point two million carry"], "mechanisms_required": ["premium ignores the carry: 3 years × $4/bottle storage, insurance and capital tied up = $1.2M"], "internal_examples": ["carry should include opportunity cost of capital, which may push it higher"], "external_examples": ["vintage-quality or demand shift over three years could erode the premium"], "anchor_note": "Bare '$2.5M' is NOT a valid anchor — it is the naive claim."},
-  "C49": {"conclusion": "segment pricing peak/off-peak (NOT uniform)", "direction": "segment", "anchor_numbers": ["$17.46M-vs-$16M", "17,460,000", "$1.46M uplift", "1,460,000"], "transcription_variants": ["seventeen point four six million", "one point four six million", "sixteen million uniform"], "mechanisms_required": ["peak is inelastic (−5% at $100), off-peak elastic (+40% at $60 fills capacity) — one price leaves money at peak and prices out off-peak"], "internal_examples": ["elasticity estimates should be validated with a limited pricing test"], "external_examples": ["visitors may perceive peak pricing as unfair — needs careful communication"], "anchor_note": "Bare '200,000 visitors' and '$80' are RAW sizes, not anchors."},
-  "C50": {"conclusion": "keep the backhaul routes (NOT drop)", "direction": "keep", "anchor_numbers": ["−3,200,000 true effect", "minus three point two million", "$11.2M connecting margin", "57.14% breakeven dependency"], "transcription_variants": ["minus three point two million", "eleven point two million", "fifty seven point one four percent"], "mechanisms_required": ["network density: the backhaul is a hub link; cutting it strands 80% of $14M connecting-route margin that can't reroute — not a per-leg load question"], "internal_examples": ["80% dependency should be validated by mapping which cargo actually reroutes versus is lost"], "external_examples": ["a partner carrier or alliance change alters the network math"], "anchor_note": "Bare '$8M' (standalone saving) is the naive claim, not a valid standalone anchor."},
-};
+  function num(v){
+    if (typeof v !== 'number') { var n = parseFloat(String(v).replace(/[, ]/g,'')); return isNaN(n) ? v : n; }
+    return v;
+  }
+  function fmtVal(v){ var n = num(v); return (typeof n === 'number') ? n.toLocaleString('en-US') : esc2(v); }
 
-/* ───────────────────────── library ───────────────────────────────────────── */
-let _byId = null;
-function caseById(id) {
-  if (!_byId) { _byId = new Map(); for (const c of (CASES_DATA.cases || [])) _byId.set(c.id, c); }
-  return _byId.get(id);
-}
+  // axis helper
+  function niceMax(m){ if (m <= 0) return 1; var p = Math.pow(10, Math.floor(Math.log10(m))); var f = m / p; var nf = f <= 1 ? 1 : f <= 2 ? 2 : f <= 5 ? 5 : 10; return nf * p; }
 
-// Flatten multipart steps the way the client used to, but assign each flat step
-// a stable grading id (gid = its index) so client and server never disagree.
-function flatten(c) {
-  const flat = [];
-  (c.steps || []).forEach(st => {
-    if (st.type === 'multipart') {
-      (st.parts || []).forEach((p, i) => {
-        const q = Object.assign({}, p);
-        if (i === 0) { q._wrap = st.prompt; q._reveal = st.reveal_exhibits_on_enter; }
-        flat.push(q);
+  function barSVG(b, histogram){
+    var labels = b.labels || [], series = b.series || [];
+    var W = 620, H = 250, pL = 48, pR = 20, pT = 20, pB = 46;
+    var pw = W - pL - pR, ph = H - pT - pB, n = labels.length, sc = series.length;
+    var maxv = 0; series.forEach(function(s){ (s.values||[]).forEach(function(v){ if (num(v) > maxv) maxv = num(v); }); });
+    var mx = niceMax(maxv), slot = pw / n, gap = histogram ? 0.02 : 0.18, groupW = slot * (1 - gap*2), bw = groupW / sc;
+    var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc2(b.name||'chart') + '">';
+    for (var i = 0; i <= 4; i++){ var y = pT + ph - (i/4)*ph; svg += '<line x1="'+pL+'" y1="'+y.toFixed(1)+'" x2="'+(W-pR)+'" y2="'+y.toFixed(1)+'" stroke="var(--sv-line-soft)"/>'; svg += '<text x="'+(pL-7)+'" y="'+(y+3.5).toFixed(1)+'" text-anchor="end" font-size="9.5" fill="var(--on-dark-soft)">'+Math.round(mx*i/4).toLocaleString()+'</text>'; }
+    labels.forEach(function(lab, li){
+      series.forEach(function(s, si){
+        var v = num((s.values||[])[li]); var h = (v/mx)*ph;
+        var x = pL + li*slot + slot*gap + si*bw + (histogram?0:bw*0.08);
+        var bwidth = bw * (histogram ? 1 : 0.84);
+        var y = pT + ph - h;
+        svg += '<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+bwidth.toFixed(1)+'" height="'+Math.max(0,h).toFixed(1)+'" rx="'+(histogram?0:3)+'" fill="'+PALETTE[si % PALETTE.length]+'" opacity="0.92"/>';
+        if (sc <= 2){ svg += '<text x="'+(x+bwidth/2).toFixed(1)+'" y="'+(y-5).toFixed(1)+'" text-anchor="middle" font-size="9.5" font-weight="700" fill="var(--on-dark)">'+esc2((s.values||[])[li])+'</text>'; }
       });
-    } else {
-      const q = Object.assign({}, st);
-      if (st.reveal_exhibits_on_enter) q._reveal = st.reveal_exhibits_on_enter;
-      flat.push(q);
-    }
-  });
-  flat.forEach((q, i) => { q.gid = i; });
-  return flat;
-}
-
-const KEY_FIELDS = ['answer', 'answer_explain', 'validation', 'model_answer', 'trigger_phrases', 'expected', 'fallback', 'rubric_ref', 'checklist'];
-// Client-safe copy of a flat step: keep prompt / type / option TEXT / reveal ids
-// / gid; strip every answer key (incl. the voice checklist, which spoils the
-// correct recommendation).
-function sanitizeStep(q) {
-  const out = {};
-  for (const k of Object.keys(q)) {
-    if (KEY_FIELDS.indexOf(k) >= 0) continue;
-    if (k === 'options') {
-      out.options = (q.options || []).map(o => ({ text: o.text }));   // drop .correct
-    } else {
-      out[k] = q[k];
-    }
+      svg += '<text x="'+(pL+li*slot+slot/2).toFixed(1)+'" y="'+(H-pB+16).toFixed(1)+'" text-anchor="middle" font-size="10" fill="var(--on-dark-soft)">'+esc2(lab)+'</text>';
+    });
+    svg += '</svg>';
+    return svg + legend(series);
   }
-  return out;
-}
 
-// Exhibits carry both display data (blocks/title) AND spoiler metadata
-// (trigger_phrases to reveal them, no_spoiler_note, fallback). Ship only what
-// the renderer needs.
-function sanitizeExhibit(ex) {
-  return { id: ex.id, title: ex.title, reveal: ex.reveal, blocks: ex.blocks || [] };
-}
+  function lineSVG(b){
+    var labels = b.labels || [], series = b.series || [];
+    var W = 620, H = 250, pL = 48, pR = 20, pT = 20, pB = 46;
+    var pw = W - pL - pR, ph = H - pT - pB, n = labels.length;
+    var maxv = 0, minv = Infinity; series.forEach(function(s){ (s.values||[]).forEach(function(v){ v = num(v); if (v>maxv) maxv=v; if (v<minv) minv=v; }); });
+    minv = Math.min(minv, 0); var mx = niceMax(maxv), rng = mx - minv || 1;
+    var xw = n > 1 ? pw/(n-1) : pw;
+    var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc2(b.name||'chart') + '">';
+    for (var i = 0; i <= 4; i++){ var y = pT + ph - (i/4)*ph; var val = minv + (mx-minv)*i/4; svg += '<line x1="'+pL+'" y1="'+y.toFixed(1)+'" x2="'+(W-pR)+'" y2="'+y.toFixed(1)+'" stroke="var(--sv-line-soft)"/>'; svg += '<text x="'+(pL-7)+'" y="'+(y+3.5).toFixed(1)+'" text-anchor="end" font-size="9.5" fill="var(--on-dark-soft)">'+Math.round(val).toLocaleString()+'</text>'; }
+    labels.forEach(function(lab, li){ var x = pL + li*xw; svg += '<text x="'+x.toFixed(1)+'" y="'+(H-pB+16).toFixed(1)+'" text-anchor="middle" font-size="10" fill="var(--on-dark-soft)">'+esc2(lab)+'</text>'; });
+    series.forEach(function(s, si){
+      var col = PALETTE[si % PALETTE.length];
+      var pts = (s.values||[]).map(function(v, li){ v = num(v); return { x: pL + li*xw, y: pT + ph - ((v-minv)/rng)*ph, v: (s.values||[])[li] }; });
+      var d = pts.map(function(p, i){ return (i?'L':'M') + p.x.toFixed(1) + ' ' + p.y.toFixed(1); }).join(' ');
+      svg += '<path d="'+d+'" fill="none" stroke="'+col+'" stroke-width="2.4"/>';
+      pts.forEach(function(p){ svg += '<circle cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="3.4" fill="'+col+'"/>'; svg += '<text x="'+p.x.toFixed(1)+'" y="'+(p.y-8).toFixed(1)+'" text-anchor="middle" font-size="9" font-weight="700" fill="'+col+'">'+esc2(p.v)+'</text>'; });
+    });
+    svg += '</svg>';
+    return svg + legend(series);
+  }
 
-function sanitizeCase(c) {
-  return {
-    id: c.id, title: c.title, meta_tag: c.meta_tag, scenario: c.scenario,
-    exhibits: (c.exhibits || []).map(sanitizeExhibit),
-    steps: flatten(c).map(sanitizeStep)
-  };
-}
+  function stackedSVG(b){
+    var labels = b.labels || [], series = b.series || [];
+    var W = 620, H = 250, pL = 48, pR = 20, pT = 20, pB = 46;
+    var pw = W - pL - pR, ph = H - pT - pB, n = labels.length;
+    var totals = labels.map(function(_, li){ var t=0; series.forEach(function(s){ t += num((s.values||[])[li]); }); return t; });
+    var mx = niceMax(Math.max.apply(null, totals)), slot = pw/n, bw = slot*0.5;
+    var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc2(b.name||'chart') + '">';
+    for (var i = 0; i <= 4; i++){ var y = pT + ph - (i/4)*ph; svg += '<line x1="'+pL+'" y1="'+y.toFixed(1)+'" x2="'+(W-pR)+'" y2="'+y.toFixed(1)+'" stroke="var(--sv-line-soft)"/>'; svg += '<text x="'+(pL-7)+'" y="'+(y+3.5).toFixed(1)+'" text-anchor="end" font-size="9.5" fill="var(--on-dark-soft)">'+Math.round(mx*i/4).toLocaleString()+'</text>'; }
+    labels.forEach(function(lab, li){
+      var x = pL + li*slot + slot/2 - bw/2, acc = 0;
+      series.forEach(function(s, si){ var v = num((s.values||[])[li]); var h = (v/mx)*ph; var y = pT + ph - ((acc+v)/mx)*ph; svg += '<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+Math.max(0,h).toFixed(1)+'" fill="'+PALETTE[si % PALETTE.length]+'" opacity="0.92"/>'; if (h > 16) svg += '<text x="'+(x+bw/2).toFixed(1)+'" y="'+(y+h/2+3).toFixed(1)+'" text-anchor="middle" font-size="9.5" font-weight="700" fill="#04201b">'+esc2((s.values||[])[li])+'</text>'; acc += v; });
+      svg += '<text x="'+(pL+li*slot+slot/2).toFixed(1)+'" y="'+(H-pB+16).toFixed(1)+'" text-anchor="middle" font-size="10" fill="var(--on-dark-soft)">'+esc2(lab)+'</text>';
+    });
+    svg += '</svg>';
+    return svg + legend(series);
+  }
 
-/* ───────────────────────── grading ───────────────────────────────────────── */
-function num(v) {
-  if (typeof v === 'number') return v;
-  const n = parseFloat(String(v).replace(/[, ]/g, ''));
-  return isNaN(n) ? NaN : n;
-}
-function fmtVal(v) { const n = num(v); return isFinite(n) ? n.toLocaleString('en-US') : String(v); }
+  function pieSVG(b){
+    var s = (b.series||[])[0] || { values: [] }; var labels = b.labels || [];
+    var vals = (s.values||[]).map(num), total = vals.reduce(function(a,c){ return a+c; }, 0) || 1;
+    var W = 360, H = 230, cx = 115, cy = 115, r = 96, a0 = -Math.PI/2;
+    var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc2(b.name||'pie') + '">';
+    vals.forEach(function(v, i){
+      var frac = v/total, a1 = a0 + frac*2*Math.PI, large = frac > 0.5 ? 1 : 0;
+      var x0 = cx + r*Math.cos(a0), y0 = cy + r*Math.sin(a0), x1 = cx + r*Math.cos(a1), y1 = cy + r*Math.sin(a1);
+      svg += '<path d="M'+cx+' '+cy+' L'+x0.toFixed(1)+' '+y0.toFixed(1)+' A'+r+' '+r+' 0 '+large+' 1 '+x1.toFixed(1)+' '+y1.toFixed(1)+' Z" fill="'+PALETTE[i % PALETTE.length]+'" opacity="0.92"/>';
+      var am = (a0+a1)/2, lx = cx + (r*0.62)*Math.cos(am), ly = cy + (r*0.62)*Math.sin(am);
+      if (frac > 0.05) svg += '<text x="'+lx.toFixed(1)+'" y="'+ly.toFixed(1)+'" text-anchor="middle" font-size="10.5" font-weight="700" fill="#04201b">'+Math.round(frac*100)+'%</text>';
+      a0 = a1;
+    });
+    svg += '</svg>';
+    var leg = labels.map(function(l, i){ return '<span><i style="background:'+PALETTE[i%PALETTE.length]+'"></i>'+esc2(l)+' ('+fmtVal(vals[i])+')</span>'; }).join('');
+    return svg + '<div class="cy-legend">' + leg + '</div>';
+  }
 
-function gradeChoice(q, selected) {
-  const req = [];
-  (q.options || []).forEach((o, i) => { if (o.correct) req.push(i); });
-  const sel = Array.isArray(selected) ? selected.map(Number) : [];
-  const ok = req.length === sel.length && req.every(i => sel.indexOf(i) >= 0);
-  // correctIdx lets the (key-free) client mark right/wrong options after submit.
-  return { ok, correctIdx: req, validation: q.validation || '' };
-}
-function gradeNumber(q, value) {
-  const ans = num(q.answer), val = num(value);
-  const tol = Math.max(0.01, Math.abs(ans) * 0.005);
-  const ok = isFinite(val) && Math.abs(val - ans) <= tol;
-  return { ok, answer: fmtVal(ans), answer_explain: q.answer_explain || '' };
-}
+  function legend(series){
+    if (!series || series.length < 2) return '';
+    return '<div class="cy-legend">' + series.map(function(s, i){ return '<span><i style="background:'+PALETTE[i%PALETTE.length]+'"></i>'+esc2(s.name||('Series '+(i+1)))+'</span>'; }).join('') + '</div>';
+  }
 
-/* ───────────────────────── infra (shared pattern) ────────────────────────── */
-async function fetchWithTimeout(url, options, timeoutMs) {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
-  try { return await fetch(url, { ...options, signal: controller.signal }); }
-  finally { clearTimeout(timer); }
-}
-const sleep = ms => new Promise(r => setTimeout(r, ms));
-const RETRIABLE_STATUS = new Set([429, 500, 502, 503, 529]);
-async function fetchAnthropicWithRetry(url, options, timeoutMs, maxRetries) {
-  let lastErr;
-  for (let attempt = 0; attempt <= maxRetries; attempt++) {
-    if (attempt > 0) await sleep(Math.min(700 * Math.pow(2, attempt - 1), 4000));
+  function tableHTML(b){
+    var rows = b.rows || [];
+    return '<table class="cy-tbl">' + rows.map(function(r){
+      var isTotal = String(r[0]).toLowerCase() === 'total';
+      return '<tr class="' + (isTotal ? 'cy-tbl-total' : '') + '">' + r.map(function(c){ return '<td>' + esc2(c) + '</td>'; }).join('') + '</tr>';
+    }).join('') + '</table>';
+  }
+
+  function renderBlock(b){
+    var body;
     try {
-      const resp = await fetchWithTimeout(url, options, timeoutMs);
-      if (RETRIABLE_STATUS.has(resp.status) && attempt < maxRetries) continue;
-      return resp;
-    } catch (e) { lastErr = e; if (attempt >= maxRetries) throw e; }
+      if (b.type === 'table') body = tableHTML(b);
+      else if (b.type === 'bar') body = barSVG(b, false);
+      else if (b.type === 'histogram') body = barSVG(b, true);
+      else if (b.type === 'line' || b.type === 'cohort_line') body = lineSVG(b);
+      else if (b.type === 'stacked_bar') body = stackedSVG(b);
+      else if (b.type === 'pie') body = pieSVG(b);
+      else body = b.rows ? tableHTML(b) : '';           // degrade_to table
+    } catch (e) { body = b.rows ? tableHTML(b) : '<div class="cy-ex-note">[exhibit]</div>'; }
+    return '<div class="cy-ex-block">' + (b.name ? '<div class="cy-ex-bname">' + esc2(b.name) + '</div>' : '') +
+      '<div class="cy-chart">' + body + '</div>' +
+      (b.note ? '<div class="cy-ex-note">' + esc2(b.note) + '</div>' : '') + '</div>';
   }
-  if (lastErr) throw lastErr;
-}
-async function rateLimited(userId, sbUrl, sbKey, token) {
-  try {
-    const resp = await fetchWithTimeout(sbUrl + '/rest/v1/rpc/check_and_increment_rate_limit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', apikey: sbKey, Authorization: 'Bearer ' + token },
-      body: JSON.stringify({ p_user_id: userId, p_window_seconds: RATE_WINDOW_MS / 1000, p_limit: RATE_LIMIT })
-    }, AUTH_TIMEOUT_MS);
-    if (!resp.ok) { console.error('Casey rate-limit RPC returned', resp.status); return false; }
-    return (await resp.json()) === false;
-  } catch (e) { console.error('Casey rate-limit RPC failed:', e); return false; }
-}
 
-// One bounded model call + a single thinking-truncation retry inside a hard
-// deadline (same discipline as claude.js), returning parsed JSON or null.
-async function graderJSON(system, userText, maxTokens) {
-  const T0 = Date.now();
-  const BUDGET_MS = 52 * 1000;
-  const call = (mt, timeoutMs) => fetchAnthropicWithRetry('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': process.env.ANTHROPIC_API_KEY,
-      'anthropic-version': '2023-06-01',
-      'anthropic-beta': 'prompt-caching-2024-07-31'
-    },
-    body: JSON.stringify({ model: GRADER_MODEL, max_tokens: mt, system: [{ type: 'text', text: system }], messages: [{ role: 'user', content: userText }] })
-  }, timeoutMs, 0);
-  const textOf = d => (d && Array.isArray(d.content)) ? d.content.filter(b => b && b.type === 'text' && typeof b.text === 'string').map(b => b.text).join('\n') : '';
-  let resp = await call(maxTokens, 45 * 1000);
-  let data = await resp.json();
-  let text = textOf(data);
-  const timeLeft = BUDGET_MS - (Date.now() - T0);
-  if ((!text || (data && data.stop_reason === 'max_tokens')) && timeLeft > 12 * 1000) {
-    try { const r2 = await call(Math.min(maxTokens * 2, 4000), timeLeft - 2000); if (r2.status === 200) { const d2 = await r2.json(); if (textOf(d2)) { data = d2; text = textOf(d2); } } } catch (e) { /* keep */ }
+  function showExhibit(ex){
+    if (!ex || S.shown[ex.id]) return; S.shown[ex.id] = true;
+    var html = '<div class="cy-ex"><span class="cy-ex-tag">Exhibit</span><div class="cy-ex-title">' + esc2(ex.title || 'Exhibit') + '</div>' +
+      (ex.blocks || []).map(renderBlock).join('') + '</div>';
+    feedNode(html);
   }
-  try { const m = text.match(/\{[\s\S]*\}/); return m ? JSON.parse(m[0]) : null; } catch (e) { return null; }
-}
 
-async function gradeOpen(q, answer) {
-  const sys = 'You are a strict but fair BCG case-interview examiner. Grade the candidate answer on a binary pass/fail. Return ONLY JSON: {"pass":true|false,"feedback":"1 short sentence IN ENGLISH: what earned or missed the pass"}.';
-  const u = 'PASS CRITERION: ' + (q.validation || 'a reasonable, on-point answer') +
-    '\nMODEL ANSWER: ' + (q.model_answer || '—') +
-    '\nCANDIDATE ANSWER: ' + answer;
-  const j = await graderJSON(sys, u, 400);
-  return j || { pass: true, feedback: 'Answer accepted.' };
-}
-
-/* ───────────────────────── handler ───────────────────────────────────────── */
-export default async function handler(req, res) {
-  const origin = process.env.ALLOWED_ORIGIN || FALLBACK_ORIGIN;
-  res.setHeader('Access-Control-Allow-Origin', origin);
-  res.setHeader('Vary', 'Origin');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  if (req.method === 'OPTIONS') return res.status(200).end();
-  if (req.method !== 'POST') return res.status(405).json({ error: { message: 'Method not allowed' } });
-
-  try {
-    const auth = req.headers['authorization'] || req.headers['Authorization'] || '';
-    const token = auth.startsWith('Bearer ') ? auth.slice(7) : null;
-    if (!token) return res.status(401).json({ error: { message: 'Authentication required.' } });
-    const sbUrl = process.env.SUPABASE_URL, sbKey = process.env.SUPABASE_ANON_KEY;
-    if (!sbUrl || !sbKey) return res.status(500).json({ error: { message: 'Server auth not configured.' } });
-
-    const raw = JSON.stringify(req.body || {});
-    if (raw.length > MAX_BODY_BYTES) return res.status(413).json({ error: { message: 'Request too large.' } });
-
-    let userResp;
-    try {
-      userResp = await fetchWithTimeout(sbUrl + '/auth/v1/user', { headers: { apikey: sbKey, Authorization: 'Bearer ' + token } }, AUTH_TIMEOUT_MS);
-    } catch (e) { return res.status(504).json({ error: { message: 'Authentication timed out. Please try again.' } }); }
-    if (!userResp.ok) return res.status(401).json({ error: { message: 'Invalid or expired session.' } });
-    const user = await userResp.json();
-    const userId = user && user.id;
-    if (!userId) return res.status(401).json({ error: { message: 'Invalid session.' } });
-
-    const body = req.body || {};
-
-    // list — no model call, meta only.
-    if (body.action === 'list') {
-      return res.status(200).json({ cases: (CASES_DATA.cases || []).map(c => ({ id: c.id, title: c.title, meta_tag: c.meta_tag })) });
-    }
-    // case — sanitized (no answer keys).
-    if (body.action === 'case') {
-      const c = caseById(body.caseId);
-      if (!c) return res.status(400).json({ error: { message: 'Unknown case.' } });
-      return res.status(200).json({ case: sanitizeCase(c) });
-    }
-    // grade — rate-limited, keys never leave.
-    if (body.action === 'grade') {
-      if (await rateLimited(userId, sbUrl, sbKey, token)) {
-        return res.status(429).json({ error: { message: 'Too many requests. Please slow down.' } });
-      }
-      const c = caseById(body.caseId);
-      if (!c) return res.status(400).json({ error: { message: 'Unknown case.' } });
-      const flat = flatten(c);
-      const gid = Number(body.gid);
-      const q = flat[gid];
-      if (!q) return res.status(400).json({ error: { message: 'Unknown step.' } });
-      const p = body.payload || {};
-      const t = q.type;
-
-      if (t === 'select_all' || t === 'select_fewest' || t === 'single_choice') {
-        return res.status(200).json(gradeChoice(q, p.selected));
-      }
-      if (t === 'enter_number') {
-        return res.status(200).json(gradeNumber(q, p.value));
-      }
-      if (t === 'open_text_elicitation') {
-        const answer = String(p.answer || '');
-        const trg = (q.trigger_phrases || []).some(ph => answer.toLowerCase().indexOf(String(ph).toLowerCase()) >= 0);
-        let pass = trg;
-        if (!trg) { const r = await gradeOpen(q, answer); pass = !!r.pass; }
-        return res.status(200).json({ pass, validation: q.validation || 'Right thing to probe.', revealExhibit: q.reveal_exhibit || null });
-      }
-      if (t === 'voice') {
-        // Canonical structured rubric for every case (C1-C30). Falls back to the
-        // book checklist only if a rubric is somehow absent (defensive).
-        const rubric = CASEY_RUBRICS[q.rubric_ref] || null;
-        const grounding = rubric
-          ? ('rubric: ' + JSON.stringify(rubric))
-          : ('voice_checklist:\n' + (q.checklist || '') + '\nmodel_answer:\n' + (q.model_answer || ''));
-        const u = 'case_id: ' + (q.rubric_ref || c.id) + '\n' + grounding + '\ntranscript: ' + String(p.transcript || '');
-        const j = await graderJSON(CASEY_VOICE_SYSTEM, u, 1200) || { criteria: {}, score: 0, verdict: 'weak', coaching: 'Could not grade — please try again.' };
-        j.model_answer = q.model_answer || '';
-        return res.status(200).json(j);
-      }
-      // open_text / brainstorm
-      return res.status(200).json(await gradeOpen(q, String(p.answer || '')));
-    }
-
-    return res.status(400).json({ error: { message: 'Unknown action.' } });
-  } catch (err) {
-    console.error('CasEdge Casey error:', err);
-    return res.status(500).json({ error: { message: 'Something went wrong. Please try again.' } });
+  // ---------- server API (auth'd) ----------
+  function freshToken2(){
+    if (typeof sb === 'undefined' || !sb) return Promise.resolve(null);
+    return sb.auth.getSession().then(function(r){
+      var s = r && r.data && r.data.session;
+      if (s && s.expires_at && (s.expires_at*1000 - Date.now() < 60000)) return sb.auth.refreshSession().then(function(rr){ return (rr && rr.data && rr.data.session) || s; });
+      return s;
+    }).then(function(s){ return s ? s.access_token : null; }).catch(function(){ return null; });
   }
-}
+  // Single entry point to /api/casey. Every answer key and every grade lives there.
+  function apiCasey(payload){
+    return freshToken2().then(function(token){
+      var headers = { 'Content-Type': 'application/json' };
+      if (token) headers['Authorization'] = 'Bearer ' + token;
+      return fetch('/api/casey', { method:'POST', headers: headers, body: JSON.stringify(payload) });
+    }).then(function(r){ return r.json().catch(function(){ return {}; }); });
+  }
+  function gradeStep(gid, payload){
+    return apiCasey({ action:'grade', caseId: S.case.id, gid: gid, payload: payload })
+      .catch(function(){ return { _err:true }; });
+  }
+
+  // ---------- flow ----------
+  function progress(){
+    var pct = Math.round((S.idx / S.flat.length) * 100);
+    var f = E('cyProgFill'); if (f) f.style.width = pct + '%';
+    var l = E('cyProgLabel'); if (l) l.textContent = 'Test Completed ' + pct + '%';
+  }
+
+  function iz(html){ var z = E('cyInputZone'), i = E('cyIz'); if (!z || !i) return; z.style.display = 'block'; i.innerHTML = html; }
+  function izHide(){ var z = E('cyInputZone'); if (z) z.style.display = 'none'; }
+
+  function step(){
+    progress();
+    if (S.idx >= S.flat.length){ return finish(); }
+    var q = S.flat[S.idx];
+    // reveal auto_at_step exhibits tied to this step
+    if (q._reveal) q._reveal.forEach(function(id){ showExhibit(exById(id)); });
+    if (q._wrap) say('ai', q._wrap);
+    say('ai', q.prompt || '(question)');
+    renderWidget(q);
+  }
+
+  function exById(id){ return (S.case.exhibits || []).filter(function(e){ return e.id === id; })[0]; }
+
+  function renderWidget(q){
+    var t = q.type;
+    if (t === 'select_all' || t === 'select_fewest' || t === 'single_choice'){
+      var single = t === 'single_choice';
+      var opts = (q.options||[]).map(function(o, i){ return '<div class="cy-opt ' + (single?'radio':'') + '" data-i="' + i + '" onclick="Casey._pick(' + i + ',' + single + ')"><span class="cy-box"><svg viewBox="0 0 24 24" fill="none" stroke="#04201b" stroke-width="3.5"><path d="M20 6L9 17l-5-5"/></svg></span><span>' + esc2(o.text) + '</span></div>'; }).join('');
+      var help = t === 'select_all' ? 'Select all that apply.' : t === 'select_fewest' ? 'Select the fewest items that fit.' : 'Choose one.';
+      iz(opts + '<div class="cy-hint">' + help + '</div><div style="margin-top:12px;text-align:right"><button class="cy-send" id="cySendBtn" disabled onclick="Casey._submit()">Submit</button></div>');
+    } else if (t === 'enter_number'){
+      iz('<div class="cy-numrow"><input class="cy-numin" id="cyNumIn" type="text" inputmode="decimal" placeholder="Enter a number" onkeydown="if(event.key===\'Enter\')Casey._submit()"><button class="cy-send" onclick="Casey._submit()">Submit</button></div><div class="cy-hint">Enter the number the question asks for (no need to type the currency symbol).</div>');
+      setTimeout(function(){ var el = E('cyNumIn'); if (el) el.focus(); }, 50);
+    } else if (t === 'voice'){
+      renderVoice(q);
+    } else { // open_text, elicitation, brainstorm
+      var ph = t === 'open_text_brainstorm' ? 'List your ideas — group them (e.g. Revenue side / Cost side)…' : 'Type your answer…';
+      iz('<textarea class="cy-txtin" id="cyTxtIn" placeholder="' + ph + '"></textarea><div style="margin-top:10px;text-align:right"><button class="cy-send" onclick="Casey._submit()">Submit</button></div>');
+      setTimeout(function(){ var el = E('cyTxtIn'); if (el) el.focus(); }, 50);
+    }
+  }
+
+  function fb(ok, html){ feedNode('<div class="cy-fb ' + (ok?'ok':'no') + '">' + html + '</div>'); }
+
+  function advance(){ S.idx++; izHide(); setTimeout(step, 350); }
+
+  function _pick(i, single){
+    var els = document.querySelectorAll('#cyIz .cy-opt');
+    if (single){ els.forEach(function(e){ e.classList.remove('sel'); }); }
+    var el = document.querySelector('#cyIz .cy-opt[data-i="' + i + '"]'); if (el) el.classList.toggle('sel');
+    var any = document.querySelectorAll('#cyIz .cy-opt.sel').length > 0;
+    var b = E('cySendBtn'); if (b) b.disabled = !any;
+  }
+
+  function _submit(){
+    var q = S.flat[S.idx], t = q.type;
+    if (t === 'select_all' || t === 'select_fewest' || t === 'single_choice'){
+      var sel = [].slice.call(document.querySelectorAll('#cyIz .cy-opt.sel')).map(function(e){ return Number(e.dataset.i); });
+      if (!sel.length) return;
+      var b = E('cySendBtn'); if (b) b.disabled = true;
+      say('me', sel.map(function(i){ return q.options[i].text; }).join('  •  '));
+      gradeStep(q.gid, { selected: sel }).then(function(r){
+        if (r._err){ fb(false, '<b>Connection issue.</b> Could not reach the grader — moving on.'); return void setTimeout(advance, 500); }
+        var correct = r.correctIdx || [];
+        (q.options||[]).forEach(function(o, i){ var el = document.querySelector('#cyIz .cy-opt[data-i="' + i + '"]'); if (!el) return; if (correct.indexOf(i) >= 0) el.classList.add('correct'); else if (sel.indexOf(i) >= 0) el.classList.add('wrong'); });
+        if (r.ok) S.score++;
+        fb(!!r.ok, (r.ok ? '<b>✓ Correct.</b> ' : '<b>Not quite.</b> ') + 'Verified against: ' + esc2(r.validation || ''));
+        setTimeout(advance, 500);
+      });
+      return;
+    }
+    if (t === 'enter_number'){
+      var raw = E('cyNumIn').value.trim().replace(/[$,%\s]/g, '');
+      if (raw === '' || isNaN(Number(raw))) return;
+      say('me', raw); izBusy();
+      gradeStep(q.gid, { value: raw }).then(function(r){
+        if (r._err){ fb(false, '<b>Connection issue.</b> Could not reach the grader — moving on.'); return void setTimeout(advance, 500); }
+        if (r.ok) S.score++;
+        var expl = r.answer_explain ? '<div style="margin-top:6px">' + md(r.answer_explain) + '</div>' : '';
+        fb(!!r.ok, (r.ok ? '<b>✓ ' + esc2(r.answer) + '</b> — correct.' : '<b>Not quite — the answer is ' + esc2(r.answer) + '.</b>') + expl);
+        setTimeout(advance, 600);
+      });
+      return;
+    }
+    // text-based
+    var el = E('cyTxtIn'); if (!el) return; var answer = el.value.trim(); if (!answer) return;
+    say('me', answer); izBusy();
+    if (t === 'open_text_elicitation'){
+      gradeStep(q.gid, { answer: answer }).then(function(r){
+        if (r._err){ fb(false, '<b>Connection issue.</b> Revealing the exhibit anyway.'); }
+        else if (r.pass){ S.score++; fb(true, '<b>Good ask.</b> ' + esc2(r.validation || 'Right thing to probe.')); }
+        else { fb(false, '<b>Hint:</b> Think about what you still need to know — revealing the exhibit anyway.'); }
+        var revId = (r && r.revealExhibit) || null;
+        if (revId){ setTimeout(function(){ say('ai', 'Here is what that surfaces:'); showExhibit(exById(revId)); setTimeout(advance, 400); }, 300); }
+        else setTimeout(advance, 400);
+      });
+      return;
+    }
+    // open_text / brainstorm → server grade
+    gradeStep(q.gid, { answer: answer }).then(function(r){
+      if (r._err){ fb(false, '<b>Connection issue.</b> Could not reach the grader — moving on.'); return void setTimeout(advance, 500); }
+      if (r.pass) S.score++;
+      fb(!!r.pass, (r.pass ? '<b>✓ </b>' : '<b>✗ </b>') + esc2(r.feedback || ''));
+      setTimeout(advance, 500);
+    });
+  }
+
+  function izBusy(){ iz('<div class="cy-recstat">Grading your answer…</div>'); }
+
+  // ---------- voice finale ----------
+  var mic = null;
+  function renderVoice(q){
+    iz('<div class="cy-rec"><button class="cy-recbtn" id="cyRecBtn" onclick="Casey._rec()"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0" fill="none" stroke="currentColor" stroke-width="2"/></svg><span id="cyRecLbl">Record recommendation</span></button><span class="cy-recstat" id="cyRecStat">~60–90 seconds. Conclusion first.</span></div><div style="margin-top:10px"><textarea class="cy-txtin" id="cyVoiceTxt" placeholder="…or type your recommendation here if you prefer."></textarea><div style="margin-top:8px;text-align:right"><button class="cy-send ghost" onclick="Casey._submitVoice()">Submit recommendation</button></div></div>');
+  }
+  function _rec(){
+    if (mic){ stopRec(); return; }
+    var stat = E('cyRecStat');
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || typeof MediaRecorder === 'undefined'){ if (stat) stat.textContent = 'Mic not supported — type your answer instead.'; return; }
+    navigator.mediaDevices.getUserMedia({ audio: true }).then(function(stream){
+      var rec = new MediaRecorder(stream), chunks = [];
+      rec.ondataavailable = function(e){ if (e.data && e.data.size) chunks.push(e.data); };
+      rec.onstop = function(){
+        stream.getTracks().forEach(function(t){ t.stop(); });
+        var blob = new Blob(chunks, { type: rec.mimeType || 'audio/webm' });
+        var fr = new FileReader();
+        fr.onloadend = function(){
+          var b64 = String(fr.result).split(',')[1];
+          if (stat) stat.textContent = 'Transcribing…';
+          if (typeof callTranscribe === 'function'){
+            callTranscribe(b64, rec.mimeType || 'audio/webm').then(function(txt){ var ta = E('cyVoiceTxt'); if (ta) ta.value = txt; if (stat) stat.textContent = 'Transcribed — review and submit.'; }).catch(function(){ if (stat) stat.textContent = 'Transcription failed — type your answer instead.'; });
+          } else if (stat) stat.textContent = 'Transcription unavailable — type your answer.';
+        };
+        fr.readAsDataURL(blob);
+      };
+      rec.start(); mic = { rec: rec, stream: stream };
+      var btn = E('cyRecBtn'), lbl = E('cyRecLbl'); if (btn) btn.classList.add('recording'); if (lbl) lbl.textContent = 'Stop recording';
+      if (stat) stat.textContent = 'Recording…';
+    }).catch(function(){ if (stat) stat.textContent = 'Mic access denied — type your answer instead.'; });
+  }
+  function stopRec(){ if (!mic) return; try { mic.rec.stop(); } catch (e) {} mic = null; var btn = E('cyRecBtn'), lbl = E('cyRecLbl'); if (btn) btn.classList.remove('recording'); if (lbl) lbl.textContent = 'Record recommendation'; }
+
+  function _submitVoice(){
+    if (mic) stopRec();
+    var ta = E('cyVoiceTxt'); if (!ta) return; var transcript = ta.value.trim(); if (!transcript) return;
+    say('me', transcript); izBusy();
+    var q = S.flat[S.idx];
+    gradeStep(q.gid, { transcript: transcript }).then(function(j){
+      if (!j || j._err || !j.criteria) j = { criteria:{}, score:0, verdict:'weak', coaching:'Could not grade — please try again.' };
+      renderGrade(j, q);
+    });
+  }
+
+  function renderGrade(j, q){
+    izHide();
+    var labels = { c1_conclusion_first:'Conclusion first (Pyramid)', c2_anchor_number:'Anchor number', c3_risks:'Risks (internal + external)', c4_nextstep:'Next step' };
+    var crit = j.criteria || {};
+    var rows = Object.keys(labels).map(function(k){ var c = crit[k] || {}; var pass = !!c.pass; return '<div class="cy-crit ' + (pass?'pass':'fail') + '"><span class="ic">' + (pass?'✓':'✗') + '</span><span><b>' + labels[k] + '</b>' + (c.evidence ? ' — ' + esc2(c.evidence) : '') + '</span></div>'; }).join('');
+    var score = typeof j.score === 'number' ? j.score : Object.keys(crit).filter(function(k){ return crit[k] && crit[k].pass; }).length;
+    var verdict = j.verdict || (score >= 4 ? 'strong' : score >= 3 ? 'partial' : 'weak');
+    feedNode('<div class="cy-grade"><div class="cy-score">Voice finale: ' + score + '/4 · ' + esc2(verdict) + '</div>' + rows + (j.coaching ? '<div class="cy-fb ' + (score>=3?'ok':'no') + '" style="margin-top:12px">' + esc2(j.coaching) + '</div>' : '') + '</div>');
+    if (score >= 3) S.score++;
+    // reveal partner model answer (server returns it with the voice grade)
+    var model = j.model_answer || '';
+    if (model){ setTimeout(function(){ feedNode('<div class="cy-ex"><span class="cy-ex-tag">Partner-level model answer</span><div class="cy-bbl" style="max-width:100%;margin-top:4px">' + md(model) + '</div></div>'); S.idx++; setTimeout(finish, 500); }, 400); }
+    else { S.idx++; setTimeout(finish, 500); }
+  }
+
+  function finish(){
+    progress();
+    izHide();
+    var maxScore = S.flat.length;
+    say('ai', '**Case complete.** You scored **' + S.score + ' / ' + maxScore + '** on this run. Review the exhibits and the model recommendation above — then try another case.');
+    feedNode('<div style="text-align:center;margin:18px 0"><button class="cy-send" onclick="Casey.open()">← Back to case list</button></div>');
+    try { var done = JSON.parse(localStorage.getItem('casedge_casey_done') || '[]'); if (done.indexOf(S.case.id) < 0) done.push(S.case.id); localStorage.setItem('casedge_casey_done', JSON.stringify(done)); } catch (e) {}
+  }
+
+  // ---------- case picker / entry ----------
+  function loadCases(){
+    if (CASES) return Promise.resolve(CASES);
+    return apiCasey({ action:'list' }).then(function(d){ if (d && d.error) throw new Error(d.error.message||'load failed'); CASES = (d && d.cases) || []; return CASES; });
+  }
+
+  function open(){
+    if (typeof showScreen === 'function') showScreen('casey');
+    izHide();
+    var w = E('cyWrap'); if (w) w.innerHTML = '';
+    E('cyProgFill').style.width = '0%'; E('cyProgLabel').textContent = 'Choose a case';
+    loadCases().then(function(cases){
+      var done = []; try { done = JSON.parse(localStorage.getItem('casedge_casey_done') || '[]'); } catch (e) {}
+      var cards = cases.map(function(c, i){ var d = done.indexOf(c.id) >= 0;
+        return '<div class="cy-card ' + (d?'done':'') + '" onclick="Casey.play(\'' + c.id + '\')"><div class="cy-num">' + (i+1) + '</div><div><div class="cy-cn">' + esc2(c.title) + '</div><div class="cy-cd">' + esc2(c.meta_tag || '') + '</div></div>' + (d?'<span class="cy-badge">✓ done</span>':'') + '</div>'; }).join('');
+      w.innerHTML = '<div class="cy-pick-h"><div class="eyebrow">BCG · Casey Simulator</div><h2>Pick a case</h2><p>30 interviewee-led cases · exhibits · voice recommendation, graded like the real thing.</p></div>' + cards;
+      scrollFeed();
+    }).catch(function(){ w.innerHTML = '<div class="cy-pick-h"><h2>Casey</h2><p>Could not load cases — please make sure you are signed in, then try again.</p></div>'; });
+  }
+
+  function play(id){
+    var w = E('cyWrap'); if (w) w.innerHTML = '';
+    var pl = E('cyProgLabel'); if (pl) pl.textContent = 'Loading…';
+    apiCasey({ action:'case', caseId: id }).then(function(d){
+      var c = d && d.case;
+      if (!c){ if (w) w.innerHTML = '<div class="cy-pick-h"><h2>Casey</h2><p>Could not load this case — please try again.</p></div>'; return; }
+      S = { case: c, flat: c.steps || [], idx: 0, score: 0, shown: {} };
+      if (pl) pl.textContent = 'Test Completed 0%';
+      say('ai', "I'm Casey. Let's work through **" + c.title + "**. Read the brief, use the exhibits — the math is real. You'll close with a spoken recommendation.");
+      say('ai', c.scenario);
+      (c.exhibits || []).forEach(function(ex){ if (ex.reveal === 'auto') showExhibit(ex); });
+      setTimeout(step, 500);
+    }).catch(function(){ if (w) w.innerHTML = '<div class="cy-pick-h"><h2>Casey</h2><p>Could not load this case — please try again.</p></div>'; });
+  }
+
+  function exit(){ if (typeof showScreen === 'function') showScreen('mode'); }
+
+  window.Casey = { open: open, play: play, exit: exit, _pick: _pick, _submit: _submit, _rec: _rec, _submitVoice: _submitVoice };
+})();
