@@ -139,7 +139,7 @@ window.caseyCalc = (function(){
   var CARD = `          <div class="firm-initial" style="background:rgba(93,184,166,.15);color:var(--accent-teal);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><line x1="8" y1="9" x2="16" y2="9"></line><line x1="8" y1="13" x2="13" y2="13"></line></svg></div>
           <div>
             <div class="firm-name">Casey Simulator <span class="firm-tag">BCG</span> <span class="soon-badge" style="background:rgba(93,184,166,.18);color:var(--accent-teal);">Premium</span></div>
-            <div class="firm-desc">The real BCG Casey chatbot - 30 interviewee-led cases, live exhibits, expected-value math, and a spoken final recommendation graded on the Pyramid Principle.</div>
+            <div class="firm-desc">The real BCG Casey chatbot - 50 interviewee-led cases, live exhibits, expected-value math, and a spoken final recommendation graded on the Pyramid Principle.</div>
           </div>
           <div class="firm-check"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg></div>`;
   function run(){
@@ -147,8 +147,10 @@ window.caseyCalc = (function(){
       var st=document.createElement('style'); st.textContent=CSS; document.head.appendChild(st);
       var d=document.createElement('div'); d.id='screen-casey'; d.className='screen'; d.setAttribute('data-screen-label','Casey Chat'); d.innerHTML=SCREEN; document.body.appendChild(d);
     }
-    var grid=document.querySelector('#screen-mode .firm-grid');
-    if (grid && !document.getElementById('caseyModeCard')){ var c=document.createElement('div'); c.id='caseyModeCard'; c.className='firm-card'; c.setAttribute('tabindex','0'); c.setAttribute('role','button'); c.setAttribute('onclick','Casey.open()'); c.innerHTML=CARD; grid.appendChild(c); }
+    // Consolidated: the single static "Chat Game / BCG" card in index.html now
+    // opens this 50-case picker via Casey.open(). No separate card is injected,
+    // to avoid two duplicate BCG entry points. (CARD kept for reference/reuse.)
+    void CARD;
   }
   if (document.readyState==='loading') document.addEventListener('DOMContentLoaded',run); else run();
 })();
@@ -514,7 +516,7 @@ window.caseyCalc = (function(){
       var done = []; try { done = JSON.parse(localStorage.getItem('casedge_casey_done') || '[]'); } catch (e) {}
       var cards = cases.map(function(c, i){ var d = done.indexOf(c.id) >= 0;
         return '<div class="cy-card ' + (d?'done':'') + '" onclick="Casey.play(\'' + c.id + '\')"><div class="cy-num">' + (i+1) + '</div><div><div class="cy-cn">' + esc2(c.title) + '</div><div class="cy-cd">' + esc2(c.meta_tag || '') + '</div></div>' + (d?'<span class="cy-badge">✓ done</span>':'') + '</div>'; }).join('');
-      w.innerHTML = '<div class="cy-pick-h"><div class="eyebrow">BCG · Casey Simulator</div><h2>Pick a case</h2><p>30 interviewee-led cases · exhibits · voice recommendation, graded like the real thing.</p></div>' + cards;
+      w.innerHTML = '<div class="cy-pick-h"><div class="eyebrow">BCG · Casey Simulator</div><h2>Pick a case</h2><p>' + cases.length + ' interviewee-led cases · exhibits · voice recommendation, graded like the real thing.</p></div>' + cards;
       scrollFeed();
     }).catch(function(){ w.innerHTML = '<div class="cy-pick-h"><h2>Casey</h2><p>Could not load cases — please make sure you are signed in, then try again.</p></div>'; });
   }
