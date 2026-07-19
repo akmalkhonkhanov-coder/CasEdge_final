@@ -9,7 +9,11 @@
 //           {id,title,difficulty,type,focus,time,prompt,exhibit,step_prompts,index,total}
 //   grade → {drillId, answer} → {pass, coaching, reference:{en,ru}, provoked:{en,ru}}
 
-const DRILLS_DATA = require('./_drills_cm.json');
+const DRILLS_CM = require('./_drills_cm.json');
+const DRILLS_MS = require('./_drills_ms.json');
+// Two curated libraries share one endpoint. Client passes set:'ms' for Market
+// Sizing; anything else (incl. absent) → Case Math. IDs are disjoint (CM-* / MS-*).
+function libData(body) { return (body && body.set === 'ms') ? DRILLS_MS : DRILLS_CM; }
 
 const FALLBACK_ORIGIN = 'https://cas-edge-final.vercel.app';
 const GRADER_MODEL = 'claude-sonnet-5';
@@ -33,7 +37,8 @@ RESPONSE FORMAT (strict JSON): {"pass":true,"coaching":"1-2 sentences IN ENGLISH
 /* ───────────────────────── library ───────────────────────────────────────── */
 let _byId = null;
 function drillById(id) {
-  if (!_byId) { _byId = new Map(); for (const d of (DRILLS_DATA.drills || [])) _byId.set(d.id, d); }
+  // one combined map across both libraries — ids are disjoint (CM-* / MS-*)
+  if (!_byId) { _byId = new Map(); for (const src of [DRILLS_CM, DRILLS_MS]) for (const d of (src.drills || [])) _byId.set(d.id, d); }
   return _byId.get(id);
 }
 
@@ -50,9 +55,9 @@ function sanitizeDrill(d, index, total) {
   };
 }
 
-function nextDrill(doneIds) {
+function nextDrill(doneIds, data) {
   const done = new Set(Array.isArray(doneIds) ? doneIds : []);
-  const list = DRILLS_DATA.drills || [];
+  const list = (data || DRILLS_CM).drills || [];
   const idx = list.findIndex(d => !done.has(d.id));
   if (idx < 0) return null;                 // all done
   return sanitizeDrill(list[idx], idx + 1, list.length);
@@ -163,10 +168,10 @@ export default async function handler(req, res) {
     const body = req.body || {};
 
     if (body.action === 'list') {
-      return res.status(200).json({ drills: (DRILLS_DATA.drills || []).map(d => ({ id: d.id, title: d.title, difficulty: d.difficulty, focus: d.focus })) });
+      return res.status(200).json({ drills: (libData(body).drills || []).map(d => ({ id: d.id, title: d.title, difficulty: d.difficulty, focus: d.focus })) });
     }
     if (body.action === 'next') {
-      const nd = nextDrill(body.doneIds);
+      const nd = nextDrill(body.doneIds, libData(body));
       return res.status(200).json({ drill: nd });     // null when the set is exhausted
     }
     if (body.action === 'grade') {

@@ -12556,6 +12556,2507 @@
      "rubric_ref": "C50"
     }
    ]
+  },
+  {
+   "id": "C51",
+   "title": "Wait for It",
+   "meta_tag": "Trap-flip · Lithium Mining",
+   "scenario": "Tanvergrove Minerals holds a lithium deposit in the market of Aldenmoor. The board is deciding whether to build the processing plant now. Economics in **Exhibit 1**.\nThe development director: \"Expected NPV is positive — $30 million. Build it now.\" The CEO asks BCG whether now is the right time.",
+   "exhibits": [
+    {
+     "id": "C51-E1",
+     "case": "C51",
+     "reveal": "auto",
+     "title": "Plant decision economics",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "",
+       "rows": [
+        [
+         "Item",
+         "Value"
+        ],
+        [
+         "Capex to build",
+         "$200,000,000"
+        ],
+        [
+         "Gross project value — high-price scenario",
+         "$340,000,000"
+        ],
+        [
+         "Gross project value — low-price scenario",
+         "$120,000,000"
+        ],
+        [
+         "Probability of each scenario",
+         "50% / 50%"
+        ],
+        [
+         "Deposit reserve life",
+         "22 years"
+        ],
+        [
+         "Regional mining employment",
+         "4,200"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "C51-E2",
+     "case": "C51",
+     "reveal": "after_elicitation",
+     "elicitation_step": "C51-Q3c",
+     "title": "Price uncertainty timing",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "",
+       "rows": [
+        [
+         "Item",
+         "Value"
+        ],
+        [
+         "When the price scenario becomes known",
+         "in 12 months (offtake auction)"
+        ],
+        [
+         "Cost of delaying the build by 12 months",
+         "capex and project values unchanged"
+        ],
+        [
+         "Discount rate",
+         "10%"
+        ]
+       ]
+      }
+     ],
+     "trigger_phrases": [
+      "when",
+      "price",
+      "scenario",
+      "becomes",
+      "known",
+      "because"
+     ],
+     "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
+    }
+   ],
+   "steps": [
+    {
+     "id": "Q1",
+     "type": "select_all",
+     "prompt": "Which analyses would you prioritize?",
+     "options": [
+      {
+       "text": "Compute expected NPV of building now",
+       "correct": true
+      },
+      {
+       "text": "Determine when the price uncertainty resolves",
+       "correct": true
+      },
+      {
+       "text": "Value the alternative of waiting and building only in the favourable scenario",
+       "correct": true
+      },
+      {
+       "text": "Benchmark regional mining employment",
+       "correct": false
+      },
+      {
+       "text": "Confirm capex and scenario values",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,3,5}, none of {4}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 5. **Validation:** all of {1,2,3,5}, none of {4}."
+    },
+    {
+     "id": "Q2",
+     "type": "select_all",
+     "prompt": "Genuine concerns for the timing decision?",
+     "options": [
+      {
+       "text": "Expected NPV of building now is positive but modest",
+       "correct": true
+      },
+      {
+       "text": "In the low-price scenario the project destroys value",
+       "correct": true
+      },
+      {
+       "text": "The deposit has 22 years of reserves",
+       "correct": false
+      },
+      {
+       "text": "Waiting means we could avoid building into a bad price",
+       "correct": true
+      },
+      {
+       "text": "The price scenario resolves within a year",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,4,5}, none of {3}.",
+     "answer_explain": "**Answer:** 1, 2, 4, 5. **Validation:** all of {1,2,4,5}, none of {3}."
+    },
+    {
+     "id": "Q3",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q3a",
+       "type": "enter_number",
+       "prompt": "What is the expected gross project value? (Probability-weighted across scenarios.)",
+       "answer": 230000000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 230000000** — 0.5 × $340M + 0.5 × $120M = **$230,000,000**."
+      },
+      {
+       "id": "Q3b",
+       "type": "enter_number",
+       "prompt": "What is the expected NPV of building now? (Expected gross value − capex.)",
+       "answer": 30000000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 30000000** — 230,000,000 − 200,000,000 = **$30,000,000**. The director's case."
+      },
+      {
+       "id": "Q3c",
+       "type": "open_text_elicitation",
+       "prompt": "The director treats this as build-or-never. Before ruling: what ONE thing about the price uncertainty would you want to know?",
+       "model_answer": "When the price scenario becomes known — because if it resolves soon, we could wait and build only if the price is high, avoiding the bad outcome.",
+       "validation": "credit only if the answer names timing of resolution or the option to wait (not generic \"what's the price risk\"). On credit → reveal Exhibit 2. On fail → L1 (\"Must the decision be made today, or does the price become known?\"), then reveal.",
+       "answer_explain": null,
+       "reveal_exhibit": "C51-E2",
+       "trigger_phrases": [
+        "when",
+        "price",
+        "scenario",
+        "becomes",
+        "known",
+        "because"
+       ],
+       "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
+      },
+      {
+       "id": "Q3d",
+       "type": "enter_number",
+       "prompt": "Using Exhibit 2: if we wait, we build only in the high scenario. What is the value of waiting? (Probability × (high value − capex), discounted one year at 10%.)",
+       "answer": 63636363.64,
+       "validation": null,
+       "answer_explain": "**Answer: 63636363.64** — 0.5 × ($340M − $200M) = $70,000,000; ÷ 1.10 = **$63,636,363.64**."
+      }
+     ]
+    },
+    {
+     "id": "Q4",
+     "type": "enter_number",
+     "prompt": "What is the option value of waiting? (Value of waiting − NPV of building now.)",
+     "answer": 33636363.64,
+     "validation": null,
+     "answer_explain": "**Answer: 33636363.64** — 63,636,363.64 − 30,000,000 = **$33,636,363.64**. Naive builds now; correct waits — **flip**."
+    },
+    {
+     "id": "Q5",
+     "type": "single_choice",
+     "prompt": "Why does waiting beat building now, despite the delay cost?",
+     "options": [
+      {
+       "text": "Because the discount rate is low",
+       "correct": false
+      },
+      {
+       "text": "Because waiting lets us avoid building into the low-price scenario, where the project destroys $80M of value",
+       "correct": true
+      },
+      {
+       "text": "Because capex falls over time",
+       "correct": false
+      },
+      {
+       "text": "Because reserves last 22 years",
+       "correct": false
+      }
+     ],
+     "validation": "choice == 2.",
+     "answer_explain": "**Answer:** Avoiding the bad scenario. **Validation:** choice == 2."
+    },
+    {
+     "id": "Q6",
+     "type": "voice",
+     "prompt": "\"The CEO wants your recommendation on timing. Record it — about 60–90 seconds.\"",
+     "model_answer": "Tanvergrove should wait twelve months rather than build now — waiting is worth about $63.6 million against $30 million for building today, an option value of roughly $33.6 million. The director is right that expected NPV today is positive, but that averages two very different outcomes: in the high-price case the plant is worth $140 million net, in the low-price case it destroys value. Because the price resolves in twelve months at the offtake auction, we can build only if the price is high — that asymmetry, not the discount rate, is what makes waiting worth more. Two risks: internally, a twelve-month delay has organizational cost — permits, team retention, and we should confirm capex doesn't escalate; externally, a competitor could commit first and take the offtake window, which would erode the option. Next step: confirm capex holds for twelve months and secure an option on the construction slot before the auction.",
+     "checklist": "1. Recommendation first: wait, NOT build now.\n2. ≥2 numbers, ≥1 anchor: **$63.6M value of waiting OR the $33.6M option value OR $63.6M-vs-$30M**.\n3. ≥1 internal (delay/capex escalation/permits) AND ≥1 external (competitor commits first) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last or no anchor.",
+     "rubric_ref": "C51"
+    }
+   ]
+  },
+  {
+   "id": "C52",
+   "title": "Fowl Play",
+   "meta_tag": "Trap-flip · Poultry Processing",
+   "scenario": "Pellhurst Foods processes poultry in the market of Vantry. It buys 50 million kg of live birds a year from independent farms. The COO wants to acquire its largest supplier farm. Economics in **Exhibit 1**.\nThe COO: \"The farm earns 6 cents a kilo on what we buy — that's $3 million a year we're handing over. Buy the farm and capture it.\" The CEO asks BCG for a view.",
+   "exhibits": [
+    {
+     "id": "C52-E1",
+     "case": "C52",
+     "reveal": "auto",
+     "title": "Supply economics",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "",
+       "rows": [
+        [
+         "Item",
+         "Value"
+        ],
+        [
+         "Annual purchase volume",
+         "50,000,000 kg"
+        ],
+        [
+         "Supplier margin on our volume",
+         "$0.06 / kg"
+        ],
+        [
+         "Acquisition price of the farm",
+         "$34,000,000"
+        ],
+        [
+         "Our processing capacity utilisation",
+         "81%"
+        ],
+        [
+         "Number of independent farms in the region",
+         "26"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "C52-E2",
+     "case": "C52",
+     "reveal": "after_elicitation",
+     "elicitation_step": "C52-Q3c",
+     "title": "Price cycle and sourcing flexibility",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "",
+       "rows": [
+        [
+         "Item",
+         "Value"
+        ],
+        [
+         "Share of years when market prices fall below internal production cost",
+         "40%"
+        ],
+        [
+         "Saving available by buying externally in those years",
+         "$0.19 / kg"
+        ]
+       ]
+      }
+     ],
+     "trigger_phrases": [
+      "give",
+      "sourcing",
+      "flexibility",
+      "specifically",
+      "whether",
+      "market"
+     ],
+     "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
+    }
+   ],
+   "steps": [
+    {
+     "id": "Q1",
+     "type": "select_all",
+     "prompt": "Which analyses would you prioritize?",
+     "options": [
+      {
+       "text": "Compute the supplier margin we would capture",
+       "correct": true
+      },
+      {
+       "text": "Assess what integration costs us in sourcing flexibility",
+       "correct": true
+      },
+      {
+       "text": "Quantify the value of buying externally when market prices fall",
+       "correct": true
+      },
+      {
+       "text": "Benchmark processing utilisation",
+       "correct": false
+      },
+      {
+       "text": "Confirm volume and supplier margin",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,3,5}, none of {4}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 5. **Validation:** all of {1,2,3,5}, none of {4}."
+    },
+    {
+     "id": "Q2",
+     "type": "select_all",
+     "prompt": "Genuine concerns for the acquisition?",
+     "options": [
+      {
+       "text": "We would capture $0.06/kg the farm currently earns",
+       "correct": true
+      },
+      {
+       "text": "Owning the farm locks us into internal supply",
+       "correct": true
+      },
+      {
+       "text": "There are 26 independent farms in the region",
+       "correct": false
+      },
+      {
+       "text": "In low-price years, buying externally would be cheaper than producing internally",
+       "correct": true
+      },
+      {
+       "text": "Poultry prices move on a cycle",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,4,5}, none of {3}.",
+     "answer_explain": "**Answer:** 1, 2, 4, 5. **Validation:** all of {1,2,4,5}, none of {3}."
+    },
+    {
+     "id": "Q3",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q3a",
+       "type": "enter_number",
+       "prompt": "What annual margin would Pellhurst capture by owning the farm? (Volume × supplier margin.)",
+       "answer": 3000000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 3000000** — 50,000,000 × $0.06 = **$3,000,000**. The COO's case."
+      },
+      {
+       "id": "Q3b",
+       "type": "enter_number",
+       "prompt": "Over how many kilos per year does that capture apply?",
+       "answer": 50000000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 50000000** — **50,000,000 kg**."
+      },
+      {
+       "id": "Q3c",
+       "type": "open_text_elicitation",
+       "prompt": "The COO counts only captured margin. Before ruling: what ONE thing about what integration COSTS us would you want to know?",
+       "model_answer": "What we give up in sourcing flexibility — specifically whether market prices ever fall below our internal production cost, so that buying externally would be cheaper.",
+       "validation": "credit only if the answer names flexibility / ability to buy externally when cheaper (not generic \"integration risk\"). On credit → reveal Exhibit 2. On fail → L1 (\"If market prices fall, what can an integrated buyer no longer do?\"), then reveal.",
+       "answer_explain": null,
+       "reveal_exhibit": "C52-E2",
+       "trigger_phrases": [
+        "give",
+        "sourcing",
+        "flexibility",
+        "specifically",
+        "whether",
+        "market"
+       ],
+       "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
+      },
+      {
+       "id": "Q3d",
+       "type": "enter_number",
+       "prompt": "Using Exhibit 2: what is the annual value of the sourcing flexibility we would lose? (Volume × share of low-price years × saving per kg.)",
+       "answer": 3800000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 3800000** — 50,000,000 × 40% × $0.19 = **$3,800,000**."
+      }
+     ]
+    },
+    {
+     "id": "Q4",
+     "type": "enter_number",
+     "prompt": "Compute the NET annual effect of acquiring: captured margin − flexibility lost.",
+     "answer": -800000.0,
+     "validation": null,
+     "answer_explain": "**Answer: -800000** — 3,000,000 − 3,800,000 = **−$800,000** → acquiring DESTROYS value before the $34M price is even considered. Naive ACQUIRE, correct DON'T — **flip**."
+    },
+    {
+     "id": "Q5",
+     "type": "enter_number",
+     "prompt": "At what low-year saving per kg would acquisition be exactly break-even? Answer $, four decimals. (Solve: 3,000,000 = 50,000,000 × 0.40 × x.)",
+     "answer": 0.15,
+     "validation": null,
+     "answer_explain": "**Answer: 0.1500** — x* = **$0.15/kg**. Actual $0.19 > $0.15 → DON'T ACQUIRE. **[9b]: порог из той же flexibility-модели.**"
+    },
+    {
+     "id": "Q6",
+     "type": "single_choice",
+     "prompt": "Your recommendation:",
+     "options": [
+      {
+       "text": "Acquire the farm",
+       "correct": false
+      },
+      {
+       "text": "Don't acquire — the sourcing flexibility is worth more than the captured margin",
+       "correct": true
+      },
+      {
+       "text": "Acquire only if the price is below $34M",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
+      }
+     ],
+     "validation": "choice == 2.",
+     "answer_explain": "**Answer:** Don't acquire. **Validation:** choice == 2."
+    },
+    {
+     "id": "Q7",
+     "type": "voice",
+     "prompt": "\"The CEO wants your recommendation on the acquisition. Record it — about 60–90 seconds.\"",
+     "model_answer": "Pellhurst should not acquire the farm — integration costs about $800,000 a year before we even discuss the $34 million price. The COO is right that we'd capture the $0.06 a kilo the farm earns, worth $3 million a year. But owning the farm locks us into internal supply, and in the 40% of years when market prices fall below our internal cost, we could otherwise buy externally and save $0.19 a kilo — that flexibility is worth $3.8 million a year. Net, integration is negative $800,000, and it only turns positive if the low-year saving were below $0.15 a kilo. Two risks: internally, the 40% cycle frequency comes from historical prices and should be validated against a longer series; externally, if the region's 26 independent farms consolidated, our alternative supply would weaken and the flexibility argument would erode. Next step: validate the price-cycle frequency over a full decade and negotiate a flexible-volume contract with the farm instead of buying it.",
+     "checklist": "1. Recommendation first: don't acquire, NOT acquire.\n2. ≥2 numbers, ≥1 anchor: **−800,000 net OR the $3.8M flexibility value OR the $0.15 breakeven**.\n3. ≥1 internal (cycle-frequency estimate) AND ≥1 external (supplier consolidation) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last or no anchor.",
+     "rubric_ref": "C52"
+    }
+   ]
+  },
+  {
+   "id": "C53",
+   "title": "Priceless",
+   "meta_tag": "Trap-action · Industrial Conglomerate",
+   "scenario": "Arbermoor Industrial has two divisions in the market of Kesswick. Division A needs 20,000 units of a component. Division B can make it. Group policy sets internal transfer prices at full cost plus markup. Division B has rejected the internal order and is selling to outside customers instead. Economics in **Exhibit 1**.\nThe group CFO: \"Division B is following policy — the transfer price is set correctly. Division A should buy outside.\" The CEO asks BCG whether the group is better off.",
+   "exhibits": [
+    {
+     "id": "C53-E1",
+     "case": "C53",
+     "reveal": "auto",
+     "title": "Divisional economics",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "",
+       "rows": [
+        [
+         "Item",
+         "Value"
+        ],
+        [
+         "Units required by Division A",
+         "20,000"
+        ],
+        [
+         "Transfer price (group policy: full cost + markup)",
+         "$140 / unit"
+        ],
+        [
+         "Division B variable (marginal) cost",
+         "$95 / unit"
+        ],
+        [
+         "Division B allocated fixed cost",
+         "$38 / unit"
+        ],
+        [
+         "Division B full cost",
+         "$133 / unit"
+        ],
+        [
+         "Division B contribution per unit from outside customers",
+         "$58 / unit"
+        ],
+        [
+         "Price Division A pays an outside supplier",
+         "$161 / unit"
+        ],
+        [
+         "Division B capacity utilisation (per last-quarter report)",
+         "88%"
+        ],
+        [
+         "Group headcount",
+         "11,400"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "C53-E2",
+     "case": "C53",
+     "reveal": "after_elicitation",
+     "elicitation_step": "C53-Q3c",
+     "title": "Capacity position",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "",
+       "rows": [
+        [
+         "Item",
+         "Value"
+        ],
+        [
+         "Division B's outside demand",
+         "limited — it can serve outside customers AND the internal order"
+        ],
+        [
+         "Incremental cost of serving Division A",
+         "variable cost only (Exhibit 1)"
+        ]
+       ]
+      }
+     ],
+     "trigger_phrases": [
+      "whether",
+      "division",
+      "spare",
+      "capacity",
+      "serve",
+      "both"
+     ],
+     "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
+    }
+   ],
+   "steps": [
+    {
+     "id": "Q1",
+     "type": "select_all",
+     "prompt": "Which analyses would you prioritize?",
+     "options": [
+      {
+       "text": "Compare Division B's internal contribution to its outside contribution",
+       "correct": true
+      },
+      {
+       "text": "Compute the group's outcome under each option",
+       "correct": true
+      },
+      {
+       "text": "Determine whether allocated fixed cost is incremental to the decision",
+       "correct": true
+      },
+      {
+       "text": "Benchmark group headcount",
+       "correct": false
+      },
+      {
+       "text": "Confirm the transfer price and cost lines",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,3,5}, none of {4}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 5. **Validation:** all of {1,2,3,5}, none of {4}."
+    },
+    {
+     "id": "Q2",
+     "type": "select_all",
+     "prompt": "Genuine concerns for the group decision?",
+     "options": [
+      {
+       "text": "Division B earns $45 contribution internally versus $58 outside",
+       "correct": true
+      },
+      {
+       "text": "Allocated fixed cost is included in the transfer price but isn't incremental",
+       "correct": true
+      },
+      {
+       "text": "Division A pays $161 outside — money leaving the group",
+       "correct": true
+      },
+      {
+       "text": "The utilisation figure is from the prior quarter and unrestated",
+       "correct": true
+      },
+      {
+       "text": "Arbermoor has 11,400 employees",
+       "correct": false
+      }
+     ],
+     "validation": "all of {1,2,3,4}, none of {5}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 4. **Validation:** all of {1,2,3,4}, none of {5}."
+    },
+    {
+     "id": "Q3",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q3a",
+       "type": "enter_number",
+       "prompt": "What contribution does Division B earn per unit on the internal order at the transfer price? (Transfer price − variable cost.)",
+       "answer": 45.0,
+       "validation": null,
+       "answer_explain": "**Answer: 45** — $140 − $95 = **$45/unit**. Against $58 outside, so B rationally refuses."
+      },
+      {
+       "id": "Q3b",
+       "type": "enter_number",
+       "prompt": "If Division B serves outside customers and Division A buys outside, what is the group's total contribution across the 20,000 units? (B's outside contribution × units.)",
+       "answer": 1160000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 1160000** — 20,000 × $58 = **$1,160,000**."
+      },
+      {
+       "id": "Q3c",
+       "type": "open_text_elicitation",
+       "prompt": "Division B is behaving rationally for itself. Before ruling: what ONE thing would you check to see whether the group is worse off?",
+       "model_answer": "Whether Division B has spare capacity to serve both — and what the group actually saves when B supplies internally at marginal cost instead of A paying $161 outside.",
+       "validation": "credit only if the answer names spare capacity OR group-level marginal cost vs the external price A pays. Generic \"check the transfer price\" fails. On credit → reveal Exhibit 2. On fail → L1 (\"Does Division B have to choose, or can it do both?\"), then reveal.",
+       "answer_explain": null,
+       "reveal_exhibit": "C53-E2",
+       "trigger_phrases": [
+        "whether",
+        "division",
+        "spare",
+        "capacity",
+        "serve",
+        "both"
+       ],
+       "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
+      },
+      {
+       "id": "Q3d",
+       "type": "enter_number",
+       "prompt": "Using Exhibit 2: if Division B serves Division A internally, what does the group gain across 20,000 units? (Price A avoids paying outside − B's variable cost, × units.)",
+       "answer": 1320000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 1320000** — 20,000 × ($161 − $95) = **$1,320,000**."
+      }
+     ]
+    },
+    {
+     "id": "Q4",
+     "type": "enter_number",
+     "prompt": "How much better off is the group when B serves internally rather than both trading outside?",
+     "answer": 160000.0,
+     "validation": null,
+     "answer_explain": "**Answer: 160000** — 1,320,000 − 1,160,000 = **$160,000**. Division B's rational choice is suboptimal for the group — **action-trap**."
+    },
+    {
+     "id": "Q5",
+     "type": "enter_number",
+     "prompt": "At what transfer price would Division B be indifferent between the internal order and outside customers? Answer $. (B's variable cost + outside contribution.)",
+     "answer": 153.0,
+     "validation": null,
+     "answer_explain": "**Answer: 153** — $95 + $58 = **$153/unit**. At or above $153, B accepts internally and the group captures the gain. **[9b]: порог из той же contribution-модели.**"
+    },
+    {
+     "id": "Q6",
+     "type": "single_choice",
+     "prompt": "Your recommendation:",
+     "options": [
+      {
+       "text": "Keep the policy; Division A buys outside",
+       "correct": false
+      },
+      {
+       "text": "Raise the transfer price to at least $153 so B serves internally",
+       "correct": true
+      },
+      {
+       "text": "Force B to accept at $140",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
+      }
+     ],
+     "validation": "choice == 2.",
+     "answer_explain": "**Answer:** Reprice the transfer at ≥$153. **Validation:** choice == 2."
+    },
+    {
+     "id": "Q7",
+     "type": "voice",
+     "prompt": "\"The CEO wants your recommendation. Record it — about 60–90 seconds.\"",
+     "model_answer": "Arbermoor should raise the internal transfer price to at least $153 so Division B serves the internal order — that's worth about $160,000 to the group on this order alone. Division B isn't misbehaving: at a $140 transfer price it earns $45 of contribution internally against $58 outside, so refusing is rational for the division. But the group's economics are different: when B supplies internally, the real cost is B's marginal $95, and Division A avoids paying $161 outside — $1.32 million of group contribution versus $1.16 million if both trade externally. The distortion comes from a transfer price built on full cost, including $38 of allocated fixed cost that isn't incremental. At $153 — B's variable cost plus its outside contribution — the division's interest and the group's align. Two risks: internally, the capacity figure in the report is from the prior quarter and unrestated, so we must confirm B genuinely has spare capacity before committing; externally, if B's outside demand strengthens, the alignment price rises and the policy needs revisiting. Next step: restate B's current utilisation this week, then reset the transfer-pricing rule to marginal cost plus opportunity cost.",
+     "checklist": "1. Recommendation first: reprice transfer to ≥$153 / serve internally, NOT keep policy.\n2. ≥2 numbers, ≥1 anchor: **$153 alignment price OR $1.32M-vs-$1.16M OR the $160,000 group gain**.\n3. ≥1 internal (stale utilisation figure — must be confirmed) AND ≥1 external (B's outside demand strengthens) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last or no anchor. **Bonus signal (not required): candidate flags the unrestated utilisation line.**",
+     "rubric_ref": "C53"
+    }
+   ]
+  },
+  {
+   "id": "C54",
+   "title": "Bed and Breakfast",
+   "meta_tag": "Trap-flip · Hospital Network",
+   "scenario": "Threndale Health runs four hospitals in the market of Bramwick. Winter peaks cause bed shortages. Operations wants to add buffer beds at each site. Economics in **Exhibit 1**.\nThe COO: \"Each site needs its own buffer for peak demand — that's the only way to hold service levels.\" The CEO asks BCG to check the plan.",
+   "exhibits": [
+    {
+     "id": "C54-E1",
+     "case": "C54",
+     "reveal": "auto",
+     "title": "Demand variability by site",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "",
+       "rows": [
+        [
+         "Site",
+         "Average daily admissions",
+         "Standard deviation"
+        ],
+        [
+         "Bramwick North",
+         "96",
+         "12"
+        ],
+        [
+         "Bramwick South",
+         "104",
+         "12"
+        ],
+        [
+         "Eastgate",
+         "88",
+         "12"
+        ],
+        [
+         "Westfield",
+         "112",
+         "12"
+        ]
+       ]
+      },
+      {
+       "type": "table",
+       "name": "",
+       "rows": [
+        [
+         "Item",
+         "Value"
+        ],
+        [
+         "Service level required",
+         "95% (z = 1.65)"
+        ],
+        [
+         "Annual cost per staffed buffer bed",
+         "$85,000"
+        ],
+        [
+         "Average length of stay",
+         "4.2 days"
+        ],
+        [
+         "Network nursing vacancy rate",
+         "7%"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "C54-E2",
+     "case": "C54",
+     "reveal": "after_elicitation",
+     "elicitation_step": "C54-Q3c",
+     "title": "Transfer feasibility",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "",
+       "rows": [
+        [
+         "Item",
+         "Value"
+        ],
+        [
+         "Maximum transfer time between any two sites",
+         "24 minutes"
+        ],
+        [
+         "Clinically safe for the admission types in question",
+         "yes"
+        ],
+        [
+         "Demand correlation between sites",
+         "independent"
+        ]
+       ]
+      }
+     ],
+     "trigger_phrases": [
+      "whether",
+      "patients",
+      "transferred",
+      "between",
+      "sites",
+      "quickly"
+     ],
+     "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
+    }
+   ],
+   "steps": [
+    {
+     "id": "Q1",
+     "type": "select_all",
+     "prompt": "Which analyses would you prioritize?",
+     "options": [
+      {
+       "text": "Compute the buffer each site needs on its own",
+       "correct": true
+      },
+      {
+       "text": "Determine whether patients can be transferred between sites",
+       "correct": true
+      },
+      {
+       "text": "Compute the buffer needed if capacity were shared across sites",
+       "correct": true
+      },
+      {
+       "text": "Benchmark the nursing vacancy rate",
+       "correct": false
+      },
+      {
+       "text": "Confirm variability and the service level",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,3,5}, none of {4}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 5. **Validation:** all of {1,2,3,5}, none of {4}."
+    },
+    {
+     "id": "Q2",
+     "type": "select_all",
+     "prompt": "Genuine concerns for the buffer decision?",
+     "options": [
+      {
+       "text": "Each site has a standard deviation of 12 admissions",
+       "correct": true
+      },
+      {
+       "text": "The chart shows peaks at different sites fall on different days",
+       "correct": true
+      },
+      {
+       "text": "Average length of stay is 4.2 days",
+       "correct": false
+      },
+      {
+       "text": "Separate buffers each carry a full safety cushion",
+       "correct": true
+      },
+      {
+       "text": "Buffer beds cost $85,000 a year each",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,4,5}, none of {3}.",
+     "answer_explain": "**Answer:** 1, 2, 4, 5. **Validation:** all of {1,2,4,5}, none of {3}."
+    },
+    {
+     "id": "Q3",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q3a",
+       "type": "enter_number",
+       "prompt": "What buffer does ONE site need on its own? (z × standard deviation.)",
+       "answer": 19.8,
+       "validation": null,
+       "answer_explain": "**Answer: 19.80** — 1.65 × 12 = **19.80 beds**."
+      },
+      {
+       "id": "Q3b",
+       "type": "enter_number",
+       "prompt": "What is the total buffer across all four sites under the COO's plan?",
+       "answer": 79.2,
+       "validation": null,
+       "answer_explain": "**Answer: 79.20** — 19.80 × 4 = **79.20 beds**."
+      },
+      {
+       "id": "Q3c",
+       "type": "open_text_elicitation",
+       "prompt": "The COO assumes each site must cover its own peak. Before ruling: what ONE thing would you check to see whether the buffers could be shared?",
+       "model_answer": "Whether patients can be transferred between sites quickly and safely — and whether the sites' demand peaks are independent rather than coinciding.",
+       "validation": "credit only if the answer names transfer between sites OR whether peaks coincide / correlation. Generic \"look at capacity\" fails. On credit → reveal Exhibit 2. On fail → L1 (\"Must a patient be admitted at the site they arrive at?\"), then reveal.",
+       "answer_explain": null,
+       "reveal_exhibit": "C54-E2",
+       "trigger_phrases": [
+        "whether",
+        "patients",
+        "transferred",
+        "between",
+        "sites",
+        "quickly"
+       ],
+       "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
+      },
+      {
+       "id": "Q3d",
+       "type": "enter_number",
+       "prompt": "Using Exhibit 2 (independent demand): if the four sites share one buffer, the combined standard deviation is 12 × √4. What pooled buffer is needed? (z × pooled standard deviation.)",
+       "answer": 39.6,
+       "validation": null,
+       "answer_explain": "**Answer: 39.60** — pooled SD = 12 × 2 = 24; buffer = 1.65 × 24 = **39.60 beds**."
+      }
+     ]
+    },
+    {
+     "id": "Q4",
+     "type": "enter_number",
+     "prompt": "What is the annual saving from pooling? (Beds saved × cost per bed.)",
+     "answer": 3366000.0,
+     "validation": null,
+     "answer_explain": "**Answer: 3366000** — (79.20 − 39.60) × $85,000 = 39.60 × 85,000 = **$3,366,000/yr**. Naive adds beds at every site; correct pools — **flip** (the plan's direction is wrong, not just its size)."
+    },
+    {
+     "id": "Q5",
+     "type": "single_choice",
+     "prompt": "Why does pooling cut the buffer in half?",
+     "options": [
+      {
+       "text": "Because average demand falls",
+       "correct": false
+      },
+      {
+       "text": "Because variability adds as the square root, not linearly, when peaks are independent",
+       "correct": true
+      },
+      {
+       "text": "Because transfer times are short",
+       "correct": false
+      },
+      {
+       "text": "Because length of stay is 4.2 days",
+       "correct": false
+      }
+     ],
+     "validation": "choice == 2.",
+     "answer_explain": "**Answer:** Square-root scaling of independent variability. **Validation:** choice == 2."
+    },
+    {
+     "id": "Q6",
+     "type": "voice",
+     "prompt": "\"The CEO wants your recommendation on buffer capacity. Record it — about 60–90 seconds.\"",
+     "model_answer": "Threndale should pool buffer capacity across the four sites rather than add beds at each one — that saves about $3.37 million a year. Separately, each site needs 19.8 buffer beds to hold a 95% service level, so the COO's plan needs 79.2 beds. But the sites' peaks are independent — the chart shows they fall on different days — and transfers take at most 24 minutes and are clinically safe. When variability is independent it adds as the square root, so the combined standard deviation is 24 rather than 48, and a shared buffer of 39.6 beds holds the same service level. That's 39.6 beds saved at $85,000 each. Two risks: internally, pooling depends on transfer logistics actually working under winter pressure — we should pilot it before removing capacity; externally, a flu surge would hit all four sites at once, breaking the independence assumption, so the plan needs a correlated-demand contingency. Next step: run a pooled-capacity pilot across two sites this winter and measure transfer performance before committing the full network.",
+     "checklist": "1. Recommendation first: pool capacity, NOT add beds per site.\n2. ≥2 numbers, ≥1 anchor: **79.2-vs-39.6 beds OR the $3.37M saving**.\n3. ≥1 internal (transfer logistics under pressure / pilot) AND ≥1 external (flu surge breaks independence) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last or no anchor.",
+     "rubric_ref": "C54"
+    }
+   ]
+  },
+  {
+   "id": "C55",
+   "title": "Wrapped Up",
+   "meta_tag": "Trap-overstate · Telecom Triple-Play",
+   "scenario": "Caldreth Communications sells broadband, TV and mobile in the market of Ferndale. Marketing wants to launch a triple-play bundle. Economics in **Exhibit 1**.\nMarketing: \"30,000 customers will take the bundle at $70. They pay $40 today for broadband — that's $30 more each, $900,000 a month.\" The CEO asks BCG to size the real uplift.",
+   "exhibits": [
+    {
+     "id": "C55-E1",
+     "case": "C55",
+     "reveal": "auto",
+     "title": "Standalone pricing and bundle",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "",
+       "rows": [
+        [
+         "Service",
+         "Monthly price"
+        ],
+        [
+         "Broadband",
+         "$40"
+        ],
+        [
+         "TV",
+         "$25"
+        ],
+        [
+         "Mobile",
+         "$20"
+        ],
+        [
+         "**Sum of parts**",
+         "**$85**"
+        ],
+        [
+         "**Bundle price**",
+         "**$70**"
+        ]
+       ]
+      },
+      {
+       "type": "table",
+       "name": "",
+       "rows": [
+        [
+         "Item",
+         "Value"
+        ],
+        [
+         "Expected bundle takers",
+         "30,000"
+        ],
+        [
+         "Total customer base",
+         "240,000"
+        ],
+        [
+         "Network coverage",
+         "94% of households"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "C55-E2",
+     "case": "C55",
+     "reveal": "after_elicitation",
+     "elicitation_step": "C55-Q3c",
+     "title": "What bundle takers buy today",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "",
+       "rows": [
+        [
+         "Current holding of bundle takers",
+         "Share",
+         "Pays today"
+        ],
+        [
+         "Broadband only",
+         "35%",
+         "$40"
+        ],
+        [
+         "Two services (broadband + TV)",
+         "40%",
+         "$65"
+        ],
+        [
+         "All three, bought separately",
+         "25%",
+         "$85"
+        ]
+       ]
+      }
+     ],
+     "trigger_phrases": [
+      "each",
+      "taker",
+      "buys",
+      "today",
+      "broadband",
+      "only"
+     ],
+     "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
+    }
+   ],
+   "steps": [
+    {
+     "id": "Q1",
+     "type": "select_all",
+     "prompt": "Which analyses would you prioritize?",
+     "options": [
+      {
+       "text": "Compute the uplift if takers currently buy broadband only",
+       "correct": true
+      },
+      {
+       "text": "Determine what bundle takers actually buy today",
+       "correct": true
+      },
+      {
+       "text": "Compute the uplift or loss for each current-holding group",
+       "correct": true
+      },
+      {
+       "text": "Benchmark network coverage",
+       "correct": false
+      },
+      {
+       "text": "Confirm standalone prices and the bundle price",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,3,5}, none of {4}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 5. **Validation:** all of {1,2,3,5}, none of {4}."
+    },
+    {
+     "id": "Q2",
+     "type": "select_all",
+     "prompt": "Genuine concerns for the bundle launch?",
+     "options": [
+      {
+       "text": "The bundle is $15 below the sum of parts",
+       "correct": true
+      },
+      {
+       "text": "Customers already buying all three would pay $15 less",
+       "correct": true
+      },
+      {
+       "text": "Caldreth covers 94% of households",
+       "correct": false
+      },
+      {
+       "text": "The uplift depends entirely on what takers buy today",
+       "correct": true
+      },
+      {
+       "text": "Some takers genuinely add services they didn't have",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,4,5}, none of {3}.",
+     "answer_explain": "**Answer:** 1, 2, 4, 5. **Validation:** all of {1,2,4,5}, none of {3}."
+    },
+    {
+     "id": "Q3",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q3a",
+       "type": "enter_number",
+       "prompt": "What is marketing's claimed monthly uplift? (Takers × (bundle price − broadband price).)",
+       "answer": 900000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 900000** — 30,000 × ($70 − $40) = **$900,000/month**."
+      },
+      {
+       "id": "Q3b",
+       "type": "enter_number",
+       "prompt": "For a customer already buying all three separately, what happens to monthly revenue when they move to the bundle?",
+       "answer": -15.0,
+       "validation": null,
+       "answer_explain": "**Answer: -15** — $70 − $85 = **−$15/month** (a loss)."
+      },
+      {
+       "id": "Q3c",
+       "type": "open_text_elicitation",
+       "prompt": "Marketing assumes every taker upgrades from broadband only. Before ruling: what ONE thing about the takers would you want to know?",
+       "model_answer": "What each taker buys today — the mix of broadband-only, two-service and all-three customers — because the bundle is an uplift for some and a discount for others.",
+       "validation": "credit only if the answer names the current holding mix of takers. Generic \"who are the customers\" fails. On credit → reveal Exhibit 2. On fail → L1 (\"Do all 30,000 takers buy the same thing today?\"), then reveal.",
+       "answer_explain": null,
+       "reveal_exhibit": "C55-E2",
+       "trigger_phrases": [
+        "each",
+        "taker",
+        "buys",
+        "today",
+        "broadband",
+        "only"
+       ],
+       "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
+      },
+      {
+       "id": "Q3d",
+       "type": "enter_number",
+       "prompt": "Using Exhibit 2: compute the TRUE monthly uplift across the three groups.",
+       "answer": 262500.0,
+       "validation": null,
+       "answer_explain": "**Answer: 262500**\n- Broadband-only 35%: 10,500 × ($70 − $40) = +$315,000\n- Two services 40%: 12,000 × ($70 − $65) = +$60,000\n- All three 25%: 7,500 × ($70 − $85) = −$112,500\n- Total = **$262,500/month** — positive, so launch, but overstated **×3.43**."
+      }
+     ]
+    },
+    {
+     "id": "Q4",
+     "type": "enter_number",
+     "prompt": "Express marketing's claim as a multiple of the true uplift ($900,000 ÷ $262,500), two decimals.",
+     "answer": 3.43,
+     "validation": null,
+     "answer_explain": "**Answer: 3.43** — **3.43×**. **[9b]: обе величины из той же mix-модели.**"
+    },
+    {
+     "id": "Q5",
+     "type": "open_text_brainstorm",
+     "prompt": "The CEO will launch — but wants to protect the uplift from being eaten by existing three-service customers. Brainstorm at least SIX ways.",
+     "model_answer": "Eligibility: (1) offer the bundle only to customers holding two or fewer services; (2) require a new service to be added to qualify. Design: (3) differentiate the bundle with content or data not available standalone, so it isn't a pure discount; (4) tier the bundle so the top tier prices above $85. Pricing: (5) set the bundle at a smaller discount, closer to $80; (6) add a contract term in exchange for the discount, so the discount buys retention; (7) grandfather existing three-service customers at current pricing for a period.",
+     "validation": "≥6 ideas, ≥2 named categories, ≥1 eligibility AND ≥1 pricing/design. <4 = fail; 4–5 = push once.",
+     "answer_explain": null
+    },
+    {
+     "id": "Q6",
+     "type": "voice",
+     "prompt": "\"The CEO wants your recommendation on the bundle. Record it — about 60–90 seconds.\"",
+     "model_answer": "Caldreth should launch the bundle — but plan for about $262,500 a month, not the $900,000 marketing is quoting. The direction is right, but the $900,000 assumes all 30,000 takers upgrade from broadband only. In reality the mix matters: 35% do upgrade from broadband and add $30 each, worth $315,000; 40% already hold two services and add just $5 each, $60,000; and 25% already buy all three separately, so for them the bundle is a $15 discount, costing $112,500. Net, the true uplift is $262,500 a month — roughly a third of the claim, a 3.4-times overstatement. Two risks: internally, the mix comes from a survey and should be validated against billing data before launch; externally, a competitor bundle could force a deeper discount and erode even this. Next step: pull the actual current-holding mix from billing this month and set bundle eligibility so existing three-service customers don't self-select into a discount.",
+     "checklist": "1. Recommendation first: launch at the honest number (~$262.5k/mo), NOT \"$900k\", NOT \"don't launch\".\n2. ≥2 numbers, ≥1 anchor: **$262,500 true uplift OR ×3.43 overstatement OR $900k-vs-$262.5k**.\n3. ≥1 internal (mix from survey / validate on billing) AND ≥1 external (competitor bundle) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last or no anchor.",
+     "rubric_ref": "C55"
+    }
+   ]
+  },
+  {
+   "id": "C56",
+   "title": "Brand New You",
+   "meta_tag": "Trap-action · Beverages",
+   "scenario": "Odelbrook Beverages owns two juice brands in the market of Larrow: Premium and Value. Each brand manager plans a promotion. Economics in **Exhibit 1**.\nBoth managers: \"Promotion lifts my brand's volume — run both.\" The CEO asks BCG to check the joint plan.",
+   "exhibits": [
+    {
+     "id": "C56-E1",
+     "case": "C56",
+     "reveal": "auto",
+     "title": "Brand economics",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "",
+       "rows": [
+        [
+         "Brand",
+         "Annual units",
+         "Margin per unit"
+        ],
+        [
+         "Premium",
+         "2,000,000",
+         "$1.80"
+        ],
+        [
+         "Value",
+         "3,000,000",
+         "$0.90"
+        ]
+       ]
+      },
+      {
+       "type": "table",
+       "name": "",
+       "rows": [
+        [
+         "Promotion",
+         "Volume lift",
+         "Discount (margin given up per unit, all units of that brand)"
+        ],
+        [
+         "Premium promo",
+         "+25%",
+         "$0.75"
+        ],
+        [
+         "Value promo",
+         "+30%",
+         "$0.12"
+        ]
+       ]
+      },
+      {
+       "type": "table",
+       "name": "",
+       "rows": [
+        [
+         "Item",
+         "Value"
+        ],
+        [
+         "Category growth",
+         "3% a year"
+        ],
+        [
+         "Odelbrook category share",
+         "22%"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "C56-E2",
+     "case": "C56",
+     "reveal": "after_elicitation",
+     "elicitation_step": "C56-Q3c",
+     "title": "Where the volume lift comes from",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "",
+       "rows": [
+        [
+         "Promotion",
+         "Share of lift taken from our OWN other brand",
+         "Share genuinely new"
+        ],
+        [
+         "Premium promo",
+         "70%",
+         "30%"
+        ],
+        [
+         "Value promo",
+         "10%",
+         "90%"
+        ]
+       ]
+      }
+     ],
+     "trigger_phrases": [
+      "where",
+      "incremental",
+      "volume",
+      "comes",
+      "from",
+      "whether"
+     ],
+     "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
+    }
+   ],
+   "steps": [
+    {
+     "id": "Q1",
+     "type": "select_all",
+     "prompt": "Which analyses would you prioritize?",
+     "options": [
+      {
+       "text": "Compute each promotion's effect on its own brand",
+       "correct": true
+      },
+      {
+       "text": "Determine where each promotion's volume lift comes from",
+       "correct": true
+      },
+      {
+       "text": "Compute total portfolio profit under each promotion combination",
+       "correct": true
+      },
+      {
+       "text": "Benchmark category growth",
+       "correct": false
+      },
+      {
+       "text": "Confirm margins, lifts and discounts",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,3,5}, none of {4}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 5. **Validation:** all of {1,2,3,5}, none of {4}."
+    },
+    {
+     "id": "Q2",
+     "type": "select_all",
+     "prompt": "Genuine concerns for the joint plan?",
+     "options": [
+      {
+       "text": "The Premium discount is $0.75 on every Premium unit",
+       "correct": true
+      },
+      {
+       "text": "A promotion may steal volume from our own other brand",
+       "correct": true
+      },
+      {
+       "text": "Odelbrook holds 22% category share",
+       "correct": false
+      },
+      {
+       "text": "Premium's lift comes mostly from Value",
+       "correct": true
+      },
+      {
+       "text": "Value's lift comes mostly from competitors",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,4,5}, none of {3}.",
+     "answer_explain": "**Answer:** 1, 2, 4, 5. **Validation:** all of {1,2,4,5}, none of {3}."
+    },
+    {
+     "id": "Q3",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q3a",
+       "type": "enter_number",
+       "prompt": "How many units does the Premium promotion add, and how many does the Value promotion add? Enter the Premium figure.",
+       "answer": 500000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 500000** — 2,000,000 × 25% = **500,000 units** (Value promo adds 3,000,000 × 30% = 900,000)."
+      },
+      {
+       "id": "Q3b",
+       "type": "enter_number",
+       "prompt": "What is portfolio profit with NO promotions? (Units × margin, both brands.)",
+       "answer": 6300000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 6300000** — 2,000,000 × $1.80 + 3,000,000 × $0.90 = 3,600,000 + 2,700,000 = **$6,300,000**."
+      },
+      {
+       "id": "Q3c",
+       "type": "open_text_elicitation",
+       "prompt": "Each manager measures only their own brand's lift. Before ruling: what ONE thing would you want to know about that lift?",
+       "model_answer": "Where the incremental volume comes from — whether it is genuinely new demand or taken from our own other brand.",
+       "validation": "credit only if the answer names the source of the lift / cannibalization between our own brands. Generic \"check elasticity\" fails. On credit → reveal Exhibit 2. On fail → L1 (\"When Premium sells more, who sells less?\"), then reveal.",
+       "answer_explain": null,
+       "reveal_exhibit": "C56-E2",
+       "trigger_phrases": [
+        "where",
+        "incremental",
+        "volume",
+        "comes",
+        "from",
+        "whether"
+       ],
+       "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
+      },
+      {
+       "id": "Q3d",
+       "type": "enter_number",
+       "prompt": "Using Exhibit 2: compute portfolio profit when BOTH brands promote (the managers' plan).",
+       "answer": 5299500.0,
+       "validation": null,
+       "answer_explain": "**Answer: 5299500**\n- Premium units: 2,000,000 + 500,000 − 90,000 (taken by Value promo) = 2,410,000 at $1.05 = $2,530,500\n- Value units: 3,000,000 + 900,000 − 350,000 (taken by Premium promo) = 3,550,000 at $0.78 = $2,769,000\n- Total = **$5,299,500**."
+      }
+     ]
+    },
+    {
+     "id": "Q4",
+     "type": "enter_number",
+     "prompt": "Compute portfolio profit when ONLY Value promotes.",
+     "answer": 6480000.0,
+     "validation": null,
+     "answer_explain": "**Answer: 6480000** — Premium: 2,000,000 − 90,000 = 1,910,000 at $1.80 = $3,438,000; Value: 3,900,000 at $0.78 = $3,042,000; total = **$6,480,000**."
+    },
+    {
+     "id": "Q5",
+     "type": "enter_number",
+     "prompt": "How much better is the optimal plan than the managers' plan, as a % of the managers' plan? Two decimals.",
+     "answer": 22.28,
+     "validation": null,
+     "answer_explain": "**Answer: 22.28** — (6,480,000 − 5,299,500) ÷ 5,299,500 = **22.28%** ($1,180,500). Naive promotes both; optimal promotes Value only — **action-trap**."
+    },
+    {
+     "id": "Q6",
+     "type": "enter_number",
+     "prompt": "At what Premium discount would promoting both become as good as Value-only? Answer $, two decimals.",
+     "answer": 0.26,
+     "validation": null,
+     "answer_explain": "**Answer: 0.26** — solving the portfolio equation gives **$0.26/unit**. Actual $0.75 ≫ $0.26 → Value-only. **[9b]: порог из той же portfolio-модели.**"
+    },
+    {
+     "id": "Q7",
+     "type": "voice",
+     "prompt": "\"The CEO wants your recommendation on the promotion plan. Record it — about 60–90 seconds.\"",
+     "model_answer": "Odelbrook should promote Value only, not both brands — that's worth $6.48 million against $5.3 million for the managers' joint plan, about 22% more. Each manager is measuring the right thing for their own brand and the wrong thing for the portfolio. Value's promotion works: 90% of its lift comes from competitors, and the discount is only $0.12 a unit. Premium's doesn't: 70% of its lift is taken from our own Value brand, and the $0.75 discount applies to every Premium unit, not just the incremental ones — so it converts high-margin Premium volume into discounted volume and cannibalizes Value at the same time. Promoting Premium only pays if its discount were under $0.26, and it's $0.75. Two risks: internally, the 70% cannibalization figure should be validated with a regional test before we cancel a brand's plan; externally, if a competitor promotes hard against Premium, holding Premium at full price could cost share. Next step: run the Value promotion nationally this quarter and test Premium's cannibalization in one region before deciding next cycle.",
+     "checklist": "1. Recommendation first: promote Value only, NOT both.\n2. ≥2 numbers, ≥1 anchor: **$6.48M-vs-$5.3M OR the 22.28% gap OR the $0.26 breakeven discount**.\n3. ≥1 internal (cannibalization estimate / regional test) AND ≥1 external (competitor promotes against Premium) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last or no anchor.",
+     "rubric_ref": "C56"
+    }
+   ]
+  },
+  {
+   "id": "C57",
+   "title": "Spilt Milk",
+   "meta_tag": "CLEAN · Dairy Processing",
+   "scenario": "Calmere Dairy runs a whey-powder line in the market of Hesketh that loses money. The plant manager recommends closing it. The board worries: the cheese line uses whey powder, and closing might force expensive external purchases — as happened at another company. The CEO asks BCG to validate the closure and confirm there's no hidden reason to keep it. Economics in **Exhibit 1**.",
+   "exhibits": [
+    {
+     "id": "C57-E1",
+     "case": "C57",
+     "reveal": "auto",
+     "title": "Whey line economics",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "",
+       "rows": [
+        [
+         "Item",
+         "Value"
+        ],
+        [
+         "Annual output",
+         "400,000 units"
+        ],
+        [
+         "Standalone loss per unit",
+         "$2"
+        ],
+        [
+         "Internal cost to produce whey powder",
+         "$6 / unit"
+        ],
+        [
+         "Line age",
+         "14 years"
+        ],
+        [
+         "Plant workforce",
+         "310"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "C57-E2",
+     "case": "C57",
+     "reveal": "after_elicitation",
+     "elicitation_step": "C57-Q3c",
+     "title": "External whey market",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "",
+       "rows": [
+        [
+         "Item",
+         "Value"
+        ],
+        [
+         "External market price for equivalent whey powder",
+         "$4.50 / unit"
+        ],
+        [
+         "Market liquidity",
+         "deep — multiple suppliers, spot and contract available"
+        ],
+        [
+         "Quality equivalence",
+         "certified equivalent for our cheese line"
+        ]
+       ]
+      }
+     ],
+     "trigger_phrases": [
+      "cost",
+      "source",
+      "equivalent",
+      "whey",
+      "powder",
+      "externally"
+     ],
+     "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
+    }
+   ],
+   "steps": [
+    {
+     "id": "Q1",
+     "type": "select_all",
+     "prompt": "Which analyses would you prioritize to validate the closure?",
+     "options": [
+      {
+       "text": "Compute the standalone saving from closing",
+       "correct": true
+      },
+      {
+       "text": "Check whether the cheese line depends on this whey powder",
+       "correct": true
+      },
+      {
+       "text": "Price the external alternative against internal production cost",
+       "correct": true
+      },
+      {
+       "text": "Benchmark the line's age",
+       "correct": false
+      },
+      {
+       "text": "Confirm output and the per-unit loss",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,3,5}, none of {4}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 5. **Validation:** all of {1,2,3,5}, none of {4}."
+    },
+    {
+     "id": "Q2",
+     "type": "select_all",
+     "prompt": "Genuine considerations for THIS decision?",
+     "options": [
+      {
+       "text": "The line loses $2 a unit standalone",
+       "correct": true
+      },
+      {
+       "text": "The cheese line uses whey powder — worth checking",
+       "correct": true
+      },
+      {
+       "text": "The plant employs 310 people",
+       "correct": false
+      },
+      {
+       "text": "External whey may be available, and at what price",
+       "correct": true
+      },
+      {
+       "text": "Another company was hurt by exactly this kind of closure",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,4,5}, none of {3}.",
+     "answer_explain": "**Answer:** 1, 2, 4, 5. **Validation:** all of {1,2,4,5}, none of {3}."
+    },
+    {
+     "id": "Q3",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q3a",
+       "type": "enter_number",
+       "prompt": "What does closing save on a standalone basis? (Output × loss per unit.)",
+       "answer": 800000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 800000** — 400,000 × $2 = **$800,000**."
+      },
+      {
+       "id": "Q3b",
+       "type": "enter_number",
+       "prompt": "How many units of whey powder would the cheese line need to source elsewhere if the line closes?",
+       "answer": 400000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 400000** — **400,000 units** (one-for-one)."
+      },
+      {
+       "id": "Q3c",
+       "type": "open_text_elicitation",
+       "prompt": "The board fears a hidden dependency. Before confirming: what ONE thing would you check to make sure closing doesn't quietly cost more?",
+       "model_answer": "What it would cost to source equivalent whey powder externally versus producing it internally — and whether the external market is liquid enough to supply us reliably.",
+       "validation": "credit only if the answer names external price/availability of the by-product. Generic \"check dependencies\" fails. On credit → reveal Exhibit 2. On fail → L1 (\"If we stop making it, what does buying it cost?\"), then reveal.",
+       "answer_explain": null,
+       "reveal_exhibit": "C57-E2",
+       "trigger_phrases": [
+        "cost",
+        "source",
+        "equivalent",
+        "whey",
+        "powder",
+        "externally"
+       ],
+       "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
+      },
+      {
+       "id": "Q3d",
+       "type": "single_choice",
+       "prompt": "Using Exhibit 2, does the by-product dependency reverse the closure decision?",
+       "options": [
+        {
+         "text": "Yes — external whey is more expensive, so we should keep the line",
+         "correct": false
+        },
+        {
+         "text": "No — external whey costs $4.50 against $6.00 internally, in a deep market",
+         "correct": true
+        },
+        {
+         "text": "It makes no difference",
+         "correct": false
+        },
+        {
+         "text": "Not enough information",
+         "correct": false
+        }
+       ],
+       "validation": "choice == 2.",
+       "answer_explain": "**Answer: No — the reversal is absent.** External is $1.50/unit CHEAPER than internal, market is deep, quality certified. **Validation:** choice == 2."
+      }
+     ]
+    },
+    {
+     "id": "Q4",
+     "type": "enter_number",
+     "prompt": "Given external whey is cheaper, what is the TOTAL annual benefit of closing? (Standalone saving + saving on switching to cheaper external supply.)",
+     "answer": 1400000.0,
+     "validation": null,
+     "answer_explain": "**Answer: 1400000** — 800,000 + 400,000 × ($6.00 − $4.50) = 800,000 + 600,000 = **$1,400,000**. Naive and full agree — close, and the benefit is larger than the manager thought."
+    },
+    {
+     "id": "Q5",
+     "type": "enter_number",
+     "prompt": "At what external price would closing become exactly break-even? Answer $, two decimals. (Solve: 800,000 = 400,000 × (x − 6.00).)",
+     "answer": 8.0,
+     "validation": null,
+     "answer_explain": "**Answer: 8.00** — x* = **$8.00/unit**. Actual $4.50 ≪ $8.00 → closure robust with a wide margin of safety. **[9b]: порог из той же sourcing-модели.**"
+    },
+    {
+     "id": "Q6",
+     "type": "single_choice",
+     "prompt": "Your validation verdict:",
+     "options": [
+      {
+       "text": "Keep the line — the dependency makes closing risky",
+       "correct": false
+      },
+      {
+       "text": "Close it — the saving is real and the by-product dependency does not reverse it",
+       "correct": true
+      },
+      {
+       "text": "Close only if external price falls below $6.00",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
+      }
+     ],
+     "validation": "choice == 2.",
+     "answer_explain": "**Answer:** Close — confirmed clean. **Validation:** choice == 2."
+    },
+    {
+     "id": "Q7",
+     "type": "voice",
+     "prompt": "\"The CEO asks you to validate the closure. Record it — about 60–90 seconds.\"",
+     "model_answer": "Calmere should close the whey line — and I can confirm the manager's call holds; there's no hidden reason to keep it. Closing saves $800,000 a year on the line's standalone loss. The board's concern is the cheese line's dependency on whey powder, so I checked it directly: equivalent certified whey is available externally at $4.50 a unit against $6.00 to make it ourselves, in a deep market with multiple suppliers. So the dependency doesn't reverse the decision — it strengthens it: switching to external supply saves another $600,000, taking the total benefit to $1.4 million. Closing would only fail if external whey cost more than $8.00 a unit, and it's $4.50. Two risks: internally, we should lock a supply contract before decommissioning rather than relying on spot; externally, whey prices are commodity-linked and could rise, so a multi-year contract or price collar is worth having. Next step: secure a twelve-month supply contract at contracted pricing, then decommission the line.",
+     "checklist": "1. Recommendation first: close — framed as CONFIRMING, NOT \"found a reason not to.\" If candidate invents a by-product dependency that blocks closure, c1 FAILS.\n2. ≥2 numbers, ≥1 anchor: **$1.4M total benefit OR $4.50-vs-$6.00 external-internal comparison OR the $8.00 breakeven**. Inventing a false dependency fails this.\n3. ≥1 internal (lock supply contract before decommissioning) AND ≥1 external (commodity price rise) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last, no anchor, OR invents a false dependency reversal.",
+     "rubric_ref": "C57"
+    }
+   ]
+  },
+  {
+   "id": "C58",
+   "title": "Paper Trail",
+   "meta_tag": "Trap-action · Paper & Packaging",
+   "scenario": "Nethermill Paper supplies packaging board in the market of Corvale. Sales wants one standard contract term for all customers. Economics in **Exhibit 1**.\nThe sales director: \"Long-term contracts earn a security premium — put everyone on them.\" The CEO asks BCG to check.",
+   "exhibits": [
+    {
+     "id": "C58-E1",
+     "case": "C58",
+     "reveal": "auto",
+     "title": "Customer book and contract terms",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "",
+       "rows": [
+        [
+         "Customer type",
+         "Annual volume",
+         "Demand pattern"
+        ],
+        [
+         "Stable",
+         "35,000 t",
+         "predictable, ±4%"
+        ],
+        [
+         "Volatile",
+         "35,000 t",
+         "swings with end-market, ±35%"
+        ]
+       ]
+      },
+      {
+       "type": "table",
+       "name": "",
+       "rows": [
+        [
+         "Item",
+         "Value"
+        ],
+        [
+         "Base margin (short-term contract)",
+         "$120 / t"
+        ],
+        [
+         "Security premium for a long-term contract",
+         "$46 / t"
+        ],
+        [
+         "Mill utilisation",
+         "89%"
+        ],
+        [
+         "Average haul distance",
+         "240 km"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "C58-E2",
+     "case": "C58",
+     "reveal": "after_elicitation",
+     "elicitation_step": "C58-Q3c",
+     "title": "Shortfall economics on long contracts",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "",
+       "rows": [
+        [
+         "Item",
+         "Value"
+        ],
+        [
+         "Probability a volatile customer under-delivers on contracted volume",
+         "70%"
+        ],
+        [
+         "Cost per tonne when that happens (take-or-pay shortfall + renegotiation)",
+         "$120 / t"
+        ],
+        [
+         "Same probability for stable customers",
+         "negligible"
+        ]
+       ]
+      }
+     ],
+     "trigger_phrases": [
+      "happens",
+      "when",
+      "volatile",
+      "customer",
+      "meet",
+      "contracted"
+     ],
+     "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
+    }
+   ],
+   "steps": [
+    {
+     "id": "Q1",
+     "type": "select_all",
+     "prompt": "Which analyses would you prioritize?",
+     "options": [
+      {
+       "text": "Compute margin per tonne under each contract term",
+       "correct": true
+      },
+      {
+       "text": "Separate customers by demand volatility",
+       "correct": true
+      },
+      {
+       "text": "Quantify the cost of shortfalls under long contracts",
+       "correct": true
+      },
+      {
+       "text": "Benchmark average haul distance",
+       "correct": false
+      },
+      {
+       "text": "Confirm volumes and the premium",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,3,5}, none of {4}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 5. **Validation:** all of {1,2,3,5}, none of {4}."
+    },
+    {
+     "id": "Q2",
+     "type": "select_all",
+     "prompt": "Genuine concerns for the contract-term decision?",
+     "options": [
+      {
+       "text": "Long contracts earn a $46/t premium",
+       "correct": true
+      },
+      {
+       "text": "Volatile customers swing ±35%",
+       "correct": true
+      },
+      {
+       "text": "Mill utilisation is 89%",
+       "correct": false
+      },
+      {
+       "text": "A volatile customer on a long contract may trigger shortfall costs",
+       "correct": true
+      },
+      {
+       "text": "One term for all ignores the difference between customer types",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,4,5}, none of {3}.",
+     "answer_explain": "**Answer:** 1, 2, 4, 5. **Validation:** all of {1,2,4,5}, none of {3}."
+    },
+    {
+     "id": "Q3",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q3a",
+       "type": "enter_number",
+       "prompt": "What is margin per tonne for a STABLE customer on a long contract? (Base + premium.)",
+       "answer": 166.0,
+       "validation": null,
+       "answer_explain": "**Answer: 166** — $120 + $46 = **$166/t**."
+      },
+      {
+       "id": "Q3b",
+       "type": "enter_number",
+       "prompt": "What is total profit if ALL customers go short-term? (Both volumes × base margin.)",
+       "answer": 8400000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 8400000** — 70,000 × $120 = **$8,400,000**."
+      },
+      {
+       "id": "Q3c",
+       "type": "open_text_elicitation",
+       "prompt": "The director wants one term for everyone. Before ruling: what ONE thing about volatile customers under a long contract would you want to know?",
+       "model_answer": "What happens when a volatile customer can't meet contracted volume — the probability of a shortfall and what it costs us in take-or-pay or renegotiation.",
+       "validation": "credit only if the answer names shortfall risk / cost of under-delivery on a long contract. Generic \"check the customers\" fails. On credit → reveal Exhibit 2. On fail → L1 (\"What if a volatile customer can't take the contracted volume?\"), then reveal.",
+       "answer_explain": null,
+       "reveal_exhibit": "C58-E2",
+       "trigger_phrases": [
+        "happens",
+        "when",
+        "volatile",
+        "customer",
+        "meet",
+        "contracted"
+       ],
+       "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
+      },
+      {
+       "id": "Q3d",
+       "type": "enter_number",
+       "prompt": "Using Exhibit 2: what is the expected margin per tonne for a VOLATILE customer on a long contract? (Base + premium − probability × shortfall cost.)",
+       "answer": 82.0,
+       "validation": null,
+       "answer_explain": "**Answer: 82** — $120 + $46 − (0.70 × $120) = 166 − 84 = **$82/t** — well below the $120 they'd earn on a short contract."
+      }
+     ]
+    },
+    {
+     "id": "Q4",
+     "type": "enter_number",
+     "prompt": "Compute total profit under the director's plan (ALL long-term).",
+     "answer": 8680000.0,
+     "validation": null,
+     "answer_explain": "**Answer: 8680000** — stable: 35,000 × $166 = $5,810,000; volatile: 35,000 × $82 = $2,870,000; total = **$8,680,000**. This beats all-short ($8.4M), so the director's single term looks right."
+    },
+    {
+     "id": "Q5",
+     "type": "enter_number",
+     "prompt": "Compute total profit under the optimal split: long for stable, short for volatile.",
+     "answer": 10010000.0,
+     "validation": null,
+     "answer_explain": "**Answer: 10010000** — 35,000 × $166 + 35,000 × $120 = 5,810,000 + 4,200,000 = **$10,010,000** — $1,330,000 (**15.32%**) better. Naive uses one term; optimal differentiates — **action-trap**."
+    },
+    {
+     "id": "Q6",
+     "type": "enter_number",
+     "prompt": "At what shortfall probability would all-long become as good as the split? Answer %, two decimals. (Solve: premium = probability × shortfall cost.)",
+     "answer": 38.33,
+     "validation": null,
+     "answer_explain": "**Answer: 38.33** — 46 ÷ 120 = **38.33%**. Actual 70% ≫ 38.33% → split. **[9b]: порог из той же margin-модели.**"
+    },
+    {
+     "id": "Q7",
+     "type": "voice",
+     "prompt": "\"The CEO wants your recommendation on contract terms. Record it — about 60–90 seconds.\"",
+     "model_answer": "Nethermill should differentiate contract terms by customer volatility — long-term for stable customers, short-term for volatile ones — worth $10.01 million against $8.68 million for putting everyone on long contracts, about 15% more. The director is right that long contracts earn a $46 a tonne security premium, and for stable customers that's pure gain: $166 a tonne against $120. But volatile customers swing 35%, and 70% of the time they under-deliver on contracted volume, costing $120 a tonne in take-or-pay and renegotiation. That turns their $166 into an expected $82 a tonne — worse than the $120 they'd earn on a simple short-term contract. The single-term policy only works if shortfall probability were below 38%, and it's 70%. Two risks: internally, classifying customers as stable or volatile needs a consistent rule, or sales will game it; externally, an end-market downturn could push currently stable customers into the volatile group, so the classification must be reviewed. Next step: build the volatility classification from two years of order data and reset terms at the next renewal cycle.",
+     "checklist": "1. Recommendation first: differentiate terms by volatility, NOT one term for all.\n2. ≥2 numbers, ≥1 anchor: **$10.01M-vs-$8.68M OR the 15.32% gap OR the $82-vs-$120 volatile comparison OR the 38.33% breakeven**.\n3. ≥1 internal (classification rule / sales gaming) AND ≥1 external (downturn shifts customers) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last or no anchor.",
+     "rubric_ref": "C58"
+    }
+   ]
+  },
+  {
+   "id": "C59",
+   "title": "In for a Penny",
+   "meta_tag": "Trap-flip · Pharma R&D",
+   "scenario": "Vireslow Pharma has a late-stage compound in the market of Ardwell. $180 million has been spent. The CFO wants to terminate. Economics in **Exhibit 1**.\nThe CFO: \"We've put $180 million in and the compound is worth $120 million at best. We'll never recover it. Kill it.\" The CEO asks BCG for a view.",
+   "exhibits": [
+    {
+     "id": "C59-E1",
+     "case": "C59",
+     "reveal": "auto",
+     "title": "Programme status",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "",
+       "rows": [
+        [
+         "Item",
+         "Value"
+        ],
+        [
+         "Spent to date",
+         "$180,000,000"
+        ],
+        [
+         "Remaining cost to complete",
+         "$40,000,000"
+        ],
+        [
+         "Value if approved",
+         "$120,000,000"
+        ],
+        [
+         "Probability of approval",
+         "55%"
+        ],
+        [
+         "Programme headcount",
+         "140"
+        ],
+        [
+         "Phase II spend (per prior-year report)",
+         "$96,000,000"
+        ],
+        [
+         "Phase III spend to date",
+         "$92,000,000"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "C59-E2",
+     "case": "C59",
+     "reveal": "after_elicitation",
+     "elicitation_step": "C59-Q3c",
+     "title": "Cost of terminating",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "",
+       "rows": [
+        [
+         "Item",
+         "Value"
+        ],
+        [
+         "Partner clawback on termination",
+         "$9,000,000"
+        ],
+        [
+         "Site closure and contract exit costs",
+         "$6,000,000"
+        ],
+        [
+         "Total cost to terminate",
+         "$15,000,000"
+        ]
+       ]
+      }
+     ],
+     "trigger_phrases": [
+      "terminating",
+      "itself",
+      "costs",
+      "partner",
+      "clawbacks",
+      "site"
+     ],
+     "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
+    }
+   ],
+   "steps": [
+    {
+     "id": "Q1",
+     "type": "select_all",
+     "prompt": "Which analyses would you prioritize?",
+     "options": [
+      {
+       "text": "Compute the expected value of completing, net of remaining cost",
+       "correct": true
+      },
+      {
+       "text": "Determine whether the $180 million already spent affects the decision",
+       "correct": true
+      },
+      {
+       "text": "Quantify what terminating itself would cost",
+       "correct": true
+      },
+      {
+       "text": "Benchmark programme headcount",
+       "correct": false
+      },
+      {
+       "text": "Confirm remaining cost and approval probability",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,3,5}, none of {4}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 5. **Validation:** all of {1,2,3,5}, none of {4}."
+    },
+    {
+     "id": "Q2",
+     "type": "select_all",
+     "prompt": "Genuine concerns for the termination decision?",
+     "options": [
+      {
+       "text": "The $180 million spent is sunk and shouldn't drive the decision",
+       "correct": true
+      },
+      {
+       "text": "Completing costs $40 million against a 55% chance of $120 million",
+       "correct": true
+      },
+      {
+       "text": "Terminating may itself carry costs",
+       "correct": true
+      },
+      {
+       "text": "Phase II and III figures don't reconcile with spent-to-date",
+       "correct": true
+      },
+      {
+       "text": "The programme employs 140 people",
+       "correct": false
+      }
+     ],
+     "validation": "all of {1,2,3,4}, none of {5}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 4. **Validation:** all of {1,2,3,4}, none of {5}."
+    },
+    {
+     "id": "Q3",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q3a",
+       "type": "enter_number",
+       "prompt": "What is the expected value of completing? (Probability × value if approved.)",
+       "answer": 66000000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 66000000** — 0.55 × $120,000,000 = **$66,000,000**."
+      },
+      {
+       "id": "Q3b",
+       "type": "enter_number",
+       "prompt": "What is the forward NPV of completing? (Expected value − remaining cost.)",
+       "answer": 26000000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 26000000** — 66,000,000 − 40,000,000 = **+$26,000,000** → completing creates value, regardless of the $180M already spent."
+      },
+      {
+       "id": "Q3c",
+       "type": "open_text_elicitation",
+       "prompt": "The forward case for completing is positive. Before ruling: what ONE thing about the alternative — terminating — would you want to know?",
+       "model_answer": "What terminating itself costs — partner clawbacks, site closure and contract exit — since the comparison is completing versus terminating, not completing versus zero.",
+       "validation": "credit only if the answer names cost of termination / exit costs. Generic \"consider alternatives\" fails. On credit → reveal Exhibit 2. On fail → L1 (\"Is walking away free?\"), then reveal.",
+       "answer_explain": null,
+       "reveal_exhibit": "C59-E2",
+       "trigger_phrases": [
+        "terminating",
+        "itself",
+        "costs",
+        "partner",
+        "clawbacks",
+        "site"
+       ],
+       "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
+      },
+      {
+       "id": "Q3d",
+       "type": "enter_number",
+       "prompt": "Using Exhibit 2: what does terminating cost?",
+       "answer": 15000000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 15000000** — 9,000,000 + 6,000,000 = **$15,000,000**."
+      }
+     ]
+    },
+    {
+     "id": "Q4",
+     "type": "enter_number",
+     "prompt": "What is the total swing between completing and terminating? (Forward NPV of completing + cost avoided by not terminating.)",
+     "answer": 41000000.0,
+     "validation": null,
+     "answer_explain": "**Answer: 41000000** — 26,000,000 + 15,000,000 = **$41,000,000**. Naive KILLS; correct COMPLETES — **flip**."
+    },
+    {
+     "id": "Q5",
+     "type": "enter_number",
+     "prompt": "At what approval probability would completing be exactly break-even against zero? Answer %, two decimals. (Solve: p × 120,000,000 = 40,000,000.)",
+     "answer": 33.33,
+     "validation": null,
+     "answer_explain": "**Answer: 33.33** — p* = **33.33%**. Actual 55% > 33.33% → complete. **[9b]: порог из той же forward-модели.**"
+    },
+    {
+     "id": "Q6",
+     "type": "single_choice",
+     "prompt": "Why is the CFO's reasoning wrong?",
+     "options": [
+      {
+       "text": "Because the approval probability is understated",
+       "correct": false
+      },
+      {
+       "text": "Because the $180 million is sunk: the decision compares $40 million more against a 55% chance of $120 million, and terminating itself costs $15 million",
+       "correct": true
+      },
+      {
+       "text": "Because the compound is worth more than $120 million",
+       "correct": false
+      },
+      {
+       "text": "Because headcount would have to be redeployed",
+       "correct": false
+      }
+     ],
+     "validation": "choice == 2.",
+     "answer_explain": "**Answer:** Sunk cost plus non-free exit. **Validation:** choice == 2."
+    },
+    {
+     "id": "Q7",
+     "type": "voice",
+     "prompt": "\"The CEO wants your recommendation on the compound. Record it — about 60–90 seconds.\"",
+     "model_answer": "Vireslow should complete the programme, not terminate it — the swing between the two is about $41 million. The CFO is anchoring on the $180 million already spent, but that money is gone whichever way we decide. The decision is forward-looking: $40 million more to complete against a 55% chance of $120 million, an expected $66 million — a forward NPV of positive $26 million. And terminating isn't free: partner clawback and site closure cost $15 million, so killing it destroys value twice over. Completing only stops making sense if approval probability fell below 33%, and it's 55%. Two risks: internally, the 55% probability is the key parameter and should be re-tested against the latest trial data before we commit the $40 million — I'd also flag that the Phase II and III spend figures in the report sum to $188 million against a $180 million spent-to-date line and haven't been restated; externally, a competitor filing first or a regulatory shift could cut the commercial value materially. Next step: re-confirm the approval probability with the trial statisticians this month, and reconcile the programme spend figures before the board decision.",
+     "checklist": "1. Recommendation first: complete, NOT terminate.\n2. ≥2 numbers, ≥1 anchor: **forward NPV +$26M OR the $41M swing OR the $15M termination cost OR the 33.33% breakeven**.\n3. ≥1 internal (probability re-test / spend reconciliation) AND ≥1 external (competitor files first / regulatory shift) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last or no anchor. **Bonus signal (not required): candidate flags the $188M-vs-$180M inconsistency.**",
+     "rubric_ref": "C59"
+    }
+   ]
+  },
+  {
+   "id": "C60",
+   "title": "All Bets Are Off",
+   "meta_tag": "Trap-flip · Offshore Drilling",
+   "scenario": "Thrandon Offshore is a drilling contractor bidding for a project in the market of Halvard. It must choose the contract structure. Economics in **Exhibit 1**.\nThe commercial director: \"Fixed-price gives us $12 million of margin against the base cost estimate. Cost-plus only pays a 9% fee. Bid fixed-price.\" The CEO asks BCG for a view.",
+   "exhibits": [
+    {
+     "id": "C60-E1",
+     "case": "C60",
+     "reveal": "auto",
+     "title": "Contract options",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "",
+       "rows": [
+        [
+         "Item",
+         "Value"
+        ],
+        [
+         "Contract value (fixed-price bid)",
+         "$80,000,000"
+        ],
+        [
+         "Base cost estimate",
+         "$68,000,000"
+        ],
+        [
+         "Cost-plus fee rate",
+         "9% of cost"
+        ],
+        [
+         "Project duration",
+         "26 months"
+        ],
+        [
+         "Fleet utilisation",
+         "76%"
+        ]
+       ]
+      }
+     ]
+    },
+    {
+     "id": "C60-E2",
+     "case": "C60",
+     "reveal": "after_elicitation",
+     "elicitation_step": "C60-Q3c",
+     "title": "Overrun exposure",
+     "blocks": [
+      {
+       "type": "table",
+       "name": "",
+       "rows": [
+        [
+         "Item",
+         "Value"
+        ],
+        [
+         "Probability of a cost overrun on this project type",
+         "45%"
+        ],
+        [
+         "Typical overrun size when it occurs",
+         "$14,000,000"
+        ],
+        [
+         "Basis",
+         "last 20 comparable deepwater projects"
+        ]
+       ]
+      }
+     ],
+     "trigger_phrases": [
+      "likely",
+      "cost",
+      "overrun",
+      "large",
+      "typically",
+      "runs"
+     ],
+     "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
+    }
+   ],
+   "steps": [
+    {
+     "id": "Q1",
+     "type": "select_all",
+     "prompt": "Which analyses would you prioritize?",
+     "options": [
+      {
+       "text": "Compute fixed-price margin against the base estimate",
+       "correct": true
+      },
+      {
+       "text": "Determine the probability and size of cost overruns",
+       "correct": true
+      },
+      {
+       "text": "Compute expected margin under each contract structure",
+       "correct": true
+      },
+      {
+       "text": "Benchmark fleet utilisation",
+       "correct": false
+      },
+      {
+       "text": "Confirm contract value and the fee rate",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,3,5}, none of {4}.",
+     "answer_explain": "**Answer:** 1, 2, 3, 5. **Validation:** all of {1,2,3,5}, none of {4}."
+    },
+    {
+     "id": "Q2",
+     "type": "select_all",
+     "prompt": "Genuine concerns for the bid structure?",
+     "options": [
+      {
+       "text": "Fixed-price shows $12 million against the base estimate",
+       "correct": true
+      },
+      {
+       "text": "Under fixed-price we absorb any overrun",
+       "correct": true
+      },
+      {
+       "text": "The project runs 26 months",
+       "correct": false
+      },
+      {
+       "text": "Cost-plus transfers overrun risk to the client",
+       "correct": true
+      },
+      {
+       "text": "Overruns are common on this project type",
+       "correct": true
+      }
+     ],
+     "validation": "all of {1,2,4,5}, none of {3}.",
+     "answer_explain": "**Answer:** 1, 2, 4, 5. **Validation:** all of {1,2,4,5}, none of {3}."
+    },
+    {
+     "id": "Q3",
+     "type": "multipart",
+     "prompt": "",
+     "parts": [
+      {
+       "id": "Q3a",
+       "type": "enter_number",
+       "prompt": "What is the fixed-price margin against the base cost estimate? (Contract value − base cost.)",
+       "answer": 12000000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 12000000** — 80,000,000 − 68,000,000 = **$12,000,000**. The director's case."
+      },
+      {
+       "id": "Q3b",
+       "type": "enter_number",
+       "prompt": "What margin does cost-plus produce? (Base cost × fee rate.)",
+       "answer": 6120000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 6120000** — 68,000,000 × 9% = **$6,120,000**, with no overrun exposure."
+      },
+      {
+       "id": "Q3c",
+       "type": "open_text_elicitation",
+       "prompt": "The director compares $12 million to $6.12 million. Before ruling: what ONE thing about the cost estimate would you want to know?",
+       "model_answer": "How likely a cost overrun is and how large it typically runs — because under fixed-price we absorb it, which reduces the expected margin below the headline.",
+       "validation": "credit only if the answer names overrun probability/size (not generic \"check the costs\"). On credit → reveal Exhibit 2. On fail → L1 (\"Does the project always land on the base estimate?\"), then reveal.",
+       "answer_explain": null,
+       "reveal_exhibit": "C60-E2",
+       "trigger_phrases": [
+        "likely",
+        "cost",
+        "overrun",
+        "large",
+        "typically",
+        "runs"
+       ],
+       "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
+      },
+      {
+       "id": "Q3d",
+       "type": "enter_number",
+       "prompt": "Using Exhibit 2: what is the EXPECTED cost under fixed-price? (Base cost + probability × overrun.)",
+       "answer": 74300000.0,
+       "validation": null,
+       "answer_explain": "**Answer: 74300000** — 68,000,000 + 0.45 × 14,000,000 = 68,000,000 + 6,300,000 = **$74,300,000**."
+      }
+     ]
+    },
+    {
+     "id": "Q4",
+     "type": "enter_number",
+     "prompt": "What is the expected margin under fixed-price?",
+     "answer": 5700000.0,
+     "validation": null,
+     "answer_explain": "**Answer: 5700000** — 80,000,000 − 74,300,000 = **$5,700,000** — below cost-plus's $6,120,000. Naive picks fixed; correct picks cost-plus — **flip**."
+    },
+    {
+     "id": "Q5",
+     "type": "enter_number",
+     "prompt": "At what overrun probability would the two structures be exactly equal? Answer %, two decimals. (Solve: 12,000,000 − p × 14,000,000 = 6,120,000.)",
+     "answer": 42.0,
+     "validation": null,
+     "answer_explain": "**Answer: 42.00** — p* = **42.00%**. Actual 45% > 42% → cost-plus, **but only by 3 percentage points**. **[9b]: порог из той же expected-margin модели.**"
+    },
+    {
+     "id": "Q6",
+     "type": "single_choice",
+     "prompt": "How robust is the recommendation?",
+     "options": [
+      {
+       "text": "Very robust — cost-plus wins by a wide margin",
+       "correct": false
+      },
+      {
+       "text": "Correct but not with a wide margin: below a 42% overrun probability fixed-price wins again, and the estimate is 45%",
+       "correct": true
+      },
+      {
+       "text": "Fixed-price is safer",
+       "correct": false
+      },
+      {
+       "text": "Not enough information",
+       "correct": false
+      }
+     ],
+     "validation": "choice == 2.",
+     "answer_explain": "**Answer:** Correct but thin — the probability estimate is load-bearing. **Validation:** choice == 2."
+    },
+    {
+     "id": "Q7",
+     "type": "voice",
+     "prompt": "\"The CEO wants your recommendation on the bid structure. Record it — about 60–90 seconds.\"",
+     "model_answer": "Thrandon should bid cost-plus rather than fixed-price — expected margin is $6.12 million against $5.7 million. The director's $12 million is the margin only if the project lands exactly on the base estimate. On this project type, 45% of comparable jobs overrun by about $14 million, and under fixed-price we absorb that, which lifts expected cost to $74.3 million and cuts expected margin to $5.7 million. Cost-plus earns 9% on cost with the client carrying the overrun. I'd flag that this is correct but not with a wide margin: the two structures tie at a 42% overrun probability, and our estimate is 45%, so the probability estimate is a load-bearing assumption, not a detail. Two risks: internally, that 45% comes from 20 comparable projects and should be tested against this project's specific geology and rig spec; externally, if the client refuses cost-plus or prices it down, the choice narrows further. Next step: re-estimate overrun probability for this specific well profile before the bid deadline, and prepare an incentive-fee structure as a middle option if the client rejects cost-plus.",
+     "checklist": "1. Recommendation first: bid cost-plus, NOT fixed-price.\n2. ≥2 numbers, ≥1 anchor: **$6.12M-vs-$5.7M expected margins OR the 42% breakeven probability**.\n3. ≥1 internal (45% from 20 projects / geology-specific re-estimate) AND ≥1 external (client refuses or reprices cost-plus) risk.\n4. ≥1 time-bound next step.\nFail if conclusion last or no anchor. **Bonus signal (not required): candidate volunteers that the margin is thin (42% vs 45%).**",
+     "rubric_ref": "C60"
+    }
+   ]
   }
  ]
 }
