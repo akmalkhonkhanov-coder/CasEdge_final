@@ -50,7 +50,7 @@
 `;
   var SCREEN = `<div class="cm-top">
     <button class="cm-x" onclick="CaseMathDrills.exit()" title="Exit">&times;</button>
-    <span class="cm-lbl">Case Math · Drills</span>
+    <span class="cm-lbl" id="cmLbl">Case Math · Drills</span>
     <span class="cm-prog" id="cmProg"></span>
   </div>
   <div id="cmFeed"><div class="cm-wrap" id="cmWrap"></div></div>
@@ -104,14 +104,25 @@
     return h + '</tbody></table>';
   }
 
+  /* ---------- libraries ---------- */
+  // Two curated libraries share this one thin client. 'cm' = Case Math (default),
+  // 'ms' = Market Sizing. The server picks the library from the `set` field.
+  var LIBS = {
+    cm: { set: 'cm', label: 'Case Math · Drills',      rec: 'Case Math',     doneKey: 'casedge_cmdrills_done', complete: 'every Case Math drill in this batch' },
+    ms: { set: 'ms', label: 'Market Sizing · Drills',  rec: 'Market Sizing', doneKey: 'casedge_msdrills_done', complete: 'every Market Sizing drill in this batch' }
+  };
+
   /* ---------- state ---------- */
-  var S = { done: [], drill: null };
-  function loadDone() { try { S.done = JSON.parse(localStorage.getItem('casedge_cmdrills_done') || '[]'); } catch (e) { S.done = []; } }
-  function saveDone(id) { if (S.done.indexOf(id) < 0) S.done.push(id); try { localStorage.setItem('casedge_cmdrills_done', JSON.stringify(S.done)); } catch (e) {} }
+  var S = { done: [], drill: null, lib: 'cm' };
+  function cfg() { return LIBS[S.lib] || LIBS.cm; }
+  function loadDone() { try { S.done = JSON.parse(localStorage.getItem(cfg().doneKey) || '[]'); } catch (e) { S.done = []; } }
+  function saveDone(id) { if (S.done.indexOf(id) < 0) S.done.push(id); try { localStorage.setItem(cfg().doneKey, JSON.stringify(S.done)); } catch (e) {} }
 
   /* ---------- flow ---------- */
-  function open() {
+  function open(lib) {
+    S.lib = (lib === 'ms') ? 'ms' : 'cm';
     inject();
+    var lbl = E('cmLbl'); if (lbl) lbl.textContent = cfg().label;
     if (typeof showScreen === 'function') showScreen('cmdrill');
     loadDone();
     var w = E('cmWrap'); if (w) w.innerHTML = '';
@@ -128,17 +139,17 @@
     var w = E('cmWrap'); if (w) w.innerHTML = '';
     izHide();
     var pr = E('cmProg'); if (pr) pr.textContent = 'Loading…';
-    api({ action: 'next', doneIds: S.done }).then(function (r) {
-      if (r && r.error) { if (w) w.innerHTML = '<div class="cm-card"><div class="cm-title">Case Math</div><div class="cm-prompt">Could not load — please make sure you are signed in, then try again.</div></div>'; return; }
+    api({ action: 'next', doneIds: S.done, set: cfg().set }).then(function (r) {
+      if (r && r.error) { if (w) w.innerHTML = '<div class="cm-card"><div class="cm-title">' + esc2(cfg().rec) + '</div><div class="cm-prompt">Could not load — please make sure you are signed in, then try again.</div></div>'; return; }
       var d = r && r.drill;
       if (!d) {   // all done → recycle
-        S.done = []; try { localStorage.removeItem('casedge_cmdrills_done'); } catch (e) {}
-        feed('<div class="cm-card"><div class="cm-title">Set complete 🎉</div><div class="cm-prompt">You have worked through every Case Math drill in this batch. Starting again from the top.</div></div>');
+        S.done = []; try { localStorage.removeItem(cfg().doneKey); } catch (e) {}
+        feed('<div class="cm-card"><div class="cm-title">Set complete 🎉</div><div class="cm-prompt">You have worked through ' + esc2(cfg().complete) + '. Starting again from the top.</div></div>');
         return void setTimeout(loadNext, 900);
       }
       S.drill = d;
       renderDrill(d);
-    }).catch(function () { if (w) w.innerHTML = '<div class="cm-card"><div class="cm-title">Case Math</div><div class="cm-prompt">Could not load this drill — please try again.</div></div>'; });
+    }).catch(function () { if (w) w.innerHTML = '<div class="cm-card"><div class="cm-title">' + esc2(cfg().rec) + '</div><div class="cm-prompt">Could not load this drill — please try again.</div></div>'; });
   }
 
   function renderDrill(d) {
@@ -168,7 +179,7 @@
     var b = E('cmSubmit'); if (b) b.disabled = true;
     iz('<div class="cm-hint">Grading your answer…</div>');
     var d = S.drill;
-    api({ action: 'grade', drillId: d.id, answer: answer }).then(function (r) {
+    api({ action: 'grade', drillId: d.id, answer: answer, set: cfg().set }).then(function (r) {
       if (r && r.error) { feed('<div class="cm-fb no"><b>Connection issue.</b> ' + esc2(r.error.message || 'Please try again.') + '</div>'); return void nextButton(); }
       var ok = !!r.pass;
       feed('<div class="cm-fb ' + (ok ? 'ok' : 'no') + '">' + (ok ? '<b>✓ Pass.</b> ' : '<b>Not quite.</b> ') + esc2(r.coaching || '') + '</div>');
@@ -177,7 +188,7 @@
            (prov ? '<div class="cm-trap"><b>Trap:</b> ' + esc2(prov) + '</div>' : '') + '</div>');
       saveDone(d.id);
       // Record this rep in the shared Progress tracker (Drills completed + "Case Math" by-type + streak, synced to cloud).
-      try { if (typeof recordSession === 'function') recordSession('drill', 'Case Math'); } catch (e) {}
+      try { if (typeof recordSession === 'function') recordSession('drill', cfg().rec); } catch (e) {}
       nextButton();
     }).catch(function () { feed('<div class="cm-fb no"><b>Connection issue.</b> Please try again.</div>'); nextButton(); });
   }
@@ -187,5 +198,6 @@
   }
   function _next() { loadNext(); }
 
-  window.CaseMathDrills = { open: open, exit: exit, _submit: _submit, _next: _next };
+  window.CaseMathDrills = { open: function () { return open('cm'); }, exit: exit, _submit: _submit, _next: _next };
+  window.MarketSizingDrills = { open: function () { return open('ms'); }, exit: exit, _submit: _submit, _next: _next };
 })();

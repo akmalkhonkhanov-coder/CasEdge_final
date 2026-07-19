@@ -2943,6 +2943,7 @@ function startDrill() {
   if (!state.drillType) return;
   if (!requireAuth()) return;
   if (state.drillType === 'Case Math' && window.CaseMathDrills) { return window.CaseMathDrills.open(); }
+  if (state.drillType === 'Market Sizing' && window.MarketSizingDrills) { return window.MarketSizingDrills.open(); }
   brGate('drill', _startDrillReal);
 }
 async function _startDrillReal() {
