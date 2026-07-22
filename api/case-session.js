@@ -738,10 +738,23 @@ export default async function handler(req, res) {
       }
     }
 
+    // Interviewee-led: tell the client which mode actually ran (so it tracks a
+    // done-set vs a linear counter) and whether the terminal step is now done.
+    const stepCompleted = (ilead && !isOpening) ? (parsed.completedSteps || []) : [];
+    const lastStepNum = steps.length ? steps[steps.length - 1].step : null;
+    let caseComplete = false;
+    if (ilead) {
+      const nd = new Set(doneSteps);
+      for (const s of stepCompleted) nd.add(s);
+      caseComplete = lastStepNum != null && nd.has(lastStepNum);
+    }
+
     return res.status(200).json({
       reply: parsed.reply || 'No response was returned. Please try again.',
       verdict: verdict,
-      completedSteps: (ilead && !isOpening) ? (parsed.completedSteps || []) : [],
+      ilead: ilead,
+      completedSteps: stepCompleted,
+      caseComplete: caseComplete,
       revealedExhibits: parsed.revealedExhibits,
       exhibits: exhibitCards
     });
