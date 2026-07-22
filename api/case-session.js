@@ -325,6 +325,15 @@ export function buildSystemPromptILead({ caseObj, doneSteps, firm, revealedSet, 
   const unlocked = unlockedStepNums(steps, done);
   const lockedNums = steps.map(s => s.step).filter(n => !done.has(n) && !unlocked.includes(n));
   const allDone = unlocked.length === 0 && lockedNums.length === 0;
+  // optimal_entry = the layer-0 step a strong candidate opens with. Reference for
+  // grading/steering the FIRST move only — never a gate; any depends_on:[] step
+  // is a legitimate opening.
+  const optEntry = Number(caseObj.optimal_entry);
+  const optStep = Number.isInteger(optEntry) ? byNum.get(optEntry) : null;
+  const openingRef = optStep
+    ? `\n\n════ STRONGEST OPENING (reference — do not force) ════
+A strong candidate opens with Step ${optEntry} — "${optStep.label || ''}" (${optStep.produces || ''}). Use this ONLY to judge the quality of their first move and to steer if they are lost at the very start. ANY step marked depends_on:[] (available now) is a legitimate opening — never penalise choosing a different valid starter, and never name Step ${optEntry} unless they stall.`
+    : '';
 
   const header =
 `You are an elite MBB case interviewer for CasEdge running a REAL casebook case from the CasEdge library. This case is fully authored in advance — every number, exhibit and answer is fixed. You must NEVER invent, change, or contradict any figure. Only reveal data that appears below, and only when the candidate reaches it.
@@ -391,7 +400,7 @@ Rules for every reply:
 Conduct the case in natural consulting English. Internal material below (questions, keys, exhibit notes) may be in RUSSIAN — that is source, never quote it; rephrase in English. Keep every number, unit, percentage and proper name EXACTLY as written. Keep the hidden markers (<step>…</step>, <verdict>…</verdict>, <reveal>…</reveal>) exactly as written; never explain or display them.`;
 
   const stable = header + ex.stableText + language;
-  const volatile = doneText + availText + lockedText + ex.volatileText + (isOpening ? '' : focusBlock(focusKey)) + flow;
+  const volatile = doneText + openingRef + availText + lockedText + ex.volatileText + (isOpening ? '' : focusBlock(focusKey)) + flow;
   return { stable, volatile };
 }
 
