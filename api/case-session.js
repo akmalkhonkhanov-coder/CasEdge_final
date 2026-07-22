@@ -324,7 +324,11 @@ export function buildSystemPromptILead({ caseObj, doneSteps, firm, revealedSet, 
   const done = new Set((Array.isArray(doneSteps) ? doneSteps : []).map(Number));
   const unlocked = unlockedStepNums(steps, done);
   const lockedNums = steps.map(s => s.step).filter(n => !done.has(n) && !unlocked.includes(n));
-  const allDone = unlocked.length === 0 && lockedNums.length === 0;
+  // terminal = the deliverable step (case-level tag). Usually the final synthesis;
+  // some cases (e.g. no synthesis step) mark the main calc as terminal. Case is
+  // "done" once the terminal step is closed, even if optional steps remain.
+  const terminalNum = Number.isInteger(Number(caseObj.terminal)) ? Number(caseObj.terminal) : (steps.length ? steps[steps.length - 1].step : null);
+  const allDone = (terminalNum != null && done.has(terminalNum)) || (unlocked.length === 0 && lockedNums.length === 0);
   // optimal_entry = the layer-0 step a strong candidate opens with. Reference for
   // grading/steering the FIRST move only — never a gate; any depends_on:[] step
   // is a legitimate opening.
@@ -741,12 +745,14 @@ export default async function handler(req, res) {
     // Interviewee-led: tell the client which mode actually ran (so it tracks a
     // done-set vs a linear counter) and whether the terminal step is now done.
     const stepCompleted = (ilead && !isOpening) ? (parsed.completedSteps || []) : [];
-    const lastStepNum = steps.length ? steps[steps.length - 1].step : null;
+    // Completion = the terminal step is done (case-level `terminal` tag, else the
+    // last step). Some steps may be skipped, so this is NOT "all steps done".
+    const terminalStepNum = Number.isInteger(Number(caseObj.terminal)) ? Number(caseObj.terminal) : (steps.length ? steps[steps.length - 1].step : null);
     let caseComplete = false;
     if (ilead) {
       const nd = new Set(doneSteps);
       for (const s of stepCompleted) nd.add(s);
-      caseComplete = lastStepNum != null && nd.has(lastStepNum);
+      caseComplete = terminalStepNum != null && nd.has(terminalStepNum);
     }
 
     return res.status(200).json({
