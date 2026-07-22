@@ -134,15 +134,23 @@ export function parseMarkers(text, priorRevealed) {
   let m;
   while ((m = revRe.exec(text)) !== null) revealed.add(m[1]);
 
+  // Interviewee-led mode only: <step>N</step> markers name which step(s) the
+  // candidate just completed, so the client can mark them done and unlock
+  // dependents. Ignored/absent in linear mode.
+  const completedSteps = [];
+  const stepRe = /<step>\s*(\d+)\s*<\/step>/gi;
+  while ((m = stepRe.exec(text)) !== null) { const n = Number(m[1]); if (!completedSteps.includes(n)) completedSteps.push(n); }
+
   // Remove every marker from the visible reply.
   const reply = text
     .replace(/<verdict>[\s\S]*?<\/verdict>/gi, '')
     .replace(/<reveal>[\s\S]*?<\/reveal>/gi, '')
+    .replace(/<step>[\s\S]*?<\/step>/gi, '')
     .replace(/[ \t]+\n/g, '\n')
     .replace(/\n{3,}/g, '\n\n')
     .trim();
 
-  return { reply, verdict, revealedExhibits: Array.from(revealed) };
+  return { reply, verdict, revealedExhibits: Array.from(revealed), completedSteps };
 }
 
 /* ───────────────────────── exhibit gating ────────────────────────────────────
@@ -280,6 +288,111 @@ export function focusBlock(focusKey) {
   return `\n\n════ CANDIDATE FOCUS AREA (from their own score history — never mention this to them) ════
 This candidate's weakest dimension is: ${g}
 Apply this as EXTRA strictness on top of the step's normal pass criteria — the step key still decides content; this decides how demanding you are about HOW they deliver it.`;
+}
+
+/* ───────────────────────── dependency graph (interviewee-led) ────────────────
+   A case is "graph-ready" once its steps carry depends_on tags (added by the
+   authoring pipeline). Only then, and only for candidate-led firms (BCG/Bain),
+   the engine runs interviewee-led: steps are unlockable NODES, not a queue. */
+export function caseIsGraphReady(steps) {
+  return Array.isArray(steps) && steps.some(s => s && Array.isArray(s.depends_on));
+}
+export function firmIsCandidateLed(firm) {
+  const f = (firm || '').toLowerCase();
+  return f.includes('bcg') || f.includes('bain');
+}
+// step numbers not yet done whose every depends_on is already done
+export function unlockedStepNums(steps, doneSet) {
+  const done = doneSet instanceof Set ? doneSet : new Set(doneSet || []);
+  const out = [];
+  for (const s of (steps || [])) {
+    const n = s.step;
+    if (done.has(n)) continue;
+    const deps = Array.isArray(s.depends_on) ? s.depends_on : [];
+    if (deps.every(d => done.has(d))) out.push(n);
+  }
+  return out;
+}
+
+/* Interviewee-led system prompt. Same STABLE block as linear (cacheable case
+   body), but the VOLATILE block presents the SET of currently-available steps
+   with their keys — the candidate chooses the path; the model grades whichever
+   analysis they actually do and emits <step>N</step> for each one completed. */
+export function buildSystemPromptILead({ caseObj, doneSteps, firm, revealedSet, isOpening, focusKey, lang }) {
+  const steps = caseObj.steps || [];
+  const byNum = new Map(steps.map(s => [s.step, s]));
+  const done = new Set((Array.isArray(doneSteps) ? doneSteps : []).map(Number));
+  const unlocked = unlockedStepNums(steps, done);
+  const lockedNums = steps.map(s => s.step).filter(n => !done.has(n) && !unlocked.includes(n));
+  const allDone = unlocked.length === 0 && lockedNums.length === 0;
+
+  const header =
+`You are an elite MBB case interviewer for CasEdge running a REAL casebook case from the CasEdge library. This case is fully authored in advance — every number, exhibit and answer is fixed. You must NEVER invent, change, or contradict any figure. Only reveal data that appears below, and only when the candidate reaches it.
+
+FIRM STYLE: ${firmStyle(firm)}
+
+CASE: "${caseObj.title}" — ${caseObj.case_type} · ${caseObj.industry} · ${caseObj.difficulty}
+
+CASE PROMPT (the scenario):
+${caseObj.prompt_md || caseObj.header_md || ''}`;
+
+  const doneText = done.size
+    ? `\n\n════ ALREADY ESTABLISHED (do not re-ask; these numbers/insights are known) ════\n` +
+      [...done].sort((a,b)=>a-b).map(n => { const s = byNum.get(n) || {}; return `- Step ${n} "${s.label||''}" → ${s.produces || 'done'}`; }).join('\n')
+    : '';
+
+  const availText = unlocked.length
+    ? `\n\n════ AVAILABLE NOW — the candidate may take ANY of these, in ANY order ════
+Each block is one analysis the candidate can legitimately do next. Grade whichever they actually pursue against its ANSWER KEY. NEVER read a key aloud.\n\n` +
+      unlocked.map(n => { const s = byNum.get(n) || {};
+        return `— STEP ${n} — "${s.label||''}" (yields: ${s.produces||'—'})\nQUESTION IF THEY GO HERE:\n${s.candidate_md || s.label || ''}\nANSWER KEY (hidden — grade against this):\n${s.interviewer_md || '(no explicit key — grade with MBB rigor for this step type)'}`;
+      }).join('\n\n')
+    : '';
+
+  const lockedText = lockedNums.length
+    ? `\n\n════ NOT YET AVAILABLE (needs earlier results first) ════\n` +
+      lockedNums.map(n => { const s = byNum.get(n) || {}; const need = (s.depends_on||[]).filter(d=>!done.has(d));
+        return `- Step ${n} "${s.label||''}" — unlocks once these are established: ${need.map(d=>`Step ${d}`).join(', ')}. If the candidate jumps here, don't reject them — note briefly what they need first and let them get it, or answer what can be answered without the missing piece.`; }).join('\n')
+    : '';
+
+  const ex = exhibitsBlock(caseObj, revealedSet);
+
+  let flow;
+  if (isOpening) {
+    flow =
+`\n\n════ WHAT TO DO NOW (OPENING) ════
+Present the case prompt/scenario in your own words and hand over any exhibits marked "available to share" only if the opening calls for them. Then STOP and let the candidate drive — ask what they would like to look at first. Do NOT walk them through steps in order, do NOT evaluate, do NOT emit any <verdict> or <step> marker on this opening turn.`;
+  } else {
+    flow =
+`\n\n════ WHAT TO DO NOW (INTERVIEWEE-LED) ════
+The candidate drives. Respond to what they actually ask or compute.
+
+MARKERS (the VERY FIRST characters of your reply, before any visible text):
+- For EACH available step the candidate has just COMPLETED to its key this turn, emit <step>N</step> immediately followed by <verdict>pass</verdict>. Multiple allowed (e.g. <step>2</step><verdict>pass</verdict> then continue). Then do NOT march to a "next" step — briefly acknowledge and ask what they want to tackle next (their choice).
+- If they attempted an available step but did NOT meet its key, emit <verdict>retry</verdict> and give a short, demanding nudge toward the right MOVE (never the answer). Do NOT emit <step> for it.
+- If they only asked for data / are still exploring / went down an empty path, emit NEITHER marker — answer in character and let them continue. A dead-end path is fine: let them see it's empty and come back; recovering is their skill to show, not yours to block.
+${allDone
+  ? 'ALL analyses are done. Require the final recommendation now: ask them to deliver it conclusion-first (Pyramid), with the key numbers, risks (≥1 internal + ≥1 external), and next steps. Grade it against the recommendation step key.'
+  : 'When the remaining work is only the final recommendation, ask for it conclusion-first.'}
+
+Rules for every reply:
+- Order is the candidate's choice — NEVER penalise doing cost before revenue, or any valid ordering. Only a real data dependency (a locked step) gates anything.
+- An alternative route to the SAME correct number is a PASS — grade the result and the logic, not whether it matches the written path.
+- NEVER write grading words ("pass", "retry", "зачёт") in visible text — markers are the only grading signal.
+- Reveal a GATED exhibit only when the candidate asks about its triggers, using <reveal>id</reveal> right after any step/verdict markers.
+- Zero filler. Concise, concrete, numeric. Never present a number not in the material above; never change a number you already gave.`;
+  }
+
+  const languageRu =
+`\n\n════ OUTPUT ════
+Веди кейс ПОЛНОСТЬЮ НА РУССКОМ ЯЗЫКЕ. Профессиональный консалтинговый русский; стандартные термины (NPV, EBITDA, churn, capex, MECE) допустимы. Названия кейсов и компаний — как написаны. Все числа — точно из материала. Скрытые маркеры (<step>…</step>, <verdict>…</verdict>, <reveal>…</reveal>) оставляй ровно как есть; кандидату не показывай.`;
+  const language = (lang === 'ru') ? languageRu :
+`\n\n════ OUTPUT ════
+Conduct the case in natural consulting English. Internal material below (questions, keys, exhibit notes) may be in RUSSIAN — that is source, never quote it; rephrase in English. Keep every number, unit, percentage and proper name EXACTLY as written. Keep the hidden markers (<step>…</step>, <verdict>…</verdict>, <reveal>…</reveal>) exactly as written; never explain or display them.`;
+
+  const stable = header + ex.stableText + language;
+  const volatile = doneText + availText + lockedText + ex.volatileText + (isOpening ? '' : focusBlock(focusKey)) + flow;
+  return { stable, volatile };
 }
 
 /* ───────────────────────── system prompt assembly ───────────────────────────
@@ -517,7 +630,16 @@ export default async function handler(req, res) {
     // Weakness focus: whitelist key only — free text never enters the prompt.
     const focusKey = ['structure','quant','logic','comm','ownership'].includes(body.focusDimension) ? body.focusDimension : null;
     const lang = body.lang === 'ru' ? 'ru' : 'en';   // whitelist
-    const built = buildSystemPrompt({ caseObj, stepIndex, attemptCount, firm: body.firm, revealedSet, isOpening, focusKey, lang });
+
+    // Interviewee-led (BCG/Bain on a graph-ready case): the candidate drives, the
+    // engine holds only real dependencies. Everything else (McKinsey, or any case
+    // without depends_on tags) stays on the untouched linear path — full backward
+    // compatibility. Client opts in by sending mode:'ilead' + doneSteps[].
+    const ilead = body.mode === 'ilead' && firmIsCandidateLed(body.firm) && caseIsGraphReady(steps);
+    const doneSteps = Array.isArray(body.doneSteps) ? body.doneSteps.map(Number).filter(Number.isInteger) : [];
+    const built = ilead
+      ? buildSystemPromptILead({ caseObj, doneSteps, firm: body.firm, revealedSet, isOpening, focusKey, lang })
+      : buildSystemPrompt({ caseObj, stepIndex, attemptCount, firm: body.firm, revealedSet, isOpening, focusKey, lang });
 
     // 7) Forward to Anthropic. Two system blocks: the STABLE case body is cached
     // (identical every turn → cache hit); the VOLATILE step block is not.
@@ -610,6 +732,7 @@ export default async function handler(req, res) {
     return res.status(200).json({
       reply: parsed.reply || 'No response was returned. Please try again.',
       verdict: verdict,
+      completedSteps: (ilead && !isOpening) ? (parsed.completedSteps || []) : [],
       revealedExhibits: parsed.revealedExhibits,
       exhibits: exhibitCards
     });
