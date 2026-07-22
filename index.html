@@ -3090,6 +3090,10 @@ async function callCaseSession(payload) {
   const err = new Error(msg); err.userFacing = true; err.status = res.status;
   throw err;
 }
+// Ask the server to run interviewee-led for candidate-led firms. The server
+// only honours it on graph-ready (dependency-tagged) cases; otherwise it runs
+// linear and returns ilead:false, so the client falls back automatically.
+function casIleadMode() { return (state.firm === 'BCG' || state.firm === 'Bain') ? 'ilead' : undefined; }
 function getUserEmail() { return document.getElementById('emailInput').value; }
 function getUserName()  { return document.getElementById('nameInput').value; }
 
@@ -3105,6 +3109,7 @@ const state = {
   // Full Case Interview (library-backed) session state.
   caseMode: false, caseId: null, caseTitle: '', caseSteps: 0,
   stepIndex: 0, attemptCount: 0, revealedExhibits: [], caseLibCache: null,
+  doneSteps: [], ilead: false,   // interviewee-led (BCG/Bain on a graph-ready case)
   // Language: aiLang drives the language of cases/drills; fbLang drives feedback.
   // fbLang 'same' = follow aiLang. uiLang drives the interface chrome (independent).
   aiLang: localStorage.getItem('caseedge_ailang') || 'en',
@@ -6434,6 +6439,8 @@ async function startLibraryCase(caseId) {
   state.stepIndex = 0;
   state.attemptCount = 0;
   state.revealedExhibits = [];
+  state.doneSteps = [];
+  state.ilead = false;
 
   document.getElementById('b-firm').textContent  = state.firm;
   document.getElementById('b-type').textContent  = meta.case_type || state.caseType;
@@ -6456,9 +6463,11 @@ async function startLibraryCase(caseId) {
   try {
     const data = await callCaseSession({
       caseId: state.caseId, stepIndex: 0, attemptCount: 0, firm: state.firm,
+      mode: casIleadMode(), doneSteps: [],
       revealedExhibits: [], messages: [], focusDimension: casWeakestDimension(), lang: state.aiLang
     });
     if (Array.isArray(data.revealedExhibits)) state.revealedExhibits = data.revealedExhibits;
+    state.ilead = !!data.ilead;   // server confirms whether this case actually runs interviewee-led
     const opening = data.reply || 'Let us begin. Please structure your approach to this case.';
     state.messages.push({ role: 'assistant', content: opening });
     rememberCase('Case #' + state.caseId + ': ' + state.caseTitle);
@@ -7216,6 +7225,8 @@ async function sendMessage() {
         stepIndex: state.stepIndex,
         attemptCount: state.attemptCount,
         firm: state.firm,
+        mode: casIleadMode(),
+        doneSteps: state.doneSteps,
         revealedExhibits: state.revealedExhibits,
         messages: state.messages.slice(-16),
         focusDimension: casWeakestDimension(),
@@ -7225,21 +7236,39 @@ async function sendMessage() {
       const reply = data.reply || 'Apologies — please try again.';
       state.messages.push({ role: 'assistant', content: reply });
 
-      const lastIndex = Math.max(0, state.caseSteps - 1);
-      if (data.verdict === 'pass') {
-        if (state.stepIndex >= lastIndex) {
-          // Final step cleared — show the closing line, then the existing feedback flow.
+      state.ilead = !!data.ilead;
+      if (data.ilead) {
+        // Interviewee-led: track a done-set of completed step numbers (the
+        // candidate chooses the path). The server signals caseComplete when the
+        // terminal/recommendation step is done — some steps may be skipped, so
+        // completion is NOT "all steps done", it's "the terminal step done".
+        if (Array.isArray(data.completedSteps)) {
+          for (const s of data.completedSteps) if (!state.doneSteps.includes(s)) state.doneSteps.push(s);
+        }
+        if (data.caseComplete) {
           setProgress(100);
           setTimeout(() => { setTyping(false); addMsg('ai', reply, true); }, 500);
           setTimeout(() => { endInterview(); }, 1500);
           return;
         }
-        state.stepIndex++;
-        state.attemptCount = 0;
-      } else if (data.verdict === 'retry') {
-        state.attemptCount++;
+        setProgress(Math.max(4, Math.min(96, Math.round((state.doneSteps.length / Math.max(1, state.caseSteps)) * 100))));
+      } else {
+        // Linear (McKinsey, or any case without dependency tags) — unchanged.
+        const lastIndex = Math.max(0, state.caseSteps - 1);
+        if (data.verdict === 'pass') {
+          if (state.stepIndex >= lastIndex) {
+            setProgress(100);
+            setTimeout(() => { setTyping(false); addMsg('ai', reply, true); }, 500);
+            setTimeout(() => { endInterview(); }, 1500);
+            return;
+          }
+          state.stepIndex++;
+          state.attemptCount = 0;
+        } else if (data.verdict === 'retry') {
+          state.attemptCount++;
+        }
+        setProgress(Math.max(4, Math.min(96, Math.round((state.stepIndex / Math.max(1, state.caseSteps)) * 100))));
       }
-      setProgress(Math.max(4, Math.min(96, Math.round((state.stepIndex / Math.max(1, state.caseSteps)) * 100))));
       setTimeout(() => { setTyping(false); addMsg('ai', reply, true); casRenderExhibits(data.exhibits); startRespTimer(); }, 500);
     } catch (e) {
       setTyping(false);
