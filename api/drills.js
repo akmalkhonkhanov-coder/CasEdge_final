@@ -11,9 +11,15 @@
 
 const DRILLS_CM = require('./_drills_cm.json');
 const DRILLS_MS = require('./_drills_ms.json');
-// Two curated libraries share one endpoint. Client passes set:'ms' for Market
-// Sizing; anything else (incl. absent) → Case Math. IDs are disjoint (CM-* / MS-*).
-function libData(body) { return (body && body.set === 'ms') ? DRILLS_MS : DRILLS_CM; }
+const DRILLS_ST = require('./_drills_st.json');
+// Curated libraries share one endpoint. Client passes set:'ms' (Market Sizing),
+// set:'st' (Structuring), else Case Math. IDs are disjoint (CM-*/MS-*/ST-*).
+function libData(body) {
+  const s = body && body.set;
+  if (s === 'ms') return DRILLS_MS;
+  if (s === 'st') return DRILLS_ST;
+  return DRILLS_CM;
+}
 
 const FALLBACK_ORIGIN = 'https://cas-edge-final.vercel.app';
 const GRADER_MODEL = 'claude-sonnet-5';
@@ -34,22 +40,49 @@ RULES:
 
 RESPONSE FORMAT (strict JSON): {"pass":true,"coaching":"1-2 sentences IN ENGLISH: what was right/missing and the one thing to fix. Specific, cite the key number."}`;
 
+// Structuring (ST) is qualitative — there is no single number. It is graded on
+// five registers: COVER (required branches, judged by MEANING not label), DECOY
+// (reflexive branches that must NOT be developed first), ME (branch pairs that
+// cannot stand together), DRIVE (what to measure), ORDER (defensible starting
+// branch). There is NO canonical tree — many MECE trees are valid; the only
+// objective failure is a MISSING required branch (per the casebook grounding).
+const ST_GRADER_SYSTEM = `You are a strict but fair MBB structuring-drill grader. The candidate was given an anchor question and asked to build a MECE issue tree — NOT to solve the case. You are given the grading REGISTERS (the answer key) and the candidate's TREE. Return ONLY JSON, no preamble, no markdown.
+
+HOW TO GRADE (in priority order):
+1. COVER is the core. Every required branch must be present in the candidate's tree BY MEANING — accept synonyms and rephrasings, never demand the exact label. A tree that MISSES a required branch FAILS, no matter how clean the rest is. This is the one objective failure mode.
+2. DECOY: mentioning a decoy branch is NOT penalised. It fails ORDER only if the candidate makes a decoy their FIRST branch to develop / their lead hypothesis.
+3. ME: if the candidate merges two branches the ME matrix marks incompatible, flag it — a hard merge of an incompatible pair is a fail; a soft-overlap pair is a warning, not a fail.
+4. ORDER: a defensible start is any branch justified by a real criterion (size of effect, speed to check, cost of data). Starting on a decoy is an ORDER defect. Not stating any criterion is a coaching note, not a fail.
+5. Do NOT reward tree LENGTH or generic templates (e.g. a blank "profitability = revenue − cost" with no tailoring). Reward branches tailored to THIS company and question.
+
+PASS = all COVER branches present (by meaning) AND no decoy developed first AND no hard ME violation.
+
+RESPONSE FORMAT (strict JSON): {"pass":true,"coaching":"1-2 sentences IN ENGLISH: name which required branch (if any) was missed, or the decoy/ME slip, and the single most valuable fix. Be specific to this case."}`;
+
 /* ───────────────────────── library ───────────────────────────────────────── */
 let _byId = null;
 function drillById(id) {
-  // one combined map across both libraries — ids are disjoint (CM-* / MS-*)
-  if (!_byId) { _byId = new Map(); for (const src of [DRILLS_CM, DRILLS_MS]) for (const d of (src.drills || [])) _byId.set(d.id, d); }
+  // one combined map across all libraries — ids are disjoint (CM-*/MS-*/ST-*)
+  if (!_byId) { _byId = new Map(); for (const src of [DRILLS_CM, DRILLS_MS, DRILLS_ST]) for (const d of (src.drills || [])) _byId.set(d.id, d); }
   return _byId.get(id);
 }
 
 // Client-safe view: prompt / exhibit / step prompts / meta — NO checklist,
-// reference, provoked, or step answers.
-function sanitizeDrill(d, index, total) {
+// reference, provoked, key registers, or step answers.
+// ST drills: the `key` registers (COVER/ME/DRIVE/ORDER/DECOY), anchor_metric and
+// reference are server-only. For E-after drills the exhibit itself is WITHHELD
+// until the candidate has submitted a tree (revealed=true) — the whole point is
+// that the data breaks the framework they already built.
+function sanitizeDrill(d, index, total, revealed) {
+  const isAfter = d.exhibit_mode === 'E-after';
+  const exhibit = (isAfter && !revealed) ? null : (d.exhibit || null);
   return {
     id: d.id, title: d.title, difficulty: d.difficulty, type: d.type,
     focus: d.focus, time: d.time,
     prompt: d.prompt,
-    exhibit: d.exhibit || null,
+    exhibit: exhibit,
+    exhibit_mode: d.exhibit_mode || null,   // client gates the E-after flow on this
+    exhibit_withheld: (isAfter && !revealed) || false,
     step_prompts: d.step_prompts || [],
     index: index, total: total
   };
@@ -125,6 +158,21 @@ async function graderJSON(system, userText, maxTokens) {
 }
 
 async function gradeDrill(d, answer) {
+  // ST (Structuring): grade the candidate's tree against the five registers.
+  if (d.type === 'Structuring' && d.key) {
+    const k = d.key;
+    const exhibitTxt = d.exhibit ? ('EXHIBIT (visible to candidate for this grade):\n' + JSON.stringify({ header: d.exhibit.header, rows: d.exhibit.rows })) : 'EXHIBIT: none / withheld';
+    const u = 'ANCHOR QUESTION: ' + d.prompt +
+      '\n\n--- GRADING REGISTERS (answer key) ---' +
+      '\nCOVER (required branches):\n' + (k.cover || '') +
+      '\n\nDECOY (reflexive branches — must not lead):\n' + (k.decoy || '') +
+      '\n\nME (incompatible pairs):\n' + (k.me || '') +
+      '\n\nORDER (defensible starts):\n' + (k.order || '') +
+      '\n\n' + exhibitTxt +
+      '\n\n--- CANDIDATE TREE ---\n' + String(answer || '');
+    const j = await graderJSON(ST_GRADER_SYSTEM, u, 500);
+    return j || { pass: false, coaching: 'Could not grade — please try again.' };
+  }
   const exhibitTxt = d.exhibit ? ('EXHIBIT ' + JSON.stringify({ header: d.exhibit.header, rows: d.exhibit.rows })) : 'EXHIBIT: none';
   const u = 'PROMPT: ' + d.prompt +
     '\n' + exhibitTxt +
@@ -181,11 +229,16 @@ export default async function handler(req, res) {
       const d = drillById(body.drillId);
       if (!d) return res.status(400).json({ error: { message: 'Unknown drill.' } });
       const r = await gradeDrill(d, body.answer);
+      // ST E-after: reveal the exhibit only now (after the tree is submitted), so
+      // the candidate can see how the data breaks their framework, then refine.
+      const revealExhibit = (d.type === 'Structuring' && d.exhibit_mode === 'E-after' && d.exhibit) ? d.exhibit : null;
       return res.status(200).json({
         pass: !!r.pass,
         coaching: r.coaching || '',
         reference: d.reference || { en: '', ru: '' },
-        provoked: d.provoked || { en: '', ru: '' }
+        provoked: d.provoked || { en: '', ru: '' },
+        exhibit: revealExhibit,
+        exhibit_mode: d.exhibit_mode || null
       });
     }
 
