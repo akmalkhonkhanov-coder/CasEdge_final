@@ -1205,6 +1205,49 @@
     .sv-qual { background: var(--sv-fill); border: 1px solid var(--sv-line); color: var(--on-dark); border-radius: 8px; padding: 6px 10px; font-size: 13.5px; font-weight: 600; min-width: 110px; }
     .sv-qual-inline { min-width: 90px; margin: 0 2px; padding: 3px 8px; font-size: 14px; }
     @media (max-width: 640px) { .sv-layout { flex-direction: column; } .sv-journal { position: static; flex-basis: auto; width: 100%; min-height: 0; } .sv-study-shell { flex-direction: column; } .sv-nav { flex: 0 0 auto !important; flex-direction: row !important; flex-wrap: wrap; position: static !important; } }
+    /* ══════════ REDROCK STUDY (server-backed Solve variant) ══════════ */
+    .rk-tag { font-size: 12px; font-weight: 500; color: var(--accent-teal); background: rgba(93,184,166,.14); padding: 2px 9px; border-radius: 20px; vertical-align: middle; margin-left: 6px; }
+    .rk-study { font-size: 14.5px; color: var(--on-dark); line-height: 1.7; margin: 6px 0 12px; }
+    .rk-study b { color: var(--on-dark); }
+    .rk-q { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--on-dark); margin: 8px 0 6px; }
+    .rk-note { font-size: 12.5px; color: var(--on-dark-soft); line-height: 1.5; margin: 8px 0 14px; }
+    .rk-note.rk-amber { color: var(--accent-amber); }
+    .rk-pre { white-space: pre-wrap; font-size: 12.5px; color: var(--on-dark-soft); font-family: var(--mono); }
+    .rk-exh { margin-top: 14px; }
+    .rk-field { margin: 12px 0; padding: 10px 12px; border: 1px solid var(--sv-line); border-radius: 10px; background: rgba(255,255,255,.015); transition: border-color .2s; }
+    .rk-field.ok { border-color: rgba(93,184,166,.55); }
+    .rk-field.naive { border-color: rgba(232,168,124,.6); }
+    .rk-field.bad { border-color: rgba(224,122,95,.55); }
+    .rk-field-l { font-size: 13.5px; color: var(--on-dark); margin-bottom: 7px; font-weight: 500; }
+    .rk-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .rk-unit { font-size: 13px; color: var(--on-dark-soft); }
+    .rk-wide { width: 320px; max-width: 100%; }
+    .rk-check { background: var(--accent-teal); color: #0d1f1c; border: none; border-radius: 8px; padding: 8px 16px; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: filter .15s; }
+    .rk-check:hover { filter: brightness(1.08); }
+    .rk-check:disabled { opacity: .5; cursor: default; }
+    .rk-fb { display: inline-block; margin-top: 8px; font-size: 12.5px; line-height: 1.45; }
+    .rk-fb.ok { color: var(--accent-teal); }
+    .rk-fb.naive { color: var(--accent-amber); }
+    .rk-fb.bad { color: #e07a5f; }
+    .rk-blank { width: 92px; background: var(--sv-fill); border: none; border-bottom: 2px solid var(--sv-line); color: var(--on-dark); padding: 3px 6px; font-size: 14px; font-family: var(--mono); text-align: center; }
+    .rk-blank.correct { border-bottom-color: var(--accent-teal); color: var(--accent-teal); }
+    .rk-blank.naive { border-bottom-color: var(--accent-amber); }
+    .rk-blank.wrong { border-bottom-color: #e07a5f; }
+    .rk-blankmark { font-size: 13px; margin: 0 4px 0 2px; color: var(--accent-teal); }
+    .rk-tmpl { font-size: 15px; line-height: 2.4; color: var(--on-dark); }
+    .rk-gcards { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0; }
+    .rk-gcards .sv-gcard { flex: 0 1 auto; min-width: 120px; }
+    .sv-gcard.rk-okcard { border-color: var(--accent-teal); background: rgba(93,184,166,.1); }
+    .sv-gcard.rk-badcard { border-color: #e07a5f; }
+    .rk-mini { background: transparent; color: var(--accent-teal); border: 1px solid var(--sv-line); border-radius: 7px; padding: 4px 10px; font-size: 12px; cursor: pointer; margin-left: 8px; }
+    .rk-result { max-width: 520px; margin: 30px auto; text-align: center; }
+    .rk-score { font-family: var(--serif); font-size: 64px; font-weight: 700; color: var(--accent-teal); line-height: 1; }
+    .rk-score-sub { font-size: 15px; color: var(--on-dark); margin: 10px 0 20px; }
+    .rk-res-table { border: 1px solid var(--sv-line); border-radius: 12px; overflow: hidden; }
+    .rk-res-row { display: flex; justify-content: space-between; padding: 12px 18px; font-size: 14.5px; color: var(--on-dark); border-bottom: 1px solid var(--sv-line); }
+    .rk-res-row:last-child { border-bottom: none; }
+    .rk-res-row b { color: var(--accent-teal); }
+
     /* ---- Investigation sidebar (Study phase: Directions/Objective/Study Info/Exhibits) ---- */
     .sv-study-shell { display: flex; gap: 20px; align-items: flex-start; }
     .sv-nav { flex: 0 0 168px; display: flex; flex-direction: column; gap: 2px; position: sticky; top: 8px; }
@@ -4483,7 +4526,7 @@ const GAME_INTROS = {
     ],
     meta: [['Time','35 min'],['Phases','4'],['Scoring','Auto-graded']],
     note: 'Original scenario (Calder Sound Fishery). The format mirrors the real assessment; the content is our own. Answers are checked within a 1% tolerance.',
-    start: 'startSolveGame',
+    start: 'startSolveChoose',
   },
   bcg: {
     eyebrow: 'BCG-style assessment',
@@ -4760,7 +4803,371 @@ function svSetPhaseUI() {
   document.getElementById('svProgFill').style.width = ((cur)/order.length*100 + (1/order.length)*50) + '%';
 }
 
+/* ══════════════════════════════════════════════════════════════════════════
+   REDROCK STUDY — McKinsey Solve Game variant, server-backed (50 games).
+   Answer keys live ONLY in api/redrock-session.js; this client renders the
+   sanitized slice and grades every field over the wire (numeric + naive
+   detection, exact for dropdown/choice, LLM for the graph justification).
+   Reuses the #screen-solve shell: topbar, timer, calculator, Research Journal
+   (svRenderJournal), collectible chips, sv-* styling. Nothing is duplicated.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+// Fixed chart-type universe — the sanitized graph_selection ships no options,
+// so every game offers the same picker; the server grades the choice string.
+const REDROCK_CHART_TYPES = ['Line', 'Bar', 'Pie', 'Scatter', 'Waterfall', 'Combo (bar + line)', 'Table', 'Map', 'Cohort heatmap'];
+
+async function rkToken() {
+  try {
+    if (typeof sb === 'undefined' || !sb) return null;
+    let { data } = await sb.auth.getSession();
+    let s = data && data.session;
+    if (s && s.expires_at && (s.expires_at * 1000 - Date.now() < 60000)) {
+      const r = await sb.auth.refreshSession();
+      s = (r && r.data && r.data.session) || s;
+    }
+    return s ? s.access_token : null;
+  } catch (e) { return null; }
+}
+
+async function rkApi(action, payload) {
+  const token = await rkToken();
+  const headers = { 'Content-Type': 'application/json' };
+  if (token) headers['Authorization'] = 'Bearer ' + token;
+  const resp = await fetch('/api/redrock-session', { method: 'POST', headers, body: JSON.stringify(Object.assign({ action }, payload || {})) });
+  let data = null; try { data = await resp.json(); } catch (e) { data = null; }
+  if (!resp.ok) { const msg = (data && data.error && data.error.message) || ('Request failed (' + resp.status + ')'); throw new Error(msg); }
+  return data;
+}
+
+function rkSeenIds() { try { return JSON.parse(localStorage.getItem('caseedge_redrock_seen') || '[]'); } catch (e) { return []; } }
+function rkMarkSeen(id) { try { const s = rkSeenIds(); if (!s.includes(id)) { s.push(id); localStorage.setItem('caseedge_redrock_seen', JSON.stringify(s)); } } catch (e) {} }
+function rkToast(m) { if (typeof toast === 'function') toast(m); }
+
+// Entry: the Solve Game briefing → variant chooser. Redrock is the live library.
+function startSolveChoose() {
+  const box = document.getElementById('giCard');
+  if (!box) { startRedrock(); return; }
+  const acts = box.querySelector('.gi-actions');
+  if (acts) acts.innerHTML =
+    `<button class="gi-start" onclick="startRedrock()">Redrock Study &mdash; 50 McKinsey Solve games &rarr;</button>
+     <button class="gi-back" style="margin-top:10px;" onclick="startSolveGame()">Calder Sound &mdash; guided sample</button>
+     <button class="gi-back" style="margin-top:10px;" onclick="showScreen('mode')">Back</button>`;
+}
+
+async function startRedrock() {
+  if (typeof requireAuth === 'function' && !requireAuth()) return;
+  if (typeof cxSetResume === 'function') cxSetResume('solve', 'Solve Game', 'startRedrock');
+  const card = document.getElementById('giCard');
+  const setActs = html => { if (card) { const a = card.querySelector('.gi-actions'); if (a) a.innerHTML = html; } };
+  setActs('<button class="gi-start" disabled>Loading a game&hellip;</button>');
+  let picked, full;
+  try {
+    picked = await rkApi('pick', { seenIds: rkSeenIds() });
+    if (picked.exhausted) { try { localStorage.removeItem('caseedge_redrock_seen'); } catch (e) {} picked = await rkApi('pick', { seenIds: [] }); }
+    if (!picked.game) throw new Error('No game available.');
+    full = await rkApi('game', { gameId: picked.game.id, revealedExhibits: [] });
+  } catch (e) {
+    setActs('<button class="gi-start" onclick="startSolveChoose()">Retry &rarr;</button><button class="gi-back" style="margin-top:10px;" onclick="showScreen(\'mode\')">Back</button>');
+    rkToast('Could not load Redrock game: ' + e.message);
+    return;
+  }
+  const game = full.game;
+  rkMarkSeen(game.id);
+  solve = {
+    rk: true, game: game, phase: 'study', qIndex: 0, reportStep: 'written',
+    rkVals: {}, rkGraded: {}, rkMeta: {}, revealed: [],
+    journal: [], calcLog: [],
+    limitS: (game.est_minutes || 30) * 60, timerId: null, startMs: null
+  };
+  svCalcExpr = '';
+  try { const cd = document.getElementById('svCalcDisp'); if (cd) cd.textContent = '0'; const cl = document.getElementById('svCalcLog'); if (cl) cl.innerHTML = ''; const cc = document.getElementById('svCalc'); if (cc) cc.classList.remove('show'); } catch (e) {}
+  showScreen('solve');
+  rkStartTimer();
+  renderSolve();
+}
+
+function rkStartTimer() {
+  const el = document.getElementById('svTimer');
+  if (!el) return;
+  if (solve.timerId) clearInterval(solve.timerId);
+  solve.startMs = Date.now();
+  if (typeof gameTimerOn === 'function' && !gameTimerOn()) { el.style.display = 'none'; return; }
+  el.style.display = '';
+  const tick = () => {
+    const left = solve.limitS - Math.floor((Date.now() - solve.startMs) / 1000);
+    const over = left < 0, a = Math.abs(left), m = Math.floor(a / 60), s = a % 60;
+    el.textContent = (over ? 'Overtime ' : '') + m + ':' + String(s).padStart(2, '0');
+    el.classList.toggle('warn', !over && left <= 300);
+    el.classList.toggle('over', over);
+  };
+  tick();
+  solve.timerId = setInterval(tick, 1000);
+}
+
+/* ── phase chrome ─────────────────────────────────────────────────────────── */
+function rkSetPhaseUI() {
+  const order = ['study', 'analysis', 'report', 'cases'];
+  const labels = { study: 'Study', analysis: 'Analysis', report: 'Report', cases: 'Cases' };
+  const cur = order.indexOf(solve.phase);
+  order.forEach((p, i) => {
+    const el = document.getElementById('svPhase-' + p);
+    if (!el) return;
+    el.classList.toggle('active', i === cur);
+    el.classList.toggle('done', i < cur && cur >= 0);
+    el.textContent = (i < cur && cur >= 0 ? '✓ ' : '') + labels[p];
+  });
+  const pf = document.getElementById('svProgFill');
+  if (pf) pf.style.width = (Math.max(cur, 0) / order.length * 100 + (1 / order.length) * 50) + '%';
+}
+
+function rkRender() {
+  rkSetPhaseUI();
+  const inner = document.getElementById('svInner'), foot = document.getElementById('svFooter');
+  if (!inner || !foot) return;
+  if (solve.phase === 'study') rkStudy(inner, foot);
+  else if (solve.phase === 'analysis') rkAnalysis(inner, foot);
+  else if (solve.phase === 'report') rkReport(inner, foot);
+  else if (solve.phase === 'cases') rkCases(inner, foot);
+  else if (solve.phase === 'result') rkResult(inner, foot);
+  if (typeof svRenderJournal === 'function' && document.getElementById('svJournal')) svRenderJournal();
+  const body = document.getElementById('svBody'); if (body) body.scrollTop = 0;
+}
+
+/* ── tiny markdown: **bold**, newlines, and pipe tables ───────────────────── */
+function rkInline(s) { return esc(String(s == null ? '' : s)).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>'); }
+function rkMd(text) {
+  const lines = String(text == null ? '' : text).split('\n');
+  let html = '', tbl = [];
+  const flush = () => {
+    if (!tbl.length) return;
+    const rows = tbl.map(r => r.replace(/^\s*\|/, '').replace(/\|\s*$/, '').split('|').map(c => c.trim()));
+    const body = rows.filter(r => !r.every(c => /^-+$/.test(c) || c === ''));
+    let tt = '<table class="sv-table" style="margin:8px 0;"><tbody>';
+    body.forEach((r, i) => { tt += '<tr>' + r.map(c => (i === 0 ? '<th>' + rkInline(c) + '</th>' : '<td class="num">' + rkInline(c) + '</td>')).join('') + '</tr>'; });
+    html += tt + '</tbody></table>'; tbl = [];
+  };
+  lines.forEach(ln => {
+    if (/^\s*\|.*\|/.test(ln)) { tbl.push(ln); return; }
+    flush();
+    if (ln.trim() === '') { html += '<div style="height:8px"></div>'; return; }
+    html += '<div style="margin:2px 0;">' + rkInline(ln) + '</div>';
+  });
+  flush();
+  return html;
+}
+
+/* ── exhibits (reuse svExhibitHTML via a {columns,rows} adapter) ───────────── */
+function rkExhibit(ex) {
+  if (ex.hidden) {
+    return `<div class="sv-exhibit"><div class="sv-exhibit-t">${esc(ex.title || 'Exhibit')}</div>
+      <div class="rk-note">This exhibit unlocks on request.
+      <button class="rk-mini" onclick="rkReveal('${esc(ex.id)}')">Request</button></div></div>`;
+  }
+  const b = ex.body || {};
+  if (b.columns && b.rows) {
+    const head = [''].concat(b.columns);
+    const rows = b.rows.map(r => [r.label].concat(r.cells));
+    return svExhibitHTML({ title: ex.title || 'Exhibit', head: head, rows: rows }, true);
+  }
+  return `<div class="sv-exhibit"><div class="sv-exhibit-t">${esc(ex.title || 'Exhibit')}</div><pre class="rk-pre">${esc(JSON.stringify(b, null, 1))}</pre></div>`;
+}
+
+async function rkReveal(exId) {
+  try {
+    const r = await rkApi('reveal', { gameId: solve.game.id, exhibitId: exId, query: solve.game.objective || solve.game.title || '' });
+    if (r && r.revealed && r.exhibit) {
+      if (!solve.revealed.includes(exId)) solve.revealed.push(exId);
+      const idx = solve.game.exhibits.findIndex(e => e.id === exId);
+      if (idx >= 0) solve.game.exhibits[idx] = r.exhibit;
+      renderSolve();
+    } else rkToast('Not yet — mention this exhibit in your analysis to unlock it.');
+  } catch (e) { rkToast(e.message); }
+}
+
+/* ── a single graded field (numeric | dropdown | choice) ──────────────────── */
+function rkField(fieldId, input, opts) {
+  opts = opts || {};
+  const g = solve.rkGraded[fieldId];
+  const val = solve.rkVals[fieldId] == null ? '' : solve.rkVals[fieldId];
+  const unit = opts.unit ? `<span class="rk-unit">${esc(opts.unit)}</span>` : '';
+  let badge = '';
+  if (g === 'correct') badge = '<span class="rk-fb ok">✓ Correct</span>';
+  else if (g === 'naive') badge = `<span class="rk-fb naive">▲ Naïve trap${opts.naiveReason ? ' — ' + esc(opts.naiveReason) : ''}. Correct: ${esc(String(opts.correct))}</span>`;
+  else if (g === 'wrong') badge = `<span class="rk-fb bad">✗ Not right${opts.correct != null ? ' — correct: ' + esc(String(opts.correct)) : ''}</span>`;
+  else if (g === 'ungraded') badge = '<span class="rk-fb">Could not grade — try again.</span>';
+  const ph = (input === 'dropdown' || input === 'choice') ? 'type your answer' : 'number';
+  const locked = g === 'correct' ? 'disabled' : '';
+  const cls = 'rk-field' + (g === 'correct' ? ' ok' : g === 'naive' ? ' naive' : g === 'wrong' ? ' bad' : '');
+  return `<div class="${cls}" id="fld-${esc(fieldId)}">
+    ${opts.label ? `<div class="rk-field-l">${rkInline(opts.label)}</div>` : ''}
+    <div class="rk-row">
+      <input class="sv-numin" id="in-${esc(fieldId)}" value="${esc(String(val))}" placeholder="${esc(ph)}" ${locked}
+        oninput="solve.rkVals['${esc(fieldId)}']=this.value" onkeydown="if(event.key==='Enter'){event.preventDefault();rkCheck('${esc(fieldId)}')}">
+      ${unit}
+      <button class="rk-check" ${locked} onclick="rkCheck('${esc(fieldId)}')">Check</button>
+    </div>
+    ${badge}
+  </div>`;
+}
+function rkFieldFull(fieldId, input, label, unit) {
+  const m = (solve.rkMeta && solve.rkMeta[fieldId]) || {};
+  return rkField(fieldId, input, { label: label, unit: unit, correct: m.correct, naiveReason: m.naiveReason });
+}
+
+async function rkCheck(fieldId) {
+  const inp = document.getElementById('in-' + fieldId);
+  const value = inp ? inp.value : solve.rkVals[fieldId];
+  solve.rkVals[fieldId] = value;
+  if (value == null || String(value).trim() === '') { rkToast('Enter an answer first.'); return; }
+  try {
+    const r = await rkApi('grade', { gameId: solve.game.id, fieldId: fieldId, value: value });
+    solve.rkGraded[fieldId] = r.status || 'wrong';
+    solve.rkMeta[fieldId] = { correct: r.correctAnswer, naiveReason: r.naiveReason, feedback: r.feedback };
+  } catch (e) { solve.rkGraded[fieldId] = 'ungraded'; rkToast(e.message); }
+  renderSolve();
+}
+
+/* ── STUDY ────────────────────────────────────────────────────────────────── */
+function rkStudy(inner, foot) {
+  const g = solve.game;
+  const exh = (g.exhibits || []).map(rkExhibit).join('');
+  inner.innerHTML =
+    `<div class="sv-layout"><div class="sv-layout-main">
+      <div class="sv-h">${esc(g.title)} <span class="rk-tag">${esc(g.world || '')}</span></div>
+      <div class="sv-obj"><span class="sv-obj-tag">Objective</span> ${rkInline(g.objective || '')}</div>
+      <div class="rk-study">${rkMd(g.study_md || '')}</div>
+      <div class="rk-note">Drag any figure into the Research Journal — some numbers here are decoys that never feed the analysis.</div>
+      ${exh}
+    </div><div class="sv-journal" id="svJournal"></div></div>`;
+  foot.innerHTML = `<span></span><button class="sv-next" onclick="solve.phase='analysis';solve.qIndex=0;renderSolve()">Start analysis &rarr;</button>`;
+}
+
+/* ── ANALYSIS ─────────────────────────────────────────────────────────────── */
+function rkAnalysis(inner, foot) {
+  const g = solve.game, qs = g.analysis || [];
+  const q = qs[solve.qIndex] || { prompt: '', parts: [] };
+  const nav = qs.map((qq, i) => {
+    const done = (qq.parts || []).length && (qq.parts || []).every(p => solve.rkGraded['a:' + p.key] === 'correct');
+    return `<button class="sv-qnav-item ${i === solve.qIndex ? 'active' : ''} ${done ? 'answered' : ''}" onclick="solve.qIndex=${i};renderSolve()">Q${i + 1}</button>`;
+  }).join('');
+  const fields = (q.parts || []).map(p => rkFieldFull('a:' + p.key, p.input || 'numeric', (p.label && p.label !== 'answer') ? p.label : '', p.unit)).join('');
+  inner.innerHTML =
+    `<div class="sv-layout"><div class="sv-layout-main">
+      <div class="sv-qnav">${nav}</div>
+      <div class="rk-q">Question ${solve.qIndex + 1}</div>
+      <div class="sv-q-text">${rkMd(q.prompt || '')}</div>
+      ${fields}
+      <div class="rk-exh">${(g.exhibits || []).map(rkExhibit).join('')}</div>
+    </div><div class="sv-journal" id="svJournal"></div></div>`;
+  const last = solve.qIndex >= qs.length - 1;
+  foot.innerHTML =
+    `<button class="sv-back" onclick="${solve.qIndex > 0 ? 'solve.qIndex--;renderSolve()' : "solve.phase='study';renderSolve()"}">&larr; Back</button>
+     <button class="sv-next" onclick="${last ? "solve.phase='report';solve.reportStep='written';renderSolve()" : 'solve.qIndex++;renderSolve()'}">${last ? 'Go to report &rarr;' : 'Next question &rarr;'}</button>`;
+}
+
+/* ── REPORT ───────────────────────────────────────────────────────────────── */
+function rkReport(inner, foot) {
+  const g = solve.game, rep = g.report || {}, step = solve.reportStep || 'written';
+  if (step === 'written') {
+    const w = rep.written || {};
+    let tmpl = String(w.template || '');
+    (w.blanks || []).forEach(b => {
+      const fid = 'w:' + b.key, gr = solve.rkGraded[fid];
+      const mark = gr === 'correct' ? '✓' : (gr === 'naive' || gr === 'wrong') ? '✗' : '';
+      const val = solve.rkVals[fid] == null ? '' : solve.rkVals[fid];
+      const inputHtml = `<input class="rk-blank ${gr || ''}" value="${esc(String(val))}" placeholder="[${esc(b.key)}]" oninput="solve.rkVals['${fid}']=this.value" onchange="rkCheck('${fid}')"><span class="rk-blankmark">${mark}</span>`;
+      tmpl = tmpl.split('[' + b.key + ']').join(inputHtml);
+    });
+    inner.innerHTML =
+      `<div class="sv-layout-main">
+        <div class="sv-h">Written report</div>
+        <div class="rk-note">Fill each blank with the figure you established, then press Enter/Tab to check.</div>
+        <div class="rk-tmpl">${tmpl}</div>
+      </div>`;
+    foot.innerHTML = `<button class="sv-back" onclick="solve.phase='analysis';solve.qIndex=(solve.game.analysis||[]).length-1;renderSolve()">&larr; Back</button>
+      <button class="sv-next" onclick="solve.reportStep='graph';renderSolve()">Choose the chart &rarr;</button>`;
+    return;
+  }
+  const gs = rep.graph_selection || {};
+  const chosen = solve.rkVals['g:type'] || '', grType = solve.rkGraded['g:type'];
+  const cards = REDROCK_CHART_TYPES.map(ct =>
+    `<div class="sv-gcard ${chosen === ct ? 'sel' : ''} ${grType && chosen === ct ? (grType === 'correct' ? 'rk-okcard' : 'rk-badcard') : ''}"
+      onclick="solve.rkVals['g:type']='${esc(ct)}';renderSolve()">${esc(ct)}</div>`).join('');
+  const typeBadge = grType === 'correct' ? '<span class="rk-fb ok">✓ Right chart</span>'
+    : grType ? `<span class="rk-fb bad">✗ Reconsider${solve.rkMeta['g:type'] && solve.rkMeta['g:type'].correct ? ' — ' + esc(String(solve.rkMeta['g:type'].correct)) : ''}</span>` : '';
+  const jm = solve.rkMeta['g:justify'] || {}, jg = solve.rkGraded['g:justify'];
+  const jBadge = jg === 'correct' ? `<span class="rk-fb ok">✓ ${esc(jm.feedback || 'Solid justification')}</span>`
+    : jg === 'wrong' ? `<span class="rk-fb bad">✗ ${esc(jm.feedback || 'Name the data shape that dictates the chart.')}</span>`
+    : jg === 'ungraded' ? '<span class="rk-fb">Could not grade — try again.</span>' : '';
+  inner.innerHTML =
+    `<div class="sv-layout-main">
+      <div class="sv-h">Chart selection</div>
+      <div class="sv-q-text">${rkMd(gs.prompt || 'Which chart type best presents the finding?')}</div>
+      <div class="rk-gcards">${cards}</div>
+      <div class="rk-row" style="margin-top:10px;"><button class="rk-check" ${chosen ? '' : 'disabled'} onclick="rkCheck('g:type')">Check chart</button>${typeBadge}</div>
+      <div class="rk-field-l" style="margin-top:18px;">Justify your choice (one line):</div>
+      <div class="rk-row">
+        <input class="sv-numin rk-wide" id="in-g:justify" value="${esc(String(solve.rkVals['g:justify'] || ''))}" placeholder="e.g. two series over time → line"
+          oninput="solve.rkVals['g:justify']=this.value" onkeydown="if(event.key==='Enter'){event.preventDefault();rkCheck('g:justify')}">
+        <button class="rk-check" onclick="rkCheck('g:justify')">Check</button>
+      </div>${jBadge}
+    </div>`;
+  foot.innerHTML = `<button class="sv-back" onclick="solve.reportStep='written';renderSolve()">&larr; Back</button>
+    <button class="sv-next" onclick="solve.phase='cases';solve.qIndex=0;renderSolve()">Go to cases &rarr;</button>`;
+}
+
+/* ── CASES ────────────────────────────────────────────────────────────────── */
+function rkCases(inner, foot) {
+  const g = solve.game, cs = g.cases || [];
+  if (!cs.length) { solve.phase = 'result'; renderSolve(); return; }
+  const c = cs[solve.qIndex] || cs[0];
+  const nav = cs.map((cc, i) => `<button class="sv-qnav-item ${i === solve.qIndex ? 'active' : ''} ${solve.rkGraded['c:' + cc.c] === 'correct' ? 'answered' : ''}" onclick="solve.qIndex=${i};renderSolve()">${i + 1}</button>`).join('');
+  inner.innerHTML =
+    `<div class="sv-layout-main">
+      <div class="sv-qnav">${nav}</div>
+      <div class="rk-q">Case ${solve.qIndex + 1}${c.kind ? ' · ' + esc(c.kind) : ''}</div>
+      <div class="sv-q-text">${rkMd(c.prompt || '')}</div>
+      ${rkFieldFull('c:' + c.c, c.input || 'numeric', '', c.unit)}
+    </div>`;
+  const last = solve.qIndex >= cs.length - 1;
+  foot.innerHTML =
+    `<button class="sv-back" onclick="${solve.qIndex > 0 ? 'solve.qIndex--;renderSolve()' : "solve.phase='report';solve.reportStep='graph';renderSolve()"}">&larr; Back</button>
+     <button class="sv-next" onclick="${last ? "solve.phase='result';renderSolve()" : 'solve.qIndex++;renderSolve()'}">${last ? 'Finish &rarr;' : 'Next case &rarr;'}</button>`;
+}
+
+/* ── RESULT ───────────────────────────────────────────────────────────────── */
+function rkResult(inner, foot) {
+  if (solve.timerId) { clearInterval(solve.timerId); solve.timerId = null; }
+  const g = solve.game, ids = [];
+  (g.analysis || []).forEach(q => (q.parts || []).forEach(p => ids.push({ id: 'a:' + p.key, grp: 'Analysis' })));
+  ((g.report && g.report.written && g.report.written.blanks) || []).forEach(b => ids.push({ id: 'w:' + b.key, grp: 'Report' }));
+  ids.push({ id: 'g:type', grp: 'Report' });
+  if (solve.rkGraded['g:justify']) ids.push({ id: 'g:justify', grp: 'Report' });
+  (g.cases || []).forEach(c => ids.push({ id: 'c:' + c.c, grp: 'Cases' }));
+  let correct = 0, naive = 0;
+  ids.forEach(x => { const s = solve.rkGraded[x.id]; if (s === 'correct') correct++; if (s === 'naive') naive++; });
+  const total = ids.length, pct = total ? Math.round(correct / total * 100) : 0;
+  const rows = ['Analysis', 'Report', 'Cases'].map(grp => {
+    const gg = ids.filter(x => x.grp === grp), ok = gg.filter(x => solve.rkGraded[x.id] === 'correct').length;
+    return `<div class="rk-res-row"><span>${grp}</span><b>${ok}/${gg.length}</b></div>`;
+  }).join('');
+  inner.innerHTML =
+    `<div class="rk-result">
+      <div class="rk-score">${pct}%</div>
+      <div class="rk-score-sub">${esc(g.title)} — ${correct}/${total} correct${naive ? `, ${naive} naïve trap${naive > 1 ? 's' : ''} hit` : ''}</div>
+      <div class="rk-res-table">${rows}</div>
+      ${naive ? '<div class="rk-note rk-amber">Naïve traps are the core Redrock test — each one is a specific mis-step the real assessment penalises. Review the correct figures before the next game.</div>' : ''}
+      <div class="gi-actions" style="margin-top:22px;">
+        <button class="gi-start" onclick="startRedrock()">Next game &rarr;</button>
+        <button class="gi-back" style="margin-top:10px;" onclick="showScreen('mode')">Back to menu</button>
+      </div>
+    </div>`;
+  foot.innerHTML = '';
+}
+
+
 function renderSolve() {
+  if (solve && solve.rk) { rkRender(); return; }
   svSetPhaseUI();
   const inner = document.getElementById('svInner');
   const foot = document.getElementById('svFooter');
