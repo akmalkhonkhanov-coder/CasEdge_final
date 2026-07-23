@@ -99,6 +99,56 @@ function sanitizeExhibit(ex, revealedSet) {
   base.body = ex.body ? rkDeepStrip(ex.body) : null;
   return base;
 }
+// The master bullet packs "question stem → ANSWER. *Naive → X*. Step 1/2 …" into
+// one string; the converter puts the WHOLE bullet in `prompt`, so the solution +
+// naive spoil the question. Scrub server-side so only the candidate STEM ships —
+// input data stays, the computed result / naive / step-cascade never reach the client.
+const RK_CLAUSE_SEP = /(?:\s;\s|\s—\s|\s–\s|:\s|\s·\s|\.\s)/g;   // clause boundaries in a terse prompt
+function rkLastSepBefore(s, idx) {
+  let best = -1; RK_CLAUSE_SEP.lastIndex = 0; let m;
+  while ((m = RK_CLAUSE_SEP.exec(s)) !== null) { if (m.index < idx) best = m.index; else break; }
+  return best;
+}
+function scrubPrompt(p, secretVals) {
+  let s = String(p == null ? '' : p);
+  // 0a. a question-form prompt's stem ends at its last "?"; anything after is commentary/answer.
+  const qm = s.lastIndexOf('?');
+  if (qm >= 0 && qm < s.length - 1) s = s.slice(0, qm + 1);
+  // 0b. neutralise the "naive" tell (the word itself flags which value is the trap)
+  s = s.replace(/\bnaïve\b|\bnaive\b/gi, '').replace(/\s{2,}/g, ' ');
+  // 1. cut the interviewer solution cascade (Step 1/2, decompose, Answer:)
+  const cut = re => { const m = s.match(re); if (m && m.index != null) s = s.slice(0, m.index); };
+  cut(/\s*[-–—]?\s*\*?\s*Step\s*\d/i);   // " - *Step 1 (headline)…"
+  cut(/\s*[-–—]?\s*\*?\s*Answer\s*:/i);  // " - Answer: X"
+  cut(/\bdecompose\b/i);
+  // 2. cut a SPACED answer arrow tail ("… → Feb (85,7) − May"); data ranges like 900→720 (no spaces) survive
+  s = s.replace(/\s+(?:→|->|⟶)\s+[\s\S]*$/u, '');
+  // 3. key-based cut: the solution is wherever a real answer/naive VALUE (>2 digits) appears —
+  //    drop from the start of the clause that first contains any such value.
+  let cutAt = s.length;
+  for (const v of (secretVals || [])) {
+    if (v == null) continue;
+    const val = String(v).trim();
+    if (val.replace(/[^\d]/g, '').length < 3) continue;   // skip small numbers — those are input data
+    const idx = s.indexOf(val);
+    if (idx >= 0) { const sep = rkLastSepBefore(s, idx); cutAt = Math.min(cutAt, sep >= 0 ? sep : idx); }
+  }
+  if (cutAt < s.length) s = s.slice(0, cutAt);
+  // 3b. cut trailing answer/naive COMMENTARY that names the winner or the trap in words
+  //     ("Winner Mid leads by 15 pp", "(widest absolute drop …)", "crosses at Year 5", "the pick …").
+  const cueRe = /\b(winner\b|wins on\b|leads by\b|crosses at\b|the (?:naive )?pick\b|no reversal\b|widest (?:absolute )?drop\b|repeats\b|reads the\b|ignores the\b|picks months\b)/i;
+  const cm = s.match(cueRe);
+  if (cm && cm.index > 0) { const sep = rkLastSepBefore(s, cm.index); s = s.slice(0, sep >= 0 ? sep : cm.index); }
+  // 4. drop a trailing parenthetical naive descriptor ("(repeats −180 absolute)")
+  s = s.replace(/\s*\([^()]*\)\s*$/u, '');
+  // 5. any surviving arrows are data ranges (900→720) — render as words so the client text is arrow-free.
+  //    (Arithmetic like "10% × $75M" is left intact: it is the question's INPUT data — the rate and base —
+  //     and the answer/naive VALUE is already removed by the key-based cut above, so it cannot spoil.)
+  s = s.replace(/\s*(?:→|->|⟶)\s*/gu, ' to ');
+  // tidy dangling separators at the tail
+  s = s.replace(/[\s;:·,\-–—×÷*/]+$/u, '').trim();
+  return s;
+}
 function sanitizeGame(game, revealedSet) {
   const rep = game.report || {};
   return {
@@ -109,7 +159,7 @@ function sanitizeGame(game, revealedSet) {
     // filtering task) — never label them for the client.
     exhibits: (game.exhibits || []).map(ex => sanitizeExhibit(ex, revealedSet)),
     analysis: (game.analysis || []).map(q => ({
-      q: q.q, prompt: q.prompt,
+      q: q.q, prompt: scrubPrompt(q.prompt, (q.parts || []).flatMap(p => [p.answer, p.naive])),
       parts: (q.parts || []).map(p => ({ key: p.key, label: p.label, input: p.input || 'numeric', unit: p.unit || null, options: p.options || null }))
     })),
     report: {
@@ -120,7 +170,7 @@ function sanitizeGame(game, revealedSet) {
       graph_selection: rep.graph_selection ? { prompt: rep.graph_selection.prompt, options: rep.graph_selection.options || [] } : null,
       visual_report: rep.visual_report ? { fields: (rep.visual_report.fields || []).map(f => ({ key: f.key, input: f.input || 'numeric', options: f.options || null })) } : null
     },
-    cases: (game.cases || []).map(c => ({ c: c.c, kind: c.kind, prompt: c.prompt, input: c.input || 'numeric', options: c.options || null }))
+    cases: (game.cases || []).map(c => ({ c: c.c, kind: c.kind, prompt: scrubPrompt(c.prompt, [c.answer, c.naive]), input: c.input || 'numeric', options: c.options || null }))
   };
 }
 
