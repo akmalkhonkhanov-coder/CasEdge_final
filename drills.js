@@ -109,7 +109,8 @@
   // 'ms' = Market Sizing. The server picks the library from the `set` field.
   var LIBS = {
     cm: { set: 'cm', label: 'Case Math · Drills',      rec: 'Case Math',     doneKey: 'casedge_cmdrills_done', complete: 'every Case Math drill in this batch' },
-    ms: { set: 'ms', label: 'Market Sizing · Drills',  rec: 'Market Sizing', doneKey: 'casedge_msdrills_done', complete: 'every Market Sizing drill in this batch' }
+    ms: { set: 'ms', label: 'Market Sizing · Drills',  rec: 'Market Sizing', doneKey: 'casedge_msdrills_done', complete: 'every Market Sizing drill in this batch' },
+    st: { set: 'st', label: 'Structuring · Drills',    rec: 'Structuring',   doneKey: 'casedge_stdrills_done', complete: 'every Structuring drill in this batch' }
   };
 
   /* ---------- state ---------- */
@@ -120,7 +121,7 @@
 
   /* ---------- flow ---------- */
   function open(lib) {
-    S.lib = (lib === 'ms') ? 'ms' : 'cm';
+    S.lib = (lib === 'ms' || lib === 'st') ? lib : 'cm';
     inject();
     var lbl = E('cmLbl'); if (lbl) lbl.textContent = cfg().label;
     if (typeof showScreen === 'function') showScreen('cmdrill');
@@ -165,11 +166,17 @@
       '<div class="cm-title">' + esc2(d.title || 'Drill') + '</div>' +
       '<div class="cm-prompt">' + md(d.prompt || '') + '</div>' +
       (d.exhibit && d.exhibit.rows ? '<div class="cm-exh"><div class="cm-exh-name">Exhibit</div>' + tableHTML(d.exhibit) + '</div>' : '') +
+      (d.exhibit_withheld ? '<div class="cm-steps"><div class="cm-sh">Exhibit — locked</div><div class="cm-hint">Build your MECE tree first. The data is released only after you commit — its whole point is to test whether your framework survives contact with it.</div></div>' : '') +
       ((d.step_prompts && d.step_prompts.length) ? '<div class="cm-steps"><div class="cm-sh">Solve</div><ol>' + d.step_prompts.map(function (s) { return '<li>' + esc2(s) + '</li>'; }).join('') + '</ol></div>' : '') +
       '</div>';
     feed(html);
-    iz('<textarea class="cm-ta" id="cmTa" placeholder="Show your numbers and your one-sentence recommendation…"></textarea>' +
-       '<div class="cm-row"><span class="cm-hint">Give the number(s) the drill asks for, then your read of the trap.</span>' +
+    var isST = (d.type || '') === 'Structuring';
+    var ph = isST ? 'Build your MECE tree: name each top branch and one line on why it belongs. State which branch you attack first and your criterion.'
+                  : 'Show your numbers and your one-sentence recommendation…';
+    var hint = isST ? 'List your branches (MECE), justify each, and pick a defensible starting branch.'
+                    : 'Give the number(s) the drill asks for, then your read of the trap.';
+    iz('<textarea class="cm-ta" id="cmTa" placeholder="' + esc2(ph) + '"></textarea>' +
+       '<div class="cm-row"><span class="cm-hint">' + esc2(hint) + '</span>' +
        '<button class="cm-btn" id="cmSubmit" onclick="CaseMathDrills._submit()">Submit</button></div>');
     setTimeout(function () { var el = E('cmTa'); if (el) el.focus(); }, 60);
   }
@@ -183,6 +190,11 @@
       if (r && r.error) { feed('<div class="cm-fb no"><b>Connection issue.</b> ' + esc2(r.error.message || 'Please try again.') + '</div>'); return void nextButton(); }
       var ok = !!r.pass;
       feed('<div class="cm-fb ' + (ok ? 'ok' : 'no') + '">' + (ok ? '<b>✓ Pass.</b> ' : '<b>Not quite.</b> ') + esc2(r.coaching || '') + '</div>');
+      // ST E-after: the exhibit is released only now — show it before the debrief
+      // so the candidate sees how the data breaks (or confirms) the tree they built.
+      if (r.exhibit && r.exhibit.rows) {
+        feed('<div class="cm-exh"><div class="cm-exh-name">Exhibit — released</div>' + tableHTML(r.exhibit) + '</div>');
+      }
       var ref = L(r.reference); var prov = L(r.provoked);
       feed('<div class="cm-ref"><div class="cm-ref-h">Reference solution</div><div class="cm-ref-body">' + md(ref || '') + '</div>' +
            (prov ? '<div class="cm-trap"><b>Trap:</b> ' + esc2(prov) + '</div>' : '') + '</div>');
@@ -200,4 +212,5 @@
 
   window.CaseMathDrills = { open: function () { return open('cm'); }, exit: exit, _submit: _submit, _next: _next };
   window.MarketSizingDrills = { open: function () { return open('ms'); }, exit: exit, _submit: _submit, _next: _next };
+  window.StructuringDrills = { open: function () { return open('st'); }, exit: exit, _submit: _submit, _next: _next };
 })();
