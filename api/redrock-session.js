@@ -77,12 +77,26 @@ function fieldMap(game) {
 /* ───────────────────────── sanitize (render slice) ───────────────────────────
    Everything the client needs to RENDER, with every answer key stripped.
    Gated (on_request) exhibits are withheld until their triggers fire. */
+// Server-only keys that must never reach the browser, ANYWHERE in the payload —
+// including nested inside exhibit bodies (e.g. `hidden` reveal-truth arrays for
+// projection null cells in #26/#36/#41/#46/#47). Deep-stripped from copied bodies.
+const RK_SERVER_KEYS = ['answer', 'naive', 'naive_reason', 'justify_rubric', 'distractors', 'hidden'];
+function rkDeepStrip(v) {
+  if (Array.isArray(v)) return v.map(rkDeepStrip);
+  if (v && typeof v === 'object') {
+    const out = {};
+    for (const k of Object.keys(v)) if (RK_SERVER_KEYS.indexOf(k) < 0) out[k] = rkDeepStrip(v[k]);
+    return out;
+  }
+  return v;
+}
 function sanitizeExhibit(ex, revealedSet) {
   const base = { id: ex.id, title: ex.title, kind: ex.kind, reveal: ex.reveal || 'auto' };
   if ((ex.reveal || 'auto') === 'on_request' && !(revealedSet && revealedSet.has(ex.id))) {
-    return { id: ex.id, title: ex.title, kind: ex.kind, reveal: 'on_request', hidden: true };
+    // `withheld` is a CLIENT marker (not the server-only `hidden` reveal-truth key).
+    return { id: ex.id, title: ex.title, kind: ex.kind, reveal: 'on_request', withheld: true };
   }
-  base.body = ex.body || null;
+  base.body = ex.body ? rkDeepStrip(ex.body) : null;
   return base;
 }
 function sanitizeGame(game, revealedSet) {
