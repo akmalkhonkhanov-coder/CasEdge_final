@@ -16,7 +16,7 @@
 //   game  → sanitized render slice {objective,study_md,exhibits(auto),analysis,report,cases,fields}
 //   grade → {gameId, fieldId, value} graded server-side → {status, feedback, correctAnswer?, naiveReason?}
 
-const GAMES_DATA = require('./redrock_games.json');
+const GAMES_DATA = require('./redrock-games.json');
 
 const FALLBACK_ORIGIN = 'https://cas-edge-final.vercel.app';
 const GRADER_MODEL = 'claude-sonnet-5';
@@ -130,10 +130,15 @@ function gradeNumeric(rec, value) {
   }
   return { status: 'wrong', correctAnswer: rec.answer };
 }
+function normExact(s) {
+  // forgiving compare for dropdown/choice fields that ship as free text:
+  // trim, collapse whitespace, drop surrounding punctuation, case-insensitive.
+  return String(s == null ? '' : s).trim().toLowerCase().replace(/\s+/g, ' ').replace(/^[\s"'(.]+|[\s"').:;,]+$/g, '');
+}
 function gradeExact(rec, value) {
-  const v = String(value);
-  if (v === String(rec.answer)) return { status: 'correct', correctAnswer: rec.answer };
-  if (rec.naive != null && v === String(rec.naive)) return { status: 'naive', correctAnswer: rec.answer, naiveReason: rec.naive_reason || '' };
+  const v = normExact(value);
+  if (v && v === normExact(rec.answer)) return { status: 'correct', correctAnswer: rec.answer };
+  if (rec.naive != null && v && v === normExact(rec.naive)) return { status: 'naive', correctAnswer: rec.answer, naiveReason: rec.naive_reason || '' };
   return { status: 'wrong', correctAnswer: rec.answer };
 }
 
