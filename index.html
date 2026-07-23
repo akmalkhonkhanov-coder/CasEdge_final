@@ -4958,7 +4958,7 @@ function rkMd(text) {
 
 /* ── exhibits (reuse svExhibitHTML via a {columns,rows} adapter) ───────────── */
 function rkExhibit(ex) {
-  if (ex.hidden) {
+  if (ex.withheld) {
     return `<div class="sv-exhibit"><div class="sv-exhibit-t">${esc(ex.title || 'Exhibit')}</div>
       <div class="rk-note">This exhibit unlocks on request.
       <button class="rk-mini" onclick="rkReveal('${esc(ex.id)}')">Request</button></div></div>`;
@@ -4995,23 +4995,38 @@ function rkField(fieldId, input, opts) {
   else if (g === 'naive') badge = `<span class="rk-fb naive">▲ Naïve trap${opts.naiveReason ? ' — ' + esc(opts.naiveReason) : ''}. Correct: ${esc(String(opts.correct))}</span>`;
   else if (g === 'wrong') badge = `<span class="rk-fb bad">✗ Not right${opts.correct != null ? ' — correct: ' + esc(String(opts.correct)) : ''}</span>`;
   else if (g === 'ungraded') badge = '<span class="rk-fb">Could not grade — try again.</span>';
-  const ph = (input === 'dropdown' || input === 'choice') ? 'type your answer' : 'number';
-  const locked = g === 'correct' ? 'disabled' : '';
   const cls = 'rk-field' + (g === 'correct' ? ' ok' : g === 'naive' ? ' naive' : g === 'wrong' ? ' bad' : '');
-  return `<div class="${cls}" id="fld-${esc(fieldId)}">
-    ${opts.label ? `<div class="rk-field-l">${rkInline(opts.label)}</div>` : ''}
-    <div class="rk-row">
+  // choice/dropdown WITH server-provided options → render a picker (no free text).
+  const options = Array.isArray(opts.options) ? opts.options : null;
+  let control;
+  if (options && options.length) {
+    const cards = options.map(o => {
+      const sel = String(val) === String(o);
+      const mark = (sel && g === 'correct') ? ' rk-okcard' : (sel && (g === 'wrong' || g === 'naive')) ? ' rk-badcard' : (sel ? ' sel' : '');
+      const lock = g === 'correct' ? '' : `onclick="solve.rkVals['${esc(fieldId)}']='${esc(String(o))}';renderSolve()"`;
+      return `<div class="sv-gcard rk-opt${mark}" ${lock}>${rkInline(String(o))}</div>`;
+    }).join('');
+    control = `<div class="rk-gcards">${cards}</div>
+      <div class="rk-row"><button class="rk-check" ${val && g !== 'correct' ? '' : 'disabled'} onclick="rkCheck('${esc(fieldId)}')">Check</button></div>`;
+  } else {
+    const ph = (input === 'dropdown' || input === 'choice') ? 'type your answer' : 'number';
+    const locked = g === 'correct' ? 'disabled' : '';
+    control = `<div class="rk-row">
       <input class="sv-numin" id="in-${esc(fieldId)}" value="${esc(String(val))}" placeholder="${esc(ph)}" ${locked}
         oninput="solve.rkVals['${esc(fieldId)}']=this.value" onkeydown="if(event.key==='Enter'){event.preventDefault();rkCheck('${esc(fieldId)}')}">
       ${unit}
       <button class="rk-check" ${locked} onclick="rkCheck('${esc(fieldId)}')">Check</button>
-    </div>
+    </div>`;
+  }
+  return `<div class="${cls}" id="fld-${esc(fieldId)}">
+    ${opts.label ? `<div class="rk-field-l">${rkInline(opts.label)}</div>` : ''}
+    ${control}
     ${badge}
   </div>`;
 }
-function rkFieldFull(fieldId, input, label, unit) {
+function rkFieldFull(fieldId, input, label, unit, options) {
   const m = (solve.rkMeta && solve.rkMeta[fieldId]) || {};
-  return rkField(fieldId, input, { label: label, unit: unit, correct: m.correct, naiveReason: m.naiveReason });
+  return rkField(fieldId, input, { label: label, unit: unit, options: options, correct: m.correct, naiveReason: m.naiveReason });
 }
 
 async function rkCheck(fieldId) {
@@ -5050,7 +5065,7 @@ function rkAnalysis(inner, foot) {
     const done = (qq.parts || []).length && (qq.parts || []).every(p => solve.rkGraded['a:' + p.key] === 'correct');
     return `<button class="sv-qnav-item ${i === solve.qIndex ? 'active' : ''} ${done ? 'answered' : ''}" onclick="solve.qIndex=${i};renderSolve()">Q${i + 1}</button>`;
   }).join('');
-  const fields = (q.parts || []).map(p => rkFieldFull('a:' + p.key, p.input || 'numeric', (p.label && p.label !== 'answer') ? p.label : '', p.unit)).join('');
+  const fields = (q.parts || []).map(p => rkFieldFull('a:' + p.key, p.input || 'numeric', (p.label && p.label !== 'answer') ? p.label : '', p.unit, p.options)).join('');
   inner.innerHTML =
     `<div class="sv-layout"><div class="sv-layout-main">
       <div class="sv-qnav">${nav}</div>
@@ -5127,7 +5142,7 @@ function rkCases(inner, foot) {
       <div class="sv-qnav">${nav}</div>
       <div class="rk-q">Case ${solve.qIndex + 1}${c.kind ? ' · ' + esc(c.kind) : ''}</div>
       <div class="sv-q-text">${rkMd(c.prompt || '')}</div>
-      ${rkFieldFull('c:' + c.c, c.input || 'numeric', '', c.unit)}
+      ${rkFieldFull('c:' + c.c, c.input || 'numeric', '', c.unit, c.options)}
     </div>`;
   const last = solve.qIndex >= cs.length - 1;
   foot.innerHTML =
