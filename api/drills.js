@@ -12,12 +12,15 @@
 const DRILLS_CM = require('./_drills_cm.json');
 const DRILLS_MS = require('./_drills_ms.json');
 const DRILLS_ST = require('./_drills_st.json');
+const DRILLS_BR = require('./_drills_br.json');
 // Curated libraries share one endpoint. Client passes set:'ms' (Market Sizing),
-// set:'st' (Structuring), else Case Math. IDs are disjoint (CM-*/MS-*/ST-*).
+// set:'st' (Structuring), set:'br' (Brainstorm), else Case Math. IDs are
+// disjoint (CM-*/MS-*/ST-*/BR-*).
 function libData(body) {
   const s = body && body.set;
   if (s === 'ms') return DRILLS_MS;
   if (s === 'st') return DRILLS_ST;
+  if (s === 'br') return DRILLS_BR;
   return DRILLS_CM;
 }
 
@@ -59,11 +62,42 @@ PASS = all COVER branches present (by meaning) AND no decoy developed first AND 
 
 RESPONSE FORMAT (strict JSON): {"pass":true,"coaching":"1-2 sentences IN ENGLISH: name which required branch (if any) was missed, or the decoy/ME slip, and the single most valuable fix. Be specific to this case."}`;
 
+// Brainstorm (BR) — creativity/idea-generation. The candidate produces a flat list
+// of options for a case question. Graded on registers, NOT on volume:
+//   LOAD  = the one load-bearing idea; if it is missing the slot FAILS regardless.
+//   COVER = required axes (2–4); fewer than 2 axes covered = FAIL.
+//   DEAD  = reflexive branches the slot's facts kill; naming one FIRST or SECOND
+//           without dismissing it = an ORDER defect (FAIL). Naming it later, or
+//           naming + dismissing it with a reason, is fine.
+//   GATE-3 = fewer than 3 fact-linked ideas = FAIL.
+// The answer key (LOAD/COVER/DEAD, and the CULL kill-set) is written in RUSSIAN;
+// the candidate answers in ENGLISH. MATCH BY MEANING across languages — never
+// require the Russian wording. Volume never earns credit.
+// Two-move CULL slots: after the idea list, the candidate is shown the client
+// team's idea list + a NEW FACT and must name exactly which team ideas the fact
+// KILLS, with a reason. The kill-set must match the reference EXACTLY (an extra
+// kill fails as hard as a miss); each kill needs a correct, distinct reason.
+const BR_GRADER_SYSTEM = `You are a strict but fair MBB brainstorm/creativity-drill grader. You receive the case QUESTION, the FACTS given to the candidate, the grading REGISTERS (answer key: LOAD, COVER, DEAD — written in Russian), and the candidate's IDEA LIST (written in English). If a CULL block is present you also receive the client team's ideas, the new fact, the reference KILL-SET, and the candidate's CULL answer. Return ONLY JSON, no preamble, no markdown.
+
+MATCH BY MEANING across languages: the key is Russian, the answer English — accept any idea/branch that means the same thing; never demand the Russian wording.
+
+GRADE IN THIS ORDER (all applicable gates must pass):
+1. GATE-3: at least 3 ideas that are genuinely tied to the slot's facts. Fewer → FAIL.
+2. LOAD (gate): the load-bearing idea must be present by meaning. Missing → FAIL no matter how long the list.
+3. DEAD-ORDER: if the candidate leads with a DEAD branch (their 1st or 2nd idea) and does NOT dismiss it, that is an ORDER defect → FAIL. A DEAD branch named later, or named and explicitly dismissed with a valid reason, is NOT a defect.
+4. COVER: at least 2 of the required axes must be covered by meaning. Fewer → FAIL.
+5. VOLUME EARNS NOTHING: do not reward a longer list. Six ideas and three ideas with the same coverage and LOAD named score identically.
+6. CULL (only if a CULL block is present): the candidate must name EXACTLY the reference kill-set (by meaning of which team ideas die), each with a correct and distinct reason. An extra kill fails as hard as a miss; a wrong reason on any kill = FAIL.
+
+PASS = every applicable gate passes.
+
+RESPONSE FORMAT (strict JSON): {"pass":true,"coaching":"1-2 sentences IN ENGLISH: name the missing LOAD / uncovered axis / DEAD-order slip / CULL miss, and the single most valuable fix. Be specific to this case.","model":"1-2 sentences IN ENGLISH stating the load-bearing idea and the axes a strong answer covers — the takeaway. Never output Russian."}`;
+
 /* ───────────────────────── library ───────────────────────────────────────── */
 let _byId = null;
 function drillById(id) {
   // one combined map across all libraries — ids are disjoint (CM-*/MS-*/ST-*)
-  if (!_byId) { _byId = new Map(); for (const src of [DRILLS_CM, DRILLS_MS, DRILLS_ST]) for (const d of (src.drills || [])) _byId.set(d.id, d); }
+  if (!_byId) { _byId = new Map(); for (const src of [DRILLS_CM, DRILLS_MS, DRILLS_ST, DRILLS_BR]) for (const d of (src.drills || [])) _byId.set(d.id, d); }
   return _byId.get(id);
 }
 
@@ -74,6 +108,19 @@ function drillById(id) {
 // until the candidate has submitted a tree (revealed=true) — the whole point is
 // that the data breaks the framework they already built.
 function sanitizeDrill(d, index, total, revealed) {
+  // Brainstorm (BR): qualitative idea-generation. Client sees prompt + facts. The
+  // `key` (LOAD/COVER/DEAD/grader) is server-only. CULL slots are two-move: the
+  // client team's idea list + the new fact are WITHHELD until the candidate has
+  // submitted their own idea list (revealed only in the grade response). NO exhibits.
+  if (d.type === 'Brainstorm') {
+    return {
+      id: d.id, title: d.title, difficulty: d.difficulty, type: d.type,
+      company: d.company || null, industry: d.industry || null, time: d.time,
+      prompt: d.prompt, facts: d.facts || [],
+      cull: !!d.cull,            // client shows a 2nd-move ("cull") screen when true
+      index: index, total: total
+    };
+  }
   const isAfter = d.exhibit_mode === 'E-after';
   const exhibit = (isAfter && !revealed) ? null : (d.exhibit || null);
   return {
@@ -157,6 +204,32 @@ async function graderJSON(system, userText, maxTokens) {
   return parsed;
 }
 
+// Brainstorm (BR): grade the idea list (and, for CULL slots, the cull answer) by
+// meaning against LOAD/COVER/DEAD (+ kill-set). `cullAnswer` is null on single-move
+// (non-CULL) slots and on the interim move-1 reveal.
+async function gradeBR(d, answer, cullAnswer) {
+  const k = d.key || {};
+  let u = 'CASE QUESTION: ' + d.prompt +
+    '\n\nFACTS GIVEN TO CANDIDATE:\n- ' + (d.facts || []).join('\n- ') +
+    '\n\n--- GRADING REGISTERS (answer key, RUSSIAN — match by meaning) ---' +
+    '\nLOAD (load-bearing idea, gate):\n' + (k.load || '') +
+    '\n\nCOVER (required axes, ≥2):\n' + (k.cover || '') +
+    '\n\nDEAD (branches the facts kill):\n' + (k.dead || '') +
+    '\n\nGRADER SYNONYMS:\n' + (k.grader || '') +
+    '\n\n--- CANDIDATE IDEA LIST ---\n' + String(answer || '');
+  if (d.cull && k.cull && cullAnswer != null) {
+    const c = k.cull;
+    u += '\n\n--- SECOND MOVE (CULL) ---' +
+      '\nNEW FACT shown to candidate: ' + (c.new_fact || '') +
+      '\nCLIENT TEAM IDEAS (numbered):\n' + (c.team_ideas || []).map((t, i) => (i + 1) + '. ' + t).join('\n') +
+      '\nREFERENCE KILL-SET (team-idea numbers that the new fact kills): {' + (c.killed || []).join(', ') + '}' +
+      '\nPER-IDEA REFERENCE + reasons:\n' + (c.peridea_raw || '') +
+      '\n\n--- CANDIDATE CULL ANSWER (which team ideas die + why) ---\n' + String(cullAnswer || '');
+  }
+  const j = await graderJSON(BR_GRADER_SYSTEM, u, 800);
+  return j || { graded: false, coaching: 'Could not grade — please try again.' };
+}
+
 async function gradeDrill(d, answer) {
   // ST (Structuring): grade the candidate's tree against the five registers.
   if (d.type === 'Structuring' && d.key) {
@@ -225,11 +298,41 @@ export default async function handler(req, res) {
       return res.status(200).json({ drill: nd });     // null when the set is exhausted
     }
     if (body.action === 'grade') {
+      const d = drillById(body.drillId);
+      if (!d) return res.status(400).json({ error: { message: 'Unknown drill.' } });
+
+      // Brainstorm two-move CULL: MOVE 1 reveals the client team's ideas + the new
+      // fact (no grading, no LLM, no rate-limit) so the fact can break the list the
+      // candidate just built. The candidate then submits the CULL answer (stage:'cull').
+      if (d.type === 'Brainstorm' && d.cull && body.stage !== 'cull') {
+        const c = (d.key && d.key.cull) || {};
+        return res.status(200).json({
+          stage: 'cull',
+          cull: { new_fact: c.new_fact || '', team_ideas: c.team_ideas || [] },
+          move1Answer: String(body.answer || '')   // echoed back so the client returns it with the cull move
+        });
+      }
+
       if (await rateLimited(userId, sbUrl, sbKey, token)) {
         return res.status(429).json({ error: { message: 'Too many requests. Please slow down.' } });
       }
-      const d = drillById(body.drillId);
-      if (!d) return res.status(400).json({ error: { message: 'Unknown drill.' } });
+
+      // Brainstorm final grade: single-move slots grade the idea list; CULL slots
+      // grade the idea list (move1Answer) + the cull answer together in one call.
+      if (d.type === 'Brainstorm') {
+        const ideaList = d.cull ? body.move1Answer : body.answer;
+        const cullAns = d.cull ? body.answer : null;
+        const rb = await gradeBR(d, ideaList, cullAns);
+        if (rb && rb.graded === false) {
+          return res.status(200).json({ graded: false, coaching: rb.coaching || 'Could not grade — please try again.' });
+        }
+        return res.status(200).json({
+          pass: !!rb.pass,
+          coaching: rb.coaching || '',
+          reference: { en: rb.model || '', ru: '' }
+        });
+      }
+
       const r = await gradeDrill(d, body.answer);
       // grader hiccup → tell the client to let the candidate retry, NOT mark it failed/done.
       if (r && r.graded === false) {
