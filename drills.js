@@ -188,6 +188,14 @@
     var d = S.drill;
     api({ action: 'grade', drillId: d.id, answer: answer, set: cfg().set }).then(function (r) {
       if (r && r.error) { feed('<div class="cm-fb no"><b>Connection issue.</b> ' + esc2(r.error.message || 'Please try again.') + '</div>'); return void nextButton(); }
+      // grader hiccup (couldn't parse a verdict) — NOT a fail. Let the candidate resubmit,
+      // keep their answer, don't mark the drill done.
+      if (r && r.graded === false) {
+        iz('<div class="cm-hint" style="margin-bottom:8px;">Grader hiccup — your answer wasn’t scored. Try submitting again.</div>' +
+           '<textarea class="cm-ta" id="cmTa">' + esc2(answer) + '</textarea>' +
+           '<div class="cm-row"><span class="cm-hint"></span><button class="cm-btn" id="cmSubmit" onclick="CaseMathDrills._submit()">Submit</button></div>');
+        return;
+      }
       var ok = !!r.pass;
       feed('<div class="cm-fb ' + (ok ? 'ok' : 'no') + '">' + (ok ? '<b>✓ Pass.</b> ' : '<b>Not quite.</b> ') + esc2(r.coaching || '') + '</div>');
       // ST E-after: the exhibit is released only now — show it before the debrief
