@@ -110,18 +110,19 @@
   var LIBS = {
     cm: { set: 'cm', label: 'Case Math · Drills',      rec: 'Case Math',     doneKey: 'casedge_cmdrills_done', complete: 'every Case Math drill in this batch' },
     ms: { set: 'ms', label: 'Market Sizing · Drills',  rec: 'Market Sizing', doneKey: 'casedge_msdrills_done', complete: 'every Market Sizing drill in this batch' },
-    st: { set: 'st', label: 'Structuring · Drills',    rec: 'Structuring',   doneKey: 'casedge_stdrills_done', complete: 'every Structuring drill in this batch' }
+    st: { set: 'st', label: 'Structuring · Drills',    rec: 'Structuring',   doneKey: 'casedge_stdrills_done', complete: 'every Structuring drill in this batch' },
+    br: { set: 'br', label: 'Brainstorm · Drills',     rec: 'Brainstorm',    doneKey: 'casedge_brdrills_done', complete: 'every Brainstorm drill in this batch' }
   };
 
   /* ---------- state ---------- */
-  var S = { done: [], drill: null, lib: 'cm' };
+  var S = { done: [], drill: null, lib: 'cm', move1: null };
   function cfg() { return LIBS[S.lib] || LIBS.cm; }
   function loadDone() { try { S.done = JSON.parse(localStorage.getItem(cfg().doneKey) || '[]'); } catch (e) { S.done = []; } }
   function saveDone(id) { if (S.done.indexOf(id) < 0) S.done.push(id); try { localStorage.setItem(cfg().doneKey, JSON.stringify(S.done)); } catch (e) {} }
 
   /* ---------- flow ---------- */
   function open(lib) {
-    S.lib = (lib === 'ms' || lib === 'st') ? lib : 'cm';
+    S.lib = (lib === 'ms' || lib === 'st' || lib === 'br') ? lib : 'cm';
     inject();
     var lbl = E('cmLbl'); if (lbl) lbl.textContent = cfg().label;
     if (typeof showScreen === 'function') showScreen('cmdrill');
@@ -165,15 +166,19 @@
       '</div>' +
       '<div class="cm-title">' + esc2(d.title || 'Drill') + '</div>' +
       '<div class="cm-prompt">' + md(d.prompt || '') + '</div>' +
+      ((d.facts && d.facts.length) ? '<div class="cm-steps"><div class="cm-sh">Facts</div><ul>' + d.facts.map(function (s) { return '<li>' + esc2(s) + '</li>'; }).join('') + '</ul></div>' : '') +
       (d.exhibit && d.exhibit.rows ? '<div class="cm-exh"><div class="cm-exh-name">Exhibit</div>' + tableHTML(d.exhibit) + '</div>' : '') +
       (d.exhibit_withheld ? '<div class="cm-steps"><div class="cm-sh">Exhibit — locked</div><div class="cm-hint">Build your MECE tree first. The data is released only after you commit — its whole point is to test whether your framework survives contact with it.</div></div>' : '') +
       ((d.step_prompts && d.step_prompts.length) ? '<div class="cm-steps"><div class="cm-sh">Solve</div><ol>' + d.step_prompts.map(function (s) { return '<li>' + esc2(s) + '</li>'; }).join('') + '</ol></div>' : '') +
       '</div>';
     feed(html);
     var isST = (d.type || '') === 'Structuring';
-    var ph = isST ? 'Build your MECE tree: name each top branch and one line on why it belongs. State which branch you attack first and your criterion.'
+    var isBR = (d.type || '') === 'Brainstorm';
+    var ph = isBR ? 'List your options — one per line. Tie each to a fact. Lead with the load-bearing idea, not a reflex.'
+                  : isST ? 'Build your MECE tree: name each top branch and one line on why it belongs. State which branch you attack first and your criterion.'
                   : 'Show your numbers and your one-sentence recommendation…';
-    var hint = isST ? 'List your branches (MECE), justify each, and pick a defensible starting branch.'
+    var hint = isBR ? (d.cull ? 'Give your options; a new fact will then test them.' : 'Options tied to the facts — quality over volume.')
+                    : isST ? 'List your branches (MECE), justify each, and pick a defensible starting branch.'
                     : 'Give the number(s) the drill asks for, then your read of the trap.';
     iz('<textarea class="cm-ta" id="cmTa" placeholder="' + esc2(ph) + '"></textarea>' +
        '<div class="cm-row"><span class="cm-hint">' + esc2(hint) + '</span>' +
@@ -196,6 +201,21 @@
            '<div class="cm-row"><span class="cm-hint"></span><button class="cm-btn" id="cmSubmit" onclick="CaseMathDrills._submit()">Submit</button></div>');
         return;
       }
+      // Brainstorm two-move CULL: the server withheld the client team's ideas + the
+      // new fact until now. Show them, keep the candidate's idea list, and ask which
+      // ideas the new fact kills — the whole point is the fact breaking their list.
+      if (r && r.stage === 'cull') {
+        S.move1 = r.move1Answer != null ? r.move1Answer : answer;
+        feed('<div class="cm-fb ok" style="background:rgba(93,184,166,.10);border-color:rgba(93,184,166,.4);color:var(--ink,#28303c)"><b>Now the twist.</b> A new fact just landed. Your options are in — see which ones survive it.</div>');
+        feed('<div class="cm-ref"><div class="cm-ref-h">New fact</div><div class="cm-ref-body">' + md(r.cull && r.cull.new_fact || '') + '</div></div>');
+        var teams = (r.cull && r.cull.team_ideas) || [];
+        feed('<div class="cm-steps"><div class="cm-sh">The client team proposed</div><ol>' + teams.map(function (t) { return '<li>' + esc2(t) + '</li>'; }).join('') + '</ol></div>');
+        iz('<textarea class="cm-ta" id="cmCull" placeholder="Which of these ideas does the new fact kill? Give the numbers and, for each, why it dies. Naming a survivor as killed fails as hard as a miss."></textarea>' +
+           '<div class="cm-row"><span class="cm-hint">Name exactly the ideas the fact kills — with a reason for each.</span>' +
+           '<button class="cm-btn" id="cmCullBtn" onclick="BrainstormDrills._submitCull()">Submit cull</button></div>');
+        setTimeout(function () { var el = E('cmCull'); if (el) el.focus(); }, 60);
+        return;
+      }
       var ok = !!r.pass;
       feed('<div class="cm-fb ' + (ok ? 'ok' : 'no') + '">' + (ok ? '<b>✓ Pass.</b> ' : '<b>Not quite.</b> ') + esc2(r.coaching || '') + '</div>');
       // ST E-after: the exhibit is released only now — show it before the debrief
@@ -213,12 +233,40 @@
     }).catch(function () { feed('<div class="cm-fb no"><b>Connection issue.</b> Please try again.</div>'); nextButton(); });
   }
 
+  // Final debrief shared by single-move slots and the CULL second move.
+  function _renderFinal(d, r) {
+    if (r && r.error) { feed('<div class="cm-fb no"><b>Connection issue.</b> ' + esc2(r.error.message || 'Please try again.') + '</div>'); return void nextButton(); }
+    if (r && r.graded === false) {
+      iz('<div class="cm-hint" style="margin-bottom:8px;">Grader hiccup — your answer wasn’t scored. Try again.</div>' +
+         '<div class="cm-row" style="justify-content:flex-end"><button class="cm-btn" onclick="BrainstormDrills._next()">Skip →</button></div>');
+      return;
+    }
+    var ok = !!r.pass;
+    feed('<div class="cm-fb ' + (ok ? 'ok' : 'no') + '">' + (ok ? '<b>✓ Pass.</b> ' : '<b>Not quite.</b> ') + esc2(r.coaching || '') + '</div>');
+    var ref = L(r.reference);
+    if (ref) feed('<div class="cm-ref"><div class="cm-ref-h">Model answer</div><div class="cm-ref-body">' + md(ref) + '</div></div>');
+    saveDone(d.id);
+    try { if (typeof recordSession === 'function') recordSession('drill', cfg().rec); } catch (e) {}
+    nextButton();
+  }
+
+  function _submitCull() {
+    var el = E('cmCull'); if (!el) return; var cull = el.value.trim(); if (!cull) return;
+    var b = E('cmCullBtn'); if (b) b.disabled = true;
+    iz('<div class="cm-hint">Grading…</div>');
+    var d = S.drill;
+    api({ action: 'grade', drillId: d.id, set: cfg().set, stage: 'cull', answer: cull, move1Answer: S.move1 })
+      .then(function (r) { _renderFinal(d, r); })
+      .catch(function () { feed('<div class="cm-fb no"><b>Connection issue.</b> Please try again.</div>'); nextButton(); });
+  }
+
   function nextButton() {
     iz('<div class="cm-row" style="justify-content:flex-end"><button class="cm-btn" onclick="CaseMathDrills._next()">Next drill →</button></div>');
   }
-  function _next() { loadNext(); }
+  function _next() { S.move1 = null; loadNext(); }
 
   window.CaseMathDrills = { open: function () { return open('cm'); }, exit: exit, _submit: _submit, _next: _next };
   window.MarketSizingDrills = { open: function () { return open('ms'); }, exit: exit, _submit: _submit, _next: _next };
   window.StructuringDrills = { open: function () { return open('st'); }, exit: exit, _submit: _submit, _next: _next };
+  window.BrainstormDrills = { open: function () { return open('br'); }, exit: exit, _submit: _submit, _submitCull: _submitCull, _next: _next };
 })();
