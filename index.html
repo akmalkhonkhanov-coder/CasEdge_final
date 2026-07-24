@@ -2988,6 +2988,7 @@ function startDrill() {
   if (state.drillType === 'Case Math' && window.CaseMathDrills) { return window.CaseMathDrills.open(); }
   if (state.drillType === 'Market Sizing' && window.MarketSizingDrills) { return window.MarketSizingDrills.open(); }
   if (state.drillType === 'Structuring' && window.StructuringDrills) { return window.StructuringDrills.open(); }
+  if (state.drillType === 'Brainstorm' && window.BrainstormDrills) { return window.BrainstormDrills.open(); }
   brGate('drill', _startDrillReal);
 }
 async function _startDrillReal() {
