@@ -1,224 +1,256 @@
-/* CasEdge — Case Math Drills (curated). Self-injecting, self-contained.
-   Thin client: the drill library, answer keys, checklists and reference
-   solutions live server-side in /api/drills. The browser receives only the
-   prompt + exhibit + step prompts, and per graded answer a verdict + the
-   bilingual reference. Bilingual EN/RU via state.aiLang. */
-(function () {
-  "use strict";
+// CasEdge — Case Math Drills server endpoint. Owns the curated drill library
+// AND all grading, so answer keys / checklists / reference solutions never reach
+// the browser. Mirrors api/casey.js security: locked CORS, Supabase bearer
+// verification, shared per-user rate limit, body limits, upstream timeout,
+// no error leakage.
+//
+// Actions:
+//   next  → {doneIds:[...]} → next unsanitized-of-keys drill in sequence
+//           {id,title,difficulty,type,focus,time,prompt,exhibit,step_prompts,index,total}
+//   grade → {drillId, answer} → {pass, coaching, reference:{en,ru}, provoked:{en,ru}}
 
-  /* ---------- inject CSS + screen ---------- */
-  var CSS = `#screen-cmdrill { position:fixed; inset:0; z-index:50; height:100vh; height:100dvh; overflow:hidden; background:var(--surface-dark); display:none; flex-direction:column; }
-#screen-cmdrill.active { display:flex; }
-#cmFeed { flex:1; overflow-y:auto; padding:22px 16px 28px; }
-.cm-wrap { max-width:760px; margin:0 auto; }
-.cm-top { display:flex; align-items:center; gap:12px; padding:12px 16px; border-bottom:1px solid var(--sv-line,rgba(31,41,55,.12)); background:var(--surface-dark-elevated,#fbf8f2); }
-.cm-top .cm-x { background:none; border:none; font-size:22px; line-height:1; color:var(--on-dark-soft,#5b6472); cursor:pointer; }
-.cm-top .cm-lbl { font-size:13px; font-weight:700; color:var(--ink,#1f2937); }
-.cm-top .cm-prog { margin-left:auto; font-size:12px; color:var(--on-dark-soft,#9db3ad); }
-.cm-card { background:var(--surface-dark-elevated,#16241f); border:1px solid var(--sv-line,rgba(255,255,255,.08)); border-radius:14px; padding:18px; margin:0 0 16px; }
-.cm-meta { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.cm-tag { font-size:10.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; padding:3px 9px; border-radius:999px; background:rgba(93,184,166,.12); color:var(--coral,#5db8a6); }
-.cm-tag.trap { background:rgba(232,124,124,.12); color:#c9564a; } .cm-tag.clean { background:rgba(95,191,107,.14); color:#3f9a4c; }
-.cm-title { font-size:18px; font-weight:800; color:var(--ink,#1f2937); margin:0 0 10px; }
-.cm-prompt { font-size:15px; line-height:1.65; color:var(--ink,#28303c); } .cm-prompt b { color:var(--ink,#1f2937); }
-.cm-exh { margin:16px 0 6px; }
-.cm-exh-name { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--coral,#5db8a6); margin-bottom:8px; }
-.cm-tbl { width:100%; border-collapse:collapse; font-size:13.5px; }
-.cm-tbl th, .cm-tbl td { padding:8px 10px; border-bottom:1px solid var(--sv-line,rgba(31,41,55,.10)); color:var(--ink,#28303c); text-align:left; }
-.cm-tbl th { font-weight:700; color:var(--on-dark-soft,#6b7c76); font-size:11.5px; text-transform:uppercase; letter-spacing:.03em; }
-.cm-tbl td:not(:first-child), .cm-tbl th:not(:first-child) { text-align:right; font-variant-numeric:tabular-nums; }
-.cm-steps { margin:14px 0 0; padding:12px 14px; background:rgba(93,184,166,.06); border-radius:10px; }
-.cm-steps .cm-sh { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--on-dark-soft,#6b7c76); margin-bottom:6px; }
-.cm-steps ol { margin:0; padding-left:20px; } .cm-steps li { font-size:14px; line-height:1.55; color:var(--ink,#28303c); margin:2px 0; }
-#cmInput { border-top:1px solid var(--sv-line,rgba(31,41,55,.12)); background:var(--surface-dark-elevated,#fbf8f2); padding:14px 16px; }
-.cm-iz { max-width:760px; margin:0 auto; }
-.cm-ta { width:100%; min-height:88px; resize:vertical; background:var(--surface-dark-soft,#efe9dd); border:1.5px solid var(--sv-line,rgba(31,41,55,.16)); border-radius:12px; padding:12px 14px; color:var(--ink,#1f2937); font-size:15px; font-family:inherit; line-height:1.5; box-sizing:border-box; }
-.cm-ta:focus { outline:none; border-color:var(--coral,#5db8a6); }
-.cm-row { display:flex; justify-content:space-between; align-items:center; margin-top:10px; gap:10px; }
-.cm-hint { font-size:12.5px; color:var(--on-dark-soft,#9db3ad); }
-.cm-btn { background:var(--coral,#5db8a6); color:#04201b; border:none; border-radius:11px; padding:12px 24px; font-size:14.5px; font-weight:700; cursor:pointer; }
-.cm-btn:disabled { opacity:.45; cursor:default; } .cm-btn.ghost { background:transparent; color:var(--coral,#5db8a6); border:1.5px solid rgba(93,184,166,.45); }
-.cm-fb { border-radius:12px; padding:13px 15px; margin:0 0 16px; font-size:14px; line-height:1.6; }
-.cm-fb.ok { background:rgba(95,191,107,.10); border:1px solid rgba(95,191,107,.4); color:#2f7d3a; }
-.cm-fb.no { background:rgba(232,124,124,.10); border:1px solid rgba(232,124,124,.4); color:#b23b3b; }
-.cm-fb b { color:var(--ink,#1f2937); }
-.cm-ref { background:var(--surface-dark-elevated,#16241f); border:1px solid var(--sv-line,rgba(31,41,55,.10)); border-radius:12px; padding:15px 16px; margin:0 0 16px; }
-.cm-ref-h { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--coral,#5db8a6); margin-bottom:8px; }
-.cm-ref-body { font-size:13.8px; line-height:1.65; color:var(--ink,#28303c); } .cm-ref-body b { color:var(--ink,#1f2937); }
-.cm-ref-body p { margin:0 0 7px; } .cm-ref-body p:last-child { margin:0; }
-.cm-trap { font-size:12.5px; color:var(--on-dark-soft,#8fa39d); font-style:italic; margin-top:10px; }
-`;
-  var SCREEN = `<div class="cm-top">
-    <button class="cm-x" onclick="CaseMathDrills.exit()" title="Exit">&times;</button>
-    <span class="cm-lbl" id="cmLbl">Case Math · Drills</span>
-    <span class="cm-prog" id="cmProg"></span>
-  </div>
-  <div id="cmFeed"><div class="cm-wrap" id="cmWrap"></div></div>
-  <div id="cmInput" style="display:none"><div class="cm-iz" id="cmIz"></div></div>`;
+const DRILLS_CM = require('./_drills_cm.json');
+const DRILLS_MS = require('./_drills_ms.json');
+const DRILLS_ST = require('./_drills_st.json');
+// Curated libraries share one endpoint. Client passes set:'ms' (Market Sizing),
+// set:'st' (Structuring), else Case Math. IDs are disjoint (CM-*/MS-*/ST-*).
+function libData(body) {
+  const s = body && body.set;
+  if (s === 'ms') return DRILLS_MS;
+  if (s === 'st') return DRILLS_ST;
+  return DRILLS_CM;
+}
 
-  function inject() {
-    if (!document.getElementById('screen-cmdrill')) {
-      var st = document.createElement('style'); st.textContent = CSS; document.head.appendChild(st);
-      var d = document.createElement('div'); d.id = 'screen-cmdrill'; d.className = 'screen';
-      d.setAttribute('data-screen-label', 'Case Math Drills'); d.innerHTML = SCREEN;
-      document.body.appendChild(d);
-    }
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', inject); else inject();
+const FALLBACK_ORIGIN = 'https://cas-edge-final.vercel.app';
+const GRADER_MODEL = 'claude-sonnet-5';
+const MAX_BODY_BYTES = 200 * 1024;
+const RATE_LIMIT = 40;
+const RATE_WINDOW_MS = 60 * 1000;
+const AUTH_TIMEOUT_MS = 8 * 1000;
 
-  /* ---------- helpers ---------- */
-  function E(id) { return document.getElementById(id); }
-  function esc2(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
-  function md(s) {
-    s = esc2(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/`(.+?)`/g, '<code>$1</code>');
-    return s.split(/\n{2,}/).map(function (p) { return '<p>' + p.replace(/\n/g, '<br>') + '</p>'; }).join('');
-  }
-  function L(v) {
-    if (v && typeof v === 'object' && ('en' in v || 'ru' in v)) {
-      var lang = (typeof state !== 'undefined' && state && state.aiLang === 'ru') ? 'ru' : 'en';
-      return v[lang] != null ? v[lang] : (v.en != null ? v.en : v.ru);
-    }
-    return v;
-  }
-  function scrollFeed() { var f = E('cmFeed'); if (f) setTimeout(function () { f.scrollTop = f.scrollHeight; }, 40); }
+/* ───────────────────────── grader system prompt ──────────────────────────── */
+const DRILL_GRADER_SYSTEM = `You are a strict but fair BCG case-math drill grader. You are given a drill PROMPT, its EXHIBIT data, a PASS CHECKLIST (the exact criteria that must all be met), a reference SOLUTION, and the candidate's ANSWER. Decide pass/fail against the checklist and give 1-2 sentences of coaching. Return ONLY JSON, no preamble, no markdown.
 
-  function freshToken() {
-    if (typeof sb === 'undefined' || !sb) return Promise.resolve(null);
-    return sb.auth.getSession().then(function (r) {
-      var s = r && r.data && r.data.session;
-      if (s && s.expires_at && (s.expires_at * 1000 - Date.now() < 60000)) return sb.auth.refreshSession().then(function (rr) { return (rr && rr.data && rr.data.session) || s; });
-      return s;
-    }).then(function (s) { return s ? s.access_token : null; }).catch(function () { return null; });
-  }
-  function api(payload) {
-    return freshToken().then(function (token) {
-      var headers = { 'Content-Type': 'application/json' };
-      if (token) headers['Authorization'] = 'Bearer ' + token;
-      return fetch('/api/drills', { method: 'POST', headers: headers, body: JSON.stringify(payload) });
-    }).then(function (r) { return r.json().catch(function () { return {}; }); });
-  }
+RULES:
+1. Pass ONLY if every checklist item is satisfied by the candidate's answer (meaning, not exact wording). Case-math is about the right number AND the right reasoning.
+2. Numbers: accept the candidate's number if it matches the checklist target within the stated tolerance (exact unless the checklist says +/-x). Numbers spoken in any form count; ignore currency symbols and thousands separators.
+3. This is a TRAP drill family: the checklist usually distinguishes the naive answer from the correct one. If the candidate gives the naive number as their answer, that is a FAIL even if the arithmetic is internally correct.
+4. For CLEAN drills the correct move is to confirm no error / no flip — inventing a reversal that is not in the data is a FAIL.
+5. Do NOT penalize grammar, spelling, or brevity. Penalize only missing or wrong required content.
 
-  function tableHTML(ex) {
-    var h = '<table class="cm-tbl"><thead><tr>' + (ex.header || []).map(function (c) { return '<th>' + esc2(c) + '</th>'; }).join('') + '</tr></thead><tbody>';
-    h += (ex.rows || []).map(function (row) { return '<tr>' + row.map(function (c) { return '<td>' + esc2(c) + '</td>'; }).join('') + '</tr>'; }).join('');
-    return h + '</tbody></table>';
-  }
+RESPONSE FORMAT (strict JSON): {"pass":true,"coaching":"1-2 sentences IN ENGLISH: what was right/missing and the one thing to fix. Specific, cite the key number."}`;
 
-  /* ---------- libraries ---------- */
-  // Two curated libraries share this one thin client. 'cm' = Case Math (default),
-  // 'ms' = Market Sizing. The server picks the library from the `set` field.
-  var LIBS = {
-    cm: { set: 'cm', label: 'Case Math · Drills',      rec: 'Case Math',     doneKey: 'casedge_cmdrills_done', complete: 'every Case Math drill in this batch' },
-    ms: { set: 'ms', label: 'Market Sizing · Drills',  rec: 'Market Sizing', doneKey: 'casedge_msdrills_done', complete: 'every Market Sizing drill in this batch' },
-    st: { set: 'st', label: 'Structuring · Drills',    rec: 'Structuring',   doneKey: 'casedge_stdrills_done', complete: 'every Structuring drill in this batch' }
+// Structuring (ST) is qualitative — there is no single number. It is graded on
+// five registers: COVER (required branches, judged by MEANING not label), DECOY
+// (reflexive branches that must NOT be developed first), ME (branch pairs that
+// cannot stand together), DRIVE (what to measure), ORDER (defensible starting
+// branch). There is NO canonical tree — many MECE trees are valid; the only
+// objective failure is a MISSING required branch (per the casebook grounding).
+const ST_GRADER_SYSTEM = `You are a strict but fair MBB structuring-drill grader. The candidate was given an anchor question and asked to build a MECE issue tree — NOT to solve the case. You are given the grading REGISTERS (the answer key) and the candidate's TREE. Return ONLY JSON, no preamble, no markdown.
+
+HOW TO GRADE (in priority order):
+1. COVER is the core. Every required branch must be present in the candidate's tree BY MEANING — accept synonyms and rephrasings, never demand the exact label. A tree that MISSES a required branch FAILS, no matter how clean the rest is. This is the one objective failure mode.
+2. DECOY: mentioning a decoy branch is NOT penalised. It fails ORDER only if the candidate makes a decoy their FIRST branch to develop / their lead hypothesis.
+3. ME: if the candidate merges two branches the ME matrix marks incompatible, flag it — a hard merge of an incompatible pair is a fail; a soft-overlap pair is a warning, not a fail.
+4. ORDER: a defensible start is any branch justified by a real criterion (size of effect, speed to check, cost of data). Starting on a decoy is an ORDER defect. Not stating any criterion is a coaching note, not a fail.
+5. Do NOT reward tree LENGTH or generic templates (e.g. a blank "profitability = revenue − cost" with no tailoring). Reward branches tailored to THIS company and question.
+
+PASS = all COVER branches present (by meaning) AND no decoy developed first AND no hard ME violation.
+
+RESPONSE FORMAT (strict JSON): {"pass":true,"coaching":"1-2 sentences IN ENGLISH: name which required branch (if any) was missed, or the decoy/ME slip, and the single most valuable fix. Be specific to this case."}`;
+
+/* ───────────────────────── library ───────────────────────────────────────── */
+let _byId = null;
+function drillById(id) {
+  // one combined map across all libraries — ids are disjoint (CM-*/MS-*/ST-*)
+  if (!_byId) { _byId = new Map(); for (const src of [DRILLS_CM, DRILLS_MS, DRILLS_ST]) for (const d of (src.drills || [])) _byId.set(d.id, d); }
+  return _byId.get(id);
+}
+
+// Client-safe view: prompt / exhibit / step prompts / meta — NO checklist,
+// reference, provoked, key registers, or step answers.
+// ST drills: the `key` registers (COVER/ME/DRIVE/ORDER/DECOY), anchor_metric and
+// reference are server-only. For E-after drills the exhibit itself is WITHHELD
+// until the candidate has submitted a tree (revealed=true) — the whole point is
+// that the data breaks the framework they already built.
+function sanitizeDrill(d, index, total, revealed) {
+  const isAfter = d.exhibit_mode === 'E-after';
+  const exhibit = (isAfter && !revealed) ? null : (d.exhibit || null);
+  return {
+    id: d.id, title: d.title, difficulty: d.difficulty, type: d.type,
+    focus: d.focus, time: d.time,
+    prompt: d.prompt,
+    exhibit: exhibit,
+    exhibit_mode: d.exhibit_mode || null,   // client gates the E-after flow on this
+    exhibit_withheld: (isAfter && !revealed) || false,
+    step_prompts: d.step_prompts || [],
+    index: index, total: total
   };
+}
 
-  /* ---------- state ---------- */
-  var S = { done: [], drill: null, lib: 'cm' };
-  function cfg() { return LIBS[S.lib] || LIBS.cm; }
-  function loadDone() { try { S.done = JSON.parse(localStorage.getItem(cfg().doneKey) || '[]'); } catch (e) { S.done = []; } }
-  function saveDone(id) { if (S.done.indexOf(id) < 0) S.done.push(id); try { localStorage.setItem(cfg().doneKey, JSON.stringify(S.done)); } catch (e) {} }
+function nextDrill(doneIds, data) {
+  const done = new Set(Array.isArray(doneIds) ? doneIds : []);
+  const list = (data || DRILLS_CM).drills || [];
+  const idx = list.findIndex(d => !done.has(d.id));
+  if (idx < 0) return null;                 // all done
+  return sanitizeDrill(list[idx], idx + 1, list.length);
+}
 
-  /* ---------- flow ---------- */
-  function open(lib) {
-    S.lib = (lib === 'ms' || lib === 'st') ? lib : 'cm';
-    inject();
-    var lbl = E('cmLbl'); if (lbl) lbl.textContent = cfg().label;
-    if (typeof showScreen === 'function') showScreen('cmdrill');
-    loadDone();
-    var w = E('cmWrap'); if (w) w.innerHTML = '';
-    izHide();
-    loadNext();
+/* ───────────────────────── infra (shared pattern) ────────────────────────── */
+async function fetchWithTimeout(url, options, timeoutMs) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try { return await fetch(url, { ...options, signal: controller.signal }); }
+  finally { clearTimeout(timer); }
+}
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const RETRIABLE_STATUS = new Set([429, 500, 502, 503, 529]);
+async function fetchAnthropicWithRetry(url, options, timeoutMs, maxRetries) {
+  let lastErr;
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    if (attempt > 0) await sleep(Math.min(700 * Math.pow(2, attempt - 1), 4000));
+    try {
+      const resp = await fetchWithTimeout(url, options, timeoutMs);
+      if (RETRIABLE_STATUS.has(resp.status) && attempt < maxRetries) continue;
+      return resp;
+    } catch (e) { lastErr = e; if (attempt >= maxRetries) throw e; }
   }
-  function exit() { if (typeof showScreen === 'function') showScreen('mode'); }
+  if (lastErr) throw lastErr;
+}
+async function rateLimited(userId, sbUrl, sbKey, token) {
+  try {
+    const resp = await fetchWithTimeout(sbUrl + '/rest/v1/rpc/check_and_increment_rate_limit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', apikey: sbKey, Authorization: 'Bearer ' + token },
+      body: JSON.stringify({ p_user_id: userId, p_window_seconds: RATE_WINDOW_MS / 1000, p_limit: RATE_LIMIT })
+    }, AUTH_TIMEOUT_MS);
+    if (!resp.ok) { console.error('Drills rate-limit RPC returned', resp.status); return false; }
+    return (await resp.json()) === false;
+  } catch (e) { console.error('Drills rate-limit RPC failed:', e); return false; }
+}
 
-  function iz(html) { var z = E('cmInput'), i = E('cmIz'); if (!z || !i) return; z.style.display = 'block'; i.innerHTML = html; }
-  function izHide() { var z = E('cmInput'); if (z) z.style.display = 'none'; }
-  function feed(html) { var w = E('cmWrap'); if (!w) return; var d = document.createElement('div'); d.innerHTML = html; w.appendChild(d.firstElementChild || d); scrollFeed(); }
+// One bounded model call + a single truncation retry inside a hard deadline.
+async function graderJSON(system, userText, maxTokens) {
+  const T0 = Date.now();
+  const BUDGET_MS = 52 * 1000;
+  const call = (mt, timeoutMs) => fetchAnthropicWithRetry('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': process.env.ANTHROPIC_API_KEY,
+      'anthropic-version': '2023-06-01',
+      'anthropic-beta': 'prompt-caching-2024-07-31'
+    },
+    body: JSON.stringify({ model: GRADER_MODEL, max_tokens: mt, system: [{ type: 'text', text: system }], messages: [{ role: 'user', content: userText }] })
+  }, timeoutMs, 0);
+  const textOf = dd => (dd && Array.isArray(dd.content)) ? dd.content.filter(b => b && b.type === 'text' && typeof b.text === 'string').map(b => b.text).join('\n') : '';
+  const parse = t => { try { const m = String(t || '').match(/\{[\s\S]*\}/); return m ? JSON.parse(m[0]) : null; } catch (e) { return null; } };
+  let resp = await call(maxTokens, 45 * 1000);
+  let data = await resp.json();
+  let parsed = parse(textOf(data));
+  // Retry once inside the deadline on truncation OR unparseable output.
+  const needsRetry = !parsed || (data && data.stop_reason === 'max_tokens');
+  const timeLeft = BUDGET_MS - (Date.now() - T0);
+  if (needsRetry && timeLeft > 12 * 1000) {
+    try { const r2 = await call(Math.min(maxTokens * 2, 2000), timeLeft - 2000); if (r2.status === 200) { const d2 = await r2.json(); const p2 = parse(textOf(d2)); if (p2) parsed = p2; } } catch (e) { /* keep */ }
+  }
+  return parsed;
+}
 
-  function loadNext() {
-    var w = E('cmWrap'); if (w) w.innerHTML = '';
-    izHide();
-    var pr = E('cmProg'); if (pr) pr.textContent = 'Loading…';
-    api({ action: 'next', doneIds: S.done, set: cfg().set }).then(function (r) {
-      if (r && r.error) { if (w) w.innerHTML = '<div class="cm-card"><div class="cm-title">' + esc2(cfg().rec) + '</div><div class="cm-prompt">Could not load — please make sure you are signed in, then try again.</div></div>'; return; }
-      var d = r && r.drill;
-      if (!d) {   // all done → recycle
-        S.done = []; try { localStorage.removeItem(cfg().doneKey); } catch (e) {}
-        feed('<div class="cm-card"><div class="cm-title">Set complete 🎉</div><div class="cm-prompt">You have worked through ' + esc2(cfg().complete) + '. Starting again from the top.</div></div>');
-        return void setTimeout(loadNext, 900);
+async function gradeDrill(d, answer) {
+  // ST (Structuring): grade the candidate's tree against the five registers.
+  if (d.type === 'Structuring' && d.key) {
+    const k = d.key;
+    const exhibitTxt = d.exhibit ? ('EXHIBIT (visible to candidate for this grade):\n' + JSON.stringify({ header: d.exhibit.header, rows: d.exhibit.rows })) : 'EXHIBIT: none / withheld';
+    const u = 'ANCHOR QUESTION: ' + d.prompt +
+      '\n\n--- GRADING REGISTERS (answer key) ---' +
+      '\nCOVER (required branches):\n' + (k.cover || '') +
+      '\n\nDECOY (reflexive branches — must not lead):\n' + (k.decoy || '') +
+      '\n\nME (incompatible pairs):\n' + (k.me || '') +
+      '\n\nORDER (defensible starts):\n' + (k.order || '') +
+      '\n\n' + exhibitTxt +
+      '\n\n--- CANDIDATE TREE ---\n' + String(answer || '');
+    const j = await graderJSON(ST_GRADER_SYSTEM, u, 800);
+    // graderJSON null = the model didn't return parseable JSON. Return graded:false
+    // (NEUTRAL) rather than pass:false so a grader hiccup is not shown as a candidate FAIL.
+    return j || { graded: false, coaching: 'Could not grade — please try again.' };
+  }
+  const exhibitTxt = d.exhibit ? ('EXHIBIT ' + JSON.stringify({ header: d.exhibit.header, rows: d.exhibit.rows })) : 'EXHIBIT: none';
+  const u = 'PROMPT: ' + d.prompt +
+    '\n' + exhibitTxt +
+    '\nSTEPS ASKED: ' + (d.step_prompts || []).join(' | ') +
+    '\nPASS CHECKLIST: ' + (d.checklist && d.checklist.en || '') +
+    '\nREFERENCE SOLUTION: ' + (d.reference && d.reference.en || '') +
+    '\nCANDIDATE ANSWER: ' + String(answer || '');
+  const j = await graderJSON(DRILL_GRADER_SYSTEM, u, 600);
+  return j || { graded: false, coaching: 'Could not grade — please try again.' };
+}
+
+/* ───────────────────────── handler ───────────────────────────────────────── */
+export default async function handler(req, res) {
+  const origin = process.env.ALLOWED_ORIGIN || FALLBACK_ORIGIN;
+  res.setHeader('Access-Control-Allow-Origin', origin);
+  res.setHeader('Vary', 'Origin');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if (req.method === 'OPTIONS') return res.status(200).end();
+  if (req.method !== 'POST') return res.status(405).json({ error: { message: 'Method not allowed' } });
+
+  try {
+    const auth = req.headers['authorization'] || req.headers['Authorization'] || '';
+    const token = auth.startsWith('Bearer ') ? auth.slice(7) : null;
+    if (!token) return res.status(401).json({ error: { message: 'Authentication required.' } });
+    const sbUrl = process.env.SUPABASE_URL, sbKey = process.env.SUPABASE_ANON_KEY;
+    if (!sbUrl || !sbKey) return res.status(500).json({ error: { message: 'Server auth not configured.' } });
+
+    const raw = JSON.stringify(req.body || {});
+    if (raw.length > MAX_BODY_BYTES) return res.status(413).json({ error: { message: 'Request too large.' } });
+
+    let userResp;
+    try {
+      userResp = await fetchWithTimeout(sbUrl + '/auth/v1/user', { headers: { apikey: sbKey, Authorization: 'Bearer ' + token } }, AUTH_TIMEOUT_MS);
+    } catch (e) { return res.status(504).json({ error: { message: 'Authentication timed out. Please try again.' } }); }
+    if (!userResp.ok) return res.status(401).json({ error: { message: 'Invalid or expired session.' } });
+    const user = await userResp.json();
+    const userId = user && user.id;
+    if (!userId) return res.status(401).json({ error: { message: 'Invalid session.' } });
+
+    const body = req.body || {};
+
+    if (body.action === 'list') {
+      return res.status(200).json({ drills: (libData(body).drills || []).map(d => ({ id: d.id, title: d.title, difficulty: d.difficulty, focus: d.focus })) });
+    }
+    if (body.action === 'next') {
+      const nd = nextDrill(body.doneIds, libData(body));
+      return res.status(200).json({ drill: nd });     // null when the set is exhausted
+    }
+    if (body.action === 'grade') {
+      if (await rateLimited(userId, sbUrl, sbKey, token)) {
+        return res.status(429).json({ error: { message: 'Too many requests. Please slow down.' } });
       }
-      S.drill = d;
-      renderDrill(d);
-    }).catch(function () { if (w) w.innerHTML = '<div class="cm-card"><div class="cm-title">' + esc2(cfg().rec) + '</div><div class="cm-prompt">Could not load this drill — please try again.</div></div>'; });
-  }
-
-  function renderDrill(d) {
-    var pr = E('cmProg'); if (pr) pr.textContent = 'Drill ' + d.index + ' / ' + d.total;
-    var tcls = (d.type || '').toLowerCase() === 'clean' ? 'clean' : 'trap';
-    var html = '<div class="cm-card">' +
-      '<div class="cm-meta">' +
-        '<span class="cm-tag ' + tcls + '">' + esc2(d.type || '') + '</span>' +
-        '<span class="cm-tag">' + esc2(d.difficulty || '') + '</span>' +
-        (d.time ? '<span class="cm-tag">' + esc2(d.time) + '</span>' : '') +
-        (d.focus ? '<span class="cm-tag">' + esc2(d.focus) + '</span>' : '') +
-      '</div>' +
-      '<div class="cm-title">' + esc2(d.title || 'Drill') + '</div>' +
-      '<div class="cm-prompt">' + md(d.prompt || '') + '</div>' +
-      (d.exhibit && d.exhibit.rows ? '<div class="cm-exh"><div class="cm-exh-name">Exhibit</div>' + tableHTML(d.exhibit) + '</div>' : '') +
-      (d.exhibit_withheld ? '<div class="cm-steps"><div class="cm-sh">Exhibit — locked</div><div class="cm-hint">Build your MECE tree first. The data is released only after you commit — its whole point is to test whether your framework survives contact with it.</div></div>' : '') +
-      ((d.step_prompts && d.step_prompts.length) ? '<div class="cm-steps"><div class="cm-sh">Solve</div><ol>' + d.step_prompts.map(function (s) { return '<li>' + esc2(s) + '</li>'; }).join('') + '</ol></div>' : '') +
-      '</div>';
-    feed(html);
-    var isST = (d.type || '') === 'Structuring';
-    var ph = isST ? 'Build your MECE tree: name each top branch and one line on why it belongs. State which branch you attack first and your criterion.'
-                  : 'Show your numbers and your one-sentence recommendation…';
-    var hint = isST ? 'List your branches (MECE), justify each, and pick a defensible starting branch.'
-                    : 'Give the number(s) the drill asks for, then your read of the trap.';
-    iz('<textarea class="cm-ta" id="cmTa" placeholder="' + esc2(ph) + '"></textarea>' +
-       '<div class="cm-row"><span class="cm-hint">' + esc2(hint) + '</span>' +
-       '<button class="cm-btn" id="cmSubmit" onclick="CaseMathDrills._submit()">Submit</button></div>');
-    setTimeout(function () { var el = E('cmTa'); if (el) el.focus(); }, 60);
-  }
-
-  function _submit() {
-    var el = E('cmTa'); if (!el) return; var answer = el.value.trim(); if (!answer) return;
-    var b = E('cmSubmit'); if (b) b.disabled = true;
-    iz('<div class="cm-hint">Grading your answer…</div>');
-    var d = S.drill;
-    api({ action: 'grade', drillId: d.id, answer: answer, set: cfg().set }).then(function (r) {
-      if (r && r.error) { feed('<div class="cm-fb no"><b>Connection issue.</b> ' + esc2(r.error.message || 'Please try again.') + '</div>'); return void nextButton(); }
-      // grader hiccup (couldn't parse a verdict) — NOT a fail. Let the candidate resubmit,
-      // keep their answer, don't mark the drill done.
+      const d = drillById(body.drillId);
+      if (!d) return res.status(400).json({ error: { message: 'Unknown drill.' } });
+      const r = await gradeDrill(d, body.answer);
+      // grader hiccup → tell the client to let the candidate retry, NOT mark it failed/done.
       if (r && r.graded === false) {
-        iz('<div class="cm-hint" style="margin-bottom:8px;">Grader hiccup — your answer wasn’t scored. Try submitting again.</div>' +
-           '<textarea class="cm-ta" id="cmTa">' + esc2(answer) + '</textarea>' +
-           '<div class="cm-row"><span class="cm-hint"></span><button class="cm-btn" id="cmSubmit" onclick="CaseMathDrills._submit()">Submit</button></div>');
-        return;
+        return res.status(200).json({ graded: false, coaching: r.coaching || 'Could not grade — please try again.' });
       }
-      var ok = !!r.pass;
-      feed('<div class="cm-fb ' + (ok ? 'ok' : 'no') + '">' + (ok ? '<b>✓ Pass.</b> ' : '<b>Not quite.</b> ') + esc2(r.coaching || '') + '</div>');
-      // ST E-after: the exhibit is released only now — show it before the debrief
-      // so the candidate sees how the data breaks (or confirms) the tree they built.
-      if (r.exhibit && r.exhibit.rows) {
-        feed('<div class="cm-exh"><div class="cm-exh-name">Exhibit — released</div>' + tableHTML(r.exhibit) + '</div>');
-      }
-      var ref = L(r.reference); var prov = L(r.provoked);
-      feed('<div class="cm-ref"><div class="cm-ref-h">Reference solution</div><div class="cm-ref-body">' + md(ref || '') + '</div>' +
-           (prov ? '<div class="cm-trap"><b>Trap:</b> ' + esc2(prov) + '</div>' : '') + '</div>');
-      saveDone(d.id);
-      // Record this rep in the shared Progress tracker (Drills completed + "Case Math" by-type + streak, synced to cloud).
-      try { if (typeof recordSession === 'function') recordSession('drill', cfg().rec); } catch (e) {}
-      nextButton();
-    }).catch(function () { feed('<div class="cm-fb no"><b>Connection issue.</b> Please try again.</div>'); nextButton(); });
-  }
+      // ST E-after: reveal the exhibit only now (after the tree is submitted), so
+      // the candidate can see how the data breaks their framework, then refine.
+      const revealExhibit = (d.type === 'Structuring' && d.exhibit_mode === 'E-after' && d.exhibit) ? d.exhibit : null;
+      return res.status(200).json({
+        pass: !!r.pass,
+        coaching: r.coaching || '',
+        reference: d.reference || { en: '', ru: '' },
+        provoked: d.provoked || { en: '', ru: '' },
+        exhibit: revealExhibit,
+        exhibit_mode: d.exhibit_mode || null
+      });
+    }
 
-  function nextButton() {
-    iz('<div class="cm-row" style="justify-content:flex-end"><button class="cm-btn" onclick="CaseMathDrills._next()">Next drill →</button></div>');
+    return res.status(400).json({ error: { message: 'Unknown action.' } });
+  } catch (err) {
+    console.error('CasEdge Drills error:', err);
+    return res.status(500).json({ error: { message: 'Something went wrong. Please try again.' } });
   }
-  function _next() { loadNext(); }
-
-  window.CaseMathDrills = { open: function () { return open('cm'); }, exit: exit, _submit: _submit, _next: _next };
-  window.MarketSizingDrills = { open: function () { return open('ms'); }, exit: exit, _submit: _submit, _next: _next };
-  window.StructuringDrills = { open: function () { return open('st'); }, exit: exit, _submit: _submit, _next: _next };
-})();
+}
