@@ -61,6 +61,17 @@ function logGrade(ev, d, userId, t0, extra) {
   } catch (e) { /* telemetry must never break a grade */ }
 }
 
+// FEEDBACK LANGUAGE (2026-07-25): the three grader prompts hardcode "coaching IN
+// ENGLISH". The product lets a candidate run the case in English and take the
+// debrief in Russian (fbLang) — understanding your own mistake is easier in your
+// own language. This directive overrides the prompt's default for that field only;
+// the VERDICT and the rubric are language-independent.
+function fbDirective(fbLang) {
+  return fbLang === 'ru'
+    ? '\n\nFEEDBACK LANGUAGE — OVERRIDES THE FORMAT LINE BELOW/ABOVE: write the `coaching` field in RUSSIAN. Keep every number, unit and proper name exactly as given. Grade by the same standard — the language of the note must not soften the verdict.'
+    : '';
+}
+
 /* ───────────────────────── grader system prompt ──────────────────────────── */
 const DRILL_GRADER_SYSTEM = `You are a strict but fair BCG case-math drill grader. You are given a drill PROMPT, its EXHIBIT data, a PASS CHECKLIST (the exact criteria that must all be met), a reference SOLUTION, and the candidate's ANSWER. Decide pass/fail against the checklist and give 1-2 sentences of coaching. Return ONLY JSON, no preamble, no markdown.
 
@@ -242,7 +253,7 @@ async function graderJSON(system, userText, maxTokens) {
 // Brainstorm (BR): grade the idea list (and, for CULL slots, the cull answer) by
 // meaning against LOAD/COVER/DEAD (+ kill-set). `cullAnswer` is null on single-move
 // (non-CULL) slots and on the interim move-1 reveal.
-async function gradeBR(d, answer, cullAnswer) {
+async function gradeBR(d, answer, cullAnswer, fbLang) {
   const k = d.key || {};
   let u = 'CASE QUESTION: ' + d.prompt +
     '\n\nFACTS GIVEN TO CANDIDATE:\n- ' + (d.facts || []).join('\n- ') +
@@ -261,11 +272,11 @@ async function gradeBR(d, answer, cullAnswer) {
       '\nPER-IDEA REFERENCE + reasons:\n' + (c.peridea_raw || '') +
       '\n\n--- CANDIDATE CULL ANSWER (which team ideas die + why) ---\n' + String(cullAnswer || '');
   }
-  const j = await graderJSON(BR_GRADER_SYSTEM, u, 800);
+  const j = await graderJSON(BR_GRADER_SYSTEM, u + fbDirective(fbLang), 800);
   return j || { graded: false, coaching: 'Could not grade — please try again.' };
 }
 
-async function gradeDrill(d, answer) {
+async function gradeDrill(d, answer, fbLang) {
   // ST (Structuring): grade the candidate's tree against the five registers.
   if (d.type === 'Structuring' && d.key) {
     const k = d.key;
@@ -278,7 +289,7 @@ async function gradeDrill(d, answer) {
       '\n\nORDER (defensible starts):\n' + (k.order || '') +
       '\n\n' + exhibitTxt +
       '\n\n--- CANDIDATE TREE ---\n' + String(answer || '');
-    const j = await graderJSON(ST_GRADER_SYSTEM, u, 800);
+    const j = await graderJSON(ST_GRADER_SYSTEM, u + fbDirective(fbLang), 800);
     // graderJSON null = the model didn't return parseable JSON. Return graded:false
     // (NEUTRAL) rather than pass:false so a grader hiccup is not shown as a candidate FAIL.
     return j || { graded: false, coaching: 'Could not grade — please try again.' };
@@ -290,7 +301,7 @@ async function gradeDrill(d, answer) {
     '\nPASS CHECKLIST: ' + (d.checklist && d.checklist.en || '') +
     '\nREFERENCE SOLUTION: ' + (d.reference && d.reference.en || '') +
     '\nCANDIDATE ANSWER: ' + String(answer || '');
-  const j = await graderJSON(DRILL_GRADER_SYSTEM, u, 600);
+  const j = await graderJSON(DRILL_GRADER_SYSTEM, u + fbDirective(fbLang), 600);
   return j || { graded: false, coaching: 'Could not grade — please try again.' };
 }
 
@@ -337,6 +348,8 @@ export default async function handler(req, res) {
     if (body.action === 'grade') {
       const d = drillById(body.drillId);
       if (!d) return res.status(400).json({ error: { message: 'Unknown drill.' } });
+      // client sends its resolved feedback language; anything but 'ru' means English
+      const fbLang = body.fbLang === 'ru' ? 'ru' : 'en';
 
       // Brainstorm two-move CULL: MOVE 1 reveals the client team's ideas + the new
       // fact (no grading, no LLM, no rate-limit) so the fact can break the list the
@@ -361,7 +374,7 @@ export default async function handler(req, res) {
         const ideaList = d.cull ? body.move1Answer : body.answer;
         const cullAns = d.cull ? body.answer : null;
         const t0 = Date.now();
-        const rb = await gradeBR(d, ideaList, cullAns);
+        const rb = await gradeBR(d, ideaList, cullAns, fbLang);
         if (rb && rb.graded === false) {
           logGrade('grade_unscored', d, userId, t0, { stage: d.cull ? 'cull' : 'single' });
           return res.status(200).json({ graded: false, coaching: rb.coaching || 'Could not grade — please try again.' });
@@ -375,7 +388,7 @@ export default async function handler(req, res) {
       }
 
       const t0 = Date.now();
-      const r = await gradeDrill(d, body.answer);
+      const r = await gradeDrill(d, body.answer, fbLang);
       // grader hiccup → tell the client to let the candidate retry, NOT mark it failed/done.
       if (r && r.graded === false) {
         logGrade('grade_unscored', d, userId, t0);
