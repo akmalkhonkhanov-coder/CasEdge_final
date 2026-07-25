@@ -55,7 +55,8 @@ function logGrade(ev, d, userId, t0, extra) {
       difficulty: d && d.difficulty || null,   // server-side label; hidden from the candidate
       echelon: !!(d && d.echelon),             // server-side tier flag; hidden from the candidate
       user: userTag(userId),
-      ms: t0 ? (Date.now() - t0) : null,
+      ms: t0 ? (Date.now() - t0) : null,          // grader latency
+      spent_ms: Number.isFinite(Number(extra && extra.spent_ms)) ? Number(extra.spent_ms) : null,
       ...(extra || {})
     }));
   } catch (e) { /* telemetry must never break a grade */ }
@@ -350,6 +351,10 @@ export default async function handler(req, res) {
       if (!d) return res.status(400).json({ error: { message: 'Unknown drill.' } });
       // client sends its resolved feedback language; anything but 'ru' means English
       const fbLang = body.fbLang === 'ru' ? 'ru' : 'en';
+      // how long the candidate actually took (soft timer, client-reported).
+      // Bounded: a bad client must not be able to write junk into the logs.
+      const spentMs = Number.isFinite(Number(body.elapsedMs)) && Number(body.elapsedMs) >= 0
+        ? Math.min(Number(body.elapsedMs), 4 * 60 * 60 * 1000) : null;
 
       // Brainstorm two-move CULL: MOVE 1 reveals the client team's ideas + the new
       // fact (no grading, no LLM, no rate-limit) so the fact can break the list the
@@ -376,10 +381,10 @@ export default async function handler(req, res) {
         const t0 = Date.now();
         const rb = await gradeBR(d, ideaList, cullAns, fbLang);
         if (rb && rb.graded === false) {
-          logGrade('grade_unscored', d, userId, t0, { stage: d.cull ? 'cull' : 'single' });
+          logGrade('grade_unscored', d, userId, t0, { stage: d.cull ? 'cull' : 'single', spent_ms: spentMs });
           return res.status(200).json({ graded: false, coaching: rb.coaching || 'Could not grade — please try again.' });
         }
-        logGrade(rb.pass ? 'grade_pass' : 'grade_fail', d, userId, t0, { stage: d.cull ? 'cull' : 'single' });
+        logGrade(rb.pass ? 'grade_pass' : 'grade_fail', d, userId, t0, { stage: d.cull ? 'cull' : 'single', spent_ms: spentMs });
         return res.status(200).json({
           pass: !!rb.pass,
           coaching: rb.coaching || '',
@@ -391,10 +396,10 @@ export default async function handler(req, res) {
       const r = await gradeDrill(d, body.answer, fbLang);
       // grader hiccup → tell the client to let the candidate retry, NOT mark it failed/done.
       if (r && r.graded === false) {
-        logGrade('grade_unscored', d, userId, t0);
+        logGrade('grade_unscored', d, userId, t0, { spent_ms: spentMs });
         return res.status(200).json({ graded: false, coaching: r.coaching || 'Could not grade — please try again.' });
       }
-      logGrade(r.pass ? 'grade_pass' : 'grade_fail', d, userId, t0);
+      logGrade(r.pass ? 'grade_pass' : 'grade_fail', d, userId, t0, { spent_ms: spentMs });
       // ST E-after: reveal the exhibit only now (after the tree is submitted), so
       // the candidate can see how the data breaks their framework, then refine.
       const revealExhibit = (d.type === 'Structuring' && d.exhibit_mode === 'E-after' && d.exhibit) ? d.exhibit : null;
