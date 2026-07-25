@@ -318,6 +318,20 @@ export function unlockedStepNums(steps, doneSet) {
    body), but the VOLATILE block presents the SET of currently-available steps
    with their keys — the candidate chooses the path; the model grades whichever
    analysis they actually do and emits <step>N</step> for each one completed. */
+// EN-NATIVE CASES (EN-canon wave, from 2026-07-25). A case authored natively in
+// English must NOT be run through the "internal material is Russian, rephrase it
+// yourself" instruction — that instruction invites the model to paraphrase, and
+// paraphrase is exactly what kills a trap: the deliberate ambiguity in a step
+// question ("which family looks worst?" — worst BY WHAT?) gets helpfully
+// clarified away and the case is dead. For these cases the text IS the script.
+const languageEnNative =
+`\n\n════ OUTPUT ════
+Conduct the case in natural consulting English. The internal material below is ALREADY written in English and was authored natively for this case — it is NOT a translation and must NOT be paraphrased "into better English".
+- Ask each step question in the words given. Do not reword, expand, or explain it.
+- Where a question is deliberately unspecific, that ambiguity IS the test. Never add the missing qualifier (never turn "which looks worst?" into "which has the worst margin?"), and never hint at which metric to use unless the answer key tells you to.
+- Keep every number, unit, percentage and proper name exactly as written.
+- Keep the hidden markers (<step>…</step>, <verdict>…</verdict>, <reveal>…</reveal>) exactly as written; never explain or display them.`;
+
 export function buildSystemPromptILead({ caseObj, doneSteps, firm, revealedSet, isOpening, focusKey, lang }) {
   const steps = caseObj.steps || [];
   const byNum = new Map(steps.map(s => [s.step, s]));
@@ -399,7 +413,8 @@ Rules for every reply:
   const languageRu =
 `\n\n════ OUTPUT ════
 Веди кейс ПОЛНОСТЬЮ НА РУССКОМ ЯЗЫКЕ. Профессиональный консалтинговый русский; стандартные термины (NPV, EBITDA, churn, capex, MECE) допустимы. Названия кейсов и компаний — как написаны. Все числа — точно из материала. Скрытые маркеры (<step>…</step>, <verdict>…</verdict>, <reveal>…</reveal>) оставляй ровно как есть; кандидату не показывай.`;
-  const language = (lang === 'ru') ? languageRu :
+  const enNative = String(caseObj.lang || caseObj.source_lang || '').toLowerCase() === 'en';
+  const language = (lang === 'ru') ? languageRu : enNative ? languageEnNative :
 `\n\n════ OUTPUT ════
 Conduct the case in natural consulting English. Internal material below (questions, keys, exhibit notes) may be in RUSSIAN — that is source, never quote it; rephrase in English. Keep every number, unit, percentage and proper name EXACTLY as written. Keep the hidden markers (<step>…</step>, <verdict>…</verdict>, <reveal>…</reveal>) exactly as written; never explain or display them.`;
 
@@ -474,7 +489,8 @@ Rules for every reply:
   const languageRu =
 `\n\n════ OUTPUT ════
 Веди кейс ПОЛНОСТЬЮ НА РУССКОМ ЯЗЫКЕ — каждый вопрос, каждая реплика, каждая подсказка. Профессиональный консалтинговый русский: стандартные термины (NPV, EBITDA, churn, capex, MECE) допустимы как есть, но никаких английских ФРАЗ и предложений. Названия кейсов и компаний оставляй как написаны. Все числа, единицы и проценты — в точности из материала. Скрытые маркеры (<verdict>…</verdict>, <reveal>…</reveal>) оставляй ровно как есть; кандидату их не показывай и не объясняй.`;
-  const language = (lang === 'ru') ? languageRu :
+  const enNative2 = String(caseObj.lang || caseObj.source_lang || '').toLowerCase() === 'en';
+  const language = (lang === 'ru') ? languageRu : enNative2 ? languageEnNative :
 `\n\n════ OUTPUT ════
 Conduct the case in English. Much of the internal material below (step questions, answer keys, hints, exhibit notes) is written in RUSSIAN — that is source material, not something to quote. ALWAYS speak to the candidate in natural, idiomatic consulting English:
 - Rephrase every step question and data introduction in English yourself — never paste the Russian text into your reply, and never mix Russian phrases into an English sentence.
