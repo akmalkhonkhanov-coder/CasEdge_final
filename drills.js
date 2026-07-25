@@ -9,12 +9,25 @@
   /* ---------- inject CSS + screen ---------- */
   var CSS = `#screen-cmdrill { position:fixed; inset:0; z-index:50; height:100vh; height:100dvh; overflow:hidden; background:var(--surface-dark); display:none; flex-direction:column; }
 #screen-cmdrill.active { display:flex; }
-#cmFeed { flex:1; overflow-y:auto; padding:22px 16px 28px; }
-.cm-wrap { max-width:760px; margin:0 auto; }
+#cmFeed { flex:1; overflow-y:auto; padding:22px 16px 28px; display:flex; flex-direction:column; }
+/* A drill is not a chat. The feed used to stretch full height with the card
+   pinned top and the answer box pinned bottom, leaving ~150px of dead space
+   between the question and where you answer it. margin auto centres the
+   card while it is shorter than the feed and falls back to normal top-anchored
+   scrolling the moment the content grows past it. */
+.cm-wrap { margin:auto auto; width:100%; }
+.cm-wrap { max-width:760px; }
 .cm-top { display:flex; align-items:center; gap:12px; padding:12px 16px; border-bottom:1px solid var(--sv-line,rgba(31,41,55,.12)); background:var(--surface-dark-elevated,#fbf8f2); }
 .cm-top .cm-x { background:none; border:none; font-size:22px; line-height:1; color:var(--on-dark-soft,#5b6472); cursor:pointer; }
 .cm-top .cm-lbl { font-size:13px; font-weight:700; color:var(--ink,#1f2937); }
-.cm-top .cm-prog { margin-left:auto; font-size:12px; color:var(--on-dark-soft,#9db3ad); }
+.cm-top .cm-prog { margin-left:14px; font-size:12px; color:var(--on-dark-soft,#9db3ad); }
+/* SOFT TIMER: counts up, shows the drill's own budget, and never interrupts.
+   The chip promised "6 MIN" with no clock at all — pressure is half of what an
+   interview tests, but a timer that cuts you off mid-answer just teaches you to
+   abandon drills. It turns amber past budget and the elapsed time is sent with
+   the answer, so the telemetry can eventually say "passes, but never in time". */
+.cm-timer { font-size:12px; font-variant-numeric:tabular-nums; color:var(--on-dark-soft,#9db3ad); margin-left:14px; }
+.cm-timer.over { color:#c98a3a; font-weight:700; }
 .cm-card { background:var(--surface-dark-elevated,#16241f); border:1px solid var(--sv-line,rgba(255,255,255,.08)); border-radius:14px; padding:18px; margin:0 0 16px; }
 .cm-meta { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
 .cm-tag { font-size:10.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; padding:3px 9px; border-radius:999px; background:rgba(93,184,166,.12); color:var(--coral,#5db8a6); }
@@ -32,7 +45,7 @@
 .cm-steps ol { margin:0; padding-left:20px; } .cm-steps li { font-size:14px; line-height:1.55; color:var(--ink,#28303c); margin:2px 0; }
 #cmInput { border-top:1px solid var(--sv-line,rgba(31,41,55,.12)); background:var(--surface-dark-elevated,#fbf8f2); padding:14px 16px; }
 .cm-iz { max-width:760px; margin:0 auto; }
-.cm-ta { width:100%; min-height:88px; resize:vertical; background:var(--surface-dark-soft,#efe9dd); border:1.5px solid var(--sv-line,rgba(31,41,55,.16)); border-radius:12px; padding:12px 14px; color:var(--ink,#1f2937); font-size:15px; font-family:inherit; line-height:1.5; box-sizing:border-box; }
+.cm-ta { width:100%; min-height:88px; max-height:44vh; resize:vertical; overflow-y:auto; background:var(--surface-dark-soft,#efe9dd); border:1.5px solid var(--sv-line,rgba(31,41,55,.16)); border-radius:12px; padding:12px 14px; color:var(--ink,#1f2937); font-size:15px; font-family:inherit; line-height:1.5; box-sizing:border-box; }
 .cm-ta:focus { outline:none; border-color:var(--coral,#5db8a6); }
 .cm-row { display:flex; justify-content:space-between; align-items:center; margin-top:10px; gap:10px; }
 .cm-hint { font-size:12.5px; color:var(--on-dark-soft,#9db3ad); }
@@ -51,6 +64,8 @@
   var SCREEN = `<div class="cm-top">
     <button class="cm-x" onclick="CaseMathDrills.exit()" title="Exit">&times;</button>
     <span class="cm-lbl" id="cmLbl">Case Math · Drills</span>
+    <span style="flex:1"></span>
+    <span class="cm-timer" id="cmTimer"></span>
     <span class="cm-prog" id="cmProg"></span>
   </div>
   <div id="cmFeed"><div class="cm-wrap" id="cmWrap"></div></div>
@@ -94,6 +109,39 @@
     }
     return v;
   }
+  /* ---------- soft timer ---------- */
+  var T = { t0: 0, budget: 0, tick: null };
+  function budgetMs(t) {                       // "6 min" / "7 MIN" → ms, 0 if absent
+    var m = /(\d+(?:\.\d+)?)/.exec(String(t || ''));
+    return m ? Math.round(parseFloat(m[1]) * 60000) : 0;
+  }
+  function fmt(ms) {
+    var s2 = Math.floor(ms / 1000);
+    return Math.floor(s2 / 60) + ':' + ('0' + (s2 % 60)).slice(-2);
+  }
+  function timerStart(timeStr) {
+    timerStop();
+    T.t0 = Date.now(); T.budget = budgetMs(timeStr);
+    var el = E('cmTimer'); if (!el) return;
+    function paint() {
+      var d = Date.now() - T.t0;
+      el.textContent = fmt(d) + (T.budget ? ' / ' + fmt(T.budget) : '');
+      el.classList.toggle('over', !!T.budget && d > T.budget);
+    }
+    paint(); T.tick = setInterval(paint, 1000);
+  }
+  function timerStop() { if (T.tick) { clearInterval(T.tick); T.tick = null; } }
+  function elapsedMs() { return T.t0 ? (Date.now() - T.t0) : null; }
+
+  // The answer box used to sit at a fixed 4 lines: a long answer scrolled inside
+  // it and you could no longer see the start of your own reasoning. You reread
+  // your answer before you hand it over — that is the point of the drill.
+  function autoGrow(el) {
+    if (!el) return;
+    function fit() { el.style.height = 'auto'; el.style.height = Math.max(88, el.scrollHeight + 2) + 'px'; }
+    el.addEventListener('input', fit); fit();
+  }
+
   function scrollFeed() { var f = E('cmFeed'); if (f) setTimeout(function () { f.scrollTop = f.scrollHeight; }, 40); }
 
   function freshToken() {
@@ -198,15 +246,17 @@
     iz('<textarea class="cm-ta" id="cmTa" placeholder="' + esc2(ph) + '"></textarea>' +
        '<div class="cm-row"><span class="cm-hint">' + esc2(hint) + '</span>' +
        '<button class="cm-btn" id="cmSubmit" onclick="CaseMathDrills._submit()">Submit</button></div>');
-    setTimeout(function () { var el = E('cmTa'); if (el) el.focus(); }, 60);
+    timerStart(d.time);
+    setTimeout(function () { var el = E('cmTa'); if (el) { el.focus(); autoGrow(el); } }, 60);
   }
 
   function _submit() {
     var el = E('cmTa'); if (!el) return; var answer = el.value.trim(); if (!answer) return;
     var b = E('cmSubmit'); if (b) b.disabled = true;
+    var spent = elapsedMs(); timerStop();
     iz('<div class="cm-hint">Grading your answer…</div>');
     var d = S.drill;
-    api({ action: 'grade', drillId: d.id, answer: answer, set: cfg().set, fbLang: fbCode() }).then(function (r) {
+    api({ action: 'grade', drillId: d.id, answer: answer, set: cfg().set, fbLang: fbCode(), elapsedMs: spent }).then(function (r) {
       if (r && r.error) { feed('<div class="cm-fb no"><b>Connection issue.</b> ' + esc2(r.error.message || 'Please try again.') + '</div>'); return void nextButton(); }
       // grader hiccup (couldn't parse a verdict) — NOT a fail. Let the candidate resubmit,
       // keep their answer, don't mark the drill done.
@@ -228,7 +278,7 @@
         iz('<textarea class="cm-ta" id="cmCull" placeholder="Which of these ideas does the new fact kill? Give the numbers and, for each, why it dies. Naming a survivor as killed fails as hard as a miss."></textarea>' +
            '<div class="cm-row"><span class="cm-hint">Name exactly the ideas the fact kills — with a reason for each.</span>' +
            '<button class="cm-btn" id="cmCullBtn" onclick="BrainstormDrills._submitCull()">Submit cull</button></div>');
-        setTimeout(function () { var el = E('cmCull'); if (el) el.focus(); }, 60);
+        setTimeout(function () { var el = E('cmCull'); if (el) { el.focus(); autoGrow(el); } }, 60);
         return;
       }
       var ok = !!r.pass;
@@ -270,7 +320,7 @@
     var b = E('cmCullBtn'); if (b) b.disabled = true;
     iz('<div class="cm-hint">Grading…</div>');
     var d = S.drill;
-    api({ action: 'grade', drillId: d.id, set: cfg().set, stage: 'cull', answer: cull, move1Answer: S.move1, fbLang: fbCode() })
+    api({ action: 'grade', drillId: d.id, set: cfg().set, stage: 'cull', answer: cull, move1Answer: S.move1, fbLang: fbCode(), elapsedMs: elapsedMs() })
       .then(function (r) { _renderFinal(d, r); })
       .catch(function () { feed('<div class="cm-fb no"><b>Connection issue.</b> Please try again.</div>'); nextButton(); });
   }
