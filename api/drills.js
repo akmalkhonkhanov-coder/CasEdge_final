@@ -31,6 +31,36 @@ const RATE_LIMIT = 40;
 const RATE_WINDOW_MS = 60 * 1000;
 const AUTH_TIMEOUT_MS = 8 * 1000;
 
+/* ───────────────────────── telemetry ─────────────────────────────────────── */
+// One-line JSON to stdout → Vercel runtime logs. Server-side ONLY: nothing here
+// is ever added to a response body, so the candidate never sees tier/echelon.
+// Outcomes are logged SEPARATELY and must never be collapsed:
+//   grade_pass     — graded, candidate met the checklist
+//   grade_fail     — graded, candidate missed it        (a real signal about the drill)
+//   grade_unscored — grader hiccup, no verdict rendered (a signal about US, not them)
+// Mixing unscored into fail is what makes a drill look "too hard" when the
+// grader was simply failing to return JSON.
+const crypto = require('crypto');
+function userTag(userId) {
+  try { return crypto.createHash('sha256').update(String(userId)).digest('hex').slice(0, 12); }
+  catch (e) { return 'anon'; }
+}
+function logGrade(ev, d, userId, t0, extra) {
+  try {
+    console.log('CASEDGE_TELEMETRY ' + JSON.stringify({
+      ev: ev,                                  // grade_pass | grade_fail | grade_unscored | cull_reveal
+      set: (d && d.id || '').split('-')[0].toLowerCase() || null,
+      drill: d && d.id || null,
+      type: d && d.type || null,
+      difficulty: d && d.difficulty || null,   // server-side label; hidden from the candidate
+      echelon: !!(d && d.echelon),             // server-side tier flag; hidden from the candidate
+      user: userTag(userId),
+      ms: t0 ? (Date.now() - t0) : null,
+      ...(extra || {})
+    }));
+  } catch (e) { /* telemetry must never break a grade */ }
+}
+
 /* ───────────────────────── grader system prompt ──────────────────────────── */
 const DRILL_GRADER_SYSTEM = `You are a strict but fair BCG case-math drill grader. You are given a drill PROMPT, its EXHIBIT data, a PASS CHECKLIST (the exact criteria that must all be met), a reference SOLUTION, and the candidate's ANSWER. Decide pass/fail against the checklist and give 1-2 sentences of coaching. Return ONLY JSON, no preamble, no markdown.
 
@@ -306,6 +336,7 @@ export default async function handler(req, res) {
       // candidate just built. The candidate then submits the CULL answer (stage:'cull').
       if (d.type === 'Brainstorm' && d.cull && body.stage !== 'cull') {
         const c = (d.key && d.key.cull) || {};
+        logGrade('cull_reveal', d, userId, null);
         return res.status(200).json({
           stage: 'cull',
           cull: { new_fact: c.new_fact || '', team_ideas: c.team_ideas || [] },
@@ -322,10 +353,13 @@ export default async function handler(req, res) {
       if (d.type === 'Brainstorm') {
         const ideaList = d.cull ? body.move1Answer : body.answer;
         const cullAns = d.cull ? body.answer : null;
+        const t0 = Date.now();
         const rb = await gradeBR(d, ideaList, cullAns);
         if (rb && rb.graded === false) {
+          logGrade('grade_unscored', d, userId, t0, { stage: d.cull ? 'cull' : 'single' });
           return res.status(200).json({ graded: false, coaching: rb.coaching || 'Could not grade — please try again.' });
         }
+        logGrade(rb.pass ? 'grade_pass' : 'grade_fail', d, userId, t0, { stage: d.cull ? 'cull' : 'single' });
         return res.status(200).json({
           pass: !!rb.pass,
           coaching: rb.coaching || '',
@@ -333,11 +367,14 @@ export default async function handler(req, res) {
         });
       }
 
+      const t0 = Date.now();
       const r = await gradeDrill(d, body.answer);
       // grader hiccup → tell the client to let the candidate retry, NOT mark it failed/done.
       if (r && r.graded === false) {
+        logGrade('grade_unscored', d, userId, t0);
         return res.status(200).json({ graded: false, coaching: r.coaching || 'Could not grade — please try again.' });
       }
+      logGrade(r.pass ? 'grade_pass' : 'grade_fail', d, userId, t0);
       // ST E-after: reveal the exhibit only now (after the tree is submitted), so
       // the candidate can see how the data breaks their framework, then refine.
       const revealExhibit = (d.type === 'Structuring' && d.exhibit_mode === 'E-after' && d.exhibit) ? d.exhibit : null;
