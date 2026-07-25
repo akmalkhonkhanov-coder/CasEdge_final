@@ -2688,7 +2688,10 @@
       <svg class="rt-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2 2M9 2h6"></path></svg>
       <span class="rt-time" id="respTimerTime">1:30</span>
       <div class="rt-bar"><div class="rt-fill" id="respTimerFill"></div></div>
-      <button class="help-btn" id="helpBtn" onclick="requestHelp()" title="Pauses the clock for 10 seconds">Need a hint?</button>
+      <!-- "Need a hint?" button removed 2026-07-25: no interview offers you a hint.
+           A candidate who needs one asks for it in their own words, and the engine's
+           hint policy answers in the flow. requestHelp()/helpHintForContext() are
+           kept below with no entry point, in case the mechanic is ever revived. -->
     </div>
     <div class="help-hint" id="helpHintPanel" style="display:none;"></div>
     <div class="hints" id="chatHints"></div>
