@@ -276,16 +276,12 @@
       letter-spacing: -.3px; color: var(--on-dark); text-decoration: none; user-select: none;
       position: relative; display: inline-flex; align-items: baseline;
     }
-    /* The shared "e" bridges Case + Edge - it belongs to both words */
-    .wm-bridge {
-      color: var(--coral); position: relative; font-style: italic;
-      padding: 0 1px;
-    }
-    .wm-bridge::after {
-      content: ""; position: absolute; left: -1px; right: -1px; bottom: -2px;
-      height: 6px; border: 1.4px solid var(--coral); border-top: none;
-      border-radius: 0 0 6px 6px; opacity: .55;
-    }
+    /* ONE LOCKUP (2026-07-25). The app used to render a different wordmark from
+       the landing page: a lowercase italic coral "e" with an arc under it, which
+       read as "Casedge" and looked like a half-loaded glyph. The landing header
+       has always been "Cas" + teal "Edge"; the app now matches it exactly, so the
+       brand does not change on the way from the sales page into the product. */
+    .wm-e { color: var(--accent-teal); }
     .wm-accent { color: var(--coral); }
     .wm-c { color: var(--accent-teal); }
 
@@ -1976,7 +1972,7 @@
 ═══════════════════════════════════════════════════ -->
 <div id="screen-faq" class="screen" data-screen-label="FAQ">
   <nav class="top-nav">
-    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-e">Edge</span></span>
     <button class="btn btn-ghost" onclick="showScreen('landing')" data-i18n="common.back">← Back</button>
   </nav>
   <div class="info-body">
@@ -2013,7 +2009,7 @@
 
 <div id="screen-contact" class="screen" data-screen-label="Contact">
   <nav class="top-nav">
-    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-e">Edge</span></span>
     <button class="btn btn-ghost" onclick="showScreen('landing')" data-i18n="common.back">← Back</button>
   </nav>
   <div class="info-body">
@@ -2035,7 +2031,7 @@
 
 <div id="screen-cookies" class="screen" data-screen-label="Cookies">
   <nav class="top-nav">
-    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-e">Edge</span></span>
     <button class="btn btn-ghost" onclick="showScreen('landing')" data-i18n="common.back">← Back</button>
   </nav>
   <div class="info-body">
@@ -2060,7 +2056,7 @@
 
 <div id="screen-privacy" class="screen" data-screen-label="Privacy">
   <nav class="top-nav">
-    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-e">Edge</span></span>
     <button class="btn btn-ghost" onclick="showScreen('landing')" data-i18n="common.back">← Back</button>
   </nav>
   <div class="info-body">
@@ -2089,7 +2085,7 @@
 
 <div id="screen-terms" class="screen" data-screen-label="Terms">
   <nav class="top-nav">
-    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-e">Edge</span></span>
     <button class="btn btn-ghost" onclick="showScreen('landing')" data-i18n="common.back">← Back</button>
   </nav>
   <div class="info-body">
@@ -2123,7 +2119,7 @@
 ═══════════════════════════════════════════════════ -->
 <div id="screen-refund" class="screen" data-screen-label="Refund">
   <nav class="top-nav">
-    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-e">Edge</span></span>
     <button class="btn btn-ghost" onclick="showScreen('landing')" data-i18n="common.back">← Back</button>
   </nav>
   <div class="info-body">
@@ -2151,7 +2147,7 @@
 ═══════════════════════════════════════════════════ -->
 <div id="screen-pricing" class="screen" data-screen-label="Pricing">
   <nav class="top-nav">
-    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-e">Edge</span></span>
     <button class="btn btn-ghost" onclick="showScreen('landing')" data-i18n="common.back">← Back</button>
   </nav>
   <div class="land-section" style="padding-top:48px;">
@@ -2221,7 +2217,7 @@
 ═══════════════════════════════════════════════════ -->
 <div id="screen-auth" class="screen" data-screen-label="Auth">
   <nav class="top-nav">
-    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-e">Edge</span></span>
     <button class="btn btn-ghost" onclick="showScreen('landing')" data-i18n="common.back">← Back</button>
   </nav>
   <div class="auth-body">
@@ -2258,7 +2254,7 @@
 ═══════════════════════════════════════════════════ -->
 <div id="screen-mode" class="screen" data-screen-label="Mode">
   <nav class="top-nav">
-    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-e">Edge</span></span>
     <div style="display:flex;align-items:center;gap:6px;">
       <div class="nav-menu">
         <button class="nav-link" onclick="chooseMode('case')" data-i18n="nav.cases">Cases</button>
@@ -2327,7 +2323,7 @@
 ═══════════════════════════════════════════════════ -->
 <div id="screen-daily" class="screen" data-screen-label="Daily Challenge">
   <nav class="top-nav">
-    <span class="wordmark" onclick="showScreen('mode')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark" onclick="showScreen('mode')" style="cursor:pointer;">Cas<span class="wm-e">Edge</span></span>
     <button class="btn btn-ghost" onclick="showScreen('mode')" data-i18n="common.back">← Back</button>
   </nav>
   <div class="daily-body"><div class="daily-card" id="dailyCard"></div></div>
@@ -2338,7 +2334,7 @@
 ═══════════════════════════════════════════════════ -->
 <div id="screen-progress" class="screen" data-screen-label="Progress">
   <nav class="top-nav">
-    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-e">Edge</span></span>
     <div style="display:flex;align-items:center;gap:6px;">
       <div class="nav-menu">
         <button class="nav-link" onclick="chooseMode('case')" data-i18n="nav.cases">Cases</button>
@@ -2404,7 +2400,7 @@
 <!-- ══════════ GAME INTRO (shared) ══════════ -->
 <div id="screen-gameintro" class="screen" data-screen-label="Game Intro">
   <nav class="top-nav">
-    <span class="wordmark" onclick="showScreen('mode')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark" onclick="showScreen('mode')" style="cursor:pointer;">Cas<span class="wm-e">Edge</span></span>
   </nav>
   <div class="gi-body"><div class="gi-card" id="giCard"></div></div>
 </div>
@@ -2473,7 +2469,7 @@
 
 <div id="screen-drill" class="screen" data-screen-label="Drill">
   <nav class="top-nav">
-    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-e">Edge</span></span>
     <div id="drill-user-pill"></div>
   </nav>
   <div class="setup-body">
@@ -2495,7 +2491,7 @@
 
 <div id="screen-setup" class="screen" data-screen-label="Setup">
   <nav class="top-nav">
-    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-e">Edge</span></span>
     <div style="display:flex;align-items:center;gap:6px;">
       <div class="nav-menu">
         <button class="nav-link" onclick="chooseMode('case')" data-i18n="nav.cases">Cases</button>
@@ -2634,7 +2630,7 @@
 ═══════════════════════════════════════════════════ -->
 <div id="screen-caselib" class="screen" data-screen-label="Case Library">
   <nav class="top-nav">
-    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-e">Edge</span></span>
     <div style="display:flex;align-items:center;gap:6px;">
       <button class="lang-btn" onclick="openLangMenu()"><span class="lang-current">EN</span> ▾</button>
       <div id="caselib-user-pill"></div>
@@ -2661,7 +2657,7 @@
 ═══════════════════════════════════════════════════ -->
 <div id="screen-interview" class="screen" data-screen-label="Interview">
   <div class="int-nav">
-    <span class="wordmark" onclick="confirmExitSession()" style="cursor:pointer;" title="Back to home"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark" onclick="confirmExitSession()" style="cursor:pointer;" title="Back to home">Cas<span class="wm-e">Edge</span></span>
     <div class="int-badges">
       <span class="pill pill-neutral" id="b-firm">McKinsey</span>
       <span class="pill pill-neutral" id="b-type">Profitability</span>
@@ -2706,7 +2702,7 @@
 ═══════════════════════════════════════════════════ -->
 <div id="screen-feedback" class="screen" data-screen-label="Feedback">
   <nav class="top-nav">
-    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;"><span class="wm-c">C</span>as<span class="wm-bridge">e</span>dge</span>
+    <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-e">Edge</span></span>
     <div class="int-badges">
       <span class="pill pill-neutral" id="fb-firm">McKinsey</span>
       <span class="pill pill-neutral" id="fb-type">Profitability</span>

@@ -77,9 +77,19 @@
     s = esc2(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/`(.+?)`/g, '<code>$1</code>');
     return s.split(/\n{2,}/).map(function (p) { return '<p>' + p.replace(/\n/g, '<br>') + '</p>'; }).join('');
   }
+  // Which language the FEEDBACK side speaks. The product has three independent
+  // axes — uiLang (chrome), aiLang (the case/drill itself), fbLang (feedback and
+  // debrief). Reference solutions and the "provoked" note are feedback, so they
+  // follow fbLang; 'same' means follow the case language. Before 2026-07-25 this
+  // read aiLang only, so "case in English, debrief in Russian" was silently ignored.
+  function fbCode() {
+    var st = (typeof state !== 'undefined' && state) ? state : {};
+    var fb = st.fbLang && st.fbLang !== 'same' ? st.fbLang : st.aiLang;
+    return fb === 'ru' ? 'ru' : 'en';
+  }
   function L(v) {
     if (v && typeof v === 'object' && ('en' in v || 'ru' in v)) {
-      var lang = (typeof state !== 'undefined' && state && state.aiLang === 'ru') ? 'ru' : 'en';
+      var lang = fbCode();
       return v[lang] != null ? v[lang] : (v.en != null ? v.en : v.ru);
     }
     return v;
@@ -196,7 +206,7 @@
     var b = E('cmSubmit'); if (b) b.disabled = true;
     iz('<div class="cm-hint">Grading your answer…</div>');
     var d = S.drill;
-    api({ action: 'grade', drillId: d.id, answer: answer, set: cfg().set }).then(function (r) {
+    api({ action: 'grade', drillId: d.id, answer: answer, set: cfg().set, fbLang: fbCode() }).then(function (r) {
       if (r && r.error) { feed('<div class="cm-fb no"><b>Connection issue.</b> ' + esc2(r.error.message || 'Please try again.') + '</div>'); return void nextButton(); }
       // grader hiccup (couldn't parse a verdict) — NOT a fail. Let the candidate resubmit,
       // keep their answer, don't mark the drill done.
@@ -260,7 +270,7 @@
     var b = E('cmCullBtn'); if (b) b.disabled = true;
     iz('<div class="cm-hint">Grading…</div>');
     var d = S.drill;
-    api({ action: 'grade', drillId: d.id, set: cfg().set, stage: 'cull', answer: cull, move1Answer: S.move1 })
+    api({ action: 'grade', drillId: d.id, set: cfg().set, stage: 'cull', answer: cull, move1Answer: S.move1, fbLang: fbCode() })
       .then(function (r) { _renderFinal(d, r); })
       .catch(function () { feed('<div class="cm-fb no"><b>Connection issue.</b> Please try again.</div>'); nextButton(); });
   }
