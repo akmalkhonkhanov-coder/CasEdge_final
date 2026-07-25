@@ -324,6 +324,18 @@ export function unlockedStepNums(steps, doneSet) {
 // paraphrase is exactly what kills a trap: the deliberate ambiguity in a step
 // question ("which family looks worst?" — worst BY WHAT?) gets helpfully
 // clarified away and the case is dead. For these cases the text IS the script.
+// VERBATIM BRIEF (2026-07-25). "Present the prompt in your own words" is fatal on
+// an EN-native case: the trap lives in what the brief deliberately does NOT say.
+// #131 says "the board has been looking at margin" — ticket margin or realized
+// margin is exactly the question, and a natural-sounding retelling ("reviewed
+// gross margin by family and flagged the least profitable one") resolves the
+// ambiguity while adding no fact at all. A retold brief is also outside every
+// gate we run: we check numbers, structure and absence of hints in the FILE, and
+// none of that binds text regenerated per run. So: the frame may be improvised,
+// the brief may not.
+const OPENING_VERBATIM =
+`\n\nBRIEF — VERBATIM. The CASE PROMPT above is the client brief. Reproduce it WORD FOR WORD in your opening turn; it must appear in your reply exactly as written, as a contiguous block. You MAY add a short conversational frame around it — a greeting, "let me give you the situation", "take a minute if you need it" — but you may NOT paraphrase, shorten, expand, reorder or "clarify" the brief itself. Where it is vague about which metric or which measure, that vagueness is the test: leave it exactly as vague as it is written.`;
+
 const languageEnNative =
 `\n\n════ OUTPUT ════
 Conduct the case in natural consulting English. The internal material below is ALREADY written in English and was authored natively for this case — it is NOT a translation and must NOT be paraphrased "into better English".
@@ -333,6 +345,7 @@ Conduct the case in natural consulting English. The internal material below is A
 - Keep the hidden markers (<step>…</step>, <verdict>…</verdict>, <reveal>…</reveal>) exactly as written; never explain or display them.`;
 
 export function buildSystemPromptILead({ caseObj, doneSteps, firm, revealedSet, isOpening, focusKey, lang }) {
+  const enNative = String(caseObj.lang || caseObj.source_lang || '').toLowerCase() === 'en' && lang !== 'ru';
   const steps = caseObj.steps || [];
   const byNum = new Map(steps.map(s => [s.step, s]));
   const done = new Set((Array.isArray(doneSteps) ? doneSteps : []).map(Number));
@@ -388,7 +401,7 @@ Each block is one analysis the candidate can legitimately do next. Grade whichev
   if (isOpening) {
     flow =
 `\n\n════ WHAT TO DO NOW (OPENING) ════
-Present the case prompt/scenario in your own words and hand over any exhibits marked "available to share" only if the opening calls for them. Then STOP and let the candidate drive — ask what they would like to look at first. Do NOT walk them through steps in order, do NOT evaluate, do NOT emit any <verdict> or <step> marker on this opening turn.`;
+Present the case prompt/scenario${enNative ? ' (see BRIEF — VERBATIM below)' : ' in your own words'} and hand over any exhibits marked "available to share" only if the opening calls for them. Then STOP and let the candidate drive — ask what they would like to look at first. Do NOT walk them through steps in order, do NOT evaluate, do NOT emit any <verdict> or <step> marker on this opening turn.` + (enNative ? OPENING_VERBATIM : '');
   } else {
     flow =
 `\n\n════ WHAT TO DO NOW (INTERVIEWEE-LED) ════
@@ -413,7 +426,6 @@ Rules for every reply:
   const languageRu =
 `\n\n════ OUTPUT ════
 Веди кейс ПОЛНОСТЬЮ НА РУССКОМ ЯЗЫКЕ. Профессиональный консалтинговый русский; стандартные термины (NPV, EBITDA, churn, capex, MECE) допустимы. Названия кейсов и компаний — как написаны. Все числа — точно из материала. Скрытые маркеры (<step>…</step>, <verdict>…</verdict>, <reveal>…</reveal>) оставляй ровно как есть; кандидату не показывай.`;
-  const enNative = String(caseObj.lang || caseObj.source_lang || '').toLowerCase() === 'en';
   const language = (lang === 'ru') ? languageRu : enNative ? languageEnNative :
 `\n\n════ OUTPUT ════
 Conduct the case in natural consulting English. Internal material below (questions, keys, exhibit notes) may be in RUSSIAN — that is source, never quote it; rephrase in English. Keep every number, unit, percentage and proper name EXACTLY as written. Keep the hidden markers (<step>…</step>, <verdict>…</verdict>, <reveal>…</reveal>) exactly as written; never explain or display them.`;
@@ -427,6 +439,7 @@ Conduct the case in natural consulting English. Internal material below (questio
    Rebuilt for the CURRENT step on every call. interviewer_md is the answer key,
    used only to grade — never read aloud. */
 export function buildSystemPrompt({ caseObj, stepIndex, attemptCount, firm, revealedSet, isOpening, focusKey, lang }) {
+  const enNative2 = String(caseObj.lang || caseObj.source_lang || '').toLowerCase() === 'en' && lang !== 'ru';
   const steps = caseObj.steps || [];
   const idx = Math.max(0, Math.min(stepIndex, steps.length - 1));
   const step = steps[idx] || {};
@@ -462,10 +475,10 @@ ${step.interviewer_md || '(No explicit key parsed for this step. Grade using the
     flow =
 `\n\n════ WHAT TO DO NOW (OPENING) ════
 This is the start of the case. Do the following, briefly and in character:
-1. Present the case prompt / scenario to the candidate in your own words.
+1. Present the case prompt / scenario to the candidate${enNative2 ? ' (see BRIEF — VERBATIM below)' : ' in your own words'}.
 2. Present any EXHIBITS marked "available to share" above only if this first step calls for them; otherwise hold them.
 3. Ask the CURRENT STEP question above.
-Do NOT evaluate anything yet and do NOT emit a <verdict> marker on this opening turn. Keep it tight and professional — no filler.`;
+Do NOT evaluate anything yet and do NOT emit a <verdict> marker on this opening turn. Keep it tight and professional — no filler.` + (enNative2 ? OPENING_VERBATIM : '');
   } else {
     const advance = isLast
       ? `Since this is the LAST step, do NOT ask a new question — give a brief, professional closing line and stop.`
@@ -489,7 +502,6 @@ Rules for every reply:
   const languageRu =
 `\n\n════ OUTPUT ════
 Веди кейс ПОЛНОСТЬЮ НА РУССКОМ ЯЗЫКЕ — каждый вопрос, каждая реплика, каждая подсказка. Профессиональный консалтинговый русский: стандартные термины (NPV, EBITDA, churn, capex, MECE) допустимы как есть, но никаких английских ФРАЗ и предложений. Названия кейсов и компаний оставляй как написаны. Все числа, единицы и проценты — в точности из материала. Скрытые маркеры (<verdict>…</verdict>, <reveal>…</reveal>) оставляй ровно как есть; кандидату их не показывай и не объясняй.`;
-  const enNative2 = String(caseObj.lang || caseObj.source_lang || '').toLowerCase() === 'en';
   const language = (lang === 'ru') ? languageRu : enNative2 ? languageEnNative :
 `\n\n════ OUTPUT ════
 Conduct the case in English. Much of the internal material below (step questions, answer keys, hints, exhibit notes) is written in RUSSIAN — that is source material, not something to quote. ALWAYS speak to the candidate in natural, idiomatic consulting English:
