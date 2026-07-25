@@ -144,7 +144,7 @@ function sanitizeDrill(d, index, total, revealed) {
   // submitted their own idea list (revealed only in the grade response). NO exhibits.
   if (d.type === 'Brainstorm') {
     return {
-      id: d.id, title: d.title, difficulty: d.difficulty, type: d.type,
+      id: d.id, title: d.title, type: d.type,   // difficulty (tier) withheld — see NO-SPOILER note below
       company: d.company || null, industry: d.industry || null, time: d.time,
       prompt: d.prompt, facts: d.facts || [],
       cull: !!d.cull,            // client shows a 2nd-move ("cull") screen when true
@@ -153,9 +153,14 @@ function sanitizeDrill(d, index, total, revealed) {
   }
   const isAfter = d.exhibit_mode === 'E-after';
   const exhibit = (isAfter && !revealed) ? null : (d.exhibit || null);
+  // NO-SPOILER (2026-07-25): `difficulty` (tier) and `focus` are NOT sent. focus
+  // names the trap mechanism outright ("F05(A) PERPETUITY VS DECAY") and tier
+  // primes the candidate — both used to render as chips above the prompt. `type`
+  // still ships because the client branches on Structuring/Brainstorm, but it is
+  // no longer displayed.
   return {
-    id: d.id, title: d.title, difficulty: d.difficulty, type: d.type,
-    focus: d.focus, time: d.time,
+    id: d.id, title: d.title, type: d.type,
+    time: d.time,
     prompt: d.prompt,
     exhibit: exhibit,
     exhibit_mode: d.exhibit_mode || null,   // client gates the E-after flow on this
@@ -321,7 +326,9 @@ export default async function handler(req, res) {
     const body = req.body || {};
 
     if (body.action === 'list') {
-      return res.status(200).json({ drills: (libData(body).drills || []).map(d => ({ id: d.id, title: d.title, difficulty: d.difficulty, focus: d.focus })) });
+      // difficulty/focus withheld here too — otherwise one `list` call hands over
+      // the tier and trap mechanism of every drill in the set.
+      return res.status(200).json({ drills: (libData(body).drills || []).map(d => ({ id: d.id, title: d.title })) });
     }
     if (body.action === 'next') {
       const nd = nextDrill(body.doneIds, libData(body));
