@@ -69,6 +69,10 @@
   /* ---------- helpers ---------- */
   function E(id) { return document.getElementById(id); }
   function esc2(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  // Inline markdown for list items — same escaping as md(), but no <p> wrapper.
+  function mdi(s) {
+    return esc2(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/`(.+?)`/g, '<code>$1</code>');
+  }
   function md(s) {
     s = esc2(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/`(.+?)`/g, '<code>$1</code>');
     return s.split(/\n{2,}/).map(function (p) { return '<p>' + p.replace(/\n/g, '<br>') + '</p>'; }).join('');
@@ -156,20 +160,21 @@
 
   function renderDrill(d) {
     var pr = E('cmProg'); if (pr) pr.textContent = 'Drill ' + d.index + ' / ' + d.total;
-    var tcls = (d.type || '').toLowerCase() === 'clean' ? 'clean' : 'trap';
+    // NO-SPOILER META (2026-07-25): the candidate used to see Trap/Clean, the
+    // difficulty tier and the `focus` code (e.g. "F05(A) PERPETUITY VS DECAY").
+    // Each one hands over the answer before a single number is written: "Trap"
+    // says do not take the obvious route, and `focus` names the exact mechanism.
+    // Real interviews label nothing. Only the time budget survives.
     var html = '<div class="cm-card">' +
       '<div class="cm-meta">' +
-        '<span class="cm-tag ' + tcls + '">' + esc2(d.type || '') + '</span>' +
-        '<span class="cm-tag">' + esc2(d.difficulty || '') + '</span>' +
         (d.time ? '<span class="cm-tag">' + esc2(d.time) + '</span>' : '') +
-        (d.focus ? '<span class="cm-tag">' + esc2(d.focus) + '</span>' : '') +
       '</div>' +
       '<div class="cm-title">' + esc2(d.title || 'Drill') + '</div>' +
       '<div class="cm-prompt">' + md(d.prompt || '') + '</div>' +
-      ((d.facts && d.facts.length) ? '<div class="cm-steps"><div class="cm-sh">Facts</div><ul>' + d.facts.map(function (s) { return '<li>' + esc2(s) + '</li>'; }).join('') + '</ul></div>' : '') +
+      ((d.facts && d.facts.length) ? '<div class="cm-steps"><div class="cm-sh">Facts</div><ul>' + d.facts.map(function (s) { return '<li>' + mdi(s) + '</li>'; }).join('') + '</ul></div>' : '') +
       (d.exhibit && d.exhibit.rows ? '<div class="cm-exh"><div class="cm-exh-name">Exhibit</div>' + tableHTML(d.exhibit) + '</div>' : '') +
       (d.exhibit_withheld ? '<div class="cm-steps"><div class="cm-sh">Exhibit — locked</div><div class="cm-hint">Build your MECE tree first. The data is released only after you commit — its whole point is to test whether your framework survives contact with it.</div></div>' : '') +
-      ((d.step_prompts && d.step_prompts.length) ? '<div class="cm-steps"><div class="cm-sh">Solve</div><ol>' + d.step_prompts.map(function (s) { return '<li>' + esc2(s) + '</li>'; }).join('') + '</ol></div>' : '') +
+      ((d.step_prompts && d.step_prompts.length) ? '<div class="cm-steps"><div class="cm-sh">Solve</div><ol>' + d.step_prompts.map(function (s) { return '<li>' + mdi(s) + '</li>'; }).join('') + '</ol></div>' : '') +
       '</div>';
     feed(html);
     var isST = (d.type || '') === 'Structuring';
