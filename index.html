@@ -1440,7 +1440,7 @@
   #screen-landing details.cl-faq summary { cursor: pointer; list-style: none; }
   #screen-landing details.cl-faq summary::-webkit-details-marker { display: none; }
   /* Reveal-on-scroll: hidden until the section is scrolled into view (IntersectionObserver adds .in) */
-  #screen-landing .cl-reveal { opacity: 0; transform: translateY(44px) scale(0.97); transition: opacity .7s ease, transform .7s ease; }
+  #screen-landing .cl-reveal { opacity: 0; transform: translateY(28px) scale(0.985); transition: opacity .35s ease, transform .35s ease; }
   #screen-landing .cl-reveal.in { opacity: 1; transform: translateY(0) scale(1); }
   @media (prefers-reduced-motion: reduce) { #screen-landing .cl-reveal { opacity: 1; transform: none; transition: none; } }
   #screen-landing .cl-tilt-frame { perspective: 1400px; }
@@ -1785,7 +1785,7 @@
   <!-- STATS -->
   <section class="cl-section" style="padding-top:64px; padding-bottom:64px; background:var(--bg-canvas);">
     <div class="cl-container">
-      <div class="cl-stats-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:32px; text-align:center;">
+      <div class="cl-stats-grid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:32px; text-align:center;">
         <div class="cl-reveal">
           <div class="cas-display-lg" style="color:#5db8a6; margin-bottom:8px;">400+</div>
           <p class="cas-body-sm" style="color:var(--text-muted); margin:0;" data-i18n="l2.stats.lbl1">реальных кейсов в библиотеке</p>
@@ -1797,6 +1797,10 @@
         <div class="cl-reveal" style="animation-delay:.16s;">
           <div class="cas-display-lg" style="color:var(--ink); margin-bottom:8px;">2</div>
           <p class="cas-body-sm" style="color:var(--text-muted); margin:0;" data-i18n="l2.stats.lbl3">фирменных формата - Solve и Chat Game</p>
+        </div>
+        <div class="cl-reveal" style="animation-delay:.24s;">
+          <div class="cas-display-lg" style="color:#5db8a6; margin-bottom:8px;">40+</div>
+          <p class="cas-body-sm" style="color:var(--text-muted); margin:0;" data-i18n="l2.stats.lbl4">кандидатов Big 3 проверили систему</p>
         </div>
       </div>
     </div>
@@ -3205,7 +3209,7 @@ const I18N = {
     'l2.drill5.title': 'Brainstorm', 'l2.drill5.body': 'Generating ideas by structure, not by list.',
     'l2.drill6.title': 'Synthesis', 'l2.drill6.body': "Wrapping up a case in 60 seconds, like in front of a partner.",
     'l2.drill7.title': 'Behavioral', 'l2.drill7.body': "Fit questions in a specific firm's format.",
-    'l2.stats.lbl1': 'real cases in the library', 'l2.stats.lbl2': 'drill types', 'l2.stats.lbl3': 'signature formats \u2014 Solve and Chat Game',
+    'l2.stats.lbl1': 'real cases in the library', 'l2.stats.lbl2': 'drill types', 'l2.stats.lbl3': 'signature formats \u2014 Solve and Chat Game', 'l2.stats.lbl4': 'Big 3 candidates have tested the system',
     'l2.formats.eyebrow': 'Exclusive', 'l2.formats.title': 'Two formats, rebuilt down to the interface',
     'l2.formats.solve.body': 'We built this format into the product: Research Journal, combo charts, and the same hint logic as the real assessment \u2014 train here, not just on interview day.',
     'l2.formats.chat.body': 'We built the live BCG Chat format into the product: an AI interviewer holds a real-time conversation, and you answer the final question by voice \u2014 just like a real call.',
@@ -8354,17 +8358,28 @@ function applyTheme(theme) {
       els.forEach(el => el.classList.add('in'));
       return;
     }
+    // ONE-WAY (2026-07-25). This used to remove .in when a section left the
+    // viewport, so content lived at opacity 0 by default and its visibility was
+    // recomputed forever. Two symptoms, both caught on prod: a fast scroll shows
+    // the block mid-fade (blank-looking screens), and scrolling back up re-hides
+    // and re-animates something the visitor already read. Reveal is now a
+    // one-shot: once shown, a section stays shown and stops being observed.
     const obs = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        // Two-way: reveal when entering view, hide again when leaving
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-        } else {
-          entry.target.classList.remove('in');
-        }
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('in');
+        obs.unobserve(entry.target);
       });
-    }, { threshold: 0.18, rootMargin: '0px 0px -12% 0px' });
-    els.forEach(el => obs.observe(el));
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    // Anything already on screen (or scrolled past — deep links, reloads mid-page,
+    // a restored scroll position) must be visible immediately, with no animation:
+    // the observer would otherwise never fire for it.
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    els.forEach(el => {
+      const r = el.getBoundingClientRect();
+      if (r.top < vh * 0.92) { el.classList.add('in'); return; }   // in view or above it
+      obs.observe(el);
+    });
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initReveal);
