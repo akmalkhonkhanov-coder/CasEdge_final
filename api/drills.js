@@ -170,8 +170,17 @@ function sanitizeDrill(d, index, total, revealed) {
   // primes the candidate — both used to render as chips above the prompt. `type`
   // still ships because the client branches on Structuring/Brainstorm, but it is
   // no longer displayed.
+  // NO-SPOILER, second pass (2026-07-26): `type` on CM/MS carries the literal
+  // values 'Trap' / 'Clean'. Shipping it told the candidate, on every single
+  // slot, whether a trap is present at all — a bigger giveaway than the tier and
+  // focus chips already withheld above. The client only ever compares type
+  // against 'Structuring' and 'Brainstorm', so everything else goes out as a
+  // neutral branch token. The trim also kills stray markdown in the data
+  // ('**Clean**' in 5 CM slots), which would otherwise defeat any type match.
+  const branch = String(d.type || '').replace(/[*_`~]/g, '').trim() === 'Structuring'
+    ? 'Structuring' : 'Drill';
   return {
-    id: d.id, title: d.title, type: d.type,
+    id: d.id, title: d.title, type: branch,
     time: d.time,
     prompt: d.prompt,
     exhibit: exhibit,
