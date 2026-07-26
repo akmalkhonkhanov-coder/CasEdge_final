@@ -13,6 +13,7 @@ const DRILLS_CM = require('./_drills_cm.json');
 const DRILLS_MS = require('./_drills_ms.json');
 const DRILLS_ST = require('./_drills_st.json');
 const DRILLS_BR = require('./_drills_br.json');
+const DRILLS_CI = require('./_drills_ci.json');
 // Curated libraries share one endpoint. Client passes set:'ms' (Market Sizing),
 // set:'st' (Structuring), set:'br' (Brainstorm), else Case Math. IDs are
 // disjoint (CM-*/MS-*/ST-*/BR-*).
@@ -21,6 +22,7 @@ function libData(body) {
   if (s === 'ms') return DRILLS_MS;
   if (s === 'st') return DRILLS_ST;
   if (s === 'br') return DRILLS_BR;
+  if (s === 'ci') return DRILLS_CI;
   return DRILLS_CM;
 }
 
@@ -139,7 +141,7 @@ RESPONSE FORMAT (strict JSON): {"pass":true,"coaching":"1-2 sentences IN ENGLISH
 let _byId = null;
 function drillById(id) {
   // one combined map across all libraries — ids are disjoint (CM-*/MS-*/ST-*)
-  if (!_byId) { _byId = new Map(); for (const src of [DRILLS_CM, DRILLS_MS, DRILLS_ST, DRILLS_BR]) for (const d of (src.drills || [])) _byId.set(d.id, d); }
+  if (!_byId) { _byId = new Map(); for (const src of [DRILLS_CM, DRILLS_MS, DRILLS_ST, DRILLS_BR, DRILLS_CI]) for (const d of (src.drills || [])) _byId.set(d.id, d); }
   return _byId.get(id);
 }
 
@@ -286,7 +288,29 @@ async function gradeBR(d, answer, cullAnswer, fbLang) {
   return j || { graded: false, coaching: 'Could not grade — please try again.' };
 }
 
+// CI (Chart Interpretation): the skill is reading an exhibit, not arithmetic.
+// A candidate who restates the chart correctly has done nothing — the pass is
+// the ONE insight, its business implication and the next check. The checklist
+// is the contract; the reference is the model answer.
+const CI_GRADER_SYSTEM = `You are a strict but fair MBB chart-interpretation drill grader. You receive the drill PROMPT, the EXHIBIT (tables, drawn charts and footnotes), a PASS CHECKLIST (the exact criteria, all of which must be met), a reference SOLUTION, and the candidate's ANSWER. Return ONLY JSON, no preamble, no markdown.
+
+GRADE THE READING, NOT THE PROSE. Describing what the chart shows is not an insight. Pass requires: the load-bearing insight named, the business implication stated, and — where the checklist asks for it — the next check or the number that settles it.
+A candidate who reaches the same insight by a different route PASSES. A candidate who lands on the naive reading the exhibit is built to provoke FAILS, however fluent the writing.
+Never invent a number that is not in the exhibit. If the candidate quotes a number that is not there, that is a fail with the reason named.
+
+Return: {"pass": boolean, "coaching": "1-2 sentences naming what was missed or what was strong"}`;
+
 async function gradeDrill(d, answer, fbLang) {
+  // CI: exhibit is a `parts` sequence, not header/rows — serialise it whole.
+  if (d.type === 'Chart Interpretation') {
+    const u = 'PROMPT: ' + d.prompt +
+      '\nEXHIBIT: ' + JSON.stringify(d.exhibit || {}) +
+      '\nPASS CHECKLIST: ' + (d.checklist && (d.checklist.en || d.checklist.ru) || '') +
+      '\nREFERENCE SOLUTION: ' + (d.reference && (d.reference.en || d.reference.ru) || '') +
+      '\nCANDIDATE ANSWER: ' + String(answer || '');
+    const j = await graderJSON(CI_GRADER_SYSTEM, u + fbDirective(fbLang), 700);
+    return j || { graded: false, coaching: 'Could not grade — please try again.' };
+  }
   // ST (Structuring): grade the candidate's tree against the five registers.
   if (d.type === 'Structuring' && d.key) {
     const k = d.key;
