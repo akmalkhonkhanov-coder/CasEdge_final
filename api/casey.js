@@ -44,7 +44,12 @@ RESPONSE FORMAT (strict JSON, no preamble, no markdown):
 {"case_id":"Cxx","criteria":{"c1_conclusion_first":{"pass":true,"evidence":"quote"},"c2_anchor_number":{"pass":true,"evidence":"quote"},"c3_risks":{"pass":true,"evidence":"quote"},"c4_nextstep":{"pass":true,"evidence":"quote"}},"score":4,"verdict":"strong","coaching":"1-3 sentences IN ENGLISH: what passed, what failed, how to fix. Specific, no platitudes."}
 Always return an evidence quote (even if approximate) from the transcript for each criterion. All prose (evidence, coaching) MUST be in English.`;
 
-const CASEY_RUBRICS = {
+// Rubrics now ship as DATA (`_casey_rubrics.json`, 60 entries, regenerated from
+// the master by the content build). The literal below stays as a fallback so an
+// older data file cannot break grading, but the JSON wins when present.
+let CASEY_RUBRICS_FILE = {};
+try { CASEY_RUBRICS_FILE = require('./_casey_rubrics.json') || {}; } catch (e) { CASEY_RUBRICS_FILE = {}; }
+const CASEY_RUBRICS_BUILTIN = {
   "C1":  {"conclusion":"keep Valtona + add Herdal top-up (hybrid); NOT full move","anchor_numbers":["55,500","52,000-vs-55,000"],"mechanisms_required":["cost advantage kept + insurance against shortfall"],"internal_examples":["two-site quality/consistency"],"external_examples":["Valtona deviation/contract, excise"]},
   "C2":  {"conclusion":"run promo WITH the 500-unit cap (not uncapped, not reject)","anchor_numbers":["27,500","9,500-vs-87,500","33.65%"],"mechanisms_required":["expected refund cost overstated the gain; cap limits exposure"],"internal_examples":["cap communication/backlash"],"external_examples":["consumer-protection regulation; probability drift past breakeven"]},
   "C3":  {"conclusion":"keep the kit (± reprice); NOT discontinue","anchor_numbers":["−8,400","33.33%-vs-45%"],"mechanisms_required":["basket margin","attribution/defection share"],"internal_examples":["survey overstates true defection; test-store measurement"],"external_examples":["competitor rival kit; food-cost inflation"]},
@@ -106,6 +111,8 @@ const CASEY_RUBRICS = {
   "C59": {"conclusion": "complete the programme, do NOT terminate", "direction": "complete", "anchor_numbers": ["forward NPV +$26M", "26,000,000", "$41M swing", "$15M termination cost", "33.33% breakeven probability"], "transcription_variants": ["twenty six million", "forty one million", "fifteen million termination", "thirty three point three three percent"], "mechanisms_required": ["the $180M is sunk; decision is $40M more against a 55% chance of $120M", "second layer: terminating itself costs $15M, so killing destroys value twice"], "internal_examples": ["the 55% probability is the load-bearing parameter — re-test against latest trial data; also reconcile the $188M-vs-$180M spend inconsistency"], "external_examples": ["a competitor filing first or a regulatory shift could cut commercial value"], "bonus_signal": "flags the $188M-vs-$180M spend inconsistency", "anchor_note": "Bare '$180M spent' is the sunk anchor being REJECTED — never a valid anchor. '$120M value if approved' alone is a RAW input; '$66M expected value' is an intermediate."},
   "C60": {"conclusion": "bid cost-plus rather than fixed-price", "direction": "cost-plus", "anchor_numbers": ["$6.12M-vs-$5.7M expected margins", "6,120,000", "42% breakeven overrun probability", "$74.3M expected cost"], "transcription_variants": ["six point one two million versus five point seven", "forty two percent", "seventy four point three million"], "mechanisms_required": ["45% of comparable projects overrun by $14M; under fixed-price we absorb it, lifting expected cost to $74.3M and cutting expected margin below the cost-plus fee"], "internal_examples": ["the 45% comes from 20 comparable projects — test against this well's geology and rig spec"], "external_examples": ["the client could refuse cost-plus or price it down"], "bonus_signal": "volunteers that the margin is thin (42% breakeven vs 45% actual, 3pp cushion)", "anchor_note": "Bare '$12M' (fixed-price margin on base estimate) is NOT a valid anchor — it is the naive claim. '$80M contract value' and '$68M base cost' are RAW inputs."},
 };
+
+const CASEY_RUBRICS = Object.keys(CASEY_RUBRICS_FILE).length ? CASEY_RUBRICS_FILE : CASEY_RUBRICS_BUILTIN;
 
 /* ───────────────────────── library ───────────────────────────────────────── */
 let _byId = null;
@@ -175,13 +182,39 @@ function num(v) {
 }
 function fmtVal(v) { const n = num(v); return isFinite(n) ? n.toLocaleString('en-US') : String(v); }
 
+// STRUCTURED VALIDATION (content package 2.0). `validation` used to be a prose
+// sentence ("credit if selects all of {1,2,3,6} and none of {4,5}") that nothing
+// could enforce, so grading fell back to "your selection must equal the correct
+// set exactly". The package now ships {rule, required, forbidden} with 1-based
+// option keys, which distinguishes two genuinely different questions:
+//   all_of    — every required option chosen and no forbidden one; extra
+//               neutral options are tolerated
+//   exact_set — the selection must equal `required` exactly (this is what
+//               "pick the fewest that…" means)
+// `forbidden` is the part that matters: without it, ticking every box passes an
+// all_of question. Prose validation and older records keep the old behaviour.
 function gradeChoice(q, selected) {
-  const req = [];
-  (q.options || []).forEach((o, i) => { if (o.correct) req.push(i); });
   const sel = Array.isArray(selected) ? selected.map(Number) : [];
-  const ok = req.length === sel.length && req.every(i => sel.indexOf(i) >= 0);
-  // correctIdx lets the (key-free) client mark right/wrong options after submit.
-  return { ok, correctIdx: req, validation: q.validation || '' };
+  const v = q.validation;
+  const correctIdx = [];
+  (q.options || []).forEach((o, i) => { if (o.correct) correctIdx.push(i); });
+
+  if (v && typeof v === 'object' && v.rule) {
+    // keys are 1-based and positional; the client speaks in indices
+    const req = (v.required || []).map(k => Number(k) - 1);
+    const forb = (v.forbidden || []).map(k => Number(k) - 1);
+    let ok;
+    if (v.rule === 'exact_set') {
+      ok = req.length === sel.length && req.every(i => sel.indexOf(i) >= 0);
+    } else {                                   // all_of / single_choice
+      ok = req.every(i => sel.indexOf(i) >= 0) && !forb.some(i => sel.indexOf(i) >= 0);
+      if (v.rule === 'single_choice') ok = ok && sel.length === 1;
+    }
+    return { ok, correctIdx: req.length ? req : correctIdx, validation: '' };
+  }
+
+  const ok = correctIdx.length === sel.length && correctIdx.every(i => sel.indexOf(i) >= 0);
+  return { ok, correctIdx, validation: typeof q.validation === 'string' ? q.validation : '' };
 }
 function gradeNumber(q, value) {
   const ans = num(q.answer), val = num(value);
@@ -255,7 +288,13 @@ async function graderJSON(system, userText, maxTokens) {
 
 async function gradeOpen(q, answer) {
   const sys = 'You are a strict but fair BCG case-interview examiner. Grade the candidate answer on a binary pass/fail. Return ONLY JSON: {"pass":true|false,"feedback":"1 short sentence IN ENGLISH: what earned or missed the pass"}.';
-  const u = 'PASS CRITERION: ' + (q.validation || 'a reasonable, on-point answer') +
+  // validation is either the new structured object ({rule:'semantic', credit_if})
+  // or, on older records, a prose sentence. Passing the raw object would send the
+  // grader "[object Object]" and quietly grade against nothing.
+  const crit = (q.validation && typeof q.validation === 'object')
+    ? (q.validation.credit_if || 'a reasonable, on-point answer')
+    : (q.validation || 'a reasonable, on-point answer');
+  const u = 'PASS CRITERION: ' + crit +
     '\nMODEL ANSWER: ' + (q.model_answer || '—') +
     '\nCANDIDATE ANSWER: ' + answer;
   const j = await graderJSON(sys, u, 400);
@@ -323,12 +362,15 @@ export default async function handler(req, res) {
       if (t === 'enter_number') {
         return res.status(200).json(gradeNumber(q, p.value));
       }
-      if (t === 'open_text_elicitation') {
+      if (t === 'open_text' || t === 'open_text_elicitation' || t === 'open_text_brainstorm') {
         const answer = String(p.answer || '');
         const trg = (q.trigger_phrases || []).some(ph => answer.toLowerCase().indexOf(String(ph).toLowerCase()) >= 0);
         let pass = trg;
         if (!trg) { const r = await gradeOpen(q, answer); pass = !!r.pass; }
-        return res.status(200).json({ pass, validation: q.validation || 'Right thing to probe.', revealExhibit: q.reveal_exhibit || null });
+        const note = (q.validation && typeof q.validation === 'object')
+          ? (q.validation.credit_if || 'Right thing to probe.')
+          : (q.validation || 'Right thing to probe.');
+        return res.status(200).json({ pass, validation: note, revealExhibit: q.reveal_exhibit || null });
       }
       if (t === 'voice') {
         // Canonical structured rubric for every case (C1-C30). Falls back to the
