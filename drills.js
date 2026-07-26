@@ -105,7 +105,14 @@
   function L(v) {
     if (v && typeof v === 'object' && ('en' in v || 'ru' in v)) {
       var lang = fbCode();
-      return v[lang] != null ? v[lang] : (v.en != null ? v.en : v.ru);
+      // Fall through on an ABSENT *or EMPTY* side. An empty string used to count as
+      // a valid translation, so a one-sided payload ({en:'…', ru:''} — every BR
+      // model answer) rendered a headed block with no body, or no block at all.
+      var pick = v[lang];
+      if (typeof pick === 'string' ? pick.trim() : pick != null) return pick;
+      var alt = lang === 'ru' ? v.en : v.ru;
+      if (typeof alt === 'string' ? alt.trim() : alt != null) return alt;
+      return '';
     }
     return v;
   }
