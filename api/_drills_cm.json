@@ -111,7 +111,7 @@
    },
    "reference": {
     "en": "- Price = 40 × 1.25 = $50.00. A 25% markup is taken ON COST, so the margin = $10.00/unit = 10/50 = **20%** of price, not 25%.\n- Naive breakeven (manager's): 30,000 / (0.25 × 50) = 30,000 / 12.50 = 2,400 units.\n- Correct: 30,000 / 10.00 = **3,000 units**. The naive figure understates the threshold by 20.00% (base = the correct 3,000).\n- Last mile: a sales plan built on 2,400 leaves the line loss-making by 600 units × $10 = $6,000/mo.",
-    "ru": "- Цена = 40 × 1.25 = $50.00. Наценка 25% считается ОТ КОСТА, поэтому маржа = $10.00/unit = 10/50 = **20%** от цены, а не 25%.\n- Naive breakeven (менеджера): 30,000 / (0.25 × 50) = 30,000 / 12.50 = 2,400 units.\n- Correct: 30,000 / 10.00 = **3,000 units**. Naive занижает порог на 20.00% (база — корректные 3,000, [11]).\n- Last mile: план продаж, построенный на 2,400, оставит линию убыточной на 600 units × $10 = $6,000/мес."
+    "ru": "- Цена = 40 × 1.25 = $50.00. Наценка 25% считается ОТ КОСТА, поэтому маржа = $10.00/unit = 10/50 = **20%** от цены, а не 25%.\n- Naive breakeven (менеджера): 30,000 / (0.25 × 50) = 30,000 / 12.50 = 2,400 units.\n- Correct: 30,000 / 10.00 = **3,000 units**. Naive занижает порог на 20.00% (база — корректные 3,000).\n- Last mile: план продаж, построенный на 2,400, оставит линию убыточной на 600 units × $10 = $6,000/мес."
    },
    "provoked": {
     "en": "markup % is read as margin % of price.",
@@ -348,7 +348,7 @@
    },
    "reference": {
     "en": "- Per-tier churn: 2.60% and 1.86% on a like-for-like basis.\n- Both tiers get WORSE year on year, yet the blended churn can look flat/better — a Simpson reversal driven by the mix shift between tiers.\n- Correct blended = **2.96%**, a **+13.85%** deterioration versus the 2.60% base — computed as Σ(churned)/Σ(base), not an average of the two ratios.",
-    "ru": "- Шаг 1. Q1: (8×3.0% + 2×1.0%)/10 = 0.260/10 = **2.60%**. Q2: (3×3.4% + 7×1.2%)/10 = 0.186/10 = **1.86%**. Цифры PR арифметически верны.\n- Шаг 2. Basic 3.0→3.4% (+0.40pp), Premium 1.0→1.2% (+0.20pp): **оба сегмента ухудшились**. Blended упал только из-за миграции базы в низко-churn Premium (8/2 → 3/7). Классический Simpson.\n- Шаг 3. Q1-микс × Q2-ставки: (8×3.4% + 2×1.2%)/10 = **2.96%** — like-for-like churn ВЫРОС на 13.85% (база сравнения — исходные 2.60%, [11]; заявленные «−28.46%» меряют смесь эффектов, из них весь «прогресс» — микс). Честная формулировка: «Churn ухудшился в обоих тарифах; blended снизился из-за сдвига базы в Premium».\n\n**Провоцируемые ошибки (2, связанные):** взвешенное среднее прячет ухудшение сегментов; % улучшения меряется от смеси эффектов вместо like-for-like базы."
+    "ru": "- Шаг 1. Q1: (8×3.0% + 2×1.0%)/10 = 0.260/10 = **2.60%**. Q2: (3×3.4% + 7×1.2%)/10 = 0.186/10 = **1.86%**. Цифры PR арифметически верны.\n- Шаг 2. Basic 3.0→3.4% (+0.40pp), Premium 1.0→1.2% (+0.20pp): **оба сегмента ухудшились**. Blended упал только из-за миграции базы в низко-churn Premium (8/2 → 3/7). Классический Simpson.\n- Шаг 3. Q1-микс × Q2-ставки: (8×3.4% + 2×1.2%)/10 = **2.96%** — like-for-like churn ВЫРОС на 13.85% (база сравнения — исходные 2.60%; заявленные «−28.46%» меряют смесь эффектов, из них весь «прогресс» — микс). Честная формулировка: «Churn ухудшился в обоих тарифах; blended снизился из-за сдвига базы в Premium».\n\n**Провоцируемые ошибки (2, связанные):** взвешенное среднее прячет ухудшение сегментов; % улучшения меряется от смеси эффектов вместо like-for-like базы."
    },
    "provoked": {
     "en": "the blend is taken as a simple average of the tier ratios.",
@@ -421,7 +421,7 @@
    },
    "reference": {
     "en": "- The 12-year sum of a DECLINING production stream (not a flat perpetuity) gives PV ≈ **25.9** (±0.1M) — sum the decaying cash flows, do not capitalize them as if level.\n- Reconciliation: 131.7% (±1pp) — the stream is finite and declining, so a perpetuity formula overstates it.",
-    "ru": "- Correct: PV = Σ (6.0 − 0.5(t−1)) / 1.1^t, t=1..12 = **$25.9M**.\n- Naive $60.0M завышает на **131.7%** (база — ПОКАЗАННЫЕ $25.9M по [5]; от exact 25.9315 было бы 131.4% — канон считается от показанной версии).\n- Драйвер: перпетуитет предполагает вечный ПЛОСКИЙ поток; здесь поток конечен И падает — обе поправки режут value в одну сторону. Прикидка-знак (mental-math слой): даже недисконтированная сумма потоков = 12×3.25 = $39M < 60 → перпетуитет отпадает до всякого DCF."
+    "ru": "- Correct: PV = Σ (6.0 − 0.5(t−1)) / 1.1^t, t=1..12 = **$25.9M**.\n- Naive $60.0M завышает на **131.7%** (считая от округлённых $25.9M).\n- Драйвер: перпетуитет предполагает вечный ПЛОСКИЙ поток; здесь поток конечен И падает — обе поправки режут value в одну сторону. Прикидка в уме: даже недисконтированная сумма потоков = 12×3.25 = $39M < 60 → перпетуитет отпадает до всякого DCF."
    },
    "provoked": {
     "en": "a declining finite stream is valued as a level perpetuity.",
@@ -491,7 +491,7 @@
    },
    "reference": {
     "en": "- Phase gate: the probabilities MULTIPLY across stages, and the cost is conditional. Expected cost = 30 + 0.4 × 50, with the go-probability P = 20% (0.5 × 0.4).\n- Correct expected value/cost = **50**. The naive read (adding or using max payoff) points the right direction but overstates by +190%.",
-    "ru": "- P(launch) = 0.40 × 0.50 = **20%** (стадии последовательны — вероятности перемножаются, не усредняются).\n- Косты тоже условные: Phase III платится только при успехе Phase II → E[cost] = 30 + 0.40×50 = $50M.\n- EV = 0.20×500 − 30 − 0.40×50 = 100 − 50 = **$50M**.\n- Направление у члена борда верное (фандить), но EV завышен на **190.0%** ($145M vs $50M; база — корректные $50M, [11]). Trap-overstate: цена ошибки — искажённые пороги для сделок/партнёрств (например, программу с EV −$20M «средний» метод тоже одобрит)."
+    "ru": "- P(launch) = 0.40 × 0.50 = **20%** (стадии последовательны — вероятности перемножаются, не усредняются).\n- Косты тоже условные: Phase III платится только при успехе Phase II → E[cost] = 30 + 0.40×50 = $50M.\n- EV = 0.20×500 − 30 − 0.40×50 = 100 − 50 = **$50M**.\n- Направление у члена борда верное (фандить), но EV завышен на **190.0%** ($145M vs $50M; база — корректные $50M). Trap-overstate: цена ошибки — искажённые пороги для сделок/партнёрств (например, программу с EV −$20M «средний» метод тоже одобрит)."
    },
    "provoked": {
     "en": "stage probabilities are added (or the max payoff used) instead of multiplied.",
@@ -706,7 +706,7 @@
    },
    "reference": {
     "en": "- Synergy at gross vs net: the headline synergy is 120, but value it through CONTRIBUTION, not revenue.\n- Lost 6.0; net 18.0 after the haircut — the gross figure overstates.\n- Correct net synergy = **54**, a **122.2%** implied premium — base the ratio on 54, not on the gross headline.",
-    "ru": "- Шаг 1. Deck: 24 × 5 = $120M. Честное первое чтение — синергия «сама по себе».\n- Шаг 2. Attrition режет базу: потерянный contribution = 150 × 10% × 40% = **$6.0M/год**. Net recurring = 24 − 6 = **$18.0M/год**. (Связка: обе поправки — «gross ≠ net», но разной природы: recurring vs one-off.)\n- Шаг 3. Value = 18 × 5 − 36 = **$54M**. Deck завышает на **122.2%** (база — корректные $54M, [11]). Last mile: переплата премии, откалиброванной на $120M, съест сделку — max premium должен строиться от $54M.\n\n**Провоцируемые ошибки (2, связанные):** синергия без attrition-эффекта на базу; recurring-поток без one-off затрат."
+    "ru": "- Шаг 1. Deck: 24 × 5 = $120M. Честное первое чтение — синергия «сама по себе».\n- Шаг 2. Attrition режет базу: потерянный contribution = 150 × 10% × 40% = **$6.0M/год**. Net recurring = 24 − 6 = **$18.0M/год**. (Связка: обе поправки — «gross ≠ net», но разной природы: recurring vs one-off.)\n- Шаг 3. Value = 18 × 5 − 36 = **$54M**. Deck завышает на **122.2%** (база — корректные $54M). Last mile: переплата премии, откалиброванной на $120M, съест сделку — max premium должен строиться от $54M.\n\n**Провоцируемые ошибки (2, связанные):** синергия без attrition-эффекта на базу; recurring-поток без one-off затрат."
    },
    "provoked": {
     "en": "gross synergy is booked without the contribution haircut.",
@@ -933,8 +933,8 @@
     "ru": "(1) точные маржи $12.70 / $12.30, tolerance: exact; (2) выбор X; (3) годовой эффект $20,000, tolerance: exact; (4) назван принцип: округление только в финале."
    },
    "reference": {
-    "en": "- Margin X = 812.40 − 799.70 = **$12.70**; Margin Y = 812.40 − 800.10 = **$12.30**. X wins by $0.40/t.\n- Naive rounding of costs to whole numbers: 812.40 − 800 = 12.40 for both → \"a tie\", the choice is random. Rounding at an intermediate step erased the real difference ([9]-violation).\n- Annual effect of the correct choice: 0.40 × 50,000 = **$20,000/year** — the price of a single rounding.",
-    "ru": "- Margin X = 812.40 − 799.70 = **$12.70**; Margin Y = 812.40 − 800.10 = **$12.30**. X выигрывает на $0.40/t.\n- Наивное округление костов до целых: 812.40 − 800 = 12.40 для обоих → «ничья», выбор случайный. Округление на промежуточном шаге стёрло реальную разницу ([9]-нарушение).\n- Годовой эффект правильного выбора: 0.40 × 50,000 = **$20,000/год** — цена одного округления."
+    "en": "- Margin X = 812.40 − 799.70 = **$12.70**; Margin Y = 812.40 − 800.10 = **$12.30**. X wins by $0.40/t.\n- Naive rounding of costs to whole numbers: 812.40 − 800 = 12.40 for both → \"a tie\", the choice is random. Rounding at an intermediate step erased the real difference.\n- Annual effect of the correct choice: 0.40 × 50,000 = **$20,000/year** — the price of a single rounding.",
+    "ru": "- Margin X = 812.40 − 799.70 = **$12.70**; Margin Y = 812.40 − 800.10 = **$12.30**. X выигрывает на $0.40/t.\n- Наивное округление костов до целых: 812.40 − 800 = 12.40 для обоих → «ничья», выбор случайный. Округление на промежуточном шаге стёрло реальную разницу.\n- Годовой эффект правильного выбора: 0.40 × 50,000 = **$20,000/год** — цена одного округления."
    },
    "provoked": {
     "en": "rounding cost at an intermediate step zeroes out the difference and changes the decision.",
@@ -1287,7 +1287,7 @@
    },
    "reference": {
     "en": "- Step 1. Dairy 4,000,000 − 3,200,000 − 300,000 = **$500,000**; Bakery 2,500,000 − 1,700,000 − 250,000 = **$550,000**; Frozen 3,500,000 − 2,660,000 − 280,000 = **$560,000**. Sum = **$1,610,000** — exactly matches the shown total. CM% = 1,610,000/10,000,000 = **16.10%**.\n- Step 2. The components reconcile line by line and in the sum at the shown precision; there is no hidden allocation/double count. Answer choice: **no error**. The skill is to check and confirm, not to \"find\" a nonexistent trap.",
-    "ru": "- Шаг 1. Dairy 4,000,000 − 3,200,000 − 300,000 = **$500,000**; Bakery 2,500,000 − 1,700,000 − 250,000 = **$550,000**; Frozen 3,500,000 − 2,660,000 − 280,000 = **$560,000**. Сумма = **$1,610,000** — точно совпадает с показанным итогом. CM% = 1,610,000/10,000,000 = **16.10%**.\n- Шаг 2. Компоненты сходятся построчно и в сумме на показанной точности; никакой скрытой аллокации/двойного счёта нет. Ответ choice: **нет ошибки**. Навык — проверить и подтвердить, а не «найти» несуществующую ловушку."
+    "ru": "- Шаг 1. Dairy 4,000,000 − 3,200,000 − 300,000 = **$500,000**; Bakery 2,500,000 − 1,700,000 − 250,000 = **$550,000**; Frozen 3,500,000 − 2,660,000 − 280,000 = **$560,000**. Сумма = **$1,610,000** — точно совпадает с показанным итогом. CM% = 1,610,000/10,000,000 = **16.10%**.\n- Шаг 2. Компоненты сходятся построчно и в сумме с показанной точностью; никакой скрытой аллокации или двойного счёта нет. Ответ choice: **нет ошибки**. Навык — проверить и подтвердить, а не «найти» несуществующую ловушку."
    },
    "provoked": {
     "en": null,
@@ -2144,7 +2144,7 @@
    },
    "reference": {
     "en": "- Step 1. Gross = 110 × 20,000 = **$2,200,000** (naive).\n- Step 2. Cannibalization: 50% × 20,000 = 10,000 units drawn away from premium. Premium CM = $180 → loss = 180 × 10,000 = **$1,800,000** (at the premium's sacrificed margin of $180, not the newcomer's $110 — this is the price-mix layer: the bundle pulls the customer from a high-margin to a low-margin product).\n- Step 3. Net = 2,200,000 − 1,800,000 = **+$400,000**. The launch is worthwhile, but 5.5× smaller than claimed.",
-    "ru": "- Шаг 1. Gross = 110 × 20,000 = **$2,200,000** (наивный).\n- Шаг 2. Каннибализация: 50% × 20,000 = 10,000 units уходят у premium. Premium CM = $180 → потеря = 180 × 10,000 = **$1,800,000** (по марже жертвы premium $180, не новичка $110 — это price-mix слой: bundle тянет клиента с высокомаржинального на низкомаржинальный).\n- Шаг 3. Net = 2,200,000 − 1,800,000 = **+$400,000**. Запуск выгоден, но в 5.5× меньше заявленного."
+    "ru": "- Шаг 1. Gross = 110 × 20,000 = **$2,200,000** (наивный).\n- Шаг 2. Каннибализация: 50% × 20,000 = 10,000 units уходят у premium. Premium CM = $180 → потеря = 180 × 10,000 = **$1,800,000** (по марже того, кого каннибализируют, — premium $180, а не новичка $110: bundle уводит клиента с высокомаржинального продукта на низкомаржинальный).\n- Шаг 3. Net = 2,200,000 − 1,800,000 = **+$400,000**. Запуск выгоден, но в 5.5× меньше заявленного."
    },
    "provoked": {
     "en": "gross≠net (cannibalization); mix-shift to lower margin (loss at the $180 premium).",
@@ -2245,8 +2245,8 @@
     "ru": "(1) true GM 13.92%, ±0.01pp; (2) вывод «бонус НЕ заработан» (порог не пройден); (3) наивные 14.52% опознаны как артефакт округления; (4) принцип: округлять только в финале."
    },
    "reference": {
-    "en": "- True GM = (1,236,000 − 1,064,000)/1,236,000 = 172,000/1,236,000 = **13.92%** — **below** the 14% threshold. Bonus NOT earned.\n- Naive rounding to $10k: (1,240,000 − 1,060,000)/1,240,000 = 180,000/1,240,000 = **14.52%** → falsely «above the threshold». Rounding at an intermediate step pushed the result across the decision boundary ([1]/[9] violation).",
-    "ru": "- True GM = (1,236,000 − 1,064,000)/1,236,000 = 172,000/1,236,000 = **13.92%** — **ниже** порога 14%. Бонус НЕ заработан.\n- Наивное округление до $10k: (1,240,000 − 1,060,000)/1,240,000 = 180,000/1,240,000 = **14.52%** → ложно «выше порога». Округление на промежуточном шаге перевело результат через границу решения ([1]/[9]-нарушение)."
+    "en": "- True GM = (1,236,000 − 1,064,000)/1,236,000 = 172,000/1,236,000 = **13.92%** — **below** the 14% threshold. Bonus NOT earned.\n- Naive rounding to $10k: (1,240,000 − 1,060,000)/1,240,000 = 180,000/1,240,000 = **14.52%** → falsely «above the threshold». Rounding at an intermediate step pushed the result across the decision boundary.",
+    "ru": "- True GM = (1,236,000 − 1,064,000)/1,236,000 = 172,000/1,236,000 = **13.92%** — **ниже** порога 14%. Бонус НЕ заработан.\n- Наивное округление до $10k: (1,240,000 − 1,060,000)/1,240,000 = 180,000/1,240,000 = **14.52%** → ложно «выше порога». Округление на промежуточном шаге перевело результат через границу решения."
    },
    "provoked": {
     "en": "rounding rev/cogs before computing the ratio crosses the bonus threshold.",
