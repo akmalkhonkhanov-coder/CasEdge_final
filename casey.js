@@ -50,6 +50,8 @@ window.caseyCalc = (function(){
 .cy-ex-title { font-size:15px; font-weight:700; color:var(--ink,#1f2937); margin-bottom:12px; }
 .cy-ex-block { margin:0 0 16px; } .cy-ex-block:last-child { margin:0; }
 .cy-ex-bname { font-size:11.5px; font-weight:600; letter-spacing:.02em; text-transform:uppercase; color:var(--on-dark-soft,#9db3ad); margin:0 0 8px; }
+.cy-ex-foot { font-size:12.5px; color:var(--on-dark-soft,#8fa39d); font-style:italic; }
+.cy-ex-warn { font-size:13px; color:#b23b3b; background:rgba(232,124,124,.10); border:1px solid rgba(232,124,124,.35); border-radius:8px; padding:8px 11px; }
 .cy-ex-note { font-size:12px; color:var(--on-dark-soft,#8fa39d); margin-top:10px; font-style:italic; }
 .cy-tbl { width:100%; border-collapse:collapse; font-size:13.5px; }
 .cy-tbl td { padding:7px 10px; border-bottom:1px solid var(--sv-line,rgba(255,255,255,.06)); color:var(--on-dark,#eaf2f0); }
@@ -289,7 +291,13 @@ window.caseyCalc = (function(){
       else if (b.type === 'line' || b.type === 'cohort_line') body = lineSVG(b);
       else if (b.type === 'stacked_bar') body = stackedSVG(b);
       else if (b.type === 'pie') body = pieSVG(b);
-      else body = b.rows ? tableHTML(b) : '';           // degrade_to table
+      // Text-only blocks shipped with the 2.0 package: a footnote under an
+      // exhibit and a warning about the data. They carry no `rows`, so the old
+      // fallback rendered them as NOTHING — the candidate silently lost the
+      // caveat the case sometimes turns on.
+      else if (b.type === 'footnote') body = '<div class="cy-ex-foot">' + esc2(b.text || '') + '</div>';
+      else if (b.type === 'warning') body = '<div class="cy-ex-warn">' + esc2(b.text || '') + '</div>';
+      else body = b.rows ? tableHTML(b) : (b.text ? '<div class="cy-ex-note">' + esc2(b.text) + '</div>' : '');   // degrade_to table
     } catch (e) { body = b.rows ? tableHTML(b) : '<div class="cy-ex-note">[exhibit]</div>'; }
     return '<div class="cy-ex-block">' + (b.name ? '<div class="cy-ex-bname">' + esc2(b.name) + '</div>' : '') +
       '<div class="cy-chart">' + body + '</div>' +
