@@ -399,7 +399,12 @@ window.caseyCalc = (function(){
         var correct = r.correctIdx || [];
         (q.options||[]).forEach(function(o, i){ var el = document.querySelector('#cyIz .cy-opt[data-i="' + i + '"]'); if (!el) return; if (correct.indexOf(i) >= 0) el.classList.add('correct'); else if (sel.indexOf(i) >= 0) el.classList.add('wrong'); });
         if (r.ok) S.score++;
-        fb(!!r.ok, (r.ok ? '<b>✓ Correct.</b> ' : '<b>Not quite.</b> ') + 'Verified against: ' + esc2(r.validation || ''));
+        // "Verified against:" used to print the prose validation sentence. With
+        // structured validation the server sends nothing there on purpose (the
+        // rule IS the answer key), so the label must not be rendered empty —
+        // "Not quite. Verified against:" with a blank tail reads like a bug.
+        fb(!!r.ok, (r.ok ? '<b>✓ Correct.</b>' : '<b>Not quite.</b>') +
+           (r.validation ? ' Verified against: ' + esc2(r.validation) : ''));
         setTimeout(advance, 500);
       });
       return;
@@ -411,7 +416,15 @@ window.caseyCalc = (function(){
       gradeStep(q.gid, { value: raw }).then(function(r){
         if (r._err){ fb(false, '<b>Connection issue.</b> Could not reach the grader — moving on.'); return void setTimeout(advance, 500); }
         if (r.ok) S.score++;
-        var expl = r.answer_explain ? '<div style="margin-top:6px">' + md(r.answer_explain) + '</div>' : '';
+        // The verdict line already prints the number. Most explanations still
+        // open with "**Answer: 800000** — ", so the candidate reads the same
+        // figure three times before the reasoning starts. Strip that prefix at
+        // render: it is presentation, not content, and the data stays untouched.
+        // Strip ONLY when the prefix repeats the number itself ("**Answer: 800000** — ").
+        // A prose verdict like "**Answer: No — the reversal is absent.**" is content
+        // and must survive, so the pattern requires a numeric payload.
+        var ex = String(r.answer_explain || '').replace(/^\s*\*\*Answer:\s*[-+]?[\d.,\s$%]+\*\*\s*(?:—|-|:)?\s*/i, '');
+        var expl = ex ? '<div style="margin-top:6px">' + md(ex) + '</div>' : '';
         fb(!!r.ok, (r.ok ? '<b>✓ ' + esc2(r.answer) + '</b> — correct.' : '<b>Not quite — the answer is ' + esc2(r.answer) + '.</b>') + expl);
         setTimeout(advance, 600);
       });
