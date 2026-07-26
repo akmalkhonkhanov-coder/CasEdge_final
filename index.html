@@ -2990,6 +2990,9 @@ function startDrill() {
   if (state.drillType === 'Market Sizing' && window.MarketSizingDrills) { return window.MarketSizingDrills.open(); }
   if (state.drillType === 'Structuring' && window.StructuringDrills) { return window.StructuringDrills.open(); }
   if (state.drillType === 'Brainstorm' && window.BrainstormDrills) { return window.BrainstormDrills.open(); }
+  // CI wired 2026-07-26: 48/48 slots with reference + checklist. Before this the
+  // card fell through to the improvising engine — no verified numbers, no key.
+  if (state.drillType === 'Chart Interpretation' && window.ChartDrills) { return window.ChartDrills.open(); }
   brGate('drill', _startDrillReal);
 }
 async function _startDrillReal() {

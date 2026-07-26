@@ -59,6 +59,14 @@
 .cm-ref-h { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--coral,#5db8a6); margin-bottom:8px; }
 .cm-ref-body { font-size:13.8px; line-height:1.65; color:var(--ink,#28303c); } .cm-ref-body b { color:var(--ink,#1f2937); }
 .cm-ref-body p { margin:0 0 7px; } .cm-ref-body p:last-child { margin:0; }
+.cm-exh-sub { font-size:12.5px; font-weight:700; color:var(--ink,#28303c); margin:12px 0 6px; }
+.cm-exh-sub:first-child { margin-top:0; }
+/* ASCII-графики CI нарисованы пробелами: любой перенос ломает картинку.
+   Моноширинный шрифт + горизонтальный скролл вместо переноса. */
+.cm-ascii { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:12px; line-height:1.45;
+  white-space:pre; overflow-x:auto; margin:8px 0; padding:10px 12px; border-radius:8px;
+  background:rgba(93,184,166,.06); color:var(--ink,#28303c); }
+.cm-exh-note { font-size:13px; line-height:1.6; color:var(--ink,#28303c); margin:8px 0; }
 .cm-trap { font-size:12.5px; color:var(--on-dark-soft,#8fa39d); font-style:italic; margin-top:10px; }
 `;
   var SCREEN = `<div class="cm-top">
@@ -173,6 +181,37 @@
     return h + '</tbody></table>';
   }
 
+  // Two exhibit shapes live in the libraries:
+  //   legacy  {header, rows}                     — CM / MS / ST
+  //   parts   {title, parts:[{type,…}]}          — CI, where one exhibit is a
+  //           sequence of blocks: `table`, `text` (markdown lines) and `ascii`
+  //           (a drawn chart that MUST keep its own spacing — hence <pre>).
+  // Anything unknown is skipped rather than dumped raw: a chart the candidate
+  // cannot read is worse than no chart.
+  function partsHTML(parts) {
+    var out = '';
+    (parts || []).forEach(function (p) {
+      if (!p) return;
+      if (p.type === 'table') out += tableHTML(p);
+      else if (p.type === 'ascii') out += '<pre class="cm-ascii">' + esc2((p.lines || []).join('\n')) + '</pre>';
+      else if (p.type === 'text') out += '<div class="cm-exh-note">' + (p.lines || []).map(mdi).join('<br>') + '</div>';
+    });
+    return out;
+  }
+  function exhibitHTML(ex) {
+    if (!ex) return '';
+    if (ex.blocks) {                       // multi-exhibit slot: Exhibit A / B / C
+      return (ex.blocks || []).map(function (b) {
+        return (b && b.title ? '<div class="cm-exh-sub">' + esc2(b.title) + '</div>' : '') + partsHTML(b && b.parts);
+      }).join('');
+    }
+    if (ex.parts) return (ex.title ? '<div class="cm-exh-sub">' + esc2(ex.title) + '</div>' : '') + partsHTML(ex.parts);
+    return ex.rows ? tableHTML(ex) : '';
+  }
+  function hasExhibit(ex) {
+    return !!(ex && (ex.rows || (ex.parts && ex.parts.length) || (ex.blocks && ex.blocks.length)));
+  }
+
   /* ---------- libraries ---------- */
   // Two curated libraries share this one thin client. 'cm' = Case Math (default),
   // 'ms' = Market Sizing. The server picks the library from the `set` field.
@@ -180,7 +219,8 @@
     cm: { set: 'cm', label: 'Case Math · Drills',      rec: 'Case Math',     doneKey: 'casedge_cmdrills_done', complete: 'every Case Math drill in this batch' },
     ms: { set: 'ms', label: 'Market Sizing · Drills',  rec: 'Market Sizing', doneKey: 'casedge_msdrills_done', complete: 'every Market Sizing drill in this batch' },
     st: { set: 'st', label: 'Structuring · Drills',    rec: 'Structuring',   doneKey: 'casedge_stdrills_done', complete: 'every Structuring drill in this batch' },
-    br: { set: 'br', label: 'Brainstorm · Drills',     rec: 'Brainstorm',    doneKey: 'casedge_brdrills_done', complete: 'every Brainstorm drill in this batch' }
+    br: { set: 'br', label: 'Brainstorm · Drills',     rec: 'Brainstorm',    doneKey: 'casedge_brdrills_done', complete: 'every Brainstorm drill in this batch' },
+    ci: { set: 'ci', label: 'Chart Interpretation · Drills', rec: 'Chart Interpretation', doneKey: 'casedge_cidrills_done', complete: 'every Chart Interpretation drill in this batch' }
   };
 
   /* ---------- state ---------- */
@@ -191,7 +231,7 @@
 
   /* ---------- flow ---------- */
   function open(lib) {
-    S.lib = (lib === 'ms' || lib === 'st' || lib === 'br') ? lib : 'cm';
+    S.lib = LIBS[lib] ? lib : 'cm';
     inject();
     var lbl = E('cmLbl'); if (lbl) lbl.textContent = cfg().label;
     if (typeof showScreen === 'function') showScreen('cmdrill');
@@ -237,18 +277,21 @@
       '<div class="cm-title">' + esc2(d.title || 'Drill') + '</div>' +
       '<div class="cm-prompt">' + md(d.prompt || '') + '</div>' +
       ((d.facts && d.facts.length) ? '<div class="cm-steps"><div class="cm-sh">Facts</div><ul>' + d.facts.map(function (s) { return '<li>' + mdi(s) + '</li>'; }).join('') + '</ul></div>' : '') +
-      (d.exhibit && d.exhibit.rows ? '<div class="cm-exh"><div class="cm-exh-name">Exhibit</div>' + tableHTML(d.exhibit) + '</div>' : '') +
+      (hasExhibit(d.exhibit) ? '<div class="cm-exh"><div class="cm-exh-name">Exhibit</div>' + exhibitHTML(d.exhibit) + '</div>' : '') +
       (d.exhibit_withheld ? '<div class="cm-steps"><div class="cm-sh">Exhibit — locked</div><div class="cm-hint">Build your MECE tree first. The data is released only after you commit — its whole point is to test whether your framework survives contact with it.</div></div>' : '') +
       ((d.step_prompts && d.step_prompts.length) ? '<div class="cm-steps"><div class="cm-sh">Solve</div><ol>' + d.step_prompts.map(function (s) { return '<li>' + mdi(s) + '</li>'; }).join('') + '</ol></div>' : '') +
       '</div>';
     feed(html);
     var isST = (d.type || '') === 'Structuring';
     var isBR = (d.type || '') === 'Brainstorm';
+    var isCI = S.lib === 'ci';
     var ph = isBR ? 'List your options — one per line. Tie each to a fact. Lead with the load-bearing idea, not a reflex.'
                   : isST ? 'Build your MECE tree: name each top branch and one line on why it belongs. State which branch you attack first and your criterion.'
+                  : isCI ? 'Read the exhibit: the ONE insight that matters, what it implies for the business, and the next thing you would check.'
                   : 'Show your numbers and your one-sentence recommendation…';
     var hint = isBR ? (d.cull ? 'Give your options; a new fact will then test them.' : 'Options tied to the facts — quality over volume.')
                     : isST ? 'List your branches (MECE), justify each, and pick a defensible starting branch.'
+                    : isCI ? 'Do not describe the chart — extract the insight, tie it to a business implication, name the next check.'
                     : 'Give the number(s) the drill asks for, then your read of the trap.';
     iz('<textarea class="cm-ta" id="cmTa" placeholder="' + esc2(ph) + '"></textarea>' +
        '<div class="cm-row"><span class="cm-hint">' + esc2(hint) + '</span>' +
@@ -292,8 +335,8 @@
       feed('<div class="cm-fb ' + (ok ? 'ok' : 'no') + '">' + (ok ? '<b>✓ Pass.</b> ' : '<b>Not quite.</b> ') + esc2(r.coaching || '') + '</div>');
       // ST E-after: the exhibit is released only now — show it before the debrief
       // so the candidate sees how the data breaks (or confirms) the tree they built.
-      if (r.exhibit && r.exhibit.rows) {
-        feed('<div class="cm-exh"><div class="cm-exh-name">Exhibit — released</div>' + tableHTML(r.exhibit) + '</div>');
+      if (hasExhibit(r.exhibit)) {
+        feed('<div class="cm-exh"><div class="cm-exh-name">Exhibit — released</div>' + exhibitHTML(r.exhibit) + '</div>');
       }
       var ref = L(r.reference); var prov = L(r.provoked);
       feed('<div class="cm-ref"><div class="cm-ref-h">Reference solution</div><div class="cm-ref-body">' + md(ref || '') + '</div>' +
@@ -315,8 +358,9 @@
     }
     var ok = !!r.pass;
     feed('<div class="cm-fb ' + (ok ? 'ok' : 'no') + '">' + (ok ? '<b>✓ Pass.</b> ' : '<b>Not quite.</b> ') + esc2(r.coaching || '') + '</div>');
-    var ref = L(r.reference);
-    if (ref) feed('<div class="cm-ref"><div class="cm-ref-h">Model answer</div><div class="cm-ref-body">' + md(ref) + '</div></div>');
+    var ref = L(r.reference), prov = L(r.provoked);
+    if (ref) feed('<div class="cm-ref"><div class="cm-ref-h">Model answer</div><div class="cm-ref-body">' + md(ref) + '</div>' +
+                  (prov ? '<div class="cm-trap"><b>Trap:</b> ' + esc2(prov) + '</div>' : '') + '</div>');
     saveDone(d.id);
     try { if (typeof recordSession === 'function') recordSession('drill', cfg().rec); } catch (e) {}
     nextButton();
@@ -341,4 +385,5 @@
   window.MarketSizingDrills = { open: function () { return open('ms'); }, exit: exit, _submit: _submit, _next: _next };
   window.StructuringDrills = { open: function () { return open('st'); }, exit: exit, _submit: _submit, _next: _next };
   window.BrainstormDrills = { open: function () { return open('br'); }, exit: exit, _submit: _submit, _submitCull: _submitCull, _next: _next };
+  window.ChartDrills = { open: function () { return open('ci'); }, exit: exit, _submit: _submit, _next: _next };
 })();
