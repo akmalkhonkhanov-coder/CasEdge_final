@@ -72,6 +72,14 @@
     [data-theme="light"] .input-el { border-color: rgba(31,41,55,.12); }
     [data-theme="light"] .stat-sep { background: rgba(31,41,55,.15); }
     [data-theme="light"] .ai .msg-bbl { background: #fbf8f2; border-color: rgba(31,41,55,.12); }
+    /* ASCII-схемы в теле кейса: пропорциональный шрифт и перенос убивают
+       картинку целиком. Моноширинный + white-space:pre + горизонтальный скролл. */
+    .md-pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12.5px;
+      line-height: 1.45; white-space: pre; overflow-x: auto; margin: 10px 0; padding: 12px 14px;
+      border-radius: 8px; background: rgba(93,184,166,.07); border: 1px solid var(--sv-line);
+      color: var(--on-dark); }
+    .md-code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .92em;
+      background: rgba(255,255,255,.08); padding: 1px 5px; border-radius: 4px; }
     [data-theme="light"] .msg-bbl .md-table { border-color: rgba(31,41,55,.15); }
     [data-theme="light"] .msg-bbl .md-table td { border-color: rgba(31,41,55,.08); }
     [data-theme="light"] .feat-pill { border-color: rgba(31,41,55,.12); color: rgba(31,41,55,.5); }
@@ -2276,6 +2284,7 @@
       <div class="nav-menu">
         <button class="nav-link" onclick="chooseMode('case')" data-i18n="nav.cases">Cases</button>
         <button class="nav-link" onclick="chooseMode('drill')" data-i18n="nav.drills">Drills</button>
+        <button class="nav-link" onclick="showScreen('setup')" data-i18n="nav.games">Games</button>
         <button class="nav-link" onclick="goToProgress()" data-i18n="nav.progress">Progress</button>
         <button class="nav-link" onclick="goToPage('faq')" data-i18n="nav.faq">FAQ</button>
         <button class="nav-link" onclick="goToPage('contact')" data-i18n="nav.contact">Contact</button>
@@ -2356,6 +2365,7 @@
       <div class="nav-menu">
         <button class="nav-link" onclick="chooseMode('case')" data-i18n="nav.cases">Cases</button>
         <button class="nav-link" onclick="chooseMode('drill')" data-i18n="nav.drills">Drills</button>
+        <button class="nav-link" onclick="showScreen('setup')" data-i18n="nav.games">Games</button>
         <button class="nav-link active" onclick="goToProgress()" data-i18n="nav.progress">Progress</button>
         <button class="nav-link" onclick="goToPage('faq')" data-i18n="nav.faq">FAQ</button>
         <button class="nav-link" onclick="goToPage('contact')" data-i18n="nav.contact">Contact</button>
@@ -2377,6 +2387,10 @@
         <div class="prog-stat">
           <div class="prog-stat-num" id="progTotalDrills">0</div>
           <div class="prog-stat-lbl">Drills completed</div>
+        </div>
+        <div class="prog-stat">
+          <div class="prog-stat-num" id="progTotalGames">0</div>
+          <div class="prog-stat-lbl">Games played</div>
         </div>
         <div class="prog-stat">
           <div class="prog-stat-num" id="progStreak">0</div>
@@ -2513,6 +2527,7 @@
       <div class="nav-menu">
         <button class="nav-link" onclick="chooseMode('case')" data-i18n="nav.cases">Cases</button>
         <button class="nav-link" onclick="chooseMode('drill')" data-i18n="nav.drills">Drills</button>
+        <button class="nav-link" onclick="showScreen('setup')" data-i18n="nav.games">Games</button>
         <button class="nav-link" onclick="goToProgress()" data-i18n="nav.progress">Progress</button>
       </div>
       <button class="lang-btn" onclick="openLangMenu()"><span class="lang-current">EN</span> ▾</button>
@@ -3267,6 +3282,7 @@ const I18N = {
     'l2.footer.copy': '\u00a9 2026 CasEdge. An independent trainer for interview prep.',
     'nav.cases': 'Cases',
     'nav.drills': 'Drills',
+    'nav.games': 'Games',
     'nav.progress': 'Progress',
     'nav.pricing': 'Pricing',
     'nav.faq': 'FAQ',
@@ -5192,6 +5208,12 @@ function rkResult(inner, foot) {
   let correct = 0, naive = 0;
   ids.forEach(x => { const s = solve.rkGraded[x.id]; if (s === 'correct') correct++; if (s === 'naive') naive++; });
   const total = ids.length, pct = total ? Math.round(correct / total * 100) : 0;
+  // Redrock не писал прогресс вообще — игра завершалась и исчезала. Пишем один
+  // раз на игру: повторный рендер экрана результата не должен множить счётчик.
+  if (!solve._recorded) {
+    solve._recorded = true;
+    try { if (typeof recordSession === 'function') recordSession('game', 'McKinsey Solve', total ? Math.round(correct / total * 100) / 10 : undefined); } catch (e) {}
+  }
   const rows = ['Analysis', 'Report', 'Cases'].map(grp => {
     const gg = ids.filter(x => x.grp === grp), ok = gg.filter(x => solve.rkGraded[x.id] === 'correct').length;
     return `<div class="rk-res-row"><span>${grp}</span><b>${ok}/${gg.length}</b></div>`;
@@ -6401,7 +6423,10 @@ function loadProgress() {
     const raw = localStorage.getItem(PROG_KEY);
     p = raw ? JSON.parse(raw) : null;
   } catch (e) { /* sandbox or corrupt */ }
-  if (!p) p = { cases: 0, drills: 0, drillsByType: {}, scores: [], days: [], lastDay: null };
+  if (!p) p = { cases: 0, drills: 0, games: 0, gamesByType: {}, drillsByType: {}, scores: [], days: [], lastDay: null };
+  // backward-compat: у существующих пользователей счётчика игр не было
+  if (typeof p.games !== 'number') p.games = 0;
+  if (!p.gamesByType) p.gamesByType = {};
   // backward-compat: ensure per-dimension history exists for existing users
   if (!p.dims) p.dims = { structure: [], quant: [], logic: [], comm: [], ownership: [] };
   ['structure','quant','logic','comm','ownership'].forEach(k => {
@@ -6416,7 +6441,15 @@ function saveProgress(p) {
 // dims optional: { structure, quant, logic, comm, ownership } each 1-10.
 function recordSession(kind, label, score, dims) {
   const p = loadProgress();
+  // 2026-07-27: игры (BCG Chat Game / McKinsey Solve) не считались НИГДЕ.
+  // Casey писался как 'case' и растворялся среди кейсов библиотеки, Redrock
+  // не писался вовсе. По прайсу это отдельный продукт (Game Pass) — и счётчик
+  // у него отдельный.
   if (kind === 'case') p.cases++;
+  else if (kind === 'game') {
+    p.games++;
+    p.gamesByType[label] = (p.gamesByType[label] || 0) + 1;
+  }
   else {
     p.drills++;
     p.drillsByType[label] = (p.drillsByType[label] || 0) + 1;
@@ -6495,8 +6528,11 @@ function renderPath() {
     }
     const pct = Math.max(0, Math.min(100, (avg / 10) * 100));
     const rawGap = PATH_TARGET - avg;
-    const gap = Math.round(rawGap * 2) / 2; // round to nearest 0.5
-    const met = gap <= 0;
+    // Округление к 0.5 — ТОЛЬКО для показа. Раньше met считался от округлённого
+    // разрыва, и 7.9 против цели 8.0 давало gap 0.1 → 0.0 → зелёную галочку
+    // «цель взята». Вся полоса 7.75–8.00 отмечалась как достигнутая.
+    const met = rawGap <= 0;
+    const gap = Math.max(0.1, Math.round(rawGap * 2) / 2); // показ: не даём +0.0
     if (!met) gaps.push({ label: d.label, gap });
     // Show the actual current score prominently, with the gap to target as a small note.
     const gapTxt = met
@@ -6528,6 +6564,7 @@ function renderProgress() {
   const total = p.cases + p.drills;
   setText('progTotalCases', p.cases);
   setText('progTotalDrills', p.drills);
+  setText('progTotalGames', p.games || 0);
   setText('progStreak', computeStreak(p.days));
   const avg = p.scores.length ? (p.scores.reduce((a,b)=>a+b,0)/p.scores.length) : null;
   setText('progAvgScore', avg !== null ? avg.toFixed(1) : '-');
@@ -8170,7 +8207,22 @@ function esc(str) {
 function mdToHtml(raw) {
   let t = esc(raw);
 
-  // ── Tables first (before hr/br rules touch the pipes) ──
+  // ── Fenced code blocks FIRST ──────────────────────────────────────────────
+  // 2026-07-27. Раньше их не было вообще: ``` доезжали до экрана буквально,
+  // а каждая строка внутри превращалась в <br> и переносилась пропорциональным
+  // шрифтом. Любая ASCII-схема (дерево источников пациентов, полосовой график)
+  // расползалась в кашу — ровно тот же дефект, что чинили в CI-дриллах.
+  // Блоки вынимаются ДО остальных правил: иначе * и _ внутри диаграммы
+  // превратятся в курсив, а | — в таблицу.
+  const _fences = [];
+  t = t.replace(/```[a-zA-Z0-9_-]*\n?([\s\S]*?)```/g, function (_m, body) {
+    _fences.push(body.replace(/\n+$/, ''));
+    return '\u0000FENCE' + (_fences.length - 1) + '\u0000';
+  });
+  // Инлайновый `код` — тем же проходом, чтобы обратные кавычки не доезжали.
+  t = t.replace(/`([^`\n]+)`/g, '<code class="md-code">$1</code>');
+
+  // ── Tables (before hr/br rules touch the pipes) ──
   // Detect blocks of consecutive lines that look like a markdown table:
   //   | A | B |
   //   |---|---|
@@ -8210,6 +8262,10 @@ function mdToHtml(raw) {
   t = t.replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
   // Remove stray <br> immediately around tables
   t = t.replace(/(<br>\s*)*<table/g, '<table').replace(/<\/table>(\s*<br>)*/g, '</table>');
+  // Возвращаем схемы на место — моноширинным, без переносов, со скроллом.
+  t = t.replace(/(?:<br>)?\u0000FENCE(\d+)\u0000(?:<br>)?/g, function (_m, i) {
+    return '<pre class="md-pre">' + _fences[Number(i)] + '</pre>';
+  });
   return t;
 }
 

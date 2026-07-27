@@ -7,7 +7,11 @@
   "use strict";
 
   /* ---------- inject CSS + screen ---------- */
-  var CSS = `#screen-cmdrill { position:fixed; inset:0; z-index:50; height:100vh; height:100dvh; overflow:hidden; background:var(--surface-dark); display:none; flex-direction:column; }
+  var CSS = `
+/* 2026-07-27: --ink — цвет ТЕКСТА НА СВЕТЛОМ. В тёмной теме (она по умолчанию)
+   --ink = #141413, а фон экрана --surface-dark = #181715: чёрным по чёрному.
+   Экран строился под светлую тему. Текст на тёмных поверхностях берёт --on-dark. */
+#screen-cmdrill { position:fixed; inset:0; z-index:50; height:100vh; height:100dvh; overflow:hidden; background:var(--surface-dark); display:none; flex-direction:column; }
 #screen-cmdrill.active { display:flex; }
 #cmFeed { flex:1; overflow-y:auto; padding:22px 16px 28px; display:flex; flex-direction:column; }
 /* A drill is not a chat. The feed used to stretch full height with the card
@@ -19,7 +23,7 @@
 .cm-wrap { max-width:760px; }
 .cm-top { display:flex; align-items:center; gap:12px; padding:12px 16px; border-bottom:1px solid var(--sv-line,rgba(31,41,55,.12)); background:var(--surface-dark-elevated,#fbf8f2); }
 .cm-top .cm-x { background:none; border:none; font-size:22px; line-height:1; color:var(--on-dark-soft,#5b6472); cursor:pointer; }
-.cm-top .cm-lbl { font-size:13px; font-weight:700; color:var(--ink,#1f2937); }
+.cm-top .cm-lbl { font-size:13px; font-weight:700; color:var(--on-dark,#faf9f5); }
 .cm-top .cm-prog { margin-left:14px; font-size:12px; color:var(--on-dark-soft,#9db3ad); }
 /* SOFT TIMER: counts up, shows the drill's own budget, and never interrupts.
    The chip promised "6 MIN" with no clock at all — pressure is half of what an
@@ -31,42 +35,42 @@
 .cm-card { background:var(--surface-dark-elevated,#16241f); border:1px solid var(--sv-line,rgba(255,255,255,.08)); border-radius:14px; padding:18px; margin:0 0 16px; }
 .cm-meta { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
 .cm-tag { font-size:10.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; padding:3px 9px; border-radius:999px; background:rgba(93,184,166,.12); color:var(--coral,#5db8a6); }
-.cm-tag.trap { background:rgba(232,124,124,.12); color:#c9564a; } .cm-tag.clean { background:rgba(95,191,107,.14); color:#3f9a4c; }
-.cm-title { font-size:18px; font-weight:800; color:var(--ink,#1f2937); margin:0 0 10px; }
-.cm-prompt { font-size:15px; line-height:1.65; color:var(--ink,#28303c); } .cm-prompt b { color:var(--ink,#1f2937); }
+.cm-tag.trap { background:rgba(232,124,124,.12); color:#ef9a9a; } .cm-tag.clean { background:rgba(95,191,107,.14); color:#7fd68e; }
+.cm-title { font-size:18px; font-weight:800; color:var(--on-dark,#faf9f5); margin:0 0 10px; }
+.cm-prompt { font-size:15px; line-height:1.65; color:var(--on-dark,#faf9f5); } .cm-prompt b { color:var(--on-dark,#faf9f5); }
 .cm-exh { margin:16px 0 6px; }
 .cm-exh-name { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--coral,#5db8a6); margin-bottom:8px; }
 .cm-tbl { width:100%; border-collapse:collapse; font-size:13.5px; }
-.cm-tbl th, .cm-tbl td { padding:8px 10px; border-bottom:1px solid var(--sv-line,rgba(31,41,55,.10)); color:var(--ink,#28303c); text-align:left; }
+.cm-tbl th, .cm-tbl td { padding:8px 10px; border-bottom:1px solid var(--sv-line,rgba(31,41,55,.10)); color:var(--on-dark,#faf9f5); text-align:left; }
 .cm-tbl th { font-weight:700; color:var(--on-dark-soft,#6b7c76); font-size:11.5px; text-transform:uppercase; letter-spacing:.03em; }
 .cm-tbl td:not(:first-child), .cm-tbl th:not(:first-child) { text-align:right; font-variant-numeric:tabular-nums; }
 .cm-steps { margin:14px 0 0; padding:12px 14px; background:rgba(93,184,166,.06); border-radius:10px; }
 .cm-steps .cm-sh { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--on-dark-soft,#6b7c76); margin-bottom:6px; }
-.cm-steps ol { margin:0; padding-left:20px; } .cm-steps li { font-size:14px; line-height:1.55; color:var(--ink,#28303c); margin:2px 0; }
+.cm-steps ol { margin:0; padding-left:20px; } .cm-steps li { font-size:14px; line-height:1.55; color:var(--on-dark,#faf9f5); margin:2px 0; }
 #cmInput { border-top:1px solid var(--sv-line,rgba(31,41,55,.12)); background:var(--surface-dark-elevated,#fbf8f2); padding:14px 16px; }
 .cm-iz { max-width:760px; margin:0 auto; }
-.cm-ta { width:100%; min-height:88px; max-height:44vh; resize:vertical; overflow-y:auto; background:var(--surface-dark-soft,#efe9dd); border:1.5px solid var(--sv-line,rgba(31,41,55,.16)); border-radius:12px; padding:12px 14px; color:var(--ink,#1f2937); font-size:15px; font-family:inherit; line-height:1.5; box-sizing:border-box; }
+.cm-ta { width:100%; min-height:88px; max-height:44vh; resize:vertical; overflow-y:auto; background:var(--surface-dark-soft,#efe9dd); border:1.5px solid var(--sv-line,rgba(31,41,55,.16)); border-radius:12px; padding:12px 14px; color:var(--on-dark,#faf9f5); font-size:15px; font-family:inherit; line-height:1.5; box-sizing:border-box; }
 .cm-ta:focus { outline:none; border-color:var(--coral,#5db8a6); }
 .cm-row { display:flex; justify-content:space-between; align-items:center; margin-top:10px; gap:10px; }
 .cm-hint { font-size:12.5px; color:var(--on-dark-soft,#9db3ad); }
 .cm-btn { background:var(--coral,#5db8a6); color:#04201b; border:none; border-radius:11px; padding:12px 24px; font-size:14.5px; font-weight:700; cursor:pointer; }
 .cm-btn:disabled { opacity:.45; cursor:default; } .cm-btn.ghost { background:transparent; color:var(--coral,#5db8a6); border:1.5px solid rgba(93,184,166,.45); }
 .cm-fb { border-radius:12px; padding:13px 15px; margin:0 0 16px; font-size:14px; line-height:1.6; }
-.cm-fb.ok { background:rgba(95,191,107,.10); border:1px solid rgba(95,191,107,.4); color:#2f7d3a; }
-.cm-fb.no { background:rgba(232,124,124,.10); border:1px solid rgba(232,124,124,.4); color:#b23b3b; }
-.cm-fb b { color:var(--ink,#1f2937); }
+.cm-fb.ok { background:rgba(95,191,107,.10); border:1px solid rgba(95,191,107,.4); color:#7fd68e; }
+.cm-fb.no { background:rgba(232,124,124,.10); border:1px solid rgba(232,124,124,.4); color:#ef9a9a; }
+.cm-fb b { color:var(--on-dark,#faf9f5); }
 .cm-ref { background:var(--surface-dark-elevated,#16241f); border:1px solid var(--sv-line,rgba(31,41,55,.10)); border-radius:12px; padding:15px 16px; margin:0 0 16px; }
 .cm-ref-h { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--coral,#5db8a6); margin-bottom:8px; }
-.cm-ref-body { font-size:13.8px; line-height:1.65; color:var(--ink,#28303c); } .cm-ref-body b { color:var(--ink,#1f2937); }
+.cm-ref-body { font-size:13.8px; line-height:1.65; color:var(--on-dark,#faf9f5); } .cm-ref-body b { color:var(--on-dark,#faf9f5); }
 .cm-ref-body p { margin:0 0 7px; } .cm-ref-body p:last-child { margin:0; }
-.cm-exh-sub { font-size:12.5px; font-weight:700; color:var(--ink,#28303c); margin:12px 0 6px; }
+.cm-exh-sub { font-size:12.5px; font-weight:700; color:var(--on-dark,#faf9f5); margin:12px 0 6px; }
 .cm-exh-sub:first-child { margin-top:0; }
 /* ASCII-графики CI нарисованы пробелами: любой перенос ломает картинку.
    Моноширинный шрифт + горизонтальный скролл вместо переноса. */
 .cm-ascii { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:12px; line-height:1.45;
   white-space:pre; overflow-x:auto; margin:8px 0; padding:10px 12px; border-radius:8px;
-  background:rgba(93,184,166,.06); color:var(--ink,#28303c); }
-.cm-exh-note { font-size:13px; line-height:1.6; color:var(--ink,#28303c); margin:8px 0; }
+  background:rgba(93,184,166,.06); color:var(--on-dark,#faf9f5); }
+.cm-exh-note { font-size:13px; line-height:1.6; color:var(--on-dark,#faf9f5); margin:8px 0; }
 .cm-trap { font-size:12.5px; color:var(--on-dark-soft,#8fa39d); font-style:italic; margin-top:10px; }
 `;
   var SCREEN = `<div class="cm-top">
@@ -321,7 +325,7 @@
       // ideas the new fact kills — the whole point is the fact breaking their list.
       if (r && r.stage === 'cull') {
         S.move1 = r.move1Answer != null ? r.move1Answer : answer;
-        feed('<div class="cm-fb ok" style="background:rgba(93,184,166,.10);border-color:rgba(93,184,166,.4);color:var(--ink,#28303c)"><b>Now the twist.</b> A new fact just landed. Your options are in — see which ones survive it.</div>');
+        feed('<div class="cm-fb ok" style="background:rgba(93,184,166,.10);border-color:rgba(93,184,166,.4);color:var(--on-dark,#faf9f5)"><b>Now the twist.</b> A new fact just landed. Your options are in — see which ones survive it.</div>');
         feed('<div class="cm-ref"><div class="cm-ref-h">New fact</div><div class="cm-ref-body">' + md(r.cull && r.cull.new_fact || '') + '</div></div>');
         var teams = (r.cull && r.cull.team_ideas) || [];
         feed('<div class="cm-steps"><div class="cm-sh">The client team proposed</div><ol>' + teams.map(function (t) { return '<li>' + esc2(t) + '</li>'; }).join('') + '</ol></div>');
