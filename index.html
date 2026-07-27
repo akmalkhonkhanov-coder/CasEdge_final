@@ -834,6 +834,9 @@
        INTERVIEW
     ══════════════════════════════════════════════════ */
     #screen-interview { height: 100vh; height: 100dvh; overflow: hidden; }
+    /* Название кейса бывает длинным — плашка не должна распирать шапку. */
+    #b-user { max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    @media (max-width: 720px) { #b-user { max-width: 150px; } }
 
     /* ══════════ BCG CHAT GAME ══════════ */
     #screen-bcg { height: 100vh; height: 100dvh; overflow: hidden; background: var(--surface-dark); }
@@ -989,7 +992,7 @@
     .resp-timer.warn .rt-zone { color: var(--accent-amber); }
     .resp-timer.over .rt-zone { color: var(--coral); }
     .rt-bar { position: relative; }
-    .rt-bar::after { content: ''; position: absolute; top: -2px; bottom: -2px; left: 50%; width: 1px; background: rgba(255,255,255,.28); }
+    .rt-bar::after { content: ''; position: absolute; top: -2px; bottom: -2px; left: var(--rt-split, 25%); width: 1px; background: rgba(255,255,255,.28); }
     [data-theme="light"] .rt-bar::after { background: rgba(31,41,55,.25); }
     .rt-icon { flex-shrink: 0; opacity: .8; }
     .rt-time { font-variant-numeric: tabular-nums; font-weight: 600; min-width: 34px; letter-spacing: .3px; }
@@ -2742,6 +2745,10 @@
     <div class="int-badges">
       <span class="pill pill-neutral" id="fb-firm">McKinsey</span>
       <span class="pill pill-neutral" id="fb-type">Profitability</span>
+      <!-- Настоящее название кейса — каламбурное и часто выдающее развязку —
+           показывается ТОЛЬКО здесь, на разборе, когда кейс уже пройден.
+           До и во время кейса в шапке стоит нейтральное «Case #N». -->
+      <span class="pill pill-coral" id="fb-case" style="max-width:340px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
     </div>
   </nav>
 
@@ -3034,7 +3041,7 @@ async function _startDrillReal() {
   const chat = document.getElementById('chat-area');
   document.getElementById('b-firm').textContent = 'Drill';
   document.getElementById('b-type').textContent = state.drillType;
-  document.getElementById('b-user').textContent = state.userName.split(' ')[0] || 'You';
+  setSessionBadge('');   // дрилл — кейса нет
   chat.innerHTML = '<div class="typing" id="typing-ind"><div class="msg-av" style="background:rgba(93,184,166,.14);color:var(--coral);font-family:var(--font-display);">I</div><div class="typing-bbl"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>';
   setProgress(10);
   showScreen('interview');
@@ -6933,9 +6940,10 @@ async function startLibraryCase(caseId) {
 
   document.getElementById('b-firm').textContent  = state.firm;
   document.getElementById('b-type').textContent  = meta.case_type || state.caseType;
-  document.getElementById('b-user').textContent  = state.userName.split(' ')[0] || 'You';
+  setSessionBadge(state.caseId);
   document.getElementById('fb-firm').textContent = state.firm;
   document.getElementById('fb-type').textContent = meta.case_type || state.caseType;
+  setDebriefCaseTitle();
 
   const chat = document.getElementById('chat-area');
   chat.innerHTML = `
@@ -6976,9 +6984,10 @@ async function _startInterviewReal() {
 
   document.getElementById('b-firm').textContent  = state.firm;
   document.getElementById('b-type').textContent  = state.caseType;
-  document.getElementById('b-user').textContent  = state.userName.split(' ')[0] || 'You';
+  setSessionBadge(state.caseId);
   document.getElementById('fb-firm').textContent = state.firm;
   document.getElementById('fb-type').textContent = state.caseType;
+  setDebriefCaseTitle();
 
   const chat = document.getElementById('chat-area');
   chat.innerHTML = `
@@ -7557,14 +7566,25 @@ const DRILL_TIME = {
   'Chart Interpretation': 90, 'Brainstorm': 90,
   'Synthesis': 75, 'Behavioral': 120
 };
-// 2026-07-26: 90s не хватало на синтез — кандидат физически не успевал
-// написать рекомендацию из четырёх блоков. Лимит удвоен; смысл таймера
-// перенесён с "успей" на "перестань думать и начни отвечать" (см. ZONE_SPLIT).
-const CASE_RESP_TIME = 180;
-// Доля лимита, отведённая на обдумывание. После неё дорожка желтеет и подпись
-// говорит прямо: на реальном интервью ты бы уже отвечал.
-const ZONE_SPLIT = 0.5;
-const RT_ZONE_TXT = { think: 'обдумывание', speak: 'уже отвечай', over: 'партнёр ждёт' };
+// Таймер ответа в кейсе — две зоны, решение владельца 27.07.
+//
+//   0:00 ─── 1:30 ── 2:00
+//   │           │      │
+//   │           │      └ дальше овертайм: считается в оценку Communication
+//   │           └ последние 30 секунд — ДОБАВКА НА ПЕЧАТЬ. На реальном
+//   │             интервью её нет, там ты уже говоришь.
+//   └ 1:30 — столько времени у тебя есть на настоящем интервью: подумать,
+//     посчитать и выдать ответ. Это и есть тренируемая величина.
+//
+// Раньше стояло 90 секунд на всё скопом, и кандидат физически не успевал
+// напечатать синтез из четырёх блоков — таймер наказывал за скорость набора,
+// а не за скорость мышления.
+const CASE_INTERVIEW_TIME = 90;          // реальное интервью
+const CASE_TYPING_BONUS  = 30;           // добавка на набор текста
+const CASE_RESP_TIME = CASE_INTERVIEW_TIME + CASE_TYPING_BONUS;   // 120
+// Граница зон в долях ОСТАТКА: жёлтый включается, когда осталось ≤ добавки.
+const ZONE_SPLIT = CASE_TYPING_BONUS / CASE_RESP_TIME;            // 0.25
+const RT_ZONE_TXT = { think: 'interview time', speak: '+30s to type', over: 'over' };
 let _rt = { id: null, left: 0, limit: 0 };
 
 function fmtTime(s) {
@@ -7602,6 +7622,9 @@ function startRespTimer() {
   if (hp) hp.style.display = 'none';
   _rt.left = limit; _rt.limit = limit;
   wrap.style.display = 'flex';
+  // Дриллы живут по своим лимитам — засечка считается от фактического.
+  const bar = wrap.querySelector('.rt-bar');
+  if (bar) bar.style.setProperty('--rt-split', (ZONE_SPLIT * 100).toFixed(1) + '%');
   rtPaint(wrap, limit, limit);
   timeEl.textContent = fmtTime(limit);
   fill.style.width = '100%';
@@ -8267,6 +8290,46 @@ function mdToHtml(raw) {
     return '<pre class="md-pre">' + _fences[Number(i)] + '</pre>';
   });
   return t;
+}
+
+// Третья плашка в шапке интервью. Раньше там стояло имя кандидата («You») —
+// строка, не несущая ничего: кандидат и так знает, кто он.
+//
+// Название кейса сюда ставить НЕЛЬЗЯ, хотя первым делом хочется именно его.
+// 33 заголовка библиотеки несут ответ прямо в себе: «Elektro's $18 Saving Per
+// Order Is Really $6.82», «Panorama Asked the Wrong 60 Advertisers»,
+// «Workgate's Onboarding Lifts Retention 23 Points. It Doesn't.» Показать такой
+// заголовок кандидату — выдать разгадку до первого вопроса.
+// Поэтому здесь нейтральный номер: он опознаёт сессию (скриншот, возврат во
+// вкладку, ссылка на кейс в разборе) и не говорит ничего о содержании.
+function setSessionBadge(caseId) {
+  const el = document.getElementById('b-user');
+  if (!el) return;
+  if (caseId != null && caseId !== '') {
+    el.textContent = 'Case #' + caseId;
+    el.title = '';
+  } else {
+    el.textContent = (state.userName || '').split(' ')[0] || 'You';
+    el.title = '';
+  }
+}
+
+// Настоящее (каламбурное) название кейса. Показывается только на разборе:
+// половина заголовков библиотеки называет развязку, поэтому до финиша их
+// видеть нельзя, а после — это половина удовольствия и то, по чему кейс
+// потом вспоминают.
+function setDebriefCaseTitle() {
+  const el = document.getElementById('fb-case');
+  if (!el) return;
+  const t = (state.caseTitle || '').toString().trim();
+  if (t && state.caseId != null) {
+    el.textContent = 'Case #' + state.caseId + ' — ' + t;
+    el.title = t;
+    el.style.display = '';
+  } else {
+    el.textContent = '';
+    el.style.display = 'none';
+  }
 }
 
 function setText(id, val) {
