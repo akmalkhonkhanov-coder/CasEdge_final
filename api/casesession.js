@@ -30,8 +30,16 @@ const CASE_MODEL = 'claude-sonnet-5';   // fixed server-side; client cannot choo
 // тем длиннее блок размышления. 2500 на это не хватало.
 // Ориентир взят из соседнего пути: api/claude.js держит пол 5000 ровно по той
 // же причине и на том же ходу не падает.
-const MAX_TOKENS = 6000;
-const MAX_TOKENS_RETRY = 12000;
+// Потолок + ЯВНЫЙ бюджет размышления. Без второго первый бесполезен: модель
+// расширяет размышление до потолка, и счёт растёт вместе с ним. Кейс владельца
+// 27.07 сжёг ~$0.39 при ориентире $0.12 — почти всё ушло в thinking-блоки,
+// которые тарифицируются как выход.
+// budget_tokens < max_tokens по контракту API; остаток гарантированно
+// достаётся тексту ответа.
+const MAX_TOKENS = 4000;
+const THINK_BUDGET = 1024;      // минимально осмысленный; текст получает ≥2976
+const MAX_TOKENS_RETRY = 8000;
+const THINK_BUDGET_RETRY = 2048;
 const MAX_BODY_BYTES = 200 * 1024;      // 200 KB request cap
 const RATE_LIMIT = 30;                  // requests per user per window
 const RATE_WINDOW_MS = 60 * 1000;
@@ -704,15 +712,8 @@ export default async function handler(req, res) {
 
     // 7) Forward to Anthropic. Two system blocks: the STABLE case body is cached
     // (identical every turn → cache hit); the VOLATILE step block is not.
-    const callModel = async (maxTok, timeoutMs, retries) => fetchAnthropicWithRetry('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': process.env.ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
-        'anthropic-beta': 'prompt-caching-2024-07-31'
-      },
-      body: JSON.stringify({
+    const buildBody = (maxTok, thinkBudget) => {
+      const b = {
         model: CASE_MODEL,
         max_tokens: maxTok,
         system: [
@@ -720,8 +721,38 @@ export default async function handler(req, res) {
           { type: 'text', text: built.volatile }
         ],
         messages: convo
-      })
+      };
+      if (thinkBudget) b.thinking = { type: 'enabled', budget_tokens: thinkBudget };
+      return JSON.stringify(b);
+    };
+    const post = (payload, timeoutMs, retries) => fetchAnthropicWithRetry('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': process.env.ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01',
+        'anthropic-beta': 'prompt-caching-2024-07-31'
+      },
+      body: payload
     }, timeoutMs != null ? timeoutMs : UPSTREAM_TIMEOUT_MS, retries != null ? retries : 4);
+
+    // Явный бюджет размышления — новый параметр для этого пути. Если апстрим
+    // его не принимает, один раз повторяем БЕЗ него: лучше дороже, чем мёртвый
+    // кейс. Отказ печатается в лог, чтобы это не жило молча.
+    let _thinkOff = false;
+    const callModel = async (maxTok, timeoutMs, retries, thinkBudget) => {
+      const budget = _thinkOff ? 0 : (thinkBudget || 0);
+      let resp = await post(buildBody(maxTok, budget), timeoutMs, retries);
+      if (budget && resp.status === 400) {
+        const txt = await resp.clone().text().catch(() => '');
+        if (/thinking|budget_tokens/i.test(txt)) {
+          console.error('case-session: upstream rejected thinking budget, falling back:', txt.slice(0, 200));
+          _thinkOff = true;
+          resp = await post(buildBody(maxTok, 0), timeoutMs, retries);
+        }
+      }
+      return resp;
+    };
 
     const extractText = (data) => Array.isArray(data && data.content)
       ? data.content.filter(b => b && b.type === 'text' && typeof b.text === 'string').map(b => b.text).join('\n').trim()
@@ -731,7 +762,7 @@ export default async function handler(req, res) {
     const BUDGET_MS = 52 * 1000;
     let response;
     try {
-      response = await callModel(MAX_TOKENS, 45 * 1000, 1);
+      response = await callModel(MAX_TOKENS, 45 * 1000, 1, THINK_BUDGET);
     } catch (e) {
       return res.status(504).json({ error: { message: 'The interviewer is taking too long. Please try again.' } });
     }
@@ -743,6 +774,17 @@ export default async function handler(req, res) {
       return res.status(response.status).json({ error: { message: 'The interviewer is busy right now. Please try again.' } });
     }
 
+    // Расход печатается всегда: пока его нет в логах, любой разговор о
+    // стоимости — гадание. u.output_tokens включает thinking.
+    if (data && data.usage) {
+      const u = data.usage;
+      console.log('case-session usage', JSON.stringify({
+        case: caseObj.id, step: stepIndex,
+        in: u.input_tokens, out: u.output_tokens,
+        cache_read: u.cache_read_input_tokens, cache_write: u.cache_creation_input_tokens,
+        stop: data.stop_reason
+      }));
+    }
     let text = extractText(data);
     // Rare failure mode: the model spends the ENTIRE budget on a thinking block
     // (stop_reason max_tokens, no text). One automatic retry with more headroom.
@@ -750,7 +792,7 @@ export default async function handler(req, res) {
     if (!text && data && data.stop_reason === 'max_tokens' && timeLeft > 12 * 1000) {
       console.error('case-session: thinking consumed budget, retrying with', MAX_TOKENS_RETRY, 'timeLeft', timeLeft);
       try {
-        const resp2 = await callModel(MAX_TOKENS_RETRY, timeLeft - 2000, 0);
+        const resp2 = await callModel(MAX_TOKENS_RETRY, timeLeft - 2000, 0, THINK_BUDGET_RETRY);
         if (resp2.status >= 200 && resp2.status < 300) {
           data = await resp2.json();
           text = extractText(data);

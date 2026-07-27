@@ -13,6 +13,11 @@ const FALLBACK_ORIGIN = 'https://cas-edge-final.vercel.app';
 const ALLOWED_MODELS = ['claude-sonnet-5', 'claude-sonnet-4-5'];
 const MAX_TOKENS_CAP = 8000;       // hard ceiling; Russian feedback JSON is ~2x token-heavier than English
 const MIN_TOKENS = 5000;           // floor so large JSON outputs (incl. Russian feedback) never truncate
+// 2026-07-27. Пол в 5000 защищал ТЕКСТ от обрезания, но ничего не говорил про
+// размышление — и модель тратила на него сколько хотела, а тарифицируется оно
+// как выход. Явный бюджет: думание ограничено, весь остаток гарантированно
+// достаётся JSON'у, ради которого пол и вводили.
+const THINK_BUDGET = 1024;
 const MAX_BODY_BYTES = 200 * 1024; // 200 KB request cap
 const RATE_LIMIT = 30;             // requests per user per window
 const RATE_WINDOW_MS = 60 * 1000;  // 1-minute window
@@ -149,6 +154,10 @@ export default async function handler(req, res) {
     // are unaffected.
     const reqTokens = (typeof body.max_tokens === 'number' && body.max_tokens > 0) ? body.max_tokens : 1000;
     body.max_tokens = Math.min(Math.max(reqTokens, MIN_TOKENS), MAX_TOKENS_CAP);
+    // budget_tokens обязан быть меньше max_tokens
+    if (!body.thinking && body.max_tokens > THINK_BUDGET + 512) {
+      body.thinking = { type: 'enabled', budget_tokens: THINK_BUDGET };
+    }
 
     // 5) Prompt caching on the system prompt (saves ~70% on input tokens).
     if (body.system && typeof body.system === 'string') {
@@ -180,11 +189,29 @@ export default async function handler(req, res) {
     let response;
     try {
       response = await callModel(body, 50 * 1000, 0);
+      // Если апстрим не принимает бюджет размышления — один повтор без него.
+      // Лучше дороже, чем мёртвая скоркарта. Отказ печатается, не молчит.
+      if (response.status === 400 && body.thinking) {
+        const txt = await response.clone().text().catch(() => '');
+        if (/thinking|budget_tokens/i.test(txt)) {
+          console.error('claude.js: upstream rejected thinking budget, falling back:', txt.slice(0, 200));
+          const noThink = { ...body }; delete noThink.thinking;
+          response = await callModel(noThink, 50 * 1000, 0);
+        }
+      }
     } catch (e) {
       return res.status(504).json({ error: { message: 'The grader is taking too long. Please try again.' } });
     }
 
     let data = await response.json();
+    if (data && data.usage) {
+      const u = data.usage;
+      console.log('claude.js usage', JSON.stringify({
+        in: u.input_tokens, out: u.output_tokens,
+        cache_read: u.cache_read_input_tokens, cache_write: u.cache_creation_input_tokens,
+        max: body.max_tokens, stop: data.stop_reason
+      }));
+    }
     // Rare failure mode: the model spends the entire max_tokens budget on a
     // thinking block and returns no text (stop_reason max_tokens). One
     // automatic retry with extra headroom fixes it.
