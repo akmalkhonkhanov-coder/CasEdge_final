@@ -21,8 +21,17 @@ const CASES_DATA = require('./_cases.json');
 
 const FALLBACK_ORIGIN = 'https://cas-edge-final.vercel.app';
 const CASE_MODEL = 'claude-sonnet-5';   // fixed server-side; client cannot choose
-const MAX_TOKENS = 2500;        // headroom: the model may spend a thinking block before the text
-const MAX_TOKENS_RETRY = 4000;  // one automatic retry if thinking ate the whole budget
+// 2026-07-27. Прод-логи по двум подряд провалам на финальном синтезе:
+//   stop_reason: max_tokens, blocks: ["thinking"]  — и на первом вызове, и на ретрае.
+// То есть модель СЪЕДАЛА ВЕСЬ бюджет размышлением и не писала ни одного слова
+// ответа. Кандидат отдал развёрнутую рекомендацию и получил «No response was
+// returned» — дважды подряд, на самом важном шаге кейса.
+// Чем длиннее транскрипт и чем труднее ход (синтез в конце — самый трудный),
+// тем длиннее блок размышления. 2500 на это не хватало.
+// Ориентир взят из соседнего пути: api/claude.js держит пол 5000 ровно по той
+// же причине и на том же ходу не падает.
+const MAX_TOKENS = 6000;
+const MAX_TOKENS_RETRY = 12000;
 const MAX_BODY_BYTES = 200 * 1024;      // 200 KB request cap
 const RATE_LIMIT = 30;                  // requests per user per window
 const RATE_WINDOW_MS = 60 * 1000;
@@ -753,6 +762,13 @@ export default async function handler(req, res) {
         ? JSON.stringify({ type: data.type, stop_reason: data.stop_reason, blocks: Array.isArray(data.content) ? data.content.map(b => b && b.type) : typeof data.content, err: data.error && data.error.type }).slice(0, 300)
         : String(data).slice(0, 200);
       console.error('case-session empty text from upstream:', shape);
+    }
+    // Пустой текст после ретрая — это НЕ ответ интервьюера, и подсовывать
+    // кандидату строку-заглушку вместо реплики нельзя: он видит её как слова
+    // интервьюера и теряет свой ход. Отдаём 503 — клиент на нём делает ещё
+    // одну попытку сам, а если и она пуста, показывает честную ошибку.
+    if (!text) {
+      return res.status(503).json({ error: { message: 'The interviewer stalled on that one. Send your answer again — it is still in the box.' } });
     }
     const parsed = parseMarkers(text, priorRevealed);
 
