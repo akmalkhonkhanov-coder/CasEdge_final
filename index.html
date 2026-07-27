@@ -973,6 +973,16 @@
     /* Chat input */
     .chat-footer { padding: 14px 28px 20px; border-top: 1px solid rgba(255,255,255,.06); flex-shrink: 0; }
     .resp-timer { display: flex; align-items: center; gap: 8px; margin-bottom: 11px; color: var(--on-dark-soft); font-size: 12px; }
+    /* Две зоны ответа. Зона 1 — обдумывание (teal). Зона 2 — на реальном
+       интервью ты бы уже говорил (amber). Овертайм — coral. Граница зон
+       нарисована засечкой на дорожке, чтобы кандидат видел её ЗАРАНЕЕ,
+       а не узнавал по смене цвета постфактум. */
+    .rt-zone { flex-shrink: 0; font-size: 11px; letter-spacing: .2px; opacity: .85; white-space: nowrap; }
+    .resp-timer.warn .rt-zone { color: var(--accent-amber); }
+    .resp-timer.over .rt-zone { color: var(--coral); }
+    .rt-bar { position: relative; }
+    .rt-bar::after { content: ''; position: absolute; top: -2px; bottom: -2px; left: 50%; width: 1px; background: rgba(255,255,255,.28); }
+    [data-theme="light"] .rt-bar::after { background: rgba(31,41,55,.25); }
     .rt-icon { flex-shrink: 0; opacity: .8; }
     .rt-time { font-variant-numeric: tabular-nums; font-weight: 600; min-width: 34px; letter-spacing: .3px; }
     .rt-bar { flex: 1; height: 3px; border-radius: 2px; background: rgba(255,255,255,.08); overflow: hidden; }
@@ -1055,7 +1065,10 @@
       background: var(--surface-dark-elevated); border: 1px solid rgba(255,255,255,.08);
       border-radius: var(--radius-lg); padding: 22px 20px;
     }
-    .m-lbl { font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--on-dark-soft); margin-bottom: 12px; }
+    .m-lbl { font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--on-dark-soft); margin-bottom: 12px;
+             /* CASE OWNERSHIP — единственный заголовок в две строки; без пола
+                высоты он сдвигал цифру, полоску и подпись вниз на всю плитку. */
+             min-height: 28px; }
     .m-val { font-family: var(--font-display); font-size: 40px; font-weight: 400; letter-spacing: -.8px; color: var(--on-dark); line-height: 1; margin-bottom: 10px; }
     .m-bar { height: 3px; background: rgba(255,255,255,.07); border-radius: 2px; overflow: hidden; margin-bottom: 9px; }
     .m-fill { height: 100%; border-radius: 2px; transition: width 1.1s ease .5s; }
@@ -2688,6 +2701,7 @@
       <svg class="rt-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2 2M9 2h6"></path></svg>
       <span class="rt-time" id="respTimerTime">1:30</span>
       <div class="rt-bar"><div class="rt-fill" id="respTimerFill"></div></div>
+      <span class="rt-zone" id="respTimerZone"></span>
       <!-- "Need a hint?" button removed 2026-07-25: no interview offers you a hint.
            A candidate who needs one asks for it in their own words, and the engine's
            hint policy answers in the flow. requestHelp()/helpHintForContext() are
@@ -3054,16 +3068,26 @@ async function callAI(system, messages, model) {
     const headers = { 'Content-Type': 'application/json' };
     const token = await freshToken();
     if (token) headers['Authorization'] = 'Bearer ' + token;
-    const response = await fetch('/api/claude', {
-      method: 'POST',
-      headers: headers,
-      body: JSON.stringify({
-        model: model || 'claude-sonnet-5',
-        max_tokens: 1000,
-        system: system,
-        messages: messages
-      })
-    });
+    // 2026-07-26: fetch без signal ждёт вечно. Если функция Vercel упёрлась
+    // в свой лимит 60s, клиент об этом не узнаёт никогда — экран «Scoring your
+    // case…» крутится бесконечно. Обрываем на 62s: чуть больше серверного
+    // лимита, чтобы не убивать ответ, который вот-вот придёт.
+    const _ac = new AbortController();
+    const _kill = setTimeout(() => _ac.abort(), 62000);
+    let response;
+    try {
+      response = await fetch('/api/claude', {
+        method: 'POST',
+        headers: headers,
+        signal: _ac.signal,
+        body: JSON.stringify({
+          model: model || 'claude-sonnet-5',
+          max_tokens: 1000,
+          system: system,
+          messages: messages
+        })
+      });
+    } finally { clearTimeout(_kill); }
     let data = {};
     try { data = await response.json(); } catch (e) { data = {}; }
     return { status: response.status, data: data };
@@ -7496,13 +7520,36 @@ const DRILL_TIME = {
   'Chart Interpretation': 90, 'Brainstorm': 90,
   'Synthesis': 75, 'Behavioral': 120
 };
-const CASE_RESP_TIME = 90; // 1.5 min per answer
+// 2026-07-26: 90s не хватало на синтез — кандидат физически не успевал
+// написать рекомендацию из четырёх блоков. Лимит удвоен; смысл таймера
+// перенесён с "успей" на "перестань думать и начни отвечать" (см. ZONE_SPLIT).
+const CASE_RESP_TIME = 180;
+// Доля лимита, отведённая на обдумывание. После неё дорожка желтеет и подпись
+// говорит прямо: на реальном интервью ты бы уже отвечал.
+const ZONE_SPLIT = 0.5;
+const RT_ZONE_TXT = { think: 'обдумывание', speak: 'уже отвечай', over: 'партнёр ждёт' };
 let _rt = { id: null, left: 0, limit: 0 };
 
 function fmtTime(s) {
   const neg = s < 0; s = Math.abs(s);
   const m = Math.floor(s / 60), ss = s % 60;
   return (neg ? '+' : '') + m + ':' + String(ss).padStart(2, '0');
+}
+
+// Одна точка правды по зонам: и стартовый тик, и возобновление после паузы
+// зовут её, чтобы цвет и подпись не разъезжались.
+function rtPaint(wrap, left, limit) {
+  const zoneEl = document.getElementById('respTimerZone');
+  if (left <= 0) {
+    wrap.classList.add('over'); wrap.classList.remove('warn');
+    if (zoneEl) zoneEl.textContent = RT_ZONE_TXT.over;
+  } else if (left <= limit * ZONE_SPLIT) {
+    wrap.classList.add('warn'); wrap.classList.remove('over');
+    if (zoneEl) zoneEl.textContent = RT_ZONE_TXT.speak;
+  } else {
+    wrap.classList.remove('warn', 'over');
+    if (zoneEl) zoneEl.textContent = RT_ZONE_TXT.think;
+  }
 }
 function startRespTimer() {
   const limit = state.drillType ? (DRILL_TIME[state.drillType] || 90) : CASE_RESP_TIME;
@@ -7518,7 +7565,7 @@ function startRespTimer() {
   if (hp) hp.style.display = 'none';
   _rt.left = limit; _rt.limit = limit;
   wrap.style.display = 'flex';
-  wrap.classList.remove('warn', 'over');
+  rtPaint(wrap, limit, limit);
   timeEl.textContent = fmtTime(limit);
   fill.style.width = '100%';
   _rt.id = setInterval(() => {
@@ -7526,8 +7573,7 @@ function startRespTimer() {
     timeEl.textContent = fmtTime(_rt.left);
     const pct = Math.max(0, (_rt.left / _rt.limit) * 100);
     fill.style.width = pct + '%';
-    if (_rt.left <= 0) { wrap.classList.add('over'); wrap.classList.remove('warn'); }
-    else if (_rt.left <= _rt.limit * 0.33) { wrap.classList.add('warn'); }
+    rtPaint(wrap, _rt.left, _rt.limit);
     // stop counting down past -60 to avoid silly numbers
     if (_rt.left <= -60) stopRespTimer();
   }, 1000);
@@ -7604,8 +7650,7 @@ function resumeRespTimer() {
     timeEl.textContent = fmtTime(_rt.left);
     const pct = Math.max(0, (_rt.left / _rt.limit) * 100);
     fill.style.width = pct + '%';
-    if (_rt.left <= 0) { wrap.classList.add('over'); wrap.classList.remove('warn'); }
-    else if (_rt.left <= _rt.limit * 0.33) { wrap.classList.add('warn'); }
+    rtPaint(wrap, _rt.left, _rt.limit);
     if (_rt.left <= -60) stopRespTimer();
   }, 1000);
 }
