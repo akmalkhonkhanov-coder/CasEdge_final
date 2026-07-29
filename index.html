@@ -2897,22 +2897,68 @@ function updateAuthUI() {
     } else { p.textContent = ''; p.style.cssText = ''; p.onclick = null; }
   });
 }
+
+/* ─────────── СЛИЯНИЕ ПРОГРЕССА МЕЖДУ УСТРОЙСТВАМИ ───────────────────────────
+   Было: облако ПЕРЕЗАПИСЫВАЛО локальное, а push писал локальное поверх облака.
+   Классический last-writer-wins: заходишь с другого ноутбука, где локально
+   пусто, делаешь одну сессию — и push затирает в облаке всю историю первого
+   устройства. Владелец видел 18 кейсов на маке и 3 на рабочем.
+   Стало: обе стороны сливаются, ни одна не теряется.
+     счётчики   — максимум (они монотонно растут)
+     истории    — длинная выигрывает (append-only, короткая всегда её префикс)
+     дни streak — объединение дат
+     по типам   — максимум по каждому ключу
+   push теперь сначала читает облако, сливает и только потом пишет — это
+   закрывает окно, в котором два устройства затирали друг друга. */
+function mergeProgress(a, b) {
+  a = a || {}; b = b || {};
+  const num = (x, y) => Math.max(Number(x) || 0, Number(y) || 0);
+  const longer = (x, y) => (Array.isArray(x) ? x : []).length >= (Array.isArray(y) ? y : []).length
+    ? (Array.isArray(x) ? x : []) : (Array.isArray(y) ? y : []);
+  const mapMax = (x, y) => {
+    const out = { ...(x || {}) };
+    Object.keys(y || {}).forEach(k => { out[k] = num(out[k], y[k]); });
+    return out;
+  };
+  const dims = {};
+  ['structure','quant','logic','comm','ownership'].forEach(k => {
+    dims[k] = longer((a.dims || {})[k], (b.dims || {})[k]);
+  });
+  const days = Array.from(new Set([...(a.days || []), ...(b.days || [])])).sort();
+  return {
+    cases: num(a.cases, b.cases),
+    drills: num(a.drills, b.drills),
+    games: num(a.games, b.games),
+    drillsByType: mapMax(a.drillsByType, b.drillsByType),
+    gamesByType: mapMax(a.gamesByType, b.gamesByType),
+    scores: longer(a.scores, b.scores),
+    days: days,
+    lastDay: days.length ? days[days.length - 1] : null,
+    dims: dims
+  };
+}
+function cloudRowToProgress(d) {
+  return {
+    cases: d.cases_completed || 0,
+    drills: d.drills_completed || 0,
+    games: d.games_played || 0,
+    drillsByType: d.drills_by_type || {},
+    gamesByType: d.games_by_type || {},
+    scores: d.scores || [],
+    days: d.streak_days || [],
+    dims: d.dims || { structure: [], quant: [], logic: [], comm: [], ownership: [] }
+  };
+}
 // Pull progress from cloud → merge into local view
 async function syncProgressFromCloud() {
   if (!sb || !currentUser) return;
   try {
     const { data, error } = await sb.from('profiles').select('*').eq('id', currentUser.id).single();
     if (data) {
-      const local = {
-        cases: data.cases_completed || 0,
-        drills: data.drills_completed || 0,
-        drillsByType: data.drills_by_type || {},
-        scores: data.scores || [],
-        days: data.streak_days || [],
-        lastDay: (data.streak_days && data.streak_days.length) ? data.streak_days[data.streak_days.length-1] : null,
-        dims: data.dims || { structure: [], quant: [], logic: [], comm: [], ownership: [] }
-      };
-      saveProgress(local);
+      // СЛИЯНИЕ, а не замена: локальная история этого устройства могла быть
+      // длиннее облачной, и терять её нельзя.
+      const merged = mergeProgress(loadProgress(), cloudRowToProgress(data));
+      saveProgress(merged);
       // Restore seen-case ids (adaptive picker) — union cloud with local so nothing is lost.
       if (Array.isArray(data.seen_case_ids)) {
         try {
@@ -2927,9 +2973,15 @@ async function syncProgressFromCloud() {
 // Push local progress → cloud
 async function pushProgressToCloud() {
   if (!sb || !currentUser) return;
-  const p = loadProgress();
+  let p = loadProgress();
   try {
-    await sb.from('profiles').update({
+    // Сначала читаем облако и сливаем — иначе это устройство затрёт историю
+    // другого. Чтение дешёвое, а потеря прогресса — нет.
+    try {
+      const { data } = await sb.from('profiles').select('*').eq('id', currentUser.id).single();
+      if (data) { p = mergeProgress(p, cloudRowToProgress(data)); saveProgress(p); }
+    } catch (e) { /* нет связи — пишем то, что есть */ }
+    const base = {
       cases_completed: p.cases,
       drills_completed: p.drills,
       drills_by_type: p.drillsByType,
@@ -2937,7 +2989,16 @@ async function pushProgressToCloud() {
       streak_days: p.days,
       dims: p.dims,
       updated_at: new Date().toISOString()
-    }).eq('id', currentUser.id);
+    };
+    // Колонок под игры в таблице может ещё не быть. Postgres валит ВЕСЬ update
+    // при неизвестной колонке — то есть одна недостающая колонка убила бы
+    // сохранение всего прогресса. Пробуем с ними, при отказе пишем без них.
+    const withGames = { ...base, games_played: p.games || 0, games_by_type: p.gamesByType || {} };
+    let r = await sb.from('profiles').update(withGames).eq('id', currentUser.id);
+    if (r && r.error) {
+      console.warn('progress push: games columns missing, writing without them', r.error.message);
+      await sb.from('profiles').update(base).eq('id', currentUser.id);
+    }
   } catch (e) { console.warn('cloud push failed', e); }
 }
 
