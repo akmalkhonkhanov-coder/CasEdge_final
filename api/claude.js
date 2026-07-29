@@ -17,7 +17,17 @@ const MIN_TOKENS = 5000;           // floor so large JSON outputs (incl. Russian
 // размышление — и модель тратила на него сколько хотела, а тарифицируется оно
 // как выход. Явный бюджет: думание ограничено, весь остаток гарантированно
 // достаётся JSON'у, ради которого пол и вводили.
-const THINK_BUDGET = 1024;
+// Форма управления размышлением. Замер 29.07: `thinking:{type:'enabled',
+// budget_tokens}` эта модель НЕ принимает — апстрим отвечает 400 и называет
+// замену: thinking.type.adaptive + output_config.effort. Пока стояла старая
+// форма, каждый вызов делал два запроса: отвергнутый и откат, а размышление
+// не ограничивалось вовсе.
+const EFFORT_MODES = [
+  { thinking: { type: 'adaptive' }, output_config: { effort: 'low' } },
+  { thinking: { type: 'adaptive' } },
+  null
+];
+let _effortMode = 0;
 const MAX_BODY_BYTES = 200 * 1024; // 200 KB request cap
 const RATE_LIMIT = 30;             // requests per user per window
 const RATE_WINDOW_MS = 60 * 1000;  // 1-minute window
@@ -154,10 +164,7 @@ export default async function handler(req, res) {
     // are unaffected.
     const reqTokens = (typeof body.max_tokens === 'number' && body.max_tokens > 0) ? body.max_tokens : 1000;
     body.max_tokens = Math.min(Math.max(reqTokens, MIN_TOKENS), MAX_TOKENS_CAP);
-    // budget_tokens обязан быть меньше max_tokens
-    if (!body.thinking && body.max_tokens > THINK_BUDGET + 512) {
-      body.thinking = { type: 'enabled', budget_tokens: THINK_BUDGET };
-    }
+    if (!body.thinking && EFFORT_MODES[_effortMode]) Object.assign(body, EFFORT_MODES[_effortMode]);
 
     // 5) Prompt caching on the system prompt (saves ~70% on input tokens).
     if (body.system && typeof body.system === 'string') {
@@ -189,15 +196,16 @@ export default async function handler(req, res) {
     let response;
     try {
       response = await callModel(body, 50 * 1000, 0);
-      // Если апстрим не принимает бюджет размышления — один повтор без него.
-      // Лучше дороже, чем мёртвая скоркарта. Отказ печатается, не молчит.
-      if (response.status === 400 && body.thinking) {
+      // Спускаемся по формам, пока апстрим не примет. Лучше дороже, чем
+      // мёртвая скоркарта; каждый отказ печатается, молча не живёт.
+      while (response.status === 400 && _effortMode < EFFORT_MODES.length - 1) {
         const txt = await response.clone().text().catch(() => '');
-        if (/thinking|budget_tokens/i.test(txt)) {
-          console.error('claude.js: upstream rejected thinking budget, falling back:', txt.slice(0, 200));
-          const noThink = { ...body }; delete noThink.thinking;
-          response = await callModel(noThink, 50 * 1000, 0);
-        }
+        if (!/thinking|output_config|effort/i.test(txt)) break;
+        console.error('claude.js: effort mode', _effortMode, 'rejected —', txt.slice(0, 160));
+        _effortMode++;
+        delete body.thinking; delete body.output_config;
+        if (EFFORT_MODES[_effortMode]) Object.assign(body, EFFORT_MODES[_effortMode]);
+        response = await callModel(body, 50 * 1000, 0);
       }
     } catch (e) {
       return res.status(504).json({ error: { message: 'The grader is taking too long. Please try again.' } });
