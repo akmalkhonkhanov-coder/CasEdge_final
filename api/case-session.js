@@ -762,7 +762,11 @@ export default async function handler(req, res) {
     const BUDGET_MS = 52 * 1000;
     let response;
     try {
-      response = await callModel(MAX_TOKENS, 45 * 1000, 1, THINK_BUDGET);
+      // Открывающий ход НЕ оценивает: модель просто представляет кейс и молчит
+      // (verdict на нём принудительно null, markers запрещены). Думать там не над
+      // чем — режем бюджет до минимума. Это экономия без единой потери качества,
+      // в отличие от снижения бюджета на оценочных ходах.
+      response = await callModel(MAX_TOKENS, 45 * 1000, 1, isOpening ? 0 : THINK_BUDGET);
     } catch (e) {
       return res.status(504).json({ error: { message: 'The interviewer is taking too long. Please try again.' } });
     }
