@@ -151,6 +151,44 @@ export function pickCase({ caseType, level, seenIds, rand }) {
 /* ───────────────────────── marker parsing ────────────────────────────────────
    The interviewer is told to append hidden markers. We strip them from the
    text the client sees and surface them structurally. */
+
+/* ─────────── две правки, снятые с цехов, чтобы не переписывали данные ─────────
+   1) safeLabel(): `step.label` уходит в промпт интервьюера (меню шагов и «CURRENT
+      STEP»). У ~85 шагов метка называет шаг наивным — «Наивный расчёт»,
+      «🔻 NAIVE — …», «Naive scenario». Модель видит это и может произнести:
+      кандидат узнаёт, что шаг ловушечный, до того как начал считать. Чистить
+      надо здесь, а не переименовывать 85 меток в данных: метка несёт модели
+      смысл шага, а вырезать надо ровно спойлер.
+   2) stepLangNote(): язык объявлен на КЕЙС, а он бывает разный по ШАГАМ — 24
+      кейса с английским промптом и частью русских вопросов. При lang:'en' модель
+      процитирует русский вопрос англофону, без флага — перескажет английские и
+      потеряет формулировку. Обе ветки плохие. Решаем по факту: у каждого шага
+      смотрим язык его собственного `candidate_md` и говорим модели, что с ним
+      делать. Это снимает перевод 24 кейсов. */
+const LABEL_SPOILER = /naive|наивн/i;
+function safeLabel(label) {
+  let t = String(label || '').replace(/^[#\s🔻▶►*_]+/, '').trim();
+  if (!LABEL_SPOILER.test(t)) return t;
+  // Метку режем по разделителям и выбрасываем куски со спойлером. Хвост в
+  // скобках («(4 min)») сохраняем — он несёт тайминг, а не подсказку.
+  const tail = (t.match(/\((?:[^()]*\bmin\b[^()]*)\)\s*$/i) || [''])[0];
+  const kept = t.replace(/\((?:[^()]*\bmin\b[^()]*)\)\s*$/i, '')
+    .split(/\s*(?:—|–|-{1,2}|·|:|\|)\s*/)
+    .filter(part => part.trim() && !LABEL_SPOILER.test(part))
+    .join(' — ')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+  return ((kept || 'Analysis') + (tail ? ' ' + tail : '')).trim();
+}
+const HAS_CYR = /[а-яА-ЯёЁ]/;
+function stepLangNote(md) {
+  const t = String(md || '');
+  if (!t.trim()) return '';
+  return HAS_CYR.test(t)
+    ? '\n[LANGUAGE: this question is written in Russian source — ask it in natural English, keeping every number, unit and proper name exactly.]'
+    : '\n[LANGUAGE: this question is already in English — ask it VERBATIM, do not rephrase.]';
+}
+
 export function parseMarkers(text, priorRevealed) {
   const revealed = new Set(priorRevealed || []);
   let verdict = null;
@@ -413,7 +451,7 @@ ${caseObj.prompt_md || caseObj.header_md || ''}`;
     ? `\n\n════ AVAILABLE NOW — the candidate may take ANY of these, in ANY order ════
 Each block is one analysis the candidate can legitimately do next. Grade whichever they actually pursue against its ANSWER KEY. NEVER read a key aloud.\n\n` +
       unlocked.map(n => { const s = byNum.get(n) || {};
-        return `— STEP ${n} — "${s.label||''}" (yields: ${s.produces||'—'})\nQUESTION IF THEY GO HERE:\n${s.candidate_md || s.label || ''}\nANSWER KEY (hidden — grade against this):\n${s.interviewer_md || '(no explicit key — grade with MBB rigor for this step type)'}`;
+        return `— STEP ${n} — "${safeLabel(s.label)}" (yields: ${s.produces||'—'})\nQUESTION IF THEY GO HERE:\n${s.candidate_md || safeLabel(s.label) || ''}${stepLangNote(s.candidate_md)}\nANSWER KEY (hidden — grade against this):\n${s.interviewer_md || '(no explicit key — grade with MBB rigor for this step type)'}`;
       }).join('\n\n')
     : '';
 
@@ -488,9 +526,9 @@ ${caseObj.prompt_md || caseObj.header_md || ''}`;
 `\n\n════ ANSWER KEY FOR THE CURRENT STEP — NEVER READ THIS ALOUD ════
 This is grading material only. NEVER quote, paraphrase, summarise, or hand any of it to the candidate. If the step text below happens to contain the model answer or a python/solution block, speak ONLY the question part — never the solution.
 
-CURRENT STEP ${idx + 1} of ${steps.length} — "${step.label || ''}"
+CURRENT STEP ${idx + 1} of ${steps.length} — "${safeLabel(step.label)}"
 QUESTION TO ASK THE CANDIDATE:
-${step.candidate_md || step.label || ''}
+${step.candidate_md || safeLabel(step.label) || ''}${stepLangNote(step.candidate_md)}
 
 ANSWER KEY (hidden — grade against this):
 ${step.interviewer_md || '(No explicit key parsed for this step. Grade using the case prompt, the exhibits, and standard MBB rigor for a step of this type. Any answer text embedded in the question above is interviewer-side — do not read it out.)'}`;
@@ -510,7 +548,7 @@ Do NOT evaluate anything yet and do NOT emit a <verdict> marker on this opening 
   } else {
     const advance = isLast
       ? `Since this is the LAST step, do NOT ask a new question — give a brief, professional closing line and stop.`
-      : `Then transition and ask the NEXT step's question:\n"${(nextStep && (nextStep.candidate_md || nextStep.label)) || ''}"`;
+      : `Then transition and ask the NEXT step's question:\n"${(nextStep && (nextStep.candidate_md || safeLabel(nextStep.label))) || ''}"${nextStep ? stepLangNote(nextStep.candidate_md) : ''}`;
     flow =
 `\n\n════ WHAT TO DO NOW (EVALUATE) ════
 Grade the candidate's latest message against the ANSWER KEY for the current step.
