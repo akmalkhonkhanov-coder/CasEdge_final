@@ -37,9 +37,9 @@ const CASE_MODEL = 'claude-sonnet-5';   // fixed server-side; client cannot choo
 // budget_tokens < max_tokens по контракту API; остаток гарантированно
 // достаётся тексту ответа.
 const MAX_TOKENS = 4000;
-const THINK_BUDGET = 1024;      // минимально осмысленный; текст получает ≥2976
+// budget_tokens этой моделью не поддерживается — см. MODES ниже.
 const MAX_TOKENS_RETRY = 8000;
-const THINK_BUDGET_RETRY = 2048;
+
 const MAX_BODY_BYTES = 200 * 1024;      // 200 KB request cap
 const RATE_LIMIT = 30;                  // requests per user per window
 const RATE_WINDOW_MS = 60 * 1000;
@@ -712,7 +712,21 @@ export default async function handler(req, res) {
 
     // 7) Forward to Anthropic. Two system blocks: the STABLE case body is cached
     // (identical every turn → cache hit); the VOLATILE step block is not.
-    const buildBody = (maxTok, thinkBudget) => {
+    // УПРАВЛЕНИЕ РАЗМЫШЛЕНИЕМ. Замер 29.07 на живом проде показал: этот модель
+    // НЕ принимает `thinking:{type:'enabled',budget_tokens}` — апстрим отвечает
+    // 400 и прямо называет замену:
+    //   "thinking.type.enabled" is not supported for this model.
+    //   Use "thinking.type.adaptive" and "output_config.effort".
+    // До этой правки каждый ход делал ДВА http-запроса: отвергнутый и откат.
+    // Теперь сразу правильная форма, а откат остаётся страховкой на случай,
+    // если и её версия API не примет.
+    const MODES = [
+      { thinking: { type: 'adaptive' }, output_config: { effort: 'low' } },
+      { thinking: { type: 'adaptive' } },
+      null                                   // без управления — как было
+    ];
+    let _mode = 0;
+    const buildBody = (maxTok, useMode) => {
       const b = {
         model: CASE_MODEL,
         max_tokens: maxTok,
@@ -722,7 +736,7 @@ export default async function handler(req, res) {
         ],
         messages: convo
       };
-      if (thinkBudget) b.thinking = { type: 'enabled', budget_tokens: thinkBudget };
+      if (useMode && MODES[_mode]) Object.assign(b, MODES[_mode]);
       return JSON.stringify(b);
     };
     const post = (payload, timeoutMs, retries) => fetchAnthropicWithRetry('https://api.anthropic.com/v1/messages', {
@@ -736,20 +750,15 @@ export default async function handler(req, res) {
       body: payload
     }, timeoutMs != null ? timeoutMs : UPSTREAM_TIMEOUT_MS, retries != null ? retries : 4);
 
-    // Явный бюджет размышления — новый параметр для этого пути. Если апстрим
-    // его не принимает, один раз повторяем БЕЗ него: лучше дороже, чем мёртвый
-    // кейс. Отказ печатается в лог, чтобы это не жило молча.
-    let _thinkOff = false;
-    const callModel = async (maxTok, timeoutMs, retries, thinkBudget) => {
-      const budget = _thinkOff ? 0 : (thinkBudget || 0);
-      let resp = await post(buildBody(maxTok, budget), timeoutMs, retries);
-      if (budget && resp.status === 400) {
+    const callModel = async (maxTok, timeoutMs, retries, useMode) => {
+      let resp = await post(buildBody(maxTok, useMode), timeoutMs, retries);
+      // Спускаемся по списку режимов, пока апстрим не примет форму.
+      while (useMode && resp.status === 400 && _mode < MODES.length - 1) {
         const txt = await resp.clone().text().catch(() => '');
-        if (/thinking|budget_tokens/i.test(txt)) {
-          console.error('case-session: upstream rejected thinking budget, falling back:', txt.slice(0, 200));
-          _thinkOff = true;
-          resp = await post(buildBody(maxTok, 0), timeoutMs, retries);
-        }
+        if (!/thinking|output_config|effort/i.test(txt)) break;
+        console.error('case-session: mode', _mode, 'rejected —', txt.slice(0, 160));
+        _mode++;
+        resp = await post(buildBody(maxTok, useMode), timeoutMs, retries);
       }
       return resp;
     };
@@ -766,7 +775,7 @@ export default async function handler(req, res) {
       // (verdict на нём принудительно null, markers запрещены). Думать там не над
       // чем — режем бюджет до минимума. Это экономия без единой потери качества,
       // в отличие от снижения бюджета на оценочных ходах.
-      response = await callModel(MAX_TOKENS, 45 * 1000, 1, isOpening ? 0 : THINK_BUDGET);
+      response = await callModel(MAX_TOKENS, 45 * 1000, 1, !isOpening);
     } catch (e) {
       return res.status(504).json({ error: { message: 'The interviewer is taking too long. Please try again.' } });
     }
@@ -796,7 +805,7 @@ export default async function handler(req, res) {
     if (!text && data && data.stop_reason === 'max_tokens' && timeLeft > 12 * 1000) {
       console.error('case-session: thinking consumed budget, retrying with', MAX_TOKENS_RETRY, 'timeLeft', timeLeft);
       try {
-        const resp2 = await callModel(MAX_TOKENS_RETRY, timeLeft - 2000, 0, THINK_BUDGET_RETRY);
+        const resp2 = await callModel(MAX_TOKENS_RETRY, timeLeft - 2000, 0, false);
         if (resp2.status >= 200 && resp2.status < 300) {
           data = await resp2.json();
           text = extractText(data);
