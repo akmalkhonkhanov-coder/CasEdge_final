@@ -172,20 +172,20 @@
     ]
    },
    "step_prompts": [
-    "The naive comparison and its verdict.",
-    "The correct comparison and the $ effect on annual cost.",
-    "Sensitivity: at what avoidable-fixed level per contract does the decision flip?"
+    "Compare the vendor price with in-house cost per contract on a fully-loaded basis. State the annual $ gap.",
+    "Now do the comparison on an avoidable-cost basis. State the annual $ gap, and say which of the two bases should drive the decision.",
+    "Sensitivity: at what vendor price per contract does the decision flip?"
    ],
    "checklist": {
-    "en": "Credit if ALL: (1) 900 vs 780 and the +180k naive read reproduced; (2) 710 vs 970 and the −390,000 correct read (exact); (3) flip threshold = 220 (exact), solved as a dependency, not the naive value.",
-    "ru": "(1) make_avoidable=$710 и buy_total=$970 названы; (2) годовой эффект −$390,000, tolerance: exact; (3) порог $220 (не $780 и не «780−620=160»), tolerance: exact; (4) минимум одна контрольная точка проверена; (5) last mile: вывод в терминах годового P&L."
+    "en": "Credit if ALL: (1) 900 vs 780 and the +180k naive read reproduced; (2) the like-for-like read on ONE basis — relevant 710 vs 780, or total 900 vs 970, either way 70/contract — and the −105,000 annual effect (exact); (3) vendor-price threshold = 710 (exact), solved from the tie-equation as a dependency, not the full-cost 900.",
+    "ru": "(1) сравнение проведено на ОДНОЙ базе: релевантно 710 против 780 либо полностью 900 против 970 — в обоих случаях 70/контракт; (2) годовой эффект −$105,000, tolerance: exact; (3) порог по ЦЕНЕ ВЕНДОРА $710 (не полная себестоимость $900), tolerance: exact; (4) минимум одна контрольная точка проверена; (5) last mile: вывод в терминах годового P&L."
    },
    "reference": {
-    "en": "- In-house today: cost per service call built from the shown drivers; the naive make-vs-buy read compares the vendor's $780 to a fully-loaded $900, so outsourcing looks like +$180k/yr.\n- Correct: strip the UNAVOIDABLE fixed from the in-house number — the avoidable in-house cost is $710 vs the vendor's true $970 all-in (incl. transition/coordination), so keeping in-house is better; the naive framing flips it to −$390,000.\n- Dependent threshold [9b]: the vendor price at which the decision flips, solved from the tie-equation (not the naive $780), = **$220** — checked against 3 counter-points.",
-    "ru": "- Шаг 1. Naive: full 900 vs 780 → аутсорс «экономит» $120/контракт, 1,500 × 120 = $180,000/год.\n- Шаг 2. Correct: уходит только avoidable-часть: make_avoidable = 620+90 = $710; полная стоимость buy = 780 + 190 (unavoidable остаётся) = $970. Аутсорс ДОРОЖЕ на $260/контракт → **−$390,000/год**. Флип: OUTSOURCE → KEEP.\n- Шаг 3. Порог решается против той же модели ([9b-model]): avoidable x входит в ОБЕ стороны — make_avoidable(x)=620+x, buy_total(x)=780+(280−x)=1060−x. Равенство: 620+x = 1060−x → **x\\* = $220**. Контрольные точки: x=90 → KEEP (710 vs 970); x=220 → tie (840 = 840); x=250 → OUTSOURCE (870 vs 810). Наивный порог «avoidable = цене 780» неверен — он игнорирует, что unavoidable падает при росте avoidable.\n\n**Провоцируемые ошибки (2, связанные):** full-cost vs avoidable; порог против buy_price вместо buy_total с движущимся unavoidable."
+    "en": "- In-house today: cost per service call built from the shown drivers; the naive make-vs-buy read compares the vendor's $780 to a fully-loaded $900, so outsourcing looks like +$180k/yr.\n- Correct: strip the UNAVOIDABLE fixed from the in-house number — compare on ONE basis — relevant $710 in-house vs the vendor's $780, or total $900 vs $970 — either way keeping in-house is better by $70/contract, i.e. −$105,000 a year. (The old key put the $190 unavoidable on the buy side only and thereby overstated the effect 3.71×.)\n- Dependent threshold [9b]: the vendor price at which the decision flips, solved from the tie-equation (not the full-cost $900), = **$710** — checked against 3 counter-points: p=700 → OUTSOURCE (890 < 900) · p=710 → TIE (900 = 900) · p=780 → KEEP (970 > 900).",
+    "ru": "- Шаг 1. Naive: full 900 vs 780 → аутсорс «экономит» $120/контракт, 1,500 × 120 = $180,000/год.\n- Шаг 2. Correct: сравнение ведётся на ОДНОЙ базе. Релевантно: make = 620+90 = $710 против buy = $780. Либо полностью: make = 620+280 = $900 против buy = 780+190 = $970. Обе базы дают одно и то же — аутсорс ДОРОЖЕ на **$70/контракт** → **−$105,000/год**. Флип: OUTSOURCE → KEEP. (Прежний ключ клал 190 unavoidable только на сторону buy и завышал эффект в 3.71 раза.)\n- Шаг 3. Порог решается по ЦЕНЕ ВЕНДОРА ([9b-model]). Невозвратные 190 присутствуют в обоих сценариях и сокращаются, поэтому уравнение безразличия: 620+90 = p → **p\\* = $710**. Наивный порог — полная себестоимость **$900** («аутсорс выгоден, пока он дешевле нашей полной цены»), разрыв **$190**. Контрольные точки: p=700 → OUTSOURCE (890 vs 900); p=710 → tie (900 = 900); p=780 → KEEP (970 vs 900).\n\n**Провоцируемые ошибки (2, связанные):** невозвратные положены только на ОДНУ сторону сравнения (отсюда мнимые $260 и −$390,000); порог взят против полной себестоимости $900 вместо цены вендора $710."
    },
    "provoked": {
-    "en": "unavoidable fixed cost is left inside the make-vs-buy comparison.",
+    "en": "unavoidable fixed cost is put on ONE side of the make-vs-buy comparison only.",
     "ru": null
    },
    "steps": [
@@ -198,13 +198,13 @@
     {
      "prompt": "Correct comparison, annual $",
      "kind": "text",
-     "answer": "710 vs 970; -390000",
+     "answer": "710 vs 780; -105000",
      "tolerance": "exact"
     },
     {
-     "prompt": "Flip threshold for avoidable fixed",
+     "prompt": "Vendor price at which the decision flips",
      "kind": "number",
-     "answer": "220",
+     "answer": "710",
      "tolerance": "exact"
     }
    ]
@@ -516,7 +516,7 @@
    "id": "CM-008",
    "title": "Second Departure",
    "difficulty": "Medium",
-   "type": "**Clean**",
+   "type": "Clean",
    "focus": "F17(c) clean validation",
    "time": "6 min",
    "render": {
@@ -768,7 +768,7 @@
     ]
    },
    "step_prompts": [
-    "Give the true breakeven in seats and explain the trap."
+    "State CM per seat, give the breakeven in seats, and assess the finance lead's figure."
    ],
    "company": "Cloudarn",
    "industry": "SaaS",
@@ -1229,9 +1229,9 @@
   },
   {
    "id": "CM-020",
-   "title": "Clean Margins",
+   "title": "Private-Label P&L",
    "difficulty": "Medium",
-   "type": "**Clean**",
+   "type": "Clean",
    "focus": "F09(b) CLEAN reconcile",
    "time": "6 min",
    "render": "table(5) · input+choice",
@@ -1391,7 +1391,7 @@
     ]
    },
    "step_prompts": [
-    "Gross contribution of B (the naive number).",
+    "Contribution of B on its own volume and margin.",
     "Contribution lost on cannibalized A units.",
     "True net incremental contribution."
    ],
@@ -1816,7 +1816,7 @@
    "id": "CM-030",
    "title": "Franchise Check",
    "difficulty": "Easy",
-   "type": "**Clean**",
+   "type": "Clean",
    "focus": "F16(c) unit build-up CLEAN",
    "time": "4 min",
    "render": "table(5) · input+choice",
@@ -2414,7 +2414,7 @@
     ]
    },
    "step_prompts": [
-    "True breakeven + the trap."
+    "Give the breakeven in members, and assess the staff's figure."
    ],
    "company": "Delvrix",
    "industry": "Gym-subscription",
@@ -2703,7 +2703,7 @@
    "id": "CM-046",
    "title": "Allocation, Checked",
    "difficulty": "Medium",
-   "type": "**Clean**",
+   "type": "Clean",
    "focus": "F03(a)",
    "time": "6 min",
    "render": "table(5) · input+choice",
@@ -2763,7 +2763,7 @@
    "id": "CM-047",
    "title": "LTV, Fully Built",
    "difficulty": "Easy",
-   "type": "**Clean**",
+   "type": "Clean",
    "focus": "F16(c)",
    "time": "4 min",
    "render": "table(5) · input+choice",
