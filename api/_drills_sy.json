@@ -1,0 +1,1260 @@
+{
+ "type": "SY",
+ "count": 16,
+ "_meta": {
+  "set": "sy",
+  "type_string": "Synthesis",
+  "wiring": "Клиенту и серверу нужны три правки, иначе набор молча получит чужую ветку: (1) LIBS в drills.js — запись sy; (2) ветвление по d.type — ветка \"Synthesis\" для placeholder и hint; (3) реестр наборов на сервере.",
+  "facts": "Массив facts НЕ собирается намеренно: запись целиком идёт в exhibit. Колонки Роль (relevant/redundant) и branch (В1/В2) — аналитический слой, в JSON не попадают: «какой факт лишний» и «какая ветвь верна» и есть половина задания.",
+  "exhibit_mode": "E-with у всех шестнадцати: в Синтезе запись и есть материал, придержать её значит не выдать задание.",
+  "scaffold": "Поле scaffold (L1/L2/L4) — глубина лесов ответа. Движком сейчас не читается; хранится, чтобы замысел слота не потерялся.",
+  "checklist": "Собран из correct_value, naive_value и эталона тела. Пункт (1) — Минто, он же главная слабость кандидата по профилю."
+ },
+ "drills": [
+  {
+   "id": "SY-001",
+   "title": "What the Board Counts",
+   "company": "Pheldwarn",
+   "industry": "Prosthetics manufacturing",
+   "difficulty": "Easy",
+   "clean": false,
+   "focus": "S01(a)",
+   "scaffold": "L4",
+   "time": "3 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Pheldwarn makes powered knee prosthetics. Two years ago the board approved a programme to move the whole line to a new actuator. The board meets Thursday to decide whether to carry it through to launch. The board approves programmes on payback alone and does not approve anything taking five years or more. No discounting. You have the programme file. What do you tell the board?",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**Programme file — actuator transition**",
+       "1. Development and tooling already paid for: **$18.0M**. The tooling is specific to this actuator and has no resale market.",
+       "2. Still to be spent to reach launch: **$21.0M** — certification, line conversion, first production run.",
+       "3. Unit volume at launch: **60,000** per year, flat for the forecast period.",
+       "4. Contribution per unit after the transition: **$100**.",
+       "5. Contribution per unit on the current actuator: **$100**. The transition replaces a component the supplier is discontinuing.",
+       "6. The current actuator's supplier stops production in **30** months.",
+       "7. Programme headcount: **14** engineers, seconded from the standard product team.",
+       "8. The board has approved **4** programmes in the last **3** years."
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Шаг | Что делает кандидат | Куда приводит | N# |\n|---|---|---|---|\n| 1 | складывает обе суммы: программа стоит 39 000 000 | база завышена | N6 |\n| 2 | делит на годовой вклад | 6.5 года | N6 |\n| 3 | сравнивает с порогом | 6.5 > 5 | N6 |\n| 4 | «совет такое не одобрит» | не запускать | N6 |",
+    "decoy": "| id | Обманка | Почему выглядит опорой | Класс |\n|---|---|---|---|\n| d1 | вклад на единицу **до** и **после** одинаков — **100** и **100** | приглашает вывести «прироста нет, окупать нечем» и закрыть тему; на деле альтернатива не «сегодня», а «линии нет через 30 месяцев» | **Q3** |\n| d2 | совет одобрил 4 программы за 3 года | база сравнения, истинна в обеих ветвях | B3 |\n\n| # | Опора | Величина | Ложна во второй ветви? |\n|---|---|---|---|\n| 1 | решает только предстоящий расход | 21 000 000 | да |\n| 2 | годовой вклад | 6 000 000 | нет |\n| 3 | 18 000 000 невозвратны, оснастка без вторичного рынка | 18 000 000 | да |\n| 4 | вклад окупает не прирост, а **сохранение линии**: через 30 месяцев альтернатива даёт ноль | 30 · 100 | да |\n\n| # | Риск | Цифра | Внутр./внеш. |\n|---|---|---|---|\n| 1 | объём принят плоским; падение спроса растягивает 3.5 года пропорционально | 60 000 | внутренний |\n| 2 | сертификация — срок не наш; задержка сверх 30 месяцев оставляет линию без актуатора | 30 | внешний |\n\n| # | Шаг | Что снимает |\n|---|---|---|\n| 1 | подтвердить срок сертификации против окна 30 месяцев | связывает риск 2 с датой снятия |\n| 2 | письменно проверить у закупок отсутствие вторичного рынка оснастки | это единственная строка, снимающая 18 000 000 из базы |",
+    "risks": "| id | Обманка | Почему выглядит опорой | Класс |\n|---|---|---|---|\n| d1 | вклад на единицу **до** и **после** одинаков — **100** и **100** | приглашает вывести «прироста нет, окупать нечем» и закрыть тему; на деле альтернатива не «сегодня», а «линии нет через 30 месяцев» | **Q3** |\n| d2 | совет одобрил 4 программы за 3 года | база сравнения, истинна в обеих ветвях | B3 |\n\n| # | Опора | Величина | Ложна во второй ветви? |\n|---|---|---|---|\n| 1 | решает только предстоящий расход | 21 000 000 | да |\n| 2 | годовой вклад | 6 000 000 | нет |\n| 3 | 18 000 000 невозвратны, оснастка без вторичного рынка | 18 000 000 | да |\n| 4 | вклад окупает не прирост, а **сохранение линии**: через 30 месяцев альтернатива даёт ноль | 30 · 100 | да |\n\n| # | Риск | Цифра | Внутр./внеш. |\n|---|---|---|---|\n| 1 | объём принят плоским; падение спроса растягивает 3.5 года пропорционально | 60 000 | внутренний |\n| 2 | сертификация — срок не наш; задержка сверх 30 месяцев оставляет линию без актуатора | 30 | внешний |\n\n| # | Шаг | Что снимает |\n|---|---|---|\n| 1 | подтвердить срок сертификации против окна 30 месяцев | связывает риск 2 с датой снятия |\n| 2 | письменно проверить у закупок отсутствие вторичного рынка оснастки | это единственная строка, снимающая 18 000 000 из базы |",
+    "build": "```python\nann   = Decimal(60_000) * Decimal(100)                       # 6000000\nnaive = (Decimal(18_000_000) + Decimal(21_000_000)) / ann    # 6.5\ncorr  = Decimal(21_000_000) / ann                            # 3.5\n```\nРоль: без рекомендации не определено, **какую из двух баз** брать — этот выбор и есть работа слота.\n**Провоцируемая ошибка:** включить понесённые 18 000 000 в базу. **Hints:** L1 «какие из этих денег ещё можно не тратить?» · L2 «оснастка не имеет вторичного рынка — что это меняет в базе?»\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: 21 000 000 / 6 000 000 = 3.5; (3) the naive reading is rejected explicitly, not merely avoided — (18 000 000 + 21 000 000) / 6 000 000 = 6.5 must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: 21 000 000 / 6 000 000 = 3.5; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — (18 000 000 + 21 000 000) / 6 000 000 = 6.5 обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "| поле | текст |\n|---|---|\n| **вывод** | **Pheldwarn should see the programme through to launch.** |\n| факты | Only the **$21.0M** still to be spent is a decision cost; the **$18.0M** already spent is non-recoverable and the tooling has no resale market. Contribution per unit is **$100** either way, so the programme does not add margin — it keeps the line alive: the current actuator disappears in **30** months, and the alternative is zero. On that basis annual contribution is **60,000 × $100 = $6.0M** and payback is **21.0 ÷ 6.0 = 3.5 years**, inside the board's five-year rule. Counting the full **$39.0M** gives **6.5 years** and is the wrong base, not a stricter test. |\n| риск | Internal: the **60,000**-unit volume is held flat; a demand fall stretches the 3.5 years proportionally. External: certification timing is not ours, and slipping past the supplier's **30**-month stop leaves the line without an actuator. |\n| next step | Confirm the certification window against the 30-month stop date. Have procurement verify in writing that the tooling has no secondary market — that single line is what removes the $18.0M from the base. |\n\n`[MIN]`: действие `see through` ✓ · субъект `Pheldwarn` ✓ · обоснования в первом предложении нет ✓\n`W1`: 21.0 · 18.0 · 60 000 · 100 · 6.0 · 3.5 · 39.0 · 6.5 — все из записи ✓ · `W2`: ветвь `launch` = `branch(3.5, 5)` ✓"
+   },
+   "anchor_metric": "5 лет"
+  },
+  {
+   "id": "SY-002",
+   "title": "Faster or Larger",
+   "company": "Josquelm",
+   "industry": "Botanical garden operations",
+   "difficulty": "Medium",
+   "clean": false,
+   "focus": "S02(a)",
+   "scaffold": "L4",
+   "time": "4 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Josquelm runs a botanical garden that has lost its city subsidy. The board has narrowed the rebuild to two schemes. The board wants the garden financially self-sufficient. Any scheme must pay back its capital within three years, simple payback, no discounting. Which scheme do you recommend?",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**Rebuild options — board pack**",
+       "",
+       "| | Meadow (open-air meadow walk) | Canopy (glasshouse canopy walk) |",
+       "|---|---|---|",
+       "| Capital required | **$15M** | **$28M** |",
+       "| Gross annual income at steady state | **$16M** | **$15M** |",
+       "| Income lost from what it displaces | **$6M** (built on the glasshouse site) | **$1M** (built on the car park; shoulder season only) |",
+       "| Time to steady state | **18** months | **30** months |",
+       "| Visitor capacity | **400,000**/yr | **520,000**/yr |",
+       "",
+       "**From the board minute of 4 March:** *the purpose of the rebuild is to maximise the garden's annual net income over the long run.* The three-year payback is recorded separately, as a condition of release of funds."
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Шаг | Что делает кандидат | Куда приводит | N# |\n|---|---|---|---|\n| 1 | видит ограничение «три года» и считает окупаемость первой | payback становится решающей | N2 |\n| 2 | 15/10 = 1.5 против 28/14 = 2.0 | Meadow «быстрее» | N2 |\n| 3 | «оба проходят, но Meadow с запасом» | Meadow | N2 |",
+    "risks": "| id | Обманка | Почему выглядит опорой | Класс |\n|---|---|---|---|\n| d1 | выход на режим 18 против 30 месяцев | второй довод за Meadow, весит в ту же сторону, что наивная метрика | **Q3** |\n| d2 | вместимость 520 000 против 400 000 | звучит масштабом, но уже вошла в доход | B3 |\n\n| # | Опора | Величина | Ложна во второй ветви? |\n|---|---|---|---|\n| 1 | цель объявлена как годовой чистый доход | 14 против 10 | да |\n| 2 | оба проходят ограничение, значит оно не выбирает | 1.5 и 2.0 против 3 | нет |\n| 3 | вычет асимметричен: 6 против 1 | 6 · 1 | да |\n\n| # | Риск | Цифра | Внутр./внеш. |\n|---|---|---|---|\n| 1 | Canopy выходит на режим 30 месяцев — почти весь трёхлетний срок; ранний недобор съедает запас | 30 | внутренний |\n| 2 | вычет 6 посчитан по действующей оранжерее; падение городской посещаемости двигает его | 6 | внешний |\n\n| # | Шаг | Что снимает |\n|---|---|---|\n| 1 | помесячный профиль выхода Canopy на режим | связывает риск 1 с ограничением 3 года |\n| 2 | проверить, не вычтена ли часть теряемого дохода уже из валовых | это единственная строка, переставляющая ранг |",
+    "build": "```python\nd_income  = Decimal(14) - Decimal(10)                            # 4\nd_payback = Decimal(28)/Decimal(14) - Decimal(15)/Decimal(10)    # 0.5\nrate      = d_income / d_payback                                 # 8\n```\n`4`, `0.5`, `8` в записи отсутствуют. При двух конкурирующих метриках партнёрский ход — назвать **курс между ними**.\n**Провоцируемая ошибка:** ранжировать по метрике ограничения, а не по объявленной цели. **Hints:** L1 «что названо целью, а что условием допуска?» · L2 «оба проходят условие. Что тогда выбирает?»\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: чистый доход: Meadow 10 против Canopy 14 → Canopy; (3) the naive reading is rejected explicitly, not merely avoided — payback: Meadow 1.5 против Canopy 2.0 → Meadow must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: чистый доход: Meadow 10 против Canopy 14 → Canopy; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — payback: Meadow 1.5 против Canopy 2.0 → Meadow обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "| поле | текст |\n|---|---|\n| **вывод** | **Josquelm should build Canopy.** |\n| факты | The board's purpose is annual net income, and on that metric Canopy earns **$14M against Meadow's $10M** — a **$4M** gap. The deduction is not symmetric: Meadow sits on the glasshouse and takes **$6M** with it, Canopy sits on the car park and takes **$1M**. Payback ranks the other way (**1.5 vs 2.0 years**) but both clear the three-year condition, so payback screens and does not choose. **Each extra year of payback buys $8M of annual income** (`$4M ÷ 0.5 years`). |\n| риск | Internal: Canopy takes **30** months to reach steady state — most of the three-year window — so an early shortfall eats the margin. External: the **$6M** displaced income is measured on today's glasshouse; a fall in city footfall moves it. |\n| next step | Get the month-by-month ramp for Canopy and test it against the three-year condition. Verify with finance that none of the displaced income is already netted out of the gross figures — that single line is what reverses the ranking. |\n\n`[MIN]` ✓ · `W2`: форма R3 обязывает заполнить обе колонки, собственное число у кандидата есть ✓"
+   },
+   "anchor_metric": "ранжирование (β); ограничение записи — окупаемость не более 3 лет"
+  },
+  {
+   "id": "SY-003",
+   "title": "Finish Your Own Line",
+   "company": "Ryskaphel",
+   "industry": "Orthodontic practices",
+   "difficulty": "Medium",
+   "clean": false,
+   "focus": "S03(a)",
+   "scaffold": "L4",
+   "time": "4 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Ryskaphel is a chain of orthodontic practices adding clear aligners. It must choose between manufacturing its own line and carrying a licensed brand. The objective is annual gross profit. Below is your own working from this morning, taken to both options. Finish it and recommend.",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**My working — aligner decision, morning of the 14th**",
+       "",
+       "*Branch A — our own line*",
+       "- Course price to patient **$2,500**; our cost per course **$1,250** → contribution **$1,250**",
+       "- Margin **1,250 ÷ 2,500 = 50.0%**",
+       "- Patients starting a course this year, target segment: **800**",
+       "- *(I stopped here yesterday and wrote \"50% — clearly ours\". Picking it back up.)*",
+       "",
+       "*Branch B — licensed brand*",
+       "- Course price **$4,000**; our cost per course **$3,000** → contribution **$1,000**",
+       "- Margin **1,000 ÷ 4,000 = 25.0%**",
+       "",
+       "*The panel result I asked for last week came back this morning:*",
+       "- Of target-segment patients offered our own line, **12.5%** accept.",
+       "- Of target-segment patients offered the licensed brand, **100%** accept.",
+       "- Panel size **240**; research confirms it represents the segment.",
+       "",
+       "*Not yet used:* chair-time per course **20** minutes either way · both ship in **6** weeks · the practice's whole patient list is **9,400**."
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Шаг | Что делает кандидат | Куда приводит | N# |\n|---|---|---|---|\n| 1 | читает собственную вчерашнюю строку | якорится на ней | N1 |\n| 2 | сравнивает 50.0% против 25.0% | своя «вдвое лучше» | N1 |\n| 3 | панель прочитана как подтверждение спроса, не как множитель объёма | 12.5 не входит в расчёт | N1 |\n| 4 | рекомендует свою линию | своя | N1 |",
+    "risks": "| id | Обманка | Почему выглядит опорой | Класс |\n|---|---|---|---|\n| d1 | весь список **9 400** | приглашает считать на неправильной базе; **срабатывает только вместе с наивным путём** — если приём сегмента уже отброшен, `9 400 × 1 250 = 11 750 000 > 9 400 000` | **Q3** |\n| d2 | кресло-время 20 минут одинаково | звучит операционным доводом, истинно в обеих ветвях | B3 |\n\n| # | Опора | Величина | Ложна во второй ветви? |\n|---|---|---|---|\n| 1 | приём сегмента переставляет ранг | 12.5 против 100 | да |\n| 2 | база решения — сегмент, а не список | 800 | да |\n| 3 | вклад на курс, а не процент | 1 250 против 1 000 | нет |\n\n| # | Риск | Цифра | Внутр./внеш. |\n|---|---|---|---|\n| 1 | обе доли приёма измерены на панели **240**; запас до переворота кончается на **80%** | 240 · 80 | внутренний |\n| 2 | вклад **1 000** задан лицензиаром: рост роялти режет его напрямую, а поднять **4 000** мы не можем | 1 000 · 4 000 | внешний |\n\n| # | Шаг | Что снимает |\n|---|---|---|\n| 1 | расширить панель за пределы пилотного города | 240 — единственный источник обеих долей |\n| 2 | зафиксировать роялти на срок контракта | связывает риск 2 с вкладом 1 000 |",
+    "build": "```python\nflip = Decimal(1000) / Decimal(1250)     # 0.8\n# сверка: 800 * Decimal(\"0.80\") * 1250 == 800000\n```\n**80%** в записи нет. Требование измеряет, **сколько стоила** вчерашняя ошибка в единицах допущения.\n**Провоцируемая ошибка:** ранжировать по проценту маржи. **Hints:** L1 «маржа — про единицу. Про что вопрос?» · L2 «что панель делает с объёмом, а не со спросом?»\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: прибыль 125 000 против 800 000 → лицензия; (3) the naive reading is rejected explicitly, not merely avoided — маржа 50.00% против 25.00% → своя линия must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: прибыль 125 000 против 800 000 → лицензия; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — маржа 50.00% против 25.00% → своя линия обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "| поле | текст |\n|---|---|\n| **вывод** | **Ryskaphel should carry the licensed brand, and I am reversing what I wrote yesterday.** |\n| факты | My own line has the better margin — **50.0% against 25.0%** — and that is what I anchored on. But margin is not the objective; annual gross profit on the target segment is. At **800** patients, our line earns `800 × 12.5% × $1,250 =` **$125,000**; the licensed brand earns `800 × 100% × $1,000 =` **$800,000** — a **$675,000** gap. **Acceptance would have to reach 80% for our own line to match** (`$1,000 ÷ $1,250`); it is at **12.5%**. |\n| риск | Internal: both acceptance figures come from one **240**-person panel, and the margin of safety ends at **80%**. External: the **$1,000** contribution is set by the licensor's royalty and we cannot raise the **$4,000** price to absorb an increase. |\n| next step | Widen the panel beyond the pilot city before signing — those 240 responses carry the whole decision. Fix the royalty for the contract term so the $1,000 contribution cannot be squeezed. |\n\n`[MIN]`: действие `carry` ✓ субъект `Ryskaphel` ✓ · вторая половина предложения — исполнение W2, а не оправдание"
+   },
+   "anchor_metric": "ранжирование (β)"
+  },
+  {
+   "id": "SY-004",
+   "title": "How Far Does It Get Us",
+   "company": "Zumbrikta",
+   "industry": "Artisan bakery chain",
+   "difficulty": "Medium",
+   "clean": false,
+   "focus": "S10(a)",
+   "scaffold": "L4",
+   "time": "4 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Zumbrikta runs artisan bakeries. The founder wants to triple revenue in five years and believes it can be done inside sourdough, where the chain already leads. The board has accepted the target as binding. Your read?",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**Category pack — sourdough**",
+       "- Zumbrikta revenue today: **$6M**/yr, all of it sourdough.",
+       "- Sourdough segment: **$60M**/yr. Zumbrikta holds **10%** of that segment.",
+       "- Category managers believe a **15%** share is reachable in five years — half again on today's share — by winning shelf space from **2** regional bakers.",
+       "- The whole artisan bread market is **$240M**/yr. Sourdough is one of **6** segments in it.",
+       "- Adjacent segments Zumbrikta can bake today without new plant: rye **$45M**, seeded **$38M**, flatbread **$31M**.",
+       "",
+       "**Appendix — store operations pack**",
+       "- store count **34** · average basket **$11.40** · flour contracts renew in month **3** · competitors that reformulated last year **2** · staff turnover **21%** · sourdough segment growth last year **4%** · years the founder's family has baked **80** · oven utilisation **71%**"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Шаг | Что делает кандидат | Куда приводит | N# |\n|---|---|---|---|\n| 1 | берёт ближайшее крупное число как базу доли — **240** | 240 × 15% = 36 | N8 |\n| 2 | 36 − 6 = 30 против нужных 12 | «с запасом» | N8 |\n| 3 | «сегмента хватает» | остаться | N8 |",
+    "risks": "| id | Обманка | Почему выглядит опорой | Класс |\n|---|---|---|---|\n| d1 | весь рынок **240** | единственное число, из которого получается «остаться»; весит | **Q3** |\n| d2 | сегмент вырос на **4%** | звучит попутным ветром, истинно в обеих ветвях | B3 |\n| d3 | загрузка печей **71%** | приглашает решать про мощность вместо базы | B3 |\n\n| # | Опора | Величина | Ложна во второй ветви? |\n|---|---|---|---|\n| 1 | 10 и 15 — доли **сегмента** | 60 | да |\n| 2 | нужный прирост задан утроением | 12 | нет |\n| 3 | смежные доступны без нового завода | 45 / 38 / 31 | да |\n\n| # | Риск | Цифра | Внутр./внеш. |\n|---|---|---|---|\n| 1 | вход в три смежных при загрузке печей **71%** упирается в мощность раньше, чем в спрос | 71 | внутренний |\n| 2 | **15%** сегмента предполагает отъём доли у **2** региональных пекарей; их ответ не заложен | 15 · 2 | внешний |\n\n| # | Шаг | Что снимает |\n|---|---|---|\n| 1 | **вопрос, переворачивающий решение:** какую долю трёх смежных мы удержим через пять лет? При **20%** от **114** это **22.8** и цель берётся; при **5%** это **5.7**, итого **8.7** против **12** — не берётся | единственная неизвестная, от которой зависит ветвь |\n| 2 | замерить свободную мощность печей до подписания шелф-контрактов | связывает риск 1 с тремя сегментами сразу |\n\nТочка переворота по смежным объявлена явно: `(12 − 3) ÷ 114 = ` **7.8947%**.",
+    "build": "```python\nneed      = Decimal(6)*3 - Decimal(6)                  # 12\nreach     = Decimal(60)*Decimal(\"0.15\") - Decimal(6)   # 3\nshortfall = need - reach                               # 9\nnaive     = Decimal(240)*Decimal(\"0.15\") - Decimal(6)  # 30\ncrossover = (need - reach) / Decimal(114) * 100        # 7.9\n```\n**Провоцируемая ошибка:** применить долю сегмента к размеру рынка. **Hints:** L1 «15% чего?» · L2 «сегодняшние 10% дают $6M. От какой базы?»\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: 60 × 0.15 − 6 = 3; (3) the naive reading is rejected explicitly, not merely avoided — 240 × 0.15 − 6 = 30 must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: 60 × 0.15 − 6 = 3; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — 240 × 0.15 − 6 = 30 обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "| поле | текст |\n|---|---|\n| **вывод** | **Zumbrikta cannot reach the target inside sourdough; the growth has to come from adjacent segments.** |\n| факты | Tripling **$6M** means finding **+$12M**. The **15%** share is 15% **of the $60M segment**, not of the **$240M** market: it yields `15% × $60M = $9M`, an increase of **+$3M**, leaving the sourdough-only route **$9M short**. Read against the market base it looks like **+$30M** — the same share on the wrong denominator. |\n| риск | Internal: entering rye, seeded and flatbread at **71%** oven utilisation hits capacity before it hits demand. External: **15%** of sourdough assumes taking share from **2** regional bakers whose response is not in the estimate. |\n| next step | **The one question I would answer next: what share of the three adjacent segments do we hold in five years?** At **20%** of the **$114M** they contain the target clears; at **5%** it does not — the crossover is **7.9%**. Alongside it, measure free oven capacity before any shelf contract is signed. |\n\n`[MIN]` ✓ · `W1`: 6 · 60 · 10 · 15 · 240 · 12 · 3 · 9 · 30 · 114 · 71 — все из записи ✓"
+   },
+   "anchor_metric": "12 (утроение: 6 → 18)"
+  },
+  {
+   "id": "SY-005",
+   "title": "The Ten-Year Rule",
+   "company": "Trevaskorn",
+   "industry": "Cold-storage warehousing",
+   "difficulty": "Medium",
+   "clean": false,
+   "focus": "S08(a)",
+   "scaffold": "L2",
+   "time": "4 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Trevaskorn operates cold-storage warehouses. It is considering a new automated site. The board proceeds with a build only if it pays for itself within a ten-year period, simple payback, no discounting. Should it build?",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**Site appraisal — automated cold store**",
+       "- Capital cost of the site: **$200M**.",
+       "- Expected revenue at full utilisation: **$100M** per year, flat.",
+       "- Contribution margin on **contract** storage: **25%**.",
+       "- Contribution margin on **spot** storage: **7%**.",
+       "- The site will serve both contract and spot customers.",
+       "- Automation removes **180** shift roles; severance is inside the $200M.",
+       "- Design life **25** years; the two nearest competing sites were built **11** and **14** years ago.",
+       "- Utilisation is expected to reach full in year **2**.",
+       ""
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Шаг | Что делает кандидат | Куда приводит | N# |\n|---|---|---|---|\n| 1 | видит две маржи и берёт бо́льшую | 25% на всю выручку | N1 |\n| 2 | 100 × 25% = 25 | годовой вклад завышен | N1 |\n| 3 | 200/25 = 8 против порога 10 | «проходит» | N1 |\n| 4 | отсутствие доли не замечено | строить | N1 |",
+    "risks": "| id | Обманка | Почему выглядит опорой | Класс |\n|---|---|---|---|\n| d1 | срок службы **25** лет против порога **10** | приглашает рассуждать «объект живёт дольше, чем окупается» и отменить правило совета; весит | **Q3** |\n| d2 | сокращение **180** ролей | звучит эффектом, но уже внутри капитала | B3 |\n\n| # | Опора | Величина | Ложна во второй ветви? |\n|---|---|---|---|\n| 1 | решает смешанная маржа, а не лучшая из двух | 16 | да |\n| 2 | доля объёма в записи отсутствует и обязана быть запрошена | 50 / 50 | да |\n| 3 | порог задан правилом совета | 10 | нет |\n\n| # | Риск | Цифра | Внутр./внеш. |\n|---|---|---|---|\n| 1 | смесь **50/50** — сегодняшняя; сдвиг к споту удлиняет срок, к контракту сокращает | 50 · 16 | внутренний |\n| 2 | два конкурирующих объекта возрастом **11** и **14** лет обновятся внутри нашего десятилетнего окна | 11 · 14 · 10 | внешний |\n\n| # | Шаг | Что снимает |\n|---|---|---|\n| 1 | получить контрактную долю выручки по годам, а не одной цифрой | это единственная величина, которой в записи нет |\n| 2 | проверить, при какой доле объект укладывается в правило: требуется **20%** смешанной маржи | связывает риск 1 с порогом |",
+    "build": "```python\nblended  = (Decimal(25) + Decimal(7)) / 2                     # 16\nrequired = Decimal(200) / Decimal(10) / Decimal(100) * 100    # 20\ngap      = required - blended                                 # 4\npayback  = Decimal(200) / (Decimal(100) * blended / 100)      # 12.5\n```\n**20%** и **4** пункта в записи отсутствуют. Требование называет **цену правила совета** в единицах маржи, а не повторяет вердикт.\n**Провоцируемая ошибка:** применить лучшую из двух маржей ко всей выручке. **Hints:** L1 «на какую выручку ложится каждая маржа?» · L2 «чего в этом паке нет?»\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: 200 / (100 × 0.16) = 12.5; (3) the naive reading is rejected explicitly, not merely avoided — 200 / (100 × 0.25) = 8.0 must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: 200 / (100 × 0.16) = 12.5; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — 200 / (100 × 0.25) = 8.0 обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "| поле | текст |\n|---|---|\n| **вывод** | **Trevaskorn should not build this site.** |\n| **остальное** | The pack gives two margins and says the site serves both customer types, but never states how revenue divides between them — and that split decides the answer, so I asked for it: it is **50/50** of revenue. That gives a blended margin of **16%** — `(25% + 7%) ÷ 2` — and **$16M** a year against a **$200M** cost, a payback of **12.5 years**, outside the board's ten-year rule. Taking the **25%** contract margin across all revenue gives **$25M** and **8 years**, but that margin applies to half the revenue, not all of it. **To clear the rule the site needs a blended 20%** (`$200M ÷ 10 ÷ $100M`); it is **4** points short. Internally, the **50/50** mix is today's and any drift toward spot lengthens the payback further; externally, the two competing sites built **11** and **14** years ago will be renewed inside our ten-year window. Next: get the contract share year by year rather than as one figure, and re-test the build at the mix that would deliver **20%**. |\n\n`[MIN]`: действие `not build` — определённая ветвь, без хеджа ✓ субъект `Trevaskorn` ✓"
+   },
+   "anchor_metric": "10 лет"
+  },
+  {
+   "id": "SY-006",
+   "title": "The Newcomer's Price List",
+   "company": "Eskvarolt",
+   "industry": "Marine desalination",
+   "difficulty": "Easy",
+   "clean": true,
+   "focus": "S14(a)",
+   "scaffold": "L4",
+   "time": "3 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Eskvarolt supplies desalinated water to coastal hotels on annual contracts. A new entrant has published a price list and the sales director wants to match it before renewals. The objective is to protect Eskvarolt's profitability. What do you recommend?",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**Renewal pack**",
+       "1. Eskvarolt price **$1.00** per m³.",
+       "2. Eskvarolt cost per m³: production **$0.45** + delivery **$0.25** = **$0.70**.",
+       "3. New entrant's published price **$0.70** per m³.",
+       "4. New entrant's cost per m³: production **$0.45** + delivery **$0.25** + imported membrane logistics **$0.20** = **$0.90**.",
+       "5. Hotel buyers rank supplier attributes: service reliability **62%**, price **24%**, water hardness **14%**.",
+       "6. Reliability score, last survey: Eskvarolt **8.4** / 10, new entrant **5.1** / 10.",
+       "7. Contract length **12** months, rolling renewal.",
+       "8. Eskvarolt has held its list price for **9** years.",
+       "9. Share of revenue from the three largest chains **41%**.",
+       "10. Average contract volume **120,000** m³ per year.",
+       "11. Seasonal swing in consumption **±18%**.",
+       "12. Membrane replacement cycle **4** years."
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Шаг | Что делает кандидат | Куда приводит | N# |\n|---|---|---|---|\n| 1 | ранжирует по цене: 0.70 против 1.00 | «мы дороже» | N4 |\n| 2 | считает потерю объёма при бездействии | «потеряем контракты» | N4 |\n| 3 | уравнивает цену | маржа 0.00% | N4 |",
+    "risks": "| id | Обманка | Почему выглядит опорой | Класс |\n|---|---|---|---|\n| d1 | контракты **12**-месячные, продлеваются волной | звучит срочностью, требует «сделать что-то сейчас»; весит в сторону снижения | **Q3** |\n| d2 | цена держится **9** лет | звучит косностью, которую пора ломать; истинно в обеих ветвях | B3 |\n| d3 | веса покупателя **62 / 24** и скоры **8.4 / 5.1** | выглядят вторым самостоятельным основанием «не снижать»; на деле ничего не говорят о том, **как долго** новичок продержится, и в обеих ветвях истинны | B3 |\n\n| # | Опора | Величина | Ложна во второй ветви? |\n|---|---|---|---|\n| 1 | новичок теряет деньги при своей же цене | −0.20 | да |\n| 2 | уравнивание стирает нашу маржу целиком | 30.00 → 0.00 | нет |\n| 3 | новичок не покрывает даже переменных: **0.45 + 0.25 + 0.20** против цены **0.70** | 0.90 | да |\n\n| # | Риск | Цифра | Внутр./внеш. |\n|---|---|---|---|\n| 1 | преимущество держится на надёжности **8.4**; падение сервиса переносит вес покупателя на цену, где мы слабее | 8.4 · 5.1 | внутренний |\n| 2 | новичок может выдерживать **−0.20**/м³ дольше своей экономики, если субсидируется головной компанией | 0.20 | внешний |\n\n| # | Шаг | Что снимает |\n|---|---|---|\n| 1 | проверить, финансируется ли новичок извне | единственное, что продлевает его убыток |\n| 2 | поставить триггер на скор надёжности ниже **8.0**, а не на цену конкурента | связывает риск 1 с решением не двигать цену |",
+    "build": "```python\nmargin_now   = (Decimal(\"1.00\")-Decimal(\"0.70\"))/Decimal(\"1.00\")*100   # 30\nmargin_match = (Decimal(\"0.70\")-Decimal(\"0.70\"))/Decimal(\"0.70\")*100   # 0\nentrant_unit =  Decimal(\"0.70\")-Decimal(\"0.90\")                        # -0.20\n```\nЕдинственный ○ партии: пропущен не риск, а **его отсутствие**.\n**Провоцируемая ошибка:** ранжировать по цене без экономики второй стороны. **Hints:** L1 «а он на своей цене зарабатывает?» · L2 «что покупатель ставит первым?»\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: не трогать цену → маржа 30.00%; (3) the naive reading is rejected explicitly, not merely avoided — уравнять цену → маржа 0.00% must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: не трогать цену → маржа 30.00%; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — уравнять цену → маржа 0.00% обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "| поле | текст |\n|---|---|\n| **вывод** | **Eskvarolt should hold its price at $1.00 per m³.** |\n| факты | Matching **$0.70** puts our price at our own cost and takes net margin from **30.0% to 0.0%** — the whole profit, not part of it. The entrant is already **losing $0.20 per m³** at his own list price, so that price is a position he funds rather than earns. And price is not what these buyers rank first: reliability weighs **62%** against price at **24%**, and we score **8.4** to his **5.1**. |\n| риск | Internal: the position rests on the **8.4** reliability score; any service slip moves buyer weight onto price, where we are weaker. External: he can sustain **−$0.20**/m³ longer than his own economics suggest if a parent is funding him. |\n| next step | Establish whether the entrant is externally funded — that is the only thing that lengthens his loss. Set a trigger on our own reliability score rather than on his price: below **8.0** we revisit, not before. |\n\n`[MIN]`: `hold` — действие, а не отказ от действия ✓"
+   },
+   "anchor_metric": "ранжирование (β); Clean — правильное поведение состоит в том, чтобы не переворачиваться"
+  },
+  {
+   "id": "SY-007",
+   "title": "After the Handover",
+   "company": "Somvekrath",
+   "industry": "Airport ground handling",
+   "difficulty": "Medium",
+   "clean": false,
+   "focus": "S06(b)",
+   "scaffold": "L4",
+   "time": "4 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Somvekrath handles ground operations at three airports and, after an acquisition, a fourth station. The board has decided to consolidate into the lowest-cost station — that decision is made, and the board will not move off its two-year payback rule. They want to know how to do it and what it will take. Your working from Tuesday is below.",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**My working — station consolidation, Tuesday**",
+       "- Combined turnarounds across all four stations: **1,600,000** per year.",
+       "- Lowest-cost station handles **400,000** per year today.",
+       "- One-time cost of consolidating — severance, apron works, equipment relocation: **$6.0M**.",
+       "- Running cost today across four stations: **$22.0M**/yr.",
+       "- Running cost after consolidation at the receiving station's current productivity: **$20.0M**/yr → net saving **$2.0M**/yr.",
+       "- So payback is **6.0 ÷ 2.0 = 3** years. *(This is where I stopped Tuesday.)*",
+       "- **Wednesday's benchmarking came back:** the receiving station turns round **4,000** aircraft per handler per year; our best station turns round **8,000**. The operations lead confirms the gap is method, not equipment, and is transferable in **4–6** months.",
+       "- Handler positions at the receiving station once it carries the whole network: **400**. Fully loaded cost of a handler position after redeployment credits: **$10,000**/yr.",
+       "- Not used yet: the acquired handlers are on a legacy roster agreement · **2** of the four stations are slot-constrained at peak."
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Шаг | Что делает кандидат | Куда приводит | N# |\n|---|---|---|---|\n| 1 | берёт собственную вторничную строку «3 года» | якорится | N9 |\n| 2 | сравнивает с порогом | 3 > 2 | N9 |\n| 3 | среды не читает: бенчмарк принят за интересный факт | экономия 4 000 000 не входит | N9 |\n| 4 | «порог не проходим» → закрывать станции по стоимости | закрытие раньше метода | N9 |",
+    "risks": "| id | Обманка | Почему выглядит опорой | Класс |\n|---|---|---|---|\n| d1 | текущая стоимость сети **22 000 000** | приглашает считать процент экономии от неё («9% — мало»), а решает срок окупаемости; весит | **Q3** |\n| d2 | слот-ограничение на **2** станциях | звучит препятствием консолидации, истинно в обеих ветвях | B3 |\n\n| # | Опора | Величина | Ложна во второй ветви? |\n|---|---|---|---|\n| 1 | разрыв производительности — метод, а не оборудование | 4–6 мес | да |\n| 2 | экономия после переноса | 4 000 000 | да |\n| 3 | порог задан советом | 2 года | нет |\n\n| # | Риск | Цифра | Внутр./внеш. |\n|---|---|---|---|\n| 1 | принимающая станция обязана поднять пропускную способность на **300%**; ростер-соглашение ограничивает скорость набора | 300 · 400 000 · 1 600 000 | внутренний |\n| 2 | перенос заявлен на **4–6** месяцев со слов операционного лида; окупаемость **1.5** года держится на верхней границе | 4–6 · 1.5 | внешний |\n\n| # | Шаг | Что снимает |\n|---|---|---|\n| 1 | **очерёдность:** перенести практики на принимающую станцию **до** закрытия любой другой — иначе 300% ложатся на текущую производительность и экономия остаётся **2 000 000** | связывает риск 1 с порядком работ |\n| 2 | **пилот:** одна смена по методу лучшей станции, **6** недель, замер оборотов на человека — до траты **6 000 000** | превращает «4–6 месяцев со слов» в измеренную величину |",
+    "build": "```python\njump = (Decimal(1_600_000)/Decimal(400_000) - 1) * 100   # 300\n```\n**300%** в записи нет: есть **1 600 000** и **400 000**, отношение строит кандидат. `[SUP]` требует чисел в `факты`, это число живёт в `риск` — дубля нет, и именно это отличает S06(b) от S06(a).\n**Провоцируемая ошибка:** остановиться на вторничном числе. **Hints:** L1 «что изменилось со вторника?» · L2 «бенчмарк — это факт или вход в расчёт?»\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: 6 000 000 / 4 000 000 = 1.5; (3) the naive reading is rejected explicitly, not merely avoided — 6 000 000 / 2 000 000 = 3.0 must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: 6 000 000 / 4 000 000 = 1.5; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — 6 000 000 / 2 000 000 = 3.0 обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "| поле | текст |\n|---|---|\n| **вывод** | **Somvekrath should transfer the method first and close stations second.** |\n| факты | Consolidation pays back in **1.5 years** against the board's two-year rule, but only at the receiving station's achievable productivity. At **8,000** turnarounds per handler the network needs **200** positions instead of **400**, worth **200 × $10,000 = $2.0M** on top of the base saving: **$22.0M − $18.0M = $4.0M**, and `$6.0M ÷ $4.0M = 1.5`. At today's productivity the saving is **$2.0M** and payback is **3 years**, outside the rule. The difference is method, transferable in **4–6** months — which is why sequencing decides this, not the decision itself. |\n| риск | Internal: the receiving station must take **400,000** turnarounds to **1,600,000** — a **300%** increase — and the legacy roster limits how fast we can staff it. External: the **4–6**-month transfer is the operations lead's estimate; payback at **1.5** years holds only at the upper end. |\n| next step | Run one shift on the best station's method for **6** weeks and measure turnarounds per handler before committing the **$6.0M**. Close no station until that measurement lands. |\n\n`[MIN]`: действие `transfer … close` ✓ субъект `Somvekrath` ✓ обоснования нет ✓\n`W2`: ветвь порога (`1.5 < 2` → консолидация проходит) установлена до финала и тикается на ней; ось финала тикается своими `branch_markers`."
+   },
+   "anchor_metric": "2 года"
+  },
+  {
+   "id": "SY-008",
+   "title": "Reading Room Hours",
+   "company": "Andrelisk",
+   "industry": "Municipal recycling",
+   "difficulty": "Medium",
+   "clean": false,
+   "focus": "S11(a)",
+   "scaffold": "L4",
+   "time": "4 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Andrelisk is a municipal recycling authority renewing its collection model. Two options are on the table. The council expects the renewed service to cost less than it does today. Which option do you recommend?",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**Renewal options — council pack**",
+       "",
+       "| | A — single contractor, commingled | B — kerbside separation, two streams |",
+       "|---|---|---|",
+       "| Annual saving against today | **$400,000** | **$150,000** |",
+       "| Diversion from landfill | **40%** | **65%** |",
+       "| Contamination rate at the sorting plant | **19%** | **4%** |",
+       "| Households covered | **86,000** | **86,000** |",
+       "| Contract length | **7** years | **7** years |",
+       "",
+       "**From the authority's charter, first article:** *the purpose of the authority is to raise the share of household waste diverted from landfill.*",
+       "**From the annual budget letter:** *the council expects the renewed service to cost less than the current arrangement.*",
+       "",
+       "Also on file: current diversion **31%** · today's collection cost **$5.8M**/yr · complaints per 1,000 households last year **12** · the sorting plant was refitted **3** years ago."
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "**Укус и контрфакт — разные мутации:** укус двигает **экономию A**, контрфакт двигает **отвод B**.",
+    "risks": "| id | Обманка | Почему выглядит опорой | Класс |\n|---|---|---|---|\n| d1 | текущая стоимость сбора **5 800 000** | приглашает считать экономию в процентах от неё (**6.9%** против **2.6%**) и тем усилить денежный ранг; весит | **Q3** |\n| d2 | жалобы **12** на 1000 домохозяйств | звучит сервисным доводом, истинно в обеих ветвях | B3 |\n\n| # | Опора | Величина | Ложна во второй ветви? |\n|---|---|---|---|\n| 1 | устав называет целью долю отвода | 65 против 40 | да |\n| 2 | ожидание по стоимости объявлено ожиданием, а не пределом | 400 000 · 150 000 | да |\n| 3 | обе опции дешевле сегодняшнего, значит стоимость допускает обе | 5 800 000 | нет |\n\n| # | Риск | Цифра | Внутр./внеш. |\n|---|---|---|---|\n| 1 | раздельный сбор держится на поведении **86 000** домохозяйств; загрязнение **4%** — проектное, а не наблюдённое | 86 000 · 4 | внутренний |\n| 2 | совет вправе переопределить ожидание по стоимости в предел; тогда цена цели **10 000** за пункт становится предметом торга | 10 000 | внешний |\n\n| # | Шаг | Что снимает |\n|---|---|---|\n| 1 | вынести на совет цену цели — **$10,000** за пункт отвода — и получить прямое подтверждение или отказ | превращает ожидание в объявленный предел |\n| 2 | замерить фактическое загрязнение на пилотном маршруте до подписания на **7** лет | связывает риск 1 с проектными **4%** |",
+    "build": "```python\nd_saving = Decimal(400_000) - Decimal(150_000)   # 250000\nd_points = Decimal(65) - Decimal(40)             # 25\nprice    = d_saving / d_points                   # 10000\n```\n**10 000** в записи нет. S11(a) требует назвать **размер разрыва, который уставная цель обязана перекрыть** — а не сказать «цель важнее денег».\n**Провоцируемая ошибка:** ранжировать по деньгам, приняв ожидание совета за предел. **Hints:** L1 «что устав называет целью, а что письмо — ожиданием?» · L2 «сколько стоит один пункт отвода?»\n\n---\n\n## Что объявляю слабым сам\n\n1. **SY-009 `[G1-BITE]`** двигает спотовую маржу с **7** до **23** — это большой сдвиг. Укус честный (ветвь перестаёт переворачиваться), но менее изящный, чем у SY-001.\n2. **SY-002 и SY-010** оба стоят на «объявленная цель против удобной метрики». Разведены механикой (S02 решает, *какая* метрика; S11 — метрика задана, вопрос в *цене* цели), формой записи (R3 против R7) и рефлексом (N2 против N7). `[DUP]` не нарушен, но это ближайшая пара партии.\n3. **SY-009 L2** — единственный слот со снятыми подписями, и на нём же лежит `SOURCE Q1`. Две трудности в одном слоте; если ревьюер сочтёт это перегрузом, `SOURCE Q1` переезжает на партию 2."
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: отвод: A 40 против B 65 → B; (3) the naive reading is rejected explicitly, not merely avoided — экономия: A 400 000 против B 150 000 → A must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: отвод: A 40 против B 65 → B; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — экономия: A 400 000 против B 150 000 → A обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "| поле | текст |\n|---|---|\n| **вывод** | **Andrelisk should adopt option B, kerbside separation.** |\n| факты | The charter names one purpose — diversion — and on it B delivers **65%** against A's **40%**, lifting today's **31%** by **34** points instead of **9**. A is cheaper by **$250,000** a year, and the council's cost expectation is written as an expectation, not a limit; both options already cost less than today's **$5.8M**. **The charter goal therefore costs $10,000 per point of diversion** (`$250,000 ÷ 25`), and that is the number the council should be asked to accept or reject. |\n| риск | Internal: separation depends on **86,000** households' behaviour, and the **4%** contamination figure is a design assumption, not an observed one. External: the council can convert its cost expectation into a limit, at which point the **$10,000** per point becomes negotiable. |\n| next step | Put the **$10,000** per point to the council explicitly and get a yes or a no rather than an assumption. Measure actual contamination on a pilot round before signing a **7**-year contract. |\n\n`[MIN]`: действие `adopt` ✓ субъект `Andrelisk` ✓\n`W2`: ветвь `option B` = ветвь метрики, которую кандидат сам назвал решающей ✓"
+   },
+   "anchor_metric": "ранжирование (β)"
+  },
+  {
+   "id": "SY-009",
+   "title": "Two Ways To The Same Number",
+   "company": "Milburnath",
+   "industry": "Event ticketing platforms",
+   "difficulty": "Medium",
+   "clean": false,
+   "focus": "S03(b)",
+   "scaffold": "L4",
+   "time": "3 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Milburnath is an event ticketing platform. Our team has already pulled the two-year operating table into the working record. The client asks one question: what happened to our take rate between 2017 and 2018, and what is the single line of the story I should tell my board? State the number you are using and where it comes from.",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "*Блок 0 — фон, снятый ранее (Exhibit A, стр. 79), $m:*"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Line",
+       "2015",
+       "2016",
+       "2017",
+       "2018"
+      ],
+      "rows": [
+       [
+        "Revenue",
+        "25.0",
+        "35.0",
+        "39.9",
+        "39.9"
+       ],
+       [
+        "Payment Processing Costs",
+        "3.3",
+        "4.7",
+        "8.0",
+        "11.9"
+       ],
+       [
+        "Server Hosting Costs",
+        "3.8",
+        "5.3",
+        "4.8",
+        "4.8"
+       ],
+       [
+        "Headcount",
+        "5.0",
+        "5.3",
+        "5.5",
+        "5.5"
+       ],
+       [
+        "Marketing",
+        "1.5",
+        "1.7",
+        "1.8",
+        "2.0"
+       ],
+       [
+        "SG&A / Other Costs",
+        "2.0",
+        "2.1",
+        "2.2",
+        "2.2"
+       ],
+       [
+        "Operating Income",
+        "9.4",
+        "16.1",
+        "17.6",
+        "13.5"
+       ],
+       [
+        "Operating Income Margin",
+        "38%",
+        "46%",
+        "44%",
+        "34%"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "Доля рынка: 2015 — Events.com 17%, RunSignUp 65%, Active Network 6%, Other 12%; 2018 — Events.com 34%, RunSignUp 30%, Active Network 28%, Other 8%.",
+       "*Блок 1 — стенограмма рабочей таблицы (Exhibit B, стр. 80), как она была записана:*"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Line",
+       "2017",
+       "2018"
+      ],
+      "rows": [
+       [
+        "Number of events",
+        "4,023",
+        "5,051"
+       ],
+       [
+        "Total registrations",
+        "8.0M",
+        "7.9M"
+       ],
+       [
+        "Dollars processed",
+        "$339M",
+        "$595M"
+       ],
+       [
+        "Events.com Revenue",
+        "$39.9M",
+        "$39.9M"
+       ],
+       [
+        "Payment Processing Expenses",
+        "$8.0M",
+        "$11.9M"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "*Блок 2 — НОВЫЙ ФАКТ, поступил после того, как таблица была записана. Exhibit C, стр. 81 — «Pricing Structure», приведён целиком:*"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Old Pricing Structure",
+       ""
+      ],
+      "rows": [
+       [
+        "Fee per transaction",
+        "10.0%"
+       ]
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "New Pricing Structure",
+       "Price under $50",
+       "Price over $50"
+      ],
+      "rows": [
+       [
+        "Fixed fee per transaction",
+        "$3.00",
+        "$5.50"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "- Промпт, стр. 77: «$100 registration price x 10% Fee = $10 in Revenue for Events.com»",
+       "- Промпт, стр. 78: «Events.com recently signed IRONMAN triathlon in Q4 2017, which has $125M in transaction volume per year, and other premium events»",
+       "- Промпт, стр. 78: «The market has declined ~4% per year since 2015»"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Шаг | Что делает кандидат под давлением | Куда приводит | Рефлекс |\n|---|---|---|---|\n| 1 | Берёт записанные $339M как данность — «цифра уже в моей таблице» | 39.9/339 = 11.8% | N9 |\n| 2 | Считает средний чек по той же ячейке | 339/8.0 = $42.375 | N9 |\n| 3 | Строит историю «ставка упала с 11.8% до 6.7%» | Аномалией объявляется 2017 год (11.8% > объявленного тарифа) | N9 |\n| 4 | Тариф 10.0% принимает как «маркетинговый прайс-лист», не как вход | Правка не производится и не называется — провал S03(b) | N9 |",
+    "decoy": "| id | Факт-обманка | Почему выглядит опорой | Класс |\n|---|---|---|---|\n| D1 | Number of events 4,023 → 5,051 (+рост) | Кажется, что рост числа мероприятий «объясняет» размывание ставки: больше мелких клиентов | Q3 |\n| D2 | Payment Processing Expenses $8.0M → $11.9M | Растущая строка расходов подтягивает внимание к марже, а вопрос задан про take rate | Q3 |\n| D3 | Registrations 8.0M → 7.9M (падение) | Похоже на объяснение «выручка не выросла, потому что регистраций стало меньше» — но выручка идентична $39.9M, а объём в долларах вырос | B3 |\n| D4 | «$100 registration price» из промпта | Читается как фактическая средняя цена билета, тогда как это иллюстрация тарифа; фактические чеки — $49.875 и $75.3165 | B3 |\n| D5 | Ступени New Pricing Structure $3.00 / $5.50 и граница $50 | Граница $50 совпадает с чеком 2017 ($49.875) и потому провоцирует считать её порогом решения; это ступень тарифа, а не критерий выбора — решает сравнение объявленной ставки с посчитанной | Q3 |\n| D6 | Operating Income Margin 44% → 34% (Exhibit A) | Готовая метрика падения, к которой тянется рука вместо take rate; вопрос задан про ставку, а не про маржу | Q3 |",
+    "support": "| # | Опора | Величина из записи | Ложна ли во второй ветви? |\n|---|---|---|---|\n| 1 | Объявленный тариф задаёт объём 2017: $39.9M / 10.0% | $399M | Да — ветвь FEE_WAS_11_8 обязана отвергнуть тариф как вход |\n| 2 | Выручка не изменилась при росте объёма | $39.9M против $39.9M при $399M → $595M | Нет — факт общий для обеих ветвей, но интерпретируется противоположно |\n| 3 | Ставка 2018 считается на бесспорных числах | 39.9/595 = 6.7059%, книга печатает 6.7% | Нет — общая опора; именно она подтверждает исправность метода |\n| 4 | Средний чек вырос при исправленном объёме | $49.875 → $75.3165 | Да — в наивной ветви старт $42.375, и величина роста чека завышается |",
+    "risks": "| # | Риск | Цифра-основание из записи | Тип |\n|---|---|---|---|\n| 1 | Данные в собственной рабочей записи не сверены с объявленным тарифом — та же ошибка воспроизведётся в любом следующем срезе | Ячейка $339M против $399M = 39.9/0.10 | внутренний |\n| 2 | Выручка стоит на месте при росте оборота на $196M ($399M → $595M) — платформа отдаёт объём без монетизации | $39.9M = $39.9M | внутренний |\n| 3 | Стоимость обработки платежей держится на 2.0% оборота ($11.9M / $595M) — при падении take rate до 6.7% фиксированная доля процессинга съедает всё больше валовой ставки | 2.0% в обоих годах | внешний (эквайринг) |\n| 4 | Средний чек вырос до $75.3165 — сдвиг в крупные мероприятия, где переговорная сила клиента выше и тариф продавливается ниже 10.0% | $49.875 → $75.3165 | внешний (рынок/клиенты) |",
+    "next": "| # | Шаг | Какую неопределённость записи снимает |\n|---|---|---|\n| 1 | Переподнять ячейку Dollars processed 2017 из первичной выгрузки и заменить в модели $339M на $399M, зафиксировав правку в лог изменений | Снимает конфликт между записанной ячейкой и объявленным тарифом 10.0% |\n| 2 | Разложить оборот 2018 ($595M) по клиентам на два ведра — по тарифу 10.0% и по договорной ставке — и посчитать долю каждого | Снимает неопределённость, скидка это или микс: 6.7059% средней ставки не говорит, сколько клиентов ушло ниже тарифа |\n| 3 | Проверить, привязана ли ставка к размеру чека — сопоставить рост среднего чека с $49.875 до $75.3165 с фактической ставкой по когортам | Снимает неопределённость по драйверу: объём против цены |\n| 4 | Зафиксировать эквайринговый контракт: 2.0% оборота в обоих годах — договорная это ставка или совпадение | Снимает неопределённость по единственной строке расходов в записи |",
+    "build": "```python\nfrom decimal import Decimal as D, ROUND_HALF_UP\n\ndef q(x, p): return x.quantize(D(p), rounding=ROUND_HALF_UP)\n\nrev_2017   = D('39.9')      # $M, Exhibit B p.80\nrev_2018   = D('39.9')      # $M, Exhibit B p.80\nfee        = D('0.10')      # Exhibit C p.81 \"Fee per transaction 10.0%\"\nproc_2018  = D('595')       # $M, Exhibit B p.80\nproc_2017_recorded = D('339')   # $M, ячейка записи (спорная)\nreg_2017   = D('8.0')       # M registrations\nreg_2018   = D('7.9')       # M registrations\nppe_2018   = D('11.9')      # $M\n\n# НАИВНО — по записанной ячейке\nprint(q(rev_2017 / proc_2017_recorded * 100, '0.1'))    # 11.8  %\nprint(q(proc_2017_recorded / reg_2017, '0.001'))        # 42.375 $\n\n# ВЕРНО — единственный путь: выручка / объявленный тариф\nproc_2017 = rev_2017 / fee\nprint(q(proc_2017, '0.1'))                              # 399.0 $M\nprint(q(rev_2017 / proc_2017 * 100, '0.1'))             # 10.0  %\nprint(q(proc_2017 / reg_2017, '0.001'))                 # 49.875 $\n\n# Сходимость метода на бесспорном 2018\nprint(q(rev_2018 / proc_2018 * 100, '0.0001'))          # 6.7059 % vs printed 6.7%\nprint(q(proc_2018 / reg_2018, '0.0001'))                # 75.3165 $ vs printed $75\nprint(q(ppe_2018 / proc_2018 * 100, '0.1'))             # 2.0 %\n```\n\n**Провоцируемая ошибка:** шаги 1–3 наивного пути — ставка 11.8% и чек $42.375, посчитанные по ячейке $339M, с историей «падение с 11.8%» и без произнесённой правки (совпадает с рефлексом N9 и с decoy D4).\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: объём 2017 = $399M (39.9/0.10), ставка = 10.0%, чек = $49.875 (399/8.0); (3) the naive reading is rejected explicitly, not merely avoided — ставка 2017 = 11.8% (39.9/339), чек = $42.375 (339/8.0) must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: объём 2017 = $399M (39.9/0.10), ставка = 10.0%, чек = $49.875 (399/8.0); (3) наивное прочтение отвергнуто вслух, а не просто обойдено — ставка 2017 = 11.8% (39.9/339), чек = $42.375 (339/8.0) обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "**Вывод.** Correct the record to $399M of dollars processed in 2017 and tell the board a single story: our take rate held exactly at the old 10.0% tariff in 2017 and collapsed to 6.7% in 2018 because we moved to a fixed tiered fee — the anomaly is entirely in 2018, not in 2017.\n\n**Факты.** First, the old structure charges 10.0% per transaction, so 2017 volume must be $39.9M / 10.0% = $399M; the $339M in our working record is my own transcription error and I am replacing it. Second, the new structure charges a flat $3.00 under $50 and $5.50 over $50 — so as the average registration rose from $49.875 to $75.3165, a fixed fee on a bigger ticket is a smaller percentage, and revenue stayed flat at $39.9M while volume ran from $399M to $595M. Third, the method is sound on undisputed data: $39.9M / $595M = 6.7059%, matching the 6.7% printed for 2018, and $595M / 7.9M = $75.3165 per registration against the printed $75.\n\n**Риск.** Internally, our own record carried an uncorrected cell, so any downstream model built on it is wrong until re-run. Externally, average price per registration rose from $49.875 to $75.3165 — we are shifting toward larger events whose buyers negotiate below the 10.0% tariff, while payment processing stays fixed at 2.0% of volume ($11.9M / $595M).\n\n**Next step.** Re-pull the 2017 volume cell from source and log the correction this week; then split 2018's $595M into tariff-rate and negotiated-rate cohorts to establish whether 6.7% is discounting or mix."
+   },
+   "anchor_metric": "не применяется, форма β"
+  },
+  {
+   "id": "SY-010",
+   "title": "Where the Rigs Go",
+   "company": "Trebolshin",
+   "industry": "Quarry aggregate leases",
+   "difficulty": "Medium",
+   "clean": false,
+   "focus": "S02(b)",
+   "scaffold": "L4",
+   "time": "4 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Trebolshin holds bidding rights conversations on three quarry aggregate lease regions and can take exactly one this year. Our team has already built the comparison table. The client's question: which region do we bid for, and what is the size of the prize versus the runner-up?",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "table",
+      "header": [
+       "Line",
+       "Region 1",
+       "Region 2",
+       "Region 3"
+      ],
+      "rows": [
+       [
+        "Cost per well",
+        "$300,000",
+        "$900,000",
+        "$3,600,000"
+       ],
+       [
+        "Yearly revenue per well",
+        "$1,800,000",
+        "$3,600,000",
+        "$5,400,000"
+       ],
+       [
+        "Profit per well",
+        "$1,500,000",
+        "$2,700,000",
+        "$1,800,000"
+       ],
+       [
+        "Profit margin per well",
+        "500%",
+        "300%",
+        "50%"
+       ],
+       [
+        "Number of wells per year",
+        "60",
+        "40",
+        "20"
+       ],
+       [
+        "Investment Cost (rights)",
+        "$40,000,000",
+        "$40,000,000",
+        "$40,000,000"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "*Операционный слой (Exhibit #1, стр. 116):*"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Line",
+       "Region 1",
+       "Region 2",
+       "Region 3"
+      ],
+      "rows": [
+       [
+        "Number of Rigs",
+        "10",
+        "10",
+        "10"
+       ],
+       [
+        "Average well production (barrels per day)",
+        "100",
+        "200",
+        "300"
+       ],
+       [
+        "Cost per rig day",
+        "$5,000",
+        "$10,000",
+        "$20,000"
+       ],
+       [
+        "Drilling rates (м/день)",
+        "20",
+        "30",
+        "20"
+       ],
+       [
+        "Average depth (м)",
+        "1200",
+        "2700",
+        "3600"
+       ],
+       [
+        "Spot price",
+        "$50",
+        "$50",
+        "$50"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "*Ограничение, стр. 112:* «Rock Energy can get the drilling operator to deploy a maximum of 10 rigs in each of the regions»"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Шаг | Что делает кандидат под давлением | Куда приводит | Рефлекс |\n|---|---|---|---|\n| 1 | Хватает строку Profit margin per well — самый выразительный ряд | 500% / 300% / 50% | N1 |\n| 2 | Ранжирует регионы по марже | R1 ≻ R2 ≻ R3 | N1 |\n| 3 | Подкрепляет «низкой стоимостью входа»: Cost per well $300,000 против $900,000 | Кажется, что R1 ещё и дешевле масштабировать | N1 |\n| 4 | Рекомендует Region 1, не умножая на 60/40 и не вычитая $40,000,000 | Ветвь REGION_1_MARGIN — потеря $18,000,000 годовой прибыли | N1 |",
+    "decoy": "| id | Факт-обманка | Почему выглядит опорой | Класс |\n|---|---|---|---|\n| D1 | Cost per well R1 $300,000 — втрое ниже R2 | Читается как капиталоэффективность; но решает не стоимость скважины, а годовая прибыль после $40,000,000 прав | Q3 |\n| D2 | Number of wells per year R1 = 60 — больше всех | Выглядит подтверждением R1 («больше скважин»), но 60 × $1,500,000 = $90,000,000 всё равно ниже 40 × $2,700,000 = $108,000,000 до вычета прав | Q3 |\n| D3 | Average well production R3 300 barrels per day — максимум | Самая продуктивная скважина при Spot price $50 внушает, что R3 — премиальный актив; Profit R3 = $(4,000,000) | B3 |\n| D4 | Number of Rigs 10 / 10 / 10 — одинаково | Кажется, что мощность не различает регионы и потому её можно игнорировать; в паре с Drilling rates 20/30/20 и Average depth 1200/2700/3600 она и порождает 60/40/20 | B3 |\n| D5 | Совпадение, всплывающее при первом же умножении: 60 × $1,800,000 = 20 × $5,400,000 = $108,000,000 | Равенство выручки R1 и R3 внушает эквивалентность регионов и приглашает остановиться на верхней строке; прибыль расходится на $54,000,000 | Q3 |",
+    "support": "| # | Опора | Величина из записи | Ложна ли во второй ветви? |\n|---|---|---|---|\n| 1 | Годовая прибыль Region 2 выше Region 1 | $68,000,000 против $50,000,000, разрыв $18,000,000 | Да — ветвь REGION_1_MARGIN обязана её отбросить |\n| 2 | Вход одинаков во всех трёх регионах, значит не различает варианты по риску капитала, но полностью вычитается из каждого | $40,000,000 | Нет — общий факт, но в наивной ветви не применяется вовсе |\n| 3 | Маржа на скважину не масштабируется: R1 выигрывает по проценту, но проигрывает по объёму | 500% против 300% при 60 против 40 скважин | Да — в наивной ветви это и есть главный аргумент, с обратным знаком |\n| 4 | Region 3 отпадает арифметически, не по суждению | Profit $(4,000,000) при Total Cost $112,000,000 > Total Revenue $108,000,000 | Нет — общий факт для обеих ветвей |",
+    "risks": "| # | Риск | Цифра-основание из записи | Тип |\n|---|---|---|---|\n| 1 | Вся прибыль Region 2 держится на способности пробурить именно 40 скважин за год при потолке в 10 буровых; недобор скважин вычитается напрямую из $68,000,000 при неизменных $40,000,000 прав | 40 скважин · 10 rigs · $40,000,000 | внутренний |\n| 2 | Стоимость скважины в Region 2 втрое выше, чем в Region 1 — перерасход по буровой смете бьёт по R2 сильнее | $900,000 против $300,000, Cost per rig day $10,000 против $5,000 | внутренний |\n| 3 | Экономика всех трёх регионов посчитана при одной цене — Spot price $50; при её снижении Region 2 теряет больше в абсолюте, поскольку несёт наибольшую выручку | $50 · Total Revenue $144,000,000 | внешний (цена сырья) |\n| 4 | Права стоят $40,000,000 и уплачиваются вперёд в любом регионе — невозвратный вход до первой скважины | $40,000,000 | внешний (условия лицензии) |",
+    "next": "| # | Шаг | Какую неопределённость записи снимает |\n|---|---|---|\n| 1 | Подтвердить с оператором график бурения на 40 скважин в Region 2 при 10 буровых, средней глубине 2700 м и темпе 30 м/день | Снимает главный риск ветви: число скважин в год — единственный драйвер, отделяющий $68,000,000 от $50,000,000 |\n| 2 | Прогнать прибыль Region 2 и Region 1 при цене ниже Spot price $50 и найти цену, при которой ранг $68,000,000 против $50,000,000 меняется | Снимает неопределённость по устойчивости выбора к рынку |\n| 3 | Запросить условия платежа за права ($40,000,000): единовременно или траншами | Снимает неопределённость по денежному потоку первого года, которую таблица не раскрывает |\n| 4 | Проверить, можно ли снять потолок в 10 буровых в Region 2 и во что обходится каждая дополнительная при Cost per rig day $10,000 | Снимает верхнюю границу прибыли: запись фиксирует потолок, но не его цену |",
+    "build": "```python\nfrom decimal import Decimal as D, ROUND_HALF_UP\n\ndef q(x, p): return x.quantize(D(p), rounding=ROUND_HALF_UP)\n\nrights = D('40000000')                        # Investment Cost, каждый регион, p.114\nprofit_per_well = {'R1': D('1500000'), 'R2': D('2700000'), 'R3': D('1800000')}\nwells           = {'R1': D('60'),      'R2': D('40'),      'R3': D('20')}\ncost_per_well   = {'R1': D('300000'),  'R2': D('900000'),  'R3': D('3600000')}\nrev_per_well    = {'R1': D('1800000'), 'R2': D('3600000'), 'R3': D('5400000')}\n\nfor r in ('R1', 'R2', 'R3'):\n    total_rev  = rev_per_well[r] * wells[r]\n    total_cost = cost_per_well[r] * wells[r] + rights\n    profit     = profit_per_well[r] * wells[r] - rights\n    print(r, q(total_rev, '1'), q(total_cost, '1'), q(profit, '1'))\n# R1 108000000 58000000 50000000   ← сверка с p.114\n# R2 144000000 76000000 68000000   ← сверка с p.114\n# R3 108000000 112000000 -4000000  ← сверка с p.114\n\ngap = (profit_per_well['R2'] * wells['R2'] - rights) - (profit_per_well['R1'] * wells['R1'] - rights)\nprint(q(gap, '1'))   # 18000000\n```\n\n**Провоцируемая ошибка:** шаги 1–4 наивного пути — ранжирование по Profit margin per well (500% > 300%) и рекомендация Region 1 без умножения на 60/40 и без вычета $40,000,000 (рефлекс N1, подкреплён decoy D1).\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: Region 2 — Profit $68,000,000 против $50,000,000 и $(4,000,000); (3) the naive reading is rejected explicitly, not merely avoided — Region 1 — margin 500% против 300% и 50% must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: Region 2 — Profit $68,000,000 против $50,000,000 и $(4,000,000); (3) наивное прочтение отвергнуто вслух, а не просто обойдено — Region 1 — margin 500% против 300% и 50% обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "**Вывод.** Bid for Region 2 — it delivers $68,000,000 of annual profit against $50,000,000 in Region 1, an $18,000,000 advantage, and Region 3 is loss-making at $(4,000,000).\n\n**Факты.** First, Region 1 wins on margin per well — 500% against 300% — but margin does not scale: Region 2 earns $2,700,000 per well across 40 wells, or $108,000,000, against Region 1's $1,500,000 across 60 wells, or $90,000,000. Second, the $40,000,000 rights cost is identical in every region, so it does not differentiate the bid but it does subtract in full: $68,000,000 versus $50,000,000 after it. Third, Region 3 fails on arithmetic, not judgement — $108,000,000 of revenue against $112,000,000 of cost.\n\n**Риск.** Internally, the entire $18,000,000 advantage rests on drilling 40 wells in year one with a maximum of 10 rigs and an average depth of 2,700 metres; every well short comes straight out of profit while the $40,000,000 stays sunk. Externally, all three cases are priced at a $50 spot, and Region 2 carries the largest revenue base at $144,000,000, so it loses the most in absolute terms if the price falls.\n\n**Next step.** Get the operator to commit to a 40-well schedule in Region 2 within two weeks, and run the profit ranking at spot prices below $50 to find the price at which Region 1 overtakes."
+   },
+   "anchor_metric": "не применяется, форма β"
+  },
+  {
+   "id": "SY-011",
+   "title": "The Vineyard Move",
+   "company": "Ombrelune",
+   "industry": "виноделие / премиальный потребительский",
+   "difficulty": "Medium",
+   "clean": false,
+   "focus": "S07(a)",
+   "scaffold": "L2",
+   "time": "4 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Ombrelune is a single-wine winery that has to leave its home valley: the climate there no longer supports its grapes. Three prospective vineyard sites in three different states are on the table, and each was described to us by a different broker, in different terms. Your job is to tell the owners which site they should acquire, and why.",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**Производственное задание Ombrelune (без изменений после переезда)**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Параметр",
+       "Значение"
+      ],
+      "rows": [
+       [
+        "Выпуск в год",
+        "10 000 ящиков"
+       ],
+       [
+        "Бутылок в ящике",
+        "12"
+       ],
+       [
+        "Гроздей на одну бутылку",
+        "10"
+       ],
+       [
+        "Гроздей с одной лозы в год",
+        "40"
+       ],
+       [
+        "Лоз на акр (базовая плотность посадки)",
+        "1 000"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "**Три площадки (описания брокеров, дословно)**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Площадка",
+       "Описание"
+      ],
+      "rows": [
+       [
+        "The Finger Lakes, New York",
+        "«Prospective Site has 36 Acres of land right along the Lake Seneca.» / «Cooler climate results in a lower yield of 32 clusters of grapes/vine.»"
+       ],
+       [
+        "Albemarle County, Virginia",
+        "«Prospective Site can produce up to 1,300,000 clusters/year.» / «Inclement weather will destroy 10% of the grape crop each year.»"
+       ],
+       [
+        "Walla Walla Valley, Washington",
+        "«Prospective Site has 40 Acres of land with beautiful vistas of the Valley.» / «Washington State Law requires no more than 750 vines per acre.»"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "Сноска к экзибиту: «The number of grape clusters needed to make one bottle of wine remains the same at 10 clusters/bottle.»",
+       "**Фон по клиенту**",
+       "- Ombrelune делает одно вино — Meritage Red Blend: «A Meritage Red Blend combines several grapes (vs. just one varietal like Pinot Noir) into a single wine. A portmanteau of \"merit\" and \"heritage,\" the name conveys high quality and tradition.»",
+       "- Цель владельцев: «not to achieve a specific financial return, but rather to maintain their current level of production, quality of wine, and brand reputation.»",
+       "- Сбыт: «to high-end restaurants all around the world as well as DTC online and in-person at the winery. A bottle sells for $500.»",
+       "- Причина переезда: «Rising temperatures, extended droughts, and recent forest fires have made their location unsuitable for grape growing.»",
+       "- Сроки: «As soon as a new region and wine is identified.»",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Шаг | Что делает кандидат под давлением | Куда приводит | Рефлекс |\n|---|---|---|---|\n| 1 | Считает бутылки и останавливается, не доводя цепочку до гроздей | нет общей единицы для сравнения площадок | «объём я уже посчитал» |\n| 2 | Читает экзибит слева направо и цепляется за 36 акров Finger Lakes | 36 > 30, площадка «проходит» | сравнение в акрах, а не в гроздях |\n| 3 | Видит у Albemarle число в «нужной» единице — 1 300 000 | берёт его как готовый ответ, минуя 10% | доверие к единице измерения вместо доверия к расчёту |\n| 4 | Считает 10% «мелкой поправкой» на фоне запаса в 100 000 | 1,3M «всё равно больше» | процент от большого числа занижается на глаз |\n| 5 | Видит у Walla Walla только запрет 750 лоз/акр | помечает площадку как ограниченную и отбрасывает | ограничение читается как минус, а не как множитель |\n| 6 | Рекомендует Albemarle «с наибольшей мощностью» | В1 | «крупнее = безопаснее» |",
+    "decoy": "| id | Факт-обманка | Почему выглядит опорой | Класс |\n|---|---|---|---|\n| D1 | «36 Acres of land» у Finger Lakes | больше минимальной площади, которую кандидат только что посчитал (30 акров) — кажется прямым сравнением | Q1 |\n| D2 | «can produce up to 1,300,000 clusters/year» | единственная площадка, описанная сразу в целевой единице, и число крупнее порога | Q1 |\n| D3 | «Washington State Law requires no more than 750 vines per acre» | формулировка запрета читается как дисквалификация площадки | Q3 |\n| D4 | «right along the Lake Seneca» / «beautiful vistas of the Valley» | звучит как аргумент бренда и туризма для винодельни с DTC-каналом | B3 |\n| D5 | «A bottle sells for $500» + сбыт в high-end restaurants | тянет на экономический критерий выбора площадки, которого в задаче нет | B3 |\n| D6 | «Inclement weather will destroy 10% of the grape crop each year» | 10% на глаз кажется меньше видимого запаса в 100 000 гроздей | Q3 |",
+    "support": "| # | Опора | Величина из записи | Ложна ли во второй ветви? |\n|---|---|---|---|\n| 1 | Объём выпуска в бутылках задан жёстко | 10 000 × 12 = 120 000 бут. | нет — общая для обеих ветвей |\n| 2 | Норма гроздей на бутылку не меняется при переезде | 10 кластеров/бут. | нет |\n| 3 | Базовая плотность посадки | 1 000 лоз/акр | нет, но у Walla Walla перекрывается законом |\n| 4 | Урожайность лозы | 40 кластеров/лоза | нет, но у Finger Lakes перекрывается климатом |\n| 5 | Площадь Finger Lakes | 36 акров | **да** — опора ложна: площадь больше, а урожайность лозы ниже, и второе перевешивает |\n| 6 | Заявленная мощность Albemarle | 1 300 000 кластеров/год | **да** — опора ложна: это мощность до вычета ежегодных потерь |\n| 7 | Площадь Walla Walla | 40 акров | нет — но работает только вместе с потолком 750 лоз/акр |\n\n---",
+    "risks": "1. **Внутренний.** Выбранная площадка выходит ровно на требуемое годовое число гроздей — запас нулевой. У соседней площадки книга прямо печатает ежегодные потери урожая в 10% («Inclement weather will destroy 10% of the grape crop each year», стр. 113); любой сопоставимый по масштабу неурожай на новой площадке уводит выпуск ниже 120 000 бутылок, то есть напрямую бьёт по заявленной цели «maintain their current level of production».\n2. **Внешний / репутационный.** Вся экономика Ombrelune стоит на цене $500 за бутылку и продаже в high-end restaurants по всему миру; книга фиксирует риск переезда как «consumer pushback, Walla Walla's lower reputation compared to Napa Valley, and a decline in quality» (стр. 116, блок Risks). Просадка премии даже на 10% — это ~$6M годовой выручки при 120 000 бутылок.",
+    "next": "1. Опросить действующих клиентов-рестораторов о готовности сохранить закупку и цену $500 после смены региона — снимает неопределённость по репутационному риску (стр. 116: «surveying current customers about the move»).\n2. Провести конкурентный анализ виноделен выбранной долины против домашней долины — снимает неопределённость по качеству и позиционированию (стр. 116: «conducting a competitive analysis comparing wineries in Walla Walla with those in Napa»).\n3. Проверить агрономическим замером фактическую урожайность лозы на площадке при разрешённой плотности посадки — снимает нулевой запас по объёму.\n4. Определить назначение старого участка после переезда — снимает неопределённость по остаточному активу (стр. 115, блок Brainstorming).\n\n---",
+    "build": "```python\nfrom decimal import Decimal as D, ROUND_HALF_UP\n\n# --- входы, все напечатаны в книге и все вынесены в ЗАПИСЬ ---\ncases        = D(\"10000\")   # стр.110, Clarifying Information п.3 / стр.112 Question 2\nbottles_case = D(\"12\")      # стр.110 \"10,000 cases (120,000 bottles)\"\nclusters_bot = D(\"10\")      # стр.112 \"# of Grapes per Bottle 10 grape clusters/bottle\"\nclusters_vine= D(\"40\")      # стр.112 \"# Grapes per Vine (annual) 40 grape clusters/vine\"\nvines_acre   = D(\"1000\")    # стр.112 \"# Vines per Acre 1000 vines/acre\"\n\n# --- ПОСТРОЕНО кандидатом: порог. Книга печатает его на стр.112, в запись не вынесен ---\nbottles   = cases * bottles_case          # 120,000  <- сверка: стр.110 \"(120,000 bottles)\"\nthreshold = bottles * clusters_bot        # 1,200,000 <- сверка: стр.112 \"Total Grapes Required 1,200,000\"\nper_acre  = clusters_vine * vines_acre    # 40,000    <- сверка: стр.112 \"Grapes per Acre 40,000\"\nacres_req = threshold / per_acre          # 30        <- сверка: стр.112 \"30 Acres\"\n\n# --- площадки, входы со стр.113 (EXHIBIT 1) ---\n# Finger Lakes: 36 акров, 32 кластера/лоза, плотность базовая 1000 лоз/акр\nfl = D(\"32\") * vines_acre * D(\"36\")                    # 1,152,000 <- сверка: стр.114\n# Albemarle: 1,300,000 заявлено, минус 10% ежегодных потерь\nalb_gross = D(\"1300000\")\nalb = alb_gross * (D(\"1\") - D(\"0.10\"))                 # 1,170,000 <- сверка: стр.114\n# Walla Walla: 40 акров, законный потолок 750 лоз/акр, урожайность базовая 40\nww = D(\"750\") * D(\"40\") * clusters_vine                # 1,200,000 <- сверка: стр.114\n\nq = lambda x: x.quantize(D(\"1\"), rounding=ROUND_HALF_UP)\nprint(\"порог  :\", q(threshold))          # 1200000\nprint(\"акров  :\", q(acres_req))          # 30\nprint(\"FL     :\", q(fl),  fl  >= threshold)   # 1152000 False\nprint(\"ALB    :\", q(alb), alb >= threshold)   # 1170000 False\nprint(\"WW     :\", q(ww),  ww  >= threshold)   # 1200000 True\n\n# ловушка «20% против 20%», книга стр.114: \"a 20% decrease in clusters/vine\n# does NOT balance out the 20% increase in acreage\"\nyield_drop  = (clusters_vine - D(\"32\")) / clusters_vine     # 0.20\nacre_gain   = (D(\"36\") - acres_req) / acres_req             # 0.20\ncombined    = (D(\"1\") - yield_drop) * (D(\"1\") + acre_gain)  # 0.96 < 1 -> недобор 4%\nprint(\"комбинированный множитель:\", combined)               # 0.9600\nprint(\"проверка:\", q(threshold * combined) == q(fl))        # True\n```\n\n**Провоцируемая ошибка:** кандидат сравнивает площадки в тех единицах, в которых их описал брокер, и выбирает ту, у которой напечатано самое крупное число, вместо того чтобы привести все три к годовому числу гроздей после местного ограничения.\n\n---\n\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: 1 200 000 кластеров/год (Walla Walla Valley, после применения потолка 750 лоз/акр); (3) the naive reading is rejected explicitly, not merely avoided — 1 300 000 кластеров/год (Albemarle County, как напечатано, стр. 113) must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: 1 200 000 кластеров/год (Walla Walla Valley, после применения потолка 750 лоз/акр); (3) наивное прочтение отвергнуто вслух, а не просто обойдено — 1 300 000 кластеров/год (Albemarle County, как напечатано, стр. 113) обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "**Conclusion.** Ombrelune should acquire the Walla Walla Valley site.\n\n**Facts.** Holding output at 10,000 cases means 120,000 bottles, and at 10 clusters per bottle the new site must deliver 1,200,000 clusters a year. Walla Walla is the only site that clears that bar: the 750-vine legal cap on 40 acres gives 30,000 vines, and at 40 clusters per vine that is exactly 1,200,000 clusters. The Finger Lakes site looks larger at 36 acres, but its cooler climate cuts yield to 32 clusters per vine, so it delivers 1,152,000 clusters — the 20% drop in yield is not offset by the 20% extra acreage. Albemarle advertises 1,300,000 clusters, but loses 10% of the crop every year to weather, which is 130,000 clusters against only 100,000 of headroom, leaving 1,170,000.\n\n**Risk — internal.** Walla Walla clears the requirement with zero margin; a crop loss of the size Albemarle already reports would put us below 120,000 bottles and break the client's core objective of holding production flat.\n\n**Risk — external.** Walla Walla carries a lower regional reputation than our home valley, which is a direct threat to a $500 bottle sold into high-end restaurants worldwide.\n\n**Next step.** Survey our current restaurant accounts on price and volume commitment post-move, and run a competitive benchmark of Walla Walla wineries against our home valley, before we sign.\n\n---"
+   },
+   "anchor_metric": "1 200 000 кластеров в год"
+  },
+  {
+   "id": "SY-012",
+   "title": "Racquet Clubs Across The Border",
+   "company": "Ulmethrayne",
+   "industry": "Urban racquet clubs",
+   "difficulty": "Medium",
+   "clean": true,
+   "focus": "S05(a)",
+   "scaffold": "L4",
+   "time": "3 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Ulmethrayne is considering opening urban racquet clubs in Germany. The client's stated goal is to break even at least, with no timeframe attached. Our team has the facility parameters and the market price already in the record. The question: at what membership fee does this work, and what should the client do?",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "*Exhibit A — Cost overview (стр. 212):*",
+       "- Total annual cost: €200,000",
+       "- Number of courts: 15",
+       "- Opening hours: 8am – 6pm",
+       "- Days of use per week: 7",
+       "- Court use: 1 hour per member per week",
+       "- Usage capacity: 70%",
+       "*Допущения, снятые аналитиком у клиента (стр. 214):*",
+       "- «Courts are always used during operating hours.»",
+       "- «assume 50% single and 50% double matches»",
+       "- «If the candidate asks about revenues, tell him/her that they are equal to the annual costs.»",
+       "*Цель и фон (стр. 211):*",
+       "- Goal: «Breakeven at least. No timeframe.»",
+       "- Revenue: «Annual subscription based revenue model.»",
+       "- Company: «Sosland Sports centers are mid-range centers with medium-quality facilities. They only exist in Sweden.»",
+       "- Продукт: «The squash centers include sauna, spa, pool, gym and — of course — the squash courts!»",
+       "- Повод: «Due to the extreme success in Sweden the company is considering expanding to other countries in Europe, in particular Germany.»",
+       "*Рынок (стр. 215):*",
+       "- «The dominant market player for squash centers (70% market share in Germany) offers memberships for €70.»"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Шаг | Что делает кандидат под давлением | Куда приводит | Рефлекс |\n|---|---|---|---|\n| 1 | Видит €70 инкумбента и принимает её за целевую цену | Считает не «при какой цене сходится», а «сколько членов нужно при €70» | — (Clean-слот) |\n| 2 | Делит €200,000 / €70 = 2 857.14 и объявляет цель по членам достижимой | База 2 857.14 не сверяется с потолком 2,205 | — |\n| 3 | Останавливается на «нет точки безразличия» или на безусловном «не входить» | Теряет условное ДА книги — что вход возможен при дифференциации | — |\n| 4 | Обосновывает вердикт долей рынка 70%, а не физикой мощности | Аргумент рыночный, не количественный; €90.70 не произносится | — |",
+    "decoy": "| id | Факт-обманка | Почему выглядит опорой | Класс |\n|---|---|---|---|\n| D1 | Доля инкумбента 70% в Германии | Совпадает по числу с Usage capacity 70% и потому легко подставляется в счёт мощности; к безубыточному взносу отношения не имеет | Q3 |\n| D2 | «Opening hours 8am – 6pm» | Читается как 8 часов рабочего дня по привычке; книга берёт 10 hours/day, что даёт 1,050 вместо иной базы | Q3 |\n| D3 | Формулировка «Breakeven at least. No timeframe.» | Отсутствие горизонта внушает, что цену можно временно держать ниже безубытка и «дорастить базу»; потолок 2,205 членов от времени не зависит | B3 |\n| D4 | «mid-range centers with medium-quality facilities» рядом с составом объекта (sauna, spa, pool, gym) | Приглашает вести спор о позиционировании качественно — «мы лучше, значит возьмём дороже» — вместо того чтобы назвать цену, при которой сходится: €90.70 из записи не выводится словами о качестве | B3 |\n| D5 | «Breakeven at least» плюс «annual subscription» | Годовая подписка внушает, что €70 инкумбента — годовая цена того же продукта; книга ровно здесь ставит контрольный вопрос «Are you sure this is an annual fee and not a weekly one?» (стр. 214) | Q3 |",
+    "support": "| # | Опора | Величина из записи | Ложна ли во второй ветви? |\n|---|---|---|---|\n| 1 | Безубыточный взнос при полном использовании объявленной мощности | €200,000 / 2,205 = €90.70 | Да — ветвь ENTER_AT_MARKET_PRICE обязана её игнорировать |\n| 2 | Физический потолок базы задан мощностью, а не спросом | 10 × 7 × 15 = 1,050 → ×70% = 735 → ×3 = 2,205 членов | Нет — общий факт, но в наивной ветви не применяется |\n| 3 | Цена инкумбента лежит на €20.70 ниже безубытка (€90.70 против €70) | €70 против €90.70 | Нет — общая опора, читается противоположно |\n| 4 | При €70 требуется загрузка 90.7029% против объявленного потолка 70% | 200 000/70 = 2 857.14 членов → 952.3810 часов → 90.7029% | Да — ветвь ENTER_AT_MARKET_PRICE обязана допустить сверхпотолочную загрузку |",
+    "risks": "| # | Риск | Цифра-основание из записи | Тип |\n|---|---|---|---|\n| 1 | Вся модель держится на одном допущении о смеси игроков — «(50% × 2) + (50% × 4) = 3»; при 2 игроках в час база падает и безубыточный взнос растёт выше €90.70 | 3 members/hour, 2,205 членов | внутренний |\n| 2 | Total annual cost €200,000 принят как фиксированный при любой загрузке; рост затрат сдвигает €90.70 вверх при неизменном потолке 2,205 | €200,000 / 2,205 | внутренний |\n| 3 | Доминирующий игрок держит 70% рынка Германии и цену €70 — ценовая война при входе, которую клиент, по записи, выиграть не может | 70% доля, €70 | внешний |\n| 4 | Требуемая при €70 загрузка 90.7029% превышает объявленный потолок 70%, то есть недостижима без изменения графика работы или числа кортов | 90.7029% против 70% | внешний (физика мощности / регламент объекта) |",
+    "next": "| # | Шаг | Какую неопределённость записи снимает |\n|---|---|---|\n| 1 | Проверить готовность немецкого игрока платить €90.70 против рыночных €70 — тест ценовой премии на целевом сегменте | Снимает единственную неопределённость, отделяющую условное ДА от НЕТ: существует ли дифференциация, оправдывающая +€20.70 |\n| 2 | Верифицировать смесь игроков «(50% × 2) + (50% × 4)» замером фактических бронирований | Снимает допущение о 3 членах в час, на котором целиком стоит потолок 2,205 |\n| 3 | Проверить, можно ли поднять потолок мощности — расширить Opening hours за пределы 8am–6pm или поднять Usage capacity выше 70% | Снимает границу 735 часов в неделю, из-за которой €70 требует 90.7029% загрузки |\n| 4 | Разложить Total annual cost €200,000 на постоянную и переменную части | Снимает допущение о фиксированности затрат, встроенное в деление €200,000 / 2,205 |",
+    "build": "```python\nfrom decimal import Decimal as D, ROUND_HALF_UP\n\ndef q(x, p): return x.quantize(D(p), rounding=ROUND_HALF_UP)\n\nannual_cost   = D('200000')   # Exhibit A p.212\ncourts        = D('15')\nhours_per_day = D('10')       # 8am – 6pm\ndays          = D('7')\nutilization   = D('0.70')     # Usage capacity 70%\nper_hour      = D('3')        # (50% x 2) + (50% x 4) = 3, p.214\nincumbent     = D('70')       # p.215\n\nhours_week = hours_per_day * days * courts\nprint(q(hours_week, '1'))                       # 1050   ← книга p.214\nusable = hours_week * utilization\nprint(q(usable, '1'))                           # 735    ← книга p.214\nmembers_cap = usable * per_hour\nprint(q(members_cap, '1'))                      # 2205   ← книга p.214\nprint(q(annual_cost / members_cap, '0.01'))     # 90.70  ← книга p.214\n\n# расчёт по книжным входам: что требует цена инкумбента\nneed_members = annual_cost / incumbent\nprint(q(need_members, '0.01'))                  # 2857.14 членов\nneed_hours = need_members / per_hour\nprint(q(need_hours, '0.0001'))                  # 952.3810 часов в неделю\nprint(q(need_hours / hours_week * 100, '0.0001'))  # 90.7029 % против потолка 70%\n```\n\n**Провоцируемая ошибка:** шаги 1–2 наивного пути — принять €70 за целевую цену и посчитать 2 857.14 членов, не сверив с потолком 2,205 (совпадает с decoy D3: «No timeframe» как разрешение временно работать ниже безубытка).\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: Потолок базы при 70% загрузке = 2,205 членов; безубыточный взнос = €90.70; €70 требует 90.7029% загрузки при объявленном потолке 70%; (3) the naive reading is rejected explicitly, not merely avoided — «Ставим €70 как все и добираем членами» — требуемая база 200 000/70 = 2 857.14 членов must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: Потолок базы при 70% загрузке = 2,205 членов; безубыточный взнос = €90.70; €70 требует 90.7029% загрузки при объявленном потолке 70%; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — «Ставим €70 как все и добираем членами» — требуемая база 200 000/70 = 2 857.14 членов обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "**Вывод.** Do not enter Germany at the incumbent's €70 — the club breaks even only at €90.70, so entry is justified only if Ulmethrayne can prove a differentiation that supports that higher price.\n\n**Факты.** First, capacity is fixed: 10 hours a day across 7 days and 15 courts gives 1,050 court-hours a week, 70% utilization gives 735, and at 3 members per hour that caps membership at 2,205. Second, €200,000 of annual cost across 2,205 members sets breakeven at €90.70 — €20.70 above the €70 the dominant player charges. Third, matching €70 would require 2,857.14 members, which is 952.38 court-hours or 90.70% utilization against a stated ceiling of 70% — physically unavailable, not merely expensive.\n\n**Риск.** Internally, the entire 2,205 ceiling rests on one assumption — 3 members per court-hour from a 50/50 singles-doubles mix; if it is closer to 2, breakeven moves above €90.70. Externally, the incumbent holds 70% of the German market at €70 with a lower cost base, so any attempt to compete on price is a war the client cannot win.\n\n**Next step.** Run a willingness-to-pay test at €90.70 against the €70 market price on the target urban segment before any site commitment, and validate the 3-members-per-hour mix from actual booking data."
+   },
+   "anchor_metric": "€70 — цена доминирующего игрока (стр. 215); цель «Breakeven at least. No timeframe.» (стр. 211)"
+  },
+  {
+   "id": "SY-013",
+   "title": "A Word From the Growers",
+   "company": "Jerncholt",
+   "industry": "Sugar-beet agronomy inputs",
+   "difficulty": "Easy",
+   "clean": true,
+   "focus": "S14(c)",
+   "scaffold": "L2",
+   "time": "4 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Jerncholt sells agronomy inputs to sugar-beet growers and is deciding whether to launch a new product with its grower base. An analyst has already worked the question through and left a transcript of that analysis. Read it and give the launch verdict — and say explicitly whether the world-price argument in the notes changes it.",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "Working note, product launch review — Jerncholt agronomy inputs.",
+       "",
+       "Step 1. What the technology does. Book text, p. 75: «The product allows farmers to grow the same amount of sugar on half of the land.»",
+       "",
+       "Step 2. What the grower then does with the freed acreage. Book text, p. 75: «we can assume that farmers will keep half of their land for sugar and repurpose the rest of the land for growing cabbage.»",
+       "",
+       "Step 3. Market note left in the file, p. 73: a doubling of production «would cause an immediate worldwide sugar glut and rapidly falling prices».",
+       "",
+       "Step 4. Inputs on hand, p. 74: «The elasticity of demand for sugar is 1». Cabbage is «one fifth as profitable as sugar».",
+       "",
+       "Step 5. Side notes carried over from the file: growers in the region rotate crops on an annual cycle; cabbage is sold into local markets rather than exported; the sales team has an existing relationship with the grower cooperatives; the product is sold as an annual input, not a one-time licence.",
+       ""
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Шаг | Что делает под давлением | Куда приводит | N# |\n|---|---|---|---|\n| 1 | Читает «doubling production» на стр. 73 как то, что произойдёт | Строит удвоение выпуска | — (зацепка, не рефлекс) |\n| 2 | Подставляет эластичность 1 | Считает, что цена падает пропорционально | — |\n| 3 | Достраивает «worldwide sugar glut» | Делает вывод, что запуск обрушит рынок | — |\n| 4 | Переворачивает рекомендацию | «Не выводить продукт» — вывод, которого в записи нет | — |",
+    "decoy": "1. «a doubling of production would cause an immediate worldwide sugar glut and rapidly falling prices» — фраза стоит в записи дословно и верна как условное утверждение, но её условие в этой записи не наступает: шаг 1 говорит «the same amount of sugar on half of the land», то есть выпуск не удваивается. Класс Q1 — истинная посылка, чужая ветвь.\n2. «The elasticity of demand for sugar is 1» — верное входное значение, но применять его не к чему: при неизменном выпуске сахара двигать по кривой спроса нечего.\n3. **Класс Q3 (другой уровень):** «glut» и эластичность заданы на мировом рынке, а вопрос задан про прибыль одного растениевода с акра; перенос мирового уровня на уровень хозяйства и есть подмена.",
+    "support": "| # | Опора | Величина | Ложна ли во второй ветви? |\n|---|---|---|---|\n| 1 | Выпуск сахара не меняется | тот же объём на половине земли | **да** — наивная ветвь требует ×2 |\n| 2 | Освобождённая земля под капусту | 0.5 акра из 1 | **да** — в наивной ветви земля остаётся под сахаром |\n| 3 | Прибыльность капусты | 1/5 от сахара | нет — величина одна и та же |\n| 4 | Прибыль с акра | 1.10, то есть +10% | **да** — в наивной ветви прибыль определяется обвалом цены |",
+    "risks": "- **Внутренний:** весь прирост держится на том, что освобождённая половина земли действительно уйдёт под капусту с прибыльностью 1/5 от сахара; если половина земли простаивает, прирост +10% не возникает вовсе — остаётся 1.0.\n- **Внешний:** капуста — отдельный рынок со своей ценой; коэффициент «one fifth as profitable as sugar» задан для сегодняшних условий, и его снижение съедает всю добавку в 0.10 на акр.",
+    "next": "1. Проверить на выборке хозяйств, что освобождаемая половина земли агрономически пригодна под капусту — это снимает неопределённость по опоре, дающей 0.10 из 1.10.\n2. Подтвердить, что выпуск сахара у растениеводов остаётся прежним, а не наращивается — если растениеводы засеют сахаром и вторую половину, возвращается ровно тот сценарий удвоения выпуска, который книга отвергает на стр. 75.",
+    "build": "```python\nfrom decimal import Decimal, ROUND_HALF_UP\nsugar_share   = Decimal('0.5')                 # стр. 75: половина земли остаётся под сахаром\ncabbage_share = Decimal('0.5')                 # стр. 75: остальное — под капусту\ncabbage_rel   = Decimal('1') / Decimal('5')    # стр. 74: «one fifth as profitable as sugar»\n# выпуск сахара не меняется → сахарная часть прибыли остаётся 1, а не 0.5\nindex = Decimal('1') + cabbage_share * cabbage_rel\nuplift = ((index - 1) * 100).quantize(Decimal('1'), ROUND_HALF_UP)\n# index  = 1.10  — ПОСТРОЕНО кандидатом; в записи этой величины нет\n# uplift = 10 %  — книга печатает +10% на стр. 75, в запись не вынесено\n```"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: +10% прибыли с акра, вердикт не переворачивается; (3) the naive reading is rejected explicitly, not merely avoided — удвоение выпуска → «immediate worldwide sugar glut and rapidly falling prices» → рекомендация переворачивается в «не выводить» must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: +10% прибыли с акра, вердикт не переворачивается; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — удвоение выпуска → «immediate worldwide sugar glut and rapidly falling prices» → рекомендация переворачивается в «не выводить» обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "Launch the product: it raises grower profit per acre by 10%, and the world-price argument in the notes does not overturn that. The technology lets a grower produce the same amount of sugar on half the land, so sugar output per grower is unchanged; the freed half goes to cabbage at one fifth the profitability of sugar, giving 1 + 0.5 × (1/5) = 1.10 per acre, a 10% gain. The glut argument assumes growers double sugar output on the same land — the book explicitly calls that the common mistake, since the technology halves the land «rather than doubling production», and with output flat the elasticity of 1 has nothing to act on. Two risks: internally, the 0.10 uplift exists only if the freed acreage is actually planted with cabbage; externally, cabbage economics are set by its own market, and a fall in its one-fifth relative profitability erases the gain. Next: test cabbage suitability on the freed acreage across a grower sample, and confirm with the cooperatives that sugar acreage is genuinely halved rather than sugar output raised."
+   },
+   "anchor_metric": "— (Clean: порога-переключателя нет, вердикт один)"
+  },
+  {
+   "id": "SY-014",
+   "title": "Eight Hundred Storefronts",
+   "company": "Aubrissac",
+   "industry": "розничная торговля одеждой (Франция)",
+   "difficulty": "Hard",
+   "clean": false,
+   "focus": "S13(a)",
+   "scaffold": "L1",
+   "time": "5 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "A private equity fund is weighing a bid for Aubrissac, a leading French clothing retail group that has been opening stores steadily for several years. Looking at the group's own investment plan, the fund's deal team has noticed that the overall operating margin has fallen year after year over that period, and they are uneasy about it. Is the fund right to be worried? Tell them what that falling number does and does not tell us about the business.",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**Цель**",
+       "Фонд прямых инвестиций рассматривает покупку Aubrissac — лидера французского рынка розничной торговли одеждой. «The Client has no specific financial target or timeline.»",
+       "**Рынок**",
+       "Французский рынок одежды состоит из двух сегментов:",
+       "- Urban: «trendy, high quality, quite expensive»",
+       "- Suburban: «mass market, lower quality, low prices»",
+       "За последние 5 лет: «The market is flat in value over the last 5 years (~$25B), but volumes have been growing over the same period (~2% per year).»",
+       "**Цель сделки (актив)**",
+       "«The target has total annual sales of $800M across 800 stores. It consists of 4 brands on each of the urban and suburban market segments.»",
+       "**Экономика точки (по одному из брендов, метрика sales/sq ft)**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Сегмент",
+       "Магазинов",
+       "Средняя площадь",
+       "Средняя доходность"
+      ],
+      "rows": [
+       [
+        "Suburban",
+        "15",
+        "1 600 кв. футов",
+        "$1 500 / кв. фут"
+       ],
+       [
+        "Urban",
+        "20",
+        "800 кв. футов",
+        "$2 750 / кв. фут"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "**Что видит команда фонда**",
+       "Фонд изучил инвестиционный план цели за последние годы. Наблюдение, которым фонд встревожен, сформулировано так: «Overall operating margin kept decreasing over the past years.»",
+       "**Условия, которые клиент подтверждает по запросу**",
+       "- «All stores are similar»",
+       "- «No cannibalization or coordination diminishing returns»",
+       "- «Opening new stores impact mainly fixed costs»",
+       "**План открытий на ближайшие годы**",
+       "«3 additional stores in year 7 and 2 additional stores in year 8.»",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Шаг | Что делает кандидат под давлением | Куда приводит | Рефлекс |\n|---|---|---|---|\n| 1 | Принимает тревогу фонда как заданную рамку («они правы, что беспокоятся») | вопрос переформулирован в «насколько плохо», а не «о чём это вообще» | согласие с формулировкой вопроса |\n| 2 | Достраивает падение средней маржи к уже известному плоскому по стоимости рынку | «цены падают → маржа падает» | склеивание двух падений в одну причину |\n| 3 | Использует sales/sq ft как доказательство ухудшения точки | смешивает доходность на метр с операционной маржой | любая метрика с деньгами идёт в тот же вывод |\n| 4 | Не спрашивает, из каких магазинов состоит выборка каждого года | состав выборки остаётся невидимым | средняя воспринимается как свойство объекта |\n| 5 | Не запрашивает допущения (они выдаются только по запросу) | три опоры второй ветви не появляются на столе | не спрашивает того, о чём не подозревает |\n| 6 | Рекомендует не заходить в сделку | В1 | «падающий ряд = продавать» |",
+    "decoy": "| id | Факт-обманка | Почему выглядит опорой | Класс |\n|---|---|---|---|\n| D1 | Рынок плоский по стоимости при росте объёма ~2%/год | готовое объяснение падающей маржи «через цену» — и оно уже подтверждено книгой на предыдущем вопросе | B3 |\n| D2 | Формулировка «the PE fund is worried about that» | тревога предъявлена как факт кейса, а не как гипотеза, требующая проверки | Q3 |\n| D3 | $800M продаж на 800 магазинов | ровное «$1M на магазин» соблазняет считать парк однородным и сравнивать годы напрямую | Q1 |\n| D4 | Urban $2 750/кв. фут против Suburban $1 500/кв. фут | разрыв в доходности читается как «микс сдвигается в худший сегмент» | Q1 |\n| D5 | «4 brands on each of the urban and suburban market segments» | 8 брендов выглядят объяснением «размывания» средней по портфелю брендов, а не по возрасту магазинов | B3 |\n| D6 | «The Client has no specific financial target or timeline» | отсутствие порога подталкивает судить по направлению ряда, раз не с чем сравнивать уровень | Q3 |",
+    "support": "| # | Опора | Величина из записи | Ложна ли во второй ветви? |\n|---|---|---|---|\n| 1 | Общая операционная маржа падала год за годом | направление | **да как аргумент о качестве бизнеса** — факт верен, вывод из него ложен |\n| 2 | Рынок плоский по стоимости, объём +2%/год | ~$25B / ~2% | **да** — объясняет цену на рынке, но не динамику маржи внутри цели |\n| 3 | Все магазины одинаковы | — | нет — работает только на В2 |\n| 4 | Каннибализации нет | — | нет — работает только на В2 |\n| 5 | Открытия бьют главным образом по постоянным затратам | — | нет — работает только на В2 |\n| 6 | 3 открытия в год 7, 2 в год 8 | 3 / 2 | нет — работает только на В2 (замедление темпа) |\n| 7 | Доходность на кв. фут по сегментам | $1 500 / $2 750 | **да** — метрика другого вопроса, к операционной марже по годам отношения не имеет |\n\n---",
+    "risks": "1. **Внутренний.** Вывод целиком держится на трёх клиентских допущениях, которые книга выдаёт как непроверенные: «All stores are similar», «No cannibalization or coordination diminishing returns», «Opening new stores impact mainly fixed costs» (стр. 194). Если хотя бы допущение об однородности не выполняется, падение средней перестаёт быть эффектом состава. Числовое основание: даже внутри одного бренда книга печатает разброс площадей в 2 раза (1 600 против 800 кв. футов, стр. 192) и разброс доходности в 1,8 раза ($1 500 против $2 750 за кв. фут) — то есть однородность парка из 800 магазинов не самоочевидна.\n2. **Внешний.** Рынок плоский по стоимости при ~$25B и растёт только в объёме ~2% в год (стр. 191): цена продолжает падать. Даже при полностью восстановившемся среднем зрелая маржа бренда остаётся, по признанию самой книги, невысокой — «The target company's margin while healthy, is still fairly low even when the new stores reach full potential» (стр. 196, блок Risks).",
+    "next": "1. Запросить операционную маржу по когортам открытия (like-for-like по магазинам, открытым до начала периода расширения) — снимает неопределённость «свойство магазинов или свойство выборки».\n2. Проверить допущение об однородности: разложить 800 магазинов по сегменту, площади и возрасту и сравнить маржу зрелых магазинов между собой — снимает риск №1.\n3. Провести конкурентный анализ рынка, чтобы понять, как играют остальные, — снимает неопределённость по устойчивости зрелой маржи при падающей цене (стр. 196: «Conduct a market competitive analysis to understand how other competitors are playing in the market»).\n4. Разобрать оргструктуру и культуру цели на предмет соответствия портфелю фонда — снимает риск исполнения сделки (стр. 196).\n\n---",
+    "build": "```python\nfrom decimal import Decimal as D, ROUND_HALF_UP\n\n# --- величины, напечатанные словами (Exhibit A стр.197 — картинка, чисел в тексте нет) ---\n# стр.192, Question 2\nsub_stores, sub_sqft, sub_psf = D(\"15\"), D(\"1600\"), D(\"1500\")\nurb_stores, urb_sqft, urb_psf = D(\"20\"), D(\"800\"),  D(\"2750\")\n\nsub_sales = sub_stores * sub_sqft * sub_psf      # 36,000,000  <- \"= $36M\" стр.192\nurb_sales = urb_stores * urb_sqft * urb_psf      # 44,000,000  <- \"= $44M\" стр.192\ntotal     = sub_sales + urb_sales                # 80,000,000  <- \"Total annual sale = $80M\" стр.192\narea      = sub_stores*sub_sqft + urb_stores*urb_sqft   # 40,000 sq ft\navg_psf   = total / area                         # 2,000       <- \"$2,000 / sq ft\" стр.192\n\n# --- ПОСТРОЕНО кандидатом, книга не печатает ---\n# входы: стр.189 \"total annual sales of $800M across 800 stores\"\nsales_per_store = D(\"800000000\") / D(\"800\")      # 1,000,000 $/магазин  [ПОСТРОЕНО]\n\n# --- план открытий, стр.195, Question 4 ---\nopenings_y7, openings_y8 = D(\"3\"), D(\"2\")\nopenings_2y = openings_y7 + openings_y8          # 5\n\nq = lambda x: x.quantize(D(\"1\"), rounding=ROUND_HALF_UP)\nprint(\"Suburban  :\", q(sub_sales))     # 36000000\nprint(\"Urban     :\", q(urb_sales))     # 44000000\nprint(\"Итого     :\", q(total))         # 80000000\nprint(\"$/кв.фут  :\", q(avg_psf))       # 2000\nprint(\"$/магазин :\", q(sales_per_store), \"[ПОСТРОЕНО, книга не печатает]\")  # 1000000\nprint(\"открытий за годы 7-8:\", q(openings_2y))  # 5\n\n# --- почему численной иллюстрации эффекта состава здесь НЕТ ---\n# Книга печатает только один уровень маржи: \"Brand reached full potential at an\n# average operating margin of 25%\" (стр.194). Уровень маржи НЕзрелого магазина,\n# длительность ramp-up и число открытий по годам 1-6 книга в тексте не печатает\n# (Exhibit A стр.197 — картинка). Любая численная модель разбавления средней\n# потребовала бы выдуманных входов, поэтому BUILD ограничен пересчётом\n# напечатанных величин. Механизм в эталоне изложен качественно — так, как его\n# печатает книга, и не подкрепляется несуществующими числами.\n```\n\n**Провоцируемая ошибка:** кандидат принимает падение средней операционной маржи за свойство самих магазинов и рекомендует отказаться от сделки, не спросив, из каких магазинов эта средняя каждый год составляется.\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: «уровень зрелого магазина 25% не менялся; средняя разбавляется когортой незрелых магазинов, добавляемых каждый год»; (3) the naive reading is rejected explicitly, not merely avoided — «средняя маржа падает N лет подряд» → бизнес ухудшается must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: «уровень зрелого магазина 25% не менялся; средняя разбавляется когортой незрелых магазинов, добавляемых каждый год»; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — «средняя маржа падает N лет подряд» → бизнес ухудшается обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "**Conclusion.** The fund should not read the falling overall operating margin as a deterioration of the business, and should keep pursuing the deal.\n\n**Facts.** The average is falling because of what enters it, not because of what happens inside it. The client confirms that all stores are similar, that there is no cannibalization or coordination diminishing returns, and that opening new stores hits mainly fixed costs — so every store opened in a given year enters the footprint below its steady-state margin and drags the blended number down, while mature stores hold their level. The target has been expanding continuously across 800 stores, so each successive year's average is a mix of matured stores and a fresh, structurally lower cohort. And the opening pace is now slowing — 3 additional stores in year 7 and 2 in year 8 — so the mix shifts back toward mature stores and the overall margin should turn up on its own, with no operational change at all.\n\n**Risk — internal.** The whole reading rests on three unverified client assumptions; if stores are in fact not similar, the decline is a genuine quality signal, and even inside one brand the book shows a 2x spread in store size and a 1.8x spread in sales per square foot.\n\n**Risk — external.** The market is flat in value at roughly $25B with volume growing only ~2% a year, so price pressure is real and the steady-state margin is fairly low even once new stores mature.\n\n**Next step.** Before bidding, pull operating margin by opening cohort and confirm like-for-like margin on stores opened before the expansion began — that single cut separates a sample-composition effect from a real decline.\n\n---"
+   },
+   "anchor_metric": "зрелая операционная маржа бренда — 25%"
+  },
+  {
+   "id": "SY-015",
+   "title": "Doughnuts At The Window",
+   "company": "Pomfretill",
+   "industry": "Drive-through restaurant co-branding",
+   "difficulty": "Medium",
+   "clean": false,
+   "focus": "S09(b)",
+   "scaffold": "L4",
+   "time": "3 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Pomfretill runs a drive-through burger chain and is considering co-branding doughnuts into its stores. The client asks a single quantitative question: what would be the incremental profit per store? Give me the number.",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "*Блок A — вход для расчёта (Exhibit 2, стр. 198):*"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Line",
+       "Value"
+      ],
+      "rows": [
+       [
+        "Units of GB sold per store",
+        "300,000"
+       ],
+       [
+        "Sales price per unit",
+        "$3"
+       ],
+       [
+        "Margin",
+        "50%"
+       ],
+       [
+        "Units of HD sold in GB stores",
+        "50,000"
+       ],
+       [
+        "Sales price per unit",
+        "$2"
+       ],
+       [
+        "Margin",
+        "60%"
+       ],
+       [
+        "Cannibalization Rate",
+        "10%"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "*Блок B — ЯВНО ИЗБЫТОЧНЫЙ фоновый блок (Exhibit 1, стр. 197):*"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Line",
+       "GB",
+       "HD"
+      ],
+      "rows": [
+       [
+        "Stores, Total",
+        "5,000",
+        "1,020"
+       ],
+       [
+        "North America",
+        "3,500",
+        "1,000"
+       ],
+       [
+        "Europe",
+        "1,000",
+        "20"
+       ],
+       [
+        "Asia",
+        "400",
+        "0"
+       ],
+       [
+        "Other",
+        "100",
+        "0"
+       ],
+       [
+        "Annual Growth in Stores",
+        "10%",
+        "15%"
+       ],
+       [
+        "Total store sales",
+        "$5,500M",
+        "$700M"
+       ],
+       [
+        "Parent company revenues",
+        "$1,900M",
+        "$200M"
+       ],
+       [
+        "Cost of sales",
+        "51%",
+        "40%"
+       ],
+       [
+        "Restaurant operating costs",
+        "24%",
+        "26%"
+       ],
+       [
+        "Property & equipment",
+        "4.6%",
+        "8.5%"
+       ],
+       [
+        "Corporate G&A",
+        "8%",
+        "15%"
+       ],
+       [
+        "Profit as % of sales",
+        "6.3%",
+        "4.9%"
+       ],
+       [
+        "Sales/store",
+        "$1.1M",
+        "$0.7M"
+       ],
+       [
+        "Industry average",
+        "$0.9M",
+        "$0.8M"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "*Вопрос клиента (стр. 195):* «What would be the incremental profit per store if we think we are going to sell 50 thousand doughnuts per store at a price of $2 per doughnut at a 60% margin with a cannibalization rate of 10% of GB's sales?»"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Шаг | Что делает кандидат под давлением | Куда приводит | Рефлекс |\n|---|---|---|---|\n| 1 | Собирает три числа, стоящие в самом вопросе: 50K, $2, 60% | Готовое произведение без выхода в Exhibit 2 | N8 |\n| 2 | Считает 50,000 × $2 × 60% | $60K — арифметически безупречно | N8 |\n| 3 | Слово «cannibalization rate of 10%» читает как оговорку о риске, а не как вход | Вычитание не производится | N8 |\n| 4 | Отвечает «$60K на точку» и переходит к масштабированию на сеть | Ветвь GROSS_60K — завышение прироста ровно вчетверо | N8 |",
+    "decoy": "| id | Факт-обманка | Почему выглядит опорой | Класс |\n|---|---|---|---|\n| D1 | Profit as % of sales GB 6.3% / HD 4.9% | Готовая маржинальная метрика, к которой тянется рука вместо Margin 50% / 60% из Exhibit 2; отвечает на другой уровень (компания, не точка) | Q3 |\n| D2 | Sales/store GB $1.1M против Industry average $0.9M | Внушает, что точка уже перевыполняет рынок и прирост можно оценивать сверху вниз от $1.1M, минуя 300,000 × $3 | Q3 |\n| D3 | Cost of sales GB 51% | Читается как «значит маржа 49%», конфликтуя с объявленными 50% Exhibit 2 | Q3 |\n| D4 | Stores, Total GB 5,000 | Подставляется при масштабировании вместо 3,500 североамериканских точек, о которых говорит стр. 196 | B3 |\n| D5 | Annual Growth in Stores HD 15% | Внушает, что прирост надо считать с ростом сети, тогда как вопрос задан на одну точку | B3 |",
+    "support": "| # | Опора | Величина из записи | Ложна ли во второй ветви? |\n|---|---|---|---|\n| 1 | Валовой вклад пончиков на точку | 50,000 × $2 × 60% = $60K | Нет — общая для обеих ветвей, но в наивной она же и финальный ответ |\n| 2 | Каннибализированная прибыль базового продукта | 300,000 × 10% × $3 × 50% = $45K | Да — ветвь GROSS_60K её отрицает целиком |\n| 3 | Чистый прирост на точку | $60K − $45K = $15K | Да — прямо противоречит $60K |\n| 4 | Масштаб для Северной Америки | $15K × 3,500 = $52.5M (книга округляет до «$50 million», стр. 196) | Да — в наивной ветви масштабировался бы $60K |",
+    "risks": "| # | Риск | Цифра-основание из записи | Тип |\n|---|---|---|---|\n| 1 | Три четверти валового вклада съедаются каннибализацией: $45K из $60K; ошибка в ставке 10% меняет ответ сильнее, чем любой другой вход | 10% · $45K из $60K | внутренний |\n| 2 | Объём 50,000 пончиков на точку — допущение, не факт; при его недоборе прирост уходит ниже $15K, тогда как каннибализация от 300,000 единиц GB остаётся | 50,000 против 300,000 | внутренний |\n| 3 | Маржа партнёра 60% выше собственной 50% при вдвое меньшей цене ($2 против $3) — условия ко-брендинга задают весь прирост и подлежат переговорам со второй стороной | 60% / $2 против 50% / $3 | внешний (партнёр) |\n| 4 | Присутствие партнёра сосредоточено в Северной Америке — 1,000 точек HD из 1,020, Европа 20, Азия 0 — поэтому $52.5M ограничены 3,500 точками GB и не масштабируются на все 5,000 | 1,000 / 20 / 0 против GB 3,500 из 5,000 | внешний (география партнёра) |",
+    "next": "| # | Шаг | Какую неопределённость записи снимает |\n|---|---|---|\n| 1 | Замерить фактическую каннибализацию в пилоте вместо допущенных 10% | Снимает главную неопределённость: $45K из $60K зависят целиком от этой ставки |\n| 2 | Проверить допущение о 50,000 пончиках на точку в год по данным пилотных точек | Снимает неопределённость по единственному объёмному входу положительной части |\n| 3 | Зафиксировать в договоре с партнёром маржу 60% при цене $2 | Снимает неопределённость по экономике, которая в записи дана как факт, но по существу является предметом переговоров |\n| 4 | Ограничить первую волну 3,500 североамериканскими точками, где у партнёра 1,000 из 1,020 точек | Снимает неопределённость по географии развёртывания, которую Exhibit 1 не разрешает |",
+    "build": "```python\nfrom decimal import Decimal as D, ROUND_HALF_UP\n\ndef q(x, p): return x.quantize(D(p), rounding=ROUND_HALF_UP)\n\nhd_units   = D('50000')    # Exhibit 2, p.198\nhd_price   = D('2')\nhd_margin  = D('0.60')\ngb_units   = D('300000')\ngb_price   = D('3')\ngb_margin  = D('0.50')\ncannib     = D('0.10')\nna_stores  = D('3500')     # Exhibit 1, p.197\n\ngross = hd_units * hd_price * hd_margin\nlost  = gb_units * cannib * gb_price * gb_margin\ninc   = gross - lost\n\nprint(q(gross, '1'))            # 60000   = $60K   ← формула p.195\nprint(q(lost,  '1'))            # 45000   = $45K   ← формула p.195\nprint(q(inc,   '1'))            # 15000   = $15K   ← p.195, p.196\n                                # сноска 1: строка формулы p.195 печатает \"5K\"\nprint(q(inc * na_stores, '1'))  # 52500000 = $52.5M\n                                # сноска 2: p.196 печатает \"$50 million\"\nprint(q(gross / inc, '0.01'))   # 4.00 — разрыв наивного и верного ответа\n```\n\n**Провоцируемая ошибка:** шаги 1–4 наивного пути — ответ «$60K на точку» (50,000 × $2 × 60%), безупречный арифметически и отвечающий не на заданный вопрос (рефлекс N8, усилен избыточным блоком Exhibit 1 и decoy D1/D2).\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: $15K на точку ($60K − $45K); (3) the naive reading is rejected explicitly, not merely avoided — $60K на точку (50K × $2 × 60%) must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: $15K на точку ($60K − $45K); (3) наивное прочтение отвергнуто вслух, а не просто обойдено — $60K на точку (50K × $2 × 60%) обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "**Вывод.** Book the incremental profit at $15K per store, not the $60K headline — doughnuts add $15,000 per store per year once cannibalization is netted out.\n\n**Факты.** First, the doughnut line contributes 50,000 units × $2 × 60% = $60K per store. Second, it cannibalizes 10% of 300,000 burger units at $3 and a 50% margin, which is $45K of profit given up. Third, the net is $60K – $45K = $15K, one quarter of the gross figure; scaled across 3,500 North American stores that is $52.5M, which the source rounds to \"$50 million\".\n\n**Риск.** Internally, $45K of the $60K rests entirely on a single assumed 10% cannibalization rate — a rate of 20% would wipe the incremental profit out entirely, so this number must be measured, not assumed. Externally, the partner's footprint is 1,000 of its 1,020 stores in North America against 20 in Europe and none in Asia, so the $52.5M cannot be extended to all 5,000 stores.\n\n**Next step.** Run a pilot to measure actual cannibalization against the assumed 10% and validate the 50,000-unit volume before committing; lock the 60% margin at $2 in the co-branding agreement in parallel."
+   },
+   "anchor_metric": "не применяется — вопрос формы «сколько», ответ обязан быть величиной"
+  },
+  {
+   "id": "SY-016",
+   "title": "Which Account First",
+   "company": "Norgumlade",
+   "industry": "Retail card issuing",
+   "difficulty": "Hard",
+   "clean": false,
+   "focus": "S11(a)",
+   "scaffold": "L1",
+   "time": "5 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Norgumlade, a retail card issuer, is standing up an online bank. The IT team can build one deposit product this year; the other launches next year. The analyst has left a two-branch transcript of his own work. Read it, pick the product to build first, and state the size of the gap the non-financial factor has to outweigh.",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**Setup.** p. 155: «BankCoCard is interested in lowering their cost of funds for their credit card program by starting an online bank.» p. 156: «BankCoCard wants to launch both a savings and checking account, but their budget only allows for the IT team to build one product this year» and «Whichever product is not selected will be launched the following year».",
+       "",
+       "**Branch 1 — profit per account (p. 158–159).**",
+       "Checking: Revenue ($2,000 × 3% + $20 × 10%) × 10 years = $620; Costs $2,000 × 0% + $2.00 × 12 × 10 + $100 = $340; profit $280.",
+       "Savings: Revenue $5,000 × 3% × 5 = $750; Costs ($5,000 × 2% + $1.50 × 12) × 5 + $50 = $640; profit $110.",
+       "p. 159: «Total Savings Account Lifetime Profit: 2,000,000 * $110 = $220,000,000».",
+       "p. 159: «Total Checking Account Lifetime Profit: 1,500,000 * $280 = $420,000,000».",
+       "**Branch 2 — deposit base (p. 160).** «the savings account will generate $10 billion in deposits, while the checking account will only generate $3 billion».",
+       "",
+       "**Exhibit 1 inputs (p. 161), checking / savings.** Average Deposits $2,000 / $5,000 · Interest Received 3% / 3% · Interest Paid to Customers 0% / 2% · Monthly Operating Expense $2.00 / $1.50 · Overdrafts 10% / N/A · Overdraft Fee $20 / N/A · Account Acquisition Cost $100 / $50 · Average Life of Account 10 years / 5 years.",
+       "",
+       "**Условия, снятые у клиента (p. 156).** Оба продукта строятся одинаковое время и стоят одинаково — $10 million · «The current cost of funds is 4% for the credit card portfolio» · «Interest rates are not expected to change for the next several years» · «Assume all deposits can be lent, no reserves are required» · «The online bank will only operate within the US» · портфель кредитных карт BankCoCard — $16 billion, «rapidly growing» (p. 155) · «BankCo expects to capture 10% of the market for online accounts of whichever product they launch» (p. 159) · рынок онлайн-checking растёт быстрее рынка онлайн-savings (p. 160).",
+       ""
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Шаг | Что делает под давлением | Куда приводит | N# |\n|---|---|---|---|\n| 1 | Считает per-account profit: $280 против $110 | Checking впереди | N7 |\n| 2 | Умножает на счета: $420M против $220M | «Почти вдвое» | N7 |\n| 3 | Достраивает «почти вдвое» ($420M против $220M) и считает вопрос закрытым | Рекомендация сформулирована по продукту, а не по цели | N7 |\n| 4 | Останавливается, не дочитав Bonus | Депозиты $10B / $3B не входят в анализ | N7 |\n| 5 | Не называет размер разрыва | Компромисс не оцифрован; цель со стр. 155 не проверена | N7 |",
+    "decoy": "1. Пара $420M против $220M — арифметика верна и разрыв велик, но она измеряет прибыльность продукта, а не цель со стр. 155 («lowering their cost of funds for their credit card program»). Отдельно её усиливает напечатанный факт, что рынок онлайн-checking растёт быстрее онлайн-savings: два независимых довода в одну сторону, и оба мимо цели.\n2. Average Life of Account 10 лет у checking против 5 у savings — тянет к «checking живёт дольше, значит лучше», хотя долговечность счёта не переводится в стоимость фондирования кредитного портфеля напрямую.\n3. **Класс Q3 (другой период):** overdraft-экономика (10% × $20) и acquisition cost $100/$50 сидят внутри lifetime-профиля и относятся к прибыли продукта, а не к депозитной базе; при цели «lower cost of funds» они на выбор не влияют.",
+    "support": "| # | Опора | Величина | Ложна ли во второй ветви? |\n|---|---|---|---|\n| 1 | Депозиты savings | $10 billion | нет — величина одна |\n| 2 | Депозиты checking | $3 billion | нет — величина одна |\n| 3 | Разрыв депозитов | $7,000,000,000 (построено) | **да** — в наивной ветви он не рассматривается вовсе |\n| 4 | Разрыв прибыли | $200,000,000 (построено) | нет — но в наивной ветви он подан как решающий, а не как цена решения |\n| 5 | Привязка цели | «for the credit card portfolio» | **да** — наивная ветвь читает цель как «прибыль продукта» |\n| 6 | Отложенный запуск | второй продукт через год | нет — общая для обеих ветвей |",
+    "risks": "- **Внутренний:** savings-счёт даёт всего $110 прибыли на счёт против $280 у checking, и решение сознательно оставляет $200,000,000 lifetime profit на столе; если фондирование кредитного портфеля не удешевится настолько, чтобы перекрыть эту сумму, выбор не окупится.\n- **Внешний:** $10 billion депозитов держатся на Average Deposits $5,000 при 2,000,000 счетов и на ставке, выплачиваемой клиентам 2% против 0% у checking; сдвиг рыночных ставок меняет и объём привлечения, и его цену, а срок жизни savings-счёта всего 5 лет против 10 у checking, то есть базу приходится перезакупать вдвое чаще.",
+    "next": "1. Оценить, на сколько базисных пунктов $10 billion депозитов снижают стоимость фондирования кредитного портфеля, и сравнить полученную экономию с $200,000,000 — это единственная проверка, превращающая «правильную по цели» ветвь в доказанную.\n2. Проверить достижимость Average Deposits $5,000 на 2,000,000 счетов при выплате 2% клиентам — если фактический средний баланс ниже, $10 billion и построенный разрыв $7B сжимаются.",
+    "build": "```python\nfrom decimal import Decimal, ROUND_HALF_UP\n# входы напечатаны: стр. 159 (lifetime profit), стр. 160 (депозиты), стр. 161 (Exhibit 1)\nprofit_checking = Decimal('420000000')   # стр. 159 напечатано\nprofit_savings  = Decimal('220000000')   # стр. 159 напечатано\nprofit_gap = (profit_checking - profit_savings).quantize(Decimal('1'), ROUND_HALF_UP)   # 200,000,000 — ПОСТРОЕНО\n\ndep_checking = (Decimal('2000') * Decimal('1500000')).quantize(Decimal('1'), ROUND_HALF_UP)  # 3,000,000,000 — ПОСТРОЕНО\ndep_savings  = (Decimal('5000') * Decimal('2000000')).quantize(Decimal('1'), ROUND_HALF_UP)  # 10,000,000,000 — ПОСТРОЕНО\ndeposit_gap  = (dep_savings - dep_checking).quantize(Decimal('1'), ROUND_HALF_UP)             # 7,000,000,000 — ПОСТРОЕНО\n# книга печатает «$10 billion» и «$3 billion» как итоги (стр. 160);\n# произведения, разрыв $7B и разрыв $200M книгой НЕ печатаются — это построение кандидата\n```"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: разрыв прибыли $200M построено против разрыва депозитов $7B построено ($10B savings − $3B checking); (3) the naive reading is rejected explicitly, not merely avoided — checking выигрывает по lifetime profit — $420,000,000 против $220,000,000 must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: разрыв прибыли $200M построено против разрыва депозитов $7B построено ($10B savings − $3B checking); (3) наивное прочтение отвергнуто вслух, а не просто обойдено — checking выигрывает по lifetime profit — $420,000,000 против $220,000,000 обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "Build the savings product first — the deposit gap it delivers is $7 billion, and that is what has to outweigh a $200 million profit gap. On product economics checking wins: $280 per account across 1,500,000 accounts is $420,000,000 of lifetime profit against $110 across 2,000,000 accounts, or $220,000,000, for savings; the difference, $200,000,000, is what we give up, and it is a figure we build, not one the book prints. But the stated objective is lowering the cost of funds for the credit card portfolio, and on that metric savings generates $10 billion in deposits against $3 billion for checking — a $7 billion gap, again built, not printed. Since the unselected product launches the following year, we capture the checking profit one year later rather than forgo it. Risk: savings earns only $110 per account and lives 5 years against checking's 10, so the base must be re-acquired twice as often; risk: the $10 billion rests on $5,000 average balances at 2% paid to customers, and a rate move changes both the volume and its price. Next: quantify how many basis points $10 billion of deposits takes off the credit card portfolio's funding cost and test that saving against $200,000,000; and validate the $5,000 average balance assumption across 2,000,000 accounts before committing the IT build."
+   },
+   "anchor_metric": "цель запуска онлайн-банка"
+  }
+ ]
+}
