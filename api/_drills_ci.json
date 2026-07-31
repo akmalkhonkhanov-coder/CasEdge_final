@@ -57,7 +57,7 @@
         "3.5"
        ],
        [
-        "**Total**",
+        "Total",
         "**1,600**",
         "—",
         "56",
@@ -91,7 +91,7 @@
    "title": "Percent of What",
    "type": "Chart Interpretation",
    "clean": false,
-   "prompt": "Our online channel share rose from 25% to 28% of revenue. The team calls it a win. Do you agree?",
+   "prompt": "Our online channel share rose from 25% to 28% of revenue. The team calls it a win. Verify it and tell me whether the claim stands.",
    "exhibit": {
     "title": "Exhibit A — Revenue mix by channel",
     "parts": [
@@ -134,7 +134,7 @@
         "88"
        ],
        [
-        "**Total**",
+        "Total",
         "**100**",
         "**100**",
         "1,760",
@@ -146,7 +146,7 @@
      {
       "type": "text",
       "lines": [
-       "**Footnote to the exhibit:** company revenue FY2023 = **$200M**, FY2024 = **$180M**."
+       "Footnote to the exhibit: company revenue FY2023 = **$200M**, FY2024 = **$180M**."
       ],
       "blank_before": 1,
       "blank_after": 1
@@ -266,7 +266,7 @@
      {
       "type": "text",
       "lines": [
-       "**Form: F3 — stacked structure.** The $700M market is broken down into a \"player → tariff plan\" stack. The remainder of the market is **physically absent** from the stack — it is neither labelled nor named."
+       "Form: F3 — stacked structure. The $700M market is broken down into a \"player → tariff plan\" stack. The remainder of the market is physically absent from the stack — it is neither labelled nor named."
       ],
       "blank_before": 1
      },
@@ -455,7 +455,7 @@
         "3.6"
        ],
        [
-        "**Total**",
+        "Total",
         "**23,350**",
         "**755**",
         "—",
@@ -490,7 +490,7 @@
    "title": "Richer per Unit",
    "type": "Chart Interpretation",
    "clean": false,
-   "prompt": "A PE fund is looking at Halden. Management points to a 30% revenue share versus 25% unit share as proof of brand strength. Do you buy that argument?",
+   "prompt": "A PE fund is looking at Halden. Management points to a 30% revenue share versus 25% unit share as proof of brand strength. Verify it and state plainly whether the claim stands.",
    "exhibit": {
     "title": null,
     "blocks": [
@@ -889,14 +889,14 @@
    "title": "Nothing Wrong Here",
    "type": "Chart Interpretation",
    "clean": true,
-   "prompt": "Our strategy deck claims we hold an 18% share of this market. Verify it and tell me whether the claim stands.",
+   "prompt": "Our strategy deck claims we hold an 18% share of this market. Does Exhibit A support that?",
    "exhibit": {
     "title": "Exhibit A — Market revenue by segment, FY2024",
     "parts": [
      {
       "type": "text",
       "lines": [
-       "**Form: F5 — a \"segment × price tier\" matrix, data in the cells.**",
+       "Form: F5 — a \"segment × price tier\" matrix, data in the cells.",
        "",
        "Market revenue, $M — by cell:",
        ""
@@ -913,25 +913,25 @@
       ],
       "rows": [
        [
-        "**A — Premium**",
+        "A — Premium",
         "62",
         "41",
         "17"
        ],
        [
-        "**B — Mid**",
+        "B — Mid",
         "33",
         "38",
         "19"
        ],
        [
-        "**C — Economy**",
+        "C — Economy",
         "14",
         "25",
         "21"
        ],
        [
-        "**D — Express**",
+        "D — Express",
         "5",
         "11",
         "14"
@@ -956,25 +956,25 @@
       ],
       "rows": [
        [
-        "**A — Premium**",
+        "A — Premium",
         "11",
         "6",
         "1"
        ],
        [
-        "**B — Mid**",
+        "B — Mid",
         "9",
         "8",
         "4"
        ],
        [
-        "**C — Economy**",
+        "C — Economy",
         "3",
         "5",
         "4"
        ],
        [
-        "**D — Express**",
+        "D — Express",
         "1",
         "1",
         "1"
@@ -1043,7 +1043,7 @@
    "title": "Small Base, Big Noise",
    "type": "Chart Interpretation",
    "clean": false,
-   "prompt": "Product leadership wants to double the Analytics team, arguing it is our fastest-growing product. Does Exhibit A support that?",
+   "prompt": "Product leadership wants to double the Analytics team, arguing it is our fastest-growing product. Verify it and tell me whether the claim stands.",
    "exhibit": {
     "title": "Exhibit A — Revenue bridge FY2023 → FY2024 ($M)",
     "parts": [
@@ -1106,8 +1106,8 @@
         "—"
        ],
        [
-        "**FY2023 → FY2024**",
-        "**312 → 360**",
+        "FY2023 → FY2024",
+        "312 → 360",
         "—",
         "—",
         "—"
@@ -1245,7 +1245,7 @@
    "title": "Two Lines, One Story",
    "type": "Chart Interpretation",
    "clean": false,
-   "prompt": "Marketing claims their spend drives revenue — the two move together almost perfectly. Do you accept that?",
+   "prompt": "Marketing claims their spend drives revenue — the two move together almost perfectly. Verify it and state plainly whether the claim stands.",
    "exhibit": {
     "title": "Exhibit A — Marketing spend and revenue",
     "parts": [
@@ -1329,7 +1329,7 @@
    "title": "The Average Lies",
    "type": "Chart Interpretation",
    "clean": false,
-   "prompt": "Finance reports an average collection period of 34 days and calls working capital healthy. Do you agree?",
+   "prompt": "Finance reports an average collection period of 34 days and calls working capital healthy. Verify it and state plainly whether the claim stands.",
    "exhibit": {
     "title": "Exhibit A — Receivables by segment",
     "parts": [
@@ -1377,7 +1377,7 @@
         "2.9"
        ],
        [
-        "**Total**",
+        "Total",
         "**2,080**",
         "**39,500,000**",
         "—",
@@ -1566,7 +1566,7 @@
           "108"
          ],
          [
-          "**Total**",
+          "Total",
           "**72**",
           "**524**",
           "**13.7**",
@@ -1667,7 +1667,7 @@
           "0.08"
          ],
          [
-          "**Total**",
+          "Total",
           "**250**",
           "**322**",
           "**28.8**",
@@ -1710,7 +1710,7 @@
    "title": "One Client Moves It",
    "type": "Chart Interpretation",
    "clean": false,
-   "prompt": "The portfolio grew 10% year over year and leadership wants to keep the current coverage model. Does Exhibit B support that?",
+   "prompt": "The portfolio grew 10% year over year and leadership wants to keep the current coverage model. Verify it and tell me whether the claim stands.",
    "exhibit": {
     "title": null,
     "blocks": [
@@ -1796,7 +1796,7 @@
           "28.9"
          ],
          [
-          "**Total**",
+          "Total",
           "**280**",
           "**308**",
           "**+28**",
@@ -1928,7 +1928,7 @@
    "title": "The Claim Checks Out",
    "type": "Chart Interpretation",
    "clean": true,
-   "prompt": "Our board deck claims a 38.1% gross margin. Verify it and tell me whether the claim stands.",
+   "prompt": "Our board deck claims a 38.1% gross margin. Do you agree?",
    "exhibit": {
     "title": "Exhibit A — Revenue and COGS by product line ($)",
     "parts": [
@@ -1971,7 +1971,7 @@
         "40.00"
        ],
        [
-        "**Total**",
+        "Total",
         "**100,000,000**",
         "**61,900,000**",
         "**1,645**",
@@ -2206,7 +2206,7 @@
    "title": "Which Way Round",
    "type": "Chart Interpretation",
    "clean": false,
-   "prompt": "Operations concluded that expanding the support team causes more complaints — the two rose together every month. Do you accept that?",
+   "prompt": "Operations concluded that expanding the support team causes more complaints — the two rose together every month. Verify it and tell me whether the claim stands.",
    "exhibit": {
     "title": "Exhibit A — Support metrics, January–June 2025",
     "parts": [
@@ -2327,7 +2327,7 @@
         "15.0"
        ],
        [
-        "**Total**",
+        "Total",
         "**600**",
         "**17.6**",
         "**100.0**",
@@ -2864,7 +2864,7 @@
    "title": "Say It Plainly",
    "type": "Chart Interpretation",
    "clean": true,
-   "prompt": "The board deck claims a 28.9% contribution margin. Verify it and state plainly whether the claim stands.",
+   "prompt": "The board deck claims a 28.9% contribution margin. Do you accept that?",
    "exhibit": {
     "title": "Exhibit A — Contribution by product line ($M)",
     "parts": [
@@ -2907,7 +2907,7 @@
         "300.00"
        ],
        [
-        "**Total**",
+        "Total",
         "**200.0**",
         "**142.2**",
         "—",
@@ -3037,7 +3037,7 @@
    "title": "Last One Standing",
    "type": "Chart Interpretation",
    "clean": false,
-   "prompt": "Our share went from 12% to 19% in three years. The board calls it a turnaround. Do you agree?",
+   "prompt": "Our share went from 12% to 19% in three years. The board calls it a turnaround. Verify it and state plainly whether the claim stands.",
    "exhibit": {
     "title": "Exhibit A — Our revenue bridge, FY2021 → FY2024 ($M)",
     "parts": [
@@ -3248,7 +3248,7 @@
         "+11.1"
        ],
        [
-        "**Year**",
+        "Year",
         "**330**",
         "**364**",
         "**+10.3**"
@@ -3336,7 +3336,7 @@
         "13.5"
        ],
        [
-        "**Total**",
+        "Total",
         "—",
         "—",
         "—",
@@ -3426,7 +3426,7 @@
         "34"
        ],
        [
-        "**Total**",
+        "Total",
         "**460**",
         "—",
         "—",
@@ -3555,7 +3555,7 @@
           "339"
          ],
          [
-          "**FY2024**",
+          "FY2024",
           "**1,242**"
          ]
         ],
@@ -3718,7 +3718,7 @@
    "title": "In That Order",
    "type": "Chart Interpretation",
    "clean": false,
-   "prompt": "The ops director reads the chart as a chain: automation cut labour, which enabled the yield gain, which lifted margin. Does the exhibit support that reading?",
+   "prompt": "The ops director reads the chart as a chain: automation cut labour, which enabled the yield gain, which lifted margin. Verify it and state plainly whether the claim stands.",
    "exhibit": {
     "title": "Exhibit A — Gross margin bridge, FY2023 → FY2024 (pp)",
     "parts": [
@@ -3775,7 +3775,7 @@
         "2.6"
        ],
        [
-        "**Total**",
+        "Total",
         "**+6.0**",
         "**100.0**",
         "**24.8**"
@@ -3876,7 +3876,7 @@
        {
         "type": "text",
         "lines": [
-         "*Note: the average ticket of a **returned** order is **$129** — returns are concentrated in the upper price range.*"
+         "*Note: the average ticket of a returned order is **$129** — returns are concentrated in the upper price range.*"
         ],
         "blank_before": 1,
         "blank_after": 1
@@ -3961,7 +3961,7 @@
         "20.0"
        ],
        [
-        "**Total**",
+        "Total",
         "**1,200**",
         "**12.70**",
         "**1,200**",
@@ -4389,14 +4389,14 @@
         "93"
        ],
        [
-        "**I (penthouse)**",
+        "I (penthouse)",
         "**4,900**",
         "**196**",
         "**25.00**",
         "**88**"
        ],
        [
-        "**Average rent**",
+        "Average rent",
         "**1,528.89**",
         "—",
         "—",
@@ -4507,7 +4507,7 @@
         "12"
        ],
        [
-        "**Total**",
+        "Total",
         "**556**",
         "**100.0**",
         "2,270",
@@ -4591,7 +4591,7 @@
         "50.00"
        ],
        [
-        "**Total**",
+        "Total",
         "**1,300**",
         "**100.0**",
         "**130.0**",

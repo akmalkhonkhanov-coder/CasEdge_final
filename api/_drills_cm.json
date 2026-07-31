@@ -87,7 +87,7 @@
   },
   {
    "id": "CM-002",
-   "title": "Markup Mirage",
+   "title": "The Accessory Line",
    "difficulty": "Easy",
    "type": "Trap",
    "focus": "F13(a) markup vs margin",
@@ -100,7 +100,7 @@
      "input_number"
     ]
    },
-   "prompt": "Aislewood buys a private-label kitchen gadget at $40 unit cost and applies its standard 25% markup. Store-level fixed costs attributable to the line are $30,000/month. The category manager says: \"25% of the price covers fixed costs, so breakeven is 30,000 / 12.50 = 2,400 units.\" Check the claim.",
+   "prompt": "Aislewood buys a private-label kitchen gadget at $40 unit cost and applies its standard 25% markup. Store-level fixed costs attributable to the line are $30,000/month. The category manager says: \"25% of the price covers fixed costs, so breakeven is 30,000 / 12.50 = 2,400 units.\" Check the claim: is there a hidden flaw in it?",
    "exhibit": null,
    "step_prompts": [
     "Verify or correct the breakeven. Show the unit margin first."
@@ -211,7 +211,7 @@
   },
   {
    "id": "CM-004",
-   "title": "Premium Squeeze",
+   "title": "The Premium Shift",
    "difficulty": "Medium",
    "type": "Trap",
    "focus": "F08(a) % vs $",
@@ -262,7 +262,7 @@
    },
    "step_prompts": [
     "Compute blended margin % and $ profit for both years.",
-    "Verdict on the CEO's claim + what really happened."
+    "Verdict on the CEO's claim, and what the two years' figures say about profit."
    ],
    "checklist": {
     "en": "Credit if ALL: (1) both segment profits exact; (2) the pp margin delta named; (3) \"margin up, profit down $0.72M\" identified as a pure mix effect.",
@@ -293,7 +293,7 @@
   },
   {
    "id": "CM-005",
-   "title": "Churn Illusion",
+   "title": "Retention Claim",
    "difficulty": "Hard",
    "type": "Trap",
    "focus": "F10(a)+F13(c) Simpson + base",
@@ -340,7 +340,7 @@
    "step_prompts": [
     "Verify both blended churn numbers.",
     "What happened at segment level? Reconcile with step 1.",
-    "Like-for-like: churn at Q1 mix with Q2 rates. Rewrite the PR sentence honestly."
+    "Like-for-like: churn at Q1 mix with Q2 rates. Then rewrite the PR sentence so it matches what the data supports."
    ],
    "checklist": {
     "en": "Credit if ALL: (1) 2.96% exact; (2) base = 2.60 named; (3) Simpson/mix-shift mechanism named; (4) blended computed as weighted, not simple average.",
@@ -391,7 +391,7 @@
      "input_number"
     ]
    },
-   "prompt": "Crudemont evaluates buying a producing well. Next-year free cash flow: $6.0M. Production declines linearly: FCF falls $0.5M each year until it reaches zero after year 12 (last positive flow $0.5M in year 12). Discount rate 10%. A junior analyst values the well as a perpetuity: 6.0 / 0.10 = $60.0M. Give the correct value.",
+   "prompt": "Crudemont evaluates buying a producing well. Next-year free cash flow: $6.0M. Production declines linearly: FCF falls $0.5M each year until it reaches zero after year 12 (last positive flow $0.5M in year 12). Discount rate 10%. A junior analyst values the well as a perpetuity: 6.0 / 0.10 = $60.0M. Value the well.",
    "exhibit": {
     "type": "table",
     "header": [
@@ -413,7 +413,7 @@
    },
    "step_prompts": [
     "Correct PV of the well (all shown values are rounded to $0.1M).",
-    "By how much (%) does the perpetuity overstate the value? What drives the gap?"
+    "Express the difference between the perpetuity shortcut and your value as a % of your value. What drives the gap?"
    ],
    "checklist": {
     "en": "Credit if ALL: (1) 25.9 (±0.1) via an explicit 12-year sum method; (2) 131.7% (±1pp) with both drivers (finite + declining) named; the perpetuity shortcut rejected.",
@@ -457,7 +457,7 @@
      "input_number"
     ]
    },
-   "prompt": "Doserith decides whether to fund a drug candidate. Phase II costs $30M now, success probability 40%. If Phase II succeeds, Phase III costs $50M, success probability 50%. If launched, NPV of payoffs is $500M. A board member: \"Average success is 45%, so EV = 0.45 × 500 − 80 = $145M. Easy yes.\" Give the correct EV.",
+   "prompt": "Doserith decides whether to fund a drug candidate. Phase II costs $30M now, success probability 40%. If Phase II succeeds, Phase III costs $50M, success probability 50%. If launched, NPV of payoffs is $500M. A board member: \"Average success is 45%, so EV = 0.45 × 500 − 80 = $145M. Easy yes.\" What is the EV of funding the program?",
    "exhibit": {
     "type": "table",
     "header": [
@@ -483,7 +483,7 @@
    },
    "step_prompts": [
     "Correct EV of funding the program.",
-    "Is the board member's direction right? Quantify the distortion."
+    "Is the board member's direction right? Quantify the gap versus your figure, and state the risk profile behind the number."
    ],
    "checklist": {
     "en": "Credit if ALL: (1) P = 20% from multiplied stage probabilities; (2) conditional cost handled; (3) 50 exact; (4) overstatement vs the 50 base named, plus the risk.",
@@ -528,7 +528,7 @@
      "choice"
     ]
    },
-   "prompt": "Fareloft flies one daily departure on a regional route: 180 seats, average load factor 92% — near the practical ceiling. It considers adding a second daily departure. Expected load factor of the new flight: 68% (stimulation + shift from the first flight, already netted). Average fare $140; variable cost per departure $14,000. Your analyst concludes: \"Contribution positive — add the flight.\" Stress-test the conclusion: is there a hidden flaw?",
+   "prompt": "Fareloft flies one daily departure on a regional route: 180 seats, average load factor 92% — near the practical ceiling. It considers adding a second daily departure. Expected load factor of the new flight: 68% (stimulation + shift from the first flight, already netted). Average fare $140; variable cost per departure $14,000. Your analyst concludes: \"Contribution positive — add the flight.\" Assess the conclusion.",
    "exhibit": {
     "type": "table",
     "header": [
@@ -600,7 +600,7 @@
      "input_number"
     ]
    },
-   "prompt": "Sudsford's detergent: price $5.00, variable cost $3.50, volume 100,000 units/mo. Marketing proposes a permanent 10% price cut, forecasting +15% volume: \"Revenue grows 3.5% — the discount pays for itself.\" Check.",
+   "prompt": "Sudsford's detergent: price $5.00, variable cost $3.50, volume 100,000 units/mo. Marketing proposes a permanent 10% price cut, forecasting +15% volume: \"Revenue grows 3.5% — the discount pays for itself.\" A skeptic suspects an error inflating the total. Validate: is the total correct, or is there a hidden flaw?",
    "exhibit": {
     "type": "table",
     "header": [
@@ -652,7 +652,7 @@
   },
   {
    "id": "CM-010",
-   "title": "Synergy Haircut",
+   "title": "Synergy Deck",
    "difficulty": "Hard",
    "type": "Trap",
    "focus": "F07(a)+(c) gross vs net",
@@ -697,8 +697,8 @@
    },
    "step_prompts": [
     "Reproduce the deck's number.",
-    "Correction #1: attrition. Net recurring synergy.",
-    "Correction #2: one-offs. Final 5-yr value + % overstatement of the deck."
+    "Fold the customer-attrition fact into the recurring synergy. Give the net recurring annual number.",
+    "Fold in the integration one-offs. Give the final 5-year value and express the gap versus the deck's number as a % of your value."
    ],
    "checklist": {
     "en": "Credit if ALL: (1) 120 gross reproduced; (2) valued via contribution not revenue (lost 6.0 / net 18.0); (3) 54 exact with base = 54; premium implication named.",
@@ -735,7 +735,7 @@
   },
   {
    "id": "CM-011",
-   "title": "Seat Cliff",
+   "title": "Seat Economics",
    "difficulty": "Medium",
    "type": "Trap",
    "focus": "F01(a) step-fixed breakeven",
@@ -835,7 +835,7 @@
   },
   {
    "id": "CM-013",
-   "title": "Fast but Shallow",
+   "title": "Retrofit Ranking",
    "difficulty": "Hard",
    "type": "Trap",
    "focus": "F06(a) payback vs NPV",
@@ -869,12 +869,13 @@
       "40",
       "90"
      ]
-    ]
+    ],
+    "title": "Drennova: project cash flows, $M"
    },
    "step_prompts": [
     "Payback of each (confirm analyst's numbers).",
     "NPV of each.",
-    "Which project, and why payback misled?"
+    "Which project should Drennova build, and what does your answer say about payback as a selection criterion?"
    ],
    "company": "Drennova",
    "industry": "Energy — power generation",
@@ -893,7 +894,7 @@
   },
   {
    "id": "CM-014",
-   "title": "Rounding Flip",
+   "title": "Route Choice",
    "difficulty": "Medium",
    "type": "Trap",
    "focus": "F09(a) rounding chain",
@@ -924,7 +925,7 @@
     ]
    },
    "step_prompts": [
-    "Correct route + annual $ impact of the rounding error."
+    "Which route, and what is the annual $ impact of deciding on the rounded figures?"
    ],
    "company": "Polynex",
    "industry": "Chemicals",
@@ -972,7 +973,7 @@
     ]
    },
    "step_prompts": [
-    "True total cost at 800,000 boxes + the budgeting error."
+    "Cost per box and total cost at 800,000, compared with the planner's budget."
    ],
    "company": "Cartonel",
    "industry": "Packaging",
@@ -991,7 +992,7 @@
   },
   {
    "id": "CM-016",
-   "title": "Growth on Paper",
+   "title": "Four-Year Growth",
    "difficulty": "Medium",
    "type": "Trap",
    "focus": "F14(a) CAGR vs mean",
@@ -1024,7 +1025,7 @@
     ]
    },
    "step_prompts": [
-    "(1) Verify the 15.8% claim. (2) Give the true annualized growth and the verdict."
+    "(1) Verify the 15.8% claim. (2) Give the annualized growth over the period and the verdict."
    ],
    "company": "Gamburst",
    "industry": "Gaming-mobile",
@@ -1049,7 +1050,7 @@
    "focus": "F16(a) LTV horizon",
    "time": "8 min",
    "render": "table(5) · reveal(3)",
-   "prompt": "Telvara postpaid: ARPU $50/month, gross margin 60%, monthly churn 2%. CAC $300. A manager computes LTV over the 24-month contract: \"30 × 24 = $720.\" Give the correct LTV and the LTV/CAC ratio.",
+   "prompt": "Telvara postpaid: ARPU $50/month, gross margin 60%, monthly churn 2%. CAC $300. A manager computes LTV over the 24-month contract: \"30 × 24 = $720.\" Give the LTV and the LTV/CAC ratio.",
    "exhibit": {
     "type": "table",
     "header": [
@@ -1081,7 +1082,7 @@
    },
    "step_prompts": [
     "Monthly contribution margin per subscriber.",
-    "Correct LTV (churn-based horizon), vs the $720 contract-term figure.",
+    "Give the LTV and the horizon you use, vs the $720 contract-term figure.",
     "LTV/CAC ratio + verdict."
    ],
    "company": "Telvara",
@@ -1165,7 +1166,7 @@
   },
   {
    "id": "CM-019",
-   "title": "Allocation Mirage",
+   "title": "Device Portfolio Review",
    "difficulty": "Medium",
    "type": "Trap",
    "focus": "F03(b) allocation base distorts ranking",
@@ -1210,7 +1211,7 @@
     ]
    },
    "step_prompts": [
-    "(1) Contribution of each device. (2) Should X be cut? What does revenue-based allocation hide?"
+    "(1) Contribution of each device. (2) Should Cathelo cut X? State what the revenue-based allocation does to the ranking, and the $ effect if X is cut."
    ],
    "company": "Cathelo",
    "industry": "Med-devices",
@@ -1235,7 +1236,7 @@
    "focus": "F09(b) CLEAN reconcile",
    "time": "6 min",
    "render": "table(5) · input+choice",
-   "prompt": "Lardero's private-label P&L shows three lines summing to a total contribution margin of $1,610,000 (16.1% of $10.0M revenue). A skeptic suspects a hidden allocation error inflating the total. Validate: is the total correct, or is there a hidden error?",
+   "prompt": "Lardero's private-label P&L shows three lines summing to a total contribution margin of $1,610,000 (16.1% of $10.0M revenue). The category head wants to sign off on the total before the review. Assess it.",
    "exhibit": {
     "type": "table",
     "header": [
@@ -1329,9 +1330,9 @@
     ]
    },
    "step_prompts": [
-    "Is the value infinite (Analyst 2)? Check r vs g.",
+    "Is the value infinite (Analyst 2)? Check r vs g: is there a hidden flaw in the model?",
     "Correct value using the growing perpetuity.",
-    "What did Analyst 1's no-growth version miss, in $?"
+    "Compare Analyst 1's no-growth figure with your value: state the difference in $ and what explains it."
    ],
    "company": "Kastovyn",
    "industry": "Fin Svcs asset-mgmt",
@@ -1356,7 +1357,7 @@
    "focus": "F07(b)+F03(c) cannibalization + OH",
    "time": "8 min",
    "render": "table(5) · reveal(3)",
-   "prompt": "Quorenti (DTC e-commerce) launches SKU B: price $50, VC $30, projected 80,000 units. Existing SKU A: price $60, VC $35, 100,000 units. Marketing says \"B adds 80,000 × ($50−$30) = $1.6M contribution — launch it.\" But 60% of B's volume is customers who would have bought A instead. What's the true incremental contribution?",
+   "prompt": "Quorenti (DTC e-commerce) launches SKU B: price $50, VC $30, projected 80,000 units. Existing SKU A: price $60, VC $35, 100,000 units. Marketing says \"B adds 80,000 × ($50−$30) = $1.6M contribution — launch it.\" But 60% of B's volume is customers who would have bought A instead. What contribution does launching B add?",
    "exhibit": {
     "type": "table",
     "header": [
@@ -1468,7 +1469,7 @@
   },
   {
    "id": "CM-024",
-   "title": "Raise the Price",
+   "title": "The Price Increase",
    "difficulty": "Medium",
    "type": "Trap",
    "focus": "F11(b) price-up high-margin",
@@ -1520,7 +1521,7 @@
   },
   {
    "id": "CM-025",
-   "title": "Cut the Right Pod",
+   "title": "Pod Utilization",
    "difficulty": "Easy",
    "type": "Trap",
    "focus": "F04(b) selective vs fleet",
@@ -1553,7 +1554,7 @@
     ]
    },
    "step_prompts": [
-    "What should Yttrelo do, and why is the 71.7% average misleading?"
+    "What should Yttrelo do, and what does the 71.7% average tell you about the three pods?"
    ],
    "company": "Yttrelo",
    "industry": "IT managed-services",
@@ -1572,7 +1573,7 @@
   },
   {
    "id": "CM-026",
-   "title": "Big Number, Bad Bet",
+   "title": "Site Selection",
    "difficulty": "Hard",
    "type": "Trap",
    "focus": "F15(a) EV vs max payoff",
@@ -1617,7 +1618,7 @@
    "step_prompts": [
     "Expected value of A.",
     "Expected value of B.",
-    "Which site, and why the \"$500M upside\" misleads?"
+    "Which site, and what weight should the \"$500M upside\" carry in the decision?"
    ],
    "company": "Torqura",
    "industry": "Industrial minerals",
@@ -1636,13 +1637,13 @@
   },
   {
    "id": "CM-027",
-   "title": "Percentage Illusion",
+   "title": "Two Ad Products",
    "difficulty": "Easy",
    "type": "Trap",
    "focus": "F08(b) growth off low base",
    "time": "3 min",
    "render": "table(4) · input",
-   "prompt": "Clickara reviews two ad products. X grew from $0.1M to $0.3M (+200%). Y grew from $10.0M to $10.5M (+5%). The team wants to pour budget into X — \"200% growth!\" Which product actually added more revenue?",
+   "prompt": "Clickara reviews two ad products. X grew from $0.1M to $0.3M (+200%). Y grew from $10.0M to $10.5M (+5%). The team wants to pour budget into X — \"200% growth!\" Which product added more revenue?",
    "exhibit": {
     "type": "table",
     "header": [
@@ -1667,7 +1668,7 @@
     ]
    },
    "step_prompts": [
-    "Which product added more absolute revenue, and what does the % hide?"
+    "Which product added more revenue in $, and what does that say about the two growth %s?"
    ],
    "company": "Clickara",
    "industry": "Ad-tech",
@@ -1686,7 +1687,7 @@
   },
   {
    "id": "CM-028",
-   "title": "Weighted, Not Simple",
+   "title": "Dealer Network Margin",
    "difficulty": "Medium",
    "type": "Trap",
    "focus": "F10(b) simple vs weighted avg",
@@ -1735,9 +1736,9 @@
     ]
    },
    "step_prompts": [
-    "True network margin (volume-weighted) vs the 7% hurdle.",
+    "Compute the network margin and state the basis you use; compare with the 7% hurdle.",
     "Margin $ pool per region.",
-    "Which region to scale — and how both the \"healthy\" verdict and the \"scale North\" call flip."
+    "Which region to scale — and what happens to the report's two conclusions?."
    ],
    "company": "Dealbry",
    "industry": "Autos-dealer",
@@ -1756,7 +1757,7 @@
   },
   {
    "id": "CM-029",
-   "title": "Wrong Station",
+   "title": "Cut, Weld, Paint",
    "difficulty": "Hard",
    "type": "Trap",
    "focus": "F17(a)+F12(c) bottleneck + leverage",
@@ -1794,8 +1795,8 @@
    },
    "step_prompts": [
     "Current system throughput (the binding station).",
-    "Output if +40 goes to Paint vs to the bottleneck.",
-    "Profit before vs after the correct move."
+    "Output if the +40 goes to Paint, and output if it goes to the station that binds.",
+    "Profit before vs after the move you recommend."
    ],
    "company": "Kelmoro",
    "industry": "Heavy equipment / smart factory",
@@ -1820,7 +1821,7 @@
    "focus": "F16(c) unit build-up CLEAN",
    "time": "4 min",
    "render": "table(5) · input+choice",
-   "prompt": "A Nibbleton franchisee's annual unit economics: avg check $12.50, 320 covers/day, 360 days; food 30% of revenue, labor 28%, rent $180,000, other $90,000. A consultant suspects \"a cost line is missing — the profit looks too clean.\" Validate: is the build-up complete, or is a component missing?",
+   "prompt": "A Nibbleton franchisee's annual unit economics: avg check $12.50, 320 covers/day, 360 days; food 30% of revenue, labor 28%, rent $180,000, other $90,000. The franchisee wants to open two more units on these economics. Evaluate the build-up.",
    "exhibit": {
     "type": "table",
     "header": [
@@ -1870,7 +1871,7 @@
   },
   {
    "id": "CM-031",
-   "title": "Seats and Compounding",
+   "title": "Seats and ARR",
    "difficulty": "Hard",
    "type": "Trap",
    "focus": "F01(b)+F14(b)",
@@ -1908,7 +1909,7 @@
    },
    "step_prompts": [
     "Seat breakeven.",
-    "True annualized expansion growth (CAGR).",
+    "Annualized growth of expansion ARR over the three years.",
     "Verdict on the 23.7% claim."
    ],
    "company": "Trelanti",
@@ -1928,7 +1929,7 @@
   },
   {
    "id": "CM-032",
-   "title": "IRR Says A, NPV Says B",
+   "title": "Rank the Renewables",
    "difficulty": "Hard",
    "type": "Trap",
    "focus": "F06(c)",
@@ -1959,12 +1960,13 @@
       "60",
       "220"
      ]
-    ]
+    ],
+    "title": "Calvyne: project cash flows, $M"
    },
    "step_prompts": [
     "IRR of each (confirm the analyst's ranking).",
     "NPV of each.",
-    "Which project, and why IRR misleads here?"
+    "Which project should Calvyne build, and what does that imply about ranking by IRR here?"
    ],
    "company": "Calvyne",
    "industry": "Energy-renewables",
@@ -2091,7 +2093,7 @@
   },
   {
    "id": "CM-035",
-   "title": "Bundle Bites Back",
+   "title": "Bundle Launch",
    "difficulty": "Hard",
    "type": "Trap",
    "focus": "F07(c)+F11(c)",
@@ -2153,7 +2155,7 @@
   },
   {
    "id": "CM-036",
-   "title": "Small but Loud",
+   "title": "Two Shows",
    "difficulty": "Easy",
    "type": "Trap",
    "focus": "F08(c)",
@@ -2203,7 +2205,7 @@
   },
   {
    "id": "CM-037",
-   "title": "Rounding to a Bonus",
+   "title": "The Bonus Threshold",
    "difficulty": "Medium",
    "type": "Trap",
    "focus": "F09(c)",
@@ -2236,7 +2238,7 @@
     ]
    },
    "step_prompts": [
-    "True GM — is the bonus earned?"
+    "Compute gross margin from the reported figures — is the bonus earned?"
    ],
    "company": "Ravonti",
    "industry": "Beverages",
@@ -2255,7 +2257,7 @@
   },
   {
    "id": "CM-038",
-   "title": "Traffic-Weighted",
+   "title": "Chain Conversion",
    "difficulty": "Medium",
    "type": "Trap",
    "focus": "F10(c)",
@@ -2381,7 +2383,7 @@
   },
   {
    "id": "CM-040",
-   "title": "Membership Cliff",
+   "title": "Gym Breakeven",
    "difficulty": "Medium",
    "type": "Trap",
    "focus": "F13(b)",
@@ -2433,7 +2435,7 @@
   },
   {
    "id": "CM-041",
-   "title": "Best Bet, Then the Choke",
+   "title": "Site and Line",
    "difficulty": "Hard",
    "type": "Trap",
    "focus": "F15(c)+F17(b)",
@@ -2528,7 +2530,7 @@
     ]
    },
    "step_prompts": [
-    "(1) LTV of each cohort. (2) True blended LTV vs the $210 \"avg churn\" figure."
+    "(1) LTV of each cohort. (2) Blended LTV for the subscriber base, vs the $210 \"avg churn\" figure — which one should Ilvento use, and why?."
    ],
    "company": "Ilvento",
    "industry": "Streaming",
@@ -2547,7 +2549,7 @@
   },
   {
    "id": "CM-043",
-   "title": "Fast on Paper, Slow in Cash",
+   "title": "Efficiency Project Payback",
    "difficulty": "Hard",
    "type": "Trap",
    "focus": "F18(c)+F06(b)",
@@ -2586,7 +2588,7 @@
    "step_prompts": [
     "Accounting payback.",
     "Annual cash generated (after WC).",
-    "Cash payback — which is the honest number?"
+    "Cash payback — which of the two paybacks should drive the decision?"
    ],
    "company": "Mendrio",
    "industry": "Wholesale-distribution",
@@ -2682,7 +2684,7 @@
     ]
    },
    "step_prompts": [
-    "(1) Verify 45%. (2) True annualized growth."
+    "(1) Verify 45%. (2) Annualized growth over the two years."
    ],
    "company": "Andvex",
    "industry": "Apparel-retail",
@@ -2701,13 +2703,13 @@
   },
   {
    "id": "CM-046",
-   "title": "Allocation, Checked",
+   "title": "Overhead by Hours",
    "difficulty": "Medium",
    "type": "Clean",
    "focus": "F03(a)",
    "time": "6 min",
    "render": "table(5) · input+choice",
-   "prompt": "Ravslen allocates $600,000 overhead by labor hours. All three products use 2 labor-hours/unit. A manager warns: \"Allocation always distorts — product R will look artificially unprofitable, we should re-examine cutting it.\" Does the labor-hour allocation actually distort the product ranking here?",
+   "prompt": "Ravslen allocates $600,000 overhead by labor hours. All three products use 2 labor-hours/unit. A manager warns: \"Allocation always distorts — product R will look artificially unprofitable, we should re-examine cutting it.\" Does the labor-hour allocation change the product ranking here?",
    "exhibit": {
     "type": "table",
     "header": [
@@ -2761,13 +2763,13 @@
   },
   {
    "id": "CM-047",
-   "title": "LTV, Fully Built",
+   "title": "MVNO Economics",
    "difficulty": "Easy",
    "type": "Clean",
    "focus": "F16(c)",
    "time": "4 min",
    "render": "table(5) · input+choice",
-   "prompt": "Hendova (MVNO): ARPU $30, gross margin 55%, monthly churn 4%, CAC $150. An advisor says \"this LTV looks too clean — you must be missing retention costs or something, the ratio can't be right.\" Compute LTV/CAC and check: is a component missing?",
+   "prompt": "Hendova (MVNO): ARPU $30, gross margin 55%, monthly churn 4%, CAC $150. An advisor calls the ratio strong enough to triple acquisition spend. Compute LTV/CAC and assess the claim.",
    "exhibit": {
     "type": "table",
     "header": [
@@ -2850,7 +2852,7 @@
     ]
    },
    "step_prompts": [
-    "Correct value with growth + what the no-growth version missed."
+    "Value the building including growth, and compare with the analyst's no-growth figure."
    ],
    "company": "Jorbeln",
    "industry": "REIT",
@@ -2921,7 +2923,7 @@
   },
   {
    "id": "CM-050",
-   "title": "Every Segment Better, Overall Worse",
+   "title": "Loss Ratio Review",
    "difficulty": "Hard",
    "type": "Trap",
    "focus": "F10(a) Simpson CAPSTONE",
@@ -2971,7 +2973,7 @@
    "step_prompts": [
     "Aggregate loss ratio Year 1.",
     "Aggregate loss ratio Year 2.",
-    "Every segment improved — why did aggregate worsen?"
+    "Every segment improved — how does that square with your two aggregate figures, and why?"
    ],
    "company": "Turnela",
    "industry": "Insurance",

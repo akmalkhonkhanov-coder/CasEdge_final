@@ -54,7 +54,7 @@
       "1.9"
      ],
      [
-      "**Q4 Y1**",
+      "Q4 Y1",
       "**77**",
       "**410**",
       "**188**",
@@ -94,7 +94,7 @@
       "1.4"
      ]
     ],
-    "note": ""
+    "note": "From Q4 Y1 the national procurement rules narrowed eligibility: a hospital must hold a current sterile-processing certificate to buy single-use kits directly. Price lists and pack sizes were unchanged."
    },
    "key": {
     "decoy": "| Branch | Why it's reflexive | [DEC-JUST]: which question it fails to answer |\n|---|---|---|\n| **Price war with competitors** | revenue falls → \"we're being undercut\" — the first hypothesis for 8 in 10 candidates | The exhibit shows **average price barely moved** ($412 → $409). This branch calls for competitor price lists — enough to say \"price isn't the issue,\" but **not enough to explain the volume decline**. A candidate who digs here first loses ten minutes to a dead end |\n| **Product quality / complaints** | \"volume is falling → the product got worse\" | Complaint rates in the exhibit are **improving** (2.1% → 1.4%). The branch is refuted by the first row of data |\n\n**Scoring:** naming these costs nothing. A penalty applies only if the candidate puts them **first in ORDER** and works them to exhaustion.",
@@ -121,7 +121,7 @@
    "type": "Structuring",
    "exhibit_mode": "E-before",
    "depth_tag": "STRONG",
-   "prompt": "Audience trust in Prendova's news division has fallen from 61 to 44 over two years. The board asks: **why is trust declining?**",
+   "prompt": "Audience trust in Prendova's news division has fallen from 61 to 44 over two years. The editorial director: \"Find where the trust is going.\"",
    "anchor_metric": "trust index decline = 17 points",
    "exhibit": {
     "type": "table",
@@ -173,7 +173,7 @@
       "0.4"
      ],
      [
-      "**Total / weighted**",
+      "Total / weighted",
       "**61**",
       "**44**",
       "**−17**",
@@ -272,7 +272,7 @@
       "5.2",
       "340",
       "15.3",
-      "**undetermined**",
+      "undetermined",
       "31%"
      ],
      [
@@ -312,7 +312,7 @@
       "2.9",
       "102",
       "28.4",
-      "**undetermined**",
+      "undetermined",
       "34%"
      ]
     ],
@@ -492,7 +492,7 @@
       "61%"
      ]
     ],
-    "note": ""
+    "note": "The board has approved a capex budget of $35M for the entry. Payback is measured from first revenue."
    },
    "key": {
     "decoy": "| Branch | Why it's reflexive | [DEC-JUST] |\n|---|---|---|\n| **\"Market attractiveness\"** | the standard opening block of a market-entry framework | The question is **how to enter**, not **whether to**. Attractiveness has already been settled by the board (the entry decision is taken). The branch calls for market size and growth, from which **no choice between entry routes can be made** — it is identical for all three and therefore cannot distinguish them |",
@@ -571,7 +571,7 @@
       "6.9"
      ],
      [
-      "**Total**",
+      "Total",
       "**31.2**",
       "**100%**",
       "—",
@@ -580,7 +580,7 @@
       "**29.4**"
      ]
     ],
-    "note": ""
+    "note": "The board's target is a $40M increase in annual EBITDA over three years. Volume shares are of total units; revenue shares are of total revenue."
    },
    "key": {
     "decoy": "| Branch | Why it's reflexive | [DEC-JUST] |\n|---|---|---|\n| **\"Premium brand marketing\"** | the strategy is about premium → \"we need better promotion\" | The branch calls for advertising spend and awareness data. Even at their best, those figures **do not answer whether the strategy is working** — that requires the segment's contribution to the result, not its promotion |\n| **\"Competitors in premium\"** | \"who else plays there\" | Competitive position in a segment delivering 2.9% of volume does not determine the company's fate. The branch is correct and **out of proportion** |",
@@ -635,7 +635,7 @@
    "type": "Structuring",
    "exhibit_mode": "E-before",
    "depth_tag": "LIGHT",
-   "prompt": "Quandreth's margin fell from 22.4% to 19.1% over the year. **Where would you look for the cause?**",
+   "prompt": "Quandreth's margin fell from 22.4% to 19.1% over the year. The board asks: **where would you look for the cause?**",
    "anchor_metric": "margin decline = 3.3 pp",
    "exhibit": {
     "type": "table",
@@ -674,7 +674,7 @@
       "−3.5 pp"
      ],
      [
-      "**Total**",
+      "Total",
       "**100.0%**",
       "**100.0%**",
       "**22.4%**",
@@ -682,7 +682,7 @@
       "**−3.3 pp**"
      ]
     ],
-    "note": ""
+    "note": "Y1 and Y2 are both full 12-month periods on the same reporting calendar. Segment revenue shares are of total revenue and every segment the company sells is shown."
    },
    "key": {
     "decoy": "In a Clean slot the decoys are **suspicions the data does not support**. The correct behaviour is to **reject all of them with reasons**, not to hunt for a hidden trap.\n\n| Suspicion | Why it's plausible | What refutes it |\n|---|---|---|\n| **\"Segment shares don't sum to 100% — something is hidden\"** | the classic D3 trap, which candidates are trained to look for | Shares in the exhibit sum to exactly **100.0%**; every segment is shown |\n| **\"The period bases differ — we're comparing unlike things\"** | the classic D6 | Both years are full 12-month periods, stated in the note |\n| **\"The average conceals a collapse in one segment\"** | the classic mix effect | Margin fell in **all three** segments, with a spread of 3.1–3.5 pp — there is no mix effect |\n\n**Scoring:** credit is given for **rejecting all three, naming what refutes each**. A candidate who \"finds\" a trap where none exists does not pass the slot. In a Clean slot the calculation **confirms** rather than refutes.",
@@ -746,7 +746,7 @@
       "15.00%"
      ],
      [
-      "**Total**",
+      "Total",
       "**100.0%**",
       "**24.46%**",
       "**17.64%**"
@@ -770,13 +770,13 @@
       "16.16%"
      ],
      [
-      "**Total**",
+      "Total",
       "**100.0%**",
       "**24.46%**",
       "**17.64%**"
      ]
     ],
-    "note": ""
+    "note": "From Y2 the metropolitan and large-city pharmacy chains moved purchasing to tenders on a fixed price grid. Small towns and rural areas continue to buy directly."
    },
    "key": {
     "decoy": "| Branch | Why it's reflexive | [DEC-JUST] |\n|---|---|---|\n| **\"Pricing policy\"** | share falls → \"we're being outpriced\" | The branch calls for competitor price lists. The exhibit shows the loss is concentrated where price **is not** the deciding factor in the purchase (chains buy through tenders on a fixed grid). A candidate who digs here first hits a dead end |\n| **\"Product quality\"** | the second reflex | Complaint rates in the exhibit are stable; the branch is refuted by one row |",
@@ -840,7 +840,7 @@
       "4.0%"
      ],
      [
-      "**Total**",
+      "Total",
       "**−5.0**",
       "**100.0%**"
      ]
@@ -872,7 +872,7 @@
    "type": "Structuring",
    "exhibit_mode": "none",
    "depth_tag": "STANDARD",
-   "prompt": "Drennick's warehouse handling costs rose 18% while volume grew 5%. **Build a tree to find the cause.**",
+   "prompt": "Drennick's warehouse handling costs rose 18% over the year while volume grew 5%. **Build a tree to find the cause.**",
    "anchor_metric": "excess cost growth = 13 pp",
    "exhibit": null,
    "key": {
@@ -937,10 +937,10 @@
       "yes"
      ],
      [
-      "**Insurance payer**",
-      "**assigns the reimbursement code**",
-      "**not surveyed**",
-      "**yes**"
+      "Insurance payer",
+      "assigns the reimbursement code",
+      "not surveyed",
+      "yes"
      ],
      [
       "Distributor",
@@ -1083,7 +1083,7 @@
       "−16.0"
      ],
      [
-      "**Year total**",
+      "Year total",
       "**+18.0**",
       "**−21.0**",
       "**−28.0**"
@@ -1092,7 +1092,7 @@
       "",
       "",
       "",
-      "**Over 3 years: −31.0**"
+      "Over 3 years: −31.0"
      ]
     ],
     "note": ""
@@ -1200,7 +1200,7 @@
     ],
     "rows": [
      [
-      "**Professional**",
+      "Professional",
       "",
       "**340.0**",
       "**+2.1%**",
@@ -1221,7 +1221,7 @@
       "7.7%"
      ],
      [
-      "**Consumer**",
+      "Consumer",
       "",
       "**610.0**",
       "**+8.4%**",
@@ -1242,7 +1242,7 @@
       "0.1%"
      ],
      [
-      "**Total market**",
+      "Total market",
       "",
       "**950.0**",
       "",
@@ -1350,7 +1350,7 @@
    "type": "Structuring",
    "exhibit_mode": "none",
    "depth_tag": "LIGHT",
-   "prompt": "The operations director: \"Our average cost per delivery has risen from $8.10 to $8.30. Find where we are losing efficiency.\" The cost data is provided and, as will emerge, **correct**.",
+   "prompt": "Ilverdane's average cost per delivery has risen from $8.10 to $8.30. The board asks: **where are we losing efficiency?**",
    "anchor_metric": "average delivery cost increase = $0.20",
    "exhibit": null,
    "key": {
@@ -1378,7 +1378,7 @@
    "type": "Structuring",
    "exhibit_mode": "E-after",
    "depth_tag": "STRONG",
-   "prompt": "Kelmorrow's revenue from its regular customer base fell 12.8% over the year. The board asks: **what makes up the decline, and what should we act on?**",
+   "prompt": "Kelmorrow's revenue from its regular customer base fell 12.8% over the year. The commercial director: \"Break the decline down and tell me what to act on.\"",
    "anchor_metric": "decline in revenue from the base = 12.8%",
    "exhibit": {
     "type": "table",
@@ -1415,7 +1415,7 @@
       "1.09 pp"
      ],
      [
-      "**Total**",
+      "Total",
       "",
       "",
       "**12.77 pp**"
@@ -1472,7 +1472,7 @@
    "type": "Structuring",
    "exhibit_mode": "E-before",
    "depth_tag": "STANDARD",
-   "prompt": "Thornquay's gross margin is 16.1%; the board's target is 19%. The board asks: **where do we find the missing 2.9 pp?**",
+   "prompt": "Thornquay's gross margin is 16.1%; the board's target is 19%. The finance director: \"Find me the missing 2.9 pp.\"",
    "anchor_metric": "gap to target = 2.9 pp",
    "exhibit": {
     "type": "table",
@@ -1515,7 +1515,7 @@
       "15.7%"
      ],
      [
-      "**Total**",
+      "Total",
       "**1 350**",
       "",
       "**11 380**",
@@ -1552,7 +1552,7 @@
       "**−3.5%**"
      ],
      [
-      "**Total**",
+      "Total",
       "**11 380**",
       "",
       "**37.69**",
@@ -1651,7 +1651,7 @@
       "1.4%"
      ],
      [
-      "**Total**",
+      "Total",
       "**−14.2**",
       "**99.9%**"
      ]
@@ -1690,8 +1690,8 @@
     "title": "Calveska: the chain from prescription to purchase",
     "header": [
      "Participant",
-     "Role **in the candidate's tree**",
-     "**Actual role**",
+     "Role in the candidate's tree",
+     "Actual role",
      "Indicator"
     ],
     "rows": [
@@ -1704,14 +1704,14 @@
      [
       "Patient",
       "receives the product",
-      "**chooses from what is offered**",
+      "chooses from what is offered",
       "ask for the brand by name: 9%"
      ],
      [
-      "**Pharmacy chain**",
-      "**sales channel**",
-      "**determines the choice at the point of purchase**",
-      "product on the list: **2 chains of 11**"
+      "Pharmacy chain",
+      "sales channel",
+      "determines the choice at the point of purchase",
+      "product on the list: 2 chains of 11"
      ],
      [
       "Wholesale distributor",
@@ -1790,7 +1790,7 @@
       "−6.5"
      ],
      [
-      "**Year total**",
+      "Year total",
       "**+6.2**",
       "**−4.8**",
       "**−11.9**"
@@ -1799,7 +1799,7 @@
       "",
       "",
       "",
-      "**Over 3 years: −10.5**"
+      "Over 3 years: −10.5"
      ]
     ],
     "note": ""
@@ -1829,7 +1829,7 @@
    "type": "Structuring",
    "exhibit_mode": "E-after",
    "depth_tag": "STRONG",
-   "prompt": "Hastreling's operating profit fell by $31.0M over the year while revenue grew 3%. The board asks: **what caused the profit decline?**",
+   "prompt": "Hastreling's operating profit fell by $31.0M over the year while revenue grew 3%. The finance director: \"Name what caused the profit decline.\"",
    "anchor_metric": "operating profit decline = $31.0M",
    "exhibit": {
     "type": "table",
@@ -1841,7 +1841,7 @@
     ],
     "rows": [
      [
-      "**Volume rebates (off-list)**",
+      "Volume rebates (off-list)",
       "**−18.6**",
       "**60.0%**"
      ],
@@ -1866,7 +1866,7 @@
       "0.0%"
      ],
      [
-      "**Total**",
+      "Total",
       "**−31.0**",
       "**100.0%**"
      ]
@@ -1898,7 +1898,7 @@
    "type": "Structuring",
    "exhibit_mode": "E-before",
    "depth_tag": "STANDARD",
-   "prompt": "Juniverre's customer acquisition cost has risen from $34.30 to $51.22 over the year. The board asks: **why is CAC rising, and what should we do?**",
+   "prompt": "Juniverre's customer acquisition cost has risen from $34.30 to $51.22 over the year. The marketing director: \"Explain why CAC is rising and tell me what to do.\"",
    "anchor_metric": "CAC increase = $16.92 (+49.3%)",
    "exhibit": {
     "type": "table",
@@ -2004,7 +2004,7 @@
       "2"
      ],
      [
-      "Revenue per sq m **in top-quintile locations**",
+      "Revenue per sq m in top-quintile locations",
       "$318",
       "$305"
      ]
@@ -2048,7 +2048,7 @@
     ],
     "rows": [
      [
-      "**Inflow — customers whose first account was opened this year**",
+      "Inflow — customers whose first account was opened this year",
       "",
       "**61**"
      ],
@@ -2068,7 +2068,7 @@
       "15"
      ],
      [
-      "**Outflow**",
+      "Outflow",
       "",
       "**−23**"
      ],
@@ -2083,7 +2083,7 @@
       "−7"
      ],
      [
-      "**Net growth**",
+      "Net growth",
       "",
       "**38**"
      ]
@@ -2125,7 +2125,7 @@
      "Retail",
      "Small HoReCa",
      "Online",
-     "**Institutional**"
+     "Institutional"
     ],
     "rows": [
      [
@@ -2161,7 +2161,7 @@
       "no",
       "no",
       "no",
-      "**yes**"
+      "yes"
      ],
      [
       "Time to obtain the certificate, months",
@@ -2268,7 +2268,7 @@
    "type": "Structuring",
    "exhibit_mode": "E-before",
    "depth_tag": "STANDARD",
-   "prompt": "Draskilde's gross profit fell by $4.6M. The board asks: **which segment will you start the analysis with, and why?**",
+   "prompt": "Draskilde's gross profit fell by $4.6M. The finance director: \"Name the segment you start with, and the reason.\"",
    "anchor_metric": "gross profit decline = $4.6M",
    "exhibit": {
     "type": "table",
@@ -2310,7 +2310,7 @@
       "4"
      ],
      [
-      "**Total**",
+      "Total",
       "**196.0**",
       "",
       "**−4.6**",
@@ -2410,7 +2410,7 @@
       "✅"
      ],
      [
-      "**A+C**",
+      "A+C",
       "23.0",
       "**12.0**",
       "16.6",
@@ -2458,7 +2458,7 @@
    "type": "Structuring",
    "exhibit_mode": "E-before",
    "depth_tag": "STANDARD",
-   "prompt": "The commercial director: \"Our revenue fell 11.8% over the year. Find where we are losing position.\"",
+   "prompt": "Jorbanth's revenue fell 11.8% over the year. The board asks: **where are we losing position?**",
    "anchor_metric": "revenue decline = 11.8%",
    "exhibit": {
     "type": "table",
@@ -2483,7 +2483,7 @@
       "−11.83%"
      ],
      [
-      "**Our share**",
+      "Our share",
       "**13.00%**",
       "**13.00%**",
       "**0.00 pp**"
@@ -2538,7 +2538,7 @@
      "Saving",
      "Customer churn",
      "Month total",
-     "**Cumulative total**"
+     "Cumulative total"
     ],
     "rows": [
      [
@@ -2653,7 +2653,7 @@
    "type": "Structuring",
    "exhibit_mode": "none",
    "depth_tag": "STANDARD",
-   "prompt": "Nystrelde's revenue grew 8% while gross profit fell 3%. **Build a tree to find the cause.**",
+   "prompt": "Nystrelde's revenue grew 8% over the year while gross profit fell 3%. **Build a tree to find the cause.**",
    "anchor_metric": "revenue +8%, gross profit −3%",
    "exhibit": null,
    "key": {
@@ -2694,7 +2694,7 @@
     ],
     "rows": [
      [
-      "**Chain**",
+      "Chain",
       "**121**",
       "**34**",
       "**163.5**"
@@ -2745,7 +2745,7 @@
    "type": "Structuring",
    "exhibit_mode": "none",
    "depth_tag": "LIGHT",
-   "prompt": "Miradelph's costs rose 12% with transport volume unchanged. **Work out the cause.**",
+   "prompt": "Miradelph's costs rose 12% over the year with transport volume unchanged. **Work out the cause.**",
    "anchor_metric": "cost growth = 12% with volume unchanged",
    "exhibit": null,
    "key": {
@@ -2783,7 +2783,7 @@
      "Months per plan",
      "Participant",
      "Role",
-     "**Moment involvement is required**"
+     "Moment involvement is required"
     ],
     "rows": [
      [
@@ -2810,9 +2810,9 @@
      [
       "Approval",
       "15–20",
-      "**Regulator**",
-      "**project approval**",
-      "**before month 5** ⚠️"
+      "Regulator",
+      "project approval",
+      "before month 5 ⚠️"
      ]
     ],
     "note": ""
@@ -2842,7 +2842,7 @@
    "type": "Structuring",
    "exhibit_mode": "E-after",
    "depth_tag": "STRONG",
-   "prompt": "Blythmore serves **379** customers. Margin has fallen for three years. The board asks: **which customers are we losing money on, and what do we do about them?**",
+   "prompt": "Blythmore serves **379** customers. Margin has fallen for three years. The commercial director: \"Name the customers we lose money on and what we do about them.\"",
    "anchor_metric": "customers in the base = 379",
    "exhibit": {
     "type": "table",
@@ -2873,7 +2873,7 @@
       "41.1"
      ],
      [
-      "**Total**",
+      "Total",
       "**379**",
       "**108.5**",
       ""
@@ -2894,7 +2894,7 @@
       "50.3"
      ],
      [
-      "**Total**",
+      "Total",
       "**379**",
       "**108.5**"
      ]
@@ -2996,7 +2996,7 @@
    "type": "Structuring",
    "exhibit_mode": "E-before",
    "depth_tag": "LIGHT",
-   "prompt": "Orvenmark is choosing a site for a distribution centre from three options. The logistics director: \"We measure on average delivery cost per order — that is our headline metric. Check the calculation and name the winner.\"",
+   "prompt": "Orvenmark is choosing a site for a distribution centre from three options. The logistics director: \"We measure on average delivery cost per order — that is our headline metric. Run the numbers and name the winner.\"",
    "anchor_metric": "average delivery cost per order",
    "exhibit": {
     "type": "table",
@@ -3009,7 +3009,7 @@
     ],
     "rows": [
      [
-      "**Delivery cost per order**",
+      "Delivery cost per order",
       "**$4.82**",
       "**$4.82**",
       "**$4.82**"
@@ -3039,7 +3039,7 @@
       "1.42"
      ]
     ],
-    "note": ""
+    "note": "Delivery cost per order is calculated to the cent on the same order base for all three sites."
    },
    "key": {
     "decoy": "| Suspicion | Why it's plausible | What refutes it |\n|---|---|---|\n| **\"The calculation is wrong — they cannot be identical\"** | three different sites, one identical figure looks suspicious | The calculation is correct: delivery cost is driven by the average haul, and all three sites sit at an **equal distance** from the centre of demand mass. The coincidence is substantive, not an error |\n| **\"Rounding hides a difference\"** | the classic precision trap | The values coincide to the **second decimal**: $4.82 across all three. The note states the precision of the calculation |\n| **\"Not all orders were included\"** | the base of comparison | The full annual volume is included: 1.42 million orders for each site |\n\n**The key difference:** the data is clean, the question is legitimate, the metric is **appropriate** and correctly computed — it simply **does not distinguish between the options**.",
@@ -3083,22 +3083,22 @@
       "ERP replacement",
       "2.1",
       "14",
-      "**reversible**",
+      "reversible",
       "rollout slips, the benefit arrives later"
      ],
      [
       "Rebranding",
       "1.8",
       "9",
-      "**reversible**",
+      "reversible",
       "the campaign moves to the next season"
      ],
      [
-      "**Emissions licence renewal**",
+      "Emissions licence renewal",
       "**0.4**",
       "**3**",
-      "**IRREVERSIBLE**",
-      "**production halts until a new licence is issued**"
+      "IRREVERSIBLE",
+      "production halts until a new licence is issued"
      ]
     ],
     "note": ""
@@ -3128,7 +3128,7 @@
    "type": "Structuring",
    "exhibit_mode": "E-before",
    "depth_tag": "STRONG",
-   "prompt": "Demand for Pellworth's products exceeds capacity by **34%**. The board asks: **how do we add capacity?**",
+   "prompt": "Demand for Pellworth's products exceeds capacity by **34%**. The operations director: \"Tell me how we add capacity.\"",
    "anchor_metric": "capacity shortfall = 34%",
    "exhibit": {
     "type": "table",
@@ -3163,11 +3163,11 @@
       "partly (19 pp of 34)"
      ],
      [
-      "**Do not add: raise price by 9%**",
+      "Do not add: raise price by 9%",
       "**0.0**",
       "**26.3**",
       "**1**",
-      "**demand falls to capacity**"
+      "demand falls to capacity"
      ]
     ],
     "note": ""
@@ -3222,7 +3222,7 @@
       "+21.3%"
      ],
      [
-      "**Our total revenue, $M**",
+      "Our total revenue, $M",
       "**321.0**",
       "**264.6**",
       "**−17.6%**"
@@ -3277,7 +3277,7 @@
      "Year 1",
      "Year 2",
      "Year 3",
-     "**Sum over 3 years**"
+     "Sum over 3 years"
     ],
     "rows": [
      [
@@ -3306,7 +3306,7 @@
       "↑ management's optimum",
       "",
       "",
-      "↑ board's optimum: **B**"
+      "↑ board's optimum: B"
      ]
     ],
     "note": ""
@@ -3352,13 +3352,13 @@
       "1–7",
       "−1.4",
       "from −1.4 to −9.8",
-      "**reversible**: the old line runs in parallel"
+      "reversible: the old line runs in parallel"
      ],
      [
       "**8**",
       "**−1.4**",
       "**−11.2**",
-      "**point of no return: the old line is dismantled**"
+      "point of no return: the old line is dismantled"
      ],
      [
       "9–20",

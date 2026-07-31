@@ -50,7 +50,7 @@
   {
    "id": "BR-002",
    "n": 2,
-   "title": "Second Serve",
+   "title": "Off-Peak Hours",
    "company": "Dorswaith",
    "industry": "Fitness clubs",
    "class": "B02(a)",
@@ -184,11 +184,11 @@
    "clean": true,
    "time": "5 min",
    "type": "Brainstorm",
-   "prompt": "A regional cable operator can launch **only one** new package this year: a sports tier or a kids-and-family tier. The other waits until next year. What should they weigh in choosing?",
+   "prompt": "A regional cable operator can launch **only one** new package this year: a sports tier or a kids-and-family tier. What would you want to know, and why?",
    "facts": [
     "Sports rights are sold on a three-year cycle; the next auction is a year away.",
     "Kids' content is licensed annually and there are several suppliers.",
-    "There is one engineering team, and either task takes all of it."
+    "Engineering has capacity for one of them this year; either task takes the whole team."
    ],
    "key": {
     "load": "**`LOAD` — irreversibility: which of the two packages is harder, or impossible, to launch a year later.**\nSports rights go to auction as a single three-year lot; a missed auction shuts the window until the next cycle. The children's package is licensed annually from several suppliers — a delay costs a year of revenue but closes nothing off. \"Which one\" is decided on this, all else equal, and not on a comparison of audiences.\n*Grounding: Grad-U-Date (S19) — \"Only one revenue model can be used\"; BankCo (S19) — the IT budget covers one product a year; Sticky Surfactants (D24).*",
@@ -257,7 +257,7 @@
   {
    "id": "BR-008",
    "n": 8,
-   "title": "Raise and Fall",
+   "title": "Teachers and Fees",
    "company": "Yendrovak",
    "industry": "Private nurseries",
    "class": "B05(a)",
@@ -328,7 +328,7 @@
   {
    "id": "BR-010",
    "n": 10,
-   "title": "Cannot Tell",
+   "title": "The Second Call",
    "company": "Chelnitorp",
    "industry": "Appliance repair",
    "class": "B08(a)",
@@ -427,7 +427,7 @@
   {
    "id": "BR-013",
    "n": 13,
-   "title": "One Class Only",
+   "title": "The Airport Counter",
    "company": "Nurvandeck",
    "industry": "Car rental",
    "class": "B03(b)",
@@ -455,7 +455,7 @@
   {
    "id": "BR-014",
    "n": 14,
-   "title": "By Age, Not Average",
+   "title": "Annual Cover",
    "company": "Meskavort",
    "industry": "Veterinary clinics",
    "class": "B06(b)",
@@ -497,7 +497,7 @@
   {
    "id": "BR-015",
    "n": 15,
-   "title": "Lock Keeper",
+   "title": "Waybills on the River",
    "company": "Feldraski",
    "industry": "River freight",
    "class": "B09(b)",
@@ -536,12 +536,12 @@
    "clean": true,
    "time": "5 min",
    "type": "Brainstorm",
-   "prompt": "Ozhenvik is a regional auction house. This season it can launch **only one** of two initiatives: online live bidding, or a new collecting category (vintage watches). The other waits a year. What should they weigh?",
+   "prompt": "Ozhenvik is a regional auction house. This season it can launch **only one** of two initiatives: online live bidding, or a new collecting category (vintage watches). Before we commit: what would you check?",
    "facts": [
-    "There is one resource: the cataloguing team, which prepares both the platform and the new category.",
+    "Cataloguing prepares both the platform and the new category, and has room for one.",
     "Online bidding: the platform is rented on an annual contract and can start in any season.",
     "The watch category: three key consignors in the region decide who gets their collections this season; next season their lots go to other houses.",
-    "Commission on both directions is comparable."
+    "Commission on the two is much the same."
    ],
    "key": {
     "load": "**`LOAD` — irreversibility: the watch category closes a window, online bidding does not.**\nThe platform is leased and can go live in any season; consignors decide once. The question turns on this, not on a comparison of expected commissions.\n*Grounding: Grad-U-Date (S19) — \"Only one revenue model can be used\"; BankCo (S19) — the IT budget covers one product a year; Sticky Surfactants (D24).*",
@@ -709,7 +709,7 @@
   {
    "id": "BR-021",
    "n": 21,
-   "title": "No Way to Know",
+   "title": "After the First Course",
    "company": "Khordyve",
    "industry": "Language schools",
    "class": "B08(b)",
@@ -719,7 +719,7 @@
    "clean": false,
    "time": "6 min",
    "type": "Brainstorm",
-   "prompt": "Khordyve runs language schools. Renewal after the first course dropped from 61% to 44%. What could be causing it, and how would we find out?",
+   "prompt": "Khordyve runs language schools. Renewal after the first course dropped from 61% to 44% over the year. What could be causing it, and how would we find out?",
    "facts": [
     "The CRM captures: course, level, teacher, attendance, payment, date of non-renewal.",
     "It does not capture: the student's final score, the reason for leaving, the age mix of the group.",
@@ -837,7 +837,7 @@
   {
    "id": "BR-025",
    "n": 25,
-   "title": "Two Thirds Short",
+   "title": "The Gas Bill",
    "company": "Plurondek",
    "industry": "Greenhouse growing",
    "class": "B04(c)",
@@ -881,7 +881,7 @@
   {
    "id": "BR-026",
    "n": 26,
-   "title": "Ask for the Split",
+   "title": "Engine Terms",
    "company": "Tsevrandi",
    "industry": "Marine engines",
    "class": "B06(c)",
@@ -923,7 +923,7 @@
   {
    "id": "BR-027",
    "n": 27,
-   "title": "Who Signs the Manifest",
+   "title": "Tugs Go Digital",
    "company": "Vlarnetsk",
    "industry": "Tug fleet",
    "class": "B09(c)",
@@ -963,12 +963,12 @@
    "clean": true,
    "time": "5 min",
    "type": "Brainstorm",
-   "prompt": "Ovrantesk plans weddings. This season it can take on **only one** new direction: destination weddings abroad, or a corporate-events line. The other waits a year. What should they weigh?",
+   "prompt": "Ovrantesk plans weddings. Management wants to add a corporate-events line this year, alongside a push into destination weddings abroad. Coordination can staff **only one** of the two. Before we plan: what could stand in the way?",
    "facts": [
-    "There is one resource: the coordinator team, which runs both directions.",
+    "Coordination is the bottleneck: one new line at a time, no exceptions.",
     "Destination weddings: partner venues abroad are booked 14 months ahead; the booking window for next season closes **this quarter**.",
-    "Corporate events: orders come in 2–3 months ahead and entry is possible in any season.",
-    "Margins on the two directions are comparable."
+    "Corporate events: orders come in 2–3 months ahead and entry is possible at any point in the year.",
+    "The two options earn much the same margin."
    ],
    "key": {
     "load": "**`LOAD` — irreversibility: destination weddings close a booking window, corporate events do not.**\nVenues are booked 14 months out and the window shuts this quarter; miss it and the agency loses not a season but a year and a half. Corporate work can be entered at any point. The question turns on this, not on a comparison of margins.\n*The third and last variant of the class. Irreversibility: BR-006 rights on a three-year cycle, BR-016 the consignors' decision, BR-028 **the venue booking horizon**.*\n*Grounding: Grad-U-Date (S19) — \"Only one revenue model can be used\"; BankCo (S19); Sticky Surfactants (D24).*",
@@ -993,7 +993,7 @@
   {
    "id": "BR-029",
    "n": 29,
-   "title": "Free Delivery, Paid Twice",
+   "title": "Free Delivery Everywhere",
    "company": "Bzhelundra",
    "industry": "Furniture manufacturing",
    "class": "B05(c)",
@@ -1021,7 +1021,7 @@
   {
    "id": "BR-030",
    "n": 30,
-   "title": "Roast for Whom",
+   "title": "Flat Volume, Falling Profit",
    "company": "Zdrelivok",
    "industry": "Coffee roasting",
    "class": "B07(c)",
@@ -1093,7 +1093,7 @@
   {
    "id": "BR-032",
    "n": 32,
-   "title": "Our Own Competitor",
+   "title": "Framing Goes Online",
    "company": "Kthelvora",
    "industry": "Picture framing",
    "class": "B02(d)",
@@ -1121,7 +1121,7 @@
   {
    "id": "BR-033",
    "n": 33,
-   "title": "One Line Only",
+   "title": "The Ageing Room",
    "company": "Nquimbrel",
    "industry": "Cheesemaking",
    "class": "B03(d)",
@@ -1149,7 +1149,7 @@
   {
    "id": "BR-034",
    "n": 34,
-   "title": "Ninety Percent There",
+   "title": "The Recovery Target",
    "company": "Vzhadorne",
    "industry": "Waste sorting",
    "class": "B04(d)",
@@ -1222,7 +1222,7 @@
   {
    "id": "BR-036",
    "n": 36,
-   "title": "Ask About the Water",
+   "title": "Trout Under Contract",
    "company": "Tsurnbeka",
    "industry": "Fish farming",
    "class": "B06(d)",
@@ -1263,7 +1263,7 @@
   {
    "id": "BR-037",
    "n": 37,
-   "title": "Not Every City",
+   "title": "Enrolment Is Up",
    "company": "Mstravind",
    "industry": "Driving schools",
    "class": "B07(d)",
@@ -1273,7 +1273,7 @@
    "clean": false,
    "time": "6 min",
    "type": "Brainstorm",
-   "prompt": "Mstravind runs driving schools in 9 cities. Enrolment grew 11%, profit fell. Where would you look?",
+   "prompt": "Mstravind runs driving schools in 9 cities. Enrolment grew 11% over the year, profit fell. Where would you look?",
    "facts": [
     "A single price list and a single programme across all nine cities.",
     "The growth in enrolment came from four cities out of nine.",
@@ -1291,7 +1291,7 @@
   {
    "id": "BR-038",
    "n": 38,
-   "title": "Nothing to Compare",
+   "title": "The Machine Replacement",
    "company": "Yzgarnoth",
    "industry": "Self-service laundrettes",
    "class": "B08(c)",
@@ -1361,7 +1361,7 @@
   {
    "id": "BR-040",
    "n": 40,
-   "title": "Cheaper Version, Same Shelf",
+   "title": "The Short Ticket",
    "company": "Chvorentu",
    "industry": "Water parks",
    "class": "B02(e)",
@@ -1417,7 +1417,7 @@
   {
    "id": "BR-042",
    "n": 42,
-   "title": "Not Our Lever",
+   "title": "The List of Causes",
    "company": "Bnorstave",
    "industry": "Rope adventure parks",
    "class": "B08(d)",
@@ -1532,7 +1532,7 @@
   {
    "id": "BR-045",
    "n": 45,
-   "title": "They Will Answer",
+   "title": "The Autumn Peak",
    "company": "Kzhelmory",
    "industry": "Tyre fitting",
    "class": "B05(e)",
@@ -1560,7 +1560,7 @@
   {
    "id": "BR-046",
    "n": 46,
-   "title": "Ask by Cohort",
+   "title": "The Route Reset",
    "company": "Bkhelostra",
    "industry": "Climbing gyms",
    "class": "B06(e)",
@@ -1601,7 +1601,7 @@
   {
    "id": "BR-047",
    "n": 47,
-   "title": "Not the Customer, the Hour",
+   "title": "Near the Universities",
    "company": "Nzhurvale",
    "industry": "Copy shops",
    "class": "B07(e)",
@@ -1611,7 +1611,7 @@
    "clean": false,
    "time": "6 min",
    "type": "Brainstorm",
-   "prompt": "Nzhurvale runs 14 copy shops near universities. Revenue is flat, profit fell 22%. Where would you look?",
+   "prompt": "Nzhurvale runs 14 copy shops near universities. Revenue is flat over the year, profit fell 22%. Where would you look?",
    "facts": [
     "Opening hours are 8:00 to 22:00, staffed by two shifts of two people regardless of footfall.",
     "Order peaks are 11:00–14:00 and 17:00–19:00; in the remaining hours footfall is three times lower.",
@@ -1629,7 +1629,7 @@
   {
    "id": "BR-048",
    "n": 48,
-   "title": "Watching Changes It",
+   "title": "Checks Before the Dive",
    "company": "Qvarnesto",
    "industry": "Dive centres",
    "class": "B08(e)",
