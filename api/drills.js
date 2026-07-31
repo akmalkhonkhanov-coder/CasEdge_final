@@ -210,17 +210,36 @@ async function fetchWithTimeout(url, options, timeoutMs) {
 }
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const RETRIABLE_STATUS = new Set([429, 500, 502, 503, 529]);
-async function fetchAnthropicWithRetry(url, options, timeoutMs, maxRetries) {
-  let lastErr;
+// `deadlineAt` (ms epoch) bounds the WHOLE retry sequence. Without it, retries
+// multiply the per-attempt timeout — 3 x 45s would blow the 60s function limit
+// and turn a soft "could not grade, try again" into a hard gateway timeout.
+// Each attempt is clamped to whatever time is left, and a retry is only started
+// if a meaningful attempt still fits.
+const MIN_ATTEMPT_MS = 8000;
+async function fetchAnthropicWithRetry(url, options, timeoutMs, maxRetries, deadlineAt) {
+  let lastErr, lastResp;
+  const left = () => (deadlineAt ? deadlineAt - Date.now() : Infinity);
+  // The guard is on TIME LEFT, never on the caller's per-attempt timeout: a
+  // caller that legitimately asks for short attempts must still get its retries.
+  const room = () => Math.min(timeoutMs, Math.max(0, left()));
   for (let attempt = 0; attempt <= maxRetries; attempt++) {
-    if (attempt > 0) await sleep(Math.min(700 * Math.pow(2, attempt - 1), 4000));
+    if (attempt > 0) {
+      const back = Math.min(700 * Math.pow(2, attempt - 1), 4000);
+      if (left() < back + Math.min(MIN_ATTEMPT_MS, timeoutMs)) break;
+      await sleep(back);
+    }
+    const budget = room();
+    if (attempt > 0 && budget < Math.min(MIN_ATTEMPT_MS, timeoutMs)) break;
     try {
-      const resp = await fetchWithTimeout(url, options, timeoutMs);
+      const resp = await fetchWithTimeout(url, options, budget || timeoutMs);
+      lastResp = resp;
       if (RETRIABLE_STATUS.has(resp.status) && attempt < maxRetries) continue;
       return resp;
-    } catch (e) { lastErr = e; if (attempt >= maxRetries) throw e; }
+    } catch (e) { lastErr = e; if (attempt >= maxRetries) break; }
   }
+  if (lastResp) return lastResp;
   if (lastErr) throw lastErr;
+  throw new Error('upstream unavailable');
 }
 async function rateLimited(userId, sbUrl, sbKey, token) {
   try {
@@ -247,18 +266,36 @@ async function graderJSON(system, userText, maxTokens) {
       'anthropic-beta': 'prompt-caching-2024-07-31'
     },
     body: JSON.stringify({ model: GRADER_MODEL, max_tokens: mt, system: [{ type: 'text', text: system }], messages: [{ role: 'user', content: userText }] })
-  }, timeoutMs, 0);
+    // maxRetries was 0 here, which made the whole RETRIABLE_STATUS branch in
+    // fetchAnthropicWithRetry dead code (`attempt < maxRetries` is never true at
+    // 0). A 429/529 from upstream came straight back and was then treated as
+    // "the model wrote bad JSON". Two attempts with backoff is what the helper
+    // was written for.
+  }, timeoutMs, 2, T0 + BUDGET_MS);
   const textOf = dd => (dd && Array.isArray(dd.content)) ? dd.content.filter(b => b && b.type === 'text' && typeof b.text === 'string').map(b => b.text).join('\n') : '';
   const parse = t => { try { const m = String(t || '').match(/\{[\s\S]*\}/); return m ? JSON.parse(m[0]) : null; } catch (e) { return null; } };
   let resp = await call(maxTokens, 45 * 1000);
+  // The first response's status was never checked: an error body has no
+  // `content` array, so textOf() returned '' and parse('') returned null — a
+  // transport failure and an unparseable answer were the same event. They need
+  // opposite responses, so they are separated here.
+  if (resp.status < 200 || resp.status >= 300) {
+    let body = '';
+    try { body = JSON.stringify(await resp.json()).slice(0, 300); } catch (e) { /* keep */ }
+    console.error('drills grader upstream non-2xx', resp.status, body);
+    return null;                       // do NOT re-ask with double max_tokens
+  }
   let data = await resp.json();
   let parsed = parse(textOf(data));
-  // Retry once inside the deadline on truncation OR unparseable output.
+  // Retry once inside the deadline on truncation OR unparseable output. This
+  // path is for a MODEL problem only — doubling max_tokens against a rate limit
+  // makes the rate limit worse, which is why the non-2xx case returns above.
   const needsRetry = !parsed || (data && data.stop_reason === 'max_tokens');
   const timeLeft = BUDGET_MS - (Date.now() - T0);
   if (needsRetry && timeLeft > 12 * 1000) {
     try { const r2 = await call(Math.min(maxTokens * 2, 2000), timeLeft - 2000); if (r2.status === 200) { const d2 = await r2.json(); const p2 = parse(textOf(d2)); if (p2) parsed = p2; } } catch (e) { /* keep */ }
   }
+  if (!parsed) console.error('drills grader unparseable after retry', String(textOf(data) || '').slice(0, 200));
   return parsed;
 }
 
