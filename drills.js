@@ -179,9 +179,13 @@
     }).then(function (r) { return r.json().catch(function () { return {}; }); });
   }
 
+  // Cells carry the same inline markup as prose: [BOLD] marks the load-bearing
+  // number. Rendering cells with esc2() alone printed `**1,600**` literally to
+  // the candidate — 179 cells across ST and CI. mdi() escapes first, so this is
+  // no less safe than esc2; it just also honours ** and `.
   function tableHTML(ex) {
-    var h = '<table class="cm-tbl"><thead><tr>' + (ex.header || []).map(function (c) { return '<th>' + esc2(c) + '</th>'; }).join('') + '</tr></thead><tbody>';
-    h += (ex.rows || []).map(function (row) { return '<tr>' + row.map(function (c) { return '<td>' + esc2(c) + '</td>'; }).join('') + '</tr>'; }).join('');
+    var h = '<table class="cm-tbl"><thead><tr>' + (ex.header || []).map(function (c) { return '<th>' + mdi(c) + '</th>'; }).join('') + '</tr></thead><tbody>';
+    h += (ex.rows || []).map(function (row) { return '<tr>' + row.map(function (c) { return '<td>' + mdi(c) + '</td>'; }).join('') + '</tr>'; }).join('');
     return h + '</tbody></table>';
   }
 
