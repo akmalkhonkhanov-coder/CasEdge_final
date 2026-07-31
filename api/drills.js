@@ -14,6 +14,7 @@ const DRILLS_MS = require('./_drills_ms.json');
 const DRILLS_ST = require('./_drills_st.json');
 const DRILLS_BR = require('./_drills_br.json');
 const DRILLS_CI = require('./_drills_ci.json');
+const DRILLS_SY = require('./_drills_sy.json');
 // Curated libraries share one endpoint. Client passes set:'ms' (Market Sizing),
 // set:'st' (Structuring), set:'br' (Brainstorm), else Case Math. IDs are
 // disjoint (CM-*/MS-*/ST-*/BR-*).
@@ -25,7 +26,8 @@ const DRILLS_CI = require('./_drills_ci.json');
 // `set:'toString'` or `set:'__proto__'` with something inherited from
 // Object.prototype — truthy, not a function, 500 on the endpoint.
 const DRILL_SETS = Object.assign(Object.create(null), {
-  cm: () => DRILLS_CM, ms: () => DRILLS_MS, st: () => DRILLS_ST, br: () => DRILLS_BR, ci: () => DRILLS_CI
+  cm: () => DRILLS_CM, ms: () => DRILLS_MS, st: () => DRILLS_ST, br: () => DRILLS_BR, ci: () => DRILLS_CI,
+  sy: () => DRILLS_SY
 });
 function libData(body) {
   const s = (body && body.set) || 'cm';
@@ -149,7 +151,7 @@ RESPONSE FORMAT (strict JSON): {"pass":true,"coaching":"1-2 sentences IN ENGLISH
 let _byId = null;
 function drillById(id) {
   // one combined map across all libraries — ids are disjoint (CM-*/MS-*/ST-*)
-  if (!_byId) { _byId = new Map(); for (const src of [DRILLS_CM, DRILLS_MS, DRILLS_ST, DRILLS_BR, DRILLS_CI]) for (const d of (src.drills || [])) _byId.set(d.id, d); }
+  if (!_byId) { _byId = new Map(); for (const src of [DRILLS_CM, DRILLS_MS, DRILLS_ST, DRILLS_BR, DRILLS_CI, DRILLS_SY]) for (const d of (src.drills || [])) _byId.set(d.id, d); }
   return _byId.get(id);
 }
 
@@ -345,7 +347,37 @@ Never invent a number that is not in the exhibit. If the candidate quotes a numb
 
 Return: {"pass": boolean, "coaching": "1-2 sentences naming what was missed or what was strong"}`;
 
+// SY (Synthesis): the candidate reads someone else's record and delivers a
+// verdict. The skill graded here is Minto, and it is graded FIRST: a correct
+// conclusion built up to at the end is a fail, because on the interview the
+// partner has stopped listening by then. The `key` registers (naive, decoy,
+// support, risks, next, build) are server-only.
+const SY_GRADER_SYSTEM = `You are a strict but fair MBB synthesis drill grader. You receive the drill PROMPT, the RECORD the candidate had to read, an answer KEY (the naive read the record provokes, the decoy fact, the facts that actually carry the answer, the risks, the next step), a PASS CHECKLIST (every item must be met), a reference SOLUTION, and the candidate's ANSWER. Return ONLY JSON, no preamble, no markdown.
+
+CONCLUSION FIRST IS A HARD GATE. The candidate's first sentence must BE the recommendation - an action verb with a subject ("We recommend X", "BuildCo should Y"). A correct conclusion that arrives after the supporting facts FAILS, and the coaching must say so in those words. This is the single most expensive habit on a real interview and it is not negotiable here.
+Then: does the answer name the figure that decides it? Does it drop, or explicitly set aside, the decoy the record is built around? Does it carry at least the risks and next step the checklist asks for?
+A candidate who reaches the same verdict by a different route PASSES. A candidate who lands on the naive read PASSES NOTHING, however fluent.
+Never invent a number that is not in the record.
+
+Return: {"pass": boolean, "coaching": "1-2 sentences naming what was missed or what was strong"}`;
+
 async function gradeDrill(d, answer, fbLang) {
+  if (d.type === 'Synthesis') {
+    const k = d.key || {};
+    const u = 'PROMPT: ' + d.prompt +
+      '\nRECORD: ' + JSON.stringify(d.exhibit || {}) +
+      '\n\n--- ANSWER KEY (server-only) ---' +
+      '\nNAIVE READ: ' + (k.naive || '') +
+      '\nDECOY: ' + (k.decoy || '') +
+      '\nSUPPORT: ' + (k.support || '') +
+      '\nRISKS: ' + (k.risks || '') +
+      '\nNEXT STEP: ' + (k.next || '') +
+      '\n\nPASS CHECKLIST: ' + (d.checklist && (d.checklist.en || d.checklist.ru) || '') +
+      '\nREFERENCE SOLUTION: ' + (d.reference && (d.reference.en || d.reference.ru) || '') +
+      '\nCANDIDATE ANSWER: ' + String(answer || '');
+    const j = await graderJSON(SY_GRADER_SYSTEM, u + fbDirective(fbLang), 700);
+    return j || { graded: false, coaching: 'Could not grade — please try again.' };
+  }
   // CI: exhibit is a `parts` sequence, not header/rows — serialise it whole.
   if (d.type === 'Chart Interpretation') {
     const u = 'PROMPT: ' + d.prompt +
