@@ -8,7 +8,7 @@
        'unsafe-inline'/'unsafe-eval' are required by the inline handlers and the
        3D layer; the real protection is connect-src/frame-src/object-src/base-uri,
        which block data exfiltration, framing (clickjacking) and base-tag hijacks. -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; connect-src 'self' https://owyjiizhtrqpzlzawrjn.supabase.co https://api.anthropic.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; connect-src 'self' https://owyjiizhtrqpzlzawrjn.supabase.co https://api.anthropic.com; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
@@ -264,6 +264,15 @@
  -webkit-font-smoothing: antialiased;
  -moz-osx-font-smoothing: grayscale;
     }
+
+    /* Sea Wolf lives in its own document (seawolf.html) inside a same-origin
+       iframe. Its stylesheet styles `body`, `.card`, `.btn`, `.note` and five
+       fixed-position background layers - names this file already uses for other
+       things. Merging 57 KB of that into this 600 KB document would have meant
+       renaming every one of them by hand, and one missed rename is a broken
+       screen somewhere else in the app. The frame costs one HTTP request. */
+    #screen-seawolf { padding: 0; background: #03151f; }
+    #swFrame { border: 0; display: block; width: 100%; height: 100vh; height: 100dvh; background: #03151f; }
 
     /* ── Screen system ────────────────────────────────── */
     .screen { display: none; min-height: 100vh; min-height: 100dvh; flex-direction: column; background: var(--surface-dark); }
@@ -1882,7 +1891,7 @@
       <div class="cl-reveal" style="margin-top:56px;">
         <div class="cas-caption-up" style="color:#7fcdbe; margin-bottom:14px;" data-i18n="l2.games.eyebrow">Игры внутри Solve</div>
         <div class="cas-title-lg" style="color:#faf9f5; margin-bottom:10px; max-width:560px;" data-i18n="l2.games.title">McKinsey гоняет не одну игру, а несколько. Мы собираем каждую.</div>
-        <p class="cas-body-sm" style="color:var(--on-dark-soft); margin:0 0 28px; max-width:560px;" data-i18n="l2.games.sub">Какая достанется тебе, заранее не известно. Redrock Study уже играется целиком.</p>
+        <p class="cas-body-sm" style="color:var(--on-dark-soft); margin:0 0 28px; max-width:560px;" data-i18n="l2.games.sub">Какая достанется тебе, заранее не известно. Redrock Study и Sea Wolf уже играются целиком.</p>
         <div class="cl-games-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
 
           <div class="ds-card-dark cl-game-card">
@@ -1896,9 +1905,9 @@
           <div class="ds-card-dark cl-game-card">
             <div class="cl-game-head">
               <span class="cas-title-md" style="color:var(--text-on-dark);">Sea Wolf</span>
-              <span class="soon-badge" data-i18n="l2.games.soon">Скоро</span>
+              <span class="cl-game-live">&#9679; <span data-i18n="l2.games.live2">играется</span></span>
             </div>
-            <p class="cas-body-sm cl-game-body" data-i18n="l2.games.seawolf">Три участка, один сквозной таймер и трио микробов, которое надо собрать раньше, чем поймёшь, что именно понадобится. Сто уровней, разбор показывает ход, на котором решение было потеряно.</p>
+            <p class="cas-body-sm cl-game-body" data-i18n="l2.games.seawolf">Три участка, один сквозной таймер и трио микробов, которое надо собрать раньше, чем поймёшь, что именно понадобится. Сто пятьдесят наборов, разбор показывает ход, на котором решение было потеряно.</p>
           </div>
 
           <div class="ds-card-dark cl-game-card">
@@ -2546,6 +2555,10 @@
   </div>
 </div>
 
+<div id="screen-seawolf" class="screen" data-screen-label="Sea Wolf">
+  <iframe id="swFrame" title="Sea Wolf" src="about:blank" allow="fullscreen"></iframe>
+</div>
+
 <div id="screen-drill" class="screen" data-screen-label="Drill">
   <nav class="top-nav">
     <span class="wordmark" onclick="showScreen('landing')" style="cursor:pointer;">Cas<span class="wm-e">Edge</span></span>
@@ -3135,6 +3148,10 @@ function startDrill() {
   // CI wired 2026-07-26: 48/48 slots with reference + checklist. Before this the
   // card fell through to the improvising engine - no verified numbers, no key.
   if (state.drillType === 'Chart Interpretation' && window.ChartDrills) { return window.ChartDrills.open(); }
+  // Synthesis wired 2026-07-31: 16/16 slots with key + checklist + reference.
+  // Until this line the card fell through to the improvising engine - no record,
+  // no key, and the Minto gate the whole library exists for was not graded.
+  if (state.drillType === 'Synthesis' && window.SynthesisDrills) { return window.SynthesisDrills.open(); }
   brGate('drill', _startDrillReal);
 }
 async function _startDrillReal() {
@@ -3371,10 +3388,10 @@ const I18N = {
     'l2.formats.eyebrow': 'Exclusive', 'l2.formats.title': 'Two formats, rebuilt down to the interface',
     'l2.formats.solve.body': 'We built this format into the product: Research Journal, combo charts, and the same hint logic as the real assessment \u2014 train here, not just on interview day.',
     'l2.games.eyebrow': 'Games inside Solve', 'l2.games.title': 'McKinsey does not run one game. It runs several. We are building each of them.',
-    'l2.games.sub': 'Which one you get is not announced in advance. Redrock Study plays in full today.',
-    'l2.games.live': 'live', 'l2.games.soon': 'Soon', 'l2.games.soon2': 'Soon',
+    'l2.games.sub': 'Which one you get is not announced in advance. Redrock Study and Sea Wolf both play in full today.',
+    'l2.games.live': 'live', 'l2.games.live2': 'live', 'l2.games.soon': 'Soon', 'l2.games.soon2': 'Soon',
     'l2.games.redrock': 'An ecosystem, a Research Journal and numeric answers against the clock - the exact mechanic McKinsey screens on. Fifty sets, a breakdown after every move.',
-    'l2.games.seawolf': 'Three sites, one timer running across all of them, and a trio of microbes you must assemble before you know what you will need. A hundred levels, and the debrief names the move where the solution was lost.',
+    'l2.games.seawolf': 'Three sites, one timer running across all of them, and a trio of microbes you must assemble before you know what you will need. A hundred and fifty sets, and the debrief names the move where the solution was lost.',
     'l2.games.sfl': 'The third Solve game, added by the 85-minute version of the assessment. In build.',
     'l2.formats.chat.body': 'We built the live BCG Chat format into the product: an AI interviewer holds a real-time conversation, and you answer the final question by voice \u2014 just like a real call.',
     'l2.pricing.title': 'Pay for what you need right now',
@@ -3659,10 +3676,10 @@ const I18N = {
     'l2.formats.eyebrow': 'Эксклюзив', 'l2.formats.title': 'Два формата, воссозданных вплоть до интерфейса',
     'l2.formats.solve.body': 'Полностью воплотили этот формат у себя: Research Journal, комбо-графики и та же логика подсказок, что на настоящем ассессменте - готовься здесь, а не только в день интервью.',
     'l2.games.eyebrow': 'Игры внутри Solve', 'l2.games.title': 'McKinsey гоняет не одну игру, а несколько. Мы собираем каждую.',
-    'l2.games.sub': 'Какая достанется тебе, заранее не известно. Redrock Study уже играется целиком.',
-    'l2.games.live': 'играется', 'l2.games.soon': 'Скоро', 'l2.games.soon2': 'Скоро',
+    'l2.games.sub': 'Какая достанется тебе, заранее не известно. Redrock Study и Sea Wolf уже играются целиком.',
+    'l2.games.live': 'играется', 'l2.games.live2': 'играется', 'l2.games.soon': 'Скоро', 'l2.games.soon2': 'Скоро',
     'l2.games.redrock': 'Экосистема, Research Journal и числовые ответы под таймером - та самая механика, на которой McKinsey отсеивает. Пятьдесят наборов, разбор после каждого хода.',
-    'l2.games.seawolf': 'Три участка, один сквозной таймер и трио микробов, которое надо собрать раньше, чем поймёшь, что именно понадобится. Сто уровней, разбор показывает ход, на котором решение было потеряно.',
+    'l2.games.seawolf': 'Три участка, один сквозной таймер и трио микробов, которое надо собрать раньше, чем поймёшь, что именно понадобится. Сто пятьдесят наборов, разбор показывает ход, на котором решение было потеряно.',
     'l2.games.sfl': 'Третья игра Solve, которую добавляет 85-минутная версия ассессмента. В сборке.',
     'l2.formats.chat.body': 'Мы воплотили живой формат BCG Chat у себя: AI-интервьюер ведёт диалог в реальном времени, а на финальный вопрос отвечаешь голосом - как на настоящем звонке.',
     'l2.pricing.title': 'Плати за то, что нужно прямо сейчас',
@@ -4026,6 +4043,11 @@ function showScreen(id, fromPop) {
   if (id !== 'interview' && id !== 'drill' && typeof hideRespTimer === 'function') hideRespTimer();
   // Stop game timers whenever we leave their screens (prevents runaway intervals)
   if (id !== 'solve' && typeof solve === 'object' && solve && solve.timerId) { clearInterval(solve.timerId); solve.timerId = null; }
+  // Sea Wolf runs in a frame with its own 30-minute clock and a continuously
+  // animating background. Leaving the screen without unloading it would keep
+  // both running behind whatever the player opened next.
+  if (id !== 'seawolf') { const swf = document.getElementById('swFrame');
+    if (swf && swf.getAttribute('src') && swf.getAttribute('src') !== 'about:blank') swf.setAttribute('src', 'about:blank'); }
   if (id !== 'bcg' && typeof bcg === 'object' && bcg && bcg.timerId) { clearInterval(bcg.timerId); bcg.timerId = null; if (bcg.qTimerId) { clearInterval(bcg.qTimerId); bcg.qTimerId = null; } }
   if (id === 'mode' && typeof cxRefreshMode === 'function') { try { cxRefreshMode(); } catch(e){} }
   if (id === 'mode' && typeof refreshDailyBadge === 'function') { try { refreshDailyBadge(); } catch(e){} }
@@ -4975,6 +4997,33 @@ function svSetPhaseUI() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
+   SEA WOLF - McKinsey Solve ecosystem game, 150 sets, server-backed.
+   The game is a separate document (seawolf.html) in a same-origin iframe; the
+   answer keys live only in api/seawolf-session.js. Two functions cross the
+   boundary, and both are called BY the frame, never the other way round:
+   swAuthToken() hands it the Supabase access token so there is exactly one copy
+   of the auth logic in the app, and swExit() brings the player back here.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+window.swAuthToken = async function () {
+  try { return await rkToken(); } catch (e) { return null; }
+};
+window.swExit = function () {
+  // Blanking the src stops the game's clock and its background animations. A
+  // hidden iframe keeps running otherwise, and this one paints every frame.
+  const f = document.getElementById('swFrame');
+  if (f) f.src = 'about:blank';
+  showScreen('gameintro');
+};
+function startSeaWolf() {
+  if (typeof requireAuth === 'function' && !requireAuth()) return;
+  if (typeof cxSetResume === 'function') cxSetResume('seawolf', 'Sea Wolf', 'startSeaWolf');
+  const f = document.getElementById('swFrame');
+  if (f && f.getAttribute('src') !== '/seawolf.html') f.setAttribute('src', '/seawolf.html');
+  showScreen('seawolf');
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
    REDROCK STUDY - McKinsey Solve Game variant, server-backed (50 games).
    Answer keys live ONLY in api/redrock-session.js; this client renders the
    sanitized slice and grades every field over the wire (numeric + naive
@@ -5021,9 +5070,9 @@ function startSolveChoose() {
   const acts = box.querySelector('.gi-actions');
   if (acts) acts.innerHTML =
     `<button class="gi-start" onclick="startRedrock()">Redrock Study - 50 McKinsey Solve games &rarr;</button>
-     <button class="gi-back sw-soon" style="margin-top:10px;" disabled>Sea Wolf <span class="soon-badge">Soon</span></button>
+     <button class="gi-back" style="margin-top:10px;" onclick="startSeaWolf()">Sea Wolf - 150 ecosystem sets &rarr;</button>
      <button class="gi-back sw-soon" style="margin-top:10px;" disabled>Sustainable Futures Lab <span class="soon-badge">Soon</span></button>
-     <div class="sw-soon-note">Solve now ships as Redrock + Sea Wolf, and the 85-minute version adds Sustainable Futures Lab. Both are in build - Redrock is live today.</div>
+     <div class="sw-soon-note">Solve ships as Redrock + Sea Wolf; the 85-minute version adds Sustainable Futures Lab, which is still in build.</div>
      <button class="gi-back" style="margin-top:10px;" onclick="startSolveGame()">Calder Sound - guided sample</button>
      <button class="gi-back" style="margin-top:10px;" onclick="showScreen('mode')">Back</button>`;
 }
