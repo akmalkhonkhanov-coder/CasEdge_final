@@ -22,40 +22,40 @@
   <style>
     /* CasEdge DS - Colors */
     :root {
-      --coral: #5db8a6; --coral-active: #3f8f7e; --coral-disabled: #dbe7e3;
-      --accent-teal: #5db8a6; --accent-amber: #e8a55a;
-      --canvas: #faf9f5; --surface-soft: #f5f0e8; --surface-card: #efe9de;
-      --surface-cream-strong: #e8e0d2;
-      --surface-dark: #181715; --surface-dark-elevated: #252320; --surface-dark-soft: #1f1e1b;
-      --hairline: #e6dfd8; --hairline-soft: #ebe6df;
-      --ink: #141413; --body-strong: #252523; --body: #3d3d3a;
-      --muted: #6c6a64; --muted-soft: #8e8b82;
-      --on-primary: #ffffff; --on-dark: #faf9f5; --on-dark-soft: #a09d96;
-      --sv-line: rgba(255,255,255,.12); --sv-line-soft: rgba(255,255,255,.07); --sv-fill: rgba(255,255,255,.06); --sv-fill-hover: rgba(255,255,255,.16);
-      --success: #5db872; --warning: #d4a017; --error: #c64545;
-      --color-primary: var(--coral); --color-primary-active: var(--coral-active);
-      --bg-canvas: var(--canvas); --bg-dark: var(--surface-dark);
-      --bg-dark-elevated: var(--surface-dark-elevated);
-      --border-hairline: var(--hairline); --border-focus: var(--coral);
-      --text-heading: var(--ink); --text-body: var(--body);
-      --text-muted: var(--muted); --text-on-dark: var(--on-dark);
-      --text-on-dark-soft: var(--on-dark-soft);
+ --coral: #5db8a6; --coral-active: #3f8f7e; --coral-disabled: #dbe7e3;
+ --accent-teal: #5db8a6; --accent-amber: #e8a55a;
+ --canvas: #faf9f5; --surface-soft: #f5f0e8; --surface-card: #efe9de;
+ --surface-cream-strong: #e8e0d2;
+ --surface-dark: #181715; --surface-dark-elevated: #252320; --surface-dark-soft: #1f1e1b;
+ --hairline: #e6dfd8; --hairline-soft: #ebe6df;
+ --ink: #141413; --body-strong: #252523; --body: #3d3d3a;
+ --muted: #6c6a64; --muted-soft: #8e8b82;
+ --on-primary: #ffffff; --on-dark: #faf9f5; --on-dark-soft: #a09d96;
+ --sv-line: rgba(255,255,255,.12); --sv-line-soft: rgba(255,255,255,.07); --sv-fill: rgba(255,255,255,.06); --sv-fill-hover: rgba(255,255,255,.16);
+ --success: #5db872; --warning: #d4a017; --error: #c64545;
+ --color-primary: var(--coral); --color-primary-active: var(--coral-active);
+ --bg-canvas: var(--canvas); --bg-dark: var(--surface-dark);
+ --bg-dark-elevated: var(--surface-dark-elevated);
+ --border-hairline: var(--hairline); --border-focus: var(--coral);
+ --text-heading: var(--ink); --text-body: var(--body);
+ --text-muted: var(--muted); --text-on-dark: var(--on-dark);
+ --text-on-dark-soft: var(--on-dark-soft);
     }
 
     /* ── LIGHT THEME (warm beige) ──
        Re-maps the "dark surface" and "on-dark text" tokens to light values,
        so the whole UI inverts cleanly without rewriting components. */
     [data-theme="light"] {
-      --surface-dark: #f4efe6;          /* main background → warm beige */
-      --surface-dark-elevated: #fbf8f2; /* cards → near-cream */
-      --surface-dark-soft: #efe9dd;
-      --on-dark: #1f2937;               /* primary text → dark slate-blue */
-      --on-dark-soft: #5b6472;          /* secondary text → muted slate */
-      --sv-line: rgba(31,41,55,.14); --sv-line-soft: rgba(31,41,55,.08); --sv-fill: rgba(31,41,55,.05); --sv-fill-hover: rgba(31,41,55,.12);
-      --ink: #1f2937;
-      --body: #3d4451;
-      --body-strong: #1f2937;
-      --hairline: #e0d8ca;
+ --surface-dark: #f4efe6;          /* main background → warm beige */
+ --surface-dark-elevated: #fbf8f2; /* cards → near-cream */
+ --surface-dark-soft: #efe9dd;
+ --on-dark: #1f2937;               /* primary text → dark slate-blue */
+ --on-dark-soft: #5b6472;          /* secondary text → muted slate */
+ --sv-line: rgba(31,41,55,.14); --sv-line-soft: rgba(31,41,55,.08); --sv-fill: rgba(31,41,55,.05); --sv-fill-hover: rgba(31,41,55,.12);
+ --ink: #1f2937;
+ --body: #3d4451;
+ --body-strong: #1f2937;
+ --hairline: #e0d8ca;
     }
     /* Root element background follows the theme so any overscroll/rubber-band
        area shows the theme colour, never the black webview underneath. */
@@ -97,20 +97,20 @@
     [data-theme="light"] .theme-toggle .icon-moon { display: none; }
     /* CasEdge DS - Typography */
     :root {
-      --font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
-      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      --font-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+ --font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
+ --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+ --font-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
     }
     /* CasEdge DS - Spacing & radius */
     :root {
-      --space-xxs:4px; --space-xs:8px; --space-sm:12px; --space-md:16px;
-      --space-lg:24px; --space-xl:32px; --space-xxl:48px; --space-section:96px;
-      --radius-xs:4px; --radius-sm:6px; --radius-md:8px;
-      --radius-lg:12px; --radius-xl:16px; --radius-pill:9999px; --radius-full:9999px;
-      --container-max:1200px;
-      --shadow-soft:0 1px 3px rgba(20,20,19,.08);
-      --shadow-card-hover:0 4px 16px rgba(20,20,19,.08);
-      --ring-coral:0 0 0 3px rgba(93,184,166,.15);
+ --space-xxs:4px; --space-xs:8px; --space-sm:12px; --space-md:16px;
+ --space-lg:24px; --space-xl:32px; --space-xxl:48px; --space-section:96px;
+ --radius-xs:4px; --radius-sm:6px; --radius-md:8px;
+ --radius-lg:12px; --radius-xl:16px; --radius-pill:9999px; --radius-full:9999px;
+ --container-max:1200px;
+ --shadow-soft:0 1px 3px rgba(20,20,19,.08);
+ --shadow-card-hover:0 4px 16px rgba(20,20,19,.08);
+ --ring-coral:0 0 0 3px rgba(93,184,166,.15);
     }
     /* ══════════ GAME INTRO SCREENS ══════════ */
     #screen-gameintro { min-height: 100vh; min-height: 100dvh; background: var(--surface-dark); flex-direction: column; }
@@ -179,7 +179,7 @@
     .gi-meta { display: flex; gap: 22px; flex-wrap: wrap; padding: 16px 0; border-top: 1px solid var(--sv-line-soft); border-bottom: 1px solid var(--sv-line-soft); margin-bottom: 26px; }
     .gi-meta-item { font-size: 13px; color: var(--on-dark-soft); }
     .gi-meta-item b { display: block; font-size: 18px; color: var(--on-dark); font-weight: 700; margin-top: 2px; }
-    .gi-actions { display: flex; gap: 12px; align-items: center; }
+    .gi-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; justify-content: center; }
     .gi-timer-toggle { display: flex; align-items: center; gap: 11px; margin: 18px 0 4px; cursor: pointer; user-select: none; }
     .gi-timer-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
     .gi-toggle-track { flex-shrink: 0; width: 42px; height: 24px; border-radius: 13px; background: rgba(255,255,255,.16); position: relative; transition: background .18s; }
@@ -261,8 +261,8 @@
       line-height: 1.5;
       overflow-x: clip;
       overscroll-behavior: none;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+ -webkit-font-smoothing: antialiased;
+ -moz-osx-font-smoothing: grayscale;
     }
 
     /* ── Screen system ────────────────────────────────── */
@@ -792,8 +792,8 @@
     .gi-back.sw-soon { opacity: .55; cursor: default; }
     .gi-back.sw-soon:hover { transform: none; box-shadow: none; }
     .sw-soon-note {
-      margin: 12px auto 2px; max-width: 380px; font-size: 12px; line-height: 1.5;
-      color: var(--on-dark-soft); text-align: center;
+      flex: 0 0 100%; width: 100%; margin: 10px auto 0; max-width: 420px;
+      font-size: 12px; line-height: 1.5; color: var(--on-dark-soft); text-align: center;
     }
     .soon-badge {
       display: inline-block; margin-left: 7px; padding: 1px 7px; border-radius: 999px;
@@ -840,7 +840,7 @@
        INTERVIEW
     ══════════════════════════════════════════════════ */
     #screen-interview { height: 100vh; height: 100dvh; overflow: hidden; }
-    /* Название кейса бывает длинным — плашка не должна распирать шапку. */
+    /* Название кейса бывает длинным - плашка не должна распирать шапку. */
     #b-user { max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     @media (max-width: 720px) { #b-user { max-width: 150px; } }
 
@@ -990,8 +990,8 @@
     /* Chat input */
     .chat-footer { padding: 14px 28px 20px; border-top: 1px solid rgba(255,255,255,.06); flex-shrink: 0; }
     .resp-timer { display: flex; align-items: center; gap: 8px; margin-bottom: 11px; color: var(--on-dark-soft); font-size: 12px; }
-    /* Две зоны ответа. Зона 1 — обдумывание (teal). Зона 2 — на реальном
-       интервью ты бы уже говорил (amber). Овертайм — coral. Граница зон
+    /* Две зоны ответа. Зона 1 - обдумывание (teal). Зона 2 - на реальном
+       интервью ты бы уже говорил (amber). Овертайм - coral. Граница зон
        нарисована засечкой на дорожке, чтобы кандидат видел её ЗАРАНЕЕ,
        а не узнавал по смене цвета постфактум. */
     .rt-zone { flex-shrink: 0; font-size: 11px; letter-spacing: .2px; opacity: .85; white-space: nowrap; }
@@ -1083,7 +1083,7 @@
       border-radius: var(--radius-lg); padding: 22px 20px;
     }
     .m-lbl { font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--on-dark-soft); margin-bottom: 12px;
-             /* CASE OWNERSHIP — единственный заголовок в две строки; без пола
+             /* CASE OWNERSHIP - единственный заголовок в две строки; без пола
                 высоты он сдвигал цифру, полоску и подпись вниз на всю плитку. */
              min-height: 28px; }
     .m-val { font-family: var(--font-display); font-size: 40px; font-weight: 400; letter-spacing: -.8px; color: var(--on-dark); line-height: 1; margin-bottom: 10px; }
@@ -1365,86 +1365,86 @@
      ═════════════════════════════════════════════════════════════ */
   #screen-landing {
     /* ---- Brand & accent (teal remap from the design page) ---- */
-    --coral: #5db8a6;
-    --coral-active: #3f8f7e;
-    --coral-disabled: #dbe7e3;
-    --accent-teal: #5db8a6;
-    --accent-amber: #e8a55a;
+ --coral: #5db8a6;
+ --coral-active: #3f8f7e;
+ --coral-disabled: #dbe7e3;
+ --accent-teal: #5db8a6;
+ --accent-amber: #e8a55a;
     /* ---- Cream surface ramp ---- */
-    --canvas: #faf9f5;
-    --surface-soft: #f5f0e8;
-    --surface-card: #efe9de;
-    --surface-cream-strong: #e8e0d2;
+ --canvas: #faf9f5;
+ --surface-soft: #f5f0e8;
+ --surface-card: #efe9de;
+ --surface-cream-strong: #e8e0d2;
     /* ---- Dark surface ramp ---- */
-    --surface-dark: #181715;
-    --surface-dark-elevated: #252320;
-    --surface-dark-soft: #1f1e1b;
+ --surface-dark: #181715;
+ --surface-dark-elevated: #252320;
+ --surface-dark-soft: #1f1e1b;
     /* ---- Hairlines ---- */
-    --hairline: #e6dfd8;
-    --hairline-soft: #ebe6df;
+ --hairline: #e6dfd8;
+ --hairline-soft: #ebe6df;
     /* ---- Ink / text ramp ---- */
-    --ink: #141413;
-    --body-strong: #252523;
-    --body: #3d3d3a;
-    --muted: #6c6a64;
-    --muted-soft: #8e8b82;
+ --ink: #141413;
+ --body-strong: #252523;
+ --body: #3d3d3a;
+ --muted: #6c6a64;
+ --muted-soft: #8e8b82;
     /* ---- On-color text ---- */
-    --on-primary: #ffffff;
-    --on-dark: #faf9f5;
-    --on-dark-soft: #a09d96;
+ --on-primary: #ffffff;
+ --on-dark: #faf9f5;
+ --on-dark-soft: #a09d96;
     /* ---- Semantic ---- */
-    --success: #5db872;
-    --warning: #d4a017;
-    --error: #c64545;
+ --success: #5db872;
+ --warning: #d4a017;
+ --error: #c64545;
     /* ---- Semantic aliases ---- */
-    --color-primary: #5db8a6;
-    --color-primary-active: #3f8f7e;
-    --color-primary-disabled: #dbe7e3;
-    --bg-canvas: var(--canvas);
-    --bg-soft: var(--surface-soft);
-    --bg-card: var(--surface-card);
-    --bg-cream-strong: var(--surface-cream-strong);
-    --bg-elevated: #e8e0d2;
-    --bg-dark: var(--surface-dark);
-    --bg-dark-elevated: var(--surface-dark-elevated);
-    --bg-dark-soft: var(--surface-dark-soft);
-    --border-hairline: var(--hairline);
-    --border-hairline-soft: var(--hairline-soft);
-    --border-focus: #5db8a6;
-    --text-heading: var(--ink);
-    --text-body: var(--body);
-    --text-body-strong: var(--body-strong);
-    --text-muted: var(--muted);
-    --text-muted-soft: var(--muted-soft);
-    --text-on-primary: var(--on-primary);
-    --text-on-dark: var(--on-dark);
-    --text-on-dark-soft: var(--on-dark-soft);
-    --text-link: #3f8f7e;
-    --ring-coral: 0 0 0 3px rgba(93, 184, 166, 0.18);
+ --color-primary: #5db8a6;
+ --color-primary-active: #3f8f7e;
+ --color-primary-disabled: #dbe7e3;
+ --bg-canvas: var(--canvas);
+ --bg-soft: var(--surface-soft);
+ --bg-card: var(--surface-card);
+ --bg-cream-strong: var(--surface-cream-strong);
+ --bg-elevated: #e8e0d2;
+ --bg-dark: var(--surface-dark);
+ --bg-dark-elevated: var(--surface-dark-elevated);
+ --bg-dark-soft: var(--surface-dark-soft);
+ --border-hairline: var(--hairline);
+ --border-hairline-soft: var(--hairline-soft);
+ --border-focus: #5db8a6;
+ --text-heading: var(--ink);
+ --text-body: var(--body);
+ --text-body-strong: var(--body-strong);
+ --text-muted: var(--muted);
+ --text-muted-soft: var(--muted-soft);
+ --text-on-primary: var(--on-primary);
+ --text-on-dark: var(--on-dark);
+ --text-on-dark-soft: var(--on-dark-soft);
+ --text-link: #3f8f7e;
+ --ring-coral: 0 0 0 3px rgba(93, 184, 166, 0.18);
     /* ---- Typography tokens ---- */
-    --font-display: 'Newsreader', 'Tiempos Headline', Garamond, 'Times New Roman', serif;
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-    --display-xl-size: 64px; --display-xl-ls: -1.5px; --display-xl-lh: 1.05;
-    --display-lg-size: 48px; --display-lg-ls: -1px;   --display-lg-lh: 1.1;
-    --display-md-size: 36px; --display-md-ls: -0.5px; --display-md-lh: 1.15;
-    --display-sm-size: 28px; --display-sm-ls: -0.3px; --display-sm-lh: 1.2;
-    --title-lg-size: 22px; --title-lg-lh: 1.3;
-    --title-md-size: 18px; --title-md-lh: 1.4;
-    --title-sm-size: 16px; --title-sm-lh: 1.4;
-    --body-md-size: 16px; --body-md-lh: 1.55;
-    --body-sm-size: 14px; --body-sm-lh: 1.55;
-    --caption-size: 13px; --caption-lh: 1.4;
-    --caption-up-size: 12px; --caption-up-ls: 1.5px; --caption-up-lh: 1.4;
-    --code-size: 14px; --code-lh: 1.6;
+ --font-display: 'Newsreader', 'Tiempos Headline', Garamond, 'Times New Roman', serif;
+ --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+ --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+ --display-xl-size: 64px; --display-xl-ls: -1.5px; --display-xl-lh: 1.05;
+ --display-lg-size: 48px; --display-lg-ls: -1px; --display-lg-lh: 1.1;
+ --display-md-size: 36px; --display-md-ls: -0.5px; --display-md-lh: 1.15;
+ --display-sm-size: 28px; --display-sm-ls: -0.3px; --display-sm-lh: 1.2;
+ --title-lg-size: 22px; --title-lg-lh: 1.3;
+ --title-md-size: 18px; --title-md-lh: 1.4;
+ --title-sm-size: 16px; --title-sm-lh: 1.4;
+ --body-md-size: 16px; --body-md-lh: 1.55;
+ --body-sm-size: 14px; --body-sm-lh: 1.55;
+ --caption-size: 13px; --caption-lh: 1.4;
+ --caption-up-size: 12px; --caption-up-ls: 1.5px; --caption-up-lh: 1.4;
+ --code-size: 14px; --code-lh: 1.6;
     /* ---- Spacing, radii, elevation ---- */
-    --space-xxs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px;
-    --space-lg: 24px; --space-xl: 32px; --space-xxl: 48px; --space-section: 96px;
-    --radius-xs: 4px; --radius-sm: 6px; --radius-md: 8px;
-    --radius-lg: 12px; --radius-xl: 16px; --radius-pill: 9999px; --radius-full: 9999px;
-    --container-max: 1200px;
-    --shadow-soft: 0 1px 3px rgba(20, 20, 19, 0.08);
-    --shadow-card-hover: 0 4px 16px rgba(20, 20, 19, 0.08);
+ --space-xxs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px;
+ --space-lg: 24px; --space-xl: 32px; --space-xxl: 48px; --space-section: 96px;
+ --radius-xs: 4px; --radius-sm: 6px; --radius-md: 8px;
+ --radius-lg: 12px; --radius-xl: 16px; --radius-pill: 9999px; --radius-full: 9999px;
+ --container-max: 1200px;
+ --shadow-soft: 0 1px 3px rgba(20, 20, 19, 0.08);
+ --shadow-card-hover: 0 4px 16px rgba(20, 20, 19, 0.08);
   }
   #screen-landing ::selection { background: rgba(93, 184, 166, 0.25); }
   #screen-landing a { text-decoration: none; }
@@ -1853,7 +1853,7 @@
             <div class="fp-body">
               <div class="fp-journal-card"><span class="fp-jc-label">Fleet size</span><span class="fp-jc-value">150 trawlers</span></div>
               <div class="fp-journal-card"><span class="fp-jc-label">Annual catch</span><span class="fp-jc-value">500 t / year</span></div>
-              <div class="fp-journal-card fp-jc-active"><span class="fp-jc-label">Exhibit 2</span><span class="fp-jc-value">Quota vs stock — 4 years</span></div>
+              <div class="fp-journal-card fp-jc-active"><span class="fp-jc-label">Exhibit 2</span><span class="fp-jc-value">Quota vs stock - 4 years</span></div>
             </div>
           </div>
         </div>
@@ -1864,7 +1864,7 @@
           </div>
           <p class="cas-body-sm" style="color:var(--on-dark-soft); margin:0 0 20px; max-width:420px;" data-i18n="l2.formats.chat.body">Живой AI-интервьюер ведёт диалог в реальном времени - на финальный вопрос отвечаешь голосом, как на настоящем звонке.</p>
           <div class="fp-win">
-            <div class="fp-head"><span class="fp-head-title">AI Interviewer — Pariw</span><span class="fp-head-meta fp-live">● live</span></div>
+            <div class="fp-head"><span class="fp-head-title">AI Interviewer - Pariw</span><span class="fp-head-meta fp-live">● live</span></div>
             <div class="fp-body">
               <div class="fp-msg fp-msg-ai">How would you prioritize the three markets?</div>
               <div class="fp-msg fp-msg-user"><span class="fp-mic">🎙</span><span class="fp-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="fp-rec-time">0:42</span></div>
@@ -2463,8 +2463,8 @@
       <span class="bcg-note-chev" id="bcgNoteChev">&#9650;</span>
     </button>
     <div class="bcg-note-body" id="bcgNoteBody">
-      <p>This is an <b>interviewee-led case</b> run as a chat. Read each prompt, scroll back through earlier messages and exhibits any time you need to, and answer in the box that appears. Some questions are multiple-choice or select-all; others ask for a number or a short written answer. The data in the exhibits matters &mdash; the math is real.</p>
-      <p>At the very end you&rsquo;ll give a <b>final recommendation</b>. In a real interview you&rsquo;d say this out loud to a partner; here, type it as you would deliver it &mdash; conclusion first, then your supporting numbers and risks.</p>
+      <p>This is an <b>interviewee-led case</b> run as a chat. Read each prompt, scroll back through earlier messages and exhibits any time you need to, and answer in the box that appears. Some questions are multiple-choice or select-all; others ask for a number or a short written answer. The data in the exhibits matters - the math is real.</p>
+      <p>At the very end you&rsquo;ll give a <b>final recommendation</b>. In a real interview you&rsquo;d say this out loud to a partner; here, type it as you would deliver it - conclusion first, then your supporting numbers and risks.</p>
     </div>
   </div>
   <div class="bcg-feed" id="bcgFeed"></div>
@@ -2667,7 +2667,7 @@
 </div>
 
 <!-- ═══════════════════════════════════════════════════
-     CASE LIBRARY PICKER  (Full Case — choose a real case)
+     CASE LIBRARY PICKER  (Full Case - choose a real case)
 ═══════════════════════════════════════════════════ -->
 <div id="screen-caselib" class="screen" data-screen-label="Case Library">
   <nav class="top-nav">
@@ -2681,7 +2681,7 @@
     <div class="setup-sec">
       <div class="sec-eyebrow">Full Case Interview</div>
       <div class="sec-title">Choose a case from the library</div>
-      <p class="br-lead" style="margin:6px 0 0;">Real casebook cases (Wharton / Darden). <span id="caselib-firm-note"></span> Every number and exhibit is fixed — the interviewer never improvises.</p>
+      <p class="br-lead" style="margin:6px 0 0;">Real casebook cases (Wharton / Darden). <span id="caselib-firm-note"></span> Every number and exhibit is fixed - the interviewer never improvises.</p>
       <div id="caselib-list" style="margin-top:20px;display:flex;flex-direction:column;gap:10px;">
         <div style="opacity:.6;padding:24px 0;">Loading the case library…</div>
       </div>
@@ -2751,7 +2751,7 @@
     <div class="int-badges">
       <span class="pill pill-neutral" id="fb-firm">McKinsey</span>
       <span class="pill pill-neutral" id="fb-type">Profitability</span>
-      <!-- Настоящее название кейса — каламбурное и часто выдающее развязку —
+      <!-- Настоящее название кейса - каламбурное и часто выдающее развязку -
            показывается ТОЛЬКО здесь, на разборе, когда кейс уже пройден.
            До и во время кейса в шапке стоит нейтральное «Case #N». -->
       <span class="pill pill-coral" id="fb-case" style="max-width:340px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
@@ -2907,14 +2907,14 @@ function updateAuthUI() {
 /* ─────────── СЛИЯНИЕ ПРОГРЕССА МЕЖДУ УСТРОЙСТВАМИ ───────────────────────────
    Было: облако ПЕРЕЗАПИСЫВАЛО локальное, а push писал локальное поверх облака.
    Классический last-writer-wins: заходишь с другого ноутбука, где локально
-   пусто, делаешь одну сессию — и push затирает в облаке всю историю первого
+   пусто, делаешь одну сессию - и push затирает в облаке всю историю первого
    устройства. Владелец видел 18 кейсов на маке и 3 на рабочем.
    Стало: обе стороны сливаются, ни одна не теряется.
-     счётчики   — максимум (они монотонно растут)
-     истории    — длинная выигрывает (append-only, короткая всегда её префикс)
-     дни streak — объединение дат
-     по типам   — максимум по каждому ключу
-   push теперь сначала читает облако, сливает и только потом пишет — это
+     счётчики - максимум (они монотонно растут)
+     истории - длинная выигрывает (append-only, короткая всегда её префикс)
+     дни streak - объединение дат
+     по типам - максимум по каждому ключу
+   push теперь сначала читает облако, сливает и только потом пишет - это
    закрывает окно, в котором два устройства затирали друг друга. */
 function mergeProgress(a, b) {
   a = a || {}; b = b || {};
@@ -2965,7 +2965,7 @@ async function syncProgressFromCloud() {
       // длиннее облачной, и терять её нельзя.
       const merged = mergeProgress(loadProgress(), cloudRowToProgress(data));
       saveProgress(merged);
-      // Restore seen-case ids (adaptive picker) — union cloud with local so nothing is lost.
+      // Restore seen-case ids (adaptive picker) - union cloud with local so nothing is lost.
       if (Array.isArray(data.seen_case_ids)) {
         try {
           const localSeen = JSON.parse(localStorage.getItem('caseedge_seen_ids') || '[]');
@@ -2981,12 +2981,12 @@ async function pushProgressToCloud() {
   if (!sb || !currentUser) return;
   let p = loadProgress();
   try {
-    // Сначала читаем облако и сливаем — иначе это устройство затрёт историю
-    // другого. Чтение дешёвое, а потеря прогресса — нет.
+    // Сначала читаем облако и сливаем - иначе это устройство затрёт историю
+    // другого. Чтение дешёвое, а потеря прогресса - нет.
     try {
       const { data } = await sb.from('profiles').select('*').eq('id', currentUser.id).single();
       if (data) { p = mergeProgress(p, cloudRowToProgress(data)); saveProgress(p); }
-    } catch (e) { /* нет связи — пишем то, что есть */ }
+    } catch (e) { /* нет связи - пишем то, что есть */ }
     const base = {
       cases_completed: p.cases,
       drills_completed: p.drills,
@@ -2997,7 +2997,7 @@ async function pushProgressToCloud() {
       updated_at: new Date().toISOString()
     };
     // Колонок под игры в таблице может ещё не быть. Postgres валит ВЕСЬ update
-    // при неизвестной колонке — то есть одна недостающая колонка убила бы
+    // при неизвестной колонке - то есть одна недостающая колонка убила бы
     // сохранение всего прогресса. Пробуем с ними, при отказе пишем без них.
     const withGames = { ...base, games_played: p.games || 0, games_by_type: p.gamesByType || {} };
     let r = await sb.from('profiles').update(withGames).eq('id', currentUser.id);
@@ -3052,7 +3052,7 @@ NUMBERS ARE FIXED - DO NOT BEND TO THE CANDIDATE: Whatever numbers you state in 
 
 AFTER REP 5 - FULL DEFERRED REVIEW (this is where ALL teaching happens, in Russian unless noted):
 Open with one line: "Серия завершена. Вот полный разбор." Then, for EACH of the 5 reps in order, give:
-- REP N — Верно / Частично / Неверно + score /10
+- REP N - Верно / Частично / Неверно + score /10
 - The single most important thing they did well or missed (one line, Russian)
 - THE LOGIC (Russian): the mental model - why the right approach is right, so they learn how to think.
 - MODEL ANSWER (mandatory, in English): the FULL flawless answer to THAT rep, written exactly as a top candidate would deliver it out loud - complete, not a hint list. Brainstorm = the entire MECE structure with all buckets and the factors inside. Math = the full worked solution. Sizing = the full equation and numbers. The candidate reads it and sees the complete target.
@@ -3094,7 +3094,7 @@ function startDrill() {
   if (state.drillType === 'Structuring' && window.StructuringDrills) { return window.StructuringDrills.open(); }
   if (state.drillType === 'Brainstorm' && window.BrainstormDrills) { return window.BrainstormDrills.open(); }
   // CI wired 2026-07-26: 48/48 slots with reference + checklist. Before this the
-  // card fell through to the improvising engine — no verified numbers, no key.
+  // card fell through to the improvising engine - no verified numbers, no key.
   if (state.drillType === 'Chart Interpretation' && window.ChartDrills) { return window.ChartDrills.open(); }
   brGate('drill', _startDrillReal);
 }
@@ -3108,7 +3108,7 @@ async function _startDrillReal() {
   const chat = document.getElementById('chat-area');
   document.getElementById('b-firm').textContent = 'Drill';
   document.getElementById('b-type').textContent = state.drillType;
-  setSessionBadge('');   // дрилл — кейса нет
+  setSessionBadge('');   // дрилл - кейса нет
   chat.innerHTML = '<div class="typing" id="typing-ind"><div class="msg-av" style="background:rgba(93,184,166,.14);color:var(--coral);font-family:var(--font-display);">I</div><div class="typing-bbl"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>';
   setProgress(10);
   showScreen('interview');
@@ -3158,7 +3158,7 @@ async function callAI(system, messages, model) {
     const token = await freshToken();
     if (token) headers['Authorization'] = 'Bearer ' + token;
     // 2026-07-26: fetch без signal ждёт вечно. Если функция Vercel упёрлась
-    // в свой лимит 60s, клиент об этом не узнаёт никогда — экран «Scoring your
+    // в свой лимит 60s, клиент об этом не узнаёт никогда - экран «Scoring your
     // case…» крутится бесконечно. Обрываем на 62s: чуть больше серверного
     // лимита, чтобы не убивать ответ, который вот-вот придёт.
     const _ac = new AbortController();
@@ -3473,7 +3473,7 @@ const I18N = {
     'contact.lead': "Questions, feedback, or partnership ideas? We'd love to hear from you.",
     'daily.eyebrow': 'Daily Challenge',
     'daily.introTitle': 'Five problems. Same for everyone. Every day.',
-    'daily.introSub': 'Rapid mental-math under the clock — the arithmetic behind every case. Solve <b>{pass} of 5</b> to keep your streak. New set at midnight, identical for every CasEdge user.',
+    'daily.introSub': 'Rapid mental-math under the clock - the arithmetic behind every case. Solve <b>{pass} of 5</b> to keep your streak. New set at midnight, identical for every CasEdge user.',
     'daily.curStreak': 'Current streak (days)',
     'daily.bestStreak': 'Best streak',
     'daily.start': "Start today’s challenge →",
@@ -3482,9 +3482,9 @@ const I18N = {
     'daily.submit': 'Submit',
     'daily.yourAnswerLbl': 'Your answer:',
     'daily.correctLbl': 'Correct:',
-    'daily.alreadyDone': "You’ve already completed today’s challenge. Come back tomorrow for a fresh set — the streak keeps going as long as you clear {pass}/5 each day.",
+    'daily.alreadyDone': "You’ve already completed today’s challenge. Come back tomorrow for a fresh set - the streak keeps going as long as you clear {pass}/5 each day.",
     'daily.streakExt': 'Streak extended to {n} days. 🔥',
-    'daily.streakStart': 'Nice — streak started!',
+    'daily.streakStart': 'Nice - streak started!',
     'daily.failed': 'You needed {pass}/5 to keep the streak. It resets today, but tomorrow’s a fresh set.',
     'daily.backToMenu': 'Back to menu',
     'sv.study': 'Study', 'sv.analysis': 'Analysis', 'sv.report': 'Report', 'sv.cases': 'Cases',
@@ -3594,13 +3594,13 @@ const I18N = {
   ru: {
     'l2.nav.features': 'Возможности', 'l2.nav.formats': 'Форматы', 'l2.nav.pricing': 'Тарифы', 'l2.nav.start': 'Начать',
     'l2.hero.eyebrow': 'AI-тренажёр для кейс-интервью', 'l2.hero.title': 'Один шанс на McKinsey. Тренируйся так, будто он уже случился.',
-    'l2.hero.sub': 'Мы полностью воплотили McKinsey Solve и BCG Chat у себя — готовься к тому же самому формату, только гораздо дешевле.',
+    'l2.hero.sub': 'Мы полностью воплотили McKinsey Solve и BCG Chat у себя - готовься к тому же самому формату, только гораздо дешевле.',
     'l2.hero.cta': 'Начать бесплатный дрилл', 'l2.hero.demo': 'Смотреть демо ↓',
     'l2.contrast.eyebrow': 'Обычная подготовка', 'l2.contrast.title': 'Коуч разбирает с тобой общий кейс. Экзамен проверяет конкретный формат.',
-    'l2.contrast.body': 'McKinsey оценивает через Solve Game с Research Journal. BCG — через живой Chat Game с голосовым ответом. Открываешь дрилл → попадаешь в тот же интерфейс → получаешь разбор от AI по каждому решению → повторяешь до результата.',
+    'l2.contrast.body': 'McKinsey оценивает через Solve Game с Research Journal. BCG - через живой Chat Game с голосовым ответом. Открываешь дрилл → попадаешь в тот же интерфейс → получаешь разбор от AI по каждому решению → повторяешь до результата.',
     'l2.library.title': 'Библиотека кейсов и 6 типов дриллов на каждый навык',
     'l2.library.card.eyebrow': 'Контент', 'l2.library.card.title': 'Библиотека кейсов',
-    'l2.library.card.body': 'Полноценные кейсы — не дрилл на отдельный навык, а целое интервью на основе реальных бизнес-школьных casebook\u2019ов.',
+    'l2.library.card.body': 'Полноценные кейсы - не дрилл на отдельный навык, а целое интервью на основе реальных бизнес-школьных casebook\u2019ов.',
     'l2.library.preview.diff': 'Средняя',
     'l2.drills.label': 'Дриллы',
     'l2.drill1.title': 'Market Sizing', 'l2.drill1.body': 'Оценка объёма рынка с нуля.',
@@ -3610,10 +3610,10 @@ const I18N = {
     'l2.drill5.title': 'Brainstorm', 'l2.drill5.body': 'Генерация идей по структуре, не списком.',
     'l2.drill6.title': 'Synthesis', 'l2.drill6.body': 'Итог кейса за 60 секунд, как перед партнёром.',
     'l2.drill7.title': 'Behavioral', 'l2.drill7.body': 'Fit-вопросы по формату конкретной фирмы.',
-    'l2.stats.lbl1': 'реальных кейсов в библиотеке', 'l2.stats.lbl2': 'типов дриллов', 'l2.stats.lbl3': 'фирменных формата — Solve и Chat Game',
+    'l2.stats.lbl1': 'реальных кейсов в библиотеке', 'l2.stats.lbl2': 'типов дриллов', 'l2.stats.lbl3': 'фирменных формата - Solve и Chat Game',
     'l2.formats.eyebrow': 'Эксклюзив', 'l2.formats.title': 'Два формата, воссозданных вплоть до интерфейса',
-    'l2.formats.solve.body': 'Полностью воплотили этот формат у себя: Research Journal, комбо-графики и та же логика подсказок, что на настоящем ассессменте — готовься здесь, а не только в день интервью.',
-    'l2.formats.chat.body': 'Мы воплотили живой формат BCG Chat у себя: AI-интервьюер ведёт диалог в реальном времени, а на финальный вопрос отвечаешь голосом — как на настоящем звонке.',
+    'l2.formats.solve.body': 'Полностью воплотили этот формат у себя: Research Journal, комбо-графики и та же логика подсказок, что на настоящем ассессменте - готовься здесь, а не только в день интервью.',
+    'l2.formats.chat.body': 'Мы воплотили живой формат BCG Chat у себя: AI-интервьюер ведёт диалог в реальном времени, а на финальный вопрос отвечаешь голосом - как на настоящем звонке.',
     'l2.pricing.title': 'Плати за то, что нужно прямо сейчас',
     'l2.price.cta': 'Выбрать', 'l2.price.popular': 'ПОПУЛЯРНЫЙ',
     'l2.price.drills.desc1': '30 дриллов любого из 6 типов', 'l2.price.drills.desc2': 'Точечная тренировка перед конкретным этапом собеседования.',
@@ -3622,19 +3622,19 @@ const I18N = {
     'l2.price.gamepass.period': ' / 2 мес', 'l2.price.gamepass.desc1': 'Solve Game + Chat Game, 75 игр', 'l2.price.gamepass.desc2': 'До 75 прогонов за 2 месяца и живой AI-интервьюер с голосовым ответом.',
     'l2.faq.title': 'Частые вопросы',
     'l2.faq.q1': 'Насколько точно повторяется формат McKinsey Solve Game?',
-    'l2.faq.a1': 'Мы полностью воплотили формат McKinsey Solve у себя: интерфейс, тайминг и логика Research Journal и комбо-графиков работают так же, как на настоящем ассессменте — включая структуру экрана.',
+    'l2.faq.a1': 'Мы полностью воплотили формат McKinsey Solve у себя: интерфейс, тайминг и логика Research Journal и комбо-графиков работают так же, как на настоящем ассессменте - включая структуру экрана.',
     'l2.faq.q2': 'Что такое BCG Chat Game и как работает голосовой ответ?',
-    'l2.faq.a2': 'Мы воплотили формат BCG Chat Game у себя: живой AI-интервьюер ведёт диалог текстом в реальном времени, а финальный вопрос ты отвечаешь голосом — так же, как на настоящем звонке с BCG.',
+    'l2.faq.a2': 'Мы воплотили формат BCG Chat Game у себя: живой AI-интервьюер ведёт диалог текстом в реальном времени, а финальный вопрос ты отвечаешь голосом - так же, как на настоящем звонке с BCG.',
     'l2.faq.q3': 'Кейсы реальные или сгенерированы ИИ?',
-    'l2.faq.a3': 'Библиотека собрана на основе реальных бизнес-школьных casebook\u2019ов — это те же кейсы, что разбирают в консалтинг-клубах топовых программ.',
+    'l2.faq.a3': 'Библиотека собрана на основе реальных бизнес-школьных casebook\u2019ов - это те же кейсы, что разбирают в консалтинг-клубах топовых программ.',
     'l2.faq.q4': 'Могу ли я перейти на другой тариф позже?',
-    'l2.faq.a4': 'Да, можно повысить тариф в любой момент — доплачиваешь только разницу за оставшийся период.',
+    'l2.faq.a4': 'Да, можно повысить тариф в любой момент - доплачиваешь только разницу за оставшийся период.',
     'l2.faq.q5': 'Есть ли бесплатный пробный дрилл?',
-    'l2.faq.a5': 'Да — один дрилл любого типа доступен бесплатно, без привязки карты.',
-    'l2.cta2.title': 'Готовься так, будто интервью уже завтра', 'l2.cta2.body': 'Первый дрилл — бесплатно. Дальше плати только за то, что реально нужно.',
+    'l2.faq.a5': 'Да - один дрилл любого типа доступен бесплатно, без привязки карты.',
+    'l2.cta2.title': 'Готовься так, будто интервью уже завтра', 'l2.cta2.body': 'Первый дрилл - бесплатно. Дальше плати только за то, что реально нужно.',
     'l2.footer.tagline': 'Независимый тренажёр для подготовки к кейс-интервью.',
     'l2.footer.product': 'Продукт', 'l2.footer.support': 'Поддержка', 'l2.footer.legal': 'Документы',
-    'l2.footer.contact': 'Вопросы? Пиши в Telegram — <a href="https://t.me/casedge" target="_blank" rel="noopener">@casedge</a> или <a href="https://t.me/+998900002512" target="_blank" rel="noopener">+998&#8209;90&#8209;000&#8209;2512</a>',
+    'l2.footer.contact': 'Вопросы? Пиши в Telegram - <a href="https://t.me/casedge" target="_blank" rel="noopener">@casedge</a> или <a href="https://t.me/+998900002512" target="_blank" rel="noopener">+998&#8209;90&#8209;000&#8209;2512</a>',
     'l2.footer.copy': '© 2026 CasEdge. Независимый тренажёр для подготовки к интервью.',
     'nav.cases': 'Кейсы',
     'nav.drills': 'Дриллы',
@@ -3642,17 +3642,17 @@ const I18N = {
     'nav.pricing': 'Цены',
     'nav.faq': 'Вопросы',
     'faq.q1': 'Что такое кейс-интервью?',
-    'faq.a1': 'Кейс-интервью — это живая бизнес-задача, которую ты решаешь вслух вместе с интервьюером. Это ядро того, как McKinsey, BCG и Bain оценивают кандидатов — проверяют структуру мышления, количественные навыки, деловое чутьё и коммуникацию.',
+    'faq.a1': 'Кейс-интервью - это живая бизнес-задача, которую ты решаешь вслух вместе с интервьюером. Это ядро того, как McKinsey, BCG и Bain оценивают кандидатов - проверяют структуру мышления, количественные навыки, деловое чутьё и коммуникацию.',
     'faq.q2': 'В чём разница между кейсами и дриллами?',
-    'faq.a2': 'Полный кейс — это симуляция на ~40 минут: структура, математика, экзибиты и финальная рекомендация. Дриллы отрабатывают один конкретный навык (математика, структурирование, синтез и другие) серией из 5 быстрых повторов, чтобы прокачать именно эту мышцу.',
+    'faq.a2': 'Полный кейс - это симуляция на ~40 минут: структура, математика, экзибиты и финальная рекомендация. Дриллы отрабатывают один конкретный навык (математика, структурирование, синтез и другие) серией из 5 быстрых повторов, чтобы прокачать именно эту мышцу.',
     'faq.q3': 'Чем фидбек отличается от других инструментов?',
-    'faq.a3': 'Большинство инструментов просто дают образец ответа для сравнения. CasEdge коучит так, как это делал бы партнёр — оспаривает слабую логику, требует точности в цифрах под давлением и показывает, КАК думать, а не просто какой был правильный ответ.',
+    'faq.a3': 'Большинство инструментов просто дают образец ответа для сравнения. CasEdge коучит так, как это делал бы партнёр - оспаривает слабую логику, требует точности в цифрах под давлением и показывает, КАК думать, а не просто какой был правильный ответ.',
     'faq.q4': 'Какие фирмы и типы кейсов покрыты?',
-    'faq.a4': 'Кейсы следуют реальным паттернам MBB по фирмам (McKinsey, BCG, Bain) и типам — прибыльность, выход на рынок, M&A, ценообразование, оценка рынка и другие. Дриллы покрывают семь отдельных навыков, которые проверяют на реальных интервью.',
+    'faq.a4': 'Кейсы следуют реальным паттернам MBB по фирмам (McKinsey, BCG, Bain) и типам - прибыльность, выход на рынок, M&A, ценообразование, оценка рынка и другие. Дриллы покрывают семь отдельных навыков, которые проверяют на реальных интервью.',
     'faq.q5': 'Какие языки поддерживаются?',
-    'faq.a5': 'Платформа поддерживает английский и русский — с одинаковой сложностью, глубиной и строгостью кейсов на обоих языках.',
+    'faq.a5': 'Платформа поддерживает английский и русский - с одинаковой сложностью, глубиной и строгостью кейсов на обоих языках.',
     'faq.q6': 'Сохраняется ли мой прогресс?',
-    'faq.a6': 'Да — прогресс сохраняется на твоём устройстве, а синхронизация через аккаунт держит его одинаковым на всех устройствах.',
+    'faq.a6': 'Да - прогресс сохраняется на твоём устройстве, а синхронизация через аккаунт держит его одинаковым на всех устройствах.',
     'nav.contact': 'Контакты',
     'nav.signin': 'Войти',
     // Hero
@@ -3715,7 +3715,7 @@ const I18N = {
     'mode.drill.desc': 'Точечные повторы на один навык - оценка рынка, структура, математика, графики, брейншторм. Быстрый фидбэк.',
     'mode.daily.name': 'Задание дня',
     'mode.daily.strip': '5 быстрых задач \u00b7 держи серию',
-    'mode.daily.desc': 'Пять быстрых задач на устный счёт — новые каждый день и одинаковые для всех. Реши 4 из 5, чтобы сохранить серию.',
+    'mode.daily.desc': 'Пять быстрых задач на устный счёт - новые каждый день и одинаковые для всех. Реши 4 из 5, чтобы сохранить серию.',
     'mode.solve.desc': 'Игра-решение в стиле McKinsey - построение экосистем, перераспределение, сценарная логика. Проверяет работу с данными в структуре. Премиум-трек.',
     'mode.chat.desc': 'Вопросы в стиле Solve, но в формате чата - тот же логический движок, без игрового интерфейса. Качай мышление, которое реально ценит ассессмент. Премиум-трек.',
     // Setup screen
@@ -3732,7 +3732,7 @@ const I18N = {
     'drillcard.structuring.name': 'Структурирование',
     'drillcard.structuring.desc': 'Строй MECE-структуры на основе гипотез в условиях таймера.',
     'drillcard.math.name': 'Математика кейса',
-    'drillcard.math.desc': 'Многошаговые бизнес-расчёты — окупаемость, ROI, маржа.',
+    'drillcard.math.desc': 'Многошаговые бизнес-расчёты - окупаемость, ROI, маржа.',
     'drillcard.chart.name': 'Чтение графиков',
     'drillcard.chart.desc': 'Читай экзибиты и извлекай ключевой инсайт.',
     'drillcard.brainstorm.name': 'Брейншторм',
@@ -3754,7 +3754,7 @@ const I18N = {
     'contact.lead': 'Вопросы, отзывы или идеи о партнёрстве? Будем рады услышать вас.',
     'daily.eyebrow': 'Задание дня',
     'daily.introTitle': 'Пять задач. Одинаковые для всех. Каждый день.',
-    'daily.introSub': 'Быстрый устный счёт на время — арифметика, лежащая в основе любого кейса. Реши <b>{pass} из 5</b>, чтобы сохранить серию. Новый набор в полночь, одинаковый для всех пользователей CasEdge.',
+    'daily.introSub': 'Быстрый устный счёт на время - арифметика, лежащая в основе любого кейса. Реши <b>{pass} из 5</b>, чтобы сохранить серию. Новый набор в полночь, одинаковый для всех пользователей CasEdge.',
     'daily.curStreak': 'Текущая серия (дней)',
     'daily.bestStreak': 'Лучшая серия',
     'daily.start': 'Начать задание дня →',
@@ -3763,10 +3763,10 @@ const I18N = {
     'daily.submit': 'Ответить',
     'daily.yourAnswerLbl': 'Твой ответ:',
     'daily.correctLbl': 'Верно:',
-    'daily.alreadyDone': 'Ты уже прошёл задание дня. Возвращайся завтра за новым набором — серия продолжается, пока ты решаешь {pass}/5 каждый день.',
+    'daily.alreadyDone': 'Ты уже прошёл задание дня. Возвращайся завтра за новым набором - серия продолжается, пока ты решаешь {pass}/5 каждый день.',
     'daily.streakExt': 'Серия продлена до {n} дней. 🔥',
-    'daily.streakStart': 'Отлично — серия началась!',
-    'daily.failed': 'Нужно было {pass}/5, чтобы сохранить серию. Сегодня она сбрасывается, но завтра — новый набор.',
+    'daily.streakStart': 'Отлично - серия началась!',
+    'daily.failed': 'Нужно было {pass}/5, чтобы сохранить серию. Сегодня она сбрасывается, но завтра - новый набор.',
     'daily.backToMenu': 'В меню',
     'sv.study': 'Изучение', 'sv.analysis': 'Анализ', 'sv.report': 'Отчёт', 'sv.cases': 'Кейсы',
     'sv.exitGame': 'Выйти', 'sv.calculator': 'Калькулятор', 'sv.journal': 'Журнал исследования',
@@ -3789,7 +3789,7 @@ const I18N = {
     'legal.eyebrow': 'Юридическое',
     'legal.note': 'Это общий шаблон, а не юридическая консультация. Покажите его квалифицированному специалисту перед запуском, особенно когда заработают платежи и аккаунты.',
     'priv.lead': 'Как CasEdge обращается с вашими данными. Обновлено в 2026.',
-    'priv.h1': 'Кто мы', 'priv.p1': 'CasEdge — инструмент для подготовки к кейс-интервью. Эта политика объясняет, какие данные мы обрабатываем и зачем. Вопросы — на support@casedge.io.',
+    'priv.h1': 'Кто мы', 'priv.p1': 'CasEdge - инструмент для подготовки к кейс-интервью. Эта политика объясняет, какие данные мы обрабатываем и зачем. Вопросы - на support@casedge.io.',
     'priv.h2': 'Что мы собираем', 'priv.p2': 'При создании аккаунта мы собираем ваш email и надёжно хешированный пароль (обрабатывается провайдером аутентификации Supabase). Мы храним ваш прогресс, чтобы он синхронизировался между устройствами. Настройки темы и языка хранятся в локальном хранилище вашего браузера на устройстве.',
     'priv.h3': 'Учебный контент и ИИ', 'priv.p3': 'Кейсы, дриллы и обратная связь генерируются ИИ-моделью через защищённый серверный прокси. Текст, который вы отправляете в сессии, передаётся модели для формирования обратной связи. Мы не продаём этот контент и не используем его для вашей идентификации.',
     'priv.h4': 'Чего мы не делаем', 'priv.p4': 'Мы не продаём ваши персональные данные. Мы не показываем стороннюю рекламу. Мы не передаём вашу информацию никому, кроме сервис-провайдеров, строго необходимых для работы CasEdge (аутентификация, хостинг, ИИ-провайдер и, после запуска, платёжный процессор).',
@@ -3797,8 +3797,8 @@ const I18N = {
     'priv.h6': 'Ваши права', 'priv.p6': 'Вы можете в любой момент запросить доступ, исправление или удаление данных аккаунта, написав на support@casedge.io. Очистка хранилища браузера удаляет локально сохранённый прогресс и настройки с этого устройства.',
     'priv.h7': 'Изменения', 'priv.p7': 'Мы можем обновлять эту политику по мере развития продукта. Существенные изменения будут отражены на этой странице.',
     'terms.lead': 'Правила использования CasEdge. Обновлено в 2026.',
-    'terms.h1': 'Принятие условий', 'terms.p1': 'Используя CasEdge, вы соглашаетесь с этими условиями. Если вы не согласны — пожалуйста, не пользуйтесь сервисом.',
-    'terms.h2': 'Что такое CasEdge', 'terms.p2': 'CasEdge — инструмент для подготовки к кейс-интервью в управленческом консалтинге. Это независимый продукт, не аффилированный с McKinsey & Company, Boston Consulting Group, Bain & Company или любой другой фирмой, не одобренный и не спонсируемый ими. Все сценарии — вымышленный учебный материал.',
+    'terms.h1': 'Принятие условий', 'terms.p1': 'Используя CasEdge, вы соглашаетесь с этими условиями. Если вы не согласны - пожалуйста, не пользуйтесь сервисом.',
+    'terms.h2': 'Что такое CasEdge', 'terms.p2': 'CasEdge - инструмент для подготовки к кейс-интервью в управленческом консалтинге. Это независимый продукт, не аффилированный с McKinsey & Company, Boston Consulting Group, Bain & Company или любой другой фирмой, не одобренный и не спонсируемый ими. Все сценарии - вымышленный учебный материал.',
     'terms.h3': 'Ваш аккаунт', 'terms.p3': 'Вы отвечаете за сохранность своих учётных данных и за действия под вашим аккаунтом. Не передавайте аккаунт другим и не используйте его для нарушения закона.',
     'terms.h4': 'Допустимое использование', 'terms.p4': 'Вы соглашаетесь не перепродавать, не скрейпить и не копировать массово контент CasEdge, не пытаться нарушить работу или реверс-инжинирить сервис и не злоупотреблять ИИ-функциями для создания вредоносного контента.',
     'terms.h5': 'Контент и точность', 'terms.p5': 'Учебный контент предоставляется только для тренировки. Мы стараемся держать высокое качество, но не гарантируем какой-либо конкретный результат интервью.',
@@ -3813,18 +3813,18 @@ const I18N = {
     'lang.done': 'Готово',
     'legal.refundLink': 'Возврат средств',
     'legal.refundTitle': 'Политика возврата средств',
-    'terms.p6': 'Платные тарифы оплачиваются через нашего платёжного оператора (Paddle, выступает продавцом по договору). Подробности об отмене и возврате — в нашей <a href="#refund">Политике возврата средств</a>.',
+    'terms.p6': 'Платные тарифы оплачиваются через нашего платёжного оператора (Paddle, выступает продавцом по договору). Подробности об отмене и возврате - в нашей <a href="#refund">Политике возврата средств</a>.',
     'refund.lead': 'Когда и как работают возвраты в CasEdge. Обновлено в 2026.',
     'refund.h1': 'Подписки (библиотека кейсов и дриллов)',
-    'refund.p1': 'Ты можешь запросить полный возврат в течение 48 часов после оплаты, если за текущий расчётный период не начат ни один кейс или дрилл. Как только кейс или дрилл начат — этот расчётный период возврату не подлежит.',
+    'refund.p1': 'Ты можешь запросить полный возврат в течение 48 часов после оплаты, если за текущий расчётный период не начат ни один кейс или дрилл. Как только кейс или дрилл начат - этот расчётный период возврату не подлежит.',
     'refund.h2': 'Отмена подписки',
     'refund.p2': 'Отменить автопродление можно в любой момент. Отмена останавливает будущие списания, но не возвращает деньги за уже активный период.',
     'refund.h3': 'Игровые пропуски (Solve Game / BCG Chat Game)',
-    'refund.p3': 'Игровой пропуск — это доступ к одной живой AI-сессии для разового использования. Возврат возможен только если сессия ни разу не была начата. После начала сессии возврата нет, так как ресурсы для её проведения уже потрачены.',
+    'refund.p3': 'Игровой пропуск - это доступ к одной живой AI-сессии для разового использования. Возврат возможен только если сессия ни разу не была начата. После начала сессии возврата нет, так как ресурсы для её проведения уже потрачены.',
     'refund.h4': 'Как запросить возврат',
     'refund.p4': 'Напиши нам на support@casedge.io или в Telegram (@casedge), указав email аккаунта и дату покупки. Одобренные возвраты обрабатывает Paddle, наш платёжный провайдер, обычно в течение нескольких рабочих дней.',
     'refund.h5': 'Чарджбэки',
-    'refund.p5': 'Пожалуйста, свяжись с нами до того, как оформлять чарджбэк через банк или платёжную систему — обычно мы можем решить вопрос с оплатой быстрее напрямую.',
+    'refund.p5': 'Пожалуйста, свяжись с нами до того, как оформлять чарджбэк через банк или платёжную систему - обычно мы можем решить вопрос с оплатой быстрее напрямую.',
     'pricing.eyebrow': 'Цены',
     'pricing.title': 'Простые и честные цены',
     'pricing.lead': 'Выбери тариф библиотеки, чтобы практиковаться в своём темпе, или Game Pass для полноценных живых симуляций в стиле BCG / McKinsey. Без скрытых платежей, отменить можно в любой момент.',
@@ -3848,11 +3848,11 @@ const I18N = {
     'pricing.tier2.f4': 'RU / EN интерфейс и фидбек',
     'pricing.games.name': 'Game Pass',
     'pricing.games.period': '2 месяца, до 75 игр',
-    'pricing.games.f1': 'McKinsey Solve Game — полная симуляция',
-    'pricing.games.f2': 'BCG Chat Game — полная симуляция',
+    'pricing.games.f1': 'McKinsey Solve Game - полная симуляция',
+    'pricing.games.f2': 'BCG Chat Game - полная симуляция',
     'pricing.games.f3': 'AI-грейдинг открытых ответов + полные решения',
     'pricing.games.f4': 'До 75 игр за 2 месяца',
-    'pricing.note': 'Цены указаны в USD. Платежи обрабатывает Paddle, наш продавец по договору (merchant of record). Подробности об отмене — в нашей <a href="#refund" style="color:inherit;text-decoration:underline;">Политике возврата средств</a>.',
+    'pricing.note': 'Цены указаны в USD. Платежи обрабатывает Paddle, наш продавец по договору (merchant of record). Подробности об отмене - в нашей <a href="#refund" style="color:inherit;text-decoration:underline;">Политике возврата средств</a>.',
     'auth.err.emailFirst': 'Сначала введи email выше, потом нажми «Забыли пароль?».',
     'auth.err.loading': 'Авторизация ещё загружается, попробуй через секунду.',
     'auth.msg.resetSent': 'Если такой email зарегистрирован, ссылка для сброса уже отправлена. Проверь почту (и папку спам).',
@@ -4924,7 +4924,7 @@ function svSetPhaseUI() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   REDROCK STUDY — McKinsey Solve Game variant, server-backed (50 games).
+   REDROCK STUDY - McKinsey Solve Game variant, server-backed (50 games).
    Answer keys live ONLY in api/redrock-session.js; this client renders the
    sanitized slice and grades every field over the wire (numeric + naive
    detection, exact for dropdown/choice, LLM for the graph justification).
@@ -4932,7 +4932,7 @@ function svSetPhaseUI() {
    (svRenderJournal), collectible chips, sv-* styling. Nothing is duplicated.
    ══════════════════════════════════════════════════════════════════════════ */
 
-// Fixed chart-type universe — the sanitized graph_selection ships no options,
+// Fixed chart-type universe - the sanitized graph_selection ships no options,
 // so every game offers the same picker; the server grades the choice string.
 const REDROCK_CHART_TYPES = ['Line', 'Bar', 'Pie', 'Scatter', 'Waterfall', 'Combo (bar + line)', 'Table', 'Map', 'Cohort heatmap'];
 
@@ -4969,11 +4969,11 @@ function startSolveChoose() {
   if (!box) { startRedrock(); return; }
   const acts = box.querySelector('.gi-actions');
   if (acts) acts.innerHTML =
-    `<button class="gi-start" onclick="startRedrock()">Redrock Study &mdash; 50 McKinsey Solve games &rarr;</button>
+    `<button class="gi-start" onclick="startRedrock()">Redrock Study - 50 McKinsey Solve games &rarr;</button>
      <button class="gi-back sw-soon" style="margin-top:10px;" disabled>Sea Wolf <span class="soon-badge">Soon</span></button>
      <button class="gi-back sw-soon" style="margin-top:10px;" disabled>Sustainable Futures Lab <span class="soon-badge">Soon</span></button>
-     <div class="sw-soon-note">Solve now ships as Redrock + Sea Wolf, and the 85-minute version adds Sustainable Futures Lab. Both are in build &mdash; Redrock is live today.</div>
-     <button class="gi-back" style="margin-top:10px;" onclick="startSolveGame()">Calder Sound &mdash; guided sample</button>
+     <div class="sw-soon-note">Solve now ships as Redrock + Sea Wolf, and the 85-minute version adds Sustainable Futures Lab. Both are in build - Redrock is live today.</div>
+     <button class="gi-back" style="margin-top:10px;" onclick="startSolveGame()">Calder Sound - guided sample</button>
      <button class="gi-back" style="margin-top:10px;" onclick="showScreen('mode')">Back</button>`;
 }
 
@@ -5103,7 +5103,7 @@ async function rkReveal(exId) {
       const idx = solve.game.exhibits.findIndex(e => e.id === exId);
       if (idx >= 0) solve.game.exhibits[idx] = r.exhibit;
       renderSolve();
-    } else rkToast('Not yet — mention this exhibit in your analysis to unlock it.');
+    } else rkToast('Not yet - mention this exhibit in your analysis to unlock it.');
   } catch (e) { rkToast(e.message); }
 }
 
@@ -5115,9 +5115,9 @@ function rkField(fieldId, input, opts) {
   const unit = opts.unit ? `<span class="rk-unit">${esc(opts.unit)}</span>` : '';
   let badge = '';
   if (g === 'correct') badge = '<span class="rk-fb ok">✓ Correct</span>';
-  else if (g === 'naive') badge = `<span class="rk-fb naive">▲ Naïve trap${opts.naiveReason ? ' — ' + esc(opts.naiveReason) : ''}. Correct: ${esc(String(opts.correct))}</span>`;
-  else if (g === 'wrong') badge = `<span class="rk-fb bad">✗ Not right${opts.correct != null ? ' — correct: ' + esc(String(opts.correct)) : ''}</span>`;
-  else if (g === 'ungraded') badge = '<span class="rk-fb">Could not grade — try again.</span>';
+  else if (g === 'naive') badge = `<span class="rk-fb naive">▲ Naïve trap${opts.naiveReason ? ' - ' + esc(opts.naiveReason) : ''}. Correct: ${esc(String(opts.correct))}</span>`;
+  else if (g === 'wrong') badge = `<span class="rk-fb bad">✗ Not right${opts.correct != null ? ' - correct: ' + esc(String(opts.correct)) : ''}</span>`;
+  else if (g === 'ungraded') badge = '<span class="rk-fb">Could not grade - try again.</span>';
   const cls = 'rk-field' + (g === 'correct' ? ' ok' : g === 'naive' ? ' naive' : g === 'wrong' ? ' bad' : '');
   // choice/dropdown WITH server-provided options → render a picker (no free text).
   const options = Array.isArray(opts.options) ? opts.options : null;
@@ -5174,7 +5174,7 @@ function rkStudy(inner, foot) {
       <div class="sv-h">${esc(g.title)} <span class="rk-tag">${esc(g.world || '')}</span></div>
       <div class="sv-obj"><span class="sv-obj-tag">Objective</span> ${rkInline(g.objective || '')}</div>
       <div class="rk-study">${rkMd(g.study_md || '')}</div>
-      <div class="rk-note">Drag any figure into the Research Journal — some numbers here are decoys that never feed the analysis.</div>
+      <div class="rk-note">Drag any figure into the Research Journal - some numbers here are decoys that never feed the analysis.</div>
       ${exh}
     </div><div class="sv-journal" id="svJournal"></div></div>`;
   foot.innerHTML = `<span></span><button class="sv-next" onclick="solve.phase='analysis';solve.qIndex=0;renderSolve()">Start analysis &rarr;</button>`;
@@ -5232,11 +5232,11 @@ function rkReport(inner, foot) {
     `<div class="sv-gcard ${chosen === ct ? 'sel' : ''} ${grType && chosen === ct ? (grType === 'correct' ? 'rk-okcard' : 'rk-badcard') : ''}"
       onclick="solve.rkVals['g:type']='${esc(ct)}';renderSolve()">${esc(ct)}</div>`).join('');
   const typeBadge = grType === 'correct' ? '<span class="rk-fb ok">✓ Right chart</span>'
-    : grType ? `<span class="rk-fb bad">✗ Reconsider${solve.rkMeta['g:type'] && solve.rkMeta['g:type'].correct ? ' — ' + esc(String(solve.rkMeta['g:type'].correct)) : ''}</span>` : '';
+    : grType ? `<span class="rk-fb bad">✗ Reconsider${solve.rkMeta['g:type'] && solve.rkMeta['g:type'].correct ? ' - ' + esc(String(solve.rkMeta['g:type'].correct)) : ''}</span>` : '';
   const jm = solve.rkMeta['g:justify'] || {}, jg = solve.rkGraded['g:justify'];
   const jBadge = jg === 'correct' ? `<span class="rk-fb ok">✓ ${esc(jm.feedback || 'Solid justification')}</span>`
     : jg === 'wrong' ? `<span class="rk-fb bad">✗ ${esc(jm.feedback || 'Name the data shape that dictates the chart.')}</span>`
-    : jg === 'ungraded' ? '<span class="rk-fb">Could not grade — try again.</span>' : '';
+    : jg === 'ungraded' ? '<span class="rk-fb">Could not grade - try again.</span>' : '';
   inner.innerHTML =
     `<div class="sv-layout-main">
       <div class="sv-h">Chart selection</div>
@@ -5285,7 +5285,7 @@ function rkResult(inner, foot) {
   let correct = 0, naive = 0;
   ids.forEach(x => { const s = solve.rkGraded[x.id]; if (s === 'correct') correct++; if (s === 'naive') naive++; });
   const total = ids.length, pct = total ? Math.round(correct / total * 100) : 0;
-  // Redrock не писал прогресс вообще — игра завершалась и исчезала. Пишем один
+  // Redrock не писал прогресс вообще - игра завершалась и исчезала. Пишем один
   // раз на игру: повторный рендер экрана результата не должен множить счётчик.
   if (!solve._recorded) {
     solve._recorded = true;
@@ -5298,9 +5298,9 @@ function rkResult(inner, foot) {
   inner.innerHTML =
     `<div class="rk-result">
       <div class="rk-score">${pct}%</div>
-      <div class="rk-score-sub">${esc(g.title)} — ${correct}/${total} correct${naive ? `, ${naive} naïve trap${naive > 1 ? 's' : ''} hit` : ''}</div>
+      <div class="rk-score-sub">${esc(g.title)} - ${correct}/${total} correct${naive ? `, ${naive} naïve trap${naive > 1 ? 's' : ''} hit` : ''}</div>
       <div class="rk-res-table">${rows}</div>
-      ${naive ? '<div class="rk-note rk-amber">Naïve traps are the core Redrock test — each one is a specific mis-step the real assessment penalises. Review the correct figures before the next game.</div>' : ''}
+      ${naive ? '<div class="rk-note rk-amber">Naïve traps are the core Redrock test - each one is a specific mis-step the real assessment penalises. Review the correct figures before the next game.</div>' : ''}
       <div class="gi-actions" style="margin-top:22px;">
         <button class="gi-start" onclick="startRedrock()">Next game &rarr;</button>
         <button class="gi-back" style="margin-top:10px;" onclick="showScreen('mode')">Back to menu</button>
@@ -5622,8 +5622,8 @@ function solveAnalysisNext() {
 function renderSolveReport(inner, foot) {
   // Three sub-steps mirroring McKinsey naming:
   //   'written' -> Written Report  (Minto-style summary paragraph, fill the figures)
-  //   'pick'     -> Graph Selection (read the combo chart, choose the best type)
-  //   'visual'   -> Visual Report   (build the chosen chart type from an editable data table)
+  //   'pick' -> Graph Selection (read the combo chart, choose the best type)
+  //   'visual' -> Visual Report   (build the chosen chart type from an editable data table)
   if (!solve.reportStep) solve.reportStep = 'written';
   if (solve.reportStep === 'written') return renderReportWritten(inner, foot);
   if (solve.reportStep === 'pick')    return renderReportPick(inner, foot);
@@ -6467,7 +6467,7 @@ function renderDailyReview(alreadyDone) {
       const r = daily.results[i];
       return `<div class="daily-review-item ${r.correct?'ok':'no'}">
         <div class="daily-review-q">${i+1}. ${esc(p.q)}</div>
-        <div class="daily-review-line">${t('daily.yourAnswerLbl')} <b>${esc(r.given||'—')}</b> · ${t('daily.correctLbl')} <b>${p.ans.toLocaleString()}</b> ${r.correct?'✓':'✗'}</div>
+        <div class="daily-review-line">${t('daily.yourAnswerLbl')} <b>${esc(r.given||'-')}</b> · ${t('daily.correctLbl')} <b>${p.ans.toLocaleString()}</b> ${r.correct?'✓':'✗'}</div>
         <div class="daily-review-work">${esc(p.work)}</div>
       </div>`;
     }).join('');
@@ -6520,7 +6520,7 @@ function recordSession(kind, label, score, dims) {
   const p = loadProgress();
   // 2026-07-27: игры (BCG Chat Game / McKinsey Solve) не считались НИГДЕ.
   // Casey писался как 'case' и растворялся среди кейсов библиотеки, Redrock
-  // не писался вовсе. По прайсу это отдельный продукт (Game Pass) — и счётчик
+  // не писался вовсе. По прайсу это отдельный продукт (Game Pass) - и счётчик
   // у него отдельный.
   if (kind === 'case') p.cases++;
   else if (kind === 'game') {
@@ -6563,7 +6563,7 @@ function computeStreak(days) {
   }
   return streak;
 }
-const ALL_DRILL_TYPES = ['Market Sizing','Structuring','Case Math','Chart Interpretation','Brainstorm','Synthesis'];   // Behavioral / Fit pulled 2026-07-25 — future paid module (resume + story calibration), not a case skill
+const ALL_DRILL_TYPES = ['Market Sizing','Structuring','Case Math','Chart Interpretation','Brainstorm','Synthesis'];   // Behavioral / Fit pulled 2026-07-25 - future paid module (resume + story calibration), not a case skill
 
 // Personal path to offer - built ONLY on the user's own dimension history.
 const PATH_DIMS = [
@@ -6605,9 +6605,9 @@ function renderPath() {
     }
     const pct = Math.max(0, Math.min(100, (avg / 10) * 100));
     const rawGap = PATH_TARGET - avg;
-    // Округление к 0.5 — ТОЛЬКО для показа. Раньше met считался от округлённого
+    // Округление к 0.5 - ТОЛЬКО для показа. Раньше met считался от округлённого
     // разрыва, и 7.9 против цели 8.0 давало gap 0.1 → 0.0 → зелёную галочку
-    // «цель взята». Вся полоса 7.75–8.00 отмечалась как достигнутая.
+    // «цель взята». Вся полоса 7.75-8.00 отмечалась как достигнутая.
     const met = rawGap <= 0;
     const gap = Math.max(0.1, Math.round(rawGap * 2) / 2); // показ: не даём +0.0
     if (!met) gaps.push({ label: d.label, gap });
@@ -6621,10 +6621,10 @@ function renderPath() {
       + `<div class="prog-path-gap ${met ? 'met' : 'need'}">${gapTxt}</div></div>`;
   }).join('');
 
-  // headline + footer guidance — lead with the candidate's overall score.
+  // headline + footer guidance - lead with the candidate's overall score.
   const targetFirm = state.firm || 'MBB';
   const avgScore = (p.scores && p.scores.length) ? (p.scores.reduce((a, b) => a + b, 0) / p.scores.length) : null;
-  if (subEl) subEl.textContent = `Your overall: ${avgScore !== null ? avgScore.toFixed(1) : '—'}/10  ·  Target for ${targetFirm}: ${PATH_TARGET.toFixed(1)} on every dimension`;
+  if (subEl) subEl.textContent = `Your overall: ${avgScore !== null ? avgScore.toFixed(1) : '-'}/10  ·  Target for ${targetFirm}: ${PATH_TARGET.toFixed(1)} on every dimension`;
   if (footEl) {
     if (!gaps.length) {
       footEl.innerHTML = `<strong style="color:var(--accent-teal);">You're at offer level across the board.</strong> Keep your reps consistent to stay sharp.`;
@@ -6780,7 +6780,7 @@ function updateStartBtn() {
 }
 
 /* ────────────────────────────────────────────────────
-   INTERVIEW  - opening messages
+   INTERVIEW - opening messages
 ──────────────────────────────────────────────────── */
 const OPENERS = {
   'Profitability': f =>
@@ -6803,7 +6803,7 @@ const OPENERS = {
 };
 
 /* ────────────────────────────────────────────────────
-   INTERVIEW  - start
+   INTERVIEW - start
 ──────────────────────────────────────────────────── */
 function startInterview() {
   if (!state.firm || !state.caseType) return;
@@ -6836,7 +6836,7 @@ function addSeenId(id) {
 async function syncSeenToCloud(ids) {
   if (!sb || !currentUser) return;
   try { await sb.from('profiles').update({ seen_case_ids: ids }).eq('id', currentUser.id); }
-  catch (e) { /* column may not exist yet — localStorage still holds it */ }
+  catch (e) { /* column may not exist yet - localStorage still holds it */ }
 }
 // Rolling level = mean of the last few case scores (0-10). Null when no history.
 function candidateLevel() {
@@ -6923,7 +6923,7 @@ async function autoStartCase() {
 }
 
 /* ────────────────────────────────────────────────────
-   FULL CASE — LIBRARY PICKER + SESSION (server-driven)
+   FULL CASE - LIBRARY PICKER + SESSION (server-driven)
 ──────────────────────────────────────────────────── */
 // Map a chosen setup case-type onto library case_type values (loose match).
 function caseTypeMatches(libType, chosen) {
@@ -6976,7 +6976,7 @@ function renderCaseLibrary(all) {
     return `<button class="firm-card caselib-card" style="width:100%;text-align:left;cursor:pointer;" onclick="startLibraryCase(${c.id})" aria-pressed="false">
       <div style="flex:1;min-width:0;">
         <div class="firm-name">${esc(c.title)}${done ? ' <span style="color:var(--accent-teal);font-size:11px;opacity:.85;">✓ done</span>' : ''}</div>
-        <div class="firm-desc">${esc(c.case_type)} · ${esc(c.industry)} · ${esc(c.difficulty)} · ~${esc(String(c.est_minutes || '—'))} min · ${esc(String(c.steps))} steps</div>
+        <div class="firm-desc">${esc(c.case_type)} · ${esc(c.industry)} · ${esc(c.difficulty)} · ~${esc(String(c.est_minutes || '-'))} min · ${esc(String(c.steps))} steps</div>
       </div>
       <div class="firm-check" style="opacity:1;background:transparent;">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
@@ -7127,10 +7127,10 @@ For MARKET ENTRY specifically: the math is usually MARKET SIZING (top-down or bo
 The #1 complaint about weak cases: math is too easy and the business logic doesn't hold up. Fix both:
 
 1. MATH MUST BE MULTI-STEP AND HARD. A single "volume × price" calc is NOT enough. Every case must force at least ONE of these:
-   - Breakeven / payback: "New equipment costs $X, saves $Y/unit, how many units to break even?"
-   - NPV / ROI: "Investment $X, returns $Y/yr for 5 years at 10% discount - worth it?"
-   - Elasticity table: "If price rises 10%, 30% of members leave, 40% upgrade, 30% stay - net EBITDA impact?"
-   - Contribution margin across a mix shift with multiple products and changing proportions
+ - Breakeven / payback: "New equipment costs $X, saves $Y/unit, how many units to break even?"
+ - NPV / ROI: "Investment $X, returns $Y/yr for 5 years at 10% discount - worth it?"
+ - Elasticity table: "If price rises 10%, 30% of members leave, 40% upgrade, 30% stay - net EBITDA impact?"
+ - Contribution margin across a mix shift with multiple products and changing proportions
    Give real numbers that require 3-5 calculation steps. The candidate should need 2-3 minutes of actual math, not 20 seconds.
 
 2. OPERATIONAL LOGIC MUST HOLD UP (critical - broken logic destroys credibility):
@@ -7140,8 +7140,8 @@ The #1 complaint about weak cases: math is too easy and the business logic doesn
    Every number and every cause must survive a smart candidate asking "wait, does that actually make sense?"
 
 3. MANDATORY FINANCIAL CLOSE (especially BCG/McKinsey). The case must END with a hard quantitative decision, not just qualitative advice:
-   - "$5M budget: invest in self-service machines across 150 stores OR open 5 new locations - which ROI is higher?"
-   - Force the candidate to compute and compare, then recommend with numbers.
+ - "$5M budget: invest in self-service machines across 150 stores OR open 5 new locations - which ROI is higher?"
+ - Force the candidate to compute and compare, then recommend with numbers.
    A case that ends on "use behavioral economics and menu design" without a financial trade-off is INCOMPLETE for MBB level.
 
 4. AVOID FALSE BINARY. Don't force "expand vs fix" as the only two options. Real strategy has nuance - e.g. "freeze expansion in underperforming clusters, continue selective expansion where the model still works." Build cases that reward this kind of segmented thinking, with data that supports a cluster/segment breakdown.
@@ -7257,23 +7257,23 @@ For THIS case, use the uniqueness seed ${seed.random} to pick an industry you ha
 A common failure: every case has the SAME skeleton - "Company with N branches in M cities, EBITDA fell over 18 months, revenue stable, restore margin in 12-18 months." Even with different industries, this becomes predictable and boring. You MUST vary the STRUCTURE of the problem itself.
 
 1. PROFITABILITY does NOT always mean "margin down, revenue flat." Randomly pick a DIFFERENT shape each time:
-   - Revenue GROWING but profit FALLING (growth is destroying margin)
-   - BOTH revenue and profit falling (losing the market)
-   - Profit stable but BELOW competitors (leaving money on the table)
-   - Sudden profit collapse after a specific event (new entrant, regulation, supply shock)
-   - One loss-making segment/product dragging down profitable ones
-   - Rising costs in ONE specific area while everything else is fine
-   - Margin fine but ROIC/asset utilization poor
+ - Revenue GROWING but profit FALLING (growth is destroying margin)
+ - BOTH revenue and profit falling (losing the market)
+ - Profit stable but BELOW competitors (leaving money on the table)
+ - Sudden profit collapse after a specific event (new entrant, regulation, supply shock)
+ - One loss-making segment/product dragging down profitable ones
+ - Rising costs in ONE specific area while everything else is fine
+ - Margin fine but ROIC/asset utilization poor
 
 2. VARY THE BUSINESS SHAPE - do NOT default to "N facilities in M cities":
-   - Single factory / single plant
-   - One flagship product sold nationally
-   - Pure online / no physical locations
-   - B2B with a few large contracts (not many small customers)
-   - Franchise model
-   - Subscription / recurring revenue
-   - Project-based (construction, consulting)
-   - Two-sided marketplace
+ - Single factory / single plant
+ - One flagship product sold nationally
+ - Pure online / no physical locations
+ - B2B with a few large contracts (not many small customers)
+ - Franchise model
+ - Subscription / recurring revenue
+ - Project-based (construction, consulting)
+ - Two-sided marketplace
 
 3. VARY THE TIME FRAME AND TRIGGER - not always "18 months." Could be: sudden last-quarter shock, slow 3-year decline, a problem that appears only seasonally, or a forward-looking "should we do X?" with no decline at all.
 
@@ -7400,7 +7400,7 @@ Do NOT give scored feedback during the case. The candidate is being timed and mu
 }
 
 /* ────────────────────────────────────────────────────
-   INTERVIEW  - chat
+   INTERVIEW - chat
 ──────────────────────────────────────────────────── */
 function addMsg(role, text, pushToHistory) {
   const chat   = document.getElementById('chat-area');
@@ -7426,7 +7426,7 @@ function addMsg(role, text, pushToHistory) {
 }
 
 /* ────────────────────────────────────────────────────
-   FULL CASE — visual exhibit cards. The server ships {id,title,render}
+   FULL CASE - visual exhibit cards. The server ships {id,title,render}
    for exhibits revealed this turn; we draw them as SVG/table cards in
    the chat. All drawing is client-side (zero tokens). Answer keys and
    correct chart-select options never reach the client.
@@ -7518,7 +7518,7 @@ function casExPieSVG(r) {
   });
   slices.forEach((sl, i) => {
     const y = 46 + i * 27, col = sl.color || CAS_EX_COLORS[i % CAS_EX_COLORS.length];
-    s += `<rect x="262" y="${y}" width="12" height="12" rx="3" fill="${col}"/><text x="282" y="${y + 10.5}" font-size="12.5" fill="var(--on-dark)">${esc(L(sl.label))} — ${sl.value}${r.unit === 'subscribers' ? '%' : ''}</text>`;
+    s += `<rect x="262" y="${y}" width="12" height="12" rx="3" fill="${col}"/><text x="282" y="${y + 10.5}" font-size="12.5" fill="var(--on-dark)">${esc(L(sl.label))} - ${sl.value}${r.unit === 'subscribers' ? '%' : ''}</text>`;
   });
   if (r.total_note) s += `<text x="262" y="${46 + slices.length * 27 + 8}" font-size="11" fill="var(--on-dark-soft)">${esc(L(r.total_note))}</text>`;
   return s + '</svg>';
@@ -7534,7 +7534,7 @@ function casExTableHTML(r) {
   return h + '</tbody></table>';
 }
 
-// Mini shape curves for chart-select options. Shapes are generic — the
+// Mini shape curves for chart-select options. Shapes are generic - the
 // correct option lives only in the server-side answer key.
 function casExMiniShape(shape, active) {
   const W = 96, H = 62, pL = 12, pR = 5, pT = 7, pB = 12, pw = W - pL - pR, ph = H - pT - pB;
@@ -7573,8 +7573,8 @@ function casPickChartOption(cardId, key, label) {
   const ta = document.getElementById('chat-ta');
   if (ta) {
     ta.value = (state && state.aiLang) === 'ru'
-      ? `Выбираю вариант ${key}${label ? ' — ' + label.toLowerCase() : ''}. Моя логика: `
-      : `I'd pick option ${key}${label ? ' — ' + label.toLowerCase() : ''}. Here's my reasoning: `;
+      ? `Выбираю вариант ${key}${label ? ' - ' + label.toLowerCase() : ''}. Моя логика: `
+      : `I'd pick option ${key}${label ? ' - ' + label.toLowerCase() : ''}. Here's my reasoning: `;
     autoResize(ta);
     ta.focus();
   }
@@ -7598,7 +7598,7 @@ function casAddExhibitCard(ex) {
     }
     else if (r.type === 'table') body = casExTableHTML(r);
     else if (r.type === 'select') body = casExSelectHTML(r, cardId);
-    else return; // unknown type — the model's text already carries the data
+    else return; // unknown type - the model's text already carries the data
   } catch (e) { return; } // never let a render bug break the chat
   const div = document.createElement('div');
   div.className = 'cas-ex-card';
@@ -7636,18 +7636,18 @@ const DRILL_TIME = {
   'Chart Interpretation': 90, 'Brainstorm': 90,
   'Synthesis': 75, 'Behavioral': 120
 };
-// Таймер ответа в кейсе — две зоны, решение владельца 27.07.
+// Таймер ответа в кейсе - две зоны, решение владельца 27.07.
 //
 //   0:00 ─── 1:30 ── 2:00
 //   │           │      │
 //   │           │      └ дальше овертайм: считается в оценку Communication
-//   │           └ последние 30 секунд — ДОБАВКА НА ПЕЧАТЬ. На реальном
+//   │           └ последние 30 секунд - ДОБАВКА НА ПЕЧАТЬ. На реальном
 //   │             интервью её нет, там ты уже говоришь.
-//   └ 1:30 — столько времени у тебя есть на настоящем интервью: подумать,
+//   └ 1:30 - столько времени у тебя есть на настоящем интервью: подумать,
 //     посчитать и выдать ответ. Это и есть тренируемая величина.
 //
 // Раньше стояло 90 секунд на всё скопом, и кандидат физически не успевал
-// напечатать синтез из четырёх блоков — таймер наказывал за скорость набора,
+// напечатать синтез из четырёх блоков - таймер наказывал за скорость набора,
 // а не за скорость мышления.
 const CASE_INTERVIEW_TIME = 90;          // реальное интервью
 const CASE_TYPING_BONUS  = 30;           // добавка на набор текста
@@ -7692,7 +7692,7 @@ function startRespTimer() {
   if (hp) hp.style.display = 'none';
   _rt.left = limit; _rt.limit = limit;
   wrap.style.display = 'flex';
-  // Дриллы живут по своим лимитам — засечка считается от фактического.
+  // Дриллы живут по своим лимитам - засечка считается от фактического.
   const bar = wrap.querySelector('.rt-bar');
   if (bar) bar.style.setProperty('--rt-split', (ZONE_SPLIT * 100).toFixed(1) + '%');
   rtPaint(wrap, limit, limit);
@@ -7836,14 +7836,14 @@ async function sendMessage() {
         lang: state.aiLang
       });
       if (Array.isArray(data.revealedExhibits)) state.revealedExhibits = data.revealedExhibits;
-      const reply = data.reply || 'Apologies — please try again.';
+      const reply = data.reply || 'Apologies - please try again.';
       state.messages.push({ role: 'assistant', content: reply });
 
       state.ilead = !!data.ilead;
       if (data.ilead) {
         // Interviewee-led: track a done-set of completed step numbers (the
         // candidate chooses the path). The server signals caseComplete when the
-        // terminal/recommendation step is done — some steps may be skipped, so
+        // terminal/recommendation step is done - some steps may be skipped, so
         // completion is NOT "all steps done", it's "the terminal step done".
         if (Array.isArray(data.completedSteps)) {
           for (const s of data.completedSteps) if (!state.doneSteps.includes(s)) state.doneSteps.push(s);
@@ -7856,7 +7856,7 @@ async function sendMessage() {
         }
         setProgress(Math.max(4, Math.min(96, Math.round((state.doneSteps.length / Math.max(1, state.caseSteps)) * 100))));
       } else {
-        // Linear (McKinsey, or any case without dependency tags) — unchanged.
+        // Linear (McKinsey, or any case without dependency tags) - unchanged.
         const lastIndex = Math.max(0, state.caseSteps - 1);
         if (data.verdict === 'pass') {
           if (state.stepIndex >= lastIndex) {
@@ -7875,7 +7875,7 @@ async function sendMessage() {
       setTimeout(() => { setTyping(false); addMsg('ai', reply, true); casRenderExhibits(data.exhibits); startRespTimer(); }, 500);
     } catch (e) {
       setTyping(false);
-      addMsg('ai', (e && e.userFacing) ? e.message : 'Apologies — something went wrong. Please try again.');
+      addMsg('ai', (e && e.userFacing) ? e.message : 'Apologies - something went wrong. Please try again.');
     }
     return;
   }
@@ -8026,7 +8026,7 @@ function startFeedbackLoading() {
   const arc = document.getElementById('ring-arc');
   if (arc) { arc.style.strokeDashoffset = 439.82 * 0.72; arc.classList.add('cas-ring-spin'); }
   setText('score-title', 'Scoring your case…');
-  setText('score-sub', 'The partner is writing your breakdown — about 10–15 seconds');
+  setText('score-sub', 'The partner is writing your breakdown - about 10-15 seconds');
   ['structure','quant','logic','comm','ownership'].forEach(k => {
     const v = document.getElementById('mv-' + k); if (v) v.textContent = '·';
     const b = document.getElementById('mb-' + k); if (b) { b.style.width = '26%'; b.classList.add('cas-pulse'); }
@@ -8069,7 +8069,7 @@ async function generateAIFeedback() {
 
   const EVAL_SYSTEM = `You are a McKinsey/BCG/Bain Senior Partner giving a candidate their honest post-case debrief. You are demanding and you do NOT sugarcoat. Score on a 1.0-10.0 scale with ONE decimal (e.g. 6.5, 7.8). Most real candidates land 5.0-7.0; a 7.5+ is genuinely strong and a 9.0+ is rare and exceptional. Do not inflate. A vague or incomplete answer scores low, not "encouraging". Kindness here means honesty, not praise.
 
-GRANULARITY (important): use FINE-GRAINED decimals for the overall AND every dimension — precise values like 7.4, 8.1, 6.7, 5.3. Do NOT round to whole or half numbers (avoid 7.0, 8.0, 7.5) unless the performance is genuinely exactly that. The decimal must carry real signal, so the candidate sees precisely where they stand and small session-to-session progress is visible.
+GRANULARITY (important): use FINE-GRAINED decimals for the overall AND every dimension - precise values like 7.4, 8.1, 6.7, 5.3. Do NOT round to whole or half numbers (avoid 7.0, 8.0, 7.5) unless the performance is genuinely exactly that. The decimal must carry real signal, so the candidate sees precisely where they stand and small session-to-session progress is visible.
 
 CALIBRATION (anchor every score):
 - 8.5-10: ready for a real MBB final round - answer-first, MECE, numbers tied to the decision, risks named.
@@ -8116,7 +8116,7 @@ Return ONLY valid JSON (no markdown, no backticks). All five scores are 1.0-10.0
       ? `${state.drillType} drill`
       : `${state.firm || ''} ${state.caseType || ''} case interview`;
     // The grader occasionally burns its whole token budget on a thinking pass
-    // or hits a transient overload — a SECOND full attempt (a fresh serverless
+    // or hits a transient overload - a SECOND full attempt (a fresh serverless
     // invocation with a fresh 60s budget) rescues nearly all of those. Only
     // after two failed attempts do we show the error state.
     let raw;
@@ -8206,11 +8206,11 @@ Return ONLY valid JSON (no markdown, no backticks). All five scores are 1.0-10.0
       <strong>🎯 Partner verdict:</strong> ${d.verdict_reason || ''}`;
   } catch(e) {
     stopFeedbackLoading();
-    const valEl = document.getElementById('ring-val'); if (valEl) valEl.textContent = '–';
+    const valEl = document.getElementById('ring-val'); if (valEl) valEl.textContent = '-';
     setText('score-title', 'Could not generate the scorecard');
-    setText('score-sub', 'The grader was briefly overloaded — tap Practice again to retry');
+    setText('score-sub', 'The grader was briefly overloaded - tap Practice again to retry');
     const fbEl = document.getElementById('fb-text');
-    if (fbEl) fbEl.textContent = 'The AI grader was momentarily overloaded and could not return your breakdown. Your answers were fine — just run it once more.';
+    if (fbEl) fbEl.textContent = 'The AI grader was momentarily overloaded and could not return your breakdown. Your answers were fine - just run it once more.';
   }
 }
 
@@ -8304,15 +8304,15 @@ function mdToHtml(raw) {
   // 2026-07-27. Раньше их не было вообще: ``` доезжали до экрана буквально,
   // а каждая строка внутри превращалась в <br> и переносилась пропорциональным
   // шрифтом. Любая ASCII-схема (дерево источников пациентов, полосовой график)
-  // расползалась в кашу — ровно тот же дефект, что чинили в CI-дриллах.
+  // расползалась в кашу - ровно тот же дефект, что чинили в CI-дриллах.
   // Блоки вынимаются ДО остальных правил: иначе * и _ внутри диаграммы
-  // превратятся в курсив, а | — в таблицу.
+  // превратятся в курсив, а | - в таблицу.
   const _fences = [];
   t = t.replace(/```[a-zA-Z0-9_-]*\n?([\s\S]*?)```/g, function (_m, body) {
     _fences.push(body.replace(/\n+$/, ''));
     return '\u0000FENCE' + (_fences.length - 1) + '\u0000';
   });
-  // Инлайновый `код` — тем же проходом, чтобы обратные кавычки не доезжали.
+  // Инлайновый `код` - тем же проходом, чтобы обратные кавычки не доезжали.
   t = t.replace(/`([^`\n]+)`/g, '<code class="md-code">$1</code>');
 
   // ── Tables (before hr/br rules touch the pipes) ──
@@ -8355,21 +8355,21 @@ function mdToHtml(raw) {
   t = t.replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
   // Remove stray <br> immediately around tables
   t = t.replace(/(<br>\s*)*<table/g, '<table').replace(/<\/table>(\s*<br>)*/g, '</table>');
-  // Возвращаем схемы на место — моноширинным, без переносов, со скроллом.
+  // Возвращаем схемы на место - моноширинным, без переносов, со скроллом.
   t = t.replace(/(?:<br>)?\u0000FENCE(\d+)\u0000(?:<br>)?/g, function (_m, i) {
     return '<pre class="md-pre">' + _fences[Number(i)] + '</pre>';
   });
   return t;
 }
 
-// Третья плашка в шапке интервью. Раньше там стояло имя кандидата («You») —
+// Третья плашка в шапке интервью. Раньше там стояло имя кандидата («You») -
 // строка, не несущая ничего: кандидат и так знает, кто он.
 //
 // Название кейса сюда ставить НЕЛЬЗЯ, хотя первым делом хочется именно его.
 // 33 заголовка библиотеки несут ответ прямо в себе: «Elektro's $18 Saving Per
 // Order Is Really $6.82», «Panorama Asked the Wrong 60 Advertisers»,
 // «Workgate's Onboarding Lifts Retention 23 Points. It Doesn't.» Показать такой
-// заголовок кандидату — выдать разгадку до первого вопроса.
+// заголовок кандидату - выдать разгадку до первого вопроса.
 // Поэтому здесь нейтральный номер: он опознаёт сессию (скриншот, возврат во
 // вкладку, ссылка на кейс в разборе) и не говорит ничего о содержании.
 function setSessionBadge(caseId) {
@@ -8386,14 +8386,14 @@ function setSessionBadge(caseId) {
 
 // Настоящее (каламбурное) название кейса. Показывается только на разборе:
 // половина заголовков библиотеки называет развязку, поэтому до финиша их
-// видеть нельзя, а после — это половина удовольствия и то, по чему кейс
+// видеть нельзя, а после - это половина удовольствия и то, по чему кейс
 // потом вспоминают.
 function setDebriefCaseTitle() {
   const el = document.getElementById('fb-case');
   if (!el) return;
   const t = (state.caseTitle || '').toString().trim();
   if (t && state.caseId != null) {
-    el.textContent = 'Case #' + state.caseId + ' — ' + t;
+    el.textContent = 'Case #' + state.caseId + ' - ' + t;
     el.title = t;
     el.style.display = '';
   } else {
@@ -8611,7 +8611,7 @@ function applyTheme(theme) {
         obs.unobserve(entry.target);
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
-    // Anything already on screen (or scrolled past — deep links, reloads mid-page,
+    // Anything already on screen (or scrolled past - deep links, reloads mid-page,
     // a restored scroll position) must be visible immediately, with no animation:
     // the observer would otherwise never fire for it.
     const vh = window.innerHeight || document.documentElement.clientHeight;
