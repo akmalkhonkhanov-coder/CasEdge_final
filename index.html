@@ -1481,6 +1481,7 @@
     #screen-landing .cl-container { padding: 0 24px; }
     #screen-landing .cl-hero-grid, #screen-landing .cl-format-grid { grid-template-columns: 1fr !important; }
     #screen-landing .cl-drills-grid, #screen-landing .cl-pricing-grid, #screen-landing .cl-stats-grid, #screen-landing .cl-library-hero { grid-template-columns: 1fr !important; }
+    #screen-landing .cl-games-grid { grid-template-columns: 1fr !important; }
   }
 
   /* ---- DS components as static CSS (exact values from Button/Badge/Card/CodeWindow JSX) ---- */
@@ -1568,6 +1569,10 @@
   #screen-landing .cl-lg-sep { color: var(--on-dark-soft); opacity: .7; }
   #screen-landing .cl-visual-host svg { width: 100%; height: auto; display: block; overflow: visible; }
   @media (max-width: 860px) { #screen-landing .cl-visual-host { display: none; } }
+  #screen-landing .cl-game-card { display: flex; flex-direction: column; }
+  #screen-landing .cl-game-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+  #screen-landing .cl-game-body { color: var(--on-dark-soft); margin: 0; }
+  #screen-landing .cl-game-live { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: #7fcdbe; }
   @keyframes clBarGrow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
   @keyframes clLineDraw { from { stroke-dashoffset: 340; } to { stroke-dashoffset: 0; } }
   @keyframes clDotPop { from { opacity: 0; transform: scale(0); } to { opacity: 1; transform: scale(1); } }
@@ -1870,6 +1875,40 @@
               <div class="fp-msg fp-msg-user"><span class="fp-mic">🎙</span><span class="fp-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="fp-rec-time">0:42</span></div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- NAMED SOLVE GAMES -->
+      <div class="cl-reveal" style="margin-top:56px;">
+        <div class="cas-caption-up" style="color:#7fcdbe; margin-bottom:14px;" data-i18n="l2.games.eyebrow">Игры внутри Solve</div>
+        <div class="cas-title-lg" style="color:#faf9f5; margin-bottom:10px; max-width:560px;" data-i18n="l2.games.title">McKinsey гоняет не одну игру, а несколько. Мы собираем каждую.</div>
+        <p class="cas-body-sm" style="color:var(--on-dark-soft); margin:0 0 28px; max-width:560px;" data-i18n="l2.games.sub">Какая достанется тебе, заранее не известно. Redrock Study уже играется целиком.</p>
+        <div class="cl-games-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
+
+          <div class="ds-card-dark cl-game-card">
+            <div class="cl-game-head">
+              <span class="cas-title-md" style="color:var(--text-on-dark);">Redrock Study</span>
+              <span class="cl-game-live">&#9679; <span data-i18n="l2.games.live">играется</span></span>
+            </div>
+            <p class="cas-body-sm cl-game-body" data-i18n="l2.games.redrock">Экосистема, Research Journal и числовые ответы под таймером - та самая механика, на которой McKinsey отсеивает. Пятьдесят наборов, разбор после каждого хода.</p>
+          </div>
+
+          <div class="ds-card-dark cl-game-card">
+            <div class="cl-game-head">
+              <span class="cas-title-md" style="color:var(--text-on-dark);">Sea Wolf</span>
+              <span class="soon-badge" data-i18n="l2.games.soon">Скоро</span>
+            </div>
+            <p class="cas-body-sm cl-game-body" data-i18n="l2.games.seawolf">Три участка, один сквозной таймер и трио микробов, которое надо собрать раньше, чем поймёшь, что именно понадобится. Сто уровней, разбор показывает ход, на котором решение было потеряно.</p>
+          </div>
+
+          <div class="ds-card-dark cl-game-card">
+            <div class="cl-game-head">
+              <span class="cas-title-md" style="color:var(--text-on-dark);">Sustainable Futures Lab</span>
+              <span class="soon-badge" data-i18n="l2.games.soon2">Скоро</span>
+            </div>
+            <p class="cas-body-sm cl-game-body" data-i18n="l2.games.sfl">Третья игра Solve, которую добавляет 85-минутная версия ассессмента. В сборке.</p>
+          </div>
+
         </div>
       </div>
     </div>
@@ -3331,6 +3370,12 @@ const I18N = {
     'l2.stats.lbl1': 'real cases in the library', 'l2.stats.lbl2': 'drill types', 'l2.stats.lbl3': 'signature formats \u2014 Solve and Chat Game', 'l2.stats.lbl4': 'Big 3 candidates have tested the system',
     'l2.formats.eyebrow': 'Exclusive', 'l2.formats.title': 'Two formats, rebuilt down to the interface',
     'l2.formats.solve.body': 'We built this format into the product: Research Journal, combo charts, and the same hint logic as the real assessment \u2014 train here, not just on interview day.',
+    'l2.games.eyebrow': 'Games inside Solve', 'l2.games.title': 'McKinsey does not run one game. It runs several. We are building each of them.',
+    'l2.games.sub': 'Which one you get is not announced in advance. Redrock Study plays in full today.',
+    'l2.games.live': 'live', 'l2.games.soon': 'Soon', 'l2.games.soon2': 'Soon',
+    'l2.games.redrock': 'An ecosystem, a Research Journal and numeric answers against the clock - the exact mechanic McKinsey screens on. Fifty sets, a breakdown after every move.',
+    'l2.games.seawolf': 'Three sites, one timer running across all of them, and a trio of microbes you must assemble before you know what you will need. A hundred levels, and the debrief names the move where the solution was lost.',
+    'l2.games.sfl': 'The third Solve game, added by the 85-minute version of the assessment. In build.',
     'l2.formats.chat.body': 'We built the live BCG Chat format into the product: an AI interviewer holds a real-time conversation, and you answer the final question by voice \u2014 just like a real call.',
     'l2.pricing.title': 'Pay for what you need right now',
     'l2.price.cta': 'Choose', 'l2.price.popular': 'POPULAR',
@@ -3613,6 +3658,12 @@ const I18N = {
     'l2.stats.lbl1': 'реальных кейсов в библиотеке', 'l2.stats.lbl2': 'типов дриллов', 'l2.stats.lbl3': 'фирменных формата - Solve и Chat Game',
     'l2.formats.eyebrow': 'Эксклюзив', 'l2.formats.title': 'Два формата, воссозданных вплоть до интерфейса',
     'l2.formats.solve.body': 'Полностью воплотили этот формат у себя: Research Journal, комбо-графики и та же логика подсказок, что на настоящем ассессменте - готовься здесь, а не только в день интервью.',
+    'l2.games.eyebrow': 'Игры внутри Solve', 'l2.games.title': 'McKinsey гоняет не одну игру, а несколько. Мы собираем каждую.',
+    'l2.games.sub': 'Какая достанется тебе, заранее не известно. Redrock Study уже играется целиком.',
+    'l2.games.live': 'играется', 'l2.games.soon': 'Скоро', 'l2.games.soon2': 'Скоро',
+    'l2.games.redrock': 'Экосистема, Research Journal и числовые ответы под таймером - та самая механика, на которой McKinsey отсеивает. Пятьдесят наборов, разбор после каждого хода.',
+    'l2.games.seawolf': 'Три участка, один сквозной таймер и трио микробов, которое надо собрать раньше, чем поймёшь, что именно понадобится. Сто уровней, разбор показывает ход, на котором решение было потеряно.',
+    'l2.games.sfl': 'Третья игра Solve, которую добавляет 85-минутная версия ассессмента. В сборке.',
     'l2.formats.chat.body': 'Мы воплотили живой формат BCG Chat у себя: AI-интервьюер ведёт диалог в реальном времени, а на финальный вопрос отвечаешь голосом - как на настоящем звонке.',
     'l2.pricing.title': 'Плати за то, что нужно прямо сейчас',
     'l2.price.cta': 'Выбрать', 'l2.price.popular': 'ПОПУЛЯРНЫЙ',
