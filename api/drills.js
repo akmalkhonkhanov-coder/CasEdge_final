@@ -17,13 +17,21 @@ const DRILLS_CI = require('./_drills_ci.json');
 // Curated libraries share one endpoint. Client passes set:'ms' (Market Sizing),
 // set:'st' (Structuring), set:'br' (Brainstorm), else Case Math. IDs are
 // disjoint (CM-*/MS-*/ST-*/BR-*).
+// An unknown `set` used to fall through to Case Math silently: a typo in the
+// client, or a sixth type shipped before the server knew about it, would serve
+// CM drills under a Structuring label and the candidate would never know why.
+// Unknown now returns null and the handler answers with an error.
+// Null-prototype map on purpose: a plain object literal would answer to
+// `set:'toString'` or `set:'__proto__'` with something inherited from
+// Object.prototype — truthy, not a function, 500 on the endpoint.
+const DRILL_SETS = Object.assign(Object.create(null), {
+  cm: () => DRILLS_CM, ms: () => DRILLS_MS, st: () => DRILLS_ST, br: () => DRILLS_BR, ci: () => DRILLS_CI
+});
 function libData(body) {
-  const s = body && body.set;
-  if (s === 'ms') return DRILLS_MS;
-  if (s === 'st') return DRILLS_ST;
-  if (s === 'br') return DRILLS_BR;
-  if (s === 'ci') return DRILLS_CI;
-  return DRILLS_CM;
+  const s = (body && body.set) || 'cm';
+  const get = typeof s === 'string' ? DRILL_SETS[s] : null;
+  if (typeof get !== 'function') { console.error('drills: unknown set', JSON.stringify(s).slice(0, 40)); return null; }
+  return get();
 }
 
 const FALLBACK_ORIGIN = 'https://cas-edge-final.vercel.app';
@@ -407,14 +415,15 @@ export default async function handler(req, res) {
 
     const body = req.body || {};
 
-    if (body.action === 'list') {
-      // difficulty/focus withheld here too — otherwise one `list` call hands over
-      // the tier and trap mechanism of every drill in the set.
-      return res.status(200).json({ drills: (libData(body).drills || []).map(d => ({ id: d.id, title: d.title })) });
-    }
-    if (body.action === 'next') {
-      const nd = nextDrill(body.doneIds, libData(body));
-      return res.status(200).json({ drill: nd });     // null when the set is exhausted
+    if (body.action === 'list' || body.action === 'next') {
+      const lib = libData(body);
+      if (!lib) return res.status(400).json({ error: { message: 'Unknown drill set.' } });
+      if (body.action === 'list') {
+        // difficulty/focus withheld here too — otherwise one `list` call hands over
+        // the tier and trap mechanism of every drill in the set.
+        return res.status(200).json({ drills: (lib.drills || []).map(d => ({ id: d.id, title: d.title })) });
+      }
+      return res.status(200).json({ drill: nextDrill(body.doneIds, lib) });   // null when the set is exhausted
     }
     if (body.action === 'grade') {
       const d = drillById(body.drillId);
