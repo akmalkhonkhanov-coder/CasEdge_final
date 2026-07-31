@@ -28,12 +28,14 @@ const AUTH_TIMEOUT_MS = 8 * 1000;
 const GAMES = Array.isArray(BANK) ? BANK : BANK.games;
 
 /* ── token ────────────────────────────────────────────────────────────────── */
-// SEAWOLF_SECRET is required in production. Falling back to a random per-instance
-// key would silently invalidate every token on cold start — a session that dies
-// mid-game with no error is worse than refusing to start.
+// The signing key must be (a) secret, (b) STABLE across cold starts. A random
+// per-instance key would kill live sessions with "bad token" and no cause.
+// ANTHROPIC_API_KEY is already configured for every other endpoint and never
+// leaves the server, so nothing new has to be set up; SEAWOLF_SECRET simply
+// overrides it if the key is ever rotated. HMAC never reveals its key.
 function secret() {
-  const s = process.env.SEAWOLF_SECRET || process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!s) throw new Error('SEAWOLF_SECRET missing');
+  const s = process.env.SEAWOLF_SECRET || process.env.ANTHROPIC_API_KEY;
+  if (!s) throw new Error('no signing key: set SEAWOLF_SECRET');
   return s;
 }
 const b64u = b => Buffer.from(b).toString('base64url');
@@ -88,18 +90,20 @@ async function verifyUser(token) {
   const u = await r.json();
   return u && u.id ? u : null;
 }
-async function underRateLimit(userId) {
-  const url = process.env.SUPABASE_URL, key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !key) return true;
+// Same contract as api/drills.js: the RPC is check_and_increment_rate_limit,
+// authorised with the CALLER'S token and the anon key. An earlier draft of this
+// file invented a different RPC name and a SUPABASE_SERVICE_ROLE_KEY that does
+// not exist in this project — every request would have returned 429.
+async function rateLimited(userId, sbUrl, sbKey, token) {
   try {
-    const r = await fetchWithTimeout(`${url}/rest/v1/rpc/check_rate_limit`, {
+    const r = await fetchWithTimeout(`${sbUrl}/rest/v1/rpc/check_and_increment_rate_limit`, {
       method: 'POST',
-      headers: { apikey: key, Authorization: 'Bearer ' + key, 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', apikey: sbKey, Authorization: 'Bearer ' + token },
       body: JSON.stringify({ p_user_id: userId, p_window_seconds: RATE_WINDOW_MS / 1000, p_limit: RATE_LIMIT })
     }, AUTH_TIMEOUT_MS);
     if (!r.ok) { console.error('Sea Wolf rate-limit RPC returned', r.status); return false; }
-    return (await r.json()) !== false;
-  } catch (e) { console.error('Sea Wolf rate-limit RPC failed'); return false; }
+    return (await r.json()) === false;
+  } catch (e) { console.error('Sea Wolf rate-limit RPC failed:', e); return false; }
 }
 
 /* ── handler ──────────────────────────────────────────────────────────────── */
@@ -116,9 +120,12 @@ export default async function handler(req, res) {
     const auth = req.headers['authorization'] || '';
     const bearer = auth.startsWith('Bearer ') ? auth.slice(7) : null;
     if (!bearer) return res.status(401).json({ error: { message: 'Authentication required.' } });
+    const sbUrl = process.env.SUPABASE_URL, sbKey = process.env.SUPABASE_ANON_KEY;
     const user = await verifyUser(bearer);
     if (!user) return res.status(401).json({ error: { message: 'Invalid or expired session.' } });
-    if (!(await underRateLimit(user.id))) return res.status(429).json({ error: { message: 'Too many requests.' } });
+    if (sbUrl && sbKey && await rateLimited(user.id, sbUrl, sbKey, bearer)) {
+      return res.status(429).json({ error: { message: 'Too many requests.' } });
+    }
 
     const raw = JSON.stringify(req.body || {});
     if (raw.length > MAX_BODY_BYTES) return res.status(413).json({ error: { message: 'Payload too large.' } });
