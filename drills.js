@@ -228,7 +228,8 @@
     ms: { set: 'ms', label: 'Market Sizing · Drills',  rec: 'Market Sizing', doneKey: 'casedge_msdrills_done', complete: 'every Market Sizing drill in this batch' },
     st: { set: 'st', label: 'Structuring · Drills',    rec: 'Structuring',   doneKey: 'casedge_stdrills_done', complete: 'every Structuring drill in this batch' },
     br: { set: 'br', label: 'Brainstorm · Drills',     rec: 'Brainstorm',    doneKey: 'casedge_brdrills_done', complete: 'every Brainstorm drill in this batch' },
-    ci: { set: 'ci', label: 'Chart Interpretation · Drills', rec: 'Chart Interpretation', doneKey: 'casedge_cidrills_done', complete: 'every Chart Interpretation drill in this batch' }
+    ci: { set: 'ci', label: 'Chart Interpretation · Drills', rec: 'Chart Interpretation', doneKey: 'casedge_cidrills_done', complete: 'every Chart Interpretation drill in this batch' },
+    sy: { set: 'sy', label: 'Synthesis · Drills',      rec: 'Synthesis',     doneKey: 'casedge_sydrills_done', complete: 'every Synthesis drill in this batch' }
   };
 
   /* ---------- state ---------- */
@@ -293,11 +294,19 @@
     var isST = (d.type || '') === 'Structuring';
     var isBR = (d.type || '') === 'Brainstorm';
     var isCI = S.lib === 'ci';
-    var ph = isBR ? 'List your options — one per line. Tie each to a fact. Lead with the load-bearing idea, not a reflex.'
+    // Synthesis branches on the LIBRARY, not on d.type: the server sanitises
+    // every type except 'Structuring' down to the neutral token 'Drill', so a
+    // check against 'Synthesis' here would never fire and the slot would
+    // silently take the Case Math placeholder - "show your numbers" on a drill
+    // where nothing is counted.
+    var isSY = S.lib === 'sy';
+    var ph = isSY ? 'The record is someone else\'s work. Give your verdict first, then the facts that carry it, the risks, and the next step.'
+                  : isBR ? 'List your options — one per line. Tie each to a fact. Lead with the load-bearing idea, not a reflex.'
                   : isST ? 'Build your MECE tree: name each top branch and one line on why it belongs. State which branch you attack first and your criterion.'
                   : isCI ? 'Read the exhibit: the ONE insight that matters, what it implies for the business, and the next thing you would check.'
                   : 'Show your numbers and your one-sentence recommendation…';
-    var hint = isBR ? (d.cull ? 'Give your options; a new fact will then test them.' : 'Options tied to the facts — quality over volume.')
+    var hint = isSY ? 'Conclusion first. Name the figure that decides it, and say which fact in the record does not matter.'
+                    : isBR ? (d.cull ? 'Give your options; a new fact will then test them.' : 'Options tied to the facts — quality over volume.')
                     : isST ? 'List your branches (MECE), justify each, and pick a defensible starting branch.'
                     : isCI ? 'Do not describe the chart — extract the insight, tie it to a business implication, name the next check.'
                     : 'Give the number(s) the drill asks for, then your read of the trap.';
@@ -394,4 +403,5 @@
   window.StructuringDrills = { open: function () { return open('st'); }, exit: exit, _submit: _submit, _next: _next };
   window.BrainstormDrills = { open: function () { return open('br'); }, exit: exit, _submit: _submit, _submitCull: _submitCull, _next: _next };
   window.ChartDrills = { open: function () { return open('ci'); }, exit: exit, _submit: _submit, _next: _next };
+  window.SynthesisDrills = { open: function () { return open('sy'); }, exit: exit, _submit: _submit, _next: _next };
 })();
