@@ -11,7 +11,7 @@
  "drills": [
   {
    "id": "CI-001",
-   "title": "Missing Denominator",
+   "title": "Where the Reps Go",
    "type": "Chart Interpretation",
    "clean": false,
    "prompt": "The VP of Sales says East is our strongest region and wants to move two reps there from West. Based on Exhibit A, do you agree?",
@@ -88,7 +88,7 @@
   },
   {
    "id": "CI-002",
-   "title": "Percent of What",
+   "title": "Three Points of Share",
    "type": "Chart Interpretation",
    "clean": false,
    "prompt": "Our online channel share rose from 25% to 28% of revenue. The team calls it a win. Verify it and tell me whether the claim stands.",
@@ -172,7 +172,7 @@
   },
   {
    "id": "CI-003",
-   "title": "Straight Line, Bumpy Road",
+   "title": "Seven Percent a Year",
    "type": "Chart Interpretation",
    "clean": false,
    "prompt": "The CFO reports \"steady 7% annual growth over five years\" and proposes to extend the current plan unchanged. What do you make of it?",
@@ -256,7 +256,7 @@
   },
   {
    "id": "CI-004",
-   "title": "The Missing Fifteen",
+   "title": "Room to Raise Price",
    "type": "Chart Interpretation",
    "clean": false,
    "prompt": "Our CEO says we are the clear market leader with 38% share and wants to raise prices. What does Exhibit A tell you?",
@@ -266,7 +266,7 @@
      {
       "type": "text",
       "lines": [
-       "Form: F3 — stacked structure. The $700M market is broken down into a \"player → tariff plan\" stack. The remainder of the market is physically absent from the stack — it is neither labelled nor named."
+       "Form: F3 — stacked structure. The $700M market is broken down into a \"player → tariff plan\" stack."
       ],
       "blank_before": 1
      },
@@ -404,7 +404,7 @@
   },
   {
    "id": "CI-005",
-   "title": "Four Rows Too Many",
+   "title": "Closing the Cost Gap",
    "type": "Chart Interpretation",
    "clean": false,
    "prompt": "We must close a $6M annual cost gap. Attrition is the suspected driver. Where would you focus, and why there?",
@@ -782,7 +782,7 @@
   },
   {
    "id": "CI-009",
-   "title": "Volume Here, Price There",
+   "title": "Which Format to Back",
    "type": "Chart Interpretation",
    "clean": false,
    "prompt": "We are choosing which cinema format to partner with. Which format delivers the most revenue, and how much?",
@@ -1040,7 +1040,7 @@
   },
   {
    "id": "CI-011",
-   "title": "Small Base, Big Noise",
+   "title": "Double the Analytics Team",
    "type": "Chart Interpretation",
    "clean": false,
    "prompt": "Product leadership wants to double the Analytics team, arguing it is our fastest-growing product. Verify it and tell me whether the claim stands.",
@@ -1144,7 +1144,7 @@
   },
   {
    "id": "CI-012",
-   "title": "Quarters and Years",
+   "title": "The Latest Bar",
    "type": "Chart Interpretation",
    "clean": false,
    "prompt": "The board packet says revenue is declining — the latest bar is well below the prior one. Is that right?",
@@ -1216,7 +1216,7 @@
      {
       "type": "text",
       "lines": [
-       "*Note: the FY columns are calendar years, the Q columns are quarters of 2024. The chart axis does not distinguish the two period types.*"
+       "*Note: the FY columns are calendar years, the Q columns are quarters of 2024.*"
       ],
       "blank_before": 1,
       "blank_after": 1
@@ -1326,7 +1326,7 @@
   },
   {
    "id": "CI-014",
-   "title": "The Average Lies",
+   "title": "Thirty-Four Days",
    "type": "Chart Interpretation",
    "clean": false,
    "prompt": "Finance reports an average collection period of 34 days and calls working capital healthy. Verify it and state plainly whether the claim stands.",
@@ -1416,10 +1416,10 @@
   },
   {
    "id": "CI-015",
-   "title": "Cut at Ninety",
+   "title": "Surging, Says the Deck",
    "type": "Chart Interpretation",
    "clean": false,
-   "prompt": "The investor deck shows revenue \"surging\" alongside margin. What does the chart actually show?",
+   "prompt": "The investor deck shows revenue \"surging\" alongside margin. What does the chart show?",
    "exhibit": {
     "title": "Exhibit A — Revenue and margin (dual-axis)",
     "parts": [
@@ -1609,7 +1609,7 @@
    "title": "Whose Growth Is It",
    "type": "Chart Interpretation",
    "clean": false,
-   "prompt": "Subscription grew 60% and the team wants the next budget cycle to go there. Where did our growth actually come from?",
+   "prompt": "Subscription grew 60% and the team wants the next budget cycle to go there. Where did our growth come from?",
    "exhibit": {
     "title": null,
     "blocks": [
@@ -1707,7 +1707,7 @@
   },
   {
    "id": "CI-018",
-   "title": "One Client Moves It",
+   "title": "Keep the Coverage Model",
    "type": "Chart Interpretation",
    "clean": false,
    "prompt": "The portfolio grew 10% year over year and leadership wants to keep the current coverage model. Verify it and tell me whether the claim stands.",
@@ -1837,7 +1837,7 @@
   },
   {
    "id": "CI-019",
-   "title": "Not the Same People",
+   "title": "Eight or Twenty",
    "type": "Chart Interpretation",
    "clean": false,
    "prompt": "Product says churn is 8%. Support says it is 20%. Both pulled the same month. Who is right?",
@@ -1925,7 +1925,7 @@
   },
   {
    "id": "CI-020",
-   "title": "The Claim Checks Out",
+   "title": "The Board Deck Margin",
    "type": "Chart Interpretation",
    "clean": true,
    "prompt": "Our board deck claims a 38.1% gross margin. Do you agree?",
@@ -2098,7 +2098,7 @@
   },
   {
    "id": "CI-022",
-   "title": "The Last Point Turns",
+   "title": "The Three-Year Commitment",
    "type": "Chart Interpretation",
    "clean": false,
    "prompt": "Our supplier claims the market is in a sustained upcycle and wants a three-year commitment. What does Exhibit A tell you?",
@@ -2203,7 +2203,7 @@
   },
   {
    "id": "CI-023",
-   "title": "Which Way Round",
+   "title": "Hiring and Complaints",
    "type": "Chart Interpretation",
    "clean": false,
    "prompt": "Operations concluded that expanding the support team causes more complaints — the two rose together every month. Verify it and tell me whether the claim stands.",
@@ -2367,7 +2367,7 @@
   },
   {
    "id": "CI-025",
-   "title": "Before What",
+   "title": "Six Months After Launch",
    "type": "Chart Interpretation",
    "clean": false,
    "prompt": "Six months after launch our new formulation shows 265,000 monthly scripts. Marketing calls the launch a failure versus the old product. Is it?",
@@ -2585,7 +2585,7 @@
   },
   {
    "id": "CI-027",
-   "title": "Share of What Base",
+   "title": "Trelan's Thirty-Four Percent",
    "type": "Chart Interpretation",
    "clean": false,
    "prompt": "Trelan holds 34% of the components market. What is that worth in dollars, and what does it tell you about our position?",
@@ -2761,7 +2761,7 @@
   },
   {
    "id": "CI-029",
-   "title": "The Missing Driver",
+   "title": "Triple It Again",
    "type": "Chart Interpretation",
    "clean": false,
    "prompt": "Marketing tripled promo spend and sales rose 52%. They want the same increase again next year. Does Exhibit A justify it?",
@@ -2861,7 +2861,7 @@
   },
   {
    "id": "CI-030",
-   "title": "Say It Plainly",
+   "title": "The Contribution Line",
    "type": "Chart Interpretation",
    "clean": true,
    "prompt": "The board deck claims a 28.9% contribution margin. Do you accept that?",
@@ -3034,7 +3034,7 @@
   },
   {
    "id": "CI-032",
-   "title": "Last One Standing",
+   "title": "Twelve to Nineteen",
    "type": "Chart Interpretation",
    "clean": false,
    "prompt": "Our share went from 12% to 19% in three years. The board calls it a turnaround. Verify it and state plainly whether the claim stands.",
@@ -3207,7 +3207,7 @@
   },
   {
    "id": "CI-034",
-   "title": "Every Winter",
+   "title": "Q4 Against Q2",
    "type": "Chart Interpretation",
    "clean": true,
    "prompt": "The CFO is worried: Q4 revenue is half of Q2. Is there a problem with the business?",
@@ -3259,7 +3259,7 @@
      {
       "type": "text",
       "lines": [
-       "*Note: garden centres are a seasonal business; the peak falls in the planting season (April–June) and the trough in the winter months.*"
+       "*Note: the company operates garden centres; the planting season runs from April to June.*"
       ],
       "blank_before": 1,
       "blank_after": 1
@@ -3285,7 +3285,7 @@
   },
   {
    "id": "CI-035",
-   "title": "Tonnes and Units",
+   "title": "Priority for Fasteners",
    "type": "Chart Interpretation",
    "clean": false,
    "prompt": "Our largest product by volume is fasteners — 42 million units. Should it get priority in the capacity plan?",
@@ -3349,7 +3349,7 @@
      {
       "type": "text",
       "lines": [
-       "*Note: no «total volume» row is given — tonnes and units do not add up.*"
+       "*Note: each volume is stated in the unit shown in the «Unit» column.*"
       ],
       "blank_before": 1,
       "blank_after": 1
@@ -3375,7 +3375,7 @@
   },
   {
    "id": "CI-036",
-   "title": "Biggest Is Not Best",
+   "title": "One Segment Next Year",
    "type": "Chart Interpretation",
    "clean": false,
    "prompt": "We can enter one segment next year. Which one, and what's the size of the opportunity?",
@@ -3521,7 +3521,7 @@
   },
   {
    "id": "CI-038",
-   "title": "Depends What You Ask",
+   "title": "Two Sources, One Year",
    "type": "Chart Interpretation",
    "clean": false,
    "prompt": "Two sources give different 2024 sales. Finance wants to know which one is reliable so we can standardise on it. What do you tell them?",
@@ -3641,7 +3641,7 @@
   },
   {
    "id": "CI-039",
-   "title": "Two Stories Fit",
+   "title": "Blame the Pricing Page",
    "type": "Chart Interpretation",
    "clean": false,
    "prompt": "Paid conversions fell from 30% to 27% while traffic grew 60%. The team blames the new pricing page. Do you agree?",
@@ -3715,7 +3715,7 @@
   },
   {
    "id": "CI-040",
-   "title": "In That Order",
+   "title": "The Director's Chain",
    "type": "Chart Interpretation",
    "clean": false,
    "prompt": "The ops director reads the chart as a chain: automation cut labour, which enabled the yield gain, which lifted margin. Verify it and state plainly whether the claim stands.",
@@ -3812,7 +3812,7 @@
   },
   {
    "id": "CI-041",
-   "title": "Out of What",
+   "title": "Net Revenue Projection",
    "type": "Chart Interpretation",
    "clean": false,
    "prompt": "Finance projects net revenue by taking gross revenue less the return rate. What number do you get, and is their method right?",
@@ -3904,7 +3904,7 @@
   },
   {
    "id": "CI-042",
-   "title": "Mix or Merit",
+   "title": "Credit to the Programme",
    "type": "Chart Interpretation",
    "clean": false,
    "prompt": "Gross margin improved from 12.7% to 18.2%. The COO credits the operational excellence programme. Is that where it came from?",
@@ -3994,7 +3994,7 @@
   },
   {
    "id": "CI-043",
-   "title": "Cheap Seats",
+   "title": "One Region to Enter",
    "type": "Chart Interpretation",
    "clean": false,
    "prompt": "We can enter one region. The Northern market is the largest and growing. Is that where we should go?",
@@ -4120,7 +4120,7 @@
   },
   {
    "id": "CI-044",
-   "title": "Name the Missing One",
+   "title": "Who to Retain",
    "type": "Chart Interpretation",
    "clean": false,
    "prompt": "Which customer segment should the retention programme prioritise?",
@@ -4210,7 +4210,7 @@
   },
   {
    "id": "CI-045",
-   "title": "Catching Up, Slowly",
+   "title": "Forty-Two Against Eleven",
    "type": "Chart Interpretation",
    "clean": false,
    "prompt": "We're growing at 42% versus the leader's 11%. The strategy deck says we close the gap. Does the chart support that?",
@@ -4315,7 +4315,7 @@
   },
   {
    "id": "CI-046",
-   "title": "Half Below",
+   "title": "Position at Fifteen Hundred",
    "type": "Chart Interpretation",
    "clean": false,
    "prompt": "Our portfolio averages $1,529 a month. Marketing wants to position against competitors at the $1,500 tier. Does the average support that?",
@@ -4430,7 +4430,7 @@
    "title": "Cut The Tail",
    "type": "Chart Interpretation",
    "clean": false,
-   "prompt": "The category director reads a clear decline across the chart and wants to cut the tail. What does the exhibit actually show?",
+   "prompt": "The category director reads a clear decline across the chart and wants to cut the tail. What does the exhibit show?",
    "exhibit": {
     "title": "Exhibit A — Category revenue, FY2024 ($M)",
     "parts": [

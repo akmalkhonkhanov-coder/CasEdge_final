@@ -672,7 +672,7 @@
     "Compute the estimate along the main chain and state the market size in $.",
     "Triangulate with an independent second path (a different data source, not the same chain reordered) and reconcile — gap should be within ~2×; name the more reliable path with justification.",
     "Sanity-check: normalize per capita / per household aloud and give a plausibility verdict.",
-    "Last mile: conclusion for conclusion for pricing strategy."
+    "Last mile: conclusion for pricing strategy."
    ],
    "checklist": {
     "en": "- GATE: ∈ [$3.56B, $56.9B]\n- P1: unit declared explicitly, volume and price brought to a single unit\n- P2: 4 anchors as numbers; «365» not stated as an estimate\n- P3: second path independent, ratio ≤2× (reference 1.22×) + choice\n- P4: translated into a decision\n- S: «$14.2B / 32.5M machines ≈ $438 per year ≈ $36/month per household» → does it reconcile with 2 cups a day",
@@ -922,7 +922,7 @@
     "Compute the estimate along the main chain and state the market size in $.",
     "Triangulate with an independent second path (a different data source, not the same chain reordered) and reconcile — gap should be within ~2×; name the more reliable path with justification.",
     "Sanity-check: normalize per capita / per household aloud and give a plausibility verdict.",
-    "Last mile: which flow to take into the sales plan and why OEM is counted separately."
+    "Last mile: which flow to take into the sales plan and why."
    ],
    "checklist": {
     "en": "- GATE: ∈ [$10.08B, $161.3B]\n- P1: **the flow named explicitly (replacement, not OEM)**; adding OEM and replacement = P1 not credited\n- P2: 5 anchors as numbers; the unit (set vs tyre) declared before the calculation\n- P3: second path independent (supply-side), ratio ≤2× (reference 1.07×) + choice\n- P4: translated into a decision\n- S: «0.30 sets per year = once every 3.3 years at 12,000 miles annual mileage and a 40,000 lifespan» → does it reconcile",
@@ -1672,7 +1672,7 @@
     "Compute the estimate along the main chain and state the market size in $.",
     "Triangulate with an independent second path (a different data source, not the same chain reordered) and reconcile — gap should be within ~2×; name the more reliable path with justification.",
     "Sanity-check: normalize per capita / per household aloud and give a plausibility verdict.",
-    "Last mile: in what to measure in what unit to measure market share, and why."
+    "Last mile: in what unit to measure market share, and why."
    ],
    "checklist": {
     "en": "- GATE: ∈ [$2.69B, $24.19B]\n- P1: **the unit of tariffing is named explicitly (ton), load factor is accounted for**; counting by trips without accounting for load = P1 not credited\n- P2: 3 anchors as numbers before the calculation\n- P3: second path is independent, **the source is named** (freight turnover), ratio ∈ [1.05×, 2.00×] (reference 1.22×) + choice\n- P4: translation into a decision\n- S: «$8.06B / 25.2M tons = $320/ton; per trip this is $4,480 at 14 tons» → does it reconcile\n\n*Note on the two tonnages [R2]:* the main path counts the **whole regional tonnage** (25.2M tons at the average tariff $320/ton), the second counts the **freight turnover of long-haul legs** by transport statistics (5.6M tons at $1,180/ton, higher because of distance). These are different cuts of the same market: short trips are numerous and cheap per ton, long ones are rare and expensive. The 4.5× discrepancy in tonnage with close products (1.22×) is not a contradiction but a consequence of a different sample structure; the candidate should name this, rather than «force-fit» one path to the other.",
@@ -1722,7 +1722,7 @@
     "Compute the estimate along the main chain and state the market size in $.",
     "Triangulate with an independent second path (a different data source, not the same chain reordered) and reconcile — gap should be within ~2×; name the more reliable path with justification.",
     "Sanity-check: normalize per capita / per household aloud and give a plausibility verdict.",
-    "Last mile: on which payment occasion to build monetization."
+    "Last mile: on what to build monetization."
    ],
    "checklist": {
     "en": "- GATE: ∈ [$835M, $13.36B]\n- P1: **segmentation by payment occasion, not by demographics**; slicing by age/gender with no link to the occasion = P1 not credited\n- P2: 4 anchors as numbers before the calculation\n- P3: second path is independent, **the source is named** (studio registry), ratio ∈ [1.05×, 2.00×] (reference 1.31×) + choice\n- P4: translation into a decision\n- S: «$3.34B / 23.2M payers ≈ $144 per year ≈ $12/month» → plausible for mobile games",
@@ -1772,7 +1772,7 @@
     "Compute the estimate along the main chain and state the market size in $.",
     "Triangulate with an independent second path (a different data source, not the same chain reordered) and reconcile — gap should be within ~2×; name the more reliable path with justification.",
     "Sanity-check: normalize per capita / per household aloud and give a plausibility verdict.",
-    "Last mile: which segment to address which segment to address and why."
+    "Last mile: which segment to address and why."
    ],
    "checklist": {
     "en": "- GATE: ∈ [$29.5B, $265.2B]\n- P1: **the B2C/B2B boundary is drawn explicitly, the household segment is excluded with justification**; mixing segments = P1 not credited\n- P2: 2 anchors as numbers before the calculation\n- P3: second path is independent, **the source is named** (supplier registry), ratio ∈ [1.05×, 2.00×] (reference 1.21×) + choice\n- P4: translation into a decision\n- S: «$88.4B / 3.4M firms = $26,000 per year ≈ $2,170/month» → plausible for regular office cleaning",
@@ -2003,7 +2003,7 @@
   },
   {
    "id": "MS-041",
-   "title": "Refill Not Device",
+   "title": "Cartridges in One Country",
    "difficulty": "Medium",
    "type": "Trap",
    "focus": "M06(a) mix цен по сегментам",
@@ -2014,7 +2014,7 @@
      "input_number"
     ]
    },
-   "prompt": "Estimate the annual market for printer cartridges (not printers) in one country.",
+   "prompt": "Estimate the annual market for printer cartridges in one country.",
    "exhibit": null,
    "step_prompts": [
     "Segment the market and state the counting base explicitly (people / households / firms / installed base) with a one-line hypothesis.",
@@ -2172,7 +2172,7 @@
     "Compute the estimate along the main chain and state the market size in $.",
     "Triangulate with an independent second path (a different data source, not the same chain reordered) and reconcile — gap should be within ~2×; name the more reliable path with justification.",
     "Sanity-check: normalize per capita / per household aloud and give a plausibility verdict.",
-    "Last mile: where the bottleneck is — where the binding constraint sits, and what it means for the rollout plan."
+    "Last mile: where the binding constraint sits, and what it means for the rollout plan."
    ],
    "checklist": {
     "en": "- GATE: ∈ [$1.13B, $18.05B]\n- P1: **both filters are applied and named separately (access, then intent)**; one filter instead of two = P1 not credited\n- P2: 4 anchors as numbers before the calculation\n- P3: second path is independent, **source is named** (import statistics), ratio ∈ [1.05×, 2.00×] (reference 1.28×) + choice\n- P4: conversion into a decision\n- S: «$4.51B / 14.56M switching households = $310 per year ≈ $26/mo» → is it plausible",
@@ -2222,7 +2222,7 @@
     "Compute the estimate along the main chain and state the market size in $.",
     "Triangulate with an independent second path (a different data source, not the same chain reordered) and reconcile — gap should be within ~2×; name the more reliable path with justification.",
     "Sanity-check: normalize per capita / per household aloud and give a plausibility verdict.",
-    "Last mile: at which level of the chain to measure market share and why."
+    "Last mile: which figure to carry into the sales plan."
    ],
    "checklist": {
     "en": "- GATE: ∈ [$4.41B, $39.67B]\n- P1: **the measurement level is named explicitly, added value is not summed with the base**; summing the stages = P1 not credited\n- P2: 3 anchors as numbers before the calculation\n- P3: second path is independent, **source is named** (customs statistics), ratio ∈ [1.05×, 2.00×] (reference 1.25×) + a conclusion about convergence\n- P4: **the measurement level relevant to the question is named, and why is explained**; an answer without stating the level = P4 not credited (the number $13.2B by itself is not an answer — it is correct only at the factory level)\n- S: «348M units at $38 = $13.2B at the factory; at the distribution level the same units give $18.1B — the difference of $4.9B is channel margin, not a new market» → name which level is relevant to the question",
@@ -2303,7 +2303,7 @@
   },
   {
    "id": "MS-047",
-   "title": "New Base",
+   "title": "Five Years of Home Storage",
    "difficulty": "Hard",
    "type": "Trap",
    "focus": "M12(c) смена базы",

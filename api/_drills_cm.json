@@ -412,7 +412,7 @@
     ]
    },
    "step_prompts": [
-    "Correct PV of the well (all shown values are rounded to $0.1M).",
+    "PV of the well (all shown values are rounded to $0.1M).",
     "Express the difference between the perpetuity shortcut and your value as a % of your value. What drives the gap?"
    ],
    "checklist": {
@@ -482,7 +482,7 @@
     ]
    },
    "step_prompts": [
-    "Correct EV of funding the program.",
+    "EV of funding the program.",
     "Is the board member's direction right? Quantify the gap versus your figure, and state the risk profile behind the number."
    ],
    "checklist": {
@@ -1108,7 +1108,7 @@
    "focus": "F18(a) profit up cash down",
    "time": "8 min",
    "render": "table(5) · reveal(3)",
-   "prompt": "Threadon grew sales from $20M to $26M; net margin 8%. But the CEO is puzzled cash fell. Receivables days (DSO) went 45→75; inventory rose $3.0M→$4.6M. Show why profit rose yet operating cash went negative.",
+   "prompt": "Threadon grew sales from $20M to $26M; net margin 8%. But the CEO is puzzled cash fell. Receivables days (DSO) went 45→75; inventory rose $3.0M→$4.6M. Reconcile the profit line with what happened to operating cash.",
    "exhibit": {
     "type": "table",
     "header": [
@@ -1146,7 +1146,7 @@
    },
    "step_prompts": [
     "Net profit both years + the profit growth.",
-    "Cash absorbed by receivables (ΔAR) and inventory (ΔInv).",
+    "Where did the cash go — quantify it.",
     "Operating cash this year — reconcile profit-up-cash-down."
    ],
    "company": "Threadon",
@@ -1331,7 +1331,7 @@
    },
    "step_prompts": [
     "Is the value infinite (Analyst 2)? Check r vs g: is there a hidden flaw in the model?",
-    "Correct value using the growing perpetuity.",
+    "Value using the growing perpetuity.",
     "Compare Analyst 1's no-growth figure with your value: state the difference in $ and what explains it."
    ],
    "company": "Kastovyn",
@@ -1394,7 +1394,7 @@
    "step_prompts": [
     "Contribution of B on its own volume and margin.",
     "Contribution lost on cannibalized A units.",
-    "True net incremental contribution."
+    "Net incremental contribution."
    ],
    "company": "Quorenti",
    "industry": "E-commerce DTC",
@@ -1738,7 +1738,7 @@
    "step_prompts": [
     "Compute the network margin and state the basis you use; compare with the 7% hurdle.",
     "Margin $ pool per region.",
-    "Which region to scale — and what happens to the report's two conclusions?."
+    "Which region to scale — and what happens to the report's two conclusions?"
    ],
    "company": "Dealbry",
    "industry": "Autos-dealer",
@@ -2099,7 +2099,7 @@
    "focus": "F07(c)+F11(c)",
    "time": "8 min",
    "render": "table(5) · reveal(3)",
-   "prompt": "Ostrenza launches a bundle at $300 (VC $190), projected 20,000 units. It cannibalizes the premium SKU ($400, VC $220) — 50% of bundle buyers would have bought premium. \"Bundle adds 20,000 × $110 = $2.2M,\" says marketing. True net contribution?",
+   "prompt": "Ostrenza launches a bundle at $300 (VC $190), projected 20,000 units. It cannibalizes the premium SKU ($400, VC $220) — 50% of bundle buyers would have bought premium. \"Bundle adds 20,000 × $110 = $2.2M,\" says marketing. What is the net contribution?",
    "exhibit": {
     "type": "table",
     "header": [
@@ -2136,7 +2136,7 @@
    "step_prompts": [
     "Gross bundle contribution.",
     "Contribution lost on cannibalized premium.",
-    "True net."
+    "Net contribution."
    ],
    "company": "Ostrenza",
    "industry": "Consumer-electronics",
@@ -2300,7 +2300,7 @@
     ]
    },
    "step_prompts": [
-    "(1) True chain conversion (traffic-weighted) vs target. (2) Which read is right, and what does the simple average hide?"
+    "(1) Chain conversion vs the target — state the basis you use. (2) Which read is right, and what does that say about the report’s simple average?"
    ],
    "company": "Zelvira",
    "industry": "Retail-chain",
@@ -2325,7 +2325,7 @@
    "focus": "F12(b)+F18(b)",
    "time": "8 min",
    "render": "table(5) · reveal(3)",
-   "prompt": "Brelonta scales output 50,000 → 90,000 units. Fixed $900,000, variable $30/unit, price $60. Unit cost falls as fixed dilutes, and profit rises — but the CFO says cash fell. Receivables rose $700,000, inventory $500,000. Show the paradox.",
+   "prompt": "Brelonta scales output 50,000 → 90,000 units. Fixed $900,000, variable $30/unit, price $60. Unit cost falls and profit rises — but the CFO says cash fell. Receivables rose $700,000, inventory $500,000. Show the paradox.",
    "exhibit": {
     "type": "table",
     "header": [
@@ -2530,7 +2530,7 @@
     ]
    },
    "step_prompts": [
-    "(1) LTV of each cohort. (2) Blended LTV for the subscriber base, vs the $210 \"avg churn\" figure — which one should Ilvento use, and why?."
+    "(1) LTV of each cohort. (2) Blended LTV for the subscriber base, vs the $210 \"avg churn\" figure — which one should Ilvento use, and why?"
    ],
    "company": "Ilvento",
    "industry": "Streaming",
@@ -2877,7 +2877,7 @@
    "focus": "F07(a)",
    "time": "5 min",
    "render": "table(4) · input",
-   "prompt": "Lundrix opens a direct route: contribution $120/passenger, 30,000 passengers/year. \"Adds 30,000 × $120 = $3.6M,\" says planning. But 40% of these passengers currently fly Lundrix's connecting route (contribution $150/pax). True net contribution?",
+   "prompt": "Lundrix opens a direct route: contribution $120/passenger, 30,000 passengers/year. \"Adds 30,000 × $120 = $3.6M,\" says planning. But 40% of these passengers currently fly Lundrix's connecting route (contribution $150/pax). What is the net contribution?",
    "exhibit": {
     "type": "table",
     "header": [
@@ -2904,7 +2904,7 @@
     ]
    },
    "step_prompts": [
-    "True net contribution."
+    "Net contribution."
    ],
    "company": "Lundrix",
    "industry": "Airline",

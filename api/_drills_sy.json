@@ -1,6 +1,6 @@
 {
  "type": "SY",
- "count": 33,
+ "count": 40,
  "_meta": {
   "set": "sy",
   "type_string": "Synthesis",
@@ -2599,7 +2599,7 @@
    "time": "4 min",
    "type": "Synthesis",
    "exhibit_mode": "E-with",
-   "prompt": "A gym franchisor asked the team where to grow and how to improve profitability; an associate has already worked the location economics for one average gym and put the note below in front of you. You have four minutes with the engagement manager before she walks into the client room. Read the note and tell her what the client should actually do — and why.",
+   "prompt": "A gym franchisor asked the team where to grow and how to improve profitability; an associate has already worked the location economics for one average gym and put the note below in front of you. You have four minutes with the engagement manager before she walks into the client room. Read the note and tell her what the client should do — and why.",
    "exhibit": {
     "parts": [
      {
@@ -2849,7 +2849,7 @@
    "time": "4 min",
    "type": "Synthesis",
    "exhibit_mode": "E-with",
-   "prompt": "The beverage department of a regional supermarket has lost revenue over the last year. A colleague has already been through the data and left the working record below; one line of it is missing and he ran out of time before filling it. You have four minutes. Is his read of what happened correct, and what should the client actually pull?",
+   "prompt": "The beverage department of a regional supermarket has lost revenue over the last year. A colleague has already been through the data and left the working record below; one line of it is missing and he ran out of time before filling it. You have four minutes. Does his read of what happened hold, and what should the client pull?",
    "exhibit": {
     "parts": [
      {
@@ -3124,7 +3124,7 @@
    "time": "5 min",
    "type": "Synthesis",
    "exhibit_mode": "E-with",
-   "prompt": "PaperCo makes self-adhesive sheeted papers and sells them to commercial printers across the US. The business is profitable but has not grown for several years, and the client wants to invest to restore growth. A colleague has already costed the two options on the table — expanding carton capacity to serve more medium-sized printers, or expanding pallet capacity to serve more large ones — and has come back with a recommendation. Here is his page, together with what the client actually asked for. Read it and tell the client what to do.",
+   "prompt": "PaperCo makes self-adhesive sheeted papers and sells them to commercial printers across the US. The business is profitable but has not grown for several years, and the client wants to invest to restore growth. A colleague has already costed the two options on the table — expanding carton capacity to serve more medium-sized printers, or expanding pallet capacity to serve more large ones — and has come back with a recommendation. Here is his page, together with what the client asked for. Read it and tell the client what to do.",
    "exhibit": {
     "parts": [
      {
@@ -3923,6 +3923,794 @@
     "en": "* **L1 — single free field.** The write-up's conclusion holds and Men's Extra Comfortable Essentials should terminate both the Tanks and the Tees lines — I am judging this on gross margin percentage, because that is the convention the CEO's own promise is written in. On the dollar convention the two lines split: dropping Tanks is the only move in the whole chain that adds absolute gross profit, $25.75M to $29.5M, because the exhibit footnote holds margins constant through 2020 and so Tanks' $75M of revenue destroys $3.75M of profit rather than funding growth; dropping Tees is free in dollars, $29.5M either way. On the percentage convention Tees has to go too — it contributes $0 to the numerator and $7.5M to the denominator, and that denominator move alone is the difference between 10.26% and 10.54%, between missing the promise and meeting it. Losing the revenue is safe because the other printed promise, 4x growth to $240M, clears in every state, $362.5M, $287.5M and $280M alike. I re-ran the last step on the unrounded market sizes the write-up left upstream — socks $194.481M and underwear $2,488.32M — and the cut still delivers $278.004M of revenue and 10.525% margin, so the cushion shrinks from about 0.036 to 0.025 points but survives. That cushion is the honest weakness: two risks. Internally, underwear alone would carry 85% of the remaining gross profit on a share that has to go from 1% to 10%, and its margin slipping to 9.9% takes the firm below 10.5% on its own. Externally, the constant-margin footnote is an expectation, not a supplier commitment, and three basis points of fabric inflation across socks and underwear erases the whole cushion. Next: lock fabric contracts for socks and underwear through 2020, put a channel-level plan behind the underwear share, and restate both promises on unrounded market sizes before the board sees them."
    },
    "anchor_metric": "ЕСТЬ, два, оба валидные и оба в клиентском блоке: 4-кратный рост к 2020 (= $240M) и 10.5% маржи"
+  },
+  {
+   "id": "SY-034",
+   "title": "Ten Miles Either Way",
+   "company": "",
+   "industry": "",
+   "difficulty": "Hard",
+   "clean": false,
+   "focus": "",
+   "scaffold": "L4",
+   "time": "5 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "A junior analyst has worked up the convenience-store question for the owner of a single gas station sited midway between two towns, and has closed the file with a zero net present value and a recommendation not to build. The owner's stated test for whether the store \"makes sense\" is printed at the top of the same worksheet. You have five minutes with the worksheet and no new data. Does the recommendation hold, and what do you tell the owner?",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**What the owner told us he is deciding on**",
+       "Criteria for \"making sense\" – 1) making profit, 2) having a better chance to hold off new competitors enter the market, 3) diversifying income.",
+       "**The site and the market**",
+       "The station sits between town A and town B, 10 miles to each. There are no other gas stations in town A or B. The station's current customers are residents of town A and town B; there are no other customers.",
+       "**Today's business — sizing**",
+       "- 1,000 people in each town; 80% of the population owns a car; 50% of car owners fuel with us → 400 per town, 800 customers in total.",
+       "- Customers fuel once a week, spend $50 each time, 50 weeks a year → $2.0M of town fuel spend a year.",
+       "- Customers make 40% of all their fuel purchases at our station → **$800K of revenue a year.**",
+       "- Gas is 75% of revenue at a 10% profit margin → $600K × 10% = $60K.",
+       "- Car washes are 25% of revenue at a 20% profit margin → $200K × 20% = $40K.",
+       "- **Current profit: $100K a year.**",
+       "**The convenience store — ongoing economics**",
+       "- Existing fuel customers will spend an additional $20 at the store per purchase, and will not increase the frequency of their purchases: 800 customers × 50 weeks × 40% of purchases made here = 16,000 purchases × $20 = $320K.",
+       "- Of the 1,200 town residents who are not customers today, half will spend $5 a week at the store: 1,200 × 50% × $5 × 50 weeks = $150K.",
+       "- Store revenue: $320K + $150K = **$470K a year.**",
+       "- COGS at 50% of revenue = $235K. Labor = $75K a year. Utilities = $5K a month = $60K a year.",
+       "- **Store profit: $470K − $235K − $75K − $60K = $100K a year.**",
+       "**The investment**",
+       "- Up-front investment cost: $1.0M. Client's discount rate: 10%. Town population growth rate: 0%. Expected life: perpetuity.",
+       "- $100K ÷ 10% = $1.0M. Against $1.0M invested: **NPV = $0.**",
+       "**Analyst's close:** the store pays back its own capital and nothing beyond it. A project that creates no value is not worth $1.0M of the owner's cash. Recommend against building.",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|\n| Хватается за последнюю цифру записи — NPV = $0 — как за итог | «проект не создаёт стоимости» | последняя строка = вывод |\n| Проверяет арифметику перпетуитета: $100K / 10% = $1M, минус $1M = 0 | арифметика сходится, доверие к записи растёт | верная арифметика читается как верный вывод |\n| Сравнивает $0 с порогом «создавать стоимость» | «ниже порога, значит нет» | подстановка своего порога вместо объявленного клиентом |\n| Ветвь «не строим» принимает за отсутствие события | вторая ветвь не оценивается вообще | бездействие ощущается бесплатным |\n| Существующие $100K/год уже «истрачены» на сайзинг выше | не возвращается к ним и не капитализирует | цифра, один раз использованная, считается закрытой |\n| Формулирует дисциплинированный вывод: «$1M — слишком дорого за ноль» | вердикт: не строить | осторожность выглядит как строгость |\n\n**DECOY_SUPPORT (вторым)** — чем наивный путь кажется подкреплённым\n- Арифметика записи безупречна и проверяема в уме: $470K − $235K − $75K − $60K = $100K; $100K / 10% = $1M. Ошибку искать негде, и это внушает доверие ко всей конструкции.\n- NPV = 0 — «чистый» результат, он выглядит не как случайность, а как найденная точка безразличия; такой результат психологически закрывает вопрос.\n- Инвестиция $1.0M — самая крупная цифра записи, а критерий №1 клиента («making profit») формально можно предъявить как выполненный ($100K/год) или как не выполненный (ноль сверх капитала) — двусмысленность позволяет наивной ветви считать, что она порог проверила.\n- Совпадение двух $100K (существующая прибыль и прибыль магазина) читается как аккуратность модели, а не как приглашение сравнить ветви.\n\n**SUPPORT (третьим)** — что на самом деле держит верный вывод\n- **Настоящая.** Существующий поток $100K/год (стр. 129, блок `QUESTION 1`) под той же ставкой 10% и тем же перпетуитетом (стр. 131, блок `QUESTION 2B`) стоит $1,000,000. Это ровно та сумма, которая находится в игре на ветви «не строим». Опора счётная, а не риторическая.\n- **Настоящая.** Площадка между двумя городами — единственная: «There are no other gas stations in town A or B» (стр. 127, блок `Clarifying Information`, клиентские данные). Свободное место рядом с монопольной точкой — это то, что занимают.\n- **Настоящая.** Книга сама печатает механизм сдерживания: конкурент имеет NPV ≤ 0 в лучшем случае **именно потому**, что клиент стоит первым с готовой базой (стр. 133, блок `QUESTION 2D`). Ноль клиента — это цена того, что у конкурента ноль или меньше. Отдав нулевой проект, клиент отдаёт и это.\n- **Настоящая.** Порог объявлен клиентом и он не одномерный: «1) making profit, 2) having a better chance to hold off new competitors enter the market, 3) diversifying income» (стр. 127, блок `Clarifying Information`). Магазин выполняет №2 и №3 независимо от величины NPV, а №1 не нарушает: $100K прибыли в год есть.\n- **Ложная, назвать вслух и не опираться:** «стратегическая ценность защиты бизнеса». Без капитализации $100K / 10% = $1,000,000 это пустая риторика, которой можно оправдать любую инвестицию. Опора становится настоящей только вместе с числом.\n- **Честное слабое место верного вывода:** книга нигде не даёт вероятности входа конкурента и не печатает, сколько именно из $100K/год уйдёт при его появлении. $1,000,000 — это верхняя граница экспозиции, а не ожидаемая потеря. Вывод держится потому, что даже при частичной потере ветвь «не строим» отрицательна, а ветвь «строим» ровно нулевая — но кандидат обязан назвать это допущение, а не прятать его.",
+    "decoy": "- Арифметика записи безупречна и проверяема в уме: $470K − $235K − $75K − $60K = $100K; $100K / 10% = $1M. Ошибку искать негде, и это внушает доверие ко всей конструкции.\n- NPV = 0 — «чистый» результат, он выглядит не как случайность, а как найденная точка безразличия; такой результат психологически закрывает вопрос.\n- Инвестиция $1.0M — самая крупная цифра записи, а критерий №1 клиента («making profit») формально можно предъявить как выполненный ($100K/год) или как не выполненный (ноль сверх капитала) — двусмысленность позволяет наивной ветви считать, что она порог проверила.\n- Совпадение двух $100K (существующая прибыль и прибыль магазина) читается как аккуратность модели, а не как приглашение сравнить ветви.\n\n**SUPPORT (третьим)** — что на самом деле держит верный вывод\n- **Настоящая.** Существующий поток $100K/год (стр. 129, блок `QUESTION 1`) под той же ставкой 10% и тем же перпетуитетом (стр. 131, блок `QUESTION 2B`) стоит $1,000,000. Это ровно та сумма, которая находится в игре на ветви «не строим». Опора счётная, а не риторическая.\n- **Настоящая.** Площадка между двумя городами — единственная: «There are no other gas stations in town A or B» (стр. 127, блок `Clarifying Information`, клиентские данные). Свободное место рядом с монопольной точкой — это то, что занимают.\n- **Настоящая.** Книга сама печатает механизм сдерживания: конкурент имеет NPV ≤ 0 в лучшем случае **именно потому**, что клиент стоит первым с готовой базой (стр. 133, блок `QUESTION 2D`). Ноль клиента — это цена того, что у конкурента ноль или меньше. Отдав нулевой проект, клиент отдаёт и это.\n- **Настоящая.** Порог объявлен клиентом и он не одномерный: «1) making profit, 2) having a better chance to hold off new competitors enter the market, 3) diversifying income» (стр. 127, блок `Clarifying Information`). Магазин выполняет №2 и №3 независимо от величины NPV, а №1 не нарушает: $100K прибыли в год есть.\n- **Ложная, назвать вслух и не опираться:** «стратегическая ценность защиты бизнеса». Без капитализации $100K / 10% = $1,000,000 это пустая риторика, которой можно оправдать любую инвестицию. Опора становится настоящей только вместе с числом.\n- **Честное слабое место верного вывода:** книга нигде не даёт вероятности входа конкурента и не печатает, сколько именно из $100K/год уйдёт при его появлении. $1,000,000 — это верхняя граница экспозиции, а не ожидаемая потеря. Вывод держится потому, что даже при частичной потере ветвь «не строим» отрицательна, а ветвь «строим» ровно нулевая — но кандидат обязан назвать это допущение, а не прятать его.",
+    "support": "- **Настоящая.** Существующий поток $100K/год (стр. 129, блок `QUESTION 1`) под той же ставкой 10% и тем же перпетуитетом (стр. 131, блок `QUESTION 2B`) стоит $1,000,000. Это ровно та сумма, которая находится в игре на ветви «не строим». Опора счётная, а не риторическая.\n- **Настоящая.** Площадка между двумя городами — единственная: «There are no other gas stations in town A or B» (стр. 127, блок `Clarifying Information`, клиентские данные). Свободное место рядом с монопольной точкой — это то, что занимают.\n- **Настоящая.** Книга сама печатает механизм сдерживания: конкурент имеет NPV ≤ 0 в лучшем случае **именно потому**, что клиент стоит первым с готовой базой (стр. 133, блок `QUESTION 2D`). Ноль клиента — это цена того, что у конкурента ноль или меньше. Отдав нулевой проект, клиент отдаёт и это.\n- **Настоящая.** Порог объявлен клиентом и он не одномерный: «1) making profit, 2) having a better chance to hold off new competitors enter the market, 3) diversifying income» (стр. 127, блок `Clarifying Information`). Магазин выполняет №2 и №3 независимо от величины NPV, а №1 не нарушает: $100K прибыли в год есть.\n- **Ложная, назвать вслух и не опираться:** «стратегическая ценность защиты бизнеса». Без капитализации $100K / 10% = $1,000,000 это пустая риторика, которой можно оправдать любую инвестицию. Опора становится настоящей только вместе с числом.\n- **Честное слабое место верного вывода:** книга нигде не даёт вероятности входа конкурента и не печатает, сколько именно из $100K/год уйдёт при его появлении. $1,000,000 — это верхняя граница экспозиции, а не ожидаемая потеря. Вывод держится потому, что даже при частичной потере ветвь «не строим» отрицательна, а ветвь «строим» ровно нулевая — но кандидат обязан назвать это допущение, а не прятать его.",
+    "risks": "**Prompt (EN):** A junior analyst has worked up the convenience-store question for the owner of a single gas station sited midway between two towns, and has closed the file with a zero net present value and a recommendation not to build. The owner's stated test for whether the store \"makes sense\" is printed at the top of the same worksheet. You have five minutes with the worksheet and no new data. Does the recommendation hold, and what do you tell the owner?\n\n---",
+    "next": "1. За две недели проверить, есть ли между A и B физически пригодная и не занятая площадка под вторую точку, и каков статус разрешений на неё. **Снимает неопределённость:** реальна ли угроза входа вообще — то есть покупаем ли мы за нулевой NPV настоящую защиту или воображаемую.\n2. За месяц опросить выборку из 1,200 не-клиентов на предмет готовности покупать в магазине. **Снимает неопределённость:** держится ли $150K новой выручки, от которой зависит, останется ли NPV нулевым или уйдёт к −$750K.\n3. До подписания капитального бюджета зафиксировать с владельцем письменно, что решение принимается по всем трём объявленным критериям, а не только по первому. **Снимает неопределённость:** по какому правилу проект вообще оценивается.",
+    "build": "```python\nfrom decimal import Decimal, ROUND_HALF_UP\n\ndef r(x, p=\"0.01\"):\n    return Decimal(x).quantize(Decimal(p), rounding=ROUND_HALF_UP)\n\n# --- входы, все из книги ---\nexisting_profit   = Decimal(\"100000\")   # стр.129, блок QUESTION 1\nstore_profit      = Decimal(\"100000\")   # стр.130, блок QUESTION 2\ninvestment        = Decimal(\"1000000\")  # стр.131, блок QUESTION 2B\nrate              = Decimal(\"0.10\")     # стр.131, блок QUESTION 2B\nstore_revenue     = Decimal(\"470000\")   # стр.130, блок QUESTION 2\nnew_cust_revenue  = Decimal(\"150000\")   # стр.130, блок QUESTION 2\ncogs_rate         = Decimal(\"0.50\")     # стр.130, блок QUESTION 2\nlabor             = Decimal(\"75000\")    # стр.130, блок QUESTION 2\nutilities         = Decimal(\"5000\") * 12  # стр.130, блок QUESTION 2\n\n# --- сверка книжной ветви (наивная величина) ---\nstore_value = r(store_profit / rate)\nnpv_build   = r(store_value - investment)\nassert store_value == Decimal(\"1000000.00\")\nassert npv_build   == Decimal(\"0.00\")          # NPV = 0, стр.131\n\n# --- ПОСТРОЕНО: капитализация существующего потока той же ставкой ---\nexisting_value = r(existing_profit / rate)      # книга не печатает\nassert existing_value == Decimal(\"1000000.00\")\n\n# --- ПОСТРОЕНО: внутренний риск — новая клиентура не приходит ---\nrev_wo_new  = r(store_revenue - new_cust_revenue)\nprofit_wo   = r(rev_wo_new - rev_wo_new * cogs_rate - labor - utilities)\nvalue_wo    = r(profit_wo / rate)\nnpv_wo      = r(value_wo - investment)\nassert rev_wo_new == Decimal(\"320000.00\")\nassert profit_wo  == Decimal(\"25000.00\")\nassert npv_wo     == Decimal(\"-750000.00\")\n\n# --- сопоставление двух ветвей ---\n# строим:     0 создано, $1,000,000 существующего потока защищено\n# не строим:  0 создано, до $1,000,000 существующего потока под угрозой\nassert npv_build == Decimal(\"0.00\") and existing_value == Decimal(\"1000000.00\")\n```\n\n**Провоцируемая ошибка** — кандидат принимает NPV = 0 за приговор проекту, не заметив, что альтернатива «не строим» тоже имеет цену: те же 10% на существующие $100K/год дают $1,000,000, стоящих на единственной свободной площадке между двумя городами.\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: ветвь «не строим» несёт под угрозой $100K/год существующей прибыли = $1,000,000 капитализированных под те же 10%; магазин при этом выполняет 2 из 3 объявленных критериев независимо от NPV; (3) the naive reading is rejected explicitly, not merely avoided — NPV = $0 must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: ветвь «не строим» несёт под угрозой $100K/год существующей прибыли = $1,000,000 капитализированных под те же 10%; магазин при этом выполняет 2 из 3 объявленных критериев независимо от NPV; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — NPV = $0 обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "- **Conclusion.** The owner should build the store, and should stop reading the zero NPV as a verdict: at this site zero is the price of keeping the pitch, not evidence that the pitch is worthless.\n- **Facts.** First, the store's standalone economics are exactly break-even — $100K a year capitalised at the owner's own 10% is $1.0M against $1.0M invested, so NPV is $0 and nothing is lost by building. Second, the branch the worksheet never priced is not free: the station already earns $100K a year, which at the same 10% is $1.0M of value, and the site between the two towns is the only fuel point either town has — that $1.0M is what an entrant would be aiming at, and an entrant is only unattractive today because we stand there first. Third, the owner set three tests, not one: the store holds off entrants and diversifies income whatever the NPV, and it does not fail the profit test either — it earns $100K a year.\n- **Risks.** Internally, $150K of the store's $470K revenue comes from the 1,200 residents who are not customers today; if none of them show up, annual profit falls to $25K and the build turns into a −$750K decision. Externally, the deterrence only holds while the site is unique — a second permitted location between the towns puts the same $1.0M at risk whether or not we build.\n- **Next step.** Within two weeks, establish whether a second buildable, permitted site exists between the towns. That single fact decides whether the zero NPV is buying real protection or is simply zero."
+   },
+   "anchor_metric": "ЕСТЬ и валиден: три объявленных клиентом критерия «making sense»"
+  },
+  {
+   "id": "SY-035",
+   "title": "The Tablet And The Sponge",
+   "company": "",
+   "industry": "",
+   "difficulty": "Hard",
+   "clean": false,
+   "focus": "",
+   "scaffold": "L4",
+   "time": "5 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Medical Devices Co. makes BloodStopper, a blood-clotting agent sold in liquid vials and applied in post-op with a sponge; it is weighing a deal in which it supplies BloodStopper in dry tablet form to a sponge maker, Spongy's, who will combine the two and sell the finished product. A colleague has worked the per-unit economics of the deal, checked what it does to our own margin, and signed off on it. You have five minutes with his sheet and no new data. Does his sign-off hold, and what do you tell Medical Devices Co.?",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**What the client said it wants out of this**",
+       "Are there any financial or operational targets for the deal? **No.** Medical Device Co. would like to determine the best course to maintain or improve profitability.",
+       "**How the deal is drawn**",
+       "Medical Devices Co. sells the tablet to Spongy's. Spongy's combines tablet and sponge, and Spongy's will take care of marketing and customer relationships for the finished product. Customers are 1,000 hospitals with operating rooms across the U.S. All products are single use.",
+       "**Willingness to pay, per unit**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "",
+       "WTP"
+      ],
+      "rows": [
+       [
+        "BloodStopper, original liquid vial",
+        "$85.00"
+       ],
+       [
+        "Standalone sponge",
+        "$10.00"
+       ],
+       [
+        "Combined product",
+        "WTP increases by 10% over the two bought separately → ($85.00 + $10.00) × 1.1 = **$104.50**"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "Why buyers pay more: the combined product enables greater efficiency in operating rooms and is preferred by buyers since there is no need to make separate purchases of BloodStopper and sponge. There is no proven improved medical benefit.",
+       "**Exhibit — Cost Breakdown, Medical Devices Co., per unit**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "",
+       "BloodStopper liquid vial",
+       "BloodStopper tablet form"
+      ],
+      "rows": [
+       [
+        "Raw materials",
+        "$1.00",
+        "$0.90"
+       ],
+       [
+        "Manufacturing",
+        "$0.25",
+        "$0.20"
+       ],
+       [
+        "Packaging",
+        "$0.15",
+        "$0.10"
+       ],
+       [
+        "Direct Labor",
+        "$2.10",
+        "$1.80"
+       ],
+       [
+        "Sales & Marketing",
+        "$1.50",
+        "$0.50"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "Spongy's cost to manufacture one sponge: $2.00.",
+       "**The two arrangements, side by side**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "",
+       "Today — no deal",
+       "Deal as drawn"
+      ],
+      "rows": [
+       [
+        "What Medical Devices Co. sells",
+        "liquid vial to hospitals at $85.00 WTP",
+        "tablet to Spongy's at a transfer price set to hold our margin"
+       ],
+       [
+        "Medical Devices Co. per-unit cost",
+        "vial cost breakdown above, $5.00",
+        "tablet cost breakdown above, $3.50"
+       ],
+       [
+        "Transfer price to Spongy's",
+        "n/a",
+        "**$83.50**"
+       ],
+       [
+        "**Our margin per unit**",
+        "$85.00 − $5.00 = **$80.00**",
+        "$83.50 − $3.50 = **$80.00**"
+       ],
+       [
+        "What Spongy's sells",
+        "standalone sponge at $10.00 WTP, $2.00 to make",
+        "combined product at $104.50, paying us $83.50 and $2.00 for the sponge"
+       ],
+       [
+        "Spongy's per-unit margin",
+        "—",
+        "$104.50 − $83.50 − $2.00 = **$19.00**"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "**Market structure**",
+       "There are 10 large sponge makers. There are no other companies that make a product like BloodStopper; it is not easy to replicate. Medical Devices Co. owns the IP on BloodStopper. There is nothing especially unique about the sponges. There are no other known uses for BloodStopper.",
+       "**Colleague's close:** I checked the one thing that matters for us, which is what this does to our own economics, and I checked it against where we stand today rather than against the other side. Our margin is $80.00 a unit before and $80.00 a unit after. The deal does not make us worse off by a cent — the downside case is simply today. On that basis there is no risk in it for Medical Devices Co., and I would sign it as drawn: it is a free option on a product the market wants more than it wants either half.",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|\n| Проверяет строку «до/после» — $85.00 − $5.00 против $83.50 − $3.50 | обе стороны равенства сходятся до цента, счёт записи верен | «проверяемое проверено ⇒ вывод обоснован» |\n| Из «маржа не изменилась» выводит «терять нечего» | сделка читается как безрисковая | отсутствие ухудшения принимается за отсутствие риска |\n| Достраивает то, чего в записи нет: $104.50 против $95.00, автономные $10.00 − $2.00 = $8.00, прирост партнёра | «создано много, нам ноль, но и минуса нет» | приросты посчитаны — и приводят туда же, куда уровни |\n| Видит цену передачи $83.50 как результат расчёта, а не как переговорную позицию | цена не подвергается сомнению | число, выведенное формулой, кажется объективным |\n| Блок про маркетинг читает как процедуру | «удобно, что продажами займутся они» | проза между числами воспринимается как фон |\n| Строку S&M $1.50 → $0.50 засчитывает в экономию себестоимости | $1.00 переданного обязательства учтён как выигрыш | статья затрат читается по величине, а не по смыслу |\n| Формулирует вывод: «риска нет, подписываем как есть — бесплатный опцион» | сделка как нарисована одобрена | безразличие по деньгам принимается за безопасность по позиции |\n\n**DECOY_SUPPORT (вторым)** — чем наивный путь кажется подкреплённым\n- **Счёт записи верен целиком и проверяется в уме до цента** — и это главная опора соблазна: обычный способ найти дефект (пересчитать) здесь ничего не даёт, потому что пересчитывать нечего.\n- Запись сравнивает не стороны друг с другом, а нас с нашим собственным «до» — то есть делает ровно тот шаг, которому кандидата учат. Дефектный вывод предъявлен как результат правильной методики.\n- «Downside случай — сегодняшний день» — форма бесплатного опциона; она читается как самоочевидно принимаемая и не требующая цифры в защиту.\n- Цена $83.50 не выглядит уступкой: она выведена из требования удержать маржу, то есть предъявляется как защита интересов клиента, а не как отказ от доли.\n- «Maintain or improve profitability» из клиентского блока формально выполнено: маржа поддержана ровно на прежнем уровне — по букве клиентской формулировки записи не в чем упрекнуть.\n- Асимметрия рынка кажется подтверждающей спокойствие: у нас патент и нет аналогов, у них 10 конкурентов — «нам ничто не угрожает». Опора ложная: заменимость партнёра ничего не стоит, если своя строка выхода на рынок уже срезана.\n\n**SUPPORT (третьим)** — что на самом деле держит верный вывод\n- **Настоящая, но ветвь не выбирает — назвать это вслух.** Сделка создаёт $11.00 на единицу ($9.50 прироста готовности платить плюс $1.50 нашей экономии на переходе флакон → таблетка), и весь этот прирост достаётся партнёру: $19.00 против автономных $8.00, при нашем $0.00. Арифметика чистая и обязательная в ответе — но **сама по себе она подтверждает запись, а не опровергает**: нулевой прирост без ущерба есть довод за бесплатный опцион. Опора работает только под следующей.\n- **Настоящая и решающая.** Вместе с деньгами передан канал. Строка Sales & Marketing падает с $1.50 до $0.50 (стр. 173, экзибит `Cost Breakdown`) ровно потому, что «Spongy's will take care of marketing and customer relationships» (стр. 171, блок `Clarifying Questions`), — и оплачивать выход на 1,000 больниц теперь должен партнёр из своих $19.00, тогда как наши $80.00 не тронуты. Ради доступа к этому каналу сделка нам и нужна; человек, которому отдали всю созданную стоимость, вкладываться в чужую цель не станет.\n- **Настоящая.** $1.00 из «экономии» $1.50 — это та же строка Sales & Marketing: она выглядит снижением себестоимости, а является переданным обязательством. По величине это мелочь внутри уже сошедшегося счёта — поэтому числом её не поймать, только смыслом.\n- **Настоящая.** Книга печатает последствие прямо: структура ставит MedDev «at risk of not having the improved access to marketing and distribution channels partially intended by going into business with Spongy's» (стр. 175, блок `Conclusion`).\n- **Настоящая.** Асимметрия заменимости: 10 крупных производителей губок против невоспроизводимого BloodStopper (стр. 174, блок `Competition & Deal Brainstorm`). Партнёр заменим, но зависимость возникает у нас — потому что свою строку выхода на рынок мы уже срезали.\n- **Ложная, назвать вслух и не опираться:** «$19.00 против $80.00 — это несправедливо». Справедливость здесь не аргумент и в книге не порога, ни цели нет. Работает только связка «прирост MedDev = $0.00 при переданном канале», а не разница уровней.\n- **Честное слабое место верного вывода:** автономная прибыль Spongy's $8.00 в книге отдельной строкой не стоит — она собирается из WTP губки $10.00 минус себестоимость $2.00 (оба входа стр. 172). Это законный вывод, но он опирается на допущение, что автономная губка продаётся ровно по WTP; если Spongy's продаёт дешевле, его прирост больше $11.00, а не меньше — вывод от этого только усиливается, но шаг обязан быть проговорён, иначе число выглядит выдуманным.",
+    "decoy": "- **Счёт записи верен целиком и проверяется в уме до цента** — и это главная опора соблазна: обычный способ найти дефект (пересчитать) здесь ничего не даёт, потому что пересчитывать нечего.\n- Запись сравнивает не стороны друг с другом, а нас с нашим собственным «до» — то есть делает ровно тот шаг, которому кандидата учат. Дефектный вывод предъявлен как результат правильной методики.\n- «Downside случай — сегодняшний день» — форма бесплатного опциона; она читается как самоочевидно принимаемая и не требующая цифры в защиту.\n- Цена $83.50 не выглядит уступкой: она выведена из требования удержать маржу, то есть предъявляется как защита интересов клиента, а не как отказ от доли.\n- «Maintain or improve profitability» из клиентского блока формально выполнено: маржа поддержана ровно на прежнем уровне — по букве клиентской формулировки записи не в чем упрекнуть.\n- Асимметрия рынка кажется подтверждающей спокойствие: у нас патент и нет аналогов, у них 10 конкурентов — «нам ничто не угрожает». Опора ложная: заменимость партнёра ничего не стоит, если своя строка выхода на рынок уже срезана.\n\n**SUPPORT (третьим)** — что на самом деле держит верный вывод\n- **Настоящая, но ветвь не выбирает — назвать это вслух.** Сделка создаёт $11.00 на единицу ($9.50 прироста готовности платить плюс $1.50 нашей экономии на переходе флакон → таблетка), и весь этот прирост достаётся партнёру: $19.00 против автономных $8.00, при нашем $0.00. Арифметика чистая и обязательная в ответе — но **сама по себе она подтверждает запись, а не опровергает**: нулевой прирост без ущерба есть довод за бесплатный опцион. Опора работает только под следующей.\n- **Настоящая и решающая.** Вместе с деньгами передан канал. Строка Sales & Marketing падает с $1.50 до $0.50 (стр. 173, экзибит `Cost Breakdown`) ровно потому, что «Spongy's will take care of marketing and customer relationships» (стр. 171, блок `Clarifying Questions`), — и оплачивать выход на 1,000 больниц теперь должен партнёр из своих $19.00, тогда как наши $80.00 не тронуты. Ради доступа к этому каналу сделка нам и нужна; человек, которому отдали всю созданную стоимость, вкладываться в чужую цель не станет.\n- **Настоящая.** $1.00 из «экономии» $1.50 — это та же строка Sales & Marketing: она выглядит снижением себестоимости, а является переданным обязательством. По величине это мелочь внутри уже сошедшегося счёта — поэтому числом её не поймать, только смыслом.\n- **Настоящая.** Книга печатает последствие прямо: структура ставит MedDev «at risk of not having the improved access to marketing and distribution channels partially intended by going into business with Spongy's» (стр. 175, блок `Conclusion`).\n- **Настоящая.** Асимметрия заменимости: 10 крупных производителей губок против невоспроизводимого BloodStopper (стр. 174, блок `Competition & Deal Brainstorm`). Партнёр заменим, но зависимость возникает у нас — потому что свою строку выхода на рынок мы уже срезали.\n- **Ложная, назвать вслух и не опираться:** «$19.00 против $80.00 — это несправедливо». Справедливость здесь не аргумент и в книге не порога, ни цели нет. Работает только связка «прирост MedDev = $0.00 при переданном канале», а не разница уровней.\n- **Честное слабое место верного вывода:** автономная прибыль Spongy's $8.00 в книге отдельной строкой не стоит — она собирается из WTP губки $10.00 минус себестоимость $2.00 (оба входа стр. 172). Это законный вывод, но он опирается на допущение, что автономная губка продаётся ровно по WTP; если Spongy's продаёт дешевле, его прирост больше $11.00, а не меньше — вывод от этого только усиливается, но шаг обязан быть проговорён, иначе число выглядит выдуманным.",
+    "support": "- **Настоящая, но ветвь не выбирает — назвать это вслух.** Сделка создаёт $11.00 на единицу ($9.50 прироста готовности платить плюс $1.50 нашей экономии на переходе флакон → таблетка), и весь этот прирост достаётся партнёру: $19.00 против автономных $8.00, при нашем $0.00. Арифметика чистая и обязательная в ответе — но **сама по себе она подтверждает запись, а не опровергает**: нулевой прирост без ущерба есть довод за бесплатный опцион. Опора работает только под следующей.\n- **Настоящая и решающая.** Вместе с деньгами передан канал. Строка Sales & Marketing падает с $1.50 до $0.50 (стр. 173, экзибит `Cost Breakdown`) ровно потому, что «Spongy's will take care of marketing and customer relationships» (стр. 171, блок `Clarifying Questions`), — и оплачивать выход на 1,000 больниц теперь должен партнёр из своих $19.00, тогда как наши $80.00 не тронуты. Ради доступа к этому каналу сделка нам и нужна; человек, которому отдали всю созданную стоимость, вкладываться в чужую цель не станет.\n- **Настоящая.** $1.00 из «экономии» $1.50 — это та же строка Sales & Marketing: она выглядит снижением себестоимости, а является переданным обязательством. По величине это мелочь внутри уже сошедшегося счёта — поэтому числом её не поймать, только смыслом.\n- **Настоящая.** Книга печатает последствие прямо: структура ставит MedDev «at risk of not having the improved access to marketing and distribution channels partially intended by going into business with Spongy's» (стр. 175, блок `Conclusion`).\n- **Настоящая.** Асимметрия заменимости: 10 крупных производителей губок против невоспроизводимого BloodStopper (стр. 174, блок `Competition & Deal Brainstorm`). Партнёр заменим, но зависимость возникает у нас — потому что свою строку выхода на рынок мы уже срезали.\n- **Ложная, назвать вслух и не опираться:** «$19.00 против $80.00 — это несправедливо». Справедливость здесь не аргумент и в книге не порога, ни цели нет. Работает только связка «прирост MedDev = $0.00 при переданном канале», а не разница уровней.\n- **Честное слабое место верного вывода:** автономная прибыль Spongy's $8.00 в книге отдельной строкой не стоит — она собирается из WTP губки $10.00 минус себестоимость $2.00 (оба входа стр. 172). Это законный вывод, но он опирается на допущение, что автономная губка продаётся ровно по WTP; если Spongy's продаёт дешевле, его прирост больше $11.00, а не меньше — вывод от этого только усиливается, но шаг обязан быть проговорён, иначе число выглядит выдуманным.",
+    "risks": "**Prompt (EN):** Medical Devices Co. makes BloodStopper, a blood-clotting agent sold in liquid vials and applied in post-op with a sponge; it is weighing a deal in which it supplies BloodStopper in dry tablet form to a sponge maker, Spongy's, who will combine the two and sell the finished product. A colleague has worked the per-unit economics of the deal, checked what it does to our own margin, and signed off on it. You have five minutes with his sheet and no new data. Does his sign-off hold, and what do you tell Medical Devices Co.?\n\n---",
+    "next": "1. До подписания вынести на стол цену передачи выше $83.50 и зафиксировать деление созданных $11.00: при $89.00 обе стороны получают по $5.50 прироста. **Снимает неопределённость:** согласится ли Spongy's вообще делиться — то есть считает ли он себя обязанным нам за $11.00 или считает их своими.\n2. За две недели оценить, сколько стоит вывод комбинированного продукта на 1,000 больниц, и сопоставить с $19.00 маржи партнёра. **Снимает неопределённость:** хватает ли Spongy's средств на тот самый канал, ради которого сделка нужна нам.\n3. Параллельно оценить покупку одного из 10 производителей губок. **Снимает неопределённость:** есть ли у нас альтернатива сделке — без неё любая переговорная позиция по пункту 1 держится на блефе.",
+    "build": "```python\nfrom decimal import Decimal, ROUND_HALF_UP\n\ndef r(x, p=\"0.01\"):\n    return Decimal(x).quantize(Decimal(p), rounding=ROUND_HALF_UP)\n\n# --- входы, все из книги ---\nwtp_vial   = Decimal(\"85.00\")    # стр.172, блок Consumers & The Product\nwtp_sponge = Decimal(\"10.00\")    # стр.172, тот же блок\nuplift     = Decimal(\"1.10\")     # стр.172, тот же блок\ncost_vial_lines   = [Decimal(x) for x in (\"1.00\",\"0.25\",\"0.15\",\"2.10\",\"1.50\")]  # стр.173, экзибит Cost Breakdown\ncost_tablet_lines = [Decimal(x) for x in (\"0.90\",\"0.20\",\"0.10\",\"1.80\",\"0.50\")]  # стр.173, экзибит Cost Breakdown\ncost_sponge  = Decimal(\"2.00\")   # стр.172, блок Consumers & The Product\ntransfer     = Decimal(\"83.50\")  # стр.172, блок Consumers & The Product\n\n# --- сверка книжных величин ---\ncost_vial   = r(sum(cost_vial_lines))\ncost_tablet = r(sum(cost_tablet_lines))\nassert cost_vial   == Decimal(\"5.00\")\nassert cost_tablet == Decimal(\"3.50\")\n\nwtp_combined = r((wtp_vial + wtp_sponge) * uplift)\nassert wtp_combined == Decimal(\"104.50\")            # стр.172\n\nmd_margin_before = r(wtp_vial - cost_vial)\nmd_margin_after  = r(transfer - cost_tablet)\nassert md_margin_before == Decimal(\"80.00\")         # стр.172\nassert md_margin_after  == Decimal(\"80.00\")         # стр.172\n\nsp_margin_after = r(wtp_combined - transfer - cost_sponge)\nassert sp_margin_after == Decimal(\"19.00\")          # стр.172\n\n# --- ПОСТРОЕНО: автономная позиция партнёра (книга не печатает) ---\nsp_margin_before = r(wtp_sponge - cost_sponge)\nassert sp_margin_before == Decimal(\"8.00\")\n\n# --- ПОСТРОЕНО: сколько сделка создаёт ---\nwtp_gain     = r(wtp_combined - (wtp_vial + wtp_sponge))\nmd_cost_save = r(cost_vial - cost_tablet)\nvalue_created = r(wtp_gain + md_cost_save)\nassert wtp_gain      == Decimal(\"9.50\")\nassert md_cost_save  == Decimal(\"1.50\")\nassert value_created == Decimal(\"11.00\")\n\n# --- ПОСТРОЕНО: кто эту стоимость забрал ---\nmd_delta = r(md_margin_after - md_margin_before)\nsp_delta = r(sp_margin_after - sp_margin_before)\nassert md_delta == Decimal(\"0.00\")\nassert sp_delta == Decimal(\"11.00\")\nassert r(md_delta + sp_delta) == value_created      # замыкание: ничего не потеряно и не выдумано\n\n# --- ПОСТРОЕНО: переданный канал внутри \"экономии\" ---\nsm_transferred = r(cost_vial_lines[4] - cost_tablet_lines[4])\nassert sm_transferred == Decimal(\"1.00\")\nassert sm_transferred < md_cost_save                # $1.00 из $1.50 — не экономия, а переданное обязательство\n\n# --- ПОСТРОЕНО: цена передачи, делящая созданное поровну ---\neven = r(transfer + value_created / 2)\nmd_even = r(even - cost_tablet)\nsp_even = r(wtp_combined - even - cost_sponge)\nassert even    == Decimal(\"89.00\")\nassert r(md_even - md_margin_before) == Decimal(\"5.50\")\nassert r(sp_even - sp_margin_before) == Decimal(\"5.50\")\n\n# --- ПОСТРОЕНО: чувствительность внешнего риска (uplift вдвое меньше) ---\nwtp_half = r((wtp_vial + wtp_sponge) * Decimal(\"1.05\"))\nassert r(wtp_half - (wtp_vial + wtp_sponge)) == Decimal(\"4.75\")\n```\n\n**Провоцируемая ошибка** — кандидат подтверждает верную арифметику записи ($80.00 до, $80.00 после), выводит из «мы не ухудшились» — «риска нет» и подписывает сделку как бесплатный опцион, не спросив, кто после подписания несёт выход на 1,000 больниц и из какой маржи он его оплачивает.\n# ПАРТИЯ 6 СИНТЕЗА — ТЕЛА B (SY-036, SY-037)"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: канал передан вместе с деньгами: строка S&M падает с $1.50 до $0.50, а оплачивать выход на рынок теперь должен партнёр из $19.00 — при том что доступ к каналу и есть цель сделки; заменимых производителей губок 10, невоспроизводимый BloodStopper один → пересогласовать цену передачи; (3) the naive reading is rejected explicitly, not merely avoided — прирост MedDev = $0.00 → сделка нейтральна, худший случай = сегодняшний день → подписать как нарисовано must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: канал передан вместе с деньгами: строка S&M падает с $1.50 до $0.50, а оплачивать выход на рынок теперь должен партнёр из $19.00 — при том что доступ к каналу и есть цель сделки; заменимых производителей губок 10, невоспроизводимый BloodStopper один → пересогласовать цену передачи; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — прирост MedDev = $0.00 → сделка нейтральна, худший случай = сегодняшний день → подписать как нарисовано обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "- **Conclusion.** Medical Devices Co. should not sign the deal as drawn: it should re-price the tablet above $83.50 so that it keeps a share of the value the deal creates, and in parallel price the alternative of buying a sponge maker outright.\n- **Facts.** First, the sheet's arithmetic is right and its conclusion does not follow from it. Our margin is indeed $80.00 before and $80.00 after — but \"not worse off\" is not the same as \"no risk\", and the risk in this deal sits outside our own margin line. Second, what we hand over with the price is the channel: $1.00 of our $1.50 cost \"saving\" is the sales-and-marketing line falling from $1.50 to $0.50, because Spongy's takes over marketing and customer relationships. Improved access to marketing and distribution is the reason we are doing this deal at all, and we are asking a partner to fund it out of $19.00 a unit while we sit on an untouched $80.00 — a partner who, on these terms, keeps every cent of the $11.00 the deal creates ($9.50 of extra willingness to pay plus $1.50 of our own cost saving; $19.00 against $8.00 standalone, being $10.00 less the $2.00 sponge). Third, we are negotiating from a stronger position than this sheet assumes: there are ten large sponge makers and there is one BloodStopper, which nobody else can replicate.\n- **Risks.** Internally, having cut our own commercial spend we depend on a partner who earns $19.00 a unit to carry the channel; if he underinvests, what is exposed is not the $11.00 we are arguing over but the $80.00 we thought we had protected. Externally, the 10% uplift rests on convenience with no proven medical benefit — halve it and the $9.50 falls to roughly $4.75, leaving almost nothing to divide.\n- **Next step.** Take a transfer price of $89.00 back to Spongy's — an even $5.50 of the $11.00 each — and in parallel value one of the 10 sponge makers as a walk-away. The response tells us within two weeks whether we have a partner or only a buyer."
+   },
+   "anchor_metric": "НЕТ клиентского порога"
+  },
+  {
+   "id": "SY-036",
+   "title": "$1.9 Billion and Sixteen Associates",
+   "company": "",
+   "industry": "",
+   "difficulty": "Hard",
+   "clean": false,
+   "focus": "",
+   "scaffold": "L2",
+   "time": "5 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Canyon Capital Partners is a hedge fund whose profits have fallen for two years running. An associate on our team spent a session on the revenue side and left the record below, together with the fund's limited partnership terms, its headcount and its compensation schedule. The associate is about to take this to the founder and recommend renegotiating the management fee. Read the record, decide whether that recommendation survives the numbers in front of you, and state what Canyon should do instead or in addition.",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**Block A — where the associate started**",
+       "Profits down two years running. Take the top line first. Management fees are a fixed percentage charged on the average balance of assets under management. That percentage was cut in 2016 under competitive pressure from rival funds and has not moved since. Assets themselves have grown in every one of the three years. And revenue still fell. So the fee cut is doing the damage — it is the one revenue term the fund sets by decision rather than by market outcome.",
+       "**Block B — three-year workup from the fund's internal reporting**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "",
+       "2015",
+       "2016",
+       "2017"
+      ],
+      "rows": [
+       [
+        "Average AuM ($mm)",
+        "1,600",
+        "1,800",
+        "1,900"
+       ],
+       [
+        "Management fee",
+        "2.00%",
+        "1.50%",
+        "1.50%"
+       ],
+       [
+        "Investment performance",
+        "20%",
+        "5%",
+        "0%"
+       ],
+       [
+        "Total revenues ($mm)",
+        "47.0",
+        "27.0",
+        "28.5"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "**Block C — terms of the limited partnership agreement, as signed with investors**",
+       "Management fees are fixed fees paid on the average balance of assets under management. Carried interest is the share of investment performance appropriated by the fund's managers as additional compensation. CCP takes 20% of all investment gains in excess of the 15% hurdle rate in the year.",
+       "Opening assets under management on 1 January 2015: $1,500mm.",
+       "**Block D — Exhibit 2, employee headcount**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "",
+       "2015",
+       "2016",
+       "2017"
+      ],
+      "rows": [
+       [
+        "C-Suite",
+        "3",
+        "3",
+        "3"
+       ],
+       [
+        "Portfolio Managers",
+        "3",
+        "3",
+        "4"
+       ],
+       [
+        "Associates",
+        "7",
+        "10",
+        "16"
+       ],
+       [
+        "Analysts",
+        "13",
+        "11",
+        "9"
+       ],
+       [
+        "Traders",
+        "3",
+        "3",
+        "3"
+       ],
+       [
+        "Support Staff",
+        "7",
+        "8",
+        "9"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "**Block E — annual compensation schedule, released by the fund on request**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Role",
+       "Salary ($)",
+       "Role",
+       "Salary ($)"
+      ],
+      "rows": [
+       [
+        "C-Suite",
+        "1,500,000",
+        "Analysts",
+        "100,000"
+       ],
+       [
+        "Portfolio Managers",
+        "500,000",
+        "Traders",
+        "200,000"
+       ],
+       [
+        "Associates",
+        "250,000",
+        "Support Staff",
+        "75,000"
+       ]
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "",
+       "2015",
+       "2016",
+       "2017"
+      ],
+      "rows": [
+       [
+        "Total Salary ($mm)",
+        "10.175",
+        "10.800",
+        "12.675"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "Only C-Suite and Portfolio Managers receive variable compensation, and it is tied directly to fund profitability.",
+       "**Block F — notes from the kickoff call**",
+       "The fund is long-established and headquartered in Hartford, CT. It invests only in US public equity markets. Current assets under management are $2.1 billion. Over the past three years the fund has had no new inflows or outflows of investor money. The office is on a long-term lease with minor annual price adjustments. Research resources have not been changed in the past years, nor have their prices.",
+       "**Block G — how the associate closed the session**",
+       "The fee rate is where the story is. 2016 is the year everything turned. Competitors set the price and we followed them down. Ask the founder what it would take to move the rate back toward 2.00%.",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|\n| Читает блок A и берёт единственную величину с напечатанной словесной причиной — срез ставки «under competitive pressure» | Рамка «выручка = ставка × AuM» ставится до того, как прочитан блок C | Причина, названная словами, побеждает причину, которую надо построить |\n| Считает 1,600 × 2.00% = 32.0 и 1,800 × 1.50% = 27.0, видит −5.0 | «Комиссионная выручка упала на $5.0M — вот оно» | Первое сошедшееся вычисление объявляется ответом |\n| Сверяет 27.0 с Total revenues 2016 = 27.0, получает совпадение | Совпадение читается как подтверждение полноты модели, а не как сигнал, что в 2016 второй строки выручки просто нет | Сходимость подтверждает не ту гипотезу, которую проверяли |\n| Не вычитает 32.0 из 47.0 в 2015 | $15.0M carried interest никогда не появляется на бумаге | Невыведенная величина не участвует в рассуждении |\n| Смотрит на доходность 20/5/0 как на «плохой год» | «Рынок был слабым, вернётся» — доходность списывается в экзогенный шум | Процент без правила рядом читается как фон, а не как порог |\n| Формулирует действие «поднять комиссию обратно к 2.00%» | Рекомендация упирается ровно в ту силу, которая ставку и срезала, — в конкурентов | Управляемым считается то, что фонд однажды менял сам |\n\n**DECOY_SUPPORT (вторым)** — чем наивный путь кажется подкреплённым\n\n* **Ставка — единственное число в записи, изменённое решением.** AuM, доходность, штат меняются постепенно; 2.00% → 1.50% — единственный разрыв, и у него в записи есть автор («competitive pressure»). Под таймером разрыв с автором выглядит как причина.\n* **Арифметика наивной ветви сходится идеально.** 1,800 × 1.50% = 27.0 = Total revenues 2016 ровно. Кандидат получает точное совпадение и принимает его за верификацию модели, тогда как совпадение означает противоположное: в 2016 из двух строк выручки осталась одна.\n* **Блоки A и G обрамляют запись комиссией.** Первое и последнее, что читает кандидат, — реплики аналитика про ставку. Ветвь подпёрта композицией записи, а не данными.\n* **Падение выручки и срез ставки совпали по году.** Оба произошли в 2016. Совпадение по времени подменяет разложение по величине.\n* **Формально ставка действительно стоила денег.** −$9.0M на базе 2016 года — это не ноль. Наивная ветвь не пуста, она недостаточна: она объясняет 45% падения и молчит про 75%.\n\n**SUPPORT (третьим)** — что на самом деле держит верный вывод\n\n* **Барьер 15% из клиентского блока стр. 106 — настоящая опора.** Задан договором с инвесторами, из счёта не выводится, фондом в одностороннем порядке не двигается. Он превращает доходность из «фона» в порог: 20% > 15% даёт carry, 5% и 0% дают ноль одинаково.\n* **Разложение падения $20.0M — настоящая опора, но ПОСТРОЕННАЯ.** Рост AuM +$4.0M, срез ставки −$9.0M, обнуление carry −$15.0M; сумма −$20.0M. Книга разложения не печатает, кандидат строит его сам из строк стр. 109. Три четверти падения — carry.\n* **Пара 2016/2017 — настоящая опора и контрфакт.** Доходность падает с 5% до 0%, carry не меняется (ноль в обоих), а общая выручка при этом **растёт**. Механика барьера — обрыв, а не наклон; и линия, которую винит наивная ветвь, уже восстанавливается.\n* **Инверсия состава штата — настоящая опора и единственный рычаг.** Ассоциаты 7→16 по $250K дают +$2.25M, аналитики 13→9 по $100K возвращают только −$0.4M; фонд оплаты растёт на $2.5M при выручке, упавшей на $18.5M. Это то, что фонд решает сам.\n* **«Ставку срезали конкуренты» — ложная опора для действия.** Факт истинный, вывод из него нет: ставку задаёт рынок, и рекомендация «поднять обратно» опирается на величину, которой фонд не управляет. Рычагом её делает только грамматика записи.\n* **«Доходность 0% — значит фонд плохо инвестирует» — ложная опора.** Доходность 0% в 2017 не отрицательна; фонд не потерял деньги инвесторов. Отсутствие carry вызвано барьером, а не убытком, и лечится оно не «новой инвестиционной стратегией», а пониманием, что при доходности между 0% и 15% carry не будет вовсе.",
+    "decoy": "* **Ставка — единственное число в записи, изменённое решением.** AuM, доходность, штат меняются постепенно; 2.00% → 1.50% — единственный разрыв, и у него в записи есть автор («competitive pressure»). Под таймером разрыв с автором выглядит как причина.\n* **Арифметика наивной ветви сходится идеально.** 1,800 × 1.50% = 27.0 = Total revenues 2016 ровно. Кандидат получает точное совпадение и принимает его за верификацию модели, тогда как совпадение означает противоположное: в 2016 из двух строк выручки осталась одна.\n* **Блоки A и G обрамляют запись комиссией.** Первое и последнее, что читает кандидат, — реплики аналитика про ставку. Ветвь подпёрта композицией записи, а не данными.\n* **Падение выручки и срез ставки совпали по году.** Оба произошли в 2016. Совпадение по времени подменяет разложение по величине.\n* **Формально ставка действительно стоила денег.** −$9.0M на базе 2016 года — это не ноль. Наивная ветвь не пуста, она недостаточна: она объясняет 45% падения и молчит про 75%.\n\n**SUPPORT (третьим)** — что на самом деле держит верный вывод\n\n* **Барьер 15% из клиентского блока стр. 106 — настоящая опора.** Задан договором с инвесторами, из счёта не выводится, фондом в одностороннем порядке не двигается. Он превращает доходность из «фона» в порог: 20% > 15% даёт carry, 5% и 0% дают ноль одинаково.\n* **Разложение падения $20.0M — настоящая опора, но ПОСТРОЕННАЯ.** Рост AuM +$4.0M, срез ставки −$9.0M, обнуление carry −$15.0M; сумма −$20.0M. Книга разложения не печатает, кандидат строит его сам из строк стр. 109. Три четверти падения — carry.\n* **Пара 2016/2017 — настоящая опора и контрфакт.** Доходность падает с 5% до 0%, carry не меняется (ноль в обоих), а общая выручка при этом **растёт**. Механика барьера — обрыв, а не наклон; и линия, которую винит наивная ветвь, уже восстанавливается.\n* **Инверсия состава штата — настоящая опора и единственный рычаг.** Ассоциаты 7→16 по $250K дают +$2.25M, аналитики 13→9 по $100K возвращают только −$0.4M; фонд оплаты растёт на $2.5M при выручке, упавшей на $18.5M. Это то, что фонд решает сам.\n* **«Ставку срезали конкуренты» — ложная опора для действия.** Факт истинный, вывод из него нет: ставку задаёт рынок, и рекомендация «поднять обратно» опирается на величину, которой фонд не управляет. Рычагом её делает только грамматика записи.\n* **«Доходность 0% — значит фонд плохо инвестирует» — ложная опора.** Доходность 0% в 2017 не отрицательна; фонд не потерял деньги инвесторов. Отсутствие carry вызвано барьером, а не убытком, и лечится оно не «новой инвестиционной стратегией», а пониманием, что при доходности между 0% и 15% carry не будет вовсе.",
+    "support": "* **Барьер 15% из клиентского блока стр. 106 — настоящая опора.** Задан договором с инвесторами, из счёта не выводится, фондом в одностороннем порядке не двигается. Он превращает доходность из «фона» в порог: 20% > 15% даёт carry, 5% и 0% дают ноль одинаково.\n* **Разложение падения $20.0M — настоящая опора, но ПОСТРОЕННАЯ.** Рост AuM +$4.0M, срез ставки −$9.0M, обнуление carry −$15.0M; сумма −$20.0M. Книга разложения не печатает, кандидат строит его сам из строк стр. 109. Три четверти падения — carry.\n* **Пара 2016/2017 — настоящая опора и контрфакт.** Доходность падает с 5% до 0%, carry не меняется (ноль в обоих), а общая выручка при этом **растёт**. Механика барьера — обрыв, а не наклон; и линия, которую винит наивная ветвь, уже восстанавливается.\n* **Инверсия состава штата — настоящая опора и единственный рычаг.** Ассоциаты 7→16 по $250K дают +$2.25M, аналитики 13→9 по $100K возвращают только −$0.4M; фонд оплаты растёт на $2.5M при выручке, упавшей на $18.5M. Это то, что фонд решает сам.\n* **«Ставку срезали конкуренты» — ложная опора для действия.** Факт истинный, вывод из него нет: ставку задаёт рынок, и рекомендация «поднять обратно» опирается на величину, которой фонд не управляет. Рычагом её делает только грамматика записи.\n* **«Доходность 0% — значит фонд плохо инвестирует» — ложная опора.** Доходность 0% в 2017 не отрицательна; фонд не потерял деньги инвесторов. Отсутствие carry вызвано барьером, а не убытком, и лечится оно не «новой инвестиционной стратегией», а пониманием, что при доходности между 0% и 15% carry не будет вовсе.",
+    "risks": "* **Внутренний.** Сокращение ассоциатов бьёт по фонду оплаты на $2.25M, но фонд уже потратил на их набор два года: 7 → 16 человек. Резкое сжатие обнуляет вложение в обучение и оставляет 4 портфельных управляющих без исполнительского слоя при AuM в $1,900M.\n* **Внешний / договорный.** Барьер 15% зафиксирован в договоре с инвесторами: при доходности 14.9% carry снова будет ноль при выручке в $28.5M и фонде оплаты в $12.675M. Пересмотр барьера требует согласия инвесторов, а фонд три года не привлекал новых денег — переговорной позиции у него нет.\n* **Внешний / рыночный.** Подъём ставки обратно к 2.00% даёт на AuM 2017 около +$9.5M, но ровно та конкурентная среда, которая срезала ставку в 2016, никуда не делась; попытка стоит риска оттока при нулевом чистом притоке за три года.",
+    "next": "1. За две недели посчитать, при какой доходности фонд возвращается к выручке 2015 года при ставке 1.50% и AuM $1,900M. **Снимает неопределённость:** насколько вообще достижим carry при нынешнем масштабе, или барьер 15% структурно недосягаем.\n2. За месяц вывести производительность на человека по слоям: ассоциат при $250K против аналитика при $100K. **Снимает неопределённость:** инверсия штата — это переплата или осознанный сдвиг модели.\n3. До следующего годового цикла проверить у инвесторов готовность обсуждать конструкцию барьера. **Снимает неопределённость:** является ли 15% переговариваемым параметром или жёсткой рамкой, под которую надо подстраивать всё остальное.",
+    "build": "```python\nfrom decimal import Decimal as D, ROUND_HALF_UP\n\n# --- входы, все из книги (Darden 2019, стр. 106, 109, 110, 111) ---\naum   = {2015: D(\"1600\"), 2016: D(\"1800\"), 2017: D(\"1900\")}   # стр. 109\nrate  = {2015: D(\"0.0200\"), 2016: D(\"0.0150\"), 2017: D(\"0.0150\")}  # стр. 109\nperf  = {2015: D(\"0.20\"), 2016: D(\"0.05\"), 2017: D(\"0.00\")}   # стр. 109\ntotrev= {2015: D(\"47.0\"), 2016: D(\"27.0\"), 2017: D(\"28.5\")}   # стр. 109\nopening_aum_2015 = D(\"1500\")                                   # стр. 109\nhurdle = D(\"0.15\")   # стр. 106, клиентский блок\ncarry_share = D(\"0.20\")  # стр. 106, клиентский блок\n\n# --- сверка книжных строк ---\nmgmt = {y: aum[y] * rate[y] for y in aum}\nassert mgmt[2015] == D(\"32.00\"), mgmt[2015]      # книга: 32.0\nassert mgmt[2016] == D(\"27.00\"), mgmt[2016]      # книга: 27.0\nassert mgmt[2017] == D(\"28.50\"), mgmt[2017]      # книга: 28.5\n\ntotal_return_2015 = opening_aum_2015 * perf[2015]\nexcess_2015       = total_return_2015 - opening_aum_2015 * hurdle\ncarry_2015        = excess_2015 * carry_share\nassert total_return_2015 == D(\"300.00\")          # книга: 300\nassert excess_2015       == D(\"75.00\")           # книга: 75\nassert carry_2015        == D(\"15.0000\")         # книга: 15\n\n# carry как остаток общей выручки — так его строит кандидат\ncarry = {y: totrev[y] - mgmt[y] for y in totrev}\nassert carry[2015] == D(\"15.00\")\nassert carry[2016] == D(\"0.00\")\nassert carry[2017] == D(\"0.00\")\n\n# ПОСТРОЕНО, книга не печатает: разложение падения 2015 -> 2016\ndrop        = totrev[2015] - totrev[2016]\naum_effect  = (aum[2016] - aum[2015]) * rate[2015]      # +4.0\nrate_effect = aum[2016] * (rate[2016] - rate[2015])     # -9.0\ncarry_effect= carry[2016] - carry[2015]                 # -15.0\nassert drop == D(\"20.0\")\nassert aum_effect  == D(\"4.000\")\nassert rate_effect == D(\"-9.000\")\nassert carry_effect== D(\"-15.00\")\nassert aum_effect + rate_effect + carry_effect == -drop\n\ncarry_share_of_drop = (-carry_effect / drop).quantize(D(\"0.001\"), ROUND_HALF_UP)\nassert carry_share_of_drop == D(\"0.750\")   # 75.0% падения — обнуление carry\n\n# ПОСТРОЕНО, книга не печатает: мост по фонду оплаты 2015 -> 2017\nhead = {\"csuite\":(3,3),\"pm\":(3,4),\"assoc\":(7,16),\"analyst\":(13,9),\n        \"trader\":(3,3),\"support\":(7,9)}                       # стр. 110\nsal  = {\"csuite\":D(\"1.5\"),\"pm\":D(\"0.5\"),\"assoc\":D(\"0.25\"),\n        \"analyst\":D(\"0.1\"),\"trader\":D(\"0.2\"),\"support\":D(\"0.075\")}  # стр. 111, $mm\nsal_2015 = sum(D(head[k][0]) * sal[k] for k in head)\nsal_2017 = sum(D(head[k][1]) * sal[k] for k in head)\nassert sal_2015 == D(\"10.175\")   # книга: 10.175\nassert sal_2017 == D(\"12.675\")   # книга: 12.675\nbridge = {k: (D(head[k][1]) - D(head[k][0])) * sal[k] for k in head}\nassert bridge[\"assoc\"]   == D(\"2.25\")\nassert bridge[\"analyst\"] == D(\"-0.4\")\nassert sum(bridge.values()) == D(\"2.5\")\n\n# ПОСТРОЕНО: падение выручки 2015 -> 2017 против роста фонда оплаты\nassert totrev[2015] - totrev[2017] == D(\"18.5\")\n```\n\n**Провоцируемая ошибка** — кандидат объясняет падение выручки строкой, у которой в записи напечатана словесная причина, и не вычитает комиссионную выручку из общей, поэтому $15.0M carried interest — три четверти падения — не появляются в его рассуждении ни разу.\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: −$15.0M (обнуление carried interest; 75.0% всего падения в $20.0M); (3) the naive reading is rejected explicitly, not merely avoided — −$5.0M (падение management fee revenue 32.0 → 27.0) must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: −$15.0M (обнуление carried interest; 75.0% всего падения в $20.0M); (3) наивное прочтение отвергнуто вслух, а не просто обойдено — −$5.0M (падение management fee revenue 32.0 → 27.0) обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "**[1] Verdict.** Canyon should stop treating the management fee as the problem and cut the associate-heavy cost base while renegotiating the carry structure with its investors.\n\n**[2] Evidence & lever.** Of the $20.0M revenue decline from 2015 to 2016, $15.0M — three quarters — is carried interest going to zero, against $9.0M from the fee cut and $4.0M added back by asset growth; and the fee line is already recovering, from $27.0M to $28.5M on rising AuM, while carry stays at zero. The lever I would pull first is headcount mix: associates went from 7 to 16 at $250K each while analysts fell from 13 to 9 at $100K, adding $2.5M to a salary bill that now sits at $12.675M against $28.5M of revenue."
+   },
+   "anchor_metric": "ЕСТЬ и валиден: барьер 15% годовой доходности, ниже которого carried interest не платится вовсе"
+  },
+  {
+   "id": "SY-037",
+   "title": "Fifty Thousand Post Offices, Year One",
+   "company": "",
+   "industry": "",
+   "difficulty": "Medium",
+   "clean": false,
+   "focus": "",
+   "scaffold": "L2",
+   "time": "4 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "The government of India is considering distributing insurance to the underserved through the national postal network, and our team has costed the first year of launch. Below is the engagement mandate as the government wrote it, the segmentation the government supplied, the distribution assumptions and the team's first-year profit and loss. The team lead has read the bottom line and is preparing to advise the government not to launch. Read the record, decide whether that advice answers the question the government asked, and state what the government should do.",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**Block A — engagement mandate, as written by the government**",
+       "The Indian insurance market is heavily underpenetrated. The majority of the insurable adult population is not insured, and this has serious consequences — when financial adversity strikes, such as when the main breadwinner of a family dies, or if there is a drought or a flood, people either find it hard to survive or in some cases also commit suicide. When we say insurance, we mean both life insurance and non-life insurance such as health and crop.",
+       "",
+       "The government is considering using the Indian postal network as a creative way of reaching the underserved insurance population. The infrastructure already exists and can be leveraged for distributing much-needed insurance products. **The objective would be to provide a safety net to as many people as possible in the underserved markets.**",
+       "**Block B — household segmentation supplied by the government**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Segment",
+       "Annual household income",
+       "Number of households (MM)",
+       "% of income willing to spend on insurance"
+      ],
+      "rows": [
+       [
+        "Globals",
+        "> USD 30K",
+        "2",
+        "1.0%"
+       ],
+       [
+        "Consumers",
+        "USD 10K – 30K",
+        "10",
+        "1.5%"
+       ],
+       [
+        "Aspirers",
+        "USD 5K – 10K",
+        "55",
+        "1.5%"
+       ],
+       [
+        "Strugglers",
+        "< USD 5K",
+        "33",
+        "2.0%"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "The underserved population is defined as the aspirers and the strugglers. Average annual income is USD 7,500 for aspirers and USD 2,000 for strugglers. Willingness to spend as a share of income falls as income rises because insurance needs are non-linear: a 10% rise in income does not require a 10% rise in cover.",
+       "**Block C — distribution assumptions for year one**",
+       "There are about 150,000 post offices in the country, of which the government expects one third to be able to provide insurance in the first year of launch. Assume one agent per branch, and that each agent can sell insurance to 10 aspiring households and 5 struggling households every month. All dollar figures below are premium amounts in USD.",
+       "**Block D — premium build, year one**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "",
+       ""
+      ],
+      "rows": [
+       [
+        "Serviceable post offices (1/3 × 150,000)",
+        "50,000"
+       ],
+       [
+        "Total number of agents",
+        "50,000"
+       ],
+       [
+        "Annual premium sales to aspirers (10 × 12 × 7,500 × 1.5% × 50,000)",
+        "675,000,000"
+       ],
+       [
+        "Annual premium sales to strugglers (5 × 12 × 2,000 × 2.0% × 50,000)",
+        "120,000,000"
+       ],
+       [
+        "**Total premium sales**",
+        "**795,000,000**"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "**Block E — first-year profit and loss**",
+       "The government pays out 85% of premium in claims every year. Agents receive 10% of premium as commission, plus USD 100 per month as a base salary. Operating the branches and travel expenses for agents cost a further USD 100 per month per branch."
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "",
+       ""
+      ],
+      "rows": [
+       [
+        "Total premium sales",
+        "795,000,000"
+       ],
+       [
+        "Claims cost (85% of premium)",
+        "675,750,000"
+       ],
+       [
+        "Commission cost (10% of premium)",
+        "79,500,000"
+       ],
+       [
+        "Salary costs (USD 100 × 12 mos × 50k agents)",
+        "60,000,000"
+       ],
+       [
+        "Other costs (USD 100 × 12 mos × 50k branches)",
+        "60,000,000"
+       ],
+       [
+        "**Total costs**",
+        "**875,250,000**"
+       ],
+       [
+        "**Result (sales − costs)**",
+        "**(80,250,000)**"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|\n| Пролистывает блок A как «контекст» и задерживается на первой таблице с числами | Мандат прочитан, но не превращён в критерий: он остался фоном, а не рамкой | Слова читаются на скорость, числа — на внимание |\n| Проверяет вывод премии 675,000,000 + 120,000,000 = 795,000,000 | Сходится — доверие к записи растёт | Верный счёт распространяет доверие на выбор величины, которую считали |\n| Проверяет P&L: 875,250,000 против 795,000,000 | Сходится тоже; ошибки нет нигде | Отсутствие арифметической ошибки принимается за отсутствие ошибки вообще |\n| Берёт итоговую строку $(80,250,000) как ответ на вопрос кейса | «Убыточную схему не запускают» | Последняя посчитанная величина назначается решающей |\n| Оценивает масштаб убытка: 10% от премии | «И это ещё оптимистично — при 85% выплат» | Проверка величины подменяет проверку её уместности |\n| Формулирует «не запускать» или «сначала сделать прибыльной» | Государству предлагается отказаться от инструмента охвата на основании метрики, которую оно решать не просило | Умолчание «решение принимается по прибыли» сильнее напечатанного мандата |\n\n**DECOY_SUPPORT (вторым)** — чем наивный путь кажется подкреплённым\n\n* **Счёт верен целиком, до последнего разряда.** Премия, выплаты, комиссия, оклады, прочие затраты, итог — всё сходится и перекрёстно сверяется двумя путями. Придраться не к чему, и именно поэтому кандидат перестаёт искать.\n* **$(80,250,000) — единственная величина в записи, оформленная как вывод.** Скобки, подчёркнутый итог, последняя строка последнего блока. Форма отчётности сама сообщает «здесь ответ».\n* **Убыток крупный и в процентах, и в абсолюте.** 10% премии в минус — величина, которую в коммерческой логике не спишешь на стартовые расходы.\n* **Структура затрат выглядит неисправимой.** 85% выплат — «так устроено страхование»; кандидат читает это как параметр природы, а не как тариф, который назначили.\n* **Наивный вывод формально осторожен.** «Не запускать убыточное» звучит как ответственная позиция и не выглядит ошибкой мышления — он ошибочен не по осторожности, а по адресу.\n\n**SUPPORT (третьим)** — что на самом деле держит верный вывод\n\n* **Мандат стр. 132 — настоящая опора и клиентская.** «Provide a safety net to as many people as possible in the underserved markets» задаёт величину решения. Прибыль в мандате не упомянута ни разу; она не отвергнута, она просто не является критерием.\n* **Охват 9,000,000 домохозяйств — настоящая опора, ПОСТРОЕННАЯ.** 15 домохозяйств на агента в месяц × 12 месяцев × 50,000 агентов. Согласуется с собственным выводом премии в книге, где те же 10×12 и 5×12 умножаются на 50,000.\n* **Знаменатель 88,000,000 — настоящая опора и клиентская.** 55MM аспиреров + 33MM страглеров из экзибита стр. 135; недообслуженные определены самим клиентом. Отсюда 10.2% покрытия в первый же год.\n* **Цена покрытия $8.92 на домохозяйство в год — настоящая опора, ПОСТРОЕННАЯ.** Она переводит убыток из «провала» в «стоимость мандата» и делает его сопоставимым с любой альтернативной программой социальной защиты.\n* **Структура убытка 85% + 10% = 95% премии — настоящая опора и рычаг.** После выплат и комиссии остаётся 5% премии, то есть $39,750,000, против постоянных затрат $120,000,000. Значит убыток настраивается долей выплат и тарифом, а не отменой программы.\n* **«Убыток = провал» — ложная опора.** Величина верна, приложена не туда: у госпрограммы социальной защиты убыток есть бюджетная цена, а не приговор.\n* **«Надо сначала выйти в ноль, потом запускать» — ложная опора.** Выход в ноль за счёт премии требует роста сборов втрое, до $2.4B, чего 50,000 агентов физически не сделают; путь в ноль лежит только через долю выплат 74.9%, то есть через **сокращение покрытия** — прямое противоречие мандату.\n* **Доля рынка 12.85% (стр. 136) — исключена как опора.** Её знаменатель — битая сумма «Total Market Size» со стр. 134; в записи её нет и в аргументации быть не должно.",
+    "decoy": "* **Счёт верен целиком, до последнего разряда.** Премия, выплаты, комиссия, оклады, прочие затраты, итог — всё сходится и перекрёстно сверяется двумя путями. Придраться не к чему, и именно поэтому кандидат перестаёт искать.\n* **$(80,250,000) — единственная величина в записи, оформленная как вывод.** Скобки, подчёркнутый итог, последняя строка последнего блока. Форма отчётности сама сообщает «здесь ответ».\n* **Убыток крупный и в процентах, и в абсолюте.** 10% премии в минус — величина, которую в коммерческой логике не спишешь на стартовые расходы.\n* **Структура затрат выглядит неисправимой.** 85% выплат — «так устроено страхование»; кандидат читает это как параметр природы, а не как тариф, который назначили.\n* **Наивный вывод формально осторожен.** «Не запускать убыточное» звучит как ответственная позиция и не выглядит ошибкой мышления — он ошибочен не по осторожности, а по адресу.\n\n**SUPPORT (третьим)** — что на самом деле держит верный вывод\n\n* **Мандат стр. 132 — настоящая опора и клиентская.** «Provide a safety net to as many people as possible in the underserved markets» задаёт величину решения. Прибыль в мандате не упомянута ни разу; она не отвергнута, она просто не является критерием.\n* **Охват 9,000,000 домохозяйств — настоящая опора, ПОСТРОЕННАЯ.** 15 домохозяйств на агента в месяц × 12 месяцев × 50,000 агентов. Согласуется с собственным выводом премии в книге, где те же 10×12 и 5×12 умножаются на 50,000.\n* **Знаменатель 88,000,000 — настоящая опора и клиентская.** 55MM аспиреров + 33MM страглеров из экзибита стр. 135; недообслуженные определены самим клиентом. Отсюда 10.2% покрытия в первый же год.\n* **Цена покрытия $8.92 на домохозяйство в год — настоящая опора, ПОСТРОЕННАЯ.** Она переводит убыток из «провала» в «стоимость мандата» и делает его сопоставимым с любой альтернативной программой социальной защиты.\n* **Структура убытка 85% + 10% = 95% премии — настоящая опора и рычаг.** После выплат и комиссии остаётся 5% премии, то есть $39,750,000, против постоянных затрат $120,000,000. Значит убыток настраивается долей выплат и тарифом, а не отменой программы.\n* **«Убыток = провал» — ложная опора.** Величина верна, приложена не туда: у госпрограммы социальной защиты убыток есть бюджетная цена, а не приговор.\n* **«Надо сначала выйти в ноль, потом запускать» — ложная опора.** Выход в ноль за счёт премии требует роста сборов втрое, до $2.4B, чего 50,000 агентов физически не сделают; путь в ноль лежит только через долю выплат 74.9%, то есть через **сокращение покрытия** — прямое противоречие мандату.\n* **Доля рынка 12.85% (стр. 136) — исключена как опора.** Её знаменатель — битая сумма «Total Market Size» со стр. 134; в записи её нет и в аргументации быть не должно.",
+    "support": "* **Мандат стр. 132 — настоящая опора и клиентская.** «Provide a safety net to as many people as possible in the underserved markets» задаёт величину решения. Прибыль в мандате не упомянута ни разу; она не отвергнута, она просто не является критерием.\n* **Охват 9,000,000 домохозяйств — настоящая опора, ПОСТРОЕННАЯ.** 15 домохозяйств на агента в месяц × 12 месяцев × 50,000 агентов. Согласуется с собственным выводом премии в книге, где те же 10×12 и 5×12 умножаются на 50,000.\n* **Знаменатель 88,000,000 — настоящая опора и клиентская.** 55MM аспиреров + 33MM страглеров из экзибита стр. 135; недообслуженные определены самим клиентом. Отсюда 10.2% покрытия в первый же год.\n* **Цена покрытия $8.92 на домохозяйство в год — настоящая опора, ПОСТРОЕННАЯ.** Она переводит убыток из «провала» в «стоимость мандата» и делает его сопоставимым с любой альтернативной программой социальной защиты.\n* **Структура убытка 85% + 10% = 95% премии — настоящая опора и рычаг.** После выплат и комиссии остаётся 5% премии, то есть $39,750,000, против постоянных затрат $120,000,000. Значит убыток настраивается долей выплат и тарифом, а не отменой программы.\n* **«Убыток = провал» — ложная опора.** Величина верна, приложена не туда: у госпрограммы социальной защиты убыток есть бюджетная цена, а не приговор.\n* **«Надо сначала выйти в ноль, потом запускать» — ложная опора.** Выход в ноль за счёт премии требует роста сборов втрое, до $2.4B, чего 50,000 агентов физически не сделают; путь в ноль лежит только через долю выплат 74.9%, то есть через **сокращение покрытия** — прямое противоречие мандату.\n* **Доля рынка 12.85% (стр. 136) — исключена как опора.** Её знаменатель — битая сумма «Total Market Size» со стр. 134; в записи её нет и в аргументации быть не должно.",
+    "risks": "* **Внутренний.** Убыток $(80,250,000) первого года — не разовый: он структурен, поскольку 95% премии уходит до постоянных затрат в $120,000,000. Без явного бюджетного лимита программа расширяется линейно вместе с сетью, и каждое следующее отделение добавляет $2,400 в год постоянных затрат при 5% маржи на премию.\n* **Внешний / поведенческий.** Доля выплат 85% задана как предпосылка, а не измерена. У страглеров с доходом $2,000 и тратами 2.0% дохода фактическая заявляемость может оказаться выше, и каждый процентный пункт сверх 85% стоит $7,950,000 в год — то есть 10% нынешнего убытка.\n* **Внешний / исполнительский.** Охват 9,000,000 держится на предпосылке, что каждый из 50,000 агентов закрывает ровно 15 домохозяйств в месяц. Недобор производительности на треть снимает 3,000,000 домохозяйств и уводит покрытие с 10.2% к 6.8%, при этом постоянные затраты в $120,000,000 не двигаются вовсе.",
+    "next": "1. До запуска зафиксировать с государством числовую цель охвата на первый год и потолок бюджетной субсидии на домохозяйство. **Снимает неопределённость:** мандат «as many as possible» не имеет числовой планки, и без неё $8.92 не с чем сравнивать.\n2. За квартал пилотировать доли выплат в диапазоне между 85% и 74.9% на ограниченной группе отделений. **Снимает неопределённость:** является ли 85% измеренной величиной или назначенной предпосылкой, и сколько покрытия стоит каждый шаг тарифа.\n3. За первый квартал замерить фактическую производительность агента против 15 домохозяйств в месяц. **Снимает неопределённость:** держится ли числитель охвата, от которого зависят и 10.2%, и $8.92.",
+    "build": "```python\nfrom decimal import Decimal as D, ROUND_HALF_UP\n\n# --- входы, все из книги (Wharton 2017, стр. 132, 135, 136, 137) ---\nbranches_total = D(\"150000\")           # стр. 136\nserviceable    = branches_total / D(\"3\")\nagents         = serviceable\nasp_per_month  = D(\"10\")               # стр. 136\nstr_per_month  = D(\"5\")                # стр. 136\nmonths         = D(\"12\")\nasp_income, asp_pct = D(\"7500\"), D(\"0.015\")   # стр. 134-135\nstr_income, str_pct = D(\"2000\"), D(\"0.020\")   # стр. 134-135\nasp_households = D(\"55000000\")         # стр. 135, клиентский экзибит\nstr_households = D(\"33000000\")         # стр. 135, клиентский экзибит\nclaims_ratio, commission_ratio = D(\"0.85\"), D(\"0.10\")   # стр. 137\nagent_salary_pm, branch_other_pm = D(\"100\"), D(\"100\")   # стр. 137\n\nassert serviceable == D(\"50000\")       # книга: 50,000\n\n# --- сверка книжных строк ---\nprem_asp = asp_per_month * months * asp_income * asp_pct * agents\nprem_str = str_per_month * months * str_income * str_pct * agents\npremium  = prem_asp + prem_str\nassert prem_asp == D(\"675000000\")      # книга: 675,000,000\nassert prem_str == D(\"120000000\")      # книга: 120,000,000\nassert premium  == D(\"795000000\")      # книга: 795,000,000\n\nclaims     = premium * claims_ratio\ncommission = premium * commission_ratio\nsalaries   = agent_salary_pm  * months * agents\nother      = branch_other_pm  * months * agents\ntotal_cost = claims + commission + salaries + other\nresult     = premium - total_cost\nassert claims     == D(\"675750000\")    # книга: 675,750,000\nassert commission == D(\"79500000\")     # книга: 79,500,000\nassert salaries   == D(\"60000000\")     # книга: 60,000,000\nassert other      == D(\"60000000\")     # книга: 60,000,000\nassert total_cost == D(\"875250000\")    # книга: 875,250,000\nassert result     == D(\"-80250000\")    # книга: (80,250,000)\n\n# перекрёстная сверка того же итога другим путём\ncontribution = premium * (D(\"1\") - claims_ratio - commission_ratio)   # 5% премии\nfixed        = salaries + other\nassert contribution == D(\"39750000\")\nassert fixed        == D(\"120000000\")\nassert contribution - fixed == result\n\n# ПОСТРОЕНО, книга не печатает: охват первого года\nhouseholds_covered = (asp_per_month + str_per_month) * months * agents\nassert households_covered == D(\"9000000\")\n\nunderserved = asp_households + str_households\nassert underserved == D(\"88000000\")\ncoverage = (households_covered / underserved * D(\"100\")).quantize(D(\"0.1\"), ROUND_HALF_UP)\nassert coverage == D(\"10.2\")           # 10.2% недообслуженных в первый год\n\n# ПОСТРОЕНО, книга не печатает: цена охвата\ncost_per_household = ((-result) / households_covered).quantize(D(\"0.01\"), ROUND_HALF_UP)\nassert cost_per_household == D(\"8.92\")\n\n# ПОСТРОЕНО, книга не печатает: где рычаг\n# (а) доля выплат, при которой схема выходит в ноль на нынешней премии\nbe_claims = ((premium - commission - fixed) / premium * D(\"100\")).quantize(D(\"0.1\"), ROUND_HALF_UP)\nassert be_claims == D(\"74.9\")\n# (б) премия, при которой 5% покрывают постоянные затраты\nbe_premium = fixed / (D(\"1\") - claims_ratio - commission_ratio)\nassert be_premium == D(\"2400000000\")   # втрое больше нынешней — путь нереализуем\n# (в) чувствительность к доле выплат\nassert premium * D(\"0.01\") == D(\"7950000\")\n\n# ОШИБКА КНИГИ, стр. 134 — проверка, зафиксированная и НЕ вынесенная в запись:\nasp_market = asp_income * asp_households * asp_pct\nstr_market = str_income * str_households * str_pct\nassert asp_market == D(\"6187500000\")\nassert str_market == D(\"1320000000\")\nassert asp_market + str_market == D(\"7507500000\")\nassert D(\"6187501320\") != asp_market + str_market   # книга напечатала 6,187,501,320\n# => ни 6,187,501,320, ни производная от неё доля 12.85% в слоте не используются\n```\n\n**Провоцируемая ошибка** — кандидат проверяет арифметику, находит её безупречной и принимает это за проверку всего решения, вынося вердикт по прибыли в задаче, где клиент дословно попросил решать по охвату.\n# ПАРТИЯ 6 СИНТЕЗА — ТЕЛА C (SY-038, SY-039)\n\nКнига обоих слотов: `6.-Wharton-Casebook-2017.pdf`. Оба слота CLEAN (`○`).\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: 9,000,000 домохозяйств охвата = 10.2% от 88,000,000 недообслуженных, при цене государству $8.92 на домохозяйство в год; (3) the naive reading is rejected explicitly, not merely avoided — $(80,250,000) первого года must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: 9,000,000 домохозяйств охвата = 10.2% от 88,000,000 недообслуженных, при цене государству $8.92 на домохозяйство в год; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — $(80,250,000) первого года обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "**[1] Verdict.** The government should launch the postal insurance scheme and fund the first-year shortfall as the price of coverage, while pilot-testing the claims ratio to bring that price down.\n\n**[2] Metric & evidence.** I judged this on the metric the government set — a safety net for as many people as possible in the underserved markets — not on profit: the scheme reaches 9,000,000 of the 88,000,000 underserved households in year one, or 10.2%, at a cost to government of $80.25M, which is $8.92 per household covered per year. The loss is a tunable parameter, not a verdict: 85% claims plus 10% commission consume 95% of the $795M premium before a single fixed cost, leaving $39.75M against $120M of fixed costs — so the lever is the claims ratio and the tariff, and cancelling the programme is the one action that trades the mandate away entirely."
+   },
+   "anchor_metric": "ЕСТЬ, клиентский блок: мандат задаёт величину, по которой решают, — охват, а не прибыль. Это критерий выбора метрики, а не числовая планка"
+  },
+  {
+   "id": "SY-038",
+   "title": "Three Months to the Shelf",
+   "company": "",
+   "industry": "",
+   "difficulty": "Hard",
+   "clean": true,
+   "focus": "",
+   "scaffold": "L1",
+   "time": "5 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "A U.S. shoe manufacturer that today produces its entire line domestically asked us whether to offshore, where to, and in what proportion. A team has already run the comparison against a Vietnamese cost-plus manufacturer and left the working note below, ending in a recommended split. You are reviewing that note before it goes to the client. Does the recommended split stand, and on exactly what does it stand?",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**Working note — sourcing split, U.S. shoe manufacturer.** Two lines were costed side by side. No capex on either line: domestic capital is sunk, the Vietnam arrangement is cost-plus.",
+       "**Line A — domestic.**",
+       "Retail revenue per pair: $200. Our per-unit model carries COGS, direct labour, SG&A, transportation, quality and retail margin. Transportation runs at 4% of retail; retail margin at 10%; the quality line is set at a **1% defect rate**; there is **no tariff line** on this side. Model output: **$10 profit per pair**. Order-to-delivery lead time: **one month**.",
+       "**Line B — Vietnam.**",
+       "Retail revenue per pair: $200 — same shelf, same price. The model carries the same six headings plus tariffs. Transportation runs at 10% of retail; retail margin at 10%; the quality line is set at a **5% defect rate**; the **tariff line is 10%**. COGS and direct labour are the two headings where this line is materially cheaper — that is where the advantage comes from. Model output: **$15 profit per pair**. Order-to-delivery lead time: **three months**.",
+       "**From two lines to one split.**",
+       "A per-unit comparison alone would put everything on Line B. It does not price the longer lead time. We therefore added average demand per period, the standard deviation of demand per period, and holding cost per period, and applied:",
+       "Offshored fraction = 1 − δ · √( h / (2 μ Δc) )",
+       "δ = standard deviation of demand per period = 20",
+       "μ = average demand per period = 1,000",
+       "h = holding cost per unit per period = $1",
+       "Δc = offshore cost advantage per unit = $5",
+       "**Recommendation on the page: manufacture 80% of the line in Vietnam and 20% domestically.**",
+       "**Background carried from the kickoff.** The client also manufactures some apparel. It sells into developed markets only — North America, Europe, Australia. Most of its competitors do not offshore at all, citing manufacturing and managerial complexity. In this industry lower-quality footwear is typically made in China, Southeast Asia and Central America, higher-quality footwear in Eastern Europe.",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|\n| Видит «5% против 1%» — самый крупный относительный разрыв на странице — и берёт его как ещё не вычтенный минус | «Брак съедает $5 разрыва» → преимущество Вьетнама обнуляется | Возразить самой яркой асимметрией; крупный кратный разрыв читается как непосчитанный |\n| Видит `Tariffs 10%` против пустой клетки и трактует пустую клетку как «статьи нет», а не «нуль внутри модели» | «10% от $200 = $20 сверху, Вьетнам в минусе» | Пустая ячейка = «не считали»; асимметричная статья = «забыли» |\n| Видит срок 3 мес. против 1 мес. в другой ветви стенограммы, оторванный от формулы | «Оборотный капитал на два лишних месяца убивает $5» → «не офшорить вовсе» | Некалькулированный минус кажется бесконечным; отсутствие цены читается как большая цена |\n| Складывает три возражения | Вердикт m-3q: срезать долю Вьетнама вплоть до нуля, запись не держится | Складывать возражения, ни одно из которых не оценено в деньгах |",
+    "decoy": "1. Порядок в записи: прибыль ($10/$15) названа **до** перечисления статей — читается как «прибыль посчитали, а вот что забыли».\n2. Строки `Quality` и `Tariffs` — единственные две, где линии не просто различаются, а различаются **качественно** (кратно / есть-нет); глаз садится на них первым.\n3. Срок поставки физически стоит в другой ветви и вне формулы в момент первого чтения — выглядит как висящее обязательство.\n4. Фоновая строка «большинство конкурентов не офшорит из-за производственной и управленческой сложности» звучит как независимое подтверждение «офшор дороже, чем кажется». Это подпорка **ложная**: она про сложность управления, а не про цену пары, и никакой величины за ней не стоит.\n5. Пятикратный разрыв брака легко переводится в деньги неверно: 5% × $200 = $10 — ровно домашняя прибыль. Совпадение красивое и потому убедительное.\n\n**SUPPORT (третьим)** — что на самом деле держит вывод\n\n| Соблазн | Чем снят (напечатанная величина) | Страница и блок | Опора настоящая или ложная |\n|---|---|---|---|\n| «Забыли качество» | Строка `Quality 1% / 5%` стоит **внутри** перечня статей, из которых получены $10 и $15; брак уже вычтен один раз | стр. 37, блок `Unit Profitability`, таблица «Give the interviewee the below data» — **клиентские данные** | настоящая |\n| «Забыли пошлины» | Строка `Tariffs NA / 10%` — в том же перечне и той же таблице; пустая клетка означает нулевую ставку внутри модели, а не отсутствие расчёта | стр. 37, тот же блок | настоящая |\n| «Три месяца срока убивают выгоду» | Срок и разброс спроса **уже оценены**: h, μ, δ и Δc = $5 вставлены в печатную формулу, которая даёт 1 − 0.2 = **0.8**. Срок сдвигает ответ со 100% на 80%, а не на ноль | стр. 39 (сроки, блок `Total Landed Cost`) + стр. 40 (формула и входы, блок `Total Landed Cost Conclusion`, «Give the interviewee the below equation and inputs») | настоящая |\n| «Разрыв $5 сам по себе слишком мал, чтобы что-то решать» | Δc = $5 — это не валовая экономия, а **чистый** разрыв прибыли после брака, пошлин и транспорта; он и стоит правым множителем формулы | стр. 40, тот же блок | настоящая |\n| «Конкуренты не офшорят — значит, экономика хуже, чем в модели» | ничем не снимается величиной и ничего не подтверждает: это качественная реплика про управленческую сложность | стр. 36, блок `Sample Clarifying Questions and Answers` | **ложная опора соблазна**, не опора вывода |\n\n**Честное слабое место — назвать вслух.** Вывод 80/20 живёт на двух входах, которые в кейсе даны как **статичные точки**, а не как тренды: σ спроса (δ = 20) и стоимость хранения (h = $1). Формула устроена так, что доля офшора падает при росте любого из них: при δ = 40 доля стала бы 1 − 0.4 = 60%, при h = $4 — 1 − 20·√(4/10000) = 60%. То есть сломать вывод действительно можно — но **ни рост σ, ни рост стоимости хранения в кейсе как происходящие не напечатаны ни в одном блоке**. Возражение «а если волатильность вырастет» правомерно как риск и неправомерно как основание переворота: под ним нет величины. Именно поэтому оно уходит в раздел рисков, а не в вердикт.",
+    "support": "| Соблазн | Чем снят (напечатанная величина) | Страница и блок | Опора настоящая или ложная |\n|---|---|---|---|\n| «Забыли качество» | Строка `Quality 1% / 5%` стоит **внутри** перечня статей, из которых получены $10 и $15; брак уже вычтен один раз | стр. 37, блок `Unit Profitability`, таблица «Give the interviewee the below data» — **клиентские данные** | настоящая |\n| «Забыли пошлины» | Строка `Tariffs NA / 10%` — в том же перечне и той же таблице; пустая клетка означает нулевую ставку внутри модели, а не отсутствие расчёта | стр. 37, тот же блок | настоящая |\n| «Три месяца срока убивают выгоду» | Срок и разброс спроса **уже оценены**: h, μ, δ и Δc = $5 вставлены в печатную формулу, которая даёт 1 − 0.2 = **0.8**. Срок сдвигает ответ со 100% на 80%, а не на ноль | стр. 39 (сроки, блок `Total Landed Cost`) + стр. 40 (формула и входы, блок `Total Landed Cost Conclusion`, «Give the interviewee the below equation and inputs») | настоящая |\n| «Разрыв $5 сам по себе слишком мал, чтобы что-то решать» | Δc = $5 — это не валовая экономия, а **чистый** разрыв прибыли после брака, пошлин и транспорта; он и стоит правым множителем формулы | стр. 40, тот же блок | настоящая |\n| «Конкуренты не офшорят — значит, экономика хуже, чем в модели» | ничем не снимается величиной и ничего не подтверждает: это качественная реплика про управленческую сложность | стр. 36, блок `Sample Clarifying Questions and Answers` | **ложная опора соблазна**, не опора вывода |\n\n**Честное слабое место — назвать вслух.** Вывод 80/20 живёт на двух входах, которые в кейсе даны как **статичные точки**, а не как тренды: σ спроса (δ = 20) и стоимость хранения (h = $1). Формула устроена так, что доля офшора падает при росте любого из них: при δ = 40 доля стала бы 1 − 0.4 = 60%, при h = $4 — 1 − 20·√(4/10000) = 60%. То есть сломать вывод действительно можно — но **ни рост σ, ни рост стоимости хранения в кейсе как происходящие не напечатаны ни в одном блоке**. Возражение «а если волатильность вырастет» правомерно как риск и неправомерно как основание переворота: под ним нет величины. Именно поэтому оно уходит в раздел рисков, а не в вердикт.",
+    "risks": "1. **Внутренний.** Разрыв прибыли $5 на пару — это 33% прибыли вьетнамской линии; любое ухудшение брака сверх напечатанных 5% срезает Δc и тянет долю офшора вниз по той же формуле (при Δc = $3 доля = 1 − 20·√(1/6000) ≈ 74%). Контроль качества у подрядчика — единственная статья, где клиент теряет управление, отдав производство на cost-plus.\n2. **Внешний / регуляторный.** Пошлина 10% от $200 = $20 на пару стоит внутри модели как **фиксированная** ставка. Это единственная статья, которую меняет не клиент и не подрядчик, а третья сторона; её сдвиг вверх бьёт по Δc напрямую, а транспорт (10% против домашних 4%) добавляет вторую макро-чувствительную статью на ту же линию.",
+    "next": "1. Запросить у подрядчика фактический ряд брака помесячно за последние 12 месяцев — снимает неопределённость по единственному входу, который держит Δc и который в записи дан одной точкой (5%).\n2. Построить δ и h по фактическим отгрузкам и складским остаткам за 12 месяцев вместо точечных 20 и $1 — снимает неопределённость по обоим входам, при росте которых доля офшора обязана уменьшиться; заодно даёт границу, ниже которой 80% перестаёт быть верным.\n3. Зафиксировать в контракте cost-plus пошлинную оговорку — снимает неопределённость по единственной статье, которой не управляет ни одна из сторон сделки.\n\n**ЭТАЛОННЫЙ ОТВЕТ ПО ПОЛЯМ (EN)** — L1, одно свободное поле\nThe recommendation stands: the client should manufacture 80% of the line in Vietnam and 20% domestically, and I would send the note as written. It stands on three printed things. First, the two objections a reader reaches for are already paid for inside the note: the quality line is carried at 1% domestic against 5% Vietnam, and the tariff line at none against 10%, and both sit inside the model that produced $10 against $15 — so the $5 gap is already net of them and must not be charged twice. Second, the three-month lead time is priced, not ignored: with δ of 20, μ of 1,000, holding cost of $1 and a $5 unit advantage, the formula returns 1 minus 0.2, which is 0.8 — lead time moves the answer from 100% offshore to 80%, not to zero. Third, the 20% kept at home is not a hedge against those objections; it is the hedge against the demand tail, which is exactly what the standard deviation term buys. The honest exposure is that δ and h are single points in this analysis, and the split falls with either of them — at double the volatility the split is 60/40 — but nothing in the data shows either rising, so that belongs in risk, not in the verdict. I would confirm the contractor's actual monthly defect series and rebuild δ and h from twelve months of shipments and stock before the split is signed.",
+    "build": "```python\nfrom decimal import Decimal, ROUND_HALF_UP, getcontext\ngetcontext().prec = 28\n\n# ВСЕ входы напечатаны в книге, стр. 40, блок Total Landed Cost Conclusion\ndelta = Decimal(\"20\")      # σ спроса / период\nmu    = Decimal(\"1000\")    # средний спрос / период\nh     = Decimal(\"1\")       # стоимость хранения / ед. / период, $\np_us  = Decimal(\"10\")      # прибыль/пара, домашняя линия, стр. 37\np_vn  = Decimal(\"15\")      # прибыль/пара, вьетнамская линия, стр. 37\n\n# ПОСТРОЕНО кандидатом: Δc как разрыв двух печатных прибылей\ndc = p_vn - p_us\nassert dc == Decimal(\"5\"), dc          # сверка с печатным Δc = $5, стр. 40\n\ninner = h / (Decimal(\"2\") * mu * dc)   # 1 / 10000\nassert inner == Decimal(\"0.0001\"), inner\nroot  = inner.sqrt()\nassert root == Decimal(\"0.01\"), root\n\nfrac  = (Decimal(\"1\") - delta * root).quantize(Decimal(\"0.01\"), rounding=ROUND_HALF_UP)\nassert frac == Decimal(\"0.80\"), frac   # сверка с печатными 80%, стр. 40\nonshore = (Decimal(\"1\") - frac).quantize(Decimal(\"0.01\"), rounding=ROUND_HALF_UP)\nassert onshore == Decimal(\"0.20\"), onshore\n\n# ПОСТРОЕНО, книга не печатает: чувствительность, нужная для честного слабого места\ndef split(delta_, h_, dc_):\n    return (Decimal(\"1\") - delta_ * (h_ / (Decimal(\"2\") * mu * dc_)).sqrt()\n            ).quantize(Decimal(\"0.01\"), rounding=ROUND_HALF_UP)\n\nassert split(Decimal(\"40\"), h, dc) == Decimal(\"0.60\")   # удвоенная σ\nassert split(delta, Decimal(\"4\"), dc) == Decimal(\"0.60\")# учетверённая h\nassert split(delta, h, Decimal(\"3\")) == Decimal(\"0.74\") # Δc упал до $3\n```\n\n**Провоцируемая ошибка** — вычесть брак и пошлину второй раз, приняв их за неучтённые надбавки поверх разрыва $5, и объявить, что доля офшора должна быть срезана до нуля.\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: 80% Вьетнама, 20% США; (3) the naive reading is rejected explicitly, not merely avoided — 0% Вьетнама (вернуть всё в США / резко срезать долю) must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: 80% Вьетнама, 20% США; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — 0% Вьетнама (вернуть всё в США / резко срезать долю) обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "The recommendation stands: the client should manufacture 80% of the line in Vietnam and 20% domestically, and I would send the note as written. It stands on three printed things. First, the two objections a reader reaches for are already paid for inside the note: the quality line is carried at 1% domestic against 5% Vietnam, and the tariff line at none against 10%, and both sit inside the model that produced $10 against $15 — so the $5 gap is already net of them and must not be charged twice. Second, the three-month lead time is priced, not ignored: with δ of 20, μ of 1,000, holding cost of $1 and a $5 unit advantage, the formula returns 1 minus 0.2, which is 0.8 — lead time moves the answer from 100% offshore to 80%, not to zero. Third, the 20% kept at home is not a hedge against those objections; it is the hedge against the demand tail, which is exactly what the standard deviation term buys. The honest exposure is that δ and h are single points in this analysis, and the split falls with either of them — at double the volatility the split is 60/40 — but nothing in the data shows either rising, so that belongs in risk, not in the verdict. I would confirm the contractor's actual monthly defect series and rebuild δ and h from twelve months of shipments and stock before the split is signed."
+   },
+   "anchor_metric": "клиентского порога нет; решение выносится сопоставлением двух посчитанных линий и величиной сдвига доли, а не сравнением с правилом"
+  },
+  {
+   "id": "SY-039",
+   "title": "Eighty Home Games and an Asking Price",
+   "company": "",
+   "industry": "",
+   "difficulty": "Medium",
+   "clean": true,
+   "focus": "",
+   "scaffold": "L1",
+   "time": "4 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Alpha Capital, a private equity firm, has been approached by the owners of a Major League Baseball team about buying it. A team has already worked the diligence and left the note below, ending in a recommendation. You are reviewing that note before it goes to the deal committee. Does the recommendation stand, and on exactly what does it stand?",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**Diligence note — MLB franchise, Alpha Capital.** The current owners approached Alpha about purchasing the team for **$1.1B**. That number is the only price constraint we were given; on hurdle rates, hold periods and other constraints the fund told us to assume none of these are major issues. This asset would go into a new fund with no hold-period constraints and no previous investments. Fund leadership are avid fans and want the team to be successful. The city owns the stadium and facilities; we pay annual lease costs. Spring training and the farm system are out of scope.",
+       "**Column 1 — the team as it runs today.**",
+       "*Revenue.* 80 home games a year. Standard seats — 45,000 of the 50,000 — run a 55.56% fill rate at $25; premium seats, the other 5,000, run 75% at $100; that is $1,000,000 a game, **$80M** of ticket sales. 20,000 fans a game buy concessions at $25 a head — **$40M**. Merchandise moves 1M items a year at $50, on which the team earns a 20% royalty — **$10M**. Media rights are $40M local plus $80M national — **$120M**. Sponsorships and advertising — **$50M**. **Total revenue $300M.**",
+       "*Costs.* Player salaries $110M. Front office $20M. Sales & advertising $50M. Stadium and facility costs $20M. **Total costs $200M.**",
+       "*Valuation.* Annual EBIT $100M. Taxes: assume zero. **Discount rate 10% — this is the only cost-of-capital figure anywhere in the materials the owners gave us; no second rate was provided for any line.** Standalone valuation on a perpetuity: **$1.0B.**",
+       "**Column 2 — the team under our ownership.**",
+       "*Cost side, against the league benchmark.* Player salaries $110M against a benchmark of $110M. Front office $20M against $20M. Stadium and facility costs $20M against $20M. Sales & advertising $50M against a benchmark of **$40M**.",
+       "*Revenue side.* **Exhibit — Potential Boost to Total Revenues.** Four levers, read off the chart to the nearest whole point, each stated against the topline revenue figure of **$300,000,000**: dynamic ticket pricing **4%**, a renegotiated local media deal **3%**, attracting higher-value sponsors **2%**, revamped concessions offerings **1%**.",
+       "**Recommendation on the page: Alpha should buy the team at the asking price.**",
+       "**Background carried from the kickoff.** There are no other bidders and we have the first shot at the team.",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|\n| Берёт первое законченное число записи — автономную стоимость $1.0B — и ставит рядом цену $1.1B | «Просят на $100M больше, чем стоит» | Сравнить готовое с готовым; законченная колонка выглядит как ответ |\n| Три из четырёх строк бенчмарка равны — читает «синергий по затратам практически нет» | Экономия обесценивается ещё до счёта | Нули читаются как «здесь пусто», а не как «здесь проверено» |\n| Смотрит на ставки 4/3/2/1% и вешает их на «свои» сегменты: 4% на билеты $80M, 3% на медиа $120M, 2% на спонсорство $50M, 1% на концессии $40M | $3.2M + $3.6M + $1.0M + $0.4M ≈ $8.2M синергий вместо $30M; стоимость $1.18B — «впритык, риск не оплачен» | Ставка, названная рядом с рычагом, кажется ставкой на выручку этого рычага |\n| Складывает: цена выше автономной стоимости, экономия нулевая, выручка почти не растёт | Вердикт m-4k: переплата, отказаться от сделки | Останавливаться на первом сравнении, прошедшем через порог |",
+    "decoy": "1. $1.0B и $1.1B — обе круглые, разница читается за секунду и даёт готовый вердикт до конца чтения.\n2. Автономная колонка сведена **до итога**, синергетическая — нет: одна строка затрат и четыре ставки, три операции до сравнимого числа. Асимметрия завершённости толкает довериться завершённому.\n3. Три нуля в бенчмарке визуально доминируют над единственным разрывом.\n4. Каждая ставка названа именем конкретного рычага («dynamic ticket pricing», «renegotiated local media deal»), и имя тянет к сегментной базе сильнее, чем колонка с $300,000,000 — к общей. Это подпорка **ложная**: подпись экзибита говорит `Total`.\n5. Фон «других претендентов нет, у нас право первого выстрела» звучит как «спешить некуда, можно отказаться» — тоже **ложная** опора: отсутствие конкуренции не меняет ни одной величины в счёте.\n\n**SUPPORT (третьим)** — что на самом деле держит вывод\n\n| Соблазн | Чем снят (напечатанная величина) | Страница и блок | Опора настоящая или ложная |\n|---|---|---|---|\n| «Автономная оценка $1.0B ниже цены $1.1B — переплата, отказ» | $40M синергий ($10M затратных + $30M выручечных), капитализированные по 10%, дают +$400M; итог $1.4B против цены $1.1B — запас ≈ $300M | синергии — стр. 127, блок интервьюера `Synergy Analysis`; цена — стр. 122, блок `Prompt`; ставка и автономный счёт — стр. 126, блоки `Information for Interviewee` и `Valuation` | настоящая |\n| «Проценты роста выручки навешены не на ту базу» | Печатная подпись экзибита кандидата — «Potential Boost to **Total** Revenues»; в таблице каждая ставка стоит против колонки «Topline Revenue **$300,000,000**» | подпись — стр. 128, экзибит для кандидата; колонка базы — стр. 127, блок интервьюера | настоящая |\n| «Синергия по затратам занижена, режьте дальше» | Три печатных равенства: зарплаты игроков $110M = $110M, фронт-офис $20M = $20M, стадион $20M = $20M. Зазор ровно один — Sales & Advertising $50M против $40M, то есть $10M, и он в счёте уже стоит | стр. 127, блок интервьюера `Synergy Analysis`; Phillies-стороны тех же строк — стр. 126, `Information for Interviewee`; график — стр. 128 | настоящая |\n| «Порога нет, значит сравнивать не с чем» | Порог есть и он клиентский: «The current team owners approached Alpha about purchasing the team for $1.1B»; сверх него клиент явно снял остальные — «Hurdle rates, hold periods, other constraints → Assume these are not major issues» | стр. 122, блок `Prompt`; стр. 123, блок `Clarifying Questions` | настоящая |\n| «Других претендентов нет — можно торговаться или уйти» | ничем не подтверждается величиной: ни одна строка счёта не меняется | стр. 123, блок `Clarifying Questions` | **ложная опора соблазна** |\n\n**Честное слабое место — назвать вслух.** Самое сильное возражение к записи — не про базу и не про бенчмарк, а про ставку: **синергию нельзя капитализировать в перпетуитет по той же ставке, что базовый EBIT**. Синергия рискованнее базовой прибыли — она требует исполнения, а базовый EBIT уже идёт. Возражение справедливо по существу и **не снимается ни одной величиной**: оно снимается только тем, что в кейсе напечатана ровно одна ставка — 10%, — и второй нет ни в одном блоке. Запись это проговаривает прямо, и именно поэтому оно не переворачивает вердикт: альтернативной ставки не существует, а не «мы её проигнорировали». Порядок величины при этом стоит назвать вслух: даже при 15% на синергетическую часть капитализация даёт $40M / 0.15 ≈ $267M, итог ≈ $1.27B — всё ещё выше $1.1B. Вывод переворачивается только при ставке на синергии выше ≈ 40%, чего в материалах нет.",
+    "support": "| Соблазн | Чем снят (напечатанная величина) | Страница и блок | Опора настоящая или ложная |\n|---|---|---|---|\n| «Автономная оценка $1.0B ниже цены $1.1B — переплата, отказ» | $40M синергий ($10M затратных + $30M выручечных), капитализированные по 10%, дают +$400M; итог $1.4B против цены $1.1B — запас ≈ $300M | синергии — стр. 127, блок интервьюера `Synergy Analysis`; цена — стр. 122, блок `Prompt`; ставка и автономный счёт — стр. 126, блоки `Information for Interviewee` и `Valuation` | настоящая |\n| «Проценты роста выручки навешены не на ту базу» | Печатная подпись экзибита кандидата — «Potential Boost to **Total** Revenues»; в таблице каждая ставка стоит против колонки «Topline Revenue **$300,000,000**» | подпись — стр. 128, экзибит для кандидата; колонка базы — стр. 127, блок интервьюера | настоящая |\n| «Синергия по затратам занижена, режьте дальше» | Три печатных равенства: зарплаты игроков $110M = $110M, фронт-офис $20M = $20M, стадион $20M = $20M. Зазор ровно один — Sales & Advertising $50M против $40M, то есть $10M, и он в счёте уже стоит | стр. 127, блок интервьюера `Synergy Analysis`; Phillies-стороны тех же строк — стр. 126, `Information for Interviewee`; график — стр. 128 | настоящая |\n| «Порога нет, значит сравнивать не с чем» | Порог есть и он клиентский: «The current team owners approached Alpha about purchasing the team for $1.1B»; сверх него клиент явно снял остальные — «Hurdle rates, hold periods, other constraints → Assume these are not major issues» | стр. 122, блок `Prompt`; стр. 123, блок `Clarifying Questions` | настоящая |\n| «Других претендентов нет — можно торговаться или уйти» | ничем не подтверждается величиной: ни одна строка счёта не меняется | стр. 123, блок `Clarifying Questions` | **ложная опора соблазна** |\n\n**Честное слабое место — назвать вслух.** Самое сильное возражение к записи — не про базу и не про бенчмарк, а про ставку: **синергию нельзя капитализировать в перпетуитет по той же ставке, что базовый EBIT**. Синергия рискованнее базовой прибыли — она требует исполнения, а базовый EBIT уже идёт. Возражение справедливо по существу и **не снимается ни одной величиной**: оно снимается только тем, что в кейсе напечатана ровно одна ставка — 10%, — и второй нет ни в одном блоке. Запись это проговаривает прямо, и именно поэтому оно не переворачивает вердикт: альтернативной ставки не существует, а не «мы её проигнорировали». Порядок величины при этом стоит назвать вслух: даже при 15% на синергетическую часть капитализация даёт $40M / 0.15 ≈ $267M, итог ≈ $1.27B — всё ещё выше $1.1B. Вывод переворачивается только при ставке на синергии выше ≈ 40%, чего в материалах нет.",
+    "risks": "1. **Внутренний.** Из $40M синергий $30M — выручечные, то есть неисполненные обещания; они втрое больше единственной затратной экономии ($10M) и стоят на четырёх рычагах, каждый из которых требует переговоров с третьей стороной (медиа, спонсоры, болельщик). Провал выручечной половины срезает стоимость до $1.0B + $10M/0.10 = $1.1B — ровно в цену, весь запас исчезает.\n2. **Внешний.** $120M из $300M выручки, то есть 40%, — медиа-права, и один из четырёх рычагов роста (3%, $9M) — это пересмотр локального медиа-контракта. Стоимость актива и половина плана роста опираются на один внешний рынок; вдобавок стадион принадлежит городу и мы платим аренду, то есть условия эксплуатации главного актива тоже задаёт третья сторона.",
+    "next": "1. До подписания получить от лиги состав бенчмарка по строке Sales & Advertising — снимает неопределённость по единственной строке, где зазор ненулевой и на которой держится вся затратная синергия $10M.\n2. Поставить каждому из четырёх выручечных рычагов срок и владельца и пересчитать стоимость при исполнении только двух из четырёх — снимает неопределённость по $30M, то есть по трём четвертям синергий; граница безубыточности к цене известна заранее: без выручечной части стоимость падает ровно в $1.1B.\n3. Запросить у фонда отдельную требуемую доходность на синергетический денежный поток — снимает единственную неопределённость, которую кейс закрыть не может: в материалах есть одна ставка 10% и второй нет.\n\n**ЭТАЛОННЫЙ ОТВЕТ ПО ПОЛЯМ (EN)** — L1, одно свободное поле\nThe recommendation stands: Alpha should buy the team at $1.1B, and I would send the note as written. It stands on three printed things. First, the standalone $1.0B is not the number to compare against the price — $10M of cost synergy plus $30M of revenue synergy is $40M, and at the 10% rate that is $400M of value, taking the team to $1.4B against a $1.1B ask, a cushion of roughly $300M. Second, the revenue percentages are on the right base: the exhibit is captioned Potential Boost to Total Revenues and every rate sits against the $300M topline, not against its own segment — reading them segment-by-segment would give about $8M instead of $30M and is simply the wrong read of the page. Third, there is no further cost fat to cut: player salaries match the benchmark at $110M, front office at $20M, stadium at $20M, and the only gap in the whole cost stack is Sales & Advertising at $50M against $40M — that $10M is already in the number. The honest exposure is the discount rate: capitalising synergy in perpetuity at the same 10% as running EBIT flatters it, and this case gives us exactly one rate and no second one — though even at 15% on the synergy leg the team clears $1.27B, still above the ask. Before committee I would get the league's build of the Sales & Advertising benchmark and put an owner and a date on each of the four revenue levers, because if the revenue half fails the valuation lands at exactly $1.1B and the entire cushion is gone.",
+    "build": "```python\nfrom decimal import Decimal, ROUND_HALF_UP, getcontext\ngetcontext().prec = 28\nM = Decimal(\"1000000\")\n\n# --- Выручка, стр. 125, Information for Interviewee (клиентские данные) ---\nstd_seats  = Decimal(\"45000\") * Decimal(\"0.5556\") * Decimal(\"25\")\nprem_seats = Decimal(\"5000\")  * Decimal(\"0.75\")   * Decimal(\"100\")\nper_game   = (std_seats + prem_seats).quantize(Decimal(\"1\"), rounding=ROUND_HALF_UP)\nassert prem_seats == Decimal(\"375000\"), prem_seats\nassert abs(std_seats - Decimal(\"625000\")) <= Decimal(\"100\"), std_seats  # 55.56% ≈ 5/9, допуск\ntickets      = Decimal(\"1000000\") * Decimal(\"80\")            # печатный $1M/игра × 80\nconcessions  = Decimal(\"20000\") * Decimal(\"25\") * Decimal(\"80\")\nmerch        = Decimal(\"1000000\") * Decimal(\"50\") * Decimal(\"0.20\")\nmedia        = Decimal(\"40\") * M + Decimal(\"80\") * M\nsponsorship  = Decimal(\"50\") * M\nrevenue = tickets + concessions + merch + media + sponsorship\nassert tickets     == Decimal(\"80\")  * M, tickets\nassert concessions == Decimal(\"40\")  * M, concessions\nassert merch       == Decimal(\"10\")  * M, merch\nassert media       == Decimal(\"120\") * M, media\nassert revenue     == Decimal(\"300\") * M, revenue\n\n# --- Затраты и автономная стоимость, стр. 126 ---\ncosts = Decimal(\"110\")*M + Decimal(\"20\")*M + Decimal(\"50\")*M + Decimal(\"20\")*M\nassert costs == Decimal(\"200\") * M, costs\nebit = revenue - costs\nassert ebit == Decimal(\"100\") * M, ebit\nrate = Decimal(\"0.10\")                     # единственная ставка в кейсе, стр. 126\nstandalone = ebit / rate\nassert standalone == Decimal(\"1000\") * M, standalone\n\n# --- Синергии, стр. 127 (блок интервьюера) / стр. 128 (графики кандидата) ---\ncost_syn = Decimal(\"50\")*M - Decimal(\"40\")*M               # единственный ненулевой зазор\nassert cost_syn == Decimal(\"10\") * M, cost_syn\nfor phillies, bench in ((Decimal(\"110\"), Decimal(\"110\")),\n                        (Decimal(\"20\"),  Decimal(\"20\")),\n                        (Decimal(\"20\"),  Decimal(\"20\"))):\n    assert phillies - bench == 0                            # три печатных равенства\n\nrates = [Decimal(\"0.04\"), Decimal(\"0.03\"), Decimal(\"0.02\"), Decimal(\"0.01\")]\nrev_syn = sum((r * revenue for r in rates), Decimal(\"0\"))   # база — TOTAL revenue\nassert rev_syn == Decimal(\"30\") * M, rev_syn\n\ntotal_syn = cost_syn + rev_syn\nassert total_syn == Decimal(\"40\") * M, total_syn\nuplift = total_syn / rate\nassert uplift == Decimal(\"400\") * M, uplift\nvaluation = standalone + uplift\nassert valuation == Decimal(\"1400\") * M, valuation\n\nprice = Decimal(\"1100\") * M                                 # стр. 122, блок Prompt\ncushion = valuation - price\nassert cushion == Decimal(\"300\") * M, cushion\nassert valuation > price                                    # вердикт m-9d\n\n# --- ПОСТРОЕНО, книга не печатает: наивная сегментная база (соблазн 2) ---\nnaive_syn = (Decimal(\"0.04\")*tickets + Decimal(\"0.03\")*media\n             + Decimal(\"0.02\")*sponsorship + Decimal(\"0.01\")*concessions)\nassert naive_syn == Decimal(\"8200000\"), naive_syn           # $8.2M вместо $30M\n\n# --- ПОСТРОЕНО, книга не печатает: два порога честного слабого места ---\nval_15 = (standalone + total_syn / Decimal(\"0.15\")).quantize(Decimal(\"1E+6\"), rounding=ROUND_HALF_UP)\nassert val_15 == Decimal(\"1267\") * M, val_15                # ≈ $1.27B, всё ещё выше цены\nno_rev  = standalone + cost_syn / rate\nassert no_rev == price, no_rev                              # без выручечной части — ровно в цену\n```\n\n**Провоцируемая ошибка** — сравнить автономную стоимость $1.0B с ценой $1.1B и объявить переплату, не доведя $40M синергий до $400M прироста.\n# ПАРТИЯ 6 — ТЕЛО D"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: $1.4B > $1.1B → покупать (запас $0.3B); (3) the naive reading is rejected explicitly, not merely avoided — $1.0B < $1.1B → не покупать (недобор $0.1B) must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: $1.4B > $1.1B → покупать (запас $0.3B); (3) наивное прочтение отвергнуто вслух, а не просто обойдено — $1.0B < $1.1B → не покупать (недобор $0.1B) обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "The recommendation stands: Alpha should buy the team at $1.1B, and I would send the note as written. It stands on three printed things. First, the standalone $1.0B is not the number to compare against the price — $10M of cost synergy plus $30M of revenue synergy is $40M, and at the 10% rate that is $400M of value, taking the team to $1.4B against a $1.1B ask, a cushion of roughly $300M. Second, the revenue percentages are on the right base: the exhibit is captioned Potential Boost to Total Revenues and every rate sits against the $300M topline, not against its own segment — reading them segment-by-segment would give about $8M instead of $30M and is simply the wrong read of the page. Third, there is no further cost fat to cut: player salaries match the benchmark at $110M, front office at $20M, stadium at $20M, and the only gap in the whole cost stack is Sales & Advertising at $50M against $40M — that $10M is already in the number. The honest exposure is the discount rate: capitalising synergy in perpetuity at the same 10% as running EBIT flatters it, and this case gives us exactly one rate and no second one — though even at 15% on the synergy leg the team clears $1.27B, still above the ask. Before committee I would get the league's build of the Sales & Advertising benchmark and put an owner and a date on each of the four revenue levers, because if the revenue half fails the valuation lands at exactly $1.1B and the entire cushion is gone."
+   },
+   "anchor_metric": "есть, клиентский"
+  },
+  {
+   "id": "SY-040",
+   "title": "Two Semis, Sixty Thousand Miles",
+   "company": "",
+   "industry": "",
+   "difficulty": "Easy",
+   "clean": true,
+   "focus": "",
+   "scaffold": "L1",
+   "time": "3 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "National Logistics is a large freight carrier that has been squeezed by five years of rising driver wages and is now looking to cut operating cost per truck. A colleague on the team started working the two semi options the client is considering — a standard diesel tractor and a hybrid — but was pulled off and left his note unfinished. You have three minutes with it and the client's exhibit, and no new data. Finish the comparison he broke off: what should National Logistics do, and on what does your verdict rest?",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**WORKING NOTE — fleet replacement options, National Logistics**",
+       "*Prepared by an associate on the team. Figures per semi, supplied by the client.*",
+       "Client ask, as recorded: bring down operating cost per truck. Management has set **no cost or profitability target** — they want improvement from the current state.",
+       "**Exhibit 1 — cost of operating each semi.**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Financial metric",
+       "Standard truck",
+       "Hybrid truck"
+      ],
+      "rows": [
+       [
+        "Purchase price",
+        "$100,000",
+        "$150,000"
+       ],
+       [
+        "Maintenance / yr.",
+        "$5,000",
+        "$8,000"
+       ],
+       [
+        "Insurance / yr.",
+        "$2,000",
+        "$3,000"
+       ],
+       [
+        "Avg. miles driven / yr.",
+        "60,000",
+        "60,000"
+       ],
+       [
+        "MPG",
+        "10",
+        "20"
+       ],
+       [
+        "Vehicle lifespan",
+        "10 years",
+        "10 years"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "*National Express pays an average $3.00 per gallon for fuel.*",
+       "Trucks are depreciated straight-line over their lifespan; all trucks carry a $0 salvage value at the end of that life.",
+       "**Where I got to — fuel line only**",
+       "- Standard: 60,000 miles / 10 MPG = 6,000 gallons → 6,000 × $3.00 = **$18,000 / yr.**",
+       "- Hybrid: 60,000 miles / 20 MPG = 3,000 gallons → 3,000 × $3.00 = **$9,000 / yr.**",
+       "- Gap on this line = **$9,000 per truck per year**, in the hybrid's favour.",
+       "**Associate's handover:** \"That is one line and I would not read it as a saving yet — what the client is choosing between is the cost of *owning* each truck for a year, and I have not put the other rows of the exhibit into annual terms. Someone needs to finish this before we say anything to the client. Two people on the team have already told me $9,000 a year across the fleet settles it, and I don't think a single row settles anything. I ran out of time here —\"",
+       "*[the note ends mid-sentence]*",
+       "**Kickoff context carried over.** National Logistics is a large transportation and logistics company. It delivers freight to all areas of North America. Wages have risen over the last five years on a nationwide shortage of truckers; the entire transportation industry is feeling the same wage pressure. Revenue has been rising steadily over the last five years and is capped only by the lack of drivers to fulfil deliveries; the company runs at full capacity. Steadily rising fuel prices have also been hampering the company's profits. The hybrid tractors run on both batteries and diesel fuel.",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| # | Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|---|\n| 1 | Видит, что заметка оборвана, и начинает не с достройки, а с оценки того, что уже есть | Внимание уходит на единственную доведённую строку — топливо | «работать с тем, что на странице, а не с тем, чего на ней нет» |\n| 2 | Проверяет арифметику этой строки, находит её верной | 60,000 / 10 = 6,000 и 60,000 / 20 = 3,000, обе × $3.00 — сходится | «арифметика верна ⇒ направление верно» |\n| 3 | Читает 10 MPG против 20 MPG как «вдвое эффективнее» | Ощущение крупного, структурного преимущества | «кратность крупнее приращения» |\n| 4 | Оговорку коллеги слышит как осторожность человека, а не как содержание | «он просто не успел и подстраховался» | «хеджирование можно перешагнуть, если сам уверен» |\n| 5 | Разницу в цене покупки $100K против $150K мысленно относит к разовым тратам | $50,000 выпадают из годового счёта, достраивать «нечего» | «капитал — не операционные затраты» |\n| 6 | Строки обслуживания и страхования видит, но не сводит: они мелкие рядом с $9,000 | +$4,000/год теряются | «мелкое не меняет крупного» |\n| 7 | Подхватывает записанный контекст «fuel prices are still climbing» как усиление | Соблазн кажется тем более надёжным | «тренд подтверждает картинку» |\n| 8 | Выдаёт вердикт: заметка перестраховывается, гибрид дешевле, $9,000 на тягач в год | **m-4k** | — |\n\n**DECOY_SUPPORT (вторым)** — чем наивный путь кажется подкреплённым\n* Топливная арифметика в записи **действительно верна** — она сходится со стр. 53 до доллара. Опора настоящая по расчёту, но ложная по охвату: она отвечает на вопрос «сколько мы экономим на топливе», а не «сколько стоит владение».\n* Оговорка коллеги ничем в записи не подкреплена: он **не называет ни одной** компенсирующей статьи и обрывается на полуслове. Опора соблазна настоящая как наблюдение — предупреждение действительно голое — и ложная как основание: голым оно является ровно потому, что счёт не доведён, а не потому, что доводить нечего. Строки, которые его подтверждают, лежат в том же экзибите на виду.\n* Двое в команде уже сказали, что $9,000 решают дело. Опора ложная: в записи это мнение без счёта, и повторяется оно как раз в той форме, в какой соблазн приходит самому кандидату.\n* Кратность 20 MPG против 10 MPG напечатана в клиентском экзибите — опора настоящая, но не решающая: удвоение эффективности при равном пробеге даёт ровно 3,000 галлонов, то есть $9,000, и не больше.\n* Строка «steadily rising fuel prices have also been hampering the company's profits» (стр. 49, `Clarifying Information`) — опора настоящая как факт, **ложная как подтверждение**: она говорит, что цены росли, и **не задаёт ни одной будущей цены**. Никакого ценового пути в кейсе не напечатано.\n* Цель клиента «reduce operational costs» (стр. 49, `PROMPT`) как будто наказывает за отказ от экономии — опора ложная: снижением затрат считается снижение **итога**, а не одной статьи.\n* Разовость покупки $150,000 — опора ложная: клиент прямо сообщает, что амортизирует тягачи прямолинейно до нулевой ликвидационной стоимости, то есть разовая цена **уже разложена** в годовую статью.\n\n**SUPPORT (третьим)** — что на самом деле держит верный вывод\n| Соблазн | Чем снят | Стр. + БЛОК | Опора |\n|---|---|---|---|\n| «Гибрид жжёт вдвое меньше — $9,000 экономии в год; заметка перестраховывается, покупать» | Тремя напечатанными строками, которые съедают экономию **ровно**: амортизация +$5,000 ($150K/10 против $100K/10), обслуживание +$3,000 ($8,000 против $5,000), страхование +$1,000 ($3,000 против $2,000). Итог $35,000 против $35,000 | Строки — стр. 52, `EXHIBIT 1: COST OF OPERATING EACH SEMI` (клиентский экзибит); амортизационное правило — стр. 53, ответ клиента на вопрос о графике амортизации; сведение $35,000 = $35,000 — стр. 53, блок `Answer` | настоящая |\n| «Гибрид служит дольше, амортизацию завысили — на самом деле она ниже» | Напечатанной строкой `Vehicle Lifespan 10 Years / 10 Years` — срок одинаков — и заявленной нулевой ликвидационной стоимостью, которая не даёт вернуть часть капитала в конце | Стр. 52, `EXHIBIT 1`; стр. 53, ответ клиента про straight-line и $0 salvage | настоящая |\n| «Цены на топливо растут — значит гибрид всё равно выиграет» | **Напечатанной величиной не снимается.** В книге есть только качественная строка «steadily rising fuel prices have also been hampering the company's profits» (стр. 49, `Clarifying Information`) — ни будущей цены, ни темпа роста, ни горизонта в кейсе нет | стр. 49, `Clarifying Information` | **опора отсутствует — это честное слабое место, а не опровержение** |\n\n**Честное слабое место, названное вслух.** Ничья держится ровно на печатной цене $3.00 за галлон и на этой цене хрупка: разница в расходе составляет 3,000 галлонов в год, поэтому **каждый устойчивый +$1 за галлон = $3,000 в год в пользу гибрида** (см. `[BUILD]`). Формально при любой устойчивой цене выше $3.00 гибрид дешевле. Кандидат обязан сказать это как **чувствительность, а не как вывод**: направление известно, величина — нет, потому что кейс не печатает ни одного будущего значения цены топлива. Слот, который выдал бы третий соблазн за опровергнутый, соврал бы; слот, который позволил бы им перевернуть вердикт, тоже соврал бы. Верный вердикт: по затратам **ничья**, решение выносится по нефинансовым основаниям, и переворачивает ничью только устойчивый рост цены топлива, величина которого в данных не задана.",
+    "decoy": "* Топливная арифметика в записи **действительно верна** — она сходится со стр. 53 до доллара. Опора настоящая по расчёту, но ложная по охвату: она отвечает на вопрос «сколько мы экономим на топливе», а не «сколько стоит владение».\n* Оговорка коллеги ничем в записи не подкреплена: он **не называет ни одной** компенсирующей статьи и обрывается на полуслове. Опора соблазна настоящая как наблюдение — предупреждение действительно голое — и ложная как основание: голым оно является ровно потому, что счёт не доведён, а не потому, что доводить нечего. Строки, которые его подтверждают, лежат в том же экзибите на виду.\n* Двое в команде уже сказали, что $9,000 решают дело. Опора ложная: в записи это мнение без счёта, и повторяется оно как раз в той форме, в какой соблазн приходит самому кандидату.\n* Кратность 20 MPG против 10 MPG напечатана в клиентском экзибите — опора настоящая, но не решающая: удвоение эффективности при равном пробеге даёт ровно 3,000 галлонов, то есть $9,000, и не больше.\n* Строка «steadily rising fuel prices have also been hampering the company's profits» (стр. 49, `Clarifying Information`) — опора настоящая как факт, **ложная как подтверждение**: она говорит, что цены росли, и **не задаёт ни одной будущей цены**. Никакого ценового пути в кейсе не напечатано.\n* Цель клиента «reduce operational costs» (стр. 49, `PROMPT`) как будто наказывает за отказ от экономии — опора ложная: снижением затрат считается снижение **итога**, а не одной статьи.\n* Разовость покупки $150,000 — опора ложная: клиент прямо сообщает, что амортизирует тягачи прямолинейно до нулевой ликвидационной стоимости, то есть разовая цена **уже разложена** в годовую статью.\n\n**SUPPORT (третьим)** — что на самом деле держит верный вывод\n| Соблазн | Чем снят | Стр. + БЛОК | Опора |\n|---|---|---|---|\n| «Гибрид жжёт вдвое меньше — $9,000 экономии в год; заметка перестраховывается, покупать» | Тремя напечатанными строками, которые съедают экономию **ровно**: амортизация +$5,000 ($150K/10 против $100K/10), обслуживание +$3,000 ($8,000 против $5,000), страхование +$1,000 ($3,000 против $2,000). Итог $35,000 против $35,000 | Строки — стр. 52, `EXHIBIT 1: COST OF OPERATING EACH SEMI` (клиентский экзибит); амортизационное правило — стр. 53, ответ клиента на вопрос о графике амортизации; сведение $35,000 = $35,000 — стр. 53, блок `Answer` | настоящая |\n| «Гибрид служит дольше, амортизацию завысили — на самом деле она ниже» | Напечатанной строкой `Vehicle Lifespan 10 Years / 10 Years` — срок одинаков — и заявленной нулевой ликвидационной стоимостью, которая не даёт вернуть часть капитала в конце | Стр. 52, `EXHIBIT 1`; стр. 53, ответ клиента про straight-line и $0 salvage | настоящая |\n| «Цены на топливо растут — значит гибрид всё равно выиграет» | **Напечатанной величиной не снимается.** В книге есть только качественная строка «steadily rising fuel prices have also been hampering the company's profits» (стр. 49, `Clarifying Information`) — ни будущей цены, ни темпа роста, ни горизонта в кейсе нет | стр. 49, `Clarifying Information` | **опора отсутствует — это честное слабое место, а не опровержение** |\n\n**Честное слабое место, названное вслух.** Ничья держится ровно на печатной цене $3.00 за галлон и на этой цене хрупка: разница в расходе составляет 3,000 галлонов в год, поэтому **каждый устойчивый +$1 за галлон = $3,000 в год в пользу гибрида** (см. `[BUILD]`). Формально при любой устойчивой цене выше $3.00 гибрид дешевле. Кандидат обязан сказать это как **чувствительность, а не как вывод**: направление известно, величина — нет, потому что кейс не печатает ни одного будущего значения цены топлива. Слот, который выдал бы третий соблазн за опровергнутый, соврал бы; слот, который позволил бы им перевернуть вердикт, тоже соврал бы. Верный вердикт: по затратам **ничья**, решение выносится по нефинансовым основаниям, и переворачивает ничью только устойчивый рост цены топлива, величина которого в данных не задана.",
+    "support": "| Соблазн | Чем снят | Стр. + БЛОК | Опора |\n|---|---|---|---|\n| «Гибрид жжёт вдвое меньше — $9,000 экономии в год; заметка перестраховывается, покупать» | Тремя напечатанными строками, которые съедают экономию **ровно**: амортизация +$5,000 ($150K/10 против $100K/10), обслуживание +$3,000 ($8,000 против $5,000), страхование +$1,000 ($3,000 против $2,000). Итог $35,000 против $35,000 | Строки — стр. 52, `EXHIBIT 1: COST OF OPERATING EACH SEMI` (клиентский экзибит); амортизационное правило — стр. 53, ответ клиента на вопрос о графике амортизации; сведение $35,000 = $35,000 — стр. 53, блок `Answer` | настоящая |\n| «Гибрид служит дольше, амортизацию завысили — на самом деле она ниже» | Напечатанной строкой `Vehicle Lifespan 10 Years / 10 Years` — срок одинаков — и заявленной нулевой ликвидационной стоимостью, которая не даёт вернуть часть капитала в конце | Стр. 52, `EXHIBIT 1`; стр. 53, ответ клиента про straight-line и $0 salvage | настоящая |\n| «Цены на топливо растут — значит гибрид всё равно выиграет» | **Напечатанной величиной не снимается.** В книге есть только качественная строка «steadily rising fuel prices have also been hampering the company's profits» (стр. 49, `Clarifying Information`) — ни будущей цены, ни темпа роста, ни горизонта в кейсе нет | стр. 49, `Clarifying Information` | **опора отсутствует — это честное слабое место, а не опровержение** |\n\n**Честное слабое место, названное вслух.** Ничья держится ровно на печатной цене $3.00 за галлон и на этой цене хрупка: разница в расходе составляет 3,000 галлонов в год, поэтому **каждый устойчивый +$1 за галлон = $3,000 в год в пользу гибрида** (см. `[BUILD]`). Формально при любой устойчивой цене выше $3.00 гибрид дешевле. Кандидат обязан сказать это как **чувствительность, а не как вывод**: направление известно, величина — нет, потому что кейс не печатает ни одного будущего значения цены топлива. Слот, который выдал бы третий соблазн за опровергнутый, соврал бы; слот, который позволил бы им перевернуть вердикт, тоже соврал бы. Верный вердикт: по затратам **ничья**, решение выносится по нефинансовым основаниям, и переворачивает ничью только устойчивый рост цены топлива, величина которого в данных не задана.",
+    "risks": "* **Внутренний.** Вся ничья держится на трёх статьях по $5,000 / $3,000 / $1,000, и две из них — обслуживание и страхование — договорные. Сдвиг обслуживания гибрида с $8,000 до $5,000, то есть на $3,000 в год, сам по себе делает гибрид дешевле на $3,000 в год на тягач; сумма $35,000 не защищена от переговоров с сервисом и страховщиком.\n* **Внешний.** Цена топлива: при 3,000 галлонах разницы устойчивое движение цены с $3.00 до $4.00 сдвигает счёт на $3,000 в год на тягач в пользу гибрида; в кейсе прямо сказано, что цены на топливо устойчиво росли, но ни одного будущего значения не приведено — то есть направление риска известно, его размер нет.",
+    "next": "1. Затребовать у клиента форвардную кривую или контрактную цену на дизель на срок службы тягача. **Снимает** единственную неопределённость, которая может перевернуть ничью: незаданную величину роста цены топлива.\n2. Запросить котировки на сервисный контракт и страхование гибрида до подписания заказа. **Снимает** неопределённость по двум статьям на $3,000 и $1,000, которые сегодня и делают счёт ничьей.\n3. Вернуться к тем статьям затрат, где сумма не ничья: клиент назвал причиной давления зарплаты водителей, а потолком выручки — нехватку водителей. **Снимает** риск потратить решение на выбор, который по деньгам ничего не меняет."
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: $0/год — обе колонки дают одну и ту же годовую сумму владения; осторожность заметки подтверждается, по затратам ничья; (3) the naive reading is rejected explicitly, not merely avoided — $9,000/год экономии на тягач (топливо: $18,000 против $9,000) → «осторожность заметки лишняя, гибрид очевидно дешевле» must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: $0/год — обе колонки дают одну и ту же годовую сумму владения; осторожность заметки подтверждается, по затратам ничья; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — $9,000/год экономии на тягач (топливо: $18,000 против $9,000) → «осторожность заметки лишняя, гибрид очевидно дешевле» обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "Finish the note and the caution in it is right: National Logistics should treat the two trucks as costing the same to own and decide between them on non-financial grounds — it should not buy hybrids expecting a $9,000 saving.\n\nThe fuel line is correct and it is not the answer. The hybrid does burn $9,000 a year less — 6,000 gallons against 3,000 at $3.00 — but the rows the note never converted absorb exactly that: depreciation is $5,000 higher, because $150,000 over ten years is $15,000 against $100,000 over ten years; maintenance is $3,000 higher; insurance is $1,000 higher. Add owning to running and both trucks land on the same annual figure, $35,000.\n\nTwo things could break that and only one of them survives contact with the data. The idea that the hybrid outlives the diesel and so carries less depreciation is closed off by the exhibit — both lifespans are ten years, and salvage value is zero, so nothing comes back at the end. Rising fuel prices are a real exposure and I want to be honest that the case does not settle them: we are told prices have been climbing, but no future price is given. What I can size is the sensitivity — the gap in consumption is 3,000 gallons, so every sustained dollar per gallon is $3,000 a year per truck in the hybrid's favour. On the printed $3.00 it is a dead heat.\n\nSo: buy on service life, driver retention, emissions exposure or maintenance terms, not on a fuel saving. Before the next replacement cycle I would put a contracted diesel price and a quoted hybrid service and insurance package in front of the client — those three lines are what the tie is made of — and I would spend the cost-reduction effort where the numbers are not tied, which is the driver wage line the client opened with.\n\n**Построенное число [BUILD]** — ПОСТРОЕНО, книга не печатает\n\n```python\nfrom decimal import Decimal, ROUND_HALF_UP\n\nD = Decimal\ndef r0(x): return x.quantize(D(\"1\"), rounding=ROUND_HALF_UP)\n\n# --- всё ниже из книги: EXHIBIT 1 (стр. 52) + правило амортизации (стр. 53) ---\nMILES       = D(\"60000\")\nFUEL_PRICE  = D(\"3.00\")\nstd = {\"price\": D(\"100000\"), \"maint\": D(\"5000\"), \"ins\": D(\"2000\"), \"mpg\": D(\"10\"), \"life\": D(\"10\")}\nhyb = {\"price\": D(\"150000\"), \"maint\": D(\"8000\"), \"ins\": D(\"3000\"), \"mpg\": D(\"20\"), \"life\": D(\"10\")}\n\ndef gallons(t):  return MILES / t[\"mpg\"]\ndef annual(t, price_per_gal):\n    dep  = t[\"price\"] / t[\"life\"]          # straight-line, $0 salvage\n    fuel = gallons(t) * price_per_gal\n    return t[\"maint\"] + t[\"ins\"] + dep + fuel\n\n# книжная сверка (числа книги, стр. 53, блок Answer)\nassert gallons(std) == D(\"6000\") and gallons(hyb) == D(\"3000\")\nassert r0(annual(std, FUEL_PRICE)) == D(\"35000\")\nassert r0(annual(hyb, FUEL_PRICE)) == D(\"35000\")\nassert r0(annual(std, FUEL_PRICE) - annual(hyb, FUEL_PRICE)) == D(\"0\")\n\n# разложение: экономия топлива съедена ровно тремя статьями\nfuel_saving = gallons(std) * FUEL_PRICE - gallons(hyb) * FUEL_PRICE\ndep_penalty = hyb[\"price\"]/hyb[\"life\"] - std[\"price\"]/std[\"life\"]\nmnt_penalty = hyb[\"maint\"] - std[\"maint\"]\nins_penalty = hyb[\"ins\"]   - std[\"ins\"]\nassert fuel_saving == D(\"9000\")\nassert (dep_penalty, mnt_penalty, ins_penalty) == (D(\"5000\"), D(\"3000\"), D(\"1000\"))\nassert dep_penalty + mnt_penalty + ins_penalty == fuel_saving\n\n# --- ПОСТРОЕНО, книга не печатает: чувствительность к цене топлива ---\n# разница в расходе = 3,000 галлонов/год -> каждый +$1/галлон = $3,000/год в пользу гибрида\ngallon_gap = gallons(std) - gallons(hyb)\nassert gallon_gap == D(\"3000\")\nper_dollar = gallon_gap * D(\"1.00\")\nassert per_dollar == D(\"3000\")          # $/год на тягач за каждый +$1/галлон\n\n# точка равенства по цене топлива: standard - hybrid = -9000 + 3000*p = 0\nbreakeven_price = (mnt_penalty + ins_penalty + dep_penalty) / gallon_gap\nassert breakeven_price == D(\"3\")        # ничья стоит ровно на печатной цене $3.00\nassert r0(annual(std, D(\"4.00\")) - annual(hyb, D(\"4.00\"))) == D(\"3000\")\n```\n\n**Провоцируемая ошибка** — перешагнуть через оговорку оборванной заметки, принять верно посчитанную экономию по одной статье ($9,000 на топливе) за экономию по итогу и не достроить три компенсирующие статьи ($5,000 амортизации + $3,000 обслуживания + $1,000 страхования), которые обнуляют её ровно."
+   },
+   "anchor_metric": "Клиентского порога нет; решение выносится сопоставлением двух колонок, а не сравнением с правилом. Вердикт держится тем, что обе колонки дают одну и ту же годовую сумму"
   }
  ]
 }

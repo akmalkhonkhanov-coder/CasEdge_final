@@ -158,7 +158,7 @@
       "Occasional (<2/wk)",
       "57",
       "37",
-      "**−20**",
+      "−20",
       "8.2",
       "12.7",
       "0.7"
@@ -167,7 +167,7 @@
       "Arrived via social",
       "57",
       "33",
-      "**−24**",
+      "−24",
       "2.0",
       "7.4",
       "0.4"
@@ -198,7 +198,7 @@
   },
   {
    "id": "ST-003",
-   "title": "Counted Twice",
+   "title": "Last Mile, Higher Bill",
    "company": "Ashcrel",
    "industry": "Logistics",
    "difficulty": "Medium",
@@ -226,7 +226,7 @@
   },
   {
    "id": "ST-004",
-   "title": "The Wrong Yardstick",
+   "title": "Wells and Budgets",
    "company": "Vosterin",
    "industry": "NGO, clean water access",
    "difficulty": "Hard",
@@ -332,7 +332,7 @@
   },
   {
    "id": "ST-005",
-   "title": "Sunk",
+   "title": "The Half-Idle Line",
    "company": "Merridax",
    "industry": "Industrial equipment",
    "difficulty": "Medium",
@@ -508,7 +508,7 @@
   },
   {
    "id": "ST-008",
-   "title": "Built on Nothing",
+   "title": "The Premium Promise",
    "company": "Nostravy",
    "industry": "Beverage manufacturing",
    "difficulty": "Hard",
@@ -596,7 +596,7 @@
   },
   {
    "id": "ST-009",
-   "title": "The Means for the End",
+   "title": "Billing by the Month",
    "company": "Kwendel",
    "industry": "Telecoms",
    "difficulty": "Medium",
@@ -607,7 +607,7 @@
    "type": "Structuring",
    "exhibit_mode": "none",
    "depth_tag": "STANDARD",
-   "prompt": "Kwendel's CEO: \"We want to move to a subscription model instead of monthly billing. Help us assess the switch.\" On clarification it emerges that the board's mandate is to **reduce churn**, and subscription is the CEO's proposed means.",
+   "prompt": "Kwendel's CEO: \"We want to move to a subscription model instead of monthly billing. Help us assess the switch.\" On clarification it emerges that the board's mandate is to **reduce churn**.",
    "anchor_metric": "churn = 34% per year",
    "exhibit": null,
    "key": {
@@ -624,7 +624,7 @@
   },
   {
    "id": "ST-010",
-   "title": "False Alarm",
+   "title": "Where the Margin Went",
    "company": "Quandreth",
    "industry": "Medical device distribution",
    "difficulty": "Easy",
@@ -792,7 +792,7 @@
   },
   {
    "id": "ST-012",
-   "title": "Against Its Own Rule",
+   "title": "Two Years of Margin",
    "company": "Solvantor",
    "industry": "Agrochemicals",
    "difficulty": "Medium",
@@ -889,7 +889,7 @@
   },
   {
    "id": "ST-014",
-   "title": "Who Signs",
+   "title": "Better, Cheaper, Unsold",
    "company": "Halvorine",
    "industry": "Medical devices",
    "difficulty": "Hard",
@@ -965,7 +965,7 @@
   },
   {
    "id": "ST-015",
-   "title": "Ours and the Market's",
+   "title": "The Commodity Year",
    "company": "Pentmarel",
    "industry": "Building materials",
    "difficulty": "Medium",
@@ -1035,7 +1035,7 @@
   },
   {
    "id": "ST-016",
-   "title": "The First Year Misleads",
+   "title": "The Standing Discount",
    "company": "Aubrestan",
    "industry": "Retail chain",
    "difficulty": "Hard",
@@ -1111,7 +1111,7 @@
   },
   {
    "id": "ST-017",
-   "title": "Elegant and Undeliverable",
+   "title": "The Growth Shortlist",
    "company": "Nerivast",
    "industry": "Coffee shop chain",
    "difficulty": "Hard",
@@ -1175,7 +1175,7 @@
   },
   {
    "id": "ST-018",
-   "title": "The Wrong Floor",
+   "title": "Where to Play Next",
    "company": "Corbenth",
    "industry": "Medical distribution",
    "difficulty": "Hard",
@@ -1186,7 +1186,7 @@
    "type": "Structuring",
    "exhibit_mode": "E-before",
    "depth_tag": "STRONG",
-   "prompt": "Corbenth is deciding **which market segment to play in over the next five years**. The board wants an answer to the question of choice, not the question of execution.",
+   "prompt": "Corbenth is deciding **which market segment to play in over the next five years**. The board asks: which segment do we build the next five years around?",
    "anchor_metric": "market = $950.0M",
    "exhibit": {
     "type": "table",
@@ -1265,7 +1265,7 @@
   },
   {
    "id": "ST-019",
-   "title": "Growth into a Loss",
+   "title": "The Fastest Segment",
    "company": "Vantreloe",
    "industry": "Packaging manufacturing",
    "difficulty": "Medium",
@@ -1296,11 +1296,11 @@
       "A",
       "1 240",
       "980",
-      "**260**",
+      "260",
       "312",
-      "**−52**",
+      "−52",
       "4.2",
-      "**+19%**"
+      "+19%"
      ],
      [
       "B",
@@ -1461,7 +1461,7 @@
   },
   {
    "id": "ST-022",
-   "title": "Profitable Customer, Loss-Making Order",
+   "title": "Short of the Target",
    "company": "Thornquay",
    "industry": "B2B distribution",
    "difficulty": "Medium",
@@ -1549,7 +1549,7 @@
       "4 280",
       "0.92",
       "3.94",
-      "**−3.5%**"
+      "−3.5%"
      ],
      [
       "Total",
@@ -1575,7 +1575,7 @@
   },
   {
    "id": "ST-023",
-   "title": "Elegant and Unmeasurable",
+   "title": "Losing the Tenders",
    "company": "Maldravin",
    "industry": "Industrial equipment",
    "difficulty": "Easy",
@@ -1603,7 +1603,7 @@
   },
   {
    "id": "ST-024",
-   "title": "Arrived at the Wrong Place",
+   "title": "Where the Profit Went",
    "company": "Ostrevane",
    "industry": "Passenger transport",
    "difficulty": "Medium",
@@ -1690,39 +1690,33 @@
     "title": "Calveska: the chain from prescription to purchase",
     "header": [
      "Participant",
-     "Role in the candidate's tree",
-     "Actual role",
+     "Position in the chain",
      "Indicator"
     ],
     "rows": [
      [
       "Doctor",
       "creates demand",
-      "creates demand",
       "awareness 84%, prescribing 61%"
      ],
      [
       "Patient",
       "receives the product",
-      "chooses from what is offered",
       "ask for the brand by name: 9%"
      ],
      [
       "Pharmacy chain",
       "sales channel",
-      "determines the choice at the point of purchase",
       "product on the list: 2 chains of 11"
      ],
      [
       "Wholesale distributor",
-      "logistics",
       "logistics",
       "coverage 96%"
      ],
      [
       "Regulator",
       "approval",
-      "approval granted",
       "registration in place"
      ]
     ],
@@ -1818,7 +1812,7 @@
   },
   {
    "id": "ST-027",
-   "title": "Three Right Out of Five",
+   "title": "Revenue Up, Profit Down",
    "company": "Hastreling",
    "industry": "Food manufacturing",
    "difficulty": "Hard",
@@ -2104,7 +2098,7 @@
   },
   {
    "id": "ST-031",
-   "title": "Data About a Different Market",
+   "title": "Into Institutional Catering",
    "company": "Belmirov",
    "industry": "Food manufacturing",
    "difficulty": "Hard",
@@ -2284,16 +2278,16 @@
      [
       "Dry mixes",
       "84.0",
-      "**1**",
+      "1",
       "−0.7",
-      "**3**"
+      "3"
      ],
      [
       "Roofing",
       "41.0",
       "3",
-      "**−2.4**",
-      "**1**"
+      "−2.4",
+      "1"
      ],
      [
       "Insulation",
@@ -2373,62 +2367,6 @@
       "7.4",
       "9.0",
       "5.5"
-     ],
-     [
-      "Set",
-      "Capex",
-      "Engineers",
-      "NPV",
-      "Feasible"
-     ],
-     [
-      "A",
-      "14.0",
-      "6.5",
-      "9.2",
-      "✅"
-     ],
-     [
-      "B",
-      "11.0",
-      "1.0",
-      "5.8",
-      "✅"
-     ],
-     [
-      "C",
-      "9.0",
-      "5.5",
-      "7.4",
-      "✅"
-     ],
-     [
-      "A+B",
-      "25.0",
-      "7.5",
-      "**15.0**",
-      "✅"
-     ],
-     [
-      "A+C",
-      "23.0",
-      "**12.0**",
-      "16.6",
-      "❌ engineers 12.0 > 8.0"
-     ],
-     [
-      "B+C",
-      "20.0",
-      "6.5",
-      "13.2",
-      "✅"
-     ],
-     [
-      "A+B+C",
-      "34.0",
-      "13.0",
-      "22.4",
-      "❌ both limits"
      ]
     ],
     "note": ""
@@ -2517,7 +2455,7 @@
   },
   {
    "id": "ST-036",
-   "title": "Sequence Decides",
+   "title": "The New Service Protocol",
    "company": "Lorvantis",
    "industry": "Car service chain",
    "difficulty": "Hard",
@@ -2642,7 +2580,7 @@
   },
   {
    "id": "ST-037",
-   "title": "One Set, Two Names",
+   "title": "The Gross Profit Gap",
    "company": "Nystrelde",
    "industry": "Corporate services",
    "difficulty": "Medium",
@@ -2734,7 +2672,7 @@
   },
   {
    "id": "ST-039",
-   "title": "Stopped Too Early",
+   "title": "Costs Up, Volume Flat",
    "company": "Miradelph",
    "industry": "Transport company",
    "difficulty": "Easy",
@@ -2791,28 +2729,28 @@
       "1–4",
       "Design institute",
       "development",
-      "1–4 ✅"
+      "1–4"
      ],
      [
       "Equipment procurement",
       "5–9",
       "Suppliers",
       "supply",
-      "5–9 ✅"
+      "5–9"
      ],
      [
       "Installation",
       "10–14",
       "Contractor",
       "works",
-      "10–14 ✅"
+      "10–14"
      ],
      [
       "Approval",
       "15–20",
       "Regulator",
       "project approval",
-      "before month 5 ⚠️"
+      "before month 5"
      ]
     ],
     "note": ""
@@ -2831,7 +2769,7 @@
   },
   {
    "id": "ST-041",
-   "title": "Divided by the Consequence",
+   "title": "The Customer Book",
    "company": "Blythmore",
    "industry": "B2B services",
    "difficulty": "Hard",
@@ -2915,7 +2853,7 @@
   },
   {
    "id": "ST-042",
-   "title": "The Word Was Given in Public",
+   "title": "The Collection Point Network",
    "company": "Kestravel",
    "industry": "Retail",
    "difficulty": "Medium",
@@ -3095,9 +3033,9 @@
      ],
      [
       "Emissions licence renewal",
-      "**0.4**",
-      "**3**",
-      "IRREVERSIBLE",
+      "0.4",
+      "3",
+      "irreversible",
       "production halts until a new licence is issued"
      ]
     ],
@@ -3117,7 +3055,7 @@
   },
   {
    "id": "ST-045",
-   "title": "The Fourth Door",
+   "title": "Demand Above Capacity",
    "company": "Pellworth",
    "industry": "Building materials manufacturing",
    "difficulty": "Hard",
@@ -3161,13 +3099,6 @@
       "9.6",
       "4",
       "partly (19 pp of 34)"
-     ],
-     [
-      "Do not add: raise price by 9%",
-      "**0.0**",
-      "**26.3**",
-      "**1**",
-      "demand falls to capacity"
      ]
     ],
     "note": ""
@@ -3186,7 +3117,7 @@
   },
   {
    "id": "ST-046",
-   "title": "The External Turned Out to Be Ours",
+   "title": "The Distributor Channel",
    "company": "Grenvalt",
    "industry": "Industrial equipment",
    "difficulty": "Hard",
@@ -3285,28 +3216,21 @@
       "14.2",
       "15.1",
       "16.0",
-      "**45.3**"
+      "45.3"
      ],
      [
       "B. Cut prices by 8%",
       "9.6",
       "18.4",
       "22.7",
-      "**50.7**"
+      "50.7"
      ],
      [
       "C. Raise prices by 5%",
-      "**16.8**",
+      "16.8",
       "13.9",
       "11.2",
       "41.9"
-     ],
-     [
-      "",
-      "↑ management's optimum",
-      "",
-      "",
-      "↑ board's optimum: B"
      ]
     ],
     "note": ""
@@ -3325,7 +3249,7 @@
   },
   {
    "id": "ST-048",
-   "title": "The Point of No Return",
+   "title": "The New Formulation",
    "company": "Wrenlocke",
    "industry": "Food manufacturing",
    "difficulty": "Medium",
@@ -3345,32 +3269,32 @@
      "Month",
      "Month total",
      "Cumulative total",
-     "Reversibility"
+     "Old line"
     ],
     "rows": [
      [
       "1–7",
       "−1.4",
       "from −1.4 to −9.8",
-      "reversible: the old line runs in parallel"
+      "runs in parallel"
      ],
      [
-      "**8**",
-      "**−1.4**",
-      "**−11.2**",
-      "point of no return: the old line is dismantled"
+      "8",
+      "−1.4",
+      "−11.2",
+      "dismantled"
      ],
      [
       "9–20",
       "+0.9",
-      "from −10.3 to **+0.6**",
-      "irreversible"
+      "from −10.3 to +0.6",
+      "dismantled"
      ],
      [
       "21–24",
       "+0.9",
-      "from +1.5 to **+3.2**",
-      "irreversible"
+      "from +1.5 to +3.2",
+      "dismantled"
      ]
     ],
     "note": ""
