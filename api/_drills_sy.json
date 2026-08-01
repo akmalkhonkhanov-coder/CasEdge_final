@@ -1,6 +1,6 @@
 {
  "type": "SY",
- "count": 25,
+ "count": 33,
  "_meta": {
   "set": "sy",
   "type_string": "Synthesis",
@@ -2746,6 +2746,1183 @@
     "en": "The answer VaxCo needs is a convention, not a number, and we should say that to the client in the first sentence: hold our dollar margin and the hybrid prices at $17 — $10 COGS plus the $7 we make today — but the customer pays $20 today for vial plus syringe, so we hand back $3 a dose nobody asked us for; hold the customer's current outlay and it prices at $20, our margin goes to $10, and the customer has no financial reason to switch. I would price at $20 off the customer's outlay and buy the switch with nurse time and disposal savings rather than with price. The bigger point is that both conventions are sized wrong: partial doses are 30% of all doses and a needled vial cannot deliver them, so at most 70% of doses are addressable — on 100 doses the $10 convention earns $700, not $1,000, and no pricing basis repairs that. Two risks: the $10 COGS is an estimate from a firm with no syringe manufacturing experience, and a $3 miss wipes out the entire $7 margin under the first convention; and the one stakeholder against us is the nursing staff, who actually administer the vaccine, with regulatory approval still outstanding. Next step: verify the 30% partial-dose share against actual purchase data at our top accounts before we commit to either convention."
    },
    "anchor_metric": "клиентского порога нет; решение выносится сопоставлением двух защитимых конвенций, а не сравнением с правилом"
+  },
+  {
+   "id": "SY-026",
+   "title": "Made to Measure",
+   "company": "",
+   "industry": "",
+   "difficulty": "Medium",
+   "clean": true,
+   "focus": "",
+   "scaffold": "L4",
+   "time": "4 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "A colleague on your team has already worked this client's operations question and left the transcript below, including a challenge one of the analysts raised against it. You have four minutes and no time to redo the workshop's numbers from scratch. Does the transcript's weekly-output conclusion hold, what exactly is holding it up, and what could break it?",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**Client situation.** The client owns a designer shoe-store making high-end, made-to-measure shoes. Demand has grown fast and the client wants to ramp up output without hurting quality or profitability. The shoe-making process has 3 stages: cutting, stitching and finishing. There are currently 15 shoemakers, each of whom takes an average of 12 hours to produce one pair, and each shoemaker performs all three steps himself. There are no additional skilled shoemakers available in the market. The client has confirmed the process may be reorganised so that shoemakers perform specific tasks rather than whole pairs.",
+       "**Exhibit 1 — employee survey, hours per activity.**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Hours per activity",
+       "Group 1 (5 employees)",
+       "Group 2 (5 employees)",
+       "Group 3 (5 employees)"
+      ],
+      "rows": [
+       [
+        "Cutting",
+        "3",
+        "5",
+        "4"
+       ],
+       [
+        "Stitching",
+        "4",
+        "4",
+        "3"
+       ],
+       [
+        "Finishing",
+        "5",
+        "3",
+        "5"
+       ],
+       [
+        "Total Hours",
+        "12",
+        "12",
+        "12"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "**Working assumption used throughout the transcript:** employees work 9 hours a day, 5 days a week → 45 hours per employee per week.",
+       "**Branch m-4k — the objection raised in the room.**",
+       "\"Hold on. The three stages run in sequence, not in parallel. A pair is not made by one person any more — it is handed from station to station. So you cannot say a shoemaker produces 5 pairs a week; every pair is touched by three different people. Output on a sequential line is set by the slowest station, not by adding hours together. The 15 × 5 count triples what the line can actually push out — call it 25 pairs a week, not 75. The transcript is overstating the gain.\"",
+       "**Branch m-9t — the transcript as originally written.**",
+       "\"Reassign each group to the activity it is fastest at. Group 1 → cutting. Group 2 → finishing. Group 3 → stitching. Hours per pair in the new system: 3 + 3 + 3 = 9. Hours per week per employee: 45. Per-week output per employee: 45 ÷ 9 = 5 pairs. Total employees: 15. Weekly output: 75 pairs.",
+       "Then, on the same 75 pairs: selling price $300 per pair; materials and delivery $40 + $10 = $50 per pair; gross profit $250 per pair; total gross profit $18,750 per week. Employee cost $15 per hour × 45 hours × 15 employees = $10,125. Weekly fixed costs $1,000. Weekly profit $7,625. Annual profit $396,500.\"",
+       "**Left open in the transcript:** no station-by-station capacity was ever written down, and no work-in-process buffer or hand-off time between stations appears anywhere in the client data.",
+       "**What the client asked for:** more output, no loss of quality, no damage to profitability — with the labour force fixed at the 15 people already employed.",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Шаг | Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|---|\n| 1 | Хватается за слово «специализация» и делает вывод: ни один работник больше не производит пару целиком | «счёт по работникам недействителен» | «разделение труда ⇒ подушевой счёт запрещён» |\n| 2 | Читает три стадии как конвейер (cutting → stitching → finishing) | «выпуск задаёт узкое место, а не сумма» | школьное правило про bottleneck, применённое до проверки мощностей |\n| 3 | Не строит станционную мощность (5 чел. × 45 ч ÷ 3 ч), потому что кажется, что и так всё ясно | остаётся без единственной величины, которая решает | экономия времени на «очевидном» |\n| 4 | Вводит поправочный делитель: «пару трогают трое ⇒ 75 ÷ 3» | 25 пар/нед | делитель по числу касаний вместо мощности станции |\n| 5 | Выносит вердикт «запись неверна, выпуск завышен втрое» | переворот верной записи | «в такой задаче всегда надо что-то перевернуть» |\n\n**DECOY_SUPPORT (вторым)** — чем наивный путь кажется подкреплённым\n* Клиентская формулировка «each of whom take an average of 12 hours to produce one pair» — язык целой пары на одного человека; после специализации он и правда перестаёт описывать реальность, и это создаёт впечатление, что весь подушевой счёт рухнул.\n* Чужой расчёт написан по работнику: «45 ÷ 9 = 5 пар на работника», затем «× 15». Формально это выглядит как модель 15 независимых кустарей — то есть как раз то, что специализация отменяет.\n* Стадии перечислены строго в технологическом порядке, что грунтует картинку конвейера и слово «узкое место» раньше любых чисел.\n* Правило «на последовательной линии выпуск задаёт слабейшая станция» само по себе верно — наивный применяет верное правило, не проверив, различаются ли станции. Это и делает соблазн честным.\n\n**SUPPORT (третьим)** — что на самом деле держит верный вывод\n1. **Настоящая опора.** В каждой группе ровно одна трёхчасовая ячейка, и это три разные операции: Гр.1 cutting 3, Гр.2 finishing 3, Гр.3 stitching 3 (`Exhibit 1`, стр. 38). Каждая станция получает своего исполнителя, и ни одна станция не остаётся пустой. Соблазн «узкое место ниже суммы» снимается именно этой напечатанной сеткой.\n2. **Настоящая опора.** По 5 человек в каждой группе (`Exhibit 1`, стр. 38) ⇒ станционные мощности 5 × 45 ÷ 3 = 75 пар/нед у всех трёх станций. Линия сбалансирована; узкое место есть, но оно даёт то же число, что и сумма часов. Соблазн снят построенной величиной, опёртой на клиентский экзибит.\n3. **Настоящая опора.** Единый недельный фонд 45 ч у всех работников — без него равенство мощностей не собирается. Оговорка: цифра живёт в интервьюерском блоке `Math Information`, стр. 35, поэтому в записи она стоит как допущение записи, а не как правило клиента; вердикт зависит от этого допущения и это надо произнести.\n4. **Ложная опора — не опираться.** Total Hours = 12 у всех трёх групп. Красивая симметрия, но решают только три минимальные ячейки; вердикт устоит и при разных суммах строк.\n5. **Ложная опора — не опираться.** $7 625 недельной прибыли и $396 500 годовой. Это содержимое чужого расчёта из интервьюерского блока `Calculation Guide`, стр. 36. Оно не подтверждает выпуск, оно из него следует; ссылаться на прибыль как на доказательство выпуска — круг.\n6. **Честное слабое место, называется вслух.** Вывод сломали бы межоперационные заделы, время передачи пары между станциями и разогрев после перехода на новый режим — на несбалансированной передаче фактическая мощность любой линии ниже расчётной. Книга этих величин не печатает ни одним вхождением. На напечатанных данных вердикт держится; за пределами напечатанных данных он держится ровно настолько, насколько мал межстанционный простой.",
+    "decoy": "* Клиентская формулировка «each of whom take an average of 12 hours to produce one pair» — язык целой пары на одного человека; после специализации он и правда перестаёт описывать реальность, и это создаёт впечатление, что весь подушевой счёт рухнул.\n* Чужой расчёт написан по работнику: «45 ÷ 9 = 5 пар на работника», затем «× 15». Формально это выглядит как модель 15 независимых кустарей — то есть как раз то, что специализация отменяет.\n* Стадии перечислены строго в технологическом порядке, что грунтует картинку конвейера и слово «узкое место» раньше любых чисел.\n* Правило «на последовательной линии выпуск задаёт слабейшая станция» само по себе верно — наивный применяет верное правило, не проверив, различаются ли станции. Это и делает соблазн честным.\n\n**SUPPORT (третьим)** — что на самом деле держит верный вывод\n1. **Настоящая опора.** В каждой группе ровно одна трёхчасовая ячейка, и это три разные операции: Гр.1 cutting 3, Гр.2 finishing 3, Гр.3 stitching 3 (`Exhibit 1`, стр. 38). Каждая станция получает своего исполнителя, и ни одна станция не остаётся пустой. Соблазн «узкое место ниже суммы» снимается именно этой напечатанной сеткой.\n2. **Настоящая опора.** По 5 человек в каждой группе (`Exhibit 1`, стр. 38) ⇒ станционные мощности 5 × 45 ÷ 3 = 75 пар/нед у всех трёх станций. Линия сбалансирована; узкое место есть, но оно даёт то же число, что и сумма часов. Соблазн снят построенной величиной, опёртой на клиентский экзибит.\n3. **Настоящая опора.** Единый недельный фонд 45 ч у всех работников — без него равенство мощностей не собирается. Оговорка: цифра живёт в интервьюерском блоке `Math Information`, стр. 35, поэтому в записи она стоит как допущение записи, а не как правило клиента; вердикт зависит от этого допущения и это надо произнести.\n4. **Ложная опора — не опираться.** Total Hours = 12 у всех трёх групп. Красивая симметрия, но решают только три минимальные ячейки; вердикт устоит и при разных суммах строк.\n5. **Ложная опора — не опираться.** $7 625 недельной прибыли и $396 500 годовой. Это содержимое чужого расчёта из интервьюерского блока `Calculation Guide`, стр. 36. Оно не подтверждает выпуск, оно из него следует; ссылаться на прибыль как на доказательство выпуска — круг.\n6. **Честное слабое место, называется вслух.** Вывод сломали бы межоперационные заделы, время передачи пары между станциями и разогрев после перехода на новый режим — на несбалансированной передаче фактическая мощность любой линии ниже расчётной. Книга этих величин не печатает ни одним вхождением. На напечатанных данных вердикт держится; за пределами напечатанных данных он держится ровно настолько, насколько мал межстанционный простой.",
+    "support": "1. **Настоящая опора.** В каждой группе ровно одна трёхчасовая ячейка, и это три разные операции: Гр.1 cutting 3, Гр.2 finishing 3, Гр.3 stitching 3 (`Exhibit 1`, стр. 38). Каждая станция получает своего исполнителя, и ни одна станция не остаётся пустой. Соблазн «узкое место ниже суммы» снимается именно этой напечатанной сеткой.\n2. **Настоящая опора.** По 5 человек в каждой группе (`Exhibit 1`, стр. 38) ⇒ станционные мощности 5 × 45 ÷ 3 = 75 пар/нед у всех трёх станций. Линия сбалансирована; узкое место есть, но оно даёт то же число, что и сумма часов. Соблазн снят построенной величиной, опёртой на клиентский экзибит.\n3. **Настоящая опора.** Единый недельный фонд 45 ч у всех работников — без него равенство мощностей не собирается. Оговорка: цифра живёт в интервьюерском блоке `Math Information`, стр. 35, поэтому в записи она стоит как допущение записи, а не как правило клиента; вердикт зависит от этого допущения и это надо произнести.\n4. **Ложная опора — не опираться.** Total Hours = 12 у всех трёх групп. Красивая симметрия, но решают только три минимальные ячейки; вердикт устоит и при разных суммах строк.\n5. **Ложная опора — не опираться.** $7 625 недельной прибыли и $396 500 годовой. Это содержимое чужого расчёта из интервьюерского блока `Calculation Guide`, стр. 36. Оно не подтверждает выпуск, оно из него следует; ссылаться на прибыль как на доказательство выпуска — круг.\n6. **Честное слабое место, называется вслух.** Вывод сломали бы межоперационные заделы, время передачи пары между станциями и разогрев после перехода на новый режим — на несбалансированной передаче фактическая мощность любой линии ниже расчётной. Книга этих величин не печатает ни одним вхождением. На напечатанных данных вердикт держится; за пределами напечатанных данных он держится ровно настолько, насколько мал межстанционный простой.",
+    "risks": "* **Внутренний.** Ограничение клиента жёсткое: свободных мастеров на рынке 0, значит любая станция остаётся ровно с 5 людьми. Потеря одного человека на stitching роняет мощность этой станции до 4 × 45 ÷ 3 = 60 пар/нед, то есть выпуск всей линии падает с 75 до 60 (−20%) при неизменных двух других станциях. Балансировка держится на полной численности, запаса нет.\n* **Внешний / организационный.** Переход с целикового изготовления на три станции — смена укоренённого процесса: возможны разовые затраты на перепланировку цеха и просадка в период освоения. При текущей экономике одна потерянная неделя выпуска стоит $18 750 валовой прибыли, а недельная прибыль всего $7 625 — то есть цена срыва больше недельного результата.",
+    "next": "1. Замерить время передачи пары между станциями и размер межоперационного задела на пилотной неделе одной группы. Снимает единственную неопределённость, способную опустить фактический выпуск ниже 75 пар/нед, — ту, которую книга не печатает.\n2. Проверить, воспроизводятся ли часы из опроса на рабочем месте (survey vs. факт) по трём назначенным операциям. Снимает риск, что 3-часовые ячейки — самооценка, а не замер; именно на равенстве трёх троек стоит весь вердикт.\n3. Зафиксировать план подмены на случай отсутствия работника на любой из трёх станций. Снимает неопределённость по внутреннему риску: −20% выпуска при выбытии одного человека.",
+    "build": "```python\nfrom decimal import Decimal, ROUND_HALF_UP\n\ndef r(x, q=\"0.01\"):\n    return Decimal(x).quantize(Decimal(q), rounding=ROUND_HALF_UP)\n\n# --- напечатано в книге ---\n# Exhibit 1, стр. 38 (экзибит, клиентский): часы по группам\nG1 = {\"cutting\": Decimal(3), \"stitching\": Decimal(4), \"finishing\": Decimal(5)}\nG2 = {\"cutting\": Decimal(5), \"stitching\": Decimal(4), \"finishing\": Decimal(3)}\nG3 = {\"cutting\": Decimal(4), \"stitching\": Decimal(3), \"finishing\": Decimal(5)}\nHEADCOUNT = Decimal(5)          # Exhibit 1: 5 employees per group\nWORKERS   = Decimal(15)         # Clarifying Information, стр. 33 (клиентский)\nCUR_HRS   = Decimal(12)         # Clarifying Information, стр. 33 (клиентский)\nHRS_WEEK  = Decimal(9) * Decimal(5)   # Math Information, стр. 35 (интервьюерский блок; допущение записи)\n\nassert sum(G1.values()) == sum(G2.values()) == sum(G3.values()) == Decimal(12)\nassert HEADCOUNT * Decimal(3) == WORKERS\nassert HRS_WEEK == Decimal(45)\n\n# --- ПОСТРОЕНО, книга не печатает: назначение по минимуму и станционные мощности ---\nassign = {\"Group 1\": min(G1, key=G1.get), \"Group 2\": min(G2, key=G2.get), \"Group 3\": min(G3, key=G3.get)}\nassert assign == {\"Group 1\": \"cutting\", \"Group 2\": \"finishing\", \"Group 3\": \"stitching\"}\nassert len(set(assign.values())) == 3          # три разные операции — ядро вердикта\n\ncap = {}\nfor grp, cells in ((\"Group 1\", G1), (\"Group 2\", G2), (\"Group 3\", G3)):\n    h = cells[assign[grp]]\n    assert h == Decimal(3)                     # ни одна назначенная ячейка не больше 3 ч\n    cap[grp] = r(HEADCOUNT * HRS_WEEK / h)     # пар/нед на станции\n\nassert cap == {\"Group 1\": Decimal(\"75.00\"), \"Group 2\": Decimal(\"75.00\"), \"Group 3\": Decimal(\"75.00\")}\n\nbottleneck = min(cap.values())                 # мощность линии по узкому месту\nsum_route  = r(WORKERS * HRS_WEEK / Decimal(9))  # мощность по сумме часов\nassert bottleneck == sum_route == Decimal(\"75.00\")   # линия сбалансирована → соблазн не подтверждается\n\n# --- ПОСТРОЕНО: текущий выпуск и прирост ---\ncurrent = r(WORKERS * HRS_WEEK / CUR_HRS)      # 56.25 пар/нед\nassert current == Decimal(\"56.25\")\ngain_pct = r((bottleneck / current - Decimal(1)) * Decimal(100))\nassert gain_pct == Decimal(\"33.33\")\n\n# --- контрфакт: если бы у Гр.3 минимум был 4 ч, линия разбалансировалась бы ---\ncf = r(HEADCOUNT * HRS_WEEK / Decimal(4))\nassert cf == Decimal(\"56.25\") and cf < sum_route\n\n# --- контрфакт: выбытие одного человека на stitching ---\nshort = r((HEADCOUNT - Decimal(1)) * HRS_WEEK / Decimal(3))\nassert short == Decimal(\"60.00\")\nassert r((Decimal(1) - short / bottleneck) * Decimal(100)) == Decimal(\"20.00\")\n```\n\n**Провоцируемая ошибка** — увидев специализацию, применить верное правило про узкое место, не построив станционные мощности, и перевернуть корректную запись поправочным делителем «пару трогают трое» (75 ÷ 3 = 25 пар/нед).\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: 75 пар/нед — и станционная мощность каждой из трёх станций тоже 75 пар/нед, линия сбалансирована; (3) the naive reading is rejected explicitly, not merely avoided — 25 пар/нед («каждую пару трогают трое, чужой счёт 15×5 утраивает выпуск») must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: 75 пар/нед — и станционная мощность каждой из трёх станций тоже 75 пар/нед, линия сбалансирована; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — 25 пар/нед («каждую пару трогают трое, чужой счёт 15×5 утраивает выпуск») обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "* **Conclusion.** The transcript's conclusion stands: we should confirm the 75 pairs per week figure and proceed with specialisation — the objection about bottlenecks does not overturn it here.\n* **Facts.** Each of the three groups has exactly one three-hour activity, and they are three different activities — Group 1 cutting, Group 2 finishing, Group 3 stitching. With five people in every group and 45 working hours each, every station carries 5 × 45 ÷ 3 = 75 pairs per week. The line is balanced, so the bottleneck and the sum-of-hours route return the same 75 pairs, up from 56.25 pairs today. The objection would have been right if any assigned cell exceeded three hours; none does.\n* **Risk.** The balance has no slack. Losing one worker on stitching cuts that station to 60 pairs per week and the whole line with it, and the market offers no additional skilled shoemakers. Separately, hand-off time and work-in-process between stations are not measured anywhere in the data — that, not the arithmetic, is what could pull actual output below 75.\n* **Next step.** Run one pilot week on a single group to measure hand-off time and buffers, and verify the surveyed hours against observed hours on the three assigned activities before committing the full workshop."
+   },
+   "anchor_metric": "клиентского порога нет; решение выносится сопоставлением трёх станционных мощностей между собой, а не сравнением с правилом. Есть жёсткое клиентское ограничение — «There are no additional skilled shoemakers available in the market» (Clarifying Information, стр. 33): это ограничение на ресурс, не порог решения"
+  },
+  {
+   "id": "SY-027",
+   "title": "Drinks Gone Flat",
+   "company": "",
+   "industry": "",
+   "difficulty": "Medium",
+   "clean": false,
+   "focus": "",
+   "scaffold": "L4",
+   "time": "4 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "The beverage department of a regional supermarket has lost revenue over the last year. A colleague has already been through the data and left the working record below; one line of it is missing and he ran out of time before filling it. You have four minutes. Is his read of what happened correct, and what should the client actually pull?",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**Client situation.** The client is a leading regional grocer in the southeastern U.S. The revenue decline is specifically within the beverage segment. The competitive landscape has not changed in the last year. The client wants the cause of the declining revenue and recommendations for how to stop the decline.",
+       "**Exhibit 1 — revenues and costs by beverage category.**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Category",
+       "Gallons (MM)* 2014",
+       "Gallons (MM)* 2015",
+       "Price / gallon ($)* 2014",
+       "Price / gallon ($)* 2015",
+       "Cost / gallon ($) 2014",
+       "Cost / gallon ($) 2015"
+      ],
+      "rows": [
+       [
+        "Sodas",
+        "100",
+        "120",
+        "0.9",
+        "0.7",
+        "0.3",
+        "0.3"
+       ],
+       [
+        "Waters",
+        "20",
+        "22",
+        "0.7",
+        "0.65",
+        "0.2",
+        "0.2"
+       ],
+       [
+        "Others",
+        "11",
+        "10",
+        "4",
+        "4.5",
+        "3.9",
+        "3.9"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "\\* Average per store",
+       "**Exhibit 2 — sodas by brand.**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Category",
+       "Gallons (MM)* 2014",
+       "Gallons (MM)* 2015",
+       "Revenue ($M)* 2014",
+       "Revenue ($M)* 2015"
+      ],
+      "rows": [
+       [
+        "Brand A",
+        "50",
+        "30",
+        "50",
+        "30"
+       ],
+       [
+        "Brand B",
+        "25",
+        "30",
+        "25",
+        "30"
+       ],
+       [
+        "Value Brand",
+        "25",
+        "60",
+        "15",
+        "24"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "\\* Average per store",
+       "**Colleague's working record.**",
+       "\"Start with our price. Sodas went from $0.90 a gallon to $0.70 a gallon — that is our pricing decision on the category, a 22% cut.",
+       "Category revenue: sodas 100 × 0.9 = $90M in 2014, 120 × 0.7 = $84M in 2015, change −$6M.",
+       "Waters: 20 × 0.7 = $14M, then 22 × 0.65 = $14.3M, change +$0.3M.",
+       "Others: 11 × 4 = $44M, then 10 × 4.5 = $45M, change +$1M.",
+       "So the whole beverage decline sits in sodas. Volume responded — 100 to 120 million gallons, up 20% — but the price cut outran it and we ended up $6M lighter.",
+       "Brand split for sodas is attached above. Brand A is down 20 million gallons and $20M. Value Brand is up 35 million gallons and $9M. Brand B is up.",
+       "Read: we discounted the category, chased volume into the cheapest brand, and lost money doing it. Recommendation: reverse the soda price.\"",
+       "**Missing line in the record (never filled in):** price per gallon for Brand A, Brand B and Value Brand, 2014 and 2015 — and the share of soda volume each brand carried in each year.",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Шаг | Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|---|\n| 1 | Берёт первую строку записи — среднюю цену $0.90 → $0.70 — и принимает её за принятое решение | «мы срезали цену на 22%» | средняя величина читается как управленческий рычаг |\n| 2 | Склеивает её с самым крупным числом записи, −$6M | «цена срезана ⇒ выручка упала» | причинность из соседства двух чисел |\n| 3 | Отмечает рост объёма 100 → 120 как отклик на скидку | «эластичность не окупила скидку» | достраивание истории под уже выбранную причину |\n| 4 | Смотрит на побрендовую таблицу как на объёмную: A вниз, Value вверх | «покупатель ушёл в дешёвый бренд, потому что мы всё удешевили» | сырую таблицу без цен не читает как ценовую |\n| 5 | Выносит рекомендацию «вернуть цену содовой к $0.90» | рычаг, которого не существует: единой цены категории нет | «нашёл причину — откати её» |\n\n**DECOY_SUPPORT (вторым)** — чем наивный путь кажется подкреплённым\n* Средняя цена напечатана в экзибите как **колонка «Price / gallon»**, то есть выглядит как настоящая цена, а не как частное от деления.\n* Арифметика чужого расчёта сходится идеально: 100 × 0.9 = 90, 120 × 0.7 = 84, разница −6. Ничто в счёте не «ломается», и проверять его нечего — ошибка не в арифметике.\n* Направление верно: содовая действительно единственная просевшая категория, а Waters и Others действительно в плюсе. Наивный прав в диагнозе категории и неправ только в диагнозе рычага — поэтому соблазн честный.\n* Рост объёма на 20% выглядит как классический отклик на скидку и подтверждает историю задним числом.\n* Побрендовая таблица напечатана без цен, и глазами она читается как таблица объёмов; цену там надо построить, а не прочитать.\n\n**SUPPORT (третьим)** — что на самом деле держит верный вывод\n1. **Настоящая опора.** Brand A: $50M ÷ 50 гал. = $1.00 в 2014 и $30M ÷ 30 гал. = $1.00 в 2015. Цена не изменилась. Опора построена из `Exhibit 2`, стр. 31 — клиентского экзибита.\n2. **Настоящая опора.** Brand B: $25M ÷ 25 = $1.00 и $30M ÷ 30 = $1.00. Тоже без изменения. Два бренда из трёх опровергают формулировку «мы срезали цену содовой».\n3. **Настоящая опора.** Value Brand: $15M ÷ 25 = $0.60 → $24M ÷ 60 = $0.40. Единственное реальное снижение цены в поле, −33% у одного бренда.\n4. **Настоящая опора.** Доля Value в объёме содовой 25 ÷ 100 = 25% → 60 ÷ 120 = 50%. Половина падения средней — арифметика перевеса состава, а не чьё-либо решение о цене.\n5. **Настоящая опора, построенная.** При объёмах 2015 и ценах 2014 средняя = (30 + 30 + 36) ÷ 120 = $0.80. Значит из −$0.20 ровно −$0.10 даёт состав и −$0.10 — собственное снижение Value. В деньгах: объём и состав дают +$6M, снижение цены Value даёт −$12M, итог −$6M.\n6. **Ложная опора — не опираться.** Waters +$0.3M и Others +$1.0M. Они подтверждают только то, что проблема в содовой; к выбору рычага внутри содовой отношения не имеют и тянут в межкатегорийное сравнение.\n7. **Ложная опора — не опираться.** Себестоимость галлона неизменна во всех трёх категориях. Соблазнительно уйти в маржу, но постановка клиента — про выручку, и неизменная себестоимость ничего не добавляет к причине.\n8. **Единица измерения, держать в поле.** Обе таблицы помечены «* Average per store». Все $M и галлоны — на магазин; любая денежная формулировка обязана нести эту единицу, иначе рекомендация окажется в чужом масштабе.",
+    "decoy": "* Средняя цена напечатана в экзибите как **колонка «Price / gallon»**, то есть выглядит как настоящая цена, а не как частное от деления.\n* Арифметика чужого расчёта сходится идеально: 100 × 0.9 = 90, 120 × 0.7 = 84, разница −6. Ничто в счёте не «ломается», и проверять его нечего — ошибка не в арифметике.\n* Направление верно: содовая действительно единственная просевшая категория, а Waters и Others действительно в плюсе. Наивный прав в диагнозе категории и неправ только в диагнозе рычага — поэтому соблазн честный.\n* Рост объёма на 20% выглядит как классический отклик на скидку и подтверждает историю задним числом.\n* Побрендовая таблица напечатана без цен, и глазами она читается как таблица объёмов; цену там надо построить, а не прочитать.\n\n**SUPPORT (третьим)** — что на самом деле держит верный вывод\n1. **Настоящая опора.** Brand A: $50M ÷ 50 гал. = $1.00 в 2014 и $30M ÷ 30 гал. = $1.00 в 2015. Цена не изменилась. Опора построена из `Exhibit 2`, стр. 31 — клиентского экзибита.\n2. **Настоящая опора.** Brand B: $25M ÷ 25 = $1.00 и $30M ÷ 30 = $1.00. Тоже без изменения. Два бренда из трёх опровергают формулировку «мы срезали цену содовой».\n3. **Настоящая опора.** Value Brand: $15M ÷ 25 = $0.60 → $24M ÷ 60 = $0.40. Единственное реальное снижение цены в поле, −33% у одного бренда.\n4. **Настоящая опора.** Доля Value в объёме содовой 25 ÷ 100 = 25% → 60 ÷ 120 = 50%. Половина падения средней — арифметика перевеса состава, а не чьё-либо решение о цене.\n5. **Настоящая опора, построенная.** При объёмах 2015 и ценах 2014 средняя = (30 + 30 + 36) ÷ 120 = $0.80. Значит из −$0.20 ровно −$0.10 даёт состав и −$0.10 — собственное снижение Value. В деньгах: объём и состав дают +$6M, снижение цены Value даёт −$12M, итог −$6M.\n6. **Ложная опора — не опираться.** Waters +$0.3M и Others +$1.0M. Они подтверждают только то, что проблема в содовой; к выбору рычага внутри содовой отношения не имеют и тянут в межкатегорийное сравнение.\n7. **Ложная опора — не опираться.** Себестоимость галлона неизменна во всех трёх категориях. Соблазнительно уйти в маржу, но постановка клиента — про выручку, и неизменная себестоимость ничего не добавляет к причине.\n8. **Единица измерения, держать в поле.** Обе таблицы помечены «* Average per store». Все $M и галлоны — на магазин; любая денежная формулировка обязана нести эту единицу, иначе рекомендация окажется в чужом масштабе.",
+    "support": "1. **Настоящая опора.** Brand A: $50M ÷ 50 гал. = $1.00 в 2014 и $30M ÷ 30 гал. = $1.00 в 2015. Цена не изменилась. Опора построена из `Exhibit 2`, стр. 31 — клиентского экзибита.\n2. **Настоящая опора.** Brand B: $25M ÷ 25 = $1.00 и $30M ÷ 30 = $1.00. Тоже без изменения. Два бренда из трёх опровергают формулировку «мы срезали цену содовой».\n3. **Настоящая опора.** Value Brand: $15M ÷ 25 = $0.60 → $24M ÷ 60 = $0.40. Единственное реальное снижение цены в поле, −33% у одного бренда.\n4. **Настоящая опора.** Доля Value в объёме содовой 25 ÷ 100 = 25% → 60 ÷ 120 = 50%. Половина падения средней — арифметика перевеса состава, а не чьё-либо решение о цене.\n5. **Настоящая опора, построенная.** При объёмах 2015 и ценах 2014 средняя = (30 + 30 + 36) ÷ 120 = $0.80. Значит из −$0.20 ровно −$0.10 даёт состав и −$0.10 — собственное снижение Value. В деньгах: объём и состав дают +$6M, снижение цены Value даёт −$12M, итог −$6M.\n6. **Ложная опора — не опираться.** Waters +$0.3M и Others +$1.0M. Они подтверждают только то, что проблема в содовой; к выбору рычага внутри содовой отношения не имеют и тянут в межкатегорийное сравнение.\n7. **Ложная опора — не опираться.** Себестоимость галлона неизменна во всех трёх категориях. Соблазнительно уйти в маржу, но постановка клиента — про выручку, и неизменная себестоимость ничего не добавляет к причине.\n8. **Единица измерения, держать в поле.** Обе таблицы помечены «* Average per store». Все $M и галлоны — на магазин; любая денежная формулировка обязана нести эту единицу, иначе рекомендация окажется в чужом масштабе.",
+    "risks": "* **Внутренний.** Поднять цену Value обратно к $0.60 — значит бить по бренду, который за год вырос с 25 до 60 млн галлонов на магазин и стал половиной объёма содовой. Если объём Value откатится к прежним 25 галлонам, категория потеряет 35 галлонов объёма; при этом выручка Value при $0.60 и 25 галлонах вернётся к $15M против нынешних $24M, то есть −$9M на магазин — лечение окажется дороже болезни.\n* **Внешний.** Brand A потерял 20 из 50 млн галлонов при неизменной цене $1.00 — это переток покупателя, а не реакция на нашу цену. Любое изменение цен по A и B задевает отношения с их поставщиками, а поведение самого покупателя (переход в дешёвый сегмент) от нашего прайса не зависит и может продолжиться.",
+    "next": "1. Проверить, было ли снижение цены Value с $0.60 до $0.40 нашим решением или следствием изменения закупочной цены и промо-календаря. Снимает главную неопределённость: −$12M на магазин — это управляемая величина или внешняя.\n2. Разделить прирост Value на переток из Brand A и на новый спрос — сопоставить −20 галлонов A с +35 галлонами Value. Снимает неопределённость по каннибализации: без этого нельзя оценить, сколько объёма вернётся при откате цены.\n3. Зафиксировать масштаб: перевести «на магазин» в сетевые величины по числу магазинов, прежде чем нести любую денежную рекомендацию клиенту. Снимает риск ошибки в единицах.",
+    "build": "```python\nfrom decimal import Decimal, ROUND_HALF_UP\n\ndef r(x, q=\"0.01\"):\n    return Decimal(x).quantize(Decimal(q), rounding=ROUND_HALF_UP)\n\nD = Decimal\n\n# --- напечатано в книге: Exhibit 1, стр. 30 (экзибит), avg per store ---\nSODA_GAL   = {2014: D(100), 2015: D(120)}\nSODA_PRICE = {2014: D(\"0.9\"), 2015: D(\"0.7\")}\n\n# --- напечатано в книге: Exhibit 2, стр. 31 (экзибит), avg per store ---\nGAL = {\"A\": {2014: D(50), 2015: D(30)}, \"B\": {2014: D(25), 2015: D(30)}, \"V\": {2014: D(25), 2015: D(60)}}\nREV = {\"A\": {2014: D(50), 2015: D(30)}, \"B\": {2014: D(25), 2015: D(30)}, \"V\": {2014: D(15), 2015: D(24)}}\n\n# сходимость экзибитов между собой\nfor y in (2014, 2015):\n    assert sum(GAL[b][y] for b in GAL) == SODA_GAL[y]\n    assert sum(REV[b][y] for b in REV) == r(SODA_GAL[y] * SODA_PRICE[y])\n\ndelta_cat = r(SODA_GAL[2015] * SODA_PRICE[2015] - SODA_GAL[2014] * SODA_PRICE[2014])\nassert delta_cat == D(\"-6.00\")          # −$6M на магазин\n\n# --- ПОСТРОЕНО, книга печатает только в интервьюерском блоке: побрендовая цена ---\nP = {b: {y: r(REV[b][y] / GAL[b][y]) for y in (2014, 2015)} for b in GAL}\nassert P[\"A\"] == {2014: D(\"1.00\"), 2015: D(\"1.00\")}\nassert P[\"B\"] == {2014: D(\"1.00\"), 2015: D(\"1.00\")}\nassert P[\"V\"] == {2014: D(\"0.60\"), 2015: D(\"0.40\")}\nassert P[\"A\"][2014] == P[\"A\"][2015] and P[\"B\"][2014] == P[\"B\"][2015]   # цену снизил ровно один бренд\n\n# --- ПОСТРОЕНО, книга не печатает: доля Value в объёме ---\nshare_V = {y: r(GAL[\"V\"][y] / SODA_GAL[y] * D(100)) for y in (2014, 2015)}\nassert share_V == {2014: D(\"25.00\"), 2015: D(\"50.00\")}\n\n# --- ПОСТРОЕНО: разложение средней цены на состав и собственную цену ---\nrev_mix = sum(GAL[b][2015] * P[b][2014] for b in GAL)      # объёмы 2015 × цены 2014\nassert r(rev_mix) == D(\"96.00\")\navg_mix = r(rev_mix / SODA_GAL[2015])\nassert avg_mix == D(\"0.80\")\n\neffect_mix   = r(avg_mix - SODA_PRICE[2014])               # сдвиг состава\neffect_price = r(SODA_PRICE[2015] - avg_mix)               # собственная цена Value\nassert effect_mix == D(\"-0.10\") and effect_price == D(\"-0.10\")\nassert r(effect_mix + effect_price) == r(SODA_PRICE[2015] - SODA_PRICE[2014])   # = −0.20\n\n# --- ПОСТРОЕНО: то же в деньгах на магазин ---\nd_volume = r(rev_mix - SODA_GAL[2014] * SODA_PRICE[2014])              # +6\nd_vprice = r(SODA_GAL[2015] * SODA_PRICE[2015] - rev_mix)              # −12\nassert d_volume == D(\"6.00\") and d_vprice == D(\"-12.00\")\nassert r(d_volume + d_vprice) == delta_cat                             # −6 ✔\n\n# --- контрфакт риска: откат цены Value к $0.60 при возврате объёма к 25 галлонам ---\nrollback = r(D(25) * D(\"0.60\"))\nassert rollback == D(\"15.00\") and r(rollback - REV[\"V\"][2015]) == D(\"-9.00\")\n```\n\n**Провоцируемая ошибка** — принять среднюю цену за галлон по категории ($0.90 → $0.70) за собственное ценовое решение и потребовать «вернуть цену содовой», не построив побрендовые цены и не отделив сдвиг состава от снижения цены одного бренда."
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: цену не менял никто, кроме Value: Brand A $1.00 → $1.00, Brand B $1.00 → $1.00, Value $0.60 → $0.40; доля Value в объёме 25% → 50%; из −$0.20 средней ровно −$0.10 даёт сдвиг состава и −$0.10 — собственное снижение цены Value; (3) the naive reading is rejected explicitly, not merely avoided — «мы срезали цену содовой на 22%; вернуть цену к $0.90» must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: цену не менял никто, кроме Value: Brand A $1.00 → $1.00, Brand B $1.00 → $1.00, Value $0.60 → $0.40; доля Value в объёме 25% → 50%; из −$0.20 средней ровно −$0.10 даёт сдвиг состава и −$0.10 — собственное снижение цены Value; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — «мы срезали цену содовой на 22%; вернуть цену к $0.90» обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "* **Conclusion.** The record's read is wrong and the client should not touch the soda price as a category — we recommend the client work the Value Brand specifically, because that is the only brand whose price actually moved.\n* **Facts.** Brand A sold at $1.00 a gallon in both years ($50M on 50 gallons, then $30M on 30 gallons) and Brand B at $1.00 in both years. Only Value moved, from $0.60 to $0.40. Meanwhile Value went from 25% to 50% of soda volume. Splitting the $0.20 fall in the category average: hold 2014 prices at 2015 volumes and the average is $0.80, so $0.10 is pure mix shift and $0.10 is Value's own price cut. In dollars per store, volume and mix added $6M and Value's price cut took away $12M, netting the $6M decline.\n* **Risk.** Pushing Value's price back up hits the one brand that grew from 25 to 60 million gallons per store; if that volume unwinds, Value's revenue falls from $24M back toward $15M per store and we lose more than we recover. Externally, Brand A lost 20 of its 50 million gallons at an unchanged $1.00 price — the shopper is trading down on his own, and repricing A or B also puts supplier relationships in play. All figures are average per store.\n* **Next step.** Establish within a week whether the Value price move was our decision or a cost pass-through, and separate Value's 35-gallon gain into cannibalisation of Brand A versus incremental demand, before setting any price on Value."
+   },
+   "anchor_metric": "клиентского порога нет; решение выносится сопоставлением брендов между собой и разложением средней, а не сравнением с правилом. Case Prompt, стр. 24 просит «determine the cause of the decline and recommend ways to reverse the trend» — числа в постановке нет"
+  },
+  {
+   "id": "SY-028",
+   "title": "Ninety Tails",
+   "company": "",
+   "industry": "",
+   "difficulty": "Hard",
+   "clean": false,
+   "focus": "",
+   "scaffold": "L2",
+   "time": "5 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Your firm advises a domestic airline that has agreed to outfit its entire fleet with in-flight WiFi through a white-label vendor: the two sides split the up-front capex and the airline then pays the vendor a per-session fee out of its session margin. An analyst on your team has already worked out what share of passengers must buy a session for the airline to break even in two years, and has set that number against what the market delivers today. You have his working page and one further input that arrived after he finished. Read his work and tell the client whether the two-year break-even is reachable — and if not, what should move instead.",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**Analyst working page — IFC break-even, fleet-wide roll-out**",
+       "*Deal terms as agreed with the vendor*",
+       "- Capex = $250K per plane; the airline will cover 40% of it.",
+       "- Margin to the airline = $10 per session.",
+       "- Fleet: 90 planes, servicing ~30,000 flights per year in total.",
+       "**Exhibit 2 — Air Fleet Statistics.**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "",
+       "Wide body",
+       "Narrow body"
+      ],
+      "rows": [
+       [
+        "Fleet Size",
+        "10",
+        "80"
+       ],
+       [
+        "Seats per Aircraft",
+        "300",
+        "100"
+       ],
+       [
+        "Flights per Year",
+        "2,500",
+        "27,500"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "*Step 1 — airline's share of the investment*",
+       "- $250K × 40% = $100K per plane.",
+       "- Wide body: 10 × $100K = $1M. Narrow body: 80 × $100K = $8M.",
+       "- **Total investment = $9M.**",
+       "*Step 2 — passengers carried over the two-year window*",
+       "- Wide body: 300 seats × 2,500 flights/yr × 2 yrs = 1.5M.",
+       "- Narrow body: 100 seats × 27,500 flights/yr × 2 yrs = 5.5M.",
+       "- **Total = 7M passengers in 2 years.**",
+       "*Step 3 — take rate required to break even*",
+       "- 7M × [take rate] × $10 = $9M.",
+       "- **[Take rate] = 12.9%.**",
+       "*Assumptions carried through the model*",
+       "- Seat occupancy rate = 100%.",
+       "- All aircraft will be outfitted at the same time.",
+       "- Ad revenues already baked in to the margin figures.",
+       "- One WiFi session covers the entire flight.",
+       "*Analyst's read:* 12.9% is the bar. It sits a few points above where the category is today, so the gap looks like a marketing-and-pricing problem rather than a structural one.",
+       "**— New input, received after the page above was written —**",
+       "Market research: take rates are only between 5 and 10% today for paid connectivity. The client is concerned about being able to hit the break-even target.",
+       "**Background on the client and the category, for context**",
+       "- 80% of US-based aircraft are already outfitted with IFC technology; offering WiFi service is becoming table-stakes.",
+       "- The airline flies primarily domestic routes within the continental US, plus select flights to Canada, Mexico and the Caribbean.",
+       "- IFC includes only WiFi connectivity. In-flight entertainment is delivered via an on-board server through a separate system, though the two can be integrated into one user experience.",
+       "- IFC contracts with vendors are typically 10+ years long.",
+       "- Total bandwidth is shared across passengers, so the more passengers buy a session, the slower the service.",
+       "**Exhibit 1 — Competitive Benchmarking.**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "",
+       "Competitor 1",
+       "Competitor 2"
+      ],
+      "rows": [
+       [
+        "Airline description",
+        "Major domestic and international carrier with 65% fleet IFC coverage",
+        "Domestic discount carrier with 90% fleet IFC coverage"
+       ],
+       [
+        "IFC Branding",
+        "Vendor-branded",
+        "Airline-branded"
+       ],
+       [
+        "Pricing (for customers)",
+        "Determined by vendor, average $25/session",
+        "Determined by airline, Free"
+       ],
+       [
+        "Revenue model",
+        "Revenue share",
+        "Wholesale"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|\n| Считывает «Total = 7M passengers in 2 years» как свойство парка | база расчёта закрыта, дальше не проверяется | «подведённый итог = факт» |\n| Проверяет арифметику 9 / 70 = 12.9% и находит её верной | вывод «расчёт корректен» переносится с арифметики на постановку | «сошлось — значит правильно» |\n| Сравнивает 12.9% с новым блоком «5–10%» | разрыв читается как 3 пункта | «сравниваю с тем, что подали последним» |\n| Закрывает разрыв рычагами спроса | «амбициозно, но добираем маркетингом и ценой» | «три пункта — это про исполнение, а не про модель» |\n| Список допущений внизу читает как формальности | «Seat occupancy rate = 100%» проходит мимо вместе с «ad revenues baked in» | «допущения — это дисклеймер» |",
+    "decoy": "- Арифметика записи безупречна на всех трёх шагах: 250×0.4=100, 100×90=9,000, 9/70=12.86 — придраться не к чему, и это гасит подозрение к постановке.\n- 7M подведено жирным итогом с двумя слагаемыми — форма подведённого итога сама сообщает «здесь считать закончили».\n- Новый факт 5–10% подан **после** расчёта: композиция навязывает сравнение 12.9 против 10, то есть спор о трёх пунктах, а не о базе.\n- 12.9% попадает в правдоподобный коридор — это не абсурд, который заставил бы перепроверять; будь там 130%, кандидат вернулся бы к базе сам.\n- «Ad revenues already baked in» и «1 session covers entire flight» — настоящие безобидные допущения, и соседство маскирует единственное несущее.",
+    "support": "| Опора | Настоящая или ложная | Чем держится |\n|---|---|---|\n| «Seat occupancy rate = 100%» — это **допущение, а не факт**, и оно стоит ровно под расчётом, который даёт 12.9% | настоящая | напечатано в блоке `Question #2 / Math Information`, стр. 79, в списке assumptions |\n| При загрузке 80% база 5.6M и требуемая доля 16.1%; при 85% — 15.1% | настоящая, но **ПОСТРОЕНО, книга не печатает** значения загрузки | арифметика на книжной базе 7M; направление однозначно — честная величина уходит от рынка, а не к нему |\n| Даже верхняя граница напечатанного рынка не спасает: 7M × 10% × $10 = $7M против $9M вложения | настоящая, и это **защита от прямо напечатанного контраргумента** | 10% — верх диапазона со стр. 81; 7M — потолок при 100% загрузке. Контраргумент «доберём до 10% маркетингом» отбивается напечатанными числами |\n| Требуемая доля обратно пропорциональна загрузке, а загрузка ниже 100% при любой реалистичной эксплуатации | настоящая | «Load factor — % aircraft capacity filled by paying passengers» назван ключевой метрикой отрасли, стр. 19, блок `Airlines` (отраслевой обзор книги) |\n| «12.9% выше рынка, но это разрыв в три пункта» | **ложная** — величина, с которой сравнивают, сама завышена в пользу проекта | 12.9% — нижняя граница требуемого, а не цель |\n| «Экзибит даёт 2,500 рейсов на борт, значит база 70M» | **ложная** | 2,500 + 27,500 = 30,000 = «~30K flights per year» на весь парк, стр. 76, блок `Clarifying Info` |",
+    "risks": "- **Внутренний (структура сделки, а не спрос):** 40% — договорная доля клиента в капексе, а не физическая константа. Каждые 5 п.п., снятые с клиента, срезают вложение на $1.125M; при 35% вложение $7.875M и требуемая доля при 80% загрузки падает до 14.1% (**ПОСТРОЕНО**). То есть рычаг, который реально двигает вердикт, лежит в переговорах с вендором, и работать надо там — но и он в одиночку не выводит проект в напечатанный коридор 5–10%.\n- **Внешний (рынок и продукт):** напечатанный тейк-рейт 5–10% — это сегодняшний рынок при том, что полоса делится между пассажирами: рост числа покупок сам роняет скорость и, следовательно, готовность платить. Верх диапазона 10% даёт за два года $7M против $9M — дефицит $2M, который спросом не закрывается по построению.",
+    "next": "1. Затребовать у клиента фактический load factor по wide и narrow body за последние 12 месяцев. Снимает единственную неопределённость, отделяющую 12.9% от честной величины: сегодня вместо неё стоит допущение 100%.\n2. Пересобрать переговорную позицию по вендорскому контракту — доля клиента в капексе и per-session fee. Снимает неопределённость «какой из двух рычагов вообще способен сдвинуть вердикт»: расчёт показывает, что тейк-рейт не способен, а доля инвестиции — способна.\n3. Проверить срок: два года заданы формулировкой задачи, а не клиентом. Снимает неопределённость, является ли двухлетняя окупаемость требованием или рабочим допущением; при 10-летнем контракте (напечатанная норма отрасли) вопрос ставится иначе.",
+    "build": "```python\nfrom decimal import Decimal, ROUND_HALF_UP\n\ndef pct(x):\n    return (x * Decimal(100)).quantize(Decimal(\"0.1\"), rounding=ROUND_HALF_UP)\n\n# --- всё книжное (стр. 79 Math Information, стр. 84 Exhibit 2, стр. 76 Clarifying Info) ---\ncapex_per_plane = Decimal(\"250000\")\nairline_share   = Decimal(\"0.40\")\nplanes          = Decimal(\"90\")\nmargin_session  = Decimal(\"10\")\nyears           = Decimal(\"2\")\n\ninvestment = capex_per_plane * airline_share * planes\nassert investment == Decimal(\"9000000\")\n\nwide   = Decimal(\"300\") * Decimal(\"2500\")  * years   # 1.5M\nnarrow = Decimal(\"100\") * Decimal(\"27500\") * years   # 5.5M\npax_100 = wide + narrow\nassert wide == Decimal(\"1500000\") and narrow == Decimal(\"5500000\")\nassert pax_100 == Decimal(\"7000000\")\n\n# замок двусмысленности: рейсы — на флот, а не на борт\nassert Decimal(\"2500\") + Decimal(\"27500\") == Decimal(\"30000\")   # ~30K flights per year, стр. 76\nassert Decimal(\"10\") + Decimal(\"80\") == planes                   # 90 planes, стр. 76\n\nnaive = investment / (pax_100 * margin_session)\nassert pct(naive) == Decimal(\"12.9\")\n\n# --- ПОСТРОЕНО, книга не печатает: загрузка кресел ниже 100% ---\nfor load, expected in ((Decimal(\"0.80\"), Decimal(\"16.1\")),\n                       (Decimal(\"0.85\"), Decimal(\"15.1\"))):\n    req = investment / (pax_100 * load * margin_session)\n    assert pct(req) == expected\n\n# --- защита от напечатанного контраргумента: верх рынка 10% при 100% загрузке ---\nceiling_rev = pax_100 * Decimal(\"0.10\") * margin_session\nassert ceiling_rev == Decimal(\"7000000\")\nassert ceiling_rev < investment                      # $7M < $9M\nassert investment - ceiling_rev == Decimal(\"2000000\")\n\n# --- рычаг, который работает: доля клиента в капексе ---\ninv_35 = capex_per_plane * Decimal(\"0.35\") * planes\nassert inv_35 == Decimal(\"7875000\")\nassert investment - inv_35 == Decimal(\"1125000\")\nassert pct(inv_35 / (pax_100 * Decimal(\"0.80\") * margin_session)) == Decimal(\"14.1\")\n```\n\n**Провоцируемая ошибка** — принять подведённый итог 7M за свойство парка и спорить о трёх процентных пунктах, не заметив, что он получен при загрузке кресел 100%, напечатанной строкой ниже как допущение.\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: 16.1% при загрузке 80% (15.1% при 85%); потолок напечатанного рынка 10% даёт $7M выручки против $9M вложения даже при 100% загрузке; (3) the naive reading is rejected explicitly, not merely avoided — 12.9% must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: 16.1% при загрузке 80% (15.1% при 85%); потолок напечатанного рынка 10% даёт $7M выручки против $9M вложения даже при 100% загрузке; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — 12.9% обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "**[1] Verdict.** The airline should stop treating the 12.9% take rate as the target and reopen the vendor terms, because 12.9% is the *floor* — it is what break-even requires only if every seat on every flight is full, and the model says so on its own assumptions line.\n\n**[2] Deciding number.** At an 80% load factor the same $9M investment needs 16.1% of passengers to buy a session, and at 85% it needs 15.1% — the honest number moves away from the 5–10% the market delivers, not toward it. The check that closes the argument: even at the top of the printed range, 7M passengers × 10% × $10 = $7M, $2M short of the $9M, and that is with every seat full. So the lever is the deal, not demand — the airline's 40% share of the $250K capex, the per-session margin, or the two-year window, none of which is a client rule."
+   },
+   "anchor_metric": "клиентского порога нет; решение выносится сопоставлением, а не сравнением с правилом. Двухлетний срок задан текстом самого вопроса («break even in 2 years»), 5–10% — рыночный факт, произнесённый кандидату. Вердикт держится сопоставлением требуемой доли с напечатанным диапазоном рынка и с физическим потолком мест"
+  },
+  {
+   "id": "SY-029",
+   "title": "Whose Customers Are These",
+   "company": "",
+   "industry": "",
+   "difficulty": "Hard",
+   "clean": false,
+   "focus": "",
+   "scaffold": "L2",
+   "time": "5 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "PaperCo makes self-adhesive sheeted papers and sells them to commercial printers across the US. The business is profitable but has not grown for several years, and the client wants to invest to restore growth. A colleague has already costed the two options on the table — expanding carton capacity to serve more medium-sized printers, or expanding pallet capacity to serve more large ones — and has come back with a recommendation. Here is his page, together with what the client actually asked for. Read it and tell the client what to do.",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**What the client asked for**",
+       "PaperCo's operations are profitable, but the business has failed to grow over the past few years. The client would like to invest in the business to restore growth and has asked us to identify opportunities.",
+       "**Colleague's working page — carton vs. pallet capacity expansion**",
+       "*Market and customer facts on file*",
+       "- PaperCo sells to 24,000 commercial printers in the US: 20,000 small, 3,000 medium, 1,000 large.",
+       "- PaperCo holds 30% market share in the small printer segment and 10% in the medium and large printer segments.",
+       "- A study by the team showed that if PaperCo expanded production it could increase sales to the medium-sized or large-sized printer segments by 20%.",
+       "- The company has the capability to expand production. Any additional production requires an increase in fixed costs — new packaging equipment, expanded facilities, an increase in the permanent labor force. The amount differs by distribution method:",
+       "  - carton distribution capacity (medium printers): one-off cost of **$675K**",
+       "  - pallet distribution capacity (large printers): one-off cost of **$1.3M**",
+       "- Printers prefer to receive product in different forms by size: small prefer boxes, medium prefer cartons, large prefer pallets.",
+       "- Raw materials are rolls of paper, adhesives and a non-stick coating; these are layered and then cut to specification — \"sheeting\".",
+       "- Margins are acceptable, but management is averse to price-cutting for fear of initiating a war with competitors.",
+       "- The client's product range is broadly the same for all customers and it does not wish to change it.",
+       "- This is a mature industry, with low growth across the board, and no significant competitive or regulatory trends to be aware of.",
+       "*Unit economics and volumes*"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Variables",
+       "Small",
+       "Medium",
+       "Large"
+      ],
+      "rows": [
+       [
+        "Unit price",
+        "$20",
+        "$18",
+        "$15"
+       ],
+       [
+        "Materials cost",
+        "$5.5",
+        "$5.5",
+        "$5.5"
+       ],
+       [
+        "Coating cost",
+        "$1",
+        "$1",
+        "$1"
+       ],
+       [
+        "Sheeting cost",
+        "$0.5",
+        "$0.5",
+        "$0.5"
+       ],
+       [
+        "Packaging cost",
+        "$3",
+        "$2",
+        "$1"
+       ],
+       [
+        "**Profit per unit**",
+        "**$10**",
+        "**$9**",
+        "**$7**"
+       ],
+       [
+        "Number of customers",
+        "20,000",
+        "3,000",
+        "1,000"
+       ],
+       [
+        "Annual unit usage per customer",
+        "100",
+        "500",
+        "3,000"
+       ],
+       [
+        "**Total annual profit**",
+        "**$20M**",
+        "**$13.5M**",
+        "**$21M**"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "*Return on the two expansions*"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Variables",
+       "Medium",
+       "Large"
+      ],
+      "rows": [
+       [
+        "Total annual profit",
+        "$13.5M",
+        "$21M"
+       ],
+       [
+        "Additional annual sales with expansion",
+        "20%",
+        "20%"
+       ],
+       [
+        "Additional annual profit",
+        "$2.7M",
+        "$4.2M"
+       ],
+       [
+        "Cost of capacity expansion (one-off)",
+        "$675K",
+        "$1.3M"
+       ],
+       [
+        "Additional profit net of expansion",
+        "$2.025M",
+        "$2.9M"
+       ],
+       [
+        "**Return on investment**",
+        "**3.0**",
+        "**2.23**"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "*Colleague's conclusion:* expand carton capacity and go after the medium printer segment. It returns three times the money put in within the year, against 2.23 for pallets, and the smaller cheque means a smaller financing need.",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|\n| Видит клиентские цены и клиентские издержки в шапке таблицы | доверяет всей таблице как «нашей» | «начало клиентское — значит и итог клиентский» |\n| Читает строку `Total annual profit $13.5M` | берёт её как прибыль PaperCo в сегменте | «строка `Total` относится к тому, о ком кейс» |\n| Умножает на напечатанные 20% | $2.7M годового прироста | «множитель дан — применяю» |\n| Сопоставляет $2.7M с $675K | «возврат втрое за год» | «крупное число против мелкого — решение очевидно» |\n| Сравнивает 3.0 и 2.23 и выбирает | «берём средний сегмент» | ранжирование готово, значит работа сделана |\n| Долю 10% помнит как характеристику позиции | не применяет её нигде | «доля — это про то, кто мы, а не про то, сколько мы» |",
+    "decoy": "- Таблица идёт **от клиентских цен и клиентских издержек** — база кажется клиентской по инерции первых строк, хотя ломается она в строке `Number of customers`.\n- Арифметика верна на всех шагах: 3,000 × 500 × 9 = 13.5M действительно 13.5M; проверка счёта подтверждает запись и гасит подозрение.\n- Итоговые ROI 3.0 и 2.23 крупные, различимые и разнонаправленные — они дают готовый ответ на вопрос «что выбрать», и внимание уходит на выбор, а не на базу.\n- Строка долей 30%/10% стоит в другом блоке и выше по странице, оторвана от расчёта; к моменту таблицы она уже «прочитана».\n- Расширение действительно дешевле в среднем сегменте, и вывод «берём средний» подкреплён вторым, независимым и настоящим доводом (меньше финансирования) — это делает ошибочный заголовок правдоподобнее.",
+    "support": "| Опора | Настоящая или ложная | Чем держится |\n|---|---|---|\n| $13.5M = 3,000 × 500 × $9, то есть весь средний сегмент страны, а не бизнес клиента | настоящая | таблица `Number of customers 3,000` — это все типографии сегмента, стр. 150–152, блоки `Clarifying Information` и `Calculations` |\n| Доля клиента напечатана в том же клиентском блоке: 10% в medium и large | настоящая | «30% market share in the small printer segment and 10% in the medium and large printer segments» — стр. 149, блок `Clarifying Information` |\n| Прибыль клиента: medium $1.35M, large $2.1M; прирост +20% = $270K и $420K | настоящая, **ПОСТРОЕНО** из двух напечатанных величин | арифметика на книжных числах |\n| Ни один вариант не возвращает вложение за год: $270K < $675K и $420K < $1.3M | настоящая, и это **защита от прямо напечатанного контраргумента** | напечатанный контраргумент — сам ROI 3.0 в записи; он падает, потому что стоит на чужой базе |\n| Направление выбора выживает: 0.40 против 0.32 | настоящая | средний сегмент остаётся лучшим и на клиентской базе — переворачивается вердикт «идти», а не вердикт «куда» |\n| У решения нет напечатанного критерия приёмки | настоящая | в `Clarifying Information` стр. 149–151 правила окупаемости нет; годовой горизонт возникает только в `Recommendation:` стр. 154 — это указание интервьюеру |\n| «Трёхкратный возврат за год» | **ложная** | числитель собран по всему рынку, знаменатель — по клиенту; величины разной базы |\n| «Меньший чек = меньше риска, значит средний сегмент» | настоящая, но **недостаточная** | довод верен и уцелевает, но он про выбор между вариантами, а не про то, стоит ли вкладываться вообще |",
+    "risks": "- **Внутренний:** запись считает расширение разовым чеком, тогда как клиентский блок прямо перечисляет в составе прироста «an increase in the permanent labor force» и «expanded facilities» — то есть **постоянные** издержки. Годовой прирост клиента в среднем сегменте $270K; любая устойчивая прибавка к постоянным расходам свыше $270K в год не удлиняет окупаемость, а обнуляет её как понятие. Разовая сумма $675K и годовой поток $270K не сопоставимы, пока рекуррентная часть не выделена.\n- **Внешний:** отрасль зрелая с низким ростом по всему полю (стр. 151, `Clarifying Information`), значит +20% продаж берутся у конкурентов, а не из роста рынка. Конкурентный ответ, который срезает прирост вдвое, оставляет $135K в год против $675K — пять лет на возврат вместо заявленного года. Отдельно: книга сама предупреждает о втором прочтении цифры 20% — **«The candidate should be clear about the difference between increasing sales by 20% and increasing market share by 20 percentage points. The former is correct. The latter would constitute a 200% increase in sales»** (стр. 149, инлайн-заметка интервьюеру внутри блока `Clarifying Information`). Прочтение «+20 п.п. доли» дало бы прирост в десять раз больший и перевернуло бы вердикт обратно — поэтому базу надо назвать вслух.",
+    "next": "1. Затребовать у клиента разбивку расширения на разовую и рекуррентную часть по обеим опциям. Снимает неопределённость, которая сейчас делает любой расчёт возврата условным: постоянные издержки перечислены, но не оцифрованы.\n2. Зафиксировать с клиентом критерий решения — горизонт и требуемую отдачу. Снимает главную неопределённость вердикта: напечатанного правила приёмки в кейсе нет, а тот годовой горизонт, на котором стоит чужая запись, клиентом не заявлен.\n3. Проверить у команды, к какой базе относятся +20% — к продажам клиента или к его доле. Снимает разночтение, которое меняет прирост на порядок.\n4. Поставить вопрос о доле, а не о мощности: клиент держит 30% в малом сегменте и 10% в среднем и крупном. Снимает неопределённость, лежит ли ограничение роста в производственной мощности вообще — при 10% доли потолок скорее коммерческий.",
+    "build": "```python\nfrom decimal import Decimal, ROUND_HALF_UP\n\ndef r2(x):\n    return x.quantize(Decimal(\"0.01\"), rounding=ROUND_HALF_UP)\n\n# --- книжные величины (стр. 149–153, блоки Clarifying Information и Calculations) ---\nmid_customers, mid_usage, mid_unit_profit = Decimal(\"3000\"),  Decimal(\"500\"),   Decimal(\"9\")\nlg_customers,  lg_usage,  lg_unit_profit  = Decimal(\"1000\"),  Decimal(\"3000\"),  Decimal(\"7\")\nclient_share = Decimal(\"0.10\")      # доля клиента в medium и large, стр. 149\nuplift       = Decimal(\"0.20\")      # increase sales by 20%, стр. 149\ncost_carton  = Decimal(\"675000\")\ncost_pallet  = Decimal(\"1300000\")\n\n# сверка прибыли на единицу с ценами и издержками\nassert Decimal(\"18\") - (Decimal(\"5.5\")+Decimal(\"1\")+Decimal(\"0.5\")+Decimal(\"2\")) == mid_unit_profit\nassert Decimal(\"15\") - (Decimal(\"5.5\")+Decimal(\"1\")+Decimal(\"0.5\")+Decimal(\"1\")) == lg_unit_profit\n\n# пулы всего сегмента — то, на чём стоит чужая запись\nmid_pool = mid_customers * mid_usage * mid_unit_profit\nlg_pool  = lg_customers  * lg_usage  * lg_unit_profit\nassert mid_pool == Decimal(\"13500000\") and lg_pool == Decimal(\"21000000\")\n\n# наивная ветвь: ROI книги на пуле сегмента\nroi_naive_mid = (mid_pool*uplift - cost_carton) / cost_carton\nroi_naive_lg  = (lg_pool*uplift  - cost_pallet) / cost_pallet\nassert r2(roi_naive_mid) == Decimal(\"3.00\")\nassert r2(roi_naive_lg)  == Decimal(\"2.23\")\n\n# --- ПОСТРОЕНО, книга не печатает: та же арифметика на доле клиента ---\nmid_own = mid_pool * client_share\nlg_own  = lg_pool  * client_share\nassert mid_own == Decimal(\"1350000\") and lg_own == Decimal(\"2100000\")\n\nmid_gain = mid_own * uplift\nlg_gain  = lg_own  * uplift\nassert mid_gain == Decimal(\"270000\") and lg_gain == Decimal(\"420000\")\n\n# ни один вариант не возвращает вложение за год\nassert mid_gain < cost_carton and lg_gain < cost_pallet\nassert r2(mid_gain / cost_carton) == Decimal(\"0.40\")\nassert r2(lg_gain  / cost_pallet) == Decimal(\"0.32\")\n\n# по формуле самой книги, но на клиентской базе — обе отрицательны\nroi_own_mid = (mid_gain - cost_carton) / cost_carton\nroi_own_lg  = (lg_gain  - cost_pallet) / cost_pallet\nassert r2(roi_own_mid) == Decimal(\"-0.60\")\nassert r2(roi_own_lg)  == Decimal(\"-0.68\")\n\n# направление выбора выживает, заголовок — нет\nassert roi_own_mid > roi_own_lg\nassert (mid_gain/cost_carton) > (lg_gain/cost_pallet)\n\n# внешний риск в цифре: конкурентный ответ срезает прирост вдвое\nassert r2(cost_carton / (mid_gain/2)) == Decimal(\"5.00\")   # пять лет вместо года\n```\n\n**Провоцируемая ошибка** — принять `Total annual profit $13.5M` за прибыль клиента и посчитать возврат на пуле всего сегмента, не применив напечатанную рядом долю 10%."
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: прирост клиента $270K (medium) против $420K (large); отношение к вложению 0.40 и 0.32 — ни один вариант не возвращается за год; на клиентской базе ROI по формуле книги = −0.60 и −0.68; (3) the naive reading is rejected explicitly, not merely avoided — ROI 3.0 (medium) против 2.23 (large); «трёхкратный возврат за год» must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: прирост клиента $270K (medium) против $420K (large); отношение к вложению 0.40 и 0.32 — ни один вариант не возвращается за год; на клиентской базе ROI по формуле книги = −0.60 и −0.68; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — ROI 3.0 (medium) против 2.23 (large); «трёхкратный возврат за год» обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "**[1] Verdict.** PaperCo should not fund either expansion on this case — neither pays its cheque back inside a year — and should reopen the question as one of share, not capacity: the client holds 10% of the medium and large segments against 30% of the small one.\n\n**[2] Deciding number.** The $13.5M in the working page is the whole medium segment — 3,000 printers × 500 units × $9 — not PaperCo's book. PaperCo's 10% share of it is $1.35M, so a 20% sales uplift is **$270K a year against a $675K one-off**, and in the large segment $420K against $1.3M. What survives is the direction, not the headline: medium still beats large, 0.40 against 0.32. What does not survive is \"three times the money back in a year\" — and note that no payback rule appears anywhere in what the client told us; the client asked for growth."
+   },
+   "anchor_metric": "клиентского порога нет; решение выносится сопоставлением, а не сравнением с правилом. В Clarifying Information (стр. 149–151) нет ни правила окупаемости, ни горизонта. Вердикт держится сопоставлением годового прироста прибыли клиента с разовой суммой и с напечатанной целью клиента"
+  },
+  {
+   "id": "SY-030",
+   "title": "EnerForce",
+   "company": "",
+   "industry": "",
+   "difficulty": "Hard",
+   "clean": false,
+   "focus": "",
+   "scaffold": "L2",
+   "time": "5 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "A deal team screening a wind turbine manufacturer for a U.S. energy conglomerate has finished its first pass: three market exhibits, a unit forecast by geography, the target's plant capacities, and a perpetuity valuation set against the asking price. You have five minutes with the working file before the partner call. Read it and tell the partner what the price is worth and where the diligence team should spend its next two weeks.",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**WORKING FILE — Project Windward · target: EnerForce, wind turbine manufacturer, plants in China and Vietnam**",
+       "**Client objective (as briefed).** A U.S. energy conglomerate is considering the acquisition of EnerForce. The conglomerate wants a go / no-go on the seller's asking price, and a list of what diligence must confirm before signing.",
+       "**Block A — market screen for the upcoming EnerForce 100 KW turbine.**",
+       "Analyst note: \"I started from where the 100 KW turbine sells best next year. Conversion the team used throughout: 1 GW = 1,000,000 KW, and each turbine is rated 100 KW.\"",
+       "**Exhibit — market size and growth.**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Market",
+       "Yearly demand (GW)",
+       "Projected annual growth rate"
+      ],
+      "rows": [
+       [
+        "Asia",
+        "4.5",
+        "2%"
+       ],
+       [
+        "U.S.",
+        "5",
+        "9%"
+       ],
+       [
+        "Europe",
+        "6",
+        "−13%"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "**Exhibit — competitive landscape, industry rank of the EnerForce 100 KW turbine.**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Market",
+       "# of total competitors",
+       "Durability",
+       "Size",
+       "Aesthetics",
+       "Output",
+       "Brand",
+       "Cost"
+      ],
+      "rows": [
+       [
+        "Asia",
+        "9",
+        "#2",
+        "#6",
+        "#7",
+        "#4",
+        "#7",
+        "#7"
+       ],
+       [
+        "U.S.",
+        "4",
+        "#2",
+        "#3",
+        "#2",
+        "#1",
+        "#4",
+        "#4"
+       ],
+       [
+        "Europe",
+        "6",
+        "#3",
+        "#1",
+        "#6",
+        "#2",
+        "#3",
+        "#3"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "**Exhibit — customer survey, importance of product characteristic by market (10 = most important).**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Market",
+       "Durability",
+       "Size",
+       "Aesthetics",
+       "Output",
+       "Brand",
+       "Cost"
+      ],
+      "rows": [
+       [
+        "Asia",
+        "3",
+        "6",
+        "4",
+        "9",
+        "4",
+        "8"
+       ],
+       [
+        "U.S.",
+        "4",
+        "3",
+        "9",
+        "8",
+        "5",
+        "5"
+       ],
+       [
+        "Europe",
+        "2",
+        "8",
+        "3",
+        "10",
+        "5",
+        "5"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "**Block B — unit forecast the team carried forward.**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Market",
+       "Demand (GW)",
+       "Turbines in market this year",
+       "Growth",
+       "Turbines in market next year",
+       "Market share",
+       "Expected EnerForce turbine sales next year"
+      ],
+      "rows": [
+       [
+        "Asia",
+        "4.5",
+        "45,000",
+        "2%",
+        "45,900",
+        "10%",
+        "4,590"
+       ],
+       [
+        "U.S.",
+        "5",
+        "50,000",
+        "9%",
+        "54,500",
+        "50%",
+        "27,250"
+       ],
+       [
+        "Europe",
+        "6",
+        "60,000",
+        "−13%",
+        "52,200",
+        "40%",
+        "20,880"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "Margin note in the file: *the three share figures are the team's own read of the two exhibits above. Nothing in the client data fixes them.*",
+       "**Block C — plant and deal terms handed over by the seller.**",
+       "Plant capacity in China: 2,000 turbines/year. Plant capacity in Vietnam: 3,000 turbines/year. Turbines are sold at a price of $100K at a 15% profit margin. Discount rate: 10%. Asking price: $700M.",
+       "**Block D — the valuation the team ran.**",
+       "5,000 turbines/year × $100K = $500M revenue per year. $500M × 15% profit margin = $75M profit per year. $75M ÷ 10% = $750M. Treated as a no-growth perpetuity, and on the assumption that the turbine is EnerForce's only product.",
+       "**Over to you.** The partner call is in five minutes. What do you tell her about the $700M, and what goes on the diligence list?",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Шаг | Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|---|\n| 1 | Идёт по записи сверху вниз, геоблок читает как основную работу | Первые три минуты уходят на рынки, ранги и предпочтения | «Порядок в записи = порядок важности» |\n| 2 | Ищет самое крупное число в блоке B | Фиксирует 27,250 турбин по США | «Больше всего продаж = главный рынок» |\n| 3 | Проверяет, чем США заслужили 50% | Находит Output #1 при 4 конкурентах и важность Output 8 — подтверждение есть | «Если допущение объяснимо, оно верно» |\n| 4 | Переходит к блоку D и читает $750M как итог рыночной работы | Считает, что рынок США и есть источник стоимости | «Расчёт, стоящий следующим, следует из предыдущего» |\n| 5 | Сравнивает $750M с $700M | Запас 7.1% → «покупаем, оценка выше цены» | «Есть порог — сравни и остановись» |\n| 6 | Формулирует вердикт и риски вокруг рынков (тарифы, конкуренты из Азии) | Due diligence уходит в привлекательность рынков | «Риски строятся вокруг того, что я анализировал» |\n\n**DECOY_SUPPORT (вторым)** — чем наивный путь кажется подкреплённым\n\n* Три экзибита подряд, все про рынки, и ни одного про производство: объём материала сам сообщает, что здесь и лежит ответ.\n* США выигрывают согласованно и в трёх местах сразу: спрос растёт быстрее всех (9% против 2% и −13%), конкурентов меньше всех (4 против 9 и 6), ранг по Output #1 при важности Output 8. Согласованность читается как доказательство.\n* 27,250 — почти шестикратно больше азиатских 4,590 и заметно больше европейских 20,880. Разрыв выглядит как содержательный вывод, а не как следствие придуманной 50%-й доли.\n* Блок D начинается ровно с «5,000 turbines/year» без объяснения, откуда 5,000. Пропуск заполняется автоматически: «из рынков».\n* Порог напечатан прямым текстом ($700M) и стоит рядом с оценкой ($750M). Задача выглядит закрытой вычитанием.\n\n**SUPPORT (третьим)** — что на самом деле держит верный вывод\n\n| Опора | Настоящая или ложная | Чем держится |\n|---|---|---|\n| Совокупная мощность 5,000 турбин/год против 52,720 турбин ожидаемых продаж — покрытие 9.5% | Настоящая | Обе стороны напечатаны: мощности — `Question #4:`, стр. 126; слагаемые — `Question 3`, стр. 125. Сумма и деление — ПОСТРОЕНО |\n| Оценка $750M построена только на мощности, цене и марже — доля рынка в неё не входит ни одним множителем | Настоящая | Полный расчёт напечатан в `Question #4:`, стр. 126: 5,000 × $100K × 15% ÷ 10%. Ни одного входа из блока B |\n| Убрать рынок США целиком — мощность по-прежнему меньше остатка (5,000 против 25,470), оценка не меняется | Настоящая (контрфакт) | ПОСТРОЕНО из напечатанных 4,590 и 20,880 |\n| Запас 7.1% держится на бессрочной ренте без роста при единственной ставке 10%; при 11% оценка $681.8M — ниже цены | Настоящая, но с оговоркой | $75M и 10% напечатаны (`Question #4:`, стр. 126). Ставка 11% — ПОСТРОЕНО; это не альтернативный факт книги, а тест на устойчивость |\n| «США — лучший рынок по рангам и предпочтениям» | Ложная как опора вердикта | Верно как наблюдение (`Exhibit #2`, стр. 129; `Exhibit #1`, стр. 128), но с оценкой не связано ни одной операцией |\n| Доли 10% / 50% / 40% | Ложная | Взяты из интервьюерской таблицы `Question 3`, стр. 125, книгой не обоснованы; спор о них не меняет ни одного числа в оценке |",
+    "decoy": "* Три экзибита подряд, все про рынки, и ни одного про производство: объём материала сам сообщает, что здесь и лежит ответ.\n* США выигрывают согласованно и в трёх местах сразу: спрос растёт быстрее всех (9% против 2% и −13%), конкурентов меньше всех (4 против 9 и 6), ранг по Output #1 при важности Output 8. Согласованность читается как доказательство.\n* 27,250 — почти шестикратно больше азиатских 4,590 и заметно больше европейских 20,880. Разрыв выглядит как содержательный вывод, а не как следствие придуманной 50%-й доли.\n* Блок D начинается ровно с «5,000 turbines/year» без объяснения, откуда 5,000. Пропуск заполняется автоматически: «из рынков».\n* Порог напечатан прямым текстом ($700M) и стоит рядом с оценкой ($750M). Задача выглядит закрытой вычитанием.\n\n**SUPPORT (третьим)** — что на самом деле держит верный вывод\n\n| Опора | Настоящая или ложная | Чем держится |\n|---|---|---|\n| Совокупная мощность 5,000 турбин/год против 52,720 турбин ожидаемых продаж — покрытие 9.5% | Настоящая | Обе стороны напечатаны: мощности — `Question #4:`, стр. 126; слагаемые — `Question 3`, стр. 125. Сумма и деление — ПОСТРОЕНО |\n| Оценка $750M построена только на мощности, цене и марже — доля рынка в неё не входит ни одним множителем | Настоящая | Полный расчёт напечатан в `Question #4:`, стр. 126: 5,000 × $100K × 15% ÷ 10%. Ни одного входа из блока B |\n| Убрать рынок США целиком — мощность по-прежнему меньше остатка (5,000 против 25,470), оценка не меняется | Настоящая (контрфакт) | ПОСТРОЕНО из напечатанных 4,590 и 20,880 |\n| Запас 7.1% держится на бессрочной ренте без роста при единственной ставке 10%; при 11% оценка $681.8M — ниже цены | Настоящая, но с оговоркой | $75M и 10% напечатаны (`Question #4:`, стр. 126). Ставка 11% — ПОСТРОЕНО; это не альтернативный факт книги, а тест на устойчивость |\n| «США — лучший рынок по рангам и предпочтениям» | Ложная как опора вердикта | Верно как наблюдение (`Exhibit #2`, стр. 129; `Exhibit #1`, стр. 128), но с оценкой не связано ни одной операцией |\n| Доли 10% / 50% / 40% | Ложная | Взяты из интервьюерской таблицы `Question 3`, стр. 125, книгой не обоснованы; спор о них не меняет ни одного числа в оценке |",
+    "support": "| Опора | Настоящая или ложная | Чем держится |\n|---|---|---|\n| Совокупная мощность 5,000 турбин/год против 52,720 турбин ожидаемых продаж — покрытие 9.5% | Настоящая | Обе стороны напечатаны: мощности — `Question #4:`, стр. 126; слагаемые — `Question 3`, стр. 125. Сумма и деление — ПОСТРОЕНО |\n| Оценка $750M построена только на мощности, цене и марже — доля рынка в неё не входит ни одним множителем | Настоящая | Полный расчёт напечатан в `Question #4:`, стр. 126: 5,000 × $100K × 15% ÷ 10%. Ни одного входа из блока B |\n| Убрать рынок США целиком — мощность по-прежнему меньше остатка (5,000 против 25,470), оценка не меняется | Настоящая (контрфакт) | ПОСТРОЕНО из напечатанных 4,590 и 20,880 |\n| Запас 7.1% держится на бессрочной ренте без роста при единственной ставке 10%; при 11% оценка $681.8M — ниже цены | Настоящая, но с оговоркой | $75M и 10% напечатаны (`Question #4:`, стр. 126). Ставка 11% — ПОСТРОЕНО; это не альтернативный факт книги, а тест на устойчивость |\n| «США — лучший рынок по рангам и предпочтениям» | Ложная как опора вердикта | Верно как наблюдение (`Exhibit #2`, стр. 129; `Exhibit #1`, стр. 128), но с оценкой не связано ни одной операцией |\n| Доли 10% / 50% / 40% | Ложная | Взяты из интервьюерской таблицы `Question 3`, стр. 125, книгой не обоснованы; спор о них не меняет ни одного числа в оценке |",
+    "risks": "* **Внутренний.** Оценка $750M предполагает, что оба завода работают на 100% мощности бессрочно и что турбина — единственный продукт EnerForce. Провал загрузки на 10% (500 турбин/год) снимает $75M стоимости, то есть весь запас над ценой $700M и ещё $25M сверху.\n* **Внешний / регуляторный.** Мощность 5,000 турбин/год стоит в Китае и Вьетнаме, а спрос, под который её планируют загружать, — в США и Европе: 48,130 из 52,720 ожидаемых продаж. Тарифы или квоты на импорт турбин обнуляют доступ к рынкам, под которые сделка и покупается, не тронув ни одной цифры оценки.\n* **Модельный.** Один процентный пункт ставки стоит $68M: 10% → $750M, 11% → $681.8M. Вердикт «покупать» живёт на разнице в 7.1% и переворачивается раньше, чем любое из рыночных допущений успеет ошибиться.",
+    "next": "1. Расширяемость мощностей: за две недели получить от EnerForce капитальный план и сроки по обоим заводам — сколько стоит и сколько занимает переход с 5,000 к 10,000 турбин/год. *Снимает главную неопределённость: является ли 5,000 потолком стоимости или временным состоянием.*\n2. Ставка: согласовать с корпоративными финансами WACC для актива с производством в Китае и Вьетнаме и продажами в США и Европе, с диапазоном, а не точкой. *Снимает неопределённость знака: при 11% сделка уже убыточна.*\n3. Прочие продукты и активы EnerForce. *Снимает допущение «100 KW турбина — единственный продукт», на котором целиком стоит $750M.*\n4. Только после этого — тарифы и квоты на импорт турбин в США и ЕС. *Снимает неопределённость доступа к спросу; до пунктов 1–3 не приоритет, потому что не влияет на саму оценку.*",
+    "build": "```python\nfrom decimal import Decimal as D, ROUND_HALF_UP\n\ndef q(x, n=\"0.1\"):\n    return x.quantize(D(n), rounding=ROUND_HALF_UP)\n\n# ── книжные входы ────────────────────────────────────────────────\n# Question 3, стр. 125 (интервьюерская таблица)\nsales = {\"Asia\": D(\"4590\"), \"US\": D(\"27250\"), \"Europe\": D(\"20880\")}\n# Question #4:, стр. 126\ncap    = D(\"2000\") + D(\"3000\")\nprice  = D(\"100000\")\nmargin = D(\"0.15\")\nrate   = D(\"0.10\")\nask    = D(\"700000000\")\n\nassert cap == D(\"5000\")                     # «production would be 5,000 turbines/year», стр. 126\n\n# ── книжная цепочка оценки (всё напечатано на стр. 126) ──────────\nrevenue = cap * price\nassert revenue == D(\"500000000\")            # $500M/year\nprofit  = revenue * margin\nassert profit == D(\"75000000\")              # $75M/year\nval_10  = profit / rate\nassert val_10 == D(\"750000000\")             # $750M valuation\nassert val_10 > ask                          # наивный вердикт: покупать\n\n# ── ПОСТРОЕНО, книга не печатает ─────────────────────────────────\ndemand_next = sales[\"Asia\"] + sales[\"US\"] + sales[\"Europe\"]\nassert demand_next == D(\"52720\")\n\ncoverage = q(cap / demand_next * D(\"100\"), \"0.1\")\nassert coverage == D(\"9.5\")                  # мощность покрывает 9.5% ожидаемых продаж\n\n# контрфакт: рынка США нет\ndemand_ex_us = sales[\"Asia\"] + sales[\"Europe\"]\nassert demand_ex_us == D(\"25470\")\nassert cap <= demand_ex_us                   # мощность всё равно связывает\nassert profit / rate == val_10               # оценка не изменилась ни на доллар\n\n# чувствительность к ставке (11% — ПОСТРОЕНО, в книге ставки 11% нет)\nval_11 = q(profit / D(\"0.11\") / D(\"1000000\"), \"0.1\")\nassert val_11 == D(\"681.8\")                  # $681.8M\nassert val_11 * D(\"1000000\") < ask           # ниже цены сделки\n\ncushion = q((val_10 - ask) / ask * D(\"100\"), \"0.1\")\nassert cushion == D(\"7.1\")                   # весь запас — 7.1%\n\nrate_cost = q((val_10 - val_11 * D(\"1000000\")) / D(\"1000000\"), \"0.1\")\nassert rate_cost == D(\"68.2\")                # один пункт ставки стоит $68.2M\n```\n\n**Провоцируемая ошибка** — кандидат объявляет США лучшим рынком, принимает $750M за результат рыночной работы, вычитает $700M и рекомендует покупать, не заметив, что мощность закрывает 9.5% спроса и что оценка держится на единственной ставке.\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: Мощность 5,000/год покрывает 9.5% от 52,720 турбин ожидаемых продаж; оценка $750M не меняется ни на доллар при исчезновении рынка США; при ставке 11% оценка $681.8M — ниже цены; (3) the naive reading is rejected explicitly, not merely avoided — Оценка $750M против цены $700M, запас 7.1% → покупать; лучший рынок — США must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: Мощность 5,000/год покрывает 9.5% от 52,720 турбин ожидаемых продаж; оценка $750M не меняется ни на доллар при исчезновении рынка США; при ставке 11% оценка $681.8M — ниже цены; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — Оценка $750M против цены $700M, запас 7.1% → покупать; лучший рынок — США обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "**[1] Verdict and the two numbers that hold it.** *\"Do not sign at $700M yet — the valuation is real but it is not a market call, and it is one percentage point away from breaking. Two numbers. First, EnerForce can build 5,000 turbines a year against 52,720 turbines of expected demand next year: capacity covers 9.5% of the market the team just sized, so output is set by the plants, not by share. The $750M is 5,000 × $100K × 15% ÷ 10% — drop the U.S. market entirely and the number does not move. Second, that $750M is a no-growth perpetuity at a single 10% rate; at 11% it is $681.8M, below the asking price. The 7.1% cushion is a rate assumption, not a market position.\"*\n\n**[2] Where diligence goes and what it buys us.** *\"Point the next two weeks at capacity and at the rate, not at market attractiveness. Get EnerForce's capital plan for the China and Vietnam plants — cost and lead time to move from 5,000 to 10,000 turbines a year — because everything above $750M has to come from expansion. Get a WACC range from corporate finance for an asset producing in Asia and selling in the U.S. and Europe. Confirm whether the 100 KW turbine is the only product, since the whole valuation assumes it is. If capacity is fixed and the rate lands at 11%, we walk or we reprice; if capacity doubles cheaply, $700M is a bargain and the market work finally starts to matter.\"*"
+   },
+   "anchor_metric": "$700M — цена сделки"
+  },
+  {
+   "id": "SY-031",
+   "title": "MJ Wineries",
+   "company": "",
+   "industry": "",
+   "difficulty": "Medium",
+   "clean": true,
+   "focus": "",
+   "scaffold": "L1",
+   "time": "4 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "A California winery known for its Chardonnay has seen profitability decline and asked the team which grape variety it should add. The working file below contains the varietal comparison the team built, the consumption trend it read, and the conclusion it reached. You have four minutes. Tell the partner whether the file's conclusion survives, what exactly holds it up, and what would have to be true for it to fail.",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**WORKING FILE — MJ Wineries, varietal selection**",
+       "**Client objective.** MJ Wineries produces wine in Sonoma Valley, California, specialising in Chardonnay and holding a strong share in it. Profitability has recently declined. The CEO has asked us to recommend ways to immediately improve profitability, and the team has taken the route of adding a second grape variety. Today is January 1st, 2018; 2017 has just concluded.",
+       "**Block A — consumption trend.**",
+       "**Exhibit 1 — \"Which wine do you consume the most? (US Adults)\", % of responses, 2007 to 2017, three series: White, Red, Rose.** Over the eleven years the White series falls and the Red series rises; the two cross. The Rose series stays flat and low. The chart carries no data labels.",
+       "**Block B — varietal comparison the team built.**",
+       "**Exhibit 2 — grape varieties.**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Grape variety",
+       "Wine type",
+       "Key locations",
+       "Food pairing",
+       "Consumption growth",
+       "Profit margin"
+      ],
+      "rows": [
+       [
+        "Chardonnay",
+        "White",
+        "France, California",
+        "Fish and Chicken",
+        "2%",
+        "20%"
+       ],
+       [
+        "Riesling",
+        "White",
+        "Germany, Eastern USA",
+        "Food friendly",
+        "10%",
+        "15%"
+       ],
+       [
+        "Sauvignon Blanc",
+        "White",
+        "New Zealand, France",
+        "Seafood",
+        "4%",
+        "10%"
+       ],
+       [
+        "Syrah",
+        "Red",
+        "Australia, France",
+        "Red meat",
+        "2%",
+        "18%"
+       ],
+       [
+        "Merlot",
+        "Red",
+        "France, California",
+        "Red meat",
+        "12%",
+        "8%"
+       ],
+       [
+        "Cabernet Sauvignon",
+        "Red",
+        "France, California",
+        "Red meat",
+        "1%",
+        "10%"
+       ],
+       [
+        "Pinot Noir",
+        "Red",
+        "France, California",
+        "Food friendly",
+        "12%",
+        "15%"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "**Block C — production and distribution notes on file.**",
+       "MJ Wineries only produces wine in Sonoma Valley, from grapes grown at one large 3,000 acre vineyard. It takes at least nine months to produce a bottle of Chardonnay from the time the grapes are planted to the time the wine can be un-corked, but the wines get better as they age. Wine production is very capital intensive, but MJ Wineries owns the equipment it uses. There are some major wine producers but tens of thousands of small ones. Liquor stores are the primary distribution source; restaurants, bars and nightclubs, and supermarkets follow.",
+       "**Block D — the team's conclusion as written in the file.**",
+       "\"MJ Wineries should add Pinot Noir. Consumer preference is shifting from white wine to red, and Pinot Noir shows the highest consumption growth among the red varieties.\"",
+       "**Over to you.** Does the file's conclusion hold? Say what holds it up, and what would have to be true for it to fail.",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Шаг | Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|---|\n| 1 | Читает блок D и слышит «highest consumption growth among the reds» | Идёт проверять именно колонку роста | «Проверяй запись по тому основанию, которое она сама назвала» |\n| 2 | Сканирует колонку роста по красным | Находит Merlot 12% и Pinot Noir 12% — ничья | «Ищи одну колонку-решатель» |\n| 3 | Ничью читает как пойманную ошибку чужой работы | Ощущение находки, скорость растёт | «В чужой записи всегда есть, что перевернуть» |\n| 4 | Ищет тайбрейк там же, где смотрел: тип и география | Merlot тоже Red, тоже France + California — различий нет | «Проверяй по тем же колонкам, что уже открыл» |\n| 5 | Объявляет, что запись не обоснована и выбор между Merlot и Pinot Noir произволен | Вердикт «файл не защитим, нужен ещё один критерий» | «Не смог различить — значит, автор тоже не мог» |\n| 6 | Либо, вместо этого, хватает 18% у Syrah как «самую высокую маржу» | Переворачивает вывод в пользу Syrah | «Маржа решает в задачах о прибыльности» |\n\n**DECOY_SUPPORT (вторым)** — чем соблазн кажется подкреплённым\n\n* Ничья 12% / 12% **настоящая**: обе цифры напечатаны в одном экзибите, это не игра слов и не разные базы.\n* Merlot совпадает с Pinot Noir по трём видимым признакам сразу — Red, France + California, 12% роста, — то есть по всему, что запись назвала своим основанием. По названному основанию строки действительно неразличимы.\n* Merlot стоит в таблице **выше** Pinot Noir: глаз, идущий сверху, находит его первым и закрепляет как кандидата.\n* Syrah несёт 18% — больше, чем у любой другой альтернативы, а задача клиента дословно про прибыльность («immediately improve profitability»). Соблазн взять маржу выглядит прямым ответом на постановку.\n* Riesling даёт 10% при 15% — по двум числам почти как Pinot Noir; отделяет его только колонка типа, которую после ничьей уже никто не перечитывает.\n* Само основание, названное в записи, **действительно неполно**: «красное растёт» + «максимальный рост среди красных» не отделяет Pinot Noir от Merlot. Кандидат прав, что запись объяснена плохо, — и делает отсюда неверный шаг, что она обоснована неверно.\n\n**SUPPORT (третьим)** — что на самом деле держит верный вывод\n\n| Соблазн | Чем снят | Настоящая или ложная опора | Страница и блок |\n|---|---|---|---|\n| **Merlot** — та же ничья 12%, тоже Red, тоже California | Маржа 8% против 15% у Pinot Noir: минимум по всей таблице и почти вдвое меньше. При цели «immediately improve profitability» вариант с вдвое меньшей маржой при равной скорости роста не побеждает | Настоящая | `Exhibit 2`, стр. 93 (экзибит) |\n| **Syrah** — максимальная маржа среди альтернатив, 18% | Рост 2% — ровно столько же, сколько у Chardonnay, из которого клиент выходит: сорт не решает исходную проблему. Ключевые локации Australia + France, не California. И 18% ниже уже имеющихся у клиента 20% на Chardonnay — маржа сама по себе не улучшает микс | Настоящая | `Exhibit 2`, стр. 93 (экзибит) |\n| **Riesling** — 10% роста при той же марже 15% | Тип White. `Exhibit 1` показывает падение белого и рост красного за 2007–2017: второй белый сорт оставляет клиента в той же экспозиции, из которой он выходит | Настоящая (направление, не значения) | `Exhibit 2`, стр. 93 + `Exhibit 1`, стр. 92 (экзибиты) |\n| **Cabernet Sauvignon** — Red, France + California | Рост 1% — минимум таблицы, на 11 п.п. ниже Pinot Noir | Настоящая | `Exhibit 2`, стр. 93 |\n| Вывод записи как таковой | Pinot Noir — единственная строка, где сходятся Red, рост 12% (максимум среди красных), маржа 15%, ключевая локация California (совпадает с единственным виноградником клиента в Sonoma Valley) и Food friendly | Настоящая | `Exhibit 2`, стр. 93 + `Clarifying Information`, стр. 86 (клиентский блок) |\n| «Sonoma Valley известна производством Pinot Noir» | **Не используется как опора** — строка живёт в `Notes to Interviewer`, стр. 88, это указание интервьюеру. Калифорнийская привязка берётся из ячейки `Key Locations` экзибита | Ложная как опора вердикта | `Notes to Interviewer`, стр. 88 |\n\n**Честное слабое место — назвать вслух.** Категория Pinot Noir в США — самая маленькая из названных в кейсе: $300M против $2,500M у Chardonnay, то есть примерно в восемь раз меньше. Абсолютный потолок нового сорта мал, и «immediately improve profitability» он один не закроет. Вывод это **не переворачивает** по двум причинам. Первая: вопрос, на который отвечает запись, — «какой сорт добавить», а не «чем заменить выручку Chardonnay»; ни один сорт в таблице не сопоставим с Chardonnay по объёму, поэтому размер категории не различает варианты, а обесценивает всю ветвь целиком. Вторая, и более жёсткая: **эти цифры напечатаны в колонке `Interviewer Guide:`, стр. 86, а не в клиентском блоке.** Это указание интервьюеру. Поэтому $300M допустимо произнести только в форме «вот что могло бы сломать вывод, если бы это были данные клиента» — и недопустимо в форме «вывод верен/неверен, потому что $300M». В записи этих чисел нет.",
+    "decoy": "* Ничья 12% / 12% **настоящая**: обе цифры напечатаны в одном экзибите, это не игра слов и не разные базы.\n* Merlot совпадает с Pinot Noir по трём видимым признакам сразу — Red, France + California, 12% роста, — то есть по всему, что запись назвала своим основанием. По названному основанию строки действительно неразличимы.\n* Merlot стоит в таблице **выше** Pinot Noir: глаз, идущий сверху, находит его первым и закрепляет как кандидата.\n* Syrah несёт 18% — больше, чем у любой другой альтернативы, а задача клиента дословно про прибыльность («immediately improve profitability»). Соблазн взять маржу выглядит прямым ответом на постановку.\n* Riesling даёт 10% при 15% — по двум числам почти как Pinot Noir; отделяет его только колонка типа, которую после ничьей уже никто не перечитывает.\n* Само основание, названное в записи, **действительно неполно**: «красное растёт» + «максимальный рост среди красных» не отделяет Pinot Noir от Merlot. Кандидат прав, что запись объяснена плохо, — и делает отсюда неверный шаг, что она обоснована неверно.\n\n**SUPPORT (третьим)** — что на самом деле держит верный вывод\n\n| Соблазн | Чем снят | Настоящая или ложная опора | Страница и блок |\n|---|---|---|---|\n| **Merlot** — та же ничья 12%, тоже Red, тоже California | Маржа 8% против 15% у Pinot Noir: минимум по всей таблице и почти вдвое меньше. При цели «immediately improve profitability» вариант с вдвое меньшей маржой при равной скорости роста не побеждает | Настоящая | `Exhibit 2`, стр. 93 (экзибит) |\n| **Syrah** — максимальная маржа среди альтернатив, 18% | Рост 2% — ровно столько же, сколько у Chardonnay, из которого клиент выходит: сорт не решает исходную проблему. Ключевые локации Australia + France, не California. И 18% ниже уже имеющихся у клиента 20% на Chardonnay — маржа сама по себе не улучшает микс | Настоящая | `Exhibit 2`, стр. 93 (экзибит) |\n| **Riesling** — 10% роста при той же марже 15% | Тип White. `Exhibit 1` показывает падение белого и рост красного за 2007–2017: второй белый сорт оставляет клиента в той же экспозиции, из которой он выходит | Настоящая (направление, не значения) | `Exhibit 2`, стр. 93 + `Exhibit 1`, стр. 92 (экзибиты) |\n| **Cabernet Sauvignon** — Red, France + California | Рост 1% — минимум таблицы, на 11 п.п. ниже Pinot Noir | Настоящая | `Exhibit 2`, стр. 93 |\n| Вывод записи как таковой | Pinot Noir — единственная строка, где сходятся Red, рост 12% (максимум среди красных), маржа 15%, ключевая локация California (совпадает с единственным виноградником клиента в Sonoma Valley) и Food friendly | Настоящая | `Exhibit 2`, стр. 93 + `Clarifying Information`, стр. 86 (клиентский блок) |\n| «Sonoma Valley известна производством Pinot Noir» | **Не используется как опора** — строка живёт в `Notes to Interviewer`, стр. 88, это указание интервьюеру. Калифорнийская привязка берётся из ячейки `Key Locations` экзибита | Ложная как опора вердикта | `Notes to Interviewer`, стр. 88 |\n\n**Честное слабое место — назвать вслух.** Категория Pinot Noir в США — самая маленькая из названных в кейсе: $300M против $2,500M у Chardonnay, то есть примерно в восемь раз меньше. Абсолютный потолок нового сорта мал, и «immediately improve profitability» он один не закроет. Вывод это **не переворачивает** по двум причинам. Первая: вопрос, на который отвечает запись, — «какой сорт добавить», а не «чем заменить выручку Chardonnay»; ни один сорт в таблице не сопоставим с Chardonnay по объёму, поэтому размер категории не различает варианты, а обесценивает всю ветвь целиком. Вторая, и более жёсткая: **эти цифры напечатаны в колонке `Interviewer Guide:`, стр. 86, а не в клиентском блоке.** Это указание интервьюеру. Поэтому $300M допустимо произнести только в форме «вот что могло бы сломать вывод, если бы это были данные клиента» — и недопустимо в форме «вывод верен/неверен, потому что $300M». В записи этих чисел нет.",
+    "support": "| Соблазн | Чем снят | Настоящая или ложная опора | Страница и блок |\n|---|---|---|---|\n| **Merlot** — та же ничья 12%, тоже Red, тоже California | Маржа 8% против 15% у Pinot Noir: минимум по всей таблице и почти вдвое меньше. При цели «immediately improve profitability» вариант с вдвое меньшей маржой при равной скорости роста не побеждает | Настоящая | `Exhibit 2`, стр. 93 (экзибит) |\n| **Syrah** — максимальная маржа среди альтернатив, 18% | Рост 2% — ровно столько же, сколько у Chardonnay, из которого клиент выходит: сорт не решает исходную проблему. Ключевые локации Australia + France, не California. И 18% ниже уже имеющихся у клиента 20% на Chardonnay — маржа сама по себе не улучшает микс | Настоящая | `Exhibit 2`, стр. 93 (экзибит) |\n| **Riesling** — 10% роста при той же марже 15% | Тип White. `Exhibit 1` показывает падение белого и рост красного за 2007–2017: второй белый сорт оставляет клиента в той же экспозиции, из которой он выходит | Настоящая (направление, не значения) | `Exhibit 2`, стр. 93 + `Exhibit 1`, стр. 92 (экзибиты) |\n| **Cabernet Sauvignon** — Red, France + California | Рост 1% — минимум таблицы, на 11 п.п. ниже Pinot Noir | Настоящая | `Exhibit 2`, стр. 93 |\n| Вывод записи как таковой | Pinot Noir — единственная строка, где сходятся Red, рост 12% (максимум среди красных), маржа 15%, ключевая локация California (совпадает с единственным виноградником клиента в Sonoma Valley) и Food friendly | Настоящая | `Exhibit 2`, стр. 93 + `Clarifying Information`, стр. 86 (клиентский блок) |\n| «Sonoma Valley известна производством Pinot Noir» | **Не используется как опора** — строка живёт в `Notes to Interviewer`, стр. 88, это указание интервьюеру. Калифорнийская привязка берётся из ячейки `Key Locations` экзибита | Ложная как опора вердикта | `Notes to Interviewer`, стр. 88 |\n\n**Честное слабое место — назвать вслух.** Категория Pinot Noir в США — самая маленькая из названных в кейсе: $300M против $2,500M у Chardonnay, то есть примерно в восемь раз меньше. Абсолютный потолок нового сорта мал, и «immediately improve profitability» он один не закроет. Вывод это **не переворачивает** по двум причинам. Первая: вопрос, на который отвечает запись, — «какой сорт добавить», а не «чем заменить выручку Chardonnay»; ни один сорт в таблице не сопоставим с Chardonnay по объёму, поэтому размер категории не различает варианты, а обесценивает всю ветвь целиком. Вторая, и более жёсткая: **эти цифры напечатаны в колонке `Interviewer Guide:`, стр. 86, а не в клиентском блоке.** Это указание интервьюеру. Поэтому $300M допустимо произнести только в форме «вот что могло бы сломать вывод, если бы это были данные клиента» — и недопустимо в форме «вывод верен/неверен, потому что $300M». В записи этих чисел нет.",
+    "risks": "* **Внутренний.** Pinot Noir — красное вино, и оно не выращивается и не производится так же, как Chardonnay: клиент располагает одним виноградником в 3,000 акров и оборудованием под белое. Всё, что уйдёт под Pinot Noir, уйдёт с той же площади — это не добавление, а размен, и внутри 3,000 акров рост нового сорта оплачивается сокращением сорта с маржой 20%.\n* **Внешний.** Вывод стоит на историческом направлении Exhibit 1 за 2007–2017 и на росте 12% за один год. Вкусы разворачиваются, а лаг между посадкой и продажей — не менее девяти месяцев даже для Chardonnay, и вино становится лучше с выдержкой, то есть решение окупается в горизонте, где тренд уже может смениться. Плюс отрасль состоит из десятков тысяч мелких производителей — новый конкурентный набор, где доля не гарантирована.\n* **Риск самого вердикта (Clean-специфический).** Единственная величина, которая могла бы его сломать, — абсолютный размер категории Pinot Noir; она в клиентских блоках не напечатана. Вердикт «файл держится» верен при доступных данных, но не проверен по объёму.",
+    "next": "1. Запросить у клиента абсолютные размеры категорий вина в США в долларах и его собственную выручку по Chardonnay. *Снимает единственную неопределённость, способную перевернуть вывод: хватает ли категории Pinot Noir, чтобы «immediately improve profitability», а не только улучшить микс.*\n2. Посчитать разменную экономику 3,000 акров: сколько акров уходит под Pinot Noir, сколько выручки Chardonnay при 20% маржи теряется, что даёт Pinot Noir при 15%. *Снимает риск того, что добавление сорта ухудшает совокупную маржу.*\n3. Проверить, что падение прибыльности Chardonnay идёт от спроса, а не от издержек. *Снимает риск лечить симптом: если проблема в затратах, новый сорт её только удорожает.*\n4. Параллельно — контингенси-ветка без нового сорта (выдержка вина ради более высокой цены, туры и мероприятия на винодельне, продажа излишка винограда). *Снимает риск девятимесячного лага: даёт эффект внутри горизонта «immediately».*",
+    "build": "```python\nfrom decimal import Decimal as D\n\n# Exhibit 2, стр. 93 (экзибит): (wine type, consumption growth %, profit margin %)\nex2 = {\n    \"Chardonnay\":         (\"White\", D(\"2\"),  D(\"20\")),\n    \"Riesling\":           (\"White\", D(\"10\"), D(\"15\")),\n    \"Sauvignon Blanc\":    (\"White\", D(\"4\"),  D(\"10\")),\n    \"Syrah\":              (\"Red\",   D(\"2\"),  D(\"18\")),\n    \"Merlot\":             (\"Red\",   D(\"12\"), D(\"8\")),\n    \"Cabernet Sauvignon\": (\"Red\",   D(\"1\"),  D(\"10\")),\n    \"Pinot Noir\":         (\"Red\",   D(\"12\"), D(\"15\")),\n}\nloc = {  # колонка Key Locations, тот же экзибит\n    \"Chardonnay\": \"France, California\", \"Riesling\": \"Germany, Eastern USA\",\n    \"Sauvignon Blanc\": \"New Zealand, France\", \"Syrah\": \"Australia, France\",\n    \"Merlot\": \"France, California\", \"Cabernet Sauvignon\": \"France, California\",\n    \"Pinot Noir\": \"France, California\",\n}\n\nreds = {k: v for k, v in ex2.items() if v[0] == \"Red\"}\n\n# ── соблазн 1: ничья по росту реальна ────────────────────────────\ntop_growth = max(v[1] for v in reds.values())\nassert top_growth == D(\"12\")\nassert sorted(k for k, v in reds.items() if v[1] == top_growth) == [\"Merlot\", \"Pinot Noir\"]\n\n# ── чем снят: маржа ──────────────────────────────────────────────\nassert ex2[\"Pinot Noir\"][2] - ex2[\"Merlot\"][2] == D(\"7\")          # 15% против 8%\nassert ex2[\"Merlot\"][2] == min(v[2] for v in ex2.values())        # 8% — минимум всей таблицы\nassert ex2[\"Merlot\"][2] * 2 < ex2[\"Pinot Noir\"][2] * 2 - D(\"6\")   # почти вдвое ниже\n\n# ── соблазн 2: Syrah, максимум маржи СРЕДИ АЛЬТЕРНАТИВ ───────────\nalts = {k: v for k, v in ex2.items() if k != \"Chardonnay\"}\nassert ex2[\"Syrah\"][2] == max(v[2] for v in alts.values())        # 18%\nassert ex2[\"Chardonnay\"][2] == D(\"20\")                            # но у текущего вина 20%\nassert ex2[\"Syrah\"][2] < ex2[\"Chardonnay\"][2]                     # маржа не улучшает микс\nassert ex2[\"Syrah\"][1] == ex2[\"Chardonnay\"][1] == D(\"2\")          # тот же рост, что у Chardonnay\nassert \"California\" not in loc[\"Syrah\"]\n\n# ── соблазн 3: Riesling ──────────────────────────────────────────\nassert ex2[\"Riesling\"][2] == ex2[\"Pinot Noir\"][2] == D(\"15\")      # маржа не различает\nassert ex2[\"Pinot Noir\"][1] - ex2[\"Riesling\"][1] == D(\"2\")        # рост различает на 2 п.п.\nassert ex2[\"Riesling\"][0] == \"White\" and ex2[\"Pinot Noir\"][0] == \"Red\"\n# Exhibit 1, стр. 92: White падает, Red растёт — только направление, значений в книге нет\n\n# ── Cabernet ─────────────────────────────────────────────────────\nassert ex2[\"Cabernet Sauvignon\"][1] == min(v[1] for v in ex2.values())   # 1%\nassert ex2[\"Pinot Noir\"][1] - ex2[\"Cabernet Sauvignon\"][1] == D(\"11\")\n\n# ── вывод записи: единственная строка со всеми четырьмя условиями ─\nwinners = [k for k, v in ex2.items()\n           if v[0] == \"Red\" and v[1] == D(\"12\") and v[2] >= D(\"15\")\n           and \"California\" in loc[k]]\nassert winners == [\"Pinot Noir\"]\n\n# ── что могло бы сломать (Interviewer Guide:, стр. 86 — НЕ основание) ──\nus_category_M = {\"Chardonnay\": D(\"2500\"), \"Cabernet Sauvignon\": D(\"2000\"),\n                 \"Merlot\": D(\"1050\"), \"Pinot Grigio\": D(\"800\"), \"Pinot Noir\": D(\"300\")}\nassert us_category_M[\"Pinot Noir\"] == min(us_category_M.values())\nratio = us_category_M[\"Chardonnay\"] / us_category_M[\"Pinot Noir\"]\nassert D(\"8.3\") < ratio < D(\"8.4\")     # ≈8.3×; ПОСТРОЕНО, интервьюерский блок, только как «что могло бы сломать»\n```\n\n**Провоцируемая ошибка** — кандидат видит ничью 12% / 12% по колонке роста, объявляет выбор записи необоснованным и переворачивает его на Merlot (или на Syrah за 18% маржи), не прочитав, что маржа Merlot 8% — минимум всей таблицы, а рост Syrah 2% совпадает с ростом сорта, из которого клиент выходит.\n# ПАРТИЯ 5 СИНТЕЗА — ТЕЛА D (SY-032, SY-033)"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: Pinot Noir: Red, рост 12% (максимум среди красных), маржа 15%, California, Food friendly — единственная строка со всеми четырьмя; (3) the naive reading is rejected explicitly, not merely avoided — Merlot: тот же рост 12%, тоже Red, тоже France + California must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: Pinot Noir: Red, рост 12% (максимум среди красных), маржа 15%, California, Food friendly — единственная строка со всеми четырьмя; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — Merlot: тот же рост 12%, тоже Red, тоже France + California обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "**[L1 — single free field].** *\"The file's conclusion holds: Pinot Noir is the right variety to add, and it is not the growth column that makes it right. Three varieties look like better calls and each one is closed by a printed cell. Merlot ties Pinot Noir at 12% growth, is also red and also Californian — but its margin is 8%, the lowest in the table and roughly half Pinot Noir's 15%, and the client's brief is to improve profitability, so equal growth at half the margin loses. Syrah carries the highest margin among the alternatives at 18% — but it grows at 2%, exactly the rate of the Chardonnay the client is trying to move away from, its key locations are Australia and France rather than California, and 18% is still below the 20% the client already earns on Chardonnay, so margin alone buys nothing. Riesling matches Pinot Noir's 15% margin at 10% growth — but it is white, and the consumption chart shows white falling and red rising across the eleven years, so a second white leaves the client in the exposure he is exiting. Pinot Noir is the only row where red, the joint-highest growth among reds, a 15% margin and a California location all appear together, and California is where the client's single 3,000-acre vineyard sits. What would break this: the absolute size of the US Pinot Noir category. It is by far the smallest of the varieties named, so the variety improves the mix but may not on its own restore profitability — and we do not have that figure in the client data, so I would ask for category sizes and the client's own Chardonnay revenue before we size the upside. That is the first thing on the list, not a reason to change the recommendation.\"*"
+   },
+   "anchor_metric": "Клиентского порога нет; решение выносится сопоставлением, а не сравнением с правилом. Вердикт держится тем, что ровно одна строка таблицы удовлетворяет всем четырём условиям одновременно"
+  },
+  {
+   "id": "SY-032",
+   "title": "Pineapple Express",
+   "company": "",
+   "industry": "",
+   "difficulty": "Hard",
+   "clean": false,
+   "focus": "",
+   "scaffold": "L1",
+   "time": "5 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Moore Semiconductors, a US semiconductor start-up, is a week away from negotiating the price of its new ID-5 microchip with Pine-apple, which wants the chip for the PA-25 smartphone launching in a year. A colleague has already worked the pricing question and left the write-up below; you have five minutes and no time to rebuild it from scratch. Does the number the write-up lands on hold up as the ceiling we can ask for, and what should Alex DSouza put on the table next week?",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**Situation.** Our client is Alex DSouza, CEO of Moore Semiconductors, a new semiconductor start-up based in the US. Moore Semiconductors has recently built a new microchip, the ID-5, that is significantly faster and more efficient relative to other chips for smartphones in the industry. Pine-apple has approached Moore Semiconductors to use the chip in the new PA-25, a cutting-edge smartphone to be released in a year. Negotiations with Pine-apple are to take place in a week. We currently do not have an existing relationship with Pine-apple.",
+       "**Background from the client call.** Microchip manufacturing involves creating tiny circuits on a silicon wafer using light, chemicals, and precise machinery in ultra-clean environments. These circuits contain billions of transistors that work together to process and store information, powering devices like smartphones, computers, and cars.",
+       "**Exhibit 1 — cost of manufacturing.**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Description",
+       "Value"
+      ],
+      "rows": [
+       [
+        "Pre-fabrication Silicon Wafer",
+        "$1500 per wafer"
+       ],
+       [
+        "Number of chips per wafer",
+        "60"
+       ],
+       [
+        "Yield",
+        "80%"
+       ],
+       [
+        "Fabrication*",
+        "$900"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "*fabrication is the process of building chip designs on a wafer",
+       "**Exhibit 2 — demand forecasts on the PA-25.**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Price",
+       "Demand (000's)"
+      ],
+      "rows": [
+       [
+        "$1100",
+        "1000"
+       ],
+       [
+        "$1000",
+        "1600"
+       ],
+       [
+        "$900",
+        "2000"
+       ],
+       [
+        "$800",
+        "3200"
+       ],
+       [
+        "$600",
+        "4000"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "1. Graph not to scale",
+       "2. Cost to manufacture and assemble all other components in a smartphone apart from a microchip = $600",
+       "**Working table the analyst built from Exhibit 2.**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Price",
+       "Cost",
+       "Demand",
+       "Profit"
+      ],
+      "rows": [
+       [
+        "$800",
+        "$600",
+        "3.2 M",
+        "(800−600) × 3.2 = 640 M"
+       ],
+       [
+        "$900",
+        "$600",
+        "2 M",
+        "(900−600) × 2 = 600 M"
+       ],
+       [
+        "$1000",
+        "$600",
+        "1.6 M",
+        "(1000−600) × 1.6 = 640 M"
+       ],
+       [
+        "$1100",
+        "$600",
+        "1 M",
+        "(1100−600) × 1 = 500 M"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "**The analyst's chain, as written.**",
+       "\"Cost to produce one chip: $1500 per wafer + $900 for fabrication = $2400. Number of usable chips = 60 × 80% = 48. Cost per chip = $2400 ÷ 48 = $50.",
+       "Phone prices can range from $600 to $1100. $600 can be excluded from consideration, as it costs $600 to manufacture the phone without a microchip. It is reasonable to assume that Pine-apple will sell the smartphone at $1000. If the smartphone is priced at $1000 and the cost of all other parts except the chip is $600, then $400 is left over for the chip and Pine-apple's profit margin.",
+       "Profit margin carried through for Pine-apple: 20%. $1000 × 20% = $200. Subtracting $200 from the leftover $400, the max price we can get for the chip is $200.\"",
+       "**What the client has told us.** Moore Semiconductors wants to price the product at a price that best considers all their interests as a startup.",
+       "**Left open in the write-up.** Nothing in the client's brief fixes the retail price of the PA-25, and no contract terms — duration, exclusivity, geography, payment structure — have been written down anywhere.",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Шаг | Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|---|\n| 1 | Видит в записи одну доведённую до конца цену телефона и принимает её как данность | $1000 становится входом, а не переменной | «то, что стоит первым и посчитано до конца, — это факт» |\n| 2 | Читает вычеркнутый $600 как уже проведённый отбор цен | «кандидатов больше не осталось» | закрытие перечня по одному отброшенному элементу |\n| 3 | Вычитает $600 прочих компонентов из $1000 | остаток $400 | «цена минус чужие затраты = моя зона» |\n| 4 | Берёт 20% маржи из записи, не спрашивая, чьё это число | $200 маржи покупателя | принятие допущения записи за правило клиента |\n| 5 | Объявляет $400 − $200 = $200 потолком за чип | наивная величина $200 | «остаток — это максимум, который можно просить» |\n| 6 | Сверяет $200 с себестоимостью $50 и радуется четырёхкратной марже | вердикт «просим $200» | подмена вопроса «сколько можно взять» вопросом «много ли это по сравнению с себестоимостью» |\n\n**DECOY_SUPPORT (вторым)** — чем наивный путь кажется подкреплённым\n* Арифметика записи безупречна: $1500 + $900 = $2400, 60 × 80% = 48, $2400 ÷ 48 = $50, $1000 − $600 − $200 = $200. Ни одной ошибки в счёте нет, и проверка счёта ничего не находит — именно поэтому кандидат считает вопрос закрытым.\n* Все числа наивного пути напечатаны в книге: $600 прочих компонентов и все пять пар цена/спрос — в клиентском экзибите, $50 и $200 — в интервьюерских блоках. Кандидату нечего заподозрить в происхождении цифр, только в их роли.\n* Отбрасывание $600 выглядит как честная работа: цена телефона, равная себестоимости прочих компонентов, действительно не оставляет ничего. Один аккуратный шаг отбора создаёт впечатление, что отбор закончен.\n* Крупный блок себестоимости стоит отдельно и тянет на себя внимание: сравнение $200 с $50 даёт эффектный четырёхкратный запас и закрывает вопрос эмоционально раньше, чем логически.\n* Слово «reasonable» рядом с $1000 в записи снимает потребность обосновывать выбор цены: обоснование как будто уже дано.\n\n**SUPPORT (третьим)** — что на самом деле держит верный вывод\n1. **Настоящая опора.** Кривая спроса напечатана целиком: $1100/1000k, $1000/1600k, $900/2000k, $800/3200k, $600/4000k (`Exhibit 2`, стр. 138). Прибыль покупателя при $800 и при $1000 — одно и то же число, $640M, и обе строки стоят в таблице записи. Значит цена телефона не задана ничем: покупатель между этими двумя точками безразличен и волен выбрать любую.\n2. **Настоящая опора.** Потолок за чип при этих двух безразличных для покупателя точках различается пятикратно: $200 при $1000 и $40 при $800 (ПОСТРОЕНО на клиентском экзибите стр. 138 и марже 20%). Величина, которую мы собираемся просить, целиком определяется выбором, который делает не мы, — это и есть содержание вердикта.\n3. **Настоящая опора.** Себестоимость $50 (`Exhibit 1`, стр. 136) выше потолка $40. При цене телефона $800 контракт по формуле записи не просто хуже — он убыточен: −$32M на объёме 3.2M штук. Соблазн «возьмём сколько дадут, объём-то вдвое больше» снимается напечатанной себестоимостью.\n4. **Настоящая опора.** Наш итог по двум безразличным для покупателя точкам: $320M выручки при $1000 против $128M при $800; по прибыли +$240M против −$32M. Разница целиком наша, для покупателя её нет — отсюда следует, где лежит рычаг: не в торге за цену чипа, а в том, чтобы цена запуска телефона стала условием контракта либо чтобы платёж был роялти за штуку, безразличным к ней. Инструмент назван в книге: «Payment terms – lumpsum or royalty-based», `Framework Guidance`, стр. 135 (**интервьюерский блок**) — это лист рычагов, а не правило клиента, и число из него не берётся.\n5. **Ложная опора — не опираться.** Маржа 20%. Она не встречается ни в `PROMPT`, ни в `CLARIFYING INFORMATION`, ни в экзибитах; она живёт только в `Exhibit Guidance`, стр. 139. Это указание интервьюеру, а не правило клиента. Опирать на неё потолок нельзя: при 25% потолок = 1000 − 600 − 250 = $150, то есть −25% от одного слова.\n6. **Ложная опора — не опираться.** Четырёхкратный запас $200 против $50 себестоимости. Он ничего не говорит о том, сколько согласится заплатить покупатель, и вообще не является аргументом в переговорах: наша себестоимость — наша проблема, а не его.\n7. **Честное слабое место, называется вслух.** Кривая спроса взята как данность и она — прогноз («Demand forecasts»), а не факт; сноска «Graph not to scale» прямо предупреждает, что картинка не масштабирована. Если фактический спрос при $800 окажется хоть немного ниже 3 200k, ничья исчезнет и $1000 станет доминирующей ценой сама собой. Вердикт про фиксацию цены запуска в контракте от этого не рушится — он становится дешевле, потому что покупателю нечего терять, — но острота довода «пятикратный разброс при нулевой разнице» держится ровно на точности одной строки прогноза.",
+    "decoy": "* Арифметика записи безупречна: $1500 + $900 = $2400, 60 × 80% = 48, $2400 ÷ 48 = $50, $1000 − $600 − $200 = $200. Ни одной ошибки в счёте нет, и проверка счёта ничего не находит — именно поэтому кандидат считает вопрос закрытым.\n* Все числа наивного пути напечатаны в книге: $600 прочих компонентов и все пять пар цена/спрос — в клиентском экзибите, $50 и $200 — в интервьюерских блоках. Кандидату нечего заподозрить в происхождении цифр, только в их роли.\n* Отбрасывание $600 выглядит как честная работа: цена телефона, равная себестоимости прочих компонентов, действительно не оставляет ничего. Один аккуратный шаг отбора создаёт впечатление, что отбор закончен.\n* Крупный блок себестоимости стоит отдельно и тянет на себя внимание: сравнение $200 с $50 даёт эффектный четырёхкратный запас и закрывает вопрос эмоционально раньше, чем логически.\n* Слово «reasonable» рядом с $1000 в записи снимает потребность обосновывать выбор цены: обоснование как будто уже дано.\n\n**SUPPORT (третьим)** — что на самом деле держит верный вывод\n1. **Настоящая опора.** Кривая спроса напечатана целиком: $1100/1000k, $1000/1600k, $900/2000k, $800/3200k, $600/4000k (`Exhibit 2`, стр. 138). Прибыль покупателя при $800 и при $1000 — одно и то же число, $640M, и обе строки стоят в таблице записи. Значит цена телефона не задана ничем: покупатель между этими двумя точками безразличен и волен выбрать любую.\n2. **Настоящая опора.** Потолок за чип при этих двух безразличных для покупателя точках различается пятикратно: $200 при $1000 и $40 при $800 (ПОСТРОЕНО на клиентском экзибите стр. 138 и марже 20%). Величина, которую мы собираемся просить, целиком определяется выбором, который делает не мы, — это и есть содержание вердикта.\n3. **Настоящая опора.** Себестоимость $50 (`Exhibit 1`, стр. 136) выше потолка $40. При цене телефона $800 контракт по формуле записи не просто хуже — он убыточен: −$32M на объёме 3.2M штук. Соблазн «возьмём сколько дадут, объём-то вдвое больше» снимается напечатанной себестоимостью.\n4. **Настоящая опора.** Наш итог по двум безразличным для покупателя точкам: $320M выручки при $1000 против $128M при $800; по прибыли +$240M против −$32M. Разница целиком наша, для покупателя её нет — отсюда следует, где лежит рычаг: не в торге за цену чипа, а в том, чтобы цена запуска телефона стала условием контракта либо чтобы платёж был роялти за штуку, безразличным к ней. Инструмент назван в книге: «Payment terms – lumpsum or royalty-based», `Framework Guidance`, стр. 135 (**интервьюерский блок**) — это лист рычагов, а не правило клиента, и число из него не берётся.\n5. **Ложная опора — не опираться.** Маржа 20%. Она не встречается ни в `PROMPT`, ни в `CLARIFYING INFORMATION`, ни в экзибитах; она живёт только в `Exhibit Guidance`, стр. 139. Это указание интервьюеру, а не правило клиента. Опирать на неё потолок нельзя: при 25% потолок = 1000 − 600 − 250 = $150, то есть −25% от одного слова.\n6. **Ложная опора — не опираться.** Четырёхкратный запас $200 против $50 себестоимости. Он ничего не говорит о том, сколько согласится заплатить покупатель, и вообще не является аргументом в переговорах: наша себестоимость — наша проблема, а не его.\n7. **Честное слабое место, называется вслух.** Кривая спроса взята как данность и она — прогноз («Demand forecasts»), а не факт; сноска «Graph not to scale» прямо предупреждает, что картинка не масштабирована. Если фактический спрос при $800 окажется хоть немного ниже 3 200k, ничья исчезнет и $1000 станет доминирующей ценой сама собой. Вердикт про фиксацию цены запуска в контракте от этого не рушится — он становится дешевле, потому что покупателю нечего терять, — но острота довода «пятикратный разброс при нулевой разнице» держится ровно на точности одной строки прогноза.",
+    "support": "1. **Настоящая опора.** Кривая спроса напечатана целиком: $1100/1000k, $1000/1600k, $900/2000k, $800/3200k, $600/4000k (`Exhibit 2`, стр. 138). Прибыль покупателя при $800 и при $1000 — одно и то же число, $640M, и обе строки стоят в таблице записи. Значит цена телефона не задана ничем: покупатель между этими двумя точками безразличен и волен выбрать любую.\n2. **Настоящая опора.** Потолок за чип при этих двух безразличных для покупателя точках различается пятикратно: $200 при $1000 и $40 при $800 (ПОСТРОЕНО на клиентском экзибите стр. 138 и марже 20%). Величина, которую мы собираемся просить, целиком определяется выбором, который делает не мы, — это и есть содержание вердикта.\n3. **Настоящая опора.** Себестоимость $50 (`Exhibit 1`, стр. 136) выше потолка $40. При цене телефона $800 контракт по формуле записи не просто хуже — он убыточен: −$32M на объёме 3.2M штук. Соблазн «возьмём сколько дадут, объём-то вдвое больше» снимается напечатанной себестоимостью.\n4. **Настоящая опора.** Наш итог по двум безразличным для покупателя точкам: $320M выручки при $1000 против $128M при $800; по прибыли +$240M против −$32M. Разница целиком наша, для покупателя её нет — отсюда следует, где лежит рычаг: не в торге за цену чипа, а в том, чтобы цена запуска телефона стала условием контракта либо чтобы платёж был роялти за штуку, безразличным к ней. Инструмент назван в книге: «Payment terms – lumpsum or royalty-based», `Framework Guidance`, стр. 135 (**интервьюерский блок**) — это лист рычагов, а не правило клиента, и число из него не берётся.\n5. **Ложная опора — не опираться.** Маржа 20%. Она не встречается ни в `PROMPT`, ни в `CLARIFYING INFORMATION`, ни в экзибитах; она живёт только в `Exhibit Guidance`, стр. 139. Это указание интервьюеру, а не правило клиента. Опирать на неё потолок нельзя: при 25% потолок = 1000 − 600 − 250 = $150, то есть −25% от одного слова.\n6. **Ложная опора — не опираться.** Четырёхкратный запас $200 против $50 себестоимости. Он ничего не говорит о том, сколько согласится заплатить покупатель, и вообще не является аргументом в переговорах: наша себестоимость — наша проблема, а не его.\n7. **Честное слабое место, называется вслух.** Кривая спроса взята как данность и она — прогноз («Demand forecasts»), а не факт; сноска «Graph not to scale» прямо предупреждает, что картинка не масштабирована. Если фактический спрос при $800 окажется хоть немного ниже 3 200k, ничья исчезнет и $1000 станет доминирующей ценой сама собой. Вердикт про фиксацию цены запуска в контракте от этого не рушится — он становится дешевле, потому что покупателю нечего терять, — но острота довода «пятикратный разброс при нулевой разнице» держится ровно на точности одной строки прогноза.",
+    "risks": "* **Внутренний.** Мы стартап без действующих отношений с Pine-apple, а весь наш итог по контракту висит на одной чужой переменной: между двумя равновыгодными покупателю ценами наша выручка меняется с $320M до $128M (2.5×), а прибыль — с +$240M до −$32M. Если мы подпишем цену за чип, не зафиксировав цену запуска телефона, покупатель может сдвинуть её после подписания без потерь для себя и с потерей $272M прибыли для нас.\n* **Внешний / переговорный.** Маржа 20% — не обязательство покупателя. Если Pine-apple в переговорах заявит целевую маржу 25%, потолок при той же цене телефона $1000 падает с $200 до $150, то есть на 25%, и никакой напечатанной величиной мы этому возразить не можем: клиентского правила о марже в кейсе нет.",
+    "next": "1. Внести розничную цену запуска PA-25 в условия контракта либо перевести платёж в роялти за штуку. Снимает главную неопределённость — то, что решающая переменная принадлежит покупателю, а не нам; отменяет разброс $320M/$128M целиком.\n2. Запросить у Pine-apple подтверждение целевой маржи по PA-25 письменно, до переговоров. Снимает неопределённость по единственному числу, которое клиент никогда не называл, но на котором стоит весь потолок ($200 при 20% против $150 при 25%).\n3. Проверить строку $800 / 3 200k прогноза спроса у независимого источника. Снимает неопределённость по существованию самой ничьей: если спрос при $800 ниже 3 200k, покупателю выгоднее $1000 и наша переговорная позиция сильнее, чем сейчас предполагается.",
+    "build": "```python\nfrom decimal import Decimal, ROUND_HALF_UP\n\ndef r(x, q=\"0.01\"):\n    return Decimal(x).quantize(Decimal(q), rounding=ROUND_HALF_UP)\n\n# --- напечатано в книге ---\n# Exhibit 1, стр. 136 (экзибит, клиентский)\nWAFER  = Decimal(1500)\nCHIPS  = Decimal(60)\nYIELD  = Decimal(\"0.80\")\nFAB    = Decimal(900)\n\n# Exhibit 2, стр. 138 (экзибит, клиентский): пары цена / спрос (тыс. шт.) и сноска 2\nDEMAND = {Decimal(1100): Decimal(1000), Decimal(1000): Decimal(1600),\n          Decimal(900):  Decimal(2000), Decimal(800):  Decimal(3200),\n          Decimal(600):  Decimal(4000)}\nOTHER_COMPONENTS = Decimal(600)\n\n# Exhibit Guidance, стр. 139 (ИНТЕРВЬЮЕРСКИЙ блок; в записи — допущение без источника)\nMARGIN = Decimal(\"0.20\")\n\n# --- себестоимость чипа: совпадает с $50 из Question Guidance, стр. 137 (интервьюерский) ---\ngood = CHIPS * YIELD\nassert good == Decimal(48)\nunit_cost = r((WAFER + FAB) / good)\nassert unit_cost == Decimal(\"50.00\")\n\n# --- прибыль покупателя по строкам: сверка с таблицей стр. 139 ---\nbuyer = {p: r((p - OTHER_COMPONENTS) * q / Decimal(1000), \"0.0001\")   # $M, спрос в тыс. шт.\n         for p, q in DEMAND.items() if p > OTHER_COMPONENTS}\nassert buyer[Decimal(800)]  == Decimal(\"640.0000\")\nassert buyer[Decimal(900)]  == Decimal(\"600.0000\")\nassert buyer[Decimal(1000)] == Decimal(\"640.0000\")\nassert buyer[Decimal(1100)] == Decimal(\"500.0000\")\nassert buyer[Decimal(800)] == buyer[Decimal(1000)]        # ничья — ядро вердикта\nassert max(buyer.values()) == Decimal(\"640.0000\")\n\n# --- ПОСТРОЕНО: потолок за чип при каждой цене телефона ---\nceiling = {p: r(p - OTHER_COMPONENTS - p * MARGIN) for p in buyer}\nassert ceiling[Decimal(1000)] == Decimal(\"200.00\")        # наивная величина, напечатана\nassert ceiling[Decimal(800)]  == Decimal(\"40.00\")         # верная вторая точка\nassert ceiling[Decimal(900)]  == Decimal(\"120.00\")\nassert ceiling[Decimal(1100)] == Decimal(\"280.00\")\nassert r(ceiling[Decimal(1000)] / ceiling[Decimal(800)]) == Decimal(\"5.00\")   # 5-кратный разброс\n\n# --- ПОСТРОЕНО: наш итог по двум безразличным покупателю точкам ---\ndef our_rev(p):   return r(ceiling[p] * DEMAND[p] / Decimal(1000), \"0.0001\")      # $M\ndef our_prof(p):  return r((ceiling[p] - unit_cost) * DEMAND[p] / Decimal(1000), \"0.0001\")\n\nassert our_rev(Decimal(1000)) == Decimal(\"320.0000\")\nassert our_rev(Decimal(800))  == Decimal(\"128.0000\")\nassert r(our_rev(Decimal(1000)) / our_rev(Decimal(800))) == Decimal(\"2.50\")\nassert our_prof(Decimal(1000)) == Decimal(\"240.0000\")\nassert our_prof(Decimal(800))  == Decimal(\"-32.0000\")     # ниже себестоимости $50\nassert ceiling[Decimal(800)] < unit_cost\n\n# --- ПОСТРОЕНО: чувствительность к неклиентскому допущению о марже ---\nc25 = r(Decimal(1000) - OTHER_COMPONENTS - Decimal(1000) * Decimal(\"0.25\"))\nassert c25 == Decimal(\"150.00\")\nassert r((c25 / ceiling[Decimal(1000)] - Decimal(1)) * Decimal(100)) == Decimal(\"-25.00\")\n\n# --- контрфакт: без ничьей рычаг исчезает ---\ncf = r((Decimal(800) - OTHER_COMPONENTS) * Decimal(3000) / Decimal(1000), \"0.0001\")\nassert cf == Decimal(\"600.0000\") and cf < buyer[Decimal(1000)]\n```\n\n**Провоцируемая ошибка** — принять единственную доведённую до конца цену телефона за заданную, вычесть из неё чужие затраты и чужую маржу и объявить остаток $200 потолком за чип, не заметив, что покупателю ровно так же выгодна цена $800, при которой тот же расчёт даёт $40 — ниже нашей себестоимости.\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: $40 за чип — потолок при $800, то есть при второй цене, дающей покупателю ту же прибыль; наш итог $128M против $320M; (3) the naive reading is rejected explicitly, not merely avoided — $200 за чип (потолок при цене телефона $1000) must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: $40 за чип — потолок при $800, то есть при второй цене, дающей покупателю ту же прибыль; наш итог $128M против $320M; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — $200 за чип (потолок при цене телефона $1000) обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "* **L1 — single free field.** Moore Semiconductors should not go into next week's negotiation asking for a chip price at all — it should ask Pine-apple to commit to the PA-25 launch price, or take payment as a per-unit royalty. The write-up's $200 is arithmetically correct but it is the best case of a tie, not a ceiling: on the demand curve Pine-apple earns $640M at both $800 and $1000, so the retail price is a choice we do not control, and the same 20% margin rule turns that indifferent choice into $200 per chip at $1000 and $40 at $800 — a five-fold swing worth $320M versus $128M to us, and at $40 we would be selling below our own $50 unit cost, losing $32M on the contract. The 20% margin itself is nobody's commitment; at 25% the ceiling falls to $150. Two risks: internally, we are a start-up with no prior relationship with Pine-apple, so a price signed without a launch-price clause can be re-optimised against us after signature; externally, Pine-apple can simply assert a higher target margin and we have no client-side rule to point at. Next: put the launch price or a per-unit royalty into the term sheet, get the target margin confirmed in writing before the meeting, and validate the $800 / 3.2M demand point, because that single row is what makes the tie real."
+   },
+   "anchor_metric": "клиентского порога нет; решение выносится сопоставлением двух равнопривлекательных для покупателя строк между собой, а не сравнением с правилом. Клиент формулирует цель качественно"
+  },
+  {
+   "id": "SY-033",
+   "title": "Men's Extra Comfortable Essentials",
+   "company": "",
+   "industry": "",
+   "difficulty": "Hard",
+   "clean": true,
+   "focus": "",
+   "scaffold": "L1",
+   "time": "5 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Men's Extra Comfortable Essentials is a US-based manufacturer of basic apparel. A colleague has already worked the CEO's targets question and left the write-up below; you have five minutes and no time to rebuild the market sizing. Does the write-up's conclusion survive, on which accounting convention does your judgement rest, and what exactly would have to be different for it to fail?",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**Client situation.** Our client, Men's Extra Comfortable Essentials, is a US-based manufacturer of basic apparel including socks, tanks, tees, and underwear. They manufacture each apparel line then brand and package them for distribution. The firm purchases the fabrics through contracts with suppliers across the US, receives uncut fabrics, and must process them into each apparel line in-house. The firm currently only produces products for men.",
+       "**Current product mix (share of 2016 revenue).** Socks 40% · Tanks 25% · Tees 15% · Underwear 20%.",
+       "**Market position and market growth used by the analyst.**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Product",
+       "Market share 2016",
+       "Estimated market share 2020",
+       "2016–2020 market CAGR"
+      ],
+      "rows": [
+       [
+        "Socks",
+        "15%",
+        "15%",
+        "↑ 5%"
+       ],
+       [
+        "Tanks",
+        "2.5%",
+        "10%",
+        "↑ 6%"
+       ],
+       [
+        "Tees",
+        "5%",
+        "5%",
+        "↓ 3%"
+       ],
+       [
+        "Underwear",
+        "1%",
+        "10%",
+        "↑ 20%"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "**Exhibit 1 — gross margin by product.**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Product",
+       "2016 Revenue",
+       "2016 Margins %¹"
+      ],
+      "rows": [
+       [
+        "Socks",
+        "$24M",
+        "15%"
+       ],
+       [
+        "Tanks",
+        "$15M",
+        "−5%"
+       ],
+       [
+        "Tees",
+        "$9M",
+        "0%"
+       ],
+       [
+        "Underwear",
+        "$12M",
+        "10%"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "¹ Firm expects 2016 margin % to maintain constant through 2020",
+       "**The analyst's chain, as written.**",
+       "\"2016 revenue by product: Socks 40% × $60M = $24M · Tanks 25% × $60M = $15M · Tees 15% × $60M = $9M · Underwear 20% × $60M = $12M.",
+       "2016 market size by product: Socks $24M / 15% = $160M · Tanks $15M / 2.5% = $600M · Tees $9M / 5% = $180M · Underwear $12M / 1% = $1.2B.",
+       "2020 market size by product: Socks $160M × 1.05⁴ = $194,481,000 ≈ $200M · Tanks $600M × 1.06⁴ = $757,486,176 ≈ $750M · Tees $180M × 0.97⁴ = $159,352,706 ≈ $150M · Underwear $1.2B × 1.20⁴ = $2,488,320,000 ≈ $2.5B.",
+       "2020 revenue by product: Socks $200M × 15% = $30M · Tanks $750M × 10% = $75M · Tees $150M × 5% = $7.5M · Underwear $2.5B × 10% = $250M. Total 2020 revenue = $362.5M.",
+       "2020 gross margin by product: Socks $30M × 15% = $4.5M · Tanks $75M × (−5%) = ($3.75M) · Tees $7.5M × 0% = $0 · Underwear $250M × 10% = $25M. Gross profit = $25.75M. $25.75M / $362.5M = 7.10%.",
+       "Terminating the Tanks product line: revenue $287.5M, gross profit $29.5M, gross margin 10.26%.",
+       "Terminating the Tees product line as well: revenue $280M, gross profit $29.5M, gross margin 10.54%.\"",
+       "**What the CEO has promised shareholders (printed in the client brief).** Revenues in 2016 were $60M, and the CEO has promised shareholders 4x growth by 2020, at which point, she promised 10.5% profit margin. She has hired us to determine whether these are realistic revenue targets, and if so, how her firm could go about achieving them.",
+       "**Left open in the write-up.** The analyst worked the last two steps on the rounded 2020 market sizes only, and no statement was recorded about which of the two lines has to go first or why.",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Шаг | Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|---|\n| 1 | Читает колонку долей и видит четырёхкратный прирост Tanks: 2.5% → 10% | «Tanks — история роста портфеля» | «самый быстрый рост нельзя трогать» |\n| 2 | Смотрит на $75M выручки Tanks рядом с $7.5M у Tees | «Tanks несёт пятую часть плана 2020, Tees — шум» | масштаб выручки читается как масштаб ценности |\n| 3 | Не переносит маржу −5% из другого экзибита на строку Tanks | связь «$75M уничтожают $3.75M» не собирается | физическая оторванность маржи от выручки в записи |\n| 4 | Объявляет снятие Tanks уничтожением стоимости | переворот верного вывода по первому соблазну | «резать растущее — ошибка по определению» |\n| 5 | Отдельно замечает, что у Tees маржа 0%, и делает вывод «её снятие ничего не меняет» | второй соблазн: Tees трогать бессмысленно | «нулевой вклад ⇒ нулевой эффект» — верно для числителя, неверно для знаменателя |\n| 6 | Сравнивает 10.54% с 10.5% и видит зазор 0.04 п.п. | третий соблазн: «это шум округления» | здоровая осторожность к третьему знаку, применённая без проверки |\n| 7 | Выносит вердикт «вывод не держится» | переворот записи, которая верна | «в такой задаче всегда надо что-то перевернуть» |\n\n**DECOY_SUPPORT (вторым)** — чем наивный путь кажется подкреплённым\n* Соблазн 1 честен по форме: Tanks действительно самая быстрорастущая линия портфеля по доле (2.5% → 10%, четырёхкратно) на рынке, растущем на 6% в год, и действительно даёт $75M — это второе по величине число в колонке выручки 2020 и почти третья часть обещанных $240M. Ни одно из этих утверждений не ложно.\n* Соблазн 2 честен арифметически: маржа Tees равна нулю, её вклад в числитель равен нулю, и абсолютная валовая прибыль после снятия Tees действительно не меняется — $29.5M до и $29.5M после. Записанное различие только в третьем знаке процента.\n* Соблазн 3 честен методологически: 10.54% против 10.5% — это подушка в 0.04 процентного пункта, полученная на размерах рынков, округлённых с $194.481M до $200M и с $2.4883B до $2.5B. Осторожность к такому зазору — правильный инстинкт, а не трусость.\n* Все три соблазна усиливает то, что запись сама доработала последние два шага только на округлённых числах, оставив неокруглённые выше по цепочке — визуально они выглядят как черновик, а не как проверочный материал.\n* Слово «growth» стоит в заголовке типа кейса, а «margin» появляется только на четвёртом шаге цепочки: порядок чтения грунтует выручную конвенцию раньше маржинальной.\n\n**SUPPORT (третьим)** — что на самом деле держит верный вывод\n\n*Соблазн 1 → чем снят → где напечатано.*\n1. **Настоящая опора.** Сноска `Exhibit 1`, стр. 74: «Firm expects 2016 margin % to maintain constant through 2020». Маржа Tanks в 2020 остаётся −5%, значит $75M выручки Tanks уничтожают $3.75M валовой прибыли. Рост Tanks уводит от обещания 10.5%, а не приближает к нему: снятие линии — единственный шаг во всей цепочке, дающий прирост абсолютной прибыли ($25.75M → $29.5M). Выручка сама по себе поставкой не является: оба обещания напечатаны в одном предложении `Case Prompt`, стр. 65, и выручное из них ($240M) выполняется во всех трёх состояниях — $362.5M, $287.5M, $280M. Терять $75M выручки безопасно ровно потому, что порог по выручке напечатан и с запасом пройден.\n\n*Соблазн 2 → чем снят → где напечатано.*\n2. **Настоящая опора.** Tees режется **именно потому**, что маржа 0% (`Exhibit 1`, стр. 74). В числитель линия даёт $0, в знаменатель — $7.5M. Операция чисто на знаменателе: $29.5M / $287.5M = 10.26% против $29.5M / $280M = 10.54%. Эти 0.275 п.п. (0.28 п.п. на напечатанной округлённой паре) и есть весь переход между «не выполнили обещание» и «выполнили». Утверждение «нулевая маржа ⇒ ничего не меняет» верно для числителя и ложно для дроби — а обещание клиента сформулировано именно в процентах.\n\n*Соблазн 3 → чем снят → где напечатано.*\n3. **Настоящая опора.** Подушка проверяется на неокруглённых размерах рынков, напечатанных в книге (`Math Solution`, стр. 68). Выручка среза: Socks $194.481M × 15% = $29.17215M, Underwear $2,488.32M × 10% = $248.832M, итого **$278.00415M** — выше порога $240M. Валовая прибыль: $4.3758225M + $24.8832M = **$29.2590225M**. Маржа = **10.525%**, всё ещё выше 10.5%. Подушка сжимается с 0.036 до 0.025 п.п., но вывод выживает — и выживает на числах, которые напечатаны, а не на округлении.\n\n*Две конвенции.*\n4. **Настоящая опора.** По абсолютной валовой прибыли Tanks надо резать: +$3.75M, единственный положительный шаг. По валовой марже — тоже: 7.10% → 10.26%. Конвенции расходятся только на Tees, и расходятся бесплатно: абсолютная прибыль в обоих случаях $29.5M, то есть по денежной конвенции решение по Tees безразлично, а по процентной оно обязательно. Тай-брейк напечатан в клиентском блоке: обещание сформулировано в процентах — «she promised 10.5% profit margin», `Case Prompt`, стр. 65. Поэтому кандидат обязан назвать конвенцию, а не просто согласиться с выводом: согласие без названной конвенции неотличимо от угадывания.\n\n*Ложные опоры.*\n5. **Ложная опора — не опираться.** Таблица долей рынка и CAGR (Socks 15/15/↑5%, Tanks 2.5/10/↑6%, Tees 5/5/↓3%, Underwear 1/10/↑20%) напечатана в колонке `Interviewer Guide:`, стр. 66 — это интервьюерский блок. На вердикт она влияет только через уже посчитанные размеры рынков 2020; строить на ней самостоятельный довод о привлекательности линий нельзя.\n6. **Ложная опора — не опираться.** Совпадение $29.5M в двух срезах. Оно выглядит как подтверждение устойчивости, а на деле это ровно тот факт, из-за которого денежная конвенция ничего не решает по Tees. Ссылаться на него как на довод «значит всё равно» — обратить опору против вывода.\n\n*Честное слабое место.*\n7. **Честное слабое место, называется вслух.** Подушка после честной проверки — 0.025 п.п. Это очень мало: вывод держится на третьем знаке процента и на том, что маржи всех четырёх линий останутся ровно такими же четыре года подряд — а это сноска о **ожидании** фирмы, а не контракт. Любое ухудшение маржи Socks с 15% до 14.9% или Underwear с 10% до 9.99% съедает зазор целиком. Вывод верен на напечатанных данных и хрупок за их пределами; правильная формулировка вердикта — «обещание достижимо ровно впритык», а не «обещание достигается уверенно».",
+    "decoy": "* Соблазн 1 честен по форме: Tanks действительно самая быстрорастущая линия портфеля по доле (2.5% → 10%, четырёхкратно) на рынке, растущем на 6% в год, и действительно даёт $75M — это второе по величине число в колонке выручки 2020 и почти третья часть обещанных $240M. Ни одно из этих утверждений не ложно.\n* Соблазн 2 честен арифметически: маржа Tees равна нулю, её вклад в числитель равен нулю, и абсолютная валовая прибыль после снятия Tees действительно не меняется — $29.5M до и $29.5M после. Записанное различие только в третьем знаке процента.\n* Соблазн 3 честен методологически: 10.54% против 10.5% — это подушка в 0.04 процентного пункта, полученная на размерах рынков, округлённых с $194.481M до $200M и с $2.4883B до $2.5B. Осторожность к такому зазору — правильный инстинкт, а не трусость.\n* Все три соблазна усиливает то, что запись сама доработала последние два шага только на округлённых числах, оставив неокруглённые выше по цепочке — визуально они выглядят как черновик, а не как проверочный материал.\n* Слово «growth» стоит в заголовке типа кейса, а «margin» появляется только на четвёртом шаге цепочки: порядок чтения грунтует выручную конвенцию раньше маржинальной.\n\n**SUPPORT (третьим)** — что на самом деле держит верный вывод\n\n*Соблазн 1 → чем снят → где напечатано.*\n1. **Настоящая опора.** Сноска `Exhibit 1`, стр. 74: «Firm expects 2016 margin % to maintain constant through 2020». Маржа Tanks в 2020 остаётся −5%, значит $75M выручки Tanks уничтожают $3.75M валовой прибыли. Рост Tanks уводит от обещания 10.5%, а не приближает к нему: снятие линии — единственный шаг во всей цепочке, дающий прирост абсолютной прибыли ($25.75M → $29.5M). Выручка сама по себе поставкой не является: оба обещания напечатаны в одном предложении `Case Prompt`, стр. 65, и выручное из них ($240M) выполняется во всех трёх состояниях — $362.5M, $287.5M, $280M. Терять $75M выручки безопасно ровно потому, что порог по выручке напечатан и с запасом пройден.\n\n*Соблазн 2 → чем снят → где напечатано.*\n2. **Настоящая опора.** Tees режется **именно потому**, что маржа 0% (`Exhibit 1`, стр. 74). В числитель линия даёт $0, в знаменатель — $7.5M. Операция чисто на знаменателе: $29.5M / $287.5M = 10.26% против $29.5M / $280M = 10.54%. Эти 0.275 п.п. (0.28 п.п. на напечатанной округлённой паре) и есть весь переход между «не выполнили обещание» и «выполнили». Утверждение «нулевая маржа ⇒ ничего не меняет» верно для числителя и ложно для дроби — а обещание клиента сформулировано именно в процентах.\n\n*Соблазн 3 → чем снят → где напечатано.*\n3. **Настоящая опора.** Подушка проверяется на неокруглённых размерах рынков, напечатанных в книге (`Math Solution`, стр. 68). Выручка среза: Socks $194.481M × 15% = $29.17215M, Underwear $2,488.32M × 10% = $248.832M, итого **$278.00415M** — выше порога $240M. Валовая прибыль: $4.3758225M + $24.8832M = **$29.2590225M**. Маржа = **10.525%**, всё ещё выше 10.5%. Подушка сжимается с 0.036 до 0.025 п.п., но вывод выживает — и выживает на числах, которые напечатаны, а не на округлении.\n\n*Две конвенции.*\n4. **Настоящая опора.** По абсолютной валовой прибыли Tanks надо резать: +$3.75M, единственный положительный шаг. По валовой марже — тоже: 7.10% → 10.26%. Конвенции расходятся только на Tees, и расходятся бесплатно: абсолютная прибыль в обоих случаях $29.5M, то есть по денежной конвенции решение по Tees безразлично, а по процентной оно обязательно. Тай-брейк напечатан в клиентском блоке: обещание сформулировано в процентах — «she promised 10.5% profit margin», `Case Prompt`, стр. 65. Поэтому кандидат обязан назвать конвенцию, а не просто согласиться с выводом: согласие без названной конвенции неотличимо от угадывания.\n\n*Ложные опоры.*\n5. **Ложная опора — не опираться.** Таблица долей рынка и CAGR (Socks 15/15/↑5%, Tanks 2.5/10/↑6%, Tees 5/5/↓3%, Underwear 1/10/↑20%) напечатана в колонке `Interviewer Guide:`, стр. 66 — это интервьюерский блок. На вердикт она влияет только через уже посчитанные размеры рынков 2020; строить на ней самостоятельный довод о привлекательности линий нельзя.\n6. **Ложная опора — не опираться.** Совпадение $29.5M в двух срезах. Оно выглядит как подтверждение устойчивости, а на деле это ровно тот факт, из-за которого денежная конвенция ничего не решает по Tees. Ссылаться на него как на довод «значит всё равно» — обратить опору против вывода.\n\n*Честное слабое место.*\n7. **Честное слабое место, называется вслух.** Подушка после честной проверки — 0.025 п.п. Это очень мало: вывод держится на третьем знаке процента и на том, что маржи всех четырёх линий останутся ровно такими же четыре года подряд — а это сноска о **ожидании** фирмы, а не контракт. Любое ухудшение маржи Socks с 15% до 14.9% или Underwear с 10% до 9.99% съедает зазор целиком. Вывод верен на напечатанных данных и хрупок за их пределами; правильная формулировка вердикта — «обещание достижимо ровно впритык», а не «обещание достигается уверенно».",
+    "support": "*Соблазн 1 → чем снят → где напечатано.*\n1. **Настоящая опора.** Сноска `Exhibit 1`, стр. 74: «Firm expects 2016 margin % to maintain constant through 2020». Маржа Tanks в 2020 остаётся −5%, значит $75M выручки Tanks уничтожают $3.75M валовой прибыли. Рост Tanks уводит от обещания 10.5%, а не приближает к нему: снятие линии — единственный шаг во всей цепочке, дающий прирост абсолютной прибыли ($25.75M → $29.5M). Выручка сама по себе поставкой не является: оба обещания напечатаны в одном предложении `Case Prompt`, стр. 65, и выручное из них ($240M) выполняется во всех трёх состояниях — $362.5M, $287.5M, $280M. Терять $75M выручки безопасно ровно потому, что порог по выручке напечатан и с запасом пройден.\n\n*Соблазн 2 → чем снят → где напечатано.*\n2. **Настоящая опора.** Tees режется **именно потому**, что маржа 0% (`Exhibit 1`, стр. 74). В числитель линия даёт $0, в знаменатель — $7.5M. Операция чисто на знаменателе: $29.5M / $287.5M = 10.26% против $29.5M / $280M = 10.54%. Эти 0.275 п.п. (0.28 п.п. на напечатанной округлённой паре) и есть весь переход между «не выполнили обещание» и «выполнили». Утверждение «нулевая маржа ⇒ ничего не меняет» верно для числителя и ложно для дроби — а обещание клиента сформулировано именно в процентах.\n\n*Соблазн 3 → чем снят → где напечатано.*\n3. **Настоящая опора.** Подушка проверяется на неокруглённых размерах рынков, напечатанных в книге (`Math Solution`, стр. 68). Выручка среза: Socks $194.481M × 15% = $29.17215M, Underwear $2,488.32M × 10% = $248.832M, итого **$278.00415M** — выше порога $240M. Валовая прибыль: $4.3758225M + $24.8832M = **$29.2590225M**. Маржа = **10.525%**, всё ещё выше 10.5%. Подушка сжимается с 0.036 до 0.025 п.п., но вывод выживает — и выживает на числах, которые напечатаны, а не на округлении.\n\n*Две конвенции.*\n4. **Настоящая опора.** По абсолютной валовой прибыли Tanks надо резать: +$3.75M, единственный положительный шаг. По валовой марже — тоже: 7.10% → 10.26%. Конвенции расходятся только на Tees, и расходятся бесплатно: абсолютная прибыль в обоих случаях $29.5M, то есть по денежной конвенции решение по Tees безразлично, а по процентной оно обязательно. Тай-брейк напечатан в клиентском блоке: обещание сформулировано в процентах — «she promised 10.5% profit margin», `Case Prompt`, стр. 65. Поэтому кандидат обязан назвать конвенцию, а не просто согласиться с выводом: согласие без названной конвенции неотличимо от угадывания.\n\n*Ложные опоры.*\n5. **Ложная опора — не опираться.** Таблица долей рынка и CAGR (Socks 15/15/↑5%, Tanks 2.5/10/↑6%, Tees 5/5/↓3%, Underwear 1/10/↑20%) напечатана в колонке `Interviewer Guide:`, стр. 66 — это интервьюерский блок. На вердикт она влияет только через уже посчитанные размеры рынков 2020; строить на ней самостоятельный довод о привлекательности линий нельзя.\n6. **Ложная опора — не опираться.** Совпадение $29.5M в двух срезах. Оно выглядит как подтверждение устойчивости, а на деле это ровно тот факт, из-за которого денежная конвенция ничего не решает по Tees. Ссылаться на него как на довод «значит всё равно» — обратить опору против вывода.\n\n*Честное слабое место.*\n7. **Честное слабое место, называется вслух.** Подушка после честной проверки — 0.025 п.п. Это очень мало: вывод держится на третьем знаке процента и на том, что маржи всех четырёх линий останутся ровно такими же четыре года подряд — а это сноска о **ожидании** фирмы, а не контракт. Любое ухудшение маржи Socks с 15% до 14.9% или Underwear с 10% до 9.99% съедает зазор целиком. Вывод верен на напечатанных данных и хрупок за их пределами; правильная формулировка вердикта — «обещание достижимо ровно впритык», а не «обещание достигается уверенно».",
+    "risks": "* **Внутренний.** После снятия двух линий из четырёх на бельё приходится 89.5% выручки среза ($248.832M из $278.004M) и 85.0% валовой прибыли ($24.883M из $29.259M), причём доля белья должна вырасти с 1% до 10% — десятикратно. Подушка над обещанием — 0.025 п.п. Проседания маржи белья с 10% до 9.9% достаточно, чтобы маржа среза упала до 10.435% и обещание оказалось невыполненным: одна линия, один десятый процентного пункта, и никаких других изменений.\n* **Внешний / рыночный.** Обещание 10.5% опирается на сноску «Firm expects 2016 margin % to maintain constant through 2020» — на ожидание, а не на обязательство поставщиков. Ткани закупаются по контрактам с поставщиками по всей территории США, и удорожание сырья, снижающее маржу носков и белья хотя бы на 0.03 п.п. каждую, съедает всю подушку 0.025 п.п. и переводит фирму из «выполнили» в «не выполнили» без единого управленческого решения.",
+    "next": "1. Зафиксировать сроки и цены по контрактам на ткани для линий носков и белья на горизонт до 2020. Снимает главную неопределённость вердикта — устойчивость маржи 15% и 10%, на которой держится подушка в 0.025 п.п.\n2. Проверить у отдела продаж достижимость доли белья 10% (рост с 1%) отдельным планом по каналам. Снимает неопределённость по единственной линии, дающей 85% валовой прибыли среза.\n3. Пересчитать оба обещания на неокруглённых размерах рынков и закрепить эту версию как рабочую в материалах для совета директоров. Снимает риск, что решение по Tees, стоящее 0.275 п.п., будет оспорено как артефакт округления.",
+    "build": "```python\nfrom decimal import Decimal, ROUND_HALF_UP\n\ndef r(x, q=\"0.0001\"):\n    return Decimal(x).quantize(Decimal(q), rounding=ROUND_HALF_UP)\n\n# --- напечатано в книге ---\n# Case Prompt, стр. 65 (КЛИЕНТСКИЙ блок): два порога\nREV_2016      = Decimal(60)                 # $M\nREV_TARGET    = REV_2016 * Decimal(4)       # $240M — «4x growth by 2020»\nMARGIN_TARGET = Decimal(\"10.5\")             # % — «she promised 10.5% profit margin»\nassert REV_TARGET == Decimal(240)\n\n# Clarifying Information, стр. 66 (клиентский): продуктовый микс\nMIX = {\"Socks\": Decimal(\"0.40\"), \"Tanks\": Decimal(\"0.25\"),\n       \"Tees\": Decimal(\"0.15\"), \"Underwear\": Decimal(\"0.20\")}\nassert sum(MIX.values()) == Decimal(1)\n\n# Exhibit 1, стр. 74 (экзибит, клиентский): выручка 2016 и маржи, сноска о постоянстве\nREV16 = {\"Socks\": Decimal(24), \"Tanks\": Decimal(15), \"Tees\": Decimal(9), \"Underwear\": Decimal(12)}\nMARG  = {\"Socks\": Decimal(\"0.15\"), \"Tanks\": Decimal(\"-0.05\"),\n         \"Tees\": Decimal(\"0.00\"),  \"Underwear\": Decimal(\"0.10\")}\nfor k in REV16:\n    assert REV16[k] == r(REV_2016 * MIX[k], \"0.01\")\n\n# Interviewer Guide, стр. 66 (ИНТЕРВЬЮЕРСКИЙ блок): доли рынка 2020\nSHARE20 = {\"Socks\": Decimal(\"0.15\"), \"Tanks\": Decimal(\"0.10\"),\n           \"Tees\": Decimal(\"0.05\"),  \"Underwear\": Decimal(\"0.10\")}\n\n# Math Solution, стр. 68 (ИНТЕРВЬЮЕРСКИЙ): размеры рынков 2020, неокруглённые и округлённые\nMKT20_EXACT = {\"Socks\": Decimal(\"194.481\"), \"Tanks\": Decimal(\"757.486176\"),\n               \"Tees\": Decimal(\"159.352706\"), \"Underwear\": Decimal(\"2488.320\")}\nMKT20_ROUND = {\"Socks\": Decimal(200), \"Tanks\": Decimal(750),\n               \"Tees\": Decimal(150), \"Underwear\": Decimal(2500)}\nassert r(Decimal(160) * Decimal(\"1.05\") ** 4, \"0.001\") == Decimal(\"194.481\")\nassert r(Decimal(1200) * Decimal(\"1.20\") ** 4, \"0.001\") == Decimal(\"2488.320\")\n\ndef state(lines, mkt):\n    rev = sum(mkt[k] * SHARE20[k] for k in lines)\n    gp  = sum(mkt[k] * SHARE20[k] * MARG[k] for k in lines)\n    return r(rev), r(gp), r(gp / rev * Decimal(100), \"0.0001\")\n\nALL       = [\"Socks\", \"Tanks\", \"Tees\", \"Underwear\"]\nNO_TANKS  = [\"Socks\", \"Tees\", \"Underwear\"]\nNO_BOTH   = [\"Socks\", \"Underwear\"]\n\n# --- сверка чужой записи на округлённых размерах (стр. 69–71, интервьюерские) ---\nrev_a, gp_a, m_a = state(ALL, MKT20_ROUND)\nassert rev_a == Decimal(\"362.5000\") and gp_a == Decimal(\"25.7500\")\nassert r(m_a, \"0.01\") == Decimal(\"7.10\")\n\nrev_t, gp_t, m_t = state(NO_TANKS, MKT20_ROUND)\nassert rev_t == Decimal(\"287.5000\") and gp_t == Decimal(\"29.5000\")\nassert r(m_t, \"0.01\") == Decimal(\"10.26\")\n\nrev_b, gp_b, m_b = state(NO_BOTH, MKT20_ROUND)\nassert rev_b == Decimal(\"280.0000\") and gp_b == Decimal(\"29.5000\")\nassert r(m_b, \"0.01\") == Decimal(\"10.54\")\n\n# обе конвенции: по деньгам Tanks режется (+3.75), Tees бесплатен (0)\nassert gp_t - gp_a == Decimal(\"3.7500\")\nassert gp_b - gp_t == Decimal(\"0.0000\")\n# по проценту Tees решает: 0.275 п.п. точно (0.28 п.п. на напечатанной округлённой паре)\nassert r(m_b - m_t, \"0.001\") == Decimal(\"0.275\")\nassert r(Decimal(\"10.54\") - Decimal(\"10.26\"), \"0.01\") == Decimal(\"0.28\")\nassert m_t < MARGIN_TARGET < m_b\n# оба обещания по выручке выполняются во всех состояниях\nassert rev_a > REV_TARGET and rev_t > REV_TARGET and rev_b > REV_TARGET\n\n# --- ПОСТРОЕНО: проверка на неокруглённых размерах рынков ---\nrev_x, gp_x, m_x = state(NO_BOTH, MKT20_EXACT)\nassert rev_x == Decimal(\"278.0042\")                     # 278.00415 → 278.0042\nassert r(Decimal(\"194.481\") * Decimal(\"0.15\"), \"0.00001\") == Decimal(\"29.17215\")\nassert r(Decimal(\"2488.320\") * Decimal(\"0.10\"), \"0.001\") == Decimal(\"248.832\")\nassert gp_x == Decimal(\"29.2590\")                       # 29.2590225 → 29.2590\nassert r(m_x, \"0.001\") == Decimal(\"10.525\")             # выше обещания 10.5\nassert m_x > MARGIN_TARGET and rev_x > REV_TARGET\n\ncushion_round = r(m_b - MARGIN_TARGET, \"0.0001\")\ncushion_exact = r(m_x - MARGIN_TARGET, \"0.0001\")\nassert cushion_round == Decimal(\"0.0357\") and cushion_exact == Decimal(\"0.0247\")\nassert cushion_exact < cushion_round                    # подушка сжимается, но не исчезает\n\ndef state_m(lines, mkt, marg):\n    rev = sum(mkt[k] * SHARE20[k] for k in lines)\n    gp  = sum(mkt[k] * SHARE20[k] * marg[k] for k in lines)\n    return r(rev), r(gp), r(gp / rev * Decimal(100), \"0.0001\")\n\n# --- контрфакт 1: маржа Tanks +15% — обещание выполнялось бы без сокращений ---\nMARG_CF = dict(MARG); MARG_CF[\"Tanks\"] = Decimal(\"0.15\")\nrev_cf, gp_cf, m_cf = state_m(ALL, MKT20_ROUND, MARG_CF)\nassert gp_cf == Decimal(\"40.7500\") and r(m_cf, \"0.001\") == Decimal(\"11.241\")\nassert m_cf > MARGIN_TARGET                             # резать было бы не нужно вовсе\n\n# --- контрфакт 2: маржа Tees +2% — конвенции конфликтуют по-настоящему ---\nMARG_T = dict(MARG); MARG_T[\"Tees\"] = Decimal(\"0.02\")\n_, gp_keep, m_keep = state_m(NO_TANKS, MKT20_ROUND, MARG_T)   # Tees сохранён\n_, gp_cut,  m_cut  = state_m(NO_BOTH,  MKT20_ROUND, MARG_T)   # Tees снят\nassert gp_keep == Decimal(\"29.6500\") and gp_cut == Decimal(\"29.5000\")\nassert gp_keep > gp_cut                                  # денежная конвенция: сохранить\nassert m_cut > m_keep                                    # процентная конвенция: снять\nassert r(m_keep, \"0.001\") == Decimal(\"10.313\") and r(m_cut, \"0.001\") == Decimal(\"10.536\")\n\n# --- контрфакт 3: маржа Tees −1% — конвенции сходятся сами ---\nMARG_N = dict(MARG); MARG_N[\"Tees\"] = Decimal(\"-0.01\")\n_, gp_keep_n, _ = state_m(NO_TANKS, MKT20_ROUND, MARG_N)\n_, gp_cut_n,  _ = state_m(NO_BOTH,  MKT20_ROUND, MARG_N)\nassert gp_keep_n == Decimal(\"29.4250\") and gp_cut_n == Decimal(\"29.5000\")\nassert gp_cut_n > gp_keep_n                              # обе конвенции требуют снять\n\n# --- контрфакт 4: округление имело бы значение при другом размере рынка носков ---\nMKT_CF = dict(MKT20_EXACT); MKT_CF[\"Socks\"] = Decimal(150)\nrev_c4, gp_c4, m_c4 = state(NO_BOTH, MKT_CF)\nassert rev_c4 == Decimal(\"271.3320\") and gp_c4 == Decimal(\"28.2582\")\nassert r(m_c4, \"0.001\") == Decimal(\"10.415\") and m_c4 < MARGIN_TARGET\n\n# --- контрфакт 5: маржа белья 9.9% съедает подушку ---\nMARG_U = dict(MARG); MARG_U[\"Underwear\"] = Decimal(\"0.099\")\n_, _, m_u = state_m(NO_BOTH, MKT20_EXACT, MARG_U)\nassert r(m_u, \"0.001\") == Decimal(\"10.435\") and m_u < MARGIN_TARGET\n```\n\n**Провоцируемая ошибка** — перевернуть верную запись, защитив Tanks как самую быстрорастущую линию с $75M выручки, объявив снятие Tees бессмысленным из-за нулевой маржи и списав зазор 0.04 п.п. на округление, — не заметив, что сноска экзибита превращает эти $75M в −$3.75M прибыли, что нулевая маржа Tees работает в знаменателе и даёт весь переход 10.26% → 10.54%, и что на напечатанных неокруглённых размерах рынков зазор выживает."
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: −$3.75M: столько валовой прибыли эти же $75M уничтожают при марже −5%; снятие Tanks — единственный шаг, дающий +$3.75M; (3) the naive reading is rejected explicitly, not merely avoided — $75M выручки Tanks в 2020 при доле 2.5% → 10% — крупнейший прирост в портфеле must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: −$3.75M: столько валовой прибыли эти же $75M уничтожают при марже −5%; снятие Tanks — единственный шаг, дающий +$3.75M; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — $75M выручки Tanks в 2020 при доле 2.5% → 10% — крупнейший прирост в портфеле обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "* **L1 — single free field.** The write-up's conclusion holds and Men's Extra Comfortable Essentials should terminate both the Tanks and the Tees lines — I am judging this on gross margin percentage, because that is the convention the CEO's own promise is written in. On the dollar convention the two lines split: dropping Tanks is the only move in the whole chain that adds absolute gross profit, $25.75M to $29.5M, because the exhibit footnote holds margins constant through 2020 and so Tanks' $75M of revenue destroys $3.75M of profit rather than funding growth; dropping Tees is free in dollars, $29.5M either way. On the percentage convention Tees has to go too — it contributes $0 to the numerator and $7.5M to the denominator, and that denominator move alone is the difference between 10.26% and 10.54%, between missing the promise and meeting it. Losing the revenue is safe because the other printed promise, 4x growth to $240M, clears in every state, $362.5M, $287.5M and $280M alike. I re-ran the last step on the unrounded market sizes the write-up left upstream — socks $194.481M and underwear $2,488.32M — and the cut still delivers $278.004M of revenue and 10.525% margin, so the cushion shrinks from about 0.036 to 0.025 points but survives. That cushion is the honest weakness: two risks. Internally, underwear alone would carry 85% of the remaining gross profit on a share that has to go from 1% to 10%, and its margin slipping to 9.9% takes the firm below 10.5% on its own. Externally, the constant-margin footnote is an expectation, not a supplier commitment, and three basis points of fabric inflation across socks and underwear erases the whole cushion. Next: lock fabric contracts for socks and underwear through 2020, put a channel-level plan behind the underwear share, and restate both promises on unrounded market sizes before the board sees them."
+   },
+   "anchor_metric": "ЕСТЬ, два, оба валидные и оба в клиентском блоке: 4-кратный рост к 2020 (= $240M) и 10.5% маржи"
   }
  ]
 }

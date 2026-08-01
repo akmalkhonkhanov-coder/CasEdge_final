@@ -8325,7 +8325,7 @@
    "lang": "ru",
    "difficulty_test": "ОСТАВЛЕН EASY: несущая механика — недоверие к выборке, запрещённый способ делать трудность. Поднимать нельзя без смены механики.",
    "lang_note": "тег приведён к факту: тело на русском; перевод — отдельная волна",
-   "difficulty_family": null
+   "difficulty_family": "F3"
   },
   {
    "id": 47,
@@ -19113,7 +19113,7 @@
    "lang_note": "тег проставлен по факту тела (поля не было)",
    "single_carrier": "declared",
    "single_carrier_reason": "носитель один по замыслу: вся числовая часть кейса — один связный объект (memo / таблица / график), и разрезать его на два экзибита можно только выдумав данные, чего цех не делает",
-   "difficulty_family": null
+   "difficulty_family": "F8"
   },
   {
    "id": 118,
@@ -20433,7 +20433,7 @@
    "difficulty_test": "ОСТАВЛЕН EASY: та же механика — недоверие к выборке. Плюс объявленная глубина противоречит механике, подпись опущена.",
    "lang": "ru",
    "lang_note": "тег проставлен по факту тела (поля не было)",
-   "difficulty_family": null
+   "difficulty_family": "F3"
   },
   {
    "id": 126,
@@ -21180,7 +21180,7 @@
    "lang_note": "тег проставлен по факту тела (поля не было)",
    "single_carrier": "declared",
    "single_carrier_reason": "носитель один по замыслу: вся числовая часть кейса — один связный объект (memo / таблица / график), и разрезать его на два экзибита можно только выдумав данные, чего цех не делает",
-   "difficulty_family": null
+   "difficulty_family": "F8"
   },
   {
    "id": 131,
@@ -41094,5 +41094,5 @@
  "source_scope": "graph skeleton only; prose re-authored in EN per languages{}",
  "family_ratchet_armed": false,
  "package_sha256_method": "sha256 of the full payload minus package_sha256, package_sha256_method; json.dumps(sort_keys=True, ensure_ascii=False, separators=(\",\",\":\"))",
- "package_sha256": "aacdb2e943d78c4acb443f00b4fce0ab670a3623e713167e9793d7ee8d40b129"
+ "package_sha256": "1dc16ecee626c469e424cd75f9873973a511d2bd0c085b14d8c304886be96ff1"
 }
