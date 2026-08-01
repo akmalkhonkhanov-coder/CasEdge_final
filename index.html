@@ -1006,6 +1006,9 @@
     .thread-label span { display: inline-block; animation: thread-fade .5s ease both; }
     @keyframes thread-fade { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: none; } }
 
+    .setup-sec.need .sec-title { color: var(--coral, #5db8a6); }
+    .setup-sec.need { animation: sec-need .9s ease 1; }
+    @keyframes sec-need { 0%,100% { transform: none; } 30% { transform: translateX(-3px); } 60% { transform: translateX(3px); } }
     /* ──────────── ТАБЛО ВЫБОРА ДРИЛЛА ────────────
        Кнопка висела внизу отдельно от карточек: выбрал навык - и надо ещё
        найти её глазами и дожать. Табло разворачивается под сеткой ровно в
@@ -2661,7 +2664,7 @@
 
   <div class="setup-body">
     <!-- Firm selection -->
-    <div class="setup-sec">
+    <div class="setup-sec" id="sec-firm">
       <div class="sec-eyebrow" data-i18n="setup.step1">Step 1 of 2</div>
       <div class="sec-title" data-i18n="setup.firm">Choose your target firm</div>
       <div class="firm-grid">
@@ -2703,7 +2706,7 @@
     </div>
 
     <!-- Case type selection -->
-    <div class="setup-sec">
+    <div class="setup-sec" id="sec-type">
       <div class="sec-eyebrow" data-i18n="setup.step2">Step 2 of 2</div>
       <div class="sec-title" data-i18n="setup.casetype">Choose your case type</div>
       <div class="case-grid">
@@ -2819,7 +2822,7 @@
       <span class="pill pill-neutral" id="b-type">Profitability</span>
       <span class="pill pill-coral" id="b-user">You</span>
     </div>
-    <button class="btn btn-ghost" style="font-size:13px;" onclick="endInterview()">End session →</button>
+    <button class="btn btn-ghost" id="end-btn" style="font-size:13px;" onclick="endInterview()" data-i18n="iv.end">End session →</button>
   </div>
 
   <div class="prog-track">
@@ -3634,6 +3637,8 @@ const I18N = {
     // Drill screen
     'drill.eyebrow': 'Skill Drills',
     'drill.title': 'Pick a skill to drill',
+    'setup.start': 'Start Interview', 'setup.needFirm': 'Pick a firm first', 'setup.needType': 'Pick a case type',
+    'iv.end': 'End session →', 'iv.debrief': 'Get my debrief →',
     'dp.skill': 'Skill', 'dp.where': 'Where in the case', 'dp.rep': 'One rep', 'dp.lib': 'In the library',
     'drill.start': 'Start Drill',
     'drillcard.sizing.name': 'Market Sizing',
@@ -3922,6 +3927,8 @@ const I18N = {
     // Drill screen
     'drill.eyebrow': 'Дриллы навыков',
     'drill.title': 'Выбери навык для дрилла',
+    'setup.start': 'Начать интервью', 'setup.needFirm': 'Сначала выбери фирму', 'setup.needType': 'Выбери тип кейса',
+    'iv.end': 'Завершить →', 'iv.debrief': 'Получить разбор →',
     'dp.skill': 'Навык', 'dp.where': 'Где в кейсе', 'dp.rep': 'Один подход', 'dp.lib': 'В библиотеке',
     'drill.start': 'Начать дрилл',
     'drillcard.sizing.name': 'Оценка рынка',
@@ -7002,10 +7009,25 @@ function selectCase(type, el) {
   updateStartBtn();
 }
 
+/* Серая кнопка не говорит, чего не хватает. Я сам на этом застрял в живом
+   прогоне: выбрал тип кейса, жму «Start Interview» — серая; фирма казалась
+   выбранной, потому что карточка подсвечивается на наведении. Кнопка теперь
+   называет недостающий шаг и подводит к нему взгляд. */
 function updateStartBtn() {
   const btn = document.getElementById('start-btn');
   if (!btn) return;
-  btn.disabled = !(state.firm && state.caseType);
+  const need = !state.firm ? 'firm' : (!state.caseType ? 'type' : null);
+  btn.disabled = !!need;
+  const lbl = btn.querySelector('.sb-label') || btn.firstChild;
+  const txt = need === 'firm' ? t('setup.needFirm') : need === 'type' ? t('setup.needType') : t('setup.start');
+  if (lbl && lbl.nodeType === 3) lbl.nodeValue = ' ' + txt + ' ';
+  else if (lbl) lbl.textContent = txt;
+  // Незакрытый шаг мигает один раз - подсказка, а не украшение.
+  document.querySelectorAll('.setup-sec').forEach(s => s.classList.remove('need'));
+  if (need) {
+    const sec = document.getElementById(need === 'firm' ? 'sec-firm' : 'sec-type');
+    if (sec) { sec.classList.add('need'); }
+  }
 }
 
 /* ────────────────────────────────────────────────────
@@ -8267,7 +8289,19 @@ function renderHints() {
   ).join('');
 }
 
+/* «End session» читается как «бросить», и кандидат её боится: между «кейс
+   закрыт» и оценкой стоит шаг, который выглядит как выход. Ближе к концу кнопка
+   называет то, что действительно делает, и перестаёт быть призрачной. */
+function updateEndBtn(pct) {
+  const b = document.getElementById('end-btn');
+  if (!b) return;
+  const near = pct >= 60;
+  b.textContent = near ? t('iv.debrief') : t('iv.end');
+  b.classList.toggle('btn-ghost', !near);
+  b.classList.toggle('btn-primary', near);
+}
 function setProgress(val) {
+  try { updateEndBtn(val); } catch (e) {}
   const el = document.getElementById('prog-fill');
   if (el) el.style.width = val + '%';
 }
