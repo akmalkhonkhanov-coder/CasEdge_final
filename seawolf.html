@@ -717,7 +717,7 @@ function scr_reveal(){
     <b>${r.squeeze.took.name}</b> — осталось <b>${r.squeeze.to}</b> трио вместо <b>${r.squeeze.from}</b>
     (<b>${r.squeeze.better.name}</b>). Лучших ходов ${r.bestMoves} из 4.
     <br><span class="dim">На «Среднем» это сходит с рук. На ассессменте, где решений 1–2 из 120, такой ход и есть проигрыш.</span></p>`
-    :(r.bestMoves===4&&!r.lost?`<p class="small">Все четыре хода держали максимальный запас — это и есть чистая игра на доборе.</p>`:'')}
+    :''}
    <div class="dim small" style="margin:10px 0 4px">Цена хода — сколько стопроцентных трио из 120 осталось бы достижимо после каждого варианта:</div>
    <table><tr><th>раунд</th><th>вариант 1</th><th>вариант 2</th><th>вариант 3</th></tr>
    ${r.cost.map(c=>`<tr><td>${c.round}${c.played?'':' <span class="dim">не сыгран</span>'}</td>${c.options.map(o=>`<td class="${o.taken?'taken':''}">${o.name}: ${o.remaining}${o.taken?' ←ты':''}</td>`).join('')}</tr>`).join('')}</table>

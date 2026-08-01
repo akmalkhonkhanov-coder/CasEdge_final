@@ -2341,7 +2341,7 @@
       <div class="nav-menu">
         <button class="nav-link" onclick="chooseMode('case')" data-i18n="nav.cases">Cases</button>
         <button class="nav-link" onclick="chooseMode('drill')" data-i18n="nav.drills">Drills</button>
-        <button class="nav-link" onclick="showScreen('setup')" data-i18n="nav.games">Games</button>
+        <button class="nav-link" onclick="openGameIntro('solve')" data-i18n="nav.games">Games</button>
         <button class="nav-link" onclick="goToProgress()" data-i18n="nav.progress">Progress</button>
         <button class="nav-link" onclick="goToPage('faq')" data-i18n="nav.faq">FAQ</button>
         <button class="nav-link" onclick="goToPage('contact')" data-i18n="nav.contact">Contact</button>
@@ -2386,7 +2386,7 @@
           <div class="firm-initial" style="background:rgba(232,168,124,.15);color:#e8a87c;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect></svg></div>
           <div>
             <div class="firm-name">Solve Game <span class="firm-tag">McKinsey</span> <span class="soon-badge" style="background:rgba(93,184,166,.18);color:var(--accent-teal);">Premium</span></div>
-            <div class="firm-desc">McKinsey-style problem-solving game - Redrock Study live now, with Sea Wolf and Sustainable Futures Lab in build. The screening format before the live interview.</div>
+            <div class="firm-desc">McKinsey-style problem-solving game - Redrock Study and Sea Wolf are live, Sustainable Futures Lab is in build. The screening format before the live interview.</div>
           </div>
           <div class="firm-check soon-lock"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
         </div>
@@ -2422,7 +2422,7 @@
       <div class="nav-menu">
         <button class="nav-link" onclick="chooseMode('case')" data-i18n="nav.cases">Cases</button>
         <button class="nav-link" onclick="chooseMode('drill')" data-i18n="nav.drills">Drills</button>
-        <button class="nav-link" onclick="showScreen('setup')" data-i18n="nav.games">Games</button>
+        <button class="nav-link" onclick="openGameIntro('solve')" data-i18n="nav.games">Games</button>
         <button class="nav-link active" onclick="goToProgress()" data-i18n="nav.progress">Progress</button>
         <button class="nav-link" onclick="goToPage('faq')" data-i18n="nav.faq">FAQ</button>
         <button class="nav-link" onclick="goToPage('contact')" data-i18n="nav.contact">Contact</button>
@@ -2588,7 +2588,7 @@
       <div class="nav-menu">
         <button class="nav-link" onclick="chooseMode('case')" data-i18n="nav.cases">Cases</button>
         <button class="nav-link" onclick="chooseMode('drill')" data-i18n="nav.drills">Drills</button>
-        <button class="nav-link" onclick="showScreen('setup')" data-i18n="nav.games">Games</button>
+        <button class="nav-link" onclick="openGameIntro('solve')" data-i18n="nav.games">Games</button>
         <button class="nav-link" onclick="goToProgress()" data-i18n="nav.progress">Progress</button>
       </div>
       <button class="lang-btn" onclick="openLangMenu()"><span class="lang-current">EN</span> ▾</button>
@@ -4456,8 +4456,8 @@ function bcgPushExhibit(ex) {
   const wrap = document.createElement('div');
   wrap.className = 'bcg-exhibit';
   let html = `<div class="bcg-exhibit-title">${escapeHtml(ex.title)}</div><table class="bcg-table">`;
-  html += '<thead><tr>' + ex.table.cols.map(c=>`<th>${escapeHtml(c)}</th>`).join('') + '</tr></thead><tbody>';
-  ex.table.rows.forEach(r => { html += '<tr>' + r.map(c=>`<td>${escapeHtml(c)}</td>`).join('') + '</tr>'; });
+  html += '<thead><tr>' + ex.table.cols.map(c=>`<th>${casInline(c)}</th>`).join('') + '</tr></thead><tbody>';
+  ex.table.rows.forEach(r => { html += '<tr>' + r.map(c=>`<td>${casInline(c)}</td>`).join('') + '</tr>'; });
   html += '</tbody></table>';
   wrap.innerHTML = html;
   feed.appendChild(wrap);
@@ -7625,14 +7625,18 @@ function casExPieSVG(r) {
 }
 
 function casExTableHTML(r) {
+  // Cells carry the same inline markup as prose: ** marks the load-bearing
+  // number. esc() alone printed `**NRR**` and `**97.0%**` literally to the
+  // candidate on #165. casInline() escapes first, so this is no less safe.
   let h = '<table class="cas-ex-table"><thead><tr>';
-  (r.head || []).forEach(c => h += `<th>${esc(String(L(c)))}</th>`);
+  (r.head || []).forEach(c => h += `<th>${casInline(L(c))}</th>`);
   h += '</tr></thead><tbody>';
   (r.rows || []).forEach(row => {
-    h += '<tr>' + row.map(c => `<td>${esc(String(L(c)))}</td>`).join('') + '</tr>';
+    h += '<tr>' + row.map(c => `<td>${casInline(L(c))}</td>`).join('') + '</tr>';
   });
   return h + '</tbody></table>';
 }
+function casInline(s) { return esc(String(s == null ? '' : s)).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>'); }
 
 // Mini shape curves for chart-select options. Shapes are generic - the
 // correct option lives only in the server-side answer key.
