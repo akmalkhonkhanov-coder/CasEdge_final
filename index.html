@@ -981,6 +981,58 @@
       background: rgba(93,184,166,.16); color: var(--on-dark);
       border: 1px solid rgba(93,184,166,.18); border-top-right-radius: 4px;
     }
+    /* ──────────── ОЖИДАНИЕ: НИТКА ────────────
+       Три мигающие точки не сообщают ничего: экран, который молчит, читается
+       как зависший. Нитка идёт по кругу и не останавливается, а подпись под ней
+       меняется по этапам работы — ожидание, которое объясняет себя, ощущается
+       вдвое короче того же ожидания молча. Анимация чисто на CSS: никаких
+       таймеров, кроме одного на смену подписи. */
+    .thread { display: inline-flex; align-items: center; gap: 12px; }
+    /* Нитка пишется как росчерк пера и убегает за собственным хвостом.
+       `pathLength="100"` нормирует длину контура, поэтому одна и та же
+       анимация подходит любому пути и не требует пересчёта при правке кривой. */
+    .thread-svg { width: 46px; height: 24px; flex-shrink: 0; overflow: visible; }
+    .thread-svg path {
+      fill: none; stroke: var(--coral, #5db8a6); stroke-width: 2.6;
+      stroke-linecap: round; stroke-linejoin: round;
+      stroke-dasharray: 26 100; animation: thread-write 1.9s cubic-bezier(.5,.05,.5,.95) infinite;
+    }
+    .thread-svg path.ghost { opacity: .16; animation: none; stroke-dasharray: none; }
+    @keyframes thread-write {
+      0%   { stroke-dashoffset: 100; }
+      100% { stroke-dashoffset: -26; }
+    }
+    .thread-label { font-size: 13.5px; color: var(--on-dark-soft, #9db3ad); }
+    .thread-label span { display: inline-block; animation: thread-fade .5s ease both; }
+    @keyframes thread-fade { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: none; } }
+
+    /* ──────────── ТАБЛО ВЫБОРА ДРИЛЛА ────────────
+       Кнопка висела внизу отдельно от карточек: выбрал навык - и надо ещё
+       найти её глазами и дожать. Табло разворачивается под сеткой ровно в
+       момент выбора и несёт кнопку внутри себя, там, куда смотришь. */
+    .dp-board {
+      max-height: 0; opacity: 0; overflow: hidden; margin-top: 20px;
+      transition: max-height .42s cubic-bezier(.22,.61,.36,1), opacity .3s ease;
+    }
+    .dp-board.open { max-height: 520px; opacity: 1; }
+    .dp-inner {
+      background: var(--surface-dark-elevated, #fbf8f2);
+      border: 1px solid var(--sv-line, rgba(31,41,55,.12));
+      border-radius: 16px; padding: 22px 24px;
+    }
+    .dp-eyebrow { font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--coral, #5db8a6); font-weight: 700; margin-bottom: 6px; }
+    .dp-name { font-size: 21px; font-weight: 700; margin: 0 0 10px; }
+    .dp-when { font-size: 14.5px; line-height: 1.6; margin: 0 0 16px; }
+    .dp-facts { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-bottom: 18px; }
+    .dp-fact { min-width: 128px; }
+    .dp-fact-k { font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--text-muted, #7d8a86); margin-bottom: 3px; }
+    .dp-fact-v { font-size: 14px; font-weight: 600; }
+    .dp-graded { font-size: 13px; line-height: 1.55; color: var(--text-muted, #7d8a86);
+      border-top: 1px solid var(--sv-line, rgba(31,41,55,.10)); padding-top: 14px; margin-bottom: 18px; }
+    .dp-graded b { color: inherit; }
+    @media (max-width: 620px) { .dp-facts { gap: 10px 16px; } .dp-fact { min-width: 100px; } }
     /* Typing indicator */
     .typing { display: none; align-self: flex-start; gap: 10px; animation: msgIn .26s ease both; }
     .typing.show { display: flex; }
@@ -2576,7 +2628,18 @@
         <div class="firm-card drill-card" onclick="selectDrill('Brainstorm', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 4 10.5c-.7.7-1 1.5-1 2.5H9c0-1-.3-1.8-1-2.5A6 6 0 0 1 12 3z"/></svg></div><div><div class="firm-name" data-i18n="drillcard.brainstorm.name">Brainstorm</div><div class="firm-desc" data-i18n="drillcard.brainstorm.desc">Generate 6+ MECE ideas with creativity and structure.</div></div></div>
         <div class="firm-card drill-card" onclick="selectDrill('Synthesis', this)" tabindex="0" role="button"><div class="drill-icon"><svg viewBox="0 0 24 24"><path d="M12 3 3 20h18L12 3z"/><path d="M7.5 13h9M9.5 8.5h5"/></svg></div><div><div class="firm-name" data-i18n="drillcard.synthesis.name">Synthesis</div><div class="firm-desc" data-i18n="drillcard.synthesis.desc">Deliver an answer-first recommendation under 90 seconds (Minto Pyramid).</div></div></div>
       </div>
-      <button id="drill-start-btn" class="btn btn-primary btn-cta" disabled onclick="startDrill()" style="margin-top:24px;" data-i18n="drill.start">Start Drill</button>
+      <div class="dp-board" id="drill-board"><div class="dp-inner">
+        <div class="dp-eyebrow" id="dp-eyebrow" data-i18n="dp.skill">Skill</div>
+        <h3 class="dp-name" id="dp-name"></h3>
+        <p class="dp-when" id="dp-when"></p>
+        <div class="dp-facts">
+          <div class="dp-fact"><div class="dp-fact-k" data-i18n="dp.where">Where in the case</div><div class="dp-fact-v" id="dp-where"></div></div>
+          <div class="dp-fact"><div class="dp-fact-k" data-i18n="dp.rep">One rep</div><div class="dp-fact-v" id="dp-time"></div></div>
+          <div class="dp-fact"><div class="dp-fact-k" data-i18n="dp.lib">In the library</div><div class="dp-fact-v" id="dp-count"></div></div>
+        </div>
+        <div class="dp-graded" id="dp-graded"></div>
+        <button id="drill-start-btn" class="btn btn-primary btn-cta" onclick="startDrill()" data-i18n="drill.start">Start Drill</button>
+      </div></div>
     </div>
   </div>
 </div>
@@ -2767,7 +2830,7 @@
     <div class="typing" id="typing-ind">
       <div class="msg-av" style="background:rgba(93,184,166,.14);color:var(--coral);font-family:var(--font-display);">I</div>
       <div class="typing-bbl">
-        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        <span class="thread"><svg class="thread-svg" viewBox="0 0 46 24"><path class="ghost" pathLength="100" d="M2 15 C5 5, 13 4, 14 12 C15 20, 8 21, 10 12 C12 4, 20 3, 21 12 C22 20, 15 21, 17 12 C19 4, 27 3, 28 12 C29 20, 22 21, 24 12 C26 5, 34 6, 38 13 C40 17, 42 18, 44 17"/><path pathLength="100" d="M2 15 C5 5, 13 4, 14 12 C15 20, 8 21, 10 12 C12 4, 20 3, 21 12 C22 20, 15 21, 17 12 C19 4, 27 3, 28 12 C29 20, 22 21, 24 12 C26 5, 34 6, 38 13 C40 17, 42 18, 44 17"/></svg><span class="thread-label"><span>&#8230;</span></span></span>
       </div>
     </div>
   </div>
@@ -3165,11 +3228,11 @@ async function _startDrillReal() {
   document.getElementById('b-firm').textContent = 'Drill';
   document.getElementById('b-type').textContent = state.drillType;
   setSessionBadge('');   // дрилл - кейса нет
-  chat.innerHTML = '<div class="typing" id="typing-ind"><div class="msg-av" style="background:rgba(93,184,166,.14);color:var(--coral);font-family:var(--font-display);">I</div><div class="typing-bbl"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>';
+  chat.innerHTML = '<div class="typing" id="typing-ind"><div class="msg-av" style="background:rgba(93,184,166,.14);color:var(--coral);font-family:var(--font-display);">I</div><div class="typing-bbl"><span class="thread"><svg class="thread-svg" viewBox="0 0 46 24"><path class="ghost" pathLength="100" d="M2 15 C5 5, 13 4, 14 12 C15 20, 8 21, 10 12 C12 4, 20 3, 21 12 C22 20, 15 21, 17 12 C19 4, 27 3, 28 12 C29 20, 22 21, 24 12 C26 5, 34 6, 38 13 C40 17, 42 18, 44 17"/><path pathLength="100" d="M2 15 C5 5, 13 4, 14 12 C15 20, 8 21, 10 12 C12 4, 20 3, 21 12 C22 20, 15 21, 17 12 C19 4, 27 3, 28 12 C29 20, 22 21, 24 12 C26 5, 34 6, 38 13 C40 17, 42 18, 44 17"/></svg><span class="thread-label"><span>&#8230;</span></span></span></div></div>';
   setProgress(10);
   showScreen('interview');
   renderHints();
-  setTyping(true);
+  setTyping(true, 'open');
   const seed = Math.random().toString(36).substring(2,8);
   const sys = DRILL_PROMPTS[state.drillType] + '\n\nUniqueness seed: ' + seed + ' - make this drill genuinely different from any previous one. VARIETY IS MANDATORY: do NOT default to the classic "profits/margin fell from X% to Y%, find out why" profitability-decline setup - that specific framing is overused and banned unless the drill type is explicitly about diagnosing a decline. Rotate hard across sectors (healthcare, logistics, agritech, fintech, education, energy, media, public sector, industrials, retail, SaaS) AND across problem types (market entry, pricing, M&A, capacity, product launch, turnaround, growth strategy, cost transformation, make-vs-buy, non-profit). Avoid coffee/café topics.' + langInstruction();
   try {
@@ -3183,10 +3246,74 @@ async function _startDrillReal() {
   }
 }
 
+/* Что кандидат должен знать ДО того, как начнёт: не «что это за упражнение»,
+   а «в какой момент реального интервью этот навык решает исход». Иначе дриллы
+   читаются как набор задач, а не как разбор кейса по частям. */
+const DRILL_BOARD = {
+  'Market Sizing': {
+    where:{ru:'Опорный вопрос, первые 5–10 минут', en:'Anchor question, first 5–10 minutes'},
+    time:{ru:'5–7 мин', en:'5–7 min'}, count:{ru:'48 задач', en:'48 drills'},
+    when:{ru:'Интервьюер спрашивает размер рынка, о котором нет данных. Проверяется не память, а умение разложить величину на множители, которые можно оценить, и назвать допущение вслух до того, как о нём спросят.',
+          en:'The interviewer asks for the size of a market nobody has data on. What is tested is not recall but breaking the number into factors you can actually estimate - and naming your assumption out loud before you are asked for it.'},
+    graded:{ru:'Оценивается: структура разложения · правдоподобие допущений · арифметика в уме · <b>ты сам называешь, где твоя оценка может быть неверна</b>.',
+            en:'Graded on: structure of the breakdown · plausibility of assumptions · mental math · <b>you naming where your own estimate could be wrong</b>.'} },
+  'Structuring': {
+    where:{ru:'Первые 2 минуты кейса', en:'First 2 minutes of the case'},
+    time:{ru:'6–8 мин', en:'6–8 min'}, count:{ru:'48 задач', en:'48 drills'},
+    when:{ru:'Самая дорогая минута интервью. Дерево, которое ты строишь в начале, определяет весь оставшийся разговор — и партнёр по нему решает, стоит ли тебя слушать дальше.',
+          en:'The most expensive minute of the interview. The tree you build at the start shapes every exchange that follows - and the partner decides from it whether you are worth listening to.'},
+    graded:{ru:'Оценивается: MECE · гипотеза заявлена ПЕРВОЙ · обоснование каждой ветки · <b>выбор ветки, с которой начинаешь, и критерий этого выбора</b>.',
+            en:'Graded on: MECE · hypothesis stated FIRST · a reason for every branch · <b>which branch you open with, and the criterion behind that choice</b>.'} },
+  'Case Math': {
+    where:{ru:'Середина кейса, после экзибита', en:'Mid-case, after an exhibit'},
+    time:{ru:'5–7 мин', en:'5–7 min'}, count:{ru:'50 задач', en:'50 drills'},
+    when:{ru:'Многошаговый счёт под взглядом. Ошибка здесь стоит дороже любой другой: она видна мгновенно и ставит под сомнение всё, что ты сказал раньше.',
+          en:'Multi-step arithmetic while someone watches. A slip here costs more than any other: it is visible instantly and puts everything you said earlier in doubt.'},
+    graded:{ru:'Оценивается: верный ответ · шаги показаны ДО ответа · единицы и порядок величины · <b>вывод для бизнеса, а не голое число</b>.',
+            en:'Graded on: the right answer · steps shown BEFORE it · units and order of magnitude · <b>the business read, not a bare number</b>.'} },
+  'Chart Interpretation': {
+    where:{ru:'Когда выдают экзибит', en:'The moment an exhibit lands'},
+    time:{ru:'4–6 мин', en:'4–6 min'}, count:{ru:'48 задач', en:'48 drills'},
+    when:{ru:'График дают не для пересказа. Слабый кандидат описывает, что нарисовано; сильный за десять секунд называет ОДНО, что меняет решение, и говорит, что проверит следующим.',
+          en:'A chart is not handed over to be narrated. A weak candidate describes what is drawn; a strong one names in ten seconds the ONE thing that changes the decision, and what they would check next.'},
+    graded:{ru:'Оценивается: инсайт, а не описание · связь с бизнесом · следующий шаг · <b>что в графике НЕ важно</b>.',
+            en:'Graded on: insight, not description · the business implication · the next check · <b>what in the chart does NOT matter</b>.'} },
+  'Brainstorm': {
+    where:{ru:'Ближе к концу, перед рекомендацией', en:'Late in the case, before the recommendation'},
+    time:{ru:'5–7 мин', en:'5–7 min'}, count:{ru:'48 задач', en:'48 drills'},
+    when:{ru:'Проверка на творчество под структурой. Шесть идей списком стоят меньше, чем четыре, разложенные по осям и привязанные к фактам кейса. Часть задач ломает твой список новым фактом.',
+          en:'Creativity under structure. Six ideas in a list are worth less than four grouped on axes and tied to the facts of the case. Some drills then break your list with a new fact.'},
+    graded:{ru:'Оценивается: 6+ идей · MECE-группировка · привязка к фактам · <b>какие из твоих идей убивает новый факт</b>.',
+            en:'Graded on: 6+ ideas · MECE grouping · each tied to a fact · <b>which of your ideas the new fact kills</b>.'} },
+  'Synthesis': {
+    where:{ru:'Последние 90 секунд', en:'The last 90 seconds'},
+    time:{ru:'3–5 мин', en:'3–5 min'}, count:{ru:'17 записей', en:'17 records'},
+    when:{ru:'Тебе дают чужую работу — запись чужого анализа — и просят вынести вердикт. Это то, чем занимается консультант на проекте каждый день, и то, на чём чаще всего сыплется кандидат: подводит к выводу вместо того, чтобы начать с него.',
+          en:'You are handed someone else\'s work - a record of their analysis - and asked for a verdict. It is what a consultant does on a project every day, and where candidates most often fail: building up to the conclusion instead of opening with it.'},
+    graded:{ru:'Оценивается: <b>вывод назван ПЕРВЫМ, действием и с субъектом</b> · 2–3 факта под ним · риски · следующий шаг · какой факт в записи не имеет значения.',
+            en:'Graded on: <b>the verdict stated FIRST, as an action, with a subject</b> · 2–3 facts under it · risks · the next step · which fact in the record does not matter.'} }
+};
+function dbText(v) { const l = (state.uiLang === 'ru') ? 'ru' : 'en'; return (v && typeof v === 'object') ? (v[l] || v.en || '') : (v || ''); }
 function selectDrill(type, el) {
   document.querySelectorAll('.drill-card').forEach(c => { c.classList.remove('selected'); });
   if (el) el.classList.add('selected');
   state.drillType = type;
+  const d = DRILL_BOARD[type];
+  const set = (id, html) => { const n = document.getElementById(id); if (n) n.innerHTML = html; };
+  if (d) {
+    set('dp-name', type); set('dp-when', dbText(d.when)); set('dp-where', dbText(d.where));
+    set('dp-time', dbText(d.time)); set('dp-count', dbText(d.count)); set('dp-graded', dbText(d.graded));
+  }
+  const board = document.getElementById('drill-board');
+  if (board) {
+    board.classList.add('open');
+    // Кнопка приезжает вместе с объяснением - но экран не должен дёргаться под
+    // курсором, поэтому доводим табло в кадр только если оно не поместилось.
+    setTimeout(() => {
+      const r = board.getBoundingClientRect();
+      if (r.bottom > window.innerHeight) board.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }, 260);
+  }
   const btn = document.getElementById('drill-start-btn');
   if (btn) btn.disabled = false;
 }
@@ -3507,6 +3634,7 @@ const I18N = {
     // Drill screen
     'drill.eyebrow': 'Skill Drills',
     'drill.title': 'Pick a skill to drill',
+    'dp.skill': 'Skill', 'dp.where': 'Where in the case', 'dp.rep': 'One rep', 'dp.lib': 'In the library',
     'drill.start': 'Start Drill',
     'drillcard.sizing.name': 'Market Sizing',
     'drillcard.sizing.desc': 'Estimate market sizes from first principles with clean structure.',
@@ -3794,6 +3922,7 @@ const I18N = {
     // Drill screen
     'drill.eyebrow': 'Дриллы навыков',
     'drill.title': 'Выбери навык для дрилла',
+    'dp.skill': 'Навык', 'dp.where': 'Где в кейсе', 'dp.rep': 'Один подход', 'dp.lib': 'В библиотеке',
     'drill.start': 'Начать дрилл',
     'drillcard.sizing.name': 'Оценка рынка',
     'drillcard.sizing.desc': 'Оценивай размеры рынка с нуля, с чистой структурой.',
@@ -6990,11 +7119,11 @@ async function autoStartCase() {
   if (chat) chat.innerHTML = `
     <div class="typing" id="typing-ind">
       <div class="msg-av" style="background:rgba(93,184,166,.14);color:var(--coral);font-family:var(--font-display);">I</div>
-      <div class="typing-bbl"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+      <div class="typing-bbl"><span class="thread"><svg class="thread-svg" viewBox="0 0 46 24"><path class="ghost" pathLength="100" d="M2 15 C5 5, 13 4, 14 12 C15 20, 8 21, 10 12 C12 4, 20 3, 21 12 C22 20, 15 21, 17 12 C19 4, 27 3, 28 12 C29 20, 22 21, 24 12 C26 5, 34 6, 38 13 C40 17, 42 18, 44 17"/><path pathLength="100" d="M2 15 C5 5, 13 4, 14 12 C15 20, 8 21, 10 12 C12 4, 20 3, 21 12 C22 20, 15 21, 17 12 C19 4, 27 3, 28 12 C29 20, 22 21, 24 12 C26 5, 34 6, 38 13 C40 17, 42 18, 44 17"/></svg><span class="thread-label"><span>&#8230;</span></span></span></div>
     </div>`;
   setProgress(2);
   showScreen('interview');
-  setTyping(true);
+  setTyping(true, 'open');
 
   try {
     const res = await callCaseSession({
@@ -7119,12 +7248,12 @@ async function startLibraryCase(caseId) {
   chat.innerHTML = `
     <div class="typing" id="typing-ind">
       <div class="msg-av" style="background:rgba(93,184,166,.14);color:var(--coral);font-family:var(--font-display);">I</div>
-      <div class="typing-bbl"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+      <div class="typing-bbl"><span class="thread"><svg class="thread-svg" viewBox="0 0 46 24"><path class="ghost" pathLength="100" d="M2 15 C5 5, 13 4, 14 12 C15 20, 8 21, 10 12 C12 4, 20 3, 21 12 C22 20, 15 21, 17 12 C19 4, 27 3, 28 12 C29 20, 22 21, 24 12 C26 5, 34 6, 38 13 C40 17, 42 18, 44 17"/><path pathLength="100" d="M2 15 C5 5, 13 4, 14 12 C15 20, 8 21, 10 12 C12 4, 20 3, 21 12 C22 20, 15 21, 17 12 C19 4, 27 3, 28 12 C29 20, 22 21, 24 12 C26 5, 34 6, 38 13 C40 17, 42 18, 44 17"/></svg><span class="thread-label"><span>&#8230;</span></span></span></div>
     </div>`;
   setProgress(4);
   showScreen('interview');
   renderHints();
-  setTyping(true);
+  setTyping(true, 'open');
 
   // Opening turn: server presents the prompt + first question (no verdict).
   try {
@@ -7164,14 +7293,14 @@ async function _startInterviewReal() {
     <div class="typing" id="typing-ind">
       <div class="msg-av" style="background:rgba(93,184,166,.14);color:var(--coral);font-family:var(--font-display);">I</div>
       <div class="typing-bbl">
-        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        <span class="thread"><svg class="thread-svg" viewBox="0 0 46 24"><path class="ghost" pathLength="100" d="M2 15 C5 5, 13 4, 14 12 C15 20, 8 21, 10 12 C12 4, 20 3, 21 12 C22 20, 15 21, 17 12 C19 4, 27 3, 28 12 C29 20, 22 21, 24 12 C26 5, 34 6, 38 13 C40 17, 42 18, 44 17"/><path pathLength="100" d="M2 15 C5 5, 13 4, 14 12 C15 20, 8 21, 10 12 C12 4, 20 3, 21 12 C22 20, 15 21, 17 12 C19 4, 27 3, 28 12 C29 20, 22 21, 24 12 C26 5, 34 6, 38 13 C40 17, 42 18, 44 17"/></svg><span class="thread-label"><span>&#8230;</span></span></span>
       </div>
     </div>`;
 
   setProgress(8);
   showScreen('interview');
   renderHints();
-  setTyping(true);
+  setTyping(true, 'open');
 
   // Generate uniqueness seed so every case is different
   const seed = {
@@ -7720,14 +7849,73 @@ function casRenderExhibits(list) {
   list.forEach(ex => casAddExhibitCard(ex));
 }
 
-function setTyping(on) {
+/* Ожидание, которое называет этап, ощущается вдвое короче молчащего. Подписи
+   не выдуманы: это то, что интервьюер действительно делает с ответом по порядку.
+   Первая держится дольше остальных - если ответ пришёл быстро, кандидат не
+   увидит мельтешения. Последняя не сменяется: врать «почти готово» нельзя. */
+const THREAD_STEPS = {
+  case:  [[0,{ru:'читаю твой ответ',en:'reading your answer'}],[2600,{ru:'сверяю с данными кейса',en:'checking it against the case data'}],
+          [6000,{ru:'решаю, что дать дальше',en:'deciding what to release next'}],[11000,{ru:'формулирую',en:'putting it into words'}]],
+  open:  [[0,{ru:'готовлю кейс',en:'setting up the case'}],[2600,{ru:'проверяю экзибиты',en:'checking the exhibits'}],
+          [6500,{ru:'начинаем',en:'here we go'}]],
+  grade: [[0,{ru:'читаю твой разбор',en:'reading your answer'}],[2600,{ru:'сверяю с эталоном',en:'comparing with the model answer'}],
+          [6000,{ru:'считаю, где потеряно',en:'working out where it was lost'}],[11000,{ru:'пишу обратную связь',en:'writing your feedback'}]]
+};
+function thText(v){ const l=(state.uiLang==='ru')?'ru':'en'; return (v&&typeof v==='object')?(v[l]||v.en):v; }
+let _threadTimer = null;
+/* Разбор пишется дольше всего в продукте. Подписи идут по тому, что грейдер
+   действительно делает по порядку, и последняя не обещает «почти готово». */
+const SCORE_STEPS = [[0,{ru:'читаю всю сессию',en:'reading the whole session'}],[3000,{ru:'проверяю каждый расчёт',en:'checking every calculation'}],
+  [7000,{ru:'сверяю рекомендацию с Минто',en:'testing your recommendation against Minto'}],
+  [12000,{ru:'считаю баллы по пяти осям',en:'scoring five dimensions'}],[18000,{ru:'пишу разбор',en:'writing the debrief'}]];
+let _scoreTimer = null;
+function scoreThread(on) {
+  if (_scoreTimer) { clearTimeout(_scoreTimer); _scoreTimer = null; }
+  if (!on) return;
+  const t0 = Date.now();
+  const paint = () => {
+    const label = document.getElementById('fb-thread');
+    if (!label) return;
+    const gone = Date.now() - t0;
+    let cur = SCORE_STEPS[0], next = null;
+    for (const s of SCORE_STEPS) { if (gone >= s[0]) cur = s; else { next = s; break; } }
+    if (label.dataset.at !== String(cur[0])) {
+      label.dataset.at = String(cur[0]);
+      label.innerHTML = '<span>' + thText(cur[1]) + '</span>';
+    }
+    if (next) _scoreTimer = setTimeout(paint, next[0] - gone);
+  };
+  paint();
+}
+function setTyping(on, mode) {
   const el = document.getElementById('typing-ind');
   if (!el) return;
   el.classList.toggle('show', on);
-  if (on) setTimeout(() => {
-    const chat = document.getElementById('chat-area');
-    if (chat) chat.scrollTop = chat.scrollHeight;
-  }, 40);
+  if (_threadTimer) { clearTimeout(_threadTimer); _threadTimer = null; }
+  if (on) {
+    const steps = THREAD_STEPS[mode] || THREAD_STEPS.case;
+    const label = el.querySelector('.thread-label');
+    const t0 = Date.now();
+    const paint = () => {
+      if (!label || !el.classList.contains('show')) return;
+      const gone = Date.now() - t0;
+      let cur = steps[0], next = null;
+      for (const s of steps) { if (gone >= s[0]) cur = s; else { next = s; break; } }
+      // Перерисовываем только на смене - иначе анимация появления дёргается.
+      if (label.dataset.at !== String(cur[0])) {
+        label.dataset.at = String(cur[0]);
+        label.innerHTML = '<span>' + thText(cur[1]) + '</span>';
+      }
+      if (next) _threadTimer = setTimeout(paint, next[0] - gone);
+    };
+    paint();
+    setTimeout(() => {
+      const chat = document.getElementById('chat-area');
+      if (chat) chat.scrollTop = chat.scrollHeight;
+    }, 40);
+  } else if (el.querySelector('.thread-label')) {
+    el.querySelector('.thread-label').dataset.at = '';
+  }
 }
 
 /* ────────────────────────────────────────────────────
@@ -7907,7 +8095,7 @@ async function sendMessage() {
 
   state.msgCount++;
   setProgress(Math.min(92, 8 + state.msgCount * 13));
-  setTyping(true);
+  setTyping(true, 'case');
 
   // Drill mode uses the drill's own system prompt
   if (state.drillType && state.drillSystem) {
@@ -8131,12 +8319,15 @@ function startFeedbackLoading() {
   if (arc) { arc.style.strokeDashoffset = 439.82 * 0.72; arc.classList.add('cas-ring-spin'); }
   setText('score-title', 'Scoring your case…');
   setText('score-sub', 'The partner is writing your breakdown - about 10-15 seconds');
+  // Та же нитка, что и в чате: экран разбора ждёт дольше всего, и молчащий
+  // прогресс-круг здесь читается хуже всего.
+  scoreThread(true);
   ['structure','quant','logic','comm','ownership'].forEach(k => {
     const v = document.getElementById('mv-' + k); if (v) v.textContent = '·';
     const b = document.getElementById('mb-' + k); if (b) { b.style.width = '26%'; b.classList.add('cas-pulse'); }
   });
   const fbEl = document.getElementById('fb-text');
-  if (fbEl) { fbEl.classList.add('cas-pulse'); fbEl.textContent = 'Analysing every answer, checking your math, and writing a partner-level debrief…'; }
+  if (fbEl) { fbEl.classList.add('cas-pulse'); fbEl.innerHTML = '<span class="thread"><svg class="thread-svg" viewBox="0 0 46 24"><path class="ghost" pathLength="100" d="M2 15 C5 5, 13 4, 14 12 C15 20, 8 21, 10 12 C12 4, 20 3, 21 12 C22 20, 15 21, 17 12 C19 4, 27 3, 28 12 C29 20, 22 21, 24 12 C26 5, 34 6, 38 13 C40 17, 42 18, 44 17"/><path pathLength="100" d="M2 15 C5 5, 13 4, 14 12 C15 20, 8 21, 10 12 C12 4, 20 3, 21 12 C22 20, 15 21, 17 12 C19 4, 27 3, 28 12 C29 20, 22 21, 24 12 C26 5, 34 6, 38 13 C40 17, 42 18, 44 17"/></svg><span class="thread-label" id="fb-thread"><span>&#8230;</span></span></span>'; }
   let n = 0;
   if (_fbLoadTimer) clearInterval(_fbLoadTimer);
   _fbLoadTimer = setInterval(() => { n = (n % 3) + 1; if (valEl) valEl.textContent = '·'.repeat(n); }, 380);

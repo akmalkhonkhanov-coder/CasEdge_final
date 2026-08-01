@@ -716,19 +716,22 @@ function scr_reveal(){
    ${r.squeeze?`<p class="small">Запас сжат: на раунде <b>${r.squeeze.round}</b> ты взял
     <b>${r.squeeze.took.name}</b> — осталось <b>${r.squeeze.to}</b> трио вместо <b>${r.squeeze.from}</b>
     (<b>${r.squeeze.better.name}</b>). Лучших ходов ${r.bestMoves} из 4.
-    <br><span class="dim">На «Среднем» это сходит с рук. На ассессменте, где решений 1–2 из 120, такой ход и есть проигрыш.</span></p>`
+    <br><span class="dim">На «Среднем» это сходит с рук. На ассессменте, где решений 1–2 из ${r.poolCombos}, такой ход и есть проигрыш.</span></p>`
     :''}
-   <div class="dim small" style="margin:10px 0 4px">Цена хода — сколько стопроцентных трио из 120 осталось бы достижимо после каждого варианта:</div>
+   <div class="dim small" style="margin:10px 0 4px">Цена хода — сколько стопроцентных трио из ${r.poolCombos} осталось бы достижимо после каждого варианта:</div>
    <table><tr><th>раунд</th><th>вариант 1</th><th>вариант 2</th><th>вариант 3</th></tr>
-   ${r.cost.map(c=>`<tr><td>${c.round}${c.played?'':' <span class="dim">не сыгран</span>'}</td>${c.options.map(o=>`<td class="${o.taken?'taken':''}">${o.name}: ${o.remaining}${o.taken?' ←ты':''}</td>`).join('')}</tr>`).join('')}</table>
+   ${r.cost.map(c=>`<tr><td>${c.round}${c.played?'':' <span class="dim">не сыгран</span>'}</td>${c.options.map(o=>`<td class="${o.taken?'taken':''}">${o.name}: ${o.remaining===null?'—':o.remaining}${o.taken?' ←ты':''}</td>`).join('')}</tr>`).join('')}</table>
    ${r.yourTrio?`<h3 style="margin:14px 0 4px;font-size:15px">Твоё трио: ${r.yourTrio.join(', ')}</h3>
    <table>${r.yourScore.detail.map(d=>`<tr><td>${d.attr}</td><td>среднее ${d.avg}</td><td>диапазон ${d.range[0]}–${d.range[1]}</td><td class="${d.ok?'ok':'bad'}">${d.ok?'ок':'МИМО'}</td></tr>`).join('')}</table>
    <table><tr><td>${V&&V.site?'':''}признаки</td><td>желательный: <b class="${r.yourScore.hasDesired?'ok':'bad'}">${r.yourScore.hasDesired?'есть':'НЕТ'}</b></td>
     <td>запрещённый: <b class="${r.yourScore.hasUndesired?'bad':'ok'}">${r.yourScore.hasUndesired?'ЕСТЬ':'нет'}</b></td>
     <td class="${r.yourScore.hasDesired&&!r.yourScore.hasUndesired?'ok':'bad'}">${r.yourScore.hasDesired&&!r.yourScore.hasUndesired?'ок':'МИМО'}</td></tr></table>`:''}
    <h3 style="margin:14px 0 4px;font-size:15px">Что было возможно из собранного</h3>
-   ${r.possible?`<p class="small">${r.possible} трио на 100%. Пример: <b>${r.possibleExample.join(', ')}</b>.<br>
-     <span class="dim">${r.spread.map(s=>`${s.attr}: решения лежат ${s.from}–${s.to}`).join(' · ')}</span></p>`
+   ${r.possible?`<p class="small">${r.possible} ${r.possible===1?'трио даёт':'трио дают'} 100% из ${r.poolCombos} сочетаний пула.
+     ${r.possibleCore&&r.possibleCore.length?`<br><b>Без чего решения не существует:</b> ${r.possibleCore.join(', ')} — входит во все ${r.possible}.`:'<br><span class="dim">Общего микроба у решений нет — пул давал несколько независимых путей.</span>'}<br>
+     <span class="dim">${r.spread.map(s=>`${s.attr}: решения лежат ${s.from}–${s.to}`).join(' · ')}</span></p>
+   ${r.possibleAll&&r.possibleAll.length?`<table><tr><th>решение</th><th>трио</th><th>носителей желательного</th></tr>
+     ${r.possibleAll.map((v,i)=>`<tr><td>${i+1}</td><td>${v.names.join(', ')}</td><td>${v.desiredCount}</td></tr>`).join('')}</table>`:''}`
     :`<p class="bad small">Ни одного трио на 100% — потолок этого пула ниже.</p>`}</div>`});
  return h}
 

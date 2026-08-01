@@ -71,6 +71,16 @@
   white-space:pre; overflow-x:auto; margin:8px 0; padding:10px 12px; border-radius:8px;
   background:rgba(93,184,166,.06); color:var(--on-dark,#faf9f5); }
 .cm-exh-note { font-size:13px; line-height:1.6; color:var(--on-dark,#faf9f5); margin:8px 0; }
+/* Ожидание грейдера - самое долгое место дрилла. Три точки молчат; нитка идёт
+   и называет этап. Подписи по тому, что грейдер делает по порядку. */
+.cm-thread { display:inline-flex; align-items:center; gap:11px; }
+.cm-thread svg { width:44px; height:23px; flex-shrink:0; overflow:visible; }
+.cm-thread path { fill:none; stroke:var(--coral,#5db8a6); stroke-width:2.6; stroke-linecap:round; stroke-linejoin:round;
+  stroke-dasharray:26 100; animation:cmwrite 1.9s cubic-bezier(.5,.05,.5,.95) infinite; }
+.cm-thread path.ghost { opacity:.16; animation:none; stroke-dasharray:none; }
+@keyframes cmwrite { 0%{stroke-dashoffset:100;} 100%{stroke-dashoffset:-26;} }
+.cm-thread-l span { display:inline-block; animation:cmfade .5s ease both; }
+@keyframes cmfade { from{opacity:0;transform:translateY(3px);} to{opacity:1;transform:none;} }
 .cm-trap { font-size:12.5px; color:var(--on-dark-soft,#8fa39d); font-style:italic; margin-top:10px; }
 `;
   var SCREEN = `<div class="cm-top">
@@ -160,6 +170,35 @@
     function fit() { el.style.height = 'auto'; el.style.height = Math.max(88, el.scrollHeight + 2) + 'px'; }
     el.addEventListener('input', fit); fit();
   }
+
+  // Нитка ожидания. Первая подпись держится дольше: если ответ пришёл быстро,
+  // кандидат не увидит мельтешения. Последняя не сменяется - «почти готово»
+  // было бы обещанием, которого никто не давал.
+  function cmL(v){ var l=(typeof state!=='undefined'&&state&&state.uiLang==='ru')?'ru':'en'; return (v&&typeof v==='object')?(v[l]||v.en):v; }
+  var CM_STEPS = [[0,{ru:'читаю твой ответ',en:'reading your answer'}],[2800,{ru:'сверяю с эталоном',en:'comparing with the model answer'}],
+    [6500,{ru:'считаю, где потеряно',en:'working out where it was lost'}],[11000,{ru:'пишу разбор',en:'writing the debrief'}]];
+  var _cmT = null;
+  function threadHTML(first) {
+    return '<span class="cm-thread"><svg viewBox="0 0 46 24"><path class="ghost" pathLength="100" d="M2 15 C5 5, 13 4, 14 12 C15 20, 8 21, 10 12 C12 4, 20 3, 21 12 C22 20, 15 21, 17 12 C19 4, 27 3, 28 12 C29 20, 22 21, 24 12 C26 5, 34 6, 38 13 C40 17, 42 18, 44 17"/><path pathLength="100" d="M2 15 C5 5, 13 4, 14 12 C15 20, 8 21, 10 12 C12 4, 20 3, 21 12 C22 20, 15 21, 17 12 C19 4, 27 3, 28 12 C29 20, 22 21, 24 12 C26 5, 34 6, 38 13 C40 17, 42 18, 44 17"/></svg>' +
+           '<span class="cm-hint cm-thread-l" id="cmThreadL"><span>' + first + '</span></span></span>';
+  }
+  function threadRun(steps) {
+    if (_cmT) { clearTimeout(_cmT); _cmT = null; }
+    var t0 = Date.now();
+    (function paint() {
+      var l = E('cmThreadL'); if (!l) return;
+      var gone = Date.now() - t0, cur = steps[0], next = null;
+      for (var i = 0; i < steps.length; i++) {
+        if (gone >= steps[i][0]) cur = steps[i]; else { next = steps[i]; break; }
+      }
+      if (l.getAttribute('data-at') !== String(cur[0])) {
+        l.setAttribute('data-at', String(cur[0]));
+        l.innerHTML = '<span>' + cmL(cur[1]) + '</span>';
+      }
+      if (next) _cmT = setTimeout(paint, next[0] - gone);
+    })();
+  }
+  function threadStop() { if (_cmT) { clearTimeout(_cmT); _cmT = null; } }
 
   function scrollFeed() { var f = E('cmFeed'); if (f) setTimeout(function () { f.scrollTop = f.scrollHeight; }, 40); }
 
@@ -259,6 +298,8 @@
     var w = E('cmWrap'); if (w) w.innerHTML = '';
     izHide();
     var pr = E('cmProg'); if (pr) pr.textContent = 'Loading…';
+    var pick={ru:'подбираю задачу',en:'picking a drill'};
+    iz(threadHTML(cmL(pick))); threadRun([[0,pick]]);
     api({ action: 'next', doneIds: S.done, set: cfg().set }).then(function (r) {
       if (r && r.error) { if (w) w.innerHTML = '<div class="cm-card"><div class="cm-title">' + esc2(cfg().rec) + '</div><div class="cm-prompt">Could not load — please make sure you are signed in, then try again.</div></div>'; return; }
       var d = r && r.drill;
@@ -321,7 +362,7 @@
     var el = E('cmTa'); if (!el) return; var answer = el.value.trim(); if (!answer) return;
     var b = E('cmSubmit'); if (b) b.disabled = true;
     var spent = elapsedMs(); timerStop();
-    iz('<div class="cm-hint">Grading your answer…</div>');
+    iz(threadHTML(cmL(CM_STEPS[0][1]))); threadRun(CM_STEPS);
     var d = S.drill;
     api({ action: 'grade', drillId: d.id, answer: answer, set: cfg().set, fbLang: fbCode(), elapsedMs: spent }).then(function (r) {
       if (r && r.error) { feed('<div class="cm-fb no"><b>Connection issue.</b> ' + esc2(r.error.message || 'Please try again.') + '</div>'); return void nextButton(); }
@@ -386,7 +427,7 @@
   function _submitCull() {
     var el = E('cmCull'); if (!el) return; var cull = el.value.trim(); if (!cull) return;
     var b = E('cmCullBtn'); if (b) b.disabled = true;
-    iz('<div class="cm-hint">Grading…</div>');
+    iz(threadHTML(cmL(CM_STEPS[0][1]))); threadRun(CM_STEPS);
     var d = S.drill;
     api({ action: 'grade', drillId: d.id, set: cfg().set, stage: 'cull', answer: cull, move1Answer: S.move1, fbLang: fbCode(), elapsedMs: elapsedMs() })
       .then(function (r) { _renderFinal(d, r); })
@@ -394,6 +435,7 @@
   }
 
   function nextButton() {
+    threadStop();
     iz('<div class="cm-row" style="justify-content:flex-end"><button class="cm-btn" onclick="CaseMathDrills._next()">Next drill →</button></div>');
   }
   function _next() { S.move1 = null; loadNext(); }
