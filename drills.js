@@ -34,18 +34,18 @@
 .cm-timer.over { color:#c98a3a; font-weight:700; }
 .cm-card { background:var(--surface-dark-elevated,#16241f); border:1px solid var(--sv-line,rgba(255,255,255,.08)); border-radius:14px; padding:18px; margin:0 0 16px; }
 .cm-meta { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
-.cm-tag { font-size:10.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; padding:3px 9px; border-radius:999px; background:rgba(93,184,166,.12); color:var(--coral,#5db8a6); }
+.cm-tag { font-size:12px; font-weight:600; letter-spacing:.01em; padding:4px 11px; border-radius:999px; background:rgba(93,184,166,.12); color:var(--coral,#5db8a6); }
 .cm-tag.trap { background:rgba(232,124,124,.12); color:#ef9a9a; } .cm-tag.clean { background:rgba(95,191,107,.14); color:#7fd68e; }
 .cm-title { font-size:18px; font-weight:800; color:var(--on-dark,#faf9f5); margin:0 0 10px; }
 .cm-prompt { font-size:15px; line-height:1.65; color:var(--on-dark,#faf9f5); } .cm-prompt b { color:var(--on-dark,#faf9f5); }
 .cm-exh { margin:16px 0 6px; }
-.cm-exh-name { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--coral,#5db8a6); margin-bottom:8px; }
+.cm-exh-name { font-size:12.5px; font-weight:600; letter-spacing:.01em; color:var(--coral,#5db8a6); margin-bottom:8px; }
 .cm-tbl { width:100%; border-collapse:collapse; font-size:13.5px; }
 .cm-tbl th, .cm-tbl td { padding:8px 10px; border-bottom:1px solid var(--sv-line,rgba(31,41,55,.10)); color:var(--on-dark,#faf9f5); text-align:left; }
-.cm-tbl th { font-weight:700; color:var(--on-dark-soft,#6b7c76); font-size:11.5px; text-transform:uppercase; letter-spacing:.03em; }
+.cm-tbl th { font-weight:600; color:var(--on-dark-soft,#6b7c76); font-size:12.5px; letter-spacing:.01em; }
 .cm-tbl td:not(:first-child), .cm-tbl th:not(:first-child) { text-align:right; font-variant-numeric:tabular-nums; }
 .cm-steps { margin:14px 0 0; padding:12px 14px; background:rgba(93,184,166,.06); border-radius:10px; }
-.cm-steps .cm-sh { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--on-dark-soft,#6b7c76); margin-bottom:6px; }
+.cm-steps .cm-sh { font-size:12.5px; font-weight:600; letter-spacing:.01em; color:var(--on-dark-soft,#6b7c76); margin-bottom:6px; }
 .cm-steps ol { margin:0; padding-left:20px; } .cm-steps li { font-size:14px; line-height:1.55; color:var(--on-dark,#faf9f5); margin:2px 0; }
 #cmInput { border-top:1px solid var(--sv-line,rgba(31,41,55,.12)); background:var(--surface-dark-elevated,#fbf8f2); padding:14px 16px; }
 .cm-iz { max-width:760px; margin:0 auto; }
@@ -60,7 +60,7 @@
 .cm-fb.no { background:rgba(232,124,124,.10); border:1px solid rgba(232,124,124,.4); color:#ef9a9a; }
 .cm-fb b { color:var(--on-dark,#faf9f5); }
 .cm-ref { background:var(--surface-dark-elevated,#16241f); border:1px solid var(--sv-line,rgba(31,41,55,.10)); border-radius:12px; padding:15px 16px; margin:0 0 16px; }
-.cm-ref-h { font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--coral,#5db8a6); margin-bottom:8px; }
+.cm-ref-h { font-size:12.5px; font-weight:600; letter-spacing:.01em; color:var(--coral,#5db8a6); margin-bottom:8px; }
 .cm-ref-body { font-size:13.8px; line-height:1.65; color:var(--on-dark,#faf9f5); } .cm-ref-body b { color:var(--on-dark,#faf9f5); }
 .cm-ref-body p { margin:0 0 7px; } .cm-ref-body p:last-child { margin:0; }
 .cm-exh-sub { font-size:12.5px; font-weight:700; color:var(--on-dark,#faf9f5); margin:12px 0 6px; }
@@ -175,6 +175,44 @@
   // кандидат не увидит мельтешения. Последняя не сменяется - «почти готово»
   // было бы обещанием, которого никто не давал.
   function cmL(v){ var l=(typeof state!=='undefined'&&state&&state.uiLang==='ru')?'ru':'en'; return (v&&typeof v==='object')?(v[l]||v.en):v; }
+  /* Подписи интерфейса дрилла. Держим в одном месте и на двух языках: экран,
+     который кричит капслоком и говорит «Grader hiccup», читается как студенческий
+     проект, а не как тренажёр, за который платят. */
+  var W = {
+    given:    {ru:'Дано',                   en:'Given'},
+    solve:    {ru:'Что нужно посчитать',    en:'What to work out'},
+    exhibit:  {ru:'Экзибит',                en:'Exhibit'},
+    exLocked: {ru:'Экзибит пока закрыт',    en:'Exhibit withheld'},
+    exOpened: {ru:'Экзибит открыт',         en:'Exhibit released'},
+    exHint:   {ru:'Сначала построй дерево. Данные выдаются после того, как ты зафиксировал структуру — смысл в том, выдержит ли она встречу с ними.',
+               en:'Build your tree first. The data is released only after you commit — the point is whether your structure survives contact with it.'},
+    pass:     {ru:'Засчитано.',             en:'Passed.'},
+    fail:     {ru:'Не засчитано.',          en:'Not yet.'},
+    refSol:   {ru:'Эталонный разбор',       en:'Reference solution'},
+    refAns:   {ru:'Эталонный ответ',        en:'Model answer'},
+    trap:     {ru:'Ловушка',                en:'The trap'},
+    newFact:  {ru:'Новый факт',             en:'A new fact'},
+    teamSaid: {ru:'Команда клиента предложила', en:'The client team proposed'},
+    twist:    {ru:'Теперь поворот.',        en:'Now the twist.'},
+    twistSub: {ru:'Появился новый факт. Твой список уже сдан — посмотрим, что из него уцелеет.',
+               en:'A new fact has landed. Your list is already in — let us see what survives it.'},
+    done:     {ru:'Библиотека пройдена',    en:'Library complete'},
+    doneSub:  {ru:'Ты прошёл все задачи этого набора. Начинаем сначала — вторым проходом задачи читаются иначе.',
+               en:'You have worked through every drill in this set. Starting again — a second pass reads differently.'},
+    conn:     {ru:'Не удалось связаться с сервером.', en:'Could not reach the server.'},
+    connSub:  {ru:'Попробуй ещё раз.',      en:'Please try again.'},
+    ungraded: {ru:'Оценка не сформировалась. Ответ сохранён — отправь его ещё раз.',
+               en:'The answer was not scored. Your text is kept — send it again.'},
+    submit:   {ru:'Ответить',               en:'Submit'},
+    nextD:    {ru:'Следующая задача',       en:'Next drill'},
+    skip:     {ru:'Пропустить',             en:'Skip'},
+    cullBtn:  {ru:'Ответить',               en:'Submit'},
+    loadFail: {ru:'Задача не загрузилась. Проверь, что ты вошёл в аккаунт, и попробуй снова.',
+               en:'The drill did not load. Check that you are signed in and try again.'},
+    grading:  {ru:'Оцениваю',               en:'Grading'}
+  };
+  function W_(k){ return cmL(W[k]); }
+
   var CM_STEPS = [[0,{ru:'читаю твой ответ',en:'reading your answer'}],[2800,{ru:'сверяю с эталоном',en:'comparing with the model answer'}],
     [6500,{ru:'считаю, где потеряно',en:'working out where it was lost'}],[11000,{ru:'пишу разбор',en:'writing the debrief'}]];
   var _cmT = null;
@@ -297,24 +335,24 @@
   function loadNext() {
     var w = E('cmWrap'); if (w) w.innerHTML = '';
     izHide();
-    var pr = E('cmProg'); if (pr) pr.textContent = 'Loading…';
+    var pr = E('cmProg'); if (pr) pr.textContent = cmL({en:'Loading…',ru:'Загружаю…'});
     var pick={ru:'подбираю задачу',en:'picking a drill'};
     iz(threadHTML(cmL(pick))); threadRun([[0,pick]]);
     api({ action: 'next', doneIds: S.done, set: cfg().set }).then(function (r) {
-      if (r && r.error) { if (w) w.innerHTML = '<div class="cm-card"><div class="cm-title">' + esc2(cfg().rec) + '</div><div class="cm-prompt">Could not load — please make sure you are signed in, then try again.</div></div>'; return; }
+      if (r && r.error) { if (w) w.innerHTML = '<div class="cm-card"><div class="cm-title">' + esc2(cfg().rec) + '</div><div class="cm-prompt">' + W_("loadFail") + '</div></div>'; return; }
       var d = r && r.drill;
       if (!d) {   // all done → recycle
         S.done = []; try { localStorage.removeItem(cfg().doneKey); } catch (e) {}
-        feed('<div class="cm-card"><div class="cm-title">Set complete 🎉</div><div class="cm-prompt">You have worked through ' + esc2(cfg().complete) + '. Starting again from the top.</div></div>');
+        feed('<div class="cm-card"><div class="cm-title">' + W_("done") + '</div><div class="cm-prompt">' + W_("doneSub") + '</div></div>');
         return void setTimeout(loadNext, 900);
       }
       S.drill = d;
       renderDrill(d);
-    }).catch(function () { if (w) w.innerHTML = '<div class="cm-card"><div class="cm-title">' + esc2(cfg().rec) + '</div><div class="cm-prompt">Could not load this drill — please try again.</div></div>'; });
+    }).catch(function () { if (w) w.innerHTML = '<div class="cm-card"><div class="cm-title">' + esc2(cfg().rec) + '</div><div class="cm-prompt">' + W_("loadFail") + '</div></div>'; });
   }
 
   function renderDrill(d) {
-    var pr = E('cmProg'); if (pr) pr.textContent = 'Drill ' + d.index + ' / ' + d.total;
+    var pr = E('cmProg'); if (pr) pr.textContent = cmL({en:'Drill ',ru:'Задача '}) + d.index + ' / ' + d.total;
     // NO-SPOILER META (2026-07-25): the candidate used to see Trap/Clean, the
     // difficulty tier and the `focus` code (e.g. "F05(A) PERPETUITY VS DECAY").
     // Each one hands over the answer before a single number is written: "Trap"
@@ -326,10 +364,10 @@
       '</div>' +
       '<div class="cm-title">' + esc2(d.title || 'Drill') + '</div>' +
       '<div class="cm-prompt">' + md(d.prompt || '') + '</div>' +
-      ((d.facts && d.facts.length) ? '<div class="cm-steps"><div class="cm-sh">Facts</div><ul>' + d.facts.map(function (s) { return '<li>' + mdi(s) + '</li>'; }).join('') + '</ul></div>' : '') +
-      (hasExhibit(d.exhibit) ? '<div class="cm-exh"><div class="cm-exh-name">Exhibit</div>' + exhibitHTML(d.exhibit) + '</div>' : '') +
-      (d.exhibit_withheld ? '<div class="cm-steps"><div class="cm-sh">Exhibit — locked</div><div class="cm-hint">Build your MECE tree first. The data is released only after you commit — its whole point is to test whether your framework survives contact with it.</div></div>' : '') +
-      ((d.step_prompts && d.step_prompts.length) ? '<div class="cm-steps"><div class="cm-sh">Solve</div><ol>' + d.step_prompts.map(function (s) { return '<li>' + mdi(s) + '</li>'; }).join('') + '</ol></div>' : '') +
+      ((d.facts && d.facts.length) ? '<div class="cm-steps"><div class="cm-sh">' + W_("given") + '</div><ul>' + d.facts.map(function (s) { return '<li>' + mdi(s) + '</li>'; }).join('') + '</ul></div>' : '') +
+      (hasExhibit(d.exhibit) ? '<div class="cm-exh"><div class="cm-exh-name">' + W_("exhibit") + '</div>' + exhibitHTML(d.exhibit) + '</div>' : '') +
+      (d.exhibit_withheld ? '<div class="cm-steps"><div class="cm-sh">' + W_("exLocked") + '</div><div class="cm-hint">' + W_("exHint") + '</div></div>' : '') +
+      ((d.step_prompts && d.step_prompts.length) ? '<div class="cm-steps"><div class="cm-sh">' + W_("solve") + '</div><ol>' + d.step_prompts.map(function (s) { return '<li>' + mdi(s) + '</li>'; }).join('') + '</ol></div>' : '') +
       '</div>';
     feed(html);
     var isST = (d.type || '') === 'Structuring';
@@ -341,19 +379,41 @@
     // silently take the Case Math placeholder - "show your numbers" on a drill
     // where nothing is counted.
     var isSY = S.lib === 'sy';
-    var ph = isSY ? 'The record is someone else\'s work. Give your verdict first, then the facts that carry it, the risks, and the next step.'
-                  : isBR ? 'List your options — one per line. Tie each to a fact. Lead with the load-bearing idea, not a reflex.'
-                  : isST ? 'Build your MECE tree: name each top branch and one line on why it belongs. State which branch you attack first and your criterion.'
-                  : isCI ? 'Read the exhibit: the ONE insight that matters, what it implies for the business, and the next thing you would check.'
-                  : 'Show your numbers and your one-sentence recommendation…';
-    var hint = isSY ? 'Conclusion first. Name the figure that decides it, and say which fact in the record does not matter.'
-                    : isBR ? (d.cull ? 'Give your options; a new fact will then test them.' : 'Options tied to the facts — quality over volume.')
-                    : isST ? 'List your branches (MECE), justify each, and pick a defensible starting branch.'
-                    : isCI ? 'Do not describe the chart — extract the insight, tie it to a business implication, name the next check.'
-                    : 'Give the number(s) the drill asks for, then your read of the trap.';
+    // Заглушка поля ответа и подсказка под ним — самый читаемый текст экрана:
+    // кандидат смотрит на них, пока думает. До 2026-08-01 они были только
+    // по-английски, и на русском интерфейсе экран говорил на двух языках сразу.
+    var PH = {
+      sy: {en:'The record is someone else\'s work. Give your verdict first, then the facts that carry it, the risks, and the next step.',
+           ru:'Это чужая работа. Сначала вывод, затем факты, которые его держат, риски и следующий шаг.'},
+      br: {en:'List your options — one per line. Tie each to a fact. Lead with the load-bearing idea, not a reflex.',
+           ru:'Перечисли варианты — по одному в строке. Каждый привяжи к факту. Первым — несущий, а не рефлекторный.'},
+      st: {en:'Build your MECE tree: name each top branch and one line on why it belongs. State which branch you attack first and your criterion.',
+           ru:'Построй MECE-дерево: назови верхние ветки и по строке, почему каждая нужна. Скажи, с какой начинаешь и по какому критерию.'},
+      ci: {en:'Read the exhibit: the one insight that matters, what it implies for the business, and the next thing you would check.',
+           ru:'Прочитай экзибит: один значимый вывод, что он означает для бизнеса и что проверишь следующим.'},
+      cm: {en:'Show your numbers and your one-sentence recommendation…',
+           ru:'Покажи расчёт и рекомендацию одной фразой…'}
+    };
+    var HINT = {
+      sy: {en:'Conclusion first. Name the figure that decides it, and say which fact in the record does not matter.',
+           ru:'Вывод первым. Назови цифру, которая его решает, и скажи, какой факт здесь не важен.'},
+      brC:{en:'Give your options; a new fact will then test them.',
+           ru:'Дай варианты — затем их проверит новый факт.'},
+      br: {en:'Options tied to the facts — quality over volume.',
+           ru:'Варианты, привязанные к фактам, — качество важнее количества.'},
+      st: {en:'List your branches (MECE), justify each, and pick a defensible starting branch.',
+           ru:'Назови ветки (MECE), обоснуй каждую и выбери ветку, с которой начнёшь.'},
+      ci: {en:'Do not describe the chart — extract the insight, tie it to a business implication, name the next check.',
+           ru:'Не описывай график — вытащи вывод, свяжи его с бизнесом, назови следующую проверку.'},
+      cm: {en:'Give the number(s) the drill asks for, then your read of the trap.',
+           ru:'Дай запрошенные числа, затем свой разбор ловушки.'}
+    };
+    var phK = isSY ? 'sy' : isBR ? 'br' : isST ? 'st' : isCI ? 'ci' : 'cm';
+    var ph = cmL(PH[phK]);
+    var hint = cmL(HINT[(isBR && d.cull) ? 'brC' : phK]);
     iz('<textarea class="cm-ta" id="cmTa" placeholder="' + esc2(ph) + '"></textarea>' +
        '<div class="cm-row"><span class="cm-hint">' + esc2(hint) + '</span>' +
-       '<button class="cm-btn" id="cmSubmit" onclick="CaseMathDrills._submit()">Submit</button></div>');
+       '<button class="cm-btn" id="cmSubmit" onclick="CaseMathDrills._submit()">' + W_("submit") + '</button></div>');
     timerStart(d.time);
     setTimeout(function () { var el = E('cmTa'); if (el) { el.focus(); autoGrow(el); } }, 60);
   }
@@ -365,13 +425,13 @@
     iz(threadHTML(cmL(CM_STEPS[0][1]))); threadRun(CM_STEPS);
     var d = S.drill;
     api({ action: 'grade', drillId: d.id, answer: answer, set: cfg().set, fbLang: fbCode(), elapsedMs: spent }).then(function (r) {
-      if (r && r.error) { feed('<div class="cm-fb no"><b>Connection issue.</b> ' + esc2(r.error.message || 'Please try again.') + '</div>'); return void nextButton(); }
+      if (r && r.error) { feed('<div class="cm-fb no"><b>' + W_("conn") + '</b> ' + esc2(r.error.message || W_("connSub")) + '</div>'); return void nextButton(); }
       // grader hiccup (couldn't parse a verdict) — NOT a fail. Let the candidate resubmit,
       // keep their answer, don't mark the drill done.
       if (r && r.graded === false) {
-        iz('<div class="cm-hint" style="margin-bottom:8px;">Grader hiccup — your answer wasn’t scored. Try submitting again.</div>' +
+        iz('<div class="cm-hint" style="margin-bottom:8px;">' + W_("ungraded") + '</div>' +
            '<textarea class="cm-ta" id="cmTa">' + esc2(answer) + '</textarea>' +
-           '<div class="cm-row"><span class="cm-hint"></span><button class="cm-btn" id="cmSubmit" onclick="CaseMathDrills._submit()">Submit</button></div>');
+           '<div class="cm-row"><span class="cm-hint"></span><button class="cm-btn" id="cmSubmit" onclick="CaseMathDrills._submit()">' + W_("submit") + '</button></div>');
         return;
       }
       // Brainstorm two-move CULL: the server withheld the client team's ideas + the
@@ -379,46 +439,46 @@
       // ideas the new fact kills — the whole point is the fact breaking their list.
       if (r && r.stage === 'cull') {
         S.move1 = r.move1Answer != null ? r.move1Answer : answer;
-        feed('<div class="cm-fb ok" style="background:rgba(93,184,166,.10);border-color:rgba(93,184,166,.4);color:var(--on-dark,#faf9f5)"><b>Now the twist.</b> A new fact just landed. Your options are in — see which ones survive it.</div>');
-        feed('<div class="cm-ref"><div class="cm-ref-h">New fact</div><div class="cm-ref-body">' + md(r.cull && r.cull.new_fact || '') + '</div></div>');
+        feed('<div class="cm-fb ok" style="background:rgba(93,184,166,.10);border-color:rgba(93,184,166,.4);color:var(--on-dark,#faf9f5)"><b>' + W_("twist") + '</b> ' + W_("twistSub") + '</div>');
+        feed('<div class="cm-ref"><div class="cm-ref-h">' + W_("newFact") + '</div><div class="cm-ref-body">' + md(r.cull && r.cull.new_fact || '') + '</div></div>');
         var teams = (r.cull && r.cull.team_ideas) || [];
-        feed('<div class="cm-steps"><div class="cm-sh">The client team proposed</div><ol>' + teams.map(function (t) { return '<li>' + esc2(t) + '</li>'; }).join('') + '</ol></div>');
+        feed('<div class="cm-steps"><div class="cm-sh">' + W_("teamSaid") + '</div><ol>' + teams.map(function (t) { return '<li>' + esc2(t) + '</li>'; }).join('') + '</ol></div>');
         iz('<textarea class="cm-ta" id="cmCull" placeholder="Which of these ideas does the new fact kill? Give the numbers and, for each, why it dies. Naming a survivor as killed fails as hard as a miss."></textarea>' +
            '<div class="cm-row"><span class="cm-hint">Name exactly the ideas the fact kills — with a reason for each.</span>' +
-           '<button class="cm-btn" id="cmCullBtn" onclick="BrainstormDrills._submitCull()">Submit cull</button></div>');
+           '<button class="cm-btn" id="cmCullBtn" onclick="BrainstormDrills._submitCull()">' + W_("cullBtn") + '</button></div>');
         setTimeout(function () { var el = E('cmCull'); if (el) { el.focus(); autoGrow(el); } }, 60);
         return;
       }
       var ok = !!r.pass;
-      feed('<div class="cm-fb ' + (ok ? 'ok' : 'no') + '">' + (ok ? '<b>✓ Pass.</b> ' : '<b>Not quite.</b> ') + esc2(r.coaching || '') + '</div>');
+      feed('<div class="cm-fb ' + (ok ? 'ok' : 'no') + '">' + (ok ? '<b>' + W_("pass") + '</b> ' : '<b>' + W_("fail") + '</b> ') + esc2(r.coaching || '') + '</div>');
       // ST E-after: the exhibit is released only now — show it before the debrief
       // so the candidate sees how the data breaks (or confirms) the tree they built.
       if (hasExhibit(r.exhibit)) {
-        feed('<div class="cm-exh"><div class="cm-exh-name">Exhibit — released</div>' + exhibitHTML(r.exhibit) + '</div>');
+        feed('<div class="cm-exh"><div class="cm-exh-name">' + W_("exOpened") + '</div>' + exhibitHTML(r.exhibit) + '</div>');
       }
       var ref = L(r.reference); var prov = L(r.provoked);
-      feed('<div class="cm-ref"><div class="cm-ref-h">Reference solution</div><div class="cm-ref-body">' + md(ref || '') + '</div>' +
-           (prov ? '<div class="cm-trap"><b>Trap:</b> ' + esc2(prov) + '</div>' : '') + '</div>');
+      feed('<div class="cm-ref"><div class="cm-ref-h">' + W_("refSol") + '</div><div class="cm-ref-body">' + md(ref || '') + '</div>' +
+           (prov ? '<div class="cm-trap"><b>' + W_("trap") + ':</b> ' + esc2(prov) + '</div>' : '') + '</div>');
       saveDone(d.id);
       // Record this rep in the shared Progress tracker (Drills completed + "Case Math" by-type + streak, synced to cloud).
       try { if (typeof recordSession === 'function') recordSession('drill', cfg().rec); } catch (e) {}
       nextButton();
-    }).catch(function () { feed('<div class="cm-fb no"><b>Connection issue.</b> Please try again.</div>'); nextButton(); });
+    }).catch(function () { feed('<div class="cm-fb no"><b>' + W_("conn") + '</b> ' + W_("connSub") + '</div>'); nextButton(); });
   }
 
   // Final debrief shared by single-move slots and the CULL second move.
   function _renderFinal(d, r) {
-    if (r && r.error) { feed('<div class="cm-fb no"><b>Connection issue.</b> ' + esc2(r.error.message || 'Please try again.') + '</div>'); return void nextButton(); }
+    if (r && r.error) { feed('<div class="cm-fb no"><b>' + W_("conn") + '</b> ' + esc2(r.error.message || W_("connSub")) + '</div>'); return void nextButton(); }
     if (r && r.graded === false) {
-      iz('<div class="cm-hint" style="margin-bottom:8px;">Grader hiccup — your answer wasn’t scored. Try again.</div>' +
-         '<div class="cm-row" style="justify-content:flex-end"><button class="cm-btn" onclick="BrainstormDrills._next()">Skip →</button></div>');
+      iz('<div class="cm-hint" style="margin-bottom:8px;">' + W_("ungraded") + '</div>' +
+         '<div class="cm-row" style="justify-content:flex-end"><button class="cm-btn" onclick="BrainstormDrills._next()">' + W_("skip") + ' →</button></div>');
       return;
     }
     var ok = !!r.pass;
-    feed('<div class="cm-fb ' + (ok ? 'ok' : 'no') + '">' + (ok ? '<b>✓ Pass.</b> ' : '<b>Not quite.</b> ') + esc2(r.coaching || '') + '</div>');
+    feed('<div class="cm-fb ' + (ok ? 'ok' : 'no') + '">' + (ok ? '<b>' + W_("pass") + '</b> ' : '<b>' + W_("fail") + '</b> ') + esc2(r.coaching || '') + '</div>');
     var ref = L(r.reference), prov = L(r.provoked);
-    if (ref) feed('<div class="cm-ref"><div class="cm-ref-h">Model answer</div><div class="cm-ref-body">' + md(ref) + '</div>' +
-                  (prov ? '<div class="cm-trap"><b>Trap:</b> ' + esc2(prov) + '</div>' : '') + '</div>');
+    if (ref) feed('<div class="cm-ref"><div class="cm-ref-h">' + W_("refAns") + '</div><div class="cm-ref-body">' + md(ref) + '</div>' +
+                  (prov ? '<div class="cm-trap"><b>' + W_("trap") + ':</b> ' + esc2(prov) + '</div>' : '') + '</div>');
     saveDone(d.id);
     try { if (typeof recordSession === 'function') recordSession('drill', cfg().rec); } catch (e) {}
     nextButton();
@@ -431,12 +491,12 @@
     var d = S.drill;
     api({ action: 'grade', drillId: d.id, set: cfg().set, stage: 'cull', answer: cull, move1Answer: S.move1, fbLang: fbCode(), elapsedMs: elapsedMs() })
       .then(function (r) { _renderFinal(d, r); })
-      .catch(function () { feed('<div class="cm-fb no"><b>Connection issue.</b> Please try again.</div>'); nextButton(); });
+      .catch(function () { feed('<div class="cm-fb no"><b>' + W_("conn") + '</b> ' + W_("connSub") + '</div>'); nextButton(); });
   }
 
   function nextButton() {
     threadStop();
-    iz('<div class="cm-row" style="justify-content:flex-end"><button class="cm-btn" onclick="CaseMathDrills._next()">Next drill →</button></div>');
+    iz('<div class="cm-row" style="justify-content:flex-end"><button class="cm-btn" onclick="CaseMathDrills._next()">' + W_("nextD") + ' →</button></div>');
   }
   function _next() { S.move1 = null; loadNext(); }
 

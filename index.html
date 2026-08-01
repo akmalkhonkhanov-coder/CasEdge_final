@@ -1023,14 +1023,14 @@
       border: 1px solid var(--sv-line, rgba(31,41,55,.12));
       border-radius: 16px; padding: 22px 24px;
     }
-    .dp-eyebrow { font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase;
-      color: var(--coral, #5db8a6); font-weight: 700; margin-bottom: 6px; }
+    .dp-eyebrow { font-size: 12px; letter-spacing: .04em;
+      color: var(--coral, #5db8a6); font-weight: 600; margin-bottom: 7px; }
     .dp-name { font-size: 21px; font-weight: 700; margin: 0 0 10px; }
     .dp-when { font-size: 14.5px; line-height: 1.6; margin: 0 0 16px; }
     .dp-facts { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-bottom: 18px; }
     .dp-fact { min-width: 128px; }
-    .dp-fact-k { font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase;
-      color: var(--text-muted, #7d8a86); margin-bottom: 3px; }
+    .dp-fact-k { font-size: 12.5px; letter-spacing: .01em;
+      color: var(--text-muted, #7d8a86); margin-bottom: 4px; }
     .dp-fact-v { font-size: 14px; font-weight: 600; }
     .dp-graded { font-size: 13px; line-height: 1.55; color: var(--text-muted, #7d8a86);
       border-top: 1px solid var(--sv-line, rgba(31,41,55,.10)); padding-top: 14px; margin-bottom: 18px; }
@@ -1757,7 +1757,7 @@
         <div class="cas-display-lg" style="margin:0 0 26px; color:#faf9f5;" data-i18n="l2.hero.title">Один шанс на McKinsey. Тренируйся так, будто он уже случился.</div>
         <p class="cas-body-md" style="max-width:460px; margin:0 0 36px; color:#c8c5be;" data-i18n="l2.hero.sub">Тот самый формат, который тебя ждёт - не общий кейс, а именно McKinsey Solve или BCG Chat.</p>
         <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
-          <button class="ds-btn ds-btn-lg ds-btn-primary auth-account-btn" onclick="goToProgress()" style="display:none;">My progress →</button>
+          <button class="ds-btn ds-btn-lg ds-btn-primary auth-account-btn" onclick="goToProgress()" style="display:none;" data-i18n="l2.myprogress">My progress →</button>
           <button class="ds-btn ds-btn-lg ds-btn-primary" onclick="handleBeginSession()" data-i18n="l2.hero.cta">Начать бесплатный дрилл</button>
           <a href="#cl-formats" class="ds-btn ds-btn-lg ds-btn-text ds-on-dark" data-i18n="l2.hero.demo">Смотреть демо ↓</a>
         </div>
@@ -2638,7 +2638,6 @@
         <div class="dp-facts">
           <div class="dp-fact"><div class="dp-fact-k" data-i18n="dp.where">Where in the case</div><div class="dp-fact-v" id="dp-where"></div></div>
           <div class="dp-fact"><div class="dp-fact-k" data-i18n="dp.rep">One rep</div><div class="dp-fact-v" id="dp-time"></div></div>
-          <div class="dp-fact"><div class="dp-fact-k" data-i18n="dp.lib">In the library</div><div class="dp-fact-v" id="dp-count"></div></div>
         </div>
         <div class="dp-graded" id="dp-graded"></div>
         <button id="drill-start-btn" class="btn btn-primary btn-cta" onclick="startDrill()" data-i18n="drill.start">Start Drill</button>
@@ -3305,7 +3304,7 @@ function selectDrill(type, el) {
   const set = (id, html) => { const n = document.getElementById(id); if (n) n.innerHTML = html; };
   if (d) {
     set('dp-name', type); set('dp-when', dbText(d.when)); set('dp-where', dbText(d.where));
-    set('dp-time', dbText(d.time)); set('dp-count', dbText(d.count)); set('dp-graded', dbText(d.graded));
+    set('dp-time', dbText(d.time)); set('dp-graded', dbText(d.graded));
   }
   const board = document.getElementById('drill-board');
   if (board) {
@@ -3549,6 +3548,7 @@ const I18N = {
     'nav.cases': 'Cases',
     'nav.drills': 'Drills',
     'nav.games': 'Games',
+    'l2.myprogress': 'My progress →',
     'nav.progress': 'Progress',
     'nav.pricing': 'Pricing',
     'nav.faq': 'FAQ',
