@@ -1,6 +1,6 @@
 {
  "type": "SY",
- "count": 17,
+ "count": 25,
  "_meta": {
   "set": "sy",
   "type_string": "Synthesis",
@@ -138,6 +138,102 @@
     "en": "| поле | текст |\n|---|---|\n| **вывод** | **Josquelm should build Canopy.** |\n| факты | The board's purpose is annual net income, and on that metric Canopy earns **$14M against Meadow's $10M** — a **$4M** gap. The deduction is not symmetric: Meadow sits on the glasshouse and takes **$6M** with it, Canopy sits on the car park and takes **$1M**. Payback ranks the other way (**1.5 vs 2.0 years**) but both clear the three-year condition, so payback screens and does not choose. **Each extra year of payback buys $8M of annual income** (`$4M ÷ 0.5 years`). |\n| риск | Internal: Canopy takes **30** months to reach steady state — most of the three-year window — so an early shortfall eats the margin. External: the **$6M** displaced income is measured on today's glasshouse; a fall in city footfall moves it. |\n| next step | Get the month-by-month ramp for Canopy and test it against the three-year condition. Verify with finance that none of the displaced income is already netted out of the gross figures — that single line is what reverses the ranking. |\n\n`[MIN]` ✓ · `W2`: форма R3 обязывает заполнить обе колонки, собственное число у кандидата есть ✓"
    },
    "anchor_metric": "ранжирование (β); ограничение записи — окупаемость не более 3 лет"
+  },
+  {
+   "id": "SY-003",
+   "title": "Bid Gradient",
+   "company": "",
+   "industry": "",
+   "difficulty": "Medium",
+   "clean": false,
+   "focus": "",
+   "scaffold": "L4",
+   "time": "5 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Copier Co. distributes commercial-grade copiers and services them; margins have been sliding and a colleague has already worked the bid data for one afternoon and left you the note below, plus the bid table he built. He is out today and the CEO wants an answer. Read his note, decide whether his diagnosis of the price gradient survives the data in front of him, and tell the CEO what Copier Co. should do.",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "*Working note — Copier Co. bid review, one branch.*",
+       "Starting point given to me: margins are sliding. Bids are the only place price is set, so I went at the bid log first.",
+       "Sales process, as described by the client: the firm bids on contracts, contracts are typically awarded to the lowest bidder, and the bid is quoted as a per-copier price that carries one year of service inside it. Salesmen have free rein to set the bid price and are compensated on commission — a percentage of overall sales. Copier Co., American Copier and Bottom Dollar Copier are all distributors and service technicians, not manufacturers; the whole review is about one identical copier that all three firms sell.",
+       "Reading the bid log: across won contracts the per-copier bid price falls as the contract gets bigger. A handful of contracts sit well above the rest on price. So the relationship is not noise — it is a slope.",
+       "I then pulled the won-bid averages into one table.",
+       "**Exhibit 2 — Copier Co. successful bid info** *(service for 1 year included)*"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "",
+       "Competing against American Copier ONLY",
+       "Competing against Bottom Dollar Copier ONLY",
+       "Competing against both AC and BDC"
+      ],
+      "rows": [
+       [
+        "Average bid price",
+        "$5,000",
+        "$4,000",
+        "$3,000"
+       ],
+       [
+        "Average copiers in order",
+        "20",
+        "25",
+        "30"
+       ],
+       [
+        "Cost of copier",
+        "$3,000",
+        "$3,000",
+        "$3,000"
+       ],
+       [
+        "Service cost (per page printed)",
+        "$0.05",
+        "$0.05",
+        "$0.05"
+       ],
+       [
+        "Average pages printed per copier (per month)",
+        "1,000",
+        "1,000",
+        "1,000"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "Background I did not use further: American Copier is the long-standing major competitor; Bottom Dollar Copier is a low-cost entrant that came into the market recently. Service on these machines means maintenance, repairs and replacing disposable parts.",
+       "**Where the slope takes me.** Twenty-copier orders clear at $5,000 a machine. Thirty-copier orders clear at $3,000 a machine — forty percent less for a bigger piece of business. Nobody has instructed the sales force to do this, so it is being done at the desk. And the incentive explains it: commission is paid on overall sales, not on what is left after the copier is bought and serviced. A salesman who drops the quote by two thousand dollars a machine and wins thirty machines instead of twenty is strictly better off; the firm is not. The bigger the order, the harder that pull works, which is exactly the slope I am looking at.",
+       "**What I would put to the CEO.** Two moves, both aimed at the desk where the price is set. First, a minimum allowable bid price, so no salesman can quote below a level the firm sets centrally. Second, re-cut the commission so it is paid on margin rather than on overall sales, which removes the reason to discount in the first place. I would size the floor off the copier cost with a sensible mark-up and pilot it on the next quarter of tenders.",
+       "Open item I did not get to: the handful of high-price contracts.",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|\n| Кладёт рядом две монотонные строки Exhibit 2 — цена вниз, штуки вверх | «Отрицательная связь: чем крупнее заказ, тем ниже цена за копир» | Две монотонные строки в одной таблице читаются как одна кривая; ось «состав конкурентов» в шапке не воспринимается как ось |\n| Ищет, кто эту кривую произвёл, и находит единственного действующего лица в записи — продавца | «Продавец на комиссии с оборота режет цену ради объёма» | Ищем агента, а не отбор: у падения цены должен быть виновник с мотивом |\n| Ставит минимальный пол заявки | Пол ниже $3,600 не убирает убыток; пол выше $3,600 отдаёт крупные тендеры низшей заявке конкурента | Ценовой пол — стандартный ответ на «продавцы дисконтируют», применяется до проверки, что при этой цене вообще остаётся |\n| Переводит комиссию с оборота на маржу | Мотивация меняется, состав тендеров — нет; на тендерах против обоих соперников выигрышной и прибыльной цены не существует | Смена схемы мотивации звучит как структурное решение и закрывает вопрос без счёта |\n| Закрывает вердикт на слове «margins», не проверив знак прибыли внутри каждой колонки | Крупнейшие контракты остаются в ($18,000) | Слово «маржа» в промпте уводит в проценты; проверка знака откладывается «на потом» |",
+    "decoy": "* Комиссия действительно платится с общего оборота, а не с остатка — мотив к дисконту у продавца реален и напечатан в книге.\n* Продавцы действительно назначают цену заявки сами: у гипотезы есть исполнитель с полномочиями.\n* Связь «крупнее заказ → ниже цена» в данных настоящая и монотонная во всех трёх строках, без исключений.\n* Автор записи выписывает размер заказа первым и крупно, а состав конкурентов упоминает один раз в шапке таблицы — рамка задана до того, как кандидат посмотрел на числа.\n* Книжный брейншторм действительно содержит и минимальный пол заявки, и смену схемы мотивации, так что наивный ответ не абсурден — он неполон.",
+    "support": "* **Настоящая.** Три колонки Exhibit 2 различаются не размером заказа, а тем, кто ещё вышел на тендер: только AC, только BDC, оба. Размер заказа меняется вместе с составом — это одна и та же выборка, разрезанная по конкурентам, а не по объёму. Градиент цены произведён отбором тендеров, а не поведением продавца.\n* **Настоящая.** Закупочная цена копира $3,000 стоит одинаково во всех трёх колонках. Скидка за объём, за которой не стоит скидка поставщика, не имеет источника финансирования: при заявке $3,000 контрибуция $0 ещё до сервиса.\n* **Настоящая.** Сервис $600 на копир (=$0.05 × 1,000 × 12) включён в цену заявки и не зависит от неё. На тендерах против обоих соперников он целиком уходит в убыток: ($600) на копир, ($18,000) на контракт из тридцати машин.\n* **Ложная опора, которую надо назвать вслух.** «Продавец режет цену ради комиссии» — правдоподобно, но нефальсифицируемо на этих данных: та же кривая получается при полностью дисциплинированном продавце, который просто не может выиграть тендер с дешёвым соперником выше $3,600. Мотивация ненаблюдаема, состав конкурентов наблюдаем.\n* **Ложная опора.** «Пол заявки защитит маржу»: любой пол выше $3,600 не спасает контракт, а отдаёт его — контракты уходят низшей заявке. Пол превращает убыточный контракт в отсутствующий, что может быть верным решением, но это решение об **отборе тендеров**, а не о ценовой дисциплине.",
+    "risks": "* **Внутренний.** Отказ от тендеров, где присутствуют оба соперника, снимает с фирмы контракты по 30 копиров — это самые крупные заказы в таблице; сервисная база и загрузка техников падают вместе с ними, а постоянные издержки сервиса записью не покрыты и не измерены.\n* **Внешний.** Bottom Dollar Copier вошёл на рынок недавно; если он расширит присутствие на тендеры, где сегодня только American Copier, то заявки в $5,000 при закупке $3,000 (прибыль $1,400 на копир) сожмутся так же, и прибыльный сегмент из $28,000 на контракт исчезнет без единого действия продавцов.\n* **Внешний, регуляторно-договорный.** Правило «контракт достаётся низшей заявке» задано заказчиком, а не Copier Co.: любое решение, поднимающее цену, работает только через изменение предмета заявки (например, вынос года сервиса из неё), а не через цену как таковую.",
+    "next": "1. За неделю разметить весь журнал тендеров тремя признаками — состав соперников, размер заказа, итоговая цена — и посчитать долю оборота, приходящуюся на колонку с обоими соперниками. Снимает неопределённость: масштаб убытка ($18,000 на контракт) сегодня известен на один средний контракт, а не на портфель.\n2. Запросить у поставщика копиров условия при консолидированном объёме. Снимает неопределённость: единственный способ сделать $3,000-заявку неубыточной, не трогая цену, — опустить закупку ниже $2,400 (ПОСТРОЕНО: $3,000 − $600).\n3. Смоделировать заявку без встроенного года сервиса и с отдельным сервисным контрактом на 30 дней. Снимает неопределённость: сколько из $600 на копир вообще обязано лежать внутри цены заявки.\n4. Проверить те несколько контрактов с высокой ценой заявки на состав соперников. Снимает неопределённость: подтверждает или ломает гипотезу отбора на данных, которые в записи остались открытым пунктом.",
+    "build": "```python\nfrom decimal import Decimal as D, ROUND_HALF_UP\n\nCOST      = D(\"3000\")     # Exhibit 2, стр. 141\nRATE      = D(\"0.05\")     # Exhibit 2, стр. 141 — за страницу\nPAGES_MO  = D(\"1000\")     # Exhibit 2, стр. 141 — страниц на копир в месяц\nMONTHS    = D(\"12\")       # год сервиса включён в заявку, стр. 141 (сноска Exhibit 2)\n\nservice = (RATE * PAGES_MO * MONTHS).quantize(D(\"1\"), rounding=ROUND_HALF_UP)\nassert service == D(\"600\")\n\nsets = [(\"AC only\", D(\"5000\"), D(\"20\")),\n        (\"BDC only\", D(\"4000\"), D(\"25\")),\n        (\"AC+BDC\",  D(\"3000\"), D(\"30\"))]\n\ncontrib, profit, total = [], [], []\nfor _, bid, n in sets:\n    c = bid - COST\n    p = c - service\n    contrib.append(c); profit.append(p); total.append(p * n)\n\nassert contrib == [D(\"2000\"), D(\"1000\"), D(\"0\")]        # Math Guidance, стр. 142\nassert profit  == [D(\"1400\"), D(\"400\"),  D(\"-600\")]     # Math Guidance, стр. 142\nassert total   == [D(\"28000\"), D(\"10000\"), D(\"-18000\")] # Math Guidance, стр. 142\n\n# ПОСТРОЕНО, книга не печатает:\nbreakeven_bid = COST + service                 # цена заявки, при которой прибыль на копир = 0\nassert breakeven_bid == D(\"3600\")\nassert (D(\"3000\") - COST - service) == D(\"-600\")\nbreakeven_purchase = D(\"3000\") - service       # закупка, при которой заявка $3,000 выходит в ноль\nassert breakeven_purchase == D(\"2400\")\n\n# контрфактуал: тот же заказ в 30 копиров, но соперник один (AC) — цена $5,000\nassert (D(\"5000\") - COST - service) * D(\"30\") == D(\"42000\")\n```\n\n**Провоцируемая ошибка** — прочитать сцепленные оси «размер заказа» и «состав конкурентов» как одну и приписать падение цены поведению продавца, а не отбору тендеров, после чего лечить мотивацию там, где при выигрышной цене прибыли не существует вовсе.\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: размер заказа и состав конкурентов сцеплены — при $3,000 контрибуция $0 ещё до сервиса $600, прибыль на копир $1,400 / $400 / ($600), по контракту $28,000 / $10,000 / ($18,000); (3) the naive reading is rejected explicitly, not merely avoided — цена заявки падает $5,000 → $4,000 → $3,000, пока средний заказ растёт 20 → 25 → 30 копиров: «скидка за объём» must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: размер заказа и состав конкурентов сцеплены — при $3,000 контрибуция $0 ещё до сервиса $600, прибыль на копир $1,400 / $400 / ($600), по контракту $28,000 / $10,000 / ($18,000); (3) наивное прочтение отвергнуто вслух, а не просто обойдено — цена заявки падает $5,000 → $4,000 → $3,000, пока средний заказ растёт 20 → 25 → 30 копиров: «скидка за объём» обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "*Вывод.* Copier Co. should stop treating the price gradient as a sales-discipline problem and start managing which tenders it enters and what it buys the machine for — the note's diagnosis does not survive its own table.\n\n*Факты.* The three columns are not three order sizes, they are three competitive fields: American Copier alone, Bottom Dollar Copier alone, both. Order size moves with the field, so size and rival presence cannot be separated in this data. At $3,000 the bid is exactly the $3,000 cost of the copier, so contribution is zero before a single page is serviced; the year of service inside the bid costs $600 per copier ($0.05 × 1,000 pages × 12 months), which turns those contracts into ($600) per copier and ($18,000) on a thirty-copier order, against $1,400 and $28,000 where American Copier is the only rival. A commission scheme cannot produce a price of exactly copier cost in one field and exactly cost plus $2,000 in another.\n\n*Риск.* Walking away from the both-rivals field removes the largest orders in the book and the service base attached to them; and if Bottom Dollar Copier extends into the tenders where American Copier is today the only rival, the $1,400-per-copier field compresses the same way with no change in seller behaviour.\n\n*Next step.* Within one week, re-tag the full tender log by competitive field and quantify what share of revenue sits in the loss-making field; in parallel, open a volume-price negotiation with the copier supplier and cost a bid variant that prices the first year of service separately."
+   },
+   "anchor_metric": "клиентского порога нет; решение выносится сопоставлением, а не сравнением с правилом"
   },
   {
    "id": "SY-004",
@@ -278,6 +374,140 @@
     "en": "| поле | текст |\n|---|---|\n| **вывод** | **Eskvarolt should hold its price at $1.00 per m³.** |\n| факты | Matching **$0.70** puts our price at our own cost and takes net margin from **30.0% to 0.0%** — the whole profit, not part of it. The entrant is already **losing $0.20 per m³** at his own list price, so that price is a position he funds rather than earns. And price is not what these buyers rank first: reliability weighs **62%** against price at **24%**, and we score **8.4** to his **5.1**. |\n| риск | Internal: the position rests on the **8.4** reliability score; any service slip moves buyer weight onto price, where we are weaker. External: he can sustain **−$0.20**/m³ longer than his own economics suggest if a parent is funding him. |\n| next step | Establish whether the entrant is externally funded — that is the only thing that lengthens his loss. Set a trigger on our own reliability score rather than on his price: below **8.0** we revisit, not before. |\n\n`[MIN]`: `hold` — действие, а не отказ от действия ✓"
    },
    "anchor_metric": "ранжирование (β); Clean — правильное поведение состоит в том, чтобы не переворачиваться"
+  },
+  {
+   "id": "SY-007",
+   "title": "Full Potential",
+   "company": "",
+   "industry": "",
+   "difficulty": "Medium",
+   "clean": false,
+   "focus": "",
+   "scaffold": "L4",
+   "time": "5 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Bell Computer Inc. is the second-largest PC maker in the US by unit sales; over five years it gained share and grew revenue while net income eroded, and the returning founder-CEO wants to know why margins fell and what would take the company to its full potential. An analyst on the team has already laid the two years side by side and written the note below. Read it, judge whether the conclusion he is heading for is the one the data supports, and give the CEO your answer.",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "*Working note — Bell Computer, FY2005 vs FY2010. Draft, one section left blank.*",
+       "Setup as given: revenue up, share up, net income down. So I compared the two years line by line.",
+       "**Bell FY2005 — by product line**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "",
+       "Desktop PCs",
+       "Laptop PCs",
+       "Netbook PCs",
+       "Servers",
+       "Other"
+      ],
+      "rows": [
+       [
+        "Units sold (K)",
+        "20.0",
+        "10.0",
+        "0.0",
+        "5.0",
+        "5.0"
+       ],
+       [
+        "ASP",
+        "$1,000",
+        "$2,000",
+        "—",
+        "$3,000",
+        "$250"
+       ],
+       [
+        "CPU",
+        "$800",
+        "$800",
+        "—",
+        "$800",
+        "$200"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "**Bell FY2010 — by product line**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "",
+       "Desktop PCs",
+       "Laptop PCs",
+       "Netbook PCs",
+       "Servers",
+       "Other"
+      ],
+      "rows": [
+       [
+        "Units sold (K)",
+        "30.0",
+        "30.0",
+        "5.0",
+        "10.0",
+        "5.0"
+       ],
+       [
+        "ASP",
+        "$1,000",
+        "$750",
+        "$500",
+        "$3,000",
+        "$250"
+       ],
+       [
+        "CPU",
+        "$800",
+        "$800",
+        "$800",
+        "$800",
+        "$200"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "**Totals as reported to us.** Total units 40.0K in FY2005 and 80.0K in FY2010. Total revenue $56.3M and $86.3M. Total net income $27.3M and $25.3M. Overall profit margin 48.4% and 29.3%.",
+       "Background from the client that I have not worked into the argument: all competitors face the same ASPs and sell comparable products. Servers, laptops and netbooks carry the same cost per unit; net income varies by ASP. Netbook PCs did not exist in 2005. \"Other\" covers Pocket PCs and calculators and carries a total cost per unit of $200. This is a US domestic question — ignore international. The Client segment means PCs designed for and sold to retail consumers, direct or through a retailer such as Best Buy. Assume only hardware is sold. Bell is the second-largest PC maker in the US by unit sales and the founder has returned as CEO.",
+       "**What the line-by-line comparison shows.** Desktops: nothing moved — same ASP, same cost, both years. Servers: nothing moved — $3,000 and $800, both years. Other: nothing moved. One line, and only one line, has a price that is different in FY2010 from FY2005: laptops, where the average selling price went from $2,000 to $750. That is a 62.5% cut on the single largest revenue line of 2005, and it is the only price movement anywhere in the portfolio.",
+       "**Where that points.** The laptop business is what broke. At $2,000 it was carrying the company; at $750 it cannot be. So the question in front of the CEO is a laptop-pricing question: either Bell recovers price in laptops — repositioning, bundling, premium configurations, whatever it takes to get the average selling price back up — or it accepts that the segment is structurally unattractive and reallocates out of it toward the lines that did not deteriorate.",
+       "**[Section left blank — volume]** Units went 40.0K to 80.0K over the period and I have the split in the tables above, but I ran out of time before working out what that change does to the totals. I do not expect it to change the conclusion, since none of the per-unit economics outside laptops moved at all.",
+       "Recommendation I am drafting: fix the laptop price or exit laptops.",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "**_meta (форма ответа):** branch_markers = {m-7f, m-3q} · m-7f — наивная ветвь (сломался продукт, у которого сдвинулась цена), m-3q — верная ветвь (сломался состав объёма при неподвижной себестоимости) · поля L4: вывод / факты / риск / next step.\n\n**Prompt (EN):** Bell Computer Inc. is the second-largest PC maker in the US by unit sales; over five years it gained share and grew revenue while net income eroded, and the returning founder-CEO wants to know why margins fell and what would take the company to its full potential. An analyst on the team has already laid the two years side by side and written the note below. Read it, judge whether the conclusion he is heading for is the one the data supports, and give the CEO your answer.\n\n---",
+    "decoy": "* Сдвиг ASP ноутбука действительно единственный: desktop, server и other стоят на месте по обеим строкам в оба года — наблюдение точное.\n* Сдвиг огромен и стоит на крупной линии: $2,000 → $750 при 10.0K базовых коробок — это ($12.5M) переоценки базы (ПОСТРОЕНО), крупнейший единичный член разложения. Наивный путь указывает на настоящий и самый большой член.\n* Автор записи ставит продуктовое сравнение годов первым блоком и выписывает ноутбучную цену отдельной строкой; состав объёма он даже не пробует посчитать и прямо пишет, что не ждёт от него изменения вывода.\n* Строка про отраслевые ASP лежит в фоновом абзаце вместе с географией, каналом и калькуляторами — то есть в самом слабом месте записи.\n* «Выйти из ноутбуков» звучит как жёсткое решение и хорошо ложится на итог: линия в минусе, значит, режем.",
+    "support": "* **Настоящая.** CPU $800 стоит под desktop, laptop, netbook и server в оба года. Значит, ни у одного продукта нет собственной сломавшейся экономики: одна и та же себестоимость встречается с разными экзогенными ценами. Линия с ASP $750 и линия с ASP $500 отрицательны по построению, а не по качеству управления ими.\n* **Настоящая.** Цена экзогенна и это напечатано: все конкуренты работают при тех же ASP и продают сопоставимые продукты. Ветвь «вернуть цену» закрыта не суждением, а фактом из клиентского блока.\n* **Настоящая.** Объём вырос 40.0K → 80.0K, и 25.0K из 40.0K прироста легли в ноутбуки (+20.0K) и нетбуки (+5.0K) — ровно в те линии, где ASP ниже CPU. Прирост в этих линиях стоил ($1.0M) и ($1.5M) (ПОСТРОЕНО). «Рост доли рынка» из постановки и есть механизм ухудшения: не цена изменилась дополнительно, а изменился состав того, что продано.\n* **Настоящая, с оговоркой, которую надо произнести вслух.** Крупнейший член разложения — не состав, а переоценка базовых 10.0K ноутбуков: ($12.5M) (ПОСТРОЕНО). Это честно и это надо сказать первым, но именно этот член экзогенен и рычагом не является. Управляемая часть — куда положен прирост в 40.0K коробок и по какой себестоимости он произведён.\n* **Ложная опора.** «Выйти из ноутбуков»: линия даёт ($1.5M) при $86.3M выручки, а тот же CPU $800 стоит и под нетбуками, и под десктопами. Уход из линии лечит симптом одной линии и не трогает величину, общую для всех.\n* **Ложная опора.** «Виноват продукт, у которого сдвинулась цена»: сдвиг цены отраслевой, значит, он произошёл у всех участников рынка одинаково; отличает Bell не цена, а неподвижная себестоимость под ней.",
+    "risks": "* **Внутренний.** Сокращение себестоимости коробки — операционная программа по закупке компонентов, прямому труду и накладным сразу; она затрагивает все 80.0K коробок и не имеет в записи ни срока, ни сметы. Если сокращение окажется вдвое меньше заявленного, две линии с ASP $750 и $500 останутся отрицательными.\n* **Внешний.** ASP заданы рынком: пять лет цена ноутбука шла вниз с $2,000 до $750, и ничто в данных не обещает, что она остановилась. Дальнейшее снижение на $100 при объёме 30.0K коробок стоит ещё ($3.0M) чистой прибыли и съедает часть выигрыша от снижения себестоимости.\n* **Внешний, спросовый.** Состав спроса продолжает смещаться: нетбуков в 2005 году не существовало, в 2010 их 5.0K при худшей экономике в портфеле ($300 убытка на коробку). Если эта линия растёт дальше при той же себестоимости, состав объёма ухудшает итог сам по себе.",
+    "next": "1. За две недели разложить $800 себестоимости коробки на статьи — комплектующие, прямой труд, накладные — и по каждой статье получить сопоставимую величину у трёх ближайших конкурентов. Снимает неопределённость: сколько из $800 действительно подвижно, а не является отраслевым минимумом.\n2. Посчитать по каждой линии величину ASP − CPU при текущих ценах и поставить правило: линия с отрицательным знаком не получает планового прироста объёма до тех пор, пока знак не изменится. Снимает неопределённость: продолжает ли план по доле рынка загонять объём в убыточные линии.\n3. Проверить, при какой себестоимости коробки нетбук с ASP $500 перестаёт быть убыточным. Снимает неопределённость: остаётся ли самая слабая линия портфеля в игре после программы сокращения затрат или закрывается отдельным решением.\n4. Оценить вклад сопутствующих продуктов — принтеры, ПО, апгрейды комплектующих, гарантии — в чистую прибыль на коробку. Снимает неопределённость: есть ли источник прибыли, не зависящий от экзогенного ASP «железа».",
+    "build": "```python\nfrom decimal import Decimal as D, ROUND_HALF_UP\n\ndef q1(x): return x.quantize(D(\"0.1\"), rounding=ROUND_HALF_UP)\n\n# Входы: Math Solutions / Math Part I, стр. 93\nlines = [\"Desktop\", \"Laptop\", \"Netbook\", \"Server\", \"Other\"]\nu05  = dict(zip(lines, [D(\"20\"), D(\"10\"), D(\"0\"),  D(\"5\"),  D(\"5\")]))    # тыс. шт\nu10  = dict(zip(lines, [D(\"30\"), D(\"30\"), D(\"5\"),  D(\"10\"), D(\"5\")]))\na05  = dict(zip(lines, [D(\"1000\"), D(\"2000\"), D(\"0\"), D(\"3000\"), D(\"250\")]))\na10  = dict(zip(lines, [D(\"1000\"), D(\"750\"),  D(\"500\"), D(\"3000\"), D(\"250\")]))\ncpu05 = dict(zip(lines, [D(\"800\"), D(\"800\"), D(\"0\"),   D(\"800\"), D(\"200\")]))\ncpu10 = dict(zip(lines, [D(\"800\"), D(\"800\"), D(\"800\"), D(\"800\"), D(\"200\")]))\n\nni_u05 = {k: a05[k] - cpu05[k] for k in lines}\nni_u10 = {k: a10[k] - cpu10[k] for k in lines}\nassert ni_u05[\"Laptop\"]  == D(\"1200\")   # книга: $1,200.0\nassert ni_u10[\"Laptop\"]  == D(\"-50\")    # книга: ($50.0)\nassert ni_u10[\"Netbook\"] == D(\"-300\")   # книга: ($300.0)\nassert ni_u10[\"Server\"]  == D(\"2200\")   # книга: $2,200.0\n\n# $M = тыс. шт × $/шт / 1000\nrev05 = sum(u05[k] * a05[k] for k in lines) / D(\"1000\")\nrev10 = sum(u10[k] * a10[k] for k in lines) / D(\"1000\")\nni05  = sum(u05[k] * ni_u05[k] for k in lines) / D(\"1000\")\nni10  = sum(u10[k] * ni_u10[k] for k in lines) / D(\"1000\")\nassert (rev05, rev10) == (D(\"56.25\"), D(\"86.25\"))     # книга: $56.3M / $86.3M\nassert (ni05,  ni10)  == (D(\"27.25\"), D(\"25.25\"))     # книга: $27.3M / $25.3M\nassert q1(rev05) == D(\"56.3\") and q1(rev10) == D(\"86.3\")\nassert q1(ni05)  == D(\"27.3\") and q1(ni10)  == D(\"25.3\")\nassert q1(ni05 / rev05 * D(\"100\")) == D(\"48.4\")       # книга: 48.4%\nassert q1(ni10 / rev10 * D(\"100\")) == D(\"29.3\")       # книга: 29.3%\nassert u10[\"Laptop\"] * ni_u10[\"Laptop\"] / D(\"1000\") == D(\"-1.5\")   # книга: ($1.5)\nassert u10[\"Netbook\"] * ni_u10[\"Netbook\"] / D(\"1000\") == D(\"-1.5\") # книга: ($1.5)\nassert u10[\"Server\"] * ni_u10[\"Server\"] / D(\"1000\") == D(\"22\")     # книга: $22.0\n\n# ПОСТРОЕНО, книга не печатает: разложение падения NI на переоценку базы и состав прироста\nbase_reprice = sum(u05[k] * (ni_u10[k] - ni_u05[k]) for k in lines) / D(\"1000\")\ngrowth_mix   = sum((u10[k] - u05[k]) * ni_u10[k] for k in lines) / D(\"1000\")\nassert base_reprice == D(\"-12.5\")                       # вся величина сидит в ноутбуках\nassert u05[\"Laptop\"] * (ni_u10[\"Laptop\"] - ni_u05[\"Laptop\"]) / D(\"1000\") == D(\"-12.5\")\nassert growth_mix == D(\"10.5\")\nassert ni05 + base_reprice + growth_mix == ni10         # 27.25 − 12.5 + 10.5 = 25.25\n\n# состав прироста: сколько прирост принёс в линиях с ASP ниже CPU\nneg_growth = sum((u10[k] - u05[k]) * ni_u10[k] for k in lines if ni_u10[k] < 0) / D(\"1000\")\nneg_units  = sum(u10[k] - u05[k] for k in lines if ni_u10[k] < 0)\nassert neg_growth == D(\"-2.5\") and neg_units == D(\"25\")  # 25.0K из 40.0K прироста\nassert sum(u10[k] - u05[k] for k in lines) == D(\"40\")\n```\n\n**Провоцируемая ошибка** — принять единственную сдвинувшуюся цену за причину падения агрегата и лечить продукт, тогда как цена экзогенна, себестоимость неподвижна и одинакова под всеми линиями, а изменился состав объёма: 25.0K из 40.0K прироста ушли в линии, где ASP ниже собственной себестоимости коробки.\n# ПАРТИЯ 4 — СЕМЬЯ F4 (неназванное ограничение) — ТЕЛА SY-013, SY-020\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: CPU $800 стоит под каждой линией в оба года: при ASP $750 и $500 линия отрицательна по построению, а клиент нарастил объём именно туда (ноутбуки 10K → 30K, нетбуки 0 → 5K); цена экзогенна и рычагом не является; (3) the naive reading is rejected explicitly, not merely avoided — ASP ноутбука $2,000 → $750 — единственная сдвинувшаяся цена; отсюда «сломался ноутбучный бизнес» must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: CPU $800 стоит под каждой линией в оба года: при ASP $750 и $500 линия отрицательна по построению, а клиент нарастил объём именно туда (ноутбуки 10K → 30K, нетбуки 0 → 5K); цена экзогенна и рычагом не является; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — ASP ноутбука $2,000 → $750 — единственная сдвинувшаяся цена; отсюда «сломался ноутбучный бизнес» обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "*Вывод.* Bell should attack cost per box across the whole portfolio and stop routing unit growth into lines whose selling price sits below that cost — the note's laptop-price conclusion targets the one variable Bell does not control.\n\n*Факты.* Cost per unit is $800 under desktops, laptops, netbooks and servers in both years — it did not move, and it is identical across product types, so no single product has broken economics of its own. Prices are exogenous: all competitors face the same ASPs and sell comparable products, which closes the \"recover laptop price\" branch outright. What Bell did control is where the extra 40.0K units went: of that growth, 20.0K went into laptops at an ASP of $750 and 5.0K into netbooks at $500 — both below the $800 it costs Bell to build them — while units doubled from 40.0K to 80.0K. The market share Bell bought was bought in the two lines that lose money at Bell's own cost base.\n\n*Риск.* The cost programme touches every one of the 80.0K boxes and has no timetable yet; and laptop ASP has fallen for five straight years, so a further $100 decline on 30.0K units removes another $3.0M of net income before any cost saving lands.\n\n*Next step.* Within two weeks, break the $800 into parts, direct labour and overhead and benchmark each line item against the three closest competitors; in parallel, impose the rule that no line with a negative ASP-minus-cost gap receives planned volume growth until that gap closes."
+   },
+   "anchor_metric": "клиентского порога нет; решение выносится сопоставлением, а не сравнением с правилом"
   },
   {
    "id": "SY-008",
@@ -860,6 +1090,195 @@
     "en": "**Вывод.** Do not enter Germany at the incumbent's €70 — the club breaks even only at €90.70, so entry is justified only if Ulmethrayne can prove a differentiation that supports that higher price.\n\n**Факты.** First, capacity is fixed: 10 hours a day across 7 days and 15 courts gives 1,050 court-hours a week, 70% utilization gives 735, and at 3 members per hour that caps membership at 2,205. Second, €200,000 of annual cost across 2,205 members sets breakeven at €90.70 — €20.70 above the €70 the dominant player charges. Third, matching €70 would require 2,857.14 members, which is 952.38 court-hours or 90.70% utilization against a stated ceiling of 70% — physically unavailable, not merely expensive.\n\n**Риск.** Internally, the entire 2,205 ceiling rests on one assumption — 3 members per court-hour from a 50/50 singles-doubles mix; if it is closer to 2, breakeven moves above €90.70. Externally, the incumbent holds 70% of the German market at €70 with a lower cost base, so any attempt to compete on price is a war the client cannot win.\n\n**Next step.** Run a willingness-to-pay test at €90.70 against the €70 market price on the target urban segment before any site commitment, and validate the 3-members-per-hour mix from actual booking data."
    },
    "anchor_metric": "€70 — цена доминирующего игрока (стр. 215); цель «Breakeven at least. No timeframe.» (стр. 211)"
+  },
+  {
+   "id": "SY-013",
+   "title": "Flat Line At Ten",
+   "company": "",
+   "industry": "",
+   "difficulty": "Medium",
+   "clean": false,
+   "focus": "",
+   "scaffold": "L2",
+   "time": "5 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Rubber Bumper Co is a small family-owned producer of rubber products with two plants, one per product: rubber bands and condoms. A new President has taken over after two years of declining profits and has asked our firm to fix them. A colleague has written up the working note below on the condom line, plus the terms and rules the client has confirmed for us. You have five minutes: read the note, decide whether the line of enquiry it opens is the one worth funding, and tell the President what Rubber Bumper should do.",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**Working note — condom line, volume diagnosis**",
+       "Team pulled seven years of unit volumes for both of our product industries. On the condom side the picture is this: the category is expanding fast, and we are not moving with it.",
+       "**Exhibit 1 — condoms sold each year (millions of condoms).**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "",
+       "2011",
+       "2012",
+       "2013",
+       "2014",
+       "2015",
+       "2016",
+       "2017"
+      ],
+      "rows": [
+       [
+        "Rubber Bumper",
+        "1",
+        "2",
+        "5",
+        "10",
+        "10",
+        "10",
+        "10"
+       ],
+       [
+        "Spartan",
+        "100",
+        "110",
+        "108",
+        "115",
+        "117",
+        "115",
+        "115"
+       ],
+       [
+        "Durable",
+        "150",
+        "155",
+        "152",
+        "158",
+        "159",
+        "165",
+        "170"
+       ],
+       [
+        "Others (15)",
+        "99",
+        "93",
+        "105",
+        "107",
+        "119",
+        "130",
+        "155"
+       ],
+       [
+        "**Total**",
+        "**350**",
+        "**360**",
+        "**370**",
+        "**390**",
+        "**405**",
+        "**420**",
+        "**450**"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "**Exhibit 2 — rubber bands sold each year (millions of pounds of rubber).**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "",
+       "2011",
+       "2012",
+       "2013",
+       "2014",
+       "2015",
+       "2016",
+       "2017"
+      ],
+      "rows": [
+       [
+        "Rubber Bumper",
+        "4",
+        "3",
+        "3",
+        "2.5",
+        "2.5",
+        "2.5",
+        "2"
+       ],
+       [
+        "Max Rubber",
+        "17",
+        "19",
+        "21",
+        "21",
+        "22",
+        "23",
+        "24"
+       ],
+       [
+        "Others (8)",
+        "9",
+        "9",
+        "8",
+        "7.5",
+        "6.5",
+        "4.5",
+        "5"
+       ],
+       [
+        "**Total**",
+        "**30**",
+        "**31**",
+        "**32**",
+        "**31**",
+        "**31**",
+        "**30**",
+        "**31**"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "Where the note goes from here:",
+       "Our condom volume has not moved since 2014. Over the same four years the category added 60 million units and the fragmented tail — Others, fifteen of them — added 48 million on its own. Spartan is flat too, but Spartan is flat at 115, we are flat at 10. Durable is up. Read together, this says our growth has tapered off while everybody else's has not, and our share of the category has gone the wrong way since 2014.",
+       "",
+       "So the question the team wants to open is why our condom growth stalled while the industry kept expanding. Three places to look: **competitor response** — Spartan and Durable both outspend us and the fifteen small players are clearly taking shelf; **brand and positioning** — we are a family firm known for a limited range and the highest quality on the market, which may simply not be what this category rewards; **distribution and pricing to retailers** — we sell 4-packs at $3 a pack and have never tested that, and we have no read on how our retail coverage compares.",
+       "**Plant and product background (from the client's finance pack)**",
+       "- Rubber Bumper sells only two products. Each is made in its own factory. The factories essentially do not share any fixed costs and for the most part are run as separate P&Ls. A factory can only make one thing.",
+       "- Rubber band factory: boxes of 500 rubber bands sold to retailers at $20 a box; one pound of rubber makes approximately 125 rubber bands; it costs $1 to turn a pound of rubber into a pound of rubber bands (assume no waste). Annual overhead, inclusive: $4MM.",
+       "- Condom factory: 4-packs of condoms sold to retailers at $3 a pack; each condom costs $0.10 to make. This factory is the smaller of the two — its capacity is about half that of the rubber band plant. Annual overhead, inclusive of everything: $2MM.",
+       "- The bigger plant can produce twice the volume of condoms as the smaller plant.",
+       "- Rubber Bumper is the market leader in both of its product industries. Topline sales have remained relatively stable over the last three years. New products are introduced only after much deliberation and careful market study.",
+       "**What the client has confirmed for us**",
+       "- The President's brief to the firm: fix the decline in profits.",
+       "- Terms confirmed for any project that changes what a plant makes: it will cost $2MM to refurbish and take 1 year to complete, during which time that factory will be off line. Overhead would remain the same. Assume there are no tax benefits from depreciating the CapEx and no cost of capital.",
+       "- Rubber Bumper Co's payback period for such projects is 4 years.",
+       "- Assume that Rubber Bumper's rubber band demand has stabilized at 2MM lbs per year.",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|\n| Читает временной ряд объёмов как коммерческий симптом: «плоско ↔ спрос» | Ставит гипотезу «мы теряем позицию в растущей категории» | Плоская выручка = коммерческая болезнь |\n| Подхватывает готовую рамку аналитика (конкуренты / бренд / дистрибуция) | Тратит все пять минут внутри чужой ветви, ни разу её не проверив | Наследование чужой структуры вместо аудита чужой структуры |\n| Опирается на самое крупное в записи — таблицу с четырьмя игроками и семью годами | Углубляется в Others(15) и Durable, потому что там движение | Крупнее набрано → важнее |\n| Производственный блок читает как «фон о заводах», а не как данные по вопросу | Пропускает пару «мощность ≈ половина» + «×2 объёма» | Финансово-производственный блок = справка, а не улика |\n| Выдаёт рекомендацию из коммерческого меню: усилить дистрибуцию, поднять маркетинг, пересмотреть цену пачки | Рекомендует рычаги, которые физически не могут увеличить отгрузку сверх 10 MM | Действие важнее выполнимости действия |\n\n**DECOY_SUPPORT (вторым)** — чем наивный путь кажется подкреплённым\n- Книга сама толкает туда: строка «why Rubber Bumper's condom growth has tapered off while the industry keeps expanding… If they do not get to that issue, prod them until they do» (стр. 171, блок `Commentary`). Наивная ветвь здесь официально одобрена источником — это не соломенное чучело.\n- Others(15) выросли 99 → 155: в категории явно есть свободный рост, и его берёт кто-то другой. Это настоящий факт и он честно поддерживает «мы что-то делаем не так».\n- Spartan плоский на 115 — значит плоскость в этой категории *бывает* коммерческой; у Spartan она именно такая. Аналогия соблазнительна и ложна: Spartan плоский около собственной большой базы, RB плоский на 10 при рынке 450.\n- Профиль клиента подыгрывает: семейная фирма, узкий ассортимент, «highest quality», новые продукты после долгого изучения рынка. Готовая история про консервативную компанию, которая проспала рост.\n- Rubber Bumper — лидер обоих своих рынков; это подталкивает искать объяснение в позиционировании, а не в железе.\n\n**SUPPORT (третьим)** — что на самом деле держит верный вывод\n- **Настоящая опора.** Ровно 10 / 10 / 10 / 10 четыре года подряд. Спрос не даёт четырёх одинаковых значений подряд с точностью до целого при рынке, который за те же годы прибавил 60 млн единиц. Такую линию рисует не рынок, а стена.\n- **Настоящая опора.** Мощность завода презервативов ≈ половина мощности завода резинок, и больший завод способен на вдвое больший объём презервативов. Две строки, стоящие в разных местах записи, вместе дают и диагноз, и единственный доступный шаг.\n- **Настоящая опора.** Overhead $2 MM против $4 MM при сопоставимой прибыли — независимый след того, что заводы разного размера, и что меньший несёт почти ту же выработку на вдвое меньшей базе.\n- **Ложная опора (снять с рассмотрения).** «Маржа на презервативах выше: $4.5 MM прибыли на $3 MM затрат против $4 MM на $6 MM». Это верно арифметически и бесполезно как аргумент: пока объём упёрт в потолок, более высокая маржа не масштабируется ни на единицу.\n- **Ложная опора (снять с рассмотрения).** «Категория растёт — значит спрос на наш продукт есть». Рост категории говорит о рынке, а не о нашей способности его обслужить; вход в рекомендацию через рост категории обходит именно тот вопрос, который стоит.",
+    "decoy": "- Книга сама толкает туда: строка «why Rubber Bumper's condom growth has tapered off while the industry keeps expanding… If they do not get to that issue, prod them until they do» (стр. 171, блок `Commentary`). Наивная ветвь здесь официально одобрена источником — это не соломенное чучело.\n- Others(15) выросли 99 → 155: в категории явно есть свободный рост, и его берёт кто-то другой. Это настоящий факт и он честно поддерживает «мы что-то делаем не так».\n- Spartan плоский на 115 — значит плоскость в этой категории *бывает* коммерческой; у Spartan она именно такая. Аналогия соблазнительна и ложна: Spartan плоский около собственной большой базы, RB плоский на 10 при рынке 450.\n- Профиль клиента подыгрывает: семейная фирма, узкий ассортимент, «highest quality», новые продукты после долгого изучения рынка. Готовая история про консервативную компанию, которая проспала рост.\n- Rubber Bumper — лидер обоих своих рынков; это подталкивает искать объяснение в позиционировании, а не в железе.\n\n**SUPPORT (третьим)** — что на самом деле держит верный вывод\n- **Настоящая опора.** Ровно 10 / 10 / 10 / 10 четыре года подряд. Спрос не даёт четырёх одинаковых значений подряд с точностью до целого при рынке, который за те же годы прибавил 60 млн единиц. Такую линию рисует не рынок, а стена.\n- **Настоящая опора.** Мощность завода презервативов ≈ половина мощности завода резинок, и больший завод способен на вдвое больший объём презервативов. Две строки, стоящие в разных местах записи, вместе дают и диагноз, и единственный доступный шаг.\n- **Настоящая опора.** Overhead $2 MM против $4 MM при сопоставимой прибыли — независимый след того, что заводы разного размера, и что меньший несёт почти ту же выработку на вдвое меньшей базе.\n- **Ложная опора (снять с рассмотрения).** «Маржа на презервативах выше: $4.5 MM прибыли на $3 MM затрат против $4 MM на $6 MM». Это верно арифметически и бесполезно как аргумент: пока объём упёрт в потолок, более высокая маржа не масштабируется ни на единицу.\n- **Ложная опора (снять с рассмотрения).** «Категория растёт — значит спрос на наш продукт есть». Рост категории говорит о рынке, а не о нашей способности его обслужить; вход в рекомендацию через рост категории обходит именно тот вопрос, который стоит.",
+    "support": "- **Настоящая опора.** Ровно 10 / 10 / 10 / 10 четыре года подряд. Спрос не даёт четырёх одинаковых значений подряд с точностью до целого при рынке, который за те же годы прибавил 60 млн единиц. Такую линию рисует не рынок, а стена.\n- **Настоящая опора.** Мощность завода презервативов ≈ половина мощности завода резинок, и больший завод способен на вдвое больший объём презервативов. Две строки, стоящие в разных местах записи, вместе дают и диагноз, и единственный доступный шаг.\n- **Настоящая опора.** Overhead $2 MM против $4 MM при сопоставимой прибыли — независимый след того, что заводы разного размера, и что меньший несёт почти ту же выработку на вдвое меньшей базе.\n- **Ложная опора (снять с рассмотрения).** «Маржа на презервативах выше: $4.5 MM прибыли на $3 MM затрат против $4 MM на $6 MM». Это верно арифметически и бесполезно как аргумент: пока объём упёрт в потолок, более высокая маржа не масштабируется ни на единицу.\n- **Ложная опора (снять с рассмотрения).** «Категория растёт — значит спрос на наш продукт есть». Рост категории говорит о рынке, а не о нашей способности его обслужить; вход в рекомендацию через рост категории обходит именно тот вопрос, который стоит.",
+    "risks": "- **Внутренний.** Расчёт держится на допущении, что Rubber Bumper сможет продать втрое больше презервативов, чем сегодня, немедленно: 20 MM при сегодняшних 10 MM плюс сохранение выпуска. Если раскатка займёт год, +$5 MM/год превращается в +$5 MM со второго года работы, и окупаемость сдвигается на 4-й год — ровно на границу правила.\n- **Внешний / регуляторный.** Год простоя завода резинок стоит $8 MM контрибуции и уводит нас с рынка, где мы лидер: Max Rubber уже прошёл 17 → 24 млн фунтов за семь лет и займёт освободившиеся 2 млн. Плюс контрацепция — категория с большей юридической и политической нагрузкой, чем резинки; изменение регулирования или сокращение программ полового просвещения бьёт по объёму, на котором держится вся выгода в $5 MM.",
+    "next": "1. За две недели снять фактическую загрузку завода презервативов по сменам и OEE — снимает неопределённость «100 % мощности или 100 % текущего графика»; если это график, а не потолок, весь проект отменяется и лечится третьей сменой за околонулевой CapEx.\n2. До подписания CapEx получить от 3–5 крупнейших ритейлеров подтверждённые объёмы на 20 MM единиц — снимает главный внутренний риск (допущение о немедленной продаже утроенного объёма), от которого зависит, укладываемся мы в 4 года или нет.\n3. Параллельно оценить стоимость сохранения выпуска резинок на стороне (толлинг) на год простоя — снимает $8 MM, то есть 80 % цены проекта; если толлинг стоит меньше $8 MM, окупаемость уходит на 2-й год и запас до порога удваивается.",
+    "build": "Все величины ниже — **ПОСТРОЕНО, книга печатает результат в блоке `Expected Calculations` (стр. 173, 175); здесь пересчитано от клиентских входов** (Exhibit 1 стр. 170, данные Question 2 стр. 172, `Supplementary Information` стр. 174).\n\n```python\nfrom decimal import Decimal as D, ROUND_HALF_UP\n\ndef r2(x): return x.quantize(D(\"0.01\"), rounding=ROUND_HALF_UP)\n\n# --- клиентские входы ---\nband_lbs        = D(\"2\")      # MM lbs, стр. 174 Supplementary + Exhibit 1 (2017)\nbands_per_lb    = D(\"125\")\nbands_per_box   = D(\"500\")\nprice_per_box   = D(\"20\")     # $\nconvert_per_lb  = D(\"1\")      # $\ncondom_units    = D(\"10\")     # MM шт, Exhibit 1 (2014-2017)\ncondoms_in_pack = D(\"4\")\nprice_per_pack  = D(\"3\")      # $\ncost_per_condom = D(\"0.10\")   # $\nbig_plant_mult  = D(\"2\")      # \"twice the volume of condoms\"\ncapex           = D(\"2\")      # $MM\npayback_rule    = D(\"4\")      # лет, Supplementary Information\n\n# --- контрибуция резинок (цена года простоя) ---\nbands_mm      = band_lbs * bands_per_lb                  # 250 MM шт\nboxes_mm      = bands_mm / bands_per_box                 # 0.5 MM коробок\nband_revenue  = boxes_mm * price_per_box                 # 10 $MM\nband_vc       = band_lbs * convert_per_lb                # 2 $MM\nband_contrib  = band_revenue - band_vc                   # 8 $MM\nassert r2(band_revenue) == D(\"10.00\")\nassert r2(band_contrib) == D(\"8.00\")\n\n# --- контрибуция презервативов на малом заводе ---\npacks_mm        = condom_units / condoms_in_pack         # 2.5 MM пачек\ncondom_revenue  = packs_mm * price_per_pack              # 7.5 $MM\ncondom_vc       = condom_units * cost_per_condom         # 1 $MM\ncondom_contrib  = condom_revenue - condom_vc             # 6.5 $MM\nassert r2(condom_revenue) == D(\"7.50\")\nassert r2(condom_contrib) == D(\"6.50\")\n\n# --- ВЕРНАЯ ВЕЛИЧИНА: потолок и шаг ---\nceiling_units   = condom_units                           # 10 MM = 100% мощности малого завода\nbig_plant_units = condom_units * big_plant_mult          # 20 MM шт\nbig_plant_contr = condom_contrib * big_plant_mult        # 13 $MM\ndelta_per_year  = big_plant_contr - band_contrib         # 5 $MM/год\nassert r2(big_plant_units) == D(\"20.00\")\nassert r2(big_plant_contr) == D(\"13.00\")\nassert r2(delta_per_year) == D(\"5.00\")\n\n# --- тест НА ВЫХОДЕ, не на входе ---\nproject_cost    = band_contrib + capex                   # 10 $MM\noperating_years = project_cost / delta_per_year          # 2 года работы\npayback_years   = D(\"1\") + operating_years               # +1 год простоя = 3\nassert r2(project_cost) == D(\"10.00\")\nassert r2(payback_years) == D(\"3.00\")\nassert payback_years <= payback_rule                     # 3 <= 4 -> проходит\n\n# --- разведение ветвей ---\nnaive_branch   = \"commercial: share / brand / distribution / price\"\ncorrect_branch = \"supply: 10MM is the smaller plant's ceiling; convert the bigger plant\"\nassert naive_branch != correct_branch\nassert ceiling_units < big_plant_units\n```\n\n**Провоцируемая ошибка** — принять четыре одинаковых года за угасший спрос и назначить лечение (бренд, дистрибуция, цена), которое физически не способно увеличить отгрузку у завода, работающего на 100 % мощности.\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: «линия плоская, потому что 10 MM = 100 % мощности малого завода; коммерческий рычаг не двигает объём, упёртый в предложение. Доступный шаг — большой завод: 2 × 10 MM = 20 MM условных единиц объёма, +$5 MM/год контрибуции, окупаемость на 3-й год ≤ 4 лет»; (3) the naive reading is rejected explicitly, not merely avoided — «линия плоская → спрос/доля; лечим брендом, дистрибуцией, ценой и конкурентной позицией» — коммерческий диагноз must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: «линия плоская, потому что 10 MM = 100 % мощности малого завода; коммерческий рычаг не двигает объём, упёртый в предложение. Доступный шаг — большой завод: 2 × 10 MM = 20 MM условных единиц объёма, +$5 MM/год контрибуции, окупаемость на 3-й год ≤ 4 лет»; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — «линия плоская → спрос/доля; лечим брендом, дистрибуцией, ценой и конкурентной позицией» — коммерческий диагноз обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "**Conclusion.** Rubber Bumper should stop the commercial diagnosis and convert the rubber band plant to condoms — the condom line is not losing share, it is sold out.\n\n**Support.** Two facts in the note settle it. First, our condom volume is exactly 10 million in 2014, 2015, 2016 and 2017 — four identical years while the category added 60 million units. Demand does not produce a line like that; a capacity ceiling does, and the note tells us the condom plant is roughly half the size of the rubber band plant. Second, the only lever that moves a supply-bound line is more supply: the bigger plant can run twice the condom volume, which lifts condom contribution from $6.5MM to $13MM against the $8MM the rubber band plant contributes today — a gain of $5MM a year. Against a project cost of $10MM — $2MM of CapEx plus $8MM of contribution lost during the year offline — that repays in year three, inside the client's four-year rule. No brand, pricing or distribution move in the note's original branch can add a single unit while the plant is at its ceiling."
+   },
+   "anchor_metric": "ЕСТЬ И ВАЛИДЕН: срок окупаемости проекта ≤ 4 года — правило приёмки клиента, применяется на выходе, не на входе"
   },
   {
    "id": "SY-014",
@@ -1585,6 +2004,119 @@
    "anchor_metric": "$160M — стоимость Phase I"
   },
   {
+   "id": "SY-020",
+   "title": "Twice The Market, Half The Room",
+   "company": "",
+   "industry": "",
+   "difficulty": "Medium",
+   "clean": false,
+   "focus": "",
+   "scaffold": "L2",
+   "time": "4 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Home Inspection, Co. is a third-party independent home inspection company operating out of Ohio. It has narrowed expansion down to two states and can enter only one. An analyst has already sized both markets and written up the comparison below, together with the context notes gathered from the client. You have four minutes: read the analyst's work, decide which state Home Inspection should enter, and say what the client should do.",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**Analyst's comparison — Colorado vs Michigan, annual single-family inspection revenue**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Step",
+       "Colorado",
+       "Michigan"
+      ],
+      "rows": [
+       [
+        "People in state",
+        "5 million",
+        "10 million"
+       ],
+       [
+        "People per household",
+        "2.5",
+        "2.5"
+       ],
+       [
+        "Households",
+        "2 million",
+        "4 million"
+       ],
+       [
+        "Share of households that are single-family homes",
+        "90 %",
+        "75 %"
+       ],
+       [
+        "Single-family homes",
+        "1.8 million",
+        "3 million"
+       ],
+       [
+        "Inspection frequency",
+        "1 home every 9 years",
+        "1 home every 12 years"
+       ],
+       [
+        "Inspections per year",
+        "200,000",
+        "250,000"
+       ],
+       [
+        "Price per inspection",
+        "$300",
+        "$400"
+       ],
+       [
+        "Annual market revenue",
+        "200,000 × $300",
+        "250,000 × $400"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "Analyst's note on the table: both states are sized the same way and off the same client-supplied inputs, so the two columns are directly comparable step for step. Colorado has the denser single-family stock and inspects more often; Michigan has twice the people and a materially higher price per inspection. The gap opens at the last two rows.",
+       "**Context notes on the two states**",
+       "- Home Inspection, Co. currently operates out of Ohio. Its inspections are conducted after a home is sold, and it inspects single-family homes only.",
+       "- Current company revenue: $10 million.",
+       "- Basis for wanting to move: increasing top line revenue.",
+       "- Market size in both states is relatively flat — neither growing nor shrinking.",
+       "- Home inspection is typically government run. Michigan opened it to third parties 10 years ago; Colorado did so 2½ years ago.",
+       "- Michigan only allows 20 % of their market to be inspected by 3rd party, and Colorado is 50 %.",
+       "- The longer third parties have been allowed, the more competition: Michigan has many competitors, Colorado has few.",
+       "- Price of an inspection changes by state and by type of home.",
+       "- Michigan is geographically next to Ohio. Working southern Michigan would let us reassign employees from the current office, which decreases set-up and training costs.",
+       "- The client can only expand to one state.",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|\n| Дочитывает таблицу до строки `Annual market revenue` и добивает последнее умножение | Получает $100 M и $60 M и считает работу завершённой | Последняя строка чужой таблицы = итог |\n| Проверяет цепочку на арифметику: делится ли население на 2.5, сходятся ли частоты | Всё сходится — таблица подтверждает саму себя | Аудит = пересчёт, а не поиск недостающего шага |\n| Блок контекста читает как качественный фон о конкуренции и логистике | Строка про 20 % / 50 % проходит мимо: она стоит между возрастом режима и числом конкурентов и читается как объяснение конкуренции | Регуляторный факт = фон, а не множитель |\n| Взвешивает Michigan качественно: рынок вдвое больше, штат рядом с Ohio, можно перебросить людей | Michigan укрепляется и по цифре, и по исполнимости | Совпадение количественного и качественного = уверенность |\n| Отмечает, что в Michigan много конкурентов, и трактует это как обычный риск входа | Скидывает конкуренцию в «риски» вместо того, чтобы спросить, откуда она взялась | Неудобный факт → в раздел рисков |\n| Выдаёт: «Идём в Michigan — рынок $100 M против $60 M, плюс экономия на запуске» | Рекомендует штат, где доступно $20 M, вместо штата, где доступно $30 M | Больший рынок = большая возможность |\n\n**DECOY_SUPPORT (вторым)** — чем наивный путь кажется подкреплённым\n- Michigan действительно вдвое больше по населению и берёт $400 против $300 за проверку — оба факта настоящие и оба из книги.\n- Полный размер рынка Michigan честно больше: $100 M против $60 M. Это не подстроенное число, это верно посчитанная величина не той метрики.\n- Michigan граничит с Ohio, где компания уже работает; книга сама даёт это как экономию: переброска сотрудников снижает затраты на запуск и обучение. Умный человек под таймером взвешивает исполнимость и добавляет Michigan очко.\n- Цель клиента сформулирована как «increasing top line revenue» — и наивный путь буквально максимизирует верхнюю строку рынка.\n- Книга официально разрешает пропустить ограничение («If the case is running long, you can skip the government limitations addition to the case»), то есть наивный путь существует не как ошибка кандидата, а как санкционированная сокращённая версия кейса.\n\n**SUPPORT (третьим)** — что на самом деле держит верный вывод\n- **Настоящая опора.** Доступно не всё: Michigan пускает третью сторону на 20 % рынка, Colorado на 50 %. Множитель применяется к последней строке той же таблицы, обеими сторонами одинаково: $100 M × 20 % = $20 M против $60 M × 50 % = $30 M. Больший рынок оказывается меньшей возможностью.\n- **Настоящая опора.** Разрыв между ограничениями (2.5×) сильнее разрыва между рынками (1.67×) — поэтому вывод не «уточняется», а переворачивается. Оценка на глаз здесь не спасает: нужно перемножить.\n- **Настоящая опора.** Тот же параметр объясняет и второй факт записи, который наивный путь списал в риски: режим третьей стороны в Michigan открыт 10 лет и уже поделён, в Colorado — 2.5 года и почти свободен. Одна переменная закрывает и размер возможности, и её конкурентную плотность; это признак того, что найдено ограничение, а не совпадение.\n- **Ложная опора (снять с рассмотрения).** «Colorado инспектирует чаще (раз в 9 лет против 12) и имеет более плотную застройку частными домами (90 % против 75 %)». Верно и уже полностью учтено в $60 M — второй раз этим аргументировать нельзя.\n- **Ложная опора (снять с рассмотрения).** «В Colorado мало конкурентов — значит там легче». Само по себе это аргумент о лёгкости входа, а не о величине возможности; работает только будучи привязанным к возрасту режима, то есть к тому же ограничению.",
+    "decoy": "- Michigan действительно вдвое больше по населению и берёт $400 против $300 за проверку — оба факта настоящие и оба из книги.\n- Полный размер рынка Michigan честно больше: $100 M против $60 M. Это не подстроенное число, это верно посчитанная величина не той метрики.\n- Michigan граничит с Ohio, где компания уже работает; книга сама даёт это как экономию: переброска сотрудников снижает затраты на запуск и обучение. Умный человек под таймером взвешивает исполнимость и добавляет Michigan очко.\n- Цель клиента сформулирована как «increasing top line revenue» — и наивный путь буквально максимизирует верхнюю строку рынка.\n- Книга официально разрешает пропустить ограничение («If the case is running long, you can skip the government limitations addition to the case»), то есть наивный путь существует не как ошибка кандидата, а как санкционированная сокращённая версия кейса.\n\n**SUPPORT (третьим)** — что на самом деле держит верный вывод\n- **Настоящая опора.** Доступно не всё: Michigan пускает третью сторону на 20 % рынка, Colorado на 50 %. Множитель применяется к последней строке той же таблицы, обеими сторонами одинаково: $100 M × 20 % = $20 M против $60 M × 50 % = $30 M. Больший рынок оказывается меньшей возможностью.\n- **Настоящая опора.** Разрыв между ограничениями (2.5×) сильнее разрыва между рынками (1.67×) — поэтому вывод не «уточняется», а переворачивается. Оценка на глаз здесь не спасает: нужно перемножить.\n- **Настоящая опора.** Тот же параметр объясняет и второй факт записи, который наивный путь списал в риски: режим третьей стороны в Michigan открыт 10 лет и уже поделён, в Colorado — 2.5 года и почти свободен. Одна переменная закрывает и размер возможности, и её конкурентную плотность; это признак того, что найдено ограничение, а не совпадение.\n- **Ложная опора (снять с рассмотрения).** «Colorado инспектирует чаще (раз в 9 лет против 12) и имеет более плотную застройку частными домами (90 % против 75 %)». Верно и уже полностью учтено в $60 M — второй раз этим аргументировать нельзя.\n- **Ложная опора (снять с рассмотрения).** «В Colorado мало конкурентов — значит там легче». Само по себе это аргумент о лёгкости входа, а не о величине возможности; работает только будучи привязанным к возрасту режима, то есть к тому же ограничению.",
+    "support": "- **Настоящая опора.** Доступно не всё: Michigan пускает третью сторону на 20 % рынка, Colorado на 50 %. Множитель применяется к последней строке той же таблицы, обеими сторонами одинаково: $100 M × 20 % = $20 M против $60 M × 50 % = $30 M. Больший рынок оказывается меньшей возможностью.\n- **Настоящая опора.** Разрыв между ограничениями (2.5×) сильнее разрыва между рынками (1.67×) — поэтому вывод не «уточняется», а переворачивается. Оценка на глаз здесь не спасает: нужно перемножить.\n- **Настоящая опора.** Тот же параметр объясняет и второй факт записи, который наивный путь списал в риски: режим третьей стороны в Michigan открыт 10 лет и уже поделён, в Colorado — 2.5 года и почти свободен. Одна переменная закрывает и размер возможности, и её конкурентную плотность; это признак того, что найдено ограничение, а не совпадение.\n- **Ложная опора (снять с рассмотрения).** «Colorado инспектирует чаще (раз в 9 лет против 12) и имеет более плотную застройку частными домами (90 % против 75 %)». Верно и уже полностью учтено в $60 M — второй раз этим аргументировать нельзя.\n- **Ложная опора (снять с рассмотрения).** «В Colorado мало конкурентов — значит там легче». Само по себе это аргумент о лёгкости входа, а не о величине возможности; работает только будучи привязанным к возрасту режима, то есть к тому же ограничению.",
+    "risks": "- **Внутренний.** Colorado не граничит с Ohio: базу приходится строить с нуля, нанимать и обучать людей на месте, тогда как южный Michigan закрывался бы перекинутыми сотрудниками. Против годовой доступной разницы в $10 M ($30 M против $20 M) стоимость запуска удалённого офиса — единственная статья, способная эту разницу съесть, и она пока не оценена.\n- **Внешний / регуляторный.** Весь перевес Colorado держится на одном числе — лимите 50 %. Режим открыт всего 2.5 года и не обкатан; сдвиг лимита к мичиганским 20 % обрушивает доступный рынок Colorado с $30 M до $12 M и переворачивает вывод обратно. Рынок при этом в обоих штатах плоский, то есть роста, который компенсировал бы такой сдвиг, не будет.",
+    "next": "1. До подписания аренды офиса поднять текст регламента Colorado и историю его пересмотров, включая заявленные планы регулятора на ближайшие 24 месяца — снимает единственную неопределённость, способную перевернуть вывод (устойчивость лимита 50 %).\n2. За четыре недели оценить полную стоимость запуска офиса в Colorado против южного Michigan (наём, обучение, лицензирование) — снимает неопределённость по внутреннему риску: съедает ли разрыв в запуске годовую разницу в $10 M доступного рынка.\n3. Проверить, входят ли 2–3 действующих независимых инспектора Colorado в те самые 50 %, и какую их часть они уже занимают — снимает неопределённость «доступный рынок» против «свободный рынок»: $30 M — это потолок доступа, а не пустое поле.",
+    "build": "Обе итоговые величины книга печатает на стр. 199 в таблице `Math (for interviewer only)`; **ПОСТРОЕНО здесь заново от входов записи** и сверено с напечатанным.\n\n```python\nfrom decimal import Decimal as D, ROUND_HALF_UP\n\ndef r0(x): return x.quantize(D(\"1\"), rounding=ROUND_HALF_UP)\n\ndef size(people_mm, per_hh, single_share, years_between, price, third_party_limit):\n    households   = D(people_mm) / D(per_hh)                    # млн\n    single_homes = households * D(single_share)                # млн\n    per_year     = single_homes / D(years_between)             # млн проверок/год\n    total_rev    = per_year * D(price)                         # $ млн/год\n    addressable  = total_rev * D(third_party_limit)            # $ млн/год\n    return households, single_homes, per_year, total_rev, addressable\n\n# --- Colorado ---\nco_hh, co_sf, co_yr, co_total, co_addr = size(\"5\", \"2.5\", \"0.90\", \"9\", \"300\", \"0.50\")\nassert r0(co_hh * 1000000) == D(\"2000000\")        # 2 млн домохозяйств\nassert r0(co_sf * 1000000) == D(\"1800000\")        # 1.8 млн частных домов\nassert r0(co_yr * 1000000) == D(\"200000\")         # 200 000 проверок/год\nassert r0(co_total)        == D(\"60\")             # $60 млн полный рынок\nassert r0(co_addr)         == D(\"30\")             # $30 млн доступный рынок\n\n# --- Michigan ---\nmi_hh, mi_sf, mi_yr, mi_total, mi_addr = size(\"10\", \"2.5\", \"0.75\", \"12\", \"400\", \"0.20\")\nassert r0(mi_hh * 1000000) == D(\"4000000\")        # 4 млн домохозяйств\nassert r0(mi_sf * 1000000) == D(\"3000000\")        # 3 млн частных домов\nassert r0(mi_yr * 1000000) == D(\"250000\")         # 250 000 проверок/год\nassert r0(mi_total)        == D(\"100\")            # $100 млн полный рынок\nassert r0(mi_addr)         == D(\"20\")             # $20 млн доступный рынок\n\n# --- переворот ---\nassert mi_total > co_total                        # наивный: Michigan\nassert co_addr  > mi_addr                         # верный:  Colorado\nnaive_pick, correct_pick = \"Michigan\", \"Colorado\"\nassert naive_pick != correct_pick\n\n# --- почему переворачивается: ограничение сильнее перевеса рынков ---\nmarket_edge = mi_total / co_total                 # 1.666...\nlimit_edge  = D(\"0.50\") / D(\"0.20\")               # 2.5\nassert limit_edge > market_edge\nassert (co_addr - mi_addr) == D(\"10\")             # $10 млн/год разницы\n```\n\n**Провоцируемая ошибка** — сравнить два корректно посчитанных полных рынка и выбрать больший, не применив к обеим колонкам последний, никем не названный множитель доступа."
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: MI $20 M против CO $30 M → Colorado; (3) the naive reading is rejected explicitly, not merely avoided — MI $100 M против CO $60 M → Michigan must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: MI $20 M против CO $30 M → Colorado; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — MI $100 M против CO $60 M → Michigan обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "**Conclusion.** Home Inspection, Co. should enter Colorado, not Michigan — the analyst's table sizes the whole market, and the whole market is not the market we are allowed to serve.\n\n**Support.** The context notes carry a step the table never applies: Michigan lets third parties inspect only 20 % of its market, Colorado 50 %. Run the same last multiplication on both columns and the ranking inverts — Michigan drops from $100 million to $20 million of addressable revenue, Colorado from $60 million to $30 million. Colorado is a 50 % larger opportunity, on a $10 million revenue base. The same parameter explains the competition note we would otherwise have filed as a risk: Michigan's third-party regime has been open ten years and is crowded, Colorado's has been open two and a half and is not — so Colorado is both the bigger opening and the emptier one."
+   },
+   "anchor_metric": "клиентского порога нет; решение выносится сопоставлением двух штатов между собой, а не сравнением с правилом. Вердикт держится на том, что оба числа считаются по одной и той же цепочке и различаются только последним, никем не применённым множителем. Цель «increasing top line revenue» (стр. 193, блок Clarifying Questions) — направление, а не число. Доли 20 % / 50 % — это ограничение доступа к рынку, а не порог приёмки; выдавать их за порог нельзя"
+  },
+  {
    "id": "SY-021",
    "title": "Kegs Or Cans",
    "company": "",
@@ -1668,6 +2200,552 @@
     "en": "**Вывод (первым).** *We recommend Northwind Brewworks fund the upgraded canning system, and we recommend it on a stated convention rather than on cost, because on cost the two initiatives are a dead tie.*\n\n**Остальное.** Both initiatives deliver exactly $10m of ten-year savings — kegs move $40m of leasing to $30m of ownership, and the canning line moves $91m of operating cost to $81m all-in. Cost is therefore not a discriminator, and any recommendation built on it is arbitrary. The client stated two things on the way in: $20 million of available budget, and an interest in projects that support future growth after tripling volume in three years. Applying the growth convention, the canning system doubles throughput from 600 to 1,200 cases per hour at unchanged headcount, so it absorbs future volume without new labour; owning 400,000 kegs absorbs nothing — it only converts a rental stream into an asset. On the budget convention, the canning system enters at $18.7m net of $1.3m salvage and leaves headroom; the keg purchase consumes the full $20m on day one. Both conventions point the same way. The keg case is defensible only on a third convention — hedging against future lease increases — and if the board prefers that convention, we would recommend kegs, and we would say so explicitly rather than dress it as a cost result.\n\n---"
    },
    "anchor_metric": "$20,000,000 доступного бюджета (экзогенно, напечатано в промпте) + заявленная цель клиента «поддержка будущего роста»"
+  },
+  {
+   "id": "SY-022",
+   "title": "Soup Made Sense",
+   "company": "",
+   "industry": "",
+   "difficulty": "Medium",
+   "clean": false,
+   "focus": "",
+   "scaffold": "L2",
+   "time": "4 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Montoya Soup, a business unit of Izzy's Healthy Foods, grew revenue in F14 and raised the contribution margins on its Traditional and Light lines, but a spike in fixed costs pushed profitability down; to offset that in F15 it launched a Premium line to add volume and reach economies of scale, and although the team judged the launch a success, profitability fell again in F15. A colleague on the F16 planning team has circulated the working note below, has already closed the fixed-cost and input-price questions, and is about to pull the per-case variable input build for each line. You have four minutes with the note before the planning session: is the colleague's read of the Premium launch the one you would take into the room, and what do you tell the client to do?",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**Working note — Montoya Soup · F15 profitability review · prepared for the F16 planning session**",
+       "*Where we stand.* F14: revenue up, contribution margins up on Traditional and Light, but a spike in fixed costs pulled profitability down. F15: Premium launched to add volume and pull the unit up the scale curve. Revenue up again. Profitability down again. Same symptom, second year running.",
+       "*Step 1 — did the launch itself do its job?* Premium shipped 40M cases in its first year at a $6 contribution per case. That is $240M of contribution sitting in the F15 portfolio that was not there in F14. Retail is asking for more shelf space on the strength of it. On its own terms the launch cleared the bar the team set for it, so I am treating the top line as settled and moving to the cost side.",
+       "*Step 2 — so the erosion has to be in cost.* Went through it with the plant and with finance:",
+       "— Fixed costs. Gross margin less contribution margin gives fixed cost. F14: 1,360 − 60 = 1,300. F15: 1,356 − 56 = 1,300. Flat at $1.3B. Whatever spiked in F14 did not spike again.",
+       "— Input prices for Traditional and Light: unchanged from F14. No additional wastage. No change in formulation.",
+       "*Step 3 — where I am heading.* Revenue up, fixed costs flat, input prices flat, formulation unchanged — the erosion has to be sitting somewhere in variable cost. Next step is to pull the per-case variable input build for each of the three lines and find the component that moved. Contribution per case as it stands today: Traditional $10, Light $10, Premium $6.",
+       "**Data received after this note was circulated — Exhibit B, product lines.**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "",
+       "Traditional",
+       "Light",
+       "Premium"
+      ],
+      "rows": [
+       [
+        "Wholesale price",
+        "$28",
+        "$24",
+        "$30"
+       ],
+       [
+        "F14 volume (M cases)",
+        "80",
+        "60",
+        "—"
+       ],
+       [
+        "F15 volume (M cases)",
+        "60",
+        "55",
+        "40"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "Product marketing, on the launch: *\"Our research showed that many of our consumers were willing to pay more for a product with more meat and vegetable bounty in a carton (instead of a can). After testing several price points, we decided a lower margin and higher volume would help us reach the economies of scale we wanted to see. Consumers loved the product and thought it was a great bargain!\"*",
+       "**Also on file, not yet worked through**",
+       "*Exhibit A — performance metrics.*"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "",
+       "F10",
+       "F11",
+       "F12",
+       "F13",
+       "F14",
+       "F15"
+      ],
+      "rows": [
+       [
+        "Sales Vol. (M of cases)",
+        "126.5",
+        "130.4",
+        "131.7",
+        "136.5",
+        "140.0",
+        "155.0"
+       ],
+       [
+        "Sales Rev. (M)",
+        "$3,282",
+        "$3,366",
+        "$3,409",
+        "$3,560",
+        "$3,680",
+        "$4,200"
+       ],
+       [
+        "Contribution Margin (M)",
+        "$1,165",
+        "$1,212",
+        "$1,261",
+        "$1,264",
+        "$1,360",
+        "$1,356"
+       ],
+       [
+        "Gross Margin (M)",
+        "$65.2",
+        "$61.9",
+        "$61.4",
+        "$63.9",
+        "$60.0",
+        "$56.0"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "*Exhibit D — stakeholder input.*",
+       "Customer feedback: *\"We really loved the new Premium Montoya Soup offering, it brought a new consumer to the shelf-stable soup category when all of the other players were introducing products that just stole from their competitors.\"* · *\"We're planning to give more shelf space to Montoya Soup in F16 after their successful premium launch this year. Our guests really loved the new packaging format and the higher meat and vegetable content. Product trial wasn't extremely high, but we saw a lot of repeat purchases from the people who were buying.\"*",
+       "Consumer focus group: *\"I definitely think their brand is rising with me, the old stuff was mostly broth, this new stuff is a huge bargain and it actually has actual stuff in it.\"*",
+       "*Standing context.* Montoya sells cases of soup to buyers at grocery retailers who mark up the units inside to sell. Traditional, Light and Premium are the only product lines in the portfolio. Competitors are not playing in the premium space — only in value and super-premium.",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|\n| Читает первый абзац записки, видит «revenue up, profitability down» | Закрывает ревенью-сторону как объяснённую | Уравнение прибыли: если одна половина растёт, виновата другая |\n| Берёт 40M × $6 = $240M как прирост портфеля | Фиксирует запуск как успешный и больше к нему не возвращается | Готовая крупная сумма, набранная отдельной строкой, воспринимается как факт, а не как промежуточный результат |\n| Соглашается с пересчётом FC (1,360−60, 1,356−56 = 1,300) | Ветка постоянных издержек закрыта чужими руками, перепроверять некогда | Доверие к арифметике, которая сошлась |\n| Принимает «input prices unchanged, no wastage, no formulation change» | Остаётся единственный незакрытый угол — переменные издержки | Метод исключения по MECE-дереву, не спрашивая, полно ли дерево |\n| Заказывает построение переменных издержек по компонентам (бульон / мясо / овощи / упаковка / зарплаты) | Уходит в разбивку, где роста нет и быть не может | «Копнуть глубже там, где ещё не копали» вместо «проверить, туда ли копаем» |\n| Читает таблицу цен и объёмов как справку по ценам | Пара 80→60 и 60→55 проходит мимо глаз | Таблица подана после закрытия темы и адресована к переменным издержкам; роль блока задаёт то, куда его положили |\n| Выносит вердикт: «Запуск успешен, причина падения — переменные издержки, нужен разбор по компонентам» | Рекомендация без числа и без действия для клиента | Под таймером отчитаться о проделанном пути безопаснее, чем признать, что путь был не тот |",
+    "decoy": "1. **Сама постановка кейса.** Промпт клиента говорит «a spike in fixed costs caused them to see a dip in profitability» про F14 — прошлогоднее объяснение было именно затратным, и кандидат по инерции ищет то же самое второй раз.\n2. **Ветка издержек закрыта аккуратно, но не полностью.** Записка закрывает постоянные и входные цены — и оставляет переменные открытыми. Это выглядит как честно суженная воронка, а не как ложный след.\n3. **Реплика ритейлера** прямо отрицает переток: Premium «brought a new consumer to the shelf-stable soup category when all of the other players were introducing products that just stole from their competitors». Единственный голос в записи, который вообще касается вопроса «откуда объём», отвечает «извне».\n4. **Реплика про полку в F16.** Ритейлер расширяет листинг «after their successful premium launch» — коммерческое подтверждение успеха от того, кто платит.\n5. **Реплика продуктового маркетинга.** Пониженная маржа — сознательное решение ради масштаба, то есть $6 против $10 подан как исполненный план, а не как дефект.\n6. **Отсутствие конкурентов в premium.** «Competitors are not playing in the premium space» — значит объём Premium не отобран у соседей по полке; кандидат достраивает «значит он новый», хотя третий вариант (отобран у себя) не закрыт ничем.\n7. **Величина $240M** — самое крупное число в записи и единственное, посчитанное до конца. Числа, доведённые до результата, читаются как выводы.",
+    "support": "| Опора верного вывода | Настоящая или ложная |\n|---|---|\n| 80 → 60 по Traditional: минус 20M кейсов при неизменной цене $28 и неизменной рецептуре | **Настоящая.** Пара объёмов напечатана в Exhibit B стр. 155; падение не объясняется в записи ничем, а «input prices unchanged» прямо исключает подорожание как причину ухода объёма |\n| 60 → 55 по Light: минус 5M кейсов | **Настоящая.** Тот же Exhibit B; вместе с Traditional даёт ровно 25M — больше половины 40M объёма Premium |\n| Контрибуция ушедшего объёма $10 против $6 у пришедшего | **Настоящая.** Стр. 160 печатает «$10 contribution margin on Traditional & Light, $6 contribution margin on Premium (price – sum of VC's)»; ставки разные, значит перемещение объёма меняет прибыль даже при неизменной выручке |\n| −20×10 = −$200M и −5×10 = −$50M против +$240M → **−$10M** | **Настоящая.** Все три строки и итог напечатаны в таблице `Part 3 (continued)` стр. 161 |\n| Постоянные плоские $1.3B и неизменные входные цены | **Настоящая, но не как опора вывода, а как закрытие альтернативы.** Она не доказывает переток; она только оставляет переток единственным незакрытым объяснением, если кандидат догадался его рассмотреть |\n| «Запуск успешен, потому что 40M кейсов проданы» | **Ложная.** Объём проданного не измеряет вклад в прибыль, пока не назван его источник; в этой конкретной записи 25 из 40 млн кейсов уже приносили деньги по вдвое большей ставке |\n| Реплика ритейлера про «нового потребителя в категории» | **Ложная как опора.** Ритейлер наблюдает свою полку, а не портфель Montoya; при этом Product trial «wasn't extremely high» — новых покупателей пришло мало, а повторные покупки шли от уже имеющихся |\n| Расхождение суммы контрибуций по линиям ($1,390) с портфельной ($1,356) | **Не опора.** Книга это расхождение не объясняет; строить на нём вывод нельзя, и вердикт на нём не стоит |",
+    "risks": "*Внутренний.* Повышение цены Premium до $33 обрушивает объём линии вдвое, с 40M до 20M кейсов (стр. 156, Exhibit C, клиентский экзибит). Это половина годового объёма линии, под которую уже поставлены производственные и торговые обязательства, и ритейлер, расширяющий полку в F16 «after their successful premium launch», получит вдвое меньше оборота на этой полке — риск потерять расширение листинга прямо в год его получения. Книга это фиксирует: «Raising prices could upset some buyers and lose distribution» (стр. 162, `Risks`).\n\n*Внешний.* Конкуренты в premium-сегменте сегодня отсутствуют — они стоят в value и super-premium (стр. 160). Цена $33 открывает между ними коридор, куда конкурент может войти дешевле. Книга: «could competitor come in with a lower priced premium soup and force us out of the category?» (стр. 162, `Risks`). Плечо риска считается прямо: при потере линии Premium портфель теряет 40M кейсов оборота и уже не возвращает 25M кейсов по $10, потому что потребитель ушёл в картон, а не в банку.",
+    "next": "1. **Пересобрать вклад запуска по фактическому источнику объёма, а не по отгрузке линии** — панель покупок за F14–F15, чтобы отделить переключившихся с Traditional и Light от действительно новых покупателей категории. *Снимает неопределённость:* весь вердикт стоит на допущении, что вся убыль 25M кейсов ушла именно в Premium, а не в конкурента и не из категории; если часть убыли внешняя, чистый вклад запуска лучше −$10M.\n2. **Просчитать сценарий цены $33 на данных Exhibit C до постановки на F16-план** — объём 20M, каннибализация Traditional 10 %, Light 0 %. *Снимает неопределённость:* даёт вторую точку кривой спроса и показывает, лежит ли оптимум внутри диапазона $30–$33 или за его пределами.\n3. **Зафиксировать с ритейлером условие расширения полки при вдвое меньшем объёме Premium** до объявления цены. *Снимает неопределённость:* превращает риск потери дистрибуции из предположения в договорную величину.\n4. **Закрыть расхождение $34M между суммой контрибуций по линиям и портфельной контрибуцией F15** силами финансов. *Снимает неопределённость:* пока оно открыто, любая посчитанная по линиям цифра не смыкается с отчётностью, и вердикт нельзя защитить перед CFO.",
+    "build": "Чистый вклад запуска **−$10M книга печатает** в таблице `Part 3 (continued)` стр. 161, строка `Last Year`, колонка `Net Total Profit`. Код ниже — не построение, а сверка книжной строки с независимо восстановленными объёмами из Exhibit B стр. 155 и контрибуциями со стр. 160.\n\n```python\nfrom decimal import Decimal as D, ROUND_HALF_UP\n\n# Exhibit B, стр. 155 — оптовые цены и объёмы\np_tr, p_li, p_pr = D('28'), D('24'), D('30')\nv14_tr, v14_li            = D('80'), D('60')          # M cases\nv15_tr, v15_li, v15_pr    = D('60'), D('55'), D('40') # M cases\n\n# стр. 160, Part 3, колонка Cost Reduction — контрибуция на кейс\ncm_tr, cm_li, cm_pr = D('10'), D('10'), D('6')\n\n# сверка выручки с Exhibit A, стр. 154\nassert v14_tr*p_tr + v14_li*p_li                 == D('3680')  # F14 Sales Rev. $3,680M\nassert v15_tr*p_tr + v15_li*p_li + v15_pr*p_pr   == D('4200')  # F15 Sales Rev. $4,200M\n\n# сверка постоянных издержек: GM - CM = FC, стр. 159\nassert D('1360') - D('60') == D('1300')   # F14\nassert D('1356') - D('56') == D('1300')   # F15 — flat at $1.3B\n\n# вклад запуска\nprem_profit   =  v15_pr * cm_pr                    # 40 x 6\ntrad_lost     = (v14_tr - v15_tr) * cm_tr          # 20 x 10\nlight_lost    = (v14_li - v15_li) * cm_li          #  5 x 10\nnet           = prem_profit - trad_lost - light_lost\n\nassert prem_profit == D('240')   # стр. 161, Last Year, Profit\nassert trad_lost   == D('200')   # стр. 161, Trad. Profit Lost ($200)\nassert light_lost  == D('50')    # стр. 161, Light Profit Lost ($50)\nassert net         == D('-10')   # стр. 161, Net Total Profit ($10)\n\n# доля объёма Premium, пришедшая из собственных линий — ПОСТРОЕНО, книга не печатает\ndisplaced = (v14_tr - v15_tr) + (v14_li - v15_li)          # 25M cases\nshare = (displaced / v15_pr * D('100')).quantize(D('0.1'), ROUND_HALF_UP)\nassert displaced == D('25') and share == D('62.5')          # 62.5 % объёма Premium\n\n# сценарий цены $33 — входы Exhibit C стр. 156, итог стр. 161\nassert D('20')*D('9') - D('2')*D('10') - D('0') == D('160')\n\nprint(net, displaced, share)   # -10 25 62.5\n```\n\nВыполнено: `-10 25 62.5`. Величина **62.5 %** помечена «**ПОСТРОЕНО, книга не печатает**» — книга печатает объёмы и убыли, но не долю.\n\n**Провоцируемая ошибка** — принять контрибуцию линии за её вклад в прибыль портфеля и уйти искать рост издержек, которого нет, потому что источник объёма новой линии не вычтен.\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: −$10M; (3) the naive reading is rejected explicitly, not merely avoided — +$240M (и вывод «издержки не выросли — причина не найдена») must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: −$10M; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — +$240M (и вывод «издержки не выросли — причина не найдена») обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "**[1] Verdict.** *Reject the note's read: the Premium launch did not add $240M, it cost Montoya $10M in F15, and Montoya should reprice Premium rather than keep hunting for a variable-cost line that does not exist.*\n\n**[2] Support and next move.** *Three facts. First, the launch's own contribution is $240M — 40M cases at $6. Second, 25M of those 40M cases did not come from outside the portfolio: Traditional fell from 80M to 60M cases and Light from 60M to 55M over the same year, at unchanged wholesale prices and unchanged formulation. Third, that displaced volume earned $10 a case, not $6 — so the launch gave back $200M on Traditional and $50M on Light, and the net contribution of the launch is minus $10M. The colleague's cost hunt cannot find anything because there is nothing to find: fixed costs are flat at $1.3B in both years and input prices are unchanged. The problem is mix, not cost. Immediate next move: price Premium up — the demand data on file puts volume at 20M cases at $33 with Traditional cannibalization falling from 50% to 10% — and do not touch meat, vegetable or packaging content, because the whole value proposition of the line is exactly what those inputs buy. Two risks I would flag to the client: halving Premium volume in the year the retailer is expanding our shelf space could cost us that expansion, and a $33 price opens a gap for a competitor who today sits only in value and super-premium.*"
+   },
+   "anchor_metric": "клиентского порога нет; решение выносится сопоставлением, а не сравнением с правилом"
+  },
+  {
+   "id": "SY-023",
+   "title": "Wash Sale",
+   "company": "",
+   "industry": "",
+   "difficulty": "Medium",
+   "clean": false,
+   "focus": "",
+   "scaffold": "L1",
+   "time": "5 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "A+Airline Co. is the third largest airline in the United States by passengers carried; its primary competitor Gamma has stopped accepting cash for in-flight food and beverage and now takes major credit cards only, and A+Airline's CEO wants to know whether to follow. A colleague has already worked the numbers on an average flight and circulated the two-branch note below, and is ready to take a recommendation into the CEO's office on the strength of it. You have five minutes: does the colleague's conclusion hold, and what do you tell the CEO?",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**Working note — A+Airline Co. · cash-to-card decision · per average flight**",
+       "Framing I used: this is a BEFORE versus AFTER comparison of switching from a cash-and-card system to a card-only system, so I worked the two things that change and netted them.",
+       "**Branch 1 — what we give up on the top line**",
+       "An average A+Airline flight is a Boeing 737-800 Vers. 2 with 200 total seats.",
+       "**Exhibit 1 — an average A+Airline flight.**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "",
+       "% of Seats",
+       "Load Factor",
+       "% Business",
+       "% Leisure"
+      ],
+      "rows": [
+       [
+        "First Class",
+        "25.0%",
+        "100%",
+        "100%",
+        "0%"
+       ],
+       [
+        "Economy",
+        "75.0%",
+        "80%",
+        "50%",
+        "50%"
+       ]
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "",
+       "% that Purchase",
+       "Avg. Spend ($)"
+      ],
+      "rows": [
+       [
+        "Business",
+        "75.0%",
+        "$10"
+       ],
+       [
+        "Leisure",
+        "25.0%",
+        "$5"
+       ]
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "% of In-flight Purchases",
+       ""
+      ],
+      "rows": [
+       [
+        "Cash",
+        "20%"
+       ],
+       [
+        "Card",
+        "80%"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "*Note: First Class Passengers Receive Free Food & Beverage*",
+       "Worked through:"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "",
+       "Seats",
+       "Occupants",
+       "Business",
+       "Leisure"
+      ],
+      "rows": [
+       [
+        "First Class",
+        "50",
+        "50",
+        "50",
+        "0"
+       ],
+       [
+        "Economy",
+        "150",
+        "120",
+        "60",
+        "60"
+       ],
+       [
+        "Total",
+        "200",
+        "170",
+        "110",
+        "60"
+       ]
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "",
+       "# that Purchase",
+       "Total Purchase $"
+      ],
+      "rows": [
+       [
+        "Business",
+        "45",
+        "$450"
+       ],
+       [
+        "Leisure",
+        "15",
+        "$75"
+       ],
+       [
+        "Total",
+        "60",
+        "$525"
+       ]
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "",
+       "Cash",
+       "Card",
+       "Total"
+      ],
+      "rows": [
+       [
+        "In-flight $",
+        "$105",
+        "$420",
+        "$525"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "We were told we lose one third of cash customers when we move to card-only."
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "",
+       "#",
+       "$",
+       "New Total"
+      ],
+      "rows": [
+       [
+        "Business",
+        "3",
+        "($30)",
+        "$420"
+       ],
+       [
+        "Leisure",
+        "1",
+        "($5)",
+        "$70"
+       ],
+       [
+        "Total",
+        "4",
+        "($35)",
+        "$490"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "Branch 1 lands at **−$35 per flight**.",
+       "**Branch 2 — what we take out on the cost side**",
+       "Both processes carry a fee: cash management and card management both have 2% fees associated, so this is a wash and drops out of the comparison.",
+       "What does not drop out is the overhead that only the cash process needs — cash management carries additional headcount that card management does not, seven employees per airport on the cash side alone, and that headcount goes away. We were given the figure directly: the total, per flight, savings from eliminating overhead due to Cash Management Operations is **$35/flight**.",
+       "Branch 2 lands at **+$35 per flight**.",
+       "**Netting the two branches**",
+       "−35 + 35 = 0. The savings offset the loss exactly. On the numbers this is a wash, so the decision has to be made on the qualitative side, and there is plenty there:",
+       "— there is a 30 day time benefit to collecting payment by card rather than cash, so we would have the money 30 days sooner and could put it into interest-bearing accounts, into early-payment discounts with suppliers, or against the lines of credit;",
+       "— $50 per flight in change stops being tied up on the aircraft, and we stop losing cash to theft and damage;",
+       "— transactions get faster, so most customers place and receive their order sooner, and people at the back of the aircraft abandon fewer purchases.",
+       "**Standing context on file.** Roughly 99% of all consumers purchase their airline tickets using a credit card, so every consumer on the aircraft has a credit card available. Only food and alcoholic beverage items are sold on A+Airline flights. This is a US domestic decision only; ignore international. Gamma is the only airline that has made the switch, however all other airlines are evaluating it. For the purposes of this decision Gamma and A+Airline should be considered exactly the same in all regards.",
+       "**My read.** Financially neutral. I would go ahead on the working-capital and customer-experience arguments.",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|\n| Принимает рамку записи «BEFORE vs AFTER, считаем дельту» | Задача сведена к «собрать все плечи разницы» | Кейс сам сформулирован как сравнение двух состояний; рамку, которую дали, не проверяют |\n| Проверяет длинную арифметику первой ветви: 50 / 120 / 45 / 15 / $525 / $105 | Всё сходится, доверие к записи установлено | Сошедшаяся арифметика читается как гарантия качества всей записки |\n| Соглашается, что 2 % против 2 % — wash | Одна ветка закрыта чужими руками | Экономия внимания на том, что уже посчитано |\n| Кладёт −$35 и +$35 рядом и складывает | Получает $0 | Одинаковые числа в одинаковых знаках доллара просят сложения; отсутствие единицы измерения в строке «−35 + 35 = 0» снимает последний тормоз |\n| Объявляет финансовую нейтральность | Количественная часть закрыта, дальше решать нечем | Ноль — сильный, законченный на вид результат |\n| Уходит в качественные доводы: 30 дней, оборотный капитал, довольные клиенты | Рекомендация «переходить» с верным знаком по неверному основанию | Когда числа «молчат», консультант переключается на качество — и запись любезно подготовила три готовых довода |\n| Не спрашивает, в чём измерены плечи разницы | Подмена рамок остаётся ненайденной | Единицы проверяют, когда результат смущает; ноль не смущает |",
+    "decoy": "1. **Совпадение до цента.** −$35 и +$35 — редкое, красивое равенство; такие совпадения воспринимаются как признак того, что модель сошлась, а не как признак того, что сравнивают разное.\n2. **Асимметрия объёма ветвей.** Первая ветвь — девять шагов и пять таблиц, вторая — одна выданная строка. Кандидат тратит четыре пятых внимания на ту ветвь, где ошибки нет, и приходит ко второй уже уставшим.\n3. **Честно закрытая комиссия.** «2 % и 2 %, значит wash» — корректный ход, выполненный в записи. Он показывает, что автор записки умеет отбрасывать несущественное, и авансирует доверие к следующему ходу, который несущественное как раз не отбрасывает.\n4. **Готовый выход в качество.** Три качественных довода — TVM, оборотный капитал, скорость обслуживания — все настоящие и все из книги. Они дают ничьей осмысленное продолжение, и кандидату незачем возвращаться к числам.\n5. **Язык записи.** Первая ветвь говорит «revenue», вторая «savings», сумма не названа никак. Слово «прибыль» не произносится ни разу, и разница определений нигде не выходит на поверхность.\n6. **Внешнее подтверждение.** Gamma уже перешла, остальные оценивают, а Gamma и A+Airline «exactly the same in all regards» — знак, что ответ «переходить» и так верен; проверять основание вроде бы незачем.",
+    "support": "| Опора верного вывода | Настоящая или ложная |\n|---|---|\n| $35 экономии оверхеда — это ликвидированная затрата, то есть $35 прибыли целиком | **Настоящая.** Книга называет величину именно savings from eliminating overhead (стр. 86); устранённая затрата не имеет собственной себестоимости и переносится в прибыль один к одному |\n| $35 потерянной выручки — это прибыли только на величину контрибуции по еде и напиткам | **Настоящая.** Величина названа в книге как Revenue loss (стр. 87); чтобы превратить её в прибыль, нужна маржа, и книга её не даёт — но и не требует, потому что решает знак, а не число |\n| На непроданных четырёх покупках не тратится себестоимость еды и напитков | **Настоящая.** Товар, который не продан, не закуплен под эту продажу; книга прямо ограничивает ассортимент едой и алкоголем (стр. 85), то есть речь о физическом товаре с себестоимостью, а не об услуге |\n| Следовательно 35 − 35m > 0 при любой m < 1 — дельта строго положительна | **Настоящая, но только по знаку.** Величину назвать нельзя: m в книге не напечатана. Вердикт обязан это признать, а не подставить маржу |\n| Равенство двух чисел по $35 | **Ложная как опора.** Это совпадение величин, посчитанных по разным определениям; оно не свидетельствует ни о чём и должно быть названо и отвергнуто, а не разрешено критерием |\n| «Wash» по комиссиям 2 % / 2 % | **Настоящая, но не про то.** Корректно снимает третью величину и к сопоставлению выручки с прибылью отношения не имеет; в записи работает как знак добросовестности |\n| Три качественных довода — 30 дней, $50 сдачи, скорость | **Настоящие как выгоды, ложные как основание решения.** Они складываются поверх уже положительной дельты; строить на них решение значит принять несуществующую ничью |\n| «Gamma уже перешла, и мы с ней одинаковы» | **Ложная.** Совпадение ответа с чужим не заменяет основания; кандидат, опирающийся на это, не сможет назвать величину, которую защищает перед CEO |",
+    "risks": "*Внутренний.* Вся первая ветвь стоит на выданной величине «теряем треть кэш-клиентов»: это 4 человека и $35 на рейс. Величина не выведена из данных и не проверена — её сообщили. Если реальная потеря вдвое выше, потеря выручки на рейс становится ~$70, а экономия остаётся $35, и знак дельты зависит уже от маржи по еде: при m выше 50 % переход перестаёт окупаться на уровне рейса. При 50 бортах во флоте ошибка в этой одной величине масштабируется на весь парк.\n\n*Внешний.* Gamma — единственная перешедшая, все остальные авиакомпании «are evaluating the switch» (стр. 85). Если отрасль после оценки массово откажется, A+Airline останется вторым из двух перевозчиков без наличных, и потеря кэш-клиентов из разовой −$35 превратится в постоянный дифференциатор конкурентов на маршрутах, где выбор есть. Плечо: каждые дополнительные 10 % потерянных кэш-клиентов сверх выданной трети — это ещё ~$10,5 выручки на рейс.",
+    "next": "1. **Запросить у финансов контрибуционную маржу по бортовой еде и алкоголю** и пересчитать дельту как 35 − 35m. *Снимает неопределённость:* превращает вердикт из «строго положительно» в конкретную сумму на рейс и на флот, которую можно защищать перед CEO цифрой, а не знаком.\n2. **Проверить величину «треть кэш-клиентов» на данных Gamma**, которая уже перешла и, по условию, идентична нам во всех отношениях. *Снимает неопределённость:* единственное непроверенное допущение всей первой ветви, и единственное, способное развернуть знак.\n3. **Отделить оверхед кэш-процесса, который действительно исчезает, от того, который перераспределяется.** Семь сотрудников на аэропорт — это люди, а не строка; часть функций может уехать в карточный процесс. *Снимает неопределённость:* $35 экономии переносится в прибыль один к одному только если затрата исчезает целиком.\n4. **Оценить TVM и оборотный капитал отдельной строкой, а не в качестве аргумента.** 30 дней ускорения и $50 сдачи на борту при 50 бортах — считаемые величины. *Снимает неопределённость:* переводит качественную часть в тот же формат, что и основную дельту, и убирает соблазн решать «по качественным доводам».",
+    "build": "Книга печатает обе величины по $35 и печатает вычисление первой ветви целиком (стр. 86). **Книга не печатает** контрибуционную маржу по еде и напиткам ни в одном блоке стр. 84–89 — поэтому величина дельты прибыли построена, а не взята, и определён только её знак.\n\n```python\nfrom decimal import Decimal as D, ROUND_HALF_UP\n\n# --- Ветвь 1: восстановление $35 из Exhibit 1, стр. 88 ---\nseats = D('200')\nfc_seats = seats * D('0.25'); fc_occ = fc_seats * D('1.00'); fc_bus = fc_occ * D('1.00')\nec_seats = seats * D('0.75'); ec_occ = ec_seats * D('0.80')\nec_bus   = ec_occ * D('0.50'); ec_leis = ec_occ * D('0.50')\nassert (fc_seats, fc_occ, fc_bus) == (D('50'), D('50'), D('50'))   # стр. 86\nassert (ec_seats, ec_occ, ec_bus, ec_leis) == (D('150'), D('120'), D('60'), D('60'))\n\n# сноска Exhibit 1: первый класс питается бесплатно -> покупают только эконом-business\nbuy_bus  = ec_bus  * D('0.75'); spend_bus  = buy_bus  * D('10')\nbuy_leis = ec_leis * D('0.25'); spend_leis = buy_leis * D('5')\nassert (buy_bus, spend_bus)   == (D('45'), D('450'))               # стр. 86\nassert (buy_leis, spend_leis) == (D('15'), D('75'))                # стр. 86\ntotal = spend_bus + spend_leis\nassert total == D('525')\n\ncash = total * D('0.20'); card = total * D('0.80')\nassert (cash, card) == (D('105'), D('420'))                        # стр. 86\n\nlost_bus  = spend_bus  * D('0.20') / 3    # треть кэш-клиентов business\nlost_leis = spend_leis * D('0.20') / 3    # треть кэш-клиентов leisure\nassert lost_bus == D('30') and lost_leis == D('5')                 # стр. 86: (30) и (5)\nrevenue_loss = lost_bus + lost_leis\nassert revenue_loss == D('35') and total - revenue_loss == D('490')\n\n# --- Ветвь 2: выданная величина, стр. 86 ---\noverhead_saving = D('35')          # $/flight, целиком в прибыль\n\n# --- Наивная величина: вычитание несопоставимого ---\nnaive = (overhead_saving - revenue_loss).quantize(D('0.01'), ROUND_HALF_UP)\nassert naive == D('0.00')\n\n# --- Верная величина: ПОСТРОЕНО, книга не печатает маржу m ---\ndef profit_delta(m):\n    return (overhead_saving - revenue_loss * m).quantize(D('0.01'), ROUND_HALF_UP)\n\nfor m in ['0.20', '0.40', '0.60', '0.80', '0.95', '0.99']:\n    d = profit_delta(D(m))\n    assert d > 0, (m, d)\n    print(f'm={m}  profit delta = ${d}/flight')\n\nassert profit_delta(D('1.00')) == D('0.00')   # ничья возможна только при 100% марже\nprint('naive:', naive, '| correct: strictly > 0 for any m < 1')\n```\n\nВыполнено:\n```\nm=0.20  profit delta = $28.00/flight\nm=0.40  profit delta = $21.00/flight\nm=0.60  profit delta = $14.00/flight\nm=0.80  profit delta = $7.00/flight\nm=0.95  profit delta = $1.75/flight\nm=0.99  profit delta = $0.35/flight\nnaive: 0.00 | correct: strictly > 0 for any m < 1\n```\n\nСтрока `profit_delta(1.00) == 0` показывает, при каком единственном допущении наивная ничья была бы верна: если бы еда и напитки продавались с нулевой себестоимостью. Ассортимент — физический товар (стр. 85), так что это допущение исключено. Все величины со ставкой m помечены «**ПОСТРОЕНО, книга не печатает**».\n\n**Провоцируемая ошибка** — вычесть выручку из прибыли, получить ноль и объявить решение качественным, потому что обе величины равны $35 и запись нигде не называет, какая из них чем измерена."
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: +$35 × (1 − m) > 0, где m — контрибуционная маржа по еде и напиткам; строго положительно при любой m < 1; (3) the naive reading is rejected explicitly, not merely avoided — $0 (ничья: −$35 выручки против +$35 экономии) must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: +$35 × (1 − m) > 0, где m — контрибуционная маржа по еде и напиткам; строго положительно при любой m < 1; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — $0 (ничья: −$35 выручки против +$35 экономии) обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "*A+Airline should switch to card-only, and the CEO should be told the decision is not a close call — the note's \"wash\" is an artefact of comparing two different things. The two $35 figures are not comparable: the $35 of overhead we stop spending on cash management is $35 of profit, one for one, while the $35 of forgone in-flight sales is only profit to the extent of the contribution margin on food and beverage — and on the four purchases we no longer make, we also no longer buy the food. So the profit delta is $35 less thirty-five times the F&B margin, which is strictly positive for any margin below one hundred percent. Netting the two to zero is the one move I would not make, and I would say so before I said anything about working capital. The revenue arithmetic itself I checked and it holds: 200 seats, 45 business and 15 leisure buyers spending $525 a flight, twenty percent of it cash, one third of those customers lost — four people, $35. The 2% fee on both cash and card is correctly a wash. Two things I would flag. First, internal: the one-third attrition figure was handed to us, not derived; at double that rate the loss is $70 against $35 of savings and the sign turns on the margin, so I want it validated against Gamma's own numbers before we commit fifty aircraft. Second, external: Gamma is the only carrier that has switched and the rest are still evaluating — if the industry does not follow, a permanent cash-only competitor set makes this a recurring revenue drag rather than a one-off $35. Next step, this week: get the F&B contribution margin from finance so I can put a dollar figure per flight and per fleet in front of you instead of a sign.*"
+   },
+   "anchor_metric": "клиентского порога нет; ни hurdle rate, ни правила окупаемости в кейсе не напечатано; решение выносится сопоставлением двух дельт, а не сравнением с правилом"
+  },
+  {
+   "id": "SY-024",
+   "title": "Sweat Equity",
+   "company": "",
+   "industry": "",
+   "difficulty": "Medium",
+   "clean": false,
+   "focus": "",
+   "scaffold": "L1",
+   "time": "4 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "A gym franchisor asked the team where to grow and how to improve profitability; an associate has already worked the location economics for one average gym and put the note below in front of you. You have four minutes with the engagement manager before she walks into the client room. Read the note and tell her what the client should actually do — and why.",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**Client goal, as stated by the franchisor.** Grow the business and improve profitability in a highly competitive market.",
+       "**Associate's working note — economics of one average location, monthly.**",
+       "*Format.* Average 3,000 square feet in a local strip mall. Standard fitness equipment, no group fitness classes. Open 24 hours per day and 7 days a week. Members enter the gym via an access card and staffing at the gym is minimal. Membership is a flat monthly fee. The franchisor has franchisees across the U.S. and the business is growing rapidly.",
+       "*Revenue inputs, per member.* Monthly membership dues $40 / month. Vending machine $5 / month. Personal training $15 / month.",
+       "*Cost inputs.* Rent $2 per square foot per month. Equipment $144,000 initial cost, depreciated over 3 years, $0 salvage value. Labor $20 per hour, 2 people on staff at a time. Utilities $400 / month. Franchise fees $300 / month. Marketing $100 / month. A month is modeled as 4 weeks.",
+       "*Rolled up.* Total cost of the location is $37,680 per month. The location is currently not making any profit.",
+       "*Question put to the team.* If the client wants to increase revenue by 10%, how many more members on average does a location need to acquire?",
+       "**[m-7f]** Revenue per member is $40 + $5 + $15 = $60 / month. With $37,680 of monthly cost and no profit, the location carries 37,680 / 60 = 628 members today. Revenue up 10% is $41,448 / month, which is 41,448 / 60 ≈ 690 members. Gap: 62 members. Note to self: on a base of 628 that is a small ask, and the franchise pipeline is the obvious place to find it.",
+       "**[m-3q]** The $37,680 has not been broken into its line items in this note.",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|\n| Читает [m-7f], видит доведённую до конца цепочку 628 → 690 → 62 и принимает её как результат записи | 62 члена — ответ | «Ветка, которую довели до числа, и есть ответ» |\n| Сверяет 62 против базы 628 | «Это ~10% базы, вполне достижимо» | Сравнение с базой вместо сравнения с альтернативным рычагом |\n| Подтягивает контекст: франчайзи по всей стране, бизнес растёт быстро, цель клиента — «grow» | «Добираем членов и открываем новые точки» | Достраивание вывода из цели клиента, а не из данных |\n| Затратную сторону оставляет: она дана россыпью ставок в разных единицах, а [m-3q] прямо помечена как несведённая | Себестоимость не декомпозирована, труд никогда не всплывает | 80/20 наоборот: считаем то, что уже сведено |\n| Формулирует вердикт | «Расти в новые локации плюс привлечение членов» — ровно то, к чему ведёт формулировка вопроса | «Отвечай на заданный вопрос» |\n\n**DECOY_SUPPORT (вторым)** — чем наивный путь кажется подкреплённым\n1. Арифметика наивной ветви **верна до последней цифры** и сходится с книгой (стр. 57, `Calculations`): 62 — это ровно тот ответ, который книга печатает на заданный вопрос. Ловушка не в ошибке счёта.\n2. Книга сама благословляет наивный вывод: «This numbers seem achievable, especially if the client targets rural areas where there is still relatively strong interest in fitness with low competition» — стр. 57, блок `Key Takeaways`; и «it makes more sense to focus on expanding franchising effort in rural markets» — стр. 59, блок `Recommendation`. Оба блока адресованы интервьюеру и в запись не идут, но кандидат, который «знает книгу», получит подтверждение своей ошибки.\n3. Книга прямо уводит от труда: «Client's gym is only very minimal in terms of staffing and equipments that cutting cost could be more challenging here. The biggest cost contribution here is probably rent» — стр. 54, блок `Business insights`. Это ложная опора: аренда $6,000 в 4.48 раза меньше труда $26,880.\n4. Цель клиента, вынесенная в R7 отдельным блоком, содержит «grow their business» — и «добрать 62 члена» читается как прямой ответ на неё.\n5. Прирост в 10% на растущем бизнесе выглядит консервативно — масштаб не вызывает подозрений.\n\n**SUPPORT (третьим)** — что на самом деле держит верный вывод\n1. **Настоящая, напечатанная опора.** Стр. 53, блок `Problem Statement`: «They are open 24 hours per day and 7 days a week» и, через предложение, «Members enter the gym via an access card and staffing at the gym is minimal». Стр. 56, блок `Additional Information (Provide Upon Request)`: «Labor $20 / hour (2 people on staff at a time)». Две строки из двух клиентских блоков описывают **несовместимые** вещи: 2 человека × 24 ч × 7 дн = 336 человеко-часов в неделю — это не «minimal staffing», это круглосуточная укомплектованная смена в зале с карточным доступом, где по описанию модели персонал не нужен. Вывод стоит на этом противоречии, а не на предпочтении автора: обе строки напечатаны, обе клиентские, обе входные.\n2. **Настоящая опора.** Труд $26,880 = 71.3% себестоимости $37,680 (стр. 57, `Calculations`). Ни один другой рычаг не сопоставим по величине: аренда 15.9%, оборудование 10.6%, прочее 2.1%.\n3. **Настоящая опора.** Сопоставление рычагов в одних единицах: 62 члена дают +$3,720/мес; уход на одного дежурного даёт −$13,440/мес, то есть 3.61× больше, и эквивалентен 224 новым членам без единого нового члена. Обе величины ПОСТРОЕНЫ из книжных входов и пересчитаны в `Decimal`.\n4. **Ложная опора, назвать вслух.** «The biggest cost contribution here is probably rent» (стр. 54, `Business insights`) — блок интервьюера, и он фактически неверен по числам самой книги. Опираться на него нельзя; называть его надо, потому что именно он объясняет, почему затратная сторона в записи не разобрана.\n5. **Ложная опора, назвать вслух.** «Our client could improve profitability by 10% if they can increase membership by 62 members» (стр. 59, блок `Recommendation`) — вопрос на стр. 56 спрашивал про рост **выручки** на 10%, а рекомендация говорит про **прибыль**, при том что прибыль локации сейчас ровно ноль и 10% от нуля есть ноль. Подмена базы напечатана в книге; кандидат, который её замечает, получает второй независимый признак, что наивная ветвь не выдерживает.\n6. **Граница вывода, обязательна в ответе.** Книга нигде не предлагает резать труд — вывод книгой не благословлён. Он держится не на авторитете книги, а на том, что описание модели (24/7 + карта доступа + «minimal») и строка затрат (2 человека в смене круглосуточно) не могут быть верны одновременно. Честная формулировка: одна из двух строк описывает не то, что происходит в зале, и это первое, что надо проверить у клиента.\n\n**РИСКИ** (внутренний + внешний, каждый с цифрой)\n* **Внутренний.** Уход на одного дежурного освобождает $13,440/мес, но в зале на 3,000 кв. футов с карточным доступом остаётся оборудование первоначальной стоимостью $144,000 (3 года, salvage $0) и часть из 168 часов недели проходит без второго человека: рост порчи, травматизма и страховых издержек может съесть часть экономии.\n* **Внешний.** База в 628 членов на фиксированных $60/мес в «highly competitive market»: отток всего 62 членов (9.9% базы) стирает ровно тот прирост, за которым клиента посылает наивная ветвь, и обнуляет её экономику быстрее, чем окупится любая кампания привлечения.",
+    "decoy": "1. Арифметика наивной ветви **верна до последней цифры** и сходится с книгой (стр. 57, `Calculations`): 62 — это ровно тот ответ, который книга печатает на заданный вопрос. Ловушка не в ошибке счёта.\n2. Книга сама благословляет наивный вывод: «This numbers seem achievable, especially if the client targets rural areas where there is still relatively strong interest in fitness with low competition» — стр. 57, блок `Key Takeaways`; и «it makes more sense to focus on expanding franchising effort in rural markets» — стр. 59, блок `Recommendation`. Оба блока адресованы интервьюеру и в запись не идут, но кандидат, который «знает книгу», получит подтверждение своей ошибки.\n3. Книга прямо уводит от труда: «Client's gym is only very minimal in terms of staffing and equipments that cutting cost could be more challenging here. The biggest cost contribution here is probably rent» — стр. 54, блок `Business insights`. Это ложная опора: аренда $6,000 в 4.48 раза меньше труда $26,880.\n4. Цель клиента, вынесенная в R7 отдельным блоком, содержит «grow their business» — и «добрать 62 члена» читается как прямой ответ на неё.\n5. Прирост в 10% на растущем бизнесе выглядит консервативно — масштаб не вызывает подозрений.\n\n**SUPPORT (третьим)** — что на самом деле держит верный вывод\n1. **Настоящая, напечатанная опора.** Стр. 53, блок `Problem Statement`: «They are open 24 hours per day and 7 days a week» и, через предложение, «Members enter the gym via an access card and staffing at the gym is minimal». Стр. 56, блок `Additional Information (Provide Upon Request)`: «Labor $20 / hour (2 people on staff at a time)». Две строки из двух клиентских блоков описывают **несовместимые** вещи: 2 человека × 24 ч × 7 дн = 336 человеко-часов в неделю — это не «minimal staffing», это круглосуточная укомплектованная смена в зале с карточным доступом, где по описанию модели персонал не нужен. Вывод стоит на этом противоречии, а не на предпочтении автора: обе строки напечатаны, обе клиентские, обе входные.\n2. **Настоящая опора.** Труд $26,880 = 71.3% себестоимости $37,680 (стр. 57, `Calculations`). Ни один другой рычаг не сопоставим по величине: аренда 15.9%, оборудование 10.6%, прочее 2.1%.\n3. **Настоящая опора.** Сопоставление рычагов в одних единицах: 62 члена дают +$3,720/мес; уход на одного дежурного даёт −$13,440/мес, то есть 3.61× больше, и эквивалентен 224 новым членам без единого нового члена. Обе величины ПОСТРОЕНЫ из книжных входов и пересчитаны в `Decimal`.\n4. **Ложная опора, назвать вслух.** «The biggest cost contribution here is probably rent» (стр. 54, `Business insights`) — блок интервьюера, и он фактически неверен по числам самой книги. Опираться на него нельзя; называть его надо, потому что именно он объясняет, почему затратная сторона в записи не разобрана.\n5. **Ложная опора, назвать вслух.** «Our client could improve profitability by 10% if they can increase membership by 62 members» (стр. 59, блок `Recommendation`) — вопрос на стр. 56 спрашивал про рост **выручки** на 10%, а рекомендация говорит про **прибыль**, при том что прибыль локации сейчас ровно ноль и 10% от нуля есть ноль. Подмена базы напечатана в книге; кандидат, который её замечает, получает второй независимый признак, что наивная ветвь не выдерживает.\n6. **Граница вывода, обязательна в ответе.** Книга нигде не предлагает резать труд — вывод книгой не благословлён. Он держится не на авторитете книги, а на том, что описание модели (24/7 + карта доступа + «minimal») и строка затрат (2 человека в смене круглосуточно) не могут быть верны одновременно. Честная формулировка: одна из двух строк описывает не то, что происходит в зале, и это первое, что надо проверить у клиента.\n\n**РИСКИ** (внутренний + внешний, каждый с цифрой)\n* **Внутренний.** Уход на одного дежурного освобождает $13,440/мес, но в зале на 3,000 кв. футов с карточным доступом остаётся оборудование первоначальной стоимостью $144,000 (3 года, salvage $0) и часть из 168 часов недели проходит без второго человека: рост порчи, травматизма и страховых издержек может съесть часть экономии.\n* **Внешний.** База в 628 членов на фиксированных $60/мес в «highly competitive market»: отток всего 62 членов (9.9% базы) стирает ровно тот прирост, за которым клиента посылает наивная ветвь, и обнуляет её экономику быстрее, чем окупится любая кампания привлечения.",
+    "support": "1. **Настоящая, напечатанная опора.** Стр. 53, блок `Problem Statement`: «They are open 24 hours per day and 7 days a week» и, через предложение, «Members enter the gym via an access card and staffing at the gym is minimal». Стр. 56, блок `Additional Information (Provide Upon Request)`: «Labor $20 / hour (2 people on staff at a time)». Две строки из двух клиентских блоков описывают **несовместимые** вещи: 2 человека × 24 ч × 7 дн = 336 человеко-часов в неделю — это не «minimal staffing», это круглосуточная укомплектованная смена в зале с карточным доступом, где по описанию модели персонал не нужен. Вывод стоит на этом противоречии, а не на предпочтении автора: обе строки напечатаны, обе клиентские, обе входные.\n2. **Настоящая опора.** Труд $26,880 = 71.3% себестоимости $37,680 (стр. 57, `Calculations`). Ни один другой рычаг не сопоставим по величине: аренда 15.9%, оборудование 10.6%, прочее 2.1%.\n3. **Настоящая опора.** Сопоставление рычагов в одних единицах: 62 члена дают +$3,720/мес; уход на одного дежурного даёт −$13,440/мес, то есть 3.61× больше, и эквивалентен 224 новым членам без единого нового члена. Обе величины ПОСТРОЕНЫ из книжных входов и пересчитаны в `Decimal`.\n4. **Ложная опора, назвать вслух.** «The biggest cost contribution here is probably rent» (стр. 54, `Business insights`) — блок интервьюера, и он фактически неверен по числам самой книги. Опираться на него нельзя; называть его надо, потому что именно он объясняет, почему затратная сторона в записи не разобрана.\n5. **Ложная опора, назвать вслух.** «Our client could improve profitability by 10% if they can increase membership by 62 members» (стр. 59, блок `Recommendation`) — вопрос на стр. 56 спрашивал про рост **выручки** на 10%, а рекомендация говорит про **прибыль**, при том что прибыль локации сейчас ровно ноль и 10% от нуля есть ноль. Подмена базы напечатана в книге; кандидат, который её замечает, получает второй независимый признак, что наивная ветвь не выдерживает.\n6. **Граница вывода, обязательна в ответе.** Книга нигде не предлагает резать труд — вывод книгой не благословлён. Он держится не на авторитете книги, а на том, что описание модели (24/7 + карта доступа + «minimal») и строка затрат (2 человека в смене круглосуточно) не могут быть верны одновременно. Честная формулировка: одна из двух строк описывает не то, что происходит в зале, и это первое, что надо проверить у клиента.\n\n**РИСКИ** (внутренний + внешний, каждый с цифрой)\n* **Внутренний.** Уход на одного дежурного освобождает $13,440/мес, но в зале на 3,000 кв. футов с карточным доступом остаётся оборудование первоначальной стоимостью $144,000 (3 года, salvage $0) и часть из 168 часов недели проходит без второго человека: рост порчи, травматизма и страховых издержек может съесть часть экономии.\n* **Внешний.** База в 628 членов на фиксированных $60/мес в «highly competitive market»: отток всего 62 членов (9.9% базы) стирает ровно тот прирост, за которым клиента посылает наивная ветвь, и обнуляет её экономику быстрее, чем окупится любая кампания привлечения.",
+    "risks": "* **Внутренний.** Уход на одного дежурного освобождает $13,440/мес, но в зале на 3,000 кв. футов с карточным доступом остаётся оборудование первоначальной стоимостью $144,000 (3 года, salvage $0) и часть из 168 часов недели проходит без второго человека: рост порчи, травматизма и страховых издержек может съесть часть экономии.\n* **Внешний.** База в 628 членов на фиксированных $60/мес в «highly competitive market»: отток всего 62 членов (9.9% базы) стирает ровно тот прирост, за которым клиента посылает наивная ветвь, и обнуляет её экономику быстрее, чем окупится любая кампания привлечения.",
+    "next": "1. Снять фактический график присутствия персонала по локациям за 4 недели и сопоставить с посещаемостью по логам карт доступа. Снимает неопределённость: какая из двух напечатанных строк — «minimal staffing» или «2 people on staff at a time» — описывает реальность; без этого величина $26,880 остаётся модельной, а не наблюдённой.\n2. Смоделировать три режима укомплектования (2 дежурных 24/7; 1 дежурный 24/7; укомплектованные пиковые часы + карточный доступ вне их) с расчётом $/мес и члено-эквивалента для каждого. Снимает неопределённость: сколько именно из $26,880 реально освобождается, а не «можно ли резать в принципе».\n3. Только после этого вернуться к вопросу о привлечении членов и рурал-франшизе — с уже известной величиной альтернативного рычага, чтобы 62 члена сравнивались с $13,440, а не с базой 628.\n\n**ЭТАЛОННЫЙ ОТВЕТ ПО ПОЛЯМ (EN)** — L1, одно свободное поле\n\nThe client should stop sizing the member gap and re-cut the staffing model — that is where the money is, and the note points at the wrong lever. Labor runs $26,880 a month, 71% of the location's $37,680 cost base, while the 62 members the question asks for are worth $3,720 a month — a 7-to-1 difference in the client's favor on the cost side. Labor is also the one line that contradicts the business model we were handed: a 24/7 access-card gym described as minimally staffed is in fact carrying two attendants around the clock, 336 person-hours a week. Moving to a single attendant releases $13,440 a month — the equivalent of 224 new members — without signing up one. Two caveats I would state to the client: one of those two descriptions of the gym is wrong, and we need the actual staffing rosters and card-access logs before we quantify the cut; and on a 628-member base at a flat $60, churn of 62 members erases the entire membership upside anyway. Next step: pull four weeks of rosters and access logs across locations and price three staffing regimes, then bring the member-acquisition question back with a number to compare it against.",
+    "build": "```python\nfrom decimal import Decimal as D, ROUND_HALF_UP\n\ndef r(x, q=\"0.01\"):\n    return x.quantize(D(q), rounding=ROUND_HALF_UP)\n\n# --- входы из книги (стр. 53 Problem Statement; стр. 56 Additional Information) ---\nsqft        = D(\"3000\")\nrent_rate   = D(\"2\")        # $ / кв.фут / мес\nequip_cost  = D(\"144000\")   # $, 3 года, salvage 0\nequip_years = D(\"3\")\nwage        = D(\"20\")       # $ / час\nstaff       = D(\"2\")        # человек в смене\nhours_day   = D(\"24\")\ndays_week   = D(\"7\")\nweeks_month = D(\"4\")\nutilities, franchise, marketing = D(\"400\"), D(\"300\"), D(\"100\")\nrev_dues, rev_vending, rev_pt   = D(\"40\"), D(\"5\"), D(\"15\")\n\n# --- воспроизведение книжной арифметики (стр. 57, блок Calculations) ---\nrev_member = rev_dues + rev_vending + rev_pt\nrent  = rent_rate * sqft\nequip = equip_cost / equip_years / D(\"12\")\nlabor = staff * wage * hours_day * days_week * weeks_month\nother = utilities + franchise + marketing\ntotal = rent + equip + labor + other\n\nassert rev_member == D(\"60\"),    rev_member\nassert rent       == D(\"6000\"),  rent\nassert equip      == D(\"4000\"),  equip\nassert labor      == D(\"26880\"), labor\nassert other      == D(\"800\"),   other\nassert total      == D(\"37680\"), total          # «Cost Total: $37,680», стр. 57\n\nmembers_now = total / rev_member\nnew_revenue = total * D(\"1.10\")\nmembers_new = new_revenue / rev_member\nassert members_now == D(\"628\"),    members_now   # «628 Members», стр. 57\nassert new_revenue == D(\"41448\"),  new_revenue   # «$41,448 / month», стр. 57\nassert r(members_new) == D(\"690.80\"), members_new  # книга округляет до ~690\nnaive_gap = D(\"690\") - members_now\nassert naive_gap == D(\"62\"), naive_gap           # «62 Members», стр. 57\n\n# --- ПОСТРОЕНО, книга не печатает ---\nlabor_share   = r(labor / total * D(\"100\"), \"0.1\")          # доля труда в себестоимости\nnaive_value   = naive_gap * rev_member                      # что дают 62 члена\nlabor_vs_rent = r(labor / rent)                             # труд против аренды\nperson_hours  = staff * hours_day * days_week               # человеко-часов в неделю\nlabor_one     = D(\"1\") * wage * hours_day * days_week * weeks_month\nsaving_one    = labor - labor_one                           # уход на одного дежурного\nmember_equiv  = saving_one / rev_member                     # в членах\nratio         = r(saving_one / naive_value)                 # во сколько раз крупнее\n\nassert labor_share   == D(\"71.3\"),  labor_share\nassert naive_value   == D(\"3720\"),  naive_value\nassert labor_vs_rent == D(\"4.48\"),  labor_vs_rent\nassert person_hours  == D(\"336\"),   person_hours\nassert saving_one    == D(\"13440\"), saving_one\nassert member_equiv  == D(\"224\"),   member_equiv\nassert ratio         == D(\"3.61\"),  ratio\nassert saving_one > naive_value                              # рычаг крупнее наивного прироста\nassert labor > rent * D(\"4\")                                 # «biggest cost is probably rent» неверно\n```\n\n**Провоцируемая ошибка** — кандидат отвечает на арифметически корректный вопрос («62 члена, достижимо, растём франшизой») и не декомпозирует себестоимость, где 71.3% занимает строка труда, прямо противоречащая напечатанному описанию зала.\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: Труд $26,880/мес = 71.3% всей себестоимости $37,680; уход на одного дежурного освобождает $13,440/мес ≡ 224 члена; (3) the naive reading is rejected explicitly, not merely avoided — 62 члена (+$3,720/мес выручки) must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: Труд $26,880/мес = 71.3% всей себестоимости $37,680; уход на одного дежурного освобождает $13,440/мес ≡ 224 члена; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — 62 члена (+$3,720/мес выручки) обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "The client should stop sizing the member gap and re-cut the staffing model — that is where the money is, and the note points at the wrong lever. Labor runs $26,880 a month, 71% of the location's $37,680 cost base, while the 62 members the question asks for are worth $3,720 a month — a 7-to-1 difference in the client's favor on the cost side. Labor is also the one line that contradicts the business model we were handed: a 24/7 access-card gym described as minimally staffed is in fact carrying two attendants around the clock, 336 person-hours a week. Moving to a single attendant releases $13,440 a month — the equivalent of 224 new members — without signing up one. Two caveats I would state to the client: one of those two descriptions of the gym is wrong, and we need the actual staffing rosters and card-access logs before we quantify the cut; and on a 628-member base at a flat $60, churn of 62 members erases the entire membership upside anyway. Next step: pull four weeks of rosters and access logs across locations and price three staffing regimes, then bring the member-acquisition question back with a number to compare it against."
+   },
+   "anchor_metric": "клиентского порога нет; решение выносится сопоставлением величин двух рычагов, а не сравнением с правилом"
+  },
+  {
+   "id": "SY-025",
+   "title": "Stick A Needle In My Eye",
+   "company": "",
+   "industry": "",
+   "difficulty": "Medium",
+   "clean": false,
+   "focus": "",
+   "scaffold": "L1",
+   "time": "5 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "VaxCo has developed a hybrid vaccine unit — a vial with an integrated needle that both stores the vaccine and delivers it, replacing today's separate vial-plus-syringe. An analyst on the team has already pulled the unit economics and the stakeholder survey and left the working table below. In five minutes you brief the partner ahead of the client call. What is your verdict on how VaxCo should price this product, and what does the client need to hear?",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**Product.** One hybrid unit replaces two items the customer buys today: the traditional vaccine vial and the syringe used to inject it. Vaccines are administered to patients via syringes by nursing staff; doctors take up that responsibility in rare instances. VaxCo has spent $5M in R&D on the hybrid method; the method is ready and patented. Regulatory approvals from medical agencies have not been obtained yet. VaxCo today manufactures vaccines and the vial they go in, has no syringe manufacturing experience, but with suitable investments has the capability to manufacture the needled vials in-house.",
+       "**Unit economics as pulled.**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Line",
+       "Amount"
+      ],
+      "rows": [
+       [
+        "Traditional vaccine vial — price to customer",
+        "$14 / vial"
+       ],
+       [
+        "Traditional vaccine vial — COGS",
+        "$7 / vial"
+       ],
+       [
+        "Syringe — price to customer",
+        "$6 / syringe"
+       ],
+       [
+        "Hybrid vaccine vial — COGS",
+        "$10 / vial"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "**Pricing options on the table.**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Option",
+       "Basis used",
+       "Working",
+       "Price",
+       "Margin to VaxCo"
+      ],
+      "rows": [
+       [
+        "A",
+        "Hold VaxCo's current **dollar** margin per vaccine",
+        "current dollar margin = $14 − $7 = $7; hybrid price = $10 COGS + $7 = $17",
+        "$17 / unit",
+        "$7 / unit"
+       ],
+       [
+        "B",
+        "Hold what the customer pays today",
+        "customer pays $14 + $6 = $20 today; hybrid COGS $10",
+        "$20 / unit",
+        "$10 / unit"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "**[m-2k]** Option A is the line the analyst carried into the model: the dollar margin per vaccine is unchanged at $7 versus the traditional product, so the switch does not disturb VaxCo's unit economics. Price to quote: $17.",
+       "**[m-9d]** Option B was written down at the same time and left where it stands.",
+       "**Exhibit A — stakeholder survey across 3,000 hospitals.** Three of the four key stakeholder groups favor the hybrid vial.",
+       "\"Making vaccine delivery process easier and reducing complexity would be very helpful.\" — Dr. Anonymous",
+       "\"No reason why there should not be technological developments in this space. Has there been any improvement in vaccine delivery since the 1900s? This seems to be it!\" — Patient Anonymous (works in tech)",
+       "\"This would require re-training for a lot of our nursing staff and make partial doses, which are 30% of all doses, harder to administer.\" — Nurse Anonymous",
+       "\"A hybrid vial seems to a good way to push hospital costs down in addition to taking innovative steps in the right direction! Huge fan of the proposal.\" — Admin, Anonymous Hospital",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|\n| Видит в таблице R3 доведённую строку A и одностроч­ную B, берёт A | $10 + $7 = $17 | «Доведённая ветка и есть результат записи» |\n| Обосновывает: юнит-экономика при смене продукта не должна меняться | «$17 — консервативно и защитимо» | Дисциплина «не трогай маржу», применённая как правило, а не как выбор |\n| Проверяет себя арифметикой | 14 − 7 = 7; 10 + 7 = 17 — всё сходится | Проверка счёта вместо проверки базы |\n| Выдаёт **число** как вердикт | «Оптимальная цена — $17» | Ответ величиной там, где ответом является конвенция |\n| Exhibit A читает как поддержку: трое из четырёх «за» | «Рынок готов, вопрос только в цене» | Счёт голосов вместо взвешивания того, кто вообще колет |\n| 30% частичных доз читает как операционное неудобство для брейншторма | Адресуемая база остаётся 100% | Качественная цитата не переводится в число |\n\n**DECOY_SUPPORT (вторым)** — чем наивный путь кажется подкреплённым\n1. Арифметика опции A безупречна и совпадает с книгой (стр. 65, блок `Answer`): $17 — не ошибка счёта, а один из двух вариантов, которые книга сама печатает.\n2. Удержание абсолютной маржи при замене продукта — стандартная, преподаваемая дисциплина; ответ выглядит профессионально сдержанным, а не наивным.\n3. Утопленные $5M на R&D и отсутствие опыта в шприцах (стр. 62, `Additional Information`) подталкивают к «не жадничать»: $17 читается как цена, которая не отпугнёт покупателя.\n4. Exhibit A даёт три голоса «за» из четырёх, включая админа с прямым «push hospital costs down» — при цене $17 против сегодняшних $20 это выглядит как подтверждение.\n5. Книга не даёт «правильной» цены нигде, поэтому кандидат, ищущий один ответ, цепляется за тот, который дальше всех доведён.\n\n**SUPPORT (третьим)** — что на самом деле держит верный вывод\n1. **Настоящая опора.** Обе конвенции напечатаны и обе защищены книгой на одной странице (стр. 65, блок `Answer`), а «оптимальной» цены книга не называет ни на одной из девяти страниц кейса. Следовательно, вердикт, состоящий из одного числа, отвечает не на тот вопрос: результат целиком висит на выборе базы, и назвать надо базу.\n2. **Настоящая опора.** Цена каждой конвенции считается из клиентских входов стр. 64 и различима: A — цена $17, маржа $7, но клиент сегодня платит $20, значит мы сами оставляем $3/доза на столе; B — цена $20, маржа $10, но у клиента нет ни цента экономии, то есть нет причины переходить. Обе цены — $/доза, обе абсолютные; развилка идёт по стороне сделки, а не по единице измерения.\n3. **Настоящая опора, второй слой.** Цитата медсестры (стр. 69, `Exhibit A`) содержит число: частичные дозы — 30% всех доз, и гибридный флакон их не отдаёт. Значит адресуемая база не 100%, а 70%: на 100 доз конвенция B зарабатывает $700 вместо $1,000, конвенция A — $490 вместо $700. Слой переворачивает **обе** ветви и не чинится ни одной ценовой конвенцией — это и есть второй порядок слота.\n4. **Настоящая опора.** Вес медсестры не равен весу остальных трёх голосов: «vaccines are administered to the patients via syringes by nursing staff» (стр. 62, `Additional Information`) — единственный несогласный стейкхолдер и есть тот, кто выполняет процедуру. Счёт «трое из четырёх» — ложная опора; назвать её вслух.\n5. **Третья конвенция — только сюда, не во вход.** Можно держать **процентную** маржу: $7 / $14 = 50% → $10 / 0.5 = $20, что численно совпадает с конвенцией B при другом обосновании. Упомянуть её стоит как полноту разбора, но строить на ней вход слота нельзя: развилка «процент против абсолюта» — перегруженное движение библиотеки.\n6. **Ложная опора, назвать вслух.** $5M на R&D — утопленные затраты (книга сама предлагает обсудить это как sunk cost, стр. 68, блок `Next Steps` — блок интервьюера). Их нельзя вносить в цену ни при одной конвенции.\n\n**РИСКИ** (внутренний + внешний, каждый с цифрой)\n* **Внутренний.** COGS гибрида $10 — оценка при том, что у VaxCo нет опыта производства шприцев и производство надо ставить in-house под инвестиции. Промах по COGS всего на $3/доза стирает всю маржу конвенции A ($7 → $4 при цене $17) и приводит её ниже маржи традиционного продукта; при 70% адресуемой базы это уже $280 на 100 доз против $700 в конвенции B.\n* **Внешний / регуляторный.** Регуляторные одобрения не получены ни от одного медицинского агентства, а 30% всех доз — частичные, то есть возражение персонала, который непосредственно колет, приходится ровно на ту треть объёма, которую продукт не обслуживает: адопция может остановиться до того, как любая из двух цен будет протестирована.",
+    "decoy": "1. Арифметика опции A безупречна и совпадает с книгой (стр. 65, блок `Answer`): $17 — не ошибка счёта, а один из двух вариантов, которые книга сама печатает.\n2. Удержание абсолютной маржи при замене продукта — стандартная, преподаваемая дисциплина; ответ выглядит профессионально сдержанным, а не наивным.\n3. Утопленные $5M на R&D и отсутствие опыта в шприцах (стр. 62, `Additional Information`) подталкивают к «не жадничать»: $17 читается как цена, которая не отпугнёт покупателя.\n4. Exhibit A даёт три голоса «за» из четырёх, включая админа с прямым «push hospital costs down» — при цене $17 против сегодняшних $20 это выглядит как подтверждение.\n5. Книга не даёт «правильной» цены нигде, поэтому кандидат, ищущий один ответ, цепляется за тот, который дальше всех доведён.\n\n**SUPPORT (третьим)** — что на самом деле держит верный вывод\n1. **Настоящая опора.** Обе конвенции напечатаны и обе защищены книгой на одной странице (стр. 65, блок `Answer`), а «оптимальной» цены книга не называет ни на одной из девяти страниц кейса. Следовательно, вердикт, состоящий из одного числа, отвечает не на тот вопрос: результат целиком висит на выборе базы, и назвать надо базу.\n2. **Настоящая опора.** Цена каждой конвенции считается из клиентских входов стр. 64 и различима: A — цена $17, маржа $7, но клиент сегодня платит $20, значит мы сами оставляем $3/доза на столе; B — цена $20, маржа $10, но у клиента нет ни цента экономии, то есть нет причины переходить. Обе цены — $/доза, обе абсолютные; развилка идёт по стороне сделки, а не по единице измерения.\n3. **Настоящая опора, второй слой.** Цитата медсестры (стр. 69, `Exhibit A`) содержит число: частичные дозы — 30% всех доз, и гибридный флакон их не отдаёт. Значит адресуемая база не 100%, а 70%: на 100 доз конвенция B зарабатывает $700 вместо $1,000, конвенция A — $490 вместо $700. Слой переворачивает **обе** ветви и не чинится ни одной ценовой конвенцией — это и есть второй порядок слота.\n4. **Настоящая опора.** Вес медсестры не равен весу остальных трёх голосов: «vaccines are administered to the patients via syringes by nursing staff» (стр. 62, `Additional Information`) — единственный несогласный стейкхолдер и есть тот, кто выполняет процедуру. Счёт «трое из четырёх» — ложная опора; назвать её вслух.\n5. **Третья конвенция — только сюда, не во вход.** Можно держать **процентную** маржу: $7 / $14 = 50% → $10 / 0.5 = $20, что численно совпадает с конвенцией B при другом обосновании. Упомянуть её стоит как полноту разбора, но строить на ней вход слота нельзя: развилка «процент против абсолюта» — перегруженное движение библиотеки.\n6. **Ложная опора, назвать вслух.** $5M на R&D — утопленные затраты (книга сама предлагает обсудить это как sunk cost, стр. 68, блок `Next Steps` — блок интервьюера). Их нельзя вносить в цену ни при одной конвенции.\n\n**РИСКИ** (внутренний + внешний, каждый с цифрой)\n* **Внутренний.** COGS гибрида $10 — оценка при том, что у VaxCo нет опыта производства шприцев и производство надо ставить in-house под инвестиции. Промах по COGS всего на $3/доза стирает всю маржу конвенции A ($7 → $4 при цене $17) и приводит её ниже маржи традиционного продукта; при 70% адресуемой базы это уже $280 на 100 доз против $700 в конвенции B.\n* **Внешний / регуляторный.** Регуляторные одобрения не получены ни от одного медицинского агентства, а 30% всех доз — частичные, то есть возражение персонала, который непосредственно колет, приходится ровно на ту треть объёма, которую продукт не обслуживает: адопция может остановиться до того, как любая из двух цен будет протестирована.",
+    "support": "1. **Настоящая опора.** Обе конвенции напечатаны и обе защищены книгой на одной странице (стр. 65, блок `Answer`), а «оптимальной» цены книга не называет ни на одной из девяти страниц кейса. Следовательно, вердикт, состоящий из одного числа, отвечает не на тот вопрос: результат целиком висит на выборе базы, и назвать надо базу.\n2. **Настоящая опора.** Цена каждой конвенции считается из клиентских входов стр. 64 и различима: A — цена $17, маржа $7, но клиент сегодня платит $20, значит мы сами оставляем $3/доза на столе; B — цена $20, маржа $10, но у клиента нет ни цента экономии, то есть нет причины переходить. Обе цены — $/доза, обе абсолютные; развилка идёт по стороне сделки, а не по единице измерения.\n3. **Настоящая опора, второй слой.** Цитата медсестры (стр. 69, `Exhibit A`) содержит число: частичные дозы — 30% всех доз, и гибридный флакон их не отдаёт. Значит адресуемая база не 100%, а 70%: на 100 доз конвенция B зарабатывает $700 вместо $1,000, конвенция A — $490 вместо $700. Слой переворачивает **обе** ветви и не чинится ни одной ценовой конвенцией — это и есть второй порядок слота.\n4. **Настоящая опора.** Вес медсестры не равен весу остальных трёх голосов: «vaccines are administered to the patients via syringes by nursing staff» (стр. 62, `Additional Information`) — единственный несогласный стейкхолдер и есть тот, кто выполняет процедуру. Счёт «трое из четырёх» — ложная опора; назвать её вслух.\n5. **Третья конвенция — только сюда, не во вход.** Можно держать **процентную** маржу: $7 / $14 = 50% → $10 / 0.5 = $20, что численно совпадает с конвенцией B при другом обосновании. Упомянуть её стоит как полноту разбора, но строить на ней вход слота нельзя: развилка «процент против абсолюта» — перегруженное движение библиотеки.\n6. **Ложная опора, назвать вслух.** $5M на R&D — утопленные затраты (книга сама предлагает обсудить это как sunk cost, стр. 68, блок `Next Steps` — блок интервьюера). Их нельзя вносить в цену ни при одной конвенции.\n\n**РИСКИ** (внутренний + внешний, каждый с цифрой)\n* **Внутренний.** COGS гибрида $10 — оценка при том, что у VaxCo нет опыта производства шприцев и производство надо ставить in-house под инвестиции. Промах по COGS всего на $3/доза стирает всю маржу конвенции A ($7 → $4 при цене $17) и приводит её ниже маржи традиционного продукта; при 70% адресуемой базы это уже $280 на 100 доз против $700 в конвенции B.\n* **Внешний / регуляторный.** Регуляторные одобрения не получены ни от одного медицинского агентства, а 30% всех доз — частичные, то есть возражение персонала, который непосредственно колет, приходится ровно на ту треть объёма, которую продукт не обслуживает: адопция может остановиться до того, как любая из двух цен будет протестирована.",
+    "risks": "* **Внутренний.** COGS гибрида $10 — оценка при том, что у VaxCo нет опыта производства шприцев и производство надо ставить in-house под инвестиции. Промах по COGS всего на $3/доза стирает всю маржу конвенции A ($7 → $4 при цене $17) и приводит её ниже маржи традиционного продукта; при 70% адресуемой базы это уже $280 на 100 доз против $700 в конвенции B.\n* **Внешний / регуляторный.** Регуляторные одобрения не получены ни от одного медицинского агентства, а 30% всех доз — частичные, то есть возражение персонала, который непосредственно колет, приходится ровно на ту треть объёма, которую продукт не обслуживает: адопция может остановиться до того, как любая из двух цен будет протестирована.",
+    "next": "1. Разложить объём доз по типам (полная / частичная) у 3–5 крупнейших клиентов и подтвердить долю 30% на реальных закупках, а не на цитате из опроса. Снимает неопределённость: адресуемая база — 70% или иная, и стоит ли вообще выбирать конвенцию до этого.\n2. Протестировать обе конвенции на закупщиках: платит ли больница те же $20 за один SKU вместо двух (конвенция B), и какой неценовой стимул заменяет отсутствующую экономию — время медсестры, утилизация, логистика. Снимает неопределённость: есть ли у клиента повод переходить при цене $20.\n3. Зафиксировать COGS гибрида производственным расчётом под требуемые инвестиции, с чувствительностью ±$3/доза. Снимает неопределённость: устойчива ли маржа конвенции A ($7) вообще.\n\n**ЭТАЛОННЫЙ ОТВЕТ ПО ПОЛЯМ (EN)** — L1, одно свободное поле\n\nThe answer VaxCo needs is a convention, not a number, and we should say that to the client in the first sentence: hold our dollar margin and the hybrid prices at $17 — $10 COGS plus the $7 we make today — but the customer pays $20 today for vial plus syringe, so we hand back $3 a dose nobody asked us for; hold the customer's current outlay and it prices at $20, our margin goes to $10, and the customer has no financial reason to switch. I would price at $20 off the customer's outlay and buy the switch with nurse time and disposal savings rather than with price. The bigger point is that both conventions are sized wrong: partial doses are 30% of all doses and a needled vial cannot deliver them, so at most 70% of doses are addressable — on 100 doses the $10 convention earns $700, not $1,000, and no pricing basis repairs that. Two risks: the $10 COGS is an estimate from a firm with no syringe manufacturing experience, and a $3 miss wipes out the entire $7 margin under the first convention; and the one stakeholder against us is the nursing staff, who actually administer the vaccine, with regulatory approval still outstanding. Next step: verify the 30% partial-dose share against actual purchase data at our top accounts before we commit to either convention.",
+    "build": "```python\nfrom decimal import Decimal as D, ROUND_HALF_UP\n\ndef r(x, q=\"0.01\"):\n    return x.quantize(D(q), rounding=ROUND_HALF_UP)\n\n# --- входы из книги (стр. 64, блок данных Math; стр. 69, Exhibit A) ---\ntrad_price   = D(\"14\")   # цена традиционного флакона клиенту\ntrad_cogs    = D(\"7\")    # COGS традиционного флакона\nsyringe_price= D(\"6\")    # цена шприца клиенту\nhybrid_cogs  = D(\"10\")   # COGS гибридного флакона\npartial_share= D(\"0.30\") # доля частичных доз, Exhibit A / стр. 67\n\n# --- воспроизведение книжной арифметики (стр. 65, блок Answer) ---\ndollar_margin = trad_price - trad_cogs\nprice_A       = hybrid_cogs + dollar_margin\nprice_B       = trad_price + syringe_price\nmargin_B      = price_B - hybrid_cogs\n\nassert dollar_margin == D(\"7\"),  dollar_margin   # «(14-7) = $7 per vaccine»\nassert price_A       == D(\"17\"), price_A         # «10+7 = $17 per vaccine»\nassert price_B       == D(\"20\"), price_B         # «14 + 6 = $20 per vaccine»\nassert margin_B      == D(\"10\"), margin_B        # «20-10 = $10 per vaccine»\n\n# --- ПОСТРОЕНО, книга не печатает ---\nleft_on_table = price_B - price_A                # сколько отдаём при конвенции A\nmargin_gap    = margin_B - dollar_margin         # разница маржи между конвенциями\naddressable   = D(\"1\") - partial_share           # адресуемая доля доз\ndoses         = D(\"100\")\nA_real  = dollar_margin * doses * addressable    # маржа A на 100 доз при базе 70%\nA_naive = dollar_margin * doses                  # то же при допущении 100%\nB_real  = margin_B * doses * addressable\nB_naive = margin_B * doses\npct_convention_margin = r(dollar_margin / trad_price, \"0.0001\")   # третья конвенция\nprice_pct = hybrid_cogs / (D(\"1\") - pct_convention_margin)\n\nassert left_on_table == D(\"3\"),   left_on_table\nassert margin_gap    == D(\"3\"),   margin_gap\nassert addressable   == D(\"0.70\"), addressable\nassert A_real  == D(\"490.00\"),  A_real\nassert A_naive == D(\"700\"),     A_naive\nassert B_real  == D(\"700.00\"),  B_real\nassert B_naive == D(\"1000\"),    B_naive\nassert pct_convention_margin == D(\"0.5000\"), pct_convention_margin\nassert r(price_pct) == D(\"20.00\"), price_pct     # процентная конвенция совпадает с B по числу\nassert price_A != price_B                        # развилка существует\nassert B_real == A_naive                         # база 70% при конвенции B = наивная оценка A при 100%\n```\n\n**Провоцируемая ошибка** — кандидат выдаёт число ($17) вместо конвенции, не называет $3/доза, которые эта конвенция дарит клиенту, и оставляет адресуемую базу равной 100%, хотя 30% всех доз частичные и гибридом не обслуживаются."
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: Ответ — конвенция, а не число: держим $7 долларовой маржи → $17, но клиент платит сегодня $20 и мы сами оставляем $3/доза на столе; держим конечную цену клиента $20 → маржа $10, но у клиента исчезает повод переходить. Второй слой: частичные дозы — 30% всех доз, гибрид их не отдаёт, адресуемая база 70%, не 100% (на 100 доз конвенция «$10 маржи» даёт $700, а не $1,000), и это не чинится ни одной ценовой конвенцией; (3) the naive reading is rejected explicitly, not merely avoided — $17 / флакон must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: Ответ — конвенция, а не число: держим $7 долларовой маржи → $17, но клиент платит сегодня $20 и мы сами оставляем $3/доза на столе; держим конечную цену клиента $20 → маржа $10, но у клиента исчезает повод переходить. Второй слой: частичные дозы — 30% всех доз, гибрид их не отдаёт, адресуемая база 70%, не 100% (на 100 доз конвенция «$10 маржи» даёт $700, а не $1,000), и это не чинится ни одной ценовой конвенцией; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — $17 / флакон обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "The answer VaxCo needs is a convention, not a number, and we should say that to the client in the first sentence: hold our dollar margin and the hybrid prices at $17 — $10 COGS plus the $7 we make today — but the customer pays $20 today for vial plus syringe, so we hand back $3 a dose nobody asked us for; hold the customer's current outlay and it prices at $20, our margin goes to $10, and the customer has no financial reason to switch. I would price at $20 off the customer's outlay and buy the switch with nurse time and disposal savings rather than with price. The bigger point is that both conventions are sized wrong: partial doses are 30% of all doses and a needled vial cannot deliver them, so at most 70% of doses are addressable — on 100 doses the $10 convention earns $700, not $1,000, and no pricing basis repairs that. Two risks: the $10 COGS is an estimate from a firm with no syringe manufacturing experience, and a $3 miss wipes out the entire $7 margin under the first convention; and the one stakeholder against us is the nursing staff, who actually administer the vaccine, with regulatory approval still outstanding. Next step: verify the 30% partial-dose share against actual purchase data at our top accounts before we commit to either convention."
+   },
+   "anchor_metric": "клиентского порога нет; решение выносится сопоставлением двух защитимых конвенций, а не сравнением с правилом"
   }
  ]
 }
