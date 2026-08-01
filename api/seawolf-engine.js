@@ -188,17 +188,32 @@ class SeaWolfSession {
            Раньше для него `taken` был ложным у всех трёх вариантов, «взятый» запас
            читался как 0 — и разбор обвинял кандидата в ходе, которого он не делал. */
         const played = r < ch.length;
-        const opts = [0, 1, 2].map(o => {
-          const pre = ch.slice(0, r).concat(o);
-          return { name: site.rounds[r][o][0], a: site.rounds[r][o][1], trait: site.rounds[r][o][2],
-                   remaining: bestAhead(site, pre).best, taken: played && ch[r] === o };
-        });
+        /* Правка цеха игр, круг 8, перенесена сюда дословно. `bestAhead` считает запас
+           по ПРЕФИКСУ ходов, и позиция варианта в префиксе обязана совпадать с номером
+           раунда. Здесь стояло `ch.slice(0, r).concat(o)`: на несыгранном раунде
+           префикс короче `r`, и вариант раунда 3 считался так, будто берётся на
+           раунде 2. Внешне правдоподобно — три одинаковых числа в трёх колонках
+           подряд, — и потому глазом не ловилось. Для несыгранного раунда честного
+           остатка не существует: он зависит от ходов, которых не было. Такой раунд
+           теперь объявляется прочерком, а не считается. */
+        const opts = played
+          ? [0, 1, 2].map(o => {
+              const pre = ch.slice(0, r).concat(o);
+              return { name: site.rounds[r][o][0], a: site.rounds[r][o][1], trait: site.rounds[r][o][2],
+                       remaining: bestAhead(site, pre).best, taken: ch[r] === o };
+            })
+          : [0, 1, 2].map(o => ({ name: site.rounds[r][o][0], a: site.rounds[r][o][1], trait: site.rounds[r][o][2],
+                       remaining: null, taken: false }));
         cost.push({ round: r + 1, played, options: opts });
         if (!played) continue;
-        const takenRemaining = opts.find(o => o.taken).remaining;
+        /* `find` без защиты падал, если в `ch` лежало значение не того типа: партия
+           доигрывалась, а разбор — главный товар — не выдавался вовсе. */
+        const takenOpt = opts.find(o => o.taken);
+        if (!takenOpt) continue;
+        const takenRemaining = takenOpt.remaining;
         if (lost === null && takenRemaining === 0 && Math.max(...opts.map(o => o.remaining)) > 0) {
           const should = opts.reduce((a, b) => (b.remaining > a.remaining ? b : a));
-          lost = { round: r + 1, took: opts.find(o => o.taken), should, priceFrom: should.remaining, priceTo: takenRemaining };
+          lost = { round: r + 1, took: takenOpt, should, priceFrom: should.remaining, priceTo: takenRemaining };
         }
       }
       /**
