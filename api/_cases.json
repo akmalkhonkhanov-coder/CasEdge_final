@@ -2,11 +2,11 @@
  "schema": "casedge.cases.v1",
  "source_master": "MASTER_180.md",
  "source_sha256": "65f765f84e5b62a393fe143eff133626ffa2384ddf7bc8ea026e273ed77fd7ba",
- "note": "graph fields (depends_on/optimal_entry/terminal/produces) intentionally absent — merged from engine package by step number | #181-185 merged 2026-07-30 EN-native, bodies from build_bodies_181_185_en_v2.py | #186-200 собраны 31.07.2026 из тел .md скриптом assemble_186_200.py | #201-206 (блок A партии 201-235) собраны 01.08.2026 из тел .md скриптом assemble_201_206.py | #207-211 (блок B партии 201-235) собраны 01.08.2026 из тел .md скриптом assemble_207_211.py | #212-219 (блоки C и D партии 201-235) собраны 01.08.2026 | #220-227 (блоки E и F партии 201-235) собраны 01.08.2026 | #228-235 (блоки G и H партии 201-235, ПАРТИЯ ЗАКРЫТА) собраны 01.08.2026",
+ "note": "graph fields (depends_on/optimal_entry/terminal/produces) intentionally absent — merged from engine package by step number | #181-185 merged 2026-07-30 EN-native, bodies from build_bodies_181_185_en_v2.py | #186-200 собраны 31.07.2026 из тел .md скриптом assemble_186_200.py | #201-206 (блок A партии 201-235) собраны 01.08.2026 из тел .md скриптом assemble_201_206.py | #207-211 (блок B партии 201-235) собраны 01.08.2026 из тел .md скриптом assemble_207_211.py | #212-219 (блоки C и D партии 201-235) собраны 01.08.2026 | #220-227 (блоки E и F партии 201-235) собраны 01.08.2026 | #228-235 (блоки G и H партии 201-235, ПАРТИЯ ЗАКРЫТА) собраны 01.08.2026 | подсказка перенесена с финального шага на несущий в 14 кейсах (81-90, 191, 195, 208, 216, 89) 01.08.2026 | #236-240 (блок A партии 236-270) собраны 01.08.2026",
  "totals": {
-  "cases": 235,
-  "steps": 1714,
-  "exhibits": 464,
+  "cases": 240,
+  "steps": 1754,
+  "exhibits": 474,
   "cases_without_exhibit_block": [
    18,
    58,
@@ -13813,7 +13813,10 @@
      "label": "Correct (cannibalization).",
      "candidate_md": "How many of the 3,000 members at the new club are genuinely new to Reptrix? Rework the annual economics on that basis and give me your answer.",
      "interviewer_md": "```python\ntransfer_share=D('0.45')\ntransfers=new_members*transfer_share           # 1350\nlost_rev=transfers*annual_fee/D('1000000')     # 0.648  (revenue already ours)\ntrue_incremental_rev=gross_rev-lost_rev        # 0.792\ncorrect_profit=true_incremental_rev-fixed      # -0.108\ncorrect_value=correct_profit/WACC              # -1.08\n```\nCorrect: only **55% (1,650 members)** are truly new. True incremental revenue = **$0.792M**, minus fixed **$0.9M** = **−$0.108M/yr** → value **−$1.08M** → **DO NOT OPEN**.",
-     "hints": {},
+     "hints": {
+      "L1": "Чем новый клуб отличается от того, что уже стоит рядом?",
+      "L2": "Спроси, какая доля будущих участников уже ходит в наш соседний клуб."
+     },
      "conditional_exhibits": [],
      "depends_on": [
       4
@@ -13845,8 +13848,8 @@
      "candidate_md": "Reptrix's CEO asks: do we open the new club or not? Your recommendation.",
      "interviewer_md": "> - **hint_L0:** ничего. Движок молчит и ждёт, пока кандидат сам выйдет на вопрос.\n> - **hint_L1** (если застрял, после явного «не знаю, что дальше»): «Что общего у нового клуба со старым в 2 милях?»\n> - **hint_L2** (крайний случай, если L1 не помог): reveal catchment study: 45% are transfers.\n> - **Conditional exhibit — Catchment study:** `reveal_on_request`. Не показывать автоматически — только когда кандидат сам запросит. Триггеры-запросы: \"catchment overlap\" · \"are members new\" · \"transfers from existing club\" · \"cannibalization\" · \"distance to nearest club\".\n> *Инсайт = добываемый, не преподнесённый. В interviewee-led режиме движок держит это закрытым; в interviewer-led (McKinsey-style) может подать L1 проактивно.*\n\n---\n\n**Conditional exhibits:** {'title': 'Catchment study', 'triggers': ['catchment overlap', 'are members new', 'transfers from existing club', 'cannibalization', 'distance to nearest club']}\n\n**Partner answer (Pyramid):**\n\n*\"Reptrix should NOT open the new club as scoped — it destroys ~$1.1M of value because 45% of projected members merely transfer from an existing club 2 miles away.\"* Facts: gross $1.44M but true incremental only $0.79M < $0.9M fixed; breakeven overlap is 37.5% and actual is 45%. Risks: (internal) transfer estimate is soft — a survey could revise it; (external) a competitor could open in the district if Reptrix doesn't, capturing the genuinely-new 55%. Next steps: run a member-address survey to firm the 45%; test a differentiated format that expands total catchment before committing capex.\n\n> **🎬 Interviewer-only disclosure (для движка, не показывать кандидату).**\n> Ключевой инсайт кейса кандидат должен **добыть сам**, а не получить в подарок.\n> - **Что кандидат должен спросить сам (L0 — тишина по умолчанию):** candidate should ask whether the two clubs' catchments overlap / whether memb",
      "hints": {
-      "L1": "Чем новый клуб отличается от того, что уже стоит рядом?",
-      "L2": "Спроси, какая доля будущих участников уже ходит в наш соседний клуб."
+      "L1": "",
+      "L2": ""
      },
      "conditional_exhibits": [],
      "depends_on": [
@@ -13941,7 +13944,10 @@
      "label": "Correct (net waterfall, derive each layer).",
      "candidate_md": "Take the projected gross revenue per game through to what lands in the franchise's own P&L, scale it to a full season and compare it with the financing. Does the expansion pay?",
      "interviewer_md": "```python\narena_cut=D('0.30'); league=D('0.06'); visitor=D('0.10')\nticket=gross_pg*D('0.60')                        # 192000\nafter_arena=gross_pg*(1-arena_cut)               # 224000\nleague_take=ticket*league                        # 11520\nvisitor_take=ticket*visitor                      # 19200\nnet_pg=after_arena-league_take-visitor_take      # 193280\nnet_annual=net_pg*games/D('1000000')             # 7.924\ncorrect_profit=net_annual-fin                    # -1.076\n```\nCorrect: after the waterfall the franchise keeps **$193,280/game** → **$7.92M/yr** net, minus $9M = **−$1.08M** → **REJECT**.",
-     "hints": {},
+     "hints": {
+      "L1": "Does the team keep all of the arena's revenue?",
+      "L2": "Ask how the gate is split before treating the ticket price as revenue to the team."
+     },
      "conditional_exhibits": [],
      "depends_on": [
       3
@@ -13984,8 +13990,8 @@
      "candidate_md": "The ownership group is in the room — approve the courtside expansion or not? What do you recommend?",
      "interviewer_md": "> - **hint_L0:** ничего. Движок молчит и ждёт, пока кандидат сам выйдет на вопрос.\n> - **hint_L1** (если застрял, после явного «не знаю, что дальше»): «Команда оставляет весь доход с арены себе?»\n> - **hint_L2** (крайний случай, если L1 не помог): reveal waterfall: arena 30% / league 6% gate / visitor 10% ticket.\n> - **Conditional exhibit — Revenue-share waterfall:** `reveal_on_request`. Не показывать автоматически — только когда кандидат сам запросит. Триггеры-запросы: \"revenue share\" · \"arena lease terms\" · \"league gate sharing\" · \"who owns arena revenue\" · \"net vs gross\".\n> *Инсайт = добываемый, не преподнесённый. В interviewee-led режиме движок держит это закрытым; в interviewer-led (McKinsey-style) может подать L1 проактивно.*\n\n---\n\n**Conditional exhibits:** {'title': 'Revenue-share waterfall', 'triggers': ['revenue share', 'arena lease terms', 'league gate sharing', 'who owns arena revenue', 'net vs gross']}\n\n**Partner answer (Pyramid):**\n\n*\"Backcourt should NOT approve the courtside expansion as structured — the revenue-share waterfall leaves only $7.9M net against $9M financing, a $1.1M annual loss.\"* Facts: gross $13.12M is misleading; after arena 30% + league 6% + visitor 10% the team nets $193k/game; breakeven needs 13% more gross. Risks: (internal) financing terms may be renegotiable, changing the verdict; (external/regulatory) league gate-sharing rules can change and further cut the net. Next steps: model a concession-weighted design (avoids league/visitor take); reopen the arena split before committing.\n\n> **🎬 Interviewer-only disclosure (для движка, не показывать кандидату).**\n> Ключевой инсайт кейса кандидат должен **добыть сам**, а не получить в подарок.\n> - **Что кандидат должен спросить сам (L0 — тишина по умолчанию):** candidate should ask how arena revenue is split / whether the team owns 100% of it.",
      "hints": {
-      "L1": "Does the team keep all of the arena's revenue?",
-      "L2": "Ask how the gate is split before treating the ticket price as revenue to the team."
+      "L1": "",
+      "L2": ""
      },
      "conditional_exhibits": [],
      "depends_on": [
@@ -14070,7 +14076,10 @@
      "label": "Correct (lifetime, full multi-year chain — [4]+[9b]).",
      "candidate_md": "Value those 800,000 subscribers over the full period they stay with Vireno, discounted. Where does the show land against its $220M cost?",
      "interviewer_md": "```python\nchurn=D('0.30')\ndef ltv_per_sub():\n    tot=D('0'); retained=D('1')\n    for t in range(0,10):                  # 10-yr horizon, discounted\n        tot += annual_rev*retained/((1+WACC)**t)\n        retained *= (1-churn)\n    return tot\nltv=ltv_per_sub()                          # 489.61\nlifetime=subs*ltv/D('1000000')             # 391.7\ncorrect=lifetime-cost                      # 171.69\n```\nCorrect: LTV per sub = **$489.61** (discounted over retention), lifetime value = **$391.69M**, minus $220M = **+$171.69M** → **GREENLIGHT**.",
-     "hints": {},
+     "hints": {
+      "L1": "Does a subscriber won by a hit stay only one year?",
+      "L2": "Ask what the retention curve looks like, then value the subscriber over the life it implies."
+     },
      "conditional_exhibits": [],
      "depends_on": [
       3
@@ -14113,8 +14122,8 @@
      "candidate_md": "The greenlight committee is waiting: do we make the series or not? Your recommendation.",
      "interviewer_md": "> - **hint_L0:** ничего. Движок молчит и ждёт, пока кандидат сам выйдет на вопрос.\n> - **hint_L1** (если застрял, после явного «не знаю, что дальше»): «Подписчик от хита остаётся только один год?»\n> - **hint_L2** (крайний случай, если L1 не помог): reveal retention: 30%/yr churn, ~3.3yr life.\n> - **Conditional exhibit — Retention:** `reveal_on_request`. Не показывать автоматически — только когда кандидат сам запросит. Триггеры-запросы: \"churn\" · \"retention\" · \"how long do subscribers stay\" · \"lifetime value\" · \"LTV\".\n> *Инсайт = добываемый, не преподнесённый. В interviewee-led режиме движок держит это закрытым; в interviewer-led (McKinsey-style) может подать L1 проактивно.*\n\n---\n\n**Conditional exhibits:** {'title': 'Retention', 'triggers': ['churn', 'retention', 'how long do subscribers stay', 'lifetime value', 'LTV']}\n\n**Partner answer (Pyramid):**\n\n*\"Vireno should GREENLIGHT the series — on a lifetime basis it creates ~$172M of value, even though year-1 revenue alone looks $76M short.\"* Facts: 800k subs at $490 LTV = $392M vs $220M cost; the decision survives churn up to ~60%. Risks: (internal) the 800k acquisition and 30% churn are estimates — a soft launch could miss; (external) a competitor's rival hit could raise churn. Next steps: greenlight with a churn-tracking gate at 6 months; pre-commit a follow-on slate to defend retention.\n\n> **🎬 Interviewer-only disclosure (для движка, не показывать кандидату).**\n> Ключевой инсайт кейса кандидат должен **добыть сам**, а не получить в подарок.\n> - **Что кандидат должен спросить сам (L0 — тишина по умолчанию):** candidate should ask about retention/churn, not judge on year-1 revenue.",
      "hints": {
-      "L1": "Does a subscriber won by a hit stay only one year?",
-      "L2": "Ask what the retention curve looks like, then value the subscriber over the life it implies."
+      "L1": "",
+      "L2": ""
      },
      "conditional_exhibits": [],
      "depends_on": [
@@ -14269,7 +14278,10 @@
      "label": "Correct (peak-capacity, [4] full recompute + FLAG-checks).",
      "candidate_md": "Volume isn't flat across the year. Work through what the network has to handle at its busiest, and tell me what closing a hub is actually worth.",
      "interviewer_md": "```python\npeak=avg*D('1.30')                                # 1430\n# full network handles its own peak (sanity): 1500 >= 1430  -> True\n# any single closure drops capacity to 1200 -> peak shortfall:\ncap_after_1_closure=total_cap-hub_cap             # 1200\nshortfall=peak-cap_after_1_closure                # 230 k/day at peak\nsurge_cost=shortfall*D('0.20')                    # 46 /yr  >> 15 saved\n# every closure option is NEGATIVE; best = keep all open -> synergy $0\ncorrect_value=D('0')\n```\nCorrect: Q4 peak **1,430k** exceeds post-closure capacity **1,200k** by **230k/day**. Renting surge for that shortfall costs **$46M/yr**, dwarfing the **$15M** saved. **Every** closure option is value-negative, so the best action is **keep all hubs open → synergy = $0**. The \"redundant\" hub is **stranded by the peak**.",
-     "hints": {},
+     "hints": {
+      "L1": "Is the volume even across the whole year?",
+      "L2": "Ask for the seasonality profile and check the peak month against the capacity you assumed."
+     },
      "conditional_exhibits": [],
      "depends_on": [
       3
@@ -14323,8 +14335,8 @@
      "candidate_md": "You're in front of Sortwell's deal committee. What's your recommendation?",
      "interviewer_md": "> - **hint_L0:** ничего. Движок молчит и ждёт, пока кандидат сам выйдет на вопрос.\n> - **hint_L1** (если застрял, после явного «не знаю, что дальше»): «Объём равномерен весь год?»\n> - **hint_L2** (крайний случай, если L1 не помог): reveal seasonality: Q4 peak 1.30x avg = 1430k.\n> - **Conditional exhibit — Seasonality:** `reveal_on_request`. Не показывать автоматически — только когда кандидат сам запросит. Триггеры-запросы: \"seasonality\" · \"peak volume\" · \"Q4 holiday surge\" · \"volume by season\" · \"average vs peak\".\n> *Инсайт = добываемый, не преподнесённый. В interviewee-led режиме движок держит это закрытым; в interviewer-led (McKinsey-style) может подать L1 проактивно.*\n\n---\n\n**Conditional exhibits:** {'title': 'Seasonality', 'triggers': ['seasonality', 'peak volume', 'Q4 holiday surge', 'volume by season', 'average vs peak']}\n\n**Partner answer (Pyramid):**\n\n*\"Sortwell should NOT count the hub-closure synergy — it is worth $0, not $150M, because Q4 peak volume (1,430k) needs the full network and any closure strands capacity.\"* Facts: average 1,100k fits 4 hubs but peak 1,430k exceeds 4-hub capacity 1,200k; surge to cover the 230k shortfall costs $46M/yr vs $15M saved; synergy is real only below a 1.09× peak, and actual is 1.30×. Risks: (internal) the deal model likely bakes in this phantom synergy — revalue before closing; (external/regulatory) peak seasonality could intensify, deepening the stranding. Next steps: strip the hub synergy from the valuation and renegotiate price; pursue non-capacity (back-office) synergies instead.\n\n> **🎬 Interviewer-only disclosure (для движка, не показывать кандидату).**\n> Ключевой инсайт кейса кандидат должен **добыть сам**, а не получить в подарок.\n> - **Что кандидат должен спросить сам (L0 — тишина по умо",
      "hints": {
-      "L1": "Is the volume even across the whole year?",
-      "L2": "Ask for the seasonality profile and check the peak month against the capacity you assumed."
+      "L1": "",
+      "L2": ""
      },
      "conditional_exhibits": [],
      "depends_on": [
@@ -14469,7 +14481,10 @@
      "label": "Correct (marginal cost).",
      "candidate_md": "The plant has spare capacity. What does it actually cost Breakwell to make those extra tons, and what does the order contribute?",
      "interviewer_md": "```python\nmarginal=var                                       # 200/ton (fixed already sunk, capacity exists)\ncontribution=(price-marginal)*extra/D('1000000')   # 0.8\n```\nCorrect: marginal cost of the extra batch = **$200/ton** (fixed unchanged, spare capacity). Contribution = ($240 − $200) × 20,000 = **+$0.8M** → **ACCEPT**.",
-     "hints": {},
+     "hints": {
+      "L1": "Какой реальный дополнительный расход даёт лишняя партия, если завод уже работает?",
+      "L2": "Спроси, какие статьи себестоимости меняются с объёмом, а какие понесены в любом случае."
+     },
      "conditional_exhibits": [],
      "depends_on": []
     },
@@ -14499,8 +14514,8 @@
      "candidate_md": "Breakwell's commercial director needs an answer on the customer's offer today — accept or reject. Your recommendation.",
      "interviewer_md": "> - **hint_L0:** ничего. Движок молчит и ждёт, пока кандидат сам выйдет на вопрос.\n> - **hint_L1** (если застрял, после явного «не знаю, что дальше»): «Какой РЕАЛЬНЫЙ доп.расход на лишнюю партию, если завод уже работает?»\n> - **hint_L2** (крайний случай, если L1 не помог): state marginal = variable $200/ton (fixed sunk).\n> - **Нет exhibit'а** (инсайт концептуальный). Раскрытие через hint-уровни. Триггеры: \"marginal cost\" · \"variable cost\" · \"is fixed cost already covered\" · \"incremental cost\".\n> *Инсайт = добываемый, не преподнесённый. В interviewee-led режиме движок держит это закрытым; в interviewer-led (McKinsey-style) может подать L1 проактивно.*\n\n---\n\n**Partner answer (Pyramid):**\n\n*\"Breakwell should ACCEPT the order — it adds $0.8M of contribution, because the relevant cost is the $200/ton marginal cost, not the $500/ton average.\"* Facts: fixed $30M is already covered by base volume; extra batch costs only variable $200/ton; $240 clears the $200 breakeven. Risks: (internal) accepting a below-average price risks anchoring future deals — keep it contractually one-off; (external) if base demand rises the capacity may no longer be spare, changing the marginal calculus. Next steps: accept as a fixed-term incremental contract, ring-fenced from list pricing.\n\n> **🎬 Interviewer-only disclosure (для движка, не показывать кандидату).**\n> Ключевой инсайт кейса кандидат должен **добыть сам**, а не получить в подарок.\n> - **Что кандидат должен спросить сам (L0 — тишина по умолчанию):** candidate should recognize fixed cost is already covered; ask for marginal cost of the extr",
      "hints": {
-      "L1": "Какой реальный дополнительный расход даёт лишняя партия, если завод уже работает?",
-      "L2": "Спроси, какие статьи себестоимости меняются с объёмом, а какие понесены в любом случае."
+      "L1": "",
+      "L2": ""
      },
      "conditional_exhibits": [],
      "depends_on": [
@@ -14584,7 +14599,10 @@
      "label": "Correct (capacity ceiling, [1] reconciliation shown).",
      "candidate_md": "Demand isn't spread evenly across the day. Work out how many meals a store actually serves, and what that does to the value of entry.",
      "interviewer_md": "```python\nmph=D('90'); peak_h=D('6'); off_h=D('4')\npeak_cap=peak_h*mph                                 # 540 (capacity in peak window)\npeak_dem=demand*D('0.70')                           # 840 wants to buy in peak\npeak_served=min(peak_dem,peak_cap)                  # 540  (capacity-capped)\noff_cap=off_h*mph                                   # 360\noff_dem=demand*D('0.30')                            # 360\noff_served=min(off_dem,off_cap)                     # 360  (demand-capped, just fits)\nserved=peak_served+off_served                       # 540 + 360 = 900   <-- reconciliation\ncorrect_rev=served*ticket*days*stores/D('1000000')  # 31.104\ncorrect_value=(correct_rev-opex)/WACC-entry         # -28.96\n```\nCorrect: peak window caps at **540** served (of 840 demanded); off-peak serves **360**. Total **540 + 360 = 900 meals/store/day** (not 1,200). Revenue = **$31.1M/yr**; minus $28M opex → profit $3.10M → value **−$28.96M** → **DO NOT ENTER**.",
-     "hints": {},
+     "hints": {
+      "L1": "Can the kitchen physically produce the daily volume the plan assumes?",
+      "L2": "Ask for the kitchen's hourly throughput and how much of the day the peak occupies."
+     },
      "conditional_exhibits": [],
      "depends_on": [
       3
@@ -14627,8 +14645,8 @@
      "candidate_md": "Phorage's CEO is about to sign off on the city launch and wants your view first. What do you recommend?",
      "interviewer_md": "> - **hint_L0:** ничего. Движок молчит и ждёт, пока кандидат сам выйдет на вопрос.\n> - **hint_L1** (если застрял, после явного «не знаю, что дальше»): «Кухня физически осилит 1200 блюд в день?»\n> - **hint_L2** (крайний случай, если L1 не помог): reveal throughput: 90 meals/hr, 70% in 6h peak.\n> - **Conditional exhibit — Kitchen throughput:** `reveal_on_request`. Не показывать автоматически — только когда кандидат сам запросит. Триггеры-запросы: \"kitchen capacity\" · \"throughput\" · \"can the kitchen make that many\" · \"peak hours\" · \"meals per hour\".\n> *Инсайт = добываемый, не преподнесённый. В interviewee-led режиме движок держит это закрытым; в interviewer-led (McKinsey-style) может подать L1 проактивно.*\n\n---\n\n**Conditional exhibits:** {'title': 'Kitchen throughput', 'triggers': ['kitchen capacity', 'throughput', 'can the kitchen make that many', 'peak hours', 'meals per hour']}\n\n**Partner answer (Pyramid):**\n\n*\"Phorage should NOT enter the city as planned — capacity-capped revenue ($31M, not $41M) makes the entry worth −$29M.\"* Facts: kitchens serve 900 meals/day, not the 1,200 demanded; peak 6h caps at 540; entry needs ~110 meals/hr throughput to work. Risks: (internal) throughput could be raised with capex — re-model before abandoning; (external) a faster-format competitor could capture the unmet peak demand. Next steps: pilot a higher-throughput kitchen in 1–2 stores; re-decide on measured peak-hour capacity.\n\n> **🎬 Interviewer-only disclosure (для движка, не показывать кандидату).**\n> Ключевой инсайт кейса кандидат должен **добыть сам**, а не получить в подарок.\n> - **Что кандидат должен спросить сам (L0 — тишина по умолчанию):** candidate should ask whether each kitchen can physically produce 1,200 meals/day.",
      "hints": {
-      "L1": "Can the kitchen physically produce the daily volume the plan assumes?",
-      "L2": "Ask for the kitchen's hourly throughput and how much of the day the peak occupies."
+      "L1": "",
+      "L2": ""
      },
      "conditional_exhibits": [],
      "depends_on": [
@@ -14742,7 +14760,10 @@
      "label": "Correct (segment-level, derive each).",
      "candidate_md": "Work out profit and margin for each of the three segments. What does that say about the board's proposal?",
      "interviewer_md": "```python\nfor k,(r,m) in seg.items():\n    print(k, 'profit', q(r*m,1), 'margin', m)\n# Retail 210.0 @35% | Online 105.0 @42% | B2B 48.0 @12%\nonline_profit=seg['Online'][0]*seg['Online'][1]     # 105.0\n```\nCorrect: Online DTC is the **highest-margin** segment at **42%** (vs blended 29%) — it is *lifting* the average, not dragging it. The real drag is **Commercial B2B at 12%**. Closing Online would **destroy $105M of the chain's highest-margin profit** → **DO NOT CLOSE Online** (kill→keep).",
-     "hints": {},
+     "hints": {
+      "L1": "Маржа одинакова по каналам, или среднее скрывает разброс?",
+      "L2": "Запроси маржу по каждому каналу отдельно и посмотри, какой из них тянет среднее."
+     },
      "conditional_exhibits": [],
      "depends_on": []
     },
@@ -14783,8 +14804,8 @@
      "candidate_md": "Camburn's board is about to vote on closing the segment. What's your recommendation?",
      "interviewer_md": "> - **hint_L0:** ничего. Движок молчит и ждёт, пока кандидат сам выйдет на вопрос.\n> - **hint_L1** (если застрял, после явного «не знаю, что дальше»): «Одинаковая ли маржа по сегментам, или это среднее скрывает разброс?»\n> - **hint_L2** (крайний случай, если L1 не помог): reveal segment margins: Online 42% / Retail 35% / B2B 12%.\n> - **Conditional exhibit — Segment margins:** `reveal_on_request`. Не показывать автоматически — только когда кандидат сам запросит. Триггеры-запросы: \"segment margin\" · \"margin by channel\" · \"break down the blended margin\" · \"which segment is actually low margin\".\n> *Инсайт = добываемый, не преподнесённый. В interviewee-led режиме движок держит это закрытым; в interviewer-led (McKinsey-style) может подать L1 проактивно.*\n\n---\n\n**Conditional exhibits:** {'title': 'Segment margins', 'triggers': ['segment margin', 'margin by channel', 'break down the blended margin', 'which segment is actually low margin']}\n\n**Partner answer (Pyramid):**\n\n*\"Camburn should NOT close Online DTC — it is the highest-margin segment at 42% and closing it would destroy $105M of profit; the real drag is Commercial B2B at 12%.\"* Facts: segment margins are 42% Online / 35% Retail / 12% B2B against a 29% blend; the board's blended-lens reasoning inverts the truth. Risks: (internal) Online margins must hold as it scales — monitor unit economics; (external) B2B contracts may be strategically necessary despite low margin — assess before exiting. Next steps: keep and grow Online; run a margin-recovery review on B2B before any closure decision.\n\n> **🎬 Interviewer-only disclosure (для движка, не показывать кандидату).**\n> Ключевой инсайт кейса кандидат должен **добыть сам**, а не получить в подарок.\n> - **Что кандидат должен спросить сам (L0 — тишина по умолчанию):** candidate should ask for segment-level margins, not reason from the blended 29%.",
      "hints": {
-      "L1": "Маржа одинакова по каналам, или среднее скрывает разброс?",
-      "L2": "Запроси маржу по каждому каналу отдельно и посмотри, какой из них тянет среднее."
+      "L1": "",
+      "L2": ""
      },
      "conditional_exhibits": [],
      "depends_on": [
@@ -14870,7 +14891,10 @@
      "label": "Correct (tiered, derive each tier).",
      "candidate_md": "Interchange is tiered — walk through the tiers in the exhibit and tell me what the increase actually earns.",
      "interviewer_md": "```python\ntiers={'Small':(D('4000'),True),'Mid':(D('6000'),True),'Large':(D('10000'),False)}\naddressable=sum(v for v,ap in tiers.values() if ap)   # 10000\ncorrect_gain=addressable*inc                           # 15.0\n```\nCorrect: only **$10,000M (small + mid)** is addressable; large merchants' caps block the increase. Real gain = $10,000M × 15 bps = **$15M** — **half** the projected $30M.",
-     "hints": {},
+     "hints": {
+      "L1": "Do all merchants pay the same rate?",
+      "L2": "Ask which merchant tiers the cap actually touches before applying it to the whole volume."
+     },
      "conditional_exhibits": [],
      "depends_on": [
       3
@@ -14924,8 +14948,8 @@
      "candidate_md": "Swypeco's board asks what they should do about the take-rate. Your recommendation.",
      "interviewer_md": "> - **hint_L0:** ничего. Движок молчит и ждёт, пока кандидат сам выйдет на вопрос.\n> - **hint_L1** (если застрял, после явного «не знаю, что дальше»): «Все мерчанты платят одинаковую ставку?»\n> - **hint_L2** (крайний случай, если L1 не помог): reveal tiers: large $10B on caps (immune), small+mid $10B addressable.\n> - **Conditional exhibit — Tier structure:** `reveal_on_request`. Не показывать автоматически — только когда кандидат сам запросит. Триггеры-запросы: \"tiered pricing\" · \"do large merchants pay the same\" · \"negotiated caps\" · \"which volume is addressable\" · \"merchant tiers\".\n> *Инсайт = добываемый, не преподнесённый. В interviewee-led режиме движок держит это закрытым; в interviewer-led (McKinsey-style) может подать L1 проактивно.*\n\n---\n\n**Conditional exhibits:** {'title': 'Tier structure', 'triggers': ['tiered pricing', 'do large merchants pay the same', 'negotiated caps', 'which volume is addressable', 'merchant tiers']}\n\n**Partner answer (Pyramid):**\n\n*\"Swypeco should raise the rate — but expect ~$15M, not $30M, because half the volume sits on capped large-merchant tiers the increase can't reach.\"* Facts: only $10,000M of $20,000M is addressable; the flat projection overstates by 100%; large merchants are immune. Risks: (internal) even the $15M assumes no small-merchant attrition from the higher rate — model churn; (external) large merchants may resist any future cap renegotiation. Next steps: implement the increase on addressable tiers; model small-merchant price elasticity before finalizing; open cap renegotiation at the next large-merchant renewal.\n\n> **🎬 Interviewer-only disclosure (для движка, не показывать кандидату).**\n> Ключевой инсайт кейса кандидат должен **добыть сам**, а не получить в подарок.\n> - **Что кандидат должен спросить сам (L0 — тишина по умолчанию):** candidate should ask whether all merchants pay the same rate",
      "hints": {
-      "L1": "Do all merchants pay the same rate?",
-      "L2": "Ask which merchant tiers the cap actually touches before applying it to the whole volume."
+      "L1": "",
+      "L2": ""
      },
      "conditional_exhibits": [],
      "depends_on": [
@@ -15038,7 +15062,10 @@
      "label": "Validation (the Clean skill — check each candidate trap).",
      "candidate_md": "Before you accept that number — what could reverse it? Name the specific catches you would test on a line like this, and tell me how each one lands here.",
      "interviewer_md": "**EXPECTED ANSWER:**\n- *Peak-capacity conflict?* **No** — automation doesn't change throughput, so no seasonal stranding (unlike #84).\n- *Avg-vs-marginal distortion?* **No** — a single uniform line, one cost basis (unlike #85).\n- *Cannibalization / overlap?* **No** — one standalone line.\n→ **Naive and correct converge.** There is no hidden reversal; the investment simply pays.\n\n---\n\n**Pass if ALL:** (1) names at least three specific candidate reversals and tests each, instead of accepting the $2.4M / $0.3M inputs at face value — stranded labour (does the full $2.4M actually leave, or does a share stay behind?), a peak or seasonal capacity conflict, an average-vs-marginal cost distortion, and overlap/cannibalization with another line; (2) rules each out on the stated mechanism: the line runs lights-out after automation so all $2.4M is removable; automation does not change throughput, so nothing is stranded seasonally; a single uniform line means one cost basis, so no average-vs-marginal gap; the line is standalone, so no overlap; (3) concludes that naive and correct **converge** — no haircut to the $2.1M/yr net, and the $12M at a 10% WACC stands on the base economics.\n\n**Fail if:** the candidate invents a catch the case does not support — assumes a share of the $2.4M labour remains, or a hidden throughput/seasonality constraint — and marks the investment down; equally a fail if the validation step is skipped and the payback is simply restated without naming which traps were checked and cleared.",
-     "hints": {},
+     "hints": {
+      "L1": "Есть ли в этой экономии подвох — застрявший труд, пик, средняя вместо предельной?",
+      "L2": "Проверь по очереди: весь ли труд действительно снимается, держит ли линия пик, и на какой величине ты считаешь выгоду."
+     },
      "conditional_exhibits": [],
      "depends_on": [
       2
@@ -15081,8 +15108,8 @@
      "candidate_md": "Croplin's CEO wants a decision on the automation investment. Your recommendation.",
      "interviewer_md": "> - **hint_L0:** ничего. Движок молчит и ждёт, пока кандидат сам выйдет на вопрос.\n> - **hint_L1** (если застрял, после явного «не знаю, что дальше»): «Есть ли скрытый подвох — застрявший труд, пик, avg-vs-marginal?»\n> - **hint_L2** (крайний случай, если L1 не помог): confirm: labor fully removable, no peak, single line — converge.\n> - **Нет exhibit'а** (инсайт концептуальный). Раскрытие через hint-уровни. Триггеры: \"is the labor really removable\" · \"any hidden catch\" · \"stranded cost\" · \"validate no reversal\".\n> *Инсайт = добываемый, не преподнесённый. В interviewee-led режиме движок держит это закрытым; в interviewer-led (McKinsey-style) может подать L1 проактивно.*\n\n---\n\n**Partner answer (Pyramid):**\n\n*\"Croplin should INVEST in the automation — it creates ~$9M of value with a 5.7-year payback, and validation confirms there is no hidden catch.\"* Facts: net saving $2.1M/yr on $12M capex; ~17.5% return; breakeven only if labor saving falls below $1.5M (37% cushion). Risks: (internal) labor-redeployment/severance costs could reduce the net saving — confirm HR plan; (external/regulatory) any labor-law or union constraint on the reduction must be cleared. Next steps: validate the labor and maintenance figures with vendor and HR; approve with a phased install to de-risk downtime.\n\n> **🎬 Interviewer-only disclosure (для движка, не показывать кандидату).**\n> Ключевой инсайт кейса кандидат должен **добыть сам**, а не получить в подарок.\n> - **Что кандидат должен спросить сам (L0 — тишина по умолчанию):** candidate should actively CHECK for the usual traps and confirm none apply (the clean skil",
      "hints": {
-      "L1": "Есть ли в этой экономии подвох — застрявший труд, пик, средняя вместо предельной?",
-      "L2": "Проверь по очереди: весь ли труд действительно снимается, держит ли линия пик, и на какой величине ты считаешь выгоду."
+      "L1": "",
+      "L2": ""
      },
      "conditional_exhibits": [],
      "depends_on": [
@@ -15190,7 +15217,10 @@
      "label": "Correct (rank by profit, derive each).",
      "candidate_md": "Rank the three routes the way you would actually rank them, and tell me which one Tailwynn should launch.",
      "interviewer_md": "```python\nfor k,(r,c) in routes.items():\n    print(k,'profit',q(r-c,1))\n# A: 4.0 | B: 10.0 | C: 3.0\ncorrect_pick=max(routes,key=lambda k:routes[k][0]-routes[k][1])   # 'B'\n```\nCorrect: profit by route is **A $4M, B $10M, C $3M**. Route B earns **$10M** — the most profit — despite lower revenue. **Launch Route B**, not A. Wrong-ranking-criterion (revenue vs profit) reverses the choice.",
-     "hints": {},
+     "hints": {
+      "L1": "По какому критерию сравнивать маршруты — по выручке или по прибыли?",
+      "L2": "Запроси структуру затрат по каждому маршруту и сравнивай то, что остаётся после них."
+     },
      "conditional_exhibits": [],
      "depends_on": []
     },
@@ -15231,8 +15261,8 @@
      "candidate_md": "Tailwynn's leadership wants one answer: which route do we launch? Your recommendation.",
      "interviewer_md": "> - **hint_L0:** ничего. Движок молчит и ждёт, пока кандидат сам выйдет на вопрос.\n> - **hint_L1** (если застрял, после явного «не знаю, что дальше»): «По какому критерию сравнивать маршруты — выручка или прибыль?»\n> - **hint_L2** (крайний случай, если L1 не помог): reveal cost by route: A profit $4M vs B $10M.\n> - **Conditional exhibit — Cost by route:** `reveal_on_request`. Не показывать автоматически — только когда кандидат сам запросит. Триггеры-запросы: \"cost per route\" · \"profit not revenue\" · \"route economics\" · \"what's the cost of each route\".\n> *Инсайт = добываемый, не преподнесённый. В interviewee-led режиме движок держит это закрытым; в interviewer-led (McKinsey-style) может подать L1 проактивно.*\n\n---\n\n---\n\n**Conditional exhibits:** {'title': 'Cost by route', 'triggers': ['cost per route', 'profit not revenue', 'route economics', \"what's the cost of each route\"]}\n\n**Partner answer (Pyramid):**\n\n*\"Tailwynn should launch Route B — it earns $10M of profit versus $4M for the highest-revenue Route A, because revenue is the wrong ranking criterion; profit is.\"* Facts: profits are A $4M / B $10M / C $3M; Route A's high revenue is consumed by $44M of cost; A would need a 14% cost cut to catch B. Risks: (internal) the cost estimates drive the ranking — validate stage-length and fuel assumptions; (external) a competitor could enter Route B, compressing its margin. Next steps: launch Route B; monitor competitive entry and cost assumptions; hold A/C as contingencies if B's economics shift.\n\n> **🎬 Interviewer-only disclosure (для движка, не показывать кандидату).**\n> Ключевой инсайт кейса кандидат должен **добыть сам**, а не получить в подарок.\n> - **Что кандидат должен спросить сам (L0 — тишина по умолчанию):** candidate should ask for cost by route before ranking; not rank on revenue.",
      "hints": {
-      "L1": "По какому критерию сравнивать маршруты — по выручке или по прибыли?",
-      "L2": "Запроси структуру затрат по каждому маршруту и сравнивай то, что остаётся после них."
+      "L1": "",
+      "L2": ""
      },
      "conditional_exhibits": [],
      "depends_on": [
@@ -34605,8 +34635,8 @@
      "depends_on": [],
      "conditional_exhibits": [],
      "hints": {
-      "L1": "",
-      "L2": ""
+      "L1": "Своя генерация освобождает от договора с сетью?",
+      "L2": "Поставь рядом экономию на киловатт-часе и то, что сеть берёт за резерв."
      },
      "candidate_md": "",
      "interviewer_md": "**Верно.** Резерв `400 × 4,100 × 12 = $19.68M/год` → чистая экономия `$67.36M`;\nочередь 3 года → поток идёт с 4-го: `(7.606080 − 2.486852) = 5.119228` →\n   `NPV = 67.36 × 5.119228 − 612 = −$267.17M` → **не строить. Флип, расхождение 634.04%.**"
@@ -34629,8 +34659,8 @@
      "depends_on": [],
      "conditional_exhibits": [],
      "hints": {
-      "L1": "Своя генерация освобождает от договора с сетью?",
-      "L2": "Поставь рядом экономию на киловатт-часе и то, что сеть берёт за резерв."
+      "L1": "",
+      "L2": ""
      },
      "candidate_md": "",
      "interviewer_md": "**Синтез.** Вывод: **не строить генерацию, а законтрактовать сетевую мощность\nдолгосрочно** — вопрос не в цене мегаватт-часа, а в том, что регламент присоединения\n   делает собственную генерацию дополнением к сети, а не заменой ей.\n\n**Подсказки.** L1: «Своя генерация освобождает от договора с сетью?»\nL2: «Проверь, с какого года начинается экономия и что сеть берёт за резерв всё это время.»\n\n---\n\n## Отброшенные попытки первой грунтовки\n\n**#188** строился как flip. Прогон дал `+6,120.89` против `+3,639.52` — обе величины\nположительные. Чтобы получить флип, пришлось бы втрое завысить выбытие (порог 3.46%\nпротив реальных 1.1%). Не докручивал: кейс переведён в overstate, трудность перенесена\nтуда, где она настоящая — наив и верный ответ считают **разных людей**.\n\n**#189** первая грунтовка дала `EV = −0.01B` — формально флип, практически неотличимо\nот нуля. Норма [D1] такой запас запрещает. Балансовый капитал цели поднят с 18.4 до 21.0,\nзапас стал `+2.59B` по ожиданию против `−20.70B` в хвосте.\n\n**#190** наив был определён как «полный перенос без изменения объёма» и давал ровно\n`0.00` — считать нечего. Перестроен: наив берёт эластичность категории, верный —\nперекрёстную, потому что конкурент с локальной сборкой пошлину не платит.\n\n**#191** порог по плате за резерв не существовал: при нулевой плате проект всё равно\n`−166.43M`, связывала очередь. Норма [9d] запрещает печатать несуществующий порог.\nПлата снижена до реалистичных `$4,100`, и результат оказался ещё честнее: **порога\nне существует ни по одной переменной по отдельности** — так и объявлено в кейсе."
@@ -35121,8 +35151,8 @@
      "depends_on": [],
      "conditional_exhibits": [],
      "hints": {
-      "L1": "",
-      "L2": ""
+      "L1": "Сходится ли заявленный пик с пациентской математикой в том же листе?",
+      "L2": "Посчитай пик вторым путём и поставь рядом с заявленным."
      },
      "candidate_md": "",
      "interviewer_md": "**Оценка на обеих базах.** Аннуитет 4 года под 11% = `3.102446`.\n```\n   на заявленном пике: 3,400.00 × 0.34 × 3.102446 = $3,586.43M -> дешевле цены $2,600M\n   на счётном пике:    1,791.19 × 0.34 × 3.102446 = $1,889.40M -> ДОРОЖЕ цены\n   ```\n   **Флип. Разрыв $1,697.03M = 89.82%.**"
@@ -35145,8 +35175,8 @@
      "depends_on": [],
      "conditional_exhibits": [],
      "hints": {
-      "L1": "Сходится ли заявленный пик с пациентской математикой в том же листе?",
-      "L2": "Посчитай пик вторым путём и поставь рядом с заявленным."
+      "L1": "",
+      "L2": ""
      },
      "candidate_md": "",
      "interviewer_md": "**Синтез.** Вывод первым предложением: **не платить $2,600M; потолок — $1,889M,\nи его надо привязать к подтверждённой приверженности.**\n   Риски: внутренний — если наши данные дистрибуции неполны, счётный пик занижен;\n   внешний — конкурирующий покупатель может принять прогноз продавца и перебить цену,\n   и тогда мы теряем актив, но не деньги.\n\n**Подсказки.** L1: «Заявленный пик можно вывести из остальных строк экзибита?»\nL2: «Умножь число пациентов на цену и приверженность и сравни с заявленным пиком.»\n\n---\n\n## Отброшенные попытки\n\n**#192** первая грунтовка дала наив и верный ответ на **одном канале** — реферальная\nпобеждала и по конверсии, и по приростной ценности, разница $0.00M. Причина: бонус\nза приглашение был задан $3.20, то есть нереалистично дёшево. Поднял до $19.50 —\nуровень действующих программ — и снизил цену инфлюенсеров до $4.20. Выбор разошёлся:\nнаив берёт реферальную (−$1.39M), верный — инфлюенсеров (+$0.10M).\nПобочно вскрылось лучшее: **порога по перехвату не существует** — канал убыточен\nструктурно, CAC $171.05 против LTV $111.75, и перехват объясняет высокую конверсию,\nно не убивает канал. Это сильнее исходного замысла и вынесено в шаг 5.\n\n**#194** порог считался бисекцией и упёрся в границу диапазона (40 ч), потому что\nфункция убывает по часам стоянки, а искался рост. Решил уравнение прямо:\n`4,112 × 4,600 × 186 / 359,352,000 = 9.79 ч`. Результат оказался содержательнее:\nнаивная цифра требует, чтобы **более крупные** суда обрабатывались **быстрее** нынешних.\nФизически невозможно — так и записано в кейсе."
@@ -37044,8 +37074,8 @@
      "depends_on": [],
      "conditional_exhibits": [],
      "hints": {
-      "L1": "",
-      "L2": ""
+      "L1": "База, от которой ты считаешь премию, свободна от ожиданий этой же сделки?",
+      "L2": "Поставь рядом цену за день до объявления и цену до первых сообщений о переговорах."
      },
      "candidate_md": "",
      "interviewer_md": "Верный счёт.**\n```\n96.0M × ($52.08 − $33.20) = $1,812.48M премии = 56.87%\nзапас против синергий: 2,100.0 − 1,812.48 = $287.52M\n```\n**Ответ: премия $1,812.48M. Решение не меняется — сделка всё ещё оправдана, —\nно запас меньше в 3.27 раза. Наив занижает премию на $652.80M, то есть на 56.29%\nот меньшей по модулю величины.**"
@@ -37092,8 +37122,8 @@
      "depends_on": [],
      "conditional_exhibits": [],
      "hints": {
-      "L1": "База, от которой ты считаешь премию, свободна от ожиданий этой же сделки?",
-      "L2": "Поставь рядом цену за день до объявления и цену до первых сообщений о переговорах."
+      "L1": "",
+      "L2": ""
      },
      "candidate_md": "",
      "interviewer_md": "Синтез — партнёрский ответ (Pyramid):**\n> Мы рекомендуем **подтвердить сделку, но пересчитать её экономику от невозмущённой\n> цены и сократить круг синергий, которые комитет считает обязательными** — запас\n> над премией не $940M, а $288M.\n>\n> Три факта. Первое: премия 30.20% посчитана от $40.00, а эта цена содержит шесть недель\n> ожиданий сделки — первые сообщения в прессе вышли на день −42, невозмущённая цена\n> $33.20. Второе: от неё премия $1,812.48M, то есть 56.87%, и запас против синергий\n> $2,100M сжимается с $940.32M до $287.52M. Третье: порог безубыточности — невозмущённая\n> цена $30.21, запас над ним 9.92%, то есть решение верное, но не с той прочностью,\n> которую показывал первый расчёт.\n>\n> Риски. Внутренний: план интеграции свёрстан под запас в $940M, и первая же\n> недостигнутая синергия съедает четверть реального запаса — целевые показатели\n> команд надо пересобрать до закрытия, а не после. Внешний: акция покупателя оплачивает\n> сделку, и её падение до закрытия увеличивает размытие; коридор коэффициента обмена\n> должен быть согласован сейчас, а не при первом сообщении о срыве.\n>\n> Следующие шаги: за две недели — заключение о справедливости цены на невозмущённой\n> базе и перечень синергий с ответственными и сроками; параллельно — согласование\n> коридора коэффициента обмена с продавцом."
@@ -38204,8 +38234,8 @@
      "depends_on": [],
      "conditional_exhibits": [],
      "hints": {
-      "L1": "",
-      "L2": ""
+      "L1": "Опрос меряет предпочтение или поведение?",
+      "L2": "Сравни тех, кто назвал причину, с теми, кто пришёл ради неё."
      },
      "candidate_md": "",
      "interviewer_md": "Верный счёт.**\n```\n3.1M × 74% = 2.294M\n15.3M × 6% = 0.918M\nитого 3.212M\nсходимость: 3.1 + 15.3 = 18.4M = база\n3.212M × $14.20 × 12 = $547.32M в год\n```\n**Ответ: $547.32M. Знак не меняется — отток есть в любом случае, — но наив завышает\nпотерю в 1.78 раза, то есть на 77.58% от меньшей по модулю величины.**"
@@ -38252,8 +38282,8 @@
      "depends_on": [],
      "conditional_exhibits": [],
      "hints": {
-      "L1": "Опрос меряет предпочтение или поведение?",
-      "L2": "Сравни тех, кто назвал причину, с теми, кто пришёл ради неё."
+      "L1": "",
+      "L2": ""
      },
      "candidate_md": "",
      "interviewer_md": "Синтез — партнёрский ответ (Pyramid):**\n> Мы рекомендуем **не выкупать права выше рыночной цены и направить разницу\n> на удержание сезонной когорты** — потеря составит $547.32M, а не $971.96M.\n>\n> Три факта. Первое: 31% из опроса — это доля назвавших лигу главной причиной,\n> и она измеряет предпочтение, а не поведение. Второе: по трём предыдущим случаям\n> в отрасли уходит 74% тех, кто подписался в неделю старта сезона, и 6% всех\n> остальных — 3.212M против 5.704M у наивной оценки. Третье: чтобы наивная цифра\n> оказалась верной, обычный подписчик должен уходить с вероятностью 22.26%, то есть\n> в 3.71 раза чаще, чем уходит.\n>\n> Риски. Внутренний: потолок цены за права сейчас установлен по завышенной оценке\n> потерь, и переговорная команда пойдёт на аукцион с неверным мандатом — его надо\n> переписать до подачи заявки. Внешний: конкурент, купивший права, может пойти\n> за нашей сезонной когортой пакетным предложением, и тогда отток превысит 74%;\n> удержание надо запускать до старта сезона, а не после.\n>\n> Следующие шаги: за три недели — расчёт стоимости удержания сезонной когорты\n> и потолка цены за права от $547.32M; параллельно — тест пакета с обзорами\n> на выборке из этой когорты."
@@ -41081,6 +41111,755 @@
    "lang_note": "RU-native, партия 201–235 блоки G и H, жанр «реальные сюжеты, свои числа»",
    "difficulty_test": "Убыток региональных маршрутов виден и складывается в $84.0M. Он не является рычагом: 29% пассажиров дальних рейсов приходят с региональных, и без них остаётся 34%. Закрытие всех даёт минус $13.61M. Закрыть надо 28 маршрутов из 46 — те, что подвоза не дают.",
    "difficulty_family": "F9"
+  },
+  {
+   "id": 236,
+   "title": "The Cement of Surprise",
+   "title_registry": "The Cement of Surprise",
+   "case_type": "Cost Reduction",
+   "industry": "Цемент",
+   "format": "F1",
+   "difficulty": "Hard",
+   "depth": "STRONG",
+   "trap_or_clean": "Trap",
+   "naive_error": "E02",
+   "generation": null,
+   "est_minutes": "40",
+   "header_md": "## Case 236 — The Cement of Surprise\n\n> **ПЛАШКА** · Cost Reduction · Цемент · F1 · **Hard** · 🔥 STRONG\n> **T/C:** Trap-action · **Семья:** F2 второй порядок · **Ошибка:** E02\n> **Экзибиты (2):** печи и топливный баланс · table · **Слои:** [OD] [MM]\n> **difficulty_test:** Проектная доля замещения RDF 45% применяется ко всему тепловому\n> балансу завода — экономия $17.37M и окупаемость 3.34 года. Печи неоднородны:\n> кальцинатор принимает 45% тепла, мокрая печь по нормативу выбросов только 12%.\n> Второй порядок: зольность RDF снижает выпуск, а с ним и базу топливной экономии.\n> Экономия падает до $8.80M, приростные $27.0M на мокрые печи окупаются 13.79 года\n> при горизонте восемь лет, и порог их выгодности лежит выше разрешённой доли.",
+   "prompt_md": "> *Ситуация на июль 2026 года.*\n>\n> **Lafarje** готовит перевод завода на альтернативное топливо RDF. Инвестиционный\n> комитет получил расчёт годовой экономии и срок окупаемости системы подачи\n> на все печи завода.\n>\n> Проверить до утверждения капитальных затрат. Данные — в ex1.",
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Печи и топливный баланс",
+     "reveal": "auto",
+     "triggers": [],
+     "body_md": "```\nГОД\n\nпечь A (сухая)            ████████████████ 1.05 Mt клинкера\nпечь B (сухая)            ███████████████ 1.00 Mt\nпечь C (мокрая)           █████████ 0.60 Mt\nпечь D (мокрая)           ████████ 0.55 Mt\n                            ↓\nвыпуск завода             ████████████████████████████████████████████████ 3.20 Mt\n\nудельный расход тепла:    сухая печь 3.35 ГДж/т · мокрая печь 5.60 ГДж/т\nтепловой баланс завода:   13.3075 млн ГДж\n\nпеткокс                   $4.80 за ГДж\nRDF                       $1.90 за ГДж\n\nпроектная доля замещения RDF по заводу   45% тепловой нагрузки\nсистема подачи на все четыре печи        $58.0M · горизонт оценки 8 лет\n```",
+     "render": null
+    },
+    {
+     "id": "ex2",
+     "title": "Exhibit ex2",
+     "reveal": "on_request",
+     "triggers": [
+      "нормативы выбросов",
+      "ограничения по печам",
+      "кальцинатор",
+      "зольность",
+      "качество клинкера"
+     ],
+     "body_md": "| Условие | Значение |\n|---|---|\n| Печь с кальцинатором (A, B) принимает RDF | до **45%** тепловой нагрузки |\n| Мокрая печь (C, D) по нормативу выбросов | до **12%** тепловой нагрузки |\n| Зольность RDF снижает выпуск печи | на **0.10 пункта на каждый пункт** доли RDF |\n| Вклад тонны клинкера в покрытие, **за вычетом топлива** | **$18.60** |\n| Система подачи только на печи A и B | **$31.0M** |",
+     "render": null
+    }
+   ],
+   "steps": [
+    {
+     "step": 1,
+     "label": "[OD] С чего начинаешь",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "[OD] С чего начинаешь.** Комитет просит проверить окупаемость перевода на RDF.\nОжидается: сначала выяснить, все ли печи одинаково способны принять альтернативное\nтопливо, — потому что экономия считается на тепле, а тепло производят разные агрегаты.\n🚩 Флаг за немедленный пересчёт экономии на тонну."
+    },
+    {
+     "step": 2,
+     "label": "Наивный счёт",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "Наивный счёт.**\n```\n13.3075 × 45% × ($4.80 − $1.90) = $17.37M в год\nокупаемость 58.0 / 17.37 = 3.34 года\n```\n**Ответ: 3.34 года при горизонте 8 лет → ставить систему на все четыре печи.**"
+    },
+    {
+     "step": 3,
+     "label": "[MM] Прикидка вслух",
+     "depends_on": [],
+     "conditional_exhibits": [
+      "ex2"
+     ],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "[MM] Прикидка вслух.** Не считая: мокрая печь и печь с кальцинатором сжигают\nтопливо по-разному. Что мешает мокрой печи принять столько же RDF? Ожидается устно:\nнесгоревшая фракция и норматив выбросов; предельная доля будет разной, и проектная\nдоля по заводу — не свойство ни одной печи.\n*(выдать ex2)*"
+    },
+    {
+     "step": 4,
+     "label": "Верный счёт",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "Печи в этом расчёте различаются между собой или считаются одной величиной?",
+      "L2": "Поставь рядом предельную долю альтернативного топлива для печи с кальцинатором и для мокрой печи."
+     },
+     "candidate_md": "",
+     "interviewer_md": "Верный счёт.**\n```\nсухие печи: выпуск падает на 4.5%, значит и тепла проходит меньше\n   тепло 6.8675 × 0.955 = 6.5585 млн ГДж\n   топливо 6.5585 × 45% × $2.90 = $8.56M\n   выпуск  2.05 × 4.5% × $18.60 = $1.72M\n   итог                            $6.84M\n\nмокрые печи: тепло 6.4400 × 0.988 = 6.3627 млн ГДж\n   топливо 6.3627 × 12% × $2.90 = $2.21M\n   выпуск  1.15 × 1.2% × $18.60 = $0.26M\n   итог                            $1.96M\n\nвсе четыре печи: $8.80M в год · за 8 лет чистыми $12.40M\nтолько A и B:    $6.84M в год · за 8 лет чистыми $23.74M\n```\n**Ответ: ставить только на две сухие печи. Приростные $27.0M против приростных\n$1.96M в год — окупаемость 13.79 года при горизонте восемь лет. Знак экономии\nне меняется, меняется действие.**"
+    },
+    {
+     "step": 5,
+     "label": "Объяснение",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "Объяснение.** Зачёт, если ВСЕ: (1) названо, что 45% — предел печи с кальцинатором,\nа не свойство завода, и что применение проектной доли ко всему тепловому балансу\nсоздаёт экономию из воздуха; (2) назван второй порядок и назван последовательно:\nпадение выпуска отнимает не только вклад тонны, но и тепло, а значит и базу самой\nтопливной экономии; (3) **не** утверждается, что RDF на мокрых печах вреден — он\nдаёт $1.96M в год, просто не оправдывает своей доли капитальных затрат."
+    },
+    {
+     "step": 6,
+     "label": "Sensitivity",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "Sensitivity.**\n```\nприростные $27.0M окупаются за 8 лет при доле RDF на мокрых печах 20.90%\nконтроль: экономия мокрых при 20.90% = $3.375M против требуемых $3.375M в год\nнорматив выбросов разрешает 12% → порог ВЫШЕ разрешённого\n```\n**Ответ: порога в допустимой области нет.** Зачёт за произнесённое: вложение\nв мокрые печи не станет выгодным от настройки процесса — только от смены норматива,\nа это не проектное решение."
+    },
+    {
+     "step": 7,
+     "label": "Brainstorm",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "Brainstorm.** Шесть ходов, чтобы поднять отдачу от RDF при действующем нормативе.\nMECE. Зачёт ≥6 в ≥2 группах.\n*Топливо и печь:* поднять долю на A и B выше проектной через дожиг в кальцинаторе ·\nподсушка RDF под зольность · сортировка фракции на входе · перевод мокрых печей\nна сухой способ как отдельный проект.\n*Экономика:* продажа сэкономленных квот на выбросы · долгосрочный контракт на RDF\nпод фиксированную цену · загрузка A и B за счёт остановки мокрых печей в межсезонье ·\nплата муниципалитета за приём отходов как второй источник выручки."
+    },
+    {
+     "step": 8,
+     "label": "Синтез — партнёрский ответ (Pyramid):",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "Синтез — партнёрский ответ (Pyramid):**\n> Мы рекомендуем **поставить систему подачи RDF только на две печи с кальцинатором\n> за $31.0M и отложить мокрые печи до пересмотра норматива выбросов** — это даёт\n> $23.74M за горизонт против $12.40M у полного варианта.\n>\n> Три факта. Первое: проектные 45% замещения достижимы только на печи с кальцинатором;\n> мокрая печь ограничена нормативом на уровне 12%, и применение проектной доли\n> ко всему тепловому балансу завышает экономию почти вдвое. Второе: зольность RDF\n> отнимает выпуск, а вместе с выпуском и тепло, поэтому валовая экономия на сухих\n> печах $8.56M превращается в $6.84M. Третье: приростные $27.0M на мокрые печи дают\n> $1.96M в год — окупаемость 13.79 года при горизонте восемь, и порог их выгодности\n> лежит на доле 20.90%, то есть выше того, что вообще разрешено.\n>\n> Риски. Внутренний: экономия $17.37M уже разослана по комитету и, скорее всего,\n> заложена в бюджет следующего года — цифру надо отозвать до утверждения плана,\n> а не после. Внешний: норматив выбросов для мокрых печей ужесточается в большинстве\n> юрисдикций, а не смягчается, поэтому отложенный вариант надо считать отменённым,\n> а не поставленным в очередь.\n>\n> Следующие шаги: за восемь недель — рабочий проект подачи на A и B с выходом\n> на 45% и замером зольности на реальной партии RDF; параллельно — отдельная оценка\n> перевода печей C и D на сухой способ, где ограничение снимается конструктивно,\n> а не переговорами."
+    }
+   ],
+   "step_count": 8,
+   "qa_checks_md": "",
+   "optimal_entry": 2,
+   "terminal": 8,
+   "trap_subtype": "action",
+   "lang": "ru",
+   "lang_note": "RU-native, партия 236–270 блок A, жанр «реальные сюжеты, свои числа»",
+   "difficulty_test": "Проектная доля замещения RDF 45% применяется ко всему тепловому балансу завода — экономия $17.37M и окупаемость 3.34 года. Печи неоднородны: кальцинатор принимает 45% тепла, мокрая печь по нормативу выбросов только 12%. Второй порядок: зольность RDF снижает выпуск, а с ним и базу топливной экономии. Экономия падает до $8.80M, приростные $27.0M на мокрые печи окупаются 13.79 года при горизонте восемь лет, и порог их выгодности лежит выше разрешённой доли.",
+   "difficulty_family": "F2",
+   "reasoning_form": "Ф1"
+  },
+  {
+   "id": 237,
+   "title": "Fuel's Gold",
+   "title_registry": "Fuel's Gold",
+   "case_type": "Growth Strategy",
+   "industry": "Бункеровка судов",
+   "format": "F1",
+   "difficulty": "Hard",
+   "depth": "STRONG",
+   "trap_or_clean": "Trap",
+   "naive_error": "E16",
+   "generation": null,
+   "est_minutes": "40",
+   "header_md": "## Case 237 — Fuel's Gold\n\n> **ПЛАШКА** · Growth Strategy · Бункеровка судов · F1 · **Hard** · 🔥 STRONG\n> **T/C:** Trap-overstate · **Семья:** F8 разворота нет · **Ошибка:** E16\n> **Экзибиты (2):** контракт и маржа · table · **Слои:** [OD] [MM]\n> **difficulty_test:** Контракт take-or-pay на 2.40 Mt даёт по наивному счёту $14.35M\n> в год. Физически отгрузить можно 1.728 Mt: четыре баржи по 4,500 тонн и 96 рейсов.\n> Недобор оплачивается штрафом, эффект падает до $5.95M, а контракт ровно на 1.728 Mt\n> даёт $10.33M. Возражение «докупим баржи» проверяется на горизонте: две новые баржи\n> добавляют $32.15M за восемь лет и стоят $37.0M — не окупаются. Контракт на десять\n> лет без права выхода: ошибка размера оплачивается сорок раз поквартально.",
+   "prompt_md": "> *Ситуация на июль 2026 года.*\n>\n> **Vitel** заходит в новый бункеровочный хаб и должна подписать долгосрочный\n> контракт на терминальные слоты. Коммерческий директор предлагает брать объём\n> под весь план продаж — слоты дефицитны, второй раз их не дадут.\n>\n> Решить, на какой объём подписываться. Данные — в ex1.",
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Контракт и маржа",
+     "reveal": "auto",
+     "triggers": [],
+     "body_md": "```\nГОД\n\nнаш план продаж в хабе   ████████████████████████ 2.40 Mt\nмаржа бункеровки         ██████████ $9.40 за тонну\nставка терминального слота  $3.42 за тонну контрактного объёма\n                           ↓\nплата за слоты при 2.40 Mt  $8.21M в год\n\nконтракт: начало января 2027 · срок 10 лет · take-or-pay · выход не предусмотрен\n```",
+     "render": null
+    },
+    {
+     "id": "ex2",
+     "title": "Exhibit ex2",
+     "reveal": "on_request",
+     "triggers": [
+      "флот",
+      "баржи",
+      "чем возить",
+      "штраф за недобор",
+      "сроки поставки",
+      "стоимость баржи"
+     ],
+     "body_md": "| Условие | Значение |\n|---|---|\n| Барж в собственности | **2** |\n| Барж в тайм-чартере | **2** |\n| Итого доступный флот | **4** |\n| Грузоподъёмность баржи | **4,500 тонн** |\n| Рейсов на баржу в год | **96** |\n| Новая баржа: цена и срок постройки | **$18.5M**, **26 месяцев**, свободных на рынке нет |\n| Штраф за недобор законтрактованного объёма | **$3.10** за тонну |",
+     "render": null
+    }
+   ],
+   "steps": [
+    {
+     "step": 1,
+     "label": "[OD] С чего начинаешь",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "[OD] С чего начинаешь.** Надо выбрать объём десятилетнего контракта take-or-pay.\nОжидается: сначала выяснить, чем физически возить, — потому что контракт фиксирует\nобязательство, а отгружает флот. 🚩 Флаг за расчёт маржи от плана продаж."
+    },
+    {
+     "step": 2,
+     "label": "Наивный счёт",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "Наивный счёт.**\n```\n2.40 × $9.40 − 2.40 × $3.42 = $14.35M в год\n```\n**Ответ: подписывать на 2.40 Mt, план продаж покрыт целиком.**"
+    },
+    {
+     "step": 3,
+     "label": "[MM] Прикидка вслух",
+     "depends_on": [],
+     "conditional_exhibits": [
+      "ex2"
+     ],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "[MM] Прикидка вслух.** Не считая: бункеровка идёт с баржи к борту судна. Сколько\nрейсов в год делает одна баржа и сколько барж понадобится на такой объём? Ожидается\nустно: обратный ход — от требуемой отгрузки назад к флоту, и проверка, успевает ли\nфлот появиться внутри срока контракта.\n*(выдать ex2)*"
+    },
+    {
+     "step": 4,
+     "label": "Верный счёт",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "Контракт фиксирует то, что мы можем отгрузить, или то, что мы обязаны?",
+      "L2": "Поставь рядом прогноз спроса и то, чем этот объём физически возят."
+     },
+     "candidate_md": "",
+     "interviewer_md": "Верный счёт.**\n```\nпотолок отгрузки: 4 × 4,500 × 96 = 1.728 Mt\n\nпри наивном контракте:\n   1.728 × $9.40 − 2.40 × $3.42 − (2.40 − 1.728) × $3.10 = $5.95M в год\nпри контракте по флоту:\n   1.728 × ($9.40 − $3.42) = $10.33M в год\n\nцена переподписки: $3.42 + $3.10 = $6.52 за каждую законтрактованную\n                   и не отгруженную тонну\n```\n**Ответ: подписывать на 1.728 Mt, а не на 2.40 Mt. Знак не меняется — меняется\nразмер обязательства.**"
+    },
+    {
+     "step": 5,
+     "label": "Объяснение",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "Объяснение.** Зачёт, если ВСЕ: (1) названо, что контракт фиксирует обязательство,\nа не возможность, и что план продаж — верхняя граница выручки, а не нижняя;\n(2) посчитана цена переподписки $6.52 за тонну и названы обе её части; (3) **не**\nутверждается, что в хаб заходить не надо — заходить надо, но объёмом флота,\nа не объёмом плана."
+    },
+    {
+     "step": 6,
+     "label": "Sensitivity",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "Sensitivity.**\n```\nВОЗРАЖЕНИЕ КАНДИДАТА: «подпишем 2.40 и закажем баржи». Считаем на горизонт:\n\n  наив как есть   (контракт 2.40, флот 4)                    $59.52M\n  A  контракт 2.40 + две новые баржи                         $89.72M\n  B  контракт 1.728, барж не докупаем                       $103.33M\n  C  лестница 1.728 → 2.40 с третьего года + две баржи       $98.48M\n\nлучший вариант с баржами — C; он добавляет к B $32.15M валовыми за восемь лет\nи требует $37.0M на две баржи, поэтому C проигрывает B на $4.85M\nпорог: лестница с баржами обгоняет B при цене баржи ниже $16.07M · факт $18.5M · разрыв 15.09%\n\nвторой порог: наивный контракт остаётся в плюсе, пока отгружаем больше 1.252 Mt\nконтроль: 1.252 × $9.40 − $8.21M − (2.40 − 1.252) × $3.10 = $0.00M\n```\n**Ответ: лучший вариант — B, контракт по флоту без докупки. Порог цены баржи $16.07M.**\nЗачёт за произнесённое: наивный контракт не убыточен — он просто хуже правильного\nна $43.81M за горизонт, и именно поэтому ошибку не поймают десять лет."
+    },
+    {
+     "step": 7,
+     "label": "Brainstorm",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "Brainstorm.** Шесть ходов, чтобы поднять отгрузку без покупки барж. MECE.\nЗачёт ≥6 в ≥2 группах.\n*Флот и операции:* субчартер у местного оператора под пик · ночная бункеровка\nдля роста числа рейсов · сокращение оборота у причала · баржа большей\nгрузоподъёмности при плановой замене тайм-чартера.\n*Контракт:* лестница объёма по годам вместо плоского обязательства · право\nпереуступки слота третьей стороне · зачёт недобора против перевыполнения соседнего\nгода · опцион на расширение вместо обязательства."
+    },
+    {
+     "step": 8,
+     "label": "Синтез — партнёрский ответ (Pyramid):",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "Синтез — партнёрский ответ (Pyramid):**\n> Мы рекомендуем **подписать контракт на 1.728 Mt с опционом на расширение\n> и не заказывать новые баржи** — это даёт $103.33M за горизонт против $89.72M\n> у варианта с полным объёмом и флотом и против $59.52M у полного объёма без флота.\n>\n> Три факта. Первое: физический потолок отгрузки — четыре баржи по 4,500 тонн\n> и 96 рейсов, то есть 1.728 Mt против плана продаж в 2.40 Mt. Второе: каждая\n> законтрактованная и не отгруженная тонна стоит $6.52 — слот $3.42 плюс штраф\n> $3.10, и на разнице объёмов это $4.38M в год все десять лет. Третье: докупка\n> двух барж проверена и отклонена счётом: лучший вариант с ними — лестница C,\n> она добавляет к B $32.15M валовыми за восемь лет и требует $37.0M, то есть\n> проигрывает B на $4.85M и окупалась бы лишь при цене баржи ниже $16.07M.\n>\n> Риски. Внутренний: план продаж уже стал целевой цифрой для коммерческой команды,\n> и опцион на расширение будет прочитан как согласие на 2.40 Mt — объём в бюджете\n> надо переставить на 1.728 Mt одновременно с подписанием. Внешний: терминал\n> дефицитен и может отказать в опционе; тогда правильный ход — лестница объёма\n> по годам, но её цена известна заранее: вариант C хуже варианта B на $4.85M.\n>\n> Следующие шаги: за четыре недели — переговорная позиция по опциону с расчётом\n> $6.52 за тонну переподписки как аргументом; параллельно — проработка субчартера\n> под пиковые месяцы, который поднимает потолок отгрузки без капитальных затрат\n> и без десятилетнего обязательства."
+    }
+   ],
+   "step_count": 8,
+   "qa_checks_md": "",
+   "optimal_entry": 2,
+   "terminal": 8,
+   "trap_subtype": "overstate",
+   "lang": "ru",
+   "lang_note": "RU-native, партия 236–270 блок A, жанр «реальные сюжеты, свои числа»",
+   "difficulty_test": "Контракт take-or-pay на 2.40 Mt даёт по наивному счёту $14.35M в год. Физически отгрузить можно 1.728 Mt: четыре баржи по 4,500 тонн и 96 рейсов. Недобор оплачивается штрафом, эффект падает до $5.95M, а контракт ровно на 1.728 Mt даёт $10.33M. Возражение «докупим баржи» проверяется на горизонте: две новые баржи добавляют $32.15M за восемь лет и стоят $37.0M — не окупаются. Контракт на десять лет без права выхода: ошибка размера оплачивается сорок раз поквартально.",
+   "difficulty_family": "F8",
+   "reasoning_form": "Ф8"
+  },
+  {
+   "id": 238,
+   "title": "Silence of the Fans",
+   "title_registry": "Silence of the Fans",
+   "case_type": "M&A",
+   "industry": "Охлаждение ЦОД",
+   "format": "F1",
+   "difficulty": "Medium",
+   "depth": "STRONG",
+   "trap_or_clean": "Trap",
+   "naive_error": "E15",
+   "generation": null,
+   "est_minutes": "40",
+   "header_md": "## Case 238 — Silence of the Fans\n\n> **ПЛАШКА** · M&A · Охлаждение ЦОД · F1 · **Medium** · 🔥 STRONG\n> **T/C:** Trap-overstate · **Семья:** F3 причина против отбора · **Ошибка:** E15\n> **Экзибиты (2):** площадка и сопоставимые · table · **Слои:** [OD] [MM]\n> **difficulty_test:** Площадка оценивается по подведённой мощности 42.0 МВт и средней\n> сделке $9.54M за подведённый МВт — $400.68M против цены $268.0M. Продаваемая\n> мощность — минимум по цепочке: электричество 42.0, охлаждение 31.0, водозабор\n> по разрешению 27.00 МВт. Средняя собрана по выборке, где в восьми сделках из десяти\n> подведённая мощность равна продаваемой, то есть смешивает два знаменателя. Верная\n> оценка 27.00 × $10.40M = $280.80M, запас к цене всего 4.78%.",
+   "prompt_md": "> *Ситуация на июль 2026 года.*\n>\n> **Equinox** рассматривает покупку площадки центра обработки данных. Инвестиционный\n> меморандум продавца показывает подведённую мощность и сопоставимые сделки рынка;\n> запрашиваемая цена выглядит существенно ниже расчётной стоимости.\n>\n> Решить, стоит ли брать по запрашиваемой цене. Данные — в ex1.",
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Площадка и сопоставимые сделки",
+     "reveal": "auto",
+     "triggers": [],
+     "body_md": "```\nНА МОМЕНТ СДЕЛКИ\n\nподведённая мощность     ████████████████████████ 42.0 МВт\nсредний остаточный срок договоров аренды   6.4 года\n\nсопоставимые сделки рынка: 10 транзакций\n                           средняя $9.54M за подведённый МВт\n\nзапрашиваемая цена       $268.0M\n```",
+     "render": null
+    },
+    {
+     "id": "ex2",
+     "title": "Exhibit ex2",
+     "reveal": "on_request",
+     "triggers": [
+      "охлаждение",
+      "вода",
+      "разрешения",
+      "состав выборки сделок",
+      "что именно сдаётся"
+     ],
+     "body_md": "| Условие | Значение |\n|---|---|\n| Установленная мощность охлаждения | **31.0 МВт** |\n| Разрешённый водозабор | **4,104 м³/сут** |\n| Расход воды на МВт при текущей технологии | **152 м³/сут** |\n| Восемь сделок, где продаваемая мощность равна подведённой | **$10.40M** за МВт |\n| Сделка X: подведено / продаётся | **38.0 / 22.0 МВт** — **$6.02M** за подведённый МВт |\n| Сделка Y: подведено / продаётся | **44.0 / 26.0 МВт** — **$6.15M** за подведённый МВт |",
+     "render": null
+    }
+   ],
+   "steps": [
+    {
+     "step": 1,
+     "label": "[OD] С чего начинаешь",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "[OD] С чего начинаешь.** Надо решить о покупке площадки по цене ниже расчётной.\nОжидается: сначала выяснить, что именно продаётся — подведённая мощность или та,\nкоторую можно сдать, — и к какому знаменателю относится средняя по сделкам.\n🚩 Флаг за немедленное умножение мощности на мультипл."
+    },
+    {
+     "step": 2,
+     "label": "Наивный счёт",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "Наивный счёт.**\n```\n42.0 × $9.54M = $400.68M\nцена $268.0M → дисконт $132.68M\n```\n**Ответ: брать не торгуясь, площадка стоит в полтора раза дороже цены.**"
+    },
+    {
+     "step": 3,
+     "label": "[MM] Прикидка вслух",
+     "depends_on": [],
+     "conditional_exhibits": [
+      "ex2"
+     ],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "[MM] Прикидка вслух.** Не считая: стойку нельзя запитать без охлаждения,\nа охлаждение — без воды. Какая из трёх мощностей окажется меньшей и одинаковы ли\nзнаменатели у десяти сделок? Ожидается устно: минимум по цепочке, и проверка,\nне смешивает ли средняя площадки с разрывом между подведённой и продаваемой\nмощностью и площадки без него.\n*(выдать ex2)*"
+    },
+    {
+     "step": 4,
+     "label": "Верный счёт",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "Мультипл сопоставимых — свойство рынка или свойство тех, кто в выборку попал?",
+      "L2": "Поставь рядом подведённую мощность и ту, которую ограничивает узкое место цепочки."
+     },
+     "candidate_md": "",
+     "interviewer_md": "Верный счёт.**\n```\nцепочка: электричество 42.0 · охлаждение 31.0 · вода 4,104 / 152 = 27.00 МВт\nпродаваемая мощность = 27.00 МВт\n\nзнаменатель: в восьми сделках подведённая мощность равна продаваемой, значит\n   $10.40M — это цена ПРОДАВАЕМОГО МВт; сделки X и Y выглядят дешёвыми\n   только потому, что у них есть разрыв: 22.0 × $10.40M / 38.0 = $6.02M\n\nоценка: 27.00 × $10.40M = $280.80M\nзапас к цене: 280.80 − 268.0 = $12.80M = 4.78%\n```\n**Ответ: брать можно, но запас 4.78%, а не 50%. Наив завышает стоимость на 42.69%\nот меньшей по модулю величины.**"
+    },
+    {
+     "step": 5,
+     "label": "Объяснение",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "Объяснение.** Зачёт, если ВСЕ: (1) названо, что продаётся минимум по цепочке,\nа не подведённая мощность; (2) названо, что средняя $9.54M смешивает два знаменателя:\nдля восьми площадок подведённая мощность и есть продаваемая, а для двух — нет,\nи применять такую среднюю к площадке с разрывом нельзя;\n(3) **не** утверждается, что сделку надо отменить — при запасе 4.78% она проходит,\nно переговорная позиция теперь другая."
+    },
+    {
+     "step": 6,
+     "label": "Sensitivity",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "Sensitivity.**\n```\nсделка остаётся в плюсе при водозаборе от 25.77 МВт = 3,917 м³/сут\nконтроль: 25.77 × $10.40M = $268.0M — ровно цена\nфакт 4,104 м³/сут · запас 4.78%\n\nрасширение водозабора до мощности охлаждения: 31.0 × $10.40M = $322.40M\nрасширение окупается, пока стоит меньше 322.40 − 280.80 = $41.60M\n```\n**Ответ: порог 3,917 м³/сут.** Зачёт за произнесённое: сделка держится на разрешении,\nкоторое выдаёт муниципалитет, и запас по нему меньше пяти процентов."
+    },
+    {
+     "step": 7,
+     "label": "Brainstorm",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "Brainstorm.** Шесть ходов, чтобы снять водное ограничение или обойти его.\nMECE. Зачёт ≥6 в ≥2 группах.\n*Технология:* переход на прямое жидкостное охлаждение стойки · сухие градирни\nв холодный сезон · замкнутый контур с доочисткой · аккумуляция холода на ночном тарифе.\n*Право и сделка:* заявка на расширение разрешения до закрытия сделки · покупка водной\nквоты у соседнего промышленного абонента · отложенный платёж, привязанный к получению\nразрешения · опцион на смежный участок со своим водозабором."
+    },
+    {
+     "step": 8,
+     "label": "Синтез — партнёрский ответ (Pyramid):",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "Синтез — партнёрский ответ (Pyramid):**\n> Мы рекомендуем **выходить на сделку с потолком $280.80M и отдельным условием\n> о расширении водозабора**, а не принимать запрашиваемые $268.0M как очевидный\n> дисконт — реальный запас составляет 4.78%, а не 50%.\n>\n> Три факта. Первое: продаётся не подведённая мощность, а минимум по цепочке —\n> электричество 42.0 МВт, охлаждение 31.0 МВт, вода 27.00 МВт по разрешению\n> в 4,104 м³/сут. Второе: средняя $9.54M за подведённый МВт смешивает два\n> знаменателя: в восьми сделках из десяти подведённая мощность равна продаваемой,\n> и именно такие площадки чаще выходят на рынок — цена продаваемого МВт составляет\n> $10.40M. Третье: сделка уходит в ноль уже при водозаборе 3,917 м³/сут против\n> разрешённых 4,104, то есть весь запас держится на пяти процентах одного разрешения.\n>\n> Риски. Внутренний: оценка $400.68M уже в инвестиционном комитете, и отказ от неё\n> выглядит как отказ от сделки; выносить надо не «дешевле, чем думали», а «актив\n> другой, и торгуемся мы за воду». Внешний: разрешение выдаёт муниципалитет,\n> и в засушливый год его скорее сокращают, чем расширяют — при сокращении на пять\n> процентов сделка становится убыточной, поэтому условие о цене надо привязывать\n> к факту разрешения, а не к заявке.\n>\n> Следующие шаги: за шесть недель — юридическая проверка перспектив расширения\n> водозабора и параллельная оценка перехода на жидкостное охлаждение, которое\n> снижает удельный расход воды; на переговоры выходить с потолком $280.80M\n> и отдельной ценой за расширение, где верхняя граница разумного — $41.60M."
+    }
+   ],
+   "step_count": 8,
+   "qa_checks_md": "",
+   "optimal_entry": 2,
+   "terminal": 8,
+   "trap_subtype": "overstate",
+   "lang": "ru",
+   "lang_note": "RU-native, партия 236–270 блок A, жанр «реальные сюжеты, свои числа»",
+   "difficulty_test": "Площадка оценивается по подведённой мощности 42.0 МВт и средней сделке $9.54M за подведённый МВт — $400.68M против цены $268.0M. Продаваемая мощность — минимум по цепочке: электричество 42.0, охлаждение 31.0, водозабор по разрешению 27.00 МВт. Средняя собрана по выборке, где в восьми сделках из десяти подведённая мощность равна продаваемой, то есть смешивает два знаменателя. Верная оценка 27.00 × $10.40M = $280.80M, запас к цене всего 4.78%.",
+   "difficulty_family": "F3",
+   "reasoning_form": "Ф2"
+  },
+  {
+   "id": 239,
+   "title": "There Will Be Sludge",
+   "title_registry": "There Will Be Sludge",
+   "case_type": "Pricing",
+   "industry": "Водоочистка",
+   "format": "F1",
+   "difficulty": "Hard",
+   "depth": "STRONG",
+   "trap_or_clean": "Trap",
+   "naive_error": "E20",
+   "generation": null,
+   "est_minutes": "40",
+   "header_md": "## Case 239 — There Will Be Sludge\n\n> **ПЛАШКА** · Pricing · Водоочистка · F1 · **Hard** · 🔥 STRONG\n> **T/C:** Trap-flip · **Семья:** F2 второй порядок · **Ошибка:** E20\n> **Экзибиты (2):** объём и тариф · table · **Слои:** [OD] [MM]\n> **difficulty_test:** В план заложен прирост прибыли $7.45M от повышения тарифа\n> на 14%. Тот же пересмотр норматива обязал промышленных абонентов поставить\n> предочистку: они дают 34% биллингового объёма и сбрасывают на 62% меньше.\n> Знаменатель движется вместе с числителем, и прибыль следующего года выходит\n> $3.59M против $5.24M в этом — план показывает не рост, а падение. Ловушка\n> второго уровня: отсюда не следует «не повышать» — при том же объёме без повышения\n> результат минус $2.30M, то есть повышение даёт $5.88M и обязательно.",
+   "prompt_md": "> *Ситуация на июль 2026 года.*\n>\n> **Veolla** обслуживает муниципальные очистные сооружения. Регулятор пересмотрел\n> норматив по сбросу и разрешил повышение тарифа за кубометр. Финансовая служба\n> посчитала прирост прибыли и внесла его в план следующего года.\n>\n> Проверить план до утверждения. Данные — в ex1.",
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Объём и тариф",
+     "reveal": "auto",
+     "triggers": [],
+     "body_md": "```\nГОД\n\nбиллинговый объём        ████████████████████ 41.6 млн м³\nинфильтрация в сеть      ██ 4.6 млн м³\n                           ↓\nчерез станцию проходит   ██████████████████████ 46.2 млн м³\n\nтариф сейчас             $1.28 за м³\nразрешённое повышение    +14%\n\nпеременные затраты       $0.42 за м³ фактически прошедшего объёма\nпостоянные затраты       $28.6M в год\n\nдоговор: тариф применяется к БИЛЛИНГОВОМУ объёму\n         переменные затраты идут по РАСХОДОМЕРУ станции\n```",
+     "render": null
+    },
+    {
+     "id": "ex2",
+     "title": "Exhibit ex2",
+     "reveal": "on_request",
+     "triggers": [
+      "промышленные абоненты",
+      "что ещё изменил норматив",
+      "предочистка",
+      "структура сброса"
+     ],
+     "body_md": "| Условие | Значение |\n|---|---|\n| Доля промышленных абонентов в биллинговом объёме | **34%** |\n| Что обязал их тот же пересмотр норматива | поставить локальную предочистку **до начала следующего года**; срок уже истёк, установки работают |\n| Насколько падает их сброс после предочистки | на **62%** |\n| Зависит ли предочистка от решения о тарифе | нет: её требует норматив |\n| Меняется ли инфильтрация | нет: она не зависит от абонентов |\n| Число промышленных абонентов | **26** |",
+     "render": null
+    }
+   ],
+   "steps": [
+    {
+     "step": 1,
+     "label": "[OD] С чего начинаешь",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "[OD] С чего начинаешь.** План следующего года опирается на прирост прибыли\nот повышения тарифа. Ожидается: сначала выяснить, что ещё изменилось в том же\nдокументе регулятора, — потому что тариф и объём меняет одно и то же решение.\n🚩 Флаг за немедленный пересчёт выручки по новому тарифу."
+    },
+    {
+     "step": 2,
+     "label": "Наивный счёт",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "Наивный счёт.**\n```\nэтот год:  41.6 × $1.28 − 46.2 × $0.42 − $28.6M = $5.24M\nплан:      41.6 × $1.4592 − 46.2 × $0.42 − $28.6M = $12.70M\nприрост $7.45M\n```\n**Ответ: повышение тарифа удваивает прибыль с лишним, закладывать в план.**"
+    },
+    {
+     "step": 3,
+     "label": "[MM] Прикидка вслух",
+     "depends_on": [],
+     "conditional_exhibits": [
+      "ex2"
+     ],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "[MM] Прикидка вслух.** Не считая: регулятор пересмотрел норматив по сбросу.\nЧто норматив по сбросу требует от промышленного абонента и что это делает с объёмом\nв сети? Ожидается устно: предочистка, падение объёма, и что тариф и объём движутся\nот одной причины.\n*(выдать ex2)*"
+    },
+    {
+     "step": 4,
+     "label": "Верный счёт",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "Тариф и объём в этом кейсе меняются независимо друг от друга?",
+      "L2": "Поставь рядом то, что регулятор разрешил, и то, что он же обязал сделать абонентов."
+     },
+     "candidate_md": "",
+     "interviewer_md": "Верный счёт.**\n```\nпадение объёма: 41.6 × 34% × 62% = 8.769 млн м³\nбиллинг после:    41.6 − 8.769 = 32.831\nрасходомер после: 46.2 − 8.769 = 37.431 (инфильтрация не меняется)\n\nплан следующего года: 32.831 × $1.4592 − 37.431 × $0.42 − $28.6M = $3.59M\nпротив $5.24M в этом году → минус $1.66M\n```\n**Ответ: план показывает не рост на $7.45M, а падение на $1.66M. Флип плана.**"
+    },
+    {
+     "step": 5,
+     "label": "Объяснение",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "Объяснение.** Зачёт, если ВСЕ: (1) названо, что тариф и объём меняет один\nи тот же документ, поэтому считать их независимо нельзя; (2) названо, что затраты\nпадают медленнее выручки: инфильтрация остаётся и оплачивается нами по расходомеру,\nа тарифицируется только биллинговый объём; (3) **обязательно** — сказано, что\nиз этого НЕ следует отказ от повышения: предочистку требует норматив, а не тариф,\nпоэтому объём упадёт при любом решении. 🚩 Флаг за вывод «значит, не повышать»."
+    },
+    {
+     "step": 6,
+     "label": "Sensitivity",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "Sensitivity.**\n```\nЧЕСТНАЯ КОНТРФАКТИКА — тот же объём БЕЗ повышения:\n   32.831 × $1.28 − 37.431 × $0.42 − $28.6M = −$2.30M\nповышение даёт $5.88M против отказа → повышение обязательно\n\nпорог: план показывает рост, пока промышленные абоненты дают\n       меньше 27.81% биллингового объёма\nконтроль: прибыль при 27.81% = $5.24M — ровно этот год\nфакт 34% · превышение 6.19 пункта\n```\n**Ответ: порог 27.81%.** Зачёт за произнесённое: неверно не решение о тарифе,\nа цифра в плане; повышение спасает год, но не делает его растущим."
+    },
+    {
+     "step": 7,
+     "label": "Brainstorm",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "Brainstorm.** Шесть ходов, чтобы удержать прибыль при падающем объёме.\nMECE. Зачёт ≥6 в ≥2 группах.\n*Выручка:* двухставочный тариф с платой за присоединённую мощность · отдельный\nтариф на приём концентрата от предочистки · договор на обслуживание локальных\nустановок абонентов · продажа очищенной воды на техническое водоснабжение.\n*Затраты:* ремонт сети под инфильтрацию, которая оплачивается, но не тарифицируется ·\nпересмотр постоянных затрат под меньший объём · утилизация осадка как отдельный\nпродукт · перевод части линий в резерв."
+    },
+    {
+     "step": 8,
+     "label": "Синтез — партнёрский ответ (Pyramid):",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "Синтез — партнёрский ответ (Pyramid):**\n> Мы рекомендуем **переписать план следующего года с падения, а не с роста,\n> и одновременно подать заявку на двухставочный тариф** — повышение принимать\n> обязательно, но прибыль следующего года составит $3.59M против $5.24M в этом,\n> а не $12.70M, как заложено.\n>\n> Три факта. Первое: тот же документ регулятора, который разрешил повышение,\n> обязал промышленных абонентов поставить предочистку; они дают 34% биллингового\n> объёма и сбрасывают после неё на 62% меньше — из сети уходит 8.769 млн м³.\n> Второе: затраты падают медленнее выручки, потому что инфильтрация в 4.6 млн м³\n> остаётся, оплачивается нами по расходомеру и не тарифицируется вовсе. Третье:\n> отказ от повышения не спасает — при том же объёме и старом тарифе результат\n> составил бы минус $2.30M, то есть само повышение приносит $5.88M и является\n> единственной причиной, по которой год остаётся прибыльным.\n>\n> Риски. Внутренний: прирост $7.45M уже внесён в план, и его изъятие обнажает\n> дыру в бюджете — выносить надо вместе с готовым предложением по тарифу,\n> а не отдельно. Внешний: регулятор согласовал повышение как компенсацию расходов\n> на норматив и может воспринять новую заявку как двойной запрос; заходить надо\n> от структуры объёма, показывая, что база тарифа сузилась его же решением.\n>\n> Следующие шаги: за восемь недель — заявка на двухставочный тариф с платой\n> за присоединённую мощность, которая не зависит от объёма сброса; параллельно —\n> программа ремонта сети под инфильтрацию, поскольку это единственный кубометр,\n> который мы оплачиваем полностью и не тарифицируем вовсе."
+    }
+   ],
+   "step_count": 8,
+   "qa_checks_md": "",
+   "optimal_entry": 2,
+   "terminal": 8,
+   "trap_subtype": "flip",
+   "lang": "ru",
+   "lang_note": "RU-native, партия 236–270 блок A, жанр «реальные сюжеты, свои числа»",
+   "difficulty_test": "В план заложен прирост прибыли $7.45M от повышения тарифа на 14%. Тот же пересмотр норматива обязал промышленных абонентов поставить предочистку: они дают 34% биллингового объёма и сбрасывают на 62% меньше. Знаменатель движется вместе с числителем, и прибыль следующего года выходит $3.59M против $5.24M в этом — план показывает не рост, а падение. Ловушка второго уровня: отсюда не следует «не повышать» — при том же объёме без повышения результат минус $2.30M, то есть повышение даёт $5.88M и обязательно.",
+   "difficulty_family": "F2",
+   "reasoning_form": "Ф9"
+  },
+  {
+   "id": 240,
+   "title": "Gone with the Wire",
+   "title_registry": "Gone with the Wire",
+   "case_type": "Market Entry",
+   "industry": "Производство кабеля",
+   "format": "F1",
+   "difficulty": "Medium",
+   "depth": "STRONG",
+   "trap_or_clean": "Trap",
+   "naive_error": "E14",
+   "generation": null,
+   "est_minutes": "40",
+   "header_md": "## Case 240 — Gone with the Wire\n\n> **ПЛАШКА** · Market Entry · Производство кабеля · F1 · **Medium** · 🔥 STRONG\n> **T/C:** Trap-understate · **Семья:** F6 рамка меняется задним числом · **Ошибка:** E14\n> **Экзибиты (2):** проект входа · table · **Слои:** [OD] [MM]\n> **difficulty_test:** Проект входа в сегмент подводного кабеля оценён по полной\n> себестоимости: общезаводские отнесены по ставке 11.8% выручки, эффект $3.87M —\n> «проходит, но в очередь». Из 11.8 пункта приростными являются только 2.9;\n> остальные 8.9 — амортизация действующих зданий и центральная служба, которые\n> от входа не двигаются. При приростной оценке эффект $14.90M против $9.10M\n> у лучшей альтернативы. Знак не меняется, меняется приоритет.",
+   "prompt_md": "> *Ситуация на июль 2026 года.*\n>\n> **Prysmion** рассматривает вход в сегмент подводного кабеля для офшорных ветропарков.\n> Инвестиционный комитет уже рассмотрел бизнес-кейс и поставил проект в очередь\n> после модернизации действующих линий.\n>\n> Проверить оценку до окончательного распределения капитала. Данные — в ex1.",
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Проект входа",
+     "reveal": "auto",
+     "triggers": [],
+     "body_md": "```\nГОД\n\nвыручка сегмента         ████████████████████████ $124.0M\nпрямые затраты           ███████████████████ $99.0M\nобщезаводские по ставке  ███ 11.8% выручки\nамортизация нового цеха  ██ $6.5M\n                           ↓\nэффект по полной себестоимости  $3.87M\n```",
+     "render": null
+    },
+    {
+     "id": "ex2",
+     "title": "Exhibit ex2",
+     "reveal": "on_request",
+     "triggers": [
+      "из чего состоит ставка общезаводских",
+      "что реально добавится",
+      "альтернативные проекты",
+      "регламент комитета"
+     ],
+     "body_md": "| Условие | Значение |\n|---|---|\n| Приростная часть ставки общезаводских | **2.9 пункта** — контроль качества и метрология под новый стандарт |\n| Не двигающаяся часть ставки | **8.9 пункта** — амортизация действующих зданий, содержание территории, центральная служба |\n| Итого ставка | **11.8 пункта** |\n| Цех под проект | строится только под этот сегмент, другими линиями не используется |\n| Лучший альтернативный проект портфеля | эффект **$9.10M** в год, оценён приростным методом |\n| Что говорит регламент комитета | для решений о входе применяется приростная оценка |",
+     "render": null
+    }
+   ],
+   "steps": [
+    {
+     "step": 1,
+     "label": "[OD] С чего начинаешь",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "[OD] С чего начинаешь.** Комитет уже поставил проект в очередь; надо проверить\nоценку. Ожидается: сначала выяснить, из чего состоит ставка общезаводских и какая\nеё часть появится оттого, что мы войдём. 🚩 Флаг за пересчёт выручки или прямых затрат."
+    },
+    {
+     "step": 2,
+     "label": "Наивный счёт",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "Наивный счёт.**\n```\n$124.0M − $99.0M − 124.0 × 11.8% − $6.5M = $3.87M\n```\n**Ответ: проект проходит, но слабо — в очередь после модернизации.**"
+    },
+    {
+     "step": 3,
+     "label": "[MM] Прикидка вслух",
+     "depends_on": [],
+     "conditional_exhibits": [
+      "ex2"
+     ],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "[MM] Прикидка вслух.** Не считая: в ставке общезаводских сидит содержание\nтерритории и центральная служба. Появится ли хоть один из этих рублей оттого,\nчто мы войдём в новый сегмент? Ожидается устно: приростная часть меньше полной,\nи рамка оценки для решения о входе другая, чем для сравнения действующих линий.\n*(выдать ex2)*"
+    },
+    {
+     "step": 4,
+     "label": "Верный счёт",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "Отнесённая на проект затрата появляется оттого, что появился проект?",
+      "L2": "Поставь рядом ставку общезаводских и ту её часть, которая двигается от входа."
+     },
+     "candidate_md": "",
+     "interviewer_md": "Верный счёт.**\n```\nприростные общезаводские: 124.0 × 2.9% = $3.60M\nэффект: $124.0M − $99.0M − $3.60M − $6.5M = $14.90M\n\nамортизация нового цеха остаётся в обоих счётах: цех строится только под этот\nпроект, значит она приростная — в отличие от 8.9 пункта ставки\n```\n**Ответ: $14.90M против $9.10M у лучшей альтернативы, посчитанной той же рамкой, —\nпроект первый в портфеле, а не в очереди. Знак не меняется, меняется приоритет.**"
+    },
+    {
+     "step": 5,
+     "label": "Объяснение",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "Объяснение.** Зачёт, если ВСЕ: (1) названо, что 8.9 пункта из ставки несутся\nзаводом независимо от входа и их отнесение на проект не создаёт и не убирает\nни одного платежа; (2) названа разница между двумя статьями, которые выглядят\nодинаково: амортизация нового цеха приростная, потому что цех строится под проект,\nа амортизация действующих зданий — нет; (3) **не** утверждается, что общезаводские\nне надо покрывать — надо, но покрывает их портфель целиком, а не тот проект,\nна который их отнёс расчёт."
+    },
+    {
+     "step": 6,
+     "label": "Sensitivity",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "Sensitivity.**\n```\nпроект остаётся первым в портфеле, пока ПРИРОСТНАЯ часть ставки меньше 7.58% выручки\nконтроль: $124.0M − $99.0M − 124.0 × 7.58% − $6.5M = $9.10M — ровно альтернатива\nфакт 2.9% · запас 4.68 пункта\n```\n**Ответ: порог 7.58% приростной части.** Зачёт за произнесённое: даже если приростная\nчасть окажется вдвое больше заявленной, проект остаётся первым. Порог относится\nименно к приростной части: 8.9 пункта не считаются вовсе, какими бы они ни были."
+    },
+    {
+     "step": 7,
+     "label": "Brainstorm",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "Brainstorm.** Шесть ходов, где неверная рамка оценки могла исказить и другие\nрешения завода. MECE. Зачёт ≥6 в ≥2 группах.\n*Решения о входе и выходе:* отказы от сегментов, отклонённых по полной себестоимости ·\nрешения о закрытии линий, где ставка перераспределялась на остальных · выбор между\nпроизводством и закупкой · оценка экспортных заказов по остаточной загрузке.\n*Механика ставки:* пересмотр базы распределения с выручки на прямые затраты ·\nотдельная ставка для новых мощностей · выделение центральной службы в отдельный\nцентр затрат · регламентная проверка рамки до внесения проекта в комитет."
+    },
+    {
+     "step": 8,
+     "label": "Синтез — партнёрский ответ (Pyramid):",
+     "depends_on": [],
+     "conditional_exhibits": [],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "",
+     "interviewer_md": "Синтез — партнёрский ответ (Pyramid):**\n> Мы рекомендуем **вернуть проект в комитет первым номером портфеля и пересчитать\n> по приростной ставке все решения о входе за последние два года** — при верной\n> рамке эффект составляет $14.90M против $9.10M у лучшей альтернативы.\n>\n> Три факта. Первое: из ставки общезаводских в 11.8 пункта приростными являются\n> только 2.9 — контроль качества и метрология под новый стандарт; остальные\n> 8.9 пункта завод несёт независимо от нашего решения. Второе: рамка была применена\n> не та — полная себестоимость сравнивает действующие линии между собой,\n> а регламент комитета для решений о входе требует приростной оценки, и альтернатива\n> в $9.10M посчитана именно ею, то есть сравнение корректно. Третье: проект остаётся\n> первым, пока приростная часть ставки не превысит 7.58%, — вывод устойчив\n> к более чем двукратной ошибке в ней.\n>\n> Риски. Внутренний: по полной ставке оценивались и другие решения, включая отказы\n> от сегментов, — ревизия обнаружит собственные закрытые проекты, и выносить её\n> надо как регламентную процедуру, а не как разбор чужих ошибок. Внешний: тендеры\n> офшорных ветропарков распределяются на несколько лет вперёд, и год в очереди —\n> это не отсрочка входа, а пропуск цикла закупок целиком.\n>\n> Следующие шаги: за четыре недели — повторное внесение проекта с приростным\n> расчётом и справкой о составе ставки; параллельно — правка регламента комитета,\n> где рамка оценки закрепляется за типом решения, чтобы возврат к полной ставке\n> не зависел от того, кто готовит материалы."
+    }
+   ],
+   "step_count": 8,
+   "qa_checks_md": "",
+   "optimal_entry": 2,
+   "terminal": 8,
+   "trap_subtype": "understate",
+   "lang": "ru",
+   "lang_note": "RU-native, партия 236–270 блок A, жанр «реальные сюжеты, свои числа»",
+   "difficulty_test": "Проект входа в сегмент подводного кабеля оценён по полной себестоимости: общезаводские отнесены по ставке 11.8% выручки, эффект $3.87M — «проходит, но в очередь». Из 11.8 пункта приростными являются только 2.9; остальные 8.9 — амортизация действующих зданий и центральная служба, которые от входа не двигаются. При приростной оценке эффект $14.90M против $9.10M у лучшей альтернативы. Знак не меняется, меняется приоритет.",
+   "difficulty_family": "F6",
+   "reasoning_form": "Ф3"
   }
  ],
  "oe_exceptions": {
@@ -41089,10 +41868,10 @@
  },
  "languages": {
   "en": 74,
-  "ru": 161
+  "ru": 166
  },
  "source_scope": "graph skeleton only; prose re-authored in EN per languages{}",
  "family_ratchet_armed": false,
  "package_sha256_method": "sha256 of the full payload minus package_sha256, package_sha256_method; json.dumps(sort_keys=True, ensure_ascii=False, separators=(\",\",\":\"))",
- "package_sha256": "1dc16ecee626c469e424cd75f9873973a511d2bd0c085b14d8c304886be96ff1"
+ "package_sha256": "00b07f63d23087720ab5c19d28461a68a286e429a6f3b8485e76fb181bbc2876"
 }
