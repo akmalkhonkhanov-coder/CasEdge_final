@@ -14,6 +14,10 @@
     "api/drills.js": {
       "includeFiles": "api/_drills_cm.json",
       "maxDuration": 60
+    },
+    "api/sfl-session.js": {
+      "includeFiles": "api/_sfl_scenarios.json",
+      "maxDuration": 30
     }
   },
   "headers": [
