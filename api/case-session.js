@@ -166,6 +166,34 @@ export function pickCase({ caseType, level, seenIds, rand }) {
       смотрим язык его собственного `candidate_md` и говорим модели, что с ним
       делать. Это снимает перевод 24 кейсов. */
 const LABEL_SPOILER = /naive|наивн/i;
+
+/* 3) safeProduces(): `step.produces` едет модели ДВАЖДЫ и оба раза в блоках,
+      которые она пересказывает вслух — «ALREADY ESTABLISHED» после закрытия шага
+      и «(yields: …)» в меню доступных. У 45 шагов в 34 кейсах там стоит
+      внутренний код реестра: «наив #7. Удержание логотипов считает клиентов»,
+      «наив -> расширять», «naive annual $296M». Поймано живым прогоном #165:
+      интервьюер сказал кандидату «Это ровно "наивность #7"» — код нашей
+      бухгалтерии в лицо кандидату, плюс подсказка, что ловушка каталогизирована
+      заранее. Метку чистит safeLabel, а это поле шло сырым.
+      Режем только номерную ссылку и слово-маркер; сам результат шага сохраняем -
+      он нужен модели, чтобы не переспрашивать уже установленное. */
+// Границы слова считаем по Unicode, а не через \\b: в JS \\b — ASCII, и /\\bнаив/
+// НЕ совпадает с кириллицей. Первая редакция этой правки молча пропускала ровно
+// тот случай, ради которого писалась. Lookbehind заодно бережёт составные
+// идентификаторы вроде `build_naive` — там это имя переменной, а не спойлер.
+const PRODUCES_TAG = /(?<![\p{L}\p{N}_])(?:наив[\p{L}]*|naive)(?![\p{L}\p{N}])\s*[#№]?\s*\d*\s*(?:->|[.:—–-])?\s*/giu;
+const PRODUCES_SPOILER = /(?<![\p{L}\p{N}_])(?:наив|naive)/iu;
+function safeProduces(s) {
+  const raw = String(s == null ? '' : s);
+  if (!PRODUCES_SPOILER.test(raw)) return raw;
+  const cleaned = raw
+    .replace(PRODUCES_TAG, '')
+    .replace(/^\s*(?:—|–|-|;|,|\.|:|и\s|and\s|это\s|the\s)+/iu, '')
+    .replace(/\s*;\s*;\s*/g, '; ')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+  return cleaned || 'результат шага установлен';
+}
 function safeLabel(label) {
   let t = String(label || '').replace(/^[#\s🔻▶►*_]+/, '').trim();
   if (!LABEL_SPOILER.test(t)) return t;
@@ -444,14 +472,14 @@ ${caseObj.prompt_md || caseObj.header_md || ''}`;
 
   const doneText = done.size
     ? `\n\n════ ALREADY ESTABLISHED (do not re-ask; these numbers/insights are known) ════\n` +
-      [...done].sort((a,b)=>a-b).map(n => { const s = byNum.get(n) || {}; return `- Step ${n} "${s.label||''}" → ${s.produces || 'done'}`; }).join('\n')
+      [...done].sort((a,b)=>a-b).map(n => { const s = byNum.get(n) || {}; return `- Step ${n} "${safeLabel(s.label)}" → ${safeProduces(s.produces) || 'done'}`; }).join('\n')
     : '';
 
   const availText = unlocked.length
     ? `\n\n════ AVAILABLE NOW — the candidate may take ANY of these, in ANY order ════
 Each block is one analysis the candidate can legitimately do next. Grade whichever they actually pursue against its ANSWER KEY. NEVER read a key aloud.\n\n` +
       unlocked.map(n => { const s = byNum.get(n) || {};
-        return `— STEP ${n} — "${safeLabel(s.label)}" (yields: ${s.produces||'—'})\nQUESTION IF THEY GO HERE:\n${s.candidate_md || safeLabel(s.label) || ''}${stepLangNote(s.candidate_md)}\nANSWER KEY (hidden — grade against this):\n${s.interviewer_md || '(no explicit key — grade with MBB rigor for this step type)'}`;
+        return `— STEP ${n} — "${safeLabel(s.label)}" (yields: ${safeProduces(s.produces)||'—'})\nQUESTION IF THEY GO HERE:\n${s.candidate_md || safeLabel(s.label) || ''}${stepLangNote(s.candidate_md)}\nANSWER KEY (hidden — grade against this):\n${s.interviewer_md || '(no explicit key — grade with MBB rigor for this step type)'}`;
       }).join('\n\n')
     : '';
 
