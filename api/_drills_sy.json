@@ -1,13 +1,13 @@
 {
  "type": "SY",
- "count": 16,
+ "count": 24,
  "_meta": {
   "set": "sy",
   "type_string": "Synthesis",
-  "wiring": "Клиенту и серверу нужны три правки, иначе набор молча получит чужую ветку: (1) LIBS в drills.js — запись sy; (2) ветвление по d.type — ветка \"Synthesis\" для placeholder и hint; (3) реестр наборов на сервере.",
+  "wiring": "Подвязано девом в круге 12, три точки: (1) LIBS.sy в drills.js; (2) ветвление по БИБЛИОТЕКЕ — var isSY = (S.lib === \"sy\"), как у CI; (3) DRILL_SETS.sy и SY_GRADER_SYSTEM на сервере. Ветвиться по d.type НЕЛЬЗЯ и это уже проверено: sanitizeDrill в api/drills.js схлопывает всё, кроме \"Structuring\", в токен \"Drill\", поэтому строка \"Synthesis\" до клиента не доезжает и сравнение всегда ложно — слот молча получает чужую подсказку. Поле type здесь остаётся серверным, не клиентским.",
   "facts": "Массив facts НЕ собирается намеренно: запись целиком идёт в exhibit. Колонки Роль (relevant/redundant) и branch (В1/В2) — аналитический слой, в JSON не попадают: «какой факт лишний» и «какая ветвь верна» и есть половина задания.",
-  "exhibit_mode": "E-with у всех шестнадцати: в Синтезе запись и есть материал, придержать её значит не выдать задание.",
-  "scaffold": "Поле scaffold (L1/L2/L4) — глубина лесов ответа. Движком сейчас не читается; хранится, чтобы замысел слота не потерялся.",
+  "exhibit_mode": "E-with у всех двадцати четырёх: в Синтезе запись и есть материал, придержать её значит не выдать задание.",
+  "scaffold": "Леса ответа. L4 — ответ разложен на четыре поля: вывод / факты / риск / следующий шаг. L2 — на два: вывод / всё остальное. L1 — одно свободное поле, границы блоков кандидат ставит сам. Внутри партии лестница: начинать с L4, к концу L1. УСЛОВИЕ ВКЛЮЧЕНИЯ (одно, проверяемое): движок начинает читать scaffold в тот круг, когда в drills.js у библиотеки sy появится многопольная форма ответа вместо одного textarea — тогда значение поля задаёт число полей формы и подписи к ним. СРОК: если к сдаче 40/40 многопольной формы нет, поле удаляется из мастера тем же кругом, а не остаётся лежать. Прецедент, ради которого написан этот срок: hints в CI лежит год, и никто не помнит зачем.",
   "checklist": "Собран из correct_value, naive_value и эталона тела. Пункт (1) — Минто, он же главная слабость кандидата по профилю."
  },
  "drills": [
@@ -76,16 +76,51 @@
       "type": "text",
       "lines": [
        "**Rebuild options — board pack**",
+       ""
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
        "",
-       "| | Meadow (open-air meadow walk) | Canopy (glasshouse canopy walk) |",
-       "|---|---|---|",
-       "| Capital required | **$15M** | **$28M** |",
-       "| Gross annual income at steady state | **$16M** | **$15M** |",
-       "| Income lost from what it displaces | **$6M** (built on the glasshouse site) | **$1M** (built on the car park; shoulder season only) |",
-       "| Time to steady state | **18** months | **30** months |",
-       "| Visitor capacity | **400,000**/yr | **520,000**/yr |",
+       "Meadow (open-air meadow walk)",
+       "Canopy (glasshouse canopy walk)"
+      ],
+      "rows": [
+       [
+        "Capital required",
+        "**$15M**",
+        "**$28M**"
+       ],
+       [
+        "Gross annual income at steady state",
+        "**$16M**",
+        "**$15M**"
+       ],
+       [
+        "Income lost from what it displaces",
+        "**$6M** (built on the glasshouse site)",
+        "**$1M** (built on the car park; shoulder season only)"
+       ],
+       [
+        "Time to steady state",
+        "**18** months",
+        "**30** months"
+       ],
+       [
+        "Visitor capacity",
+        "**400,000**/yr",
+        "**520,000**/yr"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
        "",
-       "**From the board minute of 4 March:** *the purpose of the rebuild is to maximise the garden's annual net income over the long run.* The three-year payback is recorded separately, as a condition of release of funds."
+       "**From the board minute of 4 March:** *the purpose of the rebuild is to maximise the garden's annual net income over the long run.* The three-year payback is recorded separately, as a condition of release of funds.",
+       "",
+       "Also on file: season length **240** days · staff on the rebuild **62** · the garden has run **11** consecutive deficits · the glasshouse was built in **1974**."
       ]
      }
     ]
@@ -363,14 +398,47 @@
       "type": "text",
       "lines": [
        "**Renewal options — council pack**",
+       ""
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
        "",
-       "| | A — single contractor, commingled | B — kerbside separation, two streams |",
-       "|---|---|---|",
-       "| Annual saving against today | **$400,000** | **$150,000** |",
-       "| Diversion from landfill | **40%** | **65%** |",
-       "| Contamination rate at the sorting plant | **19%** | **4%** |",
-       "| Households covered | **86,000** | **86,000** |",
-       "| Contract length | **7** years | **7** years |",
+       "A — single contractor, commingled",
+       "B — kerbside separation, two streams"
+      ],
+      "rows": [
+       [
+        "Annual saving against today",
+        "**$400,000**",
+        "**$150,000**"
+       ],
+       [
+        "Diversion from landfill",
+        "**40%**",
+        "**65%**"
+       ],
+       [
+        "Contamination rate at the sorting plant",
+        "**19%**",
+        "**4%**"
+       ],
+       [
+        "Households covered",
+        "**86,000**",
+        "**86,000**"
+       ],
+       [
+        "Contract length",
+        "**7** years",
+        "**7** years"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
        "",
        "**From the authority's charter, first article:** *the purpose of the authority is to raise the share of household waste diverted from landfill.*",
        "**From the annual budget letter:** *the council expects the renewed service to cost less than the current arrangement.*",
@@ -1255,6 +1323,900 @@
     "en": "Build the savings product first — the deposit gap it delivers is $7 billion, and that is what has to outweigh a $200 million profit gap. On product economics checking wins: $280 per account across 1,500,000 accounts is $420,000,000 of lifetime profit against $110 across 2,000,000 accounts, or $220,000,000, for savings; the difference, $200,000,000, is what we give up, and it is a figure we build, not one the book prints. But the stated objective is lowering the cost of funds for the credit card portfolio, and on that metric savings generates $10 billion in deposits against $3 billion for checking — a $7 billion gap, again built, not printed. Since the unselected product launches the following year, we capture the checking profit one year later rather than forgo it. Risk: savings earns only $110 per account and lives 5 years against checking's 10, so the base must be re-acquired twice as often; risk: the $10 billion rests on $5,000 average balances at 2% paid to customers, and a rate move changes both the volume and its price. Next: quantify how many basis points $10 billion of deposits takes off the credit card portfolio's funding cost and test that saving against $200,000,000; and validate the $5,000 average balance assumption across 2,000,000 accounts before committing the IT build."
    },
    "anchor_metric": "цель запуска онлайн-банка"
+  },
+  {
+   "id": "SY-017",
+   "title": "Two Apps, One Bill",
+   "company": "",
+   "industry": "",
+   "difficulty": "Medium",
+   "clean": false,
+   "focus": "S04(b)",
+   "scaffold": "L4",
+   "time": "4 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Aurelia Studios runs two subscription video services: Aurelia+, its flagship family-content platform, and Vellum, a broader library of network shows, films and originals. Consumers increasingly want one consolidated app, so Aurelia is preparing to fold Vellum into Aurelia+ and launch a single discounted bundle. Leadership wants to know what the bundle does to annual subscription revenue before they commit. Where would you start?",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "Client: **Aurelia Studios**, media & entertainment. Two owned streaming services: **Aurelia+** (flagship, family content — animation, space-saga and superhero franchises) and **Vellum** (broader range: network TV shows, movies, original content). Aurelia is considering merging Vellum into Aurelia+ and launching a bundled subscription at a discounted rate versus subscribing to each service separately.",
+       "Stated objective: *Aurelia hopes to increase revenues from its streaming channel.*",
+       "Geography: both services have subscribers across the globe, and the two platforms serve similar geographical markets.",
+       "Subscriber base today:",
+       "- Aurelia+: **100M subscribers**",
+       "- Vellum: **35M subscribers**",
+       "- **15M are subscribed to both**",
+       "Pricing today: Aurelia+ **$7/month**; Vellum **$11/month**.",
+       "Bundled pricing: both services **$15/month**.",
+       "Switching assumption for year one:",
+       "**20% of current Aurelia+ only subscribers and 25% of current Vellum only subscribers will switch to the new bundle in the first year.**",
+       "Market context — streaming service market share:"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Player",
+       "Share"
+      ],
+      "rows": [
+       [
+        "Крупнейший конкурент",
+        "40%"
+       ],
+       [
+        "Aurelia+",
+        "30%"
+       ],
+       [
+        "Второй конкурент",
+        "15%"
+       ],
+       [
+        "Vellum",
+        "10%"
+       ],
+       [
+        "Others",
+        "5%"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "Question: **Calculate the expected annual revenue from the new subscription model and compare it to the current revenue generated by separate subscriptions to Aurelia+ and Vellum.**",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Шаг | Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|---|\n| 1 | Видит «100M» первой строкой, помечает как «база Aurelia+» | база зафиксирована как 100M до чтения строки про пересечение | «крупнейшее и первое = база» |\n| 2 | Читает «20% … subscribers will switch», глаз перескакивает слово «only» | 100M × 20% = 20M | доля × ближайшее крупное число |\n| 3 | Повторяет ход на Vellum | 35M × 25% = 8.75M | симметрия предыдущего шага |\n| 4 | Вспоминает про 15M и корректно добавляет их в бандл | 20 + 8.75 + 15 = 43.75M | «пересечение попадает в бандл автоматически» — верно, но поверх уже испорченной базы |\n| 5 | Считает остатки как 100−15−20 = 65M и 35−15−8.75 = 11.25M | сумма 43.75+65+11.25 = 120M — сходится с уникальной базой | «итог сошёлся ⇒ ошибки нет» — ложное подтверждение |\n| 6 | Считает выручку | $7.875B + $5.46B + $1.485B = **$14.82B** [ПОСТРОЕНО] | арифметика чистая, определение испорчено |\n| 7 | Докладывает «прирост более $1.8B, идём» | завышение прироста на $470M (+35% к приросту) | «число большое ⇒ вывод сильный» |\n\nДиагностика В1 в одной строке: 8.75M из пула «только Vellum» в 20M — это **43.75%**, а книга печатает **25%**.\n\n---",
+    "decoy": "| id | Факт-обманка | Почему выглядит опорой | Класс |\n|---|---|---|---|\n| D1 | Доли рынка 40 / 30 / 15 / 10 / 5 | 30% + 10% = 40% «догоняет лидера» — кандидат тянет вывод из долей, не считая абонентов | Q1 |\n| D2 | «Others 5%» | читается как «рынок консолидирован, риска новых игроков нет» — к решению не относится | Q3 |\n| D3 | Различие контента (семейный vs сетевое ТВ) | подталкивает к качественному ответу про бренд вместо счёта пересечения | Q3 |\n| D4 | «обе платформы обслуживают схожие географии» | звучит как обоснование, что базы можно складывать напрямую — прямо провоцирует В1 | B3 |\n| D5 | Разрыв цен $7 против $11 | тянет внимание на «кто ценнее», а не на «кто посчитан дважды» | Q1 |\n| D6 | Цель «increase revenues from its streaming channel» | любой положительный прирост выглядит достаточным, гасит проверку величины | B3 |\n\n---",
+    "support": "| # | Опора | Величина из записи | Ложна ли во второй ветви? |\n|---|---|---|---|\n| 1 | База для доли 20% | 100M − 15M = 85M | в В1 подменена на 100M — да, ложна |\n| 2 | База для доли 25% | 35M − 15M = 20M | в В1 подменена на 35M — да, ложна |\n| 3 | Пересечение входит в бандл целиком | 15M | нет, верна в обеих ветвях |\n| 4 | Цены $7 / $11 / $15 | как напечатано | нет, верны в обеих |\n| 5 | Сумма трёх групп = уникальная база | 120M | нет — сходится и в В1, поэтому проверкой не является |\n| 6 | Годовой горизонт (×12) | 12 мес | нет, верна в обеих |\n\n---",
+    "risks": "1. **Внутренний — каннибализация цены на пересечении.** 15M абонентов сегодня платят $7 + $11 = $18/мес, а в бандле — $15/мес: это −$3/мес × 15M × 12 = **−$540M/год** [ПОСТРОЕНО, книга не печатает], то есть прирост $1.33B держится только на 22M переключившихся.\n2. **Внешний — отток при смене платформы.** Книга (стр. 32) фиксирует subscriber churn и brand dilution как риски: аудитории двух сервисов различны; при потере всего 10% от 37M бандла ($6.66B × 10% ≈ $0.67B) половина прироста исчезает.\n\n---",
+    "next": "1. Прогнать чувствительность по доле переключения (20%/25% ±5 п.п.) и по цене бандла $13–$17 до фиксации цены.\n2. Протестировать бандл в ограниченном числе рынков и снять фактический churn на пересечении (15M) отдельно от остальной базы.\n3. Разложить прирост $1.33B на «новые деньги» и «скидка пересечению» перед защитой бизнес-кейса у CFO.\n4. Заложить фазированный план миграции интерфейса, чтобы отток не съел прирост в первый же год.\n\n---",
+    "build": "```python\nfrom decimal import Decimal as D, ROUND_HALF_UP\n\n# --- ВХОДЫ (все со стр. 29, блок \"Data needed to solve calculation\") ---\nSUB_A   = D('100')   # \"Disney+: 100M subscribers\"\nSUB_V   = D('35')    # \"Hulu: 35M subscribers\"\nBOTH    = D('15')    # \"15M are subscribed to both\"\nP_A     = D('7')     # \"Disney+: $7/month\"\nP_V     = D('11')    # \"Hulu: $11/month\"\nP_BUND  = D('15')    # \"Both services: $15/month\"\nSW_A    = D('0.20')  # \"20% of current Disney+ ONLY subscribers\"\nSW_V    = D('0.25')  # \"25% of current Hulu ONLY subscribers\"\nM       = D('12')\n\n# --- В2: ВЕРНАЯ ВЕТВЬ (сверка построчно против стр. 30) ---\nonly_a = SUB_A - BOTH          # 85   ~ \"(100 mn-15 mn)\"           стр.30\nonly_v = SUB_V - BOTH          # 20   ~ \"(35mn-15mn)\"              стр.30\nsw_a   = only_a * SW_A         # 17   ~ \"=17M subscribers\"         стр.30\nsw_v   = only_v * SW_V         # 5    ~ \"= 5M subscribers\"         стр.30\nbundle = sw_a + sw_v + BOTH    # 37   ~ \"= 37M subscribers\"        стр.30\n\nrev_today = SUB_A*P_A*M + SUB_V*P_V*M          # 8400 + 4620 = 13020 ~ \"$13.02B\" стр.30\nrev_bund  = bundle*P_BUND*M                    # 6660                ~ \"$6.66B\"  стр.30\nrev_a_only= (SUB_A-BOTH-sw_a)*P_A*M            # 68 * 84 = 5712      ~ \"$5.712B\" стр.30\nrev_v_only= (SUB_V-BOTH-sw_v)*P_V*M            # 15 * 132 = 1980     ~ \"$1.98B\"  стр.30\nrev_new   = rev_bund + rev_a_only + rev_v_only # 14352\n\nassert (sw_a, sw_v, bundle) == (D('17'), D('5'), D('37'))\nassert rev_today == D('13020')\n# книга печатает $14.35B — это округление точной суммы 14.352\nassert (rev_new/1000).quantize(D('0.01'), ROUND_HALF_UP) == D('14.35')\n\n# --- В1: НАИВНАЯ ВЕТВЬ — ПОСТРОЕНО, книга не печатает ---\nn_sw_a = SUB_A * SW_A                          # 20.00   (база взята полной)\nn_sw_v = SUB_V * SW_V                          # 8.75    (база взята полной)\nn_bund = n_sw_a + n_sw_v + BOTH                # 43.75\nn_rev  = (n_bund*P_BUND*M\n          + (SUB_A-BOTH-n_sw_a)*P_A*M          # 65 -> 5460\n          + (SUB_V-BOTH-n_sw_v)*P_V*M)         # 11.25 -> 1485\nassert n_rev == D('14820')                     # $14.82B  [ПОСТРОЕНО]\n\n# --- G1: подразумеваемая доля от НАПЕЧАТАННОЙ базы \"only\" ---\nimpl_v = (n_sw_v / only_v * 100).quantize(D('0.01'), ROUND_HALF_UP)  # 43.75%\nimpl_a = (n_sw_a / only_a * 100).quantize(D('0.01'), ROUND_HALF_UP)  # 23.53%\nassert impl_v == D('43.75') and impl_a == D('23.53')   # против 25% и 20% (стр.29)\n\n# --- контроль уникальной базы: в В1 тоже сходится, проверкой не является ---\nassert bundle + (SUB_A-BOTH-sw_a) + (SUB_V-BOTH-sw_v) == SUB_A + SUB_V - BOTH == D('120')\nassert n_bund + (SUB_A-BOTH-n_sw_a) + (SUB_V-BOTH-n_sw_v) == D('120')\n\n# --- цена скидки на пересечении: ПОСТРОЕНО, книга не печатает ---\ngiveback = BOTH * ((P_A + P_V) - P_BUND) * M   # 15 * 3 * 12 = 540\nassert giveback == D('540')\n```\n\n**Провоцируемая ошибка:** кандидат применяет 20% и 25% к полным базам 100M и 35M, засчитывая 15M пересечения второй раз, и завышает прирост выручки с $1.33B до $1.80B при формально сходящейся сумме в 120M абонентов.\n\n---\n\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: 25.00% и 20.00% (книга, стр. 29); (3) the naive reading is rejected explicitly, not merely avoided — 43.75% от базы «только Hulu» (и 23.53% от базы «только Disney+») — ПОСТРОЕНО, книга не печатает must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: 25.00% и 20.00% (книга, стр. 29); (3) наивное прочтение отвергнуто вслух, а не просто обойдено — 43.75% от базы «только Hulu» (и 23.53% от базы «только Disney+») — ПОСТРОЕНО, книга не печатает обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "- **Вывод (сначала):** We recommend Aurelia launch the bundle: annual subscription revenue rises from **$13.02B to $14.35B**, a **$1.33B** gain.\n- **Факты:** Only the non-overlapping bases can switch — **(100M − 15M) × 20% = 17M** from Aurelia+ and **(35M − 15M) × 25% = 5M** from Vellum; adding the **15M** already on both services gives **37M bundle subscribers at $15 × 12 = $6.66B**, alongside **68M × $7 × 12 = $5.712B** and **15M × $11 × 12 = $1.98B**.\n- **Риск:** The 15M dual subscribers move from $18 to $15 per month, a **$540M** annual give-back, and any churn on the merged interface eats directly into the $1.33B gain.\n- **Next step:** Pilot the bundle in selected markets, measure churn on the 15M overlap separately, and stress-test the 20%/25% switch rates before committing to the $15 price point.\n\n---"
+   },
+   "anchor_metric": "Печатное правило: 20% берётся от «Disney+ only», 25% — от «Hulu only»"
+  },
+  {
+   "id": "SY-018",
+   "title": "Two Quarters To Fix It",
+   "company": "",
+   "industry": "",
+   "difficulty": "Hard",
+   "clean": false,
+   "focus": "S03(c)",
+   "scaffold": "L2",
+   "time": "5 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Cadenza Fitness is a connected-fitness platform with millions of members, selling a proprietary stationary bike alongside a subscription to its live and on-demand classes. An activist investor has taken a position, blaming a collapsing share price on poor cost control, and the CEO has hired us to fix the cost base before the next board cycle. Management needs to know how deep the cuts have to go and where they should land. How would you approach it?",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "Client: **Cadenza Fitness**, interactive fitness platform. Revenue comes from member subscriptions, hardware sales of the stationary bicycle, and branded fitness gear. International supply chain sourcing bike parts across multiple countries; distribution both online through the company's own website and offline through company-owned retail locations.",
+       "Situation: an activist investor cites the plummeting stock price and attributes it directly to poor cost control. If the CEO cannot decrease costs to return to an annual profit, there is a high risk the investor will engage in a leveraged buyout.",
+       "Target: **the CEO would like to cut costs enough to achieve a 5% profit target.**",
+       "Timeline: **investors are demanding cost decreases in the next two quarters** to meet year-end corporate goals.",
+       "**EXHIBIT 1 — Cadenza Fitness Financial Statement** (millions $)"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Consolidated Statement of Operations Data",
+       "2021",
+       "2022",
+       "2023"
+      ],
+      "rows": [
+       [
+        "**Revenue**",
+        "",
+        "",
+        ""
+       ],
+       [
+        "Connected Fitness Products",
+        "$1,462",
+        "$3,150",
+        "$3,313"
+       ],
+       [
+        "Subscription",
+        "$364",
+        "$872",
+        "$1,687"
+       ],
+       [
+        "**Total revenue**",
+        "**$1,826**",
+        "**$4,022**",
+        "**$5,000**"
+       ],
+       [
+        "**Cost of revenue**",
+        "",
+        "",
+        ""
+       ],
+       [
+        "Connected Fitness Products",
+        "$833",
+        "$2,237",
+        "$2,242"
+       ],
+       [
+        "Subscription",
+        "$156",
+        "$331",
+        "$335"
+       ],
+       [
+        "**Total cost of revenue**",
+        "**$988**",
+        "**$2,567**",
+        "**$2,577**"
+       ],
+       [
+        "**Gross profit**",
+        "**$838**",
+        "**$1,454**",
+        "**$2,424**"
+       ],
+       [
+        "**Operating expenses**",
+        "",
+        "",
+        ""
+       ],
+       [
+        "Manufacturing",
+        "$477",
+        "$728",
+        "$1,190"
+       ],
+       [
+        "Real Estate & Office Space",
+        "$351",
+        "$662",
+        "$839"
+       ],
+       [
+        "General & administrative",
+        "$90",
+        "$253",
+        "$478"
+       ],
+       [
+        "**Total operating expenses**",
+        "**$918**",
+        "**$1,643**",
+        "**$2,507**"
+       ],
+       [
+        "**Loss from operations**",
+        "**($80)**",
+        "**($189)**",
+        "**($83)**"
+       ],
+       [
+        "Other (expense) income, net",
+        "$12",
+        "($10)",
+        "($21)"
+       ],
+       [
+        "Loss before provision for income taxes",
+        "($68)",
+        "($199)",
+        "($104)"
+       ],
+       [
+        "Income tax expense (benefit)",
+        "$3",
+        "($9)",
+        "$20"
+       ],
+       [
+        "**Net gain/ loss**",
+        "**($71)**",
+        "**($190)**",
+        "**($125)**"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "\\*Revenues and expenses are expected to be equal in 2024.",
+       "**EXHIBIT 2 — Cost levers**",
+       "Reduce Real Estate Footprint (**30 of 90**) Offices"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Expense Type",
+       "Average Annual Savings"
+      ],
+      "rows": [
+       [
+        "Utilities",
+        "$30,000"
+       ],
+       [
+        "Rent",
+        "$170,000"
+       ],
+       [
+        "Management",
+        "$300,000"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "SG&A Layoffs (**? of 20,000**) FTEs"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "FTE Expenses",
+       "Average Annual Savings"
+      ],
+      "rows": [
+       [
+        "Salary",
+        "$130,000"
+       ],
+       [
+        "Benefits",
+        "$40,000"
+       ],
+       [
+        "Severance package",
+        "$20,000"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "Annual Savings from Alternative Manufacturer = **$210 M**",
+       "Question 1: **Given the financial information in Exhibit 1, what cost decrease does Cadenza Fitness need to achieve a 5% profit in 2024, and where should cost cutting be focused?**",
+       "Question 2: **Our team has determined that the two most efficient approaches to reducing costs are pursuing an alternative manufacturer and reducing head count and office space. By what percentage will Cadenza Fitness have to reduce their work force to achieve their cost savings target?**",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Шаг | Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|---|\n| 1 | Ищет «сколько всего расходов», взгляд ловит два жирных «Total» | 2,577 и 2,507 приняты за полный расход | «жирное = итог» |\n| 2 | Складывает | 5,084 | «два итога складываются в один» |\n| 3 | Строит цель: 5,000 × 95% | 4,750 | верно и уверенно — арифметика чистая |\n| 4 | Вычитает | 5,084 − 4,750 = **$334M** | «цель минус база» |\n| 5 | Строки Other expense (21), Income tax 20 и Net loss (125) пропускает как «ниже операционной, не наши расходы» | −$41M выпадают из базы навсегда | «после Loss from operations — справка» |\n| 6 | Снимает $210M и $15M | остаток $109M | ход верный, размер неверный |\n| 7 | Делит на $150k | 726.67 → **727 FTE ≈ 3.63% штата** [ПОСТРОЕНО] | «делим и докладываем» |\n| 8 | Докладывает «увольняем ~3.6%, цель 5% взята» | фактическая маржа 2024 = 4.18%, порог не взят, LBO-риск остаётся | «дробное число выглядит точнее круглого» |\n\nДиагностика В1 в одной строке: план на $334M оставляет расходы $4,791M и прибыль $209M — **4.18% < 5%**.\n\n---",
+    "decoy": "| id | Факт-обманка | Почему выглядит опорой | Класс |\n|---|---|---|---|\n| D1 | Разбивка opex: Manufacturing $1,190 / RE&Office $839 / G&A $478 | приглашает «посчитать доли и решить, где резать», подменяя вопрос «от чего резать» вопросом «что резать» | Q1 |\n| D2 | Себестоимость Connected Fitness Products $2,242 | самая крупная строка расходов — притягивает как «главный источник», хотя размер цели от неё не зависит | Q1 |\n| D3 | Колонки 2021 и 2022 | приглашают к тренду и CAGR; сноска прямо говорит, что 2024 равен 2023 | Q3 |\n| D4 | Gross profit $2,424 | выглядит проверенным итогом, но сам не сходится с 5,000 − 2,577 на $1 и маскирует, что округления в отчёте есть | B3 |\n| D5 | Loss from operations ($83) | читается как «полный убыток», хотя чистый убыток втрое больше — ($125) | B3 |\n| D6 | Rent $170,000 на офис и «cost savings $170k» на FTE | совпадение величин провоцирует перепутать статьи и посчитать офисы вместо людей | Q3 |\n| D7 | Срок «два квартала» | тянет обсуждать исполнимость вместо размера цели | Q3 |\n\n---",
+    "support": "| # | Опора | Величина из записи | Ложна ли во второй ветви? |\n|---|---|---|---|\n| 1 | База совокупных расходов 2023 | 5,000 − (125) = 5,125 | в В1 подменена на 2,577 + 2,507 = 5,084 — да, ложна |\n| 2 | Целевой уровень расходов | 5,000 × 95% = 4,750 | нет, верна в обеих ветвях |\n| 3 | Строки ниже операционной прибыли входят в расходы | 21 + 20 = 41 | в В1 отброшены — да, ложна |\n| 4 | Сноска о равенстве выручки и расходов 2024 | — | нет, верна в обеих |\n| 5 | Экономия у альтернативного производителя | $210M | нет, верна в обеих |\n| 6 | Экономия по офисам | 500,000 × 30 = $15M | нет, верна в обеих |\n| 7 | Экономия на FTE | 130k + 40k − 20k = $150k | нет, верна в обеих |\n| 8 | Знаменатель для процента | 20,000 FTE | нет, верна в обеих |\n\n---",
+    "risks": "1. **Внутренний — единовременность экономии и severance.** Экономия $150k на FTE уже очищена от выходного пособия $20k, но само пособие × 1,000 человек = **$20M оттока денег** внутри тех же двух кварталов; при этом сокращение 5% штата бьёт по производительности и культуре ровно в период, когда инвестор смотрит на результат.\n2. **Внешний — качество и контроль при смене производителя.** $210M из $375M, то есть **56% всей программы**, держатся на одном внешнем контрагенте: перенос производства несёт риски качества, защиты интеллектуальной собственности и регуляторного соответствия, а публичные увольнения 1,000 человек бьют по бренду и могут утянуть выручку ниже $5,000M, что немедленно ломает саму цель в 5%.\n\n---",
+    "next": "1. Зафиксировать базу расходов 2024 письменно: $5,125M, с явной пометкой, что $41M лежат ниже операционной прибыли (Other expense $21M + Income tax $20M) — до начала любых переговоров о сокращениях.\n2. За две недели закрыть due diligence альтернативного производителя, поскольку на нём висит $210M из $375M.\n3. Составить график увольнений и закрытия 30 офисов внутри двух кварталов с расчётом кассового эффекта severance ($20M) отдельно от годовой экономии.\n4. Прогнать сценарий чувствительности: падение выручки на 3% при неизменных сокращениях снова уводит маржу ниже 5%.\n\n---",
+    "build": "```python\nfrom decimal import Decimal as D, ROUND_HALF_UP\n\n# --- НАПЕЧАТАННЫЕ СТРОКИ ОТЧЁТА 2023 (EXHIBIT 1, слайд \"03 | PEDAL PALS\") ---\nREV        = D('5000')\nCOR_TOTAL  = D('2577')   # \"Total cost of revenue\"\nOPEX_TOTAL = D('2507')   # \"Total operating expenses\"\nGROSS      = D('2424')   # \"Gross profit\"      <- напечатано\nLOSS_OPS   = D('-83')    # \"Loss from operations\"\nOTHER      = D('-21')    # \"Other (expense) income, net\"\nLOSS_PRE   = D('-104')   # \"Loss before provision for income taxes\"\nTAX        = D('20')     # \"Income tax expense (benefit)\"\nNET        = D('-125')   # \"Net gain/ loss\"\nTARGET_M   = D('0.05')   # \"achieve a 5% profit target\"  (стр.118, кларификации)\n\n# --- ДВЕ БАЗЫ РАСХОДОВ ---\nbase_visible = COR_TOTAL + OPEX_TOTAL      # 5084  сумма напечатанных \"Total\"\nbase_true    = REV - NET                   # 5125  ~ \"Total Expenses $ 5,125\" (слайд 04)\ngap          = base_true - base_visible     # 41\nassert base_visible == D('5084') and base_true == D('5125') and gap == D('41')\nassert -OTHER + TAX == gap                 # 21 + 20 = 41 -> источник расхождения найден\n\n# --- ВНУТРЕННИЕ НЕСХОДИМОСТИ САМОГО ОТЧЁТА (округления книги, допуск $1) ---\nassert REV - COR_TOTAL == D('2423') and GROSS - (REV - COR_TOTAL) == D('1')   # 2423 vs 2424\nassert GROSS - OPEX_TOTAL == LOSS_OPS                                          # -83  точно\nassert LOSS_OPS + OTHER   == LOSS_PRE                                          # -104 точно\nassert LOSS_PRE - TAX     == D('-124') and NET - D('-124') == D('-1')          # -124 vs -125\n\n# --- В2: ВЕРНАЯ ВЕТВЬ ---\ntarget_cost = REV * (1 - TARGET_M)         # 4750  ~ \"$ 5b * 95% = $ 4.75b\" (слайд 04)\ncut_true    = base_true - target_cost      # 375   ~ \"x= $0.375b\"           (слайд 04)\nassert (target_cost, cut_true) == (D('4750'), D('375'))\n\nOFFICE = (D('30000') + D('170000') + D('300000'))      # 500,000 на офис\noffice_sav = OFFICE * 30 / D('1000000')                # 15 ($M) ~ \"= $15 M\"\nmfg_sav    = D('210')                                  # \"$210 M\"\nrest_true  = cut_true - mfg_sav - office_sav           # 150 ~ \"$150 M remaining\"\nFTE_SAV    = D('130000') + D('40000') - D('20000')     # 150,000 ~ \"$170k - $20k = $150k\"\nfte_true   = rest_true * D('1000000') / FTE_SAV        # 1000 ~ \"1000 employees\"\npct_true   = (fte_true / D('20000') * 100)             # 5.00 ~ \"or 5% of the workforce\"\nassert (office_sav, rest_true, fte_true, pct_true) == (D('15'), D('150'), D('1000'), D('5'))\n\n# --- В1: НАИВНАЯ ВЕТВЬ — ПОСТРОЕНО, книга не печатает ---\ncut_naive  = base_visible - target_cost                # 334\nrest_naive = cut_naive - mfg_sav - office_sav          # 109\nfte_naive  = (rest_naive * D('1000000') / FTE_SAV).quantize(D('1'), ROUND_HALF_UP)  # 727\npct_naive  = (fte_naive / D('20000') * 100).quantize(D('0.01'), ROUND_HALF_UP)      # 3.64\nassert (cut_naive, rest_naive, fte_naive) == (D('334'), D('109'), D('727'))\n\n# --- G1: маржа, которую В1 реально приносит (порог 5% не берётся) ---\ndelivered = ((REV - (base_true - cut_naive)) / REV * 100).quantize(D('0.01'), ROUND_HALF_UP)\nassert delivered == D('4.18')                          # 4.18% < 5.00%  -> В1\nassert ((REV - (base_true - cut_true)) / REV * 100) == D('5')          # 5.00% -> В2\n\n# --- кассовый эффект severance: ПОСТРОЕНО, книга не печатает ---\nseverance_cash = fte_true * D('20000') / D('1000000')  # 20 ($M)\nassert severance_cash == D('20')\n```\n\n**Провоцируемая ошибка:** кандидат принимает сумму двух жирных строк «Total» ($5,084M) за совокупные расходы, теряет $41M, лежащие ниже операционной прибыли, и режет на $334M вместо $375M — увольняя ~727 человек и выходя на маржу 4.18% вместо требуемых 5%.\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: 5.00% (сокращение $375M, база $5,125); (3) the naive reading is rejected explicitly, not merely avoided — 4.18% (сокращение $334M, база $5,084) — ПОСТРОЕНО, книга не печатает must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: 5.00% (сокращение $375M, база $5,125); (3) наивное прочтение отвергнуто вслух, а не просто обойдено — 4.18% (сокращение $334M, база $5,084) — ПОСТРОЕНО, книга не печатает обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "- **Вывод (сначала):** Cadenza must take **$375M out of its cost base** and lay off **1,000 FTEs — 5% of the workforce** — to hit the 5% profit target in 2024.\n- **Остальное:** The printed expense lines sum to **$5,084M ($2,577 + $2,507)**, but total revenue less the net loss gives **$5,000 − (−$125) = $5,125M**; the **$41M** gap is exactly Other expense **$21M** plus Income tax **$20M**, which sit below operating profit and are still real cash costs. Against a target cost base of **$5,000 × 95% = $4,750M**, the required cut is **$375M** — not $334M. The alternative manufacturer delivers **$210M** and closing **30 of 90** offices delivers **($30k + $170k + $300k) × 30 = $15M**, leaving **$150M**; at **$130k + $40k − $20k = $150k** net saving per FTE that is exactly **1,000 people, 5% of 20,000**. Sizing off the visible-lines base would fund only ~727 layoffs and land the company at **4.18%** — short of target, with the LBO threat intact. Two risks: severance of **$20M** hits cash inside the same two quarters and 5% headcount loss damages productivity; and **56% of the programme ($210M)** depends on a single new manufacturer, with quality, IP and compliance exposure. Next steps: lock the $5,125M base in writing, close manufacturer due diligence within two weeks, and stress-test the plan against a 3% revenue miss.\n\n---"
+   },
+   "anchor_metric": "5% прибыли"
+  },
+  {
+   "id": "SY-019",
+   "title": "Four Gates",
+   "company": "",
+   "industry": "",
+   "difficulty": "Hard",
+   "clean": false,
+   "focus": "S09(c)",
+   "scaffold": "L2",
+   "time": "5 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Verenda Pharma is weighing the purchase of Kelvane Bio, a private biologicals start-up. Kelvane's only promising asset is a single candidate drug that has not yet entered clinical trials. Before we look at the seller's asking price, the team wants one number: over the drug's whole development path, how much should Verenda expect to spend on R&D — and what does that number tell you about the deal? ---",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "*Client and target*",
+       "Verenda Pharma is a pharmaceutical company with $10 billion in annual revenue. Its corporate HQ and primary R&D centers are in Switzerland, with regional sales offices worldwide. Verenda is interested in entering a new, rapidly growing segment of drugs called \"biologicals.\" To gain the R&D capabilities requisite for biologicals, Verenda is considering acquiring Kelvane Bio, a biologicals start-up in Austin. Kelvane Bio is privately owned and has an estimated valuation of $1 billion.",
+       "*Clarifying information on the record*",
+       "— Verenda has a long, successful tradition in researching, developing, and selling \"small molecule\" drugs. This class of drugs represents the vast majority of drugs today, including aspirin and most blood-pressure or cholesterol medications.",
+       "— R&D for biologicals is vastly different from small-molecule R&D. Since its competitors are already several years ahead of Verenda in the biologicals market, Verenda wants to jumpstart its biologicals program via acquisition.",
+       "*The asset*",
+       "Based on market research, Kelvane's only promising drug, SM1, is estimated to generate $10B in sales if brought to market.",
+       "*Exhibit — Expected probability of success, by stage of research and development, %*"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Stage",
+       "Success",
+       "Fail"
+      ],
+      "rows": [
+       [
+        "Phase I trial",
+        "70",
+        "30"
+       ],
+       [
+        "Phase II trial",
+        "40",
+        "60"
+       ],
+       [
+        "Phase III trial",
+        "50",
+        "50"
+       ],
+       [
+        "Filing",
+        "90",
+        "10"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "Note: \"Filing\" is the process of submitting all of the clinical and safety evidence from Phase I, II, and III trials, and asking for regulatory approval to actually sell the drug.",
+       "*Costs on the record*",
+       "— Costs by phase: Phase I $160M, Phase II $125M, Phase III $75M, Filing $5M. Costs are incurred only if the drug reaches a particular phase.",
+       "— Costs of production: Manufacturing 5% of sales, Logistics 5% of sales, Other 10% of sales.",
+       "*Cost items the team listed for a drug's lifetime (background)*",
+       "Research: highly skilled labor (scientists); specialized equipment and labs; materials; Phase I, II, III testing — proper testing and documentation; cost of failed drugs.",
+       "Regulatory approval: regulatory fees paid to governing bodies; salary / wages for in-house council to file patents, trademarks, and other legal documentation.",
+       "Commercialization: promotional materials; marketing campaigns; production costs (materials, quality, sourcing); adding personnel (sales, marketing, administrative, regulatory); new facilities; packaging materials; distribution and shipment (logistics); taxes; patent infringement.",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Шаг | Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|---|\n| 1 | Считает общую вероятность довести до рынка: 70 × 40 × 50 × 90 | 12.6% — первая красивая цифра за 20 секунд | якорение на первом успешном вычислении |\n| 2 | Умножает $10B на 12.6% | $1,260MM выручки — совпадает с книгой, уверенность растёт | подтверждение верным промежуточным шагом |\n| 3 | Умножает $2B производственных на те же 12.6% | $252MM — снова совпадает с книгой | «метод работает, применяю дальше» |\n| 4 | Складывает четыре стадии в один столбик: 160 + 125 + 75 + 5 | $365M — «затраты на R&D» | одна колонка → один множитель |\n| 5 | Умножает $365M на те же 12.6% | **$45.99M** | перенос коэффициента без проверки базы |\n| 6 | Не сверяет с $160M | $45.99M < $160M — стоимость стадии, которую платят всегда | отсутствует проверка нижней границы |\n| 7 | Выдаёт вывод | R&D — мелочь на фоне производства; вся стоимость препарата в производственных затратах | ветвь **В1** |\n\nТочка невозврата — шаг 4: как только четыре строки сложены в одну сумму, вложенность вероятностей физически негде восстановить.\n\n---",
+    "decoy": "| id | Факт-обманка | Почему выглядит опорой | Класс |\n|---|---|---|---|\n| D1 | Manufacturing 5% + Logistics 5% + Other 10% of sales | Единственная статья, где книга сама задаёт затраты как долю от выручки — подсказывает, что и R&D можно свести к доле | Q1 |\n| D2 | «Costs of production» и «Costs by phase» напечатаны подряд одной строкой поставки | Типографическое соседство читается как «две части одного списка», к которому применяется одно правило | Q1 |\n| D3 | Оценка цели $1 billion | Круглая, крупная, в промпте — тянет на роль порога и уводит от $160M | Q3 |\n| D4 | Годовая выручка клиента $10 billion | Численно совпадает с пожизненной выручкой SM1 — кандидат путает базы и весит не ту величину | Q3 |\n| D5 | Брейншторм стр. 129 (cost of failed drugs) | Прямо называет «стоимость неудачных препаратов» — кажется, что вероятности уже учтены в списке статей | B3 |\n| D6 | «Competitors are already several years ahead» | Читается как аргумент срочности и давит в сторону «не считать, а покупать» | B3 |\n\n---",
+    "support": "| # | Опора | Величина | Ложна ли во второй ветви? |\n|---|---|---|---|\n| 1 | Phase I достигается всегда, значит платится целиком | $160M | нет — верна в обеих, но в В1 не используется |\n| 2 | Phase II оплачивается только при прохождении Phase I | 70% | да — в В1 к ней применён общий коэффициент 12.6% |\n| 3 | Phase III оплачивается только при прохождении двух предыдущих | 70% × 40% = 28% | да — в В1 применён 12.6% |\n| 4 | Filing оплачивается при прохождении трёх предыдущих | 70% × 40% × 50% = 14% | да — в В1 применён 12.6% |\n| 5 | Выручка требует всех четырёх успехов | 12.6% | нет — единственное место, где общий коэффициент верен |\n| 6 | Производственные затраты пропорциональны выручке, значит несут ту же вероятность | 12.6% | нет — верна в обеих |\n\nКлюч асимметрии: коэффициент 12.6% верен ровно для двух строк из шести и неверен ровно для трёх. Опора №1 в В1 не ложна — она просто не применена, и именно её неприменение делает результат физически невозможным.\n\n---",
+    "risks": "1. **Внутренний.** Ожидаемая величина не равна сценарию: с вероятностью 87.4% препарат не доходит до рынка, и тогда компания несёт затраты без единого доллара выручки. Худший реалистичный сценарий — дойти до Filing и провалиться: $160M + $125M + $75M + $5M = $365M списаны при нулевой выручке. Ни одна строка расчёта ожидаемой стоимости этот сценарий не показывает.\n2. **Внешний / регуляторный.** Вероятность 90% на стадии Filing — историческая средняя по классу; биологические препараты для покупателя новы, регуляторный трек и требования к досье отличаются от small-molecule, где у компании весь опыт. Сдвиг Filing с 90% до 70% снимает с выручки $280MM при неизменных затратах.\n3. **Внутренний, оценочный.** Расчёт покрывает один препарат; разрыв между стоимостью SM1 и запрошенной ценой $1B держится на активах, которые в цифру не вошли — команда, IP, платформа. Если разрыв объясняется не ими, переплата структурная.\n\n---",
+    "next": "1. За две недели построить сценарную сетку по четырём стадиям (провал на каждой из четырёх + успех), с денежным следом каждого исхода, а не только средневзвешенным.\n2. Запросить у цели пофазную стоимость её собственных прошлых программ и сверить с $160M / $125M / $75M / $5M — эти цифры отраслевые, не компанийские.\n3. Оценить не вошедшие в расчёт активы (научный состав, патенты, ноу-хау, партнёрства) и проверить, закрывают ли они разрыв между стоимостью препарата и запрошенной ценой.\n4. Заложить в структуру сделки earn-out, привязанный к прохождению Phase II — стадии с наименьшей вероятностью успеха.\n\n---",
+    "build": "```python\nfrom decimal import Decimal as D, ROUND_HALF_UP\n\ndef r(x, n='0.01'):\n    return D(x).quantize(D(n), rounding=ROUND_HALF_UP)\n\n# ВХОДЫ — все со стр. 130-131 Darden 2024-25\np1, p2, p3, pf = D('0.70'), D('0.40'), D('0.50'), D('0.90')   # Exhibit 1, стр. 130\nc1, c2, c3, cf = D('160'), D('125'), D('75'), D('5')          # $M, стр. 131\nsales   = D('10000')                                          # $M, стр. 129\nprod_sh = D('0.05') + D('0.05') + D('0.10')                   # стр. 131\n\noverall = p1 * p2 * p3 * pf                     # 0.126  — ПОСТРОЕНО\nrevenue = sales * overall                       # 1260.00 — сверка стр. 131\nprod    = sales * prod_sh * overall             #  252.00 — сверка стр. 131\n\n# В2 — вероятность ДОЙТИ до стадии\nrd_correct = c1 + c2*p1 + c3*p1*p2 + cf*p1*p2*p3\nvalue_correct = revenue - prod - rd_correct\n\n# В1 — один общий множитель на весь столбик затрат\nrd_naive = (c1 + c2 + c3 + cf) * overall\nvalue_naive = revenue - prod - rd_naive\n\nTHRESHOLD = c1                                  # $160M, стр. 131 — экзогенный\n\nassert r(overall, '0.0001') == D('0.1260')\nassert r(revenue) == D('1260.00')               # стр. 131: $1,260MM\nassert r(prod)    == D('252.00')                # стр. 131: $252MM\nassert r(c2*p1)   == D('87.50')                 # стр. 131: $87.5M\nassert r(c3*p1*p2) == D('21.00')                # стр. 131: $21M\nassert r(cf*p1*p2*p3, '0.1') == D('0.7')        # стр. 131: $0.7M\nassert r(rd_correct) == D('269.20')             # стр. 131: $269.2MM\nassert r(value_correct) == D('738.80')          # стр. 131: $738.8MM\n\nassert r(rd_naive) == D('45.99')                # ПОСТРОЕНО, книга не печатает\nassert r(value_naive) == D('962.01')            # ПОСТРОЕНО, книга не печатает\n\nassert rd_correct > THRESHOLD > rd_naive        # ветвь переворачивается\nassert rd_correct != rd_naive\nprint(r(rd_naive), r(rd_correct), r(value_naive), r(value_correct))\n# 45.99  269.20  962.01  738.80\n```\n\nСверка против страниц: стр. 130 — вероятности (Exhibit 1); стр. 131 — стоимости стадий, доли производственных затрат, все восемь промежуточных результатов; стр. 129 — $10B пожизненной выручки; стр. 127 — оценка $1B. Величины `45.99` и `962.01` в книге отсутствуют и помечены как построенные.\n\n---\n\n**Провоцируемая ошибка:** кандидат применяет одну общую вероятность доведения препарата до рынка ко всему столбику стадийных затрат сразу и получает ожидаемый R&D меньше стоимости той единственной стадии, которую платят при любом исходе.\n\n---\n\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: $269.20M (стр. 131); (3) the naive reading is rejected explicitly, not merely avoided — $45.99M — ПОСТРОЕНО, книга не печатает must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: $269.20M (стр. 131); (3) наивное прочтение отвергнуто вслух, а не просто обойдено — $45.99M — ПОСТРОЕНО, книга не печатает обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "**Поле 1 — Conclusion (Minto, first):**\n\"Verenda should expect to spend roughly $270M on R&D for SM1 — meaningfully more than the $160M it is certain to spend on Phase I, and more than the expected production cost — so R&D is the single largest cost bucket in this asset, not a rounding item.\"\n\n**Поле 2 — Everything else:**\n*Facts.* Phase I is reached in 100% of cases, so all $160M is spent for certain. Phase II is reached only 70% of the time, giving $125M × 70% = $87.5M. Phase III is reached 70% × 40% = 28% of the time, giving $21M. Filing is reached 14% of the time, giving $0.7M. Total expected R&D is $269.2M. Expected production cost is $2B × 12.6% = $252M, and expected revenue is $10B × 12.6% = $1,260M — leaving SM1 worth $738.8M against a $1B asking price.\n*Risk.* Two risks. Internally, the expected value hides the outcome that matters most: in 87.4% of cases the drug never sells, and a failure at Filing burns the full $365M with zero revenue. Externally, the 90% Filing probability is an industry average — Verenda has no biologicals regulatory track record, and a drop to 70% removes $280M of expected revenue while costs stay put.\n*Next step.* Build the four-failure scenario grid within two weeks, benchmark the phase costs against Kelvane's own programs, and value the assets outside SM1 — team, IP, platform — to test whether they justify the ~$260M gap to the asking price. Structure an earn-out on Phase II completion, the weakest link in the chain.\n\n---"
+   },
+   "anchor_metric": "$160M — стоимость Phase I"
+  },
+  {
+   "id": "SY-020",
+   "title": "The Curb Rate",
+   "company": "",
+   "industry": "",
+   "difficulty": "Medium",
+   "clean": false,
+   "focus": "S12(b)",
+   "scaffold": "L4",
+   "time": "4 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "The city of Philadelphia is auctioning off the operating rights to its on-street parking for the next twenty years, and our client is preparing a bid. The contract lets the winner reset hourly rates region by region, and the city has already published how demand responds at each rate. Our client's dense downtown district is the one that matters most. Which rate should we set there? ---",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "*Situation*",
+       "The city of Philadelphia is planning to sell the rights to all of its parking meters for 20 years to a private company. In exchange for a lump sum, the city would turn over the operation and revenue stream of its 40,000 parking spaces to a private operator. The deal will bring in a big amount of cash for a cash-strapped city and relieve it of the responsibility of maintaining meters — something it isn't very good at. The city is planning to use a competitive bidding process with the highest bidder winning the contract. The contract also requires a high-tech upgrade replacing the old coin-based meters with new machines that accept cash, cards and digital NFC payments, which is a service enhancement that should be incorporated in the bid.",
+       "Our client, Meridian Curbworks, has been hired to establish a reasonable price to win the competitive bid and to assess whether the ROI is attractive.",
+       "*On the record from the client*",
+       "— Proceeds from collections: the company keeps all proceeds from parking meter collections for 20 years after buying rights for the lump sum amount.",
+       "— Parking space tiers, pricing, number of spaces: differ currently by region.",
+       "— Prior experience: no prior experience in PA, but the company runs similar operations in Chicago.",
+       "— Bidding rivals: rivals expected, but not our primary concern.",
+       "— Expected ROI: Meridian Curbworks would like to make $2 B net profit from this deal over 20 years.",
+       "— Government liaisons report that $1.5 B would be a winning bid in the auction.",
+       "— Discount rate is zero.",
+       "— Assume the lifetime of a new parking meter is 20 years.",
+       "*Exhibit A — Number, daily usage, and price of parking spaces by region*"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Region",
+       "# Spaces",
+       "Usage (Hrs/day)",
+       "Price ($ per hour)"
+      ],
+      "rows": [
+       [
+        "Rittenhouse Square",
+        "10,000",
+        "12",
+        "3"
+       ],
+       [
+        "Center City",
+        "14,000",
+        "5",
+        "2"
+       ],
+       [
+        "Rest of Philadelphia",
+        "16,000",
+        "7",
+        "1"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "Annual Revenue = # Spaces * Daily usage * Price * 30 days * 12 months",
+       "Note: Assume no growth in # meters or change in pricing or usage over the 20-year period.",
+       "*Exhibit B — Price sensitivity analysis for parking spaces*"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Region",
+       "Existing Price ($)",
+       "Existing Usage (Hrs/Day)",
+       "Plan A Price ($)",
+       "Plan A Usage",
+       "Plan B Price ($)",
+       "Plan B Usage",
+       "Plan C Price ($)",
+       "Plan C Usage"
+      ],
+      "rows": [
+       [
+        "Rittenhouse Square",
+        "3",
+        "12",
+        "5",
+        "8",
+        "6",
+        "7",
+        "7",
+        "5"
+       ],
+       [
+        "Center City",
+        "2",
+        "5",
+        "3",
+        "4",
+        "4",
+        "3",
+        "5",
+        "2"
+       ],
+       [
+        "Rest of Philadelphia",
+        "1",
+        "7",
+        "2",
+        "6",
+        "3",
+        "4",
+        "4",
+        "2"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "Note: Each parking space region will have its own pricing plan, i.e. — Region 1 could have Plan A, Region 2 could have Plan B and Region 3 could have Plan C at the same time.",
+       "*Cost inputs on the record*",
+       "— New parking meters with new payment features: 1 meter covers 8 spaces; each meter costs $200K.",
+       "— Monthly maintenance cost per meter: $500.",
+       "— Labor: 500 employees, 1 per 10 meters, annual wages $40,000.",
+       "*Background*",
+       "In 2008, Chicago, trying to balance its budget, sold the rights to all of its parking meters for 75 years to Morgan Stanley for $1.15 billion. The bank has recouped its investment as of 2023, with 60 years left.",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Шаг | Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|---|\n| 1 | Считает выручку и затраты, упирается в дефицит до целевой прибыли | «нужно ещё, и много» | давление величины разрыва |\n| 2 | Открывает таблицу планов с готовым вопросом «где взять» | ищет максимум, а не оптимум | поиск рычага вместо поиска функции |\n| 3 | Читает пары слева направо, фиксирует ценовой столбец | цена растёт по столбцам: 5 → 6 → 7 | порядок чтения таблицы = порядок предпочтения |\n| 4 | Столбец загрузки трактует как справочную характеристику спроса | загрузка выпадает из расчёта | второй множитель принят за атрибут |\n| 5 | Выбирает Plan C для самого дорогого региона | 10,000 × 7 × 5 × 30 × 12 = **$126.0M** | «максимальная цена — максимальный рычаг» |\n| 6 | Переносит ту же логику на два других региона | Plan C везде | обобщение единственного правила |\n| 7 | Не сверяет с действующей выручкой региона | $126.0M против $129.6M сегодня | отсутствует сверка со статус-кво |\n| 8 | Выдаёт вывод | «подняли цену, закрыли разрыв» — при том что по главному региону выручка упала | ветвь **В1** |\n\nТочка невозврата — шаг 4: как только загрузка перестала быть множителем, максимум произведения искать негде, и решение сводится к сортировке по цене.\n\n---",
+    "decoy": "| id | Факт-обманка | Почему выглядит опорой | Класс |\n|---|---|---|---|\n| D1 | Целевая чистая прибыль $2 B за 20 лет | Единственный явный критерий приёмки в записи — превращает задачу в «добрать любой ценой», а не «оптимизировать» | Q1 |\n| D2 | Цена $1.5 B названа выигрышной ставкой | Читается как зафиксированный вход, который нельзя трогать → давление уходит целиком в цену за час | Q1 |\n| D3 | Rittenhouse Square — самая высокая действующая цена ($3) и самая высокая загрузка (12) | «Регион премиальный, значит выдержит любую цену» — качественный вывод подменяет счёт | Q3 |\n| D4 | Порядок столбцов Exhibit B: Existing → A → B → C по возрастанию цены | Монотонность колонок читается как монотонность выгоды | Q3 |\n| D5 | Затратный блок (счётчики, обслуживание, персонал) | Крупный, детальный, считается легко — забирает время у единственного решения, которое реально меняет исход | B3 |\n| D6 | Кейс про Чикаго: Morgan Stanley окупился за 15 из 75 лет | Читается как доказательство, что агрессивная модель работает | B3 |\n\n---",
+    "support": "| # | Опора | Величина | Ложна ли во второй ветви? |\n|---|---|---|---|\n| 1 | Выручка = цена × загрузка × мест × 360 | формула, стр. 208 | нет — верна в обеих, но в В1 применена с выпавшим множителем |\n| 2 | Загрузка падает при росте цены | 12 → 8 → 7 → 5 | да — в В1 не учтена вовсе |\n| 3 | Rittenhouse даёт наибольшую выручку среди трёх регионов | 10,000 мест × 3 × 12 | нет — верна в обеих |\n| 4 | Максимум произведения на Rittenhouse | 6 × 7 = 42 | да — в В1 выбрано 7 × 5 = 35 |\n| 5 | Действующее произведение как точка отсчёта | 3 × 12 = 36 | да — в В1 не построено, поэтому падение ниже статус-кво не замечено |\n| 6 | Каждый регион выбирает план независимо | нота Exhibit B | да — в В1 одно правило перенесено на все три |\n\nКлюч асимметрии: опора №5 — единственная, которая делает ошибку В1 **видимой изнутри**, без сравнения с эталоном. Её отсутствие и есть то, что превращает неоптимальный выбор в незамеченный.\n\n---",
+    "risks": "1. **Внешний / общественно-политический.** Удвоение почасового тарифа в самом посещаемом районе (с $3 до $6) — публично заметное действие в городе, который сам объявил себя cash-strapped. Реакция горожан и городского совета может вылиться в регуляторное ограничение тарифа уже после подписания, а вся дельта $25.2M/год ($504M за 20 лет) держится ровно на праве этот тариф установить.\n2. **Внутренний / модельный.** Вся конструкция стоит на одной таблице эластичности с тремя точками и на ноте «no change in pricing or usage over the 20-year period». Двадцать лет без изменения поведения — сильное допущение: сдвиг загрузки Rittenhouse с 7 до 6 часов при цене $6 снимает $21.6M в год и возвращает выбор к статус-кво.\n3. **Внутренний / операционный.** Компания не работала в Пенсильвании; операционная модель перенесена из Чикаго. Разница в правилах взимания, инфорсменте и структуре спроса напрямую бьёт по загрузке — тому самому множителю, который и делает решение верным.\n\n---",
+    "next": "1. За 30 дней достроить кривую эластичности между $5 и $7 с шагом $0.50 — три точки не показывают, где именно лежит вершина, и $6 может оказаться не максимумом, а его окрестностью.\n2. Прогнать сценарий регуляторного потолка тарифа (например, ограничение ростом не более чем вдвое) и посчитать, сохраняется ли целевая прибыль при откате к плану с меньшей ценой.\n3. До подачи ставки зафиксировать в контракте право оператора на пересмотр тарифов — без него вся дельта не защищена.\n4. Проверить второй рычаг, который открывает падение загрузки: при меньшем спросе часть счётчиков может стать избыточной, что снимает часть капитальных и трудовых затрат.\n\n---",
+    "build": "```python\nfrom decimal import Decimal as D, ROUND_HALF_UP\n\ndef r(x, n='0.01'):\n    return D(x).quantize(D(n), rounding=ROUND_HALF_UP)\n\nDAYS   = D('30') * D('12')            # сноска Exhibit A, стр. 208\nSPACES = {'RS': D('10000'), 'CC': D('14000'), 'RP': D('16000')}   # стр. 208\n\n# Exhibit A (действующее) и Exhibit B (планы), стр. 208-209 — (price, usage)\nPLANS = {\n    'RS': {'Ex': (D('3'), D('12')), 'A': (D('5'), D('8')),\n           'B':  (D('6'), D('7')),  'C': (D('7'), D('5'))},\n    'CC': {'Ex': (D('2'), D('5')),  'A': (D('3'), D('4')),\n           'B':  (D('4'), D('3')),  'C': (D('5'), D('2'))},\n    'RP': {'Ex': (D('1'), D('7')),  'A': (D('2'), D('6')),\n           'B':  (D('3'), D('4')),  'C': (D('4'), D('2'))},\n}\n\ndef rev_m(region, plan):\n    p, u = PLANS[region][plan]\n    return SPACES[region] * p * u * DAYS / D('1000000')\n\n# ПОРОГ — экзогенный: выручка Rittenhouse на действующем плане\nTHRESHOLD = rev_m('RS', 'Ex')                 # 129.60 -> книга: ~130 M, стр. 201\nnaive     = rev_m('RS', 'C')                  # 126.00 -- ПОСТРОЕНО\ncorrect   = rev_m('RS', 'B')                  # 151.20 -> книга: ~151 M, стр. 204\n\nassert r(THRESHOLD) == D('129.60')            # стр. 201: ~130 M (допуск округления)\nassert r(rev_m('CC','Ex')) == D('50.40')      # стр. 201: ~50 M\nassert r(rev_m('RP','Ex')) == D('40.32')      # стр. 201: ~40 M\nassert r(rev_m('RS','Ex') + rev_m('CC','Ex') + rev_m('RP','Ex')) == D('220.32')  # ~220 M\nassert r(correct) == D('151.20')              # стр. 204: ~151 M\nassert r(rev_m('CC','A')) == D('60.48')       # стр. 204: ~60 M\nassert r(rev_m('RP','B')) == D('69.12')       # стр. 204: ~69 M\nassert r(naive)   == D('126.00')              # ПОСТРОЕНО, книга не печатает\nassert r(rev_m('RS','A')) == D('144.00')      # ПОСТРОЕНО, книга не печатает\n\n# ранги по двум метрикам расходятся -> форма beta доказана\nby_price = sorted(PLANS['RS'], key=lambda k: PLANS['RS'][k][0], reverse=True)\nby_prod  = sorted(PLANS['RS'], key=lambda k: PLANS['RS'][k][0]*PLANS['RS'][k][1],\n                  reverse=True)\nassert by_price[0] == 'C' and by_prod[0] == 'B'\n\n# ветвь переворачивается через экзогенный порог\nassert correct > THRESHOLD > naive\nassert correct != naive\nprint(r(naive), r(THRESHOLD), r(correct), r(correct - naive))\n# 126.00  129.60  151.20  25.20\n```\n\nСверка против страниц: стр. 199 — предмет и срок сделки, мотивация Чикаго; стр. 200 — условия клиента, цель $2 B, отсутствие опыта в PA; стр. 201 + 208 — Exhibit A, формула, действующие выручки регионов; стр. 202 — затратные входы; стр. 203 — цена $1.5 B; стр. 204 + 209 — Exhibit B и новые выручки. Величины `126.00` и `144.00` в книге отсутствуют и помечены как построенные; `129.60`, `50.40`, `40.32`, `151.20`, `60.48`, `69.12` сверены с округлёнными значениями книги в пределах её собственного допуска («ballpark numbers acceptable», стр. 204).\n\n---\n\n**Провоцируемая ошибка:** под давлением недобранной прибыли кандидат берёт самый дорогой тарифный план для главного региона и не замечает, что падение загрузки уводит выручку этого региона ниже уровня, который тот приносит уже сегодня.\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: $151.2M (Plan B) — книга печатает «~$151 M», стр. 204; (3) the naive reading is rejected explicitly, not merely avoided — $126.0M (Plan C) — ПОСТРОЕНО, книга не печатает must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: $151.2M (Plan B) — книга печатает «~$151 M», стр. 204; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — $126.0M (Plan C) — ПОСТРОЕНО, книга не печатает обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "**Field 1 — Conclusion (Minto, first):**\n\"We should set Rittenhouse Square at $6 per hour, not the maximum $7 — the highest price on the sheet is the only plan that leaves us worse off than doing nothing.\"\n\n**Field 2 — Facts:**\n\"Revenue is price times usage, and usage falls as price rises, so the best plan is the one with the highest product of the two. At Rittenhouse Square that product is 42 at $6 with 7 hours, against 40 at $5 with 8 hours and 35 at $7 with 5 hours. The current plan already runs at 36. So $7 per hour is not a smaller gain — it is a loss: 10,000 spaces at $7 × 5 hours × 360 days is $126M a year, below the $130M the region produces today. At $6 the same region produces $151M, $21M more than today. The same test applied to the other two regions moves them off the top plan as well.\"\n\n**Field 3 — Risk:**\n\"Two risks. Externally, doubling the hourly rate in the city's busiest district in a city that just declared itself cash-strapped invites political pushback and a rate cap after signing — and the entire $25M a year sits on our right to set that rate. Internally, the whole case rests on a three-point elasticity table held constant for twenty years; if usage at $6 comes in at 6 hours rather than 7, we lose $22M a year and the plan collapses back to the status quo.\"\n\n**Field 4 — Next step:**\n\"Within 30 days, fill in the elasticity curve between $5 and $7 in half-dollar steps to locate the actual peak rather than assume it, stress-test a regulatory rate cap, and secure contractual rate-setting authority before we submit the bid.\"\n\n---"
+   },
+   "anchor_metric": "~$130M — годовая выручка Rittenhouse Square на действующем плане"
+  },
+  {
+   "id": "SY-021",
+   "title": "Kegs Or Cans",
+   "company": "",
+   "industry": "",
+   "difficulty": "Medium",
+   "clean": false,
+   "focus": "S08(a)",
+   "scaffold": "L2",
+   "time": "4 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Northwind Brewworks is a large craft brewery that sells nationally through a distributor network. The CEO is preparing for the annual board meeting and has asked us to investigate two efficiency initiatives: purchasing kegs outright instead of renewing a long-term lease, and purchasing an upgraded canning and packaging system. There are $20 million available in the budget. How would you advise our client? ---",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "*Контекст.* Клиент — крупная крафтовая пивоварня, продаёт по стране через сеть национальных дистрибьюторов. Производство выросло со 100,000 BBL три года назад до 500,000 BBL сегодня. Пиво фасуется в кеги (розлив на кранах в барах и ресторанах) и в 24-баночные ящики (магазины). В бюджете доступно $20 million. Рассматриваются две инициативы: выкуп кег вместо продления долгосрочной аренды и покупка обновлённой канлайн-системы.",
+       "*Условия по кегам (даются устно).*",
+       "- Срок арендного контракта: 10 лет; годовая аренда одной кеги: $10; провайдер отказывается от всех разовых сборов при продлении.",
+       "- Покупка: $50 за кегу; ставка замены 5% в год; срок службы 10 лет.",
+       "- Годовое производство 500,000 BBL; 40% фасуется в кеги; 1 BBL (≈31 галлон) = 2 кеги.",
+       "- Допущение: кега используется один раз в год (полный цикл: мойка → розлив → дистрибуция → потребление → возврат).",
+       "*EXHIBIT 2 — канлайн-системы.*"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "",
+       "Cantastic 3000 (текущая)",
+       "Beer-zilla 5000 (предлагаемая)"
+      ],
+      "rows": [
+       [
+        "Operators",
+        "4",
+        "4"
+       ],
+       [
+        "Rate (Cases/hr)",
+        "600",
+        "1,200"
+       ],
+       [
+        "Waste (Cases)",
+        "10%",
+        "7%"
+       ],
+       [
+        "MSRP",
+        "$10m",
+        "$20m"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "*Сноска экспоната:* «*The canning system is not expected to have any impact on the brewery's overall energy consumption» (стр. 95).",
+       "*Дополнительные условия по канлайну (по запросу).* Часовая ставка оператора $25/hr; стоимость брака $20 за ящик; срок службы 10 лет; salvage-стоимость текущей системы $1.3m. 60% производства фасуется в банки; 1 BBL = 14 ящиков по 24 банки. Пивоварня работает 24 часа в сутки.",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Шаг | Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|---|\n| 1 | Слышит «$20 million available» и читает задачу как выбор одного из двух проектов по цене входа | Сравнивает $20m покупки кег против $20m MSRP канлайна | «Что влезает в бюджет» вместо «что даёт больше» |\n| 2 | Считает кеговый поток, получает величину, считает канлайн-поток, получает существенно бо́льшую | Кладёт рядом абсолютные уровни потоков | Сопоставление уровней, а не дельт |\n| 3 | Объявляет: «кеги дешевле в несколько раз» | **В1** — победитель по масштабу потока | Масштаб принимается за выгоду |\n| 4 | Не берёт дельты «до/после» внутри каждой инициативы | Экономии как величины в разборе вообще не появляется | Пропуск базовой линии |\n| 5 | На вопрос «почему кеги» ссылается на разницу потоков, не на конвенцию клиента | Рекомендация без основания, которое можно защитить | Ответ без названного правила выбора |\n| 6 | Цель «support future growth» со стр. 91 не поднимает ни разу | Конвенция, единственно разрешающая ситуацию, остаётся неиспользованной | Кларификации не возвращаются в вывод |\n\n---",
+    "decoy": "| id | Факт-обманка | Почему выглядит опорой | Класс |\n|---|---|---|---|\n| D1 | MSRP Cantastic 3000 = $10m | Выглядит балансодержателем сравнения «$10m против $20m» и толкает к выводу «новая линия вдвое дороже»; в расчёте текущей системы MSRP не участвует вовсе — участвует только salvage $1.3m | Q1 |\n| D2 | «Operators 4» одинаково у обеих систем | Читается как «различий нет, труд можно не считать»; на деле различие в часах при равном числе операторов и создаёт половину эффекта | Q3 |\n| D3 | Бюджет $20m равен цене входа в кеги | Создаёт ощущение, что бюджет уже «съеден» кегами и второй проект нужно отбросить; на деле это вход, а не итог | B3 |\n| D4 | «not expected to have any impact on the brewery's overall energy consumption» (стр. 95) | Приглашает искать коммунальную экономию и обсуждать её отсутствие как аргумент против канлайна | Q1 |\n| D5 | Рост со 100,000 до 500,000 BBL за три года | Выглядит как количественный вход для прогноза; в расчётах не используется ни разу, но именно он объясняет, почему клиент вообще говорит о росте | Q3 |\n| D6 | «Provider will waive all one-time fees if the brewery renews» (стр. 93) | Читается как скрытая скидка в пользу аренды; на арифметику аренды не влияет — просто фиксирует, что разовых сборов нет | B3 |\n\n---",
+    "support": "| # | Опора | Величина | Ложна ли во второй ветви? |\n|---|---|---|---|\n| 1 | Парк кег, требующийся в год | 400,000 кег | Нет — общая для обеих ветвей |\n| 2 | Годовая замена парка | 5% × $50 = $1m | Нет, но в В1 не доживает до сравнения |\n| 3 | Годовой объём розлива в банки | 4.2m ящиков | Нет — общая |\n| 4 | Разрыв в производительности линий | 600 → 1,200 ящиков/час | Нет |\n| 5 | Разрыв в браке | 10% → 7% при $20/ящик | Нет |\n| 6 | Чистый вход в новую линию | $20m − $1.3m | В В1 подменяется на «$20m против $10m по MSRP» — да, ложна |\n| 7 | Дельта каждой инициативы против её базовой линии | сопоставима между инициативами | В В1 отсутствует как величина — да, ложна |\n| 8 | Заявленная цель клиента (стр. 91) | «projects that support future growth» | В В1 не используется — да, ложна как основание |\n\n---",
+    "risks": "- **Внутренний.** Вход в любую из инициатив забирает весь доступный бюджет: покупка кег требует $20m вперёд при $20m в бюджете, канлайн — $20m MSRP при salvage $1.3m. Свободного капитала на вторую инициативу и на непредвиденный ремонт в течение десятилетнего горизонта не остаётся; при производстве, выросшем со 100,000 до 500,000 BBL за три года, нулевой резерв ликвидности — реальное операционное ограничение.\n- **Внешний.** Горизонт обеих оценок — 10 лет при фиксированных ценах: аренда $10 за кегу в год, ставка оператора $25/час, стоимость брака $20 за ящик. Ни одна из этих строк не индексирована; книга прямо ставит вопрос «Will leasing / keg costs remain the same for ten years? Will labor costs rise faster than other costs?» (стр. 97, блок **Durability of forecast**). Опережающий рост ставки труда бьёт по канлайну, рост арендной ставки — по решению не покупать кеги.\n- **Технологический (внешний, второй).** «Will new equipment make this system obsolete within ten years?» (стр. 97): при списании канлайна раньше десятого года его десятилетний поток теряет основание, а salvage $1.3m — единственный зачёт, уже использованный на входе.",
+    "next": "1. До заседания совета зафиксировать в договорной форме, индексируется ли арендная ставка $10 за кегу и ставка оператора $25/час, — обе строки развёрнуты на 10 лет без индексации.\n2. Оценить объём обучения и интеграции, необходимый для ввода Beer-zilla 5000 при том же штате 4 оператора (стр. 98, **Next Steps**).\n3. Спроектировать систему управления собственным парком в 400,000 кег через сеть национальных дистрибьюторов — при покупке кеги становятся имуществом клиента в чужом контуре (стр. 98, **Next Steps**).\n4. Проверить обе инициативы во времени денег: обе цитируются как десятилетние потоки без дисконтирования (стр. 94, сноска про time value of money).\n\n---\n\n**ЭТАЛОННЫЙ ОТВЕТ ПО ПОЛЯМ (EN)** — scaffold L2\n\n**Вывод (первым).** *We recommend Northwind Brewworks fund the upgraded canning system, and we recommend it on a stated convention rather than on cost, because on cost the two initiatives are a dead tie.*\n\n**Остальное.** Both initiatives deliver exactly $10m of ten-year savings — kegs move $40m of leasing to $30m of ownership, and the canning line moves $91m of operating cost to $81m all-in. Cost is therefore not a discriminator, and any recommendation built on it is arbitrary. The client stated two things on the way in: $20 million of available budget, and an interest in projects that support future growth after tripling volume in three years. Applying the growth convention, the canning system doubles throughput from 600 to 1,200 cases per hour at unchanged headcount, so it absorbs future volume without new labour; owning 400,000 kegs absorbs nothing — it only converts a rental stream into an asset. On the budget convention, the canning system enters at $18.7m net of $1.3m salvage and leaves headroom; the keg purchase consumes the full $20m on day one. Both conventions point the same way. The keg case is defensible only on a third convention — hedging against future lease increases — and if the board prefers that convention, we would recommend kegs, and we would say so explicitly rather than dress it as a cost result.\n\n---",
+    "build": "```python\nfrom decimal import Decimal as D, ROUND_HALF_UP\n\n# ВСЕ входы — напечатанные строки стр. 91, 93, 95, 96\nbbl        = D(500_000)      # стр. 91, PROMPT / стр. 93, EXHIBIT 1\nkeg_share  = D('0.40')       # стр. 91, CLARIFYING п.2\nkegs_bbl   = D(2)            # стр. 91, CLARIFYING п.3\nlease_yr   = D(10)           # стр. 93, \"Annual cost to lease one keg: $10\"\nterm       = D(10)           # стр. 93, \"Contract Term: 10 Years\"\nbuy_keg    = D(50)           # стр. 93, \"Cost per keg: $50\"\nrepl       = D('0.05')       # стр. 93, \"Replacement Rate: 5% per year\"\n\nkegs   = bbl * keg_share * kegs_bbl                 # 400,000  ← стр. 94\nlease  = kegs * lease_yr * term                     # 40,000,000 ← стр. 94 \"$4m x 10 = $40m\"\nbuy    = kegs*buy_keg + kegs*repl*buy_keg*term      # 30,000,000 ← стр. 94 \"$20m + $10m = $30m\"\nsave_k = lease - buy                                # 10,000,000 ← стр. 94 \"Total cost savings = $10m\"\n\ncan_share = D('0.60'); cases_bbl = D(14)            # стр. 91, CLARIFYING п.2–3\ncases = bbl * can_share * cases_bbl                 # 4,200,000 ← стр. 96\nwage  = D(25); waste_cost = D(20)                   # стр. 96, Exhibit or Question Guidance\n\ndef annual(rate, waste):                            # стр. 95, EXHIBIT 2\n    hrs = cases / rate\n    return hrs*4*wage + cases*waste*waste_cost\n\ncur = annual(D(600),  D('0.10')) * term             # 91,000,000 ← стр. 96 \"10-year cost = $91m\"\nnew = annual(D(1200), D('0.07')) * term + (D(20_000_000) - D('1300000'))\n                                                    # 81,000,000 ← стр. 96 \"$62.3m + $18.7m = $81m\"\nsave_c = cur - new                                  # 10,000,000 ← стр. 96 \"$91M - $81 M = $10m\"\n\ntie = (save_k == save_c)                            # True  ← стр. 97 \"both options have identical cost savings\"\nbudget_fit_kegs = kegs*buy_keg == D(20_000_000)     # True  ← вход равен бюджету стр. 91 ровно\nbudget_fit_can  = D(20_000_000) - D('1300000')      # 18,700,000 < 20,000,000\n\nfor x in (save_k, save_c, cur, new, lease, buy):\n    assert x == x.quantize(D('1'), rounding=ROUND_HALF_UP)\n```\n\nСверка: 400,000 кег и $40m / $30m / $10m — стр. 94, блок **Exhibit or Question Guidance**. 4.2m ящиков, 7,000 и 3,500 часов, $9.1m и $6.23m годовых, $91m / $81m / $10m — стр. 96, блок **Exhibit or Question Guidance**. Ничья подтверждена книжной формулировкой вопроса брейншторма: «Given that both options have identical cost savings, what other factors do you think our client should consider when making this decision?» (стр. 97). Бюджет $20m и цель «support future growth» — стр. 91.\n\n**Провоцируемая ошибка:** кандидат объявляет победителя по абсолютному размеру потока ($30m против $81m), не заметив, что обе инициативы дают ровно одинаковую экономию, и потому не называет вслух ни одной конвенции, по которой такое равенство вообще может быть разрешено.\n\n---\n\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: Ровная ничья: экономия $10m у обеих инициатив; разрешается только конвенцией (рост / бюджетный вход); (3) the naive reading is rejected explicitly, not merely avoided — «Кеги дешевле»: $30m против $81m — вывод из абсолютных величин потоков must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: Ровная ничья: экономия $10m у обеих инициатив; разрешается только конвенцией (рост / бюджетный вход); (3) наивное прочтение отвергнуто вслух, а не просто обойдено — «Кеги дешевле»: $30m против $81m — вывод из абсолютных величин потоков обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "**Вывод (первым).** *We recommend Northwind Brewworks fund the upgraded canning system, and we recommend it on a stated convention rather than on cost, because on cost the two initiatives are a dead tie.*\n\n**Остальное.** Both initiatives deliver exactly $10m of ten-year savings — kegs move $40m of leasing to $30m of ownership, and the canning line moves $91m of operating cost to $81m all-in. Cost is therefore not a discriminator, and any recommendation built on it is arbitrary. The client stated two things on the way in: $20 million of available budget, and an interest in projects that support future growth after tripling volume in three years. Applying the growth convention, the canning system doubles throughput from 600 to 1,200 cases per hour at unchanged headcount, so it absorbs future volume without new labour; owning 400,000 kegs absorbs nothing — it only converts a rental stream into an asset. On the budget convention, the canning system enters at $18.7m net of $1.3m salvage and leaves headroom; the keg purchase consumes the full $20m on day one. Both conventions point the same way. The keg case is defensible only on a third convention — hedging against future lease increases — and if the board prefers that convention, we would recommend kegs, and we would say so explicitly rather than dress it as a cost result.\n\n---"
+   },
+   "anchor_metric": "$20,000,000 доступного бюджета (экзогенно, напечатано в промпте) + заявленная цель клиента «поддержка будущего роста»"
+  },
+  {
+   "id": "SY-022",
+   "title": "The Surfactant Plant",
+   "company": "",
+   "industry": "",
+   "difficulty": "Medium",
+   "clean": false,
+   "focus": "S02(c)",
+   "scaffold": "L4",
+   "time": "3 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Your client, Meridian Polymers, is a global chemicals manufacturer. Meridian recently acquired a manufacturing facility that makes surfactants as part of a larger purchase of competitor assets. Surfactants are a specialty chemical used for a variety of purposes, including laundry detergent, and the client has very little prior experience with this type of product. The manufacturing facility is not currently generating profits, and the client wants your help in determining what to do. ---",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "*Контекст.* 80% выручки клиента приходится на продажу товарных пластиков другим производителям; остальные 20% — смесь продуктов, которые являются либо продолжением, либо побочными продуктами основного бизнеса. Завод по производству сурфактанта достался клиенту в составе пакетной покупки других производственных активов, стратегически важных для компании; теперь клиент хочет оценить этот завод отдельно. Рынок данного сурфактанта — $300M в год; клиент и один конкурент — единственные значимые производители. Клиент хочет получить от завода максимальную отдачу в ближайшие 5 лет.",
+       "*EXHIBIT 1 — Average cost and profit breakdown for surfactants in cents/lb.*"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Строка",
+       "CavalierChem (клиент)",
+       "Competitor"
+      ],
+      "rows": [
+       [
+        "Variable Cost",
+        "2.3",
+        "2.3"
+       ],
+       [
+        "Fixed Cost",
+        "2.7",
+        "2.7"
+       ],
+       [
+        "Profit",
+        "0.5",
+        "2.0"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "*Структура продаж (выдаётся по запросу).*",
+       "- Объём: 1.4 million tons в год; 2000 lbs в тонне.",
+       "- 75% продаж идёт по контракту, оставшиеся 25% — на споте.",
+       "- Средняя контрактная цена клиента: 5.67 cents/lb.",
+       "- Средняя контрактная цена конкурента: 7.67 cents/lb.",
+       "- Средняя спот-цена (у клиента и у конкурента одинаково): 5 cents/lb.",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Шаг | Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|---|\n| 1 | Читает «facility is not currently generating profits» и открывает затратную ветвь ещё до экспоната | Гипотеза «затраты завышены» до всяких данных | Убыток ⇒ резать затраты |\n| 2 | Видит экспонат, озаглавленный как разбивка затрат, и считает высоту затратных полос клиента | 5.0 ц/фунт объявляются полем работы | Крупнейший видимый блок принимается за рычаг |\n| 3 | Не вычитает колонку конкурента из колонки клиента построчно | Нуль разрыва не обнаружен | Столбцы читаются вертикально, не горизонтально |\n| 4 | Оценивает «реалистичное» сокращение затрат на 10–20% и умножает на объём | **В1** — придуманный процент вместо напечатанного разрыва | Ввод числа, которого нет на странице |\n| 5 | Если всё же доходит до цены — применяет разрыв 2 ц/фунт ко всему объёму | Прирост завышается почти на треть | База не проверяется на подвижность |\n| 6 | Спот-цену 5.00 у обеих сторон не поднимает | Не замечает, что четверть объёма неподвижна по определению | Одинаковые числа принимаются за фон |\n\n---",
+    "decoy": "| id | Факт-обманка | Почему выглядит опорой | Класс |\n|---|---|---|---|\n| D1 | Постоянные затраты 2.7 ц/фунт — самая высокая строка у клиента | Крупнейшая полоса читается как крупнейшая возможность; при равенстве с конкурентом хода в ней ровно ноль | Q1 |\n| D2 | «The manufacturing facility is not currently generating profits» (стр. 143) | Прямая формулировка убыточности толкает в затратную ветвь; при этом прибыль в экспонате положительна (0.5 ц/фунт) | B3 |\n| D3 | Спот-цена 5.00 ц/фунт | Выглядит третьей ценой в ряду и приглашает считать средневзвешенный прирост по всем трём; на деле фиксирует неподвижность 25% объёма | Q3 |\n| D4 | Рынок $300M в год | Выглядит потолком для проверки прироста и приглашает считать долю рынка; в вычислении прироста не участвует | Q1 |\n| D5 | «part of a larger purchase of competitor assets» (стр. 143) | Приглашает вернуть цену приобретения в расчёт; она невозвратна и в анализ не входит — «A good candidate should not bring acquisition price into account, as it is a sunk cost» (стр. 144) | B3 |\n| D6 | «very little prior experience with this type of product» (стр. 143) | Читается как объяснение операционной неэффективности и подкрепляет затратную ветвь; операционного разрыва в экспонате нет | Q3 |\n\n---",
+    "support": "| # | Опора | Величина | Ложна ли во второй ветви? |\n|---|---|---|---|\n| 1 | Построчное совпадение затрат клиента и конкурента | 2.3 = 2.3; 2.7 = 2.7 | Нет — это и есть замок ветвления |\n| 2 | Кратность прибыли при равных затратах | 2.0 / 0.5 = 4× | Нет |\n| 3 | Полный объём в фунтах | 2.8 млрд фунтов | В В1 берётся как база прироста — да, ложна |\n| 4 | Контрактная база | 2.1 млрд фунтов | Нет — единственная верная база |\n| 5 | Разрыв контрактных цен | 2.00 ц/фунт | Нет |\n| 6 | Неподвижность спотовой части | 5.00 у обеих сторон | В В1 игнорируется — да, ложна как основание |\n| 7 | Потенциал затратного рычага | 0.0 ц/фунт | В В1 подменяется придуманным процентом — да, ложна |\n| 8 | Сходимость экспоната с ценами | 5.5 ≈ 5.5025 и 7.0 ≈ 7.0025 | Нет — подтверждает, что вся разница сидит в контрактной цене |\n\n---",
+    "risks": "- **Внутренний.** Клиент почти не имеет опыта с этим продуктом, а завод достался в составе пакетной сделки; переговорная позиция по контрактам опирается не на отношения с покупателями сурфактанта, а на факт владения активом. Подтягивание контрактной цены на 2 ц/фунт по 2.1 млрд фунтов проводится силами команды, у которой нет истории работы с этими клиентами.\n- **Внешний.** На рынке в $300M в год всего два значимых производителя, и 75% объёма продаётся по контракту. Часть покупателей может не выдержать более высокой цены, а рынок может сжаться — обе формулировки прямо перечислены книгой: «Some customers may not be able to afford higher prices» и «The market may contract» (стр. 149, блок **Risks**).\n- **Структурный (внешний, второй).** Спот-цена у клиента и конкурента одинакова — 5 cents/lb. Значит, на 25% объёма ценового хода нет вовсе, и любое давление покупателей на перевод объёма из контракта в спот прямо съедает базу прироста.",
+    "next": "1. Разобрать структуру затрат покупателей и проверить, есть ли у них запас на более высокую цену — «Look into customers cost structure and see if there is room for higher prices» (стр. 149, **Next Steps**).\n2. Параллельно собрать альтернативные предложения по продаже актива — «while also soliciting alternative bids for asset sale» (стр. 149, **Next Steps**).\n3. Разложить контрактный портфель по срокам перезаключения: 2.1 млрд фунтов не пересматриваются одномоментно, и график перезаключения задаёт реальный профиль прироста внутри пятилетнего горизонта.\n4. Проверить, чем именно конкурент обосновывает 7.67 ц/фунт при идентичной затратной базе, — источник разрыва определяет, воспроизводим ли он.\n\n---\n\n**ЭТАЛОННЫЙ ОТВЕТ ПО ПОЛЯМ (EN)** — scaffold L4\n\n**Вывод.** *We recommend Meridian re-price its surfactant contracts to the competitor's level, and we recommend explicitly against a cost programme: on this asset there is no cost lever at all.*\n\n**Факты.** Variable cost is 2.3 cents per pound for us and 2.3 for the competitor; fixed cost is 2.7 and 2.7. The two cost lines match to the tenth of a cent, so the entire four-fold profit gap — 0.5 cents per pound against 2.0 — sits in price, not in cost. Our contract price is 5.67 cents per pound against their 7.67, a two-cent gap. That gap is collectible only where price is actually negotiated: 75% of our 1.4 million tons, which is 2.1 billion of our 2.8 billion pounds. The remaining quarter clears on the spot market at 5 cents for both of us and carries no gap to close.\n\n**Риск.** With only two significant producers in a $300M market and very little client experience in this product, a two-cent move may push price-sensitive contract customers to shift volume onto the spot market — where the gap is zero — and that shift erodes the very base the upside is built on.\n\n**Next step.** Before we go to the table, we want the cost structure of the top contract customers to see who can absorb the increase, sequenced against the contract renewal calendar; and in parallel we solicit bids for the asset, so the re-pricing case is measured against a real alternative rather than against itself.\n\n---",
+    "build": "```python\nfrom decimal import Decimal as D, ROUND_HALF_UP\n\n# ВСЕ входы — напечатанные строки стр. 145 (EXHIBIT 1) и стр. 146\nvc_cl, fc_cl, pr_cl = D('2.3'), D('2.7'), D('0.5')   # стр. 145, EXHIBIT 1\nvc_cp, fc_cp, pr_cp = D('2.3'), D('2.7'), D('2.0')   # стр. 145, EXHIBIT 1\n\ncost_gap = (vc_cl - vc_cp) + (fc_cl - fc_cp)          # 0.0  ← затратного рычага нет\nprofit_x = pr_cp / pr_cl                              # 4    ← кратность прибыли\n\ntons   = D('1.4') * D(10**6)                          # стр. 146\nlbs    = tons * D(2000)                               # 2,800,000,000\nshare  = D('0.75')                                    # стр. 146\nbase   = lbs * share                                  # 2,100,000,000 ← стр. 146\ngap    = D('7.67') - D('5.67')                        # 2.00 ц/фунт   ← стр. 146\n\ncorrect = base * gap / D(100)                         # 42,000,000  ← стр. 146 \"42 million dollars\"\nnaive   = lbs  * gap / D(100)                         # 56,000,000  ← ПОСТРОЕНО, книга не печатает\n\n# сходимость экспоната с ценами (проверка, книга не печатает)\nblend_cl = D('0.75')*D('5.67') + D('0.25')*D('5.00')  # 5.5025 vs 2.3+2.7+0.5 = 5.5\nblend_cp = D('0.75')*D('7.67') + D('0.25')*D('5.00')  # 7.0025 vs 2.3+2.7+2.0 = 7.0\n\nassert cost_gap == D('0.0')\nassert correct == D(42_000_000)\nassert abs(blend_cl - (vc_cl+fc_cl+pr_cl)) <= D('0.0025')\nassert abs(blend_cp - (vc_cp+fc_cp+pr_cp)) <= D('0.0025')\nfor x in (correct, naive):\n    assert x == x.quantize(D('1'), rounding=ROUND_HALF_UP)\n```\n\nСверка: 2.8 млрд фунтов, 2.1 млрд контрактных фунтов, разрыв 2 ц/фунт и итог $42 million — стр. 146, блок **Exhibit or Question Guidance**. Затратные строки 2.3 / 2.7 у обеих сторон и прибыль 0.5 против 2.0 — стр. 145, **EXHIBIT 1**. Величина **$56,000,000** — **ПОСТРОЕНО, книга не печатает**: это результат применения напечатанного разрыва ко всему объёму вместо контрактной доли, нужен только для разметки В1. Сходимости 5.5 ≈ 5.5025 и 7.0 ≈ 7.0025 — **ПОСТРОЕНО, книга не печатает**, служебная проверка когерентности экспоната и цен.\n\n**Провоцируемая ошибка:** кандидат уводит кейс в сокращение затрат, потому что затраты занимают 5.0 из 5.5 ц/фунт столбца и промпт называет завод убыточным, — и не вычитает колонку конкурента построчно, где разрыв ровно нулевой; во втором варианте той же ошибки он находит цену, но применяет разрыв ко всему объёму вместо контрактных 75%.\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: Затраты рычагом не являются вовсе (ход = 0); ход есть только в цене и только на 2.1 млрд контрактных фунтов; (3) the naive reading is rejected explicitly, not merely avoided — Затраты объявляются рычагом; при переносе на цену разрыв 2 ц/фунт применяется ко всему объёму 2.8 млрд фунтов must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: Затраты рычагом не являются вовсе (ход = 0); ход есть только в цене и только на 2.1 млрд контрактных фунтов; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — Затраты объявляются рычагом; при переносе на цену разрыв 2 ц/фунт применяется ко всему объёму 2.8 млрд фунтов обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "**Вывод.** *We recommend Meridian re-price its surfactant contracts to the competitor's level, and we recommend explicitly against a cost programme: on this asset there is no cost lever at all.*\n\n**Факты.** Variable cost is 2.3 cents per pound for us and 2.3 for the competitor; fixed cost is 2.7 and 2.7. The two cost lines match to the tenth of a cent, so the entire four-fold profit gap — 0.5 cents per pound against 2.0 — sits in price, not in cost. Our contract price is 5.67 cents per pound against their 7.67, a two-cent gap. That gap is collectible only where price is actually negotiated: 75% of our 1.4 million tons, which is 2.1 billion of our 2.8 billion pounds. The remaining quarter clears on the spot market at 5 cents for both of us and carries no gap to close.\n\n**Риск.** With only two significant producers in a $300M market and very little client experience in this product, a two-cent move may push price-sensitive contract customers to shift volume onto the spot market — where the gap is zero — and that shift erodes the very base the upside is built on.\n\n**Next step.** Before we go to the table, we want the cost structure of the top contract customers to see who can absorb the increase, sequenced against the contract renewal calendar; and in parallel we solicit bids for the asset, so the re-pricing case is measured against a real alternative rather than against itself.\n\n---"
+   },
+   "anchor_metric": "Разрыв в затратах между клиентом и конкурентом = 0.0 ц/фунт (2.3 − 2.3 и 2.7 − 2.7), напечатан в EXHIBIT 1; вторичный порог — доля 75% продаж по контракту"
+  },
+  {
+   "id": "SY-023",
+   "title": "Casting The Picture",
+   "company": "",
+   "industry": "",
+   "difficulty": "Hard",
+   "clean": false,
+   "focus": "S05(b)",
+   "scaffold": "L2",
+   "time": "5 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Marquee Crossing represents a globally recognised action star preparing his first Bollywood production. The star has set two acceptance conditions for the project, and our team must choose the production house, the co-star and the director that satisfy both. Which combination should he go with, and on what basis do you eliminate the alternatives? ---",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**Client acceptance conditions (stated by the star).**",
+       "The film must debut with an opening weekend revenue of over **$250 M** and must achieve a movie rating of **at least 4.5 stars**.",
+       "**Market note.**",
+       "Films are distributed through multiplexes (venues with multiple screens) and single-screen theaters. Musical and dance sequences are a central part of Bollywood films, and success is often measured by box office performance, especially in opening weekend revenues. Popular production houses and celebrities are crucial to drawing large crowds. The star is seen positively in the Bollywood market as a globally renowned actor; his involvement would be considered a potential boost for the film's international appeal, given his broad fanbase.",
+       "**Available production house partners.**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Production House",
+       "% of single screen theaters served",
+       "% of multiplexes served",
+       "Average movie rating",
+       "Action score"
+      ],
+      "rows": [
+       [
+        "A",
+        "100%",
+        "33%",
+        "1.5",
+        "5.0"
+       ],
+       [
+        "B",
+        "50%",
+        "100%",
+        "3.0",
+        "4.0"
+       ],
+       [
+        "C",
+        "25%",
+        "50%",
+        "3.5",
+        "4.5"
+       ],
+       [
+        "D",
+        "75%",
+        "50%",
+        "2.5",
+        "2.0"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "1. There are 120,000 single screen theaters with 6 opening weekend showings each, and 75,000 multiplexes with 12 opening weekend showings each",
+       "2. Each showing sells 200 tickets at a ticket price of $1",
+       "3. Historical minimum movie rating represents the lowest rating given to any movie produced by the production house",
+       "4. Action and scores are qualitative comparisons of the production houses, and do not directly impact the Movie Rating",
+       "**Impact of Co-Star on Movie Rating (% boost).** C1 +25% · C2 +25% · C3 +16.67% · C4 +10%",
+       "**Impact of Director on Movie Rating (% boost).** D1 +33% · D2 +30% · D3 +16.67%",
+       "**Collaboration potential.** The potential for a successful collaboration between the co-star and director is outlined in the D1–D3 × C1–C4 grid (стр. 39). *Сетка выдаётся кандидату как страница-изображение и воспроизводится буквально; её ячейки не пересказываются и не приводятся текстом ни здесь, ни в подсказках.*",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Шаг | Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|---|\n| 1 | Считает выручку по всем четырём домам, находит единственный, кто перепрыгивает $250M | Дом B — верно, и это создаёт ложное ощущение, что задача решена наполовину и остальное симметрично | «первый фильтр сработал, второй сработает так же» |\n| 2 | Берёт средний рейтинг Дома B = 3.0 и цель 4.5, считает +50% | верно | — |\n| 3 | Строит матрицу сумм 4×3 и сканирует её сверху слева | видит +58% в первой же строке | максимум по числу = победитель |\n| 4 | Объявляет C1-D1, потому что «даёт наибольший запас над порогом» | **В1** | запас над порогом ценнее, чем проверка допуска |\n| 5 | Сетку совместимости прочитывает как «дополнительный качественный комментарий», а не как отсев | сетка не применяется вовсе либо применяется как тай-брейк между равными | числовое вытесняет качественное |\n| 6 | Даёт рекомендацию с рейтингом 4.74 | ответ звучит увереннее верного (4.65 < 4.74) — и потому не перепроверяется | «мой ответ лучше книжного, значит верный» |\n\n**Точка невозврата:** шаг 3. Как только матрица сумм построена и отсортирована, сетка теряет статус фильтра и становится комментарием. Восстановиться после этого можно только внешним вопросом «а что вообще из этих четырёх нам доступно».\n\n---",
+    "decoy": "| id | Факт-обманка | Почему выглядит опорой | Класс |\n|---|---|---|---|\n| d1 | Дом A: action score 5.0 — максимум в таблице, и клиент — звезда боевиков | отраслевая логика безупречна: экшн-актёр × экшн-дом. Отраслевое знание кандидата работает против него | **Q1** |\n| d2 | Дом C: средний рейтинг 3.5 — лучший в таблице, требуемый прирост от него всего 28.6% | «возьмём дом с лучшим рейтингом, чтобы легче дотянуть до 4.5» — экономит работу и звучит как 80/20 | **Q3** |\n| d3 | Дом A обслуживает 100% односкринов — максимальный охват по одной из двух площадок | максимум по видимой строке; в стране 120,000 односкринов против 75,000 мультиплексов, «больше площадок» интуитивно = больше кассы | **Q1** |\n| d4 | C1 и C2 дают одинаковые +25% — выбор между ними по процентам не определён | подталкивает искать тай-брейк, и кандидат находит его не в сетке, а в порядке следования (C1 первый) | **B3** |\n| d5 | D1 +33% — максимальный вклад режиссёра | «сильнейший режиссёр» как самостоятельная ценность вне зависимости от партнёра | **Q1** |\n| d6 | Дом D: 75% / 50%, выручка $198M — «почти дотягивает» | приглашает к разговору «а если поднять цену билета / занятость», то есть к переигрыванию порога вместо его соблюдения | **Q3** |\n\n---",
+    "support": "| # | Опора | Величина | Ложна ли во второй ветви? |\n|---|---|---|---|\n| 1 | Дом B — единственный, кто проходит порог выручки | $252M > $250M | **Нет.** Общая для В1 и В2. Ветви расходятся строго после выбора дома |\n| 2 | Требуемый прирост рейтинга от базы Дома B | +50% | **Нет.** Общая |\n| 3 | Комбинация даёт прирост не ниже требуемого | +58% (В1) / +55% (В2) | **Нет.** Обе комбинации порог проходят — в этом и весь смысл слота: числовой фильтр не различает ветви |\n| 4 | Комбинация допустима по сетке потенциала совместимости | качественная | **ДА — это единственная ложная опора В1.** В1 её не проверяет; при проверке В1 отваливается |\n| 5 | Action score не участвует в расчёте рейтинга | сноска 4 | **Нет.** Общая; обезвреживает d1 и d3 в обеих ветвях |\n| 6 | Итоговый рейтинг выше целевого | 4.74 (В1) / 4.65 (В2) | **Нет.** Обе цифры выше 4.5. Именно поэтому В1 не ловится ни на пороге, ни на арифметике — только на допуске |\n\n**Единственная точка расхождения — опора №4.** Всё остальное у В1 корректно. Слот наказывает не за счёт, а за то, что множество допустимых вариантов было сужено уже после того, как ранг построили.\n\n---",
+    "risks": "1. **Внутренний — занятость.** Все выручки построены на допущении 100%-й заполняемости: 120,000 × 6 × 200 и 75,000 × 12 × 200 — это полный зал на каждом показе открытого уикенда. У Дома B запас над порогом $2M на $252M, то есть **0.8%**. Падение заполняемости на 1 п.п. выбивает проект из условия по выручке. Сверка: «Occupancy: We have assumed a 100% occupancy rate during opening weekend; major deviation could impact revenues», стр. 41.\n2. **Внешний / отношенческий — непроверенная совместимость с самим клиентом.** Сетка стр. 39 описывает потенциал связки «со-звезда × режиссёр». Совместимость клиента с C1 и совместимость клиента с D2 не оценены ни одним входом записи, а рейтинг 4.65 при цели 4.5 держится на запасе **0.15 звезды (+3.3%)**. Сверка: «Compatibility of Dom Cruise & Co-star / Dom Cruise & Director has not been assessed or factored in», стр. 41.\n3. **Внешний — культурно-языковой барьер.** Клиент входит на рынок, где музыкально-танцевальные номера центральны, без языковой подготовки; влияние на итоговый рейтинг в модели не учтено. Сверка: «Potential cultural and language challenges for Dom Cruise when doing a Bollywood film have not been considered», стр. 41.\n\n---",
+    "next": "1. **До подписания контракта с домом** — стресс-тест выручки по заполняемости: пересчитать $252M при 95% и 90% занятости и зафиксировать минимальную занятость, при которой условие $250M ещё держится.\n2. **Параллельно с переговорами по составу** — прямая проверка совместимости клиента с C1 и с D2 (совместные пробы, читка), поскольку запас над рейтингом 4.5 составляет 0.15 звезды.\n3. **До старта съёмок** — культурный и языковой тренинг клиента; исследование аудиторных предпочтений по жанру и формату музыкальных номеров.\n\n---",
+    "build": "```python\nfrom decimal import Decimal as D, ROUND_HALF_UP\n\ndef q(x, n='0.01'):\n    return D(x).quantize(D(n), rounding=ROUND_HALF_UP)\n\n# --- входы записи, стр. 36 (EXHIBIT 1 + сноски 1-2) ---\nSINGLE_POOL = D(120_000) * D(6) * D(200) * D(1)   # 144_000_000\nMULTI_POOL  = D(75_000)  * D(12) * D(200) * D(1)  # 180_000_000\nTARGET_REV  = D(250_000_000)   # стр. 34, acceptance rule\nTARGET_RATE = D('4.5')         # стр. 34, acceptance rule\n\nHOUSES = {  # доля односкринов, доля мультиплексов, средний рейтинг\n    'A': (D('1.00'), D('0.33'), D('1.5')),\n    'B': (D('0.50'), D('1.00'), D('3.0')),\n    'C': (D('0.25'), D('0.50'), D('3.5')),\n    'D': (D('0.75'), D('0.50'), D('2.5')),\n}\nCO_STARS  = {'C1': D('0.25'), 'C2': D('0.25'), 'C3': D('0.1667'), 'C4': D('0.10')}\nDIRECTORS = {'D1': D('0.33'), 'D2': D('0.30'), 'D3': D('0.1667')}\n\n# --- шаг 1: ранг домов по выручке открытого уикенда (форма beta) ---\nrev = {h: s * SINGLE_POOL + m * MULTI_POOL for h, (s, m, _) in HOUSES.items()}\npassing = [h for h, r in rev.items() if r > TARGET_REV]\nassert passing == ['B'], passing\nassert q(rev['B'] / D(10**6)) == D('252.00')          # сверка: стр. 37 \"= $252M\"\nassert q(rev['C'] / D(10**6)) == D('126.00')          # сверка: стр. 37 \"= $126M\"\nassert q(rev['D'] / D(10**6)) == D('198.00')          # сверка: стр. 37 \"= $198M\"\n# Дом A: точное 203.40 против книжных 204 - округление 33% на стр. 37, допуск +-0.6\nassert q(rev['A'] / D(10**6)) == D('203.40')\n\n# --- шаг 2: требуемый прирост от базы Дома B (форма alpha) ---\nbase = HOUSES['B'][2]\nneed = (TARGET_RATE - base) / base\nassert q(need * 100) == D('50.00')                    # сверка: стр. 40 \"of 50%\"\n\n# --- шаг 3: комбинации, проходящие порог по процентам ---\ncombos = {}\nfor cn, c in CO_STARS.items():\n    for dn, d in DIRECTORS.items():\n        combos[(cn, dn)] = c + d\ncleared = sorted(k for k, v in combos.items() if v >= need)\nassert cleared == [('C1', 'D1'), ('C1', 'D2'), ('C2', 'D1'), ('C2', 'D2')]\n\nNAIVE   = ('C1', 'D1')   # rank_by(% boost) -> максимум\nCORRECT = ('C1', 'D2')   # прошёл сетку совместимости, стр. 39\n\nnaive_value   = q(combos[NAIVE]   * 100)   # 58.00\ncorrect_value = q(combos[CORRECT] * 100)   # 55.00\nassert naive_value == D('58.00')                      # сверка: стр. 40 \"+58%\"\nassert correct_value == D('55.00')                    # сверка: стр. 40 \"+55%\"\nassert naive_value != correct_value                   # G1 assert\n\n# --- шаг 4: итоговые рейтинги ---\nrate_correct = q(base * (1 + combos[CORRECT]), '0.001')   # 4.650\nrate_naive   = q(base * (1 + combos[NAIVE]),   '0.001')   # 4.740\nassert rate_correct == D('4.650')                     # сверка: стр. 40 \"Movie Rating = 4.65\"\n# ПОСТРОЕНО, книга не печатает: 4.740 как результат C1-D1.\n# Стр. 41 печатает \"4.75 stars\" и \"+1.75\" в вердикте - это C1-D1, а не C1-D2.\n# Расхождение книги зафиксировано, в запись не выносится.\nassert rate_naive > rate_correct > TARGET_RATE        # обе выше порога -> порог не различает ветви\n\n# --- шаг 5: то, чем ветви РАЗЛИЧАЮТСЯ ---\n# Единственный различитель - сетка потенциала совместимости, стр. 39.\n# Величины у неё нет: фильтр качественный. Именно поэтому наивный путь его теряет.\nassert len(cleared) == 4 and len([CORRECT]) == 1\nprint('naive', NAIVE, naive_value, rate_naive, '| correct', CORRECT, correct_value, rate_correct)\n```\n\n**Сводка сверки против страниц.** Стр. 37: $252M / $126M / $198M — точно; $204M — округление книги, точное 203.40, допуск ±0.6. Стр. 40: 50%, +58%, +55%, 4.65 — точно. Стр. 41: 4.75 и +1.75 — **не воспроизводятся из C1-D2**, книга на странице вердикта посчитала наивную ветвь; в запись и в эталон не идут.\n\n---\n\n**Провоцируемая ошибка:** кандидат объявляет победителем комбинацию с максимальным суммарным приростом рейтинга, потому что она прошла порог с наибольшим запасом, и не проверяет её по сетке потенциала совместимости — фильтру, который сужает множество доступных вариантов уже после того, как ранг построен.\n\n---\n\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: +55% (комбинация, пережившая сетку); (3) the naive reading is rejected explicitly, not merely avoided — +58% (максимум по процентам) must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: +55% (комбинация, пережившая сетку); (3) наивное прочтение отвергнуто вслух, а не просто обойдено — +58% (максимум по процентам) обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "**Вывод (СНАЧАЛА, Minto).**\nWe recommend partnering with Production House B and casting co-star C1 alongside director D2. This is the only combination on the table that clears both acceptance conditions and survives the collaboration-potential screen — three other combinations clear the rating hurdle on the numbers and are eliminated only by that screen.\n\n**Остальное (L2: факты, риск, next step одним блоком).**\nThree facts drive this. First, House B is the only partner that clears the revenue condition: at 50% of single screens and 100% of multiplexes, it delivers $252M of opening weekend revenue against the $250M target, while the next-best house falls short. Second, House B's historical minimum rating of 3.0 against a 4.5-star target requires a 50% lift, and C1 with D2 delivers 55%, taking the film to 4.65 stars. Third — and this is the step that decides the case — four combinations clear 50% on the numbers alone; the collaboration-potential grid eliminates three of them, and C1-D2 is the one that remains. Choosing on the highest percentage would have selected a pairing the grid rules out.\n\nTwo risks. Internally, the $252M sits on a 100% opening-weekend occupancy assumption with only 0.8% of headroom over the $250M condition — a one-point occupancy miss breaks it. Externally, the grid scores the co-star and director against each other, not against our client; his own compatibility with C1 and with D2 is unassessed, and we are carrying only 0.15 stars of headroom over the 4.5 target.\n\nNext steps, in order: stress-test the revenue at 95% and 90% occupancy before the house contract is signed; run joint read-throughs with C1 and D2 in parallel with casting negotiations; and put the client into cultural and language training ahead of the shoot.\n\n---"
+   },
+   "anchor_metric": "рейтинг фильма не ниже 4.5 звезды (и выручка открытого уикенда выше $250 M)"
+  },
+  {
+   "id": "SY-024",
+   "title": "Fifty Percent Of The Practice",
+   "company": "",
+   "industry": "",
+   "difficulty": "Hard",
+   "clean": true,
+   "focus": "S14(b)",
+   "scaffold": "L2",
+   "time": "5 min",
+   "type": "Synthesis",
+   "exhibit_mode": "E-with",
+   "prompt": "Alder Point Capital is looking at a minority-control investment in a four-partner ophthalmology practice outside Philadelphia. The partners want $15M for a 50% stake. Our team has already worked through the operating case and the synergies; what is left is to decide whether the conclusion survives the ways this deal could go wrong. Does it, and what do you tell the investment committee? ---",
+   "exhibit": {
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**The practice.**",
+       "A full-range ophthalmology practice (exams, surgeries) located outside Philadelphia. Today the founding doctor and 3 other doctor partners are equity owners in the business. **They are only paid their share of the profits. They do not take a salary.**",
+       "**The ask.** $15M for a 50% stake.",
+       "**The fund.** Alder Point has invested in other hospitals, but none of them offer ophthalmology as a service. The fund's objective is to make a good ROI on the investment.",
+       "**Financial projection prepared for next year, before the deal takes place.**"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Product",
+       "2022F"
+      ],
+      "rows": [
+       [
+        "Revenue",
+        "$20M"
+       ],
+       [
+        "Costs",
+        "$16M"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "Valuation inputs: **WACC = 13% · Growth rate = 3% · Tax rate = 20%.** Assume 0 depreciation, debt, or investment in CapEx.",
+       "**Identified synergies.** After initial research the fund believes it can improve revenue by **5%** via improved pricing and collections. In addition, through cost synergies, it believes it can reduce practice management costs by **$1M**.",
+       "**Scenario carried by the team — volume.** Say volume declines by ~10%, from $21M in revenue to **$19M** in revenue, due to the increase in prices.",
+       "**Scenario carried by the team — compensation.** The client determines that it needs to pay **$0.6M** in performance-based compensation to the doctor partners to keep them sufficiently incentivised and continue to grow volume.",
+       "**Brainstorm material on the table.** Revenue synergies: increase reimbursement rates via greater market power; increase volume via combination with referrals; increase collection rate via better business management. Cost synergies: decrease practice management costs through scale with other assets in portfolio. Retention mechanics discussed: incentive-based salaries / bonus tied to volume; vest the payout over multiple years and make it conditional on patient volume; hire new doctors and other staff to improve leverage per doctor.",
+       "---"
+      ]
+     }
+    ]
+   },
+   "key": {
+    "naive": "| Шаг | Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|---|\n| 1 | Считает базовую оценку без синергий, видит доходность ниже WACC | «сделка плохая» — первая эмоция кейса отрицательная и она закрепляется | якорь на первом результате |\n| 2 | Накладывает синергии, получает доходность сильно выше WACC | «сделка хорошая» — разворот на 180° за один шаг | — |\n| 3 | Замечает, что вывод оказался хрупким, и правильно решает его протестировать | до этого места всё безупречно | — |\n| 4 | Берёт сценарий падения объёма, аккуратно пересчитывает, видит возврат к исходной доходности | арифметика верна | — |\n| 5 | Объявляет: «чувствительность показывает, что вывод не выдерживает, рекомендую воздержаться» | **В1** | **«я построил сценарий, в котором вывод падает» = «вывод падает»** |\n| 6 | Сценарий компенсации либо не доходит до рекомендации, либо подаётся как «ещё один риск» рядом со стресс-тестом | два входа разного статуса уравнены в одном списке | всё, что напечатано, одинаково истинно |\n\n**Точка невозврата:** шаг 5. Как только стресс-сценарий произнесён как основание рекомендации, а не как граница применимости, кандидат уже не вернётся — потому что он уверен, что проявил осторожность, а осторожность на интервью поощряется. Здесь она наказывается: осторожность, не различающая статус входа, — это не осторожность, а подмена вывода допущением.\n\n---",
+    "decoy": "| id | Факт-обманка | Почему выглядит опорой | Класс |\n|---|---|---|---|\n| d1 | Стресс-сценарий выручки $19M | напечатан теми же чернилами, что и всё остальное, и даёт ровно ту доходность, что и базовый расчёт (≈6.67%) — «совпадение» читается как подтверждение, а не как арифметическое совпадение знаменателя | **Q1** |\n| d2 | Причина падения объёма — «рост цен» — и синергия выручки как раз построена на «improved pricing» | замыкается в самосогласованную петлю: наша же синергия порождает наш же риск. Логика безупречна, статус входа — нет | **Q3** |\n| d3 | Партнёры после сделки получают $15M кэшем и половину прибыли вместо целой | качественное рассуждение о мотивации сильное и верное — но оно **уже учтено** в сценарии компенсации $0.6M, и повторное его применение считает один и тот же эффект дважды | **B3** |\n| d4 | Фонд не имеет офтальмологии ни в одном портфельном активе | «нет отраслевой экспертизы» — классический аргумент против сделки, при том что синергия затрат в записи опирается ровно на масштаб по портфелю | **Q3** |\n| d5 | Базовая доходность ≈6.67% при WACC 13% | первое посчитанное число кейса и оно отрицательное; служит якорем, к которому кандидат возвращается при любой неопределённости | **Q1** |\n| d6 | Список механик удержания (вестинг, бонус к объёму, наём врачей) | приглашает уйти в дизайн сделки и не довести счёт до сравнения с порогом — рекомендация подменяется структурой | **B3** |\n\n---",
+    "support": "| # | Опора | Величина | Ложна ли во второй ветви? |\n|---|---|---|---|\n| 1 | Базовая оценка без синергий даёт доходность ниже стоимости капитала | ≈6.67% < 13% | **Нет.** Общая для обеих ветвей; это отправная точка, а не вывод |\n| 2 | Синергии выручки и затрат подняты как обоснованные | +5% / −$1M | **Нет.** Общая; ни одна ветвь их не оспаривает |\n| 3 | Доходность с синергиями выше стоимости капитала | 60% > 13% | **Нет.** Общая |\n| 4 | Компенсация партнёрам обязательна и требует $0.6M в год | 44% > 13% | **Нет.** Общая — и именно она несёт В2 |\n| 5 | При падении объёма до $19M доходность падает ниже стоимости капитала | ≈6.67% < 13% | **Нет по арифметике — ДА по статусу.** Величина верна; ложно её использование как основания рекомендации. Это единственная опора, которую В1 применяет неправомерно |\n| 6 | Вердикт устойчив к каждому сценарию, подтверждённому записью | 60% и 44%, оба > 13% | **Нет.** Это и есть формулировка Clean-слота |\n\n**Ни одна опора В2 не ложна.** Расхождение ветвей проходит не по числу, а по вопросу «что запись утверждает, а что она предполагает». В1 не ошибается в счёте — В1 ошибается в том, какой вход считать состоянием мира.\n\n---",
+    "risks": "1. **Внутренний — мотивация партнёров.** Четверо врачей-совладельцев сегодня зарплаты не получают и делят прибыль целиком; после сделки они получают $15M единовременно и половину потока. Их доля в приросте прибыли от собственных усилий падает вдвое, и стоимость бизнеса напрямую зависит от объёма приёма, который создают они же. Именно этот риск и оцифрован: удержание требует $0.6M в год, что снижает доходность с 60% до 44%. Риск не устранён — он куплен.\n2. **Внешний — эластичность спроса по цене.** Синергия выручки +5% построена на improved pricing; сценарий команды показывает, что падение объёма на ~10% (с $21M до $19M выручки) возвращает долю фонда к $16M и доходность ниже 13%. Эластичность спроса на офтальмологические услуги в этой географии не измерена ни одним входом. Это **граница применимости вывода, а не основание против сделки**: сценарий условен, но условие проверяемо и должно быть проверено до закрытия.\n3. **Внутренний — отсутствие отраслевой экспертизы у фонда.** Фонд владеет больницами, ни одна из которых не оказывает офтальмологических услуг. Синергия затрат в $1M опирается на масштаб practice management по портфелю, состоящему из активов другого профиля.\n\n---",
+    "next": "1. **До закрытия** — измерить эластичность: исторические данные по объёму приёма при прошлых изменениях цен и ставок возмещения. Точка отсечения задаётся жёстко: выручка после синергий не должна опускаться ниже уровня, при котором доля фонда падает к $16M.\n2. **В структуру сделки** — зашить $0.6M как performance-based компенсацию с привязкой к объёму приёма, а не как оклад; рассмотреть вестинг выплаты $15M по траншам, обусловленным сохранением объёма и темпа роста 3%.\n3. **В первые 90 дней после закрытия** — подтвердить синергию затрат $1M: конкретный перечень функций practice management, переводимых на портфельный масштаб, и их стоимость сегодня.\n\n---",
+    "build": "```python\nfrom decimal import Decimal as D, ROUND_HALF_UP\n\ndef q(x, n='0.01'):\n    return D(x).quantize(D(n), rounding=ROUND_HALF_UP)\n\n# --- входы записи, стр. 181-182 ---\nWACC  = D('0.13')     # стр. 181, Additional Information\nG     = D('0.03')     # стр. 181\nTAX   = D('0.20')     # стр. 181\nPRICE = D('15')       # $M за 50% доли, стр. 179 (промпт)\nSHARE = D('0.50')\n# допущение: 0 амортизации, долга, капвложений -> Net Profit == FCF\n\ndef valuation(revenue, costs):\n    op  = D(revenue) - D(costs)\n    tax = op * TAX\n    npf = op - tax\n    val = npf / (WACC - G)          # вечность с ростом\n    stake = val * SHARE\n    ret = (stake - PRICE) / PRICE\n    return q(op), q(npf), q(val), q(stake), q(ret * 100)\n\n# --- сценарий 0: до сделки, без синергий (стр. 182) ---\nop0, np0, v0, s0, r0 = valuation('20', '16')\nassert (op0, np0, v0, s0) == (D('4.00'), D('3.20'), D('32.00'), D('16.00'))  # стр. 182\nassert r0 == D('6.67')            # книга округляет до \"~7%\", стр. 182 - допуск\nassert r0 < WACC * 100            # ниже стоимости капитала\n\n# --- сценарий 1: с синергиями (стр. 184) ---\nREV_SYN  = D('20') * D('1.05')    # \"Revenue = 1.05 * $20M = $21M\"\nCOST_SYN = D('16') - D('1')       # \"Costs = $16M - $1M = $15M\"\nassert (REV_SYN, COST_SYN) == (D('21.00'), D('15'))\nop1, np1, v1, s1, r1 = valuation(REV_SYN, COST_SYN)\nassert (op1, np1, v1, s1, r1) == (D('6.00'), D('4.80'), D('48.00'), D('24.00'), D('60.00'))  # стр. 184\n\n# --- сценарий 2: СТРЕСС, объём падает (стр. 184, Additional Insights) ---\n# СТАТУС: допущение чувствительности. \"say, if volume declines ~10% ... due to\n# increase in prices\". Записью НЕ подтверждено. Основанием рекомендации быть не может.\nop2, np2, v2, s2, r2 = valuation('19', COST_SYN)\nassert (op2, np2, v2, s2) == (D('4.00'), D('3.20'), D('32.00'), D('16.00'))  # стр. 184\nassert r2 == D('6.67')\nassert r2 < WACC * 100            # ниже порога - но это условная ветвь\n\n# --- сценарий 3: КОМПЕНСАЦИЯ, установленная потребность (стр. 186) ---\n# СТАТУС: \"The client determines that they need to pay $0.6M\". Подтверждено записью.\nCOMP = D('0.6')\nop3, np3, v3, s3, r3 = valuation(REV_SYN, COST_SYN + COMP)\nassert op3 == D('5.40')           # стр. 186 \"Operating profit = $5.4M\"\n# книга: \"Net Profit = $4.3M (ok to round); Valuation = $43M; PE stake = 21.5M; ROI = 43%\"\n# точный счёт: 4.32 / 43.20 / 21.60 / 44.00 - расхождение округления, санкционировано книгой\nassert (np3, v3, s3, r3) == (D('4.32'), D('43.20'), D('21.60'), D('44.00'))\nassert q(np3, '0.1') == D('4.3') and q(v3, '1') == D('43') and q(s3, '0.1') == D('21.6')\n\n# --- G1: величины ветвей ---\nnaive_value   = r2   #  6.67  - стресс-сценарий, В1\ncorrect_value = r3   # 44.00  - подтверждённый сценарий, В2\nassert naive_value != correct_value                       # G1 assert\nassert naive_value < WACC * 100 < correct_value           # ветви по разные стороны порога\n\n# --- Clean: вердикт не переворачивается ни в одном ПОДТВЕРЖДЁННОМ сценарии ---\nconfirmed = [r1, r3]              # синергии; синергии + обязательная компенсация\nassert all(x > WACC * 100 for x in confirmed), confirmed\n# порог неподвижен при подмене базы:\nassert WACC == D('0.13') and G == D('0.03')   # ни один сценарий их не двигает\n\nprint('naive', naive_value, '| correct', correct_value, '| confirmed', confirmed)\n```\n\n**Сводка сверки против страниц.** Стр. 182: $4M / $0.8M / $3.2M / $32M / $16M — точно; «~7%» — округление книги от 6.67%, допуск ±0.33 п.п. Стр. 184: $21M / $15M / $6M / $1.2M / $4.8M / $48M / $24M / 60% — точно; стресс-сценарий $19M → $32M → $16M — точно. Стр. 186: $5.4M — точно; $4.3M / $43M / $21.5M / 43% — округление книги, санкционированное «ok to round», точное 4.32 / 43.20 / 21.60 / 44.00.\n\n---\n\n**Провоцируемая ошибка:** кандидат корректно строит стресс-сценарий падения объёма, видит, что доходность в нём уходит ниже стоимости капитала, и переворачивает рекомендацию в «не инвестировать» — приняв собственное допущение чувствительности за состояние, которое запись утверждает, хотя каждый подтверждённый записью сценарий порог проходит.\n\n\n---"
+   },
+   "checklist": {
+    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: 44% доходности (сценарий компенсации $0.6M: доля $21.6M); (3) the naive reading is rejected explicitly, not merely avoided — ≈6.67% доходности (стресс-сценарий: выручка падает до $19M, доля возвращается к $16M) must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
+    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: 44% доходности (сценарий компенсации $0.6M: доля $21.6M); (3) наивное прочтение отвергнуто вслух, а не просто обойдено — ≈6.67% доходности (стресс-сценарий: выручка падает до $19M, доля возвращается к $16M) обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+   },
+   "reference": {
+    "en": "**Вывод (СНАЧАЛА, Minto).**\nWe recommend proceeding with the $15M investment for the 50% stake. The conclusion holds in every scenario the record actually supports, including the one that costs us the most — and I want to be explicit that the volume-decline case does not change that, because it is a sensitivity assumption we constructed, not a condition anyone has established.\n\n**Остальное (L2: факты, риск, next step одним блоком).**\nThree facts. First, on the pre-deal projection alone the deal fails: $20M of revenue against $16M of costs, taxed at 20%, discounted at a 13% WACC against 3% growth, values the practice at $32M and our half at $16M — a return under 7%, below our cost of capital. Second, the identified synergies change the answer, not the arithmetic: 5% on revenue and $1M off costs take net profit to $4.8M, the practice to $48M, our stake to $24M, and the return to 60%. Third — and this is the test that matters — once we price in the $0.6M of performance-based compensation the partners require to stay incentivised, the stake is worth $21.6M and the return is 44%. Still more than three times our cost of capital. The deal survives the one adjustment the record establishes as necessary.\n\nOn the sensitivity: yes, if volume falls roughly 10% on the back of the price increase, the practice returns to $32M, our stake to $16M, and the return drops below WACC. That is a real boundary and I am not dismissing it — but it is a condition we assumed, not one we measured, and I will not invert a recommendation on an untested elasticity when every established scenario clears the hurdle.\n\nTwo risks. Internally, four owner-physicians who today take no salary and keep all the profit will keep half of it and hold $15M in cash — the value of this business is the volume they personally generate, and $0.6M a year is us buying that risk down, not removing it. Externally, our 5% revenue synergy runs through pricing, and the elasticity behind it is unmeasured in a market where the fund has no ophthalmology exposure at all.\n\nNext steps, in order: before close, pull the practice's historical volume response to prior price and reimbursement changes and set a hard floor below which we walk; structure the $0.6M as volume-linked performance pay and vest the $15M in tranches conditional on volume and the 3% growth; and in the first ninety days, name the specific practice-management functions moving to portfolio scale that deliver the $1M.\n\n---"
+   },
+   "anchor_metric": "WACC = 13% — вход оправдан, если доходность выше стоимости капитала"
   }
  ]
 }
