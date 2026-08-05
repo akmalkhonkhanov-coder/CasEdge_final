@@ -129,8 +129,8 @@
     "ru": "- GATE: результат ∈ [$3.9B, $35.3B]\n- P1: явно разделены запас (парк) и поток (годовые продажи)\n- P2: 3 якоря числом; срок службы назван до расчёта\n- P3: второй путь (напр. новое строительство + замена отдельно) в пределах 2× + выбор\n- P4: перевод в решение\n- S: «$11.8B / 130M дх ≈ $90 в год на домохозяйство при цене $600 — покупка раз в ~7 лет» → сходится ли"
    },
    "reference": {
-    "en": "Allowed anchors (revealed on request, not upfront):\n  • Refrigerator fleet (≈households): ~280M [A1]\n  • Service life: ~14 years → replacement ~7%/year [A4]\n  • Average price: ~$600 [A5]\n\nReference chain:\nmarket = 280_000_000 * D('0.07') * 600     # 11,760,000,000\n\nReference answer: $11,760,000,000 · Corridor: [$3,920,000,000 … $35,280,000,000]",
-    "ru": "Разрешённые якоря (раскрываются по запросу, не вперёд):\n  • Парк холодильников (≈домохозяйств): ~280M [A1]\n  • Срок службы: ~14 лет → замена ~7%/год [A4]\n  • Средняя цена: ~$600 [A5]\n\nЭталонная цепочка:\nmarket = 280_000_000 * D('0.07') * 600     # 11,760,000,000\n\nЭталон: $11,760,000,000 · Коридор: [$3,920,000,000 … $35,280,000,000]"
+    "en": "Allowed anchors (revealed on request, not upfront):\n  • Refrigerator installed base (≈2 per household): ~280M [A1]\n  • Service life: ~14 years → replacement ~7%/year [A4]\n  • Average price: ~$600 [A5]\n\nReference chain:\nmarket = 280_000_000 * D('0.07') * 600     # 11,760,000,000\n\nReference answer: $11,760,000,000 · Corridor: [$3,920,000,000 … $35,280,000,000]",
+    "ru": "Разрешённые якоря (раскрываются по запросу, не вперёд):\n  • Парк холодильников (≈2 на домохозяйство): ~280M [A1]\n  • Срок службы: ~14 лет → замена ~7%/год [A4]\n  • Средняя цена: ~$600 [A5]\n\nЭталонная цепочка:\nmarket = 280_000_000 * D('0.07') * 600     # 11,760,000,000\n\nЭталон: $11,760,000,000 · Коридор: [$3,920,000,000 … $35,280,000,000]"
    },
    "provoked": {
     "en": "equating the market to installed base × price ($168B) — that is, counting **stock as flow**. The annual market = replacement + growth only, not the entire installed base.",
@@ -475,12 +475,12 @@
     "Last mile: whether it is worth entering this market at such capacity."
    ],
    "checklist": {
-    "en": "- GATE: result ∈ [$281.3M, $2.53B]\n- P1: scaling base named explicitly (income, not population) and justified\n- P2: 3 anchors as numbers before calculating\n- P3: second path (bottom-up: households × penetration × price) ≤2× + choice\n- P4: translation into a decision\n- S: «$844M / 75M ≈ $11 per person against $36 in the US at 25% income» → does it reconcile",
-    "ru": "- GATE: результат ∈ [$281.3M, $2.53B]\n- P1: база масштабирования названа явно (доход, не население) и обоснована\n- P2: 3 якоря числом до расчёта\n- P3: второй путь (снизу: домохозяйства × penetration × цена) ≤2× + выбор\n- P4: перевод в решение\n- S: «$844M / 75M ≈ $11 на человека против $36 в США при доходе 25%» → сходится ли"
+    "en": "- GATE: result ∈ [$225M, $2.03B]\n- P1: scaling base named explicitly (income, not population) and justified\n- P2: 3 anchors as numbers before calculating\n- P3: second path (bottom-up: households × penetration × price) ≤2× + choice\n- P4: translation into a decision\n- S: «$675M / 75M ≈ $9 per person against $36 in the US at 25% income» → does it reconcile",
+    "ru": "- GATE: результат ∈ [$225M, $2.03B]\n- P1: база масштабирования названа явно (доход, не население) и обоснована\n- P2: 3 якоря числом до расчёта\n- P3: второй путь (снизу: домохозяйства × penetration × цена) ≤2× + выбор\n- P4: перевод в решение\n- S: «$675M / 75M ≈ $9 на человека против $36 в США при доходе 25%» → сходится ли"
    },
    "reference": {
-    "en": "Allowed anchors (revealed on request, not upfront):\n  • Target country population: ~75M [A1]\n  • Income per capita relative to the US: ~25% [A2]\n  • Category consumption per unit of income: ~$45/person at full income [A4]\n\nReference chain:\nmarket = 75_000_000 * D('0.25') * 45      # 843,750,000\n\nReference answer: $843,750,000 · Corridor: [$281,250,000 … $2,531,250,000]",
-    "ru": "Разрешённые якоря (раскрываются по запросу, не вперёд):\n  • Население целевой страны: ~75M [A1]\n  • Доход на душу относительно США: ~25% [A2]\n  • Потребление категории на единицу дохода: ~$45/чел при полном доходе [A4]\n\nЭталонная цепочка:\nmarket = 75_000_000 * D('0.25') * 45      # 843,750,000\n\nЭталон: $843,750,000 · Коридор: [$281,250,000 … $2,531,250,000]"
+    "en": "Allowed anchors (revealed on request, not upfront):\n  • Target country population: ~75M [A1]\n  • Income per capita relative to the US: ~25% [A2]\n  • Category consumption per unit of income: ~$36/person at full income (the prompt prints $12B / 330M) [A4]\n\nReference chain:\nmarket = 75_000_000 * D('0.25') * 36      # 675,000,000\n\nReference answer: $675,000,000 · Corridor: [$225,000,000 … $2,025,000,000]",
+    "ru": "Разрешённые якоря (раскрываются по запросу, не вперёд):\n  • Население целевой страны: ~75M [A1]\n  • Доход на душу относительно США: ~25% [A2]\n  • Потребление категории на единицу дохода: ~$36/чел при полном доходе (промпт печатает $12B / 330M) [A4]\n\nЭталонная цепочка:\nmarket = 75_000_000 * D('0.25') * 36      # 675,000,000\n\nЭталон: $675,000,000 · Коридор: [$225,000,000 … $2,025,000,000]"
    },
    "provoked": {
     "en": "scaling by population (75/330 × $12B = $2.7B). For a mid-price-tier product the **proxy is nonlinear**: demand is determined by disposable income, not the number of people. The naive path overstates by ~3.2×. This is Hard precisely because the naive proportion looks mathematically flawless — the error is in the **choice of base**, not the arithmetic.",
@@ -490,13 +490,13 @@
     {
      "prompt": "Final market-size estimate, $",
      "kind": "number",
-     "answer": "843750000",
-     "tolerance": "corridor [$281,250,000 … $2,531,250,000]"
+     "answer": "675000000",
+     "tolerance": "corridor [$225,000,000 … $2,025,000,000]"
     },
     {
      "prompt": "Independent second-path triangulation + one-sentence recommendation",
      "kind": "text",
-     "answer": "reference answer $843,750,000; second path within ~2×",
+     "answer": "reference answer $675,000,000; second path within ~2×",
      "tolerance": "judged"
     }
    ]
@@ -975,12 +975,12 @@
     "Last mile: whether it is worth entering at such a capacity."
    ],
    "checklist": {
-    "en": "- GATE: ∈ [$350M, $3.15B]\n- P1: scaling base named explicitly (income, not population) and justified by the premium nature of the category\n- P2: 3 anchors as numbers before the calculation\n- P3: second path independent (retail), ratio ≤2× (reference 1.22×) + choice\n- P4: translated into a decision\n- S: «$1.05B / 50M ≈ $21 per person versus $42 in the US» → does it reconcile with 60% income",
-    "ru": "- GATE: ∈ [$350M, $3.15B]\n- P1: база масштабирования названа явно (доход, не население) и обоснована премиальностью категории\n- P2: 3 якоря числом до расчёта\n- P3: второй путь независим (розница), ratio ≤2× (эталон 1.22×) + выбор\n- P4: перевод в решение\n- S: «$1.05B / 50M ≈ $21 на человека против $42 в США» → сходится ли с доходом 60%"
+    "en": "- GATE: ∈ [$420M, $3.78B]\n- P1: scaling base named explicitly (income, not population) and justified by the premium nature of the category\n- P2: 3 anchors as numbers before the calculation\n- P3: second path independent (retail), ratio ≤2× (reference 1.22×) + choice\n- P4: translated into a decision\n- S: «$1.26B / 50M ≈ $25 per person versus $42 in the US» → does it reconcile with 60% income",
+    "ru": "- GATE: ∈ [$420M, $3.78B]\n- P1: база масштабирования названа явно (доход, не население) и обоснована премиальностью категории\n- P2: 3 якоря числом до расчёта\n- P3: второй путь независим (розница), ratio ≤2× (эталон 1.22×) + выбор\n- P4: перевод в решение\n- S: «$1.26B / 50M ≈ $25 на человека против $42 в США» → сходится ли с доходом 60%"
    },
    "reference": {
-    "en": "Allowed anchors (revealed on request, not upfront):\n  • Population of the target country: ~50M [A1]\n  • Income per capita relative to the US: ~60% [A2]\n  • Category consumption per person at full income: ~$35 [A4]\n\nReference chain:\nmarket = 50_000_000 * D('0.60') * 35        # 1,050,000,000\n\nReference answer: $1,050,000,000 · Corridor: [$350,000,000 … $3,150,000,000]",
-    "ru": "Разрешённые якоря (раскрываются по запросу, не вперёд):\n  • Население целевой страны: ~50M [A1]\n  • Доход на душу относительно США: ~60% [A2]\n  • Потребление категории на человека при полном доходе: ~$35 [A4]\n\nЭталонная цепочка:\nmarket = 50_000_000 * D('0.60') * 35        # 1,050,000,000\n\nЭталон: $1,050,000,000 · Коридор: [$350,000,000 … $3,150,000,000]"
+    "en": "Allowed anchors (revealed on request, not upfront):\n  • Population of the target country: ~50M [A1]\n  • Income per capita relative to the US: ~60% [A2]\n  • Category consumption per person at full income: ~$42 (the prompt prints $14B / 330M) [A4]\n\nReference chain:\nmarket = 50_000_000 * D('0.60') * 42        # 1,260,000,000\n\nReference answer: $1,260,000,000 · Corridor: [$420,000,000 … $3,780,000,000]",
+    "ru": "Разрешённые якоря (раскрываются по запросу, не вперёд):\n  • Население целевой страны: ~50M [A1]\n  • Доход на душу относительно США: ~60% [A2]\n  • Потребление категории на человека при полном доходе: ~$42 (промпт печатает $14B / 330M) [A4]\n\nЭталонная цепочка:\nmarket = 50_000_000 * D('0.60') * 42        # 1,260,000,000\n\nЭталон: $1,260,000,000 · Коридор: [$420,000,000 … $3,780,000,000]"
    },
    "provoked": {
     "en": "scaling strictly by population (50/330 × $14B = $2.12B), ignoring income. For a **premium** category the link to income is stronger than to the number of people: at 60% income the per-capita consumption falls not proportionally but more steeply. The naive path overstates by ~2×.",
@@ -990,13 +990,13 @@
     {
      "prompt": "Final market-size estimate, $",
      "kind": "number",
-     "answer": "1050000000",
-     "tolerance": "corridor [$350,000,000 … $3,150,000,000]"
+     "answer": "1260000000",
+     "tolerance": "corridor [$420,000,000 … $3,780,000,000]"
     },
     {
      "prompt": "Independent second-path triangulation + one-sentence recommendation",
      "kind": "text",
-     "answer": "reference answer $1,050,000,000; second path within ~2×",
+     "answer": "reference answer $1,260,000,000; second path within ~2×",
      "tolerance": "judged"
     }
    ]
@@ -1075,12 +1075,12 @@
     "Last mile: which of the paths to carry into the business case and why."
    ],
    "checklist": {
-    "en": "- GATE: main path ∈ [$10.8B, $172.5B]\n- P1: segmentation by driver (who trains and who pays). *This drill's provocation is caught by P3, not P1 — see below*\n- P2: 4 anchors of the main path as numbers before the calculation\n- P3: **second path built from a DIFFERENT base (firms, not people)**, ratio ∈ [1.05×, 2.00×] (reference 1.13×); rearranging the multipliers of the same chain = P3 not credited\n- P4: translated into a decision\n- S: «$43.1B / 160M employed ≈ $270 per worker per year» → does it reconcile with $1,400 spending at a 55% share and a 35% external share",
-    "ru": "- GATE: основной путь ∈ [$10.8B, $172.5B]\n- P1: сегментация по драйверу (кто обучается и кто платит). *Провокация этого дрилла ловится P3, не P1 — см. ниже*\n- P2: 4 якоря основного пути числом до расчёта\n- P3: **второй путь построен от ДРУГОЙ базы (фирмы, не люди)**, ratio ∈ [1.05×, 2.00×] (эталон 1.13×); перестановка множителей той же цепочки = P3 не зачтён\n- P4: перевод в решение\n- S: «$43.1B / 160M занятых ≈ $270 на работника в год» → сходится ли с расходом $1,400 при доле 55% и внешней доле 35%"
+    "en": "- GATE: main path ∈ [$10.8B, $172.5B]\n- P1: segmentation by driver (who trains and who pays). *This drill's provocation is caught by P3, not P1 — see below*\n- P2: 4 anchors of the main path as numbers before the calculation\n- P3: **second path built from a DIFFERENT base (firms, not people)**, ratio ∈ [1.05×, 2.00×] (reference 1.11×); rearranging the multipliers of the same chain = P3 not credited\n- P4: translated into a decision\n- S: «$48.0B / 6M firms ≈ $8,000 per firm per year» → does it reconcile with $1,400 spending at a 55% share and a 35% external share",
+    "ru": "- GATE: основной путь ∈ [$10.8B, $172.5B]\n- P1: сегментация по драйверу (кто обучается и кто платит). *Провокация этого дрилла ловится P3, не P1 — см. ниже*\n- P2: 4 якоря основного пути числом до расчёта\n- P3: **второй путь построен от ДРУГОЙ базы (фирмы, не люди)**, ratio ∈ [1.05×, 2.00×] (эталон 1.11×); перестановка множителей той же цепочки = P3 не зачтён\n- P4: перевод в решение\n- S: «$48.0B / 6M фирм ≈ $8,000 на фирму в год» → сходится ли с расходом $1,400 при доле 55% и внешней доле 35%"
    },
    "reference": {
-    "en": "Allowed anchors (revealed on request, not upfront):\n  • Employed in the country: ~160M [A1]\n  • Share undergoing training per year: ~55% [A4]\n  • Spending per trainee per year: ~$1,400 [A3]\n  • Share given to external providers: ~35% [A4]\n  • *For the second path:* firms in the country: ~6M [A3]\n  • *For the second path:* employees per firm: ~30 [A3]\n  • *For the second path:* spending per employee: ~$270 [A3]\n\nReference chain:\nbottom_up = 160_000_000 * D('0.55') * 1_400 * D('0.35')   # 43,120,000,000\ntop_down  = 6_000_000 * 30 * 270                          # 48,600,000,000\nratio     = 1.13                                          # P3 ✓\n\nReference answer: $43,120,000,000 · Corridor: [$10,780,000,000 … $172,480,000,000]",
-    "ru": "Разрешённые якоря (раскрываются по запросу, не вперёд):\n  • Занятых в стране: ~160M [A1]\n  • Доля проходящих обучение за год: ~55% [A4]\n  • Расход на обучаемого в год: ~$1,400 [A3]\n  • Доля, отдаваемая внешним провайдерам: ~35% [A4]\n  • *Для второго пути:* фирм в стране: ~6M [A3]\n  • *Для второго пути:* сотрудников на фирму: ~30 [A3]\n  • *Для второго пути:* расход на сотрудника: ~$270 [A3]\n\nЭталонная цепочка:\nbottom_up = 160_000_000 * D('0.55') * 1_400 * D('0.35')   # 43,120,000,000\ntop_down  = 6_000_000 * 30 * 270                          # 48,600,000,000\nratio     = 1.13                                          # P3 ✓\n\nЭталон: $43,120,000,000 · Коридор: [$10,780,000,000 … $172,480,000,000]"
+    "en": "Allowed anchors (revealed on request, not upfront):\n  • Employed in the country: ~160M [A1]\n  • Share undergoing training per year: ~55% [A4]\n  • Spending per trainee per year: ~$1,400 [A3]\n  • Share given to external providers: ~35% [A4]\n  • *For the second path:* firms in the country: ~6M [A3]\n  • *For the second path:* employees per firm: ~30 [A3]\n  • *For the second path:* external-training budget per firm per year: ~$8,000 [A3]\n\nReference chain:\nbottom_up = 160_000_000 * D('0.55') * 1_400 * D('0.35')   # 43,120,000,000\ntop_down  = 6_000_000 * 8_000                             # 48,000,000,000\nratio     = 1.11                                          # P3 ✓\n\nReference answer: $43,120,000,000 · Corridor: [$10,780,000,000 … $172,480,000,000]",
+    "ru": "Разрешённые якоря (раскрываются по запросу, не вперёд):\n  • Занятых в стране: ~160M [A1]\n  • Доля проходящих обучение за год: ~55% [A4]\n  • Расход на обучаемого в год: ~$1,400 [A3]\n  • Доля, отдаваемая внешним провайдерам: ~35% [A4]\n  • *Для второго пути:* фирм в стране: ~6M [A3]\n  • *Для второго пути:* сотрудников на фирму: ~30 [A3]\n  • *Для второго пути:* бюджет фирмы на внешнее обучение в год: ~$8,000 [A3]\n\nЭталонная цепочка:\nbottom_up = 160_000_000 * D('0.55') * 1_400 * D('0.35')   # 43,120,000,000\ntop_down  = 6_000_000 * 8_000                             # 48,000,000,000\nratio     = 1.11                                          # P3 ✓\n\nЭталон: $43,120,000,000 · Коридор: [$10,780,000,000 … $172,480,000,000]"
    },
    "provoked": {
     "en": "taking as the second path the same chain with the multipliers rearranged («employed × spending» instead of «employed × share × spending»). This is **not triangulation** — the second chain is derived from the first by renaming. The muscle of the drill is to approach from **a different side**: from the number of firms and their budgets, not from people.",
@@ -1529,8 +1529,8 @@
     "ru": "- GATE: ∈ [$236M, $3.78B]\n- P1: **юнит продажи назван явно (чашка/расходники), договор отделён от потребления**; счёт по контрактам на обслуживание = P1 не зачтён\n- P2: 4 якоря числом до расчёта\n- P3: второй путь независим, **источник назван** (перепись дистрибьюторов), ratio ∈ [1.05×, 2.00×] (эталон 1.21×) + выбор надёжнейшего\n- P4: перевод в решение\n- S: «$945M / 240,000 офисов ≈ $3,940 на офис в год ≈ $87 на сотрудника» → сходится ли с 250 чашками"
    },
    "reference": {
-    "en": "Allowed anchors (revealed on request, not upfront):\n  • Offices with coffee service: ~240,000 [A3]\n  • Employees per office: ~45 [A3]\n  • Cups per employee per year: ~250 [A4]\n  • Share of coffee purchased by the company (not one's own): ~35% [A4]\n\nReference chain:\nmarket = 240_000 * 45 * 250 * D('0.35')      # 945,000,000\n\nReference answer: $945,000,000 · Corridor: [$236,250,000 … $3,780,000,000]",
-    "ru": "Разрешённые якоря (раскрываются по запросу, не вперёд):\n  • Офисов с кофейным сервисом: ~240,000 [A3]\n  • Сотрудников на офис: ~45 [A3]\n  • Чашек на сотрудника в год: ~250 [A4]\n  • Доля кофе, закупаемого компанией (не своего): ~35% [A4]\n\nЭталонная цепочка:\nmarket = 240_000 * 45 * 250 * D('0.35')      # 945,000,000\n\nЭталон: $945,000,000 · Коридор: [$236,250,000 … $3,780,000,000]"
+    "en": "Allowed anchors (revealed on request, not upfront):\n  • Offices with coffee service: ~240,000 [A3]\n  • Employees per office: ~45 [A3]\n  • Cups per employee per year: ~250 [A4]\n  • Consumables cost per cup borne by the company: ~$0.35 [A4]\n\nReference chain:\nmarket = 240_000 * 45 * 250 * D('0.35')      # 2.7B cups × $0.35 = 945,000,000\n\nReference answer: $945,000,000 · Corridor: [$236,250,000 … $3,780,000,000]",
+    "ru": "Разрешённые якоря (раскрываются по запросу, не вперёд):\n  • Офисов с кофейным сервисом: ~240,000 [A3]\n  • Сотрудников на офис: ~45 [A3]\n  • Чашек на сотрудника в год: ~250 [A4]\n  • Стоимость расходников на чашку за счёт компании: ~$0.35 [A4]\n\nЭталонная цепочка:\nmarket = 240_000 * 45 * 250 * D('0.35')      # 2.7 млрд чашек × $0.35 = 945,000,000\n\nЭталон: $945,000,000 · Коридор: [$236,250,000 … $3,780,000,000]"
    },
    "provoked": {
     "en": "counting **contracts** for servicing coffee machines («240,000 offices × $3,900 contract»). The **contract and consumption** are confused: there is one contract per office, but consumables are bought by the thousands of cups and make up the bulk of the money. The contract is the vehicle for the service, but not the unit of sale.",
@@ -2075,8 +2075,8 @@
     "Last mile: which segment to build the subscription model for."
    ],
    "checklist": {
-    "en": "- GATE: ∈ [$1.48B, $23.75B]\n- P1: **the unevenness is named: core/periphery are separated OR the weighted-average nature is explicitly stated**; using the average as the behavior of a typical visitor = P1 not credited\n- P2: 4 anchors as numbers before the calculation\n- P3: second path is independent, **source is named** (ticket statistics), ratio ∈ [1.05×, 2.00×] (reference 1.29×) + choice\n- P4: conversion into a decision\n- S: «74M visits over 10.6M who visited ≈ 7 times per year; with a core of 10% going 60 times, the periphery goes ~1.1 times» → does the structure converge",
-    "ru": "- GATE: ∈ [$1.48B, $23.75B]\n- P1: **неравномерность названа: ядро/периферия разделены ИЛИ средневзвешенность оговорена явно**; использование средней как поведения типичного посетителя = P1 не зачтён\n- P2: 4 якоря числом до расчёта\n- P3: второй путь независим, **источник назван** (билетная статистика), ratio ∈ [1.05×, 2.00×] (эталон 1.29×) + выбор\n- P4: перевод в решение\n- S: «74M посещений на 10.6M посещавших ≈ 7 раз в год; при ядре 10%, ходящем 60 раз, периферия ходит ~1.1 раза» → сходится ли структура"
+    "en": "- GATE: ∈ [$1.48B, $23.75B]\n- P1: **the unevenness is named: core/periphery are separated OR the weighted-average nature is explicitly stated**; using the average as the behavior of a typical visitor = P1 not credited\n- P2: 4 anchors as numbers before the calculation\n- P3: second path is independent, **source is named** (ticket statistics), ratio ∈ [1.05×, 2.00×] (reference 1.29×) + choice\n- P4: conversion into a decision\n- S: «95.8M visits over 10.6M who visited ≈ 9 times per year; with a core of 10% going 60 times, the periphery goes ~3.3 times» → does the structure converge",
+    "ru": "- GATE: ∈ [$1.48B, $23.75B]\n- P1: **неравномерность названа: ядро/периферия разделены ИЛИ средневзвешенность оговорена явно**; использование средней как поведения типичного посетителя = P1 не зачтён\n- P2: 4 якоря числом до расчёта\n- P3: второй путь независим, **источник назван** (билетная статистика), ratio ∈ [1.05×, 2.00×] (эталон 1.29×) + выбор\n- P4: перевод в решение\n- S: «95.8M посещений на 10.6M посещавших ≈ 9 раз в год; при ядре 10%, ходящем 60 раз, периферия ходит ~3.3 раза» → сходится ли структура"
    },
    "reference": {
     "en": "Allowed anchors (revealed on request, not upfront):\n  • Population: ~28M [A1]\n  • Share who visited at least once in the year: ~38% [A4]\n  • Visits per year (weighted average): ~9 [A4]\n  • Average spend per visit: ~$62 [A5]\n\nReference chain:\nmarket = 28_000_000 * D('0.38') * 9 * 62      # 5,937,120,000\n\nReference answer: $5,937,120,000 · Corridor: [$1,484,280,000 … $23,748,480,000]",

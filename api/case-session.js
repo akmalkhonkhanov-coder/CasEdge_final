@@ -241,6 +241,60 @@ function stepLangNote(md) {
     : '\n[LANGUAGE: this question is already in English — ask it VERBATIM, do not rephrase.]';
 }
 
+/* ─────────────────────── ПОТОК: фильтр маркеров ──────────────────────────────
+   Замер на живом проде 01.08: открывающий ход 6.8–7.8 с, оценочный 4.9 с,
+   и TTFB РАВЕН общему времени — то есть кандидат сидит перед пустым экраном
+   ровно столько, сколько модель пишет. Стриминг не трогает ни промпт, ни модель,
+   ни max_tokens: те же самые токены, только отданные по мере появления.
+   Качество измениться не может — меняется момент доставки, а не содержание.
+
+   Одна сложность: текст модели несёт служебные маркеры <verdict> <reveal> <step>,
+   и парсит их СЕРВЕР (parseMarkers). Дублировать разбор в клиенте нельзя — это
+   C24, две копии одной логики. Поэтому маркеры снимаются здесь, на лету, и
+   наружу уходит только чистая проза.
+
+   Правило удержания: если хвост буфера может оказаться НАЧАЛОМ маркера
+   («<», «<ver», «<reveal>ex»), он придерживается до следующего куска. Иначе
+   кандидат увидел бы «<ver» и через секунду его исчезновение. Придержанное
+   отдаётся, как только стало ясно, что это не маркер, либо в конце потока. */
+const MARKER_OPEN = /<(?:verdict|reveal|step)>/i;
+const MARKER_FULL = /<(verdict|reveal|step)>[\s\S]*?<\/\1>/gi;
+// «Может ли этот хвост стать маркером» — префикс любого из открывающих тегов.
+const TAG_PREFIX = /<(?:v(?:e(?:r(?:d(?:i(?:c(?:t)?)?)?)?)?)?|r(?:e(?:v(?:e(?:a(?:l)?)?)?)?)?|s(?:t(?:e(?:p)?)?)?)?$/i;
+export function createMarkerFilter() {
+  let buf = '';
+  return {
+    /** отдаёт безопасный кусок текста, придерживая возможный недописанный маркер */
+    push(chunk) {
+      buf += chunk;
+      // снимаем все ЗАКРЫТЫЕ маркеры целиком
+      buf = buf.replace(MARKER_FULL, '');
+      // если внутри остался НЕзакрытый маркер — держим всё от него и дальше
+      const open = buf.search(MARKER_OPEN);
+      if (open >= 0) { const out = buf.slice(0, open); buf = buf.slice(open); return out; }
+      // держим хвост, который может оказаться началом тега
+      const m = buf.match(TAG_PREFIX);
+      if (m && m.index !== undefined) { const out = buf.slice(0, m.index); buf = buf.slice(m.index); return out; }
+      const out = buf; buf = ''; return out;
+    },
+    /* Конец потока. Придержанный хвост может быть: закрытым маркером (снять),
+       открытым без закрывающего (снять вместе с содержимым до конца) или
+       НЕДОПИСАННЫМ префиксом «<verdi» (тоже снять — модель оборвалась на теге,
+       и показывать кандидату огрызок тега нельзя).
+       Первая редакция снимала только первые два случая, и тест «маркер
+       обрывается в конце потока» выдавал кандидату «Text <verdi». */
+    flush() {
+      let out = buf.replace(MARKER_FULL, '');
+      const open = out.search(MARKER_OPEN);
+      if (open >= 0) out = out.slice(0, open);
+      const m = out.match(TAG_PREFIX);
+      if (m && m.index !== undefined) out = out.slice(0, m.index);
+      buf = '';
+      return out;
+    }
+  };
+}
+
 export function parseMarkers(text, priorRevealed) {
   const revealed = new Set(priorRevealed || []);
   let verdict = null;
@@ -787,6 +841,9 @@ export default async function handler(req, res) {
     };
 
     // Weakness focus: whitelist key only — free text never enters the prompt.
+    /* ПОТОК. Клиент просит его явно (`stream:true`); без флага всё работает
+       ровно как раньше — старые клиенты и повторы не ломаются. */
+    const wantStream = body.stream === true || body.stream === 1;
     const focusKey = ['structure','quant','logic','comm','ownership'].includes(body.focusDimension) ? body.focusDimension : null;
     const lang = body.lang === 'ru' ? 'ru' : 'en';   // whitelist
 
@@ -827,6 +884,7 @@ export default async function handler(req, res) {
         messages: convo
       };
       if (useMode && MODES[_mode]) Object.assign(b, MODES[_mode]);
+      if (wantStream) b.stream = true;
       return JSON.stringify(b);
     };
     const post = (payload, timeoutMs, retries) => fetchAnthropicWithRetry('https://api.anthropic.com/v1/messages', {
@@ -870,7 +928,61 @@ export default async function handler(req, res) {
       return res.status(504).json({ error: { message: 'The interviewer is taking too long. Please try again.' } });
     }
 
-    let data = await response.json();
+    /* Заголовки SSE НЕ ставим, пока не пришёл первый кусок текста. Пока их нет,
+       можно честно откатиться на обычный путь: пустой ответ, ретрай, 503.
+       Поставив заголовки заранее, мы бы отрезали себе все эти ветки. */
+    let sseOpen = false;
+    const sseSend = (obj) => { res.write('data: ' + JSON.stringify(obj) + '\n\n'); };
+    const openSse = () => {
+      if (sseOpen) return;
+      res.status(200);
+      res.setHeader('Content-Type', 'text/event-stream; charset=utf-8');
+      res.setHeader('Cache-Control', 'no-cache, no-transform');
+      res.setHeader('Connection', 'keep-alive');
+      res.setHeader('X-Accel-Buffering', 'no');   // без этого прокси копит буфер и стрим бессмысленен
+      sseOpen = true;
+    };
+    let streamedText = '';
+    if (wantStream && response.status >= 200 && response.status < 300 && response.body) {
+      const filter = createMarkerFilter();
+      const reader = response.body.getReader();
+      const dec = new TextDecoder();
+      let sseBuf = '';
+      try {
+        for (;;) {
+          const { done: rdone, value } = await reader.read();
+          if (rdone) break;
+          sseBuf += dec.decode(value, { stream: true });
+          let nl;
+          while ((nl = sseBuf.indexOf('\n')) >= 0) {
+            const line = sseBuf.slice(0, nl).trim();
+            sseBuf = sseBuf.slice(nl + 1);
+            if (!line.startsWith('data:')) continue;
+            const raw = line.slice(5).trim();
+            if (!raw || raw === '[DONE]') continue;
+            let ev; try { ev = JSON.parse(raw); } catch (e) { continue; }
+            if (ev.type === 'content_block_delta' && ev.delta && typeof ev.delta.text === 'string') {
+              streamedText += ev.delta.text;
+              const safe = filter.push(ev.delta.text);
+              if (safe) { openSse(); sseSend({ t: safe }); }
+            } else if (ev.type === 'message_delta' && ev.usage) {
+              console.log('case-session usage(stream)', JSON.stringify({ case: caseObj.id, step: stepIndex, out: ev.usage.output_tokens }));
+            }
+          }
+        }
+        const tail = filter.flush();
+        if (tail) { openSse(); sseSend({ t: tail }); }
+      } catch (e) {
+        console.error('case-session stream read failed:', e && e.message);
+        // Уже что-то отдали — честно закрываем ошибкой; ещё нет — падаем на обычный путь.
+        if (sseOpen) { sseSend({ error: 'stream broken' }); res.end(); return; }
+        streamedText = '';
+      }
+    }
+
+    let data = wantStream && streamedText
+      ? { content: [{ type: 'text', text: streamedText }], stop_reason: 'end_turn' }
+      : await response.json();
     if (response.status < 200 || response.status >= 300) {
       // Pass through status; never leak upstream internals.
       console.error('case-session upstream non-2xx', response.status, JSON.stringify(data).slice(0, 300));
@@ -955,7 +1067,7 @@ export default async function handler(req, res) {
       caseComplete = terminalStepNum != null && nd.has(terminalStepNum);
     }
 
-    return res.status(200).json({
+    const payload = {
       reply: parsed.reply || 'No response was returned. Please try again.',
       verdict: verdict,
       ilead: ilead,
@@ -963,7 +1075,14 @@ export default async function handler(req, res) {
       caseComplete: caseComplete,
       revealedExhibits: parsed.revealedExhibits,
       exhibits: exhibitCards
-    });
+    };
+    /* Хвост потока несёт ТОТ ЖЕ payload целиком, включая `reply`. Клиент им
+       заменяет накопленный текст: разбор маркеров живёт на сервере в одном
+       месте (parseMarkers), а поток — только доставка. Если фильтр и парсер
+       когда-нибудь разойдутся, побеждает парсер, и расхождение не доедет
+       до кандидата. */
+    if (sseOpen) { sseSend({ done: 1, payload: payload }); res.end(); return; }
+    return res.status(200).json(payload);
   } catch (err) {
     console.error('CasEdge case-session error:', err);
     return res.status(500).json({ error: { message: 'Something went wrong. Please try again.' } });

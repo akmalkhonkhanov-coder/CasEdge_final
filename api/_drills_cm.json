@@ -265,11 +265,11 @@
     "Verdict on the CEO's claim, and what the two years' figures say about profit."
    ],
    "checklist": {
-    "en": "Credit if ALL: (1) both segment profits exact; (2) the pp margin delta named; (3) \"margin up, profit down $0.72M\" identified as a pure mix effect.",
+    "en": "Credit if ALL: (1) both years' profits exact ($9.60M, $8.88M); (2) the pp margin delta named; (3) \"margin up, profit down $0.72M\" identified as a pure mix effect.",
     "ru": "(1) profit Y1 = $9.60M и Y2 = $8.88M, tolerance: exact; (2) blended 34.29% → 36.39% (2.10pp), tolerance: exact; (3) явный вердикт «маржа ↑, прибыль ↓ на $0.72M»; (4) причина — mix, ставки неизменны."
    },
    "reference": {
-    "en": "- Segment A: margin 9.60 / 34.29%; Segment B: margin 8.88 / 36.39% — computed from the shown price/cost.\n- Trap: the blended margin % rises while total profit FALLS by $0.72M — a pure MIX effect (volume shifts toward the higher-%, lower-$ segment).\n- The % going up is not the same as more money: rank and decide on dollars, not on margin percentage.",
+    "en": "- Year 1: profit $9.60M, blended margin 34.29%; Year 2: profit $8.88M, blended margin 36.39% — computed from the shown price/margin.\n- Trap: the blended margin % rises while total profit FALLS by $0.72M — a pure MIX effect (volume shifts toward the higher-%, lower-$ segment).\n- The % going up is not the same as more money: rank and decide on dollars, not on margin percentage.",
     "ru": "- Y1: revenue 28.0M; profit = 10×2×0.30 + 2×4×0.45 = 6.00+3.60 = **$9.60M**; blended 34.29%.\n- Y2: revenue 24.4M; profit = 7×2×0.30 + 2.6×4×0.45 = 4.20+4.68 = **$8.88M**; blended 36.39%.\n- Маржа выросла на 2.10pp — И прибыль упала на $0.72M (−7.50%). Микс сдвинулся к premium, но потеря 3M units Core (contribution $1.8M) не покрыта приростом premium (+$1.08M).\n- Last mile: слайд CEO верен по метрике и ложен по деньгам; решение принимать по $-прибыли."
    },
    "provoked": {
@@ -343,11 +343,11 @@
     "Like-for-like: churn at Q1 mix with Q2 rates. Then rewrite the PR sentence so it matches what the data supports."
    ],
    "checklist": {
-    "en": "Credit if ALL: (1) 2.96% exact; (2) base = 2.60 named; (3) Simpson/mix-shift mechanism named; (4) blended computed as weighted, not simple average.",
+    "en": "Credit if ALL: (1) 2.96% exact; (2) base = 2.60 named and both tiers named worse (+0.40pp / +0.20pp); (3) Simpson/mix-shift mechanism named; (4) blended computed as weighted, not simple average.",
     "ru": "(1) 2.60% и 1.86% воспроизведены, tolerance: exact; (2) названо ухудшение ОБОИХ сегментов (+0.40pp, +0.20pp); (3) counterfactual 2.96%, tolerance: exact; (4) честная переформулировка: вывод первым предложением, слово «mix» присутствует."
    },
    "reference": {
-    "en": "- Per-tier churn: 2.60% and 1.86% on a like-for-like basis.\n- Both tiers get WORSE year on year, yet the blended churn can look flat/better — a Simpson reversal driven by the mix shift between tiers.\n- Correct blended = **2.96%**, a **+13.85%** deterioration versus the 2.60% base — computed as Σ(churned)/Σ(base), not an average of the two ratios.",
+    "en": "- Blended churn: 2.60% (Q1) and 1.86% (Q2), weighted as Σ(churned)/Σ(base) — the PR figures are arithmetically correct. Per-tier churn moved 3.0%→3.4% and 1.0%→1.2%.\n- Both tiers get WORSE year on year, yet the blended churn can look flat/better — a Simpson reversal driven by the mix shift between tiers.\n- Like-for-like (Q1 mix × Q2 rates) = **2.96%**, a **+13.85%** deterioration versus the 2.60% base — the reported −28% is a mix artefact, not progress.",
     "ru": "- Шаг 1. Q1: (8×3.0% + 2×1.0%)/10 = 0.260/10 = **2.60%**. Q2: (3×3.4% + 7×1.2%)/10 = 0.186/10 = **1.86%**. Цифры PR арифметически верны.\n- Шаг 2. Basic 3.0→3.4% (+0.40pp), Premium 1.0→1.2% (+0.20pp): **оба сегмента ухудшились**. Blended упал только из-за миграции базы в низко-churn Premium (8/2 → 3/7). Классический Simpson.\n- Шаг 3. Q1-микс × Q2-ставки: (8×3.4% + 2×1.2%)/10 = **2.96%** — like-for-like churn ВЫРОС на 13.85% (база сравнения — исходные 2.60%; заявленные «−28.46%» меряют смесь эффектов, из них весь «прогресс» — микс). Честная формулировка: «Churn ухудшился в обоих тарифах; blended снизился из-за сдвига базы в Premium».\n\n**Провоцируемые ошибки (2, связанные):** взвешенное среднее прячет ухудшение сегментов; % улучшения меряется от смеси эффектов вместо like-for-like базы."
    },
    "provoked": {
@@ -559,12 +559,12 @@
     "The peak-vs-average check: does the weekday/weekend split reverse the call? Then answer: hidden error — yes/no."
    ],
    "checklist": {
-    "en": "Credit if ALL: (1) 3,136 and 1,144,640 reproduced; (2) weekend recomputed = +637 (exact); (3) conclusion \"consistent, no hidden error\" (clean case — do not invent a flip).",
-    "ru": "(1) contribution $3,136 и $1,144,640/год, tolerance: exact; (2) weekend-проверка проведена: $14,637 → +$637, tolerance: exact (расчёт цепочкой ×82/96 от точной выручки); (3) choice = «нет», с формулировкой «проверка сделана, разворота нет»; (4) НЕ выдумана несуществующая ошибка."
+    "en": "Credit if ALL: (1) 3,136 and 1,144,640 reproduced; (2) weekend recomputed = +1,273.39 (exact); (3) conclusion \"consistent, no hidden error\" (clean case — do not invent a flip).",
+    "ru": "(1) contribution $3,136 и $1,144,640/год, tolerance: exact; (2) weekend-проверка проведена: $15,273.39 → +$1,273.39, tolerance: exact (цепочкой ×82/92 от точной выручки); (3) choice = «нет», с формулировкой «проверка сделана, разворота нет»; (4) НЕ выдумана несуществующая ошибка."
    },
    "reference": {
-    "en": "- CLEAN validation: reproduce the weekend figure from the exact revenue with the ×82/96 half-cent chain (Decimal, not floor): revenue $14,637.00 → **+$637** weekend uplift.\n- Intermediate totals 3,136 and 1,144,640 reconcile; there is NO hidden error — the numbers are internally consistent.",
-    "ru": "- Шаг 1. Revenue = 180 × 0.68 × 140 = $17,136; contribution = 17,136 − 14,000 = **+$3,136**/рейс; ×365 = **$1,144,640**/год.\n- Шаг 2. Соблазн — «средний LF скрывает провальные выходные». Проверяем: масштабируем LF нового рейса отношением weekend/weekday = 82/96 → weekend-выручка = 17,136 × 82/96 = $14,637.00 (цепочка точная), contribution **+$637** — положителен и в худший день недели. Проверка ПРОВЕДЕНА и решение НЕ переворачивает: скрытой ошибки нет, вывод аналитика верен. Ответ choice: **нет**.\n- Навык clean-дрилла: сказать «я проверил peak-vs-average, разворота нет» — а не изобрести несуществующий bottleneck."
+    "en": "- CLEAN validation: reproduce the weekend figure from the exact revenue with the ×82/92 chain from the average LF (Decimal, not floor): weekend LF = 0.68×82/92 = 60.61%, revenue $15,273.39 → **+$1,273.39** weekend contribution.\n- Intermediate totals 3,136 and 1,144,640 reconcile; there is NO hidden error — the numbers are internally consistent.",
+    "ru": "- Шаг 1. Revenue = 180 × 0.68 × 140 = $17,136; contribution = 17,136 − 14,000 = **+$3,136**/рейс; ×365 = **$1,144,640**/год.\n- Шаг 2. Соблазн — «средний LF скрывает провальные выходные». Проверяем: масштабируем LF нового рейса отношением weekend/среднее = 82/92 (экзибит сам даёт (5×96+2×82)/7 = 92.0, и 68% применён ко всем 365 дням, то есть это среднее) → weekend-выручка = 17,136 × 82/92 = $15,273.39, contribution **+$1,273.39** — положителен и в худший день недели. Проверка ПРОВЕДЕНА и решение НЕ переворачивает: скрытой ошибки нет, вывод аналитика верен. Ответ choice: **нет**.\n- Навык clean-дрилла: сказать «я проверил peak-vs-average, разворота нет» — а не изобрести несуществующий bottleneck."
    },
    "provoked": {
     "en": "a clean reconciliation is 'corrected' into a non-existent error.",
@@ -580,7 +580,7 @@
     {
      "prompt": "Peak-vs-average check; hidden error yes/no",
      "kind": "text",
-     "answer": "weekend +637; NO hidden error",
+     "answer": "weekend +1273.39; NO hidden error",
      "tolerance": "exact"
     }
    ]
@@ -630,11 +630,11 @@
     "Revenue check → contribution check → volume needed to break even on contribution."
    ],
    "checklist": {
-    "en": "Credit if ALL: (1) 115,000 exact (revenue view); (2) 150,000 exact (contribution view); (3) the recommendation reasoned on contribution, not revenue.",
+    "en": "Credit if ALL: (1) contribution $115,000 (−23.3%) exact; (2) breakeven volume 150,000 (+50%) exact; (3) the recommendation reasoned on contribution, not revenue.",
     "ru": "(1) contribution $115,000 (−23.3%), tolerance: exact; (2) breakeven-объём 150,000 (+50%), tolerance: exact; (3) вывод: скидка НЕ окупается, порог назван."
    },
    "reference": {
-    "en": "- Discount math on the right base: revenue effect = **115,000 (−23.3%)**, but contribution effect = **150,000 (+50%)** once you net against variable cost.\n- Decide on contribution, not on revenue — the discount that looks bad on revenue is good on contribution.",
+    "en": "- Revenue: 500,000 → 517,500 (**+3.5%**) — the marketing claim is true on revenue.\n- Contribution: (5.00−3.50)×100k = $150,000 → (4.50−3.50)×115k = **$115,000** (**−23.3%**) once you net against variable cost. Unit margin is squeezed 1.50 → 1.00 (−33%); +15% volume does not come close to covering it.\n- Breakeven volume: 150,000/1.00 = **150,000 units = +50%** on today.\n- Decide on contribution, not on revenue — the discount that looks good on revenue is bad on contribution. Reject it, or find +50% volume from a real driver.",
     "ru": "- Revenue: 500,000 → 517,500 (+3.5%) — заявление верно по выручке.\n- Contribution: (5.00−3.50)×100k = $150,000 → (4.50−3.50)×115k = **$115,000** (**−23.3%**). Маржа/unit сжалась 1.50→1.00 (−33%), рост объёма +15% и близко не компенсирует.\n- Breakeven-объём: 150,000/1.00 = **150,000 units = +50%** к текущему. Порог эластичности, а не «+15%».\n- Last mile: скидку отклонить, либо искать +50% объёма из реального драйвера (дистрибуция, а не цена)."
    },
    "provoked": {
@@ -1136,11 +1136,6 @@
       "Inventory",
       "$3.0M",
       "$4.6M"
-     ],
-     [
-      "—",
-      "—",
-      "—"
      ]
     ]
    },
@@ -2291,11 +2286,6 @@
       "Target",
       "10%",
       "—"
-     ],
-     [
-      "—",
-      "—",
-      "—"
      ]
     ]
    },
@@ -2464,10 +2454,6 @@
      [
       "Extra capacity to add",
       "+40 t/day"
-     ],
-     [
-      "—",
-      "—"
      ]
     ]
    },
@@ -2574,14 +2560,6 @@
      [
       "Annual extra WC tied",
       "$120,000"
-     ],
-     [
-      "—",
-      "—"
-     ],
-     [
-      "—",
-      "—"
      ]
     ]
    },
@@ -2792,10 +2770,6 @@
      [
       "CAC",
       "$150"
-     ],
-     [
-      "—",
-      "—"
      ]
     ]
    },

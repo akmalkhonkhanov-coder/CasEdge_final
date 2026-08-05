@@ -1051,11 +1051,11 @@
       "type": "ascii",
       "lines": [
        "FY2023  ████████████████████████████████  312",
-       "          Legacy platform    ▏+9",
+       "          Legacy platform    ▉ +9",
        "          Cloud suite        ███ +27",
-       "          Analytics add-on   ▏+9",
-       "          Services           ▏+6",
-       "          Churn/discounts    ▍ −3",
+       "          Analytics add-on   ▉ +9",
+       "          Services           ▋ +6",
+       "          Churn/discounts    ▎ −3",
        "FY2024  ██████████████████████████████████  360"
       ],
       "blank_before": 1
@@ -2015,8 +2015,8 @@
        "FY2022  ████████████████████████  1,260",
        "          Postpaid net adds     ███ +168",
        "          Prepaid migration     █▌  +84",
-       "          ARPU uplift           █▏  +42",
-       "          Churn                 ██  −84",
+       "          ARPU uplift           ▊   +42",
+       "          Churn                 █▌  −84",
        "FY2024  ██████████████████████████  1,470"
       ],
       "blank_before": 1
@@ -2466,10 +2466,10 @@
    "time": "4 min",
    "step_prompts": [],
    "checklist": {
-    "en": "Credit if ALL: (1) establishes that Exhibit A is monthly and Exhibit B is quarterly before comparing anything, and refuses to set 265,000 against 597,000 as printed; (2) converts the base to a common period, 597,000 / 3 = 199,000 prescriptions per month, and places June 2025 at 265,000 above that base by 33.17% - any answer that reports the new formulation as running below the old one fails this item; (3) brings in price as well, $61 to $84, +37.70%, and states that the revenue comparison is therefore wider than the volume comparison: June at $22.3M against a monthly-equivalent $12.1M, a factor of 1.84, and does not describe this as a doubling; (4) does not accept either false reading - that 265,000 against 597,000 shows the launch running at under half the old volume, or that Exhibit A holds no pre-launch period and so there is nothing to compare against; (5) concludes the marketing verdict is wrong and that the launch is ahead of the prior formulation on both volume and price, pointing the discussion at how fast to scale rather than at withdrawal. Bonus, not required for credit: notes the 2025 trend is +45.60% from 182,000 in March to 265,000 in June against +22.84% for the old formulation across all of 2024, so the curve is accelerating rather than flattening; notes the Revenue column is prescriptions times $84 and carries nothing the Prescriptions column does not already hold."
+    "en": "Credit if ALL: (1) establishes that Exhibit A is monthly and Exhibit B is quarterly before comparing anything, and refuses to set 265,000 against 597,000 as printed; (2) converts the base to a common period, 597,000 / 3 = 199,000 prescriptions per month, and places June 2025 at 265,000 above that base by 33.17% - any answer that reports the new formulation as running below the old one fails this item; (3) brings in price as well, $61 to $84, +37.70%, and states that the revenue comparison is therefore wider than the volume comparison: June at $22.3M against a monthly-equivalent $12.1M, a factor of about 1.83 (1.84 on the rounded revenue column), and does not describe this as a doubling; (4) does not accept either false reading - that 265,000 against 597,000 shows the launch running at under half the old volume, or that Exhibit A holds no pre-launch period and so there is nothing to compare against; (5) concludes the marketing verdict is wrong and that the launch is ahead of the prior formulation on both volume and price, pointing the discussion at how fast to scale rather than at withdrawal. Bonus, not required for credit: notes the 2025 trend is +45.60% from 182,000 in March to 265,000 in June against +22.84% for the old formulation across all of 2024, so the curve is accelerating rather than flattening; notes the Revenue column is prescriptions times $84 and carries nothing the Prescriptions column does not already hold."
    },
    "reference": {
-    "en": "- Naive: the two headline numbers sit one exhibit apart and look made for each other. The new formulation does 265,000 scripts in June 2025; the old one did 597,000 in Q4 2024. That is under half the volume six months after launch, and the failure verdict follows without a single calculation - which is exactly why it is the wrong verdict.\n- Correct: the exhibits do not run on the same clock. Exhibit A reports prescriptions by month; Exhibit B reports quarterly totals, and the note under the table says so. Q4 2024 at 597,000 scripts per quarter is 597,000 / 3 = 199,000 scripts per month. Against that base, June 2025 at 265,000 is +33.17%. The new product is ahead of the one it replaced, not at half its size.\n- Price moves the same way. The old formulation sold at $61 per prescription, the new one at $84, +37.70%. Higher volume at a higher price means the revenue gap is wider than the volume gap: June revenue of $22.3M against a monthly-equivalent $12.1M for Q4 2024, which is 199,000 at $61. That is $22.3M over $12.1M, a factor of 1.84 - large, and not the doubling a quick multiplication of two increases suggests.\n- The shape inside 2025 is the second argument. March 182,000 to June 265,000 is +45.60% in three months, while the old formulation needed all of 2024 to go from 486,000 to 597,000, +22.84%. The launch curve is steepening; the incumbent curve was not.\n- Two parts of the tables do no work. The Revenue column is prescriptions times $84 rounded for display - 182,000 in March shows as 15.3 - so it repeats the volume column in dollars. April and May are waypoints between endpoints that already carry the trend, and Q1 and Q2 2024 play the same role in Exhibit B.\n- Last mile: putting both series on a monthly basis gives a base of 199,000 prescriptions per month, and June 2025 at 265,000 clears it by 33.17% at a price 37.70% higher. Marketing has compared a month with a quarter and drawn a conclusion the data reverses. The launch beats the prior formulation on both volume and price, so the meeting should be about the rate of scale-up - supply, detailing capacity, payer coverage - and not about whether to pull the product."
+    "en": "- Naive: the two headline numbers sit one exhibit apart and look made for each other. The new formulation does 265,000 scripts in June 2025; the old one did 597,000 in Q4 2024. That is under half the volume six months after launch, and the failure verdict follows without a single calculation - which is exactly why it is the wrong verdict.\n- Correct: the exhibits do not run on the same clock. Exhibit A reports prescriptions by month; Exhibit B reports quarterly totals, and the note under the table says so. Q4 2024 at 597,000 scripts per quarter is 597,000 / 3 = 199,000 scripts per month. Against that base, June 2025 at 265,000 is +33.17%. The new product is ahead of the one it replaced, not at half its size.\n- Price moves the same way. The old formulation sold at $61 per prescription, the new one at $84, +37.70%. Higher volume at a higher price means the revenue gap is wider than the volume gap: June revenue of $22.3M against a monthly-equivalent $12.1M for Q4 2024, which is 199,000 at $61. That is $22.3M over $12.1M, a factor of about 1.83 (1.84 on the rounded revenue column) - large, and not the doubling a quick multiplication of two increases suggests.\n- The shape inside 2025 is the second argument. March 182,000 to June 265,000 is +45.60% in three months, while the old formulation needed all of 2024 to go from 486,000 to 597,000, +22.84%. The launch curve is steepening; the incumbent curve was not.\n- Two parts of the tables do no work. The Revenue column is prescriptions times $84 rounded for display - 182,000 in March shows as 15.3 - so it repeats the volume column in dollars. April and May are waypoints between endpoints that already carry the trend, and Q1 and Q2 2024 play the same role in Exhibit B.\n- Last mile: putting both series on a monthly basis gives a base of 199,000 prescriptions per month, and June 2025 at 265,000 clears it by 33.17% at a price 37.70% higher. Marketing has compared a month with a quarter and drawn a conclusion the data reverses. The launch beats the prior formulation on both volume and price, so the meeting should be about the rate of scale-up - supply, detailing capacity, payer coverage - and not about whether to pull the product."
    },
    "provoked": {
     "ru": "= **D6**."
@@ -3047,8 +3047,8 @@
        "FY2021  ████████████████████████  288",
        "          Inflow from exited competitors   ███ +96",
        "          Fall in demand                   ████ −132",
-       "          Price increase                   █ +24",
-       "          Subscriber churn                 ██ −48",
+       "          Price increase                   ▊ +24",
+       "          Subscriber churn                 █▌ −48",
        "FY2024  ███████████████████  228"
       ],
       "blank_before": 1
@@ -3730,7 +3730,7 @@
        "    2. Lower labour cost         █▌ +1.8",
        "    3. Higher product yield      █▎ +1.5",
        "    4. Raw material prices       █ +1.2",
-       "    5. Logistics                 ▍ −0.9",
+       "    5. Logistics                 ▊ −0.9",
        "FY2024 margin  ████████████████████████  24.0%"
       ],
       "blank_before": 1
