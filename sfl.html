@@ -100,8 +100,8 @@ let STATE={};
 const keep=j=>{ if(j&&typeof j==='object') for(const k of CARRY) if(k in j&&j[k]!=null) STATE[k]=j[k]; return j };
 const qs=extra=>{ const p=CARRY.filter(k=>STATE[k]!=null).map(k=>k+'='+encodeURIComponent(STATE[k]));
                   if(extra)p.push(extra); return p.length?'?'+p.join('&'):'' };
-const forget=()=>{ STATE={}; SID=null };
-let ERR=null,SID=null,V=null,PROF=null,INTRO=null,introStep=0,REV=null,pick=null,order=null,dragged=false,tick=null,busy=false,CONS=null;
+const forget=()=>{ STATE={}; SID=null; DEADLINE=null; clearInterval(tick); };
+let ERR=null,SID=null,V=null,PROF=null,INTRO=null,introStep=0,REV=null,pick=null,order=null,dragged=false,tick=null,busy=false,CONS=null,DEADLINE=null;
 
 /* ТРАНСПОРТ ПОД VERCEL. Цеховой сервер — это шесть REST-путей с query-строкой;
    в Vercel один файл в `api/` — это одна функция, поэтому наружу торчит ОДИН
@@ -142,7 +142,7 @@ async function call(action,extra){
   /* Ошибка приходит объектом {error:{message}}, а не строкой: прежний клиент
      печатал бы «[object Object]». */
   if(r.status===401) throw new Error('Сессия не найдена. Войди в аккаунт CasEdge и открой игру заново.');
-  if(r.status===429) throw new Error('Слишком много запросов подряд. Подожди минуту — партия не потеряна.');
+  if(r.status===429) throw new Error('Слишком много запросов подряд. Подожди минуту и повтори ход — состояние партии хранится у тебя, оно не потеряно.');
   if(j&&j.error) throw new Error((j.error&&j.error.message)||String(j.error));
   if(!r.ok) throw new Error('сервер ответил '+r.status);
   return keep(j);
@@ -182,17 +182,26 @@ function start(){ return act(async()=>{
   order=V.items?V.items.map(x=>x.id):null; clearInterval(tick);
 })}
 function beginQuestions(){ return act(async()=>{ V=await POST('/begin',qs(),{}); INTRO=null;
-  clearInterval(tick); tick=setInterval(refresh,1000); }) }
-async function refresh(){ if(!SID||busy||INTRO||REV)return;
-  try{ const v=await GET('/view',qs()); if(busy||INTRO)return;
-    if(v.phase==='done'){ clearInterval(tick); V=v; await loadReveal(); }
-    else { V=v; paintTimer(); } }
-  catch(e){ ERR=e.message; clearInterval(tick); render() } }
+  syncDeadline(); clearInterval(tick); tick=setInterval(clock,1000); }) }
+/* Дедлайн ставится по msLeft, который пришёл ОТ СЕРВЕРА, и пересчитывается на
+   каждом ответе. Подкрутить часы у себя можно, но это ничего не даёт: сервер
+   считает время по t0 внутри подписанного токена и режет ход сам. */
+function syncDeadline(){ if(V&&typeof V.msLeft==='number') DEADLINE=Date.now()+V.msLeft; }
+function clock(){
+  if(!V||V.phase==='done'||DEADLINE===null)return;
+  V.msLeft=Math.max(0,DEADLINE-Date.now());
+  if(V.msLeft===0){ clearInterval(tick);
+    /* Ноль на часах — единственный случай, когда клиент спрашивает сервер сам:
+       партию закрывает он, и разбор берётся у него же. */
+    act(async()=>{ const v=await GET('/view',qs()); V=v;
+      if(v.phase==='done'){ await loadReveal(); } });
+    return }
+  paintTimer(); }
 function answer(){ return act(async()=>{
   const payload=V.type==='rank'?order:pick;
   if(payload===null||payload===undefined)return;
   const r=await POST('/answer',qs(),{answer:payload});
-  CONS=r.consequence||null; V=r; pick=null; dragged=false;
+  CONS=r.consequence||null; V=r; pick=null; dragged=false; syncDeadline();
   order=V.items?V.items.map(x=>x.id):null;
   if(V.phase==='done'){ clearInterval(tick); await loadReveal(); }
 })}

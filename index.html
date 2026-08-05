@@ -273,6 +273,8 @@
        screen somewhere else in the app. The frame costs one HTTP request. */
     #screen-seawolf { padding: 0; background: #03151f; }
     #swFrame { border: 0; display: block; width: 100%; height: 100vh; height: 100dvh; background: #03151f; }
+    #screen-sfl { padding: 0; background: #0a1512; }
+    #sflFrame { border: 0; display: block; width: 100%; height: 100vh; height: 100dvh; background: #0a1512; }
 
     /* ── Screen system ────────────────────────────────── */
     .screen { display: none; min-height: 100vh; min-height: 100dvh; flex-direction: column; background: var(--surface-dark); }
@@ -3393,6 +3395,56 @@ async function callAI(system, messages, model) {
 // Calls the server-side case engine (/api/case-session). The library, answer
 // keys and exhibit bodies stay on the server; we send only the case pointer,
 // step, attempt count, revealed-exhibit ids and the trimmed transcript.
+/* ПОТОК. Замер на живом проде 01.08: открывающий ход 6.8–7.8 с, оценочный 4.9 с,
+   и TTFB равен общему времени — кандидат сидел перед пустым экраном ровно столько,
+   сколько модель писала. Стриминг не меняет ни промпт, ни модель, ни max_tokens:
+   те же токены, отданные по мере появления. Замер на заглушке апстрима:
+   первый текст через 266 мс против 1369 мс, то есть ожидание съедается целиком.
+
+   Разбор маркеров остаётся на сервере (parseMarkers) — здесь только доставка.
+   Хвост потока несёт канонический payload, им и заменяем накопленный текст.
+   Любая осечка — молча уходим на обычный путь, он не тронут. */
+async function callCaseSessionStream(payload, onText) {
+  const headers = { 'Content-Type': 'application/json' };
+  const token = await casFreshToken();
+  if (token) headers['Authorization'] = 'Bearer ' + token;
+  const r = await fetch('/api/case-session', {
+    method: 'POST', headers: headers, body: JSON.stringify(Object.assign({}, payload, { stream: true }))
+  });
+  const ct = r.headers.get('content-type') || '';
+  // Сервер отдал обычный JSON (старая версия, ошибка, пустой ответ) — не поток.
+  if (!r.ok || !/text\/event-stream/.test(ct) || !r.body) return null;
+  const reader = r.body.getReader();
+  const dec = new TextDecoder();
+  let buf = '', payloadOut = null, got = false;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buf += dec.decode(value, { stream: true });
+    let nl;
+    while ((nl = buf.indexOf('\n')) >= 0) {
+      const line = buf.slice(0, nl).trim();
+      buf = buf.slice(nl + 1);
+      if (!line.startsWith('data:')) continue;
+      let ev; try { ev = JSON.parse(line.slice(5).trim()); } catch (e) { continue; }
+      if (typeof ev.t === 'string') { got = true; onText(ev.t); }
+      else if (ev.done && ev.payload) payloadOut = ev.payload;
+      else if (ev.error) throw Object.assign(new Error('Соединение прервалось. Отправь ответ ещё раз — он не потерян.'), { userFacing: true });
+    }
+  }
+  // Поток без текста — это не ответ интервьюера. Пусть отработает обычный путь.
+  return got ? payloadOut : null;
+}
+async function casFreshToken() {
+  if (!sb) return null;
+  try {
+    let { data } = await sb.auth.getSession();
+    let session = data && data.session;
+    const expSoon = session && session.expires_at && (session.expires_at * 1000 - Date.now() < 60000);
+    if (!session || expSoon) { const r = await sb.auth.refreshSession(); session = (r && r.data && r.data.session) || session; }
+    return session ? session.access_token : null;
+  } catch (e) { return null; }
+}
 async function callCaseSession(payload) {
   async function freshToken() {
     if (!sb) return null;
@@ -4184,6 +4236,8 @@ function showScreen(id, fromPop) {
   // both running behind whatever the player opened next.
   if (id !== 'seawolf') { const swf = document.getElementById('swFrame');
     if (swf && swf.getAttribute('src') && swf.getAttribute('src') !== 'about:blank') swf.setAttribute('src', 'about:blank'); }
+  if (id !== 'sfl') { const sff = document.getElementById('sflFrame');
+    if (sff && sff.getAttribute('src') && sff.getAttribute('src') !== 'about:blank') sff.setAttribute('src', 'about:blank'); }
   if (id !== 'bcg' && typeof bcg === 'object' && bcg && bcg.timerId) { clearInterval(bcg.timerId); bcg.timerId = null; if (bcg.qTimerId) { clearInterval(bcg.qTimerId); bcg.qTimerId = null; } }
   if (id === 'mode' && typeof cxRefreshMode === 'function') { try { cxRefreshMode(); } catch(e){} }
   if (id === 'mode' && typeof refreshDailyBadge === 'function') { try { refreshDailyBadge(); } catch(e){} }
@@ -7297,17 +7351,30 @@ async function startLibraryCase(caseId) {
 
   // Opening turn: server presents the prompt + first question (no verdict).
   try {
-    const data = await callCaseSession({
+    const openPayload = {
       caseId: state.caseId, stepIndex: 0, attemptCount: 0, firm: state.firm,
       mode: casIleadMode(), doneSteps: [],
       revealedExhibits: [], messages: [], focusDimension: casWeakestDimension(), lang: state.aiLang
-    });
+    };
+    let data = null, bubble = null;
+    try {
+      data = await callCaseSessionStream(openPayload, (t) => {
+        if (!bubble) { setTyping(false); bubble = addMsg('ai', '', true); state.casStreamed = true; }
+        casAppendToBubble(bubble, t);
+      });
+    } catch (e) { if (e && e.userFacing) throw e; data = null; }
+    if (!data) { state.casStreamed = false; data = await callCaseSession(openPayload); }
+    else if (bubble) casSetBubble(bubble, data.reply);   // канон с сервера побеждает
     if (Array.isArray(data.revealedExhibits)) state.revealedExhibits = data.revealedExhibits;
     state.ilead = !!data.ilead;   // server confirms whether this case actually runs interviewee-led
     const opening = data.reply || 'Let us begin. Please structure your approach to this case.';
     state.messages.push({ role: 'assistant', content: opening });
     rememberCase('Case #' + state.caseId + ': ' + state.caseTitle);
-    setTimeout(() => { setTyping(false); addMsg('ai', opening, true); casRenderExhibits(data.exhibits); startRespTimer(); }, 600);
+    // Текст уже нарисован потоком — второй раз его не печатаем и паузу
+    // в 600 мс не держим: она была нужна, чтобы «печатает…» не мигало,
+    // а теперь на её месте настоящий текст.
+    if (state.casStreamed) { state.casStreamed = false; setTyping(false); casRenderExhibits(data.exhibits); startRespTimer(); }
+    else setTimeout(() => { setTyping(false); addMsg('ai', opening, true); casRenderExhibits(data.exhibits); startRespTimer(); }, 600);
   } catch (e) {
     setTyping(false);
     addMsg('ai', (e && e.userFacing) ? e.message : 'Connection error. Please check your network and try again.');
@@ -7692,6 +7759,28 @@ function addMsg(role, text, pushToHistory) {
   }
 
   setTimeout(() => { chat.scrollTop = chat.scrollHeight; }, 40);
+  return div;                       // нужен потоку, чтобы дописывать в этот же пузырь
+}
+
+/* Дописывание в пузырь по мере прихода текста. Markdown пересобирается целиком
+   на каждом куске: разметка бывает многострочной (списки, **жирный**), и
+   дорисовывать её по кусочку нельзя — получится незакрытый тег. Реплики
+   интервьюера короткие, пересборка сотни-другой символов незаметна. */
+function casAppendToBubble(div, chunk) {
+  if (!div) return;
+  div._raw = (div._raw || '') + chunk;
+  const b = div.querySelector('.msg-bbl');
+  if (b) b.innerHTML = mdToHtml(div._raw);
+  const chat = document.getElementById('chat-area');
+  if (chat) chat.scrollTop = chat.scrollHeight;
+}
+/* Финал: канонический текст с сервера. Поток — доставка, разбор маркеров живёт
+   в parseMarkers, и если они разойдутся, побеждает сервер. */
+function casSetBubble(div, text) {
+  if (!div) return;
+  div._raw = text || '';
+  const b = div.querySelector('.msg-bbl');
+  if (b) b.innerHTML = mdToHtml(div._raw);
 }
 
 /* ────────────────────────────────────────────────────
