@@ -2,7 +2,7 @@
  "schema": "casedge.cases.v1",
  "source_master": "MASTER_180.md",
  "source_sha256": "65f765f84e5b62a393fe143eff133626ffa2384ddf7bc8ea026e273ed77fd7ba",
- "note": "graph fields (depends_on/optimal_entry/terminal/produces) intentionally absent — merged from engine package by step number | #181-185 merged 2026-07-30 EN-native, bodies from build_bodies_181_185_en_v2.py | #186-200 собраны 31.07.2026 из тел .md скриптом assemble_186_200.py | #201-206 (блок A партии 201-235) собраны 01.08.2026 из тел .md скриптом assemble_201_206.py | #207-211 (блок B партии 201-235) собраны 01.08.2026 из тел .md скриптом assemble_207_211.py | #212-219 (блоки C и D партии 201-235) собраны 01.08.2026 | #220-227 (блоки E и F партии 201-235) собраны 01.08.2026 | #228-235 (блоки G и H партии 201-235, ПАРТИЯ ЗАКРЫТА) собраны 01.08.2026 | подсказка перенесена с финального шага на несущий в 14 кейсах (81-90, 191, 195, 208, 216, 89) 01.08.2026 | #236-240 (блок A партии 236-270) собраны 01.08.2026 | сплит шага восстановлен: candidate_md проставлен на 371 шаге в 48 кейсах, эхо метки снято с interviewer_md 01.08.2026 | Н28 (уточнение): 1 строка-вывод переписана в данные, 3 метки строк переименованы 01.08.2026 | два вопроса кандидату называли предыдущий шаг наивным (#31 ш6, #102 ш3) — переписаны 01.08.2026 | #241-245 (блок B партии 236-270) собраны 01.08.2026 | семь нерешаемых NPV-кейсов (#36 #45 #46 #58 #60 #120 #183): ставка/горизонт/посылка вынесены из ключа в экзибит или бриф 01.08.2026 | #36 посылка о бессрочности, #45 доля переменного опекса — добавлены после проверки ревьюером 01.08.2026 | место вставки двух сносок исправлено по рендеру (#36 за чертой, #45 вплотную к таблице) 01.08.2026 | L1 в #218 #223 #229 #239 переписаны: подсказка повторяла формулировку [MM]-шага 01.08.2026 | #45: ставка и горизонт вынесены из сегментной таблицы сноской — строка читалась как четвёртый сегмент 01.08.2026 | скаляры вынесены из широких таблиц в 7 кейсах (правило dev'а) 01.08.2026 | #246-250 (блок C партии 236-270) собраны 01.08.2026 | #198 #203: «ДО ex2» в тексте шага заставляло сборку выдать экзибит до наивного счёта 01.08.2026 | #251-255 (блок D партии 236-270) собраны 01.08.2026 | #256-260 (блок E партии 236-270) собраны 01.08.2026 | #256-260 (блок E партии 236-270) собраны 01.08.2026 | долг старого слоя, восьмёрка 1: #17 #30 #53 #64 #73 #74 #91 #100 сделаны решаемыми 06.08.2026 | долг старого слоя закрыт 06.08.2026: #105 #116 #135 решаемы, 39 арифметических правок в 25 кейсах, 11 экзибитов возвращены на on_request | проверка «только промпт и экзибиты» #1-50: 9 арифметических правок 06.08.2026 | 7 подтверждённых нерешаемых из #1-50 закрыты 06.08.2026 | #51-100: 7 нерешаемых класса «горизонт/ставка не названы» закрыты 06.08.2026",
+ "note": "graph fields (depends_on/optimal_entry/terminal/produces) intentionally absent — merged from engine package by step number | #181-185 merged 2026-07-30 EN-native, bodies from build_bodies_181_185_en_v2.py | #186-200 собраны 31.07.2026 из тел .md скриптом assemble_186_200.py | #201-206 (блок A партии 201-235) собраны 01.08.2026 из тел .md скриптом assemble_201_206.py | #207-211 (блок B партии 201-235) собраны 01.08.2026 из тел .md скриптом assemble_207_211.py | #212-219 (блоки C и D партии 201-235) собраны 01.08.2026 | #220-227 (блоки E и F партии 201-235) собраны 01.08.2026 | #228-235 (блоки G и H партии 201-235, ПАРТИЯ ЗАКРЫТА) собраны 01.08.2026 | подсказка перенесена с финального шага на несущий в 14 кейсах (81-90, 191, 195, 208, 216, 89) 01.08.2026 | #236-240 (блок A партии 236-270) собраны 01.08.2026 | сплит шага восстановлен: candidate_md проставлен на 371 шаге в 48 кейсах, эхо метки снято с interviewer_md 01.08.2026 | Н28 (уточнение): 1 строка-вывод переписана в данные, 3 метки строк переименованы 01.08.2026 | два вопроса кандидату называли предыдущий шаг наивным (#31 ш6, #102 ш3) — переписаны 01.08.2026 | #241-245 (блок B партии 236-270) собраны 01.08.2026 | семь нерешаемых NPV-кейсов (#36 #45 #46 #58 #60 #120 #183): ставка/горизонт/посылка вынесены из ключа в экзибит или бриф 01.08.2026 | #36 посылка о бессрочности, #45 доля переменного опекса — добавлены после проверки ревьюером 01.08.2026 | место вставки двух сносок исправлено по рендеру (#36 за чертой, #45 вплотную к таблице) 01.08.2026 | L1 в #218 #223 #229 #239 переписаны: подсказка повторяла формулировку [MM]-шага 01.08.2026 | #45: ставка и горизонт вынесены из сегментной таблицы сноской — строка читалась как четвёртый сегмент 01.08.2026 | скаляры вынесены из широких таблиц в 7 кейсах (правило dev'а) 01.08.2026 | #246-250 (блок C партии 236-270) собраны 01.08.2026 | #198 #203: «ДО ex2» в тексте шага заставляло сборку выдать экзибит до наивного счёта 01.08.2026 | #251-255 (блок D партии 236-270) собраны 01.08.2026 | #256-260 (блок E партии 236-270) собраны 01.08.2026 | #256-260 (блок E партии 236-270) собраны 01.08.2026 | долг старого слоя, восьмёрка 1: #17 #30 #53 #64 #73 #74 #91 #100 сделаны решаемыми 06.08.2026 | долг старого слоя закрыт 06.08.2026: #105 #116 #135 решаемы, 39 арифметических правок в 25 кейсах, 11 экзибитов возвращены на on_request | проверка «только промпт и экзибиты» #1-50: 9 арифметических правок 06.08.2026 | 7 подтверждённых нерешаемых из #1-50 закрыты 06.08.2026 | #51-100: 7 нерешаемых класса «горизонт/ставка не названы» закрыты 06.08.2026 | #101-150: 8 нерешаемых закрыты 06.08.2026",
  "totals": {
   "cases": 270,
   "steps": 1995,
@@ -8711,7 +8711,7 @@
    "generation": null,
    "est_minutes": "39",
    "header_md": "## Case 47 — Server and Protect\n\n> **ПЛАШКА** \n> **Тип:** Market Entry · **Индустрия:** Дата-центры · **Формат:** F6  \n> **Difficulty:** 🔴 Hard · **Depth:** 🔥 STRONG · **Соответствие:** OK  \n> **T/C:** Trap · **Время:** ~39 min  \n> **Экспонаты (2):** memo — memo от Head of Construction (prose); memo — memo от Grid Liaison (prose)  \n> **Reveal:** on_request\n> **optimal_entry:** 2  \n>  \n> **Слои insight:** ① F6 косты (replacement) ② **ТВИСТ: 4-летняя очередь на подключение непокупаема** → флип +$90.4M → −$331.9M\n\n**Market Entry · Дата-центры · Hard · Trap · ~39 min · naive #1 · gen B**\n*Registry: Corevault*\n\n| Поле | Значение |\n|---|---|\n| № | 47 · **Corevault** *(прототип: Equinix / Digital Realty)* |\n| Индустрия | Дата-центры |\n| Тип | **Market Entry** |\n| Difficulty | 🔴 **Hard** |\n| Trap/Clean | 🔴 Trap |\n| Время | 39 мин · 9 шагов |\n| Формат | **F6** — недостающая информация *(данные только по запросу)* |\n| Exhibit | Prose memo + таблица |\n| Naive-error | **#1 — historical vs replacement cost** |\n| Твист | **Очередь на подключение к сети — 4 года.** Деньги не покупают позицию |\n\n---",
-   "prompt_md": "> **Corevault** operates six data centres. It wants to enter a new metro with a **40 MW** campus.\n>\n> Finance built the budget from the last campus: **32 MW for $288 million** — **$9.0 million per MW**.\n>\n> Colocation pricing in the target metro: **$245 per kW per month**, stabilised utilisation **90%**, annual opex **$1.52 million per MW**. WACC **10%**.\n>\n> **Should Corevault enter?**\n\n> 🔒 **F6.** Данные по репрайсингу компонентов и по подключению к сети **не выдаются**, пока кандидат их не запросит. Не спросил — считает по историческим костам и рекомендует сжечь $640M.\n\n---",
+   "prompt_md": "> **Corevault** operates six data centres. It wants to enter a new metro with a **40 MW** campus.\n>\n> Finance built the budget from the last campus: **32 MW for $288 million** — **$9.0 million per MW**.\n>\n> Colocation pricing in the target metro: **$245 per kW per month**, stabilised utilisation **90%**, annual opex **$1.52 million per MW**. WACC **10%**.\n>\n> **Should Corevault enter?** (Поток после ввода в эксплуатацию считается вечной рентой.)\n\n> 🔒 **F6.** Данные по репрайсингу компонентов и по подключению к сети **не выдаются**, пока кандидат их не запросит. Не спросил — считает по историческим костам и рекомендует сжечь $640M.\n\n---",
    "exhibits": [
     {
      "id": "exA",
@@ -9936,7 +9936,7 @@
    "generation": null,
    "est_minutes": "39",
    "header_md": "## Case 54 — Swipe Right on Cardexa?\n\n> **ПЛАШКА** \n> **Тип:** M&A · **Индустрия:** Платёжные сети · **Формат:** F6  \n> **Difficulty:** 🔴 Hard · **Depth:** 🔥 STRONG · **Соответствие:** OK  \n> **T/C:** Trap · **Время:** ~39 min  \n> **Экспонаты (2):** table — Cardexa operating profile (deal deck); memo — memo General Counsel (prose)  \n> **Reveal:** on_request\n> **optimal_entry:** 3  \n>  \n> **Слои insight:** ① F6 регулирование ② **ошибка в КРИТЕРИИ, не в числе**: interchange-рост — метрика вчерашнего дня → флип $1,523M → $909M\n\n**M&A · Платёжные сети · Hard · Trap · ~39 min · naive #8 · gen B**\n*Registry: Swipe Right on Cardexa?*\n\n| Поле | Значение |\n|---|---|\n| № | 54 · **Cardexa** *(прототип: Visa / Mastercard, домашняя сеть)* |\n| Индустрия | Платёжные сети |\n| Грунтовка | **Stern p.12 Banking** — interchange fees, IT cost base, regulation (Dodd-Frank-style caps) |\n| Тип | **M&A** |\n| Difficulty | 🔴 **Hard** |\n| Trap/Clean | 🔴 Trap |\n| Время | 39 мин · 9 шагов |\n| Формат | **F6** — недостающая информация *(данные по запросу)* |\n| Exhibit | Таблица + regulatory memo |\n| Naive-error | **#8 — wrong criterion** *(пре-кап метрика для пост-кап актива)* |\n| Твист | Сеть выживает на volume+VAS — но стоит на $614M меньше |\n\n---",
-   "prompt_md": "> A PE fund is bidding for **Cardexa**, a domestic debit network. Ask: **$1,150 million**.\n>\n> The deal model: transaction volume **$18.6 billion/year**, blended network fee **92 bps**, of which Cardexa keeps **80%**. Value-added services (fraud scoring, tokenization, data): **$64M**. Cost base: IT/processing **$72M** + other **$28M**. Interchange revenue has grown **7%/year** historically.\n>\n> **Should the fund bid?**\n\n> 🔒 **F6.** Регуляторный статус interchange-капа **не выдаётся**, пока кандидат не спросит о регулировании. Stern-грунтовка прямо называет regulation определяющим фактором отрасли — не спросить о нём и есть провал критерия.\n\n---",
+   "prompt_md": "> A PE fund is bidding for **Cardexa**, a domestic debit network. Ask: **$1,150 million**.\n>\n> The deal model: transaction volume **$18.6 billion/year**, blended network fee **92 bps**, of which Cardexa keeps **80%**. Value-added services (fraud scoring, tokenization, data): **$64M**. Cost base: IT/processing **$72M** + other **$28M**. Interchange revenue has grown **7%/year** historically.\n>\n> **Should the fund bid?**\n\n> 🔒 **F6.** Регуляторный статус interchange-капа **не выдаётся**, пока кандидат не спросит о регулировании. Stern-грунтовка прямо называет regulation определяющим фактором отрасли — не спросить о нём и есть провал критерия.\n>\n> **Горизонт оценки — восемь лет, далее терминальная стоимость как вечная рента от потока восьмого года.**\n\n---",
    "exhibits": [
     {
      "id": "exA",
@@ -10288,7 +10288,7 @@
    "generation": null,
    "est_minutes": "32",
    "header_md": "## Case 56 — The Brake-Up\n\n> **ПЛАШКА** \n> **Тип:** M&A · **Индустрия:** Автокомпоненты · **Формат:** F2  \n> **Difficulty:** 🟡 Medium · **Depth:** 🔥 STRONG · **Соответствие:** ↑выше  \n> **T/C:** Clean · **Время:** ~32 min  \n> **Экспонаты (2):** table — brake division by platform; memo — memo:  \n> **Reveal:** auto\n> **optimal_entry:** 2  \n>  \n> **Слои insight:** ① H2 недоплата ② H3 stranded cost ③ **CLEAN**: H1 подтверждена (sell-side верен)\n\n**M&A · Автокомпоненты · Medium · Clean · ~32 min · gen B**\n*Registry: The Brake-Up*\n\n| Поле | Значение |\n|---|---|\n| № | 56 · **Motovia Parts** *(прототип: Bosch / Denso)* |\n| Индустрия | Автокомпоненты |\n| Грунтовка | **Kellogg p.229 Automotive** — OEM-контракты живут с платформой; parts = OEM vs replacement |\n| Тип | **M&A** *(sell-side)* |\n| Difficulty | **Medium** |\n| Trap/Clean | ⚪ **CLEAN** *(не показывать кандидату)* |\n| Время | 32 мин · 7 шагов |\n| Формат | **F2** — конкурирующие гипотезы |\n| Exhibit | Таблица платформ + memo |\n| Naive-error | — *(naive = correct)* |\n\n> ⚪ **CLEAN — зеркало #41 Norvex.** Там продажа разрушала стоимость; здесь продажа **верна**, и кандидат, натренированный на Norvex, будет искать stranded-cost-разворот. Найдёт его — $36M — и обязан честно сказать: разворота нет, запас $164M.\n\n---",
-   "prompt_md": "> **Motovia Parts** has received a PE offer of **$410 million** for its brake division.\n>\n> Three views in the boardroom:\n> - **H1** — the division is peaking with its platforms; sell now\n> - **H2** — the buyer underprices our platform-cycle revenue; hold out\n> - **H3** — stranded costs make any sale a trap (we read the Norvex case)\n>\n> **Sell or keep?**\n\n---",
+   "prompt_md": "> **Motovia Parts** has received a PE offer of **$410 million** for its brake division.\n>\n> Three views in the boardroom:\n> - **H1** — the division is peaking with its platforms; sell now\n> - **H2** — the buyer underprices our platform-cycle revenue; hold out\n> - **H3** — stranded costs make any sale a trap (we read the Norvex case)\n>\n> **Sell or keep?** (Stranded costs run indefinitely — value them as a perpetuity.)\n\n---",
    "exhibits": [
     {
      "id": "exA",
@@ -17487,7 +17487,7 @@
     {
      "step": 4,
      "label": "Equity по replacement cost",
-     "candidate_md": "Пересчитай equity по replacement cost.",
+     "candidate_md": "Сегодня привлечение одного такого контракта стоит нам **$34,000** в развитии бизнеса, а не те $18,000, по которым он стоит на балансе. Пересчитай equity по replacement cost.",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nBD-cost сегодня = $34k/контракт\n\nEXPECTED ANSWER:\nrepl_contract=$14.28M; correct_equity=$19.48M > $17.5M -> BUY\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) 420×34000=14,280,000; (2) equity=19,480,000; (3) вывод BUY; (4) understatement книги назван от replacement-базы (~47%), НЕ от equity.",
      "hints": {},
      "conditional_exhibits": [],
@@ -18744,7 +18744,7 @@
    "generation": null,
    "est_minutes": "30",
    "header_md": "## Case 110 — Drugstore Cowboy\n\n> **ПЛАШКА** \n> **Тип:** Cost Reduction · **Индустрия:** Generic pharma · **Формат:** F1  \n> **Difficulty:** 🟡 Medium · **Depth:** ⚠️ STANDARD · **Соответствие:** OK  \n> **T/C:** Trap · **Время:** ~30 min  \n> **Экспонаты (3):** table — Exhibit — Automation proposal; table — Exhibit — Technology lifecycle; table — Exhibit — Savings stream over time  \n> **Reveal:** on_request\n> **optimal_entry:** 2  \n>  \n> **Слои insight:** ① 12-летний горизонт naive ② обрыв на 4 году + salvage\n\n**Cost Reduction · Generic pharma · Medium · Trap · ~30 min · naive #9 · gen D**\n*Registry: Drugstore Cowboy*\n\n**Type · Generic pharma · F1 (interviewee-led) · Ловушка #110 (Trap-flip, naive #9 wrong-discount-horizon)**\nDifficulty: Medium · Prototype: Teva/Mylan · IO: Life Sciences/Pharma, Stern p.18 · Layer: mental-math",
-   "prompt_md": "**Venclar Pharma** (дженерики) решает: инвестировать **$28M capex** в собственное производство ключевого API (активной субстанции) или продолжать закупать у поставщика. Собственное производство даёт экономию **$6.1M/год**. Инвестировать?",
+   "prompt_md": "**Venclar Pharma** (дженерики) решает: инвестировать **$28M capex** в собственное производство ключевого API (активной субстанции) или продолжать закупать у поставщика. Собственное производство даёт экономию **$6.1M/год**. Срок службы установки по паспорту — **12 лет**. Инвестировать?",
    "exhibits": [
     {
      "id": "ex1",
@@ -18864,7 +18864,7 @@
     },
     {
      "step": 4,
-     "label": "PV за 4 года со salvage",
+     "label": "PV на пересмотренном сроке",
      "candidate_md": "Правильный PV (4 года +salvage).",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nобрыв год-5; salvage $2M год-4\n\nEXPECTED ANSWER:\nPV $18,924,918.71; +salvage $20,242,380.65 < $28M -> KEEP\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) Σ(6.1M/1.11^t, t=1..4)=18,924,918.71; (2) +salvage=20,242,380.65; (3) вывод KEEP; (4) overstate назван от 4-летнего PV (~109%).\n\nCHART-SELECT KEY (hidden): correct option = D — the platform is obsolete in year 5 — savings run flat for 4 years then stop (salvage $2M in year 4). If they pick another option, do not reveal the numbers yet; ask them to reconsider and re-pick.",
      "hints": {},
@@ -19122,7 +19122,7 @@
     {
      "step": 4,
      "label": "Выручка с оттоком и решение",
-     "candidate_md": "Правильная выручка и решение.",
+     "candidate_md": "Эластичность спроса по цене в этой категории — **−1.6**. Правильная выручка и решение.",
      "interviewer_md": "EXPECTED ANSWER:\n$258,909.74 < $319,800 -> HOLD\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) rev_correct=5509×47≈258,909.74; (2) вывод HOLD; (3) overstate назван от new-price выручки (~48.85%).",
      "hints": {},
      "conditional_exhibits": [],
@@ -21990,7 +21990,7 @@
     {
      "step": 4,
      "label": "Validation",
-     "candidate_md": "Проверь sensitivity и каннибализацию.",
+     "candidate_md": "Проверь sensitivity — возьми падение набора на **20%** — и каннибализацию.",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nenrollment −20%; новая аудитория\n\nEXPECTED ANSWER:\nNPV@−20% +$1,117,082 (положителен); каннибализации нет -> GO, разворота нет\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) кандидат САМ инициирует проверку; (2) NPV@−20%=1,117,082 положителен; (3) каннибализация исключена (иная аудитория); (4) явно: разворота нет, наив=correct.",
      "hints": {},
      "conditional_exhibits": [],
@@ -24552,7 +24552,7 @@
     {
      "step": 4,
      "label": "Reversal hypothesis 2 (4 min)",
-     "candidate_md": "What if the associates leave?",
+     "candidate_md": "Suppose the departing associates take **12%** of the discretionary book with them. What if the associates leave?",
      "interviewer_md": "```\nThe DSO holds the patient list; only the discretionary book walks — 12% of Calderwood EBITDA = $86,940.\nGroup → $1,680,160, entry = 5.26×\n```\n**Answer: 5.26× — below the 6.0× limit.** Painful but not decisive. CLOSED.",
      "hints": {},
      "conditional_exhibits": [],
@@ -24564,7 +24564,7 @@
     {
      "step": 5,
      "label": "Reversal hypothesis 3 (4 min)",
-     "candidate_md": "And an insurer repricing?",
+     "candidate_md": "And an insurer repricing that takes **8 percentage points** off margin — what does that do?",
      "interviewer_md": "```\n14% of revenue = $1,286,600; an 8% margin cut = $102,928\nGroup → $1,664,172, entry = 5.31×\n```\n**Answer: 5.31× — below the limit.** CLOSED.",
      "hints": {},
      "conditional_exhibits": [],
@@ -24863,7 +24863,7 @@
     {
      "step": 6,
      "label": "Layer 2: the fixes are not independent (5 min)",
-     "candidate_md": "What if they do both?",
+     "candidate_md": "Of the 132 pallets lost at the hub, **54** are lost to the refrigeration failure alone. What if they do both?",
      "interviewer_md": "```\nOf the hub's 132 addressable pallets, 54 spoil at the doors ONLY because\nthey arrive with no thermal reserve — the refrigeration unit failed in transit.\nFixing line-haul removes the CAUSE of those 54.\n\nLine-haul fix           : 276 pallets →  $7,250,000   (unchanged)\nHub fix on its own      : 132 pallets →    $750,000\nHub fix AFTER line-haul :  78 pallets → −$1,275,000\nBoth together           :               $5,975,000  ← LESS than line-haul alone\n```\n**Answer: the hub business case is CONDITIONAL — it exists only if nothing upstream is fixed.** Approving both projects on their standalone figures counts the same 54 pallets twice.",
      "hints": {},
      "conditional_exhibits": [],
@@ -25079,7 +25079,7 @@
       "объёмы",
       "сколько стоит прогон"
      ],
-     "body_md": "> Chamber setup per run is **$96,000**: two days of pump-down and calibration. The cost is **lost chamber capacity**, and it arises **per run**, not per unit.\n> Chamber capacity caps a run at **3,200** blanks; both lines share the chamber. Run size follows the order.\n> Blank cost $310 · premium price (7–8 layers) $1,450 · standard price (3–5 layers) $620.\n> Volumes: premium 96,000 units/year, standard 240,000 units/year.",
+     "body_md": "> Chamber setup per run is **$96,000**: two days of pump-down and calibration. The cost is **lost chamber capacity**, and it arises **per run**, not per unit.\n> Chamber capacity caps a run at **3,200** blanks; both lines share the chamber. Run size follows the order.\n> Blank cost $310 · premium price **$1,450 at 8 layers** · standard price **$620 at 4 layers**.\n> Volumes: premium 96,000 units/year, standard 240,000 units/year.",
      "render": null,
      "render_omitted": {
       "reason": "memo",
@@ -25148,7 +25148,7 @@
     {
      "step": 6,
      "label": "Layer 2: the defects are priced in (5 min)",
-     "candidate_md": "So is premium at 8 layers unprofitable?",
+     "candidate_md": "Suppose we shift **24,000 units** of volume from standard to premium. So is premium at 8 layers unprofitable?",
      "interviewer_md": "```\n             Units    Layers  Defect %       Profit      $/unit\nPremium      96,000     8     2.00%  $103,776,000   $1,081.00\nStandard    240,000     4     1.00%   $65,712,000     $273.80\n```\n**Answer: premium is defective twice as often — exactly the ratio of layers — and earns four times as much per unit.** The extra defects are real and **already in the price**. The answer is neither \"cut batches\" nor \"cut premium\" but **shift the mix**: moving 24,000 units of capacity is worth **+$19,372,800/year** (full restatement of both lines: new volumes → new defects → new run count → new setup).",
      "hints": {},
      "conditional_exhibits": [],
@@ -25367,7 +25367,7 @@
     {
      "step": 6,
      "label": "The fix (3 min)",
-     "candidate_md": "What would the fix cost?",
+     "candidate_md": "The re-spec carries a capex of **$5,200,000**. What would the fix cost — and does it pay back?",
      "interviewer_md": "```\nHMPE re-spec + requalification: capex $5,200,000\nShortfall 1,260 → 0, net price $31,700 → $45,560\nGrade C: −$1,860,000 → +$6,456,000 (swing $8,316,000)\nPayback 0.63 years\n```",
      "hints": {},
      "conditional_exhibits": [],
@@ -47202,5 +47202,5 @@
  "source_scope": "graph skeleton only; prose re-authored in EN per languages{}",
  "family_ratchet_armed": false,
  "package_sha256_method": "sha256 of the full payload minus package_sha256, package_sha256_method; json.dumps(sort_keys=True, ensure_ascii=False, separators=(\",\",\":\"))",
- "package_sha256": "5a1093bea0ebd5f649591ff1823935e998541f09592554e73c959e83293b23a3"
+ "package_sha256": "6a0493ea2121e1de4e476e26671bd6a55396c3c6fd63fd62dde7c08282ba6a3d"
 }
