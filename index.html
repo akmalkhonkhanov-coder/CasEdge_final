@@ -813,6 +813,20 @@
        открыл экран и спросил, где игра — и был прав: две из трёх игр читались
        как сноска под кнопкой. Три игры равны по важности, значит равны и по
        весу на экране. Отличать их должно название, а не яркость. */
+    /* ── Счётчик длины ответа ───────────────────────────
+       Предел в 1500 знаков — это примерно полторы минуты речи вслух.
+       Показываем не «знаки», а СЕКУНДЫ: кандидат готовится к разговору,
+       а не к письму, и время он чувствует, а знаки — нет. */
+    .ans-meter { display: flex; align-items: center; gap: 10px; padding: 6px 4px 0; }
+    .am-bar { flex: 1; height: 3px; border-radius: 2px; background: var(--sv-line); overflow: hidden; }
+    .am-bar i { display: block; height: 100%; width: 0; border-radius: 2px;
+                background: var(--accent-teal); transition: width .12s linear, background .2s; }
+    .am-bar i.warn { background: var(--accent-amber); }
+    .am-bar i.over { background: #d9705d; }
+    .am-txt { font-size: 11.5px; color: var(--on-dark-soft); white-space: nowrap; }
+    .am-txt b { font-weight: 700; }
+    .am-txt.warn { color: var(--accent-amber); }
+    .am-txt.over { color: #d9705d; }
     .gm-grid { display: grid; gap: 12px; width: 100%; }
     .gm-card {
       display: grid; gap: 6px; text-align: left; width: 100%;
@@ -2886,10 +2900,18 @@
     <div class="help-hint" id="helpHintPanel" style="display:none;"></div>
     <div class="hints" id="chatHints"></div>
     <div class="input-row">
-      <textarea id="chat-ta" class="chat-ta" placeholder="Share your thinking…" rows="1" onkeydown="handleKeydown(event)" oninput="autoResize(this)"></textarea>
+      <textarea id="chat-ta" class="chat-ta" placeholder="Share your thinking…" rows="1" onkeydown="handleKeydown(event)" oninput="autoResize(this);answerMeter(this)" maxlength="1500"></textarea>
       <button class="send-btn" onclick="sendMessage()">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2L15 22 11 13 2 9l20-7z"></path></svg>
       </button>
+    </div>
+    <!-- Счётчик длины ответа. Он тут не ради экономии токенов, хотя и её даёт.
+         На живом интервью ответ в 1500 знаков — это полторы минуты речи, и
+         столько никто говорить не даст: перебьют. Кандидат должен видеть предел
+         ДО того, как начал писать, и помнить о нём, пока пишет. -->
+    <div class="ans-meter" id="ansMeter">
+      <span class="am-bar"><i id="amFill"></i></span>
+      <span class="am-txt" id="amTxt"></span>
     </div>
   </div>
 </div>
@@ -4256,6 +4278,12 @@ function rememberCase(summary) {
    SCREEN NAV
 ──────────────────────────────────────────────────── */
 function showScreen(id, fromPop) {
+  /* Счётчик длины ответа должен стоять на экране ДО первого символа —
+     иначе правило узнаётся в момент, когда его уже нарушил. */
+  if (id === 'chat') setTimeout(() => {
+    const ta = document.getElementById('chat-ta');
+    if (ta && typeof answerMeter === 'function') answerMeter(ta);
+  }, 0);
   // Stop the response timer whenever we leave the live interview/drill screens
   if (id !== 'interview' && id !== 'drill' && typeof hideRespTimer === 'function') hideRespTimer();
   // Stop game timers whenever we leave their screens (prevents runaway intervals)
@@ -8287,6 +8315,7 @@ async function sendMessage() {
   }
   stopRespTimer();
   ta.value = '';
+  if (typeof answerMeter === 'function') answerMeter(ta);   // счётчик обратно на «90 секунд»
   autoResize(ta);
   addMsg('user', text);
 
@@ -8421,6 +8450,51 @@ MATH FLOOR (no easy arithmetic):
 
 function handleKeydown(e) {
   if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+}
+
+/* Счётчик длины ответа.
+ *
+ * Сервер режет реплику кандидата на 1500 знаках. Резать молча — значит учить
+ * человека тому, что его мысль обрывают без причины. Поэтому предел показан,
+ * и показан В СЕКУНДАХ РЕЧИ, а не в знаках: кандидат готовится говорить, а не
+ * писать, и «90 секунд» он понимает, а «1500 знаков» — нет.
+ *
+ * 1500 знаков ≈ 250 слов ≈ 100 секунд при обычном темпе речи 150 слов в минуту.
+ * На интервью ответ такой длины уже перебивают.
+ */
+const ANS_LIMIT = 1500;
+const CHARS_PER_SEC = 15;      // 150 слов/мин при средней длине слова 6 знаков
+
+function answerMeter(ta) {
+  const box = document.getElementById('ansMeter');
+  const fill = document.getElementById('amFill');
+  const txt = document.getElementById('amTxt');
+  if (!box || !fill || !txt) return;
+  const n = (ta && ta.value ? ta.value.length : 0);
+  const pc = Math.min(100, Math.round(n / ANS_LIMIT * 100));
+  const sec = Math.round(n / CHARS_PER_SEC);
+  fill.style.width = pc + '%';
+  fill.className = pc >= 100 ? 'over' : pc >= 70 ? 'warn' : '';
+  txt.className = 'am-txt' + (pc >= 100 ? ' over' : pc >= 70 ? ' warn' : '');
+
+  const ru = (typeof state !== 'undefined' && state && state.uiLang === 'ru');
+  if (!n) {
+    txt.innerHTML = ru
+      ? 'Предел — <b>90 секунд речи</b>. Столько длится ответ на интервью, дальше перебивают.'
+      : 'Limit: <b>90 seconds of speech</b>. That is how long an interview answer runs before you are cut off.';
+  } else if (pc >= 100) {
+    txt.innerHTML = ru
+      ? '<b>Предел.</b> Убери всё, что не довод: вывод, два аргумента с числом, риск.'
+      : '<b>At the limit.</b> Cut everything that is not an argument: conclusion, two reasons with a number, risk.';
+  } else if (pc >= 70) {
+    txt.innerHTML = ru
+      ? '≈ <b>' + sec + ' сек</b> вслух. Партнёр слушает первые тридцать — вывод уже прозвучал?'
+      : '≈ <b>' + sec + ' sec</b> aloud. A partner listens to the first thirty — has your conclusion landed yet?'
+  } else {
+    txt.innerHTML = ru
+      ? '≈ <b>' + sec + ' сек</b> вслух из 90'
+      : '≈ <b>' + sec + ' sec</b> aloud of 90';
+  }
 }
 
 function autoResize(el) {
