@@ -968,6 +968,16 @@ export default async function handler(req, res) {
     // Anthropic requires the conversation to start with a user turn.
     const convo = messages.length ? messages : [{ role: 'user', content: 'Please begin the case.' }];
     if (convo[0].role !== 'user') convo.unshift({ role: 'user', content: 'Please begin the case.' });
+    /* ...and to END with one. Fixing only the first turn cost a live 400 on
+       06.08: the client sends a transcript ending with the interviewer's turn
+       whenever the step advances without a candidate reply, and upstream
+       answers "This model does not support assistant message prefill" - which
+       the candidate reads as "The interviewer is busy right now". The trailing
+       nudge is neutral: it carries no case content and no instruction beyond
+       "keep going", so it cannot change what the interviewer asks next. */
+    if (convo[convo.length - 1].role !== 'user') {
+      convo.push({ role: 'user', content: 'Please continue.' });
+    }
 
     // Cache the conversation prefix: mark the last message as a cache breakpoint
     // so every prior turn is a cache hit on the next request.
