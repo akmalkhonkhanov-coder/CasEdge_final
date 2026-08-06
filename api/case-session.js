@@ -17,6 +17,7 @@
 // Load the library via require so Vercel's bundler inlines it at build time.
 // (Vercel transpiles this function to CommonJS, so ESM-only features like
 // `import.meta.url` / `import fs` are unavailable — require is the safe path.)
+const { verifyUserCached } = require('./_auth.js');
 const CASES_DATA = require('./_cases.json');
 
 const FALLBACK_ORIGIN = 'https://cas-edge-final.vercel.app';
@@ -768,18 +769,12 @@ export default async function handler(req, res) {
     const raw = JSON.stringify(req.body || {});
     if (raw.length > MAX_BODY_BYTES) return res.status(413).json({ error: { message: 'Request too large.' } });
 
-    // 3) Verify the token with Supabase.
-    let userResp;
-    try {
-      userResp = await fetchWithTimeout(sbUrl + '/auth/v1/user',
-        { headers: { apikey: sbKey, Authorization: 'Bearer ' + token } }, AUTH_TIMEOUT_MS);
-    } catch (e) {
-      return res.status(504).json({ error: { message: 'Authentication timed out. Please try again.' } });
-    }
-    if (!userResp.ok) return res.status(401).json({ error: { message: 'Invalid or expired session.' } });
-    const user = await userResp.json();
-    const userId = user && user.id;
-    if (!userId) return res.status(401).json({ error: { message: 'Invalid session.' } });
+    // Одна проверка сессии на всё приложение — ./_auth.js, с кешем на инстанс.
+    // Раньше каждый вызов ходил в /auth/v1/user по сети; на тёплом инстансе
+    // повторная проверка того же токена теперь не идёт в сеть вовсе.
+    const user = await verifyUserCached(token, AUTH_TIMEOUT_MS);
+    if (!user) return res.status(401).json({ error: { message: 'Invalid or expired session.' } });
+    const userId = user.id;
 
     const body = req.body || {};
 

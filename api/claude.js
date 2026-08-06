@@ -9,6 +9,7 @@
 //   ALLOWED_ORIGIN      - e.g. https://cas-edge-final.vercel.app
 //                         (optional; falls back to the value below)
 
+const { verifyUserCached } = require('./_auth.js');
 const FALLBACK_ORIGIN = 'https://cas-edge-final.vercel.app';
 const ALLOWED_MODELS = ['claude-sonnet-5', 'claude-sonnet-4-5'];
 const MAX_TOKENS_CAP = 8000;       // hard ceiling; Russian feedback JSON is ~2x token-heavier than English
@@ -127,21 +128,10 @@ export default async function handler(req, res) {
       return res.status(413).json({ error: { message: 'Request too large.' } });
     }
 
-    // 3) Verify the token with Supabase (with a timeout).
-    let userResp;
-    try {
-      userResp = await fetchWithTimeout(sbUrl + '/auth/v1/user', {
-        headers: { apikey: sbKey, Authorization: 'Bearer ' + token }
-      }, AUTH_TIMEOUT_MS);
-    } catch (e) {
-      return res.status(504).json({ error: { message: 'Authentication timed out. Please try again.' } });
-    }
-    if (!userResp.ok) {
-      return res.status(401).json({ error: { message: 'Invalid or expired session.' } });
-    }
-    const user = await userResp.json();
-    const userId = user && user.id;
-    if (!userId) return res.status(401).json({ error: { message: 'Invalid session.' } });
+    // 3) Одна проверка сессии на всё приложение — ./_auth.js, с кешем на инстанс.
+    const user = await verifyUserCached(token, AUTH_TIMEOUT_MS);
+    if (!user) return res.status(401).json({ error: { message: 'Invalid or expired session.' } });
+    const userId = user.id;
 
     // 4) Per-user rate limit (after we know who the user is). Shared across
     // all serverless instances via Supabase - see check_and_increment_rate_limit.

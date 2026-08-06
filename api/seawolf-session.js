@@ -118,20 +118,15 @@ function pickGame(level, seen) {
   return { game: pool[Math.floor(Math.random() * pool.length)], wrapped: !unseen.length, poolSize: pool.length };
 }
 
+const { verifyUserCached, subjectOf } = require('./_auth.js');
+
 /* ── auth + rate limit (same contract as the other endpoints) ─────────────── */
 async function fetchWithTimeout(url, options, ms) {
   const c = new AbortController(); const t = setTimeout(() => c.abort(), ms);
   try { return await fetch(url, { ...options, signal: c.signal }); } finally { clearTimeout(t); }
 }
-async function verifyUser(token) {
-  const url = process.env.SUPABASE_URL, key = process.env.SUPABASE_ANON_KEY;
-  if (!url || !key) return null;
-  const r = await fetchWithTimeout(`${url}/auth/v1/user`,
-    { headers: { apikey: key, Authorization: 'Bearer ' + token } }, AUTH_TIMEOUT_MS);
-  if (!r.ok) return null;
-  const u = await r.json();
-  return u && u.id ? u : null;
-}
+// verifyUser жил здесь. Теперь один на всё приложение — ./_auth.js,
+// с кешем на инстанс. Две копии одной проверки — это C24.
 // Same contract as api/drills.js: the RPC is check_and_increment_rate_limit,
 // authorised with the CALLER'S token and the anon key. An earlier draft of this
 // file invented a different RPC name and a SUPABASE_SERVICE_ROLE_KEY that does
@@ -163,11 +158,25 @@ export default async function handler(req, res) {
     const bearer = auth.startsWith('Bearer ') ? auth.slice(7) : null;
     if (!bearer) return res.status(401).json({ error: { message: 'Authentication required.' } });
     const sbUrl = process.env.SUPABASE_URL, sbKey = process.env.SUPABASE_ANON_KEY;
-    const user = await verifyUser(bearer);
-    if (!user) return res.status(401).json({ error: { message: 'Invalid or expired session.' } });
-    if (sbUrl && sbKey && await rateLimited(user.id, sbUrl, sbKey, bearer)) {
-      return res.status(429).json({ error: { message: 'Too many requests.' } });
+    // Проверка токена и счётчик лимита — два независимых похода в Supabase.
+    // Раньше они шли по очереди, и вместе давали большую часть задержки хода:
+    // замер 06.08 на проде — 1813 мс на action=state, где модели нет вовсе.
+    // Счётчику нужен только id пользователя, а он лежит в sub самого токена,
+    // поэтому оба запроса стартуют разом. Доверия к sub при этом не появляется:
+    // если проверка не прошла — отвечаем 401 и результат счётчика не смотрим,
+    // а если sub в токене не тот, что вернул Supabase, это тоже 401.
+    const claimSub = subjectOf(bearer);
+    const limitP = (sbUrl && sbKey && claimSub)
+      ? rateLimited(claimSub, sbUrl, sbKey, bearer).catch(() => false)
+      : Promise.resolve(false);
+    const user = await verifyUserCached(bearer, AUTH_TIMEOUT_MS);
+    if (!user) { limitP.catch(() => {}); return res.status(401).json({ error: { message: 'Invalid or expired session.' } }); }
+    if (claimSub && claimSub !== user.id) {
+      return res.status(401).json({ error: { message: 'Invalid or expired session.' } });
     }
+    let over = await limitP;
+    if (!claimSub && sbUrl && sbKey) over = await rateLimited(user.id, sbUrl, sbKey, bearer);
+    if (over) return res.status(429).json({ error: { message: 'Too many requests.' } });
 
     const raw = JSON.stringify(req.body || {});
     if (raw.length > MAX_BODY_BYTES) return res.status(413).json({ error: { message: 'Payload too large.' } });

@@ -13,6 +13,7 @@
 // accented/mixed-language speech over the cheaper mini variant. Cost is
 // $0.006/min either way, negligible next to per-session AI costs.
 
+const { verifyUserCached } = require('./_auth.js');
 const FALLBACK_ORIGIN = 'https://cas-edge-final.vercel.app';
 const TRANSCRIBE_MODEL = 'gpt-4o-transcribe';
 const MAX_BODY_BYTES = 8 * 1024 * 1024;   // 8 MB - comfortably covers a ~2 min webm/opus clip as base64
@@ -74,16 +75,10 @@ export default async function handler(req, res) {
     const raw = JSON.stringify(req.body || {});
     if (raw.length > MAX_BODY_BYTES) return res.status(413).json({ error: { message: 'Recording too large. Please keep answers under ' + Math.floor(MAX_AUDIO_SECONDS / 60) + ' minutes.' } });
 
-    let userResp;
-    try {
-      userResp = await fetchWithTimeout(sbUrl + '/auth/v1/user', { headers: { apikey: sbKey, Authorization: 'Bearer ' + token } }, AUTH_TIMEOUT_MS);
-    } catch (e) {
-      return res.status(504).json({ error: { message: 'Authentication timed out. Please try again.' } });
-    }
-    if (!userResp.ok) return res.status(401).json({ error: { message: 'Invalid or expired session.' } });
-    const user = await userResp.json();
-    const userId = user && user.id;
-    if (!userId) return res.status(401).json({ error: { message: 'Invalid session.' } });
+    // Одна проверка сессии на всё приложение — ./_auth.js, с кешем на инстанс.
+    const user = await verifyUserCached(token, AUTH_TIMEOUT_MS);
+    if (!user) return res.status(401).json({ error: { message: 'Invalid or expired session.' } });
+    const userId = user.id;
 
     if (await rateLimited(userId, sbUrl, sbKey, token)) {
       return res.status(429).json({ error: { message: 'Too many recordings. Please wait a moment and try again.' } });
