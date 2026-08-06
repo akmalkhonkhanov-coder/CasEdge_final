@@ -938,6 +938,7 @@ export default async function handler(req, res) {
       sseOpen = true;
     };
     let streamedText = '';
+    let streamUsage = null;   // вход/кеш приходят в message_start, выход — в message_delta
     if (wantStream && response.status >= 200 && response.status < 300 && response.body) {
       const filter = createMarkerFilter();
       const reader = response.body.getReader();
@@ -960,8 +961,20 @@ export default async function handler(req, res) {
               streamedText += ev.delta.text;
               const safe = filter.push(ev.delta.text);
               if (safe) { openSse(); sseSend({ t: safe }); }
+            } else if (ev.type === 'message_start' && ev.message && ev.message.usage) {
+              /* Вход и кеш приходят ТОЛЬКО в message_start; в message_delta их нет.
+                 Пока мы читали один message_delta, лог знал лишь выходные токены —
+                 то есть на потоковом пути, которым ходят живые люди, стоимость
+                 была невидима вовсе. Замер 06.08 показал, зачем это нужно:
+                 cache_read = 0 на каждом ходу после открывающего, при
+                 cache_write 2.3–3.0k — мы платим за запись кеша, который никто
+                 не читает. Без этой строки такое не увидеть. */
+              const u = ev.message.usage;
+              streamUsage = { in: u.input_tokens, cache_read: u.cache_read_input_tokens,
+                              cache_write: u.cache_creation_input_tokens };
             } else if (ev.type === 'message_delta' && ev.usage) {
-              console.log('case-session usage(stream)', JSON.stringify({ case: caseObj.id, step: stepIndex, out: ev.usage.output_tokens }));
+              console.log('case-session usage(stream)', JSON.stringify(Object.assign(
+                { case: caseObj.id, step: stepIndex, out: ev.usage.output_tokens }, streamUsage || {})));
             }
           }
         }

@@ -276,7 +276,15 @@ async function graderJSON(system, userText, maxTokens) {
       'anthropic-version': '2023-06-01',
       'anthropic-beta': 'prompt-caching-2024-07-31'
     },
-    body: JSON.stringify({ model: GRADER_MODEL, max_tokens: mt, system: [{ type: 'text', text: system }], messages: [{ role: 'user', content: userText }] })
+    // Системный блок разбора одинаков для всего набора и переезжает по сети
+    // на каждую проверку. Помечаем его кешем: содержание не меняется, значит
+    // платить за него как за новый вход незачем. На качество не влияет вовсе —
+    // модель получает тот же текст, меняется только цена его доставки.
+    // (Блоки короче 1024 токенов апстрим просто не кеширует, и это безопасно:
+    // пометка на коротком блоке ничего не ломает, она молча не срабатывает.)
+    body: JSON.stringify({ model: GRADER_MODEL, max_tokens: mt,
+      system: [{ type: 'text', text: system, cache_control: { type: 'ephemeral' } }],
+      messages: [{ role: 'user', content: userText }] })
     // maxRetries was 0 here, which made the whole RETRIABLE_STATUS branch in
     // fetchAnthropicWithRetry dead code (`attempt < maxRetries` is never true at
     // 0). A 429/529 from upstream came straight back and was then treated as
@@ -297,6 +305,20 @@ async function graderJSON(system, userText, maxTokens) {
     return null;                       // do NOT re-ask with double max_tokens
   }
   let data = await resp.json();
+  /* Расход разбора не логировался вовсе: телеметрия писала только ms, поэтому
+     на вопрос «сколько стоит дрилл» ответа не существовало. Пишем то же, что
+     пишет case-session, и теми же именами, чтобы два эндпоинта считались одним
+     запросом к логам. Имени дрилла тут нет намеренно: в graderJSON его в
+     области видимости не существует, и первая версия этой строки ссылалась на
+     несуществующую переменную — то есть падала бы на каждом разборе. Дрилл
+     виден в соседней строке CASEDGE_TELEMETRY того же запроса. */
+  if (data && data.usage) {
+    const u = data.usage;
+    console.log('drills usage', JSON.stringify({
+      in: u.input_tokens, out: u.output_tokens,
+      cache_read: u.cache_read_input_tokens, cache_write: u.cache_creation_input_tokens,
+      stop: data.stop_reason }));
+  }
   let parsed = parse(textOf(data));
   // Retry once inside the deadline on truncation OR unparseable output. This
   // path is for a MODEL problem only — doubling max_tokens against a rate limit
