@@ -273,8 +273,16 @@
        screen somewhere else in the app. The frame costs one HTTP request. */
     #screen-seawolf { padding: 0; background: #03151f; }
     #swFrame { border: 0; display: block; width: 100%; height: 100vh; height: 100dvh; background: #03151f; }
-    #screen-sfl { padding: 0; background: #0a1512; }
-    #sflFrame { border: 0; display: block; width: 100%; height: 100vh; height: 100dvh; background: #0a1512; }
+    /* Высота кадра игры.
+       Было: height:100dvh прямо на iframe внутри флекс-колонки. На моём окне
+       работало, на окне владельца кадр схлопывался в 150 пикселей — ровно
+       столько занимает iframe без применённой высоты. Частный случай ловить
+       бессмысленно; правильнее убрать саму возможность: высоту держит
+       контейнер, а кадр занимает её целиком через flex, а не через единицы
+       вьюпорта. min-height:0 обязателен — без него флекс-элемент не даёт
+       себя сжать ниже содержимого. */
+    #screen-sfl { padding: 0; background: #0a1512; height: 100vh; height: 100dvh; overflow: hidden; }
+    #sflFrame { border: 0; display: block; width: 100%; flex: 1 1 auto; min-height: 0; height: 100%; background: #0a1512; }
 
     /* ── Screen system ────────────────────────────────── */
     .screen { display: none; min-height: 100vh; min-height: 100dvh; flex-direction: column; background: var(--surface-dark); }
@@ -800,6 +808,27 @@
       border: 1px solid rgba(255,255,255,.12); width: 22px; height: 22px;
     }
     .firm-check.soon-lock svg { opacity: .55; }
+    /* ── Выбор игры ─────────────────────────────────────
+       Было: одна яркая кнопка Redrock и две бледные пилюли под ней. Владелец
+       открыл экран и спросил, где игра — и был прав: две из трёх игр читались
+       как сноска под кнопкой. Три игры равны по важности, значит равны и по
+       весу на экране. Отличать их должно название, а не яркость. */
+    .gm-grid { display: grid; gap: 12px; width: 100%; }
+    .gm-card {
+      display: grid; gap: 6px; text-align: left; width: 100%;
+      background: var(--surface-dark-elevated); color: var(--on-dark, inherit);
+      border: 1px solid var(--sv-line); border-left: 3px solid var(--accent-teal);
+      border-radius: 14px; padding: 16px 18px; cursor: pointer;
+      transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .gm-card:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,.16); border-color: var(--accent-teal); }
+    .gm-card:focus-visible { outline: 2px solid var(--accent-teal); outline-offset: 2px; }
+    .gm-name { font-size: 17px; font-weight: 700; letter-spacing: -.01em; }
+    .gm-desc { font-size: 13.5px; line-height: 1.45; color: var(--on-dark-soft); }
+    .gm-meta { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--on-dark-soft); margin-top: 2px; }
+    .gm-meta b { font-weight: 700; color: var(--accent-teal); }
+    .gm-go { margin-left: auto; font-weight: 700; color: var(--accent-teal); }
+    .gm-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 12px; }
     .gi-back.sw-soon { opacity: .55; cursor: default; }
     .gi-back.sw-soon:hover { transform: none; box-shadow: none; }
     .sw-soon-note {
@@ -5272,17 +5301,56 @@ function rkMarkSeen(id) { try { const s = rkSeenIds(); if (!s.includes(id)) { s.
 function rkToast(m) { if (typeof toast === 'function') toast(m); }
 
 // Entry: the Solve Game briefing → variant chooser. Redrock is the live library.
+/* Числа под названиями игр берутся у сервера, а не пишутся в разметке.
+   Кнопка говорила «6 scenarios», когда сценариев было семь: величина жила в
+   двух местах — в библиотеке и в HTML, — и второе про первое не знало.
+   Разметка теперь несёт запасное значение на случай, если сеть молчит, и
+   заменяет его на настоящее, как только оно пришло. */
+async function gmFillCounts() {
+  const put = (k, v) => document.querySelectorAll('[data-gm-count="' + k + '"]')
+    .forEach(el => { el.textContent = String(v); });
+  try {
+    const tok = await window.swAuthToken();
+    if (!tok) return;
+    const resp = await fetch('/api/sfl-session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + tok },
+      body: JSON.stringify({ action: 'state' })
+    });
+    if (!resp.ok) return;
+    const r = await resp.json();
+    if (r && typeof r.scenarios === 'number') put('sfl', r.scenarios);
+  } catch (e) { /* молчим: в разметке уже стоит запасное значение */ }
+}
+
 function startSolveChoose() {
   const box = document.getElementById('giCard');
   if (!box) { startRedrock(); return; }
   const acts = box.querySelector('.gi-actions');
   if (acts) acts.innerHTML =
-    `<button class="gi-start" onclick="startRedrock()">Redrock Study - 50 McKinsey Solve games &rarr;</button>
-     <button class="gi-back" style="margin-top:10px;" onclick="startSeaWolf()">Sea Wolf - 150 ecosystem sets &rarr;</button>
-     <button class="gi-back" style="margin-top:10px;" onclick="startSFL()">Sustainable Futures Lab - 6 scenarios, 13 decisions &rarr;</button>
-     <div class="sw-soon-note">Solve ships as Redrock + Sea Wolf; the 85-minute version adds Sustainable Futures Lab.</div>
-     <button class="gi-back" style="margin-top:10px;" onclick="startSolveGame()">Calder Sound - guided sample</button>
-     <button class="gi-back" style="margin-top:10px;" onclick="showScreen('mode')">Back</button>`;
+    `<div class="gm-grid">
+       <button class="gm-card" onclick="startRedrock()">
+         <span class="gm-name">Redrock Study</span>
+         <span class="gm-desc">Study &middot; Analysis &middot; Report &middot; Cases. Четыре фазы, 35 минут, авто-оценка.</span>
+         <span class="gm-meta"><b data-gm-count="redrock">50</b> игр<span class="gm-go">Играть &rarr;</span></span>
+       </button>
+       <button class="gm-card" onclick="startSeaWolf()">
+         <span class="gm-name">Sea Wolf</span>
+         <span class="gm-desc">Экосистема: собери устойчивую цепь и удержи её под давлением.</span>
+         <span class="gm-meta"><b data-gm-count="seawolf">150</b> наборов<span class="gm-go">Играть &rarr;</span></span>
+       </button>
+       <button class="gm-card" onclick="startSFL()">
+         <span class="gm-name">Sustainable Futures Lab</span>
+         <span class="gm-desc">Тринадцать решений подряд. Правильного ответа нет — измеряется линия.</span>
+         <span class="gm-meta"><b data-gm-count="sfl">&hellip;</b> сценариев<span class="gm-go">Играть &rarr;</span></span>
+       </button>
+     </div>
+     <div class="sw-soon-note">Solve сдаётся как Redrock + Sea Wolf; 85-минутная версия добавляет Sustainable Futures Lab.</div>
+     <div class="gm-row">
+       <button class="gi-back" onclick="startSolveGame()">Calder Sound &mdash; разбор с подсказками</button>
+       <button class="gi-back" onclick="showScreen('mode')">Назад</button>
+     </div>`;
+  gmFillCounts();
 }
 
 async function startRedrock() {
