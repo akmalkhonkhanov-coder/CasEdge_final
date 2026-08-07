@@ -2,7 +2,7 @@
  "schema": "casedge.cases.v1",
  "source_master": "MASTER_180.md",
  "source_sha256": "65f765f84e5b62a393fe143eff133626ffa2384ddf7bc8ea026e273ed77fd7ba",
- "note": "graph fields (depends_on/optimal_entry/terminal/produces) intentionally absent — merged from engine package by step number | #181-185 merged 2026-07-30 EN-native, bodies from build_bodies_181_185_en_v2.py | #186-200 собраны 31.07.2026 из тел .md скриптом assemble_186_200.py | #201-206 (блок A партии 201-235) собраны 01.08.2026 из тел .md скриптом assemble_201_206.py | #207-211 (блок B партии 201-235) собраны 01.08.2026 из тел .md скриптом assemble_207_211.py | #212-219 (блоки C и D партии 201-235) собраны 01.08.2026 | #220-227 (блоки E и F партии 201-235) собраны 01.08.2026 | #228-235 (блоки G и H партии 201-235, ПАРТИЯ ЗАКРЫТА) собраны 01.08.2026 | подсказка перенесена с финального шага на несущий в 14 кейсах (81-90, 191, 195, 208, 216, 89) 01.08.2026 | #236-240 (блок A партии 236-270) собраны 01.08.2026 | сплит шага восстановлен: candidate_md проставлен на 371 шаге в 48 кейсах, эхо метки снято с interviewer_md 01.08.2026 | Н28 (уточнение): 1 строка-вывод переписана в данные, 3 метки строк переименованы 01.08.2026 | два вопроса кандидату называли предыдущий шаг наивным (#31 ш6, #102 ш3) — переписаны 01.08.2026 | #241-245 (блок B партии 236-270) собраны 01.08.2026 | семь нерешаемых NPV-кейсов (#36 #45 #46 #58 #60 #120 #183): ставка/горизонт/посылка вынесены из ключа в экзибит или бриф 01.08.2026 | #36 посылка о бессрочности, #45 доля переменного опекса — добавлены после проверки ревьюером 01.08.2026 | место вставки двух сносок исправлено по рендеру (#36 за чертой, #45 вплотную к таблице) 01.08.2026 | L1 в #218 #223 #229 #239 переписаны: подсказка повторяла формулировку [MM]-шага 01.08.2026 | #45: ставка и горизонт вынесены из сегментной таблицы сноской — строка читалась как четвёртый сегмент 01.08.2026 | скаляры вынесены из широких таблиц в 7 кейсах (правило dev'а) 01.08.2026 | #246-250 (блок C партии 236-270) собраны 01.08.2026 | #198 #203: «ДО ex2» в тексте шага заставляло сборку выдать экзибит до наивного счёта 01.08.2026 | #251-255 (блок D партии 236-270) собраны 01.08.2026 | #256-260 (блок E партии 236-270) собраны 01.08.2026 | #256-260 (блок E партии 236-270) собраны 01.08.2026 | долг старого слоя, восьмёрка 1: #17 #30 #53 #64 #73 #74 #91 #100 сделаны решаемыми 06.08.2026 | долг старого слоя закрыт 06.08.2026: #105 #116 #135 решаемы, 39 арифметических правок в 25 кейсах, 11 экзибитов возвращены на on_request | проверка «только промпт и экзибиты» #1-50: 9 арифметических правок 06.08.2026 | 7 подтверждённых нерешаемых из #1-50 закрыты 06.08.2026 | #51-100: 7 нерешаемых класса «горизонт/ставка не названы» закрыты 06.08.2026 | #101-150: 8 нерешаемых закрыты 06.08.2026",
+ "note": "graph fields (depends_on/optimal_entry/terminal/produces) intentionally absent — merged from engine package by step number | #181-185 merged 2026-07-30 EN-native, bodies from build_bodies_181_185_en_v2.py | #186-200 собраны 31.07.2026 из тел .md скриптом assemble_186_200.py | #201-206 (блок A партии 201-235) собраны 01.08.2026 из тел .md скриптом assemble_201_206.py | #207-211 (блок B партии 201-235) собраны 01.08.2026 из тел .md скриптом assemble_207_211.py | #212-219 (блоки C и D партии 201-235) собраны 01.08.2026 | #220-227 (блоки E и F партии 201-235) собраны 01.08.2026 | #228-235 (блоки G и H партии 201-235, ПАРТИЯ ЗАКРЫТА) собраны 01.08.2026 | подсказка перенесена с финального шага на несущий в 14 кейсах (81-90, 191, 195, 208, 216, 89) 01.08.2026 | #236-240 (блок A партии 236-270) собраны 01.08.2026 | сплит шага восстановлен: candidate_md проставлен на 371 шаге в 48 кейсах, эхо метки снято с interviewer_md 01.08.2026 | Н28 (уточнение): 1 строка-вывод переписана в данные, 3 метки строк переименованы 01.08.2026 | два вопроса кандидату называли предыдущий шаг наивным (#31 ш6, #102 ш3) — переписаны 01.08.2026 | #241-245 (блок B партии 236-270) собраны 01.08.2026 | семь нерешаемых NPV-кейсов (#36 #45 #46 #58 #60 #120 #183): ставка/горизонт/посылка вынесены из ключа в экзибит или бриф 01.08.2026 | #36 посылка о бессрочности, #45 доля переменного опекса — добавлены после проверки ревьюером 01.08.2026 | место вставки двух сносок исправлено по рендеру (#36 за чертой, #45 вплотную к таблице) 01.08.2026 | L1 в #218 #223 #229 #239 переписаны: подсказка повторяла формулировку [MM]-шага 01.08.2026 | #45: ставка и горизонт вынесены из сегментной таблицы сноской — строка читалась как четвёртый сегмент 01.08.2026 | скаляры вынесены из широких таблиц в 7 кейсах (правило dev'а) 01.08.2026 | #246-250 (блок C партии 236-270) собраны 01.08.2026 | #198 #203: «ДО ex2» в тексте шага заставляло сборку выдать экзибит до наивного счёта 01.08.2026 | #251-255 (блок D партии 236-270) собраны 01.08.2026 | #256-260 (блок E партии 236-270) собраны 01.08.2026 | #256-260 (блок E партии 236-270) собраны 01.08.2026 | долг старого слоя, восьмёрка 1: #17 #30 #53 #64 #73 #74 #91 #100 сделаны решаемыми 06.08.2026 | долг старого слоя закрыт 06.08.2026: #105 #116 #135 решаемы, 39 арифметических правок в 25 кейсах, 11 экзибитов возвращены на on_request | проверка «только промпт и экзибиты» #1-50: 9 арифметических правок 06.08.2026 | 7 подтверждённых нерешаемых из #1-50 закрыты 06.08.2026 | #51-100: 7 нерешаемых класса «горизонт/ставка не названы» закрыты 06.08.2026 | #101-150: 8 нерешаемых закрыты 06.08.2026 | находки цеха дриллов: материал интервьюера убран из видимых полей в 13 кейсах, 06.08.2026 | #151-200 проверка «получи ответ» 06.08.2026: 6 нерешаемых закрыты (162,165,167,176,187,193), 3 печатных числа исправлены (163,175,177), конвенция объявлена (197) | проход 2: #197 конвенция приведена к ключу, #167 снят спойлер хода, #165 назван горизонт, 8 шагов-заглушек названы | проход 3: #75 снята роль интервьюера из prompt_md (находка gate_cases2 цеха дриллов)",
  "totals": {
   "cases": 270,
   "steps": 1995,
@@ -10959,7 +10959,7 @@
      "title": "распределение частоты походов (активные посетители)",
      "reveal": "auto",
      "triggers": [],
-     "body_md": "| Визитов/мес | Доля посетителей |\n|---|---|\n| 0.25 | 38% |\n| 0.5 | 21% |\n| 1 | 17% |\n| 2 | 14% |\n| 4 | 10% |\n| **Средняя** | **1.05** *(0.38×0.25 + 0.21×0.5 + 0.17×1 + 0.14×2 + 0.10×4 = 1.05 точно)* |\n\n> 🔄 **Шаг гипотезы (до Exhibit B):** *«Что ты ожидаешь увидеть в данных пилота пасса и почему?»*\n> **Сильная гипотеза:** покупатели придут из хвоста (2–4 визита) — им пасс выгоден; средняя частота 1.05 не описывает подписчиков. **Слабая:** «подписчики будут как средний посетитель».",
+     "body_md": "| Визитов/мес | Доля посетителей |\n|---|---|\n| 0.25 | 38% |\n| 0.5 | 21% |\n| 1 | 17% |\n| 2 | 14% |\n| 4 | 10% |\n| **Средняя** | **1.05** *(0.38×0.25 + 0.21×0.5 + 0.17×1 + 0.14×2 + 0.10×4 = 1.05 точно)* |",
      "render": {
       "type": "table",
       "title": "распределение частоты походов (активные посетители)",
@@ -11048,7 +11048,7 @@
      "step": 3,
      "label": "Exhibit A + 🔄 hypothesis  (4 min)",
      "candidate_md": "Разбери exA.",
-     "interviewer_md": "**ЧТО ДОЛЖЕН ВЫДАТЬ САМ КАНДИДАТ (перенесено из поля вопроса):**\nСильная гипотеза:** покупатели придут из хвоста (2–4 визита) — им пасс выгоден; средняя частота 1.05 не описывает подписчиков. **Слабая:** «подписчики будут как средний посетитель».\n\n---\n\n**Зачёт, если ВСЕ:** (1) читает Exhibit A как сильно скошенное распределение, а не как «средний посетитель»: **38% + 21% = 59%** ходят **≤0.5** визита/мес, а **14% + 10% = 24%** ходят **≥2** визитов/мес — средняя **1.05** не описывает никого; (2) формулирует направленную гипотезу самоотбора: пасс купит хвост (**2** и **4** визита/мес), потому что при цене **$18.99** и билете **$12** пасс окупается покупателю примерно с **1.6** визита в месяц — то есть подписчик по построению ходит чаще 1.05; (3) называет, какое допущение деки это ломает и как это проверяется в пилоте: **1.75** визита/мес и **120,000** подписчиков — проверяемое предсказание: частота подписчиков **до** покупки пасса окажется заметно выше 1.05.\n\n**НЕ зачёт, если:** кандидат берёт среднюю **1.05** как базу поведения подписчика и принимает допущение деки «пойдёт чуть чаще — 1.75», либо ограничивается общим «подписчики будут ходить чаще», не указав, что они приходят из хвоста распределения и что их частота уже сейчас выше средней.",
+     "interviewer_md": "**ЧТО ДОЛЖЕН ВЫДАТЬ САМ КАНДИДАТ (перенесено из поля вопроса):**\nСильная гипотеза:** покупатели придут из хвоста (2–4 визита) — им пасс выгоден; средняя частота 1.05 не описывает подписчиков. **Слабая:** «подписчики будут как средний посетитель».\n\n---\n\n**Зачёт, если ВСЕ:** (1) читает Exhibit A как сильно скошенное распределение, а не как «средний посетитель»: **38% + 21% = 59%** ходят **≤0.5** визита/мес, а **14% + 10% = 24%** ходят **≥2** визитов/мес — средняя **1.05** не описывает никого; (2) формулирует направленную гипотезу самоотбора: пасс купит хвост (**2** и **4** визита/мес), потому что при цене **$18.99** и билете **$12** пасс окупается покупателю примерно с **1.6** визита в месяц — то есть подписчик по построению ходит чаще 1.05; (3) называет, какое допущение деки это ломает и как это проверяется в пилоте: **1.75** визита/мес и **120,000** подписчиков — проверяемое предсказание: частота подписчиков **до** покупки пасса окажется заметно выше 1.05.\n\n**НЕ зачёт, если:** кандидат берёт среднюю **1.05** как базу поведения подписчика и принимает допущение деки «пойдёт чуть чаще — 1.75», либо ограничивается общим «подписчики будут ходить чаще», не указав, что они приходят из хвоста распределения и что их частота уже сейчас выше средней.\n\n> 🔄 **Шаг гипотезы (до Exhibit B):** *«Что ты ожидаешь увидеть в данных пилота пасса и почему?»*\n> **Сильная гипотеза:** покупатели придут из хвоста (2–4 визита) — им пасс выгоден; средняя частота 1.05 не описывает подписчиков. **Слабая:** «подписчики будут как средний посетитель».",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": []
@@ -11135,7 +11135,7 @@
      "title": "посещаемость по типам дней (условие ревьюера: мощность видна",
      "reveal": "auto",
      "triggers": [],
-     "body_md": "| Тип дня | Дней/год | Средняя посещаемость | Capacity | Загрузка |\n|---|---|---|---|---|\n| **Peak** (каникулы, сб) | 40 | **23,500** | 24,000 | **97.9%** |\n| Shoulder | 120 | 11,000 | 24,000 | 45.8% |\n| Off-peak | 205 | 4,200 | 24,000 | 17.5% |\n| **Итого визитов** | 365 | **3,121,000** | | |\n\nБазовая gate-выручка: 3,121,000 × $58 = **$181,018,000**.\n\n> 🔄 **Шаг гипотезы (до Exhibit B):** *«Что ожидаешь от истории ценовых эпизодов?»*\n> **Сильная:** пики почти у мощности (97.9%) — но 97.9% ≠ очередь за воротами: поднятая цена срежет спрос, и **никто не заполнит** место срезанного; off-peak эластичность может быть слабой — туда не ходят не из-за цены, а из-за школы. **Слабая:** «пики sold out, там цена бесплатна».",
+     "body_md": "| Тип дня | Дней/год | Средняя посещаемость | Capacity | Загрузка |\n|---|---|---|---|---|\n| **Peak** (каникулы, сб) | 40 | **23,500** | 24,000 | **97.9%** |\n| Shoulder | 120 | 11,000 | 24,000 | 45.8% |\n| Off-peak | 205 | 4,200 | 24,000 | 17.5% |\n| **Итого визитов** | 365 | **3,121,000** | | |\n\nБазовая gate-выручка: 3,121,000 × $58 = **$181,018,000**.",
      "render": {
       "type": "table",
       "title": "посещаемость по типам дней (условие ревьюера: мощность видна",
@@ -11229,8 +11229,8 @@
     {
      "step": 3,
      "label": "Exhibit A + 🔄 hypothesis  (4 min)",
-     "candidate_md": "Базовая gate-выручка: 3,121,000 × $58 = **$181,018,000**.\n\n> 🔄 **Шаг гипотезы (до Exhibit B):** *«Что ожидаешь от истории ценовых эпизодов?»*\n> **Сильная:** пики почти у мощности (97.9%) — но 97.9% ≠ очередь за воротами: поднятая цена срежет спрос, и **никто не заполнит** место срезанного; off-peak эластичность может быть слабой — туда не ходят не из-за цены, а из-за школы. **Слабая:** «пики sold out, там цена бесплатна».\n\nДанные — в exA.",
-     "interviewer_md": "**Зачёт, если ВСЕ:** (1) прочитана загрузка по типам дней: peak **97.9%** (23,500 из 24,000) — но всего **40 дней** в году, off-peak **17.5%** — **205 дней**, то есть база, на которую действует −20%, вчетверо длиннее той, на которую действует +25%; (2) названа база **3,121,000** визитов × **$58** = **$181,018,000**, и обещанные **+$15.6M** соотнесены с ней (≈8.6%) — то есть модель предполагает почти нулевую реакцию спроса на обеих сторонах; (3) гипотеза до Exhibit B сформулирована с механизмом в обе стороны: на пике 97.9% — не очередь за воротами, поднятая цена срежет часть спроса и **срезанное место никто не займёт**; на off-peak барьер не ценовой (школьный календарь), поэтому скидка −20% скорее отдаст выручку тем, кто пришёл бы и так, чем приведёт новый объём.\n\n**НЕ зачёт:** «пики sold out, там цена бесплатна» — надбавка +25% принимается без потери визитов; или off-peak трактуется как чистый апсайд («заполним пустую внепиковую мощность»), без вопроса, чем именно ограничен спрос в 205 дней; или кандидат считает +$15.6M, не сверив с базой $181,018,000.",
+     "candidate_md": "Базовая gate-выручка: 3,121,000 × $58 = **$181,018,000**.\n\n\nДанные — в exA.",
+     "interviewer_md": "**Зачёт, если ВСЕ:** (1) прочитана загрузка по типам дней: peak **97.9%** (23,500 из 24,000) — но всего **40 дней** в году, off-peak **17.5%** — **205 дней**, то есть база, на которую действует −20%, вчетверо длиннее той, на которую действует +25%; (2) названа база **3,121,000** визитов × **$58** = **$181,018,000**, и обещанные **+$15.6M** соотнесены с ней (≈8.6%) — то есть модель предполагает почти нулевую реакцию спроса на обеих сторонах; (3) гипотеза до Exhibit B сформулирована с механизмом в обе стороны: на пике 97.9% — не очередь за воротами, поднятая цена срежет часть спроса и **срезанное место никто не займёт**; на off-peak барьер не ценовой (школьный календарь), поэтому скидка −20% скорее отдаст выручку тем, кто пришёл бы и так, чем приведёт новый объём.\n\n**НЕ зачёт:** «пики sold out, там цена бесплатна» — надбавка +25% принимается без потери визитов; или off-peak трактуется как чистый апсайд («заполним пустую внепиковую мощность»), без вопроса, чем именно ограничен спрос в 205 дней; или кандидат считает +$15.6M, не сверив с базой $181,018,000.\n\n> 🔄 **Шаг гипотезы (до Exhibit B):** *«Что ожидаешь от истории ценовых эпизодов?»*\n> **Сильная:** пики почти у мощности (97.9%) — но 97.9% ≠ очередь за воротами: поднятая цена срежет спрос, и **никто не заполнит** место срезанного; off-peak эластичность может быть слабой — туда не ходят не из-за цены, а из-за школы. **Слабая:** «пики sold out, там цена бесплатна».",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": []
@@ -11481,7 +11481,7 @@
      "title": "blended service P&L, $M",
      "reveal": "auto",
      "triggers": [],
-     "body_md": "| | 3 года назад | Сейчас |\n|---|---|---|\n| Revenue | 33.1 | 34.2 |\n| Labor | 15.0 | 16.1 |\n| Parts | 8.1 | 11.9 |\n| Overhead | 3.0 | 3.1 |\n| **Margin** | **21.1%** *(7.0/33.1)* | **9.1%** *(3.1/34.2)* |\n\n> 🔄 **Шаг гипотезы (до Exhibit B):** *«Что ожидаешь увидеть в разбивке по когортам?»*\n> **Сильная:** parts выросли +$3.8M против labor +$1.1M — проблема в запчастях, и она, вероятно, **сконцентрирована** (старый парк), а не размазана. **Слабая:** «инфляция бьёт всё равномерно».",
+     "body_md": "| | 3 года назад | Сейчас |\n|---|---|---|\n| Revenue | 33.1 | 34.2 |\n| Labor | 15.0 | 16.1 |\n| Parts | 8.1 | 11.9 |\n| Overhead | 3.0 | 3.1 |\n| **Margin** | **21.1%** *(7.0/33.1)* | **9.1%** *(3.1/34.2)* |",
      "render": {
       "type": "table",
       "title": "blended service P&L, $M",
@@ -11611,7 +11611,7 @@
      "step": 3,
      "label": "Exhibit A + 🔄 hypothesis  (3 min)",
      "candidate_md": "Разбери exA.",
-     "interviewer_md": "**Зачёт, если ВСЕ:** (1) Читает дельты по строкам, а не по марже: parts **8.1 → 11.9 (+$3.8M)** против labor **15.0 → 16.1 (+$1.1M)** и overhead **3.0 → 3.1 (+$0.1M)** при выручке **33.1 → 34.2 (+$1.1M)** — то есть весь провал маржи (**7.0 → 3.1**) сидит в запчастях. (2) Явно отклоняет гипотезу ops про overtime: labor вырос примерно пропорционально выручке (+$1.1M на +$1.1M выручки), поэтому labor-программа лечит не ту строку. (3) Формулирует **фальсифицируемую** гипотезу до Exhibit B: перерасход по parts **сконцентрирован** в подмножестве из **12,000** лифтов (старый парк), а не размазан равномерно, и называет, чем это проверяется — parts на юнит в разрезе когорт возраста.\n\n**НЕ зачёт, если:** гипотеза звучит как «инфляция бьёт всё равномерно» / «подорожали запчасти у всех» — это нефальсифицируемо и не даёт что искать в Exhibit B. Также не зачёт, если кандидат принимает версию про overtime, или объясняет падение маржи стагнацией выручки (выручка выросла).",
+     "interviewer_md": "**Зачёт, если ВСЕ:** (1) Читает дельты по строкам, а не по марже: parts **8.1 → 11.9 (+$3.8M)** против labor **15.0 → 16.1 (+$1.1M)** и overhead **3.0 → 3.1 (+$0.1M)** при выручке **33.1 → 34.2 (+$1.1M)** — то есть весь провал маржи (**7.0 → 3.1**) сидит в запчастях. (2) Явно отклоняет гипотезу ops про overtime: labor вырос примерно пропорционально выручке (+$1.1M на +$1.1M выручки), поэтому labor-программа лечит не ту строку. (3) Формулирует **фальсифицируемую** гипотезу до Exhibit B: перерасход по parts **сконцентрирован** в подмножестве из **12,000** лифтов (старый парк), а не размазан равномерно, и называет, чем это проверяется — parts на юнит в разрезе когорт возраста.\n\n**НЕ зачёт, если:** гипотеза звучит как «инфляция бьёт всё равномерно» / «подорожали запчасти у всех» — это нефальсифицируемо и не даёт что искать в Exhibit B. Также не зачёт, если кандидат принимает версию про overtime, или объясняет падение маржи стагнацией выручки (выручка выросла).\n\n> 🔄 **Шаг гипотезы (до Exhibit B):** *«Что ожидаешь увидеть в разбивке по когортам?»*\n> **Сильная:** parts выросли +$3.8M против labor +$1.1M — проблема в запчастях, и она, вероятно, **сконцентрирована** (старый парк), а не размазана. **Слабая:** «инфляция бьёт всё равномерно».",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": []
@@ -11827,7 +11827,7 @@
      "title": "категорийные данные (синдицированное исследование)",
      "reveal": "auto",
      "triggers": [],
-     "body_md": "| Метрика | Значение |\n|---|---|\n| Refill-доля категории | 19%, растёт |\n| Покупатели refill, новые для бренда | **52%** *(в среднем по категории)* |\n| Маржа: bottle $6.00 − $2.40 = **$3.60** (60%) | pouch $3.60 − $1.08 = **$2.52** (70%) |\n\n> 🔄 **Шаг гипотезы (до Exhibit B):** *«Категорийные 52% new-to-brand — переносятся ли на Lumessa? Что ожидаешь в собственном тест-рынке?»*\n> **Сильная:** Lumessa — **лидер** (Kellogg: P&G/Unilever ≈ половина рынка). У малых брендов refill рекрутирует чужих; у лидера «чужих» мало — новых будет **меньше** 48%, подмен больше. **Слабая:** «категорийная средняя применима».",
+     "body_md": "| Метрика | Значение |\n|---|---|\n| Refill-доля категории | 19%, растёт |\n| Покупатели refill, новые для бренда | **52%** *(в среднем по категории)* |\n| Маржа: bottle $6.00 − $2.40 = **$3.60** (60%) | pouch $3.60 − $1.08 = **$2.52** (70%) |",
      "render": {
       "type": "table",
       "title": "категорийные данные (синдицированное исследование)",
@@ -11895,7 +11895,7 @@
      "step": 2,
      "label": "Exhibit A + 🔄 hypothesis  (4 min)",
      "candidate_md": "Разбери exA.",
-     "interviewer_md": "**Зачёт, если ВСЕ:** (1) сказал, что **категорийные 52% new-to-brand нельзя переносить** на Lumessa напрямую — это средняя по категории, а не по игроку; (2) назвал механизм лидерства: у малых брендов refill рекрутирует чужих покупателей, у **лидера категории** «чужих» мало, поэтому ожидаемая доля новых для бренда **ниже 48%**, а подмены собственной бутылки — выше; (3) держит в руках долларовую маржу, а не процентную: pouch **$2.52** против bottle **$3.60**, то есть каждая подмена стоит **−$1.08**, значит доля подмен — это и есть переменная, решающая кейс (при 8.4M pouches и launch cost $6.5M).\n\n**НЕ зачёт, если:** кандидат принимает 52% как применимую к Lumessa вводную («категорийная средняя применима»), или формулирует гипотезу без направления — «посмотрим, что покажет тест» вместо «у лидера новых будет меньше, подмен больше»; равно не зачёт, если продолжает опираться на 70% vs 60% маржи в процентах.",
+     "interviewer_md": "**Зачёт, если ВСЕ:** (1) сказал, что **категорийные 52% new-to-brand нельзя переносить** на Lumessa напрямую — это средняя по категории, а не по игроку; (2) назвал механизм лидерства: у малых брендов refill рекрутирует чужих покупателей, у **лидера категории** «чужих» мало, поэтому ожидаемая доля новых для бренда **ниже 48%**, а подмены собственной бутылки — выше; (3) держит в руках долларовую маржу, а не процентную: pouch **$2.52** против bottle **$3.60**, то есть каждая подмена стоит **−$1.08**, значит доля подмен — это и есть переменная, решающая кейс (при 8.4M pouches и launch cost $6.5M).\n\n**НЕ зачёт, если:** кандидат принимает 52% как применимую к Lumessa вводную («категорийная средняя применима»), или формулирует гипотезу без направления — «посмотрим, что покажет тест» вместо «у лидера новых будет меньше, подмен больше»; равно не зачёт, если продолжает опираться на 70% vs 60% маржи в процентах.\n\n> 🔄 **Шаг гипотезы (до Exhibit B):** *«Категорийные 52% new-to-brand — переносятся ли на Lumessa? Что ожидаешь в собственном тест-рынке?»*\n> **Сильная:** Lumessa — **лидер** (Kellogg: P&G/Unilever ≈ половина рынка). У малых брендов refill рекрутирует чужих; у лидера «чужих» мало — новых будет **меньше** 48%, подмен больше. **Слабая:** «категорийная средняя применима».",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": []
@@ -11991,7 +11991,7 @@
      "title": "bid cost model (внутренняя)",
      "reveal": "auto",
      "triggers": [],
-     "body_md": "| Статья | Сумма | Основание |\n|---|---|---|\n| Labor | 2.1M hrs × $96 = $201.6M | ставка **текущего года**; learning curve 85% |\n| Materials | $328M | прайс **текущего года** |\n| NRE / test | $148M | план |\n| **Итого** | **$677.6M** | margin $162.4M (19.3%) |\n\n*График трудоёмкости по годам: 12% / 18% / 22% / 20% / 16% / 12%. Закупки материалов: годы 2–5 = 10% / 30% / 35% / 25%.*\n\n> 🔄 **Шаг гипотезы (до Exhibit B):** *«Что ожидаешь от union-соглашения и индексов материалов?»*\n> **Сильная:** labor предсказуем (профсоюзная сетка известна), materials — хуже (титан/авионика волатильны); плюс где-то должна сидеть сертификация, которой в модели **нет как статьи**. **Слабая:** «инфляция ~2–3%, поправим коэффициентом».",
+     "body_md": "| Статья | Сумма | Основание |\n|---|---|---|\n| Labor | 2.1M hrs × $96 = $201.6M | ставка **текущего года**; learning curve 85% |\n| Materials | $328M | прайс **текущего года** |\n| NRE / test | $148M | план |\n| **Итого** | **$677.6M** | margin $162.4M (19.3%) |\n\n*График трудоёмкости по годам: 12% / 18% / 22% / 20% / 16% / 12%. Закупки материалов: годы 2–5 = 10% / 30% / 35% / 25%.*",
      "render": {
       "type": "table",
       "title": "bid cost model (внутренняя)",
@@ -12076,8 +12076,8 @@
     {
      "step": 3,
      "label": "Exhibit A + 🔄 hypothesis  (4 min)",
-     "candidate_md": "*График трудоёмкости по годам: 12% / 18% / 22% / 20% / 16% / 12%. Закупки материалов: годы 2–5 = 10% / 30% / 35% / 25%.*\n\n> 🔄 **Шаг гипотезы (до Exhibit B):** *«Что ожидаешь от union-соглашения и индексов материалов?»*\n> **Сильная:** labor предсказуем (профсоюзная сетка известна), materials — хуже (титан/авионика волатильны); плюс где-то должна сидеть сертификация, которой в модели **нет как статьи**. **Слабая:** «инфляция ~2–3%, поправим коэффициентом».\n\nДанные — в exA.",
-     "interviewer_md": "**Зачёт, если ВСЕ:** (1) читает не суммы, а **основание** строк: ставка **$96** и прайс материалов **$328M** взяты по **текущему году**, тогда как программа **6-летняя и fixed-price** — то есть вся эскалация лежит на подрядчике, а в модели её нет ни одной строкой; маржа **$162.4M (19.3%)** посчитана в ценах года 0; (2) использует профили из exhibit'а: трудоёмкость по годам **12% / 18% / 22% / 20% / 16% / 12%**, закупки материалов годы 2–5 **10% / 30% / 35% / 25%** — и делает вывод, что основная масса и труда, и материалов приходится на поздние годы, где расхождение с базой максимально, а не распределена ровно; (3) в гипотезе **до Exhibit B** разделяет два источника по предсказуемости: labor предсказуем (профсоюзная сетка известна заранее), materials — нет (титан/авионика волатильны); (4) называет пропущенную статью: **first-article qualification / сертификация** отсутствует в модели как строка, при том что заявлена **85% learning curve**, которая сама по себе не покрывает стоимость квалификации.\n\n**НЕ зачёт, если:** гипотеза сводится к «инфляция ~2–3%, поправим коэффициентом» (обезличенный индекс вместо контрактно определённого механизма), либо кандидат проверяет только арифметику **$201.6M + $328M + $148M = $677.6M** и маржу **19.3%**, не спросив, к какому году относятся ставка и прайс.",
+     "candidate_md": "*График трудоёмкости по годам: 12% / 18% / 22% / 20% / 16% / 12%. Закупки материалов: годы 2–5 = 10% / 30% / 35% / 25%.*\n\n\nДанные — в exA.",
+     "interviewer_md": "**Зачёт, если ВСЕ:** (1) читает не суммы, а **основание** строк: ставка **$96** и прайс материалов **$328M** взяты по **текущему году**, тогда как программа **6-летняя и fixed-price** — то есть вся эскалация лежит на подрядчике, а в модели её нет ни одной строкой; маржа **$162.4M (19.3%)** посчитана в ценах года 0; (2) использует профили из exhibit'а: трудоёмкость по годам **12% / 18% / 22% / 20% / 16% / 12%**, закупки материалов годы 2–5 **10% / 30% / 35% / 25%** — и делает вывод, что основная масса и труда, и материалов приходится на поздние годы, где расхождение с базой максимально, а не распределена ровно; (3) в гипотезе **до Exhibit B** разделяет два источника по предсказуемости: labor предсказуем (профсоюзная сетка известна заранее), materials — нет (титан/авионика волатильны); (4) называет пропущенную статью: **first-article qualification / сертификация** отсутствует в модели как строка, при том что заявлена **85% learning curve**, которая сама по себе не покрывает стоимость квалификации.\n\n**НЕ зачёт, если:** гипотеза сводится к «инфляция ~2–3%, поправим коэффициентом» (обезличенный индекс вместо контрактно определённого механизма), либо кандидат проверяет только арифметику **$201.6M + $328M + $148M = $677.6M** и маржу **19.3%**, не спросив, к какому году относятся ставка и прайс.\n\n> 🔄 **Шаг гипотезы (до Exhibit B):** *«Что ожидаешь от union-соглашения и индексов материалов?»*\n> **Сильная:** labor предсказуем (профсоюзная сетка известна), materials — хуже (титан/авионика волатильны); плюс где-то должна сидеть сертификация, которой в модели **нет как статьи**. **Слабая:** «инфляция ~2–3%, поправим коэффициентом».",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": []
@@ -13365,7 +13365,7 @@
    "generation": null,
    "est_minutes": "30",
    "header_md": "## Case 75 — Trainspotting (Railcore Systems) · Cost Reduction · Medium · Trap-flip · **open-drive**\n\n> **ПЛАШКА** \n> **Тип:** Cost Reduction · **Индустрия:** Rail · **Формат:** NA  \n> **Difficulty:** 🟡 Medium · **Depth:** 🔥 STRONG · **Соответствие:** ↑выше  \n> **T/C:** Trap fixed-cost allocation · **Время:** —  \n> **Экспонаты (2):** table — Exhibit A — Plant P&L.  \n> **Reveal:** on_request\n> **optimal_entry:** 4  \n>  \n> **Слои insight:** ① F7 самоопровержение ② **#14 fixed-cost allocation** ③ sensitivity: при какой утилизации переворот\n\n**Cost Reduction · Rail · Medium · Trap · naive #14 fixed-cost allocation · gen C**\n*Registry: Trainspotting*\n\n**Grounding (Stern Industrials p.22):** capital-intensive manufacturing (leased/owned); union labor; key metrics **capacity utilization** + **book-to-bill**; bundled aftermarket/maintenance. → Plant closure decisions must separate avoidable plant cost from unavoidable allocated corporate overhead.",
-   "prompt_md": "Railcore Systems assembles rail equipment at three plants. **Plant C** reports the worst EBIT (occupancy only 50%). An analyst recommends closing it to cut costs. Should Railcore close Plant C? (WACC 10%.)\n\n**Open-drive (after framework):** interviewer offers four directions — (a) plant utilization, (b) fixed/variable cost split, (c) **corporate-overhead allocation basis**, (d) aftermarket revenue by plant. *Optimal:* (c) first (surfaces the trap), then (b). *Red flag:* jumping to (a) and concluding \"close the low-util plant\" without checking (c).",
+   "prompt_md": "Railcore Systems assembles rail equipment at three plants. **Plant C** reports the worst EBIT (occupancy only 50%). An analyst recommends closing it to cut costs. Should Railcore close Plant C? (WACC 10%.)\n\n**Open-drive (after framework):** four directions are on the table — (a) plant utilization, (b) fixed/variable cost split, (c) corporate-overhead allocation basis, (d) aftermarket revenue by plant. Choose your order.",
    "exhibits": [
     {
      "id": "ex1",
@@ -13472,7 +13472,7 @@
      "step": 1,
      "label": "Framework.",
      "candidate_md": "Take a minute and structure it — how would you decide whether Railcore should actually close Plant C?",
-     "interviewer_md": "**Pass if ALL:** (1) frames closure as an **avoidable-cost** test — what cash cost genuinely disappears if Plant C shuts, versus what stays with the company regardless; (2) states explicitly that plant-level avoidable cost must be **separated from allocated corporate overhead** before the reported EBIT can be used to judge the plant; (3) puts the other side of the ledger up too — the contribution lost with Plant C's volume, and whether that volume can be absorbed by the other plants, before any close/keep call.\n\n**Fail if:** takes the reported Plant C EBIT as the decision metric and builds the structure around how to close (severance, logistics, timing) rather than whether to; or treats the **50%** occupancy as proof of the answer without testing the cost allocation behind the loss.",
+     "interviewer_md": "**Pass if ALL:** (1) frames closure as an **avoidable-cost** test — what cash cost genuinely disappears if Plant C shuts, versus what stays with the company regardless; (2) states explicitly that plant-level avoidable cost must be **separated from allocated corporate overhead** before the reported EBIT can be used to judge the plant; (3) puts the other side of the ledger up too — the contribution lost with Plant C's volume, and whether that volume can be absorbed by the other plants, before any close/keep call.\n\n**Fail if:** takes the reported Plant C EBIT as the decision metric and builds the structure around how to close (severance, logistics, timing) rather than whether to; or treats the **50%** occupancy as proof of the answer without testing the cost allocation behind the loss.\n\n**Open-drive, ответ для ведущего.** Optimal: (c) first — it surfaces the trap — then (b). Red flag: jumping to (a) and concluding \"close the low-util plant\" without checking (c).",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": []
@@ -15512,8 +15512,8 @@
     {
      "step": 5,
      "label": "Direction check (why this is OVERSTATE, not flip).",
-     "candidate_md": "Raising the rate still **increases revenue** ($15M > 0) — the decision direction (raise) is correct. The error is **magnitude**: $30M projected vs $15M real, a **100% overstatement**. Tag: **Trap-overstate**, not flip.",
-     "interviewer_md": "```python\noverstatement=(naive_gain-correct_gain)/correct_gain*100   # 100.0\n```",
+     "candidate_md": "Is the error in the direction of the decision or in its magnitude? Quantify it.",
+     "interviewer_md": "```python\noverstatement=(naive_gain-correct_gain)/correct_gain*100   # 100.0\n```\n\nRaising the rate still **increases revenue** ($15M > 0) — the decision direction (raise) is correct. The error is **magnitude**: $30M projected vs $15M real, a **100% overstatement**. Tag: **Trap-overstate**, not flip.",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
@@ -15806,8 +15806,8 @@
     {
      "step": 1,
      "label": "Framework + open-drive.",
-     "candidate_md": "Interviewer offers: (a) revenue by route, (b) cost by route, (c) profit by route, (d) strategic fit. Candidate picks order. Optimal: get **cost (b)** before ranking — revenue alone is the wrong criterion. Red-flag: rank by revenue and stop.",
-     "interviewer_md": "**Pass if ALL:** (1) states a hypothesis up front that the ranking criterion itself is wrong — management wants the highest-**revenue** route, but with only **one** launch slot the choice must be made on profit per route, since **$48M** of revenue against **$44M** of cost is not the same asset as **$36M** against **$26M**; (2) structure has at least three MECE buckets covering route economics (revenue and cost per route, so a cost side is present), feasibility and capacity (aircraft, slots, crew — the one-route constraint), and strategic/competitive fit, framed as a mutually exclusive choice among A, B and C rather than a generic market-entry tree; (3) drives the case: names **cost by route (b)** — or profit by route (c) — as the first thing to establish, explicitly **before** any ranking, and defers strategic fit (d) to a tie-break.\n\n**Fail if:** the candidate ranks on revenue and picks Route A, or opens on strategic fit (d) / market attractiveness before the cost side, or presents a demand-only framework with no cost bucket and no stated ranking criterion.",
+     "candidate_md": "Interviewer offers: (a) revenue by route, (b) cost by route, (c) profit by route, (d) strategic fit. Candidate picks order.",
+     "interviewer_md": "**Pass if ALL:** (1) states a hypothesis up front that the ranking criterion itself is wrong — management wants the highest-**revenue** route, but with only **one** launch slot the choice must be made on profit per route, since **$48M** of revenue against **$44M** of cost is not the same asset as **$36M** against **$26M**; (2) structure has at least three MECE buckets covering route economics (revenue and cost per route, so a cost side is present), feasibility and capacity (aircraft, slots, crew — the one-route constraint), and strategic/competitive fit, framed as a mutually exclusive choice among A, B and C rather than a generic market-entry tree; (3) drives the case: names **cost by route (b)** — or profit by route (c) — as the first thing to establish, explicitly **before** any ranking, and defers strategic fit (d) to a tie-break.\n\n**Fail if:** the candidate ranks on revenue and picks Route A, or opens on strategic fit (d) / market attractiveness before the cost side, or presents a demand-only framework with no cost bucket and no stated ranking criterion.\n\n**Open-drive, ответ для ведущего.** Optimal: get **cost (b)** before ranking — revenue alone is the wrong criterion. Red-flag: rank by revenue and stop.",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": []
@@ -16724,8 +16724,8 @@
     {
      "step": 1,
      "label": "Framework + open-drive.",
-     "candidate_md": "Interviewer offers: (a) green-sawing capacity, (b) kiln-drying capacity, (c) demand, (d) capex. Candidate picks order. Optimal: check the **kiln** (downstream bottleneck) before valuing extra green output. Red-flag: value extra green × price and stop.",
-     "interviewer_md": "**Pass if ALL:** (1) at least 3 MECE buckets that cover the *downstream* step (kiln-drying capacity), market demand for the extra output, and the $30M capex economics — a framework with only capacity and capex is incomplete; (2) explicitly names the **kiln** as the first area to open and justifies it as the binding constraint: the extra 100,000 board-ft/day (300,000 − 200,000) is only sellable at $0.80/bf if the kiln can dry it, so green-sawing capacity alone does not create saleable output; (3) states a hypothesis before asking for data — the expansion pays only if the whole chain, not just the saw, can carry 300,000 bf/day over the 300 days.\n\n**Fail if:** the candidate opens on (a) green-sawing capacity or (d) capex and prices the expansion as 100,000 bf × $0.80 × 300 days against $30M before establishing that the downstream kiln can absorb the extra volume.",
+     "candidate_md": "Interviewer offers: (a) green-sawing capacity, (b) kiln-drying capacity, (c) demand, (d) capex. Candidate picks order.",
+     "interviewer_md": "**Pass if ALL:** (1) at least 3 MECE buckets that cover the *downstream* step (kiln-drying capacity), market demand for the extra output, and the $30M capex economics — a framework with only capacity and capex is incomplete; (2) explicitly names the **kiln** as the first area to open and justifies it as the binding constraint: the extra 100,000 board-ft/day (300,000 − 200,000) is only sellable at $0.80/bf if the kiln can dry it, so green-sawing capacity alone does not create saleable output; (3) states a hypothesis before asking for data — the expansion pays only if the whole chain, not just the saw, can carry 300,000 bf/day over the 300 days.\n\n**Fail if:** the candidate opens on (a) green-sawing capacity or (d) capex and prices the expansion as 100,000 bf × $0.80 × 300 days against $30M before establishing that the downstream kiln can absorb the extra volume.\n\n**Open-drive, ответ для ведущего.** Optimal: check the **kiln** (downstream bottleneck) before valuing extra green output. Red-flag: value extra green × price and stop.",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": []
@@ -17005,8 +17005,8 @@
     {
      "step": 1,
      "label": "Framework + open-drive.",
-     "candidate_md": "Interviewer offers: (a) new-grove gross output, (b) buyer/contract structure, (c) grove cost, (d) water/land constraints. Candidate picks order. Optimal: check **buyer overlap** before trusting gross output. Red-flag: gross × price and stop.",
-     "interviewer_md": "**Pass if ALL:** (1) States an incrementality hypothesis before any math — the new grove's output is only worth **$40/box** if it is sold to buyers who are not already taking Citricor fruit; volume that displaces existing sales adds nothing. (2) Picks **buyer / contract structure** first from the offered menu and justifies the order: gross output is uninterpretable until buyer overlap is known, so (a), (c), (d) come after. (3) The structure carries both sides: revenue = truly incremental boxes × price (net of displaced existing volume) and cost = the **$1.3M/yr** grove operating cost plus any water/land constraint cost.\n\n**Fail if:** Candidate computes 50,000 × $40 = $2.0M, nets the $1.3M and calls the resulting $0.7M incremental profit; or opens on grove cost or water/land and treats gross output as incremental by default.",
+     "candidate_md": "Interviewer offers: (a) new-grove gross output, (b) buyer/contract structure, (c) grove cost, (d) water/land constraints. Candidate picks order.",
+     "interviewer_md": "**Pass if ALL:** (1) States an incrementality hypothesis before any math — the new grove's output is only worth **$40/box** if it is sold to buyers who are not already taking Citricor fruit; volume that displaces existing sales adds nothing. (2) Picks **buyer / contract structure** first from the offered menu and justifies the order: gross output is uninterpretable until buyer overlap is known, so (a), (c), (d) come after. (3) The structure carries both sides: revenue = truly incremental boxes × price (net of displaced existing volume) and cost = the **$1.3M/yr** grove operating cost plus any water/land constraint cost.\n\n**Fail if:** Candidate computes 50,000 × $40 = $2.0M, nets the $1.3M and calls the resulting $0.7M incremental profit; or opens on grove cost or water/land and treats gross output as incremental by default.\n\n**Open-drive, ответ для ведущего.** Optimal: check **buyer overlap** before trusting gross output. Red-flag: gross × price and stop.",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": []
@@ -23278,7 +23278,7 @@
       "ask about parts and service",
       "what else do they make money on"
      ],
-     "body_md": "> \"EBIT margin on new equipment is **4.00%**: tenders are competitive and the customer sets the price.\n> EBIT margin on parts and service is **31.00%** (after-sales service, Kellogg p.222).\n> The installed base is **9,400 units**. Parts and service revenue is **$11,500** per unit per year.\n> **58.00%** of the base is under a service contract.\n> Comparable transactions in SERVICE businesses: Servitor Industrial / Halden Group 11.5×, Bracknell Rotating Equipment 12.0×, Wendell Power Services 13.0×, Kestrel Compression 11.5×. Pure OEM manufacturers trade at 6–7×.\"",
+     "body_md": "> \"EBIT margin on new equipment is **4.00%**: tenders are competitive and the customer sets the price.\n> EBIT margin on parts and service is **31.00%**.\n> The installed base is **9,400 units**. Parts and service revenue is **$11,500** per unit per year.\n> **58.00%** of the base is under a service contract.\n> Comparable transactions in SERVICE businesses: Servitor Industrial / Halden Group 11.5×, Bracknell Rotating Equipment 12.0×, Wendell Power Services 13.0×, Kestrel Compression 11.5×. Pure OEM manufacturers trade at 6–7×.\"",
      "render": null,
      "render_omitted": {
       "reason": "memo",
@@ -24408,7 +24408,7 @@
    "generation": null,
    "est_minutes": "31",
    "header_md": "## Case 140 — You Can't Handle the Tooth\n\n> **ПЛАШКА** \n> **Тип:** M&A · **Индустрия:** Dental DSO · **Формат:** F5  \n> **Difficulty:** 🟡 Medium · **Depth:** ⚠️ STANDARD · **Соответствие:** OK  \n> **T/C:** Clean · **Время:** ~31 min  \n> **Экспонаты (2):** table — Клиники цели; memo — MEMO — заметки due diligence  \n> **Reveal:** on_request\n> **optimal_entry:** 2  \n\n**M&A · Dental DSO · Medium · Clean · ~31 min · gen E**\n*Registry: You Can't Handle the Tooth*\n\n**Type · Dental DSO · F5 · Ловушка #140 (CLEAN — validate no reversal) · Depth: STANDARD**\nDifficulty: Medium · Prototype: Smile Direct / европейские DSO · IO: Healthcare Providers (chair/bed capacity utilization), Stern p.16 · Layers: brainstorm",
-   "prompt_md": "**Ordwyn Dental**, a dental services organisation, is considering the purchase of a four-practice group. The economics look clean. Should they buy?\n\n*(Clean case: naive and correct agree. The candidate's job is to name and CLOSE the hypotheses of a hidden reversal with a calculation, not to say \"the numbers add up\".)*",
+   "prompt_md": "**Ordwyn Dental**, a dental services organisation, is considering the purchase of a four-practice group. The economics look clean. Should they buy?",
    "exhibits": [
     {
      "id": "ex1",
@@ -24518,7 +24518,7 @@
      "step": 1,
      "label": "Framework (4 min)",
      "candidate_md": "How would you decide whether to buy?",
-     "interviewer_md": "Pass requires ALL of: (1) hypothesis first; (2) at least 3 MECE buckets; (3) the entry multiple named explicitly against the funding limit; (4) a closing question.",
+     "interviewer_md": "Pass requires ALL of: (1) hypothesis first; (2) at least 3 MECE buckets; (3) the entry multiple named explicitly against the funding limit; (4) a closing question.\n\n**Для ведущего.** *(Clean case: naive and correct agree. The candidate's job is to name and CLOSE the hypotheses of a hidden reversal with a calculation, not to say \"the numbers add up\".)*",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [],
@@ -26784,7 +26784,7 @@
    "generation": null,
    "est_minutes": "26",
    "header_md": "## Case 150 — The Vend of the Affair\n\n> **ПЛАШКА** \n> **Тип:** Growth Strategy · **Индустрия:** Вендинг · **Формат:** F5  \n> **Difficulty:🟡 Medium · **Depth:** ⚠️ STANDARD · **Соответствие:** OK  \n> **T/C:** Clean · **Время:** ~26 min  \n> **Экспонаты (2):** table — Предлагаемое размещение; memo — MEMO — существующий парк  \n> **Reveal:** on_request\n> **optimal_entry:** 2  \n\n**Growth Strategy · Вендинг · Easy · Clean · ~26 min · gen F**\n*Registry: The Vend of the Affair*\n\n**Type · Вендинг · F5 · Ловушка #150 (CLEAN — validate no reversal) · Depth: LIGHT**\nDifficulty: Medium · Prototype: оператор unattended retail · IO: Retail — выручка на автомат-день · Layers: mental-math",
-   "prompt_md": "**Vantrode Machines** proposes placing 240 new machines across four site types. The economics look clean. Should they launch?\n\n*(Clean case: naive and correct agree — GO. The candidate's job is to NAME the hypotheses of a hidden reversal and CLOSE each one with a calculation, not to say \"the numbers add up\".)*",
+   "prompt_md": "**Vantrode Machines** proposes placing 240 new machines across four site types. The economics look clean. Should they launch?",
    "exhibits": [
     {
      "id": "ex1",
@@ -26883,7 +26883,7 @@
      "step": 1,
      "label": "Framework (4 min)",
      "candidate_md": "How would you decide whether to launch?",
-     "interviewer_md": "Pass requires ALL of: (1) hypothesis first; (2) at least 3 MECE buckets; (3) **the hypotheses of a possible reversal named explicitly**; (4) a closing question.",
+     "interviewer_md": "Pass requires ALL of: (1) hypothesis first; (2) at least 3 MECE buckets; (3) **the hypotheses of a possible reversal named explicitly**; (4) a closing question.\n\n**Для ведущего.** *(Clean case: naive and correct agree — GO. The candidate's job is to NAME the hypotheses of a hidden reversal and CLOSE each one with a calculation, not to say \"the numbers add up\".)*",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [],
@@ -29069,7 +29069,7 @@
    "generation": null,
    "est_minutes": "25",
    "header_md": "## Case 160 — The Postman Always Ships Twice\n\n> **ПЛАШКА** \n> **Тип:** Growth Strategy · **Индустрия:** Сборные грузоперевозки · **Формат:** F5  \n> **Difficulty:🟡 Medium · **Depth:** ⚠️ STANDARD · **Соответствие:** OK  \n> **T/C:** Clean · **Время:** ~25 min  \n> **Экспонаты (2):** table — Программа кубирования по направлениям; memo — MEMO — реакция рынка  \n> **Reveal:** on_request\n> **optimal_entry:** 2  \n\n**Growth Strategy · Сборные грузоперевозки · Easy · Clean · ~25 min · gen F**\n*Registry: The Postman Always Ships Twice*\n\n**Type · Сборные грузоперевозки (LTL) · F5 · Ловушка #160 (CLEAN — validate no reversal) · Depth: LIGHT**\nDifficulty: Medium · Prototype: перевозчик сборных грузов · IO: Logistics — оплачиваемый вес против объёма · Layers: 1",
-   "prompt_md": "**Palfreight Group** rates less-than-truckload freight on actual weight. A cubing programme is proposed: rate on the greater of actual and volumetric weight. Should they launch it?\n\n*(Clean case: naive and correct agree — GO. The candidate's job is to NAME the hypotheses of a hidden reversal and CLOSE each one with a calculation, not to say \"the numbers add up\".)*",
+   "prompt_md": "**Palfreight Group** rates less-than-truckload freight on actual weight. A cubing programme is proposed: rate on the greater of actual and volumetric weight. Should they launch it?",
    "exhibits": [
     {
      "id": "ex1",
@@ -29159,7 +29159,7 @@
      "step": 1,
      "label": "Framework (4 min)",
      "candidate_md": "How would you decide whether to launch the programme?",
-     "interviewer_md": "Pass requires ALL of: (1) hypothesis first; (2) at least 3 MECE buckets; (3) **the hypotheses of a possible reversal named explicitly**; (4) a closing question.",
+     "interviewer_md": "Pass requires ALL of: (1) hypothesis first; (2) at least 3 MECE buckets; (3) **the hypotheses of a possible reversal named explicitly**; (4) a closing question.\n\n**Для ведущего.** *(Clean case: naive and correct agree — GO. The candidate's job is to NAME the hypotheses of a hidden reversal and CLOSE each one with a calculation, not to say \"the numbers add up\".)*",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [],
@@ -29629,8 +29629,8 @@
     {
      "step": 3,
      "label": "CORE: the SLA term (7 min)",
-     "candidate_md": "What does the contract say about spoilage?",
-     "interviewer_md": "```\nSLA TERM (released when the candidate asks):\nA consignment arriving outside 2-8 °C is reimbursed by the contractor at the\nVALUE OF THE DOSES — $4,120 per thousand doses — not at the transport tariff.\n\nLiability by lot:\n  Metro     24,800 × 0.4% × $4,120 =   $408,704\n  Regional  13,100 × 1.1% × $4,120 =   $593,692\n  Remote     4,600 × 7.9% × $4,120 = $1,497,208\n  ─────────────────────────────────────────────\n  TOTAL                              $2,499,604\n```\n**Answer: dose value of $4,120 against a tariff of $315-960 — reimbursement is 4 to 13 times dearer than the carriage itself. The liability is comparable to the whole contribution of the programme.**",
+     "candidate_md": "The contract reimburses any consignment that arrives outside 2-8 °C at the VALUE OF THE DOSES — $4,120 per thousand doses — not at the transport tariff. What does that term do to the economics of the three lots?",
+     "interviewer_md": "```\nSLA TERM (stated aloud in the step question):\nA consignment arriving outside 2-8 °C is reimbursed by the contractor at the\nVALUE OF THE DOSES — $4,120 per thousand doses — not at the transport tariff.\n\nLiability by lot:\n  Metro     24,800 × 0.4% × $4,120 =   $408,704\n  Regional  13,100 × 1.1% × $4,120 =   $593,692\n  Remote     4,600 × 7.9% × $4,120 = $1,497,208\n  ─────────────────────────────────────────────\n  TOTAL                              $2,499,604\n```\n**Answer: dose value of $4,120 against a tariff of $315-960 — reimbursement is 4 to 13 times dearer than the carriage itself. The liability is comparable to the whole contribution of the programme.**",
      "hints": {
       "L1": "What does the contract say the contractor owes when a consignment goes out of range?",
       "L2": "Ask for the SLA term: the reimbursement basis decides whether spoilage is our loss at all."
@@ -29872,7 +29872,7 @@
      "step": 3,
      "label": "CORE, layer 1: the mix (8 min)",
      "candidate_md": "Decompose it by mix.",
-     "interviewer_md": "```\nShare of cases       Y1        Y3\n  Diagnostics      82.50%    92.22%   (contribution $14/case)\n  Day surgery      13.09%     5.92%   (contribution $595/case)\n  Oncology          4.41%     1.86%   (contribution $3,090/case)\n\nCounterfactual: the same 137,710 Y3 cases in Y1 proportions\n  Diagnostics    ≈113,616 × $14    =  $1,590,619\n  Day surgery     ≈18,022 × $595   = $10,722,966\n  Oncology         ≈6,073 × $3,090 = $18,764,212\n  * case counts are Y1 volumes scaled by 137,710/70,300 and shown rounded;\n    the contributions are computed from the unrounded counts\n  ───────────────────────────────────────────────\n  Contribution                       $31,077,797\n  Counterfactual EBIT                $18,277,797\n\n  Actual EBIT Y3                      $1,737,650\n  MIX EFFECT                        −$16,540,147\n```\n**Answer: the network grew volume 96% in the line worth $14 a case and lost volume in the lines worth $595 and $3,090. Revenue rose, the money left.**",
+     "interviewer_md": "```\nShare of cases       Y1        Y3\n  Diagnostics      82.50%    92.22%   (contribution $14/case)\n  Day surgery      13.09%     5.92%   (contribution $595/case)\n  Oncology          4.41%     1.86%   (contribution $3,090/case)\n\nCounterfactual: the same 137,710 Y3 cases in Y1 proportions\n  Diagnostics    ≈113,616 × $14    =  $1,590,619\n  Day surgery     ≈18,022 × $595   = $10,722,966\n  Oncology         ≈6,073 × $3,090 = $18,764,212\n  * case counts are Y1 volumes scaled by 137,710/70,300 and shown rounded;\n    the contributions are computed from the unrounded counts\n  ───────────────────────────────────────────────\n  Contribution                       $31,077,797\n  Counterfactual EBIT                $18,277,797\n\n  Actual EBIT Y3                      $1,737,650\n  MIX EFFECT                        −$16,540,147\n```\n**Answer: the network grew volume 119% in the line worth $14 a case and lost volume in the lines worth $595 and $3,090. Revenue rose, the money left.**",
      "hints": {
       "L1": "Did the number of cases move, or did the mix behind them move?",
       "L2": "Hold the mix at the first year and recompute — the counterfactual tells you which driver is doing the work."
@@ -30332,7 +30332,7 @@
     {
      "step": 5,
      "label": "Working the budget (6 min)",
-     "candidate_md": "Work out both allocations.",
+     "candidate_md": "The commercial directorate has drafted an alternative split — SMB 20% · Mid-market 45% · Enterprise 35%. Work out both allocations.",
      "interviewer_md": "```\nCURRENT (71/22/7):\n  SMB          $8,165,000 / $3,100   = 2,633 logos × $4,800   =  $12,638,400\n  Mid-market   $2,530,000 / $26,000  =    97 logos × $38,500  =   $3,734,500\n  Enterprise     $805,000 / $142,000 =     5 logos × $196,000 =     $980,000\n  Year 1 ARR                                                     $17,352,900\n\nREALLOCATED (20/45/35):\n  SMB          $2,300,000 / $3,100   =   741 logos × $4,800    =   $3,556,800\n  Mid-market   $5,175,000 / $26,000  =   199 logos × $38,500   =   $7,661,500\n  Enterprise   $4,025,000 / $142,000 =    28 logos × $196,000  =   $5,488,000\n  Year 1 ARR                                                     $16,706,300\n\nRounding: logo counts are rounded DOWN to whole numbers on every line\n(a fraction of a customer cannot be bought).\n```\n**Answer: the current allocation wins in year one — $17,352,900 against $16,706,300. That is exactly why it was chosen.**",
      "hints": {},
      "conditional_exhibits": [],
@@ -30342,7 +30342,7 @@
     {
      "step": 6,
      "label": "The same cohort two years on (5 min)",
-     "candidate_md": "What becomes of those cohorts?",
+     "candidate_md": "What becomes of those cohorts by year three?",
      "interviewer_md": "```\nA cohort lives at its segment's NRR: ARR × NRR²\n\nCURRENT:        SMB $12,638,400 × 0.9120² = $10,511,913\n                MM    $3,734,500 × 1.0208² =  $3,891,471\n                ENT     $980,000 × 1.0368² =  $1,053,455\n                YEAR 3 TOTAL                 $15,456,839\n\nREALLOCATED:    SMB  $3,556,800 × 0.9120² =  $2,958,347\n                MM   $7,661,500 × 1.0208² =  $7,983,533\n                ENT  $5,488,000 × 1.0368² =  $5,899,349\n                YEAR 3 TOTAL                $16,841,229\n```\n**Answer: FLIP. The allocation that won $646,600 in year one is $1,384,390 behind by year three. The SMB logos bought contract 8.8% a year; the Enterprise logos bought grow 3.7%.**",
      "hints": {},
      "conditional_exhibits": [],
@@ -30744,7 +30744,7 @@
       "структура затрат",
       "третья смена"
      ],
-     "body_md": "```\nShift three costs                                  $6,221,850\n\n  labour (with night premium)       $2,760,000  ########\n  material (301,000 × $3.85)        $1,158,850  ###\n  CHANGEOVERS (94 × $24,500)        $2,303,000  #######\n                                    ----------\n                                    $6,221,850\n\n  Changeovers as a share of shift three cost:  37.0%\n  Changeovers as a share of shift 1 cost:     8.5%\n  Changeovers as a share of shift 2 cost:    10.1%\n```\n*Production planning puts product changeovers mainly on the night shift so as not to interrupt the long runs of the day shifts.*",
+     "body_md": "```\nShift three costs                                  $6,221,850\n\n  labour (with night premium)       $2,760,000  ########\n  material (301,000 × $3.85)        $1,158,850  ###\n  CHANGEOVERS (94 × $24,500)        $2,303,000  #######\n                                    ----------\n                                    $6,221,850\n\n  Changeovers as a share of shift three cost:  37.0%\n  Changeovers as a share of shift 1 cost:     8.5%\n  Changeovers as a share of shift 2 cost:    10.1%\n```\n*Production planning puts product changeovers mainly on the night shift so as not to interrupt the long runs of the day shifts.*\n*A changeover moved onto a day shift interrupts a long run and is worked at overtime: **1.85×** the standard changeover cost.*",
      "render": null,
      "render_omitted": {
       "reason": "prose_data",
@@ -30801,7 +30801,7 @@
     {
      "step": 5,
      "label": "The right action (5 min)",
-     "candidate_md": "What should be done instead?",
+     "candidate_md": "A pilot has found a way to cut the number of changeovers by 60%, with the shifts and the volume kept. What should be done instead, and what is it worth?",
      "interviewer_md": "```\nResequence production: group similar SKUs and cut the number of\nchangeovers by 60% (confirmed in a pilot).\n\n  94 × 60% = 56.4 changeovers × $24,500 = +$1,381,800\n\nShifts are kept, volume is kept.\n\nGap between the right action and the naive one:\n  $1,381,800 − (−$2,914,900) = $4,296,700\n```\n**Answer: the right action is not to close the carrier of the cost but to remove the cost itself. The difference between the two decisions is $4,296,700.**",
      "hints": {},
      "conditional_exhibits": [],
@@ -32516,7 +32516,7 @@
      "step": 8,
      "label": "Final synthesis",
      "candidate_md": "What do you recommend to the investor? One recommendation.",
-     "interviewer_md": "**Partner-level answer (Pyramid):**\n> We recommend **not funding the production expansion, and making audience retention a condition of the deal**. Growth of 6.2% a month is not growth of the business: **62% of the base is 2,542,000 listeners from a single viral episode**, leaving at 21% a month. In a year 150,211 of them remain, the organic base at its 2.1% reaches 1,999,293, and the total audience is **2,149,504 against the projected 8,438,749** — a halving, not a doubling. Profit moves from **$318,274.34 to a loss of $56,061.52** a month. **Internal risk:** tripling production raises fixed costs at the moment the base is contracting — we would double the loss rather than remove it. **External risk:** a repeat of the viral effect is outside our control and cannot be modelled; the platform algorithms that produced the first spike change without notice. **Actions:** within 30 days — split reporting by cohort and start measuring retention separately from total downloads; within 90 days — raise organic growth to 4.4%, at which the base stops shrinking, and only then return to the conversation about expansion.",
+     "interviewer_md": "**Partner-level answer (Pyramid):**\n> We recommend **not funding the production expansion, and making audience retention a condition of the deal**. Growth of 6.2% a month is not growth of the business: **62% of the base is 2,542,000 listeners from a single viral episode**, leaving at 21% a month. In a year 150,211 of them remain, the organic base at its 2.1% reaches 1,999,293, and the total audience is **2,149,504 against the projected 8,438,749** — a halving, not a doubling. Profit moves from **$318,274.34 to a loss of $56,061.52** a month. **Internal risk:** tripling production raises fixed costs at the moment the base is contracting — we would double the loss rather than remove it. **External risk:** a repeat of the viral effect is outside our control and cannot be modelled; the platform algorithms that produced the first spike change without notice. **Actions:** within 30 days — split reporting by cohort and start measuring retention separately from total downloads; within 90 days — raise organic growth to 8.1%, at which the base stops shrinking, and only then return to the conversation about expansion.",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
@@ -32566,7 +32566,7 @@
       "спросить про EBITDA",
       "спросить про мультипл"
      ],
-     "body_md": "| Measure | Value |\n|---|---|\n| Revenue | $62,400,000 |\n| EBITDA margin | 14.8% |\n| Comparable transaction multiple | 9.2× EBITDA |\n| Auction price | $148,000,000 |\n| Discount rate | 11% |",
+     "body_md": "| Measure | Value |\n|---|---|\n| Revenue | $62,400,000 |\n| EBITDA margin | 14.8% |\n| Comparable transaction multiple | 9.2× EBITDA |\n| Auction price | $148,000,000 |\n| Discount rate | 11% |\n| Synergy horizon | in perpetuity (no fade assumed) |",
      "render": {
       "type": "table",
       "title": "Financial profile of the target",
@@ -33010,7 +33010,7 @@
      "step": 8,
      "label": "Final synthesis",
      "candidate_md": "What do you recommend to the board? One recommendation.",
-     "interviewer_md": "**Partner-level answer (Pyramid):**\n> We recommend **approving the development director's choice — M6 Services, A1 Motorway and City Hub — but revising the criterion on which it is made**. The three sites deliver a combined contribution of **£2,828,500.64** a year, and this is genuinely the best set of six. But the choice by traffic coincided with the choice by contribution by chance: grid tariffs differ by a factor of 2.5 and connection costs by a factor of five, and on a different set of sites those differences would have given a different answer. **Internal risk:** a criterion of \"take the busiest\" contains neither the grid tariff nor the connection cost — at the next round of selection it will very likely produce the wrong set. **External risk:** grid tariffs are set by the distribution network operators and reviewed by the regulator; a rise in the City Hub tariff to £0.148 would put it level with Rail Park. **Actions:** within 30 days — write selection on contribution after connection, rather than on traffic, into the investment policy; within 90 days — approach the network operator about co-funding the A1 connection, where £420,000 a year consumes a third of the site's margin advantage.",
+     "interviewer_md": "**Partner-level answer (Pyramid):**\n> We recommend **approving the development director's choice — M6 Services, A1 Motorway and City Hub — but revising the criterion on which it is made**. The three sites deliver a combined contribution of **£2,828,500.64** a year, and this is genuinely the best set of six. But the choice by traffic coincided with the choice by contribution by chance: grid tariffs differ by a factor of 2.5 and connection costs by a factor of five, and on a different set of sites those differences would have given a different answer. **Internal risk:** a criterion of \"take the busiest\" contains neither the grid tariff nor the connection cost — at the next round of selection it will very likely produce the wrong set. **External risk:** grid tariffs are set by the distribution network operators and reviewed by the regulator; a rise in the City Hub tariff to £0.157 would put it level with Rail Park. **Actions:** within 30 days — write selection on contribution after connection, rather than on traffic, into the investment policy; within 90 days — approach the network operator about co-funding the A1 connection, where £420,000 a year consumes a third of the site's margin advantage.",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
@@ -34844,7 +34844,7 @@
       "сопоставимые",
       "как оценивать"
      ],
-     "body_md": "| Параметр | Значение |\n|---|---|\n| Медианный мультипл сектора к нормализованной годовой прибыли | 8.0× |\n| Стоимость капитала фонда | 9.0% |\n| Доля к продаже | 20% |\n| Момент закрытия | сразу после турнира |",
+     "body_md": "| Параметр | Значение |\n|---|---|\n| Медианный мультипл сектора к нормализованной годовой прибыли | 8.0× |\n| Стоимость капитала фонда | 9.0% |\n| Доля к продаже | 20% |\n| Момент закрытия | сразу после турнира |\n| Горизонт оценки | цикл повторяется бессрочно, следующий турнир через 4 года |",
      "render": null
     }
    ],
@@ -35190,7 +35190,7 @@
       "L1": "",
       "L2": ""
      },
-     "candidate_md": "Посчитай эту величину и скажи, что она означает для решения.",
+     "candidate_md": "Посчитай ожидаемую величину результата сделки и скажи, что она означает для решения.",
      "interviewer_md": "`0.70×0 + 0.20×6.8 + 0.10×24.5 = $3.81B` → `EV = +$2.59B`.\n**По ожиданию сделка всё ещё выгодна.**"
     },
     {
@@ -35202,7 +35202,7 @@
       "L1": "",
       "L2": ""
      },
-     "candidate_md": "Посчитай эту величину и скажи, что она означает для решения.",
+     "candidate_md": "Посчитай, во что обходится хвостовой сценарий, и скажи, что это означает для решения.",
      "interviewer_md": "`6.40 − 24.50 = −$18.10B` против подушки `$11.60B` → **дефицит $6.50B**.\nС вероятностью 10% сделка стирает покупателя.\n   **Ответ: покупать только с потолком госгарантии не ниже $6.50B.**\n   Проверка: `−18.10 + 6.50 = −11.60` — ровно подушка, покупатель выживает впритык."
     },
     {
@@ -35300,7 +35300,7 @@
       "L1": "",
       "L2": ""
      },
-     "candidate_md": "Посчитай эту величину и скажи, что она означает для решения.",
+     "candidate_md": "Посчитай пошлину на единицу товара и скажи, что она означает для решения.",
      "interviewer_md": "Пошлина на единицу: `486 × 0.65 × 0.18 = $56.86`. Маржа была `$234.00`."
     },
     {
@@ -35436,7 +35436,7 @@
       "L1": "",
       "L2": ""
      },
-     "candidate_md": "Посчитай эту величину и скажи, что она означает для решения.",
+     "candidate_md": "Посчитай годовое потребление площадки и скажи, что оно означает для решения.",
      "interviewer_md": "Потребление `400 × 8,760 × 0.92 = 3,223,680` МВт·ч/год."
     },
     {
@@ -35694,7 +35694,7 @@
       "инфляция",
       "цена меры"
      ],
-     "body_md": "```\nA: без капекса темп естественного падения добычи растёт с 4.0% до 9.1% в год\nB: 74% срезанной субсидии попадает в потребительские цены;\n   потребительские расходы $310B, текущая инфляция 6.1%\n```",
+     "body_md": "```\nA: без капекса темп естественного падения добычи растёт с 4.0% до 9.1% в год\n   цена меры оценивается на горизонте 5 лет по рыночной цене барреля\nB: 74% срезанной субсидии попадает в потребительские цены;\n   потребительские расходы $310B, текущая инфляция 6.1%\n```",
      "render": null
     }
    ],
@@ -35708,7 +35708,7 @@
       "L1": "В какой валюте платит каждая мера?",
       "L2": "Поставь рядом то, чем платит первый вариант, и то, чем платит второй."
      },
-     "candidate_md": "Посчитай эту величину и скажи, что она означает для решения.",
+     "candidate_md": "Совет даёт три направления: размер дыры, цена варианта A, цена варианта B. С чего начнёшь и почему?",
      "interviewer_md": "Три направления: размер дыры, цена варианта A, цена варианта B. Порядок за\nкандидатом, оценивается обоснование."
     },
     {
@@ -35720,7 +35720,7 @@
       "L1": "",
       "L2": ""
      },
-     "candidate_md": "Посчитай эту величину и скажи, что она означает для решения.",
+     "candidate_md": "Посчитай размер бюджетной дыры и скажи, что он означает для решения.",
      "interviewer_md": "`(74 − 58) × 2,100,000 × 365 × 0.62 = $7.60B`."
     },
     {
@@ -35744,7 +35744,7 @@
       "L1": "",
       "L2": ""
      },
-     "candidate_md": "Посчитай эту величину и скажи, что она означает для решения.",
+     "candidate_md": "Посчитай цену варианта A — потерю нефтяных доходов из-за ускоренного падения добычи — и скажи, что она означает для решения.",
      "interviewer_md": "Потеря нефтяных доходов за пять лет из-за ускоренного падения\nдобычи: **$17.68B** — вдвое больше самой дыры."
     },
     {
@@ -35756,7 +35756,7 @@
       "L1": "",
       "L2": ""
      },
-     "candidate_md": "Посчитай эту величину и скажи, что она означает для решения.",
+     "candidate_md": "Посчитай цену варианта B — эффект на потребительские цены — и скажи, что он означает для решения.",
      "interviewer_md": "`9.6 × 0.74 / 310 = 2.29 п.п.` инфляции: с 6.1% до 8.4%."
     },
     {
@@ -36219,7 +36219,7 @@
      "title": "Набор до и после визового цикла",
      "reveal": "auto",
      "triggers": [],
-     "body_md": "```\nВОРОНКА НАБОРА\n\nместные       18,400 ─────────── без изменений ──────────► 18,400\n                                                            плата $11,800/год\n\nиностранные    4,200 ────────────── −38.0% ──────────────►  2,604\n                                                            плата $34,600/год\n\nРегулятор ограничивает повышение платы для местных студентов 4.0% в год.\n```",
+     "body_md": "```\nВОРОНКА НАБОРА\n\nместные       18,400 ─────────── без изменений ──────────► 18,400\n                                                            плата $11,800/год\n\nиностранные    4,200 ────────────── −38.0% ──────────────►  2,604\n                                                            плата $34,600/год\n\nРегулятор ограничивает повышение платы 4.0% в год. Потолок считается\n  от базовой местной платы, и надбавка в абсолюте одна и та же для местных\n  и для иностранных студентов.\n```",
      "render": null
     },
     {
@@ -47202,5 +47202,5 @@
  "source_scope": "graph skeleton only; prose re-authored in EN per languages{}",
  "family_ratchet_armed": false,
  "package_sha256_method": "sha256 of the full payload minus package_sha256, package_sha256_method; json.dumps(sort_keys=True, ensure_ascii=False, separators=(\",\",\":\"))",
- "package_sha256": "6a0493ea2121e1de4e476e26671bd6a55396c3c6fd63fd62dde7c08282ba6a3d"
+ "package_sha256": "269c6325e24deb91b9e6a7ea696fbd2c91a7e2529075bfcfbca6a77f9f29abf1"
 }

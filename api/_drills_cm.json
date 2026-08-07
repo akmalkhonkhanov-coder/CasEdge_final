@@ -83,7 +83,10 @@
      "answer": "-36000; keep C",
      "tolerance": "exact"
     }
-   ]
+   ],
+   "family_h25": "F1",
+   "family_src": "словарь:F03",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-002",
@@ -124,7 +127,10 @@
      "answer": "3000",
      "tolerance": "exact"
     }
-   ]
+   ],
+   "family_h25": "F1",
+   "family_src": "словарь:F13",
+   "family_conf": "спорная"
   },
   {
    "id": "CM-003",
@@ -207,7 +213,10 @@
      "answer": "710",
      "tolerance": "exact"
     }
-   ]
+   ],
+   "family_h25": "F1",
+   "family_src": "словарь:F02",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-004",
@@ -289,7 +298,10 @@
      "answer": "margin up, profit down 0.72M; pure mix effect",
      "tolerance": "exact"
     }
-   ]
+   ],
+   "family_h25": "F1",
+   "family_src": "словарь:F08",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-005",
@@ -373,7 +385,10 @@
      "answer": "2.96%; +13.85% deterioration",
      "tolerance": "exact"
     }
-   ]
+   ],
+   "family_h25": "F1",
+   "family_src": "словарь:F10",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-006",
@@ -440,7 +455,10 @@
      "answer": "131.7% (+-1pp); finite + declining",
      "tolerance": "+-0.1M"
     }
-   ]
+   ],
+   "family_h25": "F2",
+   "family_src": "словарь:F05",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-007",
@@ -510,7 +528,10 @@
      "answer": "direction ok, +190% overstated",
      "tolerance": "exact"
     }
-   ]
+   ],
+   "family_h25": "F1",
+   "family_src": "словарь:F15",
+   "family_conf": "спорная"
   },
   {
    "id": "CM-008",
@@ -583,7 +604,10 @@
      "answer": "weekend +1273.39; NO hidden error",
      "tolerance": "exact"
     }
-   ]
+   ],
+   "family_h25": "F0",
+   "family_src": "clean",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-009",
@@ -648,7 +672,10 @@
      "answer": "115000 (-23.3%); 150000 (+50%)",
      "tolerance": "exact"
     }
-   ]
+   ],
+   "family_h25": "F1",
+   "family_src": "словарь:F11",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-010",
@@ -731,7 +758,10 @@
      "answer": "54; 122.2%",
      "tolerance": "exact"
     }
-   ]
+   ],
+   "family_h25": "F1",
+   "family_src": "словарь:F07",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-011",
@@ -783,7 +813,10 @@
    "provoked": {
     "en": "linear breakeven ignores the FC step landing exactly on its value.",
     "ru": "линейный breakeven игнорирует ступеньку FC ровно на своём значении."
-   }
+   },
+   "family_h25": "F4",
+   "family_src": "словарь:F01",
+   "family_conf": "спорная"
   },
   {
    "id": "CM-012",
@@ -831,7 +864,10 @@
    "provoked": {
     "en": "decision based on average cost instead of marginal.",
     "ru": "решение по средней стоимости вместо маржинальной."
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:F04",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-013",
@@ -890,7 +926,10 @@
    "provoked": {
     "en": "payback as the selection criterion; ignoring the terminal profile of the flows.",
     "ru": "payback как критерий выбора; игнор terminal-профиля потоков."
-   }
+   },
+   "family_h25": "F2",
+   "family_src": "словарь:F06",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-014",
@@ -940,7 +979,10 @@
    "provoked": {
     "en": "rounding cost at an intermediate step zeroes out the difference and changes the decision.",
     "ru": "округление коста на промежуточном шаге обнуляет разницу и меняет решение."
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:F09",
+   "family_conf": "спорная"
   },
   {
    "id": "CM-015",
@@ -988,7 +1030,10 @@
    "provoked": {
     "en": "extrapolating unit cost to 2× volume without diluting FC.",
     "ru": "экстраполяция unit cost на 2× объём без разбавления FC."
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:F12",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-016",
@@ -1040,7 +1085,10 @@
    "provoked": {
     "en": "arithmetic mean of volatile annual rates instead of CAGR — and the endpoint is ABOVE the start, so the sanity check \"did we grow?\" does not save you.",
     "ru": "среднее арифметическое волатильных годовых темпов вместо CAGR — и конечная точка ВЫШЕ старта, поэтому sanity-чек «выросли?» не спасает."
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:F14",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-017",
@@ -1098,7 +1146,10 @@
    "provoked": {
     "en": "horizon = contract instead of 1/churn; conclusion based on understated LTV/CAC.",
     "ru": "горизонт = контракт вместо 1/churn; вывод по заниженному LTV/CAC."
-   }
+   },
+   "family_h25": "F6",
+   "family_src": "словарь:F16",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-018",
@@ -1157,7 +1208,10 @@
    "provoked": {
     "en": "profit grows → they assume cash grows; WC-absorb is ignored.",
     "ru": "прибыль растёт → предполагают рост кэша; WC-absorb игнорируется."
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:F18",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-019",
@@ -1221,7 +1275,10 @@
    "provoked": {
     "en": "ranking by full-cost with revenue-based allocation instead of contribution.",
     "ru": "ранжирование по full-cost с revenue-based аллокацией вместо contribution."
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:F03",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-020",
@@ -1288,7 +1345,10 @@
    "provoked": {
     "en": null,
     "ru": null
-   }
+   },
+   "family_h25": "F0",
+   "family_src": "clean",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-021",
@@ -1342,7 +1402,10 @@
    "provoked": {
     "en": "no-growth perpetuity ignores g; false alarm \"g≈r → ∞\" despite a healthy 5% spread.",
     "ru": "no-growth perpetuity игнорирует g; ложная тревога «g≈r → ∞» при здоровом спреде 5%."
-   }
+   },
+   "family_h25": "F2",
+   "family_src": "словарь:F05",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-022",
@@ -1404,7 +1467,10 @@
    "provoked": {
     "en": "gross ≠ net (cannibalization); the loss is counted at the margin of the victim A, not the newcomer B.",
     "ru": "gross ≠ net (каннибализация); потеря считается по марже жертвы A, не новичка B."
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:F07",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-023",
@@ -1460,7 +1526,10 @@
    "provoked": {
     "en": "comparing full-cost ($700) instead of avoidable ($640); the unavoidable fixed cost distorts.",
     "ru": "сравнение full-cost ($700) вместо избегаемого ($640); неизбегаемый fixed искажает."
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:F02",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-024",
@@ -1512,7 +1581,10 @@
    "provoked": {
     "en": "\"volume falls → reject\", ignoring that margin/unit rose more.",
     "ru": "«объём падает → отказаться», игнорируя, что маржа/юнит выросла сильнее."
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:F11",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-025",
@@ -1564,7 +1636,10 @@
    "provoked": {
     "en": "deciding on the fleet average instead of the individual units.",
     "ru": "решение по среднему парка вместо по отдельным юнитам."
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:F04",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-026",
@@ -1628,7 +1703,10 @@
    "provoked": {
     "en": "choosing by the maximum outcome ($500M) instead of expected value.",
     "ru": "выбор по максимальному исходу ($500M) вместо ожидаемой ценности."
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:F15",
+   "family_conf": "спорная"
   },
   {
    "id": "CM-027",
@@ -1678,7 +1756,10 @@
    "provoked": {
     "en": "a large % on a low base reads as a priority.",
     "ru": "большой % на низкой базе читается как приоритет."
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:F08",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-028",
@@ -1748,7 +1829,10 @@
    "provoked": {
     "en": "the simple average % overstates the network above the hurdle (go/no-go flip); \"best by %\" ≠ the real profit pool (expansion flip).",
     "ru": "простое среднее % завышает сеть над барьером (go/no-go flip); «лучший по %» ≠ реальный профит-пул (expansion flip)."
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:F10",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-029",
@@ -1806,7 +1890,10 @@
    "provoked": {
     "en": "adding capacity outside the bottleneck (zero effect); underestimating operating leverage (×3 profit from +50% volume).",
     "ru": "добавление мощности не в узкое место (ноль эффекта); недооценка операц. рычага (×3 прибыль от +50% объёма)."
-   }
+   },
+   "family_h25": "F4",
+   "family_src": "словарь:F17",
+   "family_conf": "спорная"
   },
   {
    "id": "CM-030",
@@ -1862,7 +1949,10 @@
    "provoked": {
     "en": null,
     "ru": null
-   }
+   },
+   "family_h25": "F0",
+   "family_src": "clean",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-031",
@@ -1920,7 +2010,10 @@
    "provoked": {
     "en": "breakeven muscle + CAGR-vs-arithmetic on volatile ARR (end>start, sanity does not save you).",
     "ru": "breakeven-мышца + CAGR-vs-arith на волатильном ARR (end>start, sanity не спасает)."
-   }
+   },
+   "family_h25": "F4",
+   "family_src": "словарь:F01",
+   "family_conf": "спорная"
   },
   {
    "id": "CM-032",
@@ -1976,7 +2069,10 @@
    "provoked": {
     "en": "IRR as the selection criterion for mutually exclusive projects (it actually points to A); IRR's blindness to the scale of value created.",
     "ru": "IRR как критерий выбора взаимоисключающих (реально указывает на A); слепота IRR к масштабу создаваемой стоимости."
-   }
+   },
+   "family_h25": "F2",
+   "family_src": "словарь:F06",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-033",
@@ -2032,7 +2128,10 @@
    "provoked": {
     "en": "comparing full-cost ($120) instead of avoidable ($105); forgetting the ramp payback.",
     "ru": "сравнить full-cost ($120) вместо избегаемого ($105); забыть про ramp-payback."
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:F02",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-034",
@@ -2084,7 +2183,10 @@
    "provoked": {
     "en": "average cost instead of marginal on free capacity.",
     "ru": "avg-стоимость вместо marginal на свободной мощности."
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:F04",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-035",
@@ -2146,7 +2248,10 @@
    "provoked": {
     "en": "gross≠net (cannibalization); mix-shift to lower margin (loss at the $180 premium).",
     "ru": "gross≠net (каннибализация); mix-shift на низкую маржу (потеря по $180 premium)."
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:F07",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-036",
@@ -2196,7 +2301,10 @@
    "provoked": {
     "en": "a large % on a low base treated as the priority.",
     "ru": "большой % на низкой базе как приоритет."
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:F08",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-037",
@@ -2248,7 +2356,10 @@
    "provoked": {
     "en": "rounding rev/cogs before computing the ratio crosses the bonus threshold.",
     "ru": "округление rev/cogs до расчёта ratio пересекает порог бонуса."
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:F09",
+   "family_conf": "спорная"
   },
   {
    "id": "CM-038",
@@ -2305,7 +2416,10 @@
    "provoked": {
     "en": "the simple average of % overstates versus the target; the weight of the large low-conversion C is ignored (decision flip).",
     "ru": "простое среднее % завышает над целью; вес большого низкоконверсионного C игнорируется (decision flip)."
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:F10",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-039",
@@ -2369,7 +2483,10 @@
    "provoked": {
     "en": "FC-dilution (unit falls) read as «everything is better»; growth ties up cash in WC.",
     "ru": "FC-dilution (unit падает) читается как «всё лучше»; рост связывает кэш в WC."
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:F12",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-040",
@@ -2421,7 +2538,10 @@
    "provoked": {
     "en": "linear breakeven ignores the step-FC at its own value.",
     "ru": "линейный breakeven игнорирует step-FC на своём значении."
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:F13",
+   "family_conf": "спорная"
   },
   {
    "id": "CM-041",
@@ -2475,7 +2595,10 @@
    "provoked": {
     "en": "choosing by max payoff instead of EV; adding capacity somewhere other than the bottleneck.",
     "ru": "выбор по max payoff вместо EV; добавление мощности не в bottleneck."
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:F15",
+   "family_conf": "спорная"
   },
   {
    "id": "CM-042",
@@ -2531,7 +2654,10 @@
    "provoked": {
     "en": "averaging churn before inversion → UNDERSTATEMENT of LTV (1/churn is convex; it seems that \"average churn is reasonable,\" but this underestimates the life of loyal customers).",
     "ru": "усреднить churn до инверсии → ЗАНИЖЕНИЕ LTV (1/churn выпукла; кажется, что «средняя churn — разумно», но это недооценивает жизнь лояльных)."
-   }
+   },
+   "family_h25": "F6",
+   "family_src": "словарь:F16",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-043",
@@ -2581,7 +2707,10 @@
    "provoked": {
     "en": "accounting payback ignores WC-drag; the cash horizon is longer.",
     "ru": "accounting payback игнорирует WC-drag; кэш-горизонт длиннее."
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:F18",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-044",
@@ -2629,7 +2758,10 @@
    "provoked": {
     "en": "minor — confusing recurring revenue with the full price / forgetting VC.",
     "ru": "мелкая — перепутать recurring revenue с полной ценой/забыть VC."
-   }
+   },
+   "family_h25": "F4",
+   "family_src": "словарь:F01",
+   "family_conf": "спорная"
   },
   {
    "id": "CM-045",
@@ -2677,7 +2809,10 @@
    "provoked": {
     "en": "arithmetic mean of volatile rates; end>start doesn't let you off the hook with a sanity check.",
     "ru": "арифм. среднее волатильных темпов; end>start не даёт отделаться sanity."
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:F14",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-046",
@@ -2737,7 +2872,10 @@
    "provoked": {
     "en": null,
     "ru": null
-   }
+   },
+   "family_h25": "F0",
+   "family_src": "clean",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-047",
@@ -2789,7 +2927,10 @@
    "provoked": {
     "en": null,
     "ru": null
-   }
+   },
+   "family_h25": "F0",
+   "family_src": "clean",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-048",
@@ -2841,7 +2982,10 @@
    "provoked": {
     "en": "no-growth cap ignores rent growth (g), understating the valuation.",
     "ru": "no-growth cap игнорирует рост ренты (g), занижая оценку."
-   }
+   },
+   "family_h25": "F2",
+   "family_src": "словарь:F05",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-049",
@@ -2893,7 +3037,10 @@
    "provoked": {
     "en": "gross≠net; the loss is at the connecting margin $150, not the new $120.",
     "ru": "gross≠net; потеря по марже connecting $150, не новой $120."
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:F07",
+   "family_conf": "высокая"
   },
   {
    "id": "CM-050",
@@ -2962,7 +3109,13 @@
    "provoked": {
     "en": "\"every segment better → total better\" (Simpson); ignoring the mix shift toward the worst segment.",
     "ru": "«все сегменты лучше → итог лучше» (Simpson); игнор mix-сдвига к худшему сегменту."
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:F10",
+   "family_conf": "высокая"
   }
- ]
+ ],
+ "_meta": {
+  "family_h25": "Семья трудности Н25 (F1-F10). F0 = Clean-слот, ловушки нет по конструкции. Поле авторское, движок его не читает и кандидату не отдаёт; включится, когда подбор слотов начнёт балансировать партию по семьям. family_src: 'тело' = размечено чтением слота (круг 29), 'словарь:<код>' = выведено из собственного словаря библиотеки, 'clean' = по признаку Clean. family_conf='спорная' = решается прецедентом Н25.8, метка временная."
+ }
 }

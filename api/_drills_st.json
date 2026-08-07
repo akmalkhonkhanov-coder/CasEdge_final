@@ -106,7 +106,10 @@
    },
    "reference": {
     "en": "The candidate builds \"revenue = price × volume,\" adds competitors and quality. That tree is **MECE and correct**. The exhibit shows price is flat, quality is improving, and purchases per customer are steady — what falls is **only the customer count**, and the break in Q4 Y1 lines up with the note. There is no \"eligibility\" branch in the tree, and without it the conclusion will be \"push harder on sales\" rather than \"certify the second site.\"\n\n**Top echelon: YES.** The first step is right, the tree is faultless, the answer is wrong.\n\n**E-after breaks the tree rather than extending it:** after the exhibit, the \"price/volume\" branch is **empty** — volume per customer has not changed, so the entire revenue decomposition through price and purchase intensity explains nothing. The tree needs **rebuilding**, not filling in.\n\n- notice that the decline **accelerates** rather than running flat (−1, −2, −4, −6, −4, −4, −2): churn peaks in the two quarters right after the rule change\n- propose checking whether departed customers moved to competitors that hold the certificate\n- observe that complaints fall **because** the most demanding customers are the ones leaving — not an improvement"
-   }
+   },
+   "family_h25": "F2",
+   "family_src": "словарь:S01",
+   "family_conf": "высокая"
   },
   {
    "id": "ST-002",
@@ -194,7 +197,10 @@
    },
    "reference": {
     "en": "\"Financials\" is a MECE-clean, legitimate, reflexive branch, and it **yields no variable capable of explaining trust**. A candidate who starts there spends time and returns with nothing. Second: the weighted index falls 17 points, but the core audience is down only 2. The decline is created by **new, weakly engaged segments** that the company itself attracted.\n\n**Top echelon: YES.** The tree can be faultless on MECE grounds and still lead to the wrong answer, \"we've damaged our journalism.\"\n\n- notice that the industry backdrop explains **8 of the 17** points (59→51), i.e. nearly half the decline — roughly 9 points are specific to us\n- propose recalculating the index **on a like-for-like audience base**: without the new segments the decline would be materially smaller\n- observe that reach growing 18.7 → 28.6 million may have been **another division's target** — a KPI conflict"
-   }
+   },
+   "family_h25": "F9",
+   "family_src": "словарь:S02",
+   "family_conf": "спорная"
   },
   {
    "id": "ST-003",
@@ -222,7 +228,10 @@
    },
    "reference": {
     "en": "The difficulty is **in detection**, not in knowing ME. The candidate places \"fuel\" and \"variable costs\" in different parts of the tree, and the overlap does not stand out because the two sit physically far apart.\n\n**Top echelon: NO** — a candidate who builds the tree correctly reaches the right answer. An honest **Medium**.\n\n- propose normalising: cost per delivery rather than absolute cost\n- notice that 22% growth against 6% volume implies unit costs up ≈15%"
-   }
+   },
+   "family_h25": "F10",
+   "family_src": "словарь:S03",
+   "family_conf": "спорная"
   },
   {
    "id": "ST-004",
@@ -328,7 +337,10 @@
    },
    "reference": {
     "en": "The profit tree is built reflexively and is **correct as a profit tree**. It simply is not about this organisation. Second: even a candidate who moves past profit to \"$ per beneficiary\" will pick C and H — the best on efficiency and the worst on survival. The right first step (normalise per beneficiary) leads to the wrong answer.\n\n**Top echelon: YES.**\n\n- weight reach by survival: C gives 340 × 0.31 ≈ 105k durable beneficiaries against D's 96 × 0.88 ≈ 84k at a third of the budget\n- propose funding C **conditionally** — contingent on naming an operator\n- notice that $12M against $47M means funding roughly a quarter of applications"
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:S05",
+   "family_conf": "высокая"
   },
   {
    "id": "ST-005",
@@ -410,7 +422,10 @@
    },
    "reference": {
     "en": "A candidate who knows the sunk-cost rule **in theory** still adds an \"earn back the investment\" branch, because it belongs to the cost template. The difficulty is applying the rule under the pressure of concrete data where $40M and $30.4M are printed large and look relevant.\n\n**Top echelon: NO** — knowing the rule produces the right answer. An honest **Medium**.\n\n- notice that book value $30.4M exceeds the market price $17.5M: a sale books a $12.9M accounting loss which **is not** a cash flow\n- propose testing whether demand returns — mothballing buys an option\n- observe that 45% utilisation means volume growth requires no capex"
-   }
+   },
+   "family_h25": "F9",
+   "family_src": "словарь:S06",
+   "family_conf": "спорная"
   },
   {
    "id": "ST-006",
@@ -438,7 +453,10 @@
    },
    "reference": {
     "en": "The slot tests **DRIVE directly**: naming \"Traffic / Basket / Competitors\" is within reach of any candidate; naming **what to measure** inside each is not. A label without a metric does not score.\n\n**Top echelon: NO** — by construction. An honest **Easy**.\n\n- propose comparing LFL by cohort: stores older than 3 years against those 1–2 years old\n- notice that 40 new sites with falling LFL can still produce **total revenue growth** — these are different metrics"
-   }
+   },
+   "family_h25": "F4",
+   "family_src": "словарь:S07",
+   "family_conf": "спорная"
   },
   {
    "id": "ST-007",
@@ -504,7 +522,10 @@
    },
    "reference": {
     "en": "The candidate names one route (usually building) and goes deep on it. **At least two** are required before any comparison. The second difficulty: the $35M budget **rules out building** ($48M), which is visible only by reading the exhibit against the note.\n\n**Top echelon: NO** — a candidate who names two options and checks them against the budget reaches the right answer. An honest **Medium**.\n\n- notice that building is **infeasible** on a $35M budget — the option drops out before any economics\n- propose a combination: partner now, acquire in two to three years\n- observe that a 9.2-year payback in chemicals is comparable to the asset's own life"
-   }
+   },
+   "family_h25": "F2",
+   "family_src": "словарь:S10",
+   "family_conf": "высокая"
   },
   {
    "id": "ST-008",
@@ -592,7 +613,10 @@
    },
    "reference": {
     "en": "The candidate builds the tree around the premium segment — which is **what the strategy statement instructs** — and the tree comes out correct: premium contribution, its growth, competitors, marketing. The exhibit, released **after**, shows premium delivers **2.9% of volume**, its 50% growth is **83% one contract** expiring next year, and without it growth would have been 8.3%.\n\nThe premium branch is neither missing nor wrong — it is **nullified**: the segment physically cannot deliver $40M of EBITDA on revenue of $37.8M. The tree must be **rebuilt around the non-premium 97%**, not extended.\n\n**Top echelon: YES.**\n\n**Separation from ST-001 ([DUP], substantive):** in ST-001 the exhibit reveals a **missing** branch (regulation was absent from the tree). Here the branch is **present, correct, and turns out to be empty** — an existing branch is nullified. Different E-after mechanisms.\n\n- notice that promo grew from 6.9 to 8.7 m units — **+26.1%** — so the portfolio is shifting **down**, not up\n- observe that the entire revenue of premium ($37.8M) is smaller than the targeted EBITDA increase ($40M) — the segment cannot deliver the target even at 100% margin\n- note that the mid segment **contracted** 6.1 → 5.4 m units"
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:S13",
+   "family_conf": "высокая"
   },
   {
    "id": "ST-009",
@@ -620,7 +644,10 @@
    },
    "reference": {
     "en": "The client **explicitly asks** for an assessment of the switch, and building the tree around subscription is obedient and professionally plausible behaviour. The difficulty is **redefining the question** without dismissing the client's request.\n\n**Top echelon: NO, and this is confirmed on the body.** A candidate who asks \"what problem are we solving\" gets the objective from the prompt and proceeds correctly from the first step. There is no \"right first step → wrong answer\" mechanism here. **The slot stays Medium**, as planned; Hard is not assigned.\n\n- propose checking whether competitors' churn actually fell **after** their switch\n- notice that subscription may **raise** churn in the segment that values flexibility\n- observe that 34% churn implies an average customer life of about three years"
-   }
+   },
+   "family_h25": "F2",
+   "family_src": "словарь:S14",
+   "family_conf": "высокая"
   },
   {
    "id": "ST-010",
@@ -694,7 +721,10 @@
    },
    "reference": {
     "en": "The difficulty is **inverted**: the candidate is trained to hunt for traps and will find them where none exist. The slot tests the ability to say \"the data is clean, the cause lies elsewhere\" — and to **justify** it, rather than simply failing to notice a catch.\n\n**Top echelon: NO** — by construction, this is Clean.\n\n- compute the weighted average and confirm it reconciles with the stated total\n- propose looking for the cause **outside** this table: supplier contracts, logistics, rebates\n- notice that an identical decline across all segments points to a **common** factor"
-   }
+   },
+   "family_h25": "F0",
+   "family_src": "clean",
+   "family_conf": "высокая"
   },
   {
    "id": "ST-011",
@@ -788,7 +818,10 @@
    },
    "reference": {
     "en": "The candidate builds \"losses by geography\" **and** \"losses by customer type\" as two parallel branches — both look legitimate and MECE **within themselves**. The exhibit, released after, shows that in this industry customer type is **determined by geography**: it is **the same cut**, named twice. A tree that adds both branches covers 200% of the market.\n\n**Top echelon: YES.** Both branches are individually correct; the tree is wrong.\n\n**E-after breaks the tree:** before the exhibit there is no way to know the cuts coincide — the note about where chains operate appears only with the data. The tree needs **one cut chosen**, not both extended.\n\n- notice the decline is concentrated in metropolitan (−12.00 pp) and large cities (−9.00 pp), while small towns and rural barely move (−1.00 and 0.00)\n- connect that to the note: tendering came in from Y2, and the losses sit exactly where the chains are\n- propose checking whether we are admitted to the supplier register"
-   }
+   },
+   "family_h25": "F10",
+   "family_src": "словарь:S04",
+   "family_conf": "спорная"
   },
   {
    "id": "ST-012",
@@ -857,7 +890,10 @@
    },
    "reference": {
     "en": "The candidate states a prioritisation criterion (\"I'll start with the largest contributor\") and then starts with raw materials, because that is the familiar branch in this industry. The contradiction is with **his own** criterion, not with a reference one.\n\n**Top echelon: NO** — a candidate who names a criterion and checks against it reaches the right answer. An honest **Medium**.\n\n- notice that discounts and mix together account for **82.0%** of the decline — both commercial, not industrial\n- propose checking whether the discounting is tied to customers moving to tenders\n- observe that raw materials and energy together are **14.0%**"
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:S08",
+   "family_conf": "высокая"
   },
   {
    "id": "ST-013",
@@ -885,7 +921,10 @@
    },
    "reference": {
     "en": "The tree is **complete** and metrics are present everywhere. The error is in **allocation of depth**: the candidate takes three levels of detail into branch 3 (rent → indexation → contract terms → review dates), which contributes little, while leaving branch 1 at one level with no decomposition into \"rate × time × count.\"\n\n**Top echelon: NO** — a candidate who matches depth to contribution reaches the right answer. An honest **Medium**.\n\n- propose normalising: cost per unit rather than absolute cost\n- notice that 18% cost growth against 5% volume implies unit costs up **12.4%**\n- propose comparing depth of work against expected contribution **before** going deep"
-   }
+   },
+   "family_h25": "F9",
+   "family_src": "словарь:S09",
+   "family_conf": "спорная"
   },
   {
    "id": "ST-014",
@@ -961,7 +1000,10 @@
    },
    "reference": {
     "en": "The tree comes out correct: the product is better, cheaper, clinicians are satisfied. The clinic economics are calculated properly. The conclusion \"push sales and work procurement harder\" is **logically faultless** and unexecutable: without a code the clinic pays from its own funds, and being 12% cheaper does not offset losing reimbursement entirely.\n\n**Top echelon: YES.** A faultless tree leads to an unexecutable recommendation.\n\n- notice that the only participant with no rating is the only one who can block with no appeal\n- propose checking whether a code application has been filed and when\n- observe that the annual sales plan is meaningless until the reimbursement code exists — ask for the filing date and the register’s stated turnaround before judging the 3%"
-   }
+   },
+   "family_h25": "F9",
+   "family_src": "словарь:S11",
+   "family_conf": "высокая"
   },
   {
    "id": "ST-015",
@@ -1031,7 +1073,10 @@
    },
    "reference": {
     "en": "\"Demand fell\" sounds like one branch and is two. Splitting them, the candidate finds our share **did not change**, the decline is entirely market-driven, and the gap between −13.1% of volume and −14.2% of revenue is explained by price.\n\n**Top echelon: NO** — a candidate who separates external from internal reaches the right answer. An honest **Medium**.\n\n- notice that share is stable, so the question \"why are we falling\" is mis-posed — the market is falling\n- decompose: volume −13.1%, price −1.3% — together they produce the −14.2% revenue decline\n- propose moving the question from \"how do we recover revenue\" to \"how do we get through a contracting market\""
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:S12",
+   "family_conf": "высокая"
   },
   {
    "id": "ST-016",
@@ -1107,7 +1152,10 @@
    },
    "reference": {
     "en": "The candidate builds a correct tree: uplift, cost of the programme, effect on the base. The tree is MECE and complete, and the year-one result of +$18.0M is calculated correctly.\n\nThe error is that the **horizon is collapsed**: every component is measured \"per year,\" and year one gives +$18.0M.\n\nE-after reverses the conclusion: over three years the programme delivers **−$31.0M**. The uplift does not disappear (+42.0 → +31.0); what kills the programme is the **discount granted to a growing base** (−19.0 → −38.0) and **base migration to promo** (0.0 → −21.0 → −16.0), which is zero in year one by construction.\n\n**Top echelon: YES.** The right first step (calculate the year-one effect) produces the wrong answer.\n\n**The sign flip is arithmetically honest.** There is no discounting at all: every figure is cash and undiscounted, and no rate exists in the construction. The sign flips through the **composition of components**, not through a choice of rate.\n\n- notice the discount grows faster than the uplift: uplift −26.2% over three years, discount +100.0%\n- propose testing whether the programme can be confined to a segment that does not migrate to promo\n- observe that base migration shrinks in year three — the base has already moved, and the effect exhausts itself"
-   }
+   },
+   "family_h25": "F2",
+   "family_src": "словарь:S15",
+   "family_conf": "высокая"
   },
   {
    "id": "ST-017",
@@ -1171,7 +1219,10 @@
    },
    "reference": {
     "en": "The limits are printed in the exhibit note: $40.0M of capex and 8 managers. The tree \"options → return → choice\" is complete and correct, and screening the rows against those limits is also correct — but the **unit of choice is wrong**. Options are independent, so the choice is over **subsets**. Row-screening kills \"expand the chain\" ($64.0M and 11.5 managers) and \"new format\" ($47.0M and 9.1) and lands on the online channel at $19.4M → $8.6M; the best admissible subset is **online plus franchise at $13.8M**, $5.2M more.\n\n**The constraint inverts the ranking:** the two best options by NPV are **both** infeasible, and the best deliverable one is third on the list.\n\n**Top echelon: YES** — asking about constraints is no longer enough: the limits are printed, and row-screening still gives the wrong answer. The candidate has to search **subsets** and name the binding constraint. **Hard.**\n\n**Separation from ST-001 ([DUP], substantive):** in ST-001 the missing branch is an **explanatory** one — regulation explains *why* revenue is falling. Here the missing branch is a **constraining** one: causes and returns are established correctly, but the recommendation cannot be executed. The ST-001 candidate does not understand what is happening; the ST-017 candidate understands everything and advises something that cannot be done.\n\n- notice that online plus franchise together need $31.0M of the $40.0M capex — **$9.0M idle, and no remaining option fits it** (the cheapest unused option costs $47.0M) — and 8.0 of the 8.0 managers: **the binding constraint is managers, not money**\n- the combined NPV of that pair is $13.8M against $19.4M for the infeasible option\n- propose raising the manager constraint with the board as a separate decision"
-   }
+   },
+   "family_h25": "F2",
+   "family_src": "словарь:S01",
+   "family_conf": "высокая"
   },
   {
    "id": "ST-018",
@@ -1261,7 +1312,10 @@
    },
    "reference": {
     "en": "A distributor's candidate builds an operational tree: warehousing, logistics, service levels, costs. It is **correct, MECE and relevant to the business** — efficiency really does affect profit. But the question asked is which segment to play in, and an operational tree answers \"how to execute better what we already do.\"\n\n**Top echelon: YES.** The tree is faultless and answers a different question — a question at a **different level of decision**.\n\n**Separation from ST-002 ([DUP], substantive):** in ST-002 the \"Financials\" branch is irrelevant to the **question** — no variable explaining trust can be extracted from a P&L; the branch is empty with respect to the subject. Here the operational branch is **not empty**: it contains real variables that affect the result. The defect is one of **level**: it answers \"how\" when \"what\" was asked. The ST-002 candidate collects data that will say nothing; the ST-018 candidate collects data that will say a great deal — but not about the choice.\n\n- notice the consumer segment is **1.8 times** larger than professional ($610.0M against $340.0M) and grows **4.0 times** faster (+8.4% against +2.1%)\n- but our share there is 1.2% against 14.0% — the question is not \"where is the market\" but \"where can we play\"\n- notice online grows fastest (+12.5%) while our share is 0.1%"
-   }
+   },
+   "family_h25": "F9",
+   "family_src": "словарь:S02",
+   "family_conf": "спорная"
   },
   {
    "id": "ST-019",
@@ -1335,7 +1389,10 @@
    },
    "reference": {
     "en": "Segment A grows fastest and has the **highest contribution margin** ($260 against $220 and $125). On both familiar metrics it looks like the best investment candidate. Its full margin is **−$52**: every additional unit of A **increases the loss**.\n\n**Top echelon: NO** — a candidate who asks about full cost for an investment decision reaches the right answer. An honest **Medium**, as planned.\n\n**Separation from ST-008 ([DUP], substantive):** in ST-008 the data **nullifies** the branch — the premium segment turns out to be 2.9% of volume and physically cannot deliver the target. Here the segment is **large, growing and material** — the branch is not nullified. The data **reverses the sign**: what was taken for a growth driver turns out to be a source of loss, and growth **worsens** it. In ST-008 the branch disappears; here it changes the direction of action to its opposite.\n\n- compute the contribution to the result: A delivers **−$0.22M** of full margin at 4.2k units\n- notice B and C deliver **+$0.29M** and **+$0.34M** at full margin\n- propose not withdrawing from A but raising price or reducing product complexity: contribution margin is positive, so at existing capacity the segment is not loss-making"
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:S13",
+   "family_conf": "высокая"
   },
   {
    "id": "ST-020",
@@ -1363,7 +1420,10 @@
    },
    "reference": {
     "en": "A double inversion. The first, as in ST-010: the candidate hunts for a trap in the data and there is none. The second, new: having confirmed the data, the candidate **must not stop**. The correct answer is not \"the data is clean, there are no losses,\" but \"the data is clean, and the metric does not answer your question — here is the one that does.\"\n\n**Top echelon: NO** — by construction, this is Clean.\n\n**Separation from ST-010 ([DUP], substantive):** ST-010 — the **data** is clean, and the correct behaviour is to reject the suspicions with reasons and state what data is missing. ST-020 — the data is clean too, but the **framing of the question** is not: the metric is wrongly chosen. In ST-010 the candidate ends with \"look outside this table\"; in ST-020, with \"don't look for this.\"\n\n- propose computing cost per unit of goods and per dollar of revenue\n- notice that rising cost per delivery alongside a rising share of small orders is an **expected** consequence, not an efficiency loss\n- propose that the director reframe the task: \"is efficiency falling\" rather than \"where is it falling\""
-   }
+   },
+   "family_h25": "F0",
+   "family_src": "clean",
+   "family_conf": "высокая"
   },
   {
    "id": "ST-021",
@@ -1457,7 +1517,10 @@
    },
    "reference": {
     "en": "The candidate builds \"churn / behaviour of those who stayed / channel migration.\" **At the first level this is faultless MECE** — those who left, those who stayed, and those who switched channel do not overlap as categories.\n\nThe overlap appears **at the second level**: the sub-branch \"left for online\" inside churn is the same group as the whole of branch 3. A pairwise matrix of the first level does not reveal it.\n\n**Top echelon: YES.** The tree passes a standard MECE check and still counts 11.2% of the base twice.\n\n**Separation from ST-003 ([DUP], substantive):** in ST-003 the absorption sits **within one level** — \"fuel\" stands beside \"variable costs,\" and a pairwise check of the first level catches it. Here there is **no first-level overlap at all**; it exists only between levels. Different operations, different means of detection.\n\n- notice the 11.2% group delivers **5.15 pp** of the 12.77 — the largest contribution, and it is **not a loss** for the chain as a whole\n- compute the true loss without the double count: 12.77 − 5.15 = **7.62 pp**\n- propose measuring revenue per shopper **across both channels at once**"
-   }
+   },
+   "family_h25": "F10",
+   "family_src": "словарь:S03",
+   "family_conf": "спорная"
   },
   {
    "id": "ST-022",
@@ -1581,7 +1644,10 @@
    },
    "reference": {
     "en": "The tree \"price / cost / customers\" is correct as a type — it is the right profit tree for a distributor. The unit of analysis chosen is the **customer**, and in that unit there are no loss-makers: 15.7%, 16.0%, 16.1%.\n\nThe right unit for a margin question is the **order**: 4 280 orders (37.6% of all) run at a margin of **−3.5%**, and they are spread across every customer type, including the large and profitable ones.\n\n**Top echelon: NO** — a candidate who asks \"in which cut are we measuring margin\" reaches the right answer. An honest **Medium**.\n\n**Separation from ST-004 ([DUP], substantive):** in ST-004 the **type** of tree is wrong — a profit tree for a foundation with no revenue; the tree is not about that organisation at all. Here the tree type is **right**: a profit tree suits a distributor. What is wrong is the **unit of analysis** inside a right type. The ST-004 candidate builds the wrong tree; the ST-022 candidate builds the right tree on the wrong base.\n\n- compute: the loss-making orders deliver **10.5%** of revenue and **−$0.14M** of gross profit\n- notice that large customers are profitable **on average** but place some of the small orders — dropping the customer is not the answer\n- propose a minimum order value or paid delivery on small orders"
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:S05",
+   "family_conf": "высокая"
   },
   {
    "id": "ST-023",
@@ -1609,7 +1675,10 @@
    },
    "reference": {
     "en": "This slot differs from ST-006 in that the metric **is named**. \"Satisfaction among competitors' customers\" sounds analytically mature — and it is unworkable, because the data does not exist in any form the company can reach.\n\nThe muscle: state not only **what** to measure but **where it comes from**.\n\n**Top echelon: NO** — by construction. An honest **Easy**.\n\n**Separation from ST-006 ([DUP], substantive):** ST-006 — a branch with **no metric at all**, the label \"Competitors\" with nothing inside. Here the metric **exists, is specific, and is unmeasurable**. In ST-006 the candidate did not think it through; in ST-023 the candidate thought it through to the end and ran into an absence of data without noticing.\n\n- propose a proxy: the winner's share of repeat awards, visible in public records\n- notice that a fall from 31% to 18% is **−41.9%** in relative terms, not 13% in absolute\n- propose splitting tenders into \"lost on price\" and \"not admitted\""
-   }
+   },
+   "family_h25": "F4",
+   "family_src": "словарь:S07",
+   "family_conf": "спорная"
   },
   {
    "id": "ST-024",
@@ -1678,7 +1747,10 @@
    },
    "reference": {
     "en": "The tree is complete, the metrics are present, and depth is **allocated correctly** — each branch is worked in proportion. The error is in the **order**: the candidate begins with staff, because that is the familiar line, and within the time available never reaches fuel.\n\n**Top echelon: NO** — a candidate who checks the order against the size of contribution reaches the right answer. An honest **Medium**.\n\n**Separation from ST-013 ([DUP], substantive):** in ST-013 the depth went **into the wrong branch** — three levels into a line with no contribution while the load-bearing one stayed a label. Here depth is allocated **correctly**; what is wrong is the **sequence**: the same map walked in the wrong order. ST-013 is a defect of the tree; ST-024 is a defect of the route through it.\n\n- notice that fuel and load factor together account for **86.6%** of the decline\n- propose checking whether the load factor drop follows from cutting trips\n- observe that the fare barely moved — no pricing decision was taken"
-   }
+   },
+   "family_h25": "F9",
+   "family_src": "словарь:S09",
+   "family_conf": "спорная"
   },
   {
    "id": "ST-025",
@@ -1742,7 +1814,10 @@
    },
    "reference": {
     "en": "The pharmacy chain **is named** in nearly every candidate's tree — under \"sales channels,\" as a link in distribution. The tree looks complete: product, doctors, patients, channels, regulator.\n\nThe error is in the **role**: the chain is filed under execution when in fact it **makes the choice**, with 87% of prescriptions written under INN and only 9% of patients asking for a brand. The product is on the list of **2 chains of 11**.\n\n**Top echelon: YES.** The actor is present in the tree, the tree is complete, and the conclusion is wrong because the actor has been assigned the wrong function.\n\n**Separation from ST-014 ([DUP], substantive):** in ST-014 the insurance payer is **absent** from the tree — the row reads \"not surveyed,\" the actor is never named. Here the pharmacy chain **is named and sits in the tree**, but as a channel rather than as the decision-maker. ST-014 is an omission; ST-025 is a **misattribution of role**. Detection differs too: there you look for a missing row, here for a mismatch between two columns in an existing one.\n\n- compute: with the product on 2 chains of 11, the ceiling on market share is far below the planned 12%\n- notice that 61% of doctors prescribing against a 1.4% share means demand is created and not converted\n- propose moving budget from medical reps to negotiating list access"
-   }
+   },
+   "family_h25": "F9",
+   "family_src": "словарь:S11",
+   "family_conf": "высокая"
   },
   {
    "id": "ST-026",
@@ -1818,7 +1893,10 @@
    },
    "reference": {
     "en": "The board's goal is stated explicitly and has been met: churn 24% → 13%. The candidate builds a correct tree around churn — trend, programme cost, satisfaction — and everything reconciles.\n\nThe error is that **reducing churn is not the ultimate goal**. It was set for the sake of profit, and retention runs through a growing personal discount: revenue from retained customers +34.1, but the cost of retaining them −27.6 and cost to serve −11.9. Over three years the programme delivers **−$10.5M**.\n\n**Top echelon: YES.** The stated goal is met, the tree around it is correct, and the answer \"continue\" is wrong.\n\n**The sign flip is honest.** There is no discounting at all and no rate exists in the construction; the sign flips through the **composition of components** — the discount deepens with every renewal.\n\n**The Hard rating comes from the mechanics of §5**, not from corridor arithmetic: the slot carries a full echelon mechanism of \"right first step → wrong answer.\"\n\n**Separation from ST-009 ([DUP], substantive):** in ST-009 the client names a **means** (subscription) mistaken for an end, and the correct move is to redefine the task before any analysis. Here the client names a **genuine goal**; it is correct and achieved. The error is that it is **intermediate**, and optimising it works against the goal above. ST-009 is a goal replaced by an instrument; ST-026 is a correct goal at the wrong level of the hierarchy.\n\n- notice that the cost of retention grows faster than revenue: +184.5% against +59.3% over three years\n- propose segmenting: retain only customers whose revenue covers their discount\n- observe that 13% churn at a loss is worse than 17% at a profit — the metric was chosen without a link to money"
-   }
+   },
+   "family_h25": "F2",
+   "family_src": "словарь:S14",
+   "family_conf": "высокая"
   },
   {
    "id": "ST-027",
@@ -1887,7 +1965,10 @@
    },
    "reference": {
     "en": "The candidate finds three causes, and **all three are correct**: input prices rose, two chain customers left, logistics got more expensive. The tree is complete on the standard set and every branch is confirmed by data.\n\nBut three correct causes deliver **$12.4M of $31.0M = 40.0%**. The fourth, absent from the tree, delivers **$18.6M = 60.0%** — more than all the others combined.\n\n**Top echelon: YES.** The candidate is wrong about none of the causes found — he is wrong about **priorities**, because he ranks them inside 40% of the gap.\n\n**Separation from ST-001 and ST-017 ([DUP], against BOTH):**\n\n| | Mechanism |\n|---|---|\n| **ST-001 (a)** | an **explanatory** branch is missing — regulation explains *why* revenue falls; without it the candidate does not understand the cause at all |\n| **ST-017 (b)** | a **constraining** branch is missing — the causes are found correctly, but the recommendation cannot be executed |\n| **ST-027 (c)** | a branch is missing that **devalues the rest** — the causes are correct, executable, and immaterial: 40% against 60% |\n\nIn (a) what was found is wrong. In (b) what was found is right and unrealisable. In (c) what was found is right, realisable, and **does not solve the problem**.\n\n- notice the three causes found are **not erroneous** — removing them recovers $12.4M of $31.0M\n- propose examining the \"commercial expenses\" line separately from cost of goods\n- observe that 3% revenue growth alongside volume rebates are **mechanically linked**: more volume, more rebate"
-   }
+   },
+   "family_h25": "F2",
+   "family_src": "словарь:S01",
+   "family_conf": "высокая"
   },
   {
    "id": "ST-028",
@@ -1961,7 +2042,10 @@
    },
    "reference": {
     "en": "The candidate looks for the cause in branches 1 and 2 — click price and conversion. The price **did rise**, so the branch is not mistaken.\n\nBut its contribution is small: within each channel CAC rose 1.6–8.3%, while blended CAC rose 49.3%. The main driver is the **third branch** — the affiliate share grew from 12% to 42%, and that is the most expensive channel ($81.25 against $32.50 and $26.00).\n\n**Top echelon: NO** — a candidate who checks the channel mix reaches the right answer. An honest **Medium**.\n\n**Separation from ST-008 and ST-019 ([DUP], against BOTH):**\n\n| | Mechanism |\n|---|---|\n| **ST-008 (a)** | the data **nullifies** the branch — premium is 2.9% of volume and physically cannot deliver the target |\n| **ST-019 (b)** | the data **reverses the sign** — the growth driver turns out to be a source of loss |\n| **ST-028 (c)** | the data **relocates** the problem — the branch is correct and small, the cause sits in the neighbouring one; the tree needs **reweighting**, not rebuilding |\n\nIn (a) the branch disappears. In (b) it changes direction. In (c) it remains correct, but its weight turns out to be the wrong one.\n\n- compute the mix contribution: at Y1 shares and Y2 prices, blended CAC would be materially lower\n- notice that conversion **did not fall** in any channel — branch 2 is refuted outright by the data\n- propose checking why the affiliate share grew: a decision or a drift"
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:S13",
+   "family_conf": "высокая"
   },
   {
    "id": "ST-029",
@@ -2025,7 +2109,10 @@
    },
    "reference": {
     "en": "A triple inversion, and the subtlest Clean slot in the type.\n\n- The data is clean — all 228 stores, one period, everything shown.\n- The question is legitimate — the director asks exactly what is needed for the decision.\n- The calculation is correct — 318/241 − 1 = +32.0%, no error.\n\nAnd **the inference does not follow from the correct number**: 95.2% of premium stores sit in top-quintile footfall locations against 1.1% of base stores. Format and location are **confounded**, and in comparable locations the gap is **+4.3%**, not +32.0%.\n\n**Top echelon: NO** — by construction, this is Clean.\n\n**Separation from ST-010 and ST-020 ([DUP], against BOTH):**\n\n| | What is clean | What is dirty | The right answer ends with |\n|---|---|---|---|\n| **ST-010** S16(a) | the data | nothing in the table; the cause is outside it | \"look **outside this table**\" |\n| **ST-020** S16(b) | the data | the **framing of the question** — the metric does not answer the objective | \"don't look for **this**\" |\n| **ST-029** S16(c) | the data, the question **and the calculation** | the **inference from the calculation** — the variables are confounded | \"the number is right, **the inference does not follow**\" |\n\nIn (a) the candidate confirms and sends the search elsewhere. In (b) he reframes the question. In (c) he confirms **everything he was asked to** and shows that what he confirmed provides no basis for the decision.\n\n- propose comparing premium against base **in identical locations** — 40 stores against 2, a small sample, but the direction is visible\n- notice that premium stores are 4.4 years younger — a second confounded variable\n- propose a pilot: convert base stores in top locations to the premium format and measure the effect"
-   }
+   },
+   "family_h25": "F0",
+   "family_src": "clean",
+   "family_conf": "высокая"
   },
   {
    "id": "ST-030",
@@ -2104,7 +2191,10 @@
    },
    "reference": {
     "en": "The candidate builds \"new customers\" and \"customers who arrived this year\" as parallel branches — for example, separating \"acquisition\" from \"base dynamics.\" These are **one set**, named twice.\n\nUnlike ST-011, where the overlap is **spatial** and is found by comparing two tables, here it is **temporal** and there is only one block: the exhibit never uses the phrase \"new customers,\" so the candidate must first map their own branch label onto the arrival definition printed in the note before the double count becomes arithmetic (61+61=122 against 61 arrivals, 200% of the increase). ST-011 is caught by comparing two blocks; ST-030 only by reconciling the tree against one. It is therefore **less visible**: both phrasings sound like different categories while describing the same people.\n\n**Top echelon: NO** — a candidate who checks the sums discovers the double count. An honest **Medium**.\n\n**Separation from ST-011 ([DUP], substantive):** in ST-011 the shared criterion is **spatial** — geography and customer type coincide because chains exist only in cities; it is found arithmetically (34+28=62). Here the shared criterion is **temporal** — \"new\" and \"arrived this year\" are identical by the definition in the note, and it is found by **reading the definition**, not by adding. Different origins and different means of detection.\n\n- notice that the referral programme delivers **39.3%** of inflow — the largest single source\n- compute: outflow of 23 thousand against inflow of 61 thousand means gross churn consumes **37.7%** of acquisition\n- propose looking at net growth by arrival cohort rather than in aggregate"
-   }
+   },
+   "family_h25": "F10",
+   "family_src": "словарь:S04",
+   "family_conf": "спорная"
   },
   {
    "id": "ST-031",
@@ -2187,7 +2277,10 @@
    },
    "reference": {
     "en": "The \"structure of past sales\" branch is neither an error nor a foolish move. It is strategic, relevant to the entry question, and returns accurate data. A candidate starting there gets a detailed picture of three segments and **not one fact about the fourth**, because the company's share there is 0%.\n\nE-after shows the decision turns on two rows that do not exist in past experience at all: a tender cycle of **14 months** and a certificate taking **9 months**, sequentially — a minimum of **23 months** against a plan of **6**.\n\n**Top echelon: YES.** The tree is correct, the branch is relevant, the data is accurate — and the answer is wrong.\n\n**Separation from ST-002 and ST-018 ([DUP], against BOTH):**\n\n| | Mechanism |\n|---|---|\n| **ST-002 (a)** | the branch is irrelevant to the **question** — \"Financials\" hold no variable explaining trust |\n| **ST-018 (b)** | relevant to the question, but at a **different level of decision** — operations for a strategic question |\n| **ST-031 (c)** | relevant to the question and the level, but for a **different period**: it describes a market the decision does not concern |\n\nIn (a) the data is not about it. In (b) the data is about it but for another decision. In (c) the data is about it and for it — but **about the past**, while the question is about a market where we have never been.\n\n- notice that 0% in the target segment is not a data gap but a **fact**: there is no experience\n- compute: 9 + 14 = 23 months against a plan of 6 — a gap of **17 months**\n- propose starting the certification immediately and replanning around 24 months"
-   }
+   },
+   "family_h25": "F9",
+   "family_src": "словарь:S02",
+   "family_conf": "спорная"
   },
   {
    "id": "ST-032",
@@ -2257,7 +2350,10 @@
    },
    "reference": {
     "en": "A candidate who knows the sunk-cost rule applies it to **money** — and in this slot the monetary figure ($1 340k) sits in the first row and is easy to discard. But what is also irrecoverable here is **two years of time** and the accumulated position of \"60% complete,\" and those feel different: they feel like an asset rather than a cost.\n\n\"60% complete\" is not an asset but a **description of how much has already been spent**. What is relevant is the remaining 40%.\n\n**Top echelon: NO** — a candidate who applies the rule consistently reaches the right answer. An honest **Medium**.\n\n**Separation from ST-005 ([DUP], substantive):** in ST-005 what is sunk is **money** — $40M for a line, and the quantity is plainly monetary. Here what is sunk is **time and position**: two years and \"60% complete.\" The phrasing \"we're almost done\" sounds like an argument **for** continuing, whereas \"we spent $40M\" sounds like a statement of fact. Different disguises for one rule.\n\n- notice that 11 months to release against 2 months to implement means a year of work with no result\n- compute: over three years the own path costs 760 + 3×210 = **$1 390k**, the ready-made one 95 + 3×180 = **$635k**\n- propose assessing whether the functional difference between the two solutions is worth the **$755k** difference over three years"
-   }
+   },
+   "family_h25": "F9",
+   "family_src": "словарь:S06",
+   "family_conf": "спорная"
   },
   {
    "id": "ST-033",
@@ -2333,7 +2429,10 @@
    },
    "reference": {
     "en": "The candidate names the criterion \"largest contribution\" — the right criterion. He applies it — the right operation. And he applies it to **revenue**, because that is the familiar quantity for ranking segments.\n\nThe question concerns the decline in **profit**. The largest segment by revenue (Dry mixes, $84.0M) delivers **$0.7M** of $4.6M, i.e. **15.2%**. The largest by decline (Roofing) delivers **$2.4M = 52.2%** on half the revenue.\n\n**Top echelon: NO** — a candidate who checks the quantity against the question reaches the right answer. An honest **Medium**.\n\n**Separation from ST-012 ([DUP], substantive):** in ST-012 the criterion is named and **violated** — the candidate declares \"size of effect\" and goes to a line contributing 8%. Here the criterion is named and **honoured**: the candidate genuinely takes the largest — but the largest **of the wrong quantity**. In ST-012 the defect is in executing the criterion; in ST-033 it is in choosing the quantity it is applied to.\n\n- notice that Roofing at $41.0M of revenue produces a decline **3.4 times larger** ($2.4M against $0.7M) than Dry mixes at $84.0M — so the problem is in margin, not volume\n- compute: Roofing and Insulation together deliver **78.3%** of the decline\n- propose checking whether this is a common factor across the two segments"
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:S08",
+   "family_conf": "высокая"
   },
   {
    "id": "ST-034",
@@ -2391,7 +2490,10 @@
    },
    "reference": {
     "en": "Every project is feasible on its own: A (14.0 ≤ 26.0, 6.5 ≤ 8.0), B, C — all pass. Ranking by NPV gives A (9.2) → C (7.4) → B (5.8), and the natural move is to take the two best.\n\n**A+C requires 12.0 engineers against 8.0 available.** Capex is within limits (23.0 ≤ 26.0) — the constraint binds on the second resource, not on money.\n\nThe best feasible set is **A+B** with an NPV of **$15.0M**, even though B is the weakest project by NPV.\n\n**Top echelon: YES.** The tree is complete, every project passes its check, the ranking is correct — and the answer is wrong, because what was checked were **projects** while the decision is about a **set**.\n\n**Separation from ST-007 ([DUP], substantive):** in ST-007 the requirement was to name **≥2 options** — the defect was an incomplete list. Here the list is complete, all three are named and checked; the defect is that the options are **not independent**, and checking each individually does not answer the question about a set. There, elements were missing; here, what is missing is a check of the **relations** between them.\n\n- notice the binding constraint is engineers, not money: for A+C capex is 23.0 ≤ 26.0\n- compute: A+B delivers NPV of $15.0M against an unreachable $16.6M for A+C — a loss of **$1.6M**\n- propose putting the engineering resource to the board: it is that resource, not the budget, standing between us and $16.6M"
-   }
+   },
+   "family_h25": "F2",
+   "family_src": "словарь:S10",
+   "family_conf": "высокая"
   },
   {
    "id": "ST-035",
@@ -2461,7 +2563,10 @@
    },
    "reference": {
     "en": "The director asks where **we are losing position**, and the question carries an unstated assumption that position is being lost. The candidate performs exactly the operation the S12 focus trains — separating external from internal — and finds: **the market −11.85%, us −11.83%, share 13.00% → 13.00%**.\n\nNo position has been lost. We are falling precisely with the market.\n\n**Top echelon: NO** — by construction, this is Clean. An honest **Medium**.\n\n**Clean mechanics:** the focus muscle is **not weakened** — separating external from internal is mandatory and is the only route to the answer. The result of that separation happens to be \"clean.\"\n\n**Separation from every Clean slot ([DUP], against THREE):**\n\n| | What is clean | What is dirty | The right answer |\n|---|---|---|---|\n| **ST-010** S16(a) | the data | nothing in the table; the cause lies outside | \"look **outside this table**\" |\n| **ST-020** S16(b) | the data | the **framing**: the metric does not answer the objective | \"don't look for **this**\" |\n| **ST-029** S16(c) | data, question, calculation | the **inference**: variables are confounded | \"the number is right, **the inference does not follow**\" |\n| **ST-035** S12(b) `○` | data, question, calculation **and inference** | the **premise** of the question: there is no loss | \"**there is nothing to look for**, no position has been lost\" |\n\nThe first three sit in focus S16, whose muscle is \"reject false suspicions.\" Here the focus is **S12**, the muscle is \"separate ours from the market's,\" and Clean arises as the **result** of applying it rather than as the subject of the slot.\n\n- notice that the 0.02 pp divergence in rates is rounding, not a movement in share\n- propose reframing the task for the director: not \"where are we losing\" but \"how do we get through a contracting market without losing share\"\n- observe that the customer count barely moved (412 → 409) — the base is intact"
-   }
+   },
+   "family_h25": "F0",
+   "family_src": "clean",
+   "family_conf": "высокая"
   },
   {
    "id": "ST-036",
@@ -2586,7 +2691,10 @@
    },
    "reference": {
     "en": "The candidate builds a correct tree: what it delivers, what it costs, what the total is. All three branches are confirmed by the data, and the annual result of −$3.0M is computed correctly.\n\nThe error is that the **horizon is collapsed to a point**. The effects begin in a different order: the saving in month 1, the churn in month 7 — and not by accident, but because customers leave when a six-month package expires. The cumulative total is **positive for ten months** and reaches **+$10.8M** by month 6.\n\n**Top echelon: YES.** The tree is complete, the calculation correct, and the answer \"shut it down\" is wrong without first asking whether the churn is fixable.\n\n**The sign flip is honest.** There is no discounting and no rate exists in the construction. The sign flips through the **order in which the effects arrive**.\n\n**Separation from ST-016 ([DUP], substantive):** in ST-016 the **horizon** is collapsed — year 1 against three years, and different horizons give different signs. Here the horizon is a single year and what is collapsed is the **sequence within it**: two effects starting in different months. In ST-016 you must look further; in ST-036 you must look **inside**.\n\n- notice the churn is tied to the package term (6 months), i.e. it is a **one-off wave** rather than steady attrition\n- compute: if churn stops after the first wave, month 13 delivers +1.8 and the cumulative total returns to positive in month 14\n- propose checking the reason for leaving: the protocol itself or how it was presented to customers"
-   }
+   },
+   "family_h25": "F2",
+   "family_src": "словарь:S15",
+   "family_conf": "высокая"
   },
   {
    "id": "ST-037",
@@ -2614,7 +2722,10 @@
    },
    "reference": {
     "en": "The candidate sets \"corporate customers\" and \"customers on an annual contract\" as two branches. **Structurally they are not nested** — both at the first level, each with its own sub-branches, and the nesting test passes.\n\nThe overlap exists only in the **definition**: corporate status in this company is granted **on signing an annual contract**, so these are exactly the same 218 customers. Added as parallel branches, they give 436 customers against an actual 218.\n\n**Top echelon: NO** — a candidate who compares definitions discovers the identity. An honest **Medium**.\n\n**Separation from ST-003 and ST-021 ([DUP], against BOTH):**\n\n| | Where the overlap sits | How it is detected |\n|---|---|---|\n| **ST-003 (a)** | **within one level** — \"fuel\" beside \"variable costs\" | a pairwise check of the first level |\n| **ST-021 (b)** | **between levels** — a sub-branch of one branch is another first-level branch | a two-level matrix |\n| **ST-037 (c)** | **in the definition** — there is no structural nesting at all | comparing **definitions**, not structure |\n\nIn (a) and (b) the overlap is visible from the tree. In (c) the tree is correct under any structural check, and it can be found only by reading what each attribute means.\n\n- notice that 8% revenue growth against −3% profit implies a margin decline **of 10.2% in relative terms** (0.97 / 1.08 − 1)\n- propose checking whether volume discounts are tied to annual contracts\n- observe that the identity of the branches makes any addition of them invalid"
-   }
+   },
+   "family_h25": "F10",
+   "family_src": "словарь:S03",
+   "family_conf": "спорная"
   },
   {
    "id": "ST-038",
@@ -2678,7 +2789,10 @@
    },
    "reference": {
     "en": "The tree \"profit = revenue − costs\" is right as a type. The unit of analysis is right too — profit, which is what was asked about. What is wrong is the **level of aggregation**: the count is at chain level while the decision is taken at site level.\n\nAll three levels are internally consistent and the sums reconcile. And each gives its own answer: the chain is profitable ($163.5M), every region is profitable, **34 of 121 sites are loss-making** — and in the South that is **55.2%** against 19–21% elsewhere.\n\n**Top echelon: NO** — a candidate who asks \"at what level is this decision taken\" reaches the right answer. An honest **Medium**.\n\n**Separation from ST-004 and ST-022 ([DUP], against BOTH):**\n\n| | What is wrong |\n|---|---|\n| **ST-004 (a)** | the **type** of tree — a profit tree for a foundation with no revenue |\n| **ST-022 (b)** | the **unit of analysis** — margin per customer instead of margin per order |\n| **ST-038 (c)** | the **level of aggregation** — the same quantity computed on the chain rather than the site |\n\nIn (a) the tree is not about this organisation. In (b) the tree is about it but counts the wrong entity. In (c) the tree is about it and counts the right entity — but **at the wrong level**, and at the required level the answer is the opposite.\n\n- notice the South carries **55.2%** loss-making sites against 19.0–20.6% elsewhere — the problem is regional\n- compute: 34 loss-making sites inside a profitable chain means the profitable sites are covering their losses\n- propose not closing immediately: part of a closed site's revenue transfers to neighbours, so the effect of closure is smaller than the site's loss"
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:S05",
+   "family_conf": "высокая"
   },
   {
    "id": "ST-039",
@@ -2706,7 +2820,10 @@
    },
    "reference": {
     "en": "The tree is complete, depth is allocated correctly, the order is correct: the candidate moves from cost structure to the largest line and finds — \"logistics rose.\" And **stops**, because at that level there is already an answer to \"where.\"\n\nBut the question was \"work out the cause,\" and \"logistics\" is a **place**, not a cause. At that level no action can be named: it is not known whether the contractor's rate rose, mileage rose, or the route mix changed.\n\n**Top echelon: NO** — by construction. An honest **Easy**.\n\n**Separation from ST-013 and ST-024 ([DUP], against BOTH):**\n\n| | What is wrong |\n|---|---|\n| **ST-013 (a)** | depth went **into the wrong branch** — three levels inside a line with no contribution |\n| **ST-024 (b)** | depth is right, the **order** is wrong — started with staff ($1.1M), never reached fuel ($8.9M) |\n| **ST-039 (c)** | depth and order are right, the **stopping point** is wrong — reached the right branch and halted before an action appeared |\n\nIn (a) he dug in the wrong place. In (b) he dug in the right place in the wrong order. In (c) he dug in the right place in the right order — and **abandoned it halfway**.\n\n- propose a stopping rule: the analysis is complete when what is found permits naming a specific action\n- notice that rising costs at unchanged volume mean rising **unit** costs\n- propose checking whether the route mix changed while total volume held"
-   }
+   },
+   "family_h25": "F9",
+   "family_src": "словарь:S09",
+   "family_conf": "спорная"
   },
   {
    "id": "ST-040",
@@ -2775,7 +2892,10 @@
    },
    "reference": {
     "en": "The regulator **is named** in the plan. The role is stated **correctly** — project approval. The standard check \"are all participants accounted for and their functions correctly described\" **passes in full**.\n\nThe defect is in the **moment**: approval sits in months 15–20 while it is required **before month 5**, because it determines the equipment requirements. Equipment procurement happens in months 5–9 — that is, **before** the requirements are known, and non-returnable if they are not met.\n\n**Top echelon: NO** — a candidate who checks the dependencies between stages finds the defect. An honest **Medium**.\n\n**Separation from ST-014 and ST-025 ([DUP], against BOTH):**\n\n| | Actor | Role | Moment | What is detected |\n|---|---|---|---|---|\n| **ST-014 (a)** | **not named** | — | — | a missing row in the map |\n| **ST-025 (b)** | named | **wrong** (channel instead of decision-maker) | — | a mismatch between two role columns |\n| **ST-040 (c)** | named | **correct** | **wrong** | a mismatch between two **date** columns |\n\nThree states: the actor is absent; the actor is present but does the wrong thing; the actor is present and does the right thing — but **not at the right time**.\n\n- compute: $8.4M at risk = **35.6%** of the budget\n- propose moving approval to months 1–6 in parallel with design\n- notice that moving it does not extend the overall timeline: approval runs in parallel rather than in sequence"
-   }
+   },
+   "family_h25": "F9",
+   "family_src": "словарь:S11",
+   "family_conf": "высокая"
   },
   {
    "id": "ST-041",
@@ -2863,7 +2983,10 @@
    },
    "reference": {
     "en": "The candidate sets \"large customers\" and \"profitable customers\" as two branches of the cut. The attributes are **different by definition** — one concerns customer revenue, the other their profitability. There is no structural nesting. The test \"is A part of B\" passes.\n\nThe exhibit, released after, shows: the cost of service **does not depend on size** ($41.0k for any customer), so profitability is determined by the single condition \"revenue > $500k\" — that is, **the boundary of the \"large\" group**. The sets coincide: 64 = 64.\n\n**Top echelon: YES.** The tree is correct structurally and by definitions, and still counts the same customers twice.\n\n**Separation from ST-011, ST-030 and ST-037 ([DUP], against ALL THREE):**\n\n| | Nature of the coincidence | How it is detected |\n|---|---|---|\n| **ST-011** S04(a) | **spatial**: chains exist only in cities | adding the shares (34+28=62) |\n| **ST-030** S04(b) | **temporal**: \"new\" = \"arrived this year\" | reading the definition |\n| **ST-037** S03(c) | **by rule**: corporate status is granted on an annual contract | comparing definitions |\n| **ST-041** S04(c) | **by consequence**: profitability **follows** from size through a fixed cost of service | examining the **mechanism** that generates the attribute |\n\nIn ST-037 the coincidence is set by a **rule of assignment**. Here it is set by **economics**: nobody defined profitability through size, it came out that way because the cost is fixed.\n\n- notice that at a service cost of $41.0k, all **315** customers below the threshold are unprofitable\n- compute: the unprofitable ones deliver **46.4%** of revenue, so dropping them cuts almost half the turnover\n- propose changing the **cost of service** rather than segmenting — it is what creates the threshold"
-   }
+   },
+   "family_h25": "F10",
+   "family_src": "словарь:S04",
+   "family_conf": "спорная"
   },
   {
    "id": "ST-042",
@@ -2933,7 +3056,10 @@
    },
    "reference": {
     "en": "The monetary sunk cost ($34.0M) is discarded — the rule is known and the figure is explicit. **The reputational stake is not discarded**, because it does not look like a cost: it looks like an **obligation**, and obligations are meant to be honoured.\n\nYet it is sunk in exactly the same way: the word has been said, and the damage from a gap between word and deed arises from **the plan being unachievable**, not from admitting it. It does not distinguish between decisions about the future.\n\n**Top echelon: NO** — a candidate who applies the rule to a non-monetary sunk item reaches the right answer. An honest **Medium**.\n\n**Separation from ST-005 and ST-032 ([DUP], against BOTH):**\n\n| | What is sunk | Why it is disguised |\n|---|---|---|\n| **ST-005** S06(a) | **money** — $40M for a line | not disguised at all; the rule in its plain form |\n| **ST-032** S06(b) | **time and position** — 2 years, 60% complete | \"we're almost done\" sounds like an argument for |\n| **ST-042** S06(c) | a **public commitment** | it looks not like a cost but like an **obligation**; backing out feels like breaking one's word |\n\nIn (a) the figure is monetary and explicit. In (b) it is non-monetary but expressible as cost. In (c) it is non-monetary and **not expressible as cost at all** — it concerns reputation, and the sunk-cost rule is hardest of all to apply to it.\n\n- notice that 19 of 60 sites have not reached payback — **31.7%** of those already open\n- compute: $71.0M at the 14% alternative gives **$9.94M/year** of forgone return\n- propose a third path: stop at 60 sites, neither closing nor expanding"
-   }
+   },
+   "family_h25": "F9",
+   "family_src": "словарь:S06",
+   "family_conf": "спорная"
   },
   {
    "id": "ST-043",
@@ -3003,7 +3129,10 @@
    },
    "reference": {
     "en": "A triple inversion, the fourth Clean state in the type.\n\n- The data is clean — all three sites, the full volume, precision to the cent.\n- The question is legitimate — a site really does need choosing.\n- The metric is **appropriate** — delivery cost is relevant for a distribution centre.\n- The calculation is correct — $4.82 is confirmed.\n\nAnd the metric **does not distinguish the options**: the spread is zero. \"The winner is X\" cannot be said, not because the data is poor, but because **the chosen criterion is identical for all**.\n\n**Top echelon: NO** — by construction, this is Clean.\n\n**Separation from every Clean slot ([DUP], against FOUR):**\n\n| | What is clean | What prevents an answer | The answer ends with |\n|---|---|---|---|\n| **ST-010** S16(a) | the data | nothing; the cause lies outside the table | \"look **outside this table**\" |\n| **ST-020** S16(b) | the data | the metric does not answer the **objective** | \"don't look for **this**\" |\n| **ST-029** S16(c) | data, question, calculation | the **inference** does not follow from the number | \"the number is right, **the inference does not follow**\" |\n| **ST-035** S12(b) | data, question, calculation, inference | the **premise** of the question is false | \"**there is nothing to look for**\" |\n| **ST-043** S07(c) | data, question, calculation, **and the metric is appropriate** | the metric **does not discriminate** | \"the metric is right, **but you cannot choose on it**\" |\n\nIn ST-020 the metric is not about the right thing. Here the metric **is** about the right thing and correctly computed — it is simply identical.\n\n- notice that a zero spread is a **substantive result**, not a data defect\n- compute: capex differs by **$6.6M**, rent by **$2.8M/year** — that is where the choice lies\n- propose a criterion of total cost over 5 years: Southern $14.7 + 5×$1.8 = **$23.7M**, Northern **$25.9M**, Eastern **$31.1M** — **Southern is $7.4M cheaper than Eastern**, though on capex it looks the worst"
-   }
+   },
+   "family_h25": "F0",
+   "family_src": "clean",
+   "family_conf": "высокая"
   },
   {
    "id": "ST-044",
@@ -3065,7 +3194,10 @@
    },
    "reference": {
     "en": "The candidate names the criterion \"largest effect\" — the right criterion. He applies it to the quantity \"effect in $M\" — **the right quantity** (unlike ST-033, where the quantity was wrong). The ranking is correct: 2.1 → 1.8 → 0.4.\n\nAnd the priority is still wrong, because the criterion **measures the wrong thing when setting a sequence**. Under sequential execution what matters is not the gain but the **loss from postponement**, and that is asymmetric: reversible initiatives lose time, the irreversible one loses production.\n\n**Top echelon: YES.** The criterion is right, the quantity is right, the arithmetic is right — and the answer is wrong.\n\n**Separation from ST-012 and ST-033 ([DUP], against BOTH):**\n\n| | Criterion | Quantity | What is wrong |\n|---|---|---|---|\n| **ST-012** S08(a) | named | — | the criterion is **violated**: declared \"size of effect,\" went to a line contributing 8% |\n| **ST-033** S08(b) | right, honoured | **wrong** — revenue instead of profit | the ranking is on the wrong quantity |\n| **ST-044** S08(c) | right, honoured | **right** — effect in $M | **the criterion itself does not fit the task**: sequencing needs the price of omission, not the size of the gain |\n\nThree levels: fail to honour the criterion → honour it on the wrong quantity → honour it on the right quantity **with the wrong criterion**.\n\n- notice: the price of missing the licence is a production halt of unknown length — its order of magnitude has to be estimated before it can be set against the $0.4M effect\n- notice the deadlines run inversely to the effects: 3 < 9 < 14 against 0.4 < 1.8 < 2.1\n- propose the criterion \"maximum price of omission\" instead of \"maximum effect\" for sequencing tasks"
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:S08",
+   "family_conf": "высокая"
   },
   {
    "id": "ST-045",
@@ -3127,7 +3259,10 @@
    },
    "reference": {
     "en": "The question is framed as \"**how do we add** capacity,\" and that framing **narrows the space** to ways of adding. The candidate names three, all correct, all independent, all costed — and the list looks exhaustive, because it exhausts the **stated** axis.\n\nThe fourth option lies on the same real axis (\"bring demand and capacity into balance\") and requires no capex and has to be costed before the three named options can be ranked.\n\n**Top echelon: YES.** Three options are named correctly, are independent, are costed correctly and ranked correctly — and the answer is wrong, because the set is incomplete.\n\n**Separation from ST-007 and ST-034 ([DUP], against BOTH):**\n\n| | What is wrong with the options |\n|---|---|\n| **ST-007** S10(a) | **one** is named, ≥2 required — the list is **quantitatively incomplete** |\n| **ST-034** S10(b) | all three are named, independence is **violated** — together they do not fit the resource |\n| **ST-045** S10(c) | all are named, independent, costed — the set is **not closed on the axis**: a fourth element exists outside the stated framing |\n\nIn (a) elements are missing. In (b) the elements conflict. In (c) the elements are fine, and **the axis of enumeration has been narrowed by the question**.\n\n- notice that the question \"how do we add\" **itself narrows** the space — reframe it as \"how do we bring demand and capacity into balance\"\n- compute: leasing covers **19 of 34 pp**, i.e. **55.9%** of the shortfall — the only partial option\n- propose a combination: price plus leasing, if the shortfall must be closed quickly and in full"
-   }
+   },
+   "family_h25": "F2",
+   "family_src": "словарь:S10",
+   "family_conf": "высокая"
   },
   {
    "id": "ST-046",
@@ -3197,7 +3332,10 @@
    },
    "reference": {
     "en": "The candidate performs **the correct operation of focus S12** — separating external from internal. And the separation confirms the director's hypothesis: the channel market really did contract 32.6%, an external fact.\n\nThe error is in the **boundary**: the channel contraction was caused in part by our own launch of direct sales. The phenomenon has been assigned to the external **by where it is observed**, not by its cause. We fall faster than the channel market (−46.5% against −32.6%), lose share within it (−3.0 pp), and grow in direct sales at the same time (+21.3%).\n\n**Top echelon: YES.** The separation is performed correctly, the external fact is confirmed — and the conclusion \"it is not our doing\" is wrong.\n\n**Separation from ST-015 and ST-035 ([DUP], against BOTH, same focus S12):**\n\n| | The separation | The result |\n|---|---|---|\n| **ST-015** S12(a) | **not performed** — \"demand fell\" conflates ours with the market's | performing it gives the candidate the answer |\n| **ST-035** S12(b) `○` | performed correctly | the result is **clean**: share is stable, nothing has been lost — **Clean** |\n| **ST-046** S12(c) | performed correctly | the result is **misleading**: the external is confirmed but **we caused it** — the boundary is in the wrong place |\n\nIn (a) the operation is not performed. In (b) it is performed and the answer is \"there is no problem.\" In (c) it is performed and the answer looks like \"the problem is external\" — and that is a **wrong attribution**, not a wrong calculation.\n\n- notice we fall **13.9 pp faster** than the channel market (−46.5% against −32.6%) — so there is a contribution of ours on top of the general one\n- compute the net effect: direct +$29.2M against distribution −$85.6M, i.e. **−$56.4M**\n- propose assessing whether the growth of the direct channel compensates the loss of distribution over the horizon — at present it does not"
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "словарь:S12",
+   "family_conf": "высокая"
   },
   {
    "id": "ST-047",
@@ -3259,7 +3397,10 @@
    },
    "reference": {
     "en": "Management **is not making a mistake**. Its calculation is correct, the data is agreed, and option C really does deliver the highest first-year profit — **$16.8M** against $14.2M and $9.6M.\n\nThe divergence lies in the **objective function**: the board maximises the three-year sum, where the best option is **B ($50.7M)**, while management maximises the first year, where the best is **C ($16.8M)**. Both optimisations are correct, and both parties are right **within their own problem**.\n\n**Top echelon: NO** — a candidate who asks \"which quantity are we maximising\" reaches the right answer. An honest **Medium**, as planned.\n\n**Separation from ST-009 and ST-026 ([DUP], against BOTH):**\n\n| | The objective | What is wrong |\n|---|---|---|\n| **ST-009** S14(a) | the client names a **means** (subscription) | the objective is replaced by an instrument |\n| **ST-026** S14(b) | the objective is right but **intermediate** (churn instead of profit) | optimising the intermediate contradicts the ultimate |\n| **ST-047** S14(c) | the objective is right and ultimate **for each party** | the objectives **differ between parties**, and both optimisations are correct |\n\nIn (a) there is no objective. In (b) the objective is the wrong one. In (c) there are **two**, both genuine, and the conflict lies not in understanding but in the **incentive scheme**.\n\n- notice the divergence is worth **$8.8M** over three years (50.7 against 41.9)\n- compute: option B loses to C by **$7.2M** in the first year — that is the price of patience\n- propose a solution that is not analytical but **organisational**: tie part of the remuneration to the three-year result"
-   }
+   },
+   "family_h25": "F2",
+   "family_src": "словарь:S14",
+   "family_conf": "высокая"
   },
   {
    "id": "ST-048",
@@ -3323,7 +3464,13 @@
    },
    "reference": {
     "en": "The total is correct and positive: **+$3.2M** over 24 months. The horizon is chosen correctly — 24 months, the whole project. The sequence of effects is accounted for: costs first, returns after.\n\nThe error is that **mid-horizon there is a point of no return**, and it falls exactly on the **maximum accumulated loss**: at month 8 the figure is **−$11.2M**, and from month 9 exit also means reinstating a line that has been dismantled — a cost the client has to be asked for.\n\nThe project therefore asks for agreement not to \"+$3.2M over two years\" but to \"−$11.2M with the right to change our minds forfeited, in exchange for +$3.2M in 24 months.\"\n\n**Top echelon: NO** — a candidate who checks reversibility stage by stage reaches the right answer. An honest **Medium**, as planned.\n\n**Separation from ST-016 and ST-036 ([DUP], against BOTH):**\n\n| | What is collapsed | What unfolding it reveals |\n|---|---|---|\n| **ST-016** S15(a) | the **horizon**: year 1 against three years | the sign changes over a longer horizon |\n| **ST-036** S15(b) | the **sequence**: effects start in different months within the year | the sign changes inside the period |\n| **ST-048** S15(c) | **reversibility**: horizon and sequence are both correct | mid-way the **right to exit disappears**, and this is visible in neither the total nor the profile alone |\n\nIn (a) look further. In (b) look inside. In (c) look at **rights** rather than money: the trajectory is known, and the question is when the option to stop disappears.\n\n- notice that the month of the minimum and the month reversibility is lost **coincide** — the worst possible combination\n- compute: exiting at month 9 costs 11.2 + 19.4 = **$30.6M** against $11.2M at month 8\n- propose moving the dismantling of the old line to month 12 if technically possible: the point of no return would then fall beyond the minimum"
-   }
+   },
+   "family_h25": "F2",
+   "family_src": "словарь:S15",
+   "family_conf": "высокая"
   }
- ]
+ ],
+ "_meta": {
+  "family_h25": "Семья трудности Н25 (F1-F10). F0 = Clean-слот, ловушки нет по конструкции. Поле авторское, движок его не читает и кандидату не отдаёт; включится, когда подбор слотов начнёт балансировать партию по семьям. family_src: 'тело' = размечено чтением слота (круг 29), 'словарь:<код>' = выведено из собственного словаря библиотеки, 'clean' = по признаку Clean. family_conf='спорная' = решается прецедентом Н25.8, метка временная."
+ }
 }

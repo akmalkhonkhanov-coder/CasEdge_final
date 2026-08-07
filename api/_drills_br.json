@@ -45,7 +45,10 @@
      "peridea_raw": "**Per-idea analysis — computed BEFORE the kill set is declared (`[CULL-PERIDEA]`):**\n\n| # | Idea | What the fact does to it | Verdict |\n|---|---|---|---|\n| 1 | Processing coloured HDPE | the line cannot do it for 14 months — the idea **directly contradicts** the fact | **killed** · `contradicts the fact` |\n| 2 | Toll processing for a preform manufacturer | the fact does not touch it: clear PET, certificate in force | alive |\n| 3 | Sell night shifts to a contractor | the fact does not touch it | alive |\n| 4 | Recertify and look for a client in parallel | the action is **feasible** and does not contradict the fact; but it takes 14 months against a question horizon of 3 | **killed** · `does not answer the question asked` |\n| 5 | Export under the current certificate | the fact does not touch it | alive |\n| 6 | Mothball half the line | the fact does not touch it; economically weak, but weakness is not grounds for culling | alive |\n| 7 | Buy an HDPE granulator | the purchase is **feasible** and does not contradict the fact; it fills no capacity in three months or later without the certificate | **killed** · `does not answer the question asked` |\n\n**Kill set: `{1, 4, 7}` — derived from the table, not the other way round.**\n**The grounds differ:** `1` — contradiction with the fact; `4` and `7` — irrelevance to the horizon of the question. A candidate who states this distinction more precisely than the first draft recorded it must be passed, not failed.\n\n**Pass criteria, second move:** the set `{1, 4, 7}` named exactly, with grounds. One cut too many fails as hard as one missed.\n\n**`[NOSELF]`:** neither the prompt nor the facts call certification an obstacle — it is presented as a property of the line. The word \"constraint\" does not appear in the text.\n\n---\n\n---"
     },
     "grader": "### Grader\n\n- **load_syn:** toll · tolling · third-party feedstock · contract process · processing under someone else's brand · conversion only\n- **cover.A (existing certification):** preform · thermoform · clear pet · food-grade pet · same pet stream · same grade\n- **cover.B (selling/leasing capacity):** sell shifts · lease the line · contractor · sell capacity · mothball\n- **cover.C (export):** export · abroad · overseas market · recogni\n- **dead.D1 (coloured HDPE):** hdpe · colo · new polymer · different feedstock grade\n- **dead.D2 (win the client back):** win the client back · negotiate with the departed client · retain the client\n- **dead.D3 (ungrounded):** step up marketing · broaden the range · improve quality\n\n---\n\n---\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F4",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-002",
@@ -72,7 +75,10 @@
     "dead": "**`DEAD`:**\n\n| Branch | What kills it |\n|---|---|\n| \"Step up marketing of the new tier\" | fails `[GROUND]` |\n| Open clubs in new cities | outside the question: what is asked is what to check **before launching the tier** |\n| Raise the price of the main tier | does not answer the question of introducing a second one |\n\n**Pass criteria:** `LOAD` named + at least two `COVER` axes + no `DEAD`. Ideas beyond `[GATE-3]` are not required and add no credit.",
     "cull": null,
     "grader": "### Grader\n\n- **load_syn:** migrat · cannibal · will switch from the current tier · will leave the old tier · margin on the switchers\n- **cover.A (off-peak demand):** student · shift work · retire · who trains during the day · new segment\n- **cover.B (throughput):** utili · peak · changing room · shower · capacity\n- **cover.C (channel and contracts):** corporat · b2b · company contract · public tier\n- **dead.D1:** step up marketing · promote the new tier\n- **dead.D2:** new cities · new clubs · regional expansion\n- **dead.D3:** raise the main tier price · make the base tier more expensive\n\n---\n\n---\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F2",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-003",
@@ -99,7 +105,10 @@
     "dead": "**`DEAD` — and this is the core of the slot:**\n\n| Branch | What kills it |\n|---|---|\n| Fleet wear | the fleet is shared across the network; city-wide availability has not changed |\n| Growth in users | true for the city; explains nothing about **one** station |\n| Seasonality | acts on all 240 stations alike |\n\nEach of the three is **a true statement about the business and an empty one about the question.** A candidate who builds a flawless MECE list of city-level causes answers wrongly.\n\n**Pass criteria:** `LOAD` named + ≥2 `COVER` axes; every accepted `DEAD` subtracts.",
     "cull": null,
     "grader": "### Grader\n\n- **load_syn:** this station specifically · local · one-way flow · rebalanc · faulty dock · nearby development\n- **cover.A (siting and capacity):** metro · office · campus · number of docks · station capacity\n- **cover.B (rebalancing):** truck · resupply · delivery schedul · how many are dropped off\n- **cover.C (equipment condition):** faulty · repair · the station's bikes · written off\n- **dead.D1:** fleet wear · aging · age of the bikes\n- **dead.D2:** growth in users · more demand in the city\n- **dead.D3:** seasonality · weather · summer\n\n---\n\n---\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-004",
@@ -140,7 +149,10 @@
      "peridea_raw": "**Per-idea analysis — computed BEFORE the kill set is declared (`[CULL-PERIDEA]`):**\n\n| # | Idea | What the fact does to it | Verdict |\n|---|---|---|---|\n| 1 | Single subscription at the average cost | 70% of breakdowns sit with a third of renters ⇒ owners of newer machines pay for other people's failures and leave; revenue falls in exactly the segment the subscription was built for | **killed** · `second-order effect reverses the sign` |\n| 2 | Tariff by machine age | the fact supports it | alive |\n| 3 | Subscription for new contracts only | the fact does not touch it | alive |\n| 4 | Discount for renters taking five units or more | the fact **does not connect** a renter's fleet size to machine age. To kill the idea you need the assumption \"large renters hold newer machines\" — the slot does not contain it | **alive** |\n| 5 | Scheduled maintenance in, emergencies out | the fact does not touch it | alive |\n| 6 | Sell machines older than eight years | expensive and slow, but not killed by the fact | alive |\n\n**Kill set: `{1}`.**\n\n**Proof by contradiction, mandatory in a CULL slot:** if the rule were \"any pricing not tied to age is dead\", it would also catch idea 5, which is alive. So no such rule exists, and `{1, 4}` does not follow from the fact. `{1}` does.\n\n**`[NOSELF]`:** the prompt does not say breakdowns are unevenly distributed; the fleet's average age is given as background.\n\n---\n\n---"
     },
     "grader": "### Grader\n\n- **load_syn:** breakdowns by age · machine age · distribution of failures · older than eight · uneven\n- **cover.A (service economics):** cost per call-out · service revenue · repeat repair\n- **cover.B (willingness to pay):** predictab · subsidi · will they agree to pay\n- **cover.C (delivery times):** sla · downtime · call-out priority · penalty\n- **dead.D1:** raise rental prices · put the rental rate up\n- **dead.D2:** train the mechanics\n\n---\n\n---\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-005",
@@ -169,7 +181,10 @@
     "dead": "**`DEAD`:**\n\n| Branch | What kills it |\n|---|---|\n| Budget and licence cost | the budget is approved with a 15% reserve — a fact of the slot |\n| \"Train the staff\" with no statement of whom and why them | fails `[GROUND]`; it describes a measure, not a risk |\n| Board resistance | the board signed the project off |\n\n**Echelon mechanic:** a formally impeccable stakeholder list (physicians, IT, regulator, budget) yields the conclusion \"no obstacles, roll it out\" — and that conclusion is wrong.",
     "cull": null,
     "grader": "### Grader\n\n- **load_syn:** nurs · nurse · duty shift · nursing staff · who enters the orders · junior clinical staff\n- **cover.A (physicians):** physician · the fourth hospital · ward round\n- **cover.B (IT and integration):** integrat · outage · rollback · lab system · system training\n- **cover.C (regulator and records):** regulator · paper duplicat · audit · one-year retention\n- **dead.D1:** budget · licen · not enough money\n- **dead.D2:** train the staff\n- **dead.D3:** the board is against · board resistance\n\n---\n\n---\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F4",
+   "family_src": "тело",
+   "family_conf": "низкая"
   },
   {
    "id": "BR-006",
@@ -208,7 +223,10 @@
      "peridea_raw": "**Per-idea analysis (`[CULL-PERIDEA]` applies in Clean too — otherwise a zero cannot be proved):**\n\n| # | Idea | What the fact does to it | Verdict |\n|---|---|---|---|\n| 1 | Start with sports — the rights go for three years | a partner licence does not bring back a missed auction | alive |\n| 2 | Start with children's — cheaper | the licence makes deferral cheaper but does not cancel the idea | alive |\n| 3 | Estimate churn over a year of waiting | the fact changes the size of the churn, not the task | alive |\n| 4 | Check the team's throughput | the licence removes part of the load; the question stands | alive |\n| 5 | Account for the cost of the deferred package | the fact **sharpens** that cost — the idea gets stronger, not deader | alive |\n| 6 | Compare LTV across segments | the fact does not touch it | alive |\n\n**Kill set: `{}` — zero, and it is proved line by line rather than asserted.** The partner licence shifts the **weight** of the arguments but moves no idea outside what is admissible.\n\n**Clean pass criteria:** zero culled **and** an explicit statement along the lines of \"this fact cancels nothing, because it changes the cost of waiting rather than the fork itself\". A silent zero does not count: without grounds, understanding cannot be told apart from inaction.\n\n**Purpose of the slot:** a candidate arriving from BR-001 and BR-004 comes in with a reflex to cut. The slot is the inoculation against it, which is why it sits in the first batch rather than the third.\n\n---"
     },
     "grader": "### Grader\n\n- **load_syn:** irreversib · harder to launch later · the window closes · missed auction · rights cycle\n- **cover.A (demand and market window):** demand · window · a competitor will launch\n- **cover.B (reuse):** infrastructure · already built · reuse\n- **cover.C (team and timelines):** team · timeline · schedul · burnout\n- **dead.D1:** launch both · both in stages\n- **dead.D2:** hire a second team · expand headcount\n\n---\n\n---\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F0",
+   "family_src": "clean",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-007",
@@ -252,7 +270,10 @@
      "peridea_raw": "**Per-idea analysis (`[CULL-PERIDEA]`):**\n\n| # | Idea | What the fact does to it | Verdict |\n|---|---|---|---|\n| 1 | Take more from existing carriers | two of the three are locked into firm contracts; the headroom falls from 60 000 to ≈20 000 — the idea **does not die**, but the quantified coverage falls from 130 000 to **90 000 against 420 000, just over a fifth** | alive |\n| 2 | Bulk cargo | the fact does not touch it | alive |\n| 3 | Tariff −10% | the fact does not touch it | alive |\n| 4 | Joint rate with the railway | the fact does not touch it | alive |\n| 5 | Mothball a berth | the fact does not touch it; the measure is about cost, not volume | alive |\n| 6 | Design work on a terminal | **does not answer the question asked**: the horizon is a quarter | **killed** · `does not answer the question asked` |\n| 7 | Sell a window to a stevedore | the fact does not touch it | alive |\n\n**Kill set: `{6}`** — derived from the table. The only one killed, and rightly so: the fact about the contracts destroys no ideas, it **devalues the largest quantified one**, and that is exactly what the candidate must notice by recomputing the gap.\n\n**`[NOSELF]`:** neither the prompt nor the facts say \"that will not be enough\". Every number is given as background on capacity and growth; the adding up is the candidate's work."
     },
     "grader": "### Grader\n\n- **load_syn:** not enough · does not close · gap · volume shortfall · sum of the measures · under a third · 130 against 420 · cannot be sized · no volume figure for the competitor · insufficient\n- **cover.A (existing customers):** existing carrier · current customers · share with existing · extend the contract\n- **cover.B (new cargo types):** bulk · ro-ro · project cargo · different cargo type\n- **cover.C (tariff and taking share):** tariff · undercut · take volume off · neighbouring port · rail rate\n- **dead.D1 (new terminal):** new terminal · build a berth · construction\n- **dead.D2 (win the carrier back):** win the carrier back · retain the departed\n- **dead.D3 (ungrounded):** step up sales · improve service · port marketing\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F4",
+   "family_src": "тело",
+   "family_conf": "низкая"
   },
   {
    "id": "BR-008",
@@ -280,7 +301,10 @@
     "dead": "**`DEAD`:**\n\n| Branch | What kills it |\n|---|---|\n| Cut the number of teachers | the question is about a pay rise, not headcount; at 88–96% occupancy there is nobody to cut |\n| Open new nurseries | outside the question |\n| \"Improve the culture\" with no mechanism | fails `[GROUND]` |\n\n**Echelon mechanic:** a list of six retention ideas — competent, comprehensive and **wrong**, if none of them links pay to parent fees.",
     "cull": null,
     "grader": "### Grader\n\n- **load_syn:** parent fees · we raise the price · pass it on to parent · families leave · occupancy will fall · second order · elastic\n- **cover.A (economics of the decision):** payroll · wage share · payback · cost of recruit · saving on hiring\n- **cover.B (demand and price):** competitor is cheaper · willingness to pay · demand · family budget\n- **cover.C (alternatives to money):** rota · group size · training · career · working conditions\n- **dead.D1:** cut teachers · lay some off · optimise headcount\n- **dead.D2:** open new nurseries · network expansion\n- **dead.D3:** corporate cultur · improve the atmosphere\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F2",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-009",
@@ -323,7 +347,10 @@
      "peridea_raw": "**Per-idea analysis (`[CULL-PERIDEA]`):**\n\n| # | Idea | What the fact does to it | Verdict |\n|---|---|---|---|\n| 1 | Push through the distributors | the retroactive discount deepens across the whole volume: the more we sell, the lower the margin — **the sign of the result reverses** | **killed** · `second-order effect reverses the sign` |\n| 2 | Revisit the scale | the fact supports it | alive |\n| 3 | Direct contracts | the fact does not touch it | alive |\n| 4 | Paid agronomy support | the fact does not touch it | alive |\n| 5 | Shift the mix | the fact does not touch it | alive |\n| 6 | Bonus on volume above plan | it reinforces the same retroactive mechanic: a bonus stacked on a deepening discount | **killed** · `second-order effect reverses the sign` |\n\n**Kill set: `{1, 6}`.**\n**Proof by contradiction:** if the rule were \"any idea about distributors is dead\", it would catch idea 2, which is alive. So the rule is different; what kills is not the channel but the **retroactivity of the discount**.\n\n**`[NOSELF]`:** the word \"channel\" does not appear in the prompt; the shares and discounts are given as background on sales."
     },
     "grader": "### Grader\n\n- **load_syn:** channel · distributor · 34 discount · discount structure · direct contract · who we sell to\n- **cover.A (channel and discounts):** discount scale · contract terms · revise the discount · direct sales\n- **cover.B (mix):** hybrid · mix · product range · high-margin\n- **cover.C (services):** agronomy support · soil testing · service · advis\n- **dead.D1:** grow volume · sell more · increase sales\n- **dead.D2:** new regions · export · new geography\n- **dead.D3:** cut unit cost · cut costs\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F2",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-010",
@@ -351,7 +378,10 @@
     "dead": "**`DEAD`:**\n\n| Branch | What kills it |\n|---|---|\n| \"Technicians rush to hit their numbers\" | not testable: visit duration is not captured |\n| \"Customers have become more demanding\" | not testable: there are no customer ratings in the system |\n| Appliances in general have got worse | does not answer the question about **our** increase over the year |",
     "cull": null,
     "grader": "### Grader\n\n- **load_syn:** how do we test · what would confirm · do we have the data · test it against the data · we cannot measure · not in the system\n- **cover.A (people):** tenure · new technicians · training · job allocation · mentor\n- **cover.B (parts):** supplier · part · spare · faulty batch\n- **cover.C (diagnostics):** fault code · diagnos · classif · same code again\n- **dead.D1:** rush · in a hurry · hit their numbers · time standard\n- **dead.D2:** customers more demanding · expectations have risen\n- **dead.D3:** appliances got worse · manufacturers cutting corners\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F4",
+   "family_src": "тело",
+   "family_conf": "низкая"
   },
   {
    "id": "BR-011",
@@ -394,7 +424,10 @@
      "peridea_raw": "**Per-idea analysis (`[CULL-PERIDEA]`):**\n\n| # | Idea | What the fact does to it | Verdict |\n|---|---|---|---|\n| 1 | Sign up the \"other side's\" restaurants | expressly forbidden for another 14 months | **killed** · `contradicts the fact` |\n| 2 | Cancel the clause | impossible unilaterally; negotiation runs past the 60-day horizon | **killed** · `does not answer the question asked` |\n| 3 | Logistics as a service | the fact does not touch it | alive |\n| 4 | Subscription across our own 40 contracted restaurants | the fact does not touch it | alive |\n| 5 | Dark kitchen | the fact does not touch it | alive |\n| 6 | Cut the commission | the fact does not touch it | alive |\n\n**Kill set: `{1, 2}`, on different grounds** — the first contradicts the fact; the second neither contradicts it nor solves the problem inside the horizon of the question.\n\n**`[NOSELF]`:** the exclusivity clause is presented as a fact about Zhelbrun's own contracts, without the words \"constraint\" or \"cannot\"."
     },
     "grader": "### Grader\n\n- **load_syn:** logistics as a servic · carry other people's orders · courier network · last mile · pharmac · non-food deliver\n- **cover.A (restaurants outside the platform):** 40% · outside the platform · the remaining restaurants · sign up independents\n- **cover.B (economics of the network):** courier load · 61% · utili · cost per delivery\n- **cover.C (own demand):** subscription · dark kitchen · own brand · ready meals\n- **dead.D1:** platform restaurants · sign up the chains · go after the ones on the platform\n- **dead.D2:** outbid the anchor's exclusivity · buy out the anchor's contract with the platform\n- **dead.D3:** improve the app · interface · brand marketing\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F4",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-012",
@@ -422,7 +455,10 @@
     "dead": "**`DEAD`:** \"advertise the new line harder\" (fails `[GROUND]`) · open studios in new cities (outside the question) · raise the price of bespoke (not about introducing the line).",
     "cull": null,
     "grader": "### Grader\n\n- **load_syn:** migrat · cannibal · will move off bespoke · will eat into bespoke · margin difference · instead of the expensive service\n- **cover.A (demand):** new segment · who comes in for alterations · demand for alterations\n- **cover.B (resource):** tailor load · 91% · capacity · queue · cutter\n- **cover.C (brand):** referral · reputation · brand perception · premium\n- **dead.D1:** advertise the new line · promote alterations\n- **dead.D2:** new cities · new studios · franchise\n- **dead.D3:** raise the bespoke price · make bespoke more expensive\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F2",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-013",
@@ -450,7 +486,10 @@
     "dead": "**`DEAD`:**\n\n| Branch | What kills it |\n|---|---|\n| The fleet is ageing | true of the whole fleet; explains nothing about one class |\n| Customers have become more demanding | acts on every class alike |\n| The valeting contractor has got worse | it services the whole fleet |",
     "cull": null,
     "grader": "### Grader\n\n- **load_syn:** the compact specifically · one class · only in this class · compact mileage · rental frequency · specific to the class\n- **cover.A (how it is used):** mileage · number of rentals · short rentals · turnover · cold start\n- **cover.B (service schedule):** service every · schedule · service interval · 15 000\n- **cover.C (customer and check-in):** check-in · returned unwashed · customer profile · inspection at return\n- **dead.D1:** the fleet is ageing · fleet age · fleet wear\n- **dead.D2:** customers more demanding · expectations have risen\n- **dead.D3:** valeting contractor · cleaning · the wash has got worse\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-014",
@@ -492,7 +531,10 @@
      "peridea_raw": "**Per-idea analysis (`[CULL-PERIDEA]`):**\n\n| # | Idea | What the fact does to it | Verdict |\n|---|---|---|---|\n| 1 | Single subscription off the average | 62% of visits come from 29% of the base: owners of puppies and older animals buy first, and an average price collects exactly them — **the sign reverses** | **killed** · `second-order effect reverses the sign` |\n| 2 | Tariff by age | the fact supports it | alive |\n| 3 | Ages 2–7 only | the fact supports it | alive |\n| 4 | Vaccinations in, chronic care out | the fact does not touch it directly | alive |\n| 5 | Discount for two pets | the fact **does not connect** the number of pets to age — to kill the idea you need an assumption the slot does not contain | alive |\n| 6 | New clients only | the fact does not touch it | alive |\n\n**Kill set: `{1}`.**\n**Proof by contradiction:** if the rule were \"any idea not tied to age is dead\", 4 and 6 would die too, and they are alive. So what kills is not the absence of age but **collecting adverse selection at a single price**.\n\n**`[NOSELF]`:** the prompt does not say frequency is unevenly distributed; the average of 2.4 is given as background."
     },
     "grader": "### Grader\n\n- **load_syn:** the animal's age · distribution of visits · frequency by age · puppy · older animal · uneven · tails\n- **cover.A (economics of a visit):** cost of an appointment · consumable · margin per visit\n- **cover.B (owner behaviour):** who will buy · adverse selection · selection · why would an owner\n- **cover.C (capacity):** throughput · queue · vet workload · number of appointments\n- **dead.D1:** raise appointment prices · make the service more expensive\n- **dead.D2:** hire vets · expand headcount\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-015",
@@ -521,7 +563,10 @@
     "dead": "**`DEAD`:**\n\n| Branch | What kills it |\n|---|---|\n| The captains are not ready | they are trained and the fleet is equipped — a fact of the slot |\n| Project budget | the slot says nothing about budget; the branch is not grounded |\n| \"Train the staff\" with nobody named | fails `[GROUND]` |\n\n**Echelon mechanic:** cargo owners, IT, the register and the captains are all covered — four branches, the conclusion \"no obstacles\", and it is wrong.",
     "cull": null,
     "grader": "### Grader\n\n- **load_syn:** controller · lock · waterway authority · whoever applies the stamp · outside executor · not our staff\n- **cover.A (cargo owners):** cargo owner · shipper · their record system · integration with the client\n- **cover.B (IT and connectivity):** connectivity on the river · integrat · outage · rollback · tablet\n- **cover.C (register):** register · paper copy · navigat · dual layer · supervis\n- **dead.D1:** the captains are not ready · the crew is untrained\n- **dead.D2:** budget · not enough money · project cost\n- **dead.D3:** train the staff · training sessions\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F4",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-016",
@@ -561,7 +606,10 @@
      "peridea_raw": "**Per-idea analysis (`[CULL-PERIDEA]` applies in Clean too — otherwise a zero cannot be proved):**\n\n| # | Idea | What the fact does to it | Verdict |\n|---|---|---|---|\n| 1 | Start with watches | a partner platform does not bring consignors back; the argument stands | alive |\n| 2 | Start with online bidding | the fact makes it **cheaper**, not void | alive |\n| 3 | Estimate the loss of lots | the fact changes the size, not the task | alive |\n| 4 | Check the team | the fact removes part of the load; the question stands | alive |\n| 5 | Account for the deferred cost | the fact **sharpens** that cost — the idea gets stronger | alive |\n| 6 | Compare LTV | the fact does not touch it | alive |\n\n**Kill set: `{}` — the zero is proved line by line rather than asserted.**\n**Clean pass criteria:** zero culled **and** an explicit statement that \"this fact cancels nothing, because it changes the price of one option rather than the fork itself\". A silent zero does not count.\n\n**Purpose of the slot:** the second Clean of the type. A candidate arriving from BR-007, 009, 011 and 014 comes in with a reflex to cut — this slot tests whether they can refrain."
     },
     "grader": "### Grader\n\n- **load_syn:** irreversib · the window closes · consignors decide once · harder later · cannot be deferred\n- **cover.A (window and irreversibility):** window · season · will go to competitors · one time only\n- **cover.B (reuse):** platform · already built · reuse · infrastructure\n- **cover.C (team and timelines):** cataloguing team · timeline · schedul · workload\n- **dead.D1:** launch both · both in stages · both in parallel\n- **dead.D2:** hire a second team · expand headcount · outsource the team\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F0",
+   "family_src": "clean",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-017",
@@ -589,7 +637,10 @@
     "dead": "**`DEAD`:**\n\n| Branch | What kills it |\n|---|---|\n| Add rooms by reconfiguring the layout | prohibited by the listed-building covenant |\n| Add a floor or alter the façade | the same |\n| \"Refurbish to move up a class\" without stating what is actually permitted | fails `[GROUND]` |",
     "cull": null,
     "grader": "### Grader\n\n- **load_syn:** rate · revenue per room · revpar · existing stock · without structural work · guest segment\n- **cover.A (rate and segment):** raise the rate · dynamic pricing · corporate segment · extended stay\n- **cover.B (non-room space):** restaurant · conference room · space to let · roof · event\n- **cover.C (channels):** direct booking · sales channel · aggregator commission · loyalty programme\n- **dead.D1:** more rooms · reconfigure the layout · split the rooms\n- **dead.D2:** add a floor · alter the façade · build an extension\n- **dead.D3:** refurbish · refresh the interiors\n\n---\n\n---\n\n---\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F4",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-018",
@@ -634,7 +685,10 @@
      "peridea_raw": "**Per-idea analysis (`[CULL-PERIDEA]`):**\n\n| # | Idea | What the fact does to it | Verdict |\n|---|---|---|---|\n| 1 | Take more from existing customers | the orders are already confirmed, the ceiling is +126 thousand — the idea is alive, but its contribution is capped | alive |\n| 2 | Expand the garden centre | the fact does not touch it | alive |\n| 3 | Landscaping contractors | the fact does not touch it | alive |\n| 4 | A new chain customer | a chain's procurement cycle is a year; it cannot be done before the planting plan is fixed | **killed** · `does not answer the question asked` |\n| 5 | Cut the planting plan | the fact makes it **urgent**, not dead | alive |\n| 6 | Plant against future demand | two seasons of growing plus 4 per unit disposed of: a bet on demand nobody has confirmed, with the price of being wrong already known | **killed** · `not testable` |\n\n**Kill set: `{4, 6}`, on different grounds.**\n\n**`[NOSELF]`:** all five numbers are given as separate pieces of background about the channels; adding them up and comparing with 1.8 million is the candidate's work. The words \"not enough\" do not appear in the text."
     },
     "grader": "### Grader\n\n- **load_syn:** not enough · gap · covers a quarter · sum of the measures · cut the planting · plant less · hole\n- **cover.A (existing customers):** the chains we supply · three customers · confirmed orders\n- **cover.B (retail):** garden centre · own retail · expand the site\n- **cover.C (new segments):** landscaping contractor · municipal planting · municipal · wholesale\n- **dead.D1:** export · ship abroad · quarantine\n- **dead.D2:** new chain customer · replace the chain · find a chain\n- **dead.D3:** step up sales · marketing · promotion\n\n---\n\n---\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F4",
+   "family_src": "тело",
+   "family_conf": "низкая"
   },
   {
    "id": "BR-019",
@@ -677,7 +731,10 @@
      "peridea_raw": "**Per-idea analysis (`[CULL-PERIDEA]`):**\n\n| # | Idea | What the fact does to it | Verdict |\n|---|---|---|---|\n| 1 | Discount for everyone | 64% of weekend viewers come once a month — for them Tuesday is not an extra outing but a **substitute** for Saturday: the shift is guaranteed | **killed** · `second-order effect reverses the sign` |\n| 2 | Lapsed viewers only | the fact supports it: it screens out precisely the ones who would shift | alive |\n| 3 | Bundle with the bar | the fact does not touch it | alive |\n| 4 | Cheaper ticket, dearer snacks | the fact does not touch it | alive |\n| 5 | Themed Tuesday | the fact does not touch it: different content does not compete with the Saturday release | alive |\n| 6 | Extend to Monday | it reinforces the same mechanic on a second day | **killed** · `second-order effect reverses the sign` |\n\n**Kill set: `{1, 6}`.**\n**Proof by contradiction:** if the rule were \"any discount is dead\", 2 and 4 would die, and they are alive. What kills is not the discount but **its availability to people who would have come at the weekend anyway**.\n\n**`[NOSELF]`:** the revenue shares, the margins and the occupancy are given as three separate pieces of background; the link \"the bar sits at the weekend\" is assembled by the candidate."
     },
     "grader": "### Grader\n- **load_syn:** shift · demand shifts · will move off the weekend · instead of Saturday · cannibalis the weekend · we lose the bar · second order\n- **cover.A (revenue structure):** bar margin · ticket share · royalty · where the profit sits\n- **cover.B (viewer behaviour):** who comes · where they come from · how often they come · new viewer\n- **cover.C (contracts):** distributor · royalty · print terms · minimum price\n- **dead.D1:** advertise Tuesday · promote weekdays\n- **dead.D2:** new screens · open a cinema\n- **dead.D3:** raise weekend prices · make Saturday dearer\n\n---\n\n---\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F2",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-020",
@@ -705,7 +762,10 @@
     "dead": "**`DEAD`:** \"take more one-offs, they pay better\" (exactly backwards) · \"buy a second crane\" (outside the question of falling margin) · \"cut headcount\" with no area named (fails `[GROUND]`).",
     "cull": null,
     "grader": "### Grader\n- **load_syn:** segment · one-off jobs · by order type · crane utilisation · idle time between · segment economics\n- **cover.A (segment economics):** revenue per call-out · share of call-outs · idle time · segment margin\n- **cover.B (planning):** dispatch · schedul · planning · booking window\n- **cover.C (pricing for urgency):** urgency rate · surcharge · minimum order · idle-time charge\n- **dead.D1:** more one-offs · grow the urgent jobs\n- **dead.D2:** buy a crane · second crane · expand the fleet\n- **dead.D3:** cut headcount · optimise the staffing\n\n---\n\n---\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "тело",
+   "family_conf": "низкая"
   },
   {
    "id": "BR-021",
@@ -748,7 +808,10 @@
      "peridea_raw": "**Per-idea analysis (`[CULL-PERIDEA]`):**\n\n| # | Idea | What the fact does to it | Verdict |\n|---|---|---|---|\n| 1 | Change of teacher ↔ renewal | both fields exist | alive |\n| 2 | Historic scores | the field never existed and cannot be added to the archive | **killed** · `not testable` |\n| 3 | Survey of non-renewers | the survey is **prospective**; the fact about the archive does not forbid it | alive |\n| 4 | Attendance ↔ renewal | both fields exist | alive |\n| 5 | Price ↔ the fall | the payment data exists | alive |\n| 6 | Reconstruct the reasons for leaving | the field never existed; there is nothing to reconstruct from | **killed** · `not testable` |\n\n**Kill set: `{2, 6}`.**\n**Proof by contradiction:** if the rule were \"anything not in the CRM is dead\", idea 3 would die — a survey is not in the CRM either — but it is alive, because it creates **new** data rather than demanding past data.\n\n**`[NOSELF]`:** the list of CRM fields is presented as background on the system, with no notes saying \"and this one is missing\"."
     },
     "grader": "### Grader\n- **load_syn:** how do we test · do we have the data · what would confirm · untestable · no such field · create the data\n- **cover.A (teachers):** change of teacher · stable line-up · replacement mid-course\n- **cover.B (outcome and level):** score · group level · student progress · group composition\n- **cover.C (price and market):** course price · competitor · market offer · cost\n- **dead.D1:** got bored · lost interest · motivation dropped\n- **dead.D2:** expectations have risen · the market has changed\n- **dead.D3:** people study languages less · demand for languages is falling\n\n---\n\n---\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F4",
+   "family_src": "тело",
+   "family_conf": "низкая"
   },
   {
    "id": "BR-022",
@@ -777,7 +840,10 @@
     "dead": "**`DEAD`:**\n\n| Branch | What kills it |\n|---|---|\n| Sow forage plants around the site | lime to a commercial honey flow takes 5–7 years; the horizon of the question is one season |\n| Find a site within 60 km | there are none free, all are taken |\n| \"Sell the honey dearer as a premium product\" | the harvest is down 62%: the problem is volume, not price, it did not get cheaper |\n\n**Echelon mechanic:** the list \"restore the base, sow forage, find a site nearby, raise the price\" — competent, comprehensive and dead in its entirety.",
     "cull": null,
     "grader": "### Grader\n- **load_syn:** pollinat · hire the hives out · pollination service · breeding queen · bee package · income other than honey\n- **cover.A (services):** orchard pollination · hive rental · travelling apiar\n- **cover.B (genetics and other products):** queen · wax · propolis · royal jelly · bee package\n- **cover.C (relocation):** migratory · move the apiary · distant site · lease land\n- **dead.D1:** sow forage · plant lime · restore the base\n- **dead.D2:** a site within the radius · find somewhere nearby\n- **dead.D3:** premium honey · raise the honey price · brand the honey\n\n---\n\n---\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F4",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-023",
@@ -805,7 +871,10 @@
     "dead": "**`DEAD`:** \"advertise the morning hours\" (fails `[GROUND]`) · build a fifth rink (outside the question) · raise the prime price (not about introducing a discount).",
     "cull": null,
     "grader": "### Grader\n- **load_syn:** move their blocks · will leave prime · migrat · will free up the evening · cannibal · shift the schedule\n- **cover.A (who is free in the morning):** school · amateur · corporate · retire · new morning demand\n- **cover.B (hirer flexibility):** club schedule · hire block · season contract · training\n- **cover.C (cost):** resurfac · refrigerat · cost of an hour · fixed costs\n- **dead.D1:** advertise the morning · promote the morning slots\n- **dead.D2:** new rink · fifth site\n- **dead.D3:** raise the prime price · make the evening dearer\n\n---\n\n---\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F2",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-024",
@@ -833,7 +902,10 @@
     "dead": "**`DEAD`:**\n\n| Branch | What kills it |\n|---|---|\n| The chemical supplier changed | the chemistry is the same across 30 sites; the morning shift at the same site is unaffected |\n| The equipment has worn out | the same machines run in the morning with no rise in complaints |\n| Customers have become fussier | that acts on the whole chain |",
     "cull": null,
     "grader": "### Grader\n- **load_syn:** evening shift · this shift specifically · who is on the shift · drop-off peak · end of day · only in the evening\n- **cover.A (the shift's people):** shift line-up · new employee · training · cover · supervisor\n- **cover.B (the peak):** drop-off peak · rush · 61% of volume · evening workload\n- **cover.C (end-of-day procedures):** sort · tagg · shift handover · closing\n- **dead.D1:** chemical supplier · the chemistry changed · reagent\n- **dead.D2:** equipment wear · old machine · the machine failed\n- **dead.D3:** customers fussier · expectations have risen\n\n---\n\n---\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-025",
@@ -877,7 +949,10 @@
      "peridea_raw": "**Per-idea analysis (`[CULL-PERIDEA]`):**\n\n| # | Idea | What the fact does to it | Verdict |\n|---|---|---|---|\n| 1 | Price +5% | the fact does not touch it | alive |\n| 2 | Thermal store | nine months of installation against two before the tariff changes: it falls outside the horizon | **killed** · `does not answer the question asked` |\n| 3 | Night-time lighting | the fact does not touch it | alive |\n| 4 | Selling heat | the fact does not touch it | alive |\n| 5 | Cutting the area | the fact does not touch it; the idea is weak on the arithmetic (−4 million net), but **weakness is not grounds for culling** | alive |\n| 6 | Mothballing for the winter | the fact does not touch it | alive |\n\n**Kill set: `{2}`.**\n**Proof by contradiction:** if the rule were \"anything that does not pay off within two months is dead\", idea 6 would die — mothballing starts with the winter — but it is alive, because the winter falls inside the horizon of the problem while nine months of installation falls outside it.\n\n**`[NOSELF]`:** all six numbers are given as separate pieces of background about the measures; adding them up and comparing with 48 million is the candidate's work. The phrase \"not enough\" does not appear in the text."
     },
     "grader": "### Grader\n- **load_syn:** not enough · gap · two thirds · sum of the measures · 32 against 48 · a hole remains · we need something else\n- **cover.A (price and market):** price · the chains · imports · wholesale price · elastic\n- **cover.B (energy efficiency):** thermal store · supplementary lighting · night tariff · insulat · selling heat\n- **cover.C (structure of production):** area · crop · mothball · seasonality · switch the crop\n- **dead.D1:** raise the price by 15 · a steep price rise\n- **dead.D2:** lay off the agronomists · cut headcount\n\n---\n\n---\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F4",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-026",
@@ -919,7 +994,10 @@
      "peridea_raw": "**Per-idea analysis (`[CULL-PERIDEA]`):**\n\n| # | Idea | What the fact does to it | Verdict |\n|---|---|---|---|\n| 1 | Single price on power | a 2.3× difference by environment at equal running hours: pricing on power collects the sea-going vessels | **killed** · `second-order effect reverses the sign` |\n| 2 | Coefficient by environment | the fact supports it | alive |\n| 3 | River fleet first | the fact supports it | alive |\n| 4 | Maintenance in, unplanned out | the fact does not touch it | alive |\n| 5 | Whole-fleet discount | the fact **does not connect** fleet size to operating environment — the slot holds no such assumption | alive |\n| 6 | Anti-corrosion treatment | the fact does not touch it directly; the measure lowers future failures | alive |\n\n**Kill set: `{1}`.**\n\n**`[NOSELF]`:** the operating environment is listed among the fields of the vessel record alongside the others, with no note about its significance."
     },
     "grader": "### Grader\n- **load_syn:** operating environment · sea · river · mixed navigation · conditions · corros · failure profile\n- **cover.A (economics of a repair):** part · getting it aboard · vessel downtime · cost of the repair\n- **cover.B (owner behaviour):** who will buy · adverse selection · selection · why would an owner\n- **cover.C (service logistics):** port served · sending a crew out · spares depot\n- **dead.D1:** raise repair prices · make the service dearer\n- **dead.D2:** hire engineers · expand headcount\n\n---\n\n---\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F2",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-027",
@@ -949,7 +1027,10 @@
     "dead": "**`DEAD`:**\n\n| Branch | What kills it |\n|---|---|\n| The union will block it | it has raised no objection — a fact of the slot |\n| The captains are not ready | they are trained and the tablets are bought |\n| \"Train the staff\" with nobody named | fails `[GROUND]` |\n\n**Echelon mechanic:** the authority, the shipowners, IT, the captains and the union are all covered — five branches, the conclusion \"no obstacles\", and it is wrong.",
     "cull": null,
     "grader": "### Grader\n- **load_syn:** pilot · pilotage service · whoever confirms the request · outside party · not under our authority · state service\n- **cover.A (shipowners):** shipowner · their system · integration with the client\n- **cover.B (IT and connectivity):** connectivity across the water · integrat · outage · rollback · tablet\n- **cover.C (authority and procedure):** port authorit · arrival procedure · dispatch\n- **dead.D1:** union · the crews are against\n- **dead.D2:** the captains are not ready · untrained\n- **dead.D3:** train the staff · training\n\n---\n\n---\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F4",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-028",
@@ -989,7 +1070,10 @@
      "peridea_raw": "**Per-idea analysis (`[CULL-PERIDEA]`, required in Clean too):**\n\n| # | Idea | What the fact does to it | Verdict |\n|---|---|---|---|\n| 1 | Start with destination weddings | a contractor does not reopen a venue window that has shut | alive |\n| 2 | Start with corporate | the fact makes it **cheaper in resource**, it does not cancel it | alive |\n| 3 | Estimate the loss of couples | the fact changes the size, not the task | alive |\n| 4 | Check the team | the fact removes part of the load; the question stands | alive |\n| 5 | Account for the deferred cost | the fact **sharpens** it — the idea gets stronger | alive |\n| 6 | Compare LTV | the fact does not touch it | alive |\n\n**Kill set: `{}` — the zero is proved line by line.**\n**Clean pass criteria:** zero culled **and** a statement along the lines of \"the partnership changes the price of one option, not the fork itself\". A silent zero does not count.\n\n**Purpose of the slot:** the third Clean of the type. After BR-025 and BR-026, where cutting is required, this slot tests the ability not to cut."
     },
     "grader": "### Grader\n- **load_syn:** irreversib · booking window · 14 months · shuts this quarter · cannot be deferred · we lose a year and a half\n- **cover.A (the window):** window · season · venue booking · will go to competitors\n- **cover.B (reuse):** contractor · template · venue · base already built up\n- **cover.C (team and seasonality):** coordinator · workload · seasonality · schedul\n- **dead.D1:** a bit of both · both in parallel · partly both\n- **dead.D2:** hire a team · expand headcount · a second crew\n\n---\n\n---\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F0",
+   "family_src": "clean",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-029",
@@ -1017,7 +1101,10 @@
     "dead": "**`DEAD`:** \"raise prices across the board to cover delivery\" (outside the question) · \"hire more floor staff\" (fails `[GROUND]`) · \"open new showrooms\" (outside the question).",
     "cull": null,
     "grader": "### Grader\n- **load_syn:** small orders · the order mix will shift · the share of small orders will grow · the trip does not pay for itself · free-delivery threshold · second order\n- **cover.A (economics of a trip):** 3 100 · cost of a trip · free-delivery threshold · combine trips\n- **cover.B (buyer behaviour):** will stop collecting · self-collection · 38% · who will order delivery\n- **cover.C (testing the hypothesis):** conversion · is it really delivery · survey · test in some showrooms\n- **dead.D1:** raise prices · build it into the price\n- **dead.D2:** hire floor staff · strengthen the showroom\n- **dead.D3:** new showrooms · network expansion\n\n---\n\n---\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F2",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-030",
@@ -1045,7 +1132,10 @@
     "dead": "**`DEAD`:** \"sell more\" with no segment · move into retail (outside the question of falling margin) · \"lower the green-bean purchase price\" with no lever named (fails `[GROUND]`).",
     "cull": null,
     "grader": "### Grader\n- **load_syn:** customer segment · independent cafés · small customers · batch size · cost to serve the segment · who we sell to\n- **cover.A (economics by segment):** batch · unit-by-unit delivery · samples · cost to serve\n- **cover.B (price and minimum batch):** minimum batch · price list · shipping terms · small-order surcharge\n- **cover.C (product mix):** roast · grind · packag · product range\n- **dead.D1:** sell more · grow volume\n- **dead.D2:** move into retail · open a shop\n- **dead.D3:** lower the bean price · purchase price\n\n---\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-031",
@@ -1089,7 +1179,10 @@
      "peridea_raw": "**Per-idea analysis (`[CULL-PERIDEA]`):**\n\n| # | Idea | What the fact does to it | Verdict |\n|---|---|---|---|\n| 1 | Barges | the fact does not touch it; navigation is a release route | alive |\n| 2 | Rail spur | the fact does not touch it | alive |\n| 3 | Deferral of release | the right to collect applies at any moment; a deferral is **not available unilaterally** and does not remove the risk | **killed** · `contradicts the fact` |\n| 4 | Buying the grain | the fact **strengthens** it: it turns somebody else's risk into our own stock | alive |\n| 5 | Temporary road across the slope | the depositors may collect at any moment — the horizon is immediate, while the slope needs three years | **killed** · `does not answer the question asked` |\n| 6 | A mill on site | the fact does not touch it | alive |\n\n**Kill set: `{3, 5}`, on different grounds.**\n**Proof by contradiction:** if the rule were \"anything requiring the depositors' consent is dead\", idea 4 would die — buying the grain needs consent too — but it is alive, because buying is in the depositor's interest and a deferral is against it.\n\n**`[NOSELF]`:** the storage contracts are given as background on the structure of the stock, without the word \"risk\"."
     },
     "grader": "### Grader\n- **load_syn:** river · barge · by water · rail · spur · without hauling it out · process it on site · mill\n- **cover.A (routes out):** barge · navigation · rail · embankment · crossing\n- **cover.B (selling without moving it):** sell out of storage · process on site · mill · animal feed\n- **cover.C (obligations):** depositor · storage contract · release · penalty\n- **dead.D1:** repair the road · reinstate the road faster\n- **dead.D2:** another route · small trucks · go around\n- **dead.D3:** insur · recover the loss\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F4",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-032",
@@ -1117,7 +1210,10 @@
     "dead": "**`DEAD`:** \"advertise the online channel\" (fails `[GROUND]`) · close some workshops (outside the question of launching a channel) · raise workshop prices (not about introducing online).",
     "cull": null,
     "grader": "### Grader\n- **load_syn:** migrat · will leave the workshops · cannibal · our own channel · instead of the workshop · margin difference\n- **cover.A (margin and fixed costs):** the rent is fixed · margin · fixed costs · workshop load\n- **cover.B (new or switched):** new customer · where they come from · incremental demand · delivery geography\n- **cover.C (consultation):** consultat · choosing the moulding · 62% · the framer's expertise\n- **dead.D1:** advertise online · promote the site\n- **dead.D2:** close the workshops · cut the number of sites\n- **dead.D3:** raise workshop prices\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F2",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-033",
@@ -1145,7 +1241,10 @@
     "dead": "**`DEAD`:**\n\n| Branch | What kills it |\n|---|---|\n| The milk quality has changed | the milk is shared by 14 lines |\n| The ripening room is faulty | the room is shared; thirteen lines are unchanged |\n| The chains have got stricter on intake | that acts on the whole portfolio |",
     "cull": null,
     "grader": "### Grader\n- **load_syn:** slice · this line specifically · format · semi-hard only · shelf life of the sliced · specific to the line\n- **cover.A (format and packaging):** slice · packag · modified atmosphere · film\n- **cover.B (order cycle):** turnover · order cycle · delivery frequency · stock on shelf\n- **cover.C (storage):** cabinet · temperature · chill · shelf conditions\n- **dead.D1:** milk quality · raw material · milk supplier\n- **dead.D2:** ripening room · maturing chamber · process\n- **dead.D3:** the chains are stricter · intake has tightened\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F4",
+   "family_src": "тело",
+   "family_conf": "низкая"
   },
   {
    "id": "BR-034",
@@ -1190,7 +1289,10 @@
      "peridea_raw": "**Per-idea analysis (`[CULL-PERIDEA]`):**\n\n| # | Idea | What the fact does to it | Verdict |\n|---|---|---|---|\n| 1 | Second-stage optical | the fact does not touch it; on the contrary, a contract for it opens the right to a deferral | alive |\n| 2 | Manual picking | the fact does not touch it | alive |\n| 3 | Separate collection | the fact does not touch it | alive |\n| 4 | Our own flotation | 14 months against the 10 before it takes effect; but the deferral is granted **once equipment is under contract** — the idea is not dead, its meaning changes: the contract is needed for the deferral, not for the line | alive |\n| 5 | Pay the penalty | the fact does not touch it: the penalty remains a lawful outcome, 24 million a year against 210 million of capex — a payback of about nine years | alive |\n| 6 | Hand it to a contractor | the fact does not touch it | alive |\n| 7 | Our own landfill | the target requires **recovery**, not burial: the idea is not about the problem as set | **killed** · `does not answer the question asked` |\n\n**Kill set: `{7}`.**\n\n> **Note on authorship.** The first draft of the list held six ideas, and the analysis produced zero killed — the slot would have been degenerate under `[CULL-NONDEG]` while not declared Clean. Rather than \"pushing\" a ground onto one of the six, a seventh idea was added that genuinely fails to answer the fact. This is `[FAIL]` read literally: fix the drill, not the criterion.\n\n**Proof by contradiction:** if the rule were \"anything that does not deliver 95% is dead\", idea 5 would die — paying the penalty — but it is alive, because the question \"how do we close the gap\" admits the answer \"it is cheaper not to close it\".\n\n**`[NOSELF]`:** the six numeric measures are given on separate lines; comparing 48 million against 210 million and against a 24 million penalty is the candidate's work."
     },
     "grader": "### Grader\n- **load_syn:** the last few points · costs the most · asymmetr · 30 out of 33 · disproportionate · the penalty is cheaper · pushing does not pay\n- **cover.A (recovery stages):** optical sort · manual picking · flotat · fines fraction\n- **cover.B (input stream):** separate collection · stream quality · districts · contaminat\n- **cover.C (regulatory routes):** deferral · perimeter of the calculation · contractor · penalty\n- **dead.D1:** add shifts · just more people\n- **dead.D2:** new plant · a second site\n- **dead.D3:** challenge the target · court · lobby\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F2",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-035",
@@ -1218,7 +1320,10 @@
     "dead": "**`DEAD`:** \"raise prices for the others to compensate\" (outside the question, and it destroys the base) · \"buy a fourth line\" (outside the question) · \"cut headcount\" (fails `[GROUND]`).",
     "cull": null,
     "grader": "### Grader\n- **load_syn:** dependence · concentrat · the customer's share will grow · negotiating position · a year from now · second order · held to ransom on price\n- **cover.A (economics of the deal):** margin · fixed costs · third shift · line utilisation\n- **cover.B (concentration risk):** the customer leaves · 41% · diversif · fallback demand\n- **cover.C (the other customers):** they will hear about the discount · price list · the others will demand · the market will find out\n- **dead.D1:** raise prices for the others · compensate with the rest\n- **dead.D2:** buy a line · expand the fleet\n- **dead.D3:** cut headcount · optimise the staffing\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F2",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-036",
@@ -1259,7 +1364,10 @@
      "peridea_raw": "**Per-idea analysis (`[CULL-PERIDEA]`):**\n\n| # | Idea | What the fact does to it | Verdict |\n|---|---|---|---|\n| 1 | Equal weekly volumes | for four months there is no weight gain — the commitment is biologically impossible | **killed** · `contradicts the fact` |\n| 2 | Seasonal schedule | the fact supports it | alive |\n| 3 | Winter stock from summer | the fact supports it | alive |\n| 4 | Tolerance band | the fact does not touch it | alive |\n| 5 | Heating two cages | the fact does not touch it: a partial measure, but not a contradictory one | alive |\n| 6 | Buying from neighbours | the fact does not touch it | alive |\n\n**Kill set: `{1}`.**\n**Proof by contradiction:** if the rule were \"anything that does not solve the winter is dead\", 4 and 5 would die, and they are alive. What kills is not the winter but **the rigid, evenly spread commitment**.\n\n**`[NOSELF]`:** the temperature log is listed among the available data alongside everything else."
     },
     "grader": "### Grader\n- **load_syn:** temperature · season · winter · monthly weight gain · biolog · uneven growth\n- **cover.A (economics of a cage):** feed · losses · stocking density · weight gain\n- **cover.B (logistics):** storage · freez · delivery frequency · transport\n- **cover.C (contract terms):** penalty · volume band · tolerance window · renegotiat\n- **dead.D1:** raise the price · a price rise\n- **dead.D2:** more cages · expand the farm\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-037",
@@ -1287,7 +1395,10 @@
     "dead": "**`DEAD`:** \"enrol more students\" with no city · enter new cities (outside the question) · \"cut instructors\" with no location named (fails `[GROUND]`).",
     "cull": null,
     "grader": "### Grader\n- **load_syn:** by city · geography · which city · single price list · cost difference · loss-making cities\n- **cover.A (economics of a city):** city costs · site rent · instructor hour · vehicle utilisation\n- **cover.B (pricing):** regional pric · differentiate the price list · local market\n- **cover.C (fleet distribution):** fleet · six vehicles · redistribute · vehicles standing idle\n- **dead.D1:** more students · grow enrolment\n- **dead.D2:** new cities · open a branch\n- **dead.D3:** cut instructors · optimise the staffing\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-038",
@@ -1327,7 +1438,10 @@
      "peridea_raw": "**Per-idea analysis (`[CULL-PERIDEA]`, required in Clean too):**\n\n| # | Idea | What the fact does to it | Verdict |\n|---|---|---|---|\n| 1 | The two delayed sites | the fact **creates** the material for it: two sites for two months became a natural control | alive, and strengthened |\n| 2 | Decompose seasonality | the fact does not touch it | alive |\n| 3 | Effect of the competitor leaving | the fact does not touch it | alive |\n| 4 | Roll out in waves | the fact **confirms** its value: the delay accidentally supplied what should have been designed in | alive |\n| 5 | Give a range | the fact narrows the range but does not undo the honesty of the conclusion | alive |\n| 6 | Plain before/after | a weak idea, but **not killed** by the fact: it remains an admissible first approximation | alive |\n\n**Kill set: `{}` — the zero is proved line by line.**\n**Clean pass criteria:** zero culled **and** the statement \"the fact does not kill the ideas, it supplies the missing control\". A silent zero does not count.\n\n**Purpose of the slot:** the fourth Clean of the type, and the only one where the new fact **strengthens** part of the list rather than merely leaving it alone. A candidate trained to cut has to see that the movement can go the other way.\n\n**`[NOSELF]`:** the fact that the replacement was simultaneous is given on the first line as a description of the project, without the word \"problem\"."
     },
     "grader": "### Grader\n- **load_syn:** control group · nothing to compare against · cannot attribute · three explanations · design of the measurement · everywhere at once\n- **cover.A (alternative explanations):** the competitor closed · seasonal · price · market\n- **cover.B (history):** three years of data · monthly · past quarters\n- **cover.C (measurement going forward):** in waves · phased · control points · pilot\n- **dead.D1:** ask the customers · survey on why they came\n- **dead.D2:** compare with last year · year on year with no adjust\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F0",
+   "family_src": "clean",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-039",
@@ -1357,7 +1471,10 @@
     "dead": "**`DEAD`:**\n\n| Branch | What kills it |\n|---|---|\n| Buy the process engineer back — as an employee **or as a consultant** | **the non-compete undertaking in his contract with the competitor covers both**, and the order horizon is shorter than a negotiation in any case |\n| Hire an equivalent within a month | hiring takes 6–9 months — a fact |\n| \"Train our own people\" with no statement of on what | training one internally takes 3 years; without the archive there is nothing to train on |\n\n**Echelon mechanic:** the list \"buy him back, hire, train, drop the fractured formations\" is complete, sensible and **dead in its entirety on facts printed in front of the candidate**: every item looks for a holder, and every route to a holder is closed on the page. The source — 400 reports — is the only thing left standing.",
     "cull": null,
     "grader": "### Grader\n- **load_syn:** report archive · 400 report · rebuild it from the data · reconstruct · from the wells already drilled · document it again\n- **cover.A (order book):** sedimentary · shift the order book · which jobs we take · drop part of\n- **cover.B (rebuilding the competence):** archive · outside expert · partner · design contractor\n- **cover.C (retention and documentation):** document · procedure · knowledge transfer · retain the remaining\n- **dead.D1:** get the engineer back · buy him back · counteroffer · hire him as a consultant · bring him in on contract · give him equity\n- **dead.D2:** hire an equivalent · find a specialist quickly\n- **dead.D3:** train our people · training\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F4",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-040",
@@ -1385,7 +1502,10 @@
     "dead": "**`DEAD`:** \"advertise the mornings\" (fails `[GROUND]`) · \"build a new slide\" (outside the question) · \"raise the full-day price\" (not about introducing a short ticket).",
     "cull": null,
     "grader": "### Grader\n- **load_syn:** 3 hours 40 · actual length · almost the whole visit · will migrate · replaces the full day · same audience\n- **cover.A (visitor behaviour):** length · families · composition of the group · visit scenario\n- **cover.B (ancillary revenue):** café · hire · 34% · upsell\n- **cover.C (new or switched):** new visitor · where they come from · incremental demand\n- **dead.D1:** advertise the mornings · promote weekdays\n- **dead.D2:** new slide · expand the park\n- **dead.D3:** raise the full-day price\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F2",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-041",
@@ -1413,7 +1533,10 @@
     "dead": "**`DEAD`:**\n\n| Branch | What kills it |\n|---|---|\n| Queues at the lift have got longer | that acts on every channel; the ticket office and the phone line are unchanged |\n| The weather spoiled the season | the same |\n| The staff have got ruder | the same |",
     "cull": null,
     "grader": "### Grader\n- **load_syn:** channel · the app · easier to complain · barrier to filing · app release · measuring instrument · not quality but the channel\n- **cover.A (changes in the app):** release · update · payment · refund · bug\n- **cover.B (barrier and audience):** easier to file · complaint button · the app's audience · younger\n- **cover.C (content of the complaints):** categoris · free text · break down the themes · themes\n- **dead.D1:** queues at the lift · crowds · throughput\n- **dead.D2:** weather · season · snow\n- **dead.D3:** staff ruder · service has slipped\n\n---\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F3",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-042",
@@ -1453,7 +1576,10 @@
      "peridea_raw": "**Per-idea analysis (`[CULL-PERIDEA]`, required in Clean too):**\n\n| # | Idea | What the fact does to it | Verdict |\n|---|---|---|---|\n| 1 | Wayfinding from the open entrances | the fact makes it **temporary** but does not cancel it: the season is still running | alive |\n| 2 | Recalculating the plan | the fact sharpens the horizon of the recalculation | alive |\n| 3 | Shuttle | the same: a measure for this season | alive |\n| 4 | Correlation with the weather | the fact does not touch it | alive |\n| 5 | Notice clause in the agreement | the fact **strengthens** it: next time becomes predictable | alive |\n| 6 | Change nothing until they reopen | weak and passive, but **not killed** by the fact — it agrees with it literally | alive |\n\n**Kill set: `{}` — the zero is proved line by line.**\n**Clean pass criteria:** zero culled **and** the statement \"the fact shortens the horizon of the measures but cancels none of them\". A silent zero does not count.\n\n**`[NOSELF]`:** the council's decision is presented as a circumstance of the lease, without the words \"not actionable\"."
     },
     "grader": "### Grader\n- **load_syn:** actionable · what we can affect · lever · not actionable · only measure · external cause · separate the causes\n- **cover.A (actionable):** route · price · opening hours · on-site promotion · programme\n- **cover.B (not actionable but measurable):** entrances closed · weather · rainy days · council\n- **cover.C (working with the unactionable):** wayfind · shuttle · agreement with the council · notice\n- **dead.D1:** open the entrances · get them reopened · stop the works\n- **dead.D2:** do something about the weather\n- **dead.D3:** cut the price · a discount with no reason\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F0",
+   "family_src": "clean",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-043",
@@ -1482,7 +1608,10 @@
     "dead": "**`DEAD`:**\n\n| Branch | What kills it |\n|---|---|\n| Find new publishers | publishers are leaving the format altogether; they do not exist as a segment |\n| Cut the price of a run | it is not share that is falling but the market |\n| \"Step up marketing\" | fails `[GROUND]` and aims at demand that has gone |\n\n**Echelon mechanic:** the list \"new customers, price, quality, advertising, export\" is complete, familiar and entirely beside the point: it fights for share of a market that is not there.",
     "cull": null,
     "grader": "### Grader\n- **load_syn:** clean room · lease the capacity · contract mould · circular printing · medical devices · let the site out · a service instead of a product\n- **cover.A (capacity as a service):** clean room · iso · injection mould · circular printing · contract manufactur\n- **cover.B (residual demand):** archival storage · collector · public procurement · long-life storage\n- **cover.C (exit):** sell the lines · downsize · relocate the site · close\n- **dead.D1:** new publisher · find customers · win the clients back\n- **dead.D2:** cut the price · undercut · cheaper runs\n- **dead.D3:** marketing · advertising · promotion\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F4",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-044",
@@ -1528,7 +1657,10 @@
      "peridea_raw": "**Per-idea analysis (`[CULL-PERIDEA]`):**\n\n| # | Idea | What the fact does to it | Verdict |\n|---|---|---|---|\n| 1 | Charging for storage | the fact does not touch it | alive |\n| 2 | Cutting the period | the fact does not touch it | alive |\n| 3 | Reducing the floor area | the area shrinks only by relocating, and the leases run three years — the measure is unreachable within the horizon | **killed** · `contradicts the fact` |\n| 4 | Ancillary goods | the fact does not touch it | alive |\n| 5 | Fitting-room fee | the fact does not touch it | alive |\n| 6 | Recompute 1–3 as one | the fact **strengthens** it: without measure 3 the double counting becomes plainer | alive |\n| 7 | Let the shelving to third parties | the fact **creates** the material for it: the shelving frees up while the floor area stays | alive |\n\n**Kill set: `{3}`.**\n**Proof by contradiction:** if the rule were \"anything to do with shelving is dead\", 2, 6 and 7 would die, and they are alive. What kills is not the shelf but **the impossibility of changing the floor area** while the possibility of changing its use is very much alive.\n\n**`[NOSELF]`:** the five measures are given as a numbered list with a total computed by the client's own team — that is, the error is presented as somebody else's assertion rather than spotlighted. The words \"twice\", \"overlap\" and \"dependent\" do not appear in the text."
     },
     "grader": "### Grader\n- **load_syn:** double counting · counting the same thing · overlap · do not add up · dependent on each other · the same shelf · cannot be summed\n- **cover.A (independence of the measures):** independen · what follows from what · effects overlap · overlapp\n- **cover.B (cost side):** rent · staff · logistic · shelving\n- **cover.C (independent measures):** ancillary goods · commiss · tariff · third-party storage\n- **dead.D1:** raise the marketplace tariff · renegotiate with the platform\n- **dead.D2:** close the loss-making points · shrink the network\n- **dead.D3:** add it all up · there is enough to spare\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-045",
@@ -1556,7 +1688,10 @@
     "dead": "**`DEAD`:** \"advertise the discount more widely\" (fails `[GROUND]`) · \"open new sites before the peak\" (six weeks is not a construction schedule) · \"raise the off-peak price\" (not about a cut at peak).",
     "cull": null,
     "grader": "### Grader\n- **load_syn:** the competitors will follow · they will copy the price · competitor response · price war · share will come back · everyone ends up cheaper\n- **cover.A (competition):** four chains · standard service · switching · copy\n- **cover.B (capacity):** 94% · bay utilisation · queue · nowhere to take\n- **cover.C (non-price levers):** booking · speed · tyre storage · service · slots\n- **dead.D1:** advertise the discount · promote the offer\n- **dead.D2:** new sites · open bays before the peak\n- **dead.D3:** raise the off-peak price · make it up out of season\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F2",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-046",
@@ -1597,7 +1732,10 @@
      "peridea_raw": "**Per-idea analysis (`[CULL-PERIDEA]`):**\n\n| # | Idea | What the fact does to it | Verdict |\n|---|---|---|---|\n| 1 | Resetting the routes | the fact does not kill it: the core exists and stays three years — investing in it is sensible, though it does not fix the main leak | alive |\n| 2 | Onboarding in the first weeks | the fact supports it | alive |\n| 3 | Payback on the average lifetime | the average glues two different groups together: the calculation yields a number that describes neither | **killed** · `second-order effect reverses the sign` |\n| 4 | Easy routes for beginners | the fact supports it | alive |\n| 5 | Induction course | the fact supports it | alive |\n| 6 | Raise the price for long-standing members | the fact **does not connect** lifetime with willingness to pay more — the slot holds no such assumption | alive |\n\n**Kill set: `{3}`.**\n**Proof by contradiction:** if the rule were \"anything not about beginners is dead\", 1 and 6 would die, and they are alive. What kills is not who the measure is aimed at but **computing on an average across glued-together groups**.\n\n**`[NOSELF]`:** the date of first purchase is listed among the available data alongside the other fields."
     },
     "grader": "### Grader\n- **load_syn:** cohort · how long ago they joined · retention curve · the first months · the average glues them together · beginners and the core · by join date\n- **cover.A (economics of a membership):** acquisition cost · membership margin · ltv\n- **cover.B (cohort behaviour):** churn · retention · the first weeks · reasons for leaving\n- **cover.C (alternatives to the investment):** timetable · coach · children's group · onboarding\n- **dead.D1:** raise the membership price · a price rise\n- **dead.D2:** expand the floor area · a new hall\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-047",
@@ -1625,7 +1763,10 @@
     "dead": "**`DEAD`:** \"attract corporate customers\" with no hour named · \"open sites at other universities\" (outside the question) · \"cut staff\" with no shift or hour named (fails `[GROUND]`).",
     "cull": null,
     "grader": "### Grader\n- **load_syn:** by hour · time of day · peak and trough · shifts · an hour of trading · when rather than who · economics of an hour\n- **cover.A (economics of an hour):** staff by shift · rent · footfall per hour · revenue per hour\n- **cover.B (shift pattern):** rota · shift · changeover · flexible start\n- **cover.C (pricing by time):** hourly tariff · urgency surcharge · discount in the trough\n- **dead.D1:** corporate customer · attract business · new customer segments\n- **dead.D2:** new sites · other universities · expansion\n- **dead.D3:** cut staff · lay off\n\n---\n\n---"
-   }
+   },
+   "family_h25": "F1",
+   "family_src": "тело",
+   "family_conf": "высокая"
   },
   {
    "id": "BR-048",
@@ -1653,7 +1794,13 @@
     "dead": "**`DEAD`:**\n\n| Branch | What kills it |\n|---|---|\n| Post an observer | the measurement will change the behaviour; anonymity is not available — a fact of the slot |\n| Count from incidents | 3 cases in 11 000 — on outcomes the hypothesis cannot be tested |\n| Ask the instructors directly | the answer is predictable and distinguishes nothing |",
     "cull": null,
     "grader": "### Grader\n- **load_syn:** being watched will change · they will do it properly with an observer there · measuring affects · hawthorne · the subject disappears · the measurement is meaningless\n- **cover.A (independent measurements):** timestamp · telemetr · checklist item by item · video\n- **cover.B (indirect indicators):** group size · preparation time · consumption · complaints about being rushed\n- **cover.C (changing the system):** make it impossible · interlock · mandatory confirmation · procedure instead of supervision\n- **dead.D1:** post an observer · a supervisor will watch · covert checks\n- **dead.D2:** count from incidents · incident statistics\n- **dead.D3:** ask the instructors · staff survey\n\n---"
-   }
+   },
+   "family_h25": "F2",
+   "family_src": "тело",
+   "family_conf": "высокая"
   }
- ]
+ ],
+ "_meta": {
+  "family_h25": "Семья трудности Н25 (F1-F10). F0 = Clean-слот, ловушки нет по конструкции. Поле авторское, движок его не читает и кандидату не отдаёт; включится, когда подбор слотов начнёт балансировать партию по семьям. family_src: 'тело' = размечено чтением слота (круг 29), 'словарь:<код>' = выведено из собственного словаря библиотеки, 'clean' = по признаку Clean. family_conf='спорная' = решается прецедентом Н25.8, метка временная."
+ }
 }

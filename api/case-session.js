@@ -73,6 +73,15 @@ const MAX_BODY_BYTES = 200 * 1024;      // 200 KB request cap
  * спрятана.
  */
 const CASE_PRICE_CAP_USD = 0.20;
+
+/* МЕТКА СБОРКИ. Отвечает на один вопрос: та ли это версия в проде.
+   Значение — первые 12 знаков sha256 этого файла, посчитанного с самой этой
+   строкой, приведённой к плейсхолдеру; вписывает и проверяет инструмент
+   `06_Обмен/DEV/stamp_build.js`. Печатается в каждом ходе рядом с ценой.
+   Куплено ошибкой смены 06.08: «залито или нет» решалось поиском по логам,
+   поиск вернул пусто из-за отставания индексации, и вывод был неверным.
+   Сравнение метки с диском от индексации логов не зависит. */
+const BUILD = '772db8afb7ac';
 const PRICE_IN_PER_MTOK = 2.0;
 const PRICE_OUT_PER_MTOK = 10.0;
 const CACHE_WRITE_MULT = 1.25;
@@ -1131,7 +1140,7 @@ export default async function handler(req, res) {
                 + (su.cache_read || 0) * PRICE_IN_PER_MTOK * CACHE_READ_MULT
                 + (ev.usage.output_tokens || 0) * PRICE_OUT_PER_MTOK) / 1e6;
               console.log('case-session cost', JSON.stringify({
-                case: caseObj.id, step: stepIndex, usd: +costUsd.toFixed(5),
+                build: BUILD, case: caseObj.id, step: stepIndex, usd: +costUsd.toFixed(5),
                 mode: _mode, dropped: win.dropped, trimmed: trimmedTurns }));
               console.log('case-session usage(stream)', JSON.stringify(Object.assign(
                 { case: caseObj.id, step: stepIndex, out: ev.usage.output_tokens }, su)));
@@ -1172,7 +1181,7 @@ export default async function handler(req, res) {
         + (u.cache_read_input_tokens || 0) * PRICE_IN_PER_MTOK * CACHE_READ_MULT
         + (u.output_tokens || 0) * PRICE_OUT_PER_MTOK) / 1e6;
       console.log('case-session cost', JSON.stringify({
-        case: caseObj.id, step: stepIndex, usd: +costUsd.toFixed(5),
+        build: BUILD, case: caseObj.id, step: stepIndex, usd: +costUsd.toFixed(5),
         mode: _mode, dropped: win.dropped, trimmed: trimmedTurns
       }));
       console.log('case-session usage', JSON.stringify({
