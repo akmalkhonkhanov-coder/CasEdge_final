@@ -63,6 +63,13 @@
 .cm-ref-h { font-size:12.5px; font-weight:600; letter-spacing:.01em; color:var(--coral,#5db8a6); margin-bottom:8px; }
 .cm-ref-body { font-size:13.8px; line-height:1.65; color:var(--on-dark,#faf9f5); } .cm-ref-body b { color:var(--on-dark,#faf9f5); }
 .cm-ref-body p { margin:0 0 7px; } .cm-ref-body p:last-child { margin:0; }
+/* Таблица разбора. Раньше её не было вовсе: авторы писали таблицу markdown,
+   а рендер печатал пайпы текстом. Стиль тихий - разбор читают, а не любуются. */
+.cm-tbl { width:100%; border-collapse:collapse; margin:4px 0 8px; font-size:13.2px; }
+.cm-tbl th { text-align:left; font-weight:600; color:var(--on-dark-soft,#b8c4bf); padding:5px 10px 5px 0; border-bottom:1px solid var(--sv-line,rgba(255,255,255,.12)); white-space:nowrap; }
+.cm-tbl td { padding:6px 10px 6px 0; border-bottom:1px solid var(--sv-line,rgba(255,255,255,.06)); vertical-align:top; color:var(--on-dark,#faf9f5); }
+.cm-tbl tr:last-child td { border-bottom:0; }
+.cm-tbl td:first-child { color:var(--on-dark-soft,#b8c4bf); white-space:nowrap; width:1%; }
 .cm-exh-sub { font-size:12.5px; font-weight:700; color:var(--on-dark,#faf9f5); margin:12px 0 6px; }
 .cm-exh-sub:first-child { margin-top:0; }
 /* ASCII-графики CI нарисованы пробелами: любой перенос ломает картинку.
@@ -110,9 +117,33 @@
   function mdi(s) {
     return esc2(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/`(.+?)`/g, '<code>$1</code>');
   }
+  /* Разбор дрилла авторы пишут таблицей markdown, а md() таблиц не знал —
+     кандидат читал на экране «| поле | текст |» и строку из дефисов. Найдено
+     игрой, а не чтением: сыграл SY-001 на проде и увидел пайпы. Чиню здесь,
+     а не в телах: поле одно, тел сорок один, и в остальных пяти библиотеках
+     таблицы появятся ровно так же. */
+  function mdTable(block) {
+    var rows = block.split('\n').filter(function (r) { return r.trim().indexOf('|') === 0 || r.indexOf('|') >= 0; });
+    if (rows.length < 2) return null;
+    var isSep = function (r) { return /^\s*\|?[\s:|-]+\|[\s:|-]*$/.test(r) && r.indexOf('-') >= 0; };
+    if (!isSep(rows[1])) return null;
+    var cells = function (r) {
+      return r.replace(/^\s*\|/, '').replace(/\|\s*$/, '').split('|').map(function (c) { return c.trim(); });
+    };
+    var head = cells(rows[0]);
+    var body = rows.slice(2).filter(function (r) { return r.indexOf('|') >= 0; }).map(cells);
+    var inline = function (t) { return esc2(t).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/`(.+?)`/g, '<code>$1</code>'); };
+    var html = '<table class="cm-tbl"><thead><tr>' + head.map(function (h) { return '<th>' + inline(h) + '</th>'; }).join('') + '</tr></thead><tbody>';
+    body.forEach(function (r) { html += '<tr>' + r.map(function (c) { return '<td>' + inline(c) + '</td>'; }).join('') + '</tr>'; });
+    return html + '</tbody></table>';
+  }
   function md(s) {
-    s = esc2(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/`(.+?)`/g, '<code>$1</code>');
-    return s.split(/\n{2,}/).map(function (p) { return '<p>' + p.replace(/\n/g, '<br>') + '</p>'; }).join('');
+    return String(s == null ? '' : s).split(/\n{2,}/).map(function (p) {
+      var t = mdTable(p);
+      if (t) return t;
+      var e = esc2(p).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/`(.+?)`/g, '<code>$1</code>');
+      return '<p>' + e.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
   }
   // Which language the FEEDBACK side speaks. The product has three independent
   // axes — uiLang (chrome), aiLang (the case/drill itself), fbLang (feedback and
