@@ -1462,7 +1462,7 @@
     },
     {
      "q": 3,
-     "prompt": "(a) Total kelp recovery over 5 years. (b) Reef-fish index at Year 5 (base 30,000, +500/pp) = 30,000 + 14×500. (uses the Year-5 Δ of 5 pp, not cumulative 14)",
+     "prompt": "(a) Total kelp recovery over 5 years. (b) Reef-fish index at Year 5 (base 30,000, +500/pp) = 30,000 + (a)×500. (uses the Year-5 Δ of 5 pp, not cumulative 14)",
      "parts": [
       {
        "key": "q3a",
@@ -1483,7 +1483,7 @@
     },
     {
      "q": 4,
-     "prompt": "Without restocking, kelp falls 3 pp/yr. (a) Cover at Year 5 = 45 − 3×4. (b) Revenue foregone vs the 45% baseline = (45−33)×$5,000. (counts 5 declines, not 4)",
+     "prompt": "Without restocking, kelp falls 3 pp/yr. (a) Cover at Year 5 = 45 − 3×4. (b) Revenue foregone vs the 45% baseline = (45 − (a))×$5,000. (counts 5 declines, not 4)",
      "parts": [
       {
        "key": "q4a",
@@ -1516,7 +1516,7 @@
    "cases": [
     {
      "c": 1,
-     "prompt": "Carrying capacity — kelp sustains ≤ 175,000 urchins. Using the no-restock series, the population first exceeds it in Year 3 (181,500 > 175,000; Y2 165,000 <). (compares the restocked series)",
+     "prompt": "Carrying capacity — kelp sustains ≤ 175,000 urchins. Using the no-restock series, in which year does the population first exceed it?. (compares the restocked series)",
      "input": "choice",
      "answer": "Year 3",
      "naive": "never",
@@ -1735,7 +1735,7 @@
     },
     {
      "q": 3,
-     "prompt": "(a) Total open-water recovery. (b) Waterfowl at Year 5 (base 12,000, +400/pp) = 12,000 + 8×400. (uses Year-5 Δ of 3 pp)",
+     "prompt": "(a) Total open-water recovery. (b) Waterfowl at Year 5 (base 12,000, +400/pp) = 12,000 + (a)×400. (uses Year-5 Δ of 3 pp)",
      "parts": [
       {
        "key": "q3a",
@@ -1756,7 +1756,7 @@
     },
     {
      "q": 4,
-     "prompt": "Without control, open water falls 2 pp/yr. (a) Year 5 = 30 − 2×4. (b) Ferry revenue foregone vs baseline = (30−22)×$3,000. (5 declines)",
+     "prompt": "Without control, open water falls 2 pp/yr. (a) Year 5 = 30 − 2×4. (b) Ferry revenue foregone vs baseline = (30 − (a))×$3,000. (5 declines)",
      "parts": [
       {
        "key": "q4a",
@@ -1789,7 +1789,7 @@
    "cases": [
     {
      "c": 1,
-     "prompt": "Carrying capacity — nuisance threshold 720 ha. No-control cover first exceeds it in Year 3 (726 > 720; Y2 660 <). (uses the controlled series)",
+     "prompt": "Carrying capacity — nuisance threshold 720 ha. in which year does the no-control cover first exceed it?. (uses the controlled series)",
      "input": "choice",
      "answer": "Year 3",
      "naive": "never",
@@ -3616,7 +3616,7 @@
     },
     {
      "q": 3,
-     "prompt": "(a) Total mangrove recovery. (b) Nursery-fish index (base 15,000, +300/pp) = 15,000 + 9×300. (uses Year-5 Δ of 3 pp)",
+     "prompt": "(a) Total mangrove recovery. (b) Nursery-fish index (base 15,000, +300/pp) = 15,000 + (a)×300. (uses Year-5 Δ of 3 pp)",
      "parts": [
       {
        "key": "q3a",
@@ -3637,7 +3637,7 @@
     },
     {
      "q": 4,
-     "prompt": "Without trapping, cover falls 2 pp/yr. (a) Year 5 = 40 − 2×4. (b) Revenue foregone vs 40% baseline = (40−32)×$4,000. (5 declines)",
+     "prompt": "Without trapping, cover falls 2 pp/yr. (a) Year 5 = 40 − 2×4. (b) Revenue foregone vs 40% baseline = (40 − (a))×$4,000. (5 declines)",
      "parts": [
       {
        "key": "q4a",
@@ -3670,7 +3670,7 @@
    "cases": [
     {
      "c": 1,
-     "prompt": "Carrying capacity — mangrove sustains ≤ 105,000 crabs. No-trap series first exceeds it in Year 3 (108,900 > 105,000; Y2 99,000 <). (uses trapped series)",
+     "prompt": "Carrying capacity — mangrove sustains ≤ 105,000 crabs. in which year does the no-trap series first exceed it?. (uses trapped series)",
      "input": "choice",
      "answer": "Year 3",
      "naive": "never",
@@ -3889,7 +3889,7 @@
     },
     {
      "q": 3,
-     "prompt": "(a) Total grassland recovery. (b) Antelope index (base 25,000, +400/pp) = 25,000 + 14×400. (Year-5 Δ)",
+     "prompt": "(a) Total grassland recovery. (b) Antelope index (base 25,000, +400/pp) = 25,000 + (a)×400. (Year-5 Δ)",
      "parts": [
       {
        "key": "q3a",
@@ -3910,7 +3910,7 @@
     },
     {
      "q": 4,
-     "prompt": "Without raptors, cover falls 3 pp/yr. (a) Year 5 = 50 − 3×4. (b) Revenue foregone vs 50% = (50−38)×$6,000",
+     "prompt": "Without raptors, cover falls 3 pp/yr. (a) Year 5 = 50 − 3×4. (b) Revenue foregone vs 50% = (50 − (a))×$6,000",
      "parts": [
       {
        "key": "q4a",
@@ -3943,7 +3943,7 @@
    "cases": [
     {
      "c": 1,
-     "prompt": "Carrying capacity — grassland sustains ≤ 240,000. No-raptor series first exceeds it in Year 3 (242,000 > 240,000; Y2 220,000 <)",
+     "prompt": "Carrying capacity — grassland sustains ≤ 240,000. in which year does the no-raptor series first exceed it?",
      "input": "choice",
      "answer": "Year 3",
      "naive": "never",
@@ -4150,7 +4150,7 @@
     },
     {
      "q": 2,
-     "prompt": "Revenue Y1, Y10; GDP Y1, Y10. Share falls 45/10,000 → 75/24,000",
+     "prompt": "Read export revenue ($M) and GDP ($B) for Y1 and Y10 from the exhibit, then the export share of GDP in each year. Does the share rise or fall?",
      "parts": [
       {
        "key": "q2a",
@@ -4448,7 +4448,7 @@
     },
     {
      "q": 2,
-     "prompt": "Revenue Y1, Y10; GDP Y1, Y10. Share falls 80/5,000 → 140/16,000",
+     "prompt": "Read export revenue ($M) and GDP ($B) for Y1 and Y10 from the exhibit, then the export share of GDP in each year. Does the share rise or fall?",
      "parts": [
       {
        "key": "q2a",
@@ -4595,7 +4595,7 @@
     },
     {
      "c": 6,
-     "prompt": "Fund allocation ($/ha) — $120M: A $4,000→30,000 · B $5,000→24,000 · C $3,000→40,000. (highest cost/ha). Dedup vs Tavrin/Merrat/Vharsk: 120k plants · mix 30/50/20 · rates 5/2/4 · $400/tonne · GDP 5–16k · reinvest 35%/Y4 · impact 0.7/$45 · royalty 18% · progressive 14/24 · threshold <1.00% (exact-boundary Y6) — every core parameter distinct from all three prior B games",
+     "prompt": "Fund allocation ($/ha) — $120M: A $4,000→30,000 · B $5,000→24,000 · C $3,000→40,000. (highest cost/ha).",
      "input": "choice",
      "answer": "C",
      "naive": "B",
@@ -6088,7 +6088,7 @@
     },
     {
      "q": 3,
-     "prompt": "(a) Total cod-bank recovery. (b) Cod-recruitment index (base 20,000, +250/pp) = 20,000 + 11×250. (uses Year-6 Δ of 3 pp)",
+     "prompt": "(a) Total cod-bank recovery. (b) Cod-recruitment index (base 20,000, +250/pp) = 20,000 + (a)×250. (uses Year-6 Δ of 3 pp)",
      "parts": [
       {
        "key": "q3a",
@@ -6109,7 +6109,7 @@
     },
     {
      "q": 4,
-     "prompt": "Without harvest, cover falls 2 pp/yr. (a) Year 6 = 45 − 2×5. (b) Revenue foregone vs 45% baseline = (45−35)×$5,000. (6 declines)",
+     "prompt": "Without harvest, cover falls 2 pp/yr. (a) Year 6 = 45 − 2×5. (b) Revenue foregone vs 45% baseline = (45 − (a))×$5,000. (6 declines)",
      "parts": [
       {
        "key": "q4a",
@@ -6142,7 +6142,7 @@
    "cases": [
     {
      "c": 1,
-     "prompt": "Carrying capacity — cod bank sustains ≤ 130,000 seals. No-harvest series first exceeds it in Year 4 . (uses the harvested series)",
+     "prompt": "Carrying capacity — cod bank sustains ≤ 130,000 seals. in which year does the no-harvest series first exceed it? (uses the harvested series)",
      "input": "choice",
      "answer": "Year 4",
      "naive": "never",
@@ -6153,7 +6153,7 @@
     },
     {
      "c": 2,
-     "prompt": "Complete the table — cod index = 30,000 − 0.2 × (harvested seals). N.B. Y6 seals (55,499) не кратно 5 → ячейка Y6 (round once): | Year | 1 | 2 | 3 | 4 | 5 | 6 | |---|---|---|---|---|---|---| | Seals (harvest) | 100,000 | 90,000 | 79,000 | 71,900 | 64,090 | 55,499 | | Cod index | 10,000 | 12,000 | 14,200 | ▢ | 17,182 | 18,900.20 | → Y4 = 30,000 − 0.2×71,900. (interpolates Y3↔Y5)",
+     "prompt": "Complete the table — cod index = 30,000 − 0.2 × (harvested seals). N.B. Y6 seals (55,499) is not a multiple of 5, so cell Y6 (round once): | Year | 1 | 2 | 3 | 4 | 5 | 6 | |---|---|---|---|---|---|---| | Seals (harvest) | 100,000 | 90,000 | 79,000 | 71,900 | 64,090 | 55,499 | | Cod index | 10,000 | 12,000 | 14,200 | ▢ | 17,182 | 18,900.20 | → Y4 = 30,000 − 0.2×71,900. (interpolates Y3↔Y5)",
      "input": "numeric",
      "answer": 15620,
      "round": 0,
@@ -6365,7 +6365,7 @@
     },
     {
      "q": 3,
-     "prompt": "(a) Total scrub recovery. (b) Seabird index (base 30,000, +350/pp) = 30,000 + 13×350. (uses Year-5 Δ of 4 pp)",
+     "prompt": "(a) Total scrub recovery. (b) Seabird index (base 30,000, +350/pp) = 30,000 + (a)×350. (uses Year-5 Δ of 4 pp)",
      "parts": [
       {
        "key": "q3a",
@@ -6386,7 +6386,7 @@
     },
     {
      "q": 4,
-     "prompt": "Without cull, cover falls 4 pp/yr. (a) Year 5 = 55 − 4×4. (b) Revenue foregone vs 55% baseline = (55−39)×$7,000. (5 declines)",
+     "prompt": "Without cull, cover falls 4 pp/yr. (a) Year 5 = 55 − 4×4. (b) Revenue foregone vs 55% baseline = (55 − (a))×$7,000. (5 declines)",
      "parts": [
       {
        "key": "q4a",
@@ -6419,7 +6419,7 @@
    "cases": [
     {
      "c": 1,
-     "prompt": "Carrying capacity — scrub sustains ≤ 140,000 goats. No-cull series first exceeds it in Year 3 . (uses culled series)",
+     "prompt": "Carrying capacity — scrub sustains ≤ 140,000 goats. in which year does the no-cull series first exceed it? (uses culled series)",
      "input": "choice",
      "answer": "Year 3",
      "naive": "never",
@@ -6430,7 +6430,7 @@
     },
     {
      "c": 2,
-     "prompt": "Complete the table — seabird index = 40,000 − 0.2 × (culled goats). N.B. Y5 goats (92,154) не кратно 5 → ячейка Y5 (round once): | Year | 1 | 2 | 3 | 4 | 5 | |---|---|---|---|---|---| | Goats (cull) | 120,000 | 114,000 | 107,400 | 100,140 | 92,154 | | Seabird index | 16,000 | 17,200 | ▢ | 19,972 | 21,569.20 | → Y3 = 40,000 − 0.2×107,400. (interpolates)",
+     "prompt": "Complete the table — seabird index = 40,000 − 0.2 × (culled goats). N.B. Y5 goats (92,154) is not a multiple of 5, so cell Y5 (round once): | Year | 1 | 2 | 3 | 4 | 5 | |---|---|---|---|---|---| | Goats (cull) | 120,000 | 114,000 | 107,400 | 100,140 | 92,154 | | Seabird index | 16,000 | 17,200 | ▢ | 19,972 | 21,569.20 | → Y3 = 40,000 − 0.2×107,400. (interpolates)",
      "input": "numeric",
      "answer": 18520,
      "round": 0,
@@ -7032,7 +7032,7 @@
     },
     {
      "c": 6,
-     "prompt": "Fund allocation ($/ha) — $150M: A $6,000→25,000 · B $5,000→30,000 · C $3,000→50,000. (highest cost/ha). Dedup vs Tavrin/Merrat/Vharsk/Sereno/Meskil: 180k plants · mix 35/45/20 · rates 6/2/4 · $250/t cocoa · GDP 3–9k · reinvest 30%/Y5 · impact 0.6/$55 · royalty 15% · progressive 12/22 · threshold <1.00% (exact-boundary Y4). No offtake twist (that's #28's). Every core parameter distinct from all five prior B games",
+     "prompt": "Fund allocation ($/ha) — $150M: A $6,000→25,000 · B $5,000→30,000 · C $3,000→50,000. (highest cost/ha).",
      "input": "choice",
      "answer": "C",
      "naive": "A",
@@ -8581,7 +8581,7 @@
     },
     {
      "q": 3,
-     "prompt": "(a) Total heath recovery. (b) Stonechat index (base 25,000, +450/pp) = 25,000 + 13×450. (uses Year-5 Δ of 4 pp)",
+     "prompt": "(a) Total heath recovery. (b) Stonechat index (base 25,000, +450/pp) = 25,000 + (a)×450. (uses Year-5 Δ of 4 pp)",
      "parts": [
       {
        "key": "q3a",
@@ -8602,7 +8602,7 @@
     },
     {
      "q": 4,
-     "prompt": "Without cull, cover falls 3 pp/yr. (a) Year 5 = 48 − 3×4. (b) Revenue foregone vs 48% baseline = (48−36)×$8,000. (5 declines)",
+     "prompt": "Without cull, cover falls 3 pp/yr. (a) Year 5 = 48 − 3×4. (b) Revenue foregone vs 48% baseline = (48 − (a))×$8,000. (5 declines)",
      "parts": [
       {
        "key": "q4a",
@@ -8635,7 +8635,7 @@
    "cases": [
     {
      "c": 1,
-     "prompt": "Carrying capacity — heath sustains ≤ 150,000 rabbits. No-cull series first exceeds it in Year 3 . (uses culled series)",
+     "prompt": "Carrying capacity — heath sustains ≤ 150,000 rabbits. in which year does the no-cull series first exceed it? (uses culled series)",
      "input": "choice",
      "answer": "Year 3",
      "naive": "never",
@@ -8646,7 +8646,7 @@
     },
     {
      "c": 2,
-     "prompt": "Complete the table — stonechat index = 40,000 − 0.2 × (culled rabbits). N.B. Y5 rabbits (88,231) не кратно 5 → ячейка Y5 (round once): | Year | 1 | 2 | 3 | 4 | 5 | |---|---|---|---|---|---| | Rabbits (cull) | 130,000 | 121,000 | 111,100 | 100,210 | 88,231 | | Stonechat index | 14,000 | 15,800 | ▢ | 19,958 | 22,353.80 | → Y3 = 40,000 − 0.2×111,100. (interpolates Y2↔Y4)",
+     "prompt": "Complete the table — stonechat index = 40,000 − 0.2 × (culled rabbits). N.B. Y5 rabbits (88,231) is not a multiple of 5, so cell Y5 (round once): | Year | 1 | 2 | 3 | 4 | 5 | |---|---|---|---|---|---| | Rabbits (cull) | 130,000 | 121,000 | 111,100 | 100,210 | 88,231 | | Stonechat index | 14,000 | 15,800 | ▢ | 19,958 | 22,353.80 | → Y3 = 40,000 − 0.2×111,100. (interpolates Y2↔Y4)",
      "input": "numeric",
      "answer": 17780,
      "round": 0,
@@ -8860,7 +8860,7 @@
     },
     {
      "c": 2,
-     "prompt": "Volume share — Specialty share of Year-2 volume = 60/100. (pools Y1+Y2 volumes: 80/200)",
+     "prompt": "Volume share — Specialty share of Year-2 volume. (pools Y1+Y2 volumes)",
      "input": "numeric",
      "answer": 60,
      "round": 2,
@@ -9120,7 +9120,7 @@
     },
     {
      "c": 4,
-     "prompt": "Effect sensitivity (decision reverses) — if Tier-3 households actually ran 3 sessions/yr: marginal benefit 30,000×3×$10 (net +$150,000). The call hinges on the marginal effect, not the pilot average",
+     "prompt": "Effect sensitivity (decision reverses) — how many sessions a year would Tier-3 households have to run for the call to reverse? Marginal benefit is 30,000 × sessions × $10. The call hinges on the marginal effect, not the pilot average",
      "input": "numeric",
      "answer": 3,
      "round": 0,
@@ -9317,7 +9317,7 @@
     },
     {
      "c": 3,
-     "prompt": "Net surplus (net vs gross) — net annual benefit $4,422,000 (gross $4,752,000 − maintenance $330,000). (forgets recurring maintenance)",
+     "prompt": "Net surplus (net vs gross) — net annual benefit from gross $4,752,000 less recurring maintenance $330,000. (forgets recurring maintenance)",
      "input": "numeric",
      "answer": 4422000,
      "round": 0,
@@ -10666,7 +10666,7 @@
     },
     {
      "q": 3,
-     "prompt": "Heath recovers as the herd falls: Δcover +2/+3/+4/+4/+5 pp over Years 2–6. (a) Total recovery. (b) Grouse index (base 20,000, +400/pp) = 20,000 + 18×400. (uses the Year-6 Δ of 5 pp)",
+     "prompt": "Heath recovers as the herd falls: Δcover +2/+3/+4/+4/+5 pp over Years 2–6. (a) Total recovery. (b) Grouse index (base 20,000, +400/pp) = 20,000 + (a)×400. (uses the Year-6 Δ of 5 pp)",
      "parts": [
       {
        "key": "q3a",
@@ -10687,7 +10687,7 @@
     },
     {
      "q": 4,
-     "prompt": "Without the cull, heath cover falls 3 pp/yr from 55%. (a) Year 6 = 55 − 3×5. (b) Revenue foregone vs 55% baseline = (55−40)×$6,000. (6 declines)",
+     "prompt": "Without the cull, heath cover falls 3 pp/yr from 55%. (a) Year 6 = 55 − 3×5. (b) Revenue foregone vs 55% baseline = (55 − (a))×$6,000. (6 declines)",
      "parts": [
       {
        "key": "q4a",
@@ -10933,7 +10933,7 @@
     },
     {
      "c": 2,
-     "prompt": "Break-even ore price — at what raw price does the refinery add nothing? refined $30M = 300,000 t × P → P. Above $100/t, refining the ore destroys value",
+     "prompt": "Break-even ore price — refined output is $30M from 300,000 t. Above $100/t of raw ore, does refining still add value?",
      "input": "choice",
      "answer": "nothing",
      "naive": "refining always adds value",
@@ -11326,7 +11326,7 @@
    "cases": [
     {
      "c": 1,
-     "prompt": "Cost per case — North $25.00 vs South $32.00 → North. *No cheaper-total-loser reversal.*",
+     "prompt": "Cost per case — which region delivers the lower cost per case, and what is it? *No cheaper-total-loser reversal.*",
      "input": "numeric",
      "answer": 25,
      "round": 2,

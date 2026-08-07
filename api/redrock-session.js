@@ -127,12 +127,31 @@ function scrubPrompt(p, secretVals) {
   // 3. key-based cut: the solution is wherever a real answer/naive VALUE (>2 digits) appears —
   //    drop from the start of the clause that first contains any such value.
   let cutAt = s.length;
+  /* Поиск шёл по ДОСЛОВНОЙ строке ответа, и на этом класс жил целиком:
+     ответ `4422000` не встречается в тексте `4,422,000`, поэтому ни одно число
+     с разделителями тысяч скраб не вырезал. Нашёл цех игр на живом теле (39 c3),
+     причём в данных он случай закрыл, а дыра осталась бы для следующего автора.
+     Ищем и дословно, и в форме с разделителями — как число печатают в тексте. */
+  const rkVariants = (val) => {
+    const out = [val];
+    const plain = val.replace(/[,\s]/g, '');
+    if (/^\d+(?:\.\d+)?$/.test(plain)) {
+      const [int, frac] = plain.split('.');
+      const grouped = int.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + (frac ? '.' + frac : '');
+      out.push(plain, grouped);
+      const sp = int.replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + (frac ? '.' + frac : '');
+      out.push(sp);
+    }
+    return [...new Set(out)].filter(Boolean);
+  };
   for (const v of (secretVals || [])) {
     if (v == null) continue;
     const val = String(v).trim();
     if (val.replace(/[^\d]/g, '').length < 3) continue;   // skip small numbers — those are input data
-    const idx = s.indexOf(val);
-    if (idx >= 0) { const sep = rkLastSepBefore(s, idx); cutAt = Math.min(cutAt, sep >= 0 ? sep : idx); }
+    for (const cand of rkVariants(val)) {
+      const idx = s.indexOf(cand);
+      if (idx >= 0) { const sep = rkLastSepBefore(s, idx); cutAt = Math.min(cutAt, sep >= 0 ? sep : idx); }
+    }
   }
   if (cutAt < s.length) s = s.slice(0, cutAt);
   // 3b. cut trailing answer/naive COMMENTARY that names the winner or the trap in words

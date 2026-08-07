@@ -1,7 +1,7 @@
 {
  "schema": "casedge.drills.br.v1",
  "type": "Brainstorm",
- "count": 48,
+ "count": 49,
  "drills": [
   {
    "id": "BR-001",
@@ -1800,6 +1800,41 @@
    "family_h25": "F2",
    "family_src": "тело",
    "family_conf": "высокая"
+  },
+  {
+   "id": "BR-049",
+   "n": 49,
+   "title": "Ten Cuts A Year",
+   "company": "Kroverdale Barbers",
+   "industry": "Personal services",
+   "class": "B12(a)",
+   "difficulty": "Hard",
+   "echelon": true,
+   "cull": false,
+   "clean": false,
+   "time": "6 min",
+   "type": "Brainstorm",
+   "family_h25": "F3",
+   "family_src": "тело",
+   "family_conf": "высокая",
+   "family_note": "круг 36: наблюдаемая средняя 10 стрижек в год относится ко ВСЕЙ базе; в подписку зайдёт не вся база, а её хвост — состав выборки, а не эффект",
+   "prompt": "Kroverdale Barbers opens downtown next month. The plan is built on **2,500 customers a year**, each buying about **10 haircuts at $30** — **$750K** of first-year revenue and roughly **$430K** of first-year profit. Barbers are paid hourly and the shop is not at capacity, so an extra haircut costs the shop almost nothing.\n\nThe owner now wants to add a **membership**: one flat monthly price, unlimited haircuts. He proposes pricing it off the plan — ten cuts a year at $30 is $300, so $25 a month.\n\n**Before any modelling: what could make that price wrong?**",
+   "facts": [
+    "The plan assumes **2,500 customers** buying **10 haircuts** a year at **$30**.",
+    "First-year revenue **$750K**; first-year profit about **$430K**.",
+    "Barbers are hourly and the shop is not at capacity: an extra haircut adds almost no cost.",
+    "The owner wants the membership live from opening day, before any usage data exists."
+   ],
+   "key": {
+    "load": "**`LOAD` — the ten is an average over people who will not all buy the membership.**\nThe price is set from the mean of the whole base, but the membership is **chosen**, and it is chosen by whoever cuts their hair more often than the mean. The relevant number is not \"cuts per customer\" but \"cuts per customer **who signs up**\", and nothing in the plan measures that. The branch is load-bearing because it makes the $25 wrong in a knowable direction — too low — before a single assumption about demand is made.\n*Grounding: `kellog2020`, Busch's Barber Shop, membership brainstorm — \"adverse selection likely to occur with only customers who would overuse membership signing up\".*",
+    "cover": "**`COVER`:**\n\n| Axis | What counts |\n|---|---|\n| **Who selects in** | the spread of haircut frequency behind the average of ten; whether the shop can even see it before launch; whether occasional customers hold a membership at all |\n| **What the membership changes in behaviour** | a customer who paid per cut now pays nothing at the margin, so frequency rises after signing up, not just before |\n| **Where the free capacity ends** | \"almost no cost\" holds while chairs are idle; the same idle chairs are what the heavy users will fill first |\n| **How the price can be made safe** | a cap on cuts, a higher price, a trial period that measures actual frequency before the price is fixed |",
+    "dead": "**`DEAD` — true about this shop, empty about this question:**\n\n| Branch | What kills it |\n|---|---|\n| \"Competitors may respond with discounts\" | true, and it moves the whole price list — it says nothing about why **this** price is wrong |\n| \"Marketing may not deliver 2,500 customers\" | that is a risk to the plan, not to the membership: if the base is smaller, the average is still the average |\n| \"Barbers may be unhappy if tips fall\" | a real consequence, and it does not touch the arithmetic of the price |\n| \"Rent downtown is high\" | a fixed cost; the membership question is about who buys and how often |\n\nEach of the four is a defensible line on a page of risks and answers a different question. **A candidate who lists them well has still not said why $25 is wrong.**\n\n**Pass criteria:** `LOAD` named — the ten is an average over a base that does not equal the buyers — plus ≥2 `COVER` axes; every accepted `DEAD` subtracts.",
+    "cull": null,
+    "grader": "### Grader\n\n- **load_syn:** who signs up · self-selection · adverse selection · the average is over everyone, the membership is bought by the frequent · heavy users · the ten does not describe the subscriber\n- **Do NOT accept** as `LOAD`: \"the price is too low\" without the reason; \"demand may be higher than expected\" (that is the whole market, not the selected group); \"they should model it\" (a process, not a cause).\n- One `COVER` axis is not a pass. The slot fails a candidate who names the risk list and never reaches the selection."
+   },
+   "reference": {
+    "en": "**Conclusion.** Price the membership off the frequency of the customers who will actually buy one, not off the ten-a-year average — the two are different numbers and the difference runs one way.\n\n**Facts.** The plan's ten cuts at $30 is a mean over **2,500** customers. A membership is optional, so it is bought by customers above that mean, and at $25 a month the shop collects **$300** a year from someone who was already worth **$300** at least, and in the selected group more. Marginal cost is near zero only while chairs are idle, and the same idle chairs are what the frequent customers fill first.\n\n**Risk.** Internal: the shop has no pre-launch measurement of frequency spread, so the selected group's mean is unknown, not merely uncertain. External: a membership is easy to copy and hard to withdraw once sold.\n\n**Next step.** Run the membership as a capped trial — a stated maximum number of cuts — and price the permanent version off the frequency the trial actually records.\n\n**Source:** `kellog2020`, Busch's Barber Shop, Parts 3–5, pp. 30–33 — plan of 2,500 customers × 10 haircuts × $30, $750K revenue, ~$430K first-year profit, hourly barbers with no marginal cost, and the membership brainstorm naming adverse selection."
+   }
   }
  ],
  "_meta": {

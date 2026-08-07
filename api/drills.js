@@ -268,6 +268,22 @@ async function rateLimited(userId, sbUrl, sbKey, token) {
 async function graderJSON(system, userText, maxTokens) {
   const T0 = Date.now();
   const BUDGET_MS = 52 * 1000;
+  /* УПРАВЛЕНИЕ РАЗМЫШЛЕНИЕМ У ГРЕЙДЕРА.
+     Замер на проде 07.08: разбор дрилла отдаётся за 7.7-9.2 секунды при выходе
+     624-700 токенов. Видимый разбор — это полторы сотни слов, то есть примерно
+     200 токенов; остальные 400-500 уходят в размышление, которым здесь никто
+     не управлял. В case-session лесенка режимов стоит с 29.07 и работает,
+     в грейдере дриллов её просто не было.
+     Ставим ту же лесенку: adaptive+effort:low → adaptive → без управления,
+     со спуском по отказу апстрима. Меньше скрытых токенов — быстрее ответ
+     кандидату и дешевле ход. Качество разбора это не трогает: чек-лист,
+     эталон и правила остаются те же, меняется бюджет размышления. */
+  const MODES = [
+    { thinking: { type: 'adaptive' }, output_config: { effort: 'low' } },
+    { thinking: { type: 'adaptive' } },
+    null
+  ];
+  let _mode = 0;
   const call = (mt, timeoutMs) => fetchAnthropicWithRetry('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: {
@@ -282,9 +298,9 @@ async function graderJSON(system, userText, maxTokens) {
     // модель получает тот же текст, меняется только цена его доставки.
     // (Блоки короче 1024 токенов апстрим просто не кеширует, и это безопасно:
     // пометка на коротком блоке ничего не ломает, она молча не срабатывает.)
-    body: JSON.stringify({ model: GRADER_MODEL, max_tokens: mt,
+    body: JSON.stringify(Object.assign({ model: GRADER_MODEL, max_tokens: mt,
       system: [{ type: 'text', text: system, cache_control: { type: 'ephemeral' } }],
-      messages: [{ role: 'user', content: userText }] })
+      messages: [{ role: 'user', content: userText }] }, MODES[_mode] || {}))
     // maxRetries was 0 here, which made the whole RETRIABLE_STATUS branch in
     // fetchAnthropicWithRetry dead code (`attempt < maxRetries` is never true at
     // 0). A 429/529 from upstream came straight back and was then treated as
@@ -294,6 +310,16 @@ async function graderJSON(system, userText, maxTokens) {
   const textOf = dd => (dd && Array.isArray(dd.content)) ? dd.content.filter(b => b && b.type === 'text' && typeof b.text === 'string').map(b => b.text).join('\n') : '';
   const parse = t => { try { const m = String(t || '').match(/\{[\s\S]*\}/); return m ? JSON.parse(m[0]) : null; } catch (e) { return null; } };
   let resp = await call(maxTokens, 45 * 1000);
+  /* Спуск по лесенке: апстрим отвергает форму — пробуем следующую, но только
+     если он жалуется именно на управление размышлением. Иначе это не наш случай
+     и повтор только тратит бюджет. */
+  while (resp && resp.status === 400 && _mode < MODES.length - 1) {
+    const txt = await resp.clone().text().catch(() => '');
+    if (!/thinking|output_config|effort/i.test(txt)) break;
+    console.error('drills grader: mode', _mode, 'rejected -', txt.slice(0, 140));
+    _mode++;
+    resp = await call(maxTokens, 45 * 1000);
+  }
   // The first response's status was never checked: an error body has no
   // `content` array, so textOf() returned '' and parse('') returned null — a
   // transport failure and an unparseable answer were the same event. They need
@@ -317,7 +343,7 @@ async function graderJSON(system, userText, maxTokens) {
     console.log('drills usage', JSON.stringify({
       in: u.input_tokens, out: u.output_tokens,
       cache_read: u.cache_read_input_tokens, cache_write: u.cache_creation_input_tokens,
-      stop: data.stop_reason }));
+      stop: data.stop_reason, mode: _mode, ms: Date.now() - T0 }));
   }
   let parsed = parse(textOf(data));
   // Retry once inside the deadline on truncation OR unparseable output. This
@@ -398,7 +424,7 @@ async function gradeDrill(d, answer, fbLang) {
       '\n\nPASS CHECKLIST: ' + (d.checklist && (d.checklist.en || d.checklist.ru) || '') +
       '\nREFERENCE SOLUTION: ' + (d.reference && (d.reference.en || d.reference.ru) || '') +
       '\nCANDIDATE ANSWER: ' + String(answer || '');
-    const j = await graderJSON(SY_GRADER_SYSTEM, u + fbDirective(fbLang), 700);
+    const j = await graderJSON(SY_GRADER_SYSTEM, u + fbDirective(fbLang), 900);   // 700 упиралось в потолок: повтор стоил +7.5 с
     return j || { graded: false, coaching: 'Could not grade — please try again.' };
   }
   // CI: exhibit is a `parts` sequence, not header/rows — serialise it whole.
