@@ -49,28 +49,21 @@ const MAX_BODY_BYTES = 200 * 1024;      // 200 KB request cap
  * оптимизацией: оптимизация делает дешевле в среднем, потолок обязан держать
  * ХУДШИЙ случай.
  *
- * Замер на проде 06.08 дал закон, из которого всё считается:
- *   · повтор внутри шага   — промпт читается из кеша (0.1x), пишется прирост
- *   · смена шага           — весь промпт пишется заново (1.25x)
- * Значит стоимость кейса ≈ (число шагов) × (размер промпта) × цена записи.
- * Число шагов задано кейсом и не наше дело. Управляем размером промпта.
+ * Закон, замеренный на живом проде 07.08 и заменивший прежний:
+ *   · пока НАЧАЛО запроса не менялось  — прошлое читается из кеша (0.1x),
+ *     пишется только прирост            ≈ $0.006 за ход
+ *   · как только начало сдвинулось      — весь промпт пишется заново (1.25x)
+ *                                        ≈ $0.020 за ход, в 3.3 раза дороже
  *
- * Арифметика бюджета при ценах Sonnet 5 ($2 вход / $10 выход за MTok):
- *   выход  ~25 ходов × 200 токенов × $10/M   = $0.05
- *   остаётся на вход                          = $0.15
- *   $0.15 / $2.50 за MTok записи              = 60 000 токенов записи на кейс
- *   при 10 сменах шага                        = 6 000 токенов на промпт
- *   минус постоянная часть кейса (~2 200)     = 3 800 токенов на стенограмму
+ * Прежняя редакция резала стенограмму до 3 800 токенов и двигала границу каждый
+ * ход — то есть сама сдвигала начало на каждом ходе и платила по дорогой ветке
+ * всю вторую половину партии. Управляем не размером промпта, а ЧАСТОТОЙ сдвига
+ * начала: см. windowTranscript ниже.
  *
- * Отсюда TRANSCRIPT_BUDGET_TOKENS. Число не круглое и не должно быть круглым:
- * оно выведено из потолка, а не выбрано. Меняется потолок — пересчитывается оно.
- *
- * Почему это НЕ бьёт по качеству. Урезается только середина разговора; начало
- * кейса и последние ходы остаются дословно. Интервьюер судит текущий шаг по
- * текущему ответу, а рамку кейса держит первый ход, который мы не выбрасываем
- * никогда. Теряется способность сослаться на реплику из середины длинной
- * партии — это настоящая, но ограниченная цена, и она названа здесь, а не
- * спрятана.
+ * Почему это НЕ бьёт по качеству. До потолка память полная и не режется вовсе;
+ * за потолком выбрасывается только середина, а рамка кейса и последние ходы
+ * остаются дословно. Теряется способность сослаться на реплику из середины
+ * очень длинной партии — цена настоящая, ограниченная и названная.
  */
 const CASE_PRICE_CAP_USD = 0.20;
 
@@ -81,12 +74,11 @@ const CASE_PRICE_CAP_USD = 0.20;
    Куплено ошибкой смены 06.08: «залито или нет» решалось поиском по логам,
    поиск вернул пусто из-за отставания индексации, и вывод был неверным.
    Сравнение метки с диском от индексации логов не зависит. */
-const BUILD = '772db8afb7ac';
+const BUILD = '993fbca0ff74';
 const PRICE_IN_PER_MTOK = 2.0;
 const PRICE_OUT_PER_MTOK = 10.0;
 const CACHE_WRITE_MULT = 1.25;
 const CACHE_READ_MULT = 0.10;
-const TRANSCRIPT_BUDGET_TOKENS = 3800;
 const MAX_CANDIDATE_CHARS = 1500;   // одна реплика кандидата
 const TOKENS_PER_CHAR = 0.27;       // латиница+кириллица вперемешку, замер по логам
 
@@ -109,53 +101,107 @@ const estTokens = (str) => Math.ceil(String(str || '').length * TOKENS_PER_CHAR)
  * для кошелька и небезопасна для кандидата — а его партия и есть продукт.
  * Точная оценка по замеренному закону не менее надёжна и никого не обрывает зря.
  */
-function estimateSpentUsd(msgs, baseTokens, stepIndex) {
-  const asstTurns = msgs.filter(m => m.role === 'assistant').length;
-  if (!asstTurns) return 0;
-  const stepChanges = Math.min(asstTurns, Math.max(1, Number(stepIndex) + 1 || 1));
-  const retries = Math.max(0, asstTurns - stepChanges);
+function estimateSpentUsd(msgs, baseTokens, volatileTokens) {
+  /* Считаем по закону, замеренному на проде 07.08 и переписанному после того,
+     как изменчивый блок уехал в конец запроса:
+       ход 1        — весь промпт пишется (1.25x)
+       ход N > 1    — прошлый промпт читается из кеша (0.1x), пишется прирост
+     Прежняя редакция делила ходы на «смены шага» и «повторы» и считала смену
+     шага полной записью. После переноса изменчивого блока смена шага больше
+     не рвёт кеш, и то деление врало в дорогую сторону — то есть закрывало
+     нормальные партии раньше времени.
+     Стенограмма и есть свидетельство: сервер без состояния, но число ходов
+     и их размеры видны прямо в ней, и соврать ими кандидат не может. */
+  const asst = msgs.filter(m => m.role === 'assistant');
+  if (!asst.length) return 0;
 
-  const transcriptTok = Math.min(
-    msgs.reduce((n, m) => n + estTokens(m.content), 0), TRANSCRIPT_BUDGET_TOKENS);
-  const promptTok = baseTokens + transcriptTok;
-  const outTok = msgs.filter(m => m.role === 'assistant')
-    .reduce((n, m) => n + estTokens(m.content), 0);
-
-  const RETRY_WRITE_TOK = 650;   // прирост, который дописывается на повторе
-  return (
-    stepChanges * promptTok * PRICE_IN_PER_MTOK * CACHE_WRITE_MULT +
-    retries * (promptTok * PRICE_IN_PER_MTOK * CACHE_READ_MULT
-             + RETRY_WRITE_TOK * PRICE_IN_PER_MTOK * CACHE_WRITE_MULT) +
-    outTok * PRICE_OUT_PER_MTOK
-  ) / 1e6;
+  let usd = 0, prevPrompt = 0, running = 0;
+  for (let i = 0; i < msgs.length; i++) {
+    running += estTokens(msgs[i].content);
+    if (msgs[i].role !== 'assistant') continue;
+    const prompt = baseTokens + Math.min(running, TRANSCRIPT_CEILING_TOKENS);
+    if (!prevPrompt) {
+      usd += (prompt + (volatileTokens || 0)) * PRICE_IN_PER_MTOK * CACHE_WRITE_MULT;
+    } else {
+      usd += prevPrompt * PRICE_IN_PER_MTOK * CACHE_READ_MULT
+           + (Math.max(0, prompt - prevPrompt) + (volatileTokens || 0))
+             * PRICE_IN_PER_MTOK * CACHE_WRITE_MULT;
+    }
+    usd += estTokens(msgs[i].content) * PRICE_OUT_PER_MTOK;
+    prevPrompt = prompt;
+  }
+  return usd / 1e6;
 }
 
-/* Окно стенограммы под бюджет.
- * Держим ПЕРВЫЙ ход интервьюера (рамка кейса) и столько последних ходов,
- * сколько влезает. Выброшенная середина заменяется одной честной строкой —
- * модель должна знать, что разговор был длиннее, иначе она решит, что
- * кандидат начал с середины. */
-function windowTranscript(msgs, budgetTokens) {
+
+/* Окно стенограммы: ПАМЯТЬ ПОЛНАЯ, пока разговор не упрётся в потолок.
+ *
+ * Прежняя редакция резала стенограмму до 3 800 токенов и двигала границу
+ * КАЖДЫЙ ход. Замер на живом проде 07.08 (кейс #2, четырнадцать ходов) показал,
+ * во что это обходится:
+ *
+ *   ходы 1-8, стенограмма влезает целиком   cache_read растёт 0 → 6428   $0.0060 за ход
+ *   ходы 9-14, началась обрезка             cache_read = 0 ВСЕГДА        $0.0199 за ход
+ *
+ * Кеш живёт только на НЕИЗМЕННОМ начале запроса. Сдвинули границу на одну
+ * реплику - начало другое, и апстрим пишет весь промпт заново. То есть механизм,
+ * написанный ради экономии токенов, включал режим, где каждый ход платит полную
+ * запись: в 3.3 раза дороже. Мы резали память ради экономии и этим её теряли.
+ *
+ * Теперь два правила.
+ *
+ * ПЕРВОЕ: до потолка не режем ВООБЩЕ. Нормальная партия на 15-20 ходов доживает
+ * до рекомендации с полной памятью, и стоит это дешевле прежней обрезки, потому
+ * что каждый ход дописывает только прирост, а прошлое читает из кеша.
+ *
+ * ВТОРОЕ: упёрлись в потолок - режем ОДИН раз крупным блоком и держим границу
+ * неподвижной, пока следующий блок не понадобится. Число выброшенных реплик
+ * квантуется по BLOCK, поэтому оно не меняется от хода к ходу: префикс живёт
+ * несколько ходов подряд, и кеш читается даже в обрезанном режиме.
+ *
+ * Сервер без состояния, поэтому граница обязана быть ФУНКЦИЕЙ стенограммы,
+ * а не памятью о прошлом ходе: одна и та же стенограмма всегда даёт одну и ту же
+ * границу, и два запроса подряд совпадают начало в начало.
+ *
+ * Цена этой правки названа честно: длинная партия держит в промпте больше
+ * токенов, и промах кеша (кандидат думал дольше пяти минут) на ней дороже.
+ * Замер: на двадцати ходах с промахом каждый четвёртый ход полная память
+ * $0.264 против $0.240 у блочной обрезки - разница есть, но она меньше, чем
+ * трёхкратная переплата, которую мы платили до сих пор.
+ */
+const TRANSCRIPT_CEILING_TOKENS = 12000;   // до этого не режем ничего
+const TRANSCRIPT_FLOOR_TOKENS   = 8000;    // упёрлись - срезаем сразу до этого
+const DROP_BLOCK = 8;                      // реплик в одном блоке выброса
+
+function windowTranscript(msgs, ceilingTokens, floorTokens, block) {
+  const CEIL = ceilingTokens || TRANSCRIPT_CEILING_TOKENS;
+  const FLOOR = floorTokens || TRANSCRIPT_FLOOR_TOKENS;
+  const BLOCK = block || DROP_BLOCK;
   if (!msgs.length) return { kept: msgs, dropped: 0 };
   const total = msgs.reduce((n, m) => n + estTokens(m.content), 0);
-  if (total <= budgetTokens) return { kept: msgs, dropped: 0 };
+  if (total <= CEIL) return { kept: msgs, dropped: 0 };   // память полная
 
-  const head = msgs[0];                       // рамка кейса — не выбрасывается
-  let used = estTokens(head.content);
-  const tail = [];
-  for (let i = msgs.length - 1; i >= 1; i--) {
-    const t = estTokens(msgs[i].content);
-    if (used + t > budgetTokens) break;
-    used += t; tail.unshift(msgs[i]);
+  // Сколько реплик надо выбросить, чтобы уйти под пол. Считаем с головы:
+  // голова (рамка кейса) не выбрасывается никогда.
+  const headTok = estTokens(msgs[0].content);
+  let need = 0, running = total;
+  for (let i = 1; i < msgs.length && running > FLOOR; i++) {
+    running -= estTokens(msgs[i].content);
+    need = i;
   }
-  const dropped = msgs.length - 1 - tail.length;
-  if (!dropped) return { kept: msgs, dropped: 0 };
+  // Квантуем по блоку: граница стоит на месте, пока не понадобится следующий блок.
+  let dropped = Math.min(Math.ceil(need / BLOCK) * BLOCK, msgs.length - 1);
+  if (dropped <= 0) return { kept: msgs, dropped: 0 };
+
+  const tail = msgs.slice(1 + dropped);
   const note = {
     role: 'user',
-    content: `[Ранее в этом кейсе было ещё ${dropped} реплик — они опущены ради длины. Опирайся на рамку кейса выше и на последние ходы ниже; не делай вид, что разговор начался здесь.]`
+    content: `[Ранее в этом кейсе было ещё ${dropped} реплик - они опущены ради длины. Опирайся на рамку кейса выше и на последние ходы ниже; не делай вид, что разговор начался здесь.]`
   };
-  return { kept: [head, note, ...tail], dropped };
+  void headTok;
+  return { kept: [msgs[0], note, ...tail], dropped };
 }
+
 const RATE_LIMIT = 30;                  // requests per user per window
 const RATE_WINDOW_MS = 60 * 1000;
 const UPSTREAM_TIMEOUT_MS = 60 * 1000;
@@ -953,7 +999,7 @@ export default async function handler(req, res) {
         return { role: m.role, content: m.content };
       })
       .slice(-80);
-    const win = windowTranscript(capped, TRANSCRIPT_BUDGET_TOKENS);
+    const win = windowTranscript(capped, TRANSCRIPT_CEILING_TOKENS, TRANSCRIPT_FLOOR_TOKENS, DROP_BLOCK);
     const messages = win.kept;
 
     /* Потолок держится ОСТАНОВКОЙ, а не сжатием — и вот почему.
@@ -965,13 +1011,8 @@ export default async function handler(req, res) {
        ненормальная закрывается: интервьюер доводит кейс до рекомендации и
        заканчивает. Это ещё и честнее по сути: партия на семьдесят реплик —
        это не тренировка интервью, интервью столько не длится. */
-    const spentUsd = estimateSpentUsd(capped, 2206, stepIndex);
-    /* Закрываем не когда потолок ПРОЙДЕН, а когда следующий ход его пробьёт:
-       стоимость одного хода известна, и тратить её, чтобы потом обнаружить
-       перерасход, — это и есть перерасход. */
-    const NEXT_TURN_USD = (2206 + TRANSCRIPT_BUDGET_TOKENS) * PRICE_IN_PER_MTOK * CACHE_WRITE_MULT / 1e6
-      + 260 * PRICE_OUT_PER_MTOK / 1e6;
-    const overCap = spentUsd + NEXT_TURN_USD >= CASE_PRICE_CAP_USD;
+    let spentUsd = 0, overCap = false;   // считается ниже, когда собран промпт
+
 
     const isOpening = !hasAssistantTurn(messages);
     // Anthropic requires the conversation to start with a user turn.
@@ -1009,9 +1050,35 @@ export default async function handler(req, res) {
     // compatibility. Client opts in by sending mode:'ilead' + doneSteps[].
     const ilead = body.mode === 'ilead' && firmIsCandidateLed(body.firm) && caseIsGraphReady(steps);
     const doneSteps = Array.isArray(body.doneSteps) ? body.doneSteps.map(Number).filter(Number.isInteger) : [];
-    const built = ilead
+    const build = (over) => ilead
       ? buildSystemPromptILead({ caseObj, doneSteps, firm: body.firm, revealedSet, isOpening, focusKey, lang })
-      : buildSystemPrompt({ caseObj, stepIndex, attemptCount, firm: body.firm, revealedSet, isOpening, focusKey, lang, overCap });
+      : buildSystemPrompt({ caseObj, stepIndex, attemptCount, firm: body.firm, revealedSet, isOpening, focusKey, lang, overCap: over });
+
+    /* ПОТОЛОК СЧИТАЕТСЯ ЗДЕСЬ, а не выше: цена хода зависит от размера
+       изменчивого блока, а он известен только после сборки промпта. Собираем
+       один раз «как обычно», меряем, и если партия упирается в потолок —
+       пересобираем с директивой закрытия. Пересборка — чистая работа со
+       строками, сети не касается.
+
+       Закрываем не когда потолок ПРОЙДЕН, а когда следующий ход его пробьёт:
+       стоимость хода известна, и тратить её, чтобы потом обнаружить перерасход,
+       — это и есть перерасход. */
+    let built = build(false);
+    const volatileTok = estTokens(built.volatile);
+    const stableTok = estTokens(built.stable);
+    spentUsd = estimateSpentUsd(capped, stableTok, volatileTok);
+    const NEXT_TURN_USD = ((stableTok + TRANSCRIPT_CEILING_TOKENS) * PRICE_IN_PER_MTOK * CACHE_READ_MULT
+      + volatileTok * PRICE_IN_PER_MTOK * CACHE_WRITE_MULT
+      + 260 * PRICE_OUT_PER_MTOK) / 1e6;
+    /* Поправка калибровки. Оценка считает по среднему ходу и systematically
+       занижает: первые ходы платят полную запись (кешируемого начала ещё нет),
+       а блочный выброс изредка рвёт кеш. Сверка с гейтом на боевом обработчике
+       (`06_Обмен/DEV/gate_case_price_cap.js`, семь сценариев) дала занижение
+       около четверти. Множитель назван числом и живёт рядом с оценкой, чтобы
+       его пересчитывали при смене закона, а не искали по коду. */
+    const CAP_CALIBRATION = 1.25;
+    overCap = spentUsd * CAP_CALIBRATION + NEXT_TURN_USD >= CASE_PRICE_CAP_USD;
+    if (overCap && !ilead) built = build(true);
 
     // 7) Forward to Anthropic. Two system blocks: the STABLE case body is cached
     // (identical every turn → cache hit); the VOLATILE step block is not.
@@ -1030,14 +1097,22 @@ export default async function handler(req, res) {
     ];
     let _mode = 0;
     const buildBody = (maxTok, useMode) => {
+      /* ПОРЯДОК БЛОКОВ РЕШАЕТ, РАБОТАЕТ ЛИ КЕШ.
+         Кеш апстрима совпадает по самому длинному общему НАЧАЛУ запроса.
+         Изменчивый блок (текущий шаг, ключ, подсказки) стоял в `system`, то есть
+         ПЕРЕД всей стенограммой, — и любая смена шага делала непохожим всё, что
+         за ним. Отсюда замеренное на проде `cache_read: 0` при каждой смене шага.
+         Теперь изменчивое уезжает В КОНЕЦ, последним ходом разговора: постоянная
+         часть кейса и вся стенограмма остаются общим началом и читаются из кеша.
+         Модель видит тот же текст и в том же порядке относительно вопроса —
+         инструкция стоит непосредственно перед тем, на что она влияет. */
       const b = {
         model: CASE_MODEL,
         max_tokens: maxTok,
         system: [
-          { type: 'text', text: built.stable, cache_control: { type: 'ephemeral' } },
-          { type: 'text', text: built.volatile }
+          { type: 'text', text: built.stable, cache_control: { type: 'ephemeral' } }
         ],
-        messages: convo
+        messages: convo.concat([{ role: 'user', content: [{ type: 'text', text: built.volatile }] }])
       };
       if (useMode && MODES[_mode]) Object.assign(b, MODES[_mode]);
       if (wantStream) b.stream = true;

@@ -1076,7 +1076,8 @@
    },
    "family_h25": "F1",
    "family_src": "словарь:S12",
-   "family_conf": "высокая"
+   "family_conf": "спорная",
+   "family_note": "ревью2: конфляция MECE, не подмена базы; семьи в Н25 нет"
   },
   {
    "id": "ST-016",
@@ -3195,9 +3196,10 @@
    "reference": {
     "en": "The candidate names the criterion \"largest effect\" — the right criterion. He applies it to the quantity \"effect in $M\" — **the right quantity** (unlike ST-033, where the quantity was wrong). The ranking is correct: 2.1 → 1.8 → 0.4.\n\nAnd the priority is still wrong, because the criterion **measures the wrong thing when setting a sequence**. Under sequential execution what matters is not the gain but the **loss from postponement**, and that is asymmetric: reversible initiatives lose time, the irreversible one loses production.\n\n**Top echelon: YES.** The criterion is right, the quantity is right, the arithmetic is right — and the answer is wrong.\n\n**Separation from ST-012 and ST-033 ([DUP], against BOTH):**\n\n| | Criterion | Quantity | What is wrong |\n|---|---|---|---|\n| **ST-012** S08(a) | named | — | the criterion is **violated**: declared \"size of effect,\" went to a line contributing 8% |\n| **ST-033** S08(b) | right, honoured | **wrong** — revenue instead of profit | the ranking is on the wrong quantity |\n| **ST-044** S08(c) | right, honoured | **right** — effect in $M | **the criterion itself does not fit the task**: sequencing needs the price of omission, not the size of the gain |\n\nThree levels: fail to honour the criterion → honour it on the wrong quantity → honour it on the right quantity **with the wrong criterion**.\n\n- notice: the price of missing the licence is a production halt of unknown length — its order of magnitude has to be estimated before it can be set against the $0.4M effect\n- notice the deadlines run inversely to the effects: 3 < 9 < 14 against 0.4 < 1.8 < 2.1\n- propose the criterion \"maximum price of omission\" instead of \"maximum effect\" for sequencing tasks"
    },
-   "family_h25": "F1",
+   "family_h25": "F9",
    "family_src": "словарь:S08",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "family_note": "ревью2: критерий верен, величина верна — рычаг не тот"
   },
   {
    "id": "ST-045",
