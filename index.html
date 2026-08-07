@@ -8341,7 +8341,15 @@ async function sendMessage() {
   // key, gates hints/exhibits, and tells us whether to advance the step.
   if (state.caseMode && state.caseId != null) {
     try {
-      const data = await callCaseSession({
+      /* ПОТОК НА КАЖДОМ ХОДЕ, А НЕ ТОЛЬКО НА ОТКРЫТИИ.
+         Замер на проде 07.08: ход интервьюера отдаётся за 5.4-7.4 секунды,
+         и всё это время кандидат смотрит на «печатает». Поток на открытии уже
+         стоял и работает; на остальных ходах — а это девять ходов из десяти —
+         его почему-то не было. Машинерия та же, откат тот же: не получилось
+         потоком, молча уходим на обычный путь.
+         Реплика кандидата на живом интервью не ждёт семи секунд молчания,
+         поэтому это не украшение, а часть тренируемого ритма. */
+      const turnPayload = {
         caseId: state.caseId,
         stepIndex: state.stepIndex,
         attemptCount: state.attemptCount,
@@ -8349,10 +8357,22 @@ async function sendMessage() {
         mode: casIleadMode(),
         doneSteps: state.doneSteps,
         revealedExhibits: state.revealedExhibits,
-        messages: state.messages.slice(-16),
+        /* Было slice(-16): клиент резал память РАНЬШЕ сервера, и серверный
+           потолок в 12 000 токенов не включался никогда. Сорок ходов — это
+           потолок клиента, дальше решает сервер, который умеет резать блоком
+           и не рвать кеш. */
+        messages: state.messages.slice(-40),
         focusDimension: casWeakestDimension(),
         lang: state.aiLang
-      });
+      };
+      let data = null, turnBubble = null;
+      try {
+        data = await callCaseSessionStream(turnPayload, (t) => {
+          if (!turnBubble) { setTyping(false); turnBubble = addMsg('ai', '', true); state.casStreamed = true; }
+          casAppendToBubble(turnBubble, t);
+        });
+      } catch (e) { if (e && e.userFacing) throw e; data = null; }
+      if (!data) { state.casStreamed = false; turnBubble = null; data = await callCaseSession(turnPayload); }
       if (Array.isArray(data.revealedExhibits)) state.revealedExhibits = data.revealedExhibits;
       const reply = data.reply || 'Apologies - please try again.';
       state.messages.push({ role: 'assistant', content: reply });
@@ -8368,7 +8388,8 @@ async function sendMessage() {
         }
         if (data.caseComplete) {
           setProgress(100);
-          setTimeout(() => { setTyping(false); addMsg('ai', reply, true); }, 500);
+          if (state.casStreamed) { state.casStreamed = false; setTyping(false); }
+          else setTimeout(() => { setTyping(false); addMsg('ai', reply, true); }, 500);
           setTimeout(() => { endInterview(); }, 1500);
           return;
         }
@@ -8379,7 +8400,8 @@ async function sendMessage() {
         if (data.verdict === 'pass') {
           if (state.stepIndex >= lastIndex) {
             setProgress(100);
-            setTimeout(() => { setTyping(false); addMsg('ai', reply, true); }, 500);
+            if (state.casStreamed) { state.casStreamed = false; setTyping(false); }
+            else setTimeout(() => { setTyping(false); addMsg('ai', reply, true); }, 500);
             setTimeout(() => { endInterview(); }, 1500);
             return;
           }
@@ -8390,7 +8412,15 @@ async function sendMessage() {
         }
         setProgress(Math.max(4, Math.min(96, Math.round((state.stepIndex / Math.max(1, state.caseSteps)) * 100))));
       }
-      setTimeout(() => { setTyping(false); addMsg('ai', reply, true); casRenderExhibits(data.exhibits); startRespTimer(); }, 500);
+      /* Реплика уже на экране, если пришла потоком, — второй раз её не печатаем.
+         Ровно та же развилка стоит на открытии кейса (`state.casStreamed`);
+         без неё поток дал бы кандидату каждый ход дважды. */
+      if (state.casStreamed) {
+        state.casStreamed = false; setTyping(false);
+        casRenderExhibits(data.exhibits); startRespTimer();
+      } else {
+        setTimeout(() => { setTyping(false); addMsg('ai', reply, true); casRenderExhibits(data.exhibits); startRespTimer(); }, 500);
+      }
     } catch (e) {
       setTyping(false);
       addMsg('ai', (e && e.userFacing) ? e.message : 'Apologies - something went wrong. Please try again.');
