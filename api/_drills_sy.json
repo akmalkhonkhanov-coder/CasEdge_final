@@ -1,6 +1,6 @@
 {
  "type": "SY",
- "count": 40,
+ "count": 42,
  "_meta": {
   "set": "sy",
   "type_string": "Synthesis",
@@ -54,7 +54,7 @@
     "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: 21 000 000 / 6 000 000 = 3.5; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — (18 000 000 + 21 000 000) / 6 000 000 = 6.5 обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
    },
    "reference": {
-    "en": "| поле | текст |\n|---|---|\n| **вывод** | **Pheldwarn should see the programme through to launch.** |\n| факты | Only the **$21.0M** still to be spent is a decision cost; the **$18.0M** already spent is non-recoverable and the tooling has no resale market. Contribution per unit is **$100** either way, so the programme does not add margin — it keeps the line alive: the current actuator disappears in **30** months, and the alternative is zero. On that basis annual contribution is **60,000 × $100 = $6.0M** and payback is **21.0 ÷ 6.0 = 3.5 years**, inside the board's five-year rule. Counting the full **$39.0M** gives **6.5 years** and is the wrong base, not a stricter test. |\n| риск | Internal: the **60,000**-unit volume is held flat; a demand fall stretches the 3.5 years proportionally. External: certification timing is not ours, and slipping past the supplier's **30**-month stop leaves the line without an actuator. |\n| next step | Confirm the certification window against the 30-month stop date. Have procurement verify in writing that the tooling has no secondary market — that single line is what removes the $18.0M from the base. |\n\n`[MIN]`: действие `see through` ✓ · субъект `Pheldwarn` ✓ · обоснования в первом предложении нет ✓\n`W1`: 21.0 · 18.0 · 60 000 · 100 · 6.0 · 3.5 · 39.0 · 6.5 — все из записи ✓ · `W2`: ветвь `launch` = `branch(3.5, 5)` ✓"
+    "en": "| field | text |\n|---|---|\n| **conclusion** | **Pheldwarn should see the programme through to launch.** |\n| facts | Only the **$21.0M** still to be spent is a decision cost; the **$18.0M** already spent is non-recoverable and the tooling has no resale market. Contribution per unit is **$100** either way, so the programme does not add margin — it keeps the line alive: the current actuator disappears in **30** months, and the alternative is zero. On that basis annual contribution is **60,000 × $100 = $6.0M** and payback is **21.0 ÷ 6.0 = 3.5 years**, inside the board's five-year rule. Counting the full **$39.0M** gives **6.5 years** and is the wrong base, not a stricter test. |\n| risk | Internal: the **60,000**-unit volume is held flat; a demand fall stretches the 3.5 years proportionally. External: certification timing is not ours, and slipping past the supplier's **30**-month stop leaves the line without an actuator. |\n| next step | Confirm the certification window against the 30-month stop date. Have procurement verify in writing that the tooling has no secondary market — that single line is what removes the $18.0M from the base. |\n"
    },
    "anchor_metric": "5 лет",
    "family_h25": "F1",
@@ -139,7 +139,7 @@
     "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: чистый доход: Meadow 10 против Canopy 14 → Canopy; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — payback: Meadow 1.5 против Canopy 2.0 → Meadow обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
    },
    "reference": {
-    "en": "| поле | текст |\n|---|---|\n| **вывод** | **Josquelm should build Canopy.** |\n| факты | The board's purpose is annual net income, and on that metric Canopy earns **$14M against Meadow's $10M** — a **$4M** gap. The deduction is not symmetric: Meadow sits on the glasshouse and takes **$6M** with it, Canopy sits on the car park and takes **$1M**. Payback ranks the other way (**1.5 vs 2.0 years**) but both clear the three-year condition, so payback screens and does not choose. **Each extra year of payback buys $8M of annual income** (`$4M ÷ 0.5 years`). |\n| риск | Internal: Canopy takes **30** months to reach steady state — most of the three-year window — so an early shortfall eats the margin. External: the **$6M** displaced income is measured on today's glasshouse; a fall in city footfall moves it. |\n| next step | Get the month-by-month ramp for Canopy and test it against the three-year condition. Verify with finance that none of the displaced income is already netted out of the gross figures — that single line is what reverses the ranking. |\n\n`[MIN]` ✓ · `W2`: форма R3 обязывает заполнить обе колонки, собственное число у кандидата есть ✓"
+    "en": "| field | text |\n|---|---|\n| **conclusion** | **Josquelm should build Canopy.** |\n| facts | The board's purpose is annual net income, and on that metric Canopy earns **$14M against Meadow's $10M** — a **$4M** gap. The deduction is not symmetric: Meadow sits on the glasshouse and takes **$6M** with it, Canopy sits on the car park and takes **$1M**. Payback ranks the other way (**1.5 vs 2.0 years**) but both clear the three-year condition, so payback screens and does not choose. **Each extra year of payback buys $8M of annual income** (`$4M ÷ 0.5 years`). |\n| risk | Internal: Canopy takes **30** months to reach steady state — most of the three-year window — so an early shortfall eats the margin. External: the **$6M** displaced income is measured on today's glasshouse; a fall in city footfall moves it. |\n| next step | Get the month-by-month ramp for Canopy and test it against the three-year condition. Verify with finance that none of the displaced income is already netted out of the gross figures — that single line is what reverses the ranking. |\n"
    },
    "anchor_metric": "ранжирование (β); ограничение записи — окупаемость не более 3 лет",
    "family_h25": "F1",
@@ -238,7 +238,7 @@
     "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: размер заказа и состав конкурентов сцеплены — при $3,000 контрибуция $0 ещё до сервиса $600, прибыль на копир $1,400 / $400 / ($600), по контракту $28,000 / $10,000 / ($18,000); (3) наивное прочтение отвергнуто вслух, а не просто обойдено — цена заявки падает $5,000 → $4,000 → $3,000, пока средний заказ растёт 20 → 25 → 30 копиров: «скидка за объём» обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
    },
    "reference": {
-    "en": "*Вывод.* Copier Co. should stop treating the price gradient as a sales-discipline problem and start managing which tenders it enters and what it buys the machine for — the note's diagnosis does not survive its own table.\n\n*Факты.* The three columns are not three order sizes, they are three competitive fields: American Copier alone, Bottom Dollar Copier alone, both. Order size moves with the field, so size and rival presence cannot be separated in this data. At $3,000 the bid is exactly the $3,000 cost of the copier, so contribution is zero before a single page is serviced; the year of service inside the bid costs $600 per copier ($0.05 × 1,000 pages × 12 months), which turns those contracts into ($600) per copier and ($18,000) on a thirty-copier order, against $1,400 and $28,000 where American Copier is the only rival. A commission scheme cannot produce a price of exactly copier cost in one field and exactly cost plus $2,000 in another.\n\n*Риск.* Walking away from the both-rivals field removes the largest orders in the book and the service base attached to them; and if Bottom Dollar Copier extends into the tenders where American Copier is today the only rival, the $1,400-per-copier field compresses the same way with no change in seller behaviour.\n\n*Next step.* Within one week, re-tag the full tender log by competitive field and quantify what share of revenue sits in the loss-making field; in parallel, open a volume-price negotiation with the copier supplier and cost a bid variant that prices the first year of service separately."
+    "en": "*Conclusion.* Copier Co. should stop treating the price gradient as a sales-discipline problem and start managing which tenders it enters and what it buys the machine for — the note's diagnosis does not survive its own table.\n\n*Facts.* The three columns are not three order sizes, they are three competitive fields: American Copier alone, Bottom Dollar Copier alone, both. Order size moves with the field, so size and rival presence cannot be separated in this data. At $3,000 the bid is exactly the $3,000 cost of the copier, so contribution is zero before a single page is serviced; the year of service inside the bid costs $600 per copier ($0.05 × 1,000 pages × 12 months), which turns those contracts into ($600) per copier and ($18,000) on a thirty-copier order, against $1,400 and $28,000 where American Copier is the only rival. A commission scheme cannot produce a price of exactly copier cost in one field and exactly cost plus $2,000 in another.\n\n*Risk.* Walking away from the both-rivals field removes the largest orders in the book and the service base attached to them; and if Bottom Dollar Copier extends into the tenders where American Copier is today the only rival, the $1,400-per-copier field compresses the same way with no change in seller behaviour.\n\n*Next step.* Within one week, re-tag the full tender log by competitive field and quantify what share of revenue sits in the loss-making field; in parallel, open a volume-price negotiation with the copier supplier and cost a bid variant that prices the first year of service separately."
    },
    "anchor_metric": "клиентского порога нет; решение выносится сопоставлением, а не сравнением с правилом",
    "family_h25": "F3",
@@ -286,7 +286,7 @@
     "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: 60 × 0.15 − 6 = 3; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — 240 × 0.15 − 6 = 30 обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
    },
    "reference": {
-    "en": "| поле | текст |\n|---|---|\n| **вывод** | **Zumbrikta cannot reach the target inside sourdough; the growth has to come from adjacent segments.** |\n| факты | Tripling **$6M** means finding **+$12M**. The **15%** share is 15% **of the $60M segment**, not of the **$240M** market: it yields `15% × $60M = $9M`, an increase of **+$3M**, leaving the sourdough-only route **$9M short**. Read against the market base it looks like **+$30M** — the same share on the wrong denominator. |\n| риск | Internal: entering rye, seeded and flatbread at **71%** oven utilisation hits capacity before it hits demand. External: **15%** of sourdough assumes taking share from **2** regional bakers whose response is not in the estimate. |\n| next step | **The one question I would answer next: what share of the three adjacent segments do we hold in five years?** At **20%** of the **$114M** they contain the target clears; at **5%** it does not — the crossover is **7.9%**. Alongside it, measure free oven capacity before any shelf contract is signed. |\n\n`[MIN]` ✓ · `W1`: 6 · 60 · 10 · 15 · 240 · 12 · 3 · 9 · 30 · 114 · 71 — все из записи ✓"
+    "en": "| field | text |\n|---|---|\n| **conclusion** | **Zumbrikta cannot reach the target inside sourdough; the growth has to come from adjacent segments.** |\n| facts | Tripling **$6M** means finding **+$12M**. The **15%** share is 15% **of the $60M segment**, not of the **$240M** market: it yields `15% × $60M = $9M`, an increase of **+$3M**, leaving the sourdough-only route **$9M short**. Read against the market base it looks like **+$30M** — the same share on the wrong denominator. |\n| risk | Internal: entering rye, seeded and flatbread at **71%** oven utilisation hits capacity before it hits demand. External: **15%** of sourdough assumes taking share from **2** regional bakers whose response is not in the estimate. |\n| next step | **The one question I would answer next: what share of the three adjacent segments do we hold in five years?** At **20%** of the **$114M** they contain the target clears; at **5%** it does not — the crossover is **7.9%**. Alongside it, measure free oven capacity before any shelf contract is signed. |\n"
    },
    "anchor_metric": "12 (утроение: 6 → 18)",
    "family_h25": "F1",
@@ -335,7 +335,7 @@
     "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа отсутствующая величина — деление выручки между контрактом и спотом — и названа цена правила совета в единицах маржи: 200 / 10 / 100 = 20% смешанной маржи против диапазона 7–25%, который дают две напечатанные маржи; при явно объявленном равном делении это 16% и срок 12.5 года; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — 200 / (100 × 0.25) = 8.0 обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
    },
    "reference": {
-    "en": "| поле | текст |\n|---|---|\n| **вывод** | **Trevaskorn should not build this site.** |\n| **остальное** | The pack gives two margins and says the site serves both customer types, but never states how revenue divides between them — and that split decides the answer, so I asked for it: it is **50/50** of revenue. That gives a blended margin of **16%** — `(25% + 7%) ÷ 2` — and **$16M** a year against a **$200M** cost, a payback of **12.5 years**, outside the board's ten-year rule. Taking the **25%** contract margin across all revenue gives **$25M** and **8 years**, but that margin applies to half the revenue, not all of it. **To clear the rule the site needs a blended 20%** (`$200M ÷ 10 ÷ $100M`); it is **4** points short. Internally, the **50/50** mix is today's and any drift toward spot lengthens the payback further; externally, the two competing sites built **11** and **14** years ago will be renewed inside our ten-year window. Next: get the contract share year by year rather than as one figure, and re-test the build at the mix that would deliver **20%**. |\n\n`[MIN]`: действие `not build` — определённая ветвь, без хеджа ✓ субъект `Trevaskorn` ✓"
+    "en": "| field | text |\n|---|---|\n| **conclusion** | **Trevaskorn should not build this site.** |\n| **the rest** | The pack gives two margins and says the site serves both customer types, but never states how revenue divides between them — and that split decides the answer, so I asked for it: it is **50/50** of revenue. That gives a blended margin of **16%** — `(25% + 7%) ÷ 2` — and **$16M** a year against a **$200M** cost, a payback of **12.5 years**, outside the board's ten-year rule. Taking the **25%** contract margin across all revenue gives **$25M** and **8 years**, but that margin applies to half the revenue, not all of it. **To clear the rule the site needs a blended 20%** (`$200M ÷ 10 ÷ $100M`); it is **4** points short. Internally, the **50/50** mix is today's and any drift toward spot lengthens the payback further; externally, the two competing sites built **11** and **14** years ago will be renewed inside our ten-year window. Next: get the contract share year by year rather than as one figure, and re-test the build at the mix that would deliver **20%**. |\n"
    },
    "anchor_metric": "10 лет",
    "family_h25": "F1",
@@ -387,7 +387,7 @@
     "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: не трогать цену → маржа 30.00%; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — уравнять цену → маржа 0.00% обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
    },
    "reference": {
-    "en": "| поле | текст |\n|---|---|\n| **вывод** | **Eskvarolt should hold its price at $1.00 per m³.** |\n| факты | Matching **$0.70** puts our price at our own cost and takes net margin from **30.0% to 0.0%** — the whole profit, not part of it. The entrant is already **losing $0.20 per m³** at his own list price, so that price is a position he funds rather than earns. And price is not what these buyers rank first: reliability weighs **62%** against price at **24%**, and we score **8.4** to his **5.1**. |\n| риск | Internal: the position rests on the **8.4** reliability score; any service slip moves buyer weight onto price, where we are weaker. External: he can sustain **−$0.20**/m³ longer than his own economics suggest if a parent is funding him. |\n| next step | Establish whether the entrant is externally funded — that is the only thing that lengthens his loss. Set a trigger on our own reliability score rather than on his price: below **8.0** we revisit, not before. |\n\n`[MIN]`: `hold` — действие, а не отказ от действия ✓"
+    "en": "| field | text |\n|---|---|\n| **conclusion** | **Eskvarolt should hold its price at $1.00 per m³.** |\n| facts | Matching **$0.70** puts our price at our own cost and takes net margin from **30.0% to 0.0%** — the whole profit, not part of it. The entrant is already **losing $0.20 per m³** at his own list price, so that price is a position he funds rather than earns. And price is not what these buyers rank first: reliability weighs **62%** against price at **24%**, and we score **8.4** to his **5.1**. |\n| risk | Internal: the position rests on the **8.4** reliability score; any service slip moves buyer weight onto price, where we are weaker. External: he can sustain **−$0.20**/m³ longer than his own economics suggest if a parent is funding him. |\n| next step | Establish whether the entrant is externally funded — that is the only thing that lengthens his loss. Set a trigger on our own reliability score rather than on his price: below **8.0** we revisit, not before. |\n"
    },
    "anchor_metric": "ранжирование (β); Clean — правильное поведение состоит в том, чтобы не переворачиваться",
    "family_h25": "F0",
@@ -524,7 +524,7 @@
     "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: CPU $800 стоит под каждой линией в оба года: при ASP $750 и $500 линия отрицательна по построению, а клиент нарастил объём именно туда (ноутбуки 10K → 30K, нетбуки 0 → 5K); цена экзогенна и рычагом не является; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — ASP ноутбука $2,000 → $750 — единственная сдвинувшаяся цена; отсюда «сломался ноутбучный бизнес» обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
    },
    "reference": {
-    "en": "*Вывод.* Bell should attack cost per box across the whole portfolio and stop routing unit growth into lines whose selling price sits below that cost — the note's laptop-price conclusion targets the one variable Bell does not control.\n\n*Факты.* Cost per unit is $800 under desktops, laptops, netbooks and servers in both years — it did not move, and it is identical across product types, so no single product has broken economics of its own. Prices are exogenous: all competitors face the same ASPs and sell comparable products, which closes the \"recover laptop price\" branch outright. What Bell did control is where the extra 40.0K units went: of that growth, 20.0K went into laptops at an ASP of $750 and 5.0K into netbooks at $500 — both below the $800 it costs Bell to build them — while units doubled from 40.0K to 80.0K. The market share Bell bought was bought in the two lines that lose money at Bell's own cost base.\n\n*Риск.* The cost programme touches every one of the 80.0K boxes and has no timetable yet; and laptop ASP has fallen for five straight years, so a further $100 decline on 30.0K units removes another $3.0M of net income before any cost saving lands.\n\n*Next step.* Within two weeks, break the $800 into parts, direct labour and overhead and benchmark each line item against the three closest competitors; in parallel, impose the rule that no line with a negative ASP-minus-cost gap receives planned volume growth until that gap closes."
+    "en": "*Conclusion.* Bell should attack cost per box across the whole portfolio and stop routing unit growth into lines whose selling price sits below that cost — the note's laptop-price conclusion targets the one variable Bell does not control.\n\n*Facts.* Cost per unit is $800 under desktops, laptops, netbooks and servers in both years — it did not move, and it is identical across product types, so no single product has broken economics of its own. Prices are exogenous: all competitors face the same ASPs and sell comparable products, which closes the \"recover laptop price\" branch outright. What Bell did control is where the extra 40.0K units went: of that growth, 20.0K went into laptops at an ASP of $750 and 5.0K into netbooks at $500 — both below the $800 it costs Bell to build them — while units doubled from 40.0K to 80.0K. The market share Bell bought was bought in the two lines that lose money at Bell's own cost base.\n\n*Risk.* The cost programme touches every one of the 80.0K boxes and has no timetable yet; and laptop ASP has fallen for five straight years, so a further $100 decline on 30.0K units removes another $3.0M of net income before any cost saving lands.\n\n*Next step.* Within two weeks, break the $800 into parts, direct labour and overhead and benchmark each line item against the three closest competitors; in parallel, impose the rule that no line with a negative ASP-minus-cost gap receives planned volume growth until that gap closes."
    },
    "anchor_metric": "клиентского порога нет; решение выносится сопоставлением, а не сравнением с правилом",
    "family_h25": "F9",
@@ -610,7 +610,7 @@
     "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: отвод: A 40 против B 65 → B; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — экономия: A 400 000 против B 150 000 → A обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
    },
    "reference": {
-    "en": "| поле | текст |\n|---|---|\n| **вывод** | **Andrelisk should adopt option B, kerbside separation.** |\n| факты | The charter names one purpose — diversion — and on it B delivers **65%** against A's **40%**, lifting today's **31%** by **34** points instead of **9**. A is cheaper by **$250,000** a year, and the council's cost expectation is written as an expectation, not a limit; both options already cost less than today's **$5.8M**. **The charter goal therefore costs $10,000 per point of diversion** (`$250,000 ÷ 25`), and that is the number the council should be asked to accept or reject. |\n| риск | Internal: separation depends on **86,000** households' behaviour, and the **4%** contamination figure is a design assumption, not an observed one. External: the council can convert its cost expectation into a limit, at which point the **$10,000** per point becomes negotiable. |\n| next step | Put the **$10,000** per point to the council explicitly and get a yes or a no rather than an assumption. Measure actual contamination on a pilot round before signing a **7**-year contract. |\n\n`[MIN]`: действие `adopt` ✓ субъект `Andrelisk` ✓\n`W2`: ветвь `option B` = ветвь метрики, которую кандидат сам назвал решающей ✓"
+    "en": "| field | text |\n|---|---|\n| **conclusion** | **Andrelisk should adopt option B, kerbside separation.** |\n| facts | The charter names one purpose — diversion — and on it B delivers **65%** against A's **40%**, lifting today's **31%** by **34** points instead of **9**. A is cheaper by **$250,000** a year, and the council's cost expectation is written as an expectation, not a limit; both options already cost less than today's **$5.8M**. **The charter goal therefore costs $10,000 per point of diversion** (`$250,000 ÷ 25`), and that is the number the council should be asked to accept or reject. |\n| risk | Internal: separation depends on **86,000** households' behaviour, and the **4%** contamination figure is a design assumption, not an observed one. External: the council can convert its cost expectation into a limit, at which point the **$10,000** per point becomes negotiable. |\n| next step | Put the **$10,000** per point to the council explicitly and get a yes or a no rather than an assumption. Measure actual contamination on a pilot round before signing a **7**-year contract. |\n"
    },
    "anchor_metric": "ранжирование (β)",
    "family_h25": "F1",
@@ -805,7 +805,7 @@
     "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: объём 2017 = $399M (39.9/0.10), ставка = 10.0%, чек = $49.875 (399/8.0); (3) наивное прочтение отвергнуто вслух, а не просто обойдено — ставка 2017 = 11.8% (39.9/339), чек = $42.375 (339/8.0) обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
    },
    "reference": {
-    "en": "**Вывод.** Correct the record to $399M of dollars processed in 2017 and tell the board a single story: our take rate held exactly at the old 10.0% tariff in 2017 and collapsed to 6.7% in 2018 because we moved to a fixed tiered fee — the anomaly is entirely in 2018, not in 2017.\n\n**Факты.** First, the old structure charges 10.0% per transaction, so 2017 volume must be $39.9M / 10.0% = $399M; the $339M in our working record is my own transcription error and I am replacing it. Second, the new structure charges a flat $3.00 under $50 and $5.50 over $50 — so as the average registration rose from $49.875 to $75.3165, a fixed fee on a bigger ticket is a smaller percentage, and revenue stayed flat at $39.9M while volume ran from $399M to $595M. Third, the method is sound on undisputed data: $39.9M / $595M = 6.7059%, matching the 6.7% printed for 2018, and $595M / 7.9M = $75.3165 per registration against the printed $75.\n\n**Риск.** Internally, our own record carried an uncorrected cell, so any downstream model built on it is wrong until re-run. Externally, average price per registration rose from $49.875 to $75.3165 — we are shifting toward larger events whose buyers negotiate below the 10.0% tariff, while payment processing stays fixed at 2.0% of volume ($11.9M / $595M).\n\n**Next step.** Re-pull the 2017 volume cell from source and log the correction this week; then split 2018's $595M into tariff-rate and negotiated-rate cohorts to establish whether 6.7% is discounting or mix."
+    "en": "**Conclusion.** Correct the record to $399M of dollars processed in 2017 and tell the board a single story: our take rate held exactly at the old 10.0% tariff in 2017 and collapsed to 6.7% in 2018 because we moved to a fixed tiered fee — the anomaly is entirely in 2018, not in 2017.\n\n**Facts.** First, the old structure charges 10.0% per transaction, so 2017 volume must be $39.9M / 10.0% = $399M; the $339M in our working record is my own transcription error and I am replacing it. Second, the new structure charges a flat $3.00 under $50 and $5.50 over $50 — so as the average registration rose from $49.875 to $75.3165, a fixed fee on a bigger ticket is a smaller percentage, and revenue stayed flat at $39.9M while volume ran from $399M to $595M. Third, the method is sound on undisputed data: $39.9M / $595M = 6.7059%, matching the 6.7% printed for 2018, and $595M / 7.9M = $75.3165 per registration against the printed $75.\n\n**Risk.** Internally, our own record carried an uncorrected cell, so any downstream model built on it is wrong until re-run. Externally, average price per registration rose from $49.875 to $75.3165 — we are shifting toward larger events whose buyers negotiate below the 10.0% tariff, while payment processing stays fixed at 2.0% of volume ($11.9M / $595M).\n\n**Next step.** Re-pull the 2017 volume cell from source and log the correction this week; then split 2018's $595M into tariff-rate and negotiated-rate cohorts to establish whether 6.7% is discounting or mix."
    },
    "anchor_metric": "не применяется, форма β",
    "family_h25": "F1",
@@ -948,7 +948,7 @@
     "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: Region 2 — Profit $68,000,000 против $50,000,000 и $(4,000,000); (3) наивное прочтение отвергнуто вслух, а не просто обойдено — Region 1 — margin 500% против 300% и 50% обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
    },
    "reference": {
-    "en": "**Вывод.** Bid for Region 2 — it delivers $68,000,000 of annual profit against $50,000,000 in Region 1, an $18,000,000 advantage, and Region 3 is loss-making at $(4,000,000).\n\n**Факты.** First, Region 1 wins on margin per well — 500% against 300% — but margin does not scale: Region 2 earns $2,700,000 per well across 40 wells, or $108,000,000, against Region 1's $1,500,000 across 60 wells, or $90,000,000. Second, the $40,000,000 rights cost is identical in every region, so it does not differentiate the bid but it does subtract in full: $68,000,000 versus $50,000,000 after it. Third, Region 3 fails on arithmetic, not judgement — $108,000,000 of revenue against $112,000,000 of cost.\n\n**Риск.** Internally, the entire $18,000,000 advantage rests on drilling 40 wells in year one with a maximum of 10 rigs and an average depth of 2,700 metres; every well short comes straight out of profit while the $40,000,000 stays sunk. Externally, all three cases are priced at a $50 spot, and Region 2 carries the largest revenue base at $144,000,000, so it loses the most in absolute terms if the price falls.\n\n**Next step.** Get the operator to commit to a 40-well schedule in Region 2 within two weeks, and run the profit ranking at spot prices below $50 to find the price at which Region 1 overtakes."
+    "en": "**Conclusion.** Bid for Region 2 — it delivers $68,000,000 of annual profit against $50,000,000 in Region 1, an $18,000,000 advantage, and Region 3 is loss-making at $(4,000,000).\n\n**Facts.** First, Region 1 wins on margin per well — 500% against 300% — but margin does not scale: Region 2 earns $2,700,000 per well across 40 wells, or $108,000,000, against Region 1's $1,500,000 across 60 wells, or $90,000,000. Second, the $40,000,000 rights cost is identical in every region, so it does not differentiate the bid but it does subtract in full: $68,000,000 versus $50,000,000 after it. Third, Region 3 fails on arithmetic, not judgement — $108,000,000 of revenue against $112,000,000 of cost.\n\n**Risk.** Internally, the entire $18,000,000 advantage rests on drilling 40 wells in year one with a maximum of 10 rigs and an average depth of 2,700 metres; every well short comes straight out of profit while the $40,000,000 stays sunk. Externally, all three cases are priced at a $50 spot, and Region 2 carries the largest revenue base at $144,000,000, so it loses the most in absolute terms if the price falls.\n\n**Next step.** Get the operator to commit to a 40-well schedule in Region 2 within two weeks, and run the profit ranking at spot prices below $50 to find the price at which Region 1 overtakes."
    },
    "anchor_metric": "не применяется, форма β",
    "family_h25": "F1",
@@ -1121,7 +1121,7 @@
     "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: Потолок базы при 70% загрузке = 2,205 членов; безубыточный взнос = €90.70; €70 требует 90.7029% загрузки при объявленном потолке 70%; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — «Ставим €70 как все и добираем членами» — требуемая база 200 000/70 = 2 857.14 членов обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
    },
    "reference": {
-    "en": "**Вывод.** Do not enter Germany at the incumbent's €70 — the club breaks even only at €90.70, so entry is justified only if Ulmethrayne can prove a differentiation that supports that higher price.\n\n**Факты.** First, capacity is fixed: 10 hours a day across 7 days and 15 courts gives 1,050 court-hours a week, 70% utilization gives 735, and at 3 members per hour that caps membership at 2,205. Second, €200,000 of annual cost across 2,205 members sets breakeven at €90.70 — €20.70 above the €70 the dominant player charges. Third, matching €70 would require 2,857.14 members, which is 952.38 court-hours or 90.70% utilization against a stated ceiling of 70% — physically unavailable, not merely expensive.\n\n**Риск.** Internally, the entire 2,205 ceiling rests on one assumption — 3 members per court-hour from a 50/50 singles-doubles mix; if it is closer to 2, breakeven moves above €90.70. Externally, the incumbent holds 70% of the German market at €70 with a lower cost base, so any attempt to compete on price is a war the client cannot win.\n\n**Next step.** Run a willingness-to-pay test at €90.70 against the €70 market price on the target urban segment before any site commitment, and validate the 3-members-per-hour mix from actual booking data."
+    "en": "**Conclusion.** Do not enter Germany at the incumbent's €70 — the club breaks even only at €90.70, so entry is justified only if Ulmethrayne can prove a differentiation that supports that higher price.\n\n**Facts.** First, capacity is fixed: 10 hours a day across 7 days and 15 courts gives 1,050 court-hours a week, 70% utilization gives 735, and at 3 members per hour that caps membership at 2,205. Second, €200,000 of annual cost across 2,205 members sets breakeven at €90.70 — €20.70 above the €70 the dominant player charges. Third, matching €70 would require 2,857.14 members, which is 952.38 court-hours or 90.70% utilization against a stated ceiling of 70% — physically unavailable, not merely expensive.\n\n**Risk.** Internally, the entire 2,205 ceiling rests on one assumption — 3 members per court-hour from a 50/50 singles-doubles mix; if it is closer to 2, breakeven moves above €90.70. Externally, the incumbent holds 70% of the German market at €70 with a lower cost base, so any attempt to compete on price is a war the client cannot win.\n\n**Next step.** Run a willingness-to-pay test at €90.70 against the €70 market price on the target urban segment before any site commitment, and validate the 3-members-per-hour mix from actual booking data."
    },
    "anchor_metric": "€70 — цена доминирующего игрока (стр. 215); цель «Breakeven at least. No timeframe.» (стр. 211)",
    "family_h25": "F0",
@@ -1579,7 +1579,7 @@
     "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: $15K на точку ($60K − $45K); (3) наивное прочтение отвергнуто вслух, а не просто обойдено — $60K на точку (50K × $2 × 60%) обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
    },
    "reference": {
-    "en": "**Вывод.** Book the incremental profit at $15K per store, not the $60K headline — doughnuts add $15,000 per store per year once cannibalization is netted out.\n\n**Факты.** First, the doughnut line contributes 50,000 units × $2 × 60% = $60K per store. Second, it cannibalizes 10% of 300,000 burger units at $3 and a 50% margin, which is $45K of profit given up. Third, the net is $60K – $45K = $15K, one quarter of the gross figure; scaled across 3,500 North American stores that is $52.5M, which the source rounds to \"$50 million\".\n\n**Риск.** Internally, $45K of the $60K rests entirely on a single assumed 10% cannibalization rate — a rate of 20% would wipe the incremental profit out entirely, so this number must be measured, not assumed. Externally, the partner's footprint is 1,000 of its 1,020 stores in North America against 20 in Europe and none in Asia, so the $52.5M cannot be extended to all 5,000 stores.\n\n**Next step.** Run a pilot to measure actual cannibalization against the assumed 10% and validate the 50,000-unit volume before committing; lock the 60% margin at $2 in the co-branding agreement in parallel."
+    "en": "**Conclusion.** Book the incremental profit at $15K per store, not the $60K headline — doughnuts add $15,000 per store per year once cannibalization is netted out.\n\n**Facts.** First, the doughnut line contributes 50,000 units × $2 × 60% = $60K per store. Second, it cannibalizes 10% of 300,000 burger units at $3 and a 50% margin, which is $45K of profit given up. Third, the net is $60K – $45K = $15K, one quarter of the gross figure; scaled across 3,500 North American stores that is $52.5M, which the source rounds to \"$50 million\".\n\n**Risk.** Internally, $45K of the $60K rests entirely on a single assumed 10% cannibalization rate — a rate of 20% would wipe the incremental profit out entirely, so this number must be measured, not assumed. Externally, the partner's footprint is 1,000 of its 1,020 stores in North America against 20 in Europe and none in Asia, so the $52.5M cannot be extended to all 5,000 stores.\n\n**Next step.** Run a pilot to measure actual cannibalization against the assumed 10% and validate the 50,000-unit volume before committing; lock the 60% margin at $2 in the co-branding agreement in parallel."
    },
    "anchor_metric": "не применяется — вопрос формы «сколько», ответ обязан быть величиной",
    "family_h25": "F2",
@@ -1724,7 +1724,7 @@
     "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: 25.00% и 20.00% (книга, стр. 29); (3) наивное прочтение отвергнуто вслух, а не просто обойдено — 43.75% от базы «только Vellum» (и 23.53% от базы «только Aurelia+») — ПОСТРОЕНО, книга не печатает обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
    },
    "reference": {
-    "en": "- **Вывод (сначала):** We recommend Aurelia launch the bundle: annual subscription revenue rises from **$13.02B to $14.35B**, a **$1.33B** gain.\n- **Факты:** Only the non-overlapping bases can switch — **(100M − 15M) × 20% = 17M** from Aurelia+ and **(35M − 15M) × 25% = 5M** from Vellum; adding the **15M** already on both services gives **37M bundle subscribers at $15 × 12 = $6.66B**, alongside **68M × $7 × 12 = $5.712B** and **15M × $11 × 12 = $1.98B**.\n- **Риск:** The 15M dual subscribers move from $18 to $15 per month, a **$540M** annual give-back, and any churn on the merged interface eats directly into the $1.33B gain.\n- **Next step:** Pilot the bundle in selected markets, measure churn on the 15M overlap separately, and stress-test the 20%/25% switch rates before committing to the $15 price point.\n\n---"
+    "en": "- **Conclusion (first):** We recommend Aurelia launch the bundle: annual subscription revenue rises from **$13.02B to $14.35B**, a **$1.33B** gain.\n- **Facts:** Only the non-overlapping bases can switch — **(100M − 15M) × 20% = 17M** from Aurelia+ and **(35M − 15M) × 25% = 5M** from Vellum; adding the **15M** already on both services gives **37M bundle subscribers at $15 × 12 = $6.66B**, alongside **68M × $7 × 12 = $5.712B** and **15M × $11 × 12 = $1.98B**.\n- **Risk:** The 15M dual subscribers move from $18 to $15 per month, a **$540M** annual give-back, and any churn on the merged interface eats directly into the $1.33B gain.\n- **Next step:** Pilot the bundle in selected markets, measure churn on the 15M overlap separately, and stress-test the 20%/25% switch rates before committing to the $15 price point.\n\n---"
    },
    "anchor_metric": "Печатное правило: 20% берётся от «Aurelia+ only», 25% — от «Vellum only»",
    "family_h25": "F1",
@@ -1961,7 +1961,7 @@
     "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: 5.00% (сокращение $375M, база $5,125); (3) наивное прочтение отвергнуто вслух, а не просто обойдено — 4.18% (сокращение $334M, база $5,084) — ПОСТРОЕНО, книга не печатает обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
    },
    "reference": {
-    "en": "- **Вывод (сначала):** Cadenza must take **$375M out of its cost base** and lay off **1,000 FTEs — 5% of the workforce** — to hit the 5% profit target in 2024.\n- **Остальное:** The printed expense lines sum to **$5,084M ($2,577 + $2,507)**, but total revenue less the net loss gives **$5,000 − (−$125) = $5,125M**; the **$41M** gap is exactly Other expense **$21M** plus Income tax **$20M**, which sit below operating profit and are still real cash costs. Against a target cost base of **$5,000 × 95% = $4,750M**, the required cut is **$375M** — not $334M. The alternative manufacturer delivers **$210M** and closing **30 of 90** offices delivers **($30k + $170k + $300k) × 30 = $15M**, leaving **$150M**; at **$130k + $40k − $20k = $150k** net saving per FTE that is exactly **1,000 people, 5% of 20,000**. Sizing off the visible-lines base would fund only ~727 layoffs and land the company at **4.18%** — short of target, with the LBO threat intact. Two risks: severance of **$20M** hits cash inside the same two quarters and 5% headcount loss damages productivity; and **56% of the programme ($210M)** depends on a single new manufacturer, with quality, IP and compliance exposure. Next steps: lock the $5,125M base in writing, close manufacturer due diligence within two weeks, and stress-test the plan against a 3% revenue miss.\n\n---"
+    "en": "- **Conclusion (first):** Cadenza must take **$375M out of its cost base** and lay off **1,000 FTEs — 5% of the workforce** — to hit the 5% profit target in 2024.\n- **The rest:** The printed expense lines sum to **$5,084M ($2,577 + $2,507)**, but total revenue less the net loss gives **$5,000 − (−$125) = $5,125M**; the **$41M** gap is exactly Other expense **$21M** plus Income tax **$20M**, which sit below operating profit and are still real cash costs. Against a target cost base of **$5,000 × 95% = $4,750M**, the required cut is **$375M** — not $334M. The alternative manufacturer delivers **$210M** and closing **30 of 90** offices delivers **($30k + $170k + $300k) × 30 = $15M**, leaving **$150M**; at **$130k + $40k − $20k = $150k** net saving per FTE that is exactly **1,000 people, 5% of 20,000**. Sizing off the visible-lines base would fund only ~727 layoffs and land the company at **4.18%** — short of target, with the LBO threat intact. Two risks: severance of **$20M** hits cash inside the same two quarters and 5% headcount loss damages productivity; and **56% of the programme ($210M)** depends on a single new manufacturer, with quality, IP and compliance exposure. Next steps: lock the $5,125M base in writing, close manufacturer due diligence within two weeks, and stress-test the plan against a 3% revenue miss.\n\n---"
    },
    "anchor_metric": "5% прибыли",
    "family_h25": "F1",
@@ -2055,7 +2055,7 @@
     "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: $269.20M (стр. 131); (3) наивное прочтение отвергнуто вслух, а не просто обойдено — $45.99M — ПОСТРОЕНО, книга не печатает обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
    },
    "reference": {
-    "en": "**Поле 1 — Conclusion (Minto, first):**\n\"Verenda should expect to spend roughly $270M on R&D for SM1 — meaningfully more than the $160M it is certain to spend on Phase I, and more than the expected production cost — so R&D is the single largest cost bucket in this asset, not a rounding item.\"\n\n**Поле 2 — Everything else:**\n*Facts.* Phase I is reached in 100% of cases, so all $160M is spent for certain. Phase II is reached only 70% of the time, giving $125M × 70% = $87.5M. Phase III is reached 70% × 40% = 28% of the time, giving $21M. Filing is reached 14% of the time, giving $0.7M. Total expected R&D is $269.2M. Expected production cost is $2B × 12.6% = $252M, and expected revenue is $10B × 12.6% = $1,260M — leaving SM1 worth $738.8M against a $1B asking price.\n*Risk.* Two risks. Internally, the expected value hides the outcome that matters most: in 87.4% of cases the drug never sells, and a failure at Filing burns the full $365M with zero revenue. Externally, the 90% Filing probability is an industry average — Verenda has no biologicals regulatory track record, and a drop to 70% removes $280M of expected revenue while costs stay put.\n*Next step.* Build the four-failure scenario grid within two weeks, benchmark the phase costs against Kelvane's own programs, and value the assets outside SM1 — team, IP, platform — to test whether they justify the ~$260M gap to the asking price. Structure an earn-out on Phase II completion, the weakest link in the chain.\n\n---"
+    "en": "**Field 1 — Conclusion (Minto, first):**\n\"Verenda should expect to spend roughly $270M on R&D for SM1 — meaningfully more than the $160M it is certain to spend on Phase I, and more than the expected production cost — so R&D is the single largest cost bucket in this asset, not a rounding item.\"\n\n**Field 2 — Everything else:**\n*Facts.* Phase I is reached in 100% of cases, so all $160M is spent for certain. Phase II is reached only 70% of the time, giving $125M × 70% = $87.5M. Phase III is reached 70% × 40% = 28% of the time, giving $21M. Filing is reached 14% of the time, giving $0.7M. Total expected R&D is $269.2M. Expected production cost is $2B × 12.6% = $252M, and expected revenue is $10B × 12.6% = $1,260M — leaving SM1 worth $738.8M against a $1B asking price.\n*Risk.* Two risks. Internally, the expected value hides the outcome that matters most: in 87.4% of cases the drug never sells, and a failure at Filing burns the full $365M with zero revenue. Externally, the 90% Filing probability is an industry average — Verenda has no biologicals regulatory track record, and a drop to 70% removes $280M of expected revenue while costs stay put.\n*Next step.* Build the four-failure scenario grid within two weeks, benchmark the phase costs against Kelvane's own programs, and value the assets outside SM1 — team, IP, platform — to test whether they justify the ~$260M gap to the asking price. Structure an earn-out on Phase II completion, the weakest link in the chain.\n\n---"
    },
    "anchor_metric": "$160M — стоимость Phase I",
    "family_h25": "F2",
@@ -2259,7 +2259,7 @@
     "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: Ровная ничья: экономия $10m у обеих инициатив; разрешается только конвенцией (рост / бюджетный вход); (3) наивное прочтение отвергнуто вслух, а не просто обойдено — «Кеги дешевле»: $30m против $81m — вывод из абсолютных величин потоков обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
    },
    "reference": {
-    "en": "**Вывод (первым).** *We recommend Northwind Brewworks fund the upgraded canning system, and we recommend it on a stated convention rather than on cost, because on cost the two initiatives are a dead tie.*\n\n**Остальное.** Both initiatives deliver exactly $10m of ten-year savings — kegs move $40m of leasing to $30m of ownership, and the canning line moves $91m of operating cost to $81m all-in. Cost is therefore not a discriminator, and any recommendation built on it is arbitrary. The client stated two things on the way in: $20 million of available budget, and an interest in projects that support future growth after tripling volume in three years. Applying the growth convention, the canning system doubles throughput from 600 to 1,200 cases per hour at unchanged headcount, so it absorbs future volume without new labour; owning 400,000 kegs absorbs nothing — it only converts a rental stream into an asset. On the budget convention, the canning system enters at $18.7m net of $1.3m salvage and leaves headroom; the keg purchase consumes the full $20m on day one. Both conventions point the same way. The keg case is defensible only on a third convention — hedging against future lease increases — and if the board prefers that convention, we would recommend kegs, and we would say so explicitly rather than dress it as a cost result.\n\n---"
+    "en": "**Conclusion (first).** *We recommend Northwind Brewworks fund the upgraded canning system, and we recommend it on a stated convention rather than on cost, because on cost the two initiatives are a dead tie.*\n\n**The rest.** Both initiatives deliver exactly $10m of ten-year savings — kegs move $40m of leasing to $30m of ownership, and the canning line moves $91m of operating cost to $81m all-in. Cost is therefore not a discriminator, and any recommendation built on it is arbitrary. The client stated two things on the way in: $20 million of available budget, and an interest in projects that support future growth after tripling volume in three years. Applying the growth convention, the canning system doubles throughput from 600 to 1,200 cases per hour at unchanged headcount, so it absorbs future volume without new labour; owning 400,000 kegs absorbs nothing — it only converts a rental stream into an asset. On the budget convention, the canning system enters at $18.7m net of $1.3m salvage and leaves headroom; the keg purchase consumes the full $20m on day one. Both conventions point the same way. The keg case is defensible only on a third convention — hedging against future lease increases — and if the board prefers that convention, we would recommend kegs, and we would say so explicitly rather than dress it as a cost result.\n\n---"
    },
    "anchor_metric": "$20,000,000 доступного бюджета (экзогенно, напечатано в промпте) + заявленная цель клиента «поддержка будущего роста»",
    "family_h25": "F1",
@@ -4827,12 +4827,245 @@
     "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: $0/год — обе колонки дают одну и ту же годовую сумму владения; осторожность заметки подтверждается, по затратам ничья; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — $9,000/год экономии на тягач (топливо: $18,000 против $9,000) → «осторожность заметки лишняя, гибрид очевидно дешевле» обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
    },
    "reference": {
-    "en": "Finish the note and the caution in it is right: National Logistics should treat the two trucks as costing the same to own and decide between them on non-financial grounds — it should not buy hybrids expecting a $9,000 saving.\n\nThe fuel line is correct and it is not the answer. The hybrid does burn $9,000 a year less — 6,000 gallons against 3,000 at $3.00 — but the rows the note never converted absorb exactly that: depreciation is $5,000 higher, because $150,000 over ten years is $15,000 against $100,000 over ten years; maintenance is $3,000 higher; insurance is $1,000 higher. Add owning to running and both trucks land on the same annual figure, $35,000.\n\nTwo things could break that and only one of them survives contact with the data. The idea that the hybrid outlives the diesel and so carries less depreciation is closed off by the exhibit — both lifespans are ten years, and salvage value is zero, so nothing comes back at the end. Rising fuel prices are a real exposure and I want to be honest that the case does not settle them: we are told prices have been climbing, but no future price is given. What I can size is the sensitivity — the gap in consumption is 3,000 gallons, so every sustained dollar per gallon is $3,000 a year per truck in the hybrid's favour. On the printed $3.00 it is a dead heat.\n\nSo: buy on service life, driver retention, emissions exposure or maintenance terms, not on a fuel saving. Before the next replacement cycle I would put a contracted diesel price and a quoted hybrid service and insurance package in front of the client — those three lines are what the tie is made of — and I would spend the cost-reduction effort where the numbers are not tied, which is the driver wage line the client opened with.\n\n**Построенное число [BUILD]** — ПОСТРОЕНО, книга не печатает\n\n```python\nfrom decimal import Decimal, ROUND_HALF_UP\n\nD = Decimal\ndef r0(x): return x.quantize(D(\"1\"), rounding=ROUND_HALF_UP)\n\n# --- всё ниже из книги: EXHIBIT 1 (стр. 52) + правило амортизации (стр. 53) ---\nMILES       = D(\"60000\")\nFUEL_PRICE  = D(\"3.00\")\nstd = {\"price\": D(\"100000\"), \"maint\": D(\"5000\"), \"ins\": D(\"2000\"), \"mpg\": D(\"10\"), \"life\": D(\"10\")}\nhyb = {\"price\": D(\"150000\"), \"maint\": D(\"8000\"), \"ins\": D(\"3000\"), \"mpg\": D(\"20\"), \"life\": D(\"10\")}\n\ndef gallons(t):  return MILES / t[\"mpg\"]\ndef annual(t, price_per_gal):\n    dep  = t[\"price\"] / t[\"life\"]          # straight-line, $0 salvage\n    fuel = gallons(t) * price_per_gal\n    return t[\"maint\"] + t[\"ins\"] + dep + fuel\n\n# книжная сверка (числа книги, стр. 53, блок Answer)\nassert gallons(std) == D(\"6000\") and gallons(hyb) == D(\"3000\")\nassert r0(annual(std, FUEL_PRICE)) == D(\"35000\")\nassert r0(annual(hyb, FUEL_PRICE)) == D(\"35000\")\nassert r0(annual(std, FUEL_PRICE) - annual(hyb, FUEL_PRICE)) == D(\"0\")\n\n# разложение: экономия топлива съедена ровно тремя статьями\nfuel_saving = gallons(std) * FUEL_PRICE - gallons(hyb) * FUEL_PRICE\ndep_penalty = hyb[\"price\"]/hyb[\"life\"] - std[\"price\"]/std[\"life\"]\nmnt_penalty = hyb[\"maint\"] - std[\"maint\"]\nins_penalty = hyb[\"ins\"]   - std[\"ins\"]\nassert fuel_saving == D(\"9000\")\nassert (dep_penalty, mnt_penalty, ins_penalty) == (D(\"5000\"), D(\"3000\"), D(\"1000\"))\nassert dep_penalty + mnt_penalty + ins_penalty == fuel_saving\n\n# --- ПОСТРОЕНО, книга не печатает: чувствительность к цене топлива ---\n# разница в расходе = 3,000 галлонов/год -> каждый +$1/галлон = $3,000/год в пользу гибрида\ngallon_gap = gallons(std) - gallons(hyb)\nassert gallon_gap == D(\"3000\")\nper_dollar = gallon_gap * D(\"1.00\")\nassert per_dollar == D(\"3000\")          # $/год на тягач за каждый +$1/галлон\n\n# точка равенства по цене топлива: standard - hybrid = -9000 + 3000*p = 0\nbreakeven_price = (mnt_penalty + ins_penalty + dep_penalty) / gallon_gap\nassert breakeven_price == D(\"3\")        # ничья стоит ровно на печатной цене $3.00\nassert r0(annual(std, D(\"4.00\")) - annual(hyb, D(\"4.00\"))) == D(\"3000\")\n```\n\n**Провоцируемая ошибка** — перешагнуть через оговорку оборванной заметки, принять верно посчитанную экономию по одной статье ($9,000 на топливе) за экономию по итогу и не достроить три компенсирующие статьи ($5,000 амортизации + $3,000 обслуживания + $1,000 страхования), которые обнуляют её ровно."
+    "en": "Finish the note and the caution in it is right: National Logistics should treat the two trucks as costing the same to own and decide between them on non-financial grounds — it should not buy hybrids expecting a $9,000 saving.\n\nThe fuel line is correct and it is not the answer. The hybrid does burn $9,000 a year less — 6,000 gallons against 3,000 at $3.00 — but the rows the note never converted absorb exactly that: depreciation is $5,000 higher, because $150,000 over ten years is $15,000 against $100,000 over ten years; maintenance is $3,000 higher; insurance is $1,000 higher. Add owning to running and both trucks land on the same annual figure, $35,000.\n\nTwo things could break that and only one of them survives contact with the data. The idea that the hybrid outlives the diesel and so carries less depreciation is closed off by the exhibit — both lifespans are ten years, and salvage value is zero, so nothing comes back at the end. Rising fuel prices are a real exposure and I want to be honest that the case does not settle them: we are told prices have been climbing, but no future price is given. What I can size is the sensitivity — the gap in consumption is 3,000 gallons, so every sustained dollar per gallon is $3,000 a year per truck in the hybrid's favour. On the printed $3.00 it is a dead heat.\n\nSo: buy on service life, driver retention, emissions exposure or maintenance terms, not on a fuel saving. Before the next replacement cycle I would put a contracted diesel price and a quoted hybrid service and insurance package in front of the client — those three lines are what the tie is made of — and I would spend the cost-reduction effort where the numbers are not tied, which is the driver wage line the client opened with.\n\n**Built number [BUILD]** — BUILT — the book does not print it\n\n```python\nfrom decimal import Decimal, ROUND_HALF_UP\n\nD = Decimal\ndef r0(x): return x.quantize(D(\"1\"), rounding=ROUND_HALF_UP)\n\n# --- everything below is from the book: EXHIBIT 1 (p. 52) + the depreciation rule (p. 53) ---\nMILES       = D(\"60000\")\nFUEL_PRICE  = D(\"3.00\")\nstd = {\"price\": D(\"100000\"), \"maint\": D(\"5000\"), \"ins\": D(\"2000\"), \"mpg\": D(\"10\"), \"life\": D(\"10\")}\nhyb = {\"price\": D(\"150000\"), \"maint\": D(\"8000\"), \"ins\": D(\"3000\"), \"mpg\": D(\"20\"), \"life\": D(\"10\")}\n\ndef gallons(t):  return MILES / t[\"mpg\"]\ndef annual(t, price_per_gal):\n    dep  = t[\"price\"] / t[\"life\"]          # straight-line, $0 salvage\n    fuel = gallons(t) * price_per_gal\n    return t[\"maint\"] + t[\"ins\"] + dep + fuel\n\n# book check (book figures, p. 53, Answer block)\nassert gallons(std) == D(\"6000\") and gallons(hyb) == D(\"3000\")\nassert r0(annual(std, FUEL_PRICE)) == D(\"35000\")\nassert r0(annual(hyb, FUEL_PRICE)) == D(\"35000\")\nassert r0(annual(std, FUEL_PRICE) - annual(hyb, FUEL_PRICE)) == D(\"0\")\n\n# decomposition: the fuel saving is eaten by exactly three items\nfuel_saving = gallons(std) * FUEL_PRICE - gallons(hyb) * FUEL_PRICE\ndep_penalty = hyb[\"price\"]/hyb[\"life\"] - std[\"price\"]/std[\"life\"]\nmnt_penalty = hyb[\"maint\"] - std[\"maint\"]\nins_penalty = hyb[\"ins\"]   - std[\"ins\"]\nassert fuel_saving == D(\"9000\")\nassert (dep_penalty, mnt_penalty, ins_penalty) == (D(\"5000\"), D(\"3000\"), D(\"1000\"))\nassert dep_penalty + mnt_penalty + ins_penalty == fuel_saving\n\n# --- BUILT — the book does not print it: sensitivity to the fuel price ---\n# consumption gap = 3,000 gallons/year -> every +$1/gallon = $3,000/year in favour of the hybrid\ngallon_gap = gallons(std) - gallons(hyb)\nassert gallon_gap == D(\"3000\")\nper_dollar = gallon_gap * D(\"1.00\")\nassert per_dollar == D(\"3000\")          # $/year per tractor for every +$1/gallon\n\n# break-even fuel price: standard - hybrid = -9000 + 3000*p = 0\nbreakeven_price = (mnt_penalty + ins_penalty + dep_penalty) / gallon_gap\nassert breakeven_price == D(\"3\")        # the tie sits exactly on the printed $3.00 price\nassert r0(annual(std, D(\"4.00\")) - annual(hyb, D(\"4.00\"))) == D(\"3000\")\n```\n\n**Provoked error** — to step over the caveat in the truncated note, take a correctly computed saving on one line ($9,000 on fuel) for the saving on the total, and fail to build the three offsetting items ($5,000 depreciation + $3,000 maintenance + $1,000 insurance), which cancel it exactly."
    },
    "anchor_metric": "Клиентского порога нет; решение выносится сопоставлением двух колонок, а не сравнением с правилом. Вердикт держится тем, что обе колонки дают одну и ту же годовую сумму",
    "family_h25": "F0",
    "family_src": "clean",
    "family_conf": "высокая"
+  },
+  {
+   "id": "SY-041",
+   "title": "A Billion Short",
+   "company": "Bharat Dak Bima",
+   "industry": "Public insurance distribution",
+   "difficulty": "Medium",
+   "clean": false,
+   "focus": "S16(a)",
+   "scaffold": "L2",
+   "time": "7 min",
+   "type": "Synthesis",
+   "exhibit_mode": "with",
+   "family_h25": "F1",
+   "family_src": "тело",
+   "family_conf": "высокая",
+   "family_note": "круг 34, ревью: заявлялась F8 и не подтвердилась — наивный и decoy ведут к «не запускать», верный к «запускать», это разворот. Реальная механика — тестом объявлена не та величина, по которой считает записка: подмена базы решения.",
+   "anchor_metric": "programme surplus, $B",
+   "prompt": "A programme office has been asked whether the state should distribute insurance through the postal network to the two underserved social classes. An analyst has already worked the numbers and left the working note below, together with the brief he was given. The steering committee meets in ten minutes and wants a verdict from you.\n\n**Give your answer in two fields: conclusion first, then everything else.**",
+   "exhibit": {
+    "title": "Analyst's working note — postal insurance programme",
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**Block A — size of the two target classes**"
+      ],
+      "blank_before": 1
+     },
+     {
+      "type": "table",
+      "header": [
+       "Segment",
+       "Annual household income",
+       "Households, M",
+       "% of income spent on insurance"
+      ],
+      "rows": [
+       [
+        "Globals",
+        "> $40K",
+        "12",
+        "2%"
+       ],
+       [
+        "Consumers",
+        "$20K – 40K",
+        "38",
+        "1.5%"
+       ],
+       [
+        "Aspirers",
+        "$10K – 20K",
+        "80",
+        "1.5%"
+       ],
+       [
+        "Strugglers",
+        "< $10K",
+        "120",
+        "1%"
+       ]
+      ],
+      "blank_after": 1
+     },
+     {
+      "type": "text",
+      "lines": [
+       "Midpoint income taken as representative. Aspirers: $15K × 80M × 1.5% = **$18B**. Strugglers: $5K × 120M × 1% = **$6B**. Two classes together = **$24B**.",
+       "",
+       "**Block B — what we would actually capture in three years**",
+       "66% of Strugglers and 33% of Aspirers: 0.66 × $6B + 0.33 × $18B ≈ $4B + $6B = **$10B** of premium.",
+       "",
+       "**Block C — what it costs**",
+       "The network has 150,000 post offices; two-thirds of them can hire one agent — 100,000 agents.",
+       "Agent payroll $15,000 each = **$1.5B**. Agent commission 10% of premium = **$1.0B**. Operating cost $5,000 per post office = **$0.5B**. Claims paid out at 80% of premium = **$8.0B**.",
+       "Total cost = 1.5 + 1.0 + 0.5 + 8.0 = **$11.0B**.",
+       "",
+       "**Block D — where I got to**",
+       "Premium in $10.0B, cost out $11.0B. The programme runs a **$1.0B deficit** in its first three years. I have not been able to find a version of the rollout that closes it: dropping agents cuts reach faster than it cuts cost, and the claims ratio is the actuarial floor, not a lever.",
+       "I stopped here and did not write a recommendation."
+      ],
+      "blank_before": 1
+     },
+     {
+      "type": "text",
+      "lines": [
+       "**Block E — the brief I was issued, attached for the file**",
+       "\"Primary objective is not to monetize insurance offerings, but instead to improve quality of life by providing insurance-based safety nets. However, profitability is seen as an important metric.\"",
+       "Insurance here covers both life and non-life — health, crop and so on."
+      ],
+      "blank_after": 1
+     }
+    ]
+   },
+   "key": {
+    "naive": "**Naive path — the honest first answer of a clever person.** Read Block E as the answer: a $1.0B hole with no closing move, therefore do not launch, or launch only after the economics are fixed. Every number on that path is right. The arithmetic is not where this slot is decided.",
+    "decoy": "**The tempting second branch.** Redesign for break-even before rollout — fewer post offices, lower commission, tighter underwriting. It reads as the responsible middle. It is the same refusal wearing a plan: every lever that closes $1.0B removes coverage, and coverage is the objective.",
+    "support": "**What decides it, and all of it is in Block A.** The brief names the objective in its first sentence — safety nets, not monetisation — and demotes profitability to \"an important metric\", not the test. Against that objective the programme delivers $10.0B of premium-equivalent protection to the two classes with the least of it, at a net public cost of $1.0B. **[ПОСТРОЕНО, книга не печатает]** on the note's own rounded figures that is a subsidy of 10.0% of the protection delivered ($1.0B ÷ $10.0B); on the unrounded chain it is 10.2%. The verdict does not turn on a better number; it turns on which number was ever the test.",
+    "correct": "Proceed with the rollout as scoped.",
+    "risks": "Internal: the 80% claims ratio is an assumption, and a 5 pp move is **[ПОСТРОЕНО]** ±$0.5B on a $1.0B deficit — the figure the committee is being asked to accept is only as firm as that ratio. External: the book's own two — excessive load on the medical system, and moral hazard once coverage is free at the point of sale.",
+    "next": "Name the $1.0B as a budgeted public-health line before launch, not as an overrun found later. Test whether a larger captured share of the same two classes narrows it, and price-test programmes that widen access without adding cost."
+   },
+   "checklist": {
+    "en": [
+     "Minto: the first sentence is the verdict itself — an action with a subject (\"the government should proceed\"). A correct verdict that arrives after the facts fails this line.",
+     "States that the objective in Block A, not the surplus in Block E, is the test.",
+     "Names the $1.0B deficit out loud rather than avoiding it — the answer is that it is a price, not that it is absent.",
+     "Uses at least two figures from the note: $10.0B captured and $11.0B cost, or the $24B market against them.",
+     "Gives one internal and one external risk.",
+     "Does not invent a lever that closes the gap; the note already ruled the obvious ones out."
+    ],
+    "ru": [
+     "Минто: первое предложение — сам вердикт, действием и с субъектом. Верный вывод, приехавший после фактов, не засчитывается.",
+     "Сказано, что тестом является цель из блока A, а не сальдо из блока E.",
+     "Дефицит $1.0B назван вслух: ответ в том, что это цена, а не в том, что его нет.",
+     "Использованы минимум две величины записи: $10.0B захвата и $11.0B издержек.",
+     "Назван один внутренний и один внешний риск.",
+     "Не выдуман рычаг, закрывающий дыру — записка уже перебрала очевидные."
+    ]
+   },
+   "reference": {
+    "en": "| field | text |\n|---|---|\n| **conclusion** | **The government should proceed with the postal insurance rollout as scoped.** |\n| **the rest** | The brief makes safety-net coverage the objective and profitability only an important metric, so the $1.0B gap is the price of the objective, not evidence against it. On the numbers the programme reaches the two least-covered classes with **$10.0B** of premium against **$11.0B** of cost, and every lever that closes the gap — fewer post offices, lower commission, tighter underwriting — removes the coverage that is the point. **[BUILT — the book does not print it]** the deficit is 10.0% of the protection delivered on the note's rounded figures, 10.2% unrounded. Risks: internally the 80% claims ratio is an assumption and 5 pp of it is ±$0.5B, which is half the deficit; externally the load on the medical system and moral hazard. Next: carry the $1.0B as a budgeted public-health line rather than an overrun, and test whether a larger captured share of the same two classes narrows it. |\n\n**Source:** `Wharton Casebook 23-24`, Case 13 The Claim Game, pp. 151–158 — prompt block, Additional Information block, Exhibit A, Math blocks, Recommendation block.\n"
+   }
+  },
+  {
+   "id": "SY-042",
+   "title": "Seven Cents A Cup",
+   "company": "Brelmont Cup",
+   "industry": "Foodservice packaging",
+   "difficulty": "Medium",
+   "clean": false,
+   "focus": "S17(a)",
+   "scaffold": "L2",
+   "time": "7 min",
+   "type": "Synthesis",
+   "exhibit_mode": "with",
+   "family_h25": "F8",
+   "family_src": "тело",
+   "family_conf": "высокая",
+   "family_note": "круг 38: вторая ветвь (ответить ценой) — только соблазн; честный ответ — продолжать делать то же самое, и это разворота не даёт",
+   "anchor_metric": "net margin per cup, cents",
+   "prompt": "A national supplier of foam cups to restaurant chains has a new competitor: an importer selling at a lower price. An associate has been through the numbers and the customer survey and left the working note below. He has drafted a response but not a verdict.\n\n**Answer in two fields: conclusion first, then everything else.**",
+   "exhibit": {
+    "title": "Associate's working note — response to the new entrant",
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**Block A — unit economics, cents per cup**"
+      ],
+      "blank_after": 0
+     },
+     {
+      "type": "table",
+      "header": [
+       "",
+       "Us",
+       "The entrant"
+      ],
+      "rows": [
+       [
+        "Price",
+        "10",
+        "7"
+       ],
+       [
+        "Manufacturing",
+        "4",
+        "4"
+       ],
+       [
+        "Shipping",
+        "3",
+        "3"
+       ],
+       [
+        "Distribution",
+        "—",
+        "2"
+       ]
+      ],
+      "blank_after": 1
+     },
+     {
+      "type": "text",
+      "lines": [
+       "Our cost is 4 + 3 = **7**, so we keep **3** of every 10 — a **30%** net margin.",
+       "The entrant's cost is 4 + 3 + 2 = **9** against a price of **7**: they are **2 cents under water on every cup** and have been from the day they arrived.",
+       "",
+       "**Block B — what matching would do**",
+       "If we go to their price of 7, our cost of 7 leaves **0**. The whole 3 cents goes, and we would be selling at cost against an importer who is already selling below it.",
+       "",
+       "**Block C — customer survey, what buyers weigh**",
+       "Buyers were asked to rank what matters when choosing a supplier. **Service reliability comes first, well ahead of price; design comes last.** On the reliability score we are rated materially above the entrant.",
+       "",
+       "**Block D — the response I drafted**",
+       "A staged price move: down 1 cent now as a signal to the accounts most at risk, a second cent if the entrant holds his price into next quarter, and contract lock-ins negotiated in parallel. It costs a third of our margin in year one and it answers the attack directly.",
+       "I have not written the recommendation."
+      ],
+      "blank_before": 1
+     }
+    ]
+   },
+   "key": {
+    "naive": "**Naive path — the honest first answer.** A cheaper competitor has arrived, so the response is priced: match partly, signal to the accounts at risk, lock in contracts. Block D is a competent plan, and every number in it is right. It is what an experienced person drafts when the trigger is a price.",
+    "decoy": "**The tempting second branch — and it is not the staged cut, it is the lock-in.** Sign the at-risk accounts to long contracts now, while the entrant is cheap and we still look safe. It costs nothing this quarter and feels like defence. It also fixes our price into the one period when the entrant's 2-cent burn is most likely to end, and it buys loyalty on the attribute the survey ranks below reliability — spending the negotiation on price when the thing we win on is service.",
+    "support": "**What decides it, and it is Block C against Block A.** The attack is on the attribute buyers rank last-but-one, while the attribute they rank first is the one we already win. Meanwhile the entrant is 2 cents under water per cup, so his price is not a position he holds, it is a burn he funds — and matching it would take us from 3 cents to 0 while he is still below us. There is no version of the price branch that leaves us better off than doing nothing to price at all.",
+    "correct": "Hold the price and spend on reliability instead.",
+    "risks": "Internal: the whole verdict rests on the survey ranking, and a survey is a snapshot — if reliability stops being the first-ranked attribute the answer changes. External: the book's own — price becomes a pain point if the economy turns, and a buyer under cost pressure re-ranks fast.",
+    "next": "Put the reliability lead under measurement rather than assertion — on-time delivery by account — and watch the entrant's price for the point at which he stops funding the 2-cent gap."
+   },
+   "checklist": {
+    "en": [
+     "Minto: the first sentence is the verdict itself, an action with a subject (\"we should hold price\"). A correct verdict arriving after the facts fails this line.",
+     "States that the attacked attribute is not the one buyers rank first — the survey is used, not just mentioned.",
+     "Names what matching costs: 3 cents to 0, that is the whole margin.",
+     "Names that the entrant is loss-making at 2 cents per cup, so the low price is funded, not sustainable.",
+     "Rejects the staged version explicitly, not only the full match.",
+     "Gives one internal and one external risk."
+    ],
+    "ru": [
+     "Минто: первое предложение — сам вердикт, действием и с субъектом. Верный вывод после фактов не засчитывается.",
+     "Сказано, что атакуют не тот атрибут, который покупатель ставит первым: опрос использован, а не упомянут.",
+     "Названа цена совпадения по цене: 3 цента превращаются в 0, то есть вся маржа.",
+     "Названо, что вошедший убыточен на 2 цента с чашки — его цена финансируется, а не держится.",
+     "Отвергнута именно ступенчатая версия, а не только полное совпадение.",
+     "Назван один внутренний и один внешний риск."
+    ]
+   },
+   "reference": {
+    "en": "| field | text |\n|---|---|\n| **conclusion** | **We should hold our price and put the money into service reliability instead.** |\n| **the rest** | The attack is on price, and price is not what buyers decide on: the survey ranks service reliability first and design last, and reliability is where we are rated materially above the entrant. Matching costs everything we have — our cost is **7** against a price of **10**, so going to **7** takes the margin from **3 cents to 0** — and it would be a concession made to a competitor who is **2 cents under water on every cup** and funding that gap rather than holding a position. The staged version in Block D is the same concession slowed down: it accepts price as the field. Risks: internally the verdict rests on a survey ranking, which is a snapshot; externally price becomes a pain point if the economy turns. Next: measure the reliability lead by on-time delivery per account rather than asserting it, and watch for the point at which the entrant stops funding the 2-cent gap. |\n\n**Source:** `Darden 2019` (2018-19 Casebook), Styrofoam Situation, pp. 58–67 — Exhibit 1 unit economics (10 / 7 price; 4 manufacturing, 3 shipping, 2 distribution), the Exhibit 1 guidance block (\"net margin is 30%\", \"Chalice Inc is running at a loss\", \"All of Cup Co's profit will be eroded if they try to match\"), the Exhibit 2 guidance block (\"The most important metric to customers is reliability of service and Cup Co ranks a lot higher\"), and the Conclusion block (\"Cup Co should not lower its price\")."
+   }
   }
  ]
 }
