@@ -74,7 +74,7 @@ const CASE_PRICE_CAP_USD = 0.20;
    Куплено ошибкой смены 06.08: «залито или нет» решалось поиском по логам,
    поиск вернул пусто из-за отставания индексации, и вывод был неверным.
    Сравнение метки с диском от индексации логов не зависит. */
-const BUILD = '5da49f4eee0f';
+const BUILD = '7b3ba21a5ac2';
 const PRICE_IN_PER_MTOK = 2.0;
 const PRICE_OUT_PER_MTOK = 10.0;
 const CACHE_WRITE_MULT = 1.25;
@@ -477,6 +477,46 @@ export function createMarkerFilter() {
       return out;
     }
   };
+}
+
+/* ЧУЖИЕ ЧИСЛА В ПЕРВОЙ ПОДСКАЗКЕ.
+ *
+ * Замер на живом проде 08.08, кейс #161, три прогона подряд: правило «на первой
+ * попытке не называть числа, которых кандидат не писал» соблюдено ОДИН раз из
+ * трёх. Дважды модель спросила «what happens to the $6,256,477 allocated to that
+ * line» — то есть показала пальцем на нужную строку и назвала величину из ключа
+ * шага, которого кандидат не проходил.
+ *
+ * Запрет в промпте есть и он проигрывает: ключ с числом лежит в том же контексте,
+ * а «задай один короткий вопрос» проще всего исполнить, ткнув в строку. Поэтому
+ * правило переносится из текста в код: ответ первой ступени ПРОВЕРЯЕТСЯ, и если
+ * в нём есть величина, которой нет в реплике кандидата, ход переписывается.
+ *
+ * Что считается величиной: число из двух и более значащих цифр. Однозначные
+ * («one», «3 lines», «two levers») ничего не выдают и сравнивать их — плодить
+ * ложные срабатывания. Разделители разрядов и валюта снимаются, чтобы
+ * «$6,256,477» и «6256477» были одним числом.
+ */
+export function foreignFigures(reply, candidateText) {
+  const grab = (t) => {
+    const out = new Set();
+    const re = /\d[\d.,\s\u00a0]*/g;
+    let m;
+    while ((m = re.exec(String(t || ''))) !== null) {
+      const raw = m[0].replace(/[\s\u00a0,]/g, '').replace(/\.$/, '');
+      if (!raw) continue;
+      const digits = raw.replace(/[^0-9]/g, '');
+      if (digits.replace(/^0+/, '').length < 2) continue;   // однозначные не считаем
+      out.add(String(parseFloat(raw)));
+      out.add(digits.replace(/^0+/, ''));                    // 6256477 и 6,256,477 — одно
+    }
+    return out;
+  };
+  const mine = grab(candidateText);
+  const theirs = grab(reply);
+  const bad = [];
+  for (const v of theirs) if (!mine.has(v)) bad.push(v);
+  return bad;
 }
 
 export function parseMarkers(text, priorRevealed) {
@@ -1313,6 +1353,22 @@ export default async function handler(req, res) {
     };
     let streamedText = '';
     let streamUsage = null;   // вход/кеш приходят в message_start, выход — в message_delta
+
+    /* ЗАДЕРЖКА ПЕРВОЙ СТУПЕНИ. Проверить ответ на чужие числа можно только когда
+       он дописан, а отправленное потоком уже не вернуть. Поэтому на ПЕРВОЙ
+       попытке текст придерживается — но лишь до вердикта, а вердикт модель
+       обязана поставить самыми первыми знаками ответа. Если это не разбор
+       ошибки (pass или просто выдача данных), придержанное тут же уходит
+       кандидату и дальше поток идёт как обычно: задержка в несколько десятков
+       миллисекунд. Держится до конца только тот случай, ради которого всё
+       и делается, — первая ошибка кандидата. */
+    const firstAttempt = (Number(attemptCount) || 0) === 0;
+    const lastCandidateText = (() => {
+      for (let i = clientMsgs.length - 1; i >= 0; i--)
+        if (clientMsgs[i] && clientMsgs[i].role === 'user') return String(clientMsgs[i].content || '');
+      return '';
+    })();
+    let holding = firstAttempt, heldText = '';
     if (wantStream && response.status >= 200 && response.status < 300 && response.body) {
       const filter = createMarkerFilter();
       const reader = response.body.getReader();
@@ -1334,7 +1390,15 @@ export default async function handler(req, res) {
             if (ev.type === 'content_block_delta' && ev.delta && typeof ev.delta.text === 'string') {
               streamedText += ev.delta.text;
               const safe = filter.push(ev.delta.text);
-              if (safe) { openSse(); sseSend({ t: safe }); }
+              if (holding) {
+                heldText += safe;
+                // вердикт стоит в самом начале ответа — как только он виден, решаем
+                const vm = streamedText.match(/<verdict>\s*(pass|retry)\s*<\/verdict>/i);
+                if (vm && vm[1].toLowerCase() !== 'retry') {
+                  holding = false;
+                  if (heldText) { openSse(); sseSend({ t: heldText }); heldText = ''; }
+                }
+              } else if (safe) { openSse(); sseSend({ t: safe }); }
             } else if (ev.type === 'message_start' && ev.message && ev.message.usage) {
               /* Вход и кеш приходят ТОЛЬКО в message_start; в message_delta их нет.
                  Пока мы читали один message_delta, лог знал лишь выходные токены —
@@ -1361,13 +1425,53 @@ export default async function handler(req, res) {
           }
         }
         const tail = filter.flush();
-        if (tail) { openSse(); sseSend({ t: tail }); }
+        if (holding) heldText += tail;
+        else if (tail) { openSse(); sseSend({ t: tail }); }
       } catch (e) {
         console.error('case-session stream read failed:', e && e.message);
         // Уже что-то отдали — честно закрываем ошибкой; ещё нет — падаем на обычный путь.
         if (sseOpen) { sseSend({ error: 'stream broken' }); res.end(); return; }
         streamedText = '';
       }
+    }
+
+    /* ПРОВЕРКА И ОДНА ПЕРЕПИСКА. Дошли сюда с придержанным текстом — значит это
+       разбор первой ошибки. Смотрим, не названо ли число, которого кандидат не
+       писал; если названо, просим переписать РОВНО ОДИН раз. Один, а не до
+       победы: вторая неудача означает, что случай не берётся правилом, и тогда
+       честнее отдать как есть, чем крутить деньги кандидата в цикле. */
+    if (holding && heldText) {
+      const bad = foreignFigures(heldText, lastCandidateText);
+      if (bad.length) {
+        console.log('case-session hint leak', JSON.stringify({
+          build: BUILD, case: caseObj.id, figures: bad.slice(0, 4) }));
+        try {
+          const strict = built.volatile
+            + '\n\nYOUR PREVIOUS ATTEMPT AT THIS REPLY WAS REJECTED. It contained the figure '
+            + bad.slice(0, 3).join(', ') + ', which the candidate never wrote. That names the row '
+            + 'they missed, which is the answer. Ask a SHORTER, VAGUER question that contains NO '
+            + 'figure at all and points only at their own claim. Keep the verdict marker.';
+          const rb = JSON.stringify({ model: CASE_MODEL, max_tokens: 300,
+            system: [{ type: 'text', text: built.stable, cache_control: { type: 'ephemeral' } }],
+            messages: convo.concat([{ role: 'user', content: [{ type: 'text', text: strict }] }]) });
+          // без stream и без ретраев: ход короткий, а ждать кандидат уже ждёт
+          const rr = await post(rb, 20000, 0);
+          if (rr.ok) {
+            const rj = await rr.json();
+            const txt = (rj.content || []).filter(b2 => b2 && b2.type === 'text')
+              .map(b2 => b2.text).join('\n').trim();
+            if (txt) {
+              const f2 = createMarkerFilter();
+              const visible = (f2.push(txt) + f2.flush()).trim();
+              const still = foreignFigures(visible, lastCandidateText);
+              console.log('case-session hint rewrite', JSON.stringify({
+                build: BUILD, case: caseObj.id, ok: still.length === 0 }));
+              if (visible) { streamedText = txt; heldText = visible; }
+            }
+          }
+        } catch (e) { console.error('case-session hint rewrite failed:', e && e.message); }
+      }
+      openSse(); sseSend({ t: heldText }); heldText = ''; holding = false;
     }
 
     let data = wantStream && streamedText

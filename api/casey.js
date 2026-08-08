@@ -18,6 +18,31 @@ const CASES_DATA = require('./_casey_cases.json');
 
 const FALLBACK_ORIGIN = 'https://cas-edge-final.vercel.app';
 const GRADER_MODEL = 'claude-sonnet-5';
+
+/* СТОИМОСТЬ CASEY НЕ ПИСАЛАСЬ НИКУДА.
+   Замер 08.08: сыграны C3 и C4 целиком, C5–C7 вслепую — в логах нет ни одной
+   строки расхода. То есть про продукт, с которого владелец рассчитывает
+   зарабатывать больше всего, нельзя было сказать, сколько он стоит: ни за шаг,
+   ни за партию. У кейсов такой счётчик стоит с 29.07 и он же ловил все дефекты
+   цены; здесь его не было вовсе.
+   Цены те же, что в case-session, и живут рядом с моделью, чтобы их правили
+   вместе с ней, а не искали по файлу. */
+const PRICE_IN_PER_MTOK = 2.0;
+const PRICE_OUT_PER_MTOK = 10.0;
+const CACHE_WRITE_MULT = 1.25;
+const CACHE_READ_MULT = 0.10;
+function logCaseyCost(kind, caseId, gid, usage, ms) {
+  if (!usage) return;
+  const usd = ((usage.input_tokens || 0) * PRICE_IN_PER_MTOK
+    + (usage.cache_creation_input_tokens || 0) * PRICE_IN_PER_MTOK * CACHE_WRITE_MULT
+    + (usage.cache_read_input_tokens || 0) * PRICE_IN_PER_MTOK * CACHE_READ_MULT
+    + (usage.output_tokens || 0) * PRICE_OUT_PER_MTOK) / 1e6;
+  console.log('casey cost', JSON.stringify({
+    kind, case: caseId, gid, usd: +usd.toFixed(5), ms,
+    in: usage.input_tokens, out: usage.output_tokens,
+    cache_read: usage.cache_read_input_tokens, cache_write: usage.cache_creation_input_tokens
+  }));
+}
 const MAX_BODY_BYTES = 200 * 1024;
 const RATE_LIMIT = 40;                 // slightly higher: a case has many graded steps
 const RATE_WINDOW_MS = 60 * 1000;
@@ -278,7 +303,7 @@ async function rateLimited(userId, sbUrl, sbKey, token) {
 
 // One bounded model call + a single thinking-truncation retry inside a hard
 // deadline (same discipline as claude.js), returning parsed JSON or null.
-async function graderJSON(system, userText, maxTokens) {
+async function graderJSON(system, userText, maxTokens, meter) {
   const T0 = Date.now();
   const BUDGET_MS = 52 * 1000;
   const call = (mt, timeoutMs) => fetchAnthropicWithRetry('https://api.anthropic.com/v1/messages', {
@@ -306,18 +331,33 @@ async function graderJSON(system, userText, maxTokens) {
     return null;
   }
   let data = await resp.json();
+  if (meter && data && data.usage) { meter.usage = data.usage; meter.calls = (meter.calls || 0) + 1; }
   let parsed = parse(textOf(data));
   // Retry once inside the deadline if the model was truncated OR returned nothing
   // parseable — the latter is the usual cause of a "could not grade".
   const needsRetry = !parsed || (data && data.stop_reason === 'max_tokens');
   const timeLeft = BUDGET_MS - (Date.now() - T0);
   if (needsRetry && timeLeft > 12 * 1000) {
-    try { const r2 = await call(Math.min(maxTokens * 2, 4000), timeLeft - 2000); if (r2.status === 200) { const d2 = await r2.json(); const p2 = parse(textOf(d2)); if (p2) parsed = p2; } } catch (e) { /* keep */ }
+    try { const r2 = await call(Math.min(maxTokens * 2, 4000), timeLeft - 2000); if (r2.status === 200) { const d2 = await r2.json();
+      /* Повтор — это ВТОРАЯ оплаченная попытка. Складываем, иначе лог покажет
+         половину счёта именно на тех ходах, где модель ошиблась и её просили
+         заново, то есть на самых дорогих. */
+      if (meter && d2 && d2.usage) {
+        const u = meter.usage || {}; const v = d2.usage;
+        meter.usage = {
+          input_tokens: (u.input_tokens || 0) + (v.input_tokens || 0),
+          output_tokens: (u.output_tokens || 0) + (v.output_tokens || 0),
+          cache_read_input_tokens: (u.cache_read_input_tokens || 0) + (v.cache_read_input_tokens || 0),
+          cache_creation_input_tokens: (u.cache_creation_input_tokens || 0) + (v.cache_creation_input_tokens || 0)
+        };
+        meter.calls = (meter.calls || 0) + 1;
+      }
+      const p2 = parse(textOf(d2)); if (p2) parsed = p2; } } catch (e) { /* keep */ }
   }
   return parsed;
 }
 
-async function gradeOpen(q, answer) {
+async function gradeOpen(q, answer, meter) {
   const sys = 'You are a strict but fair BCG case-interview examiner. Grade the candidate answer on a binary pass/fail. Return ONLY JSON: {"pass":true|false,"feedback":"1 short sentence IN ENGLISH: what earned or missed the pass"}.';
   // validation is either the new structured object ({rule:'semantic', credit_if})
   // or, on older records, a prose sentence. Passing the raw object would send the
@@ -328,7 +368,7 @@ async function gradeOpen(q, answer) {
   const u = 'PASS CRITERION: ' + crit +
     '\nMODEL ANSWER: ' + (q.model_answer || '—') +
     '\nCANDIDATE ANSWER: ' + answer;
-  const j = await graderJSON(sys, u, 400);
+  const j = await graderJSON(sys, u, 400, meter);
   return j || { pass: true, feedback: 'Answer accepted.' };
 }
 
@@ -393,7 +433,12 @@ export default async function handler(req, res) {
         const answer = String(p.answer || '');
         const trg = (q.trigger_phrases || []).some(ph => answer.toLowerCase().indexOf(String(ph).toLowerCase()) >= 0);
         let pass = trg;
-        if (!trg) { const r = await gradeOpen(q, answer); pass = !!r.pass; }
+        /* Совпадение по триггер-фразе модели не требует — значит и денег не стоит.
+           Это надо видеть в логе отдельно: доля бесплатных зачётов и есть мера
+           того, насколько дорог слот. */
+        const meter = {}; const t0 = Date.now();
+        if (!trg) { const r = await gradeOpen(q, answer, meter); pass = !!r.pass; }
+        logCaseyCost(trg ? 'open_trigger' : 'open_text', c.id, gid, meter.usage, Date.now() - t0);
         const note = (q.validation && typeof q.validation === 'object')
           ? (q.validation.credit_if || 'Right thing to probe.')
           : (q.validation || 'Right thing to probe.');
@@ -407,7 +452,9 @@ export default async function handler(req, res) {
           ? ('rubric: ' + JSON.stringify(rubric))
           : ('voice_checklist:\n' + (q.checklist || '') + '\nmodel_answer:\n' + (q.model_answer || ''));
         const u = 'case_id: ' + (q.rubric_ref || c.id) + '\n' + grounding + '\ntranscript: ' + String(p.transcript || '');
-        const j = await graderJSON(CASEY_VOICE_SYSTEM, u, 1200);
+        const meter = {}; const t0 = Date.now();
+        const j = await graderJSON(CASEY_VOICE_SYSTEM, u, 1200, meter);
+        logCaseyCost('voice', c.id, gid, meter.usage, Date.now() - t0);
         // Genuine grader failure → distinguishable flag, NOT a fake 0/4 "weak".
         // The client shows a neutral retry (no penalty, no game consumed) and
         // does not reveal the partner model answer yet.
@@ -417,7 +464,12 @@ export default async function handler(req, res) {
         return res.status(200).json(j);
       }
       // open_text / brainstorm
-      return res.status(200).json(await gradeOpen(q, String(p.answer || '')));
+      {
+        const meter = {}; const t0 = Date.now();
+        const out = await gradeOpen(q, String(p.answer || ''), meter);
+        logCaseyCost('brainstorm', c.id, gid, meter.usage, Date.now() - t0);
+        return res.status(200).json(out);
+      }
     }
 
     return res.status(400).json({ error: { message: 'Unknown action.' } });
