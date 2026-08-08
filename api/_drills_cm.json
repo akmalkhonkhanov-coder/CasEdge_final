@@ -130,7 +130,8 @@
    ],
    "family_h25": "F1",
    "family_src": "словарь:F13",
-   "family_conf": "спорная"
+   "family_conf": "высокая",
+   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом"
   },
   {
    "id": "CM-003",
@@ -531,7 +532,8 @@
    ],
    "family_h25": "F1",
    "family_src": "словарь:F15",
-   "family_conf": "спорная"
+   "family_conf": "высокая",
+   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом"
   },
   {
    "id": "CM-008",
@@ -814,9 +816,10 @@
     "en": "linear breakeven ignores the FC step landing exactly on its value.",
     "ru": "линейный breakeven игнорирует ступеньку FC ровно на своём значении."
    },
-   "family_h25": "F4",
+   "family_h25": "F1",
    "family_src": "словарь:F01",
-   "family_conf": "спорная"
+   "family_conf": "высокая",
+   "family_note": "круг 42, триаж спорных: метка исправлена независимым проходом"
   },
   {
    "id": "CM-012",
@@ -982,7 +985,8 @@
    },
    "family_h25": "F1",
    "family_src": "словарь:F09",
-   "family_conf": "спорная"
+   "family_conf": "высокая",
+   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом"
   },
   {
    "id": "CM-015",
@@ -1585,7 +1589,7 @@
    "family_h25": "F1",
    "family_src": "словарь:F11",
    "family_conf": "спорная",
-   "family_note": "ревью2: F1 не держится, семьи в Н25 нет"
+   "family_note": "круг 42, триаж: не влезает в десять семей · признак — одиночка: эвристика знака без печатной величины"
   },
   {
    "id": "CM-025",
@@ -1707,8 +1711,8 @@
    },
    "family_h25": "F7",
    "family_src": "словарь:F15",
-   "family_conf": "спорная",
-   "family_note": "ревью к31: max-payoff вместо EV — распределение против ожидания"
+   "family_conf": "высокая",
+   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом"
   },
   {
    "id": "CM-027",
@@ -1893,9 +1897,10 @@
     "en": "adding capacity outside the bottleneck (zero effect); underestimating operating leverage (×3 profit from +50% volume).",
     "ru": "добавление мощности не в узкое место (ноль эффекта); недооценка операц. рычага (×3 прибыль от +50% объёма)."
    },
-   "family_h25": "F4",
+   "family_h25": "F9",
    "family_src": "словарь:F17",
-   "family_conf": "спорная"
+   "family_conf": "высокая",
+   "family_note": "круг 42, триаж спорных: метка исправлена независимым проходом"
   },
   {
    "id": "CM-030",
@@ -2013,9 +2018,10 @@
     "en": "breakeven muscle + CAGR-vs-arithmetic on volatile ARR (end>start, sanity does not save you).",
     "ru": "breakeven-мышца + CAGR-vs-arith на волатильном ARR (end>start, sanity не спасает)."
    },
-   "family_h25": "F4",
+   "family_h25": "F1",
    "family_src": "словарь:F01",
-   "family_conf": "спорная"
+   "family_conf": "высокая",
+   "family_note": "круг 42, триаж спорных: метка исправлена независимым проходом"
   },
   {
    "id": "CM-032",
@@ -2195,10 +2201,10 @@
    "title": "Bundle Launch",
    "difficulty": "Hard",
    "type": "Trap",
-   "focus": "F07(c)+F11(c)",
+   "focus": "F07(c)+F11(c) dependent threshold ([9b-model])",
    "time": "8 min",
    "render": "table(5) · reveal(3)",
-   "prompt": "Ostrenza launches a bundle at $300 (VC $190), projected 20,000 units. It cannibalizes the premium SKU ($400, VC $220) — 50% of bundle buyers would have bought premium. \"Bundle adds 20,000 × $110 = $2.2M,\" says marketing. What is the net contribution?",
+   "prompt": "Ostrenza launches a bundle at $300 (VC $190), projected 20,000 units. Some bundle buyers would otherwise have bought the premium SKU ($400, VC $220). \"Bundle adds 20,000 × $110 = $2.2M,\" says marketing, with no allowance for that switch at all. Before the committee looks at any forecast of the switching share, it wants the line drawn: at what share of bundle buyers switching from premium does the launch stop paying for itself?",
    "exhibit": {
     "type": "table",
     "header": [
@@ -2224,32 +2230,32 @@
       "20,000"
      ],
      [
-      "— cannibalizes premium",
+      "— premium buyers switching to bundle",
       "—",
       "—",
       "—",
-      "50%"
+      "(solve)"
      ]
     ]
    },
    "step_prompts": [
-    "Gross bundle contribution.",
-    "Contribution lost on cannibalized premium.",
-    "Net contribution."
+    "Write the tie-equation for the launch, then solve it for the switching share at which the launch breaks even.",
+    "Does your threshold depend on the 20,000-unit forecast? Show why.",
+    "Marketing plans on 50% switching. State the distance between your threshold and that plan, and its sign — in percentage points, in premium units, and in net contribution dollars."
    ],
    "company": "Ostrenza",
    "industry": "Consumer-electronics",
    "checklist": {
-    "en": "(1) gross $2.2M; (2) lost $1.8M at premium $180, exact; (3) net +$400,000; (4) mix effect named.",
-    "ru": "(1) gross $2.2M; (2) lost $1.8M по premium $180, exact; (3) net +$400,000; (4) назван mix-эффект."
+    "en": "(1) tie-equation written before any number: 110 × 20,000 = 180 × c × 20,000 — the switched units valued at the PREMIUM's $180, not the bundle's $110; (2) threshold c* = 110/180 = 61.1% (11/18), tolerance: exact to 0.1pp; (3) states that the 20,000 cancels — the threshold is the margin ratio, the forecast sizes the prize, not the line; (4) headroom vs the 50% plan: 11.1pp = ≈2,222 premium units (exactly 2,222.2) = the +$400,000 net, and the two cross-check (2,222.2 × 180 = 400,000).",
+    "ru": "(1) уравнение безразличия выписано до счёта: 110 × 20,000 = 180 × c × 20,000 — снятые единицы по марже PREMIUM $180, а не bundle $110; (2) порог c* = 110/180 = 61.1% (11/18), tolerance: exact до 0.1 п.п.; (3) сказано, что 20,000 сокращается — порог есть отношение маржей, прогноз задаёт размер приза, а не линию; (4) запас против плана 50%: 11.1 п.п. = ≈2,222 ед. премиума (точно 2,222.2) = нетто +$400,000, и эти две величины сходятся крест-накрест (2,222.2 × 180 = 400,000)."
    },
    "reference": {
-    "en": "- Step 1. Gross = 110 × 20,000 = **$2,200,000** (naive).\n- Step 2. Cannibalization: 50% × 20,000 = 10,000 units drawn away from premium. Premium CM = $180 → loss = 180 × 10,000 = **$1,800,000** (at the premium's sacrificed margin of $180, not the newcomer's $110 — this is the price-mix layer: the bundle pulls the customer from a high-margin to a low-margin product).\n- Step 3. Net = 2,200,000 − 1,800,000 = **+$400,000**. The launch is worthwhile, but 5.5× smaller than claimed.",
-    "ru": "- Шаг 1. Gross = 110 × 20,000 = **$2,200,000** (наивный).\n- Шаг 2. Каннибализация: 50% × 20,000 = 10,000 units уходят у premium. Premium CM = $180 → потеря = 180 × 10,000 = **$1,800,000** (по марже того, кого каннибализируют, — premium $180, а не новичка $110: bundle уводит клиента с высокомаржинального продукта на низкомаржинальный).\n- Шаг 3. Net = 2,200,000 − 1,800,000 = **+$400,000**. Запуск выгоден, но в 5.5× меньше заявленного."
+    "en": "- Step 1. Set the net effect to zero and solve for the share: 110 × 20,000 − 180 × c × 20,000 = 0 → 110 = 180c → **c\\* = 110/180 = 61.1% (11/18)**. Above that share of bundle buyers switching from premium, the launch destroys contribution.\n- Step 2. The 20,000 sits as a factor on BOTH sides and cancels: the threshold is the ratio of the two margins alone. A bigger or smaller volume forecast changes the size of the prize, not the break-even share — which is why the line can be drawn before anyone argues about the forecast.\n- Step 3. Against marketing's 50% plan: headroom = 61.1% − 50% = **11.1pp**, i.e. 61.1% × 20,000 = 12,222.2 units versus the 10,000 planned = **≈2,222 premium units (exactly 2,222.2)** of slack. Net at plan = 2,200,000 − 180 × 10,000 = **+$400,000**. Cross-check: 2,222.2 × 180 = $400,000 — the slack in units, valued at the premium margin, IS the net.\n- Naive paths, both of which overstate the safe zone: valuing the switched units at the bundle's own $110 gives c\\* = 110/110 = 100% (\"cannibalization can never sink it\"); solving on prices instead of margins ($300/$400) gives 75%. Counter-check at 75%: 180 × 15,000 = 2,700,000 of lost premium versus 2,200,000 gross → **−$500,000**, already past the real line. The loss is always at the victim's $180.",
+    "ru": "- Шаг 1. Приравниваем нетто к нулю и решаем относительно доли: 110 × 20,000 − 180 × c × 20,000 = 0 → 110 = 180c → **c\\* = 110/180 = 61,1% (11/18)**. Выше этой доли переключения с premium запуск разрушает контрибуцию.\n- Шаг 2. 20,000 стоит множителем в ОБЕИХ частях и сокращается: порог есть чистое отношение двух маржей. Больший или меньший прогноз объёма меняет размер приза, но не долю безубыточности — поэтому линию можно провести до любого спора о прогнозе.\n- Шаг 3. Против плана маркетинга в 50%: запас = 61,1% − 50% = **11,1 п.п.**, то есть 61,1% × 20,000 = 12,222.2 ед. против плановых 10,000 = **≈2,222 ед. премиума (точно 2,222.2)** запаса. Нетто при плане = 2,200,000 − 180 × 10,000 = **+$400,000**. Сверка крест-накрест: 2,222.2 × 180 = $400,000 — запас в штуках, оценённый по марже премиума, и ЕСТЬ нетто.\n- Наивные пути, оба завышают безопасную зону: считать снятые единицы по собственной марже bundle $110 даёт c\\* = 110/110 = 100% («каннибализация не способна утопить запуск»); решать по ценам, а не по маржам ($300/$400), даёт 75%. Контрпроверка на 75%: 180 × 15,000 = 2,700,000 потерянного премиума против 2,200,000 gross → **−$500,000**, уже за реальной линией. Потеря всегда идёт по $180 жертвы."
    },
    "provoked": {
-    "en": "gross≠net (cannibalization); mix-shift to lower margin (loss at the $180 premium).",
-    "ru": "gross≠net (каннибализация); mix-shift на низкую маржу (потеря по $180 premium)."
+    "en": "solving the threshold at the newcomer's own $110 margin (→ a false 100% \"can never sink it\") or on prices $300/$400 (→ a false 75%), instead of at the cannibalized premium's $180; and reading the 20,000 forecast as an input to the threshold rather than a factor that cancels.",
+    "ru": "порог решается по собственной марже новичка $110 (→ ложные 100% «утопить невозможно») или по ценам $300/$400 (→ ложные 75%) вместо маржи каннибализируемого premium $180; плюс прогноз 20,000 читается как вход в порог, хотя он сокращается."
    },
    "family_h25": "F1",
    "family_src": "словарь:F07",
@@ -2257,13 +2263,13 @@
   },
   {
    "id": "CM-036",
-   "title": "Two Shows",
-   "difficulty": "Easy",
+   "title": "Two Shows, Three Years",
+   "difficulty": "Medium",
    "type": "Trap",
-   "focus": "F08(c)",
-   "time": "3 min",
+   "focus": "F08(c) static ranking vs compounding horizon",
+   "time": "5 min",
    "render": "table(4) · input",
-   "prompt": "Selvyx reviews two shows. A grew $0.2M → $0.6M (+200%). B grew $8.0M → $9.0M (+12.5%). The team wants budget on A (\"+200%!\"). Which added more revenue?",
+   "prompt": "Selvyx reviews two shows. A grew $0.2M → $0.6M (+200%). B grew $8.0M → $9.0M (+12.5%). Budget goes to the larger show, and the team re-checks the ranking every year. If each show holds its own current growth rate, how long does today's ranking survive?",
    "exhibit": {
     "type": "table",
     "header": [
@@ -2288,21 +2294,22 @@
     ]
    },
    "step_prompts": [
-    "Which added more absolute revenue?"
+    "Project each show forward at its own rate, year by year.",
+    "Name the first year in which the ranking is no longer what it is today — or state that it never changes — and say what that does to the budget rule."
    ],
    "company": "Selvyx",
    "industry": "Media-podcast",
    "checklist": {
-    "en": "(1) absA $0.4M, absB $1.0M, exact; (2) conclusion «B is larger»; (3) mechanism of % without a base; (4) caveat on A's scale potential.",
-    "ru": "(1) absA $0.4M, absB $1.0M, exact; (2) вывод «B больше»; (3) механизм % без базы; (4) оговорка про потенциал масштаба A."
+    "en": "Credit if ALL: (1) growth factors read off the exhibit — A ×3.0/yr (0.6/0.2), B ×1.125/yr (9.0/8.0), projection started from the current column ($0.6M and $9.0M), not from the prior one; (2) year-by-year values, tolerance ±0.1: Y1 A 1.8 vs B 10.125; Y2 A 5.4 vs B ≈11.39; Y3 A 16.2 vs B ≈12.81; (3) conclusion: today's ranking survives two years and flips in Year 3, A ahead by ≈$3.4M; (4) last mile — the budget rule is horizon-dependent, and the answer rests on ×3/yr being repeatable off a $0.2M base; if A's rate decays toward B's, the flip does not happen.",
+    "ru": "Зачёт, если ВСЁ: (1) множители сняты с экспоната — A ×3.0/год (0.6/0.2), B ×1.125/год (9.0/8.0), проекция начата от текущей колонки ($0.6M и $9.0M), а не от прошлой; (2) значения по годам, tolerance ±0.1: Y1 A 1.8 vs B 10.125; Y2 A 5.4 vs B ≈11.39; Y3 A 16.2 vs B ≈12.81; (3) вывод: сегодняшний порядок держится два года и переворачивается в Year 3, A впереди на ≈$3.4M; (4) last mile — правило бюджета зависит от горизонта, а ответ держится на допущении, что ×3/год повторяемы на базе $0.2M; если темп A затухает к темпу B, переворота не будет."
    },
    "reference": {
-    "en": "- Absolute: A +$0.4M, B +**$1.0M**. B brought in 2.5× more money, despite a modest 12.5%.\n- The «+200%» is huge on a tiny base of $0.2M. Allocating by % without the base is misleading.",
-    "ru": "- Абсолют: A +$0.4M, B +**$1.0M**. B принёс в 2.5× больше денег, несмотря на скромные 12.5%.\n- «+200%» огромен на крошечной базе $0.2M. Аллокация по % без базы вводит в заблуждение."
+    "en": "- Growth factors come straight off the exhibit: A ×3.0 per year (0.6 / 0.2 = 3), B ×1.125 per year (9.0 / 8.0 = 1.125). Project from the current column: A $0.6M, B $9.0M.\n- Year 1: A 0.6 × 3 = **$1.8M** vs B 9.0 × 1.125 = **$10.125M** — B larger. Year 2: A **$5.4M** vs B **$11.39M** — B larger. Year 3: A **$16.2M** vs B **$12.81M** — **A larger**.\n- Today's ranking survives exactly **two years** and flips in **Year 3**, with A ahead by ≈**$3.4M**. \"B is 15× A\" (9.0 / 0.6) is a statement about one moment, not about the ranking a multi-year budget has to live with: a gap in levels is closed by a gap in rates, and ×3 against ×1.125 closes it fast.\n- Last mile: the decision does not turn on today's sizes but on the assumption underneath the projection — whether ×3 a year is repeatable off a $0.2M base, where a rate that high is usually a launch effect. State the crossover year and that assumption in the same breath; if A's rate decays to anything near B's, the flip never arrives and the current rule stands.",
+    "ru": "- Множители роста снимаются прямо с экспоната: A ×3.0 в год (0.6 / 0.2 = 3), B ×1.125 в год (9.0 / 8.0 = 1.125). Проекция — от текущей колонки: A $0.6M, B $9.0M.\n- Year 1: A 0.6 × 3 = **$1.8M** против B 9.0 × 1.125 = **$10.125M** — больше B. Year 2: A **$5.4M** против B **$11.39M** — больше B. Year 3: A **$16.2M** против B **$12.81M** — **больше A**.\n- Сегодняшний порядок держится ровно **два года** и переворачивается в **Year 3**, A впереди на ≈**$3.4M**. «B в 15× больше A» (9.0 / 0.6) — утверждение про один момент, а не про порядок, с которым живёт многолетний бюджет: разрыв в уровнях закрывается разрывом в темпах, а ×3 против ×1.125 закрывает его быстро.\n- Last mile: решение упирается не в сегодняшние размеры, а в допущение под проекцией — повторяемы ли ×3 в год на базе $0.2M, где такой темп обычно эффект запуска. Год перелома и это допущение называются одной фразой; если темп A затухает до уровня B, перелом не наступает и текущее правило остаётся в силе."
    },
    "provoked": {
-    "en": "a large % on a low base treated as the priority.",
-    "ru": "большой % на низкой базе как приоритет."
+    "en": "today's size gap is treated as a permanent ranking; growth rates are compared but never compounded forward.",
+    "ru": "сегодняшний разрыв в размере принимается за постоянный порядок; темпы роста сравнивают, но не продлевают вперёд."
    },
    "family_h25": "F1",
    "family_src": "словарь:F08",
@@ -2361,7 +2368,8 @@
    },
    "family_h25": "F1",
    "family_src": "словарь:F09",
-   "family_conf": "спорная"
+   "family_conf": "высокая",
+   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом"
   },
   {
    "id": "CM-038",
@@ -2543,7 +2551,8 @@
    },
    "family_h25": "F1",
    "family_src": "словарь:F13",
-   "family_conf": "спорная"
+   "family_conf": "высокая",
+   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом"
   },
   {
    "id": "CM-041",
@@ -2601,7 +2610,7 @@
    "family_h25": "F1",
    "family_src": "словарь:F15",
    "family_conf": "спорная",
-   "family_note": "ревью2: составной EV+bottleneck без подмены; семьи в Н25 нет"
+   "family_note": "круг 42, триаж: не влезает в десять семей · признак — одиночка: два равноправных механизма в одном слоте"
   },
   {
    "id": "CM-042",
@@ -2762,9 +2771,10 @@
     "en": "minor — confusing recurring revenue with the full price / forgetting VC.",
     "ru": "мелкая — перепутать recurring revenue с полной ценой/забыть VC."
    },
-   "family_h25": "F4",
+   "family_h25": "F0",
    "family_src": "словарь:F01",
-   "family_conf": "спорная"
+   "family_conf": "высокая",
+   "family_note": "круг 42, триаж спорных: метка исправлена независимым проходом"
   },
   {
    "id": "CM-045",
@@ -3116,6 +3126,110 @@
    "family_h25": "F1",
    "family_src": "словарь:F10",
    "family_conf": "высокая"
+  },
+  {
+   "id": "CM-051",
+   "title": "Exactly One Million",
+   "difficulty": "Hard",
+   "type": "Trap",
+   "focus": "F20(a) the tie is the answer",
+   "time": "7 min",
+   "company": "Hurkalen Fuel",
+   "industry": "Roadside retail",
+   "family_h25": "F5",
+   "family_src": "тело",
+   "family_conf": "спорная",
+   "family_note": "круг 42, триаж: не влезает в десять семей · признак — одиночка: точная ничья, спорно действие, а не величина",
+   "render": {
+    "exhibits": [
+     "table"
+    ],
+    "interactive": [
+     "input_number"
+    ]
+   },
+   "prompt": "Hurkalen owns the only filling station on the road between two towns and is deciding whether to add a convenience store. The owner wants the NPV.\n\nWork it out from the Exhibit, then say what you would tell him.",
+   "exhibit": {
+    "type": "table",
+    "header": [
+     "Item",
+     "Figure"
+    ],
+    "rows": [
+     [
+      "Population, each town",
+      "1,000 · two towns"
+     ],
+     [
+      "Car ownership",
+      "80% of residents"
+     ],
+     [
+      "Share of car owners who fuel here",
+      "50%"
+     ],
+     [
+      "Fuel purchases",
+      "once a week · 50 weeks a year · $50 each"
+     ],
+     [
+      "Share of those purchases made at our station",
+      "40%"
+     ],
+     [
+      "Store: extra spend per fuelling customer, per visit",
+      "$20 · no change in visit frequency"
+     ],
+     [
+      "Store: non-customers who would come just for the store",
+      "50% of the 1,200 non-customers · $5 a week · 50 weeks"
+     ],
+     [
+      "Store: cost of goods",
+      "50% of store revenue"
+     ],
+     [
+      "Store: labour",
+      "$75,000 a year"
+     ],
+     [
+      "Store: utilities",
+      "$5,000 a month"
+     ],
+     [
+      "Up-front investment",
+      "$1,000,000"
+     ],
+     [
+      "Discount rate",
+      "10%"
+     ],
+     [
+      "Population growth",
+      "0%"
+     ],
+     [
+      "Expected life",
+      "perpetuity"
+     ]
+    ]
+   },
+   "step_prompts": [
+    "Give the store's annual profit and the NPV of the investment.",
+    "Last mile: state your recommendation and what it rests on."
+   ],
+   "checklist": {
+    "en": "Credit if ALL: (1) store revenue = $320,000 from existing customers + $150,000 from new = $470,000; (2) annual profit = 470,000 − 235,000 COGS − 75,000 labour − 60,000 utilities = $100,000; (3) NPV = 100,000 / 10% − 1,000,000 = $0 exactly; (4) states that a zero NPV is a tie, not a rejection, and that the recommendation therefore rests on a stated convention — strict NPV, or the value of diversification and of new customers who may start buying fuel; (5) does not pretend the number decides it.",
+    "ru": "Засчитывается, если ВСЁ: (1) выручка магазина = $320 000 от текущих + $150 000 от новых = $470 000; (2) годовая прибыль = 470 000 − 235 000 − 75 000 − 60 000 = $100 000; (3) NPV = 100 000 / 10% − 1 000 000 = ровно $0; (4) сказано, что нулевой NPV — это ничья, а не отказ, и рекомендация опирается на названную конвенцию: строгий NPV либо ценность диверсификации и новых клиентов; (5) не сделан вид, что число решило само."
+   },
+   "reference": {
+    "en": "- **Chain:** customers 1,000 × 80% × 50% × 2 towns = **800**. Fuel spend 800 × $50 × 50 = **$2,000,000**, of which 40% is ours = **$800,000** of station revenue. Store: 800 × 50 × 40% = **16,000** purchases × $20 = **$320,000**, plus 1,200 × 50% × $5 × 50 = **$150,000** = **$470,000**. Costs: 50% COGS = $235,000, labour $75,000, utilities $60,000 → profit **$100,000**. NPV = 100,000 / 0.10 − 1,000,000 = **$0**.\n- **Naive:** read $0 as \"no\". A zero NPV is not a rejection — it is the point at which the two options are worth the same, and the case is now about which convention you argue from.\n- **Both conventions are legitimate, and the book says so:** *\"The interviewee can provide a recommendation either for or against the convenience store as long as it recognizes the NPV of 0 and is backed up by logic.\"* For: diversification, and new customers who may start buying fuel. Against: zero return on $1,000,000 of capital, and it \"could be even worse in reality\".\n- **What the slot tests:** naming the convention out loud before recommending. A candidate who says \"NPV is zero, therefore no\" has silently chosen one and not said so.\n- **Source:** `Darden 2019` (2018-19 Casebook), Lonely Gas Station, Questions 1–2D, pp. 126–133.",
+    "ru": "- **Цепочка:** клиентов 1 000 × 80% × 50% × 2 = **800**. Расходы на топливо 800 × $50 × 50 = **$2 000 000**, наши 40% = **$800 000**. Магазин: 800 × 50 × 40% = **16 000** покупок × $20 = **$320 000** плюс 1 200 × 50% × $5 × 50 = **$150 000** = **$470 000**. Издержки: COGS $235 000, труд $75 000, коммунальные $60 000 → прибыль **$100 000**. NPV = 100 000 / 0.10 − 1 000 000 = **$0**.\n- **Наивно:** прочитать $0 как «нет». Нулевой NPV — не отказ, а точка равенства, и дальше решает названная конвенция.\n- **Обе конвенции законны, и книга это печатает.** За: диверсификация и новые клиенты, которые могут начать покупать топливо. Против: нулевая отдача на $1 000 000 капитала.\n- **Что проверяет слот:** названа ли конвенция вслух до рекомендации.\n- **Источник:** `Darden 2019`, Lonely Gas Station, вопросы 1–2D, стр. 126–133."
+   },
+   "provoked": {
+    "en": "Reading an exactly zero NPV as a rejection, and recommending without naming the convention the recommendation rests on.",
+    "ru": "Нулевой NPV прочитан как отказ, и рекомендация даётся без названной конвенции."
+   }
   }
  ],
  "_meta": {

@@ -211,7 +211,8 @@
    ],
    "family_h25": "F5",
    "family_src": "словарь:M07",
-   "family_conf": "спорная"
+   "family_conf": "высокая",
+   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом"
   },
   {
    "id": "MS-005",
@@ -423,7 +424,8 @@
    ],
    "family_h25": "F1",
    "family_src": "словарь:M14",
-   "family_conf": "спорная"
+   "family_conf": "высокая",
+   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом"
   },
   {
    "id": "MS-009",
@@ -476,7 +478,8 @@
    ],
    "family_h25": "F1",
    "family_src": "словарь:M13",
-   "family_conf": "спорная"
+   "family_conf": "высокая",
+   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом"
   },
   {
    "id": "MS-010",
@@ -529,7 +532,8 @@
    ],
    "family_h25": "F1",
    "family_src": "словарь:M10",
-   "family_conf": "спорная"
+   "family_conf": "высокая",
+   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом"
   },
   {
    "id": "MS-011",
@@ -742,7 +746,7 @@
    "family_h25": "F1",
    "family_src": "словарь:M06",
    "family_conf": "спорная",
-   "family_note": "ревью к31: то же, вопрос о правиле разметки для всего типа MS"
+   "family_note": "круг 42, триаж: не влезает в десять семей · признак — K2 печатной ловушки нет — проверяется строгость самой оценки"
   },
   {
    "id": "MS-015",
@@ -848,7 +852,8 @@
    ],
    "family_h25": "F7",
    "family_src": "словарь:M15",
-   "family_conf": "спорная"
+   "family_conf": "высокая",
+   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом"
   },
   {
    "id": "MS-017",
@@ -1008,7 +1013,7 @@
    "family_h25": "F1",
    "family_src": "словарь:M13",
    "family_conf": "спорная",
-   "family_note": "ревью к31: у MS нет напечатанного агрегата, метка натянута"
+   "family_note": "круг 42, триаж: не влезает в десять семей · признак — K2 то же — периметр рынка, не печатная величина"
   },
   {
    "id": "MS-020",
@@ -1061,7 +1066,8 @@
    ],
    "family_h25": "F1",
    "family_src": "словарь:M10",
-   "family_conf": "спорная"
+   "family_conf": "высокая",
+   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом"
   },
   {
    "id": "MS-021",
@@ -1167,7 +1173,8 @@
    ],
    "family_h25": "F5",
    "family_src": "словарь:M07",
-   "family_conf": "спорная"
+   "family_conf": "спорная",
+   "family_note": "круг 42, триаж: не влезает в десять семей · признак — K2 то же — независимость второго пути"
   },
   {
    "id": "MS-023",
@@ -1379,7 +1386,8 @@
    ],
    "family_h25": "F1",
    "family_src": "словарь:M14",
-   "family_conf": "спорная"
+   "family_conf": "спорная",
+   "family_note": "круг 42, триаж: не влезает в десять семей · признак — K2 то же — частное входов выдано за оценку"
   },
   {
    "id": "MS-027",
@@ -1432,14 +1440,15 @@
    ],
    "family_h25": "F1",
    "family_src": "словарь:M14",
-   "family_conf": "спорная"
+   "family_conf": "высокая",
+   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом"
   },
   {
    "id": "MS-028",
    "title": "Phones in Hand",
    "difficulty": "Medium",
    "type": "Trap",
-   "focus": "M03(b) replacement cycle",
+   "focus": "M03(b) flow → stock (обратное направление)",
    "time": "6 min",
    "render": {
     "exhibits": [],
@@ -1447,39 +1456,39 @@
      "input_number"
     ]
    },
-   "prompt": "Estimate the annual US market for smartphones, in dollars.",
+   "prompt": "A phone-case and extended-warranty business wants to size the base it can sell into: how many smartphones are currently in service in the US? Industry unit-sales data is available.",
    "exhibit": null,
    "step_prompts": [
-    "Segment the market and state the counting base explicitly (people / households / firms / installed base) with a one-line hypothesis.",
-    "Name each anchor as a number before computing (k=4 estimate-anchors).",
-    "Compute the estimate along the main chain and state the market size in $.",
+    "State the counting base explicitly (people / households / firms / installed base) with a one-line hypothesis, and say in one line why that base answers the question asked.",
+    "Name each anchor as a number before computing (k=2 estimate-anchors).",
+    "Compute the base in service along the main chain and state it in devices.",
     "Triangulate with an independent second path (a different data source, not the same chain reordered) and reconcile — gap should be within ~2×; name the more reliable path with justification.",
-    "Sanity-check: normalize per capita / per household aloud and give a plausibility verdict.",
-    "Last mile: what the annual figure means for supply planning."
+    "Sanity-check: normalize per capita aloud and give a plausibility verdict.",
+    "Last mile: what the base in service means for sizing the attach-on business."
    ],
    "checklist": {
-    "en": "- GATE: ∈ [$17.4B, $278.3B]\n- P1: **stock and flow are separated explicitly**; counting «fleet × price» = P1 not credited\n- P2: 4 anchors as numbers; the replacement cycle is named before the calculation\n- P3: second path is independent (from retail), ratio ∈ [1.05×, 2.00×] (reference 1.23×) + choice\n- P4: translation into a decision\n- S: «112.2M devices out of a 280.5M fleet = 40% per year, i.e. replacement once every 2.5 years» → does it reconcile with the anchor",
-    "ru": "- GATE: ∈ [$17.4B, $278.3B]\n- P1: **запас и поток разделены явно**; счёт «парк × цена» = P1 не зачтён\n- P2: 4 якоря числом; цикл замены назван до расчёта\n- P3: второй путь независим (от ритейла), ratio ∈ [1.05×, 2.00×] (эталон 1.23×) + выбор\n- P4: перевод в решение\n- S: «112.2M устройств на 280.5M парка = 40% в год, то есть замена раз в 2.5 года» → сходится ли с якорем"
+    "en": "- GATE: result ∈ [93,500,000 … 841,500,000] devices\n- P1: **flow and stock are separated explicitly**; taking one year of sales (112.2M) as the base = P1 not credited\n- P2: 2 anchors as numbers; the replacement cycle is named before the calculation\n- P3: CORROBORATION, not triangulation — the population path (330M × 85%) shares an anchor with the main chain and cannot falsify it; state that it is a corroboration and name what an independent source would have to be. No credit is given for the ratio itself\n- P4: translation into a decision (what base the attach-on business is sold into)\n- S: «280.5M devices / 330M people ≈ 0.85 per person; 1/2.5 = 40% of the base replaced a year = 112.2M» → does it reconcile with the sales anchor",
+    "ru": "- GATE: результат ∈ [93,500,000 … 841,500,000] устройств\n- P1: **поток и запас разделены явно**; принять один год продаж (112.2M) за базу = P1 не зачтён\n- P2: 2 якоря числом; цикл замены назван до расчёта\n- P3: СВЕРКА, а не триангуляция — популяционный путь (330M × 85%) сидит на общем якоре с главной цепочкой и опровергнуть её не может; сказать это вслух и назвать, каким должен быть независимый источник. За само совпадение зачёт не даётся\n- P4: перевод в решение (в какую базу продаётся attach-on бизнес)\n- S: «280.5M устройств / 330M человек ≈ 0.85 на человека; 1/2.5 = 40% базы в год = 112.2M» → сходится ли с якорем продаж"
    },
    "reference": {
-    "en": "Allowed anchors (revealed on request, not upfront):\n  • US population: ~330M [A1]\n  • Share with a smartphone: ~85% [A1]\n  • Replacement cycle: ~2.5 years [A4]\n  • Average price: ~$620 [A5]\n\nReference chain:\nbase   = 330_000_000 * D('0.85')          # 280,500,000 devices in the fleet\nunits  = base / D('2.5')                  # 112,200,000 per year (exact integer)\nmarket = units * 620                      # 69,564,000,000\n\nReference answer: $69,564,000,000 · Corridor: [$17,391,000,000 … $278,256,000,000]",
-    "ru": "Разрешённые якоря (раскрываются по запросу, не вперёд):\n  • Население США: ~330M [A1]\n  • Доля со смартфоном: ~85% [A1]\n  • Цикл замены: ~2.5 года [A4]\n  • Средняя цена: ~$620 [A5]\n\nЭталонная цепочка:\nbase   = 330_000_000 * D('0.85')          # 280,500,000 устройств в парке\nunits  = base / D('2.5')                  # 112,200,000 в год (точное целое)\nmarket = units * 620                      # 69,564,000,000\n\nЭталон: $69,564,000,000 · Коридор: [$17,391,000,000 … $278,256,000,000]"
+    "en": "Allowed anchors (revealed on request, not upfront):\n  • Smartphone unit sales in the US: ~112.2M a year [A3]\n  • Replacement cycle: ~2.5 years [A4]\n  • *For the second path:* US population: ~330M [A1]\n  • *For the second path:* share with a smartphone: ~85% [A1]\n  • *For the last mile, not for the main chain:* average price: ~$620 [A5]\n\nReference chain:\nbase    = 112_200_000 * D('2.5')          # 280,500,000 devices in service\nsecond  = 330_000_000 * D('0.85')         # 280,500,000 owners — independent source\nratio   = base / second                    # 1.00x -> P3 passes (<=2x)\ncheck   = base / D('2.5')                  # 112,200,000 = 40% of the base replaced a year\nlastmile= 112_200_000 * 620                # 69,564,000,000 a year the base generates\n\nReference answer: 280,500,000 devices · Corridor: [93,500,000 … 841,500,000]",
+    "ru": "Разрешённые якоря (раскрываются по запросу, не вперёд):\n  • Продажи смартфонов в США: ~112.2M штук в год [A3]\n  • Цикл замены: ~2.5 года [A4]\n  • *Для второго пути:* население США: ~330M [A1]\n  • *Для второго пути:* доля со смартфоном: ~85% [A1]\n  • *Для last mile, не для главной цепочки:* средняя цена: ~$620 [A5]\n\nЭталонная цепочка:\nbase    = 112_200_000 * D('2.5')          # 280,500,000 устройств в эксплуатации\nsecond  = 330_000_000 * D('0.85')         # 280,500,000 владельцев — независимый источник\nratio   = base / second                    # 1.00x -> P3 проходит (<=2x)\ncheck   = base / D('2.5')                  # 112,200,000 = 40% базы меняется за год\nlastmile= 112_200_000 * 620                # 69,564,000,000 в год, которые база генерирует\n\nЭталон: 280,500,000 устройств · Коридор: [93,500,000 … 841,500,000]"
    },
    "provoked": {
-    "en": "equating the market to fleet × price ($280.5M × $620 = $174B) — that is, counting the **stock as flow**. Annual sales = fleet ÷ replacement cycle; at a 2.5-year cycle this is 40% of the fleet, not 100%.",
-    "ru": "приравнять рынок к парку × цену ($280.5M × $620 = $174B) — то есть посчитать **запас как поток**. Годовые продажи = парк ÷ цикл замены; при цикле 2.5 года это 40% парка, а не 100%."
+    "en": "taking one year of unit sales as the base in service (112.2M devices) — that is, counting the **flow as stock**. A device stays in service for the whole replacement cycle, so the base = annual sales × 2.5 = 280.5M; one year of sales is only 40% of it. The naive read understates the addressable base by 2.5×.",
+    "ru": "принять годовые продажи за базу в эксплуатации (112.2M устройств) — то есть посчитать **поток как запас**. Устройство живёт в эксплуатации весь цикл замены, поэтому база = годовые продажи × 2.5 = 280.5M; один год продаж — это лишь 40% от неё. Наивный счёт занижает адресуемую базу в 2.5×."
    },
    "steps": [
     {
-     "prompt": "Final market-size estimate, $",
+     "prompt": "Final estimate, units (devices in service)",
      "kind": "number",
-     "answer": "69564000000",
-     "tolerance": "corridor [$17,391,000,000 … $278,256,000,000]"
+     "answer": "280500000",
+     "tolerance": "corridor [93,500,000 … 841,500,000]"
     },
     {
      "prompt": "Independent second-path triangulation + one-sentence recommendation",
      "kind": "text",
-     "answer": "reference answer $69,564,000,000; second path within ~2×",
+     "answer": "reference answer 280,500,000 devices; second path (330M × 85%) within ~2×",
      "tolerance": "judged"
     }
    ],
@@ -1750,7 +1759,8 @@
    ],
    "family_h25": "F7",
    "family_src": "словарь:M15",
-   "family_conf": "спорная"
+   "family_conf": "высокая",
+   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом"
   },
   {
    "id": "MS-034",
@@ -1962,7 +1972,8 @@
    ],
    "family_h25": "F1",
    "family_src": "словарь:M10",
-   "family_conf": "спорная"
+   "family_conf": "спорная",
+   "family_note": "круг 42, триаж: не влезает в десять семей · признак — K2 то же — сопоставимость переноса"
   },
   {
    "id": "MS-038",
@@ -2015,7 +2026,8 @@
    ],
    "family_h25": "F5",
    "family_src": "словарь:M07",
-   "family_conf": "спорная"
+   "family_conf": "спорная",
+   "family_note": "круг 42, триаж: не влезает в десять семей · признак — K2 то же — внешний аналог как второй путь"
   },
   {
    "id": "MS-039",
@@ -2386,7 +2398,8 @@
    ],
    "family_h25": "F1",
    "family_src": "словарь:M13",
-   "family_conf": "спорная"
+   "family_conf": "высокая",
+   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом"
   },
   {
    "id": "MS-046",
