@@ -5265,25 +5265,43 @@ window.swAuthToken = async function () {
    localStorage остаётся кэшем: без сети игра работает как раньше.
    Слияние: `seen` объединяется, остальное берётся из более свежей записи —
    потерять пройденный набор хуже, чем показать чуть устаревший уровень. */
-window.swProfileLoad = async function () {
+/* ОДНА КОРОБКА НА ВСЁ КЛИЕНТСКОЕ СОСТОЯНИЕ.
+   08.08, замер на проде: прогресс не доезжал до аккаунта по цепочке из трёх
+   причин — не было прав на таблицу, не было строки профиля, и в таблице не
+   хватало колонок, которые пишет код (одна неизвестная колонка валит ВЕСЬ
+   update, поэтому падала вся запись, а не её часть).
+   Отсюда решение: не заводить колонку под каждое место, а держать одну
+   `client_state` и складывать в неё именованные разделы. Новая игра или новый
+   набор дриллов тогда едет без похода в базу.
+   Первая редакция этого моста писала в `seawolf_profile` — колонку, которой
+   в таблице нет; он возвращал false и молчал. Поймано круговым тестом на живом
+   проде, а не чтением кода. */
+async function csRead() {
+  if (!sb || !currentUser) return null;
+  const { data, error } = await sb.from('profiles').select('client_state').eq('id', currentUser.id).single();
+  if (error || !data) return null;
+  const v = data.client_state;
+  return (v && typeof v === 'object' && !Array.isArray(v)) ? v : {};
+}
+/* Раздел пишется В КОРОБКУ, а не поверх неё: иначе Sea Wolf затрёт дриллы,
+   а дриллы — Sea Wolf. Читаем текущее, подменяем один ключ, пишем целиком. */
+async function csWrite(section, value) {
   try {
-    if (!sb || !currentUser) return null;
-    const { data, error } = await sb.from('profiles').select('seawolf_profile').eq('id', currentUser.id).single();
-    if (error || !data) return null;
-    const v = data.seawolf_profile;
-    return (v && typeof v === 'object') ? v : null;
-  } catch (e) { return null; }
-};
-window.swProfileSave = async function (prof) {
-  try {
-    if (!sb || !currentUser || !prof || typeof prof !== 'object') return false;
-    /* Колонки может ещё не быть в таблице. Postgres валит весь update при
-       неизвестной колонке — поэтому отказ здесь ГЛОТАЕТСЯ молча и игра
-       продолжает жить на localStorage, а не падает. */
-    const r = await sb.from('profiles').update({ seawolf_profile: prof }).eq('id', currentUser.id);
-    if (r && r.error) { console.warn('seawolf profile push: column missing', r.error.message); return false; }
+    if (!sb || !currentUser || !section) return false;
+    const box = (await csRead()) || {};
+    box[section] = value;
+    const r = await sb.from('profiles').update({ client_state: box }).eq('id', currentUser.id);
+    if (r && r.error) { console.warn('client_state push failed', r.error.message); return false; }
     return true;
   } catch (e) { return false; }
+}
+window.swProfileLoad = async function () {
+  try { const box = await csRead(); const v = box && box.seawolf;
+    return (v && typeof v === 'object') ? v : null; } catch (e) { return null; }
+};
+window.swProfileSave = async function (prof) {
+  if (!prof || typeof prof !== 'object') return false;
+  return await csWrite('seawolf', prof);
 };
 window.swExit = function () {
   // Blanking the src stops the game's clock and its background animations. A
