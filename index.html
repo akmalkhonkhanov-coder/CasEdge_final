@@ -8,7 +8,7 @@
        'unsafe-inline'/'unsafe-eval' are required by the inline handlers and the
        3D layer; the real protection is connect-src/frame-src/object-src/base-uri,
        which block data exfiltration, framing (clickjacking) and base-tag hijacks. -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; connect-src 'self' https://owyjiizhtrqpzlzawrjn.supabase.co https://api.anthropic.com; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdn.paddle.com https://sandbox-cdn.paddle.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://*.paddle.com; connect-src 'self' https://owyjiizhtrqpzlzawrjn.supabase.co https://api.anthropic.com https://*.paddle.com https://*.paddle.io; frame-src 'self' https://*.paddle.com https://*.paddle.io; object-src 'none'; base-uri 'self'; form-action 'self';">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
