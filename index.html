@@ -2539,23 +2539,23 @@
       <div class="prog-stats-grid" id="progStatsGrid">
         <div class="prog-stat">
           <div class="prog-stat-num" id="progTotalCases">0</div>
-          <div class="prog-stat-lbl">Cases completed</div>
+          <div class="prog-stat-lbl" data-i18n="prog.stat.cases">Cases completed</div>
         </div>
         <div class="prog-stat">
           <div class="prog-stat-num" id="progTotalDrills">0</div>
-          <div class="prog-stat-lbl">Drills completed</div>
+          <div class="prog-stat-lbl" data-i18n="prog.stat.drills">Drills completed</div>
         </div>
         <div class="prog-stat">
           <div class="prog-stat-num" id="progTotalGames">0</div>
-          <div class="prog-stat-lbl">Games played</div>
+          <div class="prog-stat-lbl" data-i18n="prog.stat.games">Games played</div>
         </div>
         <div class="prog-stat">
           <div class="prog-stat-num" id="progStreak">0</div>
-          <div class="prog-stat-lbl">Day streak</div>
+          <div class="prog-stat-lbl" data-i18n="prog.stat.streak">Day streak</div>
         </div>
         <div class="prog-stat">
           <div class="prog-stat-num" id="progAvgScore">-</div>
-          <div class="prog-stat-lbl">Avg score</div>
+          <div class="prog-stat-lbl" data-i18n="prog.stat.avg">Avg score</div>
         </div>
       </div>
 
@@ -2900,7 +2900,7 @@
     <div class="help-hint" id="helpHintPanel" style="display:none;"></div>
     <div class="hints" id="chatHints"></div>
     <div class="input-row">
-      <textarea id="chat-ta" class="chat-ta" placeholder="Share your thinking…" rows="1" onkeydown="handleKeydown(event)" oninput="autoResize(this);answerMeter(this)"></textarea>
+      <textarea id="chat-ta" class="chat-ta" data-i18n-ph="chat.placeholder" placeholder="Изложи свою мысль…" rows="1" onkeydown="handleKeydown(event)" oninput="autoResize(this);answerMeter(this)"></textarea>
       <button class="send-btn" onclick="sendMessage()">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2L15 22 11 13 2 9l20-7z"></path></svg>
       </button>
@@ -2954,42 +2954,42 @@
         <div class="m-lbl">Structure</div>
         <div class="m-val" id="mv-structure">-</div>
         <div class="m-bar"><div class="m-fill" id="mb-structure" style="width:0%;background:var(--coral);"></div></div>
-        <div class="m-note">MECE &amp; hypothesis-first</div>
+        <div class="m-note" data-i18n="fb.note.structure">MECE &amp; hypothesis-first</div>
       </div>
       <div class="m-card">
-        <div class="m-lbl">Quantitative</div>
+        <div class="m-lbl" data-i18n="fb.dim.quant">Quantitative</div>
         <div class="m-val" id="mv-quant">-</div>
         <div class="m-bar"><div class="m-fill" id="mb-quant" style="width:0%;background:#a78bfa;"></div></div>
-        <div class="m-note">Math &amp; numbers tied to decision</div>
+        <div class="m-note" data-i18n="fb.note.quant">Math &amp; numbers tied to decision</div>
       </div>
       <div class="m-card">
-        <div class="m-lbl">Business Logic</div>
+        <div class="m-lbl" data-i18n="fb.dim.logic">Business Logic</div>
         <div class="m-val" id="mv-logic">-</div>
         <div class="m-bar"><div class="m-fill" id="mb-logic" style="width:0%;background:var(--accent-teal);"></div></div>
-        <div class="m-note">Insight &amp; root-cause depth</div>
+        <div class="m-note" data-i18n="fb.note.logic">Insight &amp; root-cause depth</div>
       </div>
       <div class="m-card">
-        <div class="m-lbl">Communication</div>
+        <div class="m-lbl" data-i18n="fb.dim.comm">Communication</div>
         <div class="m-val" id="mv-comm">-</div>
         <div class="m-bar"><div class="m-fill" id="mb-comm" style="width:0%;background:var(--accent-amber);"></div></div>
-        <div class="m-note">Minto, concision, confidence</div>
+        <div class="m-note" data-i18n="fb.note.comm">Minto, concision, confidence</div>
       </div>
       <div class="m-card">
-        <div class="m-lbl">Case Ownership</div>
+        <div class="m-lbl" data-i18n="fb.dim.ownership">Case Ownership</div>
         <div class="m-val" id="mv-ownership">-</div>
         <div class="m-bar"><div class="m-fill" id="mb-ownership" style="width:0%;background:#6ea8fe;"></div></div>
-        <div class="m-note">Drove the case &amp; sharp questions</div>
+        <div class="m-note" data-i18n="fb.note.ownership">Drove the case &amp; sharp questions</div>
       </div>
     </div>
 
     <div class="fb-block">
-      <div class="fb-title">Detailed Feedback</div>
-      <div class="fb-text" id="fb-text">Your session feedback will appear here.</div>
+      <div class="fb-title" data-i18n="fb.detailed">Detailed Feedback</div>
+      <div class="fb-text" id="fb-text" data-i18n="fb.placeholder">Your session feedback will appear here.</div>
     </div>
 
     <div class="fb-footer">
-      <button class="btn btn-outline" onclick="showScreen('setup')">Change case</button>
-      <button class="btn btn-primary" onclick="restartPractice()">Practice again</button>
+      <button class="btn btn-outline" onclick="showScreen('setup')" data-i18n="fb.changecase">Change case</button>
+      <button class="btn btn-primary" onclick="restartPractice()" data-i18n="fb.again">Practice again</button>
     </div>
   </div>
 </div>
@@ -3596,6 +3596,40 @@ function updateLangUI() {
 ──────────────────────────────────────────────────── */
 const I18N = {
   en: {
+    'chat.qa.clarify': "Clarify objective",
+    'chat.qa.clarify.txt': "I'd like to clarify the objective before structuring.",
+    'chat.qa.data': "Request data",
+    'chat.qa.data.txt': "Could you share the relevant data for this part?",
+    'chat.qa.moment': "Take a moment",
+    'chat.qa.moment.txt': "Let me take a moment to structure my approach.",
+    'chat.qa.rec': "Give recommendation",
+    'chat.qa.rec.txt': "My recommendation is",
+    'chat.qa.approach': "State approach",
+    'chat.qa.approach.txt': "Let me state my approach first.",
+    'chat.qa.math': "Walk through math",
+    'chat.qa.math.txt': "Let me walk through the calculation step by step.",
+    'fb.scoring': "Scoring your case…",
+    'chat.placeholder': "Share your thinking…",
+    'prog.overall': "Your overall: {avg}/10  ·  Target for {firm}: {target} on every dimension",
+    'prog.stat.cases': "Cases completed",
+    'prog.stat.drills': "Drills completed",
+    'prog.stat.games': "Games played",
+    'prog.stat.streak': "Day streak",
+    'prog.stat.avg': "Avg score",
+    'fb.note.structure': "MECE & hypothesis-first",
+    'fb.note.quant': "Math & numbers tied to decision",
+    'fb.note.logic': "Insight & root-cause depth",
+    'fb.note.comm': "Minto, concision, confidence",
+    'fb.note.ownership': "Drove the case & sharp questions",
+    'fb.dim.quant': "Quantitative",
+    'fb.dim.logic': "Business Logic",
+    'fb.dim.comm': "Communication",
+    'fb.dim.ownership': "Case Ownership",
+    'fb.detailed': "Detailed Feedback",
+    'fb.placeholder': "Your session feedback will appear here.",
+    'fb.changecase': "Change case",
+    'fb.again': "Practice again",
+    'ob.welcome.t': "Welcome to CasEdge",
     'l2.nav.features': 'Features', 'l2.nav.formats': 'Formats', 'l2.nav.pricing': 'Pricing', 'l2.nav.start': 'Start',
     'l2.hero.eyebrow': 'AI case interview trainer', 'l2.hero.title': 'One shot at McKinsey. Train like it already happened.',
     'l2.hero.sub': 'We built the real McKinsey Solve and BCG Chat formats right into the product \u2014 train for the exact same thing, for a lot less.',
@@ -3888,6 +3922,40 @@ const I18N = {
     'common.resumingIn': 'Resuming in {s}s',
   },
   ru: {
+    'chat.qa.clarify': "Уточнить цель",
+    'chat.qa.clarify.txt': "Хочу уточнить цель, прежде чем строить структуру.",
+    'chat.qa.data': "Запросить данные",
+    'chat.qa.data.txt': "Можешь дать данные по этой части?",
+    'chat.qa.moment': "Взять паузу",
+    'chat.qa.moment.txt': "Дай минуту структурировать подход.",
+    'chat.qa.rec': "Дать рекомендацию",
+    'chat.qa.rec.txt': "Моя рекомендация —",
+    'chat.qa.approach': "Назвать подход",
+    'chat.qa.approach.txt': "Сначала назову свой подход.",
+    'chat.qa.math': "Пройти счёт",
+    'chat.qa.math.txt': "Пройду расчёт по шагам.",
+    'fb.scoring': "Считаем твой кейс…",
+    'chat.placeholder': "Изложи свою мысль…",
+    'prog.overall': "Твой уровень: {avg}/10  ·  Цель для {firm}: {target} по каждому измерению",
+    'prog.stat.cases': "Кейсов пройдено",
+    'prog.stat.drills': "Дриллов пройдено",
+    'prog.stat.games': "Игр сыграно",
+    'prog.stat.streak': "Дней подряд",
+    'prog.stat.avg': "Средний балл",
+    'fb.note.structure': "MECE и гипотеза первой",
+    'fb.note.quant': "Счёт и привязка чисел к решению",
+    'fb.note.logic': "Инсайт и глубина причин",
+    'fb.note.comm': "Минто, краткость, уверенность",
+    'fb.note.ownership': "Вёл кейс и задавал острые вопросы",
+    'fb.dim.quant': "Счёт",
+    'fb.dim.logic': "Бизнес-логика",
+    'fb.dim.comm': "Коммуникация",
+    'fb.dim.ownership': "Владение кейсом",
+    'fb.detailed': "Подробный разбор",
+    'fb.placeholder': "Разбор сессии появится здесь.",
+    'fb.changecase': "Сменить кейс",
+    'fb.again': "Ещё раз",
+    'ob.welcome.t': "Добро пожаловать в CasEdge",
     'l2.nav.features': 'Возможности', 'l2.nav.formats': 'Форматы', 'l2.nav.pricing': 'Тарифы', 'l2.nav.start': 'Начать',
     'l2.hero.eyebrow': 'AI-тренажёр для кейс-интервью', 'l2.hero.title': 'Один шанс на McKinsey. Тренируйся так, будто он уже случился.',
     'l2.hero.sub': 'Мы полностью воплотили McKinsey Solve и BCG Chat у себя - готовься к тому же самому формату, только гораздо дешевле.',
@@ -4215,6 +4283,11 @@ function applyUiLang() {
     const key = el.getAttribute('data-i18n');
     const val = (I18N[lang] && I18N[lang][key]) || I18N.en[key];
     if (val != null) el.textContent = val;
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    const key = el.getAttribute('data-i18n-ph');
+    const val = (I18N[lang] && I18N[lang][key]) || I18N.en[key];
+    if (val != null) el.setAttribute('placeholder', val);
   });
   document.querySelectorAll('[data-i18n-html]').forEach(el => {
     const key = el.getAttribute('data-i18n-html');
@@ -7076,7 +7149,7 @@ function renderPath() {
   // headline + footer guidance - lead with the candidate's overall score.
   const targetFirm = state.firm || 'MBB';
   const avgScore = (p.scores && p.scores.length) ? (p.scores.reduce((a, b) => a + b, 0) / p.scores.length) : null;
-  if (subEl) subEl.textContent = `Your overall: ${avgScore !== null ? avgScore.toFixed(1) : '-'}/10  ·  Target for ${targetFirm}: ${PATH_TARGET.toFixed(1)} on every dimension`;
+  if (subEl) subEl.textContent = t('prog.overall', { avg: (avgScore !== null ? avgScore.toFixed(1) : '-'), firm: targetFirm, target: PATH_TARGET.toFixed(1) });
   if (footEl) {
     if (!gaps.length) {
       footEl.innerHTML = `<strong style="color:var(--accent-teal);">You're at offer level across the board.</strong> Keep your reps consistent to stay sharp.`;
@@ -8653,16 +8726,16 @@ function renderHints() {
   } else if (state.drillType) {
     // quantitative / structuring drills
     hints = [
-      ['State approach', 'Let me state my approach first.'],
-      ['Walk through math', 'Let me walk through the calculation step by step.']
+      [t('chat.qa.approach'), t('chat.qa.approach.txt')],
+      [t('chat.qa.math'), t('chat.qa.math.txt')]
     ];
   } else {
     // full case
     hints = [
-      ['Clarify objective', "I'd like to clarify the objective before structuring."],
-      ['Request data', 'Could you share the relevant data for this part?'],
-      ['Take a moment', 'Let me take a moment to structure my approach.'],
-      ['Give recommendation', 'My recommendation is']
+      [t('chat.qa.clarify'), t('chat.qa.clarify.txt')],
+      [t('chat.qa.data'), t('chat.qa.data.txt')],
+      [t('chat.qa.moment'), t('chat.qa.moment.txt')],
+      [t('chat.qa.rec'), t('chat.qa.rec.txt')]
     ];
   }
   box.innerHTML = hints.map(([label, text]) =>
@@ -8732,7 +8805,7 @@ function startFeedbackLoading() {
   const valEl = document.getElementById('ring-val');
   const arc = document.getElementById('ring-arc');
   if (arc) { arc.style.strokeDashoffset = 439.82 * 0.72; arc.classList.add('cas-ring-spin'); }
-  setText('score-title', 'Scoring your case…');
+  setText('score-title', t('fb.scoring'));
   setText('score-sub', 'The partner is writing your breakdown - about 10-15 seconds');
   // Та же нитка, что и в чате: экран разбора ждёт дольше всего, и молчащий
   // прогресс-круг здесь читается хуже всего.
@@ -9558,7 +9631,7 @@ document.addEventListener('keydown', e => {
   <div class="cx-ob">
     <div class="cx-ob-step active" data-step="0">
       <div class="cx-ob-ic"><svg viewBox="0 0 24 24"><path d="M9 3h6M12 3v5M5 21h14M7 21v-4a5 5 0 0 1 10 0v4"/></svg></div>
-      <div class="cx-ob-t">Welcome to CasEdge</div>
+      <div class="cx-ob-t" data-i18n="ob.welcome.t">Welcome to CasEdge</div>
       <div class="cx-ob-d">Your prep ground for MBB case interviews. Real cases, sharp feedback, and the exact assessment formats firms use - built to make practice harder than the real thing.</div>
     </div>
     <div class="cx-ob-step" data-step="1">
