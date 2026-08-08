@@ -603,13 +603,19 @@ function exhibitsBlock(caseObj, revealedSet) {
     // Exhibits with a `render` payload are drawn by the app as a visual card
     // (chart/table) the moment they are revealed — the model must not retype
     // the full data in prose.
-    const renderNote = ex.render
-      ? `\nThis exhibit is DISPLAYED TO THE CANDIDATE AS A VISUAL CHART/TABLE by the app when revealed. Do NOT retype its rows/numbers in your reply — introduce it in one short sentence (e.g. "Here's the data — what do you take away?") and let the visual speak. You may quote individual numbers later when discussing their analysis.`
-      : '';
+    /* 09.08.2026. Раньше эта заметка стояла только у экзибитов с `render`
+       И ТОЛЬКО в ветке скрытых. У остальных модель ПЕРЕПЕЧАТЫВАЛА тело —
+       и теряла строки: замер на #243 показал утраченную строку с числом и
+       сломанную ограду схемы. Теперь приложение показывает КАЖДЫЙ раскрытый
+       экзибит своей карточкой, поэтому запрет на перепечатку общий и стоит
+       во всех трёх ветках. */
+    const appNote = ex.render
+      ? `\nThis exhibit is DISPLAYED TO THE CANDIDATE AS A VISUAL CHART/TABLE by the app the moment it is revealed. Do NOT retype its rows/numbers — introduce it in one short sentence and let the visual speak. You may quote individual numbers later when discussing their analysis.`
+      : `\nThis exhibit is DISPLAYED TO THE CANDIDATE AS A DATA CARD by the app the moment it is revealed, with its layout preserved exactly. Do NOT retype, re-align, summarise or paraphrase its body — you would drop lines. Introduce it in one short sentence and let the card speak. You may quote individual numbers later when discussing their analysis.`;
     if (!gate) {
-      stableShown.push(`EXHIBIT id="${ex.id}" — "${ex.title}" (available to share):\n${ex.body_md || ''}`);
+      stableShown.push(`EXHIBIT id="${ex.id}" — "${ex.title}" (available to share):${appNote}\n${ex.body_md || ''}`);
     } else if (revealedSet.has(ex.id)) {
-      volatile.push(`EXHIBIT id="${ex.id}" — "${ex.title}" (revealed — already shown to the candidate${ex.render ? ' as a visual card' : ''}; refer to it, do not retype it):\n${ex.body_md || ''}`);
+      volatile.push(`EXHIBIT id="${ex.id}" — "${ex.title}" (revealed — already shown to the candidate as a card; refer to it, do not retype it):\n${ex.body_md || ''}`);
     } else {
       const triggers = Array.from(gate);
       volatile.push(
@@ -617,7 +623,7 @@ function exhibitsBlock(caseObj, revealedSet) {
         `Do NOT mention or describe this exhibit's contents unless the candidate explicitly asks about: ` +
         `${triggers.length ? triggers.map(t => `"${t}"`).join(', ') : 'the specific data it contains'}.\n` +
         `If (and only if) they ask, BEGIN your reply with the marker <reveal>${ex.id}</reveal> and then present it.\n` +
-        `Exception (no deadlock): if the CURRENT STEP cannot be answered without this exhibit and the candidate has already made an attempt without asking for it, you may introduce it yourself — still beginning with <reveal>${ex.id}</reveal>.${renderNote}\n` +
+        `Exception (no deadlock): if the CURRENT STEP cannot be answered without this exhibit and the candidate has already made an attempt without asking for it, you may introduce it yourself — still beginning with <reveal>${ex.id}</reveal>.${appNote}\n` +
         `Contents (keep hidden until asked):\n${ex.body_md || ''}`
       );
     }
@@ -1552,19 +1558,34 @@ export default async function handler(req, res) {
     // Only meta + render — never body_md or any interviewer material.
     const priorSet = new Set(priorRevealed);
     const allExhibits = Array.isArray(caseObj.exhibits) ? caseObj.exhibits : [];
+    /* 09.08.2026. Экзибит без `render` раньше не ехал вовсе — его должна была
+       ПЕРЕПЕЧАТАТЬ модель. Замер на проде, кейс #243: модель уронила целую
+       строку данных («штраф … $0.048M за сутки») и слово «первой», а ограду
+       блока сломала, из-за чего схема из столбиков вышла пропорциональным
+       шрифтом и читалась как зачёркнутый текст.
+       По библиотеке таких экзибитов 351 из 595 (59%), и 156 из них несут
+       схему в ограде — то есть ровно то, что перепечатать без потерь труднее
+       всего. Отдаём тело сами: это тот же текст, который модель собиралась
+       прочитать вслух, и едет он ТОЛЬКО для уже раскрытых экзибитов. */
+    const cardOf = (ex) => ex ? {
+      id: ex.id,
+      title: ex.title,
+      render: ex.render || null,
+      body_md: ex.render ? null : (ex.body_md || null)
+    } : null;
     const exhibitCards = parsed.revealedExhibits
       .filter(id => !priorSet.has(id))
       .map(id => {
         const ex = allExhibits.find(e => e && e.id === id);
-        return (ex && ex.render) ? { id: ex.id, title: ex.title, render: ex.render } : null;
+        return (ex && (ex.render || ex.body_md)) ? cardOf(ex) : null;
       })
       .filter(Boolean);
     // Opening turn: exhibits designed to be handed over at case start
     // (reveal:'auto' + render, e.g. "Блок 1 (сразу)") ship as cards immediately.
     if (isOpening) {
       for (const ex of allExhibits) {
-        if (ex && ex.render && ex.reveal === 'auto' && !exhibitCards.some(c => c.id === ex.id)) {
-          exhibitCards.push({ id: ex.id, title: ex.title, render: ex.render });
+        if (ex && (ex.render || ex.body_md) && ex.reveal === 'auto' && !exhibitCards.some(c => c.id === ex.id)) {
+          exhibitCards.push(cardOf(ex));
         }
       }
     }
