@@ -17,7 +17,7 @@
 // Load the library via require so Vercel's bundler inlines it at build time.
 // (Vercel transpiles this function to CommonJS, so ESM-only features like
 // `import.meta.url` / `import fs` are unavailable — require is the safe path.)
-const { verifyUserCached } = require('./_auth.js');
+const { verifyUserCached, rateLimitedScoped } = require('./_auth.js');
 const CASES_DATA = require('./_cases.json');
 
 const FALLBACK_ORIGIN = 'https://cas-edge-final.vercel.app';
@@ -898,13 +898,13 @@ Each block is one analysis the candidate can legitimately do next. Grade whichev
 
   const ex = exhibitsBlock(caseObj, revealedSet);
 
-  let flow;
+  let flow, flowRules = '';
   if (isOpening) {
     flow =
 `\n\n════ WHAT TO DO NOW (OPENING) ════
 Present the case prompt/scenario${enNative ? ' (see BRIEF — VERBATIM below)' : ' in your own words'} and hand over any exhibits marked "available to share" only if the opening calls for them. Then STOP and let the candidate drive — ask what they would like to look at first. Do NOT walk them through steps in order, do NOT evaluate, do NOT emit any <verdict> or <step> marker on this opening turn.` + (enNative ? OPENING_VERBATIM : '');
   } else {
-    flow =
+    flowRules =
 `\n\n════ WHAT TO DO NOW (INTERVIEWEE-LED) ════
 The candidate drives. Respond to what they actually ask or compute.
 
@@ -912,16 +912,16 @@ MARKERS (the VERY FIRST characters of your reply, before any visible text):
 - For EACH available step the candidate has just COMPLETED to its key this turn, emit <step>N</step> immediately followed by <verdict>pass</verdict>. Multiple allowed (e.g. <step>2</step><verdict>pass</verdict> then continue). Then do NOT march to a "next" step — briefly acknowledge and ask what they want to tackle next (their choice).
 - If they attempted an available step but did NOT meet its key, emit <verdict>retry</verdict> and respond EXACTLY as the HINT POLICY below allows for the current attempt — on attempt 1 that is one question and nothing else. Do NOT name the move. Do NOT emit <step> for it.
 - If they only asked for data / are still exploring / went down an empty path, emit NEITHER marker — answer in character and let them continue. A dead-end path is fine: let them see it's empty and come back; recovering is their skill to show, not yours to block.
-${allDone
-  ? 'ALL analyses are done. Require the final recommendation now: ask them to deliver it conclusion-first (Pyramid), with the key numbers, risks (≥1 internal + ≥1 external), and next steps. Grade it against the recommendation step key.'
-  : 'When the remaining work is only the final recommendation, ask for it conclusion-first.'}
 
 Rules for every reply:
 - Order is the candidate's choice — NEVER penalise doing cost before revenue, or any valid ordering. Only a real data dependency (a locked step) gates anything.
 - An alternative route to the SAME correct number is a PASS — grade the result and the logic, not whether it matches the written path.
 - NEVER write grading words ("pass", "retry", "зачёт") in visible text — markers are the only grading signal.
 - Reveal a GATED exhibit only when the candidate asks about its triggers, using <reveal>id</reveal> right after any step/verdict markers.
-- Zero filler. Concise, concrete, numeric. Never present a number not in the material above; never change a number you already gave.`;
+- Zero filler. Concise, concrete, numeric. Never present a number not in the case material; never change a number you already gave.`;
+    flow = allDone
+      ? '\n\nALL analyses are done. Require the final recommendation now: ask them to deliver it conclusion-first (Pyramid), with the key numbers, risks (\u22651 internal + \u22651 external), and next steps. Grade it against the recommendation step key.'
+      : '\n\nWhen the remaining work is only the final recommendation, ask for it conclusion-first.';
   }
 
   const languageRu =
@@ -931,13 +931,13 @@ Rules for every reply:
 `\n\n════ OUTPUT ════
 Conduct the case in natural consulting English. Internal material below (questions, keys, exhibit notes) may be in RUSSIAN — that is source, never quote it; rephrase in English. Keep every number, unit, percentage and proper name EXACTLY as written. Keep the hidden markers (<step>…</step>, <verdict>…</verdict>, <reveal>…</reveal>) exactly as written; never explain or display them.`;
 
-  const stable = header + ex.stableText + language;
+  const stable = header + openingRef + ex.stableText + language + flowRules;
   /* Лестница подсказок теперь и здесь. Тексты L1/L2 конкретного шага НЕ подаются:
      в этом режиме кандидат может стоять на любом из разблокированных шагов, и
      подать подсказку не того шага — значит слить чужой ключ. Подаётся правило
      уровня, ключи у модели и так есть. */
   const hints = isOpening ? '' : hintsBlock(null, attemptCount, hintAsked);
-  const volatile = doneText + openingRef + availText + lockedText + ex.volatileText + hints + (isOpening ? '' : focusBlock(focusKey)) + flow;
+  const volatile = doneText + availText + lockedText + ex.volatileText + hints + (isOpening ? '' : focusBlock(focusKey)) + flow;
   return { stable, volatile };
 }
 
@@ -1065,19 +1065,11 @@ async function fetchAnthropicWithRetry(url, options, timeoutMs, maxRetries) {
 }
 
 async function rateLimited(userId, sbUrl, sbKey, token) {
-  try {
-    const resp = await fetchWithTimeout(sbUrl + '/rest/v1/rpc/check_and_increment_rate_limit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', apikey: sbKey, Authorization: 'Bearer ' + token },
-      body: JSON.stringify({ p_user_id: userId, p_window_seconds: RATE_WINDOW_MS / 1000, p_limit: RATE_LIMIT })
-    }, AUTH_TIMEOUT_MS);
-    if (!resp.ok) { console.error('Rate-limit RPC returned', resp.status); return false; }
-    const withinLimit = await resp.json();
-    return withinLimit === false;
-  } catch (e) {
-    console.error('Rate-limit RPC failed:', e);
-    return false; // fail open, same as claude.js
-  }
+  /* Ключ счётчика разведён по ручкам — см. api/_auth.js. До этого все
+     восемь ручек делили одну строку, и порог 6 у транскрипции вместе
+     с окном 300 секунд действовал на всех. */
+  return rateLimitedScoped({ userId, scope: 'case', limit: RATE_LIMIT,
+    windowSeconds: RATE_WINDOW_MS / 1000, sbUrl, sbKey, token, timeoutMs: AUTH_TIMEOUT_MS });
 }
 
 function hasAssistantTurn(messages) {

@@ -9,7 +9,7 @@
 //   ALLOWED_ORIGIN      - e.g. https://cas-edge-final.vercel.app
 //                         (optional; falls back to the value below)
 
-const { verifyUserCached } = require('./_auth.js');
+const { verifyUserCached, rateLimitedScoped } = require('./_auth.js');
 const FALLBACK_ORIGIN = 'https://cas-edge-final.vercel.app';
 const ALLOWED_MODELS = ['claude-sonnet-5', 'claude-sonnet-4-5'];
 const MAX_TOKENS_CAP = 8000;       // hard ceiling; Russian feedback JSON is ~2x token-heavier than English
@@ -39,32 +39,11 @@ const AUTH_TIMEOUT_MS = 8 * 1000;      // abort Supabase auth check if it hangs
 // (check_and_increment_rate_limit), so it's shared across every
 // serverless instance instead of resetting on cold start.
 async function rateLimited(userId, sbUrl, sbKey, token) {
-  try {
-    const resp = await fetchWithTimeout(sbUrl + '/rest/v1/rpc/check_and_increment_rate_limit', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        apikey: sbKey,
-        Authorization: 'Bearer ' + token
-      },
-      body: JSON.stringify({
-        p_user_id: userId,
-        p_window_seconds: RATE_WINDOW_MS / 1000,
-        p_limit: RATE_LIMIT
-      })
-    }, AUTH_TIMEOUT_MS);
-    if (!resp.ok) {
-      // If the RPC itself is unreachable/misconfigured, fail OPEN rather than
-      // blocking every request - log it so it gets noticed and fixed.
-      console.error('Rate-limit RPC returned', resp.status);
-      return false;
-    }
-    const withinLimit = await resp.json(); // true = under limit, false = over
-    return withinLimit === false;
-  } catch (e) {
-    console.error('Rate-limit RPC failed:', e);
-    return false; // fail open, same reasoning as above
-  }
+  /* Ключ счётчика разведён по ручкам — см. api/_auth.js. До этого все
+     восемь ручек делили одну строку, и порог 6 у транскрипции вместе
+     с окном 300 секунд действовал на всех. */
+  return rateLimitedScoped({ userId, scope: 'claude', limit: RATE_LIMIT,
+    windowSeconds: RATE_WINDOW_MS / 1000, sbUrl, sbKey, token, timeoutMs: AUTH_TIMEOUT_MS });
 }
 
 // fetch() with an abort timeout so a hung upstream cannot keep the function

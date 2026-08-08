@@ -118,7 +118,7 @@ function pickGame(level, seen) {
   return { game: pool[Math.floor(Math.random() * pool.length)], wrapped: !unseen.length, poolSize: pool.length };
 }
 
-const { verifyUserCached, subjectOf } = require('./_auth.js');
+const { verifyUserCached, subjectOf, rateLimitedScoped } = require('./_auth.js');
 
 /* ── auth + rate limit (same contract as the other endpoints) ─────────────── */
 async function fetchWithTimeout(url, options, ms) {
@@ -132,15 +132,11 @@ async function fetchWithTimeout(url, options, ms) {
 // file invented a different RPC name and a SUPABASE_SERVICE_ROLE_KEY that does
 // not exist in this project — every request would have returned 429.
 async function rateLimited(userId, sbUrl, sbKey, token) {
-  try {
-    const r = await fetchWithTimeout(`${sbUrl}/rest/v1/rpc/check_and_increment_rate_limit`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', apikey: sbKey, Authorization: 'Bearer ' + token },
-      body: JSON.stringify({ p_user_id: userId, p_window_seconds: RATE_WINDOW_MS / 1000, p_limit: RATE_LIMIT })
-    }, AUTH_TIMEOUT_MS);
-    if (!r.ok) { console.error('Sea Wolf rate-limit RPC returned', r.status); return false; }
-    return (await r.json()) === false;
-  } catch (e) { console.error('Sea Wolf rate-limit RPC failed:', e); return false; }
+  /* Ключ счётчика разведён по ручкам — см. api/_auth.js. До этого все
+     восемь ручек делили одну строку, и порог 6 у транскрипции вместе
+     с окном 300 секунд действовал на всех. */
+  return rateLimitedScoped({ userId, scope: 'seawolf', limit: RATE_LIMIT,
+    windowSeconds: RATE_WINDOW_MS / 1000, sbUrl, sbKey, token, timeoutMs: AUTH_TIMEOUT_MS });
 }
 
 /* ── handler ──────────────────────────────────────────────────────────────── */

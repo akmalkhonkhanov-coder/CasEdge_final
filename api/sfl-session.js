@@ -81,7 +81,7 @@ function pickScenario(seen) {
   };
 }
 
-const { verifyUserCached, subjectOf } = require('./_auth.js');
+const { verifyUserCached, subjectOf, rateLimitedScoped } = require('./_auth.js');
 
 /* ── auth + rate limit (тот же контракт, что у остальных эндпоинтов) ──────── */
 async function fetchWithTimeout(url, options, ms) {
@@ -91,15 +91,11 @@ async function fetchWithTimeout(url, options, ms) {
 // verifyUser жил здесь. Теперь один на всё приложение — ./_auth.js,
 // с кешем на инстанс. Две копии одной проверки — это C24.
 async function rateLimited(userId, sbUrl, sbKey, token) {
-  try {
-    const r = await fetchWithTimeout(`${sbUrl}/rest/v1/rpc/check_and_increment_rate_limit`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', apikey: sbKey, Authorization: 'Bearer ' + token },
-      body: JSON.stringify({ p_user_id: userId, p_window_seconds: RATE_WINDOW_MS / 1000, p_limit: RATE_LIMIT })
-    }, AUTH_TIMEOUT_MS);
-    if (!r.ok) { console.error('SFL rate-limit RPC returned', r.status); return false; }
-    return (await r.json()) === false;
-  } catch (e) { console.error('SFL rate-limit RPC failed:', e); return false; }
+  /* Ключ счётчика разведён по ручкам — см. api/_auth.js. До этого все
+     восемь ручек делили одну строку, и порог 6 у транскрипции вместе
+     с окном 300 секунд действовал на всех. */
+  return rateLimitedScoped({ userId, scope: 'sfl', limit: RATE_LIMIT,
+    windowSeconds: RATE_WINDOW_MS / 1000, sbUrl, sbKey, token, timeoutMs: AUTH_TIMEOUT_MS });
 }
 
 /* ── state <-> token ──────────────────────────────────────────────────────── */

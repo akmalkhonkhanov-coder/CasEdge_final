@@ -16,7 +16,7 @@
 //   game  → sanitized render slice {objective,study_md,exhibits(auto),analysis,report,cases,fields}
 //   grade → {gameId, fieldId, value} graded server-side → {status, feedback, correctAnswer?, naiveReason?}
 
-const { verifyUserCached } = require('./_auth.js');
+const { verifyUserCached, rateLimitedScoped } = require('./_auth.js');
 const GAMES_DATA = require('./redrock-games.json');
 
 const FALLBACK_ORIGIN = 'https://cas-edge-final.vercel.app';
@@ -267,15 +267,11 @@ async function fetchAnthropicWithRetry(url, options, timeoutMs, maxRetries, dead
   throw new Error('upstream unavailable');
 }
 async function rateLimited(userId, sbUrl, sbKey, token) {
-  try {
-    const resp = await fetchWithTimeout(sbUrl + '/rest/v1/rpc/check_and_increment_rate_limit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', apikey: sbKey, Authorization: 'Bearer ' + token },
-      body: JSON.stringify({ p_user_id: userId, p_window_seconds: RATE_WINDOW_MS / 1000, p_limit: RATE_LIMIT })
-    }, AUTH_TIMEOUT_MS);
-    if (!resp.ok) { console.error('Redrock rate-limit RPC returned', resp.status); return false; }
-    return (await resp.json()) === false;
-  } catch (e) { console.error('Redrock rate-limit RPC failed:', e); return false; }
+  /* Ключ счётчика разведён по ручкам — см. api/_auth.js. До этого все
+     восемь ручек делили одну строку, и порог 6 у транскрипции вместе
+     с окном 300 секунд действовал на всех. */
+  return rateLimitedScoped({ userId, scope: 'redrock', limit: RATE_LIMIT,
+    windowSeconds: RATE_WINDOW_MS / 1000, sbUrl, sbKey, token, timeoutMs: AUTH_TIMEOUT_MS });
 }
 
 // One bounded model call inside a hard deadline (case-session.js discipline).
