@@ -4020,8 +4020,8 @@
     {
      "step": 6,
      "label": "ТВИСТ: контракт вместо стройки  (5 min)",
-     "candidate_md": "Существующий оператор соседнего причала предлагает: **законтрактовать у него мощность на пиковые три месяца** за $4.2M/год. Capex ноль. Считать?",
-     "interviewer_md": "```python\n# Наша мощность в непиковые 9 месяцев достаточна (спрос ниже)\n# Контракт покрывает пик -> берём весь спрос 102,300 TEU\nПолный CM при 102,300 TEU = 48,000×135 + 31,500×117 + 22,800×97 = $12,377,100\nМинус аренда пиковой мощности:            −$4,200,000\nГодовой поток = $8,177,100  (capex = 0)\n# af(12 лет, 10%) без округления = (1 − 1.10⁻¹²)/0.10 = 6.8136918229 (показанное 6.8137 — округление для вывода)\nNPV = 8,177,100 × (1 − 1.10⁻¹²)/0.10 = +$55,716,239\n```\n**Ответ: контракт даёт NPV +$55.7M против −$10.3M у стройки.** Радикально лучше.\n**Но вот развилка:** мы становимся зависимы от **конкурента** в самый прибыльный месяц года. Он знает, что без него мы не переварим пик — и на втором году переговоров цена аренды будет не $4.2M. Мы покупаем отличную экономику ценой стратегического заложничества.\n*Количественный победитель ≠ качественный. Это и есть настоящий вопрос кейса.*",
+     "candidate_md": "Существующий оператор соседнего причала предлагает: **законтрактовать у него мощность на весь срок, включая пиковые месяцы** — за $4.2M/год. Свой причал тогда не строится: capex ноль. Считать?",
+     "interviewer_md": "```python\n# Контракт даёт мощность на весь год, включая пик -> берём весь спрос 102,300 TEU\n# Своего причала нет и не будет: capex не тратится вовсе\nПолный CM при 102,300 TEU = 48,000×135 + 31,500×117 + 22,800×97 = $12,377,100\nМинус аренда пиковой мощности:            −$4,200,000\nГодовой поток = $8,177,100  (capex = 0)\n# af(12 лет, 10%) без округления = (1 − 1.10⁻¹²)/0.10 = 6.8136918229 (показанное 6.8137 — округление для вывода)\nNPV = 8,177,100 × (1 − 1.10⁻¹²)/0.10 = +$55,716,239\n```\n**Ответ: контракт даёт NPV +$55.7M против −$10.3M у стройки.** Радикально лучше.\n**Но вот развилка:** мы становимся зависимы от **конкурента** в самый прибыльный месяц года. Он знает, что без него мы не переварим пик — и на втором году переговоров цена аренды будет не $4.2M. Мы покупаем отличную экономику ценой стратегического заложничества.\n*Количественный победитель ≠ качественный. Это и есть настоящий вопрос кейса.*",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
@@ -4084,8 +4084,8 @@
    "trap_subtype": "flip",
    "lang": "ru",
    "lang_note": "тег проставлен по факту тела (поля не было)",
-   "difficulty_test": "Номинальная мощность 92,000 TEU посчитана для ровной загрузки, а в августе–октябре идёт 1.62× среднемесячного: причал обязан переварить пик, и доступно 56,790 TEU. Ограничение проявляется только в пике.",
-   "difficulty_family": "F4",
+   "difficulty_test": "Наив применяет счёт к годовому резервуару мощности: 92,000 TEU действительны только «при равномерной загрузке», а причал обязан переварить август с 1.62 месячной нормы — доступно 56,790 TEU. Ограничение связывает и в наивной рамке (наив сам режет Agri до 12,500); меняется база, а не наличие ограничения.",
+   "difficulty_family": "F1",
    "status": "live"
   },
   {
@@ -14993,7 +14993,7 @@
      "step": 7,
      "label": "Sensitivity (one function).",
      "candidate_md": "At what peak multiplier does the hub-closure synergy still hold? Give me the breakeven and where the actual figure sits against it.",
-     "interviewer_md": "```python\ndef synergy_value(peak_mult):\n    pk=avg*peak_mult\n    # closing 1 hub free iff peak fits in 4 hubs (1200k):\n    return (hub_fixed/WACC) if pk<=cap_after_1_closure else D('0')\n# breakeven peak multiplier = 1200/1100:\nbreakeven=q(D('1200')/D('1100'),4)                # 1.0909\n```\nBreakeven peak multiplier = **1.09×**. Below that, one hub is genuinely redundant and the $150M synergy is real; at the actual **1.30×** it is fully stranded ($0). At 1.20× already stranded. The entire deal-synergy hinges on the peak multiplier.",
+     "interviewer_md": "```python\ndef synergy_value(peak_mult):\n    pk=avg*peak_mult\n    shortfall=max(D('0'), pk-cap_after_1_closure)   # k/day the 4 hubs cannot take\n    net=hub_fixed-surge_per_k*shortfall             # 15 saved, 0.20 per k/day paid\n    return (net/WACC) if net>D('0') else D('0')\n# closure pays while 15 - 0.20*(peak-1200) > 0  ->  peak <= 1275  ->  mult <= 1275/1100:\nbreakeven=q(D('1275')/D('1100'),4)                # 1.1591\n```\nBreakeven peak multiplier = **1.16×**, not 1.09×: below 1.09× the closure is free and the synergy is the full $150M, but between 1.09× and 1.16× it is only *partly* eaten — at 1.10× the shortfall is 10k/day, surge costs $2M against $15M saved, and the synergy is still worth $130M. It goes to zero at 1.16×. At 1.20× the shortfall of 120k costs $24M against $15M saved — stranded. At the actual **1.30×** the shortfall is 230k and surge costs $46M against $15M — stranded with room to spare. The entire deal-synergy hinges on the peak multiplier.",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
@@ -15013,7 +15013,7 @@
      "step": 9,
      "label": "Recommendation (Pyramid).",
      "candidate_md": "You're in front of Sortwell's deal committee. What's your recommendation?",
-     "interviewer_md": "> - **hint_L0:** ничего. Движок молчит и ждёт, пока кандидат сам выйдет на вопрос.\n> - **hint_L1** (если застрял, после явного «не знаю, что дальше»): «Объём равномерен весь год?»\n> - **hint_L2** (крайний случай, если L1 не помог): reveal seasonality: Q4 peak 1.30x avg = 1430k.\n> - **Conditional exhibit — Seasonality:** `reveal_on_request`. Не показывать автоматически — только когда кандидат сам запросит. Триггеры-запросы: \"seasonality\" · \"peak volume\" · \"Q4 holiday surge\" · \"volume by season\" · \"average vs peak\".\n> *Инсайт = добываемый, не преподнесённый. В interviewee-led режиме движок держит это закрытым; в interviewer-led (McKinsey-style) может подать L1 проактивно.*\n\n---\n\n**Conditional exhibits:** {'title': 'Seasonality', 'triggers': ['seasonality', 'peak volume', 'Q4 holiday surge', 'volume by season', 'average vs peak']}\n\n**Partner answer (Pyramid):**\n\n*\"Sortwell should NOT count the hub-closure synergy — it is worth $0, not $150M, because Q4 peak volume (1,430k) needs the full network and any closure strands capacity.\"* Facts: average 1,100k fits 4 hubs but peak 1,430k exceeds 4-hub capacity 1,200k; surge to cover the 230k shortfall costs $46M/yr vs $15M saved; synergy is real only below a 1.09× peak, and actual is 1.30×. Risks: (internal) the deal model likely bakes in this phantom synergy — revalue before closing; (external/regulatory) peak seasonality could intensify, deepening the stranding. Next steps: strip the hub synergy from the valuation and renegotiate price; pursue non-capacity (back-office) synergies instead.\n\n> **🎬 Interviewer-only disclosure (для движка, не показывать кандидату).**\n> Ключевой инсайт кейса кандидат должен **добыть сам**, а не получить в подарок.\n> - **Что кандидат должен спросить сам (L0 — тишина по умо",
+     "interviewer_md": "> - **hint_L0:** ничего. Движок молчит и ждёт, пока кандидат сам выйдет на вопрос.\n> - **hint_L1** (если застрял, после явного «не знаю, что дальше»): «Объём равномерен весь год?»\n> - **hint_L2** (крайний случай, если L1 не помог): reveal seasonality: Q4 peak 1.30x avg = 1430k.\n> - **Conditional exhibit — Seasonality:** `reveal_on_request`. Не показывать автоматически — только когда кандидат сам запросит. Триггеры-запросы: \"seasonality\" · \"peak volume\" · \"Q4 holiday surge\" · \"volume by season\" · \"average vs peak\".\n> *Инсайт = добываемый, не преподнесённый. В interviewee-led режиме движок держит это закрытым; в interviewer-led (McKinsey-style) может подать L1 проактивно.*\n\n---\n\n**Conditional exhibits:** {'title': 'Seasonality', 'triggers': ['seasonality', 'peak volume', 'Q4 holiday surge', 'volume by season', 'average vs peak']}\n\n**Partner answer (Pyramid):**\n\n*\"Sortwell should NOT count the hub-closure synergy — it is worth $0, not $150M, because Q4 peak volume (1,430k) needs the full network and any closure strands capacity.\"* Facts: average 1,100k fits 4 hubs but peak 1,430k exceeds 4-hub capacity 1,200k; surge to cover the 230k shortfall costs $46M/yr vs $15M saved; synergy survives only below a 1.16× peak and is whole only below 1.09×, and actual is 1.30×. Risks: (internal) the deal model likely bakes in this phantom synergy — revalue before closing; (external/regulatory) peak seasonality could intensify, deepening the stranding. Next steps: strip the hub synergy from the valuation and renegotiate price; pursue non-capacity (back-office) synergies instead.\n\n> **🎬 Interviewer-only disclosure (для движка, не показывать кандидату).**\n> Ключевой инсайт кейса кандидат должен **добыть сам**, а не получить в подарок.\n> - **Что кандидат должен спросить сам (L0 — тишина по умо",
      "hints": {
       "L1": "",
       "L2": ""
@@ -52388,6 +52388,6 @@
  },
  "source_scope": "graph skeleton only; prose re-authored in EN per languages{}",
  "family_ratchet_armed": false,
- "package_sha256": "04f21b7b46b708da5b8bd5ba3e257b7b68a7e4768942b52001c4e8fedce8569d",
+ "package_sha256": "44caaa6317277d0408bef96285b9303410905c5257b7c3ad2838ccb9ff93a70a",
  "package_sha256_method": "sha256(payload minus package_sha256/method, sort_keys, ensure_ascii=False, separators=(,:))"
 }
