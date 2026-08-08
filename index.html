@@ -8383,9 +8383,18 @@ async function sendMessage() {
         // candidate chooses the path). The server signals caseComplete when the
         // terminal/recommendation step is done - some steps may be skipped, so
         // completion is NOT "all steps done", it's "the terminal step done".
+        /* СЧЁТ ПРОМАХОВ И В ЭТОМ РЕЖИМЕ ТОЖЕ. Раньше `attemptCount` рос только
+           на линейном пути, и сервер в interviewee-led всегда видел «первая
+           попытка» — то есть лестница подсказок не могла подняться ни на одну
+           ступень, сколько бы раз кандидат ни ошибся. Замер 07.08 показал
+           обратный перекос: движок отдавал весь механизм сразу. Теперь ступень
+           растёт с промахом и обнуляется, как только шаг закрыт. */
+        const doneBefore = state.doneSteps.length;
         if (Array.isArray(data.completedSteps)) {
           for (const s of data.completedSteps) if (!state.doneSteps.includes(s)) state.doneSteps.push(s);
         }
+        if (state.doneSteps.length > doneBefore) state.attemptCount = 0;
+        else if (data.verdict === 'retry') state.attemptCount++;
         if (data.caseComplete) {
           setProgress(100);
           if (state.casStreamed) { state.casStreamed = false; setTyping(false); }
