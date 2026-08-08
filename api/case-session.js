@@ -74,7 +74,7 @@ const CASE_PRICE_CAP_USD = 0.20;
    Куплено ошибкой смены 06.08: «залито или нет» решалось поиском по логам,
    поиск вернул пусто из-за отставания индексации, и вывод был неверным.
    Сравнение метки с диском от индексации логов не зависит. */
-const BUILD = '7b3ba21a5ac2';
+const BUILD = 'a6d9745ea92b';
 const PRICE_IN_PER_MTOK = 2.0;
 const PRICE_OUT_PER_MTOK = 10.0;
 const CACHE_WRITE_MULT = 1.25;
@@ -1458,6 +1458,21 @@ export default async function handler(req, res) {
           const rr = await post(rb, 20000, 0);
           if (rr.ok) {
             const rj = await rr.json();
+            /* Перепись — ВТОРОЙ оплаченный вызов. Без этой строки лог показывал бы
+               цену только первой попытки, то есть занижал бы ровно те ходы, где
+               движок ошибся и его просили заново. Замер 08.08: перепись сработала
+               на трёх ходах из трёх, и все три были посчитаны наполовину. */
+            if (rj && rj.usage) {
+              const ru = rj.usage;
+              const rUsd = ((ru.input_tokens || 0) * PRICE_IN_PER_MTOK
+                + (ru.cache_creation_input_tokens || 0) * PRICE_IN_PER_MTOK * CACHE_WRITE_MULT
+                + (ru.cache_read_input_tokens || 0) * PRICE_IN_PER_MTOK * CACHE_READ_MULT
+                + (ru.output_tokens || 0) * PRICE_OUT_PER_MTOK) / 1e6;
+              console.log('case-session hint rewrite cost', JSON.stringify({
+                build: BUILD, case: caseObj.id, usd: +rUsd.toFixed(5),
+                in: ru.input_tokens, out: ru.output_tokens,
+                cache_read: ru.cache_read_input_tokens, cache_write: ru.cache_creation_input_tokens }));
+            }
             const txt = (rj.content || []).filter(b2 => b2 && b2.type === 'text')
               .map(b2 => b2.text).join('\n').trim();
             if (txt) {
