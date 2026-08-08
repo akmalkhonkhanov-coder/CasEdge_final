@@ -26,7 +26,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; connect-src 'self' https://owyjiizhtrqpzlzawrjn.supabase.co https://api.anthropic.com; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdn.paddle.com https://sandbox-cdn.paddle.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://*.paddle.com; connect-src 'self' https://owyjiizhtrqpzlzawrjn.supabase.co https://api.anthropic.com https://*.paddle.com https://*.paddle.io; frame-src 'self' https://*.paddle.com https://*.paddle.io; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
         },
         {
           "key": "X-Frame-Options",
@@ -46,7 +46,7 @@
         },
         {
           "key": "Permissions-Policy",
-          "value": "geolocation=(), microphone=(self), camera=(), payment=()"
+          "value": "geolocation=(), microphone=(self), camera=(), payment=(self \"https://cdn.paddle.com\" \"https://sandbox-cdn.paddle.com\")"
         }
       ]
     }
