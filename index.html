@@ -3596,6 +3596,9 @@ function updateLangUI() {
 ──────────────────────────────────────────────────── */
 const I18N = {
   en: {
+    "fb.dim.structure": "Structure",
+    "prog.footer.ok": "<strong style=\"color:var(--accent-teal);\">You're at offer level across the board.</strong> Keep your reps consistent to stay sharp.",
+    "prog.footer.gaps": "Biggest gaps to close: {top}. Focus your next drills here.",
     "auth.pw.title": "Set a new password",
     "auth.pw.new": "New password",
     "auth.pw.confirm": "Confirm new password",
@@ -3686,7 +3689,7 @@ const I18N = {
     'prog.stat.drills': "Drills completed",
     'prog.stat.games': "Games played",
     'prog.stat.streak': "Day streak",
-    'prog.stat.avg': "Avg score",
+    'prog.stat.avg': "Avg score, all time",
     'fb.note.structure': "MECE & hypothesis-first",
     'fb.note.quant': "Math & numbers tied to decision",
     'fb.note.logic': "Insight & root-cause depth",
@@ -3993,6 +3996,9 @@ const I18N = {
     'common.resumingIn': 'Resuming in {s}s',
   },
   ru: {
+    "fb.dim.structure": "Структура",
+    "prog.footer.ok": "<strong style=\"color:var(--accent-teal);\">Ты на уровне оффера по всем измерениям.</strong> Держи регулярность, чтобы не терять форму.",
+    "prog.footer.gaps": "Ближайшие разрывы: {top}. Следующие дриллы — сюда.",
     "auth.pw.title": "Задай новый пароль",
     "auth.pw.new": "Новый пароль",
     "auth.pw.confirm": "Подтверди новый пароль",
@@ -4083,7 +4089,7 @@ const I18N = {
     'prog.stat.drills': "Дриллов пройдено",
     'prog.stat.games': "Игр сыграно",
     'prog.stat.streak': "Дней подряд",
-    'prog.stat.avg': "Средний балл",
+    'prog.stat.avg': "Средний балл за всё время",
     'fb.note.structure': "MECE и гипотеза первой",
     'fb.note.quant': "Счёт и привязка чисел к решению",
     'fb.note.logic': "Инсайт и глубина причин",
@@ -4440,6 +4446,12 @@ function applyUiLang() {
     el.textContent = lang.toUpperCase();
   });
   document.documentElement.setAttribute('lang', lang);
+  /* Экраны, собранные из JS, словарь сам не перерисует: их текст уже вставлен
+     в DOM без меток. Перерисовываем те, что видны сейчас. */
+  try { if (document.getElementById('screen-progress')?.classList.contains('active')) {
+    if (typeof renderProgress === 'function') renderProgress();
+    if (typeof renderPath === 'function') renderPath();
+  } } catch (e) {}
   if (typeof window.setupRepel === 'function') {
     try { window.setupRepel(); } catch (e) {}
   }
@@ -7270,12 +7282,16 @@ function computeStreak(days) {
 const ALL_DRILL_TYPES = ['Market Sizing','Structuring','Case Math','Chart Interpretation','Brainstorm','Synthesis'];   // Behavioral / Fit pulled 2026-07-25 - future paid module (resume + story calibration), not a case skill
 
 // Personal path to offer - built ONLY on the user's own dimension history.
+/* 09.08.2026, замер на проде. Весь блок «путь к офферу» оставался английским
+   при русском интерфейсе: названия измерений лежали здесь строками, подпись
+   собиралась английской строкой в renderPath, а сам блок не перерисовывался
+   при смене языка. Переключатель менял всё вокруг и не менял его. */
 const PATH_DIMS = [
-  { key: 'structure', label: 'Structure',      color: 'var(--coral)' },
-  { key: 'quant',     label: 'Quantitative',   color: '#a78bfa' },
-  { key: 'logic',     label: 'Business Logic', color: 'var(--accent-teal)' },
-  { key: 'comm',      label: 'Communication',  color: 'var(--accent-amber)' },
-  { key: 'ownership', label: 'Case Ownership', color: '#6ea8fe' },
+  { key: 'structure', i18n: 'fb.dim.structure', color: 'var(--coral)' },
+  { key: 'quant',     i18n: 'fb.dim.quant',     color: '#a78bfa' },
+  { key: 'logic',     i18n: 'fb.dim.logic',     color: 'var(--accent-teal)' },
+  { key: 'comm',      i18n: 'fb.dim.comm',      color: 'var(--accent-amber)' },
+  { key: 'ownership', i18n: 'fb.dim.ownership', color: '#6ea8fe' },
 ];
 const PATH_TARGET = 8.0; // MBB hire bar (1-10), aligned to Wharton/Darden calibration
 
@@ -7303,7 +7319,7 @@ function renderPath() {
   listEl.innerHTML = PATH_DIMS.map(d => {
     const avg = dimAverage(p.dims[d.key]);
     if (avg === null) {
-      return `<div class="prog-path-row"><div class="prog-path-name">${d.label}</div>`
+      return `<div class="prog-path-row"><div class="prog-path-name">${t(d.i18n)}</div>`
         + `<div class="prog-path-track"></div>`
         + `<div class="prog-path-gap">-</div></div>`;
     }
@@ -7314,13 +7330,13 @@ function renderPath() {
     // «цель взята». Вся полоса 7.75-8.00 отмечалась как достигнутая.
     const met = rawGap <= 0;
     const gap = Math.max(0.1, Math.round(rawGap * 2) / 2); // показ: не даём +0.0
-    if (!met) gaps.push({ label: d.label, gap });
+    if (!met) gaps.push({ label: t(d.i18n), gap });
     // Show the actual current score prominently, with the gap to target as a small note.
     const gapTxt = met
       ? `${avg.toFixed(1)}<span style="opacity:.55;font-weight:400;"> ✓</span>`
       : `${avg.toFixed(1)}<span style="opacity:.55;font-weight:400;"> (+${gap.toFixed(1)})</span>`;
     return `<div class="prog-path-row">`
-      + `<div class="prog-path-name">${d.label}</div>`
+      + `<div class="prog-path-name">${t(d.i18n)}</div>`
       + `<div class="prog-path-track"><div class="prog-path-fill" style="width:${pct}%;background:${d.color};"></div></div>`
       + `<div class="prog-path-gap ${met ? 'met' : 'need'}">${gapTxt}</div></div>`;
   }).join('');
@@ -7339,11 +7355,11 @@ function renderPath() {
   if (subEl) subEl.textContent = t('prog.overall', { avg: (avgScore !== null ? avgScore.toFixed(1) : '-'), firm: targetFirm, target: PATH_TARGET.toFixed(1) });
   if (footEl) {
     if (!gaps.length) {
-      footEl.innerHTML = `<strong style="color:var(--accent-teal);">You're at offer level across the board.</strong> Keep your reps consistent to stay sharp.`;
+      footEl.innerHTML = t('prog.footer.ok');
     } else {
       gaps.sort((a, b) => b.gap - a.gap);
       const top = gaps.slice(0, 3).map(g => `<strong>${g.label} +${g.gap.toFixed(1)}</strong>`).join(', ');
-      footEl.innerHTML = `Biggest gaps to close: ${top}. Focus your next drills here.`;
+      footEl.innerHTML = t('prog.footer.gaps', { top: top });
     }
   }
 }
