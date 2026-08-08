@@ -519,6 +519,61 @@ export function foreignFigures(reply, candidateText) {
   return bad;
 }
 
+/* ЧИСЛА, КОТОРЫЕ КАНДИДАТ ЕЩЁ НЕ ЗАРАБОТАЛ.
+   Замер на проде 09.08, кейс #243: на запрос данных интервьюер выдал готовый
+   результат кейса — $14.07M против $5.30M, — то есть ответ, ради которого
+   кандидат и считает. Правило «NEVER read a key aloud» проиграло, потому что
+   оно про вкус: модель считает, что «пояснила», а не «прочитала ключ».
+
+   Здесь то же самое, но механически. Разрешено называть любое число, которое
+   кандидат МОГ УВИДЕТЬ: условие кейса, показанные экзибиты, вопросы доступных
+   шагов, ключи уже закрытых шагов, собственные реплики кандидата и прошлые
+   реплики интервьюера. Всё остальное — величина из ключа НЕзакрытого шага,
+   и произнести её значит решить шаг за кандидата.
+
+   Функция ничего не запрещает — она СЧИТАЕТ. Запрет живёт в промпте, а этот
+   счёт печатается в лог, чтобы «интервьюер больше не выдаёт ответ» было
+   утверждением с числом, а не ощущением. */
+export function unseenKeyFigures({ caseObj, doneSteps, revealedSet, reply, candidateText, priorAssistantText }) {
+  const grab = (t) => {
+    const out = new Set();
+    const re = /\d[\d.,\s\u00a0]*/g;
+    let m;
+    while ((m = re.exec(String(t || ''))) !== null) {
+      const raw = m[0].replace(/[\s\u00a0,]/g, '').replace(/\.$/, '');
+      if (!raw) continue;
+      const digits = raw.replace(/[^0-9]/g, '');
+      if (digits.replace(/^0+/, '').length < 3) continue;   // до трёх цифр — шум: годы, проценты, «две трети»
+      out.add(String(parseFloat(raw)));
+      out.add(digits.replace(/^0+/, ''));
+    }
+    return out;
+  };
+  const steps = (caseObj && caseObj.steps) || [];
+  const done = new Set((Array.isArray(doneSteps) ? doneSteps : []).map(Number));
+  const shown = new Set(revealedSet instanceof Set ? revealedSet : (revealedSet || []));
+
+  let seen = String(caseObj.prompt_md || caseObj.header_md || '') + ' '
+           + String(candidateText || '') + ' ' + String(priorAssistantText || '');
+  for (const ex of (caseObj.exhibits || [])) {
+    const gated = Array.isArray(ex.triggers) ? ex.triggers.length > 0 : ex.reveal !== 'auto';
+    if (!gated || shown.has(ex.id)) seen += ' ' + String(ex.body_md || '') + ' ' + JSON.stringify(ex.render || '');
+  }
+  let secret = '';
+  for (const st of steps) {
+    if (!st) continue;
+    seen += ' ' + String(st.candidate_md || '');           // вопрос шага кандидат видит
+    if (done.has(Number(st.step))) seen += ' ' + String(st.interviewer_md || '');
+    else secret += ' ' + String(st.interviewer_md || '');
+  }
+  const seenSet = grab(seen);
+  const secretSet = grab(secret);
+  const said = grab(reply);
+  const bad = [];
+  for (const v of said) if (!seenSet.has(v) && secretSet.has(v)) bad.push(v);
+  return bad;
+}
+
 export function parseMarkers(text, priorRevealed) {
   const revealed = new Set(priorRevealed || []);
   let verdict = null;
@@ -711,14 +766,24 @@ Never do ANY of the following, at any attempt level:
 - name or hint at the existence of a trap, twist, catch, or "naive" reading;
 - name the mechanism, the method, or the line item the candidate has missed;
 - state or restate the machinery of the case: step numbers, step names, how many
-  steps remain, or a menu of named future analyses. The candidate is in an
-  interview, not a workflow;
+  steps remain, or a menu of named future analyses. Concretely: never write a
+  sentence that lists two or more things you could do next and asks them to pick.
+  The candidate is in an interview, not a workflow;
 - credit the candidate with anything they did not actually say. If it is not in
   their own words in this transcript, it did not happen.`;
 
-function hintsBlock(step, attemptCount, asked) {
+function hintsBlock(step, attemptCount, asked, lang) {
   const h = (step && step.hints) || {};
   const n = Number(attemptCount) || 0;
+  /* 09.08.2026, замер на проде. Кейс шёл ПОЛНОСТЬЮ по-русски, а подсказка первой
+     ступени вышла по-английски. Причина механическая: этот блок написан
+     по-английски, содержит английские примеры «Good:/Bad:» и стоит последним
+     перед ответом — то есть перебивает языковую директиву, стоящую выше.
+     Лечится не переводом блока (правила должны читаться одинаково), а прямой
+     строкой о языке В САМОМ КОНЦЕ: последнее слово остаётся за языком. */
+  const langLine = (lang === 'ru')
+    ? '\n\nЭТИ ПРАВИЛА — ИНСТРУКЦИЯ ТЕБЕ, А НЕ ОБРАЗЕЦ ЯЗЫКА. Примеры выше английские; свою реплику кандидату пиши ПО-РУССКИ.'
+    : '';
 
   if (n <= 0 && !asked) {
     /* 2026-08-08, замер на проде после первой правки. Лестница заработала —
@@ -743,19 +808,19 @@ vaguer question. Vague is correct here: the candidate is supposed to go looking.
 Good: "What would actually change at the plant if that line stopped?"
 Good: "You said the loss goes away. What has to be true for that to hold?"
 Bad:  "What happens to that $6,256,477 of allocated fixed cost?" — you just told
-      them the row and the number, which is the whole answer.${NEVER_SAY}`;
+      them the row and the number, which is the whole answer.${NEVER_SAY}${langLine}`;
   }
 
   if (asked && n <= 0) {
     return `\n\nHINT POLICY — THE CANDIDATE ASKED FOR A HINT. Give the Level-1 steer${h.L1 ? `: ${h.L1}` : ''}
 — point at WHERE to look, not at what they will find there. One or two sentences,
-then stop and let them work.${NEVER_SAY}`;
+then stop and let them work.${NEVER_SAY}${langLine}`;
   }
 
   if (n === 1) {
     return `\n\nHINT POLICY — ATTEMPT 2. A narrow directional steer is now allowed${h.L1 ? `: ${h.L1}` : ''}.
 Point at WHERE to look — an exhibit, a row, a quantity they have not questioned —
-never at what they will find there. One or two sentences, then stop.${NEVER_SAY}`;
+never at what they will find there. One or two sentences, then stop.${NEVER_SAY}${langLine}`;
   }
 
   const lines = [];
@@ -764,7 +829,7 @@ never at what they will find there. One or two sentences, then stop.${NEVER_SAY}
   return `\n\nHINT POLICY — ATTEMPT ${n + 1}. They have missed this ${n} times. You may now give the
 mechanism itself, plainly, and then ask them to redo the calculation with it.${
   lines.length ? '\nUse:\n- ' + lines.join('\n- ') : ''}
-Do not soften it and do not pretend they nearly had it.${NEVER_SAY}`;
+Do not soften it and do not pretend they nearly had it.${NEVER_SAY}${langLine}`;
 }
 
 /* ───────────────────────── weakness focus ────────────────────────────────────
@@ -924,7 +989,11 @@ Rules for every reply:
 - An alternative route to the SAME correct number is a PASS — grade the result and the logic, not whether it matches the written path.
 - NEVER write grading words ("pass", "retry", "зачёт") in visible text — markers are the only grading signal.
 - Reveal a GATED exhibit only when the candidate asks about its triggers, using <reveal>id</reveal> right after any step/verdict markers.
-- Zero filler. Concise, concrete, numeric. Never present a number not in the case material; never change a number you already gave.`;
+- Zero filler. Concise, concrete, numeric. Never change a number you already gave.
+
+TWO MECHANICAL LIMITS. They override every instinct to be helpful, and they are not matters of judgement:
+1. NUMBERS. You may state a number ONLY if it already appears in the case prompt, in an exhibit the candidate has been shown, in a question they have been asked, in their own messages, or in something you already told them. A number that is the RESULT of an analysis they have not completed is theirs to produce — not yours to say, not even as a check, a confirmation, a "roughly", or a worked example. If they ask you for such a result, give them the input they are missing and hand the arithmetic back.
+2. NO MENU. Never offer a choice of what to do next by naming analyses ("shall I explain the mechanics, test the sensitivity, or go to the recommendation?"). That hands them the map of the remaining case. Ask one open question instead: what would they like to look at next.`;
     flow = allDone
       ? '\n\nALL analyses are done. Require the final recommendation now: ask them to deliver it conclusion-first (Pyramid), with the key numbers, risks (\u22651 internal + \u22651 external), and next steps. Grade it against the recommendation step key.'
       : '\n\nWhen the remaining work is only the final recommendation, ask for it conclusion-first.';
@@ -942,7 +1011,7 @@ Conduct the case in natural consulting English. Internal material below (questio
      в этом режиме кандидат может стоять на любом из разблокированных шагов, и
      подать подсказку не того шага — значит слить чужой ключ. Подаётся правило
      уровня, ключи у модели и так есть. */
-  const hints = isOpening ? '' : hintsBlock(null, attemptCount, hintAsked);
+  const hints = isOpening ? '' : hintsBlock(null, attemptCount, hintAsked, lang);
   const volatile = doneText + availText + lockedText + ex.volatileText + hints + (isOpening ? '' : focusBlock(focusKey)) + flow;
   return { stable, volatile };
 }
@@ -980,7 +1049,7 @@ ANSWER KEY (hidden — grade against this):
 ${step.interviewer_md || '(No explicit key parsed for this step. Grade using the case prompt, the exhibits, and standard MBB rigor for a step of this type. Any answer text embedded in the question above is interviewer-side — do not read it out.)'}`;
 
   const ex = exhibitsBlock(caseObj, revealedSet);
-  const hints = hintsBlock(step, attemptCount, hintAsked);
+  const hints = hintsBlock(step, attemptCount, hintAsked, lang);
 
   let flow;
   if (isOpening) {
@@ -1601,6 +1670,27 @@ export default async function handler(req, res) {
       const nd = new Set(doneSteps);
       for (const s of stepCompleted) nd.add(s);
       caseComplete = terminalStepNum != null && nd.has(terminalStepNum);
+    }
+
+    /* СЧЁТ УТЕЧЕК КЛЮЧА. Не запрет и не переписка: запрет живёт в промпте,
+       а здесь печатается число, чтобы «интервьюер больше не решает за
+       кандидата» было проверяемым утверждением. Смотрим ТОЛЬКО на шаги,
+       не закрытые ДО этого хода: то, что кандидат закрыл прямо сейчас,
+       он и произвёл сам. */
+    if (ilead && !isOpening) {
+      try {
+        const priorAssistant = clientMsgs.filter(m => m && m.role === 'assistant')
+          .map(m => String(m.content || '')).join('\n');
+        const leaked = unseenKeyFigures({
+          caseObj, doneSteps, revealedSet: new Set(priorRevealed),
+          reply: parsed.reply || '', candidateText: lastCandidateText,
+          priorAssistantText: priorAssistant });
+        if (leaked.length) {
+          console.log('case-session key leak', JSON.stringify({
+            build: BUILD, case: caseObj.id, done: doneSteps.length,
+            figures: leaked.slice(0, 5) }));
+        }
+      } catch (e) { console.error('key-leak check failed:', e && e.message); }
     }
 
     const payload = {
