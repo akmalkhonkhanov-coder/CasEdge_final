@@ -74,7 +74,7 @@ const CASE_PRICE_CAP_USD = 0.20;
    Куплено ошибкой смены 06.08: «залито или нет» решалось поиском по логам,
    поиск вернул пусто из-за отставания индексации, и вывод был неверным.
    Сравнение метки с диском от индексации логов не зависит. */
-const BUILD = '993fbca0ff74';
+const BUILD = '8fb5e932f61a';
 const PRICE_IN_PER_MTOK = 2.0;
 const PRICE_OUT_PER_MTOK = 10.0;
 const CACHE_WRITE_MULT = 1.25;
@@ -225,7 +225,7 @@ function lib() {
 export function listCases() {
   const { data } = lib();
   // тот же фильтр, что и в автоподборе: Easy не показываем и в ручном списке
-  return data.cases.filter(c => SERVED_BANDS.includes(normDiff(c.difficulty))).map(c => ({
+  return data.cases.filter(isServable).map(c => ({
     id: c.id,
     title: c.title,
     case_type: c.case_type,
@@ -265,6 +265,29 @@ function typeMatchServer(libType, chosen) {
 // Easy и остаются недоступны, пока плашка не сменится.
 const SERVED_BANDS = ['Medium', 'Hard'];
 
+/* 2026-08-07: КЕЙС НА ПЕРЕСБОРКЕ НЕ ВЫДАЁТСЯ.
+   Повод — #230 «Latte Than You Think». Цех снял его с Clean, потому что число
+   в ключе посчитано на неверной базе, и оставил в теле пометку «ВЕДУЩЕМУ: не
+   засчитывать ответ по напечатанному числу». Пометка адресована человеку,
+   которого нет: ведущий здесь — модель, и `interviewer_md` уходит ей как ANSWER
+   KEY. То есть кандидат, давший ВЕРНЫЙ ответ, получал «неверно» по ключу,
+   который сам цех объявил сломанным.
+   Отсюда правило движка, а не данных: пока кейс на пересборке, он не попадает
+   ни в список, ни в автоподбор. Признак — явное поле `status`, а страховкой
+   разбирается зачин `qa_checks_md`: пометка уже написана словами, и полагаться
+   только на поле, которого в старых телах нет, значит оставить дыру открытой. */
+const HOLD_STATUS = new Set(['rebuild', 'hold', 'wip', 'пересборка']);
+// без \b: в JS-регексе кириллица не является \w, и граница слова после «Е»
+// не срабатывает — пометка «НА ПЕРЕСБОРКЕ.» проходила бы мимо фильтра.
+// Поймано мутацией гейта, а не чтением.
+const HOLD_RE = /^\s*(?:⚠️\s*)?(?:НА\s+ПЕРЕСБОРКЕ|ON\s+REBUILD)/i;
+export function isServable(c) {
+  if (!c) return false;
+  if (c.status && HOLD_STATUS.has(String(c.status).toLowerCase())) return false;
+  if (typeof c.qa_checks_md === 'string' && HOLD_RE.test(c.qa_checks_md)) return false;
+  return SERVED_BANDS.includes(normDiff(c.difficulty));
+}
+
 export function levelToBand(level) {
   const n = Number(level);
   if (!Number.isFinite(n)) return 'Medium';   // no history yet → start in the middle
@@ -294,9 +317,9 @@ export function pickCase({ caseType, level, seenIds, rand }) {
   // мог бы выдать Easy-кейс.
   const pool = data.cases.filter(c => typeMatchServer(c.case_type, caseType)
     && !seen.has(Number(c.id))
-    && SERVED_BANDS.includes(normDiff(c.difficulty)));
+    && isServable(c));
   if (!pool.length) {
-    const anyUnseen = data.cases.some(c => !seen.has(Number(c.id)) && SERVED_BANDS.includes(normDiff(c.difficulty)));
+    const anyUnseen = data.cases.some(c => !seen.has(Number(c.id)) && isServable(c));
     return { exhausted: true, scope: anyUnseen ? 'type' : 'all' };
   }
   const band = levelToBand(level);
@@ -589,19 +612,97 @@ function firmStyle(firm) {
    0  → L0 silence: no hints, no leading.
    >=2 with L1 → L1 nudge allowed.
    >=3 with L2 → L2 nudge allowed. */
-function hintsBlock(step, attemptCount) {
+/* 2026-08-07. ЗАМЕР НА ЖИВОМ ПРОДЕ, ТРИ КЕЙСА ДО КОНЦА.
+   В кейсе #161 кандидат дал наивный ответ ПЕРВОЙ попыткой (attemptCount = 0,
+   то есть L0 — «не подсказывать вовсе»). Ответ движка:
+
+     «That's the naive move. ...of that −$1.93M, which costs actually disappear
+      if the line shuts, and which just get reallocated elsewhere? Rework the
+      closure logic on a contribution basis, not a fully-costed one.»
+
+   Это не подсказка, это РЕШЕНИЕ: названы и наличие ловушки, и механизм
+   (делить затраты на исчезающие и переносимые), и метод (контрибуция).
+   Кандидату осталась арифметика — а предмет кейса был именно в том, чтобы
+   додуматься до этого деления самому.
+
+   Причина не в тексте L0, он был верным. Причина в ПРОТИВОРЕЧИИ: блок сценария
+   ниже требовал «a short, demanding nudge toward the right MOVE», а «nudge
+   toward the MOVE» буквально означает «назови ход». Общий запрет проигрывает
+   конкретному указанию — тот же класс, на котором горел кейс #230.
+
+   Лечение — лестница, у которой первая ступень НЕ СОДЕРЖИТ ХОДА:
+     попытка 1  вопрос, возвращающий кандидата к его же допущению. Ни ловушки,
+                ни механизма, ни метода, ни имени статьи
+     попытка 2  узкое направление: КУДА смотреть, но не ЧТО там увидеть
+     попытка 3  механизм целиком — и это уже видно в стенограмме, а значит
+                в оценке
+   Плюс кандидат может попросить подсказку сам; тогда она даётся сразу, и просьба
+   остаётся в стенограмме, которую читает разбор. Темп выбирает кандидат,
+   планка не двигается. */
+/* Без \b вокруг кириллицы: в JS кириллица не является \w, и граница слова
+   не срабатывает — «нужна подсказка» проходила мимо. Тот же класс поймал гейт
+   снятия кейса с выдачи тремя часами раньше.
+   И просьба обязана быть ОТ ПЕРВОГО ЛИЦА: «Revenue is stuck at the same level» —
+   это описание рынка, а не крик о помощи. Ловушка поймана мутацией гейта. */
+const HINT_REQUEST_RE = new RegExp([
+  "\\b(?:i|we)(?:'m|'re| am| are)? ?(?:really |a bit |completely )?stuck\\b",
+  "\\b(?:can i (?:get|have)|could i (?:get|have)|give me|any chance of) a (?:hint|clue|steer|nudge|pointer)\\b",
+  "\\b(?:i need|need) (?:a )?(?:hint|help|steer|pointer)\\b",
+  "\\bhelp me out\\b|\\bpoint me\\b|\\bi(?:'m| am) lost\\b",
+  "(?:нужна|дай|дайте|можно) (?:мне )?(?:подсказ|намёк|намек|помощ)",
+  "(?:я |мы )?застрял|не понимаю, куда|подскаж"
+].join('|'), 'i');
+export function candidateAskedForHint(msgs) {
+  for (let i = msgs.length - 1; i >= 0 && i >= msgs.length - 2; i--) {
+    const m = msgs[i];
+    if (m && m.role === 'user' && typeof m.content === 'string' && HINT_REQUEST_RE.test(m.content)) return true;
+  }
+  return false;
+}
+
+const NEVER_SAY = `
+Never do ANY of the following, at any attempt level:
+- name or hint at the existence of a trap, twist, catch, or "naive" reading;
+- name the mechanism, the method, or the line item the candidate has missed;
+- state or restate the machinery of the case: step numbers, step names, how many
+  steps remain, or a menu of named future analyses. The candidate is in an
+  interview, not a workflow;
+- credit the candidate with anything they did not actually say. If it is not in
+  their own words in this transcript, it did not happen.`;
+
+function hintsBlock(step, attemptCount, asked) {
   const h = (step && step.hints) || {};
   const n = Number(attemptCount) || 0;
-  if (n <= 0) {
-    return '\n\nHINT POLICY: This is the candidate\'s first attempt at this step (L0). Do NOT give any hint, nudge, or leading language. Ask the question and let them work.';
+
+  if (n <= 0 && !asked) {
+    return `\n\nHINT POLICY — ATTEMPT 1. Give NO hint. If the answer is wrong, reply with ONE
+short question that sends them back to the assumption they made, and then stop.
+The question must be answerable only by re-examining the data, and must not
+contain the missing idea in any form.
+Good shape: "What would actually change at the plant if that line closed?"
+Bad shape: "Which of those costs disappear and which get reallocated?" — that is
+the answer phrased as a question.${NEVER_SAY}`;
   }
+
+  if (asked && n <= 0) {
+    return `\n\nHINT POLICY — THE CANDIDATE ASKED FOR A HINT. Give the Level-1 steer${h.L1 ? `: ${h.L1}` : ''}
+— point at WHERE to look, not at what they will find there. One or two sentences,
+then stop and let them work.${NEVER_SAY}`;
+  }
+
+  if (n === 1) {
+    return `\n\nHINT POLICY — ATTEMPT 2. A narrow directional steer is now allowed${h.L1 ? `: ${h.L1}` : ''}.
+Point at WHERE to look — an exhibit, a row, a quantity they have not questioned —
+never at what they will find there. One or two sentences, then stop.${NEVER_SAY}`;
+  }
+
   const lines = [];
-  if (n >= 2 && h.L1) lines.push(`Level-1 nudge (offer only as a gentle steer, never the answer): ${h.L1}`);
-  if (n >= 3 && h.L2) lines.push(`Level-2 nudge (a stronger steer, still not the full answer): ${h.L2}`);
-  if (!lines.length) {
-    return `\n\nHINT POLICY: The candidate has struggled (${n} attempt(s)). You may give a light directional nudge toward the right MOVE, but never state the answer.`;
-  }
-  return `\n\nHINT POLICY: The candidate has made ${n} attempt(s) on this step. You may now weave in the following nudge(s) — as a steer toward the right move, never the answer itself:\n- ${lines.join('\n- ')}`;
+  if (h.L1) lines.push(`Level-1 steer: ${h.L1}`);
+  if (h.L2) lines.push(`Level-2 steer: ${h.L2}`);
+  return `\n\nHINT POLICY — ATTEMPT ${n + 1}. They have missed this ${n} times. You may now give the
+mechanism itself, plainly, and then ask them to redo the calculation with it.${
+  lines.length ? '\nUse:\n- ' + lines.join('\n- ') : ''}
+Do not soften it and do not pretend they nearly had it.${NEVER_SAY}`;
 }
 
 /* ───────────────────────── weakness focus ────────────────────────────────────
@@ -677,7 +778,18 @@ Conduct the case in natural consulting English. The internal material below is A
 - Keep every number, unit, percentage and proper name exactly as written.
 - Keep the hidden markers (<step>…</step>, <verdict>…</verdict>, <reveal>…</reveal>) exactly as written; never explain or display them.`;
 
-export function buildSystemPromptILead({ caseObj, doneSteps, firm, revealedSet, isOpening, focusKey, lang }) {
+/* 2026-08-07. В режиме, которым идёт BCG (interviewee-led), лестницы подсказок
+   НЕ БЫЛО ВООБЩЕ: `hintsBlock` вызывался только на линейном пути. Здесь стояла
+   одна строка — «a short, demanding nudge toward the right MOVE» — и модель
+   исполняла её буквально: на первой же ошибке называла ход.
+   Замер: кейс #161, первая попытка, ответ содержал и наличие ловушки, и механизм,
+   и метод. Кандидату оставалась арифметика.
+   Теперь ilead получает ту же лестницу, что и линейный путь. Уровень попытки
+   приходит от клиента (`attemptCount`), который теперь считает промахи и в этом
+   режиме тоже; просьба о помощи читается из слов самого кандидата — отдельной
+   кнопки нет и не будет, «мне нужна помощь» кандидат обязан произнести сам,
+   и эти слова остаются в стенограмме, которую читает разбор. */
+export function buildSystemPromptILead({ caseObj, doneSteps, firm, revealedSet, isOpening, focusKey, lang, attemptCount, hintAsked }) {
   const enNative = String(caseObj.lang || caseObj.source_lang || '').toLowerCase() === 'en' && lang !== 'ru';
   const steps = caseObj.steps || [];
   const byNum = new Map(steps.map(s => [s.step, s]));
@@ -742,7 +854,7 @@ The candidate drives. Respond to what they actually ask or compute.
 
 MARKERS (the VERY FIRST characters of your reply, before any visible text):
 - For EACH available step the candidate has just COMPLETED to its key this turn, emit <step>N</step> immediately followed by <verdict>pass</verdict>. Multiple allowed (e.g. <step>2</step><verdict>pass</verdict> then continue). Then do NOT march to a "next" step — briefly acknowledge and ask what they want to tackle next (their choice).
-- If they attempted an available step but did NOT meet its key, emit <verdict>retry</verdict> and give a short, demanding nudge toward the right MOVE (never the answer). Do NOT emit <step> for it.
+- If they attempted an available step but did NOT meet its key, emit <verdict>retry</verdict> and respond EXACTLY as the HINT POLICY below allows for the current attempt — on attempt 1 that is one question and nothing else. Do NOT name the move. Do NOT emit <step> for it.
 - If they only asked for data / are still exploring / went down an empty path, emit NEITHER marker — answer in character and let them continue. A dead-end path is fine: let them see it's empty and come back; recovering is their skill to show, not yours to block.
 ${allDone
   ? 'ALL analyses are done. Require the final recommendation now: ask them to deliver it conclusion-first (Pyramid), with the key numbers, risks (≥1 internal + ≥1 external), and next steps. Grade it against the recommendation step key.'
@@ -764,14 +876,19 @@ Rules for every reply:
 Conduct the case in natural consulting English. Internal material below (questions, keys, exhibit notes) may be in RUSSIAN — that is source, never quote it; rephrase in English. Keep every number, unit, percentage and proper name EXACTLY as written. Keep the hidden markers (<step>…</step>, <verdict>…</verdict>, <reveal>…</reveal>) exactly as written; never explain or display them.`;
 
   const stable = header + ex.stableText + language;
-  const volatile = doneText + openingRef + availText + lockedText + ex.volatileText + (isOpening ? '' : focusBlock(focusKey)) + flow;
+  /* Лестница подсказок теперь и здесь. Тексты L1/L2 конкретного шага НЕ подаются:
+     в этом режиме кандидат может стоять на любом из разблокированных шагов, и
+     подать подсказку не того шага — значит слить чужой ключ. Подаётся правило
+     уровня, ключи у модели и так есть. */
+  const hints = isOpening ? '' : hintsBlock(null, attemptCount, hintAsked);
+  const volatile = doneText + openingRef + availText + lockedText + ex.volatileText + hints + (isOpening ? '' : focusBlock(focusKey)) + flow;
   return { stable, volatile };
 }
 
 /* ───────────────────────── system prompt assembly ───────────────────────────
    Rebuilt for the CURRENT step on every call. interviewer_md is the answer key,
    used only to grade — never read aloud. */
-export function buildSystemPrompt({ caseObj, stepIndex, attemptCount, firm, revealedSet, isOpening, focusKey, lang, overCap }) {
+export function buildSystemPrompt({ caseObj, stepIndex, attemptCount, firm, revealedSet, isOpening, focusKey, lang, overCap, hintAsked }) {
   const enNative2 = String(caseObj.lang || caseObj.source_lang || '').toLowerCase() === 'en' && lang !== 'ru';
   const steps = caseObj.steps || [];
   const idx = Math.max(0, Math.min(stepIndex, steps.length - 1));
@@ -801,7 +918,7 @@ ANSWER KEY (hidden — grade against this):
 ${step.interviewer_md || '(No explicit key parsed for this step. Grade using the case prompt, the exhibits, and standard MBB rigor for a step of this type. Any answer text embedded in the question above is interviewer-side — do not read it out.)'}`;
 
   const ex = exhibitsBlock(caseObj, revealedSet);
-  const hints = hintsBlock(step, attemptCount);
+  const hints = hintsBlock(step, attemptCount, hintAsked);
 
   let flow;
   if (isOpening) {
@@ -822,7 +939,7 @@ Grade the candidate's latest message against the ANSWER KEY for the current step
 
 YOUR REPLY MUST START with exactly one hidden verdict marker — the VERY FIRST characters of your reply, before any visible text:
 - <verdict>pass</verdict> if the answer meets the bar for this step (key insight / correct math / required structure). ${advance}
-- <verdict>retry</verdict> if it does not yet meet the bar — then give a short, demanding, specific nudge toward the right MOVE (obeying the HINT POLICY below — never reveal the answer). Do NOT advance.
+- <verdict>retry</verdict> if it does not yet meet the bar — then respond EXACTLY as the HINT POLICY below allows for the current attempt, and nothing more. On attempt 1 that is one question and nothing else: do NOT name the move. Do NOT advance.
 This marker is MANDATORY on every evaluating reply. A reply without it breaks the app. Any <reveal> marker comes immediately after the verdict marker.
 
 Rules for every reply:
@@ -1050,9 +1167,14 @@ export default async function handler(req, res) {
     // compatibility. Client opts in by sending mode:'ilead' + doneSteps[].
     const ilead = body.mode === 'ilead' && firmIsCandidateLed(body.firm) && caseIsGraphReady(steps);
     const doneSteps = Array.isArray(body.doneSteps) ? body.doneSteps.map(Number).filter(Number.isInteger) : [];
+    /* Просьба о помощи читается из слов кандидата, а не из кнопки. Кнопку решили
+       не заводить: на интервью её нет, и произнести «я застрял» — само по себе
+       часть навыка. Слова остаются в стенограмме, и разбор их видит. */
+    const hintAsked = candidateAskedForHint(clientMsgs);
     const build = (over) => ilead
-      ? buildSystemPromptILead({ caseObj, doneSteps, firm: body.firm, revealedSet, isOpening, focusKey, lang })
-      : buildSystemPrompt({ caseObj, stepIndex, attemptCount, firm: body.firm, revealedSet, isOpening, focusKey, lang, overCap: over });
+      ? buildSystemPromptILead({ caseObj, doneSteps, firm: body.firm, revealedSet, isOpening, focusKey, lang,
+                                 attemptCount, hintAsked })
+      : buildSystemPrompt({ caseObj, stepIndex, attemptCount, firm: body.firm, revealedSet, isOpening, focusKey, lang, overCap: over, hintAsked });
 
     /* ПОТОЛОК СЧИТАЕТСЯ ЗДЕСЬ, а не выше: цена хода зависит от размера
        изменчивого блока, а он известен только после сборки промпта. Собираем

@@ -1,6 +1,6 @@
 {
  "type": "ST",
- "count": 48,
+ "count": 49,
  "drills": [
   {
    "id": "ST-001",
@@ -198,9 +198,10 @@
    "reference": {
     "en": "\"Financials\" is a MECE-clean, legitimate, reflexive branch, and it **yields no variable capable of explaining trust**. A candidate who starts there spends time and returns with nothing. Second: the weighted index falls 17 points, but the core audience is down only 2. The decline is created by **new, weakly engaged segments** that the company itself attracted.\n\n**Top echelon: YES.** The tree can be faultless on MECE grounds and still lead to the wrong answer, \"we've damaged our journalism.\"\n\n- notice that the industry backdrop explains **8 of the 17** points (59→51), i.e. nearly half the decline — roughly 9 points are specific to us\n- propose recalculating the index **on a like-for-like audience base**: without the new segments the decline would be materially smaller\n- observe that reach growing 18.7 → 28.6 million may have been **another division's target** — a KPI conflict"
    },
-   "family_h25": "F9",
+   "family_h25": "F1",
    "family_src": "словарь:S02",
-   "family_conf": "спорная"
+   "family_conf": "высокая",
+   "family_note": "круг 42, триаж спорных: метка исправлена независимым проходом"
   },
   {
    "id": "ST-003",
@@ -229,9 +230,10 @@
    "reference": {
     "en": "The difficulty is **in detection**, not in knowing ME. The candidate places \"fuel\" and \"variable costs\" in different parts of the tree, and the overlap does not stand out because the two sit physically far apart.\n\n**Top echelon: NO** — a candidate who builds the tree correctly reaches the right answer. An honest **Medium**.\n\n- propose normalising: cost per delivery rather than absolute cost\n- notice that 22% growth against 6% volume implies unit costs up ≈15%"
    },
-   "family_h25": "F10",
+   "family_h25": "F11",
    "family_src": "словарь:S03",
-   "family_conf": "спорная"
+   "family_conf": "высокая",
+   "family_note": "круг 44: F11 «одно множество под двумя ярлыками» — ветви «fuel» и «variable costs» суть одно множество затрат, разнесённое по разным местам дерева"
   },
   {
    "id": "ST-004",
@@ -425,7 +427,8 @@
    },
    "family_h25": "F9",
    "family_src": "словарь:S06",
-   "family_conf": "спорная"
+   "family_conf": "высокая",
+   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом"
   },
   {
    "id": "ST-006",
@@ -456,7 +459,8 @@
    },
    "family_h25": "F4",
    "family_src": "словарь:S07",
-   "family_conf": "спорная"
+   "family_conf": "спорная",
+   "family_note": "круг 42, триаж: не влезает в десять семей · признак — одиночка: неочевидный драйвер с метрикой внутри ветви"
   },
   {
    "id": "ST-007",
@@ -819,9 +823,10 @@
    "reference": {
     "en": "The candidate builds \"losses by geography\" **and** \"losses by customer type\" as two parallel branches — both look legitimate and MECE **within themselves**. The exhibit, released after, shows that in this industry customer type is **determined by geography**: it is **the same cut**, named twice. A tree that adds both branches covers 200% of the market.\n\n**Top echelon: YES.** Both branches are individually correct; the tree is wrong.\n\n**E-after breaks the tree:** before the exhibit there is no way to know the cuts coincide — the note about where chains operate appears only with the data. The tree needs **one cut chosen**, not both extended.\n\n- notice the decline is concentrated in metropolitan (−12.00 pp) and large cities (−9.00 pp), while small towns and rural barely move (−1.00 and 0.00)\n- connect that to the note: tendering came in from Y2, and the losses sit exactly where the chains are\n- propose checking whether we are admitted to the supplier register"
    },
-   "family_h25": "F10",
+   "family_h25": "F11",
    "family_src": "словарь:S04",
-   "family_conf": "спорная"
+   "family_conf": "высокая",
+   "family_note": "круг 44: F11 «одно множество под двумя ярлыками» — «Metropolitan» географического среза и «Urban chains» клиентского — один и тот же покупатель, срез назван дважды"
   },
   {
    "id": "ST-012",
@@ -924,7 +929,8 @@
    },
    "family_h25": "F9",
    "family_src": "словарь:S09",
-   "family_conf": "спорная"
+   "family_conf": "высокая",
+   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом"
   },
   {
    "id": "ST-014",
@@ -1077,7 +1083,7 @@
    "family_h25": "F1",
    "family_src": "словарь:S12",
    "family_conf": "спорная",
-   "family_note": "ревью2: конфляция MECE, не подмена базы; семьи в Н25 нет"
+   "family_note": "круг 42, триаж: не влезает в десять семей · признак — одиночка: один ярлык склеивает два явления"
   },
   {
    "id": "ST-016",
@@ -1316,7 +1322,8 @@
    },
    "family_h25": "F9",
    "family_src": "словарь:S02",
-   "family_conf": "спорная"
+   "family_conf": "спорная",
+   "family_note": "круг 42, триаж: не влезает в десять семей · признак — K3 ветвь верна, но отвечает на другом уровне решения"
   },
   {
    "id": "ST-019",
@@ -1519,9 +1526,10 @@
    "reference": {
     "en": "The candidate builds \"churn / behaviour of those who stayed / channel migration.\" **At the first level this is faultless MECE** — those who left, those who stayed, and those who switched channel do not overlap as categories.\n\nThe overlap appears **at the second level**: the sub-branch \"left for online\" inside churn is the same group as the whole of branch 3. A pairwise matrix of the first level does not reveal it.\n\n**Top echelon: YES.** The tree passes a standard MECE check and still counts 11.2% of the base twice.\n\n**Separation from ST-003 ([DUP], substantive):** in ST-003 the absorption sits **within one level** — \"fuel\" stands beside \"variable costs,\" and a pairwise check of the first level catches it. Here there is **no first-level overlap at all**; it exists only between levels. Different operations, different means of detection.\n\n- notice the 11.2% group delivers **5.15 pp** of the 12.77 — the largest contribution, and it is **not a loss** for the chain as a whole\n- compute the true loss without the double count: 12.77 − 5.15 = **7.62 pp**\n- propose measuring revenue per shopper **across both channels at once**"
    },
-   "family_h25": "F10",
+   "family_h25": "F11",
    "family_src": "словарь:S03",
-   "family_conf": "спорная"
+   "family_conf": "высокая",
+   "family_note": "круг 44: F11 «одно множество под двумя ярлыками» — «Partially moved to online» из среза причин и «Offline + online» из среза каналов — те же 11.2% базы"
   },
   {
    "id": "ST-022",
@@ -1679,7 +1687,8 @@
    },
    "family_h25": "F4",
    "family_src": "словарь:S07",
-   "family_conf": "спорная"
+   "family_conf": "спорная",
+   "family_note": "круг 42, триаж: не влезает в десять семей · признак — одиночка: метрика названа, но физически неизмерима"
   },
   {
    "id": "ST-024",
@@ -1751,7 +1760,8 @@
    },
    "family_h25": "F9",
    "family_src": "словарь:S09",
-   "family_conf": "спорная"
+   "family_conf": "спорная",
+   "family_note": "круг 42, триаж: не влезает в десять семей · признак — K5 дефект исполнения дерева — порядок разбора"
   },
   {
    "id": "ST-025",
@@ -2193,9 +2203,10 @@
    "reference": {
     "en": "The candidate builds \"new customers\" and \"customers who arrived this year\" as parallel branches — for example, separating \"acquisition\" from \"base dynamics.\" These are **one set**, named twice.\n\nUnlike ST-011, where the overlap is **spatial** and is found by comparing two tables, here it is **temporal** and there is only one block: the exhibit never uses the phrase \"new customers,\" so the candidate must first map their own branch label onto the arrival definition printed in the note before the double count becomes arithmetic (61+61=122 against 61 arrivals, 200% of the increase). ST-011 is caught by comparing two blocks; ST-030 only by reconciling the tree against one. It is therefore **less visible**: both phrasings sound like different categories while describing the same people.\n\n**Top echelon: NO** — a candidate who checks the sums discovers the double count. An honest **Medium**.\n\n**Separation from ST-011 ([DUP], substantive):** in ST-011 the shared criterion is **spatial** — geography and customer type coincide because chains exist only in cities; it is found arithmetically (34+28=62). Here the shared criterion is **temporal** — \"new\" and \"arrived this year\" are identical by the definition in the note, and it is found by **reading the definition**, not by adding. Different origins and different means of detection.\n\n- notice that the referral programme delivers **39.3%** of inflow — the largest single source\n- compute: outflow of 23 thousand against inflow of 61 thousand means gross churn consumes **37.7%** of acquisition\n- propose looking at net growth by arrival cohort rather than in aggregate"
    },
-   "family_h25": "F10",
+   "family_h25": "F11",
    "family_src": "словарь:S04",
-   "family_conf": "спорная"
+   "family_conf": "высокая",
+   "family_note": "круг 44: F11 «одно множество под двумя ярлыками» — «Referral programme» и «Direct enquiries» уже внутри строки «Inflow — customers whose first account was opened this year», сложение задваивает приток"
   },
   {
    "id": "ST-031",
@@ -2281,7 +2292,8 @@
    },
    "family_h25": "F9",
    "family_src": "словарь:S02",
-   "family_conf": "спорная"
+   "family_conf": "спорная",
+   "family_note": "круг 42, триаж: не влезает в десять семей · признак — K3 то же — другой период"
   },
   {
    "id": "ST-032",
@@ -2354,7 +2366,8 @@
    },
    "family_h25": "F9",
    "family_src": "словарь:S06",
-   "family_conf": "спорная"
+   "family_conf": "спорная",
+   "family_note": "круг 42, триаж: не влезает в десять семей · признак — K4 sunk cost не в деньгах (время/готовность)"
   },
   {
    "id": "ST-033",
@@ -2724,9 +2737,10 @@
    "reference": {
     "en": "The candidate sets \"corporate customers\" and \"customers on an annual contract\" as two branches. **Structurally they are not nested** — both at the first level, each with its own sub-branches, and the nesting test passes.\n\nThe overlap exists only in the **definition**: corporate status in this company is granted **on signing an annual contract**, so these are exactly the same 218 customers. Added as parallel branches, they give 436 customers against an actual 218.\n\n**Top echelon: NO** — a candidate who compares definitions discovers the identity. An honest **Medium**.\n\n**Separation from ST-003 and ST-021 ([DUP], against BOTH):**\n\n| | Where the overlap sits | How it is detected |\n|---|---|---|\n| **ST-003 (a)** | **within one level** — \"fuel\" beside \"variable costs\" | a pairwise check of the first level |\n| **ST-021 (b)** | **between levels** — a sub-branch of one branch is another first-level branch | a two-level matrix |\n| **ST-037 (c)** | **in the definition** — there is no structural nesting at all | comparing **definitions**, not structure |\n\nIn (a) and (b) the overlap is visible from the tree. In (c) the tree is correct under any structural check, and it can be found only by reading what each attribute means.\n\n- notice that 8% revenue growth against −3% profit implies a margin decline **of 10.2% in relative terms** (0.97 / 1.08 − 1)\n- propose checking whether volume discounts are tied to annual contracts\n- observe that the identity of the branches makes any addition of them invalid"
    },
-   "family_h25": "F10",
+   "family_h25": "F11",
    "family_src": "словарь:S03",
-   "family_conf": "спорная"
+   "family_conf": "высокая",
+   "family_note": "круг 44: F11 «одно множество под двумя ярлыками» — «corporate customers» и «customers on an annual contract» — одно множество по определению, 218 клиентов, а не 436"
   },
   {
    "id": "ST-038",
@@ -2824,7 +2838,8 @@
    },
    "family_h25": "F9",
    "family_src": "словарь:S09",
-   "family_conf": "спорная"
+   "family_conf": "спорная",
+   "family_note": "круг 42, триаж: не влезает в десять семей · признак — K5 то же — точка остановки"
   },
   {
    "id": "ST-040",
@@ -2985,9 +3000,10 @@
    "reference": {
     "en": "The candidate sets \"large customers\" and \"profitable customers\" as two branches of the cut. The attributes are **different by definition** — one concerns customer revenue, the other their profitability. There is no structural nesting. The test \"is A part of B\" passes.\n\nThe exhibit, released after, shows: the cost of service **does not depend on size** ($41.0k for any customer), so profitability is determined by the single condition \"revenue > $500k\" — that is, **the boundary of the \"large\" group**. The sets coincide: 64 = 64.\n\n**Top echelon: YES.** The tree is correct structurally and by definitions, and still counts the same customers twice.\n\n**Separation from ST-011, ST-030 and ST-037 ([DUP], against ALL THREE):**\n\n| | Nature of the coincidence | How it is detected |\n|---|---|---|\n| **ST-011** S04(a) | **spatial**: chains exist only in cities | adding the shares (34+28=62) |\n| **ST-030** S04(b) | **temporal**: \"new\" = \"arrived this year\" | reading the definition |\n| **ST-037** S03(c) | **by rule**: corporate status is granted on an annual contract | comparing definitions |\n| **ST-041** S04(c) | **by consequence**: profitability **follows** from size through a fixed cost of service | examining the **mechanism** that generates the attribute |\n\nIn ST-037 the coincidence is set by a **rule of assignment**. Here it is set by **economics**: nobody defined profitability through size, it came out that way because the cost is fixed.\n\n- notice that at a service cost of $41.0k, all **315** customers below the threshold are unprofitable\n- compute: the unprofitable ones deliver **46.4%** of revenue, so dropping them cuts almost half the turnover\n- propose changing the **cost of service** rather than segmenting — it is what creates the threshold"
    },
-   "family_h25": "F10",
+   "family_h25": "F11",
    "family_src": "словарь:S04",
-   "family_conf": "спорная"
+   "family_conf": "высокая",
+   "family_note": "круг 44: F11 «одно множество под двумя ярлыками» — «Large (>$500k/year)» и «Profitable» — одни и те же 64 клиента, ветви совпадают по следствию"
   },
   {
    "id": "ST-042",
@@ -3060,7 +3076,8 @@
    },
    "family_h25": "F9",
    "family_src": "словарь:S06",
-   "family_conf": "спорная"
+   "family_conf": "спорная",
+   "family_note": "круг 42, триаж: не влезает в десять семей · признак — K4 то же — репутационное обязательство"
   },
   {
    "id": "ST-043",
@@ -3470,6 +3487,86 @@
    "family_h25": "F2",
    "family_src": "словарь:S15",
    "family_conf": "высокая"
+  },
+  {
+   "id": "ST-049",
+   "title": "The Same Fifty Percent",
+   "company": "Verendal Wireless",
+   "industry": "Telecom",
+   "difficulty": "Hard",
+   "echelon": true,
+   "clean": false,
+   "focus": "ST:S17",
+   "time": "7 min",
+   "type": "Structuring",
+   "exhibit_mode": "E-before",
+   "depth_tag": "STANDARD",
+   "family_h25": "F3",
+   "family_src": "тело",
+   "family_conf": "высокая",
+   "family_note": "круг 40: 50% и 40% — доли ПЛАТЕЖЕЙ, а не доли людей; решение принимается о людях, и состав группы в записи не установлен",
+   "anchor_metric": "customers proposed for removal = 6.0M",
+   "prompt": "Verendal has 60 million subscribers. Collections cost the company money, and a team has proposed removing the two worst credit bands from the customer book. The team's summary is in the Exhibit.\n\n**Where would you start the analysis, and why?**",
+   "exhibit": {
+    "type": "table",
+    "title": "Team summary: the two lowest credit bands",
+    "header": [
+     "Item",
+     "Figure"
+    ],
+    "rows": [
+     [
+      "Band 500–549: share of customer base",
+      "1% ≈ 0.6M customers"
+     ],
+     [
+      "Band 500–549: share of bills paid late",
+      "50%"
+     ],
+     [
+      "Next band up: share of customer base",
+      "9% ≈ 5.4M customers"
+     ],
+     [
+      "Next band up: share of bills paid late",
+      "40%"
+     ],
+     [
+      "Average bill, whole base",
+      "$40"
+     ],
+     [
+      "Average bill, these two bands",
+      "$75"
+     ],
+     [
+      "Cost of collections, per customer",
+      "$50"
+     ],
+     [
+      "Profit margin",
+      "25%"
+     ],
+     [
+      "Late fee charged",
+      "none"
+     ],
+     [
+      "Team's proposal",
+      "Remove both bands: 6.0M customers, leaving 54M"
+     ]
+    ],
+    "note": ""
+   },
+   "key": {
+    "decoy": "| Branch | Why it's reflexive | [DEC-JUST] |\n|---|---|---|\n| **\"Recompute the saving\"** — margin on $75 × 6.0M against $50 × 45% × 6.0M | the table hands over every input, and the arithmetic is the visible task | The branch is **relevant and premature**. It prices a decision whose object is not established: the 50% and 40% are shares **of bills**, not shares **of people**. Until the book says whether the same customers are late every month or different ones each month, the multiplication is over a group that may not exist. That is the muscle of the slot |",
+    "cover": "| Branch | Synonyms (≥3) | [COV-JUST] |\n|---|---|---|\n| **1. Composition of the late payments** | \"is it the same people\" · \"repeat vs occasional\" · \"who inside the band\" | Decides whether removal targets customers or events. Without it the saving is computed over an assumed cohort |\n| **2. Economics of the retained customer** | \"margin per subscriber\" · \"cost to serve\" · \"revenue lost on exit\" | The $75 bill and the 25% margin are lost with the customer, the $50 of collections is only spent on a customer who goes late — two different frequencies on the same person |\n| **3. Levers short of removal** | \"late fee\" · \"collection cadence\" · \"deposit or prepay\" · \"credit screen at signup\" | The company charges no late fee and collects monthly; the proposal jumps to the most irreversible option before the cheap ones are priced |\n| **4. What 6.0M customers are worth beyond their bills** | \"scale\" · \"network position\" · \"share against the number two\" | Removal moves the base from 60M to 54M; the value of scale is not in the table and is not zero |",
+    "me": "| Pair | Status |\n|---|---|\n| 1 ↔ 2 | **independent** — one is who they are, the other is what they earn |\n| 1 ↔ 3 | **independent** — composition does not depend on the lever chosen |\n| 2 ↔ 4 | ⚠️ partial — both are value of the customer. Separated: branch 2 is value **on the bill**, branch 4 is value **off the bill** |",
+    "start": "Branch 1. The decision removes **people**; the evidence describes **payments**. Everything downstream — the saving, the choice of lever, the scale argument — is priced differently depending on whether the 45% of late bills sits on a stable minority or is spread thinly across the whole 6.0M."
+   },
+   "reference": {
+    "en": "**Start with the composition of the late payments, because the proposal removes customers while the evidence counts bills.**\n\nThe table gives 50% and 40% as shares of **bills paid late**, and the team converts them into a block of **6.0M people** to be removed. Those are two different objects. If a stable minority inside each band is late every month, removal is aimed at them and the saving is real and concentrated. If lateness rotates across the band, removal deletes mostly customers who pay — the company loses **$75** bills at a **25%** margin from people who cost it nothing, and keeps the collections problem in whatever cohort remains.\n\nThe book puts the question and refuses to settle it: *\"Is it the same 50 percent who pay late every month? — Not necessarily. You can assume that everyone in that group has been late paying the bill at some point, some more than others.\"* That sentence is the case: the group is defined by an event, not by a type.\n\nOnly after that does the arithmetic mean anything, and only then do the cheaper levers get priced — there is **no late fee** at all today, and collections run every month at a **$50** cost per customer chased.\n\n**Source:** `Case-in-Point-2013`, the wireless late-payment case: 1% of the base in the 500–549 band late on 50% of bills · 9% of the base in the next band late on 40% · 6 million customers proposed for removal out of 60 million · average bill $40 overall and $75 in these bands · $50 to collect from one late-paying customer · 25% profit margin · no late fee charged."
+   }
   }
  ],
  "_meta": {

@@ -1,6 +1,6 @@
 {
  "type": "SY",
- "count": 42,
+ "count": 43,
  "_meta": {
   "set": "sy",
   "type_string": "Synthesis",
@@ -144,7 +144,8 @@
    "anchor_metric": "ранжирование (β); ограничение записи — окупаемость не более 3 лет",
    "family_h25": "F1",
    "family_src": "словарь:S02",
-   "family_conf": "спорная"
+   "family_conf": "высокая",
+   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом"
   },
   {
    "id": "SY-003",
@@ -615,7 +616,8 @@
    "anchor_metric": "ранжирование (β)",
    "family_h25": "F1",
    "family_src": "словарь:S11",
-   "family_conf": "спорная"
+   "family_conf": "высокая",
+   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом"
   },
   {
    "id": "SY-009",
@@ -953,7 +955,8 @@
    "anchor_metric": "не применяется, форма β",
    "family_h25": "F1",
    "family_src": "словарь:S02",
-   "family_conf": "спорная"
+   "family_conf": "высокая",
+   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом"
   },
   {
    "id": "SY-011",
@@ -1727,9 +1730,10 @@
     "en": "- **Conclusion (first):** We recommend Aurelia launch the bundle: annual subscription revenue rises from **$13.02B to $14.35B**, a **$1.33B** gain.\n- **Facts:** Only the non-overlapping bases can switch — **(100M − 15M) × 20% = 17M** from Aurelia+ and **(35M − 15M) × 25% = 5M** from Vellum; adding the **15M** already on both services gives **37M bundle subscribers at $15 × 12 = $6.66B**, alongside **68M × $7 × 12 = $5.712B** and **15M × $11 × 12 = $1.98B**.\n- **Risk:** The 15M dual subscribers move from $18 to $15 per month, a **$540M** annual give-back, and any churn on the merged interface eats directly into the $1.33B gain.\n- **Next step:** Pilot the bundle in selected markets, measure churn on the 15M overlap separately, and stress-test the 20%/25% switch rates before committing to the $15 price point.\n\n---"
    },
    "anchor_metric": "Печатное правило: 20% берётся от «Aurelia+ only», 25% — от «Vellum only»",
-   "family_h25": "F1",
+   "family_h25": "F11",
    "family_src": "словарь:S04",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "family_note": "круг 44: F11 «одно множество под двумя ярлыками» — «15M are subscribed to both» уже сидят и в «100M subscribers», и в «35M subscribers»: сложение баз задваивает"
   },
   {
    "id": "SY-018",
@@ -2409,9 +2413,10 @@
     "en": "**[1] Verdict.** *Reject the note's read: the Premium launch did not add $240M, it cost Montoya $10M in F15, and Montoya should reprice Premium rather than keep hunting for a variable-cost line that does not exist.*\n\n**[2] Support and next move.** *Three facts. First, the launch's own contribution is $240M — 40M cases at $6. Second, 25M of those 40M cases did not come from outside the portfolio: Traditional fell from 80M to 60M cases and Light from 60M to 55M over the same year, at unchanged wholesale prices and unchanged formulation. Third, that displaced volume earned $10 a case, not $6 — so the launch gave back $200M on Traditional and $50M on Light, and the net contribution of the launch is minus $10M. The colleague's cost hunt cannot find anything because there is nothing to find: fixed costs are flat at $1.3B in both years and input prices are unchanged. The problem is mix, not cost. Immediate next move: price Premium up — the demand data on file puts volume at 20M cases at $33 with Traditional cannibalization falling from 50% to 10% — and do not touch meat, vegetable or packaging content, because the whole value proposition of the line is exactly what those inputs buy. Two risks I would flag to the client: halving Premium volume in the year the retailer is expanding our shelf space could cost us that expansion, and a $33 price opens a gap for a competitor who today sits only in value and super-premium.*"
    },
    "anchor_metric": "клиентского порога нет; решение выносится сопоставлением, а не сравнением с правилом",
-   "family_h25": "F2",
+   "family_h25": "F11",
    "family_src": "тело",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "family_note": "круг 44: F11 «одно множество под двумя ярлыками» — «Premium shipped 40M cases in its first year» и вытесненные кейсы старых линий — те же покупатели: «Traditional, Light and Premium are the only product lines in the portfolio»"
   },
   {
    "id": "SY-023",
@@ -4677,9 +4682,10 @@
     "en": "The recommendation stands: the client should manufacture 80% of the line in Vietnam and 20% domestically, and I would send the note as written. It stands on three printed things. First, the two objections a reader reaches for are already paid for inside the note: the quality line is carried at 1% domestic against 5% Vietnam, and the tariff line at none against 10%, and both sit inside the model that produced $10 against $15 — so the $5 gap is already net of them and must not be charged twice. Second, the three-month lead time is priced, not ignored: with δ of 20, μ of 1,000, holding cost of $1 and a $5 unit advantage, the formula returns 1 minus 0.2, which is 0.8 — lead time moves the answer from 100% offshore to 80%, not to zero. Third, the 20% kept at home is not a hedge against those objections; it is the hedge against the demand tail, which is exactly what the standard deviation term buys. The honest exposure is that δ and h are single points in this analysis, and the split falls with either of them — at double the volatility the split is 60/40 — but nothing in the data shows either rising, so that belongs in risk, not in the verdict. I would confirm the contractor's actual monthly defect series and rebuild δ and h from twelve months of shipments and stock before the split is signed."
    },
    "anchor_metric": "клиентского порога нет; решение выносится сопоставлением двух посчитанных линий и величиной сдвига доли, а не сравнением с правилом",
-   "family_h25": "F0",
+   "family_h25": "F11",
    "family_src": "clean",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "family_note": "круг 44: F11 «одно множество под двумя ярлыками» — «the quality line is set at a 5% defect rate» и «the tariff line is 10%» уже внутри модельного результата, повторное вычитание задваивает"
   },
   {
    "id": "SY-039",
@@ -5065,6 +5071,121 @@
    },
    "reference": {
     "en": "| field | text |\n|---|---|\n| **conclusion** | **We should hold our price and put the money into service reliability instead.** |\n| **the rest** | The attack is on price, and price is not what buyers decide on: the survey ranks service reliability first and design last, and reliability is where we are rated materially above the entrant. Matching costs everything we have — our cost is **7** against a price of **10**, so going to **7** takes the margin from **3 cents to 0** — and it would be a concession made to a competitor who is **2 cents under water on every cup** and funding that gap rather than holding a position. The staged version in Block D is the same concession slowed down: it accepts price as the field. Risks: internally the verdict rests on a survey ranking, which is a snapshot; externally price becomes a pain point if the economy turns. Next: measure the reliability lead by on-time delivery per account rather than asserting it, and watch for the point at which the entrant stops funding the 2-cent gap. |\n\n**Source:** `Darden 2019` (2018-19 Casebook), Styrofoam Situation, pp. 58–67 — Exhibit 1 unit economics (10 / 7 price; 4 manufacturing, 3 shipping, 2 distribution), the Exhibit 1 guidance block (\"net margin is 30%\", \"Chalice Inc is running at a loss\", \"All of Cup Co's profit will be eroded if they try to match\"), the Exhibit 2 guidance block (\"The most important metric to customers is reliability of service and Cup Co ranks a lot higher\"), and the Conclusion block (\"Cup Co should not lower its price\")."
+   }
+  },
+  {
+   "id": "SY-043",
+   "title": "The Model That Won Last Year",
+   "company": "Kelvarno",
+   "industry": "Consumer subscription apps",
+   "difficulty": "Hard",
+   "clean": false,
+   "focus": "S18(a)",
+   "scaffold": "L1",
+   "time": "8 min",
+   "type": "Synthesis",
+   "exhibit_mode": "with",
+   "family_h25": "F6",
+   "family_src": "тело",
+   "family_conf": "высокая",
+   "family_note": "круг 41: ранжирование верно для того года, в котором посчитано, и неверно для горизонта, на который принимается решение — рамка сменилась не в записи, а между записью и решением",
+   "anchor_metric": "first-year profit by revenue model, $M",
+   "prompt": "Kelvarno is choosing the revenue model for a subscription app before launch. An analyst has priced all three and left the note below. Give your verdict.\n\n**One field, free text. Put the block markers in yourself.**",
+   "exhibit": {
+    "title": "Analyst's note — revenue model selection",
+    "parts": [
+     {
+      "type": "text",
+      "lines": [
+       "**Block A — addressable base**",
+       "6,000,000 potential users."
+      ],
+      "blank_after": 1
+     },
+     {
+      "type": "text",
+      "lines": [
+       "**Block B — first-year economics of each model**"
+      ],
+      "blank_before": 1
+     },
+     {
+      "type": "table",
+      "header": [
+       "Model",
+       "Users taken",
+       "Revenue",
+       "Profit"
+      ],
+      "rows": [
+       [
+        "Monthly fee",
+        "5% = 300,000",
+        "300,000 × $10 × 12 = $36.0M",
+        "$25.7M"
+       ],
+       [
+        "Premium account",
+        "30% = 1,800,000 on the platform",
+        "1,800,000 × (50% × 40% + 50% × 20%) × $5 × 12 = $32.4M",
+        "$20.6M"
+       ],
+       [
+        "Advertising",
+        "40% = 2,400,000",
+        "2,400,000 × (50% × $0.75 + 50% × $1.25) × 12 = $28.8M",
+        "$16.4M"
+       ]
+      ],
+      "blank_after": 1
+     },
+     {
+      "type": "text",
+      "lines": [
+       "Fixed costs $10,000,000 a year in every case; variable operating cost $1 per member per year, already deducted above.",
+       "",
+       "**Block C — the market series I was also given**",
+       "The share of users in this category who pay a monthly fee, and the average fee they pay, have been falling since 2008, and the fall steepens from 2013. Free competitors with the same core features arrived in late 2012 and the shift to them has not slowed since.",
+       "",
+       "**Block D — where I got to**",
+       "On first-year profit the monthly fee wins: **$25.7M** against **$20.6M** and **$16.4M**, a lead of **$5.1M** over the next model. I have priced all three the same way and on the same base. I did not write a recommendation."
+      ],
+      "blank_before": 1
+     }
+    ]
+   },
+   "key": {
+    "naive": "**Naive path — and it is the honest one.** Take the ranking as computed: monthly fee earns $5.1M more in year one than premium, the arithmetic is identical across the three models, so pick the monthly fee. Nothing in Block B is wrong, and a careful person checks Block B and stops there.",
+    "decoy": "**The tempting second branch.** Launch on the monthly fee and switch later, when the decline bites. It sounds like optionality and it is the opposite: the fee model takes 5% of the base onto the platform, the premium model takes 30% — switching later means switching a base six times smaller, built on the promise that made it pay.",
+    "support": "**What decides it is Block C, and Block C is not about this year.** The choice is made once and lived with for years, while the $25.7M is a first-year figure computed on a share of payers that is falling and a fee that is falling with it. The premium model is behind by **$5.1M** on a year that already happened by the time the decision matters, and it stands on **1,800,000** users against **300,000** — the model that survives the trend is the one whose base is not the shrinking segment.",
+    "correct": "Launch on the premium-account model, not the monthly fee.",
+    "risks": "Internal: premium conversion is itself an assumption — the 50/40 and 50/20 splits are a projection, and if premium share erodes the way the fee did, the answer changes. External: the book's own — the ad-supported model could be growing faster than the premium account, in which case the model we did not pick is the one gaining.",
+    "next": "Put the same series against premium conversion, not just against the fee, before committing. Price the switching cost of moving models after launch, so the decoy is refused with a number rather than an argument."
+   },
+   "checklist": {
+    "en": [
+     "Minto: the first sentence is the verdict itself — an action with a subject. A correct verdict arriving after the facts fails this line.",
+     "States that the ranking is a first-year figure while the decision has a longer horizon — the frame, not the arithmetic, is what is wrong.",
+     "Uses the trend in Block C explicitly, not as a general remark about competition.",
+     "Names the $5.1M lead being given up, rather than avoiding it.",
+     "Names the base difference — 1,800,000 against 300,000 — as the reason the surviving model is the wider one.",
+     "Refuses the launch-then-switch option, and says why.",
+     "Gives one internal and one external risk.",
+     "Sets its own block markers: conclusion, facts, risk, next step."
+    ],
+    "ru": [
+     "Минто: первое предложение — сам вердикт, действием и с субъектом.",
+     "Сказано, что ранжирование — цифра первого года, а решение живёт дольше: неверна рамка, а не арифметика.",
+     "Тренд из блока C использован явно, а не как общая ремарка про конкуренцию.",
+     "Названа отдаваемая разница $5.1M, а не обойдена.",
+     "Названа разница баз — 1 800 000 против 300 000 — как причина.",
+     "Отвергнут вариант «запустить и потом переключиться», с обоснованием.",
+     "Назван один внутренний и один внешний риск.",
+     "Маркеры блоков расставлены самим кандидатом."
+    ]
+   },
+   "reference": {
+    "en": "**Conclusion.** Kelvarno should launch on the premium-account model.\n\n**Facts.** The note's arithmetic is right and its frame is not: **$25.7M** against **$20.6M** is a first-year comparison, and the model is chosen once for years. Block C says the paying-fee share and the fee itself have fallen since 2008 and faster since free competitors arrived in 2012 — that is the segment the winning model is built on. Premium gives up **$5.1M** in year one and stands on **1,800,000** users instead of **300,000**.\n\n**Risk.** Internal: the premium conversion split is itself a projection and can erode the same way. External: the book's own — the ad-supported model could be growing faster than premium.\n\n**Next step.** Run the same series against premium conversion before committing, and price the cost of switching models after launch so that \"start on the fee and change later\" is refused with a number.\n\n**Source:** `9.-Stern-MCA-Casebook-2019`, Grad-U-Date, Questions 4–6 — base of 6,000,000; monthly fee 5% × $10 × 12 = $36.0M revenue and $25.7M profit; premium 30% × (50% × 40% + 50% × 20%) × $5 × 12 = $32.4M and $20.6M; advertising 40% × (50% × $0.75 + 50% × $1.25) × 12 = $28.8M and $16.4M; fixed costs $10,000,000 and $1 per member; and the guidance that the candidate should switch the recommendation from monthly fee to premium because \"the portion of customers willing to pay a fee and the average fee paid have been rapidly decreasing since 2008\"."
    }
   }
  ]

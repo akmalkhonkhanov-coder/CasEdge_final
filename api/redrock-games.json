@@ -111,7 +111,8 @@
        "answer": 10,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 11
+       "naive": 11,
+       "naive_reason": "picks months by rainy-days"
       }
      ]
     },
@@ -125,7 +126,8 @@
        "answer": 75,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 42.86
+       "naive": 42.86,
+       "naive_reason": "divides by the larger range"
       }
      ]
     },
@@ -146,7 +148,8 @@
        "answer": 20,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 33.33
+       "naive": 33.33,
+       "naive_reason": "uses the current value as base"
       }
      ]
     },
@@ -162,7 +165,8 @@
        "options": [
         "January",
         "December"
-       ]
+       ],
+       "naive_reason": "ranks by absolute gap"
       }
      ]
     }
@@ -190,7 +194,8 @@
       "B",
       "C",
       "D"
-     ]
+     ],
+     "naive_reason": "highest single reading 52"
     },
     {
      "c": 2,
@@ -199,7 +204,8 @@
      "answer": 576,
      "round": 0,
      "tolerance": 0.01,
-     "naive": 540
+     "naive": 540,
+     "naive_reason": "repeats −180 absolute"
     },
     {
      "c": 3,
@@ -212,7 +218,8 @@
       "Sedge",
       "Moss",
       "Heath"
-     ]
+     ],
+     "naive_reason": "count × risk"
     },
     {
      "c": 4,
@@ -221,7 +228,8 @@
      "answer": 35,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 17.26
+     "naive": 17.26,
+     "naive_reason": "÷365"
     },
     {
      "c": 5,
@@ -232,16 +240,18 @@
      "options": [
       "6:5",
       "9:10"
-     ]
+     ],
+     "naive_reason": "pool from reed → reed 30"
     },
     {
      "c": 6,
-     "prompt": "Table-avg with N/A — invertebrate biomass (g/m²); N/A = 0, average over all 3 types; if the first type doubled: | | Fen | Carr | Bog | |---|---|---|---| | Beetles | 20 | 12 | 11 | | Spiders | 7 | 9 | 8 | | Worms | *N/A* | 15 | 16 | → Fen (40+7+0)/3 · Carr 16.00 · Bog 15.33. (÷ 2 available)",
+     "prompt": "Table-avg with N/A — invertebrate biomass (g/m²) in the Fen column; N/A = 0, average over all 3 types; if the first type doubled: | | Fen | Carr | Bog | |---|---|---|---| | Beetles | 20 | 12 | 11 | | Spiders | 7 | 9 | 8 | | Worms | *N/A* | 15 | 16 | → Fen (40+7+0)/3 · Carr 16.00 · Bog 15.33. (÷ 2 available)",
      "input": "numeric",
-     "answer": 15.33,
+     "answer": 15.67,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 23.5
+     "naive": 23.5,
+     "naive_reason": "average over all 3 types"
     }
    ]
   },
@@ -353,7 +363,8 @@
        "answer": 10,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 11
+       "naive": 11,
+       "naive_reason": "by storm-days: Jan 13 − May 2"
       }
      ]
     },
@@ -367,7 +378,8 @@
        "answer": 37.5,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 27.27
+       "naive": 27.27,
+       "naive_reason": "÷11"
       }
      ]
     },
@@ -388,7 +400,8 @@
        "answer": 32,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 30
+       "naive": 30,
+       "naive_reason": "repeats −10 absolute"
       }
      ]
     },
@@ -404,7 +417,8 @@
        "options": [
         "February",
         "December"
-       ]
+       ],
+       "naive_reason": "absolute gap 6 °C is widest"
       }
      ]
     }
@@ -452,7 +466,8 @@
      "options": [
       "Wrasse",
       "Trigger"
-     ]
+     ],
+     "naive_reason": "count × risk"
     },
     {
      "c": 4,
@@ -461,7 +476,8 @@
      "answer": 36,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 14.79
+     "naive": 14.79,
+     "naive_reason": "÷365"
     },
     {
      "c": 5,
@@ -476,12 +492,13 @@
     },
     {
      "c": 6,
-     "prompt": "Table-avg with N/A — coral-recruit density (recruits/m²); N/A = 0, average over all 3 genera; if the first genus doubled: | | North | Mid | South | |---|---|---|---| | Genus A | 14 | 11 | 8 | | Genus B | 7 | 9 | 5 | | Genus C | *N/A* | 10 | 17 | → North (28+7+0)/3 · Mid 13.67 · South 12.67. (÷2 available). Note #2: carries a light layered step (Q3 reduction → forward projection) but tagged Medium honestly — one chained step over a standard C-set is not a full Hard",
+     "prompt": "Table-avg with N/A — coral-recruit density (recruits/m²) in the North column; N/A = 0, average over all 3 genera; if the first genus doubled: | | North | Mid | South | |---|---|---|---| | Genus A | 14 | 11 | 8 | | Genus B | 7 | 9 | 5 | | Genus C | *N/A* | 10 | 17 | → North (28+7+0)/3 · Mid 13.67 · South 12.67. (÷2 available). Note #2: carries a light layered step (Q3 reduction → forward projection) but tagged Medium honestly — one chained step over a standard C-set is not a full Hard",
      "input": "numeric",
-     "answer": 12.67,
+     "answer": 11.67,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 17.5
+     "naive": 17.5,
+     "naive_reason": "average over all 3 genera"
     }
    ]
   },
@@ -593,7 +610,8 @@
        "answer": 9,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 10
+       "naive": 10,
+       "naive_reason": "by snow-days: Jan 12 − May 2"
       }
      ]
     },
@@ -607,7 +625,8 @@
        "answer": 95.45,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 48.84
+       "naive": 48.84,
+       "naive_reason": "÷43"
       }
      ]
     },
@@ -644,7 +663,8 @@
        "options": [
         "April",
         "December"
-       ]
+       ],
+       "naive_reason": "absolute gap 30 NTU"
       }
      ]
     }
@@ -692,7 +712,8 @@
      "options": [
       "Perch",
       "Burbot"
-     ]
+     ],
+     "naive_reason": "count × risk"
     },
     {
      "c": 4,
@@ -701,7 +722,8 @@
      "answer": 30,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 20.55
+     "naive": 20.55,
+     "naive_reason": "÷365"
     },
     {
      "c": 5,
@@ -716,12 +738,13 @@
     },
     {
      "c": 6,
-     "prompt": "Table-avg with N/A — benthic biomass (g/m²); N/A = 0, average over all 3 types; if the first type doubled: | | Inlet | Basin | Outlet | |---|---|---|---| | Snails | 16 | 11 | 8 | | Mayflies | 5 | 9 | 6 | | Midges | *N/A* | 13 | 12 | → Inlet (32+5+0)/3 · Basin 14.67 · Outlet 11.33. (÷2 available)",
+     "prompt": "Table-avg with N/A — benthic biomass (g/m²) in the Inlet column; N/A = 0, average over all 3 types; if the first type doubled: | | Inlet | Basin | Outlet | |---|---|---|---| | Snails | 16 | 11 | 8 | | Mayflies | 5 | 9 | 6 | | Midges | *N/A* | 13 | 12 | → Inlet (32+5+0)/3 · Basin 14.67 · Outlet 11.33. (÷2 available)",
      "input": "numeric",
-     "answer": 11.33,
+     "answer": 12.33,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 18.5
+     "naive": 18.5,
+     "naive_reason": "average over all 3 types"
     }
    ]
   },
@@ -844,7 +867,8 @@
        "answer": 818,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 89.11
+       "naive": 89.11,
+       "naive_reason": "÷ peak"
       }
      ]
     }
@@ -867,7 +891,8 @@
      "answer": 60,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 40
+     "naive": 40,
+     "naive_reason": "ignores variable cost"
     },
     {
      "c": 2,
@@ -897,7 +922,8 @@
       "A",
       "B",
       "C"
-     ]
+     ],
+     "naive_reason": "highest price $900"
     },
     {
      "c": 5,
@@ -906,7 +932,8 @@
      "answer": 1.5,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 3
+     "naive": 3,
+     "naive_reason": "÷ trough"
     },
     {
      "c": 6,
@@ -1037,7 +1064,8 @@
        "answer": 285.71,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 74.07
+       "naive": 74.07,
+       "naive_reason": "÷ peak"
       }
      ]
     }
@@ -1059,7 +1087,8 @@
      "answer": 40.4,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 29.63
+     "naive": 29.63,
+     "naive_reason": "÷ price"
     },
     {
      "c": 2,
@@ -1089,7 +1118,8 @@
       "A",
       "B",
       "C"
-     ]
+     ],
+     "naive_reason": "highest price $760"
     },
     {
      "c": 5,
@@ -1098,7 +1128,8 @@
      "answer": 1.4,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 2.57
+     "naive": 2.57,
+     "naive_reason": "÷ trough"
     },
     {
      "c": 6,
@@ -1231,7 +1262,8 @@
        "answer": 232.47,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 69.92
+       "naive": 69.92,
+       "naive_reason": "÷ peak"
       }
      ]
     }
@@ -1253,7 +1285,8 @@
      "answer": 40,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 22.5
+     "naive": 22.5,
+     "naive_reason": "÷ check"
     },
     {
      "c": 2,
@@ -1283,7 +1316,8 @@
       "A",
       "B",
       "C"
-     ]
+     ],
+     "naive_reason": "highest price $700"
     },
     {
      "c": 5,
@@ -1292,7 +1326,8 @@
      "answer": 1.42,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 2.46
+     "naive": 2.46,
+     "naive_reason": "÷ trough"
     },
     {
      "c": 6,
@@ -1435,7 +1470,8 @@
         "Year 5",
         "Year 6",
         "Year 7"
-       ]
+       ],
+       "naive_reason": "reads 126,795 as \"≈120k\""
       },
       {
        "key": "q1c",
@@ -1456,7 +1492,8 @@
        "answer": 21.13,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 26.8
+       "naive": 26.8,
+       "naive_reason": "divides the gap by the 100,000 target instead of the current Year-5 population"
       }
      ]
     },
@@ -1477,7 +1514,8 @@
        "answer": 37000,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 32500
+       "naive": 32500,
+       "naive_reason": "uses the Year-5 Δ of 5 pp, not cumulative 14"
       }
      ]
     },
@@ -1491,7 +1529,8 @@
        "answer": 33,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 30
+       "naive": 30,
+       "naive_reason": "counts 5 declines, not 4"
       },
       {
        "key": "q4b",
@@ -1523,7 +1562,8 @@
      "options": [
       "Year 3",
       "never"
-     ]
+     ],
+     "naive_reason": "compares the restocked series"
     },
     {
      "c": 2,
@@ -1556,7 +1596,8 @@
       "North",
       "Mid",
       "South"
-     ]
+     ],
+     "naive_reason": "drop −12,000"
     },
     {
      "c": 5,
@@ -1568,7 +1609,8 @@
       "North",
       "Mid",
       "South"
-     ]
+     ],
+     "naive_reason": "single metric 35"
     },
     {
      "c": 6,
@@ -1715,7 +1757,8 @@
         "Year 4",
         "Year 5",
         "Year 6"
-       ]
+       ],
+       "naive_reason": "reads 501 as \"≈480\""
       }
      ]
     },
@@ -1729,7 +1772,8 @@
        "answer": 13.23,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 15.25
+       "naive": 15.25,
+       "naive_reason": "÷ target 400"
       }
      ]
     },
@@ -1750,7 +1794,8 @@
        "answer": 15200,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 13200
+       "naive": 13200,
+       "naive_reason": "uses Year-5 Δ of 3 pp"
       }
      ]
     },
@@ -1796,7 +1841,8 @@
      "options": [
       "Year 3",
       "never"
-     ]
+     ],
+     "naive_reason": "uses the controlled series"
     },
     {
      "c": 2,
@@ -1990,7 +2036,8 @@
        "answer": 585000,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 660000
+       "naive": 660000,
+       "naive_reason": "average of rates 3"
       }
      ]
     },
@@ -2076,7 +2123,8 @@
        "answer": 28.8,
        "round": 1,
        "tolerance": 0.01,
-       "naive": 48
+       "naive": 48,
+       "naive_reason": "omits 0"
       }
      ]
     }
@@ -2260,7 +2308,8 @@
        "answer": 3900000,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 3300000
+       "naive": 3300000,
+       "naive_reason": "omits fixed cost"
       }
      ]
     },
@@ -2314,7 +2363,8 @@
      "answer": 3.94,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 47.27
+     "naive": 47.27,
+     "naive_reason": "÷ households"
     },
     {
      "c": 3,
@@ -2352,7 +2402,8 @@
      "answer": 5.88,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 24.07
+     "naive": 24.07,
+     "naive_reason": "fixed total cost $3.9M ÷ $16.2M"
     }
    ]
   },
@@ -2464,7 +2515,8 @@
        "answer": 10,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 11
+       "naive": 11,
+       "naive_reason": "by rainy-days: Jan 15 − May 4"
       }
      ]
     },
@@ -2478,7 +2530,8 @@
        "answer": 81.25,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 44.83
+       "naive": 44.83,
+       "naive_reason": "÷29"
       }
      ]
     },
@@ -2515,7 +2568,8 @@
        "options": [
         "March",
         "December"
-       ]
+       ],
+       "naive_reason": "widest absolute gap 22 cm"
       }
      ]
     }
@@ -2543,7 +2597,8 @@
       "B",
       "C",
       "D"
-     ]
+     ],
+     "naive_reason": "highest reading 52"
     },
     {
      "c": 2,
@@ -2565,7 +2620,8 @@
       "Rush",
       "Aster",
       "Sea-lavender"
-     ]
+     ],
+     "naive_reason": "count × risk"
     },
     {
      "c": 4,
@@ -2574,7 +2630,8 @@
      "answer": 45,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 24.66
+     "naive": 24.66,
+     "naive_reason": "÷365"
     },
     {
      "c": 5,
@@ -2589,9 +2646,9 @@
     },
     {
      "c": 6,
-     "prompt": "Table-avg with N/A — invertebrate biomass (g/m²); N/A = 0, ÷ all 3 types; first type doubled: | | Fen | Carr | Bog | |---|---|---|---| | Crabs | 24 | 14 | 10 | | Snails | 9 | 11 | 8 | | Worms | *N/A* | 15 | 17 | → Fen (48+9+0)/3 · Carr 18.00 · Bog 15.00. (÷2)",
+     "prompt": "Table-avg with N/A — invertebrate biomass (g/m²) in the Fen column; N/A = 0, ÷ all 3 types; first type doubled: | | Fen | Carr | Bog | |---|---|---|---| | Crabs | 24 | 14 | 10 | | Snails | 9 | 11 | 8 | | Worms | *N/A* | 15 | 17 | → Fen (48+9+0)/3 · Carr 18.00 · Bog 15.00. (÷2)",
      "input": "numeric",
-     "answer": 15,
+     "answer": 19,
      "round": 2,
      "tolerance": 0.01,
      "naive": 28.5
@@ -2706,7 +2763,8 @@
        "answer": 4,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 5
+       "naive": 5,
+       "naive_reason": "by rainy-days: Jan 6 − May 1"
       }
      ]
     },
@@ -2720,7 +2778,8 @@
        "answer": 130.77,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 56.67
+       "naive": 56.67,
+       "naive_reason": "÷30"
       }
      ]
     },
@@ -2741,7 +2800,8 @@
        "answer": 38.4,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 36
+       "naive": 36,
+       "naive_reason": "repeats −12 absolute"
       }
      ]
     },
@@ -2757,7 +2817,8 @@
        "options": [
         "December",
         "April"
-       ]
+       ],
+       "naive_reason": "widest absolute gap 25 °C"
       }
      ]
     }
@@ -2816,7 +2877,8 @@
      "answer": 27.5,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 12.05
+     "naive": 12.05,
+     "naive_reason": "÷365"
     },
     {
      "c": 5,
@@ -2831,12 +2893,13 @@
     },
     {
      "c": 6,
-     "prompt": "Table-avg with N/A — soil-invertebrate biomass; N/A = 0, ÷3, first type doubled: | | Edge | Mid | Core | |---|---|---|---| | Beetles | 15 | 12 | 9 | | Ants | 6 | 10 | 7 | | Larvae | *N/A* | 9 | 16 | → Edge (30+6+0)/3 · Mid 14.33 · Core 13.67. (÷2). Note #12: carries a light layered step (Q3 reduction → projection) + %-vs-absolute Q4, but tagged Medium honestly — same basis that demoted #2 Talveh; one chained step over a standard C-set is not a full Hard (contrast #14's real 4 layers)",
+     "prompt": "Table-avg with N/A — soil-invertebrate biomass in the Edge column; N/A = 0, ÷3, first type doubled: | | Edge | Mid | Core | |---|---|---|---| | Beetles | 15 | 12 | 9 | | Ants | 6 | 10 | 7 | | Larvae | *N/A* | 9 | 16 | → Edge (30+6+0)/3 · Mid 14.33 · Core 13.67. (÷2). Note #12: carries a light layered step (Q3 reduction → projection) + %-vs-absolute Q4, but tagged Medium honestly — same basis that demoted #2 Talveh; one chained step over a standard C-set is not a full Hard (contrast #14's real 4 layers)",
      "input": "numeric",
-     "answer": 13.67,
+     "answer": 12,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 18
+     "naive": 18,
+     "naive_reason": "carries a light layered step (Q3 reduction → projection) + %-vs-absolute Q4, but tagged Medium honestly — same basis that demoted #2 Talveh"
     }
    ]
   },
@@ -2949,7 +3012,8 @@
        "answer": 12,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 13
+       "naive": 13,
+       "naive_reason": "by rainy-days: Jan 18 − May 5"
       }
      ]
     },
@@ -2963,7 +3027,8 @@
        "answer": 150,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 60
+       "naive": 60,
+       "naive_reason": "÷20"
       }
      ]
     },
@@ -3000,7 +3065,8 @@
        "options": [
         "January",
         "December"
-       ]
+       ],
+       "naive_reason": "widest absolute gap 25 h"
       }
      ]
     }
@@ -3057,7 +3123,8 @@
      "answer": 35,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 23.01
+     "naive": 23.01,
+     "naive_reason": "÷365"
     },
     {
      "c": 5,
@@ -3072,9 +3139,9 @@
     },
     {
      "c": 6,
-     "prompt": "Table-avg with N/A — leaf-litter fauna; N/A = 0, ÷3, first type doubled: | | Ridge | Slope | Valley | |---|---|---|---| | Mites | 18 | 12 | 10 | | Springtails | 7 | 9 | 6 | | Worms | *N/A* | 13 | 15 | → Ridge (36+7+0)/3 · Slope 15.33 · Valley 13.67. (÷2)",
+     "prompt": "Table-avg with N/A — leaf-litter fauna in the Ridge column; N/A = 0, ÷3, first type doubled: | | Ridge | Slope | Valley | |---|---|---|---| | Mites | 18 | 12 | 10 | | Springtails | 7 | 9 | 6 | | Worms | *N/A* | 13 | 15 | → Ridge (36+7+0)/3 · Slope 15.33 · Valley 13.67. (÷2)",
      "input": "numeric",
-     "answer": 13.67,
+     "answer": 14.33,
      "round": 2,
      "tolerance": 0.01,
      "naive": 21.5
@@ -3197,7 +3264,8 @@
        "answer": 500,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 83.33
+       "naive": 83.33,
+       "naive_reason": "÷ peak"
       }
      ]
     }
@@ -3220,7 +3288,8 @@
      "answer": 60,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 37.5
+     "naive": 37.5,
+     "naive_reason": "÷ rate"
     },
     {
      "c": 2,
@@ -3250,7 +3319,8 @@
       "A",
       "B",
       "C"
-     ]
+     ],
+     "naive_reason": "highest price $950"
     },
     {
      "c": 5,
@@ -3259,7 +3329,8 @@
      "answer": 1.54,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 3.33
+     "naive": 3.33,
+     "naive_reason": "÷ trough"
     },
     {
      "c": 6,
@@ -3391,7 +3462,8 @@
        "answer": 283.46,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 73.92
+       "naive": 73.92,
+       "naive_reason": "÷ peak"
       }
      ]
     }
@@ -3413,7 +3485,8 @@
      "answer": 56.67,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 34
+     "naive": 34,
+     "naive_reason": "÷ price"
     },
     {
      "c": 2,
@@ -3443,7 +3516,8 @@
       "A",
       "B",
       "C"
-     ]
+     ],
+     "naive_reason": "highest price $820"
     },
     {
      "c": 5,
@@ -3452,7 +3526,8 @@
      "answer": 1.58,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 3
+     "naive": 3,
+     "naive_reason": "÷ trough"
     },
     {
      "c": 6,
@@ -3610,7 +3685,8 @@
        "answer": 17.66,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 21.45
+       "naive": 21.45,
+       "naive_reason": "÷ 55,000 target"
       }
      ]
     },
@@ -3631,7 +3707,8 @@
        "answer": 17700,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 15900
+       "naive": 15900,
+       "naive_reason": "uses Year-5 Δ of 3 pp"
       }
      ]
     },
@@ -3677,7 +3754,8 @@
      "options": [
       "Year 3",
       "never"
-     ]
+     ],
+     "naive_reason": "uses trapped series"
     },
     {
      "c": 2,
@@ -3883,7 +3961,8 @@
        "answer": 21.87,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 27.99
+       "naive": 27.99,
+       "naive_reason": "÷ target"
       }
      ]
     },
@@ -3904,7 +3983,8 @@
        "answer": 30600,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 27000
+       "naive": 27000,
+       "naive_reason": "base 25,000, +400/pp"
       }
      ]
     },
@@ -4144,7 +4224,8 @@
        "answer": 800000,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 750000
+       "naive": 750000,
+       "naive_reason": "average 3"
       }
      ]
     },
@@ -4230,7 +4311,8 @@
        "answer": 15,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 30
+       "naive": 30,
+       "naive_reason": "omits 0"
       }
      ]
     }
@@ -4442,7 +4524,8 @@
        "answer": 396000,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 440000
+       "naive": 440000,
+       "naive_reason": "average 3"
       }
      ]
     },
@@ -4528,7 +4611,8 @@
        "answer": 11.03,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 15.75
+       "naive": 15.75,
+       "naive_reason": "omits 0"
       }
      ]
     }
@@ -4766,7 +4850,8 @@
      "answer": 7.03,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 35.13
+     "naive": 35.13,
+     "naive_reason": "÷ households"
     },
     {
      "c": 3,
@@ -4930,7 +5015,8 @@
        "answer": 164.71,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 62.22
+       "naive": 62.22,
+       "naive_reason": "÷45"
       }
      ]
     },
@@ -4944,7 +5030,8 @@
        "answer": 20,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 25
+       "naive": 25,
+       "naive_reason": "÷ current value: 100/400 and 900/2,100, not the 10-years-ago base"
       },
       {
        "key": "q3b",
@@ -4952,7 +5039,8 @@
        "answer": 30,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 42.86
+       "naive": 42.86,
+       "naive_reason": "÷ current value: 100/400 and 900/2,100, not the 10-years-ago base"
       }
      ]
     },
@@ -4968,7 +5056,8 @@
        "options": [
         "April",
         "December"
-       ]
+       ],
+       "naive_reason": "widest absolute gap 40"
       }
      ]
     }
@@ -5027,7 +5116,8 @@
      "answer": 40,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 19.73
+     "naive": 19.73,
+     "naive_reason": "÷365"
     },
     {
      "c": 5,
@@ -5042,9 +5132,9 @@
     },
     {
      "c": 6,
-     "prompt": "Table-avg with N/A — invertebrate biomass; N/A = 0, ÷3, first type doubled: | | North | Mid | South | |---|---|---|---| | Brine-flies | 22 | 13 | 9 | | Beetles | 8 | 10 | 7 | | Worms | *N/A* | 14 | 18 | → North (44+8+0)/3 · Mid 16.67 · South 14.33. (÷2)",
+     "prompt": "Table-avg with N/A — invertebrate biomass in the North column; N/A = 0, ÷3, first type doubled: | | North | Mid | South | |---|---|---|---| | Brine-flies | 22 | 13 | 9 | | Beetles | 8 | 10 | 7 | | Worms | *N/A* | 14 | 18 | → North (44+8+0)/3 · Mid 16.67 · South 14.33. (÷2)",
      "input": "numeric",
-     "answer": 14.33,
+     "answer": 17.33,
      "round": 2,
      "tolerance": 0.01,
      "naive": 26
@@ -5173,7 +5263,8 @@
        "answer": 90.48,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 47.5
+       "naive": 47.5,
+       "naive_reason": "÷40"
       }
      ]
     },
@@ -5210,7 +5301,8 @@
        "options": [
         "February",
         "December"
-       ]
+       ],
+       "naive_reason": "widest absolute gap 28"
       }
      ]
     }
@@ -5267,7 +5359,8 @@
      "answer": 35,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 23.01
+     "naive": 23.01,
+     "naive_reason": "÷365"
     },
     {
      "c": 5,
@@ -5282,9 +5375,9 @@
     },
     {
      "c": 6,
-     "prompt": "Table-avg with N/A — benthic biomass; N/A = 0, ÷3, first type doubled: | | Head | Basin | Mouth | |---|---|---|---| | Snails | 19 | 12 | 9 | | Mussels | 6 | 9 | 7 | | Worms | *N/A* | 14 | 16 | → Head (38+6+0)/3 · Basin 15.67 · Mouth 13.67. (÷2)",
+     "prompt": "Table-avg with N/A — benthic biomass in the Head column; N/A = 0, ÷3, first type doubled: | | Head | Basin | Mouth | |---|---|---|---| | Snails | 19 | 12 | 9 | | Mussels | 6 | 9 | 7 | | Worms | *N/A* | 14 | 16 | → Head (38+6+0)/3 · Basin 15.67 · Mouth 13.67. (÷2)",
      "input": "numeric",
-     "answer": 13.67,
+     "answer": 14.67,
      "round": 2,
      "tolerance": 0.01,
      "naive": 22
@@ -5410,7 +5503,8 @@
        "answer": 3888000,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 5184000
+       "naive": 5184000,
+       "naive_reason": "stops at the headline: all seats at $60, no cancellations"
       }
      ]
     },
@@ -5431,7 +5525,8 @@
        "answer": 382.14,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 542.86
+       "naive": 542.86,
+       "naive_reason": "uses the headline peak $5,184,000 — the headline error propagates here too"
       }
      ]
     }
@@ -5453,7 +5548,8 @@
      "answer": 30,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 20
+     "naive": 20,
+     "naive_reason": "÷ ticket"
     },
     {
      "c": 2,
@@ -5483,7 +5579,8 @@
       "A",
       "B",
       "C"
-     ]
+     ],
+     "naive_reason": "highest price $110"
     },
     {
      "c": 5,
@@ -5492,7 +5589,8 @@
      "answer": 1.61,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 3.57
+     "naive": 3.57,
+     "naive_reason": "÷ trough"
     },
     {
      "c": 6,
@@ -5624,7 +5722,8 @@
        "answer": 264.29,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 72.55
+       "naive": 72.55,
+       "naive_reason": "÷ peak"
       }
      ]
     }
@@ -5646,7 +5745,8 @@
      "answer": 81.6,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 51
+     "naive": 51,
+     "naive_reason": "÷ price"
     },
     {
      "c": 2,
@@ -5676,7 +5776,8 @@
       "A",
       "B",
       "C"
-     ]
+     ],
+     "naive_reason": "highest price $650"
     },
     {
      "c": 5,
@@ -5816,7 +5917,8 @@
        "answer": 314.81,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 75.89
+       "naive": 75.89,
+       "naive_reason": "÷ peak"
       }
      ]
     }
@@ -5838,7 +5940,8 @@
      "answer": 60,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 36
+     "naive": 36,
+     "naive_reason": "÷ price"
     },
     {
      "c": 2,
@@ -5868,7 +5971,8 @@
       "A",
       "B",
       "C"
-     ]
+     ],
+     "naive_reason": "highest price $760"
     },
     {
      "c": 5,
@@ -6068,7 +6172,8 @@
         "Year 5",
         "Year 6",
         "Year 7"
-       ]
+       ],
+       "naive_reason": "drops to 15,000"
       }
      ]
     },
@@ -6082,7 +6187,8 @@
        "answer": 9.91,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 11
+       "naive": 11,
+       "naive_reason": "÷ 50,000 target"
       }
      ]
     },
@@ -6103,7 +6209,8 @@
        "answer": 22750,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 20750
+       "naive": 20750,
+       "naive_reason": "uses Year-6 Δ of 3 pp"
       }
      ]
     },
@@ -6149,7 +6256,8 @@
      "options": [
       "Year 4",
       "never"
-     ]
+     ],
+     "naive_reason": "uses the harvested series"
     },
     {
      "c": 2,
@@ -6158,7 +6266,8 @@
      "answer": 15620,
      "round": 0,
      "tolerance": 0.01,
-     "naive": 15691
+     "naive": 15691,
+     "naive_reason": "round once"
     },
     {
      "c": 3,
@@ -6359,7 +6468,8 @@
        "answer": 7.76,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 8.42
+       "naive": 8.42,
+       "naive_reason": "÷ 85,000 target"
       }
      ]
     },
@@ -6380,7 +6490,8 @@
        "answer": 34550,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 31400
+       "naive": 31400,
+       "naive_reason": "uses Year-5 Δ of 4 pp"
       }
      ]
     },
@@ -6426,7 +6537,8 @@
      "options": [
       "Year 3",
       "never"
-     ]
+     ],
+     "naive_reason": "uses culled series"
     },
     {
      "c": 2,
@@ -6435,7 +6547,8 @@
      "answer": 18520,
      "round": 0,
      "tolerance": 0.01,
-     "naive": 18586
+     "naive": 18586,
+     "naive_reason": "round once"
     },
     {
      "c": 3,
@@ -6620,7 +6733,8 @@
        "answer": 525000,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 500000
+       "naive": 500000,
+       "naive_reason": "average 3"
       }
      ]
     },
@@ -6641,7 +6755,8 @@
        "answer": 35.36,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 41.6
+       "naive": 41.6,
+       "naive_reason": "ignores the fixed-price offtake block"
       }
      ]
     },
@@ -6655,7 +6770,8 @@
        "answer": 0.83,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 0.98
+       "naive": 0.98,
+       "naive_reason": "uses headline $41"
       }
      ]
     },
@@ -6710,7 +6826,8 @@
      "answer": 15.6,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 31.2
+     "naive": 31.2,
+     "naive_reason": "omits the 0"
     },
     {
      "c": 4,
@@ -6742,7 +6859,8 @@
       "A",
       "B",
       "C"
-     ]
+     ],
+     "naive_reason": "highest cost/ha $6,000 → 20,000 ha"
     }
    ]
   },
@@ -6879,7 +6997,8 @@
        "answer": 684000,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 720000
+       "naive": 720000,
+       "naive_reason": "average 4"
       }
      ]
     },
@@ -6965,7 +7084,8 @@
        "answer": 9.9,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 16.5
+       "naive": 16.5,
+       "naive_reason": "omits 0"
       }
      ]
     }
@@ -7203,7 +7323,8 @@
      "answer": 5.49,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 32.94
+     "naive": 32.94,
+     "naive_reason": "÷ households"
     },
     {
      "c": 3,
@@ -7240,7 +7361,8 @@
      "answer": 15.87,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 9.26
+     "naive": 9.26,
+     "naive_reason": "fixed ÷ full-adoption saving"
     }
    ]
   },
@@ -7353,7 +7475,8 @@
        "answer": 11,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 12
+       "naive": 12,
+       "naive_reason": "picks months by the rainy-days row"
       }
      ]
     },
@@ -7367,7 +7490,8 @@
        "answer": 112.5,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 52.94
+       "naive": 52.94,
+       "naive_reason": "÷17"
       }
      ]
     },
@@ -7381,7 +7505,8 @@
        "answer": 20,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 25
+       "naive": 25,
+       "naive_reason": "÷ current value"
       },
       {
        "key": "q3b",
@@ -7389,7 +7514,8 @@
        "answer": 12.5,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 14.29
+       "naive": 14.29,
+       "naive_reason": "÷ current value"
       }
      ]
     },
@@ -7405,7 +7531,8 @@
        "options": [
         "January",
         "December"
-       ]
+       ],
+       "naive_reason": "widest absolute gap 18 mg/L"
       }
      ]
     }
@@ -7464,7 +7591,8 @@
      "answer": 30,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 13.97
+     "naive": 13.97,
+     "naive_reason": "÷365"
     },
     {
      "c": 5,
@@ -7475,13 +7603,14 @@
      "options": [
       "21:19",
       "21:23"
-     ]
+     ],
+     "naive_reason": "pool → 38"
     },
     {
      "c": 6,
-     "prompt": "Table-avg with N/A — benthic biomass; N/A = 0, ÷3, first type doubled: | | Riffle | Run | Pool | |---|---|---|---| | Larvae | 24 | 14 | 8 | | Snails | 7 | 9 | 6 | | Worms | *N/A* | 12 | 15 | → Riffle (48+7+0)/3 · Run 16.33 · Pool 12.33. (÷2)",
+     "prompt": "Table-avg with N/A — benthic biomass in the Riffle column; N/A = 0, ÷3, first type doubled: | | Riffle | Run | Pool | |---|---|---|---| | Larvae | 24 | 14 | 8 | | Snails | 7 | 9 | 6 | | Worms | *N/A* | 12 | 15 | → Riffle (48+7+0)/3 · Run 16.33 · Pool 12.33. (÷2)",
      "input": "numeric",
-     "answer": 12.33,
+     "answer": 18.33,
      "round": 2,
      "tolerance": 0.01,
      "naive": 27.5
@@ -7610,7 +7739,8 @@
        "answer": 100,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 50
+       "naive": 50,
+       "naive_reason": "÷18"
       }
      ]
     },
@@ -7624,7 +7754,8 @@
        "answer": 20,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 25
+       "naive": 25,
+       "naive_reason": "÷ current"
       },
       {
        "key": "q3b",
@@ -7632,7 +7763,8 @@
        "answer": 25,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 33.33
+       "naive": 33.33,
+       "naive_reason": "÷ current"
       }
      ]
     },
@@ -7648,7 +7780,8 @@
        "options": [
         "March",
         "December"
-       ]
+       ],
+       "naive_reason": "widest absolute gap 24 cm"
       }
      ]
     }
@@ -7705,7 +7838,8 @@
      "answer": 40,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 24.11
+     "naive": 24.11,
+     "naive_reason": "÷365"
     },
     {
      "c": 5,
@@ -7720,9 +7854,9 @@
     },
     {
      "c": 6,
-     "prompt": "Table-avg with N/A — benthic biomass; N/A = 0, ÷3, first type doubled: | | Inner | Mid | Outer | |---|---|---|---| | Snails | 21 | 12 | 8 | | Mussels | 5 | 9 | 6 | | Worms | *N/A* | 13 | 15 | → Inner (42+5+0)/3 · Mid 15.33 · Outer 12.33. (÷2)",
+     "prompt": "Table-avg with N/A — benthic biomass in the Inner column; N/A = 0, ÷3, first type doubled: | | Inner | Mid | Outer | |---|---|---|---| | Snails | 21 | 12 | 8 | | Mussels | 5 | 9 | 6 | | Worms | *N/A* | 13 | 15 | → Inner (42+5+0)/3 · Mid 15.33 · Outer 12.33. (÷2)",
      "input": "numeric",
-     "answer": 12.33,
+     "answer": 15.67,
      "round": 2,
      "tolerance": 0.01,
      "naive": 23.5
@@ -7852,7 +7986,8 @@
        "answer": 95.24,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 48.78
+       "naive": 48.78,
+       "naive_reason": "÷41"
       }
      ]
     },
@@ -7866,7 +8001,8 @@
        "answer": 15,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 17.65
+       "naive": 17.65,
+       "naive_reason": "÷ current"
       },
       {
        "key": "q3b",
@@ -7874,7 +8010,8 @@
        "answer": 20,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 25
+       "naive": 25,
+       "naive_reason": "÷ current"
       }
      ]
     },
@@ -7890,7 +8027,8 @@
        "options": [
         "April",
         "December"
-       ]
+       ],
+       "naive_reason": "widest absolute gap 30 µS/cm"
       }
      ]
     }
@@ -7949,7 +8087,8 @@
      "answer": 45,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 24.66
+     "naive": 24.66,
+     "naive_reason": "÷365"
     },
     {
      "c": 5,
@@ -7964,9 +8103,9 @@
     },
     {
      "c": 6,
-     "prompt": "Table-avg with N/A — invertebrate biomass; N/A = 0, ÷3, first type doubled: | | East | Mid | West | |---|---|---|---| | Beetles | 16 | 11 | 8 | | Bugs | 5 | 9 | 6 | | Worms | *N/A* | 13 | 17 | → East (32+5+0)/3 · Mid 14.67 · West 13.00. (÷2)",
+     "prompt": "Table-avg with N/A — invertebrate biomass in the East column; N/A = 0, ÷3, first type doubled: | | East | Mid | West | |---|---|---|---| | Beetles | 16 | 11 | 8 | | Bugs | 5 | 9 | 6 | | Worms | *N/A* | 13 | 17 | → East (32+5+0)/3 · Mid 14.67 · West 13.00. (÷2)",
      "input": "numeric",
-     "answer": 13,
+     "answer": 12.33,
      "round": 2,
      "tolerance": 0.01,
      "naive": 18.5
@@ -8113,7 +8252,8 @@
        "answer": 1436211,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 2019600
+       "naive": 2019600,
+       "naive_reason": "stops at the headline: every night at the posted $220, no commission, no redemption dilution"
       }
      ]
     },
@@ -8134,7 +8274,8 @@
        "answer": 192.27,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 310.99
+       "naive": 310.99,
+       "naive_reason": "uses the headline peak $2,019,600 — the headline error propagates here too"
       }
      ]
     }
@@ -8157,7 +8298,8 @@
      "answer": 36.67,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 20
+     "naive": 20,
+     "naive_reason": "ignores variable cost"
     },
     {
      "c": 2,
@@ -8187,7 +8329,8 @@
       "A",
       "B",
       "C"
-     ]
+     ],
+     "naive_reason": "highest price $800"
     },
     {
      "c": 5,
@@ -8196,7 +8339,8 @@
      "answer": 1.65,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 3.3
+     "naive": 3.3,
+     "naive_reason": "÷ trough"
     },
     {
      "c": 6,
@@ -8328,7 +8472,8 @@
        "answer": 344.44,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 77.5
+       "naive": 77.5,
+       "naive_reason": "÷ peak"
       }
      ]
     }
@@ -8350,7 +8495,8 @@
      "answer": 80,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 48
+     "naive": 48,
+     "naive_reason": "÷ rent"
     },
     {
      "c": 2,
@@ -8380,7 +8526,8 @@
       "A",
       "B",
       "C"
-     ]
+     ],
+     "naive_reason": "highest price $720"
     },
     {
      "c": 5,
@@ -8389,7 +8536,8 @@
      "answer": 1.52,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 2.53
+     "naive": 2.53,
+     "naive_reason": "÷ trough"
     },
     {
      "c": 6,
@@ -8540,7 +8688,8 @@
         "Year 4",
         "Year 5",
         "Year 6"
-       ]
+       ],
+       "naive_reason": "round-number anchor: 100,210 ≈ 100,000, missing that it is still above"
       },
       {
        "key": "q1c",
@@ -8575,7 +8724,8 @@
        "answer": 20.66,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 26.04
+       "naive": 26.04,
+       "naive_reason": "÷ 70,000 target"
       }
      ]
     },
@@ -8596,7 +8746,8 @@
        "answer": 30850,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 26800
+       "naive": 26800,
+       "naive_reason": "uses Year-5 Δ of 4 pp"
       }
      ]
     },
@@ -8642,7 +8793,8 @@
      "options": [
       "Year 3",
       "never"
-     ]
+     ],
+     "naive_reason": "uses culled series"
     },
     {
      "c": 2,
@@ -8651,7 +8803,8 @@
      "answer": 17780,
      "round": 0,
      "tolerance": 0.01,
-     "naive": 17879
+     "naive": 17879,
+     "naive_reason": "round once"
     },
     {
      "c": 3,
@@ -8787,7 +8940,8 @@
        "answer": 920000,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 866666.67
+       "naive": 866666.67,
+       "naive_reason": "average 4"
       }
      ]
     },
@@ -8803,7 +8957,8 @@
        "options": [
         "No",
         "Yes"
-       ]
+       ],
+       "naive_reason": "average up while both grades cheapened"
       }
      ]
     },
@@ -8817,7 +8972,8 @@
        "answer": 2800,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 3600
+       "naive": 3600,
+       "naive_reason": "stops shifting, the blend FALLS"
       }
      ]
     },
@@ -8865,7 +9021,8 @@
      "answer": 60,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 40
+     "naive": 40,
+     "naive_reason": "pools Y1+Y2 volumes"
     },
     {
      "c": 3,
@@ -8874,7 +9031,8 @@
      "answer": 76,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 60
+     "naive": 60,
+     "naive_reason": "uses the volume share"
     },
     {
      "c": 4,
@@ -8883,7 +9041,8 @@
      "answer": 280,
      "round": 0,
      "tolerance": 0.01,
-     "naive": 360
+     "naive": 360,
+     "naive_reason": "projects the blended $3,000→$3,600 trend — the mix-shift error cascades into a $80M overstatement"
     },
     {
      "c": 5,
@@ -9018,7 +9177,8 @@
        "answer": 3900000,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 4800000
+       "naive": 4800000,
+       "naive_reason": "applies the pilot's 8 sessions to every served household"
       }
      ]
     },
@@ -9068,7 +9228,8 @@
        "options": [
         "No",
         "Yes"
-       ]
+       ],
+       "naive_reason": "net −$150,000; the marginal households run only 2 sessions/yr, below what their connection costs"
       },
       {
        "key": "q4e",
@@ -9098,7 +9259,8 @@
      "answer": 5.13,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 4.17
+     "naive": 4.17,
+     "naive_reason": "÷ the uniform 480,000 sessions"
     },
     {
      "c": 2,
@@ -9107,7 +9269,8 @@
      "answer": 0.51,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 0.42
+     "naive": 0.42,
+     "naive_reason": "uses the uniform $4,800,000 saving"
     },
     {
      "c": 3,
@@ -9145,7 +9308,8 @@
      "answer": 750000,
      "round": 0,
      "tolerance": 0.01,
-     "naive": 2250000
+     "naive": 2250000,
+     "naive_reason": "re-prices the whole 90,000"
     }
    ]
   },
@@ -9313,7 +9477,8 @@
      "answer": 4.09,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 36.82
+     "naive": 36.82,
+     "naive_reason": "÷ households"
     },
     {
      "c": 3,
@@ -9322,7 +9487,8 @@
      "answer": 4422000,
      "round": 0,
      "tolerance": 0.01,
-     "naive": 4752000
+     "naive": 4752000,
+     "naive_reason": "forgets recurring maintenance"
     },
     {
      "c": 4,
@@ -9351,7 +9517,8 @@
      "answer": 11.06,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 6.11
+     "naive": 6.11,
+     "naive_reason": "omits that stove cost scales with adoption"
     }
    ]
   },
@@ -9445,7 +9612,8 @@
        "options": [
         "16 : 5",
         "8 : 1"
-       ]
+       ],
+       "naive_reason": "forgets the absorption"
       }
      ]
     },
@@ -9459,7 +9627,8 @@
        "answer": 87.5,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 92.11
+       "naive": 92.11,
+       "naive_reason": "÷ the 7,600 managed area — same mis-set base"
       }
      ]
     }
@@ -9481,7 +9650,8 @@
      "answer": 12.5,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 13.16
+     "naive": 13.16,
+     "naive_reason": "÷ 7,600 managed"
     },
     {
      "c": 2,
@@ -9492,7 +9662,8 @@
      "options": [
       "Forest",
       "Alpine"
-     ]
+     ],
+     "naive_reason": "picks the largest zone"
     },
     {
      "c": 3,
@@ -9534,7 +9705,8 @@
      "answer": 31.58,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 30
+     "naive": 30,
+     "naive_reason": "read which base the question names"
     }
    ]
   },
@@ -9600,7 +9772,8 @@
        "answer": 20,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 25
+       "naive": 25,
+       "naive_reason": "÷ current 512, not the 10-years-ago base"
       }
      ]
     },
@@ -9628,7 +9801,8 @@
        "answer": 327.68,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 256
+       "naive": 256,
+       "naive_reason": "subtracts −128 twice"
       }
      ]
     },
@@ -9642,7 +9816,8 @@
        "answer": 20,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 25
+       "naive": 25,
+       "naive_reason": "repeats −24"
       },
       {
        "key": "q4b",
@@ -9650,7 +9825,8 @@
        "answer": 76.8,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 72
+       "naive": 72,
+       "naive_reason": "repeats −24"
       }
      ]
     }
@@ -9677,7 +9853,8 @@
       "B",
       "C",
       "D"
-     ]
+     ],
+     "naive_reason": "drop −288"
     },
     {
      "c": 2,
@@ -9686,7 +9863,8 @@
      "answer": 320,
      "round": 0,
      "tolerance": 0.01,
-     "naive": 300
+     "naive": 300,
+     "naive_reason": "repeats −100 absolute"
     },
     {
      "c": 3,
@@ -9695,7 +9873,8 @@
      "answer": 184.32,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 256
+     "naive": 256,
+     "naive_reason": "2 × 128"
     },
     {
      "c": 4,
@@ -9717,7 +9896,8 @@
      "options": [
       "32 : 27",
       "4 : 3"
-     ]
+     ],
+     "naive_reason": "uses the pre-decline 400 : 300"
     },
     {
      "c": 6,
@@ -9800,7 +9980,8 @@
        "answer": 5.5,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 6.75
+       "naive": 6.75,
+       "naive_reason": "average of the four per-ha indices (6+4+2+15)/4"
       }
      ]
     },
@@ -9814,7 +9995,8 @@
        "answer": 27.27,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 10
+       "naive": 10,
+       "naive_reason": "area×index"
       }
      ]
     },
@@ -9830,7 +10012,8 @@
        "options": [
         "Meadow",
         "Bog"
-       ]
+       ],
+       "naive_reason": "area×index"
       }
      ]
     },
@@ -9844,7 +10027,8 @@
        "answer": 6.8,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 6.75
+       "naive": 6.75,
+       "naive_reason": "average of the four indices unchanged"
       }
      ]
     }
@@ -9866,7 +10050,8 @@
      "answer": 5.8,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 7.5
+     "naive": 7.5,
+     "naive_reason": "average (6+4+2+18)/4"
     },
     {
      "c": 2,
@@ -9908,7 +10093,8 @@
      "answer": 1.25,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 0
+     "naive": 0,
+     "naive_reason": "treats the two as equal"
     },
     {
      "c": 6,
@@ -9919,7 +10105,8 @@
      "options": [
       "rises",
       "falls"
-     ]
+     ],
+     "naive_reason": "assumes removing area lowers the average"
     }
    ]
   },
@@ -10060,7 +10247,8 @@
        "options": [
         "No",
         "Yes"
-       ]
+       ],
+       "naive_reason": "reads the reported bridge total"
       }
      ]
     },
@@ -10088,7 +10276,8 @@
        "answer": 17.5,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 28.5
+       "naive": 28.5,
+       "naive_reason": "underlying profit ÷ revenue"
       }
      ]
     }
@@ -10112,7 +10301,8 @@
      "answer": 38.6,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 0
+     "naive": 0,
+     "naive_reason": "treats all $57M as recurring"
     },
     {
      "c": 2,
@@ -10139,7 +10329,8 @@
      "answer": 280,
      "round": 0,
      "tolerance": 0.01,
-     "naive": 456
+     "naive": 456,
+     "naive_reason": "8×$57M reported — a $176M overvaluation"
     },
     {
      "c": 5,
@@ -10148,7 +10339,8 @@
      "answer": 41,
      "round": 0,
      "tolerance": 0.01,
-     "naive": 81.23
+     "naive": 81.23,
+     "naive_reason": "extrapolates the reported trend"
     },
     {
      "c": 6,
@@ -10223,7 +10415,8 @@
        "answer": 52000,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 12000
+       "naive": 12000,
+       "naive_reason": "counts gross adds, ignores churn"
       }
      ]
     },
@@ -10237,7 +10430,8 @@
        "answer": 18720000,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 22320000
+       "naive": 22320000,
+       "naive_reason": "uses the naive 62,000 base"
       }
      ]
     },
@@ -10251,7 +10445,8 @@
        "answer": 1260,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 1800
+       "naive": 1800,
+       "naive_reason": "ignores that only the margin is profit"
       }
      ]
     },
@@ -10267,7 +10462,8 @@
        "options": [
         "14.0×",
         "20.0×"
-       ]
+       ],
+       "naive_reason": "uses the $1,800 gross LTV"
       }
      ]
     }
@@ -10290,7 +10486,8 @@
      "answer": 10000,
      "round": 0,
      "tolerance": 0.01,
-     "naive": 0
+     "naive": 0,
+     "naive_reason": "assumes the base is sticky"
     },
     {
      "c": 2,
@@ -10326,7 +10523,8 @@
      "answer": 15000,
      "round": 0,
      "tolerance": 0.01,
-     "naive": 5000
+     "naive": 5000,
+     "naive_reason": "forgets churn must be backfilled"
     },
     {
      "c": 6,
@@ -10335,7 +10533,8 @@
      "answer": 720000,
      "round": 0,
      "tolerance": 0.01,
-     "naive": 4320000
+     "naive": 4320000,
+     "naive_reason": "counts only the 12,000 adds' revenue"
     }
    ]
   },
@@ -10394,7 +10593,8 @@
        "answer": 9600,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 24000
+       "naive": 24000,
+       "naive_reason": "applies the growth rate to the whole stock, dropping the density term"
       }
      ]
     },
@@ -10422,7 +10622,8 @@
        "answer": 10000,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 20000
+       "naive": 20000,
+       "naive_reason": "0.4 × 50,000, again dropping the density term"
       }
      ]
     },
@@ -10436,7 +10637,8 @@
        "answer": 50000,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 100000
+       "naive": 100000,
+       "naive_reason": "assumes the fullest stock yields the most"
       }
      ]
     }
@@ -10459,7 +10661,8 @@
      "answer": 10000,
      "round": 0,
      "tolerance": 0.01,
-     "naive": 20000
+     "naive": 20000,
+     "naive_reason": "0.4 × 50,000"
     },
     {
      "c": 2,
@@ -10468,7 +10671,8 @@
      "answer": 6400,
      "round": 0,
      "tolerance": 0.01,
-     "naive": 8000
+     "naive": 8000,
+     "naive_reason": "interpolates 9,600↔? / applies flat rate proportionally"
     },
     {
      "c": 3,
@@ -10507,7 +10711,8 @@
       "A",
       "B",
       "C"
-     ]
+     ],
+     "naive_reason": "picks the highest tonnage this year, ignoring next-year collapse"
     }
    ]
   },
@@ -10646,7 +10851,8 @@
         "Year 3",
         "Year 5",
         "Year 6"
-       ]
+       ],
+       "naive_reason": "adds recruits = 30% of adults two years prior"
       }
      ]
     },
@@ -10660,7 +10866,8 @@
        "answer": 19.61,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 24.4
+       "naive": 24.4,
+       "naive_reason": "÷ 25,000 target"
       }
      ]
     },
@@ -10681,7 +10888,8 @@
        "answer": 27200,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 22000
+       "naive": 22000,
+       "naive_reason": "uses the Year-6 Δ of 5 pp"
       }
      ]
     },
@@ -10727,7 +10935,8 @@
      "options": [
       "never exceeds",
       "collapse"
-     ]
+     ],
+     "naive_reason": "reads the recruit inflows as unchecked growth"
     },
     {
      "c": 2,
@@ -10736,7 +10945,8 @@
      "answer": 27000,
      "round": 0,
      "tolerance": 0.01,
-     "naive": 30000
+     "naive": 30000,
+     "naive_reason": "repeats the flat early figure, ignoring that adults two years prior have fallen"
     },
     {
      "c": 3,
@@ -10849,7 +11059,8 @@
        "answer": 948000,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 960000
+       "naive": 960000,
+       "naive_reason": "average of rates 4"
       }
      ]
     },
@@ -10877,7 +11088,8 @@
        "answer": 46,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 30
+       "naive": 30,
+       "naive_reason": "counts the refined revenue as pure new, ignoring the ore it ate"
       }
      ]
     },
@@ -10891,7 +11103,8 @@
        "answer": 46,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 70
+       "naive": 70,
+       "naive_reason": "double-counts the 300,000 t of ore"
       }
      ]
     },
@@ -10940,7 +11153,8 @@
      "options": [
       "nothing",
       "refining always adds value"
-     ]
+     ],
+     "naive_reason": "add value?"
     },
     {
      "c": 3,
@@ -10976,7 +11190,8 @@
      "answer": 166667,
      "round": 0,
      "tolerance": 0.01,
-     "naive": 500000
+     "naive": 500000,
+     "naive_reason": "treats one tonne of ore as one tonne of refined"
     }
    ]
   },
@@ -11077,7 +11292,8 @@
        "answer": 336000,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 1680000
+       "naive": 1680000,
+       "naive_reason": "multiplies by people: 56,000 × 5.0 × 6 — the effect is stated per household, not per person; household size is a distractor"
       }
      ]
     },
@@ -11105,7 +11321,8 @@
        "answer": 2688000,
        "round": 0,
        "tolerance": 0.01,
-       "naive": 13440000
+       "naive": 13440000,
+       "naive_reason": "uses the per-person 1,680,000 cases"
       },
       {
        "key": "q4b",
@@ -11145,7 +11362,8 @@
      "answer": 6.19,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 1.24
+     "naive": 1.24,
+     "naive_reason": "÷ the per-person 1,680,000 cases — understates by counting people as cases"
     },
     {
      "c": 3,
@@ -11154,7 +11372,8 @@
      "answer": 2400,
      "round": 0,
      "tolerance": 0.01,
-     "naive": 12000
+     "naive": 12000,
+     "naive_reason": "400 × 5 people × 6"
     },
     {
      "c": 4,
@@ -11183,7 +11402,8 @@
      "answer": 27.78,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 10.42
+     "naive": 10.42,
+     "naive_reason": "fixed ÷ full-adoption saving"
     }
    ]
   },
@@ -11267,7 +11487,8 @@
        "options": [
         "North",
         "South"
-       ]
+       ],
+       "naive_reason": "pick and the cost-effectiveness pick agree"
       }
      ]
     },
@@ -11385,7 +11606,8 @@
      "options": [
       "North",
       "South"
-     ]
+     ],
+     "naive_reason": "picks South \"because it's cheaper in total dollars,\" a reversal the numbers do not support"
     }
    ]
   },
@@ -11483,7 +11705,8 @@
        "answer": 36.67,
        "round": 2,
        "tolerance": 0.01,
-       "naive": 50
+       "naive": 50,
+       "naive_reason": "ignores the shared 800"
       }
      ]
     },
@@ -11519,7 +11742,8 @@
      "answer": 800,
      "round": 0,
      "tolerance": 0.01,
-     "naive": 0
+     "naive": 0,
+     "naive_reason": "double-count"
     },
     {
      "c": 2,
@@ -11561,7 +11785,8 @@
      "answer": 20,
      "round": 2,
      "tolerance": 0.01,
-     "naive": 33.33
+     "naive": 33.33,
+     "naive_reason": "uses the pre-reclass 2,000"
     },
     {
      "c": 6,
@@ -11570,7 +11795,8 @@
      "answer": 6000,
      "round": 0,
      "tolerance": 0.01,
-     "naive": 6500
+     "naive": 6500,
+     "naive_reason": "double-counts the overlap, overshooting the range"
     }
    ]
   }
