@@ -8161,7 +8161,14 @@ function casPickChartOption(cardId, key, label) {
 
 let _casExSeq = 0;
 function casAddExhibitCard(ex) {
-  if (!ex || !ex.render) return;
+  if (!ex) return;
+  /* 09.08.2026. Экзибит без спецификации графика раньше не рисовался вовсе:
+     его перепечатывала модель, а она теряет строки и ломает ограду блока.
+     Теперь сервер отдаёт тело раскрытого экзибита, и мы показываем его сами —
+     тем же mdToHtml, что и остальной markdown, то есть схема в ограде встаёт
+     моноширинным <pre>, а не пропорциональной кашей. */
+  if (!ex.render && ex.body_md) { casAddExhibitTextCard(ex); return; }
+  if (!ex.render) return;
   const chat = document.getElementById('chat-area');
   const typing = document.getElementById('typing-ind');
   if (!chat) return;
@@ -8186,6 +8193,23 @@ function casAddExhibitCard(ex) {
   const enTags = { bar: 'Exhibit · Chart', line: 'Exhibit · Chart', pie: 'Exhibit · Chart', table: 'Exhibit · Table', select: 'Exhibit · Pick one' };
   const tag = ((state && state.aiLang) === 'ru' ? ruTags : enTags)[r.type] || 'Exhibit';
   div.innerHTML = `<span class="cas-ex-tag">${tag}</span><div class="cas-ex-title">${esc(L(r.title) || ex.title || 'Exhibit')}</div>${body}${r.note ? `<div class="cas-ex-note">${esc(L(r.note))}</div>` : ''}`;
+  chat.insertBefore(div, typing);
+  setTimeout(() => { chat.scrollTop = chat.scrollHeight; }, 60);
+}
+
+function casAddExhibitTextCard(ex) {
+  const chat = document.getElementById('chat-area');
+  const typing = document.getElementById('typing-ind');
+  if (!chat) return;
+  let body = '';
+  try { body = mdToHtml(ex.body_md); } catch (e) { return; }
+  const div = document.createElement('div');
+  div.className = 'cas-ex-card';
+  div.id = 'casExCard' + (++_casExSeq);
+  const tag = ((state && state.aiLang) === 'ru') ? 'Exhibit \u00b7 \u0414\u0430\u043d\u043d\u044b\u0435' : 'Exhibit \u00b7 Data';
+  div.innerHTML = '<span class="cas-ex-tag">' + tag + '</span>' +
+    (ex.title ? '<div class="cas-ex-title">' + esc(ex.title) + '</div>' : '') +
+    '<div class="cas-ex-body">' + body + '</div>';
   chat.insertBefore(div, typing);
   setTimeout(() => { chat.scrollTop = chat.scrollHeight; }, 60);
 }
