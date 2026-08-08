@@ -3778,7 +3778,7 @@
      "candidate_md": "Давай начнём с издержек. Посмотри себестоимость по каждой модели год к году, посчитай изменение и скажи, что это даёт для гипотезы про рост костов.",
      "interviewer_md": "```\nEconomy: 16,100 → 15,950  (−0.93%)\nMid:     23,800 → 23,650  (−0.63%)\nPremium: 40,900 → 40,750  (−0.37%)\n```\n**Ответ: H3 — ЛОЖНЫЙ СЛЕД.** Издержки **снизились** по всем моделям (логистика подешевела, как и сказал коммерческий директор). Рост костов не может объяснить падение прибыли — он её **поддерживал**.",
      "hints": {
-      "L1": "Три гипотезы складываются в целое падение, или ты посчитал их на разных базах?",
+      "L1": "Посмотри себестоимость каждой модели год к году — в какую сторону она двигалась?",
       "L2": "Посчитай изменение по каждой модели отдельно и назови его знак, прежде чем принимать гипотезу."
      },
      "conditional_exhibits": [],
@@ -4084,8 +4084,8 @@
    "trap_subtype": "flip",
    "lang": "ru",
    "lang_note": "тег проставлен по факту тела (поля не было)",
-   "difficulty_test": "Номинальная мощность порта посчитана для ровной загрузки: при фактическом пике доступна другая величина.",
-   "difficulty_family": "F1",
+   "difficulty_test": "Номинальная мощность 92,000 TEU посчитана для ровной загрузки, а в августе–октябре идёт 1.62× среднемесячного: причал обязан переварить пик, и доступно 56,790 TEU. Ограничение проявляется только в пике.",
+   "difficulty_family": "F4",
    "status": "live"
   },
   {
@@ -4578,8 +4578,8 @@
      "candidate_md": "Посчитай по данным меморандума отношение LTV к CAC и стоимость входа на этот рынок. Что получается — заходим?",
      "interviewer_md": "```\nLTV/CAC = 42.60 / 11.80 = 3.61x  (порог здоровья — 3x)\nValue = 380,000 × (42.60 × 0.72 − 11.80) = $7,171,360\n```\n**Ответ: 3.61x, value $7.17M → «заходим».**",
      "hints": {
-      "L1": "Ты считаешь за один период или за всё время, пока клиент остаётся?",
-      "L2": "Проверь, за какой срок собрана величина в числителе и за какой — в знаменателе."
+      "L1": "Из чего собран показатель, который называет меморандум — что стоит в числителе и что в знаменателе?",
+      "L2": "Назови три величины меморандума, которые берёшь без изменений, чтобы воспроизвести его 3.61x."
      },
      "conditional_exhibits": [],
      "depends_on": []
@@ -5584,7 +5584,7 @@
      "step": 6,
      "label": "ТВИСТ: каннибализация портфеля  (5 min)",
      "candidate_md": "Предположим, мы перекладываем капитал из Corporate в Cards. Что произойдёт?",
-     "interviewer_md": "```python\nСколько Cards вообще способен принять — сказано в ex2: $45M прироста RWA в год.\nСдвиг 45,000,000 RWA из Corporate (5.93%) в Cards (21.14%):\nПрирост = 45,000,000 × (21.14% − 5.93%) = $6,844,500\nЭто +2.9% к общей прибыли банка ($236,100,000) без единого доллара нового капитала.\nНаивная версия берёт «круглые» $200M и получает $30,420,000 — но столько\nCards принять не может, это четыре с половиной года его ёмкости.\n```\n**Но вот чего RoRWA не видит.**\nCorporate lending — это **отношения** с крупнейшими корпоративными клиентами. Именно из этих отношений растут **Trade finance** (12.28% RoRWA — вторая по эффективности линия) и значительная часть **Cards/payments** (зарплатные проекты, корпоративные карты). Обрубив Corporate, банк лишится **входа** к клиентам, которые кормят его самые высокомаржинальные продукты.\n**Мы оптимизируем линию, не заметив, что она — не линия, а дверь.**\n*Это та же логика, что в #28 (магазин продаёт сайт), но механика другая: там физический канал кормил онлайн, здесь низкодоходный продукт кормит высокодоходные.*",
+     "interviewer_md": "```python\nСколько Cards вообще способен принять — сказано в ex2: $45M прироста RWA в год.\nСдвиг 45,000,000 RWA из Corporate (5.93%) в Cards (21.14%):\nПрирост = 45,000,000 × (29.6/140 − 84.2/1,420 = 15.2133%) = $6,845,976\nЭто +2.9% к общей прибыли банка ($236,100,000) без единого доллара нового капитала.\nНаивная версия берёт «круглые» $200M и получает $30,426,559 — но столько\nCards принять не может, это четыре с половиной года его ёмкости.\n```\n**Но вот чего RoRWA не видит.**\nCorporate lending — это **отношения** с крупнейшими корпоративными клиентами. Именно из этих отношений растут **Trade finance** (12.28% RoRWA — вторая по эффективности линия) и значительная часть **Cards/payments** (зарплатные проекты, корпоративные карты). Обрубив Corporate, банк лишится **входа** к клиентам, которые кормят его самые высокомаржинальные продукты.\n**Мы оптимизируем линию, не заметив, что она — не линия, а дверь.**\n*Это та же логика, что в #28 (магазин продаёт сайт), но механика другая: там физический канал кормил онлайн, здесь низкодоходный продукт кормит высокодоходные.*",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
@@ -5594,7 +5594,7 @@
     {
      "step": 7,
      "label": "Sensitivity: ОТКРЫТЫЙ вопрос  (3 min)",
-     "candidate_md": "> *Ты установил, что Corporate lending — худшая линия по RoRWA (5.93% против 21.14% у Cards), и что сдвиг RWA в пределах ёмкости Cards ($45M в год) даёт +$6,844,500. Но твист показал, что Corporate может быть входной дверью к клиентам Trade finance и Cards. **Назови сам самое уязвимое допущение всей этой цепочки** — то, при опровержении которого твой вывод развалится. И скажи, как бы ты его проверил.*",
+     "candidate_md": "> *Ты установил, что Corporate lending — худшая линия по RoRWA (5.93% против 21.14% у Cards), и что сдвиг RWA в пределах ёмкости Cards ($45M в год) даёт +$6,845,976. Но твист показал, что Corporate может быть входной дверью к клиентам Trade finance и Cards. **Назови сам самое уязвимое допущение всей этой цепочки** — то, при опровержении которого твой вывод развалится. И скажи, как бы ты его проверил.*",
      "interviewer_md": "**Модельный ответ (что должен назвать сильный кандидат):**\nСамое уязвимое — **допущение, что RoRWA линий независимы, а капитал переносим свободно**. Я посчитал сдвиг $200M так, будто Cards может **поглотить** этот капитал с той же доходностью 21.14%. Но Cards — самая маленькая линия ($140M RWA); влить в неё ещё $200M означает вырастить её в 2.4 раза. **Рынок карточных платежей столько не даст**: доходность 21.14% существует именно потому, что объём мал и мы снимаем сливки. При масштабировании предельная доходность упадёт — возможно, до уровня SME или ниже.\n**Как проверить:** посмотреть на **предельную**, а не среднюю RoRWA — какую доходность давали последние $20M, влитые в Cards, а не первые. Плюс оценить размер адресуемого рынка: если весь рынок карт в регионе — $300M RWA, то потолок близко.\n*Слабый кандидат назовёт «требование к капиталу может измениться с 12%» — но оно применяется ко всем линиям одинаково и **не меняет их относительный порядок**.*",
      "hints": {},
      "conditional_exhibits": [],
@@ -5616,7 +5616,7 @@
      "step": 9,
      "label": "Сдвиг капитала  (3 min)",
      "candidate_md": "Посчитай эффект перераспределения.",
-     "interviewer_md": "```\n$45,000,000 RWA × (21.14% − 5.93%) = $6,844,500  (ёмкость Cards из ex2)\nПрирост к общей прибыли $236,100,000 = +2.9%\n```\n**Ответ: +$6,844,500, или 2.9% к прибыли банка, без единого доллара нового капитала — и это потолок, заданный ёмкостью Cards, а не нашим желанием.**\n*Но только если Cards способен поглотить этот капитал с прежней доходностью — см. Q7.*",
+     "interviewer_md": "```\n$45,000,000 RWA × (29.6/140 − 84.2/1,420 = 15.2133%) = $6,845,976  (ёмкость Cards из ex2)\nПрирост к общей прибыли $236,100,000 = +2.9%\n```\n**Ответ: +$6,845,976, или 2.9% к прибыли банка, без единого доллара нового капитала — и это потолок, заданный ёмкостью Cards, а не нашим желанием.**\n*Но только если Cards способен поглотить этот капитал с прежней доходностью — см. Q7.*",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
@@ -5628,7 +5628,7 @@
      "step": 10,
      "label": "Финальный синтез  (4 min)",
      "candidate_md": "Правление Corvane собирается через две минуты. Какая твоя рекомендация?",
-     "interviewer_md": "**Партнёрский ответ (Pyramid):**\n> Мы рекомендуем **не наращивать Corporate lending, а перераспределить капитал в Cards и Trade finance — но сначала проверить, сколько капитала они реально способны поглотить, и не обрубать Corporate как канал доступа к клиентам**. Corporate — крупнейшая линия по абсолютной прибыли, $84,200,000, и именно поэтому наивный выбор падает на неё. Но банк ограничен капиталом, а не спросом: по доходности на взвешенные активы Corporate даёт **5.93% — худший результат в портфеле**, тогда как Cards/payments приносит **21.14%, в 3.57 раза эффективнее**. Перекладывание RWA из Corporate в Cards в пределах того, что Cards способен принять за год ($45,000,000 по ex2), даёт **+$6,844,500, или 2.9% к прибыли банка**, без единого доллара нового капитала. Соблазнительные «круглые $200M» дали бы $30,420,000 — но это четыре с половиной года ёмкости линии. **Внутренний риск:** Cards — самая маленькая линия ($140M RWA), и даже годовая ёмкость $45M растит её на треть; доходность 21.14% может существовать именно потому, что объём мал — считать надо **предельную**, а не среднюю отдачу. **Внешний риск:** Corporate lending — это отношения с крупными клиентами, из которых растут Trade finance и корпоративные карты, то есть самые доходные линии; обрубив его, мы закроем дверь, через которую они к нам и приходят. **Действия:** за 30 дней — замерить предельную RoRWA Cards на последних траншах и оценить ёмкость рынка; за 60 дней — вместо сокращения Corporate запустить секьюритизацию корпоративного портфеля, которая снимает RWA с баланса, **сохраняя отношения** — это повышает RoRWA, не закрывая дверь.",
+     "interviewer_md": "**Партнёрский ответ (Pyramid):**\n> Мы рекомендуем **не наращивать Corporate lending, а перераспределить капитал в Cards и Trade finance — но сначала проверить, сколько капитала они реально способны поглотить, и не обрубать Corporate как канал доступа к клиентам**. Corporate — крупнейшая линия по абсолютной прибыли, $84,200,000, и именно поэтому наивный выбор падает на неё. Но банк ограничен капиталом, а не спросом: по доходности на взвешенные активы Corporate даёт **5.93% — худший результат в портфеле**, тогда как Cards/payments приносит **21.14%, в 3.57 раза эффективнее**. Перекладывание RWA из Corporate в Cards в пределах того, что Cards способен принять за год ($45,000,000 по ex2), даёт **+$6,845,976, или 2.9% к прибыли банка**, без единого доллара нового капитала. Соблазнительные «круглые $200M» дали бы $30,426,559 — но это четыре с половиной года ёмкости линии. **Внутренний риск:** Cards — самая маленькая линия ($140M RWA), и даже годовая ёмкость $45M растит её на треть; доходность 21.14% может существовать именно потому, что объём мал — считать надо **предельную**, а не среднюю отдачу. **Внешний риск:** Corporate lending — это отношения с крупными клиентами, из которых растут Trade finance и корпоративные карты, то есть самые доходные линии; обрубив его, мы закроем дверь, через которую они к нам и приходят. **Действия:** за 30 дней — замерить предельную RoRWA Cards на последних траншах и оценить ёмкость рынка; за 60 дней — вместо сокращения Corporate запустить секьюритизацию корпоративного портфеля, которая снимает RWA с баланса, **сохраняя отношения** — это повышает RoRWA, не закрывая дверь.",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
@@ -5648,7 +5648,7 @@
    "trap_subtype": "action",
    "lang": "ru",
    "lang_note": "тег проставлен по факту тела (поля не было)",
-   "difficulty_test": "Линии ранжируют по абсолютной прибыли, а капитал ограничен: сравнивать надо отдачу на доллар капитала.",
+   "difficulty_test": "Линии ранжируют по абсолютной прибыли, то есть по числителю без знаменателя: банк ограничен капиталом, и сравнивать надо отдачу на доллар RWA. Ёмкость Cards $45M в год масштабирует приз, но переворот делает смена метрики.",
    "difficulty_family": "F1",
    "status": "live"
   },
@@ -5717,7 +5717,7 @@
      "interviewer_md": "```\nЦена $41,500 × 1,840 слотов = $76,360,000\n```\n**Ответ: наив ждёт $76,360,000, прирост к базе +$37,802,327.** *(Допущение: вся база остаётся.)*",
      "hints": {
       "L1": "Кого именно измерили — и совпадает ли эта группа с той, о которой вопрос?",
-      "L2": "Проверь, кто отвечал на опрос и остаётся ли вся текущая база при новой цене."
+      "L2": "Посчитай выручку по опросной цене на текущем числе слотов, приняв базу неизменной."
      },
      "conditional_exhibits": [],
      "depends_on": []
@@ -6061,7 +6061,7 @@
      "interviewer_md": "```\n($41.20 − $23.20) × 486,000 = $8,748,000\n```\n**Ответ: $8,748,000 экономии.** *Так считает вендор — и так же посчитает менеджер, который не читал сноску.*",
      "hints": {
       "L1": "Разница ставок — это вся экономия, или у передачи есть своя цена?",
-      "L2": "Прочитай сноску к тарифу вендора и назови статьи, которые остаются у нас после передачи."
+      "L2": "Собери экономию так, как её считает вендор: одна разница ставок на годовой объём."
      },
      "conditional_exhibits": [],
      "depends_on": []
@@ -6894,7 +6894,7 @@
     },
     {
      "step": 6,
-     "label": "САМООПРОВЕРЖЕНИЕ (F7) — 4 мин",
+     "label": "САМОПРОВЕРКА — 4 мин",
      "candidate_md": "> **Q:** *You have just argued for a premium over the deal team. Before you take this to the IC — what would have to be true for you to be wrong?*",
      "interviewer_md": "🚩 Кандидат, не задавший этот вопрос **сам**, проваливает шаг. Это F7: расчёт верен, а **вопрос был не тот**.\n\n---",
      "hints": {},
@@ -6950,7 +6950,7 @@
    "trap_subtype": "flip",
    "lang": "ru",
    "lang_note": "тег проставлен по факту тела (поля не было)",
-   "difficulty_test": "Свободная мощность трубы приносит маржу по предельным затратам, а не по полному тарифу: владелец и грузоотправитель считают по-разному.",
+   "difficulty_test": "Средняя полностью нагруженная маржа $0.32/bbl — артефакт сегодняшнего объёма: $152M постоянных размазаны по чужим 218,000 барр./сут. Решать надо на приросте — своих 58,000 барр., — а контракт, который держит объём, кончается через 18 месяцев.",
    "difficulty_family": "F1",
    "status": "live"
   },
@@ -7562,7 +7562,7 @@
      "interviewer_md": "**Формула зафиксирована ДО просмотра результата:**\n\n```\nMix  = Σ [ (w₂ − w₁) × conv_Y1 ]\nRate = Σ [ w₂ × (conv_Y2 − conv_Y1) ]\n```\n\n| Channel | Вес Y1 | Вес Y2 | Conv Y1 | Conv Y2 |\n|---|---|---|---|---|\n| Direct / app | 39.37% | 28.17% | 31.2% | 30.8% |\n| Paid search | 31.11% | 24.45% | 19.6% | 19.1% |\n| Metasearch | 19.37% | 16.16% | 14.2% | 13.9% |\n| Display / social | **10.16%** | **31.22%** | 6.1% | 5.9% |\n\n```python\nmix_effect  = -3.97 pp\nrate_effect = -0.35 pp\n# ----------------------\n# TOTAL       = -4.32 pp   <- сходится с фактическим падением\n```\n\n⚠️ **Показываем 2 знака.** На 3 знаках компоненты **не сложатся**: −3.970 + (−0.346) = **−4.316** против фактических **−4.315**. На 2 знаках: −3.97 + (−0.35) = **−4.32** ✅. Точность показа выбирается так, **чтобы показанные числа сходились между собой** — и она разная в разных кейсах.\n\n### ✅ **Mix = −3.97 pp (92.0%) · Rate = −0.35 pp (8.0%)**\n\n**H1 подтверждена.** Конверсия не «сломалась» — Traventa **купила 11.1 миллиона низкоинтентных визитов**, и они разбавили воронку арифметически.\n\n---",
      "hints": {
       "L1": "Формула зафиксирована до результата — она отвечает на вопрос совета или на удобный?",
-      "L2": "Держи формулу: эффект веса считается на конверсии старого года, эффект ставки — на весах нового."
+      "L2": "Сумма двух эффектов обязана дать фактические −4.32 pp — по этому условию и подбирай базы."
      },
      "conditional_exhibits": [],
      "depends_on": [
@@ -9098,7 +9098,7 @@
      "interviewer_md": "```\nMix  = Σ [ (w₂ − w₁) × cost_Y1 ]\nRate = Σ [ w₂ × (cost_Y2 − cost_Y1) ]\n```\n\n| Model | Вес Y1 | Вес Y2 |\n|---|---|---|\n| Compact tractor | 61.13% | 53.14% |\n| Row-crop tractor | 31.89% | 35.97% |\n| **Combine harvester** | **6.98%** | **10.89%** |\n\n```python\nmix_effect  = $7,944.42 per unit\nrate_effect = $1,871.29 per unit\n# ------------------------------\n# TOTAL       = $9,815.71  <- сходится с фактическим ростом ТОЧНО\n```\n\n✅ **На 2 знаках компоненты складываются точно** (проверено механически: 7944.42 + 1871.29 = 9815.71 = фактический рост).\n\n### ✅ **Mix = $7,944.42 (80.9%) · Rate = $1,871.29 (19.1%)**\n\n---",
      "hints": {
       "L1": "Что выросло — цена входов или их количество на единицу?",
-      "L2": "Держи формулу: эффект веса считается на цене старого года, эффект ставки — на весах нового."
+      "L2": "Сумма двух эффектов обязана дать фактический рост — по этому условию и подбирай базы."
      },
      "conditional_exhibits": [],
      "depends_on": [
@@ -9530,7 +9530,7 @@
      "interviewer_md": "```python\ngross = 340_000 * 9.99 * 12                          # = $40,759,200\n\nmobile = 40_759_200 * 0.70                           # = $28,531,440\nweb    = 40_759_200 * 0.30                           # = $12,227,760\n\nafter_platform = mobile*(1-0.30) + web*(1-0.029)\n               = 19_972_008 + 11_873_155\n               = $31,845,163                          # NET RECEIPTS\n\ncreator_share  = 31_845_163 * 0.50                   # = $15,922,581.50\nstreakhouse_net= 31_845_163 - 15_922_581.50          # = $15,922,581.50\n```\n\n### 🔻 NAIVE\n\n```python\nnaive_profit = 40_759_200 - 18_600_000               # = +$22,159,200  ->  LAUNCH\n```\n\n### ✅ CORRECT\n\n```python\ncorrect_profit = 15_922_581.50 - 18_600_000          # = -$2,677,419  (округление одно, в конце)  ->  DO NOT LAUNCH\n```\n\n### ⛔ **ФЛИП: +$22,159,200 → −$2,677,419**\n\n| | Naive | Correct |\n|---|---|---|\n| Revenue | **$40,759,200** *(gross)* | **$15,922,581.50** *(net)* |\n| Product cost | $18,600,000 | $18,600,000 |\n| **Profit** | **+$22,159,200** | **−$2,677,419** |\n| Решение | Запускать | **Не запускать** |\n| **Завышение** | | **927.63%** |\n\n---",
      "hints": {
       "L1": "То, что компания выставляет, и то, что до неё доходит, — это одна величина?",
-      "L2": "Порядок удержаний задан договором: сначала платформа с валовой суммы, автор — уже с остатка."
+      "L2": "К какой базе договор привязывает долю автора — строка экзибита это оговаривает."
      },
      "conditional_exhibits": [],
      "depends_on": [
@@ -10092,7 +10092,7 @@
      "candidate_md": "Now rebuild the model with the fee cap in place, and assume cheaper acceptance lifts volume 6% a year while VAS grows 9% a year. What is Cardexa worth on that basis, and how does it sit against the ask?",
      "interviewer_md": "Кап делает дебет дешевле для мерчантов → приём расширяется: **volume +6%/год**. VAS растёт **+9%/год** (спрос эмитентов на фрод-скоринг и данные).\n\n```python\n# yr1: старая ставка (кап с месяца 18); yr2+: 35 bps\nCF_n = vol_n * rate_n * 0.80 + VAS_n - 100M\n```\n\n| Год | CF |\n|---|---|\n| 1 | $114,869,760 |\n| **2** | **$34,555,488** ← кап бьёт |\n| 3 | $44,909,969 |\n| 4 | $56,091,023 |\n| 5 | $68,166,721 |\n| 6 | $81,210,882 |\n| 7 | $95,303,568 |\n| 8 | $110,531,617 ← volume+VAS отросли |\n\n```python\ncorrect = Σ CF_n/(1.10^n) + CF_8/0.10/(1.10^8)\n# = $909,313,118.12\n```",
      "hints": {
-      "L1": "Ты ранжируешь по той величине, которая отвечает на вопрос, или по той, что напечатана?",
+      "L1": "Кап включается не с первого дня — в каком году ставка ещё старая, а в каком уже нет?",
       "L2": "Кап меняет не только ставку, но и объём и структуру — проведи оба эффекта по годам."
      },
      "conditional_exhibits": [],
@@ -11480,7 +11480,7 @@
      "candidate_md": "Посчитай, что сеть реально получит за год, если срезать эти линии — дай число. Вторым шагом проверь, насколько твой ответ устойчив к ключевому допущению, и найди точку перелома.",
      "interviewer_md": "```python\ndef net_saving(loads, km, cost_km):        # одна функция [9b]\n    direct = 31_600_000 - 23_400_000       # = $8,200,000 avoided loss\n    repositioning = loads * km * cost_km\n    return direct - repositioning\n\nnaive   = 8_200_000                        # standalone P&L\ncorrect = net_saving(9_400, 610, 2.08)\n# repositioning = 9,400 × 610 × 2.08 = $11,926,720\n# correct = 8,200,000 − 11,926,720 = −$3,726,720\n```\n\n### ⛔ **ФЛИП: +$8,200,000 экономии → −$3,726,720 убытка. Завышение 320.03%.**\n\n**Sensitivity ([9b], та же функция):** `net_saving(9_400, 610, 1.60) = −$974,400` — даже при дешёвом пустом км ($1.60) решение не переворачивается; breakeven cost/km = **$1.4301** — на треть ниже фактического $2.08.",
      "hints": {
-      "L1": "Уже потраченные деньги меняют то, что выгодно делать дальше?",
+      "L1": "Если thin-коридоров не станет, чем и за чей счёт грузится обратное плечо Core?",
       "L2": "К прямой экономии добавь стоимость перегона машин, который появится после отмены линий."
      },
      "conditional_exhibits": [],
@@ -11826,7 +11826,7 @@
      "candidate_md": "Value the scanner rollout for Denvia — give me the NPV. Then show me how sensitive that answer is to the uplift you assumed.",
      "interviewer_md": "```python\ndef npv(uplift):                      # одна функция [9b]; 5 лет @10%, annuity 3.790787\n    return uplift*12*310*350*3.790787 - 42_000*350\n\nnaive   = npv(7.5)    # blended difference   = +$22,317,035   (af=3.790787 показан)\ncorrect = npv(2.0)    # within-segment lift  = -$4,828,791   # (af shown; точное -4,828,790.65)\n```\n\n### ⛔ **ФЛИП: +$22,317,035 → −$4,828,791**\n\n**Sensitivity ([9b], та же функция, af=3.790787):** breakeven uplift = **2.9784** старта/мес. `npv(2.1) = −$4,335,230` — даже верхний внутрисегментный лифт не спасает.",
      "hints": {
-      "L1": "Горизонт, который ты взял, совпадает со сроком, на котором работает эффект?",
+      "L1": "Разрыв 14.6 против 7.1 снят на одинаковых клиниках — или на разных?",
       "L2": "Прирост, который ты подставил, — общий по сети или тот, что относится к этой линейке?"
      },
      "conditional_exhibits": [],
@@ -12790,7 +12790,7 @@
    "terminal": 8,
    "trap_subtype": "overstate",
    "lang": "en",
-   "difficulty_test": "Дивизион показывает убыток из-за разнесённых накладных, которые останутся на группе после продажи.",
+   "difficulty_test": "Дивизион убыточен только на разнесённых накладных: из $40M исчезают $14M, значит настоящий вклад +$8M, а не −$18M. Наив считает по полной себестоимости вместо избегаемой.",
    "difficulty_family": "F1",
    "status": "live"
   },
@@ -13356,7 +13356,7 @@
     },
     {
      "step": 4,
-     "label": "The hidden dis-synergies (F1).",
+     "label": "The hidden dis-synergies (F2).",
      "candidate_md": "Management's distribution synergy — what would you net out of it before we capitalise anything, and what number would you actually put in the model?",
      "interviewer_md": "```python\n# (a) Cannibalization: hot brand overlaps 20% of Fizzano's warm-season line\ncannib = 150 * 0.20 * 0.30      # overlap_rev * overlap% * 30% CM = 9\n# (b) Promo to hold combined shelf (Kellogg: promo-driven market)\npromo = 7\n# (c) Recurring route-retooling cost\nroute = 4\nnet_synergy = 30 - 9 - 7 - 4    # = 10\n```",
      "hints": {},
@@ -13419,10 +13419,10 @@
    "terminal": 8,
    "trap_subtype": "flip",
    "lang": "en",
-   "difficulty_test": "Синергия дистрибуции объявлена валовой, а часть каналов пересекается: кандидат обязан сам найти встречный отток.",
+   "difficulty_test": "валовые $30M синергии рождают встречный отток $9M каннибализации плюс $7M промо и $4M логистики — сделка живёт только при перекрытии ниже 15.6%",
    "single_carrier": "declared",
    "single_carrier_reason": "носитель один по замыслу: вся числовая часть кейса — один связный объект (memo / таблица / график), и разрезать его на два экзибита можно только выдумав данные, чего цех не делает",
-   "difficulty_family": "F1",
+   "difficulty_family": "F2",
    "status": "live"
   },
   {
@@ -14345,7 +14345,7 @@
      "candidate_md": "Give me the economics of entering this city — annual profit and the value against the entry cost. Do we go in?",
      "interviewer_md": "```python\nprofit = 2.03 - 1.20        # = 0.83\nnpv = 0.83/0.10 - 4         # = +4.25   (106% over the $4M entry cost)\n```\nNo reversal to invent. The liquidity concern is real to *check* but does not materialize.",
      "hints": {
-      "L1": "Is the annual profit you are capitalising the mature year, or the first one?",
+      "L1": "Look at what the company owes the driver regardless of how many trips come in.",
       "L2": "State which year's economics the perpetuity assumes before dividing by the discount rate."
      },
      "conditional_exhibits": [],
@@ -14971,7 +14971,7 @@
      "step": 5,
      "label": "FLAG checks (author-verified).",
      "candidate_md": "Push on your own answer before we close this out. Is there any version of this closure that does create value — and separately, is the combined network as it stands actually adequate?",
-     "interviewer_md": "**Pass if ALL:** (1) shows there is no partial-close escape — closing any single hub leaves capacity 1,200k, below peak 1,430k, a shortfall of 230k, and the resulting $46M surge cost exceeds the $15M saving; (2) states explicitly that no positive-value closure exists at the 1.30× peak factor; (3) runs the full-capacity sanity check the other way — the full network at 1,500k ≥ peak 1,430k, so the network handles its own peak and is not underwater to begin with.\n\n**Fail if:** the candidate claims a smaller or partial closure rescues the synergy, or over-corrects and says the combined network is short of capacity overall — at 1,500k vs 1,430k it is not.",
+     "interviewer_md": "**Pass if ALL:** (1) shows there is no partial-close escape — closing any single hub leaves capacity 1,200k, below peak 1,430k, a shortfall of 230k, and the resulting $46M surge cost exceeds the $15M saving; (2) states explicitly that no positive-value closure exists at the 1.30× peak factor; (3) separates the aggregate check from the hub level: in aggregate the network at 1,500k covers its 1,430k peak, but ex2 shows Hub A at 318k of 300k and Hub D at 302k of 300k, and the same exhibit forbids free reallocation — so the network is already 20k/day short at the hub level in peak, worth $4M of surge before any closure is discussed. Credit the candidate who spots it.\n\n**Fail if:** the candidate claims a smaller or partial closure rescues the synergy, or asserts the aggregate 1,500k is short against the 1,430k peak — in aggregate it is not. Do NOT fail the candidate for saying two hubs individually exceed capacity in peak: ex2 says so itself.",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
@@ -15035,8 +15035,8 @@
    "terminal": 9,
    "trap_subtype": "flip",
    "lang": "en",
-   "difficulty_test": "Годовой объём делят поровну, а мощность нужна под пиковый квартал: усреднение прячет то, чем ограничен склад.",
-   "difficulty_family": "F1",
+   "difficulty_test": "сеть держит собственный пик 1,430 при мощности 1,500, но закрытие любого узла опускает её до 1,200 — ограничение проявляется только в пике, и в ровном объёме его не видно",
+   "difficulty_family": "F4",
    "status": "live"
   },
   {
@@ -15760,8 +15760,8 @@
      "candidate_md": "Before you accept that number — what could reverse it? Name the specific catches you would test on a line like this, and tell me how each one lands here.",
      "interviewer_md": "**EXPECTED ANSWER:**\n- *Peak-capacity conflict?* **No** — automation doesn't change throughput, so no seasonal stranding (unlike #84).\n- *Avg-vs-marginal distortion?* **No** — a single uniform line, one cost basis (unlike #85).\n- *Cannibalization / overlap?* **No** — one standalone line.\n→ **Naive and correct converge.** There is no hidden reversal; the investment simply pays.\n\n---\n\n**Pass if ALL:** (1) names at least three specific candidate reversals and tests each, instead of accepting the $2.4M / $0.3M inputs at face value — stranded labour (does the full $2.4M actually leave, or does a share stay behind?), a peak or seasonal capacity conflict, an average-vs-marginal cost distortion, and overlap/cannibalization with another line; (2) rules each out on the stated mechanism: the line runs lights-out after automation so all $2.4M is removable; automation does not change throughput, so nothing is stranded seasonally; a single uniform line means one cost basis, so no average-vs-marginal gap; the line is standalone, so no overlap; (3) concludes that naive and correct **converge** — no haircut to the $2.1M/yr net, and the $12M at a 10% WACC stands on the base economics.\n\n**Fail if:** the candidate invents a catch the case does not support — assumes a share of the $2.4M labour remains, or a hidden throughput/seasonality constraint — and marks the investment down; equally a fail if the validation step is skipped and the payback is simply restated without naming which traps were checked and cleared.",
      "hints": {
-      "L1": "Есть ли в этой экономии подвох — застрявший труд, пик, средняя вместо предельной?",
-      "L2": "Проверь по очереди: весь ли труд действительно снимается, держит ли линия пик, и на какой величине ты считаешь выгоду."
+      "L1": "Пройди по строкам этой экономии по одной — какую из них ты не готов принять на слово?",
+      "L2": "Назови сам развороты, которые проверяешь на такой линии, и закрой каждый счётом."
      },
      "conditional_exhibits": [],
      "depends_on": [
@@ -16498,7 +16498,7 @@
    "terminal": 7,
    "trap_subtype": "flip",
    "lang": "ru",
-   "difficulty_test": "Первый год клиента и его срок жизни дают разные ответы; рамка меняется после того, как первый расчёт уже сделан.",
+   "difficulty_test": "Стройку $1.8M сравнивают с выручкой одного года $1.2M, тогда как участник живёт дольше: при удержании 75% дисконтированный поток $3.7M. Данные по удержанию кандидат обязан запросить сам — рамка не меняется, она не взята.",
    "lang_note": "тег приведён к факту: тело на русском; перевод — отдельная волна",
    "difficulty_family": "F1",
    "status": "live"
@@ -16723,7 +16723,7 @@
      "candidate_md": "How much of that $500M of volume does the increase actually touch? Give me the revenue gain on that basis and how it compares with what management projected.",
      "interviewer_md": "```python\naddressable=D('300')\ncorrect_gain=addressable*inc  # 15\noverstate=(naive_gain-correct_gain)/correct_gain*100  # 66.7\n```\nCorrect: only **$300M** is addressable → gain **+$15M**, not $25M. Direction is right (revenue rises), but the projection **overstates by ~67%**. Tag: **Trap-overstate**, not flip.",
      "hints": {
-      "L1": "Ставка, которую ты применил ко всему объёму, действительно одна на весь объём?",
+      "L1": "Объём, к которому ты приложил прирост, весь ли он для нас доступен?",
       "L2": "Определи, какая часть объёма вообще попадает под повышение, и считай прирост только на ней."
      },
      "conditional_exhibits": [],
@@ -17578,8 +17578,8 @@
      "candidate_md": "Отражает ли историческая стоимость экономическую ценность книги?",
      "interviewer_md": "EXPECTED ANSWER:\nНет; нужна replacement/origination cost — self-built earning-актив занижен исторической амортизацией.\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) кандидат отвергает историческую базу; (2) называет replacement/сегодняшнюю origination cost как верную базу; (3) объясняет ПОЧЕМУ (self-built recurring-актив).",
      "hints": {
-      "L1": "Историческая стоимость — это прошлые затраты; сколько стоит привлечь такой контракт сегодня?",
-      "L2": "Оцени книгу по сегодняшней стоимости привлечения одного контракта, а не по тому, во что он обошёлся когда-то."
+      "L1": "Посмотри, по какой базе книга стоит в учёте — та ли это база, по которой решают о цене?",
+      "L2": "Что происходит в учёте с активом, который компания построила сама, а не купила?"
      },
      "conditional_exhibits": [],
      "depends_on": []
@@ -18781,7 +18781,7 @@
      "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) M&A-структура; (3) заявлено мерить таргет по incremental/avoidable экономике; (4) закрывающий вопрос.",
      "hints": {
       "L1": "Снижается ли overhead Tandora реально при реаллокации?",
-      "L2": "Считай инкрементально; commissary таргета не исчезает."
+      "L2": "Какие функции таргета дублируются с Tandora, и какие из них реально можно закрыть?"
      },
      "conditional_exhibits": [],
      "depends_on": []
@@ -18947,8 +18947,8 @@
      "candidate_md": "Строить ли своё производство API? Структурируй NPV.",
      "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) NPV-структура (экономия×горизонт vs capex); (3) кандидат ставит вопрос о горизонте релевантности API; (4) закрывающий вопрос.",
      "hints": {
-      "L1": "Сколько лет держится экономия у дженерика?",
-      "L2": "Спроси, когда кончается защита продукта, и считай экономию только до этого момента."
+      "L1": "Сколько лет живёт платформа, на которой стоит эта экономия?",
+      "L2": "Спроси, сколько лет платформа остаётся актуальной, и что остаётся от установки в конце."
      },
      "conditional_exhibits": [],
      "depends_on": []
@@ -19064,7 +19064,7 @@
      "interviewer_md": "PASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) ≥3 корзины (forward build / forward buy / сравнение); (3) явно упомянуто отделить уже потраченное от будущего; (4) закрывающий вопрос.",
      "hints": {
       "L1": "Меняются ли уже потраченные суммы от решения?",
-      "L2": "Считай только будущие потоки по каждому варианту: потраченное одинаково в обоих."
+      "L2": "Изменится ли хоть один будущий поток от того, что уже потрачено?"
      },
      "conditional_exhibits": [],
      "depends_on": [],
@@ -19087,7 +19087,7 @@
      "interviewer_md": "EXPECTED ANSWER:\nНет; sunk невозвратны, сравнивать только forward.\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) кандидат называет $225M sunk/нерелевантными; (2) переходит на forward-сравнение.",
      "hints": {
       "L1": "Влияет ли уже потраченное на будущие потоки?",
-      "L2": "Отбрось sunk, сравни forward NPV."
+      "L2": "Что из этих $225M вернётся, если сегодня остановиться?"
      },
      "conditional_exhibits": [],
      "depends_on": [],
@@ -20008,7 +20008,7 @@
      "interviewer_md": "(Clean-кейс: наив и корректный путь совпадают. Кандидат обязан прийти к этому сам, закрыв гипотезы разворота счётом.)\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) ROI-структура (прибыль точки vs capex, payback/NPV); (3) заявлены проверка sensitivity И каннибализации; (4) закрывающий вопрос.",
      "hints": {
       "L1": "Что будет с выручкой, если новые точки заберут её у существующих?",
-      "L2": "Заложи каннибализацию в NPV и проверь географическое перекрытие точек."
+      "L2": "Назови каннибализацию гипотезой разворота и закрой её счётом, а не закладывай в NPV заранее."
      },
      "conditional_exhibits": [],
      "depends_on": [],
@@ -22088,7 +22088,7 @@
      "interviewer_md": "(Clean-кейс: наив и корректный путь совпадают. Кандидат обязан прийти к этому сам, закрыв гипотезы разворота счётом.)\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если ВСЕ: (1) гипотеза первой; (2) ROI-структура (прибыль vs capex, payback/NPV); (3) заявлены проверка sensitivity И каннибализации; (4) закрывающий вопрос.",
      "hints": {
       "L1": "Что будет, если новая вертикаль заберёт слушателей у текущей?",
-      "L2": "Заложи каннибализацию в NPV и проверь перекрытие аудиторий."
+      "L2": "Назови переток слушателей гипотезой разворота и закрой его счётом; данных о перекрытии в кейсе нет."
      },
      "conditional_exhibits": [],
      "depends_on": [],
@@ -24055,8 +24055,8 @@
      "candidate_md": "Work out the risk-adjusted margin at a 300 bps cut.",
      "interviewer_md": "```\nMargin = portfolio × (APR − funding 5.20% − opex 3.10% − losses)\n\nNAIVE   at APR 20.90% and losses 6.10%  = $54,600,000.00 → CUT\nCORRECT at APR 20.90% and losses 10.34% = $18,984,000.00 → DO NOT CUT\nToday   at APR 23.90% and 10.34%        = $44,184,000.00\n```\n**Answer: the cut destroys $25,200,000.00 — 57% of what the book earns today.**",
      "hints": {
-      "L1": "Are you ranking on the figure that answers the question, or the one that is printed?",
-      "L2": "Take the loss rate that belongs to the book you get after the cut, not the one you have today."
+      "L1": "Is the printed loss rate the one this book will actually deliver?",
+      "L2": "Take the loss rate the issued book already carries once its vintages season, not the 6.10% printed."
      },
      "conditional_exhibits": [],
      "depends_on": [
@@ -24529,7 +24529,7 @@
    "terminal": 6,
    "trap_subtype": "flip",
    "lang": "en",
-   "difficulty_test": "Часть затрат на хаб остаётся после отказа от маршрута: кандидат обязан отделить исчезающие косты от застрявших.",
+   "difficulty_test": "Сегменты судят по полной себестоимости с разнесёнными $1,920 накладных, а отказ от маршрута возвращает лишь $0.35 водительского времени со стопа: вклад $1,088 уходит, возвращается $224.",
    "difficulty_family": "F1",
    "status": "live"
   },
@@ -29587,7 +29587,7 @@
      "candidate_md": "Work out the true effect of closure on a contribution basis.",
      "interviewer_md": "```\nLeaves with the line:\n  contribution                        −$9,222,080\n\nSaved:\n  the line's own fixed                +$4,900,000\n\nNot saved:\n  plant-wide fixed $52,500,000        $0 — furnace, maintenance and administration remain\n\nSubtotal                              −$4,322,080\n```\n**Answer: already minus $4,322,080. The line's contribution is twice its own fixed costs — on marginal logic the line should stay. But that is not the whole effect.**",
      "hints": {
-      "L1": "Are you ranking on the figure that answers the question, or the one that is printed?",
+      "L1": "Which of these fixed costs leaves with the line, and which stays with the plant?",
       "L2": "Separate the line's own fixed cost from the plant-wide fixed cost before calling either one saved."
      },
      "conditional_exhibits": [],
@@ -31555,7 +31555,7 @@
      "interviewer_md": "```\n$72,226,880 × 21% = $15,167,644.80\n```\n**Answer: $15,167,645 of revenue by year three.**",
      "hints": {
       "L1": "Is the size of the category the same figure as the share available to us?",
-      "L2": "Apply our reachable share to the category we can actually serve, not to the whole category."
+      "L2": "The 21% is a share of what exactly? Find the figure in ex1 it attaches to."
      },
      "conditional_exhibits": [],
      "depends_on": [
@@ -32213,7 +32213,7 @@
      "interviewer_md": "*(release ex2)*\n```python\nfixed per unit: 9,640,000 ÷ 26,800 = $359.70\nfull cost:      612 + 188 + 94 + 359.70 = $1,253.70\nmargin:         1,284 − 1,253.70 = $30.30\non 4,200 units: $127,260\n```\n**Answer: on this model the tender delivers $127,260 — a 2.4% margin.**",
      "hints": {
       "L1": "Are you working one volume assumption, or the one the tender actually commits to?",
-      "L2": "Fixed cost per unit depends on the volume you spread it over — check which volume the tender assumes."
+      "L2": "Which volume does the tender model spread the fixed cost over — this year output, or output with the order?"
      },
      "conditional_exhibits": [],
      "depends_on": [
@@ -33494,7 +33494,7 @@
      "interviewer_md": "*(release ex1)*\n```python\nvariable per wash: 1.12 + 0.34 + 0.61 = $2.07\nsaving per site:   186,400 × 2.07 × 0.15 = $57,877.20\nacross the chain:  57,877.20 × 22 = $1,273,298.40\n```\n**Answer: $1,273,298.40 — the promised saving.**",
      "hints": {
       "L1": "Is the saving per wash the whole saving, or only the part that varies?",
-      "L2": "Separate the cost that moves with volume from the cost that does not before scaling to the chain."
+      "L2": "Take exactly the lines and exactly the 15% the director used to reach his figure."
      },
      "conditional_exhibits": [],
      "depends_on": []
@@ -33914,7 +33914,7 @@
       "ex2"
      ],
      "hints": {
-      "L1": "A cost that behaves like rent and a cost that behaves like piecework are not the same cost.",
+      "L1": "Which document in the case says what the crew is paid against?",
       "L2": "Ask what document the crew is paid against."
      },
      "candidate_md": "A payroll saving computed on a calendar basis rests on exactly one assumption about how this yard pays. State the assumption, name the single document that would settle it, and say what the saving becomes if the assumption is wrong.",
@@ -33930,7 +33930,7 @@
      "conditional_exhibits": [],
      "hints": {
       "L1": "If the dock is the constraint, what does a longer stay cost?",
-      "L2": "Multiply the extra days by what a berth-day earns when the dock is the binding constraint."
+      "L2": "How many vessels pass through one dock in 336 days at a 12-day stay, and at 16?"
      },
      "candidate_md": "Calculate what the cut does to the yard over a year. Measure the change against the current regime — a crew of 40 and a 12-day stay.",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nex2: repair price $780,000, materials $310,000\n\nEXPECTED ANSWER:\ncontribution per vessel = 780,000 − 310,000 − 249,600 = $220,400; vessels per year 336 / 12 = 28 and 336 / 16 = 21; vessels lost 28 − 21 = 7; effect = 7 × 220,400 = $1,542,800 lost\n\nPASS CRITERIA (grade the candidate against this):\nPass if ALL: (1) contribution per vessel $220,400; (2) throughput 28 → 21 vessels; (3) annual effect minus $1,542,800; (4) the candidate states that the sign is the opposite of what the CFO expects (plus $1,747,200)."
@@ -34755,7 +34755,7 @@
      ],
      "conditional_exhibits": [],
      "hints": {
-      "L1": "Price each hour of the session against its own step, then add.",
+      "L1": "Look at the rate exhibit — what exactly does each figure attach to?",
       "L2": "The third step does not cover a whole hour."
      },
      "candidate_md": "Using the meter split and the rate card, calculate what one space earns in a day.",
@@ -35043,7 +35043,7 @@
      "conditional_exhibits": [],
      "hints": {
       "L1": "Одинаково ли стоит эта доля в любой год цикла?",
-      "L2": "Посчитай ту же долю при закрытии перед турниром и сравни разницу с тем, что даёт торг о цене"
+      "L2": "Одинакова ли нормализованная прибыль в год турнира и в год отборочных?"
      },
      "candidate_md": "Совет даёт три направления: сопоставимые мультиплы, дисконтированный поток, структура\nцикла. С чего начнёшь и почему?",
      "interviewer_md": "Порядок не оценивается, оценивается обоснование. Сильный ответ: начать со структуры\nцикла, потому что и мультипл, и дисконт применяются к величине, которую цикл и определяет.\n🚩 Флаг, если кандидат берёт мультипл раньше, чем понял, к чему его применять."
@@ -36441,7 +36441,7 @@
      "conditional_exhibits": [],
      "hints": {
       "L1": "Меры закрывают дыру целиком или её часть?",
-      "L2": "Сложи то, что дают три рычага на пределе, и сравни с величиной дыры"
+      "L2": "Ушедший студент уносил с собой только плату — или ещё и свои переменные затраты?"
      },
      "candidate_md": "Ректорат считает дыру по выручке. Согласен ли ты с этой мерой, и если нет — какую\nвозьмёшь?",
      "interviewer_md": "Ожидается: выручка неверная мера, потому что каждый ушедший студент уносил не только\nплату, но и переменные затраты. Считать надо вклад на покрытие. 🚩 Флаг, если кандидат\nпринимает меру ректората молча. Шаг несущий: дальше расхождение между двумя мерами —\n$6.54M, и оно накапливается во всех последующих расчётах."
@@ -36773,8 +36773,8 @@
      "depends_on": [],
      "conditional_exhibits": [],
      "hints": {
-      "L1": "К чему привязано обязательство — к тому, сколько ты летаешь, или к тому,",
-      "L2": "Сравни то, что даёт лучшая достижимая цена, с тем, что даёт изменение объёма под обязательством"
+      "L1": "Прочитай условие обязательства целиком — какая величина в нём стоит?",
+      "L2": "К какому объёму привязано обязательство — ко всему заправленному или к части?"
      },
      "candidate_md": "Воспроизведи число финансового директора.",
      "interviewer_md": "```python\n6.0% × 1_840_000 т × 1000 кг × $1.48 = $163.39M\n```\n**Ответ: $163.39M — число правления воспроизводится.** Оно посчитано верно из неверной базы."
@@ -37717,7 +37717,7 @@
      "conditional_exhibits": [],
      "hints": {
       "L1": "Наблюдаемая маржа — свойство услуги или свойство тех, кто дожил до наблюдения?",
-      "L2": "Поставь рядом маржу зрелой когорты и маржу клиента первого года."
+      "L2": "Ниже какой маржи новых клиентов перекладывание перестаёт давать хоть что-то?"
      },
      "candidate_md": "При каком значении ключевой величины вывод меняется на противоположный?",
      "interviewer_md": "```\nперекладывать бессмысленно, если новые клиенты дают ниже 28.0% — маржи обучения\nфакт 34.0% · запас 21.43%\n```\n**Ответ: порог 28.0%, запас пятая часть.** Зачёт за произнесённое: решение верное,\nно не с тем запасом, который показывал первый расчёт."
@@ -41561,7 +41561,7 @@
       "L2": ""
      },
      "candidate_md": "При каком значении ключевой величины вывод меняется на противоположный?",
-     "interviewer_md": "```\nпрограмма перестаёт окупаться при ставке дисконтирования выше 16.57%\nконтроль: $11.57M × 2.7664 = $32.00M = стоимость программы\nфакт 10% · запас 65.74%\n```\n**Ответ: порог 16 против фактических 10%, запас 65.74%.57%.** Зачёт за произнесённое: решение устойчиво к ставке\nв полтора раза выше нашей, значит спор не о деньгах, а о горизонте обязательства."
+     "interviewer_md": "```\nпрограмма перестаёт окупаться при ставке дисконтирования выше 16.57%\nконтроль: $11.57M × 2.7664 = $32.00M = стоимость программы\nфакт 10% · запас 65.74%\n```\n**Ответ: порог 16.57% против фактических 10%, запас 65.74%.** Зачёт за произнесённое: решение устойчиво к ставке\nв полтора раза выше нашей, значит спор не о деньгах, а о горизонте обязательства."
     },
     {
      "step": 6,
@@ -46646,7 +46646,7 @@
      "conditional_exhibits": [],
      "hints": {
       "L1": "Спрос вырос — а сколько мы физически довезём?",
-      "L2": "Поставь рядом резерв склада и резерв доставки, возьми меньший."
+      "L2": "Заказ пришёл на склад — через сколько звеньев он проходит, прежде чем окажется у дилера?"
      },
      "candidate_md": "Пересчитай с учётом новых данных. Какой ответ теперь и чем он отличается от первого?",
      "interviewer_md": "```\nцепочка последовательная: производство 26% → склад 12% → доставка 7%\nпроходит минимум = 7%\n\n$284.00M × 1.07 × 12.7% = $38.59M\nпротив $41.75M = −$3.16M\n```\n**Ответ: скидку не давать. Флип. Наив завышает результат на 488.46%\nот меньшей по модулю величины.**"
@@ -48322,8 +48322,8 @@
      ],
      "conditional_exhibits": [],
      "hints": {
-      "L1": "Что остаётся у покупателя, когда аренда заканчивается, и учтено ли это в счёте?",
-      "L2": "Поставь рядом цену продажи и приведённую стоимость того, чем компания перестаёт владеть."
+      "L1": "Все четыре условия одного порядка величины — или какое-то нельзя оценить, не приведя к сегодняшнему дню?",
+      "L2": "Проверь каждое из четырёх условий своим счётом, прежде чем решать, какое из них решающее."
      },
      "candidate_md": "Посчитай каждое из условий сделки и скажи, меняет ли какое-нибудь из них вывод.",
      "interviewer_md": "```\nиндексация 2.5%: растущая рента 9.5666 → PV аренды $510,857,984\nзалог: $180,000,000 × (9.4% − 6.1%) × 8.3042 = $49,327,165\nналог: ($742,000,000 − $610,000,000) × 20% = $26,400,000\nостаточная стоимость: $905,000,000 / 1.085^15 = $266,196,601\n$742,000,000 − $510,857,984 − $49,327,165 − $26,400,000 − $266,196,601 = −$110,781,751\n```\n**Ответ: сделка теряет $110,781,751. Флип.** Три первые поправки вывод не переворачивают — переворачивает четвёртая: продаются не пятнадцать лет аренды, а здания вместе с их стоимостью на конец срока ($266,196,601 приведённых)."
@@ -49400,7 +49400,7 @@
      "conditional_exhibits": [],
      "hints": {
       "L1": "What does Kestrel receive in a year when the rights are worth less than the board assumes?",
-      "L2": "Discount the payment the contract actually obliges the club to make, at the rate the club borrows."
+      "L2": "What does the fund receive in a year when the rights sell below plan, and in a year above it?"
      },
      "candidate_md": "Value the same offer as the terms actually describe it.",
      "interviewer_md": "```\nfloor binds today: £26,000,000 > 25% × £96,000,000 = £24,000,000\ndiscount at the club cost of debt 6.4%, 20 years:\nannuity factor = (1 − 1.064^-20) / 0.064 = 11.1066\nPV of £26,000,000 = £288,770,845\n```\n\n```\n£288,770,845 − £240,000,000 = £48,770,845\n```\n**Ответ: клуб отдаёт £288,770,845 приведённой стоимости за £240,000,000 наличными — на £48,770,845 больше, чем получает.** Мультипликатор 10.0× посчитан на платеже, которого в договоре нет: платёж не 25%, а £26,000,000 при любой выручке."
@@ -49497,7 +49497,7 @@
       "полная площадка",
       "какие ещё расходы"
      ],
-     "body_md": "| Что известно | Значение |\n|---|---|\n| PUE 1.18 объявлен по конвенции | **по IT-нагрузке** |\n| Тот же контур по конвенции полной площадки (насосы, CDU, сухие градирни) | **1.24** |\n| Водоподготовка и подпитка контура | **$1,850,000 в год** |\n| Электроэнергия по действующему PPA до 2029 | **$0.081 за кВт·ч** |\n| После 2029 — рынок | **$0.094 за кВт·ч** |\n\n*Обе конвенции PUE применяются в отрасли и обе защитимы; проектная записка не называет, какая использована. Показатель 1.62 в ex1 дан по конвенции полной площадки.*",
+     "body_md": "| Что известно | Значение |\n|---|---|\n| PUE 1.18 объявлен по конвенции | **по IT-нагрузке** |\n| Тот же контур по конвенции полной площадки (насосы, CDU, сухие градирни) | **1.24** |\n| Водоподготовка и подпитка контура | **$1,850,000 в год** |\n| Электроэнергия по действующему PPA — ещё **три года**, до 2029 | **$0.081 за кВт·ч** |\n| После 2029 — рынок | **$0.094 за кВт·ч** |\n\n*Обе конвенции PUE применяются в отрасли и обе защитимы; проектная записка не называет, какая использована. Показатель 1.62 в ex1 дан по конвенции полной площадки.*",
      "render": null
     }
    ],
@@ -50477,7 +50477,7 @@
      "conditional_exhibits": [],
      "hints": {
       "L1": "Отходы остались еженедельными, а рейс стал длиннее — чем это закрывается?",
-      "L2": "Посчитай, сколько судов нужно для еженедельного отхода при прежней и при новой длительности рейса."
+      "L2": "Что в этом сервисе зафиксировано контрактом, а что может подстроиться под удлинившийся рейс?"
      },
      "candidate_md": "Пересчитай стоимость обхода с учётом флота.",
      "interviewer_md": "```\nбыло: 52 / 7 = 7.43 → 8 судов\nстало: (52 + 11) / 7 = 63 / 7 = 9.00 → 9 судов\n\n1 судно × 365 сут × $28,400 = $10,366,000\n$1,352,000 + $10,366,000 = $11,718,000\n```\n**Ответ: $11,718,000 в год вместо $1,352,000 — в 8.67 раза больше.** Обход покупается не топливом, а судном."
@@ -50631,7 +50631,7 @@
      "conditional_exhibits": [],
      "hints": {
       "L1": "Сколько раз за год бассейн успевает освободиться и снова заполниться?",
-      "L2": "Сложи время выращивания и простой между партиями и подели год на эту сумму."
+      "L2": "Что должно произойти с бассейном между двумя партиями, прежде чем в него сажают новую?"
      },
      "candidate_md": "Пересчитай годовой выпуск и результат по длине цикла.",
      "interviewer_md": "```\nцикл: 14 мес + 6 недель, то есть 14 + 1.4 = 15.4 мес\nоборотов в год: 12 / 15.4 = 0.7792\nвыпуск: 4,200 × 0.7792 = 3,272.7 т\n3,272.7 × 1,000 × $2.30 = $7,527,273 в год\n```\n**Ответ: $7,527,273 вместо $19,320,000 — завышение в 2.57 раза.** «Два оборота в год» требует цикла в шесть месяцев, а рыба растёт четырнадцать."
@@ -50784,7 +50784,7 @@
      "conditional_exhibits": [],
      "hints": {
       "L1": "С чем банк расстаётся, если продаёт, — с записью в учёте или с будущими поступлениями?",
-      "L2": "Приведи собственный сбор за вычетом расходов на взыскание к сегодняшнему дню и сравни с ценой."
+      "L2": "Если портфель не продавать, что именно он принесёт и в каких годах?"
      },
      "candidate_md": "Пересчитай сравнение на приведённой стоимости собственного взыскания.",
      "interviewer_md": "```\nмножитель профиля при 9.5%:\n0.45/1.095 + 0.30/1.095² + 0.15/1.095³ + 0.10/1.095⁴ = 0.8450\n\nсбор:    $840,000,000 × 24.5% × 0.8450 = $173,894,353\nрасходы: $840,000,000 × 6.2%  × 0.8450 = $44,005,918\nчистая приведённая: $129,888,435\n\n$147,000,000 − $129,888,435 = +$17,111,565\n```\n**Ответ: продажа выгоднее собственного взыскания на $17,111,565, а не убыточна на $37,800,000.** Резерв 78% уже прошёл через прибыль прошлых лет: «убыток от продажи» — движение по балансу, а не по кошельку."
@@ -50858,7 +50858,7 @@
    "difficulty_family": "F3",
    "reasoning_form": "Ф12",
    "optimal_entry": 2,
-   "difficulty_test": "Экономика посчитана на рейс, а ограничение живёт в креслах и блок-часах. Пересчёт в правильную единицу меняет и число рейсов, и размер флота — и знак вывода.",
+   "difficulty_test": "Экономика посчитана на рейс, а ограничение живёт в креслах и блок-часах: турбопроп дешевле и на рейс, и на час, но тот же поток требует 60 рейсов и 115 часов вместо 42 и 56 — и знак вывода переворачивается.",
    "prompt_md": "> *Ситуация на июль 2026 года.*\n>\n> **Aurelia Regional** переводит ближние маршруты с реактивных самолётов на турбопропы. Финансовый директор показывает экономию на топливе.\n>\n> Проверить до подписания лизинга. Данные — в ex1.",
    "exhibits": [
     {
@@ -50882,7 +50882,7 @@
       "пассажиропоток",
       "расписание"
      ],
-     "body_md": "| Что известно | Реактивный | Турбопроп |\n|---|---|---|\n| Кресел в салоне | **138** | **68** |\n| Блок-время на этом плече | **1 ч 20 мин** | **1 ч 55 мин** |\n| Лизинг, в месяц | **$310,000** | **$198,000** |\n\n| Общее | Значение |\n|---|---|\n| Пассажиров на рейс сегодня, в среднем | **96** |\n| Доступно блок-часов на самолёт в сутки | **9.2** |\n| Обязательство перед регионами по числу пассажиров | **сохранить весь поток** |\n| Частота реактивного расписания | **зафиксирована на 42 рейсах** |",
+     "body_md": "| Что известно | Реактивный | Турбопроп |\n|---|---|---|\n| Кресел в салоне | **138** | **68** |\n| Блок-время на этом плече | **1 ч 20 мин** | **1 ч 55 мин** |\n| Лизинг и обслуживание, за блок-час | **$2,150** | **$1,180** |\n\n| Общее | Значение |\n|---|---|\n| Пассажиров на рейс сегодня, в среднем | **96** |\n| Обязательство перед регионами по числу пассажиров | **сохранить весь поток** |\n| Частота реактивного расписания | **зафиксирована на 42 рейсах** |\n| Как оплачивается парк | **по налёту: лизинг и обслуживание начисляются за блок-час, машины не покупаются** |",
      "render": null
     }
    ],
@@ -50927,7 +50927,7 @@
       "L2": ""
      },
      "candidate_md": "Не считая: поток пассажиров сохраняется, а самолёты разные. Что нужно знать про них, прежде чем считать перевод?",
-     "interviewer_md": "Ожидается устно: вместимость и время оборота; при меньшем салоне тот же поток требует больше рейсов, при большем блок-времени — больше машин. Попросить данные по типам.\n*(выдать ex2)*"
+     "interviewer_md": "Ожидается устно: вместимость и время оборота; при меньшем салоне тот же поток требует больше рейсов, а при большем блок-времени каждый рейс стоит больше часов, и парк оплачивается именно за них. Попросить данные по типам. *(выдать ex2)*"
     },
     {
      "step": 4,
@@ -50938,10 +50938,10 @@
      "conditional_exhibits": [],
      "hints": {
       "L1": "Сколько человек помещается в самолёт каждого типа?",
-      "L2": "Посчитай сначала число рейсов из вместимости, потом флот из блок-часов, и только потом деньги."
+      "L2": "В каких единицах живут два ограничения этого кейса — поток пассажиров и расписание?"
      },
      "candidate_md": "Пересчитай перевод в тех единицах, в которых живут ограничения.",
-     "interviewer_md": "```\nрейсы: 42 × 96 / 68 = 59.29 → 60 рейсов в сутки (округляем вверх: полрейса не бывает)\nтопливо: (42 × $2,980 − 60 × $1,910) × 350 = $3,696,000\n\nблок-часы: реактивный 42 × 1.333 = 56.0 → 7 машин\n            турбопроп 60 × 1.9167 = 115.0 → 13 машин\nлизинг: (7 × $310,000 − 13 × $198,000) × 12 = −$4,848,000\n\n$3,696,000 − $4,848,000 = −$1,152,000\n```\n**Ответ: перевод стоит $1,152,000 в год, а не экономит $15,729,000.** Турбопроп дешевле на рейс и дороже на пассажира: рейсов нужно больше, а машин — вдвое больше от них."
+     "interviewer_md": "```\nрейсы:      поток 42 × 96 = 4,032 пассажира в сутки\n            кресел у турбопропа 68 → 4,032 / 68 = 59.29 → 60 рейсов (полрейса не бывает)\n\nтопливо:    (42 × $2,980 − 60 × $1,910) × 350\n            = ($125,160 − $114,600) × 350 = $3,696,000\n\nблок-часы:  реактивный 42 × 1 ч 20 мин = 56.0 ч в сутки\n            турбопроп  60 × 1 ч 55 мин = 115.0 ч в сутки\n\nпарк по налёту: (115.0 × $1,180 − 56.0 × $2,150) × 350\n            = ($135,700 − $120,400) × 350 = $5,355,000\n\nитог:       $3,696,000 − $5,355,000 = −$1,659,000\n```\n**Ответ: перевод стоит $1,659,000 в год, а не экономит $15,729,000.**\n\nТурбопроп дешевле **и на рейс, и на блок-час** — и всё равно дороже. Тот же поток он возит\nза 60 рейсов вместо 42 и за 115 часов вместо 56: экономия живёт в единице «рейс», а плата\nза парк — в единице «час», и рейсов стало на 43% больше, а часов вдвое."
     },
     {
      "step": 5,
@@ -50955,7 +50955,7 @@
       "L2": ""
      },
      "candidate_md": "При какой средней загрузке рейса знак решения меняется?",
-     "interviewer_md": "```\nчем меньше пассажиров на рейс, тем меньше рейсов нужно турбопропу\nобнуление при 93.9 пассажира на рейс\nфакт 96 — до порога 2.1 пассажира\n```\n**Ответ: порог 93.9 пассажира на рейс против фактических 96.** Порог задан вместимостью 68 кресел и целочисленностью флота: он не непрерывный, а ступенчатый: ступень у самого порога стоит одного рейса — $1,910 × 350 = $668,500, а целая машина отваливается ниже, на 57 рейсах."
+     "interviewer_md": "```\nна сутки: (42 × $2,980 + 56.0 × $2,150) − n × ($1,910 + 1.9167 × $1,180)\n        = $245,560 − n × $4,171.67\n\nобнуление при n* = 58.864 рейса → знак держится, пока рейсов не больше 58\n58 рейсов требуют загрузки не выше 58 × 68 / 42 = 93.90 пассажира на рейс\n```\n**Ответ: порог 93.90 пассажира на рейс против фактических 96 — запас 2.10 пассажира, 2.18% потока.**\n\nПорог ступенчатый, и ступень стоит ровно одного рейса: $4,171.67 × 350 = **$1,460,083 в год.**\nПри 59 рейсах перевод уже убыточен на $198,917, при 58 ещё даёт $1,261,167."
     },
     {
      "step": 6,
@@ -50969,7 +50969,7 @@
       "L2": ""
      },
      "candidate_md": "Где турбопроп всё-таки уместен и что делать с сетью? Не меньше шести идей минимум в двух группах — по маршрутам и по расписанию.",
-     "interviewer_md": "Ожидается ≥6 идей в ≥2 группах.\n*Маршруты:* переводить только направления с загрузкой ниже 68 · оставить реактивные на плечах с деловым потоком · отдать турбопропу утренние и вечерние рейсы, где поток тоньше · открыть турбопропом точки, куда реактивный не летает по длине полосы.\n*Расписание:* сократить число рейсов и поднять загрузку · перевести часть потока на стыковку через хаб · согласовать с регионами сокращение частоты вместо сокращения потока · смешанный парк с турбопропами только в межсезонье.\nНе зачёт, если весь список — про переговоры о лизинговой ставке."
+     "interviewer_md": "Ожидается ≥6 идей в ≥2 группах.\n*Маршруты:* переводить только направления с загрузкой ниже 68 · оставить реактивные на плечах с деловым потоком · отдать турбопропу утренние и вечерние рейсы, где поток тоньше · открыть турбопропом точки, куда реактивный не летает по длине полосы.\n*Расписание:* сократить число рейсов и поднять загрузку · перевести часть потока на стыковку через хаб · согласовать с регионами сокращение частоты вместо сокращения потока · смешанный парк с турбопропами только в межсезонье.\nНе зачёт, если весь список — про переговоры о ставке за налёт."
     },
     {
      "step": 7,
@@ -50984,7 +50984,7 @@
       "L2": ""
      },
      "candidate_md": "Дай рекомендацию: вывод первым предложением, затем факты с числами, риски и следующие шаги.",
-     "interviewer_md": "> **Мы рекомендуем не переводить сеть на турбопропы целиком: перевод стоит $1,152,000 в год, а не экономит $15,729,000.**\n>\n> Три факта. Первое: экономия на топливе реальна на рейс, но рейс турбопропа возит 68 пассажиров против 138, и при сегодняшних 96 их нужно 60 вместо 42 — топливная экономия падает до $3,696,000. Второе: блок-время больше на 35 минут, и 60 рейсов требуют 13 машин против 7; лизинг съедает $4,848,000 в год. Третье: перевод стал бы безубыточным только при загрузке 93.9 пассажира на рейс, то есть если бы поток упал всего на 2.2% — запас 2.1 пассажира на рейс.\n>\n> Риски. Внутренний: до порога 2.1 пассажира на рейс — сезонный провал спроса переводит решение в плюс и обратно без всякого нашего участия, поэтому решение нельзя принимать на среднегодовой загрузке. Обязательство перед регионами фиксирует поток, а не частоту, и переформулировать его в частоту стоит дороже, чем переторговать лизинг. Внешний: цена топлива входит в обе части сравнения, но в разной пропорции — при её росте турбопроп догоняет, и порог загрузки сдвигается вверх; пересчитывать надо ежегодно, а не один раз.\n>\n> Шаги. В 30 дней — разложить сеть по загрузке и вынести отдельно направления, где она ниже 68 пассажиров. В 90 дней — вернуться к решению по этим направлениям, а по остальным начать переговоры с регионами о частоте вместо потока."
+     "interviewer_md": "> **Мы рекомендуем не переводить сеть на турбопропы целиком: перевод стоит $1,659,000 в год, а не экономит $15,729,000.**\n>\n> Три факта. Первое: экономия на топливе реальна на рейс, но рейс турбопропа возит 68 пассажиров против 138, и при сегодняшних 96 их нужно 60 вместо 42 — топливная экономия падает до $3,696,000. Второе: блок-время больше на 35 минут, и 60 рейсов стоят 115 блок-часов против 56; оплата парка по налёту съедает $5,355,000 в год. Третье: перевод стал бы безубыточным только при загрузке 93.90 пассажира на рейс, то есть если бы поток упал всего на 2.18% — запас 2.10 пассажира на рейс.\n>\n> Риски. Внутренний: до порога 2.1 пассажира на рейс — сезонный провал спроса переводит решение в плюс и обратно без всякого нашего участия, поэтому решение нельзя принимать на среднегодовой загрузке. Обязательство перед регионами фиксирует поток, а не частоту, и переформулировать его в частоту стоит дороже, чем переторговать лизинг. Внешний: цена топлива входит в обе части сравнения, но в разной пропорции — при её росте турбопроп догоняет, и порог загрузки сдвигается вверх; пересчитывать надо ежегодно, а не один раз.\n>\n> Шаги. В 30 дней — разложить сеть по загрузке и вынести отдельно направления, где она ниже 68 пассажиров. В 90 дней — вернуться к решению по этим направлениям, а по остальным начать переговоры с регионами о частоте вместо потока."
     }
    ],
    "generation": null,
@@ -51094,7 +51094,7 @@
      "conditional_exhibits": [],
      "hints": {
       "L1": "What does Corvalis pay, and to whom, on the day after the towers are gone?",
-      "L2": "Two of them are payments: one recurring, one one-off. Which line of the term sheet is each?"
+      "L2": "The first one is not a payment at all — it is what the towers earn if nobody sells them."
      },
      "candidate_md": "Work through the first two and say what each does to the answer.",
      "interviewer_md": "**Гипотеза 1 — база удержания.** Предполагаем, что удержание стоит не «6.2 × EBITDA», а приведённого потока, который башни приносят:\n```\nаннуитет 15 лет при 8.2%: 8.4559\n$268M × 8.4559 = $2,266.2M\n$4,690M − $2,266.2M = $2,423.8M\n```\nГипотеза **закрыта**: запас падает с $3,028.4M до $2,423.8M, знак не меняется. Дальше всё считается от этой базы и только от неё.\n\n**Гипотеза 2 — обратная аренда.** Предполагаем, что рента $96M с индексацией 2.0% платится все 15 лет:\n```\nмножитель растущей ренты: (1 − (1.02/1.082)^15) / (8.2% − 2.0%) = 9.4732\n$96M × 9.4732 = $909.4M\n$2,423.8M − $909.4M = $1,514.4M\n```\nГипотеза **закрыта**: остаётся $1,514.4M, вывод не отменяется."
@@ -51707,7 +51707,7 @@
      "conditional_exhibits": [],
      "hints": {
       "L1": "What does a booking that nobody uses earn the museum?",
-      "L2": "Count visitors before and after, and price the difference at the ticket, not at the charge."
+      "L2": "How many of the slots booked today turn into a ticket actually sold?"
      },
      "candidate_md": "Redo the calculation on visitors who arrive, not on slots booked.",
      "interviewer_md": "```\nсегодня:  1,680,000 × (1 − 26%) = 1,243,200 посетителей\nпосле:    1,680,000 × (1 − 9%)  = 1,528,800 посетителей\nприрост:  285,600 × £18 = £5,140,800\n\nсбор £5,040,000 + билет £5,140,800 = £10,180,800\n```\n**Ответ: £10,180,800 вместо £5,040,000 — занижение в 2.02 раза.** Больше половины эффекта приходит билетом, а не сбором: плата за слот продаёт не слот, а явку."
@@ -52388,6 +52388,6 @@
  },
  "source_scope": "graph skeleton only; prose re-authored in EN per languages{}",
  "family_ratchet_armed": false,
- "package_sha256": "d5a87844a89477b9472a7167d62d6d30ffc505fe89902cfae18a530b8b5eb215",
+ "package_sha256": "04f21b7b46b708da5b8bd5ba3e257b7b68a7e4768942b52001c4e8fedce8569d",
  "package_sha256_method": "sha256(payload minus package_sha256/method, sort_keys, ensure_ascii=False, separators=(,:))"
 }
