@@ -425,9 +425,11 @@ function microbe(name,trait,size){
       общем лимите 60 в минуту на пользователя: игра съедала лимит целиком и
       выбивала сама себя. Часы идут локально от дедлайна, сервер остаётся
       единственным судьёй и сверяется на каждом ходе.
-   3. Профиль (уровень, виденные наборы, история) лежит в localStorage: таблицы
-      под него в проекте нет, а ключа к ответам в нём тоже нет — худшее, что даёт
-      правка профиля, это выбор своей трудности, и он и так кнопкой на меню. */
+   3. Профиль (уровень, виденные наборы, история) лежит в localStorage И на
+      аккаунте (`profiles.seawolf_profile`, через родительскую страницу).
+      Локальная копия — кэш: игра стартует без сети и работает как раньше.
+      Ключа к ответам в профиле нет — худшее, что даёт его правка, это выбор
+      своей трудности, и он и так кнопкой на меню. */
 const EP='/api/seawolf-session';
 let ERR=null, TOKEN=null, DEADLINE=null, recorded=false;
 
@@ -438,11 +440,40 @@ function loadProf(){
  try{const p=JSON.parse(localStorage.getItem(PKEY)||'{}');
   return {seen:Array.isArray(p.seen)?p.seen:[], level:LEVELS.includes(p.level)?p.level:'Средний',
    history:Array.isArray(p.history)?p.history:[], assessHistory:Array.isArray(p.assessHistory)?p.assessHistory:[],
-   adaptMsg:typeof p.adaptMsg==='string'?p.adaptMsg:''}}
- catch(e){return {seen:[],level:'Средний',history:[],assessHistory:[],adaptMsg:''}}}
+   adaptMsg:typeof p.adaptMsg==='string'?p.adaptMsg:'', ts:Number(p.ts||0)}}
+ catch(e){return {seen:[],level:'Средний',history:[],assessHistory:[],adaptMsg:'',ts:0}}}
+function profBody(){return {seen:P.seen.slice(-800),level:P.level,
+  history:P.history.slice(-500),assessHistory:P.assessHistory.slice(-500),adaptMsg:P.adaptMsg,ts:Date.now()}}
 function saveProf(){
- try{localStorage.setItem(PKEY,JSON.stringify({seen:P.seen.slice(-800),level:P.level,
-  history:P.history.slice(-500),assessHistory:P.assessHistory.slice(-500),adaptMsg:P.adaptMsg}))}catch(e){}}
+ const body=profBody();
+ try{localStorage.setItem(PKEY,JSON.stringify(body))}catch(e){}
+ /* И на аккаунт. Решение 08.08: чистка браузера больше не обнуляет банк из 150
+    наборов. Отдельного входа «по коду» не заводим — игрок уже авторизован,
+    иначе ручка игры вернула бы 401. Отказ здесь молчит: без сети игра работает
+    как раньше, на localStorage. */
+ try{ if(window.parent&&window.parent!==window&&typeof window.parent.swProfileSave==='function')
+        window.parent.swProfileSave(body); }catch(e){}}
+
+/* Подтягивание профиля с аккаунта. Локальный профиль уже загружен синхронно,
+   поэтому игра стартует мгновенно и без сети; облако приезжает следом.
+   Слияние: `seen` ОБЪЕДИНЯЕТСЯ — потерять пройденный набор хуже, чем показать
+   чуть устаревший уровень; остальное берётся из более свежей записи по `ts`. */
+async function hydrateProf(){
+ let cloud=null;
+ try{ if(window.parent&&window.parent!==window&&typeof window.parent.swProfileLoad==='function')
+        cloud=await window.parent.swProfileLoad(); }catch(e){}
+ if(!cloud||typeof cloud!=='object') return false;
+ const seen=Array.from(new Set([].concat(Array.isArray(cloud.seen)?cloud.seen:[], P.seen)));
+ const cloudNewer=Number(cloud.ts||0) > Number(P.ts||0);
+ const src=cloudNewer?cloud:P;
+ P={seen:seen,
+    level:LEVELS.includes(src.level)||src.level===ASSESS?src.level:P.level,
+    history:Array.isArray(src.history)?src.history:P.history,
+    assessHistory:Array.isArray(src.assessHistory)?src.assessHistory:P.assessHistory,
+    adaptMsg:typeof src.adaptMsg==='string'?src.adaptMsg:P.adaptMsg,
+    ts:Math.max(Number(cloud.ts||0),Number(P.ts||0))};
+ saveProf();
+ return true}
 let P=loadProf(), BANK=null, MODE='training', EXH=null;
 
 /* Лестница адаптации — та же, что на сервере цеха, слово в слово. «Ассессмент»
@@ -499,7 +530,10 @@ async function act(fn){
  catch(e){ ERR=e.message||String(e); clearInterval(tick); }
  finally{ busy=false; render(); }}
 
-async function boot(){ await act(async()=>{ BANK=await api('state'); PROF=buildProf() }) }
+/* Профиль с аккаунта подтягивается ДО запроса банка: `api()` шлёт `seenIds`,
+   и если послать локальный список раньше слияния с облачным, сервер отдаст
+   набор, который человек уже проходил на другом устройстве. */
+async function boot(){ await act(async()=>{ await hydrateProf(); BANK=await api('state'); PROF=buildProf() }) }
 
 function startGame(mode){ return act(async()=>{
  MODE=(mode==='assessment')?'assessment':'training';
