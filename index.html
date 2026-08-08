@@ -5328,6 +5328,19 @@ function svSetPhaseUI() {
 window.swAuthToken = async function () {
   try { return await rkToken(); } catch (e) { return null; }
 };
+/* 09.08.2026. Sea Wolf не писал в прогресс НИЧЕГО. Через границу кадра ходили
+   только токен, профиль и выход, а «Игр сыграно» на странице прогресса стояло
+   ноль при полутора сотнях сыгранных наборов. Замер простой: в клиенте всего
+   два вызова recordSession для игр, и оба принадлежат Redrock.
+   Балл партии — доля в процентах; в общий список оценок кейсов он НЕ идёт
+   (см. разбор в solveFinish: величина другой природы). Пишем только счётчик
+   игры и её вид, чтобы «Игр сыграно» перестало врать. */
+window.swRecordGame = function (mode) {
+  try {
+    if (typeof recordSession !== 'function') return;
+    recordSession('game', mode === 'assessment' ? 'Sea Wolf · ассессмент' : 'Sea Wolf');
+  } catch (e) {}
+};
 /* ПРОГРЕСС SEA WOLF ЖИВЁТ НА АККАУНТЕ, А НЕ В БРАУЗЕРЕ.
    Решение 08.08. Раньше профиль игры (уровень, виденные наборы, история) лежал
    только в localStorage: чистка браузера или второе устройство — и человек
@@ -6503,7 +6516,15 @@ function solveFinish() {
   });
   solve.phase = 'result'; solve.result = { correct, total, lines };
   svSetPhaseUI();
-  try { const pctScore = Math.round(correct/total*100); recordSession('case', 'Solve Game', pctScore/10); } catch(e){}
+  /* 09.08.2026. Здесь стояла запись партии видом «кейс» с долей верных
+     ответов вместо балла, и она была неверна трижды сразу. Партия Solve — не кейс: она попадала
+     в «Кейсов пройдено». Дальше renderSolve вызывает rkResult, а тот пишет
+     ту же партию ЕЩЁ РАЗ, уже правильным видом 'game'. И оба раза в общий
+     список баллов уходила ДОЛЯ ВЕРНЫХ ОТВЕТОВ, делённая на десять, — величина
+     другой природы, чем оценка кейса по рубрике 1-10. То есть одна партия
+     давала +1 кейс, +1 игру и два чужих числа в среднем балле.
+     Запись живёт в rkResult: там она одна, правильного вида и под защёлкой
+     от повторного рендера. */
   if (typeof cxClearResume === 'function') cxClearResume();
   renderSolve();
 }
@@ -7148,7 +7169,15 @@ function renderPath() {
 
   // headline + footer guidance - lead with the candidate's overall score.
   const targetFirm = state.firm || 'MBB';
-  const avgScore = (p.scores && p.scores.length) ? (p.scores.reduce((a, b) => a + b, 0) / p.scores.length) : null;
+  /* 09.08.2026. Заголовок брал среднее ЗА ВСЁ ВРЕМЯ, а полоски прямо под ним —
+     среднее по ПОСЛЕДНИМ ПЯТИ. Для растущего кандидата это расходится всегда:
+     на проде было «твой уровень 7.3 при цели 8.0», под ним все пять измерений
+     8.4-8.9, и подпись «ты на уровне оффера». Два разных статистических факта
+     были поданы как один. Заголовок теперь считается тем же окном, что и
+     полоски, и окно названо словами. Средний за всё время остаётся отдельной
+     карточкой — но как ДРУГОЕ число, а не как это же. */
+  const recent = (p.scores && p.scores.length) ? p.scores.slice(-5) : [];
+  const avgScore = recent.length ? (recent.reduce((a, b) => a + b, 0) / recent.length) : null;
   if (subEl) subEl.textContent = t('prog.overall', { avg: (avgScore !== null ? avgScore.toFixed(1) : '-'), firm: targetFirm, target: PATH_TARGET.toFixed(1) });
   if (footEl) {
     if (!gaps.length) {

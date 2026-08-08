@@ -578,6 +578,11 @@ async function finish(){
    saveProf() }
   else { P.history.push(V.total); adapt(V.total); V.adaptMsg=P.adaptMsg }
   V.nextLevel=P.level;
+  /* Партия дошла до разбора — значит она сыграна. Сообщаем приложению один
+     раз, под той же защёлкой `recorded`, что и запись в профиль: повторный
+     рендер экрана итогов не должен множить счётчик. */
+  try{ if(window.parent&&window.parent!==window&&typeof window.parent.swRecordGame==='function')
+        window.parent.swRecordGame(MODE) }catch(e){}
   PROF=buildProf() }
 }
 function newGame(){ clearInterval(tick); SID=null; V=null; REV=null; TOKEN=null; DEADLINE=null; recorded=false; sel=[]; pick=null; PROF=buildProf(); render() }
