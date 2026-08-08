@@ -31,14 +31,14 @@ const PRICE_IN_PER_MTOK = 2.0;
 const PRICE_OUT_PER_MTOK = 10.0;
 const CACHE_WRITE_MULT = 1.25;
 const CACHE_READ_MULT = 0.10;
-function logCaseyCost(kind, caseId, gid, usage, ms) {
+function logCaseyCost(kind, caseId, gid, usage, ms, modeUsed) {
   if (!usage) return;
   const usd = ((usage.input_tokens || 0) * PRICE_IN_PER_MTOK
     + (usage.cache_creation_input_tokens || 0) * PRICE_IN_PER_MTOK * CACHE_WRITE_MULT
     + (usage.cache_read_input_tokens || 0) * PRICE_IN_PER_MTOK * CACHE_READ_MULT
     + (usage.output_tokens || 0) * PRICE_OUT_PER_MTOK) / 1e6;
   console.log('casey cost', JSON.stringify({
-    kind, case: caseId, gid, usd: +usd.toFixed(5), ms,
+    kind, case: caseId, gid, usd: +usd.toFixed(5), ms, mode: (typeof modeUsed === 'number' ? modeUsed : undefined),
     in: usage.input_tokens, out: usage.output_tokens,
     cache_read: usage.cache_read_input_tokens, cache_write: usage.cache_creation_input_tokens
   }));
@@ -306,6 +306,29 @@ async function rateLimited(userId, sbUrl, sbKey, token) {
 async function graderJSON(system, userText, maxTokens, meter) {
   const T0 = Date.now();
   const BUDGET_MS = 52 * 1000;
+  /* УПРАВЛЕНИЕ РАЗМЫШЛЕНИЕМ И КЕШ СИСТЕМНОГО БЛОКА.
+     Замер 08.08 на проде, первая же партия с новым счётчиком: голосовая оценка
+     C5 стоила $0.04268 при $0.0455 за ВЕСЬ кейс — то есть 94% цены Casey сидит
+     в одном вызове. Выход 3366 токенов на вердикт из четырёх строк: столько
+     текста в ответе нет, значит это размышление, которым никто не управлял.
+     У кейсов и дриллов эта лестница стоит с 29.07 и там же замерена:
+     обратная связь дриллов упала с 9178 мс и 664 токенов до 4757 и 243.
+     Плюс системный блок рубрики одинаков на каждом вызове и не кешировался
+     (cache_read 0 во всех четырёх замерах) — ставим точку кеширования.
+     Откат прежний: апстрим не принял форму — спускаемся на ступень ниже. */
+  const MODES = [
+    { thinking: { type: 'adaptive' }, output_config: { effort: 'low' } },
+    { thinking: { type: 'adaptive' } },
+    null
+  ];
+  let _mode = 0;
+  const bodyFor = (mt) => {
+    const b = { model: GRADER_MODEL, max_tokens: mt,
+      system: [{ type: 'text', text: system, cache_control: { type: 'ephemeral' } }],
+      messages: [{ role: 'user', content: userText }] };
+    if (MODES[_mode]) Object.assign(b, MODES[_mode]);
+    return JSON.stringify(b);
+  };
   const call = (mt, timeoutMs) => fetchAnthropicWithRetry('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: {
@@ -314,7 +337,7 @@ async function graderJSON(system, userText, maxTokens, meter) {
       'anthropic-version': '2023-06-01',
       'anthropic-beta': 'prompt-caching-2024-07-31'
     },
-    body: JSON.stringify({ model: GRADER_MODEL, max_tokens: mt, system: [{ type: 'text', text: system }], messages: [{ role: 'user', content: userText }] })
+    body: bodyFor(mt)
     // maxRetries was 0, which made the RETRIABLE_STATUS branch in
     // fetchAnthropicWithRetry dead code (`attempt < maxRetries` never true at 0):
     // a 429/529 came straight back and was then read as "the model wrote bad JSON".
@@ -322,6 +345,15 @@ async function graderJSON(system, userText, maxTokens, meter) {
   const textOf = d => (d && Array.isArray(d.content)) ? d.content.filter(b => b && b.type === 'text' && typeof b.text === 'string').map(b => b.text).join('\n') : '';
   const parse = t => { try { const m = String(t || '').match(/\{[\s\S]*\}/); return m ? JSON.parse(m[0]) : null; } catch (e) { return null; } };
   let resp = await call(maxTokens, 45 * 1000);
+  /* Форму отвергают ответом 400 с прямым названием причины. Спускаемся по
+     ступеням, а не падаем: без этого одна смена версии API убрала бы оценку
+     голоса целиком. */
+  while (resp.status === 400 && _mode < MODES.length - 1) {
+    let why = ''; try { why = JSON.stringify(await resp.json()).slice(0, 200); } catch (e) {}
+    console.log('casey grader mode down', JSON.stringify({ from: _mode, why }));
+    _mode++;
+    resp = await call(maxTokens, 45 * 1000);
+  }
   // Transport failure and unparseable answer need opposite responses: re-asking
   // with double max_tokens against a rate limit makes the rate limit worse.
   if (resp.status < 200 || resp.status >= 300) {
@@ -331,7 +363,7 @@ async function graderJSON(system, userText, maxTokens, meter) {
     return null;
   }
   let data = await resp.json();
-  if (meter && data && data.usage) { meter.usage = data.usage; meter.calls = (meter.calls || 0) + 1; }
+  if (meter && data && data.usage) { meter.usage = data.usage; meter.calls = (meter.calls || 0) + 1; meter.mode = _mode; }
   let parsed = parse(textOf(data));
   // Retry once inside the deadline if the model was truncated OR returned nothing
   // parseable — the latter is the usual cause of a "could not grade".
@@ -438,7 +470,7 @@ export default async function handler(req, res) {
            того, насколько дорог слот. */
         const meter = {}; const t0 = Date.now();
         if (!trg) { const r = await gradeOpen(q, answer, meter); pass = !!r.pass; }
-        logCaseyCost(trg ? 'open_trigger' : 'open_text', c.id, gid, meter.usage, Date.now() - t0);
+        logCaseyCost(trg ? 'open_trigger' : 'open_text', c.id, gid, meter.usage, Date.now() - t0, meter.mode);
         const note = (q.validation && typeof q.validation === 'object')
           ? (q.validation.credit_if || 'Right thing to probe.')
           : (q.validation || 'Right thing to probe.');
@@ -454,7 +486,7 @@ export default async function handler(req, res) {
         const u = 'case_id: ' + (q.rubric_ref || c.id) + '\n' + grounding + '\ntranscript: ' + String(p.transcript || '');
         const meter = {}; const t0 = Date.now();
         const j = await graderJSON(CASEY_VOICE_SYSTEM, u, 1200, meter);
-        logCaseyCost('voice', c.id, gid, meter.usage, Date.now() - t0);
+        logCaseyCost('voice', c.id, gid, meter.usage, Date.now() - t0, meter.mode);
         // Genuine grader failure → distinguishable flag, NOT a fake 0/4 "weak".
         // The client shows a neutral retry (no penalty, no game consumed) and
         // does not reveal the partner model answer yet.
@@ -467,7 +499,7 @@ export default async function handler(req, res) {
       {
         const meter = {}; const t0 = Date.now();
         const out = await gradeOpen(q, String(p.answer || ''), meter);
-        logCaseyCost('brainstorm', c.id, gid, meter.usage, Date.now() - t0);
+        logCaseyCost('brainstorm', c.id, gid, meter.usage, Date.now() - t0, meter.mode);
         return res.status(200).json(out);
       }
     }
