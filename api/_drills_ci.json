@@ -4806,6 +4806,218 @@
    "family_h25": "F0",
    "family_src": "clean",
    "family_conf": "высокая"
+  },
+  {
+   "id": "CI-049",
+   "title": "The Clinic Across Town",
+   "type": "Chart Interpretation",
+   "clean": false,
+   "prompt": "The board's note reads: \"MedCo earns a 47.9% operating margin against our 3.2%. Buying it moves us toward that margin.\" Does the exhibit support the note?",
+   "exhibit": {
+    "title": "Exhibit A — Per-patient economics, 2022",
+    "parts": [
+     {
+      "type": "table",
+      "header": [
+       "Item",
+       "Princeton-Plainsboro",
+       "MedCo"
+      ],
+      "rows": [
+       [
+        "Revenue per patient — private insurance",
+        "$6,300",
+        "$6,300"
+       ],
+       [
+        "Revenue per patient — public insurance",
+        "$3,700",
+        "$3,700"
+       ],
+       [
+        "Revenue per patient — uninsured",
+        "$3,300",
+        "$3,300"
+       ],
+       [
+        "Patient mix — private",
+        "50%",
+        "80%"
+       ],
+       [
+        "Patient mix — public",
+        "40%",
+        "15%"
+       ],
+       [
+        "Patient mix — uninsured",
+        "10%",
+        "5%"
+       ],
+       [
+        "Average revenue per patient",
+        "**$4,960**",
+        "**$5,760**"
+       ],
+       [
+        "Cost per patient",
+        "$4,800",
+        "$3,000"
+       ],
+       [
+        "Operating margin",
+        "**3.2%**",
+        "**47.9%**"
+       ],
+       [
+        "Patients served per year",
+        "—",
+        "5,000"
+       ],
+       [
+        "Asking price, all cash",
+        "—",
+        "$40M"
+       ]
+      ],
+      "blank_before": 1
+     },
+     {
+      "type": "text",
+      "lines": [
+       "*Note: MedCo's cost per patient is $3,000 since MedCo has a younger clientele. The same three reimbursement rates apply to both columns.*"
+      ],
+      "blank_before": 1,
+      "blank_after": 1
+     }
+    ]
+   },
+   "exhibit_mode": "E-before",
+   "time": "3 min",
+   "step_prompts": [],
+   "checklist": {
+    "en": "Credit if ALL: (1) decomposes the gap in profit per patient rather than comparing the two margin percentages — MedCo 5,760 − 3,000 = $2,760, the hospital 4,960 − 4,800 = $160, a gap of $2,600 per patient, and splits it into $800 of revenue and $1,800 of cost; (2) shows the $800 is mix and nothing else, because the same three reimbursement rates stand in both columns, and demonstrates it: +30pp private × 6,300 = +$1,890, −25pp public × 3,700 = −$925, −5pp uninsured × 3,300 = −$165, netting +$800; (3) attributes the $1,800 cost gap to panel composition and says why that follows from the exhibit rather than restating the note, and states that no line anywhere in the exhibit describes a procedure, a staffing model or a process at MedCo — every line that differs describes who is being treated, not how; (4) concludes that the 47.9% is a property of MedCo's patient panel, so it travels with those 5,000 patients and does not attach to the hospital's own 50/40/10 book, and asks how that panel was assembled and whether the hospital's own patients are comparable before the note's claim is priced; (5) states that the note's arithmetic cannot be completed at all — the hospital's annual patient count appears nowhere in the exhibit, so no blended margin is computable, and the only figure the exhibit will carry is MedCo's own 2,760 × 5,000 = $13.8M against a $40M price, roughly three years; (6) rejects \"MedCo is the better-run practice, so its margin transfers to us\". Bonus, not required for credit: runs the two counterfactuals — MedCo's $3,000 cost on the hospital's own mix gives (4,960 − 3,000) / 4,960 = 39.5%, and the hospital's $4,800 cost on MedCo's mix gives (5,760 − 4,800) / 5,760 = 16.7%, so neither half alone reaches 47.9% and both halves are properties of the panel; or weights the two channels, 1,800 / 2,600 = 69% of the gap on the cost side against 800 / 2,600 = 31% on the revenue side; or notes that the hospital's own 2022 margin of 3.2% is unchanged by the deal on every patient it already treats."
+   },
+   "reference": {
+    "en": "- Naive: 47.9% against 3.2% is a fifteenfold difference and it sits in bold at the bottom of a column headed by a clinic that is for sale. The reflex is to read the ratio as performance — MedCo is the better-run practice, buy it, import what it does. The exhibit then looks like confirmation, because everything in MedCo's column is better than everything in ours.\n- Correct: put the two margins away and take the difference in dollars per patient, where it can be taken apart. MedCo earns 5,760 − 3,000 = $2,760 per patient. The hospital earns 4,960 − 4,800 = $160. The gap is $2,600, and it has exactly two pieces: $800 of revenue, 5,760 against 4,960, and $1,800 of cost, 4,800 against 3,000. Both pieces are in the exhibit and both can be traced to their source.\n- The $800 is mix, and only mix. The same three reimbursement rates — $6,300 private, $3,700 public, $3,300 uninsured — stand in both columns, so the entire revenue advantage comes from the weights: 30 points more private at 6,300 is +$1,890, 25 points less public at 3,700 is −$925, 5 points less uninsured at 3,300 is −$165, and 1,890 − 925 − 165 = $800, the whole of it. MedCo is not paid more for anything. It is paid the same rates for a different set of patients.\n- The $1,800 is the other half of the same fact. The exhibit gives the reason on its own line: MedCo's cost per patient is $3,000 since MedCo has a younger clientele. That is a statement about who walks in, not about what is done to them once they do. Read the two pieces together and every line in the exhibit that differs between the columns is a line about the composition of the patient book — the mix rows and the age of the panel. There is no line about a procedure, a staffing ratio, a supply contract or a process.\n- Which is what breaks the note. The 47.9% is not a capability that a buyer acquires and then applies; it is a description of 5,000 particular patients, and it comes with them and stops there. The hospital's own patients are still 50/40/10, still cost $4,800, and still return $160 each the day after the deal closes — 3.2%, unchanged. The right question to put back to the board is how MedCo's panel was assembled, and whether anything in the deal changes who arrives at the hospital's own door.\n- Two counterfactuals settle it arithmetically. Give the hospital MedCo's $3,000 cost but keep its own mix: (4,960 − 3,000) / 4,960 = 39.5%. Give it MedCo's mix but keep its own $4,800 cost: (5,760 − 4,800) / 5,760 = 16.7%. Neither reaches 47.9%, because 47.9% requires both the mix and the clientele at once — and the two are the same underlying fact seen from the revenue side and the cost side. On weights, 1,800 / 2,600 = 69% of the gap sits on the cost side and 800 / 2,600 = 31% on the revenue side.\n- Last mile: the exhibit does not support the note, and it also cannot be made to — the hospital's own annual patient count is nowhere in it, so no blended margin can be computed from what is on the page. What the exhibit does support is narrower and worth stating in its place: MedCo earns $2,760 on each of 5,000 patients, $13.8M a year, against a $40M price, so the deal recovers its cost in roughly three years on MedCo's book alone. Bring back two things before it goes to the board — how MedCo's panel was formed and whether it holds under new ownership, and what, if anything, in this deal changes the mix of the hospital's own patients."
+   },
+   "provoked": {
+    "ru": "«приписать разрыв 47,9% против 3,2% тому, как MedCo работает, и перенести её маржу на своих пациентов» — вместо того чтобы разложить $2,600 на $800 микса и $1,800 стоимости и увидеть, что обе части описывают состав панели пациентов, а не работу клиники."
+   },
+   "hints": {
+    "L1": "Переведи обе маржи в прибыль на одного пациента и разложи разрыв на части",
+    "L2": "Ставки возмещения в обеих колонках одинаковы — тогда откуда берётся $800?"
+   },
+   "family_h25": "F3",
+   "family_src": "тело",
+   "family_conf": "высокая",
+   "family_note": "Круг по телу записи: разница объясняется составом группы, а не воздействием. В checklist пункт 3: «no line anywhere in the exhibit describes a procedure, a staffing model or a process at MedCo — every line that differs describes who is being treated, not how». В reference: «The 47.9% is not a capability that a buyer acquires and then applies; it is a description of 5,000 particular patients, and it comes with them and stops there». Обе половины разрыва книжные: $800 — чистый микс при одинаковых ставках, $1,800 — книга прямо пишет «since MedCo has a younger clientele»."
+  },
+  {
+   "id": "CI-050",
+   "title": "Everyone Over Thirty",
+   "type": "Chart Interpretation",
+   "clean": false,
+   "prompt": "Our focus group says shoppers over 30 will take the store brand — 100% of them said yes, against 12.5% of those under 30. Marketing wants to build an over-30 plan on that gap. Do you agree?",
+   "exhibit": {
+    "title": "Exhibit A — Focus group: \"Would you purchase a store-brand version of Vibrants over the brand name?\"",
+    "parts": [
+     {
+      "type": "table",
+      "header": [
+       "Gender",
+       "Age",
+       "Answer"
+      ],
+      "rows": [
+       [
+        "M",
+        "33",
+        "Y"
+       ],
+       [
+        "F",
+        "29",
+        "N"
+       ],
+       [
+        "F",
+        "27",
+        "N"
+       ],
+       [
+        "F",
+        "24",
+        "Y"
+       ],
+       [
+        "M",
+        "25",
+        "N"
+       ],
+       [
+        "F",
+        "29",
+        "N"
+       ],
+       [
+        "F",
+        "26",
+        "N"
+       ],
+       [
+        "M",
+        "31",
+        "Y"
+       ],
+       [
+        "F",
+        "23",
+        "N"
+       ],
+       [
+        "M",
+        "31",
+        "Y"
+       ],
+       [
+        "F",
+        "28",
+        "N"
+       ]
+      ],
+      "blank_before": 1
+     },
+     {
+      "type": "text",
+      "lines": [
+       "*Note: the target customer for this product is under 30 years in age.*"
+      ],
+      "blank_before": 1,
+      "blank_after": 1
+     }
+    ]
+   },
+   "exhibit_mode": "E-before",
+   "time": "3 min",
+   "step_prompts": [],
+   "checklist": {
+    "en": "Credit if ALL: (1) states the verdict first, in one sentence, with a subject and an action verb — the gap cannot be read as an age effect and the over-30 plan should not be built on it yet; a correct conclusion that arrives after the analysis does not score; (2) reproduces both printed rates off the eleven rows rather than accepting them, three respondents above 30 and all three answering Y, 3 of 3 = 100%, and eight respondents below 30 with one Y, 1 of 8 = 12.5%; (3) cuts the same eleven rows a second way and reports what the second cut shows: all three respondents over 30 are men, no woman over 30 appears in the panel at all, and seven of the eight under 30 are women; (4) says explicitly that the two cells therefore differ in composition and not only in age, so the 100% is a statement about three men and the 12.5% about a group that is 7 of 8 women; (5) asks how the panel was assembled and names the specific cells missing before the claim can be tested — women over 30, and more than one man under 30; (6) does not overclaim in the other direction: the single man under 30 answered N, so the record does not establish gender as the driver either, and the candidate must say that the panel cannot separate the two rather than swapping one story for another; (7) states what to do next in a way that is decidable — hold the over-30 plan, re-run the panel with the two missing cells filled, and keep the under-30 reading, which is the target segment, as the finding that does not depend on the missing cells. Bonus, not required for credit: notes that the over-30 cell is three respondents and one different answer would move 100% to 66.67% — and accepts, if told the panel is representative of a larger study, that this argument then falls away while the composition argument does not; computes the cuts that were not printed, 3 of 4 men Y = 75.00% against 1 of 7 women Y = 14.29%, and 4 of 11 = 36.36% overall; observes that the under-30 verdict is what the case objective actually turns on, since the target customer is under 30."
+   },
+   "reference": {
+    "en": "- Naive: the exhibit hands you a clean cut and the arithmetic confirms it. Everyone over 30 said yes, nobody under 30 much did, so age is the variable and older shoppers are relaxed about a store brand. Both printed figures check out against the rows, which is exactly why the story feels finished — it is an honest first read by a careful person, not a careless one.\n- Correct: verify the rates, then cut the same eleven rows a second way, and the age story stops standing on its own. Over 30 there are three respondents — 33, 31, 31 — and all three answered Y, so 3 of 3 = 100%. Under 30 there are eight, one of whom answered Y, so 1 of 8 = 12.5%. Both printed numbers are right. What is not printed is that all three respondents over 30 are men, and that seven of the eight under 30 are women. There is no woman over 30 anywhere in this panel.\n- So the two cells are not the same kind of group measured at two ages. The 100% is three men; the 12.5% is a group that is 7 of 8 women. Across the eleven rows, the over/under-30 line and the male/female line are very nearly the same line — they separate only one respondent, and the whole gap sits on top of that overlap. Lead with that: the gap cannot be attributed to age from this panel, because nothing here varies age while holding the rest of the cell fixed.\n- The discipline is to not swap one confident story for another. The single man under 30, aged 25, answered N. If gender were doing the work he is the respondent who should have said Y, and he did not. Run the other cut anyway and print it: 3 of 4 men answered Y, 75.00%, against 1 of 7 women, 14.29%, with 4 of 11 = 36.36% overall. Neither cut is clean, and the correct claim is the narrow one — this panel has no cell in which one variable moves and the other holds, so it can decide neither.\n- The size of the cell is the second, smaller point, and it should not be the first. 100% here is three people; a single different answer among them reads 2 of 3 = 66.67%. A rate built on three observations is not evidence that a segment behaves one way, and this one is also the cell with a missing half.\n- The move the case actually rewards is to ask how the panel was put together and to name what is missing rather than to ask for \"more data\" in general. Two cells are absent and both are cheap to fill: women over 30, and men under 30 beyond a single respondent. Until they exist, the over-30 plan is being sized off a group that does not resemble the buyers it is meant to describe.\n- Last mile: hold the over-30 plan, do not kill it — the claim is untested, not disproved. Keep the reading that does not depend on the missing cells: under 30, 1 of 8 said they would take the store brand, and under 30 is the target customer for this product, so that is the number the launch decision turns on. Two things to bring back: the recruitment rule that produced a panel with no woman over 30, since the same rule will have shaped every other cut of this survey; and a re-run with the two missing cells filled before any over-30 plan is sized."
+   },
+   "provoked": {
+    "ru": "«разница читается как возраст» — принять 100% против 12.5% за свойство возрастной группы и строить план на этом разрыве. **Зачёт = кандидат режет те же одиннадцать строк вторым разрезом, называет состав обеих ячеек, требует недостающие ячейки — и не подменяет возрастную версию гендерной, потому что единственный мужчина до 30 ответил N** [Y2]."
+   },
+   "hints": {
+    "L1": "Пересчитай обе доли по строкам, потом разрежь те же строки ещё раз",
+    "L2": "Кто именно стоит в ячейке «над 30» — и кого там нет?"
+   },
+   "family_h25": "F3",
+   "family_src": "тело",
+   "family_conf": "высокая",
+   "family_note": "F3 «причина против отбора»: наблюдаемая разница объясняется составом ячеек, а не возрастом. Тело ставит это дословно — «all three respondents over 30 are men, and that seven of the eight under 30 are women. There is no woman over 30 anywhere in this panel», и далее «this panel has no cell in which one variable moves and the other holds, so it can decide neither». Входное движение кандидата: пересчитать 3 из 3 = 100% и 1 из 8 = 12.5% по строкам, затем разрезать те же одиннадцать строк по полу и потребовать недостающие ячейки. Не F1: подмены базы нет, обе доли считаны от своей верной базы и сходятся с книгой. Не F7: размер ячейки (три наблюдения) — вторичный довод, тело держит его после разбора состава."
   }
  ]
 }

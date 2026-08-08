@@ -1,5 +1,5 @@
 {
- "version": "cm-50",
+ "version": "cm-54",
  "drills": [
   {
    "id": "CM-001",
@@ -3230,6 +3230,286 @@
     "en": "Reading an exactly zero NPV as a rejection, and recommending without naming the convention the recommendation rests on.",
     "ru": "Нулевой NPV прочитан как отказ, и рекомендация даётся без названной конвенции."
    }
+  },
+  {
+   "id": "CM-052",
+   "title": "Four To A Room",
+   "difficulty": "Hard",
+   "type": "Trap",
+   "focus": "F05(a)",
+   "time": "8 min",
+   "render": "table(13) · reveal(3)",
+   "prompt": "High Quality Bottles (HQB) has bottled beverages for 20 years and now wants to supply local hotels with toiletries — shampoo, conditioner, body wash, lotion. Every room is stocked with one bottle of each; guests take what they use and housekeeping tops the room back up after every stay. The CEO wants the Year-1 size of this regional market and what HQB would earn on it.",
+   "exhibit": {
+    "type": "table",
+    "header": [
+     "Item",
+     "Value"
+    ],
+    "rows": [
+     [
+      "Hotels in the region",
+      "50"
+     ],
+     [
+      "Rooms per hotel",
+      "120"
+     ],
+     [
+      "Occupancy rate",
+      "80%"
+     ],
+     [
+      "Room turnovers per week",
+      "3"
+     ],
+     [
+      "Bottles stocked per room (initial fit-out)",
+      "4"
+     ],
+     [
+      "Bottles used per guest stay",
+      "2.5"
+     ],
+     [
+      "Price charged to hotels per bottle",
+      "$0.50"
+     ],
+     [
+      "Cost of ingredients",
+      "$0.20 per bottle"
+     ],
+     [
+      "Cost to make bottle",
+      "$0.05 per bottle"
+     ],
+     [
+      "Cost of distribution",
+      "$1.00 per case"
+     ],
+     [
+      "Bottles per case",
+      "20"
+     ],
+     [
+      "Fixed labor",
+      "$100,000 / yr"
+     ],
+     [
+      "Cap Ex for new equipment",
+      "$250,000, straight-line over 10 years starting year 1 to $0 salvage"
+     ]
+    ]
+   },
+   "step_prompts": [
+    "Year-1 market size for hotel toiletries in this region, in dollars.",
+    "Assume HQB captures 100% of that market in Year 1. What profit margin does HQB earn?",
+    "HQB's beverage operations run a 25% profit margin and the CEO will only enter a business that clears it. What do you tell her?"
+   ],
+   "company": "High Quality Bottles (HQB)",
+   "industry": "Manufacturing / Hospitality supply",
+   "checklist": {
+    "en": "(1) initial fit-out counted separately from replenishment: 6,000 rooms × 4 = 24,000 bottles = $12,000; (2) replenishment 36,000 bottles/wk derived (6,000 × 80% × 3 × 2.5); (3) weeks-per-year NAMED OUT LOUD as a chosen convention before multiplying — 50 wks → $912,000 or 52 wks → $948,000, both defensible, and the candidate says which he took and why; (4) Y1 volume includes the fit-out: 1,824,000 or 1,896,000 bottles; (5) variable cost $0.25/bottle and distribution $0.05/bottle ($1.00 ÷ 20); (6) only Year-1 depreciation $25,000 enters P&L, NOT the $250,000 Cap Ex; (7) margin 26.3% (50 wks) or 26.8% (52 wks), ±0.5pp; (8) last mile — the convention moves revenue by $36,000 but the answer clears 25% either way, so the recommendation is robust; say that, do not hide the assumption.",
+    "ru": "(1) первичная выкладка отделена от пополнения: 6 000 номеров × 4 = 24 000 бутылок = $12 000; (2) пополнение 36 000 бутылок/нед выведено (6 000 × 80% × 3 × 2,5); (3) число недель в году НАЗВАНО ВСЛУХ как выбранная условность ДО умножения — 50 нед → $912 000 или 52 нед → $948 000, обе защитимы, кандидат говорит, какую взял и почему; (4) объём Y1 включает выкладку: 1 824 000 или 1 896 000 бутылок; (5) переменные $0,25/бут и дистрибуция $0,05/бут ($1,00 ÷ 20); (6) в P&L входит только амортизация первого года $25 000, а НЕ $250 000 Cap Ex; (7) маржа 26,3% (50 нед) или 26,8% (52 нед), ±0,5 п.п.; (8) last mile — условность двигает выручку на $36 000, но порог 25% пройден в обоих случаях, значит рекомендация устойчива; это надо сказать, а не спрятать допущение."
+   },
+   "reference": {
+    "en": "- Step 1a — initial fit-out. Rooms = 50 hotels × 120 = **6,000**. Bottles = 6,000 × 4 = **24,000** → 24,000 × $0.50 = **$12,000**.\n- Step 1b — replenishment. Occupied rooms = 6,000 × 80% = 4,800. Stays/wk = 4,800 × 3 = 14,400. Bottles/wk = 14,400 × 2.5 = **36,000**.\n- Step 1c — the fork. The table gives bottles per WEEK and asks for a YEAR; it never says how many weeks are in the working year. Two conventions are equally defensible and the case is built on that: **50 weeks** (the standard market-sizing round number, and what the casebook itself advises) → 36,000 × 50 = 1,800,000 bottles → $900,000; **52 weeks** (hotels do not shut for two weeks, so the calendar year is the honest count) → 36,000 × 52 = 1,872,000 → $936,000.\n- Step 1d — market size. 50 wks: $12,000 + $900,000 = **$912,000**. 52 wks: $12,000 + $936,000 = **$948,000**. The graded move is not picking the \"right\" one — it is saying which one you took and why BEFORE you multiply, and carrying it consistently through the rest of the case.\n- Step 2 — costs. Variable per bottle = ingredients $0.20 + bottle $0.05 = **$0.25**. Distribution = $1.00 ÷ 20 = **$0.05/bottle**. Fixed labor = $100,000. Depreciation = $250,000 ÷ 10 = **$25,000** — only this enters Year 1; the $250,000 Cap Ex is a cash outlay, not a Year-1 expense.\n- Step 2a — 50-week branch. Y1 volume = 1,800,000 + 24,000 = 1,824,000. Materials = 1,824,000 × $0.25 = $456,000. Distribution = 1,824,000 × $0.05 = $91,200. Profit = 912,000 − 100,000 − 456,000 − 91,200 − 25,000 = **$239,800** → 239,800 ÷ 912,000 = **26.3%**.\n- Step 2b — 52-week branch. Y1 volume = 1,872,000 + 24,000 = 1,896,000. Materials = 1,896,000 × $0.25 = $474,000. Distribution = 1,896,000 × $0.05 = $94,800. Profit = 948,000 − 100,000 − 474,000 − 94,800 − 25,000 = **$254,200** → 254,200 ÷ 948,000 = **26.8%**.\n- Step 3 — so what. Revenue swings $36,000 (~4%) on the convention alone, but margin moves only 0.5pp and both branches clear the 25% hurdle. Correct delivery: \"Market size is $912K on a 50-week year — $948K if we use the full calendar — and margin is 26–27% either way, so the business clears your 25% hurdle regardless of which convention we adopt.\" State the assumption, then show the conclusion survives it. Silently taking one number and never mentioning the other is the failure, even when the arithmetic is perfect.",
+    "ru": "- Шаг 1a — первичная выкладка. Номера = 50 отелей × 120 = **6 000**. Бутылок = 6 000 × 4 = **24 000** → 24 000 × $0,50 = **$12 000**.\n- Шаг 1b — пополнение. Занятых номеров = 6 000 × 80% = 4 800. Заездов/нед = 4 800 × 3 = 14 400. Бутылок/нед = 14 400 × 2,5 = **36 000**.\n- Шаг 1c — развилка. Таблица даёт бутылки в НЕДЕЛЮ, а спрашивают за ГОД; сколько недель в рабочем году — не сказано нигде. Две условности одинаково защитимы, и кейс построен именно на этом: **50 недель** (стандартное круглое число market sizing, и сам casebook его советует) → 36 000 × 50 = 1 800 000 бутылок → $900 000; **52 недели** (отели не закрываются на две недели, календарный год — честный счёт) → 36 000 × 52 = 1 872 000 → $936 000.\n- Шаг 1d — размер рынка. 50 нед: $12 000 + $900 000 = **$912 000**. 52 нед: $12 000 + $936 000 = **$948 000**. Оценивается не выбор «правильной» — оценивается то, что ты назвал выбранную условность и обосновал её ДО умножения и потом вёл её сквозь весь кейс без подмены.\n- Шаг 2 — затраты. Переменные на бутылку = ингредиенты $0,20 + бутылка $0,05 = **$0,25**. Дистрибуция = $1,00 ÷ 20 = **$0,05/бут**. Постоянный труд = $100 000. Амортизация = $250 000 ÷ 10 = **$25 000** — только она входит в первый год; $250 000 Cap Ex это отток денег, а не расход года.\n- Шаг 2a — ветка 50 недель. Объём Y1 = 1 800 000 + 24 000 = 1 824 000. Материалы = 1 824 000 × $0,25 = $456 000. Дистрибуция = 1 824 000 × $0,05 = $91 200. Прибыль = 912 000 − 100 000 − 456 000 − 91 200 − 25 000 = **$239 800** → 239 800 ÷ 912 000 = **26,3%**.\n- Шаг 2b — ветка 52 недели. Объём Y1 = 1 872 000 + 24 000 = 1 896 000. Материалы = 1 896 000 × $0,25 = $474 000. Дистрибуция = 1 896 000 × $0,05 = $94 800. Прибыль = 948 000 − 100 000 − 474 000 − 94 800 − 25 000 = **$254 200** → 254 200 ÷ 948 000 = **26,8%**.\n- Шаг 3 — so what. Выручка гуляет на $36 000 (~4%) от одной только условности, но маржа сдвигается на 0,5 п.п., и обе ветки проходят порог 25%. Правильная подача: «Market size is $912K on a 50-week year — $948K if we use the full calendar — and margin is 26–27% either way, so the business clears your 25% hurdle regardless of which convention we adopt.» Сначала называешь допущение, потом показываешь, что вывод его переживает. Молча взять одно число и не упомянуть второе — это провал, даже если арифметика идеальна.\n- Примечание к книге: casebook в своей второй строке округляет выручку до $950k и печатает «~256k/950k = 27%»; из точной $948 000 получается $254 200 и 26,8% — обе цифры лежат в книжной вилке «Answer Between 25-30% is fine»."
+   },
+   "provoked": {
+    "en": "silently picking one weeks-per-year figure and never naming it, so the $912K / $948K fork never surfaces; folding the full $250,000 Cap Ex into Year 1 instead of the $25,000 first-year depreciation; forgetting the 24,000-bottle initial fit-out on top of replenishment.",
+    "ru": "молча взять одно число недель в году и не назвать его, из-за чего развилка $912K / $948K вообще не всплывает; засунуть в первый год весь Cap Ex $250 000 вместо амортизации $25 000; забыть первичную выкладку 24 000 бутылок поверх пополнения."
+   },
+   "family_h25": "F5",
+   "family_src": "словарь:F05",
+   "family_conf": "высокая",
+   "family_note": "Носитель F5: две честные условности счёта дают разные ответы, и книга печатает оба — «Market size for this region is ($12k + 900k) =$912k if they rounded and ($12k + $936k) = $948k if they didn't round» (UVA Darden 2018-19 Casebook, High Quality Bottles, Exhibit 1 Guidance, стр. 97). Обе защитимы: книга сама пишет «It is strongly advised and acceptable that the interviewee uses 50 weeks/ year rather than 52 weeks» — то есть 50 рекомендована, но 52 не запрещена и не помечена как ошибка. Входное движение слота: «Первым делом отчерчиваю на листе отдельную строку weeks/year = ___, вслух объявляю, что ставлю туда 50 и почему, и только после этого начинаю умножать» — это НЕ близнец MS-004/MS-022/MS-038, где кандидату прямым текстом велено посчитать двумя путями и сверить; здесь развилка не названа в видимой области, и кандидат обязан обнаружить её сам. Ловушка поставлена тем, что в exhibit есть бутылки в неделю и нет числа недель в году. Отраслевой перенос семьи: в CM это второй носитель F5 после CM-051, входное движение иное."
+  },
+  {
+   "id": "CM-053",
+   "title": "The Ops Director's Read",
+   "difficulty": "Hard",
+   "type": "Trap",
+   "focus": "F07(c) net-of-receipts vs cash-out",
+   "time": "8 min",
+   "render": "table(11) · input",
+   "company": "Vorlane Toys",
+   "industry": "Online toy retail / fulfilment",
+   "prompt": "Vorlane Toys sells toys online and ships nationwide from a single warehouse outside Boston. The CEO is deciding whether to keep distribution in-house or move it to a third-party fulfilment centre, Danny's. Her ops director has priced both options off the Exhibit and reports that staying in-house comes out cheaper. Check his read and advise her.",
+   "exhibit": {
+    "type": "table",
+    "header": [
+     "Item",
+     "Figure"
+    ],
+    "rows": [
+     [
+      "Regular orders",
+      "250 orders a day · 20 days a month · 10 months"
+     ],
+     [
+      "Holiday orders",
+      "2,000 orders a day · 20 days a month · 2 months"
+     ],
+     [
+      "Average toy price",
+      "$20"
+     ],
+     [
+      "In-house: warehouse rental, utilities, equipment",
+      "$75,000 a year"
+     ],
+     [
+      "In-house: warehouse insurance",
+      "$9,000 a year"
+     ],
+     [
+      "In-house: full-time labor, 4 employees incl. benefits",
+      "$200,000 a year"
+     ],
+     [
+      "In-house: holiday labor",
+      "30 employees · $10 an hour · 8 hours a day · 20 days a month · 2 months · no benefits"
+     ],
+     [
+      "Danny's: storage",
+      "$0.45 per cubic foot"
+     ],
+     [
+      "Danny's: space used",
+      "10,000 cubic feet for 10 months · 100,000 cubic feet for 2 months"
+     ],
+     [
+      "Danny's: returns",
+      "3% return rate · restocking fee $2 per returned item"
+     ],
+     [
+      "Handling fee per package",
+      "collected from the customer on every package today · payable to Danny's on every package if distribution moves out"
+     ]
+    ]
+   },
+   "step_prompts": [
+    "Total packages shipped in a year, and annual revenue.",
+    "Build the annual figure for each option.",
+    "Last mile: give your recommendation to the CEO in one sentence, and say which quantity each of your two figures is before you compare them."
+   ],
+   "checklist": {
+    "en": "Credit if ALL: (1) 130,000 packages, revenue $2.6M; (2) in-house operating cost $380,000 = 200,000 + 96,000 + 75,000 + 9,000; (3) Danny's outlay $272,800 = 135,000 storage + 130,000 handling + 7,800 restocking; (4) each column is labelled — one figure is cost net of the $1 the customer pays, the other is cash paid out, and the two are not the same quantity; (5) put on one basis the gap is $107,200 in Danny's favour (380,000 − 272,800, and 250,000 − 142,800 — same number both ways); (6) the ops director's $22,800 in-house advantage is reproduced and shown to require the $1 fee to survive in-house and die on outsourcing; (7) the two readings differ by exactly $130,000; (8) the recommendation names which reading it stands on.",
+    "ru": "Зачёт, если ВСЁ: (1) 130,000 посылок, выручка $2.6M; (2) операционные расходы in-house $380,000 = 200,000 + 96,000 + 75,000 + 9,000; (3) отток по Danny's $272,800 = 135,000 хранение + 130,000 handling + 7,800 restocking; (4) названо, что измеряет каждая колонка — одна цифра это расход за вычетом $1, который платит покупатель, вторая это выплаченные деньги, и это не одна и та же величина; (5) на одном основании разрыв $107,200 в пользу Danny's (380,000 − 272,800 и 250,000 − 142,800 — одно и то же число); (6) воспроизведено преимущество in-house $22,800 ops-директора и показано, что оно требует, чтобы сбор $1 жил при in-house и умирал при аутсорсе; (7) два прочтения расходятся ровно на $130,000; (8) в рекомендации названо, на каком прочтении она стоит."
+   },
+   "reference": {
+    "en": "- **Volume.** 250 × 20 = 5,000 a month × 10 = 50,000. 2,000 × 20 = 40,000 a month × 2 = 80,000. Total **130,000 packages**; revenue 130,000 × $20 = **$2.6M**.\n- **In-house operating cost.** Full-time $200,000; holiday labor 30 × $10 × 8 = $2,400 a day × 20 = $48,000 a month × 2 = $96,000; rent and equipment $75,000; insurance $9,000 → **$380,000**.\n- **Danny's outlay.** Storage $0.45 × 10,000 = $4,500 a month × 10 = $45,000, plus $0.45 × 100,000 = $45,000 a month × 2 = $90,000 → $135,000. Handling 130,000 × $1 = $130,000. Restocking 130,000 × 3% = 3,900 × $2 = $7,800 → **$272,800**.\n- **What each column measures.** The ops director's in-house figure is $380,000 less the $130,000 the customer pays in handling fees = $250,000 — a cost *net of customer receipts*. His Danny's figure, $272,800, is *cash paid out*, with no customer receipt netted against it. Subtracting one from the other is subtracting two different quantities; that subtraction, not the data, produces his $22,800.\n- **Put on one basis.** Net of the fee on both sides: $250,000 against $272,800 − $130,000 = $142,800. Gross on both sides: $380,000 against $272,800. Either way the gap is **$107,200 in Danny's favour**, and it is the same number both ways — the invariant.\n- **The fork is real, not a slip.** The $1 fee is a pricing decision, not a cost fact, and both readings are defensible off the book. Reading A: Vorlane keeps charging the customer $1 either way — the fee cancels and Danny's is $107,200 cheaper. Reading B: the fee is collected only while Vorlane handles its own packages — then in-house is $22,800 cheaper. The two readings differ by exactly $130,000, the whole fee. Nothing in the operating data moves; only the pricing convention does.\n- **Pressure on the fee itself.** The book flags that the industry is moving to free holiday shipping, which would remove $80,000 of the $130,000 — the 80,000 holiday packages — leaving $50,000 and dragging Reading B toward Reading A.\n- **Last mile.** Do not hand the CEO a single number. Say which quantity you are comparing, give the $107,200 operating gap, and flag that the whole disagreement is $130,000 of handling fee that is Vorlane's to charge or forgo.",
+    "ru": "- **Объём.** 250 × 20 = 5,000 в месяц × 10 = 50,000. 2,000 × 20 = 40,000 в месяц × 2 = 80,000. Итого **130,000 посылок**; выручка 130,000 × $20 = **$2.6M**.\n- **Операционные расходы in-house.** Постоянный персонал $200,000; праздничный 30 × $10 × 8 = $2,400 в день × 20 = $48,000 в месяц × 2 = $96,000; аренда и оборудование $75,000; страховка $9,000 → **$380,000**.\n- **Отток по Danny's.** Хранение $0.45 × 10,000 = $4,500 в месяц × 10 = $45,000 плюс $0.45 × 100,000 = $45,000 в месяц × 2 = $90,000 → $135,000. Handling 130,000 × $1 = $130,000. Restocking 130,000 × 3% = 3,900 × $2 = $7,800 → **$272,800**.\n- **Что измеряет каждая колонка.** Цифра ops-директора по in-house — это $380,000 минус $130,000, которые платит покупатель, = $250,000, то есть расход *за вычетом поступлений от клиента*. Его же цифра по Danny's, $272,800, — это *выплаченные деньги*, без всякого зачёта поступлений. Вычитая одно из другого, он вычитает две разные величины; именно это вычитание, а не данные, рождает его $22,800.\n- **На одном основании.** С зачётом сбора с обеих сторон: $250,000 против $272,800 − $130,000 = $142,800. Без зачёта с обеих сторон: $380,000 против $272,800. В обоих случаях разрыв **$107,200 в пользу Danny's** — одно и то же число, инвариант.\n- **Развилка настоящая, а не оговорка.** Сбор $1 — это решение о цене, а не факт затрат, и оба прочтения защитимы по книге. Прочтение A: Vorlane берёт $1 с покупателя в любом сценарии — сбор сокращается, Danny's дешевле на $107,200. Прочтение B: сбор собирается только пока Vorlane сама обрабатывает посылки — тогда in-house дешевле на $22,800. Прочтения расходятся ровно на $130,000, на весь сбор. В операционных данных не двигается ничего, двигается только ценовая конвенция.\n- **Давление на сам сбор.** Книга отмечает, что отрасль идёт к бесплатной доставке в праздники, а это снимет $80,000 из $130,000 — те самые 80,000 праздничных посылок — оставив $50,000 и подтягивая прочтение B к прочтению A.\n- **Last mile.** Не выдавать CEO одно число. Сказать, какую величину сравниваешь, дать операционный разрыв $107,200 и отметить, что весь спор — это $130,000 сбора, который Vorlane вправе брать или не брать."
+   },
+   "provoked": {
+    "en": "Subtracting two columns that measure different quantities — a cost net of what the customer pays against cash paid out — and reporting the resulting $22,800 as a fact about operating costs.",
+    "ru": "Вычитание двух колонок, измеряющих разные величины, — расхода за вычетом клиентских поступлений из выплаченных денег — и подача полученных $22,800 как факта об операционных расходах."
+   },
+   "family_h25": "F5",
+   "family_src": "словарь:F07",
+   "family_conf": "высокая",
+   "family_note": "F5 — две защитимые конвенции. Входное движение слота: «назвать, что именно измеряет каждая колонка, прежде чем вычитать одну из другой». Обоснование семьи: «$22,800 в пользу in-house и $107,200 в пользу Danny's — обе арифметики верны и расходятся ровно на то, переживает ли аутсорсинг сбор $1 с покупателя», и «в операционных данных не двигается ничего, двигается только ценовая конвенция». Гейт близнеца прогнан по всем 51 слоту снимка; ближайшие два разведены. CM-023 «Overhaul or Outsource»: его движение — «релевантна только избегаемая стоимость keep: 520 + 120 = $640k/aircraft», то есть выбросить нерелевантную строку изнутри одного напечатанного итога до сравнения; здесь ни одна строка не выбрасывается, оба итога арифметически верны и полны, а маркируются сами величины. CM-051 «Exactly One Million»: его движение — «нулевой NPV — не отказ, а точка равенства», конвенция называется после счёта, когда единственное число село в точную ничью; здесь чисел два, они не равны, и конвенция называется до вычитания. Источник данных: Case in Point: Complete Case Interview Preparation, 8th Edition (2013), Burgee Press, Partner Cases → Level 2 → кейс №9 «Finding Fulfillment», блоки Data Bank и FORCE THE STUDENT TO MAKE A DECISION (извлечённый текст без печатной пагинации; строки извлечения 7113–7220). Коды focus в мастере CM переиспользуются (F03(a) на CM-001 и CM-046, F05(a) на CM-006 и CM-052) — «занятость» кода конфликтом не является; код взят по содержанию: зачёт клиентских поступлений это F07, не перпетуитет F05. Гейт близнеца прогнан по 54 слотам живого мастера, а не по устаревшему снимку: CM-023 редактирует одну сторону изнутри итога, CM-051 называет конвенцию после счёта на точной ничьей, здесь чисел два и оба верны. Смежность с CM-051 остаётся только на last mile."
+  },
+  {
+   "id": "CM-054",
+   "title": "The Final Offer",
+   "difficulty": "Medium",
+   "type": "Trap",
+   "focus": "F19(a) price-volume bridge on a falling top line",
+   "time": "5 min",
+   "company": "Plastic World",
+   "industry": "Plastic packaging / Private equity",
+   "render": {
+    "exhibits": [
+     "table"
+    ],
+    "interactive": [
+     "input_number"
+    ]
+   },
+   "prompt": "A private equity firm is looking at Plastic World, a plastic packaging manufacturer. The owners want $25m and the offer is final. Product mix has not changed in recent years, products are top quality, customers are loyal, and two years ago the company invested further in equipment for product innovation. The three-year P&L is below. Sales fell while volume grew — explain what actually moved, in dollars.",
+   "exhibit": {
+    "type": "table",
+    "header": [
+     "",
+     "2018",
+     "2017",
+     "2016"
+    ],
+    "rows": [
+     [
+      "Sales ($)",
+      "18,824,000",
+      "19,180,000",
+      "19,650,000"
+     ],
+     [
+      "Volume (units)",
+      "36,200,000",
+      "34,250,000",
+      "32,750,000"
+     ],
+     [
+      "COGS ($)",
+      "9,050,000",
+      "8,900,000",
+      "8,650,000"
+     ],
+     [
+      "SG&A ($)",
+      "7,500,000",
+      "7,200,000",
+      "7,300,000"
+     ],
+     [
+      "Depreciation ($)",
+      "3,450,000",
+      "3,450,000",
+      "2,250,000"
+     ],
+     [
+      "EBIT ($)",
+      "(1,176,000)",
+      "(370,000)",
+      "1,450,000"
+     ]
+    ]
+   },
+   "step_prompts": [
+    "Sales fell $826,000 from 2016 to 2018. Split that fall into a price part and a volume part — value the price effect at 2018 volume, the volume effect at the 2016 price. Give the price part in $; the two parts must add back to −$826,000.",
+    "Last mile: at 2018 volume and 2018 costs, what price per unit puts EBIT margin at 0% — the level at which the sensitivity chart values the company at exactly the $25m asked? Give $/unit and the recommendation in one sentence."
+   ],
+   "checklist": {
+    "en": "Credit if ALL: (1) realized price per unit built for at least 2016 and 2018 = $0.60 and $0.52; (2) price effect = −$2,896,000 (−$0.08 × 36,200,000) and volume effect = +$2,070,000 (3,450,000 × $0.60), reconciling to −$826,000; (3) candidate states the printed $826,000 is a net of two opposite-signed components and that volume is not the problem; (4) breakeven price = $0.5525/unit (Sales must reach $20,000,000 = 9,050,000 + 7,500,000 + 3,450,000); (5) recommendation \"buy at $25m\" tied to the gap being $0.0325/unit, ~41% of the $0.08 price erosion, i.e. still $0.0475 below the 2016 price.",
+    "ru": "(1) построена реализованная цена за юнит минимум за 2016 и 2018 = $0.60 и $0.52; (2) ценовой эффект = −$2,896,000 (−$0.08 × 36,200,000) и объёмный = +$2,070,000 (3,450,000 × $0.60), сходятся в −$826,000, tolerance: exact; (3) сказано, что напечатанные $826,000 — нетто двух разнознаковых компонент и что объём не является проблемой; (4) цена безубыточности = $0.5525/юнит (Sales должны дойти до $20,000,000 = 9,050,000 + 7,500,000 + 3,450,000); (5) рекомендация «покупать за $25m» с привязкой к разрыву $0.0325/юнит — это ~41% эрозии в $0.08, то есть всё ещё на $0.0475 ниже цены 2016 года."
+   },
+   "reference": {
+    "en": "- Naive: sales fell only $826,000 (−4.2%) while EBIT fell $2,626,000, and the one line that visibly jumps is Depreciation, +$1,200,000 (46% of the EBIT swing). Read that way, the story is \"a cost problem plus a mild demand softening\". That is the honest first read of the table.\n- Correct: divide Sales by Volume. Realized price is $0.60 (2016) → $0.56 (2017) → $0.52 (2018): 32,750,000 × $0.60 = 19,650,000; 34,250,000 × $0.56 = 19,180,000; 36,200,000 × $0.52 = 18,824,000. Bridge the top line: price effect (0.52 − 0.60) × 36,200,000 = **−$2,896,000**; volume effect 3,450,000 × $0.60 = **+$2,070,000**; sum = **−$826,000**. The printed decline is a net of two components 3.5× its own size, pulling in opposite directions.\n- Naive↔correct gap: $2,070,000 — the size of the growth the aggregate line silently eats.\n- Costs are not the problem either: total costs went 18,200,000 → 20,000,000 (+9.9%) on +10.5% volume, so full cost per unit FELL from $0.5557 to $0.5525; COGS per unit fell from $0.2641 to $0.2500, and the incremental $400,000 of COGS on 3,450,000 added units is $0.116 per added unit. Depreciation is the 2016→2018 equipment investment — non-cash and already sunk, not a lever.\n- Whole loss is priced: $0.52 realized vs $0.552486 full unit cost = −$0.032486 × 36,200,000 = −$1,176,000 = reported EBIT (rounded to $0.5525 the bridge reads −$1,176,500).\n- Last mile: Sales must reach 9,050,000 + 7,500,000 + 3,450,000 = **$20,000,000** → price **$0.5525/unit**, +$0.0325 (+6.2%). That recovers only 41% of the $0.08 erosion and still leaves price $0.0475 under 2016. Since the chart values the company at the asked $25m at 0% margin and at $40m at the industry average, and every competitor is profitable while Plastic World is not, the fix is company-specific and cheap: the sales force is compensated on market share, which is what pays them to give price away; re-cut incentives to earnings and simplify the 350 molds. Recommendation: buy at $25m.",
+    "ru": "- Naive: продажи упали всего на $826,000 (−4.2%), а EBIT — на $2,626,000, и единственная строка, которая заметно скачет, — амортизация, +$1,200,000 (46% свинга EBIT). При таком чтении история звучит как «проблема в costs плюс лёгкое проседание спроса». Это честное первое чтение таблицы.\n- Correct: разделить Sales на Volume. Реализованная цена: $0.60 (2016) → $0.56 (2017) → $0.52 (2018): 32,750,000 × $0.60 = 19,650,000; 34,250,000 × $0.56 = 19,180,000; 36,200,000 × $0.52 = 18,824,000. Мост по верхней строке: ценовой эффект (0.52 − 0.60) × 36,200,000 = **−$2,896,000**; объёмный 3,450,000 × $0.60 = **+$2,070,000**; сумма = **−$826,000**. Напечатанное падение — нетто двух компонент, каждая в разы больше него самого и разного знака.\n- Разрыв naive↔correct: $2,070,000 — ровно тот рост, который агрегат съедает молча.\n- Costs тоже не проблема: суммарные затраты 18,200,000 → 20,000,000 (+9.9%) при +10.5% объёма, то есть полная себестоимость юнита УПАЛА с $0.5557 до $0.5525; COGS на юнит упал с $0.2641 до $0.2500, а прирост COGS $400,000 на 3,450,000 добавленных юнитов — это $0.116 на добавленный юнит. Амортизация — то самое вложение в оборудование, неденежное и уже понесённое, рычагом не является.\n- Весь убыток — ценовой: $0.52 против полной себестоимости $0.552486 = −$0.032486 × 36,200,000 = −$1,176,000, то есть в точности отчётный EBIT (при округлении до $0.5525 мост даёт −$1,176,500).\n- Last mile: Sales должны дойти до 9,050,000 + 7,500,000 + 3,450,000 = **$20,000,000** → цена **$0.5525/юнит**, +$0.0325 (+6.2%). Это отыгрывает лишь 41% эрозии в $0.08 и оставляет цену на $0.0475 ниже 2016 года. Поскольку график даёт запрошенные $25m уже при нулевой марже и $40m при среднеотраслевой, а все конкуренты прибыльны, проблема специфична для компании и дешева в лечении: sales force премируется за долю рынка — именно за это ей и платят отдавать цену; перевести бонус на earnings и упростить линейку из 350 форм. Рекомендация: покупать за $25m."
+   },
+   "provoked": {
+    "en": "a small net decline in a printed Sales line is read as the size of the revenue problem, while it nets −$2,896,000 of price against +$2,070,000 of volume.",
+    "ru": "маленькое нетто-падение напечатанной строки Sales читается как масштаб проблемы выручки, хотя внутри −$2,896,000 цены против +$2,070,000 объёма."
+   },
+   "steps": [
+    {
+     "prompt": "Price effect on Sales, 2016 → 2018, valued at 2018 volume, $",
+     "kind": "number",
+     "answer": "-2896000",
+     "tolerance": "exact"
+    },
+    {
+     "prompt": "Price per unit for 0% EBIT margin at 2018 volume and costs + one-sentence recommendation",
+     "kind": "text",
+     "answer": "0.5525; buy at $25m",
+     "tolerance": "±0.001 on price"
+    }
+   ],
+   "family_h25": "F1",
+   "family_src": "тело",
+   "family_conf": "высокая",
+   "family_note": "F1 по определению «агрегат скрывает разнознаковые компоненты», и это ставится по телу, а не по памяти о кейсе (Н25.10). Носитель — первый шаг записи: «Split that fall into a price part and a volume part», где напечатанные −$826,000 оказываются нетто −$2,896,000 цены и +$2,070,000 объёма. Второй носитель — формулировка провокации: «a small net decline in a printed Sales line is read as the size of the revenue problem», то есть кандидат решает по сводной величине, а не по той, по которой принимается решение. F9 рассматривался и отклонён: самый крупный видимый драйвер (амортизация, +$1,200,000 = 46% свинга EBIT) действительно не рычаг, но после декомпозиции крупнейший вклад — цена, и она как раз доступна к действию, поэтому строгое условие F9 не выполняется; амортизация работает здесь как отвлекающий слой внутри F1, а не как отдельная семья. Долг: библиотека CM уже перегружена F1 (Н25.3), слот добавляет к перекосу осознанно — уникальность обеспечена под-движением (Н25.7), а не кодом семьи."
   }
  ],
  "_meta": {

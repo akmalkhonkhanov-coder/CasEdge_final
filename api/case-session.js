@@ -74,7 +74,7 @@ const CASE_PRICE_CAP_USD = 0.20;
    Куплено ошибкой смены 06.08: «залито или нет» решалось поиском по логам,
    поиск вернул пусто из-за отставания индексации, и вывод был неверным.
    Сравнение метки с диском от индексации логов не зависит. */
-const BUILD = '8fb5e932f61a';
+const BUILD = '5da49f4eee0f';
 const PRICE_IN_PER_MTOK = 2.0;
 const PRICE_OUT_PER_MTOK = 10.0;
 const CACHE_WRITE_MULT = 1.25;
@@ -675,13 +675,29 @@ function hintsBlock(step, attemptCount, asked) {
   const n = Number(attemptCount) || 0;
 
   if (n <= 0 && !asked) {
+    /* 2026-08-08, замер на проде после первой правки. Лестница заработала —
+       ушли и «That's the naive move», и название метода, и весь механизм, —
+       но на первой ступени модель ТРИ РАЗА ИЗ ТРЁХ показывала пальцем на нужную
+       строку: «what happens to that $6,256,477 of allocated fixed cost».
+       Запрет «не называть строку» есть в NEVER_SAY и проигрывает, потому что он
+       про вкус, а ключ с числом лежит рядом. Поэтому правило переписано в
+       МЕХАНИЧЕСКОЕ: на первой попытке нельзя произносить ни одного числа и ни
+       одного названия статьи, которых нет в собственной реплике кандидата.
+       Такое правило нельзя истолковать в свою пользу, и его видно гейтом. */
     return `\n\nHINT POLICY — ATTEMPT 1. Give NO hint. If the answer is wrong, reply with ONE
-short question that sends them back to the assumption they made, and then stop.
-The question must be answerable only by re-examining the data, and must not
-contain the missing idea in any form.
-Good shape: "What would actually change at the plant if that line closed?"
-Bad shape: "Which of those costs disappear and which get reallocated?" — that is
-the answer phrased as a question.${NEVER_SAY}`;
+short question and then stop. HARD CONSTRAINT on that question, and it overrides
+every instinct to be helpful:
+
+  · it may NOT contain any figure that the candidate did not write themselves;
+  · it may NOT name the line item, cost category, row or exhibit they missed;
+  · it may only point back at THEIR OWN claim and ask what it assumes.
+
+If you cannot ask it without citing the thing they missed, ask a shorter and
+vaguer question. Vague is correct here: the candidate is supposed to go looking.
+Good: "What would actually change at the plant if that line stopped?"
+Good: "You said the loss goes away. What has to be true for that to hold?"
+Bad:  "What happens to that $6,256,477 of allocated fixed cost?" — you just told
+      them the row and the number, which is the whole answer.${NEVER_SAY}`;
   }
 
   if (asked && n <= 0) {
