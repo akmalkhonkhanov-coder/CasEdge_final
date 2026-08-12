@@ -2032,23 +2032,23 @@
       </div>
       <div class="cl-pricing-grid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:20px; align-items:stretch;">
 
-        <div class="cl-reveal cl-tap" onclick="handleBeginSession()" role="button" tabindex="0" style="background:var(--bg-canvas); border:1px solid var(--border-hairline); border-radius:var(--radius-lg); padding:32px; display:flex; flex-direction:column;">
+        <div class="cl-reveal cl-tap" onclick="casBuy('drills')" role="button" tabindex="0" style="background:var(--bg-canvas); border:1px solid var(--border-hairline); border-radius:var(--radius-lg); padding:32px; display:flex; flex-direction:column;">
           <div class="cas-title-md" style="margin-bottom:8px;" data-i18n="pricing.drills.name2">Drills Only</div>
           <div class="cas-display-sm" style="margin-bottom:6px; font-family:var(--font-sans); font-weight:600;">$10</div>
           <p class="cas-body-sm" style="color:var(--text-muted); margin:0 0 24px;" data-i18n="l2.price.drills.desc1">30 дриллов любого из 6 типов</p>
           <p class="cas-body-sm" style="color:var(--text-body); margin:0 0 28px; flex:1;" data-i18n="l2.price.drills.desc2">Точечная тренировка перед конкретным этапом собеседования.</p>
-          <button class="ds-btn ds-btn-md ds-btn-secondary" style="width:100%;" onclick="event.stopPropagation();handleBeginSession()" data-i18n="l2.price.cta">Выбрать</button>
+          <button class="ds-btn ds-btn-md ds-btn-secondary" style="width:100%;" onclick="event.stopPropagation();casBuy('drills')" data-i18n="l2.price.cta">Выбрать</button>
         </div>
 
-        <div class="cl-reveal cl-tap" onclick="handleBeginSession()" role="button" tabindex="0" style="background:var(--bg-canvas); border:1px solid var(--border-hairline); border-radius:var(--radius-lg); padding:32px; display:flex; flex-direction:column; animation-delay:.08s;">
+        <div class="cl-reveal cl-tap" onclick="casBuy('starter')" role="button" tabindex="0" style="background:var(--bg-canvas); border:1px solid var(--border-hairline); border-radius:var(--radius-lg); padding:32px; display:flex; flex-direction:column; animation-delay:.08s;">
           <div class="cas-title-md" style="margin-bottom:8px;">Starter Library</div>
           <div class="cas-display-sm" style="margin-bottom:6px; font-family:var(--font-sans); font-weight:600;">$14</div>
           <p class="cas-body-sm" style="color:var(--text-muted); margin:0 0 24px;" data-i18n="l2.price.starter.desc1">Базовая библиотека кейсов + все дриллы</p>
           <p class="cas-body-sm" style="color:var(--text-body); margin:0 0 28px; flex:1;" data-i18n="l2.price.starter.desc2">Хороший старт, если только начинаешь готовиться.</p>
-          <button class="ds-btn ds-btn-md ds-btn-secondary" style="width:100%;" onclick="event.stopPropagation();handleBeginSession()" data-i18n="l2.price.cta">Выбрать</button>
+          <button class="ds-btn ds-btn-md ds-btn-secondary" style="width:100%;" onclick="event.stopPropagation();casBuy('starter')" data-i18n="l2.price.cta">Выбрать</button>
         </div>
 
-        <div class="cl-reveal cl-tap" onclick="handleBeginSession()" role="button" tabindex="0" style="background:var(--ink); border-radius:var(--radius-lg); padding:32px; display:flex; flex-direction:column; position:relative; animation-delay:.16s;">
+        <div class="cl-reveal cl-tap" onclick="casBuy('full')" role="button" tabindex="0" style="background:var(--ink); border-radius:var(--radius-lg); padding:32px; display:flex; flex-direction:column; position:relative; animation-delay:.16s;">
           <div style="position:absolute; top:-12px; left:32px;">
             <span class="ds-badge-coral" data-i18n="l2.price.popular">Популярный</span>
           </div>
@@ -2056,15 +2056,15 @@
           <div class="cas-display-sm" style="margin-bottom:6px; color:var(--on-dark); font-family:var(--font-sans); font-weight:600;">$18</div>
           <p class="cas-body-sm" style="color:var(--on-dark-soft); margin:0 0 24px;" data-i18n="l2.price.full.desc1">Вся библиотека кейсов + все дриллы</p>
           <p class="cas-body-sm" style="color:var(--on-dark-soft); margin:0 0 28px; flex:1;" data-i18n="l2.price.full.desc2">Полный охват реальных бизнес-школьных кейсов.</p>
-          <button class="ds-btn ds-btn-md ds-btn-primary" style="width:100%;" onclick="event.stopPropagation();handleBeginSession()" data-i18n="l2.price.cta">Выбрать</button>
+          <button class="ds-btn ds-btn-md ds-btn-primary" style="width:100%;" onclick="event.stopPropagation();casBuy('full')" data-i18n="l2.price.cta">Выбрать</button>
         </div>
 
-        <div class="cl-reveal cl-tap" onclick="handleBeginSession()" role="button" tabindex="0" style="background:var(--bg-canvas); border:1px solid var(--border-hairline); border-radius:var(--radius-lg); padding:32px; display:flex; flex-direction:column; animation-delay:.24s;">
+        <div class="cl-reveal cl-tap" onclick="casBuy('gamepass')" role="button" tabindex="0" style="background:var(--bg-canvas); border:1px solid var(--border-hairline); border-radius:var(--radius-lg); padding:32px; display:flex; flex-direction:column; animation-delay:.24s;">
           <div class="cas-title-md" style="margin-bottom:8px;">Game Pass</div>
           <div class="cas-display-sm" style="margin-bottom:6px; font-family:var(--font-sans); font-weight:600;">$45<span class="cas-body-sm" style="color:var(--text-muted); font-family:var(--font-sans);" data-i18n="l2.price.gamepass.period"> / 2 мес</span></div>
           <p class="cas-body-sm" style="color:var(--text-muted); margin:0 0 24px;" data-i18n="l2.price.gamepass.desc1">Solve Game + Chat Game, 75 игр</p>
           <p class="cas-body-sm" style="color:var(--text-body); margin:0 0 28px; flex:1;" data-i18n="l2.price.gamepass.desc2">До 75 прогонов за 2 месяца и живой AI-интервьюер с голосовым ответом.</p>
-          <button class="ds-btn ds-btn-md ds-btn-secondary" style="width:100%;" onclick="event.stopPropagation();handleBeginSession()" data-i18n="l2.price.cta">Выбрать</button>
+          <button class="ds-btn ds-btn-md ds-btn-secondary" style="width:100%;" onclick="event.stopPropagation();casBuy('gamepass')" data-i18n="l2.price.cta">Выбрать</button>
         </div>
 
       </div>
@@ -2347,7 +2347,7 @@
           <li data-i18n="pricing.drills.f2">Instant feedback + model answers</li>
           <li data-i18n="pricing.drills.f3">All 6 drill types</li>
         </ul>
-        <button class="btn btn-secondary" onclick="handleBeginSession()" data-i18n="pricing.cta">Get started</button>
+        <button class="btn btn-secondary" onclick="casBuy('drills')" data-i18n="pricing.cta">Get started</button>
       </div>
 
       <div class="price-card featured">
@@ -2360,7 +2360,7 @@
           <li data-i18n="pricing.tier1.f3">AI feedback on every attempt</li>
           <li data-i18n="pricing.tier1.f4">RU / EN interface &amp; feedback</li>
         </ul>
-        <button class="btn btn-primary" onclick="handleBeginSession()" data-i18n="pricing.cta">Get started</button>
+        <button class="btn btn-primary" onclick="casBuy('starter')" data-i18n="pricing.cta">Get started</button>
       </div>
 
       <div class="price-card">
@@ -2373,7 +2373,7 @@
           <li data-i18n="pricing.tier2.f3">AI feedback on every attempt</li>
           <li data-i18n="pricing.tier2.f4">RU / EN interface &amp; feedback</li>
         </ul>
-        <button class="btn btn-secondary" onclick="handleBeginSession()" data-i18n="pricing.cta">Get started</button>
+        <button class="btn btn-secondary" onclick="casBuy('full')" data-i18n="pricing.cta">Get started</button>
       </div>
 
       <div class="price-card">
@@ -2386,7 +2386,7 @@
           <li data-i18n="pricing.games.f3">AI-graded open answers + full solutions</li>
           <li data-i18n="pricing.games.f4">Up to 75 games over 2 months</li>
         </ul>
-        <button class="btn btn-secondary" onclick="handleBeginSession()" data-i18n="pricing.cta">Get started</button>
+        <button class="btn btn-secondary" onclick="casBuy('gamepass')" data-i18n="pricing.cta">Get started</button>
       </div>
     </div>
 
@@ -3952,6 +3952,9 @@ const I18N = {
     'pricing.title': 'Simple, honest pricing',
     'pricing.lead': 'Pick a library plan to practice at your own pace, or a Game Pass for full live BCG / McKinsey-style simulations. No hidden fees, cancel anytime.',
     'pricing.cta': 'Get started',
+    'pay.err.plan': 'Unknown plan. Please refresh the page and try again.',
+    'pay.err.off': 'Payments are not switched on yet. Write to support@casedge.io and we will sort it out.',
+    'pay.err.open': 'The payment window did not open. Check your connection and try again.',
     'pricing.drills.name': 'Drills Only',
     'pricing.drills.period': 'one-time, 30 drills',
     'pricing.drills.f1': '30 skill drill attempts',
@@ -4316,6 +4319,9 @@ const I18N = {
     'priv.h2': 'Что мы собираем', 'priv.p2': 'При создании аккаунта мы собираем ваш email и надёжно хешированный пароль (обрабатывается провайдером аутентификации Supabase). Мы храним ваш прогресс, чтобы он синхронизировался между устройствами. Настройки темы и языка хранятся в локальном хранилище вашего браузера на устройстве.',
     'priv.h3': 'Учебный контент и ИИ', 'priv.p3': 'Кейсы, дриллы и обратная связь генерируются ИИ-моделью через защищённый серверный прокси. Текст, который вы отправляете в сессии, передаётся модели для формирования обратной связи. Мы не продаём этот контент и не используем его для вашей идентификации.',
     'priv.h4': 'Чего мы не делаем', 'priv.p4': 'Мы не продаём ваши персональные данные. Мы не показываем стороннюю рекламу. Мы не передаём вашу информацию никому, кроме сервис-провайдеров, строго необходимых для работы CasEdge (аутентификация, хостинг, ИИ-провайдер и, после запуска, платёжный процессор).',
+    'pay.err.plan': 'Неизвестный тариф. Обнови страницу и попробуй ещё раз.',
+    'pay.err.off': 'Оплата пока не включена. Напиши на support@casedge.io, разберёмся.',
+    'pay.err.open': 'Окно оплаты не открылось. Проверь соединение и попробуй ещё раз.',
     'priv.h5': 'Платежи', 'priv.p5': 'Когда появятся платные планы, платежи обрабатывает сторонний merchant of record (Paddle). Данные карты вводятся в их защищённых системах; CasEdge никогда не видит и не хранит полный номер карты.',
     'priv.h6': 'Ваши права', 'priv.p6': 'Вы можете в любой момент запросить доступ, исправление или удаление данных аккаунта, написав на support@casedge.io. Очистка хранилища браузера удаляет локально сохранённый прогресс и настройки с этого устройства.',
     'priv.h7': 'Изменения', 'priv.p7': 'Мы можем обновлять эту политику по мере развития продукта. Существенные изменения будут отражены на этой странице.',
@@ -4575,6 +4581,85 @@ function handleSignIn() {
   switchAuthTab('signin');
   showScreen('auth');
 }
+/* ────────────────────────────────────────────────────
+   ОПЛАТА PADDLE
+   Кнопки тарифов зовут casBuy(plan). Раньше все четыре звали
+   handleBeginSession(), то есть кнопка "купить" открывала обычный старт занятия,
+   и оплатить было физически нечем.
+
+   Три вещи, на которых это ломается, и как каждая закрыта:
+   1. Скрипт Paddle грузится ПО ТРЕБОВАНИЮ, а не на каждой загрузке лендинга:
+      человек, который никогда не нажмёт "купить", не платит за него временем.
+   2. customData.userId ОБЯЗАТЕЛЕН: вебхук выдаёт права именно по нему. Без
+      сессии чекаут не открываем вовсе, а отправляем в регистрацию - иначе
+      оплата пришла бы без адресата и деньги списались бы в никуда.
+   3. Токен клиента публичный по замыслу Paddle (в отличие от ключа вебхука),
+      поэтому лежит здесь строкой. Пока он не подставлен, кнопка честно говорит,
+      что оплата не настроена, а не открывает пустое окно.
+──────────────────────────────────────────────────── */
+
+/* ЗАПОЛНИТЬ ВЛАДЕЛЬЦУ: Paddle Dashboard -> Developer Tools -> Authentication ->
+   Client-side token. Начинается на live_ (боевой) или test_ (песочница). */
+const PADDLE_CLIENT_TOKEN = '';
+/* 'production' или 'sandbox'. На песочнице токен обязан быть test_. */
+const PADDLE_ENV = 'production';
+
+/* Цены заведены в Paddle 09.07.2026, те же id читает api/paddle-webhook.js.
+   Расходятся здесь и там - права выдаются не за то, что куплено. */
+const PADDLE_PRICES = {
+  drills:   'pri_01kx2wjymz8kv1y8azrf7st8zz',
+  starter:  'pri_01kx2whmgwkjaz0bqcn6g2415h',
+  full:     'pri_01kx2wdq460z7084wnmtebk3w3',
+  gamepass: 'pri_01kx2wb5fb6r2gkkvsfk58dkd6'
+};
+
+let _paddleReady = null;
+function casPaddleLoad() {
+  if (_paddleReady) return _paddleReady;
+  _paddleReady = new Promise(function (resolve, reject) {
+    if (window.Paddle) return resolve(window.Paddle);
+    const el = document.createElement('script');
+    el.src = 'https://cdn.paddle.com/paddle/v2/paddle.js';
+    el.onload = function () {
+      if (!window.Paddle) return reject(new Error('paddle.js loaded but Paddle is undefined'));
+      try {
+        if (PADDLE_ENV === 'sandbox') window.Paddle.Environment.set('sandbox');
+        window.Paddle.Initialize({ token: PADDLE_CLIENT_TOKEN });
+      } catch (e) { return reject(e); }
+      resolve(window.Paddle);
+    };
+    el.onerror = function () { reject(new Error('paddle.js failed to load')); };
+    document.head.appendChild(el);
+  });
+  return _paddleReady;
+}
+
+async function casBuy(plan) {
+  const priceId = PADDLE_PRICES[plan];
+  if (!priceId) { casToast(t('pay.err.plan')); return; }
+
+  /* Нет аккаунта - нет адресата у покупки. Отправляем регистрироваться,
+     а не открываем окно оплаты. */
+  if (!currentUser) { switchAuthTab('signup'); showScreen('auth'); return; }
+
+  if (!PADDLE_CLIENT_TOKEN) { casToast(t('pay.err.off')); return; }
+
+  try {
+    const Paddle = await casPaddleLoad();
+    Paddle.Checkout.open({
+      items: [{ priceId: priceId, quantity: 1 }],
+      customer: currentUser.email ? { email: currentUser.email } : undefined,
+      customData: { userId: currentUser.id },
+      settings: { theme: (document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'),
+                  locale: (typeof uiLang !== 'undefined' && uiLang === 'ru') ? 'ru' : 'en',
+                  successUrl: location.origin + '/#progress' }
+    });
+  } catch (e) {
+    console.error('Paddle checkout failed:', e);
+    casToast(t('pay.err.open'));
+  }
+}
+
 // Soft wall: anyone can browse, but starting practice requires an account
 function handleBeginSession() {
   if (currentUser) {
