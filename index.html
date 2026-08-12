@@ -1459,6 +1459,12 @@
   
   <!-- Supabase client (auth + database) -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Аналитика Vercel. Скрипт отдаётся с НАШЕГО домена (/_vercel/insights/...),
+       поэтому политика безопасности его пропускает без единой правки: и script-src,
+       и connect-src уже содержат 'self'. Добавлять домены не нужно и не будем -
+       каждый лишний домен в политике это дверь, которую потом надо помнить.
+       defer: счётчик не задерживает первый экран. -->
+  <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 
