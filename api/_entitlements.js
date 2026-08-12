@@ -108,7 +108,18 @@ async function checkAndConsume({ kind, ref, sbUrl, sbKey, token, peek = false, f
      Сюда же ловится 'case:undefined' - хвост, дописанный к живому имени вида.
      Не списываем и не отказываем человеку: пускаем, помечаем degraded и кричим
      в лог. Ошибка наша, платить за неё кандидату не за что. */
-  const refStr = String(ref == null ? '' : ref).trim();
+  /* Тип проверяется ДО String(). Найдено цехом игр (круг 50) замером, а не догадкой:
+     String({}) даёт «[object Object]», String(NaN) даёт «NaN» - и фильтр пустоты,
+     стоящий ПОСЛЕ приведения, обе формы пропускает. Снова один ключ на все партии.
+     Путь не выдуманный: поле sc в SFL уже живёт в двух формах, строкой и объектом,
+     и следующий, кто соберёт ref из объекта, сделает это молча. */
+  if (typeof ref !== 'string' && typeof ref !== 'number') {
+    return failOpen(kind, 'ref is ' + (ref === null ? 'null' : typeof ref));
+  }
+  if (typeof ref === 'number' && !Number.isFinite(ref)) {
+    return failOpen(kind, 'ref is not a finite number');
+  }
+  const refStr = String(ref).trim();
   if (!refStr || refStr === kind || /(^|:)undefined$|(^|:)null$|:$/.test(refStr)) {
     return failOpen(kind, 'bad ref "' + refStr + '"');
   }

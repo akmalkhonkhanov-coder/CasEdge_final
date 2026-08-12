@@ -552,10 +552,17 @@ export default async function handler(req, res) {
           return res.status(200).json({ graded: false, coaching: rb.coaching || 'Could not grade — please try again.' });
         }
         logGrade(rb.pass ? 'grade_pass' : 'grade_fail', d, userId, t0, { stage: d.cull ? 'cull' : 'single', spent_ms: spentMs });
+        // РАЗБОР BR. Раньше сюда уходил ТОЛЬКО ответ модели (rb.model): текст,
+        // который никем не проверен и на каждом прогоне другой. Теперь источник —
+        // поле `reference` слота, а модель остаётся страховкой, пока цех дриллов
+        // дописывает поле по всем сорока девяти. Строка в лог помечает слоты,
+        // где поля ещё нет: по ней видно остаток конверсии.
+        const brRef = (d.reference && (d.reference.en || d.reference.ru)) ? d.reference : null;
+        if (!brRef) console.log('drills br_reference_missing', d.id);
         return res.status(200).json({
           pass: !!rb.pass,
           coaching: rb.coaching || '',
-          reference: { en: rb.model || '', ru: '' }
+          reference: brRef || { en: rb.model || '', ru: '' }
         });
       }
 
