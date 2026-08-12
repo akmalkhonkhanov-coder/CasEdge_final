@@ -14,6 +14,7 @@
 //   grade  → {gid, payload} graded server-side → verdict (+ post-answer explain)
 
 const { verifyUserCached, rateLimitedScoped } = require('./_auth.js');
+const { checkAndConsume, refusalMessage } = require('./_entitlements.js');
 const CASES_DATA = require('./_casey_cases.json');
 
 const FALLBACK_ORIGIN = 'https://cas-edge-final.vercel.app';
@@ -442,6 +443,18 @@ export default async function handler(req, res) {
       if (await rateLimited(userId, sbUrl, sbKey, token)) {
         return res.status(429).json({ error: { message: 'Too many requests. Please slow down.' } });
       }
+
+    /* ПРАВА. Списываем ПОСЛЕ того, как человек начал работать, и ровно один раз
+       на кейс Casey: ключ расхода идемпотентен, поэтому обрыв связи, перезагрузка
+       и повтор того же хода попытку не съедают. Сбой базы пускает (решение
+       владельца 09.08.2026) и печатает строку в лог. */
+    {
+      const ent = await checkAndConsume({ kind: 'cases', ref: 'casey:' + String(body.caseId), sbUrl, sbKey, token });
+      if (!ent.allowed) return res.status(402).json({
+        error: { message: refusalMessage('cases', (body.fbLang === 'ru' ? 'ru' : 'en')), code: 'entitlement_exhausted' },
+        entitlement: { kind: 'cases', remaining: 0, cap: ent.cap, used: ent.used }
+      });
+    }
       const c = caseById(body.caseId);
       if (!c) return res.status(400).json({ error: { message: 'Unknown case.' } });
       const flat = flatten(c);

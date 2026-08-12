@@ -119,6 +119,7 @@ function pickGame(level, seen) {
 }
 
 const { verifyUserCached, subjectOf, rateLimitedScoped } = require('./_auth.js');
+const { checkAndConsume, refusalMessage } = require('./_entitlements.js');
 
 /* ── auth + rate limit (same contract as the other endpoints) ─────────────── */
 async function fetchWithTimeout(url, options, ms) {
@@ -223,6 +224,18 @@ export default async function handler(req, res) {
     if (action === 'view') return res.status(200).json({ token: body.token, view: withTotals(s, s.view()) });
 
     if (action === 'choose') {
+
+    /* ПРАВА. Списываем ПОСЛЕ того, как человек начал работать, и ровно один раз
+       на партию Sea Wolf: ключ расхода идемпотентен, поэтому обрыв связи, перезагрузка
+       и повтор того же хода попытку не съедают. Сбой базы пускает (решение
+       владельца 09.08.2026) и печатает строку в лог. */
+    {
+      const ent = await checkAndConsume({ kind: 'games', ref: 'seawolf:' + String(st.g), sbUrl, sbKey, token: bearer });
+      if (!ent.allowed) return res.status(402).json({
+        error: { message: refusalMessage('games', 'ru'), code: 'entitlement_exhausted' },
+        entitlement: { kind: 'games', remaining: 0, cap: ent.cap, used: ent.used }
+      });
+    }
       const o = body.option;
       if (!(Number.isInteger(o) && o >= 0 && o <= 2)) return res.status(400).json({ error: { message: 'Bad option.' } });
       if (s.finished) return res.status(200).json({ token: body.token, view: withTotals(s, s.view()) });

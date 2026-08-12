@@ -10,6 +10,7 @@
 //   grade → {drillId, answer} → {pass, coaching, reference:{en,ru}, provoked:{en,ru}}
 
 const { verifyUserCached, rateLimitedScoped } = require('./_auth.js');
+const { checkAndConsume, refusalMessage } = require('./_entitlements.js');
 const DRILLS_CM = require('./_drills_cm.json');
 const DRILLS_MS = require('./_drills_ms.json');
 const DRILLS_ST = require('./_drills_st.json');
@@ -501,6 +502,18 @@ export default async function handler(req, res) {
       return res.status(200).json({ drill: nextDrill(body.doneIds, lib) });   // null when the set is exhausted
     }
     if (body.action === 'grade') {
+
+    /* ПРАВА. Списываем ПОСЛЕ того, как человек начал работать, и ровно один раз
+       на дрилл: ключ расхода идемпотентен, поэтому обрыв связи, перезагрузка
+       и повтор того же хода попытку не съедают. Сбой базы пускает (решение
+       владельца 09.08.2026) и печатает строку в лог. */
+    {
+      const ent = await checkAndConsume({ kind: 'drills', ref: 'drill:' + String(body.drillId), sbUrl, sbKey, token });
+      if (!ent.allowed) return res.status(402).json({
+        error: { message: refusalMessage('drills', (body.fbLang === 'ru' ? 'ru' : 'en')), code: 'entitlement_exhausted' },
+        entitlement: { kind: 'drills', remaining: 0, cap: ent.cap, used: ent.used }
+      });
+    }
       const d = drillById(body.drillId);
       if (!d) return res.status(400).json({ error: { message: 'Unknown drill.' } });
       // client sends its resolved feedback language; anything but 'ru' means English

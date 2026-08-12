@@ -17,6 +17,7 @@
 //   grade → {gameId, fieldId, value} graded server-side → {status, feedback, correctAnswer?, naiveReason?}
 
 const { verifyUserCached, rateLimitedScoped } = require('./_auth.js');
+const { checkAndConsume, refusalMessage } = require('./_entitlements.js');
 const GAMES_DATA = require('./redrock-games.json');
 
 const FALLBACK_ORIGIN = 'https://cas-edge-final.vercel.app';
@@ -379,6 +380,17 @@ export default async function handler(req, res) {
     }
     if (body.action === 'grade') {
       if (await rateLimited(userId, sbUrl, sbKey, token)) return res.status(429).json({ error: { message: 'Too many requests. Please slow down.' } });
+    /* ПРАВА. Списываем ПОСЛЕ того, как человек начал работать, и ровно один раз
+       на игру Redrock: ключ расхода идемпотентен, поэтому обрыв связи, перезагрузка
+       и повтор того же хода попытку не съедают. Сбой базы пускает (решение
+       владельца 09.08.2026) и печатает строку в лог. */
+    {
+      const ent = await checkAndConsume({ kind: 'games', ref: 'redrock:' + String(body.gameId), sbUrl, sbKey, token });
+      if (!ent.allowed) return res.status(402).json({
+        error: { message: refusalMessage('games', 'ru'), code: 'entitlement_exhausted' },
+        entitlement: { kind: 'games', remaining: 0, cap: ent.cap, used: ent.used }
+      });
+    }
       const g = gameById(body.gameId);
       if (!g) return res.status(400).json({ error: { message: 'Unknown game.' } });
       const rec = fieldMap(g).get(String(body.fieldId));

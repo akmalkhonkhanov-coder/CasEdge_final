@@ -6,7 +6,7 @@
  "totals": {
   "cases": 312,
   "steps": 2289,
-  "exhibits": 639,
+  "exhibits": 640,
   "cases_without_exhibit_block": [
    18,
    58,
@@ -3934,7 +3934,7 @@
      "title": "Exhibit 2 — ОПИСАННЫЙ ГРАФИК",
      "reveal": "auto",
      "triggers": [],
-     "body_md": "### Exhibit 2 — ОПИСАННЫЙ ГРАФИК\n> *«Линейный график месячной загрузки. Кривая почти плоская с января по июль, затем резко идёт вверх: август–октябрь — сезон отгрузок, объём в эти месяцы достигает **1.62× среднемесячного**. Ноябрь–декабрь возвращаются к средним. Подпись: причал физически не может обслужить пиковый месяц выше номинала — очередь судов переносится на следующий, а часть грузов уходит к конкуренту.»*\n",
+     "body_md": "### Exhibit 2 — ОПИСАННЫЙ ГРАФИК\n> *«Линейный график месячной загрузки. Кривая почти плоская с января по июль, затем резко идёт вверх: август–октябрь — сезон отгрузок, объём в эти месяцы достигает **1.62× среднемесячного**. Ноябрь–декабрь возвращаются к средним. Подпись: причал физически не может обслужить пиковый месяц выше номинала — лишний объём не переносится на более поздние месяцы — контракты сезонные, и груз уходит к конкуренту.»*\n",
      "render": null,
      "render_omitted": {
       "reason": "single_fact",
@@ -3947,7 +3947,7 @@
      "step": 1,
      "label": "Select-fewest-items  (3 min)",
      "candidate_md": "Что нужно для решения?\n1. Спрос, выручка и var cost по сегментам\n2. Номинальная пропускная способность\n3. Пиковый коэффициент из графика\n4. Capex, ставка, горизонт\n5. Тарифы конкурирующего порта\n6. Доля рынка Meridian в регионе",
-     "interviewer_md": "**Ответ: 1, 2, 3, 4.** (5) и (6) — рыночные бенчмарки, в NPV не входят. *Специфичная ловушка: соблазн «посмотреть на конкурентов» вместо счёта собственной мощности.*\n**Критично:** (3) выглядит второстепенным — «ну сезонность, у всех она есть». **Именно она режет мощность на 38%.**",
+     "interviewer_md": "**Ответ: 1, 2, 3, 4.** (5) и (6) — рыночные бенчмарки, в NPV не входят. *Специфичная ловушка: соблазн «посмотреть на конкурентов» вместо счёта собственной мощности.*\n**Критично:** (3) выглядит второстепенным — «ну сезонность, у всех она есть». **Именно она и решает мощность — насколько, кандидат считает на следующем шаге.**",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": []
@@ -4000,7 +4000,7 @@
      "step": 6,
      "label": "ТВИСТ: контракт вместо стройки  (5 min)",
      "candidate_md": "Существующий оператор соседнего причала предлагает: **законтрактовать у него мощность на весь срок, включая пиковые месяцы** — за $4.2M/год. Свой причал тогда не строится: capex ноль. Считать?",
-     "interviewer_md": "```python\n# Контракт даёт мощность на весь год, включая пик -> берём весь спрос 102,300 TEU\n# Своего причала нет и не будет: capex не тратится вовсе\nПолный CM при 102,300 TEU = 48,000×135 + 31,500×117 + 22,800×97 = $12,377,100\nМинус аренда пиковой мощности:            −$4,200,000\nГодовой поток = $8,177,100  (capex = 0)\n# af(12 лет, 10%) без округления = (1 − 1.10⁻¹²)/0.10 = 6.8136918229 (показанное 6.8137 — округление для вывода)\nNPV = 8,177,100 × (1 − 1.10⁻¹²)/0.10 = +$55,716,239\n```\n**Ответ: контракт даёт NPV +$55.7M против −$10.3M у стройки.** Радикально лучше.\n**Но вот развилка:** мы становимся зависимы от **конкурента** в самый прибыльный месяц года. Он знает, что без него мы не переварим пик — и на втором году переговоров цена аренды будет не $4.2M. Мы покупаем отличную экономику ценой стратегического заложничества.\n*Количественный победитель ≠ качественный. Это и есть настоящий вопрос кейса.*",
+     "interviewer_md": "```python\n# Контракт даёт мощность на весь год, включая пик -> берём весь спрос 102,300 TEU\n# Своего причала нет и не будет: capex не тратится вовсе\nПолный CM при 102,300 TEU = 48,000×135 + 31,500×117 + 22,800×97 = $12,377,100\nМинус плата за контрактную мощность:      −$4,200,000\nГодовой поток = $8,177,100  (capex = 0)\n# af(12 лет, 10%) без округления = (1 − 1.10⁻¹²)/0.10 = 6.8136918229 (показанное 6.8137 — округление для вывода)\nNPV = 8,177,100 × (1 − 1.10⁻¹²)/0.10 = +$55,716,239\n```\n**Ответ: контракт даёт NPV +$55.7M против −$10.3M у стройки.** Радикально лучше.\n**Но вот развилка:** мы становимся зависимы от **конкурента** в самый прибыльный месяц года. Он знает, что без него мы не переварим пик — и на втором году переговоров цена аренды будет не $4.2M. Мы покупаем отличную экономику ценой стратегического заложничества.\n*Количественный победитель ≠ качественный. Это и есть настоящий вопрос кейса.*",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
@@ -4011,7 +4011,7 @@
      "step": 7,
      "label": "Sensitivity  (3 min)",
      "candidate_md": "> *Твой NPV −$10.3M стоит на трёх допущениях: peak-фактор 1.62; ранжирование по CM/TEU; capex $61.5M.*\n1. Пиковый фактор на самом деле 1.30 (сезон мягче)\n2. Пиковый фактор 1.80 (сезон жёстче)\n3. Agri export готов платить $260/TEU вместо $228\n4. Capex удалось сбить до $45M",
-     "interviewer_md": "**Ответ: переворачивают в плюс — (1) и (4). Углубляет минус — (2). Не меняет вывод — (3).**\n*(Все варианты пересчитаны полной цепочкой: peak проходит через аллокацию, поэтому приращением считать нельзя.)*\n- **(1)** peak 1.30 → effective cap **70,769 TEU** → annual **$9,144,000** → **NPV = +$804,398 → заходить.** *Порог лежит здесь: NPV = 0 при годовом CM $9,025,944, что соответствует peak ≈ **1.32** (точно 1.3188, effective cap ≈ 69,760 TEU). Весь проект висит на одном коэффициенте с графика.*\n- **(2)** peak 1.80 → effective cap 51,111 → annual $6,844,000 → **NPV = −$14,867,093.** Хуже на $4.5M.\n- **(3)** Agri по $260 даёт CM $129/TEU и обгоняет Regional ($117), поэтому остаток мощности 8,790 TEU достаётся Agri, а не Regional. Итог: 48,000×135 + 8,790×129 = $7,613,910 — прирост $105K, NPV всё ещё глубоко отрицателен. *Ловушка: улучшение сегмента, который не помещается, почти ничего не даёт.*\n- **(4)** capex $45M → NPV = (6,480,000 + (92,000/1.62 − 48,000)×117) × (1 − 1.10⁻¹²)/0.10 − 45,000,000 = **+$6,160,227 → заходить.** *Проект жив при capex не выше $51,160,227; фактический — $61,500,000.*\n  *(Оба показанных операнда округлены: годовой CM без округления = $7,508,444.44 (effective cap 92,000/1.62 = 56,790.12 TEU), af = 6.8136918229.)*",
+     "interviewer_md": "**Ответ: переворачивают в плюс — (1) и (4). Углубляет минус — (2). Не меняет вывод — (3).**\n*(Все варианты пересчитаны полной цепочкой: peak проходит через аллокацию, поэтому приращением считать нельзя.)*\n- **(1)** peak 1.30 → effective cap **70,769 TEU** → annual **$9,144,000** → **NPV = +$804,398 → заходить.**\n- **(2)** peak 1.80 → effective cap 51,111 → annual $6,844,000 → **NPV = −$14,867,093.** Хуже на $4.5M.\n- **(3)** Agri по $260 даёт CM $129/TEU и обгоняет Regional ($117), поэтому остаток мощности 8,790 TEU достаётся Agri, а не Regional. Итог: 48,000×135 + 8,790×129 = $7,613,910 — прирост $105K, NPV всё ещё глубоко отрицателен. *Ловушка: улучшение сегмента, который не помещается, почти ничего не даёт.*\n- **(4)** capex $45M → NPV = (6,480,000 + (92,000/1.62 − 48,000)×117) × (1 − 1.10⁻¹²)/0.10 − 45,000,000 = **+$6,160,227 → заходить.** *Проект жив при capex не выше $51,160,227; фактический — $61,500,000.*\n  *(Оба показанных операнда округлены: годовой CM без округления = $7,508,444.44 (effective cap 92,000/1.62 = 56,790.12 TEU), af = 6.8136918229.)*",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
@@ -4035,15 +4035,14 @@
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
-      4,
-      6
+      4
      ]
     },
     {
      "step": 10,
      "label": "Финальный синтез  (4 min)",
      "candidate_md": "CEO Meridian Ports заходит к тебе на две минуты. Что ты ему скажешь?",
-     "interviewer_md": "**Партнёрский ответ (Pyramid):**\n> Мы рекомендуем **не строить причал, а законтрактовать пиковую мощность у существующего оператора — но только с многолетним фиксом цены**. Совокупный спрос коридора в 102,300 TEU превышает номинальную мощность причала в 92,000, но настоящее ограничение жёстче: пиковый сезон даёт **1.62× месячной нормы**, и мощность определяется худшим месяцем, а не средним — реально мы переварим лишь **56,790 TEU**. На этой базе годовой CM составляет **$7,508,444, а не $11,378,000**, завышение 51.5%, и NPV равен **−$10,339,773** вместо +$16,026,186: рекомендация переворачивается. **Внутренний риск:** весь проект висит на одном коэффициенте с графика — порог окупаемости лежит на peak ≈ 1.32, а фактический составляет 1.62; прежде чем вкладывать $61.5M, эту цифру надо перепроверить независимо. **Внешний риск:** контрактный вариант даёт NPV +$55.7M, но делает нас зависимыми от **конкурента** в самый прибыльный месяц года — на втором году переговоров цена не будет $4.2M. **Действия:** за 30 дней — независимо верифицировать пиковый коэффициент по данным судозаходов за три года; за 60 дней — вести переговоры о контракте на мощность с фиксацией цены на 5+ лет и правом выкупа, чтобы купить экономику, не покупая заложничество.",
+     "interviewer_md": "**Партнёрский ответ (Pyramid):**\n> Мы рекомендуем **не строить причал, а законтрактовать мощность у существующего оператора на весь год, включая пик — но только с многолетним фиксом цены**. Совокупный спрос коридора в 102,300 TEU превышает номинальную мощность причала в 92,000, но настоящее ограничение жёстче: пиковый сезон даёт **1.62× месячной нормы**, и мощность определяется худшим месяцем, а не средним — реально мы переварим лишь **56,790 TEU**. На этой базе годовой CM составляет **$7,508,444, а не $11,378,000**, завышение 51.5%, и NPV равен **−$10,339,773** вместо +$16,026,186: рекомендация переворачивается. **Внутренний риск:** весь проект висит на одном коэффициенте с графика — порог окупаемости лежит на peak ≈ 1.32, а фактический составляет 1.62; прежде чем вкладывать $61.5M, эту цифру надо перепроверить независимо. **Внешний риск:** контрактный вариант даёт NPV +$55.7M, но делает нас зависимыми от **конкурента** в самый прибыльный месяц года — на втором году переговоров цена не будет $4.2M. **Действия:** за 30 дней — независимо верифицировать пиковый коэффициент по данным судозаходов за три года; за 60 дней — вести переговоры о контракте на мощность с фиксацией цены на 5+ лет и правом выкупа, чтобы купить экономику, не покупая заложничество.",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
@@ -14846,7 +14845,7 @@
      "step": 1,
      "label": "Framework.",
      "candidate_md": "Take a minute and walk me through how you'd structure your approach to evaluating this synergy.",
-     "interviewer_md": "**Candidate:**\nCandidate must test whether the hub is truly redundant — i.e., check **peak** volume, not just average. Flag if candidate accepts the average-based closure.\n\n**Expected structure.**\n\nCandidate must test whether the hub is truly redundant — i.e., check **peak** volume, not just average. Flag if candidate accepts the average-based closure.",
+     "interviewer_md": "**Expected structure.** Candidate must test whether the hub is truly redundant — i.e., check **peak** volume, not just average.\n🚩 Flag if the candidate accepts the average-based closure.",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": []
@@ -14864,19 +14863,19 @@
      "step": 3,
      "label": "Hypothesis-update.",
      "candidate_md": "Interviewer: *\"Is parcel volume flat across the year?\"*",
-     "interviewer_md": "**ЧТО ДОЛЖЕН ВЫДАТЬ САМ КАНДИДАТ (перенесено из поля вопроса):**\nStrong hypothesis: Q4 peak (holiday). The average hides seasonality.\n\n---\n\n**Pass if ALL:** (1) abandons the average framing explicitly — **1,100k/day is an annual average**, while a sort network must be sized to its **peak**; states the seasonality hypothesis by name (Q4 / holiday peak, and weekday-vs-weekend within the week); (2) converts the hypothesis into the right test: after closing one hub capacity is **1,500k − 300k = 1,200k/day**, so the question is whether **peak-day** volume exceeds **1,200k**, not whether it exceeds 1,100k — the \"400k of spare capacity\" is spare only on an average day; (3) names the data request and the consequence — daily/weekly volume profile by season (peak-to-average ratio) — and states that if peak breaches 1,200k the **$15M/yr** saving is not free: it converts into peak-season overflow cost, and the **$150M** perpetuity value falls or disappears.\n\n**Fail if:** the candidate keeps the average view, treats the 400k gap as genuine idle capacity and confirms the synergy; or agrees that volume is seasonal but never restates the test against the **1,200k** post-closure capacity, leaving the $150M unchallenged.",
+     "interviewer_md": "Strong hypothesis: Q4 peak (holiday). The average hides seasonality.\n\n---\n\n**Pass if ALL:** (1) abandons the average framing explicitly — **1,100k/day is an annual average**, while a sort network must be sized to its **peak**; states the seasonality hypothesis by name (Q4 / holiday peak, and weekday-vs-weekend within the week); (2) converts the hypothesis into the right test: after closing one hub capacity is **1,500k − 300k = 1,200k/day**, so the question is whether **peak-day** volume exceeds **1,200k**, not whether it exceeds 1,100k — the \"400k of spare capacity\" is spare only on an average day; (3) names the data request and the consequence — daily/weekly volume profile by season (peak-to-average ratio) — and states that if peak breaches 1,200k the **$15M/yr** saving is not free: it converts into peak-season overflow cost, and the **$150M** perpetuity value falls or disappears.\n\n**Fail if:** the candidate keeps the average view, treats the 400k gap as genuine idle capacity and confirms the synergy; or agrees that volume is seasonal but never restates the test against the **1,200k** post-closure capacity, leaving the $150M unchallenged.",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": []
     },
     {
      "step": 4,
-     "label": "Correct (peak-capacity, [4] full recompute + FLAG-checks).",
+     "label": "Correct — peak capacity, full recompute.",
      "candidate_md": "Volume isn't flat across the year. Work through what the network has to handle at its busiest, and tell me what closing a hub is actually worth.",
      "interviewer_md": "```python\npeak=avg*D('1.30')                                # 1430\n# full network handles its own peak (sanity): 1500 >= 1430  -> True\n# any single closure drops capacity to 1200 -> peak shortfall:\ncap_after_1_closure=total_cap-hub_cap             # 1200\nshortfall=peak-cap_after_1_closure                # 230 k/day at peak\nsurge_cost=shortfall*D('0.20')                    # 46 /yr  >> 15 saved\n# every closure option is NEGATIVE; best = keep all open -> synergy $0\ncorrect_value=D('0')\n```\nCorrect: Q4 peak **1,430k** exceeds post-closure capacity **1,200k** by **230k/day**. Renting surge for that shortfall costs **$46M/yr**, dwarfing the **$15M** saved. **Every** closure option is value-negative, so the best action is **keep all hubs open → synergy = $0**. The \"redundant\" hub is **stranded by the peak**.",
      "hints": {
-      "L1": "Is the volume even across the whole year?",
-      "L2": "Ask for the seasonality profile and check the peak month against the capacity you assumed."
+      "L1": "What does the network have left once one hub is gone?",
+      "L2": "Put post-closure capacity next to the busiest-day volume, not the average one."
      },
      "conditional_exhibits": [],
      "depends_on": [
@@ -14885,7 +14884,7 @@
     },
     {
      "step": 5,
-     "label": "FLAG checks (author-verified).",
+     "label": "Pressure-test your own answer.",
      "candidate_md": "Push on your own answer before we close this out. Is there any version of this closure that does create value — and separately, is the combined network as it stands actually adequate?",
      "interviewer_md": "**Pass if ALL:** (1) shows there is no partial-close escape — closing any single hub leaves capacity 1,200k, below peak 1,430k, a shortfall of 230k, and the resulting $46M surge cost exceeds the $15M saving; (2) states explicitly that no positive-value closure exists at the 1.30× peak factor; (3) separates the aggregate check from the hub level: in aggregate the network at 1,500k covers its 1,430k peak, and ex2 also shows Hub A at 318k of 300k and Hub D at 302k of 300k — a 20k/day overflow at two nodes. That overflow is NOT the same problem as the closure: the other three hubs carry 90k/day of spare in peak (B 4k, C 58k, E 28k), so 20k can be rerouted inside the network at $0.31 a parcel. **After a closure it cannot: capacity falls to 1,200k against a 1,430k peak, so there is no spare anywhere to reroute into, and the 230k has to be bought outside.** Credit the candidate who spots the hub-level overflow AND says why it does not change the closure answer.\n\n**Fail if:** the candidate claims a smaller or partial closure rescues the synergy, or asserts the aggregate 1,500k is short against the 1,430k peak — in aggregate it is not. Do NOT fail the candidate for saying two hubs individually exceed capacity in peak: ex2 says so itself.",
      "hints": {},
@@ -14898,7 +14897,7 @@
      "step": 6,
      "label": "Mental-math check.",
      "candidate_md": "You have the number. Now check it a second way, in your head: come at it per hub rather than per parcel, and tell me whether the sign holds.",
-     "interviewer_md": "**Pass if ALL:** (1) re-derives the answer by a different route than step 4 — e.g. per hub: one hub is 300k of capacity, the peak needs 1,430k, five hubs give 1,500k, so the network runs at 95% of capacity in peak and there is no whole hub of slack anywhere in it; (2) states that the $15M saving buys back 300k of capacity while the peak needs 230k of it replaced at a premium, i.e. we would be selling capacity at $50 per k/day and rebuying it at $200; (3) reaches the same sign as the model and says so explicitly — the check is worth nothing if the candidate does not compare the two routes.\n\n**Fail if:** the candidate simply repeats the step-4 arithmetic with the same numbers in the same order, or produces a second route that disagrees with the model and does not notice.\n\n*The point of this step is not the number — it is that a $150M synergy is worth checking twice, and that two routes to the same sign is what makes it safe to say out loud to a deal committee.*",
+     "interviewer_md": "**Pass if ALL:** (1) re-derives the answer by a different route than step 4 — e.g. per hub: one hub is 300k of capacity, the peak needs 1,430k, five hubs give 1,500k, so the network runs at 95% of capacity in peak and there is no whole hub of slack anywhere in it; (2) states that the $15M saving buys back 300k of capacity while the peak needs 230k of it replaced at a premium, i.e. we would be selling capacity at $50k per k/day and rebuying it at $200k per k/day; (3) reaches the same sign as the model and says so explicitly — the check is worth nothing if the candidate does not compare the two routes.\n\n**Fail if:** the candidate simply repeats the step-4 arithmetic with the same numbers in the same order, or produces a second route that disagrees with the model and does not notice.\n\n*The point of this step is not the number — it is that a $150M synergy is worth checking twice, and that two routes to the same sign is what makes it safe to say out loud to a deal committee.*",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
@@ -14929,7 +14928,7 @@
      "step": 9,
      "label": "Recommendation (Pyramid).",
      "candidate_md": "You're in front of Sortwell's deal committee. What's your recommendation?",
-     "interviewer_md": "> - **hint_L0:** ничего. Движок молчит и ждёт, пока кандидат сам выйдет на вопрос.\n> - **hint_L1** (если застрял, после явного «не знаю, что дальше»): «Объём равномерен весь год?»\n> - **hint_L2** (крайний случай, если L1 не помог): reveal seasonality: Q4 peak 1.30x avg = 1430k.\n> - **Conditional exhibit — Seasonality:** `reveal_on_request`. Не показывать автоматически — только когда кандидат сам запросит. Триггеры-запросы: \"seasonality\" · \"peak volume\" · \"Q4 holiday surge\" · \"volume by season\" · \"average vs peak\".\n> *Инсайт = добываемый, не преподнесённый. В interviewee-led режиме движок держит это закрытым; в interviewer-led (McKinsey-style) может подать L1 проактивно.*\n\n---\n\n**Conditional exhibits:** {'title': 'Seasonality', 'triggers': ['seasonality', 'peak volume', 'Q4 holiday surge', 'volume by season', 'average vs peak']}\n\n**Partner answer (Pyramid):**\n\n*\"Sortwell should NOT count the hub-closure synergy — it is worth $0, not $150M, because Q4 peak volume (1,430k) needs the full network and any closure strands capacity.\"* Facts: average 1,100k fits 4 hubs but peak 1,430k exceeds 4-hub capacity 1,200k; surge to cover the 230k shortfall costs $46M/yr vs $15M saved; synergy survives only below a 1.16× peak and is whole only below 1.09×, and actual is 1.30×. Risks: (internal) the deal model likely bakes in this phantom synergy — revalue before closing; (external/regulatory) peak seasonality could intensify, deepening the stranding. Next steps: strip the hub synergy from the valuation and renegotiate price; pursue non-capacity (back-office) synergies instead.\n\n> **🎬 Interviewer-only disclosure (для движка, не показывать кандидату).**\n> Ключевой инсайт кейса кандидат должен **добыть сам**, а не получить в подарок.\n> - **Что кандидат должен спросить сам (L0 — тишина по умо",
+     "interviewer_md": "**Partner answer (Pyramid):**\n\n*\"Sortwell should NOT count the hub-closure synergy — it is worth $0, not $150M, because Q4 peak volume (1,430k) needs the full network and any closure strands capacity.\"* Facts: average 1,100k fits 4 hubs but peak 1,430k exceeds 4-hub capacity 1,200k; surge to cover the 230k shortfall costs $46M/yr vs $15M saved; synergy survives only below a 1.16× peak and is whole only below 1.09×, and actual is 1.30×. Risks: (internal) the deal model likely bakes in this phantom synergy — revalue before closing; (external/regulatory) peak seasonality could intensify, deepening the stranding. Next steps. Within 30 days — strip the hub synergy out of the valuation model and reopen price on the revised number. Within 60 days — verify the 1.30× peak factor against three years of daily volume, since the whole synergy question turns on it, and scope the back-office synergies that do not consume capacity.",
      "hints": {
       "L1": "",
       "L2": ""
@@ -47056,7 +47055,7 @@
    "naive_error": "E14",
    "generation": null,
    "est_minutes": "40",
-   "header_md": "## Case 270 — Waste Not, Want Less\n\n> **ПЛАШКА** · M&A · Мусоросжигание · **Hard** · 🔥 STRONG\n> **T/C:** Trap-understate · **Семья:** F9 видимый драйвер не рычаг · **Ошибка:** E14\n> **Экзибиты (2):** цель и барьер мультипликатора · собственная сеть покупателя ·\n> table · **Слои:** [OD] [MM]\n> **difficulty_test:** Синергии считаются внутри цели: $6.4M корпоративных,\n> база $65.0M, мультипликатор 9.85× при барьере совета 9.0× — отказ.\n> Основной эффект лежит вне цели: собственные заводы Covantah загружены на 96%\n> и вывозят 218,000 т законтрактованного мусора на сторонний полигон по $61\n> за тонну, а у цели 212,000 т свободной мощности при той же технической\n> доступности 96% — занять её сама она не может, потому что ей структурно\n> не хватает законтрактованного сырья.\n> Сжечь у цели стоит $23 за тонну: $8.06M в год падают на затраты СВОИХ заводов.\n> База $73.06M, мультипликатор 8.76× — флип.",
+   "header_md": "## Case 270 — Waste Not, Want Less\n\n> **ПЛАШКА** · M&A · Мусоросжигание · **Hard** · 🔥 STRONG\n> **T/C:** Trap-understate · **Семья:** F2 эффект второго порядка · **Ошибка:** E14\n> **Экзибиты (2):** цель и барьер мультипликатора · собственная сеть покупателя ·\n> table · **Слои:** [OD] [MM]\n> **difficulty_test:** Синергии считаются внутри цели: $6.4M корпоративных,\n> база $65.0M, мультипликатор 9.85× при барьере совета 9.0× — отказ.\n> Основной эффект лежит вне цели: собственные заводы Covantah загружены на 96%\n> и вывозят 218,000 т законтрактованного мусора на сторонний полигон по $61\n> за тонну, а у цели 212,000 т свободной мощности при той же технической\n> доступности 96% — занять её сама она не может, потому что ей структурно\n> не хватает законтрактованного сырья.\n> Сжечь у цели стоит $23 за тонну: $8.06M в год падают на затраты СВОИХ заводов.\n> База $73.06M, мультипликатор 8.76× — флип.",
    "prompt_md": "> *Ситуация на июль 2026 года.*\n>\n> **Covantah** рассматривает покупку портфеля мусоросжигательных заводов.\n> Команда по слияниям посчитала синергии и рекомендует отказаться:\n> запрошенная цена выше внутреннего барьера.\n>\n> Данные — в ex1.",
    "exhibits": [
     {
@@ -47069,7 +47068,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Собственная сеть покупателя",
      "reveal": "on_request",
      "triggers": [
       "собственные заводы Covantah",
@@ -47098,7 +47097,9 @@
     {
      "step": 2,
      "label": "Наивный счёт",
-     "depends_on": [],
+     "depends_on": [
+      1
+     ],
      "conditional_exhibits": [],
      "hints": {
       "L1": "",
@@ -47110,7 +47111,9 @@
     {
      "step": 3,
      "label": "[MM] Прикидка вслух",
-     "depends_on": [],
+     "depends_on": [
+      2
+     ],
      "conditional_exhibits": [
       "ex2"
      ],
@@ -47124,19 +47127,23 @@
     {
      "step": 4,
      "label": "Верный счёт",
-     "depends_on": [],
+     "depends_on": [
+      3
+     ],
      "conditional_exhibits": [],
      "hints": {
       "L1": "Что в НАШИХ затратах меняется от появления этой мощности?",
       "L2": "Поставь рядом тариф стороннего полигона и приростную стоимость сжигания."
      },
      "candidate_md": "Пересчитай с учётом новых данных. Какой ответ теперь и чем он отличается от первого?",
-     "interviewer_md": "```\nсвободная мощность цели считается от доступности, а не от паспорта:\n   1.700 Mt × 96% − 1.420 Mt = 0.212 Mt = 212,000 т в год\nнаш вывоз на сторонний полигон:            218,000 т в год\nразмещаем меньшее из двух:                 212,000 т — остаток 6,000 т едет на полигон\n\nвыигрыш на тонне: $61 − $23 = $38\n212,000 × $38 = $8.06M в год\n\nэтого эффекта нет в P&L цели: он ложится на затраты наших действующих заводов\n\nбаза: $58.6M + $6.4M + $8.06M = $73.06M\n$640M / $73.06M = 8.76× < 9.0×\n```\n**Ответ: покупать. Флип. Наив занижает базу оценки на 12.39% и потому завышает\nмультипликатор до 9.85× против верных 8.76×.**"
+     "interviewer_md": "```\nсвободная мощность цели считается от доступности, а не от паспорта:\n   1.700 Mt × 96% − 1.420 Mt = 0.212 Mt = 212,000 т в год\nнаш вывоз на сторонний полигон:            218,000 т в год\nразмещаем меньшее из двух:                 212,000 т — остаток 6,000 т едет на полигон\n\nвыигрыш на тонне: $61 − $23 = $38\n212,000 × $38 = $8.06M в год\n\nэтого эффекта нет в P&L цели: он ложится на затраты наших действующих заводов\n\nбаза: $58.6M + $6.4M + $8.06M = $73.06M\n$640M / $73.06M = 8.76× < 9.0×\n```\n**Ответ: покупать. Флип. Верная база выше наивной на 12.39% (наив занижает её на 11.03%) и потому завышает\nмультипликатор до 9.85× против верных 8.76×.**"
     },
     {
      "step": 5,
      "label": "Объяснение",
-     "depends_on": [],
+     "depends_on": [
+      4
+     ],
      "conditional_exhibits": [],
      "hints": {
       "L1": "",
@@ -47148,7 +47155,9 @@
     {
      "step": 6,
      "label": "Sensitivity",
-     "depends_on": [],
+     "depends_on": [
+      4
+     ],
      "conditional_exhibits": [],
      "hints": {
       "L1": "",
@@ -47160,7 +47169,9 @@
     {
      "step": 7,
      "label": "Brainstorm",
-     "depends_on": [],
+     "depends_on": [
+      4
+     ],
      "conditional_exhibits": [],
      "hints": {
       "L1": "",
@@ -47172,14 +47183,18 @@
     {
      "step": 8,
      "label": "Синтез — партнёрский ответ (Pyramid):",
-     "depends_on": [],
+     "depends_on": [
+      5,
+      6,
+      7
+     ],
      "conditional_exhibits": [],
      "hints": {
       "L1": "",
       "L2": ""
      },
      "candidate_md": "Дай рекомендацию: вывод первым, затем факты с числами, риски и следующие шаги.",
-     "interviewer_md": "> Мы рекомендуем **покупать портфель, торгуясь вниз от $640M и ни при каких\n> условиях не выходя за $657.5M**, и изменить методику: синергии считаются\n> по периметру группы, а не приобретаемой компании.\n>\n> Три основания. Первое: расчёт команды верен внутри своего периметра —\n> $6.4M внутренних синергий дают 9.85× и барьер не проходят. Второе:\n> свободная мощность цели при её собственной технической доступности 96%\n> составляет 212,000 тонн, а мы вывозим на сторонний полигон 218,000 тонн\n> по $61 за тонну при приростной стоимости сжигания $23 — это $8.06M в год\n> на затратах наших действующих заводов, а не в отчётности цели; сама цель\n> эту мощность не занимает, потому что ей не хватает сырья, а не мощности.\n> Третье: на полной базе $73.06M мультипликатор 8.76×, барьер выполняется\n> с запасом около четверти объёма, а потолок цены — $657.5M против запроса $640M.\n>\n> Риски. Внутренний: 212,000 тонн — это остаток при паспортной доступности 96%;\n> любая незапланированная остановка на заводах цели уводит доступный объём\n> к порогу в 160,819 тонн, выше которого экономика меняется. Внешний:\n> муниципальные контракты цели могут содержать обязательства по приёму\n> местного мусора, которые займут ту же свободную мощность, — этот пункт\n> надо закрыть в due diligence до подписания.\n>\n> Следующие шаги. Тридцать дней: сверка фактической доступности заводов цели\n> за три года против паспортных 96%. Переговорная позиция строится\n> на внутренних синергиях $6.4M и запросе продавца; сетевой эффект\n> не раскрывается до подписания, потому что весь запас между $640M и $657.5M\n> составляет $17.5M и целиком уходит продавцу, если он о нём узнает. Шестьдесят дней: правовая проверка\n> обязательств по приёму в контрактах трёх заводов. Девяносто дней: подписание."
+     "interviewer_md": "> Мы рекомендуем **покупать портфель, торгуясь вниз от $640M и ни при каких\n> условиях не выходя за $657.5M**, и изменить методику: синергии считаются\n> по периметру группы, а не приобретаемой компании.\n>\n> Три основания. Первое: расчёт команды верен внутри своего периметра —\n> $6.4M внутренних синергий дают 9.85× и барьер не проходят. Второе:\n> свободная мощность цели при её собственной технической доступности 96%\n> составляет 212,000 тонн, а мы вывозим на сторонний полигон 218,000 тонн\n> по $61 за тонну при приростной стоимости сжигания $23 — это $8.06M в год\n> на затратах наших действующих заводов, а не в отчётности цели; сама цель\n> эту мощность не занимает, потому что ей не хватает сырья, а не мощности.\n> Третье: на полной базе $73.06M мультипликатор 8.76×, барьер выполняется\n> с запасом около четверти объёма, а потолок цены — $657.5M против запроса $640M.\n>\n> Риски. Внутренний: 212,000 тонн — это остаток при паспортной доступности 96%;\n> падение технической доступности с 96% до 92.99% уводит доступный объём\n> к порогу в 160,819 тонн, ниже которого барьер совета перестаёт выполняться — три пункта доступности,\n> а не любая остановка. Внешний:\n> муниципальные контракты цели могут содержать обязательства по приёму\n> местного мусора, которые займут ту же свободную мощность, — этот пункт\n> надо закрыть в due diligence до подписания.\n>\n> Следующие шаги. Тридцать дней: сверка фактической доступности заводов цели\n> за три года против паспортных 96%. Переговорная позиция строится\n> на внутренних синергиях $6.4M и запросе продавца; сетевой эффект\n> не раскрывается до подписания, потому что весь запас между $640M и $657.5M\n> составляет $17.5M и целиком уходит продавцу, если он о нём узнает. Шестьдесят дней: правовая проверка\n> обязательств по приёму в контрактах трёх заводов. Девяносто дней: подписание."
     }
    ],
    "step_count": 8,
@@ -47190,9 +47205,10 @@
    "lang": "ru",
    "lang_note": "RU-native, партия 236–270 блоки F+G, жанр «реальные сюжеты, свои числа»",
    "difficulty_test": "Синергии считаются внутри цели: $6.4M корпоративных, база $65.0M, мультипликатор 9.85× при барьере совета 9.0× — отказ. Основной эффект лежит вне цели: собственные заводы Covantah загружены на 96% и вывозят 218,000 т законтрактованного мусора на сторонний полигон по $61 за тонну, а у цели 212,000 т свободной мощности при той же технической доступности 96% — занять её сама она не может, потому что ей структурно не хватает законтрактованного сырья. Сжечь у цели стоит $23 за тонну: $8.06M в год падают на затраты СВОИХ заводов. База $73.06M, мультипликатор 8.76× — флип.",
-   "difficulty_family": "F9",
+   "difficulty_family": "F2",
    "reasoning_form": "Ф7",
-   "status": "live"
+   "status": "live",
+   "gap_line": "наив считает базу синергий только внутри цели: $58.6M + $6.4M = $65.0M, мультипликатор 9.85× при барьере 9.0× → отказ · верно: 212,000 т свободной мощности цели принимают наш вывоз на полигон, и выигрыш $61 − $23 = $38 за тонну = $8.06M в год падает на затраты НАШИХ заводов после сделки; база $73.06M, мультипликатор 8.76× → покупать · разрыв $8056000.00 и смена действия · механизм: эффект возникает у остальных активов группы, а не в отчётности цели, и он посчитан"
   },
   {
    "id": 271,
@@ -52545,9 +52561,9 @@
    "difficulty": "Hard",
    "depth": "STRONG",
    "trap_or_clean": "Trap",
-   "naive_error": "E16",
+   "naive_error": "E09",
    "est_minutes": "40",
-   "trap_subtype": "overstate",
+   "trap_subtype": "understate",
    "difficulty_family": "F6",
    "reasoning_form": "Ф4",
    "optimal_entry": 2,
@@ -52636,7 +52652,7 @@
       "L2": "Take the number of weeks the agreement itself assigns to this cycle and rebuild both the base and the target on it."
      },
      "candidate_md": "Redo the rebate and the target on the year as the agreement defines it.",
-     "interviewer_md": "```\nagreement year in this cycle: 53 trading weeks\nbase:   53 x $1,960,000 = $103,880,000\ntarget $103,000,000 against base $103,880,000 -> the top tier IS reached\nrebate: $103,000,000 x 1.8% + $880,000 x 2.4% = $1,854,000 + $21,120 = $1,875,120.00\n\ntarget $103,000,000 against base $103,880,000 → target IS reached\nweek at which the target is crossed: $103,000,000 / $1,960,000 = 52.55\n```\n**Answer: the rebate is $1,875,120.00, not $1,834,560.00 — a gap of $40,560.00, or 2.21%.** The 53rd week does two things at once: it adds $1,960,000 of base, and it carries the agreement across the $103,000,000 target in week 52.55, so the last $880,000 earns 2.4% instead of 1.8%. Finance modelled neither."
+     "interviewer_md": "```\nagreement year in this cycle: 53 trading weeks\nbase:   53 x $1,960,000 = $103,880,000\nrebate: $103,000,000 x 1.8% + $880,000 x 2.4% = $1,854,000 + $21,120 = $1,875,120.00\n\ntarget $103,000,000 against base $103,880,000 → target IS reached\nweek at which the target is crossed: $103,000,000 / $1,960,000 = 52.55\n```\n**Answer: the rebate is $1,875,120.00, not $1,834,560.00 — a gap of $40,560.00, or 2.21%.** The 53rd week does two things at once: it adds $1,960,000 of base, and it carries the agreement across the $103,000,000 target in week 52.55, so the last $880,000 earns 2.4% instead of 1.8%. Finance modelled neither."
     },
     {
      "step": 5,
@@ -52649,8 +52665,8 @@
       "L1": "",
       "L2": ""
      },
-     "candidate_md": "How much weekly purchasing would a 52-week cycle need for the target to be reached anyway?",
-     "interviewer_md": "```\n$103,000,000 / 52 = $1,980,769.23 a week\nagainst the actual $1,960,000 — short by $20,769.23\nthat is 1.06% more volume every week of the year\n```\n```\nand on a 53-week cycle the target needs only $103,000,000 / 53 = $1,943,396.23 a week\nagainst the actual $1,960,000 - a margin of just 0.85%\n```\n**Answer: a 52-week cycle would need $1,980,769.23 a week, 1.06% above the actual run rate.** The tier is therefore won by the calendar, not by buying harder — and lost again in the next 52-week cycle unless the target is renegotiated onto a weekly basis."
+     "candidate_md": "How much weekly purchasing would the target need — on a 52-week cycle, and on this 53-week one?",
+     "interviewer_md": "```\na 52-week cycle: $103,000,000 / 52 = $1,980,769.23 a week\n   against the actual $1,960,000 — short by $20,769.23, or 1.06%\na 53-week cycle: $103,000,000 / 53 = $1,943,396.23 a week\n   against the actual $1,960,000 — clear by $16,603.77, or 0.85%\n```\n**Answer: two thresholds, and the cycle decides which one applies. On a 52-week cycle the target needs $1,980,769.23 a week — 1.06% above the actual run rate, so it is missed. On this 53-week cycle it needs only $1,943,396.23, which the run rate clears by 0.85%.** The tier is therefore won by the calendar, not by buying harder — and 0.85% is a thin margin: one store closed for refit, or a week of stock-outs, puts the tier back out of reach inside the same cycle. In the next 52-week cycle it is lost outright unless the target is restated per trading week."
     },
     {
      "step": 6,
@@ -52679,7 +52695,7 @@
       "L2": ""
      },
      "candidate_md": "Give your recommendation: conclusion first, then the numbers behind it, the risks, and the next steps.",
-     "interviewer_md": "> **We recommend not signing on the finance model: this cycle is a 53-week year, the top tier is reached, and the agreement should be negotiated on a per-week basis before signature.**\n>\n> Three facts. First, the agreement defines its year as 52 or 53 trading weeks ending on the Saturday nearest 31 January, and this cycle has 53 — the base is $103,880,000, not $101,920,000. Second, the rebate is $1,875,120 against the modelled $1,834,560 - a gap of $40,560, or 2.21%, because the extra week both adds base and carries us over the target into the 2.4% tier. Third, the $103,000,000 target finance wrote off is crossed in week 52.55 — the tier is won by the calendar, and finance never modelled it.\n>\n> Risks. Internal: the same model is used to set the buying budget, so a rebate understated by 1.92% understates gross margin across the whole private-label range — the error does not stop at this agreement. External: the next cycle reverts to 52 weeks, and a target left in absolute terms becomes unreachable again by the same mechanism, this time against us.\n>\n> Next steps. In 30 days — restate the target on a per-trading-week basis and rebuild the model on the week count the agreement assigns to each cycle. In 60 days — audit every other supplier agreement for the same clause, because the trading calendar is common to all of them and the model that missed it is the same model."
+     "interviewer_md": "> **We recommend not signing on the finance model: this cycle is a 53-week year, the top tier is reached, and the agreement should be negotiated on a per-week basis before signature.**\n>\n> Three facts. First, the agreement defines its year as 52 or 53 trading weeks ending on the Saturday nearest 31 January, and this cycle has 53 — the base is $103,880,000, not $101,920,000. Second, the rebate is $1,875,120 against the modelled $1,834,560 - a gap of $40,560, or 2.21%, because the extra week both adds base and carries us over the target into the 2.4% tier. Third, the $103,000,000 target finance wrote off is crossed in week 52.55 — the tier is won by the calendar, and finance never modelled it.\n>\n> Risks. Internal: the same model is used to set the buying budget, so a rebate understated by $40,560 — 2.21% of the modelled figure — understates gross margin across the whole private-label range — the error does not stop at this agreement. External: the next cycle reverts to 52 weeks, and a target left in absolute terms becomes unreachable again by the same mechanism, this time against us.\n>\n> Next steps. In 30 days — restate the target on a per-trading-week basis and rebuild the model on the week count the agreement assigns to each cycle. In 60 days — audit every other supplier agreement for the same clause, because the trading calendar is common to all of them and the model that missed it is the same model."
     }
    ],
    "generation": null,
@@ -52689,7 +52705,7 @@
    "step_count": 7,
    "terminal": 7,
    "title_registry": "Fifty-Three Weeks",
-   "header_md": "## Case 306 — Fifty-Three Weeks\n\n> **ПЛАШКА** · Profitability · Розничная сеть · **Hard** · 🔥 STRONG\n> **T/C:** Trap-overstate · **Семья:** F6 · **Ошибка:** E16\n> **Форма:** Ф4\n"
+   "header_md": "## Case 306 — Fifty-Three Weeks\n\n> **ПЛАШКА** · Profitability · Розничная сеть · **Hard** · 🔥 STRONG\n> **T/C:** Trap-understate · **Семья:** F6 · **Ошибка:** E09\n> **Форма:** Ф4\n"
   },
   {
    "id": 307,
@@ -52706,16 +52722,16 @@
    "reasoning_form": "Ф5",
    "optimal_entry": 2,
    "lang": "ru",
-   "difficulty_test": "Вторая смена оценивается по вкладу на час, и в наивной рамке часы просто есть: календарный фонд минус отработанные даёт 2,840. Ограничением они становятся только после того, как из фонда вычитается плановое обслуживание — свободных часов 1,660 против нужных 1,960.",
-   "gap_line": "наив считает вторую смену по вкладу: 1,960 × $1,180 − $2,140,000 = +$172,800, и часы в наивной рамке ограничением не являются вовсе (8,760 − 5,920 = 2,840 «свободных») · верно: из фонда уходит 1,180 часов планового обслуживания, свободных остаётся 1,660, и недостающие 300 часов покупаются срезом ТО по $740 → −$49,200 · разрыв $222,000 · механизм: ограничение, которого в наивной рамке нет, — доступное время, а не календарное",
-   "prompt_md": "> *Ситуация на июль 2026 года.*\n>\n> **Ravenholt Foundry** обсуждает вторую смену на линии точного литья. Директор по производству показывает загрузку и говорит, что резерв есть.\n>\n> Решить, ставить ли смену. Данные — в ex1.",
+   "difficulty_test": "Третья смена оценивается по вкладу на час, и в наивной рамке часы просто есть: календарный фонд минус отработанные даёт 2,840. Ограничением они становятся только после того, как из фонда вычитается плановое обслуживание — свободных часов 1,660 против нужных 1,960.",
+   "gap_line": "наив считает третью смену по вкладу: 1,960 × $1,180 − $2,140,000 = +$172,800, и часы в наивной рамке ограничением не являются вовсе (8,760 − 5,920 = 2,840 «свободных») · верно: из фонда уходит 1,180 часов планового обслуживания, свободных остаётся 1,660, и недостающие 300 часов покупаются срезом ТО по $740 → −$49,200 · разрыв $222,000 · механизм: ограничение, которого в наивной рамке нет, — доступное время, а не календарное",
+   "prompt_md": "> *Ситуация на июль 2026 года.*\n>\n> **Ravenholt Foundry** обсуждает третью смену на линии точного литья. Директор по производству показывает загрузку и говорит, что резерв есть.\n>\n> Решить, ставить ли смену. Данные — в ex1.",
    "exhibits": [
     {
      "id": "ex1",
      "title": "Линия точного литья",
      "reveal": "auto",
      "triggers": [],
-     "body_md": "```\nЛИНИЯ ТОЧНОГО ЛИТЬЯ\n\nотработано часов за год           5,920\nкалендарный фонд                  8,760 часов\nзагрузка по отчёту                67.6%\n\nотраслевой ориентир загрузки      75%\n\nвторая смена: постоянные затраты  $2,140,000 в год\nвторая смена: добавляет           1,960 часов в год\nвклад на час работы линии         $1,180\n```\n\n*Директор: «Загрузка ниже ориентира на семь пунктов — резерв очевиден».*",
+     "body_md": "```\nЛИНИЯ ТОЧНОГО ЛИТЬЯ\n\nрежим сегодня                     две смены по 8 часов, семь дней\n                                  в неделю, с переработками\nотработано часов за год           5,920\nкалендарный фонд                  8,760 часов\nзагрузка по отчёту                67.6%\n\nотраслевой ориентир загрузки      75%\n\nтретья смена: постоянные затраты  $2,140,000 в год\nтретья смена: 8 часов × 245 ночных\nсмен (пятидневная схема)          1,960 часов в год\nвклад на час работы линии         $1,180 за час\n```\n\n*Директор: «Загрузка ниже ориентира на семь пунктов — резерв очевиден».*",
      "render": null
     },
     {
@@ -52759,7 +52775,7 @@
       "L1": "",
       "L2": ""
      },
-     "candidate_md": "Посчитай эффект второй смены по данным, которые уже на столе, и скажи, что он означает для решения.",
+     "candidate_md": "Посчитай эффект третьей смены по данным, которые уже на столе, и скажи, что он означает для решения.",
      "interviewer_md": "```\nзагрузка: 5,920 / 8,760 = 67.58% против ориентира 75%\nвклад смены: 1,960 × $1,180 = $2,312,800\nминус постоянные:            −$2,140,000\nитог:                        +$172,800\n```\n**Ответ: +$172,800 в год, смену ставить.** Счёт берёт разрыв с ориентиром за резерв и не спрашивает, в одной ли конвенции построены обе величины."
     },
     {
@@ -52775,7 +52791,7 @@
       "L1": "",
       "L2": ""
      },
-     "candidate_md": "Не считая: 1,960 часов второй смены — это почти четверть календарного фонда. Откуда они возьмутся и что должно быть в году свободно?",
+     "candidate_md": "Не считая: 1,960 часов третьей смены — это почти четверть календарного фонда. Откуда они возьмутся и что должно быть в году свободно?",
      "interviewer_md": "Ожидается устно: свободные часы = фонд минус отработанные минус то, что фонд не отдаёт; спросить, входит ли плановое ТО в те 8,760 и как считает ориентир.\n*(выдать ex2)*"
     },
     {
@@ -52786,11 +52802,11 @@
      ],
      "conditional_exhibits": [],
      "hints": {
-      "L1": "Ориентир 75% построен на том же фонде, что и наши 67.6%?",
+      "L1": "Ориентир загрузки и наша загрузка построены от одного и того же фонда времени?",
       "L2": "Посчитай, сколько часов в году линия физически свободна, и сравни с тем, сколько просит смена."
      },
      "candidate_md": "Приведи обе величины к одной конвенции и пересчитай смену.",
-     "interviewer_md": "```\nконвенция календаря:        5,920 / 8,760          = 67.58%\nконвенция доступного времени: 5,920 / (8,760 − 1,180) = 78.10%\nориентир 75% лежит МЕЖДУ ними\n\nсвободных часов по второй конвенции: 8,760 − 1,180 − 5,920 = 1,660\nвторая смена требует:                                        1,960\nне хватает:                                                    300 часов\n\nэти 300 часов снимаются с планового ТО по $740:\n+$172,800 − 300 × $740 = −$49,200\n```\n**Ответ: смена не даёт +$172,800, а стоит $49,200.** В конвенции календаря резерв есть и он большой; в конвенции доступного времени мы уже выше ориентира, и последние 300 часа покупаются износом оснастки. **Ориентир 75% не подтверждает и не опровергает решение — он лежит между двумя законными способами посчитать одно и то же, и спор о конвенции здесь ни к чему не ведёт. Решают часы: их 1,660, а смене нужно 1,960, и в наивной рамке этого ограничения нет вовсе.**"
+     "interviewer_md": "```\nконвенция календаря:        5,920 / 8,760          = 67.58%\nконвенция доступного времени: 5,920 / (8,760 − 1,180) = 78.10%\nориентир 75% лежит МЕЖДУ ними\n\nсвободных часов по второй конвенции: 8,760 − 1,180 − 5,920 = 1,660\nтретья смена требует:                                        1,960\nне хватает:                                                    300 часов\n\nэти 300 часов снимаются с планового ТО по $740:\n+$172,800 − 300 × $740 = −$49,200\n```\n**Ответ: смена не даёт +$172,800, а стоит $49,200.** В конвенции календаря резерв есть и он большой; в конвенции доступного времени мы уже выше ориентира, и последние 300 часа покупаются износом оснастки. **Ориентир 75% не подтверждает и не опровергает решение — он лежит между двумя законными способами посчитать одно и то же, и спор о конвенции здесь ни к чему не ведёт. Решают часы: их 1,660, а смене нужно 1,960, и в наивной рамке этого ограничения нет вовсе.**"
     },
     {
      "step": 5,
@@ -52818,7 +52834,7 @@
       "L2": ""
      },
      "candidate_md": "Как получить эти часы, не покупая их у обслуживания? Не меньше шести идей минимум в двух группах — по фонду и по спросу.",
-     "interviewer_md": "Ожидается ≥6 идей в ≥2 группах.\n*По фонду:* сократить переналадку группировкой однотипных заказов · перенести часть ТО на выходные · вынести подготовку оснастки за пределы линии · перейти на предиктивное обслуживание вместо планового по календарю.\n*По спросу:* поднять вклад на час, отдав линии более маржинальную номенклатуру · отдать простую номенклатуру на сторону · продавать свободные часы как подряд · согласовать с клиентами ровный график заказов вместо пиков.\nНе зачёт, если весь список — про наём второй смены в разных вариантах."
+     "interviewer_md": "Ожидается ≥6 идей в ≥2 группах.\n*По фонду:* сократить переналадку группировкой однотипных заказов · перенести часть ТО на выходные · вынести подготовку оснастки за пределы линии · перейти на предиктивное обслуживание вместо планового по календарю.\n*По спросу:* поднять вклад на час, отдав линии более маржинальную номенклатуру · отдать простую номенклатуру на сторону · продавать свободные часы как подряд · согласовать с клиентами ровный график заказов вместо пиков.\nНе зачёт, если весь список — про наём третьей смены в разных вариантах."
     },
     {
      "step": 7,
@@ -52833,7 +52849,7 @@
       "L2": ""
      },
      "candidate_md": "Дай рекомендацию: вывод первым предложением, затем факты с числами, риски и следующие шаги.",
-     "interviewer_md": "> **Мы рекомендуем не ставить вторую смену: на доступном времени она стоит $49,200 в год, а не приносит $172,800.**\n>\n> Три факта. Первое: наша загрузка 67.58% посчитана от календарного фонда, а отраслевой ориентир 75% — от доступного времени; в той же конвенции мы даём 78.10%, то есть уже выше ориентира. Второе: свободных часов в году 1,660, а смена просит 1,960 — недостающие 300 часа берутся у планового обслуживания по $740 за час. Третье: с этой поправкой +$172,800 превращается в −$49,200, и смена окупилась бы только при цене часа ниже $576.00.\n>\n> Риски. Внутренний: обе конвенции законны, и выбор одной из них меняет не только это решение — на ней же построены премии производства и заявки на капзатраты; менять конвенцию надо один раз и для всех, а не под каждое решение. Внешний: $740 за час — наша оценка ускоренного износа оснастки, а не цена с рынка; если она занижена, минус растёт, и проверять её надо до, а не после решения.\n>\n> Шаги. В 30 дней — закрепить методикой, что загрузка считается от доступного времени, и пересчитать все отчёты и премии на неё. В 90 дней — вернуться к смене, но только после того, как переналадка сократит плановые 1,180 часов: тогда часы для смены появятся, не отнимая их у оснастки."
+     "interviewer_md": "> **Мы рекомендуем не ставить третью смену: на доступном времени она стоит $49,200 в год, а не приносит $172,800.**\n>\n> Три факта. Первое: наша загрузка 67.58% посчитана от календарного фонда, а отраслевой ориентир 75% — от доступного времени; в той же конвенции мы даём 78.10%, то есть уже выше ориентира. Второе: свободных часов в году 1,660, а смена просит 1,960 — недостающие 300 часа берутся у планового обслуживания по $740 за час. Третье: с этой поправкой +$172,800 превращается в −$49,200, и смена окупилась бы только при цене часа ниже $576.00.\n>\n> Риски. Внутренний: обе конвенции законны, и выбор одной из них меняет не только это решение — на ней же построены премии производства и заявки на капзатраты; менять конвенцию надо один раз и для всех, а не под каждое решение. Внешний: $740 за час — наша оценка ускоренного износа оснастки, а не цена с рынка; если она занижена, минус растёт, и проверять её надо до, а не после решения.\n>\n> Шаги. В 30 дней — закрепить методикой, что загрузка считается от доступного времени, и пересчитать все отчёты и премии на неё. В 90 дней — вернуться к смене, но только после того, как переналадка сократит плановые 1,180 часов: тогда часы для смены появятся, не отнимая их у оснастки."
     }
    ],
    "generation": null,
@@ -53094,7 +53110,7 @@
      ],
      "conditional_exhibits": [],
      "hints": {
-      "L1": "Is $240 what a machine costs to cover, or what the most common repair costs?",
+      "L1": "Is the reported repair what a machine costs to cover, or what the most common repair costs?",
       "L2": "Weight every band by how often it happens and add them up before comparing with the fee."
      },
      "candidate_md": "Reprice the programme on what a machine actually costs to cover in a year.",
@@ -53112,7 +53128,7 @@
       "L2": ""
      },
      "candidate_md": "How rare would the structural band have to be for the fee to cover the cost?",
-     "interviewer_md": "```\nfirst three bands cost: $486.90 per machine per year\nheadroom to the $510.00 fee: $23.10\n$23.10 / $62,000 = 0.0373%   (при неизменных долях первых трёх диапазонов)\n```\n**Answer: the structural band would have to run at 0.0373% against the actual 0.20% — five times rarer than it is.** Holding the other three bands fixed is what that figure assumes; if the freed share falls back into routine adjustment, the threshold is 0.0366% and the conclusion is unchanged. The programme is not marginally mispriced: the single rarest event decides it, and it is the one the reported \"typical repair\" cannot see by construction."
+     "interviewer_md": "```\nfirst three bands cost: $486.90 per machine per year\nheadroom to the $510.00 fee: $23.10\n$23.10 / $62,000 = 0.0373%   (holding the first three bands fixed)\n```\n**Answer: the structural band would have to run at 0.0373% against the actual 0.20% — five times rarer than it is.** Holding the other three bands fixed is what that figure assumes; if the freed share falls back into routine adjustment, the threshold is 0.0366% and the conclusion is unchanged. The programme is not marginally mispriced: the single rarest event decides it, and it is the one the reported \"typical repair\" cannot see by construction."
     },
     {
      "step": 6,
@@ -53126,7 +53142,7 @@
       "L2": ""
      },
      "candidate_md": "What would you do with the programme? At least six ideas in at least two groups — the price and the cover.",
-     "interviewer_md": "Expected ≥6 ideas in ≥2 groups.\n*Price:* reprice to the expected cost plus a margin · price by machine age and duty cycle · charge by operating hours rather than per year · differentiate by application, since structural failures follow load.\n*Cover:* cap the structural band or exclude it · add a deductible on the large bands only · reinsure the tail rather than carry it · make cover conditional on service intervals being met · sell cover only on machines below a wear threshold.\nFail the list if it is all about selling more warranties: volume multiplies a negative margin."
+     "interviewer_md": "Expected ≥6 ideas in ≥2 groups. The ideas that move the expected cost of $610.90 have to say by how much; the ones that change how cover is sold do not need a number.\n*Price:* reprice to the expected cost plus a margin — the $510.00 fee is short by $100.90 a machine, $1,856,560 across 18,400 · price by age and duty cycle, since the $62,000 band follows load · charge by operating hours rather than per year · differentiate by application.\n*Cover:* exclude or cap the structural band — it carries $124.00 of the $610.90, and without it expected cost is $486.90, inside the $510.00 fee · put a $1,000 deductible on hydraulics and drivetrain only — that is $74.00 + $14.00 = $88.00 off the expected cost, and it leaves the routine band untouched · reinsure the tail rather than carry it, which is worth doing only below $124.00 a machine · make cover conditional on service intervals being met · sell cover only on machines below a wear threshold.\nFail the list if it is all about selling more warranties: every extra machine adds −$100.90, not the +$270.00 the reported repair suggests."
     },
     {
      "step": 7,
@@ -53322,33 +53338,50 @@
    "reasoning_form": "Ф9",
    "optimal_entry": 2,
    "lang": "ru",
-   "difficulty_test": "Самая быстрорастущая линия растёт под действием норматива, который сработает независимо от наших вложений. Управляемая часть роста лежит в другой линии.",
-   "gap_line": "наив ставит мощность под огнезащиту — линию с ростом 24.0%, самым быстрым в портфеле, NPV −$976,745 · верно: 13.88% этого роста приносит норматив на 9,400 объектов, который наступит без нас, а управляемый прирост даёт изоляция: NPV +$4,992,507 · разрыв $5,969,252 · механизм: видимый драйвер не рычаг — рост есть, но он не наш",
-   "prompt_md": "> *Ситуация на июль 2026 года.*\n>\n> **Стенвальд Химия** распределяет инвестиционный бюджет между четырьмя продуктовыми линиями. Коммерческий директор указывает на линию с наибольшим ростом.\n>\n> Решить, куда ставить мощность. Данные — в ex1.",
+   "difficulty_test": "Прирост, на который посчитан проект расширения, на две трети состоит из объёма, который приходит по нормативу и закреплён рамочными договорами. Мощность меняет срок обслуживания, а не размер спроса, и по управляемой части решение обратное.",
+   "gap_line": "наив относит на проект весь заявленный прирост: $9,200,000 × 34% × 4.355261 − $6,400,000 = +$7,223,255.47 и выбирает огнезащиту против изоляции +$4,992,507.01 · верно: 69.58% прироста — это 2,170 объектов норматива по $2,950 ($6,401,500.00 в год), приходящих по рамочным договорам без расширения; управляемый прирост $2,798,500.00 даёт −$2,256,013.00, и мощность идёт в изоляцию · разрыв $9,479,268.46 и смена действия · механизм: видимый драйвер не рычаг — объём есть, но он приходит без нас",
+   "prompt_md": "> *Ситуация на июль 2026 года.*\n>\n> **Стенвальд Химия** распределяет инвестиционный бюджет между четырьмя продуктовыми линиями: бюджета хватает на один проект расширения мощности. Коммерческий директор указывает на линию с наибольшим ростом.\n>\n> Решить, куда ставить мощность. Данные — в ex1.",
    "exhibits": [
     {
      "id": "ex1",
      "title": "Портфель линий",
      "reveal": "auto",
      "triggers": [],
-     "body_md": "```\nПРОДУКТОВЫЕ ЛИНИИ\n\nлиния            выручка      рост в год\nОгнезащита       $86.0M       24.0%\nКровля           $212.0M       6.1%\nФасад            $174.0M       3.8%\nИзоляция         $128.0M       9.4%\n\nбюджет расширения мощности   один проект в этом цикле\nстоимость капитала           10%\nсрок оценки                  6 лет\n```\n\n*Коммерческий директор: «Огнезащита растёт вчетверо быстрее портфеля — вкладывать надо туда».*",
-     "render": null
+     "render": null,
+     "body_md": "```\nПРОДУКТОВЫЕ ЛИНИИ\n\nлиния            выручка      рост в год\nОгнезащита       $86.0M       24.0%\nКровля           $212.0M       6.1%\nФасад            $174.0M       3.8%\nИзоляция         $128.0M       9.4%\n\nбюджет расширения мощности   один проект в этом цикле\nстоимость капитала           10%\nсрок оценки                  6 лет\n```\n\n*Коммерческий директор: «Огнезащита растёт почти втрое быстрее портфеля — вкладывать надо туда».*"
     },
     {
      "id": "ex2",
-     "title": "Два проекта расширения",
+     "title": "Два проработанных проекта",
      "reveal": "on_request",
+     "render": null,
+     "triggers": [
+      "экономика проектов",
+      "капзатраты",
+      "сравнить проекты",
+      "сколько стоит расширение",
+      "что даёт проект",
+      "маржа линий",
+      "какие проекты есть"
+     ],
+     "body_md": "| Проект расширения мощности | Огнезащита | Изоляция |\n|---|---|---|\n| Капитальные затраты | **$6,400,000** | **$5,900,000** |\n| Прирост выручки в год | **$9,200,000** | **$6,100,000** |\n| Вклад на выручку | **34%** | **41%** |\n| Из чего складывается прирост | **объекты категории B по рамочным договорам и коммерческие заказы** | **тендеры, выигранные сроком поставки** |\n\n*Прирост посчитан на шесть лет оценки: по огнезащите — на объёме программы замены, по изоляции — на плановой доле побед в тендерах. По кровле и фасаду расширение не прорабатывалось: там мощность загружена не полностью. Бюджет берёт один проект.*"
+    },
+    {
+     "id": "ex3",
+     "title": "Объекты категории B",
+     "reveal": "on_request",
+     "render": null,
      "triggers": [
       "откуда рост огнезащиты",
       "почему так быстро растёт",
       "норматив",
+      "регулирование",
       "что если не вкладывать",
-      "экономика проектов",
-      "капзатраты",
-      "сравнить проекты"
+      "кто приносит рост",
+      "источник роста",
+      "категория B"
      ],
-     "body_md": "| Проект | Огнезащита | Изоляция |\n|---|---|---|\n| Капитальные затраты | **$14,600,000** | **$5,900,000** |\n| Прирост выручки в год | **$9,200,000** | **$6,100,000** |\n| Вклад на выручку | **34%** | **41%** |\n\n| Откуда берётся рост огнезащиты | Значение |\n|---|---|\n| Норматив: замена состава на объектах категории B | **9,400 объектов за три года** |\n| Наша доля на этих объектах | **31%** |\n| Средний чек по объекту | **$2,950** |\n| Что происходит, если мощность не расширять | **объекты обслуживаются с текущей мощности, очередь удлиняется** |\n\n*Норматив вступил в силу и не зависит от наших решений. Мощность влияет на скорость обслуживания, а не на то, придёт ли объём.*",
-     "render": null
+     "body_md": "| Показатель | Значение |\n|---|---|\n| Норматив: замена состава на объектах категории B | **7,000 объектов в год** |\n| Наша доля на этих объектах | **31%**, закреплена рамочными договорами на весь срок норматива |\n| Средний чек по объекту | **$2,950** |\n| Очередь на обслуживание сегодня | **4–6 недель** |\n| Очередь после расширения мощности | **1–2 недели** |\n| Срок программы замены | **шесть лет, по 7,000 объектов ежегодно** |\n| Штрафы за срок обслуживания объекта | **не предусмотрены** |\n| Коммерческие заказы вне программы | **распределяются по сроку поставки** |\n\n*Норматив вступил в силу. Распределение объектов категории B между исполнителями закреплено рамочными договорами на весь срок программы.*"
     }
    ],
    "steps": [
@@ -53361,28 +53394,14 @@
       "L1": "",
       "L2": ""
      },
-     "candidate_md": "Не считая: директор указывает на линию с ростом 24% против 6, 4 и 9 у остальных. С чего начнёшь и почему именно оттуда?",
-     "interviewer_md": "Ожидается: спросить, чем вызван рост огнезащиты и что произойдёт с ним, если мощность не расширять.\n🚩 Флаг, если кандидат принимает наибольший рост за наилучшее место для денег и переходит к капзатратам."
+     "candidate_md": "Не считая: директор указывает на линию с ростом 24% против 6.1, 3.8 и 9.4 у остальных. С чего начнёшь и почему именно оттуда?",
+     "interviewer_md": "Ожидается: спросить, из чего складывается прирост, на который посчитан проект, и что случится с этим приростом, если мощность не расширять, — прежде чем считать экономику.\n🚩 Флаг, если кандидат принимает наибольший рост за наилучшее место для денег и сразу просит капзатраты."
     },
     {
      "step": 2,
      "label": "Наивный счёт",
      "depends_on": [
       1
-     ],
-     "conditional_exhibits": [],
-     "hints": {
-      "L1": "",
-      "L2": ""
-     },
-     "candidate_md": "Посчитай, что даёт вложение в самую быструю линию, по данным, которые уже на столе.",
-     "interviewer_md": "```\nаннуитет 6 лет под 10%: (1 − 1.10⁻⁶) / 0.10 = 4.3553\n$9,200,000 × 34% × 4.3553 = $13,623,255.47\nминус капзатраты:          −$14,600,000\nNPV:                       −$976,744.53\n```\n**Ответ: NPV −$976,744.53 — проект в самой быстрой линии не окупается.** Счёт уже даёт отрицательный ответ, и на этом кандидат обычно останавливается, не спросив, куда тогда ставить мощность и почему рост такой."
-    },
-    {
-     "step": 3,
-     "label": "[MM] Прикидка вслух",
-     "depends_on": [
-      2
      ],
      "conditional_exhibits": [
       "ex2"
@@ -53391,8 +53410,24 @@
       "L1": "",
       "L2": ""
      },
-     "candidate_md": "Не считая: линия растёт 24% в год. Что должно быть верно, чтобы эти 24% зависели от того, расширим мы мощность или нет?",
-     "interviewer_md": "Ожидается устно: рост наш только если спрос приходит к нам из-за нашего действия; если он приходит по внешней причине, мощность меняет скорость обслуживания, а не объём. Спросить, откуда рост.\n*(выдать ex2)*"
+     "candidate_md": "Сравни оба проработанных проекта по данным, которые на столе, и скажи, куда ставить мощность.",
+     "interviewer_md": "*(выдать ex2)*\n```\nаннуитет 6 лет под 10%: (1 − 1.10⁻⁶) / 0.10 = 4.355261\nогнезащита: $9,200,000 × 34% × 4.355261 − $6,400,000 = +$7,223,255.47\nизоляция:   $6,100,000 × 41% × 4.355261 − $5,900,000 = +$4,992,507.01\n```\n**Ответ: огнезащита +$7,223,255.47 против изоляции +$4,992,507.01 — по этому счёту мощность идёт в огнезащиту, перевес 45%.** Счёт арифметически верен, и потому опасен: он относит на проект весь его заявленный прирост, не спросив, что из этого прироста придёт и без проекта."
+    },
+    {
+     "step": 3,
+     "label": "[MM] Прикидка вслух",
+     "depends_on": [
+      2
+     ],
+     "conditional_exhibits": [
+      "ex3"
+     ],
+     "hints": {
+      "L1": "",
+      "L2": ""
+     },
+     "candidate_md": "Не считая: прирост проекта — $9,200,000 в год. Что должно быть верно, чтобы весь этот прирост принадлежал проекту?",
+     "interviewer_md": "Ожидается устно: прирост принадлежит проекту, только если объём приходит из-за нашего действия. Если часть объёма приходит по внешней причине и распределена заранее, расширение меняет срок обслуживания, а не размер спроса, и относить эту часть на проект нельзя. Кандидат обязан спросить, из чего складывается прирост.\n*(выдать ex3)*"
     },
     {
      "step": 4,
@@ -53402,11 +53437,11 @@
      ],
      "conditional_exhibits": [],
      "hints": {
-      "L1": "Что случится с ростом огнезащиты, если мощность не расширять вовсе?",
-      "L2": "Раздели рост линии на часть, которая придёт сама, и часть, которая зависит от нашего решения."
+      "L1": "Что случится с объёмом по нормативу, если мощность не расширять вовсе?",
+      "L2": "Поставь рядом заявленный прирост проекта и деньги, которые приносит норматив."
      },
-     "candidate_md": "Посчитай, какая часть роста приходит извне, и сравни оба проекта.",
-     "interviewer_md": "```\nнорматив: 9,400 объектов × 31% × $2,950 / 3 года = $2,865,433.33 в год\nрост линии в деньгах: $86.0M × 24.0% = $20,640,000.00\nдоля роста от норматива: 13.88%\n\nогнезащита: $9,200,000 × 34% × 4.3553 − $14,600,000 = −$976,744.53\nизоляция:   $6,100,000 × 41% × 4.3553 −  $5,900,000 = +$4,992,507.01\n```\n**Ответ: мощность надо ставить под изоляцию: +$4,992,507.01 против −$976,744.53, разрыв $5,969,251.54.** Огнезащита действительно растёт быстрее всех, но 13.88% этого роста приносит норматив, который наступит и без нашего проекта — **мощность там меняет длину очереди, а не размер объёма.** Изоляция растёт вдвое медленнее, но каждый её процент управляем и стоит дороже: вклад 41% против 34%."
+     "candidate_md": "Раздели прирост проекта на то, что придёт без нас, и то, что зависит от решения, и пересчитай.",
+     "interviewer_md": "```\nнаших объектов по нормативу: 7,000 × 31% = 2,170 в год\nденьги норматива: 2,170 × $2,950 = $6,401,500.00 в год\nэто доля заявленного прироста: $6,401,500.00 / $9,200,000 = 69.58%\n\nуправляемый прирост: $9,200,000 − $6,401,500.00 = $2,798,500.00\nогнезащита: $2,798,500.00 × 34% × 4.355261 − $6,400,000 = −$2,256,013.00\nизоляция:   прирост целиком тендерный, счёт не меняется = +$4,992,507.01\n```\n**Ответ: мощность идёт в изоляцию: +$4,992,507.01 против −$2,256,013.00, перевес $7,248,520.01.** 69.58% прироста, на который посчитан проект, приносит норматив: 2,170 объектов в год по $2,950 приходят к нам по рамочным договорам независимо от того, расширим мы мощность или нет — расширение сокращает очередь с 4–6 недель до 1–2, но не добавляет ни одного объекта. **Решение меняется на противоположное: разрыв по одной и той же огнезащите — $9,479,268.46.** Изоляция растёт в два с половиной раза медленнее, но весь её прирост тендерный, то есть управляемый, и вклад выше: 41% против 34%."
     },
     {
      "step": 5,
@@ -53419,8 +53454,8 @@
       "L1": "",
       "L2": ""
      },
-     "candidate_md": "Какого годового прироста потребовал бы проект в огнезащите, чтобы окупиться?",
-     "interviewer_md": "```\n$14,600,000 / (34% × 4.3553) = $9,859,611 прироста выручки в год\nзаявлено $9,200,000 — не хватает $659,611\n```\n**Ответ: порог $9,859,611 против заявленных $9,200,000, то есть нужен прирост на 7.2% больше.** Порог задан не спросом, а вкладом линии: 34% против 41% у изоляции. **Огнезащита проигрывает дважды — её рост частично не наш, и её вклад на рубль выручки ниже.**"
+     "candidate_md": "Насколько устойчив ответ? Сколько объектов норматива должно было бы быть, чтобы проект прошёл?",
+     "interviewer_md": "```\nогнезащита сравнялась бы с изоляцией при 1,647 объектах программы в год и меньше (объекты целиком, до нашей доли 31%)\nвышла бы в ноль по NPV при 5,334 объектах и меньше\nфактически норматив даёт 7,000 объектов — выше обоих\n\nобратный ход: при фактических 7,000 объектах проект обошёл бы изоляцию только при годовом приросте $14,095,040\n  против заявленных $9,200,000 — на 53% больше\n```\n**Ответ: ответ устойчив. Проект прошёл бы только при нормативе не крупнее 1,647 объектов в год, а норматив даёт 7,000 — вчетверо больше порога; даже просто выйти в ноль он смог бы лишь при 5,334 объектах и ниже.** Обратный порог по приросту — $14,095,040 в год — требует, чтобы проект приносил в полтора раза больше, чем под него посчитали. **Пересматривать надо не момент, а состав прироста: когда программа замены закончится, вместе с ней уйдёт и объём, который проект записал себе, — сам по себе он считаться не начнёт.**"
     },
     {
      "step": 6,
@@ -53433,8 +53468,8 @@
       "L1": "",
       "L2": ""
      },
-     "candidate_md": "Что делать с огнезащитой, если мощность идёт в изоляцию? Не меньше шести идей минимум в двух группах — по обслуживанию норматива и по портфелю.",
-     "interviewer_md": "Ожидается ≥6 идей в ≥2 группах.\n*По нормативу:* обслуживать очередь текущей мощностью и поднять цену на срочность · передать часть объектов подрядчикам под нашей маркой · приоритизировать объекты с большим чеком · законтрактовать объекты заранее, зафиксировав долю.\n*По портфелю:* поднять вклад огнезащиты, а не объём · вернуться к проекту, когда норматив отработает и рост станет управляемым · разделить бюджет между линиями меньшими очередями · проверить кровлю и фасад на тот же вопрос: чей их рост.\nНе зачёт, если весь список — про ускорение стройки мощности под огнезащиту."
+     "candidate_md": "Мощность ушла в изоляцию. Что делать с огнезащитой? Не меньше шести идей минимум в двух группах — обслуживание норматива и портфель. Идеи, которые двигают деньги, называй числом.",
+     "interviewer_md": "Ожидается ≥6 идей в ≥2 группах; те из них, что двигают деньги, обязаны называть сколько.\n*По нормативу (объём приходит сам, узкое место — очередь 4–6 недель):* взять наценку за срочность — на $6,401,500.00 нормативной выручки каждый процент цены стоит $64,015 в год · отдать часть из 2,170 объектов подрядчикам под нашей маркой, сохранив долю 31% без капзатрат · приоритизировать объекты с чеком выше $2,950 · сдвинуть обслуживание к срокам норматива, а не к очереди.\n*По портфелю:* поднимать вклад линии — каждый пункт вклада на $9,200,000 прироста даёт $92,000 в год до налога · вернуться к проекту только при условии, что коммерческая часть прироста дорастёт до $14,095,040 в год, — это условие, а не календарь · проверить кровлю и фасад тем же вопросом: чей их прирост · вложить в изоляцию сверх проекта, если тендерная воронка это выдерживает.\nНе зачёт, если весь список — про ускорение стройки мощности под огнезащиту: это ровно то решение, которое счёт отверг."
     },
     {
      "step": 7,
@@ -53449,13 +53484,13 @@
       "L2": ""
      },
      "candidate_md": "Дай рекомендацию: вывод первым предложением, затем факты с числами, риски и следующие шаги.",
-     "interviewer_md": "> **Мы рекомендуем поставить мощность под изоляцию, а не под огнезащиту: +$4,992,507.01 против −$976,744.53.**\n>\n> Три факта. Первое: огнезащита растёт быстрее всех, но 13.88% её роста приносит норматив на 9,400 объектов, который наступит независимо от нашего проекта — мощность там сокращает очередь, а не создаёт объём. Второе: проект в огнезащите не окупается — NPV −$976,744.53 при вкладе 34%, тогда как изоляция при вкладе 41% и вдвое меньших капзатратах даёт +$4,992,507.01. Третье: огнезащита окупилась бы только при годовом приросте $9,859,611 — на 7.2% больше заявленного.\n>\n> Риски. Внутренний: очередь по нормативу — это риск потерять долю тем, кто расширится раньше нас; её надо закрывать подрядом и контрактованием объектов, а не капзатратами, иначе мы платим за объём, который и так наш. Внешний: норматив отработает за три года, и после этого рост огнезащиты станет обычным — решение о мощности там правильно принимать тогда, на управляемом росте, а не сейчас.\n>\n> Шаги. В 30 дней — вынести на инвесткомитет правило: рост линии делится на управляемую и внешнюю часть до сравнения проектов. В 90 дней — закрыть очередь по нормативу подрядом и законтрактовать объекты категории B, чтобы удержать долю 31% без капзатрат."
+     "interviewer_md": "> **Мы рекомендуем поставить мощность под изоляцию, а не под огнезащиту: +$4,992,507.01 против −$2,256,013.00 за шесть лет.**\n>\n> Три факта. Первое: 69.58% прироста, на который посчитан проект огнезащиты — $6,401,500.00 из $9,200,000 в год — это 2,170 объектов категории B, закреплённых за нами рамочными договорами; они придут независимо от проекта, а расширение сокращает очередь с 4–6 недель до 1–2. Второе: на полном приросте проект даёт +$7,223,255.47 и уводит бюджет в огнезащиту, на управляемом — −$2,256,013.00; разрыв $9,479,268.46. Третье: ответ устойчив — огнезащита сравнялась бы с изоляцией только при нормативе не крупнее 1,647 объектов против фактических 7,000.\n>\n> Риски. Внутренний: прирост изоляции $6,100,000 посчитан на плановой доле побед в тендерах, а не закреплён договорами, как нормативный объём; чтобы он проиграл огнезащите, воронка должна недобрать две трети, но перепроверять решение надо на фактической воронке. Внешний: коммерческие заказы вне программы распределяются по сроку поставки, и очередь 4–6 недель делает уязвимой именно управляемую часть прироста огнезащиты — $2,798,500.00: если конкурент расширится первым, минус по огнезащите станет глубже, а не мельче.\n>\n> Шаги. В 30 дней — вынести на инвесткомитет правило: заявленный прирост проекта делится на управляемую и приходящую без нас часть до сравнения проектов. В 90 дней — закрыть очередь подрядом под нашей маркой, удержав долю 31% без капзатрат, и поставить на мониторинг сроки программы; к проекту огнезащиты возвращаться не по календарю норматива, а когда коммерческая часть прироста дорастёт до $14,095,040 в год."
     }
    ],
    "generation": null,
    "qa_checks_md": "",
-   "status": "rebuild",
-   "lang_note": "партия 303–312, блок F; тонкие семьи F10/F6/F5/F7/F9, F1 = 0 | СНЯТ С РАЗДАЧИ 09.08.2026 по ревью в чистом контексте: наив приходит к верному действию (NPV −$976,745 → не вкладывать), доля роста от норматива 13.88% не входит ни в один расчёт решения, механизм F9 собственным счётом опровергнут. Пересборка посчитана: норматив 16,000 объектов за ГОД (70.89% роста), capex $11,000,000, наив +$2,623,255 → верно −$7,034,471 против изоляции +$4,992,507, порог доли норматива 19.26%.",
+   "status": "live",
+   "lang_note": "партия 303–312, блок F; тонкие семьи F10/F6/F5/F7/F9, F1 = 0 | ПЕРЕСОБРАН 09.08.2026, круг 29, редакция 3: доля норматива считается от ПРИРОСТА ПРОЕКТА, а не от роста линии; срок программы замены покрывает горизонт оценки, оба риска переписаны по ревью. Редакция 1 редакция 1 сравнивала годовой уровень выручки норматива с годовым приростом линии. Числа — cases_311_redo_math.py, обе отброшенные попытки выписаны в его шапке",
    "step_count": 7,
    "terminal": 7,
    "title_registry": "Growth by Decree",
@@ -53626,6 +53661,6 @@
  },
  "source_scope": "graph skeleton only; prose re-authored in EN per languages{}",
  "family_ratchet_armed": false,
- "package_sha256": "e93b1e49ba53269ba6fc98c5d82590e0a7ba5a8c127e4da0787dffd1fb982e41",
+ "package_sha256": "b5985fea9382dc8acd796cbc5985a6fbaa064d7a77dda45075fb1143f33ae7ad",
  "package_sha256_method": "sha256(payload minus package_sha256/method, sort_keys, ensure_ascii=False, separators=(,:))"
 }

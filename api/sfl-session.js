@@ -82,6 +82,7 @@ function pickScenario(seen) {
 }
 
 const { verifyUserCached, subjectOf, rateLimitedScoped } = require('./_auth.js');
+const { checkAndConsume, refusalMessage } = require('./_entitlements.js');
 
 /* ── auth + rate limit (тот же контракт, что у остальных эндпоинтов) ──────── */
 async function fetchWithTimeout(url, options, ms) {
@@ -187,6 +188,32 @@ export default async function handler(req, res) {
     }
 
     if (action === 'answer') {
+
+    /* ПРАВА. Списываем ПОСЛЕ того, как человек начал работать, и ровно один раз
+       на партию SFL: ключ расхода идемпотентен, поэтому обрыв связи, перезагрузка
+       и повтор того же хода попытку не съедают. Сбой базы пускает (решение
+       владельца 09.08.2026) и печатает строку в лог. */
+    {
+      /* Ключ расхода берётся из ПРОВЕРЕННОГО decode. Цех игр показал замером
+         (круг 47), что поле sc живёт в двух формах: encode принимает и строку,
+         и объект (`state.sc.id ?? state.sc`), а decode подменяет строку объектом
+         из библиотеки. Мой первый вариант писал `st.sc.id` и на строковом sc дал бы
+         `sfl:undefined` — то есть ВСЕ партии слились бы в одну списываемую единицу,
+         и человек оплатил бы одну игру вместо двадцати. Класс: величина, у которой
+         две формы, а потребитель знает про одну.
+         Берём id так, как его понял decode, и при отсутствии НЕ пишем undefined,
+         а отказываем явно: молча пропущенный ключ хуже упавшего запроса. */
+      const scId = (st.sc && typeof st.sc === 'object' ? st.sc.id : st.sc);
+      if (!scId || typeof scId !== 'string') {
+        console.error('sfl spend key missing: sc=' + JSON.stringify(st.sc));
+        return res.status(400).json({ error: { message: 'Bad or expired game token.' } });
+      }
+      const ent = await checkAndConsume({ kind: 'games', ref: 'sfl:' + scId, sbUrl, sbKey, token: bearer });
+      if (!ent.allowed) return res.status(402).json({
+        error: { message: refusalMessage('games', 'ru'), code: 'entitlement_exhausted' },
+        entitlement: { kind: 'games', remaining: 0, cap: ent.cap, used: ent.used }
+      });
+    }
       const s = restore(st);
       // Партия закрыта — повтор возвращает тот же экран, а не ошибку: моргнувшая
       // сеть и двойной клик не должны выглядеть как проигрыш.
