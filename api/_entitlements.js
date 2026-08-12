@@ -24,6 +24,44 @@ const FREE = { cases: 3, drills: 5, games: 0 };   // решение владел
 
 const RPC_TIMEOUT_MS = 5000;
 
+/* КЕШ УЖЕ ОПЛАЧЕННОГО.
+   Найден цехом игр (круг 48): проверка стоит на КАЖДОМ ходу, а списание
+   идемпотентно по ref - то есть партия SFL из двенадцати ходов делала
+   двенадцать походов в базу, из которых одиннадцать заведомо возвращали
+   "уже оплачено". То же на кейсе (восемь шагов и повторы) и на Redrock
+   (поле за полем). Это не двойное списание, но это лишняя сетевая задержка
+   на каждом ходу и лишний расход общего счётчика лимитов.
+
+   Кешируем ТОЛЬКО положительный ответ по конкретному ref. Отказы не кешируются
+   никогда - иначе одна сетевая икота заперла бы живого человека до конца TTL;
+   ровно тот класс, за который в api/_auth.js стоит отдельный комментарий.
+   Ключ включает токен: без него сосед по инстансу получил бы чужую
+   оплаченную партию - это тот же класс, что стоил нам ключа кеша по хвосту JWT.
+
+   TTL 30 минут: партия SFL идёт восемь минут, кейс до сорока. Инстансы Vercel
+   живут между вызовами, поэтому подряд идущие ходы одной партии почти всегда
+   попадают в один инстанс, а значит и в кеш. */
+const PAID_TTL_MS = 30 * 60 * 1000;
+const MAX_PAID = 2000;
+const paid = new Map();   // key -> until
+
+const crypto = require('crypto');
+function paidKey(token, kind, ref) {
+  return crypto.createHash('sha256')
+    .update(String(token)).update(' ').update(String(kind)).update(' ').update(String(ref))
+    .digest('base64');
+}
+function paidHit(k) {
+  const until = paid.get(k);
+  if (until === undefined) return false;
+  if (until <= Date.now()) { paid.delete(k); return false; }
+  return true;
+}
+function paidRemember(k) {
+  if (paid.size >= MAX_PAID) paid.clear();
+  paid.set(k, Date.now() + PAID_TTL_MS);
+}
+
 /* Ответ, который отдаём, когда база не ответила. Отдельная форма, а не
    подделка успешного ответа: вызывающий обязан иметь возможность отличить
    «разрешено, потому что есть запас» от «разрешено, потому что мы не знаем». */
@@ -62,11 +100,31 @@ async function checkAndConsume({ kind, ref, sbUrl, sbKey, token, peek = false, f
   if (!FREE.hasOwnProperty(kind)) return failOpen(kind, 'bad kind');
   if (!sbUrl || !sbKey || !token) return failOpen(kind, 'not configured');
 
+  /* КЛЮЧ РАСХОДА ОБЯЗАН БЫТЬ. Найдено цехом игр (круг 49): при пустом ref
+     строка схлопывалась в само имя вида ('games'), и ВСЕ партии человека
+     становились одной списываемой единицей - купивший 75 игр оплатил бы одну.
+     Тот же класс, что уже стоил нам 'sfl:undefined': величина, у которой нет
+     значения, тихо превращается в общее для всех значение.
+     Сюда же ловится 'case:undefined' - хвост, дописанный к живому имени вида.
+     Не списываем и не отказываем человеку: пускаем, помечаем degraded и кричим
+     в лог. Ошибка наша, платить за неё кандидату не за что. */
+  const refStr = String(ref == null ? '' : ref).trim();
+  if (!refStr || refStr === kind || /(^|:)undefined$|(^|:)null$|:$/.test(refStr)) {
+    return failOpen(kind, 'bad ref "' + refStr + '"');
+  }
+
   const p_free = Number.isInteger(free) ? free : FREE[kind];
+
+  /* За эту партию в этом инстансе уже платили - в базу не идём вовсе. */
+  const pk = paidKey(token, kind, refStr);
+  if (!peek && paidHit(pk)) {
+    return { allowed: true, charged: false, cached: true, kind, reason: 'already_paid' };
+  }
+
   let r;
   try {
     r = await rpc(sbUrl, sbKey, token, {
-      p_kind: kind, p_ref: String(ref || kind), p_free, p_peek: !!peek
+      p_kind: kind, p_ref: refStr, p_free, p_peek: !!peek
     });
   } catch (e) { return failOpen(kind, e); }
 
@@ -81,6 +139,9 @@ async function checkAndConsume({ kind, ref, sbUrl, sbKey, token, peek = false, f
   if (!out || typeof out.allowed !== 'boolean') return failOpen(kind, 'bad shape');
 
   out.kind = kind;
+  /* Запоминаем только "пустили": и списание, и "уже оплачено" означают,
+     что за этот ref платить больше не нужно. Отказ не запоминаем. */
+  if (!peek && out.allowed === true) paidRemember(pk);
   return out;
 }
 

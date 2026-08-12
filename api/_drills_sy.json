@@ -154,14 +154,20 @@
      "from": 6000000,
      "to": 1000000,
      "unit": "$",
-     "src": "exhibit.parts[1].rows[2][1]"
+     "src": "exhibit.parts[1].rows[2][1]",
+     "exchange": true,
+     "quote_from": "**$6M** (built on the glasshouse site)",
+     "quote_to": "**$1M** (built on the car park; shoulder season only)"
     },
     "lever2": {
      "name": "the income Canopy displaces (the car park)",
      "from": 1000000,
      "to": 6000000,
      "unit": "$",
-     "src": "exhibit.parts[1].rows[2][2]"
+     "src": "exhibit.parts[1].rows[2][2]",
+     "exchange": true,
+     "quote_from": "**$1M** (built on the car park; shoulder season only)",
+     "quote_to": "**$6M** (built on the glasshouse site)"
     },
     "result": {
      "base_case": 4000000,
@@ -279,14 +285,18 @@
      "from": 3000,
      "to": 5000,
      "unit": "$",
-     "src": "exhibit.parts[1].rows[0][3]"
+     "src": "exhibit.parts[1].rows[0][3]",
+     "quote_from": "Average bid price || $3,000",
+     "quote_to": "Average bid price || $5,000"
     },
     "lever2": {
      "name": "average copiers in the order",
      "from": 30,
      "to": 20,
      "unit": "",
-     "src": "exhibit.parts[1].rows[1][3]"
+     "src": "exhibit.parts[1].rows[1][3]",
+     "quote_from": "Average copiers in order || 30",
+     "quote_to": "Average copiers in order || 20"
     },
     "result": {
      "base_case": -18000,
@@ -388,7 +398,7 @@
     "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа отсутствующая величина — деление выручки между контрактом и спотом — и названа цена правила совета в единицах маржи: 200 / 10 / 100 = 20% смешанной маржи против диапазона 7–25%, который дают две напечатанные маржи; при явно объявленном равном делении это 16% и срок 12.5 года; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — 200 / (100 × 0.25) = 8.0 обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
    },
    "reference": {
-    "en": "| field | text |\n|---|---|\n| **conclusion** | **Trevaskorn should not build this site.** |\n| **the rest** | The pack gives two margins and says the site serves both customer types, but never states how revenue divides between them — and that split decides the answer, so I asked for it: it is **50/50** of revenue. That gives a blended margin of **16%** — `(25% + 7%) ÷ 2` — and **$16M** a year against a **$200M** cost, a payback of **12.5 years**, outside the board's ten-year rule. Taking the **25%** contract margin across all revenue gives **$25M** and **8 years**, but that margin applies to half the revenue, not all of it. **To clear the rule the site needs a blended 20%** (`$200M ÷ 10 ÷ $100M`); it is **4** points short. Internally, the **50/50** mix is today's and any drift toward spot lengthens the payback further; externally, the two competing sites built **11** and **14** years ago will be renewed inside our ten-year window. Next: get the contract share year by year rather than as one figure, and re-test the build at the mix that would deliver **20%**. |\n\n**[TWO LEVERS]** The two levers are the margin mix and the revenue the site actually earns, and the record fixes the first at an explicitly assumed even split: (25% plus 7%) divided by 2 = 16%, which on $100 million a year is $16 million against a $200 million cost, a payback of 12.5 years. The board's rule priced in margin terms is 200 divided by 10 divided by 100 = a 20% blended margin, so the site is 4 points short. Move the first lever by exactly those 4 points, to 20%, and the site clears at 200 divided by 20 = 10.0 years, on the line and not past it. Now move the second lever by the same 4 — revenue at full utilisation 4% below $100 million, that is $96 million — and contribution is 20% multiplied by $96 million = $19.2 million, so payback is 200 divided by 19.2 = 10.42 years, back outside the rule with the mix already fixed. The margin cushion is therefore no cushion at all: it is exactly consumed by a 4% miss on the top line, and the site is expected to reach full utilisation only in year 2. What survives is the request that must be made before any build decision — the contract share of revenue year by year rather than as one figure — since the pack states two margins and never states the split that decides between them."
+    "en": "| field | text |\n|---|---|\n| **conclusion** | **Trevaskorn should not build this site.** |\n| **the rest** | The pack gives two margins and says the site serves both customer types, but never states how revenue divides between them — and that split decides the answer, so I asked for it: it is **50/50** of revenue. That gives a blended margin of **16%** — `(25% + 7%) ÷ 2` — and **$16M** a year against a **$200M** cost, a payback of **12.5 years**, outside the board's ten-year rule. Taking the **25%** contract margin across all revenue gives **$25M** and **8 years** — **$9M** more than the blended **$16M**, or **56%** on that $16M base — but that margin applies to half the revenue, not all of it. **To clear the rule the site needs a blended 20%** (`$200M ÷ 10 ÷ $100M`); it is **4** points short. Internally, the **50/50** mix is today's and any drift toward spot lengthens the payback further; externally, the two competing sites built **11** and **14** years ago will be renewed inside our ten-year window. Next: get the contract share year by year rather than as one figure, and re-test the build at the mix that would deliver **20%**. |\n\n**[TWO LEVERS]** The two levers are the margin mix and the revenue the site actually earns, and the record fixes the first at an explicitly assumed even split: (25% plus 7%) divided by 2 = 16%, which on $100 million a year is $16 million against a $200 million cost, a payback of 12.5 years. The board's rule priced in margin terms is 200 divided by 10 divided by 100 = a 20% blended margin, so the site is 4 points short. Move the first lever by exactly those 4 points, to 20%, and the site clears at 200 divided by 20 = 10.0 years, on the line and not past it. Now move the second lever by the same 4 — revenue at full utilisation 4% below $100 million, that is $96 million — and contribution is 20% multiplied by $96 million = $19.2 million, so payback is 200 divided by 19.2 = 10.42 years, back outside the rule with the mix already fixed. The margin cushion is therefore no cushion at all: it is exactly consumed by a 4% miss on the top line, and the site is expected to reach full utilisation only in year 2. What survives is the request that must be made before any build decision — the contract share of revenue year by year rather than as one figure — since the pack states two margins and never states the split that decides between them."
    },
    "anchor_metric": "10 лет",
    "family_h25": "F1",
@@ -663,7 +673,7 @@
     "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: отвод: A 40 против B 65 → B; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — экономия: A 400 000 против B 150 000 → A обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
    },
    "reference": {
-    "en": "| field | text |\n|---|---|\n| **conclusion** | **Andrelisk should adopt option B, kerbside separation.** |\n| facts | The charter names one purpose — diversion — and on it B delivers **65%** against A's **40%**, lifting today's **31%** by **34** points instead of **9**. A is cheaper by **$250,000** a year, and the council's cost expectation is written as an expectation, not a limit; both options already cost less than today's **$5.8M**. **The charter goal therefore costs $10,000 per point of diversion** (`$250,000 ÷ 25`), and that is the number the council should be asked to accept or reject. |\n| risk | Internal: separation depends on **86,000** households' behaviour, and the **4%** contamination figure is a design assumption, not an observed one. External: the council can convert its cost expectation into a limit, at which point the **$10,000** per point becomes negotiable. |\n| next step | Put the **$10,000** per point to the council explicitly and get a yes or a no rather than an assumption. Measure actual contamination on a pilot round before signing a **7**-year contract. |\n\n**[TWO LEVERS]** The verdict prices the charter goal at $10,000 per point of diversion ($250,000 ÷ 25). Two parameters in the record can move. Lever one is B's contamination, which the record itself calls a design assumption rather than an observation, at 4%. Lever two is B's diversion, 65%, the only line the charter names. The record prints how far each can travel — to A's printed values, 19% and 40% — so move both by exactly that distance. Contamination 4% → 19% changes nothing in the count: the charter names diversion, not contamination, and the saving gap of $400,000 − $150,000 = $250,000 is untouched. Diversion 65% → 40% removes the denominator: 65 − 40 = 25 points becomes 0, the price per point has nothing to divide into, and B then costs $250,000 a year more for the same 40% diversion and the same 19% contamination — A dominates outright. What remains of the verdict: it is robust to the lever the record flags and dies on the lever it does not. $10,000 per point is a statement about the 25-point gap, not about option B, so the 65% is the number to defend in front of the council."
+    "en": "| field | text |\n|---|---|\n| **conclusion** | **Andrelisk should adopt option B, kerbside separation.** |\n| facts | The charter names one purpose — diversion — and on it B delivers **65%** against A's **40%**, lifting today's **31%** by **34** points instead of **9**. A is cheaper by **$250,000** a year — **62.5%** of A's own **$400,000** saving — and the council's cost expectation is written as an expectation, not a limit; both options already cost less than today's **$5.8M**. **The charter goal therefore costs $10,000 per point of diversion** (`$250,000 ÷ 25`), and that is the number the council should be asked to accept or reject. |\n| risk | Internal: separation depends on **86,000** households' behaviour, and the **4%** contamination figure is a design assumption, not an observed one. External: the council can convert its cost expectation into a limit, at which point the **$10,000** per point becomes negotiable. |\n| next step | Put the **$10,000** per point to the council explicitly and get a yes or a no rather than an assumption. Measure actual contamination on a pilot round before signing a **7**-year contract. |\n\n**[TWO LEVERS]** The verdict prices the charter goal at $10,000 per point of diversion ($250,000 ÷ 25). Two parameters in the record can move. Lever one is B's contamination, which the record itself calls a design assumption rather than an observation, at 4%. Lever two is B's diversion, 65%, the only line the charter names. The record prints how far each can travel — to A's printed values, 19% and 40% — so move both by exactly that distance. Contamination 4% → 19% changes nothing in the count: the charter names diversion, not contamination, and the saving gap of $400,000 − $150,000 = $250,000 is untouched. Diversion 65% → 40% removes the denominator: 65 − 40 = 25 points becomes 0, the price per point has nothing to divide into, and B then costs $250,000 a year more for the same 40% diversion and the same 19% contamination — A dominates outright. What remains of the verdict: it is robust to the lever the record flags and dies on the lever it does not. $10,000 per point is a statement about the 25-point gap, not about option B, so the 65% is the number to defend in front of the council."
    },
    "anchor_metric": "ранжирование (β)",
    "family_h25": "F1",
@@ -1002,13 +1012,45 @@
     "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: Region 2 — Profit $68,000,000 против $50,000,000 и $(4,000,000); (3) наивное прочтение отвергнуто вслух, а не просто обойдено — Region 1 — margin 500% против 300% и 50% обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
    },
    "reference": {
-    "en": "**Conclusion.** Bid for Region 2 — it delivers $68,000,000 of annual profit against $50,000,000 in Region 1, an $18,000,000 advantage, and Region 3 is loss-making at $(4,000,000).\n\n**Facts.** First, Region 1 wins on margin per well — 500% against 300% — but margin does not scale: Region 2 earns $2,700,000 per well across 40 wells, or $108,000,000, against Region 1's $1,500,000 across 60 wells, or $90,000,000. Second, the $40,000,000 rights cost is identical in every region, so it does not differentiate the bid but it does subtract in full: $68,000,000 versus $50,000,000 after it. Third, Region 3 fails on arithmetic, not judgement — $108,000,000 of revenue against $112,000,000 of cost.\n\n**Risk.** Internally, the entire $18,000,000 advantage rests on drilling 40 wells in year one with a maximum of 10 rigs and an average depth of 2,700 metres; every well short comes straight out of profit while the $40,000,000 stays sunk. Externally, all three cases are priced at a $50 spot, and Region 2 carries the largest revenue base at $144,000,000, so it loses the most in absolute terms if the price falls.\n\n**Next step.** Get the operator to commit to a 40-well schedule in Region 2 within two weeks, and run the profit ranking at spot prices below $50 to find the price at which Region 1 overtakes.\n\n**[TWO LEVERS]** Lever one is the 40-well schedule the internal risk already names; lever two is the $50 spot price the external risk already names. Both carry crossing points computable from the record alone. Wells: Region 1's pre-rights profit is 60 × $1,500,000 = $90,000,000, so Region 2 falls to it at $90,000,000 ÷ $2,700,000 = 33.33 wells — a shortfall of 6.67 wells wipes the whole $18,000,000 advantage. Price: costs do not move with the spot, so Region 2 is $144,000,000 of revenue (40 × $3,600,000) against $36,000,000 of cost (40 × $900,000) and Region 1 is $108,000,000 against $18,000,000; halve the spot and they tie exactly — $72,000,000 − $36,000,000 = $36,000,000 = $54,000,000 − $18,000,000 — with both then landing at $36,000,000 − $40,000,000 = −$4,000,000, the same loss the record prints for Region 3. Move both together, 33.33 wells at half the spot: Region 2 = $60,000,000 − $30,000,000 − $40,000,000 = −$10,000,000 against Region 1's −$4,000,000, and the ranking inverts. What remains: the rejection of the margin ranking (500% against 300% and 50%) is arithmetic and survives everything. The $18,000,000 prize does not — it is consumed by either lever alone and reversed by the two together."
+    "en": "**Conclusion.** Bid for Region 2 — it delivers $68,000,000 of annual profit against $50,000,000 in Region 1, an $18,000,000 advantage, and Region 3 is loss-making at $(4,000,000).\n\n**Facts.** First, Region 1 wins on margin per well — 500% against 300% — but margin does not scale: Region 2 earns $2,700,000 per well across 40 wells, or $108,000,000, against Region 1's $1,500,000 across 60 wells, or $90,000,000. Second, the $40,000,000 rights cost is identical in every region, so it does not differentiate the bid but it does subtract in full: $68,000,000 versus $50,000,000 after it. Third, Region 3 fails on arithmetic, not judgement — $108,000,000 of revenue against $112,000,000 of cost.\n\n**Risk.** Internally, the entire $18,000,000 advantage rests on drilling 40 wells in year one with a maximum of 10 rigs and an average depth of 2,700 metres; every well short comes straight out of profit while the $40,000,000 stays sunk. Externally, all three cases are priced at a $50 spot, and Region 2 carries the largest revenue base at $144,000,000, so it loses the most in absolute terms if the price falls.\n\n**Next step.** Get the operator to commit to a 40-well schedule in Region 2 within two weeks, and run the profit ranking at spot prices below $50 to find the price at which Region 1 overtakes.\n\n**[TWO LEVERS]** One base for all four numbers: Region 2 as printed, one year, with the $40,000,000 rights cost charged in full to every case because the table prints it identically for all three regions. The count is annual profit after the rights cost, in $ — profit per well multiplied by wells per year, less $40,000,000. Lever 1 — profit per well, Region 2's line replaced by Region 1's: $2,700,000 → $1,500,000. Lever 2 — number of wells per year, Region 2's line replaced by Region 1's: 40 → 60. Base case 68,000,000; lever 1 alone 20,000,000; lever 2 alone 122,000,000; both together 50,000,000 (interaction −24,000,000). What survives: the rejection of the margin ranking — 500% against 300% is arithmetic that never reaches the count, and the $40,000,000 of rights is identical in every case, so it subtracts without differentiating. What does not survive: reading the $18,000,000 prize as Region 2's superiority — the two drivers pull opposite ways, and Region 2 wins only because 40 wells at $2,700,000 outweigh 60 at $1,500,000; hand Region 2 Region 1's profit per well and the same 40 wells return $20,000,000 against Region 1's $50,000,000."
    },
    "anchor_metric": "не применяется, форма β",
    "family_h25": "F1",
    "family_src": "словарь:S02",
    "family_conf": "высокая",
-   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом"
+   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом",
+   "levers": {
+    "base": "Region 2 as printed, one year, with the $40,000,000 rights cost charged in full to every case because the table prints it identically for all three regions",
+    "metric": "annual profit after the rights cost, in $ — profit per well multiplied by wells per year, less $40,000,000",
+    "lever1": {
+     "name": "profit per well, Region 2's line replaced by Region 1's",
+     "from": 2700000,
+     "to": 1500000,
+     "unit": "$",
+     "src": "exhibit.parts[0].rows[2][2]",
+     "exchange": true,
+     "quote_from": "Profit per well || $2,700,000",
+     "quote_to": "Profit per well || $1,500,000"
+    },
+    "lever2": {
+     "name": "number of wells per year, Region 2's line replaced by Region 1's",
+     "from": 40,
+     "to": 60,
+     "unit": "",
+     "src": "exhibit.parts[0].rows[4][2]",
+     "exchange": true,
+     "quote_from": "Number of wells per year || 40",
+     "quote_to": "Number of wells per year || 60"
+    },
+    "result": {
+     "base_case": 68000000,
+     "alone1": 20000000,
+     "alone2": 122000000,
+     "both": 50000000,
+     "interaction": -24000000
+    },
+    "verdict": "What survives: the rejection of the margin ranking — 500% against 300% is arithmetic that never reaches the count, and the $40,000,000 of rights is identical in every case, so it subtracts without differentiating. What does not survive: reading the $18,000,000 prize as Region 2's superiority — the two drivers pull opposite ways, and Region 2 wins only because 40 wells at $2,700,000 outweigh 60 at $1,500,000; hand Region 2 Region 1's profit per well and the same 40 wells return $20,000,000 against Region 1's $50,000,000."
+   }
   },
   {
    "id": "SY-011",
@@ -1634,12 +1676,44 @@
     "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: $15K на точку ($60K − $45K); (3) наивное прочтение отвергнуто вслух, а не просто обойдено — $60K на точку (50K × $2 × 60%) обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
    },
    "reference": {
-    "en": "**Conclusion.** Book the incremental profit at $15K per store, not the $60K headline — doughnuts add $15,000 per store per year once cannibalization is netted out.\n\n**Facts.** First, the doughnut line contributes 50,000 units × $2 × 60% = $60K per store. Second, it cannibalizes 10% of 300,000 burger units at $3 and a 50% margin, which is $45K of profit given up. Third, the net is $60K – $45K = $15K, one quarter of the gross figure; scaled across 3,500 North American stores that is $52.5M, which the source rounds to \"$50 million\".\n\n**Risk.** Internally, $45K of the $60K rests entirely on a single assumed 10% cannibalization rate — a rate of 20% would wipe the incremental profit out entirely, so this number must be measured, not assumed. Externally, the partner's footprint is 1,000 of its 1,020 stores in North America against 20 in Europe and none in Asia, so the $52.5M cannot be extended to all 5,000 stores.\n\n**Next step.** Run a pilot to measure actual cannibalization against the assumed 10% and validate the 50,000-unit volume before committing; lock the 60% margin at $2 in the co-branding agreement in parallel.\n\n**[TWO LEVERS]** Lever one is moved by the record itself: cannibalization 10% → 20%. Counted: 300,000 × 20% × $3 × 50% = $90,000 of profit given up against a doughnut contribution of 50,000 × $2 × 60% = $60,000, so the net is $60,000 − $90,000 = −$30,000 instead of +$15,000. Lever two is the doughnut volume, 50,000 units, the only other input with a number of its own. Move it by the same factor of two: 25,000 × $2 × 60% = $30,000, and at the record's own 10% cannibalization ($45,000) the net is $30,000 − $45,000 = −$15,000. Either lever alone flips the sign. Both together: $30,000 − $90,000 = −$60,000 per store, and across 3,500 North American stores that is −$210,000,000 where the record projected +$52,500,000. What remains: the method — gross contribution net of cannibalized profit, not the $60,000 headline — survives completely, and it is the whole point of the answer. The $15,000 does not: it is one quarter of the headline and it sits inside a factor of two on two separate inputs, which is why the pilot named in the next step measures cannibalization and validates the 50,000 units together, not one after the other."
+    "en": "**Conclusion.** Book the incremental profit at $15K per store, not the $60K headline — doughnuts add $15,000 per store per year once cannibalization is netted out.\n\n**Facts.** First, the doughnut line contributes 50,000 units × $2 × 60% = $60K per store. Second, it cannibalizes 10% of 300,000 burger units at $3 and a 50% margin, which is $45K of profit given up. Third, the net is $60K – $45K = $15K, one quarter of the gross figure; scaled across 3,500 North American stores that is $52.5M, which the source rounds to \"$50 million\".\n\n**Risk.** Internally, $45K of the $60K rests entirely on a single assumed 10% cannibalization rate — a rate of 20% would wipe the incremental profit out entirely, so this number must be measured, not assumed. Externally, the partner's footprint is 1,000 of its 1,020 stores in North America against 20 in Europe and none in Asia, so the $52.5M cannot be extended to all 5,000 stores.\n\n**Next step.** Run a pilot to measure actual cannibalization against the assumed 10% and validate the 50,000-unit volume before committing; lock the 60% margin at $2 in the co-branding agreement in parallel.\n\n**[TWO LEVERS]** One base for all four numbers: One store, one year: incremental profit = doughnut contribution (units x price x margin) minus the burger profit cannibalised (300,000 units x 10% x $3 x 50%), on the per-store figures of Exhibit 2. The count is incremental profit per store, $ per year. Lever 1 — doughnut margin, taken at the burger margin printed in the same exhibit: 60% → 50%. Lever 2 — doughnut price per unit, taken at the burger price printed in the same exhibit: $2 → $3. Base case 15,000; lever 1 alone 5,000; lever 2 alone 45,000; both together 30,000 (interaction −5,000). The method survives every value — gross doughnut contribution net of cannibalised burger profit, never the $60,000 headline — but $15,000 does not: the same two assumed inputs, each swapped only for a figure the exhibit already prints, put the answer anywhere between $5,000 and $45,000, so the pilot has to fix margin and price together, not the cannibalisation rate alone."
    },
    "anchor_metric": "не применяется — вопрос формы «сколько», ответ обязан быть величиной",
    "family_h25": "F2",
    "family_src": "словарь:S09",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "levers": {
+    "base": "One store, one year: incremental profit = doughnut contribution (units x price x margin) minus the burger profit cannibalised (300,000 units x 10% x $3 x 50%), on the per-store figures of Exhibit 2",
+    "metric": "incremental profit per store, $ per year",
+    "lever1": {
+     "name": "doughnut margin, taken at the burger margin printed in the same exhibit",
+     "from": 60,
+     "to": 50,
+     "unit": "%",
+     "src": "exhibit.parts[1].rows[5]",
+     "exchange": true,
+     "quote_from": "Margin || 60%",
+     "quote_to": "Margin || 50%"
+    },
+    "lever2": {
+     "name": "doughnut price per unit, taken at the burger price printed in the same exhibit",
+     "from": 2,
+     "to": 3,
+     "unit": "$",
+     "src": "exhibit.parts[1].rows[4]",
+     "exchange": true,
+     "quote_from": "Sales price per unit || $2",
+     "quote_to": "Sales price per unit || $3"
+    },
+    "result": {
+     "base_case": 15000,
+     "alone1": 5000,
+     "alone2": 45000,
+     "both": 30000,
+     "interaction": -5000
+    },
+    "verdict": "The method survives every value — gross doughnut contribution net of cannibalised burger profit, never the $60,000 headline — but $15,000 does not: the same two assumed inputs, each swapped only for a figure the exhibit already prints, put the answer anywhere between $5,000 and $45,000, so the pilot has to fix margin and price together, not the cannibalisation rate alone."
+   }
   },
   {
    "id": "SY-016",
@@ -2017,12 +2091,43 @@
     "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: 5.00% (сокращение $375M, база $5,125); (3) наивное прочтение отвергнуто вслух, а не просто обойдено — 4.18% (сокращение $334M, база $5,084) — ПОСТРОЕНО, книга не печатает обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
    },
    "reference": {
-    "en": "- **Conclusion (first):** Cadenza must take **$375M out of its cost base** and lay off **1,000 FTEs — 5% of the workforce** — to hit the 5% profit target in 2024.\n- **The rest:** The printed expense lines sum to **$5,084M ($2,577 + $2,507)**, but total revenue less the net loss gives **$5,000 − (−$125) = $5,125M**; the **$41M** gap is exactly Other expense **$21M** plus Income tax **$20M**, which sit below operating profit and are still real cash costs. Against a target cost base of **$5,000 × 95% = $4,750M**, the required cut is **$375M** — not $334M. The alternative manufacturer delivers **$210M** and closing **30 of 90** offices delivers **($30k + $170k + $300k) × 30 = $15M**, leaving **$150M**; at **$130k + $40k − $20k = $150k** net saving per FTE that is exactly **1,000 people, 5% of 20,000**. Sizing off the visible-lines base would fund only ~727 layoffs and land the company at **4.18%** — short of target, with the LBO threat intact. Two risks: severance of **$20M** hits cash inside the same two quarters and 5% headcount loss damages productivity; and **56% of the programme ($210M)** depends on a single new manufacturer, with quality, IP and compliance exposure. Next steps: lock the $5,125M base in writing, close manufacturer due diligence within two weeks, and stress-test the plan against a 3% revenue miss.\n\n---\n\n**[TWO LEVERS]** Lever one is written into the next step: a 3% revenue miss. Lever two is the single new manufacturer carrying $210,000,000, which is 56% of the programme. Base case: the true cost base is $5,000,000,000 − (−$125,000,000) = $5,125,000,000, not the $5,084,000,000 of printed expense lines, because the $41,000,000 below operating profit is still cash; the target base is $5,000,000,000 × 95% = $4,750,000,000, so the cut is $375,000,000, of which $210,000,000 from the manufacturer and $15,000,000 from offices (($30,000 + $170,000 + $300,000) × 30), leaving $150,000,000 ÷ $150,000 per FTE = 1,000 people, 5% of 20,000. Move lever one: revenue $5,000,000,000 × 97% = $4,850,000,000, target base $4,850,000,000 × 95% = $4,607,500,000, required cut $5,125,000,000 − $4,607,500,000 = $517,500,000, and the residual is $517,500,000 − $210,000,000 − $15,000,000 = $292,500,000 ÷ $150,000 = 1,950 people, 9.75%. Move lever two alone: $375,000,000 − $15,000,000 = $360,000,000 ÷ $150,000 = 2,400 people, 12%. Both together: $517,500,000 − $15,000,000 = $502,500,000 ÷ $150,000 = 3,350 people, 16.75% of 20,000. What remains: the base correction to $5,125,000,000 is the point of the slot and it survives every movement. The 1,000-FTE answer does not — it is the best case of two levers, and \"5% of the workforce\" becomes 16.75% if both move, which is why the base is locked in writing and the manufacturer diligence closes inside two weeks."
+    "en": "- **Conclusion (first):** Cadenza must take **$375M out of its cost base** and lay off **1,000 FTEs — 5% of the workforce** — to hit the 5% profit target in 2024.\n- **The rest:** The printed expense lines sum to **$5,084M ($2,577 + $2,507)**, but total revenue less the net loss gives **$5,000 − (−$125) = $5,125M**; the **$41M** gap is exactly Other expense **$21M** plus Income tax **$20M**, which sit below operating profit and are still real cash costs. Against a target cost base of **$5,000 × 95% = $4,750M**, the required cut is **$375M** — not $334M. The alternative manufacturer delivers **$210M** and closing **30 of 90** offices delivers **($30k + $170k + $300k) × 30 = $15M**, leaving **$150M**; at **$130k + $40k − $20k = $150k** net saving per FTE that is exactly **1,000 people, 5% of 20,000**. Sizing off the visible-lines base would fund only ~727 layoffs and land the company at **4.18%** — short of target, with the LBO threat intact. Two risks: severance of **$20M** hits cash inside the same two quarters and 5% headcount loss damages productivity; and **56% of the programme ($210M)** depends on a single new manufacturer, with quality, IP and compliance exposure. Next steps: lock the $5,125M base in writing, close manufacturer due diligence within two weeks, and stress-test the plan against a 3% revenue miss.\n\n---\n\n**[TWO LEVERS]** One base for all four numbers: 2024 on the record's own base: cost base = total revenue minus net loss = $5,000M - (-$125M) = $5,125M, target cost base = 2024 revenue x 95%, the residual after the $210M manufacturer saving and the office closures divided by $150,000 of net annual saving per FTE ($130,000 salary + $40,000 benefits - $20,000 severance). The count is layoffs required to reach the 5% profit target, FTEs out of 20,000. Lever 1 — offices closed, taken to the whole printed footprint: 30 → 90. Lever 2 — 2024 revenue base, $M, taken at the 2022 total revenue printed on the same line: 5,000 → 4,022. Base case 1,000; lever 1 alone 800; lever 2 alone 7,194; both together 6,994 (no interaction term). The base correction to $5,125M is the point of the slot and it survives both movements, but the 1,000-FTE answer does not: closing every office the record offers saves only 200 jobs, while a 2024 revenue base at the 2022 level takes the cut to 7,194 people, so the plan is locked against a written revenue assumption rather than against the office footprint."
    },
    "anchor_metric": "5% прибыли",
    "family_h25": "F1",
    "family_src": "словарь:S03",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "levers": {
+    "base": "2024 on the record's own base: cost base = total revenue minus net loss = $5,000M - (-$125M) = $5,125M, target cost base = 2024 revenue x 95%, the residual after the $210M manufacturer saving and the office closures divided by $150,000 of net annual saving per FTE ($130,000 salary + $40,000 benefits - $20,000 severance)",
+    "metric": "layoffs required to reach the 5% profit target, FTEs out of 20,000",
+    "lever1": {
+     "name": "offices closed, taken to the whole printed footprint",
+     "from": 30,
+     "to": 90,
+     "unit": "",
+     "src": "exhibit.parts[2].lines[2]",
+     "quote_from": "Reduce Real Estate Footprint (**30 of 90**) Offices",
+     "quote_to": "Reduce Real Estate Footprint (**30 of 90**) Offices"
+    },
+    "lever2": {
+     "name": "2024 revenue base, $M, taken at the 2022 total revenue printed on the same line",
+     "from": 5000,
+     "to": 4022,
+     "unit": "",
+     "src": "exhibit.parts[1].rows[3]",
+     "exchange": true,
+     "quote_from": "2023 || **$5,000**",
+     "quote_to": "2022 || **$4,022**"
+    },
+    "result": {
+     "base_case": 1000,
+     "alone1": 800,
+     "alone2": 7194,
+     "both": 6994,
+     "interaction": 0
+    },
+    "verdict": "The base correction to $5,125M is the point of the slot and it survives both movements, but the 1,000-FTE answer does not: closing every office the record offers saves only 200 jobs, while a 2024 revenue base at the 2022 level takes the cut to 7,194 people, so the plan is locked against a written revenue assumption rather than against the office footprint."
+   }
   },
   {
    "id": "SY-019",
@@ -2227,12 +2332,44 @@
     "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: MI $20 M против CO $30 M → Colorado; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — MI $100 M против CO $60 M → Michigan обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
    },
    "reference": {
-    "en": "**Conclusion.** Home Inspection, Co. should enter Colorado, not Michigan — the analyst's table sizes the whole market, and the whole market is not the market we are allowed to serve.\n\n**Support.** The context notes carry a step the table never applies: Michigan lets third parties inspect only 20 % of its market, Colorado 50 %. Run the same last multiplication on both columns and the ranking inverts — Michigan drops from $100 million to $20 million of addressable revenue, Colorado from $60 million to $30 million. Colorado is a 50 % larger opportunity, on a $10 million revenue base. The same parameter explains the competition note we would otherwise have filed as a risk: Michigan's third-party regime has been open ten years and is crowded, Colorado's has been open two and a half and is not — so Colorado is both the bigger opening and the emptier one.\n\n**[ONE LEVER]** The decisive parameter is not a lever at all: the third-party share, Michigan 20% and Colorado 50%, is a statute. It does not move, it is applied — and applying it is the whole answer: Michigan's 250,000 inspections become 50,000 and its $100,000,000 becomes $20,000,000, Colorado's 200,000 become 100,000 and its $60,000,000 becomes $30,000,000. That leaves exactly one movable parameter in the record, the price, which the record marks as variable in its own words: \"price of an inspection changes by state and by type of home\", printed at $300 in Colorado against $400 in Michigan. Counted on that one lever: after the cap Colorado holds twice Michigan's addressable volume, 100,000 against 50,000, so Colorado leads for as long as its price stays above half Michigan's — a threshold of $200 against the printed $300, a reserve of $100 per inspection, which is the $30,000,000 against $20,000,000 written as a price. There is no second lever. Every other input — 5,000,000 and 10,000,000 people, 2.5 per household, the 90% and 75% single-family shares, inspection every 9 years against every 12 — is printed once as a client-supplied constant, with no alternative value and no statement of variability; the competition note (Michigan open 10 years and crowded, Colorado 2½ and not) carries no number at all, and the record states both markets are flat, neither growing nor shrinking. Inventing a magnitude for any of them would be the defect this check exists to catch. What remains: the correction stands unconditionally, and Colorado's lead has a stated reserve of one price step, so the recommendation is Colorado plus a price read by home type."
+    "en": "**Conclusion.** Home Inspection, Co. should enter Colorado, not Michigan — the analyst's table sizes the whole market, and the whole market is not the market we are allowed to serve.\n\n**Support.** The context notes carry a step the table never applies: Michigan lets third parties inspect only 20 % of its market, Colorado 50 %. Run the same last multiplication on both columns and the ranking inverts — Michigan drops from $100 million to $20 million of addressable revenue, Colorado from $60 million to $30 million. Colorado is a 50 % larger opportunity, on a $10 million revenue base. The same parameter explains the competition note we would otherwise have filed as a risk: Michigan's third-party regime has been open ten years and is crowded, Colorado's has been open two and a half and is not — so Colorado is both the bigger opening and the emptier one.\n\n**[TWO LEVERS]** One base for all four numbers: One base on the record: Colorado's addressable annual single-family inspection revenue = 200,000 inspections per year x price per inspection x the share of the market a third party is allowed to inspect, in dollars per year; Michigan's comparable figure on the same convention is 250,000 x $400 x 20 % = $20,000,000. The count is Colorado addressable annual inspection revenue, in $ per year. Lever 1 — third-party share Colorado allows, moved onto Michigan's statutory cap: 50% → 20%. Lever 2 — Colorado price per inspection, moved onto Michigan's price: $300 → $400. Base case 30,000,000; lever 1 alone 12,000,000; lever 2 alone 40,000,000; both together 16,000,000 (interaction −6,000,000). What survives is the shape of the answer, not the pick: the 50 % versus 20 % access cap is the only line that decides this case, so Colorado's $30,000,000 beats Michigan's $20,000,000 even at Michigan's own price ($40,000,000), but the moment Colorado's untested 2.5-year-old regime is capped like Michigan's the state falls to $12,000,000 and the recommendation flips - which is why the cap, not the $60,000,000 versus $100,000,000 headline market, is what the client must diligence"
    },
    "anchor_metric": "клиентского порога нет; решение выносится сопоставлением двух штатов между собой, а не сравнением с правилом. Вердикт держится на том, что оба числа считаются по одной и той же цепочке и различаются только последним, никем не применённым множителем. Цель «increasing top line revenue» (стр. 193, блок Clarifying Questions) — направление, а не число. Доли 20 % / 50 % — это ограничение доступа к рынку, а не порог приёмки; выдавать их за порог нельзя",
    "family_h25": "F1",
    "family_src": "тело",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "levers": {
+    "base": "One base on the record: Colorado's addressable annual single-family inspection revenue = 200,000 inspections per year x price per inspection x the share of the market a third party is allowed to inspect, in dollars per year; Michigan's comparable figure on the same convention is 250,000 x $400 x 20 % = $20,000,000",
+    "metric": "Colorado addressable annual inspection revenue, in $ per year",
+    "lever1": {
+     "name": "third-party share Colorado allows, moved onto Michigan's statutory cap",
+     "from": 50,
+     "to": 20,
+     "unit": "%",
+     "src": "exhibit.parts[2].lines[7]",
+     "quote_from": "Colorado is 50 %",
+     "quote_to": "Michigan only allows 20 %",
+     "exchange": true
+    },
+    "lever2": {
+     "name": "Colorado price per inspection, moved onto Michigan's price",
+     "from": 300,
+     "to": 400,
+     "unit": "$",
+     "src": "exhibit.parts[1].rows[7]",
+     "quote_from": "Colorado || $300",
+     "quote_to": "Michigan || $400",
+     "exchange": true
+    },
+    "result": {
+     "base_case": 30000000,
+     "alone1": 12000000,
+     "alone2": 40000000,
+     "both": 16000000,
+     "interaction": -6000000
+    },
+    "verdict": "What survives is the shape of the answer, not the pick: the 50 % versus 20 % access cap is the only line that decides this case, so Colorado's $30,000,000 beats Michigan's $20,000,000 even at Michigan's own price ($40,000,000), but the moment Colorado's untested 2.5-year-old regime is capped like Michigan's the state falls to $12,000,000 and the recommendation flips - which is why the cap, not the $60,000,000 versus $100,000,000 headline market, is what the client must diligence"
+   }
   },
   {
    "id": "SY-021",
@@ -2329,14 +2466,18 @@
      "from": 10,
      "to": 50,
      "unit": "$",
-     "src": "exhibit.parts[0].lines[2]"
+     "src": "exhibit.parts[0].lines[2]",
+     "quote_from": "Annual cost to lease one keg: $10",
+     "quote_to": "Cost per keg: $50"
     },
     "lever2": {
      "name": "Canning line: keep the Cantastic 3000 at 600 cases/hr, or buy the Beer-zilla 5000 at 1,200 cases/hr — the same switch moves waste from 10% to 7% and costs $20m less $1.3m of salvage",
      "from": 600,
      "to": 1200,
      "unit": "",
-     "src": "exhibit.parts[1].rows[1]"
+     "src": "exhibit.parts[1].rows[1]",
+     "quote_from": "Rate (Cases/hr) || 600",
+     "quote_to": "Rate (Cases/hr) || 1,200"
     },
     "result": {
      "base_case": 131000000,
@@ -2994,12 +3135,44 @@
     "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: 75 пар/нед — и станционная мощность каждой из трёх станций тоже 75 пар/нед, линия сбалансирована; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — 25 пар/нед («каждую пару трогают трое, чужой счёт 15×5 утраивает выпуск») обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
    },
    "reference": {
-    "en": "* **Conclusion.** The transcript's conclusion stands: we should confirm the 75 pairs per week figure and proceed with specialisation — the objection about bottlenecks does not overturn it here.\n* **Facts.** Each of the three groups has exactly one three-hour activity, and they are three different activities — Group 1 cutting, Group 2 finishing, Group 3 stitching. With five people in every group and 45 working hours each, every station carries 5 × 45 ÷ 3 = 75 pairs per week. The line is balanced, so the bottleneck and the sum-of-hours route return the same 75 pairs, up from 56.25 pairs today. The objection would have been right if any assigned cell exceeded three hours; none does.\n* **Risk.** The balance has no slack. Losing one worker on stitching cuts that station to 60 pairs per week and the whole line with it, and the market offers no additional skilled shoemakers. Separately, hand-off time and work-in-process between stations are not measured anywhere in the data — that, not the arithmetic, is what could pull actual output below 75.\n* **Next step.** Run one pilot week on a single group to measure hand-off time and buffers, and verify the surveyed hours against observed hours on the three assigned activities before committing the full workshop.\n\n**[TWO LEVERS]** Lever 1 - headcount per station, which the record already moves: lose one stitcher and that station falls from 5 x 45 / 3 = 75 pairs a week to 4 x 45 / 3 = 60, and the whole line with it. Lever 2 - the hours in the assigned cell, which the record’s own next step calls unverified: the surveyed 3 hours for Group 3 stitching sits in a grid where the printed stitching figure for Group 1 is 4 hours. Move both, using only cells printed in Exhibit 1: four stitchers at 4 hours each gives 4 x 45 / 4 = 45 pairs a week. One base for the comparison, and I name it: both levers fire only after a shoemaker is lost, so the benchmark has to be the same 14 people, not 15 - 14 shoemakers making whole pairs the old way produce 14 x 45 / 12 = 52.5 pairs a week. Specialisation then delivers 45 against 52.5, a gap of 7.5 pairs a week, so the entire gain from specialisation is gone and the reorganisation turns negative. What survives: the arithmetic of the verdict at the printed inputs - all three stations carry 5 x 45 / 3 = 75, the line is balanced, and the 25-pairs objection is still wrong. What does not survive: 75 as a plannable number. Measured on the base I declared - the same 14 people, making whole pairs the old way at 14 x 45 / 12 = 52.5 pairs a week - one lever alone still leaves specialisation ahead, 60 against 52.5, a gain of 7.5 pairs; both levers together put it behind, 45 against 52.5, a loss of 7.5 pairs. The balance has no slack to absorb either, since the market offers no additional skilled shoemakers."
+    "en": "* **Conclusion.** The transcript's conclusion stands: we should confirm the 75 pairs per week figure and proceed with specialisation — the objection about bottlenecks does not overturn it here.\n* **Facts.** Each of the three groups has exactly one three-hour activity, and they are three different activities — Group 1 cutting, Group 2 finishing, Group 3 stitching. With five people in every group and 45 working hours each, every station carries 5 × 45 ÷ 3 = 75 pairs per week. The line is balanced, so the bottleneck and the sum-of-hours route return the same 75 pairs, up from 56.25 pairs today. The objection would have been right if any assigned cell exceeded three hours; none does.\n* **Risk.** The balance has no slack. Losing one worker on stitching cuts that station to 60 pairs per week and the whole line with it, and the market offers no additional skilled shoemakers. Separately, hand-off time and work-in-process between stations are not measured anywhere in the data — that, not the arithmetic, is what could pull actual output below 75.\n* **Next step.** Run one pilot week on a single group to measure hand-off time and buffers, and verify the surveyed hours against observed hours on the three assigned activities before committing the full workshop.\n\n**[TWO LEVERS]** One base for all four numbers: One base on the record: weekly output of the reorganised line = the slowest station's capacity, each station being 5 employees x 45 hours per week divided by that station's hours per pair; with Group 1 on cutting, Group 3 on stitching and Group 2 on finishing every station runs at 3 hours, so all three sit at 5 x 45 / 3 = 75 pairs a week and the line is balanced. The count is weekly output of the reorganised line, in pairs per week. Lever 1 — hours the stitching station needs per pair, moved from the assigned group's 3 to the hours the same row prints for the other groups: 3 → 4. Lever 2 — hours the cutting station needs per pair, moved from the assigned group's 3 to the hours the same row prints for Group 2: 3 → 5. Base case 75; lever 1 alone 56.25; lever 2 alone 45; both together 45 (interaction 18.75). What survives is the transcript's 75 pairs a week: the analyst's objection is right about the rule and wrong about this line, because all three stations happen to run at 3 hours, so the bottleneck equals the sum-of-hours count and nothing supports dividing by three to get 25. What does not survive is the balance the 75 rests on - it needs every assigned cell to stay at 3 hours; let stitching slip to the 4 hours its own row prints and output falls to 56.25, exactly today's output, and let cutting slip to 5 and it falls to 45, below today, while the two slips do not add because output is a minimum, not a sum"
    },
    "anchor_metric": "клиентского порога нет; решение выносится сопоставлением трёх станционных мощностей между собой, а не сравнением с правилом. Есть жёсткое клиентское ограничение — «There are no additional skilled shoemakers available in the market» (Clarifying Information, стр. 33): это ограничение на ресурс, не порог решения",
    "family_h25": "F0",
    "family_src": "clean",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "levers": {
+    "base": "One base on the record: weekly output of the reorganised line = the slowest station's capacity, each station being 5 employees x 45 hours per week divided by that station's hours per pair; with Group 1 on cutting, Group 3 on stitching and Group 2 on finishing every station runs at 3 hours, so all three sit at 5 x 45 / 3 = 75 pairs a week and the line is balanced",
+    "metric": "weekly output of the reorganised line, in pairs per week",
+    "lever1": {
+     "name": "hours the stitching station needs per pair, moved from the assigned group's 3 to the hours the same row prints for the other groups",
+     "from": 3,
+     "to": 4,
+     "unit": "",
+     "src": "exhibit.parts[1].rows[1]",
+     "quote_from": "Stitching • 4 • 4 • 3",
+     "quote_to": "Stitching • 4 • 4 • 3",
+     "exchange": true
+    },
+    "lever2": {
+     "name": "hours the cutting station needs per pair, moved from the assigned group's 3 to the hours the same row prints for Group 2",
+     "from": 3,
+     "to": 5,
+     "unit": "",
+     "src": "exhibit.parts[1].rows[0]",
+     "quote_from": "Cutting • 3 • 5 • 4",
+     "quote_to": "Cutting • 3 • 5 • 4",
+     "exchange": true
+    },
+    "result": {
+     "base_case": 75,
+     "alone1": 56.25,
+     "alone2": 45,
+     "both": 45,
+     "interaction": 18.75
+    },
+    "verdict": "What survives is the transcript's 75 pairs a week: the analyst's objection is right about the rule and wrong about this line, because all three stations happen to run at 3 hours, so the bottleneck equals the sum-of-hours count and nothing supports dividing by three to get 25. What does not survive is the balance the 75 rests on - it needs every assigned cell to stay at 3 hours; let stitching slip to the 4 hours its own row prints and output falls to 56.25, exactly today's output, and let cutting slip to 5 and it falls to 45, below today, while the two slips do not add because output is a minimum, not a sum"
+   }
   },
   {
    "id": "SY-027",
@@ -3275,7 +3448,7 @@
     "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: 16.1% при загрузке 80% (15.1% при 85%); потолок напечатанного рынка 10% даёт $7M выручки против $9M вложения даже при 100% загрузке; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — 12.9% обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
    },
    "reference": {
-    "en": "**[1] Verdict.** The airline should stop treating the 12.9% take rate as the target and reopen the vendor terms, because 12.9% is the *floor* — it is what break-even requires only if every seat on every flight is full, and the model says so on its own assumptions line.\n\n**[2] Deciding number.** At an 80% load factor the same $9M investment needs 16.1% of passengers to buy a session, and at 85% it needs 15.1% — the honest number moves away from the 5–10% the market delivers, not toward it. The check that closes the argument: even at the top of the printed range, 7M passengers × 10% × $10 = $7M, $2M short of the $9M, and that is with every seat full. So the lever is the deal, not demand — the airline's 40% share of the $250K capex, the per-session margin, or the two-year window, none of which is a client rule.\n\n**[TWO LEVERS]** Lever 1 — the load factor, which the record already moves: at 100% occupancy the base is 7,000,000 passengers and break-even needs 12.9%; at 80% the base is 5,600,000 and it needs 16.1%; at 85%, 15.1%. Lever 2 — the take rate itself, printed as a market range of 5 to 10% for paid connectivity. The record checks each separately; move them together. At 80% occupancy and the very top of the printed market: 5,600,000 x 10% x $10 = $5,600,000 against a $9,000,000 investment, short by $3,400,000. At 80% and the bottom of the printed range: 5,600,000 x 5% x $10 = $2,800,000, less than a third of the $9,000,000. The one-lever version in the record is already short by $2,000,000 (7,000,000 x 10% x $10 = $7,000,000) and that is with every seat full. What survives: the verdict entirely, and it hardens. The gap is not three points of marketing on a 12.9% bar; with both parameters at once the shortfall runs from $2,000,000 to $6,200,000, so the lever has to be the deal — the airline's 40% share of the $250,000 per-plane capex, the $10 per-session margin, or the two-year window, none of which is a client rule. What does not survive: 12.9% as a target of any kind. It is a floor that only exists at an occupancy nobody operates at."
+    "en": "**[1] Verdict.** The airline should stop treating the 12.9% take rate as the target and reopen the vendor terms, because 12.9% is the *floor* — it is what break-even requires only if every seat on every flight is full, and the model says so on its own assumptions line.\n\n**[2] Deciding number.** At an 80% load factor the same $9M investment needs 16.1% of passengers to buy a session, and at 85% it needs 15.1% — the honest number moves away from the 5–10% the market delivers, not toward it. The check that closes the argument: even at the top of the printed range, 7M passengers × 10% × $10 = $7M, $2M short of the $9M — **22%** of that $9M, and that is with every seat full. So the lever is the deal, not demand — the airline's 40% share of the $250K capex, the per-session margin, or the two-year window, none of which is a client rule.\n\n**[TWO LEVERS]** Lever 1 — the load factor, which the record already moves: at 100% occupancy the base is 7,000,000 passengers and break-even needs 12.9%; at 80% the base is 5,600,000 and it needs 16.1%; at 85%, 15.1%. Lever 2 — the take rate itself, printed as a market range of 5 to 10% for paid connectivity. The record checks each separately; move them together. At 80% occupancy and the very top of the printed market: 5,600,000 x 10% x $10 = $5,600,000 against a $9,000,000 investment, short by $3,400,000. At 80% and the bottom of the printed range: 5,600,000 x 5% x $10 = $2,800,000, less than a third of the $9,000,000. The one-lever version in the record is already short by $2,000,000 (7,000,000 x 10% x $10 = $7,000,000) and that is with every seat full. What survives: the verdict entirely, and it hardens. The gap is not three points of marketing on a 12.9% bar; with both parameters at once the shortfall runs from $2,000,000 to $6,200,000, so the lever has to be the deal — the airline's 40% share of the $250,000 per-plane capex, the $10 per-session margin, or the two-year window, none of which is a client rule. What does not survive: 12.9% as a target of any kind. It is a floor that only exists at an occupancy nobody operates at."
    },
    "anchor_metric": "клиентского порога нет; решение выносится сопоставлением, а не сравнением с правилом. Двухлетний срок задан текстом самого вопроса («break even in 2 years»), 5–10% — рыночный факт, произнесённый кандидату. Вердикт держится сопоставлением требуемой доли с напечатанным диапазоном рынка и с физическим потолком мест",
    "family_h25": "F4",
@@ -3808,12 +3981,44 @@
     "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: Pinot Noir: Red, рост 12% (максимум среди красных), маржа 15%, California, Food friendly — единственная строка со всеми четырьмя; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — Merlot: тот же рост 12%, тоже Red, тоже France + California обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
    },
    "reference": {
-    "en": "**[L1 — single free field].** *\"The file's conclusion holds: Pinot Noir is the right variety to add, and it is not the growth column that makes it right. Three varieties look like better calls and each one is closed by a printed cell. Merlot ties Pinot Noir at 12% growth, is also red and also Californian — but its margin is 8%, the lowest in the table and roughly half Pinot Noir's 15%, and the client's brief is to improve profitability, so equal growth at half the margin loses. Syrah carries the highest margin among the alternatives at 18% — but it grows at 2%, exactly the rate of the Chardonnay the client is trying to move away from, its key locations are Australia and France rather than California, and 18% is still below the 20% the client already earns on Chardonnay, so margin alone buys nothing. Riesling matches Pinot Noir's 15% margin at 10% growth — but it is white, and the consumption chart shows white falling and red rising across the eleven years, so a second white leaves the client in the exposure he is exiting. Pinot Noir is the only row where red, the joint-highest growth among reds, a 15% margin and a California location all appear together, and California is where the client's single 3,000-acre vineyard sits. What would break this: the absolute size of the US Pinot Noir category. It is by far the smallest of the varieties named, so the variety improves the mix but may not on its own restore profitability — and we do not have that figure in the client data, so I would ask for category sizes and the client's own Chardonnay revenue before we size the upside. That is the first thing on the list, not a reason to change the recommendation.\"*\n\n**[TWO LEVERS]** Lever 1 — profit margin, which the record uses as the tie-break: Merlot ties Pinot Noir on growth but carries 8% against 15%. Lever 2 — consumption growth, the column the file's own conclusion leaned on: Pinot Noir 12%, Merlot 12%, Riesling 10%, Sauvignon Blanc 4%, Chardonnay 2%, Syrah 2%, Cabernet Sauvignon 1%. Move both at once across the printed grid — growth multiplied by margin gives Pinot Noir 12 x 15 = 180, Riesling 10 x 15 = 150, Merlot 12 x 8 = 96, Sauvignon Blanc 4 x 10 = 40, Chardonnay 2 x 20 = 40, Syrah 2 x 18 = 36, Cabernet Sauvignon 1 x 10 = 10. Pinot Noir leads on both levers moved together, and the only row within 30 of it, Riesling, is white against a chart where the white series falls and the red series rises across the eleven years. What survives: the recommendation and its grounds. Merlot loses on margin at equal growth, Syrah's 18% is still below the 20% the client already earns on Chardonnay and grows at the 2% he is exiting, and Pinot Noir is the only row combining red, joint-highest growth among reds, a 15% margin and a California location next to the client's single 3,000-acre vineyard. What must not be counted: the third parameter, absolute category size. The record prints no size for any variety, so the product above is a ranking device and not money — and supplying a size to turn it into money would be inventing data. That is precisely why the next step asks for category sizes and the client's own Chardonnay revenue before the upside is sized."
+    "en": "**[L1 — single free field].** *\"The file's conclusion holds: Pinot Noir is the right variety to add, and it is not the growth column that makes it right. Three varieties look like better calls and each one is closed by a printed cell. Merlot ties Pinot Noir at 12% growth, is also red and also Californian — but its margin is 8%, the lowest in the table and roughly half Pinot Noir's 15%, and the client's brief is to improve profitability, so equal growth at half the margin loses. Syrah carries the highest margin among the alternatives at 18% — but it grows at 2%, exactly the rate of the Chardonnay the client is trying to move away from, its key locations are Australia and France rather than California, and 18% is still below the 20% the client already earns on Chardonnay, so margin alone buys nothing. Riesling matches Pinot Noir's 15% margin at 10% growth — but it is white, and the consumption chart shows white falling and red rising across the eleven years, so a second white leaves the client in the exposure he is exiting. Pinot Noir is the only row where red, the joint-highest growth among reds, a 15% margin and a California location all appear together, and California is where the client's single 3,000-acre vineyard sits. What would break this: the absolute size of the US Pinot Noir category. It is by far the smallest of the varieties named, so the variety improves the mix but may not on its own restore profitability — and we do not have that figure in the client data, so I would ask for category sizes and the client's own Chardonnay revenue before we size the upside. That is the first thing on the list, not a reason to change the recommendation.\"*\n\n**[TWO LEVERS]** One base for all four numbers: the client's current variety as printed in Exhibit 2 - Chardonnay at 2% consumption growth and a 20% profit margin - with each lever carrying that cell to Pinot Noir's printed value in the same column, the two columns being the only quantified ones in the table. The count is consumption growth multiplied by profit margin, in points - a ranking device across the printed grid, not money, because the record prints no category size for any variety. Lever 1 — consumption growth, carried from Chardonnay to Pinot Noir: 2% → 12%. Lever 2 — profit margin, carried from Chardonnay to Pinot Noir: 20% → 15%. Base case 40; lever 1 alone 240; lever 2 alone 30; both together 180 (interaction −50). What survives: adding Pinot Noir. Moving both cells at once takes the score from 40 to 180, the highest in the table - Riesling 150, Merlot 96, Syrah 36 - and Pinot Noir is the only row that is red, joint-highest growing among reds, 15% margin and Californian next to the client's single 3,000 acre vineyard. What does not survive: the file's one-column reasoning and the arithmetic of the swap - the interaction is minus 50 points, because ten points of growth are bought at five points of margin, and Merlot ties the growth column at 12% while scoring 96."
    },
    "anchor_metric": "Клиентского порога нет; решение выносится сопоставлением, а не сравнением с правилом. Вердикт держится тем, что ровно одна строка таблицы удовлетворяет всем четырём условиям одновременно",
    "family_h25": "F0",
    "family_src": "clean",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "levers": {
+    "base": "the client's current variety as printed in Exhibit 2 - Chardonnay at 2% consumption growth and a 20% profit margin - with each lever carrying that cell to Pinot Noir's printed value in the same column, the two columns being the only quantified ones in the table",
+    "metric": "consumption growth multiplied by profit margin, in points - a ranking device across the printed grid, not money, because the record prints no category size for any variety",
+    "lever1": {
+     "name": "consumption growth, carried from Chardonnay to Pinot Noir",
+     "from": 2,
+     "to": 12,
+     "unit": "%",
+     "exchange": true,
+     "src": "exhibit.parts[1].rows[0][4]",
+     "quote_from": "Consumption growth || 2%",
+     "quote_to": "Consumption growth || 12%"
+    },
+    "lever2": {
+     "name": "profit margin, carried from Chardonnay to Pinot Noir",
+     "from": 20,
+     "to": 15,
+     "unit": "%",
+     "exchange": true,
+     "src": "exhibit.parts[1].rows[0][5]",
+     "quote_from": "Profit margin || 20%",
+     "quote_to": "Profit margin || 15%"
+    },
+    "result": {
+     "base_case": 40,
+     "alone1": 240,
+     "alone2": 30,
+     "both": 180,
+     "interaction": -50
+    },
+    "verdict": "What survives: adding Pinot Noir. Moving both cells at once takes the score from 40 to 180, the highest in the table - Riesling 150, Merlot 96, Syrah 36 - and Pinot Noir is the only row that is red, joint-highest growing among reds, 15% margin and Californian next to the client's single 3,000 acre vineyard. What does not survive: the file's one-column reasoning and the arithmetic of the swap - the interaction is minus 50 points, because ten points of growth are bought at five points of margin, and Merlot ties the growth column at 12% while scoring 96."
+   }
   },
   {
    "id": "SY-032",
@@ -4332,12 +4537,44 @@
     "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: канал передан вместе с деньгами: строка S&M падает с $1.50 до $0.50, а оплачивать выход на рынок теперь должен партнёр из $19.00 — при том что доступ к каналу и есть цель сделки; заменимых производителей губок 10, невоспроизводимый BloodStopper один → пересогласовать цену передачи; (3) наивное прочтение отвергнуто вслух, а не просто обойдено — прирост MedDev = $0.00 → сделка нейтральна, худший случай = сегодняшний день → подписать как нарисовано обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
    },
    "reference": {
-    "en": "- **Conclusion.** Medical Devices Co. should not sign the deal as drawn: it should re-price the tablet above $83.50 so that it keeps a share of the value the deal creates, and in parallel price the alternative of buying a sponge maker outright.\n- **Facts.** First, the sheet's arithmetic is right and its conclusion does not follow from it. Our margin is indeed $80.00 before and $80.00 after — but \"not worse off\" is not the same as \"no risk\", and the risk in this deal sits outside our own margin line. Second, what we hand over with the price is the channel: $1.00 of our $1.50 cost \"saving\" is the sales-and-marketing line falling from $1.50 to $0.50, because Spongy's takes over marketing and customer relationships. Improved access to marketing and distribution is the reason we are doing this deal at all, and we are asking a partner to fund it out of $19.00 a unit while we sit on an untouched $80.00 — a partner who, on these terms, keeps every cent of the $11.00 the deal creates ($9.50 of extra willingness to pay plus $1.50 of our own cost saving; $19.00 against $8.00 standalone, being $10.00 less the $2.00 sponge). Third, we are negotiating from a stronger position than this sheet assumes: there are ten large sponge makers and there is one BloodStopper, which nobody else can replicate.\n- **Risks.** Internally, having cut our own commercial spend we depend on a partner who earns $19.00 a unit to carry the channel; if he underinvests, what is exposed is not the $11.00 we are arguing over but the $80.00 we thought we had protected. Externally, the 10% uplift rests on convenience with no proven medical benefit — halve it and the $9.50 falls to roughly $4.75, leaving almost nothing to divide.\n- **Next step.** Take a transfer price of $89.00 back to Spongy's — an even $5.50 of the $11.00 each — and in parallel value one of the 10 sponge makers as a walk-away. The response tells us within two weeks whether we have a partner or only a buyer.\n\n**[TWO LEVERS]** Lever 1 - the estimates in the record, halved as a single premise. One convention, named before the arithmetic: only the estimated parts get halved. The 10% willingness-to-pay uplift is an estimate - it rests on convenience with no proven medical benefit - and so is the part of our vial-to-tablet cost saving that is an engineering number. Of that $1.50 saving ($5.00 vial to $3.50 tablet), $1.00 is the sales-and-marketing line falling from $1.50 to $0.50 because Spongy's takes marketing and customer relationships; that is a term of the deal, not an estimate, so it is carried in full whatever the uplift turns out to be. The remaining $0.50 is the manufacturing estimate ($0.10 raw materials, $0.05 manufacturing, $0.05 packaging, $0.30 direct labour), and it halves to $0.25. Under lever 1 the combined willingness to pay becomes $95.00 x 1.05 = $99.75 and our tablet cost becomes $5.00 - $1.00 - $0.25 = $3.75, so the value the deal creates falls from $11.00 to $6.00 - $4.75 of uplift plus $1.25 of our cost saving. Lever 2 - the transfer price, the only number in this record Medical Devices Co. sets itself, and the only one it can move without anyone re-estimating anything. Move lever 2 alone, at full estimates: $89.00 instead of $83.50 splits the $11.00 evenly, $5.50 of gain each. Move lever 1 alone: the margin-holding price becomes $3.75 + $80.00 = $83.75, we keep exactly the $80.00 we earn today, and Spongy's keeps $99.75 - $83.75 - $2.00 = $14.00 - all $6.00 of the thinner pie, same as before. Move both: an even split of $6.00 needs $83.75 + $3.00 = $86.75, which leaves us $86.75 - $3.75 = $83.00 against today's $80.00 and Spongy's $99.75 - $86.75 - $2.00 = $11.00 against his standalone $8.00 - $3.00 of gain each. What survives: the conclusion. Do not sign at $83.50. At full estimates it hands the partner every cent of the $11.00; with the estimates halved it does not even hold our margin, since $83.50 - $3.75 = $79.75, a quarter below the $80.00 the sheet promises to protect. And the negotiating asymmetry is unchanged under either lever - ten large sponge makers, one BloodStopper nobody can replicate - while the $1.00 of channel we hand over does not shrink with the pie. What does not survive: $89.00 as the answer. It is $5.50 each only at full uplift and full saving; halve the estimates and the even-split price is $86.75 for $3.00 each. That is why the walk-away - valuing one of the 10 sponge makers - moves from parallel option to main option: paying $1.00 of channel to capture $3.00 is a materially worse trade than paying it to capture $5.50."
+    "en": "- **Conclusion.** Medical Devices Co. should not sign the deal as drawn: it should re-price the tablet above $83.50 so that it keeps a share of the value the deal creates, and in parallel price the alternative of buying a sponge maker outright.\n- **Facts.** First, the sheet's arithmetic is right and its conclusion does not follow from it. Our margin is indeed $80.00 before and $80.00 after — but \"not worse off\" is not the same as \"no risk\", and the risk in this deal sits outside our own margin line. Second, what we hand over with the price is the channel: $1.00 of our $1.50 cost \"saving\" is the sales-and-marketing line falling from $1.50 to $0.50, because Spongy's takes over marketing and customer relationships. Improved access to marketing and distribution is the reason we are doing this deal at all, and we are asking a partner to fund it out of $19.00 a unit while we sit on an untouched $80.00 — a partner who, on these terms, keeps every cent of the $11.00 the deal creates ($9.50 of extra willingness to pay plus $1.50 of our own cost saving; $19.00 against $8.00 standalone, being $10.00 less the $2.00 sponge). Third, we are negotiating from a stronger position than this sheet assumes: there are ten large sponge makers and there is one BloodStopper, which nobody else can replicate.\n- **Risks.** Internally, having cut our own commercial spend we depend on a partner who earns $19.00 a unit to carry the channel; if he underinvests, what is exposed is not the $11.00 we are arguing over but the $80.00 we thought we had protected. Externally, the 10% uplift rests on convenience with no proven medical benefit — halve it and the $9.50 falls to roughly $4.75, leaving almost nothing to divide.\n- **Next step.** Take a transfer price of $89.00 back to Spongy's — an even $5.50 of the $11.00 each — and in parallel value one of the 10 sponge makers as a walk-away. The response tells us within two weeks whether we have a partner or only a buyer.\n\n**[TWO LEVERS]** One base for all four numbers: the deal exactly as drawn on the colleague's sheet - one unit, tablet cost $3.50 built from the printed breakdown, sold to Spongy's at the $83.50 transfer price, against today's $85.00 vial at a $5.00 cost - with the willingness-to-pay lines and the sponge cost untouched. The count is Medical Devices Co.'s margin per unit, in $, the single line the sheet says is protected. Lever 1 — the per-unit price Medical Devices Co. charges, moved from the transfer price to the price it charges hospitals today: $83.5 → $85. Lever 2 — the Sales & Marketing line, kept on our side at the vial rate instead of handed to Spongy's with the channel: $0.5 → $1.5. Base case 80; lever 1 alone 81.5; lever 2 alone 79; both together 80.5 (no interaction term). What does not survive: $80.00 as a protected number. It is $80.00 only while Spongy's carries the channel - put the $1.00 of Sales & Marketing back on our side and the deal as drawn pays $79.00, below today, so the sheet's cost saving is a transferred obligation and not a saving at all. What survives: the conclusion that the transfer price is the only line we own. Charging Spongy's the $85.00 we charge hospitals buys back $1.50 of the $11.00 the deal creates ($9.50 of extra willingness to pay plus $1.50 of cost), which is why the ask is a price above $83.50 and the walk-away is one of the 10 sponge makers."
    },
    "anchor_metric": "НЕТ клиентского порога",
    "family_h25": "F9",
    "family_src": "тело",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "levers": {
+    "base": "the deal exactly as drawn on the colleague's sheet - one unit, tablet cost $3.50 built from the printed breakdown, sold to Spongy's at the $83.50 transfer price, against today's $85.00 vial at a $5.00 cost - with the willingness-to-pay lines and the sponge cost untouched",
+    "metric": "Medical Devices Co.'s margin per unit, in $, the single line the sheet says is protected",
+    "lever1": {
+     "name": "the per-unit price Medical Devices Co. charges, moved from the transfer price to the price it charges hospitals today",
+     "from": 83.5,
+     "to": 85,
+     "unit": "$",
+     "exchange": true,
+     "src": "exhibit.parts[5].rows[2]",
+     "quote_from": "Transfer price to Spongy's || **$83.50**",
+     "quote_to": "liquid vial to hospitals at $85.00 WTP"
+    },
+    "lever2": {
+     "name": "the Sales & Marketing line, kept on our side at the vial rate instead of handed to Spongy's with the channel",
+     "from": 0.5,
+     "to": 1.5,
+     "unit": "$",
+     "exchange": true,
+     "src": "exhibit.parts[3].rows[4]",
+     "quote_from": "Sales & Marketing || $0.50",
+     "quote_to": "Sales & Marketing || $1.50"
+    },
+    "result": {
+     "base_case": 80,
+     "alone1": 81.5,
+     "alone2": 79,
+     "both": 80.5,
+     "interaction": 0
+    },
+    "verdict": "What does not survive: $80.00 as a protected number. It is $80.00 only while Spongy's carries the channel - put the $1.00 of Sales & Marketing back on our side and the deal as drawn pays $79.00, below today, so the sheet's cost saving is a transferred obligation and not a saving at all. What survives: the conclusion that the transfer price is the only line we own. Charging Spongy's the $85.00 we charge hospitals buys back $1.50 of the $11.00 the deal creates ($9.50 of extra willingness to pay plus $1.50 of cost), which is why the ask is a price above $83.50 and the walk-away is one of the 10 sponge makers."
+   }
   },
   {
    "id": "SY-036",
@@ -5014,9 +5251,9 @@
     ]
    },
    "key": {
-    "naive": "**Naive path — the honest first answer of a clever person.** Read Block E as the answer: a $1.0B hole with no closing move, therefore do not launch, or launch only after the economics are fixed. Every number on that path is right. The arithmetic is not where this slot is decided.",
+    "naive": "**Naive path — the honest first answer of a clever person.** Read Block D as the answer: a $1.0B hole with no closing move, therefore do not launch, or launch only after the economics are fixed. Every number on that path is right. The arithmetic is not where this slot is decided.",
     "decoy": "**The tempting second branch.** Redesign for break-even before rollout — fewer post offices, lower commission, tighter underwriting. It reads as the responsible middle. It is the same refusal wearing a plan: every lever that closes $1.0B removes coverage, and coverage is the objective.",
-    "support": "**What decides it, and all of it is in Block A.** The brief names the objective in its first sentence — safety nets, not monetisation — and demotes profitability to \"an important metric\", not the test. Against that objective the programme delivers $10.0B of premium-equivalent protection to the two classes with the least of it, at a net public cost of $1.0B. **[ПОСТРОЕНО, книга не печатает]** on the note's own rounded figures that is a subsidy of 10.0% of the protection delivered ($1.0B ÷ $10.0B); on the unrounded chain it is 10.2%. The verdict does not turn on a better number; it turns on which number was ever the test.",
+    "support": "**What decides it, and all of it is in Block E.** The brief names the objective in its first sentence — safety nets, not monetisation — and demotes profitability to \"an important metric\", not the test. Against that objective the programme delivers $10.0B of premium-equivalent protection to the two classes with the least of it, at a net public cost of $1.0B. **[ПОСТРОЕНО, книга не печатает]** on the note's own rounded figures that is a subsidy of 10.0% of the protection delivered ($1.0B ÷ $10.0B); on the unrounded chain it is 10.2%. The verdict does not turn on a better number; it turns on which number was ever the test.",
     "correct": "Proceed with the rollout as scoped.",
     "risks": "Internal: the 80% claims ratio is an assumption, and a 5 pp move is **[ПОСТРОЕНО]** ±$0.5B on a $1.0B deficit — the figure the committee is being asked to accept is only as firm as that ratio. External: the book's own two — excessive load on the medical system, and moral hazard once coverage is free at the point of sale.",
     "next": "Name the $1.0B as a budgeted public-health line before launch, not as an overrun found later. Test whether a larger captured share of the same two classes narrows it, and price-test programmes that widen access without adding cost."
@@ -5024,7 +5261,7 @@
    "checklist": {
     "en": [
      "Minto: the first sentence is the verdict itself — an action with a subject (\"the government should proceed\"). A correct verdict that arrives after the facts fails this line.",
-     "States that the objective in Block A, not the surplus in Block E, is the test.",
+     "States that the objective in Block E, not the surplus in Block D, is the test.",
      "Names the $1.0B deficit out loud rather than avoiding it — the answer is that it is a price, not that it is absent.",
      "Uses at least two figures from the note: $10.0B captured and $11.0B cost, or the $24B market against them.",
      "Gives one internal and one external risk.",
@@ -5032,7 +5269,7 @@
     ],
     "ru": [
      "Минто: первое предложение — сам вердикт, действием и с субъектом. Верный вывод, приехавший после фактов, не засчитывается.",
-     "Сказано, что тестом является цель из блока A, а не сальдо из блока E.",
+     "Сказано, что тестом является цель из блока E, а не сальдо из блока D.",
      "Дефицит $1.0B назван вслух: ответ в том, что это цена, а не в том, что его нет.",
      "Использованы минимум две величины записи: $10.0B захвата и $11.0B издержек.",
      "Назван один внутренний и один внешний риск.",
