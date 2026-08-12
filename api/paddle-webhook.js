@@ -131,28 +131,84 @@ async function handleEntitlementGrant(data, sbUrl, sbServiceKey) {
   const planCfg = PRICE_PLAN_MAP[priceId];
   if (!planCfg) { console.error('Paddle webhook: unrecognized price_id', priceId); return; }
 
+  const txId = data.id || null;
+  if (!txId) { console.error('Paddle webhook: transaction has no id'); return; }
+
+  /* ─── 1. ИДЕМПОТЕНТНОСТЬ ────────────────────────────────────────────────
+     Paddle ПОВТОРЯЕТ доставку вебхука, пока не получит 200. С прежней записью
+     "поверх" повтор был безвреден: он писал те же самые предельные значения.
+     С накоплением (см. пункт 2) тот же повтор УДВОИЛ БЫ купленное. Поэтому
+     каждая выдача сперва отмечается в журнале выдач по transaction_id:
+     первичный ключ отбивает второй заход механически, а не проверкой памяти. */
+  const claim = await fetch(sbUrl + '/rest/v1/entitlement_grants', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      apikey: sbServiceKey,
+      Authorization: 'Bearer ' + sbServiceKey,
+      Prefer: 'return=minimal'
+    },
+    body: JSON.stringify({ transaction_id: txId, user_id: userId, plan: planCfg.plan })
+  });
+  if (claim.status === 409) {
+    console.log('Paddle webhook: transaction ' + txId + ' already granted, skipping');
+    return;
+  }
+  if (!claim.ok) {
+    // Не выдаём права, если не смогли застолбить выдачу: лучше повтор от Paddle,
+    // чем двойная выдача. Вернувшись без 200, мы попросим доставить ещё раз.
+    console.error('Paddle webhook: grant claim failed', claim.status, await claim.text());
+    throw new Error('grant claim failed');
+  }
+
+  /* ─── 2. НАКОПЛЕНИЕ, А НЕ ЗАМЕНА ─────────────────────────────────────────
+     Прежняя запись клала cases_cap = cap ТЕКУЩЕЙ покупки и обнуляла *_used.
+     Человек, купивший Starter (15 кейсов), потративший 10 и купивший затем
+     Game Pass, получал cases_cap = 0 - пять оплаченных кейсов исчезали.
+     Теперь пределы СКЛАДЫВАЮТСЯ, потраченное не трогается, а окно Game Pass
+     берётся более поздним из двух. */
   const now = new Date();
-  // null periodDays = no calendar expiry (consumption-based plan); period_end stays null in that case.
   const periodEnd = planCfg.periodDays
     ? new Date(now.getTime() + planCfg.periodDays * 24 * 60 * 60 * 1000)
     : null;
 
+  let prev = null;
+  try {
+    const r = await fetch(sbUrl + '/rest/v1/user_entitlements?user_id=eq.'
+      + encodeURIComponent(userId) + '&select=cases_cap,drills_cap,games_cap,period_end,plan',
+      { headers: { apikey: sbServiceKey, Authorization: 'Bearer ' + sbServiceKey } });
+    if (r.ok) { const rows = await r.json(); prev = Array.isArray(rows) && rows[0] ? rows[0] : null; }
+    else console.error('Paddle webhook: read existing entitlement failed', r.status);
+  } catch (e) { console.error('Paddle webhook: read existing entitlement threw', e); }
+
+  const num = v => (Number.isFinite(Number(v)) ? Number(v) : 0);
+  const prevEnd = prev && prev.period_end ? new Date(prev.period_end) : null;
+  /* Более позднее из двух окон. Уже истёкшее окно не продлевает новое и
+     не укорачивает его. */
+  const mergedEnd = (() => {
+    const cands = [prevEnd, periodEnd].filter(d => d && d.getTime() > now.getTime());
+    if (!cands.length) return null;
+    return new Date(Math.max.apply(null, cands.map(d => d.getTime())));
+  })();
+
   const body = {
     user_id: userId,
+    // Имя плана - последняя покупка. Права считаются по пределам, не по имени.
     plan: planCfg.plan,
     period_start: now.toISOString(),
-    period_end: periodEnd ? periodEnd.toISOString() : null,
-    cases_used: 0,
-    cases_cap: planCfg.casesCap || 0,
-    drills_used: 0,
-    drills_cap: planCfg.drillsCap || 0,
-    games_used: 0,
-    games_cap: planCfg.gamesCap || 0,
+    period_end: mergedEnd ? mergedEnd.toISOString() : null,
+    cases_cap:  num(prev && prev.cases_cap)  + (planCfg.casesCap  || 0),
+    drills_cap: num(prev && prev.drills_cap) + (planCfg.drillsCap || 0),
+    games_cap:  num(prev && prev.games_cap)  + (planCfg.gamesCap  || 0),
     paddle_customer_id: data.customer_id || null,
-    paddle_transaction_id: data.id || null,
+    paddle_transaction_id: txId,
     status: 'active',
     updated_at: now.toISOString()
   };
+  /* cases_used / drills_used / games_used НЕ ПЕРЕЧИСЛЯЮТСЯ здесь намеренно:
+     merge-duplicates не трогает поля, которых нет в теле. Потраченное живёт
+     своей жизнью, и настоящий счёт расхода ведёт таблица
+     entitlement_consumption, а не эти колонки. */
 
   const resp = await fetch(sbUrl + '/rest/v1/user_entitlements?on_conflict=user_id', {
     method: 'POST',
@@ -164,7 +220,12 @@ async function handleEntitlementGrant(data, sbUrl, sbServiceKey) {
     },
     body: JSON.stringify(body)
   });
-  if (!resp.ok) console.error('Supabase entitlement grant failed:', resp.status, await resp.text());
+  if (!resp.ok) {
+    console.error('Supabase entitlement grant failed:', resp.status, await resp.text());
+    throw new Error('entitlement grant failed');
+  }
+  console.log('Paddle webhook: granted ' + planCfg.plan + ' to ' + userId
+    + ' caps now ' + body.cases_cap + '/' + body.drills_cap + '/' + body.games_cap);
 }
 
 async function handleEntitlementRevoke(data, sbUrl, sbServiceKey) {
