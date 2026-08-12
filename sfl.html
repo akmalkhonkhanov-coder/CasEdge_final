@@ -101,7 +101,7 @@ const keep=j=>{ if(j&&typeof j==='object') for(const k of CARRY) if(k in j&&j[k]
 const qs=extra=>{ const p=CARRY.filter(k=>STATE[k]!=null).map(k=>k+'='+encodeURIComponent(STATE[k]));
                   if(extra)p.push(extra); return p.length?'?'+p.join('&'):'' };
 const forget=()=>{ STATE={}; SID=null; DEADLINE=null; clearInterval(tick); };
-let ERR=null,SID=null,V=null,PROF=null,INTRO=null,introStep=0,REV=null,pick=null,order=null,dragged=false,tick=null,busy=false,CONS=null,DEADLINE=null;
+let ERR=null,ERRCODE=null,SID=null,V=null,PROF=null,INTRO=null,introStep=0,REV=null,pick=null,order=null,dragged=false,tick=null,busy=false,CONS=null,DEADLINE=null;
 
 /* ТРАНСПОРТ ПОД VERCEL. Цеховой сервер — это шесть REST-путей с query-строкой;
    в Vercel один файл в `api/` — это одна функция, поэтому наружу торчит ОДИН
@@ -143,7 +143,9 @@ async function call(action,extra){
      печатал бы «[object Object]». */
   if(r.status===401) throw new Error('Сессия не найдена. Войди в аккаунт CasEdge и открой игру заново.');
   if(r.status===429) throw new Error('Слишком много запросов подряд. Подожди минуту и повтори ход — состояние партии хранится у тебя, оно не потеряно.');
-  if(j&&j.error) throw new Error((j.error&&j.error.message)||String(j.error));
+  /* Код отказа едет вместе с текстом: экран ошибки обязан отличать «нет прав»
+     от «сервер потерян» — иначе кандидат читает отказ по оплате как поломку. */
+  if(j&&j.error){ const e=new Error((j.error&&j.error.message)||String(j.error)); e.code=(j.error&&j.error.code)||null; throw e; }
   if(!r.ok) throw new Error('сервер ответил '+r.status);
   return keep(j);
 }
@@ -154,14 +156,21 @@ async function GET(p,q){
   const a=ACT(p), j=await call(a);
   if(a==='reveal') return j.reveal||j;
   if(a==='view')   return j.view||j;
-  if(a==='state')  { const pr=prof(); return Object.assign({},j,{played:(pr.history||[]).length,
-                       best:(pr.history||[]).length?Math.max.apply(null,pr.history):null, exhausted:pr.exhausted||null}); }
+  /* 13.08.2026. Фраза «все N сценариев пройдены» жила в профиле кандидата и
+     пережила рост банка с семи сценариев до двадцати: экран говорил «все семь
+     пройдены», когда непройденных было семнадцать. Состояние сервера в клиентском
+     профиле не хранится — оно считается заново по ТЕКУЩЕМУ числу сценариев. */
+  if(a==='state')  { const pr=prof(); const seen=new Set(pr.seen||[]).size; const total=Number(j.scenarios)||0;
+                     const done=total>0&&seen>=total;
+                     return Object.assign({},j,{played:(pr.history||[]).length,
+                       best:(pr.history||[]).length?Math.max.apply(null,pr.history):null,
+                       exhausted:done?`Все ${total} сценариев пройдены. Дальше второй круг: сценарии те же, но решения ты уже принимал.`:null}); }
   return j;
 }
 async function POST(p,q,b){
   const a=ACT(p), j=await call(a,b||{});
   if(a==='start'){
-    const pr=prof(); pr.seen=(pr.seen||[]).concat([j.scenarioId]).slice(-50); pr.exhausted=j.exhausted||null;
+    const pr=prof(); pr.seen=(pr.seen||[]).concat([j.scenarioId]).slice(-50); delete pr.exhausted;
     profSave(pr);
     return j;                                   // {token, intro, view, …} — как раньше
   }
@@ -169,8 +178,8 @@ async function POST(p,q,b){
   if(a==='begin')  return j.view||j;
   return j;
 }
-async function act(fn){ if(busy)return; busy=true; ERR=null;
-  try{ await fn() }catch(e){ ERR=e.message||String(e); clearInterval(tick) }
+async function act(fn){ if(busy)return; busy=true; ERR=null; ERRCODE=null;
+  try{ await fn() }catch(e){ ERR=e.message||String(e); ERRCODE=e.code||null; clearInterval(tick) }
   finally{ busy=false; render() } }
 const mmss=ms=>Math.floor(ms/60000)+':'+String(Math.floor(ms%60000/1000)).padStart(2,'0');
 const hhmm=ms=>Math.floor(ms/60000)+' мин '+String(Math.floor(ms%60000/1000)).padStart(2,'0')+' с';
@@ -346,9 +355,10 @@ function scr_rev(){
   </table></div>`;
  return h}
 
-function scr_err(){ return `<div class="brand">CasEdge · SFL</div><h1>Связь с сервером потеряна</h1>
+function scr_err(){ const paid=ERRCODE==='entitlement_exhausted';
+ return `<div class="brand">CasEdge · SFL</div><h1>${paid?'Нужен Game Pass':'Связь с сервером потеряна'}</h1>
   <p class="lead">${ERR}</p>
-  <div class="note w">Модуль живёт на сервере. Если он перезапустился, текущий прогон продолжить нельзя — начни новый.</div>
+  <div class="note w">${paid?'Партия не начата и попытка не списана. Открой раздел с тарифами и вернись сюда.':'Модуль живёт на сервере. Если он перезапустился, текущий прогон продолжить нельзя — начни новый.'}</div>
   <p><button class="btn g" style="margin-top:14px" onclick="ERR=null;forget();V=null;REV=null;INTRO=null;boot()">В меню</button></p>`}
 
 function render(){ const a=document.getElementById('app');
