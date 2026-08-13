@@ -1328,6 +1328,12 @@
     .sv-journal-list { display: flex; flex-direction: column; gap: 8px; }
     .sv-jchip { background: rgba(93,184,166,.12); border: 1px solid rgba(93,184,166,.4); color: var(--on-dark); border-radius: 8px; padding: 8px 12px; font-size: 13.5px; font-weight: 600; cursor: grab; touch-action: none; display: flex; align-items: center; justify-content: space-between; }
     .sv-jcard { border: 1px solid var(--sv-line-soft); border-radius: 8px; overflow: hidden; }
+    .sv-jcard.sv-jstarred { border-color: var(--accent-amber); }
+    .sv-jtools { display: flex; gap: 6px; align-items: center; margin-top: 6px; }
+    .sv-jrename { flex: 1; min-width: 0; background: var(--sv-fill); border: 1px solid var(--sv-line-soft); border-radius: 6px; color: var(--on-dark); font-size: 12px; padding: 4px 7px; }
+    .sv-jstar, .sv-jdrop { background: none; border: none; color: var(--on-dark-soft); cursor: pointer; font-size: 14px; line-height: 1; padding: 2px 4px; }
+    .sv-jstar { color: var(--accent-amber); }
+    .rk-chip { cursor: grab; }
     .sv-jhead { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 8px; background: transparent; border: none; padding: 9px 11px; font-size: 13px; font-weight: 600; color: var(--on-dark); cursor: pointer; text-align: left; }
     .sv-jhead:hover { background: rgba(93,184,166,.08); }
     .sv-jlabel { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -5868,7 +5874,14 @@ function rkRender() {
 }
 
 /* ── tiny markdown: **bold**, newlines, and pipe tables ───────────────────── */
-function rkInline(s) { return esc(String(s == null ? '' : s)).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>'); }
+function rkInline(s) {
+  let h = esc(String(s == null ? '' : s)).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+  // Экран сбора: сервер пометил в тексте, ЧТО можно утащить в журнал. Роли
+  // (рабочее число или шум) в метке нет - это и есть задача кандидата.
+  h = h.replace(/\[\[c:([A-Za-z0-9_-]+)\|([^\]]*)\]\]/g,
+    (m, id, txt) => `<span class="sv-chip rk-chip" data-cid="${id}" data-val="${txt}" data-label="" onpointerdown="svChipDownEl(event)">${txt}</span>`);
+  return h;
+}
 function rkMd(text) {
   const lines = String(text == null ? '' : text).split('\n');
   let html = '', tbl = [];
@@ -6107,8 +6120,10 @@ async function rkLoadReview() {
   if (solve.rkReviewBusy || solve.rkReview) { renderSolve(); return; }
   solve.rkReviewBusy = true; renderSolve();
   try {
-    const r = await rkApi('review', { gameId: solve.game.id, tickets: solve.rkTickets });
+    const collected = (solve.journal || []).map(j => j.cid).filter(Boolean);
+    const r = await rkApi('review', { gameId: solve.game.id, tickets: solve.rkTickets, collected: collected });
     solve.rkReview = (r && r.review) || [];
+    solve.rkJournalScore = (r && r.journal) || null;
   } catch (e) { rkToast(e.message); }
   solve.rkReviewBusy = false; renderSolve();
 }
@@ -6134,7 +6149,16 @@ function rkReviewHTML() {
         ${trap}
       </div>`;
   }).join('');
-  return `<div class="rk-rv"><div class="rk-rv-title">Analysis breakdown</div>${rows}</div>`;
+  const js = solve.rkJournalScore;
+  // Сводка сбора: сколько рабочих величин кандидат утащил в журнал и сколько
+  // взял шума. Пропущенные и лишние печатаются явкой, а не одним процентом.
+  const jhtml = !js ? '' : `<div class="rk-rv-item">
+      <div class="rk-rv-head">Research Journal <span class="rk-rv-key">collection</span></div>
+      <div class="rk-rv-line"><span>Working</span> <b>${js.neededTaken}/${js.neededTotal}</b> figures that actually feed the analysis</div>
+      <div class="rk-rv-line"><span>Noise</span> <b>${js.noiseTaken}</b> collected${js.noise && js.noise.length ? ': ' + esc(js.noise.join(', ')) : ''}</div>
+      ${js.missed && js.missed.length ? `<div class="rk-rv-line"><span>Missed</span> ${esc(js.missed.join(', '))}</div>` : ''}
+    </div>`;
+  return `<div class="rk-rv"><div class="rk-rv-title">Analysis breakdown</div>${jhtml}${rows}</div>`;
 }
 
 function rkResult(inner, foot) {
@@ -6202,8 +6226,12 @@ function svChipText(display, fullVal, label) {
 }
 function svChipDownEl(e) {
   const src = e.currentTarget;
+  // id чипа нужен, чтобы сервер потом сказал, что из собранного было рабочим,
+  // а что шумом. Сверять по тексту нельзя: одно и то же число встречается дважды.
+  svChipPendingId = src.dataset.cid || (src.dataset.cid = '') || null;
   svChipDown(e, src.dataset.val, src.dataset.label);
 }
+let svChipPendingId = null;
 let svDrag = null;
 function svChipDown(e, val, label) {
   label = label || '';
@@ -6257,8 +6285,29 @@ function svFillField(field, val, label) {
 }
 function svCollect(val, label) {
   if (!solve.journal) solve.journal = [];
-  if (!solve.journal.some(j => (j.val!==undefined?j.val:j) == val)) solve.journal.push({ val, label: label || '' });
+  const cid = svChipPendingId || null;
+  const same = solve.journal.some(j => (cid && j.cid === cid) || (!cid && (j.val !== undefined ? j.val : j) == val));
+  if (!same) solve.journal.push({ val, label: label || '', cid: cid, star: false });
   svRenderJournal();
+}
+// Журнал настоящей игры это не список чисел, а рабочая запись: величину можно
+// назвать своими словами и пометить важной. Имя и звезда живут в записи, а не
+// в разметке, иначе перерисовка их стирает.
+function svJournalRename(i, name) {
+  const e = (solve.journal || [])[i]; if (!e) return;
+  e.label = String(name || '');
+  const card = document.querySelectorAll('.sv-jcard')[i];
+  const lab = card && card.querySelector('.sv-jlabel');
+  if (lab) lab.textContent = e.label || String(e.val);   // без полной перерисовки: поле не теряет фокус
+}
+function svJournalStar(i) {
+  const e = (solve.journal || [])[i]; if (!e) return;
+  e.star = !e.star; svRenderJournal();
+  const card = document.querySelectorAll('.sv-jcard')[i]; if (card) card.classList.add('open');
+}
+function svJournalDrop(i) {
+  if (!solve.journal) return;
+  solve.journal.splice(i, 1); svRenderJournal();
 }
 function svRenderJournal() {
   const el = document.getElementById('svJournal');
@@ -6266,12 +6315,19 @@ function svRenderJournal() {
   const j = (solve.journal || []).map(entry => typeof entry === 'object' ? entry : { val: entry, label: '' }); // tolerate legacy string entries
   el.innerHTML = `<div class="sv-journal-t">${t('sv.journal')}</div>` +
     (j.length ? `<div class="sv-journal-list">` + j.map((entry,i) => `
-      <div class="sv-jcard">
+      <div class="sv-jcard${entry.star ? ' sv-jstarred' : ''}">
         <button class="sv-jhead" onclick="this.parentElement.classList.toggle('open')">
           <span class="sv-jlabel">${esc(entry.label || String(entry.val))}</span>
           <span class="sv-jchevron">\u2304</span>
         </button>
-        <div class="sv-jbody"><span class="sv-jchip" data-val="${esc(String(entry.val))}" data-label="${esc(entry.label||'')}" onpointerdown="svChipDownEl(event)">${esc(String(entry.val))}</span></div>
+        <div class="sv-jbody">
+          <span class="sv-jchip" data-val="${esc(String(entry.val))}" data-cid="${esc(String(entry.cid||''))}" data-label="${esc(entry.label||'')}" onpointerdown="svChipDownEl(event)">${esc(String(entry.val))}</span>
+          <div class="sv-jtools">
+            <input class="sv-jrename" placeholder="name this figure" value="${esc(entry.label || '')}" oninput="svJournalRename(${i}, this.value)">
+            <button class="sv-jstar" title="mark as important" onclick="svJournalStar(${i})">${entry.star ? '\u2605' : '\u2606'}</button>
+            <button class="sv-jdrop" title="remove" onclick="svJournalDrop(${i})">\u00d7</button>
+          </div>
+        </div>
       </div>`).join('') + `</div>`
     : `<div class="sv-journal-empty">Drag any highlighted number here to collect it, or drag it straight into an answer box.</div>`);
 }
