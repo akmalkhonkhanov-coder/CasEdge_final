@@ -83,7 +83,10 @@ function fieldMap(game) {
 // Server-only keys that must never reach the browser, ANYWHERE in the payload —
 // including nested inside exhibit bodies (e.g. `hidden` reveal-truth arrays for
 // projection null cells in #26/#36/#41/#46/#47). Deep-stripped from copied bodies.
-const RK_SERVER_KEYS = ['answer', 'naive', 'naive_reason', 'justify_rubric', 'distractors', 'hidden'];
+// `collect` — разметка экрана сбора: какой токен рабочий, а какой шум. Это ключ
+// ровно того же сорта, что и answer: весь смысл задачи в том, чтобы кандидат
+// решил это сам. В браузер уезжает только id и текст чипа.
+const RK_SERVER_KEYS = ['answer', 'naive', 'naive_reason', 'justify_rubric', 'distractors', 'hidden', 'collect', 'role', 'used_in'];
 function rkDeepStrip(v) {
   if (Array.isArray(v)) return v.map(rkDeepStrip);
   if (v && typeof v === 'object') {
@@ -171,12 +174,47 @@ function scrubPrompt(p, secretVals) {
   s = s.replace(/[\s;:·,\-–—×÷*/]+$/u, '').trim();
   return s;
 }
+/* ───────────────────────── экран сбора (долг dev №2) ────────────────────────
+   Цех игр разметил 491 токен на 50 играх: `needed` несёт цепочки, `noise` не
+   несёт ничего. Роль — ключ, наружу не уходит. Наружу уходит ДВА поля: id чипа
+   и его текст, плюс тот же текст, размеченный прямо в study_md меткой
+   [[c:id|текст]] — чтобы клиент знал, ЧТО именно можно перетащить, и не искал
+   вхождения сам. Метка ставится на ПЕРВОЕ вхождение и никогда внутрь уже
+   поставленной метки: длинные тексты размечаются раньше коротких, иначе
+   «8,000» съел бы «8,000 km²». */
+function markStudy(md, chips) {
+  let s = String(md == null ? '' : md);
+  const marks = [];   // занятые куски строки: [начало, конец)
+  const order = (chips || []).slice().sort((a, b) => String(b.text).length - String(a.text).length);
+  for (const c of order) {
+    const txt = String(c.text == null ? '' : c.text);
+    if (!txt) continue;
+    let from = 0, at = -1;
+    for (;;) {
+      at = s.indexOf(txt, from);
+      if (at < 0) break;
+      const end = at + txt.length;
+      if (!marks.some(m => at < m[1] && end > m[0])) break;   // пересеклись с уже размеченным
+      from = at + 1;
+    }
+    if (at < 0) continue;
+    const tag = '[[c:' + c.id + '|' + txt + ']]';
+    s = s.slice(0, at) + tag + s.slice(at + txt.length);
+    const shift = tag.length - txt.length;
+    for (const m of marks) { if (m[0] >= at) { m[0] += shift; m[1] += shift; } }
+    marks.push([at, at + tag.length]);
+  }
+  return s;
+}
 function sanitizeGame(game, revealedSet) {
   const rep = game.report || {};
   return {
     id: game.id, title: game.title, world: game.world, family: game.family,
     difficulty: game.difficulty, est_minutes: game.est_minutes,
-    objective: game.objective, study_md: game.study_md,
+    objective: game.objective,
+    study_md: (game.collect && game.collect.length) ? markStudy(game.study_md, game.collect) : game.study_md,
+    // роли тут нет и быть не может: только чем можно двигать по экрану
+    chips: (game.collect || []).map(c => ({ id: c.id, text: c.text })),
     // distractors are SERVER-ONLY (their whole point is the Research Journal
     // filtering task) — never label them for the client.
     exhibits: (game.exhibits || []).map(ex => sanitizeExhibit(ex, revealedSet)),
@@ -457,8 +495,25 @@ export default async function handler(req, res) {
         error: { message: 'Разбор открывается после того, как сданы все вопросы Analysis.', code: 'review_locked' },
         locked: true, missing: missing.length, total: need.length
       });
+      // Разбор сбора едет вместе с разбором Analysis: тот же замок, тот же момент.
+      const col = Array.isArray(g.collect) ? g.collect : [];
+      let journal = null;
+      if (col.length) {
+        const took = new Set(Array.isArray(body.collected) ? body.collected.map(String) : []);
+        const needed = col.filter(c => c.role === 'needed');
+        const takenNeeded = needed.filter(c => took.has(c.id));
+        const takenNoise = col.filter(c => c.role !== 'needed' && took.has(c.id));
+        journal = {
+          neededTotal: needed.length,
+          neededTaken: takenNeeded.length,
+          noiseTaken: takenNoise.length,
+          missed: needed.filter(c => !took.has(c.id)).map(c => c.text),
+          noise: takenNoise.map(c => c.text)
+        };
+      }
       const rev = Array.isArray(g.analysis_review) ? g.analysis_review : [];
       return res.status(200).json({
+        journal: journal,
         review: rev.map(r => ({
           q: r.q, key: r.key, answer: r.answer,
           trap: (r.trap === undefined ? null : r.trap),
