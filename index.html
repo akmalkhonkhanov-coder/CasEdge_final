@@ -6028,8 +6028,12 @@ function rkAnalysis(inner, foot) {
   const last = solve.qIndex >= qs.length - 1;
   // Разбор показывается на последнем вопросе и только по полному набору билетов.
   if (last && rkAnalysisSubmittedAll()) {
+    // Разбор ставится ПЕРЕД экзибитами, а не в самый низ: живой прогон 13.08
+    // показал, что снизу его надо искать прокруткой мимо двух таблиц.
+    const exh = inner.querySelector('.rk-exh');
     const host = inner.querySelector('.sv-layout-main');
-    if (host) host.insertAdjacentHTML('beforeend', rkReviewHTML());
+    if (exh) exh.insertAdjacentHTML('beforebegin', rkReviewHTML());
+    else if (host) host.insertAdjacentHTML('beforeend', rkReviewHTML());
   }
   foot.innerHTML =
     `<button class="sv-back" onclick="${solve.qIndex > 0 ? 'solve.qIndex--;renderSolve()' : "solve.phase='study';renderSolve()"}">&larr; Back</button>
