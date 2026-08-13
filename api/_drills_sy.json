@@ -59,7 +59,12 @@
    "anchor_metric": "5 лет",
    "family_h25": "F1",
    "family_src": "словарь:S01",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "включает уже понесённые расходы на разработку в базу окупаемости",
+    "correct": "включает в базу только предстоящий расход и делит его на годовой вклад",
+    "why": "потраченное без вторичного рынка не меняется ни от одного из решений"
+   }
   },
   {
    "id": "SY-002",
@@ -177,6 +182,11 @@
      "interaction": 0
     },
     "verdict": "The ranking rests entirely on the two displacement lines: swap them and Canopy loses on the board's own metric, so the $4M gap is one line of the pack, not a cushion."
+   },
+   "mehanizm": {
+    "naive": "ранжирует схемы по сроку окупаемости",
+    "correct": "ранжирует по объявленной цели — годовому чистому доходу — и называет курс обмена между метриками",
+    "why": "метрика допуска отсеивает варианты, но не выбирает среди прошедших"
    }
   },
   {
@@ -306,6 +316,11 @@
      "interaction": -20000
     },
     "verdict": "The two levers are one column of the table, not two dials: price and order size move together with the competitive field, so the $42,000 counterfactual is not a tender that exists - the record offers $28,000 where American Copier bids alone and ($18,000) where both rivals do."
+   },
+   "mehanizm": {
+    "naive": "читает падение цены при росте размера заказа как поведение продавца",
+    "correct": "читает те же строки как разрез по составу конкурентов на тендере",
+    "why": "градиент цены произведён отбором тендеров, а мотивация назначающего цену ненаблюдаема"
    }
   },
   {
@@ -354,7 +369,12 @@
    "anchor_metric": "12 (утроение: 6 → 18)",
    "family_h25": "F1",
    "family_src": "словарь:S10",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "умножает долю сегмента на размер всего рынка",
+    "correct": "умножает долю на размер того сегмента, к которому она относится",
+    "why": "доля измерена внутри сегмента и на рынок целиком не переносится"
+   }
   },
   {
    "id": "SY-005",
@@ -403,7 +423,12 @@
    "anchor_metric": "10 лет",
    "family_h25": "F1",
    "family_src": "словарь:S08",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "применяет более высокую из двух маржей ко всей выручке",
+    "correct": "применяет каждую маржу к своей части выручки и получает смешанную",
+    "why": "разные маржи относятся к разным частям выручки"
+   }
   },
   {
    "id": "SY-006",
@@ -488,6 +513,11 @@
     },
     "verdict": "What survives is that $0.70 is a price the entrant funds rather than earns: on his own printed cost of $0.90 the same contract runs at minus $24,000 a year, while our cost of $0.70 at his price earns exactly zero. What does not survive is matching as a defensive move - the price lever alone deletes all $36,000 of contribution, which is why the trigger belongs on our own reliability score, 8.4 today against his 5.1, and not on his list price. The pair cannot interact here: contribution is volume times price minus volume times cost, two separate terms on one volume held fixed, so the cross term is zero by construction of the count and not by measurement.",
     "verdict_scope": "the zero cross term is a property of this count on a fixed 120,000 m3 - a price cut that moved volume, or the seasonal swing of plus or minus 18%, would put a cross term back"
+   },
+   "mehanizm": {
+    "naive": "уравнивает свою цену с ценой новичка, чтобы удержать контракты",
+    "correct": "считает юнит-экономику новичка на его собственной цене прежде чем отвечать ценой",
+    "why": "цена, на которой конкурент теряет деньги, не является устойчивой ценой рынка"
    }
   },
   {
@@ -656,6 +686,11 @@
     },
     "verdict": "What survives is that cost per box never moved - $800 stands under desktops, laptops and servers in both years and under netbooks in FY2010, the year the line first exists - so no product has broken economics of its own, and price is exogenous by the record's own line that all competitors face the same ASPs. What does not survive is the note's price conclusion together with the assumption it signs off with, that volume cannot change the answer: the same volume move is worth plus $24,000,000 at FY2005 economics, $12,000,000 to $36,000,000, and minus $1,000,000 at FY2010 economics, because the 20,000 extra boxes now meet an ASP of $750 against a cost of $800. The interaction is the slot itself - minus $25,000,000, the $1,250 of price drop multiplied by the 20,000 boxes of growth - and it sits precisely in the section the note left blank.",
     "verdict_scope": "these two levers are the laptop line's own price and volume on the $800 base; the rest of the portfolio is outside the count, and \"Other\" carries a different $200 cost per unit"
+   },
+   "mehanizm": {
+    "naive": "раскладывает падение прибыли по продуктам и объявляет виновной линию со сдвинувшейся ценой",
+    "correct": "раскладывает то же падение по составу проданного объёма при неподвижной себестоимости коробки",
+    "why": "цена задана рынком, а управляемая величина — куда лёг прирост объёма"
    }
   },
   {
@@ -776,6 +811,12 @@
     },
     "verdict": "What survives: the ranking, and it is not a money question. Hand option B option A's entire $400,000 saving and B still buys 6.30 points of diversion per $1M of annual cost against the 1.67 the same money buys at A's 40% - the money line moves the count by 5%, the diversion line cuts it by three quarters. What does not survive: option B's 65% itself. Read that one line at A's printed 40% and B falls to 1.59 points per $1M, below A on A's own terms, and the charter goal stops being affordable - so 65% is the single line to defend in front of the council, and the pilot round is what defends it.",
     "verdict_scope": "decisive of the two lines that separate A from B in this pack - the annual saving and the diversion - not of everything the council weighs: contamination, complaints and the 7-year contract length are untouched by both levers"
+   },
+   "mehanizm": {
+    "naive": "ранжирует опции по экономии, приняв ожидание совета по стоимости за предел",
+    "correct": "ранжирует по уставной цели и называет цену одного пункта этой цели",
+    "why": "ожидание не является ограничением, а цель объявлена отдельно от него",
+    "src": "выведено из checklist"
    }
   },
   {
@@ -1004,6 +1045,11 @@
     },
     "verdict": "What survives: the correction and the ticket it produces. The decisive quantities are the 2017 volume the tariff forces, $399M = 39.9 / 10.0%, and the $49.875 average registration that follows - and neither lever reaches the $42.375 the recorded $339M cell produces. Re-read registrations at the 2018 line and the ticket moves to $50.51, 1.3%; re-read revenue a whole year back at $35.0M and it is still $43.75, above $42.375. No printed line of this record produces $42.375; only the mistyped cell does. What does not survive: comparing the ticket with the $3.00 and $5.50 steps. Those are fixed fees per transaction, not ticket prices, and the take-rate story is settled without them - 39.9 / 399 = 10.0% in 2017 against 39.9 / 595 = 6.7% in 2018, a division that uses no registrations figure at all.",
     "verdict_scope": "decisive of the 2017 ticket this pair is built on - the volume cell and the two inputs of its division - not of the 2018 take rate, which stands on revenue and dollars processed alone and moves under neither lever"
+   },
+   "mehanizm": {
+    "naive": "берёт записанную выручку как объём и считает ставку на ней",
+    "correct": "восстанавливает объём из объявленного тарифа и считает ставку уже на нём",
+    "why": "величина из чужой записи, взятая без проверки размерности, задаёт всю дальнейшую историю"
    }
   },
   {
@@ -1181,6 +1227,11 @@
     },
     "verdict": "What survives: the rejection of the margin ranking — 500% against 300% is arithmetic that never reaches the count, and the $40,000,000 of rights is identical in every case, so it subtracts without differentiating. What does not survive: reading the $18,000,000 prize as Region 2's superiority — the two drivers pull opposite ways, and Region 2 wins only because 40 wells at $2,700,000 outweigh 60 at $1,500,000; hand Region 2 Region 1's profit per well and the same 40 wells return $20,000,000 against Region 1's $50,000,000.",
     "verdict_scope": "of the two drivers in this pair — profit per well and wells per year — not of everything that separates the three regions"
+   },
+   "mehanizm": {
+    "naive": "ранжирует регионы по проценту маржи на скважину",
+    "correct": "ранжирует по годовой прибыли региона после вычета одинаковой стоимости прав",
+    "why": "процентная маржа не масштабируется числом скважин и не оплачивает фиксированный вход"
    }
   },
   {
@@ -1293,7 +1344,12 @@
    "anchor_metric": "1 200 000 кластеров в год",
    "family_h25": "F1",
    "family_src": "словарь:S07",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "сравнивает площадки по площади и по числу, поданному сразу в целевой единице",
+    "correct": "сравнивает после того, как каждая площадка доведена до целевой единицы через свои ограничения по плотности и урожайности",
+    "why": "готовая величина в нужной единице посчитана по чужим допущениям, а ограничения площадок различны"
+   }
   },
   {
    "id": "SY-012",
@@ -1354,7 +1410,12 @@
    "anchor_metric": "€70 — цена доминирующего игрока (стр. 215); цель «Breakeven at least. No timeframe.» (стр. 211)",
    "family_h25": "F0",
    "family_src": "clean",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "считает, сколько членов нужно при цене конкурента",
+    "correct": "считает безубыточный взнос при физическом потолке мощности",
+    "why": "цена конкурента не является входом задачи о точке безубытка"
+   }
   },
   {
    "id": "SY-013",
@@ -1546,7 +1607,12 @@
    "anchor_metric": "ЕСТЬ И ВАЛИДЕН: срок окупаемости проекта ≤ 4 года — правило приёмки клиента, применяется на выходе, не на входе",
    "family_h25": "F4",
    "family_src": "тело",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "читает плоскую линию объёма как коммерческий симптом спроса",
+    "correct": "сопоставляет плоскую линию с мощностью завода и читает её как упор в потолок",
+    "why": "несколько одинаковых значений подряд рисует ограничение, а не рынок"
+   }
   },
   {
    "id": "SY-014",
@@ -1635,7 +1701,12 @@
    "anchor_metric": "темп открытий: 3 магазина в год 7 и 2 в год 8",
    "family_h25": "F3",
    "family_src": "словарь:S13",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "объясняет падение средней маржи падением цен на рынке",
+    "correct": "проверяет состав выборки точек по годам и долю недавно открытых в ней",
+    "why": "средняя по меняющемуся составу двигается без изменения экономики отдельной точки"
+   }
   },
   {
    "id": "SY-015",
@@ -1845,6 +1916,11 @@
     },
     "verdict": "The method survives every value — gross doughnut contribution net of cannibalised burger profit, never the $60,000 headline — but $15,000 does not: the same two assumed inputs, each swapped only for a figure the exhibit already prints, put the answer anywhere between $5,000 and $45,000, so the pilot has to fix margin and price together, not the cannibalisation rate alone.",
     "verdict_scope": "\"only\" bounds where the two swapped values come from, both being figures Exhibit 2 already prints, and singles out neither lever"
+   },
+   "mehanizm": {
+    "naive": "перемножает объём, цену и маржу новинки и выдаёт валовой вклад как прирост",
+    "correct": "вычитает из валового вклада каннибализированную прибыль базового продукта",
+    "why": "прирост измеряется против сценария без запуска, а не против нуля"
    }
   },
   {
@@ -1932,6 +2008,11 @@
      "interaction": -75000000
     },
     "verdict": "The shape of the answer survives — the decision turns on a stated non-financial objective and the candidate must price what that objective has to outweigh — but the $200,000,000 does not: re-running the record's own formula at the checking balance makes the savings account lose $40 per account, so the gap runs from $255,000,000 to $500,000,000 and the $5,000 balance is validated before the basis-point calculation, not after."
+   },
+   "mehanizm": {
+    "naive": "выбирает продукт по прибыли на счёт и по её сумме",
+    "correct": "выбирает продукт по объявленной цели — объёму привлекаемых депозитов, удешевляющих фондирование",
+    "why": "прибыльность продукта не совпадает с целью, ради которой продукт запускается"
    }
   },
   {
@@ -2056,6 +2137,11 @@
     },
     "verdict": "What holds in every cell is the structure the slot grades: only the non-overlapping pools can switch, so the 20% goes on 85M and the 25% on 20M, and the 15M who already pay for both move from $18 to $15 a month — a give-back of $540M a year, not a gain. That is true at any price and at any switch rate. What does not survive is quoting the +$1.33B as a number. Run the Vellum-only pool at the Aurelia+ 20% and revenue is $14.30B, a gain of $1.28B; price the bundle at the flagship's own $7 and revenue is $10.80B, $2.22B below today's $13.02B. The cross term is $96M on a $14B base, so the two inputs move the answer almost independently and neither can be called the one that settles it — which is why the pilot has to read the price point and both switch rates at once rather than in two separate tests.",
     "verdict_scope": "decisive among the two inputs this pair moves — the bundle price and the Vellum-only switch rate — and explicitly not a ranking of price against the switch rates, which the record's own next step requires to be settled together in one pilot"
+   },
+   "mehanizm": {
+    "naive": "умножает долю переходящих на всю базу подписчиков каждого сервиса",
+    "correct": "умножает долю на базу за вычетом пересечения, а пересечение добавляет отдельной строкой",
+    "why": "пересекающиеся подписчики считаются дважды, пока база не очищена"
    }
   },
   {
@@ -2325,6 +2411,11 @@
     },
     "verdict": "The base correction to $5,125M is the point of the slot and it survives both movements, but the 1,000-FTE answer does not: closing every office the record offers saves only 200 jobs, while a 2024 revenue base at the 2022 level takes the cut to 7,194 people, so the plan is locked against a written revenue assumption rather than against the office footprint.",
     "verdict_scope": "Decisive only for the FTE count under this slot's fixed construction — the $5,125M cost base and the $150k net saving per FTE stay at the printed 2023 lines while only the revenue year is swapped — so it ranks the two levers against each other inside that construction."
+   },
+   "mehanizm": {
+    "naive": "складывает два подытога отчёта и принимает сумму за полную базу расходов",
+    "correct": "выводит базу расходов из выручки и итогового убытка, включая строки ниже операционной прибыли",
+    "why": "подытоги отчёта не покрывают все статьи, из которых складывается цель по сокращению"
    }
   },
   {
@@ -2452,6 +2543,11 @@
     },
     "verdict": "What survives both moves is the answer to the question actually asked: expected R&D is anchored by the $160M Phase I pays with certainty, the Filing probability never enters it and Phase III enters it only through the $5M filing cost - $0.14MM across this move - so R&D stays the largest cost bucket in all four counts here, $269.2MM against expected production of $252.0MM at base and $156.8MM with both levers moved. What does not survive is the deal: the commercial side is a product of four probabilities, so the two cuts overlap instead of adding - separately they cost $224.0MM and $201.6MM, together $380.8MM rather than the $425.6MM they sum to, and the $44.8MM difference is that overlap - and SM1 falls from $738.8MM to $358.0MM against a $1 billion ask, taking the gap from 26.1% of the ask to 64.2%.",
     "verdict_scope": "\"largest cost bucket\" is measured across these four counts, where expected production runs from $252.0MM down to $156.8MM; it is not a claim about probabilities the exhibit does not print"
+   },
+   "mehanizm": {
+    "naive": "умножает сумму затрат всех стадий на общую вероятность дойти до рынка",
+    "correct": "умножает затраты каждой стадии на вероятность дойти именно до этой стадии",
+    "why": "стадия оплачивается при прохождении предыдущих, а не при успехе всего пути"
    }
   },
   {
@@ -2601,6 +2697,11 @@
     },
     "verdict": "What survives is the shape of the answer, not the pick: the 50 % versus 20 % access cap is the only line that decides this case, so Colorado's $30,000,000 beats Michigan's $20,000,000 even at Michigan's own price ($40,000,000), but the moment Colorado's untested 2.5-year-old regime is capped like Michigan's the state falls to $12,000,000 and the recommendation flips - which is why the cap, not the $60,000,000 versus $100,000,000 headline market, is what the client must diligence",
     "verdict_scope": "of the two levers in this pair — the access cap and the price per inspection — the cap is the only one that reverses the state choice, not the only line the client must diligence"
+   },
+   "mehanizm": {
+    "naive": "сравнивает территории по полному размеру рынка",
+    "correct": "сравнивает по размеру рынка, умноженному на долю, открытую регулированием для третьей стороны",
+    "why": "закрытая регулированием часть рынка не является возможностью"
    }
   },
   {
@@ -2719,6 +2820,11 @@
      "interaction": 0
     },
     "verdict": "Each lever alone takes exactly $10,000,000 out of the same base and the two add without interaction, so the count cannot pick between them and the tie has to be broken by a stated convention; what does not survive is moving both — $20,000,000 of kegs on day one plus $18,700,000 net of salvage is $38,700,000 of capex against the $20,000,000 the client has."
+   },
+   "mehanizm": {
+    "naive": "сравнивает инициативы по абсолютному размеру денежного потока каждой",
+    "correct": "сравнивает дельты «до и после» внутри каждой инициативы",
+    "why": "уровень потока существует и без инициативы, решение меняет только приращение"
    }
   },
   {
@@ -2868,7 +2974,12 @@
    "family_h25": "F11",
    "family_src": "тело",
    "family_conf": "высокая",
-   "family_note": "круг 44: F11 «одно множество под двумя ярлыками» — «Premium shipped 40M cases in its first year» и вытесненные кейсы старых линий — те же покупатели: «Traditional, Light and Premium are the only product lines in the portfolio»"
+   "family_note": "круг 44: F11 «одно множество под двумя ярлыками» — «Premium shipped 40M cases in its first year» и вытесненные кейсы старых линий — те же покупатели: «Traditional, Light and Premium are the only product lines in the portfolio»",
+   "mehanizm": {
+    "naive": "ищет причину падения прибыли на затратной стороне вслед за прошлогодним объяснением",
+    "correct": "сопоставляет ушедший объём высокомаржинальных линий с объёмом новой линии",
+    "why": "прирост объёма в низкомаржинальной линии не компенсирует переток из высокомаржинальных"
+   }
   },
   {
    "id": "SY-023",
@@ -3146,6 +3257,11 @@
     },
     "verdict": "What survives every value of both levers is the category error, not the tie: $35 of cash-management overhead removed is $35 of profit one for one, while forgone in-flight sales are profit only at the food-and-beverage margin, because the four purchases we no longer make are food we no longer buy - so the two $35 figures cannot be netted to zero at any cash share and any spend. What does not survive is the comfortable form of that correction, 'positive at any margin below 100%'. It is true only at the 20% cash mix the note happens to use. At the 80% the same table prints for card, $140 a flight is at risk and the switch pays only below a 25% margin; with leisure spending like business, $160 and 21.9%. The F&B contribution margin is therefore an input to the recommendation, not a footnote to it, and it is obtained before the CEO meeting rather than after.",
     "verdict_scope": "true of the two inputs this pair moves - the cash share and the leisure spend - and not of the whole note: the one-third attrition rate, the 2% fees and the $35 of overhead are held at the record's own values throughout, and each of them moves the breakeven margin again"
+   },
+   "mehanizm": {
+    "naive": "складывает равные по величине экономию накладных и потерю выручки и получает ноль",
+    "correct": "переводит потерю выручки в прибыль через контрибуцию, а устранённую затрату берёт целиком",
+    "why": "единица выручки и единица устранённой затраты дают разную прибыль"
    }
   },
   {
@@ -3230,6 +3346,11 @@
     },
     "verdict": "What survives both moves is the note's arithmetic: 62 more members really are worth $3,720 a month. What does not survive is 62 members as the answer - lifting vending from $5 to the $15 the record already charges for personal training earns $6,280 on the same 628 members, 1.7 times the member hunt, and the two together deliver $10,620 while the one line the note never opened, labour at $20 x 2 people x 24 hours x 7 days x 4 weeks = $26,880 a month or 71.3% of the $37,680 cost base of a gym the same note calls minimally staffed with card access, releases $13,440 a month by going to one attendant - more than both revenue levers combined.",
     "verdict_scope": "the ranking is inside this pair plus the labour line it is measured against: both levers here are revenue-side, neither touches the $37,680 cost roll-up, and the $13,440 figure is what one staffing move releases, not a claim that no other cost line exists"
+   },
+   "mehanizm": {
+    "naive": "берёт доведённую до числа ветвь по приросту членов как ответ записи",
+    "correct": "сводит затратные ставки в одни единицы и сопоставляет рычаг труда с рычагом членства",
+    "why": "крупнейшая статья себестоимости даёт эффект, кратно превосходящий прирост базы"
    }
   },
   {
@@ -3376,6 +3497,11 @@
     },
     "verdict": "What holds in every cell is the shape of the answer and the size of the base. The answer is a convention, not a number, and no convention repairs the base: partial doses are 30% of all doses and a needled vial cannot deliver them, so at most 70 of every 100 doses are addressable, and that is untouched by both levers. What does not survive is the analyst's line that the switch leaves VaxCo's unit economics undisturbed. Hand the customer the whole $6 syringe saving and the margin is $4 a unit, below the $7 the traditional vial earns today; hold the customer's current outlay and it is $10, and only a build-in-house cost at the vial's own $7 makes the giveaway version match today's $7. Note what cannot be tested here at all: Option A's $17 is defined as hybrid COGS plus $7, so it is not an independent price — move the COGS lever and the $17 moves with it. Option A has no price to stress, which is itself the argument for quoting off the customer's outlay.",
     "verdict_scope": "decisive among the two inputs of the per-unit margin this pair moves — the price asked of the customer under convention B and the hybrid COGS — and not a ranking against the 30% partial-dose share, which neither lever touches and which caps the addressable base under either convention"
+   },
+   "mehanizm": {
+    "naive": "выдаёт одну цену как вердикт, приняв удержание абсолютной маржи за правило",
+    "correct": "называет базу ценообразования и условия, при которых выбирается одна конвенция против другой",
+    "why": "ответом является выбор конвенции, а число лишь следует из него"
    }
   },
   {
@@ -3501,6 +3627,11 @@
      "interaction": 18.75
     },
     "verdict": "What survives is the transcript's 75 pairs a week: the analyst's objection is right about the rule and wrong about this line, because all three stations happen to run at 3 hours, so the bottleneck equals the sum-of-hours count and nothing supports dividing by three to get 25. What does not survive is the balance the 75 rests on - it needs every assigned cell to stay at 3 hours; let stitching slip to the 4 hours its own row prints and output falls to 56.25, exactly today's output, and let cutting slip to 5 and it falls to 45, below today, while the two slips do not add because output is a minimum, not a sum"
+   },
+   "mehanizm": {
+    "naive": "объявляет подушевой счёт недействительным из-за разделения труда и вводит поправочный делитель",
+    "correct": "строит мощность каждой станции из числа людей, их часов и времени операции",
+    "why": "разделение труда меняет способ счёта мощности, а не отменяет саму возможность её посчитать"
    }
   },
   {
@@ -3673,6 +3804,11 @@
     },
     "verdict": "What survives every cell is the diagnosis. Nobody set a category price: Brand A sold at $1.00 a gallon in both years and Brand B at $1.00 in both years, Value alone moved, $0.60 to $0.40, while Value's share of soda gallons went 25% to 50% — half of the $0.20 fall in the printed average is that mix, half is Value's own cut. What does not survive is the colleague's 'reverse the soda price' as an action. Roll Value's gallons back where his recommendation points and sodas fall from $84M to $70M per store, $14M below today and $20M below 2014; recovering Brand A's lost gallons instead is worth $104M, more than the whole category made in 2014. The two lines are additive here only because the count holds each brand at its own price — interaction zero is a property of that convention, not a finding. Whether the gallons themselves are independent is precisely the open question: Value gained 35 million gallons in the year Brand A lost 20 million, and until that split is measured no price on Value can be set.",
     "verdict_scope": "decisive among the two brand volume lines this pair moves — Value Brand gallons and Brand A gallons, each priced at its own realized price — and not a claim about the category average price, which is a quotient of the mix rather than a lever anyone can pull"
+   },
+   "mehanizm": {
+    "naive": "принимает среднюю цену категории за срезанную цену и объясняет ею падение выручки",
+    "correct": "считает цену каждого бренда отдельно и проверяет сдвиг долей в сторону дешёвого",
+    "why": "средняя цена падает от сдвига структуры продаж без единого решения о цене"
    }
   },
   {
@@ -3845,6 +3981,11 @@
     },
     "verdict": "What does not survive: the two-year break-even anywhere inside the market range the record prints. At the top of that range, 10%, two years return $7,000,000; at the bottom, 5%, $3,500,000 — both against the $9,000,000 the airline puts in, and both already standing on the page's own 100% seat occupancy, so the honest gap is wider than the few points the analyst's read argues about. The only take rate on the page that does clear $9,000,000 is 12.9% (7,000,000 × 12.9% × $10 = $9,030,000), and 12.9% is not a market rate at all: it is the output of the analyst's own step 3, while the research line caps what the category delivers today at 5 to 10%. What survives: the investment itself, once it is read on the 10+ year contract length the record prints as the industry norm, where even the bottom of the market range returns $17,500,000 against the same $9,000,000. This pair multiplies rather than adds — half the rate against five times the window — so the cross term is −$14,000,000 by count and not by assumption. Which is why the terms the record shows as agreed with the vendor — the airline's 40% share of the $250K per-plane capex and the $10 per-session margin — together with the length of the window are where this case moves, and demand is not.",
     "verdict_scope": "this pair measures the printed market take rate against the length of the window, and 12.9% is named only as the page's own required rate, never moved; seat occupancy is a third parameter the record prints at one value only, 100%, and is therefore held, not measured, in all four numbers"
+   },
+   "mehanizm": {
+    "naive": "проверяет арифметику чужого расчёта доли и спорит о разрыве с рыночным ориентиром",
+    "correct": "проверяет допущение о полной заполняемости мест, на котором построена база пользователей",
+    "why": "верная арифметика на завышенной базе даёт долю, недостижимую при реальной загрузке"
    }
   },
   {
@@ -4021,7 +4162,12 @@
    "anchor_metric": "клиентского порога нет; решение выносится сопоставлением, а не сравнением с правилом. В Clarifying Information (стр. 149–151) нет ни правила окупаемости, ни горизонта. Вердикт держится сопоставлением годового прироста прибыли клиента с разовой суммой и с напечатанной целью клиента",
    "family_h25": "F1",
    "family_src": "тело",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "берёт итоговую прибыль сегмента из таблицы как прибыль клиента",
+    "correct": "берёт прибыль сегмента и умножает её на долю клиента в этом сегменте",
+    "why": "таблица посчитана по всем игрокам сегмента, а не по одному клиенту"
+   }
   },
   {
    "id": "SY-030",
@@ -4283,6 +4429,11 @@
     },
     "verdict": "What survives: the plants set output, not the share table. On the team's own shares the two plants cover 9.48% of expected sales; carry the U.S. down to the Asian share and it is 16.17%, Europe as well and it is 32.77% - the most conservative reading the file allows, and capacity still binds two thirds of the way. The valuation is untouched by either move: $750M is 5,000 x $100K x 15% / 10% and takes no share, growth or rank input at all, so the number does not change by a dollar anywhere in this pair. What does not survive: arguing the shares. The debate the exhibits invite moves nothing that the price is paid for, while one point of discount rate - 10% to 11% - is worth $68.2M and eats the entire 7.1% cushion over the $700M asking price.",
     "verdict_scope": "decisive of the two share cells this pair moves, the U.S. 50% and the European 40%, and of nothing in the valuation: capacity, price, margin and the discount rate stand outside this pair and each of them does move the $750M"
+   },
+   "mehanizm": {
+    "naive": "выводит стоимость цели из размера и привлекательности рынков",
+    "correct": "выводит стоимость из производственной мощности цели, сопоставленной с ожидаемыми продажами",
+    "why": "продать можно только произведённое, поэтому доля рынка не входит в оценку ни одним множителем"
    }
   },
   {
@@ -4444,6 +4595,11 @@
     },
     "verdict": "What survives: adding Pinot Noir. Moving both cells at once takes the score from 40 to 180, the highest in the table - Riesling 150, Merlot 96, Syrah 36 - and Pinot Noir is the only row that is red, joint-highest growing among reds, 15% margin and Californian next to the client's single 3,000 acre vineyard. What does not survive: the file's one-column reasoning and the arithmetic of the swap - the interaction is minus 50 points, because ten points of growth are bought at five points of margin, and Merlot ties the growth column at 12% while scoring 96.",
     "verdict_scope": "of the four printed attributes taken together, not of redness alone — Syrah, Merlot and Cabernet Sauvignon are red rows too"
+   },
+   "mehanizm": {
+    "naive": "выбирает сорт по колонке роста потребления и ищет тайбрейк в тех же признаках",
+    "correct": "выбирает по марже, поскольку цель заявлена как немедленный рост прибыльности",
+    "why": "признак, по которому строки неразличимы, не может выбирать между ними"
    }
   },
   {
@@ -4605,7 +4761,12 @@
    "anchor_metric": "клиентского порога нет; решение выносится сопоставлением двух равнопривлекательных для покупателя строк между собой, а не сравнением с правилом. Клиент формулирует цель качественно",
    "family_h25": "F5",
    "family_src": "тело",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "принимает единственную доведённую цену конечного устройства за данность и считает потолок за компонент от неё",
+    "correct": "проверяет по кривой спроса точки, между которыми покупатель безразличен, и считает потолок в каждой",
+    "why": "потолок за компонент кратно различается между точками, одинаковыми по прибыли покупателя"
+   }
   },
   {
    "id": "SY-033",
@@ -4769,6 +4930,11 @@
     },
     "verdict": "What survives both moves is the margin promise; what does not survive either of them is the write-up's opening 7.103% — and neither move is the rounding. Taking Tanks out of the FULL book lifts the margin by 3.157 points to the 10.261% the write-up prints, because the footnote holds its margin at −5% and so its $75M of revenue is −$3.75M of profit. Taking Tees out of that same full book — not out of the post-Tanks book — lifts it by only 0.150 points, to 7.254%: gross profit stays at the printed $25.75M because the line earns $0, and $7.5M leaves a denominator that is still $362.5M, so $25.75M over $355M. Both together give the $280M and 10.536% the write-up prints, 3.432 points above base, and the 0.125-point interaction is exactly the gap between the two readings of the Tees cut: worth 0.150 of a point taken alone from the full book, worth 0.275 once Tanks is already gone. The rounding named in the base is worth about a hundredth of that: the convention covers BOTH surviving lines on one printed line — socks $194,481,000 ≈ $200M and underwear $2,488,320,000 ≈ $2.5B — and lifting it on both at once moves the final cell from 10.536% to the 10.525% this slot's reference prints on $278.004M of revenue, 0.011 of a point. The promise clears 10.5% on either rounding, so the conclusion holds; it is carried by the two terminations, not by the third decimal of a market size.",
     "verdict_scope": "the pair is the write-up's own two terminations, each measured against the full four-line 2020 book on the rounded market sizes: lever 1 is Tanks leaving that book at its printed $75M of revenue, shown as the book's $362.5M → $287.5M the record itself prints, and lever 2 is Tees leaving the SAME full book at its own printed $7.5M, shown at line level because the record prints its Tees step only after Tanks is already out; the cells 'lever 1 alone' and 'lever 2 alone' therefore each take one line out of the full book, and 'both together' is the $280M state; nothing here re-opens the market shares, the market sizes or the margins, and the rounding of those sizes is the convention of the base, not a lever of this pair"
+   },
+   "mehanizm": {
+    "naive": "защищает самую быстрорастущую по доле и выручке линию",
+    "correct": "переносит маржу линии на её выручку и считает вклад линии в абсолютную прибыль",
+    "why": "выручка при отрицательной марже уменьшает прибыль тем сильнее, чем быстрее растёт"
    }
   },
   {
@@ -4866,6 +5032,11 @@
     },
     "verdict": "What does not survive: NPV = $0 as a property of the store. It rests on two assumed spend rates of the same kind, and swapping each onto the other's printed value moves annual store profit to minus $20,000 and to $325,000, and both at once to $205,000 - at the same 10% and the same $1,000,000 invested that is a decision worth anywhere from minus $1,200,000 to plus $2,250,000, and there is no interaction term to argue over, because revenue is the sum of the two groups, COGS is a flat 50% of it and labour and utilities are fixed, so the two moves add by construction. What survives is the branch the worksheet never priced: the station already earns $100,000 a year as the only fuel site for two towns of 1,000 people each, which at the owner's own 10% is $1,000,000 of existing value exposed to an entrant, and criteria 2 and 3 of the owner's three printed tests - holding off new competitors and diversifying income - are met by the store whatever the NPV does.",
     "verdict_scope": "«the only fuel site» is the record's own statement about towns A and B, whose residents it also calls the station's only customers, not a claim about any wider area; and the swap measured here is between these two spend assumptions only - the fuel and car-wash economics are untouched by both levers"
+   },
+   "mehanizm": {
+    "naive": "сравнивает нулевую приведённую стоимость проекта с порогом создания стоимости",
+    "correct": "сравнивает ветвь строительства с ветвью бездействия, где площадку рядом занимает конкурент",
+    "why": "нулевой результат измерен против сценария, в котором ничего не происходит, а бездействие не бесплатно"
    }
   },
   {
@@ -5065,6 +5236,11 @@
     },
     "verdict": "What does not survive: $80.00 as a protected number. It is $80.00 only while Spongy's carries the channel - put the $1.00 of Sales & Marketing back on our side and the deal as drawn pays $79.00, below today, so the sheet's cost saving is a transferred obligation and not a saving at all. What survives: the conclusion that the transfer price is the only line we own. Charging Spongy's the $85.00 we charge hospitals buys back $1.50 of the $11.00 the deal creates ($9.50 of extra willingness to pay plus $1.50 of cost), which is why the ask is a price above $83.50 and the walk-away is one of the 10 sponge makers.",
     "verdict_scope": "of the two levers in this pair — the transfer price and the Sales & Marketing line, which goes to Spongy's with the channel — not our only source of leverage, the walk-away being one of the 10 sponge makers"
+   },
+   "mehanizm": {
+    "naive": "выводит из неизменной маржи, что сделка ничем не грозит",
+    "correct": "выводит из распределения созданной стоимости переговорную позицию по цене передачи",
+    "why": "нулевой прирост при созданной стоимости означает, что вся она досталась второй стороне"
    }
   },
   {
@@ -5295,6 +5471,11 @@
     },
     "verdict": "Move both and the fee line falls by $5,000,000 - $32,000,000 to $27,000,000, which is the whole of the 2016 Total revenues the record prints - and that $5,000,000 is the entire size of the associate's story, against a fall in total revenue of $20,000,000 from 47.0 to 27.0: the larger asset base adds $4,000,000, the rate cut takes $8,000,000 on 2015's assets, and the cross term of -$1,000,000 is that same half-point applied to the $200mm of assets 2016 added, which is why the fee cut is worth $9,000,000 when it is measured on 2016's base and only $8,000,000 on 2015's. What survives both moves is that the rate cut cost real money. What does not survive is the recommendation built on it: three quarters of the fall - the $15,000,000 of carried interest that 2015 earned and 2016 did not - never enters this box at all, because it sits on the investment-performance row against the 15% hurdle written into the limited partnership agreement, and the fund cannot move that hurdle by itself.",
     "verdict_scope": "the management fee line, which is the metric of this box, and not Canyon's revenue: on that wider base the same $5,000,000 is a quarter of a $20,000,000 fall whose larger part is the carried interest line standing outside both levers"
+   },
+   "mehanizm": {
+    "naive": "объясняет падение выручки срезом комиссионной ставки",
+    "correct": "раскладывает падение на ставку, активы и обнулившееся вознаграждение за результат относительно барьерной доходности",
+    "why": "крупнейшая часть падения приходится на компонент, исчезающий при недоборе барьера"
    }
   },
   {
@@ -5497,6 +5678,11 @@
     },
     "verdict": "What survives is the answer to the question actually asked: the mandate is reach, and the launch delivers 9,000,000 of the 88,000,000 underserved households in year one at a budget price of $8.92 a household — launch. What does not survive is treating the two ways of buying reach as interchangeable. Tripling the network to 150,000 branches triples the shortfall to $(240,750,000) and leaves the price of a covered household at the same $8.92, because every branch carries USD 2,400 of fixed cost; selling to 10 struggling households instead of 5 adds coverage with no branch attached and drops the price to $6.19, and the $12,000,000 cross term is that difference showing up when both move. Neither lever touches what makes the shortfall structural: 85% claims plus 10% commission leave 5% of premium, $39,750,000, against $120,000,000 of fixed cost — that ratio is the government's own dial and the range the pilot has to test.",
     "verdict_scope": "of the two distribution parameters moved in this pair — number of serviceable branches and households per agent per month — not of the payout and commission structure, which the record names as the real lever on the shortfall and which is held at 85% and 10% in all four cells"
+   },
+   "mehanizm": {
+    "naive": "берёт итоговый убыток первого года как ответ на вопрос о запуске",
+    "correct": "берёт объявленный мандатом охват как критерий, а убыток называет ценой этого охвата",
+    "why": "критерий решения задан мандатом, и прибыль в нём тестом не названа"
    }
   },
   {
@@ -5588,6 +5774,11 @@
     },
     "verdict": "What survives: freight cannot bring the line home. It is the one heading the record prices differently on the two sides - 4% against 10% of a $200 retail, $8 a pair against $20 - and re-quoting either leg at the other's rate widens Δc from $5 to $17 and lifts the split from 80% to 89.15%, both legs together to 91.70%. Every freight reading the record can price pushes further offshore, so the 20% kept at home is bought by demand variance and not by transport. What does not survive: reading 80/20 as robust in general. The record prices two moves that cut it and neither is freight - at double the volatility, δ = 20 → 40, the split is 60/40, and if the quality line erodes the gap to Δc = $3 it is about 74%. The split is therefore firm against transport and exposed on variance and on defects, which is why rebuilding δ and h from twelve months of shipments and pulling the contractor's monthly defect series come before signature.",
     "verdict_scope": "true of the two transportation legs this pair moves, and of nothing else in the note: δ, h and Δc are held at their printed points here, and the record itself puts a number on moving them - 60/40 at δ = 40, about 74% at Δc = $3"
+   },
+   "mehanizm": {
+    "naive": "возражает записи статьями, уже вычтенными в её собственном расчёте прибыли",
+    "correct": "принимает чистый разрыв прибыли как вход и считает долю переноса по формуле со сроком и разбросом спроса",
+    "why": "статья, уже входящая в перечень, из которого получена прибыль, не вычитается второй раз"
    }
   },
   {
@@ -5673,6 +5864,11 @@
     },
     "verdict": "The buy survives both moves and the size of the margin over the ask does not: give back the whole cost synergy and $300,000,000 above the ask becomes $200,000,000; let the biggest printed revenue lever deliver at the smallest printed rate, 1% instead of 4%, and it is $210,000,000; do both and it is $110,000,000 — still positive, so the note's recommendation stands on the sign of that difference and never on its size. What the size is not is a quotation: the record shows $300,000,000 twice and both times it is topline revenue — Total revenue $300M, and each rate stated against the topline revenue figure of $300,000,000 — while the $300,000,000 above the ask is a number this pair computes, and the coincidence of the two is arithmetic, not a citation. There is no cross term and there cannot be one: each move enters EBIT as its own additive term, value is EBIT divided by the single 10% rate the record prints, and the $1.1B ask is a constant, so the two levers multiply nothing. What does not survive is a valuation defended by that size, because the size is an entirely undelivered promise — and the corner neither lever of this pair reaches, the whole revenue half failing and all four rates going to zero, leaves ($100M + $10M) / 10% = $1.1B, the ask exactly, with nothing above it.",
     "verdict_scope": "the difference as this pair builds it — the printed standalone $1.0B plus the $40M of synergy the note's own two columns imply, capitalised at the single printed 10% — and not Alpha's return on the deal, for which the record prints no hurdle rate and tells us to assume none of these are major issues"
+   },
+   "mehanizm": {
+    "naive": "сравнивает автономную оценку с запрошенной ценой и объявляет переплату",
+    "correct": "сравнивает с ценой оценку, к которой добавлены синергии, капитализированные по той же ставке",
+    "why": "автономная стоимость не содержит того, ради чего покупатель платит премию"
    }
   },
   {
@@ -5806,6 +6002,11 @@
     },
     "verdict": "The dead heat is not a property of the hybrid, it is the exact balance of the two columns' own numbers — $9,000 of fuel saved against $5,000 of depreciation, $3,000 of maintenance and $1,000 of insurance — and it holds only while both hold: at the diesel's 10 MPG the hybrid costs $44,000 a year against $35,000, at the diesel's $100,000 price it costs $30,000, and there is no cross term to soften either. What survives is deciding on non-financial grounds at the printed inputs; what does not survive is treating the tie as robust, since it is one delivered MPG figure or one price concession away in either direction.",
     "verdict_scope": "\"only while both hold\" conditions the tie on the two printed inputs this pair moves, the hybrid's 20 MPG and its $150,000 price, and singles out neither"
+   },
+   "mehanizm": {
+    "naive": "выбирает вариант по экономии на топливе",
+    "correct": "выбирает по полной стоимости владения, сложив амортизацию, обслуживание и страхование",
+    "why": "экономия на одной статье гасится приростом остальных, пока полная стоимость не сведена"
    }
   },
   {
@@ -5963,6 +6164,11 @@
     },
     "verdict": "Half a point of willingness is worth $200,000,000 of the gap on either class - Aspirers at the 2% Globals already spend and Strugglers at the 1.5% Aspirers already spend each lift captured premium from $10B to $12B - and both together, at $14B of captured premium, still leave the programme $600,000,000 short, with no interaction term to hope for: each rate moves one class only and the surplus is 10% of captured premium less a fixed $2.0B, so the two moves add by construction. What does not survive is any claim that the shortfall closes on the demand side, because Block C spends 90 cents of every premium dollar - 80% on claims and 10% on commission - before the $2.0B payroll and operating stack is paid. What survives is the recommendation itself: proceed as scoped and carry the gap as a budgeted public-health line, because the test is the objective printed in Block E, not the surplus in Block D.",
     "verdict_scope": "the pair measured here is the two willingness rates of the two target classes; the claims ratio and the commission are named in the base as held, each at the single value the record prints for it, and this field does not measure them"
+   },
+   "mehanizm": {
+    "naive": "отказывается от запуска из-за дефицита или требует сначала свести экономику",
+    "correct": "измеряет программу против объявленной цели охвата и называет дефицит субсидией на единицу защиты",
+    "why": "каждый рычаг, закрывающий дефицит, срезает охват, который и является целью"
    }
   },
   {
@@ -6072,6 +6278,11 @@
    },
    "reference": {
     "en": "| field | text |\n|---|---|\n| **conclusion** | **We should hold our price and put the money into service reliability instead.** |\n| **the rest** | The attack is on price, and price is not what buyers decide on: the survey ranks service reliability first and design last, and reliability is where we are rated materially above the entrant. Matching costs everything we have — our cost is **7** against a price of **10**, so going to **7** takes the margin from **3 cents to 0** — and it would be a concession made to a competitor who is **2 cents under water on every cup** and funding that gap rather than holding a position. The staged version in Block D is the same concession slowed down: it accepts price as the field. Risks: internally the verdict rests on a survey ranking, which is a snapshot; externally price becomes a pain point if the economy turns. Next: measure the reliability lead by on-time delivery per account rather than asserting it, and watch for the point at which the entrant stops funding the 2-cent gap. |\n\n**Source:** `Darden 2019` (2018-19 Casebook), Styrofoam Situation, pp. 58–67 — Exhibit 1 unit economics (10 / 7 price; 4 manufacturing, 3 shipping, 2 distribution), the Exhibit 1 guidance block (\"net margin is 30%\", \"Chalice Inc is running at a loss\", \"All of Cup Co's profit will be eroded if they try to match\"), the Exhibit 2 guidance block (\"The most important metric to customers is reliability of service and Cup Co ranks a lot higher\"), and the Conclusion block (\"Cup Co should not lower its price\")."
+   },
+   "mehanizm": {
+    "naive": "отвечает на приход дешёвого конкурента ценой",
+    "correct": "сопоставляет атрибут атаки с рангом атрибутов у покупателей и с юнит-экономикой новичка",
+    "why": "атака идёт по признаку, который покупатели ставят низко, и держится на цене ниже собственной себестоимости"
    }
   },
   {
@@ -6187,6 +6398,11 @@
    },
    "reference": {
     "en": "**Conclusion.** Kelvarno should launch on the premium-account model.\n\n**Facts.** The note's arithmetic is right and its frame is not: **$25.7M** against **$20.6M** is a first-year comparison, and the model is chosen once for years. Block C says the paying-fee share and the fee itself have fallen since 2008 and faster since free competitors arrived in 2012 — that is the segment the winning model is built on. Premium gives up **$5.1M** in year one and stands on **1,800,000** users instead of **300,000**.\n\n**Risk.** Internal: the premium conversion split is itself a projection and can erode the same way. External: the book's own — the ad-supported model could be growing faster than premium.\n\n**Next step.** Run the same series against premium conversion before committing, and price the cost of switching models after launch so that \"start on the fee and change later\" is refused with a number.\n\n**Source:** `9.-Stern-MCA-Casebook-2019`, Grad-U-Date, Questions 4–6 — base of 6,000,000; monthly fee 5% × $10 × 12 = $36.0M revenue and $25.7M profit; premium 30% × (50% × 40% + 50% × 20%) × $5 × 12 = $32.4M and $20.6M; advertising 40% × (50% × $0.75 + 50% × $1.25) × 12 = $28.8M and $16.4M; fixed costs $10,000,000 and $1 per member; and the guidance that the candidate should switch the recommendation from monthly fee to premium because \"the portion of customers willing to pay a fee and the average fee paid have been rapidly decreasing since 2008\"."
+   },
+   "mehanizm": {
+    "naive": "выбирает модель по прибыли первого года",
+    "correct": "выбирает модель по доле базы, которая платит, и по устойчивости этой доли на горизонте жизни решения",
+    "why": "решение принимается один раз и живёт годы, а лидерство посчитано на падающей доле плательщиков"
    }
   }
  ]

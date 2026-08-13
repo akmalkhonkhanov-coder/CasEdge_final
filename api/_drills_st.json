@@ -109,7 +109,12 @@
    },
    "family_h25": "F2",
    "family_src": "словарь:S01",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "объясняет падение выручки ценовой конкуренцией и качеством продукта",
+    "correct": "раскладывает выручку на цену и число покупателей и проверяет, не изменилось ли правило допуска покупателей",
+    "why": "цена и качество в динамике не ухудшались, а падало только число покупателей"
+   }
   },
   {
    "id": "ST-002",
@@ -201,7 +206,12 @@
    "family_h25": "F1",
    "family_src": "словарь:S02",
    "family_conf": "высокая",
-   "family_note": "круг 42, триаж спорных: метка исправлена независимым проходом"
+   "family_note": "круг 42, триаж спорных: метка исправлена независимым проходом",
+   "mehanizm": {
+    "naive": "ставит первой ветку финансовых показателей в вопросе о причинах падения доверия",
+    "correct": "строит ветки из составляющих самого доверия — содержание, источник, канал, состав аудитории",
+    "why": "финансовая отчётность фиксирует результат и не содержит ни одной переменной, объясняющей доверие"
+   }
   },
   {
    "id": "ST-003",
@@ -233,7 +243,13 @@
    "family_h25": "F11",
    "family_src": "словарь:S03",
    "family_conf": "высокая",
-   "family_note": "круг 44: F11 «одно множество под двумя ярлыками» — ветви «fuel» и «variable costs» суть одно множество затрат, разнесённое по разным местам дерева"
+   "family_note": "круг 44: F11 «одно множество под двумя ярлыками» — ветви «fuel» и «variable costs» суть одно множество затрат, разнесённое по разным местам дерева",
+   "mehanizm": {
+    "naive": "объясняет рост издержек подорожанием одной статьи, поместив её и содержащую её группу в разные ветки",
+    "correct": "раскладывает издержки на стоимость единицы и число единиц, следя, чтобы статья не входила в две ветки",
+    "why": "одна и та же статья издержек попадает сразу в две разнесённые ветки дерева",
+    "src": "выведено из s0"
+   }
   },
   {
    "id": "ST-004",
@@ -342,7 +358,12 @@
    },
    "family_h25": "F1",
    "family_src": "словарь:S05",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "строит дерево прибыли и ранжирует заявки по возврату на вложенный капитал",
+    "correct": "выводит критерии отбора из цели распорядителя средств и ранжирует заявки по охвату благополучателей",
+    "why": "у распорядителя бюджета нет выручки, поэтому возврат капитала не является его целью"
+   }
   },
   {
    "id": "ST-005",
@@ -428,7 +449,12 @@
    "family_h25": "F9",
    "family_src": "словарь:S06",
    "family_conf": "высокая",
-   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом"
+   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом",
+   "mehanizm": {
+    "naive": "включает уже уплаченную за актив сумму в сравнение вариантов решения",
+    "correct": "сравнивает варианты по будущим денежным потокам, различающимся между ними",
+    "why": "уплаченная сумма одинакова при всех вариантах и потому их не различает"
+   }
   },
   {
    "id": "ST-006",
@@ -460,7 +486,12 @@
    "family_h25": "F4",
    "family_src": "словарь:S07",
    "family_conf": "спорная",
-   "family_note": "круг 42, триаж: не влезает в десять семей · признак — одиночка: неочевидный драйвер с метрикой внутри ветви"
+   "family_note": "круг 42, триаж: не влезает в десять семей · признак — одиночка: неочевидный драйвер с метрикой внутри ветви",
+   "mehanizm": {
+    "naive": "называет ветки одними ярлыками, не указывая, что именно измеряется внутри каждой",
+    "correct": "называет внутри каждой ветки измеримую величину и период сравнения",
+    "why": "ярлык без метрики не порождает ни одной проверяемой гипотезы"
+   }
   },
   {
    "id": "ST-007",
@@ -529,7 +560,12 @@
    },
    "family_h25": "F2",
    "family_src": "словарь:S10",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "начинает с оценки привлекательности рынка, когда решение о входе уже принято",
+    "correct": "перечисляет способы входа и сравнивает их по скорости, контролю и требуемым вложениям",
+    "why": "привлекательность рынка одинакова для всех способов входа и потому их не различает"
+   }
   },
   {
    "id": "ST-008",
@@ -652,6 +688,11 @@
     },
     "verdict": "The nullification holds in all four cells: premium revenue spans $16.8M to $37.8M and never reaches the board's $40M EBITDA target, so the segment cannot deliver the target even at a 100% margin, and the tree still has to be rebuilt around the non-premium 97% — promo grew 6.9 to 8.7 m units, mid contracted 6.1 to 5.4, and the portfolio is moving down while the strategy claims up. What does not survive is '+50% volume, so the strategy is working'. Volume is one of two factors and the record prices only one year: at the mid price the enlarged segment is worth $25.2M, exactly what the smaller volume is worth at the premium price, so a volume gain says nothing about the segment until the price it was won at is known. The record does not print a price for three years ago, and neither cell here supplies one; what these cells compare is today's segment under two moves, not two points in time.",
     "verdict_scope": "decisive among the two factors of the premium revenue line this pair moves — the segment's own volume and its price per unit — and not a statement about the $40M target itself, which is the board's ask and carries no range or trajectory anywhere in the record"
+   },
+   "mehanizm": {
+    "naive": "проверяет стратегию смещения портфеля по расходам на продвижение и узнаваемости",
+    "correct": "проверяет её по вкладу целевого сегмента в объём и прибыль и по устойчивости источника этого вклада",
+    "why": "продвижение показывает приложенное усилие, а не результат смещения портфеля"
    }
   },
   {
@@ -683,7 +724,12 @@
    },
    "family_h25": "F2",
    "family_src": "словарь:S14",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "строит дерево вокруг предложенной механики оплаты вместо цели, ради которой её меняют",
+    "correct": "строит дерево вокруг причин ухода клиентов и проверяет, закрывает ли предложенная механика главные из них",
+    "why": "предложенная механика — средство, и дерево вокруг средства не проверяет, лучшее ли оно"
+   }
   },
   {
    "id": "ST-010",
@@ -760,7 +806,12 @@
    },
    "family_h25": "F0",
    "family_src": "clean",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "объявляет ловушку в данных — недосумму долей, несопоставимые периоды, скрытый сдвиг структуры — там, где данные её не содержат",
+    "correct": "проверяет каждое подозрение, отклоняет его с указанием опровергающей строки и называет недостающие данные",
+    "why": "натренированный поиск подвоха даёт ложное срабатывание, когда данные чисты"
+   }
   },
   {
    "id": "ST-011",
@@ -858,7 +909,13 @@
    "family_h25": "F11",
    "family_src": "словарь:S04",
    "family_conf": "высокая",
-   "family_note": "круг 44: F11 «одно множество под двумя ярлыками» — «Metropolitan» географического среза и «Urban chains» клиентского — один и тот же покупатель, срез назван дважды"
+   "family_note": "круг 44: F11 «одно множество под двумя ярлыками» — «Metropolitan» географического среза и «Urban chains» клиентского — один и тот же покупатель, срез назван дважды",
+   "mehanizm": {
+    "naive": "ставит параллельными ветками разрез по географии и разрез по типу клиента",
+    "correct": "проверяет, не задаётся ли один признак другим, и оставляет один разрез",
+    "why": "тип клиента определяется географией, поэтому один и тот же разрез назван дважды",
+    "src": "выведено из s0"
+   }
   },
   {
    "id": "ST-012",
@@ -930,7 +987,12 @@
    },
    "family_h25": "F1",
    "family_src": "словарь:S08",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "объявляет критерием величину вклада, а начинает с привычной отраслевой ветки с малым вкладом",
+    "correct": "ранжирует ветки по вкладу в падение и начинает с наибольшего",
+    "why": "начало с малой ветки противоречит собственному объявленному критерию"
+   }
   },
   {
    "id": "ST-013",
@@ -962,7 +1024,12 @@
    "family_h25": "F9",
    "family_src": "словарь:S09",
    "family_conf": "высокая",
-   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом"
+   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом",
+   "mehanizm": {
+    "naive": "углубляется в статью, зафиксированную долгосрочным договором, оставив крупную статью нераскрытой",
+    "correct": "раскладывает крупную статью на ставку, время и число операций, а зафиксированную отбрасывает сразу",
+    "why": "зафиксированная договором статья не менялась и потому не может объяснять прирост"
+   }
   },
   {
    "id": "ST-014",
@@ -1041,7 +1108,12 @@
    },
    "family_h25": "F9",
    "family_src": "словарь:S11",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "объясняет отсутствие закупок работой продавцов и уровнем цены",
+    "correct": "прослеживает путь оплаты до места остановки и находит сторону, чьё разрешение открывает доступ к деньгам",
+    "why": "остановка происходит на шаге доступа к деньгам, а не в продаже или цене"
+   }
   },
   {
    "id": "ST-015",
@@ -1115,7 +1187,12 @@
    "family_h25": "F1",
    "family_src": "словарь:S12",
    "family_conf": "спорная",
-   "family_note": "круг 42, триаж: не влезает в десять семей · признак — одиночка: один ярлык склеивает два явления"
+   "family_note": "круг 42, триаж: не влезает в десять семей · признак — одиночка: один ярлык склеивает два явления",
+   "mehanizm": {
+    "naive": "объединяет сжатие рынка и уход собственных клиентов в одну ветку падения спроса",
+    "correct": "разделяет падение на внешнюю часть — рынок — и внутреннюю — долю — и считает каждую отдельно",
+    "why": "пока обе причины стоят в одной ветке, нельзя сказать, теряется ли доля"
+   }
   },
   {
    "id": "ST-016",
@@ -1194,7 +1271,12 @@
    },
    "family_h25": "F2",
    "family_src": "словарь:S15",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "принимает результат первого года за результат программы и решает по нему",
+    "correct": "строит накопленный результат по годам, где стимул распространяется на растущую базу, и решает по траектории",
+    "why": "стимул охватывает растущую базу, поэтому годовой срез не показывает разворот знака"
+   }
   },
   {
    "id": "ST-017",
@@ -1294,6 +1376,11 @@
     },
     "verdict": "What holds in all four cells is the inversion the slot is built on: expand the chain at $64.0M and 11.5 managers and the new format at $47.0M and 9.1 managers are inadmissible under every cell of this pair, so the two highest NPVs on the sheet, $19.4M and $14.8M, are never the answer, and the answer always has to be searched over subsets rather than read off a row. What does not survive is the $13.8M itself and the $5.2M premium attached to it. Move the franchise onto the online channel's 4.9 managers and the pair needs 9.8 of 8 available, so the search returns the online channel alone at $8.6M — the same figure row-screening produces, which makes the premium a property of the base case and not of the method. Move the online channel onto the new format's $47.0M and the search returns the franchise alone at $5.2M, capex binding this time, not managers. So 'managers are the binding constraint and $9.0M of capex sits idle' is a fact about the printed numbers and not a fact about the problem: one requirement away in either direction and the binding limit changes, and the board should be asked to relax both together or neither.",
     "verdict_scope": "decisive among the two option requirements this pair moves — the online channel's capex and the franchise's manager count — and not a ranking of the capex limit against the manager limit, both of which are held at their printed $40.0M and 8 in every cell"
+   },
+   "mehanizm": {
+    "naive": "отбирает по ограничениям отдельные варианты и берёт лучший уцелевший",
+    "correct": "перебирает совместимые наборы вариантов и берёт набор с наибольшей суммарной отдачей",
+    "why": "варианты независимы, поэтому единицей выбора служит набор, а не отдельная строка"
    }
   },
   {
@@ -1388,7 +1475,12 @@
    "family_h25": "F9",
    "family_src": "словарь:S02",
    "family_conf": "спорная",
-   "family_note": "круг 42, триаж: не влезает в десять семей · признак — K3 ветвь верна, но отвечает на другом уровне решения"
+   "family_note": "круг 42, триаж: не влезает в десять семей · признак — K3 ветвь верна, но отвечает на другом уровне решения",
+   "mehanizm": {
+    "naive": "строит операционное дерево в ответ на вопрос о выборе сегмента",
+    "correct": "строит критерии сравнения сегментов — размер, рост, доступность, способность выиграть — и сравнивает по ним",
+    "why": "операционные показатели применимы ко всем сегментам одинаково и потому их не различают"
+   }
   },
   {
    "id": "ST-019",
@@ -1465,7 +1557,12 @@
    },
    "family_h25": "F1",
    "family_src": "словарь:S13",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "обосновывает решение об инвестиции маржинальной прибылью сегмента",
+    "correct": "считает полную себестоимость сегмента, включая распределяемые затраты, создаваемые самой инвестицией",
+    "why": "инвестиция создаёт новые распределяемые затраты, которых маржинальный расчёт не содержит"
+   }
   },
   {
    "id": "ST-020",
@@ -1496,7 +1593,12 @@
    },
    "family_h25": "F0",
    "family_src": "clean",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "подтверждает чистоту данных и на этом закрывает вопрос выводом об отсутствии потерь",
+    "correct": "подтверждает данные и заменяет метрику на удельную по объёму товара и по выручке",
+    "why": "заданная метрика растёт при уменьшении среднего заказа и потому не отвечает на вопрос об эффективности"
+   }
   },
   {
    "id": "ST-021",
@@ -1594,7 +1696,13 @@
    "family_h25": "F11",
    "family_src": "словарь:S03",
    "family_conf": "высокая",
-   "family_note": "круг 44: F11 «одно множество под двумя ярлыками» — «Partially moved to online» из среза причин и «Offline + online» из среза каналов — те же 11.2% базы"
+   "family_note": "круг 44: F11 «одно множество под двумя ярлыками» — «Partially moved to online» из среза причин и «Offline + online» из среза каналов — те же 11.2% базы",
+   "mehanizm": {
+    "naive": "ставит параллельными ветками ушедших клиентов и перешедших в собственный канал",
+    "correct": "сверяет определения подветок и относит перешедших в собственный канал только к одной ветке",
+    "why": "перешедшие в собственный канал попадают одновременно в ветку оттока и в ветку канала",
+    "src": "выведено из s0"
+   }
   },
   {
    "id": "ST-022",
@@ -1721,7 +1829,12 @@
    },
    "family_h25": "F1",
    "family_src": "словарь:S05",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "ищет убыточных в разрезе клиентов и, не найдя ни одного, закрывает вопрос",
+    "correct": "меняет единицу измерения маржи на заказ и ищет убыточные заказы внутри прибыльных клиентов",
+    "why": "убыток усредняется внутри клиента, пока единицей измерения остаётся клиент"
+   }
   },
   {
    "id": "ST-023",
@@ -1753,7 +1866,12 @@
    "family_h25": "F4",
    "family_src": "словарь:S07",
    "family_conf": "спорная",
-   "family_note": "круг 42, триаж: не влезает в десять семей · признак — одиночка: метрика названа, но физически неизмерима"
+   "family_note": "круг 42, триаж: не влезает в десять семей · признак — одиночка: метрика названа, но физически неизмерима",
+   "mehanizm": {
+    "naive": "называет метрику, данные для которой компания не может получить ни в каком виде",
+    "correct": "называет для каждой метрики источник и проверяет его доступность до того, как ставит ветку",
+    "why": "ветка без достижимого источника не даёт ни одной цифры"
+   }
   },
   {
    "id": "ST-024",
@@ -1826,7 +1944,12 @@
    "family_h25": "F9",
    "family_src": "словарь:S09",
    "family_conf": "спорная",
-   "family_note": "круг 42, триаж: не влезает в десять семей · признак — K5 дефект исполнения дерева — порядок разбора"
+   "family_note": "круг 42, триаж: не влезает в десять семей · признак — K5 дефект исполнения дерева — порядок разбора",
+   "mehanizm": {
+    "naive": "начинает разбор с самой крупной статьи расходов, не сверив её вклад в падение прибыли",
+    "correct": "ранжирует ветки по вкладу в падение и начинает с наибольшего вклада",
+    "why": "крупная статья может почти не двигаться, а порядок задаётся вкладом в изменение, а не размером статьи"
+   }
   },
   {
    "id": "ST-025",
@@ -1893,7 +2016,12 @@
    },
    "family_h25": "F9",
    "family_src": "словарь:S11",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "относит закупающую сторону к ветке исполнения продаж, а низкую долю объясняет незнанием и ценой",
+    "correct": "определяет, кто фактически выбирает продукт в точке выдачи, и ставит эту сторону отдельной ветвью",
+    "why": "выбор делает сторона, отнесённая к исполнению, поэтому остальные ветки не объясняют разрыв"
+   }
   },
   {
    "id": "ST-026",
@@ -1972,7 +2100,12 @@
    },
    "family_h25": "F2",
    "family_src": "словарь:S14",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "останавливается на достигнутой промежуточной цели и продлевает программу без изменений",
+    "correct": "считает денежный результат программы за срок жизни клиента — прирост выручки против стоимости удержания и обслуживания",
+    "why": "снижение оттока было средством ради прибыли, и достижение средства не доказывает выгоды"
+   }
   },
   {
    "id": "ST-027",
@@ -2044,7 +2177,12 @@
    },
    "family_h25": "F2",
    "family_src": "словарь:S01",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "останавливается, найдя несколько подтверждённых причин, не сложив их вклад с общей величиной падения",
+    "correct": "суммирует вклады найденных причин, видит незакрытый остаток и ищет ветку, которой в дереве нет",
+    "why": "подтверждённые причины закрывают меньшую часть падения, а большая остаётся вне дерева"
+   }
   },
   {
    "id": "ST-028",
@@ -2121,7 +2259,12 @@
    },
    "family_h25": "F1",
    "family_src": "словарь:S13",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "объясняет рост стоимости привлечения подорожанием внутри каналов",
+    "correct": "раскладывает сводную стоимость на стоимость по каналам и доли каналов и проверяет сдвиг долей",
+    "why": "внутри каналов стоимость выросла слабо, а сводную величину подняло смещение объёма в дорогой канал"
+   }
   },
   {
    "id": "ST-029",
@@ -2188,7 +2331,12 @@
    },
    "family_h25": "F0",
    "family_src": "clean",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "переносит разрыв показателя между форматами на всю сеть, проверив только правильность расчёта",
+    "correct": "сравнивает форматы в сопоставимых по трафику точках и переносит на сеть уже очищенный разрыв",
+    "why": "формат и расположение совпали, поэтому верно посчитанный разрыв смешивает эффект формата с эффектом места"
+   }
   },
   {
    "id": "ST-030",
@@ -2304,6 +2452,12 @@
     },
     "verdict": "Net growth spans 1 to 45 thousand across the two levers, so what survives is that durability is a statement about the pair and never about the 38, which is only the difference of two numbers of the same order; what does not survive is reading the 61 as the growth - inflow and its three sources are one set, and a tree that carries both covers 122 against 61 arrivals.",
     "verdict_scope": "\"only the difference\" says what the 38 is — a residual of the two totals this pair moves, inflow 61 and outflow 23 — and names no single decisive driver"
+   },
+   "mehanizm": {
+    "naive": "ставит параллельными ветками привлечённых клиентов и прирост базы за период",
+    "correct": "сверяет название собственной ветки с определением прироста в записи и оставляет одну ветку",
+    "why": "обе ветки описывают одно множество, названное двумя разными ярлыками",
+    "src": "выведено из s0"
    }
   },
   {
@@ -2391,7 +2545,12 @@
    "family_h25": "F9",
    "family_src": "словарь:S02",
    "family_conf": "спорная",
-   "family_note": "круг 42, триаж: не влезает в десять семей · признак — K3 то же — другой период"
+   "family_note": "круг 42, триаж: не влезает в десять семей · признак — K3 то же — другой период",
+   "mehanizm": {
+    "naive": "начинает с разбора структуры прошлых продаж перед входом в сегмент, где компания не работала",
+    "correct": "начинает с требований целевого сегмента — цикл закупки, допуск, условия оплаты — и сверяет с ними свои возможности",
+    "why": "в прошлых продажах целевого сегмента нет, поэтому оттуда не приходит ни одного факта о нём"
+   }
   },
   {
    "id": "ST-032",
@@ -2465,7 +2624,12 @@
    "family_h25": "F9",
    "family_src": "словарь:S06",
    "family_conf": "спорная",
-   "family_note": "круг 42, триаж: не влезает в десять семей · признак — K4 sunk cost не в деньгах (время/готовность)"
+   "family_note": "круг 42, триаж: не влезает в десять семей · признак — K4 sunk cost не в деньгах (время/готовность)",
+   "mehanizm": {
+    "naive": "учитывает потраченное время и достигнутую степень готовности как аргумент за продолжение",
+    "correct": "сравнивает варианты по оставшимся до результата затратам и по дальнейшей стоимости владения",
+    "why": "потраченное время не возвращается ни при одном из вариантов и потому их не различает"
+   }
   },
   {
    "id": "ST-033",
@@ -2544,7 +2708,12 @@
    },
    "family_h25": "F1",
    "family_src": "словарь:S08",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "ранжирует сегменты по выручке, объявив критерием величину вклада в падение прибыли",
+    "correct": "ранжирует сегменты по вкладу в падение прибыли и начинает с наибольшего",
+    "why": "порядок по выручке не совпадает с порядком по вкладу в прибыль"
+   }
   },
   {
    "id": "ST-034",
@@ -2605,7 +2774,12 @@
    },
    "family_h25": "F2",
    "family_src": "словарь:S10",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "ранжирует проекты по отдаче и берёт лучшие подряд сверху списка",
+    "correct": "проверяет каждый допустимый набор проектов на все ограничения и берёт лучший из прошедших",
+    "why": "проекты делят общий ограниченный ресурс, поэтому лучшие по отдельности вместе не помещаются"
+   }
   },
   {
    "id": "ST-035",
@@ -2678,7 +2852,12 @@
    },
    "family_h25": "F0",
    "family_src": "clean",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "ищет, где потеряна позиция, приняв на веру, что она потеряна",
+    "correct": "сравнивает собственную динамику с динамикой рынка и проверяет долю на обоих концах периода",
+    "why": "падение вместе с рынком не означает потери позиции, и допущение вопроса остаётся непроверенным"
+   }
   },
   {
    "id": "ST-036",
@@ -2806,7 +2985,12 @@
    },
    "family_h25": "F2",
    "family_src": "словарь:S15",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "принимает годовой итог за результат программы и сворачивает её",
+    "correct": "строит накопленный результат по месяцам и смотрит, в каком порядке наступают эффект и издержка",
+    "why": "выгода наступает сразу, а издержка позже, поэтому годовой срез скрывает знак накопленного результата"
+   }
   },
   {
    "id": "ST-037",
@@ -2864,7 +3048,12 @@
    "family_h25": "F11",
    "family_src": "тело",
    "family_conf": "высокая",
-   "family_note": "круг 44: F11 «одно множество под двумя ярлыками». Дерево выдано готовым: в экзибите рядом стоят «1. Corporate customers» и «2. Customers on an annual contract», обе по 218, строка «Covered by branches 1 and 2» даёт 436. Тождество задано правилом присвоения: «The register assigns corporate status at the moment a customer signs an annual contract, and removes it when the contract lapses; there is no other route into the corporate list». Структурной вложенности нет — ловится только сверкой определений, входное движение «can these two branches be added»."
+   "family_note": "круг 44: F11 «одно множество под двумя ярлыками». Дерево выдано готовым: в экзибите рядом стоят «1. Corporate customers» и «2. Customers on an annual contract», обе по 218, строка «Covered by branches 1 and 2» даёт 436. Тождество задано правилом присвоения: «The register assigns corporate status at the moment a customer signs an annual contract, and removes it when the contract lapses; there is no other route into the corporate list». Структурной вложенности нет — ловится только сверкой определений, входное движение «can these two branches be added».",
+   "mehanizm": {
+    "naive": "складывает две ветки дерева, проверив только их структурную вложенность",
+    "correct": "сверяет определения признаков в записи и убеждается, что множества не совпадают, до сложения",
+    "why": "оба признака присваиваются по одному правилу, поэтому непересечение по форме не означает непересечения по составу"
+   }
   },
   {
    "id": "ST-038",
@@ -2931,7 +3120,12 @@
    },
    "family_h25": "F1",
    "family_src": "словарь:S05",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "делает вывод о закрытии точек по прибыли всей сети",
+    "correct": "спускается до уровня точки и смотрит распределение прибыли по точкам",
+    "why": "прибыль сети есть сумма по точкам, и убыточные точки в ней не видны по построению"
+   }
   },
   {
    "id": "ST-039",
@@ -2963,7 +3157,12 @@
    "family_h25": "F9",
    "family_src": "словарь:S09",
    "family_conf": "спорная",
-   "family_note": "круг 42, триаж: не влезает в десять семей · признак — K5 то же — точка остановки"
+   "family_note": "круг 42, триаж: не влезает в десять семей · признак — K5 то же — точка остановки",
+   "mehanizm": {
+    "naive": "останавливается, назвав статью расходов, в которой произошёл рост",
+    "correct": "раскладывает эту статью на ставку, объём и структуру и называет, какая из них сдвинулась",
+    "why": "статья указывает место роста, а не причину, и по ней нельзя назвать действие"
+   }
   },
   {
    "id": "ST-040",
@@ -3035,7 +3234,12 @@
    },
    "family_h25": "F9",
    "family_src": "словарь:S11",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "проверяет, все ли участники плана названы и верно ли описаны их роли",
+    "correct": "сверяет для каждого участника месяц вовлечения по плану с месяцем, в который его результат требуется",
+    "why": "участник назван верно, но поставлен позже шага, который зависит от его результата"
+   }
   },
   {
    "id": "ST-041",
@@ -3159,6 +3363,12 @@
     },
     "verdict": "What survives is the identity the slot is built on - Profitable 64 = Large 64, so the 315 unprofitable are exactly the 112 Mid plus the 203 Small, and the trim takes the service bill from $15,536.9k to $2,624k with no assumption added. What does not survive is any profit statement built on that trim: the exhibit carries revenue and cost of service and no margin rate, so the $50.3M the trim gives up - 46.4% of $108.5M - cannot be netted against the cost it releases. The rate lever is bounded by the same record: the whole spread printed is 41.1 - 40.8 = $0.3k per customer, worth $73.7k on the full book against the trim's $12.9M, and $60.9k of that $73.7k is the Small group's saving - which is why the two moves together save less than the two savings added, the interaction being exactly 203 x $0.3k, the saving the trim has already deleted.",
     "verdict_scope": "\"no margin rate\" is a statement about the four columns of this exhibit, not a claim that Blythmore has no margin; the cost-side count is what the record supports"
+   },
+   "mehanizm": {
+    "naive": "ставит параллельными ветками крупных клиентов и прибыльных клиентов",
+    "correct": "проверяет по данным, определяется ли прибыльность размером, и объединяет ветки при совпадении множеств",
+    "why": "стоимость обслуживания не зависит от размера, поэтому обе ветки описывают одно множество",
+    "src": "выведено из s0"
    }
   },
   {
@@ -3233,7 +3443,12 @@
    "family_h25": "F9",
    "family_src": "словарь:S06",
    "family_conf": "спорная",
-   "family_note": "круг 42, триаж: не влезает в десять семей · признак — K4 то же — репутационное обязательство"
+   "family_note": "круг 42, триаж: не влезает в десять семей · признак — K4 то же — репутационное обязательство",
+   "mehanizm": {
+    "naive": "учитывает публично данное обещание как аргумент против сворачивания",
+    "correct": "сравнивает варианты только по будущим последствиям, отбросив уже понесённый репутационный урон",
+    "why": "слово уже сказано, и урон одинаков при обоих решениях, поэтому их не различает"
+   }
   },
   {
    "id": "ST-043",
@@ -3306,7 +3521,12 @@
    },
    "family_h25": "F0",
    "family_src": "clean",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "объявляет победителя по метрике, значения которой у вариантов совпадают",
+    "correct": "проверяет разброс метрики между вариантами и вводит различающие метрики при нулевом разбросе",
+    "why": "метрика с нулевым разбросом не разделяет варианты, как бы точно она ни была посчитана"
+   }
   },
   {
    "id": "ST-044",
@@ -3372,7 +3592,12 @@
    "family_h25": "F9",
    "family_src": "словарь:S08",
    "family_conf": "высокая",
-   "family_note": "ревью2: критерий верен, величина верна — рычаг не тот"
+   "family_note": "ревью2: критерий верен, величина верна — рычаг не тот",
+   "mehanizm": {
+    "naive": "ранжирует инициативы по размеру годового эффекта",
+    "correct": "ранжирует инициативы по цене пропуска срока, отделяя обратимые от необратимой",
+    "why": "при последовательном исполнении решает не величина выигрыша, а величина потери от отсрочки"
+   }
   },
   {
    "id": "ST-045",
@@ -3437,7 +3662,12 @@
    },
    "family_h25": "F2",
    "family_src": "словарь:S10",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "выбирает лучший вариант расширения мощности из предложенного списка",
+    "correct": "достраивает ось способами закрыть разрыв, включая отказ от расширения, и только потом сравнивает",
+    "why": "ранжирование внутри неполного списка не способно обнаружить пропущенный вариант"
+   }
   },
   {
    "id": "ST-046",
@@ -3510,7 +3740,12 @@
    },
    "family_h25": "F1",
    "family_src": "словарь:S12",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "подтверждает названную менеджментом внешнюю причину отраслевой статистикой по каналу",
+    "correct": "проверяет, какая часть падения произведена собственным решением о распределении продаж по каналам",
+    "why": "верный факт о сокращении канала не устанавливает, что причина падения внешняя"
+   }
   },
   {
    "id": "ST-047",
@@ -3575,7 +3810,12 @@
    },
    "family_h25": "F2",
    "family_src": "словарь:S14",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "проверяет арифметику предложенного варианта повышения цены",
+    "correct": "проверяет, на каком горизонте максимизируется прибыль, и сравнивает варианты на объявленном советом горизонте",
+    "why": "расхождение лежит в целевой функции, а не в счёте"
+   }
   },
   {
    "id": "ST-048",
@@ -3642,7 +3882,12 @@
    },
    "family_h25": "F2",
    "family_src": "словарь:S15",
-   "family_conf": "высокая"
+   "family_conf": "высокая",
+   "mehanizm": {
+    "naive": "принимает решение по накопленному итогу проекта за весь срок",
+    "correct": "принимает решение по траектории накопленного результата и по точке, после которой выход невозможен",
+    "why": "положительный итог за горизонт не говорит, что происходит в середине пути"
+   }
   },
   {
    "id": "ST-049",
@@ -3722,6 +3967,11 @@
    },
    "reference": {
     "en": "**Start with the composition of the late payments, because the proposal removes customers while the evidence counts bills.**\n\nThe table gives 50% and 40% as shares of **bills paid late**, and the team converts them into a block of **6.0M people** to be removed. Those are two different objects. If a stable minority inside each band is late every month, removal is aimed at them and the saving is real and concentrated. If lateness rotates across the band, removal deletes mostly customers who pay — the company loses **$75** bills at a **25%** margin from people who cost it nothing, and keeps the collections problem in whatever cohort remains.\n\nThe book puts the question and refuses to settle it: *\"Is it the same 50 percent who pay late every month? — Not necessarily. You can assume that everyone in that group has been late paying the bill at some point, some more than others.\"* That sentence is the case: the group is defined by an event, not by a type.\n\nOnly after that does the arithmetic mean anything, and only then do the cheaper levers get priced — there is **no late fee** at all today, and collections run every month at a **$50** cost per customer chased.\n\n**Source:** `Case-in-Point-2013`, the wireless late-payment case: 1% of the base in the 500–549 band late on 50% of bills · 9% of the base in the next band late on 40% · 6 million customers proposed for removal out of 60 million · average bill $40 overall and $75 in these bands · $50 to collect from one late-paying customer · 25% profit margin · no late fee charged."
+   },
+   "mehanizm": {
+    "naive": "умножает маржу на число клиентов худших кредитных полос и считает экономию",
+    "correct": "устанавливает, к чему относится доля просрочек — к счетам или к людям — прежде чем умножать",
+    "why": "доля от счетов не переносится на число людей без данных о повторяемости"
    }
   },
   {
@@ -3820,6 +4070,11 @@
    },
    "reference": {
     "en": "**Conclusion.** Start by establishing who the **$150,000** was measured on — it belongs to alumni admitted under the **$50,000** price, and the proposed model's whole advantage rests on carrying it across to a class the proposed model itself creates.\n\n**Facts.** The per-student mechanics are sound on both sides: **$50,000** less **34%** aid is **$33,000** a year, **4** years, **$132,000**; and because the **5%** commitment equals the **5%** discount rate, the proposed model's per-student value equals the graduate's salary exactly. That equality is the exposure: any error in the salary passes through undamped. The salary on the page is today's, and the policy that produces the **$180M** is the same policy that moves applicants from **2,000** to **3,600**. The gap the proposal is sold on — **$180M** against the current **$132M** — is **$48M** a class, **36.4%** above today's.\n\n**Re-measured on the body the new price attracts** — **50%** social science at **$100k**, **25%** STEM at **$175k**, **25%** humanities at **$75k** — the average is **$112,500**, so the per-student value is **$112,500** and the class is worth **1,200** × **$112,500** = **$135M** against the current **$132M**: a **2%** difference. The decision is a toss-up on money, and has to be made on mission and on cash.\n\n**Risk.** Internal: the college has no measurement of the new body's earnings other than a district survey, so the **$112,500** is a forecast and not an observation. External: a lifetime claim on graduate income invites scrutiny from accreditors and the Department of Education, and the claim is only worth what can be collected across a career.\n\n**Next step.** Ask admissions for the projected field-of-study mix and the salary attached to each field before any comparison is presented to the board — and ask finance to re-run the class comparison on that mix rather than on current alumni.\n\n**Source:** Darden Case Book 2024-25, Hooville College, pp. 53–60 — Exhibit 1 (2,000/3,600 applicants, 50%/33% acceptance, $50,000/$0 tuition, 34% financial aid, note \"Average alumni salary for Hooville College is currently $150,000 per year\"), Question 1 ($33,000 × 4 = $132,000; $150,000 × 0.05 / 0.05 = $150,000; $132M and $180M per class), Exhibit 2 and Question 2 (50% social science $100k, 25% STEM $175k, 25% humanities $75k → $112.5k; 1,200 × $112,500 = $135M, a 2% increase)."
+   },
+   "mehanizm": {
+    "naive": "сравнивает поток от новой модели с потоком сегодняшней платы",
+    "correct": "сравнивает только после проверки, на одной ли когорте измерены доход выпускника и плата студента",
+    "why": "две суммы, посчитанные на разных поколениях людей, не сопоставимы"
    }
   }
  ],

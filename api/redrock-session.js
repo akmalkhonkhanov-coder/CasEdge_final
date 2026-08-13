@@ -16,6 +16,7 @@
 //   game  → sanitized render slice {objective,study_md,exhibits(auto),analysis,report,cases,fields}
 //   grade → {gameId, fieldId, value} graded server-side → {status, feedback, correctAnswer?, naiveReason?}
 
+const crypto = require('crypto');
 const { verifyUserCached, rateLimitedScoped } = require('./_auth.js');
 const { checkAndConsume, refusalMessage } = require('./_entitlements.js');
 const GAMES_DATA = require('./redrock-games.json');
@@ -313,6 +314,43 @@ async function gradeGraphJustify(rec, value) {
   return { status: j.pass ? 'correct' : 'wrong', feedback: j.feedback || '' };
 }
 
+/* ───────────────────────── Analysis review: ticket proof ────────────────────
+   Долг dev №1. Разбор Analysis (`analysis_review`: верный ответ, наив, урок)
+   лежит в теле игры и НИКОГДА не уезжает в санитайзере — это спойлер. Отдаём
+   его отдельной ручкой и только тому, кто вопросы УЖЕ сдал.
+
+   «Сдал» доказывается не словом клиента. На каждое оценивание аналитического
+   поля сервер возвращает БИЛЕТ — HMAC(userId|gameId|fieldId) своим секретом.
+   Билет нельзя подделать, не имея ключа, и нельзя получить, не пройдя через
+   grade. Разбор отдаётся, только когда предъявлены валидные билеты на ВСЕ
+   аналитические поля игры; не хватило хотя бы одного — 403 и число недостающих.
+   Ключ берётся так же, как в seawolf-session.js: отдельная переменная, а при
+   её отсутствии ANTHROPIC_API_KEY, который уже настроен и наружу не уходит.
+   HMAC ключ не раскрывает. */
+function rkSecret() {
+  const s = process.env.REDROCK_SECRET || process.env.ANTHROPIC_API_KEY;
+  if (!s) throw new Error('no signing key: set REDROCK_SECRET');
+  return s;
+}
+function rkTicket(userId, gameId, fieldId) {
+  return crypto.createHmac('sha256', rkSecret())
+    .update(String(userId) + '|' + String(gameId) + '|' + String(fieldId))
+    .digest('base64url');
+}
+function rkTicketValid(userId, gameId, fieldId, got) {
+  if (typeof got !== 'string' || !got) return false;
+  const want = rkTicket(userId, gameId, fieldId);
+  // Длины равны по построению, но сравнение всё равно постоянного времени.
+  const a = Buffer.from(want), b = Buffer.from(got);
+  return a.length === b.length && crypto.timingSafeEqual(a, b);
+}
+// Все аналитические поля игры — тот же обход, что и в fieldMap, но только ключи.
+function analysisFieldIds(game) {
+  const ids = [];
+  for (const q of (game.analysis || [])) for (const p of (q.parts || [])) ids.push('a:' + p.key);
+  return ids;
+}
+
 /* ───────────────────────── adaptive pick ─────────────────────────────────── */
 function pickGame(body) {
   const games = GAMES_DATA.games || [];
@@ -395,9 +433,38 @@ export default async function handler(req, res) {
       if (!g) return res.status(400).json({ error: { message: 'Unknown game.' } });
       const rec = fieldMap(g).get(String(body.fieldId));
       if (!rec) return res.status(400).json({ error: { message: 'Unknown field.' } });
-      if (rec.input === 'justify') return res.status(200).json(await gradeGraphJustify(rec, body.value));
-      if (rec.input === 'numeric') return res.status(200).json(gradeNumeric(rec, body.value));
-      return res.status(200).json(gradeExact(rec, body.value)); // dropdown | choice
+      const fid = String(body.fieldId);
+      let out;
+      if (rec.input === 'justify') out = await gradeGraphJustify(rec, body.value);
+      else if (rec.input === 'numeric') out = gradeNumeric(rec, body.value);
+      else out = gradeExact(rec, body.value); // dropdown | choice
+      // Билет на разбор выдаётся ТОЛЬКО аналитическим полям и ТОЛЬКО когда поле
+      // действительно оценено (ungraded — это несостоявшаяся сдача, не сдача).
+      if (fid.indexOf('a:') === 0 && out && out.status && out.status !== 'ungraded') {
+        try { out.ticket = rkTicket(userId, g.id, fid); } catch (e) { /* без ключа просто нет билета */ }
+      }
+      return res.status(200).json(out);
+    }
+    if (body.action === 'review') {
+      // Разбор Analysis. Прав не списывает: за игру уже списано на первом grade.
+      if (await rateLimited(userId, sbUrl, sbKey, token)) return res.status(429).json({ error: { message: 'Too many requests. Please slow down.' } });
+      const g = gameById(body.gameId);
+      if (!g) return res.status(400).json({ error: { message: 'Unknown game.' } });
+      const need = analysisFieldIds(g);
+      const tickets = (body.tickets && typeof body.tickets === 'object') ? body.tickets : {};
+      const missing = need.filter(fid => !rkTicketValid(userId, g.id, fid, tickets[fid]));
+      if (missing.length) return res.status(403).json({
+        error: { message: 'Разбор открывается после того, как сданы все вопросы Analysis.', code: 'review_locked' },
+        locked: true, missing: missing.length, total: need.length
+      });
+      const rev = Array.isArray(g.analysis_review) ? g.analysis_review : [];
+      return res.status(200).json({
+        review: rev.map(r => ({
+          q: r.q, key: r.key, answer: r.answer,
+          trap: (r.trap === undefined ? null : r.trap),
+          lesson: r.lesson || ''
+        }))
+      });
     }
 
     return res.status(400).json({ error: { message: 'Unknown action.' } });
