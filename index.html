@@ -1347,6 +1347,17 @@
     .rk-q { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--on-dark); margin: 8px 0 6px; }
     .rk-note { font-size: 12.5px; color: var(--on-dark-soft); line-height: 1.5; margin: 8px 0 14px; }
     .rk-note.rk-amber { color: var(--accent-amber); }
+    .rk-rv { margin: 16px 0 4px; text-align: left; }
+    .rk-rv-title { font-family: var(--serif); font-size: 16px; font-weight: 600; color: var(--on-dark); margin-bottom: 8px; }
+    .rk-rv-item { background: var(--sv-fill); border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; }
+    .rk-rv-head { font-size: 12.5px; font-weight: 600; color: var(--on-dark); margin-bottom: 4px; }
+    .rk-rv-key { color: var(--on-dark-soft); font-weight: 500; }
+    .rk-rv-line { font-size: 12.5px; color: var(--on-dark-soft); line-height: 1.55; }
+    .rk-rv-line span { display: inline-block; min-width: 54px; color: var(--on-dark-soft); opacity: .75; }
+    .rk-rv-line b { color: var(--on-dark); }
+    .rk-rv-ok { color: var(--accent-teal); font-weight: 600; }
+    .rk-rv-trap { color: var(--accent-amber); font-weight: 600; }
+    .rk-rv-miss { color: var(--on-dark-soft); font-weight: 600; }
     .rk-pre { white-space: pre-wrap; font-size: 12.5px; color: var(--on-dark-soft); font-family: var(--mono); }
     .rk-exh { margin-top: 14px; }
     .rk-field { margin: 12px 0; padding: 10px 12px; border: 1px solid var(--sv-line); border-radius: 10px; background: rgba(255,255,255,.015); transition: border-color .2s; }
@@ -5798,6 +5809,7 @@ async function startRedrock() {
   solve = {
     rk: true, game: game, phase: 'study', qIndex: 0, reportStep: 'written',
     rkVals: {}, rkGraded: {}, rkMeta: {}, revealed: [],
+    rkTickets: {}, rkReview: null, rkReviewBusy: false,
     journal: [], calcLog: [],
     limitS: (game.est_minutes || 30) * 60, timerId: null, startMs: null
   };
@@ -5960,6 +5972,10 @@ async function rkCheck(fieldId) {
     const r = await rkApi('grade', { gameId: solve.game.id, fieldId: fieldId, value: value });
     solve.rkGraded[fieldId] = r.status || 'wrong';
     solve.rkMeta[fieldId] = { correct: r.correctAnswer, naiveReason: r.naiveReason, feedback: r.feedback };
+    // Билет на разбор Analysis: сервер выдаёт его на оценённое аналитическое
+    // поле. Разбор открывается только по полному набору билетов, поэтому
+    // потерять билет значит потерять разбор: кладём сразу, как пришёл.
+    if (r.ticket) solve.rkTickets[fieldId] = r.ticket;
   } catch (e) { solve.rkGraded[fieldId] = 'ungraded'; rkToast(e.message); }
   renderSolve();
 }
@@ -5997,6 +6013,11 @@ function rkAnalysis(inner, foot) {
       <div class="rk-exh">${(g.exhibits || []).map(rkExhibit).join('')}</div>
     </div><div class="sv-journal" id="svJournal"></div></div>`;
   const last = solve.qIndex >= qs.length - 1;
+  // Разбор показывается на последнем вопросе и только по полному набору билетов.
+  if (last && rkAnalysisSubmittedAll()) {
+    const host = inner.querySelector('.sv-layout-main');
+    if (host) host.insertAdjacentHTML('beforeend', rkReviewHTML());
+  }
   foot.innerHTML =
     `<button class="sv-back" onclick="${solve.qIndex > 0 ? 'solve.qIndex--;renderSolve()' : "solve.phase='study';renderSolve()"}">&larr; Back</button>
      <button class="sv-next" onclick="${last ? "solve.phase='report';solve.reportStep='written';renderSolve()" : 'solve.qIndex++;renderSolve()'}">${last ? 'Go to report &rarr;' : 'Next question &rarr;'}</button>`;
@@ -6073,6 +6094,49 @@ function rkCases(inner, foot) {
 }
 
 /* ── RESULT ───────────────────────────────────────────────────────────────── */
+/* ── РАЗБОР ANALYSIS ───────────────────────────────────────────────────────
+   Долг dev №1. Разбор живёт на сервере и приходит по билетам, которые сервер
+   выдал за оценённые поля. Кнопка появляется, только когда сданы ВСЕ вопросы
+   Analysis: до этого разбор это спойлер, а не обучение. */
+function rkAnalysisSubmittedAll() {
+  const g = solve.game, need = [];
+  (g.analysis || []).forEach(q => (q.parts || []).forEach(p => need.push('a:' + p.key)));
+  return need.length > 0 && need.every(f => !!solve.rkTickets[f]);
+}
+async function rkLoadReview() {
+  if (solve.rkReviewBusy || solve.rkReview) { renderSolve(); return; }
+  solve.rkReviewBusy = true; renderSolve();
+  try {
+    const r = await rkApi('review', { gameId: solve.game.id, tickets: solve.rkTickets });
+    solve.rkReview = (r && r.review) || [];
+  } catch (e) { rkToast(e.message); }
+  solve.rkReviewBusy = false; renderSolve();
+}
+function rkReviewHTML() {
+  if (solve.rkReviewBusy) return '<div class="rk-note">Loading breakdown...</div>';
+  if (!rkAnalysisSubmittedAll()) {
+    return '<div class="rk-note">The Analysis breakdown unlocks once every Analysis question has been submitted.</div>';
+  }
+  if (!solve.rkReview) {
+    return '<div class="gi-actions" style="margin-top:14px;"><button class="gi-start" onclick="rkLoadReview()">Show Analysis breakdown</button></div>';
+  }
+  if (!solve.rkReview.length) return '<div class="rk-note">No breakdown recorded for this game.</div>';
+  const rows = solve.rkReview.map(r => {
+    const st = solve.rkGraded['a:' + r.key] || '';
+    const tag = st === 'correct' ? '<span class="rk-rv-ok">correct</span>'
+      : st === 'naive' ? '<span class="rk-rv-trap">trap hit</span>'
+      : st ? '<span class="rk-rv-miss">missed</span>' : '';
+    const trap = (r.trap === null || r.trap === undefined) ? '' :
+      `<div class="rk-rv-line"><span>Trap</span> <b>${esc(String(r.trap))}</b>${r.lesson ? ' ' + rkInline(r.lesson) : ''}</div>`;
+    return `<div class="rk-rv-item">
+        <div class="rk-rv-head">Q${esc(String(r.q))} <span class="rk-rv-key">${esc(String(r.key))}</span> ${tag}</div>
+        <div class="rk-rv-line"><span>Answer</span> <b>${esc(String(r.answer))}</b></div>
+        ${trap}
+      </div>`;
+  }).join('');
+  return `<div class="rk-rv"><div class="rk-rv-title">Analysis breakdown</div>${rows}</div>`;
+}
+
 function rkResult(inner, foot) {
   if (solve.timerId) { clearInterval(solve.timerId); solve.timerId = null; }
   const g = solve.game, ids = [];
@@ -6100,6 +6164,7 @@ function rkResult(inner, foot) {
       <div class="rk-score-sub">${esc(g.title)} - ${correct}/${total} correct${naive ? `, ${naive} naïve trap${naive > 1 ? 's' : ''} hit` : ''}</div>
       <div class="rk-res-table">${rows}</div>
       ${naive ? '<div class="rk-note rk-amber">Naïve traps are the core Redrock test - each one is a specific mis-step the real assessment penalises. Review the correct figures before the next game.</div>' : ''}
+      ${rkReviewHTML()}
       <div class="gi-actions" style="margin-top:22px;">
         <button class="gi-start" onclick="startRedrock()">Next game &rarr;</button>
         <button class="gi-back" style="margin-top:10px;" onclick="showScreen('mode')">Back to menu</button>
