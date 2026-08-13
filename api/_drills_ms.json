@@ -2559,6 +2559,330 @@
    "family_h25": "F0",
    "family_src": "clean",
    "family_conf": "высокая"
+  },
+  {
+   "id": "MS-049",
+   "title": "Twenty-Six Firms On The List",
+   "difficulty": "Hard",
+   "type": "Trap",
+   "focus": "M20(a) потолок исполнителей вместо срока программы",
+   "time": "8 min",
+   "render": {
+    "exhibits": [],
+    "interactive": [
+     "input_number"
+    ]
+   },
+   "prompt": "A regulator has ordered every filling station holding a pre-1995 underground fuel tank to have that tank dug out and replaced, and has given the trade 5 years to finish. The country has 21,000 filling stations and 60% of them still hold a pre-1995 tank. Digging out and replacing a tank is priced at $180,000 per site. The work is contaminated-ground work, and only firms entered on the national hazardous-ground register may carry it out: the register lists 26 firms, and a firm completes about 15 sites a year. Estimate the annual market in dollars for this work.",
+   "exhibit": null,
+   "step_prompts": [
+    "Segment the market and state the counting base explicitly (people / households / firms / installed base) with a one-line hypothesis.",
+    "Name each anchor as a number before computing (k=3 estimate-anchors).",
+    "Compute the estimate along the main chain and state the market size in $.",
+    "Triangulate with an independent second path (a different data source, not the same chain reordered) and reconcile — gap should be within ~2x; name the more reliable path with justification.",
+    "Sanity-check: normalize per capita / per unit aloud and give a plausibility verdict.",
+    "Last mile: what the figure means for a contractor deciding whether to bid for this programme."
+   ],
+   "checklist": {
+    "en": "- GATE: result in [$23,400,000, $210,600,000]\n- P1: **the five-year deadline is refused as the volume driver, because the work can only be invoiced by firms on the register**, and the annual figure is built from what those firms can complete; billing 2,520 sites a year because the deadline asks for them = P1 not credited, whatever the arithmetic\n- P2: 3 anchors as numbers before the calculation\n- P3: second path from a different source (people employed in licensed tank removal x billings per operative), ratio in [1.00x, 2.00x] (reference 1.02x) + the more reliable path named\n- P4: translated into a decision - a bidder prices against 390 sites a year of national capacity, and the queue, not the deadline, is what a new entrant is buying into\n- S: 12,600 sites at 390 a year is 32 years of work, not 5 - the deadline is unmeetable on the current register, and a schedule nobody can meet is not a revenue line",
+    "ru": "- GATE: результат в [$23,400,000, $210,600,000]\n- P1: **пятилетний срок отвергнут как драйвер объёма, потому что выставить счёт может только фирма из реестра**, и годовая величина построена от того, что эти фирмы успевают; 2,520 площадок в год потому, что этого требует срок = P1 не зачтён при любой арифметике\n- P2: 3 якоря числом до расчёта\n- P3: второй путь из другого источника (занятые в лицензированном демонтаже x выработка на человека), ratio в [1.00x, 2.00x] (эталон 1.02x) + назван надёжнейший путь\n- P4: перевод в решение - претендент считает цену против 390 площадок национальной мощности в год, и покупает он очередь, а не срок\n- S: 12,600 площадок по 390 в год - это 32 года работы, а не 5; срок на нынешнем реестре недостижим, а график, который никто не может выполнить, выручкой не является"
+   },
+   "reference": {
+    "en": "The market is $70,200,000 a year: price what the 26 firms on the register can complete, not what the five-year deadline demands.\nAllowed anchors (revealed on request, not upfront):\n  • Filling stations: 21,000 [A3]\n  • Share still holding a pre-1995 tank: 60% [A4]\n  • Price per site: $180,000 [A5]\n  • Firms on the hazardous-ground register: 26 [A3]\n  • Sites one firm completes a year: 15 [A4]\n  • *For the second path:* operatives working in licensed tank removal: 470 [A3]\n  • *For the second path:* annual billings per operative: $153,000 [A3]\n\nReference chain:\nin_scope = 21_000 * D('0.60')   # 12,600 sites carrying a pre-1995 tank\nper_year = in_scope / 5         # 2,520 sites a year the deadline asks for\nnaive    = per_year * 180_000   # 453,600,000  <- the deadline priced out\ncapacity = 26 * 15              # 390 sites a year the register can deliver\nmarket   = capacity * 180_000   # 70,200,000   <- market\nalt      = 470 * 153_000        # 71,910,000   <- second path, sector employment\nratio    = alt / market         # 1.02\ngap      = naive - market       # 383,400,000\nmult     = naive / market       # 6.46\nReference answer: $70,200,000 · Corridor: [$23,400,000 … $210,600,000]\n\nThe order names a date, the register names a rate, and only one of them can be invoiced: pricing the deadline overstates the market by $383,400,000, that is 6.46x the $70,200,000 the licensed firms can bill in a year.",
+    "ru": "Рынок - $70,200,000 в год: считать то, что успевают 26 фирм реестра, а не то, чего требует пятилетний срок.\nРазрешённые якоря (выдаются по запросу, не сразу):\n  • АЗС: 21,000 [A3]\n  • Доля с баком до 1995 года: 60% [A4]\n  • Цена за площадку: $180,000 [A5]\n  • Фирм в реестре опасных грунтов: 26 [A3]\n  • Площадок на фирму в год: 15 [A4]\n  • *Для второго пути:* занятых в лицензированном демонтаже баков: 470 [A3]\n  • *Для второго пути:* выработка на человека в год: $153,000 [A3]\n\nЭталонная цепочка:\nin_scope = 21_000 * D('0.60')   # 12,600 площадок с баком до 1995 года\nper_year = in_scope / 5         # 2,520 площадок в год требует срок\nnaive    = per_year * 180_000   # 453,600,000  <- срок, посчитанный в деньгах\ncapacity = 26 * 15              # 390 площадок в год может дать реестр\nmarket   = capacity * 180_000   # 70,200,000   <- рынок\nalt      = 470 * 153_000        # 71,910,000   <- второй путь, занятость отрасли\nratio    = alt / market         # 1.02\ngap      = naive - market       # 383,400,000\nmult     = naive / market       # 6.46\nЭталон: $70,200,000 · Коридор: [$23,400,000 … $210,600,000]\n\nПредписание называет дату, реестр называет темп, и выставить счёт можно только по одному из них: цена срока даёт завышение на $383,400,000, то есть 6.46x от $70,200,000, которые лицензированные фирмы способны выставить за год."
+   },
+   "provoked": {
+    "en": "the deadline reads as the demand schedule: 12,600 tanks have to go in 5 years, so 2,520 a year looks like the market by definition. The register line arrives as procurement colour - who is allowed to do the work - rather than as the number that decides how much work gets done.",
+    "ru": "срок читается как график спроса: 12,600 баков надо снять за 5 лет, значит 2,520 в год - это и есть рынок по определению. Строка про реестр приходит как деталь закупки - кому разрешено работать, - а не как величина, решающая, сколько работы будет сделано."
+   },
+   "steps": [
+    {
+     "prompt": "Final market-size estimate, $",
+     "kind": "number",
+     "answer": "70200000",
+     "tolerance": "corridor [$23,400,000 … $210,600,000]"
+    },
+    {
+     "prompt": "Independent second-path triangulation + one-sentence recommendation",
+     "kind": "text",
+     "answer": "reference answer $70,200,000; second path within ~2x",
+     "tolerance": "judged"
+    }
+   ],
+   "family_h25": "F4",
+   "family_src": "тело",
+   "family_conf": "высокая",
+   "family_note": "F4 «неназванное ограничение»: объём связывает не число, а условие допуска к работе. Тело говорит условие дословно - «only firms entered on the national hazardous-ground register may carry it out» - и тут же даёт ставку этого условия: «the register lists 26 firms, and a firm completes about 15 sites a year». Ход тот же, что у F4 в соседних библиотеках (BR-001, SY-013, CI-033): считается не спрос, а то, что разрешено и физически выполнимо."
+  },
+  {
+   "id": "MS-051",
+   "title": "What The Members Spend",
+   "difficulty": "Hard",
+   "type": "Trap",
+   "focus": "M18(a) якорь снят с самоотобранной группы",
+   "time": "8 min",
+   "render": {
+    "exhibits": [],
+    "interactive": [
+     "input_number"
+    ]
+   },
+   "prompt": "Estimate the annual market for veterinary wellness plans in one country. 24,000,000 households own a pet. The plans are sold today by three chains, whose 480,000 plan members pay $620 a year for the plan. A national survey ranks pet-owning households by annual veterinary spend into ten equal groups of 2,400,000 households: the top group spends $940 a year at the vet, the next group $410, and the average across all pet-owning households is $185.",
+   "exhibit": null,
+   "step_prompts": [
+    "Segment the market and state the counting base explicitly (people / households / firms / installed base) with a one-line hypothesis.",
+    "Name each anchor as a number before computing (k=3 estimate-anchors).",
+    "Compute the estimate along the main chain and state the market size in $.",
+    "Triangulate with an independent second path (a different data source, not the same chain reordered) and reconcile — gap should be within ~2×; name the more reliable path with justification.",
+    "Sanity-check: normalize per capita / per household aloud and give a plausibility verdict.",
+    "Last mile: what the figure means for a chain deciding how far to push the plan."
+   ],
+   "checklist": {
+    "en": "- GATE: result ∈ [$496,000,000, $4,464,000,000]\n- P1: **the $620 is read as a property of the households that bought, not as a rate for a household picked at random** — the base is cut to the group whose vet spend clears the plan price; multiplying all 24,000,000 households by $620 = P1 not credited\n- P2: 3 anchors as numbers before the calculation\n- P3: second path from a different source (pet insurance policies in force × average premium), ratio ∈ [1.05×, 2.00×] (reference 1.07×) + the more reliable path named\n- P4: translated into a decision — the plan is a top-decile product, so the growth question is whether the price can be cut to reach the $410 group, not how many households own a pet\n- S: «a $620 plan against $185 of average annual vet spend» → a household cannot buy a plan that costs 3.35x everything it spends at the vet",
+    "ru": "- GATE: результат ∈ [$496,000,000, $4,464,000,000]\n- P1: **$620 прочитаны как свойство купивших домохозяйств, а не как ставка для случайного домохозяйства** — база сужена до группы, чей расход у ветеринара перекрывает цену плана; умножение всех 24,000,000 домохозяйств на $620 = P1 не зачтён\n- P2: 3 якоря числом до расчёта\n- P3: второй путь из другого источника (действующие полисы страхования питомцев × средняя премия), ratio ∈ [1.05×, 2.00×] (эталон 1.07×) + назван надёжнейший путь\n- P4: перевод в решение — план есть продукт верхней децили, поэтому вопрос роста в том, можно ли снизить цену до группы с $410, а не в том, сколько домохозяйств держат питомца\n- S: «план за $620 против $185 среднего годового расхода у ветеринара» → домохозяйство не может купить план, стоящий 3.35x всего, что оно тратит у ветеринара"
+   },
+   "reference": {
+    "en": "Exhibit:\n| Line | Figure |\n|---|---|\n| Pet-owning households | 24,000,000 |\n| Households in each survey group | 2,400,000 |\n| Plan members today | 480,000 |\n| Plan price | $620 / year |\n| Top group, annual vet spend | $940 |\n| Next group, annual vet spend | $410 |\n| Average pet-owning household | $185 |\n\n  • *For the second path:* pet insurance policies in force: ~1,900,000 [A3]\n  • *For the second path:* average annual premium: ~$840 [A3]\n\nReference chain:\nnaive  = 24_000_000 * 620   # 14,880,000,000  <- every pet-owning household at the members' rate\nmarket = 2_400_000 * 620    # 1,488,000,000   <- market: the group whose vet spend clears $620\nalt    = 1_900_000 * 840    # 1,596,000,000   <- second path, insurance in force\nratio  = alt / market       # 1.07\n\nThe $620 was measured on the households that walked in and signed, and only the top group spends more than that at the vet at all; applying it to everyone is an overstatement of $13,392,000,000 and lands at 10.00x the $1,488,000,000 the record supports.\n\nReference answer: $1,488,000,000 · Corridor: [$496,000,000 … $4,464,000,000]",
+    "ru": "Exhibit:\n| Строка | Величина |\n|---|---|\n| Домохозяйств с питомцем | 24,000,000 |\n| Домохозяйств в каждой группе опроса | 2,400,000 |\n| Участников плана сегодня | 480,000 |\n| Цена плана | $620 / год |\n| Верхняя группа, годовой расход у ветеринара | $940 |\n| Следующая группа, годовой расход | $410 |\n| Среднее домохозяйство с питомцем | $185 |\n\n  • *Для второго пути:* действующих полисов страхования питомцев: ~1,900,000 [A3]\n  • *Для второго пути:* средняя годовая премия: ~$840 [A3]\n\nЭталонная цепочка:\nnaive  = 24_000_000 * 620   # 14,880,000,000  <- все домохозяйства с питомцем по ставке участников\nmarket = 2_400_000 * 620    # 1,488,000,000   <- рынок: группа, чей расход перекрывает $620\nalt    = 1_900_000 * 840    # 1,596,000,000   <- второй путь, действующее страхование\nratio  = alt / market       # 1.07\n\n$620 измерены на тех домохозяйствах, которые сами пришли и подписали, и только верхняя группа вообще тратит у ветеринара больше этой суммы; перенос ставки на всех даёт завышение на $13,392,000,000 и составляет 10.00x от $1,488,000,000, которые подтверждает запись.\n\nЭталон: $1,488,000,000 · Коридор: [$496,000,000 … $4,464,000,000]"
+   },
+   "provoked": {
+    "en": "taking $620 as the spend of a household that owns a pet and multiplying it by 24,000,000. The figure is real and audited — it is what members actually pay — but it describes the households that selected themselves into the plan, and the survey's own $185 average says that the household in the middle cannot afford it.",
+    "ru": "взять $620 за расход домохозяйства с питомцем и умножить на 24,000,000. Величина настоящая и проверяемая — столько платят участники, — но описывает она домохозяйства, которые сами отобрались в план, а среднее $185 из того же опроса говорит, что домохозяйству из середины он не по карману."
+   },
+   "steps": [
+    {
+     "prompt": "Final market-size estimate, $",
+     "kind": "number",
+     "answer": "1488000000",
+     "tolerance": "corridor [$496,000,000 … $4,464,000,000]"
+    },
+    {
+     "prompt": "Independent second-path triangulation + one-sentence recommendation",
+     "kind": "text",
+     "answer": "reference answer $1,488,000,000; second path within ~2×",
+     "tolerance": "judged"
+    }
+   ],
+   "family_h25": "F3",
+   "family_src": "тело",
+   "family_conf": "высокая",
+   "family_note": "F3 «причина против отбора»: ставка снята с группы, которая отобралась сама. В записи это стоит дословно — «whose 480,000 plan members pay $620 a year for the plan» — и рядом лежит величина, описывающая невыбранное множество: «the average across all pet-owning households is $185». Разница объясняется составом купивших, а не свойством домохозяйства с питомцем."
+  },
+  {
+   "id": "MS-052",
+   "title": "Ten Stores Out Of Twelve Hundred",
+   "difficulty": "Hard",
+   "type": "Trap",
+   "focus": "M18(b) отобранные площадки пилота",
+   "time": "8 min",
+   "render": {
+    "exhibits": [],
+    "interactive": [
+     "input_number"
+    ]
+   },
+   "prompt": "A grocery chain with 1,200 stores has piloted paid same-day delivery in 10 of them and wants the annual revenue the service would bring nationally. In the pilot each store takes 640 delivery orders a week, at an average order value of $78 plus a $6 delivery fee. The pilot stores were picked by the commercial team as the ten busiest in the estate: they average 41,000 visits a week against 8,200 for the estate as a whole. Two years earlier the chain ran an unadvertised delivery trial in 60 stores drawn at random, which took 150 orders a week each. Estimate the annual revenue in dollars.",
+   "exhibit": null,
+   "step_prompts": [
+    "Segment the market and state the counting base explicitly (people / households / firms / installed base) with a one-line hypothesis.",
+    "Name each anchor as a number before computing (k=3 estimate-anchors).",
+    "Compute the estimate along the main chain and state the market size in $.",
+    "Triangulate with an independent second path (a different data source, not the same chain reordered) and reconcile — gap should be within ~2×; name the more reliable path with justification.",
+    "Sanity-check: normalize per capita / per household aloud and give a plausibility verdict.",
+    "Last mile: what the figure means for the decision to roll the service out nationally."
+   ],
+   "checklist": {
+    "en": "- GATE: result ∈ [$262,080,000, $2,358,720,000]\n- P1: **the pilot rate is refused because the pilot stores were chosen for being extreme**, and the rate from the randomly drawn trial is used instead; rolling out 640 orders a week = P1 not credited\n- P2: 3 anchors as numbers before the calculation\n- P3: second path from a different source (national delivery orders × the chain's share), ratio ∈ [1.05×, 2.00×] (reference 1.08×) + the more reliable path named\n- P4: translated into a decision — the rollout case has to be built on 150 orders a week, and the ten pilot stores say what a busy store can do, not what an average one will\n- S: «150 orders a week against 8,200 visits ≈ 1.8% of footfall» → plausible; the pilot's 640 against 41,000 visits is the same 1.6%, which is what makes the pilot honest and the extrapolation wrong",
+    "ru": "- GATE: результат ∈ [$262,080,000, $2,358,720,000]\n- P1: **ставка пилота отвергнута, потому что площадки пилота выбраны как крайние**, и вместо неё взята ставка случайно набранного трайла; раскатка 640 заказов в неделю = P1 не зачтён\n- P2: 3 якоря числом до расчёта\n- P3: второй путь из другого источника (национальные заказы доставки × доля сети), ratio ∈ [1.05×, 2.00×] (эталон 1.08×) + назван надёжнейший путь\n- P4: перевод в решение — обоснование раскатки строится на 150 заказах в неделю, а десять пилотных магазинов говорят, что может занятой магазин, а не что сделает средний\n- S: «150 заказов в неделю против 8,200 визитов ≈ 1.8% трафика» → правдоподобно; 640 пилота против 41,000 визитов дают те же 1.6%, и именно это делает пилот честным, а экстраполяцию — неверной"
+   },
+   "reference": {
+    "en": "Exhibit:\n| Line | Figure |\n|---|---|\n| Stores in the estate | 1,200 |\n| Pilot stores | 10 |\n| Pilot orders per store per week | 640 |\n| Average order value | $78 |\n| Delivery fee | $6 |\n| Pilot store visits per week | 41,000 |\n| Estate store visits per week | 8,200 |\n| Random trial, stores | 60 |\n| Random trial, orders per store per week | 150 |\n\n  • *For the second path:* national grocery delivery orders a year: ~21,000,000 [A3]\n  • *For the second path:* the chain's share of grocery turnover: ~48% [A3]\n\nReference chain:\nrev_order  = 78 + 6                   # 84 per order\nnaive_ord  = 1_200 * 640 * 52         # 39,936,000 orders a year at the pilot rate\nnaive      = naive_ord * 84           # 3,354,624,000  <- pilot rolled out\norders     = 1_200 * 150 * 52         # 9,360,000 orders a year at the random-trial rate\nmarket     = orders * 84              # 786,240,000    <- market\nalt_ord    = 21_000_000 * D('0.48')   # 10,080,000 orders\nalt        = alt_ord * 84             # 846,720,000    <- second path, national orders\nratio      = alt / market             # 1.08\n\nThe pilot measured ten stores that were picked for being busy, so its rate carries the choice and not the estate: rolling it out is an overstatement of $2,568,384,000, or 4.27x the $786,240,000 the random trial supports.\n\nReference answer: $786,240,000 · Corridor: [$262,080,000 … $2,358,720,000]",
+    "ru": "Exhibit:\n| Строка | Величина |\n|---|---|\n| Магазинов в сети | 1,200 |\n| Пилотных магазинов | 10 |\n| Заказов пилота на магазин в неделю | 640 |\n| Средний чек | $78 |\n| Плата за доставку | $6 |\n| Визитов в пилотный магазин в неделю | 41,000 |\n| Визитов в магазин сети в неделю | 8,200 |\n| Случайный трайл, магазинов | 60 |\n| Случайный трайл, заказов на магазин в неделю | 150 |\n\n  • *Для второго пути:* национальных заказов продуктовой доставки в год: ~21,000,000 [A3]\n  • *Для второго пути:* доля сети в продуктовом обороте: ~48% [A3]\n\nЭталонная цепочка:\nrev_order  = 78 + 6                   # 84 на заказ\nnaive_ord  = 1_200 * 640 * 52         # 39,936,000 заказов в год по ставке пилота\nnaive      = naive_ord * 84           # 3,354,624,000  <- пилот, раскатанный на сеть\norders     = 1_200 * 150 * 52         # 9,360,000 заказов в год по ставке случайного трайла\nmarket     = orders * 84              # 786,240,000    <- рынок\nalt_ord    = 21_000_000 * D('0.48')   # 10,080,000 заказов\nalt        = alt_ord * 84             # 846,720,000    <- второй путь, национальные заказы\nratio      = alt / market             # 1.08\n\nПилот измерил десять магазинов, отобранных за то, что они загружены, поэтому его ставка несёт отбор, а не сеть: раскатка даёт завышение на $2,568,384,000, то есть 4.27x от $786,240,000, которые подтверждает случайный трайл.\n\nЭталон: $786,240,000 · Коридор: [$262,080,000 … $2,358,720,000]"
+   },
+   "provoked": {
+    "en": "scaling the pilot: 640 orders a week is a measured number from live stores, and 1,200 stores are a fact, so the multiplication feels safe. The line about how the ten were chosen reads as a project detail rather than as the reason the rate cannot travel.",
+    "ru": "масштабировать пилот: 640 заказов в неделю — измеренная величина живых магазинов, 1,200 магазинов — факт, и умножение кажется безопасным. Строка о том, как выбирали десятку, читается как деталь проекта, а не как причина, по которой ставку переносить нельзя."
+   },
+   "steps": [
+    {
+     "prompt": "Final market-size estimate, $",
+     "kind": "number",
+     "answer": "786240000",
+     "tolerance": "corridor [$262,080,000 … $2,358,720,000]"
+    },
+    {
+     "prompt": "Independent second-path triangulation + one-sentence recommendation",
+     "kind": "text",
+     "answer": "reference answer $786,240,000; second path within ~2×",
+     "tolerance": "judged"
+    }
+   ],
+   "family_h25": "F3",
+   "family_src": "тело",
+   "family_conf": "высокая",
+   "family_note": "F3 «причина против отбора»: разницу между пилотом и сетью объясняет отбор площадок, а не услуга. Запись говорит это дословно — «The pilot stores were picked by the commercial team as the ten busiest in the estate» — и тут же даёт невыбранное множество для сравнения: «an unadvertised delivery trial in 60 stores drawn at random, which took 150 orders a week each»."
+  },
+  {
+   "id": "MS-053",
+   "title": "Paid By The Tonne",
+   "difficulty": "Hard",
+   "type": "Trap",
+   "focus": "M22(a) посредник не владеет потоком, который через него идёт",
+   "time": "8 min",
+   "render": {
+    "exhibits": [],
+    "interactive": [
+     "input_number"
+    ]
+   },
+   "prompt": "A fund is sizing the annual market for licensed grain brokerage in one country before backing a broker. 14,000,000 tonnes of grain a year change hands through licensed brokers, at an average sale price of $310 a tonne. Under the exchange's schedule the broker is paid a handling fee of $7.60 for every tonne it puts through. Estimate the annual market in dollars.",
+   "exhibit": null,
+   "step_prompts": [
+    "Segment the market and state the counting base explicitly (people / households / firms / installed base) with a one-line hypothesis.",
+    "Name each anchor as a number before computing (k=3 estimate-anchors).",
+    "Compute the estimate along the main chain and state the market size in $.",
+    "Triangulate with an independent second path (a different data source, not the same chain reordered) and reconcile — gap should be within ~2x; name the more reliable path with justification.",
+    "Sanity-check: normalize per capita / per unit aloud and give a plausibility verdict.",
+    "Last mile: what the figure means for the fund's decision to back a broker."
+   ],
+   "checklist": {
+    "en": "- GATE: result in [$35,466,667, $319,200,000]\n- P1: **the value of the grain is refused as the market, because the brokerage market is the fee the schedule pays**, and the estimate is built on the handling fee; answering $4,340,000,000, or any share of it taken as a guess at what brokers keep, = P1 not credited\n- P2: 3 anchors as numbers before the calculation\n- P3: second path from a different source (brokerages on the exchange register x fee income per brokerage), ratio in [1.00x, 2.00x] (reference 1.03x) + the more reliable path named\n- P4: translated into a decision - the fund is buying a $106,400,000 fee pool split across the register, and a point of grain price moves the brokers' revenue not at all while a cent off the fee moves it directly\n- S: $7.60 against a $310 sale is 2.5% of the value handled, which is what a commodity intermediary earns; 100% of the sale value would mean the broker had bought the grain, and nothing in the schedule says it did",
+    "ru": "- GATE: результат в [$35,466,667, $319,200,000]\n- P1: **стоимость зерна отвергнута как рынок, потому что рынок брокериджа - это плата по расписанию биржи**, и оценка построена на плате за тонну; ответ $4,340,000,000 или взятая на глаз доля от него = P1 не зачтён\n- P2: 3 якоря числом до расчёта\n- P3: второй путь из другого источника (брокерских контор в реестре биржи x доход конторы от платы), ratio в [1.00x, 2.00x] (эталон 1.03x) + назван надёжнейший путь\n- P4: перевод в решение - фонд покупает долю в пуле платы $106,400,000, поделённом по реестру, и пункт цены зерна не двигает выручку брокеров вовсе, а цент платы двигает её напрямую\n- S: $7.60 против продажи в $310 - это 2.5% от проходящей стоимости, столько и зарабатывает товарный посредник; 100% стоимости означали бы, что брокер зерно купил, а расписание об этом не говорит"
+   },
+   "reference": {
+    "en": "The market is $106,400,000 a year: price the handling fee the exchange pays on each tonne, not the grain that moves past the broker.\nAllowed anchors (revealed on request, not upfront):\n  • Grain traded through licensed brokers: 14,000,000 tonnes [A3]\n  • Average sale price: $310 a tonne [A5]\n  • Handling fee under the exchange schedule: $7.60 a tonne [A5]\n  • *For the second path:* brokerages on the exchange register: 210 [A3]\n  • *For the second path:* annual fee income per brokerage: $524,000 [A3]\n\nReference chain:\ntonnes = 14_000_000             # 14,000,000 tonnes a year\nnaive  = tonnes * 310           # 4,340,000,000  <- the grain priced as the market\nmarket = tonnes * D('7.60')     # 106,400,000    <- market\nalt    = 210 * 524_000          # 110,040,000    <- second path, the register of brokerages\nratio  = alt / market           # 1.03\ngap    = naive - market         # 4,233,600,000\nmult   = naive / market         # 40.79\nReference answer: $106,400,000 · Corridor: [$35,466,667 … $319,200,000]\n\nThe tonnes are real and the $310 is real, but the broker never owns either: pricing the flow overstates the brokerage market by $4,233,600,000, that is 40.79x the $106,400,000 the fee schedule actually pays.",
+    "ru": "Рынок - $106,400,000 в год: считать плату за тонну по расписанию биржи, а не зерно, которое проходит мимо брокера.\nРазрешённые якоря (выдаются по запросу, не сразу):\n  • Зерна проходит через лицензированных брокеров: 14,000,000 тонн [A3]\n  • Средняя цена продажи: $310 за тонну [A5]\n  • Плата за обработку по расписанию биржи: $7.60 за тонну [A5]\n  • *Для второго пути:* брокерских контор в реестре биржи: 210 [A3]\n  • *Для второго пути:* доход конторы от платы в год: $524,000 [A3]\n\nЭталонная цепочка:\ntonnes = 14_000_000             # 14,000,000 тонн в год\nnaive  = tonnes * 310           # 4,340,000,000  <- зерно, посчитанное как рынок\nmarket = tonnes * D('7.60')     # 106,400,000    <- рынок\nalt    = 210 * 524_000          # 110,040,000    <- второй путь, реестр контор\nratio  = alt / market           # 1.03\ngap    = naive - market         # 4,233,600,000\nmult   = naive / market         # 40.79\nЭталон: $106,400,000 · Коридор: [$35,466,667 … $319,200,000]\n\nТонны настоящие и $310 настоящие, но брокеру не принадлежит ни то, ни другое: счёт по потоку даёт завышение рынка брокериджа на $4,233,600,000, то есть 40.79x от $106,400,000, которые реально платит расписание."
+   },
+   "provoked": {
+    "en": "price times volume is the reflex of the drill itself: two big numbers stand next to each other and multiply cleanly, and the fee looks like a detail of how brokers are paid rather than like the whole of what they are paid.",
+    "ru": "цена на объём - рефлекс самого жанра: два крупных числа стоят рядом и чисто перемножаются, а плата выглядит деталью того, как брокеру платят, а не всем, что ему платят."
+   },
+   "steps": [
+    {
+     "prompt": "Final market-size estimate, $",
+     "kind": "number",
+     "answer": "106400000",
+     "tolerance": "corridor [$35,466,667 … $319,200,000]"
+    },
+    {
+     "prompt": "Independent second-path triangulation + one-sentence recommendation",
+     "kind": "text",
+     "answer": "reference answer $106,400,000; second path within ~2x",
+     "tolerance": "judged"
+    }
+   ],
+   "family_h25": "F2",
+   "family_src": "тело",
+   "family_conf": "высокая",
+   "family_note": "F2 «второй порядок»: прямой счёт верен и отвечает не на тот вопрос - $4,340,000,000 это точный размер зерновой торговли и ответ фермеру, а спрошен рынок посредника. Тело ставит вопрос про посредника дословно - «sizing the annual market for licensed grain brokerage» - и тут же печатает единственную величину, которая посреднику причитается: «the broker is paid a handling fee of $7.60 for every tonne it puts through». Ход тот же, что у F2 в соседних библиотеках (BR-002, SY-015, CI-006): счёт правильный, адресат счёта другой."
+  },
+  {
+   "id": "MS-054",
+   "title": "Thirty Hours A Week",
+   "difficulty": "Hard",
+   "type": "Trap",
+   "focus": "M23(a) оплаченный час против полученного часа",
+   "time": "8 min",
+   "render": {
+    "exhibits": [],
+    "interactive": [
+     "input_number"
+    ]
+   },
+   "prompt": "A nursery group is sizing the annual market for childcare for children under five in one country. The country has 4,200,000 children under five, and a child of that age is looked after by an adult other than at a school for about 30 hours a week. An hour of professional childcare is billed at $9. A national time-use survey finds that 15% of those hours are delivered by a paid provider, and that the remaining hours are delivered by parents, grandparents and neighbours, who receive nothing for them. Estimate the annual market in dollars.",
+   "exhibit": null,
+   "step_prompts": [
+    "Segment the market and state the counting base explicitly (people / households / firms / installed base) with a one-line hypothesis.",
+    "Name each anchor as a number before computing (k=4 estimate-anchors).",
+    "Compute the estimate along the main chain and state the market size in $.",
+    "Triangulate with an independent second path (a different data source, not the same chain reordered) and reconcile — gap should be within ~2x; name the more reliable path with justification.",
+    "Sanity-check: normalize per capita / per unit aloud and give a plausibility verdict.",
+    "Last mile: what the figure means for the group's decision to open in this country."
+   ],
+   "checklist": {
+    "en": "- GATE: result in [$2,211,300,000, $35,380,800,000]\n- P1: **the hours a child receives are refused as the base, because only the hours somebody invoices are a market**, and the estimate runs through the paid share; pricing all 6,552,000,000 hours at the billing rate = P1 not credited, and so is treating the unpaid hours as demand waiting to be captured\n- P2: 4 anchors as numbers before the calculation\n- P3: second path from a different source (registered providers x annual fee income per provider), ratio in [1.00x, 2.00x] (reference 1.02x) + the more reliable path named\n- P4: translated into a decision - entry is priced against an $8,845,200,000 pool, and the 85% delivered by family is not a pipeline: it converts only if something changes what a family does, which no nursery buys with capacity\n- S: $8,845,200,000 across 4,200,000 children is about $2,106 a child a year, near $40 a week - which is what 4.5 paid hours at $9 costs, and 4.5 hours is 15% of 30",
+    "ru": "- GATE: результат в [$2,211,300,000, $35,380,800,000]\n- P1: **часы, которые ребёнок получает, отвергнуты как база, потому что рынок - только те часы, за которые кто-то выставляет счёт**, и оценка идёт через оплаченную долю; цена всех 6,552,000,000 часов по тарифу = P1 не зачтён, как и трактовка неоплаченных часов как спроса, который осталось забрать\n- P2: 4 якоря числом до расчёта\n- P3: второй путь из другого источника (зарегистрированные провайдеры x доход провайдера в год), ratio в [1.00x, 2.00x] (эталон 1.02x) + назван надёжнейший путь\n- P4: перевод в решение - вход считается против пула $8,845,200,000, а 85%, которые делает семья, - не воронка: они переходят в рынок, только если меняется поведение семьи, а его мощностями не покупают\n- S: $8,845,200,000 на 4,200,000 детей - около $2,106 на ребёнка в год, порядка $40 в неделю; ровно столько стоят 4.5 оплаченных часа по $9, а 4.5 часа - это 15% от 30"
+   },
+   "reference": {
+    "en": "The market is $8,845,200,000 a year: bill the 15% of hours a paid provider delivers, not the 30 hours a week a child receives.\nAllowed anchors (revealed on request, not upfront):\n  • Children under five: 4,200,000 [A1]\n  • Hours of care received per child per week: 30 [A4]\n  • Share of those hours delivered by a paid provider: 15% [A4]\n  • Billing rate per hour: $9 [A5]\n  • *For the second path:* registered nurseries and childminders: 62,000 [A3]\n  • *For the second path:* annual fee income per provider: $145,000 [A3]\n\nReference chain:\nhours_all = 4_200_000 * 30 * 52    # 6,552,000,000 hours of care received a year\nnaive     = hours_all * 9          # 58,968,000,000  <- every hour priced at the billing rate\npaid_h    = hours_all * D('0.15')  # 982,800,000 hours somebody invoices\nmarket    = paid_h * 9             # 8,845,200,000   <- market\nalt       = 62_000 * 145_000       # 8,990,000,000   <- second path, the provider register\nratio     = alt / market           # 1.02\ngap       = naive - market         # 50,122,800,000\nmult      = naive / market         # 6.67\nReference answer: $8,845,200,000 · Corridor: [$2,211,300,000 … $35,380,800,000]\n\nCare received and care bought are different quantities, and only one of them has an invoice behind it: pricing every hour overstates the market by $50,122,800,000, that is 6.67x the $8,845,200,000 providers actually bill.",
+    "ru": "Рынок - $8,845,200,000 в год: считать 15% часов, которые оказывает платный провайдер, а не все 30 часов в неделю, которые получает ребёнок.\nРазрешённые якоря (выдаются по запросу, не сразу):\n  • Детей до пяти лет: 4,200,000 [A1]\n  • Часов ухода на ребёнка в неделю: 30 [A4]\n  • Доля этих часов, оказанная платным провайдером: 15% [A4]\n  • Тариф за час: $9 [A5]\n  • *Для второго пути:* зарегистрированных садов и нянь: 62,000 [A3]\n  • *Для второго пути:* доход провайдера в год: $145,000 [A3]\n\nЭталонная цепочка:\nhours_all = 4_200_000 * 30 * 52    # 6,552,000,000 часов ухода получено за год\nnaive     = hours_all * 9          # 58,968,000,000  <- каждый час по тарифу\npaid_h    = hours_all * D('0.15')  # 982,800,000 часов, за которые выставляют счёт\nmarket    = paid_h * 9             # 8,845,200,000   <- рынок\nalt       = 62_000 * 145_000       # 8,990,000,000   <- второй путь, реестр провайдеров\nratio     = alt / market           # 1.02\ngap       = naive - market         # 50,122,800,000\nmult      = naive / market         # 6.67\nЭталон: $8,845,200,000 · Коридор: [$2,211,300,000 … $35,380,800,000]\n\nПолученный уход и купленный уход - разные величины, и счёт стоит только за одной: цена всех часов даёт завышение на $50,122,800,000, то есть 6.67x от $8,845,200,000, которые провайдеры выставляют на самом деле."
+   },
+   "provoked": {
+    "en": "the chain is already assembled in the prompt: children, hours, rate. The survey line reads as background on how families cope, not as the filter that decides which hours have a payer behind them; and an unpaid hour looks like demand not yet served rather than like an hour nobody was ever going to buy.",
+    "ru": "цепочка собрана прямо в условии: дети, часы, тариф. Строка про опрос читается как фон о том, как справляются семьи, а не как фильтр, решающий, за какими часами стоит плательщик; неоплаченный час выглядит неудовлетворённым спросом, а не часом, который никто и не собирался покупать."
+   },
+   "steps": [
+    {
+     "prompt": "Final market-size estimate, $",
+     "kind": "number",
+     "answer": "8845200000",
+     "tolerance": "corridor [$2,211,300,000 … $35,380,800,000]"
+    },
+    {
+     "prompt": "Independent second-path triangulation + one-sentence recommendation",
+     "kind": "text",
+     "answer": "reference answer $8,845,200,000; second path within ~2x",
+     "tolerance": "judged"
+    }
+   ],
+   "family_h25": "F9",
+   "family_src": "тело",
+   "family_conf": "высокая",
+   "family_note": "F9 «видимый драйвер не рычаг»: самый крупный вклад в объём недоступен к действию. Тело называет и объём - «looked after by an adult other than at a school for about 30 hours a week» - и то, что подавляющая его часть никем не оплачивается: «the remaining hours are delivered by parents, grandparents and neighbours, who receive nothing for them». Ход тот же, что у F9 в соседних библиотеках (SY-007, CI-008, BR-047): самая большая величина на экране рычагом не является, и решение строится на меньшей."
+  },
+  {
+   "id": "MS-058",
+   "title": "The Register After The Rule",
+   "difficulty": "Medium",
+   "type": "Trap",
+   "focus": "M20(d) база отвечает на введение платы",
+   "time": "8 min",
+   "render": {
+    "exhibits": [],
+    "interactive": [
+     "input_number"
+    ]
+   },
+   "prompt": "A testing group is sizing the annual market for the roadworthiness certificate that a new rule will make compulsory for light commercial trailers in one country. The register lists 1,400,000 trailers, and the certificate will cost an owner $180 a year. The rule copies one adopted in a comparable country three years ago: there, within a year of the certificate becoming compulsory, 88% of registered trailers were taken off the register rather than certified — most of them were standing idle, and their owners gave up the registration instead of paying for it. Estimate the annual market in dollars.",
+   "exhibit": null,
+   "step_prompts": [
+    "Segment the market and state the counting base explicitly (people / households / firms / installed base) with a one-line hypothesis.",
+    "Name each anchor as a number before computing (k=3 estimate-anchors).",
+    "Compute the estimate along the main chain and state the market size in $.",
+    "Triangulate with an independent second path (a different data source, not the same chain reordered) and reconcile — gap should be within ~2×; name the more reliable path with justification.",
+    "Sanity-check: normalize per capita / per unit aloud and give a plausibility verdict.",
+    "Last mile: what the figure means for staffing the testing lanes."
+   ],
+   "checklist": {
+    "en": "- GATE: result ∈ [$10,080,000, $90,720,000]\n- P1: **the base is taken after the register answers the charge, not before** — the register counts trailers under a rule that costs their owners nothing, and the charge being priced is what empties it; multiplying the 1,400,000 on the register today = P1 not credited\n- P2: 3 anchors as numbers before the calculation\n- P3: second path from a different source (accredited testing stations × the certificate income each plans for), ratio ∈ [1.05×, 2.00×] (reference 1.12×) + the more reliable path named\n- P4: translated into a decision — lanes are staffed for 168,000 certificates, and building for the register books a fixed cost against trailers that will answer the rule by leaving it\n- S: «168,000 certificates against a register of 1,400,000» → one trailer in eight stays on, which is what an idle-heavy fleet does when standing still starts to cost $180 a year",
+    "ru": "- GATE: результат ∈ [$10,080,000, $90,720,000]\n- P1: **база берётся после того, как реестр ответит на плату, а не до** — реестр считает прицепы при правиле, которое их владельцам ничего не стоит, и именно оцениваемая плата его опустошает; умножение сегодняшних 1,400,000 из реестра = P1 не зачтён\n- P2: 3 якоря числом до расчёта\n- P3: второй путь из другого источника (аккредитованные станции × запланированный каждой доход от сертификата), ratio ∈ [1.05×, 2.00×] (эталон 1.12×) + назван надёжнейший путь\n- P4: перевод в решение — линии укомплектовываются под 168,000 сертификатов, а стройка под реестр заводит постоянные затраты против прицепов, которые ответят на правило уходом из него\n- S: «168,000 сертификатов против реестра в 1,400,000» → остаётся один прицеп из восьми, и именно так ведёт себя простаивающий парк, когда стоять начинает стоить $180 в год"
+   },
+   "reference": {
+    "en": "The market is $30,240,000 a year: price the 168,000 trailers that stay on the register once the certificate bites, not the 1,400,000 that sit on it today.\nAllowed anchors (revealed on request, not upfront):\n  • Trailers on the register today: 1,400,000 [A3]\n  • Share taken off the register in the comparable country: 88% [A4]\n  • Price of the certificate per year: $180 [A5]\n  • *For the second path:* accredited testing stations: ~95 [A3]\n  • *For the second path:* certificate income each station plans for: ~$355,000 [A3]\n\nReference chain:\nstaying = 1_400_000 * D('0.12')     # 168,000\nnaive   = 1_400_000 * 180           # 252,000,000    <- today's register priced out\nmarket  = staying * 180             # 30,240,000     <- market\nalt     = 95 * 355_000              # 33,725,000     <- second path, testing stations\nratio   = alt / market              # 1.12\n\nThe register is a list of trailers that cost nothing to keep listed, and the rule being sized is exactly what changes that: the only evidence of the answer is the comparable country, and it says seven trailers in eight walk away. Pricing today's register overstates the market by $221,760,000, or 8.33x the $30,240,000 that the trailers staying on it support.\n\nReference answer: $30,240,000 · Corridor: [$10,080,000 … $90,720,000]",
+    "ru": "Рынок — $30,240,000 в год: считаются 168,000 прицепов, которые останутся в реестре после введения сертификата, а не 1,400,000, стоящие в нём сегодня.\nAllowed anchors (revealed on request, not upfront):\n  • Прицепов в реестре сегодня: 1,400,000 [A3]\n  • Доля снятых с учёта в сопоставимой стране: 88% [A4]\n  • Цена сертификата в год: $180 [A5]\n  • *Для второго пути:* аккредитованных станций: ~95 [A3]\n  • *Для второго пути:* доход от сертификатов, который планирует станция: ~$355,000 [A3]\n\nЭталонная цепочка:\nstaying = 1_400_000 * D('0.12')     # 168,000\nnaive   = 1_400_000 * 180           # 252,000,000    <- сегодняшний реестр в деньгах\nmarket  = staying * 180             # 30,240,000     <- рынок\nalt     = 95 * 355_000              # 33,725,000     <- второй путь, станции\nratio   = alt / market              # 1.12\n\nРеестр — список прицепов, которых держать в нём ничего не стоит, а оцениваемое правило ровно это и меняет: единственное свидетельство ответа — сопоставимая страна, и она говорит, что семь прицепов из восьми уходят. Перевод сегодняшнего реестра в деньги завышает рынок на $221,760,000, то есть в 8.33x от $30,240,000, которые подтверждают остающиеся прицепы.\n\nЭталон: $30,240,000 · Коридор: [$10,080,000 … $90,720,000]"
+   },
+   "provoked": {
+    "en": "treating the register as the market. It is an official count, it is current, and it is the only population in the record — but it was built under a rule that let an idle trailer stay listed for free, and the number being priced is the one that ends that.",
+    "ru": "принять реестр за рынок. Это официальный счёт, он актуален и это единственная популяция в записи — но собран он при правиле, при котором простаивающий прицеп числился бесплатно, а оцениваемое число ровно это и прекращает."
+   },
+   "steps": [
+    {
+     "prompt": "Final market-size estimate, $",
+     "kind": "number",
+     "answer": "30240000",
+     "tolerance": "corridor [$10,080,000 … $90,720,000]"
+    },
+    {
+     "prompt": "Independent second-path triangulation + one-sentence recommendation",
+     "kind": "text",
+     "answer": "reference answer $30,240,000; second path within ~2×",
+     "tolerance": "judged"
+    }
+   ],
+   "family_h25": "F2",
+   "family_src": "тело",
+   "family_conf": "высокая",
+   "family_note": "F2 «второй порядок»: прямой счёт по реестру верен и отвечает не на тот вопрос, потому что база отвечает на введение платы. Обратная связь подтверждена телом дословно: «The register lists 1,400,000 trailers, and the certificate will cost an owner $180 a year» — и «within a year of the certificate becoming compulsory, 88% of registered trailers were taken off the register rather than certified». Оценка переключает базу: 1,400,000 → 168,000. Сверено с носителем F2 в соседней библиотеке: SY-015 «Doughnuts At The Window» — там прямой счёт по обороту тоже верен и отвечает не на тот вопрос, пока не учтён ответ на собственное действие; здесь отвечает не свой продукт, а база регулируемых."
   }
  ],
  "_meta": {
