@@ -1235,6 +1235,94 @@
       .metrics-grid { grid-template-columns: repeat(2, 1fr); }
       .fb-block { padding: 20px; }
     }
+
+    /* ══════════ REDROCK · ассессментный холст ══════════════════════════════
+       По мотивам настоящего экрана McKinsey Solve (27 фото ассессмента,
+       Кейсы/McKinsey Solve): глубокий сине-стальной градиент, белый текст,
+       поля ввода прямо внутри прозы, тонкая полоса времени сверху.
+       НЕ копия: у них жёлтая полоса и рубленый шрифт, у нас янтарная нить,
+       серифные заголовки и утопленные поля с подсветкой по фокусу.
+       Живёт ТОЛЬКО на экране игры и только когда игра Redrock (класс rk-canvas),
+       поэтому тема остальных экранов не трогается.
+       ────────────────────────────────────────────────────────────────────── */
+    #screen-solve.rk-canvas {
+      background:
+        radial-gradient(1200px 700px at 12% -10%, rgba(93,184,166,.10), transparent 60%),
+        radial-gradient(900px 600px at 100% 0%, rgba(232,165,90,.07), transparent 55%),
+        linear-gradient(168deg, #10202e 0%, #16293a 42%, #101c28 100%);
+      color: #eef3f6;
+    }
+    .rk-canvas .sv-topbar { border-bottom: 1px solid rgba(255,255,255,.10); background: rgba(8,16,24,.35); backdrop-filter: blur(6px); }
+    .rk-canvas .sv-exit { background: rgba(255,255,255,.10); color: #eef3f6; }
+    .rk-canvas .sv-phase { background: rgba(255,255,255,.07); color: #9fb3c2; }
+    .rk-canvas .sv-phase.active { background: var(--accent-teal); color: #06201b; }
+    .rk-canvas .sv-phase.done { color: var(--accent-teal); background: rgba(93,184,166,.12); }
+    /* полоса времени: нить в 3px, у них - жирная жёлтая */
+    .rk-canvas .sv-progress-track { height: 3px; background: rgba(255,255,255,.10); }
+    .rk-canvas .sv-progress-fill { background: linear-gradient(90deg, var(--accent-teal), var(--accent-amber)); }
+    .rk-canvas .sv-timer { color: #dfe8ee; letter-spacing: .02em; }
+    .rk-canvas .sv-h { color: #ffffff; letter-spacing: -.015em; }
+    .rk-canvas .rk-tag { background: rgba(93,184,166,.18); color: #8fe3d0; }
+    .rk-canvas .sv-obj, .rk-canvas .rk-study, .rk-canvas .sv-q-text { color: #dbe6ee; }
+    /* карточка Objective - тёмная плашка, как в оригинале, но с левой нитью */
+    .rk-canvas .sv-obj {
+      background: rgba(6,14,22,.55); border: 1px solid rgba(255,255,255,.08);
+      border-left: 3px solid var(--accent-amber); border-radius: 10px; padding: 12px 14px;
+    }
+    .rk-canvas .sv-obj-tag { color: var(--accent-amber); }
+    /* чипы прямо в тексте - утопленные, а не белые как у них */
+    .rk-canvas .rk-chip {
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16);
+      color: #ffffff; border-radius: 6px; padding: 1px 7px; box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+    }
+    .rk-canvas .rk-chip:hover { background: rgba(93,184,166,.22); border-color: rgba(93,184,166,.45); }
+    /* поля ввода: тёмные пилюли внутри прозы */
+    .rk-canvas input.sv-inp, .rk-canvas input.sv-numin {
+      background: rgba(4,10,16,.6); border: 1px solid rgba(255,255,255,.18); color: #ffffff;
+    }
+    .rk-canvas input.sv-inp:focus, .rk-canvas input.sv-numin:focus {
+      border-color: var(--accent-teal); box-shadow: 0 0 0 3px rgba(93,184,166,.18); outline: none;
+    }
+    .rk-canvas .sv-table { border-color: rgba(255,255,255,.10); }
+    .rk-canvas .sv-table th { color: #9fb3c2; }
+    .rk-canvas .sv-table td, .rk-canvas .sv-table th { border-color: rgba(255,255,255,.08); }
+    .rk-canvas .sv-exhibit { background: rgba(6,14,22,.45); border: 1px solid rgba(255,255,255,.09); border-radius: 12px; }
+    .rk-canvas .sv-exhibit-t { color: #8fe3d0; }
+    /* журнал - стеклянная панель, не белая карточка */
+    .rk-canvas .sv-journal { background: rgba(6,14,22,.5); border: 1px solid rgba(255,255,255,.10); box-shadow: 0 18px 40px rgba(0,0,0,.35); }
+    .rk-canvas .sv-journal-t { color: var(--accent-amber); letter-spacing: .10em; }
+    .rk-canvas .sv-jcard { border-color: rgba(255,255,255,.10); background: rgba(255,255,255,.03); }
+    .rk-canvas .sv-jcard.sv-jstarred { border-color: var(--accent-amber); }
+    .rk-canvas .sv-journal-empty { color: #90a4b3; }
+    .rk-canvas .sv-footer { background: rgba(8,16,24,.55); border-top: 1px solid rgba(255,255,255,.10); backdrop-filter: blur(6px); }
+    .rk-canvas .sv-back { color: #b9c8d4; }
+    .rk-canvas .rk-rv-item { background: rgba(255,255,255,.045); }
+    .rk-canvas .rk-note { color: #9fb3c2; }
+
+
+    /* Детали, взятые с фото настоящего Redrock (экран Cases, IMG_2203):
+       поле ответа с «захватом» слева, варианты как жетоны (выбранный залит),
+       калькулятор тёмной панелью с журналом над клавишами.
+       У них захват - две колонки точек и круглая кнопка сброса; у нас одна
+       колонка и подсветка нитью по фокусу, чтобы не было копией. */
+    .rk-canvas .rk-field input.sv-inp, .rk-canvas .rk-field input.sv-numin {
+      padding-left: 16px;
+      background-image: radial-gradient(circle, rgba(255,255,255,.45) 1px, transparent 1px);
+      background-size: 3px 6px; background-repeat: repeat-y; background-position: 6px center;
+    }
+    .rk-canvas .rk-opt {
+      border-radius: 999px; padding: 7px 16px; background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.16); color: #dbe6ee; font-weight: 600;
+    }
+    .rk-canvas .rk-opt:hover { background: rgba(255,255,255,.13); }
+    .rk-canvas .rk-opt.sel { background: #071722; border-color: var(--accent-teal); color: #ffffff; }
+    .rk-canvas .rk-opt.rk-okcard { background: rgba(93,184,166,.22); border-color: var(--accent-teal); color: #ffffff; }
+    .rk-canvas .rk-opt.rk-badcard { background: rgba(224,122,95,.18); border-color: var(--accent-coral); color: #ffffff; }
+    .rk-canvas .rk-check { background: var(--accent-teal); color: #04201b; }
+    .rk-canvas #svCalc { background: rgba(4,10,16,.92); border: 1px solid rgba(255,255,255,.12); box-shadow: 0 24px 60px rgba(0,0,0,.5); }
+    .rk-canvas #svCalcLog { color: #9fb3c2; }
+    .rk-canvas #svCalcDisp { color: #ffffff; }
+
       /* ══════════ McKINSEY SOLVE GAME ══════════ */
     #screen-solve { height: 100vh; height: 100dvh; max-height: 100vh; max-height: 100dvh; min-height: 0; overflow: hidden; background: var(--surface-dark); flex-direction: column; }
     #screen-solve.active { display: flex; min-height: 0; }
@@ -5862,6 +5950,11 @@ function rkSetPhaseUI() {
 }
 
 function rkRender() {
+  // Ассессментный холст включается только на игре Redrock и снимается на выходе,
+  // чтобы остальные экраны жили в своей теме.
+  const scr = document.getElementById('screen-solve');
+  if (scr) scr.classList.add('rk-canvas');
+
   rkSetPhaseUI();
   const inner = document.getElementById('svInner'), foot = document.getElementById('svFooter');
   if (!inner || !foot) return;
@@ -6930,8 +7023,10 @@ function renderSolveResult(inner, foot) {
   foot.innerHTML = `<span></span><button class="sv-next" onclick="showScreen('mode')">${t('common.backToModes')}</button>`;
 }
 
+function rkCanvasOff() { const s = document.getElementById('screen-solve'); if (s) s.classList.remove('rk-canvas'); }
 function confirmExitSolve() {
   if (confirm('Leave the Solve Game? Your progress in this session will be lost.')) {
+    rkCanvasOff();
     if (solve && solve.timerId) clearInterval(solve.timerId);
     showScreen('mode');
   }
