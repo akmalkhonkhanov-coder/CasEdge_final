@@ -86,7 +86,7 @@ function fieldMap(game) {
 // `collect` — разметка экрана сбора: какой токен рабочий, а какой шум. Это ключ
 // ровно того же сорта, что и answer: весь смысл задачи в том, чтобы кандидат
 // решил это сам. В браузер уезжает только id и текст чипа.
-const RK_SERVER_KEYS = ['answer', 'naive', 'naive_reason', 'justify_rubric', 'distractors', 'hidden', 'collect', 'role', 'used_in'];
+const RK_SERVER_KEYS = ['answer', 'naive', 'naive_reason', 'justify_rubric', 'distractors', 'hidden', 'collect', 'role', 'used_in', 'chain'];
 function rkDeepStrip(v) {
   if (Array.isArray(v)) return v.map(rkDeepStrip);
   if (v && typeof v === 'object') {
@@ -517,7 +517,12 @@ export default async function handler(req, res) {
         review: rev.map(r => ({
           q: r.q, key: r.key, answer: r.answer,
           trap: (r.trap === undefined ? null : r.trap),
-          lesson: r.lesson || ''
+          lesson: r.lesson || '',
+          // Сквозная цепь (долг dev №3). Кандидат, собравший не тот чип, получает
+          // ДРУГОЕ число и доносит его до отчёта. Без этой строки он видит голое
+          // «неверно» и не узнаёт, что свернул ещё на экране сбора.
+          chainTrap: (r.chain_trap === undefined ? null : r.chain_trap),
+          chainLesson: r.chain_lesson || ''
         }))
       });
     }
