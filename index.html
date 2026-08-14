@@ -1364,6 +1364,7 @@
     .rk-rv-ok { color: var(--accent-teal); font-weight: 600; }
     .rk-rv-trap { color: var(--accent-amber); font-weight: 600; }
     .rk-rv-miss { color: var(--on-dark-soft); font-weight: 600; }
+    .rk-rv-chain b { color: var(--accent-amber); }
     .rk-pre { white-space: pre-wrap; font-size: 12.5px; color: var(--on-dark-soft); font-family: var(--mono); }
     .rk-exh { margin-top: 14px; }
     .rk-field { margin: 12px 0; padding: 10px 12px; border: 1px solid var(--sv-line); border-radius: 10px; background: rgba(255,255,255,.015); transition: border-color .2s; }
@@ -6147,10 +6148,14 @@ function rkReviewHTML() {
       : st ? '<span class="rk-rv-miss">missed</span>' : '';
     const trap = (r.trap === null || r.trap === undefined) ? '' :
       `<div class="rk-rv-line"><span>Trap</span> <b>${esc(String(r.trap))}</b>${r.lesson ? ' ' + rkInline(r.lesson) : ''}</div>`;
+    // Путь ошибки сбора: не «неверно», а где именно кандидат свернул.
+    const chain = (r.chainTrap === null || r.chainTrap === undefined) ? '' :
+      `<div class="rk-rv-line rk-rv-chain"><span>Carried</span> <b>${esc(String(r.chainTrap))}</b>${r.chainLesson ? ' ' + rkInline(r.chainLesson) : ''}</div>`;
     return `<div class="rk-rv-item">
         <div class="rk-rv-head">Q${esc(String(r.q))} <span class="rk-rv-key">${esc(String(r.key))}</span> ${tag}</div>
         <div class="rk-rv-line"><span>Answer</span> <b>${esc(String(r.answer))}</b></div>
         ${trap}
+        ${chain}
       </div>`;
   }).join('');
   const js = solve.rkJournalScore;
