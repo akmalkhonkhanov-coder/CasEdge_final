@@ -93,7 +93,9 @@
     "naive": "сравнивает подразделения по абсолютному числу сделок и по доле подразделения в общем числе побед",
     "correct": "сравнивает их по выручке на одного сотрудника, приведя число сделок к размеру команды",
     "why": "команды разного размера, поэтому абсолютный счёт измеряет численность, а не производительность",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-105-нормировка-на-размер",
+    "code2": []
    }
   },
   {
@@ -186,7 +188,9 @@
     "naive": "читает рост доли канала в процентах как рост канала в деньгах",
     "correct": "переводит обе доли в деньги по их собственным базам и сравнивает суммы",
     "why": "доля растёт даже при неизменной сумме, если знаменатель сокращается",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-99-доля-вместо-денег",
+    "code2": []
    }
   },
   {
@@ -279,7 +283,9 @@
     "naive": "берёт средний темп за весь период и называет рост ровным",
     "correct": "проходит ряд год к году и разделяет провал и восстановление на две фазы",
     "why": "один усреднённый темп одинаково описывает ровный рост и падение с отскоком",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-12-средний-темп-скрывает-фазы",
+    "code2": []
    }
   },
   {
@@ -437,7 +443,9 @@
     "naive": "объявляет себя лидером по крупнейшей нарисованной доле, не сложив показанные доли",
     "correct": "складывает показанные доли, называет неучтённый остаток и берёт свою долю от полного рынка",
     "why": "перенормировка на нарисованную часть завышает долю ровно на величину скрытого остатка",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-101-неучтённый-остаток",
+    "code2": []
    }
   },
   {
@@ -529,7 +537,9 @@
     "naive": "ранжирует направления по числу уволившихся",
     "correct": "умножает число уходов на стоимость замены и ранжирует по сумме",
     "why": "уход в дорогой роли стоит на порядок больше, чем уход в дешёвой",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-64-натура-вместо-денег",
+    "code2": []
    }
   },
   {
@@ -630,7 +640,9 @@
     "naive": "читает разрыв между долей выручки и долей штук как силу бренда",
     "correct": "делит выручку на количество и называет разрыв разницей цен с явно указанной базой сравнения",
     "why": "разрыв долей арифметически задаёт цену и ничего не говорит о её причине",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-100-разрыв-долей-как-цена",
+    "code2": []
    }
   },
   {
@@ -730,7 +742,9 @@
     "naive": "заключает по улучшению каждого этапа воронки, что итоговая конверсия выросла",
     "correct": "делит сумму исходов на сумму входов и объясняет движение итога сдвигом веса между сегментами",
     "why": "агрегат взвешен объёмом входа, поэтому перенос веса в слабый сегмент тянет итог вниз при росте обеих частей",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-34-итог-из-частей",
+    "code2": []
    }
   },
   {
@@ -851,7 +865,9 @@
     "naive": "выбирает сегмент по размеру рынка из первой таблицы, не привлекая доступность из второй",
     "correct": "умножает размер сегмента на охват и сравнивает ожидаемую выручку",
     "why": "две доли разного рода сопоставимы только после перемножения, а не рядом друг с другом",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-102-одна-колонка",
+    "code2": []
    }
   },
   {
@@ -964,7 +980,9 @@
     "naive": "ранжирует форматы по числу точек или по цене за единицу",
     "correct": "строит объём как точки × сеансы × места × заполняемость и умножает его на цену",
     "why": "ни мощность, ни цена по отдельности не являются выручкой",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-120-цепочка-мощности",
+    "code2": []
    }
   },
   {
@@ -1126,7 +1144,11 @@
    "mehanizm": {
     "naive": "ищет скрытый сегмент и перенормирует доли там, где сумма ячеек уже сходится",
     "correct": "складывает ячейки обеих матриц и делит свою сумму на рыночную",
-    "why": "проверка утверждения — это сложение и деление, а не обязательный поиск изъяна"
+    "why": "проверка утверждения — это сложение и деление, а не обязательный поиск изъяна",
+    "code": "MECH-40-выдуманная-ловушка",
+    "code2": [
+     "MECH-42-правка-исправного-входа"
+    ]
    }
   },
   {
@@ -1239,7 +1261,9 @@
     "naive": "выбирает линию для вложения по темпу роста, посчитанному от малой базы",
     "correct": "считает вклад линии в прирост в деньгах и делит его на общий прирост",
     "why": "темп от малой базы приносит мало денег, а бюджет распределяется деньгами",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-33-темп-от-малой-базы",
+    "code2": []
    }
   },
   {
@@ -1346,7 +1370,9 @@
     "naive": "сравнивает последний столбец с предыдущим, не проверив длину периода в каждом",
     "correct": "суммирует короткие периоды до полного и сравнивает год с годом",
     "why": "сопоставление квартала с годом создаёт падение, которого в данных нет",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-94-несопоставимые-периоды",
+    "code2": []
    }
   },
   {
@@ -1439,7 +1465,9 @@
     "naive": "читает синхронный рост двух рядов как причинную связь между ними",
     "correct": "нормирует выручку на число точек сети и проверяет третий ряд, растущий вместе с обоими",
     "why": "общий драйвер даёт ту же синхронность без всякой причинной связи",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-91-приписанная-причинность",
+    "code2": []
    }
   },
   {
@@ -1538,7 +1566,9 @@
     "naive": "берёт простое среднее сроков по сегментам как срок по портфелю",
     "correct": "взвешивает сроки суммами и называет сегмент, задающий хвост",
     "why": "простое среднее уравнивает крупный и мелкий портфель в одном числе",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-07-невзвешенное-среднее",
+    "code2": []
    }
   },
   {
@@ -1637,7 +1667,9 @@
     "naive": "читает высоту столбцов как величину роста, не проверив начало оси",
     "correct": "считает изменение от фактических значений и переводит его в средний темп",
     "why": "обрезанная снизу ось увеличивает видимое изменение в разы",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-95-ось-и-шкала",
+    "code2": []
    }
   },
   {
@@ -1747,7 +1779,9 @@
     "naive": "выбирает более достоверный из двух расходящихся отчётов",
     "correct": "измеряет разрыв в деньгах и находит статью, на которую отличаются периметры",
     "why": "отчёты считают разный периметр, поэтому оба верны и выбирать не из чего",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-110-расхождение-источников",
+    "code2": []
    }
   },
   {
@@ -1889,7 +1923,9 @@
     "naive": "направляет бюджет в линию с наибольшим темпом роста",
     "correct": "считает вклад каждой линии в процентных пунктах от общей базы прошлого года",
     "why": "вклад есть база, умноженная на темп, а темп сам по себе базы не содержит",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-33-темп-от-малой-базы",
+    "code2": []
    }
   },
   {
@@ -2028,7 +2064,9 @@
     "naive": "принимает совокупный рост портфеля за укрепление базы клиентов",
     "correct": "вычитает крупнейшего клиента и смотрит движение оставшегося портфеля",
     "why": "один выброс может превышать весь прирост и скрывать падение всех прочих",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-104-доминирующий-элемент",
+    "code2": []
    }
   },
   {
@@ -2125,7 +2163,9 @@
     "naive": "объявляет один из двух расчётов ошибочным, не сверив знаменатели",
     "correct": "делит один и тот же числитель на каждую базу и называет базу, отвечающую на заданный вопрос",
     "why": "разные знаменатели дают разные верные ответы, а не противоречие",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-110-расхождение-источников",
+    "code2": []
    }
   },
   {
@@ -2229,7 +2269,9 @@
    "mehanizm": {
     "naive": "ищет убыточную линию или скрытую наценку там, где строки уже сходятся с итогом",
     "correct": "проверяет утверждение вычитанием и делением, а возникшие подозрения отвергает счётом",
-    "why": "требование проверить не означает, что ошибка в утверждении есть"
+    "why": "требование проверить не означает, что ошибка в утверждении есть",
+    "code": "MECH-40-выдуманная-ловушка",
+    "code2": []
    }
   },
   {
@@ -2334,7 +2376,9 @@
     "naive": "читает падение доли рынка как потерю выручки и клиентов",
     "correct": "переводит долю в деньги и сравнивает собственный темп с темпом рынка",
     "why": "доля падает при растущем числителе, если знаменатель растёт быстрее",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-99-доля-вместо-денег",
+    "code2": []
    }
   },
   {
@@ -2448,7 +2492,9 @@
     "naive": "продлевает тренд по последним точкам ряда, не проверив длину периода в них",
     "correct": "склеивает короткие периоды в прежний шаг и сравнивает сопоставимые отрезки",
     "why": "смена шага ряда маскирует перелом тренда",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-94-несопоставимые-периоды",
+    "code2": []
    }
   },
   {
@@ -2534,7 +2580,9 @@
     "naive": "принимает синхронный рост найма и жалоб за причинную связь и режет найм",
     "correct": "нормирует жалобы на объём операций и проверяет ряд объёма",
     "why": "оба ряда растут от общего объёма, а найм следует за жалобами, а не ведёт их",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-91-приписанная-причинность",
+    "code2": []
    }
   },
   {
@@ -2630,7 +2678,9 @@
     "naive": "читает рост средней маржи как улучшение работы подразделений",
     "correct": "сравнивает маржу каждого сегмента год к году и раскладывает изменение на микс и ставку",
     "why": "среднее может расти при падении всех своих составляющих за счёт сдвига весов",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-35-микс-против-ставки",
+    "code2": []
    }
   },
   {
@@ -2753,7 +2803,9 @@
     "naive": "сравнивает месячный показатель с квартальным как одну величину",
     "correct": "приводит оба показателя к общему периоду и лишь затем сравнивает",
     "why": "величины за периоды разной длины несопоставимы напрямую",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-94-несопоставимые-периоды",
+    "code2": []
    }
   },
   {
@@ -2866,7 +2918,9 @@
     "naive": "ранжирует приоритеты по одной колонке опроса — по худшей оценке или по наибольшей важности",
     "correct": "умножает важность на недобор до максимума и ранжирует по произведению",
     "why": "важное без запаса роста и низкое без важности одинаково не окупают вложение",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-121-недобор-до-максимума",
+    "code2": []
    }
   },
   {
@@ -2983,7 +3037,11 @@
     "naive": "отвечает на денежный вопрос долями и списывает распылённый остаток как незначимый",
     "correct": "строит базу рынка из второго экспоната и переводит все доли в деньги",
     "why": "доля без базы не имеет денежного размера, а мелкая доля крупного рынка сопоставима с названным игроком",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-99-доля-вместо-денег",
+    "code2": [
+     "MECH-101-неучтённый-остаток"
+    ]
    }
   },
   {
@@ -3060,7 +3118,9 @@
     "naive": "заключает по росту конверсии на каждом этапе, что модель работает",
     "correct": "умножает конверсию на объём входа и смотрит абсолютный выход",
     "why": "рост ставки не окупает падение входа, если вход упал сильнее",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-31-один-множитель-в-выводе",
+    "code2": []
    }
   },
   {
@@ -3169,7 +3229,9 @@
     "naive": "принимает совместный рост расходов и продаж на двух осях за отдачу от расходов",
     "correct": "делит продажи на число точек сети и сверяет полученный ряд с ростом сети",
     "why": "график с двумя осями по построению скрывает третий ряд, двигающий оба",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-91-приписанная-причинность",
+    "code2": []
    }
   },
   {
@@ -3306,7 +3368,11 @@
    "mehanizm": {
     "naive": "взвешивает маржи линий натуральным объёмом или берёт невзвешенное среднее по линиям",
     "correct": "перестраивает выручку как объём × цена и взвешивает маржи деньгами",
-    "why": "маржа есть отношение к деньгам, поэтому веса берутся из выручки, а не из тонн"
+    "why": "маржа есть отношение к деньгам, поэтому веса берутся из выручки, а не из тонн",
+    "code": "MECH-112-база-доли",
+    "code2": [
+     "MECH-07-невзвешенное-среднее"
+    ]
    }
   },
   {
@@ -3411,7 +3477,11 @@
     "naive": "читает параллельность двух линий как сохранение отставания",
     "correct": "проверяет тип шкалы оси и считает разрыв в деньгах на обоих концах ряда",
     "why": "на логарифмической оси параллельность означает равный темп, а равный темп на разных базах расширяет денежный разрыв",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-98-абсолютный-против-относительного-разрыва",
+    "code2": [
+     "MECH-95-ось-и-шкала"
+    ]
    }
   },
   {
@@ -3496,7 +3566,9 @@
    "mehanizm": {
     "naive": "складывает все столбцы моста как однородные и планирует от полученного итога",
     "correct": "отделяет унаследованный извне приток от собственной торговли и пересобирает итог без него",
-    "why": "перешедшая извне выручка не заработана и не воспроизводится в следующем периоде"
+    "why": "перешедшая извне выручка не заработана и не воспроизводится в следующем периоде",
+    "code": "MECH-97-разнородные-слагаемые-моста",
+    "code2": []
    }
   },
   {
@@ -3596,7 +3668,9 @@
     "naive": "называет крупнейший по выручке канал самым прибыльным",
     "correct": "отказывается отвечать на вопрос о прибыли по экспонату, где нет ни одной статьи затрат",
     "why": "детализация по одной переменной не приближает к ответу о другой",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-103-вывод-без-недостающей-величины",
+    "code2": []
    }
   },
   {
@@ -3682,7 +3756,9 @@
    "mehanizm": {
     "naive": "сравнивает соседние периоды внутри года и читает сезонный спад как разворот тренда",
     "correct": "сравнивает каждый период с тем же периодом прошлого года и проверяет повторяемость профиля",
-    "why": "сезонный профиль повторяется, поэтому сравнение вдоль года и поперёк лет даёт разные знаки"
+    "why": "сезонный профиль повторяется, поэтому сравнение вдоль года и поперёк лет даёт разные знаки",
+    "code": "MECH-10-сезонность-как-тренд",
+    "code2": []
    }
   },
   {
@@ -3781,7 +3857,9 @@
     "naive": "ранжирует строки по колонке объёма, в которой стоят разные единицы измерения",
     "correct": "переводит все строки в деньги через цену и ранжирует по выручке",
     "why": "величины в разных физических единицах не сравнимы и не складываются",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-63-несовпадение-единиц",
+    "code2": []
    }
   },
   {
@@ -3873,7 +3951,9 @@
     "naive": "выбирает сегмент по размеру рынка или по темпу роста",
     "correct": "считает свободный остаток как размер рынка, умноженный на незанятую долю, и наращивает его на темп",
     "why": "уже занятая нами часть сегмента не входит в то, что можно захватить",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-53-рынок-без-доли",
+    "code2": []
    }
   },
   {
@@ -3945,7 +4025,9 @@
     "naive": "исключает строку по малости её величины или считает, что нужны все напечатанные строки",
     "correct": "определяет метрику вопроса и исключает строку по её природе, а не по размеру",
     "why": "принадлежность строки к показателю задаётся определением показателя, а не величиной числа",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-109-исключение-по-размеру",
+    "code2": []
    }
   },
   {
@@ -4074,7 +4156,9 @@
     "naive": "выбирает один источник как надёжный и объявляет второй ошибочным",
     "correct": "приводит источники к общему охвату по сноске и назначает каждый вопрос своему источнику",
     "why": "источники покрывают разные периметры, поэтому расхождение есть разница охвата, а не ошибка",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-110-расхождение-источников",
+    "code2": []
    }
   },
   {
@@ -4157,7 +4241,9 @@
     "naive": "принимает первое правдоподобное объяснение падения, не прочитав ставки остальных этапов",
     "correct": "читает ставку каждого этапа и проверяет альтернативу — разбавление входящего потока новыми каналами",
     "why": "названная причина не может объяснять падение ставок, стоящих выше неё по цепочке",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-80-остановка-на-первом-объяснении",
+    "code2": []
    }
   },
   {
@@ -4263,7 +4349,9 @@
     "naive": "читает порядок столбцов моста как последовательность причин",
     "correct": "проверяет правило сортировки столбцов и относится к ним как к вкладам в изменение",
     "why": "мост упорядочен по величине вклада, и порядок не несёт хронологии",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-96-порядок-столбцов-моста",
+    "code2": []
    }
   },
   {
@@ -4364,7 +4452,9 @@
     "naive": "умножает выручку на долю возвратов, измеренную в заказах",
     "correct": "переводит долю возвратов в число заказов и умножает его на чек возвращённого заказа",
     "why": "доля, измеренная в штуках, не переносится на деньги, если чек возврата отличается от среднего",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-112-база-доли",
+    "code2": []
    }
   },
   {
@@ -4463,7 +4553,9 @@
     "naive": "приписывает рост общей маржи программе улучшений",
     "correct": "сравнивает маржи по сегментам год к году и раскладывает изменение на вклад микса и вклад ставок",
     "why": "при неизменной выручке общий рост маржи может целиком идти от сдвига весов, тогда как все ставки упали",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-35-микс-против-ставки",
+    "code2": []
    }
   },
   {
@@ -4598,7 +4690,9 @@
     "naive": "выбирает регион по размеру и росту рынка, не сопоставив их со стоимостью входа",
     "correct": "делит ожидаемую отдачу от доли на стоимость входа и ранжирует по этому отношению",
     "why": "стоимость входа не пропорциональна размеру рынка, поэтому крупнейший рынок может давать худшую отдачу на вложенный доллар",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-122-отдача-на-стоимость-входа",
+    "code2": []
    }
   },
   {
@@ -4730,7 +4824,11 @@
     "naive": "выбирает сегмент удержания по выручке на одного клиента",
     "correct": "умножает выручку на клиента на число клиентов и называет вероятность ухода недостающей величиной",
     "why": "приоритет удержания задаётся тем, сколько будет потеряно, а не тем, сколько приносит один клиент",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-103-вывод-без-недостающей-величины",
+    "code2": [
+     "MECH-103-вывод-без-недостающей-величины"
+    ]
    }
   },
   {
@@ -4828,7 +4926,7 @@
     "en": "Credit if ALL: (1) reads the Gap column rather than the Ratio column and states that the absolute gap rises in every year, $2,220M to $3,013M, $793M wider over six years, a factor of 1.36, or 35.72%; (2) states that a falling ratio and a widening gap are both true at once, so the ratio's fall from 13.33 to 3.04 is not evidence of the deck's claim; (3) explains the cause as the difference in bases, showing at least the first year - we add 256 - 180 = $76M while the leader adds 2,664 - 2,400 = $264M, so the gap grows by 264 - 76 = $188M, 8.47% of the $2,220M it starts from, exactly the step from 2,220 to 2,408; (4) states that the rate advantage, 42 against 11, a factor of 3.82, is outweighed by the base, since the dollar increments run $264M against $76M, a factor of 3.47 the other way; (5) reaches the horizon question rather than stopping at \"the gap is growing\", noting that the gap is still at its maximum in the last column of the exhibit, +6, at $3,013M and 35.72% above today's $2,220M; (6) rejects both \"the ratio is falling, so the lines are converging\" and \"our rate is far higher, so it is only a matter of time, and that time is near\". Bonus, not required for credit: runs the same subtraction at the far end of the table, where the leader adds 4,489 - 4,044 = $445M in the final year against our 1,476 - 1,039 = $437M, so the annual widening falls to $8M from the $188M of year one and the gap is close to turning; or projects the crossover, holding 42% and 11% from today's $180M and $2,400M, at year 11, five years past the right-hand edge of the exhibit; or notes that the projection requires our revenue to multiply 1,476 / 180 = 8.2 times within the six years already charted."
    },
    "reference": {
-    "en": "- Naive: the Ratio column falls from 13.33 to 3.04 across six years, our rate is 42% against the leader's 11%, and on the right axis that difference is the loudest thing on the chart. A falling ratio and a rate advantage read together as convergence, so the deck's claim looks confirmed by the very exhibit that was meant to test it.\n- Correct: the Gap column sits on the same page and moves the other way. $2,220M today, then 2,408, 2,594, 2,767, 2,911, 3,005 and 3,013 - the absolute gap rises in every one of the six years and ends $793M wider than it started, a factor of 1.36, or 35.72%. The ratio improves and the gap widens simultaneously; both readings are correct, and only one of them is denominated in money.\n- The cause is the base, and the first year shows it whole. We go 180 to 256, adding $76M. The leader goes 2,400 to 2,664, adding $264M. The gap therefore grows by 264 - 76 = $188M, 8.47% of the $2,220M it starts from, which is exactly the step from 2,220 to 2,408. A rate of 42 against 11 is a factor of 3.82 in our favour and it produces $264M against $76M, a factor of 3.47 in theirs. A larger percentage of a smaller base is less money, and the chart puts the percentage on the axis that dominates.\n- Now run that same subtraction at the other end of the table, because the answer changes there. In the final year the leader adds 4,489 - 4,044 = $445M and we add 1,476 - 1,039 = $437M, so the gap widens by 445 - 437 = $8M, 0.27% of the $3,005M gap it starts that year from, against the $188M it widened in the first year. The turn is already visible one column earlier: at +5 the leader adds 4,044 - 3,643 = $401M against our 1,039 - 732 = $307M, a widening of $94M. The annual damage runs 188, then 94, then 8, so the gap has all but stopped growing at the exact right-hand edge of the exhibit. The strategy is working; it is the timing the deck has wrong.\n- Push past the chart to get the horizon. Hold 42% and 11% from today's $180M and $2,400M and our revenue passes the leader's in year 11, five years beyond the last column drawn here. So the honest reading is three-staged: the gap widens for six years, flattens around the end of the charted window, and closes only in year 11.\n- The ratio was not lying, it was answering a different question. It genuinely improves from 13.33 to 3.04, a factor of 4.38, and by that metric we are catching up throughout. Which metric is right depends on who is asking: for tracking whether the strategy has traction the ratio is the better instrument, and for anyone funding the deficit the absolute gap is the only one that matters. The exhibit prints both, which is why the choice has to be made explicitly rather than by whichever column is easier to read.\n- Last mile: the chart does not support the deck on the horizon the deck is written for. The gap runs $2,220M to $3,013M and is still at its maximum in the final column, so on a planning horizon of six years we do not close it - we fall $793M, 35.72%, further behind, and the crossover lands in year 11. Rewrite the claim as what the data actually says: the gap stops widening around year 6 at $3,013M and closes around year 11 on unchanged rates. Two things to bring back before that goes in front of a board: what our growth rate would have to be to turn the gap inside three years rather than six, and whether 42% is defensible for eleven consecutive years on a base that already has to multiply 1,476 / 180 = 8.2 times inside the window charted here.\n\n**[TWO LEVERS]** One base for all four numbers: today's printed revenues — Brackenvale $180M and the leader $2,400M — compounded one year, each side at a rate taken from the right-hand axis. The count is the leader's revenue lead one year out, $M. Lever 1 — Brackenvale's growth rate: 42% → 11%. Lever 2 — the leader's growth rate: 11% → 42%. Base case 2,408.4; lever 1 alone 2,464.2; lever 2 alone 3,152.4; both together 3,208.2 (no interaction term). The same 31-point rate is worth $744M to the leader and $55.8M to us, a factor of 13.33 — the Ratio the exhibit prints for today — so the 42-against-11 advantage buys $76M against $264M and the gap still widens from $2,220M to $2,408M; what does not survive is the deck's claim on its own horizon, since the gap is at its maximum $3,013M in the last charted column and the two rates close it only in year 11. Scope: \"only in year 11\" dates the crossover on the two printed rates held unchanged, five years past the last charted column, and is not a claim that no other path closes the gap."
+    "en": "- Naive: the Ratio column falls from 13.33 to 3.04 across six years, our rate is 42% against the leader's 11%, and on the right axis that difference is the loudest thing on the chart. A falling ratio and a rate advantage read together as convergence, so the deck's claim looks confirmed by the very exhibit that was meant to test it.\n- Correct: the Gap column sits on the same page and moves the other way. $2,220M today, then 2,408, 2,594, 2,767, 2,911, 3,005 and 3,013 - the absolute gap rises in every one of the six years and ends $793M wider than it started, a factor of 1.36, or 35.72%. The ratio improves and the gap widens simultaneously; both readings are correct, and only one of them is denominated in money.\n- The cause is the base, and the first year shows it whole. We go 180 to 256, adding $76M. The leader goes 2,400 to 2,664, adding $264M. The gap therefore grows by 264 - 76 = $188M, 8.47% of the $2,220M it starts from, which is exactly the step from 2,220 to 2,408. A rate of 42 against 11 is a factor of 3.82 in our favour and it produces $264M against $76M, a factor of 3.47 in theirs. A larger percentage of a smaller base is less money, and the chart puts the percentage on the axis that dominates.\n- Now run that same subtraction at the other end of the table, because the answer changes there. In the final year the leader adds 4,489 - 4,044 = $445M and we add 1,476 - 1,039 = $437M, so the gap widens by 445 - 437 = $8M, 0.27% of the $3,005M gap it starts that year from, against the $188M it widened in the first year. The turn is already visible one column earlier: at +5 the leader adds 4,044 - 3,643 = $401M against our 1,039 - 732 = $307M, a widening of $94M. The annual damage runs 188, then 94, then 8, so the gap has all but stopped growing at the exact right-hand edge of the exhibit. The strategy is working; it is the timing the deck has wrong.\n- Push past the chart to get the horizon. Hold 42% and 11% from today's $180M and $2,400M and our revenue passes the leader's in year 11, five years beyond the last column drawn here. So the honest reading is three-staged: the gap widens for six years, flattens around the end of the charted window, and closes only in year 11.\n- The ratio was not lying, it was answering a different question. It genuinely improves from 13.33 to 3.04, a factor of 4.38, and by that metric we are catching up throughout. Which metric is right depends on who is asking: for tracking whether the strategy has traction the ratio is the better instrument, and for anyone funding the deficit the absolute gap is the only one that matters. The exhibit prints both, which is why the choice has to be made explicitly rather than by whichever column is easier to read.\n- Last mile: the chart does not support the deck on the horizon the deck is written for. The gap runs $2,220M to $3,013M and is still at its maximum in the final column, so on a planning horizon of six years we do not close it - we fall $793M, 35.72%, further behind, and the crossover lands in year 11. Rewrite the claim as what the data actually says: the gap stops widening around year 6 at $3,013M and closes around year 11 on unchanged rates. Two things to bring back before that goes in front of a board: what our growth rate would have to be to turn the gap inside three years rather than six, and whether 42% is defensible for eleven consecutive years on a base that already has to multiply 1,476 / 180 = 8.2 times inside the window charted here.\n\n**[TWO LEVERS]** One base for all four numbers: today's printed revenues — Brackenvale $180M and the leader $2,400M — compounded one year, each side at a rate taken from the right-hand axis. The count is the leader's revenue lead one year out, $M. Lever 1 — Brackenvale's growth rate: 42% → 11%. Lever 2 — the leader's growth rate: 11% → 42%. Base case 2,408.4; lever 1 alone 2,464.2; lever 2 alone 3,152.4; both together 3,208.2 (no interaction term). The same 31-point rate is worth $744M to the leader and $55.8M to us, a factor of 13.33 — the Ratio the exhibit prints for today — so the 42-against-11 advantage buys $76M against $264M and the gap still widens from $2,220M to $2,408M; what does not survive is the deck's claim on its own horizon, since the gap is at its maximum $3,013M in the last charted column, $793M or 35.72% above today's $2,220M and the two rates close it only in year 11. Scope: \"only in year 11\" dates the crossover on the two printed rates held unchanged, five years past the last charted column, and is not a claim that no other path closes the gap."
    },
    "provoked": {
     "ru": "= **D1**."
@@ -4877,7 +4975,9 @@
     "naive": "читает падающее отношение к лидеру как сокращение отставания",
     "correct": "считает разрыв в деньгах на обоих концах ряда и сравнивает абсолютные приросты",
     "why": "больший процент от меньшей базы даёт меньше денег, поэтому отношение и разрыв движутся в разные стороны",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-98-абсолютный-против-относительного-разрыва",
+    "code2": []
    }
   },
   {
@@ -4998,7 +5098,9 @@
     "naive": "принимает среднее как типичное значение и позиционируется по нему",
     "correct": "строит медиану по строкам и считает долю объектов ниже среднего",
     "why": "один выброс тянет среднее вверх, и оно перестаёт описывать типичный объект",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-08-среднее-вместо-распределения",
+    "code2": []
    }
   },
   {
@@ -5125,7 +5227,9 @@
     "naive": "читает убывающие столбцы как падение во времени",
     "correct": "проверяет, что несёт каждая ось, и считает число периодов в экспонате",
     "why": "падение требует одной величины, измеренной дважды, а здесь каждая категория измерена один раз",
-    "src": "выведено из checklist"
+    "src": "выведено из checklist",
+    "code": "MECH-95-ось-и-шкала",
+    "code2": []
    }
   },
   {
@@ -5217,7 +5321,9 @@
    "mehanizm": {
     "naive": "ищет подмену базы между колонками и хеджирует вывод, не найдя её",
     "correct": "называет вердикт первой фразой и подтверждает его независимой проверкой суммы колонок",
-    "why": "хеджирование при сходящихся колонках выдаёт неуверенность за строгость"
+    "why": "хеджирование при сходящихся колонках выдаёт неуверенность за строгость",
+    "code": "MECH-40-выдуманная-ловушка",
+    "code2": []
    }
   },
   {
@@ -5328,7 +5434,9 @@
    "mehanizm": {
     "naive": "приписывает разрыв маржи тому, как работает вторая организация, и переносит её маржу на своих клиентов",
     "correct": "раскладывает разрыв в прибыли на клиента на часть от микса плательщиков и часть от стоимости обслуживания",
-    "why": "при одинаковых тарифах разница целиком описывает состав обслуживаемых, а не способ обслуживания"
+    "why": "при одинаковых тарифах разница целиком описывает состав обслуживаемых, а не способ обслуживания",
+    "code": "MECH-114-перенос-чужой-экономики",
+    "code2": []
    }
   },
   {
@@ -5439,7 +5547,9 @@
    "mehanizm": {
     "naive": "читает разрыв между двумя ячейками как эффект признака, по которому эти ячейки разрезаны",
     "correct": "режет те же строки вторым признаком и называет состав обеих ячеек",
-    "why": "на малом наборе два признака могут почти совпадать, и разрыв нельзя отнести ни к одному из них"
+    "why": "на малом наборе два признака могут почти совпадать, и разрыв нельзя отнести ни к одному из них",
+    "code": "MECH-93-признак-разреза-как-причина",
+    "code2": []
    }
   }
  ]
