@@ -1,6 +1,6 @@
 {
  "version": "1.0",
- "count": 56,
+ "count": 57,
  "games": [
   {
    "id": 1,
@@ -23847,6 +23847,508 @@
      "if_decoy": 34.89,
      "calc": "(1240000*1.85-780000-1240000*0.72)/(1240000*1.85)=27.08%",
      "why": "и до маржи, которой кандидат закрывает игру"
+    }
+   ]
+  },
+  {
+   "id": 59,
+   "title": "Standing Room",
+   "world": "Kelmar Ferries",
+   "family": "O",
+   "difficulty": "Medium",
+   "depth": "STANDARD",
+   "trap_or_clean": "Trap",
+   "objective": "Work out what a season of ferry crossings was actually worth once concessions are counted.",
+   "study_md": "Kelmar Ferries works 3 quays on the Sarel sound and has sailed since 1964. This season it carried 62,000 paying crossings, and after concessions the average fare it collected was $18.40.",
+   "distractors": [
+    "3 quays",
+    "1964"
+   ],
+   "exhibits": [
+    {
+     "id": "ex1",
+     "title": "Crossings offered, by quarter",
+     "kind": "line",
+     "body": {
+      "columns": [
+       "Q1",
+       "Q2",
+       "Q3",
+       "Q4"
+      ],
+      "rows": [
+       {
+        "label": "Crossings offered",
+        "cells": [
+         18000,
+         19500,
+         20500,
+         16000
+        ]
+       }
+      ]
+     },
+     "reveal": "auto",
+     "triggers": []
+    },
+    {
+     "id": "ex2",
+     "title": "Tariff and cost lines",
+     "kind": "table",
+     "body": {
+      "columns": [
+       "Value"
+      ],
+      "rows": [
+       {
+        "label": "Tariff board fare ($/crossing)",
+        "cells": [
+         21
+        ]
+       },
+       {
+        "label": "Fuel and crew ($/crossing)",
+        "cells": [
+         9.6
+        ]
+       },
+       {
+        "label": "Fixed season cost ($)",
+        "cells": [
+         410000
+        ]
+       }
+      ]
+     },
+     "reveal": "auto",
+     "triggers": []
+    }
+   ],
+   "analysis": [
+    {
+     "q": 1,
+     "prompt": "Gap between the busiest and the quietest quarter offered (ex1).",
+     "parts": [
+      {
+       "key": "q1",
+       "input": "numeric",
+       "answer": 4500,
+       "round": 0,
+       "tolerance": 0.01,
+       "naive": 20500,
+       "naive_reason": "answers with the busiest quarter itself; the question asks how far apart the two ends of the season were"
+      }
+     ]
+    },
+    {
+     "q": 2,
+     "prompt": "Season fare revenue.",
+     "parts": [
+      {
+       "key": "q2",
+       "input": "numeric",
+       "answer": 1140800,
+       "round": 2,
+       "tolerance": 0.01,
+       "naive": 1554000,
+       "naive_reason": "takes both numbers off the screen — the crossings the boats offered and the fare on the tariff board; neither is what was sold",
+       "naives": [
+        {
+         "value": 1554000,
+         "reason": "takes both numbers off the screen — the crossings the boats offered and the fare on the tariff board; neither is what was sold"
+        },
+        {
+         "value": 377200,
+         "reason": "prices the busiest quarter as the whole season"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "q": 3,
+     "prompt": "Season profit after the cost lines (ex2).",
+     "parts": [
+      {
+       "key": "q3",
+       "input": "numeric",
+       "answer": 135600,
+       "round": 2,
+       "tolerance": 0.01,
+       "naive": 730800,
+       "naive_reason": "takes the fixed line off revenue and never pays the fuel and crew each crossing burns",
+       "naives": [
+        {
+         "value": 730800,
+         "reason": "takes the fixed line off revenue and never pays the fuel and crew each crossing burns"
+        },
+        {
+         "value": 545600,
+         "reason": "pays the crossings but forgets the fixed line the season owes whether the boats sail or not"
+        },
+        {
+         "value": 433600,
+         "reason": "profit built on the offered crossings AND the board fare — neither of them was sold"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "q": 4,
+     "prompt": "(a) What share of revenue that profit is. (b) Profit for each paying crossing.",
+     "parts": [
+      {
+       "key": "q4a",
+       "input": "numeric",
+       "answer": 11.89,
+       "round": 2,
+       "tolerance": 0.01,
+       "naive": 13.49,
+       "naive_reason": "measures the profit against what was spent rather than against what came in",
+       "naives": [
+        {
+         "value": 13.49,
+         "reason": "measures the profit against what was spent rather than against what came in"
+        },
+        {
+         "value": 27.9,
+         "reason": "share built on the offered crossings and the board fare together"
+        }
+       ]
+      },
+      {
+       "key": "q4b",
+       "input": "numeric",
+       "answer": 2.19,
+       "round": 2,
+       "tolerance": 0.01,
+       "naive": 11.79,
+       "naive_reason": "divides revenue less the fixed line by the crossings and never pays the fuel and crew",
+       "naives": [
+        {
+         "value": 11.79,
+         "reason": "divides revenue less the fixed line by the crossings and never pays the fuel and crew"
+        },
+        {
+         "value": 5.86,
+         "reason": "profit per crossing when both numbers come off the screen"
+        }
+       ]
+      }
+     ]
+    }
+   ],
+   "report": {
+    "written": {
+     "template": "The season collected [b1] a crossing. On that fare the ferries took [b2] dollars and kept [b3] after costs — [b4] percent of revenue. The heavier of the two cost lines is [d1], and every paying crossing left [b5] dollars behind.",
+     "blanks": [
+      {
+       "key": "b1",
+       "input": "text",
+       "answer": "$18.40"
+      },
+      {
+       "key": "b2",
+       "input": "numeric",
+       "answer": "1140800"
+      },
+      {
+       "key": "b3",
+       "input": "numeric",
+       "answer": "135600"
+      },
+      {
+       "key": "b4",
+       "input": "numeric",
+       "answer": "11.89"
+      },
+      {
+       "key": "d1",
+       "input": "dropdown",
+       "options": [
+        "the fixed season cost",
+        "the fares given away against the tariff board"
+       ],
+       "answer": "the fixed season cost"
+      },
+      {
+       "key": "b5",
+       "input": "numeric",
+       "answer": "2.19"
+      }
+     ]
+    },
+    "graph_selection": {
+     "prompt": "Show how the season's revenue divided between cost and what was left.",
+     "options": [
+      "Line",
+      "Bar",
+      "Pie"
+     ],
+     "answer": "Pie"
+    }
+   },
+   "cases": [
+    {
+     "c": 1,
+     "input": "numeric",
+     "round": 0,
+     "tolerance": 0.01,
+     "prompt": "Empty seats — the boats offered 74,000 crossings this season. How many of them sailed without paying?",
+     "answer": 12000,
+     "naive": 62000,
+     "naive_reason": "answers with the crossings that paid; the question asks how many of the offered ones did not"
+    },
+    {
+     "c": 2,
+     "input": "numeric",
+     "round": 2,
+     "tolerance": 0.01,
+     "prompt": "Tariff gap — the board fare is $21.00. Across the season, how much revenue did the concessions give away?",
+     "answer": 161200,
+     "naive": 2.6,
+     "naive_reason": "answers with the gap on a single crossing; the season carried that gap on every paying one"
+    },
+    {
+     "c": 3,
+     "input": "choice",
+     "round": 0,
+     "tolerance": 0,
+     "prompt": "Which took more out of the season — the fares given away against the $21.00 board, or the fuel and crew burned on the crossings that sailed unpaid?",
+     "options": [
+      "The fares given away",
+      "Fuel and crew on the unpaid crossings"
+     ],
+     "answer": "The fares given away",
+     "naive": "Fuel and crew on the unpaid crossings",
+     "naive_reason": "empty seats look like the obvious waste; the concession on every paying crossing runs past what the empty ones burn"
+    },
+    {
+     "c": 4,
+     "input": "numeric",
+     "round": 2,
+     "tolerance": 0.01,
+     "prompt": "Everything in — the operator also pays $88,000 of harbour dues that sit outside the cost lines above. What share of revenue is left once they are paid?",
+     "answer": 4.17,
+     "naive": 4.35,
+     "naive_reason": "measures what is left against what was spent; the question asks its share of revenue"
+    },
+    {
+     "c": 5,
+     "input": "choice",
+     "round": 0,
+     "tolerance": 0,
+     "prompt": "Two offers: fill 6,000 of the unpaid crossings at the fare the season actually collected, or take $60,000 off the fixed cost. Fuel and crew cost $9.60 a crossing. Which is worth more?",
+     "options": [
+      "Fill 6,000 unpaid crossings",
+      "Take $60,000 off the fixed cost"
+     ],
+     "answer": "Take $60,000 off the fixed cost",
+     "naive": "Fill 6,000 unpaid crossings",
+     "naive_reason": "filling seats reads as growth; at the fare this season collected a filled crossing leaves $8.80, and six thousand of them fall short of the cut"
+    },
+    {
+     "c": 6,
+     "input": "choice",
+     "round": 0,
+     "tolerance": 0,
+     "prompt": "Which is bigger over the season — the fuel and crew burned across the paying crossings at $9.60 each, or the $640,000 the operator pays in charter hire?",
+     "options": [
+      "Fuel and crew on the paying crossings",
+      "The charter hire"
+     ],
+     "answer": "The charter hire",
+     "naive": "Fuel and crew on the paying crossings",
+     "naive_reason": "nine dollars sixty on every crossing feels like it must outrun a single printed line; this season it did not, and it only fails to by a margin the crossing count decides"
+    }
+   ],
+   "analysis_review": [
+    {
+     "q": 1,
+     "key": "q1",
+     "answer": 4500,
+     "trap": 20500,
+     "lesson": "answers with the busiest quarter instead of the gap"
+    },
+    {
+     "q": 2,
+     "key": "q2",
+     "answer": 1140800,
+     "trap": 1554000,
+     "lesson": "takes both numbers off the screen",
+     "chain_trap": [
+      1302000,
+      1361600
+     ],
+     "chain_lesson": [
+      "унёс число рейсов, но не цену: считает по тарифу с доски, а сезон продавался дешевле",
+      "унёс цену, но не число рейсов: считает по предложенным, а платили не за все"
+     ]
+    },
+    {
+     "q": 3,
+     "key": "q3",
+     "answer": 135600,
+     "trap": 730800,
+     "lesson": "never pays the fuel and crew",
+     "chain_trap": [
+      296800,
+      241200
+     ],
+     "chain_lesson": [
+      "прибыль на тарифной цене: сезон её не собрал",
+      "прибыль на предложенных рейсах: и выручка, и топливо посчитаны по ним"
+     ]
+    },
+    {
+     "q": 4,
+     "key": "q4a",
+     "answer": 11.89,
+     "trap": 13.49,
+     "lesson": "measures against spend, not revenue",
+     "chain_trap": [
+      22.8,
+      17.71
+     ],
+     "chain_lesson": [
+      "доля на тарифной цене — вдвое выше настоящей",
+      "доля на предложенных рейсах"
+     ]
+    },
+    {
+     "q": 4,
+     "key": "q4b",
+     "answer": 2.19,
+     "trap": 11.79,
+     "lesson": "never pays the fuel and crew before dividing",
+     "chain_trap": [
+      4.79,
+      3.26
+     ],
+     "chain_lesson": [
+      "на рейс по тарифной цене",
+      "на рейс по предложенным рейсам"
+     ]
+    }
+   ],
+   "collect": [
+    {
+     "id": "s1",
+     "text": "62,000 paying crossings",
+     "role": "needed",
+     "used_in": [
+      "q2",
+      "q3",
+      "q4a",
+      "q4b",
+      "c1",
+      "c2",
+      "c3",
+      "c4",
+      "c5",
+      "c6",
+      "report"
+     ],
+     "note": "оплаченные рейсы: 62,000*18.40=1,140,800 (q2). Без него подставляются предложенные 74,000 с ex1"
+    },
+    {
+     "id": "s2",
+     "text": "$18.40",
+     "role": "needed",
+     "used_in": [
+      "q2",
+      "q3",
+      "q4a",
+      "q4b",
+      "c2",
+      "c3",
+      "c4",
+      "c5",
+      "c6",
+      "report"
+     ],
+     "note": "собранная цена: без неё подставляется тарифная 21.00 с ex2"
+    },
+    {
+     "id": "s3",
+     "text": "3 quays",
+     "role": "noise",
+     "used_in": [],
+     "note": "объявленный distractor, ни одна цепочка"
+    },
+    {
+     "id": "s4",
+     "text": "1964",
+     "role": "noise",
+     "used_in": [],
+     "note": "год начала работы, ни одна цепочка"
+    }
+   ],
+   "journal_required": [
+    "s1",
+    "s2"
+   ],
+   "chain": [
+    {
+     "field": "q2",
+     "chips": [
+      "s1",
+      "s2"
+     ],
+     "decoy": null,
+     "answer": 1140800,
+     "if_partial": {
+      "s1": 1302000,
+      "s2": 1361600
+     },
+     "calc": "62000*18.4=1140800",
+     "why": "полю нужны ОБА числа: ошибка сбора здесь не «взял другое», а «взял только одно»"
+    },
+    {
+     "field": "q3",
+     "chips": [
+      "s1",
+      "s2"
+     ],
+     "decoy": null,
+     "answer": 135600,
+     "if_partial": {
+      "s1": 296800,
+      "s2": 241200
+     },
+     "calc": "62000*18.4-410000-62000*9.6=135600",
+     "why": "пропуск любого из двух чипов доезжает до прибыли"
+    },
+    {
+     "field": "q4a",
+     "chips": [
+      "s1",
+      "s2"
+     ],
+     "decoy": null,
+     "answer": 11.89,
+     "if_partial": {
+      "s1": 22.8,
+      "s2": 17.71
+     },
+     "calc": "(62000*18.4-410000-62000*9.6)/(62000*18.4)=11.89%",
+     "why": "и до доли, причём по-разному в зависимости от того, какой чип потерян"
+    },
+    {
+     "field": "q4b",
+     "chips": [
+      "s1",
+      "s2"
+     ],
+     "decoy": null,
+     "answer": 2.19,
+     "if_partial": {
+      "s1": 4.79,
+      "s2": 3.26
+     },
+     "calc": "(62000*18.4-410000-62000*9.6)/62000=2.1871",
+     "why": "и до величины на один рейс, которой кандидат закрывает игру"
     }
    ]
   }
