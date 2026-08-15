@@ -790,6 +790,10 @@
     }
     .firm-card:hover { border-color: rgba(255,255,255,.18); transform: translateY(-2px); }
     .firm-card.selected { border-color: var(--coral); background: rgba(93,184,166,.07); }
+
+    .firm-note { margin-top: 14px; font-size: 12.5px; line-height: 1.6; color: var(--on-dark-soft);
+      border-left: 2px solid var(--accent-teal); padding-left: 12px; max-width: 720px; }
+
     .firm-card:focus-visible { box-shadow: 0 0 0 2px var(--coral); }
     .firm-initial {
       width: 46px; height: 46px; border-radius: var(--radius-md);
@@ -1463,6 +1467,13 @@
     .rk-rv-trap { color: var(--accent-amber); font-weight: 600; }
     .rk-rv-miss { color: var(--on-dark-soft); font-weight: 600; }
     .rk-rv-chain b { color: var(--accent-amber); }
+    /* Training-такт: пристройка к вопросу, а не новый вопрос. Отсюда сдвиг
+       вправо и линия слева — визуально видно, что данные те же. */
+    .rk-tact { margin: 4px 0 14px 18px; padding: 10px 0 2px 14px; border-left: 2px solid rgba(232,168,124,.35); }
+    .rk-tact-h { font-size: 11px; letter-spacing: .09em; text-transform: uppercase; color: var(--accent-amber); font-weight: 700; margin-bottom: 6px; }
+    .rk-tact-tag { font-weight: 400; letter-spacing: .04em; text-transform: none; color: var(--on-dark-soft); margin-left: 6px; }
+    .rk-tact-q { font-size: 13.5px; color: var(--on-dark-soft); line-height: 1.55; }
+    .rk-tact .rk-field { margin: 8px 0 0; background: transparent; }
     .rk-pre { white-space: pre-wrap; font-size: 12.5px; color: var(--on-dark-soft); font-family: var(--mono); }
     .rk-exh { margin-top: 14px; }
     .rk-field { margin: 12px 0; padding: 10px 12px; border: 1px solid var(--sv-line); border-radius: 10px; background: rgba(255,255,255,.015); transition: border-color .2s; }
@@ -2873,6 +2884,7 @@
         </div>
 
       </div>
+      <div class="firm-note" data-i18n="setup.firmnote">Cases are real casebook cases (Wharton, Darden). The firm you pick sets who drives: McKinsey runs interviewer-led, BCG and Bain run interviewee-led - the same case, a different conversation.</div>
     </div>
 
     <!-- Case type selection -->
@@ -3963,6 +3975,7 @@ const I18N = {
     // Setup screen
     'setup.step1': 'Step 1 of 2',
     'setup.firm': 'Choose your target firm',
+    'setup.firmnote': 'Cases are real casebook cases (Wharton, Darden). The firm you pick sets who drives: McKinsey runs interviewer-led, BCG and Bain run interviewee-led - the same case, a different conversation.',
     'setup.step2': 'Step 2 of 2',
     'setup.casetype': 'Choose your case type',
     // Drill screen
@@ -4365,6 +4378,7 @@ const I18N = {
     // Setup screen
     'setup.step1': 'Шаг 1 из 2',
     'setup.firm': 'Выбери целевую фирму',
+    'setup.firmnote': 'Кейсы настоящие, из кейсбуков Wharton и Darden. Фирма задаёт, кто ведёт: McKinsey - interviewer-led, BCG и Bain - interviewee-led. Кейс тот же, разговор другой.',
     'setup.step2': 'Шаг 2 из 2',
     'setup.casetype': 'Выбери тип кейса',
     // Drill screen
@@ -5913,7 +5927,7 @@ async function startRedrock() {
   rkMarkSeen(game.id);
   solve = {
     rk: true, game: game, phase: 'study', qIndex: 0, reportStep: 'written',
-    rkVals: {}, rkGraded: {}, rkMeta: {}, revealed: [],
+    rkVals: {}, rkGraded: {}, rkMeta: {}, rkTacts: {}, revealed: [],
     rkTickets: {}, rkReview: null, rkReviewBusy: false,
     journal: [], calcLog: [],
     limitS: (game.est_minutes || 30) * 60, timerId: null, startMs: null
@@ -6121,8 +6135,28 @@ async function rkCheck(fieldId) {
     // поле. Разбор открывается только по полному набору билетов, поэтому
     // потерять билет значит потерять разбор: кладём сразу, как пришёл.
     if (r.ticket) solve.rkTickets[fieldId] = r.ticket;
+    // Training-такт: сервер прислал его вместе с оценкой родителя. Раньше
+    // условия такта на клиенте нет — и не должно быть.
+    if (Array.isArray(r.training) && r.training.length) solve.rkTacts[fieldId] = r.training;
   } catch (e) { solve.rkGraded[fieldId] = 'ungraded'; rkToast(e.message); }
   renderSolve();
+}
+
+/* ── TRAINING-ТАКТ ────────────────────────────────────────────────────────────
+   Те же данные, другая величина. Висит под своим вопросом и появляется только
+   после того, как вопрос оценён: пока родитель не сдан, такта на экране нет. */
+function rkTactsHTML(parentFieldId) {
+  const list = solve.rkTacts[parentFieldId];
+  if (!Array.isArray(list) || !list.length) return '';
+  const items = list.map(t => {
+    const m = (solve.rkMeta && solve.rkMeta[t.id]) || {};
+    return `<div class="rk-tact">
+      <div class="rk-tact-h">Training <span class="rk-tact-tag">same data, different quantity</span></div>
+      <div class="rk-tact-q">${rkMd(t.prompt || '')}</div>
+      ${rkField(t.id, t.input || 'numeric', { unit: t.unit, options: t.options, correct: m.correct, naiveReason: m.naiveReason })}
+    </div>`;
+  }).join('');
+  return items;
 }
 
 /* ── STUDY ────────────────────────────────────────────────────────────────── */
@@ -6148,7 +6182,9 @@ function rkAnalysis(inner, foot) {
     const done = (qq.parts || []).length && (qq.parts || []).every(p => solve.rkGraded['a:' + p.key] === 'correct');
     return `<button class="sv-qnav-item ${i === solve.qIndex ? 'active' : ''} ${done ? 'answered' : ''}" onclick="solve.qIndex=${i};renderSolve()">Q${i + 1}</button>`;
   }).join('');
-  const fields = (q.parts || []).map(p => rkFieldFull('a:' + p.key, p.input || 'numeric', (p.label && p.label !== 'answer') ? p.label : '', p.unit, p.options)).join('');
+  const fields = (q.parts || []).map(p =>
+    rkFieldFull('a:' + p.key, p.input || 'numeric', (p.label && p.label !== 'answer') ? p.label : '', p.unit, p.options)
+    + rkTactsHTML('a:' + p.key)).join('');
   inner.innerHTML =
     `<div class="sv-layout"><div class="sv-layout-main">
       <div class="sv-qnav">${nav}</div>
@@ -6280,8 +6316,14 @@ function rkReviewHTML() {
     const trap = (r.trap === null || r.trap === undefined) ? '' :
       `<div class="rk-rv-line"><span>Trap</span> <b>${esc(String(r.trap))}</b>${r.lesson ? ' ' + rkInline(r.lesson) : ''}</div>`;
     // Путь ошибки сбора: не «неверно», а где именно кандидат свернул.
-    const chain = (r.chainTrap === null || r.chainTrap === undefined) ? '' :
-      `<div class="rk-rv-line rk-rv-chain"><span>Carried</span> <b>${esc(String(r.chainTrap))}</b>${r.chainLesson ? ' ' + rkInline(r.chainLesson) : ''}</div>`;
+    // Класс SUB даёт одно число (унёс не то), класс OMIT — несколько (унёс только
+    // одно из двух, у каждого пропуска свой ответ и свой урок). Порядок массивов
+    // задан порядком chips[] и на клиенте не пересортировывается.
+    const ct = r.chainTrap, cl = r.chainLesson;
+    const chainOne = (t, l) => `<div class="rk-rv-line rk-rv-chain"><span>Carried</span> <b>${esc(String(t))}</b>${l ? ' ' + rkInline(l) : ''}</div>`;
+    const chain = Array.isArray(ct)
+      ? ct.map((t, i) => chainOne(t, Array.isArray(cl) ? cl[i] : cl)).join('')
+      : (ct === null || ct === undefined) ? '' : chainOne(ct, cl);
     return `<div class="rk-rv-item">
         <div class="rk-rv-head">Q${esc(String(r.q))} <span class="rk-rv-key">${esc(String(r.key))}</span> ${tag}</div>
         <div class="rk-rv-line"><span>Answer</span> <b>${esc(String(r.answer))}</b></div>
