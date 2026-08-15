@@ -1323,6 +1323,16 @@
     .rk-canvas #svCalcLog { color: #9fb3c2; }
     .rk-canvas #svCalcDisp { color: #ffffff; }
 
+
+    .rk-linewrap { padding-bottom: 10px; }
+    .rk-line { width: 100%; height: auto; max-height: 210px; display: block; margin: 6px 0 2px; }
+    .rk-line-grid line { stroke: currentColor; opacity: .16; stroke-width: 1; }
+    .rk-line-path { fill: none; stroke: var(--accent-teal); stroke-width: 2.2; stroke-linejoin: round; }
+    .rk-line-dot circle { fill: var(--accent-teal); }
+    .rk-line-lab text { fill: currentColor; opacity: .65; font-size: 11px; }
+    .rk-linechips { display: flex; flex-wrap: wrap; gap: 8px; font-size: 12px; color: var(--on-dark-soft); }
+    .rk-linechip { display: inline-flex; align-items: center; gap: 4px; }
+
       /* ══════════ McKINSEY SOLVE GAME ══════════ */
     #screen-solve { height: 100vh; height: 100dvh; max-height: 100vh; max-height: 100dvh; min-height: 0; overflow: hidden; background: var(--surface-dark); flex-direction: column; }
     #screen-solve.active { display: flex; min-height: 0; }
@@ -6005,6 +6015,34 @@ function rkExhibit(ex) {
       <button class="rk-mini" onclick="rkReveal('${esc(ex.id)}')">Request</button></div></div>`;
   }
   const b = ex.body || {};
+  // kind:"line" рисовался таблицей: цех спросил на приёмке, и был прав.
+  // Линия из одной строки чисел, точки подписаны, значения остаются чипами -
+  // иначе величину нельзя утащить в журнал, а это ломает сбор.
+  if (ex.kind === 'line' && b.rows && b.rows.length === 1 && Array.isArray(b.rows[0].cells) && b.rows[0].cells.length > 1) {
+    const cells = b.rows[0].cells.map(Number);
+    const cols = b.columns || cells.map((_, i) => String(i + 1));
+    const W = 620, H = 170, PL = 44, PR = 14, PT = 14, PB = 26;
+    const min = Math.min.apply(null, cells), max = Math.max.apply(null, cells);
+    const span = (max - min) || 1;
+    const x = i => PL + i * (W - PL - PR) / (cells.length - 1);
+    const y = v => PT + (H - PT - PB) * (1 - (v - min) / span);
+    const pts = cells.map((v, i) => x(i).toFixed(1) + ',' + y(v).toFixed(1)).join(' ');
+    const dots = cells.map((v, i) => `<circle cx="${x(i).toFixed(1)}" cy="${y(v).toFixed(1)}" r="3.5"/>`).join('');
+    const xlab = cols.map((c, i) => `<text x="${x(i).toFixed(1)}" y="${H - 8}" text-anchor="middle">${esc(String(c))}</text>`).join('');
+    const grid = [0, .5, 1].map(t => `<line x1="${PL}" x2="${W - PR}" y1="${(PT + (H - PT - PB) * t).toFixed(1)}" y2="${(PT + (H - PT - PB) * t).toFixed(1)}"/>`).join('');
+    const ylab = [max, min].map((v, k) => `<text x="${PL - 8}" y="${(k === 0 ? PT + 4 : H - PB)}" text-anchor="end">${esc(String(v))}</text>`).join('');
+    const chips = cells.map((v, i) => `<span class="rk-linechip">${esc(String(cols[i]))}: ${svChip(String(v), (b.rows[0].label || '') + ' ' + cols[i])}</span>`).join('');
+    return `<div class="sv-exhibit rk-linewrap">
+      <div class="sv-exhibit-t">${esc(ex.title || 'Exhibit')}</div>
+      <svg class="rk-line" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${esc(ex.title || 'line chart')}">
+        <g class="rk-line-grid">${grid}</g>
+        <polyline class="rk-line-path" points="${pts}"/>
+        <g class="rk-line-dot">${dots}</g>
+        <g class="rk-line-lab">${xlab}${ylab}</g>
+      </svg>
+      <div class="rk-linechips">${chips}</div>
+    </div>`;
+  }
   if (b.columns && b.rows) {
     const head = [''].concat(b.columns);
     const rows = b.rows.map(r => [r.label].concat(r.cells));
