@@ -38,6 +38,10 @@ function gameById(id) {
 /* ───────────────────────── gradeable field map ───────────────────────────────
    Flatten every gradeable field of a game into a stable fieldId → key record.
    The client grades field-by-field with these ids; the server resolves the key. */
+// Ключ такта. Порядковый номер внутри игры входит в ключ, потому что на одном
+// поле может висеть несколько тактов, а `from` у них общий.
+function trainingId(t, i) { return 't:' + String(t.from || '?') + ':' + i; }
+
 function fieldMap(game) {
   const m = new Map();
   const add = (id, rec) => m.set(id, rec);
@@ -69,6 +73,16 @@ function fieldMap(game) {
     add('v:' + f.key, { input: f.input || 'numeric', answer: f.answer, naive: f.naive, naive_reason: f.naive_reason,
       options: f.options || null, round: (f.round == null ? 2 : f.round), tolerance: (f.tolerance == null ? 0.01 : f.tolerance) });
   }
+  // Training-такт (долг dev №4). Те же данные, другая величина: такт висит на
+  // аналитическом поле `from` и открывается только после того, как это поле
+  // оценено. Оценивается тем же кодом, что и всё остальное, — своего грейдера
+  // у тактов нет и быть не должно.
+  (game.training || []).forEach((t, i) => {
+    add(trainingId(t, i), {
+      input: t.input || 'numeric', answer: t.answer, naive: t.naive, naive_reason: t.naive_reason,
+      options: t.options || null, round: (t.round == null ? 2 : t.round), tolerance: (t.tolerance == null ? 0.01 : t.tolerance)
+    });
+  });
   // Cases 1–6
   for (const c of (game.cases || [])) {
     add('c:' + c.c, { input: c.input || 'numeric', answer: c.answer, naive: c.naive, naive_reason: c.naive_reason,
@@ -86,7 +100,10 @@ function fieldMap(game) {
 // `collect` — разметка экрана сбора: какой токен рабочий, а какой шум. Это ключ
 // ровно того же сорта, что и answer: весь смысл задачи в том, чтобы кандидат
 // решил это сам. В браузер уезжает только id и текст чипа.
-const RK_SERVER_KEYS = ['answer', 'naive', 'naive_reason', 'justify_rubric', 'distractors', 'hidden', 'collect', 'role', 'used_in', 'chain'];
+// `training` — такты: их условие несёт величину, которой в вопросе ещё не было.
+// Уехав в браузер целиком, такт выдаёт и ответ, и то, что кандидату предстоит
+// считать дальше. Наружу он уходит по одному и только после оценки родителя.
+const RK_SERVER_KEYS = ['answer', 'naive', 'naive_reason', 'justify_rubric', 'distractors', 'hidden', 'collect', 'role', 'used_in', 'chain', 'training'];
 function rkDeepStrip(v) {
   if (Array.isArray(v)) return v.map(rkDeepStrip);
   if (v && typeof v === 'object') {
@@ -480,6 +497,25 @@ export default async function handler(req, res) {
       // действительно оценено (ungraded — это несостоявшаяся сдача, не сдача).
       if (fid.indexOf('a:') === 0 && out && out.status && out.status !== 'ungraded') {
         try { out.ticket = rkTicket(userId, g.id, fid); } catch (e) { /* без ключа просто нет билета */ }
+      }
+      // Training-такт едет ВМЕСТЕ с оценкой родителя и никак иначе: отдельного
+      // действия нет, потому что отдельное действие можно позвать заранее и
+      // вытащить условие такта до того, как вопрос сдан. Ответ, наив, разбор
+      // наива и счёт остаются на сервере — уходит только условие.
+      if (fid.indexOf('a:') === 0 && out && out.status && out.status !== 'ungraded') {
+        const parent = fid.slice(2);
+        const tacts = (g.training || [])
+          .map((t, i) => ({ t: t, i: i }))
+          .filter(x => String(x.t.from) === parent)
+          .map(x => ({
+            id: trainingId(x.t, x.i),
+            prompt: scrubPrompt(x.t.prompt, [x.t.answer, x.t.naive]),
+            input: x.t.input || 'numeric',
+            unit: x.t.unit || null,
+            options: x.t.options || null,
+            form: x.t.form || null
+          }));
+        if (tacts.length) out.training = tacts;
       }
       return res.status(200).json(out);
     }
