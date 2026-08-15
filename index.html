@@ -80,8 +80,8 @@
       color: var(--on-dark); }
     .md-code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .92em;
       background: rgba(255,255,255,.08); padding: 1px 5px; border-radius: 4px; }
-    [data-theme="light"] .msg-bbl .md-table { border-color: rgba(31,41,55,.15); }
-    [data-theme="light"] .msg-bbl .md-table td { border-color: rgba(31,41,55,.08); }
+    [data-theme="light"] .msg-bbl .md-table, [data-theme="light"] .cas-ex-body .md-table { border-color: rgba(31,41,55,.15); }
+    [data-theme="light"] .msg-bbl .md-table td, [data-theme="light"] .cas-ex-body .md-table td { border-color: rgba(31,41,55,.08); }
     [data-theme="light"] .feat-pill { border-color: rgba(31,41,55,.12); color: rgba(31,41,55,.5); }
     [data-theme="light"] .input-el { background: #fbf8f2; }
     /* Theme toggle button */
@@ -1007,21 +1007,21 @@
     .msg-bbl strong { font-weight: 600; color: var(--on-dark); }
     .msg-bbl em { font-style: italic; }
     .msg-bbl hr { border: none; border-top: 1px solid rgba(255,255,255,.14); margin: 10px 0; }
-    .msg-bbl .md-bullet { color: var(--coral); margin-right: 7px; }
-    .msg-bbl .md-table {
+    .msg-bbl .md-bullet, .cas-ex-body .md-bullet { color: var(--coral); margin-right: 7px; }
+    .msg-bbl .md-table, .cas-ex-body .md-table {
       border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 13.5px;
       border: 1px solid rgba(255,255,255,.12); border-radius: 8px; overflow: hidden;
     }
-    .msg-bbl .md-table th {
+    .msg-bbl .md-table th, .cas-ex-body .md-table th {
       background: rgba(93,184,166,.14); color: var(--on-dark); font-weight: 600;
       text-align: left; padding: 9px 12px; border-bottom: 1px solid rgba(255,255,255,.12);
     }
-    .msg-bbl .md-table td {
+    .msg-bbl .md-table td, .cas-ex-body .md-table td {
       padding: 8px 12px; color: var(--on-dark-soft);
       border-bottom: 1px solid rgba(255,255,255,.07);
     }
-    .msg-bbl .md-table tr:last-child td { border-bottom: none; }
-    .msg-bbl .md-table tbody tr:hover td { background: rgba(255,255,255,.03); }
+    .msg-bbl .md-table tr:last-child td, .cas-ex-body .md-table tr:last-child td { border-bottom: none; }
+    .msg-bbl .md-table tbody tr:hover td, .cas-ex-body .md-table tbody tr:hover td { background: rgba(255,255,255,.03); }
     .ai .msg-bbl {
       background: var(--surface-dark-elevated); color: var(--on-dark);
       border: 1px solid rgba(255,255,255,.07); border-top-left-radius: 4px;
@@ -1566,6 +1566,17 @@
     .cas-ex-tag { display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--accent-teal); background: rgba(93,184,166,.1); border: 1px solid rgba(93,184,166,.25); border-radius: 6px; padding: 2px 8px; margin-bottom: 8px; }
     .cas-ex-title { font-size: 14.5px; font-weight: 700; color: var(--on-dark); margin-bottom: 10px; }
     .cas-ex-note { font-size: 12px; color: var(--on-dark-soft); margin-top: 10px; border-top: 1px dashed rgba(128,128,128,.3); padding-top: 8px; }
+    .cas-ex-body { font-size: 13.5px; line-height: 1.55; color: var(--on-dark); }
+    .cas-ex-body > .md-table:first-child, .cas-ex-body > .md-pre:first-child { margin-top: 0; }
+    .cas-ex-body strong { color: var(--on-dark); font-weight: 700; }
+    /* Table with no |---| separator row: same cells, no invented header. */
+    .md-table-plain td:first-child { color: var(--on-dark); }
+    .md-table-plain td:last-child { text-align: right; }
+    /* Memoranda and internal notes are written as markdown quotes in 68 case
+       exhibits; without this rule the '>' reached the candidate as text. */
+    .md-quote { margin: 10px 0; padding: 2px 0 2px 14px; border-left: 3px solid rgba(93,184,166,.45); color: var(--on-dark-soft); }
+    .md-quote strong { color: var(--on-dark); }
+    [data-theme="light"] .md-quote { border-left-color: rgba(31,41,55,.22); }
     .cas-ex-table { width: 100%; border-collapse: collapse; font-size: 13px; }
     .cas-ex-table th, .cas-ex-table td { padding: 6px 9px; border-bottom: 1px solid rgba(128,128,128,.2); text-align: right; color: var(--on-dark); }
     .cas-ex-table th:first-child, .cas-ex-table td:first-child { text-align: left; }
@@ -8783,15 +8794,30 @@ function casAddExhibitCard(ex) {
     }
     else if (r.type === 'table') body = casExTableHTML(r);
     else if (r.type === 'select') body = casExSelectHTML(r, cardId);
-    else return; // unknown type - the model's text already carries the data
+    /* 2026-08-15. `prose` fell into the `else return` below and the candidate
+       saw NOTHING: the server nulls body_md whenever `render` is present, and
+       the interviewer prompt tells the model not to retype a rendered exhibit.
+       Five load-bearing numbers were lost on both channels at once (#17 ex4
+       $19.8M base, #24 ex3 ARPU 61%, #30 ex2 2.2 pt per point of overprice,
+       #31 ex3 exit cap 10.5%, #53 exC 6% of volume). */
+    else if (r.type === 'prose') body = '<div class="cas-ex-body">' + mdToHtml(L(r.text) || '') + '</div>';
+    else if (ex.body_md) { casAddExhibitTextCard(ex); return; }
+    else return; // unknown type and no body - nothing to draw
   } catch (e) { return; } // never let a render bug break the chat
   const div = document.createElement('div');
   div.className = 'cas-ex-card';
   div.id = cardId;
-  const ruTags = { bar: 'Exhibit · График', line: 'Exhibit · График', pie: 'Exhibit · График', table: 'Exhibit · Таблица', select: 'Exhibit · Выбери один' };
-  const enTags = { bar: 'Exhibit · Chart', line: 'Exhibit · Chart', pie: 'Exhibit · Chart', table: 'Exhibit · Table', select: 'Exhibit · Pick one' };
+  const ruTags = { bar: 'Exhibit · График', line: 'Exhibit · График', pie: 'Exhibit · График', table: 'Exhibit · Таблица', select: 'Exhibit · Выбери один', prose: 'Exhibit · Данные' };
+  const enTags = { bar: 'Exhibit · Chart', line: 'Exhibit · Chart', pie: 'Exhibit · Chart', table: 'Exhibit · Table', select: 'Exhibit · Pick one', prose: 'Exhibit · Data' };
   const tag = ((state && state.aiLang) === 'ru' ? ruTags : enTags)[r.type] || 'Exhibit';
-  div.innerHTML = `<span class="cas-ex-tag">${tag}</span><div class="cas-ex-title">${esc(L(r.title) || ex.title || 'Exhibit')}</div>${body}${r.note ? `<div class="cas-ex-note">${esc(L(r.note))}</div>` : ''}`;
+  /* Six early case bodies (#3, #5, #12, #13, #14, #15) carry "Exhibit 1 - table"
+     as the title. The tag above already says Table, so the line carried nothing
+     and read like a placeholder left in by mistake. Nothing informative is
+     hidden: only the literal placeholder shape is dropped. */
+  const rawTitle = String(L(r.title) || ex.title || '');
+  const titleHtml = /^exhibit\s*\d*\s*[—-]?\s*(table|chart|bar|line|pie)?\s*$/i.test(rawTitle.trim())
+    ? '' : `<div class="cas-ex-title">${esc(rawTitle || 'Exhibit')}</div>`;
+  div.innerHTML = `<span class="cas-ex-tag">${tag}</span>${titleHtml}${body}${r.note ? `<div class="cas-ex-note">${esc(L(r.note))}</div>` : ''}`;
   chat.insertBefore(div, typing);
   setTimeout(() => { chat.scrollTop = chat.scrollHeight; }, 60);
 }
@@ -9704,20 +9730,33 @@ function esc(str) {
 // Lightweight, XSS-safe markdown → HTML. Input is ESCAPED first, so the only
 // HTML this ever produces is the small set of tags we add ourselves.
 function mdToHtml(raw) {
-  let t = esc(raw);
+  let t = String(raw == null ? '' : raw);
 
-  // ── Fenced code blocks FIRST ──────────────────────────────────────────────
-  // 2026-07-27. Раньше их не было вообще: ``` доезжали до экрана буквально,
-  // а каждая строка внутри превращалась в <br> и переносилась пропорциональным
-  // шрифтом. Любая ASCII-схема (дерево источников пациентов, полосовой график)
-  // расползалась в кашу - ровно тот же дефект, что чинили в CI-дриллах.
-  // Блоки вынимаются ДО остальных правил: иначе * и _ внутри диаграммы
-  // превратятся в курсив, а | - в таблицу.
+  /* 2026-08-15. Fences are pulled out of the RAW text now, not out of the
+     escaped text: the blockquote pass below has to see raw '>' line starts,
+     and it must not mistake an ASCII diagram's arrows for a quote. Bodies are
+     escaped at re-insertion, so the output is byte-identical to before. */
   const _fences = [];
   t = t.replace(/```[a-zA-Z0-9_-]*\n?([\s\S]*?)```/g, function (_m, body) {
     _fences.push(body.replace(/\n+$/, ''));
     return '\u0000FENCE' + (_fences.length - 1) + '\u0000';
   });
+
+  /* Blockquotes. 68 exhibit bodies open with '> **Memorandum - finance
+     directorate**'; without this the '>' reached the candidate literally and a
+     table inside the quote never assembled (#166/ex3, #168/ex3 shipped raw
+     pipes). Inner text goes through the same pipeline recursively, so a quote
+     keeps its table, its bold and its fences. */
+  const _quotes = [];
+  t = t.replace(/(?:^[ \t]*>[ \t]?.*(?:\n|$))+/gm, function (block) {
+    const inner = block.replace(/[\r\n]+$/, '').split('\n')
+      .map(l => l.replace(/^[ \t]*>[ \t]?/, '')).join('\n');
+    _quotes.push(mdToHtml(inner));
+    return '\u0000QUOTE' + (_quotes.length - 1) + '\u0000\n';
+  });
+
+  t = esc(t);
+
   // Инлайновый `код` - тем же проходом, чтобы обратные кавычки не доезжали.
   t = t.replace(/`([^`\n]+)`/g, '<code class="md-code">$1</code>');
 
@@ -9728,13 +9767,28 @@ function mdToHtml(raw) {
   //   | 1 | 2 |
   t = t.replace(/(?:^\|.*\|[ \t]*\n?)+/gm, function (block) {
     const lines = block.trim().split('\n').filter(l => l.trim().startsWith('|'));
-    if (lines.length < 2) return block; // not a real table
-    // second line must be the separator (---|---)
-    const sep = lines[1].replace(/[^|\-: \t]/g, '');
-    if (!/\|?\s*:?-+:?\s*(\|\s*:?-+:?\s*)+\|?/.test(lines[1])) return block;
     const cells = l => l.replace(/^\||\|$/g, '').split('|').map(c => c.trim());
+    /* 2026-08-15. A pipe block with no |---| separator used to be handed back
+       untouched, and the candidate read raw pipes (#304/ex2, one label-value
+       row). A headerless table is the honest degradation: same cells, no
+       invented header row. */
+    const hasSep = lines.length >= 2 &&
+      /\|?\s*:?-+:?\s*(\|\s*:?-+:?\s*)+\|?/.test(lines[1]);
+    if (!hasSep) {
+      if (!lines.length || !lines.some(l => (l.match(/\|/g) || []).length >= 2)) return block;
+      return '<table class="md-table md-table-plain"><tbody>' +
+        lines.map(l => '<tr>' + cells(l).map(c => '<td>' + c + '</td>').join('') + '</tr>').join('') +
+        '</tbody></table>';
+    }
     const head = cells(lines[0]);
     const rows = lines.slice(2).map(cells);
+    /* An all-blank header row (`| | |`, used in #168/ex3 to get a plain
+       label-value block) painted an empty coloured band. Same cells, no band. */
+    if (head.every(h => !h)) {
+      return '<table class="md-table md-table-plain"><tbody>' +
+        rows.map(r => '<tr>' + head.map((_, i) => '<td>' + (r[i] || '') + '</td>').join('') + '</tr>').join('') +
+        '</tbody></table>';
+    }
     let html = '<table class="md-table"><thead><tr>' +
       head.map(h => '<th>' + h + '</th>').join('') + '</tr></thead><tbody>';
     rows.forEach(r => {
@@ -9763,7 +9817,12 @@ function mdToHtml(raw) {
   t = t.replace(/(<br>\s*)*<table/g, '<table').replace(/<\/table>(\s*<br>)*/g, '</table>');
   // Возвращаем схемы на место - моноширинным, без переносов, со скроллом.
   t = t.replace(/(?:<br>)?\u0000FENCE(\d+)\u0000(?:<br>)?/g, function (_m, i) {
-    return '<pre class="md-pre">' + _fences[Number(i)] + '</pre>';
+    return '<pre class="md-pre">' + esc(_fences[Number(i)]) + '</pre>';
+  });
+  /* 2026-08-15. Quotes come back last: their inside already went through the
+     same pipeline recursively, so nothing here may touch it again. */
+  t = t.replace(/(?:<br>)?\u0000QUOTE(\d+)\u0000(?:<br>)?/g, function (_m, i) {
+    return '<blockquote class="md-quote">' + _quotes[Number(i)] + '</blockquote>';
   });
   return t;
 }
