@@ -8822,12 +8822,127 @@ function casAddExhibitCard(ex) {
   setTimeout(() => { chat.scrollTop = chat.scrollHeight; }, 60);
 }
 
+
+/* ─── Авточарт из ASCII-полос (15.08.2026, решение владельца) ────────────────
+   73 экзибита рисуют график символами. Числа в них верные, но это текст: на
+   интервью кандидату дают чарт. Разбираются ТОЛЬКО те блоки, которые
+   разбираются ЦЕЛИКОМ - если после снятия подписи, полосы и величины на строке
+   остаётся хоть один значимый символ, блок остаётся текстом как был. Под
+   каждым графиком печатается таблица с теми же числами: если авточарт
+   ошибётся с масштабом, число всё равно на экране. */
+/* Разбор ASCII-полос в спецификацию графика.
+   Правило безопасности: строка засчитывается ТОЛЬКО если после снятия
+   подписи, полосы, величины и (необязательного) второго числового столбца
+   на ней не остаётся ни одного значимого символа. Что не разобралось целиком -
+   не разбирается вовсе: блок остаётся текстом. */
+const CAS_BARCH = '█▓▬■░▒▇▆▅▄▃▂▁';
+const CAS_BARRE = new RegExp('[' + CAS_BARCH + ']+');
+// величина: необязательный знак, необязательный $, число с разделителями,
+// необязательный %, необязательная буква масштаба (B/M/K/т/млн и т.п. НЕ берём -
+// они меняют единицу и должны остаться в подписи оси, а не в числе)
+const CAS_VAL = /^[+-]?\$?\d[\d.,]*%?$/;
+// единица, приклеенная к числу ($125/т, 4.2x): берётся только если ОДНА И ТА ЖЕ
+// у всех строк блока, иначе строки несут разные величины и график соврёт.
+const CAS_VAL_U = /^([+-]?\$?\d[\d.,]*)(%|\/[^\s]+|[xх])$/;
+
+function casParseBarBlock(fenceBody) {
+  const lines = fenceBody.split('\n');
+  const barLines = lines.filter(l => CAS_BARRE.test(l));
+  if (barLines.length < 2) return null;
+
+  const rows = [];
+  let unit = '', shape = null;
+  for (const raw of barLines) {
+    const m = CAS_BARRE.exec(raw);
+    const before = raw.slice(0, m.index);
+    const after = raw.slice(m.index + m[0].length);
+    const bTok = before.trim(), aTok = after.trim();
+
+    let label, valTok, extraTok = '';
+    if (aTok) {                                   // подпись слева, величина справа
+      const parts = aTok.split(/\s+/);
+      if (!CAS_VAL.test(parts[0]) && !CAS_VAL_U.test(parts[0])) return null;
+      label = bTok; valTok = parts[0];
+      if (parts.length === 2 && CAS_VAL.test(parts[1])) extraTok = parts[1];
+      else if (parts.length > 1) return null;     // хвост, который мы не понимаем
+      if (shape === null) shape = 'right'; else if (shape !== 'right') return null;
+    } else {                                      // величина слева, полоса справа
+      const parts = bTok.split(/\s+/);
+      const last = parts[parts.length - 1];
+      if (!CAS_VAL.test(last) && !CAS_VAL_U.test(last)) return null;
+      valTok = last; label = parts.slice(0, -1).join(' ');
+      if (shape === null) shape = 'left'; else if (shape !== 'left') return null;
+    }
+    if (!label) return null;
+
+    const um = CAS_VAL_U.exec(valTok);
+    const suf = um ? um[2] : (/%$/.test(valTok) ? '%' : '');
+    if (rows.length && suf !== (rows[0].suf || '')) return null;   // единицы разошлись
+    if (suf) unit = suf; else if (/^[+-]?\$/.test(valTok)) unit = unit || '$';
+    const num = Number(valTok.replace(/[^0-9.\-]/g, ''));
+    if (!isFinite(num)) return null;
+    const exNum = extraTok ? Number(extraTok.replace(/[^0-9.\-]/g, '')) : null;
+    if (extraTok && !isFinite(exNum)) return null;
+
+    // полная сборка: ничего значимого не потеряно
+    const rebuilt = (label + m[0] + valTok + extraTok).replace(/\s+/g, '');
+    const original = raw.replace(/\s+/g, '');
+    if (rebuilt !== original) return null;
+
+    rows.push({ label: label.trim(), value: num, raw: valTok, extra: extraTok, extraNum: exNum, suf: suf });
+  }
+  const hasExtra = rows.some(r => r.extra);
+  if (hasExtra && !rows.every(r => r.extra)) return null;
+
+  // строки блока, не несущие полос: заголовок, итог, примечание. Не теряются.
+  const rest = lines.filter(l => !CAS_BARRE.test(l) && l.trim().length).map(l => l.replace(/\s+$/, ''));
+  return { rows, unit, rest, hasExtra };
+}
+
+// Возвращает HTML графика с таблицей под ним либо null.
+function casBarBlockHTML(fenceBody, title) {
+  let p = null;
+  try { p = casParseBarBlock(fenceBody); } catch (e) { return null; }
+  if (!p) return null;
+  const unit = p.unit || '';
+  // Подпись ряда и шапка таблицы не повторяют заголовок карточки: он уже
+  // напечатан над ними. Несут единицу, если она есть в самих числах.
+  const svg = casExBarSVG({
+    categories: p.rows.map(r => r.label),
+    series: [{ name: unit || '', values: p.rows.map(r => r.value) }]
+  });
+  const head = ['', unit || ''];
+  if (p.hasExtra) head.push('');
+  const tbl = casExTableHTML({
+    head: head,
+    rows: p.rows.map(r => p.hasExtra ? [r.label, r.raw, r.extra] : [r.label, r.raw])
+  });
+  const rest = p.rest.length
+    ? '<pre class="md-pre" style="margin-top:10px">' + esc(p.rest.join('\n')) + '</pre>' : '';
+  return svg + '<div style="margin-top:12px">' + tbl + '</div>' + rest;
+}
+
 function casAddExhibitTextCard(ex) {
   const chat = document.getElementById('chat-area');
   const typing = document.getElementById('typing-ind');
   if (!chat) return;
   let body = '';
-  try { body = mdToHtml(ex.body_md); } catch (e) { return; }
+  try {
+    // Схема в ограде, которая разбирается целиком, становится графиком.
+    // Всё остальное идёт прежним путём, байт в байт.
+    const md = String(ex.body_md == null ? '' : ex.body_md);
+    const parts = [];
+    let last = 0, changed = false;
+    md.replace(/```[a-zA-Z0-9_-]*\n?([\s\S]*?)```/g, function (whole, inner, off) {
+      const chart = casBarBlockHTML(inner, ex.title);
+      if (!chart) return whole;
+      parts.push(mdToHtml(md.slice(last, off)), chart);
+      last = off + whole.length; changed = true;
+      return whole;
+    });
+    if (changed) { parts.push(mdToHtml(md.slice(last))); body = parts.join(''); }
+    else body = mdToHtml(md);
+  } catch (e) { try { body = mdToHtml(ex.body_md); } catch (e2) { return; } }
   const div = document.createElement('div');
   div.className = 'cas-ex-card';
   div.id = 'casExCard' + (++_casExSeq);
