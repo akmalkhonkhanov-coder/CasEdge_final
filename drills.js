@@ -137,6 +137,23 @@
     body.forEach(function (r) { html += '<tr>' + r.map(function (c) { return '<td>' + inline(c) + '</td>'; }).join('') + '</tr>'; });
     return html + '</tbody></table>';
   }
+
+  /* 19.08.2026, куплено живым прогоном дрилла CI-001 на проде.
+     Поле `provoked` печаталось через esc2 - без markdown, тогда как соседний
+     `reference` в той же карточке идёт через md. Кандидат читал буквально
+     «Ловушка: = **D3** — считает 510/1,600…»: звёздочки на экране, а `D3` -
+     внутренняя метка реестра наивных ошибок, которая ему ничего не говорит.
+     Замер по шести библиотекам: 89 слотов из 302 печатали `**`, а 40 слотов CI
+     несли ТОЛЬКО метку («= **D2**.») и больше ничего - целая строка экрана,
+     не сообщавшая кандидату ни одного факта.
+     Метка снимается, остаток печатается разметкой; если после метки пусто -
+     строка не печатается вовсе. Тела дриллов при этом не трогаются. */
+  function trapText(prov) {
+    var t = String(prov == null ? '' : prov).trim();
+    t = t.replace(/^=\s*/, '').replace(/^\*\*[A-ZА-Я]?\d{1,2}\*\*\s*[—\-–:.]?\s*/, '');
+    return t.replace(/^\.\s*$/, '').trim();
+  }
+
   function md(s) {
     return String(s == null ? '' : s).split(/\n{2,}/).map(function (p) {
       var t = mdTable(p);
@@ -489,7 +506,7 @@
       }
       var ref = L(r.reference); var prov = L(r.provoked);
       feed('<div class="cm-ref"><div class="cm-ref-h">' + W_("refSol") + '</div><div class="cm-ref-body">' + md(ref || '') + '</div>' +
-           (prov ? '<div class="cm-trap"><b>' + W_("trap") + ':</b> ' + esc2(prov) + '</div>' : '') + '</div>');
+           (trapText(prov) ? '<div class="cm-trap"><b>' + W_("trap") + ':</b> ' + md(trapText(prov)) + '</div>' : '') + '</div>');
       saveDone(d.id);
       // Record this rep in the shared Progress tracker (Drills completed + "Case Math" by-type + streak, synced to cloud).
       try { if (typeof recordSession === 'function') recordSession('drill', cfg().rec); } catch (e) {}
@@ -509,7 +526,7 @@
     feed('<div class="cm-fb ' + (ok ? 'ok' : 'no') + '">' + (ok ? '<b>' + W_("pass") + '</b> ' : '<b>' + W_("fail") + '</b> ') + esc2(r.coaching || '') + '</div>');
     var ref = L(r.reference), prov = L(r.provoked);
     if (ref) feed('<div class="cm-ref"><div class="cm-ref-h">' + W_("refAns") + '</div><div class="cm-ref-body">' + md(ref) + '</div>' +
-                  (prov ? '<div class="cm-trap"><b>' + W_("trap") + ':</b> ' + esc2(prov) + '</div>' : '') + '</div>');
+                  (trapText(prov) ? '<div class="cm-trap"><b>' + W_("trap") + ':</b> ' + md(trapText(prov)) + '</div>' : '') + '</div>');
     saveDone(d.id);
     try { if (typeof recordSession === 'function') recordSession('drill', cfg().rec); } catch (e) {}
     nextButton();
