@@ -400,6 +400,32 @@ function rkTicketValid(userId, gameId, fieldId, got) {
   return a.length === b.length && crypto.timingSafeEqual(a, b);
 }
 // Все аналитические поля игры — тот же обход, что и в fieldMap, но только ключи.
+/* 15.08.2026, куплено живым прогоном #59. Класс OMIT печатал ВСЕ пути пропуска
+   сразу. Кандидат, потерявший ОДИН чип из двух, читал под заголовком «Carried»
+   и своё число, и число пути, которого он не проходил, — слово «унёс» на второй
+   строке было неправдой о факте.
+   Запись цепи знает, какой чип отвечает какому пути (порядок chips[] равен
+   порядку chain_trap[]), а ручка знает, что кандидат унёс. Фильтруется здесь,
+   в единственном месте, где известно и то и другое; клиент печатает то, что
+   пришло, и остаётся глупым.
+     ничего не пропущено  → строк нет
+     пропущено одно из N  → строки тех путей, которые кандидат реально прошёл
+     пропущено ВСЁ        → все строки: ни один путь не пройден, но каждая
+                            показывает, что дал бы один спасённый чип
+   Класс SUB (одиночный chip + decoy) не трогается: там путь один. */
+function rkWalkedPaths(game, r, took) {
+  let ct = (r.chain_trap === undefined ? null : r.chain_trap);
+  let cl = r.chain_lesson || '';
+  const link = (Array.isArray(game.chain) ? game.chain : []).find(l => l.field === r.key);
+  if (!link || !Array.isArray(link.chips) || !Array.isArray(ct)) return { ct, cl };
+  const missed = link.chips.filter(id => !took.has(String(id)));
+  if (!missed.length) return { ct: null, cl: '' };
+  if (missed.length === link.chips.length) return { ct, cl };
+  const keep = link.chips.map((id, i) => i).filter(i => took.has(String(link.chips[i])));
+  if (!keep.length) return { ct, cl };
+  return { ct: keep.map(i => ct[i]), cl: Array.isArray(cl) ? keep.map(i => cl[i]) : cl };
+}
+
 function analysisFieldIds(game) {
   const ids = [];
   for (const q of (game.analysis || [])) for (const p of (q.parts || [])) ids.push('a:' + p.key);
@@ -533,9 +559,9 @@ export default async function handler(req, res) {
       });
       // Разбор сбора едет вместе с разбором Analysis: тот же замок, тот же момент.
       const col = Array.isArray(g.collect) ? g.collect : [];
+      const took = new Set(Array.isArray(body.collected) ? body.collected.map(String) : []);
       let journal = null;
       if (col.length) {
-        const took = new Set(Array.isArray(body.collected) ? body.collected.map(String) : []);
         const needed = col.filter(c => c.role === 'needed');
         const takenNeeded = needed.filter(c => took.has(c.id));
         const takenNoise = col.filter(c => c.role !== 'needed' && took.has(c.id));
@@ -550,16 +576,19 @@ export default async function handler(req, res) {
       const rev = Array.isArray(g.analysis_review) ? g.analysis_review : [];
       return res.status(200).json({
         journal: journal,
-        review: rev.map(r => ({
-          q: r.q, key: r.key, answer: r.answer,
-          trap: (r.trap === undefined ? null : r.trap),
-          lesson: r.lesson || '',
-          // Сквозная цепь (долг dev №3). Кандидат, собравший не тот чип, получает
-          // ДРУГОЕ число и доносит его до отчёта. Без этой строки он видит голое
-          // «неверно» и не узнаёт, что свернул ещё на экране сбора.
-          chainTrap: (r.chain_trap === undefined ? null : r.chain_trap),
-          chainLesson: r.chain_lesson || ''
-        }))
+        review: rev.map(r => {
+          const w = rkWalkedPaths(g, r, took);
+          return {
+            q: r.q, key: r.key, answer: r.answer,
+            trap: (r.trap === undefined ? null : r.trap),
+            lesson: r.lesson || '',
+            // Сквозная цепь (долг dev №3). Кандидат, собравший не тот чип, получает
+            // ДРУГОЕ число и доносит его до отчёта. Без этой строки он видит голое
+            // «неверно» и не узнаёт, что свернул ещё на экране сбора.
+            chainTrap: w.ct,
+            chainLesson: w.cl
+          };
+        })
       });
     }
 
