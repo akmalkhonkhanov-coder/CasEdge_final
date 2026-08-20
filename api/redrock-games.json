@@ -1891,7 +1891,7 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 1300,
-     "naive_reason": "называет саму группу, а не остаток: спрашивают тех, кто в неё НЕ входит",
+     "naive_reason": "gives the group's own count, NOT the remainder; the question asks for those who are not in it",
      "same_data": [
       "s6",
       "s7"
@@ -2271,7 +2271,7 @@
      "prompt": "Same Q1 and Q3 totals you already used: by what percent is the Q3 total above the Q1 total? (Q4 is not part of this one.)",
      "answer": 50,
      "naive": 33.33,
-     "naive_reason": "делит разницу на больший квартал: базой роста служит тот квартал, ОТ которого считают, то есть меньший",
+     "naive_reason": "divides the gap by the larger quarter; growth is measured FROM the quarter it starts at, and that is the smaller one",
      "same_data": [
       "s5",
       "s7"
@@ -2290,7 +2290,7 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 2160,
-     "naive_reason": "называет саму группу, а не остаток: спрашивают тех, кто в неё НЕ входит",
+     "naive_reason": "gives the group's own count, NOT the remainder; the question asks for those who are not in it",
      "same_data": [
       "s7",
       "s8"
@@ -2822,7 +2822,7 @@
      "prompt": "Same 3 pp-a-year slide and the same $5,000 for each point of cover: measured against the Year-1 45% baseline and with no restocking at all, how much dive-tourism revenue is given up in total across Years 2, 3 and 4?",
      "answer": 90000,
      "naive": 135000,
-     "naive_reason": "берёт разрыв последнего года окна и множит его на три: внутри окна разрыв растёт — 3, 6, 9 пунктов, — поэтому складывается ряд, а не последний год трижды",
+     "naive_reason": "takes the last year's gap in the window and multiplies it by three; within the window the gap grows (3, 6, 9 points), so the series must be summed, not the last year taken three times",
      "same_data": [
       "s10",
       "s11",
@@ -3348,7 +3348,7 @@
      "prompt": "Same 2 pp-a-year slide and the same $3,000 for each point of open water: measured against the Year-1 30% baseline and with no weevil program at all, how much ferry-tour revenue is given up in total across Years 3, 4 and 5?",
      "answer": 54000,
      "naive": 72000,
-     "naive_reason": "берёт разрыв последнего года окна и множит его на три: внутри окна разрыв растёт — 4, 6, 8 пунктов, — поэтому складывается ряд, а не последний год трижды",
+     "naive_reason": "takes the last year's gap in the window and multiplies it by three; within the window the gap grows (4, 6, 8 points), so the series must be summed, not the last year taken three times",
      "same_data": [
       "s11",
       "s12",
@@ -4287,7 +4287,7 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 18.18,
-     "naive_reason": "делит постоянные затраты на переменную часть, а не на полную стоимость первого года: доля считается от целого",
+     "naive_reason": "divides the fixed cost by the variable part, not by the full first-year cost; a share is taken of the whole",
      "same_data": [
       "s7"
      ],
@@ -6209,7 +6209,7 @@
      "prompt": "Same Q1 and Q3 totals you already used: by what percent is the Q3 total above the Q1 total? (Q4 is not part of this one.)",
      "answer": 55.56,
      "naive": 35.71,
-     "naive_reason": "делит разницу на больший квартал: базой роста служит тот квартал, ОТ которого считают, то есть меньший",
+     "naive_reason": "divides the gap by the larger quarter; growth is measured FROM the quarter it starts at, and that is the smaller one",
      "same_data": [
       "s4",
       "s6"
@@ -6228,7 +6228,7 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 1960,
-     "naive_reason": "называет саму группу, а не остаток: спрашивают тех, кто в неё НЕ входит",
+     "naive_reason": "gives the group's own count, NOT the remainder; the question asks for those who are not in it",
      "same_data": [
       "s6",
       "s7"
@@ -6746,7 +6746,7 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 16,
-     "naive_reason": "делит на темп ОСТАТОК на пятом году, а не уровень на старте: вопрос о сроке от начала ряда",
+     "naive_reason": "divides what is LEFT in the final year of the chart by the rate, instead of the level at the start; the question asks for the time from the start of the series",
      "same_data": [
       "s10",
       "s11"
@@ -6763,7 +6763,7 @@
      "prompt": "Same 2 pp-a-year slide and the same $4,000 for each point of cover: measured against the Year-1 40% baseline and with no trapping at all, how much revenue is given up in total across Years 2, 3, 4 and 5?",
      "answer": 80000,
      "naive": 128000,
-     "naive_reason": "берёт разрыв последнего года и множит его на число лет: разрыв нарастает — 2, 4, 6, 8 пунктов, — поэтому складывается ряд, а не последний год четырежды",
+     "naive_reason": "takes the last year's gap in the window and multiplies it by the number of years; within the window the gap grows (2, 4, 6, 8 points), so the series must be summed, not the last year taken four times",
      "same_data": [
       "s10",
       "s11",
@@ -7277,7 +7277,7 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 12.67,
-     "naive_reason": "делит на темп ОСТАТОК на пятом году, а не уровень на старте: вопрос о сроке от начала ряда",
+     "naive_reason": "divides what is LEFT in the final year of the chart by the rate, instead of the level at the start; the question asks for the time from the start of the series",
      "same_data": [
       "s10",
       "s11"
@@ -8769,7 +8769,7 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 17.09,
-     "naive_reason": "делит постоянные затраты на переменную часть, а не на полную стоимость первого года: доля считается от целого",
+     "naive_reason": "divides the fixed cost by the variable part, not by the full first-year cost; a share is taken of the whole",
      "same_data": [
       "s7"
      ],
@@ -10406,7 +10406,7 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 1950,
-     "naive_reason": "называет саму группу, а не остаток: спрашивают тех, кто в неё НЕ входит",
+     "naive_reason": "gives the group's own count, NOT the remainder; the question asks for those who are not in it",
      "same_data": [
       "s8",
       "s9"
@@ -10780,7 +10780,7 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 1680,
-     "naive_reason": "называет саму группу, а не остаток: спрашивают тех, кто в неё НЕ входит",
+     "naive_reason": "gives the group's own count, NOT the remainder; the question asks for those who are not in it",
      "same_data": [
       "s6",
       "s7"
@@ -11356,7 +11356,7 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 17.5,
-     "naive_reason": "делит на темп ОСТАТОК на пятом году, а не уровень на старте: вопрос о сроке от начала ряда",
+     "naive_reason": "divides what is LEFT in the final year of the chart by the rate, instead of the level at the start; the question asks for the time from the start of the series",
      "same_data": [
       "s8",
       "s9"
@@ -11870,7 +11870,7 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 9.75,
-     "naive_reason": "делит на темп ОСТАТОК на пятом году, а не уровень на старте: вопрос о сроке от начала ряда",
+     "naive_reason": "divides what is LEFT in the final year of the chart by the rate, instead of the level at the start; the question asks for the time from the start of the series",
      "same_data": [
       "s8",
       "s9"
@@ -11887,7 +11887,7 @@
      "prompt": "Same 4 pp-a-year slide and the same $7,000 for each point of cover: measured against the Year-1 55% baseline and with no cull at all, how much revenue is given up in total across Years 2, 3, 4 and 5?",
      "answer": 280000,
      "naive": 448000,
-     "naive_reason": "берёт разрыв последнего года и множит его на число лет: разрыв нарастает — 4, 8, 12, 16 пунктов, — поэтому складывается ряд, а не последний год четырежды",
+     "naive_reason": "takes the last year's gap in the window and multiplies it by the number of years; within the window the gap grows (4, 8, 12, 16 points), so the series must be summed, not the last year taken four times",
      "same_data": [
       "s8",
       "s9",
@@ -13344,7 +13344,7 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 31.75,
-     "naive_reason": "делит постоянные затраты на переменную часть, а не на полную стоимость первого года: доля считается от целого",
+     "naive_reason": "divides the fixed cost by the variable part, not by the full first-year cost; a share is taken of the whole",
      "same_data": [
       "s7"
      ],
@@ -15004,7 +15004,7 @@
      "prompt": "Same Q1 and Q3 totals you already used: by what percent is the Q3 total above the Q1 total? (Q4 is not part of this one.)",
      "answer": 50,
      "naive": 33.33,
-     "naive_reason": "делит разницу на больший квартал: базой роста служит тот квартал, ОТ которого считают, то есть меньший",
+     "naive_reason": "divides the gap by the larger quarter; growth is measured FROM the quarter it starts at, and that is the smaller one",
      "same_data": [
       "s10",
       "s12"
@@ -15023,7 +15023,7 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 1890,
-     "naive_reason": "называет саму группу, а не остаток: спрашивают тех, кто в неё НЕ входит",
+     "naive_reason": "gives the group's own count, NOT the remainder; the question asks for those who are not in it",
      "same_data": [
       "s12",
       "s13"
@@ -15388,7 +15388,7 @@
      "prompt": "Same Q1 and Q3 totals you already used: by what percent is the Q3 total above the Q1 total? (Q4 is not part of this one.)",
      "answer": 33.33,
      "naive": 133.33,
-     "naive_reason": "даёт ОТНОШЕНИЕ кварталов, а не прирост: прирост — это отношение минус сто процентов",
+     "naive_reason": "gives the RATIO of the two quarters, not the growth; growth is that ratio minus one hundred percent",
      "same_data": [
       "s3",
       "s5"
@@ -15942,7 +15942,7 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 12,
-     "naive_reason": "делит на темп ОСТАТОК на пятом году, а не уровень на старте: вопрос о сроке от начала ряда",
+     "naive_reason": "divides what is LEFT in the final year of the chart by the rate, instead of the level at the start; the question asks for the time from the start of the series",
      "same_data": [
       "s9",
       "s10"
@@ -17563,7 +17563,7 @@
      "round": 0,
      "tolerance": 0,
      "naive": "32 : 24",
-     "naive_reason": "сокращает на круглую сотню, а не на общий делитель: простейший вид требует наибольшего общего делителя",
+     "naive_reason": "reduces by a round hundred instead of by the common divisor; the simplest form needs the greatest common divisor",
      "same_data": [
       "s4",
       "s5"
@@ -20621,7 +20621,7 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 23.81,
-     "naive_reason": "делит постоянные затраты на переменную часть, а не на полную стоимость первого года: доля считается от целого",
+     "naive_reason": "divides the fixed cost by the variable part, not by the full first-year cost; a share is taken of the whole",
      "same_data": [
       "s8"
      ],
