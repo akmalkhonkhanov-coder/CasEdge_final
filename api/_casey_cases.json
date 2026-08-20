@@ -1878,7 +1878,11 @@
       "negotiated rate",
       "parity",
       "contract terms",
-      "forecast sensitivity"
+      "forecast sensitivity",
+      "корпоративн",
+      "условия договора",
+      "чувствительность прогноза",
+      "договорн ставк"
      ],
      "fallback": "on elicitation fail: show hint_L1, then reveal and proceed",
      "title": "Corporate master agreement: key terms",
@@ -2049,7 +2053,11 @@
         "negotiated rate",
         "parity",
         "contract terms",
-        "forecast sensitivity"
+        "forecast sensitivity",
+        "корпоративн",
+        "условия договора",
+        "чувствительность прогноза",
+        "договорн ставк"
        ],
        "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
       },
@@ -2586,7 +2594,11 @@
       "what is in the 180000",
       "avoidable",
       "which costs disappear",
-      "trunk linehaul"
+      "trunk linehaul",
+      "из чего состоят 180",
+      "какие расходы исчезнут",
+      "чего можно избежать",
+      "магистральн"
      ],
      "fallback": "on elicitation fail: show hint_L1, then reveal and proceed",
      "title": "The $180,000/week network fixed cost",
@@ -2746,7 +2758,11 @@
         "what is in the 180000",
         "avoidable",
         "which costs disappear",
-        "trunk linehaul"
+        "trunk linehaul",
+        "из чего состоят 180",
+        "какие расходы исчезнут",
+        "чего можно избежать",
+        "магистральн"
        ],
        "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
       },
@@ -2956,8 +2972,11 @@
       "premium economics",
       "premium usage",
       "capacity cap",
-      "waitlist",
-      "how many visits premium"
+      "how many visits premium",
+      "экономика премиум",
+      "сколько ходит премиум",
+      "лимит по мощности",
+      "можно ли расширить лимит"
      ],
      "fallback": "on elicitation fail: show hint_L1, then reveal and proceed",
      "title": "Premium proposal & capacity policy",
@@ -3111,8 +3130,11 @@
         "premium economics",
         "premium usage",
         "capacity cap",
-        "waitlist",
-        "how many visits premium"
+        "how many visits premium",
+        "экономика премиум",
+        "сколько ходит премиум",
+        "лимит по мощности",
+        "можно ли расширить лимит"
        ],
        "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
       },
@@ -3321,7 +3343,11 @@
       "per client bill",
       "who pays more",
       "seat vs usage comparison",
-      "winners and losers"
+      "winners and losers",
+      "по сегментам",
+      "счёт клиента",
+      "кто платит больше",
+      "выигравшие и проигравшие"
      ],
      "fallback": "on elicitation fail: show hint_L1, then reveal and proceed",
      "title": "Per-client monthly bill: seat vs usage @ $0.03/op",
@@ -3482,7 +3508,11 @@
         "per client bill",
         "who pays more",
         "seat vs usage comparison",
-        "winners and losers"
+        "winners and losers",
+        "по сегментам",
+        "счёт клиента",
+        "кто платит больше",
+        "выигравшие и проигравшие"
        ],
        "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
       },
@@ -3677,7 +3707,11 @@
       "food and beverage",
       "popcorn",
       "attach",
-      "spend per visitor"
+      "spend per visitor",
+      "буфет",
+      "попкорн",
+      "еда и напитки",
+      "трата на посетител"
      ],
      "fallback": "on elicitation fail: show hint_L1, then reveal and proceed",
      "title": "Concession economics per visitor",
@@ -3832,7 +3866,11 @@
         "food and beverage",
         "popcorn",
         "attach",
-        "spend per visitor"
+        "spend per visitor",
+        "буфет",
+        "попкорн",
+        "еда и напитки",
+        "трата на посетител"
        ],
        "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
       },
@@ -4005,7 +4043,12 @@
       "what runs in the evenings",
       "retention effect",
       "displacement",
-      "cancel programs"
+      "cancel programs",
+      "пусты ли вечера",
+      "что идёт вечером",
+      "отток семей",
+      "удержание семей",
+      "отмена программ"
      ],
      "fallback": "on elicitation fail: show hint_L1, then reveal and proceed",
      "title": "Program displacement research",
@@ -4094,7 +4137,12 @@
         "what runs in the evenings",
         "retention effect",
         "displacement",
-        "cancel programs"
+        "cancel programs",
+        "пусты ли вечера",
+        "что идёт вечером",
+        "отток семей",
+        "удержание семей",
+        "отмена программ"
        ],
        "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
       },
@@ -4643,7 +4691,11 @@
       "migration",
       "where do app orders go",
       "churn to competitors",
-      "retention of own channel"
+      "retention of own channel",
+      "миграц",
+      "куда уйдут заказы",
+      "отток к конкурентам",
+      "перейдут ли пользователи"
      ],
      "fallback": "on elicitation fail: show hint_L1, then reveal and proceed",
      "title": "Own-channel migration research",
@@ -4761,7 +4813,11 @@
         "migration",
         "where do app orders go",
         "churn to competitors",
-        "retention of own channel"
+        "retention of own channel",
+        "миграц",
+        "куда уйдут заказы",
+        "отток к конкурентам",
+        "перейдут ли пользователи"
        ],
        "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
       },
@@ -4937,7 +4993,11 @@
       "does fixed change",
       "allocation",
       "scale",
-      "per-policy cost"
+      "per-policy cost",
+      "меняются ли постоянные",
+      "аллокац",
+      "распределение постоянных",
+      "на один полис"
      ],
      "fallback": "on elicitation fail: show hint_L1, then reveal and proceed",
      "title": "Fixed-cost base",
@@ -5108,7 +5168,11 @@
         "does fixed change",
         "allocation",
         "scale",
-        "per-policy cost"
+        "per-policy cost",
+        "меняются ли постоянные",
+        "аллокац",
+        "распределение постоянных",
+        "на один полис"
        ],
        "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
       },
@@ -5889,7 +5953,11 @@
       "pull through",
       "what else stops selling",
       "service revenue",
-      "annuity"
+      "annuity",
+      "расходник",
+      "сменные лезви",
+      "послепродажн",
+      "что ещё перестанет продаваться"
      ],
      "fallback": "on elicitation fail: show hint_L1, then reveal and proceed",
      "title": "After-sales pull-through per blade set",
@@ -6028,7 +6096,11 @@
         "pull through",
         "what else stops selling",
         "service revenue",
-        "annuity"
+        "annuity",
+        "расходник",
+        "сменные лезви",
+        "послепродажн",
+        "что ещё перестанет продаваться"
        ],
        "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
       },
@@ -6194,7 +6266,12 @@
       "trunk",
       "backbone",
       "other regions",
-      "dependency"
+      "dependency",
+      "общая сеть",
+      "якорн клиент",
+      "переток",
+      "магистраль",
+      "другие регионы"
      ],
      "fallback": "on elicitation fail: show hint_L1, then reveal and proceed",
      "title": "Highland network dependencies",
@@ -6356,7 +6433,12 @@
         "trunk",
         "backbone",
         "other regions",
-        "dependency"
+        "dependency",
+        "общая сеть",
+        "якорн клиент",
+        "переток",
+        "магистраль",
+        "другие регионы"
        ],
        "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
       },
@@ -6800,7 +6882,11 @@
       "retention",
       "deposits leave",
       "funding leaves",
-      "relationship"
+      "relationship",
+      "уйдут ли депозиты",
+      "отток депозит",
+      "удержание депозит",
+      "останутся ли вклад"
      ],
      "fallback": "hint_L1 then reveal",
      "title": "Deposit behaviour if branch closes",
@@ -6941,7 +7027,11 @@
         "retention",
         "deposits leave",
         "funding leaves",
-        "relationship"
+        "relationship",
+        "уйдут ли депозиты",
+        "отток депозит",
+        "удержание депозит",
+        "останутся ли вклад"
        ],
        "fallback": "hint_L1 then reveal"
       },
@@ -7068,12 +7158,15 @@
      "reveal": "after_elicitation",
      "elicitation_step": "C22-Q3c",
      "trigger_phrases": [
-      "range",
       "other shades",
       "halo",
       "lineup",
       "display",
-      "rest of the range"
+      "rest of the range",
+      "другие оттенки",
+      "линейк",
+      "ореол",
+      "остальная гамма"
      ],
      "fallback": "hint_L1 then reveal",
      "title": "Range/display halo effect",
@@ -7215,12 +7308,15 @@
        "answer_explain": null,
        "reveal_exhibit": "C22-E2",
        "trigger_phrases": [
-        "range",
         "other shades",
         "halo",
         "lineup",
         "display",
-        "rest of the range"
+        "rest of the range",
+        "другие оттенки",
+        "линейк",
+        "ореол",
+        "остальная гамма"
        ],
        "fallback": "hint_L1 then reveal"
       },
@@ -7345,7 +7441,11 @@
       "maintenance",
       "monitoring",
       "20 year cost",
-      "residual"
+      "residual",
+      "эксплуатационн",
+      "обслуживание за 20 лет",
+      "затраты на обслуживание",
+      "остаточная стоимость"
      ],
      "fallback": "hint_L1 then reveal",
      "title": "Lease-model ongoing economics",
@@ -7447,7 +7547,11 @@
         "maintenance",
         "monitoring",
         "20 year cost",
-        "residual"
+        "residual",
+        "эксплуатационн",
+        "обслуживание за 20 лет",
+        "затраты на обслуживание",
+        "остаточная стоимость"
        ],
        "fallback": "hint_L1 then reveal"
       }
@@ -7778,7 +7882,11 @@
       "net-new",
       "would have bought",
       "cannibaliz",
-      "new readers"
+      "new readers",
+      "инкрементальн",
+      "новые читател",
+      "купили бы и так",
+      "каннибализ"
      ],
      "fallback": "hint_L1 then reveal",
      "title": "Incrementality research",
@@ -7919,7 +8027,11 @@
         "net-new",
         "would have bought",
         "cannibaliz",
-        "new readers"
+        "new readers",
+        "инкрементальн",
+        "новые читател",
+        "купили бы и так",
+        "каннибализ"
        ],
        "fallback": "hint_L1 then reveal"
       },
@@ -8061,7 +8173,11 @@
       "traffic",
       "whole basket",
       "defect",
-      "shoppers leave"
+      "shoppers leave",
+      "уйдут из магазина",
+      "трафик",
+      "вся корзина",
+      "перестанут ходить"
      ],
      "fallback": "hint_L1 then reveal",
      "title": "Brand traffic effect",
@@ -8202,7 +8318,11 @@
         "traffic",
         "whole basket",
         "defect",
-        "shoppers leave"
+        "shoppers leave",
+        "уйдут из магазина",
+        "трафик",
+        "вся корзина",
+        "перестанут ходить"
        ],
        "fallback": "hint_L1 then reveal"
       },
@@ -8337,7 +8457,11 @@
       "low demand",
       "empty dates",
       "uplift by event type",
-      "peak vs off"
+      "peak vs off",
+      "непиков",
+      "низкий спрос",
+      "пустые даты",
+      "по типам событий"
      ],
      "fallback": "hint_L1 then reveal",
      "title": "Dynamic-pricing response by event type",
@@ -8430,7 +8554,11 @@
         "low demand",
         "empty dates",
         "uplift by event type",
-        "peak vs off"
+        "peak vs off",
+        "непиков",
+        "низкий спрос",
+        "пустые даты",
+        "по типам событий"
        ],
        "fallback": "hint_L1 then reveal"
       }
@@ -8580,7 +8708,11 @@
       "learning curve",
       "scale",
       "shared tooling",
-      "production cost per course"
+      "production cost per course",
+      "размер каталога",
+      "кривая обучения",
+      "эффект масштаба",
+      "себестоимость курса"
      ],
      "fallback": "hint_L1 then reveal",
      "title": "Catalog learning-curve on production cost",
@@ -8721,7 +8853,11 @@
         "learning curve",
         "scale",
         "shared tooling",
-        "production cost per course"
+        "production cost per course",
+        "размер каталога",
+        "кривая обучения",
+        "эффект масштаба",
+        "себестоимость курса"
        ],
        "fallback": "hint_L1 then reveal"
       },
@@ -9048,7 +9184,11 @@
       "actual output",
       "utilization",
       "full nameplate",
-      "intermittent"
+      "intermittent",
+      "коэффициент использования",
+      "фактическая выработка",
+      "номинальн мощност",
+      "прерывист"
      ],
      "fallback": "hint_L1 then reveal",
      "title": "Capacity factors",
@@ -9141,7 +9281,11 @@
         "actual output",
         "utilization",
         "full nameplate",
-        "intermittent"
+        "intermittent",
+        "коэффициент использования",
+        "фактическая выработка",
+        "номинальн мощност",
+        "прерывист"
        ],
        "fallback": "hint_L1 then reveal"
       }
@@ -9305,7 +9449,11 @@
       "investment income",
       "reserves",
       "reserve release",
-      "yield on reserves"
+      "yield on reserves",
+      "доход от резерв",
+      "инвестиционный доход",
+      "высвобождение резерв",
+      "флоат"
      ],
      "fallback": "hint_L1 then reveal",
      "title": "Reserves and float",
@@ -9446,7 +9594,11 @@
         "investment income",
         "reserves",
         "reserve release",
-        "yield on reserves"
+        "yield on reserves",
+        "доход от резерв",
+        "инвестиционный доход",
+        "высвобождение резерв",
+        "флоат"
        ],
        "fallback": "hint_L1 then reveal"
       },
@@ -9571,7 +9723,11 @@
       "bar",
       "ancillary",
       "spend aboard",
-      "excursions"
+      "excursions",
+      "на борту",
+      "казино",
+      "экскурси",
+      "допвыручк"
      ],
      "fallback": "hint_L1 then reveal",
      "title": "Onboard spend",
@@ -9709,7 +9865,11 @@
         "bar",
         "ancillary",
         "spend aboard",
-        "excursions"
+        "excursions",
+        "на борту",
+        "казино",
+        "экскурси",
+        "допвыручк"
        ],
        "fallback": "hint_L1 then reveal"
       },
@@ -10078,7 +10238,11 @@
       "markdown",
       "clearance",
       "full price share",
-      "how much sells"
+      "how much sells",
+      "распродаж",
+      "уценк",
+      "доля по полной цене",
+      "сколько продаётся по полной"
      ],
      "fallback": "hint_L1 then reveal",
      "title": "Sell-through and markdown",
@@ -10219,7 +10383,11 @@
         "markdown",
         "clearance",
         "full price share",
-        "how much sells"
+        "how much sells",
+        "распродаж",
+        "уценк",
+        "доля по полной цене",
+        "сколько продаётся по полной"
        ],
        "fallback": "hint_L1 then reveal"
       },
@@ -10326,11 +10494,16 @@
      "reveal": "after_elicitation",
      "elicitation_step": "C35-Q3c",
      "trigger_phrases": [
-      "contract",
       "anchor client",
       "revenue at risk",
       "route dependency",
-      "tonnage"
+      "tonnage",
+      "contract dependency",
+      "tied to the route",
+      "муниципальн контракт",
+      "якорн клиент",
+      "выручка под риском",
+      "привязка к маршрут"
      ],
      "fallback": "hint_L1 then reveal",
      "title": "Contract and service dependencies",
@@ -10471,11 +10644,16 @@
        "answer_explain": null,
        "reveal_exhibit": "C35-E2",
        "trigger_phrases": [
-        "contract",
         "anchor client",
         "revenue at risk",
         "route dependency",
-        "tonnage"
+        "tonnage",
+        "contract dependency",
+        "tied to the route",
+        "муниципальн контракт",
+        "якорн клиент",
+        "выручка под риском",
+        "привязка к маршрут"
        ],
        "fallback": "hint_L1 then reveal"
       },
@@ -10613,7 +10791,11 @@
       "power cap",
       "PUE",
       "usable capacity",
-      "full nameplate at once"
+      "full nameplate at once",
+      "охлаждени",
+      "лимит по питанию",
+      "полезная мощност",
+      "одновременно на полной"
      ],
      "fallback": "hint_L1 then reveal",
      "title": "Cooling/power constraints",
@@ -10702,7 +10884,11 @@
         "power cap",
         "PUE",
         "usable capacity",
-        "full nameplate at once"
+        "full nameplate at once",
+        "охлаждени",
+        "лимит по питанию",
+        "полезная мощност",
+        "одновременно на полной"
        ],
        "fallback": "hint_L1 then reveal"
       }
@@ -10856,7 +11042,11 @@
       "risk adjusted",
       "expected yield",
       "chance of disease",
-      "yield loss"
+      "yield loss",
+      "вероятность болезни",
+      "с поправкой на риск",
+      "ожидаемая урожайност",
+      "потери урожая"
      ],
      "fallback": "hint_L1 then reveal",
      "title": "Disease risk",
@@ -11030,7 +11220,11 @@
         "risk adjusted",
         "expected yield",
         "chance of disease",
-        "yield loss"
+        "yield loss",
+        "вероятность болезни",
+        "с поправкой на риск",
+        "ожидаемая урожайност",
+        "потери урожая"
        ],
        "fallback": "hint_L1 then reveal"
       },
@@ -11369,7 +11563,11 @@
       "new client",
       "acquisition",
       "how clients enter",
-      "word of mouth"
+      "word of mouth",
+      "приток новых клиент",
+      "рекомендац",
+      "как приходят клиент",
+      "сарафан"
      ],
      "fallback": "hint_L1 then reveal",
      "title": "Referral network from routine care",
@@ -11510,7 +11708,11 @@
         "new client",
         "acquisition",
         "how clients enter",
-        "word of mouth"
+        "word of mouth",
+        "приток новых клиент",
+        "рекомендац",
+        "как приходят клиент",
+        "сарафан"
        ],
        "fallback": "hint_L1 then reveal"
       },
@@ -11644,7 +11846,11 @@
       "car rental",
       "activities",
       "attached",
-      "also book"
+      "also book",
+      "кросс-продаж",
+      "аренда авто",
+      "экскурси",
+      "что ещё бронируют"
      ],
      "fallback": "hint_L1 then reveal",
      "title": "Cross-sell attached to budget bookings",
@@ -11785,7 +11991,11 @@
         "car rental",
         "activities",
         "attached",
-        "also book"
+        "also book",
+        "кросс-продаж",
+        "аренда авто",
+        "экскурси",
+        "что ещё бронируют"
        ],
        "fallback": "hint_L1 then reveal"
       },
@@ -11930,8 +12140,14 @@
       "debt service",
       "coverage",
       "operating cash",
-      "equity return",
-      "how much debt eats"
+      "how much debt eats",
+      "eats into the equity",
+      "falls on the equity",
+      "how much the equity absorbs",
+      "обслуживание долга",
+      "покрытие долга",
+      "операционный денежный поток",
+      "доходность капитала"
      ],
      "fallback": "hint_L1 then reveal",
      "title": "Debt service coverage",
@@ -12067,8 +12283,14 @@
         "debt service",
         "coverage",
         "operating cash",
-        "equity return",
-        "how much debt eats"
+        "how much debt eats",
+        "eats into the equity",
+        "falls on the equity",
+        "how much the equity absorbs",
+        "обслуживание долга",
+        "покрытие долга",
+        "операционный денежный поток",
+        "доходность капитала"
        ],
        "fallback": "hint_L1 then reveal"
       },
@@ -12205,7 +12427,11 @@
       "trade down",
       "cannibaliz",
       "switch to value",
-      "existing customers switch"
+      "existing customers switch",
+      "переток вниз",
+      "каннибализ",
+      "перейдут на дешёв",
+      "существующие перейдут"
      ],
      "fallback": "hint_L1 then reveal",
      "title": "Trade-down behavior",
@@ -12341,7 +12567,11 @@
         "trade down",
         "cannibaliz",
         "switch to value",
-        "existing customers switch"
+        "existing customers switch",
+        "переток вниз",
+        "каннибализ",
+        "перейдут на дешёв",
+        "существующие перейдут"
        ],
        "fallback": "hint_L1 then reveal"
       },
@@ -12686,7 +12916,11 @@
       "surge signal",
       "drivers come online",
       "unfulfilled",
-      "why drivers"
+      "why drivers",
+      "предложение водител",
+      "водители выходят",
+      "сигнал для водител",
+      "неудовлетворённый спрос"
      ],
      "fallback": "hint_L1 then reveal",
      "title": "Surge as a supply signal",
@@ -12823,7 +13057,11 @@
         "surge signal",
         "drivers come online",
         "unfulfilled",
-        "why drivers"
+        "why drivers",
+        "предложение водител",
+        "водители выходят",
+        "сигнал для водител",
+        "неудовлетворённый спрос"
        ],
        "fallback": "hint_L1 then reveal"
       },
@@ -12954,7 +13192,11 @@
       "premium realized",
       "premium holds",
       "asking vs realized",
-      "comps"
+      "comps",
+      "сопоставим объект",
+      "фактическая ставка",
+      "премия удержится",
+      "запрошенная против фактическ"
      ],
      "fallback": "hint_L1 then reveal",
      "title": "Premium realization",
@@ -13095,7 +13337,11 @@
         "premium realized",
         "premium holds",
         "asking vs realized",
-        "comps"
+        "comps",
+        "сопоставим объект",
+        "фактическая ставка",
+        "премия удержится",
+        "запрошенная против фактическ"
        ],
        "fallback": "hint_L1 then reveal"
       },
@@ -13232,7 +13478,11 @@
       "churn",
       "retention",
       "actual lifetime",
-      "how long whales stay"
+      "how long whales stay",
+      "отток",
+      "удержание",
+      "фактический срок жизни",
+      "сколько держатся"
      ],
      "fallback": "hint_L1 then reveal",
      "title": "Whale churn",
@@ -13368,7 +13618,11 @@
         "churn",
         "retention",
         "actual lifetime",
-        "how long whales stay"
+        "how long whales stay",
+        "отток",
+        "удержание",
+        "фактический срок жизни",
+        "сколько держатся"
        ],
        "fallback": "hint_L1 then reveal"
       },
@@ -13480,7 +13734,11 @@
       "joint production",
       "high-margin line needs",
       "external premium",
-      "what production yields"
+      "what production yields",
+      "побочн продукт",
+      "совместное производство",
+      "что ещё даёт производство",
+      "закупать снаружи"
      ],
      "fallback": "hint_L1 then reveal",
      "title": "Joint-production dependency",
@@ -13621,7 +13879,11 @@
         "joint production",
         "high-margin line needs",
         "external premium",
-        "what production yields"
+        "what production yields",
+        "побочн продукт",
+        "совместное производство",
+        "что ещё даёт производство",
+        "закупать снаружи"
        ],
        "fallback": "hint_L1 then reveal"
       },
@@ -13733,7 +13995,11 @@
       "storage",
       "capital tied up",
       "holding cost",
-      "aging period cost"
+      "aging period cost",
+      "стоимость хранения",
+      "замороженный капитал",
+      "затраты на выдержк",
+      "склад и страховк"
      ],
      "fallback": "hint_L1 then reveal",
      "title": "Aging carry cost",
@@ -13826,7 +14092,11 @@
         "storage",
         "capital tied up",
         "holding cost",
-        "aging period cost"
+        "aging period cost",
+        "стоимость хранения",
+        "замороженный капитал",
+        "затраты на выдержк",
+        "склад и страховк"
        ],
        "fallback": "hint_L1 then reveal"
       }
@@ -13959,7 +14229,11 @@
       "elasticity",
       "peak off-peak response",
       "price sensitivity",
-      "segment response"
+      "segment response",
+      "эластичност",
+      "чувствительность к цене",
+      "пик и непик",
+      "реакция сегментов"
      ],
      "fallback": "hint_L1 then reveal",
      "title": "Segmented-pricing response",
@@ -14069,7 +14343,11 @@
         "elasticity",
         "peak off-peak response",
         "price sensitivity",
-        "segment response"
+        "segment response",
+        "эластичност",
+        "чувствительность к цене",
+        "пик и непик",
+        "реакция сегментов"
        ],
        "fallback": "hint_L1 then reveal"
       }
@@ -14184,11 +14462,16 @@
      "reveal": "after_elicitation",
      "elicitation_step": "C50-Q3c",
      "trigger_phrases": [
-      "network",
       "hub link",
       "connecting routes",
       "connectivity",
-      "reroute"
+      "reroute",
+      "route network",
+      "network dependency",
+      "сеть маршрут",
+      "стыковочн",
+      "узлов рейс",
+      "другие маршруты зависят"
      ],
      "fallback": "hint_L1 then reveal",
      "title": "Network connectivity",
@@ -14325,11 +14608,16 @@
        "answer_explain": null,
        "reveal_exhibit": "C50-E2",
        "trigger_phrases": [
-        "network",
         "hub link",
         "connecting routes",
         "connectivity",
-        "reroute"
+        "reroute",
+        "route network",
+        "network dependency",
+        "сеть маршрут",
+        "стыковочн",
+        "узлов рейс",
+        "другие маршруты зависят"
        ],
        "fallback": "hint_L1 then reveal"
       },
@@ -14482,12 +14770,21 @@
       }
      ],
      "trigger_phrases": [
-      "when",
-      "price",
-      "scenario",
-      "becomes",
-      "known",
-      "because"
+      "option to wait",
+      "wait and see",
+      "when the price becomes known",
+      "when the uncertainty resolves",
+      "defer the decision",
+      "delay the decision",
+      "timing of resolution",
+      "build later",
+      "price scenario becomes known",
+      "we could wait",
+      "could wait and build",
+      "подождать",
+      "отложить решение",
+      "когда станет известн",
+      "опцион на ожидание"
      ],
      "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
     }
@@ -14607,12 +14904,21 @@
        "answer_explain": null,
        "reveal_exhibit": "C51-E2",
        "trigger_phrases": [
-        "when",
-        "price",
-        "scenario",
-        "becomes",
-        "known",
-        "because"
+        "option to wait",
+        "wait and see",
+        "when the price becomes known",
+        "when the uncertainty resolves",
+        "defer the decision",
+        "delay the decision",
+        "timing of resolution",
+        "build later",
+        "price scenario becomes known",
+        "we could wait",
+        "could wait and build",
+        "подождать",
+        "отложить решение",
+        "когда станет известн",
+        "опцион на ожидание"
        ],
        "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
       },
@@ -14749,12 +15055,17 @@
       }
      ],
      "trigger_phrases": [
-      "give",
-      "sourcing",
-      "flexibility",
-      "specifically",
-      "whether",
-      "market"
+      "sourcing flexibility",
+      "buy externally",
+      "buy on the market",
+      "market price falls below",
+      "flexibility to source",
+      "cheaper outside",
+      "lose the option to buy",
+      "гибкость закупок",
+      "купить на рынке",
+      "если рыночная цена ниже",
+      "закупать извне"
      ],
      "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
     }
@@ -14874,12 +15185,17 @@
        "answer_explain": null,
        "reveal_exhibit": "C52-E2",
        "trigger_phrases": [
-        "give",
-        "sourcing",
-        "flexibility",
-        "specifically",
-        "whether",
-        "market"
+        "sourcing flexibility",
+        "buy externally",
+        "buy on the market",
+        "market price falls below",
+        "flexibility to source",
+        "cheaper outside",
+        "lose the option to buy",
+        "гибкость закупок",
+        "купить на рынке",
+        "если рыночная цена ниже",
+        "закупать извне"
        ],
        "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
       },
@@ -15040,12 +15356,17 @@
       }
      ],
      "trigger_phrases": [
-      "whether",
-      "division",
-      "spare",
-      "capacity",
-      "serve",
-      "both"
+      "spare capacity",
+      "idle capacity",
+      "serve both",
+      "marginal cost to the group",
+      "group marginal cost",
+      "capacity to do both",
+      "свободные мощност",
+      "свободных мощност",
+      "хватит ли мощност",
+      "предельная себестоимость",
+      "обслужить обоих"
      ],
      "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
     }
@@ -15165,12 +15486,17 @@
        "answer_explain": null,
        "reveal_exhibit": "C53-E2",
        "trigger_phrases": [
-        "whether",
-        "division",
-        "spare",
-        "capacity",
-        "serve",
-        "both"
+        "spare capacity",
+        "idle capacity",
+        "serve both",
+        "marginal cost to the group",
+        "group marginal cost",
+        "capacity to do both",
+        "свободные мощност",
+        "свободных мощност",
+        "хватит ли мощност",
+        "предельная себестоимость",
+        "обслужить обоих"
        ],
        "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
       },
@@ -15409,12 +15735,21 @@
       }
      ],
      "trigger_phrases": [
-      "whether",
-      "patients",
-      "transferred",
-      "between",
-      "sites",
-      "quickly"
+      "transfer between sites",
+      "move patients",
+      "transfer patients",
+      "peaks coincide",
+      "peaks correlated",
+      "shared buffer",
+      "do the peaks overlap",
+      "transferred between sites",
+      "peaks are independent",
+      "demand peaks are independent",
+      "перевозить пациент",
+      "переводить пациент",
+      "совпадают ли пики",
+      "корреляц пиков",
+      "общий буфер"
      ],
      "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
     }
@@ -15534,12 +15869,21 @@
        "answer_explain": null,
        "reveal_exhibit": "C54-E2",
        "trigger_phrases": [
-        "whether",
-        "patients",
-        "transferred",
-        "between",
-        "sites",
-        "quickly"
+        "transfer between sites",
+        "move patients",
+        "transfer patients",
+        "peaks coincide",
+        "peaks correlated",
+        "shared buffer",
+        "do the peaks overlap",
+        "transferred between sites",
+        "peaks are independent",
+        "demand peaks are independent",
+        "перевозить пациент",
+        "переводить пациент",
+        "совпадают ли пики",
+        "корреляц пиков",
+        "общий буфер"
        ],
        "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
       },
@@ -15706,12 +16050,19 @@
       }
      ],
      "trigger_phrases": [
-      "each",
-      "taker",
-      "buys",
-      "today",
-      "broadband",
-      "only"
+      "what they buy today",
+      "current mix",
+      "holding mix",
+      "what takers already have",
+      "already have two services",
+      "current subscriptions",
+      "taker buys today",
+      "buys today",
+      "mix of broadband",
+      "что покупают сейчас",
+      "текущий набор услуг",
+      "что уже подключено",
+      "сколько услуг уже"
      ],
      "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
     }
@@ -15831,12 +16182,19 @@
        "answer_explain": null,
        "reveal_exhibit": "C55-E2",
        "trigger_phrases": [
-        "each",
-        "taker",
-        "buys",
-        "today",
-        "broadband",
-        "only"
+        "what they buy today",
+        "current mix",
+        "holding mix",
+        "what takers already have",
+        "already have two services",
+        "current subscriptions",
+        "taker buys today",
+        "buys today",
+        "mix of broadband",
+        "что покупают сейчас",
+        "текущий набор услуг",
+        "что уже подключено",
+        "сколько услуг уже"
        ],
        "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
       },
@@ -15987,12 +16345,16 @@
       }
      ],
      "trigger_phrases": [
-      "where",
-      "incremental",
-      "volume",
-      "comes",
-      "from",
-      "whether"
+      "where the volume comes from",
+      "source of the lift",
+      "cannibaliz",
+      "from our other brand",
+      "taken from our own",
+      "new demand or stolen",
+      "откуда берётся прирост",
+      "каннибализ",
+      "у нашего же бренда",
+      "источник прироста"
      ],
      "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
     }
@@ -16112,12 +16474,16 @@
        "answer_explain": null,
        "reveal_exhibit": "C56-E2",
        "trigger_phrases": [
-        "where",
-        "incremental",
-        "volume",
-        "comes",
-        "from",
-        "whether"
+        "where the volume comes from",
+        "source of the lift",
+        "cannibaliz",
+        "from our other brand",
+        "taken from our own",
+        "new demand or stolen",
+        "откуда берётся прирост",
+        "каннибализ",
+        "у нашего же бренда",
+        "источник прироста"
        ],
        "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
       },
@@ -16244,12 +16610,19 @@
       }
      ],
      "trigger_phrases": [
-      "cost",
-      "source",
-      "equivalent",
-      "whey",
-      "powder",
-      "externally"
+      "external price of whey",
+      "cost to buy whey",
+      "buy the whey externally",
+      "whey market price",
+      "is whey available",
+      "source it externally",
+      "source equivalent whey",
+      "whey powder externally",
+      "cost to source equivalent",
+      "цена сыворотки на рынке",
+      "купить сыворотку",
+      "доступна ли сыворотк",
+      "закупать сыворотк"
      ],
      "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
     }
@@ -16369,12 +16742,19 @@
        "answer_explain": null,
        "reveal_exhibit": "C57-E2",
        "trigger_phrases": [
-        "cost",
-        "source",
-        "equivalent",
-        "whey",
-        "powder",
-        "externally"
+        "external price of whey",
+        "cost to buy whey",
+        "buy the whey externally",
+        "whey market price",
+        "is whey available",
+        "source it externally",
+        "source equivalent whey",
+        "whey powder externally",
+        "cost to source equivalent",
+        "цена сыворотки на рынке",
+        "купить сыворотку",
+        "доступна ли сыворотк",
+        "закупать сыворотк"
        ],
        "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
       },
@@ -16562,12 +16942,17 @@
       }
      ],
      "trigger_phrases": [
-      "happens",
-      "when",
-      "volatile",
-      "customer",
-      "meet",
-      "contracted"
+      "shortfall",
+      "under-delivery",
+      "take-or-pay",
+      "cannot meet the volume",
+      "miss the contracted volume",
+      "renegotiation cost",
+      "недобор объёма",
+      "не выберет объём",
+      "штраф за недобор",
+      "пересмотр контракта",
+      "бери или плати"
      ],
      "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
     }
@@ -16687,12 +17072,17 @@
        "answer_explain": null,
        "reveal_exhibit": "C58-E2",
        "trigger_phrases": [
-        "happens",
-        "when",
-        "volatile",
-        "customer",
-        "meet",
-        "contracted"
+        "shortfall",
+        "under-delivery",
+        "take-or-pay",
+        "cannot meet the volume",
+        "miss the contracted volume",
+        "renegotiation cost",
+        "недобор объёма",
+        "не выберет объём",
+        "штраф за недобор",
+        "пересмотр контракта",
+        "бери или плати"
        ],
        "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
       },
@@ -16827,12 +17217,16 @@
       }
      ],
      "trigger_phrases": [
-      "terminating",
-      "itself",
-      "costs",
-      "partner",
-      "clawbacks",
-      "site"
+      "cost of terminating",
+      "termination cost",
+      "exit cost",
+      "clawback",
+      "cost to walk away",
+      "cancellation cost",
+      "стоимость выхода",
+      "затраты на прекращени",
+      "штраф за выход",
+      "сколько стоит остановить"
      ],
      "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
     }
@@ -16952,12 +17346,16 @@
        "answer_explain": null,
        "reveal_exhibit": "C59-E2",
        "trigger_phrases": [
-        "terminating",
-        "itself",
-        "costs",
-        "partner",
-        "clawbacks",
-        "site"
+        "cost of terminating",
+        "termination cost",
+        "exit cost",
+        "clawback",
+        "cost to walk away",
+        "cancellation cost",
+        "стоимость выхода",
+        "затраты на прекращени",
+        "штраф за выход",
+        "сколько стоит остановить"
        ],
        "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
       },
@@ -17106,12 +17504,16 @@
       }
      ],
      "trigger_phrases": [
-      "likely",
-      "cost",
-      "overrun",
-      "large",
-      "typically",
-      "runs"
+      "overrun probability",
+      "cost overrun",
+      "how likely an overrun",
+      "size of the overrun",
+      "probability of overrun",
+      "how often projects overrun",
+      "вероятность перерасход",
+      "размер перерасход",
+      "превышение сметы",
+      "насколько часто перерасход"
      ],
      "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
     }
@@ -17231,12 +17633,16 @@
        "answer_explain": null,
        "reveal_exhibit": "C60-E2",
        "trigger_phrases": [
-        "likely",
-        "cost",
-        "overrun",
-        "large",
-        "typically",
-        "runs"
+        "overrun probability",
+        "cost overrun",
+        "how likely an overrun",
+        "size of the overrun",
+        "probability of overrun",
+        "how often projects overrun",
+        "вероятность перерасход",
+        "размер перерасход",
+        "превышение сметы",
+        "насколько часто перерасход"
        ],
        "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
       },
