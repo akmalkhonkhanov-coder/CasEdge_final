@@ -18,7 +18,7 @@
 // (Vercel transpiles this function to CommonJS, so ESM-only features like
 // `import.meta.url` / `import fs` are unavailable — require is the safe path.)
 const { verifyUserCached, rateLimitedScoped } = require('./_auth.js');
-const { checkAndConsume, refusalMessage } = require('./_entitlements.js');
+const { checkAndConsume, refusalMessage, refusalLang } = require('./_entitlements.js');
 const CASES_DATA = require('./_cases.json');
 
 const FALLBACK_ORIGIN = 'https://cas-edge-final.vercel.app';
@@ -418,12 +418,21 @@ function safeLabel(label) {
   return ((kept || 'Analysis') + (tail ? ' ' + tail : '')).trim();
 }
 const HAS_CYR = /[а-яА-ЯёЁ]/;
-function stepLangNote(md) {
+/* 21.08.2026. Пометка выдавалась БЕЗ ОГЛЯДКИ НА ЯЗЫК ПАРТИИ: русскому
+   кандидату на русском кейсе к каждому вопросу приезжало «ask it in natural
+   English», хотя блок OUTPUT тремя абзацами выше требует вести партию
+   ПОЛНОСТЬЮ НА РУССКОМ. Замер: 317 кейсов из 400, 2 128 шагов — то есть
+   противоречие стояло на самом ходовом пути продукта, и стояло БЛИЖЕ к
+   вопросу, чем правило, которому оно противоречит.
+   Заодно закрыта дыра в защите ловушки: когда партия идёт на языке
+   источника, перевода не происходит вовсе, и вопрос обязан звучать дословно. */
+function stepLangNote(md, lang) {
   const t = String(md || '');
   if (!t.trim()) return '';
-  return HAS_CYR.test(t)
-    ? '\n[LANGUAGE: this question is written in Russian source — ask it in natural English, keeping every number, unit and proper name exactly.]'
-    : '\n[LANGUAGE: this question is already in English — ask it VERBATIM, do not rephrase.]';
+  if (!HAS_CYR.test(t)) return '\n[LANGUAGE: this question is already in English — ask it VERBATIM, do not rephrase.]';
+  return String(lang) === 'ru'
+    ? '\n[LANGUAGE: this question is in Russian and the case runs in Russian — ask it VERBATIM, do not rephrase, and do not resolve any vagueness in it: that vagueness is the test.]'
+    : '\n[LANGUAGE: this question is written in Russian source — ask it in natural English, keeping every number, unit and proper name exactly, and leaving it exactly as vague as it is written.]';
 }
 
 /* ─────────────────────── ПОТОК: фильтр маркеров ──────────────────────────────
@@ -958,7 +967,7 @@ ${caseObj.prompt_md || caseObj.header_md || ''}`;
     ? `\n\n════ AVAILABLE NOW — the candidate may take ANY of these, in ANY order ════
 Each block is one analysis the candidate can legitimately do next. Grade whichever they actually pursue against its ANSWER KEY. NEVER read a key aloud.\n\n` +
       unlocked.map(n => { const s = byNum.get(n) || {};
-        return `— STEP ${n} — "${safeLabel(s.label)}" (yields: ${safeProduces(s.produces)||'—'})\nQUESTION IF THEY GO HERE:\n${s.candidate_md || safeLabel(s.label) || ''}${stepLangNote(s.candidate_md)}\nANSWER KEY (hidden — grade against this):\n${s.interviewer_md || '(no explicit key — grade with MBB rigor for this step type)'}`;
+        return `— STEP ${n} — "${safeLabel(s.label)}" (yields: ${safeProduces(s.produces)||'—'})\nQUESTION IF THEY GO HERE:\n${s.candidate_md || safeLabel(s.label) || ''}${stepLangNote(s.candidate_md, lang)}\nANSWER KEY (hidden — grade against this):\n${s.interviewer_md || '(no explicit key — grade with MBB rigor for this step type)'}`;
       }).join('\n\n')
     : '';
 
@@ -1005,7 +1014,10 @@ TWO MECHANICAL LIMITS. They override every instinct to be helpful, and they are 
 Веди кейс ПОЛНОСТЬЮ НА РУССКОМ ЯЗЫКЕ. Профессиональный консалтинговый русский; стандартные термины (NPV, EBITDA, churn, capex, MECE) допустимы. Названия кейсов и компаний — как написаны. Все числа — точно из материала. Скрытые маркеры (<step>…</step>, <verdict>…</verdict>, <reveal>…</reveal>) оставляй ровно как есть; кандидату не показывай.`;
   const language = (lang === 'ru') ? languageRu : enNative ? languageEnNative :
 `\n\n════ OUTPUT ════
-Conduct the case in natural consulting English. Internal material below (questions, keys, exhibit notes) may be in RUSSIAN — that is source, never quote it; rephrase in English. Keep every number, unit, percentage and proper name EXACTLY as written. Keep the hidden markers (<step>…</step>, <verdict>…</verdict>, <reveal>…</reveal>) exactly as written; never explain or display them.`;
+Conduct the case in natural consulting English. Internal material below (questions, keys, exhibit notes) may be in RUSSIAN — that is source, never quote it; rephrase in English.
+- Where a question is deliberately unspecific, that ambiguity IS the test. Never add the missing qualifier (never turn "which looks worst?" into "which has the worst margin?"), and never hint at which metric to use unless the answer key tells you to.
+- Rephrasing a question into English is a TRANSLATION, never a repair: the English question must be exactly as broad, as vague and as incomplete as the source. Do not resolve, narrow, complete or "clarify" it, and never add a qualifier the source does not have.
+Keep every number, unit, percentage and proper name EXACTLY as written. Keep the hidden markers (<step>…</step>, <verdict>…</verdict>, <reveal>…</reveal>) exactly as written; never explain or display them.`;
 
   const stable = header + openingRef + ex.stableText + language + flowRules;
   /* Лестница подсказок теперь и здесь. Тексты L1/L2 конкретного шага НЕ подаются:
@@ -1044,7 +1056,7 @@ This is grading material only. NEVER quote, paraphrase, summarise, or hand any o
 
 CURRENT STEP ${idx + 1} of ${steps.length} — "${safeLabel(step.label)}"
 QUESTION TO ASK THE CANDIDATE:
-${step.candidate_md || safeLabel(step.label) || ''}${stepLangNote(step.candidate_md)}
+${step.candidate_md || safeLabel(step.label) || ''}${stepLangNote(step.candidate_md, lang)}
 
 ANSWER KEY (hidden — grade against this):
 ${step.interviewer_md || '(No explicit key parsed for this step. Grade using the case prompt, the exhibits, and standard MBB rigor for a step of this type. Any answer text embedded in the question above is interviewer-side — do not read it out.)'}`;
@@ -1064,7 +1076,7 @@ Do NOT evaluate anything yet and do NOT emit a <verdict> marker on this opening 
   } else {
     const advance = isLast
       ? `Since this is the LAST step, do NOT ask a new question — give a brief, professional closing line and stop.`
-      : `Then transition and ask the NEXT step's question:\n"${(nextStep && (nextStep.candidate_md || safeLabel(nextStep.label))) || ''}"${nextStep ? stepLangNote(nextStep.candidate_md) : ''}`;
+      : `Then transition and ask the NEXT step's question:\n"${(nextStep && (nextStep.candidate_md || safeLabel(nextStep.label))) || ''}"${nextStep ? stepLangNote(nextStep.candidate_md, lang) : ''}`;
     flow =
 `\n\n════ WHAT TO DO NOW (EVALUATE) ════
 Grade the candidate's latest message against the ANSWER KEY for the current step.
@@ -1088,6 +1100,8 @@ Rules for every reply:
 `\n\n════ OUTPUT ════
 Conduct the case in English. Much of the internal material below (step questions, answer keys, hints, exhibit notes) is written in RUSSIAN — that is source material, not something to quote. ALWAYS speak to the candidate in natural, idiomatic consulting English:
 - Rephrase every step question and data introduction in English yourself — never paste the Russian text into your reply, and never mix Russian phrases into an English sentence.
+- Where a question is deliberately unspecific, that ambiguity IS the test. Never add the missing qualifier (never turn "which looks worst?" into "which has the worst margin?"), and never hint at which metric to use unless the answer key tells you to.
+- Rephrasing a question into English is a TRANSLATION, never a repair: the English question must be exactly as broad, as vague and as incomplete as the source. Do not resolve, narrow, complete or "clarify" it, and never add a qualifier the source does not have.
 - Translate meaning, not words: keep the wit and tone (case titles and puns stay AS WRITTEN — never translate a proper name or title), and keep every number, unit, percentage and company name EXACTLY as in the source.
 - Hints/nudges you deliver must also be in English, rephrased naturally.
 Keep the hidden markers EXACTLY as written (<verdict>…</verdict>, <reveal>…</reveal>) so the app can parse them; never explain or display them to the candidate.`;
@@ -1219,7 +1233,7 @@ export default async function handler(req, res) {
         ? await checkAndConsume({ kind: 'cases', ref: 'case:' + String(body.caseId), sbUrl, sbKey, token })
         : { allowed: true, charged: false };
       if (!ent.allowed) return res.status(402).json({
-        error: { message: refusalMessage('cases', (body.fbLang === 'ru' ? 'ru' : 'en')), code: 'entitlement_exhausted' },
+        error: { message: refusalMessage('cases', refusalLang(body)), code: 'entitlement_exhausted' },
         entitlement: { kind: 'cases', remaining: 0, cap: ent.cap, used: ent.used }
       });
     }

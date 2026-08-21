@@ -10,7 +10,7 @@
 //   grade → {drillId, answer} → {pass, coaching, reference:{en,ru}, provoked:{en,ru}}
 
 const { verifyUserCached, rateLimitedScoped } = require('./_auth.js');
-const { checkAndConsume, refusalMessage } = require('./_entitlements.js');
+const { checkAndConsume, refusalMessage, refusalLang } = require('./_entitlements.js');
 const DRILLS_CM = require('./_drills_cm.json');
 const DRILLS_MS = require('./_drills_ms.json');
 const DRILLS_ST = require('./_drills_st.json');
@@ -510,7 +510,7 @@ export default async function handler(req, res) {
     {
       const ent = await checkAndConsume({ kind: 'drills', ref: 'drill:' + String(body.drillId), sbUrl, sbKey, token });
       if (!ent.allowed) return res.status(402).json({
-        error: { message: refusalMessage('drills', (body.fbLang === 'ru' ? 'ru' : 'en')), code: 'entitlement_exhausted' },
+        error: { message: refusalMessage('drills', refusalLang(body)), code: 'entitlement_exhausted' },
         entitlement: { kind: 'drills', remaining: 0, cap: ent.cap, used: ent.used }
       });
     }

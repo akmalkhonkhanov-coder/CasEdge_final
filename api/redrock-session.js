@@ -18,7 +18,25 @@
 
 const crypto = require('crypto');
 const { verifyUserCached, rateLimitedScoped } = require('./_auth.js');
-const { checkAndConsume, refusalMessage } = require('./_entitlements.js');
+const { checkAndConsume, refusalMessage, refusalLang } = require('./_entitlements.js');
+
+/* СООБЩЕНИЯ РУЧКИ — ПАРА, А НЕ ЗАМЕНА. Цех игр нашёл 20.08 русскую строку в
+   теле ответа (:557 старой нумерации) при зелёном гейте. Соблазн — «перевести
+   на английский»; это тот же регресс, за который цех кейсов выиграл спор про
+   пару полей: 317 кейсов из 400 русские, и большинство аудитории читает
+   по-русски. Поэтому строка живёт в двух языках, а язык выбирает refusalLang()
+   по телу запроса — единственный владелец этого выбора в проекте.
+   Тем же образом принимаются остальные серверные строки круга 68. */
+const RK_MSG = {
+  review_locked: {
+    ru: 'Разбор открывается после того, как сданы все вопросы Analysis.',
+    en: 'The review opens once every Analysis question has been submitted.'
+  }
+};
+function rkMsg(key, body) {
+  const pair = RK_MSG[key] || {};
+  return pair[refusalLang(body)] || pair.en || '';
+}
 const GAMES_DATA = require('./redrock-games.json');
 
 const FALLBACK_ORIGIN = 'https://cas-edge-final.vercel.app';
@@ -506,7 +524,7 @@ export default async function handler(req, res) {
     {
       const ent = await checkAndConsume({ kind: 'games', ref: 'redrock:' + String(body.gameId), sbUrl, sbKey, token });
       if (!ent.allowed) return res.status(402).json({
-        error: { message: refusalMessage('games', 'ru'), code: 'entitlement_exhausted' },
+        error: { message: refusalMessage('games', refusalLang(body)), code: 'entitlement_exhausted' },
         entitlement: { kind: 'games', remaining: 0, cap: ent.cap, used: ent.used }
       });
     }
@@ -554,7 +572,7 @@ export default async function handler(req, res) {
       const tickets = (body.tickets && typeof body.tickets === 'object') ? body.tickets : {};
       const missing = need.filter(fid => !rkTicketValid(userId, g.id, fid, tickets[fid]));
       if (missing.length) return res.status(403).json({
-        error: { message: 'Разбор открывается после того, как сданы все вопросы Analysis.', code: 'review_locked' },
+        error: { message: rkMsg('review_locked', body), code: 'review_locked' },
         locked: true, missing: missing.length, total: need.length
       });
       // Разбор сбора едет вместе с разбором Analysis: тот же замок, тот же момент.

@@ -119,7 +119,7 @@ function pickGame(level, seen) {
 }
 
 const { verifyUserCached, subjectOf, rateLimitedScoped } = require('./_auth.js');
-const { checkAndConsume, refusalMessage } = require('./_entitlements.js');
+const { checkAndConsume, refusalMessage, refusalLang } = require('./_entitlements.js');
 
 /* ── auth + rate limit (same contract as the other endpoints) ─────────────── */
 async function fetchWithTimeout(url, options, ms) {
@@ -232,7 +232,7 @@ export default async function handler(req, res) {
     {
       const ent = await checkAndConsume({ kind: 'games', ref: 'seawolf:' + String(st.g), sbUrl, sbKey, token: bearer });
       if (!ent.allowed) return res.status(402).json({
-        error: { message: refusalMessage('games', 'ru'), code: 'entitlement_exhausted' },
+        error: { message: refusalMessage('games', refusalLang(body)), code: 'entitlement_exhausted' },
         entitlement: { kind: 'games', remaining: 0, cap: ent.cap, used: ent.used }
       });
     }

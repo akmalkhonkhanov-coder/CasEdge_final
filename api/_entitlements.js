@@ -168,7 +168,26 @@ function refusalMessage(kind, lang) {
     drills: 'You have used all drills in your plan. Open the plans page to continue.',
     games:  'Games are part of the Game Pass. Open the plans page.'
   };
-  return (String(lang).toLowerCase().startsWith('ru') ? ru : en)[kind] || ru.cases;
+  /* Запасной вариант тоже по языку: раньше неизвестный kind возвращал
+     русскую строку даже англоязычному кандидату. */
+  const dict = String(lang).toLowerCase().startsWith('ru') ? ru : en;
+  return dict[kind] || dict.cases;
 }
 
-module.exports = { checkAndConsume, refusalMessage, FREE };
+/* Функция стоит ПОСЛЕ refusalMessage намеренно: gate_entitlements.mjs
+   строит мутанта склейкой «начало файла + хвост от /** Текст отказа», и
+   всё, что лежит между этими якорями, из мутанта исчезает. 21.08 я
+   положил её выше и уронил чужой гейт на ReferenceError. */
+/* Язык отказа — это ОБОЛОЧКА, а не разбор: кандидат читает его на экране
+   оплаты, рядом с кнопкой тарифов. Источник один — uiLang клиента
+   (localStorage 'caseedge_uilang'); fbLang остаётся запасным для клиентов,
+   которые uiLang ещё не шлют. Умолчание английское — как у оболочки.
+   20.08.2026: три игровые ручки звали refusalMessage(kind, 'ru') ЗАШИТО,
+   и англоязычный кандидат получал русский экран ровно в точке оплаты. */
+function refusalLang(body) {
+  const b = (body && typeof body === 'object') ? body : {};
+  const v = String(b.uiLang || b.fbLang || '').toLowerCase();
+  return v.startsWith('ru') ? 'ru' : 'en';
+}
+
+module.exports = { checkAndConsume, refusalMessage, refusalLang, FREE };
