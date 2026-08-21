@@ -3605,7 +3605,7 @@ async function callCaseSessionStream(payload, onText) {
   const token = await casFreshToken();
   if (token) headers['Authorization'] = 'Bearer ' + token;
   const r = await fetch('/api/case-session', {
-    method: 'POST', headers: headers, body: JSON.stringify(Object.assign({}, payload, { stream: true }))
+    method: 'POST', headers: headers, body: JSON.stringify(Object.assign({}, payload, { stream: true, uiLang: window.caseedgeUiLang() }))
   });
   const ct = r.headers.get('content-type') || '';
   // Сервер отдал обычный JSON (старая версия, ошибка, пустой ответ) — не поток.
@@ -3660,7 +3660,7 @@ async function callCaseSession(payload) {
     const token = await freshToken();
     if (token) headers['Authorization'] = 'Bearer ' + token;
     const response = await fetch('/api/case-session', {
-      method: 'POST', headers: headers, body: JSON.stringify(payload)
+      method: 'POST', headers: headers, body: JSON.stringify(Object.assign({}, payload, { uiLang: window.caseedgeUiLang() }))
     });
     let data = {};
     try { data = await response.json(); } catch (e) { data = {}; }
@@ -3709,6 +3709,11 @@ const state = {
   fbLang: localStorage.getItem('caseedge_fblang') || 'same',
   uiLang: localStorage.getItem('caseedge_uilang') || 'en',
 };
+
+// Язык ОБОЛОЧКИ одной функцией, и она же уезжает на сервер: экран «кейсы в
+// плане закончились» рисует сервер, а читает его тот же кандидат, что и меню.
+// Держать его язык в двух местах - это C24; поэтому источник один, здесь.
+window.caseedgeUiLang = function () { return state.uiLang === 'ru' ? 'ru' : 'en'; };
 
 const LANG_NAMES = { en: 'English', ru: 'Russian (Русский)' };
 function setAiLang(code) {
@@ -5838,7 +5843,7 @@ async function rkApi(action, payload) {
   const token = await rkToken();
   const headers = { 'Content-Type': 'application/json' };
   if (token) headers['Authorization'] = 'Bearer ' + token;
-  const resp = await fetch('/api/redrock-session', { method: 'POST', headers, body: JSON.stringify(Object.assign({ action }, payload || {})) });
+  const resp = await fetch('/api/redrock-session', { method: 'POST', headers, body: JSON.stringify(Object.assign({ action, uiLang: window.caseedgeUiLang() }, payload || {})) });
   let data = null; try { data = await resp.json(); } catch (e) { data = null; }
   if (!resp.ok) { const msg = (data && data.error && data.error.message) || ('Request failed (' + resp.status + ')'); throw new Error(msg); }
   return data;

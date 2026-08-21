@@ -325,7 +325,9 @@ window.caseyCalc = (function(){
     return freshToken2().then(function(token){
       var headers = { 'Content-Type': 'application/json' };
       if (token) headers['Authorization'] = 'Bearer ' + token;
-      return fetch('/api/casey', { method:'POST', headers: headers, body: JSON.stringify(payload) });
+      // uiLang - для экрана отказа по плану; владелец величины в index.html.
+      var ui = (typeof window.caseedgeUiLang === 'function') ? window.caseedgeUiLang() : 'en';
+      return fetch('/api/casey', { method:'POST', headers: headers, body: JSON.stringify(Object.assign({}, payload, { uiLang: ui })) });
     }).then(function(r){ return r.json().catch(function(){ return {}; }); });
   }
   function gradeStep(gid, payload){

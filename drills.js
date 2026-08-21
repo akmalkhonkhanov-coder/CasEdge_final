@@ -300,7 +300,10 @@
     return freshToken().then(function (token) {
       var headers = { 'Content-Type': 'application/json' };
       if (token) headers['Authorization'] = 'Bearer ' + token;
-      return fetch('/api/drills', { method: 'POST', headers: headers, body: JSON.stringify(payload) });
+      // uiLang едет на сервер ради одного экрана - отказа по исчерпанному плану.
+      // Источник один, он в index.html; здесь только пересылка.
+      var ui = (typeof window.caseedgeUiLang === 'function') ? window.caseedgeUiLang() : 'en';
+      return fetch('/api/drills', { method: 'POST', headers: headers, body: JSON.stringify(Object.assign({}, payload, { uiLang: ui })) });
     }).then(function (r) { return r.json().catch(function () { return {}; }); });
   }
 
