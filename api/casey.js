@@ -237,11 +237,14 @@ function gradeChoice(q, selected) {
       ok = req.every(i => sel.indexOf(i) >= 0) && !forb.some(i => sel.indexOf(i) >= 0);
       if (v.rule === 'single_choice') ok = ok && sel.length === 1;
     }
-    return { ok, correctIdx: req.length ? req : correctIdx, validation: '' };
+    /* answer_explain уходит клиенту для РАЗБОРА В КОНЦЕ. Раньше он лежал
+       в данных и не отдавался никому: кандидат видел, какие варианты верны,
+       и ни слова о том, ПОЧЕМУ. */
+    return { ok, correctIdx: req.length ? req : correctIdx, validation: '', answer_explain: q.answer_explain || '' };
   }
 
   const ok = correctIdx.length === sel.length && correctIdx.every(i => sel.indexOf(i) >= 0);
-  return { ok, correctIdx, validation: typeof q.validation === 'string' ? q.validation : '' };
+  return { ok, correctIdx, validation: typeof q.validation === 'string' ? q.validation : '', answer_explain: q.answer_explain || '' };
 }
 function gradeNumber(q, value) {
   const ans = num(q.answer), val = num(value);
@@ -386,8 +389,15 @@ async function graderJSON(system, userText, maxTokens, meter) {
   return parsed;
 }
 
-async function gradeOpen(q, answer, meter) {
-  const sys = 'You are a strict but fair BCG case-interview examiner. Grade the candidate answer on a binary pass/fail. Return ONLY JSON: {"pass":true|false,"feedback":"1 short sentence IN ENGLISH: what earned or missed the pass"}.';
+/* Язык РАЗБОРА — ось fbLang, не язык оболочки. До 21.08 системный промпт
+   требовал объяснение «IN ENGLISH» безусловно, и русскому кандидату разбор
+   приходил по-английски. */
+async function gradeOpen(q, answer, meter, fbLang) {
+  const sys = 'You are a strict but fair BCG case-interview examiner. Grade the candidate answer on a binary pass/fail. Return ONLY JSON: {"pass":true|false,"feedback":"' +
+    (String(fbLang) === 'ru'
+      ? '1 short sentence IN RUSSIAN (одно короткое предложение по-русски)'
+      : '1 short sentence IN ENGLISH') +
+    ': what earned or missed the pass"}.';
   // validation is either the new structured object ({rule:'semantic', credit_if})
   // or, on older records, a prose sentence. Passing the raw object would send the
   // grader "[object Object]" and quietly grade against nothing.
@@ -398,7 +408,7 @@ async function gradeOpen(q, answer, meter) {
     '\nMODEL ANSWER: ' + (q.model_answer || '—') +
     '\nCANDIDATE ANSWER: ' + answer;
   const j = await graderJSON(sys, u, 400, meter);
-  return j || { pass: true, feedback: 'Answer accepted.' };
+  return j || { pass: true, feedback: String(fbLang) === 'ru' ? 'Ответ принят.' : 'Answer accepted.' };
 }
 
 /* ───────────────────────── handler ───────────────────────────────────────── */
@@ -440,6 +450,8 @@ export default async function handler(req, res) {
     }
     // grade — rate-limited, keys never leave.
     if (body.action === 'grade') {
+      /* Язык разбора: ось fbLang, запасным — язык оболочки. */
+      const fbLang = String(body.fbLang || body.uiLang || '').toLowerCase().startsWith('ru') ? 'ru' : 'en';
       if (await rateLimited(userId, sbUrl, sbKey, token)) {
         return res.status(429).json({ error: { message: 'Too many requests. Please slow down.' } });
       }
@@ -478,12 +490,27 @@ export default async function handler(req, res) {
            Это надо видеть в логе отдельно: доля бесплатных зачётов и есть мера
            того, насколько дорог слот. */
         const meter = {}; const t0 = Date.now();
-        if (!trg) { const r = await gradeOpen(q, answer, meter); pass = !!r.pass; }
-        logCaseyCost(trg ? 'open_trigger' : 'open_text', c.id, gid, meter.usage, Date.now() - t0, meter.mode);
+        /* 21.08.2026. feedback МОДЕЛИ ЗДЕСЬ ВЫБРАСЫВАЛСЯ. Клиент на типах
+           open_text и open_text_brainstorm печатает esc2(r.feedback || '') —
+           кандидат видел голую галочку без единого слова о том, за что зачёт.
+           Замер: 17 шагов (open_text 8 + brainstorm 9), и объяснение на них
+           уже написано и уже оплачено. Теперь оно доезжает.
+           На пути триггера модель не звалась вовсе — объяснения нет и быть
+           не может, там подтверждение печатает клиент. */
+        let feedback = '';
+        if (!trg) { const r = await gradeOpen(q, answer, meter, fbLang); pass = !!r.pass; feedback = String(r.feedback || ''); }
+        /* Строка расхода — по ТИПУ ШАГА: brainstorm считался как open_text и
+           в логе не существовал вовсе. */
+        logCaseyCost(trg ? 'open_trigger' : (t === 'open_text_brainstorm' ? 'brainstorm' : 'open_text'), c.id, gid, meter.usage, Date.now() - t0, meter.mode);
         const note = (q.validation && typeof q.validation === 'object')
           ? (q.validation.credit_if || 'Right thing to probe.')
           : (q.validation || 'Right thing to probe.');
-        return res.status(200).json({ pass, validation: note, revealExhibit: q.reveal_exhibit || null });
+        /* Эталон и объяснение отдаются ПОСЛЕ того, как шаг закрыт, и печатаются
+           разбором в конце. Без них на открытых шагах кандидат не узнавал
+           верного ответа вообще: ни модель, ни ключ до него не доезжали. */
+        return res.status(200).json({ pass, feedback, validation: note,
+          model_answer: q.model_answer || '', answer_explain: q.answer_explain || '',
+          revealExhibit: q.reveal_exhibit || null });
       }
       if (t === 'voice') {
         // Canonical structured rubric for every case (C1-C30). Falls back to the
@@ -504,11 +531,14 @@ export default async function handler(req, res) {
         j.model_answer = q.model_answer || '';
         return res.status(200).json(j);
       }
-      // open_text / brainstorm
+      /* УМОЛЧАНИЕ для открытого типа, которого ещё нет. Сегодня недостижимо:
+         перебор flatten() по всей библиотеке (631 шаг) показывает, что все три
+         открытых типа ловит ветка выше. Блок оставлен как поведение по
+         умолчанию для НОВОГО типа, а не как вторая копия той же логики. */
       {
         const meter = {}; const t0 = Date.now();
-        const out = await gradeOpen(q, String(p.answer || ''), meter);
-        logCaseyCost('brainstorm', c.id, gid, meter.usage, Date.now() - t0, meter.mode);
+        const out = await gradeOpen(q, String(p.answer || ''), meter, fbLang);
+        logCaseyCost('open_other', c.id, gid, meter.usage, Date.now() - t0, meter.mode);
         return res.status(200).json(out);
       }
     }
