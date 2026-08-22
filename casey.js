@@ -437,11 +437,18 @@ window.caseyCalc = (function(){
         // and must survive, so the pattern requires a numeric payload.
         var ex = String(r.answer_explain || '').replace(/^\s*\*\*Answer:\s*[-+]?[\d.,\s$%]+\*\*\s*(?:—|-|:)?\s*/i, '');
         record(q, raw, r.ok, String(r.answer == null ? '' : r.answer), ex);
-        /* Число НАЗЫВАЕТСЯ, потому что остальная часть кейса считается от него -
-           так делает и живой интервьюер: он выравнивает цифру и идёт дальше.
-           Но без слов оценки: ни «верно», ни «не совсем». */
-        if (r.answer != null && String(r.answer) !== '') say('ai', 'Let\'s carry ' + esc2(String(r.answer)) + ' forward.');
-        setTimeout(advance, 500);
+        /* 22.08.2026. Здесь стояла строка «Let's carry X forward» - я вывел её
+           из живого интервью, где интервьюер выравнивает цифру, чтобы остаток
+           кейса считался от верного числа. В Casey такого нет и быть не может:
+           это не разговор, а лист вопросов. Владелец показал десять настоящих
+           партий формата Casey: вопросы идут подряд, ответ не комментируется,
+           разбор - отдельным разделом Answer Key в конце.
+           Цепочки при этом СУЩЕСТВУЮТ и никто не поправляет по дороге:
+             AeroView   4a) 35,500,000 · 4b) 45,700,000 · 4c) какой флот дешевле
+             Interstate 5a) 5b) 5c) → 5d) прирост прибыли считается из трёх
+           Ошибка в 4a тянется в 4c - и это часть проверки. Назвать верное
+           число здесь значит и подсказать, и объявить приговор. Молчим. */
+        setTimeout(advance, 400);
       });
       return;
     }
@@ -563,11 +570,11 @@ window.caseyCalc = (function(){
       return '<div class="cy-crit ' + (e.ok ? 'pass' : 'fail') + '"><span class="ic">' + (e.ok ? '✓' : '✗') + '</span><span>' +
         '<b>' + e.n + '. ' + esc2(String(e.q).slice(0, 140)) + '</b>' +
         '<div style="margin-top:6px"><i>You said:</i> ' + esc2(String(e.mine).slice(0, 500) || '—') + '</div>' +
-        (e.expected ? '<div style="margin-top:4px"><i>Model answer:</i> ' + md(String(e.expected).slice(0, 900)) + '</div>' : '') +
-        (cleanWhy(e.why) ? '<div style="margin-top:4px;opacity:.9"><i>Why:</i> ' + md(cleanWhy(e.why).slice(0, 900)) + '</div>' : '') +
+        (e.expected ? '<div style="margin-top:4px"><i>Answer:</i> ' + md(String(e.expected).slice(0, 900)) + '</div>' : '') +
+        (cleanWhy(e.why) ? '<div style="margin-top:4px;opacity:.9"><i>Explanation:</i> ' + md(cleanWhy(e.why).slice(0, 900)) + '</div>' : '') +
         '</span></div>';
     }).join('');
-    feedNode('<div class="cy-grade"><div class="cy-score">Debrief — step by step</div>' + rows + '</div>');
+    feedNode('<div class="cy-grade"><div class="cy-score">Answer key — question by question</div>' + rows + '</div>');
   }
 
   function finish(){
@@ -575,7 +582,7 @@ window.caseyCalc = (function(){
     izHide();
     var maxScore = S.flat.length;
     debrief();
-    say('ai', '**Case complete.** You scored **' + S.score + ' / ' + maxScore + '** on this run. The debrief above goes step by step - that is where the case is actually learned.');
+    say('ai', '**Case complete.** You scored **' + S.score + ' / ' + maxScore + '** on this run. The answer key above goes question by question - that is where the case is actually learned.');
     feedNode('<div style="text-align:center;margin:18px 0"><button class="cy-send" onclick="Casey.open()">← Back to case list</button></div>');
     try { var done = JSON.parse(localStorage.getItem('casedge_casey_done') || '[]'); if (done.indexOf(S.case.id) < 0) done.push(S.case.id); localStorage.setItem('casedge_casey_done', JSON.stringify(done)); } catch (e) {}
     // Record this case in the shared Progress tracker (Cases completed + a 0-10 score from steps nailed, synced to cloud).
