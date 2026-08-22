@@ -325,9 +325,11 @@ window.caseyCalc = (function(){
     return freshToken2().then(function(token){
       var headers = { 'Content-Type': 'application/json' };
       if (token) headers['Authorization'] = 'Bearer ' + token;
-      // uiLang - для экрана отказа по плану; владелец величины в index.html.
+      // uiLang - для экрана отказа по плану, fbLang - для языка разбора.
+      // Владелец обеих величин в index.html, здесь только пересылка.
       var ui = (typeof window.caseedgeUiLang === 'function') ? window.caseedgeUiLang() : 'en';
-      return fetch('/api/casey', { method:'POST', headers: headers, body: JSON.stringify(Object.assign({}, payload, { uiLang: ui })) });
+      var fb = (typeof window.caseedgeFbLang === 'function') ? window.caseedgeFbLang() : 'en';
+      return fetch('/api/casey', { method:'POST', headers: headers, body: JSON.stringify(Object.assign({}, payload, { uiLang: ui, fbLang: fb })) });
     }).then(function(r){ return r.json().catch(function(){ return {}; }); });
   }
   function gradeStep(gid, payload){
@@ -379,6 +381,13 @@ window.caseyCalc = (function(){
 
   function fb(ok, html){ feedNode('<div class="cy-fb ' + (ok?'ok':'no') + '">' + html + '</div>'); }
 
+  /* ЗАПИСЬ ХОДА. Кладём в журнал вопрос, ответ кандидата и всё, что прислал
+     сервер: вердикт, объяснение, эталон. Печатается это ОДИН раз, в конце. */
+  function record(q, mine, ok, expected, why){
+    S.log.push({ n: S.log.length + 1, q: q.prompt || '(question)', mine: mine, ok: !!ok,
+                 expected: expected || '', why: why || '' });
+  }
+
   function advance(){ S.idx++; izHide(); setTimeout(step, 350); }
 
   function _pick(i, single){
@@ -399,15 +408,16 @@ window.caseyCalc = (function(){
       gradeStep(q.gid, { selected: sel }).then(function(r){
         if (r._err){ fb(false, '<b>Connection issue.</b> Could not reach the grader — moving on.'); return void setTimeout(advance, 500); }
         var correct = r.correctIdx || [];
-        (q.options||[]).forEach(function(o, i){ var el = document.querySelector('#cyIz .cy-opt[data-i="' + i + '"]'); if (!el) return; if (correct.indexOf(i) >= 0) el.classList.add('correct'); else if (sel.indexOf(i) >= 0) el.classList.add('wrong'); });
         if (r.ok) S.score++;
-        // "Verified against:" used to print the prose validation sentence. With
-        // structured validation the server sends nothing there on purpose (the
-        // rule IS the answer key), so the label must not be rendered empty —
-        // "Not quite. Verified against:" with a blank tail reads like a bug.
-        fb(!!r.ok, (r.ok ? '<b>✓ Correct.</b>' : '<b>Not quite.</b>') +
-           (r.validation ? ' Verified against: ' + esc2(r.validation) : ''));
-        setTimeout(advance, 500);
+        record(q, sel.map(function(i){ return (q.options[i]||{}).text; }).join(' • '), r.ok,
+               correct.map(function(i){ return (q.options[i]||{}).text; }).join(' • '),
+               r.answer_explain || r.validation || '');
+        /* Раньше здесь печатался вердикт и подсвечивались верные варианты.
+           Ни того, ни другого по ходу партии больше нет: и вердикт, и эталон
+           лежат в журнале и печатаются разбором в конце. Структурная
+           validation при этом часто пуста (правило И ЕСТЬ ключ), и в разборе
+           она печатается только когда не пуста. */
+        setTimeout(advance, 350);
       });
       return;
     }
@@ -426,9 +436,12 @@ window.caseyCalc = (function(){
         // A prose verdict like "**Answer: No — the reversal is absent.**" is content
         // and must survive, so the pattern requires a numeric payload.
         var ex = String(r.answer_explain || '').replace(/^\s*\*\*Answer:\s*[-+]?[\d.,\s$%]+\*\*\s*(?:—|-|:)?\s*/i, '');
-        var expl = ex ? '<div style="margin-top:6px">' + md(ex) + '</div>' : '';
-        fb(!!r.ok, (r.ok ? '<b>✓ ' + esc2(r.answer) + '</b> — correct.' : '<b>Not quite — the answer is ' + esc2(r.answer) + '.</b>') + expl);
-        setTimeout(advance, 600);
+        record(q, raw, r.ok, String(r.answer == null ? '' : r.answer), ex);
+        /* Число НАЗЫВАЕТСЯ, потому что остальная часть кейса считается от него -
+           так делает и живой интервьюер: он выравнивает цифру и идёт дальше.
+           Но без слов оценки: ни «верно», ни «не совсем». */
+        if (r.answer != null && String(r.answer) !== '') say('ai', 'Let\'s carry ' + esc2(String(r.answer)) + ' forward.');
+        setTimeout(advance, 500);
       });
       return;
     }
@@ -438,8 +451,10 @@ window.caseyCalc = (function(){
     if (t === 'open_text_elicitation'){
       gradeStep(q.gid, { answer: answer }).then(function(r){
         if (r._err){ fb(false, '<b>Connection issue.</b> Revealing the exhibit anyway.'); }
-        else if (r.pass){ S.score++; fb(true, '<b>Good ask.</b> ' + esc2(r.validation || 'Right thing to probe.')); }
-        else { fb(false, '<b>Hint:</b> Think about what you still need to know — revealing the exhibit anyway.'); }
+        else {
+          if (r.pass) S.score++;
+          record(q, answer, r.pass, r.model_answer || r.validation || '', r.feedback || '');
+        }
         var revId = (r && r.revealExhibit) || null;
         if (revId){ setTimeout(function(){ say('ai', 'Here is what that surfaces:'); showExhibit(exById(revId)); setTimeout(advance, 400); }, 300); }
         else setTimeout(advance, 400);
@@ -450,8 +465,8 @@ window.caseyCalc = (function(){
     gradeStep(q.gid, { answer: answer }).then(function(r){
       if (r._err){ fb(false, '<b>Connection issue.</b> Could not reach the grader — moving on.'); return void setTimeout(advance, 500); }
       if (r.pass) S.score++;
-      fb(!!r.pass, (r.pass ? '<b>✓ </b>' : '<b>✗ </b>') + esc2(r.feedback || ''));
-      setTimeout(advance, 500);
+      record(q, answer, r.pass, r.model_answer || r.validation || '', r.feedback || '');
+      setTimeout(advance, 350);
     });
   }
 
@@ -524,11 +539,43 @@ window.caseyCalc = (function(){
     else { S.idx++; setTimeout(finish, 500); }
   }
 
+  /* РАЗБОР ПОЛЁТОВ. Один блок в конце, как после настоящего интервью: по каждому
+     ходу - вопрос, твой ответ, что ожидалось и почему. По ходу партии кандидат
+     не видел ни одного вердикта, и это не украшение: живой интервьюер ведёт и
+     подсказывает («point them in the direction of historical trends»,
+     «if they do not bring up synergies, guide them to this topic» - заметки
+     интервьюеру Kellogg 2012 и Wharton 2017), но не объявляет «верно/неверно». */
+  /* Строка «почему» приходит из данных в трёх видах, и два из них печатать
+     нельзя: служебный расчёт в тройных кавычках (```python …```) и повтор
+     самого ответа («**Answer:** 1, 2, 3, 6.»), после которого не остаётся
+     ничего, кроме номеров вариантов. Найдено прогоном разбора на боевом
+     кейсе C1, а не чтением. */
+  function cleanWhy(t){
+    var x = String(t == null ? '' : t).replace(/```[\s\S]*?```/g, '').trim();
+    x = x.replace(/^\s*\*\*Answer:?\s*[^*]*\*\*\s*[—:-]?\s*/i, '').trim();
+    if (/^[\d\s,.;]*$/.test(x)) return '';
+    return x;
+  }
+
+  function debrief(){
+    if (!S.log.length) return;
+    var rows = S.log.map(function(e){
+      return '<div class="cy-crit ' + (e.ok ? 'pass' : 'fail') + '"><span class="ic">' + (e.ok ? '✓' : '✗') + '</span><span>' +
+        '<b>' + e.n + '. ' + esc2(String(e.q).slice(0, 140)) + '</b>' +
+        '<div style="margin-top:6px"><i>You said:</i> ' + esc2(String(e.mine).slice(0, 500) || '—') + '</div>' +
+        (e.expected ? '<div style="margin-top:4px"><i>Model answer:</i> ' + md(String(e.expected).slice(0, 900)) + '</div>' : '') +
+        (cleanWhy(e.why) ? '<div style="margin-top:4px;opacity:.9"><i>Why:</i> ' + md(cleanWhy(e.why).slice(0, 900)) + '</div>' : '') +
+        '</span></div>';
+    }).join('');
+    feedNode('<div class="cy-grade"><div class="cy-score">Debrief — step by step</div>' + rows + '</div>');
+  }
+
   function finish(){
     progress();
     izHide();
     var maxScore = S.flat.length;
-    say('ai', '**Case complete.** You scored **' + S.score + ' / ' + maxScore + '** on this run. Review the exhibits and the model recommendation above — then try another case.');
+    debrief();
+    say('ai', '**Case complete.** You scored **' + S.score + ' / ' + maxScore + '** on this run. The debrief above goes step by step - that is where the case is actually learned.');
     feedNode('<div style="text-align:center;margin:18px 0"><button class="cy-send" onclick="Casey.open()">← Back to case list</button></div>');
     try { var done = JSON.parse(localStorage.getItem('casedge_casey_done') || '[]'); if (done.indexOf(S.case.id) < 0) done.push(S.case.id); localStorage.setItem('casedge_casey_done', JSON.stringify(done)); } catch (e) {}
     // Record this case in the shared Progress tracker (Cases completed + a 0-10 score from steps nailed, synced to cloud).
@@ -561,7 +608,11 @@ window.caseyCalc = (function(){
     apiCasey({ action:'case', caseId: id }).then(function(d){
       var c = d && d.case;
       if (!c){ if (w) w.innerHTML = '<div class="cy-pick-h"><h2>Casey</h2><p>Could not load this case — please try again.</p></div>'; return; }
-      S = { case: c, flat: c.steps || [], idx: 0, score: 0, shown: {} };
+      /* log — журнал партии. Ни одного слова оценки по ходу: всё, что
+         сказал бы интервьюер ПОСЛЕ, копится здесь и печатается разбором
+         в конце. Так же устроен полный кейс (api/case-session.js), где
+         маркеры оценки кандидату не показываются вовсе. */
+      S = { case: c, flat: c.steps || [], idx: 0, score: 0, shown: {}, log: [] };
       if (pl) pl.textContent = 'Test Completed 0%';
       say('ai', "I'm Casey. Let's work through **" + c.title + "**. Read the brief, use the exhibits — the math is real. You'll close with a spoken recommendation.");
       say('ai', c.scenario);

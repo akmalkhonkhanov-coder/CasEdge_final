@@ -3714,6 +3714,12 @@ const state = {
 // плане закончились» рисует сервер, а читает его тот же кандидат, что и меню.
 // Держать его язык в двух местах - это C24; поэтому источник один, здесь.
 window.caseedgeUiLang = function () { return state.uiLang === 'ru' ? 'ru' : 'en'; };
+// Язык РАЗБОРА (ось fbLang) - для сервера, который пишет объяснение оценки.
+// Правило то же, что в drills.js: 'same' означает язык самой партии.
+window.caseedgeFbLang = function () {
+  var fb = state.fbLang === 'same' ? state.aiLang : state.fbLang;
+  return fb === 'ru' ? 'ru' : 'en';
+};
 
 const LANG_NAMES = { en: 'English', ru: 'Russian (Русский)' };
 function setAiLang(code) {
