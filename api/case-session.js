@@ -708,7 +708,13 @@ function exhibitsBlock(caseObj, revealedSet, lang) {
         `${triggers.length ? triggers.map(t => `"${t}"`).join(', ') : 'the specific data it contains'}.\n` +
         `If (and only if) they ask, BEGIN your reply with the marker <reveal>${ex.id}</reveal> and then present it.\n` +
         `Exception (no deadlock): if the CURRENT STEP cannot be answered without this exhibit and the candidate has already made an attempt without asking for it, you may introduce it yourself — still beginning with <reveal>${ex.id}</reveal>.${appNote}\n` +
-        `Contents (keep hidden until asked):\n${ex.body_md || ''}`
+        /* 23.08.2026. ЗДЕСЬ СТОЯЛ СЫРОЙ `ex.body_md` — единственная из трёх
+           веток экзибита, куда 21.08 я не поставил enField. У СКРЫТОГО экзибита
+           модель получала русское тело даже при готовом body_md_en: то есть
+           ровно там, где она этот текст пересказывает своими словами, перевод
+           до неё не доезжал. Замер исполнением caseGates() по всей библиотеке: экзибитов
+           со шлюзом 499 из 819. */
+        `Contents (keep hidden until asked):\n${enField(ex, 'body_md', lang) || ''}`
       );
     }
   }
@@ -945,8 +951,30 @@ Conduct the case in natural consulting English. The internal material below is A
    режиме тоже; просьба о помощи читается из слов самого кандидата — отдельной
    кнопки нет и не будет, «мне нужна помощь» кандидат обязан произнести сам,
    и эти слова остаются в стенограмме, которую читает разбор. */
+/* 23.08.2026. БРИФ ПО-АНГЛИЙСКИ И КЕЙС ПО-АНГЛИЙСКИ - РАЗНЫЕ ВЕЩИ, и раньше
+   это была одна переменная. `enNative` читался ТОЛЬКО из `caseObj.lang`, а
+   значит переведённый бриф ничего не менял: кейс оставался помечен `ru`,
+   модель получала «present the case prompt in your own words» и пересказывала
+   уже переведённый текст. Цех кейсов назвал это трижды подряд: перевод 273
+   промптов без этой правки - работа в стол.
+   Оси теперь две, и каждая отвечает за своё:
+     briefIsEnglish  - бриф, который получает модель, английский → печатать
+                       ДОСЛОВНО (OPENING_VERBATIM)
+     enNative        - ВЕСЬ материал кейса английский → блок languageEnNative,
+                       который утверждает «это не перевод». У кейса с одним
+                       переведённым брифом шаги и ключи остаются русскими,
+                       и это утверждение было бы ложью. Поэтому вторая ось
+                       остаётся ровно там, где была. */
+function briefIsEnglish(caseObj, lang) {
+  if (String(lang) === 'ru') return false;
+  if (String((caseObj && (caseObj.lang || caseObj.source_lang)) || '').toLowerCase() === 'en') return true;
+  const v = caseObj && caseObj.prompt_md_en;
+  return typeof v === 'string' && v.trim() !== '';
+}
+
 export function buildSystemPromptILead({ caseObj, doneSteps, firm, revealedSet, isOpening, focusKey, lang, attemptCount, hintAsked }) {
   const enNative = String(caseObj.lang || caseObj.source_lang || '').toLowerCase() === 'en' && lang !== 'ru';
+  const briefEn = briefIsEnglish(caseObj, lang);
   const steps = caseObj.steps || [];
   const byNum = new Map(steps.map(s => [s.step, s]));
   const done = new Set((Array.isArray(doneSteps) ? doneSteps : []).map(Number));
@@ -1002,7 +1030,7 @@ Each block is one analysis the candidate can legitimately do next. Grade whichev
   if (isOpening) {
     flow =
 `\n\n════ WHAT TO DO NOW (OPENING) ════
-Present the case prompt/scenario${enNative ? ' (see BRIEF — VERBATIM below)' : ' in your own words'} and hand over any exhibits marked "available to share" only if the opening calls for them. Then STOP and let the candidate drive — ask what they would like to look at first. Do NOT walk them through steps in order, do NOT evaluate, do NOT emit any <verdict> or <step> marker on this opening turn.` + (enNative ? OPENING_VERBATIM : '');
+Present the case prompt/scenario${briefEn ? ' (see BRIEF — VERBATIM below)' : ' in your own words'} and hand over any exhibits marked "available to share" only if the opening calls for them. Then STOP and let the candidate drive — ask what they would like to look at first. Do NOT walk them through steps in order, do NOT evaluate, do NOT emit any <verdict> or <step> marker on this opening turn.` + (briefEn ? OPENING_VERBATIM : '');
   } else {
     flowRules =
 `\n\n════ WHAT TO DO NOW (INTERVIEWEE-LED) ════
@@ -1053,6 +1081,7 @@ Keep every number, unit, percentage and proper name EXACTLY as written. Keep the
    used only to grade — never read aloud. */
 export function buildSystemPrompt({ caseObj, stepIndex, attemptCount, firm, revealedSet, isOpening, focusKey, lang, overCap, hintAsked }) {
   const enNative2 = String(caseObj.lang || caseObj.source_lang || '').toLowerCase() === 'en' && lang !== 'ru';
+  const briefEn2 = briefIsEnglish(caseObj, lang);
   const steps = caseObj.steps || [];
   const idx = Math.max(0, Math.min(stepIndex, steps.length - 1));
   const step = steps[idx] || {};
@@ -1088,10 +1117,10 @@ ${step.interviewer_md || '(No explicit key parsed for this step. Grade using the
     flow =
 `\n\n════ WHAT TO DO NOW (OPENING) ════
 This is the start of the case. Do the following, briefly and in character:
-1. Present the case prompt / scenario to the candidate${enNative2 ? ' (see BRIEF — VERBATIM below)' : ' in your own words'}.
+1. Present the case prompt / scenario to the candidate${briefEn2 ? ' (see BRIEF — VERBATIM below)' : ' in your own words'}.
 2. Present any EXHIBITS marked "available to share" above only if this first step calls for them; otherwise hold them.
 3. Ask the CURRENT STEP question above.
-Do NOT evaluate anything yet and do NOT emit a <verdict> marker on this opening turn. Keep it tight and professional — no filler.` + (enNative2 ? OPENING_VERBATIM : '');
+Do NOT evaluate anything yet and do NOT emit a <verdict> marker on this opening turn. Keep it tight and professional — no filler.` + (briefEn2 ? OPENING_VERBATIM : '');
   } else {
     const advance = isLast
       ? `Since this is the LAST step, do NOT ask a new question — give a brief, professional closing line and stop.`
