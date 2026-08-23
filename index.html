@@ -6100,43 +6100,54 @@ async function rkReveal(exId) {
 }
 
 /* ── a single graded field (numeric | dropdown | choice) ──────────────────── */
+/* ── ПОЛЕ ОТВЕТА ──────────────────────────────────────────────────────────────
+   23.08.2026. ЗДЕСЬ СТОЯЛА КНОПКА «Check» И МГНОВЕННЫЙ ВЕРДИКТ. Кандидат вводил
+   число, жал Check и сразу получал «✓ Correct» / «▲ Naïve trap — причина.
+   Correct: 74,000» / «✗ Not right — correct: 74,000»; при верном ответе поле
+   блокировалось, при неверном можно было подбирать заново.
+
+   Владелец остановил это и потребовал смотреть настоящую игру, а не достраивать.
+   Смотрел сам, 23.08, симулятор PrepMatter, Redrock Study, сценарий Kokona Falli,
+   под его аккаунтом:
+
+     · ответы кладутся в пунктирные зоны (task-droparea is-unanswered),
+       числа перетаскиваются из Research Journal или из калькулятора
+     · кнопки проверки под полем НЕТ ВООБЩЕ
+     · после выбора ответа и нажатия «Complete Question →» не появляется НИЧЕГО:
+       ни верно/неверно, ни верного ответа, ни цвета на поле
+     · подраздел Review внутри Analysis закрыт (is-locked), пока вопросы не сданы
+
+   Поэтому поле теперь только принимает ответ. Оценка идёт на сервер молча,
+   билет на разбор выдаётся как раньше, а вердикт кандидат читает разбором —
+   там, где он и был предусмотрен: rkReviewHTML() печатает статус, верный ответ,
+   ловушку и унесённое число по каждому вопросу.
+
+   Состояние поля осталось ровно одно и оно не про правоту: заполнено или нет. */
 function rkField(fieldId, input, opts) {
   opts = opts || {};
-  const g = solve.rkGraded[fieldId];
   const val = solve.rkVals[fieldId] == null ? '' : solve.rkVals[fieldId];
   const unit = opts.unit ? `<span class="rk-unit">${esc(opts.unit)}</span>` : '';
-  let badge = '';
-  if (g === 'correct') badge = '<span class="rk-fb ok">✓ Correct</span>';
-  else if (g === 'naive') badge = `<span class="rk-fb naive">▲ Naïve trap${opts.naiveReason ? ' - ' + esc(opts.naiveReason) : ''}. Correct: ${esc(String(opts.correct))}</span>`;
-  else if (g === 'wrong') badge = `<span class="rk-fb bad">✗ Not right${opts.correct != null ? ' - correct: ' + esc(String(opts.correct)) : ''}</span>`;
-  else if (g === 'ungraded') badge = '<span class="rk-fb">Could not grade - try again.</span>';
-  const cls = 'rk-field' + (g === 'correct' ? ' ok' : g === 'naive' ? ' naive' : g === 'wrong' ? ' bad' : '');
+  const cls = 'rk-field' + (String(val).trim() ? ' answered' : '');
   // choice/dropdown WITH server-provided options → render a picker (no free text).
   const options = Array.isArray(opts.options) ? opts.options : null;
   let control;
   if (options && options.length) {
     const cards = options.map(o => {
       const sel = String(val) === String(o);
-      const mark = (sel && g === 'correct') ? ' rk-okcard' : (sel && (g === 'wrong' || g === 'naive')) ? ' rk-badcard' : (sel ? ' sel' : '');
-      const lock = g === 'correct' ? '' : `onclick="solve.rkVals['${esc(fieldId)}']='${esc(String(o))}';renderSolve()"`;
-      return `<div class="sv-gcard rk-opt${mark}" ${lock}>${rkInline(String(o))}</div>`;
+      return `<div class="sv-gcard rk-opt${sel ? ' sel' : ''}" onclick="solve.rkVals['${esc(fieldId)}']='${esc(String(o))}';renderSolve()">${rkInline(String(o))}</div>`;
     }).join('');
-    control = `<div class="rk-gcards">${cards}</div>
-      <div class="rk-row"><button class="rk-check" ${val && g !== 'correct' ? '' : 'disabled'} onclick="rkCheck('${esc(fieldId)}')">Check</button></div>`;
+    control = `<div class="rk-gcards">${cards}</div>`;
   } else {
     const ph = (input === 'dropdown' || input === 'choice') ? 'type your answer' : 'number';
-    const locked = g === 'correct' ? 'disabled' : '';
     control = `<div class="rk-row">
-      <input class="sv-numin" id="in-${esc(fieldId)}" value="${esc(String(val))}" placeholder="${esc(ph)}" ${locked}
-        oninput="solve.rkVals['${esc(fieldId)}']=this.value" onkeydown="if(event.key==='Enter'){event.preventDefault();rkCheck('${esc(fieldId)}')}">
+      <input class="sv-numin" id="in-${esc(fieldId)}" value="${esc(String(val))}" placeholder="${esc(ph)}"
+        oninput="solve.rkVals['${esc(fieldId)}']=this.value">
       ${unit}
-      <button class="rk-check" ${locked} onclick="rkCheck('${esc(fieldId)}')">Check</button>
     </div>`;
   }
   return `<div class="${cls}" id="fld-${esc(fieldId)}">
     ${opts.label ? `<div class="rk-field-l">${rkInline(opts.label)}</div>` : ''}
     ${control}
-    ${badge}
   </div>`;
 }
 function rkFieldFull(fieldId, input, label, unit, options) {
@@ -6144,11 +6155,15 @@ function rkFieldFull(fieldId, input, label, unit, options) {
   return rkField(fieldId, input, { label: label, unit: unit, options: options, correct: m.correct, naiveReason: m.naiveReason });
 }
 
-async function rkCheck(fieldId) {
+/* Отправка ОДНОГО поля. Возвращает промис и НИЧЕГО не печатает: экран после
+   сдачи выглядит ровно так же, как до неё. Оценка нужна серверу и разбору,
+   не кандидату по ходу. */
+async function rkSubmitField(fieldId) {
   const inp = document.getElementById('in-' + fieldId);
   const value = inp ? inp.value : solve.rkVals[fieldId];
   solve.rkVals[fieldId] = value;
-  if (value == null || String(value).trim() === '') { rkToast('Enter an answer first.'); return; }
+  if (value == null || String(value).trim() === '') return false;
+  if (solve.rkGraded[fieldId]) return true;          // повтор не тратит запрос
   try {
     const r = await rkApi('grade', { gameId: solve.game.id, fieldId: fieldId, value: value });
     solve.rkGraded[fieldId] = r.status || 'wrong';
@@ -6160,8 +6175,29 @@ async function rkCheck(fieldId) {
     // Training-такт: сервер прислал его вместе с оценкой родителя. Раньше
     // условия такта на клиенте нет — и не должно быть.
     if (Array.isArray(r.training) && r.training.length) solve.rkTacts[fieldId] = r.training;
-  } catch (e) { solve.rkGraded[fieldId] = 'ungraded'; rkToast(e.message); }
+  } catch (e) { solve.rkGraded[fieldId] = 'ungraded'; rkToast(e.message); return false; }
+  return true;
+}
+
+/* Сдача ВСЕГО вопроса — так же, как «Complete Question →» в настоящей игре:
+   уходят все заполненные поля разом, экран молчит, дальше следующий вопрос.
+
+   ОДНА ОГОВОРКА, И ОНА НЕ КОСМЕТИЧЕСКАЯ. Training-такт приходит ВМЕСТЕ с оценкой
+   родительского поля и висит под ним. Пока проверка была по кнопке, кандидат
+   видел такт сразу и отвечал на него до перехода. Если сдавать вопрос и тут же
+   уходить дальше, такт отрисуется и в ту же секунду исчезнет — то есть партия
+   Training пропала бы целиком, молча.
+   Поэтому переход отдаётся вызывающему: rkSubmitFields возвращает true только
+   когда НОВОГО неотвеченного такта не появилось. */
+async function rkSubmitFields(ids) {
+  for (const id of ids) await rkSubmitField(id);
+  let pending = false;
+  for (const id of ids) {
+    const list = solve.rkTacts[id];
+    if (Array.isArray(list) && list.some(x => String(solve.rkVals[x.id] || '').trim() === '')) pending = true;
+  }
   renderSolve();
+  return !pending;
 }
 
 /* ── TRAINING-ТАКТ ────────────────────────────────────────────────────────────
@@ -6201,7 +6237,10 @@ function rkAnalysis(inner, foot) {
   const g = solve.game, qs = g.analysis || [];
   const q = qs[solve.qIndex] || { prompt: '', parts: [] };
   const nav = qs.map((qq, i) => {
-    const done = (qq.parts || []).length && (qq.parts || []).every(p => solve.rkGraded['a:' + p.key] === 'correct');
+    /* «Отвечено» = поле заполнено. Раньше стояло `=== 'correct'`, то есть
+       навигация подсвечивала ПРАВОТУ и тем самым сообщала вердикт в обход
+       разбора: кандидат видел, какие вопросы «зелёные», не открывая ничего. */
+    const done = (qq.parts || []).length && (qq.parts || []).every(p => String(solve.rkVals['a:' + p.key] || '').trim() !== '');
     return `<button class="sv-qnav-item ${i === solve.qIndex ? 'active' : ''} ${done ? 'answered' : ''}" onclick="solve.qIndex=${i};renderSolve()">Q${i + 1}</button>`;
   }).join('');
   const fields = (q.parts || []).map(p =>
@@ -6225,9 +6264,16 @@ function rkAnalysis(inner, foot) {
     if (exh) exh.insertAdjacentHTML('beforebegin', rkReviewHTML());
     else if (host) host.insertAdjacentHTML('beforeend', rkReviewHTML());
   }
+  /* Сдача вопроса живёт на кнопке «дальше», как «Complete Question →» в
+     настоящей игре: отдельной кнопки проверки под полем больше нет. */
+  const partIds = (q.parts || []).map(p => 'a:' + p.key);
+  /* Поля тактов, уже показанных под этим вопросом, уходят тем же нажатием. */
+  const tactIds = partIds.flatMap(fid => (solve.rkTacts[fid] || []).map(x => x.id));
+  const ids = partIds.concat(tactIds).map(x => "'" + x + "'").join(',');
+  const after = last ? "solve.phase='report';solve.reportStep='written';renderSolve()" : 'solve.qIndex++;renderSolve()';
   foot.innerHTML =
     `<button class="sv-back" onclick="${solve.qIndex > 0 ? 'solve.qIndex--;renderSolve()' : "solve.phase='study';renderSolve()"}">&larr; Back</button>
-     <button class="sv-next" onclick="${last ? "solve.phase='report';solve.reportStep='written';renderSolve()" : 'solve.qIndex++;renderSolve()'}">${last ? 'Go to report &rarr;' : 'Next question &rarr;'}</button>`;
+     <button class="sv-next" onclick="rkSubmitFields([${ids}]).then(function(go){ if (go) { ${after} } })">${last ? 'Complete question and go to report &rarr;' : 'Complete question &rarr;'}</button>`;
 }
 
 /* ── REPORT ───────────────────────────────────────────────────────────────── */
@@ -6237,48 +6283,46 @@ function rkReport(inner, foot) {
     const w = rep.written || {};
     let tmpl = String(w.template || '');
     (w.blanks || []).forEach(b => {
-      const fid = 'w:' + b.key, gr = solve.rkGraded[fid];
-      const mark = gr === 'correct' ? '✓' : (gr === 'naive' || gr === 'wrong') ? '✗' : '';
+      /* Галочка и крестик у каждой дырки — тот же вердикт по ходу, что и у
+         кнопки Check. Убраны: отчёт заполняется молча, разбор в конце. */
+      const fid = 'w:' + b.key;
       const val = solve.rkVals[fid] == null ? '' : solve.rkVals[fid];
-      const inputHtml = `<input class="rk-blank ${gr || ''}" value="${esc(String(val))}" placeholder="[${esc(b.key)}]" oninput="solve.rkVals['${fid}']=this.value" onchange="rkCheck('${fid}')"><span class="rk-blankmark">${mark}</span>`;
+      const inputHtml = `<input class="rk-blank" value="${esc(String(val))}" placeholder="[${esc(b.key)}]" oninput="solve.rkVals['${fid}']=this.value">`;
       tmpl = tmpl.split('[' + b.key + ']').join(inputHtml);
     });
     inner.innerHTML =
       `<div class="sv-layout-main">
         <div class="sv-h">Written report</div>
-        <div class="rk-note">Fill each blank with the figure you established, then press Enter/Tab to check.</div>
+        <div class="rk-note">Fill each blank with the figure you established.</div>
         <div class="rk-tmpl">${tmpl}</div>
       </div>`;
+    const wids = (w.blanks || []).map(b => "'w:" + b.key + "'").join(',');
     foot.innerHTML = `<button class="sv-back" onclick="solve.phase='analysis';solve.qIndex=(solve.game.analysis||[]).length-1;renderSolve()">&larr; Back</button>
-      <button class="sv-next" onclick="solve.reportStep='graph';renderSolve()">Choose the chart &rarr;</button>`;
+      <button class="sv-next" onclick="rkSubmitFields([${wids}]).then(function(){ solve.reportStep='graph';renderSolve() })">Choose the chart &rarr;</button>`;
     return;
   }
   const gs = rep.graph_selection || {};
-  const chosen = solve.rkVals['g:type'] || '', grType = solve.rkGraded['g:type'];
+  /* Выбор графика раньше проверялся кнопками «Check chart» и «Check» и печатал
+     «✓ Right chart» / «✗ Reconsider — line». Тот же вердикт по ходу, что и у
+     полей: убран. В настоящей игре выбор графика — три карточки и переход
+     дальше, без оценки. */
+  const chosen = solve.rkVals['g:type'] || '';
   const cards = REDROCK_CHART_TYPES.map(ct =>
-    `<div class="sv-gcard ${chosen === ct ? 'sel' : ''} ${grType && chosen === ct ? (grType === 'correct' ? 'rk-okcard' : 'rk-badcard') : ''}"
+    `<div class="sv-gcard ${chosen === ct ? 'sel' : ''}"
       onclick="solve.rkVals['g:type']='${esc(ct)}';renderSolve()">${esc(ct)}</div>`).join('');
-  const typeBadge = grType === 'correct' ? '<span class="rk-fb ok">✓ Right chart</span>'
-    : grType ? `<span class="rk-fb bad">✗ Reconsider${solve.rkMeta['g:type'] && solve.rkMeta['g:type'].correct ? ' - ' + esc(String(solve.rkMeta['g:type'].correct)) : ''}</span>` : '';
-  const jm = solve.rkMeta['g:justify'] || {}, jg = solve.rkGraded['g:justify'];
-  const jBadge = jg === 'correct' ? `<span class="rk-fb ok">✓ ${esc(jm.feedback || 'Solid justification')}</span>`
-    : jg === 'wrong' ? `<span class="rk-fb bad">✗ ${esc(jm.feedback || 'Name the data shape that dictates the chart.')}</span>`
-    : jg === 'ungraded' ? '<span class="rk-fb">Could not grade - try again.</span>' : '';
   inner.innerHTML =
     `<div class="sv-layout-main">
       <div class="sv-h">Chart selection</div>
       <div class="sv-q-text">${rkMd(gs.prompt || 'Which chart type best presents the finding?')}</div>
       <div class="rk-gcards">${cards}</div>
-      <div class="rk-row" style="margin-top:10px;"><button class="rk-check" ${chosen ? '' : 'disabled'} onclick="rkCheck('g:type')">Check chart</button>${typeBadge}</div>
       <div class="rk-field-l" style="margin-top:18px;">Justify your choice (one line):</div>
       <div class="rk-row">
         <input class="sv-numin rk-wide" id="in-g:justify" value="${esc(String(solve.rkVals['g:justify'] || ''))}" placeholder="e.g. two series over time → line"
-          oninput="solve.rkVals['g:justify']=this.value" onkeydown="if(event.key==='Enter'){event.preventDefault();rkCheck('g:justify')}">
-        <button class="rk-check" onclick="rkCheck('g:justify')">Check</button>
-      </div>${jBadge}
+          oninput="solve.rkVals['g:justify']=this.value">
+      </div>
     </div>`;
   foot.innerHTML = `<button class="sv-back" onclick="solve.reportStep='written';renderSolve()">&larr; Back</button>
-    <button class="sv-next" onclick="solve.phase='cases';solve.qIndex=0;renderSolve()">Go to cases &rarr;</button>`;
+    <button class="sv-next" onclick="rkSubmitFields(['g:type','g:justify']).then(function(){ solve.phase='cases';solve.qIndex=0;renderSolve() })">Go to cases &rarr;</button>`;
 }
 
 /* ── CASES ────────────────────────────────────────────────────────────────── */
@@ -6286,7 +6330,8 @@ function rkCases(inner, foot) {
   const g = solve.game, cs = g.cases || [];
   if (!cs.length) { solve.phase = 'result'; renderSolve(); return; }
   const c = cs[solve.qIndex] || cs[0];
-  const nav = cs.map((cc, i) => `<button class="sv-qnav-item ${i === solve.qIndex ? 'active' : ''} ${solve.rkGraded['c:' + cc.c] === 'correct' ? 'answered' : ''}" onclick="solve.qIndex=${i};renderSolve()">${i + 1}</button>`).join('');
+  /* «Отвечено» по факту ответа, не по правоте — см. ту же правку в Analysis. */
+  const nav = cs.map((cc, i) => `<button class="sv-qnav-item ${i === solve.qIndex ? 'active' : ''} ${String(solve.rkVals['c:' + cc.c] || '').trim() ? 'answered' : ''}" onclick="solve.qIndex=${i};renderSolve()">${i + 1}</button>`).join('');
   inner.innerHTML =
     `<div class="sv-layout-main">
       <div class="sv-qnav">${nav}</div>
@@ -6295,9 +6340,10 @@ function rkCases(inner, foot) {
       ${rkFieldFull('c:' + c.c, c.input || 'numeric', '', c.unit, c.options)}
     </div>`;
   const last = solve.qIndex >= cs.length - 1;
+  const afterC = last ? "solve.phase='result';renderSolve()" : 'solve.qIndex++;renderSolve()';
   foot.innerHTML =
     `<button class="sv-back" onclick="${solve.qIndex > 0 ? 'solve.qIndex--;renderSolve()' : "solve.phase='report';solve.reportStep='graph';renderSolve()"}">&larr; Back</button>
-     <button class="sv-next" onclick="${last ? "solve.phase='result';renderSolve()" : 'solve.qIndex++;renderSolve()'}">${last ? 'Finish &rarr;' : 'Next case &rarr;'}</button>`;
+     <button class="sv-next" onclick="rkSubmitFields(['c:${esc(String(c.c))}']).then(function(){ ${afterC} })">${last ? 'Finish &rarr;' : 'Next case &rarr;'}</button>`;
 }
 
 /* ── RESULT ───────────────────────────────────────────────────────────────── */
