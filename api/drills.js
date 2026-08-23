@@ -112,7 +112,8 @@ HOW TO GRADE (in priority order):
 2. DECOY: mentioning a decoy branch is NOT penalised. It fails ORDER only if the candidate makes a decoy their FIRST branch to develop / their lead hypothesis.
 3. ME: if the candidate merges two branches the ME matrix marks incompatible, flag it — a hard merge of an incompatible pair is a fail; a soft-overlap pair is a warning, not a fail.
 4. ORDER: a defensible start is any branch justified by a real criterion (size of effect, speed to check, cost of data). Starting on a decoy is an ORDER defect. Not stating any criterion is a coaching note, not a fail.
-5. Do NOT reward tree LENGTH or generic templates (e.g. a blank "profitability = revenue − cost" with no tailoring). Reward branches tailored to THIS company and question.
+5. DRIVE: for each branch the key names WHAT WOULD BE MEASURED under it. A branch stated as a heading with nothing measurable under it is a coaching note — name the metric the candidate should have put there. DRIVE never decides pass/fail on its own.
+6. Do NOT reward tree LENGTH or generic templates (e.g. a blank "profitability = revenue − cost" with no tailoring). Reward branches tailored to THIS company and question.
 
 PASS = all COVER branches present (by meaning) AND no decoy developed first AND no hard ME violation.
 
@@ -443,6 +444,12 @@ async function gradeDrill(d, answer, fbLang) {
       '\nCOVER (required branches):\n' + (k.cover || '') +
       '\n\nDECOY (reflexive branches — must not lead):\n' + (k.decoy || '') +
       '\n\nME (incompatible pairs):\n' + (k.me || '') +
+      /* 23.08.2026, dev. Находка цеха дриллов: регистр DRIVE объявлен в комментарии
+         выше и заполнен у 49 слотов из 50, но до грейдера не доходил ВООБЩЕ.
+         Дерево из одних заголовков проходило так же, как дерево с метриками.
+         Отдаём регистр грейдеру, но УСЛОВИЕ PASS НЕ МЕНЯЕМ: иначе сложность
+         50 слотов сдвинется одним ходом и без замера. */
+      '\n\nDRIVE (what to measure under each branch):\n' + (k.drive || '') +
       '\n\nORDER (defensible starts):\n' + (k.order || '') +
       '\n\n' + exhibitTxt +
       '\n\n--- CANDIDATE TREE ---\n' + String(answer || '');
@@ -503,21 +510,17 @@ export default async function handler(req, res) {
     }
     if (body.action === 'grade') {
 
-      /* ПУСТОЙ ОТВЕТ НЕ ЯВЛЯЕТСЯ ОТВЕТОМ. 23.08.2026, класс, объявленный цеху
-         дриллов и оказавшийся моим: сервер не смотрел на содержимое вовсе.
-         Пустая строка списывала попытку, уходила в модель за деньги и получала
-         вердикт — а модель на пустом входе иногда ставит зачёт, потому что
-         «противоречий с ключом нет».
-         Проверка стоит ДО списания прав и ДО вызова модели: не ошибка кандидата,
-         а отсутствие хода. Для CULL-хода Brainstorm смотрим тот ответ, который
-         действительно сдаётся на этом шаге. */
-      {
-        const stage = body.stage === 'cull';
-        const said = stage ? body.answer : (body.answer != null ? body.answer : body.move1Answer);
-        if (said == null || String(said).trim() === '') {
-          return res.status(400).json({ error: { message: 'Empty answer.', code: 'empty_answer' } });
-        }
+    /* 23.08.2026, dev. ПУСТОЙ ХОД. Клиент отправлял пустую строку, и она шла
+       ДАЛЬШЕ: право списывалось, модель звалась, кандидат получал разбор
+       на ничто. Отбой стоит ДО checkAndConsume и ДО любого обращения к модели —
+       иначе пустой ход стоит попытки. */
+    {
+      const stage = body.stage === 'cull';
+      const said = stage ? body.answer : (body.answer != null ? body.answer : body.move1Answer);
+      if (said == null || String(said).trim() === '') {
+        return res.status(400).json({ error: { message: 'Empty answer.', code: 'empty_answer' } });
       }
+    }
 
     /* ПРАВА. Списываем ПОСЛЕ того, как человек начал работать, и ровно один раз
        на дрилл: ключ расхода идемпотентен, поэтому обрыв связи, перезагрузка

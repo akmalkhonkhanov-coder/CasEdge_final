@@ -1896,7 +1896,9 @@
       "s6",
       "s7"
      ],
-     "calc": "2000-1300=700"
+     "calc": "2000-1300=700",
+     "naive_src": "input",
+     "naive_read": "chip:s7"
     }
    ]
   },
@@ -2278,7 +2280,9 @@
      ],
      "calc": "(3600-2400)/2400=50.0%",
      "mech": "D · рост квартала в процентах от меньшего",
-     "form": "процент"
+     "form": "процент",
+     "naive_src": "calc",
+     "naive_calc": "(3600-2400)/3600=33.3333%"
     },
     {
      "from": "q1a",
@@ -2295,7 +2299,9 @@
       "s7",
       "s8"
      ],
-     "calc": "3600-2160=1440"
+     "calc": "3600-2160=1440",
+     "naive_src": "input",
+     "naive_read": "chip:s8"
     }
    ]
   },
@@ -2828,7 +2834,9 @@
       "s11",
       "s14"
      ],
-     "calc": "3*5000=15000 · 15000+15000=30000 · 30000+15000=45000 · 15000+30000+45000=90000"
+     "calc": "3*5000=15000 · 15000+15000=30000 · 30000+15000=45000 · 15000+30000+45000=90000",
+     "naive_src": "calc",
+     "naive_calc": "3*5000=15000 · 15000+15000=30000 · 30000+15000=45000 · 45000+45000=90000 · 90000+45000=135000"
     }
    ]
   },
@@ -3354,7 +3362,28 @@
       "s12",
       "s15"
      ],
-     "calc": "2*3000=6000 · 6000+6000=12000 · 12000+6000=18000 · 18000+6000=24000 · 12000+18000+24000=54000"
+     "calc": "2*3000=6000 · 6000+6000=12000 · 12000+6000=18000 · 18000+6000=24000 · 12000+18000+24000=54000",
+     "naive_src": "calc",
+     "naive_calc": "2*3000=6000 · 6000+6000=12000 · 12000+6000=18000 · 18000+6000=24000 · 24000+24000=48000 · 48000+24000=72000"
+    },
+    {
+     "from": "q4a",
+     "input": "numeric",
+     "round": 2,
+     "tolerance": 0.01,
+     "prompt": "Same baseline open-water share and the same rate of decline: one year of that decline is what percent of the baseline share?",
+     "answer": 6.67,
+     "calc": "2/30=6.6667%",
+     "naive": 9.09,
+     "naive_src": "window",
+     "naive_calc": "2/22=9.0909%",
+     "naive_reason": "measures the yearly step against what is LEFT at the end of the five-year window instead of against the baseline the rate is quoted on",
+     "same_data": [
+      "s11",
+      "s12"
+     ],
+     "mech": "E3 · годовой темп в долях базы, а не остатка",
+     "form": "процент"
     }
    ]
   },
@@ -3912,6 +3941,27 @@
     "s13",
     "s14",
     "s15"
+   ],
+   "training": [
+    {
+     "from": "q1",
+     "input": "numeric",
+     "round": 2,
+     "tolerance": 1,
+     "prompt": "Same nursery and the same total uptake you just computed: how many kilograms a year does one hectare of the nursery take up?",
+     "answer": 19500,
+     "calc": "585000/30=19500",
+     "naive": 3.25,
+     "naive_src": "calc",
+     "naive_calc": "585000/180000=3.25",
+     "naive_reason": "divides the total by the number of plants instead of by the hectares; that gives the uptake of one plant, which is a different quantity from the uptake of one hectare of ground",
+     "same_data": [
+      "s4",
+      "s6"
+     ],
+     "mech": "S · итог на гектар, а не на растение",
+     "form": "число"
+    }
    ]
   },
   {
@@ -4292,7 +4342,9 @@
       "s7"
      ],
      "calc": "600000/3900000=15.3846%",
-     "form": "процент"
+     "form": "процент",
+     "naive_src": "calc",
+     "naive_calc": "3900000-600000=3300000 · 600000/3300000=18.1818%"
     }
    ]
   },
@@ -4683,6 +4735,27 @@
     "s4",
     "s5",
     "s6"
+   ],
+   "training": [
+    {
+     "from": "q3a",
+     "input": "numeric",
+     "round": 2,
+     "tolerance": 0.01,
+     "prompt": "Same marsh-area figures and the reduction you just computed: how many hectares stand behind each percentage point of that reduction?",
+     "answer": 8.5,
+     "calc": "850-680=170 · 170/20=8.5",
+     "naive": 42.5,
+     "naive_src": "calc",
+     "naive_calc": "850/20=42.5",
+     "naive_reason": "spreads the whole marsh of ten years ago over the percentage points instead of spreading only the area that was lost",
+     "same_data": [
+      "s3",
+      "s4"
+     ],
+     "mech": "M · на пункт приходится потерянное, а не всё",
+     "form": "число"
+    }
    ]
   },
   {
@@ -6216,7 +6289,9 @@
      ],
      "calc": "(2800-1800)/1800=55.5556%",
      "mech": "D · рост квартала в процентах от меньшего",
-     "form": "процент"
+     "form": "процент",
+     "naive_src": "calc",
+     "naive_calc": "(2800-1800)/2800=35.7143%"
     },
     {
      "from": "q1a",
@@ -6233,7 +6308,9 @@
       "s6",
       "s7"
      ],
-     "calc": "2800-1960=840"
+     "calc": "2800-1960=840",
+     "naive_src": "input",
+     "naive_read": "chip:s7"
     }
    ]
   },
@@ -6751,7 +6828,9 @@
       "s10",
       "s11"
      ],
-     "calc": "40/2=20.0"
+     "calc": "40/2=20.0",
+     "naive_src": "window",
+     "naive_calc": "32/2=16.0"
     },
     {
      "from": "q4b",
@@ -6769,7 +6848,9 @@
       "s11",
       "s14"
      ],
-     "calc": "2*4000=8000 · 8000+8000=16000 · 16000+8000=24000 · 24000+8000=32000 · 8000+16000+24000+32000=80000"
+     "calc": "2*4000=8000 · 8000+8000=16000 · 16000+8000=24000 · 24000+8000=32000 · 8000+16000+24000+32000=80000",
+     "naive_src": "calc",
+     "naive_calc": "2*4000=8000 · 8000+8000=16000 · 16000+8000=24000 · 24000+8000=32000 · 32000+32000=64000 · 64000+32000=96000 · 96000+32000=128000"
     }
    ]
   },
@@ -7282,7 +7363,9 @@
       "s10",
       "s11"
      ],
-     "calc": "50/3=16.6667"
+     "calc": "50/3=16.6667",
+     "naive_src": "window",
+     "naive_calc": "38/3=12.6667"
     }
    ]
   },
@@ -8395,6 +8478,27 @@
     "s13",
     "s14",
     "s16"
+   ],
+   "training": [
+    {
+     "from": "q1",
+     "input": "numeric",
+     "round": 2,
+     "tolerance": 1,
+     "prompt": "Same nursery and the same total uptake you just computed: how many kilograms a year does one hectare of the nursery take up?",
+     "answer": 16500,
+     "calc": "396000/24=16500",
+     "naive": 3.3,
+     "naive_src": "calc",
+     "naive_calc": "396000/120000=3.3",
+     "naive_reason": "divides the total by the number of plants instead of by the hectares; that gives the uptake of one plant, which is a different quantity from the uptake of one hectare of ground",
+     "same_data": [
+      "s5",
+      "s7"
+     ],
+     "mech": "S · итог на гектар, а не на растение",
+     "form": "число"
+    }
    ]
   },
   {
@@ -8774,7 +8878,9 @@
       "s7"
      ],
      "calc": "400000/2740000=14.5985%",
-     "form": "процент"
+     "form": "процент",
+     "naive_src": "calc",
+     "naive_calc": "2740000-400000=2340000 · 400000/2340000=17.0940%"
     }
    ]
   },
@@ -10411,7 +10517,9 @@
       "s8",
       "s9"
      ],
-     "calc": "3000-1950=1050"
+     "calc": "3000-1950=1050",
+     "naive_src": "input",
+     "naive_read": "chip:s9"
     }
    ]
   },
@@ -10785,7 +10893,9 @@
       "s6",
       "s7"
      ],
-     "calc": "2400-1680=720"
+     "calc": "2400-1680=720",
+     "naive_src": "input",
+     "naive_read": "chip:s7"
     }
    ]
   },
@@ -11361,7 +11471,9 @@
       "s8",
       "s9"
      ],
-     "calc": "45/2=22.5"
+     "calc": "45/2=22.5",
+     "naive_src": "window",
+     "naive_calc": "35/2=17.5"
     }
    ]
   },
@@ -11875,7 +11987,9 @@
       "s8",
       "s9"
      ],
-     "calc": "55/4=13.75"
+     "calc": "55/4=13.75",
+     "naive_src": "window",
+     "naive_calc": "39/4=9.75"
     },
     {
      "from": "q4b",
@@ -11893,7 +12007,9 @@
       "s9",
       "s12"
      ],
-     "calc": "4*7000=28000 · 28000+28000=56000 · 56000+28000=84000 · 84000+28000=112000 · 28000+56000+84000+112000=280000"
+     "calc": "4*7000=28000 · 28000+28000=56000 · 56000+28000=84000 · 84000+28000=112000 · 28000+56000+84000+112000=280000",
+     "naive_src": "calc",
+     "naive_calc": "4*7000=28000 · 28000+28000=56000 · 56000+28000=84000 · 84000+28000=112000 · 112000+112000=224000 · 224000+112000=336000 · 336000+112000=448000"
     }
    ]
   },
@@ -12967,6 +13083,30 @@
     "s12",
     "s13",
     "s14"
+   ],
+   "training": [
+    {
+     "from": "q1",
+     "input": "numeric",
+     "round": 3,
+     "tolerance": 0.001,
+     "prompt": "Same nursery mix and the same uptake rates: for every kilogram the C group takes up in a year, how many kilograms does the A group take up?",
+     "answer": 2.625,
+     "calc": "180000*35/100*6=378000 · 180000*20/100*4=144000 · 378000/144000=2.625",
+     "naive": 1.75,
+     "naive_src": "calc",
+     "naive_calc": "35/20=1.75",
+     "naive_reason": "compares the two shares of the mix instead of the uptakes; a group's uptake is its share multiplied by its own rate, and the rates differ",
+     "same_data": [
+      "s5",
+      "s6",
+      "s8",
+      "s9",
+      "s11"
+     ],
+     "mech": "R · отношение вкладов двух групп",
+     "form": "число"
+    }
    ]
   },
   {
@@ -13349,7 +13489,9 @@
       "s7"
      ],
      "calc": "500000/2075000=24.0964%",
-     "form": "процент"
+     "form": "процент",
+     "naive_src": "calc",
+     "naive_calc": "2075000-500000=1575000 · 500000/1575000=31.7460%"
     }
    ]
   },
@@ -15011,7 +15153,9 @@
      ],
      "calc": "(2700-1800)/1800=50.0%",
      "mech": "D · рост квартала в процентах от меньшего",
-     "form": "процент"
+     "form": "процент",
+     "naive_src": "calc",
+     "naive_calc": "(2700-1800)/2700=33.3333%"
     },
     {
      "from": "q1a",
@@ -15028,7 +15172,9 @@
       "s12",
       "s13"
      ],
-     "calc": "2700-1890=810"
+     "calc": "2700-1890=810",
+     "naive_src": "input",
+     "naive_read": "chip:s13"
     }
    ]
   },
@@ -15395,7 +15541,9 @@
      ],
      "calc": "(2000-1500)/1500=33.3333%",
      "mech": "D · рост квартала в процентах от меньшего",
-     "form": "процент"
+     "form": "процент",
+     "naive_src": "calc",
+     "naive_calc": "2000/1500=133.3333%"
     }
    ]
   },
@@ -15947,7 +16095,9 @@
       "s9",
       "s10"
      ],
-     "calc": "48/3=16.0"
+     "calc": "48/3=16.0",
+     "naive_src": "window",
+     "naive_calc": "36/3=12.0"
     }
    ]
   },
@@ -16808,6 +16958,28 @@
     "s7",
     "s8",
     "s9"
+   ],
+   "training": [
+    {
+     "from": "q3",
+     "input": "numeric",
+     "round": 2,
+     "tolerance": 0.01,
+     "prompt": "Same program cost you just built: what does it come to per household the program serves?",
+     "answer": 33.33,
+     "calc": "60000*25=1500000 · 1500000+500000=2000000 · 2000000/60000=33.3333",
+     "naive": 8.33,
+     "naive_src": "calc",
+     "naive_reason": "charges each served household only the fixed cost and leaves out what its own connection costs; the cost per household is the whole cost divided by the households, not the fixed part alone",
+     "same_data": [
+      "s6",
+      "s7",
+      "s8"
+     ],
+     "mech": "J · стоимость программы на обслуживаемого",
+     "form": "доллары",
+     "naive_calc": "500000/60000=8.3333"
+    }
    ]
   },
   {
@@ -17189,7 +17361,28 @@
      ]
     }
    ],
-   "journal_required": []
+   "journal_required": [],
+   "training": [
+    {
+     "from": "q3",
+     "input": "numeric",
+     "round": 2,
+     "tolerance": 0.01,
+     "prompt": "Same first-year setup cost you just built: what share of it is the fixed cost rather than the stove cost? Answer in percent.",
+     "answer": 18.52,
+     "calc": "450000/2430000=18.5185%",
+     "naive": 22.73,
+     "naive_src": "calc",
+     "naive_calc": "2430000-450000=1980000 · 450000/1980000=22.7273%",
+     "naive_reason": "divides the fixed cost by the stove part, not by the full first-year cost; a share is taken of the whole",
+     "same_data": [
+      "s6",
+      "s7"
+     ],
+     "mech": "F · структура затрат: доля постоянной части",
+     "form": "процент"
+    }
+   ]
   },
   {
    "id": 40,
@@ -17569,7 +17762,9 @@
       "s5"
      ],
      "calc": "3200/2400=1.3333 · 4/3=1.3333",
-     "form": "отношение"
+     "form": "отношение",
+     "naive_src": "calc",
+     "naive_calc": "3200/100=32 · 2400/100=24"
     }
    ]
   },
@@ -18647,6 +18842,28 @@
     "s3",
     "s4",
     "s5"
+   ],
+   "training": [
+    {
+     "from": "q1a",
+     "input": "numeric",
+     "round": 2,
+     "tolerance": 0.01,
+     "prompt": "Same two reported operating-profit figures and the change you just computed: the Year-2 result is how many times that change?",
+     "answer": 3.35,
+     "calc": "57/17=3.3529",
+     "naive": 2.59,
+     "naive_src": "row",
+     "naive_at": "ex:1:One-off (inventory revaluation):Δ ($M)",
+     "naive_calc": "57/22=2.5909",
+     "naive_reason": "reads the one-off line of the split instead of the reported total; the two sit in the same column of the same table, one row apart",
+     "same_data": [
+      "s3",
+      "s4"
+     ],
+     "mech": "P · результат года к своему же сдвигу за год",
+     "form": "число"
+    }
    ]
   },
   {
@@ -20626,7 +20843,9 @@
       "s8"
      ],
      "calc": "400000/2080000=19.2308%",
-     "form": "процент"
+     "form": "процент",
+     "naive_src": "calc",
+     "naive_calc": "2080000-400000=1680000 · 400000/1680000=23.8095%"
     }
    ]
   },
