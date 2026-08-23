@@ -1,4 +1,4 @@
-<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Sea Wolf - CasEdge</title>
 <style>
 :root{
@@ -226,13 +226,28 @@ th{color:var(--dim2);font-weight:500;font-size:10.5px;letter-spacing:.08em;text-
 <div id="sea"></div><div id="caust"></div><div id="rays"></div><div id="snow"></div><div id="grain"></div><div id="vig"></div>
 <div class="wrap" id="app"></div>
 <script>
+/* @@I18N-DICT-BEGIN@@ объявленный двуязычный словарь: русская половина здесь ЗАКОННА */
+/* ---- язык интерфейса. Круг 68. Источник истины ОДИН и общий с index.html:
+     localStorage['caseedge_uilang']. Своего состояния экран не заводит. ---- */
+const I18N={ ru:{"sw_1":"Гидрофильный","sw_2":"Термостойкий","sw_3":"Биолюминесцентный","sw_4":"Барорезистентный","sw_5":"Прошёл чисто — следующая партия будет плотнее.","sw_6":"Выше тренировочного уровня подниматься некуда. Если хочешь плотность реального отбора — открой ассессмент, он рядом с кнопкой партии.","sw_7":"Дам просторнее: смысл не в том, чтобы мучиться, а в том, чтобы поймать порядок ходов.","sw_8":"Уровень оставляю прежним — он тебе по руке.","sw_9":"сервер ответил не JSON (","sw_10":"Сессия не найдена. Войди в аккаунт CasEdge и открой игру заново.","sw_11":"Слишком много запросов подряд. Подожди минуту и продолжи — партия не потеряна.","sw_12":"сервер ответил ","sw_13":" мин ","sw_14":" с","sw_15":"Ассессмент не двигает тренировочный уровень — он остаётся «","sw_16":"». Здесь важен не процент, а то, на каком ходу решение было потеряно.","sw_17":" мин","sw_18":"Шаг 1 из 4","sw_19":"Что происходит","sw_20":"Ты в команде, очищающей три загрязнённых участка океана. На каждом участке нужно выпустить","sw_21":"лечение — ровно три микроба","sw_22":"Их характеристики","sw_23":"усредняются","sw_24":". Среднее по каждой из трёх характеристик обязано попасть в диапазон участка, плюс два условия по признакам.","sw_25":"Требования","sw_26":"диапазоны и признаки участка","sw_27":"Добор пула","sw_28":"6 + 4 раунда «1 из 3»","sw_29":"Лечение","sw_30":"три микроба из десяти","sw_31":"Шаг 2 из 4","sw_32":"Пять условий, каждое стоит 20 %","sw_33":"Эффективность лечения начинается со 100 %, и каждое невыполненное условие срезает","sw_34":"среднее","sw_35":"— в диапазоне участка","sw_36":"среднее","sw_37":"— в диапазоне","sw_38":"среднее","sw_39":"— в диапазоне","sw_40":"хотя бы один микроб несёт","sw_41":"желательный","sw_42":"признак","sw_43":"ни один не несёт","sw_44":"запрещённый","sw_45":"Стопроцентного трио может не существовать. Тогда задача — лучшее из возможного, а не идеальное.","sw_46":"Шаг 3 из 4","sw_47":"Главное: пул собирается раньше, чем известно трио","sw_48":"Сначала","sw_49":"добор","sw_50":". У тебя шесть микробов, и четыре раза подряд показывают","sw_51":"трёх","sw_52":"— берёшь одного. Выбор необратим.","sw_53":"И только потом из собранных десяти ты выбираешь трио. Значит на доборе решаешь","sw_54":"не «хорош ли микроб»","sw_55":", а","sw_56":"«какую дыру в будущем трио он закрывает»","sw_57":"Необратимый выбор","sw_58":"4 раунда по 3 варианта","sw_59":"Один таймер","sw_60":"30 минут на все три участка","sw_61":"Разбор в конце","sw_62":"где решение было потеряно","sw_63":"Шаг 4 из 4","sw_64":"Что покажет разбор","sw_65":"После третьего участка ты увидишь не просто процент, а","sw_66":"цену каждого хода","sw_67":": сколько стопроцентных трио оставлял каждый из трёх вариантов на каждом раунде.","sw_68":"И прямой ответ на вопрос","sw_69":"«где я проиграл»","sw_70":"— с указанием раунда и микроба, которого надо было взять.","sw_71":"Три загрязнённых участка океана. На каждом собери пул микробов и составь лечение — трио, чьи усреднённые характеристики попадают в требования участка.","sw_72":"Игра простая по природе — думать по десять минут над экраном не нужно. Сложность подбирается автоматически: начинаем со среднего и подстраиваемся под твою игру.","sw_73":"Следующая партия —","sw_74":"Как играть","sw_75":"Следующая партия","sw_76":"Пройти ассессмент","sw_77":"Пройдено партий:","sw_78":", лучший результат","sw_79":"уровней","sw_80":"участка","sw_81":"минут","sw_82":"осталось Л/С/Сл","sw_83":"твоя средняя за","sw_84":"Назад","sw_85":"Пропустить","sw_86":"Дальше","sw_87":"Начать игру","sw_88":"Связь с сервером потеряна","sw_89":"Партия живёт на сервере. Если он перезапустился,\n   текущую партию продолжить нельзя — начни новую, прогресс и уровень сохранены в профиле.","sw_90":"Вернуться в меню","sw_91":"Калибровочный режим","sw_92":"Ассессмент","sw_93":"Отличия от тренировки: тренировочный уровень после этой партии\n   не изменится, а плотность решений здесь такая же, как на реальном отборе. Осталось непройденных наборов —","sw_94":"из","sw_95":"Не сейчас","sw_96":"Начать ассессмент","sw_97":"Справка","sw_98":"Легенда","sw_99":"Характеристики","sw_100":"среднее по трём должно попасть в диапазон","sw_101":"Признаки","sw_102":"Цвет микроба соответствует признаку. Форма — вид организма, на счёт не влияет.","sw_103":"Понятно","sw_104":"вариант","sw_105":")\" title=\"Взять\">","sw_106":"осталось","sw_107":"мин","sw_108":"участок","sw_109":"Выйти","sw_110":"Пул участка —","sw_111":"из 10","sw_112":"Участок","sw_113":"мелководье","sw_114":"средние глубины","sw_115":"абиссаль","sw_116":"Характеристики","sw_117":"Признаки","sw_118":"желательный","sw_119":"запрещённый","sw_120":"Предпросмотр","sw_121":"признаки","sw_122":"жел. есть","sw_123":"нет жел.","sw_124":" · запрещ.!","sw_125":"эффективность","sw_126":"Счёт","sw_127":"Участок","sw_128":"Добор пула, раунд","sw_129":"из 4. Выбери одного микроба из трёх — нажми «+». Выбор необратим.","sw_130":"Выбери 3 микроба из пула: их характеристики усредняются и должны попасть в диапазоны участка. Выбрано","sw_131":"из 3.","sw_132":"onclick=\"take(pick)\">Взять и дальше →","sw_133":"onclick=\"submitTrio()\">Сдать лечение →","sw_134":"Легенда","sw_135":"партия окончена","sw_136":"Ещё партия","sw_137":"В CasEdge","sw_138":"участок","sw_139":"Всего потрачено","sw_140":"из 30 мин.","sw_141":"Больше половины времени ушло на участок","sw_142":"— на ассессменте таймер один на три участка, и это половина трудности.","sw_143":"Следующая партия —","sw_144":"Участок","sw_145":"взял","sw_146":"] → осталось","sw_147":"стопроцентных трио","sw_148":"надо было","sw_149":"] → осталось бы","sw_150":"Запас сжат: на раунде","sw_151":"ты взял","sw_152":"— осталось","sw_153":"трио вместо","sw_154":"). Лучших ходов","sw_155":"из 4.","sw_156":"На «Среднем» это сходит с рук. На ассессменте, где решений 1–2 из","sw_157":", такой ход и есть проигрыш.","sw_158":"Цена хода — сколько стопроцентных трио из","sw_159":"осталось бы достижимо после каждого варианта:","sw_160":"раунд","sw_161":"вариант 1","sw_162":"вариант 2","sw_163":"вариант 3","sw_164":" <span class=\"dim\">не сыгран</span>","sw_165":" ←ты","sw_166":"Твоё трио:","sw_167":"среднее","sw_168":"диапазон","sw_169":"ок","sw_170":"МИМО","sw_171":"признаки","sw_172":"желательный: <b class=\"","sw_173":"есть","sw_174":"НЕТ","sw_175":"запрещённый: <b class=\"","sw_176":"ЕСТЬ","sw_177":"нет","sw_178":"ок","sw_179":"МИМО","sw_180":"Что было возможно из собранного","sw_181":"трио даёт","sw_182":"трио дают","sw_183":"100% из","sw_184":"сочетаний пула.","sw_185":"Без чего решения не существует:","sw_186":"— входит во все","sw_187":"<br><span class=\"dim\">Общего микроба у решений нет — пул давал несколько независимых путей.</span>","sw_188":": решения лежат","sw_189":"решение","sw_190":"трио","sw_191":"носителей желательного","sw_192":"Ни одного трио на 100% — потолок этого пула ниже.","sw_193":"Выйти из партии?"},
+ en:{"sw_1":"Hydrophilic","sw_2":"Heat Resistant","sw_3":"Bioluminescence","sw_4":"Pressure Resistant","sw_5":"Cleared it — the next run will be tighter.","sw_6":"There is nowhere further to climb in training. If you want the density of the real screen, open the assessment — it sits next to the run button.","sw_7":"I will give you more room: the point is not to suffer, it is to catch the order of the moves.","sw_8":"Keeping the level where it is — it suits your hand.","sw_9":"server did not return JSON (","sw_10":"Session not found. Sign in to your CasEdge account and open the game again.","sw_11":"Too many requests in a row. Wait a minute and carry on — the run is not lost.","sw_12":"server returned ","sw_13":" min ","sw_14":"s","sw_15":"The assessment does not move your training level — it stays at «","sw_16":"». What matters here is not the percentage but the move on which the solution was lost.","sw_17":" min","sw_18":"Step 1 of 4","sw_19":"What is going on","sw_20":"You are on a team clearing three polluted stretches of ocean. On each stretch you release","sw_21":"a treatment — exactly three microbes","sw_22":"Their characteristics are","sw_23":"averaged","sw_24":". The average of each of the three characteristics must land inside the stretch's range, plus two conditions on traits.","sw_25":"Requirements","sw_26":"the stretch's ranges and traits","sw_27":"Building the pool","sw_28":"6 + 4 rounds of «1 of 3»","sw_29":"Treatment","sw_30":"three microbes out of ten","sw_31":"Step 2 of 4","sw_32":"Five conditions, each worth 20 %","sw_33":"Treatment efficacy starts at 100 %, and every condition you miss cuts","sw_34":"average","sw_35":"— inside the stretch's range","sw_36":"average","sw_37":"— inside the range","sw_38":"average","sw_39":"— inside the range","sw_40":"at least one microbe carries the","sw_41":"desired","sw_42":"trait","sw_43":"none carries the","sw_44":"forbidden","sw_45":"A hundred-percent trio may not exist. Then the task is the best available, not the perfect one.","sw_46":"Step 3 of 4","sw_47":"The heart of it: the pool is built before the trio is known","sw_48":"First comes","sw_49":"the draft","sw_50":". You hold six microbes, and four times in a row you are shown","sw_51":"three","sw_52":"— you take one. The choice cannot be undone.","sw_53":"Only then do you pick the trio out of the ten you collected. So on the draft what you decide is","sw_54":"not «is this microbe good»","sw_55":", but","sw_56":"«which hole in the future trio does it close»","sw_57":"An irreversible choice","sw_58":"4 rounds, 3 options each","sw_59":"One timer","sw_60":"30 minutes for all three stretches","sw_61":"Review at the end","sw_62":"where the solution was lost","sw_63":"Step 4 of 4","sw_64":"What the review will show","sw_65":"After the third stretch you will see not just a percentage but","sw_66":"the price of every move","sw_67":": how many hundred-percent trios each of the three options left alive in each round.","sw_68":"And a straight answer to the question","sw_69":"«where did I lose it»","sw_70":"— naming the round and the microbe you should have taken.","sw_71":"Three polluted stretches of ocean. On each one, build a pool of microbes and compose a treatment — a trio whose averaged characteristics land inside the stretch's requirements.","sw_72":"The game is simple by nature — there is no need to stare at a screen for ten minutes. Difficulty is set automatically: we start at medium and adjust to how you play.","sw_73":"Next run —","sw_74":"How to play","sw_75":"Next run","sw_76":"Take the assessment","sw_77":"Runs played:","sw_78":", best result","sw_79":"levels","sw_80":"stretches","sw_81":"minutes","sw_82":"left E/M/H","sw_83":"your average over","sw_84":"Back","sw_85":"Skip","sw_86":"Next","sw_87":"Start the game","sw_88":"Connection to the server lost","sw_89":"The run lives on the server. If it restarted,\n   the current run cannot be continued — start a new one; your progress and level are saved in your profile.","sw_90":"Back to menu","sw_91":"Calibration mode","sw_92":"Assessment","sw_93":"How it differs from training: your training level will not change after this run,\n   and the density of solutions here is the same as on the real screen. Sets not yet played —","sw_94":"of","sw_95":"Not now","sw_96":"Start the assessment","sw_97":"Help","sw_98":"Legend","sw_99":"Characteristics","sw_100":"the average of the three must land inside the range","sw_101":"Traits","sw_102":"A microbe's colour matches its trait. The shape is the type of organism and does not affect the score.","sw_103":"Got it","sw_104":"option","sw_105":")\" title=\"Take\">","sw_106":"left","sw_107":"min","sw_108":"stretch","sw_109":"Exit","sw_110":"Pool for this stretch —","sw_111":"of 10","sw_112":"Stretch","sw_113":"shallows","sw_114":"mid-depths","sw_115":"abyssal","sw_116":"Characteristics","sw_117":"Traits","sw_118":"desired","sw_119":"forbidden","sw_120":"Preview","sw_121":"traits","sw_122":"desired ✓","sw_123":"no desired","sw_124":" · forbidden!","sw_125":"efficacy","sw_126":"Score","sw_127":"Stretch","sw_128":"Building the pool, round","sw_129":"of 4. Pick one microbe out of three — press «+». The choice cannot be undone.","sw_130":"Pick 3 microbes from the pool: their characteristics are averaged and must land inside the stretch's ranges. Picked","sw_131":"of 3.","sw_132":"onclick=\"take(pick)\">Take it and continue →","sw_133":"onclick=\"submitTrio()\">Submit the treatment →","sw_134":"Legend","sw_135":"run over","sw_136":"Another run","sw_137":"To CasEdge","sw_138":"stretch","sw_139":"Total time used","sw_140":"of 30 min.","sw_141":"More than half the time went on stretch","sw_142":"— in the assessment one timer covers all three stretches, and that is half the difficulty.","sw_143":"Next run —","sw_144":"Stretch","sw_145":"you took","sw_146":"] → left","sw_147":"hundred-percent trios","sw_148":"you should have taken","sw_149":"] → would have left","sw_150":"The margin narrowed: in round","sw_151":"you took","sw_152":"— leaving","sw_153":"trios instead of","sw_154":"). Best moves","sw_155":"of 4.","sw_156":"At Medium this passes. In the assessment, where there are 1–2 solutions out of","sw_157":", a move like this is the loss itself.","sw_158":"The price of a move — how many hundred-percent trios out of","sw_159":"would still be reachable after each option:","sw_160":"round","sw_161":"option 1","sw_162":"option 2","sw_163":"option 3","sw_164":" <span class=\"dim\">not played</span>","sw_165":" ←you","sw_166":"Your trio:","sw_167":"average","sw_168":"range","sw_169":"ok","sw_170":"MISS","sw_171":"traits","sw_172":"desired: <b class=\"","sw_173":"yes","sw_174":"NO","sw_175":"forbidden: <b class=\"","sw_176":"YES","sw_177":"no","sw_178":"ok","sw_179":"MISS","sw_180":"What was possible from what you collected","sw_181":"trio gives","sw_182":"trios give","sw_183":"100% out of","sw_184":"combinations in the pool.","sw_185":"What no solution exists without:","sw_186":"— appears in every one","sw_187":"<br><span class=\"dim\">The solutions share no common microbe — the pool offered several independent routes.</span>","sw_188":": the solutions lie","sw_189":"solution","sw_190":"trio","sw_191":"carriers of the desired trait","sw_192":"Not a single 100% trio — the ceiling of this pool is lower.","sw_193":"Leave the run?"} };
+let UILANG=(function(){try{const v=localStorage.getItem('caseedge_uilang');return v==='ru'?'ru':'en'}catch(e){return 'en'}})();
+function t(k){ const d=I18N[UILANG]||I18N.en; return (d&&d[k]!==undefined)?d[k]:(I18N.en[k]!==undefined?I18N.en[k]:k); }
+/* Имена уровней — КЛЮЧИ ДАННЫХ (seawolf-games.json хранит level:'Лёгкий').
+   Значения не трогаем, переводим только ПЕЧАТЬ. */
+const LVL_EN={'Лёгкий':'Easy','Средний':'Medium','Сложный':'Hard','Ассессмент':'Assessment'};
+const LV_E='Лёгкий', LV_M='Средний', LV_H='Сложный', LV_A='Ассессмент';
+function L(v){ return UILANG==='ru' ? v : (LVL_EN[v]||v); }
+try{document.documentElement.lang=UILANG;}catch(e){}
+/* @@I18N-DICT-END@@ */
+
 // данных в клиенте нет — всё приходит с сервера
 const ATTRS=['Permeability','Size','Density'], ROUNDS=4, TIMER=30*60*1000;
 const TRAITS={
- 'Hydrophilic':      {c1:'#8fdcf5',c2:'#2f86ab',c3:'#124a67',ic:'drop',  ru:'Гидрофильный'},
- 'Heat Resistant':   {c1:'#f0a882',c2:'#b8563a',c3:'#6d2a1c',ic:'therm', ru:'Термостойкий'},
- 'Bioluminescence':  {c1:'#b8e88f',c2:'#4f9646',c3:'#245127',ic:'bulb',  ru:'Биолюминесцентный'},
- 'Pressure Resistant':{c1:'#c3aae8',c2:'#6f52a8',c3:'#3a2a5e',ic:'press', ru:'Барорезистентный'}
+ 'Hydrophilic':      {c1:'#8fdcf5',c2:'#2f86ab',c3:'#124a67',ic:'drop',  ru:t('sw_1')},
+ 'Heat Resistant':   {c1:'#f0a882',c2:'#b8563a',c3:'#6d2a1c',ic:'therm', ru:t('sw_2')},
+ 'Bioluminescence':  {c1:'#b8e88f',c2:'#4f9646',c3:'#245127',ic:'bulb',  ru:t('sw_3')},
+ 'Pressure Resistant':{c1:'#c3aae8',c2:'#6f52a8',c3:'#3a2a5e',ic:'press', ru:t('sw_4')}
 };
 /* Калибровочная строка НЕ дублируется здесь: она приходит с сервера (state.levelNote,
    view.levelNote). Вторая копия этого текста в клиенте — ровно тот дефект, из-за которого
@@ -436,13 +451,13 @@ let ERR=null, TOKEN=null, DEADLINE=null, recorded=false;
 
 /* ---- профиль игрока ---- */
 const PKEY='casedge_seawolf_profile';
-const LEVELS=['Лёгкий','Средний','Сложный'], ASSESS='Ассессмент';
+const LEVELS=[LV_E,LV_M,LV_H], ASSESS=LV_A;
 function loadProf(){
  try{const p=JSON.parse(localStorage.getItem(PKEY)||'{}');
-  return {seen:Array.isArray(p.seen)?p.seen:[], level:LEVELS.includes(p.level)?p.level:'Средний',
+  return {seen:Array.isArray(p.seen)?p.seen:[], level:LEVELS.includes(p.level)?p.level:LV_M,
    history:Array.isArray(p.history)?p.history:[], assessHistory:Array.isArray(p.assessHistory)?p.assessHistory:[],
    adaptMsg:typeof p.adaptMsg==='string'?p.adaptMsg:'', ts:Number(p.ts||0)}}
- catch(e){return {seen:[],level:'Средний',history:[],assessHistory:[],adaptMsg:'',ts:0}}}
+ catch(e){return {seen:[],level:LV_M,history:[],assessHistory:[],adaptMsg:'',ts:0}}}
 function profBody(){return {seen:P.seen.slice(-800),level:P.level,
   history:P.history.slice(-500),assessHistory:P.assessHistory.slice(-500),adaptMsg:P.adaptMsg,ts:Date.now()}}
 function saveProf(){
@@ -481,10 +496,10 @@ let P=loadProf(), BANK=null, MODE='training', EXH=null;
    в неё не входит: в него заходят по своей воле и выходят на тот же уровень. */
 function adapt(total){
  const i=LEVELS.indexOf(P.level); let ni=i, why;
- if(total>=90&&i<2){ni=i+1; why='Прошёл чисто — следующая партия будет плотнее.'}
- else if(total>=90&&i===2) why='Выше тренировочного уровня подниматься некуда. Если хочешь плотность реального отбора — открой ассессмент, он рядом с кнопкой партии.';
- else if(total<=60&&i>0){ni=i-1; why='Дам просторнее: смысл не в том, чтобы мучиться, а в том, чтобы поймать порядок ходов.'}
- else why='Уровень оставляю прежним — он тебе по руке.';
+ if(total>=90&&i<2){ni=i+1; why=t('sw_5')}
+ else if(total>=90&&i===2) why=t('sw_6');
+ else if(total<=60&&i>0){ni=i-1; why=t('sw_7')}
+ else why=t('sw_8');
  P.level=LEVELS[ni]; P.adaptMsg=why; saveProf()}
 
 /* профиль для экрана собирается из банка (сервер) и истории (локально) */
@@ -506,33 +521,25 @@ async function authToken(){
  try{ if(window.parent&&window.parent!==window&&typeof window.parent.swAuthToken==='function')
         return await window.parent.swAuthToken(); }catch(e){}
  return null}
-/* ЯЗЫК ОБОЛОЧКИ. Едет на сервер КАЖДЫМ ходом. Без него refusalLang(body)
-   читать нечего и берёт своё умолчание - английский: 23.08.2026 на проде
-   русский кандидат получал калибровочную строку по-английски внутри
-   полностью русского экрана. Дефект мой, внесён вместе с парностью строк
-   движка 21-22.08. Ключ и умолчание - те же, что в index.html:3710,
-   иначе оболочка и игра разъедутся на новом посетителе. */
-function uiLang(){
- try{ return String(localStorage.getItem('caseedge_uilang')||'en').toLowerCase().indexOf('ru')===0?'ru':'en' }
- catch(e){ return 'en' }
-}
 async function api(action,payload){
  const t=await authToken();
  const h={'content-type':'application/json'}; if(t)h['Authorization']='Bearer '+t;
  const r=await fetch(EP,{method:'POST',headers:h,
-   body:JSON.stringify(Object.assign({action:action,token:TOKEN,seenIds:P.seen,uiLang:uiLang()},payload||{}))});
- let j=null; try{ j=await r.json() }catch(e){ throw new Error('сервер ответил не JSON ('+r.status+')') }
- if(r.status===401) throw new Error('Сессия не найдена. Войди в аккаунт CasEdge и открой игру заново.');
- if(r.status===429) throw new Error('Слишком много запросов подряд. Подожди минуту и продолжи — партия не потеряна.');
+   /* Круг 72, находка dev'а: язык не доезжал до ручки вовсе — см. sfl.NEW.html. */
+   body:JSON.stringify(Object.assign({action:action,token:TOKEN,seenIds:P.seen,
+                                      uiLang:UILANG},payload||{}))});
+ let j=null; try{ j=await r.json() }catch(e){ throw new Error(t('sw_9')+r.status+')') }
+ if(r.status===401) throw new Error(t('sw_10'));
+ if(r.status===429) throw new Error(t('sw_11'));
  if(j&&j.error) throw new Error((j.error&&j.error.message)||String(j.error));
- if(!r.ok) throw new Error('сервер ответил '+r.status);
+ if(!r.ok) throw new Error(t('sw_12')+r.status);
  if(j&&j.token) TOKEN=j.token;
  if(j&&j.view&&typeof j.view.msLeft==='number') DEADLINE=Date.now()+j.view.msLeft;
  return j}
 
 let SID=null, V=null, REV=null, PROF=null, sel=[], pick=null, modal=null, tutStep=0, tick=null, busy=false;
 const mm=ms=>String(Math.floor(ms/60000)).padStart(2,'0')+':'+String(Math.floor(ms%60000/1000)).padStart(2,'0');
-const hhmm=ms=>{const m=Math.floor(ms/60000),s=Math.floor(ms%60000/1000);return m+' мин '+String(s).padStart(2,'0')+' с'};
+const hhmm=ms=>{const m=Math.floor(ms/60000),s=Math.floor(ms%60000/1000);return m+t('sw_13')+String(s).padStart(2,'0')+t('sw_14')};
 
 /** одна обёртка на все действия: busy снимается всегда, ошибка попадает на экран */
 async function act(fn){
@@ -584,7 +591,7 @@ async function finish(){
  if(!recorded){
   recorded=true;
   if(MODE==='assessment'){ P.assessHistory.push(V.total);
-   V.adaptMsg=`Ассессмент не двигает тренировочный уровень — он остаётся «${P.level}». Здесь важен не процент, а то, на каком ходу решение было потеряно.`;
+   V.adaptMsg=`${t('sw_15')}${L(P.level)}${t('sw_16')}`;
    saveProf() }
   else { P.history.push(V.total); adapt(V.total); V.adaptMsg=P.adaptMsg }
   V.nextLevel=P.level;
@@ -602,42 +609,42 @@ function quitToApp(){ clearInterval(tick);
 
 function paintTimer(){const l=document.getElementById('tlab'),f=document.getElementById('tfill');if(!f)return;
  const ms=V.msLeft; f.style.width=(ms/(30*60000)*100)+'%'; f.className='tfill'+(ms<5*60000?' hot':ms<10*60000?' warn':'');
- if(l)l.textContent=Math.ceil(ms/60000)+' мин'}
+ if(l)l.textContent=Math.ceil(ms/60000)+t('sw_17')}
 function tog(i){ if(sel.includes(i))sel=sel.filter(x=>x!==i); else if(sel.length<3)sel.push(i); render(); }
 
 /* ================= экраны ================= */
 /* Туториал: массив жил только в оффлайн-демо, при переносе клиента его потеряли,
    и живой клиент падал на первой же кнопке. Гейт читал HTML глазами, а не запускал. */
 const TUT=[
- {k:'Шаг 1 из 4',t:'Что происходит',h:`
-   <p>Ты в команде, очищающей три загрязнённых участка океана. На каждом участке нужно выпустить <b>лечение — ровно три микроба</b>.</p>
-   <p>Их характеристики <b>усредняются</b>. Среднее по каждой из трёх характеристик обязано попасть в диапазон участка, плюс два условия по признакам.</p>
+ {k:t('sw_18'),t:t('sw_19'),h:`
+   <p>${t('sw_20')} <b>${t('sw_21')}</b>.</p>
+   <p>${t('sw_22')} <b>${t('sw_23')}</b>${t('sw_24')}</p>
    <div class="row3">
-     <div class="phase"><div class="b">${icon('target',30,'#d8a53c')}</div><div class="t">Требования</div><div class="d">диапазоны и признаки участка</div></div>
-     <div class="phase"><div class="b">${icon('flask',30,'#7fc3e8')}</div><div class="t">Добор пула</div><div class="d">6 + 4 раунда «1 из 3»</div></div>
-     <div class="phase"><div class="b">${icon('drops',30,'#5fbf95')}</div><div class="t">Лечение</div><div class="d">три микроба из десяти</div></div>
+     <div class="phase"><div class="b">${icon('target',30,'#d8a53c')}</div><div class="t">${t('sw_25')}</div><div class="d">${t('sw_26')}</div></div>
+     <div class="phase"><div class="b">${icon('flask',30,'#7fc3e8')}</div><div class="t">${t('sw_27')}</div><div class="d">${t('sw_28')}</div></div>
+     <div class="phase"><div class="b">${icon('drops',30,'#5fbf95')}</div><div class="t">${t('sw_29')}</div><div class="d">${t('sw_30')}</div></div>
    </div>`},
- {k:'Шаг 2 из 4',t:'Пять условий, каждое стоит 20 %',h:`
-   <p>Эффективность лечения начинается со 100 %, и каждое невыполненное условие срезает <b>20 %</b>:</p>
+ {k:t('sw_31'),t:t('sw_32'),h:`
+   <p>${t('sw_33')} <b>20 %</b>:</p>
    <ul>
-    <li>среднее <b>Permeability</b> — в диапазоне участка</li>
-    <li>среднее <b>Size</b> — в диапазоне</li>
-    <li>среднее <b>Density</b> — в диапазоне</li>
-    <li>хотя бы один микроб несёт <b>желательный</b> признак</li>
-    <li>ни один не несёт <b>запрещённый</b></li>
+    <li>${t('sw_34')} <b>Permeability</b> ${t('sw_35')}</li>
+    <li>${t('sw_36')} <b>Size</b> ${t('sw_37')}</li>
+    <li>${t('sw_38')} <b>Density</b> ${t('sw_39')}</li>
+    <li>${t('sw_40')} <b>${t('sw_41')}</b> ${t('sw_42')}</li>
+    <li>${t('sw_43')} <b>${t('sw_44')}</b></li>
    </ul>
-   <div class="note">Стопроцентного трио может не существовать. Тогда задача — лучшее из возможного, а не идеальное.</div>`},
- {k:'Шаг 3 из 4',t:'Главное: пул собирается раньше, чем известно трио',h:`
-   <p>Сначала <b>добор</b>. У тебя шесть микробов, и четыре раза подряд показывают <b>трёх</b> — берёшь одного. Выбор необратим.</p>
-   <p>И только потом из собранных десяти ты выбираешь трио. Значит на доборе решаешь <b>не «хорош ли микроб»</b>, а <b>«какую дыру в будущем трио он закрывает»</b>.</p>
+   <div class="note">${t('sw_45')}</div>`},
+ {k:t('sw_46'),t:t('sw_47'),h:`
+   <p>${t('sw_48')} <b>${t('sw_49')}</b>${t('sw_50')} <b>${t('sw_51')}</b> ${t('sw_52')}</p>
+   <p>${t('sw_53')} <b>${t('sw_54')}</b>${t('sw_55')} <b>${t('sw_56')}</b>.</p>
    <div class="row3">
-     <div class="phase"><div class="b">${icon('branch',30,'#d8a53c')}</div><div class="t">Необратимый выбор</div><div class="d">4 раунда по 3 варианта</div></div>
-     <div class="phase"><div class="b">${icon('clock',30,'#7fc3e8')}</div><div class="t">Один таймер</div><div class="d">30 минут на все три участка</div></div>
-     <div class="phase"><div class="b">${icon('pct',30,'#5fbf95')}</div><div class="t">Разбор в конце</div><div class="d">где решение было потеряно</div></div>
+     <div class="phase"><div class="b">${icon('branch',30,'#d8a53c')}</div><div class="t">${t('sw_57')}</div><div class="d">${t('sw_58')}</div></div>
+     <div class="phase"><div class="b">${icon('clock',30,'#7fc3e8')}</div><div class="t">${t('sw_59')}</div><div class="d">${t('sw_60')}</div></div>
+     <div class="phase"><div class="b">${icon('pct',30,'#5fbf95')}</div><div class="t">${t('sw_61')}</div><div class="d">${t('sw_62')}</div></div>
    </div>`},
- {k:'Шаг 4 из 4',t:'Что покажет разбор',h:`
-   <p>После третьего участка ты увидишь не просто процент, а <b>цену каждого хода</b>: сколько стопроцентных трио оставлял каждый из трёх вариантов на каждом раунде.</p>
-   <p>И прямой ответ на вопрос <b>«где я проиграл»</b> — с указанием раунда и микроба, которого надо было взять.</p>`}
+ {k:t('sw_63'),t:t('sw_64'),h:`
+   <p>${t('sw_65')} <b>${t('sw_66')}</b>${t('sw_67')}</p>
+   <p>${t('sw_68')} <b>${t('sw_69')}</b> ${t('sw_70')}</p>`}
 ];
 
 function scr_menu(){const first=!PROF||PROF.played===0;
@@ -646,65 +653,63 @@ function scr_menu(){const first=!PROF||PROF.played===0;
  return `<div class="hero">
   <div class="reef">${cast.map((c,i)=>`<div style="transform:translateY(${[6,-8,0,-4][i]}px)">${microbe(c[0],c[1],[76,96,84,70][i])}</div>`).join('')}</div>
   <div class="brand">CasEdge · McKinsey Solve</div><h1>Sea Wolf</h1>
-  <p class="lead">Три загрязнённых участка океана. На каждом собери пул микробов и составь лечение — трио, чьи усреднённые характеристики попадают в требования участка.</p>
-  ${first?`<div class="note" style="max-width:600px;margin:0 auto 26px;text-align:left">Игра простая по природе — думать по десять минут над экраном не нужно. Сложность подбирается автоматически: начинаем со среднего и подстраиваемся под твою игру.</div>`
-        :`<div class="note" style="max-width:600px;margin:0 auto 26px;text-align:left">${PROF.adaptMsg} Следующая партия — <b>${PROF.level}</b>.</div>`}
-  <button class="btn g" style="padding:14px 36px;font-size:16px;border-radius:10px" onclick="tutStep=0;modal='tut';render()">${first?'Как играть':'Следующая партия'}</button>
+  <p class="lead">${t('sw_71')}</p>
+  ${first?`<div class="note" style="max-width:600px;margin:0 auto 26px;text-align:left">${t('sw_72')}</div>`
+        :`<div class="note" style="max-width:600px;margin:0 auto 26px;text-align:left">${PROF.adaptMsg} ${t('sw_73')} <b>${L(PROF.level)}</b>.</div>`}
+  <button class="btn g" style="padding:14px 36px;font-size:16px;border-radius:10px" onclick="tutStep=0;modal='tut';render()">${first?t('sw_74'):t('sw_75')}</button>
   ${(PROF&&PROF.exhausted)?`<div class="note" style="max-width:600px;margin:0 auto 18px;text-align:left;border-color:rgba(216,165,60,.5)">${PROF.exhausted}</div>`:''}
   ${(!first&&PROF&&PROF.assessment&&PROF.assessment.total)?`
    <div style="margin:18px auto 0;max-width:600px">
-    <button class="btn ghost" style="padding:11px 26px;border-radius:10px" onclick="modal='assess';render()">Пройти ассессмент</button>
+    <button class="btn ghost" style="padding:11px 26px;border-radius:10px" onclick="modal='assess';render()">${t('sw_76')}</button>
     <div class="note" style="margin-top:10px;text-align:left">${PROF.assessment.note}
-     ${PROF.assessment.played?`<br><br>Пройдено партий: <b>${PROF.assessment.played}</b>, лучший результат <b>${PROF.assessment.best}%</b>.`:''}</div>
+     ${PROF.assessment.played?`<br><br>${t('sw_77')} <b>${PROF.assessment.played}</b>${t('sw_78')} <b>${PROF.assessment.best}%</b>.`:''}</div>
    </div>`:''}
   <div class="stats">
-   <div><b>${PROF?PROF.total:100}</b>уровней</div><div><b>3</b>участка</div><div><b>30</b>минут</div>
-   ${rem?`<div><b>${rem['Лёгкий']}/${rem['Средний']}/${rem['Сложный']}</b>осталось Л/С/Сл</div>`:''}
-   ${PROF&&PROF.played?`<div><b>${PROF.avg}%</b>твоя средняя за ${PROF.played}</div>`:''}
+   <div><b>${PROF?PROF.total:100}</b>${t('sw_79')}</div><div><b>3</b>${t('sw_80')}</div><div><b>30</b>${t('sw_81')}</div>
+   ${rem?`<div><b>${rem[LV_E]}/${rem[LV_M]}/${rem[LV_H]}</b>${t('sw_82')}</div>`:''}
+   ${PROF&&PROF.played?`<div><b>${PROF.avg}%</b>${t('sw_83')} ${PROF.played}</div>`:''}
   </div></div>`}
 
-function scr_tut(){const s=TUT[tutStep], lvl=PROF?PROF.level:'Средний';
+function scr_tut(){const s=TUT[tutStep], lvl=PROF?PROF.level:LV_M;
  return `<div class="veil"><div class="modal"><div class="kicker">${s.k}</div><h2>${s.t}</h2>${s.h}
   <div class="note" style="background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.25);color:#bcd2e2">${(PROF&&PROF.levelNote)||(V&&V.levelNote)||''}</div>
   <div class="mbtns"><div class="dots">${TUT.map((_,i)=>`<div class="dot ${i===tutStep?'on':''}"></div>`).join('')}</div>
-   ${tutStep>0?`<button class="btn ghost" onclick="tutStep--;render()">Назад</button>`:''}
-   <button class="btn ghost" onclick="startGame()">Пропустить</button>
-   <button class="btn g" onclick="${tutStep<TUT.length-1?'tutStep++;render()':'startGame()'}">${tutStep<TUT.length-1?'Дальше':'Начать игру'}</button>
+   ${tutStep>0?`<button class="btn ghost" onclick="tutStep--;render()">${t('sw_84')}</button>`:''}
+   <button class="btn ghost" onclick="startGame()">${t('sw_85')}</button>
+   <button class="btn g" onclick="${tutStep<TUT.length-1?'tutStep++;render()':'startGame()'}">${tutStep<TUT.length-1?t('sw_86'):t('sw_87')}</button>
   </div></div></div>`}
 
 function scr_err(){return `<div class="hero"><div class="brand">CasEdge · Sea Wolf</div>
-  <h1>Связь с сервером потеряна</h1>
+  <h1>${t('sw_88')}</h1>
   <p class="lead">${ERR}</p>
-  <div class="note" style="max-width:600px;margin:0 auto 22px;text-align:left">Партия живёт на сервере. Если он перезапустился,
-   текущую партию продолжить нельзя — начни новую, прогресс и уровень сохранены в профиле.</div>
-  <button class="btn g" style="padding:13px 30px;border-radius:10px" onclick="newGame();ERR=null;boot()">Вернуться в меню</button></div>`}
+  <div class="note" style="max-width:600px;margin:0 auto 22px;text-align:left">${t('sw_89')}</div>
+  <button class="btn g" style="padding:13px 30px;border-radius:10px" onclick="newGame();ERR=null;boot()">${t('sw_90')}</button></div>`}
 
-function scr_assess(){return `<div class="veil"><div class="modal"><div class="kicker">Калибровочный режим</div>
-  <h2>Ассессмент</h2>
+function scr_assess(){return `<div class="veil"><div class="modal"><div class="kicker">${t('sw_91')}</div>
+  <h2>${t('sw_92')}</h2>
   <div class="note" style="text-align:left">${PROF.assessment.note}</div>
-  <div class="note" style="text-align:left;margin-top:10px">Отличия от тренировки: тренировочный уровень после этой партии
-   не изменится, а плотность решений здесь такая же, как на реальном отборе. Осталось непройденных наборов —
-   <b>${PROF.assessment.remaining}</b> из ${PROF.assessment.total}.</div>
+  <div class="note" style="text-align:left;margin-top:10px">${t('sw_93')}
+   <b>${PROF.assessment.remaining}</b> ${t('sw_94')} ${PROF.assessment.total}.</div>
   <div class="mbtns"><span></span>
-   <button class="btn ghost" onclick="modal=null;render()">Не сейчас</button>
-   <button class="btn g" onclick="startGame('assessment')">Начать ассессмент</button>
+   <button class="btn ghost" onclick="modal=null;render()">${t('sw_95')}</button>
+   <button class="btn g" onclick="startGame('assessment')">${t('sw_96')}</button>
   </div></div></div>`}
 
 function scr_legend(){return `<div class="veil" onclick="modal=null;render()"><div class="modal" onclick="event.stopPropagation()">
- <div class="kicker">Справка</div><h2>Легенда</h2><div class="lg">
-  <div><div class="grp">Характеристики</div>${ATTRS.map(a=>`<div class="lgrow"><span class="ico">${icon(ATTR_ICON[a],17,'#9fc4dd')}</span><span>${a}<br><span class="tag">среднее по трём должно попасть в диапазон</span></span></div>`).join('')}</div>
-  <div><div class="grp">Признаки</div>${Object.entries(TRAITS).map(([k,v])=>`<div class="lgrow"><span class="ico">${icon(v.ic,17,v.c1)}</span><span>${k}<br><span class="tag">${v.ru}</span></span></div>`).join('')}</div>
- </div><div class="note">Цвет микроба соответствует признаку. Форма — вид организма, на счёт не влияет.</div>
- <div class="mbtns"><button class="btn" onclick="modal=null;render()">Понятно</button></div></div></div>`}
+ <div class="kicker">${t('sw_97')}</div><h2>${t('sw_98')}</h2><div class="lg">
+  <div><div class="grp">${t('sw_99')}</div>${ATTRS.map(a=>`<div class="lgrow"><span class="ico">${icon(ATTR_ICON[a],17,'#9fc4dd')}</span><span>${a}<br><span class="tag">${t('sw_100')}</span></span></div>`).join('')}</div>
+  <div><div class="grp">${t('sw_101')}</div>${Object.entries(TRAITS).map(([k,v])=>`<div class="lgrow"><span class="ico">${icon(v.ic,17,v.c1)}</span><span>${k}<br><span class="tag">${v.ru}</span></span></div>`).join('')}</div>
+ </div><div class="note">${t('sw_102')}</div>
+ <div class="mbtns"><button class="btn" onclick="modal=null;render()">${t('sw_103')}</button></div></div></div>`}
 
 const M=m=>[m.name,m.a,m.trait];
 function offerCard(m,i){const T=TRAITS[m.trait];
  return `<div class="ocard ${pick===i?'picked':''}" onclick="pick=${i};render()">
-  <div class="nm">${m.name}</div><div class="sub">вариант ${i+1}</div>
+  <div class="nm">${m.name}</div><div class="sub">${t('sw_104')} ${i+1}</div>
   <div class="art">${microbe(m.name,m.trait,112)}</div><div class="hr"></div>
   ${ATTRS.map((a,x)=>`<div class="arow"><span class="ico">${icon(ATTR_ICON[a],16,'#5b6d7e')}</span><span class="an">${a}</span><span class="av mono">${m.a[x]}</span></div>`).join('')}
   <div class="trow2">${icon(T.ic,17,T.c2)}<span>${m.trait}</span></div>
-  <button class="plus" onclick="event.stopPropagation();take(${i})" title="Взять"><svg width="15" height="15" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></button></div>`}
+  <button class="plus" onclick="event.stopPropagation();take(${i}${t('sw_105')}<svg width="15" height="15" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></button></div>`}
 function pillCard(m,i,click,s){const T=TRAITS[m.trait];
  return `<div class="pill ${click?'click':''} ${s?'sel':''}" ${click?`onclick="tog(${i})"`:''}>
   <span class="tr">${icon(T.ic,15,T.c2)}</span><div class="thumb">${microbe(m.name,m.trait,50)}</div>
@@ -721,74 +726,74 @@ function preview(){ if(sel.length!==3) return null;
 
 function scr_game(){const prospect=V.phase==='prospect', ms=V.msLeft, pv=preview();
  return `<div class="top"><div class="tl">
-   <div class="trow"><span class="lab">осталось</span><span class="val mono" id="tlab" style="width:62px">${Math.ceil(ms/60000)} мин</span>
+   <div class="trow"><span class="lab">${t('sw_106')}</span><span class="val mono" id="tlab" style="width:62px">${Math.ceil(ms/60000)} ${t('sw_107')}</span>
      <div class="tbar"><div class="tfill${ms<5*60000?' hot':ms<10*60000?' warn':''}" id="tfill" style="width:${ms/(30*60000)*100}%"></div></div></div>
-   <div class="trow"><span class="lab">участок</span><span class="val mono" style="width:62px">${V.siteIndex+1} / 3</span>
+   <div class="trow"><span class="lab">${t('sw_108')}</span><span class="val mono" style="width:62px">${V.siteIndex+1} / 3</span>
      <div class="segs">${[0,1,2].map(i=>`<div class="seg ${i<V.siteIndex?'done':i===V.siteIndex?'on':''}"></div>`).join('')}</div></div>
-  </div><button class="exit" onclick="if(confirm('Выйти из партии?')){quitToApp()}">Выйти</button></div>
+  </div><button class="exit" onclick="if(confirm('${t('sw_193')}')){quitToApp()}">${t('sw_109')}</button></div>
  <div class="stage"><div>
   ${prospect?`<div class="offers">${V.offers.map((m,i)=>offerCard(m,i)).join('')}</div>`:''}
-  <div class="poolwrap"><div class="sechead">Пул участка — ${V.pool.length} из 10</div>
+  <div class="poolwrap"><div class="sechead">${t('sw_110')} ${V.pool.length} ${t('sw_111')}</div>
    <div class="pool" style="margin-top:26px">${V.pool.map((m,i)=>pillCard(m,i,!prospect,sel.includes(i))).join('')}</div></div>
  </div><div>
-  <div class="panel"><h3>Участок ${V.siteIndex+1} · ${["мелководье","средние глубины","абиссаль"][V.siteIndex]}</h3><div class="body">
-   <div class="grp">Характеристики</div>
+  <div class="panel"><h3>${t('sw_112')} ${V.siteIndex+1} · ${[t('sw_113'),t('sw_114'),t('sw_115')][V.siteIndex]}</h3><div class="body">
+   <div class="grp">${t('sw_116')}</div>
    ${ATTRS.map(a=>`<div class="prow"><span class="ico">${icon(ATTR_ICON[a],17)}</span><span class="n">${a}</span><span class="v">${V.site.ranges[a][0]} – ${V.site.ranges[a][1]}</span></div>`).join('')}
-   <div class="grp" style="margin-top:10px">Признаки</div>
-   <div class="prow"><span class="ico">${icon(TRAITS[V.site.desired].ic,17,TRAITS[V.site.desired].c1)}</span><span class="n">${V.site.desired}<br><span class="tag">желательный</span></span></div>
-   <div class="prow"><span class="ico">${icon(TRAITS[V.site.undesired].ic,17,TRAITS[V.site.undesired].c1)}</span><span class="n">${V.site.undesired}<br><span class="tag">запрещённый</span></span></div>
+   <div class="grp" style="margin-top:10px">${t('sw_117')}</div>
+   <div class="prow"><span class="ico">${icon(TRAITS[V.site.desired].ic,17,TRAITS[V.site.desired].c1)}</span><span class="n">${V.site.desired}<br><span class="tag">${t('sw_118')}</span></span></div>
+   <div class="prow"><span class="ico">${icon(TRAITS[V.site.undesired].ic,17,TRAITS[V.site.undesired].c1)}</span><span class="n">${V.site.undesired}<br><span class="tag">${t('sw_119')}</span></span></div>
   </div></div>
-  ${pv?`<div class="panel" style="margin-top:12px"><h3>Предпросмотр</h3><div class="body">
+  ${pv?`<div class="panel" style="margin-top:12px"><h3>${t('sw_120')}</h3><div class="body">
     ${pv.detail.map(d=>`<div class="prow"><span class="ico">${icon(ATTR_ICON[d.attr],17)}</span><span class="n">${d.attr}</span><span class="v ${d.ok?'ok':'bad'}">${d.avg}</span></div>`).join('')}
-    <div class="prow"><span class="n">признаки</span><span class="v ${pv.hd&&!pv.hu?'ok':'bad'}">${pv.hd?'жел. есть':'нет жел.'}${pv.hu?' · запрещ.!':''}</span></div>
-    <div class="prow" style="border-top:1px solid rgba(255,255,255,.12)"><span class="n">эффективность</span><span class="v" style="font-size:22px">${pv.percent}%</span></div>
+    <div class="prow"><span class="n">${t('sw_121')}</span><span class="v ${pv.hd&&!pv.hu?'ok':'bad'}">${pv.hd?t('sw_122'):t('sw_123')}${pv.hu?t('sw_124'):''}</span></div>
+    <div class="prow" style="border-top:1px solid rgba(255,255,255,.12)"><span class="n">${t('sw_125')}</span><span class="v" style="font-size:22px">${pv.percent}%</span></div>
   </div></div>`:''}
-  <div class="panel" style="margin-top:12px"><h3>Счёт</h3><div class="body">
-   ${V.scores.map((s,i)=>`<div class="prow"><span class="n">Участок ${i+1}</span><span class="v">${s===null?'—':s+'%'}</span></div>`).join('')}
+  <div class="panel" style="margin-top:12px"><h3>${t('sw_126')}</h3><div class="body">
+   ${V.scores.map((s,i)=>`<div class="prow"><span class="n">${t('sw_127')} ${i+1}</span><span class="v">${s===null?'—':s+'%'}</span></div>`).join('')}
   </div></div>
  </div></div>
  <div class="bottom"><div class="i">i</div><div class="txt">${prospect
-   ?`Добор пула, раунд ${V.round+1} из 4. Выбери одного микроба из трёх — нажми «+». Выбор необратим.`
-   :`Выбери 3 микроба из пула: их характеристики усредняются и должны попасть в диапазоны участка. Выбрано ${sel.length} из 3.`}</div>
-  ${prospect?`<button class="btn" ${pick===null?'disabled':''} onclick="take(pick)">Взять и дальше →</button>`
-            :`<button class="btn g" ${sel.length===3?'':'disabled'} onclick="submitTrio()">Сдать лечение →</button>`}</div>
- <button class="legend" onclick="modal='legend';render()">Легенда</button>`}
+   ?`${t('sw_128')} ${V.round+1} ${t('sw_129')}`
+   :`${t('sw_130')} ${sel.length} ${t('sw_131')}`}</div>
+  ${prospect?`<button class="btn" ${pick===null?'disabled':''} ${t('sw_132')}</button>`
+            :`<button class="btn g" ${sel.length===3?'':'disabled'} ${t('sw_133')}</button>`}</div>
+ <button class="legend" onclick="modal='legend';render()">${t('sw_134')}</button>`}
 
 function scr_reveal(){
- let h=`<div class="top"><div class="tl"><div class="trow"><span class="lab">партия окончена</span>
+ let h=`<div class="top"><div class="tl"><div class="trow"><span class="lab">${t('sw_135')}</span>
    <div class="tbar"><div class="tfill" style="width:100%"></div></div></div></div>
-   <button class="exit" onclick="newGame()">Ещё партия</button><button class="exit" style="margin-left:8px" onclick="quitToApp()">В CasEdge</button></div>
+   <button class="exit" onclick="newGame()">${t('sw_136')}</button><button class="exit" style="margin-left:8px" onclick="quitToApp()">${t('sw_137')}</button></div>
   <div style="text-align:center;margin:10px 0 18px"><div class="big">${V.total??0}%</div>
-   <div class="dim">${V.scores.map((s,i)=>`участок ${i+1}: <b style="color:#eaf2f9">${s??0}%</b>${V.siteMs&&V.siteMs[i]!=null?` <span style="opacity:.7">(${hhmm(V.siteMs[i])})</span>`:''}`).join(' &nbsp;·&nbsp; ')}</div>
-   ${V.usedMs?`<div class="dim small" style="margin-top:6px">Всего потрачено ${hhmm(V.usedMs)} из 30 мин.${
-     V.siteMs&&V.siteMs.every(x=>x!=null)&&Math.max(...V.siteMs)>V.usedMs*0.5?` Больше половины времени ушло на участок ${V.siteMs.indexOf(Math.max(...V.siteMs))+1} — на ассессменте таймер один на три участка, и это половина трудности.`:''}</div>`:''}
-   <div class="note" style="max-width:680px;margin:14px auto;text-align:left">${REV[0].levelNote}<br><br><b>${V.adaptMsg||''}</b> ${V.nextLevel?`Следующая партия — <b>${V.nextLevel}</b>.`:''}</div></div>`;
+   <div class="dim">${V.scores.map((s,i)=>`${t('sw_138')} ${i+1}: <b style="color:#eaf2f9">${s??0}%</b>${V.siteMs&&V.siteMs[i]!=null?` <span style="opacity:.7">(${hhmm(V.siteMs[i])})</span>`:''}`).join(' &nbsp;·&nbsp; ')}</div>
+   ${V.usedMs?`<div class="dim small" style="margin-top:6px">${t('sw_139')} ${hhmm(V.usedMs)} ${t('sw_140')}${
+     V.siteMs&&V.siteMs.every(x=>x!=null)&&Math.max(...V.siteMs)>V.usedMs*0.5?` ${t('sw_141')} ${V.siteMs.indexOf(Math.max(...V.siteMs))+1} ${t('sw_142')}`:''}</div>`:''}
+   <div class="note" style="max-width:680px;margin:14px auto;text-align:left">${REV[0].levelNote}<br><br><b>${V.adaptMsg||''}</b> ${V.nextLevel?`${t('sw_143')} <b>${L(V.nextLevel)}</b>.`:''}</div></div>`;
  REV.forEach((r,si)=>{
   const V_=r.verdict||{head:'',body:''};
-  h+=`<div class="rcard"><h2>Участок ${si+1} — ${r.yourScore?r.yourScore.percent:0}%${r.siteMs?` <span class="dim small">· ${hhmm(r.siteMs)}</span>`:''}</h2>
+  h+=`<div class="rcard"><h2>${t('sw_144')} ${si+1} — ${r.yourScore?r.yourScore.percent:0}%${r.siteMs?` <span class="dim small">· ${hhmm(r.siteMs)}</span>`:''}</h2>
    <p><b class="${r.verdict&&(r.verdict.kind==='clean')?'ok':(r.verdict&&r.verdict.kind==='notFound'?'bad':'')}">${V_.head}</b><br>${V_.body}</p>
-   ${r.lost?`<p class="small">взял <b>${r.lost.took.name}</b> [${r.lost.took.trait}] → осталось <b class="bad">${r.lost.priceTo}</b> стопроцентных трио
-    <br>надо было <b>${r.lost.should.name}</b> [${r.lost.should.trait}] → осталось бы <b class="ok">${r.lost.priceFrom}</b></p>`:''}
-   ${r.squeeze?`<p class="small">Запас сжат: на раунде <b>${r.squeeze.round}</b> ты взял
-    <b>${r.squeeze.took.name}</b> — осталось <b>${r.squeeze.to}</b> трио вместо <b>${r.squeeze.from}</b>
-    (<b>${r.squeeze.better.name}</b>). Лучших ходов ${r.bestMoves} из 4.
-    <br><span class="dim">На «Среднем» это сходит с рук. На ассессменте, где решений 1–2 из ${r.poolCombos}, такой ход и есть проигрыш.</span></p>`
+   ${r.lost?`<p class="small">${t('sw_145')} <b>${r.lost.took.name}</b> [${r.lost.took.trait}${t('sw_146')} <b class="bad">${r.lost.priceTo}</b> ${t('sw_147')}
+    <br>${t('sw_148')} <b>${r.lost.should.name}</b> [${r.lost.should.trait}${t('sw_149')} <b class="ok">${r.lost.priceFrom}</b></p>`:''}
+   ${r.squeeze?`<p class="small">${t('sw_150')} <b>${r.squeeze.round}</b> ${t('sw_151')}
+    <b>${r.squeeze.took.name}</b> ${t('sw_152')} <b>${r.squeeze.to}</b> ${t('sw_153')} <b>${r.squeeze.from}</b>
+    (<b>${r.squeeze.better.name}</b>${t('sw_154')} ${r.bestMoves} ${t('sw_155')}
+    <br><span class="dim">${t('sw_156')} ${r.poolCombos}${t('sw_157')}</span></p>`
     :''}
-   <div class="dim small" style="margin:10px 0 4px">Цена хода — сколько стопроцентных трио из ${r.poolCombos} осталось бы достижимо после каждого варианта:</div>
-   <table><tr><th>раунд</th><th>вариант 1</th><th>вариант 2</th><th>вариант 3</th></tr>
-   ${r.cost.map(c=>`<tr><td>${c.round}${c.played?'':' <span class="dim">не сыгран</span>'}</td>${c.options.map(o=>`<td class="${o.taken?'taken':''}">${o.name}: ${o.remaining===null?'—':o.remaining}${o.taken?' ←ты':''}</td>`).join('')}</tr>`).join('')}</table>
-   ${r.yourTrio?`<h3 style="margin:14px 0 4px;font-size:15px">Твоё трио: ${r.yourTrio.join(', ')}</h3>
-   <table>${r.yourScore.detail.map(d=>`<tr><td>${d.attr}</td><td>среднее ${d.avg}</td><td>диапазон ${d.range[0]}–${d.range[1]}</td><td class="${d.ok?'ok':'bad'}">${d.ok?'ок':'МИМО'}</td></tr>`).join('')}</table>
-   <table><tr><td>${V&&V.site?'':''}признаки</td><td>желательный: <b class="${r.yourScore.hasDesired?'ok':'bad'}">${r.yourScore.hasDesired?'есть':'НЕТ'}</b></td>
-    <td>запрещённый: <b class="${r.yourScore.hasUndesired?'bad':'ok'}">${r.yourScore.hasUndesired?'ЕСТЬ':'нет'}</b></td>
-    <td class="${r.yourScore.hasDesired&&!r.yourScore.hasUndesired?'ok':'bad'}">${r.yourScore.hasDesired&&!r.yourScore.hasUndesired?'ок':'МИМО'}</td></tr></table>`:''}
-   <h3 style="margin:14px 0 4px;font-size:15px">Что было возможно из собранного</h3>
-   ${r.possible?`<p class="small">${r.possible} ${r.possible===1?'трио даёт':'трио дают'} 100% из ${r.poolCombos} сочетаний пула.
-     ${r.possibleCore&&r.possibleCore.length?`<br><b>Без чего решения не существует:</b> ${r.possibleCore.join(', ')} — входит во все ${r.possible}.`:'<br><span class="dim">Общего микроба у решений нет — пул давал несколько независимых путей.</span>'}<br>
-     <span class="dim">${r.spread.map(s=>`${s.attr}: решения лежат ${s.from}–${s.to}`).join(' · ')}</span></p>
-   ${r.possibleAll&&r.possibleAll.length?`<table><tr><th>решение</th><th>трио</th><th>носителей желательного</th></tr>
+   <div class="dim small" style="margin:10px 0 4px">${t('sw_158')} ${r.poolCombos} ${t('sw_159')}</div>
+   <table><tr><th>${t('sw_160')}</th><th>${t('sw_161')}</th><th>${t('sw_162')}</th><th>${t('sw_163')}</th></tr>
+   ${r.cost.map(c=>`<tr><td>${c.round}${c.played?'':t('sw_164')}</td>${c.options.map(o=>`<td class="${o.taken?'taken':''}">${o.name}: ${o.remaining===null?'—':o.remaining}${o.taken?t('sw_165'):''}</td>`).join('')}</tr>`).join('')}</table>
+   ${r.yourTrio?`<h3 style="margin:14px 0 4px;font-size:15px">${t('sw_166')} ${r.yourTrio.join(', ')}</h3>
+   <table>${r.yourScore.detail.map(d=>`<tr><td>${d.attr}</td><td>${t('sw_167')} ${d.avg}</td><td>${t('sw_168')} ${d.range[0]}–${d.range[1]}</td><td class="${d.ok?'ok':'bad'}">${d.ok?t('sw_169'):t('sw_170')}</td></tr>`).join('')}</table>
+   <table><tr><td>${V&&V.site?'':''}${t('sw_171')}</td><td>${t('sw_172')}${r.yourScore.hasDesired?'ok':'bad'}">${r.yourScore.hasDesired?t('sw_173'):t('sw_174')}</b></td>
+    <td>${t('sw_175')}${r.yourScore.hasUndesired?'bad':'ok'}">${r.yourScore.hasUndesired?t('sw_176'):t('sw_177')}</b></td>
+    <td class="${r.yourScore.hasDesired&&!r.yourScore.hasUndesired?'ok':'bad'}">${r.yourScore.hasDesired&&!r.yourScore.hasUndesired?t('sw_178'):t('sw_179')}</td></tr></table>`:''}
+   <h3 style="margin:14px 0 4px;font-size:15px">${t('sw_180')}</h3>
+   ${r.possible?`<p class="small">${r.possible} ${r.possible===1?t('sw_181'):t('sw_182')} ${t('sw_183')} ${r.poolCombos} ${t('sw_184')}
+     ${r.possibleCore&&r.possibleCore.length?`<br><b>${t('sw_185')}</b> ${r.possibleCore.join(', ')} ${t('sw_186')} ${r.possible}.`:t('sw_187')}<br>
+     <span class="dim">${r.spread.map(s=>`${s.attr}${t('sw_188')} ${s.from}–${s.to}`).join(' · ')}</span></p>
+   ${r.possibleAll&&r.possibleAll.length?`<table><tr><th>${t('sw_189')}</th><th>${t('sw_190')}</th><th>${t('sw_191')}</th></tr>
      ${r.possibleAll.map((v,i)=>`<tr><td>${i+1}</td><td>${v.names.join(', ')}</td><td>${v.desiredCount}</td></tr>`).join('')}</table>`:''}`
-    :`<p class="bad small">Ни одного трио на 100% — потолок этого пула ниже.</p>`}</div>`});
+    :`<p class="bad small">${t('sw_192')}</p>`}</div>`});
  return h}
 
 function render(){const app=document.getElementById('app');

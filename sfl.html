@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Sustainable Futures Lab · CasEdge</title>
 <style>
 :root{
@@ -127,6 +127,21 @@ body::before{
 </style></head>
 <body><div id="bgfx"></div><div id="grain"></div><div id="app"></div>
 <script>
+/* @@I18N-DICT-BEGIN@@ объявленный двуязычный словарь: русская половина здесь ЗАКОННА */
+/* ---- язык интерфейса. Круг 68. Источник истины ОДИН и общий с index.html:
+     localStorage['caseedge_uilang']. Своего состояния экран не заводит. ---- */
+const I18N={ ru:{"sfl_1":"сервер ответил не JSON (","sfl_2":"Сессия не найдена. Войди в аккаунт CasEdge и открой игру заново.","sfl_3":"Слишком много запросов подряд. Подожди минуту и повтори ход — состояние партии хранится у тебя, оно не потеряно.","sfl_4":"сервер ответил ","sfl_5":"Все","sfl_6":"сценариев пройдены. Дальше второй круг: сценарии те же, но решения ты уже принимал.","sfl_7":" мин ","sfl_8":" с","sfl_9":"Тринадцать решений подряд по одному сценарию. Правильного ответа нет ни у одного:\n   измеряется линия — очерёдность, соразмерность реакции и то, держишься ли ты своего порядка,\n   когда сценарий давит.","sfl_10":"Как это устроено","sfl_11":"Один таймер на 20 минут · первый шаг — порядок приоритетов · дальше выбор из 2–4 ·\n    назад вернуться нельзя · после каждого ответа виден его разбор, а баллы — только в конце.","sfl_12":"Пропущенный шаг считается нулём, а не исключается из счёта:\n    незакрытое решение — это тоже решение.","sfl_13":"Следующий сценарий","sfl_14":"Начать","sfl_15":"сценариев","sfl_16":"пройдено","sfl_17":"· лучший","sfl_18":"Таймер на паузе","sfl_19":"Задание","sfl_20":"Введение","sfl_21":"Экран","sfl_22":"из","sfl_23":". Таймер пойдёт после этого экрана.","sfl_24":"Назад","sfl_25":"Начать — таймер пойдёт","sfl_26":"Дальше","sfl_27":"Вопрос","sfl_28":"Последствие предыдущего решения.","sfl_29":"<button title=\"выше\" onclick=\"moveItem(","sfl_30":"<button title=\"ниже\" onclick=\"moveItem(","sfl_31":"Перетащи пункты или подвинь стрелками. Порядок по умолчанию — не ответ:\n      кнопка откроется, когда ты сам расставишь приоритеты.","sfl_32":"Назад вернуться нельзя — как на реальном ассессменте.","sfl_33":"Завершить","sfl_34":"Дальше","sfl_35":"Результат","sfl_36":"Пропущено шагов: <b class=\"","sfl_37":"·\n      потрачено","sfl_38":"из 20 мин","sfl_39":"Ещё сценарий","sfl_40":"Пять признаков","sfl_41":"шага","sfl_42":"Слабее всего:","sfl_43":"Сильный ход выбран на","sfl_44":"шагах из","sfl_45":"Линия почти безупречна — дальше только скорость.","sfl_46":"Половина шагов взята сильно: смотри ниже, где именно ты уступал, — по этим шагам виден тип ошибки, а не случайность.","sfl_47":"Меньше половины: разбор ниже читай не как оценку, а как список решений, которые надо уметь принимать быстро.","sfl_48":"Линия: что ты объявил и как играл","sfl_49":"На первом шаге ты сам расставил приоритеты. Дальше каждый шаг относился к одному из них —\n    ниже видно, где слово и дело разошлись.","sfl_50":"объявлен","sfl_51":"приоритет","sfl_52":"шагов","sfl_53":"сила игры","sfl_54":"Согласованность","sfl_55":"· расхождений","sfl_56":"из","sfl_57":"сравнимых пар.","sfl_58":"Ты играл ровно так, как объявил.","sfl_59":"Линия в целом держится, но на части приоритетов ты сыграл не так, как расставил.","sfl_60":"Объявленный порядок и фактическая игра расходятся: либо порядок был не твой, либо давление сценария оказалось сильнее линии.","sfl_61":"Согласованность не измеряется.","sfl_62":"Шаг за шагом","sfl_63":"Под каждым шагом — сильный ход и почему он сильный. Оценка без образца\n   учит чувству вины, а не работе.","sfl_64":"шаг","sfl_65":"признак","sfl_66":"твой","sfl_67":"разбор и сильный ход","sfl_68":"время","sfl_69":"Это и был сильный ход.","sfl_70":"Сильный ход:","sfl_71":" с","sfl_72":"Нужен Game Pass","sfl_73":"Связь с сервером потеряна","sfl_74":"Партия не начата и попытка не списана. Открой раздел с тарифами и вернись сюда.","sfl_75":"Модуль живёт на сервере. Если он перезапустился, текущий прогон продолжить нельзя — начни новый.","sfl_76":"В меню"},
+ en:{"sfl_1":"server did not return JSON (","sfl_2":"Session not found. Sign in to your CasEdge account and open the game again.","sfl_3":"Too many requests in a row. Wait a minute and repeat the move — the run is stored on your side, nothing is lost.","sfl_4":"server returned ","sfl_5":"All","sfl_6":"scenarios cleared. From here a second round runs: the same scenarios, but you have made these calls before.","sfl_7":" min ","sfl_8":"s","sfl_9":"Thirteen decisions in a row on a single scenario. None of them has a right answer:\n   what is measured is your line — the order you work in, whether the response fits the size of the problem,\n   and whether you hold that order when the scenario pushes back.","sfl_10":"How this works","sfl_11":"One 20-minute timer · the first step is ranking your priorities · then a choice of 2–4 ·\n    there is no going back · each answer is reviewed as you go, and the score comes only at the end.","sfl_12":"A skipped step counts as zero rather than dropping out of the score:\n    a decision left open is a decision too.","sfl_13":"Next scenario","sfl_14":"Start","sfl_15":"scenarios played:","sfl_16":"played","sfl_17":"· best","sfl_18":"Timer paused","sfl_19":"Task","sfl_20":"Introduction","sfl_21":"Screen","sfl_22":"of","sfl_23":". The timer starts after this screen.","sfl_24":"Back","sfl_25":"Start — the timer runs","sfl_26":"Next","sfl_27":"Question","sfl_28":"Consequence of your previous decision.","sfl_29":"<button title=\"up\" onclick=\"moveItem(","sfl_30":"<button title=\"down\" onclick=\"moveItem(","sfl_31":"Drag the items or move them with the arrows. The default order is not an answer:\n      the button opens once you have ranked them yourself.","sfl_32":"There is no going back — the same as the real assessment.","sfl_33":"Finish","sfl_34":"Next","sfl_35":"Result","sfl_36":"Steps skipped: <b class=\"","sfl_37":"·\n      time used","sfl_38":"of 20 min","sfl_39":"Another scenario","sfl_40":"Five traits","sfl_41":"steps","sfl_42":"Weakest:","sfl_43":"The strong move was taken on","sfl_44":"steps out of","sfl_45":"The line is close to flawless — from here it is only speed.","sfl_46":"Half the steps were taken strongly: look below at where exactly you gave ground — those steps show a type of mistake, not chance.","sfl_47":"Fewer than half: read the review below not as a grade but as a list of decisions you need to be able to make quickly.","sfl_48":"Your line: what you declared and how you played","sfl_49":"On the first step you ranked the priorities yourself. Every step after that belonged to one of them —\n    below you can see where word and deed came apart.","sfl_50":"declared","sfl_51":"priority","sfl_52":"steps","sfl_53":"strength of play","sfl_54":"Consistency","sfl_55":"· divergences","sfl_56":"of","sfl_57":"comparable pairs.","sfl_58":"You played exactly as you declared.","sfl_59":"The line broadly holds, but on some priorities you played against your own ranking.","sfl_60":"The order you declared and the way you played diverge: either the order was not yours, or the pressure of the scenario proved stronger than the line.","sfl_61":"Consistency cannot be measured here.","sfl_62":"Step by step","sfl_63":"Under each step is the strong move and why it is strong. Marking without a model answer\n   teaches guilt, not work.","sfl_64":"step","sfl_65":"trait","sfl_66":"yours","sfl_67":"review and the strong move","sfl_68":"time","sfl_69":"That was the strong move.","sfl_70":"Strong move:","sfl_71":"s","sfl_72":"A Game Pass is required","sfl_73":"Connection to the server lost","sfl_74":"The run has not started and no attempt was used. Open the pricing section and come back here.","sfl_75":"The module lives on the server. If it restarted, the current run cannot be continued — start a new one.","sfl_76":"Back to menu"} };
+let UILANG=(function(){try{const v=localStorage.getItem('caseedge_uilang');return v==='ru'?'ru':'en'}catch(e){return 'en'}})();
+function t(k){ const d=I18N[UILANG]||I18N.en; return (d&&d[k]!==undefined)?d[k]:(I18N.en[k]!==undefined?I18N.en[k]:k); }
+/* Имена уровней — КЛЮЧИ ДАННЫХ (seawolf-games.json хранит level:'Лёгкий').
+   Значения не трогаем, переводим только ПЕЧАТЬ. */
+const LVL_EN={'Лёгкий':'Easy','Средний':'Medium','Сложный':'Hard','Ассессмент':'Assessment'};
+const LV_E='Лёгкий', LV_M='Средний', LV_H='Сложный', LV_A='Ассессмент';
+function L(v){ return UILANG==='ru' ? v : (LVL_EN[v]||v); }
+try{document.documentElement.lang=UILANG;}catch(e){}
+/* @@I18N-DICT-END@@ */
+
 const PID='p'+Math.random().toString(36).slice(2,10);
 /* НЕПРОЗРАЧНЫЙ КОНВЕРТ СОСТОЯНИЯ. Клиент не знает, что внутри, и возвращает серверу
    всё, что тот прислал: сегодня это `sid`, после порта в `api/` — подписанный токен,
@@ -173,34 +188,40 @@ async function bearer(){
   }catch(e){}
   return null;
 }
-/* ЯЗЫК ОБОЛОЧКИ. Едет на сервер КАЖДЫМ ходом. Без него refusalLang(body)
-   читать нечего и берёт своё умолчание - английский: 23.08.2026 на проде
-   русский кандидат получал калибровочную строку по-английски внутри
-   полностью русского экрана. Дефект мой, внесён вместе с парностью строк
-   движка 21-22.08. Ключ и умолчание - те же, что в index.html:3710,
-   иначе оболочка и игра разъедутся на новом посетителе. */
-function uiLang(){
- try{ return String(localStorage.getItem('caseedge_uilang')||'en').toLowerCase().indexOf('ru')===0?'ru':'en' }
- catch(e){ return 'en' }
-}
 async function call(action,extra){
   const h={'content-type':'application/json'};
   const tk=await bearer(); if(tk) h['Authorization']='Bearer '+tk;
-  const body=Object.assign({action,seenIds:seenIds(),uiLang:uiLang()},STATE.token?{token:STATE.token}:{},extra||{});
+  /* Круг 72, находка dev'а: клиенты игр НЕ СЛАЛИ ЯЗЫК ВООБЩЕ. Сервер брал
+     умолчание продукта (английское), и русский кандидат читал английскую
+     калибровочную строку внутри русского экрана. Ось языка обязана ДОЕЗЖАТЬ:
+     ключ и умолчание те же, что у index.html. */
+  const body=Object.assign({action,seenIds:seenIds(),uiLang:UILANG},
+                           STATE.token?{token:STATE.token}:{},extra||{});
   const r=await fetch(SFL_API,{method:'POST',headers:h,body:JSON.stringify(body)});
-  let j=null; try{ j=await r.json() }catch(e){ throw new Error('сервер ответил не JSON ('+r.status+')') }
+  let j=null; try{ j=await r.json() }catch(e){ throw new Error(t('sfl_1')+r.status+')') }
   /* Ошибка приходит объектом {error:{message}}, а не строкой: прежний клиент
      печатал бы «[object Object]». */
-  if(r.status===401) throw new Error('Сессия не найдена. Войди в аккаунт CasEdge и открой игру заново.');
-  if(r.status===429) throw new Error('Слишком много запросов подряд. Подожди минуту и повтори ход — состояние партии хранится у тебя, оно не потеряно.');
+  if(r.status===401) throw new Error(t('sfl_2'));
+  if(r.status===429) throw new Error(t('sfl_3'));
   /* Код отказа едет вместе с текстом: экран ошибки обязан отличать «нет прав»
      от «сервер потерян» — иначе кандидат читает отказ по оплате как поломку. */
   if(j&&j.error){ const e=new Error((j.error&&j.error.message)||String(j.error)); e.code=(j.error&&j.error.code)||null; throw e; }
-  if(!r.ok) throw new Error('сервер ответил '+r.status);
+  if(!r.ok) throw new Error(t('sfl_4')+r.status);
   return keep(j);
 }
 /* Прежние сигнатуры сохранены. Путь превращается в action, query игнорируется —
    всё, что она возила, теперь едет в теле. */
+/* Текст РУЧКИ печатается сырым, а он бывает размеченным: разбор сильного хода
+   доходит до шести абзацев и десяти пар `**…**`. До круга 70 абзацы схлопывались
+   в один ком, а звёздочки уезжали кандидату как звёздочки. Находка ревьюера
+   круга 70. Экранируем ВСЁ, что пришло с сервера, и разворачиваем ровно две
+   разметки — жирное и абзац; тегов в этих полях нет (проверено по 2 170 строкам
+   двадцати сценариев), поэтому экранирование ничего не ломает. */
+function md(t){
+  if(t==null) return '';
+  const e=String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  return e.replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>').replace(/\n/g,'<br>');
+}
 const ACT=p=>String(p).replace(/^\//,'').split('?')[0];
 async function GET(p,q){
   const a=ACT(p), j=await call(a);
@@ -214,7 +235,7 @@ async function GET(p,q){
                      const done=total>0&&seen>=total;
                      return Object.assign({},j,{played:(pr.history||[]).length,
                        best:(pr.history||[]).length?Math.max.apply(null,pr.history):null,
-                       exhausted:done?`Все ${total} сценариев пройдены. Дальше второй круг: сценарии те же, но решения ты уже принимал.`:null}); }
+                       exhausted:done?`${t('sfl_5')} ${total} ${t('sfl_6')}`:null}); }
   return j;
 }
 async function POST(p,q,b){
@@ -232,7 +253,7 @@ async function act(fn){ if(busy)return; busy=true; ERR=null; ERRCODE=null;
   try{ await fn() }catch(e){ ERR=e.message||String(e); ERRCODE=e.code||null; clearInterval(tick) }
   finally{ busy=false; render() } }
 const mmss=ms=>Math.floor(ms/60000)+':'+String(Math.floor(ms%60000/1000)).padStart(2,'0');
-const hhmm=ms=>Math.floor(ms/60000)+' мин '+String(Math.floor(ms%60000/1000)).padStart(2,'0')+' с';
+const hhmm=ms=>Math.floor(ms/60000)+t('sfl_7')+String(Math.floor(ms%60000/1000)).padStart(2,'0')+t('sfl_8');
 
 function boot(){ return act(async()=>{ PROF=await GET('/state','?pid='+PID) }) }
 function start(){ return act(async()=>{
@@ -291,44 +312,40 @@ function drop(e,to){ e.preventDefault(); e.currentTarget.classList.remove('over'
 function scr_menu(){ const p=PROF||{};
  return `<div class="brand">CasEdge · McKinsey Solve</div>
   <h1>Sustainable Futures Lab</h1>
-  <p class="lead">Тринадцать решений подряд по одному сценарию. Правильного ответа нет ни у одного:
-   измеряется линия — очерёдность, соразмерность реакции и то, держишься ли ты своего порядка,
-   когда сценарий давит.</p>
+  <p class="lead">${t('sfl_9')}</p>
   ${p.exhausted?`<div class="note w" style="margin:16px 0">${p.exhausted}</div>`:''}
   <div class="card">
-   <h2>Как это устроено</h2>
-   <p class="small dim">Один таймер на 20 минут · первый шаг — порядок приоритетов · дальше выбор из 2–4 ·
-    назад вернуться нельзя · после каждого ответа виден его разбор, а баллы — только в конце.</p>
-   <p class="small dim" style="margin:0">Пропущенный шаг считается нулём, а не исключается из счёта:
-    незакрытое решение — это тоже решение.</p>
+   <h2>${t('sfl_10')}</h2>
+   <p class="small dim">${t('sfl_11')}</p>
+   <p class="small dim" style="margin:0">${t('sfl_12')}</p>
   </div>
   <div class="trow"><div class="n">
-    <button class="btn g" onclick="start()">${p.played?'Следующий сценарий':'Начать'}</button></div>
-   <span class="chip">сценариев ${p.scenarios||0}</span>
-   ${p.played?`<span class="chip">пройдено ${p.played} · лучший ${p.best}/10</span>`:''}
+    <button class="btn g" onclick="start()">${p.played?t('sfl_13'):t('sfl_14')}</button></div>
+   <span class="chip">${t('sfl_15')} ${p.scenarios||0}</span>
+   ${p.played?`<span class="chip">${t('sfl_16')} ${p.played} ${t('sfl_17')} ${p.best}/10</span>`:''}
   </div>`}
 
 function scr_intro(){ const s=INTRO[introStep], last=introStep===INTRO.length-1;
- return `<div class="bar"><span class="chip">Таймер на паузе</span>
+ return `<div class="bar"><span class="chip">${t('sfl_18')}</span>
    <div class="tbar"><div class="tfill" style="width:100%"></div></div>
    <span class="chip mono">20:00</span></div>
-  <div class="card"><div class="brand">${last?'Задание':'Введение'} · ${V.title}</div>
+  <div class="card"><div class="brand">${last?t('sfl_19'):t('sfl_20')} · ${V.title}</div>
    <h1 style="font-size:26px">${s.head}</h1>
    <p class="lead">${s.body}</p>
    ${s.mission?`<div class="note">${s.mission}</div>`:''}
   </div>
-  <div class="trow"><div class="n dim small">Экран ${introStep+1} из ${INTRO.length}. Таймер пойдёт после этого экрана.</div>
-   ${introStep>0?`<button class="btn" onclick="introStep--;render()">Назад</button>`:''}
-   <button class="btn g" onclick="${last?'beginQuestions()':'introStep++;render()'}">${last?'Начать — таймер пойдёт':'Дальше'}</button>
+  <div class="trow"><div class="n dim small">${t('sfl_21')} ${introStep+1} ${t('sfl_22')} ${INTRO.length}${t('sfl_23')}</div>
+   ${introStep>0?`<button class="btn" onclick="introStep--;render()">${t('sfl_24')}</button>`:''}
+   <button class="btn g" onclick="${last?'beginQuestions()':'introStep++;render()'}">${last?t('sfl_25'):t('sfl_26')}</button>
   </div>`}
 
 function scr_q(){
  const ms=V.msLeft;
- let h=`<div class="bar"><span class="chip">Вопрос ${V.n} / ${V.of}</span>
+ let h=`<div class="bar"><span class="chip">${t('sfl_27')} ${V.n} / ${V.of}</span>
    <span class="chip" id="sctitle">${V.title}</span>
    <div class="tbar"><div class="tfill${ms<3*60000?' hot':ms<7*60000?' warn':''}" id="tf" style="width:${ms/(20*60000)*100}%"></div></div>
    <span class="chip mono" id="tl">${mmss(ms)}</span></div>`;
- if(CONS) h+=`<div class="note" style="margin-bottom:14px"><b>Последствие предыдущего решения.</b><br>${CONS}</div>`;
+ if(CONS) h+=`<div class="note" style="margin-bottom:14px"><b>${t('sfl_28')}</b><br>${md(CONS)}</div>`;
  h+=`<div class="card"><p class="lead">${V.prompt}</p>`;
  if(V.type==='rank'){
    h+=`<ul class="rank">${order.map((id,i)=>{
@@ -337,79 +354,75 @@ function scr_q(){
         ondragstart="dragStart(event,${i})" ondragend="this.classList.remove('drag')"
         ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="drop(event,${i})">
        <span class="num">${i+1}</span><span class="txt">${it.label}</span>
-       <span class="mv"><button title="выше" onclick="moveItem(${i},${i-1})">▲</button>
-        <button title="ниже" onclick="moveItem(${i},${i+1})">▼</button></span></li>`}).join('')}</ul>
-     <p class="small dim" style="margin-top:10px">Перетащи пункты или подвинь стрелками. Порядок по умолчанию — не ответ:
-      кнопка откроется, когда ты сам расставишь приоритеты.</p>`;
+       <span class="mv">${t('sfl_29')}${i},${i-1})">▲</button>
+        ${t('sfl_30')}${i},${i+1})">▼</button></span></li>`}).join('')}</ul>
+     <p class="small dim" style="margin-top:10px">${t('sfl_31')}</p>`;
  } else {
    h+=V.options.map(o=>`<div class="opt${pick===o.id?' on':''}" onclick="pick='${o.id}';render()">
       <span class="dot"></span><span>${o.text}</span></div>`).join('');
  }
- h+=`</div><div class="trow"><div class="n dim small">Назад вернуться нельзя — как на реальном ассессменте.</div>
+ h+=`</div><div class="trow"><div class="n dim small">${t('sfl_32')}</div>
    <button class="btn g" id="go" ${((V.type==='rank'&&!dragged)||(V.type!=='rank'&&pick===null))?'disabled':''}
-     onclick="answer()">${V.n===V.of?'Завершить':'Дальше'}</button></div>`;
+     onclick="answer()">${V.n===V.of?t('sfl_33'):t('sfl_34')}</button></div>`;
  return h}
 
 function scr_rev(){
  const R=REV, c=R.consistency;
  const cls=v=>v>=7?'':v>=4?'mid':'low';
- let h=`<div class="brand">Результат</div>
+ let h=`<div class="brand">${t('sfl_35')}</div>
   <div class="trow" style="align-items:flex-end;gap:20px;margin:6px 0 18px">
     <div><div class="big">${R.overall}<span style="font-size:22px;color:var(--dim)">/10</span></div></div>
-    <div class="n dim small">Пропущено шагов: <b class="${R.skipped?'bad':'ok'}">${R.skipped}</b> ·
-      потрачено ${hhmm(R.usedMs)} из 20 мин</div>
-    <button class="btn" onclick="forget();V=null;REV=null;boot()">Ещё сценарий</button>
+    <div class="n dim small">${t('sfl_36')}${R.skipped?'bad':'ok'}">${R.skipped}</b> ${t('sfl_37')} ${hhmm(R.usedMs)} ${t('sfl_38')}</div>
+    <button class="btn" onclick="forget();V=null;REV=null;boot()">${t('sfl_39')}</button>
   </div>
-  <div class="card"><h2>Пять признаков</h2>
-   ${R.traits.map(t=>`<div class="trow"><span class="n">${t.trait} <span class="dim small">· ${t.steps} шага</span></span>
+  <div class="card"><h2>${t('sfl_40')}</h2>
+   ${R.traits.map(t=>`<div class="trow"><span class="n">${t.trait} <span class="dim small">· ${t.steps} ${t('sfl_41')}</span></span>
      <div class="meter"><i class="${cls(t.score||0)}" style="width:${(t.score||0)*10}%"></i></div>
      <span class="mono" style="width:42px;text-align:right">${t.score===null?'—':t.score}</span></div>`).join('')}
-   <p class="small dim" style="margin-top:12px">Слабее всего: <b>${R.weakest.map(w=>w.trait+' '+w.score).join('</b> · <b>')}</b></p>
+   <p class="small dim" style="margin-top:12px">${t('sfl_42')} <b>${R.weakest.map(w=>w.trait+' '+w.score).join('</b> · <b>')}</b></p>
    ${(()=>{const hit=R.steps.filter(s=>s.best&&s.best.mine).length;
-     return `<div class="note" style="margin-top:10px">Сильный ход выбран на <b>${hit}</b> шагах из ${R.steps.length}.
-      ${hit>=11?'Линия почти безупречна — дальше только скорость.'
-       :hit>=7?'Половина шагов взята сильно: смотри ниже, где именно ты уступал, — по этим шагам виден тип ошибки, а не случайность.'
-       :'Меньше половины: разбор ниже читай не как оценку, а как список решений, которые надо уметь принимать быстро.'}</div>`})()}
+     return `<div class="note" style="margin-top:10px">${t('sfl_43')} <b>${hit}</b> ${t('sfl_44')} ${R.steps.length}.
+      ${hit>=11?t('sfl_45')
+       :hit>=7?t('sfl_46')
+       :t('sfl_47')}</div>`})()}
   </div>`;
  if(c){
   /* alignment null — это НЕ ноль и не сто. Метрика при отсутствии сравнимых пар выдавала
      максимум, и «Согласованность 100% · ты играл ровно так, как объявил» получал тот,
      кто не играл вовсе. Отсутствие свидетельств называется словами. */
   const hasNum = typeof c.alignment === 'number';
-  h+=`<div class="card"><h2>Линия: что ты объявил и как играл</h2>
-   <p class="small dim">На первом шаге ты сам расставил приоритеты. Дальше каждый шаг относился к одному из них —
-    ниже видно, где слово и дело разошлись.</p>
-   ${c.rows.length?`<table><tr><th>объявлен</th><th>приоритет</th><th>шагов</th><th>сила игры</th></tr>
+  h+=`<div class="card"><h2>${t('sfl_48')}</h2>
+   <p class="small dim">${t('sfl_49')}</p>
+   ${c.rows.length?`<table><tr><th>${t('sfl_50')}</th><th>${t('sfl_51')}</th><th>${t('sfl_52')}</th><th>${t('sfl_53')}</th></tr>
    ${c.rows.map(r=>`<tr><td class="mono">${r.declaredRank}</td><td>${r.label}</td><td class="mono">${r.steps}</td>
      <td class="mono ${r.avgShare>=0.7?'ok':r.avgShare<=0.35?'bad':'warn'}">${Math.round(r.avgShare*100)}%</td></tr>`).join('')}</table>`:''}
    <div class="note ${hasNum&&c.alignment>=0.7?'':'w'}" style="margin-top:10px">
      ${hasNum
-       ? `Согласованность <b>${Math.round(c.alignment*100)}%</b> · расхождений ${c.driftPairs} из ${c.pairs} сравнимых пар.
-          ${c.alignment>=0.99?'Ты играл ровно так, как объявил.':
-            c.alignment>=0.5?'Линия в целом держится, но на части приоритетов ты сыграл не так, как расставил.':
-            'Объявленный порядок и фактическая игра расходятся: либо порядок был не твой, либо давление сценария оказалось сильнее линии.'}`
-       : `<b>Согласованность не измеряется.</b> ${c.note||''}`}
+       ? `${t('sfl_54')} <b>${Math.round(c.alignment*100)}%</b> ${t('sfl_55')} ${c.driftPairs} ${t('sfl_56')} ${c.pairs} ${t('sfl_57')}
+          ${c.alignment>=0.99?t('sfl_58'):
+            c.alignment>=0.5?t('sfl_59'):
+            t('sfl_60')}`
+       : `<b>${t('sfl_61')}</b> ${md(c.note)}`}
    </div></div>`;
  }
- h+=`<div class="card"><h2>Шаг за шагом</h2>
-  <p class="small dim">Под каждым шагом — сильный ход и почему он сильный. Оценка без образца
-   учит чувству вины, а не работе.</p>
-  <table><tr><th>шаг</th><th>признак</th><th>твой</th><th>разбор и сильный ход</th><th>время</th></tr>
+ h+=`<div class="card"><h2>${t('sfl_62')}</h2>
+  <p class="small dim">${t('sfl_63')}</p>
+  <table><tr><th>${t('sfl_64')}</th><th>${t('sfl_65')}</th><th>${t('sfl_66')}</th><th>${t('sfl_67')}</th><th>${t('sfl_68')}</th></tr>
   ${R.steps.map(s=>`<tr><td class="mono">${s.n}</td><td class="small">${s.trait}</td>
     <td class="mono ${s.skipped?'bad':s.share>=1?'ok':s.share<=0.2?'bad':'warn'}">${s.skipped?'—':Math.round(s.share*100)+'%'}</td>
-    <td class="small">${s.feedback||''}
+    <td class="small">${md(s.feedback)}
       ${s.best?(s.best.mine
-        ? `<br><span class="ok">Это и был сильный ход.</span>`
-        : `<br><span class="dim">Сильный ход: <b style="color:var(--acc2)">${s.best.text}</b>${s.best.why?`<br>${s.best.why}`:''}</span>`):''}</td>
-    <td class="mono small">${s.ms?Math.round(s.ms/1000)+' с':'—'}</td></tr>`).join('')}
+        ? `<br><span class="ok">${t('sfl_69')}</span>`
+        : `<br><span class="dim">${t('sfl_70')} <b style="color:var(--acc2)">${md(s.best.text)}</b>${s.best.why?`<br>${md(s.best.why)}`:''}</span>`):''}</td>
+    <td class="mono small">${s.ms?Math.round(s.ms/1000)+t('sfl_71'):'—'}</td></tr>`).join('')}
   </table></div>`;
  return h}
 
 function scr_err(){ const paid=ERRCODE==='entitlement_exhausted';
- return `<div class="brand">CasEdge · SFL</div><h1>${paid?'Нужен Game Pass':'Связь с сервером потеряна'}</h1>
+ return `<div class="brand">CasEdge · SFL</div><h1>${paid?t('sfl_72'):t('sfl_73')}</h1>
   <p class="lead">${ERR}</p>
-  <div class="note w">${paid?'Партия не начата и попытка не списана. Открой раздел с тарифами и вернись сюда.':'Модуль живёт на сервере. Если он перезапустился, текущий прогон продолжить нельзя — начни новый.'}</div>
-  <p><button class="btn g" style="margin-top:14px" onclick="ERR=null;forget();V=null;REV=null;INTRO=null;boot()">В меню</button></p>`}
+  <div class="note w">${paid?t('sfl_74'):t('sfl_75')}</div>
+  <p><button class="btn g" style="margin-top:14px" onclick="ERR=null;forget();V=null;REV=null;INTRO=null;boot()">${t('sfl_76')}</button></p>`}
 
 function render(){ const a=document.getElementById('app');
  if(ERR)      return void(a.innerHTML=scr_err());
