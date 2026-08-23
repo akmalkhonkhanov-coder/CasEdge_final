@@ -969,7 +969,16 @@ function briefIsEnglish(caseObj, lang) {
   if (String(lang) === 'ru') return false;
   if (String((caseObj && (caseObj.lang || caseObj.source_lang)) || '').toLowerCase() === 'en') return true;
   const v = caseObj && caseObj.prompt_md_en;
-  return typeof v === 'string' && v.trim() !== '';
+  if (typeof v === 'string' && v.trim() !== '') return true;
+  /* 23.08.2026, находка цеха кейсов. Третий случай, который две первые ветки
+     не ловят: бриф УЖЕ английский, но кейс помечен `ru` и пары ему не ставили —
+     переводить нечего. Замер по боевому файлу: таких кейсов 44 (400 всего:
+     83 с lang=en, 273 с парой, 44 без метки и без пары). Они шли пересказом,
+     то есть модель переписывала своими словами английский текст и ровно так
+     сглаживала намеренно размытый вопрос.
+     Читаем ТЕКСТ, а не метку: метка — утверждение о кейсе, текст — сам кейс. */
+  const md = caseObj && caseObj.prompt_md;
+  return typeof md === 'string' && md.trim() !== '' && !/[А-Яа-яЁё]/.test(md);
 }
 
 export function buildSystemPromptILead({ caseObj, doneSteps, firm, revealedSet, isOpening, focusKey, lang, attemptCount, hintAsked }) {
