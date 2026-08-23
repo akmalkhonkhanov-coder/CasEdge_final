@@ -24,6 +24,22 @@ function L(v, lang) {
   return String(lang) === 'ru' ? (v.ru || v.en) : (v.en || v.ru);
 }
 
+/* ПАРА ДЛЯ ПОЛЯ СЦЕНАРИЯ. Цех игр 23.08 отдал `why` по-английски и положил
+   рядом `_why_ru` — русский оригинал. Подчёркивание не именное правило: ключ
+   с «_» снимается ОБЩЕЙ конвенцией внутреннего, поэтому ни один гейт не обязан
+   знать про него отдельно.
+   Выбор стороны стоит здесь, а не в теле сценария: владелец языка на проекте
+   один. Пары ещё нет в боевом файле — тогда возвращается `why`, и поведение
+   ровно прежнее. */
+function pickRu(obj, field, lang) {
+  if (!obj) return null;
+  if (String(lang) === 'ru') {
+    const v = obj['_' + field + '_ru'];
+    if (typeof v === 'string' ? v.trim() !== '' : v != null) return v;
+  }
+  return obj[field];
+}
+
 function rankShare(answer, key) {
   if (!Array.isArray(answer) || answer.length !== key.length) return 0;
   if (new Set(answer).size !== key.length || !answer.every(x => key.includes(x))) return 0;
@@ -260,7 +276,7 @@ class SFLSession {
         let best = null;
         if (st.type === 'rank') {
           best = { text: st.key.map(id => (this.sc.priorities.find(p => p.id === id) || {}).label || id).join(' → '),
-                   why: st.why || null, mine: a.share >= 0.99 };
+                   why: pickRu(st, 'why', lang) || null, mine: a.share >= 0.99 };
         } else {
           const set = st.variants ? (st.variants[a.variant] || st.variants[Object.keys(st.variants)[0]]).options : st.options;
           const b = set.find(o => o.share === 1.0);

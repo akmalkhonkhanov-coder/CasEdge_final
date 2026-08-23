@@ -1015,7 +1015,8 @@
       "which costs change",
       "marginal cost",
       "incremental cost",
-      "из чего состоит"
+      "из чего состоит",
+      "truly incremental"
      ],
      "fallback": "on elicitation fail: show hint_L1, then reveal and proceed",
      "title": "Cost per flight: $8,400 breakdown",
@@ -1129,7 +1130,8 @@
         "which costs change",
         "marginal cost",
         "incremental cost",
-        "из чего состоит"
+        "из чего состоит",
+        "truly incremental"
        ],
        "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
       },
@@ -1406,7 +1408,8 @@
       "which fixed costs disappear",
       "avoidable",
       "decompose the fixed",
-      "из чего состоит fixed"
+      "из чего состоит fixed",
+      "actually disappear"
      ],
      "fallback": "on elicitation fail: show hint_L1, then reveal and proceed",
      "title": "The $22 fixed allocation: breakdown per test",
@@ -1515,7 +1518,8 @@
         "which fixed costs disappear",
         "avoidable",
         "decompose the fixed",
-        "из чего состоит fixed"
+        "из чего состоит fixed",
+        "actually disappear"
        ],
        "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
       },
@@ -2598,7 +2602,8 @@
       "из чего состоят 180",
       "какие расходы исчезнут",
       "чего можно избежать",
-      "магистральн"
+      "магистральн",
+      "stop being paid"
      ],
      "fallback": "on elicitation fail: show hint_L1, then reveal and proceed",
      "title": "The $180,000/week network fixed cost",
@@ -2762,7 +2767,8 @@
         "из чего состоят 180",
         "какие расходы исчезнут",
         "чего можно избежать",
-        "магистральн"
+        "магистральн",
+        "stop being paid"
        ],
        "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
       },
@@ -3347,7 +3353,8 @@
       "по сегментам",
       "счёт клиента",
       "кто платит больше",
-      "выигравшие и проигравшие"
+      "выигравшие и проигравшие",
+      "usage bill"
      ],
      "fallback": "on elicitation fail: show hint_L1, then reveal and proceed",
      "title": "Per-client monthly bill: seat vs usage @ $0.03/op",
@@ -3512,7 +3519,8 @@
         "по сегментам",
         "счёт клиента",
         "кто платит больше",
-        "выигравшие и проигравшие"
+        "выигравшие и проигравшие",
+        "usage bill"
        ],
        "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
       },
@@ -4048,7 +4056,8 @@
       "что идёт вечером",
       "отток семей",
       "удержание семей",
-      "отмена программ"
+      "отмена программ",
+      "truly idle"
      ],
      "fallback": "on elicitation fail: show hint_L1, then reveal and proceed",
      "title": "Program displacement research",
@@ -4142,7 +4151,8 @@
         "что идёт вечером",
         "отток семей",
         "удержание семей",
-        "отмена программ"
+        "отмена программ",
+        "truly idle"
        ],
        "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
       },
@@ -4695,7 +4705,8 @@
       "миграц",
       "куда уйдут заказы",
       "отток к конкурентам",
-      "перейдут ли пользователи"
+      "перейдут ли пользователи",
+      "actually migrates"
      ],
      "fallback": "on elicitation fail: show hint_L1, then reveal and proceed",
      "title": "Own-channel migration research",
@@ -4817,7 +4828,8 @@
         "миграц",
         "куда уйдут заказы",
         "отток к конкурентам",
-        "перейдут ли пользователи"
+        "перейдут ли пользователи",
+        "actually migrates"
        ],
        "fallback": "on elicitation fail: show hint_L1, then reveal and proceed"
       },
