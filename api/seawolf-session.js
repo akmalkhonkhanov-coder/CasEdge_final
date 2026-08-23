@@ -31,7 +31,15 @@
 //           · submit → view (+ totals when the game closes) · reveal
 
 const crypto = require('crypto');
-const { SeaWolfSession, LEVEL_NOTE, LEVELS_IN_BATCH } = require('./seawolf-engine.js');
+const { SeaWolfSession, LEVEL_NOTE, LEVELS_IN_BATCH, L } = require('./seawolf-engine.js');
+
+/* Карта «уровень → пояснение» на языке партии: ключ остаётся данными, значение
+   выбирается стороной. Строится из пар движка, второй копии текста нет. */
+function notesFor(lang) {
+  const out = {};
+  for (const k of Object.keys(LEVEL_NOTE)) out[k] = L(LEVEL_NOTE[k], lang);
+  return out;
+}
 const BANK = require('./seawolf-games.json');
 
 const FALLBACK_ORIGIN = 'https://cas-edge-final.vercel.app';
@@ -178,6 +186,9 @@ export default async function handler(req, res) {
     const raw = JSON.stringify(req.body || {});
     if (raw.length > MAX_BODY_BYTES) return res.status(413).json({ error: { message: 'Payload too large.' } });
     const body = req.body || {};
+    /* Язык кандидата: владелец выбора в проекте один — refusalLang()
+       (uiLang, запасным fbLang, умолчание английское). */
+    const lang = refusalLang(body);
     const action = body.action;
     const seen = Array.isArray(body.seenIds) ? body.seenIds.slice(0, 1000) : [];
 
@@ -196,7 +207,7 @@ export default async function handler(req, res) {
         total: GAMES.filter(g => g.level !== ASSESS).length,
         // levelIds lets the client clear "seen" for one level when that level
         // wraps round, instead of forgetting every level at once.
-        levels: LEVELS_IN_BATCH, notes: LEVEL_NOTE, remaining: left, totals, levelIds
+        levels: LEVELS_IN_BATCH, notes: notesFor(lang), remaining: left, totals, levelIds
       });
     }
 
@@ -211,9 +222,10 @@ export default async function handler(req, res) {
       // words: a repeat you were warned about is a repeat; a silent one reads as
       // "the game ran out".
       const wrapped = got.wrapped
-        ? `Уровень «${level}» пройден целиком — все ${got.poolSize} наборов. Дальше идёт второй круг: наборы те же, ты их уже решал. Если нужна новая трудность, а не повтор, открой ассессмент.`
+        ? L({ ru: `Уровень «${level}» пройден целиком — все ${got.poolSize} наборов. Дальше идёт второй круг: наборы те же, ты их уже решал. Если нужна новая трудность, а не повтор, открой ассессмент.`,
+              en: `Level “${level}” is complete — all ${got.poolSize} sets. From here it is a second lap: the same sets, you have solved them before. If you need new difficulty rather than a repeat, open the assessment.` }, lang)
         : null;
-      return res.status(200).json({ token: makeToken(st), gameId: got.game.id, level, wrapped, view: s.view() });
+      return res.status(200).json({ token: makeToken(st), gameId: got.game.id, level, wrapped, view: s.view(Date.now(), lang) });
     }
 
     const st = readToken(body.token);
@@ -221,7 +233,7 @@ export default async function handler(req, res) {
     const s = rehydrate(st);
     if (!s) return res.status(400).json({ error: { message: 'Unknown game.' } });
 
-    if (action === 'view') return res.status(200).json({ token: body.token, view: withTotals(s, s.view()) });
+    if (action === 'view') return res.status(200).json({ token: body.token, view: withTotals(s, s.view(Date.now(), lang)) });
 
     if (action === 'choose') {
 
@@ -238,9 +250,9 @@ export default async function handler(req, res) {
     }
       const o = body.option;
       if (!(Number.isInteger(o) && o >= 0 && o <= 2)) return res.status(400).json({ error: { message: 'Bad option.' } });
-      if (s.finished) return res.status(200).json({ token: body.token, view: withTotals(s, s.view()) });
+      if (s.finished) return res.status(200).json({ token: body.token, view: withTotals(s, s.view(Date.now(), lang)) });
       if (s.round >= 4) return res.status(400).json({ error: { message: 'Pool complete.' } });
-      const view = s.choose(o);
+      const view = s.choose(o, Date.now(), lang);
       return res.status(200).json({ token: makeToken(stateOf(s, st)), view: withTotals(s, view) });
     }
 
@@ -251,16 +263,16 @@ export default async function handler(req, res) {
       if (!ok) return res.status(400).json({ error: { message: 'Bad trio.' } });
       // Idempotent retry: a blinked network or a double click must return the
       // same result, not an error and not a second game.
-      if (s.finished) return res.status(200).json({ token: body.token, view: withTotals(s, s.view()) });
+      if (s.finished) return res.status(200).json({ token: body.token, view: withTotals(s, s.view(Date.now(), lang)) });
       // Two different failures hide behind one throw, and they are not the same
       // answer. Time ran out → the game is over, hand back the closed view, the
       // player has nothing to fix. Pool not full → the client sent a move that
       // cannot exist, and swallowing it as "done" would print a result screen
       // for a game that was never played.
-      if (s.expired()) return res.status(200).json({ token: body.token, view: withTotals(s, s.view()) });
+      if (s.expired()) return res.status(200).json({ token: body.token, view: withTotals(s, s.view(Date.now(), lang)) });
       if (s.round < 4) return res.status(400).json({ error: { message: 'Pool incomplete.' } });
       const now = Date.now();
-      const view = s.submit(t, now);
+      const view = s.submit(t, now, lang);
       return res.status(200).json({ token: makeToken(stateOf(s, st, now)), view: withTotals(s, view) });
     }
 
@@ -270,9 +282,9 @@ export default async function handler(req, res) {
       // that is asking a question one call too early: a game whose 30 minutes
       // ran out is over, and its debrief was returning 403 instead of the
       // "site not played" verdict the player needs to see.
-      s.view();
+      s.view(Date.now(), lang);
       if (!s.finished) return res.status(403).json({ error: { message: 'Game not finished.' } });
-      return res.status(200).json({ reveal: s.reveal(), totals: s.totals() });
+      return res.status(200).json({ reveal: s.reveal(lang), totals: s.totals() });
     }
 
     return res.status(400).json({ error: { message: 'Unknown action.' } });

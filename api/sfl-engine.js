@@ -16,6 +16,14 @@ const TRAITS = ['Prioritisation', 'Decision-making under uncertainty', 'Interpre
 const SHARES = [0, 0.2, 0.4, 0.6, 1.0];   // объявленный набор долей (Ф4)
 
 /** ранжирование: доля = 1 − нормированное расстояние Кендалла до ключа */
+/* ПАРА ЯЗЫКОВ для трёх строк разбора, которые кандидат читает. Остальные
+   тексты SFL приходят из сценариев, а они уже английские (language: en у всех
+   20). Выбор стороны — тем же способом, что в Sea Wolf и в кассе. */
+function L(v, lang) {
+  if (!v || typeof v !== 'object') return v;
+  return String(lang) === 'ru' ? (v.ru || v.en) : (v.en || v.ru);
+}
+
 function rankShare(answer, key) {
   if (!Array.isArray(answer) || answer.length !== key.length) return 0;
   if (new Set(answer).size !== key.length || !answer.every(x => key.includes(x))) return 0;
@@ -181,7 +189,7 @@ class SFLSession {
    * линия держится; сильные ответы только по приоритетам, объявленным низко, —
    * человек написал одно, а играет другое, и это ЧИСЛО, а не мнение.
    */
-  consistency() {
+  consistency(lang) {
     const raw = this.answers[0] && Array.isArray(this.answers[0].choice) ? this.answers[0].choice : null;
     /* Негодное ранжирование (дубли, неполный набор, чужие id) всё равно шло сюда:
        rankShare ставил за него 0, а таблица строилась. Приоритеты, которых в ответе
@@ -193,7 +201,8 @@ class SFLSession {
     const valid = raw && raw.length === ids.length && new Set(raw).size === ids.length
                   && raw.every(x => ids.includes(x));
     if (!valid) return { declared: null, rows: [], driftPairs: 0, pairs: 0, alignment: null,
-      note: 'Порядок приоритетов на первом шаге не был задан целиком, поэтому сравнивать игру не с чем.' };
+      note: L({ ru: 'Порядок приоритетов на первом шаге не был задан целиком, поэтому сравнивать игру не с чем.',
+                en: 'The priority order was not fully declared on the first step, so there is nothing to compare the play against.' }, lang) };
     const declared = raw;
     const rank = Object.fromEntries(declared.map((id, i) => [id, i + 1]));   // 1 = объявлен первым
     const byP = {};
@@ -231,13 +240,14 @@ class SFLSession {
        и «нет свидетельств» — разные вещи, и метрика обязана их различать. */
     return { declared, rows, driftPairs: drift, pairs: comparable,
              alignment: comparable ? +(1 - drift / comparable).toFixed(2) : null,
-             note: comparable ? null : 'Игра по всем приоритетам ровная — расхождению не на чем проявиться, поэтому числа нет.' };
+             note: comparable ? null : L({ ru: 'Игра по всем приоритетам ровная — расхождению не на чем проявиться, поэтому числа нет.',
+                                           en: 'Play is even across all priorities — a drift has nothing to show up against, so there is no number.' }, lang) };
   }
 
   /** разбор — только после конца, и он называет линию, а не сумму баллов */
-  reveal() {
+  reveal(lang) {
     if (!this.finished) throw new Error('reveal before finish');
-    const sc = this.score(), cons = this.consistency();
+    const sc = this.score(), cons = this.consistency(lang);
     const weak = [...sc.traits].filter(t => t.score !== null).sort((a, b) => a.score - b.score).slice(0, 2);
     return {
       overall: sc.overall, traits: sc.traits, consistency: cons, weakest: weak,
@@ -259,7 +269,8 @@ class SFLSession {
         return {
           n: a.n, trait: a.trait, choice: a.choice, share: a.share, skipped: !!a.skipped,
           sub: a.sub.map(([name, w]) => ({ name, got: +(w * a.share).toFixed(2), max: w })),
-          feedback: a.skipped ? 'Шаг пропущен — 0 из возможного. Пропуск здесь считается ответом «не решил».' : a.fb,
+          feedback: a.skipped ? L({ ru: 'Шаг пропущен — 0 из возможного. Пропуск здесь считается ответом «не решил».',
+                                    en: 'Step skipped — 0 out of the possible. A skip counts here as “did not solve”.' }, lang) : a.fb,
           best,
           ms: a.ms, variant: a.variant, priorityTag: a.priorityTag
         };

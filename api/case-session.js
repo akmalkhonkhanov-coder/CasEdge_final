@@ -658,7 +658,26 @@ function caseGates(caseObj) {
 // (identical every turn → cacheable). Gated/revealed exhibits and gated topics
 // go in VOLATILE (they depend on revealedSet, which changes mid-case), so the
 // cached prefix stays byte-identical across the whole case.
-function exhibitsBlock(caseObj, revealedSet) {
+/* ПАРА ПОЛЕЙ. Цех кейсов переводит библиотеку ВТОРОЙ СТОРОНОЙ: `title_en`,
+   `body_md_en`, `candidate_md_en`, `render_en` — суффикс на том же уровне,
+   ключи не переименованы, русская сторона остаётся на месте.
+   До 22.08.2026 движок не читал НИ ОДНОГО такого поля: 694 переведённых поля
+   лежали мёртвым грузом, а англоязычному кандидату модель по-прежнему
+   пересказывала русский источник на лету — то есть ровно то, ради чего перевод
+   и затевался, не происходило.
+   Правило одно: партия идёт НЕ по-русски и английская сторона непуста — берём
+   её; иначе исходник. Ни одного поля не переименовано и ничего не удалено,
+   поэтому русская партия не меняется вовсе. */
+function enField(obj, field, lang) {
+  if (!obj) return '';
+  if (String(lang) !== 'ru') {
+    const v = obj[field + '_en'];
+    if (typeof v === 'string' ? v.trim() !== '' : v != null) return v;
+  }
+  return obj[field];
+}
+
+function exhibitsBlock(caseObj, revealedSet, lang) {
   const exhibits = Array.isArray(caseObj.exhibits) ? caseObj.exhibits : [];
   const { gateMap, unmatchedTopics } = caseGates(caseObj);
   const stableShown = [];
@@ -678,13 +697,13 @@ function exhibitsBlock(caseObj, revealedSet) {
       ? `\nThis exhibit is DISPLAYED TO THE CANDIDATE AS A VISUAL CHART/TABLE by the app the moment it is revealed. Do NOT retype its rows/numbers — introduce it in one short sentence and let the visual speak. You may quote individual numbers later when discussing their analysis.`
       : `\nThis exhibit is DISPLAYED TO THE CANDIDATE AS A DATA CARD by the app the moment it is revealed, with its layout preserved exactly. Do NOT retype, re-align, summarise or paraphrase its body — you would drop lines. Introduce it in one short sentence and let the card speak. You may quote individual numbers later when discussing their analysis.`;
     if (!gate) {
-      stableShown.push(`EXHIBIT id="${ex.id}" — "${ex.title}" (available to share):${appNote}\n${ex.body_md || ''}`);
+      stableShown.push(`EXHIBIT id="${ex.id}" — "${enField(ex, 'title', lang)}" (available to share):${appNote}\n${enField(ex, 'body_md', lang) || ''}`);
     } else if (revealedSet.has(ex.id)) {
-      volatile.push(`EXHIBIT id="${ex.id}" — "${ex.title}" (revealed — already shown to the candidate as a card; refer to it, do not retype it):\n${ex.body_md || ''}`);
+      volatile.push(`EXHIBIT id="${ex.id}" — "${enField(ex, 'title', lang)}" (revealed — already shown to the candidate as a card; refer to it, do not retype it):\n${enField(ex, 'body_md', lang) || ''}`);
     } else {
       const triggers = Array.from(gate);
       volatile.push(
-        `HIDDEN EXHIBIT id="${ex.id}" — "${ex.title}"\n` +
+        `HIDDEN EXHIBIT id="${ex.id}" — "${enField(ex, 'title', lang)}"\n` +
         `Do NOT mention or describe this exhibit's contents unless the candidate explicitly asks about: ` +
         `${triggers.length ? triggers.map(t => `"${t}"`).join(', ') : 'the specific data it contains'}.\n` +
         `If (and only if) they ask, BEGIN your reply with the marker <reveal>${ex.id}</reveal> and then present it.\n` +
@@ -953,10 +972,10 @@ A strong candidate opens with Step ${optEntry} — "${optStep.label || ''}" (${o
 
 FIRM STYLE: ${firmStyle(firm)}
 
-CASE: "${caseObj.title}" — ${caseObj.case_type} · ${caseObj.industry} · ${caseObj.difficulty}
+CASE: "${enField(caseObj, 'title', lang)}" — ${caseObj.case_type} · ${caseObj.industry} · ${caseObj.difficulty}
 
 CASE PROMPT (the scenario):
-${caseObj.prompt_md || caseObj.header_md || ''}`;
+${enField(caseObj, 'prompt_md', lang) || enField(caseObj, 'header_md', lang) || ''}`;
 
   const doneText = done.size
     ? `\n\n════ ALREADY ESTABLISHED (do not re-ask; these numbers/insights are known) ════\n` +
@@ -967,7 +986,7 @@ ${caseObj.prompt_md || caseObj.header_md || ''}`;
     ? `\n\n════ AVAILABLE NOW — the candidate may take ANY of these, in ANY order ════
 Each block is one analysis the candidate can legitimately do next. Grade whichever they actually pursue against its ANSWER KEY. NEVER read a key aloud.\n\n` +
       unlocked.map(n => { const s = byNum.get(n) || {};
-        return `— STEP ${n} — "${safeLabel(s.label)}" (yields: ${safeProduces(s.produces)||'—'})\nQUESTION IF THEY GO HERE:\n${s.candidate_md || safeLabel(s.label) || ''}${stepLangNote(s.candidate_md, lang)}\nANSWER KEY (hidden — grade against this):\n${s.interviewer_md || '(no explicit key — grade with MBB rigor for this step type)'}`;
+        return `— STEP ${n} — "${safeLabel(s.label)}" (yields: ${safeProduces(s.produces)||'—'})\nQUESTION IF THEY GO HERE:\n${enField(s, 'candidate_md', lang) || safeLabel(s.label) || ''}${stepLangNote(enField(s, 'candidate_md', lang), lang)}\nANSWER KEY (hidden — grade against this):\n${s.interviewer_md || '(no explicit key — grade with MBB rigor for this step type)'}`;
       }).join('\n\n')
     : '';
 
@@ -977,7 +996,7 @@ Each block is one analysis the candidate can legitimately do next. Grade whichev
         return `- Step ${n} "${s.label||''}" — unlocks once these are established: ${need.map(d=>`Step ${d}`).join(', ')}. If the candidate jumps here, don't reject them — note briefly what they need first and let them get it, or answer what can be answered without the missing piece.`; }).join('\n')
     : '';
 
-  const ex = exhibitsBlock(caseObj, revealedSet);
+  const ex = exhibitsBlock(caseObj, revealedSet, lang);
 
   let flow, flowRules = '';
   if (isOpening) {
@@ -1045,10 +1064,10 @@ export function buildSystemPrompt({ caseObj, stepIndex, attemptCount, firm, reve
 
 FIRM STYLE: ${firmStyle(firm)}
 
-CASE: "${caseObj.title}" — ${caseObj.case_type} · ${caseObj.industry} · ${caseObj.difficulty}
+CASE: "${enField(caseObj, 'title', lang)}" — ${caseObj.case_type} · ${caseObj.industry} · ${caseObj.difficulty}
 
 CASE PROMPT (the scenario):
-${caseObj.prompt_md || caseObj.header_md || ''}`;
+${enField(caseObj, 'prompt_md', lang) || enField(caseObj, 'header_md', lang) || ''}`;
 
   const answerKey =
 `\n\n════ ANSWER KEY FOR THE CURRENT STEP — NEVER READ THIS ALOUD ════
@@ -1056,12 +1075,12 @@ This is grading material only. NEVER quote, paraphrase, summarise, or hand any o
 
 CURRENT STEP ${idx + 1} of ${steps.length} — "${safeLabel(step.label)}"
 QUESTION TO ASK THE CANDIDATE:
-${step.candidate_md || safeLabel(step.label) || ''}${stepLangNote(step.candidate_md, lang)}
+${enField(step, 'candidate_md', lang) || safeLabel(step.label) || ''}${stepLangNote(enField(step, 'candidate_md', lang), lang)}
 
 ANSWER KEY (hidden — grade against this):
 ${step.interviewer_md || '(No explicit key parsed for this step. Grade using the case prompt, the exhibits, and standard MBB rigor for a step of this type. Any answer text embedded in the question above is interviewer-side — do not read it out.)'}`;
 
-  const ex = exhibitsBlock(caseObj, revealedSet);
+  const ex = exhibitsBlock(caseObj, revealedSet, lang);
   const hints = hintsBlock(step, attemptCount, hintAsked, lang);
 
   let flow;
@@ -1076,7 +1095,7 @@ Do NOT evaluate anything yet and do NOT emit a <verdict> marker on this opening 
   } else {
     const advance = isLast
       ? `Since this is the LAST step, do NOT ask a new question — give a brief, professional closing line and stop.`
-      : `Then transition and ask the NEXT step's question:\n"${(nextStep && (nextStep.candidate_md || safeLabel(nextStep.label))) || ''}"${nextStep ? stepLangNote(nextStep.candidate_md, lang) : ''}`;
+      : `Then transition and ask the NEXT step's question:\n"${(nextStep && (enField(nextStep, 'candidate_md', lang) || safeLabel(nextStep.label))) || ''}"${nextStep ? stepLangNote(enField(nextStep, 'candidate_md', lang), lang) : ''}`;
     flow =
 `\n\n════ WHAT TO DO NOW (EVALUATE) ════
 Grade the candidate's latest message against the ANSWER KEY for the current step.
@@ -1668,11 +1687,14 @@ export default async function handler(req, res) {
        схему в ограде — то есть ровно то, что перепечатать без потерь труднее
        всего. Отдаём тело сами: это тот же текст, который модель собиралась
        прочитать вслух, и едет он ТОЛЬКО для уже раскрытых экзибитов. */
+    /* Карточку кандидат ВИДИТ. Если партия идёт по-английски, а у экзибита
+       есть переведённая сторона — на карточке должна стоять она, иначе модель
+       говорит по-английски, а картинка остаётся русской. */
     const cardOf = (ex) => ex ? {
       id: ex.id,
-      title: ex.title,
-      render: ex.render || null,
-      body_md: ex.render ? null : (ex.body_md || null)
+      title: enField(ex, 'title', lang),
+      render: enField(ex, 'render', lang) || null,
+      body_md: ex.render ? null : (enField(ex, 'body_md', lang) || null)
     } : null;
     const exhibitCards = parsed.revealedExhibits
       .filter(id => !priorSet.has(id))

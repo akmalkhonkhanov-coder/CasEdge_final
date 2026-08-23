@@ -70,14 +70,16 @@ function tokenKey() {
 // Цеховой pickScenario хранит `seen` на сервере. Здесь `seen` приходит от
 // клиента, а «второй круг» объявляется словами: повтор, о котором предупредили,
 // — это повтор; молчаливый читается как «сценарии кончились».
-function pickScenario(seen) {
+function pickScenario(seen, lang) {
   const unseen = SCENARIOS.filter(s => !seen.includes(s.id));
   const pool = unseen.length ? unseen : SCENARIOS;
   const sc = pool[Math.floor(Math.random() * pool.length)];
   return {
     sc,
     exhausted: unseen.length ? null
-      : `Все ${SCENARIOS.length} сценариев пройдены. Дальше второй круг: сценарии те же, но решения ты уже принимал.`
+      : (String(lang) === 'ru'
+          ? `Все ${SCENARIOS.length} сценариев пройдены. Дальше второй круг: сценарии те же, но решения ты уже принимал.`
+          : `All ${SCENARIOS.length} scenarios are done. From here it is a second lap: the same scenarios, but you have made these decisions before.`)
   };
 }
 
@@ -143,6 +145,8 @@ export default async function handler(req, res) {
     const raw = JSON.stringify(req.body || {});
     if (raw.length > MAX_BODY_BYTES) return res.status(413).json({ error: { message: 'Payload too large.' } });
     const body = req.body || {};
+    /* Язык кандидата — один владелец на проект: refusalLang(). */
+    const lang = refusalLang(body);
     const action = body.action;
     const seen = Array.isArray(body.seenIds) ? body.seenIds.filter(x => typeof x === 'string').slice(0, 200) : [];
 
@@ -154,7 +158,7 @@ export default async function handler(req, res) {
     }
 
     if (action === 'start') {
-      const { sc, exhausted } = pickScenario(seen);
+      const { sc, exhausted } = pickScenario(seen, lang);
       const now = Date.now();
       // seed привязан к партии, а не к сценарию: одинаковый seed на два захода
       // вернул бы одинаковый порядок вариантов, и «перемешано» стало бы враньём.
@@ -237,7 +241,7 @@ export default async function handler(req, res) {
       const s = restore(st);
       s.view(now);                       // таймер закрывает партию лениво, внутри view()
       if (!s.finished) return res.status(403).json({ error: { message: 'Module not finished.' } });
-      return res.status(200).json({ reveal: s.reveal() });
+      return res.status(200).json({ reveal: s.reveal(lang) });
     }
 
     return res.status(400).json({ error: { message: 'Unknown action.' } });

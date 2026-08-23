@@ -22,12 +22,31 @@ const TIMER_MS   = 30 * 60 * 1000;
  * Числа — коридор уровня (Г1), а не число решений конкретного набора: последнее было бы
  * подсказкой к текущей партии.
  */
+/* ПАРА ЯЗЫКОВ, а не замена. Ключ — уровень партии, он ДАННЫЕ и остаётся русским
+   (по нему цех группирует наборы); переводится только печатаемое значение.
+   22.08.2026: до этого дня весь текст ниже уезжал кандидату по-русски всегда,
+   включая англоязычного и платящего, и стоял он на ПЕРВОМ экране после входа. */
 const LEVEL_NOTE = {
-  'Лёгкий':  '⚠ Тренировочный режим. На этом уровне валидных решений 21 и больше из 120 — примерно в 15 раз просторнее реального ассессмента McKinsey, где их 1–2 из 120. Уровень учит порядку ходов, а не жёсткости отбора.',
-  'Средний': '⚠ Тренировочный режим. На этом уровне валидных решений 8–20 из 120 — примерно в 8 раз просторнее реального ассессмента McKinsey, где их 1–2 из 120. Уровень учит порядку ходов, а не жёсткости отбора.',
-  'Сложный': '⚠ Тренировочный режим, самый плотный из доступных. На этом уровне валидных решений 3–7 из 120; на реальном ассессменте McKinsey — 1–2 из 120. Разрыв уже небольшой, но он есть: на отборе права на второй заход у тебя нет.',
-  'Ассессмент': '● Калибровочный режим. Валидных решений 1–2 из 120 — это плотность реального отбора McKinsey, а не тренажёрная. Сюда заходят по своей воле и без адаптации: уровень не подстроится под тебя, как на настоящем ассессменте.'
+  'Лёгкий': {
+    ru: '⚠ Тренировочный режим. На этом уровне валидных решений 21 и больше из 120 — примерно в 15 раз просторнее реального ассессмента McKinsey, где их 1–2 из 120. Уровень учит порядку ходов, а не жёсткости отбора.',
+    en: '⚠ Practice mode. At this level 21 or more of the 120 combinations are valid — roughly 15 times roomier than the real McKinsey assessment, where 1-2 of 120 are. The level teaches the order of moves, not the hardness of the screen.' },
+  'Средний': {
+    ru: '⚠ Тренировочный режим. На этом уровне валидных решений 8–20 из 120 — примерно в 8 раз просторнее реального ассессмента McKinsey, где их 1–2 из 120. Уровень учит порядку ходов, а не жёсткости отбора.',
+    en: '⚠ Practice mode. At this level 8-20 of the 120 combinations are valid — roughly 8 times roomier than the real McKinsey assessment, where 1-2 of 120 are. The level teaches the order of moves, not the hardness of the screen.' },
+  'Сложный': {
+    ru: '⚠ Тренировочный режим, самый плотный из доступных. На этом уровне валидных решений 3–7 из 120; на реальном ассессменте McKinsey — 1–2 из 120. Разрыв уже небольшой, но он есть: на отборе права на второй заход у тебя нет.',
+    en: '⚠ Practice mode, the densest available. At this level 3-7 of the 120 combinations are valid; on the real McKinsey assessment 1-2 of 120. The gap is small now, but it is there: on the screen you get no second run.' },
+  'Ассессмент': {
+    ru: '● Калибровочный режим. Валидных решений 1–2 из 120 — это плотность реального отбора McKinsey, а не тренажёрная. Сюда заходят по своей воле и без адаптации: уровень не подстроится под тебя, как на настоящем ассессменте.',
+    en: '● Calibration mode. 1-2 valid solutions of 120 — the density of the real McKinsey screen, not a trainer one. You come here by choice and without adaptation: the level will not adjust to you, exactly as on the real assessment.' }
 };
+
+/* Выбор стороны. Владелец выбора языка в проекте один — refusalLang() в
+   _entitlements.js; сюда язык приходит готовым параметром. */
+function L(v, lang) {
+  if (!v || typeof v !== 'object') return v;
+  return String(lang) === 'ru' ? (v.ru || v.en) : (v.en || v.ru);
+}
 const LEVELS_IN_BATCH = Object.keys(LEVEL_NOTE);
 
 /* ---------- чистые функции счёта ---------- */
@@ -112,11 +131,11 @@ class SeaWolfSession {
   pool() { return this.site.start.concat(this.choices[this.siteIndex].map((o, r) => this.site.rounds[r][o])); }
 
   /** ЕДИНСТВЕННОЕ, что уходит клиенту */
-  view(now = Date.now()) {
+  view(now = Date.now(), lang) {
     if (this.expired(now) && !this.finished) this._timeout();
     const s = this.site;
     const v = {
-      level: this.level, levelNote: LEVEL_NOTE[this.level],
+      level: this.level, levelNote: L(LEVEL_NOTE[this.level], lang),
       msLeft: this.msLeft(now), siteIndex: this.siteIndex, siteCount: SITE_COUNT,
       phase: this.finished ? 'done' : (this.round < ROUNDS ? 'prospect' : 'treatment'),
       site: { ranges: s.ranges, desired: s.desired, undesired: s.undesired },
@@ -129,16 +148,16 @@ class SeaWolfSession {
     return v;
   }
 
-  choose(optionIndex, now = Date.now()) {
-    if (this.finished || this.expired(now)) return this.view(now);
+  choose(optionIndex, now = Date.now(), lang) {
+    if (this.finished || this.expired(now)) return this.view(now, lang);
     if (this.round >= ROUNDS) throw new Error('pool complete');
     if (!(optionIndex >= 0 && optionIndex < 3)) throw new Error('bad option');
     this.choices[this.siteIndex].push(optionIndex);
     this.round++;
-    return this.view(now);
+    return this.view(now, lang);
   }
 
-  submit(idx, now = Date.now()) {
+  submit(idx, now = Date.now(), lang) {
     // Партия, уже закрытая (сдана или по таймеру), сдаче не подлежит. Раньше здесь
     // молча возвращался вид «готово», и повторный запрос выглядел как новая партия:
     // сервер записывал результат в историю ещё раз и двигал уровень.
@@ -160,7 +179,7 @@ class SeaWolfSession {
     this.siteMs[this.siteIndex] = now - this.siteStartedAt;
     if (this.siteIndex === SITE_COUNT - 1) this.finished = true;
     else { this.siteIndex++; this.round = 0; this.siteStartedAt = now; }
-    return this.view(now);
+    return this.view(now, lang);
   }
 
   _timeout() {                                            // Г5: несданный участок = 0%
@@ -177,7 +196,7 @@ class SeaWolfSession {
   }
 
   /** разбор — только после finished. Порядок обратный по времени (У1) */
-  reveal() {
+  reveal(lang) {
     if (!this.finished) throw new Error('reveal before finish');
     return this.game.sites.map((site, si) => {
       const ch = this.choices[si];
@@ -252,11 +271,15 @@ class SeaWolfSession {
       const timedOut = !!(this.results[si] && this.results[si].timeout);
       let verdict;
       if (timedOut && !mine) verdict = { kind: 'notPlayed',
-        head: 'Участок не сдан — кончилось время.',
-        body: `Сделано ходов: ${ch.length} из 4. На реальном ассессменте таймер один на три участка, и это половина трудности.` };
+        head: L({ ru: 'Участок не сдан — кончилось время.',
+                  en: 'Site not submitted — time ran out.' }, lang),
+        body: L({ ru: `Сделано ходов: ${ch.length} из 4. На реальном ассессменте таймер один на три участка, и это половина трудности.`,
+                  en: `Moves made: ${ch.length} of 4. On the real assessment one timer covers all three sites, and that is half the difficulty.` }, lang) };
       else if (lost) verdict = { kind: 'lostInDraft',
-        head: `Потеряно на доборе, раунд ${lost.round}.`,
-        body: `Взял ${lost.took.name} — стопроцентных решений осталось ${lost.priceTo}. ${lost.should.name} оставлял ${lost.priceFrom}.` };
+        head: L({ ru: `Потеряно на доборе, раунд ${lost.round}.`,
+                  en: `Lost in the draft, round ${lost.round}.` }, lang),
+        body: L({ ru: `Взял ${lost.took.name} — стопроцентных решений осталось ${lost.priceTo}. ${lost.should.name} оставлял ${lost.priceFrom}.`,
+                  en: `You took ${lost.took.name} — 100% solutions left: ${lost.priceTo}. ${lost.should.name} would have left ${lost.priceFrom}.` }, lang) };
       /* Ветка `ceiling` («решения не было изначально») удалена цехом игр, круг 9:
          она недостижима по построению, и это доказано перебором, а не рассуждением —
          6075 исходов (25 наборов × 81 ветка × 3 участка), `ceiling` не выпал ни разу.
@@ -265,15 +288,20 @@ class SeaWolfSession {
          Вердикт, который игрок не может увидеть, — мёртвая ветка, делающая вид,
          что живая. */
       else if (got === 100) verdict = { kind: 'clean',
-        head: 'Участок закрыт на 100%.',
-        body: kept === 4 ? 'И все четыре хода держали максимальный запас — это чистая игра на доборе.'
-                         : `Но запас ты срезал: лучших ходов ${kept} из 4. На ассессменте, где решений 1–2 из 120, такой ход и есть проигрыш.` };
+        head: L({ ru: 'Участок закрыт на 100%.', en: 'Site closed at 100%.' }, lang),
+        body: kept === 4
+          ? L({ ru: 'И все четыре хода держали максимальный запас — это чистая игра на доборе.',
+                en: 'And all four moves held the maximum margin — that is clean drafting.' }, lang)
+          : L({ ru: `Но запас ты срезал: лучших ходов ${kept} из 4. На ассессменте, где решений 1–2 из 120, такой ход и есть проигрыш.`,
+                en: `But you cut your own margin: best moves ${kept} of 4. On an assessment, where 1-2 of 120 solve it, that move is the loss.` }, lang) };
       else verdict = { kind: 'notFound',
-        head: 'Решение у тебя было — ты его не собрал.',
-        body: `${vt.length} ${vt.length === 1 ? 'трио давало' : 'трио давали'} 100%, ты сдал трио на ${got}%. Ошибка не на доборе, а на сборке лечения.` };
+        head: L({ ru: 'Решение у тебя было — ты его не собрал.',
+                  en: 'The solution was there — you did not assemble it.' }, lang),
+        body: L({ ru: `${vt.length} ${vt.length === 1 ? 'трио давало' : 'трио давали'} 100%, ты сдал трио на ${got}%. Ошибка не на доборе, а на сборке лечения.`,
+                  en: `${vt.length} ${vt.length === 1 ? 'trio gave' : 'trios gave'} 100%, you submitted a trio at ${got}%. The error is not in the draft but in assembling the treatment.` }, lang) };
 
       return {
-        siteIndex: si, levelNote: LEVEL_NOTE[this.level],
+        siteIndex: si, levelNote: L(LEVEL_NOTE[this.level], lang),
         verdict,
         lost, cost, squeeze, bestMoves: kept, cutMoves: cut,
         roundsPlayed: ch.length, timedOut,
@@ -312,4 +340,4 @@ function pick(batch, { level, seenIds = [] } = {}) {
   return pool[0];
 }
 
-module.exports = { SeaWolfSession, pick, scoreTrio, validTrios, bestAhead, ATTRS, LEVEL_NOTE, LEVELS_IN_BATCH, TIMER_MS };
+module.exports = { SeaWolfSession, pick, scoreTrio, validTrios, bestAhead, ATTRS, LEVEL_NOTE, LEVELS_IN_BATCH, TIMER_MS, L };
