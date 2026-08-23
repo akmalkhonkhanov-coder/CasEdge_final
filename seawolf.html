@@ -506,11 +506,21 @@ async function authToken(){
  try{ if(window.parent&&window.parent!==window&&typeof window.parent.swAuthToken==='function')
         return await window.parent.swAuthToken(); }catch(e){}
  return null}
+/* ЯЗЫК ОБОЛОЧКИ. Едет на сервер КАЖДЫМ ходом. Без него refusalLang(body)
+   читать нечего и берёт своё умолчание - английский: 23.08.2026 на проде
+   русский кандидат получал калибровочную строку по-английски внутри
+   полностью русского экрана. Дефект мой, внесён вместе с парностью строк
+   движка 21-22.08. Ключ и умолчание - те же, что в index.html:3710,
+   иначе оболочка и игра разъедутся на новом посетителе. */
+function uiLang(){
+ try{ return String(localStorage.getItem('caseedge_uilang')||'en').toLowerCase().indexOf('ru')===0?'ru':'en' }
+ catch(e){ return 'en' }
+}
 async function api(action,payload){
  const t=await authToken();
  const h={'content-type':'application/json'}; if(t)h['Authorization']='Bearer '+t;
  const r=await fetch(EP,{method:'POST',headers:h,
-   body:JSON.stringify(Object.assign({action:action,token:TOKEN,seenIds:P.seen},payload||{}))});
+   body:JSON.stringify(Object.assign({action:action,token:TOKEN,seenIds:P.seen,uiLang:uiLang()},payload||{}))});
  let j=null; try{ j=await r.json() }catch(e){ throw new Error('сервер ответил не JSON ('+r.status+')') }
  if(r.status===401) throw new Error('Сессия не найдена. Войди в аккаунт CasEdge и открой игру заново.');
  if(r.status===429) throw new Error('Слишком много запросов подряд. Подожди минуту и продолжи — партия не потеряна.');

@@ -173,10 +173,20 @@ async function bearer(){
   }catch(e){}
   return null;
 }
+/* ЯЗЫК ОБОЛОЧКИ. Едет на сервер КАЖДЫМ ходом. Без него refusalLang(body)
+   читать нечего и берёт своё умолчание - английский: 23.08.2026 на проде
+   русский кандидат получал калибровочную строку по-английски внутри
+   полностью русского экрана. Дефект мой, внесён вместе с парностью строк
+   движка 21-22.08. Ключ и умолчание - те же, что в index.html:3710,
+   иначе оболочка и игра разъедутся на новом посетителе. */
+function uiLang(){
+ try{ return String(localStorage.getItem('caseedge_uilang')||'en').toLowerCase().indexOf('ru')===0?'ru':'en' }
+ catch(e){ return 'en' }
+}
 async function call(action,extra){
   const h={'content-type':'application/json'};
   const tk=await bearer(); if(tk) h['Authorization']='Bearer '+tk;
-  const body=Object.assign({action,seenIds:seenIds()},STATE.token?{token:STATE.token}:{},extra||{});
+  const body=Object.assign({action,seenIds:seenIds(),uiLang:uiLang()},STATE.token?{token:STATE.token}:{},extra||{});
   const r=await fetch(SFL_API,{method:'POST',headers:h,body:JSON.stringify(body)});
   let j=null; try{ j=await r.json() }catch(e){ throw new Error('сервер ответил не JSON ('+r.status+')') }
   /* Ошибка приходит объектом {error:{message}}, а не строкой: прежний клиент
