@@ -3724,6 +3724,11 @@ window.caseedgeFbLang = function () {
 const LANG_NAMES = { en: 'English', ru: 'Russian (Русский)' };
 function setAiLang(code) {
   state.aiLang = code;
+  /* 24.08.2026, dev. Список кейсов кэшируется на весь сеанс, а отрасль в нём
+     теперь ЗАВИСИТ ОТ ЯЗЫКА. Без сброса кандидат, сменивший язык кейса,
+     видел бы отрасли на прежнем — то есть кэш пережил бы причину, по которой
+     он собран. */
+  state.caseLibCache = null;
   try { localStorage.setItem('caseedge_ailang', code); } catch(e){}
   updateLangUI();
 }
@@ -8128,8 +8133,11 @@ async function autoStartCase() {
 
   try {
     const res = await callCaseSession({
+      /* 24.08.2026, dev. Отрасль на карточке кейса переведена (288 из 400
+         несли русскую метку). Сервер выбирает сторону по `lang` — значит
+         список и автоподбор обязаны его слать, как это делает сам кейс. */
       action: 'pick', firm: state.firm, caseType: state.caseType,
-      level: candidateLevel(), seenIds: getSeenIds()
+      level: candidateLevel(), seenIds: getSeenIds(), lang: state.aiLang
     });
     if (res && res.exhausted) {
       setTyping(false);
@@ -8181,7 +8189,7 @@ async function openCaseLibrary() {
   const countEl = document.getElementById('caselib-count');
   try {
     if (!state.caseLibCache) {
-      const data = await callCaseSession({ action: 'list' });
+      const data = await callCaseSession({ action: 'list', lang: state.aiLang });
       state.caseLibCache = (data && Array.isArray(data.cases)) ? data.cases : [];
     }
     renderCaseLibrary(state.caseLibCache);
