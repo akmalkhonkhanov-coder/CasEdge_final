@@ -223,14 +223,18 @@ function lib() {
    Returns only non-spoiler meta. trap_or_clean and naive_error are the trap
    signal and the expected wrong answer — withheld so the candidate cannot see
    the twist before starting. Answer keys, prompts and exhibits are omitted. */
-export function listCases() {
+/* 24.08.2026, dev. Цех кейсов перевёл `industry` (288 из 400 несли русскую
+   отраслевую метку) и `triggers` (431 единица). Оба поля читались СЫРЫМИ:
+   англоязычный кандидат видел русскую отрасль на карточке, а модель ждала
+   от него русскую фразу, чтобы выдать экзибит. Везде enField. */
+export function listCases(lang) {
   const { data } = lib();
   // тот же фильтр, что и в автоподборе: Easy не показываем и в ручном списке
   return data.cases.filter(isServable).map(c => ({
     id: c.id,
     title: c.title,
     case_type: c.case_type,
-    industry: c.industry,
+    industry: enField(c, 'industry', lang),
     difficulty: c.difficulty,
     est_minutes: c.est_minutes,
     steps: Array.isArray(c.steps) ? c.steps.length : 0
@@ -301,15 +305,15 @@ const BAND_FALLBACK = {
   Hard: ['Hard', 'Medium']
 };
 
-function pickMeta(c) {
+function pickMeta(c, lang) {
   return {
-    id: c.id, title: c.title, case_type: c.case_type, industry: c.industry,
+    id: c.id, title: c.title, case_type: c.case_type, industry: enField(c, 'industry', lang),
     difficulty: normDiff(c.difficulty), est_minutes: c.est_minutes,
     steps: Array.isArray(c.steps) ? c.steps.length : 0
   };
 }
 
-export function pickCase({ caseType, level, seenIds, rand }) {
+export function pickCase({ caseType, level, seenIds, rand, lang }) {
   const { data } = lib();
   const seen = new Set((Array.isArray(seenIds) ? seenIds : []).map(Number));
   const r = typeof rand === 'number' ? rand : 0.5;   // deterministic unless caller passes Math.random()
@@ -327,10 +331,10 @@ export function pickCase({ caseType, level, seenIds, rand }) {
   for (const b of (BAND_FALLBACK[band] || SERVED_BANDS)) {
     const cands = pool.filter(c => normDiff(c.difficulty) === b);
     if (cands.length) {
-      return { case: pickMeta(cands[Math.floor(r * cands.length) % cands.length]), band: b, targetBand: band };
+      return { case: pickMeta(cands[Math.floor(r * cands.length) % cands.length], lang), band: b, targetBand: band };
     }
   }
-  return { case: pickMeta(pool[Math.floor(r * pool.length) % pool.length]), band: 'Medium', targetBand: band };
+  return { case: pickMeta(pool[Math.floor(r * pool.length) % pool.length], lang), band: 'Medium', targetBand: band };
 }
 
 /* ───────────────────────── marker parsing ────────────────────────────────────
@@ -633,7 +637,7 @@ function titleMatch(a, b) {
 }
 
 // Map<exhibitId, Set<trigger>> plus unmatched conditional topics [{title,triggers}]
-function caseGates(caseObj) {
+function caseGates(caseObj, lang) {
   const exhibits = Array.isArray(caseObj.exhibits) ? caseObj.exhibits : [];
   const gateMap = new Map();
   const addGate = (id, triggers) => {
@@ -641,14 +645,14 @@ function caseGates(caseObj) {
     for (const t of (triggers || [])) if (t) gateMap.get(id).add(t);
   };
   for (const ex of exhibits) {
-    if (ex.reveal === 'on_request') addGate(ex.id, ex.triggers || []);
+    if (ex.reveal === 'on_request') addGate(ex.id, enField(ex, 'triggers', lang) || []);
   }
   const unmatchedTopics = [];
   for (const s of (caseObj.steps || [])) {
     for (const ce of (s.conditional_exhibits || [])) {
       const hit = exhibits.find(ex => titleMatch(ex.title, ce.title));
-      if (hit) addGate(hit.id, ce.triggers || []);
-      else unmatchedTopics.push({ title: (ce.title || '').trim(), triggers: ce.triggers || [] });
+      if (hit) addGate(hit.id, enField(ce, 'triggers', lang) || []);
+      else unmatchedTopics.push({ title: (ce.title || '').trim(), triggers: enField(ce, 'triggers', lang) || [] });
     }
   }
   return { gateMap, unmatchedTopics };
@@ -679,7 +683,7 @@ function enField(obj, field, lang) {
 
 function exhibitsBlock(caseObj, revealedSet, lang) {
   const exhibits = Array.isArray(caseObj.exhibits) ? caseObj.exhibits : [];
-  const { gateMap, unmatchedTopics } = caseGates(caseObj);
+  const { gateMap, unmatchedTopics } = caseGates(caseObj, lang);
   const stableShown = [];
   const volatile = [];
   for (const ex of exhibits) {
@@ -1013,7 +1017,7 @@ A strong candidate opens with Step ${optEntry} — "${optStep.label || ''}" (${o
 
 FIRM STYLE: ${firmStyle(firm)}
 
-CASE: "${enField(caseObj, 'title', lang)}" — ${caseObj.case_type} · ${caseObj.industry} · ${caseObj.difficulty}
+CASE: "${enField(caseObj, 'title', lang)}" — ${caseObj.case_type} · ${enField(caseObj, 'industry', lang)} · ${caseObj.difficulty}
 
 CASE PROMPT (the scenario):
 ${enField(caseObj, 'prompt_md', lang) || enField(caseObj, 'header_md', lang) || ''}`;
@@ -1106,7 +1110,7 @@ export function buildSystemPrompt({ caseObj, stepIndex, attemptCount, firm, reve
 
 FIRM STYLE: ${firmStyle(firm)}
 
-CASE: "${enField(caseObj, 'title', lang)}" — ${caseObj.case_type} · ${caseObj.industry} · ${caseObj.difficulty}
+CASE: "${enField(caseObj, 'title', lang)}" — ${caseObj.case_type} · ${enField(caseObj, 'industry', lang)} · ${caseObj.difficulty}
 
 CASE PROMPT (the scenario):
 ${enField(caseObj, 'prompt_md', lang) || enField(caseObj, 'header_md', lang) || ''}`;
@@ -1263,7 +1267,7 @@ export default async function handler(req, res) {
 
     // 4) list action — no model call, meta only.
     if (body.action === 'list') {
-      return res.status(200).json({ cases: listCases() });
+      return res.status(200).json({ cases: listCases(body.lang === 'ru' ? 'ru' : 'en') });
     }
 
     // 4b) pick action — adaptive auto-selection, no model call, meta only.
@@ -1272,7 +1276,8 @@ export default async function handler(req, res) {
         caseType: body.caseType,
         level: body.level,
         seenIds: body.seenIds,
-        rand: Math.random()
+        rand: Math.random(),
+        lang: body.lang === 'ru' ? 'ru' : 'en'
       }));
     }
 

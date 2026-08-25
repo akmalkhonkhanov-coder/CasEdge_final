@@ -1885,7 +1885,7 @@
      "from": "q1a",
      "mech": "D2 · остаток группы, а не её доля",
      "form": "штуки",
-     "prompt": "Same Q3 figures you just used for the share: how many of the Q3 total are NOT members? (Q4 is not part of this one.)",
+     "prompt": "Same Q3 figures you just used for the share: counting Q3 alone, how many of its total are NOT members?",
      "input": "numeric",
      "answer": 700,
      "round": 0,
@@ -1898,7 +1898,8 @@
      ],
      "calc": "2000-1300=700",
      "naive_src": "input",
-     "naive_read": "chip:s7"
+     "naive_read": "chip:s7",
+     "unit": "people"
     }
    ]
   },
@@ -2270,7 +2271,7 @@
      "input": "numeric",
      "round": 2,
      "tolerance": 0.01,
-     "prompt": "Same Q1 and Q3 totals you already used: by what percent is the Q3 total above the Q1 total? (Q4 is not part of this one.)",
+     "prompt": "Same Q1 and Q3 totals you already used: by what percent is the Q3 total above the Q1 total?",
      "answer": 50,
      "naive": 33.33,
      "naive_reason": "divides the gap by the larger quarter; growth is measured FROM the quarter it starts at, and that is the smaller one",
@@ -2282,13 +2283,14 @@
      "mech": "D · рост квартала в процентах от меньшего",
      "form": "процент",
      "naive_src": "calc",
-     "naive_calc": "(3600-2400)/3600=33.3333%"
+     "naive_calc": "(3600-2400)/3600=33.3333%",
+     "unit": "%"
     },
     {
      "from": "q1a",
      "mech": "D2 · остаток группы, а не её доля",
      "form": "штуки",
-     "prompt": "Same Q3 figures you just used for the share: how many of the Q3 total are NOT members? (Q4 is not part of this one.)",
+     "prompt": "Same Q3 figures you just used for the share: counting Q3 alone, how many of its total are NOT members?",
      "input": "numeric",
      "answer": 1440,
      "round": 0,
@@ -2301,7 +2303,8 @@
      ],
      "calc": "3600-2160=1440",
      "naive_src": "input",
-     "naive_read": "chip:s8"
+     "naive_read": "chip:s8",
+     "unit": "people"
     }
    ]
   },
@@ -2836,7 +2839,8 @@
      ],
      "calc": "3*5000=15000 · 15000+15000=30000 · 30000+15000=45000 · 15000+30000+45000=90000",
      "naive_src": "calc",
-     "naive_calc": "3*5000=15000 · 15000+15000=30000 · 30000+15000=45000 · 45000+45000=90000 · 90000+45000=135000"
+     "naive_calc": "3*5000=15000 · 15000+15000=30000 · 30000+15000=45000 · 45000+45000=90000 · 90000+45000=135000",
+     "unit": "$"
     }
    ]
   },
@@ -3364,7 +3368,8 @@
      ],
      "calc": "2*3000=6000 · 6000+6000=12000 · 12000+6000=18000 · 18000+6000=24000 · 12000+18000+24000=54000",
      "naive_src": "calc",
-     "naive_calc": "2*3000=6000 · 6000+6000=12000 · 12000+6000=18000 · 18000+6000=24000 · 24000+24000=48000 · 48000+24000=72000"
+     "naive_calc": "2*3000=6000 · 6000+6000=12000 · 12000+6000=18000 · 18000+6000=24000 · 24000+24000=48000 · 48000+24000=72000",
+     "unit": "$"
     },
     {
      "from": "q4a",
@@ -3383,7 +3388,8 @@
       "s12"
      ],
      "mech": "E3 · годовой темп в долях базы, а не остатка",
-     "form": "процент"
+     "form": "процент",
+     "unit": "%"
     }
    ]
   },
@@ -3960,7 +3966,8 @@
       "s6"
      ],
      "mech": "S · итог на гектар, а не на растение",
-     "form": "число"
+     "form": "число",
+     "unit": "kg per ha per year"
     }
    ]
   },
@@ -4331,7 +4338,7 @@
     {
      "from": "q3",
      "mech": "F · структура затрат: доля постоянной части",
-     "prompt": "Same first-year cost you just built: what share of it is the fixed cost rather than the per-unit cost? Answer in percent.",
+     "prompt": "Same first-year cost you just built: what percent of it is the fixed cost rather than the per-unit cost?",
      "input": "numeric",
      "answer": 15.38,
      "round": 2,
@@ -4344,7 +4351,8 @@
      "calc": "600000/3900000=15.3846%",
      "form": "процент",
      "naive_src": "calc",
-     "naive_calc": "3900000-600000=3300000 · 600000/3300000=18.1818%"
+     "naive_calc": "3900000-600000=3300000 · 600000/3300000=18.1818%",
+     "unit": "%"
     }
    ]
   },
@@ -4754,7 +4762,8 @@
       "s4"
      ],
      "mech": "M · на пункт приходится потерянное, а не всё",
-     "form": "число"
+     "form": "число",
+     "unit": "ha per point"
     }
    ]
   },
@@ -6279,7 +6288,7 @@
      "input": "numeric",
      "round": 2,
      "tolerance": 0.01,
-     "prompt": "Same Q1 and Q3 totals you already used: by what percent is the Q3 total above the Q1 total? (Q4 is not part of this one.)",
+     "prompt": "Same Q1 and Q3 totals you already used: by what percent is the Q3 total above the Q1 total?",
      "answer": 55.56,
      "naive": 35.71,
      "naive_reason": "divides the gap by the larger quarter; growth is measured FROM the quarter it starts at, and that is the smaller one",
@@ -6291,13 +6300,14 @@
      "mech": "D · рост квартала в процентах от меньшего",
      "form": "процент",
      "naive_src": "calc",
-     "naive_calc": "(2800-1800)/2800=35.7143%"
+     "naive_calc": "(2800-1800)/2800=35.7143%",
+     "unit": "%"
     },
     {
      "from": "q1a",
      "mech": "D2 · остаток группы, а не её доля",
      "form": "штуки",
-     "prompt": "Same Q3 figures you just used for the share: how many of the Q3 total are NOT members? (Q4 is not part of this one.)",
+     "prompt": "Same Q3 figures you just used for the share: counting Q3 alone, how many of its total are NOT members?",
      "input": "numeric",
      "answer": 840,
      "round": 0,
@@ -6310,7 +6320,8 @@
      ],
      "calc": "2800-1960=840",
      "naive_src": "input",
-     "naive_read": "chip:s7"
+     "naive_read": "chip:s7",
+     "unit": "people"
     }
    ]
   },
@@ -6817,7 +6828,7 @@
      "from": "q4a",
      "mech": "E2 · сколько лет до нуля при том же темпе",
      "form": "число шагов",
-     "prompt": "Same starting level and the same annual fall: how many falls of that size would take the level to zero?",
+     "prompt": "Same starting level and the same annual fall: how many years at that rate would take the level to zero?",
      "input": "numeric",
      "answer": 20,
      "round": 2,
@@ -6830,7 +6841,8 @@
      ],
      "calc": "40/2=20.0",
      "naive_src": "window",
-     "naive_calc": "32/2=16.0"
+     "naive_calc": "32/2=16.0",
+     "unit": "years"
     },
     {
      "from": "q4b",
@@ -6850,7 +6862,8 @@
      ],
      "calc": "2*4000=8000 · 8000+8000=16000 · 16000+8000=24000 · 24000+8000=32000 · 8000+16000+24000+32000=80000",
      "naive_src": "calc",
-     "naive_calc": "2*4000=8000 · 8000+8000=16000 · 16000+8000=24000 · 24000+8000=32000 · 32000+32000=64000 · 64000+32000=96000 · 96000+32000=128000"
+     "naive_calc": "2*4000=8000 · 8000+8000=16000 · 16000+8000=24000 · 24000+8000=32000 · 32000+32000=64000 · 64000+32000=96000 · 96000+32000=128000",
+     "unit": "$"
     }
    ]
   },
@@ -7352,7 +7365,7 @@
      "from": "q4a",
      "mech": "E2 · сколько лет до нуля при том же темпе",
      "form": "число шагов",
-     "prompt": "Same starting level and the same annual fall: how many falls of that size would take the level to zero?",
+     "prompt": "Same starting level and the same annual fall: how many years at that rate would take the level to zero?",
      "input": "numeric",
      "answer": 16.67,
      "round": 2,
@@ -7365,7 +7378,8 @@
      ],
      "calc": "50/3=16.6667",
      "naive_src": "window",
-     "naive_calc": "38/3=12.6667"
+     "naive_calc": "38/3=12.6667",
+     "unit": "years"
     }
    ]
   },
@@ -8497,7 +8511,8 @@
       "s7"
      ],
      "mech": "S · итог на гектар, а не на растение",
-     "form": "число"
+     "form": "число",
+     "unit": "kg per ha per year"
     }
    ]
   },
@@ -8867,7 +8882,7 @@
     {
      "from": "q3",
      "mech": "F · структура затрат: доля постоянной части",
-     "prompt": "Same first-year cost you just built: what share of it is the fixed cost rather than the per-unit cost? Answer in percent.",
+     "prompt": "Same first-year cost you just built: what percent of it is the fixed cost rather than the per-unit cost?",
      "input": "numeric",
      "answer": 14.6,
      "round": 2,
@@ -8880,7 +8895,8 @@
      "calc": "400000/2740000=14.5985%",
      "form": "процент",
      "naive_src": "calc",
-     "naive_calc": "2740000-400000=2340000 · 400000/2340000=17.0940%"
+     "naive_calc": "2740000-400000=2340000 · 400000/2340000=17.0940%",
+     "unit": "%"
     }
    ]
   },
@@ -10506,7 +10522,7 @@
      "from": "q1a",
      "mech": "D2 · остаток группы, а не её доля",
      "form": "штуки",
-     "prompt": "Same Q3 figures you just used for the share: how many of the Q3 total are NOT members? (Q4 is not part of this one.)",
+     "prompt": "Same Q3 figures you just used for the share: counting Q3 alone, how many of its total are NOT members?",
      "input": "numeric",
      "answer": 1050,
      "round": 0,
@@ -10519,7 +10535,8 @@
      ],
      "calc": "3000-1950=1050",
      "naive_src": "input",
-     "naive_read": "chip:s9"
+     "naive_read": "chip:s9",
+     "unit": "people"
     }
    ]
   },
@@ -10882,7 +10899,7 @@
      "from": "q1a",
      "mech": "D2 · остаток группы, а не её доля",
      "form": "штуки",
-     "prompt": "Same Q3 figures you just used for the share: how many of the Q3 total are NOT annual members? (Q4 is not part of this one.)",
+     "prompt": "Same Q3 figures you just used for the share: counting Q3 alone, how many of its total are NOT annual members?",
      "input": "numeric",
      "answer": 720,
      "round": 0,
@@ -10895,7 +10912,8 @@
      ],
      "calc": "2400-1680=720",
      "naive_src": "input",
-     "naive_read": "chip:s7"
+     "naive_read": "chip:s7",
+     "unit": "people"
     }
    ]
   },
@@ -11460,7 +11478,7 @@
      "from": "q4a",
      "mech": "E2 · сколько лет до нуля при том же темпе",
      "form": "число шагов",
-     "prompt": "Same starting level and the same annual fall: how many falls of that size would take the level to zero?",
+     "prompt": "Same starting level and the same annual fall: how many years at that rate would take the level to zero?",
      "input": "numeric",
      "answer": 22.5,
      "round": 2,
@@ -11473,7 +11491,8 @@
      ],
      "calc": "45/2=22.5",
      "naive_src": "window",
-     "naive_calc": "35/2=17.5"
+     "naive_calc": "35/2=17.5",
+     "unit": "years"
     }
    ]
   },
@@ -11976,7 +11995,7 @@
      "from": "q4a",
      "mech": "E2 · сколько лет до нуля при том же темпе",
      "form": "число шагов",
-     "prompt": "Same starting level and the same annual fall: how many falls of that size would take the level to zero?",
+     "prompt": "Same starting level and the same annual fall: how many years at that rate would take the level to zero?",
      "input": "numeric",
      "answer": 13.75,
      "round": 2,
@@ -11989,7 +12008,8 @@
      ],
      "calc": "55/4=13.75",
      "naive_src": "window",
-     "naive_calc": "39/4=9.75"
+     "naive_calc": "39/4=9.75",
+     "unit": "years"
     },
     {
      "from": "q4b",
@@ -12009,7 +12029,8 @@
      ],
      "calc": "4*7000=28000 · 28000+28000=56000 · 56000+28000=84000 · 84000+28000=112000 · 28000+56000+84000+112000=280000",
      "naive_src": "calc",
-     "naive_calc": "4*7000=28000 · 28000+28000=56000 · 56000+28000=84000 · 84000+28000=112000 · 112000+112000=224000 · 224000+112000=336000 · 336000+112000=448000"
+     "naive_calc": "4*7000=28000 · 28000+28000=56000 · 56000+28000=84000 · 84000+28000=112000 · 112000+112000=224000 · 224000+112000=336000 · 336000+112000=448000",
+     "unit": "$"
     }
    ]
   },
@@ -12425,7 +12446,7 @@
     },
     {
      "id": "s9",
-     "text": "3",
+     "text": "A 3",
      "role": "needed",
      "used_in": [
       "q1",
@@ -12434,7 +12455,7 @@
     },
     {
      "id": "s10",
-     "text": "5",
+     "text": "B 5",
      "role": "needed",
      "used_in": [
       "q1",
@@ -12443,7 +12464,7 @@
     },
     {
      "id": "s11",
-     "text": "2",
+     "text": "C 2",
      "role": "needed",
      "used_in": [
       "q1",
@@ -13105,7 +13126,8 @@
       "s11"
      ],
      "mech": "R · отношение вкладов двух групп",
-     "form": "число"
+     "form": "число",
+     "unit": "kg of A per kg of C"
     }
    ]
   },
@@ -13478,7 +13500,7 @@
     {
      "from": "q3",
      "mech": "F · структура затрат: доля постоянной части",
-     "prompt": "Same first-year cost you just built: what share of it is the fixed cost rather than the per-unit cost? Answer in percent.",
+     "prompt": "Same first-year cost you just built: what percent of it is the fixed cost rather than the per-unit cost?",
      "input": "numeric",
      "answer": 24.1,
      "round": 2,
@@ -13491,7 +13513,8 @@
      "calc": "500000/2075000=24.0964%",
      "form": "процент",
      "naive_src": "calc",
-     "naive_calc": "2075000-500000=1575000 · 500000/1575000=31.7460%"
+     "naive_calc": "2075000-500000=1575000 · 500000/1575000=31.7460%",
+     "unit": "%"
     }
    ]
   },
@@ -15143,7 +15166,7 @@
      "input": "numeric",
      "round": 2,
      "tolerance": 0.01,
-     "prompt": "Same Q1 and Q3 totals you already used: by what percent is the Q3 total above the Q1 total? (Q4 is not part of this one.)",
+     "prompt": "Same Q1 and Q3 totals you already used: by what percent is the Q3 total above the Q1 total?",
      "answer": 50,
      "naive": 33.33,
      "naive_reason": "divides the gap by the larger quarter; growth is measured FROM the quarter it starts at, and that is the smaller one",
@@ -15155,13 +15178,14 @@
      "mech": "D · рост квартала в процентах от меньшего",
      "form": "процент",
      "naive_src": "calc",
-     "naive_calc": "(2700-1800)/2700=33.3333%"
+     "naive_calc": "(2700-1800)/2700=33.3333%",
+     "unit": "%"
     },
     {
      "from": "q1a",
      "mech": "D2 · остаток группы, а не её доля",
      "form": "штуки",
-     "prompt": "Same Q3 figures you just used for the share: how many of the Q3 total are NOT loyalty members? (Q4 is not part of this one.)",
+     "prompt": "Same Q3 figures you just used for the share: counting Q3 alone, how many of its total are NOT loyalty members?",
      "input": "numeric",
      "answer": 810,
      "round": 0,
@@ -15174,7 +15198,8 @@
      ],
      "calc": "2700-1890=810",
      "naive_src": "input",
-     "naive_read": "chip:s13"
+     "naive_read": "chip:s13",
+     "unit": "people"
     }
    ]
   },
@@ -15531,7 +15556,7 @@
      "input": "numeric",
      "round": 2,
      "tolerance": 0.01,
-     "prompt": "Same Q1 and Q3 totals you already used: by what percent is the Q3 total above the Q1 total? (Q4 is not part of this one.)",
+     "prompt": "Same Q1 and Q3 totals you already used: by what percent is the Q3 total above the Q1 total?",
      "answer": 33.33,
      "naive": 133.33,
      "naive_reason": "gives the RATIO of the two quarters, not the growth; growth is that ratio minus one hundred percent",
@@ -15543,7 +15568,8 @@
      "mech": "D · рост квартала в процентах от меньшего",
      "form": "процент",
      "naive_src": "calc",
-     "naive_calc": "2000/1500=133.3333%"
+     "naive_calc": "2000/1500=133.3333%",
+     "unit": "%"
     }
    ]
   },
@@ -16084,7 +16110,7 @@
      "from": "q4a",
      "mech": "E2 · сколько лет до нуля при том же темпе",
      "form": "число шагов",
-     "prompt": "Same starting level and the same annual fall: how many falls of that size would take the level to zero?",
+     "prompt": "Same starting level and the same annual fall: how many years at that rate would take the level to zero?",
      "input": "numeric",
      "answer": 16,
      "round": 2,
@@ -16097,7 +16123,8 @@
      ],
      "calc": "48/3=16.0",
      "naive_src": "window",
-     "naive_calc": "36/3=12.0"
+     "naive_calc": "36/3=12.0",
+     "unit": "years"
     }
    ]
   },
@@ -16965,7 +16992,7 @@
      "input": "numeric",
      "round": 2,
      "tolerance": 0.01,
-     "prompt": "Same program cost you just built: what does it come to per household the program serves?",
+     "prompt": "Same program cost you just built: what is the cost per household that the program serves?",
      "answer": 33.33,
      "calc": "60000*25=1500000 · 1500000+500000=2000000 · 2000000/60000=33.3333",
      "naive": 8.33,
@@ -16978,7 +17005,8 @@
      ],
      "mech": "J · стоимость программы на обслуживаемого",
      "form": "доллары",
-     "naive_calc": "500000/60000=8.3333"
+     "naive_calc": "500000/60000=8.3333",
+     "unit": "$ per household"
     }
    ]
   },
@@ -17310,7 +17338,7 @@
     },
     {
      "id": "s5",
-     "text": "9",
+     "text": "9 respiratory-illness cases",
      "role": "needed",
      "used_in": [
       "q2",
@@ -17368,7 +17396,7 @@
      "input": "numeric",
      "round": 2,
      "tolerance": 0.01,
-     "prompt": "Same first-year setup cost you just built: what share of it is the fixed cost rather than the stove cost? Answer in percent.",
+     "prompt": "Same first-year setup cost you just built: what percent of it is the fixed cost rather than the stove cost?",
      "answer": 18.52,
      "calc": "450000/2430000=18.5185%",
      "naive": 22.73,
@@ -17380,7 +17408,8 @@
       "s7"
      ],
      "mech": "F · структура затрат: доля постоянной части",
-     "form": "процент"
+     "form": "процент",
+     "unit": "%"
     }
    ]
   },
@@ -17750,7 +17779,7 @@
     {
      "from": "q2",
      "mech": "A · отношение двух зон в простейшем виде (нечисловой ответ)",
-     "prompt": "State the Alpine : Forest area ratio in its simplest whole-number form, as \"x : y\", in that order.",
+     "prompt": "Same two zone areas you just compared: in simplest whole numbers, written \"x : y\" with Alpine first, what is the Alpine-to-Forest area ratio?",
      "input": "text",
      "answer": "4 : 3",
      "round": 0,
@@ -17764,7 +17793,8 @@
      "calc": "3200/2400=1.3333 · 4/3=1.3333",
      "form": "отношение",
      "naive_src": "calc",
-     "naive_calc": "3200/100=32 · 2400/100=24"
+     "naive_calc": "3200/100=32 · 2400/100=24",
+     "unit": "x : y"
     }
    ]
   },
@@ -18849,7 +18879,7 @@
      "input": "numeric",
      "round": 2,
      "tolerance": 0.01,
-     "prompt": "Same two reported operating-profit figures and the change you just computed: the Year-2 result is how many times that change?",
+     "prompt": "Same two reported operating-profit figures and the change you just computed: the Year-2 result is how many times the size of that change?",
      "answer": 3.35,
      "calc": "57/17=3.3529",
      "naive": 2.59,
@@ -18862,7 +18892,8 @@
       "s4"
      ],
      "mech": "P · результат года к своему же сдвигу за год",
-     "form": "число"
+     "form": "число",
+     "unit": "times"
     }
    ]
   },
@@ -19539,7 +19570,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Adult herd: naive (no replacement) vs realized",
+     "title": "Adult herd: cull only vs cull with recruits",
      "kind": "table",
      "body": {
       "columns": [
@@ -19552,7 +19583,7 @@
       ],
       "rows": [
        {
-        "label": "Naive (cull only)",
+        "label": "Cull only (no replacement)",
         "cells": [
          100000,
          60000,
@@ -19563,7 +19594,7 @@
         ]
        },
        {
-        "label": "Realized (with recruits)",
+        "label": "Cull with recruits",
         "cells": [
          100000,
          90000,
@@ -20832,7 +20863,7 @@
     {
      "from": "q3",
      "mech": "F · структура затрат: доля постоянной части",
-     "prompt": "Same first-year cost you just built: what share of it is the fixed cost rather than the per-unit cost? Answer in percent.",
+     "prompt": "Same first-year cost you just built: what percent of it is the fixed cost rather than the per-unit cost?",
      "input": "numeric",
      "answer": 19.23,
      "round": 2,
@@ -20845,7 +20876,8 @@
      "calc": "400000/2080000=19.2308%",
      "form": "процент",
      "naive_src": "calc",
-     "naive_calc": "2080000-400000=1680000 · 400000/1680000=23.8095%"
+     "naive_calc": "2080000-400000=1680000 · 400000/1680000=23.8095%",
+     "unit": "%"
     }
    ]
   },

@@ -262,7 +262,14 @@ function sanitizeGame(game, revealedSet) {
         template: rep.written.template,
         blanks: (rep.written.blanks || []).map(b => ({ key: b.key, input: b.input || 'numeric', options: b.options || null }))
       } : null,
-      graph_selection: rep.graph_selection ? { prompt: rep.graph_selection.prompt, options: rep.graph_selection.options || [] } : null,
+      /* 24.08.2026, dev. Единственный промпт, уходивший кандидату МИМО scrubPrompt.
+         Замер по боевому файлу: из 57 промптов выбора графика решение в хвосте
+         не несёт ни один, НО игра 46 писала «on the naive cull-only path» —
+         то есть словом «naive» показывала кандидату, какая линия ловушка.
+         Прогоняем через тот же скраб, что и остальные 602 промпта; ключ —
+         правильный вариант ответа. Изменяет ровно 1 промпт из 57, и ровно
+         снятием этого слова. */
+      graph_selection: rep.graph_selection ? { prompt: scrubPrompt(rep.graph_selection.prompt, [rep.graph_selection.answer]), options: rep.graph_selection.options || [] } : null,
       visual_report: rep.visual_report ? { fields: (rep.visual_report.fields || []).map(f => ({ key: f.key, input: f.input || 'numeric', options: f.options || null })) } : null
     },
     cases: (game.cases || []).map(c => ({ c: c.c, kind: c.kind, prompt: scrubPrompt(c.prompt, [c.answer, c.naive]), input: c.input || 'numeric', options: c.options || null }))

@@ -144,6 +144,7 @@ GRADE IN THIS ORDER (all applicable gates must pass):
 3. DEAD-ORDER: if the candidate leads with a DEAD branch (their 1st or 2nd idea) and does NOT dismiss it, that is an ORDER defect → FAIL. A DEAD branch named later, or named and explicitly dismissed with a valid reason, is NOT a defect.
 4. COVER: at least 2 of the required axes must be covered by meaning. Fewer → FAIL.
 5. VOLUME EARNS NOTHING: do not reward a longer list. Six ideas and three ideas with the same coverage and LOAD named score identically.
+5b. FIGURES: if an idea rests on a number that contradicts the FACTS — wrong by an order of magnitude, a share above 100%, a quantity larger than the stock it is drawn from — name it in the coaching. This is NOT a gate: this drill grades the generation of ideas, not arithmetic. Do not fail an otherwise covering list for it.
 6. CULL (only if a CULL block is present): the candidate must name EXACTLY the reference kill-set (by meaning of which team ideas die), each with a correct and distinct reason. An extra kill fails as hard as a miss; a wrong reason on any kill = FAIL.
 
 PASS = every applicable gate passes.
@@ -404,9 +405,64 @@ const SY_GRADER_SYSTEM = `You are a strict but fair MBB synthesis drill grader. 
 CONCLUSION FIRST IS A HARD GATE. The candidate's first sentence must BE the recommendation - an action verb with a subject ("We recommend X", "BuildCo should Y"). A correct conclusion that arrives after the supporting facts FAILS, and the coaching must say so in those words. This is the single most expensive habit on a real interview and it is not negotiable here.
 Then: does the answer name the figure that decides it? Does it drop, or explicitly set aside, the decoy the record is built around? Does it carry at least the risks and next step the checklist asks for?
 A candidate who reaches the same verdict by a different route PASSES. A candidate who lands on the naive read PASSES NOTHING, however fluent.
-Never invent a number that is not in the record.
+
+FIGURES MUST AGREE WITH THE RECORD. Check every number the candidate states against the RECORD above. A figure that contradicts the record — wrong by an order of magnitude, a share above 100%, a quantity larger than the stock it is drawn from — is a defect and must be named in the coaching. When the contradicting figure is the one the recommendation RESTS ON, that is a FAIL: naming the deciding figure is the point of this drill, and a deciding figure that cannot be true names nothing. A stray slip in a supporting sentence is a coaching note, not a fail.
+You yourself must never invent a number that is not in the record.
 
 Return: {"pass": boolean, "coaching": "1-2 sentences naming what was missed or what was strong"}`;
+
+/* ─────────────────── СЛУЖЕБНЫЕ БЛОКИ ЦЕХА В ЭТАЛОНЕ ────────────────────────
+   24.08.2026, находка цеха дриллов. `reference` возвращается кандидату ДОСЛОВНО
+   после каждой оценённой попытки, и вместе с решением он читал внутренние
+   блоки цеха. Замер по боевым мастерам: 206 вхождений в пяти библиотеках
+   из шести — [DUP] (спор «не близнец ли слот»), [BUILD] (доказательство
+   собранного числа, вместе с питоновским кодом), [TWO LEVERS], [ONE LEVER].
+
+   Правило РАЗНОЕ, потому что классы разные, и это видно по материалу:
+     · [DUP] и [BUILD] — сам ТЕКСТ внутренний. Режем абзац целиком, вместе
+       с прилипшим блоком кода.
+     · [TWO LEVERS] и [ONE LEVER] — текст ПОЛЕЗНЫЙ (разбор чувствительности),
+       внутренний только ярлык. Снимаем ярлык, текст остаётся.
+
+   Материал правит цех — это их 103 места. Здесь СЕТЬ: движок не должен
+   зависеть от того, что цех никогда не оступится. Тот же принцип, что
+   у scrubPrompt в Redrock. */
+const REF_INTERNAL = /\[(?:DUP|BUILD)\]/;
+const REF_LABEL = /\*{0,2}\[(?:TWO LEVERS|ONE LEVER)\]\*{0,2}\s*/g;
+function refBlocks(s) {
+  // абзацы, но огороженный блок кода — ОДИН неделимый кусок
+  const out = []; let pos = 0;
+  const fence = /```[\s\S]*?```/g; let m;
+  while ((m = fence.exec(s)) !== null) {
+    for (const p of s.slice(pos, m.index).split('\n\n')) out.push(p);
+    out.push(m[0]); pos = m.index + m[0].length;
+  }
+  for (const p of s.slice(pos).split('\n\n')) out.push(p);
+  return out;
+}
+function scrubReference(v) {
+  if (typeof v !== 'string' || !v) return v;
+  const parts = refBlocks(v);
+  const keep = [];
+  for (let i = 0; i < parts.length;) {
+    if (REF_INTERNAL.test(parts[i])) {
+      i++;
+      // пустые куски между абзацем и блоком кода — артефакт нарезки
+      let j = i; while (j < parts.length && parts[j].trim() === '') j++;
+      while (j < parts.length && parts[j].trimStart().startsWith('```')) {
+        i = j + 1; j = i;
+        while (j < parts.length && parts[j].trim() === '') j++;
+      }
+      continue;
+    }
+    keep.push(parts[i]); i++;
+  }
+  return keep.join('\n\n').replace(REF_LABEL, '').replace(/\n{3,}/g, '\n\n').trim();
+}
+function scrubReferencePair(r) {
+  if (!r || typeof r !== 'object') return r;
+  return { en: scrubReference(r.en || ''), ru: scrubReference(r.ru || '') };
+}
 
 async function gradeDrill(d, answer, fbLang) {
   if (d.type === 'Synthesis') {
@@ -581,7 +637,7 @@ export default async function handler(req, res) {
         return res.status(200).json({
           pass: !!rb.pass,
           coaching: rb.coaching || '',
-          reference: brRef || { en: rb.model || '', ru: '' }
+          reference: scrubReferencePair(brRef) || { en: rb.model || '', ru: '' }
         });
       }
 
@@ -599,7 +655,7 @@ export default async function handler(req, res) {
       return res.status(200).json({
         pass: !!r.pass,
         coaching: r.coaching || '',
-        reference: d.reference || { en: '', ru: '' },
+        reference: scrubReferencePair(d.reference) || { en: '', ru: '' },
         provoked: d.provoked || { en: '', ru: '' },
         exhibit: revealExhibit,
         exhibit_mode: d.exhibit_mode || null
