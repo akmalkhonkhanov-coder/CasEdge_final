@@ -820,6 +820,33 @@ Never do ANY of the following, at any attempt level:
 - credit the candidate with anything they did not actually say. If it is not in
   their own words in this transcript, it did not happen.`;
 
+/* 27.08.2026, dev. Класс дефекта тот же, что в регистрах ST: МОЛЧАНИЕ ЧИТАЕТСЯ КАК
+   ОТСУТСТВИЕ ТРЕБОВАНИЯ. Три ветки ниже собирали строку как `шапка + (h.L1 || '')`.
+   На 2 495 шагах из 2 912 авторской подсказки нет вовсе, и модель получала
+   «дай подсказку первой ступени» и пустоту после двоеточия - то есть приказ
+   подсказать без единого слова о том, чем подсказывать. Пустота заполняется
+   выдумкой: числом или строкой отчёта, которых кандидат не писал. Поэтому вместо
+   пустой строки подставляется явный текст о том, что подсказки нет и что это
+   НЕ разрешение её сочинить. */
+const NO_STEER = '. NOTE: no steer text was authored for this step. That silence is NOT a licence '
+  + 'to invent one: do not name a figure, a row, an exhibit or a method the candidate has not '
+  + 'already written themselves; ask them where they would look next, and stop';
+const NO_STEER_L3 = '\nNo steer text was authored for this step: take the mechanism from the case '
+  + 'material itself (the exhibit and the rubric answer for this step) and do not invent a number '
+  + 'or a line item that is not in it.';
+/* Второй случай молчания, и он ДРУГОЙ. На пути interviewee-led (им идёт BCG)
+   `hintsBlock` вызывается со `step === null` НАРОЧНО: кандидат может стоять на
+   любом из разблокированных шагов, и подать L1 не того шага - слить чужой ключ.
+   То есть подсказка есть, её просто не подают. Сказать здесь «автор не написал»
+   было бы неправдой, поэтому текст свой. */
+const NO_STEER_MODE = '. NOTE: per-step steer texts are deliberately withheld in this mode, because '
+  + 'the candidate may be standing on any unlocked step. Steer from the key you already hold for the '
+  + 'step they are actually working on. This is NOT a licence to invent: do not name a figure, a row, '
+  + 'an exhibit or a method the candidate has not already written themselves';
+const NO_STEER_L3_MODE = '\nPer-step steer texts are deliberately withheld in this mode: take the '
+  + 'mechanism from the key of the step they are actually working on, and do not invent a number or a '
+  + 'line item that is not in it.';
+
 function hintsBlock(step, attemptCount, asked, lang) {
   /* 23.08.2026, dev. Подсказки переведены (`hints_en`, 319 шагов), но этот блок
      читал СЫРОЕ поле `step.hints` и английский вариант не видел вовсе: кейс шёл
@@ -827,6 +854,11 @@ function hintsBlock(step, attemptCount, asked, lang) {
      что и остальной материал шага. */
   const h = enField(step, 'hints', lang) || {};
   const n = Number(attemptCount) || 0;
+  /* `step === null` - это УДЕРЖАНИЕ подсказки режимом, а не молчание автора.
+     Два разных факта, две разные строки. */
+  const withheld = (step === null || step === undefined);
+  const gap = withheld ? NO_STEER_MODE : NO_STEER;
+  const gapL3 = withheld ? NO_STEER_L3_MODE : NO_STEER_L3;
   /* 09.08.2026, замер на проде. Кейс шёл ПОЛНОСТЬЮ по-русски, а подсказка первой
      ступени вышла по-английски. Причина механическая: этот блок написан
      по-английски, содержит английские примеры «Good:/Bad:» и стоит последним
@@ -864,13 +896,13 @@ Bad:  "What happens to that $6,256,477 of allocated fixed cost?" — you just to
   }
 
   if (asked && n <= 0) {
-    return `\n\nHINT POLICY — THE CANDIDATE ASKED FOR A HINT. Give the Level-1 steer${h.L1 ? `: ${h.L1}` : ''}
+    return `\n\nHINT POLICY — THE CANDIDATE ASKED FOR A HINT. Give the Level-1 steer${h.L1 ? `: ${h.L1}` : gap}
 — point at WHERE to look, not at what they will find there. One or two sentences,
 then stop and let them work.${NEVER_SAY}${langLine}`;
   }
 
   if (n === 1) {
-    return `\n\nHINT POLICY — ATTEMPT 2. A narrow directional steer is now allowed${h.L1 ? `: ${h.L1}` : ''}.
+    return `\n\nHINT POLICY — ATTEMPT 2. A narrow directional steer is now allowed${h.L1 ? `: ${h.L1}` : gap}.
 Point at WHERE to look — an exhibit, a row, a quantity they have not questioned —
 never at what they will find there. One or two sentences, then stop.${NEVER_SAY}${langLine}`;
   }
@@ -880,7 +912,7 @@ never at what they will find there. One or two sentences, then stop.${NEVER_SAY}
   if (h.L2) lines.push(`Level-2 steer: ${h.L2}`);
   return `\n\nHINT POLICY — ATTEMPT ${n + 1}. They have missed this ${n} times. You may now give the
 mechanism itself, plainly, and then ask them to redo the calculation with it.${
-  lines.length ? '\nUse:\n- ' + lines.join('\n- ') : ''}
+  lines.length ? '\nUse:\n- ' + lines.join('\n- ') : gapL3}
 Do not soften it and do not pretend they nearly had it.${NEVER_SAY}${langLine}`;
 }
 
