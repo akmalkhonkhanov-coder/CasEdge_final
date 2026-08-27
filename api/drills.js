@@ -357,18 +357,52 @@ async function graderJSON(system, userText, maxTokens) {
   return parsed;
 }
 
+/* 27.08.2026, dev. Один и тот же класс третий раз: регистры ST (26.08),
+   лестница подсказок кейса (27.08), теперь BR и SY. Регистр, которого в слоте
+   нет, уезжал грейдеру ЗАГОЛОВКОМ И ПУСТОТОЙ, а пустота читается как «требований
+   нет». Помощник теперь один на все три библиотеки, чтобы четвёртого раза
+   не было: новый регистр в любой из них получает защиту даром. */
+const REGISTERS = {
+  Brainstorm:  ['load', 'cover', 'dead', 'grader'],
+  Structuring: ['cover', 'decoy', 'me', 'drive', 'order'],
+  Synthesis:   ['naive', 'decoy', 'support', 'risks', 'next'],
+};
+/* Подполя `key`, которые движок читает ОТДЕЛЬНО (не через reg) и которые поэтому
+   не считаются чужими. Всё, чего нет ни здесь, ни в REGISTERS, материал носит
+   зря: до грейдера оно не доезжает. */
+const REG_EXTRA = { Brainstorm: ['cull'], Structuring: [], Synthesis: [] };
+function reg(k, name) {
+  const v = k && k[name];
+  if (typeof v === 'string' && v.trim()) return v;
+  return '(NOT SUPPLIED - this register is missing from the slot. Absence is NOT '
+       + '"no requirement": do not invent one and do not score this register at all.)';
+}
+/* Печатает в лог ДВА факта: какого требуемого регистра в слоте нет и какое имя
+   слот несёт мимо движка. Второе - зеркало первого, и его нельзя увидеть,
+   читая только код. */
+function regTelemetry(type, d, k) {
+  const req = REGISTERS[type] || [];
+  const known = new Set(req.concat(REG_EXTRA[type] || []));
+  const missing = req.filter(n => !(typeof k[n] === 'string' && k[n].trim()));
+  const alien = Object.keys(k || {}).filter(n => !known.has(n));
+  if (missing.length || alien.length) {
+    try { console.log('CASEDGE_TELEMETRY ' + JSON.stringify({ ev: 'register_gap', lib: type, drill: d.id, missing, alien })); } catch (e) {}
+  }
+}
+
 // Brainstorm (BR): grade the idea list (and, for CULL slots, the cull answer) by
 // meaning against LOAD/COVER/DEAD (+ kill-set). `cullAnswer` is null on single-move
 // (non-CULL) slots and on the interim move-1 reveal.
 async function gradeBR(d, answer, cullAnswer, fbLang) {
   const k = d.key || {};
+  regTelemetry('Brainstorm', d, k);
   let u = 'CASE QUESTION: ' + d.prompt +
     '\n\nFACTS GIVEN TO CANDIDATE:\n- ' + (d.facts || []).join('\n- ') +
     '\n\n--- GRADING REGISTERS (answer key, RUSSIAN — match by meaning) ---' +
-    '\nLOAD (load-bearing idea, gate):\n' + (k.load || '') +
-    '\n\nCOVER (required axes, ≥2):\n' + (k.cover || '') +
-    '\n\nDEAD (branches the facts kill):\n' + (k.dead || '') +
-    '\n\nGRADER SYNONYMS:\n' + (k.grader || '') +
+    '\nLOAD (load-bearing idea, gate):\n' + reg(k, 'load') +
+    '\n\nCOVER (required axes, ≥2):\n' + reg(k, 'cover') +
+    '\n\nDEAD (branches the facts kill):\n' + reg(k, 'dead') +
+    '\n\nGRADER SYNONYMS:\n' + reg(k, 'grader') +
     '\n\n--- CANDIDATE IDEA LIST ---\n' + String(answer || '');
   if (d.cull && k.cull && cullAnswer != null) {
     const c = k.cull;
@@ -491,14 +525,15 @@ function scrubReferencePair(r) {
 async function gradeDrill(d, answer, fbLang) {
   if (d.type === 'Synthesis') {
     const k = d.key || {};
+    regTelemetry('Synthesis', d, k);
     const u = 'PROMPT: ' + d.prompt +
       '\nRECORD: ' + JSON.stringify(d.exhibit || {}) +
       '\n\n--- ANSWER KEY (server-only) ---' +
-      '\nNAIVE READ: ' + (k.naive || '') +
-      '\nDECOY: ' + (k.decoy || '') +
-      '\nSUPPORT: ' + (k.support || '') +
-      '\nRISKS: ' + (k.risks || '') +
-      '\nNEXT STEP: ' + (k.next || '') +
+      '\nNAIVE READ: ' + reg(k, 'naive') +
+      '\nDECOY: ' + reg(k, 'decoy') +
+      '\nSUPPORT: ' + reg(k, 'support') +
+      '\nRISKS: ' + reg(k, 'risks') +
+      '\nNEXT STEP: ' + reg(k, 'next') +
       '\n\nPASS CHECKLIST: ' + (d.checklist && (d.checklist.en || d.checklist.ru) || '') +
       '\nREFERENCE SOLUTION: ' + (d.reference && (d.reference.en || d.reference.ru) || '') +
       '\nCANDIDATE ANSWER: ' + String(answer || '');
@@ -524,36 +559,24 @@ async function gradeDrill(d, answer, fbLang) {
    и ни один гейт этого не видел, потому что ошибки не было: было молчание.
    Теперь отсутствие регистра ОБЪЯВЛЯЕТСЯ грейдеру словами, а не пустотой,
    и уходит в телеметрию. Условие PASS не меняется. */
-const ST_REGISTERS = ['cover', 'decoy', 'me', 'drive', 'order'];
-const ST_REG_KNOWN = new Set(ST_REGISTERS.concat(['s0']));
-function stReg(k, name) {
-  const v = k && k[name];
-  if (typeof v === 'string' && v.trim()) return v;
-  return '(NOT SUPPLIED - this register is missing from the slot. Absence is NOT '
-       + '"no requirement": do not invent one and do not score this register at all.)';
-}
   if (d.type === 'Structuring' && d.key) {
     const k = d.key;
     const exhibitTxt = d.exhibit ? ('EXHIBIT (visible to candidate for this grade):\n' + JSON.stringify({ header: d.exhibit.header, rows: d.exhibit.rows })) : 'EXHIBIT: none / withheld';
     const u = 'ANCHOR QUESTION: ' + d.prompt +
       '\n\n--- GRADING REGISTERS (answer key) ---' +
-      '\nCOVER (required branches):\n' + stReg(k, 'cover') +
-      '\n\nDECOY (reflexive branches — must not lead):\n' + stReg(k, 'decoy') +
-      '\n\nME (incompatible pairs):\n' + stReg(k, 'me') +
+      '\nCOVER (required branches):\n' + reg(k, 'cover') +
+      '\n\nDECOY (reflexive branches — must not lead):\n' + reg(k, 'decoy') +
+      '\n\nME (incompatible pairs):\n' + reg(k, 'me') +
       /* 23.08.2026, dev. Находка цеха дриллов: регистр DRIVE объявлен в комментарии
          выше и заполнен у 49 слотов из 50, но до грейдера не доходил ВООБЩЕ.
          Дерево из одних заголовков проходило так же, как дерево с метриками.
          Отдаём регистр грейдеру, но УСЛОВИЕ PASS НЕ МЕНЯЕМ: иначе сложность
          50 слотов сдвинется одним ходом и без замера. */
-      '\n\nDRIVE (what to measure under each branch):\n' + stReg(k, 'drive') +
-      '\n\nORDER (defensible starts):\n' + stReg(k, 'order') +
+      '\n\nDRIVE (what to measure under each branch):\n' + reg(k, 'drive') +
+      '\n\nORDER (defensible starts):\n' + reg(k, 'order') +
       '\n\n' + exhibitTxt +
       '\n\n--- CANDIDATE TREE ---\n' + String(answer || '');
-    const missing = ST_REGISTERS.filter(n => !(typeof k[n] === 'string' && k[n].trim()));
-    const alien = Object.keys(k).filter(n => !ST_REG_KNOWN.has(n));
-    if (missing.length || alien.length) {
-      try { console.log('CASEDGE_TELEMETRY ' + JSON.stringify({ ev: 'st_register_gap', drill: d.id, missing, alien })); } catch (e) {}
-    }
+    regTelemetry('Structuring', d, k);
     const j = await graderJSON(ST_GRADER_SYSTEM, u + fbDirective(fbLang), 800);
     // graderJSON null = the model didn't return parseable JSON. Return graded:false
     // (NEUTRAL) rather than pass:false so a grader hiccup is not shown as a candidate FAIL.
