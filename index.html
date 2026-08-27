@@ -2755,7 +2755,7 @@
       <span class="bcg-note-chev" id="bcgNoteChev">&#9650;</span>
     </button>
     <div class="bcg-note-body" id="bcgNoteBody">
-      <p>This is an <b data-i18n="how.ilead">interviewee-led case</b> run as a chat. Read each prompt, scroll back through earlier messages and exhibits any time you need to, and answer in the box that appears. Some questions are multiple-choice or select-all; others ask for a number or a short written answer. The data in the exhibits matters - the math is real.</p>
+      <p data-i18n-html="how.body">This is an <b>interviewee-led case</b> run as a chat. Read each prompt, scroll back through earlier messages and exhibits any time you need to, and answer in the box that appears. Some questions are multiple-choice or select-all; others ask for a number or a short written answer. The data in the exhibits matters - the math is real.</p>
       <p data-i18n-html="how.final">At the very end you’ll give a <b>final recommendation</b>. In a real interview you’d say this out loud to a partner; here, type it as you would deliver it - conclusion first, then your supporting numbers and risks.</p>
     </div>
   </div>
@@ -4230,6 +4230,13 @@ const I18N = {
     'setup.t.mna': "M&A",
     'setup.t.mna.d': "Mergers & acquisitions",
     'setup.t.price': "Pricing",
+    'how.body': "This is an <b>interviewee-led case</b> run as a chat. Read each prompt, scroll back through earlier messages and exhibits any time you need to, and answer in the box that appears. Some questions are multiple-choice or select-all; others ask for a number or a short written answer. The data in the exhibits matters - the math is real.",
+    'ob.welcome.d': "Your prep ground for MBB case interviews. Real cases, sharp feedback, and the exact assessment formats firms use - built to make practice harder than the real thing.",
+    'ob.pick.d': "Full case interviews, targeted skill drills, or the BCG & McKinsey assessment games. Each one scores you across structure, math, business sense, communication, and ownership.",
+    'ob.fb.d': "After every session you get a strict, honest scorecard - no sugarcoating - plus the flawless answer to study. Your streak and scores build over time so you can see real progress.",
+    'ob.skip': "Skip",
+    'ob.next': "Next",
+    'ob.start': "Get started",
   },
   ru: {
     "fb.dim.structure": "Структура",
@@ -4692,6 +4699,13 @@ const I18N = {
     'setup.t.mna': "M&A",
     'setup.t.mna.d': "Слияния и поглощения",
     'setup.t.price': "Ценообразование",
+    'how.body': "Это <b>кейс, который ведёт кандидат</b>, в формате чата. Читай вопрос, возвращайся к прошлым сообщениям и экспонатам когда нужно, отвечай в поле снизу. Часть вопросов - выбор одного или нескольких вариантов, часть просит число или короткий текст. Данные в экспонатах важны: счёт настоящий.",
+    'ob.welcome.d': "Твой полигон для кейс-интервью MBB. Настоящие кейсы, жёсткий разбор и те самые форматы ассессмента, которые используют фирмы - сделано так, чтобы тренировка была тяжелее реального интервью.",
+    'ob.pick.d': "Полные кейс-интервью, точечные дриллы на навык или игры-ассессменты BCG и McKinsey. Каждый формат оценивает тебя по структуре, счёту, бизнес-логике, коммуникации и владению кейсом.",
+    'ob.fb.d': "После каждой сессии - строгий честный скоркард без прикрас и эталонный ответ для разбора. Серия и баллы копятся, так что прогресс видно.",
+    'ob.skip': "Пропустить",
+    'ob.next': "Дальше",
+    'ob.start': "Поехали",
   },
 };
 function t(key, vars) {
@@ -7379,7 +7393,7 @@ function cxObRender() {
   document.querySelectorAll('.cx-ob-dot').forEach((d, i) =>
     d.classList.toggle('on', i === cxObStep));
   const nx = document.getElementById('cxObNext');
-  if (nx) nx.textContent = cxObStep >= 2 ? 'Get started' : 'Next';
+  if (nx) nx.textContent = cxObStep >= 2 ? t('ob.start') : t('ob.next');
 }
 function cxObNext() {
   if (cxObStep >= 2) { cxObClose(); return; }
@@ -10667,25 +10681,25 @@ document.addEventListener('keydown', e => {
     <div class="cx-ob-step active" data-step="0">
       <div class="cx-ob-ic"><svg viewBox="0 0 24 24"><path d="M9 3h6M12 3v5M5 21h14M7 21v-4a5 5 0 0 1 10 0v4"/></svg></div>
       <div class="cx-ob-t" data-i18n="ob.welcome.t">Welcome to CasEdge</div>
-      <div class="cx-ob-d">Your prep ground for MBB case interviews. Real cases, sharp feedback, and the exact assessment formats firms use - built to make practice harder than the real thing.</div>
+      <div class="cx-ob-d" data-i18n="ob.welcome.d">Your prep ground for MBB case interviews. Real cases, sharp feedback, and the exact assessment formats firms use - built to make practice harder than the real thing.</div>
     </div>
     <div class="cx-ob-step" data-step="1">
       <div class="cx-ob-ic"><svg viewBox="0 0 24 24"><path d="M12 2 4 7v6c0 5 3.5 7.5 8 9 4.5-1.5 8-4 8-9V7l-8-5z"/><path d="m9 12 2 2 4-4"/></svg></div>
       <div class="cx-ob-t" data-i18n="ob.pick">Pick how you train</div>
-      <div class="cx-ob-d">Full case interviews, targeted skill drills, or the BCG &amp; McKinsey assessment games. Each one scores you across structure, math, business sense, communication, and ownership.</div>
+      <div class="cx-ob-d" data-i18n="ob.pick.d">Full case interviews, targeted skill drills, or the BCG &amp; McKinsey assessment games. Each one scores you across structure, math, business sense, communication, and ownership.</div>
     </div>
     <div class="cx-ob-step" data-step="2">
       <div class="cx-ob-ic"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 14 4-4 3 3 5-6"/></svg></div>
       <div class="cx-ob-t" data-i18n="ob.fb">Get partner-level feedback</div>
-      <div class="cx-ob-d">After every session you get a strict, honest scorecard - no sugarcoating - plus the flawless answer to study. Your streak and scores build over time so you can see real progress.</div>
+      <div class="cx-ob-d" data-i18n="ob.fb.d">After every session you get a strict, honest scorecard - no sugarcoating - plus the flawless answer to study. Your streak and scores build over time so you can see real progress.</div>
     </div>
     <div class="cx-ob-foot">
       <div class="cx-ob-dots">
         <span class="cx-ob-dot on"></span><span class="cx-ob-dot"></span><span class="cx-ob-dot"></span>
       </div>
       <div class="cx-ob-btns">
-        <button class="cx-ob-skip" onclick="cxObClose()">Skip</button>
-        <button class="cx-ob-next" id="cxObNext" onclick="cxObNext()">Next</button>
+        <button class="cx-ob-skip" onclick="cxObClose()" data-i18n="ob.skip">Skip</button>
+        <button class="cx-ob-next" id="cxObNext" onclick="cxObNext()" data-i18n="ob.next">Next</button>
       </div>
     </div>
   </div>
