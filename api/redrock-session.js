@@ -152,9 +152,18 @@ function rkLastSepBefore(s, idx) {
 }
 function scrubPrompt(p, secretVals) {
   let s = String(p == null ? '' : p);
-  // 0a. a question-form prompt's stem ends at its last "?"; anything after is commentary/answer.
+  /* 0a. a question-form prompt's stem ends at its last "?"; anything after is
+     commentary/answer.
+     27.08.2026, dev. Цех игр замерил ЭКРАН и нашёл, что это правило про ПРОЗУ
+     режет ТАБЛИЦУ. В семье «Composition count×%» вопросительный знак стоит ПЕРЕД
+     таблицей данных, и хвост с данными уходил как «комментарий после вопроса».
+     На экране кейсов блока экспонатов НЕТ, взять числа больше негде - кандидат
+     выбирал из четырёх названий вслепую, и ловушка умирала вместе с данными.
+     Мой счёт сошёлся с их: 17 слотов из 125. Признак строки таблицы - вертикальная
+     черта: строка, начинающаяся с `|`, это ДАННЫЕ, а не комментарий. Каскад
+     решения, если он идёт после таблицы, срежут правила 1-3 ниже. */
   const qm = s.lastIndexOf('?');
-  if (qm >= 0 && qm < s.length - 1) s = s.slice(0, qm + 1);
+  if (qm >= 0 && qm < s.length - 1 && s.slice(qm + 1).indexOf('|') < 0) s = s.slice(0, qm + 1);
   // 0b. neutralise the "naive" tell (the word itself flags which value is the trap)
   s = s.replace(/\bnaïve\b|\bnaive\b/gi, '').replace(/\s{2,}/g, ' ');
   // 1. cut the interviewer solution cascade (Step 1/2, decompose, Answer:)
@@ -162,8 +171,24 @@ function scrubPrompt(p, secretVals) {
   cut(/\s*[-–—]?\s*\*?\s*Step\s*\d/i);   // " - *Step 1 (headline)…"
   cut(/\s*[-–—]?\s*\*?\s*Answer\s*:/i);  // " - Answer: X"
   cut(/\bdecompose\b/i);
-  // 2. cut a SPACED answer arrow tail ("… → Feb (85,7) − May"); data ranges like 900→720 (no spaces) survive
-  s = s.replace(/\s+(?:→|->|⟶)\s+[\s\S]*$/u, '');
+  /* 2. cut a SPACED answer arrow tail ("… → Feb (85,7) − May"); data ranges like
+     900→720 (no spaces) survive.
+     27.08.2026. Тот же замер: у #9 c6 хвост со стрелками - это ПЕРЕЧИСЛЕНИЕ
+     ВАРИАНТОВ («A $7,500/ha → 20,000 · B $9,000/ha → 16,667 · C …»), а не каскад
+     решения. Первая же стрелка срезала варианты B и C, кандидат видел цену только
+     A, и «наив A» оказывался единственным, что осталось на экране. Отличаю по тому
+     же признаку, что уже используется в файле: НЕСКОЛЬКО стрелок, разделённых `·`,
+     это список, а не вывод. Значения ответа и наива из него всё равно срежет
+     правило 3 - оно ищет их по числу, а не по стрелке. */
+  {
+    const m = /\s+(?:→|->|⟶)\s+/u.exec(s);
+    if (m) {
+      const tail = s.slice(m.index);
+      const arrows = (tail.match(/(?:→|->|⟶)/gu) || []).length;
+      const enumerated = arrows >= 2 && tail.includes('\u00b7');
+      if (!enumerated) s = s.slice(0, m.index);
+    }
+  }
   // 3. key-based cut: the solution is wherever a real answer/naive VALUE (>2 digits) appears —
   //    drop from the start of the clause that first contains any such value.
   let cutAt = s.length;
