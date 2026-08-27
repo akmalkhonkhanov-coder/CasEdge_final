@@ -2908,7 +2908,7 @@
           <div class="c-icon" style="background:rgba(93,184,166,.12);">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline points="17 7 22 7 22 13"></polyline></svg>
           </div>
-          <div class="c-name" data-i18n="setup.t.profit">Profitability</div>
+          <div class="c-name">Profitability</div>
           <div class="c-desc" data-i18n="setup.t.profit.d">Revenue &amp; cost drivers</div>
         </div>
 
@@ -2924,8 +2924,8 @@
           <div class="c-icon" style="background:rgba(232,165,90,.12);">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
           </div>
-          <div class="c-name" data-i18n="setup.t.mna">M&amp;A</div>
-          <div class="c-desc" data-i18n="setup.t.mna.d">Mergers &amp; acquisitions</div>
+          <div class="c-name">M&amp;A</div>
+          <div class="c-desc">Mergers &amp; acquisitions</div>
         </div>
 
         <div class="case-card" onclick="selectCase('Growth Strategy', this)" tabindex="0" role="button" aria-pressed="false">
@@ -2948,7 +2948,7 @@
           <div class="c-icon" style="background:rgba(232,165,90,.1);">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent-amber)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
           </div>
-          <div class="c-name" data-i18n="setup.t.price">Pricing</div>
+          <div class="c-name">Pricing</div>
           <div class="c-desc" data-i18n="setup.t.price.d">Optimal price strategy</div>
         </div>
 
@@ -3101,7 +3101,7 @@
 
     <div class="metrics-grid">
       <div class="m-card">
-        <div class="m-lbl" data-i18n="fb.dim.structure">Structure</div>
+        <div class="m-lbl">Structure</div>
         <div class="m-val" id="mv-structure">-</div>
         <div class="m-bar"><div class="m-fill" id="mb-structure" style="width:0%;background:var(--coral);"></div></div>
         <div class="m-note" data-i18n="fb.note.structure">MECE &amp; hypothesis-first</div>
@@ -3222,7 +3222,7 @@ function updateAuthUI() {
       const display = meta.full_name || (currentUser.email ? currentUser.email.split('@')[0] : 'You');
       p.textContent = display;
       p.style.cssText = 'font-size:13px;color:var(--on-dark-soft);padding:6px 12px;background:rgba(93,184,166,.1);border-radius:20px;cursor:pointer;';
-      p.onclick = () => { if (confirm(t('confirm.signout'))) authSignOut(); };
+      p.onclick = () => { if (confirm('Sign out?')) authSignOut(); };
       p.title = 'Click to sign out';
     } else { p.textContent = ''; p.style.cssText = ''; p.onclick = null; }
   });
@@ -4182,54 +4182,6 @@ const I18N = {
     'gm.note': 'Solve is sat as Redrock + Sea Wolf; the 85-minute version adds Sustainable Futures Lab.',
     'gm.calder': 'Calder Sound - guided walkthrough',
     'stream.dropped': 'The connection dropped. Send your answer again - it is not lost.',
-    'cx.streak': "Day streak",
-    'cx.sessions': "Sessions done",
-    'cx.avg': "Average score",
-    'cx.resume': "Pick up where you left off",
-    'cx.welcome': "Welcome back{name} - you left off here",
-    'cx.resume.go': "Resume",
-    'cx.resume.x': "Dismiss",
-    'rt.think': "interview time",
-    'rt.speak': "+30s to type",
-    'rt.over': "over",
-    'fb.scoring.sub': "The partner is writing your breakdown - about 10-15 seconds",
-    'fb.verdict.strong': "Strong Hire - Excellent performance",
-    'fb.verdict.hire': "Hire - Solid performance",
-    'fb.verdict.border': "Borderline - Needs improvement",
-    'confirm.signout': "Sign out?",
-    'confirm.leave.chat': "Leave the BCG Chat Game? Your progress in this session will be lost.",
-    'confirm.leave.solve': "Leave the Solve Game? Your progress in this session will be lost.",
-    'confirm.leave.session': "Leave this session and return home? Your progress in this session will not be saved.",
-    'br.eyebrow': "Before you begin",
-    'br.dontshow': "Don\u2019t show this again",
-    'br.skip': "Skip",
-    'br.begin': "Begin &rarr;",
-    'br.case.title': "Full Case Interview",
-    'br.case.lead': "A live, end-to-end case run like the real thing - you lead the conversation, the interviewer responds with data, and you close with a recommendation.",
-    'br.case.i1.t': "It is a conversation",
-    'br.case.i1.d': "Type your answers in the chat, like talking to a real interviewer. Drive the case: ask for data, state your structure, request exhibits.",
-    'br.case.i2.t': "Real data &amp; math",
-    'br.case.i2.d': "Exhibits and numbers appear as you go. You will be asked to interpret a chart and to actually calculate - show your working.",
-    'br.case.i3.t': "Watch your pace",
-    'br.case.i3.d': "A response timer keeps you honest, like real time pressure. Going long is flagged, not punished.",
-    'br.case.i4.t': "Close with a recommendation",
-    'br.case.i4.d': "End with an answer-first recommendation: conclusion, 2-3 supporting facts, risks, next steps. You get a strict scorecard after.",
-    'br.case.tip': "<b>Tip:</b> lead with your answer, then support it. State your structure before diving in, and tie every point to a number.",
-    'br.drill.title': "Skill Drill",
-    'br.drill.lead': "A short, focused rep on one skill - fast reps, fast feedback. Sharpens one muscle at a time.",
-    'br.drill.i1.t': "One skill, focused",
-    'br.drill.i1.d': "Each drill targets a single skill (market sizing, math, structuring, chart reading, and so on). Quick and intense.",
-    'br.drill.i2.t': "Answer in the chat",
-    'br.drill.i2.d': "Respond directly in the chat. Be structured and specific - the same standards as a full case, just narrower scope.",
-    'br.drill.i3.t': "Instant feedback",
-    'br.drill.i3.d': "You get a focused critique right after, with the model answer to study. Repeat to build speed.",
-    'br.drill.tip': "<b>Tip:</b> treat each drill like the real moment - structure first, then numbers. Speed comes from reps.",
-    'alert.name.empty': "Name cannot be empty.",
-    'alert.name.fail': "Could not update name.",
-    'setup.t.profit': "Profitability",
-    'setup.t.mna': "M&A",
-    'setup.t.mna.d': "Mergers & acquisitions",
-    'setup.t.price': "Pricing",
   },
   ru: {
     "fb.dim.structure": "Структура",
@@ -4644,54 +4596,6 @@ const I18N = {
     'gm.note': 'Solve сдаётся как Redrock + Sea Wolf; 85-минутная версия добавляет Sustainable Futures Lab.',
     'gm.calder': 'Calder Sound &mdash; разбор с подсказками',
     'stream.dropped': 'Соединение прервалось. Отправь ответ ещё раз — он не потерян.',
-    'cx.streak': "Дней подряд",
-    'cx.sessions': "Сессий пройдено",
-    'cx.avg': "Средний балл",
-    'cx.resume': "Продолжи с того места, где остановился",
-    'cx.welcome': "С возвращением{name} - ты остановился здесь",
-    'cx.resume.go': "Продолжить",
-    'cx.resume.x': "Скрыть",
-    'rt.think': "время интервью",
-    'rt.speak': "+30 с на набор",
-    'rt.over': "сверх",
-    'fb.scoring.sub': "Партнёр пишет твой разбор - около 10-15 секунд",
-    'fb.verdict.strong': "Strong Hire - отличный результат",
-    'fb.verdict.hire': "Hire - уверенный результат",
-    'fb.verdict.border': "Borderline - есть над чем работать",
-    'confirm.signout': "Выйти из аккаунта?",
-    'confirm.leave.chat': "Выйти из BCG Chat Game? Прогресс этой партии будет потерян.",
-    'confirm.leave.solve': "Выйти из Solve Game? Прогресс этой партии будет потерян.",
-    'confirm.leave.session': "Выйти из сессии и вернуться на главную? Прогресс этой сессии не сохранится.",
-    'br.eyebrow': "Прежде чем начать",
-    'br.dontshow': "Больше не показывать",
-    'br.skip': "Пропустить",
-    'br.begin': "Начать &rarr;",
-    'br.case.title': "Полное кейс-интервью",
-    'br.case.lead': "Живой кейс от начала до конца, как на настоящем интервью: ты ведёшь разговор, интервьюер отвечает данными, ты закрываешь рекомендацией.",
-    'br.case.i1.t': "Это разговор",
-    'br.case.i1.d': "Пиши ответы в чат, как живому интервьюеру. Веди кейс сам: проси данные, называй структуру, запрашивай экспонаты.",
-    'br.case.i2.t': "Настоящие данные и счёт",
-    'br.case.i2.d': "Экспонаты и числа приходят по ходу. Тебя попросят прочитать график и реально посчитать - показывай выкладку.",
-    'br.case.i3.t': "Следи за темпом",
-    'br.case.i3.d': "Таймер ответа держит тебя честным, как настоящее давление времени. Затянул - отмечается, но не наказывается.",
-    'br.case.i4.t': "Закрой рекомендацией",
-    'br.case.i4.d': "Заканчивай выводом первым: вывод, 2-3 факта под ним, риски, следующие шаги. После этого - строгий скоркард.",
-    'br.case.tip': "<b>Совет:</b> сначала ответ, потом обоснование. Назови структуру до того, как нырять, и привязывай каждый пункт к числу.",
-    'br.drill.title': "Дрилл навыка",
-    'br.drill.lead': "Короткий точечный повтор на один навык: быстрый подход, быстрый фидбэк. Точит одну мышцу за раз.",
-    'br.drill.i1.t': "Один навык, точечно",
-    'br.drill.i1.d': "Каждый дрилл бьёт в один навык (оценка рынка, счёт, структура, чтение графиков и так далее). Коротко и плотно.",
-    'br.drill.i2.t': "Отвечай в чат",
-    'br.drill.i2.d': "Пиши прямо в чат. Структурно и конкретно - требования те же, что в полном кейсе, только область уже.",
-    'br.drill.i3.t': "Мгновенный разбор",
-    'br.drill.i3.d': "Сразу после ответа приходит точечный разбор и эталон для изучения. Повторяй, чтобы набрать скорость.",
-    'br.drill.tip': "<b>Совет:</b> относись к дриллу как к настоящему моменту - сначала структура, потом числа. Скорость приходит с повторами.",
-    'alert.name.empty': "Имя не может быть пустым.",
-    'alert.name.fail': "Не удалось обновить имя.",
-    'setup.t.profit': "Прибыльность",
-    'setup.t.mna': "M&A",
-    'setup.t.mna.d': "Слияния и поглощения",
-    'setup.t.price': "Ценообразование",
   },
 };
 function t(key, vars) {
@@ -5543,7 +5447,7 @@ function bcgReplaceLastBot(text, label) {
 }
 
 function confirmExitBcg() {
-  if (confirm(t('confirm.leave.chat'))) {
+  if (confirm('Leave the BCG Chat Game? Your progress in this session will be lost.')) {
     if (bcg && bcg.timerId) clearInterval(bcg.timerId);
     showScreen('mode');
   }
@@ -7328,7 +7232,7 @@ function renderSolveResult(inner, foot) {
 
 function rkCanvasOff() { const s = document.getElementById('screen-solve'); if (s) s.classList.remove('rk-canvas'); }
 function confirmExitSolve() {
-  if (confirm(t('confirm.leave.solve'))) {
+  if (confirm('Leave the Solve Game? Your progress in this session will be lost.')) {
     rkCanvasOff();
     if (solve && solve.timerId) clearInterval(solve.timerId);
     showScreen('mode');
@@ -7407,9 +7311,9 @@ function cxRenderStats() {
   if (total === 0) { host.innerHTML = ''; return; }
   host.innerHTML =
     `<div class="cx-stats">
-       <div class="cx-stat cx-accent"><div class="cx-stat-num"><span class="cx-flame">\u{1F525}</span>${streak}</div><div class="cx-stat-lbl">${t('cx.streak')}</div></div>
-       <div class="cx-stat"><div class="cx-stat-num">${total}</div><div class="cx-stat-lbl">${t('cx.sessions')}</div></div>
-       <div class="cx-stat"><div class="cx-stat-num">${avg}</div><div class="cx-stat-lbl">${t('cx.avg')}</div></div>
+       <div class="cx-stat cx-accent"><div class="cx-stat-num"><span class="cx-flame">\u{1F525}</span>${streak}</div><div class="cx-stat-lbl">Day streak</div></div>
+       <div class="cx-stat"><div class="cx-stat-num">${total}</div><div class="cx-stat-lbl">Sessions done</div></div>
+       <div class="cx-stat"><div class="cx-stat-num">${avg}</div><div class="cx-stat-lbl">Average score</div></div>
      </div>`;
 }
 
@@ -7444,15 +7348,15 @@ function cxRenderResume() {
   }
   const returning = gap !== null && gap >= 20;
   const heading = returning
-    ? t('cx.welcome', { name: firstName ? ', ' + (window.esc ? esc(firstName) : firstName) : '' })
-    : t('cx.resume');
+    ? `Welcome back${firstName ? ', ' + (window.esc ? esc(firstName) : firstName) : ''} - you left off here`
+    : 'Pick up where you left off';
 
   host.innerHTML =
     `<div class="cx-resume${returning ? ' cx-resume-welcome' : ''}">
        <div class="cx-resume-txt">${heading} - <b>${safeLabel}</b></div>
        <div class="cx-resume-btns">
-         <button class="cx-resume-go" onclick="cxResumeGo()">${t('cx.resume.go')}</button>
-         <button class="cx-resume-x" onclick="cxClearResume()">${t('cx.resume.x')}</button>
+         <button class="cx-resume-go" onclick="cxResumeGo()">Resume</button>
+         <button class="cx-resume-x" onclick="cxClearResume()">Dismiss</button>
        </div>
      </div>`;
 }
@@ -7492,32 +7396,29 @@ const BR_ICONS = {
   pencil: '<svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>',
 };
 
-/* Памятка перед сессией. Текст держится КЛЮЧАМИ, а не строками: это интерфейс,
-   а интерфейс - на выбор кандидата (решение владельца 25.08). До круга 92 весь
-   блок был зашит по-английски и открывался поверх русского экрана. */
 const BRIEFINGS = {
   case: {
-    eyebrow: 'br.eyebrow',
-    title: 'br.case.title',
-    lead: 'br.case.lead',
+    eyebrow: 'Before you begin',
+    title: 'Full Case Interview',
+    lead: 'A live, end-to-end case run like the real thing - you lead the conversation, the interviewer responds with data, and you close with a recommendation.',
     items: [
-      ['chat','br.case.i1.t','br.case.i1.d'],
-      ['chart','br.case.i2.t','br.case.i2.d'],
-      ['clock','br.case.i3.t','br.case.i3.d'],
-      ['check','br.case.i4.t','br.case.i4.d'],
+      ['chat','It is a conversation','Type your answers in the chat, like talking to a real interviewer. Drive the case: ask for data, state your structure, request exhibits.'],
+      ['chart','Real data &amp; math','Exhibits and numbers appear as you go. You will be asked to interpret a chart and to actually calculate - show your working.'],
+      ['clock','Watch your pace','A response timer keeps you honest, like real time pressure. Going long is flagged, not punished.'],
+      ['check','Close with a recommendation','End with an answer-first recommendation: conclusion, 2-3 supporting facts, risks, next steps. You get a strict scorecard after.'],
     ],
-    tip: 'br.case.tip',
+    tip: '<b>Tip:</b> lead with your answer, then support it. State your structure before diving in, and tie every point to a number.',
   },
   drill: {
-    eyebrow: 'br.eyebrow',
-    title: 'br.drill.title',
-    lead: 'br.drill.lead',
+    eyebrow: 'Before you begin',
+    title: 'Skill Drill',
+    lead: 'A short, focused rep on one skill - fast reps, fast feedback. Sharpens one muscle at a time.',
     items: [
-      ['target','br.drill.i1.t','br.drill.i1.d'],
-      ['chat','br.drill.i2.t','br.drill.i2.d'],
-      ['check','br.drill.i3.t','br.drill.i3.d'],
+      ['target','One skill, focused','Each drill targets a single skill (market sizing, math, structuring, chart reading, and so on). Quick and intense.'],
+      ['chat','Answer in the chat','Respond directly in the chat. Be structured and specific - the same standards as a full case, just narrower scope.'],
+      ['check','Instant feedback','You get a focused critique right after, with the model answer to study. Repeat to build speed.'],
     ],
-    tip: 'br.drill.tip',
+    tip: '<b>Tip:</b> treat each drill like the real moment - structure first, then numbers. Speed comes from reps.',
   },
 };
 
@@ -7543,18 +7444,18 @@ function brGate(kind, proceed) {
   _brPending = proceed;
   const items = b.items.map(it =>
     `<div class="br-item"><div class="br-ic">${BR_ICONS[it[0]] || ''}</div>
-       <div><div class="br-it-t">${t(it[1])}</div><div class="br-it-d">${t(it[2])}</div></div></div>`).join('');
+       <div><div class="br-it-t">${it[1]}</div><div class="br-it-d">${it[2]}</div></div></div>`).join('');
   document.getElementById('brCard').innerHTML =
-    `<div class="br-eyebrow">${esc(t(b.eyebrow))}</div>
-     <h2 class="br-title">${t(b.title)}</h2>
-     <p class="br-lead">${t(b.lead)}</p>
+    `<div class="br-eyebrow">${esc(b.eyebrow)}</div>
+     <h2 class="br-title">${b.title}</h2>
+     <p class="br-lead">${b.lead}</p>
      <div class="br-list">${items}</div>
-     <div class="br-tip">${t(b.tip)}</div>
+     <div class="br-tip">${b.tip}</div>
      <div class="br-foot">
-       <label class="br-dontshow"><input type="checkbox" id="brDontShow"> ${t('br.dontshow')}</label>
+       <label class="br-dontshow"><input type="checkbox" id="brDontShow"> Don\u2019t show this again</label>
        <div class="br-btns">
-         <button class="br-skip" onclick="brClose(false)">${t('br.skip')}</button>
-         <button class="br-begin" onclick="brBegin('${kind}')">${t('br.begin')}</button>
+         <button class="br-skip" onclick="brClose(false)">Skip</button>
+         <button class="br-begin" onclick="brBegin('${kind}')">Begin &rarr;</button>
        </div>
      </div>`;
   const ov = document.getElementById('brOverlay');
@@ -8029,15 +7930,15 @@ async function changeName() {
   const newName = prompt('Enter your name:', current);
   if (newName === null) return;
   const trimmed = newName.trim();
-  if (!trimmed) { alert(t('alert.name.empty')); return; }
+  if (!trimmed) { alert('Name cannot be empty.'); return; }
   if (!sb) return;
   try {
     const { data, error } = await sb.auth.updateUser({ data: { full_name: trimmed } });
-    if (error) { alert(t('alert.name.fail') + ' ' + error.message); return; }
+    if (error) { alert('Could not update name: ' + error.message); return; }
     if (data.user) currentUser = data.user;
     updateAuthUI();
     renderIdentity();
-  } catch (e) { alert(t('alert.name.fail')); }
+  } catch (e) { alert('Could not update name.'); }
 }
 function goToPage(page) { showScreen(page); }
 
@@ -9295,9 +9196,7 @@ const CASE_TYPING_BONUS  = 30;           // добавка на набор те�
 const CASE_RESP_TIME = CASE_INTERVIEW_TIME + CASE_TYPING_BONUS;   // 120
 // Граница зон в долях ОСТАТКА: жёлтый включается, когда осталось ≤ добавки.
 const ZONE_SPLIT = CASE_TYPING_BONUS / CASE_RESP_TIME;            // 0.25
-/* Подписи зон таймера идут через словарь: интерфейс на выбор кандидата, а эти
-   три строки печатаются рядом с секундомером на каждом ходу. */
-const RT_ZONE_TXT = { get think(){ return t('rt.think'); }, get speak(){ return t('rt.speak'); }, get over(){ return t('rt.over'); } };
+const RT_ZONE_TXT = { think: 'interview time', speak: '+30s to type', over: 'over' };
 let _rt = { id: null, left: 0, limit: 0 };
 
 function fmtTime(s) {
@@ -9766,7 +9665,7 @@ function setProgress(val) {
 }
 
 function confirmExitSession() {
-  if (confirm(t('confirm.leave.session'))) {
+  if (confirm('Leave this session and return home? Your progress in this session will not be saved.')) {
     showScreen('landing');
   }
 }
@@ -9811,7 +9710,7 @@ function startFeedbackLoading() {
   const arc = document.getElementById('ring-arc');
   if (arc) { arc.style.strokeDashoffset = 439.82 * 0.72; arc.classList.add('cas-ring-spin'); }
   setText('score-title', t('fb.scoring'));
-  setText('score-sub', t('fb.scoring.sub'));
+  setText('score-sub', 'The partner is writing your breakdown - about 10-15 seconds');
   // Та же нитка, что и в чате: экран разбора ждёт дольше всего, и молчащий
   // прогресс-круг здесь читается хуже всего.
   scoreThread(true);
@@ -9961,9 +9860,9 @@ Return ONLY valid JSON (no markdown, no backticks). All five scores are 1.0-10.0
       if (cur >= overall) { clearInterval(t); if (valEl) valEl.textContent = overall.toFixed(1); }
     }, 28);
 
-    const heading = overall >= 8.5 ? t('fb.verdict.strong')
-                  : overall >= 7.0 ? t('fb.verdict.hire')
-                  : overall >= 5.0 ? t('fb.verdict.border')
+    const heading = overall >= 8.5 ? 'Strong Hire - Excellent performance'
+                  : overall >= 7.0 ? 'Hire - Solid performance'
+                  : overall >= 5.0 ? 'Borderline - Needs improvement'
                   : 'No Hire - Significant gaps';
     setText('score-title', heading);
     const ctx = state.drillType
