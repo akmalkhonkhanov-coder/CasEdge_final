@@ -4507,7 +4507,7 @@
               "round": 2,
               "tolerance": 0.01,
               "naive": 33.33,
-              "naive_reason": "divides by the current 180 rather than the Year-1 base 240, giving 60/180 = 33.33"
+              "naive_reason": "divides by the current 180 rather than the Year-1 base 240, giving 60/180 = 33.33%"
             }
           ]
         },
@@ -5305,7 +5305,7 @@
               "round": 2,
               "tolerance": 0.01,
               "naive": 33.33,
-              "naive_reason": "divides by the current 120 rather than the Year-1 base 160, giving 40/120 = 33.33"
+              "naive_reason": "divides by the current 120 rather than the Year-1 base 160, giving 40/120 = 33.33%"
             }
           ]
         },
@@ -9449,7 +9449,7 @@
               "round": 2,
               "tolerance": 0.01,
               "naive": 33.33,
-              "naive_reason": "divides by the current 60 rather than the Year-1 base 80, giving 20/60 = 33.33"
+              "naive_reason": "divides by the current 60 rather than the Year-1 base 80, giving 20/60 = 33.33%"
             }
           ]
         },
@@ -21450,7 +21450,7 @@
       "cases": [
         {
           "c": 1,
-          "prompt": "Double-count magnitude — the naive sum (6,500) exceeds the true designated area (5,700) by 800 km² — exactly the overlap counted twice. (sees no double-count)",
+          "prompt": "Double-count magnitude — Conservation 3,000 km², Access 2,000 km² and Grazing 1,500 km² are listed separately, and 300 km² of the range carry no designation at all. The range is 6,000 km² in all. By how many km² does adding the three designations overstate the area that actually carries one?",
           "input": "numeric",
           "answer": 800,
           "round": 0,

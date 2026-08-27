@@ -97,7 +97,7 @@ RULES:
 4. For CLEAN drills the correct move is to confirm no error / no flip — inventing a reversal that is not in the data is a FAIL.
 5. Do NOT penalize grammar, spelling, or brevity. Penalize only missing or wrong required content.
 
-RESPONSE FORMAT (strict JSON): {"pass":true,"coaching":"1-2 sentences IN ENGLISH: what was right/missing and the one thing to fix. Specific, cite the key number."}\n\nVOICE (2026-08-28, dev): the candidate never sees the trainer's machinery. In the coaching field do NOT name internal register codes (COVER, DECOY, ME, ORDER, DRIVE, LOAD, DEAD, s0, build), the words slot / drill / exercise / checklist, or any field name of this engine. Say WHAT was missing in the language of the case itself.`;
+RESPONSE FORMAT (strict JSON): {"pass":true,"coaching":"1-2 sentences IN ENGLISH: what was right/missing and the one thing to fix. Specific, cite the key number."}`;
 
 // Structuring (ST) is qualitative — there is no single number. It is graded on
 // five registers: COVER (required branches, judged by MEANING not label), DECOY
@@ -117,7 +117,7 @@ HOW TO GRADE (in priority order):
 
 PASS = all COVER branches present (by meaning) AND no decoy developed first AND no hard ME violation.
 
-RESPONSE FORMAT (strict JSON): {"pass":true,"coaching":"1-2 sentences IN ENGLISH: name which required branch (if any) was missed, or the decoy/ME slip, and the single most valuable fix. Be specific to this case."}\n\nVOICE (2026-08-28, dev): the candidate never sees the trainer's machinery. In the coaching field do NOT name internal register codes (COVER, DECOY, ME, ORDER, DRIVE, LOAD, DEAD, s0, build), the words slot / drill / exercise / checklist, or any field name of this engine. Say WHAT was missing in the language of the case itself.`;
+RESPONSE FORMAT (strict JSON): {"pass":true,"coaching":"1-2 sentences IN ENGLISH: name which required branch (if any) was missed, or the decoy/ME slip, and the single most valuable fix. Be specific to this case."}`;
 
 // Brainstorm (BR) — creativity/idea-generation. The candidate produces a flat list
 // of options for a case question. Graded on registers, NOT on volume:
@@ -149,7 +149,7 @@ GRADE IN THIS ORDER (all applicable gates must pass):
 
 PASS = every applicable gate passes.
 
-RESPONSE FORMAT (strict JSON): {"pass":true,"coaching":"1-2 sentences IN ENGLISH: name the missing LOAD / uncovered axis / DEAD-order slip / CULL miss, and the single most valuable fix. Be specific to this case.","model":"1-2 sentences IN ENGLISH stating the load-bearing idea and the axes a strong answer covers — the takeaway. Never output Russian."}\n\nVOICE (2026-08-28, dev): the candidate never sees the trainer's machinery. In the coaching field do NOT name internal register codes (COVER, DECOY, ME, ORDER, DRIVE, LOAD, DEAD, s0, build), the words slot / drill / exercise / checklist, or any field name of this engine. Say WHAT was missing in the language of the case itself.`;
+RESPONSE FORMAT (strict JSON): {"pass":true,"coaching":"1-2 sentences IN ENGLISH: name the missing LOAD / uncovered axis / DEAD-order slip / CULL miss, and the single most valuable fix. Be specific to this case.","model":"1-2 sentences IN ENGLISH stating the load-bearing idea and the axes a strong answer covers — the takeaway. Never output Russian."}`;
 
 /* ───────────────────────── library ───────────────────────────────────────── */
 let _byId = null;
@@ -439,7 +439,7 @@ GRADE THE READING, NOT THE PROSE. Describing what the chart shows is not an insi
 A candidate who reaches the same insight by a different route PASSES. A candidate who lands on the naive reading the exhibit is built to provoke FAILS, however fluent the writing.
 Never invent a number that is not in the exhibit. If the candidate quotes a number that is not there, that is a fail with the reason named.
 
-Return: {"pass": boolean, "coaching": "1-2 sentences naming what was missed or what was strong"}\n\nVOICE (2026-08-28, dev): the candidate never sees the trainer's machinery. In the coaching field do NOT name internal register codes (COVER, DECOY, ME, ORDER, DRIVE, LOAD, DEAD, s0, build), the words slot / drill / exercise / checklist, or any field name of this engine. Say WHAT was missing in the language of the case itself.`;
+Return: {"pass": boolean, "coaching": "1-2 sentences naming what was missed or what was strong"}`;
 
 // SY (Synthesis): the candidate reads someone else's record and delivers a
 // verdict. The skill graded here is Minto, and it is graded FIRST: a correct
@@ -455,7 +455,7 @@ A candidate who reaches the same verdict by a different route PASSES. A candidat
 FIGURES MUST AGREE WITH THE RECORD. Check every number the candidate states against the RECORD above. A figure that contradicts the record — wrong by an order of magnitude, a share above 100%, a quantity larger than the stock it is drawn from — is a defect and must be named in the coaching. When the contradicting figure is the one the recommendation RESTS ON, that is a FAIL: naming the deciding figure is the point of this drill, and a deciding figure that cannot be true names nothing. A stray slip in a supporting sentence is a coaching note, not a fail.
 You yourself must never invent a number that is not in the record.
 
-Return: {"pass": boolean, "coaching": "1-2 sentences naming what was missed or what was strong"}\n\nVOICE (2026-08-28, dev): the candidate never sees the trainer's machinery. In the coaching field do NOT name internal register codes (COVER, DECOY, ME, ORDER, DRIVE, LOAD, DEAD, s0, build), the words slot / drill / exercise / checklist, or any field name of this engine. Say WHAT was missing in the language of the case itself.`;
+Return: {"pass": boolean, "coaching": "1-2 sentences naming what was missed or what was strong"}`;
 
 /* ─────────────────── СЛУЖЕБНЫЕ БЛОКИ ЦЕХА В ЭТАЛОНЕ ────────────────────────
    24.08.2026, находка цеха дриллов. `reference` возвращается кандидату ДОСЛОВНО
