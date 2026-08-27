@@ -657,11 +657,11 @@ function scr_menu(){const first=!PROF||PROF.played===0;
   ${first?`<div class="note" style="max-width:600px;margin:0 auto 26px;text-align:left">${t('sw_72')}</div>`
         :`<div class="note" style="max-width:600px;margin:0 auto 26px;text-align:left">${PROF.adaptMsg} ${t('sw_73')} <b>${L(PROF.level)}</b>.</div>`}
   <button class="btn g" style="padding:14px 36px;font-size:16px;border-radius:10px" onclick="tutStep=0;modal='tut';render()">${first?t('sw_74'):t('sw_75')}</button>
-  ${(PROF&&PROF.exhausted)?`<div class="note" style="max-width:600px;margin:0 auto 18px;text-align:left;border-color:rgba(216,165,60,.5)">${PROF.exhausted}</div>`:''}
+  ${(PROF&&PROF.exhausted)?`<div class="note" style="max-width:600px;margin:0 auto 18px;text-align:left;border-color:rgba(216,165,60,.5)">${esc(PROF.exhausted)}</div>`:''}
   ${(!first&&PROF&&PROF.assessment&&PROF.assessment.total)?`
    <div style="margin:18px auto 0;max-width:600px">
     <button class="btn ghost" style="padding:11px 26px;border-radius:10px" onclick="modal='assess';render()">${t('sw_76')}</button>
-    <div class="note" style="margin-top:10px;text-align:left">${PROF.assessment.note}
+    <div class="note" style="margin-top:10px;text-align:left">${esc(PROF.assessment.note)}
      ${PROF.assessment.played?`<br><br>${t('sw_77')} <b>${PROF.assessment.played}</b>${t('sw_78')} <b>${PROF.assessment.best}%</b>.`:''}</div>
    </div>`:''}
   <div class="stats">
@@ -687,7 +687,7 @@ function scr_err(){return `<div class="hero"><div class="brand">CasEdge · Sea W
 
 function scr_assess(){return `<div class="veil"><div class="modal"><div class="kicker">${t('sw_91')}</div>
   <h2>${t('sw_92')}</h2>
-  <div class="note" style="text-align:left">${PROF.assessment.note}</div>
+  <div class="note" style="text-align:left">${esc(PROF.assessment.note)}</div>
   <div class="note" style="text-align:left;margin-top:10px">${t('sw_93')}
    <b>${PROF.assessment.remaining}</b> ${t('sw_94')} ${PROF.assessment.total}.</div>
   <div class="mbtns"><span></span>
@@ -703,17 +703,25 @@ function scr_legend(){return `<div class="veil" onclick="modal=null;render()"><d
  <div class="mbtns"><button class="btn" onclick="modal=null;render()">${t('sw_103')}</button></div></div></div>`}
 
 const M=m=>[m.name,m.a,m.trait];
+/* 25.08.2026, dev. Находка цеха игр, круг 80: экран собирается шаблонными
+   строками и уходит в innerHTML, а функции экранирования в файле НЕТ - в отличие
+   от sfl.html, где есть md(). Значит авторская строка вида "&#1042;&#1099;"
+   выглядит в данных чистым ASCII и превращается на экране в «Вы…», то есть
+   проходит МИМО любой проверки алфавита. Сегодня таких строк в боевых данных
+   ноль (замер dev: 0 сущностей в api/seawolf-games.json), поэтому это не течь,
+   а канал. Закрываем канал. */
+function esc(v){ return v==null ? '' : String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 function offerCard(m,i){const T=TRAITS[m.trait];
  return `<div class="ocard ${pick===i?'picked':''}" onclick="pick=${i};render()">
-  <div class="nm">${m.name}</div><div class="sub">${t('sw_104')} ${i+1}</div>
+  <div class="nm">${esc(m.name)}</div><div class="sub">${t('sw_104')} ${i+1}</div>
   <div class="art">${microbe(m.name,m.trait,112)}</div><div class="hr"></div>
   ${ATTRS.map((a,x)=>`<div class="arow"><span class="ico">${icon(ATTR_ICON[a],16,'#5b6d7e')}</span><span class="an">${a}</span><span class="av mono">${m.a[x]}</span></div>`).join('')}
-  <div class="trow2">${icon(T.ic,17,T.c2)}<span>${m.trait}</span></div>
+  <div class="trow2">${icon(T.ic,17,T.c2)}<span>${esc(m.trait)}</span></div>
   <button class="plus" onclick="event.stopPropagation();take(${i}${t('sw_105')}<svg width="15" height="15" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></button></div>`}
 function pillCard(m,i,click,s){const T=TRAITS[m.trait];
  return `<div class="pill ${click?'click':''} ${s?'sel':''}" ${click?`onclick="tog(${i})"`:''}>
   <span class="tr">${icon(T.ic,15,T.c2)}</span><div class="thumb">${microbe(m.name,m.trait,50)}</div>
-  <div class="nm">${m.name}</div>
+  <div class="nm">${esc(m.name)}</div>
   <div class="st">${ATTRS.map((a,x)=>`<i>${icon(ATTR_ICON[a],13,'#8ea0b0')}</i><b class="mono">${m.a[x]}</b>`).join('')}</div></div>`}
 
 function preview(){ if(sel.length!==3) return null;
@@ -771,17 +779,17 @@ function scr_reveal(){
  REV.forEach((r,si)=>{
   const V_=r.verdict||{head:'',body:''};
   h+=`<div class="rcard"><h2>${t('sw_144')} ${si+1} — ${r.yourScore?r.yourScore.percent:0}%${r.siteMs?` <span class="dim small">· ${hhmm(r.siteMs)}</span>`:''}</h2>
-   <p><b class="${r.verdict&&(r.verdict.kind==='clean')?'ok':(r.verdict&&r.verdict.kind==='notFound'?'bad':'')}">${V_.head}</b><br>${V_.body}</p>
-   ${r.lost?`<p class="small">${t('sw_145')} <b>${r.lost.took.name}</b> [${r.lost.took.trait}${t('sw_146')} <b class="bad">${r.lost.priceTo}</b> ${t('sw_147')}
-    <br>${t('sw_148')} <b>${r.lost.should.name}</b> [${r.lost.should.trait}${t('sw_149')} <b class="ok">${r.lost.priceFrom}</b></p>`:''}
+   <p><b class="${r.verdict&&(r.verdict.kind==='clean')?'ok':(r.verdict&&r.verdict.kind==='notFound'?'bad':'')}">${esc(V_.head)}</b><br>${esc(V_.body)}</p>
+   ${r.lost?`<p class="small">${t('sw_145')} <b>${esc(r.lost.took.name)}</b> [${esc(r.lost.took.trait)}${t('sw_146')} <b class="bad">${r.lost.priceTo}</b> ${t('sw_147')}
+    <br>${t('sw_148')} <b>${esc(r.lost.should.name)}</b> [${esc(r.lost.should.trait)}${t('sw_149')} <b class="ok">${r.lost.priceFrom}</b></p>`:''}
    ${r.squeeze?`<p class="small">${t('sw_150')} <b>${r.squeeze.round}</b> ${t('sw_151')}
-    <b>${r.squeeze.took.name}</b> ${t('sw_152')} <b>${r.squeeze.to}</b> ${t('sw_153')} <b>${r.squeeze.from}</b>
-    (<b>${r.squeeze.better.name}</b>${t('sw_154')} ${r.bestMoves} ${t('sw_155')}
+    <b>${esc(r.squeeze.took.name)}</b> ${t('sw_152')} <b>${r.squeeze.to}</b> ${t('sw_153')} <b>${r.squeeze.from}</b>
+    (<b>${esc(r.squeeze.better.name)}</b>${t('sw_154')} ${r.bestMoves} ${t('sw_155')}
     <br><span class="dim">${t('sw_156')} ${r.poolCombos}${t('sw_157')}</span></p>`
     :''}
    <div class="dim small" style="margin:10px 0 4px">${t('sw_158')} ${r.poolCombos} ${t('sw_159')}</div>
    <table><tr><th>${t('sw_160')}</th><th>${t('sw_161')}</th><th>${t('sw_162')}</th><th>${t('sw_163')}</th></tr>
-   ${r.cost.map(c=>`<tr><td>${c.round}${c.played?'':t('sw_164')}</td>${c.options.map(o=>`<td class="${o.taken?'taken':''}">${o.name}: ${o.remaining===null?'—':o.remaining}${o.taken?t('sw_165'):''}</td>`).join('')}</tr>`).join('')}</table>
+   ${r.cost.map(c=>`<tr><td>${c.round}${c.played?'':t('sw_164')}</td>${c.options.map(o=>`<td class="${o.taken?'taken':''}">${esc(o.name)}: ${o.remaining===null?'—':o.remaining}${o.taken?t('sw_165'):''}</td>`).join('')}</tr>`).join('')}</table>
    ${r.yourTrio?`<h3 style="margin:14px 0 4px;font-size:15px">${t('sw_166')} ${r.yourTrio.join(', ')}</h3>
    <table>${r.yourScore.detail.map(d=>`<tr><td>${d.attr}</td><td>${t('sw_167')} ${d.avg}</td><td>${t('sw_168')} ${d.range[0]}–${d.range[1]}</td><td class="${d.ok?'ok':'bad'}">${d.ok?t('sw_169'):t('sw_170')}</td></tr>`).join('')}</table>
    <table><tr><td>${V&&V.site?'':''}${t('sw_171')}</td><td>${t('sw_172')}${r.yourScore.hasDesired?'ok':'bad'}">${r.yourScore.hasDesired?t('sw_173'):t('sw_174')}</b></td>
@@ -792,7 +800,7 @@ function scr_reveal(){
      ${r.possibleCore&&r.possibleCore.length?`<br><b>${t('sw_185')}</b> ${r.possibleCore.join(', ')} ${t('sw_186')} ${r.possible}.`:t('sw_187')}<br>
      <span class="dim">${r.spread.map(s=>`${s.attr}${t('sw_188')} ${s.from}–${s.to}`).join(' · ')}</span></p>
    ${r.possibleAll&&r.possibleAll.length?`<table><tr><th>${t('sw_189')}</th><th>${t('sw_190')}</th><th>${t('sw_191')}</th></tr>
-     ${r.possibleAll.map((v,i)=>`<tr><td>${i+1}</td><td>${v.names.join(', ')}</td><td>${v.desiredCount}</td></tr>`).join('')}</table>`:''}`
+     ${r.possibleAll.map((v,i)=>`<tr><td>${i+1}</td><td>${esc(v.names.join(', '))}</td><td>${v.desiredCount}</td></tr>`).join('')}</table>`:''}`
     :`<p class="bad small">${t('sw_192')}</p>`}</div>`});
  return h}
 

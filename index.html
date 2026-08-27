@@ -3703,9 +3703,13 @@ const state = {
   caseMode: false, caseId: null, caseTitle: '', caseSteps: 0,
   stepIndex: 0, attemptCount: 0, revealedExhibits: [], caseLibCache: null,
   doneSteps: [], ilead: false,   // interviewee-led (BCG/Bain on a graph-ready case)
-  // Language: aiLang drives the language of cases/drills; fbLang drives feedback.
-  // fbLang 'same' = follow aiLang. uiLang drives the interface chrome (independent).
-  aiLang: localStorage.getItem('caseedge_ailang') || 'en',
+  /* 25.08.2026, решение владельца. ВЕДЕНИЕ БОЛЬШЕ НЕ ВЫБИРАЕТСЯ: кейс, дрилл
+     и игры Solve идут ТОЛЬКО по-английски - это язык настоящего интервью MBB.
+     Выбираются две оси: uiLang (оболочка) и fbLang (разбор). Поле aiLang
+     оставлено константой, а не удалено: его читают девять мест, и константа
+     держит их честными без девяти правок. 'same' у fbLang теперь означает
+     «как интерфейс»: язык партии константа, и следовать ей нечему. */
+  aiLang: 'en',
   fbLang: localStorage.getItem('caseedge_fblang') || 'same',
   uiLang: localStorage.getItem('caseedge_uilang') || 'en',
 };
@@ -3717,13 +3721,15 @@ window.caseedgeUiLang = function () { return state.uiLang === 'ru' ? 'ru' : 'en'
 // Язык РАЗБОРА (ось fbLang) - для сервера, который пишет объяснение оценки.
 // Правило то же, что в drills.js: 'same' означает язык самой партии.
 window.caseedgeFbLang = function () {
-  var fb = state.fbLang === 'same' ? state.aiLang : state.fbLang;
+  var fb = state.fbLang === 'same' ? state.uiLang : state.fbLang;
   return fb === 'ru' ? 'ru' : 'en';
 };
 
 const LANG_NAMES = { en: 'English', ru: 'Russian (Русский)' };
 function setAiLang(code) {
-  state.aiLang = code;
+  /* 25.08.2026. Ведение зафиксировано английским; функция оставлена,
+     чтобы старые вызовы не падали, но язык не меняет. */
+  state.aiLang = 'en';
   /* 24.08.2026, dev. Список кейсов кэшируется на весь сеанс, а отрасль в нём
      теперь ЗАВИСИТ ОТ ЯЗЫКА. Без сброса кандидат, сменивший язык кейса,
      видел бы отрасли на прежнем — то есть кэш пережил бы причину, по которой
@@ -3739,14 +3745,16 @@ function setFbLang(code) {
 }
 // Returns an instruction line to append to any AI system prompt
 function langInstruction() {
-  const caseLang = LANG_NAMES[state.aiLang] || 'English';
-  const fb = state.fbLang === 'same' ? state.aiLang : state.fbLang;
+  /* 25.08.2026. Ведение - всегда английское, выбора нет. Разбор идёт по оси
+     fbLang, и 'same' означает язык интерфейса. */
+  const caseLang = 'English';
+  const fb = state.fbLang === 'same' ? state.uiLang : state.fbLang;
   const fbLang = LANG_NAMES[fb] || caseLang;
   return `\n\nLANGUAGE: Conduct the case/drill entirely in ${caseLang}. Deliver all feedback, scoring, and debrief in ${fbLang}. CRITICAL: the difficulty, depth, rigor, and quality must be IDENTICAL regardless of language - never simplify or shorten because of the language. Numbers, traps, and structure stay exactly as hard.`;
 }
 function updateLangUI() {
   document.querySelectorAll('.lang-current').forEach(el => {
-    el.textContent = (state.aiLang || 'en').toUpperCase();
+    el.textContent = (state.uiLang || 'en').toUpperCase();
   });
 }
 
@@ -4092,9 +4100,10 @@ const I18N = {
     'terms.h8': 'Contact', 'terms.p8': 'Questions about these terms? Reach us at support@casedge.io.',
     'lang.settings': 'Language settings',
     'lang.interface': 'Interface language',
-    'lang.casedrill': 'Case & drill language',
+    'lang.casedrill': 'Cases, drills and games',
+    'lang.enonly': 'English only. The case, the drill and the Solve games are conducted in English - that is the language of the real MBB interview, and practising in it is part of the preparation. Your interface and your feedback stay in the language you pick.',
     'lang.feedback': 'Feedback language',
-    'lang.same': 'Same',
+    'lang.same': 'As interface',
     'lang.done': 'Done',
     'legal.refundLink': 'Refund Policy',
     'legal.refundTitle': 'Refund Policy',
@@ -4509,9 +4518,10 @@ const I18N = {
     'terms.h8': 'Контакты', 'terms.p8': 'Вопросы по условиям? Пишите на support@casedge.io.',
     'lang.settings': 'Настройки языка',
     'lang.interface': 'Язык интерфейса',
-    'lang.casedrill': 'Язык кейсов и дриллов',
-    'lang.feedback': 'Язык фидбэка',
-    'lang.same': 'Как у кейса',
+    'lang.casedrill': 'Кейсы, дриллы и игры',
+    'lang.enonly': 'Только английский. Сам кейс, дрилл и игры Solve идут по-английски - это язык настоящего интервью MBB, и тренировка на нём часть подготовки. Интерфейс и разбор остаются на выбранном тобой языке.',
+    'lang.feedback': 'Язык разбора',
+    'lang.same': 'Как интерфейс',
     'lang.done': 'Готово',
     'legal.refundLink': 'Возврат средств',
     'legal.refundTitle': 'Политика возврата средств',
@@ -4649,6 +4659,10 @@ function setUiLang(code) {
   state.uiLang = code;
   try { localStorage.setItem('caseedge_uilang', code); } catch(e){}
   applyUiLang();
+  /* 25.08.2026. Чип в шапке показывает теперь язык ОБОЛОЧКИ (язык ведения стал
+     константой), а обновлялся он только из двух других переключателей - то есть
+     смена языка интерфейса чип не трогала. Поймано прогоном в браузере. */
+  if (typeof updateLangUI === 'function') updateLangUI();
 }
 function pickUiLang(code) {
   setUiLang(code);
@@ -4660,9 +4674,6 @@ function openLangMenu() {
   // highlight current selections
   document.querySelectorAll('#langOptsUi .lang-opt').forEach((b, i) => {
     b.classList.toggle('sel', ['en','ru'][i] === state.uiLang);
-  });
-  document.querySelectorAll('#langOptsAi .lang-opt').forEach((b, i) => {
-    b.classList.toggle('sel', ['en','ru'][i] === state.aiLang);
   });
   document.querySelectorAll('#langOptsFb .lang-opt').forEach((b, i) => {
     b.classList.toggle('sel', ['same','en','ru'][i] === state.fbLang);
@@ -10487,11 +10498,8 @@ document.addEventListener('keydown', e => {
       <button class="lang-opt" onclick="pickUiLang('en')">English</button>
       <button class="lang-opt" onclick="pickUiLang('ru')">Русский</button>
     </div>
-    <div class="lm-sub" data-i18n="lang.casedrill">Case &amp; drill language</div>
-    <div class="lang-opts" id="langOptsAi">
-      <button class="lang-opt" onclick="pickAiLang('en')">English</button>
-      <button class="lang-opt" onclick="pickAiLang('ru')">Русский</button>
-    </div>
+    <div class="lm-sub" data-i18n="lang.casedrill">Cases, drills and games</div>
+    <div class="help-hint" data-i18n="lang.enonly">English only. The case, the drill and the Solve games are conducted in English - that is the language of the real MBB interview, and practising in it is part of the preparation. Your interface and your feedback stay in the language you pick.</div>
     <div class="lm-sub" data-i18n="lang.feedback">Feedback language</div>
     <div class="lang-opts" id="langOptsFb">
       <button class="lang-opt" onclick="pickFbLang('same')" data-i18n="lang.same">Same</button>
