@@ -5935,6 +5935,23 @@ async function gmFillCounts() {
     const r = await resp.json();
     if (r && typeof r.total === 'number') put('seawolf', r.total);
   } catch (e) {}
+  /* 27.08.2026, dev. Из трёх счётчиков у сервера спрашивались ДВА, а Redrock
+     оставался зашитым числом 50 в разметке. Корпус давно вырос до 57, и витрина
+     врала - причём я сам прочитал это «50» как доказательство, что на проде
+     старый файл. Число, живущее в двух местах, расходится всегда; читать его
+     как замер нельзя. Спрашиваем и третье. */
+  try {
+    const tok = await window.swAuthToken();
+    if (!tok) return;
+    const resp = await fetch('/api/redrock-session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + tok },
+      body: JSON.stringify({ action: 'list' })
+    });
+    if (!resp.ok) return;
+    const r = await resp.json();
+    if (r && Array.isArray(r.games)) put('redrock', r.games.length);
+  } catch (e) {}
 }
 
 function startSolveChoose() {
