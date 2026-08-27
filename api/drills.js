@@ -516,23 +516,44 @@ async function gradeDrill(d, answer, fbLang) {
     return j || { graded: false, coaching: 'Could not grade — please try again.' };
   }
   // ST (Structuring): grade the candidate's tree against the five registers.
+/* 27.08.2026, dev. ЧЕМ КУПЛЕНО: круг 85 цеха дриллов. У ST-049 содержимое
+   регистра ORDER лежало под именем `start`, которого грейдер не знает, а DRIVE
+   не было вовсе. Промпт собирался как `(k.order || '')` — то есть строка
+   «ORDER (defensible starts):» и ПУСТОТА следом. Модель читала пустоту как
+   «требований нет» и ставила зачёт. Слот год судился по трём регистрам из пяти,
+   и ни один гейт этого не видел, потому что ошибки не было: было молчание.
+   Теперь отсутствие регистра ОБЪЯВЛЯЕТСЯ грейдеру словами, а не пустотой,
+   и уходит в телеметрию. Условие PASS не меняется. */
+const ST_REGISTERS = ['cover', 'decoy', 'me', 'drive', 'order'];
+const ST_REG_KNOWN = new Set(ST_REGISTERS.concat(['s0']));
+function stReg(k, name) {
+  const v = k && k[name];
+  if (typeof v === 'string' && v.trim()) return v;
+  return '(NOT SUPPLIED - this register is missing from the slot. Absence is NOT '
+       + '"no requirement": do not invent one and do not score this register at all.)';
+}
   if (d.type === 'Structuring' && d.key) {
     const k = d.key;
     const exhibitTxt = d.exhibit ? ('EXHIBIT (visible to candidate for this grade):\n' + JSON.stringify({ header: d.exhibit.header, rows: d.exhibit.rows })) : 'EXHIBIT: none / withheld';
     const u = 'ANCHOR QUESTION: ' + d.prompt +
       '\n\n--- GRADING REGISTERS (answer key) ---' +
-      '\nCOVER (required branches):\n' + (k.cover || '') +
-      '\n\nDECOY (reflexive branches — must not lead):\n' + (k.decoy || '') +
-      '\n\nME (incompatible pairs):\n' + (k.me || '') +
+      '\nCOVER (required branches):\n' + stReg(k, 'cover') +
+      '\n\nDECOY (reflexive branches — must not lead):\n' + stReg(k, 'decoy') +
+      '\n\nME (incompatible pairs):\n' + stReg(k, 'me') +
       /* 23.08.2026, dev. Находка цеха дриллов: регистр DRIVE объявлен в комментарии
          выше и заполнен у 49 слотов из 50, но до грейдера не доходил ВООБЩЕ.
          Дерево из одних заголовков проходило так же, как дерево с метриками.
          Отдаём регистр грейдеру, но УСЛОВИЕ PASS НЕ МЕНЯЕМ: иначе сложность
          50 слотов сдвинется одним ходом и без замера. */
-      '\n\nDRIVE (what to measure under each branch):\n' + (k.drive || '') +
-      '\n\nORDER (defensible starts):\n' + (k.order || '') +
+      '\n\nDRIVE (what to measure under each branch):\n' + stReg(k, 'drive') +
+      '\n\nORDER (defensible starts):\n' + stReg(k, 'order') +
       '\n\n' + exhibitTxt +
       '\n\n--- CANDIDATE TREE ---\n' + String(answer || '');
+    const missing = ST_REGISTERS.filter(n => !(typeof k[n] === 'string' && k[n].trim()));
+    const alien = Object.keys(k).filter(n => !ST_REG_KNOWN.has(n));
+    if (missing.length || alien.length) {
+      try { console.log('CASEDGE_TELEMETRY ' + JSON.stringify({ ev: 'st_register_gap', drill: d.id, missing, alien })); } catch (e) {}
+    }
     const j = await graderJSON(ST_GRADER_SYSTEM, u + fbDirective(fbLang), 800);
     // graderJSON null = the model didn't return parseable JSON. Return graded:false
     // (NEUTRAL) rather than pass:false so a grader hiccup is not shown as a candidate FAIL.
