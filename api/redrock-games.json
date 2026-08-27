@@ -1533,7 +1533,7 @@
    "depth": "STANDARD",
    "trap_or_clean": "Trap",
    "objective": "Analyze the tasting-room revenue, seasonality and member mix of Corveil Estate winery.",
-   "study_md": "Corveil Estate spans 60 ha of vineyard with vines averaging 22 years. The tasting room seats 80. Guest mix by quarter: Q1 1,200 (480 members) · Q3 2,000 (1,300) · Q4 1,600 (960).",
+   "study_md": "Corveil Estate spans 60 ha of vineyard with vines averaging 22 years. The tasting room seats 80 guests. Guest mix by quarter: Q1 1,200 (480 members) · Q3 2,000 (1,300) · Q4 1,600 (960).",
    "distractors": [
     "60 ha** of vineyard ⟨distractor⟩ with vines averaging **22 years"
    ],
@@ -1808,7 +1808,7 @@
     },
     {
      "id": "s3",
-     "text": "80",
+     "text": "80 guests",
      "role": "needed",
      "used_in": [
       "q3",
@@ -2317,7 +2317,7 @@
    "depth": "LAYERED",
    "trap_or_clean": "Trap",
    "objective": "Analyze the ecological and economic impact of an otter-restocking program on Sorrel Cove — its effect on the sea-urchin population, kelp recovery and dive-tourism revenue.",
-   "study_md": "Sorrel Cove is a temperate kelp forest 9 km² in area with 12 dive operators. An exploding sea-urchin population has grazed the kelp into a barren. At Year 1 the cove holds 150,000 urchins, growing 10%/year unchecked. The program restocks 50 sea otters, each removing 400 urchins/year (20,000/year total), monitored over 5 years. The kelp can sustain at most 175,000 urchins. Kelp cover is 45% in Year 1; under restocking it recovers, without it falls 3 pp/year. Each +1% kelp supports +500 reef-fish index and +$5,000 dive-tourism revenue.",
+   "study_md": "Sorrel Cove is a temperate kelp forest 9 km² in area with 12 dive operators. An exploding sea-urchin population has grazed the kelp into a barren. At Year 1 the cove holds 150,000 urchins, growing 10%/year unchecked. The program restocks 50 sea otters, each removing 400 urchins/year (20,000/year total), monitored over 5 years. The kelp can sustain at most 175,000 urchins. Kelp cover is 45% in Year 1; under restocking it recovers, without it falls 3 pp/year. Each +1% of cover adds +500 reef-fish index, and dive-tourism revenue moves +$5,000 per pp.",
    "distractors": [
     "9 km²** in area ⟨distractor⟩ with **12 dive operators"
    ],
@@ -2801,7 +2801,7 @@
     },
     {
      "id": "s14",
-     "text": "+$5,000",
+     "text": "+$5,000 per pp",
      "role": "needed",
      "used_in": [
       "q4b",
@@ -6334,7 +6334,7 @@
    "depth": "STANDARD",
    "trap_or_clean": "Trap",
    "objective": "Analyze the impact of a trapping program on Tanoa Mangroves — its effect on the invasive mud-crab population, mangrove recovery and nursery-fishery revenue.",
-   "study_md": "Tanoa Mangroves cover 1,600 ha worked by 8 fishing crews. An invasive mud-crab population grazes the seedlings. At Year 1 it stands at 90,000, growing 10%/year. A trapping program (70 traps × 200 crabs/year = 14,000/year) runs 5 years. The mangrove sustains at most 105,000 crabs. Mangrove cover is 40% in Year 1; under trapping it recovers, without it falls 2 pp/year. Each +1 pp cover adds +300 nursery-fish index and +$4,000 revenue.",
+   "study_md": "Tanoa Mangroves cover 1,600 ha worked by 8 fishing crews. An invasive mud-crab population grazes the seedlings. At Year 1 it stands at 90,000, growing 10%/year. A trapping program (70 traps × 200 crabs/year = 14,000/year) runs 5 years. The mangrove sustains at most 105,000 crabs. Mangrove cover is 40% in Year 1; under trapping it recovers, without it falls 2 pp/year. Each +1 pp of cover adds +300 nursery-fish index, and revenue moves +$4,000 per pp.",
    "distractors": [
     "1,600 ha",
     "8 fishing crews"
@@ -6805,7 +6805,7 @@
     },
     {
      "id": "s14",
-     "text": "+$4,000",
+     "text": "+$4,000 per pp",
      "role": "needed",
      "used_in": [
       "q4b"
@@ -7392,7 +7392,7 @@
    "depth": "LAYERED",
    "trap_or_clean": "Trap",
    "objective": "Analyze Vharsk's timber-export economy and reforestation policies — nutrient uptake, export revenue, its GDP share, and reclamation-credit financing.",
-   "study_md": "Vharsk is a forested kingdom; temperature 18 °C, area 90,000 km². Prong 1 — reforestation nursery: 50 ha × 5,000 plants/ha (250,000 plants), mix A 40% / B 40% / C 20%; uptake A 4 · B 3 · C 2 kg/plant/yr. Prong 2: timber sells at $150/m³; from Year 6 the crown reinvests 20% of export revenue; it issues reclamation credits.",
+   "study_md": "Vharsk is a forested kingdom; temperature 18 °C, area 90,000 km². Prong 1 — reforestation nursery: 50 ha × 5,000 plants/ha (250,000 plants), mix A 40% / B 40% / C 20%; uptake A 4 kg · B 3 kg · C 2 kg per plant a year. Prong 2: timber sells at $150/m³; from Year 6 the crown reinvests 20% of export revenue; it issues reclamation credits.",
    "distractors": [
     "18 °C",
     "90,000 km²"
@@ -7865,7 +7865,7 @@
     },
     {
      "id": "s9",
-     "text": "A 4",
+     "text": "A 4 kg",
      "role": "needed",
      "used_in": [
       "q1",
@@ -7874,7 +7874,7 @@
     },
     {
      "id": "s10",
-     "text": "B 3",
+     "text": "B 3 kg",
      "role": "needed",
      "used_in": [
       "q1",
@@ -7883,7 +7883,7 @@
     },
     {
      "id": "s11",
-     "text": "C 2 kg/plant/yr",
+     "text": "C 2 kg",
      "role": "needed",
      "used_in": [
       "q1",
@@ -11505,7 +11505,7 @@
    "depth": "STANDARD",
    "trap_or_clean": "Trap",
    "objective": "Analyze a culling program on Tarel Isle — its effect on the invasive goat population, native-scrub recovery and eco-tourism revenue.",
-   "study_md": "Tarel Isle covers 3,200 ha with 11 landing coves. An invasive goat herd strips the native scrub. At Year 1 it stands at 120,000, growing 10%/year. A cull program removes 18,000/year over 5 years. The scrub sustains at most 140,000 goats. Scrub cover is 55% in Year 1; under the cull it recovers, without it falls 4 pp/year. Each +1 pp cover adds +350 seabird index and +$7,000 revenue.",
+   "study_md": "Tarel Isle covers 3,200 ha with 11 landing coves. An invasive goat herd strips the native scrub. At Year 1 it stands at 120,000, growing 10%/year. A cull program removes 18,000/year over 5 years. The scrub sustains at most 140,000 goats. Scrub cover is 55% in Year 1; under the cull it recovers, without it falls 4 pp/year. Each +1 pp of cover adds +350 seabird index, and revenue moves +$7,000 per pp.",
    "distractors": [
     "3,200 ha",
     "11 landing coves"
@@ -11973,7 +11973,7 @@
     },
     {
      "id": "s12",
-     "text": "+$7,000",
+     "text": "+$7,000 per pp",
      "role": "needed",
      "used_in": [
       "q4b"
@@ -12043,7 +12043,7 @@
    "depth": "STRONG",
    "trap_or_clean": "Trap",
    "objective": "Analyze Meskil's bauxite-export economy and its land-reclamation fund — nutrient uptake, realized export revenue, its GDP share, and reclamation-credit financing.",
-   "study_md": "Meskil is a bauxite republic; plateau 900 m, 8 mining leases. Prong 1 — reclamation nursery: 30 ha × 5,000 plants/ha (150,000 plants), mix A 45% / B 35% / C 20%; uptake A 3 · B 5 · C 2 kg/plant/yr. Prong 2: bauxite's spot price is $80/tonne. Twist fact (offtake): 40% of every year's tonnage is locked in long-term offtake contracts at a fixed $50/tonne (below spot); only the remaining 60% sells at spot. From Year 6 the state reinvests 25% of realized export revenue; it issues reclamation credits.",
+   "study_md": "Meskil is a bauxite republic; plateau 900 m, 8 mining leases. Prong 1 — reclamation nursery: 30 ha × 5,000 plants/ha (150,000 plants), mix A 45% / B 35% / C 20%; uptake A 3 kg · B 5 kg · C 2 kg per plant a year. Prong 2: bauxite's spot price is $80/tonne. Twist fact (offtake): 40% of every year's tonnage is locked in long-term offtake contracts at a fixed $50/tonne (below spot); only the remaining 60% sells at spot. From Year 6 the state reinvests 25% of realized export revenue; it issues reclamation credits.",
    "distractors": [
     "900 m",
     "8 mining leases"
@@ -12446,7 +12446,7 @@
     },
     {
      "id": "s9",
-     "text": "A 3",
+     "text": "A 3 kg",
      "role": "needed",
      "used_in": [
       "q1",
@@ -12455,7 +12455,7 @@
     },
     {
      "id": "s10",
-     "text": "B 5",
+     "text": "B 5 kg",
      "role": "needed",
      "used_in": [
       "q1",
@@ -12464,7 +12464,7 @@
     },
     {
      "id": "s11",
-     "text": "C 2",
+     "text": "C 2 kg",
      "role": "needed",
      "used_in": [
       "q1",
@@ -16137,7 +16137,7 @@
    "depth": "STRONG",
    "trap_or_clean": "Trap",
    "objective": "Analyze Zubara's coffee-export economy and its watershed-restoration fund — nutrient uptake, the direction of its export pricing, and reinvestment.",
-   "study_md": "Zubara is a highland coffee republic; altitude 1,600 m, 9 growing districts. Prong 1 — watershed nursery: 40 ha × 5,000 plants/ha (200,000 plants), mix A 40% / B 40% / C 20%; uptake A 4 · B 6 · C 3 kg/plant/yr. Prong 2: Zubara exports 100 kt/year of coffee in two grades — Specialty and Commercial. Twist facts (grade mix): the mix is shifting toward Specialty. From Year 2 the state reinvests 30% of export revenue into the fund. GDP is $8,000M (Year 1) and $9,000M (Year 2).",
+   "study_md": "Zubara is a highland coffee republic; altitude 1,600 m, 9 growing districts. Prong 1 — watershed nursery: 40 ha × 5,000 plants/ha (200,000 plants), mix A 40% / B 40% / C 20%; uptake A 4 kg · B 6 kg · C 3 kg per plant a year. Prong 2: Zubara exports 100 kt/year of coffee in two grades — Specialty and Commercial. Twist facts (grade mix): the mix is shifting toward Specialty. From Year 2 the state reinvests 30% of export revenue into the fund. GDP is $8,000M (Year 1) and $9,000M (Year 2).",
    "distractors": [
     "1,600 m",
     "9 growing districts"
@@ -16484,7 +16484,7 @@
     },
     {
      "id": "s9",
-     "text": "A 4",
+     "text": "A 4 kg",
      "role": "needed",
      "used_in": [
       "q1"
@@ -16492,7 +16492,7 @@
     },
     {
      "id": "s10",
-     "text": "B 6",
+     "text": "B 6 kg",
      "role": "needed",
      "used_in": [
       "q1"
@@ -16500,7 +16500,7 @@
     },
     {
      "id": "s11",
-     "text": "C 3",
+     "text": "C 3 kg",
      "role": "needed",
      "used_in": [
       "q1"
@@ -21864,15 +21864,15 @@
     },
     {
      "c": 6,
-     "prompt": "Two levers at the same flooded area: +5% seasonal yield, or $1/t off the harvest cost. Which lifts the season margin more?",
+     "prompt": "Two levers at the same flooded area: +5% seasonal yield, or $1/t off the harvest cost. Which adds more to the season's MARGIN in dollars?",
      "input": "choice",
      "options": [
       "+5% yield",
       "$1/t off harvest cost"
      ],
-     "answer": "$1/t off harvest cost",
-     "naive": "+5% yield",
-     "naive_reason": "more yield lifts revenue but drags its own harvest cost with it; a dollar off the cost is kept in full",
+     "answer": "+5% yield",
+     "naive": "$1/t off harvest cost",
+     "naive_reason": "counts only the dollar saved on every tonne already harvested and misses that the extra tonnes carry the same price: +5% adds 3,240 t worth $45.20 each against $12 to harvest, $107,568, while the dollar off saves $64,800",
      "round": 0,
      "tolerance": 0
     }
@@ -21896,8 +21896,8 @@
      "q": 2,
      "key": "q2b",
      "answer": 19440,
-     "trap": 22680,
-     "lesson": "does not read the 30% share off ex1"
+     "trap": 32400,
+     "lesson": "splits the harvest evenly between the two grades instead of applying the 70/30 shares printed in ex1"
     },
     {
      "q": 3,
@@ -22316,9 +22316,9 @@
     {
      "q": 3,
      "key": "q3b",
-     "answer": "Export",
-     "trap": "Domestic",
-     "lesson": "a proportional fall costs the bigger line more dollars"
+     "answer": "Domestic",
+     "trap": "Export",
+     "lesson": "halving the bigger line costs more dollars than lifting the smaller one gains: 14,250 export tonnes at $34 fall short of 28,500 domestic tonnes at $19"
     },
     {
      "q": 4,
@@ -22837,7 +22837,7 @@
    "depth": "STANDARD",
    "trap_or_clean": "Trap",
    "objective": "Size the season's own brick output, price it by grade and judge the season margin.",
-   "study_md": "Vetra Brickworks draws clay from 3 pits on the Sarel plain and keeps 14 lorries at the yard. Its kilns fired 798,000 bricks this season. The dispatch book records 840,000 bricks leaving the gate, 100,000 of them bought in from the Sarel works to fill orders. The site has been firing since 1961.",
+   "study_md": "Vetra Brickworks draws clay from 3 pits on the Sarel plain and keeps 14 lorries at the yard. Its kilns fired 798,000 bricks this season. The dispatch book records 840,000 bricks leaving the gate, of which 100,000 bricks were bought in from the Sarel works to fill orders. The site has been firing since 1961.",
    "distractors": [
     "3 pits",
     "14 lorries",
@@ -23168,7 +23168,7 @@
     },
     {
      "id": "s3",
-     "text": "100,000",
+     "text": "100,000 bricks",
      "role": "needed",
      "used_in": [
       "c1",

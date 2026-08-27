@@ -747,6 +747,15 @@ function firmStyle(firm) {
   return 'MBB interviewer. Guide the candidate through the fixed steps, balancing structure with letting them drive.';
 }
 
+/* ЯЗЫК ВЕДЕНИЯ · решение владельца 25.08.2026.
+   Кейс ведётся ТОЛЬКО по-английски: это язык настоящего интервью MBB, и
+   тренировка на нём часть подготовки. Выбора у кандидата нет, и его нет
+   и на клиенте - но щит стоит ЗДЕСЬ тоже: клиент может прислать что угодно,
+   а ведение - свойство продукта, а не пожелание запроса.
+   Что ОСТАЛОСЬ на выборе кандидата: оболочка (uiLang) и РАЗБОР (fbLang).
+   Разбор кейса собирает клиент своим вызовом, ось fbLang туда и уходит. */
+const CONDUCT_LANG = 'en';
+
 /* ───────────────────────── hint gating ───────────────────────────────────────
    attemptCount is the number of failed attempts on the CURRENT step.
    0  → L0 silence: no hints, no leading.
@@ -1267,7 +1276,7 @@ export default async function handler(req, res) {
 
     // 4) list action — no model call, meta only.
     if (body.action === 'list') {
-      return res.status(200).json({ cases: listCases(body.lang === 'ru' ? 'ru' : 'en') });
+      return res.status(200).json({ cases: listCases(CONDUCT_LANG) });
     }
 
     // 4b) pick action — adaptive auto-selection, no model call, meta only.
@@ -1277,7 +1286,7 @@ export default async function handler(req, res) {
         level: body.level,
         seenIds: body.seenIds,
         rand: Math.random(),
-        lang: body.lang === 'ru' ? 'ru' : 'en'
+        lang: CONDUCT_LANG
       }));
     }
 
@@ -1380,7 +1389,7 @@ export default async function handler(req, res) {
        ровно как раньше — старые клиенты и повторы не ломаются. */
     const wantStream = body.stream === true || body.stream === 1;
     const focusKey = ['structure','quant','logic','comm','ownership'].includes(body.focusDimension) ? body.focusDimension : null;
-    const lang = body.lang === 'ru' ? 'ru' : 'en';   // whitelist
+    const lang = CONDUCT_LANG;   // ведение фиксировано, см. объявление константы
 
     // Interviewee-led (BCG/Bain on a graph-ready case): the candidate drives, the
     // engine holds only real dependencies. Everything else (McKinsey, or any case

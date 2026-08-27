@@ -85,10 +85,6 @@
     "ru": "= **D3** — считает 510/1,600 = 31.9% и объявляет East лидером.",
     "en": "= **D3** — computes 510/1,600 = 31.9% and declares East the leader."
    },
-   "hints": {
-    "L1": "Одинаковы ли команды по размеру?",
-    "L2": "Что нужно в знаменателе, чтобы получить *rate*?"
-   },
    "family_h25": "F1",
    "family_src": "тело",
    "family_conf": "высокая",
@@ -183,10 +179,6 @@
     "ru": "Ты прочитал рост доли онлайна с 25% до 28% как рост канала в деньгах и не перевёл обе доли в суммы по их собственным базам.",
     "en": "You read the online share moving from 25% to 28% as growth in money and never converted both shares into dollars on their own bases."
    },
-   "hints": {
-    "L1": "От чего эти проценты?",
-    "L2": "Переведи обе доли в доллары"
-   },
    "family_h25": "F1",
    "family_src": "тело",
    "family_conf": "высокая",
@@ -280,10 +272,6 @@
    "provoked": {
     "ru": "Ты взял средний темп за весь период и назвал рост ровным, не пройдя ряд год к году и не отделив провал от последующего восстановления.",
     "en": "You took the average rate for the whole period and called growth steady, without walking the series year by year and splitting the fall from the recovery."
-   },
-   "hints": {
-    "L1": "Пройди ряд год за годом",
-    "L2": "Что случилось между 2021 и 2022?"
    },
    "family_h25": "F1",
    "family_src": "тело",
@@ -443,10 +431,6 @@
     "ru": "Ты объявил себя лидером по самой крупной нарисованной доле, не сложив показанные доли и не спросив, кому принадлежит неучтённый остаток рынка.",
     "en": "You claimed leadership off the largest slice drawn, without adding up the shares shown and asking who holds the unaccounted remainder of the market."
    },
-   "hints": {
-    "L1": "Сложи доли",
-    "L2": "Чего в таблице нет?"
-   },
    "family_h25": "F1",
    "family_src": "тело",
    "family_conf": "высокая",
@@ -540,10 +524,6 @@
    "provoked": {
     "ru": "Ты ранжировал направления по числу уволившихся, не умножив уходы на стоимость замены, из-за чего дорогая по замене категория ушла вниз списка.",
     "en": "You ranked the categories by number of leavers, without multiplying leavers by replacement cost, so the expensive-to-replace category dropped down the list."
-   },
-   "hints": {
-    "L1": "Уход уходу рознь — по цене?",
-    "L2": "Какие две строки вообще можно не считать?"
    },
    "family_h25": "F1",
    "family_src": "тело",
@@ -647,10 +627,6 @@
     "ru": "Ты прочитал разрыв между 30% доли выручки и 25% доли штук как силу бренда, не поделив выручку на количество и не назвав базу сравнения цены.",
     "en": "You read the gap between the 30% revenue share and the 25% unit share as brand strength, without dividing revenue by units and naming the price comparison base."
    },
-   "hints": {
-    "L1": "Что получится, если поделить одну долю на другую?",
-    "L2": "Премия к кому — к рынку или к конкурентам?"
-   },
    "family_h25": "F2",
    "family_src": "тело",
    "family_conf": "высокая",
@@ -751,10 +727,6 @@
    "provoked": {
     "ru": "Ты заключил по улучшению каждого этапа обеих воронок, что итоговая конверсия выросла, и не пересчитал итог как сумму сделок на сумму лидов.",
     "en": "You concluded from every stage of both funnels improving that the overall win rate rose, and never recomputed the total as wins divided by leads."
-   },
-   "hints": {
-    "L1": "Посчитай конверсию каждого шага отдельно по сегментам",
-    "L2": "Какая доля лидов пришлась на Enterprise в каждом году?"
    },
    "family_h25": "F1",
    "family_src": "тело",
@@ -878,10 +850,6 @@
     "ru": "Ты выбрал сегмент по размеру рынка из первой таблицы, не умножив его на охват из второй, и сопоставил две доли разного рода рядом друг с другом.",
     "en": "You picked the segment by market size from the first exhibit, without multiplying it by the coverage from the second, comparing two unlike percentages side by side."
    },
-   "hints": {
-    "L1": "Хватает ли одного экзибита?",
-    "L2": "Что делать с двумя процентами на один сегмент?"
-   },
    "family_h25": "F9",
    "family_src": "тело",
    "family_conf": "высокая",
@@ -995,10 +963,6 @@
    "provoked": {
     "ru": "Ты ранжировал форматы по числу экранов или по цене билета, не построив объём как экраны × сеансы × места × заполняемость и не умножив его на цену.",
     "en": "You ranked the formats by screen count or by ticket price, without building volume as screens x showings x seats x occupancy and multiplying that volume by price."
-   },
-   "hints": {
-    "L1": "Посчитай билеты по каждому формату",
-    "L2": "Билеты одинаковы — что тогда решает?"
    },
    "family_h25": "F9",
    "family_src": "тело",
@@ -1164,10 +1128,6 @@
     "ru": "«найти подвох, которого нет» — перенормировать доли, объявить ось обрезанной или искать скрытый сегмент. **Зачёт Clean = оба ложных подозрения проверены и отвергнуты + явно сказано «ловушки нет, потому что…»** [Y2].",
     "en": "\"hunting for a trap that is not there\" — renormalising the shares, calling the axis truncated or looking for a hidden segment. **Clean credit = both false suspicions checked and rejected + \"there is no trap, because…\" said explicitly** [Y2]."
    },
-   "hints": {
-    "L1": "Сложи клетки обеих матриц",
-    "L2": "Если всё сходится — как это сформулировать?"
-   },
    "family_h25": "F0",
    "family_src": "clean",
    "family_conf": "высокая",
@@ -1283,10 +1243,6 @@
     "ru": "Ты выбрал линию для найма по темпу роста, посчитанному от малой базы, не посчитав её вклад в прирост выручки в деньгах и долю этого вклада в приросте.",
     "en": "You picked the line to staff by its growth rate off a small base, without computing its contribution to the revenue increase in dollars and its share of that increase."
    },
-   "hints": {
-    "L1": "От какой базы каждый рост?",
-    "L2": "Сколько долларов из 48 дал каждый драйвер?"
-   },
    "family_h25": "F9",
    "family_src": "тело",
    "family_conf": "высокая",
@@ -1395,10 +1351,6 @@
     "ru": "Ты сравнил последний столбец с предыдущим, не проверив длину периода в каждом, и не сложил кварталы до полного года перед сравнением год к году.",
     "en": "You compared the last bar with the one before it without checking the period length in each, and never summed the quarters into a full year before comparing year to year."
    },
-   "hints": {
-    "L1": "Все ли столбцы — про один и тот же тип периода?",
-    "L2": "Что даст сумма четырёх последних?"
-   },
    "family_h25": "F6",
    "family_src": "тело",
    "family_conf": "высокая",
@@ -1492,10 +1444,6 @@
    "provoked": {
     "ru": "Ты принял синхронный рост маркетинга и выручки за причинную связь и не проверил третий столбец — число клиник, выросшее с 240 до 425 вместе с обоими.",
     "en": "You read marketing and revenue rising together as proof of causation and never checked the third column — clinics, up from 240 to 425 alongside both."
-   },
-   "hints": {
-    "L1": "Что ещё в таблице растёт с тем же темпом?",
-    "L2": "Посчитай выручку на клинику"
    },
    "family_h25": "F9",
    "family_src": "тело",
@@ -1597,10 +1545,6 @@
     "ru": "Ты взял простое среднее сроков по четырём сегментам, 34 дня, за срок по портфелю и не взвесил их суммами — $4,500,000 у SMB против $15,000,000 у Government.",
     "en": "You took the simple four-segment average of 34 days as the portfolio figure and never weighted it by amount — $4,500,000 in SMB against $15,000,000 in Government."
    },
-   "hints": {
-    "L1": "Как именно посчитано это среднее?",
-    "L2": "Взвесь по сумме, а не по числу сегментов"
-   },
    "family_h25": "F1",
    "family_src": "тело",
    "family_conf": "высокая",
@@ -1699,10 +1643,6 @@
    "provoked": {
     "ru": "Ты прочитал высоту столбцов выручки как рост в разы, не заметив, что левая ось начинается с 800, а не с нуля, и что правая идёт от нуля.",
     "en": "You read the height of the revenue bars as a multi-fold climb without noticing the left axis starts at 800, not at zero, while the right one runs from zero."
-   },
-   "hints": {
-    "L1": "С какого значения начинается левая ось?",
-    "L2": "Посчитай прибыль, а не выручку"
    },
    "family_h25": "F1",
    "family_src": "тело",
@@ -1816,10 +1756,6 @@
     "ru": "Ты сразу принялся выбирать, какой из двух отчётов правильный, и отдал победу более свежему и подробному, а второй объявил устаревшим.",
     "en": "You went straight to picking which of the two exhibits is the right one, handing the win to the newer, more granular one and calling the other stale."
    },
-   "hints": {
-    "L1": "Насколько именно расходятся, и что это за число?",
-    "L2": "Прочти примечание к Exhibit B"
-   },
    "family_h25": "F6",
    "family_src": "тело",
    "family_conf": "высокая",
@@ -1930,10 +1866,6 @@
    "provoked": {
     "ru": "Ты направил бюджет в Subscription из-за темпа 60% и не пересчитал вклад линий в процентных пунктах от общей базы прошлого года в 250.",
     "en": "You sent the budget to Subscription on its 60% growth rate without recomputing each line's contribution in percentage points off the prior-year total of 250."
-   },
-   "hints": {
-    "L1": "Сколько долларов дала каждая линия?",
-    "L2": "Раздели прирост линии на общую базу, а не на свою"
    },
    "family_h25": "F9",
    "family_src": "тело",
@@ -2107,10 +2039,6 @@
     "ru": "Ты принял рост портфеля на 10% за укрепление базы и не вычел Client A, чей прирост с 62 до 98 больше всего прироста портфеля.",
     "en": "You took the 10% portfolio growth as a stronger client base and never stripped out Client A, whose move from 62 to 98 exceeds the entire portfolio gain."
    },
-   "hints": {
-    "L1": "Сколько клиентов выросло, а сколько упало?",
-    "L2": "Посчитай портфель без Client A"
-   },
    "family_h25": "F1",
    "family_src": "тело",
    "family_conf": "высокая",
@@ -2208,10 +2136,6 @@
    "provoked": {
     "ru": "Ты стал решать, кто из двух прав, вместо того чтобы поделить одни и те же 38,400 отмен на каждую базу — на 480,000 и на 192,000.",
     "en": "You set about deciding which team was wrong instead of dividing the same 38,400 cancellations by each base — by 480,000 and by 192,000."
-   },
-   "hints": {
-    "L1": "Одинаковый ли числитель у обеих цифр?",
-    "L2": "Прочти примечание к Exhibit B"
    },
    "family_h25": "F5",
    "family_src": "тело",
@@ -2319,10 +2243,6 @@
     "ru": "«найти подвох, которого нет» — заподозрить ценовую премию или убыточную линию. **Зачёт Clean = оба ложных подозрения проверены и отвергнуты + явно сказано «ловушки нет, потому что…»** [Y2].",
     "en": "\"hunting for a trap that is not there\" — suspecting a price premium or a loss-making line. **Clean credit = both false suspicions checked and rejected + \"there is no trap, because…\" said explicitly** [Y2]."
    },
-   "hints": {
-    "L1": "Проверь, сходятся ли линии с итогом",
-    "L2": "Если всё сходится — как это сформулировать?"
-   },
    "family_h25": "F0",
    "family_src": "clean",
    "family_conf": "высокая",
@@ -2427,10 +2347,6 @@
    "provoked": {
     "ru": "Ты прочитал падение доли с 30.0 до 25.0 как потерю выручки и клиентов и не перевёл долю в деньги — выручка выросла с 1,260 до 1,470.",
     "en": "You read the share fall from 30.0 to 25.0 as lost revenue and customers without converting share into dollars — revenue rose from 1,260 to 1,470."
-   },
-   "hints": {
-    "L1": "Что произошло с рынком за эти два года?",
-    "L2": "Посчитай нашу выручку в долларах, а не в долях"
    },
    "family_h25": "F1",
    "family_src": "тело",
@@ -2547,10 +2463,6 @@
     "ru": "Ты дотянул линию роста до последних строк таблицы и объявил подъём продолжающимся, взяв свежие точки как есть — как очередной шаг того же ряда.",
     "en": "You extended the growth line onto the table's last rows and declared the upcycle still running, taking the newest points at face value as the next step of the same series."
    },
-   "hints": {
-    "L1": "Одинаковой ли длины все периоды?",
-    "L2": "Сложи два квартала 2025 и сравни с полугодием"
-   },
    "family_h25": "F6",
    "family_src": "тело",
    "family_conf": "высокая",
@@ -2637,10 +2549,6 @@
    "provoked": {
     "ru": "Ты принял синхронный рост жалоб и найма за причинную связь и предложил резать найм, не нормировав жалобы на транзакции — они выросли с 84,000 до 216,000.",
     "en": "You took complaints and headcount rising together as causation and moved to cut hiring without normalising complaints by transactions, up from 84,000 to 216,000."
-   },
-   "hints": {
-    "L1": "Что ещё растёт в таблице?",
-    "L2": "Посчитай жалобы на 1,000 транзакций"
    },
    "family_h25": "F9",
    "family_src": "тело",
@@ -2738,10 +2646,6 @@
    "provoked": {
     "ru": "Читает рост средней маржи с 17.6% до 18.0% как улучшение работы подразделений, не сверив маржу каждого сегмента год к году.",
     "en": "Reads the average margin rising from 17.6% to 18.0% as the business units performing better, without comparing each segment's margin year on year."
-   },
-   "hints": {
-    "L1": "Сравни маржу по каждому сегменту отдельно",
-    "L2": "Что изменилось в долях выручки?"
    },
    "family_h25": "F1",
    "family_src": "тело",
@@ -2867,10 +2771,6 @@
     "ru": "Ставит июньские 265,000 рецептов против квартальных 597,000 как одну величину и объявляет запуск провалом, не приведя ряды к одному периоду.",
     "en": "Sets June's 265,000 prescriptions against a quarterly 597,000 as if they were one measure and calls the launch a failure, never putting both series on the same period."
    },
-   "hints": {
-    "L1": "Одинаковой ли длины периоды в двух экзибитах?",
-    "L2": "Приведи квартал к месяцу"
-   },
    "family_h25": "F1",
    "family_src": "тело",
    "family_conf": "высокая",
@@ -2984,10 +2884,6 @@
    "provoked": {
     "ru": "Ранжирует приоритет по одной колонке опроса — худшая оценка 2.4 или высшая важность 9.4 — и не строит взвешенный важностью недобор до 10.",
     "en": "Ranks priority off a single survey column — the worst rating 2.4 or the highest importance 9.4 — and never builds the shortfall to 10 weighted by importance."
-   },
-   "hints": {
-    "L1": "Достаточно ли одной колонки, чтобы расставить приоритет?",
-    "L2": "Где важность высока, а оценка низка одновременно?"
    },
    "family_h25": "F9",
    "family_src": "тело",
@@ -3107,10 +3003,6 @@
     "ru": "Отвечает на денежный вопрос долями, оставляя 34% как есть без базы рынка из второго экспоната, и списывает распылённые 17% как незначимые.",
     "en": "Answers a dollar question in share points, leaving 34% as it stands with no market base from the second exhibit, and writes the scattered 17% off as negligible."
    },
-   "hints": {
-    "L1": "От какой базы эти проценты?",
-    "L2": "Что даёт сумма трёх столбцов в Exhibit B?"
-   },
    "family_h25": "F1",
    "family_src": "тело",
    "family_conf": "высокая",
@@ -3190,10 +3082,6 @@
    "provoked": {
     "ru": "Заключает по росту конверсии на каждом этапе, что модель работает, и не умножает ставки на вход воронки, упавший с 60,000 до 36,000 лидов.",
     "en": "Concludes the model works because every stage rate improved, never multiplying those rates by a funnel entrance that fell from 60,000 to 36,000 leads."
-   },
-   "hints": {
-    "L1": "Сколько сделок в абсолюте в каждом году?",
-    "L2": "Что произошло со входом воронки?"
    },
    "family_h25": "F2",
    "family_src": "тело",
@@ -3305,10 +3193,6 @@
     "ru": "Принимает совместный рост промо с $2.10M до $6.20M и продаж за отдачу от расходов, не поделив продажи на число точек, выросшее со 120 до 183.",
     "en": "Takes promo rising from $2.10M to $6.20M alongside sales as the return on that spend, never dividing sales by a network that went from 120 to 183 sites."
    },
-   "hints": {
-    "L1": "Что ещё изменилось за эти кварталы?",
-    "L2": "Посчитай продажи на одну точку"
-   },
    "family_h25": "F9",
    "family_src": "тело",
    "family_conf": "высокая",
@@ -3414,10 +3298,6 @@
    "provoked": {
     "ru": "«сдвиг объявлен в тоннах — считаю в тоннах»: взвесить маржи линий по тоннажу (28.59%) или взять невзвешенное среднее четырёх линий (30.25%) вместо взвешивания по выручке. Второй рефлекс — «ушло 425 k t, значит выручка упала»: одинаковая цена $80.00/t на Cement и Concrete держит тотал ровно на $200.0M. **Зачёт = новая выручка построена как объём x цена, взвешивание по деньгам, ответ назван в п.п. и в долларах.**",
     "en": "\"the shift is announced in tonnes, so I count in tonnes\": weighting the line margins by tonnage (28.59%) or taking an unweighted average of the four lines (30.25%) instead of weighting by revenue. The second reflex — \"425 k t moved out, so revenue fell\": the same $80.00/t price on Cement and Concrete holds the total at exactly $200.0M. **Credit = new revenue built as volume x price, weighting in dollars, the answer named in percentage points and in dollars.**"
-   },
-   "hints": {
-    "L1": "В каких единицах взвешивается маржа — в тоннах или в деньгах?",
-    "L2": "Посчитай новую выручку каждой линии как объём x цену и сравни новый процент с 28.9% в п.п."
    },
    "family_h25": "F2",
    "family_src": "тело",
@@ -3559,10 +3439,6 @@
     "ru": "Читает параллельность двух линий как сохранение отставания, не проверив, что левая ось логарифмическая, и не посчитав разрыв в деньгах на концах ряда.",
     "en": "Reads two parallel lines as keeping pace with the leader, never checking that the left axis is logarithmic or sizing the dollar gap at both ends of the series."
    },
-   "hints": {
-    "L1": "Посмотри на подписи делений оси",
-    "L2": "Посчитай разрыв в долларах для 2020 и 2024"
-   },
    "family_h25": "F2",
    "family_src": "тело",
    "family_conf": "высокая",
@@ -3651,10 +3527,6 @@
    "provoked": {
     "ru": "складывает четыре столбца моста как однородные драйверы и отчитывается сальдо −$60M (−20.83%), не отделив унаследованный приток +$96M от собственной торговли; базой плана остаётся $228M вместо $132M.",
     "en": "Adds the bridge's four bars as drivers of one kind and reports a net −$60M (−20.83%), without separating the inherited inflow of +$96M from its own trading; the plan's base stays $228M instead of $132M."
-   },
-   "hints": {
-    "L1": "Какие из четырёх столбцов моста — результат наших действий, а какой пришёл со стороны?",
-    "L2": "Пересобери мост без столбца притока — каким тогда будет FY2024?"
    },
    "family_h25": "F1",
    "family_src": "тело",
@@ -3756,10 +3628,6 @@
     "ru": "Называет самым прибыльным крупнейший по выручке канал — Retail, $420M из $900M, — хотя в экспонате нет ни одной статьи затрат.",
     "en": "Names the largest revenue channel, Retail at $420M of the $900M total, as the most profitable, although the exhibit carries no cost line of any kind."
    },
-   "hints": {
-    "L1": "Что именно спрошено, и что показано?",
-    "L2": "Какой величины не хватает, чтобы ответить?"
-   },
    "family_h25": "F4",
    "family_src": "тело",
    "family_conf": "высокая",
@@ -3847,10 +3715,6 @@
    "provoked": {
     "ru": "«найти подвох, которого нет» — принять сезонность за разворот тренда. **Зачёт Clean = оба ложных подозрения проверены и отвергнуты + явно сформулировано «ловушки нет, потому что…»** [Y2].",
     "en": "\"hunting for a trap that is not there\" — taking seasonality for a reversal of the trend. **Clean credit = both false suspicions checked and rejected + \"there is no trap, because…\" stated explicitly** [Y2]."
-   },
-   "hints": {
-    "L1": "Сравни Q4 с Q4, а не с Q2",
-    "L2": "Если всё сходится — как это сказать прямо?"
    },
    "family_h25": "F0",
    "family_src": "clean",
@@ -3951,10 +3815,6 @@
     "ru": "Ранжирует продукты по колонке объёма, где 42,000,000 штук стоят рядом с 480,000 тонн, и отдаёт крепежу приоритет, не переведя строки в деньги.",
     "en": "Ranks products off a volume column where 42,000,000 units sit beside 480,000 tonnes, and gives fasteners priority without converting the rows into money."
    },
-   "hints": {
-    "L1": "Посмотри на колонку единиц измерения",
-    "L2": "Какая база общая для всех четырёх строк?"
-   },
    "family_h25": "F1",
    "family_src": "тело",
    "family_conf": "высокая",
@@ -4048,10 +3908,6 @@
     "ru": "Выбирает сегмент по размеру рынка — Cardiology, $180M — или по темпу роста — Dental, 25% в год, — не вычитая уже занятую нами долю.",
     "en": "Picks the segment on market size, Cardiology at $180M, or on growth, Dental at 25% per year, without netting out the share we already hold."
    },
-   "hints": {
-    "L1": "Что именно мы можем занять в каждом сегменте?",
-    "L2": "Учти уже занятую нами долю"
-   },
    "family_h25": "F9",
    "family_src": "тело",
    "family_conf": "высокая",
@@ -4124,10 +3980,6 @@
    "provoked": {
     "ru": "= **D4** (принять, что все ряды нужны) либо **D5** в форме «лишний, потому что маленький».",
     "en": "= **D4** (accepting that every row is needed) or **D5** in the form \"irrelevant because it is small\"."
-   },
-   "hints": {
-    "L1": "Какой метрикой измеряется прибыльность андеррайтинга?",
-    "L2": "Все ли строки относятся к страховой деятельности?"
    },
    "family_h25": "F9",
    "family_src": "тело",
@@ -4259,10 +4111,6 @@
     "ru": "Объявляет POS надёжным источником, а панельные 1,380 — ошибкой, и не читает сноску про 90% охвата, которая и объясняет расхождение с 1,242.",
     "en": "Declares POS the reliable source and calls the panel's 1,380 an error, skipping the 90% coverage footnote that explains the gap from 1,242."
    },
-   "hints": {
-    "L1": "Насколько именно расходятся, и что покрывает каждый источник?",
-    "L2": "Прочти обе сноски"
-   },
    "family_h25": "F5",
    "family_src": "тело",
    "family_conf": "высокая",
@@ -4346,10 +4194,6 @@
    "provoked": {
     "ru": "Соглашается с версией про страницу цен, не прочитав ставки выше по воронке, где регистрация упала с 35.00% до 27.50%, и не проверив разбавление трафика.",
     "en": "Accepts the pricing-page story without reading the upstream rates, where registration fell 35.00% to 27.50%, and without testing traffic dilution."
-   },
-   "hints": {
-    "L1": "Что ещё изменилось, кроме страницы цен?",
-    "L2": "Может ли новый трафик объяснить те же цифры?"
    },
    "family_h25": "F3",
    "family_src": "тело",
@@ -4458,10 +4302,6 @@
     "ru": "Читает порядок столбцов моста как хронологию и выводит +1.8 из +2.4, хотя столбцы отсортированы по величине вклада, а дат в экспонате нет.",
     "en": "Reads the bridge's column order as chronology and derives +1.8 from +2.4, though the bars are sorted by size of contribution and carry no dates."
    },
-   "hints": {
-    "L1": "Откуда взят порядок факторов?",
-    "L2": "Связаны ли закупочные цены с автоматизацией?"
-   },
    "family_h25": "F6",
    "family_src": "тело",
    "family_conf": "высокая",
@@ -4564,10 +4404,6 @@
     "ru": "Умножает выручку на 12.0% возвратов, хотя эта доля измерена в заказах, и не берёт из сноски чек возвращённого заказа $129 против среднего 86.",
     "en": "Multiplies revenue by the 12.0% return rate although that share is measured in orders, ignoring the footnote's returned ticket of $129 against 86."
    },
-   "hints": {
-    "L1": "В чём измерена доля возвратов?",
-    "L2": "Прочти примечание про чек возвращаемого заказа"
-   },
    "family_h25": "F1",
    "family_src": "тело",
    "family_conf": "высокая",
@@ -4667,10 +4503,6 @@
    "provoked": {
     "ru": "Отдаёт рост до 18.20% программе улучшений, не сверив маржи сегментов год к году, где все три упали, а выручка осталась 1,200.",
     "en": "Credits the rise to 18.20% to the excellence programme without comparing segment margins year on year, where all three fell while revenue stayed 1,200."
-   },
-   "hints": {
-    "L1": "Сравни маржу по каждому сегменту отдельно",
-    "L2": "Раздели изменение на вклад микса и вклад ставок"
    },
    "family_h25": "F1",
    "family_src": "тело",
@@ -4808,10 +4640,6 @@
     "ru": "Выбирает Northern по размеру 1,400 и росту 9, не сопоставив это с ценой входа 340 против 72 у Southern, то есть не считая отдачу на вложенный доллар.",
     "en": "Picks Northern on market size 1,400 and growth 9 without weighing entry cost of 340 against Southern's 72, so return per dollar spent is never computed."
    },
-   "hints": {
-    "L1": "Сколько стоит войти в каждый регион?",
-    "L2": "Раздели отдачу на стоимость входа"
-   },
    "family_h25": "F9",
    "family_src": "тело",
    "family_conf": "высокая",
@@ -4911,10 +4739,6 @@
    "provoked": {
     "ru": "Ставит в приоритет полный пакет из-за 890 на клиента, не умножив это на 160 клиентов и не назвав churn недостающей величиной.",
     "en": "Prioritises the full package because it pays 890 per customer, never multiplying by its 160 customers nor naming churn as the missing quantity."
-   },
-   "hints": {
-    "L1": "Сколько всего приносит каждый сегмент, а не один клиент?",
-    "L2": "Что определяет приоритет именно для удержания?"
    },
    "family_h25": "F4",
    "family_src": "тело",
@@ -5065,10 +4889,6 @@
    "provoked": {
     "ru": "Читает падение отношения с 13.33 до 3.04 как сокращение отставания и не смотрит колонку разрыва, где 2,220 вырастают до 3,013.",
     "en": "Reads the ratio falling from 13.33 to 3.04 as closing the gap and never looks at the gap column, where 2,220 widens to 3,013."
-   },
-   "hints": {
-    "L1": "Посчитай разрыв в долларах для каждого года",
-    "L2": "Сколько денег даёт 42% от нашей базы против 11% от их?"
    },
    "family_h25": "F5",
    "family_src": "тело",
@@ -5225,10 +5045,6 @@
     "ru": "Принимает среднее 1,528.89 за типичный объект и позиционируется на 1,500, не построив медиану и не заметив, что пентхаус 4,900 тянет среднее вверх.",
     "en": "Takes the 1,528.89 average as the typical unit and positions at 1,500, never building the median nor seeing that the 4,900 penthouse lifts the mean."
    },
-   "hints": {
-    "L1": "Сколько объектов стоят дешевле среднего?",
-    "L2": "Найди пятую ставку по порядку"
-   },
    "family_h25": "F7",
    "family_src": "тело",
    "family_conf": "высокая",
@@ -5357,10 +5173,6 @@
     "ru": "Читает убывающие столбцы от 142 до 27 как падение во времени и режет хвост, не проверив, что в экспонате один период FY2024 и сортировка по выручке.",
     "en": "Reads the bars falling from 142 to 27 as a decline over time and cuts the tail, never checking that the exhibit holds one period, FY2024, sorted by revenue."
    },
-   "hints": {
-    "L1": "Что отложено по горизонтальной оси?",
-    "L2": "Сколько периодов в этом экзибите?"
-   },
    "family_h25": "F6",
    "family_src": "тело",
    "family_conf": "высокая",
@@ -5454,10 +5266,6 @@
    "provoked": {
     "ru": "«найти подвох, которого нет» — заподозрить смену базы или смешение баз между колонками. **Зачёт Clean = оба ложных подозрения проверены и отвергнуты + явно сформулировано «ловушки нет, потому что…»** [Y2].",
     "en": "\"hunting for a trap that is not there\" — suspecting a change of base or bases mixed between the columns. **Clean credit = both false suspicions checked and rejected + \"there is no trap, because…\" stated explicitly** [Y2]."
-   },
-   "hints": {
-    "L1": "Раздели выручку тарифа на итог",
-    "L2": "Если всё сходится — как это сказать прямо?"
    },
    "family_h25": "F0",
    "family_src": "clean",
@@ -5570,10 +5378,6 @@
     "ru": "«приписать разрыв 47.9% против 3.2% тому, как MedCo работает, и перенести её маржу на своих пациентов» — вместо того чтобы разложить $2,600 на $800 микса и $1,800 стоимости и увидеть, что обе части описывают состав панели пациентов, а не работу клиники.",
     "en": "\"attributing the 47.9% against 3.2% gap to how MedCo is run and carrying its margin over to the hospital's own patients\" — instead of splitting the $2,600 into $800 of mix and $1,800 of cost and seeing that both pieces describe the composition of the patient panel, not the way the clinic is run."
    },
-   "hints": {
-    "L1": "Переведи обе маржи в прибыль на одного пациента и разложи разрыв на части",
-    "L2": "Ставки возмещения в обеих колонках одинаковы — тогда откуда берётся $800?"
-   },
    "family_h25": "F3",
    "family_src": "тело",
    "family_conf": "высокая",
@@ -5685,10 +5489,6 @@
    "provoked": {
     "ru": "«разница читается как возраст» — принять 100% против 12.5% за свойство возрастной группы и строить план на этом разрыве. **Зачёт = кандидат режет те же одиннадцать строк вторым разрезом, называет состав обеих ячеек, требует недостающие ячейки — и не подменяет возрастную версию гендерной, потому что единственный мужчина до 30 ответил N** [Y2].",
     "en": "\"the difference reads as age\" — taking 100% against 12.5% for a property of the age group and building the plan on that gap. **Credit = the candidate cuts the same eleven rows a second way, names the composition of both cells, demands the missing cells — and does not swap the age story for a gender one, because the single man under 30 answered N** [Y2]."
-   },
-   "hints": {
-    "L1": "Пересчитай обе доли по строкам, потом разрежь те же строки ещё раз",
-    "L2": "Кто именно стоит в ячейке «над 30» — и кого там нет?"
    },
    "family_h25": "F3",
    "family_src": "тело",

@@ -110,7 +110,7 @@ const ST_GRADER_SYSTEM = `You are a strict but fair MBB structuring-drill grader
 HOW TO GRADE (in priority order):
 1. COVER is the core. Every required branch must be present in the candidate's tree BY MEANING — accept synonyms and rephrasings, never demand the exact label. A tree that MISSES a required branch FAILS, no matter how clean the rest is. This is the one objective failure mode.
 2. DECOY: mentioning a decoy branch is NOT penalised. It fails ORDER only if the candidate makes a decoy their FIRST branch to develop / their lead hypothesis.
-3. ME: if the candidate merges two branches the ME matrix marks incompatible, flag it — a hard merge of an incompatible pair is a fail; a soft-overlap pair is a warning, not a fail.
+3. ME: the matrix flags pairs that must not be merged. FAIL only on the status the library actually writes as hard: **direct violation**. Every other status it writes — partial, absorption, conflation risk, duplicate, shared, opposition — is a WARNING, never a fail. The pair may be decoy-to-branch or branch-to-branch; in this library the hard marks sit on decoy-to-branch. Do not invent a status: if the pair carries no status you were given, it is not a fail.
 4. ORDER: a defensible start is any branch justified by a real criterion (size of effect, speed to check, cost of data). Starting on a decoy is an ORDER defect. Not stating any criterion is a coaching note, not a fail.
 5. DRIVE: for each branch the key names WHAT WOULD BE MEASURED under it. A branch stated as a heading with nothing measurable under it is a coaching note — name the metric the candidate should have put there. DRIVE never decides pass/fail on its own.
 6. Do NOT reward tree LENGTH or generic templates (e.g. a blank "profitability = revenue − cost" with no tailoring). Reward branches tailored to THIS company and question.
@@ -440,6 +440,21 @@ function refBlocks(s) {
   for (const p of s.slice(pos).split('\n\n')) out.push(p);
   return out;
 }
+/* 25.08.2026, dev. Дыра, найденную цехом дриллов в круге 84 и подтверждённую
+   их прогоном: блок [DUP] состоит из ТРЁХ кусков — заголовок, markdown-таблица
+   сравнения с чужими слотами, хвост «In (a)…». Правило перешагивало ограду
+   кода и НЕ перешагивало таблицу, поэтому кандидат получал голую таблицу,
+   сравнивающую его слот с ST-010 и ST-020, которых он не видел.
+   Материал цех уже почистил; сеть чинится здесь, чтобы следующий такой блок
+   не проехал наполовину. Хвост глотается ТОЛЬКО если была таблица и следующий
+   кусок не список и не заголовок — иначе съелся бы полезный разбор. */
+function refIsTable(p) {
+  const ls = String(p).split('\n').map(x => x.trim()).filter(Boolean);
+  return ls.length >= 2 && ls.every(l => l.startsWith('|'));
+}
+function refStartsList(p) {
+  return /^\s*(?:[-*+]\s|\d+[.)]\s|#{1,6}\s|>)/.test(String(p));
+}
 function scrubReference(v) {
   if (typeof v !== 'string' || !v) return v;
   const parts = refBlocks(v);
@@ -452,6 +467,15 @@ function scrubReference(v) {
       while (j < parts.length && parts[j].trimStart().startsWith('```')) {
         i = j + 1; j = i;
         while (j < parts.length && parts[j].trim() === '') j++;
+      }
+      let ate = false;
+      if (j < parts.length && refIsTable(parts[j])) {
+        i = j + 1; ate = true; j = i;
+        while (j < parts.length && parts[j].trim() === '') j++;
+      }
+      if (ate && j < parts.length && parts[j].trim() &&
+          !refStartsList(parts[j]) && !refIsTable(parts[j])) {
+        i = j + 1;
       }
       continue;
     }
