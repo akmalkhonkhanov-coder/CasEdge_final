@@ -148,9 +148,8 @@
               "answer": 20,
               "round": 2,
               "tolerance": 0.01,
-              "naive": 33.33,
-              "naive_reason": "uses the current value as base",
-              "почему": "стадия объявляет механизм ловушки один раз — «uses the current value as base». Для ряда 2 (bog area 900→720) он даёт 180/720 = 25.00%, а не 33.33%. 33.33% — ловушка ряда 1 (sphagnum 60→45): 15/45"
+              "naive": 25,
+              "naive_reason": "divides the 180 ha lost by the 720 ha that remain instead of the 900 ha at the start, 180/720 = 25%"
             }
           ]
         },
@@ -323,8 +322,8 @@
           "q": 3,
           "key": "q3b",
           "answer": 20,
-          "trap": 33.33,
-          "lesson": "uses the current value as base"
+          "trap": 25,
+          "lesson": "divides the 180 ha lost by the 720 ha that remain instead of the 900 ha at the start, 180/720 = 25%"
         },
         {
           "q": 4,
@@ -928,8 +927,8 @@
               "answer": 20,
               "round": 2,
               "tolerance": 0.01,
-              "naive": 33.33,
-              "почему": "стадия объявляет «(current base)». Для ряда 2 (ice-cover 120→96) это 24/96 = 25.00%. 33.33% — ловушка ряда 1 (whitefish 80→60): 20/60. В разборе #3 записи ловушки не было вовсе — кандидат попадался и не узнавал, на чём"
+              "naive": 25,
+              "naive_reason": "divides the 24-point fall in ice cover by the 96 that remain instead of the 120 at the start, 24/96 = 25%"
             }
           ]
         },
@@ -1099,7 +1098,9 @@
         {
           "q": 3,
           "key": "q3b",
-          "answer": 20
+          "answer": 20,
+          "trap": 25,
+          "lesson": "divides the 24-point fall in ice cover by the 96 that remain instead of the 120 at the start, 24/96 = 25%"
         },
         {
           "q": 4,
@@ -3747,7 +3748,8 @@
             "A",
             "B",
             "C"
-          ]
+          ],
+          "naive_reason": "picks mix A because it is the largest share of the nursery planting, 45% against B 35% and C 20%; the question asks which allocation buys the most hectares, and at $6,000/ha option C covers 25,000 ha against A's 20,000"
         }
       ],
       "analysis_review": [
@@ -7201,7 +7203,9 @@
         {
           "q": 1,
           "key": "q1b",
-          "answer": "Year 7"
+          "answer": "Year 7",
+          "trap": "Year 5",
+          "lesson": "stops at Year 5, the last column the exhibit prints, where the controlled population is still 153,590; carried forward at +10% less the 30,000 removed it reaches ≤130,000 only in Year 7"
         },
         {
           "q": 2,
@@ -15459,7 +15463,9 @@
         {
           "q": 2,
           "key": "q2",
-          "answer": 25
+          "answer": 25,
+          "trap": 116.67,
+          "lesson": "reports the relative rise in the number of anchor tenants, (1,300 − 600)/600 = 116.67%, instead of the difference in anchor share: 65% − 40% = 25 pp"
         },
         {
           "q": 3,
@@ -19815,7 +19821,7 @@
       "cases": [
         {
           "c": 1,
-          "prompt": "Carrying capacity — the estate sustains ≤ 120,000 adults; the pre-cull herd (stable 100,000) never exceeds it. (reads the recruit inflows as unchecked growth)",
+          "prompt": "Carrying capacity — the estate sustains ≤ 120,000 adults; the pre-cull herd is stable at 100,000. Read the adult-herd series together with the maturing-cohort recruits: which outcome does the herd reach?",
           "input": "choice",
           "answer": "never exceeds",
           "naive": "collapse",
@@ -21131,7 +21137,7 @@
         },
         {
           "c": 6,
-          "prompt": "Verdict — name every reversal hypothesis ; all close to North. Recommend North and state explicitly that no reversal exists. (picks South \"because it's cheaper in total dollars,\" a reversal the numbers do not support)",
+          "prompt": "Verdict — every reversal hypothesis has been named and tested against the per-case and per-household figures. Which zone does the evidence support?",
           "input": "choice",
           "answer": "North",
           "naive": "South",

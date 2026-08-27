@@ -150,7 +150,7 @@ function rkLastSepBefore(s, idx) {
   while ((m = RK_CLAUSE_SEP.exec(s)) !== null) { if (m.index < idx) best = m.index; else break; }
   return best;
 }
-function scrubPrompt(p, secretVals) {
+function scrubPrompt(p, secretVals, opts) {
   let s = String(p == null ? '' : p);
   /* 0a. a question-form prompt's stem ends at its last "?"; anything after is
      commentary/answer.
@@ -163,7 +163,29 @@ function scrubPrompt(p, secretVals) {
      черта: строка, начинающаяся с `|`, это ДАННЫЕ, а не комментарий. Каскад
      решения, если он идёт после таблицы, срежут правила 1-3 ниже. */
   const qm = s.lastIndexOf('?');
-  if (qm >= 0 && qm < s.length - 1 && s.slice(qm + 1).indexOf('|') < 0) s = s.slice(0, qm + 1);
+  /* 27.08.2026, круг 87. Признак «строка с трубой» оказался УЖЕ класса: у #40 c2
+     данные после «?» написаны ПРОЗОЙ («Forest 2,400 (diff 400) beats Meadow 1,400»),
+     и таблицы там нет. Цех воспроизвёл управляемой пробой: вставил трубу в тот же
+     хвост - хвост доехал.
+     Управляемый опыт на всём корпусе, четыре редакции правила, оба исхода сразу:
+        как было                      слепых 2 · утечек 0
+        резать только без цифр        слепых 1 · утечек 0   <- взято
+        снять 0a совсем               слепых 1 · утечек 0
+        сузить правило 3 до чисел     слепых 2 · утечек 1   <- отвергнуто, ТЕЧЁТ
+     Хвост с цифрами - это данные. Хвост без цифр - словесный комментарий, и его
+     по-прежнему режем: за словесную подсказку отвечают правила 3b и cueRe. */
+  /* Порог выбран опытом, а не на глаз. Признак «в хвосте есть хоть одна цифра»
+     чинил слепоту, но ОСЛАБЛЯЛ структурный рез: gate_rk_prompt_intact дописывает
+     ответ в конец всех 32 условий и требует срезать у всех - на нём срезалось
+     только 26. Прогнал четыре порога через ЭТОТ ЖЕ гейт:
+        только труба (было)     слепых 2 · утечек 0 · рез 32/32   зелёный
+        любая цифра             слепых 1 · утечек 0 · рез 26/32   КРАСНЫЙ
+        труба или >=2 чисел     слепых 1 · утечек 0 · рез 31/32   КРАСНЫЙ
+        труба или >=3 чисел     слепых 1 · утечек 0 · рез 32/32   зелёный  <- взято
+     Три и более чисел в хвосте - это перечисление данных, а не комментарий. */
+  const tail0a = s.slice(qm + 1);
+  if (qm >= 0 && qm < s.length - 1 && tail0a.indexOf('|') < 0
+      && (tail0a.match(/\d[\d.,]*/g) || []).length < 3) s = s.slice(0, qm + 1);
   // 0b. neutralise the "naive" tell (the word itself flags which value is the trap)
   s = s.replace(/\bnaïve\b|\bnaive\b/gi, '').replace(/\s{2,}/g, ' ');
   // 1. cut the interviewer solution cascade (Step 1/2, decompose, Answer:)
@@ -212,6 +234,14 @@ function scrubPrompt(p, secretVals) {
   for (const v of (secretVals || [])) {
     if (v == null) continue;
     const val = String(v).trim();
+    /* 27.08.2026, круг 88. Признак цеха игр, проверенный числом: НЕ резать по
+       строке, которая ДОСЛОВНО является одним из вариантов слота. Такую строку
+       кандидат и так видит в списке; резать по ней нечего, а вопрос без неё
+       разваливается. У #57 c6 ответ - фраза `120 more on nights`: в ней три
+       цифры, порог `цифр < 3` её не отсеивал, и правило резало вопрос с
+       перечисления вариантов, обрубая его на «or».
+       Обе меры до и после: слепых 2 -> 1, утечек 0 -> 0. */
+    if ((opts || []).some(o => String(o).trim() === val)) continue;
     if (val.replace(/[^\d]/g, '').length < 3) continue;   // skip small numbers — those are input data
     for (const cand of rkVariants(val)) {
       const idx = s.indexOf(cand);
@@ -294,10 +324,10 @@ function sanitizeGame(game, revealedSet) {
          Прогоняем через тот же скраб, что и остальные 602 промпта; ключ —
          правильный вариант ответа. Изменяет ровно 1 промпт из 57, и ровно
          снятием этого слова. */
-      graph_selection: rep.graph_selection ? { prompt: scrubPrompt(rep.graph_selection.prompt, [rep.graph_selection.answer]), options: rep.graph_selection.options || [] } : null,
+      graph_selection: rep.graph_selection ? { prompt: scrubPrompt(rep.graph_selection.prompt, [rep.graph_selection.answer], rep.graph_selection.options || []), options: rep.graph_selection.options || [] } : null,
       visual_report: rep.visual_report ? { fields: (rep.visual_report.fields || []).map(f => ({ key: f.key, input: f.input || 'numeric', options: f.options || null })) } : null
     },
-    cases: (game.cases || []).map(c => ({ c: c.c, kind: c.kind, prompt: scrubPrompt(c.prompt, [c.answer, c.naive]), input: c.input || 'numeric', options: c.options || null }))
+    cases: (game.cases || []).map(c => ({ c: c.c, kind: c.kind, prompt: scrubPrompt(c.prompt, [c.answer, c.naive], c.options || null), input: c.input || 'numeric', options: c.options || null }))
   };
 }
 
