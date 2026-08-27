@@ -133,7 +133,7 @@
         },
         {
           "q": 3,
-          "prompt": "% reductions over 10 years: sphagnum (60→45); bog area (900→720).",
+          "prompt": "% reductions over 10 years: sphagnum (60→45); bog area (900→720). uses the current value as base",
           "parts": [
             {
               "key": "q3a",
@@ -155,7 +155,7 @@
         },
         {
           "q": 4,
-          "prompt": "Month with the highest %-difference (Hollow−Hummock)/Hummock: Dec 150 · Jan 200.00% · Feb 100 · Mar 81.82 · Apr 86.67.",
+          "prompt": "Month with the highest %-difference (Hollow−Hummock)/Hummock: Dec 150 · Jan 200.00% · Feb 100 · Mar 81.82 · Apr 86.67. ranks by absolute gap (Dec 18 cm)",
           "parts": [
             {
               "key": "q4",
@@ -1887,7 +1887,7 @@
         {
           "from": "q1a",
           "mech": "D2 · остаток группы, а не её доля",
-          "form": "count",
+          "form": "штуки",
           "prompt": "Same Q3 figures you just used for the share: counting Q3 alone, how many of its total are NOT members?",
           "input": "numeric",
           "answer": 700,
@@ -2285,7 +2285,7 @@
           ],
           "calc": "(3600-2400)/2400=50.0%",
           "mech": "D · рост квартала в процентах от меньшего",
-          "form": "percent",
+          "form": "процент",
           "naive_src": "calc",
           "naive_calc": "(3600-2400)/3600=33.3333%",
           "unit": "%"
@@ -2293,7 +2293,7 @@
         {
           "from": "q1a",
           "mech": "D2 · остаток группы, а не её доля",
-          "form": "count",
+          "form": "штуки",
           "prompt": "Same Q3 figures you just used for the share: counting Q3 alone, how many of its total are NOT members?",
           "input": "numeric",
           "answer": 1440,
@@ -2828,7 +2828,7 @@
         {
           "from": "q4b",
           "mech": "G · накопленный убыток: разрыв растёт год от года",
-          "form": "money",
+          "form": "деньги",
           "input": "numeric",
           "round": 0,
           "tolerance": 0.01,
@@ -3357,7 +3357,7 @@
         {
           "from": "q4b",
           "mech": "G · накопленный убыток: разрыв растёт год от года",
-          "form": "money",
+          "form": "деньги",
           "input": "numeric",
           "round": 0,
           "tolerance": 0.01,
@@ -3392,7 +3392,7 @@
             "s12"
           ],
           "mech": "E3 · годовой темп в долях базы, а не остатка",
-          "form": "percent",
+          "form": "процент",
           "unit": "%"
         }
       ]
@@ -3971,7 +3971,7 @@
             "s6"
           ],
           "mech": "S · итог на гектар, а не на растение",
-          "form": "number",
+          "form": "число",
           "unit": "kg per ha per year"
         }
       ]
@@ -4354,7 +4354,7 @@
             "s7"
           ],
           "calc": "600000/3900000=15.3846%",
-          "form": "percent",
+          "form": "процент",
           "naive_src": "calc",
           "naive_calc": "3900000-600000=3300000 · 600000/3300000=18.1818%",
           "unit": "%"
@@ -4767,7 +4767,7 @@
             "s4"
           ],
           "mech": "M · на пункт приходится потерянное, а не всё",
-          "form": "number",
+          "form": "число",
           "unit": "ha per point"
         }
       ]
@@ -6303,7 +6303,7 @@
           ],
           "calc": "(2800-1800)/1800=55.5556%",
           "mech": "D · рост квартала в процентах от меньшего",
-          "form": "percent",
+          "form": "процент",
           "naive_src": "calc",
           "naive_calc": "(2800-1800)/2800=35.7143%",
           "unit": "%"
@@ -6311,7 +6311,7 @@
         {
           "from": "q1a",
           "mech": "D2 · остаток группы, а не её доля",
-          "form": "count",
+          "form": "штуки",
           "prompt": "Same Q3 figures you just used for the share: counting Q3 alone, how many of its total are NOT members?",
           "input": "numeric",
           "answer": 840,
@@ -6832,7 +6832,7 @@
         {
           "from": "q4a",
           "mech": "E2 · сколько лет до нуля при том же темпе",
-          "form": "step count",
+          "form": "число шагов",
           "prompt": "Same starting level and the same annual fall: how many years at that rate would take the level to zero?",
           "input": "numeric",
           "answer": 20,
@@ -6852,7 +6852,7 @@
         {
           "from": "q4b",
           "mech": "G · накопленный убыток: разрыв растёт год от года",
-          "form": "money",
+          "form": "деньги",
           "input": "numeric",
           "round": 0,
           "tolerance": 0.01,
@@ -7372,7 +7372,7 @@
         {
           "from": "q4a",
           "mech": "E2 · сколько лет до нуля при том же темпе",
-          "form": "step count",
+          "form": "число шагов",
           "prompt": "Same starting level and the same annual fall: how many years at that rate would take the level to zero?",
           "input": "numeric",
           "answer": 16.67,
@@ -8520,7 +8520,7 @@
             "s7"
           ],
           "mech": "S · итог на гектар, а не на растение",
-          "form": "number",
+          "form": "число",
           "unit": "kg per ha per year"
         }
       ]
@@ -8902,7 +8902,7 @@
             "s7"
           ],
           "calc": "400000/2740000=14.5985%",
-          "form": "percent",
+          "form": "процент",
           "naive_src": "calc",
           "naive_calc": "2740000-400000=2340000 · 400000/2340000=17.0940%",
           "unit": "%"
@@ -10530,7 +10530,7 @@
         {
           "from": "q1a",
           "mech": "D2 · остаток группы, а не её доля",
-          "form": "count",
+          "form": "штуки",
           "prompt": "Same Q3 figures you just used for the share: counting Q3 alone, how many of its total are NOT members?",
           "input": "numeric",
           "answer": 1050,
@@ -10907,7 +10907,7 @@
         {
           "from": "q1a",
           "mech": "D2 · остаток группы, а не её доля",
-          "form": "count",
+          "form": "штуки",
           "prompt": "Same Q3 figures you just used for the share: counting Q3 alone, how many of its total are NOT annual members?",
           "input": "numeric",
           "answer": 720,
@@ -11486,7 +11486,7 @@
         {
           "from": "q4a",
           "mech": "E2 · сколько лет до нуля при том же темпе",
-          "form": "step count",
+          "form": "число шагов",
           "prompt": "Same starting level and the same annual fall: how many years at that rate would take the level to zero?",
           "input": "numeric",
           "answer": 22.5,
@@ -12003,7 +12003,7 @@
         {
           "from": "q4a",
           "mech": "E2 · сколько лет до нуля при том же темпе",
-          "form": "step count",
+          "form": "число шагов",
           "prompt": "Same starting level and the same annual fall: how many years at that rate would take the level to zero?",
           "input": "numeric",
           "answer": 13.75,
@@ -12023,7 +12023,7 @@
         {
           "from": "q4b",
           "mech": "G · накопленный убыток: разрыв растёт год от года",
-          "form": "money",
+          "form": "деньги",
           "input": "numeric",
           "round": 0,
           "tolerance": 0.01,
@@ -13135,7 +13135,7 @@
             "s11"
           ],
           "mech": "R · отношение вкладов двух групп",
-          "form": "number",
+          "form": "число",
           "unit": "kg of A per kg of C"
         }
       ]
@@ -13520,7 +13520,7 @@
             "s7"
           ],
           "calc": "500000/2075000=24.0964%",
-          "form": "percent",
+          "form": "процент",
           "naive_src": "calc",
           "naive_calc": "2075000-500000=1575000 · 500000/1575000=31.7460%",
           "unit": "%"
@@ -15185,7 +15185,7 @@
           ],
           "calc": "(2700-1800)/1800=50.0%",
           "mech": "D · рост квартала в процентах от меньшего",
-          "form": "percent",
+          "form": "процент",
           "naive_src": "calc",
           "naive_calc": "(2700-1800)/2700=33.3333%",
           "unit": "%"
@@ -15193,7 +15193,7 @@
         {
           "from": "q1a",
           "mech": "D2 · остаток группы, а не её доля",
-          "form": "count",
+          "form": "штуки",
           "prompt": "Same Q3 figures you just used for the share: counting Q3 alone, how many of its total are NOT loyalty members?",
           "input": "numeric",
           "answer": 810,
@@ -15578,7 +15578,7 @@
           ],
           "calc": "(2000-1500)/1500=33.3333%",
           "mech": "D · рост квартала в процентах от меньшего",
-          "form": "percent",
+          "form": "процент",
           "naive_src": "calc",
           "naive_calc": "2000/1500=133.3333%",
           "unit": "%"
@@ -16122,7 +16122,7 @@
         {
           "from": "q4a",
           "mech": "E2 · сколько лет до нуля при том же темпе",
-          "form": "step count",
+          "form": "число шагов",
           "prompt": "Same starting level and the same annual fall: how many years at that rate would take the level to zero?",
           "input": "numeric",
           "answer": 16,
@@ -17018,7 +17018,7 @@
             "s8"
           ],
           "mech": "J · стоимость программы на обслуживаемого",
-          "form": "dollars",
+          "form": "доллары",
           "naive_calc": "500000/60000=8.3333",
           "unit": "$ per household"
         }
@@ -17422,7 +17422,7 @@
             "s7"
           ],
           "mech": "F · структура затрат: доля постоянной части",
-          "form": "percent",
+          "form": "процент",
           "unit": "%"
         }
       ]
@@ -17805,7 +17805,7 @@
             "s5"
           ],
           "calc": "3200/2400=1.3333 · 4/3=1.3333",
-          "form": "ratio",
+          "form": "отношение",
           "naive_src": "calc",
           "naive_calc": "3200/100=32 · 2400/100=24",
           "unit": "x : y"
@@ -18906,7 +18906,7 @@
             "s4"
           ],
           "mech": "P · результат года к своему же сдвигу за год",
-          "form": "number",
+          "form": "число",
           "unit": "times"
         }
       ]
@@ -19472,7 +19472,7 @@
         },
         {
           "c": 6,
-          "prompt": "Pick the quota — A 8,000 t · B 9,600 t · C 12,000 t.",
+          "prompt": "Pick the quota — A 8,000 t (under) · B 9,600 t · C 12,000 t (over). (picks the highest tonnage this year, ignoring next-year collapse)",
           "input": "choice",
           "answer": "B",
           "naive": "C",
@@ -20890,7 +20890,7 @@
             "s8"
           ],
           "calc": "400000/2080000=19.2308%",
-          "form": "percent",
+          "form": "процент",
           "naive_src": "calc",
           "naive_calc": "2080000-400000=1680000 · 400000/1680000=23.8095%",
           "unit": "%"
@@ -23539,7 +23539,7 @@
         {
           "c": 6,
           "input": "choice",
-          "prompt": "Where does the county's money go further? The same budget buys either 200 more on days at the day rate, or 120 more on nights at the night rate — operatives in both cases. Running cost is $6,900 whichever it buys. Which adds more to the season's MARGIN?",
+          "prompt": "Where does the county's money go further? It offers either 200 more operatives on days at the day rate, or 120 more on nights at the night rate. Running cost is $6,900 either way. Which adds more to the season's MARGIN?",
           "options": [
             "200 more on days",
             "120 more on nights"

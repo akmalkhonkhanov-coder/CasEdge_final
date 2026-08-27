@@ -150,42 +150,7 @@ function rkLastSepBefore(s, idx) {
   while ((m = RK_CLAUSE_SEP.exec(s)) !== null) { if (m.index < idx) best = m.index; else break; }
   return best;
 }
-/* Поиск ЧИСЛА, а не подстроки. 27.08.2026, круг 91. Цех игр нашёл 16 слотов
-   кейсов, где на экране нет ни вопроса, ни единой цифры. У #53 c1 наив `600`
-   находился ВНУТРИ данных `3,600 ha`, у #47 c3 наив `300` - внутри `300,000 t`.
-   Правило 3 резало по совпадению подстроки и уносило вопрос целиком.
-   Число считается найденным, только если слева и справа от него нет цифры и нет
-   разделителя разрядов, прилипшего к цифре. */
-function rkFindNumber(s, cand) {
-  if (!/\d/.test(cand)) return s.indexOf(cand);
-  let from = 0;
-  for (;;) {
-    const i = s.indexOf(cand, from);
-    if (i < 0) return -1;
-    const before = s.slice(Math.max(0, i - 2), i);
-    const after = s.slice(i + cand.length, i + cand.length + 2);
-    const glued = /\d$/.test(before) || /^[.,\s]?\d/.test(after)
-               || /\d[.,\s]$/.test(before);
-    if (!glued) return i;
-    from = i + 1;
-  }
-}
-
-/* Скобка: данные или комментарий. Слова-пустышки и единицы выбрасываются, как
-   и числа, ссылки на экспонат (ex1) и имена полей (q3, c6). Осталось значимое
-   слово - это авторский комментарий, а не данные. */
-const RK_PAREN_STOP = new Set(['to','of','and','or','vs','per','at','in','on','a','an','the','by','pp','ha','km','kg','mt','t','m','k','bn','yr','y','x']);
-function rkParenIsComment(inner) {
-  const rest = String(inner)
-    .replace(/\b(?:ex|q|c)\s*\d+\b/gi, ' ')
-    .replace(/[\d.,%$€£+\-–—×÷/≥≤<>=]+/g, ' ');
-  for (const w of rest.split(/[^A-Za-z]+/)) {
-    if (w.length >= 3 && !RK_PAREN_STOP.has(w.toLowerCase())) return true;
-  }
-  return false;
-}
-
-function rkScrubOnce(p, secretVals, opts, mode) {
+function scrubPrompt(p, secretVals, opts) {
   let s = String(p == null ? '' : p);
   /* 0a. a question-form prompt's stem ends at its last "?"; anything after is
      commentary/answer.
@@ -237,7 +202,7 @@ function rkScrubOnce(p, secretVals, opts, mode) {
      же признаку, что уже используется в файле: НЕСКОЛЬКО стрелок, разделённых `·`,
      это список, а не вывод. Значения ответа и наива из него всё равно срежет
      правило 3 - оно ищет их по числу, а не по стрелке. */
-  if (!(mode && mode.noArrow)) {
+  {
     const m = /\s+(?:→|->|⟶)\s+/u.exec(s);
     if (m) {
       const tail = s.slice(m.index);
@@ -266,16 +231,8 @@ function rkScrubOnce(p, secretVals, opts, mode) {
     }
     return [...new Set(out)].filter(Boolean);
   };
-  /* ПОРЯДОК ЗНАЧЕНИЙ — ЧАСТЬ КОНТРАКТА. Все четыре места вызова движка кладут
-     значения парами [answer, naive]: кейсы (сборка игры), Analysis
-     (parts.flatMap([p.answer, p.naive])), такты Обучения, выбор графика (один
-     ответ). Поэтому ЧЁТНЫЙ индекс - ОТВЕТ, нечётный - наив. Ответ режется
-     всегда; наив мягкая ступень лестницы (см. scrubPrompt ниже) может оставить,
-     когда он напечатан ОПЕРАНДОМ входных данных. Гейт держит это парой мер:
-     ответ на экране - красное всегда. */
-  for (const [vi, v] of (secretVals || []).entries()) {
+  for (const v of (secretVals || [])) {
     if (v == null) continue;
-    if (mode && mode.noNaive && vi % 2 === 1) continue;
     const val = String(v).trim();
     /* 27.08.2026, круг 88. Признак цеха игр, проверенный числом: НЕ резать по
        строке, которая ДОСЛОВНО является одним из вариантов слота. Такую строку
@@ -287,7 +244,7 @@ function rkScrubOnce(p, secretVals, opts, mode) {
     if ((opts || []).some(o => String(o).trim() === val)) continue;
     if (val.replace(/[^\d]/g, '').length < 3) continue;   // skip small numbers — those are input data
     for (const cand of rkVariants(val)) {
-      const idx = rkFindNumber(s, cand);
+      const idx = s.indexOf(cand);
       if (idx >= 0) { const sep = rkLastSepBefore(s, idx); cutAt = Math.min(cutAt, sep >= 0 ? sep : idx); }
     }
   }
@@ -299,15 +256,6 @@ function rkScrubOnce(p, secretVals, opts, mode) {
   if (cm && cm.index > 0) { const sep = rkLastSepBefore(s, cm.index); s = s.slice(0, sep >= 0 ? sep : cm.index); }
   // 4. drop a trailing parenthetical naive descriptor ("(repeats −180 absolute)")
   s = s.replace(/\s*\([^()]*\)\s*$/u, '');
-  /* 4b. ТА ЖЕ скобка, но перед ТОЧКОЙ. 27.08.2026, круг 91.
-     Цех игр: правило 4 требовало конца строки сразу за «)», и 17 хвостовых
-     скобок с точкой после них не резались. Общий рез запрещён - в тех же
-     скобках лежат ДАННЫЕ («(120 to 96)», «(640 to 512)», «($3,600)», «(ex1)»).
-     Признак цеха, проверенный их прогоном и пересчитанный моим: скобка -
-     КОММЕНТАРИЙ, если после выброса чисел, единиц, имён полей и ссылок на
-     экспонат в ней остаётся значимое слово. Иначе - данные.
-     Замер: хвостовых скобок перед точкой 34 · данные 28 · комментарии 6. */
-  s = s.replace(/\s*\(([^()]*)\)(?=\s*\.)/gu, (m, inner) => rkParenIsComment(inner) ? '' : m);
   // 5. any surviving arrows are data ranges (900→720) — render as words so the client text is arrow-free.
   //    (Arithmetic like "10% × $75M" is left intact: it is the question's INPUT data — the rate and base —
   //     and the answer/naive VALUE is already removed by the key-based cut above, so it cannot spoil.)
@@ -315,56 +263,6 @@ function rkScrubOnce(p, secretVals, opts, mode) {
   // tidy dangling separators at the tail
   s = s.replace(/[\s;:·,\-–—×÷*/]+$/u, '').trim();
   return s;
-}
-
-/* ЛЕСТНИЦА СКРАБА. 27.08.2026, круг 91.
-   Замер цеха игр, воспроизведён моим счётом: числовых слотов кейсов без
-   вариантов 217, из них НИ ВОПРОСА, НИ ЕДИНОЙ ЦИФРЫ на экране - 16. У трёх
-   (#53 c1, #57 c3, #58 c1) автор написал полный вопрос, и его срезало вместе
-   с данными. Причина одна на всех: наив у этих слотов НАПЕЧАТАН ОПЕРАНДОМ
-   входных данных («unserved = 150,000 - 82,500», наив 82,500 = «reports
-   covered»), и рез по наиву уносил сами данные.
-
-   Признак самодоказательный, выдумывать его не пришлось: если рез по значению
-   оставляет экран БЕЗ цифр И БЕЗ вопроса - значит резалось не пояснение, а
-   данные. Настоящий словесный хвост («(repeats -180 absolute)») при удалении
-   вопрос не разрушает.
-
-   Ступени берутся по одной, сверху вниз, и мягкая принимается ТОЛЬКО если на
-   экране нет ЗНАЧЕНИЯ ОТВЕТА. Ответ не показывается ни на одной ступени. */
-const RK_Q_WORD = /\b(what|how|which|when|where|who|why|pick|rank|choose|identify|estimate|complete)\b|\?/i;
-function rkSolvable(s) { return /\d/.test(s) || RK_Q_WORD.test(s); }
-function rkHasAnswer(s, secretVals) {
-  for (const [vi, v] of (secretVals || []).entries()) {
-    if (v == null || vi % 2 === 1) continue;
-    const val = String(v).trim();
-    if (val.replace(/[^\d]/g, '').length < 3) continue;
-    for (const cand of rkNumForms(val)) if (rkFindNumber(s, cand) >= 0) return true;
-  }
-  return false;
-}
-function rkNumForms(val) {
-  const out = [val];
-  const plain = val.replace(/[,\s]/g, '');
-  if (/^\d+(?:\.\d+)?$/.test(plain)) {
-    const [int, frac] = plain.split('.');
-    out.push(plain, int.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + (frac ? '.' + frac : ''),
-                    int.replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + (frac ? '.' + frac : ''));
-  }
-  return [...new Set(out)].filter(Boolean);
-}
-function scrubPrompt(p, secretVals, opts, ctx) {
-  const strict = rkScrubOnce(p, secretVals, opts);
-  /* Лестница только для КЕЙСОВ. На экране Анализа есть экспонаты - промпт без
-     цифр там нормален, данные берутся из таблицы. На экране кейсов экспонатов
-     НЕТ (замер цеха игр, круг 86), и промпт без цифр и без вопроса нерешаем.
-     Без этой границы мягкая ступень открывала наив на 94 промптах вместо 15. */
-  if (ctx !== 'case' || rkSolvable(strict)) return strict;
-  for (const mode of [{ noNaive: true }, { noNaive: true, noArrow: true }]) {
-    const soft = rkScrubOnce(p, secretVals, opts, mode);
-    if (rkSolvable(soft) && !rkHasAnswer(soft, secretVals)) return soft;
-  }
-  return strict;   // материал: вопрос не восстановим без правки автора
 }
 /* ───────────────────────── экран сбора (долг dev №2) ────────────────────────
    Цех игр разметил 491 токен на 50 играх: `needed` несёт цепочки, `noise` не
@@ -429,7 +327,7 @@ function sanitizeGame(game, revealedSet) {
       graph_selection: rep.graph_selection ? { prompt: scrubPrompt(rep.graph_selection.prompt, [rep.graph_selection.answer], rep.graph_selection.options || []), options: rep.graph_selection.options || [] } : null,
       visual_report: rep.visual_report ? { fields: (rep.visual_report.fields || []).map(f => ({ key: f.key, input: f.input || 'numeric', options: f.options || null })) } : null
     },
-    cases: (game.cases || []).map(c => ({ c: c.c, kind: c.kind, prompt: scrubPrompt(c.prompt, [c.answer, c.naive], c.options || null, 'case'), input: c.input || 'numeric', options: c.options || null }))
+    cases: (game.cases || []).map(c => ({ c: c.c, kind: c.kind, prompt: scrubPrompt(c.prompt, [c.answer, c.naive], c.options || null), input: c.input || 'numeric', options: c.options || null }))
   };
 }
 
