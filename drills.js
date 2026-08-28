@@ -113,10 +113,21 @@
   /* ---------- helpers ---------- */
   function E(id) { return document.getElementById(id); }
   function esc2(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
-  // Inline markdown for list items — same escaping as md(), but no <p> wrapper.
-  function mdi(s) {
-    return esc2(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/`(.+?)`/g, '<code>$1</code>');
+  /* 28.08.2026, по замеру цеха дриллов. Три места рисовали разметку своей
+     копией одной и той же строки, и ни одно не знало одиночного *…*: кандидат
+     читал звёздочки в reference (205 кусков в 61 слоте), в provoked (28 в 14)
+     и в текстовых строках экзибита. Разметка теперь в одном помощнике.
+     Курсив нарочно узкий: открывающая звёздочка не может стоять после буквы
+     или цифры, а содержимое не может начинаться или кончаться пробелом -
+     иначе «3*4*5» и маркер сноски «Revenue*» стали бы курсивом. */
+  function inl(s) {
+    return esc2(s)
+      .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
+      .replace(/(^|[^*\w])\*([^\s*][^*\n]*?[^\s*]|[^\s*])\*(?![*\w])/g, '$1<i>$2</i>')
+      .replace(/`(.+?)`/g, '<code>$1</code>');
   }
+  // Inline markdown for list items — same escaping as md(), but no <p> wrapper.
+  function mdi(s) { return inl(s); }
   /* Разбор дрилла авторы пишут таблицей markdown, а md() таблиц не знал —
      кандидат читал на экране «| поле | текст |» и строку из дефисов. Найдено
      игрой, а не чтением: сыграл SY-001 на проде и увидел пайпы. Чиню здесь,
@@ -132,7 +143,7 @@
     };
     var head = cells(rows[0]);
     var body = rows.slice(2).filter(function (r) { return r.indexOf('|') >= 0; }).map(cells);
-    var inline = function (t) { return esc2(t).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/`(.+?)`/g, '<code>$1</code>'); };
+    var inline = inl;
     var html = '<table class="cm-tbl"><thead><tr>' + head.map(function (h) { return '<th>' + inline(h) + '</th>'; }).join('') + '</tr></thead><tbody>';
     body.forEach(function (r) { html += '<tr>' + r.map(function (c) { return '<td>' + inline(c) + '</td>'; }).join('') + '</tr>'; });
     return html + '</tbody></table>';
@@ -158,7 +169,7 @@
     return String(s == null ? '' : s).split(/\n{2,}/).map(function (p) {
       var t = mdTable(p);
       if (t) return t;
-      var e = esc2(p).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/`(.+?)`/g, '<code>$1</code>');
+      var e = inl(p);
       return '<p>' + e.replace(/\n/g, '<br>') + '</p>';
     }).join('');
   }

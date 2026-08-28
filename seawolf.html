@@ -474,6 +474,23 @@ function saveProf(){
    поэтому игра стартует мгновенно и без сети; облако приезжает следом.
    Слияние: `seen` ОБЪЕДИНЯЕТСЯ — потерять пройденный набор хуже, чем показать
    чуть устаревший уровень; остальное берётся из более свежей записи по `ts`. */
+/* 28.08.2026, долг цеха игр с круга 95. `seen` объединялся, а истории счётов
+   брались из более свежей записи ЦЕЛИКОМ: игры, сыгранные на втором
+   устройстве, исчезали. Обе истории - массивы чисел без меток, слить их можно
+   только по совпадению: если одна лежит внутри другой, берём длинную; иначе
+   берём общее начало и дописываем оба хвоста, свежий последним. Ни одного
+   выдуманного числа и ни одного потерянного; порядок между хвостами роли не
+   играет - история читается только счётом сыгранных, средним и лучшим. */
+function mergeRuns(a,b,bIsNewer){
+ const A=Array.isArray(a)?a:[], B=Array.isArray(b)?b:[];
+ if(!A.length) return B.slice();
+ if(!B.length) return A.slice();
+ const ja='\u0001'+A.join('\u0001')+'\u0001', jb='\u0001'+B.join('\u0001')+'\u0001';
+ if(ja.indexOf(jb)>=0) return A.slice();
+ if(jb.indexOf(ja)>=0) return B.slice();
+ let i=0; while(i<A.length&&i<B.length&&A[i]===B[i]) i++;
+ const older=bIsNewer?A:B, newer=bIsNewer?B:A;
+ return older.concat(newer.slice(i))}
 async function hydrateProf(){
  let cloud=null;
  try{ if(window.parent&&window.parent!==window&&typeof window.parent.swProfileLoad==='function')
@@ -484,8 +501,8 @@ async function hydrateProf(){
  const src=cloudNewer?cloud:P;
  P={seen:seen,
     level:LEVELS.includes(src.level)||src.level===ASSESS?src.level:P.level,
-    history:Array.isArray(src.history)?src.history:P.history,
-    assessHistory:Array.isArray(src.assessHistory)?src.assessHistory:P.assessHistory,
+    history:mergeRuns(P.history,cloud.history,cloudNewer),
+    assessHistory:mergeRuns(P.assessHistory,cloud.assessHistory,cloudNewer),
     adaptMsg:typeof src.adaptMsg==='string'?src.adaptMsg:P.adaptMsg,
     ts:Math.max(Number(cloud.ts||0),Number(P.ts||0))};
  saveProf();
