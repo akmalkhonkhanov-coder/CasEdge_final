@@ -10883,6 +10883,35 @@
      },
      "title_en": "line chart: berth slots at Marquee Port, by season week",
      "body_md_en": "> **Weeks 1–6 and 21–26** *(shoulder, 12 weeks)*: Carnivia allocated **1 slot per week**\n> **Weeks 7–20** *(peak, 14 weeks)*: port saturated by incumbents — Carnivia gets **1 slot every other week**\n>\n> *Note: the Marquee Port call is the itinerary's entire selling proposition. A sailing without it is not this product.*"
+    },
+    {
+     "id": "exC",
+     "title": "Marquee Port — цена гарантированного пикового захода",
+     "reveal": "on_request",
+     "triggers": [
+      "цена захода",
+      "цена слота",
+      "сколько просит порт",
+      "прейскурант порта",
+      "стоимость пикового захода",
+      "цена гарантированного захода"
+     ],
+     "triggers_en": [
+      "slot price",
+      "price of a slot",
+      "port asking price",
+      "what does the port charge",
+      "cost per peak call",
+      "price of a guaranteed call"
+     ],
+     "body_md": "> **Marquee Port — цена гарантированного пикового захода**\n>\n> **$340,000** за заход.",
+     "render": null,
+     "render_omitted": {
+      "reason": "single_fact",
+      "note": "одно число, рисовать нечего"
+     },
+     "title_en": "Marquee Port — price of a guaranteed peak call",
+     "body_md_en": "> **Marquee Port — price of a guaranteed peak call**\n>\n> **$340,000** per call."
     }
    ],
    "steps": [
@@ -10953,7 +10982,27 @@
      "candidate_md": "Проверь допущение **A1 — распределение слотов в пиковые недели** — пересчитай результат целиком и скажи, меняется ли решение или только величина.",
      "interviewer_md": "```python\n# ЛОВУШКА: выкупить ВСЕ 7 пиковых заходов\nslots = 12 + 14                                      # = 26  (full schedule)\ncapacity = 3_200 * 26                                # = 83,200 -> all demand fits\ncm = 104_468_000\nextra_fee = 340_000 * 7                              # = $2,380,000  (7 additional peak calls)\nprofit = 104_468_000 - 84_000_000 - 2_380_000        # = $18,088,000\nnpv = sum(18_088_000/1.11**n for n in 1..8) - 96_000_000\n# = -$2,916,932   ->  всё ещё отрицательно\n\n# А сколько заходов НУЖНО? Непокрытый спрос = 69,400 - 60,800 = 8,600 pax\nextra_calls = ceil(8_600 / 3_200)                    # = 3   (заходы 4-7 везут пустые койки)\nsailings    = 19 + 3                                 # = 22\ncapacity    = 3_200 * 22                             # = 70,400 -> весь спрос 69,400 влезает\nopcost_22   = 68_880_000 + 22 * 581_538.46           # = $81,673,846\nfee         = 3 * 340_000                            # = $1,020,000\nprofit_22   = 104_468_000 - 81_673_846 - 1_020_000   # = $21,774,154\nnpv_22 = sum(21_774_153.85/1.11**n for n in 1..8) - 96_000_000\n# = +$16,052,469   ->  ENTER\n```\n\n**Меняет РЕШЕНИЕ — но только если считать нужное число заходов.** Выкуп всех семи пиковых слотов оставляет −$2.9M: слоты 4–7 везут пустые койки, спрос кончился на третьем. Три захода закрывают весь дефицит в 8,600 пассажиров и дают **+$16.1M**.\n\n```python\n# Breakeven fee per additional peak call: NPV = 0\nannuity_factor  = sum(1/1.11**n for n in 1..8)       # = 5.146123\nrequired_profit = 96_000_000 / annuity_factor        # = $18,654,821.20\nbreakeven_fee   = (104_468_000 - 81_673_846.15 - 18_654_821.20) / 3\n# = $1,379,777.55 per call\n```\n\nНастоящий вывод sensitivity: **порог — $1,379,777.55 за заход при трёх заходах**, а порт просит $340,000 — вчетверо меньше порога. Переговоры должны идти о **трёх** гарантированных пиковых заходах, а не о «доступе в принципе» и не о всех семи.\n\n---",
      "hints": {},
-     "conditional_exhibits": [],
+     "conditional_exhibits": [
+      {
+       "title": "Marquee Port — цена гарантированного пикового захода",
+       "triggers": [
+        "цена захода",
+        "цена слота",
+        "сколько просит порт",
+        "прейскурант порта",
+        "стоимость пикового захода",
+        "цена гарантированного захода"
+       ],
+       "triggers_en": [
+        "slot price",
+        "price of a slot",
+        "port asking price",
+        "what does the port charge",
+        "cost per peak call",
+        "price of a guaranteed call"
+       ]
+      }
+     ],
      "depends_on": [
       3,
       5
@@ -16055,7 +16104,7 @@
     {
      "id": "ex1",
      "title": "Exhibit A — Target tool-line cost basis.",
-     "reveal": "on_request",
+     "reveal": "auto",
      "triggers": [
       "cost basis",
       "data",
@@ -16085,14 +16134,40 @@
     {
      "id": "ex2",
      "title": "Exhibit B — export-control review",
-     "reveal": "auto",
-     "triggers": [],
+     "reveal": "on_request",
+     "triggers": [
+      "экспортный контроль",
+      "экспортная лицензия",
+      "лицензионная проверка",
+      "антимонопольная проверка",
+      "пересечение клиентов",
+      "export control",
+      "export-control",
+      "export licence",
+      "export license",
+      "licensing review",
+      "regulatory review",
+      "antitrust",
+      "customer overlap",
+      "buyer-specific risk"
+     ],
      "body_md": "Maskwright's acquisition triggers a **2-year export-control review** on the Control/EUV linchpin line; **35% of output is un-shippable** during review.",
      "render": null,
      "render_omitted": {
       "reason": "single_fact",
       "note": "меньше трёх чисел, рисовать нечего"
-     }
+     },
+     "triggers_en": [
+      "export control",
+      "export-control",
+      "export licence",
+      "export license",
+      "licensing review",
+      "regulatory review",
+      "antitrust",
+      "customer overlap",
+      "buyer-specific risk"
+     ]
     }
    ],
    "steps": [
@@ -16141,7 +16216,38 @@
       "L1": "Is what this asset earns today the same as what it earns under the restriction?",
       "L2": "Run both branches through the identical valuation formula; only the cost base and the restricted years differ."
      },
-     "conditional_exhibits": [],
+     "conditional_exhibits": [
+      {
+       "title": "Exhibit B — export-control review",
+       "triggers": [
+        "экспортный контроль",
+        "экспортная лицензия",
+        "лицензионная проверка",
+        "антимонопольная проверка",
+        "пересечение клиентов",
+        "export control",
+        "export-control",
+        "export licence",
+        "export license",
+        "licensing review",
+        "regulatory review",
+        "antitrust",
+        "customer overlap",
+        "buyer-specific risk"
+       ],
+       "triggers_en": [
+        "export control",
+        "export-control",
+        "export licence",
+        "export license",
+        "licensing review",
+        "regulatory review",
+        "antitrust",
+        "customer overlap",
+        "buyer-specific risk"
+       ]
+      }
+     ],
      "depends_on": [
       4
      ]
@@ -18103,7 +18209,7 @@
      "step": 6,
      "label": "Sensitivity (one function).",
      "candidate_md": "Your call is hanging on one assumption more than any other. Name it — and tell me how far it would have to move before you'd flip the decision.",
-     "interviewer_md": "**Pass if ALL:** (1) names retention/churn as the single swing variable, because subscriber lifetime is what converts the cohort into lifetime value; (2) tests it with a number: at **50% churn** (2-yr life) lifetime ≈ **$270M**, which still clears the **$220M** cost of the show; (3) gives the break point — the greenlight only reverses if churn exceeds ~**60%/yr** — and concludes the decision is robust once lifetime rather than first-year revenue is used.\n\n**Fail if:** nominates price or the 800,000 subscriber count as the swing assumption instead of churn; or says \"it depends on churn\" without testing a churn level and without stating the threshold at which the answer flips.",
+     "interviewer_md": "**Pass if ALL:** (1) names **one** assumption and it is **not churn** — the **800,000** cohort or the **$15** price, either one accepted, because the two break the call at practically the same relative move (−**43.875%** at 449,000 subscribers against −**43.867%** at $8.42/month), so no single variable is *the* sensitive one and a candidate who says exactly that, then picks one, is right; (2) gives the break point on the variable it named, with **both neighbouring values substituted back**: **449,000 subscribers** (NPV −$0.17M, against +$0.32M at 450,000), or **$8.42/month** (NPV −$0.13M, against +$0.13M at $8.43); (3) shows with a number that retention/churn is the *least* sensitive of the three — it has to more than **double**, from 30% to **62%/yr**, before the greenlight reverses (at **61%** the cohort is still worth $223.09M, NPV **+$3.09M**; at **62%** it is $219.99M, NPV **−$0.01M**) — and that at **50% churn** (2-yr life) lifetime ≈ **$264M**, which still clears the **$220M** cost of the show.\n\n**Fail if:** nominates **churn** as the assumption the call hangs on — that is the answer this stem invites and the arithmetic refuses: the greenlight is robust to churn right across the 30–50% range (at 50% churn the cohort is still worth $264M against a $220M cost) and dies only past **61%**; or names any assumption **without a break point** — \"it depends on churn\" with no churn level tested and no threshold at which the answer flips. **Do NOT fail a candidate who nominates the $15 price or the 800,000 subscriber count:** a 44% fall in either flips the call, sooner than churn's +107% does, and both are projections carried in from the prompt, not contracted figures.",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
@@ -18123,7 +18229,7 @@
      "step": 8,
      "label": "Recommendation (Pyramid).",
      "candidate_md": "The greenlight committee is waiting: do we make the series or not? Your recommendation.",
-     "interviewer_md": "> - **hint_L0:** ничего. Движок молчит и ждёт, пока кандидат сам выйдет на вопрос.\n> - **hint_L1** (если застрял, после явного «не знаю, что дальше»): «Подписчик от хита остаётся только один год?»\n> - **hint_L2** (крайний случай, если L1 не помог): reveal retention: 30%/yr churn, ~3.3yr life.\n> - **Conditional exhibit — Retention:** `reveal_on_request`. Не показывать автоматически — только когда кандидат сам запросит. Триггеры-запросы: \"churn\" · \"retention\" · \"how long do subscribers stay\" · \"lifetime value\" · \"LTV\".\n> *Инсайт = добываемый, не преподнесённый. В interviewee-led режиме движок держит это закрытым; в interviewer-led (McKinsey-style) может подать L1 проактивно.*\n\n---\n\n**Conditional exhibits:** {'title': 'Retention', 'triggers': ['churn', 'retention', 'how long do subscribers stay', 'lifetime value', 'LTV']}\n\n**Partner answer (Pyramid):**\n\n*\"Vireno should GREENLIGHT the series — on a lifetime basis it creates ~$172M of value, even though year-1 revenue alone looks $76M short.\"* Facts: 800k subs at $490 LTV = $392M vs $220M cost; the decision survives churn up to ~60%. Risks: (internal) the 800k acquisition and 30% churn are estimates — a soft launch could miss; (external) a competitor's rival hit could raise churn. Next steps: greenlight with a churn-tracking gate at 6 months; pre-commit a follow-on slate to defend retention.\n\n> **🎬 Interviewer-only disclosure (для движка, не показывать кандидату).**\n> Ключевой инсайт кейса кандидат должен **добыть сам**, а не получить в подарок.\n> - **Что кандидат должен спросить сам (L0 — тишина по умолчанию):** candidate should ask about retention/churn, not judge on year-1 revenue.",
+     "interviewer_md": "> - **hint_L0:** ничего. Движок молчит и ждёт, пока кандидат сам выйдет на вопрос.\n> - **hint_L1** (если застрял, после явного «не знаю, что дальше»): «Подписчик от хита остаётся только один год?»\n> - **hint_L2** (крайний случай, если L1 не помог): reveal retention: 30%/yr churn, ~3.3yr life.\n> - **Conditional exhibit — Retention:** `reveal_on_request`. Не показывать автоматически — только когда кандидат сам запросит. Триггеры-запросы: \"churn\" · \"retention\" · \"how long do subscribers stay\" · \"lifetime value\" · \"LTV\".\n> *Инсайт = добываемый, не преподнесённый. В interviewee-led режиме движок держит это закрытым; в interviewer-led (McKinsey-style) может подать L1 проактивно.*\n\n---\n\n**Conditional exhibits:** {'title': 'Retention', 'triggers': ['churn', 'retention', 'how long do subscribers stay', 'lifetime value', 'LTV']}\n\n**Partner answer (Pyramid):**\n\n*\"Vireno should GREENLIGHT the series — on a lifetime basis it creates ~$172M of value, even though year-1 revenue alone looks $76M short.\"* Facts: 800k subs at $490 LTV = $392M vs $220M cost; the decision survives churn up to **61%** (cohort $223.09M, NPV **+$3.09M**) and only reverses at **62%** (cohort $219.99M, NPV **−$0.01M**) — more than double today's 30% — while a 44% shortfall in the 800k cohort or in ARPU would flip it. Risks: (internal) the 800k acquisition and 30% churn are estimates — a soft launch could miss; (external) a competitor's rival hit could raise churn. Next steps: greenlight with a churn-tracking gate at 6 months; pre-commit a follow-on slate to defend retention.\n\n> **🎬 Interviewer-only disclosure (для движка, не показывать кандидату).**\n> Ключевой инсайт кейса кандидат должен **добыть сам**, а не получить в подарок.\n> - **Что кандидат должен спросить сам (L0 — тишина по умолчанию):** candidate should ask about retention/churn, not judge on year-1 revenue.",
      "hints": {
       "L1": "",
       "L2": ""
@@ -20391,7 +20497,7 @@
      "step": 6,
      "label": "Sensitivity.",
      "candidate_md": "Suppose management pushed the increase harder than +5% — what assumption would have to change for their projection to actually come true?",
-     "interviewer_md": "**Pass if ALL:** (1) a larger list increase only scales the **$300M** addressable base — the gain grows proportionally but from that base only; (2) the **$200M** of contract volume never contributes until renewal, so no size of increase reaches it; (3) names the flip condition explicitly — the conclusion only changes if the contracts reprice or come up for renewal/renegotiation; the locked contracts are the binding constraint, not the size of the increase.\n\n**Fail if:** candidate scales the projection up across the full $500M and treats a bigger increase as the way to close the gap.",
+     "interviewer_md": "**Pass if ALL:** (1) a larger list increase only scales the **$300M** addressable base — the gain grows proportionally but from that base only; (2) the **$200M** of contract volume never contributes until renewal, so the locked volume caps the **base** the increase reaches, not the total it can deliver; (3) quantifies the two routes to management's projected **$25M**: a list increase of **$25M / $300M = 8.33%** on the addressable base alone, or repricing the **$200M** at renewal. Threshold checked on both neighbouring whole points: **+8%** gives $300M × 8% = **$24.0M** and misses the projection, **+9%** gives **$27.0M** and overshoots it (even +8.3% still misses, at $24.9M) — so the executable figure is **8.33%**. Candidate must also price that route: 8.33% is a **67%** bigger increase than the planned +5% (8.33 / 5 = 1.67), loaded entirely onto the volume that is *not* contract-protected, so it carries proportionally more elasticity and retailer-resistance risk.\n\n**Fail if:** candidate scales the projection up across the full **$500M** — i.e. applies the bigger increase to the contract-locked volume as well — or claims no increase can reach management's $25M without testing the addressable base, where **$25M / $300M = 8.33%** does reach it. Do NOT fail a candidate who closes the gap with a larger increase confined to the $300M and names what it costs in elasticity and retailer resistance: that is the arithmetically correct answer to the question as asked.",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
@@ -20715,7 +20821,7 @@
      "step": 5,
      "label": "Sensitivity.",
      "candidate_md": "Test your own conclusion. What would have to be true for the board to be right — name the assumption and how far off it would have to be?",
-     "interviewer_md": "**Pass if ALL:** (1) names the DTC online margin as the single variable that could reverse the call, and gives the breakeven — it would have to fall below **24.4%** to dilute the blend — the blend itself moves with it; (2) sizes the required error at **20.6-pt** and calls it implausible, so keep-DTC is robust; (3) redirects the sensitivity to where it belongs — **Big-box at 15%** is the unambiguous diluter of the blend.\n\n**Fail if:** candidate stress-tests DTC revenue or growth instead of its margin, or accepts the board's premise and hunts for conditions under which closing DTC improves the blend — the blended-vs-segment naive answer.",
+     "interviewer_md": "**Pass if ALL:** (1) keeps two different thresholds apart and says so: DTC stops **lifting the blend** below **24.375%** (≈24.4%) — the margin the other two channels earn between them, a **20.625-pt** fall from 45%, and the blend moves with it — but that does **not** reverse the call, because at that exact threshold DTC still earns $200M × 24.375% = **$48.75M** of gross profit that closing it destroys; (2) gives the threshold that actually reverses the call — closure is right only if DTC carries **more than $90M/yr of avoidable DTC-specific fixed or allocated cost**, i.e. more than **45%** of its $200M revenue, i.e. a non-positive net contribution — and rules out the channel-recapture story by arithmetic: recovering that $90M through Pro shops at 40% needs **112.5%** of DTC revenue to migrate, through Big-box at 15% it needs **300%**, so recapture alone cannot justify closure; (3) redirects the sensitivity to where it belongs — **Big-box at 15%** is the unambiguous diluter of the blend.\n\n**Fail if:** candidate stress-tests DTC revenue or growth instead of its economics; or quotes the blend-dilution threshold — **24.375%**, ≈24.4% — as the point at which the recommendation reverses: it is not, because $200M × 24.375% = **$48.75M** of gross profit is still destroyed by closing at that margin, and no positive DTC margin makes closure pay on channel economics alone; or names an avoidable-fixed-cost or channel-recapture story without sizing it against the **$90M** of gross profit at stake. Do NOT fail a candidate who, asked what would make the board right, answers with avoidable DTC-specific fixed cost above **$90M/yr** — that is the correct reading of the question.",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
@@ -20775,7 +20881,7 @@
       "cannibalization",
       "are these new customers"
      ],
-     "body_md": "**Exhibit — Buyer overlap.** **40% of the new grove's output displaces** existing groves' contracted sales (same regional buyers, capped contract volumes) — not incremental.",
+     "body_md": "**Exhibit — Buyer overlap.** **40% of the new grove's output displaces** existing groves' contracted sales (same regional buyers, capped contract volumes) — not incremental. The displaced fruit is already grown on standing trees and its picking and packing are contracted for the season, so **the existing groves avoid no cost on the displaced volume**: displacement is a loss of revenue at full value, not of contribution.",
      "render": null,
      "render_omitted": {
       "reason": "single_fact",
@@ -20840,7 +20946,7 @@
      "step": 6,
      "label": "Sensitivity.",
      "candidate_md": "Your call hangs on one assumption. Where is the breakeven on it — at what level does the decision flip the other way?",
-     "interviewer_md": "**Pass if ALL:** (1) Computes the breakeven displacement: 1 − 1.3/2.0 = **35%**. (2) Compares it with the actual level: **40%** > **35%** → the grove is incrementally negative. (3) States the flip condition explicitly — below **35%** displacement the grove would pay, so the recommendation is conditional on that number, not absolute.\n\n**Fail if:** Candidate stress-tests price or yield instead of displacement, gives a directional answer with no numeric threshold, or falls back on gross output (**50,000 boxes/yr** × **$40/box** against **$1.3M/yr**) and calls the grove profitable.",
+     "interviewer_md": "**Pass if ALL:** (1) Computes the breakeven displacement: 1 − 1.3/2.0 = **35%**, and names the assumption it rests on — per ex1 the existing groves avoid no cost on the displaced volume, so the displaced $2.0M × 40% = **$0.8M** is netted at full revenue, not at contribution; if any cost were avoidable on the displaced boxes, this breakeven would sit above 35%. (2) Compares it with the actual level: **40%** > **35%** → the grove is incrementally negative. (3) States the flip condition explicitly — below **35%** displacement the grove would pay, so the recommendation is conditional on that number, not absolute.\n\n**Fail if:** Candidate stress-tests price or yield instead of displacement, gives a directional answer with no numeric threshold, or falls back on gross output (**50,000 boxes/yr** × **$40/box** against **$1.3M/yr**) and calls the grove profitable.",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
@@ -21183,7 +21289,7 @@
      "step": 6,
      "label": "Sensitivity (one function).",
      "candidate_md": "Test how sensitive your answer is to off-peak price sensitivity: under what conditions would a single flat price actually beat tiered pricing?",
-     "interviewer_md": "```python\ndef rev(peak_p,off_p,peak_u,off_u):\n    return (peak_p*peak_u*D('0.4')+off_p*off_u*D('0.6'))*machines*hrs*days/D('1000000')\ncap  = machines*hrs*days                                # 216,000 machine-hours/yr\nflat   = rev(D('5'),D('5'),D('0.60'),D('0.25'))         # 0.4212\ntiered = rev(D('6'),D('3'),D('0.55'),D('0.75'))         # 0.5767\npeak_only = D('6')*D('0.55')*D('0.4')*cap/D('1000000')  # 0.2851\nu_star = (flat-peak_only)/(D('3')*D('0.6')*cap/D('1000000'))   # 0.35\n```\nCapacity is 50 × 12 × 360 = **216,000 machine-hours/yr**. Flat $5 earns 5 × 216,000 × (0.4 × 0.60 + 0.6 × 0.25) = **$0.421M**. Under tiered pricing the peak tier alone already brings 6 × 0.55 × 0.4 × 216,000 = **$0.285M**, so flat wins only if the off-peak tier contributes less than 0.421 − 0.285 = **$0.136M**, i.e. 3 × u × 0.6 × 216,000 < $0.136M → **u < 0.35**. That is the condition: flat beats tiered when off-peak utilization at $3 sits at **0.35 or below** — 0.35, not \"off-peak demand is inelastic\", which the naive reading gives. ex1 prints **0.75**, more than double the threshold, so tiered wins by $0.16M/yr and the answer does not turn.",
+     "interviewer_md": "```python\ndef rev(peak_p,off_p,peak_u,off_u):\n    return (peak_p*peak_u*D('0.4')+off_p*off_u*D('0.6'))*machines*hrs*days/D('1000000')\ncap  = machines*hrs*days                                # 216,000 machine-hours/yr\nflat   = rev(D('5'),D('5'),D('0.60'),D('0.25'))         # 0.4212\ntiered = rev(D('6'),D('3'),D('0.55'),D('0.75'))         # 0.5767\npeak_only = D('6')*D('0.55')*D('0.4')*cap/D('1000000')  # 0.2851\ntier65 = rev(D('6'),D('5'),D('0.55'),D('0.25'))         # 0.4471 — peak lever, independent of u\nu_flat = (flat-peak_only)/(D('3')*D('0.6')*cap/D('1000000'))   # 0.35   — here $6/$3 TIES flat, it is not where flat wins\nu_tier = (D('5')*D('0.25'))/D('3')                             # 0.4167 = 162,000/388,800 — $3 vs $5 off-peak\n```\nCapacity is 50 × 12 × 360 = **216,000 machine-hours/yr** — **86,400** peak hours (40%) and **129,600** off-peak (60%). The case gives two prices on each side — peak $5 → 0.60 (ex0) or $6 → 0.55 (ex1); off-peak $5 → 0.25 (ex0) or $3 → u (ex1) — so there are **four** structures, not two:\n\n| structure | peak (86,400 h) | off-peak (129,600 h) | revenue/yr |\n|---|---|---|---|\n| flat $5 | 5 × 0.60 = **$259,200** | 5 × 0.25 = **$162,000** | **$421,200** ($0.42M) |\n| **$6 peak / $5 off-peak** | 6 × 0.55 = **$285,120** | **$162,000** | **$447,120** ($0.45M) |\n| $5 / $3 at u = 0.75 | $259,200 | 3 × 0.75 = **$291,600** | $550,800 |\n| $6 / $3 at u = 0.75 | $285,120 | $291,600 | **$576,720** ($0.58M) |\n\n**The answer to the question as asked is that no such condition exists — flat never beats tiered.** The peak lever is independent of u: 6 × 0.55 = **$3.30** per peak machine-hour against 5 × 0.60 = **$3.00**, so **$6 peak / $5 off-peak earns $447,120 against flat $5's $421,200 — +$25,920/yr at any off-peak utilization whatsoever**, because it never touches the off-peak price.\n\nOff-peak utilization therefore decides only **which** off-peak tier to run, never whether to tier at all. $3 off-peak beats $5 off-peak when 3 × u × 129,600 > 5 × 0.25 × 129,600 = **$162,000**, i.e. u > 162,000 / 388,800 = **0.4167** (the 129,600 hours cancel: u > 1.25/3). Both sides of that threshold: u = **0.41** → off-peak $3 yields $159,408 < $162,000, run **$6/$5** at $447,120; u = **0.4167** → $162,000 exactly, the two tie at $447,120; u = **0.42** → $163,296, run **$6/$3** at $448,416.\n\n**Trap — the number the candidate will reach for, and it must not be awarded: 0.35.** It is a real threshold answering a different question. 3 × u × 129,600 = 421,200 − 285,120 = **$136,080** → u = 136,080 / 388,800 = **0.35**, the point where **$6/$3 ties flat $5** — not where flat becomes best. Both sides: u = **0.34** → $6/$3 = $417,312 < flat $421,200; u = **0.35** → $421,200 = $421,200, an exact tie, so flat does not *beat* anything even here; u = **0.36** → $425,088 > $421,200. And at every one of those points **$6/$5 pays $447,120**, so flat is third-best throughout.\n\nex1 prints u = **0.75**, above both thresholds, so $6/$3 wins at **$576,720** — **+$155,520 (+37%)** over flat — and the recommendation to price dynamically is robust to off-peak elasticity outright, not merely above some cut-off.\n\n**Pass if ALL:** (1) treats the peak tier and the off-peak tier as **separate** levers instead of comparing \"flat\" against one packaged alternative; (2) concludes that no off-peak utilization makes a single price optimal, and supports it with the peak-only comparison — **$285,120** vs **$259,200** on the same 86,400 peak hours; (3) if a threshold is quoted, quotes it as the choice **between off-peak tiers** ($3 vs $5 at **0.4167**), not as the point where flat wins.\n\n**Fail if:** the candidate answers that flat $5 becomes optimal at or below some off-peak utilization — typically **0.35** — and stops there: flat never wins, and $6 peak / $5 off-peak beats it by **$25,920/yr independent of u**. Also fail a candidate who merely re-runs the $6/$3 formula at a lower u and never asks whether the off-peak price should move back to **$5**.",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
@@ -21194,7 +21300,7 @@
      "step": 7,
      "label": "Recommendation (Pyramid).",
      "candidate_md": "Orbwash's founders want your answer on pricing. What do you recommend?",
-     "interviewer_md": "> - **Conditional exhibit — Demand states:** `reveal_on_request`. Триггеры: \"demand by time\" · \"peak vs off-peak\" · \"price elasticity\" · \"utilization by hour\".\n\n---\n\n---\n\n**Conditional exhibits:** {'title': 'Demand states', 'triggers': ['demand by time', 'peak vs off-peak', 'price elasticity', 'utilization by hour']}\n\n**Partner answer (Pyramid):**\n\n*\"Orbwash should price dynamically ($6 peak / $3 off-peak), not flat $5 — expected value across demand states yields $0.58M vs $0.42M, a 37% revenue lift.\"* Facts: flat $5 crashes off-peak utilization to 0.25; tiered lifts off-peak to 0.75 and peak revenue to $6; +$0.16M/yr. Risks: (internal) dynamic pricing needs clear signage/app to avoid customer confusion; (external) competitor flat-pricing could pressure peak rates. Next steps: pilot tiered pricing on a machine subset; measure off-peak elasticity before full rollout.\n\n> **🎬 Interviewer-only disclosure.**\n> - **L0:** распознать, что спрос имеет состояния (peak/off) с разной эластичностью; считать expected value, а не один флэт.\n> - **L1:** «Одна цена подходит и для пикового, и для непикового спроса?»\n> - **L2:** reveal demand states: peak $6 util 0.55 / off $3 util 0.75.",
+     "interviewer_md": "> - **Conditional exhibit — Demand states:** `reveal_on_request`. Триггеры: \"demand by time\" · \"peak vs off-peak\" · \"price elasticity\" · \"utilization by hour\".\n\n---\n\n---\n\n**Conditional exhibits:** {'title': 'Demand states', 'triggers': ['demand by time', 'peak vs off-peak', 'price elasticity', 'utilization by hour']}\n\n**Partner answer (Pyramid):**\n\n*\"Orbwash should price dynamically ($6 peak / $3 off-peak), not flat $5 — expected value across demand states yields $0.58M vs $0.42M, a 37% revenue lift.\"* Facts: flat $5 crashes off-peak utilization to 0.25; tiered lifts off-peak to 0.75 and peak revenue to $6; +$0.16M/yr. Third fact — the call does not rest on the off-peak response at all: the peak tier alone earns **$285,120** against flat's **$259,200** on the same **86,400** peak hours, so $6 peak / $5 off-peak would still beat a single price by **$25,920/yr** even if the $3 off-peak volume never materialised. Risks: (internal) dynamic pricing needs clear signage/app to avoid customer confusion; (external) competitor flat-pricing could pressure peak rates. Next steps: pilot tiered pricing on a machine subset; measure off-peak utilization at $3 — if it lands below **0.4167**, hold off-peak at $5 and keep the $6 peak tier; do not revert to a single price.\n\n> **🎬 Interviewer-only disclosure.**\n> - **L0:** распознать, что спрос имеет состояния (peak/off) с разной эластичностью; считать expected value, а не один флэт.\n> - **L1:** «Одна цена подходит и для пикового, и для непикового спроса?»\n> - **L2:** reveal demand states: peak $6 util 0.55 / off $3 util 0.75.",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
@@ -23501,18 +23607,18 @@
      "step": 3,
      "label": "Insight",
      "candidate_md": "Как реагирует спрос?",
-     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nэластичность −1.6\n\nEXPECTED ANSWER:\nобъём −32.8%, members_new≈5,509\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) price_change≈20.5%; (2) qty_change=−1.6×0.205; (3) members_new≈5,509.\n\nCHART-SELECT KEY (hidden): correct option = A (steep decline — elastic demand, elasticity −1.6). If the candidate picks A/B/D, do not reveal the number yet; ask them to reconsider what a budget-gym member does when price rises ~20%.",
+     "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nэластичность −1.6\n\nEXPECTED ANSWER:\nобъём −32.8%, members_new = 5,508.72 (для показа ≈5,509 членов)\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) price_change≈20.5%; (2) qty_change=−1.6×0.205; (3) members_new = 5,508.72 (≈5,509 членов при показе).\n\nCHART-SELECT KEY (hidden): correct option = A (steep decline — elastic demand, elasticity −1.6). If they pick another option, do not reveal the numbers yet; ask them to reconsider and re-pick.",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [],
-     "produces": "объём −32.8%, members_new≈5,509",
+     "produces": "объём −32.8%, members_new=5,508.72 (≈5,509)",
      "candidate_md_en": "How does demand respond?"
     },
     {
      "step": 4,
      "label": "Выручка с оттоком и решение",
      "candidate_md": "Эластичность спроса по цене в этой категории — **−1.6**. Правильная выручка и решение.",
-     "interviewer_md": "EXPECTED ANSWER:\n$258,909.74 < $319,800 -> HOLD\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) rev_correct=5509×47≈258,909.74; (2) вывод HOLD; (3) overstate назван от КОРРЕКТНОЙ выручки: 126,490.26/258,909.74 ≈ 48.85% — а не 32.82%, которые даёт наивное деление того же разрыва на new-price выручку $385,400.",
+     "interviewer_md": "EXPECTED ANSWER:\n$258,909.74 < $319,800 -> HOLD\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) rev_correct = 8,200 × (1 − 1.6 × 8/39) × 47 = 5,508.7179… × 47 = $258,909.74 — базу НЕЛЬЗЯ округлять ДО умножения, ни до целого, ни до сотых: 5,509 × 47 = $258,923.00, 5,508 × 47 = $258,876.00, даже 5,508.72 × 47 = $258,909.84 — ни одно не равно ответу; округление до ≈5,509 членов допустимо только при показе; (2) вывод HOLD; (3) overstate назван от КОРРЕКТНОЙ выручки: 126,490.26/258,909.74 ≈ 48.85% — а не 32.82%, которые даёт наивное деление того же разрыва на new-price выручку $385,400.",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
@@ -25195,13 +25301,13 @@
      "step": 5,
      "label": "Sensitivity",
      "candidate_md": "Что при контракте 7 лет?",
-     "interviewer_md": "EXPECTED ANSWER:\nPV $29,378,781 < $34M; нужен ~9+ лет\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) 7-лет + 3 остаточных = 29,378,781; (2) вывод — флип устойчив.",
+     "interviewer_md": "EXPECTED ANSWER:\nPV $29,378,781 < $34M; порог — контракт 10 лет (9 лет: PV $33,777,113, дефицит −$222,887 к capex $34M → SKIP; 10 лет: PV $35,655,056, +$1,655,056 → ENTER)\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) 7-лет + 3 остаточных = 29,378,781; (2) вывод — флип устойчив; (3) если кандидат называет минимальный срок контракта, он обязан подставить оба соседних целых: 9 лет — всё ещё SKIP (PV $33,777,113, −$222,887), ENTER только с 10 лет (PV $35,655,056, +$1,655,056). Ответ «хватит ~9 лет» не засчитывать: на 9 годах проект по-прежнему отрицателен.",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
       4
      ],
-     "produces": "PV $29,378,781 < $34M; нужен ~9+ лет",
+     "produces": "PV $29,378,781 < $34M; порог — контракт 10 лет (9 лет: −$222,887)",
      "candidate_md_en": "What happens with a 7-year contract?"
     },
     {
