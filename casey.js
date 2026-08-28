@@ -27,6 +27,75 @@ window.caseyCalc = (function(){
 })();
 
 
+/* 28.08.2026, dev. Правило владельца от 25.08: ВЕДЕНИЕ английское, а разбор
+   и обратная связь - на языке кандидата. Casey держал английским всё, включая
+   системные сообщения («Connection issue.», «Mic access denied») и весь разбор
+   («Answer key», «You said», четыре критерия финала). Поверхность самого
+   ассессмента (вопросы, подсказки ввода, кнопка Submit, экспонаты) остаётся
+   английской НАМЕРЕННО - на настоящем BCG Chat она английская.
+   Свой словарь, а не I18N из index.html: casey.js - отдельный файл, и так же
+   устроен drills.js. */
+var CY_T = {
+  connLost:  {en:'<b>Connection issue.</b> Could not reach the grader - moving on.',
+              ru:'<b>Обрыв связи.</b> Не достучались до проверки - идём дальше.'},
+  connExh:   {en:'<b>Connection issue.</b> Revealing the exhibit anyway.',
+              ru:'<b>Обрыв связи.</b> Экспонат всё равно открываем.'},
+  grading:   {en:'Grading your answer…',            ru:'Проверяю ответ…'},
+  micNo:     {en:'Mic not supported - type your answer instead.',
+              ru:'Микрофон не поддерживается - напиши ответ текстом.'},
+  micDenied: {en:'Mic access denied - type your answer instead.',
+              ru:'Доступ к микрофону запрещён - напиши ответ текстом.'},
+  transcribing: {en:'Transcribing…',                ru:'Расшифровываю…'},
+  transcribed:  {en:'Transcribed - review and submit.',
+                 ru:'Расшифровано - проверь и отправь.'},
+  transFail: {en:'Transcription failed - type your answer instead.',
+              ru:'Расшифровка не удалась - напиши ответ текстом.'},
+  transNA:   {en:'Transcription unavailable - type your answer.',
+              ru:'Расшифровка недоступна - напиши ответ текстом.'},
+  recording: {en:'Recording…',                      ru:'Записываю…'},
+  recStop:   {en:'Stop recording',                  ru:'Остановить запись'},
+  recStart:  {en:'Record recommendation',           ru:'Записать рекомендацию'},
+  recSubmit: {en:'Submit recommendation',           ru:'Отправить рекомендацию'},
+  recPh:     {en:'…or type your recommendation here if you prefer.',
+              ru:'…или напиши рекомендацию здесь, если так удобнее.'},
+  progress:  {en:'Test Completed ',                 ru:'Пройдено '},
+  loadFail:  {en:'Could not load this case - please try again.',
+              ru:'Не удалось загрузить кейс - попробуй ещё раз.'},
+  loading:   {en:'Loading…',                        ru:'Загружаю…'},
+  pickCase:  {en:'Choose a case',                   ru:'Выбери кейс'},
+  calc:      {en:'Calculator',                      ru:'Калькулятор'},
+  exit:      {en:'Exit',                            ru:'Выход'},
+  closeBtn:  {en:'Close',                           ru:'Закрыть'},
+  yourIv:    {en:'Your interviewer',                ru:'Твой интервьюер'},
+  finale:    {en:'Voice finale: ',                  ru:'Голосовой финал: '},
+  modelAns:  {en:'Partner-level model answer',      ru:'Эталонный ответ партнёрского уровня'},
+  answerKey: {en:'Answer key - question by question',
+              ru:'Разбор - вопрос за вопросом'},
+  youSaid:   {en:'You said:',                       ru:'Ты сказал:'},
+  answer:    {en:'Answer:',                         ru:'Ответ:'},
+  explain:   {en:'Explanation:',                    ru:'Почему:'},
+  c1:        {en:'Conclusion first (Pyramid)',      ru:'Вывод первой строкой (пирамида)'},
+  c2:        {en:'Anchor number',                   ru:'Опорное число'},
+  c3:        {en:'Risks (internal + external)',     ru:'Риски (внутренний + внешний)'},
+  c4:        {en:'Next step',                       ru:'Следующий шаг'},
+  pickTitle: {en:'Pick a case',                     ru:'Выбери кейс'},
+  pickLead:  {en:' interviewee-led cases · exhibits · voice recommendation, graded like the real thing.',
+              ru:' кейсов, которые ведёт кандидат · экспонаты · голосовая рекомендация, оценка как на настоящем интервью.'},
+  cardDone:  {en:'✓ done',                          ru:'✓ пройден'},
+  loadCases: {en:'Could not load cases - please make sure you are signed in, then try again.',
+              ru:'Не удалось загрузить кейсы - проверь, что ты вошёл в аккаунт, и попробуй ещё раз.'},
+  ivTitle:   {en:'Your interviewer',                ru:'Твой интервьюер'},
+  testDone0: {en:'Test Completed 0%',               ru:'Пройдено 0%'}
+};
+/* Разбор и обратная связь идут по fbLang; 'same' означает язык ведения. */
+function CY(k){
+  var st = (typeof state !== 'undefined' && state) ? state : {};
+  var fb = st.fbLang && st.fbLang !== 'same' ? st.fbLang : st.aiLang;
+  var lang = fb === 'ru' ? 'ru' : 'en';
+  var e = CY_T[k];
+  return e ? (e[lang] || e.en) : '';
+}
+
 (function(){
   var CSS = `#screen-casey { position:fixed; inset:0; z-index:50; height:100vh; height:100dvh; overflow:hidden; background:var(--surface-dark); display:none; flex-direction:column; }
 #screen-casey.active { display:flex; }
@@ -133,7 +202,7 @@ window.caseyCalc = (function(){
   <div id="cyFeed"><div class="cy-wrap" id="cyWrap"></div></div>
   <button class="cy-calc-fab" onclick="caseyCalc.toggle()" title="Calculator" aria-label="Calculator"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="8" y1="14" x2="8" y2="14"></line><line x1="12" y1="14" x2="12" y2="14"></line><line x1="16" y1="14" x2="16" y2="18"></line><line x1="8" y1="18" x2="12" y2="18"></line></svg></button>
   <div class="cy-calc" id="cyCalc" style="display:none">
-    <div class="cy-calc-head"><span>Calculator</span><button onclick="caseyCalc.toggle()" aria-label="Close">&times;</button></div>
+    <div class="cy-calc-head"><span id="cyCalcTitle">Calculator</span><button onclick="caseyCalc.toggle()" aria-label="Close">&times;</button></div>
     <input class="cy-calc-disp" id="cyCalcDisp" readonly value="0">
     <div class="cy-calc-keys"><button onclick="caseyCalc.press('C')">C</button><button onclick="caseyCalc.press('DEL')">&#9003;</button><button class="op" onclick="caseyCalc.press('%')">%</button><button class="op" onclick="caseyCalc.press('÷')">÷</button><button onclick="caseyCalc.press('7')">7</button><button onclick="caseyCalc.press('8')">8</button><button onclick="caseyCalc.press('9')">9</button><button class="op" onclick="caseyCalc.press('×')">×</button><button onclick="caseyCalc.press('4')">4</button><button onclick="caseyCalc.press('5')">5</button><button onclick="caseyCalc.press('6')">6</button><button class="op" onclick="caseyCalc.press('-')">−</button><button onclick="caseyCalc.press('1')">1</button><button onclick="caseyCalc.press('2')">2</button><button onclick="caseyCalc.press('3')">3</button><button class="op" onclick="caseyCalc.press('+')">+</button><button class="wide" onclick="caseyCalc.press('0')">0</button><button onclick="caseyCalc.press('.')">.</button><button class="eq" onclick="caseyCalc.press('=')">=</button></div>
   </div>
@@ -341,7 +410,7 @@ window.caseyCalc = (function(){
   function progress(){
     var pct = Math.round((S.idx / S.flat.length) * 100);
     var f = E('cyProgFill'); if (f) f.style.width = pct + '%';
-    var l = E('cyProgLabel'); if (l) l.textContent = 'Test Completed ' + pct + '%';
+    var l = E('cyProgLabel'); if (l) l.textContent = CY('progress') + pct + '%';
   }
 
   function iz(html){ var z = E('cyInputZone'), i = E('cyIz'); if (!z || !i) return; z.style.display = 'block'; i.innerHTML = html; }
@@ -406,7 +475,7 @@ window.caseyCalc = (function(){
       var b = E('cySendBtn'); if (b) b.disabled = true;
       say('me', sel.map(function(i){ return q.options[i].text; }).join('  •  '));
       gradeStep(q.gid, { selected: sel }).then(function(r){
-        if (r._err){ fb(false, '<b>Connection issue.</b> Could not reach the grader — moving on.'); return void setTimeout(advance, 500); }
+        if (r._err){ fb(false, CY('connLost')); return void setTimeout(advance, 500); }
         var correct = r.correctIdx || [];
         if (r.ok) S.score++;
         record(q, sel.map(function(i){ return (q.options[i]||{}).text; }).join(' • '), r.ok,
@@ -426,7 +495,7 @@ window.caseyCalc = (function(){
       if (raw === '' || isNaN(Number(raw))) return;
       say('me', raw); izBusy();
       gradeStep(q.gid, { value: raw }).then(function(r){
-        if (r._err){ fb(false, '<b>Connection issue.</b> Could not reach the grader — moving on.'); return void setTimeout(advance, 500); }
+        if (r._err){ fb(false, CY('connLost')); return void setTimeout(advance, 500); }
         if (r.ok) S.score++;
         // The verdict line already prints the number. Most explanations still
         // open with "**Answer: 800000** — ", so the candidate reads the same
@@ -457,7 +526,7 @@ window.caseyCalc = (function(){
     say('me', answer); izBusy();
     if (t === 'open_text_elicitation'){
       gradeStep(q.gid, { answer: answer }).then(function(r){
-        if (r._err){ fb(false, '<b>Connection issue.</b> Revealing the exhibit anyway.'); }
+        if (r._err){ fb(false, CY('connExh')); }
         else {
           if (r.pass) S.score++;
           record(q, answer, r.pass, r.model_answer || r.validation || '', r.feedback || '');
@@ -470,24 +539,24 @@ window.caseyCalc = (function(){
     }
     // open_text / brainstorm → server grade
     gradeStep(q.gid, { answer: answer }).then(function(r){
-      if (r._err){ fb(false, '<b>Connection issue.</b> Could not reach the grader — moving on.'); return void setTimeout(advance, 500); }
+      if (r._err){ fb(false, CY('connLost')); return void setTimeout(advance, 500); }
       if (r.pass) S.score++;
       record(q, answer, r.pass, r.model_answer || r.validation || '', r.feedback || '');
       setTimeout(advance, 350);
     });
   }
 
-  function izBusy(){ iz('<div class="cy-recstat">Grading your answer…</div>'); }
+  function izBusy(){ iz('<div class="cy-recstat">' + CY('grading') + '</div>'); }
 
   // ---------- voice finale ----------
   var mic = null;
   function renderVoice(q){
-    iz('<div class="cy-rec"><button class="cy-recbtn" id="cyRecBtn" onclick="Casey._rec()"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0" fill="none" stroke="currentColor" stroke-width="2"/></svg><span id="cyRecLbl">Record recommendation</span></button><span class="cy-recstat" id="cyRecStat">~60–90 seconds. Conclusion first.</span></div><div style="margin-top:10px"><textarea class="cy-txtin" id="cyVoiceTxt" placeholder="…or type your recommendation here if you prefer."></textarea><div style="margin-top:8px;text-align:right"><button class="cy-send ghost" onclick="Casey._submitVoice()">Submit recommendation</button></div></div>');
+    iz('<div class="cy-rec"><button class="cy-recbtn" id="cyRecBtn" onclick="Casey._rec()"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3z"/><path d="M19 11a7 7 0 0 1-14 0" fill="none" stroke="currentColor" stroke-width="2"/></svg><span id="cyRecLbl">' + CY('recStart') + '</span></button><span class="cy-recstat" id="cyRecStat">~60–90 seconds. Conclusion first.</span></div><div style="margin-top:10px"><textarea class="cy-txtin" id="cyVoiceTxt" placeholder="' + CY('recPh') + '"></textarea><div style="margin-top:8px;text-align:right"><button class="cy-send ghost" onclick="Casey._submitVoice()">' + CY('recSubmit') + '</button></div></div>');
   }
   function _rec(){
     if (mic){ stopRec(); return; }
     var stat = E('cyRecStat');
-    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || typeof MediaRecorder === 'undefined'){ if (stat) stat.textContent = 'Mic not supported — type your answer instead.'; return; }
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || typeof MediaRecorder === 'undefined'){ if (stat) stat.textContent = CY('micNo'); return; }
     navigator.mediaDevices.getUserMedia({ audio: true }).then(function(stream){
       var rec = new MediaRecorder(stream), chunks = [];
       rec.ondataavailable = function(e){ if (e.data && e.data.size) chunks.push(e.data); };
@@ -497,19 +566,19 @@ window.caseyCalc = (function(){
         var fr = new FileReader();
         fr.onloadend = function(){
           var b64 = String(fr.result).split(',')[1];
-          if (stat) stat.textContent = 'Transcribing…';
+          if (stat) stat.textContent = CY('transcribing');
           if (typeof callTranscribe === 'function'){
-            callTranscribe(b64, rec.mimeType || 'audio/webm').then(function(txt){ var ta = E('cyVoiceTxt'); if (ta) ta.value = txt; if (stat) stat.textContent = 'Transcribed — review and submit.'; }).catch(function(){ if (stat) stat.textContent = 'Transcription failed — type your answer instead.'; });
-          } else if (stat) stat.textContent = 'Transcription unavailable — type your answer.';
+            callTranscribe(b64, rec.mimeType || 'audio/webm').then(function(txt){ var ta = E('cyVoiceTxt'); if (ta) ta.value = txt; if (stat) stat.textContent = CY('transcribed'); }).catch(function(){ if (stat) stat.textContent = CY('transFail'); });
+          } else if (stat) stat.textContent = CY('transNA');
         };
         fr.readAsDataURL(blob);
       };
       rec.start(); mic = { rec: rec, stream: stream };
-      var btn = E('cyRecBtn'), lbl = E('cyRecLbl'); if (btn) btn.classList.add('recording'); if (lbl) lbl.textContent = 'Stop recording';
-      if (stat) stat.textContent = 'Recording…';
-    }).catch(function(){ if (stat) stat.textContent = 'Mic access denied — type your answer instead.'; });
+      var btn = E('cyRecBtn'), lbl = E('cyRecLbl'); if (btn) btn.classList.add('recording'); if (lbl) lbl.textContent = CY('recStop');
+      if (stat) stat.textContent = CY('recording');
+    }).catch(function(){ if (stat) stat.textContent = CY('micDenied'); });
   }
-  function stopRec(){ if (!mic) return; try { mic.rec.stop(); } catch (e) {} mic = null; var btn = E('cyRecBtn'), lbl = E('cyRecLbl'); if (btn) btn.classList.remove('recording'); if (lbl) lbl.textContent = 'Record recommendation'; }
+  function stopRec(){ if (!mic) return; try { mic.rec.stop(); } catch (e) {} mic = null; var btn = E('cyRecBtn'), lbl = E('cyRecLbl'); if (btn) btn.classList.remove('recording'); if (lbl) lbl.textContent = CY('recStart'); }
 
   function _submitVoice(){
     if (mic) stopRec();
@@ -533,16 +602,16 @@ window.caseyCalc = (function(){
 
   function renderGrade(j, q){
     izHide();
-    var labels = { c1_conclusion_first:'Conclusion first (Pyramid)', c2_anchor_number:'Anchor number', c3_risks:'Risks (internal + external)', c4_nextstep:'Next step' };
+    var labels = { c1_conclusion_first:CY('c1'), c2_anchor_number:CY('c2'), c3_risks:CY('c3'), c4_nextstep:CY('c4') };
     var crit = j.criteria || {};
     var rows = Object.keys(labels).map(function(k){ var c = crit[k] || {}; var pass = !!c.pass; return '<div class="cy-crit ' + (pass?'pass':'fail') + '"><span class="ic">' + (pass?'✓':'✗') + '</span><span><b>' + labels[k] + '</b>' + (c.evidence ? ' — ' + esc2(c.evidence) : '') + '</span></div>'; }).join('');
     var score = typeof j.score === 'number' ? j.score : Object.keys(crit).filter(function(k){ return crit[k] && crit[k].pass; }).length;
     var verdict = j.verdict || (score >= 4 ? 'strong' : score >= 3 ? 'partial' : 'weak');
-    feedNode('<div class="cy-grade"><div class="cy-score">Voice finale: ' + score + '/4 · ' + esc2(verdict) + '</div>' + rows + (j.coaching ? '<div class="cy-fb ' + (score>=3?'ok':'no') + '" style="margin-top:12px">' + esc2(j.coaching) + '</div>' : '') + '</div>');
+    feedNode('<div class="cy-grade"><div class="cy-score">' + CY('finale') + score + '/4 · ' + esc2(verdict) + '</div>' + rows + (j.coaching ? '<div class="cy-fb ' + (score>=3?'ok':'no') + '" style="margin-top:12px">' + esc2(j.coaching) + '</div>' : '') + '</div>');
     if (score >= 3) S.score++;
     // reveal partner model answer (server returns it with the voice grade)
     var model = j.model_answer || '';
-    if (model){ setTimeout(function(){ feedNode('<div class="cy-ex"><span class="cy-ex-tag">Partner-level model answer</span><div class="cy-bbl" style="max-width:100%;margin-top:4px">' + md(model) + '</div></div>'); S.idx++; setTimeout(finish, 500); }, 400); }
+    if (model){ setTimeout(function(){ feedNode('<div class="cy-ex"><span class="cy-ex-tag">' + CY('modelAns') + '</span><div class="cy-bbl" style="max-width:100%;margin-top:4px">' + md(model) + '</div></div>'); S.idx++; setTimeout(finish, 500); }, 400); }
     else { S.idx++; setTimeout(finish, 500); }
   }
 
@@ -569,12 +638,12 @@ window.caseyCalc = (function(){
     var rows = S.log.map(function(e){
       return '<div class="cy-crit ' + (e.ok ? 'pass' : 'fail') + '"><span class="ic">' + (e.ok ? '✓' : '✗') + '</span><span>' +
         '<b>' + e.n + '. ' + esc2(String(e.q).slice(0, 140)) + '</b>' +
-        '<div style="margin-top:6px"><i>You said:</i> ' + esc2(String(e.mine).slice(0, 500) || '—') + '</div>' +
-        (e.expected ? '<div style="margin-top:4px"><i>Answer:</i> ' + md(String(e.expected).slice(0, 900)) + '</div>' : '') +
-        (cleanWhy(e.why) ? '<div style="margin-top:4px;opacity:.9"><i>Explanation:</i> ' + md(cleanWhy(e.why).slice(0, 900)) + '</div>' : '') +
+        '<div style="margin-top:6px"><i>' + CY('youSaid') + '</i> ' + esc2(String(e.mine).slice(0, 500) || '—') + '</div>' +
+        (e.expected ? '<div style="margin-top:4px"><i>' + CY('answer') + '</i> ' + md(String(e.expected).slice(0, 900)) + '</div>' : '') +
+        (cleanWhy(e.why) ? '<div style="margin-top:4px;opacity:.9"><i>' + CY('explain') + '</i> ' + md(cleanWhy(e.why).slice(0, 900)) + '</div>' : '') +
         '</span></div>';
     }).join('');
-    feedNode('<div class="cy-grade"><div class="cy-score">Answer key — question by question</div>' + rows + '</div>');
+    feedNode('<div class="cy-grade"><div class="cy-score">' + CY('answerKey') + '</div>' + rows + '</div>');
   }
 
   function finish(){
@@ -595,37 +664,52 @@ window.caseyCalc = (function(){
     return apiCasey({ action:'list' }).then(function(d){ if (d && d.error) throw new Error(d.error.message||'load failed'); CASES = (d && d.cases) || []; return CASES; });
   }
 
+  /* 28.08.2026. Четыре подписи стоят в ШАБЛОНЕ, который вклеивается при
+     загрузке файла - раньше, чем прочитан язык из localStorage. Поэтому они
+     выставляются при открытии экрана, а не при вклейке. */
+  function applyStatic(){
+    var t = E('cyCalcTitle'); if (t) t.textContent = CY('calc');
+    var q = function(sel, key, attr){
+      document.querySelectorAll(sel).forEach(function(el){ el.setAttribute(attr, CY(key)); });
+    };
+    q('#screen-casey [title="Exit"]', 'exit', 'title');
+    q('#screen-casey [title="Your interviewer"]', 'ivTitle', 'title');
+    q('#screen-casey [title="Calculator"]', 'calc', 'title');
+    q('#screen-casey [aria-label="Calculator"]', 'calc', 'aria-label');
+    q('#screen-casey [aria-label="Close"]', 'closeBtn', 'aria-label');
+  }
   function open(){
     if (typeof showScreen === 'function') showScreen('casey');
+    applyStatic();
     izHide();
     var w = E('cyWrap'); if (w) w.innerHTML = '';
-    E('cyProgFill').style.width = '0%'; E('cyProgLabel').textContent = 'Choose a case';
+    E('cyProgFill').style.width = '0%'; E('cyProgLabel').textContent = CY('pickCase');
     loadCases().then(function(cases){
       var done = []; try { done = JSON.parse(localStorage.getItem('casedge_casey_done') || '[]'); } catch (e) {}
       var cards = cases.map(function(c, i){ var d = done.indexOf(c.id) >= 0;
-        return '<div class="cy-card ' + (d?'done':'') + '" onclick="Casey.play(\'' + c.id + '\')"><div class="cy-num">' + (i+1) + '</div><div><div class="cy-cn">' + esc2(c.title) + '</div><div class="cy-cd">' + esc2(c.meta_tag || '') + '</div></div>' + (d?'<span class="cy-badge">✓ done</span>':'') + '</div>'; }).join('');
-      w.innerHTML = '<div class="cy-pick-h"><div class="eyebrow">BCG · Casey Simulator</div><h2>Pick a case</h2><p>' + cases.length + ' interviewee-led cases · exhibits · voice recommendation, graded like the real thing.</p></div>' + cards;
+        return '<div class="cy-card ' + (d?'done':'') + '" onclick="Casey.play(\'' + c.id + '\')"><div class="cy-num">' + (i+1) + '</div><div><div class="cy-cn">' + esc2(c.title) + '</div><div class="cy-cd">' + esc2(c.meta_tag || '') + '</div></div>' + (d?'<span class="cy-badge">' + CY('cardDone') + '</span>':'') + '</div>'; }).join('');
+      w.innerHTML = '<div class="cy-pick-h"><div class="eyebrow">BCG · Casey Simulator</div><h2>' + CY('pickTitle') + '</h2><p>' + cases.length + CY('pickLead') + '</p></div>' + cards;
       scrollFeed();
-    }).catch(function(){ w.innerHTML = '<div class="cy-pick-h"><h2>Casey</h2><p>Could not load cases — please make sure you are signed in, then try again.</p></div>'; });
+    }).catch(function(){ w.innerHTML = '<div class="cy-pick-h"><h2>Casey</h2><p>' + CY('loadCases') + '</p></div>'; });
   }
 
   function play(id){
     var w = E('cyWrap'); if (w) w.innerHTML = '';
-    var pl = E('cyProgLabel'); if (pl) pl.textContent = 'Loading…';
+    var pl = E('cyProgLabel'); if (pl) pl.textContent = CY('loading');
     apiCasey({ action:'case', caseId: id }).then(function(d){
       var c = d && d.case;
-      if (!c){ if (w) w.innerHTML = '<div class="cy-pick-h"><h2>Casey</h2><p>Could not load this case — please try again.</p></div>'; return; }
+      if (!c){ if (w) w.innerHTML = '<div class="cy-pick-h"><h2>Casey</h2><p>' + CY('loadFail') + '</p></div>'; return; }
       /* log — журнал партии. Ни одного слова оценки по ходу: всё, что
          сказал бы интервьюер ПОСЛЕ, копится здесь и печатается разбором
          в конце. Так же устроен полный кейс (api/case-session.js), где
          маркеры оценки кандидату не показываются вовсе. */
       S = { case: c, flat: c.steps || [], idx: 0, score: 0, shown: {}, log: [] };
-      if (pl) pl.textContent = 'Test Completed 0%';
+      if (pl) pl.textContent = CY('testDone0');
       say('ai', "I'm Casey. Let's work through **" + c.title + "**. Read the brief, use the exhibits — the math is real. You'll close with a spoken recommendation.");
       say('ai', c.scenario);
       (c.exhibits || []).forEach(function(ex){ if (ex.reveal === 'auto') showExhibit(ex); });
       setTimeout(step, 500);
-    }).catch(function(){ if (w) w.innerHTML = '<div class="cy-pick-h"><h2>Casey</h2><p>Could not load this case — please try again.</p></div>'; });
+    }).catch(function(){ if (w) w.innerHTML = '<div class="cy-pick-h"><h2>Casey</h2><p>' + CY('loadFail') + '</p></div>'; });
   }
 
   function exit(){ if (typeof showScreen === 'function') showScreen('mode'); }
