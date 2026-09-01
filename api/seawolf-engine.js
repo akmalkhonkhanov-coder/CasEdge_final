@@ -28,8 +28,8 @@ const TIMER_MS   = 30 * 60 * 1000;
    включая англоязычного и платящего, и стоял он на ПЕРВОМ экране после входа. */
 const LEVEL_NOTE = {
   'Лёгкий': {
-    ru: '⚠ Тренировочный режим. На этом уровне валидных решений 21 и больше из 120 — примерно в 15 раз просторнее реального ассессмента McKinsey, где их 1–2 из 120. Уровень учит порядку ходов, а не жёсткости отбора.',
-    en: '⚠ Practice mode. At this level 21 or more of the 120 combinations are valid — roughly 15 times roomier than the real McKinsey assessment, where 1-2 of 120 are. The level teaches the order of moves, not the hardness of the screen.' },
+    ru: '⚠ Тренировочный режим. На этом уровне валидных решений 21–30 из 120 — примерно в 15 раз просторнее реального ассессмента McKinsey, где их 1–2 из 120. Уровень учит порядку ходов, а не жёсткости отбора.',
+    en: '⚠ Practice mode. At this level 21-30 of the 120 combinations are valid — roughly 15 times roomier than the real McKinsey assessment, where 1-2 of 120 are. The level teaches the order of moves, not the hardness of the screen.' },
   'Средний': {
     ru: '⚠ Тренировочный режим. На этом уровне валидных решений 8–20 из 120 — примерно в 8 раз просторнее реального ассессмента McKinsey, где их 1–2 из 120. Уровень учит порядку ходов, а не жёсткости отбора.',
     en: '⚠ Practice mode. At this level 8-20 of the 120 combinations are valid — roughly 8 times roomier than the real McKinsey assessment, where 1-2 of 120 are. The level teaches the order of moves, not the hardness of the screen.' },

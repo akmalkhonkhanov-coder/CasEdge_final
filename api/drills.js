@@ -504,6 +504,32 @@ Return: {"pass": boolean, "coaching": "1-2 sentences naming what was missed or w
    у scrubPrompt в Redrock. */
 const REF_INTERNAL = /\[(?:DUP|BUILD)\]/;
 const REF_LABEL = /\*{0,2}\[(?:TWO LEVERS|ONE LEVER)\]\*{0,2}\s*/g;
+
+/* ССЫЛКА НА КНИГУ В ЭТАЛОНЕ - 01.09.2026, dev.
+   Двадцать слотов из 315 несут в ЭТАЛОНЕ строку «**Source:** <книга>, <кейс>,
+   стр. NN-MM» вместе с числами книги, а эталон уходит кандидату ДОСЛОВНО после
+   каждой оценённой попытки. Кандидат узнаёт, из какого кейса какого кейсбука
+   собран слот, и заходит в этот кейс с готовым ответом - ровно тот вред, ради
+   которого у цеха дриллов есть норма Н25.7. Среди названных - живые кейсы
+   владельца (Hooville College в ST-050).
+   Замер до правки: 20 слотов · SY 16 · ST 2 · BR 1 · CM 1.
+
+   Режем СТРОКОЙ, а не абзацем, потому что блок встречается в трёх видах:
+     1  своим абзацем                       (SY-041 и большинство)
+     2  последним пунктом списка «- **Source:**»  (CM-051 - весь эталон там
+        ОДИН абзац, и срез абзацем стёр бы эталон целиком)
+     3  приклеенным через <br><br> к концу абзаца (SY-049, SY-055)
+   В SY-041 после блока идёт ПОЛЕЗНЫЙ абзац - поэтому «резать до конца строки»
+   нельзя было заменить на «резать до конца текста».
+   Это СЕТЬ. Материал правит цех; движок не должен зависеть от того, что цех
+   никогда не оступится. Тот же принцип, что у scrubPrompt в Redrock. */
+const REF_SRC_BR = /(?:<br\s*\/?>\s*)+\*{0,2}(?:Source|Источник):\*{0,2}[^\n]*/g;
+const REF_SRC_LINE = /^[ \t]*(?:[-*\u2022]|\d+[.)])?[ \t]*\*{0,2}(?:Source|Источник):/;
+function refDropSource(s) {
+  const noBr = s.replace(REF_SRC_BR, '');
+  return noBr.split('\n').filter(l => !REF_SRC_LINE.test(l)).join('\n');
+}
+
 function refBlocks(s) {
   // абзацы, но огороженный блок кода — ОДИН неделимый кусок
   const out = []; let pos = 0;
@@ -556,7 +582,7 @@ function scrubReference(v) {
     }
     keep.push(parts[i]); i++;
   }
-  return keep.join('\n\n').replace(REF_LABEL, '').replace(/\n{3,}/g, '\n\n').trim();
+  return refDropSource(keep.join('\n\n')).replace(REF_LABEL, '').replace(/\n{3,}/g, '\n\n').trim();
 }
 function scrubReferencePair(r) {
   if (!r || typeof r !== 'object') return r;
