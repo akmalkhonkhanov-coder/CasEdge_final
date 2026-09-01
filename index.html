@@ -4060,8 +4060,7 @@ const I18N = {
     'auth.password': 'Password',
     'auth.ph.name': 'Your name',
     'auth.showPw': 'Show password',
-    'cookie.decline': 'Decline',
-    'cookie.accept': 'Accept',
+    'cookie.ok': 'Got it',
     'demo.tag1': 'Market Sizing',
     'demo.tag2': 'Growth',
     'caselib.lead1': 'Real casebook cases (Wharton / Darden).',
@@ -4551,8 +4550,7 @@ const I18N = {
     'auth.password': 'Пароль',
     'auth.ph.name': 'Твоё имя',
     'auth.showPw': 'Показать пароль',
-    'cookie.decline': 'Отклонить',
-    'cookie.accept': 'Принять',
+    'cookie.ok': 'Понятно',
     'demo.tag1': 'Оценка рынка',
     'demo.tag2': 'Рост',
     'caselib.lead1': 'Настоящие кейсы из кейсбуков (Wharton / Darden).',
@@ -10034,6 +10032,27 @@ Return ONLY valid JSON (no markdown, no backticks). All five scores are 1.0-10.0
     const d = JSON.parse(clean);
     stopFeedbackLoading();
 
+    /* 28.08.2026, поймано владельцем на живом кейсе: общий балл 4.5 при
+       измерениях 6.2-7.3. Модель заполняет `overall` ОТДЕЛЬНЫМ полем, и ничто
+       не связывало его с пятью измерениями - число, по которому кандидат судит
+       о себе, противоречило собственной расшифровке.
+       Правило: общий балл - это сводка пяти, значит он не может быть хуже
+       худшего измерения и лучше лучшего. Свободу взвешивать модели оставляем:
+       внутри разброса её число не трогаем, один провальный ход по-прежнему
+       тянет кейс вниз - но только до худшего измерения, не ниже. */
+    (function clampOverall() {
+      const dims = [d.structure, d.quant, d.logic, d.communication, d.ownership]
+        .map(parseFloat).filter(v => !isNaN(v));
+      const ov = parseFloat(d.overall);
+      if (dims.length < 5 || isNaN(ov)) return;
+      const lo = Math.min.apply(null, dims), hi = Math.max.apply(null, dims);
+      const fixed = Math.min(hi, Math.max(lo, ov));
+      if (fixed !== ov) {
+        d.overall = Math.round(fixed * 10) / 10;
+        d._overall_raw = ov;   // видно в консоли, если понадобится разбирать
+      }
+    })();
+
     // Record the overall score into progress (for the avg-score stat)
     const ov = parseFloat(d.overall);
     if (!isNaN(ov)) {
@@ -10763,8 +10782,13 @@ document.addEventListener('keydown', e => {
 <div class="cookie-banner" id="cookieBanner">
   <div class="cookie-text" data-i18n-html="cookie.banner">We use local storage and essential cookies to run CasEdge and remember your preferences. See our <a onclick="goToPage('cookies')">Cookie Policy</a>.</div>
   <div class="cookie-actions">
-    <button class="cookie-btn cookie-btn-ghost" onclick="acceptCookies()" data-i18n="cookie.decline">Decline</button>
-    <button class="cookie-btn" onclick="acceptCookies()" data-i18n="cookie.accept">Accept</button>
+    <!-- 28.08.2026. Кнопок было две, «Отклонить» и «Принять», и обе вызывали
+         acceptCookies(): отказаться было нельзя, кнопка обещала выбор, которого
+         нет. Мы ставим только обязательное хранилище (прогресс и настройки),
+         отказ от него означал бы «не пользоваться продуктом». Честная форма
+         для такого случая - подтверждение, а не выбор. Появится аналитика или
+         маркетинг - вернём две кнопки И РАЗНОЕ ПОВЕДЕНИЕ, не раньше. -->
+    <button class="cookie-btn" onclick="acceptCookies()" data-i18n="cookie.ok">Got it</button>
   </div>
 </div>
 
