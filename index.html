@@ -3497,6 +3497,22 @@ const DRILL_BOARD = {
             en:'Graded on: <b>the verdict stated first, as an action, with a subject</b> · 2–3 facts under it · risks · the next step · which fact in the record does not matter.'} }
 };
 function dbText(v) { const l = (state.uiLang === 'ru') ? 'ru' : 'en'; return (v && typeof v === 'object') ? (v[l] || v.en || '') : (v || ''); }
+// Заголовок табло навыка обязан совпадать с карточкой над ним. До 01.09.2026
+// сюда печатался внутренний ключ ('Synthesis'), и на русском экране заголовок
+// стоял по-английски под русской карточкой. Один источник подписи - словарь.
+const DRILL_KEY = {
+  'Market Sizing': 'drillcard.sizing.name',
+  'Structuring': 'drillcard.structuring.name',
+  'Case Math': 'drillcard.math.name',
+  'Chart Interpretation': 'drillcard.chart.name',
+  'Brainstorm': 'drillcard.brainstorm.name',
+  'Synthesis': 'drillcard.synthesis.name'
+};
+function drillName(type) {
+  const k = DRILL_KEY[type];
+  if (!k) return type;              // незнакомый тип печатаем как есть, а не пусто
+  try { const v = t(k); return v || type; } catch (e) { return type; }
+}
 function selectDrill(type, el) {
   document.querySelectorAll('.drill-card').forEach(c => { c.classList.remove('selected'); });
   if (el) el.classList.add('selected');
@@ -3504,7 +3520,7 @@ function selectDrill(type, el) {
   const d = DRILL_BOARD[type];
   const set = (id, html) => { const n = document.getElementById(id); if (n) n.innerHTML = html; };
   if (d) {
-    set('dp-name', type); set('dp-when', dbText(d.when)); set('dp-where', dbText(d.where));
+    set('dp-name', drillName(type)); set('dp-when', dbText(d.when)); set('dp-where', dbText(d.where));
     set('dp-time', dbText(d.time)); set('dp-graded', dbText(d.graded));
   }
   const board = document.getElementById('drill-board');
@@ -3857,7 +3873,7 @@ const I18N = {
     'chat.qa.math.txt': "Let me walk through the calculation step by step.",
     'fb.scoring': "Scoring your case…",
     'chat.placeholder': "Share your thinking…",
-    'prog.overall': "Your overall: {avg}/10  ·  Target for {firm}: {target} on every dimension",
+    'prog.overall': "Your level (last {n}): {avg}/10  ·  Target for {firm}: {target} on every dimension",
     'prog.stat.cases': "Cases completed",
     'prog.stat.drills': "Drills completed",
     'prog.stat.games': "Games played",
@@ -4042,6 +4058,9 @@ const I18N = {
     'prog.eyebrow': 'Your progress',
     'prog.title': 'How your training is going',
     'prog.drillsByType': 'Drills by type',
+    'prog.signedin': 'Signed in as',
+    'prog.editname': 'Edit name',
+    'prog.entername': 'Enter your name:',
     'path.title': 'Your path to the offer',
     // Misc
     'common.signin': 'Sign in →',
@@ -4347,7 +4366,7 @@ const I18N = {
     'chat.qa.math.txt': "Пройду расчёт по шагам.",
     'fb.scoring': "Считаем твой кейс…",
     'chat.placeholder': "Изложи свою мысль…",
-    'prog.overall': "Твой уровень: {avg}/10  ·  Цель для {firm}: {target} по каждому измерению",
+    'prog.overall': "Твой уровень (последние {n}): {avg}/10  ·  Цель для {firm}: {target} по каждому измерению",
     'prog.stat.cases': "Кейсов пройдено",
     'prog.stat.drills': "Дриллов пройдено",
     'prog.stat.games': "Игр сыграно",
@@ -4532,6 +4551,9 @@ const I18N = {
     'prog.eyebrow': 'Твой прогресс',
     'prog.title': 'Как идёт тренировка',
     'prog.drillsByType': 'Дриллы по типам',
+    'prog.signedin': 'Ты вошёл как',
+    'prog.editname': 'Изменить имя',
+    'prog.entername': 'Введи своё имя:',
     'path.title': 'Твой путь к офферу',
     // Misc
     'common.signin': 'Войти →',
@@ -4854,6 +4876,11 @@ function applyUiLang() {
     if (document.getElementById('screen-bcg')?.classList.contains('active')
         && typeof bcg === 'object' && bcg && bcg.case
         && typeof bcgSetProgress === 'function') bcgSetProgress();
+  } catch (e) {}
+  try {
+    const dpn = document.getElementById('dp-name');
+    if (dpn && state && state.drillType && typeof drillName === 'function')
+      dpn.innerHTML = drillName(state.drillType);
   } catch (e) {}
   if (typeof window.setupRepel === 'function') {
     try { window.setupRepel(); } catch (e) {}
@@ -5662,52 +5689,81 @@ function goToMode() { showScreen('mode'); }
    Explains the format before the game starts, like a
    real assessment briefing. Then launches the engine.
 ──────────────────────────────────────────────────── */
+// 01.09.2026. Экран-бриф игры собирался ТОЛЬКО по-английски, а рамка вокруг
+// него (Ситуация / Играть / Назад) шла через словарь: на русском экране
+// получалась смесь. Норма проекта: интерфейс идёт на языке кандидата, а
+// СОДЕРЖАНИЕ ассессмента (сама легенда кейса) остаётся английским, потому что
+// на настоящем интервью оно английское. Поэтому story и title не переводятся,
+// а объяснение формата - переводится.
 const GAME_INTROS = {
   solve: {
-    eyebrow: 'McKinsey-style assessment',
+    eyebrow: {ru:'Ассессмент в стиле McKinsey', en:'McKinsey-style assessment'},
     title: 'Solve Game',
     story: 'You\u2019ve been brought in as an analyst for the Calder Sound marine authority. Three commercial fish species in the sound are under pressure, and the regulator must decide how much catch is sustainable before the next season opens. The data is messy and the clock is ticking \u2014 your job is to turn the survey numbers into defensible figures the board can act on.',
-    lead: 'This mirrors the McKinsey Solve assessment - a data-driven problem-solving game. You work through an ecosystem scenario in four phases, entering numeric answers that are graded against a verified solution.',
+    lead: {ru:'Это повторение ассессмента McKinsey Solve - игры на решение задач по данным. Ты проходишь сценарий экосистемы в четыре фазы и вводишь числовые ответы, которые сверяются с проверенным решением.',
+           en:'This mirrors the McKinsey Solve assessment - a data-driven problem-solving game. You work through an ecosystem scenario in four phases, entering numeric answers that are graded against a verified solution.'},
     steps: [
-      ['1','<b>Study</b> - read the scenario and fill the missing figures into the text, using the exhibit data.'],
-      ['2','<b>Analysis</b> - answer numeric questions: areas, growth rates, and which entity grew fastest.'],
-      ['3','<b>Report</b> - choose the chart type that best visualises the breakdown.'],
-      ['4','<b>Cases</b> - solve a short standalone mini-case with its own exhibit.'],
+      ['1',{ru:'<b>Study</b> - прочитай сценарий и подставь в текст недостающие числа, опираясь на экзибит.',
+            en:'<b>Study</b> - read the scenario and fill the missing figures into the text, using the exhibit data.'}],
+      ['2',{ru:'<b>Analysis</b> - ответь на числовые вопросы: площади, темпы роста и кто вырос быстрее всех.',
+            en:'<b>Analysis</b> - answer numeric questions: areas, growth rates, and which entity grew fastest.'}],
+      ['3',{ru:'<b>Report</b> - выбери тип графика, который лучше всего показывает разбивку.',
+            en:'<b>Report</b> - choose the chart type that best visualises the breakdown.'}],
+      ['4',{ru:'<b>Cases</b> - реши короткий отдельный мини-кейс со своим экзибитом.',
+            en:'<b>Cases</b> - solve a short standalone mini-case with its own exhibit.'}],
     ],
-    meta: [['Time','35 min'],['Phases','4'],['Scoring','Auto-graded']],
-    note: 'Original scenario (Calder Sound Fishery). The format mirrors the real assessment; the content is our own. Answers are checked within a 1% tolerance.',
+    meta: [[{ru:'Время',en:'Time'},{ru:'35 мин',en:'35 min'}],
+           [{ru:'Фаз',en:'Phases'},'4'],
+           [{ru:'Оценка',en:'Scoring'},{ru:'Автоматическая',en:'Auto-graded'}]],
+    note: {ru:'Оригинальный сценарий (Calder Sound Fishery). Формат повторяет настоящий ассессмент, содержание наше собственное. Ответы принимаются с допуском 1%.',
+           en:'Original scenario (Calder Sound Fishery). The format mirrors the real assessment; the content is our own. Answers are checked within a 1% tolerance.'},
     start: 'startSolveChoose',
   },
   bcg: {
-    eyebrow: 'BCG-style assessment',
+    eyebrow: {ru:'Ассессмент в стиле BCG', en:'BCG-style assessment'},
     title: 'BCG Chat Game',
     story: 'Calveron, a mid-sized coffee roaster, has just learned that Brightwell \u2014 one of its key bean suppliers \u2014 is up for sale. Calveron\u2019s CEO needs to know whether acquiring Brightwell makes sense, and if so, what it is worth paying. You\u2019re the consultant on the case: work the numbers, weigh the risks, and land a clear recommendation.',
-    lead: 'This mirrors BCG\u2019s online case assessment - a single business scenario explored through a chat conversation. The case unfolds in linked questions with data exhibits; you answer using the same widget types the real assessment uses.',
+    lead: {ru:'Это повторение онлайн-кейса BCG - одна бизнес-ситуация, которую разбирают в чате. Кейс идёт связанными вопросами с экзибитами; отвечаешь теми же типами полей, что и на настоящем ассессменте.',
+           en:'This mirrors BCG\u2019s online case assessment - a single business scenario explored through a chat conversation. The case unfolds in linked questions with data exhibits; you answer using the same widget types the real assessment uses.'},
     steps: [
-      ['1','<b>Read the brief</b> - a real-style client scenario opens the case.'],
-      ['2','<b>Answer in the chat</b> - numbers, single-select, select-all, and short written answers.'],
-      ['3','<b>Use the exhibits</b> - tables of data appear inline; the math matters.'],
-      ['4','<b>Final recommendation</b> - close with a clear, answer-first call, as you would for a partner.'],
+      ['1',{ru:'<b>Прочитай бриф</b> - кейс открывается сценарием в клиентском стиле.',
+            en:'<b>Read the brief</b> - a real-style client scenario opens the case.'}],
+      ['2',{ru:'<b>Отвечай в чате</b> - числа, один вариант, несколько вариантов и короткие письменные ответы.',
+            en:'<b>Answer in the chat</b> - numbers, single-select, select-all, and short written answers.'}],
+      ['3',{ru:'<b>Пользуйся экзибитами</b> - таблицы приходят прямо в чат, и счёт имеет значение.',
+            en:'<b>Use the exhibits</b> - tables of data appear inline; the math matters.'}],
+      ['4',{ru:'<b>Финальная рекомендация</b> - закрой кейс выводом с первой строки, как перед партнёром.',
+            en:'<b>Final recommendation</b> - close with a clear, answer-first call, as you would for a partner.'}],
     ],
-    meta: [['Time','30 min'],['Format','Chat'],['Scoring','Auto-graded']],
-    note: 'The case runs in English to mirror the real BCG screening you\u2019ll face. Original verified case (Calveron). Numeric and select answers are machine-graded; open answers are flagged for AI review.',
+    meta: [[{ru:'Время',en:'Time'},{ru:'30 мин',en:'30 min'}],
+           [{ru:'Формат',en:'Format'},{ru:'Чат',en:'Chat'}],
+           [{ru:'Оценка',en:'Scoring'},{ru:'Автоматическая',en:'Auto-graded'}]],
+    note: {ru:'Кейс идёт на английском, потому что настоящий отбор BCG идёт на английском. Оригинальный проверенный кейс (Calveron). Числа и выборы проверяются машиной, открытые ответы уходят на разбор AI.',
+           en:'The case runs in English to mirror the real BCG screening you\u2019ll face. Original verified case (Calveron). Numeric and select answers are machine-graded; open answers are flagged for AI review.'},
     start: 'startBcgGame',
   },
 };
+
+// Одно место, где двуязычное поле превращается в строку экрана. Строка без
+// перевода проходит как есть - экран не должен пустеть из-за нового поля.
+function giText(v) {
+  if (v && typeof v === 'object') { const l = (state.uiLang === 'ru') ? 'ru' : 'en'; return v[l] || v.en || ''; }
+  return v || '';
+}
 
 function openGameIntro(which) {
   if (typeof requireAuth === 'function' && !requireAuth()) return;
   const g = GAME_INTROS[which];
   if (!g) return;
   const steps = g.steps.map(s =>
-    `<div class="gi-step"><div class="gi-step-n">${s[0]}</div><div class="gi-step-t">${s[1]}</div></div>`).join('');
+    `<div class="gi-step"><div class="gi-step-n">${s[0]}</div><div class="gi-step-t">${giText(s[1])}</div></div>`).join('');
   const meta = g.meta.map(m =>
-    `<div class="gi-meta-item">${esc(m[0])}<b>${esc(m[1])}</b></div>`).join('');
+    `<div class="gi-meta-item">${esc(giText(m[0]))}<b>${esc(giText(m[1]))}</b></div>`).join('');
   document.getElementById('giCard').innerHTML =
-    `<div class="gi-eyebrow gi-fade" style="--d:0ms">${esc(g.eyebrow)}</div>
+    `<div class="gi-eyebrow gi-fade" style="--d:0ms">${esc(giText(g.eyebrow))}</div>
      <h1 class="gi-title gi-fade" style="--d:80ms">${esc(g.title)}</h1>
      ${g.story ? `<div class="gi-story gi-fade" style="--d:160ms"><span class="gi-story-tag">${t('gi.situation')}</span><p>${esc(g.story)}</p></div>` : ''}
-     <p class="gi-lead gi-fade" style="--d:260ms">${esc(g.lead)}</p>
+     <p class="gi-lead gi-fade" style="--d:260ms">${esc(giText(g.lead))}</p>
      <div class="gi-meta gi-fade" style="--d:340ms">${meta}</div>
      <div class="gi-steps gi-fade" style="--d:420ms">${steps}</div>
      <label class="gi-timer-toggle">
@@ -5719,7 +5775,7 @@ function openGameIntro(which) {
        <button class="gi-start" onclick="${g.start}()">${t('gi.start')} &rarr;</button>
        <button class="gi-back" onclick="showScreen('mode')">${t('gi.back')}</button>
      </div>
-     <p class="gi-note">${esc(g.note)}</p>`;
+     <p class="gi-note">${esc(giText(g.note))}</p>`;
   showScreen('gameintro');
 }
 
@@ -8079,7 +8135,9 @@ function renderPath() {
      карточкой — но как ДРУГОЕ число, а не как это же. */
   const recent = (p.scores && p.scores.length) ? p.scores.slice(-5) : [];
   const avgScore = recent.length ? (recent.reduce((a, b) => a + b, 0) / recent.length) : null;
-  if (subEl) subEl.textContent = t('prog.overall', { avg: (avgScore !== null ? avgScore.toFixed(1) : '-'), firm: targetFirm, target: PATH_TARGET.toFixed(1) });
+  // Окно обязано быть НАЗВАНО: рядом стоит карточка «средний за всё время»,
+  // и без подписи два разных числа читаются как одно противоречивое.
+  if (subEl) subEl.textContent = t('prog.overall', { avg: (avgScore !== null ? avgScore.toFixed(1) : '-'), n: recent.length, firm: targetFirm, target: PATH_TARGET.toFixed(1) });
   if (footEl) {
     if (!gaps.length) {
       footEl.innerHTML = t('prog.footer.ok');
@@ -8104,10 +8162,12 @@ function renderProgress() {
   const bd = document.getElementById('progDrillBreakdown');
   if (bd) {
     const maxCount = Math.max(1, ...ALL_DRILL_TYPES.map(t => p.drillsByType[t] || 0));
-    bd.innerHTML = ALL_DRILL_TYPES.map(t => {
-      const c = p.drillsByType[t] || 0;
+    // 01.09.2026: параметр звался `t` и ЗАТЕНЯЛ словарь, а в подпись шёл
+    // внутренний ключ типа - на русском экране столбец стоял по-английски.
+    bd.innerHTML = ALL_DRILL_TYPES.map(ty => {
+      const c = p.drillsByType[ty] || 0;
       const pct = Math.round((c / maxCount) * 100);
-      return `<div class="prog-bd-row"><div class="prog-bd-name">${t}</div><div class="prog-bd-bar"><div class="prog-bd-fill" style="width:${c?pct:0}%"></div></div><div class="prog-bd-count">${c}</div></div>`;
+      return `<div class="prog-bd-row"><div class="prog-bd-name">${drillName(ty)}</div><div class="prog-bd-bar"><div class="prog-bd-fill" style="width:${c?pct:0}%"></div></div><div class="prog-bd-count">${c}</div></div>`;
     }).join('');
   }
   const empty = document.getElementById('progEmpty');
@@ -8126,12 +8186,12 @@ function renderIdentity() {
   if (!currentUser) { box.innerHTML = ''; return; }
   const meta = currentUser.user_metadata || {};
   const name = meta.full_name || (currentUser.email ? currentUser.email.split('@')[0] : 'You');
-  box.innerHTML = `Signed in as <span class="pi-name">${esc(name)}</span><button onclick="changeName()">Edit name</button>`;
+  box.innerHTML = `${t('prog.signedin')} <span class="pi-name">${esc(name)}</span><button onclick="changeName()">${t('prog.editname')}</button>`;
 }
 
 async function changeName() {
   const current = (currentUser?.user_metadata?.full_name) || '';
-  const newName = prompt('Enter your name:', current);
+  const newName = prompt(t('prog.entername'), current);
   if (newName === null) return;
   const trimmed = newName.trim();
   if (!trimmed) { alert(t('alert.name.empty')); return; }
