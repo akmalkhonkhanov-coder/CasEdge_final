@@ -16137,19 +16137,14 @@
      "reveal": "on_request",
      "triggers": [
       "экспортный контроль",
+      "проверка экспортного контроля",
       "экспортная лицензия",
+      "экспортная лицензия США",
       "лицензионная проверка",
+      "проверка регулятора",
       "антимонопольная проверка",
       "пересечение клиентов",
-      "export control",
-      "export-control",
-      "export licence",
-      "export license",
-      "licensing review",
-      "regulatory review",
-      "antitrust",
-      "customer overlap",
-      "buyer-specific risk"
+      "риск конкретного покупателя"
      ],
      "body_md": "Maskwright's acquisition triggers a **2-year export-control review** on the Control/EUV linchpin line; **35% of output is un-shippable** during review.",
      "render": null,
@@ -16221,19 +16216,14 @@
        "title": "Exhibit B — export-control review",
        "triggers": [
         "экспортный контроль",
+        "проверка экспортного контроля",
         "экспортная лицензия",
+        "экспортная лицензия США",
         "лицензионная проверка",
+        "проверка регулятора",
         "антимонопольная проверка",
         "пересечение клиентов",
-        "export control",
-        "export-control",
-        "export licence",
-        "export license",
-        "licensing review",
-        "regulatory review",
-        "antitrust",
-        "customer overlap",
-        "buyer-specific risk"
+        "риск конкретного покупателя"
        ],
        "triggers_en": [
         "export control",
@@ -26747,13 +26737,13 @@
      "step": 5,
      "label": "Sensitivity",
      "candidate_md": "Когда вход оправдан?",
-     "interviewer_md": "EXPECTED ANSWER:\nесли costs удержать на ~2% (=выручке) NPV>0\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) при равной эскалации NPV возвращается в плюс; (2) рычаг — контроль эскалации.",
+     "interviewer_md": "EXPECTED ANSWER:\nсвязывающий порог — эскалация затрат ≈3.65%/год при росте выручки 2%/год: при 3.6% NPV +$116,482 (входить), при 3.7% NPV −$113,237 (не входить). Паритет 2% даёт NPV +$3,679,983 — условие ДОСТАТОЧНОЕ, но не минимальное: вход остаётся оправданным на всей полосе до ~3.65%\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) назван связывающий порог эскалации ≈3.6–3.7%/год (равносильно: показано, что при паритете 2% NPV +$3,679,983 и настоящий порог ЛЕЖИТ ВЫШЕ 2%). Ответ «вход оправдан только при паритете 2% (=выручке)» НЕ засчитывается: он отказывается от входа на всей полосе 2.0–3.65%, где NPV положителен; (2) рычаг — контроль эскалации.",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
       4
      ],
-     "produces": "если costs удержать на ~2% (=выручке) NPV>0",
+     "produces": "порог эскалации ≈3.65%/год: 3.6% → +$116,482 (входить), 3.7% → −$113,237",
      "candidate_md_en": "When is entry justified?"
     },
     {
@@ -28488,13 +28478,13 @@
      "step": 5,
      "label": "MAIN CALCULATION (7 min) — core",
      "candidate_md": "Work out the CM uplift by zone, allowing for densification.",
-     "interviewer_md": "```\nNew customers RAISE density → cost per drop falls for the WHOLE zone.\nGain = (on the new customers) + (on existing customers, now cheaper to serve)\n\nZ2: density 28 → 42, cost $14.00 → $7.00\n    on new customers 11,050×30×$11.72 = $3,885,180.00\n    on existing 22,100×30×($11.72−$4.72) = $4,641,000.00\n    Δ = $8,526,180.00 → $771.60 per customer\nZ5: density 4 → 6, cost $26.00 → $25.00 → Δ $221,760.00 → $105.60 per customer\n```\n```\nNAIVE:   everything into Z5 → absorbs only 2,100 → $221,760.00/year\nCORRECT: fill by Δ CM per customer, then place the top-up where its OWN density step is largest:\n         Z2 Ring suburb  11,050 × $771.60 =                      $8,526,180.00\n         Z1 Inner city      950 top-up, density 44 → 46.27, cost hits the $5.00 floor\n              on new       950 × 30 × $10.08 =                     $287,280.00\n              on existing  18,400 × 30 × ($10.08 − $9.08) =        $552,000.00\n                                                                  $839,280.00\n         TOTAL                                                  $9,365,460.00/year\n```\n**Answer: the naive plan captures 2.37% of the correctly allocated plan — not the 2.48% you get by topping up Z3 ($427,485.00, total $8,953,665.00).** A top-up is ranked by its OWN density step, not by the zone's average Δ CM per customer at a full fill: 950 customers lift Z1 from density 44 to 46.27, which pushes delivery cost onto its $5.00 floor and takes $1.00 off every drop for all 18,400 existing customers. Trap-action: expanding is right, the **allocation** is wrong.",
+     "interviewer_md": "```\nNew customers RAISE density → cost per drop falls for the WHOLE zone.\nGain = (on the new customers) + (on existing customers, now cheaper to serve)\n\nZ2: density 28 → 42, cost $14.00 → $7.00\n    on new customers 11,050×30×$11.72 = $3,885,180.00\n    on existing 22,100×30×($11.72−$4.72) = $4,641,000.00\n    Δ = $8,526,180.00 → $771.60 per customer\nZ5: density 4 → 6, cost $26.00 → $25.00 → Δ $221,760.00 → $105.60 per customer\n```\n```\nNAIVE:   everything into Z5 → absorbs only 2,100 → $221,760.00/year\nCORRECT: fill by Δ CM per customer, then place the top-up where the MARGINAL customer is worth most — a zone's own density step counts only while it is still being paid for, and it stops being paid for the moment cost reaches the $5.00 floor:\n         Z2 Ring suburb  11,050 × $771.60 =                      $8,526,180.00\n         Z1 Inner city      837 top-up — the floor point, not a round number:\n                            cost reaches $5.00 at density 46, i.e. 44 × (18,400+n)/18,400 ≥ 46\n                            → n ≥ 836.36 → 837 (n = 836 gives density 45.999130 and a formula\n                            cost of $5.000435, so the floor does NOT yet bind; n = 837 gives\n                            density 46.001522 and $4.999239, which the floor cuts to $5.00)\n              on new       837 × 30 × $10.08 =                     $253,108.80\n              on existing  18,400 × 30 × ($10.08 − $9.08) =        $552,000.00\n                                                                   $805,108.80\n         Z3 Outer suburb    113 residual — past the floor a further Z1 customer adds only\n                            30 × $10.08 = $302.40/yr, because the existing base stops getting\n                            cheaper, while the next Z3 customer adds $430.82/yr\n              density 20 → 20.15479452, cost $17.92260274, CM/drop $4.43739726\n              on new       113 × 30 × $4.43739726 =                  $15,042.78\n              on existing  14,600 × 30 × ($4.43739726 − $4.36) =     $33,900.00\n                                                                     $48,942.78\n         TOTAL                                                    $9,380,231.58/year\n```\n**Answer: the naive plan — everything into Z5 — is worth $221,760.00/year, which is 2.36% of the $9,380,231.58 the correct allocation delivers. Put the whole 950-customer top-up into Z3 instead and the top-up is worth $427,804.52 and the plan $8,953,984.52 in total: $9,380,231.58 − $8,953,984.52 = $426,247.06/year WORSE. That same naive $221,760.00 is 2.48% of that weaker plan — the share RISES because the denominator SHRANK, so the higher percentage marks the worse plan, never the better one.** A top-up is ranked by the MARGINAL value of the customer it adds, not by the zone's average Δ CM per customer at a full fill and not by its own density step taken on its own: the first 837 Z1 customers lift density from 44 past the 46.0015 at which cost reaches the $5.00 floor and take $1.00 off every drop for all 18,400 existing customers, but from 837 on the cost is sitting on that floor and every further Z1 customer is worth only $302.40/yr against $430.82/yr for the next customer in Z3. Answering 950 into Z1 is now WRONG: it is $14,771.58/year short of the maximum. Trap-action: expanding is right, the **allocation** is wrong.",
      "hints": {
       "L1": "Is the new volume all from outside, or does it change the cost of serving what we already have?",
       "L2": "New customers change the cost of serving the existing ones in the same zone — count both sides of the density effect."
      },
      "conditional_exhibits": [],
-     "produces": "the naive plan captures 2.37% of the correctly allocated plan (Z2 full 11,050 + Z1 top-up 950 = $9,365,460/year)",
+     "produces": "верно: 11,050 Z2 + 837 Z1 + 113 Z3 = $9,380,231.58/год · 950 в Z1 = $9,365,460",
      "depends_on": [
       3,
       4
@@ -28504,7 +28494,7 @@
      "step": 6,
      "label": "Explain (3 min)",
      "candidate_md": "Why did the biggest basket lose?",
-     "interviewer_md": "**Model answer:** basket is revenue, and the decision turns on margin after delivery. In the outer zone delivery consumes almost the whole gross margin ($26.00 of $26.52). Second layer: the gain is not confined to new customers — densification makes delivery cheaper for the entire existing base, and that effect is largest where density is already high.",
+     "interviewer_md": "**Model answer:** basket is revenue, and the decision turns on margin after delivery. In the outer zone delivery consumes almost the whole gross margin ($26.00 of $26.52). Second layer: the gain is not confined to new customers — densification makes delivery cheaper for the entire existing base, and that effect is largest where density is already high: one added customer takes 30 × $0.50 × 44 = $660/year off the existing Z1 base against 30 × $0.50 × 20 = $300/year in Z3. Do not let the candidate stop on that sentence. Ask him what the $660 becomes once Z1 delivery is sitting on its $5.00 floor, and whether the rule he has just stated still sends the 838th customer to Z1. A candidate who repeats «densest zone first» without bounding it at the saturation point has taken only half of the second layer, however clean his step 5 arithmetic was.",
      "hints": {},
      "conditional_exhibits": [],
      "produces": "Explain",
@@ -32276,7 +32266,7 @@
       "возврат",
       "реализуемо"
      ],
-     "body_md": "| Band | Inventory | **Reducible** | **Recovery on disposal** | Why |\n|---|---|---|---|---|\n| A — fast | $14,400,000 | **0%** | — | already 8.00 turns; cutting means out-of-stock |\n| B — steady | $21,000,000 | 5% | 100% | safety stock trimmed without hurting service |\n| C — slow | $19,200,000 | 10% | 100% | consolidation into regional hubs |\n| D — dead | $29,000,000 | 8% | **35%** | only the still-saleable portion clears; the rest is obsolete |",
+     "body_md": "| Band | Inventory | **Reducible** | **Recovery on disposal** | Why |\n|---|---|---|---|---|\n| A — fast | $14,400,000 | **0%** | — | already 8.00 turns; cutting means out-of-stock |\n| B — steady | $21,000,000 | 5% | 100% | safety stock trimmed without hurting service |\n| C — slow | $19,200,000 | 10% | 100% | consolidation into regional hubs |\n| D — dead | $29,000,000 | 8% | **35%** | 8% is the trim this programme is scoped to; on disposal only the still-saleable portion clears, the rest is obsolete |",
      "render": {
       "type": "table",
       "title": "MEMO — what each band would actually give up",
@@ -32314,7 +32304,7 @@
         "$29,000,000",
         "8%",
         "**35%**",
-        "only the still-saleable portion clears; the rest is obsolete"
+        "8% is the trim this programme is scoped to; on disposal only the still-saleable portion clears, the rest is obsolete"
        ]
       ]
      },
@@ -32362,13 +32352,13 @@
      "step": 3,
      "label": "MAIN CALCULATION (5 min) — core",
      "candidate_md": "Check how much of that is actually reducible.",
-     "interviewer_md": "```\nA: $14,400,000 × 0%  = $0          (cannot be cut — out-of-stock)\nB: $21,000,000 × 5%  = $1,050,000\nC: $19,200,000 × 10% = $1,920,000\nD: $29,000,000 × 8%  = $2,320,000\n                TOTAL  $5,290,000  reducible\n\nSaving = $5,290,000 × 22.00% = $1,163,800/year\n```\n**Answer: the direction is the SAME (the money is real), the annual saving is overstated by 43.67%.**",
+     "interviewer_md": "```\nA: $14,400,000 × 0%  = $0          (cannot be cut — out-of-stock)\nB: $21,000,000 × 5%  = $1,050,000\nC: $19,200,000 × 10% = $1,920,000\nD: $29,000,000 × 8%  = $2,320,000\n                TOTAL  $5,290,000  reducible inside this programme\n\nSaving = $5,290,000 × 22.00% = $1,163,800/year\n```\n**Answer: the direction is the SAME (the money is real), and inside this programme the annual saving is overstated by 43.67% — the naive $1,672,000 against a real $1,163,800.**",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
       2
      ],
-     "produces": "направление ТО ЖЕ (деньги реальны), завышение годовой экономии 43.67%"
+     "produces": "направление ТО ЖЕ, внутри программы завышение годовой экономии 43.67%"
     },
     {
      "step": 4,
@@ -32398,7 +32388,7 @@
      "step": 6,
      "label": "Sensitivity (3 min)",
      "candidate_md": "What if the dead stock could be cleared at a better price?",
-     "interviewer_md": "```\nThe $1,163,800 annual saving does not depend on recovery — the stock leaves the warehouse either way.\nRecovery only affects the one-off cash:\n@20% → $3,434,000   @35% → $3,782,000   @60% → $4,362,000   @100% → $5,290,000\n```\n**Answer: even at 100% of book, the one-off cash is $5,290,000 against the naive $7,600,000. No threshold is printed: the constraint is on volume, not on price** — only $5,290,000 is reducible.",
+     "interviewer_md": "```\nThe $1,163,800 annual saving does not depend on recovery — the stock leaves the warehouse either way.\nRecovery only affects the one-off cash:\n@20% → $3,434,000   @35% → $3,782,000   @60% → $4,362,000   @100% → $5,290,000\n```\n**Answer: even at 100% of book, the one-off cash is $5,290,000 against the naive $7,600,000. No threshold is printed: the constraint is on volume, not on price** — inside this programme only $5,290,000 is reducible.",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
@@ -32411,7 +32401,7 @@
      "step": 7,
      "label": "Synthesis (4 min)",
      "candidate_md": "Your recommendation.",
-     "interviewer_md": "Pass requires ALL of: (1) conclusion first (\"a programme worth $1.16M a year and $3.78M once, and the 2.75 target is not reachable by trimming\"); (2) at least 2 figures; (3) at least 2 risks (internal: out-of-stock risk from trimming B, the P&L hit from writing down D; external: demand for obsolete stock, supplier terms); (4) at least 1 time-bound next step.",
+     "interviewer_md": "Pass requires ALL of: (1) conclusion first (\"a programme worth $1.16M a year and $3.78M once, and the 2.75 target is not reachable by trimming\"); (2) at least 2 figures; (3) at least 2 risks (internal: out-of-stock risk from trimming B, the P&L hit from writing down D; external: demand for obsolete stock, supplier terms); (4) at least 1 time-bound next step. Pass also requires the candidate to size what the programme does NOT touch: the other 92% of band D, $29,000,000 × 92% = $26,680,000, carries $26,680,000 × 22.00% = $5,869,600 a year of holding — 5.04× the whole programme's $1,163,800 — and clearing it takes turns to $209,000,000 / ($83,600,000 − $26,680,000) = 3.67, past the 2.75 benchmark that trimming alone cannot reach. A recommendation that leaves the dead band unnamed does not pass, however clean the trimming arithmetic is.",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
@@ -32987,7 +32977,7 @@
      "step": 5,
      "label": "Layer 2: buy the capacity (6 min)",
      "candidate_md": "And if they buy more molecular analysers?",
-     "interviewer_md": "```\nShortfall 59,000 hours → 10 analysers (60,000 h)\nFull volume at the NET rate: 1,800,000 × $4.50 = $8,100,000/year\n$8,100,000 − opex 10 × $310,000 = $5,000,000/year\nMax price = 9.0 × ($13,440,000 + $5,000,000) = $165,960,000\nHeadroom over the ask: −$107,160,000 — and capex 10 × $1,450,000 = $14,500,000 sits on top\nTRUE headroom: −$121,660,000\nWhat the instruments add: $165,960,000 − $14,500,000 = $151,460,000 against $148,459,500 without them → +$3,000,500\n```\n**Answer: PASS. The capacity is real but not free — capex the naive model never had.**",
+     "interviewer_md": "```\nShortfall 59,000 hours → 10 analysers would close it (60,000 h), but every instrument has to\npay for its OWN capex, so price the last one on the margin before buying the round number:\n   9th analyser: 6,000 h × 19 = 114,000 tests × $4.50 − $310,000 = $203,000\n                 → 9.0× = $1,827,000 against $1,450,000 of capex → +$377,000. BUY it.\n  10th analyser: only 1,178,000 − 1,083,000 = 95,000 molecular tests are left to move\n                 → 95,000 × $4.50 − $310,000 = $117,500\n                 → 9.0× = $1,057,500 against $1,450,000 of capex → −$392,500. Do NOT buy it.\nSo 9 analysers: 9 × 6,000 = 54,000 h + the 3,000 already free = 57,000 h\n                → 57,000 × 19 = 1,083,000 of the 1,178,000 molecular tests; 95,000 stay outsourced\nVolume moved 1,083,000 + 380,000 + 242,000 = 1,705,000 × $4.50 = $7,672,500/year\n$7,672,500 − opex 9 × $310,000 = $4,882,500/year\nMax price = 9.0 × ($13,440,000 + $4,882,500) = $164,902,500\nHeadroom over the ask: −$108,217,500 — and capex 9 × $1,450,000 = $13,050,000 sits on top\nTRUE headroom: −$121,267,500\nWhat the instruments add: $164,902,500 − $13,050,000 = $151,852,500 against $148,459,500 without them → +$3,393,000\n```\n**Answer: PASS. The capacity is real but not free — capex the naive model never had.**",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
@@ -32999,19 +32989,19 @@
      "step": 6,
      "label": "Threshold (4 min)",
      "candidate_md": "At what price does the deal work?",
-     "interviewer_md": "```\nask $148,459,500 → headroom   $3,000,500 → BUY\nask $151,460,000 → headroom           $0 → tie\nask $273,120,000 → headroom −$121,660,000 → PASS\n```\n**Answer: the breakeven ask is $151,460,000 — the seller is asking $121,660,000 more than the asset is worth to Perrivane, so this is a walk, not a negotiation. No threshold on UTILISATION is printed: once the analysers are bought, the synergy is capped by the outsourced volume and the function goes flat.**",
+     "interviewer_md": "```\nask $148,459,500 → headroom   $3,393,000 → BUY\nask $151,852,500 → headroom           $0 → tie\nask $273,120,000 → headroom −$121,267,500 → PASS\n```\n**Answer: the breakeven ask is $151,852,500 — the seller is asking $121,267,500 more than the asset is worth to Perrivane, so this is a walk, not a negotiation. No threshold on UTILISATION is printed, and at the buy point the synergy is NOT capped by the outsourced volume: with 9 analysers the binding constraint is still HOURS — 9 × 6,000 = 54,000 h plus the 3,000 already free carry 57,000 × 19 = 1,083,000 of the 1,178,000 molecular tests, so 95,000 tests stay outsourced. The function only goes flat at the 10th instrument, which buys those last 95,000 tests for $1,450,000 of capex and destroys $392,500.**",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
       5
      ],
-     "produces": "безубыточный ask $151,460,000 — сторговать $121,660,000 либо уходить. Порог по ЗАГРУЗКЕ"
+     "produces": "безубыточный ask $151,852,500 — сторговать $121,267,500 либо уходить. Связывают ЧАСЫ"
     },
     {
      "step": 7,
      "label": "Recommendation (5 min)",
      "candidate_md": "Your conclusion for the committee.",
-     "interviewer_md": "Pass on the Pyramid: (1) conclusion first — do not pay $273,120,000; (2) at least 2 figures ($3,055,500 of real synergy against $20,700,000 claimed; true headroom −$121,660,000); (3) at least 2 risks — internal (10 instruments still have to be delivered and staffed) + external/regulatory (laboratory accreditation when volume moves between sites); (4) an urgent next step.",
+     "interviewer_md": "Pass on the Pyramid: (1) conclusion first — do not pay $273,120,000; (2) at least 2 figures ($3,055,500 of real synergy against $20,700,000 claimed; true headroom −$121,267,500); (3) at least 2 risks — internal (9 instruments still have to be delivered and staffed) + external/regulatory (laboratory accreditation when volume moves between sites); (4) an urgent next step.",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
@@ -35489,13 +35479,13 @@
      "step": 6,
      "label": "Tier retention threshold (4 min)",
      "candidate_md": "What is the minimum anchor chain volume that holds the tier?",
-     "interviewer_md": "```\nTier condition:  1.14 × T + 364,450 ≥ 380,000\n                 1.14 × T ≥ 15,550\n                        T ≥ 13,640.35 t\n\nCheck: 13,640.35 × 1.14 + 364,450 = 380,000.00 ✓\n```\n**Answer: 13,640 tonnes — less than a third of current volume. The threshold says where the tier breaks, not where closure pays. At $418/t the contribution is $200.48/t ($1,015 − 1.14 × $418 − $338), so it covers the avoidable own fixed of $4,900,000 only above 24,441 t. Below 13,640 t the tier is gone anyway: slab costs $452/t, contribution falls to $161.72/t, and the line would then need 30,299 t to cover the same $4,900,000 — at 13,640 t it earns $2,205,861, so closure gains $2,694,139. The trap is to read $200/t as covering own fixed at any volume.**",
+     "interviewer_md": "```\nTier condition:  1.14 × T + 364,450 ≥ 380,000\n                 1.14 × T ≥ 15,550\n                        T ≥ 15,550 / 1.14 = 13,640.3509 t\n\nCheck: 13,641 × 1.14 + 364,450 = 380,000.74 ✓\n       13,640 × 1.14 + 364,450 = 379,999.60 ✗\n```\n**Answer: 13,641 tonnes — the exact break is 13,640.3509 t and tonnes are whole: at 13,640 t the mill's total slab purchase is 379,999.6 t and the tier is already lost, at 13,641 t it is 380,000.74 t and the tier holds. Less than a third of current volume. The tier break is also where closure turns: at 13,641 t and above closure itself drops the mill to 364,450 t and carries the $12,391,300 penalty, so it loses at every volume — −$10,226,048 at 13,641 t; at 13,640 t and below the tier is already lost with the line running, closure carries no penalty, and it gains at every volume. At $418/t the contribution is $200.48/t ($1,015 − 1.14 × $418 − $338), so on a stand-alone basis it covers the avoidable own fixed of $4,900,000 only from 24,442 t: at 24,441 t it earns $4,899,931.68 and the fixed is not covered, at 24,442 t it earns $4,900,132.16 and it is. At 13,640 t and below the tier is gone anyway: slab costs $452/t, contribution falls to $161.72/t, and covering the same $4,900,000 at $161.72/t would take 30,300 t (30,299 t earns $4,899,954.28, $45.72 short), a tonnage that would itself put the mill back over 380,000 t of slab and restore the $418/t tier, so inside the lower tier the line never covers that own fixed — at 13,640 t it earns $2,205,861, so closure gains $2,694,139. The trap is to read $200/t as covering own fixed at any volume.**",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
       5
      ],
-     "produces": "13,640 тонн — меньше трети текущего объёма. Ниже порога закрытие как раз выгодно"
+     "produces": "13,641 тонна — меньше трети объёма. Ниже порога закрытие как раз выгодно"
     },
     {
      "step": 7,
@@ -36759,32 +36749,32 @@
      "step": 5,
      "label": "Cost of water saved (7 min)",
      "candidate_md": "Where should the $6,200,000 go?",
-     "interviewer_md": "```\nClass         Cost         Ml saved     $/Ml        Value of water   ROI\n<150 mm      $2,591,600      3,280      $790.09       $1,016,800    0.39\n150-400 mm   $1,215,200      4,090      $297.11       $1,267,900    1.04\ntrunk          $883,500      3,822      $231.16       $1,184,820    1.34\n\nSaved = background × 60% + burst losses × 35%\n```\n**Answer: FLIP. The naive target costs $790.09 per megalitre, the trunk $231.16. A ratio of 3.42×, and the naive target is the only one of the three classes that returns below one: ROI 0.39, against 1.34 on the trunk and 1.04 on 150-400 mm.**",
+     "interviewer_md": "```\nClass         Cost         Ml saved     $/Ml        Value of water   ROI, first year\n<150 mm      $2,591,600      3,280      $790.12       $1,016,800    0.39\n150-400 mm   $1,215,200      4,090      $297.11       $1,267,900    1.04\ntrunk          $883,500      3,822      $231.16       $1,184,820    1.34\n\nSaved = background × 60% + burst losses × 35%\n```\n**Answer: FLIP. The naive target costs $790.12 per megalitre, the trunk $231.16. A ratio of 3.42×, and the naive target is the only one of the three classes whose first-year return is below one: 0.39, against 1.34 on the trunk and 1.04 on 150-400 mm.**",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
       3,
       4
      ],
-     "produces": "FLIP. Наивная цель стоит $790.09 за мегалитр, магистраль — $231.16. Разница 3.42×, и "
+     "produces": "FLIP. Наивная цель — $790.12 за мегалитр, магистраль — $231.16, разница 3.42×"
     },
     {
      "step": 6,
      "label": "Sequencing the programme (4 min)",
      "candidate_md": "Put the $6,200,000 programme together.",
-     "interviewer_md": "```\n  trunk (310 km)           $883,500  → 3,822 Ml\n  150-400 mm (1,240 km)  $1,215,200  → 4,090 Ml\n  ────────────────────────────────────────────\n  subtotal               $2,098,700  → 7,912 Ml\n\n  $4,101,300 remains for <150 mm: enough for the whole class (4,180 km\n  costs $2,591,600), but at an ROI of 0.39 that is value destruction.\n```\n**Answer: trunk and mid-diameter first — they capture 7,912 Ml for a third of the budget. Do not spend the remainder on the whole small-diameter class; put it into acoustic survey to locate the background.**",
+     "interviewer_md": "```\n  trunk (310 km)           $883,500  → 3,822 Ml\n  150-400 mm (1,240 km)  $1,215,200  → 4,090 Ml\n  ────────────────────────────────────────────\n  subtotal               $2,098,700  → 7,912 Ml\n\n  $4,101,300 remains for <150 mm: enough for the whole class (4,180 km\n  costs $2,591,600), and at $1,016,800 of water a year that class pays\n  back in 2.55 years — last in the queue, not out of it.\n\n  Whole network: $4,690,300 of the $6,200,000 → 11,192 Ml saved,\n  $1,509,700 unspent.\n```\n**Answer: trunk and mid-diameter first — they capture 7,912 Ml for a third of the budget. Do the whole network in that order: all three classes cost $4,690,300 of the $6,200,000 and save 11,192 Ml, leaving $1,509,700 unspent. The ranking sets the queue, not a cut-off — small diameter is last because it pays back in 2.55 years against 0.96 and 0.75, not because it destroys value.**",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
       5
      ],
-     "produces": "сначала магистраль и средний диаметр — они закрывают 7,912 Мл за треть бюджета. Остав"
+     "produces": "магистраль → средний → малый: все три класса за $4,690,300, остаток $1,509,700"
     },
     {
      "step": 7,
      "label": "Recommendation (6 min)",
      "candidate_md": "Your conclusion for the board.",
-     "interviewer_md": "Pass on the Pyramid: (1) conclusion first — start with the trunk main, not with small-diameter pipe; (2) at least 2 figures (cost of water $231.16/Ml against $790.09/Ml; background 16,300 Ml against 4,036 Ml of burst losses); (3) at least 2 risks — internal (the reporting system logs only bursts, background leakage is not measured and an acoustic survey programme is needed) + external/regulatory (a trunk burst cuts supply to a whole district and carries more political weight than economic; the water tariff is regulated and the saving may not stay with the utility); (4) an urgent next step — survey the 310 km of trunk acoustically before committing the bulk of the budget.",
+     "interviewer_md": "Pass on the Pyramid: (1) conclusion first — start with the trunk main, not with small-diameter pipe; (2) at least 2 figures (cost of water $231.16/Ml against $790.12/Ml; background 16,300 Ml against 4,036 Ml of burst losses); (3) at least 2 risks — internal (the reporting system logs only bursts, background leakage is not measured and an acoustic survey programme is needed) + external/regulatory (a trunk burst cuts supply to a whole district and carries more political weight than economic; the water tariff is regulated and the saving may not stay with the utility); (4) an urgent next step — survey the 310 km of trunk acoustically before committing the bulk of the budget.",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
@@ -40029,7 +40019,7 @@
      "step": 7,
      "label": "Sensitivity",
      "candidate_md": "How robust is the conclusion?",
-     "interviewer_md": "Run four scenarios against the partial project — NPV $4,961,882.64 on 262 units:\n1. Dealer quotes of 48% instead of 58%\n2. New fleet utilisation of 80% instead of 84%\n3. A discount rate of 13%\n4. The rental contracts turn out to end inside the horizon, so all 340 units become replaceable\n\n*Expected: (2) is the one that kills it. At 80% the benefit per unit falls to (0.80 − 0.71) × 412 × 365 + 16,800 = $30,334.20, the PV to $40,899,123.37 and the NPV to −$3,148,316.63; break-even utilisation is 81.55%, only 2.45 points below the promise. (1) leaves +$2,708,682.64: proceeds 262 × 41,280 = $10,815,360, that is $2,253,200 less, and the NPV zeroes only at 35.98% of book — far below the 48% in the scenario. (3) leaves +$1,653,854.29 at an annuity factor of 4.798770. (4) is the upside: with all 340 replaceable the benefit is $63,599,884.35, proceeds are 340 × 49,880 = $16,959,200, the outflow $57,160,800 and the NPV $6,439,084.35 — so the contract lock costs $1,477,201.71.*\n\n*🚩 Flag if the candidate runs the scenarios against $2,548,444.35: that number carries the benefit of 340 units into a project that sells only 262.*",
+     "interviewer_md": "Run four scenarios against the partial project — NPV $4,961,882.64 on 262 units:\n1. Dealer quotes of 48% instead of 58%\n2. New fleet utilisation of 80% instead of 84%\n3. A discount rate of 13%\n4. The rental contracts turn out to end inside the horizon, so all 340 units become replaceable\n\n*Expected: (2) is the one that kills it. At 80% the benefit per unit falls to (0.80 − 0.71) × 412 × 365 + 16,800 = $30,334.20, the PV to $40,899,123.37 and the NPV to −$3,148,316.63; break-even utilisation is 81.55%, only 2.45 points below the promise. (1) leaves +$2,708,682.64: proceeds 262 × 41,280 = $10,815,360, that is $2,253,200 less, and the NPV zeroes only at 35.98% of book — far below the 48% in the scenario. (3) leaves +$1,653,851.48 at an annuity factor of 4.798770. (4) is the upside: with all 340 replaceable the benefit is $63,599,884.35, proceeds are 340 × 49,880 = $16,959,200, the outflow $57,160,800 and the NPV $6,439,084.35 — so the contract lock costs $1,477,201.70. Subtracting the two printed NPVs gives $1,477,201.71, a cent of rounding order: each NPV is rounded before the subtraction, while the case rounds once at the print.*\n\n*🚩 Flag if the candidate runs the scenarios against $2,548,444.35: that number carries the benefit of 340 units into a project that sells only 262.*",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
@@ -40049,7 +40039,7 @@
      "step": 9,
      "label": "Final synthesis",
      "candidate_md": "What do you recommend to the board? One recommendation.",
-     "interviewer_md": "**Partner-level answer (Pyramid):**\n> We recommend **rejecting the renewal as it was put to the board and approving instead the renewal of the 262 units that are free to replace**. The project on the table is not worth $18,719,884.35 — renewing the whole fleet destroys **$12,042,117.36** — because the benefit the CFO capitalises never arrives on all 340 machines: **78 units run under rental contracts that forbid substitution and run beyond the eight-year horizon**, so they keep 71% utilisation and the $38,400 maintenance bill throughout. Renewing the remaining **262 units** is worth **$4,961,882.64**: $9,523,542.80 a year discounted at 11% is $49,009,322.64, against an outflow of $44,047,440 — capex of $57,116,000 less **$13,068,560** of disposal proceeds, the old machines being worth 58% of book and not the $29,240,000 the model took at book value. **Internal risk:** $4,961,882.64 on $57,116,000 of capex is a margin of 8.7%, and it does not survive a shortfall in the utilisation gain — 80% instead of 84% turns the NPV to −$3,148,316.63, with break-even at 81.55%. **External risk:** prices in the secondary market for heavy equipment follow the construction cycle, and we would be selling 262 units into it in a single transaction. **Actions:** within 30 days — obtain firm quotes from three dealers instead of the indicative 58%, and confirm the end dates of the contracts on all 78 locked units; within 90 days — open negotiations on a substitution right for those 78 machines, which is worth $2,835,253.20 a year, or **$14,590,561.70** in present value — nearly three times the project we are approving.",
+     "interviewer_md": "**Partner-level answer (Pyramid):**\n> We recommend **rejecting the renewal as it was put to the board and approving instead the renewal of the 262 units that are free to replace**. The project on the table is not worth $18,719,884.35 — renewing the whole fleet destroys **$12,042,117.36** — because the benefit the CFO capitalises never arrives on all 340 machines: **78 units run under rental contracts that forbid substitution and run beyond the eight-year horizon**, so they keep 71% utilisation and the $38,400 maintenance bill throughout. Renewing the remaining **262 units** is worth **$4,961,882.64**: $9,523,542.80 a year discounted at 11% is $49,009,322.64, against an outflow of $44,047,440 — capex of $57,116,000 less **$13,068,560** of disposal proceeds, the old machines being worth 58% of book and not the $29,240,000 the model took at book value. **Internal risk:** $4,961,882.64 on $57,116,000 of capex is a margin of 8.7%, and it does not survive a shortfall in the utilisation gain — 80% instead of 84% turns the NPV to −$3,148,316.63, with break-even at 81.55%. **External risk:** prices in the secondary market for heavy equipment follow the construction cycle, and we would be selling 262 units into it in a single transaction. **Actions:** within 30 days — obtain firm quotes from three dealers instead of the indicative 58%, and confirm the end dates of the contracts on all 78 locked units; within 90 days — open negotiations on a substitution right for those 78 machines: the benefit they are locked out of is $2,835,253.20 a year, **$14,590,561.70** in present value, but releasing it means buying 78 new machines at $17,004,000 and selling 78 old ones for $3,890,640, so the right is worth **$1,477,201.70** net — under a third of the $4,961,882.64 we are approving, and that is the ceiling on what we should pay the lessees for it.",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
@@ -41332,7 +41322,7 @@
    "naive_error": "E08",
    "generation": null,
    "est_minutes": "40",
-   "header_md": "## Case 187 — Selling the Family Silverware\n\n> **ПЛАШКА**\n> **Тип:** M&A · **Индустрия:** Международный спорт / медиаправа\n> **Difficulty:** 🔴 Hard · **Depth:** 🔥 STRONG\n> **T/C:** Trap-action · **Семья трудности:** F9 видимый драйвер не рычаг · **Наивная ошибка:** E08\n> **Время:** ~40 min · **Экзибиты (2):** bar (цикл) · table (условия) · **Reveal:** ex1 auto, ex2 on_request\n> **Слои:** [MM] [OD] · 2 независимых слоя\n> **difficulty_test:** Цена — самый заметный предмет переговоров и самый слабый рычаг:\n> торг о цене даёт $96.80M, перенос даты закрытия — $263.43M. Кандидат дожимает то,\n> что видно, вместо того, что двигает результат.",
+   "header_md": "## Case 187 — Selling the Family Silverware\n\n> **ПЛАШКА**\n> **Тип:** M&A · **Индустрия:** Международный спорт / медиаправа\n> **Difficulty:** 🔴 Hard · **Depth:** 🔥 STRONG\n> **T/C:** Trap-action · **Семья трудности:** F9 видимый драйвер не рычаг · **Наивная ошибка:** E08\n> **Время:** ~40 min · **Экзибиты (2):** bar (цикл) · table (условия) · **Reveal:** ex1 auto, ex2 on_request\n> **Слои:** [MM] [OD] · 2 независимых слоя\n> **difficulty_test:** Перенос даты закрытия — самый заметный ход, и в приведённой\n> стоимости он стоит $0: тот же поток под той же ставкой 9.0%. Рычаг — база оценки на\n> неизменной дате: $1,714.07M против предложения $1,250M, то есть $464.07M, из них\n> $367.27M — разрыв ставок 9.0% против 11.2164%, а торг о цене до мультипловой\n> оценки даёт лишь $96.80M.\n> Кандидат дожимает то, что видно, вместо того, что двигает результат.",
    "prompt_md": "> *Ситуация на июль 2026 года.*\n>\n> **FIFPA** рассматривает продажу **20%** компании, держащей коммерческие права, крупному\n> инвестиционному фонду. Фонд предлагает **$1,250M**. Сделка закрывается сразу после\n> завершившегося чемпионата мира.\n>\n> Финансовый комитет просит сказать, справедлива ли цена и о чём торговаться.\n> Данные — в ex1.",
    "exhibits": [
     {
@@ -41395,7 +41385,7 @@
       "L2": ""
      },
      "candidate_md": "Посчитай денежный поток цикла и нормализованный год.",
-     "interviewer_md": "```python\nпоток = [1100−980, 1300−980, 1700−980, 4437−980−1250]\n      = [120, 320, 720, 2207]                       # = 3,367 за цикл\nнормализованный год = 3,367 / 4 = 841.75\n```\n**Ответ: $841.75M в нормализованном году.** Год турнира даёт 65.6% потока цикла.",
+     "interviewer_md": "```python\nпоток = [1100−980, 1300−980, 1700−980, 4437−980−1250]\n      = [120, 320, 720, 2207]                       # = 3,367 за цикл\nнормализованный год = 3,367 / 4 = 841.75\n```\n**Ответ: $841.75M в нормализованном году.** Год турнира даёт 65.5% потока цикла.",
      "candidate_md_en": "Work out the cash flow of the cycle and the normalised year."
     },
     {
@@ -41433,9 +41423,9 @@
       "L1": "",
       "L2": ""
      },
-     "candidate_md": "Посчитай стоимость доли дисконтированием фактической последовательности от даты закрытия,\nа затем ту же величину при закрытии **перед** турниром.",
-     "interviewer_md": "```python\nPV цикла (вход после турнира) = 120/1.09 + 320/1.09² + 720/1.09³ + 2207/1.09⁴ = 2,498.90\n100% = 2,498.90 / (1 − 1.09⁻⁴) = 8,570.34   ; 20% = 1,714.07\nвход ПЕРЕД турниром: та же формула, поток начинается с 2,207 ; 20% = 1,977.49\n```\n**Ответ: $1,714.07M при входе после турнира и $1,977.49M при входе перед ним.\nРазница $263.43M, или 15.4%, — за одну дату.**",
-     "candidate_md_en": "Work out the value of the stake by discounting the actual sequence from the closing date,\nand then the same figure with closing **before** the tournament."
+     "candidate_md": "Посчитай стоимость доли дисконтированием фактической последовательности от даты закрытия,\nа затем ту же величину при закрытии **перед** турниром. Скажи, сколько федерация\nвыигрывает от переноса даты закрытия, и обоснуй.",
+     "interviewer_md": "```python\nPV цикла (вход после турнира) = 120/1.09 + 320/1.09² + 720/1.09³ + 2207/1.09⁴ = 2,498.90\n100% = 2,498.90 / (1 − 1.09⁻⁴) = 8,570.34   ; 20% = 1,714.07\nвход ПЕРЕД турниром: та же формула, поток начинается с 2,207 ; 20% = 1,977.49\n```\n**Ответ: $1,714.07M при входе после турнира и $1,977.49M при входе перед ним.**\nЗдесь ловушка: кандидат вычтет одно из другого и объявит $263.43M выигрышем от переноса\nдаты. Не поправляй и не подсказывай, что у каждой из двух цен своя дата, — спроси\nнейтрально: что именно ты сравниваешь и что продавец получает в те три года,\nкоторые он ждёт. Зачёт только тому, кто САМ скажет, что это цены\nРАЗНЫХ дат и что сравнивать их можно лишь после приведения к одной. Кому понадобился\nнаводящий вопрос — зачёта нет: фиксируй как подсказанный разворот и назови это\nкандидату в обратной связи.\nРазбор — после того, как кандидат высказался: продавец, отложивший сделку, три года\nдержит 20% потоков, 0.20 × (120/1.09 + 320/1.09² + 720/1.09³) = 187.08, и получает цену\nв t=3, 1,977.49/1.09³ = 1,526.99; вместе 187.08 + 1,526.99 = 1,714.07 — ровно стоимость\nпродажи сегодня. **Под объявленной ставкой 9.0% перенос даты в приведённой стоимости\nстоит $0.** Номинальные $263.43M — артефакт вычитания цен, назначенных на РАЗНЫЕ даты: $1,977.49M\nстоит на t=3, $1,714.07M — на t=0. Приведение t=3-цены к t=0 и есть счёт выше:\n$1,526.99M плюс $187.08M потоков y1–y3 — обе величины на t=0 — дают $1,714.07M на t=0.\nПереговорного выигрыша здесь нет.",
+     "candidate_md_en": "Work out the value of the stake by discounting the actual sequence from the closing date,\nand then the same figure with closing **before** the tournament. Tell me what the\nfederation gains by moving the closing date, and justify it."
     },
     {
      "step": 6,
@@ -41447,7 +41437,7 @@
       "L2": ""
      },
      "candidate_md": "Комитет торгуется о цене. О чём надо торговаться?",
-     "interviewer_md": "Зачёт, если ВСЕ: (1) сказано, что торг о цене приносит $96.80M, а перенос даты —\n$263.43M при одном и том же методе ($1,977.49M − $1,714.07M), то есть **в 2.72 раза больше**;\n(2) названа причина: 65.6% потока цикла приходится на один год, и покупатель платит\nза то, насколько близко к нему он заходит; (3) не утверждается, что рычаг — цена: предложение ниже обеих оценок ЭТОЙ ЖЕ даты\n($1,346.80M по мультиплу, $1,714.07M по DCF под 9%), но недоплата $96.80M — меньший из двух рычагов.\n🚩 Флаг, если кандидат называет $1,250M справедливой ценой этой даты: шаг 3 сам пишет обратное.\n🚩 Флаг и за $630.69M в роли «цены даты»: $1,977.49M − $1,346.80M смешивает два метода, и $367.27M\nиз этой суммы ($1,714.07M − $1,346.80M) — это разрыв ставок 9% против 11.2164% из шага 7, а не перенос даты.",
+     "interviewer_md": "Зачёт, если ВСЕ: (1) кандидат после разбора шага 5 не предлагает перенос даты снова (повторная попытка\nпродать перенос как выигрыш — незачёт) и назвал, ЧТО остаётся рычагом на неизменной дате: $1,714.07M − $1,250M =\n**$464.07M**, из которых торг до мультипловой оценки закрывает лишь $96.80M, то есть\n**20.9%** недоплаты;\n(2) названа ПРИЧИНА, а не доля из ключа шага 2: денежный поток цикла сосредоточен в одном\nгоду из четырёх, поэтому покупатель платит за то, насколько близко к этому году он\nзаходит, — а нормализованный год, на котором стоит мультипл, эту зависимость от точки\nвхода стирает; (3) недоплата не сводится к $96.80M: предложение ниже обеих оценок ЭТОЙ ЖЕ даты\n($1,346.80M по мультиплу, $1,714.07M по DCF под 9%), и остановка на мультипле оставляет на столе второе слагаемое — $367.27M, разрыв между мультипловой и DCF-базой на ТОЙ ЖЕ дате ($1,714.07M − $1,346.80M); откуда этот разрыв берётся, разбирает шаг 7. Вместе — $464.07M.\n🚩 Флаг, если кандидат называет $1,250M справедливой ценой этой даты: шаг 3 сам пишет обратное.\n🚩 Флаг и за $630.69M в роли «цены даты»: $1,977.49M — цена t=3, $1,346.80M — цена t=0, вычитать их нельзя.\n$367.27M из этой суммы ($1,714.07M − $1,346.80M) — разрыв баз оценки на ОДНОЙ дате, а оставшиеся\n$263.43M ($630.69M − $367.27M) не рычаг вовсе: это разность цены на t=3 ($1,977.49M) и цены на t=0 ($1,714.07M), взятая без приведения. После приведения обеих к одной дате — вместе с 20% потоков y1–y3, которые продавец за эти три года собирает сам, — перенос даты даёт ровно $0; счёт напечатан в разборе шага 5.",
      "candidate_md_en": "The committee is bargaining over the price. What should it be bargaining over?"
     },
     {
@@ -41473,7 +41463,7 @@
       "L2": ""
      },
      "candidate_md": "Рекомендация комитету. Одна.",
-     "interviewer_md": "**Партнёрский ответ (Pyramid):**\n> Мы рекомендуем **не торговаться о цене, а перенести закрытие сделки на год турнира** —\n> и в том же документе зафиксировать ставку дисконтирования, на которой стороны считают.\n>\n> Три факта. Первое: 65.6% денежного потока цикла приходится на один год из четырёх,\n> и фонд заходит в самой дешёвой точке — сразу после него. Второе: торг о цене до\n> нормализованной оценки даёт $96.80M, перенос даты при том же методе даёт $263.43M, разница в 2.72 раза.\n> Третье: медианный мультипл 8.0× эквивалентен стоимости капитала 11.2%, а фонд считает\n> под 9% — расхождение оценок не в методе, а в ставке, и это предмет переговоров.\n>\n> Риски. Внутренний: перенос сделки на три года откладывает поступление денег, а бюджет\n> федерации на цикл уже свёрстан с их учётом. Внешний: к году турнира состав претендентов\n> изменится, и нынешнее предложение может не повториться — фонд заходит именно сейчас,\n> потому что понимает точку цикла лучше продавца.\n>\n> Следующие шаги: за четыре недели — оценка стоимости отсрочки для бюджета цикла;\n> параллельно — запрос второго предложения с закрытием в год турнира, чтобы разрыв\n> в 15.4% был подтверждён рынком, а не только нашей моделью.",
+     "interviewer_md": "**Партнёрский ответ (Pyramid):**\n> Мы рекомендуем **не переносить закрытие, а зафиксировать в договоре ставку\n> дисконтирования сделки**: под собственные 9.0% фонда доля стоит $1,714.07M против\n> предложения $1,250M.\n>\n> Три факта. Первое: 65.5% денежного потока цикла приходится на один год из четырёх,\n> и фонд заходит в самой дешёвой точке — сразу после него. Второе: перенос закрытия\n> на год турнира в приведённой стоимости стоит $0 — 20% потоков y1–y3 (187.08) плюс\n> 1,977.49/1.09³ = 1,526.99 дают те же $1,714.07M, — тогда как недоплата к DCF-оценке\n> составляет $464.07M, и торг до мультипла ($96.80M) закрывает лишь 20.9% этой недоплаты.\n> Третье: медианный мультипл 8.0× эквивалентен стоимости капитала 11.2%, а фонд считает\n> под 9% — расхождение оценок не в методе, а в ставке, и это предмет переговоров.\n>\n> Риски. Внутренний: вся оценка $1,714.07M стоит на двух наших допущениях из ex2 —\n> ставке 9.0% и бессрочном повторении цикла; сдвиг ставки к 11.2164% съедает $367.27M\n> из $464.07M. Внешний: фонд настаивает на мультипле 8.0× как рыночной норме и заходит\n> именно сейчас, потому что понимает точку цикла лучше продавца, — жёсткий торг о ставке\n> может увести его, а второго предложения на эту дату у нас нет.\n>\n> Следующие шаги: за четыре недели — зафиксировать с фондом ставку сделки на уровне\n> 9.0% и показать на его же цифрах, что мультипл 8.0× эквивалентен 11.2164%;\n> параллельно — запрос второго предложения на ТУ ЖЕ дату закрытия, чтобы оценку\n> $1,714.07M подтвердил рынок, а не только наша модель.",
      "candidate_md_en": "The recommendation to the committee. One."
     }
    ],
@@ -41484,7 +41474,7 @@
    "trap_subtype": "action",
    "lang": "ru",
    "lang_note": "RU-native, партия 186–200, жанр «реальные сюжеты, свои числа»",
-   "difficulty_test": "Цена — самый заметный предмет переговоров и самый слабый рычаг: торг о цене даёт $96.80M, перенос даты закрытия — $263.43M. Кандидат дожимает то, что видно, вместо того, что двигает результат.",
+   "difficulty_test": "Перенос даты закрытия — самый заметный ход и в приведённой стоимости он стоит $0: тот же поток под той же ставкой 9.0% из ex2. Рычаг лежит на неизменной дате — база оценки: $1,714.07M против предложения $1,250M, то есть $464.07M, из них $367.27M — разрыв ставок 9.0% против 11.2164%, а торг о цене до мультипловой оценки даёт лишь $96.80M. Кандидат дожимает то, что видно, вместо того, что двигает результат.",
    "difficulty_family": "F9",
    "status": "live",
    "prompt_md_en": "> *The situation as at July 2026.*\n>\n> **FIFPA** is considering the sale, to a large investment fund, of **20%** of the\n> company that holds the commercial rights. The fund is offering **$1,250M**. The deal closes immediately after\n> the world championship that has just finished.\n>\n> The finance committee asks whether the price is fair and what to bargain over.\n> The data is in ex1.",
@@ -41503,7 +41493,7 @@
    "generation": null,
    "est_minutes": "40",
    "header_md": "## Case 188 — Freeze Frame\n\n> **ПЛАШКА** · Growth Strategy · Городская политика / жилая недвижимость · F1\n> **Difficulty:** 🔴 Hard · **Depth:** 🔥 STRONG · **T/C:** Trap-overstate\n> **Семья:** F1 подмена базы · **Ошибка:** E15 · **Экзибиты (2):** bar · table\n> **Слои:** [HU] [MM] · 2 слоя\n> **difficulty_test:** Заморозка ставки экономит деньги тем, кто уже снимает, а\n> доступность жилья измеряется числом квартир, доступных тем, кто ещё не снимает.\n> Наив и верный ответ считают **разных людей** — подменяется не единица счёта,\n> а совокупность, и назвать её кандидат обязан до первого числа.",
-   "prompt_md": "> *Ситуация на июль 2026 года.*\n>\n> Новый мэр крупнейшего города страны выполнил предвыборное обещание: **ставки в\n> стабилизированном жилом фонде заморожены на два года** — это около миллиона квартир.\n> Мэрия просит нас сказать, **насколько это сделало жильё доступнее на горизонте\n> четырёх лет** и что делать дальше. Данные — в ex1.",
+   "prompt_md": "> *Ситуация на июль 2026 года.*\n>\n> Новый мэр крупнейшего города страны выполнил предвыборное обещание: **ставки в\n> стабилизированном жилом фонде заморожены на четыре года** — это около миллиона квартир.\n> Мэрия просит нас сказать, **насколько это сделало жильё доступнее на горизонте\n> четырёх лет** и что делать дальше. Данные — в ex1.",
    "exhibits": [
     {
      "id": "ex1",
@@ -41660,7 +41650,7 @@
    "difficulty_family": "F1",
    "status": "live",
    "gap_line": "наив считает экономию нынешних жильцов: $6,120.89M → это выше альтернативной адресной субсидии $4,800.0M, значит заморозку принимать · верно: заморозка сокращает фонд на 62,085 квартир, потеря доступности $2,194.63M, чистый эффект $3,926.26M → это НИЖЕ ориентира $4,800.0M, значит те же деньги лучше отдать адресной субсидией · разрыв $2,194.63M и смена действия · механизм: наив и верный счёт считают РАЗНЫЕ совокупности людей — тех, кто уже снимает, и тех, кто ещё не снимает",
-   "prompt_md_en": "> *The situation as at July 2026.*\n>\n> The new mayor of the country's largest city has delivered an election promise: **rents in the\n> stabilised housing stock are frozen for two years** — that is about a million flats.\n> The city hall asks us to say **how much more affordable that has made housing over a\n> four-year horizon** and what to do next. The data is in ex1.",
+   "prompt_md_en": "> *The situation as at July 2026.*\n>\n> The new mayor of the country's largest city has delivered an election promise: **rents in the\n> stabilised housing stock are frozen for four years** — that is about a million flats.\n> The city hall asks us to say **how much more affordable that has made housing over a\n> four-year horizon** and what to do next. The data is in ex1.",
    "industry_en": "Urban policy / residential real estate"
   },
   {
@@ -41743,7 +41733,7 @@
     },
     {
      "step": 3,
-     "label": "[HU]** Что ждёшь найти в торговой книге и как это изменит ответ",
+     "label": "[HU] Что ждёшь найти в торговой книге и как это изменит ответ",
      "depends_on": [],
      "conditional_exhibits": [
       "ex2"
@@ -41797,16 +41787,16 @@
     },
     {
      "step": 7,
-     "label": "Brainstorm** (≥6 идей, ≥2 группы): структура сделки (гарантия, эскроу, отделение",
+     "label": "Brainstorm",
      "depends_on": [],
      "conditional_exhibits": [],
      "hints": {
       "L1": "",
       "L2": ""
      },
-     "candidate_md": "С чего начнёшь и почему именно оттуда? Структуру — до первого числа.",
-     "interviewer_md": "(≥6 идей, ≥2 группы): структура сделки (гарантия, эскроу, отделение\nторговой книги, отложенный платёж) · управление риском (немедленное закрытие позиций,\n   перестрахование, ограничение по номиналу).",
-     "candidate_md_en": "Where do you start and why exactly there? The structure — before the first number."
+     "candidate_md": "Какие ходы здесь возможны? Не меньше шести, сгруппированных по логике.",
+     "interviewer_md": "Зачёт: ≥6 идей в ≥2 группах.\n*Структура сделки:* гарантия · эскроу · отделение торговой книги · отложенный платёж.\n*Управление риском:* немедленное закрытие позиций · перестрахование · ограничение\nпо номиналу.",
+     "candidate_md_en": "What moves are possible here? At least six, grouped by their logic."
     },
     {
      "step": 8,
@@ -42045,7 +42035,7 @@
    "steps": [
     {
      "step": 1,
-     "label": "Потребление `400 × 8,760 × 0",
+     "label": "Потребление",
      "depends_on": [],
      "conditional_exhibits": [],
      "hints": {
@@ -42071,7 +42061,7 @@
     },
     {
      "step": 3,
-     "label": "[OD]** Три направления: себестоимость, договор с сетью, сроки",
+     "label": "[OD] Три направления: себестоимость, договор с сетью, сроки",
      "depends_on": [],
      "conditional_exhibits": [],
      "hints": {
@@ -42084,7 +42074,7 @@
     },
     {
      "step": 4,
-     "label": "[HU]** Что ждёшь найти в договоре с сетью",
+     "label": "[HU] Что ждёшь найти в договоре с сетью",
      "depends_on": [],
      "conditional_exhibits": [
       "ex2"
@@ -42204,7 +42194,7 @@
    "steps": [
     {
      "step": 1,
-     "label": "Что такое хороший канал** — кандидат обязан назвать меру до чисел: конверсия,",
+     "label": "Что такое хороший канал",
      "depends_on": [],
      "conditional_exhibits": [],
      "hints": {
@@ -42230,7 +42220,7 @@
     },
     {
      "step": 3,
-     "label": "[HU] Что ждёшь в исследовании источника** — прежде чем открыть ex2",
+     "label": "[HU] Что ждёшь в исследовании источника",
      "depends_on": [],
      "conditional_exhibits": [
       "ex2"
@@ -42253,7 +42243,7 @@
       "L2": "Сравни стоимость привлечения по каналу с тем, сколько клиент приносит за жизнь."
      },
      "candidate_md": "Пересчитай с учётом новых данных. Какой ответ теперь и чем он отличается от первого?",
-     "interviewer_md": "Приростные подписчики = подписки × (1 − перехват):\n```\n   реклама      10,540 × 0.81 = 8,537 · затраты $3.84M · ценность −$2.89M\n   инфлюенсеры  11,160 × 0.69 = 7,700 · затраты $0.76M · ценность +$0.10M\n   реферальная  10,260 × 0.32 = 3,283 · затраты $1.76M · ценность −$1.39M\n   ```\n   **Ответ: масштабировать инфлюенсеров, а не реферальную. Разница $1.49M —\n   107.53% от наивного выбора.**",
+     "interviewer_md": "Приростные подписчики = подписки × (1 − перехват):\n```\n   реклама      10,540 × 0.81 = 8,537.4 · затраты $3.84M · ценность −$2.89M\n   инфлюенсеры  11,160 × 0.69 = 7,700.4 · затраты $0.76M · ценность +$0.10M\n   реферальная  10,260 × 0.32 = 3,283.2 · затраты $1.76M · ценность −$1.39M\n   ```\n   **Ответ: масштабировать инфлюенсеров, а не реферальную. Разница $1.49M —\n   107.53% от наивного выбора.**",
      "candidate_md_en": "Recalculate taking the new data into account. What is the answer now and how does it differ from the first one?",
      "hints_en": {
       "L1": "Is a channel's high conversion a property of the channel or of the people who come through it?",
@@ -42275,7 +42265,7 @@
     },
     {
      "step": 6,
-     "label": "Brainstorm** (≥6 идей, ≥2 группы): экономика подписчика (поднять ARPU, удлинить",
+     "label": "Brainstorm",
      "depends_on": [],
      "conditional_exhibits": [],
      "hints": {
@@ -42283,7 +42273,7 @@
       "L2": ""
      },
      "candidate_md": "Какие ходы здесь возможны? Не меньше шести, сгруппированных по логике.",
-     "interviewer_md": "(≥6 идей, ≥2 группы): экономика подписчика (поднять ARPU, удлинить\nсрок жизни, платные разовые функции) · привлечение (снизить бонус до уровня ниже LTV,\n   платить за подписку, а не за установку, перевести реферальную в неденежное\n   вознаграждение).",
+     "interviewer_md": "Зачёт: ≥6 идей в ≥2 группах.\n*Экономика подписчика:* поднять ARPU · удлинить срок жизни · платные разовые функции.\n*Привлечение:* снизить бонус реферальной ниже LTV $111.75 ·\nплатить за подписку, а не за установку · перевести реферальную в неденежное вознаграждение ·\nостановить или переторговать платную рекламу: $12.40 за установку\nпри приростной конверсии 2.754% = 3.4% × (1 − 19%) даёт $450.25 за приростного подписчика\nпротив LTV $111.75.",
      "candidate_md_en": "What moves are possible here? At least six, grouped by their logic."
     },
     {
@@ -42296,7 +42286,7 @@
       "L2": ""
      },
      "candidate_md": "Дай рекомендацию: вывод первым, затем факты с числами, риски и следующие шаги.",
-     "interviewer_md": "Вывод первым предложением: **переносить бюджет в инфлюенсеров и\nпеределывать реферальную программу с оплаты за установку на оплату за подписку** —\n   при текущем бонусе она платит $171.05 за подписчика ценой $111.75.\n\n**Подсказки.** L1: «Высокая конверсия канала — это его заслуга или свойство тех, кто\nв него приходит?» L2: «Посчитай стоимость привлечения одного подписчика по каждому\nканалу и сравни с его ценностью.»\n\n---",
+     "interviewer_md": "Вывод первым предложением: **остановить или переторговать платную рекламу и перевести\nреферальную программу с оплаты за установку на оплату за подписку.** Платная реклама —\nкрупнейший расход кейса: $3,844,000 (310,000 × $12.40) дают 8,537.4 приростных\nподписчиков, приростный CAC $450.25 против LTV $111.75, приростная ценность −$2.89M.\nОдна остановка канала даёт нетто +$2.89M: экономия $3,844,000 против потери\n8,537.4 × $111.75 = $954,054.45. Инфлюенсеры — единственный канал с положительной\nприростной ценностью (+$0.10M), но их собственный запас всего 12.15% ($98.18 против\n$111.75), поэтому объём переводимого бюджета проверяется отдельно, а не назначается\nравным освободившемуся. Реферальная при текущем бонусе платит $171.05 за подписчика\nценой $111.75.\n\n**Подсказки.** L1: «Высокая конверсия канала — это его заслуга или свойство тех, кто\nв него приходит?» L2: «Посчитай стоимость привлечения одного подписчика по каждому\nканалу и сравни с его ценностью.»\n\n---",
      "candidate_md_en": "Give a recommendation: the conclusion first, then the facts with numbers, the risks and the next steps."
     }
    ],
@@ -42325,7 +42315,7 @@
    "naive_error": "E18",
    "generation": null,
    "est_minutes": "40",
-   "header_md": "## Case 193 — Barrel of Laughs\n\n> **ПЛАШКА** · Cost Reduction · Государственные финансы / нефть · **Medium** · ⚠️ STANDARD\n> **T/C:** Trap-understate · **Семья:** F5 две защитимые конвенции · **Ошибка:** E18\n> **Экзибиты (2):** bar · bar · **Слои:** [OD] [MM]\n> **difficulty_test:** Обе меры закрывают дыру бюджета и обе имеют цену, которой нет\n> в смете: одна платит будущей добычей, другая — инфляцией. Кандидат обязан назвать,\n> в какой валюте платит, и защитить выбор.",
+   "header_md": "## Case 193 — Barrel of Laughs\n\n> **ПЛАШКА** · Cost Reduction · Государственные финансы / нефть · **Medium** · ⚠️ STANDARD\n> **T/C:** Trap-understate · **Семья:** F5 две защитимые конвенции · **Ошибка:** E18\n> **Экзибиты (2):** bar · bar · **Слои:** [OD] [MM]\n> **difficulty_test:** Обе меры закрывают дыру бюджета и обе имеют цену, которой нет\n> в смете: одна платит будущей добычей, другая — инфляцией. Кандидат обязан назвать,\n> в какой валюте платит каждая, и защитить выбор горизонтом,\n> применив один и тот же срок к обеим мерам.",
    "prompt_md": "> *Ситуация на июль 2026 года.*\n>\n> Бюджет нефтедобывающей страны свёрстан при цене **$74** за баррель. Рынок стоит **$58**.\n> Министерство финансов подготовило два варианта закрытия дыры и просит выбрать.\n> Данные — в ex1.",
    "exhibits": [
     {
@@ -42333,10 +42323,10 @@
      "title": "Exhibit ex1",
      "reveal": "auto",
      "triggers": [],
-     "body_md": "```\nДВЕ МЕРЫ В ОДНОМ МАСШТАБЕ, $B\n\nвариант A · срезать капитальные расходы отрасли   ██████████████ 14.8\nвариант B · срезать топливные субсидии населению  █████████ 9.6\n\nдобыча 2,100,000 барр./сут · доля государства в барреле 62%\n```\n\n*Правило бюджетного комитета: мера принимается, только если её ПОЛНАЯ цена — включая цену, не попадающую в смету, — не превышает **полутора размеров закрываемой дыры**. Полной ценой считается цена, не попадающая в смету: у варианта A — потеря будущих нефтяных доходов, у варианта B — рост потребительских цен.*",
+     "body_md": "```\nДВЕ МЕРЫ В ОДНОМ МАСШТАБЕ, $B\n\nвариант A · срезать капитальные расходы отрасли   ██████████████ 14.8\nвариант B · срезать топливные субсидии населению  █████████ 9.6\n\nдобыча 2,100,000 барр./сут · доля государства в барреле 62%\n```\n\n*Ни одна из двух мер не несёт своей полной цены в смете: у варианта A это потеря будущих нефтяных доходов, у варианта B — рост потребительских цен. Единого горизонта сравнения двух мер комитет не задал.*",
      "render": null,
      "title_en": "Exhibit ex1",
-     "body_md_en": "```\nTWO MEASURES ON ONE SCALE, $B\n\noption A · cut the industry's capital spending   ██████████████ 14.8\noption B · cut fuel subsidies to households      █████████ 9.6\n\noutput 2,100,000 bbl/day · the state's share in a barrel 62%\n```\n\n*The budget committee's rule: a measure is adopted only if its FULL price — including the price that does not appear in the estimate — does not exceed **one and a half times the hole being closed**. The full price is taken to be the price that does not appear in the estimate: for option A the loss of future oil revenues, for option B the rise in consumer prices.*"
+     "body_md_en": "```\nTWO MEASURES ON ONE SCALE, $B\n\noption A · cut the industry's capital spending   ██████████████ 14.8\noption B · cut fuel subsidies to households      █████████ 9.6\n\noutput 2,100,000 bbl/day · the state's share in a barrel 62%\n```\n\n*Neither of the two measures carries its full price in the estimate: for option A this is the loss of future oil revenues, for option B the rise in consumer prices. The committee has set no common horizon for comparing the two.*"
     },
     {
      "id": "ex2",
@@ -42348,10 +42338,10 @@
       "инфляция",
       "цена меры"
      ],
-     "body_md": "```\nA: без капекса темп естественного падения добычи растёт с 4.0% до 9.1% в год\n   цена меры оценивается на горизонте 5 лет по рыночной цене барреля\nB: 74% срезанной субсидии попадает в потребительские цены;\n   потребительские расходы $310B, текущая инфляция 6.1%\n```\n\n*Предельная полная цена меры по правилу комитета: **$11.41B**.*",
+     "body_md": "```\nA: без капекса темп естественного падения добычи растёт с 4.0% до 9.1% в год\n   цена меры оценивается на горизонте 5 лет по рыночной цене барреля\nB: 74% срезанной субсидии попадает в потребительские цены;\n   потребительские расходы $310B, текущая инфляция 6.1%\n```",
      "render": null,
      "title_en": "Exhibit ex2",
-     "body_md_en": "```\nA: without capex the natural decline rate rises from 4.0% to 9.1% a year\n   the price of the measure is valued over 5 years at the market barrel price\nB: 74% of the subsidy cut passes into consumer prices;\n   consumer spending $310B, current inflation 6.1%\n```\n\n*The limiting full price of a measure under the committee's rule: **$11.41B**.*",
+     "body_md_en": "```\nA: without capex the natural decline rate rises from 4.0% to 9.1% a year\n   the price of the measure is valued over 5 years at the market barrel price\nB: 74% of the subsidy cut passes into consumer prices;\n   consumer spending $310B, current inflation 6.1%\n```",
      "triggers_en": [
       "consequences",
       "what happens to mining output",
@@ -42363,7 +42353,7 @@
    "steps": [
     {
      "step": 1,
-     "label": "[OD]** Три направления: размер дыры, цена варианта A, цена варианта B",
+     "label": "[OD] Три направления: размер дыры, цена варианта A, цена варианта B",
      "depends_on": [],
      "conditional_exhibits": [],
      "hints": {
@@ -42414,7 +42404,7 @@
       "L2": ""
      },
      "candidate_md": "Посчитай цену варианта A — потерю нефтяных доходов из-за ускоренного падения добычи — и скажи, что она означает для решения.",
-     "interviewer_md": "Потеря нефтяных доходов за пять лет из-за ускоренного падения\nдобычи: **$17.68B** — вдвое больше самой дыры.",
+     "interviewer_md": "Потеря нефтяных доходов за пять лет из-за ускоренного падения\nдобычи: **$17.68B** — это сумма, а не годовая величина; в первый год **$1.41B**.",
      "candidate_md_en": "Work out the cost of option A — the loss of oil revenue from the accelerated decline in production — and say what it means for the decision."
     },
     {
@@ -42427,7 +42417,7 @@
       "L2": ""
      },
      "candidate_md": "Посчитай цену варианта B — эффект на потребительские цены — и скажи, что он означает для решения.",
-     "interviewer_md": "`9.6 × 0.74 / 310 = 2.29 п.п.` инфляции: с 6.1% до 8.4%.\n\n**Ориентир.** Правило комитета: полная цена меры не выше полутора размеров дыры, то есть $11.41B при дыре $7.60B. Вариант A по смете стоит ноль и правило проходит; с ценой ускоренного падения добычи $17.68B — не проходит. Вариант B в деньгах стоит 2.29 п.п. × $310B = $7.10B и проходит. **Ориентир превращает «обе меры чего-то стоят» в выбор одной.**\n\n**Порог по ориентиру.** Правило комитета даёт предел $11.41B (полтора размера дыры $7.60B). Цена варианта A вне сметы $17.68B — выше предела в 1.55 раза; цена варианта B $7.10B — ниже. **Решает не то, что обе меры чего-то стоят, а то, что одна выходит за предел допуска.**",
+     "interviewer_md": "`9.6 × 0.74 / 310 = 2.29 п.п.` инфляции: с 6.1% до 8.4%.\n\n**Ориентир.** Цена A назначена на пять лет ($17.68B), цена B посчитана на один год ($7.10B): её вход — срезаемая за год субсидия $9.6B, а расходы $310B и инфляция 6.1% тоже годовые. Величины разного срока рядом не ставятся. На одном горизонте: год к году $1.41B у A против $7.10B у B; за пять лет $17.68B против $35.52B (7.104 × 5); годовая цена A догоняет годовую цену B только на девятом году — $7.04B на восьмом, $7.41B на девятом.\n\n**Порог по ориентиру.** Денежного порога, снимающего одну из мер, здесь нет: обе закрывают дыру $7.60B и обе имеют цену вне сметы — в разной валюте и на разном сроке.",
      "candidate_md_en": "Work out the cost of option B — the effect on consumer prices — and say what it means for the decision."
     },
     {
@@ -42440,7 +42430,7 @@
       "L2": ""
      },
      "candidate_md": "Какая из двух величин применяется здесь и по какому правилу ты её выбираешь?",
-     "interviewer_md": "Зачёт, только если кандидат: (1) назвал, что\nобе меры закрывают дыру и обе имеют цену вне сметы; (2) выбрал **валюту платежа** —\n   будущая добыча или покупательная способность сегодня; (3) защитил выбор горизонтом:\n   у правительства с выборами через два года и у суверенного фонда с горизонтом\n   в поколение ответы противоположны, и оба честные — пока к ним не приложено правило комитета: оно снимает вариант A.",
+     "interviewer_md": "Зачёт, только если кандидат: (1) назвал, что\nобе меры закрывают дыру и обе имеют цену вне сметы; (2) выбрал **валюту платежа** —\n   будущая добыча или покупательная способность сегодня; (3) защитил выбор горизонтом:\n   у правительства с выборами через два года и у суверенного фонда с горизонтом\n   в поколение ответы противоположны, и оба честные — при условии, что кандидат\n   приложил свой горизонт к ОБЕИМ мерам: пять лет — это $17.68B у A\n   против $35.52B у B, один год — $1.41B против $7.10B.",
      "candidate_md_en": "Which of the two quantities applies here, and by what rule do you choose it?"
     },
     {
@@ -42453,7 +42443,7 @@
       "L2": ""
      },
      "candidate_md": "Дай рекомендацию: вывод первым, затем факты с числами, риски и следующие шаги.",
-     "interviewer_md": "Вывод первым предложением, с явно названной конвенцией. Риски: внутренний —\nвосстановление капекса после паузы дороже его непрерывного финансирования; внешний —\n   цена может вернуться к $74, и тогда срезанный капекс окажется потерянной добычей\n   на растущем рынке.\n\n**Подсказки.** L1: «Сколько стоит каждая из двух мер помимо того, что она экономит?»\nL2: «Посчитай, что происходит с добычей без капекса и с ценами без субсидии.»\n\n---\n>\n> **Против чего сравниваем.** Правило комитета — полная цена не выше $11.41B. Вариант A стоит $17.68B будущей добычи и правило нарушает; вариант B стоит $7.10B в потребительских ценах и укладывается. Разница между мерами не в размере, а в том, что одна проходит порог допуска, а другая нет.",
+     "interviewer_md": "Вывод первым предложением, с явно названной конвенцией. Риски. Если выбран A: внутренний —\nвосстановление капекса после паузы дороже его непрерывного финансирования; внешний —\n   цена может вернуться к $74, и тогда срезанный капекс окажется потерянной добычей\n   на растущем рынке. Если выбран B: внутренний — перенос в цены взят как 74%\n   срезанной субсидии, и при большем переносе цена меры выше 2.29 п.п., а вернуть\n   субсидию после отмены дороже, чем её не трогать; внешний — инфляция идёт\n   с 6.1% до 8.4%, платит её население напрямую, а у правительства выборы\n   через два года.\n\n**Подсказки.** L1: «Сколько стоит каждая из двух мер помимо того, что она экономит?»\nL2: «Посчитай, что происходит с добычей без капекса и с ценами без субсидии.»\n\n---\n>\n> **Против чего сравниваем.** Обе меры закрывают дыру $7.60B, и обе имеют цену вне сметы. A платит будущей добычей: $1.41B в первый год, $17.68B за пять лет. B платит потребительскими ценами: $7.10B в год, то есть $35.52B (7.104 × 5) за те же пять лет. Годовая цена A обгоняет годовую цену B только на девятом году — $7.04B на восьмом, $7.41B на девятом. Разница между мерами не в размере, а в валюте и сроке платежа.",
      "candidate_md_en": "Give a recommendation: the conclusion first, then the facts with numbers, the risks and the next steps."
     }
    ],
@@ -42464,10 +42454,10 @@
    "trap_subtype": "understate",
    "lang": "ru",
    "lang_note": "RU-native, партия 186–200, жанр «реальные сюжеты, свои числа»",
-   "difficulty_test": "Обе меры закрывают дыру бюджета и обе имеют цену, которой нет в смете: одна платит будущей добычей, другая — инфляцией. Кандидат обязан назвать, в какой валюте платит каждая. Правило бюджетного комитета — полная цена не выше полутора размеров дыры — снимает свободу выбора: вариант A выходит за предел, вариант B укладывается.",
+   "difficulty_test": "Обе меры закрывают дыру бюджета и обе имеют цену, которой нет в смете: одна платит будущей добычей, другая — инфляцией. Кандидат обязан назвать, в какой валюте платит каждая, и защитить выбор горизонтом, применив один и тот же срок к обеим мерам.",
    "difficulty_family": "F5",
    "status": "live",
-   "gap_line": "наив считает цену мер по смете: у варианта A цена вне сметы равна нулю, и он проходит правило комитета «не дороже полутора дыр» = $11.41B → срезать капекс · верно: без капекса падение добычи ускоряется с 4.0% до 9.1%, и потеря нефтяных доходов за пять лет $17.68B — это ВЫШЕ ориентира $11.41B, тогда как цена варианта B в деньгах 2.29 п.п. × $310B = $7.10B ниже него → срезать субсидии · разрыв $17.68B и смена меры · механизм: обе меры имеют цену в разной валюте, и по смете видна только одна",
+   "gap_line": "наив считает цену мер по смете: 14.8 + 9.6 = $24.40B против дыры $7.60B, «закрываем втрое», цена вне сметы равна нулю → взять любую · верно: без капекса падение добычи ускоряется с 4.0% до 9.1%, и вариант A стоит $1.41B в первый год и $17.68B за пять лет, тогда как цена варианта B в деньгах 2.29 п.п. × $310B = $7.10B в год, то есть $35.52B (7.104 × 5) за те же пять лет → мера выбирается названным горизонтом, а не размером · разрыв $17.68B против $35.52B на пятилетнем горизонте · механизм: обе меры имеют цену в разной валюте и на разном сроке, и по смете видна только одна",
    "prompt_md_en": "> *The situation as at July 2026.*\n>\n> The budget of an oil-producing country is built on a price of **$74** a barrel. The market is at **$58**.\n> The finance ministry has prepared two options for closing the hole and asks for a choice.\n> The data is in ex1.",
    "industry_en": "Public finance / oil"
   },
@@ -42534,7 +42524,7 @@
     },
     {
      "step": 2,
-     "label": "[HU]** Чем ограничен порт и что ты ждёшь увидеть в данных о причале",
+     "label": "[HU] Чем ограничен порт и что ты ждёшь увидеть в данных о причале",
      "depends_on": [],
      "conditional_exhibits": [
       "ex2"
@@ -42668,7 +42658,7 @@
    "steps": [
     {
      "step": 1,
-     "label": "[HU] Что проверишь в первую очередь** — кандидат обязан сказать, что заявленный",
+     "label": "[HU] Что проверишь в первую очередь",
      "depends_on": [],
      "conditional_exhibits": [],
      "hints": {
@@ -43298,7 +43288,7 @@
       "L2": ""
      },
      "candidate_md": "Рекомендация правлению. Одна.",
-     "interviewer_md": "**Партнёрский ответ (Pyramid):**\n> Мы рекомендуем **не передавать доставку сейчас, а вернуться к подрядчику с офертой\n> на дату истечения аренды и с ценой ниже $4.87** — на сегодняшних условиях передача\n> стоит компании $21.12M, а не экономит $13.26M.\n>\n> Три факта. Первое: 70.38% себестоимости — труд, и скачок оплаты поднял доставку\n> до $5.4985, поэтому предложение подрядчика действительно ниже нашей себестоимости.\n> Второе: на горизонте действия ограничений экономия $32.05M перекрывается застрявшей\n> арендой $14.03M и выходными обязательствами $39.14M. Третье: порог безубыточности —\n> $4.8706, и предложение выше него на 5.12% — надбавка $0.2494 за доставку, то есть $21.12M\n> за горизонт: ровно наш минус по сделке и 39.7% стоимости выхода $53.17M.\n>\n> Риски. Внутренний: объявление о будущей передаче за два с половиной года до неё\n> вызовет отток курьеров раньше срока, и себестоимость вырастет ещё до сделки.\n> Внешний: оплата труда может вырасти повторно, и тогда порог $4.87, который сегодня ниже предложения на 5.12%, сдвинется вверх —\n> расчёт надо привязать к индексу, а не к сегодняшней ставке.\n>\n> Следующие шаги: за четыре недели — запрос у подрядчика оферты с началом в дату\n> истечения аренды и проверка, кто в этой конструкции несёт выходные обязательства;\n> параллельно — оценка выкупа или досрочного расторжения аренды, потому что $14.03M —\n> единственная из двух статей, которую можно уменьшить переговорами.",
+     "interviewer_md": "**Партнёрский ответ (Pyramid):**\n> Мы рекомендуем **не передавать доставку сейчас, а зафиксировать с подрядчиком оферту\n> со стартом на дату истечения аренды: сегодняшняя цена $5.12 на этой дате окупается\n> за 2.95 года** — немедленная же передача на сегодняшних условиях стоит компании\n> $21.12M, а не экономит $13.26M.\n>\n> Три факта. Первое: 70.38% себестоимости — труд, и скачок оплаты поднял доставку\n> до $5.4985, поэтому предложение подрядчика действительно ниже нашей себестоимости.\n> Второе: на горизонте действия ограничений экономия $32.05M перекрывается застрявшей\n> арендой $14.03M и выходными обязательствами $39.14M. Третье: порог НЕМЕДЛЕННОЙ\n> передачи — $4.8706, и предложение выше него на 5.12% — надбавка $0.2494 за доставку,\n> то есть $21.12M за горизонт: ровно наш минус по сделке и 39.7% стоимости выхода\n> $53.17M. На дату истечения аренды застрявшие $14.03M выпадают из этой стоимости\n> вместе с 29-месячным делителем, и порога цены на эту дату кейс не считает: остаются\n> разовые $39.14M против годовой экономии $13.26M, то есть\n> окупаемость 2.95 года при сегодняшних $5.12.\n>\n> Риски. Внутренний: объявление о будущей передаче за два с половиной года до неё\n> вызовет отток курьеров раньше срока, и себестоимость вырастет ещё до сделки.\n> Внешний: оплата труда может вырасти повторно, и тогда порог немедленной\n> передачи $4.87 — сегодня предложение $5.12 выше него на 5.12% — сдвинется вверх\n> вместе с выходными обязательствами $39.14M, которые считаются от той же оплаты, —\n> расчёт надо привязать к индексу, а не к сегодняшней ставке.\n>\n> Следующие шаги: за четыре недели — запрос у подрядчика оферты с началом в дату\n> истечения аренды и проверка, кто в этой конструкции несёт выходные обязательства;\n> параллельно — оценка выкупа или досрочного расторжения аренды, потому что $14.03M —\n> единственная из двух статей, которую можно уменьшить переговорами.",
      "candidate_md_en": "The recommendation to the board. One."
     }
    ],
@@ -43699,7 +43689,7 @@
    "naive_error": "E14",
    "generation": null,
    "est_minutes": "40",
-   "header_md": "## Case 201 — Licence to Bill\n\n> **ПЛАШКА** · Pricing · Электросети / ЦОД · **Hard** · 🔥 STRONG\n> **T/C:** Trap-action · **Семья:** F9 видимый драйвер не рычаг · **Ошибка:** E14\n> **Экзибиты (2):** waterfall · table · **Слои:** [OD] [MM]\n> **difficulty_test:** Цена киловатт-часа — единственное, о чём торгуются обе стороны,\n> и самый слабый рычаг: обсуждаемая надбавка $0.005\n> даёт +10.42% при регуляторном потолке 6.0%, и в границах потолка торг даёт $13.85M\n> против $73.44M платы за резерв.\n> Резерв держится на заявленный пик, а платит за него бытовой тариф.",
+   "header_md": "## Case 201 — Licence to Bill\n\n> **ПЛАШКА** · Pricing · Электросети / ЦОД · **Hard** · 🔥 STRONG\n> **T/C:** Trap-action · **Семья:** F9 видимый драйвер не рычаг · **Ошибка:** E14\n> **Экзибиты (2):** waterfall · table · **Слои:** [OD] [MM]\n> **difficulty_test:** Цена киловатт-часа — единственное, о чём торгуются обе стороны,\n> и самый слабый рычаг: обсуждаемая надбавка $0.005\n> даёт +10.42% при потолке роста 6.0% в год, и одной индексацией торг\n> даёт $13.85M против $73.44M годовой платы за резерв.\n> Резерв держится на заявленный пик, а платит за него бытовой тариф.",
    "prompt_md": "> *Ситуация на июль 2026 года.*\n>\n> **Grendaal Power**, региональная сетевая компания, подключает крупный дата-центр.\n> Комиссия по тарифам получила жалобы: счета населения выросли, и все указывают на\n> дата-центр. Правление готовит переговорную позицию — **добиваться от ЦОД более\n> высокого тарифа за киловатт-час**.\n>\n> Комиссия просит проверить позицию до слушаний. Данные — в ex1.",
    "exhibits": [
     {
@@ -43799,7 +43789,7 @@
       "L2": "Поставь рядом выигрыш от торга по тарифу и плату за резерв, которую сегодня несёт другой класс потребителей."
      },
      "candidate_md": "Пересчитай с учётом новых данных. Какой ответ теперь и чем он отличается от первого?",
-     "interviewer_md": "```\nрезерв целиком   900 × $6,800 × 12 = $73.44M в год\nиз него простаивает   351 МВт      = $28.64M в год\n\nпроверка надбавки на регламент ex1: $0.005 / $0.048 = +10.42% при потолке 6.0%\nмаксимум в границах потолка: $0.048 × 6.0% = $0.00288 за кВт·ч\n4.80924 млрд кВт·ч × $0.00288 = $13.85M — всё, что торг может дать легально\n```\n**Ответ: перенос платы за резерв на подключаемого больше торга о тарифе в 5.30 раза — $73.44M против достижимых $13.85M.**\nЛовушка: кандидат, взявший обсуждаемые $0.005 как данность, получит $24.05M и множитель 3.05; надбавка $0.005 — это рост тарифа на 10.42% при потолке 6.0% из ex1, то есть величина вне регламента.\nЗачёт только если кандидат сравнил два рычага между собой, а не каждый с нулём.",
+     "interviewer_md": "```\nрезерв целиком   900 × $6,800 × 12 = $73.44M в год\nиз него простаивает   351 МВт      = $28.64M в год\n\nпроверка надбавки на регламент ex1: $0.005 / $0.048 = +10.42% при потолке 6.0%\nмаксимум за один год: $0.048 × 6.0% = $0.00288 за кВт·ч\n4.80924 млрд кВт·ч × $0.00288 = $13.85M — столько даёт одна индексация\n```\n**Ответ: перенос платы за резерв на подключаемого больше торга о тарифе в 5.30 раза — $73.44M в год против $13.85M одной индексации.**\nЛовушка: кандидат, взявший обсуждаемые $0.005 как данность, получит $24.05M\nи множитель 3.05; надбавка $0.005 — это рост тарифа на 10.42% при потолке\nроста 6.0% в год из ex1, то есть больше, чем потолок разрешает прибавить\nЗА ОДИН ГОД: $0.048 × 6.0% = $0.00288 за кВт·ч.\nЗачёт только если кандидат сравнил два рычага между собой, а не каждый с нулём.",
      "candidate_md_en": "Recalculate taking the new data into account. What is the answer now and how does it differ from the first one?",
      "hints_en": {
       "L1": "Is the lever both sides are bargaining over really the strongest one?",
@@ -43816,7 +43806,7 @@
       "L2": ""
      },
      "candidate_md": "Объясни, почему получилось именно так. Что здесь работает механически?",
-     "interviewer_md": "Зачёт, если ВСЕ: (1) названо, что резерв держится на заявленный пик,\nа тариф собирается с фактического потребления, и разрыв в 351 МВт — это не убыток ЦОД\nи не убыток сети, а счёт населения; (2) сказано, что торг о тарифе в границах регуляторного потолка даёт меньше пятой\nчасти переноса резерва — $13.85M против $73.44M; (3) **не** утверждается, что ЦОД «недоплачивает» — он платит ровно по договору,\nдефект в том, за что договор берёт плату.",
+     "interviewer_md": "Зачёт, если ВСЕ: (1) названо, что резерв держится на заявленный пик,\nа тариф собирается с фактического потребления, и разрыв в 351 МВт — это не убыток ЦОД\nи не убыток сети, а счёт населения; (2) сказано, что торг о тарифе одной индексацией даёт меньше пятой\nчасти годового переноса резерва — $13.85M против $73.44M; (3) **не** утверждается, что ЦОД «недоплачивает» — он платит ровно по договору,\nдефект в том, за что договор берёт плату.",
      "candidate_md_en": "Explain why it came out exactly that way. What is working here mechanically?"
     },
     {
@@ -43829,7 +43819,7 @@
       "L2": ""
      },
      "candidate_md": "При каком значении ключевой величины вывод меняется на противоположный?",
-     "interviewer_md": "```\nнадбавка, при которой торг сравнялся бы с переносом:\n$73.44M / 4.809 млрд = $0.015271 за кВт·ч = +31.81% к тарифу\nпотолок регулятора +6.0% -> максимум, что даёт торг = $13.85M\n```\n**Ответ: порог $0.015271 недостижим по регламенту.** Регулятор допускает рост 6.0%,\nнужен 31.81%. Зачёт за произнесённое: рычаг, который упирается в регламент, — это\nне медленный рычаг, а отсутствующий.",
+     "interviewer_md": "```\nнадбавка, при которой торг сравнялся бы с переносом:\n$73.44M / 4.809 млрд = $0.015271 за кВт·ч = +31.81% к тарифу\nпотолок ex1 — 6.0% в год: это предел темпа, а не уровня\nнужный тариф $0.048 + $0.015271 = $0.063271\n4 индексации по 6.0%: тариф $0.060599 -> торг $60.59M, мало на $12.85M\n5 индексаций:         тариф $0.064235 -> торг $78.08M, перебор $4.64M\nв первый год потолок держит торг на $13.85M\n```\n**Ответ: порог $0.015271 берётся на пятый год максимальных индексаций.** Регулятор\nограничивает темп — 6.0% в год, — а не уровень: за четыре года тариф доходит до\n$0.060599, торг даёт $60.59M и не добирает $12.85M; на пятый год тариф $0.064235,\nторг даёт $78.08M против $73.44M переноса. Зачёт за произнесённое: рычаг,\nупирающийся в темп регламента, — это медленный рычаг, а не отсутствующий,\nи в первый год он приносит $13.85M. Ловушка: прочитавший «6.0% в год» как потолок\nуровня объявит нужные +31.81% недостижимыми и снимет с доски пять лет, которые ex1\nразрешает.",
      "candidate_md_en": "At what value of the key quantity does the conclusion turn into its opposite?"
     },
     {
@@ -43855,7 +43845,7 @@
       "L2": ""
      },
      "candidate_md": "Дай рекомендацию: вывод первым, затем факты с числами, риски и следующие шаги.",
-     "interviewer_md": "> Мы рекомендуем **не добиваться повышения тарифа, а вынести плату за резервируемую\n> мощность в отдельную статью и выставить её подключаемому** — торг о киловатт-часе\n> упирается в потолок регулятора и в его границах закрывает меньше пятой части проблемы.\n>\n> Три факта. Первое: ЦОД заявляет 900 МВт, берёт 549, и сеть обязана держать резерв\n> на весь заявленный пик — 351 МВт стоят под нагрузкой, которой нет. Второе: полная\n> стоимость этого резерва $73.44M в год против $13.85M, которые надбавка может дать\n> в границах регуляторного потолка 6.0% ($0.048 × 6.0% = $0.00288 за кВт·ч), — рычаг\n> больше в 5.30 раза; обсуждаемые правлением $0.005 дают +10.42% и лежат вне\n> регламента. Третье: чтобы торг сравнялся с переносом,\n> тариф должен вырасти на 31.81% при регуляторном потолке в 6.0%, то есть этот путь\n> закрыт не переговорами, а регламентом.\n>\n> Риски. Внутренний: отдельная плата за заявленную мощность меняет договорную модель\n> для всех крупных потребителей, а не только для ЦОД, и часть из них пересогласует\n> условия вниз. Внешний: подключаемый может уйти в соседний штат, и тогда сеть\n> останется с построенным резервом и без выручки — поэтому плата вводится с переходным\n> периодом, а не с даты решения.\n>\n> Следующие шаги: за шесть недель — расчёт платы за заявленную мощность по всем\n> потребителям свыше 100 МВт и оценка, сколько из них завышают заявку; параллельно —\n> проект тарифного решения с возвратом неиспользованной заявки, чтобы у ЦОД был стимул\n> заявлять точно, а не с запасом.",
+     "interviewer_md": "> Мы рекомендуем **не добиваться повышения тарифа, а вынести плату за резервируемую\n> мощность в отдельную статью и выставить её подключаемому** — торг о киловатт-часе\n> упирается в потолок темпа и одной индексацией закрывает меньше пятой части\n> проблемы.\n>\n> Три факта. Первое: ЦОД заявляет 900 МВт, берёт 549, и сеть обязана держать резерв\n> на весь заявленный пик — 351 МВт стоят под нагрузкой, которой нет. Второе: полная\n> стоимость этого резерва $73.44M в год против $13.85M, которые даёт одна\n> индексация потолка 6.0% ($0.048 × 6.0% = $0.00288 за кВт·ч), — рычаг\n> больше в 5.30 раза; обсуждаемые правлением $0.005 дают +10.42% и берутся\n> второй индексацией (1.06² = +12.36%). Третье: чтобы торг сравнялся с переносом,\n> тариф должен вырасти на 31.81%, а регулятор ограничивает темп — 6.0% в год: даже\n> пятью максимальными индексациями подряд тариф доходит до $0.064235 только\n> на пятый год (за четыре года $0.060599, торг $60.59M против $73.44M), то есть\n> тарифный путь не закрыт регламентом, он растянут на пять лет, а плата за резерв\n> стоит $73.44M уже в этом году.\n>\n> Риски. Внутренний: отдельная плата за заявленную мощность меняет договорную модель\n> для всех крупных потребителей, а не только для ЦОД, и часть из них пересогласует\n> условия вниз. Внешний: подключаемый может уйти в соседний штат, и тогда сеть\n> останется с построенным резервом и без выручки — поэтому плата вводится с переходным\n> периодом, а не с даты решения.\n>\n> Следующие шаги: за шесть недель — расчёт платы за заявленную мощность по всем\n> потребителям свыше 100 МВт и оценка, сколько из них завышают заявку; параллельно —\n> проект тарифного решения с возвратом неиспользованной заявки, чтобы у ЦОД был стимул\n> заявлять точно, а не с запасом.",
      "candidate_md_en": "Give a recommendation: the conclusion first, then the facts with numbers, the risks and the next steps."
     }
    ],
@@ -43866,7 +43856,7 @@
    "trap_subtype": "action",
    "lang": "ru",
    "lang_note": "RU-native, партия 201–235 блок A, жанр «реальные сюжеты, свои числа»",
-   "difficulty_test": "Цена киловатт-часа — единственное, о чём торгуются обе стороны, и самый слабый рычаг: обсуждаемая надбавка $0.005 — это +10.42% при регуляторном потолке 6.0%, и в границах потолка торг даёт $13.85M против $73.44M платы за резерв. Резерв держится на заявленный пик, а платит за него бытовой тариф.",
+   "difficulty_test": "Цена киловатт-часа — единственное, о чём торгуются обе стороны, и самый слабый рычаг: обсуждаемая надбавка $0.005 — это +10.42% при потолке роста 6.0% в год, и одной индексацией торг даёт $13.85M против $73.44M годовой платы за резерв. Резерв держится на заявленный пик, а платит за него бытовой тариф.",
    "difficulty_family": "F9",
    "status": "live",
    "prompt_md_en": "> *The situation as at July 2026.*\n>\n> **Grendaal Power**, a regional network company, is connecting a large data centre.\n> The tariff commission has received complaints: household bills have risen, and everyone points to\n> the data centre. The board is preparing a negotiating position — **to obtain from the data centre a\n> higher tariff per kilowatt-hour**.\n>\n> The commission asks for the position to be checked before the hearings. The data is in ex1.",
@@ -46647,9 +46637,9 @@
       "L1": "",
       "L2": ""
      },
-     "candidate_md": "Пересчитай с учётом новых данных. Какой ответ теперь и чем он отличается от первого?",
+     "candidate_md": "Прежде чем открывать распределение: при каком условии «на стриминг» верно для каждого фильма?",
      "interviewer_md": "Прежде чем открывать\nраспределение: при каком условии «на стриминг» верно для каждого фильма? Ожидается:\nтолько если сборы всех фильмов примерно равны средней. Кандидат обязан назвать это\nДО ex2. *(выдать ex2)*",
-     "candidate_md_en": "Recalculate taking the new data into account. What is the answer now and how does it differ from the first one?"
+     "candidate_md_en": "Before opening the distribution: on what condition is «to streaming» right for every film?"
     },
     {
      "step": 4,
@@ -47270,10 +47260,10 @@
      "title": "Оборот, премия и типичный год",
      "reveal": "auto",
      "triggers": [],
-     "body_md": "```\nОБОРОТ И РИСК\n\nоборот в сети            ████████████████████████████████ $186.0B\nприбыль сегодня          ██████ $340.0M\n\nв ставке интерчейнджа заложена премия за риск: $210.0M в год\nпотолок регулятора эту премию снимает\n\nвозвраты в ПОСЛЕДНЕМ году: 0.04% оборота\n```",
+     "body_md": "```\nОБОРОТ И РИСК\n\nоборот в сети            ████████████████████████████████ $186.0B\nприбыль сегодня          ██████ $340.0M (до потерь по возвратам)\n\nв ставке интерчейнджа заложена премия за риск: $210.0M в год\nпотолок регулятора эту премию снимает\n\nвозвраты в ПОСЛЕДНЕМ году: 0.04% оборота\n```",
      "render": null,
      "title_en": "Turnover, the premium and a typical year",
-     "body_md_en": "```\nTURNOVER AND RISK\n\nturnover in the network  ████████████████████████████████ $186.0B\nprofit today             ██████ $340.0M\n\nthe interchange rate carries a risk premium of $210.0M a year\nthe regulator's cap takes that premium away\n\nchargebacks in the LAST year: 0.04% of turnover\n```"
+     "body_md_en": "```\nTURNOVER AND RISK\n\nturnover in the network  ████████████████████████████████ $186.0B\nprofit today             ██████ $340.0M (before chargeback losses)\n\nthe interchange rate carries a risk premium of $210.0M a year\nthe regulator's cap takes that premium away\n\nchargebacks in the LAST year: 0.04% of turnover\n```"
     },
     {
      "id": "ex2",
@@ -49319,7 +49309,7 @@
    "naive_error": "E18",
    "generation": null,
    "est_minutes": "40",
-   "header_md": "## Case 234 — Battery Not Included\n\n> **ПЛАШКА** · Cost Reduction · Логистика · **Medium** · ⚠️ STANDARD\n> **T/C:** Trap-overstate · **Семья:** F4 неназванное ограничение · **Ошибка:** E18\n> **Экзибиты (2):** timeline владения · table · **Слои:** [MM]\n> **difficulty_test:** С субсидией доплата за электромашину $20,000 и окупаемость\n> 1.25 года — менять весь парк. Субсидия действует два года, а замена парка занимает\n> четыре: половина машин будет куплена без неё, с доплатой $54,000. Решение «менять»\n> устойчиво, но выигрыш $100.58M вместо $116.56M.",
+   "header_md": "## Case 234 — Battery Not Included\n\n> **ПЛАШКА** · Cost Reduction · Логистика · **Medium** · ⚠️ STANDARD\n> **T/C:** Trap-overstate · **Семья:** F4 неназванное ограничение · **Ошибка:** E18\n> **Экзибиты (2):** timeline владения · table · **Слои:** [MM]\n> **difficulty_test:** С субсидией доплата за электромашину $20,000 и окупаемость\n> 1.25 года — менять весь парк. Субсидия действует два года, а замена парка занимает\n> четыре: половина машин будет куплена без неё, с доплатой $54,000. Экономика\n> машины устойчива, но выигрыш $100.58M вместо $116.56M — ниже планки комитета $110.0M.",
    "prompt_md": "> *Ситуация на июль 2026 года.*\n>\n> **Rydder Fleet** переводит парк развозных машин на электротягу. Совет получил расчёт\n> окупаемости с учётом действующей субсидии и готов утверждать замену всего парка.\n>\n> Проверить расчёт. Данные — в ex1.",
    "exhibits": [
     {
@@ -49410,7 +49400,7 @@
       "L2": ""
      },
      "candidate_md": "Объясни, почему получилось именно так. Что здесь работает механически?",
-     "interviewer_md": "Зачёт, если ВСЕ: (1) названо, что ограничение не в деньгах,\nа в сроке замены — четыре года против двухлетнего окна; (2) сказано, что даже\nбез субсидии окупаемость 3.375 года укладывается в срок службы, поэтому решение\nне переворачивается; (3) **не** утверждается, что субсидию можно не учитывать —\nона реальна для половины парка.",
+     "interviewer_md": "Зачёт, если ВСЕ: (1) названо, что ограничение не в деньгах,\nа в сроке замены — четыре года против двухлетнего окна; (2) сказано, что даже\nбез субсидии окупаемость 3.375 года укладывается в срок службы, поэтому\nне переворачивается экономика машины — переворачивает решение не она,\nа число машин, успевших в окно; (3) **не** утверждается, что субсидию можно не учитывать —\nона реальна для половины парка.",
      "candidate_md_en": "Explain why it came out exactly that way. What is working here mechanically?"
     },
     {
@@ -49423,7 +49413,7 @@
       "L2": ""
      },
      "candidate_md": "При каком значении ключевой величины вывод меняется на противоположный?",
-     "interviewer_md": "```\nбез субсидии замена окупается за 3.375 года при сроке службы 9 лет\nконтроль: 3.375 × $16,000 = $54,000 = доплата\nзапас 166.67%\n```\n**Ответ: порог 3.375 года при сроке службы 9 лет.** Зачёт за произнесённое: проект устойчив и без субсидии,\nпоэтому её окончание меняет размер выигрыша, а не решение.\n\n**Порог по ориентиру.** Планка комитета $110.0M достигается, если в окно субсидии попадает 748 машин из 940, а не 470: каждая машина в окне добавляет $34,000, база без субсидии $84.60M. **Это и есть рабочий вывод: решение упирается не в экономику машины, а в график поставок — надо либо ускорять его до 748 машин за два года, либо отдавать капитал складам.**",
+     "interviewer_md": "```\nбез субсидии замена окупается за 3.375 года при сроке службы 9 лет\nконтроль: 3.375 × $16,000 = $54,000 = доплата\nзапас 166.67%\n\nвыигрыш при n машинах в окне = $84.60M + $0.034M × n\nсоседи: 747 → $109.998M, планка $110.0M не берётся\n        748 → $110.032M, берётся\nфакт n = 470 → $100.58M\n```\n**Ответ: порог 748 машин в окне субсидии против фактических 470; окупаемость\n3.375 года при сроке службы 9 лет запаса не теряет и решения не меняет.**\nЗачёт за произнесённое: экономика машины устойчива и без субсидии,\nпоэтому её окончание меняет не окупаемость машины, а число машин, купленных\nв окне, — и через него решение: $100.58M против планки $110.0M.\n\n**Порог по ориентиру.** Планка комитета $110.0M достигается, если в окно субсидии попадает 748 машин из 940, а не 470: каждая машина в окне добавляет $34,000, база без субсидии $84.60M. **Это и есть рабочий вывод: решение упирается не в экономику машины, а в график поставок — надо либо ускорять его до 748 машин за два года, либо отдавать капитал складам.**",
      "candidate_md_en": "At what value of the key quantity does the conclusion turn into its opposite?"
     },
     {
@@ -49462,7 +49452,7 @@
       "L2": ""
      },
      "candidate_md": "Дай рекомендацию: вывод первым, затем факты с числами, риски и следующие шаги.",
-     "interviewer_md": "> Мы рекомендуем **не утверждать замену в нынешнем графике: при 470 машинах в окне выигрыш $100.58M ниже планки $110.0M. Утверждать только с ускоренным графиком поставок,\n> чтобы в окно субсидии попало больше 470 машин** — выигрыш $100.58M, а не $116.56M,\n> и разница целиком в сроках, а не в экономике машины.\n>\n> Три факта. Первое: экономия $16,000 на машину в год реальна и не зависит\n> от субсидии. Второе: субсидия действует два года, а замена парка занимает четыре —\n> половина машин будет куплена с доплатой $54,000 вместо $20,000. Третье: даже\n> без субсидии окупаемость 3.375 года против срока службы девять лет, то есть решение\n> устойчиво, и вопрос только в размере выигрыша.\n>\n> Риски. Внутренний: ускорение графика упирается в зарядную инфраструктуру,\n> и она строится не быстрее поставок — узкое место надо проверить до того,\n> как менять заказ. Внешний: субсидия может быть отменена досрочно или продлена;\n> план должен быть посчитан в обоих сценариях, а не в одном.\n>\n> Следующие шаги: за четыре недели — переговоры с поставщиком об ускорении первых\n> двух лет и расчёт зарядной инфраструктуры под ускоренный график; параллельно —\n> сценарий с досрочной отменой субсидии, чтобы решение не зависело от одной даты.",
+     "interviewer_md": "> Мы рекомендуем **не утверждать замену в нынешнем графике: при 470 машинах в окне выигрыш $100.58M ниже планки $110.0M. Утверждать только с ускоренным графиком поставок,\n> чтобы в окно субсидии попало не меньше 748 машин из 940** — в нынешнем графике выигрыш $100.58M, а не $116.56M,\n> и разница целиком в сроках, а не в экономике машины.\n>\n> Три факта. Первое: экономия $16,000 на машину в год реальна и не зависит\n> от субсидии. Второе: субсидия действует два года, а замена парка занимает четыре —\n> половина машин будет куплена с доплатой $54,000 вместо $20,000. Третье: даже\n> без субсидии окупаемость 3.375 года против срока службы девять лет, то есть\n> устойчива экономика машины; решает не она, а число машин в окне: планка\n> $110.0M берётся с 748 машин, а в нынешнем графике их 470.\n>\n> Риски. Внутренний: ускорение графика упирается в зарядную инфраструктуру,\n> и она строится не быстрее поставок — узкое место надо проверить до того,\n> как менять заказ. Внешний: субсидия может быть отменена досрочно или продлена;\n> план должен быть посчитан в обоих сценариях, а не в одном.\n>\n> Следующие шаги: за четыре недели — переговоры с поставщиком об ускорении первых\n> двух лет и расчёт зарядной инфраструктуры под ускоренный график; параллельно —\n> сценарий с досрочной отменой субсидии, чтобы решение не зависело от одной даты.",
      "candidate_md_en": "Give a recommendation: the conclusion first, then the facts with numbers, the risks and the next steps."
     }
    ],
@@ -49473,7 +49463,7 @@
    "trap_subtype": "overstate",
    "lang": "ru",
    "lang_note": "RU-native, партия 201–235 блоки G и H, жанр «реальные сюжеты, свои числа»",
-   "difficulty_test": "С субсидией доплата за электромашину $20,000 и окупаемость 1.25 года — менять весь парк. Субсидия действует два года, а замена парка занимает четыре: половина машин будет куплена без неё, с доплатой $54,000. Решение «менять» устойчиво, но выигрыш $100.58M вместо $116.56M.",
+   "difficulty_test": "С субсидией доплата за электромашину $20,000 и окупаемость 1.25 года — менять весь парк. Субсидия действует два года, а замена парка занимает четыре: половина машин будет куплена без неё, с доплатой $54,000. Экономика машины устойчива, но выигрыш $100.58M вместо $116.56M — ниже планки комитета $110.0M.",
    "difficulty_family": "F4",
    "status": "live",
    "gap_line": "наив считает всю замену по субсидии: 940 × ($16,000 × 9 − $20,000) = +$116.56M → это выше планки комитета $110.0M, проект утверждается · верно: субсидия действует 2 года, замена парка занимает 4, в окно попадает 470 машин, остальные идут с доплатой $54,000: $58.28M + $42.30M = +$100.58M → это НИЖЕ планки, капитал уходит в модернизацию складов · разрыв $15.98M и смена действия · механизм: ограничение по срокам замены не считается ограничением в наивной рамке",
@@ -49588,15 +49578,15 @@
      "depends_on": [],
      "conditional_exhibits": [],
      "hints": {
-      "L1": "Убыток маршрута — это весь его вклад в компанию?",
-      "L2": "Поставь рядом убыток регионального рейса и прибыль дальнего, которая живёт его пассажиром."
+      "L1": "Все 46 региональных маршрутов одинаково нужны дальним рейсам?",
+      "L2": "Поставь рядом две группы региональных маршрутов и то, что каждая из них даёт дальним рейсам."
      },
-     "candidate_md": "Пересчитай с учётом новых данных. Какой ответ теперь и чем он отличается от первого?",
+     "candidate_md": "Что здесь работает вместо этого и сколько это стоит по числам?",
      "interviewer_md": "```\n18 маршрутов дают подвоз, 28 не дают\nзакрыть 28: $84.0M × 28 / 46 = $51.13M, дальние не тронуты\n```\n**Ответ: закрыть 28 маршрутов, оставить 18.** Зачёт только за понятое: решение\nпринимается не по знаку результата маршрута, а по его вкладу в сеть, и эти два\nпризнака не совпадают.",
-     "candidate_md_en": "Recalculate taking the new data into account. What is the answer now and how does it differ from the first one?",
+     "candidate_md_en": "What works here instead of that, and how much does it cost by the numbers?",
      "hints_en": {
-      "L1": "Is a route's loss its whole contribution to the company?",
-      "L2": "Put the loss of the regional flight and the profit of the long-haul that lives off its passenger side by side."
+      "L1": "Are all 46 regional routes equally needed by the long-haul flights?",
+      "L2": "Put the two groups of regional routes and what each of them gives the long-haul flights side by side."
      }
     },
     {
@@ -49609,7 +49599,7 @@
       "L2": ""
      },
      "candidate_md": "При каком значении ключевой величины вывод меняется на противоположный?",
-     "interviewer_md": "```\nзакрыть всё выгодно, если без регионалки остаётся больше 43.20% подвозных пассажиров\nконтроль: потеря при 43.20% = $84.0M = убыток регионалки\nфакт 34% · разрыв 9.20 пункта\n```\n**Ответ: порог 43.20% против фактических 34%.** Зачёт за произнесённое: решение держится на одной величине —\nдоле остающихся пассажиров, — и её надо мерить, а не оценивать; разрыв в девять\nпунктов это предмет замера, а не спора.",
+     "interviewer_md": "```\nзакрыть ВСЁ выгоднее, чем закрыть 28, если без регионалки остаётся\nбольше 77.78% подвозных пассажиров\nконтроль: потеря дальних в точке порога = $32.87M\n          = убыток 18 подвозных, 84.0 × 18/46\nсоседи: при 77.77% закрыть всё = $51.12M против $51.13M у «закрыть 28»\n        при 77.78% закрыть всё = $51.14M против тех же $51.13M\nфакт 34% · разрыв 43.78 пункта\n```\n**Ответ: порог 77.78% против фактических 34%.** Зачёт за произнесённое: порог\nмеряется против действующей альтернативы, а не против нуля, — «закрыть 28»\nвыигрывает на всём диапазоне до 77.78%, а долю остающихся пассажиров всё\nравно надо мерить, а не оценивать: она стоит 43.78 пункта запаса, а не девять.\nЛовушка: 43.20% — это порог «закрыть всё» против «оставить всё», но\nэта база отброшена: 28 маршрутов подвоза не дают и снимаются при любом\nудержании.",
      "candidate_md_en": "At what value of the key quantity does the conclusion turn into its opposite?"
     },
     {
@@ -49635,7 +49625,7 @@
       "L2": ""
      },
      "candidate_md": "Дай рекомендацию: вывод первым, затем факты с числами, риски и следующие шаги.",
-     "interviewer_md": "> Мы рекомендуем **закрыть 28 региональных маршрутов, не дающих подвоза, и сохранить\n> 18 подвозных** — это даёт $51.13M, тогда как закрытие всех 46 отнимает $13.61M.\n>\n> Три факта. Первое: 29% пассажиров дальних рейсов приходят с региональных,\n> и это $147.90M прибыли дальних. Второе: без регионалки остаётся только 34% таких\n> пассажиров, и мы теряем $97.61M при убытке регионалки $84.0M. Третье: 18 маршрутов\n> из 46 дают весь подвоз; оставшиеся 28 — точка-точка внутри региона, их убыток\n> $51.13M снимается без последствий для дальних.\n>\n> Риски. Внутренний: результат маршрута в управленческой отчётности считается\n> изолированно, без вклада в подвоз — следующее решение о сокращении придёт с той же\n> ошибкой, поэтому методику надо менять до объявления. Внешний: доля 34% дана\n> в данных одной строкой, без источника, и ошибка в ней стоит дороже всего остального:\n> закрывать все 46 выгодно уже с 43.20%, а от факта этот порог отделяют 9.20 пункта.\n> Если хаб конкурента доступен из этих регионов хуже, чем предполагает оценка,\n> удержание выше 34% — и тогда мы недозакрываем сеть, а не перезакрываем.\n>\n> Следующие шаги: за пять недель — замерить фактическое удержание по бронированиям\n> тех 29% пассажиров дальних рейсов, что приходят с 18 подвозных маршрутов,\n> и сверить результат с порогом 43.20%; параллельно — переговоры о код-шеринге\n> на подвозных направлениях как о варианте, где мы сохраняем пассажира без\n> собственного флота.",
+     "interviewer_md": "> Мы рекомендуем **закрыть 28 региональных маршрутов, не дающих подвоза, и сохранить\n> 18 подвозных** — это даёт $51.13M, тогда как закрытие всех 46 отнимает $13.61M.\n>\n> Три факта. Первое: 29% пассажиров дальних рейсов приходят с региональных,\n> и это $147.90M прибыли дальних. Второе: без регионалки остаётся только 34% таких\n> пассажиров, и мы теряем $97.61M при убытке регионалки $84.0M. Третье: 18 маршрутов\n> из 46 дают весь подвоз; оставшиеся 28 — точка-точка внутри региона, их убыток\n> $51.13M снимается без последствий для дальних.\n>\n> Риски. Внутренний: результат маршрута в управленческой отчётности считается\n> изолированно, без вклада в подвоз — следующее решение о сокращении придёт с той же\n> ошибкой, поэтому методику надо менять до объявления. Внешний: доля 34% дана\n> в данных одной строкой, без источника. Сама рекомендация к ней устойчива:\n> закрывать все 46 выгоднее, чем 28, только с 77.78%, а от факта этот порог\n> отделяют 43.78 пункта. Уязвимо другое: 18 подвозных маршрутов мы сознательно\n> держим в убытке $32.87M ради $147.90M прибыли дальних, и если хаб конкурента\n> окажется доступнее из этих регионов, чем предполагает оценка, подвоз уйдёт\n> туда и при работающей регионалке.\n>\n> Следующие шаги: за пять недель — замерить фактическое удержание по бронированиям\n> тех 29% пассажиров дальних рейсов, что приходят с 18 подвозных маршрутов,\n> и сверить результат с порогом 77.78%; параллельно — переговоры о код-шеринге\n> на подвозных направлениях как о варианте, где мы сохраняем пассажира без\n> собственного флота.",
      "candidate_md_en": "Give a recommendation: the conclusion first, then the facts with numbers, the risks and the next steps."
     }
    ],
@@ -49839,7 +49829,7 @@
    "naive_error": "E16",
    "generation": null,
    "est_minutes": "40",
-   "header_md": "## Case 237 — Fuel's Gold\n\n> **ПЛАШКА** · Growth Strategy · Бункеровка судов · **Hard** · 🔥 STRONG\n> **T/C:** Trap-overstate · **Семья:** F8 разворота нет · **Ошибка:** E16\n> **Экзибиты (2):** контракт и маржа · table · **Слои:** [OD] [MM]\n> **difficulty_test:** Контракт take-or-pay на 2.40 Mt даёт по наивному счёту $14.35M\n> в год. Физически отгрузить можно 1.728 Mt: четыре баржи по 4,500 тонн и 96 рейсов.\n> Недобор оплачивается штрафом, эффект падает до $5.95M, а контракт ровно на 1.728 Mt\n> даёт $10.33M. Возражение «докупим баржи» проверяется на горизонте: две новые баржи\n> добавляют $32.15M за восемь лет и стоят $37.0M — не окупаются. Контракт на десять\n> лет без права выхода: ошибка размера оплачивается сорок раз поквартально.",
+   "header_md": "## Case 237 — Fuel's Gold\n\n> **ПЛАШКА** · Growth Strategy · Бункеровка судов · **Hard** · 🔥 STRONG\n> **T/C:** Trap-overstate · **Семья:** F8 разворота нет · **Ошибка:** E16\n> **Экзибиты (2):** контракт и маржа · table · **Слои:** [OD] [MM]\n> **difficulty_test:** Контракт take-or-pay на 2.40 Mt даёт по наивному счёту $14.35M\n> в год. Физически отгрузить можно 1.728 Mt: четыре баржи по 4,500 тонн и 96 рейсов.\n> Недобор оплачивается штрафом, эффект падает до $5.95M, а контракт ровно на 1.728 Mt\n> даёт $10.33M. Возражение «докупим баржи» проверяется на горизонте ПОШТУЧНО: пара\n> добавляет $32.15M за восемь лет против $37.0M и не окупается, а первый\n> борт даёт $20.66688M против цены $18.5M и окупается сам. Контракт\n> на десять лет без права выхода: ошибка размера оплачивается сорок\n> раз поквартально.",
    "prompt_md": "> *Ситуация на июль 2026 года.*\n>\n> **Vitel** заходит в новый бункеровочный хаб и должна подписать долгосрочный\n> контракт на терминальные слоты. Коммерческий директор предлагает брать объём\n> под весь план продаж — слоты дефицитны, второй раз их не дадут.\n>\n> Решить, на какой объём подписываться. Данные — в ex1.",
    "exhibits": [
     {
@@ -49960,7 +49950,7 @@
       "L2": ""
      },
      "candidate_md": "При каком значении ключевой величины вывод меняется на противоположный?",
-     "interviewer_md": "```\nВОЗРАЖЕНИЕ КАНДИДАТА: «подпишем 2.40 и закажем баржи». Считаем на горизонт:\n\n  наив как есть   (контракт 2.40, флот 4)                    $59.52M\n  A  контракт 2.40 + две новые баржи                         $89.72M\n  B  контракт 1.728, барж не докупаем                       $103.33M\n  C  лестница 1.728 → 2.40 с третьего года + две баржи       $98.48M\n\nлучший вариант с баржами — C; он добавляет к B $32.15M валовыми за восемь лет\nи требует $37.0M на две баржи, поэтому C проигрывает B на $4.85M\nпорог: лестница с баржами обгоняет B при цене баржи ниже $16.07M · факт $18.5M · разрыв 15.09%\n\nвторой порог: наивный контракт остаётся в плюсе, пока отгружаем больше 1.252 Mt\nконтроль: 1.252 × $9.40 − $8.21M − (2.40 − 1.252) × $3.10 = $0.00M\n```\n**Ответ: лучший вариант — B, контракт по флоту без докупки. Порог цены баржи $16.07M против фактических $18.5M.**\nЗачёт за произнесённое: наивный контракт не убыточен — он просто хуже правильного\nна $43.81M за горизонт, и именно поэтому ошибку не поймают десять лет.\n\n**Порог по ориентиру.** Контракт на 2.40 Mt обгоняет слот во втором хабе ($8.00M), только если потолок отгрузки не ниже 1.892 Mt — это 4.38 баржи, то есть нужен пятый борт при четырёх имеющихся. **Порог считается не по марже и не по цене слота, а по флоту: он и есть ограничение.**",
+     "interviewer_md": "```\nВОЗРАЖЕНИЕ КАНДИДАТА: «подпишем 2.40 и закажем баржи». Считаем на горизонт:\n\n  наив как есть   (контракт 2.40, флот 4)                    $59.52M\n  A  контракт 2.40 + две новые баржи                         $89.72M\n  B  контракт 1.728, барж не докупаем                       $103.33M\n  C  лестница 1.728 → 2.40 с третьего года + две баржи       $98.48M\n  C1 лестница 1.728 → 2.160 с третьего года + одна баржа    $105.50M\n\nпара барж действительно не окупается: $32.15M валовыми за восемь лет\nпротив $37.0M, поэтому C проигрывает B на $4.85M\nно борта считаются поштучно:\n  первый  0.432 Mt (4,500 × 96) × $5.98 × 8 лет = $20.66688M против $18.5M\n          -> +$2.17M\n  второй  упирается в план 2.40: (2.40 − 2.16) × $5.98 × 8 = $11.48M\n          -> −$7.02M\nпорог цены первого борта $20.66688M (при $20.67M борт уже не окупается),\nвторого $11.48160M; факт $18.5M между ними\n$16.07M = 32.14848 / 2 — это среднее по паре, а не порог одного борта\n\nвторой порог: наивный контракт остаётся в плюсе, пока отгружаем больше 1.252 Mt\nконтроль: 1.252 × $9.40 − $8.21M − (2.40 − 1.252) × $3.10 = $0.00M\n```\n**Ответ: лучший вариант — C1: лестница 1.728 → 2.160 Mt с третьего года\nи ОДНА новая баржа, $105.50M против $103.33M у B. Порог цены первого борта\n$20.66688M, второго $11.48160M, факт $18.5M лежит между ними.**\nЗачёт за произнесённое: наивный контракт не убыточен — он просто хуже\nконтракта по флоту на $43.81M за горизонт, и именно поэтому ошибку\nне поймают десять лет.\nЛовушка: пара барж нужна только плану 2.40 Mt (2.40 / 0.432 = 5.56 ->\nшесть бортов); кто считает баржи парой, получает средний порог $16.07M\nи отвергает борт, который окупается сам.\n\n**Порог по ориентиру.** Контракт на 2.40 Mt обгоняет слот во втором хабе ($8.00M), только если потолок отгрузки не ниже 1.892 Mt — это 4.38 баржи, то есть нужен пятый борт при четырёх имеющихся — тот самый, который окупается сам; берём мы его под контракт 2.160 Mt, а не под 2.40 Mt: под 2.40 Mt проигрывает не борт, а сам контракт — A $89.72M против C1 $105.50M. **Порог считается не по марже и не по цене слота, а по флоту: он и есть ограничение — и снимается оно поштучно, а не парой.**",
      "candidate_md_en": "At what value of the key quantity does the conclusion turn into its opposite?"
     },
     {
@@ -49973,7 +49963,7 @@
       "L2": ""
      },
      "candidate_md": "Какие ходы здесь возможны? Не меньше шести, сгруппированных по логике.",
-     "interviewer_md": "Шесть ходов, чтобы поднять отгрузку без покупки барж. MECE.\nЗачёт ≥6 в ≥2 группах.\n*Флот и операции:* субчартер у местного оператора под пик · ночная бункеровка\nдля роста числа рейсов · сокращение оборота у причала · баржа большей\nгрузоподъёмности при плановой замене тайм-чартера.\n*Контракт:* лестница объёма по годам вместо плоского обязательства · право\nпереуступки слота третьей стороне · зачёт недобора против перевыполнения соседнего\nгода · опцион на расширение вместо обязательства.",
+     "interviewer_md": "Шесть ходов, чтобы поднять отгрузку без новых капитальных затрат — сверх того\nединственного борта, который окупается сам. MECE.\nЗачёт ≥6 в ≥2 группах; лестница объёма уже отдана ключом шага 6\nи в зачёт не идёт — нужны шесть других.\n*Флот и операции:* субчартер у местного оператора под пик · ночная бункеровка\nдля роста числа рейсов · сокращение оборота у причала · баржа большей\nгрузоподъёмности при плановой замене тайм-чартера.\n*Контракт:* лестница объёма по годам вместо плоского обязательства · право\nпереуступки слота третьей стороне · зачёт недобора против перевыполнения соседнего\nгода · опцион на расширение вместо обязательства.",
      "candidate_md_en": "What moves are possible here? At least six, grouped by their logic."
     },
     {
@@ -49986,7 +49976,7 @@
       "L2": ""
      },
      "candidate_md": "Дай рекомендацию: вывод первым, затем факты с числами, риски и следующие шаги.",
-     "interviewer_md": "> Мы рекомендуем **подписать контракт на 1.728 Mt с опционом на расширение и не брать слот во втором хабе\n> и не заказывать новые баржи** — это даёт $103.33M за горизонт против $89.72M\n> у варианта с полным объёмом и флотом и против $59.52M у полного объёма без флота.\n>\n> Ноль. Альтернатива на том же флоте — слот второго хаба с эффектом $8.00M в год: контракт по флоту даёт $10.33M и её обгоняет, а контракт на полный объём $5.95M — не обгоняет. Именно поэтому объём контракта, а не наличие слота, и есть решение.\n>\n> Три факта. Первое: физический потолок отгрузки — четыре баржи по 4,500 тонн\n> и 96 рейсов, то есть 1.728 Mt против плана продаж в 2.40 Mt. Второе: каждая\n> законтрактованная и не отгруженная тонна стоит $6.52 — слот $3.42 плюс штраф\n> $3.10, и на разнице объёмов это $4.38M в год все десять лет. Третье: докупка\n> двух барж проверена и отклонена счётом: лучший вариант с ними — лестница C,\n> она добавляет к B $32.15M валовыми за восемь лет и требует $37.0M, то есть\n> проигрывает B на $4.85M и окупалась бы лишь при цене баржи ниже $16.07M.\n>\n> Риски. Внутренний: план продаж уже стал целевой цифрой для коммерческой команды,\n> и опцион на расширение будет прочитан как согласие на 2.40 Mt — объём в бюджете\n> надо переставить на 1.728 Mt одновременно с подписанием. Внешний: терминал\n> дефицитен и может отказать в опционе; тогда правильный ход — лестница объёма\n> по годам, но её цена известна заранее: вариант C хуже варианта B на $4.85M.\n>\n> Следующие шаги: за четыре недели — переговорная позиция по опциону с расчётом\n> $6.52 за тонну переподписки как аргументом; параллельно — проработка субчартера\n> под пиковые месяцы, который поднимает потолок отгрузки без капитальных затрат\n> и без десятилетнего обязательства.",
+     "interviewer_md": "> Мы рекомендуем **подписать контракт лестницей — 1.728 Mt, а с третьего года\n> 2.160 Mt, — заказать ОДНУ новую баржу и не брать слот во втором хабе** — это\n> даёт $105.50M за горизонт против $103.33M у того же контракта без баржи,\n> $89.72M у полного объёма с двумя баржами и $59.52M у объёма без флота.\n>\n> Ноль. Альтернатива на том же флоте — слот второго хаба с эффектом $8.00M в год: контракт по флоту даёт $10.33M и её обгоняет, а контракт на полный объём $5.95M — не обгоняет. Именно поэтому объём контракта, а не наличие слота, и есть решение.\n>\n> Три факта. Первое: физический потолок отгрузки — четыре баржи по 4,500 тонн\n> и 96 рейсов, то есть 1.728 Mt против плана продаж в 2.40 Mt. Второе: каждая\n> законтрактованная и не отгруженная тонна стоит $6.52 — слот $3.42 плюс штраф\n> $3.10, и на разнице объёмов это $4.38M в год все десять лет. Третье: борта\n> считаются поштучно: первый везёт 0.432 Mt и даёт $20.67M за восемь лет\n> против цены $18.5M, второй упирается в план продаж 2.40 Mt — его приростные\n> 0.24 Mt дают всего $11.48M, — поэтому пара ($32.15M валовыми против $37.0M,\n> минус $4.85M к B) отклонена, а один борт взят.\n>\n> Риски. Внутренний: план продаж уже стал целевой цифрой для коммерческой\n> команды, и лестница будет прочитана как согласие дойти до 2.40 Mt — объём\n> в бюджете надо переставить на 1.728 Mt, а с третьего года на 2.160 Mt,\n> одновременно с подписанием. Внешний: терминал дефицитен и может отказать\n> в лестнице; тогда правильный ход — плоский контракт на 1.728 Mt, и его цена\n> известна заранее: $103.33M против $105.50M, то есть $2.17M, а борт\n> без второй ступени не нужен.\n>\n> Следующие шаги: за четыре недели — переговорная позиция по лестнице объёма\n> с расчётом $6.52 за тонну переподписки как аргументом и заказ одного борта,\n> чтобы 26 месяцев постройки закончились к третьей ступени; параллельно —\n> проработка субчартера\n> под пиковые месяцы, который поднимает потолок отгрузки без капитальных затрат\n> и без десятилетнего обязательства.",
      "candidate_md_en": "Give a recommendation: the conclusion first, then the facts with numbers, the risks and the next steps."
     }
    ],
@@ -49997,7 +49987,7 @@
    "trap_subtype": "overstate",
    "lang": "ru",
    "lang_note": "RU-native, партия 236–270 блок A, жанр «реальные сюжеты, свои числа»",
-   "difficulty_test": "Контракт take-or-pay на 2.40 Mt даёт по наивному счёту $14.35M в год. Физически отгрузить можно 1.728 Mt: четыре баржи по 4,500 тонн и 96 рейсов. Недобор оплачивается штрафом, эффект падает до $5.95M, а контракт ровно на 1.728 Mt даёт $10.33M. Возражение «докупим баржи» проверяется на горизонте: две новые баржи добавляют $32.15M за восемь лет и стоят $37.0M — не окупаются. Контракт на десять лет без права выхода: ошибка размера оплачивается сорок раз поквартально.",
+   "difficulty_test": "Контракт take-or-pay на 2.40 Mt даёт по наивному счёту $14.35M в год. Физически отгрузить можно 1.728 Mt: четыре баржи по 4,500 тонн и 96 рейсов. Недобор оплачивается штрафом, эффект падает до $5.95M, а контракт ровно на 1.728 Mt даёт $10.33M. Возражение «докупим баржи» проверяется на горизонте ПОШТУЧНО: пара добавляет $32.15M за восемь лет против $37.0M и не окупается, а первый борт даёт $20.66688M против цены $18.5M и окупается сам. Контракт на десять лет без права выхода: ошибка размера оплачивается сорок раз поквартально.",
    "difficulty_family": "F8",
    "reasoning_form": "Ф8",
    "status": "live",
@@ -50106,7 +50096,7 @@
       "L2": "Поставь рядом подведённую мощность и ту, которую ограничивает узкое место цепочки."
      },
      "candidate_md": "Пересчитай с учётом новых данных. Какой ответ теперь и чем он отличается от первого?",
-     "interviewer_md": "```\nцепочка: электричество 42.0 · охлаждение 31.0 · вода 4,104 / 152 = 27.00 МВт\nпродаваемая мощность = 27.00 МВт\n\nзнаменатель: в восьми сделках подведённая мощность равна продаваемой, значит\n   $10.40M — это цена ПРОДАВАЕМОГО МВт; сделки X и Y выглядят дешёвыми\n   только потому, что у них есть разрыв: 22.0 × $10.40M / 38.0 = $6.02M\n\nоценка: 27.00 × $10.40M = $280.80M\nзапас к цене: 280.80 − 268.0 = $12.80M = 4.78%\n```\n**Ответ: брать можно, но запас 4.78%, а не 50%. Наив завышает стоимость на 42.69%\nот меньшей по модулю величины.**",
+     "interviewer_md": "```\nцепочка: электричество 42.0 · охлаждение 31.0 · вода 4,104 / 152 = 27.00 МВт\nпродаваемая мощность = 27.00 МВт\n\nзнаменатель: в восьми сделках подведённая мощность равна продаваемой, значит\n   $10.40M — это цена ПРОДАВАЕМОГО МВт; сделки X и Y выглядят дешёвыми\n   только потому, что у них есть разрыв: 22.0 × $10.40M / 38.0 = $6.02M\n\nоценка: 27.00 × $10.40M = $280.80M\nзапас к цене: 280.80 − 268.0 = $12.80M = 4.78%\n```\n**Ответ: актив дороже цены, но всего на 4.78%, а не на 50%, — и мандат фонда\n(дисконт не менее 15% к собственной оценке) при цене $268.0M НЕ выполняется.\nНаив завышает стоимость на 42.69% от меньшей по модулю величины.**\nЗапас к цене отвечает на вопрос «дороже ли актив, чем просят», а мандат —\nна вопрос «можно ли покупать по этой цене»; решение принимается по второму.",
      "candidate_md_en": "Recalculate taking the new data into account. What is the answer now and how does it differ from the first one?",
      "hints_en": {
       "L1": "Is the multiple of the comparables a property of the market or of those who got into the sample?",
@@ -50123,7 +50113,7 @@
       "L2": ""
      },
      "candidate_md": "Объясни, почему получилось именно так. Что здесь работает механически?",
-     "interviewer_md": "Зачёт, если ВСЕ: (1) названо, что продаётся минимум по цепочке,\nа не подведённая мощность; (2) названо, что средняя $9.54M смешивает два знаменателя:\nдля восьми площадок подведённая мощность и есть продаваемая, а для двух — нет,\nи применять такую среднюю к площадке с разрывом нельзя;\n(3) **не** утверждается, что сделку надо отменить — при запасе 4.78% она проходит,\nно переговорная позиция теперь другая.",
+     "interviewer_md": "Зачёт, если ВСЕ: (1) названо, что продаётся минимум по цепочке,\nа не подведённая мощность; (2) названо, что средняя $9.54M смешивает два знаменателя:\nдля восьми площадок подведённая мощность и есть продаваемая, а для двух — нет,\nи применять такую среднюю к площадке с разрывом нельзя;\n(3) **не** утверждается, что сделку надо отменить — при запасе 4.78% актив\nдороже цены, но мандату эта цена не удовлетворяет, и переговорная позиция\nтеперь другая.",
      "candidate_md_en": "Explain why it came out exactly that way. What is working here mechanically?"
     },
     {
@@ -50136,7 +50126,7 @@
       "L2": ""
      },
      "candidate_md": "При каком значении ключевой величины вывод меняется на противоположный?",
-     "interviewer_md": "```\nсделка остаётся в плюсе при водозаборе от 25.77 МВт = 3,917 м³/сут\nконтроль: 25.77 × $10.40M = $268.0M — ровно цена\nфакт 4,104 м³/сут · запас 4.78%\n\nрасширение водозабора до мощности охлаждения: 31.0 × $10.40M = $322.40M\nрасширение окупается, пока стоит меньше 322.40 − 280.80 = $41.60M\n```\n**Ответ: порог 3,917 м³/сут против фактических 4,104 м³/сут.** Зачёт за произнесённое: сделка держится на разрешении,\nкоторое выдаёт муниципалитет, и запас по нему меньше пяти процентов.\n\n**Порог по ориентиру.** Мандат требует дисконта 15%: при верной оценке $280.80M это цена не выше $238.68M против запрошенных $268.0M. **Переговорная позиция считается от $238.68M, а не от «полутора крат», которые показывал первый расчёт.**",
+     "interviewer_md": "```\nпо цене сделка остаётся в плюсе от 25.77 МВт = 3,917 м³/сут\nконтроль: 25.77 × $10.40M = $268.0M — ровно цена\nпо мандату нужна оценка $315.29M: 268.0/0.85/10.40 × 152 = 4,608.145 м³/сут\nсоседи: 4,608 → $315.28M не проходит; 4,609 → $315.35M проходит\nфакт 4,104 м³/сут: к цене запас 4.78%, до мандата не хватает 505 м³/сут\n\nрасширение водозабора до мощности охлаждения: 31.0 × $10.40M = $322.40M\nрасширение окупается, пока стоит меньше 322.40 − 280.80 = $41.60M\n```\n**Ответ: порог по мандату 4,609 м³/сут против фактических 4,104 м³/сут.**\nПорог 3,917 м³/сут отвечает за «дороже ли актив цены», порог 4,609 м³/сут —\nза «можно ли покупать по этой цене», и решение принимается по второму;\nфакт лежит между ними. Зачёт за произнесённое: сделка держится на разрешении,\nкоторое выдаёт муниципалитет, и по мандату запаса нет вовсе — не хватает\n505 м³/сут.\n\n**Порог по ориентиру.** Мандат требует дисконта 15%: при верной оценке $280.80M это цена не выше $238.68M против запрошенных $268.0M. **Переговорная позиция считается от $238.68M, а не от «полутора крат», которые показывал первый расчёт.**",
      "candidate_md_en": "At what value of the key quantity does the conclusion turn into its opposite?"
     },
     {
@@ -50162,7 +50152,7 @@
       "L2": ""
      },
      "candidate_md": "Дай рекомендацию: вывод первым, затем факты с числами, риски и следующие шаги.",
-     "interviewer_md": "> Мы рекомендуем **торговаться от $238.68M: мандат фонда требует дисконта 15% к верной оценке $280.80M, и запрошенные $268.0M его не дают. Идти на сделку только с условием\n> о расширении водозабора**, а не принимать запрашиваемые $268.0M как очевидный\n> дисконт — реальный запас составляет 4.78%, а не 50%.\n>\n> Три факта. Первое: продаётся не подведённая мощность, а минимум по цепочке —\n> электричество 42.0 МВт, охлаждение 31.0 МВт, вода 27.00 МВт по разрешению\n> в 4,104 м³/сут. Второе: средняя $9.54M за подведённый МВт смешивает два\n> знаменателя: в восьми сделках из десяти подведённая мощность равна продаваемой,\n> и именно такие площадки чаще выходят на рынок — цена продаваемого МВт составляет\n> $10.40M. Третье: сделка уходит в ноль уже при водозаборе 3,917 м³/сут против\n> разрешённых 4,104, то есть весь запас держится на пяти процентах одного разрешения.\n>\n> Риски. Внутренний: оценка $400.68M уже в инвестиционном комитете, и отказ от неё\n> выглядит как отказ от сделки; выносить надо не «дешевле, чем думали», а «актив\n> другой, и торгуемся мы за воду». Внешний: разрешение выдаёт муниципалитет,\n> и в засушливый год его скорее сокращают, чем расширяют — при сокращении на пять\n> процентов сделка становится убыточной, поэтому условие о цене надо привязывать\n> к факту разрешения, а не к заявке.\n>\n> Следующие шаги: за шесть недель — юридическая проверка перспектив расширения\n> водозабора и параллельная оценка перехода на жидкостное охлаждение, которое\n> снижает удельный расход воды; на переговоры выходить с потолком $238.68M — это наша оценка\n> $280.80M минус мандатные 15%, а не сама оценка; расширение водозабора окупается,\n> пока стоит меньше $41.60M, но по мандату площадка и расширение вместе не должны\n> стоить дороже $274.04M — 85% от расширенной оценки 31.0 x $10.40M = $322.40M.",
+     "interviewer_md": "> Мы рекомендуем **торговаться от $238.68M: мандат фонда требует дисконта 15% к верной оценке $280.80M, и запрошенные $268.0M его не дают. Идти на сделку только с условием\n> о расширении водозабора**, а не принимать запрашиваемые $268.0M как очевидный\n> дисконт — реальный запас составляет 4.78%, а не 50%.\n>\n> Три факта. Первое: продаётся не подведённая мощность, а минимум по цепочке —\n> электричество 42.0 МВт, охлаждение 31.0 МВт, вода 27.00 МВт по разрешению\n> в 4,104 м³/сут. Второе: средняя $9.54M за подведённый МВт смешивает два\n> знаменателя: в восьми сделках из десяти подведённая мощность равна продаваемой,\n> и именно такие площадки чаще выходят на рынок — цена продаваемого МВт составляет\n> $10.40M. Третье: сделка уходит в ноль уже при водозаборе 3,917 м³/сут против\n> разрешённых 4,104, то есть весь запас к цене держится на пяти процентах\n> одного разрешения; по мандату запаса нет — до $315.29M не хватает\n> 505 м³/сут.\n>\n> Риски. Внутренний: оценка $400.68M уже в инвестиционном комитете, и отказ от неё\n> выглядит как отказ от сделки; выносить надо не «дешевле, чем думали», а «актив\n> другой, и торгуемся мы за воду». Внешний: разрешение выдаёт муниципалитет,\n> и в засушливый год его скорее сокращают, чем расширяют — при сокращении на пять\n> процентов актив становится дешевле цены: исчезает и последний запас, тот, что\n> к цене, а не к мандату, — по мандату его нет уже сейчас. Поэтому условие о цене\n> надо привязывать к факту разрешения, а не к заявке.\n>\n> Следующие шаги: за шесть недель — юридическая проверка перспектив расширения\n> водозабора и параллельная оценка перехода на жидкостное охлаждение, которое\n> снижает удельный расход воды; на переговоры выходить с потолком $238.68M — это наша оценка\n> $280.80M минус мандатные 15%, а не сама оценка; расширение водозабора окупается,\n> пока стоит меньше $41.60M, но по мандату площадка и расширение вместе не должны\n> стоить дороже $274.04M — 85% от расширенной оценки 31.0 x $10.40M = $322.40M.",
      "candidate_md_en": "Give a recommendation: the conclusion first, then the facts with numbers, the risks and the next steps."
     }
    ],
