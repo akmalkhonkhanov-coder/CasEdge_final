@@ -4078,10 +4078,10 @@
    "type": "Structuring",
    "exhibit_mode": "E-before",
    "depth_tag": "STANDARD",
-   "family_h25": "F3",
+   "family_h25": "F1",
    "family_src": "тело",
    "family_conf": "высокая",
-   "family_note": "круг 40: 50% и 40% — доли ПЛАТЕЖЕЙ, а не доли людей; решение принимается о людях, и состав группы в записи не установлен",
+   "family_note": "Разметка исправлена в круге 109 по слепому чтению: тело читали ТРИ независимых чтеца в чистом контексте, каждый без разметки в теле и без чужих ответов, и все трое дали одно и то же. Повторяемость пробы измерена на тех же 14 телах: попарно 71–86%, единогласно трое на 71%, поэтому единогласие трёх принято за основание, а одиночное чтение — нет.\n\nF3 -> F1. `mehanizm.why`: «доля от счетов не переносится на число людей без данных о повторяемости»; `reference.ru`: «Таблица даёт 50% и 40% как доли счетов, оплаченных с опозданием, а команда превращает их в блок из 6.0M человек». Сравниваемых групп в слоте нет, поэтому F3 («разница объясняется составом групп») неприменима: удельная доля приложена не к тому множеству — это F1. Класс назван ревью круга 108 строкой в реестр и подтверждён здесь чтением.",
    "anchor_metric": "customers proposed for removal = 6.0M",
    "prompt": "Verendal has 60 million subscribers. Collections cost the company money, and a team has proposed removing the two worst credit bands from the customer book. The team's summary is in the Exhibit.\n\n**Where would you start the analysis, and why?**",
    "exhibit": {
@@ -4156,9 +4156,9 @@
   },
   {
    "id": "ST-050",
-   "title": "The Salary On The Note",
-   "company": "Marrowbridge College",
-   "industry": "Education",
+   "title": "Six Hundred Thousand Buses",
+   "company": "Thelbrook Telematics",
+   "industry": "Transportation technology",
    "difficulty": "Hard",
    "echelon": true,
    "clean": false,
@@ -4167,98 +4167,96 @@
    "type": "Structuring",
    "exhibit_mode": "E-before",
    "depth_tag": "STANDARD",
-   "family_h25": "F3",
+   "family_h25": "F2",
    "family_src": "тело",
    "family_conf": "высокая",
-   "family_note": "Корпус F3. В записи прямо сказано: «The **$150,000** is a measured property of the people the **$50,000** price let in» — то есть наблюдаемая величина описывает состав группы, а не действие модели. И второе: «the new price is what forms the new group — applicants move from **2,000** to **3,600**» — воздействие меняет отбор, поэтому старая база несопоставима. Входное движение отличается от ST-049 (там доли платежей против долей людей в уже существующей базе) и от BR-049 (там добровольный вход хвоста базы в опциональный продукт при неизменной базе): здесь база заменяется целиком, а число старой базы переносится в новую модель как её собственный результат.",
-   "prompt": "Marrowbridge College is a liberal arts college serving about **4,000 students**. Facing declining enrolment, the President wants to abolish tuition outright and replace it with a binding commitment: every graduate pays **5%** of annual income back to the college for the entirety of their career.\n\nThe admissions office has surveyed the districts the college recruits from and produced the forecast in the Exhibit. The finance office has already priced both models, per student and per entering class.\n\n**Where would you start the analysis, and why?**",
-   "anchor_metric": "lifetime value per class, proposed model = $180M",
+   "family_note": "Разметка исправлена в круге 109 по слепому чтению: тело читали ТРИ независимых чтеца в чистом контексте, каждый без разметки в теле и без чужих ответов, и все трое дали одно и то же. Повторяемость пробы измерена на тех же 14 телах: попарно 71–86%, единогласно трое на 71%, поэтому единогласие трёх принято за основание, а одиночное чтение — нет.\n\nF1 -> F2. `mehanizm.why`: «при конечном сроке жизни продукта и нерастущем рынке собственные отгрузки прошлых лет вычитаются из базы будущего года». Первый эффект (продажи по 10% в первый год) посчитан верно и ТЯНЕТ второй — истощение собственной базы, меняющее вывод с $24M на $15.7M. Базу пятого года нельзя построить, не увидев этот второй эффект, поэтому по Р2 решает F2, а не F1. ОШИБКА ЦЕХА ДВАЖДЫ: бриф круга 108 задал F3, ревью круга 108 исправило на F1 со ссылкой на словарь — и тоже мимо. Ревьюер, читающий словарь, ошибся так же, как автор; развело только слепое чтение втроём.",
+   "prompt": "Thelbrook Telematics has built a GPS fleet-tracking device and is deciding whether to roll it out as a school-bus tracking device in the US. The device transmits location and ETA to schools and to parents through the company's own app, and the client earns on the initial sale of the devices and on technology service plans alongside them; this sizing covers the device sales.\n\nThe team has already sized the US school-bus opportunity. The partner has now asked it for one number: **the annual revenue from new device sales in year 5**. The team's working sheet is in the Exhibit.\n\n**Where would you start the analysis, and why?**",
+   "anchor_metric": "potential addressable year 1 market size = $240M",
    "exhibit": {
     "type": "table",
-    "title": "Marrowbridge College: current model against the proposed model, as priced by finance",
+    "title": "Thelbrook Telematics: US school-bus working sheet, as the team has it",
     "header": [
      "Item",
-     "Current tuition model",
-     "Proposed tuition model"
+     "Figure"
     ],
     "rows": [
      [
-      "Applicants per year",
-      "2,000",
-      "3,600"
+      "US population",
+      "320M, evenly distributed across ages"
      ],
      [
-      "Acceptance rate (all admitted students enrol)",
-      "50%",
-      "33%"
+      "Life expectancy",
+      "80 years, i.e. 4M people per single year of age"
      ],
      [
-      "Enrolled students per year",
-      "1,000",
-      "1,200"
+      "School age",
+      "4 to 18"
      ],
      [
-      "Tuition per year",
-      "$50,000",
-      "$0"
+      "Students aged 4–13 who ride a bus",
+      "60%"
      ],
      [
-      "Financial aid, share of total tuition",
-      "34%",
-      "—"
+      "Students aged 14–18 who ride a bus",
+      "30%"
      ],
      [
-      "Tuition actually collected per year",
-      "$33,000",
-      "—"
+      "Average bus",
+      "13 rows on each side, 2 students per row"
      ],
      [
-      "Years of study",
-      "4",
-      "4"
+      "Students per bus carried into the sizing",
+      "50"
      ],
      [
-      "Graduate's commitment, share of annual income",
-      "—",
-      "5%"
+      "School buses in the US",
+      "600K"
      ],
      [
-      "Discount rate used for the commitment",
-      "—",
-      "5%"
+      "Devices per bus",
+      "2"
      ],
      [
-      "Lifetime value per student, as priced",
-      "$132,000",
-      "$150,000"
+      "Selling price per device",
+      "$200"
      ],
      [
-      "Lifetime value per entering class, as priced",
-      "$132M",
-      "$180M"
+      "Potential addressable year 1 market, new device sales",
+      "$240M"
+     ],
+     [
+      "Product life span",
+      "5 years"
+     ],
+     [
+      "Overall market growth",
+      "none"
+     ],
+     [
+      "Product adoption in year 1, as the team has it",
+      "10%"
      ]
     ],
-    "note": "Average alumni salary for Marrowbridge College is currently $150,000 per year."
+    "note": "The client also sells a technology service plan alongside the device; this working sheet covers new device sales only."
    },
    "key": {
-    "decoy": "| Branch | Why it's reflexive | [DEC-JUST] |\n|---|---|---|\n| **\"$180M against $132M — adopt the proposed model\"** | the two priced figures are laid side by side and invite subtraction | Both figures are arithmetically clean. But they are not built on the same people: **$132,000** is what a **current** student pays, and **$150,000** is what a **current** alumnus earns. The branch asks for the comparison and **will not ask who was measured** |\n| **\"Model the cash-flow gap during the transition\"** | the finance reflex — tuition stops today, income arrives over careers | A real constraint and a legitimate second question. It concerns **when** the money lands, not **whose income** was used to size it |\n| **\"Test the perpetuity — the 5% giving rate and the 5% discount rate cancel\"** | the technical reflex, and the cancellation is elegant enough to feel like the catch | The cancellation is correct: at equal rates the per-student value equals the salary exactly. That is precisely why an error **in the salary** passes into the answer at full size and unchallenged |",
-    "cover": "| Branch | Synonyms (≥3) | [COV-JUST] |\n|---|---|---|\n| **1. What each model charges a student** | \"the per-student mechanics\" · \"how a student converts into money\" · \"price against claim on income\" | Without it there is no comparison at all: **$50,000** less **34%** aid over **4** years against **5%** of a career |\n| **2. Who the entering class is made of** | \"where the extra applicants come from\" · \"the mix of fields of study\" · \"whose salary the $150,000 is\" · \"what the old price kept out\" | **Load-bearing, and this is the muscle of the slot.** The **$150,000** is a measured property of the people the **$50,000** price let in. The new price is what forms the new group — applicants move from **2,000** to **3,600** — so the salary has to be re-measured on the body the new price brings in, not carried across |\n| **3. Whether the promised money arrives** | \"collection over a career\" · \"enforceability of the commitment\" · \"attrition of the claim\" · \"what regulators allow\" | A claim held for the entirety of a career is an asset only if it is collectable; without it branch 1 prices a promise rather than a payment |",
-    "me": "| Pair | Status |\n|---|---|\n| 1 ↔ 2 | ⚠️ **the slot's key pair** — both look like \"the value of a student\". Separated: branch 1 is **the rule applied to a student**; branch 2 is **which student the rule is applied to**. The record supplies the rule cleanly and leaves the population unstated |\n| 1 ↔ 3 | **independent** — the size of the claim against its collectability |\n| 2 ↔ 3 | **independent** — who is in the class against whether they pay |\n| \"$180M vs $132M\" ↔ 1 | ⚠️ **duplicate** — it is branch 1 already executed |\n| \"$180M vs $132M\" ↔ 2 | ⚠️ **opposition** — the comparison is only valid once branch 2 is answered, and stating it first closes the question |\n| Cash-flow gap ↔ 3 | ⚠️ partial — timing is one part of collection, not the whole of it |\n| Cash-flow gap ↔ 2 | **independent** |\n| Perpetuity check ↔ 1 | ⚠️ **duplicate** |\n| Perpetuity check ↔ 2 | ⚠️ **opposition** — verifying the formula certifies the arithmetic and leaves the input untouched |",
-    "drive": "| Branch | What to measure |\n|---|---|\n| 1. Per-student mechanics | tuition collected after aid · years of study · committed share of income · discount rate |\n| 2. Composition of the class | fields of study as a share of the **future** student body · average salary within each field · the weighted average that results · the same split for today's alumni, for comparison |\n| 3. Collection | share of graduates actually paying · years the claim survives · regulatory and accreditation limits on a lifetime claim |",
-    "order": "| Criterion | Legitimate start | Why |\n|---|---|---|\n| **the figure the decision rests on** | branch 2 | the whole gap between **$180M** and **$132M** sits inside one input, and that input was measured on a different group |\n| size of effect | branch 1 | the per-student rule scales by 1,200 students |\n| speed of verification | branch 3 | collection can be checked against comparable programmes without new survey work |"
+    "decoy": "| Branch | Why it's reflexive | [DEC-JUST] |\n|---|---|---|\n| **\"Take $240M and apply the year 5 adoption rate\"** | the chain closes on the page: the market is sized, an adoption figure is printed, and one multiplication produces the number the partner asked for | Every input the branch needs is on the sheet, which is exactly why it is the first honest answer. But **$240M is the addressable market of year 1**, and the question is about year 5. Between the two sits the client's own selling: with a **5-year** life and **no market growth**, a school equipped in years 1–4 is not addressable in year 5. The branch asks for the rate and **never asks what the rate is a rate of**. That is the muscle of the slot |\n| **\"Re-check the sizing arithmetic\"** — 320M over 80 years, 13 rows against 50 seats | the numbers are all shown, so verification feels like work | The chain does reconcile: 4M per age × 15 cohorts = **60M** students, ridership gives **30M** riders, at **50** per bus **600K** buses, × **2** × **$200** = **$240M**. Auditing it certifies the year-1 figure and leaves the year-5 question untouched |\n| **\"Debate the adoption curve for years 2–5\"** | it is the visibly missing input, and the sheet stops at year 1 | Legitimate and necessary — but a rate is meaningless until the base it multiplies is established. Chosen first, the curve gets applied to the wrong denominator and the error is carried forward at full size |",
+    "cover": "| Branch | Synonyms (≥3) | [COV-JUST] |\n|---|---|---|\n| **1. How a bus turns into money in a single year** | \"the per-bus economics\" · \"the sizing chain\" · \"units × price\" | Without it there is no market at all: **600K** buses × **2** devices × **$200** = **$240M**. This is the arithmetic the sheet already performs, and it is correct |\n| **2. What the addressable base consists of in the year the question is about** | \"who is still a buyer in year 5\" · \"what our own sales have already taken out\" · \"the residual market\" · \"is the year-5 market the year-1 market\" | **Load-bearing, and this is the muscle of the slot.** The device has a **5-year** life and the overall market does **not grow**, so every school equipped in years 1–4 leaves the pool. The year-5 base is the **$240M** less everything the client itself sold into it beforehand — the base is a residue of our own selling, not a market constant |\n| **3. Who grants the adoption, and how fast** | \"the decision-making unit\" · \"district, school or driver\" · \"budget cycle of a public school\" · \"the ramp for years 2–5\" | The rate that multiplies the base. The book puts purchasing with different decision-making units across school settings — district-level, school-level, bus drivers — and that also fixes the **unit** in which a buyer exits branch 2: a district leaving takes hundreds of buses with it |\n| **4. Revenue that survives a base being consumed** | \"the technology service plan\" · \"what the installed devices earn after the sale\" · \"replacement when the 5-year life expires\" · \"other fleet outlets\" | New device sales are a **depleting** line by construction. The client's own business model names a second stream — technology service plans — which grows on exactly the installed base that branch 2 subtracts; and the book's own list of other outlets (commercial freight, shipping, public transportation, flight, cruise ships, rescue boats, tour buses, drone fleets) exists because one vertical saturates |",
+    "me": "| Pair | Status |\n|---|---|\n| 1 ↔ 2 | ⚠️ **the slot's key pair** — both read as \"the size of the market\". Separated: branch 1 is **the rule that turns a bus into dollars**; branch 2 is **how many buses are still on the table in the year asked about**. The sheet supplies the rule in full and leaves the population of the later year unstated |\n| 1 ↔ 3 | **independent** — the size of the prize against the speed of capture |\n| 2 ↔ 3 | ⚠️ **conflation risk** — adoption both *is* the rate and *causes* the depletion. Separated: branch 3 is **what share of the available base buys this year**; branch 2 is **what base is available at all**, given prior years' buying |\n| 2 ↔ 4 | ⚠️ partial — both concern the installed devices. Separated: branch 2 treats them as **subtracted from the new-sales market**; branch 4 treats them as **an asset that keeps earning** |\n| 3 ↔ 4 | **independent** — who signs against what is sold |\n| \"$240M × year-5 rate\" ↔ 1 | ⚠️ **duplicate** — it is branch 1 already executed |\n| \"$240M × year-5 rate\" ↔ 2 | ⚠️ **opposition** — stating it first asserts the answer to branch 2 (that the base is unchanged) without ever asking the question |\n| Sizing audit ↔ 1 | ⚠️ **duplicate** |\n| Sizing audit ↔ 2 | ⚠️ **opposition** — verifying the year-1 chain certifies the arithmetic and leaves the base of the later year untouched |\n| Adoption curve ↔ 3 | ⚠️ **duplicate** |",
+    "drive": "| Branch | What to measure |\n|---|---|\n| 1. Per-year sizing chain | students **60M** (4M per age × 15 cohorts, ages 4–18) · riders at **60%** of ages 4–13 and **30%** of ages 14–18 → **30M** · **50** students per bus → **600K** buses · **2** devices per bus · **$200** per device → **$240M** |\n| 2. Composition of the base in the year asked about | **the year-1 market less cumulative device sales of years 1–4, not the $240M** · buses equipped by the end of year 4 · buses never equipped · product life **5 years** · overall market growth **none** · the resulting base: at a flat **10%** adoption, **$240M → $216M → $194.4M → $175.0M → $157.5M**, i.e. about **394K** of the **600K** buses still to sell to in year 5 |\n| 3. Adoption and the buying unit | adoption in year 1 **10%** · the ramp the client will underwrite for years 2–5 · which decision-making unit signs — district, school, bus driver · buses per signing unit, which sets how much base leaves per contract |\n| 4. Revenue beyond the new-device line | technology service plan revenue per installed device per year · devices installed and still live at the end of year 5 · replacement demand when the **5-year** life expires on the year-1 cohort · size of the other outlets the client could carry the product into |",
+    "order": "| Criterion | Legitimate start | Why |\n|---|---|---|\n| **the figure the answer rests on** | branch 2 | the whole gap between the reflexive **$24M** and a defensible **≈$15.7M** sits in one input — which base the rate multiplies — and that base is set by the client's own prior sales |\n| size of effect | branch 3 | the adoption path scales every year of the horizon, and the sheet stops at year 1 |\n| speed of verification | branch 1 | the chain is fully printed and can be audited in under a minute |\n| value at stake beyond the question | branch 4 | the service plan and the replacement cycle are the lines that do not decay as the base is consumed |\n\nAny of the four is a defensible opening when the candidate names a real criterion for it. Branch 2 is the start the record forces, because it is the only one whose answer changes the number the partner asked for."
    },
    "reference": {
-    "en": "**Conclusion.** Start by establishing who the **$150,000** was measured on — it belongs to alumni admitted under the **$50,000** price, and the proposed model's whole advantage rests on carrying it across to a class the proposed model itself creates.\n\n**Facts.** The per-student mechanics are sound on both sides: **$50,000** less **34%** aid is **$33,000** a year, **4** years, **$132,000**; and because the **5%** commitment equals the **5%** discount rate, the proposed model's per-student value equals the graduate's salary exactly. That equality is the exposure: any error in the salary passes through undamped. The salary on the page is today's, and the policy that produces the **$180M** is the same policy that moves applicants from **2,000** to **3,600**. The gap the proposal is sold on — **$180M** against the current **$132M** — is **$48M** a class, **36.4%** above today's.\n\n**Re-measured on the body the new price attracts** — **50%** social science at **$100k**, **25%** STEM at **$175k**, **25%** humanities at **$75k** — the average is **$112,500**, so the per-student value is **$112,500** and the class is worth **1,200** × **$112,500** = **$135M** against the current **$132M**: a **2%** difference. The decision is a toss-up on money, and has to be made on mission and on cash.\n\n**Risk.** Internal: the college has no measurement of the new body's earnings other than a district survey, so the **$112,500** is a forecast and not an observation. External: a lifetime claim on graduate income invites scrutiny from accreditors and the Department of Education, and the claim is only worth what can be collected across a career.\n\n**Next step.** Ask admissions for the projected field-of-study mix and the salary attached to each field before any comparison is presented to the board — and ask finance to re-run the class comparison on that mix rather than on current alumni.\n\n**Source:** Darden Case Book 2024-25, Hooville College, pp. 53–60 — Exhibit 1 (2,000/3,600 applicants, 50%/33% acceptance, $50,000/$0 tuition, 34% financial aid, note \"Average alumni salary for Hooville College is currently $150,000 per year\"), Question 1 ($33,000 × 4 = $132,000; $150,000 × 0.05 / 0.05 = $150,000; $132M and $180M per class), Exhibit 2 and Question 2 (50% social science $100k, 25% STEM $175k, 25% humanities $75k → $112.5k; 1,200 × $112,500 = $135M, a 2% increase).",
-    "ru": "**Вывод.** Начни с того, чтобы установить, на ком измерены **$150,000**: они относятся к выпускникам, принятым по цене **$50,000**, а всё преимущество предложенной модели держится на переносе этой цифры на курс, который предложенная модель сама и создаёт.\n\n**Факты.** Механика в расчёте на студента верна с обеих сторон: **$50,000** минус **34%** помощи — это **$33,000** в год, **4** года, **$132,000**; а поскольку обязательство в **5%** равно ставке дисконтирования **5%**, стоимость одного студента в предложенной модели в точности равна зарплате выпускника. Это равенство и есть уязвимость: любая ошибка в зарплате проходит насквозь без затухания. Зарплата на странице — сегодняшняя, а политика, которая даёт **$180M**, — та же самая политика, которая двигает абитуриентов с **2,000** до **3,600**. Разрыв, на котором продают предложение, — **$180M** против нынешних **$132M** — это **$48M** на курс, на **36.4%** выше сегодняшнего.\n\n**Если пересчитать на том составе, который привлекает новая цена** — **50%** социальных наук по **$100k**, **25%** STEM по **$175k**, **25%** гуманитариев по **$75k**, — среднее равно **$112,500**, поэтому стоимость одного студента — **$112,500**, а курс стоит **1,200** × **$112,500** = **$135M** против нынешних **$132M**: разница в **2%**. В деньгах решение — ничья, и принимать его придётся по миссии и по денежному потоку.\n\n**Риск.** Внутренний: у колледжа нет измерения заработков нового состава, кроме окружного опроса, поэтому **$112,500** — это прогноз, а не наблюдение. Внешний: пожизненное требование к доходу выпускника притягивает внимание аккредитаторов и Министерства образования, а само требование стоит ровно столько, сколько удастся собрать за карьеру.\n\n**Следующий шаг.** Запросить у приёмной комиссии прогнозный микс по направлениям обучения и зарплату по каждому направлению, прежде чем любое сравнение будет вынесено на совет, — и попросить финансовую службу пересчитать сравнение курсов на этом миксе, а не на нынешних выпускниках.\n\n**Источник:** Darden Case Book 2024-25, Hooville College, стр. 53–60 — Exhibit 1 (2,000/3,600 абитуриентов, 50%/33% зачисления, плата $50,000/$0, 34% финансовой помощи, пометка «Средняя зарплата выпускника Hooville College сейчас составляет $150,000 в год»), Вопрос 1 ($33,000 × 4 = $132,000; $150,000 × 0.05 / 0.05 = $150,000; $132M и $180M на курс), Exhibit 2 и Вопрос 2 (50% социальных наук $100k, 25% STEM $175k, 25% гуманитариев $75k → $112.5k; 1,200 × $112,500 = $135M, рост на 2%)."
+    "en": "**Conclusion.** Start by establishing what the addressable base consists of in **year 5**, because the **$240M** on the sheet is the market of **year 1** and the largest thing removing schools from it between now and then is the client's own selling.\n\n**Facts.** The year-1 chain is sound and can be taken as given: **320M** people spread evenly over an **80**-year life expectancy give **4M** per single year of age; ages **4–18** are 15 cohorts, so **60M** students; **60%** of the 40M aged 4–13 and **30%** of the 20M aged 14–18 ride, so **30M** riders; at **50** students per bus that is **600K** buses; at **2** devices per bus and **$200** per device the potential addressable year-1 market is **$240M**. None of that chain is about year 5. The device has a **5-year** life and the overall market does **not grow**, so a school equipped in years 1–4 is not a buyer in year 5: the year-5 base is **$240M less everything the client sold into it in the four preceding years**.\n\nSized on the book's only stated adoption figure — **10%** in year 1, held flat across the horizon purely to show the magnitude, since years 2–5 are the candidate's own assumption — the base runs **$240M → $216M → $194.4M → $175.0M → $157.5M**. Year 5 therefore sells **10% × $157.5M ≈ $15.7M**, not **10% × $240M = $24M**. The reflexive answer overstates by **$8.3M**, or **52%**; in buses the same statement is **600K → about 394K** left to sell to. The direction of the error does not depend on the adoption path chosen — only its size does.\n\n**Risk.** Internal: adoption for years 2–5 is the client's own assumption and the whole depletion path scales with it — a slower ramp leaves a fuller base in year 5, a faster one empties it sooner — so the year-5 figure has to be handed over as a range with the ramp named, never as a point. External: purchasing sits with different decision-making units across school settings — district-level, school-level, bus drivers — so the unit that leaves the base may be an entire district rather than a single bus, and public-school budget cycles can make the base thin in steps far larger than the device count suggests.\n\n**Next step.** Ask the client for two things before any year-5 number is presented: the adoption path it will underwrite for years 2–5, and the unit at which one purchase removes buses from the market (district / school / bus). Re-price year 5 on the residual base that results. In parallel, because new device sales are a depleting line by construction, bring the technology service plan on the installed devices and the replacement cycle at the end of the 5-year life into the same model before the roll-out decision is taken.\n\n**Source:** Darden 2019, Transportation Tech Co., pp. 114–124 — prompt and Clarifying Information p. 115 (GPS fleet tracking device for K-12 schools; revenue from initial device sales and technology service plans, focus on device sales; 5-year life span), Question 1 guidance p. 117 (320M people evenly distributed, 80-year life expectancy, 4M per year of age, school age 4–18, 60% of ages 4–13 and 30% of ages 14–18 ride, 13 rows on each side and 2 students per row rounded to 50 per bus, 600K buses, 2 units per bus, $200 per unit, $240M year-1 market), Question 2 guidance p. 118 (year 1 adoption of 10% as a reasonable example), Question 3 guidance p. 119 (overall market will not grow; adoption rates for years 2–5 are the candidate's own assumptions), Framework Guidance p. 116 (purchasing decisions made by different decision-making units across school settings — district-level, school-level, bus drivers), Question 4 p. 120 (other outlets: commercial freight, shipping, public transportation, flight, cruise ships, rescue boats, tour buses, drone fleets).",
+    "ru": "**Вывод.** Начни с того, из кого состоит адресуемая база в **пятом году**, потому что **$240M** на листе — это рынок **первого года**, а главное, что выводит из него школы к пятому, — собственные продажи клиента.\n\n**Факты.** Цепочка первого года верна и её можно принять как данность: **320M** человек, равномерно разложенные на **80** лет ожидаемой продолжительности жизни, дают **4M** на каждый год возраста; возраст **4–18** — это 15 когорт, то есть **60M** учеников; ездят **60%** из 40M в возрасте 4–13 и **30%** из 20M в возрасте 14–18, итого **30M** ездящих; при **50** учениках на автобус это **600K** автобусов; при **2** устройствах на автобус и цене **$200** потенциальный адресуемый рынок первого года — **$240M**. Ни одно звено этой цепочки не относится к пятому году. У устройства срок жизни **5 лет**, а рынок в целом **не растёт**, поэтому школа, оснащённая в годы 1–4, в пятом году уже не покупатель: база пятого года — это **$240M за вычетом всего, что клиент сам продал в неё за предыдущие четыре года**.\n\nЕсли оценить это по единственной названной книгой доле принятия — **10%** в первом году, удержанной ровной на всём горизонте исключительно чтобы показать порядок величины, поскольку годы 2–5 книга оставляет допущению кандидата, — база идёт **$240M → $216M → $194.4M → $175.0M → $157.5M**. Значит, пятый год продаёт **10% × $157.5M ≈ $15.7M**, а не **10% × $240M = $24M**. Рефлекторный ответ завышает на **$8.3M**, то есть на **52%**; в автобусах то же самое звучит как **600K → около 394K**, которым ещё есть что продать. Направление ошибки не зависит от выбранной траектории принятия — от неё зависит только величина.\n\n**Риск.** Внутренний: принятие в годы 2–5 — собственное допущение клиента, и вся траектория истощения масштабируется вместе с ним: более медленный разгон оставляет к пятому году более полную базу, более быстрый опустошает её раньше, — поэтому цифру пятого года надо отдавать диапазоном с явно названным разгоном, а не точкой. Внешний: решение о закупке принимают разные единицы принятия решений — уровень округа, уровень школы, водители автобусов, — поэтому из базы может выходить целый округ, а не один автобус, и бюджетные циклы государственных школ способны прореживать базу шагами куда крупнее, чем подсказывает счёт устройств.\n\n**Следующий шаг.** Запросить у клиента две вещи прежде, чем какая-либо цифра пятого года будет показана: траекторию принятия, под которой он подпишется на годы 2–5, и единицу, в которой одна покупка выводит автобусы с рынка (округ / школа / автобус). Пересчитать пятый год на получившейся остаточной базе. Параллельно — поскольку продажи новых устройств по своему устройству являются истощающейся линией — завести в ту же модель сервисный тарифный план на установленных устройствах и цикл замены по истечении пятилетнего срока службы, до того как решение о выкатке будет принято.\n\n**Источник:** Darden 2019, Transportation Tech Co., стр. 114–124 — промпт и Clarifying Information стр. 115 (GPS-устройство отслеживания парка для школ K-12; выручка от первичной продажи устройств и от технологических сервисных планов, фокус на продаже устройств; срок жизни 5 лет), разбор Вопроса 1 стр. 117 (320M человек равномерно по возрастам, ожидаемая продолжительность жизни 80 лет, 4M на год возраста, школьный возраст 4–18, ездят 60% в возрасте 4–13 и 30% в возрасте 14–18, 13 рядов с каждой стороны и 2 ученика в ряду с округлением до 50 на автобус, 600K автобусов, 2 устройства на автобус, $200 за устройство, рынок первого года $240M), разбор Вопроса 2 стр. 118 (принятие 10% в первом году как разумный пример), разбор Вопроса 3 стр. 119 (рынок в целом не растёт; доли принятия для годов 2–5 — собственные допущения кандидата), Framework Guidance стр. 116 (решения о закупке принимаются разными единицами принятия решений в школьной среде — уровень округа, уровень школы, водители автобусов), Вопрос 4 стр. 120 (другие каналы: коммерческие грузоперевозки, судоходство, общественный транспорт, авиация, круизные лайнеры, спасательные суда, туристические автобусы, парки дронов)."
    },
    "mehanizm": {
-    "naive": "сравнивает поток от новой модели с потоком сегодняшней платы",
-    "correct": "сравнивает только после проверки, на одной ли когорте измерены доход выпускника и плата студента",
-    "why": "две суммы, посчитанные на разных поколениях людей, не сопоставимы",
-    "code": "MECH-111-разные-периметры-сравнения",
-    "code2": [
-     "MECH-43-проверка-вместо-ответа"
-    ]
+    "naive": "прикладывает долю принятия позднего года к размеру рынка первого года",
+    "correct": "устанавливает, из кого состоит адресуемая база в году вопроса после собственных продаж предыдущих лет, и только потом прикладывает к ней долю",
+    "why": "при конечном сроке жизни продукта и нерастущем рынке собственные отгрузки прошлых лет вычитаются из базы будущего года",
+    "code": "MECH-163-база-съедена-собственными-продажами",
+    "code2": []
    }
   }
  ],

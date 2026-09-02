@@ -189,7 +189,8 @@
     "src": "выведено из checklist",
     "code": "MECH-99-доля-вместо-денег",
     "code2": []
-   }
+   },
+   "twin_of": "CI-021"
   },
   {
    "id": "CI-003",
@@ -1139,7 +1140,8 @@
     "code2": [
      "MECH-42-правка-исправного-входа"
     ]
-   }
+   },
+   "twin_of": "CI-020"
   },
   {
    "id": "CI-011",
@@ -1253,7 +1255,8 @@
     "src": "выведено из checklist",
     "code": "MECH-33-темп-от-малой-базы",
     "code2": []
-   }
+   },
+   "twin_of": "CI-017"
   },
   {
    "id": "CI-012",
@@ -1361,7 +1364,8 @@
     "src": "выведено из checklist",
     "code": "MECH-94-несопоставимые-периоды",
     "code2": []
-   }
+   },
+   "twin_of": "CI-022"
   },
   {
    "id": "CI-013",
@@ -1455,7 +1459,8 @@
     "src": "выведено из checklist",
     "code": "MECH-91-приписанная-причинность",
     "code2": []
-   }
+   },
+   "twin_of": "CI-023"
   },
   {
    "id": "CI-014",
@@ -1766,7 +1771,8 @@
     "src": "выведено из checklist",
     "code": "MECH-110-расхождение-источников",
     "code2": []
-   }
+   },
+   "twin_of": "CI-038"
   },
   {
    "id": "CI-017",
@@ -2473,7 +2479,8 @@
     "src": "выведено из checklist",
     "code": "MECH-94-несопоставимые-периоды",
     "code2": []
-   }
+   },
+   "twin_of": "CI-025"
   },
   {
    "id": "CI-023",
@@ -2560,7 +2567,8 @@
     "src": "выведено из checklist",
     "code": "MECH-91-приписанная-причинность",
     "code2": []
-   }
+   },
+   "twin_of": "CI-029"
   },
   {
    "id": "CI-024",
@@ -2657,7 +2665,8 @@
     "src": "выведено из checklist",
     "code": "MECH-35-микс-против-ставки",
     "code2": []
-   }
+   },
+   "twin_of": "CI-042"
   },
   {
    "id": "CI-025",
@@ -2781,7 +2790,8 @@
     "src": "выведено из checklist",
     "code": "MECH-94-несопоставимые-периоды",
     "code2": []
-   }
+   },
+   "twin_of": "CI-012"
   },
   {
    "id": "CI-026",
@@ -3203,7 +3213,8 @@
     "src": "выведено из checklist",
     "code": "MECH-91-приписанная-причинность",
     "code2": []
-   }
+   },
+   "twin_of": "CI-013"
   },
   {
    "id": "CI-030",
@@ -3451,7 +3462,8 @@
     "code2": [
      "MECH-95-ось-и-шкала"
     ]
-   }
+   },
+   "twin_of": "CI-045"
   },
   {
    "id": "CI-032",
@@ -5187,57 +5199,57 @@
   },
   {
    "id": "CI-048",
-   "title": "Thirty-Six Percent Standard",
+   "title": "Two Points Of Margin",
    "type": "Chart Interpretation",
    "clean": true,
-   "prompt": "Our deck says Standard is 36% of revenue. Verify it and state plainly whether the claim stands.",
+   "prompt": "Our board deck says group gross margin is 31.0% in FY2024, 2.0 points better than FY2023. Verify it and state plainly whether the claim stands.",
    "exhibit": {
-    "title": "Exhibit A — Revenue by service tier, FY2024",
+    "title": "Exhibit A — Revenue and gross profit by business unit, $M",
     "parts": [
      {
       "type": "table",
       "header": [
-       "Tariff",
-       "Revenue, $M",
-       "Share, %",
-       "Shipments, M",
-       "$/shipment"
+       "Unit",
+       "FY2023 revenue",
+       "FY2023 gross profit",
+       "FY2024 revenue",
+       "FY2024 gross profit"
       ],
       "rows": [
        [
-        "Express",
-        "312",
-        "24.0",
-        "26.0",
-        "12.00"
+        "Bearings",
+        "320",
+        "108.80",
+        "378",
+        "139.86"
        ],
        [
-        "Standard",
-        "468",
-        "36.0",
-        "58.5",
-        "8.00"
+        "Seals",
+        "240",
+        "67.20",
+        "234",
+        "67.86"
        ],
        [
-        "Economy",
-        "195",
-        "15.0",
-        "39.0",
-        "5.00"
+        "Fasteners",
+        "160",
+        "38.40",
+        "180",
+        "45.90"
        ],
        [
-        "Oversize",
-        "325",
-        "25.0",
-        "6.5",
-        "50.00"
+        "Hydraulics",
+        "80",
+        "17.60",
+        "108",
+        "25.38"
        ],
        [
         "Total",
-        "**1,300**",
-        "**100.0**",
-        "**130.0**",
-        "—"
+        "**800**",
+        "**232.00**",
+        "**900**",
+        "**279.00**"
        ]
       ],
       "blank_before": 1
@@ -5245,118 +5257,7 @@
      {
       "type": "text",
       "lines": [
-       "*Note: all shares are calculated against total FY2024 revenue ($1,300M); no other base is used in the exhibit.*"
-      ],
-      "blank_before": 1,
-      "blank_after": 1
-     }
-    ]
-   },
-   "exhibit_mode": "E-before",
-   "time": "2 min",
-   "step_prompts": [],
-   "checklist": {
-    "en": "Credit if ALL: (1) states the verdict first and states it without hedging — the claim stands, 468 divided by 1,300 is 36.00%, exactly the figure in the deck; (2) supports it with at least one check independent of that division and names which one, from the revenue column summing to 1,300, the share column summing to 100.0, or revenue over shipments reproducing a printed price such as 468 over 58.5 = $8.00; (3) states that one base is used throughout, $1,300M for every row, and grounds that in the exhibit rather than in the note alone, since shares summing to exactly 100.0 cannot occur if two denominators were mixed into one column; (4) rejects the suspicion that shares were taken off shipments: the shipment-based figure for Standard would be 58.5 over 130.0 = 45.0%, and 45.0% appears nowhere in the share column; (5) says explicitly that there is no error to correct and does not ask for further data before confirming a figure the exhibit already verifies three ways; (6) treats the 45.0% of shipments against 36.00% of revenue, 9.0 percentage points apart, as a price fact rather than as evidence against the claim, connecting it to Standard at $8.00 per shipment. Bonus, not required for credit: computes the blended price, $1,300M over 130.0 shipments = $10.00, and places Standard 20.00% below it at $8.00; or closes the identity, revenue share equals shipment share times price over blended price, 45.0% times 8.00 over 10.00 = 36.00%; or reads Oversize the other way, 6.5 of 130.0 shipments at 5.0% and $50.00 each, five times the $10.00 blend, which is how 5.0% of volume becomes 25.0% of revenue.",
-    "ru": "Засчитывать, если ВСЁ: (1) сначала называет вердикт и называет его без оговорок — утверждение остаётся в силе, а 468, делённые на 1,300, — это 36.00%, ровно та цифра, что стоит в деке; (2) подпирает его хотя бы одной проверкой, независимой от этого деления, и называет, какой именно: колонка выручки в сумме даёт 1,300, колонка доли в сумме даёт 100.0, или выручка на отгрузки воспроизводит напечатанную цену, например 468 на 58.5 = $8.00; (3) говорит, что база на всём протяжении одна, $1,300M для каждой строки, и опирает это на экзибит, а не на одно примечание, поскольку доли, дающие в сумме ровно 100.0, так сойтись не могли бы, если бы в одну колонку смешали два знаменателя; (4) отвергает подозрение, что доли взяты от отгрузок: цифра Standard от отгрузок была бы 58.5 на 130.0 = 45.0%, а 45.0% в колонке доли не встречается нигде; (5) прямо говорит, что исправлять нечего, и не просит дополнительных данных, прежде чем подтвердить цифру, которую экзибит уже проверяет тремя путями; (6) считает 45.0% отгрузок против 36.00% выручки, расхождение в 9.0 п.п., фактом о цене, а не доводом против утверждения, и связывает это со Standard по $8.00 за отгрузку. Бонус, для зачёта не обязателен: считает смешанную цену, $1,300M на 130.0 отгрузок = $10.00, и ставит Standard на 20.00% ниже неё, на $8.00; или закрывает тождество: доля выручки равна доле отгрузок, умноженной на цену и делённой на смешанную цену, и у Standard это 45.0% умножить на 8.00 разделить на 10.00 = 36.00%; или читает Oversize в обратную сторону, 6.5 из 130.0 отгрузок — это 5.0% по $50.00 каждая, впятеро выше смеси $10.00, и вот так 5.0% объёма превращаются в 25.0% выручки."
-   },
-   "reference": {
-    "en": "- Naive: two numeric columns sit side by side, the question is phrased as a verification, and the reflex is to hunt for the switch — shares taken off revenue in one row and off shipments in the next, or a denominator that changes quietly down the column. The hunt turns up nothing, and the temptation then is to hedge: the claim is \"roughly right\", or it \"cannot be confirmed without more data\". That is a wrong answer wearing the costume of rigour.\n- Correct: the claim is exact and it stands. Standard revenue is 468 against total revenue of 1,300, and 468 divided by 1,300 is 36.00% — not close to it, equal to it. Say that in the first sentence, before any of the checking, because the checking is what supports the verdict rather than what replaces it.\n- The base is single, and the exhibit lets you demonstrate that instead of assuming it. The four tier revenues, 312 + 468 + 195 + 325, sum to exactly 1,300, so the denominator is the column itself and nothing outside it. The share column, 24.0 + 36.0 + 15.0 + 25.0, sums to exactly 100.0, and that cannot happen if two different denominators were mixed into one column — any mixture would leave the total off 100.0. The note says the same thing, but both of these hold whether or not you believe the note.\n- A third check runs through an entirely different pair of columns and agrees. Revenue over shipments reproduces the printed price on every row: 312 over 26.0 is $12.00, 468 over 58.5 is $8.00, 195 over 39.0 is $5.00, 325 over 6.5 is $50.00. The shipment column closes at 130.0 exactly as the revenue column closes at 1,300. Three independent paths, no contradiction on any of them — there is no trap here, and the useful thing is to say so plainly rather than keep looking.\n- The one genuine difference between the columns is a fact about the business, not a defect in the arithmetic. Standard carries 58.5 of 130.0 shipments, 45.0%, while producing 36.00% of revenue, 9.0 percentage points apart. That is a price, not a base error: 1,300 over 130.0 shipments is a blended $10.00, and Standard prints $8.00, 20.00% under the blend, which is precisely why its share of volume runs above its share of revenue.\n- The identity closes and confirms both readings at once. A tier's revenue share is its shipment share times its price over the blended price, and Standard gives 45.0% times 8.00 over 10.00 = 36.00%, the printed figure recovered from the other side of the table. Oversize runs the same relation in reverse: 6.5 of 130.0 shipments is 5.0%, at $50.00 each, five times the $10.00 blend, which is how 5.0% of volume turns into 25.0% of revenue. Every number in the exhibit is consistent with every other one.\n- Last mile: 468 over 1,300 is 36.00%, the base is the same 1,300 for every row, and the deck needs no correction — lead with that and do not manufacture a problem to look thorough. The number worth carrying forward is the other one: Standard moves 45.0% of shipments for 36.00% of revenue at $8.00 against a $10.00 blend, so if this portfolio has pricing pressure it lives there, not in the share calculation. Two things to bring back: cost to serve per Standard shipment, since 45.0% of volume priced 20.00% below the blend is only a problem if the cost gap is narrower than the price gap; and whether Oversize, 5.0% of shipments at $50.00, has capacity to absorb more volume.",
-    "ru": "- Наивное прочтение: две числовые колонки стоят рядом, вопрос сформулирован как проверка, и рефлекс — искать подмену: доли, взятые от выручки в одной строке и от отгрузок в следующей, или знаменатель, который тихо меняется вниз по колонке. Поиск не даёт ничего, и тогда возникает соблазн смягчить: утверждение «примерно верно» или «не может быть подтверждено без дополнительных данных». Это неверный ответ в костюме строгости.\n- Верно: утверждение точно и остаётся в силе. Выручка Standard — 468 против общей выручки 1,300, а 468, делённые на 1,300, — это 36.00%: не близко к нему, а равно ему. Скажи это первой фразой, до всякой проверки, потому что проверка подпирает вердикт, а не заменяет его.\n- База одна, и экзибит позволяет это показать, а не предположить. Четыре выручки уровней, 312 + 468 + 195 + 325, дают в сумме ровно 1,300, значит, знаменатель — это сама колонка и ничто вне её. Колонка доли, 24.0 + 36.0 + 15.0 + 25.0, даёт в сумме ровно 100.0, а этого не случилось бы, если бы в одну колонку смешали два разных знаменателя: любая смесь увела бы итог в сторону от 100.0. Примечание говорит то же самое, но обе эти проверки держатся независимо от того, веришь ты примечанию или нет.\n- Третья проверка идёт через совсем другую пару колонок и сходится. Выручка на отгрузки воспроизводит напечатанную цену в каждой строке: 312 на 26.0 — это $12.00, 468 на 58.5 — $8.00, 195 на 39.0 — $5.00, 325 на 6.5 — $50.00. Колонка отгрузок закрывается на 130.0 ровно так же, как колонка выручки закрывается на 1,300. Три независимых пути, и ни на одном нет противоречия: ловушки здесь нет, и полезно сказать это прямо, а не продолжать искать.\n- Единственная настоящая разница между колонками — это факт о бизнесе, а не дефект арифметики. Standard несёт 58.5 из 130.0 отгрузок, 45.0%, а выручки даёт 36.00%: расхождение в 9.0 п.п. Это цена, а не ошибка базы: 1,300 на 130.0 отгрузок — это смешанные $10.00, а у Standard напечатано $8.00, на 20.00% ниже смеси, и именно поэтому его доля объёма идёт выше его доли выручки.\n- Тождество закрывается и подтверждает оба прочтения разом. Доля выручки уровня — это его доля отгрузок, умноженная на его цену и делённая на смешанную цену, и у Standard это 45.0% умножить на 8.00 разделить на 10.00 = 36.00% — напечатанная цифра, восстановленная с другой стороны таблицы. Oversize гоняет то же соотношение в обратную сторону: 6.5 из 130.0 отгрузок — это 5.0%, по $50.00 каждая, впятеро выше смеси $10.00, и вот так 5.0% объёма превращаются в 25.0% выручки. Каждое число в экзибите согласовано со всеми остальными.\n- Последняя миля: 468 на 1,300 — это 36.00%, база одна и та же 1,300 для каждой строки, и дека в правке не нуждается — начни с этого и не выдумывай проблему, чтобы выглядеть дотошным. Дальше нести стоит другое число: Standard двигает 45.0% отгрузок ради 36.00% выручки по $8.00 против смеси $10.00, поэтому если у этого портфеля есть ценовое давление, живёт оно там, а не в расчёте доли. Две вещи принести: стоимость обслуживания одной отгрузки Standard, поскольку 45.0% объёма по цене на 20.00% ниже смеси — проблема только тогда, когда разрыв в затратах меньше разрыва в цене; и есть ли у Oversize, 5.0% отгрузок по $50.00, мощность, чтобы принять больше объёма."
-   },
-   "provoked": {
-    "ru": "«найти подвох, которого нет» — заподозрить, что в одну колонку доли смешали два знаменателя или что доли взяты от отгрузок, а не от выручки. **Зачёт = оба ложных подозрения проверены и отвергнуты + явно сказано «ловушки нет, потому что…»**.",
-    "en": "\"hunting for a trap that is not there\" — suspecting that two denominators were mixed into the share column or that the shares were taken off shipments rather than revenue. **Credit = both false suspicions checked and rejected + \"there is no trap, because…\" said explicitly**."
-   },
-   "family_h25": "F0",
-   "family_src": "clean",
-   "family_conf": "высокая",
-   "mehanizm": {
-    "naive": "ищет подмену базы между колонками и хеджирует вывод, не найдя её",
-    "correct": "называет вердикт первой фразой и подтверждает его независимой проверкой суммы колонок",
-    "why": "хеджирование при сходящихся колонках выдаёт неуверенность за строгость",
-    "code": "MECH-40-выдуманная-ловушка",
-    "code2": []
-   }
-  },
-  {
-   "id": "CI-049",
-   "title": "The Clinic Across Town",
-   "type": "Chart Interpretation",
-   "clean": false,
-   "prompt": "The board's note reads: \"MedCo earns a 47.9% operating margin against our 3.2%. Buying it moves us toward that margin.\" Does the exhibit support the note?",
-   "exhibit": {
-    "title": "Exhibit A — Per-patient economics, 2022",
-    "parts": [
-     {
-      "type": "table",
-      "header": [
-       "Item",
-       "Princeton-Plainsboro",
-       "MedCo"
-      ],
-      "rows": [
-       [
-        "Revenue per patient — private insurance",
-        "$6,300",
-        "$6,300"
-       ],
-       [
-        "Revenue per patient — public insurance",
-        "$3,700",
-        "$3,700"
-       ],
-       [
-        "Revenue per patient — uninsured",
-        "$3,300",
-        "$3,300"
-       ],
-       [
-        "Patient mix — private",
-        "50%",
-        "80%"
-       ],
-       [
-        "Patient mix — public",
-        "40%",
-        "15%"
-       ],
-       [
-        "Patient mix — uninsured",
-        "10%",
-        "5%"
-       ],
-       [
-        "Average revenue per patient",
-        "**$4,960**",
-        "**$5,760**"
-       ],
-       [
-        "Cost per patient",
-        "$4,800",
-        "$3,000"
-       ],
-       [
-        "Operating margin",
-        "**3.2%**",
-        "**47.9%**"
-       ],
-       [
-        "Patients served per year",
-        "—",
-        "5,000"
-       ],
-       [
-        "Asking price, all cash",
-        "—",
-        "$40M"
-       ]
-      ],
-      "blank_before": 1
-     },
-     {
-      "type": "text",
-      "lines": [
-       "*Note: MedCo's cost per patient is $3,000 since MedCo has a younger clientele. The same three reimbursement rates apply to both columns.*"
+       "*Note: audited figures for both years. There were no acquisitions, disposals or reporting-unit changes in either year, and the four units are the whole group.*"
       ],
       "blank_before": 1,
       "blank_after": 1
@@ -5367,28 +5268,165 @@
    "time": "3 min",
    "step_prompts": [],
    "checklist": {
-    "en": "Credit if ALL: (1) decomposes the gap in profit per patient rather than comparing the two margin percentages — MedCo 5,760 − 3,000 = $2,760, the hospital 4,960 − 4,800 = $160, a gap of $2,600 per patient, 1,625% of the hospital's $160, and splits it into $800 of revenue and $1,800 of cost; (2) shows the $800 is mix and nothing else, because the same three reimbursement rates stand in both columns, and demonstrates it: +30pp private × 6,300 = +$1,890, −25pp public × 3,700 = −$925, −5pp uninsured × 3,300 = −$165, netting +$800; (3) attributes the $1,800 cost gap to panel composition and says why that follows from the exhibit rather than restating the note, and states that no line anywhere in the exhibit describes a procedure, a staffing model or a process at MedCo — every line that differs describes who is being treated, not how; (4) concludes that the 47.9% is a property of MedCo's patient panel, so it travels with those 5,000 patients and does not attach to the hospital's own 50/40/10 book, and asks how that panel was assembled and whether the hospital's own patients are comparable before the note's claim is priced; (5) states that the note's arithmetic cannot be completed at all — the hospital's annual patient count appears nowhere in the exhibit, so no blended margin is computable, and the only figure the exhibit will carry is MedCo's own 2,760 × 5,000 = $13.8M against a $40M price, roughly three years; (6) rejects \"MedCo is the better-run practice, so its margin transfers to us\". Bonus, not required for credit: runs the two counterfactuals — MedCo's $3,000 cost on the hospital's own mix gives (4,960 − 3,000) / 4,960 = 39.5%, and the hospital's $4,800 cost on MedCo's mix gives (5,760 − 4,800) / 5,760 = 16.7%, so neither half alone reaches 47.9% and both halves are properties of the panel; or weights the two channels, 1,800 / 2,600 = 69% of the gap on the cost side against 800 / 2,600 = 31% on the revenue side; or notes that the hospital's own 2022 margin of 3.2% is unchanged by the deal on every patient it already treats.",
-    "ru": "Засчитывать, если ВСЁ: (1) раскладывает разрыв в прибыли на пациента, а не сравнивает две маржи в процентах — MedCo 5,760 − 3,000 = $2,760, больница 4,960 − 4,800 = $160, разрыв — $2,600 на пациента, это 1,625% от больничных $160, — и делит его на $800 выручки и $1,800 затрат; (2) показывает, что $800 — это микс и ничто иное, потому что в обеих колонках стоят одни и те же три ставки возмещения, и доказывает это: +30 п.п. частных × 6,300 = +$1,890, −25 п.п. государственных × 3,700 = −$925, −5 п.п. без страховки × 3,300 = −$165, в сумме +$800; (3) относит разрыв в $1,800 затрат к составу пациентской базы и объясняет, почему это следует из экзибита, а не пересказывает примечание, и говорит, что нигде в экзибите нет ни строки о процедуре, о нормативе укомплектованности или о процессе в MedCo — каждая различающаяся строка говорит о том, кого лечат, а не о том, как лечат; (4) заключает, что 47.9% — свойство пациентской базы MedCo, поэтому эта величина идёт вместе с теми 5,000 пациентами и на собственный портфель больницы 50/40/10 не распространяется, и спрашивает, как эта база была собрана и сопоставимы ли с ней собственные пациенты больницы, прежде чем оценивать заявление примечания в деньгах; (5) говорит, что арифметику примечания вообще нельзя довести до конца — годового числа пациентов больницы в экзибите нет нигде, поэтому никакая смешанная маржа не считается, и единственное, что экзибит поддерживает, — это собственные 2,760 × 5,000 = $13.8M у MedCo против цены $40M, то есть примерно три года; (6) отвергает вывод «MedCo — лучше управляемая практика, значит, её маржа переносится к нам». Бонус, для зачёта не обязателен: прогоняет два контрфакта — затраты MedCo $3,000 на собственном миксе больницы дают (4,960 − 3,000) / 4,960 = 39.5%, а затраты больницы $4,800 на миксе MedCo дают (5,760 − 4,800) / 5,760 = 16.7%, поэтому ни одна половина сама по себе до 47.9% не дотягивает и обе половины — свойства пациентской базы; либо взвешивает два канала: 1,800 / 2,600 = 69% разрыва на стороне затрат против 800 / 2,600 = 31% на стороне выручки; либо отмечает, что собственная маржа больницы 2022 года в 3.2% сделкой не меняется ни на одном пациенте, которого больница уже лечит."
+    "en": "Credit if ALL: (1) states the verdict first and states it without hedging — the claim stands, 279.00 divided by 900 is 31.00% and 232.00 divided by 800 is 29.00%, so the rise is exactly 2.00 points, not approximately; (2) checks and rejects the mix suspicion by computing rather than by asserting — the revenue mix genuinely moved, Bearings 40.0% to 42.0% and Seals 30.0% to 26.0%, and Bearings is the highest-margin unit, so the reflex is that the group rise was bought by weight; hold FY2023 weights and apply FY2024 unit margins and the group is 30.95%, only 0.05 points below the reported 31.00%, so mix bought essentially nothing; (3) shows the same conclusion the other way round, valuing the weight shift at FY2023 margins: 0.02 x 34.0 minus 0.04 x 28.0 plus 0.02 x 22.0 = 0.00 points exactly, because the volume leaving Seals at 28.0% is offset by what arrives at Bearings 34.0% and Hydraulics 22.0% — and says that the verdict therefore does not depend on which decomposition convention is used, mix is 0.00 to 0.05 points of a 2.00-point move; (4) checks and rejects the second suspicion, margin up on falling profit dollars, by computing the level: gross profit goes 232.00 to 279.00, plus 47.00 or plus 20.3%, on revenue up 12.5% — the rate and the money move the same way; (5) computes the unit margins and states that every unit improved on its own — Bearings 34.0 to 37.0, Seals 28.0 to 29.0, Fasteners 24.0 to 25.5, Hydraulics 22.0 to 23.5 — so no unit is being carried by the aggregate; (6) says explicitly that there is no trap here and does not ask for further data before confirming a figure the exhibit already verifies from both sides. Bonus, not required for credit: reads Seals as the one fact worth carrying forward — the only unit whose revenue fell, 240 to 234, minus 2.5%, while its margin still rose 1.0 point; or notes that the group's 2.00-point rise is smaller than Bearings' own 3.0 points precisely because Seals and Hydraulics improved less.",
+    "ru": "Засчитывать, если ВСЁ: (1) сначала называет вердикт и называет его без оговорок — утверждение остаётся в силе, 279.00, делённые на 900, — это 31.00%, а 232.00, делённые на 800, — 29.00%, значит, рост ровно 2.00 пункта, а не примерно; (2) проверяет и отвергает подозрение на микс счётом, а не заявлением — структура выручки действительно сдвинулась, Bearings с 40.0% до 42.0%, Seals с 30.0% до 26.0%, а Bearings — самый маржинальный юнит, поэтому рефлекс говорит, что рост группы куплен весами; но если удержать веса FY2023 и приложить маржи юнитов FY2024, группа даёт 30.95%, всего на 0.05 пункта ниже заявленных 31.00%, то есть микс не купил практически ничего; (3) показывает тот же вывод с другой стороны, оценивая сдвиг весов по маржам FY2023: 0.02 x 34.0 минус 0.04 x 28.0 плюс 0.02 x 22.0 = ровно 0.00 пункта, потому что объём, ушедший из Seals с 28.0%, гасится тем, что пришло в Bearings 34.0% и Hydraulics 22.0%, — и говорит, что вердикт поэтому не зависит от выбранной конвенции разложения: микс стоит от 0.00 до 0.05 пункта из 2.00; (4) проверяет и отвергает второе подозрение, «процент вырос, а деньги упали», счётом уровня: валовая прибыль идёт с 232.00 до 279.00, то есть плюс 47.00 или плюс 20.3%, при выручке плюс 12.5% — ставка и деньги двигаются в одну сторону; (5) считает маржи юнитов и говорит, что улучшился каждый сам по себе — Bearings 34.0 → 37.0, Seals 28.0 → 29.0, Fasteners 24.0 → 25.5, Hydraulics 22.0 → 23.5, — значит, агрегат никого не тащит; (6) прямо говорит, что ловушки здесь нет, и не просит дополнительных данных, прежде чем подтвердить цифру, которую экзибит проверяет с двух сторон. Бонус, для зачёта не обязателен: читает Seals как единственный факт, который стоит нести дальше, — единственный юнит с падением выручки, 240 → 234, минус 2.5%, притом что маржа его всё равно выросла на 1.0 пункт; или отмечает, что рост группы на 2.00 пункта меньше собственных 3.0 пунктов Bearings именно потому, что Seals и Hydraulics улучшились слабее."
    },
    "reference": {
-    "en": "- Naive: 47.9% against 3.2% is a fifteenfold difference and it sits in bold at the bottom of a column headed by a clinic that is for sale. The reflex is to read the ratio as performance — MedCo is the better-run practice, buy it, import what it does. The exhibit then looks like confirmation, because everything in MedCo's column is better than everything in ours.\n- Correct: put the two margins away and take the difference in dollars per patient, where it can be taken apart. MedCo earns 5,760 − 3,000 = $2,760 per patient. The hospital earns 4,960 − 4,800 = $160. The gap is $2,600, 1,625% of the hospital's $160, and it has exactly two pieces: $800 of revenue, 5,760 against 4,960, and $1,800 of cost, 4,800 against 3,000. Both pieces are in the exhibit and both can be traced to their source.\n- The $800 is mix, and only mix. The same three reimbursement rates — $6,300 private, $3,700 public, $3,300 uninsured — stand in both columns, so the entire revenue advantage comes from the weights: 30 points more private at 6,300 is +$1,890, 25 points less public at 3,700 is −$925, 5 points less uninsured at 3,300 is −$165, and 1,890 − 925 − 165 = $800, the whole of it. MedCo is not paid more for anything. It is paid the same rates for a different set of patients.\n- The $1,800 is the other half of the same fact. The exhibit gives the reason on its own line: MedCo's cost per patient is $3,000 since MedCo has a younger clientele. That is a statement about who walks in, not about what is done to them once they do. Read the two pieces together and every line in the exhibit that differs between the columns is a line about the composition of the patient book — the mix rows and the age of the panel. There is no line about a procedure, a staffing ratio, a supply contract or a process.\n- Which is what breaks the note. The 47.9% is not a capability that a buyer acquires and then applies; it is a description of 5,000 particular patients, and it comes with them and stops there. The hospital's own patients are still 50/40/10, still cost $4,800, and still return $160 each the day after the deal closes — 3.2%, unchanged. The right question to put back to the board is how MedCo's panel was assembled, and whether anything in the deal changes who arrives at the hospital's own door.\n- Two counterfactuals settle it arithmetically. Give the hospital MedCo's $3,000 cost but keep its own mix: (4,960 − 3,000) / 4,960 = 39.5%. Give it MedCo's mix but keep its own $4,800 cost: (5,760 − 4,800) / 5,760 = 16.7%. Neither reaches 47.9%, because 47.9% requires both the mix and the clientele at once — and the two are the same underlying fact seen from the revenue side and the cost side. On weights, 1,800 / 2,600 = 69% of the gap sits on the cost side and 800 / 2,600 = 31% on the revenue side.\n- Last mile: the exhibit does not support the note, and it also cannot be made to — the hospital's own annual patient count is nowhere in it, so no blended margin can be computed from what is on the page. What the exhibit does support is narrower and worth stating in its place: MedCo earns $2,760 on each of 5,000 patients, $13.8M a year, against a $40M price, so the deal recovers its cost in roughly three years on MedCo's book alone. Bring back two things before it goes to the board — how MedCo's panel was formed and whether it holds under new ownership, and what, if anything, in this deal changes the mix of the hospital's own patients.",
-    "ru": "- Наивное прочтение: 47.9% против 3.2% — это пятнадцатикратная разница, и стоит она жирным внизу колонки, во главе которой клиника, выставленная на продажу. Рефлекс — прочесть это отношение как качество работы: MedCo — лучше управляемая практика, купить её и перенести к себе то, что она делает. Экзибит тогда выглядит подтверждением, потому что всё в колонке MedCo лучше, чем всё в нашей.\n- Верно: убери обе маржи в сторону и возьми разницу в долларах на пациента — там её можно разобрать. MedCo зарабатывает 5,760 − 3,000 = $2,760 на пациента. Больница зарабатывает 4,960 − 4,800 = $160. Разрыв — $2,600, это 1,625% от больничных $160, и состоит он ровно из двух кусков: $800 выручки, 5,760 против 4,960, и $1,800 затрат, 4,800 против 3,000. Оба куска есть в экзибите, и оба прослеживаются до источника.\n- $800 — это микс, и только микс. Одни и те же три ставки возмещения — $6,300 частные, $3,700 государственные, $3,300 без страховки — стоят в обеих колонках, поэтому всё преимущество по выручке идёт от весов: на 30 пунктов больше частных по 6,300 — это +$1,890, на 25 пунктов меньше государственных по 3,700 — это −$925, на 5 пунктов меньше без страховки по 3,300 — это −$165, и 1,890 − 925 − 165 = $800, всё целиком. MedCo не платят больше ни за что. Ей платят те же ставки за другой набор пациентов.\n- $1,800 — это вторая половина того же факта. Экзибит даёт причину отдельной строкой: затраты MedCo на пациента — $3,000, поскольку у MedCo более молодая клиентура. Это утверждение о том, кто заходит в дверь, а не о том, что с ним делают, когда он зашёл. Прочти оба куска вместе — и каждая строка экзибита, которая различается между колонками, окажется строкой о составе пациентской базы: строки микса и возраст самой базы. Нет ни строки о процедуре, о нормативе укомплектованности, о контракте на поставку или о процессе.\n- Именно это и ломает примечание. 47.9% — это не способность, которую покупатель приобретает и потом применяет; это описание 5,000 конкретных пациентов, и оно идёт вместе с ними и на этом кончается. Собственные пациенты больницы и на следующий день после закрытия сделки остаются 50/40/10, по-прежнему обходятся в $4,800 и по-прежнему возвращают по $160 каждый — 3.2%, без изменений. Верный вопрос, который надо вернуть совету директоров, — как была собрана база MedCo и меняет ли что-нибудь в сделке то, кто приходит к собственной двери больницы.\n- Два контрфакта решают дело арифметически. Дай больнице затраты MedCo $3,000, но оставь ей свой микс: (4,960 − 3,000) / 4,960 = 39.5%. Дай ей микс MedCo, но оставь свои затраты $4,800: (5,760 − 4,800) / 5,760 = 16.7%. Ни один не дотягивает до 47.9%, потому что 47.9% требуют и микса, и клиентуры разом, — а это один и тот же лежащий в основе факт, увиденный со стороны выручки и со стороны затрат. По весам 1,800 / 2,600 = 69% разрыва сидят на стороне затрат, а 800 / 2,600 = 31% — на стороне выручки.\n- Последняя миля: экзибит примечание не поддерживает, и заставить его поддержать тоже нельзя — собственного годового числа пациентов больницы в нём нет, поэтому никакая смешанная маржа из того, что есть на странице, не считается. Экзибит поддерживает нечто более узкое, и это стоит сказать вместо примечания: MedCo зарабатывает $2,760 на каждом из 5,000 пациентов, $13.8M в год, против цены $40M, то есть сделка отбивает свою стоимость примерно за три года на одной только базе MedCo. Принести две вещи до выхода на совет директоров — как была сформирована база MedCo и держится ли она при новом владельце, и что в этой сделке, если вообще что-то, меняет микс собственных пациентов больницы."
+    "en": "- Naive: two years sit side by side, the question is phrased as a verification, and the reflex is to look for what the aggregate is hiding. The mix has visibly moved — Bearings, the richest unit, went from 40.0% of revenue to 42.0%, Seals from 30.0% to 26.0% — so the suspicion arrives on its own: the group did not improve, the weights did. A second reflex follows it: a margin percentage can rise while the money falls. Neither suspicion survives a calculation, and the temptation is then to hedge — the improvement is \"partly mix\", or it \"needs unit-level data to confirm\". That is a wrong answer wearing the costume of rigour, and the unit-level data is already printed.\n- Correct: the claim is exact and it stands. FY2024 gross profit of 279.00 on revenue of 900 is **31.00%**; FY2023 gross profit of 232.00 on revenue of 800 is **29.00%**; the rise is **exactly 2.00 points**. Say that in the first sentence, before the checking, because the checking supports the verdict rather than replaces it.\n- The mix suspicion is real enough to need arithmetic, and the arithmetic kills it. Hold FY2023 weights — 40.0%, 30.0%, 20.0%, 10.0% — and apply the FY2024 unit margins of 37.0%, 29.0%, 25.5% and 23.5%: 0.40 x 37.0 + 0.30 x 29.0 + 0.20 x 25.5 + 0.10 x 23.5 = **30.95%**, against the reported 31.00%. The whole of the weight shift is worth **0.05 of a point** out of a 2.00-point move.\n- Run the decomposition the other way and it lands on zero. Value the shift in weights at FY2023 margins: 0.02 x 34.0 − 0.04 x 28.0 + 0.00 x 24.0 + 0.02 x 22.0 = 0.68 − 1.12 + 0.44 = **0.00 points**. The revenue that left Seals at 28.0% was replaced by revenue arriving at Bearings 34.0% and Hydraulics 22.0%, one above and one below it, and they cancel to the decimal. So mix contributes 0.00 points on one convention and 0.05 on the other; the verdict does not depend on the choice, which is the point of running both.\n- The second suspicion needs a different calculation and dies just as fast. Percentages can rise on shrinking money, so compute the money: gross profit goes **232.00 → 279.00**, up **$47.00M**, **+20.3%**, on revenue up 12.5% from 800 to 900. Profit grew faster than revenue, which is what a genuine margin gain looks like.\n- Every unit improved on its own, so nothing is being carried. Bearings 34.0% → 37.0%, Seals 28.0% → 29.0%, Fasteners 24.0% → 25.5%, Hydraulics 22.0% → 23.5% — plus 3.0, 1.0, 1.5 and 1.5 points. The group's 2.00 points sits inside that spread, exactly where a revenue-weighted average of four positive moves should sit. There is no trap here, and the useful thing is to say so plainly rather than keep looking.\n- Last mile: 279.00 over 900 is 31.00%, the 2.0-point rise is real and it was earned unit by unit, and the deck needs no correction — lead with that and do not manufacture a problem to look thorough. The number worth carrying forward is the other one. Seals is the only unit whose revenue fell, **240 → 234, −2.5%**, in a group that grew 12.5%, and it improved its margin by the smallest amount of the four, 1.0 point. Two things to bring back: what happened to Seals volume and price separately, since a unit that shrinks while lifting margin is usually shedding low-price business and that has a floor; and whether Hydraulics, up 35.0% in revenue on the thinnest margin of the four at 23.5%, is buying that growth with price.",
+    "ru": "- Наивное прочтение: два года стоят рядом, вопрос сформулирован как проверка, и рефлекс — искать, что агрегат прячет. Структура выручки заметно сдвинулась: Bearings, самый жирный юнит, ушёл с 40.0% выручки на 42.0%, Seals — с 30.0% на 26.0%, — и подозрение приходит само: улучшилась не группа, а веса. Следом идёт второй рефлекс: процент маржи может расти при падающих деньгах. Ни одно из подозрений не переживает счёта, и тогда возникает соблазн смягчить — улучшение «частично миксовое» или «требует данных по юнитам». Это неверный ответ в костюме строгости, а данные по юнитам уже напечатаны.\n- Верно: утверждение точно и остаётся в силе. Валовая прибыль FY2024 279.00 на выручке 900 — это **31.00%**; валовая прибыль FY2023 232.00 на выручке 800 — **29.00%**; рост — **ровно 2.00 пункта**. Скажи это первой фразой, до проверки, потому что проверка подпирает вердикт, а не заменяет его.\n- Подозрение на микс достаточно серьёзно, чтобы потребовать арифметики, и арифметика его убивает. Удержим веса FY2023 — 40.0%, 30.0%, 20.0%, 10.0% — и приложим маржи юнитов FY2024, 37.0%, 29.0%, 25.5% и 23.5%: 0.40 x 37.0 + 0.30 x 29.0 + 0.20 x 25.5 + 0.10 x 23.5 = **30.95%** против заявленных 31.00%. Весь сдвиг весов стоит **0.05 пункта** из движения в 2.00 пункта.\n- Проведём разложение в обратную сторону — оно приходит в ноль. Оценим сдвиг весов по маржам FY2023: 0.02 x 34.0 − 0.04 x 28.0 + 0.00 x 24.0 + 0.02 x 22.0 = 0.68 − 1.12 + 0.44 = **0.00 пункта**. Выручка, ушедшая из Seals с 28.0%, заместилась выручкой, пришедшей в Bearings 34.0% и Hydraulics 22.0%, один выше и один ниже, и они гасятся до десятой. То есть микс даёт 0.00 пункта по одной конвенции и 0.05 по другой; вердикт от выбора не зависит, ради чего обе и считаются.\n- Второму подозрению нужен другой счёт, и умирает оно так же быстро. Проценты могут расти на сжимающихся деньгах — значит, считаем деньги: валовая прибыль идёт **232.00 → 279.00**, плюс **$47.00M**, **+20.3%**, при выручке плюс 12.5%, с 800 до 900. Прибыль выросла быстрее выручки — именно так выглядит настоящий выигрыш маржи.\n- Каждый юнит улучшился сам, значит, никого не тащат. Bearings 34.0% → 37.0%, Seals 28.0% → 29.0%, Fasteners 24.0% → 25.5%, Hydraulics 22.0% → 23.5% — плюс 3.0, 1.0, 1.5 и 1.5 пункта. Групповые 2.00 пункта лежат внутри этого разброса, ровно там, где и должно лежать взвешенное по выручке среднее четырёх положительных движений. Ловушки здесь нет, и полезно сказать это прямо, а не продолжать искать.\n- Последняя миля: 279.00 на 900 — это 31.00%, рост на 2.0 пункта реален и заработан поюнитно, дека в правке не нуждается — начни с этого и не выдумывай проблему, чтобы выглядеть дотошным. Дальше нести стоит другое число. Seals — единственный юнит с падением выручки, **240 → 234, −2.5%**, в группе, выросшей на 12.5%, и маржу он поднял слабее всех, на 1.0 пункт. Две вещи принести: что произошло у Seals с объёмом и ценой по отдельности, поскольку юнит, который сжимается и при этом поднимает маржу, обычно сбрасывает дешёвый бизнес, а у этого есть дно; и не покупает ли Hydraulics свой рост выручки в 35.0% ценой — маржа у него самая тонкая из четырёх, 23.5%."
    },
    "provoked": {
-    "ru": "«приписать разрыв 47.9% против 3.2% тому, как MedCo работает, и перенести её маржу на своих пациентов» — вместо того чтобы разложить $2,600 на $800 микса и $1,800 стоимости и увидеть, что обе части описывают состав панели пациентов, а не работу клиники.",
-    "en": "\"attributing the 47.9% against 3.2% gap to how MedCo is run and carrying its margin over to the hospital's own patients\" — instead of splitting the $2,600 into $800 of mix and $1,800 of cost and seeing that both pieces describe the composition of the patient panel, not the way the clinic is run."
+    "ru": "«найти подвох, которого нет» — заподозрить, что рост сводной маржи куплен сдвигом структуры выручки, или что процент вырос при упавшей валовой прибыли в деньгах. **Зачёт = оба ложных подозрения проверены счётом и отвергнуты + явно сказано «ловушки нет, потому что…»**.",
+    "en": "\"hunting for a trap that is not there\" — suspecting that the group margin rise was bought by a shift in revenue mix, or that the percentage rose while gross profit in dollars fell. **Credit = both false suspicions checked by calculation and rejected + \"there is no trap, because…\" said explicitly**."
    },
-   "family_h25": "F3",
-   "family_src": "тело",
+   "family_h25": "F0",
+   "family_src": "clean",
    "family_conf": "высокая",
-   "family_note": "Круг по телу записи: разница объясняется составом группы, а не воздействием. В checklist пункт 3: «no line anywhere in the exhibit describes a procedure, a staffing model or a process at MedCo — every line that differs describes who is being treated, not how». В reference: «The 47.9% is not a capability that a buyer acquires and then applies; it is a description of 5,000 particular patients, and it comes with them and stops there». Обе половины разрыва книжные: $800 — чистый микс при одинаковых ставках, $1,800 — книга прямо пишет «since MedCo has a younger clientele».",
+   "family_note": "круг 105: чистый слот; ложное подозрение сменено с подмены базы между колонками на сдвиг структуры выручки — веса действительно двигаются (40.0→42.0 и 30.0→26.0), и отвергается это пересчётом сводной маржи на неизменных весах, 30.95% против 31.00%, плюс проверкой уровня валовой прибыли 232.00 → 279.00",
    "mehanizm": {
-    "naive": "приписывает разрыв маржи тому, как работает вторая организация, и переносит её маржу на своих клиентов",
-    "correct": "раскладывает разрыв в прибыли на клиента на часть от микса плательщиков и часть от стоимости обслуживания",
-    "why": "при одинаковых тарифах разница целиком описывает состав обслуживаемых, а не способ обслуживания",
-    "code": "MECH-114-перенос-чужой-экономики",
-    "code2": []
+    "naive": "подозревает, что рост сводного показателя произведён сдвигом структуры выручки, и смягчает вывод, не посчитав вклад структуры",
+    "correct": "называет вердикт первой фразой и отвергает подозрение пересчётом сводного показателя на неизменных весах и проверкой уровня прибыли в деньгах",
+    "why": "структура может сдвинуться и не дать ничего — её вклад считается, а не предполагается",
+    "code": "MECH-40-выдуманная-ловушка",
+    "code2": [
+     "MECH-35-микс-против-ставки"
+    ]
    }
+  },
+  {
+   "id": "CI-049",
+   "title": "The Zebra Acquisition",
+   "type": "Chart Interpretation",
+   "clean": false,
+   "prompt": "Our analyst priced the zebra off the 8% attendance lift another zoo got from a similar zebra. The NPV comes out at +$155K, so the paper on the desk says buy. Should we sign?",
+   "exhibit": {
+    "title": "Exhibit A — Zebra acquisition: attendance, costs and discount rate",
+    "parts": [
+     {
+      "type": "table",
+      "header": [
+       "Item",
+       "Value"
+      ],
+      "rows": [
+       [
+        "Annual visitors",
+        "300,000"
+       ],
+       [
+        "Admission",
+        "$15"
+       ],
+       [
+        "Current annual revenue",
+        "$4,500,000"
+       ],
+       [
+        "Attendance increase at another zoo that acquired a similar zebra",
+        "8%"
+       ],
+       [
+        "Acquisition cost",
+        "$235,000"
+       ],
+       [
+        "New facilities",
+        "$850,000"
+       ],
+       [
+        "Transportation",
+        "$110,000"
+       ],
+       [
+        "Upfront costs, total",
+        "**$1,195,000**"
+       ],
+       [
+        "Annual maintenance (food, health costs, additional trainers)",
+        "$90,000"
+       ],
+       [
+        "Discount rate",
+        "20%"
+       ]
+      ],
+      "blank_before": 1
+     },
+     {
+      "type": "text",
+      "lines": [
+       "*Immediate costs are paid today. Annual costs and benefits are realised beginning next year and sustained into perpetuity. Attendance benefits are realised immediately and maintained thereafter.*"
+      ],
+      "blank_before": 1,
+      "blank_after": 1
+     },
+     {
+      "type": "text",
+      "lines": [
+       "Exhibit B — Market research findings"
+      ],
+      "blank_before": 1
+     },
+     {
+      "type": "table",
+      "header": [
+       "Possible attendance increase",
+       "Additional annual revenue",
+       "Probability"
+      ],
+      "rows": [
+       [
+        "3% increase",
+        "$135,000",
+        "20%"
+       ],
+       [
+        "5% increase",
+        "$225,000",
+        "40%"
+       ],
+       [
+        "7% increase",
+        "$315,000",
+        "30%"
+       ],
+       [
+        "9% increase",
+        "$405,000",
+        "10%"
+       ]
+      ],
+      "blank_before": 1
+     }
+    ]
+   },
+   "exhibit_mode": "E-before",
+   "time": "3 min",
+   "step_prompts": [],
+   "checklist": {
+    "en": "Credit if ALL: (1) states the conclusion first, as an action with a subject — \"Do not sign on the 8% valuation\" or \"The zoo should not buy at this price on this evidence\" — before any arithmetic is shown; building up to the verdict scores nothing on this item even when the verdict itself is right; (2) names the 8% for what it is, a lift measured on another zoo's visitors and another zebra, so it is a benchmark drawn from a different population rather than this zoo's expected outcome, and refuses to let the sign of an NPV computed on a borrowed input settle the question; (3) builds this zoo's own expectation from Exhibit B instead of from the benchmark — 0.20 × 135,000 + 0.40 × 225,000 + 0.30 × 315,000 + 0.10 × 405,000 = $252,000 — and puts it on the same scale as the benchmark, 252,000 / 4,500,000 = 5.60% against 8%, a gap of 2.40pp, with the benchmark 360,000 / 252,000 = 42.86% above the client's own expected revenue; (4) builds the breakeven threshold itself rather than asking for it: at a 20% discount rate the perpetuity must cover the $1,195,000 upfront, so 1,195,000 × 0.20 = $239,000, plus $90,000 of maintenance gives $329,000 of required additional revenue, which is 329,000 / 4,500,000 = 7.31%; (5) recomputes the NPV on the client's own expectation, −1,195,000 + (252,000 − 90,000) / 0.20 = −$385,000, and states that the sign flips — a swing of $540,000 from the reported +$155,000, equal to (360,000 − 252,000) / 0.20; (6) reads the threshold against the whole distribution and not against the expectation alone: only the 9% row, $405,000, clears $329,000, so the client's own study puts 10% probability on breaking even and 90% below it, and the 7% row misses by $14,000, that is by 0.31pp; (7) names the quantity the decision actually turns on — 8% is not one of the four outcomes the client's own study produced, and it stands above every one of them except the 9% row that the study weights at 10%, so what decides is whose population the number was measured on, not the sign of the NPV at 8%; (8) rejects \"another zoo got 8% from a similar zebra, so 8% is our number\". Bonus, not required for credit: prices each scenario, −$970,000, −$520,000, −$70,000 and +$380,000, and shows the probability-weighted NPV reproduces −$385,000; or states the shortfall in revenue terms, $329,000 required against $252,000 expected, a gap of $77,000, so breakeven demands 30.56% more additional revenue than the client's own study expects; or asks what would have to be true for the two populations to be comparable — the other zoo's visitor base and catchment, its attendance before that zebra arrived, and the window over which its 8% was measured.",
+    "ru": "Засчитывать, если ВСЁ: (1) называет вывод первым, действием и с субъектом — «Подписывать по оценке на 8% нельзя» или «Зоопарку не следует покупать по этой цене на этих данных», — до всякой арифметики; подведение к выводу по этому пункту не засчитывается, даже если сам вывод верен; (2) называет 8% тем, что это есть: приростом, измеренным на посетителях другого зоопарка и на другой зебре, то есть бенчмарком с другой совокупности, а не ожидаемым результатом своего зоопарка, — и отказывается решать вопрос знаком NPV, посчитанного на заимствованном входе; (3) строит собственное ожидание зоопарка по Exhibit B, а не по бенчмарку: 0.20 × 135,000 + 0.40 × 225,000 + 0.30 × 315,000 + 0.10 × 405,000 = $252,000, — и приводит его к той же шкале, что и бенчмарк: 252,000 / 4,500,000 = 5.60% против 8%, разрыв 2.40 п.п., при этом бенчмарк на 360,000 / 252,000 = 42.86% выше собственной ожидаемой выручки клиента; (4) строит порог безубыточности сам, а не просит его: при ставке 20% перпетуитет должен покрыть $1,195,000 первоначальных вложений, поэтому 1,195,000 × 0.20 = $239,000, плюс $90,000 обслуживания даёт $329,000 требуемой дополнительной выручки, то есть 329,000 / 4,500,000 = 7.31%; (5) пересчитывает NPV на собственном ожидании клиента, −1,195,000 + (252,000 − 90,000) / 0.20 = −$385,000, и говорит, что знак переворачивается — сдвиг на $540,000 от заявленных +$155,000, что равно (360,000 − 252,000) / 0.20; (6) читает порог против всего распределения, а не против одного ожидания: порог $329,000 перекрывает только строка 9%, $405,000, поэтому собственное исследование клиента даёт 10% вероятности выйти в ноль и 90% — оказаться ниже, а строка 7% не дотягивает $14,000, то есть 0.31 п.п.; (7) называет величину, на которой держится решение: 8% вообще нет среди четырёх исходов собственного исследования клиента, и они стоят выше каждого из них, кроме строки 9%, которой исследование даёт вес 10%, — поэтому решает то, на чьей совокупности величина измерена, а не знак NPV при 8%; (8) отвергает «другой зоопарк получил 8% на похожей зебре, значит, 8% — наша цифра». Бонус, для зачёта не обязателен: считает NPV по каждому сценарию, −$970,000, −$520,000, −$70,000 и +$380,000, и показывает, что взвешенный по вероятностям NPV воспроизводит −$385,000; либо формулирует недобор в выручке: требуется $329,000 против ожидаемых $252,000, разрыв $77,000, то есть безубыточность требует на 30.56% больше дополнительной выручки, чем ожидает собственное исследование клиента; либо спрашивает, при каких условиях две совокупности вообще сопоставимы — база и охват посетителей другого зоопарка, его посещаемость до появления той зебры и окно, на котором его 8% были измерены."
+   },
+   "reference": {
+    "en": "- Naive: the inputs are all on the page and the model closes. Annual benefit is 300,000 × $15 × 0.08 = $360K, upfront cost is 235 + 850 + 110 = $1,195K, maintenance is $90K a year, and at a 20% discount rate the perpetuity gives −1,195 + (360 − 90) / 0.20 = +$155K. A positive NPV on a live comparable — another zoo, a similar zebra, an 8% lift that actually happened — reads as evidence rather than assumption. Sign it.\n- Correct: the 8% is not an input of this zoo. It is a measurement taken on another zoo's visitors and another zoo's zebra, and it has been carried across and entered into our model as though it were our own result. Everything else in the calculation is ours — our 300,000 visitors, our $15 admission, our $1,195K of upfront cost, our $90K of maintenance. One number in the chain belongs to somebody else, and it is the only one that decides the sign.\n- The client already owns the number that belongs to it. Exhibit B is research on this zoo, and it does not produce a point, it produces a distribution: 0.20 × 135,000 + 0.40 × 225,000 + 0.30 × 315,000 + 0.10 × 405,000 = $252,000 of expected additional revenue, which is 252,000 / 4,500,000 = 5.60%. Put that against the borrowed 8% and the gap is 2.40pp; in money the benchmark is 360,000 / 252,000 = 42.86% richer than what the client's own visitors are expected to deliver. The two numbers are not two estimates of the same thing. They are estimates of two different populations.\n- Then build the threshold, because the sign of an NPV is meaningless until you know what it takes to reach zero. The perpetuity has to cover the upfront cost, so 1,195,000 × 0.20 = $239,000, and it has to cover maintenance, so the required additional revenue is 239,000 + 90,000 = $329,000. As an attendance lift that is 329,000 / 4,500,000 = 7.31%.\n- Now the two moves meet. Recompute the NPV on the client's own expectation: −1,195,000 + (252,000 − 90,000) / 0.20 = −$385,000. The sign flips, and it flips by $540,000, which is exactly (360,000 − 252,000) / 0.20 — the whole of the difference between the borrowed lift and the client's own, geared up by the perpetuity. The recommendation on the desk is not marginally optimistic; it is the entire distance from +155 to −385 built out of one transplanted number.\n- The distribution says more than its own mean, and this is where the case is actually decided. The threshold is $329,000, and only one row in Exhibit B clears it, the 9% row at $405,000, which the client's own study weights at 10%. The 7% row, $315,000, misses by $14,000 — 0.31pp of attendance. Scenario by scenario the NPV is −$970,000, −$520,000, −$70,000 and +$380,000, and weighting those by 0.20, 0.40, 0.30 and 0.10 reproduces −$385,000, which confirms the expectation was handled correctly. The borrowed 8% is not merely above the client's mean of 5.60%; it is above every outcome the client's own research produced except the one it gives a 10% chance.\n- What this is, stated plainly: a quantity measured on one population has been carried onto another and treated as its own result. The right test is not \"is the NPV positive at 8%\" but \"whose 8% is it\", and the answer is that it is the other zoo's, so it prices their zebra with their visitors. The client's own research is the only estimate of this zoo on the page, and against the threshold this zoo has to clear it fails at every outcome but one.\n- Last mile: do not sign on the 8%. On the client's own research the expected NPV is −$385,000, not +$155,000, and breakeven needs $329,000 of additional revenue against the $252,000 the research expects — 30.56% more — with only a 10% chance of getting there. Two things before this goes back: what the other zoo's baseline attendance and catchment were, and over what window its 8% was measured, since a lift on a different visitor base is not a forecast for ours; and whether the deal can be restructured so the price is not fixed against an outcome the client's own study puts at one chance in ten.\n- **Source:** Kellogg-2012, Zoo Co., pp. 200–205 — attendance, admission, the other zoo's 8%, the three upfront cost lines, maintenance, the discount rate and the perpetuity assumption, plus the $360K annual benefit, the $1.195M upfront total and the $155K NPV, all from the \"Clarifying answers / Guide to case\" block, p. 201; the breakeven chain $1,195,000 × 0.20 = $239,000, revenue = $239,000 + $90,000 = $329,000 and $329,000 / $4.5M = 7.3%, from the \"Calculations\" block, math question 1, p. 203; the four-outcome distribution, the $252,000 expected additional annual revenue and the $4,500,000 / $4,752,000 totals, from Exhibit 1, p. 205. The insurance branch of the case (pp. 202–204) is not used.",
+    "ru": "- Наивное прочтение: все входы на странице, и модель сходится. Годовая выгода — 300,000 × $15 × 0.08 = $360K, первоначальные затраты — 235 + 850 + 110 = $1,195K, обслуживание — $90K в год, и при ставке 20% перпетуитет даёт −1,195 + (360 − 90) / 0.20 = +$155K. Положительный NPV на живом сопоставимом примере — другой зоопарк, похожая зебра, 8% прироста, которые реально случились, — читается как доказательство, а не как допущение. Подписывать.\n- Верно: 8% — это не вход этого зоопарка. Это величина, измеренная на посетителях другого зоопарка и на его зебре, перенесённая к нам и подставленная в нашу модель так, будто это наш собственный результат. Всё остальное в расчёте — наше: наши 300,000 посетителей, наши $15 билета, наши $1,195K первоначальных затрат, наши $90K обслуживания. Чужая в цепочке одна величина, и именно она определяет знак.\n- Своя величина у клиента уже есть. Exhibit B — это исследование по этому зоопарку, и оно даёт не точку, а распределение: 0.20 × 135,000 + 0.40 × 225,000 + 0.30 × 315,000 + 0.10 × 405,000 = $252,000 ожидаемой дополнительной выручки, то есть 252,000 / 4,500,000 = 5.60%. Поставь это против заимствованных 8% — разрыв 2.40 п.п.; в деньгах бенчмарк на 360,000 / 252,000 = 42.86% богаче того, что ожидается от собственных посетителей клиента. Это не две оценки одного и того же. Это оценки двух разных совокупностей.\n- Дальше строим порог, потому что знак NPV ничего не значит, пока не известно, что требуется для выхода в ноль. Перпетуитет должен покрыть первоначальные затраты, поэтому 1,195,000 × 0.20 = $239,000, и должен покрыть обслуживание, поэтому требуемая дополнительная выручка — 239,000 + 90,000 = $329,000. В приросте посещаемости это 329,000 / 4,500,000 = 7.31%.\n- Теперь два хода сходятся. Пересчитаем NPV на собственном ожидании клиента: −1,195,000 + (252,000 − 90,000) / 0.20 = −$385,000. Знак переворачивается, и переворачивается на $540,000, что в точности равно (360,000 − 252,000) / 0.20 — вся разница между заимствованным приростом и своим, усиленная перпетуитетом. Рекомендация на столе не «слегка оптимистична»: вся дистанция от +155 до −385 построена на одной пересаженной величине.\n- Распределение говорит больше, чем его собственное среднее, и именно здесь кейс решается. Порог — $329,000, и перекрывает его в Exhibit B ровно одна строка, 9% с её $405,000, которой собственное исследование клиента даёт вес 10%. Строка 7%, $315,000, не дотягивает $14,000 — это 0.31 п.п. посещаемости. По сценариям NPV равен −$970,000, −$520,000, −$70,000 и +$380,000, и взвешивание их по 0.20, 0.40, 0.30 и 0.10 воспроизводит −$385,000, что подтверждает: с ожиданием обошлись правильно. Заимствованные 8% не просто выше среднего клиента в 5.60% — они выше каждого исхода собственного исследования, кроме того единственного, которому оно даёт один шанс из десяти.\n- Что здесь произошло, прямым текстом: величину, измеренную на одной совокупности, перенесли на другую и приняли за её собственный результат. Верная проверка — не «положителен ли NPV при 8%», а «чьи это 8%», и ответ: они чужие, они оценивают чужую зебру на чужих посетителях. Собственное исследование клиента — единственная оценка этого зоопарка на странице, и против порога, который этому зоопарку надо взять, она проваливается на всех исходах, кроме одного.\n- Последняя миля: на 8% подписывать нельзя. По собственному исследованию клиента ожидаемый NPV равен −$385,000, а не +$155,000, и для безубыточности нужно $329,000 дополнительной выручки против ожидаемых исследованием $252,000 — на 30.56% больше — при вероятности дойти туда в 10%. Две вещи принести до возврата вопроса: какой у другого зоопарка была базовая посещаемость и охват и на каком окне были измерены его 8%, поскольку прирост на другой базе посетителей не является прогнозом для нашей; и можно ли перестроить сделку так, чтобы цена не была зафиксирована против исхода, которому собственное исследование клиента даёт один шанс из десяти.\n- **Источник:** Kellogg-2012, Zoo Co., стр. 200–205 — посещаемость, цена билета, чужие 8%, три строки первоначальных затрат, обслуживание, ставка дисконтирования и допущение о перпетуитете, а также годовая выгода $360K, итог первоначальных затрат $1.195M и NPV $155K — всё из блока «Clarifying answers / Guide to case», стр. 201; цепочка безубыточности $1,195,000 × 0.20 = $239,000, revenue = $239,000 + $90,000 = $329,000 и $329,000 / $4.5M = 7.3% — из блока «Calculations», математический вопрос 1, стр. 203; распределение из четырёх исходов, ожидаемая дополнительная годовая выручка $252,000 и итоги $4,500,000 / $4,752,000 — из Exhibit 1, стр. 205. Страховая ветвь кейса (стр. 202–204) не используется."
+   },
+   "provoked": {
+    "ru": "«взять 8% прироста, полученные другим зоопарком на похожей зебре, как ожидаемый результат своего зоопарка, подставить их в модель и решить по знаку NPV +$155K» — вместо того чтобы построить собственное ожидание $252,000 (5.60%) по Exhibit B и собственный порог безубыточности $329,000 (7.31%) и увидеть, что на своей совокупности NPV равен −$385,000, а порог берёт только исход с вероятностью 10%.",
+    "en": "\"taking the 8% lift another zoo got from a similar zebra as this zoo's expected outcome, entering it into the model and deciding on the +$155K NPV sign\" — instead of building the client's own expectation of $252,000 (5.60%) from Exhibit B and its own breakeven of $329,000 (7.31%), and seeing that on this zoo's own population the NPV is −$385,000 and only the 10%-probability outcome clears the threshold."
+   },
+   "family_h25": "F1",
+   "family_src": "тело",
+   "family_conf": "спорная",
+   "family_note": "Разметка исправлена в круге 109 по слепому чтению: тело читали ТРИ независимых чтеца в чистом контексте, каждый без разметки в теле и без чужих ответов, и все трое дали одно и то же. Повторяемость пробы измерена на тех же 14 телах: попарно 71–86%, единогласно трое на 71%, поэтому единогласие трёх принято за основание, а одиночное чтение — нет.\n\nF3 -> F1. `mehanizm.naive`: «берёт величину, измеренную на другой совокупности, как ожидаемый результат своей и подставляет её в модель». Двух сравниваемых групп в слоте нет: 8% чужого зоопарка — не вторая группа, а заимствованная точка, подставленная в собственную цепочку. ОШИБКА ЦЕХА: разметку ставил автор тела в круге 108, и она не пережила слепого чтения. СПОРНАЯ по формулировке: чтец Б отдельно записал, что F1 описывает СВОЮ величину не на том множестве, а здесь величина ЧУЖАЯ; семьи «перенесённый бенчмарк» в словаре v2 нет.",
+   "mehanizm": {
+    "naive": "берёт величину, измеренную на другой совокупности, как ожидаемый результат своей и подставляет её в модель, решая по знаку результата",
+    "correct": "строит собственное ожидание по своему исследованию и собственный порог безубыточности и сверяет чужую точечную оценку с обоими",
+    "why": "чужая точечная оценка описывает чужих людей и чужой объект, поэтому знак модели при ней не говорит ничего о собственной совокупности, а решает распределение против порога",
+    "code": "MECH-123-чужая-оценка-вместо-своего-распределения",
+    "code2": []
+   },
+   "twin_of": "CI-046"
   },
   {
    "id": "CI-050",

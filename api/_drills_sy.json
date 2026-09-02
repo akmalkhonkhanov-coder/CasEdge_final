@@ -6854,9 +6854,9 @@
   },
   {
    "id": "SY-046",
-   "title": "Bus Builder Diligence",
-   "company": "Halloran Coachworks",
-   "industry": "Commercial vehicle manufacturing",
+   "title": "Where The Growth Is",
+   "company": "Almvik Pharma",
+   "industry": "Medicinal products and consumer skin care",
    "difficulty": "Medium",
    "clean": false,
    "focus": "",
@@ -6864,62 +6864,48 @@
    "time": "5 min",
    "type": "Synthesis",
    "exhibit_mode": "E-with",
-   "prompt": "Your client is a private equity fund weighing the acquisition of Halloran Coachworks, one of the leading manufacturers of school buses in the US. The market holds only three competitors of roughly equal share and grows at a fairly steady long-term 3% driven by GDP and population; customers are almost exclusively local cities and towns. Halloran is the #2 player by revenue and #3 by volume, its prices run 25-50% higher than its competitors, and it was the clear leader five years ago.\n\nAn analyst at the fund has been through the competitive data and written up what he sees. He has not written the recommendation. Read his note and give the fund the verdict.\n\n**Answer in four fields: conclusion, supporting facts, risks, next step.**",
+   "prompt": "Almvik Pharma is a $5B private European manufacturer of medicinal products. It licenses new medicines from research companies and sells them through traditional European wholesale distributors as well as through direct contracts with European hospitals that let it cross-sell and expand its product footprint. Its existing manufacturing footprint sits in urban locations close to its customers, which leaves its overhead costs higher than the competition's; against that, it is able to command a price premium in this market due to high quality products, excellent service, and speed to market. It currently owns 10% of the European market — highly fragmented, but growing.\n\nThe board has set an aggressive growth target: double the top line within the next 5 years. Management is looking at consumer skin care, and an analyst on your team has been through the market data sheet and written down what he sees — where the size is, where the growth is, and where he would build the entry. The data sheet has a second page — how each square is won, and what each region is like — which he transcribed below his read without working it in. He has not written the recommendation.\n\nRead his note and give the client the verdict.\n\n**Answer in four fields: conclusion, supporting facts, risks, next step.**",
    "exhibit": {
-    "title": "Fund analyst's working note — competitive read on the target",
+    "title": "Analyst's working note — consumer skin care entry",
     "parts": [
      {
       "type": "text",
       "lines": [
-       "**Block A — competitive landscape**",
-       "Bus prices normalized to Competitor B = 100."
+       "**Block A — why management is looking at this market**",
+       "Wide array of products treating acne, hair loss, wrinkles, infections, fungus, psoriasis, and oily skin.",
+       "Highly fragmented, $30B global market, with lotions, ointments and creams making up 80% of the products.",
+       "Two major channels: (i) physician prescriptions, sold through pharmacies, and (ii) over-the-counter, sold through retail outlets.",
+       "Significant convergence, with more products being sold over-the-counter, is placing pricing pressure on prescription products in an already low-margin business."
+      ],
+      "blank_after": 1
+     },
+     {
+      "type": "text",
+      "lines": [
+       "**Block B — data sheet: size and growth, by channel and by product**"
       ],
       "blank_after": 1
      },
      {
       "type": "table",
       "header": [
-       "",
-       "Halloran",
-       "Competitor A",
-       "Competitor B"
+       "Global skin care = $30B",
+       "Branded",
+       "Generic",
+       "Channel total"
       ],
       "rows": [
        [
-        "Market share ($)",
-        "30%",
-        "29%",
-        "40%"
+        "OTC",
+        "$10B (8% CAGR)",
+        "$10B (12% CAGR)",
+        "$20B (10% CAGR)"
        ],
        [
-        "2023 market share (units)",
-        "25%",
-        "30%",
-        "50%"
-       ],
-       [
-        "2018 market share (units)",
-        "60%",
-        "18%",
-        "22%"
-       ],
-       [
-        "Normalized bus price",
-        "150",
-        "120",
-        "100"
-       ],
-       [
-        "Gross margin",
-        "25%",
-        "35%",
-        "36%"
-       ],
-       [
-        "Operating margin",
-        "15%",
-        "25%",
-        "26%"
+        "Prescription",
+        "$5B (3% CAGR)",
+        "$5B (5% CAGR)",
+        "$10B (4% CAGR)"
        ]
       ],
       "blank_after": 1
@@ -6927,64 +6913,37 @@
      {
       "type": "text",
       "lines": [
-       "Read: revenue share sits above unit share, which is what a price premium does, so the top line is holding up better than the units suggest.",
-       "The margin picture is the one I would underwrite. Halloran runs a 25% gross and 15% operating margin against 35% / 25% at Competitor A and 36% / 26% at Competitor B. That is the gap I would buy: materials, equipment and labour are the significant cost drivers in this business, and bringing COGS into line with the field is exactly the kind of programme a new owner runs in the first eighteen months. On a 30% revenue share the value of closing it is the thesis.",
-       "",
-       "**Block B — customer survey, attached without comment**"
+       "**Block C — data sheet: where that $30B sits geographically**"
       ],
       "blank_after": 1
      },
      {
       "type": "table",
       "header": [
-       "Parameter",
-       "Importance to customer",
-       "Halloran",
-       "Competitor A",
-       "Competitor B"
+       "Geography",
+       "Share of the $30B",
+       "Growth rate"
       ],
       "rows": [
        [
-        "Price",
-        "5",
-        "1",
-        "4",
-        "5"
+        "Europe",
+        "20%",
+        "5%"
        ],
        [
-        "Brand awareness",
-        "1",
-        "5",
-        "3",
-        "2"
+        "US",
+        "40%",
+        "10%"
        ],
        [
-        "After sales support",
-        "1",
-        "4",
-        "2",
-        "1"
+        "Japan",
+        "8%",
+        "(2%)"
        ],
        [
-        "Quality",
-        "3",
-        "3",
-        "3",
-        "3"
-       ],
-       [
-        "Safety",
-        "3",
-        "4",
-        "3",
-        "3"
-       ],
-       [
-        "Reliability",
-        "2",
-        "4",
-        "2",
-        "2"
+        "Rest of world / emerging",
+        "32%",
+        "30%"
        ]
       ],
       "blank_after": 1
@@ -6992,56 +6951,138 @@
      {
       "type": "text",
       "lines": [
-       "Perceptions on a scale of 1-5. I read this as evidence that the brand and service assets are intact and that a new owner has something to market against.",
+       "Note on the last row: the data sheet's share chart labels that slice ROW at 32%; its growth table labels the fourth region Emerging at 30%. I have kept them on one line."
+      ],
+      "blank_after": 1
+     },
+     {
+      "type": "text",
+      "lines": [
+       "**Block D — my read**",
+       "The target is a top-line target — double the $5B in five years — so I ranked the four squares by what they can carry.",
+       "Branded prescription is $5B growing 3%: the smallest and slowest square on the sheet. Generic prescription is the same $5B at 5%. The prescription channel as a whole is $10B growing 4%.",
+       "OTC is twice the channel at $20B growing 10%, and inside it generic OTC is $10B growing 12% — tied for the largest square and the fastest one on the page.",
+       "Geography says the same thing louder. Europe, where we already sell, is 20% of the market growing 5% — the slowest region on the sheet. The US is 40% at 10%; the rest of the world is 32% growing 30%.",
+       "So the growth sits in generic OTC and outside Europe, and that is where I would build the entry. Anchoring on branded prescription inside Europe means entering the smallest square of the slowest region against a doubling target.",
        "I have not written the recommendation."
       ],
-      "blank_before": 0
+      "blank_before": 1,
+      "blank_after": 1
+     },
+     {
+      "type": "text",
+      "lines": [
+       "**Block E — second page of the same data sheet, transcribed**",
+       "Basis of competition, by channel and product:"
+      ],
+      "blank_after": 1
+     },
+     {
+      "type": "table",
+      "header": [
+       "Basis of competition",
+       "Branded",
+       "Generic"
+      ],
+      "rows": [
+       [
+        "OTC",
+        "Efficacy; brand recognition; marketing",
+        "Price; product line breadth; services / unique packaging"
+       ],
+       [
+        "Prescription",
+        "Efficacy; physician relationships; speed to market",
+        "Price; reliability; specialization (unique attributes)"
+       ]
+      ],
+      "blank_after": 1
+     },
+     {
+      "type": "text",
+      "lines": [
+       "Global skin care market characteristics, by geography:"
+      ],
+      "blank_after": 1
+     },
+     {
+      "type": "table",
+      "header": [
+       "Geography",
+       "Characteristics"
+      ],
+      "rows": [
+       [
+        "Europe",
+        "OTC competing with prescriptions; highest margins"
+       ],
+       [
+        "US",
+        "OTC competing with prescriptions; industry consolidation, declining margins"
+       ],
+       [
+        "Japan",
+        "Low population growth; high barriers to entry"
+       ],
+       [
+        "Emerging",
+        "Highly price sensitive; low margins"
+       ]
+      ],
+      "blank_after": 1
+     },
+     {
+      "type": "text",
+      "lines": [
+       "I have transcribed both panels for completeness. Neither changes where the size and the growth are, and the target we were given is a top-line target."
+      ]
      }
     ]
    },
    "key": {
-    "naive": "**Naive path — the honest first answer.** Underwrite the gap and proceed. Halloran earns 25% gross and 15% operating where its two direct comparables earn 35-36% and 25-26%, on a 30% revenue share; a cost programme of that size against that base is the most standard value-creation thesis a fund runs, and the analyst has already named where to look. It is honest because a margin gap against close comparables is the first place any buyer looks for value, because the non-price survey scores say the asset itself is not broken, and because the analyst's arithmetic is sound.",
-    "decoy": "**The tempting second branch — buy it and fix the price instead.** Price is the only attribute customers rate 5 for importance and Halloran scores 1 on it, so cut price to the field, win the units back, and let volume carry the fixed base. It is seductive because it uses the sharper of the two exhibits and identifies the right symptom. It is wrong because Halloran already earns the lowest margin in the field at the highest price in the field — 25% gross at a normalized 150 against Competitor B's 36% at 100 — so cutting price before the cost gap is closed converts a low-margin asset into a loss-making one.",
-    "support": "**What decides it, and it is whose cost advantage this is against whether a buyer can capture it.** Halloran charges 150 against Competitor B's 100 and still earns 25% gross against 36%: its cost per bus is the highest in the field, not the lowest, in a commodity where the buyers are cities and towns on public budgets who rate price 5 for importance and rate Halloran 1. The same gap runs to the bottom line — 15% operating against 25% and 26%. Meanwhile the scale that would pay for a cost programme is running out: unit share has gone from 60% in 2018 to 25% in 2023 while the two competitors went from 18% and 22% to 30% and 50%. So the fund would be underwriting the recovery of ten points of gross margin against two rivals who already earn it at a normalized 120 and 100 while Halloran charges 150, on a unit base that has more than halved in five years — and the fund has set no return threshold, price or payback to test that against. That is the reason to pass, not the thesis to buy.",
-    "risks": "Internal: the verdict rests on a read we have inferred rather than verified — the competitors' cost position is deduced from their prices and margins, not from their books, and the customer perception data behind the price finding is a single survey that has not been stress-tested. External: public perception could swing towards buses with higher safety, reliability and quality, the attributes where Halloran already scores 4, 4 and 3, which would make the asset attractive on exactly the ground we are dismissing it.",
-    "next": "Before the fund walks, stress-test the two things the verdict rests on: commission a detailed customer perception survey to confirm that price dominates the purchase decision, and tear down Competitors A and B's cost structure to confirm the advantage is theirs to keep. If both hold, pass on Halloran and take a look at Competitor B as the investment instead."
+    "naive": "**Naive path — the honest first answer.** Ratify the analyst and take the entry into generic OTC, and beyond Europe into the US and the emerging regions. The client's target is stated in top-line terms and the sheet prints exactly where top line is available: $10B growing 12% against $5B growing 3%, 40% of the market at 10% and 32% at 30% against 20% at 5%. An adviser who has been told to double revenue in five years and is handed a page on which the fitting square is both the smallest and the slowest reads that page the way the analyst did. It is honest because every figure in the chain is printed, because the ranking is arithmetically right, and because refusing the largest and fastest cells looks like refusing the mandate.",
+    "decoy": "**The tempting second branch — stay where we fit and call the target somebody else's problem.** Mirror the naive path: the sheet also prints what each square is won on, branded prescription is won on efficacy, physician relationships and speed to market, which is a description of this client, so enter there, in Europe, and defend it as playing to strength. It is seductive because it quotes the client's own premium back at him and because it is the only cell his capabilities match. It is wrong because it never owns the target it was given — the whole branded prescription square is $5B worldwide growing 3%, and the client already turns over $5B, so that square cannot carry a doubling even taken entire, and the note has to say so out loud — and because the same sheet says convergence is already pushing OTC products into that cell and pressing its prices. A verdict that hides inside the fitting square leaves the client with a growth target and no plan.",
+    "support": "**What decides it, and it is who owns the cost gap.** The client's higher overhead is not slack sitting in his P&L waiting for a cost programme; it is the price of the footprint that earns him money. The plants are in urban locations close to customers, and that placement is what produces the quality, the service and the speed to market he is paid a premium for. The gap and the premium are the same line item read from two ends. Put that against the squares the analyst picked and the ranking inverts: the growth cells are won on price — generic competes on price, product line breadth and packaging, generic prescription on price, reliability and specialization — so entering them means arriving with the highest cost position in the field into the one contest where cost is the whole contest. Geography repeats it: the highest margins on the sheet sit in Europe, growing 5%, while the two regions carrying the size and the growth are the ones flagged as consolidating with declining margins (US, 40% at 10%) and highly price sensitive with low margins (emerging, 32% at 30%). And the gap cannot be traded out of the way: removing the urban overhead means moving manufacturing away from the customers it was placed next to, which spends the service and speed the premium is paid for. So the entry cannot be built on the growth cells; the cell the client can actually win, branded prescription, is $5B growing 3%, which he must state cannot carry a doubling — the balance of the target has to be sourced somewhere other than this market.",
+    "risks": "Internal: the premium is the whole business case for the existing $5B, and it is coupled to the urban footprint — any version of this entry that pulls manufacturing, capital or management attention away from that footprint puts the price premium and the 10% European position at risk in order to chase a lower-margin one. External: convergence is already sending more products over the counter and pressing prices on prescription products in an industry the sheet itself calls low-margin, so the single cell whose basis of competition matches the client is being attacked from the channel he would be entering — and in the largest geography the sheet flags industry consolidation and declining margins on top of it.",
+    "next": "Before any entry decision is taken to the board: (1) size, on one page, how much of the doubling the one cell the client can win — branded prescription, $5B growing 3% worldwide — can actually carry, and state the residual explicitly; (2) have manufacturing quote what it would cost to serve a price-competed generic line out of the existing urban plants, and what would be given up in service and speed if that volume were made elsewhere, so the trade is priced rather than assumed; (3) put alternative growth options in the client's existing fragmented European market, where he already holds 10% and earns his premium, side by side with skin care before capital is committed."
    },
    "checklist": {
     "en": [
      "Minto: the first sentence is the verdict itself, an action with a subject. A correct verdict arriving after the facts fails this line.",
-     "Says do not acquire, in that first sentence, without hedging it into a condition.",
-     "Explains the margin gap as structural — belonging to the competitors' cost position — rather than as headroom a new owner can capture.",
-     "Uses price and margin together, not margin alone: 150 against 100 while earning 25% gross against 36%.",
-     "Brings in the unit-share collapse from 60% in 2018 to 25% in 2023 and says why it matters — the scale that would fund a cost programme is going the wrong way.",
-     "States that the fund has set no return threshold, price or payback, and does not invent one.",
-     "Gives one internal and one external risk, and a next step that stress-tests the verdict rather than merely confirming it."
+     "Names who owns the cost gap: the urban plants close to customers produce both the higher overhead and the quality, service and speed the premium is paid for, so the gap is the client's own position and not slack he can remove.",
+     "Says the growth cells are decided on price — generic is won on price, product line breadth and packaging — so entering them means arriving with the worst cost position in the field into the one contest cost decides.",
+     "Carries the geographic version: the highest margins sit in Europe at 5% growth, while the size and the growth sit in the US (40%, 10%, consolidation and declining margins) and the emerging regions (32%, 30%, highly price sensitive, low margins).",
+     "Owns the target instead of dodging it: names the branded prescription square as $5B growing 3% WORLDWIDE — not as a European figure — notes the client already turns over $5B itself, says the square cannot carry a doubling even taken entire, and says where the rest has to come from.",
+     "Does not treat relocating manufacturing as a free fix — states that removing the overhead spends the service and speed the premium is paid for.",
+     "Gives one internal and one external risk of book weight, and closes with a specific, time-bound next step tied to the decision."
     ],
     "ru": [
-     "Минто: первое предложение — сам вердикт, действием и с субъектом. Верный вывод после фактов не засчитывается.",
-     "В первом предложении сказано «не покупаем», без превращения вердикта в условие.",
-     "Маржинальный разрыв объяснён как структурный — принадлежащий позиции конкурентов, — а не как запас, который снимет новый собственник.",
-     "Цена и маржа использованы вместе, а не маржа отдельно: 150 против 100 при валовой марже 25% против 36%.",
-     "Введён обвал доли по штукам с 60% в 2018 до 25% в 2023 и сказано, почему это важно: масштаб, который оплатил бы программу затрат, уходит.",
-     "Сказано прямо, что фонд не задал ни целевой доходности, ни цены, ни срока окупаемости, и кандидат свой порог не подставляет.",
-     "Названы один внутренний и один внешний риск, а следующий шаг проверяет вердикт на прочность, а не подтверждает его."
+     "Минто: первое предложение — сам вердикт, действием и с подлежащим. Верный вывод, приехавший после фактов, не засчитывается.",
+     "Названо, чей это разрыв: городские заводы рядом с клиентами дают и повышенные накладные, и то качество, сервис и скорость, за которые платят премию, — значит разрыв принадлежит собственной позиции клиента, а не является запасом.",
+     "Сказано, что растущие клетки решаются ценой — дженерик выигрывается ценой, широтой линейки и упаковкой, — то есть вход туда означает прийти с худшей себестоимостью в поле в единственный спор, который решает себестоимость.",
+     "Проведена географическая версия того же: высшая маржа стоит в Европе с ростом 5%, тогда как размер и рост стоят в США (40%, 10%, консолидация и падающая маржа) и на развивающихся рынках (32%, 30%, высокая чувствительность к цене, низкая маржа).",
+     "Цель присвоена, а не обойдена: клетка брендированного рецептурного названа как $5B при росте 3% В МИРЕ, а не как европейская величина; сказано, что клиент сам уже делает $5B, что клетка не вывозит удвоение даже целиком, и откуда брать остаток.",
+     "Перенос производства не выдан за бесплатное решение: сказано, что снятие накладных тратит тот самый сервис и скорость, за которые платят премию.",
+     "Даны один внутренний и один внешний риск книжного веса, и в конце — конкретный следующий шаг со сроком, привязанный к решению."
     ]
    },
    "reference": {
-    "en": "| field | text |\n|---|---|\n| **conclusion** | **The fund should not acquire Halloran — the margin gap the note wants to underwrite is a cost-position gap two rivals already hold while charging less, not headroom a new owner can capture.** |\n| **supporting facts** | Halloran sells at a normalized 150 against Competitor B's 100 and still earns only a 25% gross and 15% operating margin against 36% and 26%: its cost per bus is the highest in the field, in a commodity where the buyers are cities and towns rating price 5 for importance and rating Halloran 1. The scale that would pay for a cost programme is disappearing — unit share fell from 60% in 2018 to 25% in 2023 while the two competitors rose from 18% and 22% to 30% and 50% in a market growing only 3% a year. So the fund would be underwriting the recovery of ten points of gross margin against two rivals who already earn it at a normalized 120 and 100 while Halloran charges 150 — and it has set no return threshold, price or payback against which to test that. |\n| **risks** | Internal: the verdict rests on a read we have inferred, not a verified fact — the competitors' cost position is deduced from their prices and margins rather than from their books, and the price finding comes from a single perception survey we have not stress-tested. External: public perception could swing towards buses with higher safety, reliability and quality, exactly the attributes where Halloran scores 4, 4 and 3, which would make the asset attractive on the ground we are dismissing. |\n| **next step** | Over the next three weeks, run a detailed customer perception survey to confirm price dominates the purchase decision and a teardown of Competitors A and B's cost structure to confirm the advantage is theirs to keep. If both hold, pass on Halloran and look at Competitor B as the investment instead. |\n\n**Source:** `Wharton Casebook 23-24`, Bring Your Own Bus, pp. 43–51 — market and unit shares 2023 and 2018, normalized prices 150 / 120 / 100 and margins 25-15% / 35-25% / 36-26% from Exhibit A; importance and perception scores from Exhibit B; the #2 by revenue / #3 by volume standing, the three-competitor structure, the 25-50% price premium, the 3% growth and the city-and-town customer base from the prompt's Additional Information; the COGS reading from the Question 2 answer; the price-sensitivity and lower-cost-competitor reasoning, the public-perception risk, the perception-survey next step and the look at Competitor B from the Recommendation slide.",
-    "ru": "| поле | текст |\n|---|---|\n| **вывод** | **Не покупаем Halloran: разрыв в марже, который запись хочет взять в тезис, — это разрыв в себестоимости, который два конкурента уже держат при более низких ценах, а не запас, который снимет новый собственник.** |\n| **факты** | Halloran продаёт по нормированным 150 против 100 у конкурента B и при этом держит валовую 25% и операционную 15% против 36% и 26%: себестоимость автобуса у него самая высокая в поле — в товарном рынке, где покупатель это города и посёлки, ставящие цене важность 5, а Halloran по цене — 1. Масштаб, который оплатил бы программу затрат, уходит: доля по штукам упала с 60% в 2018 до 25% в 2023, тогда как конкуренты выросли с 18% и 22% до 30% и 50%, а рынок растёт лишь на 3% в год. То есть фонд подписывается на возврат десяти пунктов валовой маржи против двух конкурентов, которые уже зарабатывают её при нормированных 120 и 100, тогда как Halloran берёт 150, — и делает это на базе по штукам, которая за пять лет упала более чем вдвое, не задав ни целевой доходности, ни цены, ни срока payback, об которые это можно померить. |\n| **риски** | Внутренний: вердикт стоит на выводе, а не на факте — позицию конкурентов по себестоимости мы вывели из их цен и маржи, а не из их отчётности, а вывод про цену взят из одного опроса восприятия, который мы не проверяли на прочность. Внешний: общественное восприятие может качнуться к автобусам с более высокой безопасностью, надёжностью и качеством — ровно к тем параметрам, где у Halloran 4, 4 и 3, — и тогда актив станет привлекательным именно на том основании, по которому мы его сейчас отклоняем. |\n| **следующий шаг** | За три недели провести подробный опрос восприятия клиентов, чтобы подтвердить главенство цены в решении о покупке, и разбор структуры затрат конкурентов A и B, чтобы подтвердить, что преимущество остаётся у них. Если оба выдержат — отказываемся от Halloran и смотрим на конкурента B как на объект инвестиции. |\n\n**Источник:** `Wharton Casebook 23-24`, Bring Your Own Bus, стр. 43–51 — доли по деньгам и по штукам за 2023 и 2018, нормированные цены 150 / 120 / 100 и маржи 25-15% / 35-25% / 36-26% из Exhibit A; важность и восприятие — из Exhibit B; статус #2 по выручке и #3 по объёму, три конкурента, премия к цене 25-50%, рост 3% и покупатель-муниципалитет — из Additional Information промпта; чтение по COGS — из ответа на вопрос 2; логика ценовой чувствительности и более дешёвых конкурентов, риск смены восприятия, шаг с опросом и взгляд на конкурента B — со слайда Recommendation."
+    "en": "| field | text |\n|---|---|\n| **conclusion** | **Almvik should not build its doubling target on skin care's growth cells: the squares that carry the growth are won on price, and Almvik's cost gap is the price of its premium, not slack it can cut.** |\n| **supporting facts** | The client's higher overhead and his price premium are the same fact read from two ends: the plants sit in urban locations close to customers, and that placement is what produces the quality, service and speed to market he is paid extra for. The analyst's picks run straight against it. Generic OTC — $10B growing 12%, the largest and fastest square — is won on price, product line breadth and packaging, and generic prescription on price, reliability and specialization; entering them means arriving with the highest cost position in the field into the one contest that cost decides. Geography repeats it: the highest margins on the sheet are in Europe, growing 5%, while the size and the growth sit in the US (40% of the market, 10% growth, industry consolidation and declining margins) and in the emerging regions (32%, 30%, highly price sensitive, low margins). Nor can the gap be traded away — taking the overhead out means moving manufacturing away from the customers it was placed beside, spending the service and speed the premium is paid for. The one square whose basis of competition describes this client, branded prescription, is $5B growing 3%: real, defensible, and unable to carry a doubling on its own, so the balance of the target has to be sourced outside this market. |\n| **risks** | Internal: the premium is the whole case for the existing $5B business and it is coupled to the urban footprint, so any entry that pulls manufacturing, capital or management attention away from that footprint risks the premium and the 10% European position in exchange for a lower-margin one. External: convergence is already moving products over the counter and pressing prices on prescription products in an industry that is low-margin to begin with, so the single cell that fits the client is under attack from the very channel he would be entering — and the largest geography on the sheet is flagged as consolidating with declining margins on top of that. |\n| **next step** | Before this goes to the board: size on one page how much of the doubling branded prescription — $5B worldwide, growing 3% — can actually carry, noting that the client already turns over $5B itself, and state the residual out loud; have manufacturing quote what it would cost to serve a price-competed generic line out of the existing urban plants and what would be lost in service and speed if that volume were made elsewhere, so the trade is priced rather than assumed; and put alternative growth options inside the client's existing fragmented European market, where he holds 10% and earns his premium, next to skin care before any capital is committed. |\n\n**Source:** `9.-Stern-MCA-Casebook-2019`, Skin Care Market, pp. 182–187 — the $5B size, the urban manufacturing footprint with higher overhead, the price premium on high quality products, excellent service and speed to market, the 10% European share, the doubling target and the four market bullets ($30B, 80% lotions/ointments/creams, two channels, convergence pressing prescription prices) from the Case Prompt, p.182; segment sizes and growth rates $10B (8%), $10B (12%), $20B (10%), $5B (3%), $5B (5%), $10B (4%), the geographic shares Europe 20% / US 40% / Japan 8% / ROW 32%, the growth rates Europe 5% / US 10% / Japan (2%) / Emerging 30%, the basis-of-competition panel and the market-characteristics panel (Europe highest margins; US consolidation and declining margins; Japan low population growth and high barriers to entry; emerging highly price sensitive, low margins) from the Data Sheet, Exhibit 1, p.187. Not taken: the Data Sheet's product-column and whole-market growth totals (5% / 8% / 7%), which do not reconcile with the cells printed beside them (weighted, the same cells give 6.33%, 9.67% and 8.0%).",
+    "ru": "| поле | текст |\n|---|---|\n| **вывод** | **Almvik не должен строить удвоение выручки на растущих клетках рынка ухода за кожей: клетки, где сидит рост, выигрываются ценой, а разрыв Almvik по себестоимости — это цена его премии, а не запас, который можно срезать.** |\n| **факты** | Повышенные накладные клиента и его ценовая премия — это один и тот же факт, прочитанный с двух концов: заводы стоят в городах рядом с клиентами, и именно это размещение даёт то качество, сервис и скорость вывода, за которые ему доплачивают. Выбор аналитика идёт прямо против этого. Дженериковый OTC — $10B с ростом 12%, самая крупная и самая быстрая клетка — выигрывается ценой, широтой линейки и упаковкой, а дженериковый рецептурный — ценой, надёжностью и специализацией; войти туда значит прийти с худшей себестоимостью в поле в единственный спор, который решает себестоимость. География повторяет то же: высшая маржа на листе — в Европе, растущей на 5%, тогда как размер и рост стоят в США (40% рынка, рост 10%, консолидация отрасли и падающая маржа) и на развивающихся рынках (32%, 30%, высокая чувствительность к цене, низкая маржа). Разрыв нельзя и выменять: убрать накладные значит увезти производство от клиентов, рядом с которыми оно поставлено, то есть потратить тот сервис и ту скорость, за которые платят премию. Единственная клетка, чья база конкуренции описывает этого клиента, — брендированный рецептурный — это $5B с ростом 3%: она настоящая и защитимая, но удвоение в одиночку не вывозит, и остаток цели придётся брать вне этого рынка. |\n| **риски** | Внутренний: премия — это весь смысл существующего бизнеса на $5B, и она сцеплена с городским размещением заводов, поэтому любой вариант входа, который уводит производство, капитал или внимание менеджмента от этого размещения, ставит под удар премию и 10% европейского рынка ради позиции с меньшей маржой. Внешний: конвергенция уже выталкивает продукты в безрецептурный канал и давит на цены рецептурных продуктов в отрасли, которая и без того низкомаржинальна, — то есть единственная подходящая клиенту клетка атакуется ровно тем каналом, в который он собирается входить, а в крупнейшей географии лист отдельно отмечает консолидацию и падающую маржу. |\n| **следующий шаг** | До выхода на совет директоров: посчитать на одной странице, какую часть удвоения реально вывозит брендированный рецептурный сегмент — $5B в мире при росте 3%, при том что сам клиент уже делает $5B, — и назвать остаток вслух; запросить у производства оценку, во что обойдётся обслуживать конкурирующую по цене дженериковую линейку с существующих городских заводов и что будет потеряно в сервисе и скорости, если этот объём делать в другом месте, чтобы размен был посчитан, а не предположен; и поставить альтернативные варианты роста внутри существующего фрагментированного европейского рынка, где у клиента 10% и где он зарабатывает премию, рядом с уходом за кожей до выделения капитала. |\n\n**Источник:** `9.-Stern-MCA-Casebook-2019`, Skin Care Market, стр. 182–187 — размер $5B, городское размещение заводов с повышенными накладными, ценовая премия за высокое качество продуктов, отличный сервис и скорость вывода, доля 10% европейского рынка, цель удвоения и четыре буллита про рынок ($30B, 80% лосьонов/мазей/кремов, два канала, конвергенция, давящая на цены рецептурных продуктов) — из Case Prompt, стр.182; размеры и темпы сегментов $10B (8%), $10B (12%), $20B (10%), $5B (3%), $5B (5%), $10B (4%), географические доли Европа 20% / США 40% / Япония 8% / ROW 32%, темпы Европа 5% / США 10% / Япония (2%) / Emerging 30%, панель базы конкуренции и панель характеристик рынка (Европа — высшая маржа; США — консолидация и падающая маржа; Япония — низкий рост населения и высокие барьеры входа; развивающиеся — высокая чувствительность к цене, низкая маржа) — из Data Sheet, Exhibit 1, стр.187. Не взято: итоговые темпы роста по продуктовым колонкам и по рынку целиком (5% / 8% / 7%) из того же Data Sheet — они не сходятся с напечатанными рядом клетками: взвешенно те же клетки дают 6.33%, 9.67% и 8.0%."
    },
-   "anchor_metric": "Порога у фонда в записи нет — ни целевой доходности, ни цены сделки, ни срока окупаемости. Поэтому маржинальный разрыв нельзя мерить об «сколько мы отобьём»; сравнение идёт с тем, чей это разрыв. Отсутствие порога кандидат обязан назвать прямо, а не подставить свой.",
+   "anchor_metric": "Порог у клиента объявлен и напечатан: удвоить топлайн за пять лет при текущих $5B. Порог валиден и применим, но он односторонний — задан по выручке и молчит про маржу и про себестоимость входа, поэтому мерить им выбор сегмента можно только вместе с ценой достижения. Кандидат обязан прямо назвать, что цель поставлена по выручке, а не по прибыли, и не подставлять вместо неё свой финансовый критерий.",
    "family_h25": "F9",
    "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
-    "naive": "Читает разрыв в марже с конкурентами как возможность улучшения, доступную покупателю.",
-    "correct": "Спрашивает, чьё это преимущество, и видит структуру отрасли плюс уходящий масштаб, а не управленческий провал.",
-    "why": "Преимущество, которое конкуренты держат в собственной себестоимости — они берут меньшую цену и зарабатывают большую маржу, — покупатель не переносит к себе никакой программой затрат.",
+    "naive": "Берёт самую крупную и самую быструю клетку как точку входа, потому что цель клиента задана по росту топлайна, и ранжирует сегменты по размеру и темпу.",
+    "correct": "Спрашивает, чем оплачен разрыв клиента по себестоимости, и видит, что городское размещение заводов даёт и повышенные накладные, и ту скорость с сервисом, за которые платят премию, — а растущие клетки и растущие географии решаются ценой и маржой.",
+    "why": "Разрыв, встроенный в собственную позицию клиента, не является запасом: снять его можно только тем же движением, которое убирает источник премии, поэтому идти в самый быстрый сегмент значит идти туда, где худшая себестоимость встречается с единственным призом, который выдают за цену.",
     "code": "MECH-102-структурный-разрыв-не-рычаг",
     "code2": []
    },
-   "family_note": "круг 102: спор идёт о принадлежности разрыва — отраслевая структура против управляемого рычага покупателя, это F9, а не поиск причины падения доли."
+   "family_note": "круг 102: спор идёт о принадлежности разрыва — повышенные накладные клиента оплачены тем же городским размещением заводов, что и его премия за качество, сервис и скорость, поэтому разрыв принадлежит его позиции, а не является рычагом; это F9, а не выбор самого большого числа на листе.",
+   "twin_of": "SY-044"
   },
   {
    "id": "SY-047",
