@@ -1815,7 +1815,7 @@
     "code2": []
    },
    "family_note": "круг 103: $60k неизбегаемых остаются при любом исходе и потому не различают варианты — релевантно $640k против цены вендора $700k",
-   "twin_of": "CM-033"
+   "twin_of": null
   },
   {
    "id": "CM-024",
@@ -2471,71 +2471,89 @@
   },
   {
    "id": "CM-033",
-   "title": "Switch and Ramp",
+   "title": "Lean Across Four Plants",
    "difficulty": "Medium",
    "type": "Trap",
-   "focus": "F02(c)",
-   "time": "5 min",
+   "focus": "F12(a) programme vs no-programme state",
+   "time": "6 min",
    "render": "table(5) · input",
-   "prompt": "Iskovel does a process step in-house: $80 variable + $25 avoidable fixed + $15 unavoidable fixed per unit. An outsourcer offers $100/unit. Switching costs a one-time $300,000. Volume 50,000 units/year. Outsource — and if so, what's the payback on the switch cost?",
+   "prompt": "Vantrell Molding supplies injection-molded parts to U.S. automakers from four plants. The exhibit is 2010 by plant, in $ million. For 2014 the planning team has fixed three things: every plant runs at 80% of its 2010 volume, prices are 10% lower, and a lean manufacturing programme rolled out across all four plants takes a further 20% out of material spend and a further 30% out of labour spend on top of the volume reduction. Overhead is committed and does not move. The CFO has to put one number into the business case for the lean programme — its annual profit impact. Give him that number, and the 2014 total profit it assumes.",
    "exhibit": {
     "type": "table",
     "header": [
-     "Item",
-     "$/unit"
+     "$ million",
+     "Plant A",
+     "Plant B",
+     "Plant C",
+     "Plant D"
     ],
     "rows": [
      [
-      "In-house variable",
-      "80"
-     ],
-     [
-      "Avoidable fixed",
-      "25"
-     ],
-     [
-      "Unavoidable fixed",
-      "15"
-     ],
-     [
-      "Outsource price",
+      "Revenues",
+      "100",
+      "100",
+      "100",
       "100"
      ],
      [
-      "One-time switch",
-      "$300,000"
+      "Labour",
+      "20",
+      "40",
+      "60",
+      "30"
+     ],
+     [
+      "Material",
+      "55",
+      "40",
+      "20",
+      "35"
+     ],
+     [
+      "Overhead",
+      "20",
+      "15",
+      "15",
+      "30"
+     ],
+     [
+      "Net profits",
+      "5",
+      "5",
+      "5",
+      "5"
      ]
     ]
    },
    "step_prompts": [
-    "Decision + payback on the switch."
+    "(1) Total 2014 profit with the programme, $M. (2) The annual profit impact of the lean programme, $M — the number that goes into the business case."
    ],
-   "company": "Iskovel",
-   "industry": "Industrial-services",
+   "company": "Vantrell Molding",
+   "industry": "Auto-parts-molding",
    "checklist": {
-    "en": "(1) relevant $105 named; (2) outsource, saving $250k/year; (3) payback 1.2 years, exact; (4) unavoidable $15 flagged as remaining.",
-    "ru": "(1) relevant $105 назван; (2) outsource, экономия $250k/год; (3) payback 1.2 года, exact; (4) неизбегаемый $15 отмечен как остающийся."
+    "en": "Three gates, all required; all figures $ million. (1) 2014 with the programme lands exactly 28.0 in total — either per plant 5.6 / 9.0 / 10.6 / 2.8, or in aggregate revenue 288.0 (100 × 0.80 × 0.90 per plant), labour 84.0, material 96.0, overhead 80.0 unchanged; tolerance: exact. (2) The programme's annual impact is built against 2014 WITHOUT the programme, not against 2010: no-programme 2014 = a loss of 32.0, so the impact is 28.0 − (−32.0) = 60.0 a year. Route-agnostic: the direct build — labour 120.0 × 30% = 36.0 plus material 120.0 × 20% = 24.0 = 60.0 — counts in full, provided the number that reaches the CFO is 60.0 and not the year-on-year change. (3) 8.0 (= 28.0 − 20.0) is named as the wrong number for this business case, with the reason: it nets the programme's +60.0 against −20.0 of lost volume and −32.0 of price, neither of which the programme caused.",
+    "ru": "Три ворота, все обязательны; все величины в $ млн. (1) 2014 с программой даёт ровно 28.0 итого — либо по заводам 5.6 / 9.0 / 10.6 / 2.8, либо агрегатом: выручка 288.0 (100 × 0.80 × 0.90 на завод), труд 84.0, материал 96.0, накладные 80.0 без изменений; tolerance: exact. (2) Годовой эффект программы построен против 2014 БЕЗ программы, а не против 2010: 2014 без программы = убыток 32.0, значит эффект = 28.0 − (−32.0) = 60.0 в год. Маршрут не важен: прямой счёт — труд 120.0 × 30% = 36.0 плюс материал 120.0 × 20% = 24.0 = 60.0 — засчитывается полностью, при условии, что CFO уносит именно 60.0, а не изменение год к году. (3) 8.0 (= 28.0 − 20.0) назван как неверное число для этого business case, с причиной: он сворачивает +60.0 программы с −20.0 потерянного объёма и −32.0 цены, которых программа не вызывала."
    },
    "reference": {
-    "en": "- Relevant in-house cost = 80 + 25 (avoidable) = **$105/unit**; the unavoidable $15 remains under any decision. 105 > 100 → **outsource**, saving $5/unit.\n- Annual saving = 5 × 50,000 = **$250,000**. Payback on the switch = 300,000/250,000 = **1.2 years**. Worth switching.",
-    "ru": "- Релевантная in-house стоимость = 80 + 25 (avoidable) = **$105/unit**; неизбегаемые $15 остаются при любом решении. 105 > 100 → **outsource**, экономия $5/unit.\n- Годовая экономия = 5 × 50,000 = **$250,000**. Payback свитча = 300,000/250,000 = **1.2 года**. Стоит переходить."
+    "en": "- Scale and sanity check. All figures $ million. The 2010 exhibit sums to revenues 400.0, labour 150.0, material 150.0, overhead 80.0, profit **20.0** [BUILD] — the four plants are the whole company, and 20.0 is what it earns today.\n- Step 1 — 2014 with the programme. Revenue per plant 100 × 0.80 × 0.90 = **72.0** (both effects, compounded; 288.0 in total). Labour × 0.80 × 0.70 = 0.56 → **11.2 / 22.4 / 33.6 / 16.8** (84.0). Material × 0.80 × 0.80 = 0.64 → **35.2 / 25.6 / 12.8 / 22.4** (96.0). Overhead unchanged → 20 / 15 / 15 / 30 (80.0). Plant profits **5.6 / 9.0 / 10.6 / 2.8**, total **28.0**.\n- Step 2 — what the programme is worth. The comparison state is 2014 *without* the programme, and it is nowhere in the exhibit: revenue 288.0, labour 150.0 × 0.80 = 120.0, material 150.0 × 0.80 = 120.0, overhead 80.0 → **a loss of 32.0** [BUILD] (per plant −8.0 / −7.0 / −7.0 / −10.0). Programme impact = 28.0 − (−32.0) = **60.0 a year** [BUILD]. Direct check: labour 120.0 × 30% = 36.0 plus material 120.0 × 20% = 24.0 = **60.0** ✓. Per plant: 13.6 / 16.0 / 17.6 / 12.8 [BUILD].\n- Why 8.0 is the wrong number for the business case. 28.0 − 20.0 = 8.0 is a true change in profits, and the source table prints it, but it nets three simultaneous moves: volume at 80% costs 20.0 of contribution (2010 contribution 400.0 − 150.0 − 150.0 = 100.0, × 0.80 → 80.0), the 10% price cut costs 32.0 (320.0 → 288.0), and the programme adds 60.0. Bridge: 20.0 − 20.0 − 32.0 + 60.0 = **28.0** ✓ [BUILD]. A +60.0 lever and a −52.0 market cancel to +8.0; priced off that delta the programme is understated 7.5×, and the deltas of the volume and price moves are charged to a decision that did not produce them.\n- So what. The programme is not marginal — it is the difference between a 32.0 loss and a 28.0 profit, so it goes ahead. It still does not reach the CEO's 100.0: 28.0 leaves 72.0 to find, more than the whole programme delivers, and the honest partner move is to reset the target. The gap that lean cannot touch is overhead: held flat at 80.0 while revenue falls 400.0 → 288.0, it goes from 20.0% to **27.8%** of revenue [BUILD]. Plant D is the only plant whose profit falls (5.0 → 2.8) — it carries 30.0 of overhead, twice Plant B's or C's — so D is a footprint decision (consolidation), not a lean one; the source's own closing recommendations are to implement lean, and separately to consider consolidating the plants, especially Plant D with its high overhead.\n- Not gated, credited as strength only: the bridge 20.0 → 0 → −32.0 → 28.0; the verdict on the CEO's 100.0 (28.0 leaves 72.0 still to find, more than the whole programme delivers); overhead named as untouched — 80.0 held flat while revenue falls 400.0 → 288.0, i.e. 20.0% → 27.8% of revenue; Plant D named as the only plant whose profit falls (5.0 → 2.8) and as a footprint question rather than a lean one.\n- Timer: 6 minutes, not the library's 5. The slot requires two computed states — 2014 with the programme and 2014 without it — where a standard Case Math slot computes one; the extra minute buys the second state and the rejection of 8.0, not extra arithmetic.\nSource: Kellogg-2012, High Q Plastics, pp. 178-185",
+    "ru": "- Шкала и проверка на вменяемость. Все величины в $ млн. Экзибит 2010 в сумме: выручка 400.0, труд 150.0, материал 150.0, накладные 80.0, прибыль **20.0** [BUILD] — четыре завода и есть вся компания, и 20.0 — это то, что она зарабатывает сегодня.\n- Шаг 1 — 2014 с программой. Выручка на завод 100 × 0.80 × 0.90 = **72.0** (оба эффекта, перемножением; 288.0 итого). Труд × 0.80 × 0.70 = 0.56 → **11.2 / 22.4 / 33.6 / 16.8** (84.0). Материал × 0.80 × 0.80 = 0.64 → **35.2 / 25.6 / 12.8 / 22.4** (96.0). Накладные без изменений → 20 / 15 / 15 / 30 (80.0). Прибыль по заводам **5.6 / 9.0 / 10.6 / 2.8**, итого **28.0**.\n- Шаг 2 — сколько стоит программа. Состояние для сравнения — 2014 *без* программы, и его нет в экзибите: выручка 288.0, труд 150.0 × 0.80 = 120.0, материал 150.0 × 0.80 = 120.0, накладные 80.0 → **убыток 32.0** [BUILD] (по заводам −8.0 / −7.0 / −7.0 / −10.0). Эффект программы = 28.0 − (−32.0) = **60.0 в год** [BUILD]. Прямая сверка: труд 120.0 × 30% = 36.0 плюс материал 120.0 × 20% = 24.0 = **60.0** ✓. По заводам: 13.6 / 16.0 / 17.6 / 12.8 [BUILD].\n- Почему 8.0 — неверное число для этого business case. 28.0 − 20.0 = 8.0 — это настоящее изменение прибыли, и источник его печатает, но в нём свёрнуты три одновременных движения: объём 80% стоит 20.0 вклада (вклад 2010 = 400.0 − 150.0 − 150.0 = 100.0, × 0.80 → 80.0), снижение цены на 10% стоит 32.0 (320.0 → 288.0), программа даёт +60.0. Мост: 20.0 − 20.0 − 32.0 + 60.0 = **28.0** ✓ [BUILD]. Рычаг +60.0 и рынок −52.0 гасят друг друга до +8.0; оценённая по этой дельте программа занижена в 7.5 раза, а падение объёма и цены записаны на счёт решения, которое их не производило.\n- So what. Программа не маргинальна — это разница между убытком 32.0 и прибылью 28.0, поэтому её запускают. До цели CEO в 100.0 она всё равно не доводит: после 28.0 остаётся найти 72.0 — больше, чем даёт вся программа целиком, и партнёрский ход здесь — пересобрать ожидания клиента. Разрыв, которого lean не касается, — накладные: держатся на 80.0, пока выручка падает 400.0 → 288.0, и растут с 20.0% до **27.8%** от выручки [BUILD]. Plant D — единственный завод, чья прибыль падает (5.0 → 2.8): он несёт 30.0 накладных, вдвое больше, чем B или C, — значит D это решение о конфигурации площадок (консолидация), а не о бережливом производстве; в самом источнике итоговые рекомендации — внедрять lean и отдельно рассмотреть консолидацию заводов, особенно Plant D с его высокими накладными.\n- Воротами не является, засчитывается как сила: мост 20.0 → 0 → −32.0 → 28.0; вердикт по цели CEO в 100.0 (после 28.0 остаётся найти 72.0 — больше, чем даёт вся программа); накладные названы нетронутыми — 80.0 держатся при падении выручки 400.0 → 288.0, то есть 20.0% → 27.8% от выручки; Plant D назван единственным заводом, чья прибыль падает (5.0 → 2.8), и как вопрос конфигурации площадок, а не бережливого производства.\n- Таймер: 6 минут вместо библиотечных 5. Слот требует двух посчитанных состояний — 2014 с программой и 2014 без неё, — тогда как обычный слот Case Math считает одно; лишняя минута куплена под второе состояние и отказ от 8.0, а не под лишнюю арифметику.\nSource: Kellogg-2012, High Q Plastics, pp. 178-185"
    },
    "provoked": {
-    "en": "comparing full-cost ($120) instead of avoidable ($105); forgetting the ramp payback.",
-    "ru": "сравнить full-cost ($120) вместо избегаемого ($105); забыть про ramp-payback."
+    "en": "the programme is priced off the 2010 → 2014 change in profits (28.0 − 20.0 = 8.0), a delta that nets the programme's +60.0 against a −52.0 market decline it did not cause.",
+    "ru": "программа оценена по изменению прибыли 2010 → 2014 (28.0 − 20.0 = 8.0) — по дельте, где её собственные +60.0 свёрнуты с падением рынка на −52.0, к которому она не имеет отношения."
    },
-   "family_h25": "F1",
+   "family_h25": "F12",
    "family_src": "тело",
-   "family_conf": "высокая",
+   "family_conf": "средняя",
    "mehanizm": {
-    "naive": "сравнивает цену подрядчика с полной себестоимостью единицы, включающей неизбегаемую часть накладных",
-    "correct": "сравнивает цену подрядчика с избегаемой себестоимостью и окупает единовременные затраты перехода годовой экономией",
-    "why": "неизбегаемая часть остаётся после передачи и потому не входит в разницу вариантов",
-    "code": "MECH-02-избегаемые-затраты",
+    "naive": "оценивает годовой эффект программы разностью прибыли между базовым годом и годом внедрения, хотя в этой разности сидят объём и цена, которых программа не касается",
+    "correct": "строит состояние того же года без программы и считает эффект как разницу «с программой минус без программы», сверяя её прямым счётом экономии по строкам затрат",
+    "why": "программа отвечает только за те строки, на которые действует; всё остальное между двумя годами происходит и без неё, поэтому прошлый год не является базой сравнения для решения",
+    "code": "MECH-311-эффект-меры-погашен-встречным-трендом",
     "code2": []
    },
-   "family_note": "круг 103: $15 неизбегаемых остаются после передачи, поэтому своя релевантная себестоимость $105, а не $120, и разовые $300k окупаются за 1.2 года",
-   "twin_of": "CM-003"
+   "family_note": "F12 по телу: решающее число 8.0 — это агрегат разнознакового, +60.0 программы против −20.0 объёма и −32.0 цены, и именно взаимное гашение делает рычаг в 60.0 похожим на мелочь в 8.0; проверка семьи проходит буквально — одно опубликованное число сворачивает компоненты противоположного знака и потому искажает масштаб сил. Уверенность средняя, и вот почему: определение F1 в словаре несёт оговорку «или агрегат прячет разные знаки», то есть F1 и F12 в этой самой точке пересекаются, и формально тело подходит под обе метки. Разводятся они головной частью определения: F1 — про подмену базы (средняя, удельная, сводная вместо той, по которой решают), а здесь подмены базы нет — 8.0 корректный итог по всей компании, все величины в одной размерности и одном периметре. Раз головная часть F1 не срабатывает, а хвостовая оговорка описана отдельной семьёй F12, ставится F12 (и при равенстве кандидатов правило круга требует не-F1). Не F4: ограничение названо — накладные объявлены неподвижными прямо в условии, чтобы слот нёс одну механику, а не две. Механика намеренно не MECH-04-постоянные-как-переменные (масштабирование накладных объёмом) и не MECH-36-свёрнутое-нетто-изменение: там ремонт — разложить показанное число на его же компоненты, здесь ремонт другой — построить состояние 2014 без программы (−32.0), которого нет ни в одной таблице.",
+   "twin_of": null
   },
   {
    "id": "CM-034",

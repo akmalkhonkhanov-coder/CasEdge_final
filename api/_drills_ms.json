@@ -50,8 +50,8 @@
      "tolerance": "judged"
     }
    ],
-   "family_h25": "F1",
-   "family_src": "словарь:M01",
+   "family_h25": "F7",
+   "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
     "naive": "умножает всё население на среднюю частоту потребления, не разделяя эпизоды повышенного и фонового спроса",
@@ -61,7 +61,9 @@
     "code2": [
      "MECH-08-среднее-вместо-распределения"
     ]
-   }
+   },
+   "family_note": "круг 103: салфетки потребляют 10% регулярных пользователей в эпизодах болезни — средняя частота по всем 320M не описывает никого, объём держит узкое ядро",
+   "twin_of": "MS-042"
   },
   {
    "id": "MS-002",
@@ -113,7 +115,7 @@
     }
    ],
    "family_h25": "F1",
-   "family_src": "словарь:M08",
+   "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
     "naive": "считает базу по числу людей там, где покупаемый объект принадлежит домохозяйству",
@@ -121,7 +123,8 @@
     "why": "актив общий для всех живущих вместе, поэтому счёт по головам завышает число покупок",
     "code": "MECH-50-единица-базы",
     "code2": []
-   }
+   },
+   "family_note": "круг 103: расход на порошок снят с домохозяйства, а наивный путь прикладывает его к 330M человек — посудомойка общий актив, база = 130M дх"
   },
   {
    "id": "MS-003",
@@ -172,8 +175,8 @@
      "tolerance": "judged"
     }
    ],
-   "family_h25": "F1",
-   "family_src": "словарь:M03",
+   "family_h25": "F6",
+   "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
     "naive": "умножает весь установленный парк на цену и называет произведение годовым рынком",
@@ -181,7 +184,8 @@
     "why": "парк накоплен за все прошлые годы, а рынок измеряется за один",
     "code": "MECH-48-запас-и-поток",
     "code2": []
-   }
+   },
+   "family_note": "круг 103: парк 280M накоплен за 14 лет, а спрошен один год — рамка величины (запас) не совпадает с рамкой вопроса (поток), в цепочку идёт только замена 7%"
   },
   {
    "id": "MS-004",
@@ -233,9 +237,9 @@
     }
    ],
    "family_h25": "F5",
-   "family_src": "словарь:M07",
-   "family_conf": "высокая",
-   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом",
+   "family_src": "тело",
+   "family_conf": "спорная",
+   "family_note": "круг 103: спрос-сайд $27B и supply-side $15.6B — две защитимые меры одного рынка с расхождением 1.73×, и надо назвать надёжнейшую, а не остановиться на первой цепочке",
    "mehanizm": {
     "naive": "объявляет результат по одной цепочке, не строя второй",
     "correct": "строит вторую оценку со стороны предложения на независимых якорях и сверяет с первой",
@@ -293,8 +297,8 @@
      "tolerance": "judged"
     }
    ],
-   "family_h25": "F1",
-   "family_src": "словарь:M09",
+   "family_h25": "F6",
+   "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
     "naive": "планирует захват против всего адресуемого рынка",
@@ -302,7 +306,9 @@
     "why": "полный рынок описывает потолок спроса, а не то, что исполнитель успевает взять",
     "code": "MECH-53-рынок-без-доли",
     "code2": []
-   }
+   },
+   "family_note": "круг 103: TAM $24B — потолок спроса, а планировать велено против того, что программа возьмёт за 3 года ($9.9B); слово «рынок» покрывает две разные рамки",
+   "twin_of": "MS-024"
   },
   {
    "id": "MS-006",
@@ -414,7 +420,7 @@
     }
    ],
    "family_h25": "F1",
-   "family_src": "словарь:M11",
+   "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
     "naive": "считает базу от числа занятых людей там, где покупатель — организация",
@@ -424,7 +430,8 @@
     "code2": [
      "MECH-52-непросеянная-база"
     ]
-   }
+   },
+   "family_note": "круг 103: расход $120k в год напечатан на фирму, а наивный путь прикладывает цену к числу занятых — покупатель организация, база = 45,000 фирм"
   },
   {
    "id": "MS-008",
@@ -476,9 +483,9 @@
     }
    ],
    "family_h25": "F1",
-   "family_src": "словарь:M14",
+   "family_src": "тело",
    "family_conf": "высокая",
-   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом",
+   "family_note": "круг 103: интенсивность 60 пачек в год — профиль регулярного покупателя, и заявленные $36B требуют приложить её к 75M человек = 23% населения; заявление проверяется подразумеваемой базой",
    "mehanizm": {
     "naive": "принимает заявленный размер рынка как данность, не выводя из него требуемое число покупателей",
     "correct": "делит заявленный рынок на цену и частоту и сверяет полученное число покупателей с численностью базы",
@@ -536,17 +543,18 @@
      "tolerance": "judged"
     }
    ],
-   "family_h25": "F1",
-   "family_src": "словарь:M13",
+   "family_h25": "F11",
+   "family_src": "тело",
    "family_conf": "высокая",
-   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом",
+   "family_note": "круг 103: 20M единиц через дистрибьюторов входят в те же 60M единиц конечных пользователей — один физический поток под двумя ярлыками, каналы не складываются",
    "mehanizm": {
     "naive": "складывает объём, прошедший через посредников, с объёмом, купленным конечными пользователями",
     "correct": "берёт объём одной ветви и умножает на цену того же уровня",
     "why": "обе ветви измеряют один физический поток с разных концов цепочки",
     "code": "MECH-49-уровень-цепочки",
     "code2": []
-   }
+   },
+   "twin_of": "MS-045"
   },
   {
    "id": "MS-010",
@@ -598,9 +606,9 @@
     }
    ],
    "family_h25": "F1",
-   "family_src": "словарь:M10",
+   "family_src": "тело",
    "family_conf": "высокая",
-   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом",
+   "family_note": "круг 103: $36 на человека снят с США, где доход вчетверо выше, и прикладывается к 75M жителей целевой страны — переносить надо по доходу, а не по головам",
    "mehanizm": {
     "naive": "масштабирует рынок соседней страны по числу людей там, где переносимая величина задана располагаемым доходом",
     "correct": "масштабирует по располагаемому доходу и вслух проверяет применимость переноса",
@@ -611,61 +619,62 @@
   },
   {
    "id": "MS-011",
-   "title": "Seats at the Table",
+   "title": "What The Patient Hands Over",
    "difficulty": "Medium",
    "type": "Trap",
-   "focus": "M02(b) домохозяйства vs люди",
-   "time": "5 min",
+   "focus": "M17(a) плательщик за единицу не один",
+   "time": "6 min",
    "render": {
     "exhibits": [],
     "interactive": [
      "input_number"
     ]
    },
-   "prompt": "Estimate the annual US market for video streaming subscriptions.",
+   "prompt": "A manufacturer is sizing the annual market for prescription hearing aids in one country before opening a sales office. 780,000 devices are fitted a year, and a patient pays $290 at the counter for a device. Under the national scheme the fitter also invoices the state $1,160 for every device it fits, and the scheme settles every invoice. Estimate the annual market in dollars.",
    "exhibit": null,
    "step_prompts": [
     "Segment the market and state the counting base explicitly (people / households / firms / installed base) with a one-line hypothesis.",
     "Name each anchor as a number before computing (k=3 estimate-anchors).",
     "Compute the estimate along the main chain and state the market size in $.",
-    "Triangulate with an independent second path (a different data source, not the same chain reordered) and reconcile — gap should be within ~2×; name the more reliable path with justification.",
-    "Sanity-check: normalize per capita / per household aloud and give a plausibility verdict.",
-    "Last mile: market capacity → is launching yet another service justified."
+    "Triangulate with an independent second path (a different data source, not the same chain reordered) and reconcile — gap should be within ~2x; name the more reliable path with justification.",
+    "Sanity-check: normalize per capita / per unit aloud and give a plausibility verdict.",
+    "Last mile: what the figure means for the manufacturer's decision to open a sales office."
    ],
    "checklist": {
-    "en": "- GATE: ∈ [$4.58B, $41.2B]\n- P1: base named explicitly (households) and justified by the divisibility of the subscription\n- P2: 3 anchors as numbers before calculating; «12 months» not declared as an estimate\n- P3: second path independent, ratio ≤2× (reference 1.16×), most reliable one named with justification\n- P4: translation into a decision (10% share = $1.4B revenue)\n- S: «$13.7B / 130M hh ≈ $106 per year ≈ $9/month per household» → does it reconcile with the price of a single subscription",
-    "ru": "- GATE: ∈ [$4.58B, $41.2B]\n- P1: база названа явно (домохозяйства) и обоснована делимостью подписки\n- P2: 3 якоря числом до расчёта; «12 месяцев» не заявлено как оценка\n- P3: второй путь независим, ratio ≤2× (эталон 1.16×), назван надёжнейший с обоснованием\n- P4: перевод в решение (доля 10% = $1.4B выручки)\n- S: «$13.7B / 130M дх ≈ $106 в год ≈ $9/мес на домохозяйство» → сходится ли с ценой одной подписки"
+    "en": "- GATE: result in [$377,000,000, $3,393,000,000]\n- P1: **the set of payers is settled before the base is multiplied — one device is paid for twice, and the market is what the device collects, not what the household hands over**; multiplying 780,000 by the $290 counter price = P1 not credited, and so is calling the $290 «the price» without asking who settles the rest\n- P2: 3 anchors as numbers before the calculation\n- P3: second path from a different source (fitting clinics on the national register x device revenue per clinic), ratio in [1.00x, 2.00x] (reference 1.04x) + the more reliable path named\n- P4: translated into a decision - 80% of the $1,131,000,000 pool is settled by one payer, so the reimbursement rate, not household willingness to pay, is the variable that moves this market\n- S: $1,131,000,000 across 780,000 devices is $1,450 a device, of which the $290 the household feels is one dollar in five - a fitted prescription device that collects $290 all in does not exist in this category",
+    "ru": "- GATE: результат в [$377,000,000, $3,393,000,000]\n- P1: **набор плательщиков определён до умножения базы — за одну единицу платят дважды, и рынок есть то, что единица собирает, а не то, что выкладывает домохозяйство**; умножение 780,000 на цену прилавка $290 = P1 не зачтён, как и называние $290 «ценой» без вопроса, кто платит остальное\n- P2: 3 якоря числом до расчёта\n- P3: второй путь из другого источника (клиники подбора в национальном реестре x выручка клиники по приборам), ratio в [1.00x, 2.00x] (эталон 1.04x) + назван надёжнейший путь\n- P4: перевод в решение - 80% пула $1,131,000,000 закрывает один плательщик, поэтому величина, двигающая этот рынок, - ставка возмещения, а не готовность домохозяйства платить\n- S: $1,131,000,000 на 780,000 приборов - это $1,450 за прибор, и $290, которые чувствует домохозяйство, суть один доллар из пяти; прибора по рецепту, собирающего $290 целиком, в этой категории не существует"
    },
    "reference": {
-    "en": "Allowed anchors (revealed on request, not upfront):\n  • US households: ~130M [A1]\n  • Share with at least one subscription: ~55% [A1]\n  • Average bill per month: ~$16 [A5]\n\nReference chain:\nmarket = 130_000_000 * D('0.55') * 12 * 16      # 13,728,000,000\n\nReference answer: $13,728,000,000 · Corridor: [$4,576,000,000 … $41,184,000,000]",
-    "ru": "Разрешённые якоря (раскрываются по запросу, не вперёд):\n  • Домохозяйств в США: ~130M [A1]\n  • Доля с хотя бы одной подпиской: ~55% [A1]\n  • Средний счёт в месяц: ~$16 [A5]\n\nЭталонная цепочка:\nmarket = 130_000_000 * D('0.55') * 12 * 16      # 13,728,000,000\n\nЭталон: $13,728,000,000 · Коридор: [$4,576,000,000 … $41,184,000,000]"
+    "en": "The market is $1,131,000,000 a year: price every dollar one device collects, not the $290 the patient hands over.\nAllowed anchors (revealed on request, not upfront):\n  • Devices fitted a year: 780,000 [A3]\n  • Paid by the patient at the counter: $290 [A5]\n  • Invoiced to the scheme per device fitted: $1,160 [A5]\n  • *For the second path:* fitting clinics on the national register: 3,100 [A3]\n  • *For the second path:* annual device revenue per clinic: $380,000 [A3]\n\nReference chain:\nper_unit = 290 + 1_160        # 1,450 collected on one device\nnaive    = 780_000 * 290      # 226,200,000    <- only what the patient pays\nmarket   = 780_000 * 1_450    # 1,131,000,000  <- market\nalt      = 3_100 * 380_000    # 1,178,000,000  <- second path, the clinic register\nratio    = alt / market       # 1.04\ngap      = market - naive     # 904,800,000\nmult     = market / naive     # 5.00\nReference answer: $1,131,000,000 · Corridor: [$377,000,000 … $3,393,000,000]\n\nThe $290 is real and auditable and it is the size of household out-of-pocket spending on the category; the device itself collects $1,450, so sizing on the counter price understates the market a supplier sells into by $904,800,000, that is 5.00x.",
+    "ru": "Рынок - $1,131,000,000 в год: считать каждый доллар, который собирает одна единица, а не $290, которые выкладывает пациент.\nРазрешённые якоря (выдаются по запросу, не сразу):\n  • Приборов подбирается в год: 780,000 [A3]\n  • Платит пациент у прилавка: $290 [A5]\n  • Выставляется программе за подобранный прибор: $1,160 [A5]\n  • *Для второго пути:* клиник подбора в национальном реестре: 3,100 [A3]\n  • *Для второго пути:* выручка клиники по приборам в год: $380,000 [A3]\n\nЭталонная цепочка:\nper_unit = 290 + 1_160        # 1,450 собирается на одной единице\nnaive    = 780_000 * 290      # 226,200,000    <- только то, что платит пациент\nmarket   = 780_000 * 1_450    # 1,131,000,000  <- рынок\nalt      = 3_100 * 380_000    # 1,178,000,000  <- второй путь, реестр клиник\nratio    = alt / market       # 1.04\ngap      = market - naive     # 904,800,000\nmult     = market / naive     # 5.00\nЭталон: $1,131,000,000 · Коридор: [$377,000,000 … $3,393,000,000]\n\n$290 настоящие и проверяемые, и это размер расхода домохозяйств из кармана на категорию; сама единица собирает $1,450, поэтому счёт по цене прилавка занижает рынок, в который продаёт поставщик, на $904,800,000, то есть в 5.00x."
    },
    "provoked": {
-    "en": "counting by people (330M × price). A subscription is shared within the household — one account per family; counting by heads overstates the base by ~2.5× and loses the fact that the purchase decision is made at the household level.",
-    "ru": "считать по людям (330M × цена). Подписка делится внутри домохозяйства — один аккаунт на семью; счёт по головам завышает базу в ~2.5× и теряет то, что решение о покупке принимается на уровне домохозяйства."
+    "en": "the $290 is the only price a human being ever quotes, and the record puts it at the counter where a price belongs. The scheme's $1,160 arrives as administrative colour - who reimburses whom - rather than as the larger half of the price of the same device.",
+    "ru": "$290 - единственная цена, которую вообще называет человек, и запись ставит её у прилавка, где цене и место. $1,160 от программы приходят как административная деталь - кто кому возмещает, - а не как бо́льшая половина цены того же прибора."
    },
    "steps": [
     {
      "prompt": "Final market-size estimate, $",
      "kind": "number",
-     "answer": "13728000000",
-     "tolerance": "corridor [$4,576,000,000 … $41,184,000,000]"
+     "answer": "1131000000",
+     "tolerance": "corridor [$377,000,000 … $3,393,000,000]"
     },
     {
      "prompt": "Independent second-path triangulation + one-sentence recommendation",
      "kind": "text",
-     "answer": "reference answer $13,728,000,000; second path within ~2×",
+     "answer": "reference answer $1,131,000,000; second path within ~2x",
      "tolerance": "judged"
     }
    ],
-   "family_h25": "F1",
-   "family_src": "словарь:M02",
+   "family_h25": "F2",
+   "family_src": "тело",
    "family_conf": "высокая",
+   "family_note": "круг 105: F2 «второй порядок» — прямой счёт верен и отвечает не на тот вопрос. $226,200,000 есть точный размер расхода домохозяйств на категорию и ответ про карман пациента, а спрошен рынок, в который продаёт производитель. Тело печатает обе части оплаты одной единицы дословно — «a patient pays $290 at the counter for a device» и «the fitter also invoices the state $1,160 for every device it fits» — и снимает вопрос о собираемости: «the scheme settles every invoice». Отличие от MS-053, где F2 тоже стоит: там поток не принадлежит посреднику и счёт надо сузить, здесь за одну единицу платят двое и счёт надо расширить.",
    "mehanizm": {
-    "naive": "считает базу подписки по числу людей вместо числа домохозяйств",
-    "correct": "считает базу по числу домохозяйств и умножает на цену одного аккаунта",
-    "why": "один аккаунт обслуживает всех живущих вместе",
-    "code": "MECH-50-единица-базы",
+    "naive": "берёт сумму, которую конечный пользователь платит из кармана, за всю выручку с единицы",
+    "correct": "складывает все источники оплаты одной единицы и умножает сумму на объём",
+    "why": "за одну и ту же единицу платят двое, и продавец получает обе части",
+    "code": "MECH-204-набор-плательщиков",
     "code2": []
    }
   },
@@ -718,8 +727,8 @@
      "tolerance": "judged"
     }
    ],
-   "family_h25": "F7",
-   "family_src": "словарь:M04",
+   "family_h25": "F1",
+   "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
     "naive": "умножает пиковую сезонную частоту на все недели года",
@@ -727,7 +736,8 @@
     "why": "пик держится малую часть года, а вне его потребление кратно ниже",
     "code": "MECH-09-режим-на-весь-период",
     "code2": []
-   }
+   },
+   "family_note": "круг 103: частота 2–3 раза в неделю снята на ~13 неделях сезона, а множится на все 52 — либо год делится на сезон и межсезонье, либо частота объявляется среднегодовой"
   },
   {
    "id": "MS-013",
@@ -779,7 +789,7 @@
     }
    ],
    "family_h25": "F1",
-   "family_src": "словарь:M05",
+   "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
     "naive": "считает выручку как число подписчиков на цену подписки там, где платят за поездку",
@@ -787,7 +797,8 @@
     "why": "деньги возникают в момент использования, а подписка лишь меняет тариф",
     "code": "MECH-51-единица-тарификации",
     "code2": []
-   }
+   },
+   "family_note": "круг 103: деньги каршеринга живут на множестве поездок ($24 × 30 в год), а наивный путь прикладывает цену к числу подписчиков — подписка лишь меняет тариф"
   },
   {
    "id": "MS-014",
@@ -839,9 +850,9 @@
     }
    ],
    "family_h25": "F1",
-   "family_src": "словарь:M06",
-   "family_conf": "спорная",
-   "family_note": "круг 42, триаж: не влезает в десять семей · признак — K2 печатной ловушки нет — проверяется строгость самой оценки",
+   "family_src": "тело",
+   "family_conf": "высокая",
+   "family_note": "круг 103: цена напечатана на коробку из 20 капсул, а объём считается в чашках — без приведения цены к чашке ($0.60) она приложена к чужому множеству",
    "mehanizm": {
     "naive": "умножает объём потребления в порциях на цену упаковки",
     "correct": "делит цену упаковки на число порций в ней и умножает на объём в порциях",
@@ -900,7 +911,7 @@
     }
    ],
    "family_h25": "F6",
-   "family_src": "словарь:M12",
+   "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
     "naive": "умножает сегодняшний рынок на рост парка, держа долю оснащённых постоянной",
@@ -908,7 +919,8 @@
     "why": "растёт доля оснащённых внутри растущей базы, а не рынок как целое",
     "code": "MECH-31-один-множитель-в-выводе",
     "code2": []
-   }
+   },
+   "family_note": "круг 103: напечатанный 1% — доля EV сегодня, а вопрос стоит на горизонте +5 лет с долей 12%; рамка времени у якоря и у вопроса разная, сегодняшний рынок в цепочку не идёт"
   },
   {
    "id": "MS-016",
@@ -960,9 +972,9 @@
     }
    ],
    "family_h25": "F7",
-   "family_src": "словарь:M15",
-   "family_conf": "высокая",
-   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом",
+   "family_src": "тело",
+   "family_conf": "спорная",
+   "family_note": "круг 103, по ревью: решает ШИРИНА самого широкого якоря (4.00× против 2.00×), а не хвост распределения — точной семьи в словаре нет",
    "mehanizm": {
     "naive": "выдаёт точечную оценку, придавая всем якорям одинаковую надёжность",
     "correct": "называет якорь с наибольшим разбросом и показывает границы оценки при его крайних значениях",
@@ -1081,7 +1093,7 @@
     }
    ],
    "family_h25": "F1",
-   "family_src": "словарь:M01",
+   "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
     "naive": "умножает суммарный объём на простую среднюю цену каналов",
@@ -1089,7 +1101,8 @@
     "why": "дешёвый канал несёт большую часть объёма, поэтому простая средняя цены завышает результат",
     "code": "MECH-07-невзвешенное-среднее",
     "code2": []
-   }
+   },
+   "family_note": "круг 103: простая средняя цена $4.50 снята по каналам поровну, а 140 из 200 порций идут по дешёвому off-trade — взвешенная цена $3.50, ветви считаются раздельно"
   },
   {
    "id": "MS-019",
@@ -1140,10 +1153,10 @@
      "tolerance": "judged"
     }
    ],
-   "family_h25": "F1",
-   "family_src": "словарь:M13",
-   "family_conf": "спорная",
-   "family_note": "круг 42, триаж: не влезает в десять семей · признак — K2 то же — периметр рынка, не печатная величина",
+   "family_h25": "F6",
+   "family_src": "тело",
+   "family_conf": "высокая",
+   "family_note": "круг 103: вопрос очерчен словом replacement, а OEM-поставка меряется в тех же шинах и молча расширяет границу рынка — в цепочку идёт только поток замены 0.30 комплекта в год",
    "mehanizm": {
     "naive": "складывает поставку на новые изделия с потоком замены",
     "correct": "считает только поток замены, умножая парк на частоту замены и держа единицу счёта общей с ценой",
@@ -1154,62 +1167,62 @@
   },
   {
    "id": "MS-020",
-   "title": "Rich Country, Small Market",
-   "difficulty": "Easy",
+   "title": "Eight Quarters Flat",
+   "difficulty": "Hard",
    "type": "Trap",
-   "focus": "M10(b) ВВП/доход scaling",
-   "time": "5 min",
+   "focus": "M19(a) доспадовый уровень как ориентир восстановления",
+   "time": "8 min",
    "render": {
     "exhibits": [],
     "interactive": [
      "input_number"
     ]
    },
-   "prompt": "The US market for premium skincare is about $14B a year (population ~330M). Estimate the market in a country of 50M people whose income per capita is about 60% of the US level.",
+   "prompt": "A services group is bidding for staffed office reception contracts in one country and needs the annual market it should plan for. Before the shift to remote working the country's offices bought 96,000,000 reception hours a year. Three years on the figure has settled at 28% of that level and has not moved for eight straight quarters. Offices accounting for 38% of the pre-shift reception hours have since given up the floor space itself, and that space has been re-let to other uses. The trade association's outlook has the market returning to its pre-shift level within five years as employers call staff back. A reception hour is billed at $27. Estimate the annual market in dollars.",
    "exhibit": null,
    "step_prompts": [
     "Segment the market and state the counting base explicitly (people / households / firms / installed base) with a one-line hypothesis.",
     "Name each anchor as a number before computing (k=3 estimate-anchors).",
     "Compute the estimate along the main chain and state the market size in $.",
-    "Triangulate with an independent second path (a different data source, not the same chain reordered) and reconcile — gap should be within ~2×; name the more reliable path with justification.",
-    "Sanity-check: normalize per capita / per household aloud and give a plausibility verdict.",
-    "Last mile: whether it is worth entering at such a capacity."
+    "Triangulate with an independent second path (a different data source, not the same chain reordered) and reconcile — gap should be within ~2x; name the more reliable path with justification.",
+    "Sanity-check: normalize per capita / per unit aloud and give a plausibility verdict.",
+    "Last mile: what the figure means for the group's decision to bid for this work."
    ],
    "checklist": {
-    "en": "- GATE: ∈ [$420M, $3.78B]\n- P1: scaling base named explicitly (income, not population) and justified by the premium nature of the category\n- P2: 3 anchors as numbers before the calculation\n- P3: second path independent (retail), ratio ≤2× (reference 1.22×) + choice\n- P4: translated into a decision\n- S: «$1.26B / 50M ≈ $25 per person versus $42 in the US» → does it reconcile with 60% income",
-    "ru": "- GATE: ∈ [$420M, $3.78B]\n- P1: база масштабирования названа явно (доход, не население) и обоснована премиальностью категории\n- P2: 3 якоря числом до расчёта\n- P3: второй путь независим (розница), ratio ≤2× (эталон 1.22×) + выбор\n- P4: перевод в решение\n- S: «$1.26B / 50M ≈ $25 на человека против $42 в США» → сходится ли с доходом 60%"
+    "en": "- GATE: result in [$241,920,000, $2,177,280,000]\n- P1: **the pre-shift level is refused as the base, because the estate that generated those hours has been re-let and the drop is not a trough** — the settled level is taken and the recovery is tested against what is left of the base; pricing the 96,000,000 hours because the outlook forecasts them = P1 not credited, whatever the arithmetic\n- P2: 3 anchors as numbers before the calculation\n- P3: second path from a different source (reception-service firms x annual billings per firm), ratio in [1.00x, 2.00x] (reference 1.04x) + the more reliable path named\n- P4: translated into a decision - the bid is staffed against $725,760,000, and even a full restoration of the surviving estate caps the market at $1,607,040,000, which is 38% below the outlook the group is being asked to bid on\n- S: 26,880,000 hours across 980 firms is about 27,400 hours a firm, roughly 13 full-time posts - the book of a regional contractor, not of a market waiting to quadruple",
+    "ru": "- GATE: результат в [$241,920,000, $2,177,280,000]\n- P1: **доспадовый уровень отвергнут как база, потому что помещения, дававшие те часы, сданы под другое, и падение не есть впадина цикла** — берётся установившийся уровень, а возврат проверяется по тому, что от базы осталось; счёт по 96,000,000 часов потому, что их обещает прогноз, = P1 не зачтён при любой арифметике\n- P2: 3 якоря числом до расчёта\n- P3: второй путь из другого источника (фирмы ресепшн-услуг x годовой оборот фирмы), ratio в [1.00x, 2.00x] (эталон 1.04x) + назван надёжнейший путь\n- P4: перевод в решение - заявка считается против $725,760,000, а полное восстановление уцелевших помещений упирается в потолок $1,607,040,000, что на 38% ниже прогноза, под который группу просят подать заявку\n- S: 26,880,000 часов на 980 фирм - около 27,400 часов на фирму, порядка 13 полных ставок: книга регионального подрядчика, а не рынка, готового вырасти вчетверо"
    },
    "reference": {
-    "en": "Allowed anchors (revealed on request, not upfront):\n  • Population of the target country: ~50M [A1]\n  • Income per capita relative to the US: ~60% [A2]\n  • Category consumption per person at full income: ~$42 (the prompt prints $14B / 330M) [A4]\n\nReference chain:\nmarket = 50_000_000 * D('0.60') * 42        # 1,260,000,000\n\nReference answer: $1,260,000,000 · Corridor: [$420,000,000 … $3,780,000,000]",
-    "ru": "Разрешённые якоря (раскрываются по запросу, не вперёд):\n  • Население целевой страны: ~50M [A1]\n  • Доход на душу относительно США: ~60% [A2]\n  • Потребление категории на человека при полном доходе: ~$42 (промпт печатает $14B / 330M) [A4]\n\nЭталонная цепочка:\nmarket = 50_000_000 * D('0.60') * 42        # 1,260,000,000\n\nЭталон: $1,260,000,000 · Коридор: [$420,000,000 … $3,780,000,000]"
+    "en": "The market is $725,760,000 a year: price the level the market settled at, not the level it stood at before the estate was re-let.\nAllowed anchors (revealed on request, not upfront):\n  • Reception hours bought a year before the shift: 96,000,000 [A3]\n  • Share of that level the market has settled at: 28% [A4]\n  • Share of the pre-shift hours sitting in offices that have since given up the floor space: 38% [A4]\n  • Billing rate per hour: $27 [A5]\n  • *For the second path:* firms supplying staffed reception services: 980 [A3]\n  • *For the second path:* annual billings per firm: $770,000 [A3]\n\nReference chain:\nnaive   = 96_000_000 * 27              # 2,592,000,000  <- the outlook's pre-shift level priced out\nhours   = 96_000_000 * D('0.28')       # 26,880,000 hours a year, flat for eight quarters\nmarket  = hours * 27                   # 725,760,000    <- market\nceiling = 96_000_000 * D('0.62') * 27  # 1,607,040,000  <- full restoration of the surviving estate\nalt     = 980 * 770_000                # 754,600,000    <- second path, the contractor register\nratio   = alt / market                 # 1.04\ngap     = naive - market               # 1,866,240,000\nmult    = naive / market               # 3.57\nReference answer: $725,760,000 · Corridor: [$241,920,000 … $2,177,280,000]\n\nAn outlook can forecast a return; floor space that has been re-let cannot supply one. Restoring every hour in every office that still exists reaches $1,607,040,000, which is 62% of the pre-shift level and already below the forecast, and the market has in fact been flat at $725,760,000 for two years. The two figures are consistent with each other: 62% of the pre-shift hours still sit in offices that exist, and the market is running at 28 of those 62 points, that is 45.2% of what the surviving estate used to buy. Pricing the pre-shift level overstates the market by $1,866,240,000, that is 3.57x.",
+    "ru": "Рынок - $725,760,000 в год: считать уровень, на котором рынок встал, а не тот, на котором он стоял до пересдачи помещений.\nРазрешённые якоря (выдаются по запросу, не сразу):\n  • Часов ресепшн покупалось в год до сдвига: 96,000,000 [A3]\n  • Доля этого уровня, на которой рынок установился: 28% [A4]\n  • Доля доспадовых часов, приходившаяся на офисы, которые с тех пор отдали и помещение: 38% [A4]\n  • Тариф за час: $27 [A5]\n  • *Для второго пути:* фирм, оказывающих услуги ресепшн: 980 [A3]\n  • *Для второго пути:* оборот фирмы в год: $770,000 [A3]\n\nЭталонная цепочка:\nnaive   = 96_000_000 * 27              # 2,592,000,000  <- доспадовый уровень прогноза в деньгах\nhours   = 96_000_000 * D('0.28')       # 26,880,000 часов в год, ровно восемь кварталов\nmarket  = hours * 27                   # 725,760,000    <- рынок\nceiling = 96_000_000 * D('0.62') * 27  # 1,607,040,000  <- полное восстановление уцелевших помещений\nalt     = 980 * 770_000                # 754,600,000    <- второй путь, реестр подрядчиков\nratio   = alt / market                 # 1.04\ngap     = naive - market               # 1,866,240,000\nmult    = naive / market               # 3.57\nЭталон: $725,760,000 · Коридор: [$241,920,000 … $2,177,280,000]\n\nПрогноз может обещать возврат; пересданные помещения его обеспечить не могут. Восстановление каждого часа в каждом уцелевшем офисе даёт $1,607,040,000, то есть 62% от доспадового уровня и уже ниже прогноза, а фактически рынок два года стоит на $725,760,000. Две величины согласованы между собой: 62% доспадовых часов по-прежнему приходятся на существующие офисы, а рынок идёт на 28 из этих 62 пунктов, то есть на 45.2% того, что уцелевшие помещения покупали прежде. Счёт по доспадовому уровню завышает рынок на $1,866,240,000, то есть в 3.57x."
    },
    "provoked": {
-    "en": "scaling strictly by population (50/330 × $14B = $2.12B), ignoring income. For a **premium** category the link to income is stronger than to the number of people: at 60% income the per-capita consumption falls not proportionally but more steeply. The naive path overstates by ~2×.",
-    "ru": "масштабировать строго по населению (50/330 × $14B = $2.12B), игнорируя доход. Для **премиальной** категории связь с доходом сильнее, чем с числом людей: при доходе 60% потребление на душу падает не пропорционально, а сильнее. Наивный путь завышает в ~2×."
+    "en": "the pre-shift 96,000,000 is the only figure in the record that describes the market at full size, and the association's outlook licenses using it: a named body says the level comes back. A decline reads as a trough by default, and the line about re-let floor space reads as background on the property market rather than as the reason the trough has no far side.",
+    "ru": "доспадовые 96,000,000 - единственная величина в записи, описывающая рынок в полный рост, и прогноз ассоциации разрешает ею пользоваться: названный орган говорит, что уровень вернётся. Падение по умолчанию читается как впадина, а строка про пересданные помещения - как фон о рынке недвижимости, а не как причина, по которой у впадины нет дальнего края."
    },
    "steps": [
     {
      "prompt": "Final market-size estimate, $",
      "kind": "number",
-     "answer": "1260000000",
-     "tolerance": "corridor [$420,000,000 … $3,780,000,000]"
+     "answer": "725760000",
+     "tolerance": "corridor [$241,920,000 … $2,177,280,000]"
     },
     {
      "prompt": "Independent second-path triangulation + one-sentence recommendation",
      "kind": "text",
-     "answer": "reference answer $1,260,000,000; second path within ~2×",
+     "answer": "reference answer $725,760,000; second path within ~2x",
      "tolerance": "judged"
     }
    ],
-   "family_h25": "F1",
-   "family_src": "словарь:M10",
+   "family_h25": "F8",
+   "family_src": "тело",
    "family_conf": "высокая",
-   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом",
+   "family_note": "круг 105: F8 «разворота нет» — возврат к прежнему уровню невозможен, потому что выбыла сама база, его создававшая. Тело называет и остановку — «has settled at 28% of that level and has not moved for eight straight quarters», — и необратимость: «Offices accounting for 38% of the pre-shift reception hours have since given up the floor space itself, and that space has been re-let to other uses». Прогноз ассоциации требует вернуть часы в помещения, которых больше нет: потолок восстановления есть 62% прежнего уровня, то есть $1,607,040,000, и он лежит ниже самого прогноза. Сверено с носителем F8 в этой же библиотеке (MS-037): там разворота нет у переноса между странами, здесь — у уровня во времени.",
    "mehanizm": {
-    "naive": "масштабирует рынок по числу людей, не корректируя подушевое потребление на разрыв в доходе",
-    "correct": "масштабирует по подушевому доходу с поправкой на премиальность категории",
-    "why": "в премиальной категории подушевое потребление падает быстрее, чем доход",
-    "code": "MECH-57-перенос-по-неверному-драйверу",
+    "naive": "берёт доспадовый уровень базы за уровень, к которому рынок вернётся",
+    "correct": "берёт установившийся после сдвига уровень и проверяет по остатку базы, возможен ли возврат вообще",
+    "why": "часть базы, дававшая прежний объём, выбыла безвозвратно, поэтому прежний уровень недостижим",
+    "code": "MECH-205-возврат-к-доспадовому-уровню",
     "code2": []
    }
   },
@@ -1263,7 +1276,7 @@
     }
    ],
    "family_h25": "F1",
-   "family_src": "словарь:M03",
+   "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
     "naive": "оценивает число сделок вторичного рынка от объёма выпуска новых единиц",
@@ -1271,7 +1284,8 @@
     "why": "одна единица за срок службы перепродаётся несколько раз",
     "code": "MECH-48-запас-и-поток",
     "code2": []
-   }
+   },
+   "family_note": "круг 103: число сделок берут с базы выпуска новых машин, а сделки живут на базе парка 280M × 14% оборота — одна машина за жизнь меняет владельца 3–4 раза"
   },
   {
    "id": "MS-022",
@@ -1322,17 +1336,18 @@
      "tolerance": "judged"
     }
    ],
-   "family_h25": "F5",
-   "family_src": "словарь:M07",
+   "family_h25": "F11",
+   "family_src": "тело",
    "family_conf": "спорная",
-   "family_note": "круг 42, триаж: не влезает в десять семей · признак — K2 то же — независимость второго пути",
+   "family_note": "круг 103: «top-down» из переставленных множителей той же цепочки — один набор якорей под двумя ярлыками, сходится по построению; второй путь обязан стоять на 6M фирм и их бюджетах",
    "mehanizm": {
     "naive": "берёт вторым путём ту же цепочку с переставленными множителями",
     "correct": "берёт вторым путём счёт от числа организаций и их бюджетов, а не от числа людей",
     "why": "цепочка, выведенная из первой, сходится по построению и проверкой не является",
     "code": "MECH-56-мнимая-независимость",
     "code2": []
-   }
+   },
+   "twin_of": "MS-038"
   },
   {
    "id": "MS-023",
@@ -1384,7 +1399,7 @@
     }
    ],
    "family_h25": "F1",
-   "family_src": "словарь:M08",
+   "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
     "naive": "считает выручку по числу пользователей вместо числа установленных единиц оборудования",
@@ -1392,7 +1407,8 @@
     "why": "доход приносит установленная единица независимо от числа подошедших к ней людей",
     "code": "MECH-152-доход-на-установленную-единицу",
     "code2": []
-   }
+   },
+   "family_note": "круг 103: $9,000 выручки в год напечатаны на банкомат, а наивный путь считает по числу снимающих людей — доход приносит установленный аппарат независимо от числа подошедших"
   },
   {
    "id": "MS-024",
@@ -1443,8 +1459,8 @@
      "tolerance": "judged"
     }
    ],
-   "family_h25": "F1",
-   "family_src": "словарь:M09",
+   "family_h25": "F6",
+   "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
     "naive": "останавливается на достижимом рынке, не применяя долю, отвоёванную у конкурентов",
@@ -1452,7 +1468,8 @@
     "why": "вопрос задан о своей части рынка, а не о доступной всем игрокам сразу",
     "code": "MECH-53-рынок-без-доли",
     "code2": []
-   }
+   },
+   "family_note": "круг 103: слово «рынок» покрывает TAM $23.4B, SAM $2.34B и SOM $351M, а спрошен «свой» — граница величины меняется между шагами, и запись этого не ловит"
   },
   {
    "id": "MS-025",
@@ -1503,8 +1520,8 @@
      "tolerance": "judged"
     }
    ],
-   "family_h25": "F1",
-   "family_src": "словарь:M11",
+   "family_h25": "F6",
+   "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
     "naive": "считает рынок снизу от собственных лицензий и их цены",
@@ -1512,7 +1529,8 @@
     "why": "продуктовая часть покрывает меньше половины расходов на функцию",
     "code": "MECH-61-счёт-от-себя",
     "code2": []
-   }
+   },
+   "family_note": "круг 103: спрошены продукты И услуги, то есть весь бюджет функции (9% от ИТ-бюджета $4.2M), а счёт через свои лицензии молча сужает границу рынка до продуктового среза"
   },
   {
    "id": "MS-026",
@@ -1563,10 +1581,10 @@
      "tolerance": "judged"
     }
    ],
-   "family_h25": "F1",
-   "family_src": "словарь:M14",
+   "family_h25": "F11",
+   "family_src": "тело",
    "family_conf": "спорная",
-   "family_note": "круг 42, триаж: не влезает в десять семей · признак — K2 то же — частное входов выдано за оценку",
+   "family_note": "круг 103, по ревью: $250M ÷ 4% верно при любом рынке — это круговая проверка, MECE внутри данных не нарушена; семьи в словаре нет",
    "mehanizm": {
     "naive": "делит целевую выручку на целевую долю и объявляет частное оценкой рынка",
     "correct": "оценивает рынок независимой цепочкой и сопоставляет с долей, которую цель подразумевает",
@@ -1624,10 +1642,10 @@
      "tolerance": "judged"
     }
    ],
-   "family_h25": "F1",
-   "family_src": "словарь:M14",
+   "family_h25": "F2",
+   "family_src": "тело",
    "family_conf": "высокая",
-   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом",
+   "family_note": "круг 103: клиент приносит $420, но тянет за собой $160 переменных — постоянные покрывает только маржа $260, и деление на цену занижает breakeven в 1.6× и рисует ложный запас ёмкости",
    "mehanizm": {
     "naive": "делит постоянные затраты на цену, не вычитая переменные затраты на единицу",
     "correct": "делит постоянные затраты на разность цены и переменных затрат на единицу",
@@ -1685,8 +1703,8 @@
      "tolerance": "judged"
     }
    ],
-   "family_h25": "F1",
-   "family_src": "словарь:M03",
+   "family_h25": "F6",
+   "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
     "naive": "принимает годовые продажи за размер установленной базы",
@@ -1694,7 +1712,8 @@
     "why": "единица остаётся в эксплуатации несколько лет, поэтому продажи одного года суть лишь её часть",
     "code": "MECH-48-запас-и-поток",
     "code2": []
-   }
+   },
+   "family_note": "круг 103: 112.2M — продажи за один год, а спрошена база в эксплуатации, живущая 2.5 года (280.5M); совпадение второго пути 1.00× ничего не доказывает, он сидит на том же якоре"
   },
   {
    "id": "MS-029",
@@ -1746,7 +1765,7 @@
     }
    ],
    "family_h25": "F1",
-   "family_src": "словарь:M09",
+   "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
     "naive": "умножает весь парк на цену замещения, не отсекая часть, непригодную к переходу",
@@ -1754,7 +1773,9 @@
     "why": "непригодная часть парка не входит в спрос ни при какой доле рынка",
     "code": "MECH-160-непригодная-часть-базы",
     "code2": []
-   }
+   },
+   "family_note": "круг 103: $52,000 на машину прикладывают ко всем 12M грузовиков, хотя электрифицируемы 18% × 35% парка — непригодная часть не входит в спрос ни при какой доле рынка",
+   "twin_of": "MS-032"
   },
   {
    "id": "MS-030",
@@ -1818,61 +1839,62 @@
   },
   {
    "id": "MS-031",
-   "title": "The Office Kitchen",
-   "difficulty": "Easy",
+   "title": "Three Lines And A Total",
+   "difficulty": "Medium",
    "type": "Trap",
-   "focus": "M05(a) штуки vs подписка",
-   "time": "5 min",
+   "focus": "M24(a) строки экзибита не сходятся между собой",
+   "time": "7 min",
    "render": {
     "exhibits": [],
     "interactive": [
      "input_number"
     ]
    },
-   "prompt": "Estimate the annual market for office coffee supplies (beans, capsules, consumables) in one country.",
+   "prompt": "A trade buyer is sizing the annual market for pest-control contracts at food premises in one country. The industry association's market note prints four lines and no method statement: 210,000 food premises in the country; 48,000 premises holding a pest-control contract; an average annual contract value of $1,450; and sector turnover of $69,600,000. Estimate the annual market in dollars.",
    "exhibit": null,
    "step_prompts": [
     "Segment the market and state the counting base explicitly (people / households / firms / installed base) with a one-line hypothesis.",
     "Name each anchor as a number before computing (k=4 estimate-anchors).",
     "Compute the estimate along the main chain and state the market size in $.",
-    "Triangulate with an independent second path (a different data source, not the same chain reordered) and reconcile — gap should be within ~2×; name the more reliable path with justification.",
-    "Sanity-check: normalize per capita / per household aloud and give a plausibility verdict.",
-    "Last mile: what the size of the consumables market means versus the equipment market."
+    "Triangulate with an independent second path (a different data source, not the same chain reordered) and reconcile — gap should be within ~2x; name the more reliable path with justification.",
+    "Sanity-check: normalize per capita / per unit aloud and give a plausibility verdict.",
+    "Last mile: what the figure means for a buyer deciding what it is acquiring."
    ],
    "checklist": {
-    "en": "- GATE: ∈ [$236M, $3.78B]\n- P1: **the unit of sale is named explicitly (cup/consumables), the contract is separated from consumption**; counting by service contracts = P1 not credited\n- P2: 4 anchors as numbers before the calculation\n- P3: second path is independent, **the source is named** (census of distributors), ratio ∈ [1.05×, 2.00×] (reference 1.21×) + choice of the most reliable\n- P4: translation into a decision\n- S: «$945M / 240,000 offices ≈ $3,940 per office per year ≈ $87 per employee» → does it reconcile with 250 cups",
-    "ru": "- GATE: ∈ [$236M, $3.78B]\n- P1: **юнит продажи назван явно (чашка/расходники), договор отделён от потребления**; счёт по контрактам на обслуживание = P1 не зачтён\n- P2: 4 якоря числом до расчёта\n- P3: второй путь независим, **источник назван** (перепись дистрибьюторов), ratio ∈ [1.05×, 2.00×] (эталон 1.21×) + выбор надёжнейшего\n- P4: перевод в решение\n- S: «$945M / 240,000 офисов ≈ $3,940 на офис в год ≈ $87 на сотрудника» → сходится ли с 250 чашками"
+    "en": "- GATE: result in [$17,400,000, $278,400,000]\n- P1: **the note is cross-multiplied against its own total before any line is used** — 210,000 x $1,450 is put against the printed $69,600,000, found to be 4.38x it, and the base of the $1,450 is settled as the 48,000 contract holders; multiplying the premises count by the contract value = P1 not credited, and so is lifting the turnover line off the page without showing which pairing closes\n- P2: 4 anchors as numbers before the calculation\n- P3: second path from a different source (field technicians working in the sector x annual billings per technician), ratio in [1.00x, 2.00x] (reference 1.02x) + the more reliable path named\n- P4: translated into a decision - the buyer is acquiring a $69,600,000 pool at 23% penetration, so the growth question is the 162,000 premises with no contract, not the price of the contract\n- S: $69,600,000 across 210,000 premises is $331 apiece, while the 48,000 who buy pay $1,450 - the $331 is an average over premises that spend nothing and is a price nobody is charged",
+    "ru": "- GATE: результат в [$17,400,000, $278,400,000]\n- P1: **записка сверена сама с собой до того, как взята хоть одна строка** — 210,000 x $1,450 поставлены против печатного $69,600,000, получено 4.38x, и знаменатель ставки $1,450 определён как 48,000 держателей контракта; умножение числа помещений на цену контракта = P1 не зачтён, как и снятие строки оборота с листа без показа, какая пара сходится\n- P2: 4 якоря числом до расчёта\n- P3: второй путь из другого источника (полевые техники отрасли x выработка на техника в год), ratio в [1.00x, 2.00x] (эталон 1.02x) + назван надёжнейший путь\n- P4: перевод в решение - покупатель приобретает пул $69,600,000 при проникновении 23%, поэтому вопрос роста - это 162,000 помещений без контракта, а не цена контракта\n- S: $69,600,000 на 210,000 помещений - это $331 на каждое, тогда как покупающие 48,000 платят $1,450; $331 есть среднее по помещениям, не тратящим ничего, и такой цены никому не выставляют"
    },
    "reference": {
-    "en": "Allowed anchors (revealed on request, not upfront):\n  • Offices with coffee service: ~240,000 [A3]\n  • Employees per office: ~45 [A3]\n  • Cups per employee per year: ~250 [A4]\n  • Consumables cost per cup borne by the company: ~$0.35 [A4]\n\nReference chain:\nmarket = 240_000 * 45 * 250 * D('0.35')      # 2.7B cups × $0.35 = 945,000,000\n\nReference answer: $945,000,000 · Corridor: [$236,250,000 … $3,780,000,000]",
-    "ru": "Разрешённые якоря (выдаются по запросу, не сразу):\n  • Офисов с кофейным сервисом: ~240,000 [A3]\n  • Сотрудников на офис: ~45 [A3]\n  • Чашек на сотрудника в год: ~250 [A4]\n  • Стоимость расходников на чашку, оплачиваемая компанией: ~$0.35 [A4]\n\nЭталонная цепочка:\nmarket = 240_000 * 45 * 250 * D('0.35')      # 2.7B чашек × $0.35 = 945,000,000\n\nЭталон: $945,000,000 · Коридор: [$236,250,000 … $3,780,000,000]"
+    "en": "The market is $69,600,000 a year: the note's turnover line and its contract register agree exactly, and the 210,000 premises are the universe, not the buying base.\nAllowed anchors (revealed on request, not upfront):\n  • Food premises in the country: 210,000 [A3]\n  • Premises holding a pest-control contract: 48,000 [A3]\n  • Average annual contract value: $1,450 [A5]\n  • Sector turnover printed by the same note: $69,600,000 [A3]\n  • *For the second path:* field technicians working in the sector: 520 [A3]\n  • *For the second path:* annual billings per technician: $137,000 [A3]\n\nReference chain:\nnaive  = 210_000 * 1_450     # 304,500,000   <- the universe priced at the contract rate\nmarket = 48_000 * 1_450      # 69,600,000    <- market, and it reproduces the note's own total to the dollar\nalt    = 520 * 137_000       # 71,240,000    <- second path, sector employment\nratio  = alt / market        # 1.02\ngap    = naive - market      # 234,900,000\nmult   = naive / market      # 4.38\nReference answer: $69,600,000 · Corridor: [$17,400,000 … $278,400,000]\n\nFour lines are printed and they cannot all be used together: 210,000 x $1,450 is $304,500,000, which is 4.38x the turnover the same note reports two lines below. Exactly one pairing closes — 48,000 x $1,450 — and it lands on the note's own total to the dollar, which is what identifies the $1,450 as a rate per contract holder and not per premises.",
+    "ru": "Рынок - $69,600,000 в год: строка оборота записки и её реестр контрактов сходятся точно, а 210,000 помещений суть универсум, а не база покупателей.\nРазрешённые якоря (выдаются по запросу, не сразу):\n  • Пищевых точек в стране: 210,000 [A3]\n  • Точек с контрактом на дезинсекцию: 48,000 [A3]\n  • Средняя годовая цена контракта: $1,450 [A5]\n  • Оборот сектора, напечатанный той же запиской: $69,600,000 [A3]\n  • *Для второго пути:* полевых техников в отрасли: 520 [A3]\n  • *Для второго пути:* выработка на техника в год: $137,000 [A3]\n\nЭталонная цепочка:\nnaive  = 210_000 * 1_450     # 304,500,000   <- универсум по ставке контракта\nmarket = 48_000 * 1_450      # 69,600,000    <- рынок, и он воспроизводит собственный итог записки до доллара\nalt    = 520 * 137_000       # 71,240,000    <- второй путь, занятость отрасли\nratio  = alt / market        # 1.02\ngap    = naive - market      # 234,900,000\nmult   = naive / market      # 4.38\nЭталон: $69,600,000 · Коридор: [$17,400,000 … $278,400,000]\n\nНапечатаны четыре строки, и вместе их использовать нельзя: 210,000 x $1,450 дают $304,500,000, то есть 4.38x от оборота, который та же записка сообщает двумя строками ниже. Сходится ровно одна пара — 48,000 x $1,450, — и она попадает в собственный итог записки до доллара; этим и определяется, что $1,450 есть ставка на держателя контракта, а не на точку."
    },
    "provoked": {
-    "en": "counting **contracts** for servicing coffee machines («240,000 offices × $3,900 contract»). The **contract and consumption** are confused: there is one contract per office, but consumables are bought by the thousands of cups and make up the bulk of the money. The contract is the vehicle for the service, but not the unit of sale.",
-    "ru": "считать **контракты** на обслуживание кофемашин («240,000 офисов × $3,900 контракт»). Спутаны **договор и потребление**: контракт один на офис, а расходники покупаются тысячами чашек и составляют основную часть денег. Договор есть носитель услуги, но не единица продажи."
+    "en": "the note reads as a source, not as a claim: four lines from one authority look like four facts, and the two nearest the question — a national count and a per-unit rate — multiply cleanly. Checking the product against the turnover line means treating the same page as evidence against itself, which is not what a market note invites.",
+    "ru": "записка читается как источник, а не как утверждение: четыре строки от одного органа выглядят четырьмя фактами, а две ближайшие к вопросу - национальный счёт и ставка на единицу - перемножаются начисто. Сверить произведение со строкой оборота значит обратить один и тот же лист против самого себя, а рыночная записка к этому не приглашает."
    },
    "steps": [
     {
      "prompt": "Final market-size estimate, $",
      "kind": "number",
-     "answer": "945000000",
-     "tolerance": "corridor [$236,250,000 … $3,780,000,000]"
+     "answer": "69600000",
+     "tolerance": "corridor [$17,400,000 … $278,400,000]"
     },
     {
      "prompt": "Independent second-path triangulation + one-sentence recommendation",
      "kind": "text",
-     "answer": "reference answer $945,000,000; second path within ~2×",
+     "answer": "reference answer $69,600,000; second path within ~2x",
      "tolerance": "judged"
     }
    ],
-   "family_h25": "F1",
-   "family_src": "словарь:M05",
+   "family_h25": "F10",
+   "family_src": "тело",
    "family_conf": "высокая",
+   "family_note": "круг 105: F10 «экзибит не сходится сам с собой» (роль экзибита здесь играет записка, напечатанная в самом условии; отдельного exhibit у слота нет) — четыре строки одной записки нельзя использовать вместе. Тело печатает и универсум («210,000 food premises in the country»), и базу покупателей («48,000 premises holding a pest-control contract»), и ставку («an average annual contract value of $1,450»), и собственный итог («sector turnover of $69,600,000»); произведение первой строки на третью даёт $304,500,000, то есть 4.38x от четвёртой. Сходится ровно одна пара — 48,000 x $1,450, — и она воспроизводит итог до доллара, чем и определяется знаменатель ставки. Отдельная строка «and no method statement» ставит разрешение спора на арифметику, а не на сноску.",
    "mehanizm": {
-    "naive": "считает выручку по числу обслуживаемых точек и цене договора",
-    "correct": "считает по объёму потребления расходников и цене единицы потребления",
-    "why": "договор один на точку, а деньги повторяются в закупке расходников",
-    "code": "MECH-51-единица-тарификации",
+    "naive": "перемножает две строки экзибита, стоящие ближе всего к вопросу, не сверив произведение с остальными строками",
+    "correct": "перемножает строки экзибита между собой, находит пару, сходящуюся с печатным итогом, и по ней определяет знаменатель ставки",
+    "why": "в экзибите стоят и универсум, и база покупателей, а знаменателем напечатанной ставки служит только одна из них",
+    "code": "MECH-208-строки-экзибита-не-сходятся",
     "code2": []
    }
   },
@@ -1926,7 +1948,7 @@
     }
    ],
    "family_h25": "F1",
-   "family_src": "словарь:M02",
+   "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
     "naive": "умножает все домохозяйства на частоту и расход, не применяя долю владеющих",
@@ -1934,66 +1956,67 @@
     "why": "у невладеющих расход равен нулю, а не пониженному значению",
     "code": "MECH-160-непригодная-часть-базы",
     "code2": []
-   }
+   },
+   "family_note": "круг 103: $85 в год — расход владельца фильтра, а прикладывается ко всем 42M домохозяйств; у 38% без фильтра расход ноль, а не пониженный"
   },
   {
    "id": "MS-033",
-   "title": "How Far Apart",
-   "difficulty": "Hard",
+   "title": "Four Services, One Invoice",
+   "difficulty": "Medium",
    "type": "Trap",
-   "focus": "M15(c) диапазон вместо точки",
-   "time": "9 min",
+   "focus": "M27(a) строка договора против стоимости договора",
+   "time": "7 min",
    "render": {
     "exhibits": [],
     "interactive": [
      "input_number"
     ]
    },
-   "prompt": "Estimate the annual market for a routine outpatient procedure in one country. Then state how wide your estimate really is, and give your final answer accordingly.",
+   "prompt": "A facilities contractor is sizing the annual market for manned guarding at retail and business parks in one country, because it is deciding whether guarding is worth building as a service line. Parks of this kind do not buy guarding on its own: 4,800 of them hold one integrated facilities contract with a single supplier. The property managers' association puts the average contract at $700,000 a year and prints what it covers: cleaning $245,000, grounds and car-park maintenance $175,000, mechanical and electrical servicing $140,000, and manned guarding, which is the balance of the contract. Estimate the annual market in dollars for manned guarding.",
    "exhibit": null,
    "step_prompts": [
     "Segment the market and state the counting base explicitly (people / households / firms / installed base) with a one-line hypothesis.",
-    "Name each anchor as a number before computing (k=3 estimate-anchors).",
+    "Name each anchor as a number before computing (k=5 estimate-anchors).",
     "Compute the estimate along the main chain and state the market size in $.",
-    "Triangulate with an independent second path (a different data source, not the same chain reordered) and reconcile — gap should be within ~2×; name the more reliable path with justification.",
-    "Sanity-check: normalize per capita / per household aloud and give a plausibility verdict.",
-    "Last mile: whether a decision can be made at the width you computed, and which anchor to refine first."
+    "Triangulate with an independent second path (a different data source, not the same chain reordered) and reconcile — gap should be within ~2x; name the more reliable path with justification.",
+    "Sanity-check: normalize per capita / per unit aloud and give a plausibility verdict.",
+    "Last mile: what the figure means for the contractor's decision to build a guarding line."
    ],
    "checklist": {
-    "en": "- GATE: point estimate ∈ [$1.14B, $10.27B]\n- P1: the estimation structure is stated (clinics → procedures → price). *This drill's provocation is caught by P4, not P1 — see below*\n- P2: 3 anchors as numbers **and each with a range** before the calculation\n- P3: second path is independent, **the source is named** (insurance statistics), ratio ∈ [1.05×, 2.00×] (reference 1.23×) + choice\n- P4: **the final answer is given as a range $2.05B–$5.48B, not as a point**; a point answer = P4 not credited\n- S: propagation across **all three** anchors (not selectively), the anchor with the maximum spread is named — **verified by arithmetic: 2.67× versus 1.41×, the maximum is unique**",
-    "ru": "- GATE: точечная оценка ∈ [$1.14B, $10.27B]\n- P1: структура оценки заявлена (клиники → процедуры → цена). *Провокация этого дрилла ловится P4, не P1 — см. ниже*\n- P2: 3 якоря числом **и с диапазоном каждый** до расчёта\n- P3: второй путь независим, **источник назван** (страховая статистика), ratio ∈ [1.05×, 2.00×] (эталон 1.23×) + выбор\n- P4: **финальный ответ подан диапазоном $2.05B–$5.48B, а не точкой**; ответ точкой = P4 не зачтён\n- S: протяжка по **всем трём** якорям (не выборочно), назван якорь с максимальным размахом — **проверяется арифметикой: 2.67× против 1.41×, максимум уникален**"
+    "en": "- GATE: result in [$168,000,000, $2,688,000,000]\n- P1: **the contract value is refused as the price of the service, because one invoice buys four different services and only one of them is the question** — the guarding line is rebuilt as the balance of the contract, $700,000 − $245,000 − $175,000 − $140,000 = $140,000, and the base is multiplied by that; multiplying the 4,800 parks by the $700,000 contract = P1 not credited whatever the arithmetic, because $3,360,000,000 is the exact size of the integrated facilities market and the answer to a different question\n- P2: 5 anchors as numbers before the calculation (4,800 · $700,000 · $245,000 · $175,000 · $140,000), with the three printed lines shown to close on the $700,000\n- P3: second path from a different source (firms supplying manned guarding to the park trade x annual guarding billings per firm), ratio in [1.00x, 2.00x] (reference 1.03x) + the more reliable path named\n- P4: translated into a decision - guarding is $672,000,000, 20.0% of what the parks pay for facilities services, and not one of the 4,800 buys it on its own, so a guarding line earns its keep only inside an integrated bid or as subcontracted work behind one\n- S: $140,000 a park a year at $20 an officer-hour is 7,000 officer-hours, about 19 hours of cover a day - one post through trading hours plus a night patrol, which is the shape of a park; nationally $672,000,000 buys 33,600,000 officer-hours, about 16,800 full-time officers at 2,000 hours each",
+    "ru": "- GATE: результат в [$168,000,000, $2,688,000,000]\n- P1: **стоимость договора отвергнута как цена услуги, потому что один счёт покупает четыре разные услуги, а спрошена одна из них** — строка охраны восстановлена как остаток договора, $700,000 − $245,000 − $175,000 − $140,000 = $140,000, и база умножена на неё; умножение 4,800 парков на $700,000 = P1 не зачтён при любой арифметике, потому что $3,360,000,000 есть точный размер рынка интегрированных договоров и ответ на другой вопрос\n- P2: 5 якорей числом до расчёта (4,800 · $700,000 · $245,000 · $175,000 · $140,000), и три напечатанные строки сведены на $700,000\n- P3: второй путь из другого источника (фирмы, оказывающие охрану парковому сегменту x годовая выручка фирмы по охране), ratio в [1.00x, 2.00x] (эталон 1.03x) + назван надёжнейший путь\n- P4: перевод в решение - охрана есть $672,000,000, то есть 20.0% того, что парки платят за обслуживание, и ни один из 4,800 не покупает её отдельно, поэтому линия охраны окупается только внутри интегрированной заявки или как субподряд за ней\n- S: $140,000 на парк в год при $20 за час поста - это 7,000 человеко-часов охраны, около 19 часов покрытия в сутки: один пост в торговые часы плюс ночной обход, и это форма именно паркового объекта; по стране $672,000,000 покупают 33,600,000 человеко-часов, то есть около 16,800 полных ставок по 2,000 часов"
    },
    "reference": {
-    "en": "Allowed anchors (revealed on request, not upfront):\n  • Clinics performing the procedure: 31,000 [±5%]\n  • Procedures per clinic per year: 2,400 [1,440–3,840 (×0.6–×1.6)]\n  • Price per procedure: $46 [$39.10–$55.20 (×0.85–×1.2)]\n\nReference chain:\nmarket = 31_000 * 2_400 * 46      # 3,422,400,000\n\nReference answer: $3,422,400,000 · Corridor: [$1,140,800,000 … $10,267,200,000]",
-    "ru": "Разрешённые якоря (раскрываются по запросу, не вперёд):\n  • Клиник, выполняющих процедуру: 31,000 [±5%]\n  • Процедур на клинику в год: 2,400 [1,440–3,840 (×0.6–×1.6)]\n  • Цена процедуры: $46 [$39.10–$55.20 (×0.85–×1.2)]\n\nЭталонная цепочка:\nmarket = 31_000 * 2_400 * 46      # 3,422,400,000\n\nЭталон: $3,422,400,000 · Коридор: [$1,140,800,000 … $10,267,200,000]"
+    "en": "The market is $672,000,000 a year: price the guarding line of the contract, not the contract.\nAllowed anchors (revealed on request, not upfront):\n  • Retail and business parks holding an integrated facilities contract: 4,800 [A3]\n  • Average annual contract value: $700,000 [A5]\n  • Of which cleaning: $245,000 [A5]\n  • Of which grounds and car-park maintenance: $175,000 [A5]\n  • Of which mechanical and electrical servicing: $140,000 [A5]\n  • *For the second path:* firms supplying manned guarding to the park trade: 84 [A3]\n  • *For the second path:* annual guarding billings per firm: $8,250,000 [A3]\n  • *For the sanity check:* charge-out rate for an officer-hour: $20 [A5]\n\nReference chain:\nnaive    = 4_800 * 700_000                       # 3,360,000,000  <- the whole invoice priced as the guarding market\nguarding = 700_000 - 245_000 - 175_000 - 140_000 # 140,000 a park a year, the balance of the contract\nmarket   = 4_800 * guarding                      # 672,000,000    <- market\nshare    = guarding / 700_000                    # 20.0% of the contract\nalt      = 84 * 8_250_000                        # 693,000,000    <- second path, the guarding contractor register\nratio    = alt / market                          # 1.03\ngap      = naive - market                        # 2,688,000,000\nmult     = naive / market                        # 5.00\nReference answer: $672,000,000 · Corridor: [$168,000,000 … $2,688,000,000]\n\nFour services are bought on one invoice and the invoice is the only headline the trade publishes. Pricing the base at the contract value is exact and correct for the integrated facilities market — $3,360,000,000 — and overstates the guarding market by $2,688,000,000, that is 5.00x. Guarding is 20.0% of what a park pays; the other four fifths are cleaning, grounds and plant, which a guarding contractor neither supplies nor invoices.",
+    "ru": "Рынок - $672,000,000 в год: считать строку охраны в договоре, а не договор.\nРазрешённые якоря (выдаются по запросу, не сразу):\n  • Парков с интегрированным договором на обслуживание: 4,800 [A3]\n  • Средняя годовая стоимость договора: $700,000 [A5]\n  • Из них уборка: $245,000 [A5]\n  • Из них территория и парковка: $175,000 [A5]\n  • Из них обслуживание инженерных систем: $140,000 [A5]\n  • *Для второго пути:* фирм, оказывающих охрану парковому сегменту: 84 [A3]\n  • *Для второго пути:* выручка фирмы по охране в год: $8,250,000 [A3]\n  • *Для проверки правдоподобия:* ставка за час поста: $20 [A5]\n\nЭталонная цепочка:\nnaive    = 4_800 * 700_000                       # 3,360,000,000  <- весь счёт, посчитанный как рынок охраны\nguarding = 700_000 - 245_000 - 175_000 - 140_000 # 140,000 на парк в год, остаток договора\nmarket   = 4_800 * guarding                      # 672,000,000    <- рынок\nshare    = guarding / 700_000                    # 20.0% договора\nalt      = 84 * 8_250_000                        # 693,000,000    <- второй путь, реестр охранных подрядчиков\nratio    = alt / market                          # 1.03\ngap      = naive - market                        # 2,688,000,000\nmult     = naive / market                        # 5.00\nЭталон: $672,000,000 · Коридор: [$168,000,000 … $2,688,000,000]\n\nЧетыре услуги куплены одним счётом, и именно счёт есть единственная заголовочная величина, которую публикует отрасль. Счёт по стоимости договора точен и верен для рынка интегрированных договоров — $3,360,000,000 — и завышает рынок охраны на $2,688,000,000, то есть в 5.00x. Охрана есть 20.0% того, что платит парк; остальные четыре пятых суть уборка, территория и инженерия, которых охранный подрядчик не оказывает и выставить не может."
    },
    "provoked": {
-    "en": "giving a point $3.42B and stopping there. The three anchors are known with different precision, and **all the uncertainty sits in one** — the number of procedures per clinic. A point answer hides this and creates false confidence.\n*Difference from the tutoring sizing:* there it was required to **name** the dominant anchor; here — to **give the final answer as a range** and say whether the width changes the decision.",
-    "ru": "дать точку $3.42B и на этом остановиться. Три якоря известны с разной точностью, и **вся неопределённость сидит в одном** — числе процедур на клинику. Точечный ответ это скрывает и создаёт ложную уверенность.\n*Отличие от задачи про репетиторство:* там требовалось **назвать** доминирующий якорь; здесь — **подать финальный ответ диапазоном** и сказать, меняет ли ширина решение."
+    "en": "the $700,000 is the only figure on the page that says what a park pays for these services, and the three lines beneath it read as a cost breakdown of one product rather than as the prices of separate markets. The question names guarding, but nobody in this record buys guarding: it arrives inside a contract, and the contract is what the trade tenders, reports and talks about.",
+    "ru": "$700,000 - единственная величина на листе, говорящая, сколько парк платит за это обслуживание, а три строки под ней читаются как разбивка затрат одного продукта, а не как цены отдельных рынков. В вопросе названа охрана, но в этой записи охрану никто не покупает: она приходит внутри договора, а тендерует, отчитывается и говорит отрасль именно договором."
    },
    "steps": [
     {
      "prompt": "Final market-size estimate, $",
      "kind": "number",
-     "answer": "3422400000",
-     "tolerance": "corridor [$1,140,800,000 … $10,267,200,000]"
+     "answer": "672000000",
+     "tolerance": "corridor [$168,000,000 … $2,688,000,000]"
     },
     {
      "prompt": "Independent second-path triangulation + one-sentence recommendation",
      "kind": "text",
-     "answer": "reference answer $3,422,400,000; second path within ~2×",
+     "answer": "reference answer $672,000,000; second path within ~2x",
      "tolerance": "judged"
     }
    ],
-   "family_h25": "F7",
-   "family_src": "словарь:M15",
+   "family_h25": "F2",
+   "family_src": "тело",
    "family_conf": "высокая",
-   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом",
+   "family_note": "круг 105, перепись по ревью: F2 «второй порядок» — прямой счёт верен и отвечает не на тот вопрос. 4,800 x $700,000 = $3,360,000,000 есть точный размер рынка интегрированных договоров на обслуживание парков и правильный ответ для интегратора; спрошен же рынок одной услуги внутри того же счёта. Тело печатает состав договора построчно — «cleaning $245,000, grounds and car-park maintenance $175,000, mechanical and electrical servicing $140,000» — и оставляет охрану остатком, $140,000, то есть 20.0% договора. Отличие от MS-053, где F2 тоже стоит: там две величины стоят на разных высотах торговой цепочки и спор идёт о том, чью выручку считать; здесь обе стоят на одном счёте у одного покупателя, и спор идёт о том, какую строку этого счёта спросили. Отличие от прежнего тела MS-033 и от MS-056: там решала сноска о методе и знаменатель напечатанной ставки, здесь — состав напечатанного договора.",
    "mehanizm": {
-    "naive": "подаёт финальный ответ одной точкой",
-    "correct": "подаёт ответ диапазоном по крайним значениям самого слабого якоря и говорит, меняет ли ширина решение",
-    "why": "годность оценки для решения определяет ширина диапазона, а не сама точка",
-    "code": "MECH-60-точечная-оценка",
+    "naive": "умножает базу на стоимость договора целиком, хотя спрошенная услуга есть одна из его строк",
+    "correct": "разбирает состав договора, выделяет строку, о которой задан вопрос, и умножает базу только на неё",
+    "why": "один договор покупает несколько разных услуг, и рынок каждой из них есть только её строка в этом договоре",
+    "code": "MECH-209-строка-договора-вместо-договора",
     "code2": []
    }
   },
@@ -2047,7 +2070,7 @@
     }
    ],
    "family_h25": "F1",
-   "family_src": "словарь:M05",
+   "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
     "naive": "считает выручку по числу операций и средней цене операции",
@@ -2055,7 +2078,8 @@
     "why": "операции идут с разной загрузкой, поэтому средняя цена операции зависит от неоценённой величины",
     "code": "MECH-150-нерасщеплённая-цена-операции",
     "code2": []
-   }
+   },
+   "family_note": "круг 103: тариф $320 напечатан на тонну, а счёт по 1.8M рейсов прикладывает среднюю цену рейса к рейсам с неоценённой загрузкой — деньги живут на 25.2M тонн"
   },
   {
    "id": "MS-035",
@@ -2106,8 +2130,8 @@
      "tolerance": "judged"
     }
    ],
-   "family_h25": "F1",
-   "family_src": "словарь:M01",
+   "family_h25": "F7",
+   "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
     "naive": "нарезает базу по демографическим признакам и приписывает каждой группе средний расход",
@@ -2115,7 +2139,8 @@
     "why": "расход привязан к ситуации, а не к признаку человека",
     "code": "MECH-151-повод-платежа",
     "code2": []
-   }
+   },
+   "family_note": "круг 103: платят 40% играющих и только по поводам (6 эпизодов × $24) — средний расход, размазанный по демографическим группам, не описывает никого"
   },
   {
    "id": "MS-036",
@@ -2166,8 +2191,8 @@
      "tolerance": "judged"
     }
    ],
-   "family_h25": "F1",
-   "family_src": "словарь:M08",
+   "family_h25": "F6",
+   "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
     "naive": "включает в рынок бытовой сегмент вместе с корпоративным",
@@ -2175,7 +2200,8 @@
     "why": "сегменты живут по разной экономике покупки и не складываются в один адресуемый рынок",
     "code": "MECH-161-граница-адресуемого-рынка",
     "code2": []
-   }
+   },
+   "family_note": "круг 103: спрошен commercial, а бытовая уборка (42M дх × $600) молча втягивается в ту же сумму — граница адресуемого рынка проводится по покупателю-организации"
   },
   {
    "id": "MS-037",
@@ -2226,10 +2252,10 @@
      "tolerance": "judged"
     }
    ],
-   "family_h25": "F1",
-   "family_src": "словарь:M10",
-   "family_conf": "спорная",
-   "family_note": "круг 42, триаж: не влезает в десять семей · признак — K2 то же — сопоставимость переноса",
+   "family_h25": "F8",
+   "family_src": "тело",
+   "family_conf": "высокая",
+   "family_note": "круг 103: разворота нет — доход страны B сопоставим, поправка по доходу не нужна, и масштабирование по 19M населению верно; но применимость переноса надо проверить вслух, а не применить автоматически",
    "mehanizm": {
     "naive": "масштабирует по числу людей автоматически, не проверив сопоставимость подушевого потребления",
     "correct": "сначала вслух проверяет сопоставимость подушевого дохода, затем масштабирует по числу людей",
@@ -2287,10 +2313,10 @@
      "tolerance": "judged"
     }
    ],
-   "family_h25": "F5",
-   "family_src": "словарь:M07",
+   "family_h25": "F11",
+   "family_src": "тело",
    "family_conf": "спорная",
-   "family_note": "круг 42, триаж: не влезает в десять семей · признак — K2 то же — внешний аналог как второй путь",
+   "family_note": "круг 103: «второй путь» из пересобранных якорей первого — один набор данных под двумя ярлыками; независимость даёт только внешний факт, рынок страны A $2.9B на 130M",
    "mehanizm": {
     "naive": "берёт вторым путём перегруппировку тех же якорей",
     "correct": "берёт вторым путём внешние данные о сопоставимом рынке до сверки с первым",
@@ -2349,7 +2375,7 @@
     }
    ],
    "family_h25": "F6",
-   "family_src": "словарь:M12",
+   "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
     "naive": "продлевает текущий темп роста рынка на весь горизонт, не ограничивая проникновение потолком базы",
@@ -2357,7 +2383,8 @@
     "why": "продлённый темп роста рано или поздно выводит проникновение за сто процентов",
     "code": "MECH-59-проекция-без-потолка",
     "code2": []
-   }
+   },
+   "family_note": "круг 103: темп ×1.5 в год принадлежит проникновению внутри 28% пригодных домохозяйств, а не рынку целиком — продлённый на рынок он рано или поздно выводит проникновение за 100%"
   },
   {
    "id": "MS-040",
@@ -2469,7 +2496,7 @@
     }
    ],
    "family_h25": "F1",
-   "family_src": "словарь:M06",
+   "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
     "naive": "считает рынок по продажам оборудования вместо расходных материалов",
@@ -2477,7 +2504,8 @@
     "why": "оборудование покупается однократно на годы, а деньги повторяются в расходнике",
     "code": "MECH-200-оборудование-вместо-расходника",
     "code2": []
-   }
+   },
+   "family_note": "круг 103: деньги живут на картриджах (24 в год × $7.50), а наивный путь считает рынок устройств — 6.8M принтеров только база, устройство покупается раз в годы"
   },
   {
    "id": "MS-042",
@@ -2529,7 +2557,7 @@
     }
    ],
    "family_h25": "F7",
-   "family_src": "словарь:M04",
+   "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
     "naive": "берёт среднюю частоту как поведение типичного участника",
@@ -2537,65 +2565,67 @@
     "why": "малая доля участников даёт большую часть объёма, поэтому средняя не описывает ни одну группу",
     "code": "MECH-08-среднее-вместо-распределения",
     "code2": []
-   }
+   },
+   "family_note": "круг 103: ядро ~10% посетителей даёт больше половины из 95.8M посещений — средние 9 визитов в год не описывают ни абонементного, ни разового гостя"
   },
   {
    "id": "MS-043",
-   "title": "Keeping Machines Running",
+   "title": "Two Thousand More Buses",
    "difficulty": "Medium",
    "type": "Trap",
-   "focus": "M11(b) по цепочке (их клиенты)",
-   "time": "6 min",
+   "focus": "M26(a) чистое изменение базы против валового потока",
+   "time": "7 min",
    "render": {
     "exhibits": [],
     "interactive": [
      "input_number"
     ]
    },
-   "prompt": "Estimate the annual market for industrial equipment maintenance services in one country.",
+   "prompt": "A manufacturer is sizing the annual market for new city buses in one country. The national fleet register stood at 84,000 vehicles at the start of last year and at 86,100 at the end of it. Over the same year 8,400 buses were withdrawn from service and scrapped. A new city bus sells for $410,000. Estimate the annual market in dollars.",
    "exhibit": null,
    "step_prompts": [
     "Segment the market and state the counting base explicitly (people / households / firms / installed base) with a one-line hypothesis.",
-    "Name each anchor as a number before computing (k=3 estimate-anchors).",
+    "Name each anchor as a number before computing (k=4 estimate-anchors).",
     "Compute the estimate along the main chain and state the market size in $.",
-    "Triangulate with an independent second path (a different data source, not the same chain reordered) and reconcile — gap should be within ~2×; name the more reliable path with justification.",
-    "Sanity-check: normalize per capita / per household aloud and give a plausibility verdict.",
-    "Last mile: what part of the client's spend can realistically be captured."
+    "Triangulate with an independent second path (a different data source, not the same chain reordered) and reconcile — gap should be within ~2x; name the more reliable path with justification.",
+    "Sanity-check: normalize per capita / per unit aloud and give a plausibility verdict.",
+    "Last mile: what the figure means for where the manufacturer competes for volume."
    ],
    "checklist": {
-    "en": "- GATE: ∈ [$2.16B, $19.43B]\n- P1: **the base is the client's spend on the whole function**, in-house services are not lost; counting through your own field visits = P1 not credited\n- P2: 3 anchors as numbers before the calculation\n- P3: second path is independent, **source is named** (industry review), ratio ∈ [1.05×, 2.00×] (reference 1.19×) + choice\n- P4: conversion into a decision\n- S: «$6.48B / 46,000 firms = $141,000 per firm per year at a total spend of $880,000» → does it converge with the 16% share",
-    "ru": "- GATE: ∈ [$2.16B, $19.43B]\n- P1: **база — расход клиента на функцию целиком**, внутренние службы не потеряны; счёт через свои выезды = P1 не зачтён\n- P2: 3 якоря числом до расчёта\n- P3: второй путь независим, **источник назван** (отраслевой обзор), ratio ∈ [1.05×, 2.00×] (эталон 1.19×) + выбор\n- P4: перевод в решение\n- S: «$6.48B / 46,000 фирм = $141,000 на фирму в год при общем расходе $880,000» → сходится ли с долей 16%"
+    "en": "- GATE: result in [$1,076,250,000, $17,220,000,000]\n- P1: **the net change in the register is refused as the sales figure, because it is a difference of two flows of opposite sign** — deliveries are rebuilt as net change plus withdrawals; multiplying the 2,100 the register grew by = P1 not credited, and so is answering with the closing register or the opening one\n- P2: 4 anchors as numbers before the calculation\n- P3: second path from a different source (assemblers supplying the domestic market x annual domestic deliveries per assembler), ratio in [1.00x, 2.00x] (reference 1.04x) + the more reliable path named\n- P4: translated into a decision - the manufacturer competes for 10,500 vehicles a year worth $4,305,000,000, of which 8,400 are replacements set by scrapping schedules and 2,100 by network growth, so four fifths of the opportunity is decided by the age of the existing fleet, not by whether the networks expand\n- S: 10,500 deliveries against a fleet of about 85,000 is one bus in eight a year, an implied service life near eight years, while 8,400 scrapped is 10.0% of the opening register - a fleet growing 2.5% a year and replacing vehicles four times faster, 8,400 against 2,100",
+    "ru": "- GATE: результат в [$1,076,250,000, $17,220,000,000]\n- P1: **чистое изменение реестра отвергнуто как объём продаж, потому что это разность двух потоков разного знака** — поставки восстановлены как чистое изменение плюс выбытие; умножение 2,100, на которые вырос реестр, = P1 не зачтён, как и ответ по конечному или начальному реестру\n- P2: 4 якоря числом до расчёта\n- P3: второй путь из другого источника (сборщики, поставляющие на внутренний рынок x поставки сборщика в год), ratio в [1.00x, 2.00x] (эталон 1.04x) + назван надёжнейший путь\n- P4: перевод в решение - производитель борется за 10,500 машин в год на $4,305,000,000, из которых 8,400 суть замена по графику списания и 2,100 - рост сети, поэтому четыре пятых возможности решают возраст существующего парка, а не расширение маршрутной сети\n- S: 10,500 поставок против парка около 85,000 - это один автобус из восьми в год, срок службы порядка восьми лет, а 8,400 списанных - 10.0% от начального реестра: парк растёт на 2.5% в год, а машины меняет вчетверо быстрее, 8,400 против 2,100"
    },
    "reference": {
-    "en": "Allowed anchors (revealed on request, not upfront):\n  • Firms with industrial equipment: ~46,000 [A3]\n  • Their annual spend on equipment (total): ~$880,000 [A3]\n  • Share of spend attributable to servicing: ~16% [A3]\n\nReference chain:\nmarket = 46_000 * 880_000 * D('0.16')      # 6,476,800,000\n\nReference answer: $6,476,800,000 · Corridor: [$2,158,933,333 … $19,430,400,000]",
-    "ru": "Разрешённые якоря (раскрываются по запросу, не вперёд):\n  • Фирм с промышленным оборудованием: ~46,000 [A3]\n  • Их годовой расход на оборудование (всего): ~$880,000 [A3]\n  • Доля расхода, приходящаяся на обслуживание: ~16% [A3]\n\nЭталонная цепочка:\nmarket = 46_000 * 880_000 * D('0.16')      # 6,476,800,000\n\nЭталон: $6,476,800,000 · Коридор: [$2,158,933,333 … $19,430,400,000]"
+    "en": "The market is $4,305,000,000 a year: price the buses delivered, which is the net change plus the buses scrapped, not the 2,100 the register grew by.\nAllowed anchors (revealed on request, not upfront):\n  • Fleet register at the start of the year: 84,000 [A3]\n  • Fleet register at the end of the year: 86,100 [A3]\n  • Buses withdrawn and scrapped during the year: 8,400 [A3]\n  • Price of a new city bus: $410,000 [A5]\n  • *For the second path:* assemblers supplying the domestic market: 5 [A3]\n  • *For the second path:* annual domestic deliveries per assembler: 2,175 [A3]\n\nReference chain:\nnet       = 86_100 - 84_000     # 2,100 net change in the register\nnaive     = net * 410_000       # 861,000,000    <- the net change priced as sales\ndelivered = net + 8_400         # 10,500 buses delivered during the year\nmarket    = delivered * 410_000 # 4,305,000,000  <- market\nalt       = 5 * 2_175 * 410_000 # 4,458,750,000  <- second path, 10,875 units off the assembler register\nratio     = alt / market        # 1.04\ngap       = market - naive      # 3,444,000,000\nmult      = market / naive      # 5.00\nReference answer: $4,305,000,000 · Corridor: [$1,076,250,000 … $17,220,000,000]\n\nThe register moved by 2,100 and that figure is exact, but it is 10,500 arriving minus 8,400 leaving, and only the arrivals were bought: four fifths of the year's deliveries are invisible in the net line. Sizing on it understates the market by $3,444,000,000, that is 5.00x.",
+    "ru": "Рынок - $4,305,000,000 в год: считать поставленные автобусы, то есть чистое изменение плюс списанные, а не те 2,100, на которые вырос реестр.\nРазрешённые якоря (выдаются по запросу, не сразу):\n  • Реестр парка на начало года: 84,000 [A3]\n  • Реестр парка на конец года: 86,100 [A3]\n  • Списано и снято с эксплуатации за год: 8,400 [A3]\n  • Цена нового городского автобуса: $410,000 [A5]\n  • *Для второго пути:* сборщиков, поставляющих на внутренний рынок: 5 [A3]\n  • *Для второго пути:* внутренних поставок на сборщика в год: 2,175 [A3]\n\nЭталонная цепочка:\nnet       = 86_100 - 84_000     # 2,100 чистое изменение реестра\nnaive     = net * 410_000       # 861,000,000    <- чистое изменение, посчитанное как продажи\ndelivered = net + 8_400         # 10,500 автобусов поставлено за год\nmarket    = delivered * 410_000 # 4,305,000,000  <- рынок\nalt       = 5 * 2_175 * 410_000 # 4,458,750,000  <- второй путь, 10,875 единиц по реестру сборщиков\nratio     = alt / market        # 1.04\ngap       = market - naive      # 3,444,000,000\nmult      = market / naive      # 5.00\nЭталон: $4,305,000,000 · Коридор: [$1,076,250,000 … $17,220,000,000]\n\nРеестр сдвинулся на 2,100, и эта величина точна, но она есть 10,500 прибывших минус 8,400 ушедших, а куплены были только прибывшие: четыре пятых годовых поставок в чистой строке не видны. Счёт по ней занижает рынок на $3,444,000,000, то есть в 5.00x."
    },
    "provoked": {
-    "en": "counting through **your own** units — «number of crew visits × price per visit». This gives only the part of the market served by contractors, and loses in-house services, spare parts, and full-cycle contracts. Sizing along the chain goes **from the client's spend**: how much they spend on this function at all, regardless of whom they pay.\n*Difference from the cybersecurity sizing (budget share):* there it's a share of **someone else's budget** (IT budget → security); here it's a movement **along the chain to the client's client**: from the fleet of equipment to the spend on maintaining it.",
-    "ru": "считать через **свои** юниты — «сколько выездов бригады × цена выезда». Это даёт только ту часть рынка, которую обслуживают подрядчики, и теряет внутренние службы, запчасти и контракты полного цикла. Сайзинг по цепочке идёт **от расхода клиента**: сколько он вообще тратит на эту функцию, независимо от того, кому платит.\n*Отличие от задачи про кибербезопасность (доля бюджета):* там доля **чужого бюджета** (ИТ-бюджет → безопасность); здесь — движение **по цепочке к клиенту клиента**: от парка оборудования к расходу на его поддержание."
+    "en": "two register readings a year apart are the cleanest pair of numbers on the page and their difference is a growth figure by construction; the scrapping line reads as fleet housekeeping. Nothing in the record is labelled deliveries, so the quantity that was actually bought has to be reconstructed rather than read.",
+    "ru": "два показания реестра с разницей в год - самая чистая пара чисел на листе, и их разность по построению есть величина прироста; строка о списании читается как хозяйственная деталь парка. Ни одна строка записи не названа поставками, поэтому купленный объём приходится восстанавливать, а не прочитывать."
    },
    "steps": [
     {
      "prompt": "Final market-size estimate, $",
      "kind": "number",
-     "answer": "6476800000",
-     "tolerance": "corridor [$2,158,933,333 … $19,430,400,000]"
+     "answer": "4305000000",
+     "tolerance": "corridor [$1,076,250,000 … $17,220,000,000]"
     },
     {
      "prompt": "Independent second-path triangulation + one-sentence recommendation",
      "kind": "text",
-     "answer": "reference answer $6,476,800,000; second path within ~2×",
+     "answer": "reference answer $4,305,000,000; second path within ~2x",
      "tolerance": "judged"
     }
    ],
-   "family_h25": "F1",
-   "family_src": "словарь:M11",
+   "family_h25": "F12",
+   "family_src": "тело",
    "family_conf": "высокая",
+   "family_note": "круг 105: F12 «агрегат гасит разнознаковое» — видимый итог есть разность двух потоков разного знака. Тело даёт обе крайние точки реестра («stood at 84,000 vehicles at the start of last year and at 86,100 at the end of it») и отдельной строкой встречный поток («8,400 buses were withdrawn from service and scrapped»); чистые +2,100 суть +10,500 против −8,400, и покупали только приток. Счёт по чистому изменению занижает рынок на $3,444,000,000, то есть в 5.00 раза, и четыре пятых годовых поставок в агрегате не видны вовсе.",
    "mehanizm": {
-    "naive": "считает рынок по собственным выездам и их цене",
-    "correct": "считает от годового расхода владельца парка на его поддержание независимо от исполнителя",
-    "why": "собственные операции покрывают лишь отданную наружу часть расхода",
-    "code": "MECH-61-счёт-от-себя",
+    "naive": "берёт чистое изменение размера парка за объём годовых продаж",
+    "correct": "восстанавливает валовой приток как чистое изменение плюс выбытие и умножает его на цену единицы",
+    "why": "чистое изменение есть разность притока и выбытия, а продажи стоят только за притоком",
+    "code": "MECH-207-нетто-вместо-брутто",
     "code2": []
    }
   },
@@ -2649,7 +2679,7 @@
     }
    ],
    "family_h25": "F1",
-   "family_src": "словарь:M02",
+   "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
     "naive": "применяет один отсекающий фильтр из двух — либо доступность, либо намерение",
@@ -2657,7 +2687,8 @@
     "why": "покупка требует обоих условий одновременно, поэтому одно не заменяет другое",
     "code": "MECH-17-один-фильтр-из-двух",
     "code2": []
-   }
+   },
+   "family_note": "круг 103: $310 в год — расход перешедшего домохозяйства, и приложить его можно только к пересечению 70% доступа и 40% намерения (14.56M), а не к одному фильтру"
   },
   {
    "id": "MS-045",
@@ -2708,10 +2739,10 @@
      "tolerance": "judged"
     }
    ],
-   "family_h25": "F1",
-   "family_src": "словарь:M13",
+   "family_h25": "F5",
+   "family_src": "тело",
    "family_conf": "высокая",
-   "family_note": "круг 42, триаж спорных: метка подтверждена независимым проходом",
+   "family_note": "круг 103: $38 у завода и $52 у дистрибьютора — две защитимые высоты измерения одного потока в 348M единиц; уровень выбирает вопрос, а сумма $31.3B не соответствует ничему",
    "mehanizm": {
     "naive": "складывает стоимость одной и той же единицы на разных этапах цепочки",
     "correct": "называет уровень цепочки, на котором меряется рынок, и держит цены одного уровня",
@@ -2769,8 +2800,8 @@
      "tolerance": "judged"
     }
    ],
-   "family_h25": "F7",
-   "family_src": "словарь:M04",
+   "family_h25": "F4",
+   "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
     "naive": "ставит частоту по аналогии с привычным обслуживанием вместо частоты, заданной регламентом",
@@ -2778,7 +2809,8 @@
     "why": "услуга потребляется по предписанию, а не по усмотрению покупателя",
     "code": "MECH-62-регламентная-частота",
     "code2": []
-   }
+   },
+   "family_note": "круг 103: частота задана регламентом — обязательная проверка раз в год, — а не привычкой сервисного обслуживания; решает напечатанное словами mandatory, числа его не несут"
   },
   {
    "id": "MS-047",
@@ -2830,7 +2862,7 @@
     }
    ],
    "family_h25": "F6",
-   "family_src": "словарь:M12",
+   "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
     "naive": "проецирует сегодняшний рынок единым темпом роста, считая состав базы неизменным",
@@ -2838,7 +2870,8 @@
     "why": "на горизонте рынок обслуживает базу, которой сегодня в нём нет",
     "code": "MECH-59-проекция-без-потолка",
     "code2": []
-   }
+   },
+   "family_note": "круг 103: через 5 лет рынок обслуживает базу, которой сегодня в нём нет (4.2M дх без панелей) — это не рост прежнего сегмента, а смена состава базы, и сегодняшние $310M в цепочку не идут"
   },
   {
    "id": "MS-048",
@@ -3020,7 +3053,8 @@
     "why": "участники отобрались в программу сами, поэтому их расход выше расхода представителя середины популяции",
     "code": "MECH-58-нерепрезентативная-выборка",
     "code2": []
-   }
+   },
+   "twin_of": "MS-052"
   },
   {
    "id": "MS-052",
@@ -3081,7 +3115,8 @@
     "why": "пилотные точки отбирались как самые загруженные, поэтому их ставка выше средней по сети",
     "code": "MECH-58-нерепрезентативная-выборка",
     "code2": []
-   }
+   },
+   "twin_of": null
   },
   {
    "id": "MS-053",
@@ -3207,64 +3242,64 @@
   },
   {
    "id": "MS-056",
-   "title": "Thirty-Eight Percent Of Whom",
-   "company": "Meridian Facilities Group",
-   "industry": "Facilities services / B2B office cleaning",
+   "title": "Forty Thousand Of What",
+   "company": "Parking GenNext",
+   "industry": "Municipal concessions / on-street parking",
    "difficulty": "Hard",
    "type": "Trap",
-   "focus": "M21(a) доля снята на одной базе, применяется к другой",
-   "time": "8 min",
+   "focus": "M28(a) одна натура, три единицы счёта: каждая ставка идёт по своей",
+   "time": "9 min",
    "render": {
     "exhibits": [],
     "interactive": [
      "input_number"
     ]
    },
-   "prompt": "A facilities-services group is sizing the annual market for outsourced office cleaning in one country. The register of businesses holding office premises lists 480,000 firms. A national business survey reports that 38% of firms buy their office cleaning from an outside contractor rather than employing cleaners themselves, and that such a contract runs at $14,000 a year. The survey's method note says the sample was drawn only from firms with 50 or more staff, which are 9% of the register; a separate postal survey covering the smaller firms, which make up the rest of the register, puts their outsourcing rate at 4% and their contract at the same $14,000 a year. Estimate the annual market in dollars.",
+   "prompt": "The city of Chicago is selling the rights to collect all the money its ~40,000 metered parking spaces take in over the next 20 years, and the bidder Parking GenNext has asked what those rights are worth. The contract obliges the winner to pull the old single-space coin meters out of the kerb and install new machines that take cash, credit and debit; one new machine serves 8 spaces, and the installed fleet is not replaced inside the term. Meter rates in the city run on a three-ring structure — the downtown Loop, the Central Business District, and suburbs and others — and you will have to take a view on the rate per hour, on the paid hours per day, and on how much of the estate sits in each ring. On the spending side the contract is explicit: a machine costs $20,000 including installation; maintenance runs $200 per machine per month; and one person is needed to monitor 10 machines, paid $10 an hour for 8 hours a day, 300 days a year. Money collected on parking tickets goes to the city, not to the operator. Assume zero growth and ignore the time value of money. What are the 20-year rights worth?",
    "exhibit": null,
    "step_prompts": [
-    "Segment the market and state the counting base explicitly (people / households / firms / installed base) with a one-line hypothesis.",
-    "Name each anchor as a number before computing (k=5 estimate-anchors).",
-    "Compute the estimate along the main chain and state the market size in $.",
-    "Triangulate with an independent second path (a different data source, not the same chain reordered) and reconcile — gap should be within ~2×; name the more reliable path with justification.",
-    "Sanity-check: normalize per capita / per unit aloud and give a plausibility verdict.",
-    "Last mile: what the figure means for where the group puts its sales force."
+    "Segment the market and state the counting convention explicitly — name the unit each figure in your chain is denominated in — with a one-line hypothesis.",
+    "Name each anchor as a number before computing (k=4 estimate-anchors).",
+    "Compute the estimate along the main chain and state the value of the 20-year rights in $.",
+    "Triangulate against the one outside price on record and reconcile — say what each figure covers before you divide one by the other, then explain the gap rather than explaining it away.",
+    "Sanity-check: normalize per unit aloud and give a plausibility verdict.",
+    "Last mile: what the figure means for the number Parking GenNext writes on the bid."
    ],
    "checklist": {
-    "en": "- GATE: result ∈ [$118,608,000, $1,897,728,000]\n- Counting convention named: one country, one year, base = firms on the register of office-holding businesses, money in $ a year\n- P1: **the 38% is refused on the whole register, because it was measured on firms with 50 or more staff**, and each rate is applied to the base it was measured on — 38% to the 43,200 large firms, 4% to the 436,800 smaller ones; running 38% across all 480,000 firms = P1 not credited, whatever the arithmetic\n- P2: 5 anchors as numbers before the calculation\n- P3: second path from a different source (registered office-cleaning contractors × office-contract turnover per contractor), ratio ∈ [1.05×, 2.00×] (reference 1.08×) + the more reliable path named\n- P4: translated into a decision — 16,416 of the 33,888 contracts sit in a segment of only 43,200 firms, so the sales force works the large-firm list, where one call in three lands, not the 436,800 small offices where it lands once in twenty-five\n- S: «33,888 contracts against 480,000 firms» → about one office in fourteen buys cleaning in, and $14,000 a year is roughly $270 a week — one cleaner for eight to ten hours a week, which is what an office buys; per contractor it is 5.6 contracts each, against the 6 implied by $84,000 of turnover at $14,000 a contract",
-    "ru": "- GATE: результат ∈ [$118,608,000, $1,897,728,000]\n- Названа конвенция счёта: одна страна, один год, база — фирмы из реестра держателей офисных помещений, деньги в $ в год\n- P1: **38% отвергнуты на всём реестре, потому что доля измерена на фирмах от 50 сотрудников**, и каждая ставка применена к своей базе — 38% к 43,200 крупным, 4% к 436,800 остальным; прогон 38% по всем 480,000 фирмам = P1 не зачтён при любой арифметике\n- P2: 5 якорей числом до расчёта\n- P3: второй путь из другого источника (зарегистрированные подрядчики офисной уборки × оборот подрядчика по офисным договорам), ratio ∈ [1.05×, 2.00×] (эталон 1.08×) + назван надёжнейший путь\n- P4: перевод в решение — 16,416 договоров из 33,888 лежат в сегменте всего из 43,200 фирм, поэтому продавцы работают список крупных, где закрывается каждый третий, а не 436,800 малых офисов, где закрывается один из двадцати пяти\n- S: «33,888 договоров против 480,000 фирм» → покупает примерно один офис из четырнадцати, а $14,000 в год — это около $270 в неделю, то есть уборщик на восемь-десять часов в неделю, столько офис и берёт; на подрядчика выходит 5.6 договора против 6, которые дают $84,000 оборота при договоре в $14,000"
+    "en": "- GATE: result ∈ [$80,480,000, $5,364,320,000] — the band is built on the part that is actually estimated, not as a multiple of the answer: the candidate's annual revenue view taken ÷3…×3 ($33,024,000 … $297,216,000 a year) and run through the contract's fixed $580,000,000 of 20-year cost. The cost side is determined; only rate, paid hours and ring mix are the candidate's own view\n- Counting convention named: one city, a 20-year term, zero growth, no discounting, ticket money out of perimeter; revenue denominated per space, capital and maintenance per machine, wages per person, money in $ of the whole term\n- P1: **each rate is applied to the count it is quoted in — the hourly rates to the 40,000 spaces, $20,000 and $200 a month to the 5,000 machines, $10 an hour to the 500 monitors — and the candidate says aloud that 40,000 and 5,000 are the same kerb under two units, so neither count is the wrong one**; one count run across both sides (40,000 machines, or revenue priced per machine) = P1 not credited, whatever the arithmetic. Discriminator: asked which of the two counts is the wrong one, the credited answer is *neither* — 40,000 is wrong only inside a per-machine line, 5,000 only inside a per-space line\n- P2: 4 estimate-anchors as numbers before the calculation — rate per hour, paid hours a day, ring mix, days a year — each carrying the unit it is quoted in, and the candidate does not treat the contract's cost terms as anchors he invented\n- P3: the outside price is put on a common horizon **before** it is compared: $1,401,440,000 over 20 years is $70,072,000 a year against the $15,333,333 a year implied by $1.15bn over 75 years — a gap of 4.6× — and the gap is explained (discounting, 75 years of demand risk, a seller in a hurry), not averaged away. Dividing the two totals into 1.22× and calling it convergence = P3 not credited: that measures 20 years against 75\n- P4: translated into a decision — $1,401,440,000 is a ceiling, not a bid: no discounting, no growth, no demand risk in it, and the only transacted price on record clears at about a fifth of undiscounted cash flow per year, so the number written on the bid goes in far below the ceiling\n- S: «$99,072,000 a year over 40,000 spaces» → $2,476.80 a space a year, $6.88 a day — against the $4 a day earned by the 81% of spaces on the $1 rate for 4 hours, with the Loop's $36 and the CBD's $16 pulling the average up; per machine it is $19,814.40 of revenue against $5,800 of cost a year ($4,800 of running cost plus $20,000 of hardware spread over 20 years), a 71% margin, which is what an asset with no rent and no cost of goods should look like",
+    "ru": "- GATE: результат ∈ [$80,480,000, $5,364,320,000] — полоса построена на том, что действительно оценивается, а не как кратное ответу: годовой взгляд кандидата на выручку, взятый ÷3…×3 ($33,024,000 … $297,216,000 в год) и проведённый через заданные контрактом $580,000,000 затрат за 20 лет. Затратная сторона определена; собственный взгляд кандидата — только ставка, оплаченные часы и разбивка по кольцам\n- Названа конвенция счёта: один город, срок 20 лет, рост нулевой, дисконта нет, штрафы вне периметра; выручка выражена в местах, вложения и обслуживание — в машинах, оплата труда — в людях, деньги в $ за весь срок\n- P1: **каждая ставка приложена к тому счёту, в котором снята — часовые ставки к 40,000 мест, $20,000 и $200 в месяц к 5,000 машин, $10 в час к 500 людям — и кандидат вслух говорит, что 40,000 и 5,000 суть одна и та же обочина в двух единицах, поэтому неверного счёта здесь нет**; один счёт, прогнанный по обеим сторонам (40,000 машин либо выручка по машинам), = P1 не зачтён при любой арифметике. Различающий вопрос: «какой из двух счётов неверен» — засчитывается ответ *ни один*: 40,000 неверны только внутри строки со ставкой на машину, 5,000 — только внутри строки со ставкой на место\n- P2: 4 оценочных якоря числом до расчёта — цена часа, оплаченные часы в день, разбивка по кольцам, дней в году — каждый со своей единицей, и кандидат не выдаёт затратные условия контракта за придуманные им якоря\n- P3: внешняя цена приведена к общему горизонту **до** сравнения: $1,401,440,000 за 20 лет это $70,072,000 в год против $15,333,333 в год, которые дают $1.15 млрд за 75 лет, — разрыв 4.6×, и разрыв объяснён (дисконт, 75 лет риска спроса, продавец в спешке), а не сглажен. Деление итога на итог с получением 1.22× и объявлением схождения = P3 не зачтён: так меряют 20 лет против 75\n- P4: перевод в решение — $1,401,440,000 это потолок, а не ставка: в нём нет ни дисконта, ни роста, ни риска спроса, а единственная сделочная цена на руках расчищается примерно на пятой части недисконтированного годового потока, поэтому на конкурс подаётся цифра заметно ниже потолка\n- S: «$99,072,000 в год на 40,000 мест» → $2,476.80 на место в год, $6.88 в день — против $4 в день у тех 81% мест, что стоят по $1 за 4 часа: среднее вверх тянут $36 у Loop и $16 у CBD; на машину выходит $19,814.40 выручки против $5,800 затрат в год ($4,800 текущих плюс $20,000 железа, разложенные на 20 лет) — маржа 71%, как и должно выглядеть имущество без аренды и без себестоимости товара"
    },
    "reference": {
-    "en": "The market is $474,432,000 a year: apply each outsourcing rate to the base it was measured on — 38% to the large firms, 4% to the rest — and price 33,888 contracts.\nAllowed anchors (revealed on request, not upfront):\n  • Firms on the register of office-holding businesses: 480,000 [A3]\n  • Share of the register with 50 or more staff: 9% [A4]\n  • Outsourcing rate measured on firms with 50 or more staff: 38% [A4]\n  • Outsourcing rate measured on the smaller firms: 4% [A4]\n  • Contract value: $14,000 a year [A5]\n  • *For the second path:* registered office-cleaning contractors: ~6,100 [A3]\n  • *For the second path:* office-contract turnover per contractor: ~$84,000 a year [A3]\n\nCounting convention: one country, one calendar year, the base is a firm on the register of office-holding businesses, and every figure is dollars a year at contract value.\n\nReference chain:\nlarge    = 480_000 * D('0.09')      # 43,200 firms with 50+ staff\nsmall    = 480_000 - 43_200         # 436,800 smaller firms\nnaive    = 480_000 * D('0.38') * 14_000   # 2,553,600,000  <- 38% run across the whole register\nbuy_lg   = 43_200 * D('0.38')       # 16,416 contracts\nbuy_sm   = 436_800 * D('0.04')      # 17,472 contracts\ncontr    = 16_416 + 17_472          # 33,888 contracts\nmarket   = 33_888 * 14_000          # 474,432,000    <- market\nalt      = 6_100 * 84_000           # 512,400,000    <- second path, the contractor register\nratio    = alt / market             # 1.08\ngap_abs  = naive - market           # 2,079,168,000\ngap_pct  = gap_abs / market         # 438%\nmult     = naive / market           # 5.38\n\nThe 38% is a real, correctly measured number, and it belongs to 43,200 firms, not to 480,000: a rate carries the base it was taken on. Running it across the register overstates the market by $2,079,168,000 — 438% above the true figure, that is 5.38x the $474,432,000 the two surveys together support. The record gives both forms because it gives both a level and a rate; the absolute gap and the percentage are the same statement counted twice.\n\nReference answer: $474,432,000 · Corridor: [$118,608,000 … $1,897,728,000]",
-    "ru": "Рынок — $474,432,000 в год: применять каждую ставку аутсорсинга к той базе, на которой она измерена, — 38% к крупным фирмам, 4% к остальным, — и оценить 33,888 договоров.\nРазрешённые якоря (выдаются по запросу, не сразу):\n  • Фирм в реестре держателей офисных помещений: 480,000 [A3]\n  • Доля реестра со штатом 50 и более: 9% [A4]\n  • Ставка аутсорсинга, измеренная на фирмах со штатом 50 и более: 38% [A4]\n  • Ставка аутсорсинга, измеренная на фирмах поменьше: 4% [A4]\n  • Стоимость договора: $14,000 в год [A5]\n  • *Для второго пути:* зарегистрированных подрядчиков офисной уборки: ~6,100 [A3]\n  • *Для второго пути:* оборот подрядчика по офисным договорам: ~$84,000 в год [A3]\n\nКонвенция счёта: одна страна, один календарный год, база — фирма из реестра держателей офисных помещений, и всякая величина дана в долларах в год по стоимости договора.\n\nЭталонная цепочка:\nlarge    = 480_000 * D('0.09')      # 43,200 фирм со штатом 50+\nsmall    = 480_000 - 43_200         # 436,800 фирм поменьше\nnaive    = 480_000 * D('0.38') * 14_000   # 2,553,600,000  <- 38% прогнаны по всему реестру\nbuy_lg   = 43_200 * D('0.38')       # 16,416 договоров\nbuy_sm   = 436_800 * D('0.04')      # 17,472 договора\ncontr    = 16_416 + 17_472          # 33,888 договоров\nmarket   = 33_888 * 14_000          # 474,432,000    <- рынок\nalt      = 6_100 * 84_000           # 512,400,000    <- второй путь, реестр подрядчиков\nratio    = alt / market             # 1.08\ngap_abs  = naive - market           # 2,079,168,000\ngap_pct  = gap_abs / market         # 438%\nmult     = naive / market           # 5.38\n\n38% — настоящая и верно измеренная величина, и принадлежит она 43,200 фирмам, а не 480,000: ставка несёт с собой ту базу, на которой снята. Прогон её по всему реестру даёт завышение рынка на $2,079,168,000 — это 438% сверх истинной величины, то есть 5.38x от $474,432,000, которые вместе подтверждают два опроса. Запись даёт обе формы, потому что даёт и уровень, и ставку; абсолютный разрыв и процент — одно и то же утверждение, посчитанное дважды.\n\nЭталон: $474,432,000 · Коридор: [$118,608,000 … $1,897,728,000]"
+    "en": "The rights are worth about $1,401,440,000 over the 20 years on the book's own assumptions: revenue is counted on the 40,000 spaces, capital and maintenance on the 5,000 machines, labour on the 500 monitors, and only the dollars are added together.\n\nEstimate anchors — the candidate assumes these, or asks and is given them (k=4):\n  • Ring split of the 40,000 spaces: Loop 3%, CBD 16%, suburbs and others 81% [A3]\n  • Price per hour by ring: $3 / $2 / $1 [A5]\n  • Paid hours a day by ring: 12 / 8 / 4 [A4]\n  • Days a year the meters run: weekends like weekdays, 30 days a month × 12 months = 360 [A4]\n\nContract terms — already in front of the candidate, not anchors: ~40,000 metered spaces; one machine serves 8 spaces; $20,000 a machine installed, no replacement inside the term; $200 per machine per month; one person per 10 machines at $10 an hour, 8 hours a day, 300 days a year; ticket money stays with the city; zero growth; time value ignored.\n\n  • *For the plausibility check:* price actually paid in 2008 for the rights to all of Chicago's meters: $1.15 billion for 75 years [A5]\n\nCounting convention: one city, a 20-year term, zero growth, no discounting, ticket money out of perimeter. The revenue lines are denominated per metered space, the capital and maintenance lines per machine, the wage line per person, and every figure is dollars of the whole term.\n\nReference chain:\n# --- revenue: estimated, anchors revealed on request ---\nloop_sp     = 40_000 * D('0.03')              # 1,200 spaces\ncbd_sp      = 40_000 * D('0.16')              # 6,400 spaces\nsub_sp      = 40_000 * D('0.81')              # 32,400 spaces\ndays        = 30 * 12                         # 360 metered days a year\nrev_loop    = 1_200 * 12 * 3 * 360            # 15,552,000\nrev_cbd     = 6_400 * 8 * 2 * 360             # 36,864,000\nrev_sub     = 32_400 * 4 * 1 * 360            # 46,656,000\nrev_year    = 15_552_000 + 36_864_000 + 46_656_000   # 99,072,000\nrev_20      = 99_072_000 * 20                 # 1,981,440,000\n# --- cost: fixed by the contract, no estimation left in it ---\nmachines    = 40_000 / 8                      # 5,000   <- unit changes here\ncapex       = 5_000 * 20_000                  # 100,000,000\nmaint_year  = 5_000 * 200 * 12                # 12,000,000\nstaff       = 5_000 / 10                      # 500     <- and again here\nwage_year   = 500 * 10 * 8 * 300              # 12,000,000\nopex_year   = 12_000_000 + 12_000_000         # 24,000,000\nopex_20     = 24_000_000 * 20                 # 480,000,000\ncost_20     = 100_000_000 + 480_000_000       # 580,000,000\nvalue       = 1_981_440_000 - 580_000_000     # 1,401,440,000  <- the rights\n# --- the provoked path: headline count carried onto per-machine rates ---\nnaive_capex = 40_000 * 20_000                 # 800,000,000\nnaive_maint = 40_000 * 200 * 12               # 96,000,000\nnaive_staff = 40_000 / 10                     # 4,000 people\nnaive_wage  = 4_000 * 10 * 8 * 300            # 96,000,000\nnaive_cost  = 800_000_000 + (96_000_000 + 96_000_000) * 20   # 4,640,000,000\nnaive_value = 1_981_440_000 - 4_640_000_000   # -2,658,560,000\nmult        = 4_640_000_000 / 580_000_000     # 8.00 exactly\ngap_abs     = 1_401_440_000 + 2_658_560_000   # 4,060,000,000\nmirror_rev  = 1_981_440_000 / 8               # 247,680,000    <- mirror: revenue priced per machine\nmirror_val  = 247_680_000 - 580_000_000       # -332,320,000\n# --- outside price, normalised before comparison ---\nours_yr     = 1_401_440_000 / 20              # 70,072,000 a year\npaid_2008   = 1_150_000_000 / 75              # 15,333,333 a year\nratio       = 70_072_000 / 15_333_333         # 4.57\nbogus       = 1_401_440_000 / 1_150_000_000   # 1.22   <- 20 years divided by 75 years, not a ratio\n# --- sanity ---\nper_space   = 99_072_000 / 40_000             # 2,476.80 a space a year = 6.88 a day\nper_machine = 99_072_000 / 5_000              # 19,814.40 a machine a year\ncost_pm     = (24_000_000 + 100_000_000/20) / 5_000   # 5,800 a machine a year\n\nThree rates, three units, one kerb. The $3, $2 and $1 are quoted per hour of a parking space, so the revenue lines run on 40,000. The $20,000 and the $200 a month are quoted per machine, and a machine covers 8 spaces, so those lines run on 5,000. The $10 an hour is quoted per person and a person covers 10 machines, so the wage line runs on 500. None of that is inconsistent: 40,000, 5,000 and 500 are the same kerb counted three ways, and what has to reconcile at the end is the money, not the head-count.\n\nCarry the headline 40,000 onto the cost side and every cost line scales by exactly eight — capital $800,000,000, maintenance $96,000,000 a year, 4,000 monitors at $96,000,000 a year — so the cost side becomes $4,640,000,000, precisely 8.00× the true $580,000,000. An asset worth $1,401,440,000 becomes a $2,658,560,000 liability: a $4,060,000,000 miss that reverses the recommendation from «bid, up to about $1.4 billion» to «walk away at any price». The mirror move costs almost as much: unify in the other direction, price the revenue stream per machine, and 20 years bring $247,680,000 against $580,000,000 of cost — a refusal to bid again, from the opposite side. Neither count is the wrong one. Each is wrong only on the other side's lines.\n\nPlausibility check, and why it is not a convergence test. The one outside price on record is the 2008 sale of these same rights: $1.15 billion for 75 years. It cannot be divided into our 20-year figure — 1,401,440,000 / 1,150,000,000 = 1.22 puts 20 years over 75 years and measures nothing. Normalise first: our chain is $70,072,000 a year of undiscounted cash flow, the transacted price is $15,333,333 a year, and the honest gap is 4.6×. That gap is the content — discounting, twenty to seventy-five years of demand risk, and a cash-strapped seller in a hurry — and it says our figure is a ceiling and not a bid. Per space-year the same statement reads $1,751.80 against $383.33, the identical 4.6×, on the assumption that the 2008 deal covered the same ~40,000-space estate; the ratio is unchanged by that assumption because the space count cancels.\n\nBook check. The casebook's cost table prints total annual recurring costs of 24,000,510 and 20-year recurring costs of 480,010,200 against its own two line items of 12,000,000 and 12,000,000; the extra $510 a year reconciles with nothing on the page and carries into its 580,010,200 of cost and its 1,401,429,800 of value, which the book itself rounds to «~600 million» and «~1.4 billion». This body uses the reconciling sum, 24,000,000, so that every figure ties to the last digit; the $10,200 difference over 20 years sits deep inside the corridor. Two further disclosures. The rate-and-usage table is withheld from the prompt because the book withholds it: «The candidate should make assumptions on the price per hour per meter, usage and growth / decline over a 20-year period to come up with an overall revenue estimate. In the interest of time and if the interviewer so desires, the following information / table can be provided.» And the staffing norm is stated twice in the book, «one person needed to monitor 10 new machines or 80 spaces», both forms giving 500 people; only the per-machine form is put in front of the candidate, so the conversion has to be made rather than read off.\n\nWhere the corridor comes from. Only the revenue side is estimated, so the band is built there and carried through: the reference $99,072,000 a year taken ÷3…×3 gives $33,024,000 … $297,216,000 a year, which over 20 years and against the contract's fixed $580,000,000 of cost gives $80,480,000 … $5,364,320,000. Four checks. A conservative but wholly defensible view — the whole estate at the suburban assumptions, $1 an hour for 4 hours over 360 days, $57,600,000 a year — lands at $572,000,000, inside. An aggressive one — the whole estate at the CBD assumptions, $2 an hour for 8 hours over 360 days, $230,400,000 a year — lands at $4,028,000,000, inside. The provoked path lands at -$2,658,560,000 and its mirror at -$332,320,000: both outside, and outside on the side no honest estimate can reach, because no revenue view makes the answer negative once costs are counted on 5,000 machines. The floor of $80,480,000 corresponds to a revenue estimate a third of the reference, which is below even a flat suburban rate across the whole estate, so an honest conservative candidate cannot be marked red for being cautious. A partially trapped answer — the unit carried into the capital line alone, $701,440,000 — does sit inside the band; that is intended, the gate is a plausibility band and P1 is what fails the unit error.\n\nReference answer: $1,401,440,000 · Corridor: [$80,480,000 … $5,364,320,000]\nSource: 6.-Wharton-Casebook-2017, Chicago Parking Meters, pp. 43-54",
+    "ru": "Права стоят около $1,401,440,000 за 20 лет на допущениях самой книги: выручка считается на 40,000 местах, вложения и обслуживание — на 5,000 машинах, труд — на 500 человеках, и складываются только деньги.\n\nОценочные якоря — кандидат их принимает сам либо спрашивает и получает (k=4):\n  • Разбивка 40,000 мест по кольцам: Loop 3%, CBD 16%, пригороды и прочее 81% [A3]\n  • Цена часа по кольцам: $3 / $2 / $1 [A5]\n  • Оплаченных часов в день по кольцам: 12 / 8 / 4 [A4]\n  • Дней в году: выходные как будни, 30 дней в месяц × 12 месяцев = 360 [A4]\n\nУсловия контракта — уже перед кандидатом, это не якоря: ~40,000 мест со счётчиками; одна машина держит 8 мест; $20,000 за машину с установкой, замены внутри срока нет; $200 на машину в месяц; один человек на 10 машин по $10 в час, 8 часов в день, 300 дней в году; деньги по штрафам остаются городу; рост нулевой; временная стоимость денег игнорируется.\n\n  • *Для проверки правдоподобия:* цена, фактически уплаченная в 2008 году за права на все счётчики Чикаго: $1.15 млрд за 75 лет [A5]\n\nКонвенция счёта: один город, срок 20 лет, рост нулевой, дисконта нет, штрафы вне периметра. Строки выручки выражены в парковочных местах, строки вложений и обслуживания — в машинах, строка труда — в людях, и всякая величина дана в долларах за весь срок.\n\nЭталонная цепочка:\n# --- выручка: оценивается, якоря раскрываются по запросу ---\nloop_sp     = 40_000 * D('0.03')              # 1,200 мест\ncbd_sp      = 40_000 * D('0.16')              # 6,400 мест\nsub_sp      = 40_000 * D('0.81')              # 32,400 места\ndays        = 30 * 12                         # 360 счётных дней в году\nrev_loop    = 1_200 * 12 * 3 * 360            # 15,552,000\nrev_cbd     = 6_400 * 8 * 2 * 360             # 36,864,000\nrev_sub     = 32_400 * 4 * 1 * 360            # 46,656,000\nrev_year    = 15_552_000 + 36_864_000 + 46_656_000   # 99,072,000\nrev_20      = 99_072_000 * 20                 # 1,981,440,000\n# --- затраты: заданы контрактом, оценивать нечего ---\nmachines    = 40_000 / 8                      # 5,000   <- здесь меняется единица\ncapex       = 5_000 * 20_000                  # 100,000,000\nmaint_year  = 5_000 * 200 * 12                # 12,000,000\nstaff       = 5_000 / 10                      # 500     <- и здесь снова\nwage_year   = 500 * 10 * 8 * 300              # 12,000,000\nopex_year   = 12_000_000 + 12_000_000         # 24,000,000\nopex_20     = 24_000_000 * 20                 # 480,000,000\ncost_20     = 100_000_000 + 480_000_000       # 580,000,000\nvalue       = 1_981_440_000 - 580_000_000     # 1,401,440,000  <- цена прав\n# --- провоцируемый путь: головной счёт под ставками на машину ---\nnaive_capex = 40_000 * 20_000                 # 800,000,000\nnaive_maint = 40_000 * 200 * 12               # 96,000,000\nnaive_staff = 40_000 / 10                     # 4,000 человек\nnaive_wage  = 4_000 * 10 * 8 * 300            # 96,000,000\nnaive_cost  = 800_000_000 + (96_000_000 + 96_000_000) * 20   # 4,640,000,000\nnaive_value = 1_981_440_000 - 4_640_000_000   # -2,658,560,000\nmult        = 4_640_000_000 / 580_000_000     # ровно 8.00\ngap_abs     = 1_401_440_000 + 2_658_560_000   # 4,060,000,000\nmirror_rev  = 1_981_440_000 / 8               # 247,680,000    <- зеркало: выручка по машинам\nmirror_val  = 247_680_000 - 580_000_000       # -332,320,000\n# --- внешняя цена, приведённая к общему горизонту ---\nours_yr     = 1_401_440_000 / 20              # 70,072,000 в год\npaid_2008   = 1_150_000_000 / 75              # 15,333,333 в год\nratio       = 70_072_000 / 15_333_333         # 4.57\nbogus       = 1_401_440_000 / 1_150_000_000   # 1.22   <- 20 лет, делённые на 75 лет: это не отношение\n# --- проверка правдоподобия ---\nper_space   = 99_072_000 / 40_000             # 2,476.80 на место в год = 6.88 в день\nper_machine = 99_072_000 / 5_000              # 19,814.40 на машину в год\ncost_pm     = (24_000_000 + 100_000_000/20) / 5_000   # 5,800 на машину в год\n\nТри ставки, три единицы, одна и та же обочина. $3, $2 и $1 сняты за час ПАРКОВОЧНОГО МЕСТА — строки выручки идут по 40,000. $20,000 и $200 в месяц сняты на МАШИНУ, а машина держит 8 мест, — эти строки идут по 5,000. $10 в час сняты на ЧЕЛОВЕКА, а человек держит 10 машин, — строка труда идёт по 500. Противоречия тут нет: 40,000, 5,000 и 500 — одна и та же обочина, сосчитанная тремя способами, и сходиться в конце обязаны деньги, а не счёт натуры.\n\nПеренеси головные 40,000 на затратную сторону — и каждая строка затрат вырастет ровно восемью: вложения $800,000,000, обслуживание $96,000,000 в год, 4,000 людей на $96,000,000 в год, — затратная сторона становится $4,640,000,000, то есть ровно 8.00× от истинных $580,000,000. Актив ценой $1,401,440,000 превращается в обязательство на $2,658,560,000: промах на $4,060,000,000, переворачивающий рекомендацию с «участвовать, до примерно $1.4 млрд» на «не участвовать ни за какую цену». Зеркальный ход стоит почти столько же: свести к одному в другую сторону, посчитать выручку по машинам — и 20 лет дают $247,680,000 против $580,000,000 затрат, снова отказ от торгов, только с другой стороны. Неверного счёта здесь нет вовсе. Каждый неверен только на строках чужой стороны.\n\nПроверка правдоподобия — и почему это НЕ проверка схождения. Единственная внешняя цена на руках — продажа этих же прав в 2008 году: $1.15 млрд за 75 лет. Делить её на нашу двадцатилетнюю величину нельзя: 1,401,440,000 / 1,150,000,000 = 1.22 кладёт 20 лет на 75 лет и не измеряет ничего. Сначала приведение: наша цепочка даёт $70,072,000 недисконтированного потока в год, сделочная цена — $15,333,333 в год, честный разрыв 4.6×. Этот разрыв и есть содержание — дисконт, разница между двадцатью и семьюдесятью пятью годами риска спроса и продавец, которому срочно нужны деньги, — и он говорит, что наша величина есть потолок, а не ставка. В пересчёте на место-год то же самое читается как $1,751.80 против $383.33, те же 4.6×, при допущении, что сделка 2008 года покрывала то же имущество из ~40,000 мест; на отношение это допущение не влияет, счёт мест сокращается.\n\nСверка с книгой. Таблица затрат книги печатает годовые текущие затраты 24,000,510 и двадцатилетние 480,010,200 при своих же двух строках 12,000,000 и 12,000,000; лишние $510 в год не сходятся ни с чем на странице и проходят в её 580,010,200 затрат и 1,401,429,800 цены, которые сама книга округляет до «~600 million» и «~1.4 billion». Тело берёт сходящуюся сумму 24,000,000, чтобы всё билось до последней цифры; разница $10,200 за 20 лет лежит глубоко внутри коридора. Ещё два раскрытия. Таблица ставок и загрузки убрана из промпта потому, что её убирает сама книга: «The candidate should make assumptions on the price per hour per meter, usage and growth / decline over a 20-year period to come up with an overall revenue estimate. In the interest of time and if the interviewer so desires, the following information / table can be provided.» И норма обслуживания дана в книге дважды — «one person needed to monitor 10 new machines or 80 spaces», обе формы дают 500 человек; кандидату показана только форма «на машину», чтобы перевод пришлось делать, а не считывать готовым.\n\nОткуда взялся коридор. Оценивается только выручка, поэтому полоса строится там и проводится дальше: эталонные $99,072,000 в год, взятые ÷3…×3, дают $33,024,000 … $297,216,000 в год, что за 20 лет и против заданных контрактом $580,000,000 затрат даёт $80,480,000 … $5,364,320,000. Четыре проверки. Осторожный, но вполне защитимый взгляд — всё имущество по пригородным допущениям, $1 в час за 4 часа при 360 днях, $57,600,000 в год — даёт $572,000,000, внутри. Смелый — всё имущество по допущениям CBD, $2 в час за 8 часов при 360 днях, $230,400,000 в год — даёт $4,028,000,000, внутри. Провоцируемый путь даёт -$2,658,560,000, его зеркало -$332,320,000: оба снаружи и снаружи с той стороны, куда честная оценка не дотягивается, потому что ни один взгляд на выручку не делает ответ отрицательным, если затраты сосчитаны на 5,000 машин. Нижняя граница $80,480,000 отвечает оценке выручки в треть эталонной, а это ниже даже плоской пригородной ставки по всему имуществу, — значит, честный осторожный кандидат не может получить красный за осторожность. Частично попавший в ловушку ответ — единица перенесена только в строку вложений, $701,440,000 — внутри полосы лежит; так и задумано: гейт есть полоса правдоподобия, а ошибку единицы валит P1.\n\nЭталон: $1,401,440,000 · Коридор: [$80,480,000 … $5,364,320,000]\nSource: 6.-Wharton-Casebook-2017, Chicago Parking Meters, pp. 43-54"
    },
    "provoked": {
-    "en": "taking 38% as the country's outsourcing rate. It is the only headline share in the record, it is printed next to the register and next to the contract value, and the three multiply cleanly. The method note reads as survey housekeeping — who was polled — rather than as the sentence that says the 38% describes 43,200 firms and nobody else.",
-    "ru": "принять 38% за ставку аутсорсинга по стране. Это единственная заголовочная доля в записи, она напечатана рядом с реестром и рядом со стоимостью договора, и все три чисто перемножаются. Методическая сноска читается как канцелярия опроса — кого опросили, — а не как фраза, которая говорит, что 38% описывают 43,200 фирмы и больше никого."
+    "en": "unifying the counts, which is the move this library has trained six times over. In MS-002, MS-007, MS-013, MS-014, MS-023 and MS-057 the work is to find the one base a rate really belongs to and convert the whole model onto it; here that reflex is the error. The headline ~40,000 is stated before any cost line and the whole revenue estimate is built on it, so when the $20,000 machine and the $200-a-month maintenance arrive they get multiplied by the number the candidate has been living in. The clause that fixes the conversion sits three sentences earlier, inside the description of the hardware, where it reads as an engineering specification rather than as the divisor of three cost lines. The mirror slip is the same unification in the other direction: having derived the 5,000 machines, the candidate 'makes it consistent' and prices the revenue stream per machine.",
+    "ru": "свести счёта к одному — ход, который эта библиотека натренировала шесть раз. В MS-002, MS-007, MS-013, MS-014, MS-023 и MS-057 работа в том и состоит, чтобы найти единственную базу, которой ставка принадлежит, и привести к ней всю модель; здесь этот рефлекс и есть ошибка. Головные ~40,000 названы до первой строки затрат, на них построена вся оценка выручки, — и когда приходят машина за $20,000 и обслуживание за $200 в месяц, они умножаются на то число, в котором кандидат живёт последние минуты. Оговорка, задающая перевод, стоит тремя предложениями раньше, внутри описания железа, где читается как характеристика оборудования, а не как делитель трёх строк затрат. Зеркальная осечка — то же сведение в обратную сторону: выведя 5,000 машин, кандидат «приводит к единообразию» и считает выручку тоже по машинам."
    },
    "steps": [
     {
-     "prompt": "Final market-size estimate, $",
+     "prompt": "Value of the 20-year rights, $",
      "kind": "number",
-     "answer": "474432000",
-     "tolerance": "corridor [$118,608,000 … $1,897,728,000]"
+     "answer": "1401440000",
+     "tolerance": "corridor [$80,480,000 … $5,364,320,000]"
     },
     {
-     "prompt": "Independent second-path triangulation + one-sentence recommendation",
+     "prompt": "Independent plausibility check + one-sentence bid recommendation",
      "kind": "text",
-     "answer": "reference answer $474,432,000; second path within ~2×",
+     "answer": "reference answer $1,401,440,000; outside price compared per year, gap 4.6× and explained",
      "tolerance": "judged"
     }
    ],
    "family_h25": "F1",
    "family_src": "тело",
    "family_conf": "высокая",
-   "family_note": "F1 «не та база»: величина верна, а база под ней чужая. Тело печатает и саму долю — «38% of firms buy their office cleaning from an outside contractor» — и границу выборки, на которой она снята: «the sample was drawn only from firms with 50 or more staff, which are 9% of the register», и тут же даёт вторую ставку для остатка реестра. Отличие от F3 (MS-051, MS-052): там ставка снята на самоотобранной или отобранной части и переносить её нельзя вовсе; здесь обе ставки честные, ошибка — в том, к какой базе каждая прикладывается.",
+   "family_note": "F1 «не та база» по телу: ставка верна, а счёт под ней чужой — $200 в месяц и $20,000 сняты на машину, наивный ход прикладывает их к 40,000 мест.\n\nТВИН-ГЕЙТ против шести слотов MS с тем же рефлексом «сверь единицу ставки с единицей счёта». Различающий вопрос применим вслепую, без знания сюжета: СКОЛЬКО СЧЁТОВ ДОЖИВАЕТ ДО ВЕРНОГО ОТВЕТА? В MS-002 (люди против домохозяйств, MECH-50), MS-007 (занятые против фирм, MECH-50), MS-013 (подписчики против поездок, MECH-51), MS-014 (коробки против чашек, MECH-63), MS-023 (пользователи против установленных банкоматов, MECH-152) и MS-057 (парк в эксплуатации против выпуска заводов, MECH-143) доживает РОВНО ОДИН счёт: второй неверен во всей модели, его находят, выбрасывают, и на этом задача кончается. Здесь доживают ТРИ — 40,000 мест, 5,000 машин и 500 человек стоят в верном ответе одновременно, и выбор любого одного из них и есть ошибка.\n\nВторой слепой различающий вопрос: ОТВЕРГНУТЫЙ СЧЁТ НЕВЕРЕН ВЕЗДЕ ИЛИ ТОЛЬКО В СВОЕЙ СТРОКЕ? В шести — везде: домохозяйства не становятся людьми ни в одной строке, поездка не становится подпиской. Здесь 40,000 верны в строках выручки и неверны только внутри строки, чья ставка снята на машину.\n\nПоэтому слот не близнец, а контркейс к шести: они тренируют ход «найди единственную верную базу и приведи к ней всю модель», и кандидат, принёсший этот натренированный рефлекс сюда, ломает ответ — приведение к одному счёту здесь и есть провоцируемая ошибка, в обе стороны сразу (40,000 машин либо выручка по 5,000). Метка F1 общая с шестью честно, потому что механизм промаха тот же — подмена базы; движение обратное.",
    "mehanizm": {
-    "naive": "умножает долю, измеренную на крупных фирмах, на весь реестр фирм",
-    "correct": "прикладывает каждую ставку к своей базе — 38% к сегменту 50+, 4% к остальным — и складывает договоры",
-    "why": "доля принадлежит той выборке, на которой измерена, и на другой базе не действует",
-    "code": "MECH-58-нерепрезентативная-выборка",
+    "naive": "сводит модель к одному счёту: прогоняет головные ~40,000 мест по строкам, ставки которых сняты на машину и на человека (зеркало — считает по машинам и выручку)",
+    "correct": "считает каждую строку в той натуре, в которой снята её ставка: выручку на 40,000 мест, вложения и обслуживание на 5,000 машин, труд на 500 человек — и складывает только деньги",
+    "why": "одно и то же имущество законно считается в трёх единицах сразу; сходиться обязаны деньги, а не счёт натуры",
+    "code": "MECH-306-единый-счёт-на-обе-стороны",
     "code2": []
    }
   },

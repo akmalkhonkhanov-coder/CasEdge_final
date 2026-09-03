@@ -864,7 +864,7 @@
     "code": "MECH-67-критерий-не-из-цели",
     "code2": []
    },
-   "twin_of": "SY-016"
+   "twin_of": null
   },
   {
    "id": "SY-009",
@@ -2001,9 +2001,9 @@
   },
   {
    "id": "SY-016",
-   "title": "Which Account First",
-   "company": "Norgumlade",
-   "industry": "Retail card issuing",
+   "title": "Twenty Dollars, Two Parties",
+   "company": "Thompson Healthcare",
+   "industry": "Health insurance",
    "difficulty": "Hard",
    "clean": false,
    "focus": "S11(a)",
@@ -2011,89 +2011,125 @@
    "time": "5 min",
    "type": "Synthesis",
    "exhibit_mode": "E-with",
-   "prompt": "Norgumlade, a retail card issuer, is standing up an online bank. The IT team can build one deposit product this year; the other launches next year. The analyst has left a two-branch transcript of his own work. Read it, pick the product to build first, and state the size of the gap the non-financial factor has to outweigh.",
+   "prompt": "Thompson Healthcare, a Midwest mutual health insurer, is rebuilding how it pays for distribution. The team has already fixed the total it will pay; one item is still open, and an analyst has left his working note on it. You have five minutes with the note before the client call. Read it and tell the client what the General Agencies should be paid and what that number turns on.",
    "exhibit": {
     "parts": [
      {
       "type": "text",
       "lines": [
-       "**Setup.** p. 155: «BankCoCard is interested in lowering their cost of funds for their credit card program by starting an online bank.» p. 156: «BankCoCard wants to launch both a savings and checking account, but their budget only allows for the IT team to build one product this year» and «Whichever product is not selected will be launched the following year».",
+       "**WORKING NOTE — Thompson Healthcare · cost of sales · open item: the split**",
        "",
-       "**Branch 1 — profit per account (p. 158–159).**",
-       "Checking: Revenue ($2,000 × 3% + $20 × 10%) × 10 years = $620; Costs $2,000 × 0% + $2.00 × 12 × 10 + $100 = $340; profit $280.",
-       "Savings: Revenue $5,000 × 3% × 5 = $750; Costs ($5,000 × 2% + $1.50 × 12) × 5 + $50 = $640; profit $110.",
-       "p. 159: «Total Savings Account Lifetime Profit: 2,000,000 * $110 = $220,000,000».",
-       "p. 159: «Total Checking Account Lifetime Profit: 1,500,000 * $280 = $420,000,000».",
-       "**Branch 2 — deposit base (p. 160).** «the savings account will generate $10 billion in deposits, while the checking account will only generate $3 billion».",
+       "**Where this sits.** Thompson is a mutual insurance company: all of its profits are returned to members in the form of lower premiums the following year, so it does not seek to maximize profit — it seeks to minimize cost. Administrative costs run above average, and the biggest driver is a high cost of sales. Thompson's policies are sold through independent agents, and all independent agents work with a \"General Agency\", which acts as a sales support organization. Market share is steady despite the presence of United Healthcare, which holds 30% of this market.",
        "",
-       "**Exhibit 1 inputs (p. 161), checking / savings.** Average Deposits $2,000 / $5,000 · Interest Received 3% / 3% · Interest Paid to Customers 0% / 2% · Monthly Operating Expense $2.00 / $1.50 · Overdrafts 10% / N/A · Overdraft Fee $20 / N/A · Account Acquisition Cost $100 / $50 · Average Life of Account 10 years / 5 years.",
+       "**What I established (settled — I am not reopening it).**",
+       "· Commission is 10% of annual premiums, paid to the General Agency, which passes a share to the independent agent. Total commission paid is, on average, $25 per member, per month. At 500,000 members: $25 × 500,000 × 12 = **$150,000,000 a year**.",
+       "· Backing the premium out of those same two facts: if $25 a month is 10% of premium, premium is $250 per member per month, so annual premium is $250 × 500,000 × 12 = $1,500,000,000. Ten percent of that is the $150,000,000 above — the two tie out.",
+       "· Thompson's medical cost inflation has run 12% over the past five years, against a national average of 10%. UHC's has run 10%.",
        "",
-       "**Conditions taken from the client (p. 156).** Both products take the same time to build and cost the same — $10 million · \"The current cost of funds is 4% for the credit card portfolio\" · \"Interest rates are not expected to change for the next several years\" · \"Assume all deposits can be lent, no reserves are required\" · \"The online bank will only operate within the US\" · BankCoCard's credit card portfolio — $16 billion, \"rapidly growing\" (p. 155) · \"BankCo expects to capture 10% of the market for online accounts of whichever product they launch\" (p. 159) · the online checking market is growing faster than the online savings market (p. 160)."
+       "**The restructure the team has already fixed.** Pay a flat commission directly to the agents, and pay the General Agencies a separate fee for the support services they provide to agents. The total commission paid to both parties is set at **$20 per member per month**. My remaining task is the one below: what share of the $20 goes to the General Agencies.",
+       "",
+       "**Why flat, and why I am comfortable with it.** UHC pays its agents a flat commission per member, per month. UHC holds 30% of this market and its costs have grown at 10% while ours have grown at 12%. The structure is the one visible difference between how they buy distribution and how we buy it, so moving to their structure is moving to the cheaper model.",
+       "",
+       "**The split — my recommendation.** Two parties now sit on the invoice where one sat before, and I looked hard for a basis to rank them. The agent makes the sale. The General Agency is not a pass-through: it performs three activities for us — training, application processing, and performance management. Finance sized what those three would cost if Thompson were to perform them internally, and the numbers are not small:"
+      ]
+     },
+     {
+      "type": "table",
+      "header": [
+       "Activity performed by the General Agencies",
+       "Cost if Thompson performed it internally"
+      ],
+      "rows": [
+       [
+        "Training",
+        "$6,000,000"
+       ],
+       [
+        "Application processing",
+        "$9,000,000"
+       ],
+       [
+        "Performance management",
+        "$15,000,000"
+       ]
+      ]
+     },
+     {
+      "type": "text",
+      "lines": [
+       "Those are annual figures for what it would cost Thompson to perform these activities internally — a different question from the one in front of me, and a total for the year rather than a rate per member per month. So I take the table as context on scale rather than as an input to the rate. It is my measure of how much work the General Agencies take off our hands, and it is why I refuse to treat their share as a rounding item: they have earned a real seat at this table.",
+       "",
+       "With substantive work on both sides of the invoice, and nothing in the client data ranking one side above the other, my opening position is an even split of the pot: **$10 per member per month to the independent agents and $10 per member per month to the General Agencies — $10 × 500,000 × 12 = $60,000,000 a year to the General Agencies.** We negotiate down from there if they let us.",
+       "",
+       "**Over to you.** The client call is in five minutes. What do you tell them about the $10, and what has to be settled before we put a number in front of the General Agencies?",
+       "---"
       ]
      }
     ]
    },
    "key": {
-    "naive": "| Шаг | Что делает под давлением | Куда приводит | N# |\n|---|---|---|---|\n| 1 | Считает per-account profit: $280 против $110 | Checking впереди | N7 |\n| 2 | Умножает на счета: $420M против $220M | «Почти вдвое» | N7 |\n| 3 | Достраивает «почти вдвое» ($420M против $220M) и считает вопрос закрытым | Рекомендация сформулирована по продукту, а не по цели | N7 |\n| 4 | Останавливается, не дочитав Bonus | Депозиты $10B / $3B не входят в анализ | N7 |\n| 5 | Не называет размер разрыва | Компромисс не оцифрован; цель со стр. 155 не проверена | N7 |",
-    "decoy": "1. Пара $420M против $220M — арифметика верна и разрыв велик — $200M, +91% к $220M, но она измеряет прибыльность продукта, а не цель со стр. 155 («lowering their cost of funds for their credit card program»). Отдельно её усиливает напечатанный факт, что рынок онлайн-checking растёт быстрее онлайн-savings: два независимых довода в одну сторону, и оба мимо цели.\n2. Average Life of Account 10 лет у checking против 5 у savings — тянет к «checking живёт дольше, значит лучше», хотя долговечность счёта не переводится в стоимость фондирования кредитного портфеля напрямую.\n3. **Другой период:** overdraft-экономика (10% × $20) и acquisition cost $100/$50 сидят внутри lifetime-профиля и относятся к прибыли продукта, а не к депозитной базе; при цели «lower cost of funds» они на выбор не влияют.",
-    "support": "| # | Опора | Величина | Ложна ли во второй ветви? |\n|---|---|---|---|\n| 1 | Депозиты savings | $10 billion | нет — величина одна |\n| 2 | Депозиты checking | $3 billion | нет — величина одна |\n| 3 | Разрыв депозитов | $7,000,000,000, +233% к $3B (построено) | **да** — в наивной ветви он не рассматривается вовсе |\n| 4 | Разрыв прибыли | $200,000,000, +91% к $220M (построено) | нет — но в наивной ветви он подан как решающий, а не как цена решения |\n| 5 | Привязка цели | «for the credit card portfolio» | **да** — наивная ветвь читает цель как «прибыль продукта» |\n| 6 | Отложенный запуск | второй продукт через год | нет — общая для обеих ветвей |",
-    "risks": "- **Внутренний:** savings-счёт даёт всего $110 прибыли на счёт против $280 у checking, и решение сознательно оставляет $200,000,000 lifetime profit на столе; если фондирование кредитного портфеля не удешевится настолько, чтобы перекрыть эту сумму, выбор не окупится.\n- **Внешний:** $10 billion депозитов держатся на Average Deposits $5,000 при 2,000,000 счетов и на ставке, выплачиваемой клиентам 2% против 0% у checking; сдвиг рыночных ставок меняет и объём привлечения, и его цену, а срок жизни savings-счёта всего 5 лет против 10 у checking, то есть базу приходится перезакупать вдвое чаще.",
-    "next": "1. Оценить, на сколько базисных пунктов $10 billion депозитов снижают стоимость фондирования кредитного портфеля, и сравнить полученную экономию с $200,000,000 — это единственная проверка, превращающая «правильную по цели» ветвь в доказанную.\n2. Проверить достижимость Average Deposits $5,000 на 2,000,000 счетов при выплате 2% клиентам — если фактический средний баланс ниже, $10 billion и построенный разрыв $7B сжимаются.",
-    "build": "```python\nfrom decimal import Decimal, ROUND_HALF_UP\n# входы напечатаны: стр. 159 (lifetime profit), стр. 160 (депозиты), стр. 161 (Exhibit 1)\nprofit_checking = Decimal('420000000')   # стр. 159 напечатано\nprofit_savings  = Decimal('220000000')   # стр. 159 напечатано\nprofit_gap = (profit_checking - profit_savings).quantize(Decimal('1'), ROUND_HALF_UP)   # 200,000,000 — ПОСТРОЕНО\n\ndep_checking = (Decimal('2000') * Decimal('1500000')).quantize(Decimal('1'), ROUND_HALF_UP)  # 3,000,000,000 — ПОСТРОЕНО\ndep_savings  = (Decimal('5000') * Decimal('2000000')).quantize(Decimal('1'), ROUND_HALF_UP)  # 10,000,000,000 — ПОСТРОЕНО\ndeposit_gap  = (dep_savings - dep_checking).quantize(Decimal('1'), ROUND_HALF_UP)             # 7,000,000,000 — ПОСТРОЕНО, +233% к 3,000,000,000\n# книга печатает «$10 billion» и «$3 billion» как итоги (стр. 160);\n# произведения, разрыв $7B и разрыв $200M книгой НЕ печатаются — это построение кандидата\n```"
+    "naive": "| Шаг | Что делает под давлением | Куда приводит | Рефлекс |\n|---|---|---|---|\n| 1 | Принимает вопрос в той формулировке, в какой он пришёл: «какая доля из $20» | Ищет пропорцию, хотя решается цена | «Вопрос задан — значит, задан правильно» |\n| 2 | Ищет в данных основание ранжировать агента и General Agency и не находит | Объявляет стороны неразличимыми | «Нет данных для ранжирования — значит, поровну» |\n| 3 | Читает $6,000,000 / $9,000,000 / $15,000,000 как годовые итоги чужого вопроса — во что эти функции обошлись бы внутри — и объявляет, что на ось ставки их не переводит | Величина, по которой решают, остаётся вне решения | «Числа из другого вопроса — контекст, а не вход» |\n| 4 | Делит котёл: $20 ÷ 2 = $10, то есть $60,000,000 в год | Цена привязана к котлу, а не к собственной себестоимости | «Фиксированную сумму делят, а не проверяют» |\n| 5 | Подкрепляет переход на flat ссылкой на UHC (30% доли, 10% против наших 12%) | Довод построен на уровне комиссии, которого в данных нет | «Конкурент делает так — значит, так дешевле» |\n| 6 | Считает вопрос закрытым и предлагает «дожать на переговорах» | Переплата $30,000,000 в год не названа и уходит в переговорный шум | «Переговоры доделают то, чего не сделал расчёт» |",
+    "decoy": "* Вопрос приходит уже оформленным как вопрос о доле — «what share of the $20» — и вопрос о доле приглашает ответ о доле. Переформулировать чужой вопрос под давлением времени труднее, чем на него ответить.\n* $20 напечатаны и зафиксированы командой; потолок не напечатан нигде. Одно число вручают, второе надо собрать из трёх строк, одного сложения и одного деления на базу, которой в записи тоже нет отдельной строкой (500,000 × 12).\n* Три строки затрат и котёл живут в разных единицах и разных периодах: годовой итог внутренней себестоимости против ставки на члена в месяц. Ничто в записи не сводит их на одну ось, а рамка «какая доля из $20» в этом и не нуждается — поэтому отказ переводить читается как методологическая аккуратность («это другой вопрос»), а не как пропуск. Ловушка держится на этом, а не на невнимательности автора: сложение он не делает потому, что объявил слагаемые нерелевантными своей оси, а не потому, что их не заметил.\n* Три строки затрат стоят под заголовком о том, что General Agencies **делают**. Язык вклада тянет к «заслужили больше», хотя ровно эти числа задают максимум, а не минимум.\n* 50/50 — единственный делёж, который не требует обоснования и которому нельзя предъявить пристрастность. Под таймером он выглядит нейтральностью, а не непросчитанным решением.\n* Запись уже показала верную работу: $150,000,000 по книжной формуле и премия $250, сходящаяся обратно к тем же $150,000,000. Верная арифметика выше по тексту покупает доверие к рассуждению ниже.\n* UHC приходит с двумя настоящими числами рядом (30% доли рынка, 10% против наших 12%), поэтому довод кажется подкреплённым — при том что единственное число, которое ему нужно, в данных отсутствует.\n* Слово «opening position» снимает ответственность: кажется, что $10 — не решение, а стартовая точка. Но именно с неё считают уступки, и потолок она уже нарушила вдвое.",
+    "support": "| Опора | Настоящая или ложная | Чем держится |\n|---|---|---|\n| Потолок: $6,000,000 + $9,000,000 + $15,000,000 на 500,000 × 12 = 6,000,000 член-месяцев | Настоящая | Три строки напечатаны, стр. 217; 500,000 и 12 напечатаны там же. Сумма, база и деление — ПОСТРОЕНО (книга печатает этот же расчёт в ответной части стр. 217; в запись он не попадает) |\n| $10 записи ровно вдвое выше потолка: $60,000,000 в год за работу стоимостью $30,000,000 | Настоящая | $20 напечатаны, стр. 217; делёж пополам — ход самой записи; произведения — ПОСТРОЕНО |\n| Переплата $30,000,000 равна всей экономии реструктуризации: $150,000,000 → $120,000,000 | Настоящая | $150,000,000 напечатано, стр. 216; $20 напечатаны, стр. 217; $120,000,000 и разность — ПОСТРОЕНО |\n| Премия $250 на члена в месяц, $1,500,000,000 в год | Настоящая | ПОСТРОЕНО из $25 и 10% (стр. 216); сходится обратно: 10% × $1,500,000,000 = $150,000,000 |\n| «General Agencies снимают с нас работы на $30,000,000, значит заслуживают крупной доли» | **Ложная как опора** | Та же величина — потолок цены, а не притязание на долю: работа, которую подрядчик с нас снимает, измеряет максимум, который он может стоить, а не минимум |\n| «Ничто в данных не ранжирует две стороны» | **Ложная** | Данные действительно не ранжируют стороны — но одну из них они определяют полностью: цена GA выведена из строк, лежащих в самой записи |\n| «Flat дешевле, потому что так платит UHC» | **Ложная** | Книга прямо печатает: сколько UHC платит комиссии, неизвестно (стр. 216) — известна только структура. А 12% против 10% — медицинская инфляция, не комиссия |\n| «Строки затрат — годовой итог чужого вопроса, на ось ставки их переводить незачем» | **Ложная** | 500,000 и 12 напечатаны в самой записи двумя абзацами выше; перевод — одно деление, после которого величина стоит ровно на той оси, на которой назначается цена. Разница осей — причина ошибки, а не её оправдание |\n| «$20 — котёл, который надо поделить» | **Ложная как рамка** | $20 — потолок совокупного расхода, а не сумма, подлежащая распределению между двумя претендентами; цена услуги имеет собственный потолок, не двигающийся вместе с котлом |",
+    "risks": "* **Внутренний.** $6,000,000, $9,000,000 и $15,000,000 — наша собственная оценка того, во что обойдётся поставить эти функции у себя, а не полученная цена. Потолок ровно настолько же надёжен: если performance management на деле стоит дороже $15,000,000, потолок поднимается, а угроза «заберём внутрь», которая за ним стоит, оказывается пустой. И потолок — это предел цены, а не указание инсорсить: забрав функции внутрь, Thompson берёт на себя постоянные затраты против базы в 500,000 членов, которая не растёт (доля рынка стабильна).\n* **Внешний.** UHC держит 30% рынка и платит агентам flat-комиссию на члена в месяц, уровень которой нам не виден. Совокупная комиссия при этом режется с $25 до $20 на члена в месяц; агенты могут увести книгу, а каждый ушедший член стоит $3,000 годовой премии ($250 × 12) против инсорсинговой базы затрат, которая при их уходе не сжимается.\n* **Структурный (Thompson — mutual).** Компания возвращает прибыль членам понижением премии следующего года. Поэтому переплата в $30,000,000 не «съедается маржой» — она выходит прямо из премий членов в следующем году, то есть бьёт ровно по той метрике, ради которой затеяна вся работа: минимизации стоимости обслуживания.",
+    "next": "1. Запросить настоящую цену на три работы — у самих General Agencies и минимум у одного внешнего провайдера. *Снимает главную неопределённость: $6,000,000 / $9,000,000 / $15,000,000 — это наша смета или рыночная цена.*\n2. Забенчмаркить фактическую flat-комиссию UHC на члена в месяц до того, как фиксировать flat-число агентов. *Снимает неопределённость уровня: книга даёт структуру UHC, но не её величину.*\n3. Прописать в договоре, что вознаграждение General Agency не индексируется к премии. *Снимает неопределённость по эскалации: куплена ли структура вместе с ней или без неё.*\n4. Только после этого — торг о конкретной точке ниже потолка. *До пунктов 1–3 переговорная позиция не имеет опоры: спорить о центах внутри котла бессмысленно, пока не установлено, что покупается.*",
+    "build": "```python\nfrom decimal import Decimal as D, ROUND_HALF_UP\n\ndef q(x, n=\"0.01\"):\n    return x.quantize(D(n), rounding=ROUND_HALF_UP)\n\nmembers   = D(\"500000\")\nmonths    = D(\"12\")\npmpm_now  = D(\"25\")\npmpm_new  = D(\"20\")\ncomm_rate = D(\"0.10\")\ntraining  = D(\"6000000\")\nappproc   = D(\"9000000\")\nperfmgmt  = D(\"15000000\")\nparties   = D(\"2\")\n\nmember_months = members * months\nassert member_months == D(\"6000000\")\n\ncomm_now = pmpm_now * member_months\nassert comm_now == D(\"150000000\")\n\npremium_pmpm = pmpm_now / comm_rate\nassert premium_pmpm == D(\"250\")\npremium_year = premium_pmpm * member_months\nassert premium_year == D(\"1500000000\")\nassert premium_year * comm_rate == comm_now\n\nga_naive = pmpm_new / parties\nassert ga_naive == D(\"10\")\nga_naive_year = ga_naive * member_months\nassert ga_naive_year == D(\"60000000\")\n\nwork = training + appproc + perfmgmt\nassert work == D(\"30000000\")\nceiling = work / member_months\nassert ceiling == D(\"5\")\nassert ga_naive == ceiling * D(\"2\")\n\noverpay = ga_naive_year - work\nassert overpay == D(\"30000000\")\n\ncomm_new = pmpm_new * member_months\nassert comm_new == D(\"120000000\")\nsaving = comm_now - comm_new\nassert saving == D(\"30000000\")\nassert overpay == saving\nassert q(saving / comm_now * D(\"100\")) == D(\"20.00\")\nassert q(pmpm_new / premium_pmpm * D(\"100\")) == D(\"8.00\")\nassert premium_pmpm * months == D(\"3000\")\n\ndef ceil_of(t, a, p):\n    return q((t + a + p) / member_months)\n\nbase   = ceil_of(training, appproc, perfmgmt)\nalone1 = ceil_of(training, appproc, appproc)\nalone2 = ceil_of(appproc,  appproc, perfmgmt)\nboth   = ceil_of(appproc,  appproc, appproc)\nassert (base, alone1, alone2, both) == (D(\"5.00\"), D(\"4.00\"), D(\"5.50\"), D(\"4.50\"))\nassert both - alone1 - alone2 + base == D(\"0.00\")\novers = []\nfor c in (base, alone1, alone2, both):\n    over = ga_naive_year - c * member_months\n    overs.append(over)\n    assert D(\"27000000\") <= over <= D(\"36000000\")\nassert q(ga_naive / alone2, \"0.1\") == D(\"1.8\") and ga_naive / alone1 == D(\"2.5\")\nprint(\"ALL OK\", base, alone1, alone2, both, [str(o) for o in overs])\n```\n\n**Провоцируемая ошибка** — кандидат принимает рамку «поделить $20», соглашается с 50/50 как с нейтральной стартовой позицией, читает $6,000,000 / $9,000,000 / $15,000,000 как заслугу подрядчика и не замечает, что эти же три строки задают потолок цены: $10 на члена в месяц — ровно двойная цена работы, а переплата в $30,000,000 в год равна всей экономии, ради которой реструктуризацию и затевали.\n\n---"
    },
    "checklist": {
-    "en": "Credit if ALL: (1) the recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right); (2) the decisive figure is named: profit gap $200M built, +91% relative to $220M, against deposit gap $7B built, +233% relative to $3B ($10B savings − $3B checking); (3) the naive reading is rejected explicitly, not merely avoided — checking wins on lifetime profit — $420,000,000 against $220,000,000 must be named and put aside; (4) at least two risks, one internal and one external, each carrying a figure from the record; (5) a next step that names what uncertainty it removes.",
-    "ru": "Засчитывать, если ВСЁ: (1) рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен); (2) названа решающая величина: разрыв прибыли $200M построено, +91% к $220M, против разрыва депозитов $7B построено, +233% к $3B ($10B savings − $3B checking); (3) наивное прочтение отвергнуто вслух, а не просто обойдено — checking выигрывает по lifetime profit — $420,000,000 против $220,000,000 обязано быть названо и отложено; (4) не меньше двух рисков, внутренний и внешний, каждый с цифрой из записи; (5) следующий шаг с указанием, какую неопределённость он снимает."
+    "en": "Three gates, all required. (1) The recommendation is stated FIRST, as an action with a subject (Minto — a build-up to the verdict fails this line even if the verdict is right). (2) The decisive figure is built, not asserted: the ceiling on what the General Agencies can be paid is what the three activities would cost Thompson to perform — $6,000,000 + $9,000,000 + $15,000,000 across 500,000 members x 12 months — and the note's $10 per member per month is twice it, $60,000,000 a year against $30,000,000 of work, an overpayment of $30,000,000. (3) The naive reading is rejected explicitly, not merely avoided — an even split of the $20 because both parties do real work must be named as the wrong frame and put aside: this is a price for a service, which has its own ceiling, not a pot to be divided between two claimants. Bonus, not required for credit: the $30,000,000 of excess is exactly the whole saving the restructure produces, $150,000,000 down to $120,000,000; the note's UHC argument is unsupported because only UHC's structure is known and not its level, while the real case for a flat fee is that 10% of premium escalates with Thompson's 12% medical cost inflation against the market's 10%; two risks, one internal and one external, each carrying a figure from the note; a next step that names the uncertainty it removes. Do not credit a bare \"$5\" with no derivation. Do not penalise a candidate who sets the General Agencies below the ceiling or who declines to insource — the ceiling is a maximum, not an instruction, and where the note leaves the negotiating point open, credit the test, not the chosen number.",
+    "ru": "Трое ворот, все обязательные. (1) Рекомендация названа ПЕРВОЙ, действием и с субъектом (Минто — подведение к выводу не засчитывается, даже если вывод верен). (2) Решающая величина ПОСТРОЕНА, а не объявлена: потолок оплаты General Agencies — это то, во что три работы обошлись бы Thompson самому, $6,000,000 + $9,000,000 + $15,000,000 на 500,000 членов × 12 месяцев, — и $10 на члена в месяц из записи вдвое выше него: $60,000,000 в год за работу на $30,000,000, переплата $30,000,000. (3) Наивное прочтение отвергнуто вслух, а не просто обойдено — «делим $20 пополам, потому что обе стороны делают настоящую работу» обязано быть названо как неверная рамка и отложено: решается цена услуги, у которой есть собственный потолок, а не делёж котла между двумя претендентами. Бонусом, для зачёта не обязательно: переплата $30,000,000 в точности равна всей экономии реструктуризации, $150,000,000 → $120,000,000; довод записи про UHC не подкреплён, потому что известна только структура UHC, но не её уровень, тогда как настоящий аргумент за flat в том, что 10% от премии растут вместе с премией, а та идёт за медицинской инфляцией Thompson в 12% против рыночных 10%; два риска, внутренний и внешний, каждый с цифрой из записи; следующий шаг с указанием, какую неопределённость он снимает. Не засчитывать голое «$5» без вывода. Не штрафовать кандидата, который ставит General Agencies ниже потолка или отказывается инсорсить: потолок — это максимум, а не указание, и там, где запись оставляет переговорную точку открытой, зачёт даётся за проверку, а не за выбранное число."
    },
    "reference": {
-    "en": "Build the savings product first — the deposit gap it delivers is $7 billion, and that is what has to outweigh a $200 million profit gap. On product economics checking wins: $280 per account across 1,500,000 accounts is $420,000,000 of lifetime profit against $110 across 2,000,000 accounts, or $220,000,000, for savings; the difference, $200,000,000, is what we give up, and it is a figure we build, not one the book prints. But the stated objective is lowering the cost of funds for the credit card portfolio, and on that metric savings generates $10 billion in deposits against $3 billion for checking — a $7 billion gap, again built, not printed. Since the unselected product launches the following year, we capture the checking profit one year later rather than forgo it. Risk: savings earns only $110 per account and lives 5 years against checking's 10, so the base must be re-acquired twice as often; risk: the $10 billion rests on $5,000 average balances at 2% paid to customers, and a rate move changes both the volume and its price. Next: quantify how many basis points $10 billion of deposits takes off the credit card portfolio's funding cost and test that saving against $200,000,000; and validate the $5,000 average balance assumption across 2,000,000 accounts before committing the IT build.\n\nOne base for all four numbers: Lifetime profit of each product as the record builds it: profit per account from the Exhibit 1 inputs, times the account base, checking held at 1,500,000 x $280 = $420,000,000. The count is the profit gap the non-financial objective has to outweigh, $ (checking lifetime profit minus savings lifetime profit). Lever 1 — average deposit behind a savings account, taken at the checking balance printed beside it: $5,000 → $2,000. Lever 2 — savings account base, taken at the checking base printed on the next line: 2,000,000 → 1,500,000. Base case 200,000,000; lever 1 alone 500,000,000; lever 2 alone 255,000,000; both together 480,000,000 (interaction −75,000,000). The shape of the answer survives — the decision turns on a stated non-financial objective and the candidate must price what that objective has to outweigh — but the $200,000,000 does not: re-running the record's own formula at the checking balance makes the savings account lose $40 per account, so the gap runs from $255,000,000 to $500,000,000 — from 27.5% above the base-case $200,000,000 to a factor of 2.5 of it, 150% above — and the $5,000 balance is validated before the basis-point calculation, not after.",
-    "ru": "Строить первым сберегательный продукт — разрыв по депозитам, который он даёт, составляет $7 миллиардов, и именно это должно перевесить разрыв в прибыли в $200 миллионов. По экономике продукта выигрывает текущий счёт: $280 на счёт по базе в 1,500,000 счетов дают $420,000,000 прибыли за срок жизни против $110 по 2,000,000 счетов, то есть $220,000,000, у сберегательного; разница, $200,000,000, — это то, от чего мы отказываемся, и это число мы строим сами, а не берём напечатанным из книги. Но заявленная цель — снизить стоимость фондирования портфеля кредитных карт, а по этой метрике сберегательный счёт даёт $10 миллиардов депозитов против $3 миллиардов у текущего — разрыв в $7 миллиардов, и он тоже построен, а не напечатан. Поскольку невыбранный продукт запускается на следующий год, прибыль текущего счёта мы получаем на год позже, а не теряем. Риск: сберегательный счёт приносит всего $110 на счёт и живёт 5 лет против 10 у текущего, поэтому базу приходится набирать заново вдвое чаще; риск: $10 миллиардов опираются на средние остатки в $5,000 при 2%, выплачиваемых клиентам, и движение ставки меняет и объём, и его цену. Дальше: посчитать, на сколько базисных пунктов $10 миллиардов депозитов снижают стоимость фондирования портфеля кредитных карт, и проверить эту экономию против $200,000,000; и подтвердить допущение о среднем остатке в $5,000 по 2,000,000 счетов, прежде чем запускать разработку ИТ.\n\nОдна база на все четыре числа: прибыль каждого продукта за срок жизни в том виде, как её строит запись: прибыль на счёт из входов Экзибита 1, умноженная на базу счетов; текущий взят как 1,500,000 x $280 = $420,000,000. Счёт — разрыв в прибыли, который должна перевесить нефинансовая цель, $ (прибыль текущего счёта за срок жизни минус прибыль сберегательного за срок жизни). Рычаг 1 — средний депозит, стоящий за сберегательным счётом, взятый по остатку текущего счёта, напечатанному рядом: $5,000 → $2,000. Рычаг 2 — база сберегательных счетов, взятая по базе текущих, напечатанной строкой ниже: 2,000,000 → 1,500,000. Базовый случай 200,000,000; только рычаг 1 — 500,000,000; только рычаг 2 — 255,000,000; оба вместе 480,000,000 (взаимодействие −75,000,000). Форма ответа переживает проверку — решение упирается в заявленную нефинансовую цель, и кандидат обязан оценить в деньгах то, что этой цели предстоит перевесить, — а вот $200,000,000 проверку не переживают: если прогнать собственную формулу записи по остатку текущего счёта, сберегательный счёт теряет $40 на счёт, и разрыв идёт от $255,000,000 до $500,000,000 — от 27.5% сверх базового случая в $200,000,000 до 2.5-кратной его величины, то есть на 150% выше, — а остаток в $5,000 подтверждают до расчёта базисных пунктов, а не после."
+    "en": "**[1] Verdict and the number that holds it.** *\"Do not open at $10 — cap the General Agencies at what those three activities cost us to run, and the note's own table sets that cap. Training $6,000,000, application processing $9,000,000 and performance management $15,000,000 is $30,000,000 of work a year, bought against 500,000 members over 12 months, or 6,000,000 member-months: the most that work can be worth to us is $5 per member per month. The note's $10 is exactly twice it. At $10 we pay $60,000,000 a year for $30,000,000 of work, and that $30,000,000 of excess is the entire saving the restructure was built to produce — total commission goes from $25 to $20 per member per month, $150,000,000 to $120,000,000, and the split as proposed hands every dollar of it straight back to the General Agencies. The $20 is not a pot to be divided between two claimants. It is a budget cap on two separate purchases, and one of them — a service we could perform ourselves — has a ceiling of its own that does not move when the pot moves.\"*\n\n**[2] What that changes, and what still has to be settled.** *\"Pay the General Agencies no more than $5 per member per month for training, application processing and performance management, and put the balance of the $20 into the agents' flat commission, which is where the selling incentive actually sits. Anything the General Agencies ask above that ceiling stops being a negotiation and becomes a decision to bring the three functions in-house, and we should say exactly that, with the number in hand. The note's own objection — that the cost table is an annual total answering a different question — is the thing to overturn first: divide it by the 500,000 members and 12 months the note prints two paragraphs above and it becomes a rate, on the same axis as the $20, and it is the only rate in the file derived from anything at all. Two corrections before we quote. The note credits the flat structure to UHC, but we know UHC's structure and not its level — its per-member-per-month figure is unknown, and the 12% against 10% is medical cost inflation, not commission, so it is not evidence about how distribution is priced. The case for flat is different and stronger: a commission set at 10% of premium rides premium upward every year, and our premium rides medical costs running 12% against the market's 10%; a flat fee severs that link. At today's $250 premium per member per month, $20 flat is 8% of premium — and it stays $20. And the ceiling is only as good as the three estimates behind it, which are ours and not quotes. Two risks go on the table with the recommendation: internally, the ceiling caps a price but does not instruct us to insource — taking the three functions in-house puts fixed cost against a member base of 500,000 that is not growing; externally, UHC holds 30% of this market and pays its agents a flat per-member-per-month commission at a level we cannot see, so agents can move the book, and every member lost costs $3,000 of annual premium. And Thompson is a mutual: the $30,000,000 does not come out of margin, it comes out of members' premiums next year. Next: put the three activities out for a real price, to the General Agencies and to at least one outside provider; benchmark UHC's actual agent commission per member per month before fixing the agents' flat number; and write the General Agency fee so that it is not indexed to premium, or the flat structure buys us nothing.\"*\n\nOne base for all four numbers: the three internal activity costs exactly as the note prints them — training $6,000,000, application processing $9,000,000, performance management $15,000,000 — set against the 500,000 members and 12 months the note also prints, that is 6,000,000 member-months. The count is the ceiling on what Thompson should pay the General Agencies, $ per member per month. Lever 1 — performance management, the largest line, taken at the application processing line printed beside it: $15,000,000 -> $9,000,000. Lever 2 — training, taken at that same application processing line: $6,000,000 -> $9,000,000. Base case 5.00; lever 1 alone 4.00; lever 2 alone 5.50; both together 4.50 (interaction 0.00). What survives: everything the verdict rests on. The ceiling is a sum over a fixed base, so it is additive in the line items and the two levers do not interact at all — the interaction term is exactly zero. Across the full range the ceiling runs from $4.00 to $5.50 per member per month, the note's $10 is between 1.8 and 2.5 times it in every case, and the annual overpayment runs from $27,000,000 to $36,000,000 against the note's $60,000,000. What does not survive: quoting $5.00 as a price. It is a ceiling built on three internal estimates, and moving one line to the size of another moves it 20% down or 10% up — which is why the next step is a real quote, not a finer division of the pot.\n\nSource: Kellogg-2012, Thompson Healthcare, pp. 212-218",
+    "ru": "**[1] Вердикт и число, которое его держит.** *«Не открывайтесь с $10 — ограничьте General Agencies тем, во что эти три работы обходятся нам самим, и потолок задаёт собственная таблица записи. Training $6,000,000, application processing $9,000,000 и performance management $15,000,000 — это $30,000,000 работы в год, покупаемой против 500,000 членов за 12 месяцев, то есть против 6,000,000 член-месяцев: больше $5 на члена в месяц эта работа стоить для нас не может. $10 из записи — ровно вдвое больше. При $10 мы платим $60,000,000 в год за работу на $30,000,000, и эти $30,000,000 превышения — вся экономия, ради которой реструктуризацию и строили: совокупная комиссия идёт с $25 до $20 на члена в месяц, со $150,000,000 до $120,000,000, а предложенный делёж возвращает General Agencies каждый доллар этой экономии. $20 — не котёл, подлежащий разделу между двумя претендентами. Это потолок бюджета на две разные покупки, и у одной из них — услуги, которую мы можем выполнить сами, — есть собственный потолок, не двигающийся вместе с котлом.»*\n\n**[2] Что это меняет и что ещё предстоит закрыть.** *«Платите General Agencies не больше $5 на члена в месяц за training, application processing и performance management, а остаток $20 направьте во flat-комиссию агентов — именно там сидит стимул продавать. Всё, что General Agencies просят сверх потолка, перестаёт быть переговорами и становится решением забрать три функции внутрь, и это надо произнести вслух, держа число в руках. Сначала опровергается собственное возражение записи — что таблица затрат это годовой итог из другого вопроса: разделите её на 500,000 членов и 12 месяцев, напечатанные в записи двумя абзацами выше, и это ставка, стоящая на той же оси, что и $20, и единственная ставка в файле, которая вообще из чего-то выведена. Две поправки до того, как называть цену. Запись ставит flat-структуру в заслугу UHC, но нам известна структура UHC, а не её уровень — цифра на члена в месяц у них неизвестна, а 12% против 10% это медицинская инфляция, а не комиссия, и доводом о цене дистрибуции быть не может. Аргумент за flat другой и более сильный: комиссия в 10% от премии растёт вместе с премией каждый год, а наша премия идёт за медицинскими затратами, бежавшими на 12% против рыночных 10%; flat-платёж рвёт эту связку. При сегодняшней премии $250 на члена в месяц $20 flat — это 8% премии, и они остаются $20. И потолок надёжен ровно настолько, насколько надёжны три сметы за ним, а это наши сметы, а не полученные цены. Два риска кладутся на стол вместе с рекомендацией: внутренний — потолок ограничивает цену, но не предписывает инсорсинг: забрав три функции внутрь, мы ставим постоянные затраты против базы в 500,000 членов, которая не растёт; внешний — UHC держит 30% рынка и платит агентам flat-комиссию на невидимом нам уровне, поэтому агенты могут увести книгу, а каждый ушедший член стоит $3,000 годовой премии. И Thompson — mutual: $30,000,000 выходят не из маржи, а из премий членов следующего года. Дальше: запросить настоящую цену на три работы — у самих General Agencies и минимум у одного внешнего провайдера; забенчмаркить фактическую комиссию агентов у UHC на члена в месяц до фиксации flat-числа агентов; и прописать вознаграждение General Agency так, чтобы оно не индексировалось к премии, иначе flat-структура не покупает ничего.»*\n\nОдна база на все четыре числа: три строки внутренних затрат ровно так, как их печатает запись, — training $6,000,000, application processing $9,000,000, performance management $15,000,000, — поставленные против 500,000 членов и 12 месяцев, которые запись печатает там же, то есть против 6,000,000 член-месяцев. Счёт — потолок того, сколько Thompson должен платить General Agencies, $ на члена в месяц. Рычаг 1 — performance management, самая крупная строка, взятая по строке application processing, напечатанной рядом: $15,000,000 -> $9,000,000. Рычаг 2 — training, взятая по той же строке application processing: $6,000,000 -> $9,000,000. Базовый случай 5.00; рычаг 1 в одиночку 4.00; рычаг 2 в одиночку 5.50; оба вместе 4.50 (взаимодействие 0.00). Что переживает: всё, на чём стоит вердикт. Потолок — это сумма, делённая на фиксированную базу, поэтому он аддитивен по строкам, и два рычага не взаимодействуют вовсе: член взаимодействия ровно ноль. По всему диапазону потолок идёт от $4.00 до $5.50 на члена в месяц, $10 из записи в каждом случае выше него в 1.8–2.5 раза, а годовая переплата идёт от $27,000,000 до $36,000,000 против $60,000,000 записи. Что не переживает: подача $5.00 как цены. Это потолок, построенный на трёх внутренних сметах, и перенос одной строки на размер другой двигает его на 20% вниз или на 10% вверх — поэтому следующий шаг это настоящая котировка, а не более тонкий делёж котла.\n\nSource: Kellogg-2012, Thompson Healthcare, pp. 212-218"
    },
-   "anchor_metric": "цель запуска онлайн-банка",
-   "family_h25": "F5",
+   "anchor_metric": "$20 на члена в месяц — весь котёл на обе стороны",
+   "family_h25": "F1",
    "family_src": "тело",
    "family_conf": "высокая",
-   "family_note": "круг 103: прибыль на счёт и объём депозитов — обе меры в числах и обе защитимы, выбор продукта решает объявленная цель удешевить фондирование: разрыв $7B против $200M",
+   "family_note": "F1: решение принимается не по той базе. Вопрос по существу — цена услуги, и решает её собственная себестоимость трёх работ, приведённая к базе решения: $6,000,000 + $9,000,000 + $15,000,000 на 500,000 × 12 = 6,000,000 член-месяцев. Запись решает по другой базе — по котлу $20, зафиксированному вверх по цепочке, — и делит его пополам. Величина, по которой решают, в записи напечатана, но на ось решения не выведена: три строки стоят годовыми итогами внутренней себестоимости этих функций, котёл — ставкой на члена в месяц, и запись прямо объявляет, что первое во второе не переводит («a total for the year rather than a rate per member per month»). Отвод F4: ограничение не спрятано — оно напечатано и отдельно прокомментировано, значит «неназванного ограничения» здесь нет; ошибка в роли величины, а не в её отсутствии. Отвод F6: рамка задним числом не меняется — она неверна с самого начала и приходит уже готовой сверху, а F6 по словарю про перерамливание постфактум. Метка увеличивает объявленный долг корпуса по F1; поставлена по телу, не по коридору.",
    "levers": {
-    "base": "Lifetime profit of each product as the record builds it: profit per account from the Exhibit 1 inputs, times the account base, checking held at 1,500,000 x $280 = $420,000,000",
-    "metric": "the profit gap the non-financial objective has to outweigh, $ (checking lifetime profit minus savings lifetime profit)",
+    "base": "the three internal activity costs exactly as the note prints them - training $6,000,000, application processing $9,000,000, performance management $15,000,000 - set against the 500,000 members and 12 months the note also prints, that is 6,000,000 member-months",
+    "metric": "the ceiling on what Thompson should pay the General Agencies, $ per member per month",
     "lever1": {
-     "name": "average deposit behind a savings account, taken at the checking balance printed beside it",
-     "from": 5000,
-     "to": 2000,
+     "name": "performance management, the largest line, taken at the application processing line printed beside it",
+     "from": 15000000,
+     "to": 9000000,
      "unit": "$",
-     "src": "exhibit.parts[0].lines[9]",
+     "src": "exhibit.parts[1].rows[2][1]",
      "exchange": true,
-     "quote_from": "Average Deposits $2,000 / $5,000",
-     "quote_to": "Average Deposits $2,000 / $5,000"
+     "quote_from": "Performance management || $15,000,000",
+     "quote_to": "Application processing || $9,000,000"
     },
     "lever2": {
-     "name": "savings account base, taken at the checking base printed on the next line",
-     "from": 2000000,
-     "to": 1500000,
-     "unit": "",
-     "src": "exhibit.parts[0].lines[5]",
+     "name": "training, taken at that same application processing line",
+     "from": 6000000,
+     "to": 9000000,
+     "unit": "$",
+     "src": "exhibit.parts[1].rows[0][1]",
      "exchange": true,
-     "quote_from": "Total Savings Account Lifetime Profit: 2,000,000 * $110 = $220,000,000",
-     "quote_to": "Total Checking Account Lifetime Profit: 1,500,000 * $280 = $420,000,000"
+     "quote_from": "Training || $6,000,000",
+     "quote_to": "Application processing || $9,000,000"
     },
     "result": {
-     "base_case": 200000000,
-     "alone1": 500000000,
-     "alone2": 255000000,
-     "both": 480000000,
-     "interaction": -75000000
+     "base_case": 5.0,
+     "alone1": 4.0,
+     "alone2": 5.5,
+     "both": 4.5,
+     "interaction": 0.0
     },
-    "verdict": "The shape of the answer survives — the decision turns on a stated non-financial objective and the candidate must price what that objective has to outweigh — but the $200,000,000 does not: re-running the record's own formula at the checking balance makes the savings account lose $40 per account, so the gap runs from $255,000,000 to $500,000,000 and the $5,000 balance is validated before the basis-point calculation, not after."
+    "verdict": "What survives: everything the verdict rests on. The ceiling is a sum over a fixed base, so it is additive in the line items and the two levers do not interact at all - the interaction term is exactly zero. Across the full range the ceiling runs from $4.00 to $5.50 per member per month, the note's $10 is between 1.8 and 2.5 times it in every case, and the annual overpayment runs from $27,000,000 to $36,000,000 against the note's $60,000,000. What does not survive: quoting $5.00 as a price - it is a ceiling built on three internal estimates, and moving one line to the size of another moves it 20% down or 10% up, which is why the next step is a real quote, not a finer division of the pot."
    },
    "mehanizm": {
-    "naive": "выбирает продукт по прибыли на счёт и по её сумме",
-    "correct": "выбирает продукт по объявленной цели — объёму привлекаемых депозитов, удешевляющих фондирование",
-    "why": "прибыльность продукта не совпадает с целью, ради которой продукт запускается",
-    "code": "MECH-67-критерий-не-из-цели",
-    "code2": []
+    "naive": "делит фиксированный котёл между двумя сторонами, а объём работ посредника читает как право на бо́льшую долю",
+    "correct": "ставит цену посредника по своему потолку — во что те же работы обошлись бы, если делать их самим",
+    "why": "цена покупной услуги задаётся собственной альтернативой, а не размером котла, случайно оказавшегося на столе: та же строка затрат, которая выглядит заслугой подрядчика, и есть предел того, сколько он может стоить. Ближайший сосед по библиотеке — SY-035 «The Tablet And The Sponge» (MECH-89-распределение-созданной-стоимости): там наблюдение «весь прирост достался второй стороне» и есть вердикт. Здесь такое же по форме наблюдение — $30,000,000 переплаты в точности равны всей экономии реструктуризации, $150,000,000 → $120,000,000 — стоит не вердиктом, а проверкой поверх него. Различающий вопрос: что чинит ответ — делёж уже созданной стоимости или базу, по которой назначается цена? В SY-035 пересчитывают распределение постфактум; здесь цену ставят против собственной себестоимости, после чего делить на переговорах оказывается нечего.",
+    "code": "MECH-307-своя-себестоимость-не-стала-потолком-цены",
+    "code2": [
+     "MECH-89-распределение-созданной-стоимости"
+    ]
    },
-   "twin_of": "SY-002"
+   "twin_of": null
   },
   {
    "id": "SY-017",
@@ -5832,7 +5868,7 @@
      "MECH-22-горизонт-накопления"
     ]
    },
-   "twin_of": "SY-041"
+   "twin_of": null
   },
   {
    "id": "SY-038",
@@ -6169,12 +6205,12 @@
   },
   {
    "id": "SY-041",
-   "title": "A Billion Short",
-   "company": "Bharat Dak Bima",
-   "industry": "Public insurance distribution",
+   "title": "Seven More Sites",
+   "company": "",
+   "industry": "Other (Non-Profit)",
    "difficulty": "Medium",
    "clean": false,
-   "focus": "S16(a)",
+   "focus": "",
    "scaffold": "L2",
    "time": "7 min",
    "type": "Synthesis",
@@ -6182,51 +6218,56 @@
    "family_h25": "F1",
    "family_src": "тело",
    "family_conf": "высокая",
-   "family_note": "круг 34, ревью: заявлялась F8 и не подтвердилась — наивный и decoy ведут к «не запускать», верный к «запускать», это разворот. Реальная механика — тестом объявлена не та величина, по которой считает записка: подмена базы решения.",
-   "anchor_metric": "programme surplus, $B",
-   "prompt": "A programme office has been asked whether the state should distribute insurance through the postal network to the two underserved social classes. An analyst has already worked the numbers and left the working note below, together with the brief he was given. The steering committee meets in ten minutes and wants a verdict from you.\n\n**Give your answer in two fields: conclusion first, then everything else.**",
+   "family_note": "F1 по телу. Решающее движение кандидата — перевести напечатанную удельную ставку ($115.67K на площадку) обратно в деньги и решать по приросту счёта ($1,000K → $1,735K), а не по ставке: напечатанная удельная величина не та, по которой принимается решение. Пара рычагов это и измеряет — смена одного знаменателя двигает ставку на $101.21, а снятие $30K реальных затрат на $2.00. Альтернативное чтение — F4 (неназванное ограничение: масштабируется ли вместе с площадками возмещение, которое округа и агентства штата уже платят за деятельность). Оно верно как «так что?», но вердикт не решает: он стоит уже на приросте в $735K и на $74.67K облегчения прежних восьми площадок, даже если о плательщике не говорить вовсе. Долг корпуса по F1 (26.7% при потолке 20%) объявляю вслух: метка поставлена по телу и не подогнана; F4 и F9 рассматривались и ни одна из них не описывает первое движение кандидата.",
+   "anchor_metric": "allocated central office cost per site, $K",
+   "prompt": "A non-profit that runs after-school centres for at-risk youth is about to open seven new sites. An analyst has worked the central-cost table and the district data and left the working note below. The executive director signs the expansion off this afternoon and wants your verdict on the note before she does.\n\n**Give your answer in two fields: conclusion first, then everything else.**",
    "exhibit": {
-    "title": "Analyst's working note — postal insurance programme",
+    "title": "Analyst's working note — seven new sites",
     "parts": [
      {
       "type": "text",
       "lines": [
-       "**Block A — size of the two target classes**"
+       "**Block A — the brief as issued, attached for the file**",
+       "It is 2003. The client offers after school programming focused on supporting at-risk youth through high school, enabling them to enter and succeed in college. The goals for expansion are to most efficiently serve students at 7 new sites, while raising their national profile; we have been hired to help vet potential sites to maximise their social and financial impact.",
+       "Client facts I was given: \"at-risk\" youth are those who, due to behaviour or grades, are at risk of dropping out of high school or have already done so. The client operates local centers attached to high schools with full time staff, and offers tutoring and test prep support as well as connections to internships and career opportunities. All centers are in Massachusetts or southern New Hampshire. The client operates 8 sites with 2,500 youth served. School districts and state agencies reimburse the client for activities. The client has a high national profile and has received calls from high school systems in Florida and California offering to pay for the client to establish centers in their districts; it has declined these offers to date."
+      ],
+      "blank_after": 1
+     },
+     {
+      "type": "text",
+      "lines": [
+       "**Block B — central office costs, as the client asked me to treat them**",
+       "The client allocates central office costs to each wholly owned site on a uniform basis: total central office costs divided by the number of sites, today $1,000K / 8. For this analysis central costs do not vary depending on the method selected for expansion. Figures in $K."
       ],
       "blank_before": 1
      },
      {
       "type": "table",
       "header": [
-       "Segment",
-       "Annual household income",
-       "Households, M",
-       "% of income spent on insurance"
+       "Central office line",
+       "Current",
+       "Additional cost from the expansion"
       ],
       "rows": [
        [
-        "Globals",
-        "> $40K",
-        "12",
-        "2%"
+        "Staff",
+        "$750K",
+        "+$600K"
        ],
        [
-        "Consumers",
-        "$20K – 40K",
-        "38",
-        "1.5%"
+        "IT",
+        "$110K",
+        "+$80K"
        ],
        [
-        "Aspirers",
-        "$10K – 20K",
-        "80",
-        "1.5%"
+        "Office expenses",
+        "$115K",
+        "No change"
        ],
        [
-        "Strugglers",
-        "< $10K",
-        "120",
-        "1%"
+        "Training and support",
+        "$25K",
+        "+$55K"
        ]
       ],
       "blank_after": 1
@@ -6234,100 +6275,142 @@
      {
       "type": "text",
       "lines": [
-       "Midpoint income taken as representative. Aspirers: $15K × 80M × 1.5% = **$18B**. Strugglers: $5K × 120M × 1% = **$6B**. Two classes together = **$24B**.",
+       "Total central office costs after the expansion: **$1,735K**. Sites after the expansion: **15**.",
        "",
-       "**Block B — what we would actually capture in three years**",
-       "66% of Strugglers and 33% of Aspirers: 0.66 × $6B + 0.33 × $18B ≈ $4B + $6B = **$10B** of premium.",
-       "",
-       "**Block C — what it costs**",
-       "The network has 150,000 post offices; two-thirds of them can hire one agent — 100,000 agents.",
-       "Agent payroll $15,000 each = **$1.5B**. Agent commission 10% of premium = **$1.0B**. Operating cost $5,000 per post office = **$0.5B**. Claims paid out at 80% of premium = **$8.0B**.",
-       "Total cost = 1.5 + 1.0 + 0.5 + 8.0 = **$11.0B**.",
-       "",
-       "**Block D — where I got to**",
-       "Premium in $10.0B, cost out $11.0B. The programme runs a **$1.0B deficit** in its first three years. I have not been able to find a version of the rollout that closes it: dropping agents cuts reach faster than it cuts cost, and the claims ratio is the actuarial floor, not a lever.",
-       "I stopped here and did not write a recommendation."
+       "**Block C — where I got to on the money**",
+       "Cost per site today: $1,000K / 8 = **$125K**. Cost per site after: $1,735K / 15 = **$115.67K**. Each site carries **$9.33K** less than it does today.",
+       "The eight sites we already run are better off, and the seven new ones come in below what a site costs the centre now. I read the financial side as settled — the structure absorbs the growth — and moved on to where the seven sites should go."
       ],
       "blank_before": 1
      },
      {
       "type": "text",
       "lines": [
-       "**Block E — the brief I was issued, attached for the file**",
-       "\"Primary objective is not to monetize insurance offerings, but instead to improve quality of life by providing insurance-based safety nets. However, profitability is seen as an important metric.\"",
-       "Insurance here covers both life and non-life — health, crop and so on."
+       "**Block D — where the seven sites should go**",
+       "Representative school districts, built from the district data the client provided: total enrolment across each district's high schools, dropouts and enrolled students with a GPA of D or lower in 2002, carried to 2003 by the district's annual change in at-risk youth."
+      ],
+      "blank_before": 1
+     },
+     {
+      "type": "table",
+      "header": [
+       "District",
+       "Total enrolment",
+       "Total at risk, 2002",
+       "Total at risk, 2003",
+       "Total at risk % of enrolled students"
+      ],
+      "rows": [
+       [
+        "Worcester, MA",
+        "3,000",
+        "1,530",
+        "1,377",
+        "45.9%"
+       ],
+       [
+        "Nashua, NH",
+        "1,600",
+        "700",
+        "665",
+        "41.6%"
+       ],
+       [
+        "Barrington, CT",
+        "800",
+        "320",
+        "352",
+        "44.0%"
+       ],
+       [
+        "San Mateo, CA",
+        "5,200",
+        "1,664",
+        "1,681",
+        "32.3%"
+       ]
       ],
       "blank_after": 1
+     },
+     {
+      "type": "text",
+      "lines": [
+       "On the client's own screen — density of at-risk youth — the districts rank Worcester 45.9%, Barrington 44.0%, Nashua 41.6%, San Mateo 32.3%. I would rank candidate districts on this measure and place the seven sites in the highest-density districts we can reach.",
+       "That is as far as I took it."
+      ],
+      "blank_before": 1
      }
     ]
    },
    "key": {
-    "naive": "**Naive path — the honest first answer of a clever person.** Read Block D as the answer: a $1.0B hole with no closing move, therefore do not launch, or launch only after the economics are fixed. Every number on that path is right. The arithmetic is not where this slot is decided.",
-    "decoy": "**The tempting second branch.** Redesign for break-even before rollout — fewer post offices, lower commission, tighter underwriting. It reads as the responsible middle. It is the same refusal wearing a plan: every lever that closes $1.0B removes coverage, and coverage is the objective.",
-    "support": "**What decides it, and all of it is in Block E.** The brief names the objective in its first sentence — safety nets, not monetisation — and demotes profitability to \"an important metric\", not the test. Against that objective the programme delivers $10.0B of premium-equivalent protection to the two classes with the least of it, at a net public cost of $1.0B. **[ПОСТРОЕНО, книга не печатает]** on the note's own rounded figures that is a subsidy of 10.0% of the protection delivered ($1.0B ÷ $10.0B); on the unrounded chain it is 10.2%. The verdict does not turn on a better number; it turns on which number was ever the test.",
-    "risks": "Internal: the 80% claims ratio is an assumption, and a 5 pp move is **[ПОСТРОЕНО]** ±$0.5B on a $1.0B deficit — the figure the committee is being asked to accept is only as firm as that ratio. External: the book's own two — excessive load on the medical system, and moral hazard once coverage is free at the point of sale.",
-    "next": "Name the $1.0B as a budgeted public-health line before launch, not as an overrun found later. Test whether a larger captured share of the same two classes narrows it, and price-test programmes that widen access without adding cost."
+    "naive": "**Naive path — the honest first answer of a clever person.** Fill in the central-cost table, see the allocation per site fall from $125K to $115.67K, and read that as the growth being absorbed: the eight sites already running are relieved of $9.33K each, and the seven new ones come in below what a site costs the centre today. The financial side is declared settled and the remaining minutes go to geography. Every figure on that path is right, the book itself rewards spotting that the per-site allocation must fall, and the note's geography move is right too. That is what makes the path honest: the only thing wrong with the note is the one sentence that turns a division into a financial case for growth. The slot is not decided in the arithmetic.",
+    "decoy": "**The tempting second branch.** Fight the mission ranking — Worcester at 45.9% against Barrington at 44.0%, or the total at-risk count, where San Mateo's 1,681 is the largest of the four while its density is the smallest. Block D is the longer, richer-looking half of the note and it invites exactly that fight. It is a fight the note is not losing: density of at-risk youth is the client's own screen, and every reordering of those four rows leaves the money question precisely where the analyst left it — unasked.",
+    "support": "**What decides it.** The note's geography answer is not in dispute and must not be reordered to make room for a finding; what does not stand is the sentence before it. The per-site line fell because its denominator grew, not because anyone spent less: central spend goes from $1,000K to $1,735K — **[ПОСТРОЕНО — точные доли против книжных округлённых; книга печатает обе на стр. 146, блок Notes to interviewer к Question 2: 74% и 88%]** an increase of $735K a year, +73.5%, against +87.5% more sites. Carried back into money, the relief the note celebrates is $125K − $115.67K = **[ПОСТРОЕНО, и это единственное построенное число видимого поля: $9.33K книга не печатает, его выводит сам аналитик в блоке C]** $9.33K on each of the eight sites that existed before, **[ПОСТРОЕНО]** $74.67K a year in all — 10.2% of the $735K being committed. Two bases, and both are stated rather than swapped: on the client's allocation base the seven new sites are charged 7 × $115.67K = **[ПОСТРОЕНО]** $809.67K, which is the $735K they add plus the $74.67K lifted off the existing eight, and those eight now carry 8 × $115.67K = $925.33K against $1,000K today, $925.33K + $809.67K = $1,735K; on the increment base a new site adds **[ПОСТРОЕНО]** $735K / 7 = $105K. Neither base is a payment. The payer is named — Block A prints that school districts and state agencies reimburse the client for activities — and what the note never asks is whether that reimbursement scales with sites and whether it carries central support at fifteen: the exhibit has no revenue line and no site-level cost line. The scale benefit itself is real, the book's own solution says so, and a candidate who keeps it is right to.",
+    "risks": "Internal: the $735K has to come from the states where the client already operates, and the book's own screen names \"might hit funding limits\" as the con of growing beside existing sites (p. 147, Question 4, illustrative chart) — the relationships that make funding easy are the ones closest to their ceiling. External: the con the same chart names for a new state, \"districts / states might not fund model\" — which is why the Florida and California calls, which offered to pay for establishing centers, buy entry rather than a recurring central line.",
+    "next": "Put one question to the Massachusetts and New Hampshire districts and state agencies before the seven sites are staffed: does the reimbursement they already pay for activities scale with sites, does it carry central support at fifteen, and at what ceiling. Then price a site rather than a centre — the exhibit has no site-level cost and no revenue, so the $105K of marginal central cost is only part of what a new site must recover: at the client's current 2,500 youth across 8 sites, seven sites at the same rate serve **[ПОСТРОЕНО]** 2,187.5 youth and the increment alone is $336 per youth. Ranking the in-footprint districts stays where the note left it, on the density screen."
    },
    "checklist": {
     "en": [
-     "Minto: the first sentence is the verdict itself — an action with a subject (\"the government should proceed\"). A correct verdict that arrives after the facts fails this line.",
-     "States that the objective in Block E, not the surplus in Block D, is the test.",
-     "Names the $1.0B deficit out loud rather than avoiding it — the answer is that it is a price, not that it is absent.",
-     "Uses at least two figures from the note: $10.0B captured and $11.0B cost, or the $24B market against them.",
-     "Gives one internal and one external risk.",
-     "Does not invent a lever that closes the gap — $1.0B, 10.0% of the $10.0B delivered; the note already ruled the obvious ones out."
+     "REQUIRED — Minto: the first sentence is the verdict itself, an action with a subject. A correct verdict that arrives after the facts fails this line.",
+     "REQUIRED — Carries the per-site line back into money and sizes it: central spend rises from $1,000K to $1,735K, an increase of $735K a year, and the fall to $115.67K is a division, not a saving. Naming the $74.67K of relief across the eight existing sites (about a tenth of the $735K), or the $105K of marginal central cost per new site, meets this line at full strength.",
+     "REQUIRED — Does not let the cost work carry the site decision, and does not reorder Block D to make room for a finding: the site choice is settled on the mission screen, the cost exhibit holding one value for the whole estate and not a single per-district line. A candidate who says the allocation per site should fall, that the client benefits financially from scale, and that the financial analysis does not indicate a geography has met this line.",
+     "BONUS — Keeps the scale benefit as real. Refusing the expansion because the bill grew is the mirror error and does not earn this line; the client does benefit financially from scale.",
+     "BONUS — Names the real open question rather than an absent payer: the payer is printed in Block A — school districts and state agencies reimburse the client for activities — and what is unknown is whether that reimbursement scales with sites and carries central support at fifteen.",
+     "BONUS — One internal and one external risk, each carrying a figure or a named constraint from the record.",
+     "BONUS — A next step that names the uncertainty it removes."
     ],
     "ru": [
-     "Минто: первое предложение — сам вердикт, действием и с субъектом. Верный вывод, приехавший после фактов, не засчитывается.",
-     "Сказано, что тестом является цель из блока E, а не сальдо из блока D.",
-     "Дефицит $1.0B назван вслух: ответ в том, что это цена, а не в том, что его нет.",
-     "Использованы минимум две величины записи: $10.0B захвата и $11.0B издержек.",
-     "Назван один внутренний и один внешний риск.",
-     "Не выдуман рычаг, закрывающий дыру — записка уже перебрала очевидные."
+     "ОБЯЗАТЕЛЬНО — Минто: первое предложение есть сам вердикт, действием и с субъектом. Верный вывод, приехавший после фактов, эту строку не проходит.",
+     "ОБЯЗАТЕЛЬНО — Удельная строка переведена обратно в деньги и измерена: центральные расходы растут с $1,000K до $1,735K, прирост $735K в год, а падение до $115.67K — это деление, а не экономия. Названные $74.67K облегчения на восьми прежних площадках (около десятой части от $735K) либо $105K приростного центрального расхода новой площадки закрывают эту строку в полную силу.",
+     "ОБЯЗАТЕЛЬНО — Затратная работа не тащит решение о площадках, и блок D не переупорядочен ради находки: выбор площадок решается миссионным отбором, поскольку затратный экзибит держит одну величину на всю сеть и ни одной строки по округам. Кандидат, сказавший, что разнесение на площадку должно падать, что клиент финансово выигрывает от масштаба и что финансовый анализ географию не указывает, эту строку закрыл.",
+     "БОНУС — Выигрыш от масштаба сохранён как настоящий. Отказ от расширения на том основании, что счёт вырос, — зеркальная ошибка и эту строку не засчитывает.",
+     "БОНУС — Назван настоящий открытый вопрос, а не отсутствующий плательщик: плательщик напечатан в блоке A — школьные округа и агентства штата возмещают клиенту деятельность, — а неизвестно то, масштабируется ли это возмещение вместе с площадками и несёт ли оно центральную поддержку при пятнадцати.",
+     "БОНУС — Один внутренний и один внешний риск, каждый с цифрой или названным ограничением из записи.",
+     "БОНУС — Следующий шаг с указанием, какую неопределённость он снимает."
     ]
    },
    "reference": {
-    "en": "| field | text |\n|---|---|\n| **conclusion** | **The government should proceed with the postal insurance rollout as scoped.** |\n| **the rest** | The brief makes safety-net coverage the objective and profitability only an important metric, so the $1.0B gap is the price of the objective, not evidence against it. On the numbers the programme reaches the two least-covered classes with **$10.0B** of premium against **$11.0B** of cost, and every lever that closes the gap — fewer post offices, lower commission, tighter underwriting — removes the coverage that is the point. **[BUILT — the book does not print it]** the deficit is 10.0% of the protection delivered on the note's rounded figures, 10.2% unrounded. Risks: internally the 80% claims ratio is an assumption and 5 pp of it is ±$0.5B, which is half the deficit; externally the load on the medical system and moral hazard. Next: carry the $1.0B as a budgeted public-health line rather than an overrun, and test whether a larger captured share of the same two classes narrows it. |\n\n**Source:** `Wharton Casebook 23-24`, Case 13 The Claim Game, pp. 151–158 — prompt block, Additional Information block, Exhibit A, Math blocks, Recommendation block.\n\nOne base for all four numbers: the analyst's own three-year build, kept to his rounding: midpoint income times households times the willingness rate, then the captured share of each class rounded to the whole $B exactly as Block B prints it (0.66 × $6B ≈ $4B, 0.33 × $18B ≈ $6B). The cost stack is the same throughout - $1.5B payroll plus $0.5B operating fixed, commission at 10% of premium and claims at 80% of premium - so the programme result is 10% of captured premium less $2.0B, and the base case reconciles to the printed $1.0B deficit. Neither move below touches the claims ratio or the commission: the record prints a single value for each and no second. The count is the three-year programme surplus, captured premium less total cost, in $. Lever 1 — the share of income Aspirers spend on insurance, at the rate Globals already spend: 1.5% → 2%. Lever 2 — the share of income Strugglers spend on insurance, at the rate Aspirers already spend: 1% → 1.5%. Base case −1,000,000,000; lever 1 alone −800,000,000; lever 2 alone −800,000,000; both together −600,000,000 (no interaction term). Half a point of willingness is worth $200,000,000 of the gap on either class - Aspirers at the 2% Globals already spend and Strugglers at the 1.5% Aspirers already spend each lift captured premium from $10B to $12B - and both together, at $14B of captured premium, still leave the programme $600,000,000 short, with no interaction term to hope for: each rate moves one class only and the surplus is 10% of captured premium less a fixed $2.0B, so the two moves add by construction. What does not survive is any claim that the shortfall closes on the demand side, because Block C spends 90 cents of every premium dollar - 80% on claims and 10% on commission - before the $2.0B payroll and operating stack is paid. What survives is the recommendation itself: proceed as scoped and carry the gap as a budgeted public-health line, because the test is the objective printed in Block E, not the surplus in Block D. Scope: the pair measured here is the two willingness rates of the two target classes; the claims ratio and the commission are named in the base as held, each at the single value the record prints for it, and this field does not measure them.",
-    "ru": "| поле | текст |\n|---|---|\n| **вывод** | **Правительству следует провести развёртывание почтового страхования в заданном объёме.** |\n| **остальное** | Бриф делает целью покрытие страховочной сетью, а прибыльность — лишь важной метрикой, поэтому разрыв в $1.0B — это цена цели, а не довод против неё. По числам программа охватывает два наименее покрытых класса с **$10.0B** премии против **$11.0B** затрат, и каждый рычаг, который закрывает разрыв, — меньше почтовых отделений, ниже комиссия, жёстче андеррайтинг, — убирает то самое покрытие, ради которого всё и делается. **[BUILT — the book does not print it]** дефицит равен 10.0% от предоставленной защиты на округлённых цифрах записки и 10.2% без округления. Риски. Внутренний: коэффициент выплат 80% — это допущение, и 5 п.п. от него дают ±$0.5B, то есть половину дефицита. Внешний: нагрузка на медицинскую систему и моральный риск. Следующий шаг: нести $1.0B как заложенную в бюджет строку общественного здравоохранения, а не как перерасход, и проверить, сужает ли его более крупная захваченная доля тех же двух классов. |\n\n**Источник:** `Wharton Casebook 23-24`, Case 13 The Claim Game, pp. 151–158 — блок prompt, блок Additional Information, Exhibit A, блоки Math, блок Recommendation.\n\nОдна база для всех четырёх чисел: собственная трёхлетняя сборка аналитика, сохранённая в его округлении: срединный доход, умноженный на домохозяйства и на ставку готовности платить, затем захваченная доля каждого класса, округлённая до целых $B ровно так, как её печатает Block B (0.66 × $6B ≈ $4B, 0.33 × $18B ≈ $6B). Стек затрат везде один и тот же — $1.5B фонда оплаты труда плюс $0.5B постоянных операционных, комиссия 10% премии и выплаты 80% премии, — поэтому результат программы есть 10% захваченной премии минус $2.0B, и базовый случай сходится с напечатанным дефицитом в $1.0B. Ни один из сдвигов ниже не трогает ни коэффициент выплат, ни комиссию: запись печатает по одному значению для каждого и никакого второго. Счёт — это трёхлетний профицит программы, захваченная премия минус полные затраты, в $. Рычаг 1 — доля дохода, которую Aspirers тратят на страхование, по ставке, которую уже тратят Globals: 1.5% → 2%. Рычаг 2 — доля дохода, которую Strugglers тратят на страхование, по ставке, которую уже тратят Aspirers: 1% → 1.5%. Базовый случай −1,000,000,000; только рычаг 1 — −800,000,000; только рычаг 2 — −800,000,000; оба вместе −600,000,000 (взаимодействия нет). Половина пункта готовности платить эквивалентна $200,000,000 разрыва на любом из двух классов: и Aspirers на 2%, которые уже тратят Globals, и Strugglers на 1.5%, которые уже тратят Aspirers, — каждый из этих двух сдвигов поднимает захваченную премию с $10B до $12B, — а вместе, при $14B захваченной премии, они всё равно оставляют программе недобор в $600,000,000, и надеяться тут не на что: взаимодействия нет, каждая ставка двигает только свой класс, а профицит есть 10% захваченной премии минус фиксированные $2.0B, так что два сдвига складываются по построению. Не переживает проверку никакое утверждение, что недобор закрывается со стороны спроса, потому что Block C тратит 90 центов с каждого доллара премии — 80% на выплаты и 10% на комиссию — ещё до того, как оплачен стек в $2.0B из фонда оплаты труда и операционных расходов. Что переживает проверку — это сама рекомендация: идти вперёд в заданном объёме и нести разрыв как заложенную в бюджет строку общественного здравоохранения, потому что проверкой служит цель, напечатанная в Block E, а не профицит в Block D. Периметр: измеряемая здесь пара — это две ставки готовности платить у двух целевых классов; коэффициент выплат и комиссия названы в базе как закреплённые, каждый на том единственном значении, которое печатает для него запись, и это поле их не измеряет."
+    "en": "| field | text |\n|---|---|\n| **conclusion** | **The client should go ahead with the seven sites and choose where they go on the mission screen — but strike the note's financial paragraph from the case for growth: it re-divides the bill, it does not show the growth paying for itself.** |\n| **the rest** | The geography answer stands and this verdict does not reorder Block D: density of at-risk youth is the client's own screen, and the cost exhibit could not have chosen a geography in any case — it carries one value for the whole estate and not a single per-district line. What does not stand is the financial claim. Central office spend goes from $1,000K to $1,735K, **[BUILT — exact shares against the book's rounded ones; the book prints both on p. 146, Notes to interviewer to Question 2: 74% and 88%]** +$735K a year, +73.5%, while sites go from 8 to 15, +87.5%; that, and nothing else, is why the allocation per site falls to $115.67K. Carried into money the fall is **[BUILT — and $9.33K is the one built number standing in the candidate's visible area: the book does not print it, the analyst derives it in Block C as $125K − $115.67K]** $9.33K on each of the eight sites that existed before, $74.67K a year in all — 10.2% of the money being committed. Two bases, both stated: on the client's allocation base the seven new sites are charged 7 × $115.67K = **[BUILT]** $809.67K, the $735K they add plus the $74.67K lifted off the existing eight, while those eight now carry $925.33K against $1,000K today ($925.33K + $809.67K = $1,735K); on the increment base a new site adds **[BUILT]** $735K / 7 = $105K. Neither base is a payment. The scale benefit is real and should be kept — the book's own solution says the client benefits financially from scale — it simply is not what the note used it for. The open question the note never asks is whether the reimbursement the client already receives from school districts and state agencies for activities scales with sites and carries central support at fifteen: the exhibit has no revenue line and no site-level cost. Risks: internally the funding ceiling in the states where the model is already approved, the book's own \"might hit funding limits\"; externally a new state's districts might not fund the model, which is why the Florida and California offers to pay for establishing centers buy entry and not a recurring central line. Next: put that one question to the Massachusetts and New Hampshire districts and state agencies before the seven sites are staffed, and rank the in-footprint districts on the density screen, as Block D already does. |\n\n*Minute budget for 7 min: ~1.5 min reading Blocks A-C · ~1 min on the two arithmetic moves, $1,735K − $1,000K and $9.33K × 8 against $735K · ~1 min on Block D, which is read and left alone · ~2 min writing the two fields, conclusion first · ~1.5 min on the risk and the next step. The three required lines fit inside that; the four bonuses do not have to.*\n\nOne base for all four numbers: the analyst's own fill of the central-cost table - Staff $750K plus $600K, IT $110K plus $80K, Office expenses $115K unchanged, Training and support $25K plus $55K, carried to a post-expansion total of $1,735K - divided by the number of wholly owned sites exactly as the client's convention prints it, total central office costs over the number of sites. The count is the allocated central office cost per site after expansion, in $K. Lever 1 - the number of wholly owned sites the bill is divided by, at the number the client owns today: 15 -> 8. Lever 2 - the additional training and support, at the level of the line it is added to: $55K -> $25K. Base case 115.67; lever 1 alone 216.88; lever 2 alone 113.67; both together 213.13 (interaction -1.75). Moving nothing the client spends, only the denominator, carries the note's headline from $115.67K to $216.88K, a swing of $101.21, while taking $30K a year out of a real cost line moves it $2.00: the figure the note calls the cost of a site is 50.6 times more responsive to its own denominator than to money. What survives every cell of the pair is the bill itself - $1,735K after expansion in two cells and $1,705K in the two that trim training, against $1,000K today, so the increment is $735K or $705K and is never nothing. What does not survive is reading the per-site line as evidence that the increment is carried. Scope: this pair measures the denominator of the note's own per-site line and the size of one cost line; it does not measure the choice among partnership, licensing and wholly owned expansion, which the client's brief holds outside the cost analysis by fixing central costs invariant to method, and it does not touch the mission screen in Block D.\n\nSource: Kellogg-2012, After School Programming, pp. 143-152",
+    "ru": "| поле | текст |\n|---|---|\n| **вывод** | **Клиенту следует идти вперёд с семью площадками и выбирать их места по миссионному отбору — но финансовый абзац записки надо вычеркнуть из доводов за рост: он переделяет счёт, а не показывает, что рост окупает себя.** |\n| **остальное** | Ответ по географии остаётся в силе, и этот вердикт блок D не переупорядочивает: плотность at-risk youth — собственный отбор клиента, а затратный экзибит географию выбрать и не мог — он держит одну величину на всю сеть и ни одной строки по округам. Не остаётся в силе финансовое утверждение. Центральные расходы растут с $1,000K до $1,735K — **[BUILT — точные доли против книжных округлённых; книга печатает обе на стр. 146, блок Notes to interviewer к Question 2: 74% и 88%]** прирост $735K в год, +73.5%, при росте числа площадок с 8 до 15, +87.5%; ровно поэтому и только поэтому разнесение на площадку падает до $115.67K. В деньгах это падение равно **[BUILT — и $9.33K есть единственное построенное число, стоящее в видимой кандидату области: книга его не печатает, аналитик выводит его в блоке C как $125K − $115.67K]** $9.33K на каждой из восьми прежних площадок, $74.67K в год в сумме — 10.2% от принимаемых на себя денег. Две базы, и обе названы: на базе разнесения семь новых площадок получают 7 × $115.67K = **[BUILT]** $809.67K — это $735K, которые они добавляют, плюс $74.67K, снятые с прежних восьми, — а прежние восемь несут теперь $925.33K против $1,000K сегодня ($925.33K + $809.67K = $1,735K); на базе прироста новая площадка добавляет **[BUILT]** $735K / 7 = $105K. Ни одна из баз не является платежом. Выигрыш от масштаба настоящий и его надо сохранить — решение книги само говорит, что клиент финансово выигрывает от масштаба, — просто записка использовала его не для того. Открытый вопрос, которого записка не задаёт: масштабируется ли вместе с площадками возмещение, которое клиент уже получает от школьных округов и агентств штата за деятельность, и несёт ли оно центральную поддержку при пятнадцати площадках — строки выручки и строки затрат площадки в экзибите нет. Риски. Внутренний: потолок финансирования в тех штатах, где модель уже одобрена, — книжное «might hit funding limits». Внешний: округа нового штата могут не финансировать модель, поэтому предложения Флориды и Калифорнии оплатить создание центров покупают вход, а не постоянную центральную строку. Следующий шаг: задать этот единственный вопрос округам и агентствам штатов Массачусетс и Нью-Гэмпшир до того, как семь площадок укомплектованы, и ранжировать округа внутри существующего периметра по отбору на плотность — так, как это уже делает блок D. |\n\n*Минутный бюджет на 7 мин: ~1.5 мин на чтение блоков A-C · ~1 мин на два арифметических хода, $1,735K − $1,000K и $9.33K × 8 против $735K · ~1 мин на блок D, который читается и остаётся нетронутым · ~2 мин на запись двух полей, вывод первым · ~1.5 мин на риск и следующий шаг. Три обязательные строки внутрь помещаются; четыре бонусные не обязаны.*\n\nОдна база для всех четырёх чисел: собственное заполнение аналитиком таблицы центральных затрат — Staff $750K плюс $600K, IT $110K плюс $80K, Office expenses $115K без изменения, Training and support $25K плюс $55K, сведённые к итогу после расширения $1,735K, — делённое на число полностью принадлежащих клиенту площадок ровно так, как это печатает конвенция клиента: полные центральные затраты на число площадок. Счёт — разнесённые центральные затраты на площадку после расширения, в $K. Рычаг 1 — число площадок, на которое делится счёт, при числе, которым клиент владеет сегодня: 15 → 8. Рычаг 2 — прирост статьи training and support, на уровне той строки, к которой он добавляется: $55K → $25K. Базовый случай 115.67; только рычаг 1 — 216.88; только рычаг 2 — 113.67; оба вместе 213.13 (взаимодействие −1.75). Сдвиг, который не трогает ни доллара расходов клиента, а меняет только знаменатель, переносит заголовок записки со $115.67K на $216.88K — размах $101.21, — тогда как снятие $30K в год с настоящей статьи затрат двигает его на $2.00: величина, которую записка называет стоимостью площадки, в 50.6 раза чувствительнее к собственному знаменателю, чем к деньгам. Что переживает все ячейки пары — сам счёт: $1,735K после расширения в двух ячейках и $1,705K в двух, где урезано обучение, против $1,000K сегодня, так что прирост равен $735K или $705K и никогда не равен нулю. Что не переживает — чтение удельной строки как свидетельства о том, что прирост покрыт. Периметр: пара измеряет знаменатель собственной удельной строки записки и размер одной статьи затрат; она не измеряет выбор между партнёрством, лицензированием и полностью собственными площадками, который бриф клиента выносит за пределы затратного анализа, фиксируя центральные затраты неизменными к способу, и она не трогает миссионный отбор из блока D.\n\nSource: Kellogg-2012, After School Programming, pp. 143-152"
    },
    "levers": {
-    "base": "the analyst's own three-year build, kept to his rounding: midpoint income times households times the willingness rate, then the captured share of each class rounded to the whole $B exactly as Block B prints it (0.66 × $6B ≈ $4B, 0.33 × $18B ≈ $6B). The cost stack is the same throughout - $1.5B payroll plus $0.5B operating fixed, commission at 10% of premium and claims at 80% of premium - so the programme result is 10% of captured premium less $2.0B, and the base case reconciles to the printed $1.0B deficit. Neither move below touches the claims ratio or the commission: the record prints a single value for each and no second",
-    "metric": "the three-year programme surplus, captured premium less total cost, in $",
+    "base": "the analyst's own fill of the central-cost table - Staff $750K plus $600K, IT $110K plus $80K, Office expenses $115K unchanged, Training and support $25K plus $55K, carried to a post-expansion total of $1,735K - divided by the number of wholly owned sites exactly as the client's convention prints it, total central office costs over the number of sites",
+    "metric": "the allocated central office cost per site after expansion, in $K",
     "lever1": {
-     "name": "the share of income Aspirers spend on insurance, at the rate Globals already spend",
-     "from": 1.5,
-     "to": 2,
-     "unit": "%",
+     "name": "the number of wholly owned sites the bill is divided by, at the number the client owns today",
+     "from": 15.0,
+     "to": 8.0,
+     "unit": "sites",
      "exchange": true,
-     "src": "exhibit.parts[1].rows[2]",
-     "quote_from": "% of income spent on insurance || 1.5%",
-     "quote_to": "% of income spent on insurance || 2%"
+     "src": "exhibit.parts[3]",
+     "quote_from": "Cost per site after: $1,735K / 15 = $115.67K",
+     "quote_to": "Cost per site today: $1,000K / 8 = $125K"
     },
     "lever2": {
-     "name": "the share of income Strugglers spend on insurance, at the rate Aspirers already spend",
-     "from": 1,
-     "to": 1.5,
-     "unit": "%",
+     "name": "the additional training and support, at the level of the line it is added to",
+     "from": 55.0,
+     "to": 25.0,
+     "unit": "$K",
      "exchange": true,
-     "src": "exhibit.parts[1].rows[3]",
-     "quote_from": "% of income spent on insurance || 1%",
-     "quote_to": "% of income spent on insurance || 1.5%"
+     "src": "exhibit.parts[2].rows[3]",
+     "quote_from": "Training and support || $25K || +$55K",
+     "quote_to": "Training and support || $25K || +$25K"
     },
     "result": {
-     "base_case": -1000000000,
-     "alone1": -800000000,
-     "alone2": -800000000,
-     "both": -600000000,
-     "interaction": 0
+     "base_case": 115.67,
+     "alone1": 216.88,
+     "alone2": 113.67,
+     "both": 213.13,
+     "interaction": -1.75
     },
-    "verdict": "Half a point of willingness is worth $200,000,000 of the gap on either class - Aspirers at the 2% Globals already spend and Strugglers at the 1.5% Aspirers already spend each lift captured premium from $10B to $12B - and both together, at $14B of captured premium, still leave the programme $600,000,000 short, with no interaction term to hope for: each rate moves one class only and the surplus is 10% of captured premium less a fixed $2.0B, so the two moves add by construction. What does not survive is any claim that the shortfall closes on the demand side, because Block C spends 90 cents of every premium dollar - 80% on claims and 10% on commission - before the $2.0B payroll and operating stack is paid. What survives is the recommendation itself: proceed as scoped and carry the gap as a budgeted public-health line, because the test is the objective printed in Block E, not the surplus in Block D.",
-    "verdict_scope": "the pair measured here is the two willingness rates of the two target classes; the claims ratio and the commission are named in the base as held, each at the single value the record prints for it, and this field does not measure them"
+    "verdict": "Moving nothing the client spends, only the denominator, carries the note's headline from $115.67K to $216.88K, a swing of $101.21, while taking $30K a year out of a real cost line moves it $2.00: the figure the note calls the cost of a site is 50.6 times more responsive to its own denominator than to money. What survives every cell of the pair is the bill itself - $1,735K after expansion in two cells and $1,705K in the two that trim training, against $1,000K today, so the increment is $735K or $705K and is never nothing. What does not survive is reading the per-site line as evidence that the increment is carried.",
+    "verdict_scope": "this pair measures the denominator of the note's own per-site line and the size of one cost line; it does not measure the choice among partnership, licensing and wholly owned expansion, which the client's brief holds outside the cost analysis by fixing central costs invariant to method, and it does not touch the mission screen in Block D"
    },
    "mehanizm": {
-    "naive": "отказывается от запуска из-за дефицита или требует сначала свести экономику",
-    "correct": "измеряет программу против объявленной цели охвата и называет дефицит субсидией на единицу защиты",
-    "why": "каждый рычаг, закрывающий дефицит, срезает охват, который и является целью",
-    "code": "MECH-67-критерий-не-из-цели",
+    "naive": "принимает падение разнесённой на площадку ставки за то, что прирост центральных затрат покрыт, и объявляет финансовую сторону закрытой",
+    "correct": "переводит ставку обратно в деньги: счёт растёт с $1,000K до $1,735K, прирост $735K в год, а всё облегчение прежних восьми площадок — $74.67K, 10.2% от принимаемых на себя денег",
+    "why": "деление счёта на большее число площадок перераспределяет счёт, но не оплачивает его: ставка падает от знаменателя, тогда как сам счёт растёт на 73.5%. Ближайший сосед по библиотеке — MECH-01-приростная-база (CM-001, CM-012): там разнесённая полная себестоимость искажает сравнение цены с затратой на уже существующей базе. Различающий вопрос: что чинит ответ — базу сравнения для цены или впечатление, что выросший счёт кем-то оплачен? Здесь ничего не оценивается по цене, а разнесение читается как покрытие прироста, и вопрос «кто платит» становится возможным только после того, как удельная ставка переведена обратно в деньги",
+    "code": "MECH-315-разнесённая-ставка-вместо-прироста-счёта",
     "code2": []
    }
   },

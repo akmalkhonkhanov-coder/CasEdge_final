@@ -3836,90 +3836,88 @@
   },
   {
    "id": "ST-046",
-   "title": "The Distributor Channel",
-   "company": "Grenvalt",
-   "industry": "Industrial equipment",
+   "title": "Ten Million Subscribers",
+   "company": "GoNet",
+   "industry": "Internet service provider",
    "difficulty": "Hard",
    "echelon": true,
    "clean": false,
    "focus": "ST:S12(c)",
    "time": "9 min",
    "type": "Structuring",
-   "exhibit_mode": "E-after",
+   "exhibit_mode": "E-before",
    "depth_tag": "STRONG",
-   "prompt": "Grenvalt's revenue fell 17.6% over the year. The sales director: \"The distributor channel market contracted by a third — that is an external shock, it is not our doing.\" The board asks: **is that so?**",
-   "anchor_metric": "revenue decline = 17.6%",
+   "prompt": "GoNet is the dominant internet service provider in the US and is looking at Europe. Management is going into the board meeting with 10 million subscribers at $20/month, plus a 3% commission on everything those subscribers buy online. The CEO wants a back-of-the-envelope view: **do we enter Europe?**",
+   "anchor_metric": "subscriber base = 10 million",
    "exhibit": {
     "type": "table",
-    "title": "Grenvalt: revenue by channel and the market",
+    "title": "GoNet: the Europe numbers",
     "header": [
-     "Indicator",
-     "Y1",
-     "Y2",
-     "Δ"
+     "Line",
+     "Europe"
     ],
     "rows": [
      [
-      "Our revenue through distributors, $M",
-      "184.0",
-      "98.4",
-      "−46.5%"
+      "Subscriber base",
+      "10 million"
      ],
      [
-      "Our direct sales, $M",
-      "137.0",
-      "166.2",
-      "+21.3%"
+      "Subscription fee",
+      "$20 / month"
      ],
      [
-      "Our total revenue, $M",
-      "**321.0**",
-      "**264.6**",
-      "**−17.6%**"
+      "Average online purchases per subscriber",
+      "$1,800 / year"
      ],
      [
-      "Distributor channel market, $M",
-      "1 290.0",
-      "870.0",
-      "−32.6%"
+      "Commission GoNet receives on those purchases",
+      "3%"
      ],
      [
-      "Our share of the distribution channel",
-      "14.3%",
-      "11.3%",
-      "−3.0 pp"
+      "Fixed costs",
+      "$1 billion / year"
+     ],
+     [
+      "Variable costs",
+      "$110 / subscriber / year"
+     ],
+     [
+      "A new entrant's fee, and it is taking share",
+      "$10 / month"
      ]
     ],
-    "note": ""
+    "note": "The first six lines are the client's own assumptions for Europe; the last is an observation of the market. Figures are annual unless stated."
    },
    "key": {
-    "decoy": "| Branch | Why it's reflexive | [DEC-JUST] |\n|---|---|---|\n| **\"Confirm the external shock with industry statistics\"** | the director has supplied a ready hypothesis with a figure | The statistics **will confirm** the channel contraction: −32.6%, the fact is correct. The branch calls for data that **proves the phenomenon is external** and will not show that it was caused by our own decision. Confirmation of a correct figure under a wrong attribution of cause |\n| **\"Compare against competitors in the same channel\"** | the second reflex | Competitors in the channel grew — the branch will indicate that it is not purely external, but will not explain the mechanism |",
-    "cover": "| Branch | Synonyms (≥3) | [COV-JUST] |\n|---|---|---|\n| **1. External: market dynamics** | \"the market\" · \"industry backdrop\" · \"category demand\" | Without the market the scale of the external effect cannot be assessed |\n| **2. Internal: our share and its movement** | \"share\" · \"our result relative to the market\" · \"position\" | Without share the external explains everything |\n| **3. The cause of the \"external\" itself** | \"what caused the contraction\" · \"who created it\" · \"our own past decisions\" · \"the boundary of external\" | **Load-bearing, and this is the muscle of the slot.** A phenomenon assigned to the external may be a **consequence of our own decision**. Then the boundary between external and internal has been drawn wrongly, and \"it is not our doing\" is unsupported |",
-    "me": "| Pair | Status |\n|---|---|\n| 1 ↔ 2 | ⚠️ **conflation risk** — share is the ratio of ours to the market. Separated: branch 1 is the **absolute** trend; branch 2 the **relative** position |\n| 1 ↔ 3 | ⚠️ **the slot's key pair** — \"market dynamics\" and \"the cause of those dynamics\" look like one branch. Separated: branch 1 is **what happened** to the market; branch 3 is **why**, and whether we did it. A candidate who merges them accepts the external as given |\n| 2 ↔ 3 | ⚠️ partial — share loss and our decision are linked. Separated: branch 2 is the **measurement** of position; branch 3 the **causal link** to our action |\n| Statistics ↔ 1 | ⚠️ **duplicate** — this is branch 1 |\n| Statistics ↔ 3 | ⚠️ **opposition** — confirming a fact is not establishing a cause |\n| Competitors ↔ 2 | ⚠️ partial |\n| Competitors ↔ 1, 3 | **independent** |\n| Statistics ↔ Competitors | **independent** |",
-    "drive": "| Branch | What to measure |\n|---|---|\n| 1. Market | channel volume by year · trend of the whole category |\n| 2. Share | our share by channel · our rate against the market's |\n| 3. Cause of the external | **dates of our decisions against dates of the contraction** · counterparty behaviour after our action |",
-    "order": "| Criterion | Legitimate start | Why |\n|---|---|---|\n| **testing the client's hypothesis** | branch 3 | the director has already supplied an attribution; that is what is being tested |\n| speed of verification | branch 1 | industry statistics are public |\n| size of effect | branch 2 | share shows whether this is our result |"
+    "decoy": "| Branch | Why it's reflexive | [DEC-JUST] |\n|---|---|---|\n| **\"Size the European market and map the competition\"** | the opening move of every market-entry framework | Released on request, the answer that comes back is that the industry is **highly fragmented** and that there is **no information on leaders or trends** — it is not on the page, so the branch is live and the candidate must reach it themselves. Nothing in that answer moves the decision, because nothing has yet said **what has to be won**. The market question is not wrong — it is **empty until branch 3 has produced a required base**, and decisive the moment it has one |\n| **\"Push the second revenue stream — the e-commerce commission, GoNet's US differentiator\"** | the strong candidate hunting for the non-obvious lever | A legitimate branch, and weakness is not grounds to drop it — but it is **unsized until the requirement is attached**. Stated as a requirement it asks each subscriber to move from $1,800 to $3,000 of purchases a year merely to cover costs at $10, and to $5,800 to hold the $840M the plan promised. The requirement comes out of branch 3, not out of this branch |\n| **\"Attack the $1B of fixed cost — outsource capacity, lease networks, pick geographies\"** | the reflex to work on the largest line on the page | Also legitimate, also unsized. At $10 and the plan's 10 million subscribers, contribution is $640M against $1B of fixed cost [BUILD]; the lever would have to take fixed cost down **36%** [BUILD] to reach zero. A lever cannot be judged before the gap it must close has been computed |",
+    "cover": "| Branch | Synonyms (≥3) | [COV-JUST] |\n|---|---|---|\n| **1. The economics of one subscriber** | \"what one subscriber earns us\" · \"contribution per head\" · \"revenue and cost per subscriber\" · \"unit economics\" | Both revenue streams and **both** cost lines. Contribution, not revenue: the $110 variable cost is the line most often dropped, and it is the line that decides. Without a contribution per subscriber nothing else in the tree can be sized — neither the base required, nor the fixed-cost gap, nor what the commission stream would have to deliver |\n| **2. Which terms are ours to set and which the market sets** | \"the price we can actually charge\" · \"elasticity and competitive response\" · \"who sets the terms of trade\" · \"is $20 defensible\" | The plan's whole top line stands on $20 while an entrant sells at $10 and takes share. Price is an **input** to the plan and an **output** of the market. If it is not ours, every figure computed at $20 answers a question that will not be asked |\n| **3. The subscriber base as the unknown, not as a given** | \"how many subscribers does this cost structure require\" · \"where did the 10 million come from\" · \"required base against attainable base\" · \"what share of the market is that\" | **Load-bearing, and this is the muscle of the slot.** 10 million is the client's **plan**, not the result of any analysis, and every profit figure in the case is conditional on it. Turn the question round — fixed cost ÷ the contribution one subscriber brings at the price the market supports — and the base stops being an assumption and becomes the decision's answer: **15.625 million**, i.e. **56.25% above the plan** [BUILD]. Only then does branch 1's market question acquire a test: is that base winnable in a fragmented market with no leader? A candidate who leaves the base as an input can execute the plan's arithmetic flawlessly and never reach the question the decision turns on |",
+    "me": "| Pair | Status |\n|---|---|\n| 1 ↔ 2 | ⚠️ partial — price sits inside the unit economics. Separated: branch 1 is the arithmetic of a subscriber **at a given price**; branch 2 is whether that price is **ours to name** |\n| 1 ↔ 3 | ⚠️ **conflation risk** — the word \"profitability\" swallows both. Separated: branch 1 is the economics of **one** subscriber; branch 3 is **how many** of them the cost structure needs. Merged, the count silently keeps the plan's value |\n| 2 ↔ 3 | ⚠️ **the slot's key pair** — both read as \"what the market gives us\". Separated: branch 2 is the **price** the market allows, branch 3 the **quantity**. They fail differently, and only their product, net of $110 and against $1B, decides |\n| Market sizing ↔ 3 | ⚠️ **duplicate once branch 3 has run** — before that they are different questions: a description of the market versus a requirement placed on it |\n| Commission lever ↔ 1 | ⚠️ partial — the commission is a **term inside** the subscriber's economics, not a branch of its own until it carries a requirement |\n| Fixed-cost lever ↔ 3 | **independent branches — but their effects are not additive.** Listing them separately is correct and is what the source does: its own open question is \"How could we reduce the fixed costs of investment?\". No point is lost for carrying both. The objection is only to **adding the two effects**: a 36% cut in fixed cost and +5.625 million subscribers each close the **whole** $360M gap on their own [BUILD], so summing them books the same $360M twice |\n| Commission lever ↔ Fixed-cost lever | **independent** — one moves revenue per subscriber, the other the cost that is not per subscriber |\n| Market sizing ↔ 2 | **independent** |",
+    "drive": "| Branch | What to measure |\n|---|---|\n| 1. Unit economics | subscription $ per subscriber-year · commission = annual purchases × 3% · variable cost per subscriber · **contribution** = the first two minus the third |\n| 2. Terms we do not set | the entrant's fee and the entrant's own economics · elasticity of demand at $20 against $10 · what price survives entry |\n| 3. The base | **required base = fixed cost ÷ contribution at the surviving price** · the share of a fragmented European market that base implies · the provenance of the 10 million |",
+    "order": "| Criterion | Legitimate start | Why |\n|---|---|---|\n| speed of verification | branch 1 | the whole unit economics is one line of arithmetic and needs no data that is not on the page |\n| **what the decision hangs on** | branch 3 | until the base is an output, every profit figure is conditional on a number nobody has defended |\n| size of effect | branch 2 | the fee is half the top line: subscription revenue is $2.4B at $20 and $1.2B at $10 |\n\n**Starting with market sizing is an ORDER defect:** the same market question is empty when asked first and decisive when asked third — it can only be answered against a required base.\n\n**MANDATORY GATES (all three; each is satisfied by asking the question — the arithmetic behind it is bonus):**\n| # | Gate | Passed when |\n|---|---|---|\n| G1 | **Contribution, not revenue, per subscriber** | the tree carries both revenue streams **and both cost lines**; the $110 variable cost is named, not only the $1B fixed |\n| G2 | **The fee is tested before it is used** | the candidate asks whether $20 survives an entrant at $10 — i.e. treats price as something the market may set — before resting the verdict on it |\n| G3 | **The base is made an output** | the candidate asks what base the cost structure requires, or where the 10 million comes from, instead of carrying it as an input. Credit the question; the 15.625 million is bonus |\n\n**BONUS (not required in 9 minutes):** sizing the fixed-cost lever against the gap it must close · stating the commission branch as a requirement ($3,000, $5,800) rather than an ambition · placing the market question **after** a required base exists · noticing that at $20 the required base is only ≈5.43 million [BUILD], so the base question bites only once the fee falls."
    },
    "reference": {
-    "en": "The candidate performs **the correct operation** — separating external from internal. And the separation confirms the director's hypothesis: the channel market really did contract 32.6%, an external fact.\n\nThe error is in the **boundary**: the channel contraction was caused in part by our own launch of direct sales. The phenomenon has been assigned to the external **by where it is observed**, not by its cause. We fall faster than the channel market (−46.5% against −32.6%), lose share within it (−3.0 pp), and grow in direct sales at the same time (+21.3%).\n\n**Top echelon: YES.** The separation is performed correctly, the external fact is confirmed — and the conclusion \"it is not our doing\" is wrong.\n\n- notice we fall **13.9 pp faster** than the channel market (−46.5% against −32.6%) — so there is a contribution of ours on top of the general one\n- compute the net effect: direct +$29.2M against distribution −$85.6M, i.e. **−$56.4M**\n- propose assessing whether the growth of the direct channel compensates the loss of distribution over the horizon — at present it does not",
-    "ru": "Кандидат выполняет **верную операцию** — отделяет внешнее от внутреннего. И разделение подтверждает гипотезу директора: канальный рынок действительно сжался на 32.6% — внешний факт.\n\nОшибка — в **границе**: сжатие канала отчасти вызвано нашим же запуском прямых продаж. Явление отнесено к внешнему **по месту наблюдения**, а не по причине. Мы падаем быстрее канального рынка (−46.5% против −32.6%), теряем долю внутри него (−3.0 пп) и одновременно растём в прямых продажах (+21.3%).\n\n**Верхний эшелон: ДА.** Разделение выполнено верно, внешний факт подтверждён — а вывод «это не наших рук дело» неверен.\n\n- заметить, что мы падаем на **13.9 пп быстрее** канального рынка (−46.5% против −32.6%), — значит, поверх общего есть и наш собственный вклад\n- посчитать чистый эффект: прямые +$29.2M против дистрибуции −$85.6M, то есть **−$56.4M**\n- предложить оценить, компенсирует ли рост прямого канала потерю дистрибуции на горизонте, — сейчас не компенсирует"
+    "en": "Run the plan as printed and it is a good business. Subscription: 10M × $20 × 12 = $2.4B. Commission: 10M × $1,800 × 3% = $540M. Revenue $2.94B. Fixed $1B plus variable 10M × $110 = $1.1B, so costs $2.1B, profit $840M, margin ~29%. None of that arithmetic is wrong, and the strong candidate goes one step further: seeing the entrant at $10, they re-run the top line at $1.2B + $540M = $1.74B against the same $2.1B of cost and report that matching the entrant turns $840M into a $0.36B loss. **Both answers are computed at 10 million subscribers.**\n\nThat number is the client's plan. It arrived with the question and leaves with the answer, and every figure above is conditional on it — in a market the case describes only as highly fragmented, with no information on leaders or trends. The constraint that decides the entry is never named: the base has to be **attainable**.\n\nThe structural move is to make the base the output. At the price the market supports, one subscriber brings $10 × 12 + $1,800 × 3% = $174 a year and costs $110 — a contribution of $64. The $1B of fixed cost therefore needs **15.625 million** subscribers to break even, **56.25% above the plan** [BUILD]. At $20 the same division gives a required base of only ≈5.43 million ($1B ÷ $184) [BUILD], which is why the defect is invisible until the fee moves: the plan clears its own break-even and the base is never questioned. Now the market question has a test attached, and the levers become comparable: the fixed-cost lever and the base lever close the same $360M gap from opposite ends, which is why they are not independent branches.\n\n**Top echelon: YES.** The unit economics are complete, the downside case at $10 is correct, and the conclusion still stands on a quantity the analysis never earned.\n\n- turn the plan round: $1B ÷ $64 of contribution at $10 — 10 million stops being an assumption and 15.625 million becomes the thing to test against a fragmented market\n- notice that at the plan's base and $10 the contribution is 10M × $64 = $640M against $1B [BUILD], so the fixed-cost lever must deliver a **36%** cut [BUILD] to do what 5.625 million extra subscribers [BUILD] would do — one gap closed twice over, so the two levers are separate branches whose effects must not be added\n- state the commission branch as a requirement rather than an ambition: $3,000 of annual purchases per subscriber to break even and $5,800 to hold $840M, against $1,800 today\n\nFrom the book: 10 million subscribers, $20/month, $1,800/year of purchases at 3% commission, $1B fixed cost, $110/subscriber variable cost, the entrant's $10/month, the highly fragmented industry with no data on leaders or trends; $2.4B subscription and $540M commission revenue and $2.94B total; $1.1B variable and $2.1B total cost; $840M profit and the ~29% margin; $1.2B, $1.74B and the $0.36B loss at $10; $174 of revenue and $64 of profit per subscriber; 15.625 million subscribers to break even; $900M of commission, $90 per subscriber and $3,000 of purchases to break even, and $5,800 to hold $840M. Built here from those: 56.25% (15.625 ÷ 10 − 1); $184 of contribution and the ≈5.43 million required base at $20 ($240 + $54 − $110; $1B ÷ $184 = 5.435M); 5.625 million subscribers of shortfall; $640M of contribution at the plan's base (10M × $64); the $360M gap ($1B − $640M, which is the book's $0.36B loss read as fixed cost minus contribution) and the 36% fixed-cost cut it implies ($360M ÷ $1B).\nSource: Kellogg-2012, GoNet Internet Service Provider, pp. 32-36",
+    "ru": "Посчитай план как напечатано — бизнес хороший. Подписка: 10M × $20 × 12 = $2.4B. Комиссия: 10M × $1,800 × 3% = $540M. Выручка $2.94B. Постоянные $1B плюс переменные 10M × $110 = $1.1B, итого затраты $2.1B, прибыль $840M, маржа ~29%. В этой арифметике нет ошибки, и сильный кандидат идёт дальше: увидев новичка с $10, он пересчитывает верхнюю строку — $1.2B + $540M = $1.74B против тех же $2.1B — и докладывает, что ответ на цену превращает $840M в убыток $0.36B. **Оба ответа посчитаны на 10 миллионах подписчиков.**\n\nЭто число — план клиента. Оно пришло вместе с вопросом и уходит вместе с ответом, и всё посчитанное выше на нём висит — на рынке, о котором в кейсе сказано только, что он сильно фрагментирован и что данных о лидерах и трендах нет. Ограничение, которое решает вход, не названо: база обязана быть **достижимой**.\n\nСтруктурный ход — сделать базу искомым. При цене, которую держит рынок, один подписчик приносит $10 × 12 + $1,800 × 3% = $174 в год и стоит $110 — вклад $64. Значит, $1B постоянных требует **15.625 млн** подписчиков до безубыточности, то есть **на 56.25% больше плана** [BUILD]. При $20 то же деление даёт требуемую базу всего ≈5.43 млн ($1B ÷ $184) [BUILD] — поэтому дефект и невидим, пока цена не двинулась: план перекрывает собственную безубыточность, и базу никто не трогает. Только теперь у рыночного вопроса появляется проверка, и рычаги становятся сравнимыми: рычаг постоянных затрат и рычаг базы закрывают один и тот же разрыв в $360M с двух сторон — поэтому это не две независимые ветки.\n\n**Верхний эшелон: ДА.** Экономика единицы полная, сценарий с $10 посчитан верно — а вывод всё равно стоит на величине, которую разбор не заработал.\n\n- перевернуть план: $1B ÷ $64 вклада при $10 — 10 млн перестаёт быть допущением, а 15.625 млн становится тем, что проверяют против фрагментированного рынка\n- заметить, что при плановой базе и $10 вклад равен 10M × $64 = $640M против $1B [BUILD], то есть рычаг постоянных затрат должен дать срез в **36%** [BUILD] — ровно то же, что дали бы 5.625 млн дополнительных подписчиков [BUILD]; один разрыв закрывается каждым рычагом целиком — рычаги стоят разными ветками, но их эффекты нельзя складывать\n- сформулировать комиссионную ветку как требование, а не как намерение: $3,000 покупок в год на подписчика для безубыточности и $5,800 для сохранения $840M против $1,800 сегодня\n\nИз книги: 10 млн подписчиков, $20/месяц, $1,800/год покупок при комиссии 3%, $1B постоянных, $110/подписчика переменных, $10/месяц у новичка, сильно фрагментированная отрасль без данных о лидерах и трендах; $2.4B подписки и $540M комиссии, итого $2.94B; $1.1B переменных и $2.1B затрат; $840M прибыли и маржа ~29%; $1.2B, $1.74B и убыток $0.36B при $10; $174 выручки и $64 прибыли на подписчика; 15.625 млн подписчиков до безубыточности; $900M комиссии, $90 на подписчика и $3,000 покупок для безубыточности, $5,800 — для сохранения $840M. Построено здесь: 56.25% (15.625 ÷ 10 − 1); вклад $184 и требуемая база ≈5.43 млн при $20 ($240 + $54 − $110; $1B ÷ $184 = 5.435 млн); 5.625 млн недобора; $640M вклада на плановой базе (10M × $64); разрыв $360M ($1B − $640M, он же книжный убыток $0.36B, прочитанный как постоянные минус вклад) и вытекающий срез постоянных на 36% ($360M ÷ $1B).\nSource: Kellogg-2012, GoNet Internet Service Provider, pp. 32-36"
    },
-   "family_h25": "F2",
+   "family_h25": "F4",
    "family_src": "тело",
-   "family_conf": "высокая",
+   "family_conf": "средняя",
    "mehanizm": {
-    "naive": "подтверждает названную менеджментом внешнюю причину отраслевой статистикой по каналу",
-    "correct": "проверяет, какая часть падения произведена собственным решением о распределении продаж по каналам",
-    "why": "верный факт о сокращении канала не устанавливает, что причина падения внешняя",
-    "code": "MECH-79-принятая-чужая-версия",
-    "code2": []
+    "naive": "считает прибыльность входа на объёме подписчиков, взятом из плана клиента, — и в базовом сценарии, и в сценарии ответа новичку на цену",
+    "correct": "делает объём подписчиков искомым: делит постоянные затраты на вклад одного подписчика при цене, которую держит рынок, и сравнивает требуемую базу с достижимой",
+    "why": "план в 10 млн — вход, а не результат разбора: при $10 безубыточность требует 15.625 млн, и вся ветвь прибыльности висит на величине, достижимость которой никто не проверял. Соседство объявляю: MECH-54 и MS-008 «Backwards» чинятся тем же движением — заявленную величину переворачивают в требование и проверяют требование. Различающий вопрос: «меняется ли структура разбора, если величину подтвердят?» У MECH-54 нет — подтверждённая величина закрывает вопрос. Здесь да: даже подтверждённые 10 млн не отвечают на вопрос, сколько подписчиков нужно, потому что дефект не в самой величине, а в том, что она стоит в корне вместо искомого",
+    "code": "MECH-302-плановый-объём-как-вход-а-не-искомое",
+    "code2": [
+     "MECH-54-заявленная-величина-без-проверки"
+    ]
    },
-   "family_note": "круг 103: запуск прямых продаж (+21.3%) сам сжимает дистрибуцию (−46.5% против рынка −32.6%) — эффект внутри контура тянет второй, и нетто равно −$56.4M"
+   "family_note": "круг 114: ограничение «база должна быть достижима» не названо ни в вопросе, ни в экзибите — 10 млн стоит как данность, а при цене $10 вклад $64 на подписчика требует 15.625 млн (+56.25%). Уверенность средняя: проверить достижимость нечем — размера европейского рынка книга не даёт ни в каком виде, поэтому ограничение опознаётся, но не замыкается"
   },
   {
    "id": "ST-047",
-   "title": "Five Percent On Price",
-   "company": "Yarnstead",
-   "industry": "Consumer goods",
+   "title": "One Million An Hour",
+   "company": "Merrowen Broadcasting",
+   "industry": "Media & entertainment",
    "difficulty": "Medium",
    "echelon": false,
    "clean": false,
@@ -3928,73 +3926,95 @@
    "type": "Structuring",
    "exhibit_mode": "E-before",
    "depth_tag": "STANDARD",
-   "prompt": "Yarnstead's board requires profit to be maximised over three years. Management proposes raising prices by 5% — \"the best option on profit.\" The board asks: **is it the best?**",
-   "anchor_metric": "board horizon = 3 years",
+   "prompt": "Merrowen Broadcasting is a major US television network and has to decide how much to bid for the US rights to the 2018 Winter Olympics. There is no subscription revenue attached to the event; the network keeps 100% of the advertising it sells inside it. The head of strategy has put the whole sheet in front of you and wants the structure before anyone runs a number: **what belongs in this evaluation, and what does the size of the bid turn on?**",
+   "anchor_metric": "opportunity cost = $1M per hour",
    "exhibit": {
     "type": "table",
-    "title": "Yarnstead: profit by option, $M",
+    "title": "Merrowen Broadcasting: the 2018 Winter Olympics sheet",
     "header": [
-     "Option",
-     "Year 1",
-     "Year 2",
-     "Year 3",
-     "Sum over 3 years"
+     "Line",
+     "What the client has"
     ],
     "rows": [
      [
-      "A. Hold prices",
-      "14.2",
-      "15.1",
-      "16.0",
-      "45.3"
+      "Broadcast window",
+      "16 days"
      ],
      [
-      "B. Cut prices by 8%",
-      "9.6",
-      "18.4",
-      "22.7",
-      "50.7"
+      "Day 1 (Friday) — opening ceremonies",
+      "3 hours of programming, 8–11 PM"
      ],
      [
-      "C. Raise prices by 5%",
-      "16.8",
-      "13.9",
-      "11.2",
-      "41.9"
+      "Days 2–15 — the Games",
+      "10 hours/day (weekday 9–12, 2–5, 7–11; weekend 11 AM – 9 PM)"
+     ],
+     [
+      "Day 16 (Saturday) — closing ceremonies",
+      "3 hours of programming, 8–11 PM"
+     ],
+     [
+      "Advertising the audience will take",
+      "no more than 10 minutes per hour"
+     ],
+     [
+      "Ad rate, prime time (M–F 7–11 PM, all weekend)",
+      "$400K per 30-second ad"
+     ],
+     [
+      "Ad rate, non-prime",
+      "$200K per 30-second ad"
+     ],
+     [
+      "Subscription revenue from the event",
+      "none; the network keeps 100% of the advertising revenue"
+     ],
+     [
+      "Total costs",
+      "$428,000,000"
+     ],
+     [
+      "Opportunity cost",
+      "$1M per hour"
+     ],
+     [
+      "Timing of the revenue",
+      "received with a 6-year lag"
+     ],
+     [
+      "WACC",
+      "12%"
      ]
     ],
-    "note": ""
+    "note": "The 16 days are the event's fixed schedule. Prime time is M–F 7–11 PM and all weekend; everything else is non-prime. Ad rates are per 30-second spot. Figures are as the client stated them."
    },
    "key": {
-    "decoy": "| Branch | Why it's reflexive | [DEC-JUST] |\n|---|---|---|\n| **\"Check management's calculation\"** | the natural first reaction to someone else's recommendation | Management's calculation is **correct**: raising prices delivers the highest profit **in year one** ($16.8M). The branch calls for their workings and will confirm them. The divergence is not in the arithmetic but in the **objective function** |\n| **\"Assess the competitor response\"** | the market reflex | The competitor response is already embedded in the yearly forecasts; the branch duplicates the exhibit |",
-    "cover": "| Branch | Synonyms (≥3) | [COV-JUST] |\n|---|---|---|\n| **1. The result of each option by year** | \"profit by year\" · \"option trajectories\" · \"what each delivers\" | Without a yearly breakdown the objective functions are indistinguishable |\n| **2. The board's objective function** | \"what the board maximises\" · \"a three-year horizon\" · \"the sum over the period\" | Without stating the board's objective the comparison is arbitrary |\n| **3. Management's objective function and how it differs** | \"what management maximises\" · \"whose objective is being optimised\" · \"do the parties' objectives coincide\" | **Load-bearing, and this is the muscle of the slot.** Both parties optimise **correctly**, but **different** functions: the board the three-year sum, management the first-year result. \"Management made a mistake\" is unsupported — they made none, they are solving a different problem |",
-    "me": "| Pair | Status |\n|---|---|\n| 1 ↔ 2 | **independent** — the data vs the criterion |\n| 1 ↔ 3 | **independent** |\n| 2 ↔ 3 | ⚠️ **the slot's key pair** — two objective functions on the same data. Separated: branch 2 is the **three-year sum**; branch 3 is the **first year**. A candidate who runs a single \"company objective\" will not see the divergence |\n| Check the calculation ↔ 1 | ⚠️ **duplicate** — this is branch 1 |\n| Check the calculation ↔ 3 | ⚠️ **opposition** — a correct calculation does not imply a correct objective |\n| Competitors ↔ 1 | ⚠️ **absorption** — the response is embedded in the forecasts |\n| Competitors ↔ 2, 3 | **independent** |",
-    "drive": "| Branch | What to measure |\n|---|---|\n| 1. Result | profit of each option in each year |\n| 2. Board's objective | **the three-year sum** for each option · the optimum |\n| 3. Management's objective | **the first year** for each option · the optimum · what sets management's horizon |",
-    "order": "| Criterion | Legitimate start | Why |\n|---|---|---|\n| **fit to the objective** | branch 2 | without an explicit objective function no comparison is possible |\n| size of effect | branch 1 | the data supplies the magnitudes |\n| speed of verification | branch 3 | management's horizon follows from the incentive scheme |"
+    "decoy": "| Branch | Why it's reflexive | [DEC-JUST] |\n|---|---|---|\n| **\"Run the inventory and get the revenue number first\"** | the page is full of rates and hours, and every input the arithmetic needs is already there | Legitimate, and it **is** branch 1 — but it is a **closed** branch: the schedule is set by the event, the 10-minute ceiling comes from market research, both rates are quoted. Nothing in it can be moved or argued, so it yields a magnitude and no decision |\n| **\"Find out what the rival networks will bid and what the last Games sold for\"** | it is an auction, so the auction looks like the first question | A real branch — the book's own guide puts the bid dynamics beyond the arithmetic — and **weakness is not grounds to drop it**. But the sheet holds nothing on rivals, and it is empty until the network knows what winning is worth to it. Open it later; do not cull it |\n| **\"Check the sign: is the net positive? If yes, bid\"** | the investment-appraisal reflex on a page laid out as revenue and costs | Sign is not what was asked; the client asked **how much**. The branch restates branches 1 and 2 and answers a question nobody put |",
+    "cover": "| Branch | Synonyms (≥3) | [COV-JUST] |\n|---|---|---|\n| **1. What happens inside the broadcast hours** | \"the event's own P&L\" · \"inventory × rate against production cost\" · \"what the Games themselves earn and cost\" | Without the event's own economics there is no magnitude to argue about, and every input for it is on the sheet |\n| **2. The clock each flow sits on** | \"when the money actually moves\" · \"the six-year lag\" · \"present value\" | The sheet dates the **receipt of revenue** six years out at a 12% WACC and dates nothing else — including the rights fee, the one figure being set |\n| **3. Whose earnings each line is a claim about** | \"which books does this line sit on\" · \"who is charged and who is credited\" · \"the event alone or the network with the Games against without them\" | **Load-bearing, and this is the muscle of the slot.** One line on the sheet is not a claim about the Games at all: **$1M an hour** is a claim about **something else the network airs**, brought onto this page for every hour the Games take — $146M over 146 hours [BUILD: 3 + 14×10 + 3]. Once a line from that subject is on the page, the page is being kept on the network's books, and the same subject has traffic in the other direction as well. Carrying its debit while its credit is left off the page — or appended at the end as an intangible — is not conservatism: it is a page that admits one subject with one sign |\n\n**Mandatory gates at eight minutes (3):** branch 1; branch 3; and, inside branch 3, a credit stated **against the $1M-an-hour line and in its unit** — dollars per hour of air over the same hours, so that the two are subtractable. A credit listed at the end as a qualitative factor does **not** take the gate, however many items it names: the slot is the pairing, not the list. Branch 2, ordering and any sizing are bonus.",
+    "me": "| Pair | Status |\n|---|---|\n| 1 ↔ 2 | **independent** — the size of the flows vs the date of the flows |\n| 1 ↔ 3 | ⚠️ **the slot's key pair** — both read as \"revenue and costs\". Separated by subject: branch 1 is what the Games earn and cost; branch 3 is every line that is a claim about something other than the Games. The $1M-an-hour line is branch 3 sitting inside branch 1's column, and a candidate who leaves it there loses the pairing |\n| 2 ↔ 3 | **independent** — dating vs whose books. They meet at one check: debit and credit quoted on the same clock |\n| Inventory decoy ↔ 1 | ⚠️ **duplicate** — this is branch 1 |\n| Rival-bids decoy ↔ 1, 3 | **independent, and downstream** of the bound those two produce |\n| Sign decoy ↔ 1, 2 | ⚠️ **absorption** — the sign falls out of branches 1 and 2 |",
+    "drive": "| Branch | What to measure |\n|---|---|\n| 1. Inside the hours | prime weekday 10 days × 4 hrs · non-prime weekday 10 days × 6 hrs · weekend 4 days × 10 hrs · ceremonies 2 days × 3 hrs — each × 10 min/hr × 2 spots/min × $400K or $200K, against $428M of total costs |\n| 2. The clock | which flows land in year six and which are paid at the auction · 12% WACC · what six years at 12% does to a year-six dollar |\n| 3. Whose earnings | the debit: 146 hours × $1M = **$146M** [BUILD] · the credit, in the same unit and over the same hours: what an hour of that air is worth to the network for anything other than selling spots in it, and what an hour of it delivers in reach it does not otherwise buy · both on the clock of branch 2 |",
+    "order": "| Criterion | Legitimate start | Why |\n|---|---|---|\n| **whose books** | branch 3 | it decides which lines belong on the page; branches 1 and 2 only measure lines already there |\n| size of effect | branch 1 | the largest determined quantities on the sheet sit here |\n| speed of verification | branch 2 | the lag and the WACC are given; the dating is settled in one question |"
    },
    "reference": {
-    "en": "Management **is not making a mistake**. Its calculation is correct, the data is agreed, and option C really does deliver the highest first-year profit — **$16.8M** against $14.2M and $9.6M.\n\nThe divergence lies in the **objective function**: the board maximises the three-year sum, where the best option is **B ($50.7M)**, while management maximises the first year, where the best is **C ($16.8M)**. Both optimisations are correct, and both parties are right **within their own problem**.\n\n**Top echelon: NO** — a candidate who asks \"which quantity are we maximising\" reaches the right answer. An honest **Medium**.\n\n- notice the divergence is worth **$8.8M** over three years (50.7 against 41.9)\n- compute: option B loses to C by **$7.2M** in the first year — that is the price of patience\n- propose a solution that is not analytical but **organisational**: tie part of the remuneration to the three-year result",
-    "ru": "Менеджмент **не ошибается**. Его расчёт верен, данные согласованы, и вариант C действительно даёт наибольшую прибыль первого года — **$16.8M** против $14.2M и $9.6M.\n\nРасхождение лежит в **целевой функции**: совет директоров максимизирует трёхлетнюю сумму, где лучший вариант — **B ($50.7M)**, а менеджмент максимизирует первый год, где лучший — **C ($16.8M)**. Обе оптимизации верны, и обе стороны правы **внутри своей задачи**.\n\n**Верхний эшелон: НЕТ** — кандидат, который спрашивает «какую величину мы максимизируем», приходит к верному ответу. Честный **Medium**.\n\n- заметить, что расхождение составляет **$8.8M** за три года (50.7 против 41.9)\n- посчитать: вариант B проигрывает C **$7.2M** в первый год — это цена терпения\n- предложить решение не аналитическое, а **организационное**: привязать часть вознаграждения к трёхлетнему результату"
+    "en": "The sheet computes, and the arithmetic is not where this slot lives. Inside the broadcast hours: prime weekday 10 days × 4 hrs = $320M, non-prime weekday 10 days × 6 hrs = $240M, weekend 4 days × 10 hrs = $320M, ceremonies 2 days × 3 hrs = $48M — each hour carrying 10 minutes of advertising at 2 spots a minute — **$928M**. Against it $428M of total costs and $146M of opportunity cost (2 days × 3 hrs + 14 days × 10 hrs at $1M/hr). Halve what is left for the six-year lag (Rule of 72, 72 ÷ 12 = 6 years to double) and the present value is **$177M**, which is half of $928M − $428M − $146M = **$354M** [BUILD]. The page prints $346M on that middle line and $177M on the next; only $354M is consistent with its own halving, so read $346M as a slip.\n\nThe defect is one line down. **$1M an hour is not a claim about the Games.** It is a claim about something else the network airs — what that programming would have earned in an hour the Games take — brought onto this page 146 times over. The moment such a line is admitted, the page is no longer the event's page; it is being kept on the network's books. And that subject has traffic in the other direction too: the same hours are the network's own air for everything else it makes, and the event reaches an audience the network does not otherwise buy. A structure that carries the debit at $1M an hour and lets the credit arrive at the end as \"intangible factors\" has not been cautious. It has admitted one subject with one sign, and the bid is set on the gap.\n\nTwo things on the book's own page have to be declared, because the second bounds how hard this can be pushed. The first is the $346M slip above. The second: the solution sentence is broken and self-contradictory — it names the intangibles and then concludes \"the bid should just be $177M\", while the next sentence puts \"most answers… in the range of $200M\". The book both refuses to move the bid off the arithmetic and expects it moved. **Do not build the finding on the $23M between those two figures.** Take either reading and the point stands unchanged: on the $177M reading the credit side is named and never priced; on the $200M reading it is priced by assertion, with no line, no unit and no hours behind it. Neither reading puts it on the page beside the $1M an hour that debits the same subject. That the book's own answer wobbles between them is a symptom of the defect, not a measurement of it.\n\n**Top echelon: NO** — the $1M-an-hour line is printed on the sheet, and a candidate who asks what that line is a claim about is already there. An honest **Medium**.\n\n- ask whose earnings the $1M an hour is, and then ask whether that same subject appears anywhere on the other side of the page\n- price the credit in the unit of the debit — dollars per hour of air over the same 146 hours [BUILD: 3 + 14×10 + 3] — so that the two are subtractable rather than merely both mentioned\n- put both on one clock before comparing: $146M is a year-six figure, **$73M** in present value [BUILD]\n\nFrom the book: the 16-day window and its dayparts; the 10-minute hourly ceiling; $400K prime and $200K non-prime per 30-second ad; no subscription revenue and 100% of the advertising kept; $428,000,000 of total costs; $1M/hour of opportunity cost; the 6-year lag and the 12% WACC; 2 slots per minute; $320M, $240M, $320M and $48M summing to $928M; $146M of opportunity cost as 2 days × 3 hours + 14 days × 10 hours at $1M/hr; the Rule of 72 and the halving of the year-six flows; the $177M present value; the printed $346M; and the solution's two sentences, \"the bid should just be $177M\" and \"most answers should be in the range of $200M\". Built here: 146 hours on air (3 + 14 × 10 + 3); $354M of net year-six value (928 − 428 − 146), which is what $177M is half of; $73M as the present value of the $146M debit (146 ÷ 2); and the $23M between $177M and $200M, cited only to refuse it as a measurement.\nSource: Kellogg-2012, Winter Olympics Bidding, pp. 59-62",
+    "ru": "Счёт сходится, и арифметика — не то, где живёт слот. Внутри эфирных часов: прайм в будни 10 дней × 4 ч = $320M, не-прайм в будни 10 дней × 6 ч = $240M, выходные 4 дня × 10 ч = $320M, церемонии 2 дня × 3 ч = $48M, каждый час несёт 10 минут рекламы по 2 слота в минуту — итого **$928M**. Против них $428M общих затрат и $146M альтернативных издержек (2 дня × 3 ч + 14 дней × 10 ч по $1M/ч). Половина остатка за шестилетний лаг (правило 72, 72 ÷ 12 = 6 лет на удвоение) даёт приведённую стоимость **$177M** — это половина от $928M − $428M − $146M = **$354M** [BUILD]. В средней строке книги напечатано $346M, в следующей $177M; собственному делению книги отвечает только $354M, так что $346M читается как опечатка.\n\nДефект строкой ниже. **$1M в час — это утверждение не об Играх.** Это утверждение о другом эфире канала: сколько заработала бы та программа в час, который забирают Игры, — и оно занесено на эту страницу 146 раз. Как только такая строка допущена, страница перестала быть страницей события: её ведут по книгам канала. А у этого адресата есть движение и в обратную сторону — те же часы служат собственным эфиром для всего остального, что канал делает, и событие даёт охват, который канал иначе не покупает. Разбор, который несёт списание по $1M в час, а зачёт пускает в конце строкой «нематериальные факторы», не осторожен. Он допустил одного адресата с одним знаком, и ставка назначается на этом разрыве.\n\nДве вещи на книжной странице надо объявить, и вторая ограничивает, как далеко это можно тянуть. Первая — опечатка $346M выше. Вторая: предложение решения синтаксически сломано и внутренне противоречиво — оно перечисляет нематериальное и тут же заключает «the bid should just be $177M», а следующее предложение ставит «most answers… in the range of $200M». Книга одновременно отказывается сдвигать ставку с арифметики и ждёт сдвига. **Не строй находку на $23M между этими числами.** Возьми любое чтение — вывод не меняется: при $177M плюсовая сторона названа и не оценена, при $200M она оценена декларацией, без строки, без единицы и без часов за ней. Ни одно из чтений не ставит её на страницу рядом с $1M в час, которые списывают того же адресата. То, что книжный ответ сам колеблется между ними, — симптом дефекта, а не его измерение.\n\n**Верхний эшелон: НЕТ** — строка «$1M в час» напечатана в таблице, и кандидат, спросивший, утверждение о чём это, уже на месте. Честный **Medium**.\n\n- спросить, чей это заработок — $1M в час, — и следом спросить, встречается ли тот же адресат где-нибудь на другой стороне страницы\n- оценить зачёт в единице списания: доллары на час эфира за те же 146 часов [BUILD: 3 + 14×10 + 3], чтобы две величины вычитались, а не просто обе упоминались\n- привести обе к одному такту до сравнения: $146M — величина шестого года, **$73M** приведённых [BUILD]\n\nИз книги: 16-дневное окно и его дейпарты; потолок в 10 минут рекламы в час; $400K в прайм и $200K вне прайма за 30-секундный ролик; отсутствие подписной выручки и 100% рекламной у канала; $428,000,000 общих затрат; $1M/час альтернативных издержек; шестилетний лаг и WACC 12%; 2 слота в минуту; $320M, $240M, $320M и $48M в сумме $928M; $146M альтернативных издержек как 2 дня × 3 часа + 14 дней × 10 часов по $1M/ч; правило 72 и деление потоков шестого года пополам; приведённая стоимость $177M; напечатанные $346M; и два предложения решения — «the bid should just be $177M» и «most answers should be in the range of $200M». Построено здесь: 146 часов эфира (3 + 14 × 10 + 3); $354M итога шестого года (928 − 428 − 146), половиной которого являются $177M; $73M как приведённая стоимость списания $146M (146 ÷ 2); $23M между $177M и $200M, приведённые только затем, чтобы отказать им в роли измерения.\nSource: Kellogg-2012, Winter Olympics Bidding, pp. 59-62"
    },
-   "family_h25": "F5",
+   "family_h25": "F11",
    "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
-    "naive": "проверяет арифметику предложенного варианта повышения цены",
-    "correct": "проверяет, на каком горизонте максимизируется прибыль, и сравнивает варианты на объявленном советом горизонте",
-    "why": "расхождение лежит в целевой функции, а не в счёте",
-    "code": "MECH-43-проверка-вместо-ответа",
-    "code2": [
-     "MECH-22-горизонт-накопления"
-    ]
+    "naive": "оставляет строку $1M/час в колонке затрат события как ещё одну статью, а то, что событие даёт остальному эфиру, называет в конце нематериальным — без строки, без единицы и без часов",
+    "correct": "спрашивает, утверждением о чьих заработках является каждая строка, и, приняв строку соседнего адресата, требует его вторую сторону в той же единице — доллары на час эфира за те же 146 часов и на том же такте",
+    "why": "слот проверяет не «объяви рамку до счёта», а один конкретный вопрос к одной конкретной строке: $1M/час — величина о другом эфире канала, и допустив её, страница уже ведётся по книгам канала, где у того же адресата есть и обратное движение; списание нормировано на час эфира, а зачёт не нормирован ни на что, поэтому две стороны одного адресата несопоставимы и разрыв между ними — артефакт разбора, а не результат",
+    "code": "MECH-310-периметр-минусов-шире-периметра-плюсов",
+    "code2": []
    },
-   "family_note": "круг 103: две меры в числах — прибыль первого года ($16.8M у C) и сумма за три года ($50.7M у B); решает объявленный советом трёхлетний горизонт"
+   "family_note": "F11 по телу: обе стороны относятся к одному адресату — остальному эфиру канала, — но приведены к разным нормировкам и потому не вычитаются. Списание нормировано дважды: на час эфира ($1M/ч) и на такт шестого года ($146M, то есть $73M приведённых). Зачёт не нормирован ни на что — он существует только как перечень в конце, без единицы, без числа часов и без даты. Решающий ход слота и есть приведение к общей нормировке (та же единица «доллар на час эфира», те же 146 часов, тот же такт); до него сравнение сторон не определено. Не F2: обратное движение к тому же адресату первого порядка и стоит на той же странице, что и списание — дефект в мере сравнения, а не в цепочке последствий. Не F1: подмены базы нет, средних и сводных строк в слоте нет. Не F5: строка $1M/ч уже выбрала книги канала за кандидата. Не близнец MECH-302 (ST-046): там величина клиента взята за вход вместо искомого, здесь входы честные. Не MECH-307 (SY-016): там своя себестоимость должна была стать потолком цены, здесь потолка нет. Не MECH-108: там забыта затрата, здесь забыта нормировка встречной величины у адресата, которому затрата уже выставлена."
   },
   {
    "id": "ST-048",
-   "title": "The New Formulation",
-   "company": "Wrenlocke",
-   "industry": "Food manufacturing",
+   "title": "Six Million In Three Years",
+   "company": "Hospitality Co",
+   "industry": "Leisure",
    "difficulty": "Medium",
    "echelon": false,
    "clean": false,
@@ -4003,67 +4023,77 @@
    "type": "Structuring",
    "exhibit_mode": "E-before",
    "depth_tag": "STANDARD",
-   "prompt": "Wrenlocke is converting production to a new formulation. The project runs **24 months** and delivers **+$3.2M** cumulatively. The board asks: **do we launch?**",
-   "anchor_metric": "result over 24 months = +$3.2M",
+   "prompt": "Our client owns a large hotel chain and is looking at a **waterpark add-on** at one of its properties. The build is **$6 million** and the client wants it back inside a **three-year payback**. The hotel runs on business travellers today; the client believes the park will bring families as well. The client is nervous about the capital and wants a view before committing: **how would you structure this decision, and what do you ask for first?**",
+   "anchor_metric": "investment to be recovered = $6M inside a 3-year payback",
    "exhibit": {
     "type": "table",
-    "title": "Wrenlocke: conversion to the new formulation, $M",
+    "title": "Hospitality Co: what the client has already put in front of the team",
     "header": [
-     "Month",
-     "Month total",
-     "Cumulative total",
-     "Old line"
+     "Item",
+     "What the client gives",
+     "Where it sits"
     ],
     "rows": [
      [
-      "1–7",
-      "−1.4",
-      "from −1.4 to −9.8",
-      "runs in parallel"
+      "Investment",
+      "$6 million",
+      "treated as a fixed cost"
      ],
      [
-      "8",
-      "−1.4",
-      "−11.2",
-      "dismantled"
+      "Payback required",
+      "3 years",
+      "the client's own requirement"
      ],
      [
-      "9–20",
-      "+0.9",
-      "from −10.3 to −0.4",
-      "dismantled"
+      "Rooms at this property",
+      "400",
+      "the hotel chosen for the experiment"
      ],
      [
-      "21–24",
-      "+0.9",
-      "from +0.5 to +3.2",
-      "dismantled"
+      "Occupancy assumption",
+      "with waterpark, 50% vacancy on average for the year",
+      "the client's planning figure"
+     ],
+     [
+      "Nights per year, planning basis",
+      "350",
+      "the hotel plans on 350 nights, not 365"
+     ],
+     [
+      "Variable cost",
+      "$40 per night per room",
+      "cost of serving an occupied room"
+     ],
+     [
+      "Current clientele",
+      "business travellers",
+      "the park is expected to add families"
      ]
     ],
-    "note": ""
+    "note": "The client has surveyed the chain and has already picked this property for the experiment. Anything not on this sheet is available from the client on request."
    },
    "key": {
-    "decoy": "| Branch | Why it's reflexive | [DEC-JUST] |\n|---|---|---|\n| **\"The result is positive — launch\"** | a direct inference from the total | The total is correct: +$3.2M over 24 months. But mid-horizon there is an **irreversible step**, after which exit is impossible, and by that moment the accumulated loss is at its maximum. The branch calls for the headline figure and **will not show the trajectory** |\n| **\"Compare against alternative projects\"** | the portfolio reflex | A comparison is appropriate but does not answer the question about the structure of risk **inside** this project |",
-    "cover": "| Branch | Synonyms (≥3) | [COV-JUST] |\n|---|---|---|\n| **1. The final result** | \"what the project delivers\" · \"cumulative total\" · \"sum over the horizon\" | Without the total the decision is unsupported |\n| **2. The trajectory within the horizon** | \"how it runs by month\" · \"the accumulation profile\" · \"where the minimum sits\" | Without the trajectory the total conceals risk: an identical total can have very different profiles |\n| **3. Points of irreversibility** | \"where exit becomes impossible\" · \"after which step is there no way back\" · \"reversibility by stage\" | **Load-bearing, and this is the muscle of the slot.** The project is reversible up to a certain step and irreversible after it. \"Launch\" is unsupported without answering **what we are risking at the point of no return** |",
-    "me": "| Pair | Status |\n|---|---|\n| 1 ↔ 2 | ⚠️ **conflation risk** — the total is the last point of the trajectory. Separated: branch 1 is the **value at the end**; branch 2 is the **profile in between** |\n| 1 ↔ 3 | **independent** — magnitude vs reversibility |\n| 2 ↔ 3 | ⚠️ **the slot's key pair** — the point of no return lies **on** the trajectory. Separated: branch 2 is **where the cumulative minimum sits**; branch 3 is **where the option to exit disappears**. Whether they coincide is the subject of the check |\n| Positive total ↔ 1 | ⚠️ **duplicate** |\n| Positive total ↔ 2, 3 | ⚠️ **opposition** — the total shows neither the profile nor the reversibility |\n| Alternatives ↔ 1 | ⚠️ partial |\n| Alternatives ↔ 2, 3 | **independent** |",
-    "drive": "| Branch | What to measure |\n|---|---|\n| 1. Total | cumulative result at month 24 |\n| 2. Trajectory | cumulative total by month · month of the minimum · month it turns positive |\n| 3. Irreversibility | the month after which exit is impossible · the accumulated loss at that moment · what is lost on exiting before and after |",
-    "order": "| Criterion | Legitimate start | Why |\n|---|---|---|\n| **irreversibility** | branch 3 | the cost of error is set by the point of no return, not by the total |\n| size of effect | branch 2 | the profile shows the maximum loss |\n| speed of verification | branch 1 | the total is already computed |"
+    "decoy": "| Branch | Why it's reflexive | [DEC-JUST] |\n|---|---|---|\n| **NAIVE — \"spread the $6M over our room-nights and back into the rate we have to charge\"** | every input it needs is on the page, it is one line of arithmetic, and **it comes out right**: $6M / 3 years = $2M a year; 400 rooms x 50% x 350 nights = 70,000 room-nights a year; $2,000,000 / 70,000 = $28.6 of fixed load per night; with the $40 variable the room has to fetch about $70 | Nothing in that line is arithmetically wrong, and that is exactly why it is the trap. **Dividing by room-nights is not a calculation, it is a commercial choice made silently** — it puts the whole $6M on the room rate. The client has two options open and has taken neither: an additional fee for waterpark entry, or all-inclusive in the hotel fee. Under the other one the denominator is not room-nights and the payer is not necessarily a room guest. The branch produces a number and buries the decision that produced it |\n| **\"Start with the market — will families come, and who else has a waterpark nearby\"** | the standard opening of any opportunity assessment: size the demand, then check the competition | Closed the moment it is asked — but only by clarifications the team gets **on request**, not from the sheet: there are no competitors immediately nearby, we have no information about competitors, there is no possibility of a competitive response in the short run, we have no specifics about the market and cannot commission further survey data. So the branch **cannot be closed and does not decide** — at eight minutes, opening here spends the budget on a branch that ends in \"we do not have the data\" |\n| **\"Compare this against the other things the chain could do with $6M\"** | the portfolio reflex | Legitimate at chain level and worth one sentence, but it neither sets this project's hurdle nor says who pays it. It is a ranking question asked before the thing to be ranked has been defined |",
+    "cover": "| Branch | Synonyms (>=3) | [COV-JUST] |\n|---|---|---|\n| **1. What has to come back, and by when** | \"the hurdle\" · \"what the $6M has to return\" · \"the recovery window\" | Without the size and the window there is no target at all: $6M over three years is $2M a year, and every figure downstream is measured against that line. Worth one question of its own: does the client mean the cash back, or a return on top of it |\n| **2. What this property can physically sell, and what it costs to serve** | \"capacity and cost to serve\" · \"how many nights we actually have\" · \"unit cost of an occupied room\" | 400 rooms, 50%, 350 nights and $40 a night are the physical facts and they bound everything. This branch also has to ask for what the page does **not** print: what the park itself costs to run each year, and how much of the 70,000 room-nights the park actually adds |\n| **3. On which bill the $6M comes back, and from whom** | \"how we charge for the park\" · \"who pays for it\" · \"what the guest is actually buying\" | **Load-bearing, and this is the muscle of the slot.** Two defensible conventions are open and the client has chosen neither: an additional fee for waterpark entry, or all-inclusive in the hotel fee. They are not two tones of the same answer — they differ in the **denominator** (room-nights vs. park admissions), in the **payer set** (room guests only vs. whoever the client lets in), and in **where the load lands**: under all-inclusive the $28.6 a night is a requirement on the **average room sold**, and nothing in the arithmetic says how that average is split — the same average is reached by charging families more and business travellers less. Who actually carries it is a **separate piece of work the structure has to schedule**, and until it is done the load sits by default on this hotel's normal clientele, who will never enter the park. A structure that divides by room-nights has answered this branch without asking it |",
+    "me": "| Pair | Status |\n|---|---|\n| 1 <-> 2 | **independent** — the target to be hit vs. the physical base that can be sold |\n| 1 <-> 3 | (!) **conflation risk** — both end in something that looks like \"a per-night number\". Separated: branch 1 fixes **how much a year** ($2M); branch 3 fixes **per what unit, and out of whose pocket** |\n| 2 <-> 3 | (!) **the slot's key pair** — room-nights appear in both. Separated: branch 2 asks **how many room-nights exist and what one costs to serve**; branch 3 asks **which of them, if any, is the recovery base, and whether there are payers who take no room at all** |\n| Naive line <-> 3 | (!) **duplicate in disguise** — the naive line is branch 3 answered without being asked. This is why the slot cannot be passed by adding a fourth branch at the end: the answer has already been committed in the denominator |\n| Market opening <-> 1, 2, 3 | **independent**, and closed by clarifications available on request |\n| Alternative uses of $6M <-> 1 | (!) partial — same hurdle language, different decision level |",
+    "drive": "| Branch | What to measure |\n|---|---|\n| 1. Target | $6M / 3 years = $2M a year · whether \"recoup\" means cash back or a return on top · what the client assumes happens after year 3 |\n| 2. Base and cost to serve | 400 rooms x 50% x 350 = 70,000 room-nights a year · $40 variable per occupied night · the park's own annual running cost (**not on the page — request it**) · the share of those 70,000 the park actually adds (**not on the page — request it**) |\n| 3. Bill and payer | which of the two conventions the client will adopt · under all-inclusive: $2,000,000 / 70,000 = $28.6 per room-night **on average across rooms sold** · how that average is split between families and business travellers — a separate question the arithmetic does not touch · under a separate entry fee: the denominator is park admissions, and that count is **not on the page** · whether non-guests may buy admission at all, which decides whether the payer set is capped by 400 rooms |",
+    "order": "| Criterion | Legitimate start | Why |\n|---|---|---|\n| **the bill before the denominator** | branch 3 | until the recovery convention is named, a per-night figure has no unit and no payer, and every number under it is conditional on a choice nobody has made |\n| speed of verification | branch 1 | the target is one division and both inputs are printed |\n| size of effect | branch 2 | the physical base caps everything downstream: 70,000 room-nights is the whole annual canvas |\n\n**Running the arithmetic first is legitimate and costs nothing at the gate.** The line comes out right, the book's own flow runs cost structure -> breakeven -> pricing, and all-inclusive is a defensible convention that the model answer itself uses. The gate fails on one thing only: the convention is **never named**, or it is named as a closing remark that changes nothing in the structure above it — the denominator stays unexamined, the second option is never priced, and the $28.6 stays an average nobody has allocated. Branch 3 heads this table because it is where the decision lives, not because a candidate who reaches it second has lost anything."
    },
    "reference": {
-    "en": "The total is correct and positive: **+$3.2M** over 24 months. The horizon is chosen correctly — 24 months, the whole project. The sequence of effects is accounted for: costs first, returns after.\n\nThe error is that **mid-horizon there is a point of no return**, and it falls exactly on the **maximum accumulated loss**: at month 8 the figure is **−$11.2M**, and from month 9 exit also means reinstating a line that has been dismantled — a cost the client has to be asked for.\n\nThe project therefore asks for agreement not to \"+$3.2M over two years\" but to \"−$11.2M with the right to change our minds forfeited, in exchange for +$3.2M in 24 months.\"\n\n**Top echelon: NO** — a candidate who checks reversibility stage by stage reaches the right answer. An honest **Medium**.\n\n- notice that the month of the minimum and the month reversibility is lost **coincide** — the worst possible combination\n- compute: exiting at month 9 costs 11.2 + 19.4 = **$30.6M** against $11.2M at month 8\n- propose moving the dismantling of the old line to month 12 if technically possible: the point of no return would then fall beyond the minimum",
-    "ru": "Итог верен и положителен: **+$3.2M** за 24 месяца. Горизонт выбран верно — 24 месяца, весь проект. Последовательность эффектов учтена: сначала затраты, отдача потом.\n\nОшибка в том, что **в середине горизонта есть точка невозврата**, и она приходится ровно на **максимум накопленного убытка**: на 8-м месяце цифра — **−$11.2M**, а с 9-го месяца выход означает ещё и восстановление демонтированной линии — затрату, которую надо запросить у клиента.\n\nЗначит, проект просит согласия не на «+$3.2M за два года», а на «−$11.2M с утратой права передумать в обмен на +$3.2M через 24 месяца».\n\n**Верхний эшелон: НЕТ** — кандидат, который проверяет обратимость этап за этапом, приходит к верному ответу. Честный **Medium**.\n\n- заметить, что месяц минимума и месяц утраты обратимости **совпадают** — худшее из возможных сочетаний\n- посчитать: выход на 9-м месяце стоит 11.2 + 19.4 = **$30.6M** против $11.2M на 8-м\n- предложить перенести демонтаж старой линии на 12-й месяц, если это технически возможно: тогда точка невозврата ляжет за минимумом"
+    "en": "The naive path is the casebook's own arithmetic and it is correct: $6M / 3 years = $2M a year; 400 rooms x 50% x 350 nights = 70,000 room-nights a year; $2,000,000 / 70,000 = $28.6 of fixed load per room-night; with the $40 variable cost the room has to fetch about $70 a night.\n\nThe defect sits **above** every one of those figures. Dividing by room-nights is a **commercial choice made silently**: it puts the entire $6M on the room rate. The client has two options in front of it — charge an additional fee for waterpark entry, or make it all-inclusive with the hotel fee — and has taken neither. The two conventions do not produce the same structure. The denominator moves from room-nights to park admissions. The payer set moves from room guests only to whoever the client allows in, which is what decides whether 400 rooms is a ceiling at all. And the load lands somewhere different: under all-inclusive the $28.6 a night is a requirement on the **average room sold**. The arithmetic says nothing about how that average is split — the same $70 average is reached by charging families more and business travellers less — so allocating it between guest types is a **separate piece of work, not yet done**, and the structure has to schedule it. Until it is done the load sits by default on this hotel's normal clientele, who will never enter the park: the very group the client is already at risk of alienating.\n\n**Two mandatory gates at eight minutes.** (1) The recovery convention is named **inside the structure**, as a choice the client still has — room rate, or a separate charge for the park — and not appended as an afterthought once the number is out. The book's own flow runs cost structure -> breakeven -> pricing, so naming the convention **after** the arithmetic passes the gate; what fails it is never naming it, or naming it as a closing remark that changes nothing in the structure above. (2) The candidate says what changes under the other convention — the denominator becomes the number of park admissions, which is not on the sheet and has to be requested. Choosing all-inclusive is a **pass**: the gate is naming the choice and pricing the alternative, not landing on a particular one.\n\n**Top echelon: NO** — a candidate who asks what the guest is buying and on which bill it appears gets there unaided. An honest **Medium**.\n\n- notice that the ~$70 is the **room's full floor**, not the park's hurdle: the $40 is the cost of serving an occupied room and is incurred whether or not the park is ever built (bonus)\n- notice that $28.6 is an average over rooms sold and ask how it is to be allocated: a family premium with a business rate held flat reaches the same average and moves the risk (bonus)\n- pin down the 50%: the sheet says \"50% **vacancy**\", and the arithmetic multiplies 400 x 50% to get the rooms **sold**. At 50% the two readings coincide and the number survives; at any other level the same sentence would break, so the label is worth one question (bonus)\n- ask for the park's own annual running cost and for the share of the 70,000 room-nights the park actually adds — neither is printed, and the assessment leans on both (bonus)\n\nSource: Kellogg-2012, Hospitality Co, pp. 106-110",
+    "ru": "Наивный путь — это книжная арифметика, и она верна: $6M / 3 года = $2M в год; 400 номеров x 50% x 350 ночей = 70 000 номеро-ночей в год; $2 000 000 / 70 000 = $28.6 постоянной нагрузки на ночь; вместе с переменными $40 номер должен приносить около $70 за ночь.\n\nДефект лежит **выше** всех этих цифр. Деление на номеро-ночи — не расчёт, а **молча принятое коммерческое решение**: оно кладёт весь $6M на тариф номера. У клиента открыты две опции — брать отдельную плату за вход в аквапарк или включить его в стоимость номера, — и он не выбрал ни одну. Конвенции дают разные структуры. Знаменатель меняется с номеро-ночей на входы в парк. Круг плательщиков меняется с гостей отеля на всех, кого клиент пустит, — и именно это решает, потолок ли вообще 400 номеров. И нагрузка ложится в разное место: при all-inclusive $28.6 за ночь — требование к **среднему проданному номеру**. Арифметика ничего не говорит о том, как эта средняя разложена: те же $70 в среднем получаются, если брать с семей больше, а с командированных меньше. Разнесение между типами гостей — **отдельная, ещё не сделанная работа**, и структура обязана её поставить. Пока она не сделана, нагрузка по умолчанию лежит на обычной клиентуре отеля, которая в парк не войдёт, — ровно на той группе, потерей которой клиент уже рискует.\n\n**Два обязательных ворота на восьми минутах.** (1) Способ возмещения назван **внутри структуры**, как открытый выбор клиента — тариф номера или отдельная плата за парк, — а не приписан послесловием, когда число уже получено. Книжный поток идёт cost structure -> breakeven -> pricing, поэтому назвать конвенцию **после** счёта — зачёт; незачёт — не назвать вовсе или назвать финальной репликой, которая ничего в структуре выше не меняет. (2) Кандидат говорит, что меняется при другой конвенции: знаменателем становится число входов в парк, которого на листе нет и которое надо запросить. Выбор в пользу all-inclusive — **зачёт**: ворота стоят на назывании выбора и оценке альтернативы, а не на попадании в конкретный вариант.\n\n**Верхний эшелон: НЕТ** — кандидат, который спрашивает, что именно покупает гость и в каком счёте это стоит, приходит сам. Честный **Medium**.\n\n- заметить, что ~$70 — это **полный пол тарифа номера**, а не барьер парка: $40 — стоимость обслуживания занятого номера, она есть и без парка (бонус)\n- заметить, что $28.6 — средняя по проданным номерам, и спросить, как её разносить: премия для семей при неизменном тарифе для командированных даёт ту же среднюю и переносит риск (бонус)\n- уточнить 50%: в листе написано «50% **vacancy**», а арифметика умножает 400 x 50%, получая **проданные** номера. На 50% оба чтения совпадают и цифра выживает; на любом другом уровне та же фраза сломалась бы — поэтому ярлык стоит одного вопроса (бонус)\n- запросить годовую стоимость эксплуатации самого парка и долю тех 70 000 номеро-ночей, которую парк действительно добавляет: ни того, ни другого на странице нет, а оценка опирается на оба (бонус)\n\n[BUILD] Построенных мной величин в теле нет — вся арифметика воспроизводит книжную, страницы 108: 6 000 000 / 3 = 2 000 000 (книга печатает «$2 million / year»); 400 x 0.50 x 350 = 70 000 (книга печатает «70,000 rooms per year»); 2 000 000 / 70 000 = 28.5714…, книга печатает «28.6, or about $30/night»; 28.6 + 40 = 68.6, книга печатает «around $70/night total».\n\nSource: Kellogg-2012, Hospitality Co, pp. 106-110"
    },
-   "family_h25": "F12",
+   "family_h25": "F5",
    "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
-    "naive": "принимает решение по накопленному итогу проекта за весь срок",
-    "correct": "принимает решение по траектории накопленного результата и по точке, после которой выход невозможен",
-    "why": "положительный итог за горизонт не говорит, что происходит в середине пути",
-    "code": "MECH-82-необратимость-окна",
+    "naive": "разносит $6M по номеро-ночам отеля и выводит требуемую ставку за номер, не назвав, что этим уже выбрал возмещение через тариф номера",
+    "correct": "называет способ возмещения до знаменателя — тариф номера или отдельная плата за вход — и держит обе конвенции в структуре, показывая, какой знаменатель, какой круг плательщиков и какой адрес нагрузки даёт каждая",
+    "why": "деление на 70 000 номеро-ночей — не расчёт, а молча принятое коммерческое решение: оно кладёт весь $6M на тариф номера, а вместе с ним ~$28.6 за ночь на средний проданный номер, не назвав ни того, что конвенция выбрана, ни того, как эта средняя разносится между семьями и командированными, — при том что клиент ни одну из двух напечатанных книгой опций ещё не выбрал",
+    "code": "MECH-312-конвенция-возмещения-выбрана-знаменателем",
     "code2": []
    },
-   "family_note": "круг 103, по ревью: итог +$3.2M верен, а внутри гасятся разнознаковые — −1.4×8 месяцев против +0.9×16"
+   "family_note": "круг 114, по телу: две защитимые конвенции возмещения напечатаны книгой как опции — «additional fee for waterpark entry or make it all-inclusive with hotel fee» (стр. 109, блок Notes to interviewer к колонке Pricing decisions), клиент не выбрал ни одну, а наивный путь выбирает молча — самим делением на 70 000. Не F4: обе опции напечатаны открыто, ничего не снимается — после ответа клиента обе ветви остаются, меняется знаменатель. Не MECH-01-приростная-база: приростность книга закрыла сама — «all guests are incremental (the 50% vacancy rate)» (стр. 107, блок Interview guidelines), — а носитель возмещения оставила открытым. Отвод ближайших, каждый различающим вопросом. MECH-302 (ST-046) — «верна ли уже посчитанная величина?»: там нет, план в 10 млн взят за вход, хотя он искомое; здесь да, дефект выше арифметики. MECH-310 (ST-047) — «полон ли периметр по обоим знакам?»: там нет; здесь полон в любой версии, молча выбрана версия. Оба входа звучат как «назови рамку прежде счёта» — слабое место слота, называю сам; ремонт разный: там добавить встречный поток, здесь показать второй знаменатель. MECH-51-единица-тарификации (MS-013) — «единица уже назначена?»: там да, платят за поездку, а кандидат берёт подписку; здесь единиц пока две, клиент не решил, продаёт он ночь или вход. MECH-204-набор-плательщиков (MS-011) — «все существующие плательщики сложены?»: там нет, вторая часть оплаты забыта; здесь круг плательщиков не забыт, а ещё не определён — следствие невыбранной конвенции, решение клиента, а не факт мира. Старая MECH-82-необратимость-окна снята целиком: её несёт ST-044."
   },
   {
    "id": "ST-049",
