@@ -682,7 +682,7 @@
     },
     {
      "c": 6,
-     "prompt": "Table-avg with N/A — coral-recruit density (recruits/m²) in the North column; N/A = 0, average over all 3 genera; if the first genus doubled: | | North | Mid | South | |---|---|---|---| | Genus A | 14 | 11 | 8 | | Genus B | 7 | 9 | 5 | | Genus C | *N/A* | 10 | 17 | → North (28+7+0)/3 · Mid 13.67 · South 12.67. (÷2 available). Note #2: carries a light layered step (Q3 reduction → forward projection) but tagged Medium honestly — one chained step over a standard C-set is not a full Hard",
+     "prompt": "Table-avg with N/A — coral-recruit density (recruits/m²) in the North column; N/A = 0, average over all 3 genera; if the first genus doubled: | | North | Mid | South | |---|---|---|---| | Genus A | 14 | 11 | 8 | | Genus B | 7 | 9 | 5 | | Genus C | *N/A* | 10 | 17 | → North (28+7+0)/3 · Mid 13.67 · South 12.67. (÷2 available).",
      "input": "numeric",
      "answer": 11.67,
      "round": 2,
@@ -5061,7 +5061,7 @@
     },
     {
      "c": 6,
-     "prompt": "Table-avg with N/A — soil-invertebrate biomass in the Edge column; N/A = 0, ÷3, first type doubled: | | Edge | Mid | Core | |---|---|---|---| | Beetles | 15 | 12 | 9 | | Ants | 6 | 10 | 7 | | Larvae | *N/A* | 9 | 16 | → Edge (30+6+0)/3 · Mid 14.33 · Core 13.67. (÷2). Note #12: carries a light layered step (Q3 reduction → projection) + %-vs-absolute Q4, but tagged Medium honestly — same basis that demoted #2 Talveh; one chained step over a standard C-set is not a full Hard (contrast #14's real 4 layers)",
+     "prompt": "Table-avg with N/A — soil-invertebrate biomass in the Edge column; N/A = 0, ÷3, first type doubled: | | Edge | Mid | Core | |---|---|---|---| | Beetles | 15 | 12 | 9 | | Ants | 6 | 10 | 7 | | Larvae | *N/A* | 9 | 16 | → Edge (30+6+0)/3 · Mid 14.33 · Core 13.67. (÷2).",
      "input": "numeric",
      "answer": 12,
      "round": 2,
@@ -8773,7 +8773,7 @@
     },
     {
      "c": 6,
-     "prompt": "Break-even adoption [9b-model] — save(a)=a×120,000×5×$12; cost(a)=a×120,000×$30+$400,000. a×(7,200,000−3,600,000)=400,000 → a. (fixed total cost). Dedup vs Nyala/Dombe: 120k hh (200k/150k) · 65% (60/55) · 5 effect (8/12) · $30 (25/40) · $400k (500k/600k) · $12 saving (6/9) · break-even 11.11% (10.87/5.88)",
+     "prompt": "Break-even adoption [9b-model] — save(a)=a×120,000×5×$12; cost(a)=a×120,000×$30+$400,000. a×(7,200,000−3,600,000)=400,000 → a. (fixed total cost).",
      "input": "numeric",
      "answer": 11.11,
      "round": 2,
@@ -13391,7 +13391,7 @@
     },
     {
      "c": 6,
-     "prompt": "Break-even adoption [9b-model] — save(a)=a×90,000×6×$10; cost(a)=a×90,000×$25+$500,000. a×(5,400,000−2,250,000)=500,000 → a. (fixed ÷ full-adoption saving). Dedup vs Nyala/Dombe/Kavango: 90k hh (200k/150k/120k) · 70% (60/55/65) · 6 sessions (8/12/5) · $25 (25/40/30) · $500k (500k/600k/400k) · $10 saving (6/9/12) · break-even 15.87% (10.87/5.88/11.11)",
+     "prompt": "Break-even adoption [9b-model] — save(a)=a×90,000×6×$10; cost(a)=a×90,000×$25+$500,000. a×(5,400,000−2,250,000)=500,000 → a. (fixed ÷ full-adoption saving).",
      "input": "numeric",
      "answer": 15.87,
      "round": 2,
@@ -17279,7 +17279,7 @@
     },
     {
      "c": 6,
-     "prompt": "Break-even adoption [9b-model, net] — net-save(a)=a×110,000×(9×8−5)=a×110,000×67; cost(a)=a×110,000×$30+$450,000. a×110,000×(67−30)=450,000 → a = 450,000/4,070,000. (fixed ÷ full net-save, omits that stove cost scales with adoption). Dedup vs Nyala/Dombe/Kavango/Lenga: 110k hh · 60% · 9 cases · $30 · $450k · $8 saving · $5 recurring maintenance (net-vs-gross hook, ≠ Lenga's covered-vs-all) · break-even 11.06% (vs 10.87/5.88/11.11/15.87)",
+     "prompt": "Break-even adoption [9b-model, net] — net-save(a)=a×110,000×(9×8−5)=a×110,000×67; cost(a)=a×110,000×$30+$450,000. a×110,000×(67−30)=450,000 → a = 450,000/4,070,000. (fixed ÷ full net-save, omits that stove cost scales with adoption).",
      "input": "numeric",
      "answer": 11.06,
      "round": 2,
@@ -20756,7 +20756,7 @@
     },
     {
      "c": 6,
-     "prompt": "Break-even adoption [9b-model] — save(a)=a×80,000×6×$8; cost(a)=a×80,000×$30+$400,000. a×(3,840,000−2,400,000)=400,000 → a. (fixed ÷ full-adoption saving). Dedup vs Nyala/Dombe/Kavango/Lenga/Tesvan: 80k hh · size 5.0 · 70% · 6 cases · $30 · $400k · $8 saving · **",
+     "prompt": "Break-even adoption [9b-model] — save(a)=a×80,000×6×$8; cost(a)=a×80,000×$30+$400,000. a×(3,840,000−2,400,000)=400,000 → a. (fixed ÷ full-adoption saving).",
      "input": "numeric",
      "answer": 27.78,
      "round": 2,
