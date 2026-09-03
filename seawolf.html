@@ -1,56 +1,88 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Sea Wolf - CasEdge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
 :root{
  --ink:#f2f6fa; --dim:#a9bccd; --dim2:#7f97ab;
- --card:#ffffff; --cardInk:#101c28;
- --panel:rgba(10,18,26,.78); --hair:rgba(255,255,255,.10);
- --ok:#3fa87a; --bad:#d1685f; --gold:#d8a53c; --acc:#2f7fb8;
+ --card:#ffffff; --cardInk:#141413;
+ --panel:rgba(8,20,18,.78); --hair:rgba(255,255,255,.10);
+ /* 03.09.2026 · тёплые нейтрали сайта. Взяты из :root боевого index.html,
+    ими крашены светлые экраны (меню, разбор) и внутренности белых карточек.
+    Подводная сцена ОСТАЁТСЯ - артборды Board и Trio тоже тёмные, с тем же
+    зелёно-бирюзовым градиентом; светлыми в макете сделаны только вход и разбор. */
+ --canvas:#faf9f5; --cream:#e8e0d2; --soft:#f5f0e8; --paper:#ffffff;
+ --ink-w:#141413; --body-w:#3d3d3a; --muted-w:#6c6a64; --faint-w:#8e8b82;
+ --hair-w:#e6dfd8; --hair-w2:#ebe6df; --on-deep:#b7c9c4;
+ --deep-1:#16302e; --deep-2:#122624; --deep-3:#0d1a18;
+/* ── ТОКЕНЫ САЙТА · круг 1 дизайна, 03.09.2026 ──────────────────────────
+   Значения скопированы из :root боевого index.html, а не подобраны на глаз.
+   Меняются ТОЛЬКО акцент и типографика; тема (тёмная) и сцена не тронуты -
+   светлая тема решается владельцем отдельно, см. ЗАМЕР_цены_дизайна. */
+ --site-coral:#5db8a6; --site-coral-active:#3f8f7e; --site-amber:#e8a55a;
+ --site-error:#c64545; --site-success:#5db872;
+ --font-display:'Newsreader',Georgia,'Times New Roman',serif;
+ --font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+ --font-mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+ --ok:var(--site-success); --bad:var(--site-error); --gold:var(--site-amber);
+ --acc:var(--site-coral);
  --r:12px; --rl:16px;
 }
 *{box-sizing:border-box}
 html,body{margin:0;height:100%}
-body{background:#03151f;color:var(--ink);
- font:400 15px/1.55 ui-sans-serif,-apple-system,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+body{background:var(--cream);color:var(--body-w);
+ font:400 15px/1.55 var(--font-sans);
  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
-h1,h2,h3,h4{letter-spacing:-.015em;font-weight:600;margin:0}
-.mono{font-variant-numeric:tabular-nums lining-nums}
+h1,h2,h3,h4{letter-spacing:-.015em;font-weight:500;margin:0;font-family:var(--font-display)}
+/* в партии - тёмная подводная сцена; вне партии (меню, разбор, отказ) - светлая
+   страница. Переключатель уже был в клиенте: render() ставит body.d1/d2/d3 на
+   время игры и снимает класс в конце. Ни строки JS для этого не добавлено. */
+body:not(.d1):not(.d2):not(.d3){background:var(--cream);color:var(--body-w)}
+body:not(.d1):not(.d2):not(.d3) #sea,
+body:not(.d1):not(.d2):not(.d3) #caust,
+body:not(.d1):not(.d2):not(.d3) #rays,
+body:not(.d1):not(.d2):not(.d3) #snow,
+body:not(.d1):not(.d2):not(.d3) #vig,
+body:not(.d1):not(.d2):not(.d3) #grain{display:none}
+body.d1,body.d2,body.d3{background:var(--deep-3);color:var(--ink)}
+.mono{font-variant-numeric:tabular-nums lining-nums;font-family:var(--font-mono)}
 
 /* ---------- фон: глубина, лучи, зерно ---------- */
 #sea{position:fixed;inset:0;z-index:0;transition:background 1.6s ease;
  background:
-  radial-gradient(120% 62% at 50% -14%, rgba(120,215,240,.30) 0%, rgba(60,160,200,.16) 26%, transparent 58%),
-  linear-gradient(180deg,#1b6d8f 0%,#125a7c 14%,#0b4364 32%,#072f49 54%,#041e30 76%,#02121e 100%)}
+  radial-gradient(120% 62% at 50% -14%, rgba(210,240,230,.22) 0%, rgba(93,184,166,.14) 26%, transparent 58%),
+  linear-gradient(180deg,#1c3a37 0%,#16302e 22%,#122624 55%,#0f1f1d 78%,#0d1a18 100%)}
 body.d1 #sea{background:
-  radial-gradient(120% 62% at 50% -14%, rgba(150,235,245,.40) 0%, rgba(80,190,215,.20) 26%, transparent 58%),
-  linear-gradient(180deg,#2a86a6 0%,#1a6f92 14%,#105577 32%,#0a3c5c 54%,#06283f 76%,#03192a 100%)}
+  radial-gradient(120% 62% at 50% -14%, rgba(210,240,230,.30) 0%, rgba(93,184,166,.18) 26%, transparent 58%),
+  linear-gradient(180deg,#23473f 0%,#1b3a35 14%,#16302e 32%,#122624 54%,#0f1f1d 76%,#0d1a18 100%)}
 body.d2 #sea{background:
-  radial-gradient(120% 62% at 50% -14%, rgba(110,200,230,.24) 0%, rgba(50,140,185,.13) 26%, transparent 56%),
-  linear-gradient(180deg,#13597c 0%,#0e4768 14%,#093551 32%,#062639 54%,#041a29 76%,#020f19 100%)}
+  radial-gradient(120% 62% at 50% -14%, rgba(210,240,230,.18) 0%, rgba(93,184,166,.11) 26%, transparent 56%),
+  linear-gradient(180deg,#16302e 0%,#132a27 14%,#102220 32%,#0e1c1a 54%,#0c1715 76%,#0a1210 100%)}
 body.d3 #sea{background:
-  radial-gradient(110% 55% at 50% -18%, rgba(80,165,205,.18) 0%, rgba(35,105,150,.09) 24%, transparent 54%),
-  linear-gradient(180deg,#0a3b57 0%,#072d45 14%,#052134 32%,#03182781 54%,#02101c 76%,#010a12 100%)}
+  radial-gradient(110% 55% at 50% -18%, rgba(210,240,230,.12) 0%, rgba(93,184,166,.07) 24%, transparent 54%),
+  linear-gradient(180deg,#112423 0%,#0e1e1c 14%,#0b1817 32%,#091412 54%,#070f0e 76%,#050a09 100%)}
 body.d1 #snow{opacity:.62} body.d2 #snow{opacity:.5} body.d3 #snow{opacity:.34}
 body.d1 #rays{opacity:.19} body.d2 #rays{opacity:.12} body.d3 #rays{opacity:.06}
 body.d1 #caust{opacity:.17} body.d2 #caust{opacity:.11} body.d3 #caust{opacity:.05}
 body.d3 #vig{background:radial-gradient(120% 82% at 50% 34%,transparent 26%,rgba(0,6,12,.6) 66%,rgba(0,4,8,.86) 100%)}
 /* каустика: настоящий шум, а не полоски */
 #caust{position:fixed;inset:-12%;z-index:1;pointer-events:none;opacity:.13;mix-blend-mode:screen;
- background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='560' height='560'><filter id='c'><feTurbulence type='fractalNoise' baseFrequency='0.011 0.02' numOctaves='3' seed='7'/><feColorMatrix type='matrix' values='0 0 0 0 0.62  0 0 0 0 0.88  0 0 0 0 1  0 0 0 -2.2 1.05'/></filter><rect width='560' height='560' filter='url(%23c)'/></svg>");
+ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='560' height='560'><filter id='c'><feTurbulence type='fractalNoise' baseFrequency='0.011 0.02' numOctaves='3' seed='7'/><feColorMatrix type='matrix' values='0 0 0 0 0.66  0 0 0 0 0.92  0 0 0 0 0.86  0 0 0 -2.2 1.05'/></filter><rect width='560' height='560' filter='url(%23c)'/></svg>");
  background-size:820px 820px;filter:blur(1.5px);animation:caust 42s linear infinite}
 @keyframes caust{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(-3%,2%,0) scale(1.06)}100%{transform:translate3d(0,0,0) scale(1)}}
 /* лучи света от поверхности */
 #rays{position:fixed;inset:-25% -15%;z-index:1;pointer-events:none;opacity:.13;mix-blend-mode:screen;
  background:
-  linear-gradient(99deg,transparent 44%,rgba(190,235,255,.75) 47.5%,transparent 51%),
-  linear-gradient(93deg,transparent 60%,rgba(190,235,255,.5) 63.5%,transparent 67%),
-  linear-gradient(108deg,transparent 20%,rgba(190,235,255,.42) 23.5%,transparent 27%),
-  linear-gradient(87deg,transparent 76%,rgba(190,235,255,.32) 79%,transparent 82%);
+  linear-gradient(99deg,transparent 44%,rgba(210,240,230,.75) 47.5%,transparent 51%),
+  linear-gradient(93deg,transparent 60%,rgba(210,240,230,.5) 63.5%,transparent 67%),
+  linear-gradient(108deg,transparent 20%,rgba(210,240,230,.42) 23.5%,transparent 27%),
+  linear-gradient(87deg,transparent 76%,rgba(210,240,230,.32) 79%,transparent 82%);
  filter:blur(30px);animation:ray 46s ease-in-out infinite alternate}
 @keyframes ray{from{transform:translate3d(-2%,0,0) rotate(-.4deg)}to{transform:translate3d(3%,1.5%,0) rotate(.5deg)}}
 /* морской снег */
 #snow{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.5}
-#snow span{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(226,244,255,.9),rgba(226,244,255,0) 70%);
+#snow span{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(219,238,231,.9),rgba(219,238,231,0) 70%);
  animation:snowfall linear infinite}
 @keyframes snowfall{0%{transform:translate3d(0,-8vh,0)}100%{transform:translate3d(2vw,108vh,0)}}
 #vig{position:fixed;inset:0;z-index:2;pointer-events:none;
@@ -66,11 +98,11 @@ body.d3 #vig{background:radial-gradient(120% 82% at 50% 34%,transparent 26%,rgba
 .lab{width:150px;text-align:right;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim2)}
 .val{font-size:13px;color:var(--ink)}
 .tbar{flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,.13);overflow:hidden}
-.tfill{height:100%;background:#5fbf95;transition:width .9s linear}
+.tfill{height:100%;background:var(--acc);transition:width .9s linear}
 .tfill.warn{background:var(--gold)}.tfill.hot{background:var(--bad)}
 .segs{flex:1;display:flex;gap:2px}
 .seg{flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,.13)}
-.seg.on{background:var(--gold)}.seg.done{background:#5fbf95}
+.seg.on{background:var(--gold)}.seg.done{background:var(--acc)}
 .exit{background:transparent;border:1px solid var(--hair);color:var(--dim);border-radius:20px;padding:7px 16px;font-size:12.5px;cursor:pointer;transition:.15s}
 .exit:hover{border-color:rgba(255,255,255,.3);color:var(--ink)}
 
@@ -89,17 +121,17 @@ body.d3 #vig{background:radial-gradient(120% 82% at 50% 34%,transparent 26%,rgba
 .ocard:hover{transform:translateY(-4px);box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 4px 10px rgba(0,20,35,.2),0 22px 46px rgba(0,15,28,.44)}
 .ocard:active{transform:translateY(-1px) scale(.995)}
 .ocard.picked{box-shadow:0 0 0 2px var(--gold),0 20px 44px rgba(0,15,28,.44)}
-.ocard .nm{text-align:center;font-weight:600;font-size:16.5px;letter-spacing:-.01em;color:#0d1822}
-.ocard .sub{text-align:center;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8496a6;margin-top:2px}
+.ocard .nm{text-align:center;font-weight:600;font-size:16.5px;letter-spacing:-.01em;color:var(--ink-w)}
+.ocard .sub{text-align:center;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint-w);margin-top:2px}
 .ocard .art{display:flex;justify-content:center;margin:10px 0 12px}
-.hr{height:1px;background:#e8edf2;margin:2px 0 8px}
+.hr{height:1px;background:var(--hair-w);margin:2px 0 8px}
 .arow{display:flex;align-items:center;gap:11px;padding:5px 0;font-size:14px}
-.arow .ico{width:26px;height:26px;flex:0 0 26px;display:grid;place-items:center;background:#f1f5f8;border-radius:7px}
-.arow .an{flex:1;color:#4a5b6c;font-size:13.5px}
-.arow .av{font-weight:650;color:#0d1822;font-size:15px}
-.trow2{display:flex;align-items:center;gap:11px;padding:9px 0 0;margin-top:6px;border-top:1px solid #e8edf2;font-size:13.5px;color:#33455a}
+.arow .ico{width:26px;height:26px;flex:0 0 26px;display:grid;place-items:center;background:var(--soft);border-radius:7px}
+.arow .an{flex:1;color:var(--muted-w);font-size:13.5px}
+.arow .av{font-weight:650;color:var(--ink-w);font-size:15px}
+.trow2{display:flex;align-items:center;gap:11px;padding:9px 0 0;margin-top:6px;border-top:1px solid var(--hair-w);font-size:13.5px;color:var(--body-w)}
 .plus{position:absolute;right:14px;bottom:13px;width:32px;height:32px;border-radius:50%;
- background:#0d1822;color:#fff;border:0;cursor:pointer;display:grid;place-items:center;transition:.15s}
+ background:var(--ink-w);color:#fff;border:0;cursor:pointer;display:grid;place-items:center;transition:.15s}
 .plus:hover{background:var(--acc);transform:scale(1.08)}
 
 /* ---------- пул ---------- */
@@ -112,10 +144,10 @@ body.d3 #vig{background:radial-gradient(120% 82% at 50% 34%,transparent 26%,rgba
 .pill.click:hover{transform:translateY(-3px);box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 14px 30px rgba(0,15,28,.4)}
 .pill.sel{box-shadow:0 0 0 2px var(--gold),0 14px 30px rgba(0,15,28,.4)}
 .pill .thumb{position:absolute;top:-20px;left:50%;transform:translateX(-50%)}
-.pill .nm{text-align:center;font-weight:600;font-size:13px;letter-spacing:-.005em;margin:6px 0 7px;color:#0d1822}
+.pill .nm{text-align:center;font-weight:600;font-size:13px;letter-spacing:-.005em;margin:6px 0 7px;color:var(--ink-w)}
 .pill .st{display:flex;align-items:center;justify-content:center;gap:8px;font-size:12.5px}
 .pill .st i{display:grid;place-items:center;width:16px;height:16px;opacity:.55}
-.pill .st b{color:#0d1822;font-weight:650}
+.pill .st b{color:var(--ink-w);font-weight:650}
 .pill .tr{position:absolute;top:8px;right:9px;opacity:.9}
 
 /* ---------- панель ---------- */
@@ -129,7 +161,7 @@ body.d3 #vig{background:radial-gradient(120% 82% at 50% 34%,transparent 26%,rgba
 .prow{display:flex;align-items:center;gap:12px;padding:7px 0}
 .prow+.prow{border-top:1px solid rgba(255,255,255,.055)}
 .prow .ico{width:28px;height:28px;flex:0 0 28px;display:grid;place-items:center;background:rgba(255,255,255,.06);border-radius:8px}
-.prow .n{flex:1;font-size:13.5px;color:#dbe8f2}
+.prow .n{flex:1;font-size:13.5px;color:var(--on-deep)}
 .prow .v{font-weight:650;font-size:15px}
 .tag{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim2)}
 
@@ -144,13 +176,13 @@ body.d3 #vig{background:radial-gradient(120% 82% at 50% 34%,transparent 26%,rgba
  background:rgba(6,14,21,.96);border:1px solid var(--hair);border-radius:var(--rl);padding:14px 18px;backdrop-filter:blur(12px)}
 .bottom .i{width:24px;height:24px;flex:0 0 24px;border-radius:50%;border:1.4px solid var(--gold);color:var(--gold);
  display:grid;place-items:center;font-size:12px;font-weight:700;font-style:italic}
-.bottom .txt{flex:1;font-size:13.5px;color:#c9dcea}
+.bottom .txt{flex:1;font-size:13.5px;color:var(--on-deep)}
 .btn{background:var(--acc);color:#fff;border:0;border-radius:9px;padding:11px 22px;font-size:14.5px;font-weight:500;cursor:pointer;transition:.15s}
-.btn:hover{background:#3b93cf}.btn[disabled]{background:rgba(255,255,255,.08);color:#6b7f90;cursor:default}
-.btn.g{background:#2b7d5c}.btn.g:hover{background:#33936c}
+.btn:hover{background:var(--site-coral-active)}.btn[disabled]{background:rgba(255,255,255,.08);color:var(--faint-w);cursor:default}
+.btn.g{background:var(--acc)}.btn.g:hover{background:var(--site-coral-active)}
 .btn.ghost{background:transparent;border:1px solid var(--hair);color:var(--dim)}
 .btn.ghost:hover{border-color:rgba(255,255,255,.3);color:var(--ink)}
-.legend{position:fixed;right:22px;bottom:22px;z-index:20;background:rgba(255,255,255,.94);color:#0d1822;border:0;
+.legend{position:fixed;right:22px;bottom:22px;z-index:20;background:rgba(255,255,255,.94);color:var(--ink-w);border:0;
  border-radius:9px;padding:9px 17px;font-size:13.5px;cursor:pointer;box-shadow:0 10px 26px rgba(0,0,0,.4)}
 
 /* ---------- живые бактерии ---------- */
@@ -182,21 +214,21 @@ body.d3 #vig{background:radial-gradient(120% 82% at 50% 34%,transparent 26%,rgba
  border:1px solid var(--hair);border-radius:20px;padding:34px 38px 28px;box-shadow:0 40px 90px rgba(0,0,0,.6);max-height:88vh;overflow:auto}
 .modal .kicker{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
 .modal h2{font-size:25px;margin:0 0 14px;letter-spacing:-.02em}
-.modal p{color:#c9dcea;margin:0 0 13px;font-size:15px}
-.modal ul{color:#c9dcea;margin:0 0 13px;padding-left:20px}
+.modal p{color:var(--on-deep);margin:0 0 13px;font-size:15px}
+.modal ul{color:var(--on-deep);margin:0 0 13px;padding-left:20px}
 .modal li{margin:5px 0}
 .row3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:22px 0}
 @media(max-width:700px){.row3{grid-template-columns:1fr}}
 .phase{text-align:center}
 .phase .b{width:64px;height:64px;margin:0 auto 10px;border-radius:16px;background:rgba(255,255,255,.06);
  border:1px solid var(--hair);display:grid;place-items:center}
-.phase .t{font-size:13px;color:#dbe8f2;font-weight:500}
+.phase .t{font-size:13px;color:var(--on-deep);font-weight:500}
 .phase .d{font-size:11.5px;color:var(--dim2);margin-top:3px}
 .mbtns{display:flex;gap:10px;justify-content:flex-end;margin-top:22px;align-items:center}
 .dots{display:flex;gap:6px;margin-right:auto}
 .dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.2)}.dot.on{background:var(--gold)}
 .note{background:rgba(216,165,60,.10);border-left:2px solid var(--gold);padding:12px 15px;border-radius:0 10px 10px 0;
- color:#e7d5ad;font-size:13px;margin:16px 0}
+ color:var(--on-deep);font-size:13px;margin:16px 0}
 .lg{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 @media(max-width:640px){.lg{grid-template-columns:1fr}}
 .lgrow{display:flex;align-items:center;gap:12px;padding:8px 0;font-size:14px;border-top:1px solid rgba(255,255,255,.055)}
@@ -221,6 +253,82 @@ th{color:var(--dim2);font-weight:500;font-size:10.5px;letter-spacing:.08em;text-
 .ok{color:var(--ok)}.bad{color:var(--bad)}.taken{color:var(--gold);font-weight:600}
 .big{font-size:56px;font-weight:600;letter-spacing:-.04em;line-height:1}
 .dim{color:var(--dim)}.small{font-size:13px}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   СВЕТЛЫЕ ЭКРАНЫ · вход и разбор, по артбордам Main и Debrief
+   Артборд Main: кремовая страница, сверху тёмная лента 560px с той же
+   подводной глубиной. Артборд Debrief: светлая страница #faf9f5, сверху
+   тёмная лента с крупным Newsreader. Оба - вне таймера.
+   Всё ниже действует ТОЛЬКО когда на body нет класса глубины, то есть
+   в партию не вмешивается ни одним правилом.
+   ══════════════════════════════════════════════════════════════════════════ */
+body:not(.d1):not(.d2):not(.d3) .wrap{padding:0 22px 56px;max-width:1180px}
+
+/* лента-герой: подводная глубина внутри неё, а не на всей странице */
+body:not(.d1):not(.d2):not(.d3) .hero{
+  max-width:none;margin:18px 0 30px;padding:44px 40px 40px;border-radius:22px;
+  background:
+    radial-gradient(120% 70% at 50% -10%, rgba(210,240,230,.20) 0%, rgba(93,184,166,.12) 28%, transparent 60%),
+    linear-gradient(180deg,var(--deep-1) 0%,var(--deep-2) 55%,var(--deep-3) 100%);
+  box-shadow:0 1px 2px rgba(20,20,19,.05), 0 18px 44px rgba(20,20,19,.14);overflow:hidden;position:relative}
+body:not(.d1):not(.d2):not(.d3) .hero::after{
+  content:'';position:absolute;left:18%;top:-18%;width:150px;height:140%;pointer-events:none;
+  background:linear-gradient(180deg,rgba(210,240,230,.22) 0%,rgba(210,240,230,.06) 55%,rgba(210,240,230,0) 100%);
+  transform:rotate(8deg);filter:blur(28px)}
+body:not(.d1):not(.d2):not(.d3) .hero>*{position:relative;z-index:1}
+body:not(.d1):not(.d2):not(.d3) .hero h1{
+  font-size:64px;font-weight:500;letter-spacing:-.02em;background:none;color:#fff;-webkit-text-fill-color:#fff}
+body:not(.d1):not(.d2):not(.d3) .hero .brand{color:var(--on-deep);letter-spacing:.09em}
+body:not(.d1):not(.d2):not(.d3) .hero .lead{color:var(--on-deep);font-size:18px;max-width:620px}
+body:not(.d1):not(.d2):not(.d3) .hero .stats{color:var(--on-deep)}
+body:not(.d1):not(.d2):not(.d3) .hero .stats b{color:#fff;font-family:var(--font-display);font-size:26px;font-weight:500}
+body:not(.d1):not(.d2):not(.d3) .hero .big{color:#fff;font-family:var(--font-display);font-size:104px;font-weight:500;letter-spacing:-.02em}
+body:not(.d1):not(.d2):not(.d3) .hero .dim{color:var(--on-deep)}
+body:not(.d1):not(.d2):not(.d3) .hero .btn.ghost,
+body:not(.d1):not(.d2):not(.d3) .hero .exit{border-color:rgba(255,255,255,.24);color:#fff}
+
+/* разбор: белые карточки на светлой странице вместо полупрозрачных тёмных */
+body:not(.d1):not(.d2):not(.d3) .top{color:var(--muted-w)}
+body:not(.d1):not(.d2):not(.d3) .top .lab{color:var(--faint-w)}
+body:not(.d1):not(.d2):not(.d3) .top .val{color:var(--ink-w)}
+body:not(.d1):not(.d2):not(.d3) .tbar,
+body:not(.d1):not(.d2):not(.d3) .seg{background:var(--hair-w)}
+body:not(.d1):not(.d2):not(.d3) .exit{border-color:var(--hair-w);color:var(--muted-w)}
+body:not(.d1):not(.d2):not(.d3) .exit:hover{border-color:var(--acc);color:var(--ink-w)}
+body:not(.d1):not(.d2):not(.d3) .rcard{
+  background:var(--paper);border:1px solid var(--hair-w);border-radius:18px;padding:26px 28px;
+  backdrop-filter:none;box-shadow:0 1px 2px rgba(20,20,19,.05), 0 12px 32px rgba(20,20,19,.07)}
+body:not(.d1):not(.d2):not(.d3) .rcard h2{font-size:24px;color:var(--ink-w)}
+body:not(.d1):not(.d2):not(.d3) .big{color:var(--ink-w);font-family:var(--font-display);font-weight:500;letter-spacing:-.02em}
+body:not(.d1):not(.d2):not(.d3) .dim{color:var(--muted-w)}
+body:not(.d1):not(.d2):not(.d3) td,
+body:not(.d1):not(.d2):not(.d3) th{border-bottom:1px solid var(--hair-w2)}
+body:not(.d1):not(.d2):not(.d3) th{color:var(--faint-w);font-size:12px;letter-spacing:.09em}
+body:not(.d1):not(.d2):not(.d3) .note{
+  background:var(--paper);border:1px solid var(--hair-w);border-left:4px solid var(--gold);
+  border-radius:0 14px 14px 0;color:var(--body-w);font-size:15px;padding:14px 18px}
+body:not(.d1):not(.d2):not(.d3) .btn[disabled]{background:var(--hair-w);color:var(--faint-w)}
+body:not(.d1):not(.d2):not(.d3) .reef{height:132px;margin-bottom:10px}
+
+/* ── адаптив: было шесть правил на игру с доской и трио ────────────────────── */
+@media (max-width:720px){
+  .wrap{padding:14px 14px 44px}
+  body:not(.d1):not(.d2):not(.d3) .wrap{padding:0 14px 44px}
+  body:not(.d1):not(.d2):not(.d3) .hero{padding:28px 20px 26px;border-radius:16px;margin:12px 0 22px}
+  body:not(.d1):not(.d2):not(.d3) .hero h1{font-size:38px}
+  body:not(.d1):not(.d2):not(.d3) .hero .big{font-size:64px}
+  body:not(.d1):not(.d2):not(.d3) .rcard{padding:18px 16px;border-radius:14px}
+  .top{flex-direction:column;gap:12px}
+  .lab{width:auto;text-align:left;flex:none}
+  .trow{flex-wrap:wrap}
+  .stats{gap:18px;flex-wrap:wrap}
+  .reef{gap:12px;height:96px}
+  .modal{padding:22px 18px 18px;border-radius:16px}
+  .modal h2{font-size:21px}
+  .bottom{flex-direction:column;align-items:stretch;gap:10px;padding:12px 14px}
+  .btn{width:100%}
+  table{font-size:12.5px} td,th{padding:7px 6px}
+}
 </style></head>
 <body>
 <div id="sea"></div><div id="caust"></div><div id="rays"></div><div id="snow"></div><div id="grain"></div><div id="vig"></div>
@@ -652,9 +760,9 @@ const TUT=[
    <p>${t('sw_20')} <b>${t('sw_21')}</b>.</p>
    <p>${t('sw_22')} <b>${t('sw_23')}</b>${t('sw_24')}</p>
    <div class="row3">
-     <div class="phase"><div class="b">${icon('target',30,'#d8a53c')}</div><div class="t">${t('sw_25')}</div><div class="d">${t('sw_26')}</div></div>
+     <div class="phase"><div class="b">${icon('target',30,'#e8a55a')}</div><div class="t">${t('sw_25')}</div><div class="d">${t('sw_26')}</div></div>
      <div class="phase"><div class="b">${icon('flask',30,'#7fc3e8')}</div><div class="t">${t('sw_27')}</div><div class="d">${t('sw_28')}</div></div>
-     <div class="phase"><div class="b">${icon('drops',30,'#5fbf95')}</div><div class="t">${t('sw_29')}</div><div class="d">${t('sw_30')}</div></div>
+     <div class="phase"><div class="b">${icon('drops',30,'var(--acc)')}</div><div class="t">${t('sw_29')}</div><div class="d">${t('sw_30')}</div></div>
    </div>`},
  {k:t('sw_31'),t:t('sw_32'),h:`
    <p>${t('sw_33')} <b>20 %</b>:</p>
@@ -670,9 +778,9 @@ const TUT=[
    <p>${t('sw_48')} <b>${t('sw_49')}</b>${t('sw_50')} <b>${t('sw_51')}</b> ${t('sw_52')}</p>
    <p>${t('sw_53')} <b>${t('sw_54')}</b>${t('sw_55')} <b>${t('sw_56')}</b>.</p>
    <div class="row3">
-     <div class="phase"><div class="b">${icon('branch',30,'#d8a53c')}</div><div class="t">${t('sw_57')}</div><div class="d">${t('sw_58')}</div></div>
+     <div class="phase"><div class="b">${icon('branch',30,'#e8a55a')}</div><div class="t">${t('sw_57')}</div><div class="d">${t('sw_58')}</div></div>
      <div class="phase"><div class="b">${icon('clock',30,'#7fc3e8')}</div><div class="t">${t('sw_59')}</div><div class="d">${t('sw_60')}</div></div>
-     <div class="phase"><div class="b">${icon('pct',30,'#5fbf95')}</div><div class="t">${t('sw_61')}</div><div class="d">${t('sw_62')}</div></div>
+     <div class="phase"><div class="b">${icon('pct',30,'var(--acc)')}</div><div class="t">${t('sw_61')}</div><div class="d">${t('sw_62')}</div></div>
    </div>`},
  {k:t('sw_63'),t:t('sw_64'),h:`
    <p>${t('sw_65')} <b>${t('sw_66')}</b>${t('sw_67')}</p>
@@ -687,7 +795,7 @@ function scr_menu(){const first=!PROF||PROF.played===0;
   <div class="brand">CasEdge · McKinsey Solve</div><h1>Sea Wolf</h1>
   <p class="lead">${t('sw_71')}</p>
   ${first?`<div class="note" style="max-width:600px;margin:0 auto 26px;text-align:left">${t('sw_72')}</div>`
-        :`<div class="note" style="max-width:600px;margin:0 auto 26px;text-align:left">${PROF.adaptMsg} ${t('sw_73')} <b>${L(PROF.level)}</b>.</div>`}
+        :`<div class="note" style="max-width:600px;margin:0 auto 26px;text-align:left">${PROF.adaptMsg||''} ${t('sw_73')} <b>${L(PROF.level)}</b>.</div>`}
   <button class="btn g" style="padding:14px 36px;font-size:16px;border-radius:10px" onclick="tutStep=0;modal='tut';render()">${first?t('sw_74'):t('sw_75')}</button>
   ${(PROF&&PROF.exhausted)?`<div class="note" style="max-width:600px;margin:0 auto 18px;text-align:left;border-color:rgba(216,165,60,.5)">${esc(PROF.exhausted)}</div>`:''}
   ${(!first&&PROF&&PROF.assessment&&PROF.assessment.total)?`
@@ -698,7 +806,7 @@ function scr_menu(){const first=!PROF||PROF.played===0;
    </div>`:''}
   <div class="stats">
    <div><b>${PROF?PROF.total:100}</b>${t('sw_79')}</div><div><b>3</b>${t('sw_80')}</div><div><b>30</b>${t('sw_81')}</div>
-   ${rem?`<div><b>${rem[LV_E]}/${rem[LV_M]}/${rem[LV_H]}</b>${t('sw_82')}</div>`:''}
+   ${(rem&&rem[LV_E]!=null&&rem[LV_M]!=null&&rem[LV_H]!=null)?`<div><b>${rem[LV_E]}/${rem[LV_M]}/${rem[LV_H]}</b>${t('sw_82')}</div>`:''}
    ${PROF&&PROF.played?`<div><b>${PROF.avg}%</b>${t('sw_83')} ${PROF.played}</div>`:''}
   </div></div>`}
 
@@ -803,8 +911,8 @@ function scr_reveal(){
  let h=`<div class="top"><div class="tl"><div class="trow"><span class="lab">${t('sw_135')}</span>
    <div class="tbar"><div class="tfill" style="width:100%"></div></div></div></div>
    <button class="exit" onclick="newGame()">${t('sw_136')}</button><button class="exit" style="margin-left:8px" onclick="quitToApp()">${t('sw_137')}</button></div>
-  <div style="text-align:center;margin:10px 0 18px"><div class="big">${V.total??0}%</div>
-   <div class="dim">${V.scores.map((s,i)=>`${t('sw_138')} ${i+1}: <b style="color:#eaf2f9">${s??0}%</b>${V.siteMs&&V.siteMs[i]!=null?` <span style="opacity:.7">(${hhmm(V.siteMs[i])})</span>`:''}`).join(' &nbsp;·&nbsp; ')}</div>
+  <div class="hero" style="text-align:center;margin:10px 0 26px"><div class="big">${V.total??0}%</div>
+   <div class="dim">${V.scores.map((s,i)=>`${t('sw_138')} ${i+1}: <b style="color:var(--canvas)">${s??0}%</b>${V.siteMs&&V.siteMs[i]!=null?` <span style="opacity:.7">(${hhmm(V.siteMs[i])})</span>`:''}`).join(' &nbsp;·&nbsp; ')}</div>
    ${V.usedMs?`<div class="dim small" style="margin-top:6px">${t('sw_139')} ${hhmm(V.usedMs)} ${t('sw_140')}${
      V.siteMs&&V.siteMs.every(x=>x!=null)&&Math.max(...V.siteMs)>V.usedMs*0.5?` ${t('sw_141')} ${V.siteMs.indexOf(Math.max(...V.siteMs))+1} ${t('sw_142')}`:''}</div>`:''}
    <div class="note" style="max-width:680px;margin:14px auto;text-align:left">${REV[0].levelNote}<br><br><b>${V.adaptMsg||''}</b> ${V.nextLevel?`${t('sw_143')} <b>${L(V.nextLevel)}</b>.`:''}</div></div>`;
