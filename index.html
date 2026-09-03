@@ -1383,6 +1383,73 @@
       .rk-canvas .sv-subnav-item { padding: 7px 10px; }
       .rk-canvas .sv-subnav-item::before { width: 16px; height: 16px; flex-basis: 16px; }
     }
+
+    /* ── ОСТАТОК REDROCK · сгенерировано из БАЗОВЫХ правил, а не написано на глаз ──
+       03.09.2026. Замер после первой правки: классов sv-/rk- в разметке 134,
+       перекрыто светлым 41, а 49 остались с тёмными токенами. На светлой странице
+       это текст цвета #faf9f5 по кремовому - то есть невидимый.
+       Каждое правило ниже - ЭТО ЖЕ базовое правило, у которого подменены только
+       цветовые свойства: --on-dark на --ink, --sv-line на --hairline и так далее.
+       Раскладка не тронута ни в одном: подменялись color, background, border,
+       box-shadow, fill, stroke - и ничего больше. */
+    .rk-canvas .sv-sub { color: var(--muted); }
+    .rk-canvas .sv-prose { color: var(--ink); }
+    .rk-canvas .sv-hint { color: var(--muted); }
+    .rk-canvas .sv-hint b { color: var(--ink); }
+    .rk-canvas .sv-qnav-item { border: 1px solid var(--hairline); background: var(--surface-soft); color: var(--muted); }
+    .rk-canvas .sv-field label { color: var(--muted); }
+    .rk-canvas .sv-unit { color: var(--muted); }
+    .rk-canvas .sv-chart { background: var(--surface-soft); border: 1px solid var(--hairline-soft); }
+    .rk-canvas .sv-chart-t { color: var(--ink); }
+    .rk-canvas .sv-chart-sub { color: var(--muted); }
+    .rk-canvas .sv-leg { color: var(--muted); }
+    .rk-canvas .sv-buildrow label { color: var(--ink); }
+    .rk-canvas .sv-buildrow input { background: var(--surface-soft); border: 1px solid var(--hairline); color: var(--ink); }
+    .rk-canvas .sv-buildrow .un { color: var(--muted); }
+    .rk-canvas .sv-chip { color: var(--ink); }
+    .rk-canvas .sv-chip.sv-dragging { box-shadow: 0 8px 24px rgba(20,20,19,.08); }
+    .rk-canvas .sv-jchip { color: var(--ink); }
+    .rk-canvas .sv-jrename { background: var(--surface-soft); border: 1px solid var(--hairline-soft); color: var(--ink); }
+    .rk-canvas .sv-jstar, .rk-canvas .sv-jdrop { color: var(--muted); }
+    .rk-canvas .sv-jhead { color: var(--ink); }
+    .rk-canvas .sv-jchevron { color: var(--muted); }
+    .rk-canvas .rk-q { color: var(--ink); }
+    .rk-canvas .rk-rv-title { color: var(--ink); }
+    .rk-canvas .rk-rv-head { color: var(--ink); }
+    .rk-canvas .rk-rv-key { color: var(--muted); }
+    .rk-canvas .rk-rv-line { color: var(--muted); }
+    .rk-canvas .rk-rv-line span { color: var(--muted); }
+    .rk-canvas .rk-rv-line b { color: var(--ink); }
+    .rk-canvas .rk-rv-miss { color: var(--muted); }
+    .rk-canvas .rk-tact-tag { color: var(--muted); }
+    .rk-canvas .rk-tact-q { color: var(--muted); }
+    .rk-canvas .rk-pre { color: var(--muted); }
+    .rk-canvas .rk-field-l { color: var(--ink); }
+    .rk-canvas .rk-unit { color: var(--muted); }
+    .rk-canvas .rk-blank { background: var(--surface-soft); border-bottom: 2px solid var(--hairline); color: var(--ink); }
+    .rk-canvas .rk-tmpl { color: var(--ink); }
+    .rk-canvas .rk-mini { border: 1px solid var(--hairline); }
+    .rk-canvas .rk-score-sub { color: var(--ink); }
+    .rk-canvas .rk-res-table { border: 1px solid var(--hairline); }
+    .rk-canvas .rk-res-row { color: var(--ink); border-bottom: 1px solid var(--hairline); }
+    .rk-canvas .sv-nav-group-title { color: var(--muted); }
+    .rk-canvas .sv-nav-item { color: var(--muted); }
+    .rk-canvas .sv-nav-item:hover { background: var(--surface-soft); color: var(--ink); }
+    .rk-canvas .sv-calc-btn { background: var(--surface-soft); border: 1px solid var(--hairline); color: var(--ink); }
+    .rk-canvas .sv-calc-btn:hover { background: var(--cream); }
+    .rk-canvas .sv-calc { border: 1px solid var(--hairline); box-shadow: 0 12px 40px rgba(20,20,19,.08); }
+    .rk-canvas .sv-calc-head { border-bottom: 1px solid var(--hairline-soft); }
+    .rk-canvas .sv-calc-x { color: var(--muted); }
+    .rk-canvas .sv-calc-disp { background: rgba(20,20,19,.08); border: 1px solid var(--hairline-soft); }
+    .rk-canvas .sv-calc-logrow { color: var(--muted); }
+    .rk-canvas .sv-calc-keys { background: var(--hairline-soft); }
+    .rk-canvas .sv-calc-keys button { color: var(--ink); }
+    .rk-canvas .sv-calc-keys button:hover { background: var(--cream); }
+    .rk-canvas .sv-calc-keys .sv-ck-fn { color: var(--muted); }
+    .rk-canvas .sv-result-card { border: 1px solid var(--hairline); }
+    .rk-canvas .sv-result-sec-score { color: var(--muted); }
+    .rk-canvas .sv-rr-correct { color: var(--muted); }
+    .rk-canvas .sv-result-row { border-top: 1px solid var(--hairline-soft); color: var(--ink); }
     .rk-linewrap { padding-bottom: 10px; }
     .rk-line { width: 100%; height: auto; max-height: 210px; display: block; margin: 6px 0 2px; }
     .rk-line-grid line { stroke: currentColor; opacity: .16; stroke-width: 1; }
@@ -4164,6 +4231,10 @@ const I18N = {
     'sv.exitGame': 'Exit Game', 'sv.calculator': 'Calculator', 'sv.journal': 'Research Journal',
     'sv.journalMark': 'Mark for important items', 'sv.finishedCollecting': 'Finished Collecting',
     'sv.nextQuestion': 'Next question', 'sv.goToReport': 'Go to Report', 'sv.back': '← Back',
+    'rk.rv.loading': 'Loading breakdown...', 'rk.rv.locked': 'The Analysis breakdown unlocks once every Analysis question has been submitted.',
+    'rk.rv.show': 'Show Analysis breakdown', 'rk.rv.none': 'No breakdown recorded for this game.',
+    'rk.rv.trap': 'Trap', 'rk.rv.carried': 'Carried', 'rk.rv.answer': 'Answer',
+    'rk.rv.journal': 'Research Journal', 'rk.rv.collection': 'collection', 'rk.rv.head': 'Analysis breakdown',
     'sv.writtenReport': 'Written Report', 'sv.graphSelection': 'Graph Selection', 'sv.visualReport': 'Visual Report',
     'sv.nextGraph': 'Next: Graph Selection →', 'sv.nextVisual': 'Next: Visual Report →', 'sv.goToCases': 'Go to Cases →',
     'sv.nextCase': 'Next case', 'sv.submitResults': 'Submit & see results', 'sv.of': 'of',
@@ -4657,6 +4728,10 @@ const I18N = {
     'sv.exitGame': 'Выйти', 'sv.calculator': 'Калькулятор', 'sv.journal': 'Журнал исследования',
     'sv.journalMark': 'Отмечай важные данные', 'sv.finishedCollecting': 'Готово, собрал',
     'sv.nextQuestion': 'Следующий вопрос', 'sv.goToReport': 'К отчёту', 'sv.back': '← Назад',
+    'rk.rv.loading': 'Собираю разбор...', 'rk.rv.locked': 'Разбор Анализа открывается, когда сданы все вопросы Анализа.',
+    'rk.rv.show': 'Показать разбор Анализа', 'rk.rv.none': 'Разбор по этой игре не записан.',
+    'rk.rv.trap': 'Ловушка', 'rk.rv.carried': 'Унесено дальше', 'rk.rv.answer': 'Ответ',
+    'rk.rv.journal': 'Журнал исследования', 'rk.rv.collection': 'сбор', 'rk.rv.head': 'Разбор Анализа',
     'sv.writtenReport': 'Текстовый отчёт', 'sv.graphSelection': 'Выбор графика', 'sv.visualReport': 'Визуальный отчёт',
     'sv.nextGraph': 'Далее: выбор графика →', 'sv.nextVisual': 'Далее: визуальный отчёт →', 'sv.goToCases': 'К кейсам →',
     'sv.nextCase': 'Следующий кейс', 'sv.submitResults': 'Завершить и увидеть результат', 'sv.of': 'из',
@@ -6739,27 +6814,30 @@ async function rkLoadReview() {
   solve.rkReviewBusy = false; renderSolve();
 }
 function rkReviewHTML() {
-  if (solve.rkReviewBusy) return '<div class="rk-note">Loading breakdown...</div>';
+  if (solve.rkReviewBusy) return '<div class="rk-note">'+t('rk.rv.loading')+'</div>';
   if (!rkAnalysisSubmittedAll()) {
-    return '<div class="rk-note">The Analysis breakdown unlocks once every Analysis question has been submitted.</div>';
+    return '<div class="rk-note">'+t('rk.rv.locked')+'</div>';
   }
   if (!solve.rkReview) {
-    return '<div class="gi-actions" style="margin-top:14px;"><button class="gi-start" onclick="rkLoadReview()">Show Analysis breakdown</button></div>';
+    return '<div class="gi-actions" style="margin-top:14px;"><button class="gi-start" onclick="rkLoadReview()">'+t('rk.rv.show')+'</button></div>';
   }
-  if (!solve.rkReview.length) return '<div class="rk-note">No breakdown recorded for this game.</div>';
+  if (!solve.rkReview.length) return '<div class="rk-note">'+t('rk.rv.none')+'</div>';
   const rows = solve.rkReview.map(r => {
     const st = solve.rkGraded['a:' + r.key] || '';
-    const tag = st === 'correct' ? '<span class="rk-rv-ok">correct</span>'
-      : st === 'naive' ? '<span class="rk-rv-trap">trap hit</span>'
-      : st ? '<span class="rk-rv-miss">missed</span>' : '';
+    const tag = st === 'correct' ? '<span class="rk-rv-ok"><b>correct</b></span>'
+      : st === 'naive' ? '<span class="rk-rv-trap"><b>trap hit</b></span>'
+      : st ? '<span class="rk-rv-miss"><b>missed</b></span>' : '';
     const trap = (r.trap === null || r.trap === undefined) ? '' :
-      `<div class="rk-rv-line"><span>Trap</span> <b>${esc(String(r.trap))}</b>${r.lesson ? ' ' + rkInline(r.lesson) : ''}</div>`;
+      `<div class="rk-rv-line"><span>${t('rk.rv.trap')}</span> <b>${esc(String(r.trap))}</b>${r.lesson ? ' ' + rkInline(r.lesson) : ''}</div>`;
     // Путь ошибки сбора: не «неверно», а где именно кандидат свернул.
     // Класс SUB даёт одно число (унёс не то), класс OMIT - несколько (унёс только
     // одно из двух, у каждого пропуска свой ответ и свой урок). Порядок массивов
     // задан порядком chips[] и на клиенте не пересортировывается.
     const ct = r.chainTrap, cl = r.chainLesson;
-    const chainOne = (t, l) => `<div class="rk-rv-line rk-rv-chain"><span>Carried</span> <b>${esc(String(t))}</b>${l ? ' ' + rkInline(l) : ''}</div>`;
+    /* 03.09.2026: имя параметра было `t` и затеняло переводчика - тот же дефект,
+       что цех игр нашёл в круге 125 на строке 394 sfl.html. Поймал gate_shadowed_handle,
+       который я взял в батарею тем же вечером. Параметр переименован в `val`. */
+    const chainOne = (val, l) => `<div class="rk-rv-line rk-rv-chain"><span>${t('rk.rv.carried')}</span> <b>${esc(String(val))}</b>${l ? ' ' + rkInline(l) : ''}</div>`;
     const chain = Array.isArray(ct)
       ? ct.map((t, i) => chainOne(t, Array.isArray(cl) ? cl[i] : cl)).join('')
       : (ct === null || ct === undefined) ? '' : chainOne(ct, cl);

@@ -295,6 +295,13 @@ body:not(.d1):not(.d2):not(.d3) .tbar,
 body:not(.d1):not(.d2):not(.d3) .seg{background:var(--hair-w)}
 body:not(.d1):not(.d2):not(.d3) .exit{border-color:var(--hair-w);color:var(--muted-w)}
 body:not(.d1):not(.d2):not(.d3) .exit:hover{border-color:var(--acc);color:var(--ink-w)}
+/* кнопка-призрак вне ленты-героя: на кремовой странице её текст был --dim
+   (бледно-синий), а на наведении --ink (почти белый) - то есть исчезал.
+   Найдено замером «правила со светлым текстом, не перекрытые на светлых экранах». */
+body:not(.d1):not(.d2):not(.d3) .btn.ghost{border-color:var(--hair-w);color:var(--muted-w)}
+body:not(.d1):not(.d2):not(.d3) .btn.ghost:hover{border-color:var(--acc);color:var(--ink-w)}
+body:not(.d1):not(.d2):not(.d3) .legend{background:var(--paper);color:var(--ink-w);
+  border:1.5px solid var(--hair-w);box-shadow:0 1px 2px rgba(20,20,19,.05),0 12px 32px rgba(20,20,19,.10)}
 body:not(.d1):not(.d2):not(.d3) .rcard{
   background:var(--paper);border:1px solid var(--hair-w);border-radius:18px;padding:26px 28px;
   backdrop-filter:none;box-shadow:0 1px 2px rgba(20,20,19,.05), 0 12px 32px rgba(20,20,19,.07)}
@@ -355,7 +362,23 @@ let UILANG=(function(){try{const v=localStorage.getItem('caseedge_uilang');retur
 const SITE_LANG = UILANG;          /* язык сайта — им ведётся РАЗБОР */
 UILANG = 'en';                     /* язык ПАРТИИ — всегда английский */
 
-function t(k){ const d=I18N[UILANG]||I18N.en; return (d&&d[k]!==undefined)?d[k]:(I18N.en[k]!==undefined?I18N.en[k]:k); }
+/* ЯЗЫК РАЗБОРА · решение владельца 03.09.2026.
+   Правило было записано давно - «внутри игры на таймере всё по-английски,
+   сайт вокруг по-русски, РАЗБОР на языке, который выбрал клиент», - но
+   выполнялось наполовину: серверный текст разбора приходил на языке клиента,
+   а свои подписи клиент брал по-английски. Замер: 95 ключей разбора из 95.
+   Уточнение владельца: сами игры и кейсы не переводятся, переводится ТОЛЬКО
+   разбор; игровые термины и триггерные моменты внутри него остаются
+   английскими и печатаются ЖИРНЫМ - по ним кандидат узнаёт язык ассессмента.
+   Признак разбора - REV: он ставится только после таймера. */
+var ДОМЕН_РАЗБОРА = new Set(['sw_1','sw_2','sw_3','sw_4',   /* признаки микробов */
+  'sw_138','sw_144',                                          /* участок / Stretch */
+  'sw_169','sw_170','sw_178','sw_179']);                       /* ok / MISS */
+function t(k){
+  var _r=null; try{ _r=REV }catch(e){}
+  if(_r && ДОМЕН_РАЗБОРА.has(k)) return '<b>'+(I18N.en[k]!==undefined?I18N.en[k]:k)+'</b>';
+  const d=I18N[_r?SITE_LANG:UILANG]||I18N.en;
+  return (d&&d[k]!==undefined)?d[k]:(I18N.en[k]!==undefined?I18N.en[k]:k); }
 /* Имена уровней — КЛЮЧИ ДАННЫХ (seawolf-games.json хранит level:'Лёгкий').
    Значения не трогаем, переводим только ПЕЧАТЬ. */
 const LVL_EN={'Лёгкий':'Easy','Средний':'Medium','Сложный':'Hard','Ассессмент':'Assessment'};
