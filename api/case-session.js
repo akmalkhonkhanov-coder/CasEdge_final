@@ -1048,9 +1048,17 @@ export function buildSystemPromptILead({ caseObj, doneSteps, firm, revealedSet, 
   // is a legitimate opening.
   const optEntry = Number(caseObj.optimal_entry);
   const optStep = Number.isInteger(optEntry) ? byNum.get(optEntry) : null;
+  /* 05.09.2026 dev. ШЕСТАЯ точка печати метки, найдена при проверке находки
+     цеха кейсов (круг 53). Цех назвал пять мест и одно сырое; мест оказалось
+     шесть, и сырых два: этот блок печатал И метку, И `produces` без защиты,
+     хотя safeProduces() написана ровно для того, что `produces` «едет модели
+     дважды». Блок STRONGEST OPENING идёт в промпт при заполненном
+     optimal_entry, то есть на самом ходовом пути. Проверять надо было не
+     «поправлена ли названная строка», а «все ли точки печати зовут защиту».
+  */
   const openingRef = optStep
     ? `\n\n════ STRONGEST OPENING (reference — do not force) ════
-A strong candidate opens with Step ${optEntry} — "${optStep.label || ''}" (${optStep.produces || ''}). Use this ONLY to judge the quality of their first move and to steer if they are lost at the very start. ANY step marked depends_on:[] (available now) is a legitimate opening — never penalise choosing a different valid starter, and never name Step ${optEntry} unless they stall.`
+A strong candidate opens with Step ${optEntry} — "${safeLabel(optStep.label)}" (${safeProduces(optStep.produces)}). Use this ONLY to judge the quality of their first move and to steer if they are lost at the very start. ANY step marked depends_on:[] (available now) is a legitimate opening — never penalise choosing a different valid starter, and never name Step ${optEntry} unless they stall.`
     : '';
 
   const header =
@@ -1079,7 +1087,16 @@ Each block is one analysis the candidate can legitimately do next. Grade whichev
   const lockedText = lockedNums.length
     ? `\n\n════ NOT YET AVAILABLE (needs earlier results first) ════\n` +
       lockedNums.map(n => { const s = byNum.get(n) || {}; const need = (s.depends_on||[]).filter(d=>!done.has(d));
-        return `- Step ${n} "${s.label||''}" — unlocks once these are established: ${need.map(d=>`Step ${d}`).join(', ')}. If the candidate jumps here, don't reject them — note briefly what they need first and let them get it, or answer what can be answered without the missing piece.`; }).join('\n')
+        /* 05.09.2026 dev, находка цеха кейсов круга 53. Из ПЯТИ мест, где метка
+           шага уходит в промпт, четыре звали safeLabel(), а это — пятое — брало
+           метку СЫРОЙ. Блок «NOT YET AVAILABLE» печатается всегда, когда есть
+           заблокированные шаги, поэтому модель видела «CORRECT: и расчёт
+           ВЫСТОЯЛ» вместо «Analysis» и могла произнести кандидату, что дальше по
+           ветке лежит правильный ответ. Замер моей же живой safeLabel: она
+           меняет 799 меток из 2912, из них 257 несут открытый вердикт, в 242
+           кейсах из 400. Класс тот же, что у d1 и у счётчика игр: защита
+           написана верно и не подключена в одной из точек. */
+        return `- Step ${n} "${safeLabel(s.label)}" — unlocks once these are established: ${need.map(d=>`Step ${d}`).join(', ')}. If the candidate jumps here, don't reject them — note briefly what they need first and let them get it, or answer what can be answered without the missing piece.`; }).join('\n')
     : '';
 
   const ex = exhibitsBlock(caseObj, revealedSet, lang);
