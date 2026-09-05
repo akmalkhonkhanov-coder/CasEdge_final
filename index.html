@@ -6164,6 +6164,18 @@ window.swRecordGame = function (mode) {
     recordSession('game', mode === 'assessment' ? 'Sea Wolf · ассессмент' : 'Sea Wolf');
   } catch (e) {}
 };
+/* 05.09.2026, dev. SFL НЕ СЧИТАЛСЯ ВООБЩЕ. Владелец сыграл три партии, экран SFL
+   печатал PLAYED 3, а «Игр сыграно» на странице прогресса стояло ноль. Диагноз
+   «нет колонок в базе» был НЕВЕРЕН - колонки есть, проверено запросом. Причина
+   в другом: в клиенте было ровно два вызова recordSession('game', ...) - Sea Wolf
+   и Redrock, - а sfl.html родителя о конце партии не звал вовсе. Своя ручка,
+   а не переиспользование swRecordGame: у игры отдельное имя в разбивке по видам. */
+window.sflRecordGame = function () {
+  try {
+    if (typeof recordSession !== 'function') return;
+    recordSession('game', 'Sustainable Futures Lab');
+  } catch (e) {}
+};
 /* ПРОГРЕСС SEA WOLF ЖИВЁТ НА АККАУНТЕ, А НЕ В БРАУЗЕРЕ.
    Решение 08.08. Раньше профиль игры (уровень, виденные наборы, история) лежал
    только в localStorage: чистка браузера или второе устройство — и человек

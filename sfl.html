@@ -432,7 +432,13 @@ async function loadReveal(){ REV=await GET('/reveal',qs());
      ровно один раз на партию: ключ — токен, второй reveal того же токена
      не должен удваивать запись. */
   try{ const pr=prof(); pr.history=(pr.history||[]);
-       if(pr.lastTok!==STATE.token){ pr.history.push(REV.overall); pr.lastTok=STATE.token; profSave(pr); } }catch(e){}
+       if(pr.lastTok!==STATE.token){ pr.history.push(REV.overall); pr.lastTok=STATE.token; profSave(pr);
+         /* 05.09.2026 dev. Партия дошла до разбора - значит сыграна. Сообщаем
+            приложению ПОД ТОЙ ЖЕ ЗАЩЁЛКОЙ, что и запись в историю: повторный
+            reveal того же токена не должен удваивать счётчик. До этой строки
+            SFL не считался нигде, и «Игр сыграно» стояло ноль при сыгранных партиях. */
+         try{ if(window.parent&&window.parent!==window&&typeof window.parent.sflRecordGame==='function')
+               window.parent.sflRecordGame() }catch(e){} } }catch(e){}
   PROF=await GET('/state','?pid='+PID); CONS=null }
 function paintTimer(){ const f=document.getElementById('tf'),l=document.getElementById('tl'); if(!f||!V)return;
   const ms=V.msLeft,total=20*60000;
