@@ -261,6 +261,12 @@ export default async function handler(req, res) {
       if (!(Number.isInteger(o) && o >= 0 && o <= 2)) return res.status(400).json({ error: { message: 'Bad option.' } });
       if (s.finished) return res.status(200).json({ token: body.token, view: withTotals(s, s.view(Date.now(), lang)) });
       if (s.round >= 4) return res.status(400).json({ error: { message: 'Pool complete.' } });
+      /* Круг 141. choose() с круга 138 требует фазы prospect и кидает исключение,
+         а внешний catch превращает это в 500 «Server error». Ход не из той фазы
+         приходит не от злого умысла, а от вкладки, оставленной открытой до
+         категоризации: у sort/review и submit такой ход уже возвращает текущий
+         вид, и у добора нет причин отвечать иначе. Найдено стендом. */
+      if (s.sitePhase() !== 'prospect') return res.status(200).json({ token: body.token, view: withTotals(s, s.view(Date.now(), lang)) });
       const view = s.choose(o, Date.now(), lang);
       return res.status(200).json({ token: makeToken(stateOf(s, st)), view: withTotals(s, view) });
     }
