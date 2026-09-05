@@ -6993,7 +6993,15 @@ function svChipDown(e, val, label) {
     svDrag.ghost.style.top = (ev.clientY - 14) + 'px';
     document.querySelectorAll('.sv-drop-active').forEach(el => el.classList.remove('sv-drop-active'));
     const t = document.elementFromPoint(ev.clientX, ev.clientY);
-    const field = t && t.closest && t.closest('input.sv-inp, input.sv-numin, .sv-buildrow input');
+    /* 05.09.2026 цех игр, круг 152. Третий случай того же класса за три круга:
+       механика есть, одно место её не зовёт. Перетаскивание числа из журнала в
+       поле работало в Analysis и Cases (там поля `sv-numin`), а дырки ТЕКСТОВОГО
+       ОТЧЁТА Redrock — `rk-blank` — в список целей не входили. То есть кандидат,
+       собравший число в журнал, обязан был перепечатать его руками именно там,
+       где настоящая игра позволяет тащить. Владелец назвал это прямо, замер
+       PrepMatter (круг 152) подтвердил: у них отчёт заполняется тремя способами —
+       руками, списком и перетаскиванием из журнала. */
+    const field = t && t.closest && t.closest('input.sv-inp, input.sv-numin, input.rk-blank, .sv-buildrow input');
     const journal = t && t.closest && t.closest('.sv-journal');
     if (field) field.classList.add('sv-drop-active');
     else if (journal) journal.classList.add('sv-drop-active');
@@ -7002,7 +7010,7 @@ function svChipDown(e, val, label) {
     window.removeEventListener('pointermove', move);
     window.removeEventListener('pointerup', up);
     const t = document.elementFromPoint(ev.clientX, ev.clientY);
-    const field = t && t.closest && t.closest('input.sv-inp, input.sv-numin, .sv-buildrow input');
+    const field = t && t.closest && t.closest('input.sv-inp, input.sv-numin, input.rk-blank, .sv-buildrow input');
     const journal = t && t.closest && t.closest('.sv-journal');
     if (svDrag.moved && field) {
       svFillField(field, svDrag.val, svDrag.label);      // dropped on an answer field
