@@ -94,7 +94,15 @@ function rehydrate(st) {
   const ch = Array.isArray(st.c) ? st.c : [[], [], []];
   const tr = Array.isArray(st.s) ? st.s : [null, null, null];
   const at = Array.isArray(st.m) ? st.m : [null, null, null];
+  /* Ходы фазы категоризации. В токене лежат ТОЛЬКО они — сама раздача и ось
+     Инсайта выводятся из id партии засеянным ГСЧ и заново при каждой
+     регидратации. Иначе токен носил бы содержимое будущих карточек, то есть
+     ровно то, что правило Г6 запрещает отдавать наружу. */
+  const ka = Array.isArray(st.k) ? st.k : [[], [], []];
+  const ra = Array.isArray(st.r) ? st.r : [[], [], []];
   for (let site = 0; site < 3; site++) {
+    for (const a of (ra[site] || [])) s.review(a, st.t);
+    for (const a of (ka[site] || [])) s.categorize(a, st.t);
     for (const opt of (ch[site] || [])) s.choose(opt, st.t);
     if (tr[site]) s.submit(tr[site], at[site] || st.t);
   }
@@ -108,7 +116,7 @@ function stateOf(s, st, submittedAt) {
     const i = s.finished ? 2 : s.siteIndex - 1;
     if (i >= 0 && i < 3) m[i] = submittedAt;
   }
-  return { g: st.g, t: st.t, c: s.choices, s: s.treatments, m };
+  return { g: st.g, t: st.t, c: s.choices, s: s.treatments, m, k: s.catActs, r: s.revActs };
 }
 // Everything the result screen needs that view() does not carry.
 function withTotals(s, view) {
@@ -216,7 +224,8 @@ export default async function handler(req, res) {
       if (!LEVELS_IN_BATCH.includes(level)) return res.status(400).json({ error: { message: 'Unknown level.' } });
       const got = pickGame(level, seen);
       if (!got) return res.status(400).json({ error: { message: 'Level is empty.' } });
-      const st = { g: got.game.id, t: Date.now(), c: [[], [], []], s: [null, null, null], m: [null, null, null] };
+      const st = { g: got.game.id, t: Date.now(), c: [[], [], []], s: [null, null, null], m: [null, null, null],
+                   k: [[], [], []], r: [[], [], []] };
       const s = rehydrate(st);
       // A level played to the end starts a second lap, and that is announced in
       // words: a repeat you were warned about is a repeat; a silent one reads as
@@ -253,6 +262,25 @@ export default async function handler(req, res) {
       if (s.finished) return res.status(200).json({ token: body.token, view: withTotals(s, s.view(Date.now(), lang)) });
       if (s.round >= 4) return res.status(400).json({ error: { message: 'Pool complete.' } });
       const view = s.choose(o, Date.now(), lang);
+      return res.status(200).json({ token: makeToken(stateOf(s, st)), view: withTotals(s, view) });
+    }
+
+    /* ── ФАЗА КАТЕГОРИЗАЦИИ ──────────────────────────────────────────────
+       Права НЕ списываем: расход привязан к первому ходу партии (action=choose),
+       и он идемпотентен по ключу 'seawolf:<id>'. Категоризация идёт РАНЬШЕ
+       добора, и если списать здесь тоже — партия съест две попытки вместо одной. */
+    if (action === 'sort' || action === 'review') {
+      const a = body.act;
+      if (typeof a !== 'string') return res.status(400).json({ error: { message: 'Bad act.' } });
+      if (s.finished) return res.status(200).json({ token: body.token, view: withTotals(s, s.view(Date.now(), lang)) });
+      if (s.expired()) return res.status(200).json({ token: body.token, view: withTotals(s, s.view(Date.now(), lang)) });
+      const need = action === 'sort' ? 'categorize' : 'review';
+      /* Повтор того же хода при моргнувшей связи не обязан быть ошибкой:
+         отдаём текущий вид, как это уже сделано для submit. */
+      if (s.sitePhase() !== need) return res.status(200).json({ token: body.token, view: withTotals(s, s.view(Date.now(), lang)) });
+      let view;
+      try { view = action === 'sort' ? s.categorize(a, Date.now(), lang) : s.review(a, Date.now(), lang); }
+      catch (e) { return res.status(400).json({ error: { message: 'Bad act.' } }); }
       return res.status(200).json({ token: makeToken(stateOf(s, st)), view: withTotals(s, view) });
     }
 

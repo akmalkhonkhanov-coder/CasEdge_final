@@ -674,7 +674,7 @@ async function gradeDrill(d, answer, fbLang) {
   const u = 'PROMPT: ' + d.prompt +
     '\n' + exhibitTxt +
     '\nSTEPS ASKED: ' + (d.step_prompts || []).join(' | ') +
-    '\nPASS CHECKLIST: ' + (d.checklist && d.checklist.en || '') +
+    '\nPASS CHECKLIST: ' + (d.checklist && (d.checklist.en || d.checklist.ru) || '') +   /* 04.09.2026 dev, находка цеха дриллов круг 118: ветка DRILL была единственной без отката на ru. Слот, написанный только по-русски, отдал бы грейдеру ПУСТОЙ чеклист, и он судил бы ни против чего. Сегодня таких слотов 0, правка на будущее. */
     '\nREFERENCE SOLUTION: ' + (d.reference && d.reference.en || '') +
     '\nCANDIDATE ANSWER: ' + String(answer || '');
   const j = await graderJSON(DRILL_GRADER_SYSTEM, u + fbDirective(fbLang), 600);

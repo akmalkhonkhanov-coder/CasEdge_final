@@ -14,6 +14,89 @@ const ROUNDS     = 4;
 const POOL_START = 6;
 const TIMER_MS   = 30 * 60 * 1000;
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   ФАЗА КАТЕГОРИЗАЦИИ · круг 138 цеха игр
+   Контракт: 05_документы/SeaWolf_КОНТРАКТ_Insight_Categorize_v1.md
+
+   Банк ОТДЕЛЬНЫЙ от игрового каталога — это утверждение К-2, и оно проверяется
+   гейтом по ИМЕНИ и по ТРОЙКЕ ЗНАЧЕНИЙ отдельно: проверка по имени к подсадке
+   тройки слепа по построению.
+
+   Размер 120 выведен, а не выдуман. Партия берёт 30 карточек (10 × 3 площадки).
+   Игра держит для своего каталога долю 18/72 = 25 %. Требуем ту же долю:
+   30/B = 0.25 → B = 120. При банке 36 вторая партия показывала бы 25 из 30
+   тех же микробов — втрое хуже собственного стандарта игры.
+   ═══════════════════════════════════════════════════════════════════════════ */
+const CAT_BANK    = require('./seawolf-microbes.json');
+const CAT_PER_SITE = 10;
+const CAT_TOTAL    = CAT_PER_SITE * SITE_COUNT;   // 30
+/* Показ строки «точность сортировки» в разборе. Ключ ФАЗЫ от него не зависит:
+   ключ считается всегда и проверяется гейтом Г-нов-5, показывается — по флагу.
+   Слово владельца по вопросу 3 переключает ровно эту константу. */
+const SHOW_SORT_ACCURACY = false;
+
+/* Детерминированный ГСЧ от id партии. Раздача и ось Инсайта НЕ хранятся
+   в токене — они выводятся заново при каждой регидратации. Токен носит только
+   то, что сделал игрок (см. шапку seawolf-session.js). */
+function mulberry32(a) {
+  return function () {
+    a |= 0; a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+function seedFrom(str) {
+  let h = 2166136261 >>> 0;
+  const v = String(str);
+  for (let i = 0; i < v.length; i++) { h ^= v.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+  return h >>> 0;
+}
+
+/** Раздача 30 РАЗНЫХ карточек банка на три площадки + ось Инсайта на каждый переход. */
+function dealCategorization(gameId) {
+  const rnd = mulberry32(seedFrom('cat:' + gameId));
+  const idx = CAT_BANK.map((_, i) => i);
+  for (let i = idx.length - 1; i > 0; i--) {         // Фишер–Йейтс на засеянном ГСЧ
+    const j = Math.floor(rnd() * (i + 1));
+    const tmp = idx[i]; idx[i] = idx[j]; idx[j] = tmp;
+  }
+  const cards = [];
+  for (let si = 0; si < SITE_COUNT; si++)
+    cards.push(idx.slice(si * CAT_PER_SITE, (si + 1) * CAT_PER_SITE).map(i => CAT_BANK[i]));
+  /* Ось Инсайта: равновероятно из трёх, независимо на каждом переходе.
+     Это НАШЕ правило, объявленное. У PrepMatter оно не выведено — 4 наблюдения. */
+  const axes = [];
+  for (let si = 0; si < SITE_COUNT - 1; si++) axes.push(ATTRS[Math.floor(rnd() * ATTRS.length)]);
+  return { cards, axes };
+}
+
+/** Годен ли микроб текущей площадке: ≥2 оси из 3 в диапазоне И нет запрещённого. */
+function fitsSite(m, site) {
+  let n = 0;
+  ATTRS.forEach((k, i) => { const [lo, hi] = site.ranges[k]; if (m[1][i] >= lo && m[1][i] <= hi) n++; });
+  return n >= 2 && m[2] !== site.undesired;
+}
+
+/**
+ * КЛЮЧ СОРТИРОВКИ, редакция круга 135. Взаимоисключаемость ДОКАЗАНА разбором
+ * трёх случаев, а не объявлена — первая редакция (круг 134) утверждала её
+ * «по построению» и была опровергнута контрпримером Vibrio 6/8/4 на журнале
+ * прогона PrepMatter: он подходил И под Current, И под Next одновременно.
+ *   current = И                 → next ложен по определению, return ложен
+ *   current = Л, сырой next = И → next истинен, return ложен
+ *   current = Л, сырой next = Л → next ложен, return истинен
+ * Ровно один во всех трёх случаях; иных случаев нет.
+ */
+function sortKey(m, site, insight) {
+  if (fitsSite(m, site)) return 'current';
+  if (!insight) return 'return';                     // последняя площадка: Next нет
+  const i = ATTRS.indexOf(insight.attr);
+  const [lo, hi] = insight.range;
+  return (m[1][i] >= lo && m[1][i] <= hi) ? 'next' : 'return';
+}
+const CAT_ACTIONS = ['current', 'next', 'return'];
+
 /**
  * Калибровочная строка. Ключи — РОВНО уровни партии (Лёгкий · Средний · Сложный):
  * ключ, которого нет в партии, даёт `undefined` на экране, а уровень, которого нет
@@ -122,6 +205,63 @@ class SeaWolfSession {
     this.siteStartedAt = this.startedAt;      // время по участкам: dev просил, и он прав —
     this.siteMs = [null, null, null];         // сквозной таймер и есть половина трудности
     this.finished = false;
+
+    /* ── фаза категоризации ──────────────────────────────────────────────── */
+    const deal = dealCategorization(game.id);
+    this.catCards = deal.cards;               // 10 карточек на площадку, выведены из id
+    this.insightAxes = deal.axes;             // ось, раскрываемая на переходе si → si+1
+    this.catActs = [[], [], []];              // ходы игрока в категоризации
+    this.revActs = [[], [], []];              // ходы игрока на экране обзора
+    this.forwarded = [[], [], []];            // что ПРИШЛО на площадку si переброской
+  }
+
+  /** Инсайт, видимый на площадке si: одна ось, ИСТИННЫЙ диапазон следующей площадки.
+      Наружу уходит ровно это — не весь следующий участок (правило Г6). */
+  insightAt(si) {
+    if (si >= SITE_COUNT - 1) return null;
+    const attr = this.insightAxes[si];
+    return { attr, range: this.game.sites[si + 1].ranges[attr].slice() };
+  }
+
+  /** Фаза внутри площадки. Обзор идёт ПЕРВЫМ и только если есть что обозревать. */
+  sitePhase() {
+    if (this.finished) return 'done';
+    const si = this.siteIndex;
+    if (this.revActs[si].length < this.forwarded[si].length) return 'review';
+    if (this.catActs[si].length < CAT_PER_SITE) return 'categorize';
+    return this.round < ROUNDS ? 'prospect' : 'treatment';
+  }
+
+  /** Счётчики трёх корзин текущей площадки. Оставленные на обзоре входят
+      в Current — утверждение К-5, снято с прогона PrepMatter. */
+  catCounts(si = this.siteIndex) {
+    const c = { current: 0, next: 0, return: 0 };
+    this.revActs[si].forEach(a => { if (a === 'current') c.current++; else c.return++; });
+    this.catActs[si].forEach(a => { c[a]++; });
+    return c;
+  }
+
+  /** Ход категоризации. Переброска кладёт карточку на СЛЕДУЮЩУЮ площадку. */
+  categorize(action, now = Date.now(), lang) {
+    if (this.finished || this.expired(now)) return this.view(now, lang);
+    if (this.sitePhase() !== 'categorize') throw new Error('not in categorize');
+    if (!CAT_ACTIONS.includes(action)) throw new Error('bad action');
+    const si = this.siteIndex;
+    const last = si === SITE_COUNT - 1;
+    if (action === 'next' && last) throw new Error('no next site on the last site');
+    const card = this.catCards[si][this.catActs[si].length];
+    this.catActs[si].push(action);
+    if (action === 'next') this.forwarded[si + 1].push(card);
+    return this.view(now, lang);
+  }
+
+  /** Ход на экране обзора: только Current или Return, кнопки Next здесь нет. */
+  review(action, now = Date.now(), lang) {
+    if (this.finished || this.expired(now)) return this.view(now, lang);
+    if (this.sitePhase() !== 'review') throw new Error('not in review');
+    if (action !== 'current' && action !== 'return') throw new Error('bad action');
+    this.revActs[this.siteIndex].push(action);
+    return this.view(now, lang);
   }
   get site() { return this.game.sites[this.siteIndex]; }
   msLeft(now = Date.now()) { return Math.max(0, TIMER_MS - (now - this.startedAt)); }
@@ -134,10 +274,29 @@ class SeaWolfSession {
   view(now = Date.now(), lang) {
     if (this.expired(now) && !this.finished) this._timeout();
     const s = this.site;
+    const ph = this.sitePhase();
+    const si = this.siteIndex;
+    /* Что уходит клиенту в фазах обзора и категоризации: ОДНА текущая карточка,
+       счётчики и Инсайт. Ни следующая карточка, ни ключ наружу не уходят —
+       иначе экран сам бы показал правильный ответ (Г6). */
+    let cat = null;
+    if (ph === 'categorize') {
+      const k = this.catActs[si].length, m = this.catCards[si][k];
+      cat = { kind: 'categorize', done: k, total: CAT_PER_SITE,
+              card: { name: m[0], a: m[1], trait: m[2] },
+              counts: this.catCounts(si), lastSite: si === SITE_COUNT - 1 };
+    } else if (ph === 'review') {
+      const k = this.revActs[si].length, m = this.forwarded[si][k];
+      cat = { kind: 'review', done: k, total: this.forwarded[si].length,
+              card: { name: m[0], a: m[1], trait: m[2] },
+              counts: this.catCounts(si), lastSite: si === SITE_COUNT - 1 };
+    }
     const v = {
       level: this.level, levelNote: L(LEVEL_NOTE[this.level], lang),
       msLeft: this.msLeft(now), siteIndex: this.siteIndex, siteCount: SITE_COUNT,
-      phase: this.finished ? 'done' : (this.round < ROUNDS ? 'prospect' : 'treatment'),
+      phase: this.finished ? 'done' : ph,
+      cat,
+      insight: this.finished ? null : this.insightAt(si),
       site: { ranges: s.ranges, desired: s.desired, undesired: s.undesired },
       pool: this.pool().map(m => ({ name: m[0], a: m[1], trait: m[2] })),
       round: this.round, roundsTotal: ROUNDS,
@@ -150,6 +309,9 @@ class SeaWolfSession {
 
   choose(optionIndex, now = Date.now(), lang) {
     if (this.finished || this.expired(now)) return this.view(now, lang);
+    /* Добор не начинается, пока не разобрана категоризация: иначе фаза,
+       которая должна стоять ПЕРЕД пулом, оказывалась бы необязательной. */
+    if (this.sitePhase() !== 'prospect') throw new Error('categorization incomplete');
     if (this.round >= ROUNDS) throw new Error('pool complete');
     if (!(optionIndex >= 0 && optionIndex < 3)) throw new Error('bad option');
     this.choices[this.siteIndex].push(optionIndex);
@@ -300,9 +462,33 @@ class SeaWolfSession {
         body: L({ ru: `${vt.length} ${vt.length === 1 ? 'трио давало' : 'трио давали'} 100%, ты сдал трио на ${got}%. Ошибка не на доборе, а на сборке лечения.`,
                   en: `${vt.length} ${vt.length === 1 ? 'trio gave' : 'trios gave'} 100%, you submitted a trio at ${got}%. The error is not in the draft but in assembling the treatment.` }, lang) };
 
+      /* ТОЧНОСТЬ СОРТИРОВКИ. Живёт РЯДОМ со счётом 5 × 20 %, не внутри него:
+         эффективность лечения как была 0–100 %, так и осталась.
+         База — Return, кнопка ФИКСИРОВАННАЯ и названная ДО раздачи. Первая
+         редакция брала «самый частый ключ в этой раздаче» — это потолок оракула,
+         кандидату недоступный: он выбирает кнопку, не зная состава. Замер на
+         200 000 раздач показал, что при оракульской базе игрок, честно жавший
+         Return на все десять, получал МИНУС в 7.9 % партий. */
+      const ins = this.insightAt(si);
+      const acts = this.catActs[si];
+      let sort = null;
+      if (acts.length) {
+        const keys = this.catCards[si].slice(0, acts.length).map(m => sortKey(m, site, ins));
+        const right = keys.filter((k, i) => k === acts[i]).length;
+        const base = keys.filter(k => k === 'return').length;
+        const misses = [];
+        keys.forEach((k, i) => { if (k !== acts[i])
+          misses.push({ name: this.catCards[si][i][0], took: acts[i], should: k }); });
+        sort = { right, of: acts.length, base,
+                 /* Знаменатель вырождается, когда наивная кнопка закрывает всё:
+                    тогда точность не измеряется, и это печатается, а не молчится. */
+                 net: base >= acts.length ? null : +((right - base) / (acts.length - base)).toFixed(2),
+                 degenerate: base >= acts.length, misses,
+                 show: SHOW_SORT_ACCURACY };
+      }
       return {
         siteIndex: si, levelNote: L(LEVEL_NOTE[this.level], lang),
-        verdict,
+        verdict, sort,
         lost, cost, squeeze, bestMoves: kept, cutMoves: cut,
         roundsPlayed: ch.length, timedOut,
         yourTrio: mine ? mine.map(i => pool[i][0]) : null,
@@ -340,4 +526,7 @@ function pick(batch, { level, seenIds = [] } = {}) {
   return pool[0];
 }
 
-module.exports = { SeaWolfSession, pick, scoreTrio, validTrios, bestAhead, ATTRS, LEVEL_NOTE, LEVELS_IN_BATCH, TIMER_MS, L };
+module.exports = { SeaWolfSession, pick, scoreTrio, validTrios, bestAhead, ATTRS, LEVEL_NOTE,
+                   LEVELS_IN_BATCH, TIMER_MS, L,
+                   CAT_BANK, CAT_PER_SITE, CAT_TOTAL, SHOW_SORT_ACCURACY,
+                   dealCategorization, fitsSite, sortKey, mulberry32, seedFrom };
