@@ -1900,10 +1900,10 @@
   },
   {
    "id": "MS-032",
-   "title": "One per Home",
+   "title": "Fitting Out the Shoe Aisle",
    "difficulty": "Easy",
    "type": "Trap",
-   "focus": "M02(a) % пользователей",
+   "focus": "M28(a) выпуск vs потребление",
    "time": "5 min",
    "render": {
     "exhibits": [],
@@ -1911,7 +1911,7 @@
      "input_number"
     ]
    },
-   "prompt": "Estimate the annual market for replacement water filters for home use in one country.",
+   "prompt": "A firm that sells in-store display and fitting equipment to footwear retailers in one country wants the annual size of the footwear market in that country before it plans its sales coverage. A pair of shoes sells for $32 on average at retail. Estimate that market in dollars a year.",
    "exhibit": null,
    "step_prompts": [
     "Segment the market and state the counting base explicitly (people / households / firms / installed base) with a one-line hypothesis.",
@@ -1919,45 +1919,45 @@
     "Compute the estimate along the main chain and state the market size in $.",
     "Triangulate with an independent second path (a different data source, not the same chain reordered) and reconcile — gap should be within ~2×; name the more reliable path with justification.",
     "Sanity-check: normalize per capita / per household aloud and give a plausibility verdict.",
-    "Last mile: the category's capacity and the advisability of entering."
+    "Last mile: which convention the business case is built on and why."
    ],
    "checklist": {
-    "en": "- GATE: ∈ [$738M, $6.64B]\n- P1: **the penetration filter is applied before the consumption calculation**; counting across all households = P1 not credited\n- P2: 3 anchors as numbers before the calculation\n- P3: second path is independent, **the source is named** (retail panel), ratio ∈ [1.05×, 2.00×] (reference 1.39×) + choice\n- P4: translation into a decision\n- S: \"$2.21B / 26M households with a filter = $85/year ≈ $7/month\" → plausible for replacement cartridges",
-    "ru": "- GATE: ∈ [$738M, $6.64B]\n- P1: **penetration-фильтр применён до расчёта расхода**; счёт по всем домохозяйствам = P1 не зачтён\n- P2: 3 якоря числом до расчёта\n- P3: второй путь независим, **источник назван** (ритейл-панель), ratio ∈ [1.05×, 2.00×] (эталон 1.39×) + выбор\n- P4: перевод в решение\n- S: «$2.21B / 26M домохозяйств с фильтром = $85/год ≈ $7/мес» → правдоподобно ли для сменных картриджей"
+    "en": "- GATE: ∈ [$1,504,000,000, $13,536,000,000]\n- P1: **the size convention is named aloud before the calculation and matched to the client's question** — this buyer sells to retailers inside the country, so the base is the pairs sold there and not the pairs the plants turn out; pricing out the plants' output and calling it the market without naming a convention = P1 not credited\n- P2: 3 anchors as numbers before the calculation, the printed retail price kept separate from them\n- P3: second path is independent, **the source is named** (demand side: population × pairs bought per head), ratio ∈ [1.05×, 2.00×] (reference 1.30×) + the more reliable path named; a second path that lands more than 2× away from the main figure is a reconciliation the candidate has to resolve, not a convergence to report\n- P4: translation into a decision — says which convention the coverage plan is built on, and which buyer the other convention would be right for\n- S: normalizes aloud — pairs a head buys in a year and the dollars a head spends at the printed $32 a pair — and gives a plausibility verdict",
+    "ru": "- GATE: ∈ [$1,504,000,000, $13,536,000,000]\n- P1: **конвенция размера названа вслух до счёта и соотнесена с вопросом клиента** — этот покупатель продаёт рознице внутри страны, значит база — пары, проданные там, а не пары, выпущенные заводами; оценить выпуск в деньгах и назвать это рынком, не объявив конвенцию = P1 не зачтён\n- P2: 3 якоря числом до расчёта, напечатанная розничная цена держится отдельно от них\n- P3: второй путь независим, **источник назван** (сторона спроса: население × пар на человека в год), ratio ∈ [1.05×, 2.00×] (эталон 1.30×) + назван надёжнейший путь; второй путь, разошедшийся с основной величиной больше чем в 2×, — это расхождение, которое кандидат обязан разрешить, а не сходимость, о которой можно отчитаться\n- P4: перевод в решение — сказано, на какой конвенции строится план покрытия и для какого покупателя верна вторая\n- S: нормировка вслух — сколько пар человек покупает за год и сколько долларов тратит при напечатанных $32 за пару — и вердикт правдоподобия"
    },
    "reference": {
-    "en": "Allowed anchors (revealed on request, not upfront):\n  • Households: ~42M [A1]\n  • Share with a filter: ~62% [A1]\n  • Spend on filters per year: ~$85 [A5]\n\nReference chain:\nmarket = 42_000_000 * D('0.62') * 85      # 2,213,400,000\n\nReference answer: $2,213,400,000 · Corridor: [$737,800,000 … $6,640,200,000]",
-    "ru": "Разрешённые якоря (раскрываются по запросу, не вперёд):\n  • Домохозяйств: ~42M [A1]\n  • Доля с фильтром: ~62% [A1]\n  • Расход на фильтры в год: ~$85 [A5]\n\nЭталонная цепочка:\nmarket = 42_000_000 * D('0.62') * 85      # 2,213,400,000\n\nЭталон: $2,213,400,000 · Коридор: [$737,800,000 … $6,640,200,000]"
+    "en": "Source: ms anchor set — [A1], [A3], [A4], [A5]; no book, sizing on anchors.\n\nAllowed anchors (revealed on request, not upfront):\n • 450,000,000 made [A3] · 80% abroad [A3] · 51,000,000 arriving [A3] · $32/pair [A5] · 2nd path 102,000,000 people [A1] · 1.8 pairs/head [A4]\n\nnaive=450_000_000*32 # 14,400,000,000\nkept=450_000_000*(1-D('.80')) # 90,000,000\nmarket=(kept+51_000_000)*32 # 141,000,000 -> 4,512,000,000\nalt=102_000_000*D('1.8')*32 # 5,875,200,000\nalt/market 1.30 · naive/market 3.19 · naive/alt 2.45\n\nReference: $4,512,000,000 · Corridor: [$1,504,000,000 … $13,536,000,000]",
+    "ru": "Source: якорный набор ms — [A1], [A3], [A4], [A5]; книга не используется, сайзинг на якорях.\n\nРазрешённые якоря (раскрываются по запросу, не вперёд):\n • 450,000,000 выпуск [A3] · 80% за границу [A3] · 51,000,000 ввоз [A3] · $32/пара [A5] · 2-й путь 102,000,000 чел [A1] · 1.8 пары/чел [A4]\n\nnaive=450_000_000*32 # 14,400,000,000\nkept=450_000_000*(1-D('.80')) # 90,000,000\nmarket=(kept+51_000_000)*32 # 141,000,000 -> 4,512,000,000\nalt=102_000_000*D('1.8')*32 # 5,875,200,000\nalt/market 1.30 · naive/market 3.19 · naive/alt 2.45\n\nЭталон: $4,512,000,000 · Коридор: [$1,504,000,000 … $13,536,000,000]"
    },
    "provoked": {
-    "en": "taking all 42M households. The penetration filter is applied **before** frequency and consumption: 38% of households have no filter at all, and for them consumption is zero, not \"less\". Skipping the filter overstates the market by 1.6×.",
-    "ru": "взять все 42M домохозяйств. Penetration-фильтр применяется **до** частоты и расхода: 38% домохозяйств фильтра не имеют вовсе, и для них расход равен нулю, а не «меньше». Пропуск фильтра завышает рынок в 1.6×."
+    "en": "reaching for the pairs the plants turn out and pricing them at $32. That figure is the published, measured, biggest number on the table, and it is a real market for somebody — the firms selling machinery and materials to those plants live on exactly it, which is why taking it feels prudent rather than sloppy. The line about where the pairs end up reads as trade colour, not as the thing that decides which of the two answers the client is paying for. The cost of not deciding shows up twice: the figure sits outside the corridor, and the demand-side path refuses to confirm it.",
+    "ru": "взять пары, выпущенные заводами, и оценить их по $32. Это опубликованная, измеренная и самая крупная величина на столе, и она действительно чей-то рынок — те, кто продаёт этим заводам оборудование и материалы, живут ровно на ней; поэтому взять её кажется не небрежностью, а осторожностью. Строка о том, куда уходят пары, читается как фон про торговлю, а не как то, что решает, за какой из двух ответов платит клиент. Цена нерешённого вопроса видна дважды: величина выпадает из коридора, и путь со стороны спроса её не подтверждает."
    },
    "steps": [
     {
      "prompt": "Final market-size estimate, $",
      "kind": "number",
-     "answer": "2213400000",
-     "tolerance": "corridor [$737,800,000 … $6,640,200,000]"
+     "answer": "4512000000",
+     "tolerance": "corridor [$1,504,000,000 … $13,536,000,000]"
     },
     {
      "prompt": "Independent second-path triangulation + one-sentence recommendation",
      "kind": "text",
-     "answer": "reference answer $2,213,400,000; second path within ~2×",
+     "answer": "reference answer $4,512,000,000; second path within ~2×",
      "tolerance": "judged"
     }
    ],
-   "family_h25": "F1",
+   "family_h25": "F5",
    "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
-    "naive": "умножает все домохозяйства на частоту и расход, не применяя долю владеющих",
-    "correct": "применяет долю владеющих до частоты и расхода",
-    "why": "у невладеющих расход равен нулю, а не пониженному значению",
-    "code": "MECH-160-непригодная-часть-базы",
+    "naive": "меряет национальный рынок по выпуску отрасли внутри страны",
+    "correct": "меряет по потреблению внутри страны: выпуск минус вывоз плюс ввоз, и объявляет выбранную конвенцию",
+    "why": "выпуск и потребление расходятся ровно на сальдо внешней торговли, и вопрос клиента выбирает одну из двух",
+    "code": "MECH-119-две-конвенции-размера-выпуск-против-потребления",
     "code2": []
    },
-   "family_note": "круг 103: $85 в год — расход владельца фильтра, а прикладывается ко всем 42M домохозяйств; у 38% без фильтра расход ноль, а не пониженный"
+   "family_note": "F5, а не F1: одна ли база верна, а вторая ошибочна, или обе законны и различаются вопросом? — здесь обе законны: выпуск отрасли есть рынок для поставщика оборудования и материалов обувным заводам, а потребление внутри страны есть рынок для того, кто продаёт тамошней рознице; выбирает между ними вопрос клиента, а не арифметика, и потому требуется объявленная конвенция, а не исправление ошибки. Обратная доточка: если бы выпуск не был рынком ни для одного покупателя, то есть был бы не той базой при любом вопросе, как бывает при счёте по непригодной части базы, стояла бы F1, и F5 не ставится."
   },
   {
    "id": "MS-033",
@@ -2878,7 +2878,7 @@
    "title": "Serving the Centres",
    "difficulty": "Easy",
    "type": "Clean",
-   "focus": "M06(b) retail vs wholesale",
+   "focus": "M16(d) осторожность не заменяет оценку",
    "time": "5 min",
    "render": {
     "exhibits": [],
@@ -2894,19 +2894,19 @@
     "Compute the estimate along the main chain and state the market size in $.",
     "Triangulate with an independent second path (a different data source, not the same chain reordered) and reconcile — gap should be within ~2×; name the more reliable path with justification.",
     "Sanity-check: normalize per capita / per household aloud and give a plausibility verdict.",
-    "Last mile: which figure to take into the business case and why."
+    "Last mile: which figure goes into the business case, and where the uncertainty is carried."
    ],
    "checklist": {
-    "en": "- GATE: ∈ [$624M, $5.62B]\n- P1: **the correspondence of the price level to the question is checked and named explicitly** (both are wholesale, no recomputation needed); recomputing to retail = P1 not credited\n- P2: 2 anchors checked for belonging to the required price level\n- P3: second path is independent, **source is named** (contractor registry), ratio ∈ [1.05×, 2.00×] (reference 1.16×) + a conclusion about convergence\n- P4: conversion into a decision\n- S: \"$1.87B / 19,500 centers = $96,000 per year ≈ $8,000/mo in procurement\" → is it plausible for a service center",
-    "ru": "- GATE: ∈ [$624M, $5.62B]\n- P1: **соответствие уровня цены вопросу проверено и названо явно** (оба оптовые, пересчёт не требуется); пересчёт в розницу = P1 не зачтён\n- P2: 2 якоря проверены на принадлежность нужному ценовому уровню\n- P3: второй путь независим, **источник назван** (реестр подрядчиков), ratio ∈ [1.05×, 2.00×] (эталон 1.16×) + вывод о схождении\n- P4: перевод в решение\n- S: «$1.87B / 19,500 центров = $96,000 в год ≈ $8,000/мес закупки» → правдоподобно ли для сервисного центра"
+    "en": "- GATE: ∈ [$624M, $5.62B]\n- P1: **the central estimate is held and no unsourced downward multiplier is applied** — uncertainty is stated as a corridor or as a sensitivity on a named anchor; a \"conservatism factor\" applied without a source = P1 not credited\n- P2: 2 anchors named as numbers before the calculation\n- P3: second path is independent, **the source is named** (national service-job count × parts per job, not the centre chain reordered), ratio ∈ [1.05×, 2.00×] (reference 1.16×) + a conclusion about convergence\n- P4: conversion into a decision — the central figure is the one that enters the business case, and the uncertainty is carried alongside it, not folded into it\n- S: \"$96,000 a year per centre ≈ $8,000 a month in wholesale purchases; the second path implies ~744 jobs a centre a year ≈ 14 a week\" → is that plausible for a regional service centre\n- Bonus, not required for credit: names which of the two anchors the estimate is most sensitive to, and by how much a stated move in it shifts the answer.",
+    "ru": "- GATE: ∈ [$624M, $5.62B]\n- P1: **центральная оценка удержана, непроисточниковый понижающий множитель не применён** — неуверенность выражена коридором либо чувствительностью по названному якорю; применённый без источника «коэффициент консервативности» = P1 не зачтён\n- P2: 2 якоря названы числом до расчёта\n- P3: второй путь независим, **источник назван** (национальный счёт сервисных работ × запчасти на работу, а не та же цепочка по центрам в другом порядке), ratio ∈ [1.05×, 2.00×] (эталон 1.16×) + вывод о схождении\n- P4: перевод в решение — в обоснование идёт центральная величина, а неуверенность несётся рядом с ней, а не вшивается внутрь\n- S: «$96,000 в год на центр ≈ $8,000 в месяц оптовых закупок; второй путь даёт ~744 работы на центр в год ≈ 14 в неделю» → правдоподобно ли для регионального сервисного центра\n- Bonus, not required for credit: называет, к какому из двух якорей оценка чувствительнее, и на сколько сдвигает ответ названное движение этого якоря."
    },
    "reference": {
-    "en": "Allowed anchors (revealed on request, not upfront):\n  • Regional service centres in the country: ~19,500 [A1]\n  • Purchases per centre **at wholesale prices**, the level at which this distributor sells: ~**$96,000** a year [A4]\n\nReference chain:\nmarket = 19_500 * 96_000      # 1,872,000,000\n\nReference answer: $1,872,000,000 · Corridor: [$624,000,000 … $5,616,000,000]",
-    "ru": "Разрешённые якоря (раскрываются по запросу, не вперёд):\n  • Региональных сервисных центров в стране: ~19,500 [A1]\n  • Закупки центра **по оптовым ценам**, на уровне которых продаёт дистрибьютор: ~**$96,000** в год [A4]\n\nЭталонная цепочка:\nmarket = 19_500 * 96_000      # 1,872,000,000\n\nЭталон: $1,872,000,000 · Коридор: [$624,000,000 … $5,616,000,000]"
+    "en": "Source: ms anchor set — [A3] centres, jobs; [A4] purchases per centre; [A5] parts per job; book not used.\n\nAllowed anchors (revealed on request, not upfront):\n  • Regional service centres: ~19,500 [A3]\n  • Wholesale purchases per centre: ~$96,000 a year [A4]\n  • *Second path:* national service jobs a year: ~14,500,000 [A3]\n  • *Second path:* wholesale parts per job: ~$150 [A5]\n\nReference chain:\nmarket = 19_500 * 96_000    # 1,872,000,000\nalt    = 14_500_000 * 150   # 2,175,000,000\nratio  = alt / market       # 1.16\n\nReference answer: $1,872,000,000 · Corridor: [$624,000,000 … $5,616,000,000]",
+    "ru": "Source: якорный набор ms — [A3] центры, работы; [A4] закупки центра; [A5] запчасти на работу; книга не используется.\n\nРазрешённые якоря (раскрываются по запросу, не вперёд):\n  • Региональных сервисных центров: ~19,500 [A3]\n  • Оптовые закупки центра: ~$96,000 в год [A4]\n  • *Второй путь:* сервисных работ за год: ~14,500,000 [A3]\n  • *Второй путь:* оптовые запчасти на работу: ~$150 [A5]\n\nЭталонная цепочка:\nmarket = 19_500 * 96_000    # 1,872,000,000\nalt    = 14_500_000 * 150   # 2,175,000,000\nratio  = alt / market       # 1.16\n\nЭталон: $1,872,000,000 · Коридор: [$624,000,000 … $5,616,000,000]"
    },
    "provoked": {
-    "en": "\"bringing it to retail prices\" — multiplying by a markup of 1.4×, because in earlier questions the price level had to be aligned. Here there is nothing to align: the question and the data are already at the same level, and the recomputation leads away from the addressable market to someone else's.\n*Difference from the industrial safety-equipment, warehouse-maintenance and data-centre facility-services sizings:* those are about behaviour under pressure (don't invent a reversal, don't replace a fact with a guess). This one is about the **technical correspondence of the price level to the given question** — what is tested is not composure but understanding of which level of the chain the question lives at.",
-    "ru": "«привести к розничным ценам» — умножить на наценку 1.4×, потому что в предыдущих задачах уровень цены приходилось выравнивать. Здесь выравнивать нечего: вопрос и данные уже на одном уровне, и пересчёт уводит от адресуемого рынка к чужому.\n*Отличие от задач про средства промышленной безопасности, обслуживание складов и услуги для дата-центров:* там речь о поведении под давлением (не выдумывай разворот, не заменяй факт догадкой). Здесь дело в **техническом соответствии уровня цены заданному вопросу**: проверяется не выдержка, а понимание, на каком уровне цепочки живёт вопрос."
+    "en": "\"I will take a haircut so as not to overstate\" — multiplying the finished estimate by 0.5 or 0.7 because a single multiplication of two round anchors feels too clean to hand over as it stands. The move reads as discipline, and on a live interview it is the most common way a good candidate spoils a good chain: 0.7 turns $1,872,000,000 into $1,310,400,000, which still sits inside the corridor and so survives every check, while the figure has quietly stopped being an estimate of the market.\n*Difference from the water-filter and delivery-pilot sizings:* there the data really do contain a defect — a base that does not consume, a rate measured on chosen sites — and the correction is required. Here nothing is wrong with the data, and the correction is invented: what is tested is whether the candidate can leave a clean chain alone and carry doubt in the corridor instead of in the centre.",
+    "ru": "«возьму с запасом, чтобы не завысить» — умножить готовую оценку на 0.5 или 0.7, потому что одно умножение двух круглых якорей кажется слишком гладким, чтобы отдавать его как есть. Ход выглядит дисциплиной, и на живом интервью это самый частый способ, которым сильный кандидат портит хорошую цепочку: 0.7 превращает $1,872,000,000 в $1,310,400,000, число по-прежнему стоит в коридоре и проходит любую проверку, а оценкой рынка быть уже перестало.\n*Отличие от задач про фильтры для воды и пилот доставки:* там в данных действительно есть дефект — база, которая не потребляет, ставка, снятая на отобранных площадках, — и поправка обязательна. Здесь с данными всё в порядке, а поправка придумана: проверяется, умеет ли кандидат оставить чистую цепочку в покое и нести сомнение в коридоре, а не в центре."
    },
    "steps": [
     {
@@ -2916,9 +2916,9 @@
      "tolerance": "corridor [$624,000,000 … $5,616,000,000]"
     },
     {
-     "prompt": "State why no further segmentation is needed + one-sentence recommendation",
+     "prompt": "Independent second-path triangulation + where the uncertainty is carried + one-sentence recommendation",
      "kind": "text",
-     "answer": "reference answer $1,872,000,000; further segmentation adds no accuracy",
+     "answer": "reference answer $1,872,000,000; second path within ~2×; uncertainty carried by the corridor and the named sensitivity, not by a discount on the centre",
      "tolerance": "judged"
     }
    ],
@@ -2926,12 +2926,13 @@
    "family_src": "clean",
    "family_conf": "высокая",
    "mehanizm": {
-    "naive": "пересчитывает цену в другой уровень цепочки, хотя вопрос задан на том уровне, на котором цена уже дана",
-    "correct": "оставляет цену на уровне цепочки, заданном вопросом, и называет совпадение уровней явно",
-    "why": "пересчёт переносит оценку на рынок другого участника цепочки, а не на адресуемый",
-    "code": "MECH-49-уровень-цепочки",
+    "naive": "умножает готовую оценку на понижающий коэффициент «чтобы быть консервативным», не имея для него источника",
+    "correct": "держит центральную оценку и выражает неуверенность коридором, а не сдвигом центра",
+    "why": "произвольный дисконт смещает центр и делает оценку непроверяемой: следующий читатель не знает, что в числе — рынок или осторожность",
+    "code": "MECH-118-запас-осторожности-вместо-оценки",
     "code2": []
-   }
+   },
+   "family_note": "F0, а не F8: есть ли в записи вторая ветвь, которая соблазняет? — здесь второй ветви нет вовсе. Оба якоря стоят на уровне вопроса, цепочка — одно умножение, разворачиваться не от чего и не к чему; понижающий коэффициент кандидат приносит с собой, из записи он не следует ни одной строкой. Обратная доточка: если бы в записи стояла защитимая вторая ветвь — второй уровень цены у тех же центров или вторая база счёта, — соблазн жил бы в данных, и слот ставился бы F8; тогда правильный ход был бы выбором между ветвями, а не отказом от выдуманной поправки."
   },
   {
    "id": "MS-049",
@@ -3058,10 +3059,10 @@
   },
   {
    "id": "MS-052",
-   "title": "Ten Stores Out Of Twelve Hundred",
+   "title": "Three And A Half Years Old",
    "difficulty": "Hard",
    "type": "Trap",
-   "focus": "M18(b) отобранные площадки пилота",
+   "focus": "M29(a) возраст запаса vs срок службы",
    "time": "8 min",
    "render": {
     "exhibits": [],
@@ -3069,7 +3070,7 @@
      "input_number"
     ]
    },
-   "prompt": "A grocery chain with 1,200 stores has piloted paid same-day delivery in 10 of them and wants the annual revenue the service would bring nationally. In the pilot each store takes 640 delivery orders a week, at an average order value of $78 plus a $6 delivery fee. The pilot stores were picked by the commercial team as the ten busiest in the estate: they average 41,000 visits a week against 8,200 for the estate as a whole. Two years earlier the chain ran an unadvertised delivery trial in 60 stores drawn at random, which took 150 orders a week each. Estimate the annual revenue in dollars.",
+   "prompt": "A manufacturer of commercial refrigeration units wants the annual size of the replacement market in one country: the dollar value of units bought to replace equipment that has come out of service, not units bought to add capacity. The category has 4,200,000 units in service in the country's food-service outlets, and the units standing in service average 3.5 years old. Last year 790,000 units were shipped into the country and the installed base grew by 90,000 over the same twelve months. The installed base and its age are read off the same trade census, taken on the same date each year. An installed replacement unit sells for $3,300. Estimate the annual replacement market in dollars.",
    "exhibit": null,
    "step_prompts": [
     "Segment the market and state the counting base explicitly (people / households / firms / installed base) with a one-line hypothesis.",
@@ -3077,43 +3078,43 @@
     "Compute the estimate along the main chain and state the market size in $.",
     "Triangulate with an independent second path (a different data source, not the same chain reordered) and reconcile — gap should be within ~2×; name the more reliable path with justification.",
     "Sanity-check: normalize per capita / per household aloud and give a plausibility verdict.",
-    "Last mile: what the figure means for the decision to roll the service out nationally."
+    "Last mile: what the figure means for sizing the replacement business, and which of the two rates the plan is built on."
    ],
    "checklist": {
-    "en": "- GATE: result ∈ [$262,080,000, $2,358,720,000]\n- P1: **the pilot rate is refused because the pilot stores were chosen for being extreme**, and the rate from the randomly drawn trial is used instead; rolling out 640 orders a week = P1 not credited\n- P2: 3 anchors as numbers before the calculation\n- P3: second path from a different source (national delivery orders × the chain's share), ratio ∈ [1.05×, 2.00×] (reference 1.08×) + the more reliable path named\n- P4: translated into a decision — the rollout case has to be built on 150 orders a week, and the ten pilot stores say what a busy store can do, not what an average one will\n- S: \"150 orders a week against 8,200 visits ≈ 1.8% of footfall\" → plausible; the pilot's 640 against 41,000 visits is the same 1.6%, which is what makes the pilot honest and the extrapolation wrong",
-    "ru": "- GATE: результат ∈ [$262,080,000, $2,358,720,000]\n- P1: **ставка пилота отвергнута, потому что площадки пилота выбраны как крайние**, и вместо неё взята ставка случайно набранного трайла; раскатка 640 заказов в неделю = P1 не зачтён\n- P2: 3 якоря числом до расчёта\n- P3: второй путь из другого источника (национальные заказы доставки × доля сети), ratio ∈ [1.05×, 2.00×] (эталон 1.08×) + назван надёжнейший путь\n- P4: перевод в решение — обоснование раскатки строится на 150 заказах в неделю, а десять пилотных магазинов говорят, что может занятой магазин, а не что сделает средний\n- S: «150 заказов в неделю против 8,200 визитов ≈ 1.8% трафика» → правдоподобно; 640 пилота против 41,000 визитов дают те же 1.6%, и именно это делает пилот честным, а экстраполяцию — неверной"
+    "en": "- GATE: result ∈ [$770,000,000, $6,930,000,000]\n- P1: **the average age of the standing base is refused as a service life, and the replacement rate is taken from the flow — units shipped net of the change in the installed base**, with the reason named: an age measured on units that are in service says how much of their life is already behind them, not how long a unit lasts; dividing the base by its average age = P1 not credited\n- P2: 3 anchors as numbers before the calculation\n- P3: second path from a different source (contractor registry × replacement units installed per contractor a year), ratio ∈ [1.05×, 2.00×] (reference 1.20×) + the more reliable path named\n- P4: translated into a decision — capacity, stock and the service network are planned on the flow rate; the base-and-age rate over-scopes the replacement business by 1.71×, and the plan has to say which of the two rates it carries\n- S: normalized aloud — the flow rate is ≈0.93 replacements per outlet a year against about 5.6 units standing per outlet → plausible; the base-and-age rate gives ≈1.60 a year per outlet, which would have every unit on site swapped every 3.5 years\n- Bonus, not required for credit: notes that the flow figure is a net measure and says what would have to hold for it to misstate replacements — units taken out and not put back, or replacements drawn from stock the contractors already hold",
+    "ru": "- GATE: результат ∈ [$770,000,000, $6,930,000,000]\n- P1: **средний возраст парка отвергнут как срок службы, а частота замены взята из потока — отгрузки минус прирост парка**, и названа причина: возраст, измеренный на единицах, которые стоят в строю, говорит, сколько жизни у них уже позади, а не сколько единица служит; деление парка на его средний возраст = P1 не зачтён\n- P2: 3 якоря числом до расчёта\n- P3: второй путь из другого источника (реестр подрядчиков × комплектов на подрядчика в год), ratio ∈ [1.05×, 2.00×] (эталон 1.20×) + назван надёжнейший путь\n- P4: перевод в решение — мощность, склад и сервисная сеть планируются по ставке потока; ставка из парка завышает бизнес замены в 1.71×, и план обязан назвать, какую из двух ставок он несёт\n- S: нормировка вслух — ставка потока даёт ≈0.93 замены на заведение в год против примерно 5.6 единиц, стоящих на площадке → правдоподобно; ставка из парка даёт ≈1.60 в год на заведение, то есть требует менять каждую стоящую единицу раз в 3.5 года\n- Bonus, not required for credit: отмечено, что величина потока — сальдо, и сказано, при каких условиях она исказит замены: единицы сняли и не поставили обратно, либо замены закрыли складом, который подрядчики уже держат"
    },
    "reference": {
-    "en": "Exhibit:\n| Line | Figure |\n|---|---|\n| Stores in the estate | 1,200 |\n| Pilot stores | 10 |\n| Pilot orders per store per week | 640 |\n| Average order value | $78 |\n| Delivery fee | $6 |\n| Pilot store visits per week | 41,000 |\n| Estate store visits per week | 8,200 |\n| Random trial, stores | 60 |\n| Random trial, orders per store per week | 150 |\n\n  • *For the second path:* national grocery delivery orders a year: ~21,000,000 [A3]\n  • *For the second path:* the chain's share of grocery turnover: ~48% [A3]\n\nReference chain:\nrev_order  = 78 + 6                   # 84 per order\nnaive_ord  = 1_200 * 640 * 52         # 39,936,000 orders a year at the pilot rate\nnaive      = naive_ord * 84           # 3,354,624,000  <- pilot rolled out\norders     = 1_200 * 150 * 52         # 9,360,000 orders a year at the random-trial rate\nmarket     = orders * 84              # 786,240,000    <- market\nalt_ord    = 21_000_000 * D('0.48')   # 10,080,000 orders\nalt        = alt_ord * 84             # 846,720,000    <- second path, national orders\nratio      = alt / market             # 1.08\n\nThe pilot measured ten stores that were picked for being busy, so its rate carries the choice and not the estate: rolling it out is an overstatement of $2,568,384,000, or 4.27x the $786,240,000 the random trial supports.\n\nReference answer: $786,240,000 · Corridor: [$262,080,000 … $2,358,720,000]",
-    "ru": "Exhibit:\n| Строка | Величина |\n|---|---|\n| Магазинов в сети | 1,200 |\n| Пилотных магазинов | 10 |\n| Заказов пилота на магазин в неделю | 640 |\n| Средний чек | $78 |\n| Плата за доставку | $6 |\n| Визитов в пилотный магазин в неделю | 41,000 |\n| Визитов в магазин сети в неделю | 8,200 |\n| Случайный трайл, магазинов | 60 |\n| Случайный трайл, заказов на магазин в неделю | 150 |\n\n  • *Для второго пути:* национальных заказов продуктовой доставки в год: ~21,000,000 [A3]\n  • *Для второго пути:* доля сети в продуктовом обороте: ~48% [A3]\n\nЭталонная цепочка:\nrev_order  = 78 + 6                   # 84 на заказ\nnaive_ord  = 1_200 * 640 * 52         # 39,936,000 заказов в год по ставке пилота\nnaive      = naive_ord * 84           # 3,354,624,000  <- пилот, раскатанный на сеть\norders     = 1_200 * 150 * 52         # 9,360,000 заказов в год по ставке случайного трайла\nmarket     = orders * 84              # 786,240,000    <- рынок\nalt_ord    = 21_000_000 * D('0.48')   # 10,080,000 заказов\nalt        = alt_ord * 84             # 846,720,000    <- второй путь, национальные заказы\nratio      = alt / market             # 1.08\n\nПилот измерил десять магазинов, отобранных за то, что они загружены, поэтому его ставка несёт отбор, а не сеть: раскатка даёт завышение на $2,568,384,000, то есть 4.27x от $786,240,000, которые подтверждает случайный трайл.\n\nЭталон: $786,240,000 · Коридор: [$262,080,000 … $2,358,720,000]"
+    "en": "Source: ms anchor set — [A3] units in service, units shipped, growth of the installed base, contractor registry and replacement units per contractor, food-service outlets; [A4] average age of the units standing in service; [A5] installed price of a replacement unit; the mean service life and the spread are BUILT from those anchors and marked as built; the book is not used, the sizing runs on anchors.\n\nExhibit:\n| Line | Figure |\n|---|---|\n| Units in service in food-service outlets | 4,200,000 [A3] |\n| Average age of the units standing in service | 3.5 years [A4] |\n| Units shipped last year | 790,000 [A3] |\n| Growth of the installed base over the same year | 90,000 [A3] |\n| Installed price of a replacement unit | $3,300 [A5] |\n\n  • *For the second path:* catering-equipment service contractors on the trade registry: ~21,000 [A3]\n  • *For the second path:* replacement units installed per contractor a year: ~40 [A3]\n  • *For the sanity check:* food-service outlets in the country: ~750,000 [A3]\n\nReference chain:\nnaive_rate = 4_200_000 / D('3.5')   # 1,200,000 units a year, average age taken as the service life\nnaive      = 1_200_000 * 3_300      # 3,960,000,000  <- replacement market read off the base\nreplaced   = 790_000 - 90_000       # 700,000 units a year replaced, from the flow\nmarket     = 700_000 * 3_300        # 2,310,000,000  <- market\nalt_units  = 21_000 * 40            # 840,000 units installed off the contractor registry\nalt        = 840_000 * 3_300        # 2,772,000,000  <- second path, contractor registry\nratio      = alt / market           # 1.20\n\nBUILT (derived from the anchors above, not anchors themselves):\nEL         = 4_200_000 / 700_000    # 6.0 years mean service life; steady state, base = flow x service life\nEL2        = 2 * 6.0 * 3.5          # 42.0 — mean age of a standing unit = E[L^2] / (2*E[L]) = 3.5\nvar        = 42.0 - 6.0**2          # 6.0 -> sd = 2.45 years, CV^2 = 1/6\noverstate  = 2 / (1 + 1/6)          # 12/7 = 1.71x, the gap between the two rates\nMean age of a standing unit = (E[L]/2)(1 + CV^2): a unit in service is caught partway through its life, so the base divided by its average age counts a turnover of about twice the true one. The whole gap is that factor of two, trimmed by the spread.\nApproximation named: the identity is stationary and this base grew 2.1% over the year. Correcting for growth pulls the implied mean service life below 6.0 years — how far depends on the shape assumed for the lifetime distribution, of the order of a few per cent to about a tenth. It does not touch the choice between the two rates: 1,200,000 against 700,000 is read straight off the anchors.\n\nSo the base-and-age path overstates the replacement market by $1,650,000,000 — 1.71x the flow path — and the error is not in the numerator: 4,200,000 units is a sound count. The denominator is the wrong quantity. An age is a position inside a service life; a service life is what the flow measures.\n\nReference answer: $2,310,000,000 · Corridor: [$770,000,000 … $6,930,000,000]",
+    "ru": "Source: якорный набор ms — [A3] единицы в строю, отгрузки, прирост парка, реестр подрядчиков и комплекты на подрядчика, заведения общепита; [A4] средний возраст единиц, стоящих в строю; [A5] цена установленного комплекта замены; средний срок службы и разброс ПОСТРОЕНЫ из этих якорей и помечены как построенные; книга не используется, сайзинг на якорях.\n\nExhibit:\n| Строка | Величина |\n|---|---|\n| Единиц в строю в заведениях общепита | 4,200,000 [A3] |\n| Средний возраст единиц, стоящих в строю | 3.5 года [A4] |\n| Отгружено единиц за прошлый год | 790,000 [A3] |\n| Прирост парка за тот же год | 90,000 [A3] |\n| Цена установленного комплекта замены | $3,300 [A5] |\n\n  • *Для второго пути:* сервисных подрядчиков по оборудованию общепита в отраслевом реестре: ~21,000 [A3]\n  • *Для второго пути:* комплектов замены на подрядчика в год: ~40 [A3]\n  • *Для проверки:* заведений общепита в стране: ~750,000 [A3]\n\nЭталонная цепочка:\nnaive_rate = 4_200_000 / D('3.5')   # 1,200,000 единиц в год, средний возраст принят за срок службы\nnaive      = 1_200_000 * 3_300      # 3,960,000,000  <- рынок замены, снятый с парка\nreplaced   = 790_000 - 90_000       # 700,000 единиц в год замещаются, из потока\nmarket     = 700_000 * 3_300        # 2,310,000,000  <- рынок\nalt_units  = 21_000 * 40            # 840,000 единиц ставит база подрядчиков\nalt        = 840_000 * 3_300        # 2,772,000,000  <- второй путь, реестр подрядчиков\nratio      = alt / market           # 1.20\n\nПОСТРОЕНО (выведено из якорей выше, само якорем не является):\nEL         = 4_200_000 / 700_000    # 6.0 года — средний срок службы; стационар, парк = поток x срок\nEL2        = 2 * 6.0 * 3.5          # 42.0 — средний возраст стоящей единицы = E[L^2] / (2*E[L]) = 3.5\nvar        = 42.0 - 6.0**2          # 6.0 -> sd = 2.45 года, CV^2 = 1/6\noverstate  = 2 / (1 + 1/6)          # 12/7 = 1.71x — разрыв между двумя ставками\nСредний возраст стоящей единицы = (E[L]/2)(1 + CV^2): единицу в строю застаёшь на середине пройденного пути, поэтому парк, делённый на свой средний возраст, даёт оборот примерно вдвое больше настоящего. Весь разрыв — этот множитель два, подрезанный разбросом.\nПриближение названо: тождество стационарное, а парк за год вырос на 2.1%. Поправка на рост опускает подразумеваемый средний срок службы ниже 6.0 лет — насколько именно, зависит от предполагаемой формы распределения сроков, порядок величины от нескольких процентов до примерно десятой части. На выбор между двумя ставками это не влияет: 1,200,000 против 700,000 читается прямо с якорей.\n\nИтого путь по парку завышает рынок замены на $1,650,000,000 — в 1.71x относительно пути по потоку, — и ошибка не в числителе: 4,200,000 единиц сосчитаны верно. В знаменателе стоит не та величина. Возраст — это положение внутри срока службы; сам срок службы измеряет поток.\n\nЭталон: $2,310,000,000 · Коридор: [$770,000,000 … $6,930,000,000]"
    },
    "provoked": {
-    "en": "scaling the pilot: 640 orders a week is a measured number from live stores, and 1,200 stores are a fact, so the multiplication feels safe. The line about how the ten were chosen reads as a project detail rather than as the reason the rate cannot travel.",
-    "ru": "масштабировать пилот: 640 заказов в неделю — измеренная величина живых магазинов, 1,200 магазинов — факт, и умножение кажется безопасным. Строка о том, как выбирали десятку, читается как деталь проекта, а не как причина, по которой ставку переносить нельзя."
+    "en": "reading the service life straight off the census: 4,200,000 units is a counted fact and 3.5 years is a measured average, so replacing one part in 3.5 of the base a year looks like the safest rate on the page — it uses only figures nobody disputes and needs no assumption at all. The census line reads as housekeeping, and nothing on the page announces that an average age and a service life are different quantities: the first says how far a unit has got, the second how far it goes.",
+    "ru": "прочитать срок службы прямо с переписи: 4,200,000 единиц — сосчитанный факт, 3.5 года — измеренное среднее, и замена одной 3.5-й парка в год выглядит самой безопасной ставкой на странице: она опирается только на бесспорные величины и не требует ни одного допущения. Строка о переписи читается как деталь учёта, и ничто на странице не объявляет, что средний возраст и срок службы — разные величины: первая говорит, сколько единица прошла, вторая — сколько она проходит всего."
    },
    "steps": [
     {
      "prompt": "Final market-size estimate, $",
      "kind": "number",
-     "answer": "786240000",
-     "tolerance": "corridor [$262,080,000 … $2,358,720,000]"
+     "answer": "2310000000",
+     "tolerance": "corridor [$770,000,000 … $6,930,000,000]"
     },
     {
      "prompt": "Independent second-path triangulation + one-sentence recommendation",
      "kind": "text",
-     "answer": "reference answer $786,240,000; second path within ~2×",
+     "answer": "reference answer $2,310,000,000; second path within ~2×",
      "tolerance": "judged"
     }
    ],
-   "family_h25": "F3",
+   "family_h25": "F1",
    "family_src": "тело",
    "family_conf": "высокая",
-   "family_note": "F3 «причина против отбора»: разницу между пилотом и сетью объясняет отбор площадок, а не услуга. Запись говорит это дословно — «The pilot stores were picked by the commercial team as the ten busiest in the estate» — и тут же даёт невыбранное множество для сравнения: «an unadvertised delivery trial in 60 stores drawn at random, which took 150 orders a week each».",
+   "family_note": "F1, а не F3: различающий вопрос — расхождение объясняется тем, КАК единицы попали в измеряемое множество, или тем, что в знаменателе стоит не та величина? Здесь причина вторая. Числитель безупречен (4,200,000 единиц сосчитаны), а делят на средний возраст парка, тогда как частота замены требует срока службы: возраст — это положение внутри срока, и в стационаре средний возраст = (E[L]/2)(1 + CV^2), откуда завышение = 2 / (1 + CV^2) = 1.71x при CV^2 = 1/6. Арифметика и отвергает F3: если бы разницу делал состав измеряемого множества, разрыв рос бы вместе с ранним выбытием, а он ровно наоборот — при CV = 0 завышение максимально (2.00x), при CV = 1 оно исчезает вовсе. Обратная доточка: если бы величина в знаменателе была той самой, а расходились бы множества — скажем, возраст мерили бы только на единицах у крупных сетей и переносили на всю страну, — стояла бы F3, и F1 не ставилась бы.",
    "mehanizm": {
-    "naive": "умножает частоту заказа, измеренную на пилотных точках, на все точки сети",
-    "correct": "берёт частоту со случайно отобранных точек либо корректирует пилотную ставку на разницу трафика",
-    "why": "пилотные точки отбирались как самые загруженные, поэтому их ставка выше средней по сети",
-    "code": "MECH-58-нерепрезентативная-выборка",
+    "naive": "принимает средний возраст единиц, стоящих в парке, за срок службы единицы",
+    "correct": "берёт срок службы из потока: отгрузки за вычетом прироста парка",
+    "why": "возраст стоящей единицы говорит, сколько она уже прошла, а не сколько служит",
+    "code": "MECH-127-возраст-запаса-вместо-срока-службы",
     "code2": []
    },
    "twin_of": null

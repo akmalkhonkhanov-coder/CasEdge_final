@@ -178,7 +178,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit (описанный график)",
+     "title": "Exhibit — средний чек по районам (описанный график)",
      "reveal": "on_request",
      "triggers": [
       "по районам",
@@ -188,7 +188,7 @@
       "география заказов",
       "доля заказов"
      ],
-     "body_md": "### Exhibit (описанный график)\n> *«Столбчатая диаграмма: средний чек по районам, под каждым столбцом — доля района в общем числе заказов. Чиланзар, премиум-центр — самый высокий столбец, около $44.20, но тонкая доля: всего 18% заказов. Юнусабад (средний сегмент) — самая широкая доля, 34%, около $31.60. Сергели (эконом) — 31% заказов при $22.90. Внешние районы — 17% заказов, самый низкий столбец, $18.40. Сноска: пилот по прибыльности проводился **только в Чиланзаре**.»*\n\nTake rate 16% · доставка $2.90 · упаковка $1.35 · базовая ставка курьера $4.15 · 48,000 заказов/день.\nМножители дистанции: Чиланзар 0.9 · Юнусабад 1.0 · Сергели 1.15 · Внешние 1.45. Наценка окна: пик ×1.25 (42%) · непик ×0.95 (58%).",
+     "body_md": "> *«Столбчатая диаграмма: средний чек по районам, под каждым столбцом — доля района в общем числе заказов. Чиланзар, премиум-центр — самый высокий столбец, около $44.20, но тонкая доля: всего 18% заказов. Юнусабад (средний сегмент) — самая широкая доля, 34%, около $31.60. Сергели (эконом) — 31% заказов при $22.90. Внешние районы — 17% заказов, самый низкий столбец, $18.40. Сноска: пилот по прибыльности проводился **только в Чиланзаре**.»*\n\nTake rate 16% · доставка $2.90 · упаковка $1.35 · базовая ставка курьера $4.15 · 48,000 заказов/день.\nМножители дистанции: Чиланзар 0.9 · Юнусабад 1.0 · Сергели 1.15 · Внешние 1.45. Наценка окна: пик ×1.25 (42%) · непик ×0.95 (58%).",
      "render": {
       "type": "bar",
       "title": "Средний чек и доля заказов по районам",
@@ -249,8 +249,8 @@
        }
       ]
      },
-     "title_en": "Exhibit (chart described)",
-     "body_md_en": "### Exhibit (chart described)\n> *\"A bar chart: the average basket by district, and under each bar the district's share of total orders. Chilanzar, the premium centre, is the tallest bar, about $44.20, but a thin share: only 18% of orders. Yunusabad (the mid segment) has the widest share, 34%, at about $31.60. Sergeli (economy) is 31% of orders at $22.90. The outer districts are 17% of orders and the lowest bar, $18.40. Footnote: the profitability pilot was run **in Chilanzar only**.\"*\n\nTake rate 16% · delivery $2.90 · packaging $1.35 · the courier's base rate $4.15 · 48,000 orders/day.\nDistance multipliers: Chilanzar 0.9 · Yunusabad 1.0 · Sergeli 1.15 · Outer districts 1.45. Window mark-up: peak ×1.25 (42%) · off-peak ×0.95 (58%).",
+     "title_en": "Exhibit — average basket by district (chart described)",
+     "body_md_en": "> *\"A bar chart: the average basket by district, and under each bar the district's share of total orders. Chilanzar, the premium centre, is the tallest bar, about $44.20, but a thin share: only 18% of orders. Yunusabad (the mid segment) has the widest share, 34%, at about $31.60. Sergeli (economy) is 31% of orders at $22.90. The outer districts are 17% of orders and the lowest bar, $18.40. Footnote: the profitability pilot was run **in Chilanzar only**.\"*\n\nTake rate 16% · delivery $2.90 · packaging $1.35 · the courier's base rate $4.15 · 48,000 orders/day.\nDistance multipliers: Chilanzar 0.9 · Yunusabad 1.0 · Sergeli 1.15 · Outer districts 1.45. Window mark-up: peak ×1.25 (42%) · off-peak ×0.95 (58%).",
      "triggers_en": [
       "by district",
       "average ticket",
@@ -371,7 +371,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — table",
+     "title": "Exhibit — цена, объём и мощность склада",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -383,7 +383,7 @@
       "цена",
       "цифры"
      ],
-     "body_md": "### Exhibit — table\n| Показатель | Значение |\n|---|---|\n| Текущая цена | $24.80 / паллета / мес |\n| Текущий объём | 3,400 паллет |\n| Базовый var cost | $6.20 / паллета / мес |\n| Мощность | 5,200 паллет |\n| Микс продуктов | Мясо 42% · Молочка 33% · Овощи 25% |\n| Корректировка var cost | Мясо ×1.00 · Молочка ×0.92 · Овощи ×1.15 |\n| Сезонность | Пик ×1.30 (40% мес.) · Непик ×0.85 (60%) |\n| Ожидаемый прирост объёма от снижения | +1,400 паллет *(если конкурент не ответит)* |",
+     "body_md": "| Показатель | Значение |\n|---|---|\n| Текущая цена | $24.80 / паллета / мес |\n| Текущий объём | 3,400 паллет |\n| Базовый var cost | $6.20 / паллета / мес |\n| Мощность | 5,200 паллет |\n| Микс продуктов | Мясо 42% · Молочка 33% · Овощи 25% |\n| Корректировка var cost | Мясо ×1.00 · Молочка ×0.92 · Овощи ×1.15 |\n| Сезонность | Пик ×1.30 (40% мес.) · Непик ×0.85 (60%) |\n| Ожидаемый прирост объёма от снижения | +1,400 паллет *(если конкурент не ответит)* |",
      "render": {
       "type": "table",
       "title": "Exhibit — table",
@@ -468,7 +468,7 @@
        ]
       ]
      },
-     "body_md_en": "### Exhibit — table\n| Indicator | Value |\n|---|---|\n| Current price | $24.80 / pallet / month |\n| Current volume | 3,400 pallets |\n| Base var cost | $6.20 / pallet / month |\n| Capacity | 5,200 pallets |\n| Product mix | Meat 42% · Dairy 33% · Vegetables 25% |\n| Var cost adjustment | Meat ×1.00 · Dairy ×0.92 · Vegetables ×1.15 |\n| Seasonality | Peak ×1.30 (40% of months) · Off-peak ×0.85 (60%) |\n| Expected volume gain from the cut | +1,400 pallets *(if the competitor does not respond)* |",
+     "body_md_en": "| Indicator | Value |\n|---|---|\n| Current price | $24.80 / pallet / month |\n| Current volume | 3,400 pallets |\n| Base var cost | $6.20 / pallet / month |\n| Capacity | 5,200 pallets |\n| Product mix | Meat 42% · Dairy 33% · Vegetables 25% |\n| Var cost adjustment | Meat ×1.00 · Dairy ×0.92 · Vegetables ×1.15 |\n| Seasonality | Peak ×1.30 (40% of months) · Off-peak ×0.85 (60%) |\n| Expected volume gain from the cut | +1,400 pallets *(if the competitor does not respond)* |",
      "triggers_en": [
       "data",
       "exhibit",
@@ -477,7 +477,8 @@
       "table",
       "price",
       "numbers"
-     ]
+     ],
+     "title_en": "Exhibit — price, volume and warehouse capacity"
     }
    ],
    "steps": [
@@ -602,7 +603,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit (internal memo)",
+     "title": "Exhibit — внутренняя записка: прогноз сайнапов ad-tier",
      "reveal": "auto",
      "triggers": [],
      "body_md": "### Exhibit (internal memo)\n> *«Growth-команда прогнозирует ~800,000 сайнапов на ad-tier в первый год. Финансы предупреждают: примерно 35% из них — существующие premium-подписчики, которые перейдут вниз, а не новые клиенты. Premium стоит $9.99, ad-tier $4.99, gross margin ~60%. И retention у ad-tier слабее premium: моделирование показывает, что из когорты первого года к году два остаётся около 58%, к году три — 37%.»*",
@@ -611,7 +612,7 @@
       "reason": "memo",
       "note": "записка или реплика, render не положен"
      },
-     "title_en": "Exhibit (internal memo)",
+     "title_en": "Exhibit — internal memo: the ad-tier sign-up forecast",
      "body_md_en": "### Exhibit (internal memo)\n> *\"The growth team forecasts ~800,000 sign-ups on the ad tier in the first year. Finance warns: about 35% of them are existing premium subscribers who will move down, not new customers. Premium costs $9.99, the ad tier $4.99, gross margin ~60%. And retention on the ad tier is weaker than premium: the modelling shows that of the first-year cohort about 58% remain at year two and 37% at year three.\"*"
     }
    ],
@@ -749,7 +750,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit 1 — table",
+     "title": "Exhibit 1 — маржа и микс категорий до и после loyalty",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -761,7 +762,7 @@
       "таблица",
       "цифры"
      ],
-     "body_md": "### Exhibit 1 — table\n| Категория | Маржа | Микс до loyalty | Микс после loyalty |\n|---|---|---|---|\n| Rx | 7.1% | 58% | 63% |\n| OTC | 21.9% | 29% | 25% |\n| Косметика | 33.6% | 13% | 12% |\n\nГодовая выручка $54M · баллы начисляются 3% от покупок.",
+     "body_md": "| Категория | Маржа | Микс до loyalty | Микс после loyalty |\n|---|---|---|---|\n| Rx | 7.1% | 58% | 63% |\n| OTC | 21.9% | 29% | 25% |\n| Косметика | 33.6% | 13% | 12% |\n\nГодовая выручка $54M · баллы начисляются 3% от покупок.",
      "render": {
       "type": "table",
       "title": "Exhibit 1 — table",
@@ -822,7 +823,7 @@
        ]
       ]
      },
-     "body_md_en": "### Exhibit 1 — table\n| Category | Margin | Mix before loyalty | Mix after loyalty |\n|---|---|---|---|\n| Rx | 7.1% | 58% | 63% |\n| OTC | 21.9% | 29% | 25% |\n| Cosmetics | 33.6% | 13% | 12% |\n\nAnnual revenue $54M · points are earned at 3% of purchases.",
+     "body_md_en": "| Category | Margin | Mix before loyalty | Mix after loyalty |\n|---|---|---|---|\n| Rx | 7.1% | 58% | 63% |\n| OTC | 21.9% | 29% | 25% |\n| Cosmetics | 33.6% | 13% | 12% |\n\nAnnual revenue $54M · points are earned at 3% of purchases.",
      "triggers_en": [
       "data",
       "exhibit",
@@ -831,11 +832,12 @@
       "mix",
       "table",
       "numbers"
-     ]
+     ],
+     "title_en": "Exhibit 1 — category margin and mix before and after loyalty"
     },
     {
      "id": "ex2",
-     "title": "Exhibit 2 — описанный chart",
+     "title": "Exhibit 2 — кривая погашения баллов по годам",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -848,7 +850,7 @@
       "таблица",
       "цифры"
      ],
-     "body_md": "### Exhibit 2 — описанный chart\n> *«Кривая погашения баллов растёт три года: около 21% начисленных баллов погашено к концу первого года, ещё 37% — к концу второго, и финальные 14% в третьем, выходя на плато около 72%.»*",
+     "body_md": "> *«Кривая погашения баллов растёт три года: около 21% начисленных баллов погашено к концу первого года, ещё 37% — к концу второго, и финальные 14% в третьем, выходя на плато около 72%.»*",
      "render": {
       "type": "bar",
       "title": "Погашение баллов по годам, % начисленных",
@@ -887,8 +889,8 @@
        }
       ]
      },
-     "title_en": "Exhibit 2 — chart described",
-     "body_md_en": "### Exhibit 2 — chart described\n> *\"The redemption curve rises over three years: about 21% of the points earned are redeemed by the end of the first year, another 37% by the end of the second, and the final 14% in the third, levelling off at about 72%.\"*",
+     "title_en": "Exhibit 2 — points redemption curve by year",
+     "body_md_en": "> *\"The redemption curve rises over three years: about 21% of the points earned are redeemed by the end of the first year, another 37% by the end of the second, and the final 14% in the third, levelling off at about 72%.\"*",
      "triggers_en": [
       "data",
       "exhibit",
@@ -2689,7 +2691,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — table",
+     "title": "Exhibit — выручка, маржа и аллоцированный overhead по регионам",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -2701,7 +2703,7 @@
       "таблица",
       "цифры"
      ],
-     "body_md": "### Exhibit — table\n| Регион | Выручка ($M) | Операционная маржа | Аллоцированный overhead ($M) |\n|---|---|---|---|\n| North | 84.2 | 4.1% | 2.9 |\n| South | 71.6 | 3.8% | 2.4 |\n| East | 58.9 | 2.9% | 2.6 |\n| West | **93.4** | 4.7% | 3.1 |\n| **Итого по сводке** | **298.09** | | |",
+     "body_md": "| Регион | Выручка ($M) | Операционная маржа | Аллоцированный overhead ($M) |\n|---|---|---|---|\n| North | 84.2 | 4.1% | 2.9 |\n| South | 71.6 | 3.8% | 2.4 |\n| East | 58.9 | 2.9% | 2.6 |\n| West | **93.4** | 4.7% | 3.1 |\n| **Итого по сводке** | **298.09** | | |",
      "render": {
       "type": "table",
       "title": "Exhibit — table",
@@ -2786,7 +2788,7 @@
        ]
       ]
      },
-     "body_md_en": "### Exhibit — table\n| Region | Revenue ($M) | Operating margin | Allocated overhead ($M) |\n|---|---|---|---|\n| North | 84.2 | 4.1% | 2.9 |\n| South | 71.6 | 3.8% | 2.4 |\n| East | 58.9 | 2.9% | 2.6 |\n| West | **93.4** | 4.7% | 3.1 |\n| **Total in the summary** | **298.09** | | |",
+     "body_md_en": "| Region | Revenue ($M) | Operating margin | Allocated overhead ($M) |\n|---|---|---|---|\n| North | 84.2 | 4.1% | 2.9 |\n| South | 71.6 | 3.8% | 2.4 |\n| East | 58.9 | 2.9% | 2.6 |\n| West | **93.4** | 4.7% | 3.1 |\n| **Total in the summary** | **298.09** | | |",
      "triggers_en": [
       "data",
       "exhibit",
@@ -2795,7 +2797,8 @@
       "by region",
       "table",
       "numbers"
-     ]
+     ],
+     "title_en": "Exhibit — revenue, margin and allocated overhead by region"
     },
     {
      "id": "ex2",
@@ -2987,7 +2990,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit 1 — table",
+     "title": "Exhibit 1 — ставка, отмены и базовый спрос по сегментам",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -2999,7 +3002,7 @@
       "таблица",
       "цифры"
      ],
-     "body_md": "### Exhibit 1 — table\n| Сегмент | Ставка/ночь | Отмены | Базовый спрос (ном.-ночей) |\n|---|---|---|---|\n| Corporate | $198 | 8% | 3,200 |\n| Leisure | $240 | 10% | 2,800 |\n| Group/Tour | $172 | 12% | 4,100 |\n| OTA (онлайн) | $232 | 41% | 3,600 |",
+     "body_md": "| Сегмент | Ставка/ночь | Отмены | Базовый спрос (ном.-ночей) |\n|---|---|---|---|\n| Corporate | $198 | 8% | 3,200 |\n| Leisure | $240 | 10% | 2,800 |\n| Group/Tour | $172 | 12% | 4,100 |\n| OTA (онлайн) | $232 | 41% | 3,600 |",
      "render": {
       "type": "table",
       "title": "Exhibit 1 — table",
@@ -3072,7 +3075,7 @@
        ]
       ]
      },
-     "body_md_en": "### Exhibit 1 — table\n| Segment | Rate/night | Cancellations | Base demand (room-nights) |\n|---|---|---|---|\n| Corporate | $198 | 8% | 3,200 |\n| Leisure | $240 | 10% | 2,800 |\n| Group/Tour | $172 | 12% | 4,100 |\n| OTA (online) | $232 | 41% | 3,600 |",
+     "body_md_en": "| Segment | Rate/night | Cancellations | Base demand (room-nights) |\n|---|---|---|---|\n| Corporate | $198 | 8% | 3,200 |\n| Leisure | $240 | 10% | 2,800 |\n| Group/Tour | $172 | 12% | 4,100 |\n| OTA (online) | $232 | 41% | 3,600 |",
      "triggers_en": [
       "data",
       "exhibit",
@@ -3081,11 +3084,12 @@
       "rate",
       "table",
       "numbers"
-     ]
+     ],
+     "title_en": "Exhibit 1 — rate, cancellations and base demand by segment"
     },
     {
      "id": "ex2",
-     "title": "Exhibit 2 — описанный chart",
+     "title": "Exhibit 2 — сезонный множитель спроса по сегментам",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -3097,7 +3101,7 @@
       "таблица",
       "цифры"
      ],
-     "body_md": "### Exhibit 2 — описанный chart\n> *«График сезонного множителя спроса относительно базовой линии 1.0. Leisure взлетает выше всех — примерно 1.4× от базы. Group/Tour над линией, около 1.2×. OTA чуть выше базы, порядка 1.05×. Corporate — единственный ниже линии, около 0.85×: корпоративные поездки проседают в праздничные недели.»*",
+     "body_md": "> *«График сезонного множителя спроса относительно базовой линии 1.0. Leisure взлетает выше всех — примерно 1.4× от базы. Group/Tour над линией, около 1.2×. OTA чуть выше базы, порядка 1.05×. Corporate — единственный ниже линии, около 0.85×: корпоративные поездки проседают в праздничные недели.»*",
      "render": {
       "type": "bar",
       "title": "Сезонный множитель спроса к базовой линии 1.0",
@@ -3140,8 +3144,8 @@
        }
       ]
      },
-     "title_en": "Exhibit 2 — chart described",
-     "body_md_en": "### Exhibit 2 — chart described\n> *\"A chart of the seasonal demand multiplier against a base line of 1.0. Leisure flies highest — about 1.4× the base. Group/Tour is above the line, around 1.2×. OTA is just above the base, of the order of 1.05×. Corporate is the only one below the line, about 0.85×: corporate travel sags in the holiday weeks.\"*",
+     "title_en": "Exhibit 2 — seasonal demand multiplier by segment",
+     "body_md_en": "> *\"A chart of the seasonal demand multiplier against a base line of 1.0. Leisure flies highest — about 1.4× the base. Group/Tour is above the line, around 1.2×. OTA is just above the base, of the order of 1.05×. Corporate is the only one below the line, about 0.85×: corporate travel sags in the holiday weeks.\"*",
      "triggers_en": [
       "data",
       "exhibit",
@@ -3274,7 +3278,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — table",
+     "title": "Exhibit — параметры проекта",
      "reveal": "on_request",
      "triggers": [
       "capex",
@@ -3286,7 +3290,7 @@
       "таблица",
       "цифры"
      ],
-     "body_md": "### Exhibit — table\n| Параметр | Значение |\n|---|---|\n| Capex | $100,000,000 |\n| Генерация в год 1 | 210,000 МВт·ч |\n| Деградация панелей | 0.7% / год |\n| Цена по PPA в год 1 | $54.00 / МВт·ч |\n| Эскалация цены по PPA | 2.5% / год |\n| Годовой opex | $2,400,000 |\n| Срок жизни | 20 лет |\n| Ставка дисконта | 8% |",
+     "body_md": "| Параметр | Значение |\n|---|---|\n| Capex | $100,000,000 |\n| Генерация в год 1 | 210,000 МВт·ч |\n| Деградация панелей | 0.7% / год |\n| Цена по PPA в год 1 | $54.00 / МВт·ч |\n| Эскалация цены по PPA | 2.5% / год |\n| Годовой opex | $2,400,000 |\n| Срок жизни | 20 лет |\n| Ставка дисконта | 8% |",
      "render": {
       "type": "table",
       "title": "Exhibit — table",
@@ -3371,7 +3375,7 @@
        ]
       ]
      },
-     "body_md_en": "### Exhibit — table\n| Parameter | Value |\n|---|---|\n| Capex | $100,000,000 |\n| Generation in year 1 | 210,000 MWh |\n| Panel degradation | 0.7% / year |\n| PPA price in year 1 | $54.00 / MWh |\n| PPA price escalation | 2.5% / year |\n| Annual opex | $2,400,000 |\n| Life | 20 years |\n| Discount rate | 8% |",
+     "body_md_en": "| Parameter | Value |\n|---|---|\n| Capex | $100,000,000 |\n| Generation in year 1 | 210,000 MWh |\n| Panel degradation | 0.7% / year |\n| PPA price in year 1 | $54.00 / MWh |\n| PPA price escalation | 2.5% / year |\n| Annual opex | $2,400,000 |\n| Life | 20 years |\n| Discount rate | 8% |",
      "triggers_en": [
       "capex",
       "data",
@@ -3380,7 +3384,8 @@
       "parameters",
       "table",
       "numbers"
-     ]
+     ],
+     "title_en": "Exhibit — project parameters"
     }
    ],
    "steps": [
@@ -3506,7 +3511,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit 1 — table",
+     "title": "Exhibit 1 — APR, дефолты и портфель по сегментам",
      "reveal": "on_request",
      "triggers": [
       "APR",
@@ -3519,7 +3524,7 @@
       "таблица",
       "цифры"
      ],
-     "body_md": "### Exhibit 1 — table\n| Сегмент | APR | Ставка дефолта | LGD | Портфель ($M) |\n|---|---|---|---|---|\n| Prime | 19% | 3% | 55% | 120 |\n| Near-prime | 31% | 9% | 62% | 85 |\n| Subprime | 52% | 38% | 78% | 40 |\n\nСтоимость фондирования — 8% для всех сегментов.",
+     "body_md": "| Сегмент | APR | Ставка дефолта | LGD | Портфель ($M) |\n|---|---|---|---|---|\n| Prime | 19% | 3% | 55% | 120 |\n| Near-prime | 31% | 9% | 62% | 85 |\n| Subprime | 52% | 38% | 78% | 40 |\n\nСтоимость фондирования — 8% для всех сегментов.",
      "render": {
       "type": "table",
       "title": "Exhibit 1 — table",
@@ -3588,7 +3593,7 @@
        ]
       ]
      },
-     "body_md_en": "### Exhibit 1 — table\n| Segment | APR | Default rate | LGD | Book ($M) |\n|---|---|---|---|---|\n| Prime | 19% | 3% | 55% | 120 |\n| Near-prime | 31% | 9% | 62% | 85 |\n| Subprime | 52% | 38% | 78% | 40 |\n\nThe cost of funding is 8% for every segment.",
+     "body_md_en": "| Segment | APR | Default rate | LGD | Book ($M) |\n|---|---|---|---|---|\n| Prime | 19% | 3% | 55% | 120 |\n| Near-prime | 31% | 9% | 62% | 85 |\n| Subprime | 52% | 38% | 78% | 40 |\n\nThe cost of funding is 8% for every segment.",
      "triggers_en": [
       "APR",
       "data",
@@ -3598,7 +3603,8 @@
       "segments",
       "table",
       "numbers"
-     ]
+     ],
+     "title_en": "Exhibit 1 — APR, default rates and book by segment"
     },
     {
      "id": "ex2",
@@ -4827,7 +4833,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — ОПИСАННЫЙ ГРАФИК",
+     "title": "Exhibit — косты и число пациентов по клиникам",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -4839,7 +4845,7 @@
       "таблица",
       "цифры"
      ],
-     "body_md": "### Exhibit — ОПИСАННЫЙ ГРАФИК\n> *«Столбчатая диаграмма по четырём клиникам: costs и число пациентов. Chorsu — $4,820,000 при 41,200 пациентах. Yunusabad — $5,310,000 при 44,800. Sergeli — $3,960,000 при 35,100. Mirobod — самый высокий столбец, $5,938,333 при 46,200 пациентах. Подпись под графиком: итого по сети — $19,180,000 и 160,700 пациентов. Сноска мелким шрифтом: Mirobod перешёл на календарную отчётность в этом году; переходный период составил 14 месяцев.»*",
+     "body_md": "> *«Столбчатая диаграмма по четырём клиникам: costs и число пациентов. Chorsu — $4,820,000 при 41,200 пациентах. Yunusabad — $5,310,000 при 44,800. Sergeli — $3,960,000 при 35,100. Mirobod — самый высокий столбец, $5,938,333 при 46,200 пациентах. Подпись под графиком: итого по сети — $19,180,000 и 160,700 пациентов. Сноска мелким шрифтом: Mirobod перешёл на календарную отчётность в этом году; переходный период составил 14 месяцев.»*",
      "render": {
       "type": "bar",
       "title": "Costs и число пациентов по клиникам",
@@ -4900,8 +4906,8 @@
        }
       ]
      },
-     "title_en": "Exhibit — CHART DESCRIBED",
-     "body_md_en": "### Exhibit — CHART DESCRIBED\n> *\"A bar chart across four clinics: costs and patient numbers. Chorsu — $4,820,000 at 41,200 patients. Yunusabad — $5,310,000 at 44,800. Sergeli — $3,960,000 at 35,100. Mirobod — the tallest bar, $5,938,333 at 46,200 patients. The caption under the chart: the network total is $19,180,000 and 160,700 patients. A footnote in small print: Mirobod moved to calendar reporting this year; the transition period was 14 months.\"*",
+     "title_en": "Exhibit — costs and patient numbers by clinic",
+     "body_md_en": "> *\"A bar chart across four clinics: costs and patient numbers. Chorsu — $4,820,000 at 41,200 patients. Yunusabad — $5,310,000 at 44,800. Sergeli — $3,960,000 at 35,100. Mirobod — the tallest bar, $5,938,333 at 46,200 patients. The caption under the chart: the network total is $19,180,000 and 160,700 patients. A footnote in small print: Mirobod moved to calendar reporting this year; the transition period was 14 months.\"*",
      "triggers_en": [
       "data",
       "exhibit",
@@ -5059,7 +5065,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit 1 — ТАБЛИЦА",
+     "title": "Exhibit 1 — объём, цена и себестоимость по моделям, годы 1–2",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -5071,7 +5077,7 @@
       "таблица",
       "цифры"
      ],
-     "body_md": "### Exhibit 1 — ТАБЛИЦА\n| Модель | Units Y1 | Price Y1 | Cost Y1 | Units Y2 | Price Y2 | Cost Y2 |\n|---|---|---|---|---|---|---|\n| Economy | 1,420 | 18,400 | 16,100 | 2,340 | 17,900 | 15,950 |\n| Mid | 1,180 | 27,600 | 23,800 | 760 | 26,400 | 23,650 |\n| Premium | 340 | 48,200 | 40,900 | 150 | 46,100 | 40,750 |",
+     "body_md": "| Модель | Units Y1 | Price Y1 | Cost Y1 | Units Y2 | Price Y2 | Cost Y2 |\n|---|---|---|---|---|---|---|\n| Economy | 1,420 | 18,400 | 16,100 | 2,340 | 17,900 | 15,950 |\n| Mid | 1,180 | 27,600 | 23,800 | 760 | 26,400 | 23,650 |\n| Premium | 340 | 48,200 | 40,900 | 150 | 46,100 | 40,750 |",
      "render": {
       "type": "table",
       "title": "Exhibit 1 — ТАБЛИЦА",
@@ -5156,8 +5162,8 @@
        ]
       ]
      },
-     "title_en": "Exhibit 1 — TABLE",
-     "body_md_en": "### Exhibit 1 — TABLE\n| Model | Units Y1 | Price Y1 | Cost Y1 | Units Y2 | Price Y2 | Cost Y2 |\n|---|---|---|---|---|---|---|\n| Economy | 1,420 | 18,400 | 16,100 | 2,340 | 17,900 | 15,950 |\n| Mid | 1,180 | 27,600 | 23,800 | 760 | 26,400 | 23,650 |\n| Premium | 340 | 48,200 | 40,900 | 150 | 46,100 | 40,750 |",
+     "title_en": "Exhibit 1 — units, price and cost by model, years 1–2",
+     "body_md_en": "| Model | Units Y1 | Price Y1 | Cost Y1 | Units Y2 | Price Y2 | Cost Y2 |\n|---|---|---|---|---|---|---|\n| Economy | 1,420 | 18,400 | 16,100 | 2,340 | 17,900 | 15,950 |\n| Mid | 1,180 | 27,600 | 23,800 | 760 | 26,400 | 23,650 |\n| Premium | 340 | 48,200 | 40,900 | 150 | 46,100 | 40,750 |",
      "triggers_en": [
       "data",
       "exhibit",
@@ -5173,7 +5179,7 @@
      "title": "Exhibit 2 — ОПИСАННЫЙ ГРАФИК (входит в ту же формулу — COMBO)",
      "reveal": "auto",
      "triggers": [],
-     "body_md": "### Exhibit 2 — ОПИСАННЫЙ ГРАФИК\n\n> *«График эластичности спроса по моделям: Economy — самая пологая кривая, эластичность около −0.4, покупатели этого сегмента цену терпят. Mid и Premium — крутые кривые, эластичность порядка −1.6: рост цены на процент уводит полтора процента покупателей. Отдельной строкой — заметка коммерческого директора: логистика в этом году подешевела, контейнеры упали, подготовка авто тоже.»*",
+     "body_md": "> *«График эластичности спроса по моделям: Economy — самая пологая кривая, эластичность около −0.4, покупатели этого сегмента цену терпят. Mid и Premium — крутые кривые, эластичность порядка −1.6: рост цены на процент уводит полтора процента покупателей. Отдельной строкой — заметка коммерческого директора: логистика в этом году подешевела, контейнеры упали, подготовка авто тоже.»*",
      "render": {
       "type": "bar",
       "title": "Эластичность спроса по сегментам",
@@ -5213,7 +5219,7 @@
       ]
      },
      "title_en": "Exhibit 2 — CHART DESCRIBED (part of the same formula — COMBO)",
-     "body_md_en": "### Exhibit 2 — CHART DESCRIBED\n\n> *\"A chart of demand elasticity by model: Economy is the flattest curve, elasticity about −0.4, buyers in this segment put up with the price. Mid and Premium are steep curves, elasticity of the order of −1.6: a one percent rise in price takes away one and a half percent of buyers. On a separate line, a note from the commercial director: logistics has become cheaper this year, containers have fallen, and preparing a car has too.\"*"
+     "body_md_en": "> *\"A chart of demand elasticity by model: Economy is the flattest curve, elasticity about −0.4, buyers in this segment put up with the price. Mid and Premium are steep curves, elasticity of the order of −1.6: a one percent rise in price takes away one and a half percent of buyers. On a separate line, a note from the commercial director: logistics has become cheaper this year, containers have fallen, and preparing a car has too.\"*"
     }
    ],
    "steps": [
@@ -5462,17 +5468,17 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit 2 — ОПИСАННЫЙ ГРАФИК",
+     "title": "Exhibit 2 — месячная загрузка причала по сезону",
      "reveal": "auto",
      "triggers": [],
-     "body_md": "### Exhibit 2 — ОПИСАННЫЙ ГРАФИК\n> *«Линейный график месячной загрузки. Кривая почти плоская с января по июль, затем резко идёт вверх: август–октябрь — сезон отгрузок, объём в эти месяцы достигает **1.62× среднемесячного за год**. Ноябрь–декабрь возвращаются на уровень января–июля — это примерно 0.79 среднемесячного: девять тихих месяцев по 0.79 и три пиковых по 1.62 как раз и складываются в годовой объём. Подпись: причал физически не может обслужить пиковый месяц выше номинала — контракты на перевозку заключаются на ГОД целиком, и грузовладелец распределяет свой объём по собственному графику: обслуживание между терминалами он не дробит.»*\n",
+     "body_md": "> *«Линейный график месячной загрузки. Кривая почти плоская с января по июль, затем резко идёт вверх: август–октябрь — сезон отгрузок, объём в эти месяцы достигает **1.62× среднемесячного за год**. Ноябрь–декабрь возвращаются на уровень января–июля — это примерно 0.79 среднемесячного: девять тихих месяцев по 0.79 и три пиковых по 1.62 как раз и складываются в годовой объём. Подпись: причал физически не может обслужить пиковый месяц выше номинала — контракты на перевозку заключаются на ГОД целиком, и грузовладелец распределяет свой объём по собственному графику: обслуживание между терминалами он не дробит.»*\n",
      "render": null,
      "render_omitted": {
       "reason": "single_fact",
       "note": "меньше трёх чисел, рисовать нечего"
      },
-     "title_en": "Exhibit 2 — CHART DESCRIBED",
-     "body_md_en": "### Exhibit 2 — CHART DESCRIBED\n> *\"A line chart of monthly loading. The curve is almost flat from January to July, then rises sharply: August–October is the shipping season, and volume in those months reaches **1.62× the monthly average for the year**. November–December come back to the January–July level — about 0.79 of the monthly average: nine quiet months at 0.79 and three peak months at 1.62 together make up exactly the annual volume. Caption: the berth physically cannot serve a peak month above its nominal capacity — carriage contracts are signed for a WHOLE year, and the cargo owner spreads his volume on his own schedule: he does not split his handling between terminals.\"*"
+     "title_en": "Exhibit 2 — monthly berth loading through the season",
+     "body_md_en": "> *\"A line chart of monthly loading. The curve is almost flat from January to July, then rises sharply: August–October is the shipping season, and volume in those months reaches **1.62× the monthly average for the year**. November–December come back to the January–July level — about 0.79 of the monthly average: nine quiet months at 0.79 and three peak months at 1.62 together make up exactly the annual volume. Caption: the berth physically cannot serve a peak month above its nominal capacity — carriage contracts are signed for a WHOLE year, and the cargo owner spreads his volume on his own schedule: he does not split his handling between terminals.\"*"
     }
    ],
    "steps": [
@@ -5642,17 +5648,17 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — PROSE",
+     "title": "Exhibit — что говорят главврач и администратор",
      "reveal": "auto",
      "triggers": [],
-     "body_md": "### Exhibit — PROSE\n> *«Главврач: за год мы приняли 18,600 консультаций против 14,200 в прошлом, диагностика упала с 8,400 до 7,100, процедур стало 2,800 вместо 3,900. Цены мы не трогали: консультация $45 при себестоимости $22, диагностика $180 при $96, процедура $520 при $295.*\n> *Администратор: неявки нас убивают. По консультациям было 9%, стало 17%. По диагностике 6% → 11%. По процедурам 4% → 8%. Слот всё равно занят — врач ждёт, зарплата идёт.»*",
+     "body_md": "> *«Главврач: за год мы приняли 18,600 консультаций против 14,200 в прошлом, диагностика упала с 8,400 до 7,100, процедур стало 2,800 вместо 3,900. Цены мы не трогали: консультация $45 при себестоимости $22, диагностика $180 при $96, процедура $520 при $295.*\n> *Администратор: неявки нас убивают. По консультациям было 9%, стало 17%. По диагностике 6% → 11%. По процедурам 4% → 8%. Слот всё равно занят — врач ждёт, зарплата идёт.»*",
      "render": null,
      "render_omitted": {
       "reason": "prose_data",
       "note": "проза с данными без табличной разметки — кандидат на ручную переверстку"
      },
-     "title_en": "Exhibit — PROSE",
-     "body_md_en": "### Exhibit — PROSE\n> *\"Chief physician: over the year we took 18,600 consultations against 14,200 last year, diagnostics fell from 8,400 to 7,100, and procedures came to 2,800 instead of 3,900. We did not touch prices: a consultation $45 at a unit cost of $22, diagnostics $180 at $96, a procedure $520 at $295.*\n> *Administrator: the no-shows are killing us. On consultations it was 9%, now 17%. On diagnostics 6% → 11%. On procedures 4% → 8%. The slot is taken anyway — the doctor waits, the salary runs.\"*"
+     "title_en": "Exhibit — what the chief physician and the administrator say",
+     "body_md_en": "> *\"Chief physician: over the year we took 18,600 consultations against 14,200 last year, diagnostics fell from 8,400 to 7,100, and procedures came to 2,800 instead of 3,900. We did not touch prices: a consultation $45 at a unit cost of $22, diagnostics $180 at $96, a procedure $520 at $295.*\n> *Administrator: the no-shows are killing us. On consultations it was 9%, now 17%. On diagnostics 6% → 11%. On procedures 4% → 8%. The slot is taken anyway — the doctor waits, the salary runs.\"*"
     },
     {
      "id": "ex2",
@@ -5844,7 +5850,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — ТАБЛИЦА",
+     "title": "Exhibit — кост, ремонты и оборачиваемость по депо",
      "reveal": "on_request",
      "triggers": [
       "TAT",
@@ -5857,7 +5863,7 @@
       "таблица",
       "цифры"
      ],
-     "body_md": "### Exhibit — ТАБЛИЦА\n| Депо | Годовой кост | Ремонтов/год | TAT (дней) |\n|---|---|---|---|\n| North | $8,400,000 | 3,100 | 4.2 |\n| Central | $11,200,000 | 4,800 | 3.1 |\n| South | $6,900,000 | 2,050 | 5.6 |\n\nПарк 1,840 вагонов · выручка $310/вагон-день в эксплуатации · маржа 34%.",
+     "body_md": "| Депо | Годовой кост | Ремонтов/год | TAT (дней) |\n|---|---|---|---|\n| North | $8,400,000 | 3,100 | 4.2 |\n| Central | $11,200,000 | 4,800 | 3.1 |\n| South | $6,900,000 | 2,050 | 5.6 |\n\nПарк 1,840 вагонов · выручка $310/вагон-день в эксплуатации · маржа 34%.",
      "render": {
       "type": "table",
       "title": "Exhibit — ТАБЛИЦА",
@@ -5918,8 +5924,8 @@
        ]
       ]
      },
-     "title_en": "Exhibit — TABLE",
-     "body_md_en": "### Exhibit — TABLE\n| Depot | Annual cost | Repairs/year | TAT (days) |\n|---|---|---|---|\n| North | $8,400,000 | 3,100 | 4.2 |\n| Central | $11,200,000 | 4,800 | 3.1 |\n| South | $6,900,000 | 2,050 | 5.6 |\n\nFleet 1,840 wagons · revenue $310/wagon-day in service · margin 34%.",
+     "title_en": "Exhibit — cost, repairs and turnaround by depot",
+     "body_md_en": "| Depot | Annual cost | Repairs/year | TAT (days) |\n|---|---|---|---|\n| North | $8,400,000 | 3,100 | 4.2 |\n| Central | $11,200,000 | 4,800 | 3.1 |\n| South | $6,900,000 | 2,050 | 5.6 |\n\nFleet 1,840 wagons · revenue $310/wagon-day in service · margin 34%.",
      "triggers_en": [
       "TAT",
       "data",
@@ -6674,7 +6680,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit 1 — ТАБЛИЦА",
+     "title": "Exhibit 1 — заявленный урожай, площадь и цена по регионам",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -6686,7 +6692,7 @@
       "урожай",
       "цифры"
      ],
-     "body_md": "### Exhibit 1 — ТАБЛИЦА\n| Регион | Урожай (заявлено) | Площадь (га) | Цена ($/тонна) |\n|---|---|---|---|\n| Steppe North | 48,200 тонн | 21,400 | 238 |\n| River Basin | 39,600 тонн | 16,900 | 245 |\n| Highland | **312,000 центнеров** | 13,800 | 231 |\n| Coastal | 27,300 тонн | 11,200 | 252 |\n| **Итого по сводке** | **146,300 тонн** | | |",
+     "body_md": "| Регион | Урожай (заявлено) | Площадь (га) | Цена ($/тонна) |\n|---|---|---|---|\n| Steppe North | 48,200 тонн | 21,400 | 238 |\n| River Basin | 39,600 тонн | 16,900 | 245 |\n| Highland | **312,000 центнеров** | 13,800 | 231 |\n| Coastal | 27,300 тонн | 11,200 | 252 |\n| **Итого по сводке** | **146,300 тонн** | | |",
      "render": {
       "type": "table",
       "title": "Exhibit 1 — ТАБЛИЦА",
@@ -6771,8 +6777,8 @@
        ]
       ]
      },
-     "title_en": "Exhibit 1 — TABLE",
-     "body_md_en": "### Exhibit 1 — TABLE\n| Region | Harvest (as reported) | Area (ha) | Price ($/tonne) |\n|---|---|---|---|\n| Steppe North | 48,200 tonnes | 21,400 | 238 |\n| River Basin | 39,600 tonnes | 16,900 | 245 |\n| Highland | **312,000 centners** | 13,800 | 231 |\n| Coastal | 27,300 tonnes | 11,200 | 252 |\n| **Total in the summary** | **146,300 tonnes** | | |",
+     "title_en": "Exhibit 1 — reported yield, area and price by region",
+     "body_md_en": "| Region | Harvest (as reported) | Area (ha) | Price ($/tonne) |\n|---|---|---|---|\n| Steppe North | 48,200 tonnes | 21,400 | 238 |\n| River Basin | 39,600 tonnes | 16,900 | 245 |\n| Highland | **312,000 centners** | 13,800 | 231 |\n| Coastal | 27,300 tonnes | 11,200 | 252 |\n| **Total in the summary** | **146,300 tonnes** | | |",
      "triggers_en": [
       "data",
       "exhibit",
@@ -6785,17 +6791,17 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit 2 — PROSE",
+     "title": "Exhibit 2 — что говорит агроном о форме отчётности",
      "reveal": "auto",
      "triggers": [],
-     "body_md": "### Exhibit 2 — PROSE\n> *«Агроном: Highland у нас исторически отчитывается по старой форме — там ещё считают в центнерах, руки не дошли перевести. Напомню: в тонне десять центнеров.»*",
+     "body_md": "> *«Агроном: Highland у нас исторически отчитывается по старой форме — там ещё считают в центнерах, руки не дошли перевести. Напомню: в тонне десять центнеров.»*",
      "render": null,
      "render_omitted": {
       "reason": "single_fact",
       "note": "меньше трёх чисел, рисовать нечего"
      },
-     "title_en": "Exhibit 2 — PROSE",
-     "body_md_en": "### Exhibit 2 — PROSE\n> *\"Agronomist: Highland has always reported on the old form — they still count in centners there, we never got round to converting it. A reminder: there are ten centners in a tonne.\"*"
+     "title_en": "Exhibit 2 — what the agronomist says about the reporting form",
+     "body_md_en": "> *\"Agronomist: Highland has always reported on the old form — they still count in centners there, we never got round to converting it. A reminder: there are ten centners in a tonne.\"*"
     }
    ],
    "steps": [
@@ -7104,7 +7110,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — ОПИСАННЫЙ ГРАФИК",
+     "title": "Exhibit — выручка, переменные косты и overhead по магазинам",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -7117,7 +7123,7 @@
       "убыточные магазины",
       "цифры"
      ],
-     "body_md": "### Exhibit — ОПИСАННЫЙ ГРАФИК\n> *«Столбчатая диаграмма по четырём магазинам: выручка, переменные косты и распределённый overhead. Flagship — $4,820,000 / $2,650,000 / $1,180,000. Mall A — $2,340,000 / $1,390,000 / $890,000. Mall B — $1,910,000 / $1,180,000 / $840,000. Outlet — $1,240,000 / $790,000 / $610,000. Два последних столбца уходят в минус.*\n> *Вторая серия — доля онлайн-выручки региона, приходящая от клиентов, которые сначала были в магазине («halo»): Mall A — 22%, Mall B — 19%, Outlet — 8%, Flagship — 0%. Онлайн-выручка $8,600,000 при марже 31%.*\n> *Сноска: только 35% распределённого overhead реально исчезает при закрытии — остальное корпоративные функции и аренда по долгосрочным договорам.»*",
+     "body_md": "> *«Столбчатая диаграмма по четырём магазинам: выручка, переменные косты и распределённый overhead. Flagship — $4,820,000 / $2,650,000 / $1,180,000. Mall A — $2,340,000 / $1,390,000 / $890,000. Mall B — $1,910,000 / $1,180,000 / $840,000. Outlet — $1,240,000 / $790,000 / $610,000. Два последних столбца уходят в минус.*\n> *Вторая серия — доля онлайн-выручки региона, приходящая от клиентов, которые сначала были в магазине («halo»): Mall A — 22%, Mall B — 19%, Outlet — 8%, Flagship — 0%. Онлайн-выручка $8,600,000 при марже 31%.*\n> *Сноска: только 35% распределённого overhead реально исчезает при закрытии — остальное корпоративные функции и аренда по долгосрочным договорам.»*",
      "render": {
       "type": "bar",
       "title": "Выручка, переменные косты и распределённый overhead по магазинам",
@@ -7196,8 +7202,8 @@
        }
       ]
      },
-     "title_en": "Exhibit — CHART DESCRIBED",
-     "body_md_en": "### Exhibit — CHART DESCRIBED\n> *\"A bar chart across four stores: revenue, variable costs and allocated overhead. Flagship — $4,820,000 / $2,650,000 / $1,180,000. Mall A — $2,340,000 / $1,390,000 / $890,000. Mall B — $1,910,000 / $1,180,000 / $840,000. Outlet — $1,240,000 / $790,000 / $610,000. The last two bars go negative.*\n> *The second series is the share of the region's online revenue that comes from customers who were in the store first (\"halo\"): Mall A — 22%, Mall B — 19%, Outlet — 8%, Flagship — 0%. Online revenue $8,600,000 at a margin of 31%.*\n> *Footnote: only 35% of the allocated overhead actually disappears on closure — the rest is corporate functions and rent under long leases.\"*",
+     "title_en": "Exhibit — revenue, variable costs and overhead by store",
+     "body_md_en": "> *\"A bar chart across four stores: revenue, variable costs and allocated overhead. Flagship — $4,820,000 / $2,650,000 / $1,180,000. Mall A — $2,340,000 / $1,390,000 / $890,000. Mall B — $1,910,000 / $1,180,000 / $840,000. Outlet — $1,240,000 / $790,000 / $610,000. The last two bars go negative.*\n> *The second series is the share of the region's online revenue that comes from customers who were in the store first (\"halo\"): Mall A — 22%, Mall B — 19%, Outlet — 8%, Flagship — 0%. Online revenue $8,600,000 at a margin of 31%.*\n> *Footnote: only 35% of the allocated overhead actually disappears on closure — the rest is corporate functions and rent under long leases.\"*",
      "triggers_en": [
       "data",
       "exhibit",
@@ -7397,7 +7403,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — ТАБЛИЦА",
+     "title": "Exhibit — прибыль и активы, взвешенные по риску, по линиям",
      "reveal": "on_request",
      "triggers": [
       "RWA",
@@ -7409,7 +7415,7 @@
       "таблица",
       "цифры"
      ],
-     "body_md": "### Exhibit — ТАБЛИЦА\n| Линия | Прибыль | RWA (активы, взвешенные по риску) |\n|---|---|---|\n| Corporate lending | $84,200,000 | $1,420,000,000 |\n| Retail mortgages | $61,800,000 | $890,000,000 |\n| SME lending | $38,400,000 | $410,000,000 |\n| Trade finance | $22,100,000 | $180,000,000 |\n| Cards/payments | $29,600,000 | $140,000,000 |\n\nТребование к капиталу — 12% от RWA.",
+     "body_md": "| Линия | Прибыль | RWA (активы, взвешенные по риску) |\n|---|---|---|\n| Corporate lending | $84,200,000 | $1,420,000,000 |\n| Retail mortgages | $61,800,000 | $890,000,000 |\n| SME lending | $38,400,000 | $410,000,000 |\n| Trade finance | $22,100,000 | $180,000,000 |\n| Cards/payments | $29,600,000 | $140,000,000 |\n\nТребование к капиталу — 12% от RWA.",
      "render": {
       "type": "table",
       "title": "Exhibit — ТАБЛИЦА",
@@ -7482,8 +7488,8 @@
        ]
       ]
      },
-     "title_en": "Exhibit — TABLE",
-     "body_md_en": "### Exhibit — TABLE\n| Business line | Profit | RWA (risk-weighted assets) |\n|---|---|---|\n| Corporate lending | $84,200,000 | $1,420,000,000 |\n| Retail mortgages | $61,800,000 | $890,000,000 |\n| SME lending | $38,400,000 | $410,000,000 |\n| Trade finance | $22,100,000 | $180,000,000 |\n| Cards/payments | $29,600,000 | $140,000,000 |\n\nThe capital requirement is 12% of RWA.",
+     "title_en": "Exhibit — profit and risk-weighted assets by line",
+     "body_md_en": "| Business line | Profit | RWA (risk-weighted assets) |\n|---|---|---|\n| Corporate lending | $84,200,000 | $1,420,000,000 |\n| Retail mortgages | $61,800,000 | $890,000,000 |\n| SME lending | $38,400,000 | $410,000,000 |\n| Trade finance | $22,100,000 | $180,000,000 |\n| Cards/payments | $29,600,000 | $140,000,000 |\n\nThe capital requirement is 12% of RWA.",
      "triggers_en": [
       "RWA",
       "data",
@@ -7686,17 +7692,17 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — PROSE",
+     "title": "Exhibit — что говорит директор по продажам об опросе",
      "reveal": "auto",
      "triggers": [],
-     "body_md": "### Exhibit — PROSE\n> *«Директор по продажам: мы опросили 60 рекламодателей, средняя готовность платить — $41,500. Значит, можем смело идти к этой цифре.*\n> *Аналитик: подожди. Мы опрашивали через клуб премиум-партнёров — там только крупные бренды. А теперь посмотри на структуру наших слотов: топ-бренды берут 14% слотов, их WTP действительно около $43,800. Средние агентства — 37% слотов, у них WTP ближе к $31,200. А локальные и малый бизнес — это 49% всех слотов, и там WTP порядка $24,600. Мы продаём 1,840 слотов в год.»*",
+     "body_md": "> *«Директор по продажам: мы опросили 60 рекламодателей, средняя готовность платить — $41,500. Значит, можем смело идти к этой цифре.*\n> *Аналитик: подожди. Мы опрашивали через клуб премиум-партнёров — там только крупные бренды. А теперь посмотри на структуру наших слотов: топ-бренды берут 14% слотов, их WTP действительно около $43,800. Средние агентства — 37% слотов, у них WTP ближе к $31,200. А локальные и малый бизнес — это 49% всех слотов, и там WTP порядка $24,600. Мы продаём 1,840 слотов в год.»*",
      "render": null,
      "render_omitted": {
       "reason": "prose_data",
       "note": "проза с данными без табличной разметки — кандидат на ручную переверстку"
      },
-     "title_en": "Exhibit — PROSE",
-     "body_md_en": "### Exhibit — PROSE\n> *\"Sales director: we surveyed 60 advertisers, the average willingness to pay is $41,500. So we can go straight to that figure.*\n> *Analyst: hold on. We surveyed through the premium partners' club — only large brands are in it. Now look at the structure of our slots: top brands take 14% of the slots, and their WTP really is around $43,800. Mid-sized agencies — 37% of the slots, their WTP is closer to $31,200. And local and small business is 49% of all the slots, and there the WTP is of the order of $24,600. We sell 1,840 slots a year.\"*"
+     "title_en": "Exhibit — what the sales director says about the survey",
+     "body_md_en": "> *\"Sales director: we surveyed 60 advertisers, the average willingness to pay is $41,500. So we can go straight to that figure.*\n> *Analyst: hold on. We surveyed through the premium partners' club — only large brands are in it. Now look at the structure of our slots: top brands take 14% of the slots, and their WTP really is around $43,800. Mid-sized agencies — 37% of the slots, their WTP is closer to $31,200. And local and small business is 49% of all the slots, and there the WTP is of the order of $24,600. We sell 1,840 slots a year.\"*"
     },
     {
      "id": "ex2",
@@ -8171,17 +8177,17 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — MEMO",
+     "title": "Exhibit — коммерческое предложение и комментарий операций",
      "reveal": "auto",
      "triggers": [],
-     "body_md": "### Exhibit — MEMO\n> *«Коммерческое предложение: наша ставка — $23.20 за заказ против ваших текущих $41.20. Экономия $18.00 на заказе.*\n> *Комментарий нашей операционной команды: осторожно, $23.20 — это ставка за прямую доставку. В неё не входит обратная логистика по возвратам ($4.85/заказ), упаковка (раньше сидела в наших $41.20, теперь отдельно — $2.30), и комиссия вендора за обработку возврата ($3.15). Плюс по опыту других ритейлеров, у аутсорсера возвраты растут: у нас 6.2%, у них исторически 9.4%. Каждый возврат съедает $27.40 маржи.»*",
+     "body_md": "> *«Коммерческое предложение: наша ставка — $23.20 за заказ против ваших текущих $41.20. Экономия $18.00 на заказе.*\n> *Комментарий нашей операционной команды: осторожно, $23.20 — это ставка за прямую доставку. В неё не входит обратная логистика по возвратам ($4.85/заказ), упаковка (раньше сидела в наших $41.20, теперь отдельно — $2.30), и комиссия вендора за обработку возврата ($3.15). Плюс по опыту других ритейлеров, у аутсорсера возвраты растут: у нас 6.2%, у них исторически 9.4%. Каждый возврат съедает $27.40 маржи.»*",
      "render": null,
      "render_omitted": {
       "reason": "memo",
       "note": "записка или реплика, render не положен"
      },
-     "title_en": "Exhibit — MEMO",
-     "body_md_en": "### Exhibit — MEMO\n> *\"Commercial offer: our rate is $23.20 per order against your current $41.20. A saving of $18.00 per order.*\n> *Our operations team's comment: careful, $23.20 is the rate for outbound delivery. It does not include reverse logistics on returns ($4.85/order), packaging (it used to sit inside our $41.20, now it is separate — $2.30), and the vendor's fee for handling a return ($3.15). On top of that, on other retailers' experience returns grow with an outsourcer: ours are 6.2%, theirs historically 9.4%. Every return eats $27.40 of margin.\"*"
+     "title_en": "Exhibit — the vendor quote and the operations comment",
+     "body_md_en": "> *\"Commercial offer: our rate is $23.20 per order against your current $41.20. A saving of $18.00 per order.*\n> *Our operations team's comment: careful, $23.20 is the rate for outbound delivery. It does not include reverse logistics on returns ($4.85/order), packaging (it used to sit inside our $41.20, now it is separate — $2.30), and the vendor's fee for handling a return ($3.15). On top of that, on other retailers' experience returns grow with an outsourcer: ours are 6.2%, theirs historically 9.4%. Every return eats $27.40 of margin.\"*"
     }
    ],
    "steps": [
@@ -13754,7 +13760,7 @@
    "generation": null,
    "est_minutes": "28",
    "header_md": "## Case 61 — Now Screening: The Unlimited Pass\n\n> **ПЛАШКА** \n> **Тип:** Pricing · **Индустрия:** Кинотеатры  \n> **Difficulty:** 🟡 Medium · **Depth:** 🔥 STRONG · **Соответствие:** ↑выше  \n> **T/C:** Trap · **Время:** ~28 min  \n> **Экспонаты (2):** table — распределение частоты походов (активные посе; table — пилот пасса, 4,100 подписчиков, 6 месяцев  \n> **Reveal:** auto\n> **optimal_entry:** 3  \n>  \n> **Слои insight:** ① mental math ② Exhibit A + hypothesis-update ③ Exhibit B пилот → subscription-каннибализация\n\n**Pricing · Кинотеатры · Medium · Trap · ~28 min · naive #15 · gen B**\n*Registry: Now Screening: The Unlimited Pass*\n\n| Поле | Значение |\n|---|---|\n| № | 61 · **Cinevox** *(прототип: AMC / Cineworld)* |\n| Индустрия | Кинотеатры |\n| Грунтовка | **Stern p.20 Media: one-time purchases vs subscriptions** (прямая строка) |\n| Тип | **Pricing** · Medium · 🔴 Trap · **F1** |\n| Naive-error | **#15 — нерепрезентативная выборка** *(adverse selection)* |\n| Слои | 🧠 mental-math · 🔄 hypothesis-update |\n| Время | 28 мин · 7 шагов |\n\n---",
-   "prompt_md": "> **Cinevox**, a 240-screen cinema chain, wants to launch an **unlimited pass: $18.99/month**. Average ticket: **$12**; concession contribution: **$3.10 per visit**.\n>\n> The deck: *\"Our active patron averages 1.05 visits/month. A pass-holder will go a bit more — say 1.75 — and we collect $18.99 instead of $12.60 of tickets. We project 120,000 subscribers.\"*\n>\n> **Launch?**\n\n---",
+   "prompt_md": "> **Cinevox**, сеть кинотеатров на 240 залов, хочет запустить **безлимитный пасс: $18.99/мес**. Средний билет: **$12**; вклад concession: **$3.10 за визит**.\n>\n> Дек: *«Наш активный посетитель ходит в среднем 1.05 раза в месяц. Владелец пасса будет ходить немного чаще — скажем, 1.75 — и мы собираем $18.99 вместо $12.60 билетами. Мы прогнозируем 120,000 подписчиков.»*\n>\n> **Запускаем?**\n\n---",
    "exhibits": [
     {
      "id": "exA",
@@ -13987,7 +13993,8 @@
    "difficulty_test": "Пропуск оценивают по среднему зрителю, а покупают его те, кто уже ходил втрое чаще: разницу даёт самоотбор.",
    "difficulty_family": "F3",
    "status": "live",
-   "industry_en": "Cinemas"
+   "industry_en": "Cinemas",
+   "prompt_md_en": "> **Cinevox**, a 240-screen cinema chain, wants to launch an **unlimited pass: $18.99/month**. Average ticket: **$12**; concession contribution: **$3.10 per visit**.\n>\n> The deck: *\"Our active patron averages 1.05 visits/month. A pass-holder will go a bit more — say 1.75 — and we collect $18.99 instead of $12.60 of tickets. We project 120,000 subscribers.\"*\n>\n> **Launch?**\n\n---"
   },
   {
    "id": 62,
@@ -14002,7 +14009,7 @@
    "generation": null,
    "est_minutes": "31",
    "header_md": "## Case 62 — Peak Performance\n\n> **ПЛАШКА** \n> **Тип:** Pricing · **Индустрия:** Парки  \n> **Difficulty:** 🟡 Medium · **Depth:** 🔥 STRONG · **Соответствие:** ↑выше  \n> **T/C:** Trap · **Время:** ~31 min  \n> **Экспонаты (2):** bridge — посещаемость по типам дней (условие ревьюера; table — фактические эпизоды  \n> **Reveal:** auto\n> **optimal_entry:** 3  \n>  \n> **Слои insight:** ① открытое вождение ② hypothesis-update ③ ценовые эпизоды + brainstorm\n\n**Pricing · Парки · Medium · Trap · ~31 min · naive #6 · gen B**\n*Registry: Peak Performance*\n\n| Поле | Значение |\n|---|---|\n| № | 62 · **Wonderpeak Parks** *(прототип: Six Flags / Europa-Park)* |\n| Индустрия | Парки развлечений |\n| Грунтовка | Сближение (X09 без разворота): **Stern p.19 Airlines — load factor/peak** + p.13 Retail traffic. Отклонение зафиксировано: билет ≠ perishable seat, спрос календарно-связан |\n| Тип | **Pricing** · Medium · 🔴 Trap · **F2** |\n| Naive-error | **#6 — capacity** |\n| Слои | 🧠 · 🔄 · **🚗 open-drive** · Brainstorm |\n| Время | 31 мин · 8 шагов |\n\n---",
-   "prompt_md": "> **Wonderpeak Parks** (single destination park, capacity **24,000 guests/day**, gate price **$58**) is considering dynamic pricing: **+25% on peak days, −20% on off-peak** to \"smooth the curve and lift revenue.\"\n>\n> The deck projects **+$15.6M** of gate revenue. **Does it hold?**\n\n---",
+   "prompt_md": "> **Wonderpeak Parks** (один destination-парк, мощность **24,000 гостей/день**, цена входа **$58**) рассматривает динамическое ценообразование: **+25% в пиковые дни, −20% во внепиковые** — чтобы «сгладить кривую и поднять выручку».\n>\n> Дек обещает **+$15.6M** gate-выручки. **Держится ли это?**\n\n---",
    "exhibits": [
     {
      "id": "exA",
@@ -14258,7 +14265,8 @@
    "difficulty_test": "Наценка на пик работает только на тех визитах, которые в пик и происходят: базу для наценки выбирает кандидат.",
    "difficulty_family": "F1",
    "status": "live",
-   "industry_en": "Parks"
+   "industry_en": "Parks",
+   "prompt_md_en": "> **Wonderpeak Parks** (single destination park, capacity **24,000 guests/day**, gate price **$58**) is considering dynamic pricing: **+25% on peak days, −20% on off-peak** to \"smooth the curve and lift revenue.\"\n>\n> The deck projects **+$15.6M** of gate revenue. **Does it hold?**\n\n---"
   },
   {
    "id": 63,
@@ -14273,7 +14281,7 @@
    "generation": null,
    "est_minutes": "22",
    "header_md": "## Case 63 — Convoy Division\n> **ПЛАШКА** \n> **Тип:** Cost Reduction · **Индустрия:** Автоперевозки  \n> **Difficulty:🟡 Medium · **Depth:** ⚠️ STANDARD · **Соответствие:** OK  \n> **T/C:** Trap · **Время:** ~22 min  \n> **Экспонаты (2):** table — сеть по группам лейнов  \n> **Reveal:** auto\n> **optimal_entry:** 2  \n>  \n> **Слои insight:** ① F5 противоречие в exhibit\n\n**Cost Reduction · Автоперевозки · Easy · Trap · ~22 min · naive #13 · gen B**\n*Registry: Lane Change*\n\n| Поле | Значение |\n|---|---|\n| № | 63 · **Lanebridge Freight** *(прототип: Old Dominion / XPO)* |\n| Индустрия | Автоперевозки (LTL-сеть) |\n| Грунтовка | Сближение: **Stern p.19 Airlines — load factor** (empty miles = пустой backhaul) + p.22 Industrials capacity util. Отклонение: сеть двусторонняя, лейн живёт парой |\n| Тип | **Cost Reduction** · 🟢 **Easy** · 🔴 Trap · **F5** |\n| Naive-error | **#13 — локальный vs системный оптимум** *(лейн-ПАРЫ; отличие от #23-депо — в расчёте: убитый лейн рождает пустые км, а не перенос объёма)* |\n| Слои | 🧠 |\n| Время | 22 мин · 5 шагов |\n\n---",
-   "prompt_md": "> **Lanebridge Freight** runs a 98-lane LTL network. The CFO: *\"Fourteen thin lanes lose $8.2 million a year. Cut them.\"*\n>\n> **Should he?**\n\n---",
+   "prompt_md": "> **Lanebridge Freight** держит LTL-сеть из 98 лейнов. CFO: *«Четырнадцать thin-лейнов теряют $8.2 млн в год. Режь их.»*\n>\n> **Резать?**\n\n---",
    "exhibits": [
     {
      "id": "exA",
@@ -14481,7 +14489,8 @@
    "lang_note": "тег проставлен по факту тела (поля не было)",
    "difficulty_family": "F2",
    "status": "live",
-   "industry_en": "Road freight"
+   "industry_en": "Road freight",
+   "prompt_md_en": "> **Lanebridge Freight** runs a 98-lane LTL network. The CFO: *\"Fourteen thin lanes lose $8.2 million a year. Cut them.\"*\n>\n> **Should he?**\n\n---"
   },
   {
    "id": 64,
@@ -14496,7 +14505,7 @@
    "generation": null,
    "est_minutes": "30",
    "header_md": "## Case 64 — Going Up?\n\n> **ПЛАШКА** \n> **Тип:** Profitability · **Индустрия:** Лифты-сервис  \n> **Difficulty:** 🟡 Medium · **Depth:** 🔥 STRONG · **Соответствие:** ↑выше  \n> **T/C:** Trap · **Время:** ~30 min  \n> **Экспонаты (2):** table — blended service P&L, $M; cohort — портфель по когортам  \n> **Reveal:** auto\n> **optimal_entry:** 3  \n>  \n> **Слои insight:** ① открытое вождение ② hypothesis-update ③ когорты (installed base vs service)\n\n**Profitability · Лифты-сервис · Medium · Trap · ~30 min · naive #1 · gen B**\n*Registry: Going Up?*\n\n| Поле | Значение |\n|---|---|\n| № | 64 · **Liftora** *(прототип: Otis / KONE)* |\n| Индустрия | Лифты — сервис |\n| Грунтовка | **Kellogg p.222 Industrial Goods: after-sales service как revenue driver** (прямая строка) |\n| Тип | **Profitability** · Medium · 🔴 Trap · **F1** |\n| Naive-error | **#1 — historical vs replacement cost** *(запчасти снятых с производства компонентов)* |\n| Слои | 🧠 · 🔄 · **🚗 open-drive** · Brainstorm |\n| Время | 30 мин · 8 шагов |\n\n---",
-   "prompt_md": "> **Liftora** services **12,000 elevators** under maintenance contracts, average fee **$2,850/year** — revenue **$34.2M**. Service margin fell from **21% to 9%** in three years. Ops blames technician overtime and wants a labor programme.\n>\n> **What happened?**\n\n---",
+   "prompt_md": "> **Liftora** обслуживает **12,000 лифтов** по контрактам на техобслуживание, средний тариф **$2,850/год** — выручка **$34.2M**. Маржа сервиса упала с **21% до 9%** за три года. Операционный блок винит переработки техников и просит программу по труду.\n>\n> **Что произошло?**\n\n---",
    "exhibits": [
     {
      "id": "exA",
@@ -14817,7 +14826,8 @@
    "difficulty_test": "Договор индексирует запчасти по CPI, а стареющий парк требует деталей по цене замещения: связывает формула индексации.",
    "difficulty_family": "F4",
    "status": "live",
-   "industry_en": "Lift servicing"
+   "industry_en": "Lift servicing",
+   "prompt_md_en": "> **Liftora** services **12,000 elevators** under maintenance contracts, average fee **$2,850/year** — revenue **$34.2M**. Service margin fell from **21% to 9%** in three years. Ops blames technician overtime and wants a labor programme.\n>\n> **What happened?**\n\n---"
   },
   {
    "id": 65,
@@ -15472,7 +15482,7 @@
    "generation": null,
    "est_minutes": "30",
    "header_md": "## Case 68 — Talking Trash\n\n> **ПЛАШКА** \n> **Тип:** Cost Reduction · **Индустрия:** Отходы  \n> **Difficulty:** 🟡 Medium · **Depth:** ⚠️ STANDARD · **Соответствие:** OK  \n> **T/C:** Clean · **Время:** ~30 min  \n> **Экспонаты (0):** table — встроенная таблица в шаге  \n> **Reveal:** inline\n> **optimal_entry:** 2  \n>  \n> **Слои insight:** ① F7 кандидат обязан атаковать ② **CLEAN** + открытый sensitivity\n\n**Cost Reduction · Отходы · Medium · Clean · ~30 min · gen B**\n*Registry: Talking Trash*\n\n| Поле | Значение |\n|---|---|\n| № | 68 · **Terrabin** *(прототип: Waste Management / Republic)* |\n| Индустрия | Вывоз отходов |\n| Грунтовка | Сближение: **Kellogg p.222 Industrial Goods** (WM назван игроком; route density). Отклонение: выручка контрактно-муниципальная — зафиксировано |\n| Тип | **Cost Reduction** · Medium · ⚪ **CLEAN** · **F7** |\n| Слои | 🧠 · Brainstorm · **Sensitivity ОТКРЫТЫЙ** |\n| Время | 30 мин · 7 шагов |\n\n> ⚪ **CLEAN.** Экономия держится. Кандидат обязан искать разворот — и, найдя малые эффекты, честно назвать их малыми.\n\n---",
-   "prompt_md": "> **Terrabin** runs **84 collection routes**; km-linked cost (fuel, maintenance, drive-time labor): **$47.2M** of a $63.5M route cost base.\n>\n> A dynamic-routing pilot on 12 routes cut kilometres **11%** (telematics-verified). Ops wants a full rollout. **Worth it?**\n\n---",
+   "prompt_md": "> **Terrabin** держит **84 маршрута сбора**; км-зависимый кост (топливо, обслуживание, оплата времени за рулём): **$47.2M** из базы маршрутных затрат $63.5M.\n>\n> Пилот динамической маршрутизации на 12 маршрутах срезал километраж на **11%** (подтверждено телематикой). Операционный блок хочет полный роллаут. **Стоит ли?**\n\n---",
    "exhibits": [],
    "steps": [
     {
@@ -15576,7 +15586,8 @@
    "difficulty_test": "Разворота нет: каждое возражение операционного директора обязано превратиться в число и закрыться, а не остаться оговоркой.",
    "difficulty_family": "F8",
    "status": "live",
-   "industry_en": "Waste"
+   "industry_en": "Waste",
+   "prompt_md_en": "> **Terrabin** runs **84 collection routes**; km-linked cost (fuel, maintenance, drive-time labor): **$47.2M** of a $63.5M route cost base.\n>\n> A dynamic-routing pilot on 12 routes cut kilometres **11%** (telematics-verified). Ops wants a full rollout. **Worth it?**\n\n---"
   },
   {
    "id": 69,
@@ -15591,7 +15602,7 @@
    "generation": null,
    "est_minutes": "29",
    "header_md": "## Case 69 — Staff Infection\n> **ПЛАШКА** \n> **Тип:** Profitability · **Индустрия:** Кадровые агентства  \n> **Difficulty:** 🟡 Medium · **Depth:** 🔥 STRONG · **Соответствие:** ↑выше  \n> **T/C:** Clean · **Время:** ~29 min  \n> **Экспонаты (3):** memo — EXHIBIT A: retention и спред; memo — EXHIBIT B: микс сегментов; memo — EXHIBIT C: рыночные зарплаты  \n> **Reveal:** inline\n> **optimal_entry:** 2  \n>  \n> **Слои insight:** ① H2 churn отвергнуть ② H3 микс отвергнуть ③ H1 wage-лаг подтвердить ④ **CLEAN** «честный вопрос»\n\n**Profitability · Кадровые агентства · Medium · Clean · ~29 min · gen B**\n*Registry: Help Wanted*\n\n| Поле | Значение |\n|---|---|\n| № | 69 · **Talenca Staffing** *(прототип: Adecco / Randstad)* |\n| Индустрия | Кадровые агентства (temp staffing) |\n| Грунтовка | Сближение (X10 без разворота): **Kellogg p.227 Restaurant — labor как крупнейший кост** по структуре. Отклонение зафиксировано явно: revenue = markup на зарплату, gross margin = спред bill−pay |\n| Тип | **Profitability** · Medium · ⚪ **CLEAN** · **F2** |\n| Слои | 🧠 |\n| Время | 29 мин · 7 шагов |\n\n> ⚪ **CLEAN.** Сжатие маржи — таймирование, не болезнь. Кандидат отвергает две гипотезы числами и обязан не выдумать третью.\n\n---",
-   "prompt_md": "> **Talenca Staffing**: bill revenue **$840M**, gross spread fell **28.0% → 25.5%** in a year. Board theories:\n> **H1** — wage inflation is outrunning bill rates; **H2** — clients are churning to cheaper rivals; **H3** — mix is shifting to low-margin industrial.\n>\n> **Which — and what to do?**\n\n---",
+   "prompt_md": "> **Talenca Staffing**: bill-выручка **$840M**, gross spread упал с **28.0% → 25.5%** за год. Гипотезы совета:\n> **H1** — рост зарплат обгоняет bill-ставки; **H2** — клиенты уходят к более дешёвым конкурентам; **H3** — микс смещается в низкомаржинальный industrial.\n>\n> **Какая из них — и что делать?**\n\n---",
    "exhibits": [
     {
      "id": "exA",
@@ -15690,13 +15701,14 @@
     {
      "step": 5,
      "label": "Explain  (2 min)",
-     "candidate_md": "Take that wage-lag finding one step further for me — what does it actually mean for Talenca's margin going forward, and why?",
+     "candidate_md": "Разверни находку с wage-лагом на шаг дальше: что она на самом деле означает для маржи Talenca в перспективе — и почему?",
      "interviewer_md": "**Pass if ALL:** (1) names the mechanism, not the symptom: **pay reprices on the day, bill rates reprice only at the contract anniversary** — the spread was compressed by **time, not by the market**, so this is not competitive margin loss; (2) states the consequence with the numbers: it is a **receivable on margin** — as anniversaries roll through, the unrepriced share goes **42% → 0** and the spread returns **mechanically to 28.0%** from the observed **25.5%** (the **2.42pp** of the **2.50pp** dip, 96.8%, that H1 explains); (3) conditions the claim: this only holds **if wage inflation does not accelerate** — the **8%** pass-through is not the last one; and (4) ties it to the industry structure: in staffing **labor is COGS**, so the repricing lag *is* the economics of the business.\n\n**Fail if:** candidate reads the 28.0% → 25.5% move as a structural loss of margin and jumps to cost cuts or across-the-board price increases; or claims the margin \"recovers by itself\" without naming anniversary repricing, the 42% unrepriced base, and the inflation condition.\n\n---\n\n### 🔍 Гипотезы разворота (перечень обязателен для Clean)\n\n**Гипотеза 1 — уход клиентов давит спред.** Предполагаем, что ушедшая книга с более низким спредом тянет блендед вниз, и пересобираем среднее:\n```\n(0.280 − 0.004 × 0.279) / 0.996 = 0.280004\n```\nГипотеза **закрыта**: уход счетов со спредом ниже книжного двигает блендед на +0.0004 пункта, то есть в плюс, а не в минус — вывод **не переворачивается**.\n\n**Гипотеза 2 — доля зарплаты в ставке занижена.** Предполагаем другую долю и ищем ту, при которой лаг объясняет весь провал:\n```\n0.025 / (0.08 × 0.42) = 0.744\n```\nГипотеза **закрыта**: при доле от 72% до 74.4% лаг объясняет от 96.8% до 100% падения, выше — с избытком; механизм только усиливается, вывод **не переворачивается**.\n\n**Гипотеза 3 — сходимость в деньгах.** Предполагаем, что процентные пункты скрывают остаток, и переводим разложение в деньги:\n```\n0.025 × 840,000,000 = 21,000,000\n0.0242 × 840,000,000 = 20,328,000\n0.0008 × 840,000,000 = 672,000\n```\nГипотеза **закрыта**: необъяснённым остаётся $672,000 из $21,000,000, то есть 3.2%, и его покрывает микс-эффект — вывод **не переворачивается**.",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
       4
-     ]
+     ],
+     "candidate_md_en": "Take that wage-lag finding one step further for me — what does it actually mean for Talenca's margin going forward, and why?"
     },
     {
      "step": 6,
@@ -15713,7 +15725,7 @@
     {
      "step": 7,
      "label": "Синтез  (3 min)",
-     "candidate_md": "> **The margin compression is a repricing lag, not a business problem — 97% of the 2.5-point drop is explained by wages repricing daily while bills reprice at contract anniversaries.**",
+     "candidate_md": "> **Сжатие маржи — это лаг перезаключения, а не проблема бизнеса: 97% падения на 2.5 пункта объясняются тем, что зарплаты переоцениваются ежедневно, а bill-ставки — на годовщину контракта.**",
      "interviewer_md": ">\n> Three facts. First, wages rose 8% and were passed to temps immediately — in staffing, labor is the cost of goods and it reprices in real time. Second, bills reprice on anniversaries: the weighted unrepriced share of the book this year was 42%, and 0.72 × 8% × 42% = **2.42 points** of the 2.50 observed. Third, the alternatives fail their own tests: churn is 0.4 points of retention at book-average spread, and the industrial mix shift explains 0.07 points.\n>\n> **The margin is not lost. It is in transit — and it will be lost next time unless the contracts change.**\n>\n> Two risks. Internally, treating this as a pricing crisis invites panic discounting exactly when bills are about to catch up. Externally, if wage inflation runs another 8% next year, the same 2.4-point dip repeats — the lag is structural until indexed.\n>\n> Next steps. Within 90 days, move renewals to wage-indexed quarterly repricing — that cuts the unrepriced share of the book from 42% to 10.5% — a five-month average lag into 1.3 — and caps the next shock at a quarter of this one. Track spread recovery monthly against the anniversary calendar; it is the cheapest forecast we will ever have.",
      "hints": {},
      "conditional_exhibits": [],
@@ -15721,7 +15733,8 @@
       4,
       5,
       6
-     ]
+     ],
+     "candidate_md_en": "> **The margin compression is a repricing lag, not a business problem — 97% of the 2.5-point drop is explained by wages repricing daily while bills reprice at contract anniversaries.**"
     }
    ],
    "step_count": 7,
@@ -15734,7 +15747,8 @@
    "difficulty_test": "Зарплаты переоцениваются мгновенно, а счета клиентам — только в годовщину договора: разрыв создаёт срок пересмотра.",
    "difficulty_family": "F4",
    "status": "live",
-   "industry_en": "Staffing agencies"
+   "industry_en": "Staffing agencies",
+   "prompt_md_en": "> **Talenca Staffing**: bill revenue **$840M**, gross spread fell **28.0% → 25.5%** in a year. Board theories:\n> **H1** — wage inflation is outrunning bill rates; **H2** — clients are churning to cheaper rivals; **H3** — mix is shifting to low-margin industrial.\n>\n> **Which — and what to do?**\n\n---"
   },
   {
    "id": 70,
@@ -21594,7 +21608,7 @@
       "цифры",
       "что будет если поднять"
      ],
-     "body_md": "> **Value-for-money framework — retail funds**\n>\n> Cap on retail management fees: **0.90%**.\n>\n> Breaching it triggers:\n> - fee rollback to the old level for the reporting year;\n> - one-off remediation cost $1.9M;\n> - reputational AUM outflow 8% (permanent).",
+     "body_md": "> **Value-for-money framework — розничные фонды**\n>\n> Потолок розничной management fee: **0.90%**.\n>\n> Пробой потолка влечёт:\n> - откат fee к прежнему уровню за отчётный год;\n> - разовые расходы на remediation $1.9M;\n> - репутационный отток AUM 8% (безвозвратный).",
      "render": null,
      "render_omitted": {
       "reason": "diagram",
@@ -21610,7 +21624,8 @@
       "regulator",
       "numbers",
       "what happens if we raise"
-     ]
+     ],
+     "body_md_en": "> **Value-for-money framework — retail funds**\n>\n> Cap on retail management fees: **0.90%**.\n>\n> Breaching it triggers:\n> - fee rollback to the old level for the reporting year;\n> - one-off remediation cost $1.9M;\n> - reputational AUM outflow 8% (permanent)."
     }
    ],
    "steps": [
@@ -22214,7 +22229,7 @@
       "возвраты",
       "net вклад"
      ],
-     "body_md": "| DTC cost line | $ per unit |\n|---|---|\n| Fulfilment and shipping | 14.00 |\n| Returns | 19.00 |\n| Payment processing (3% of $180) | 5.40 |\n| Platform and site operations | 8.50 |\n| Customer acquisition cost | 41.00 |",
+     "body_md": "| Статья затрат DTC | $ на единицу |\n|---|---|\n| Фулфилмент и доставка | 14.00 |\n| Возвраты | 19.00 |\n| Эквайринг (3% от $180) | 5.40 |\n| Платформа и операции сайта | 8.50 |\n| Стоимость привлечения клиента (CAC) | 41.00 |",
      "render": {
       "type": "table",
       "title": "DTC cost per unit (on request)",
@@ -22255,7 +22270,8 @@
       "fulfillment",
       "returns",
       "net contribution"
-     ]
+     ],
+     "body_md_en": "| DTC cost line | $ per unit |\n|---|---|\n| Fulfilment and shipping | 14.00 |\n| Returns | 19.00 |\n| Payment processing (3% of $180) | 5.40 |\n| Platform and site operations | 8.50 |\n| Customer acquisition cost | 41.00 |"
     }
    ],
    "steps": [
@@ -23946,7 +23962,7 @@
       "event data",
       "cost structure"
      ],
-     "body_md": "| Event type | Revenue | Marginal cost |\n|---|---|---|\n| Concerts | $380,000 | $210,000 |\n| College games | $160,000 | $95,000 |\n| Corporate events | $240,000 | $130,000 |\n\n*Allocated arena lease: $140,000 per event (accounting allocation of the fixed lease).*",
+     "body_md": "| Тип события | Выручка | Предельные затраты |\n|---|---|---|\n| Концерты | $380,000 | $210,000 |\n| Студенческие игры | $160,000 | $95,000 |\n| Корпоративные события | $240,000 | $130,000 |\n\n*Аллоцированная аренда арены: $140,000 на событие (учётная аллокация фиксированной аренды).*",
      "render": {
       "type": "table",
       "title": "Exhibit A — Off-season events: revenue & costs (per event type)",
@@ -23979,7 +23995,8 @@
       "event cost",
       "event cost structure",
       "cost structure"
-     ]
+     ],
+     "body_md_en": "| Event type | Revenue | Marginal cost |\n|---|---|---|\n| Concerts | $380,000 | $210,000 |\n| College games | $160,000 | $95,000 |\n| Corporate events | $240,000 | $130,000 |\n\n*Allocated arena lease: $140,000 per event (accounting allocation of the fixed lease).*"
     }
    ],
    "steps": [
@@ -25636,7 +25653,7 @@
       "какой маршрут убыточен",
       "разбивка маржи"
      ],
-     "body_md": "| Route type | Revenue, $M | Cost, $M |\n|---|---|---|\n| Longhaul | 420 | 340 |\n| Regional | 180 | 171 |\n| Shorthaul | 240 | 258 |\n\n*Blended: revenue 840, cost 769.*",
+     "body_md": "| Тип маршрута | Выручка, $M | Затраты, $M |\n|---|---|---|\n| Longhaul | 420 | 340 |\n| Regional | 180 | 171 |\n| Shorthaul | 240 | 258 |\n\n*Blended: выручка 840, затраты 769.*",
      "render": {
       "type": "table",
       "title": "Exhibit — Revenue & cost by route type ($M)",
@@ -25674,7 +25691,8 @@
       "segments",
       "which route is loss-making",
       "margin breakdown"
-     ]
+     ],
+     "body_md_en": "| Route type | Revenue, $M | Cost, $M |\n|---|---|---|\n| Longhaul | 420 | 340 |\n| Regional | 180 | 171 |\n| Shorthaul | 240 | 258 |\n\n*Blended: revenue 840, cost 769.*"
     }
    ],
    "steps": [
@@ -26608,7 +26626,7 @@
     {
      "step": 4,
      "label": "Contribution с учётом float",
-     "candidate_md": "Contribution + float.",
+     "candidate_md": "Contribution с учётом float.",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\nfloat Auto $14M/Home $9M/Commercial $31M (сумма $54M)\n\nEXPECTED ANSWER:\ncontribution все положит (Commercial +$16M); float Commercial $31M max; закрытие $47M->$0\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) contribution 82/75/16M все положит; (2) float сумма=54M=company inv income; (3) total profit=underwriting −7M + float 54M=47M; (4) закрытие Commercial -> 0 (потеря 16M+31M); (5) вывод — оставить (флип).",
      "hints": {},
      "conditional_exhibits": [],
@@ -26616,7 +26634,8 @@
       2,
       3
      ],
-     "produces": "contribution все положит (Commercial +$16M); float Commercial $31M max; закрытие"
+     "produces": "contribution все положит (Commercial +$16M); float Commercial $31M max; закрытие",
+     "candidate_md_en": "Contribution + float."
     },
     {
      "step": 5,
@@ -26752,7 +26771,7 @@
     {
      "step": 4,
      "label": "NPV с эскалацией",
-     "candidate_md": "Escalating NPV.",
+     "candidate_md": "NPV с эскалацией.",
      "interviewer_md": "DATA TO REVEAL WHEN THE CANDIDATE REACHES/REQUESTS THIS STEP:\ncosts +6%/год, rev +2%/год\n\nEXPECTED ANSWER:\nescalating NPV −$5,634,935 -> SKIP\n\nPASS CRITERIA (grade the candidate against this):\nЗачёт, если: (1) escalating NPV=−5,634,935; (2) вывод SKIP; (3) overstate назван от NPV (~132.79% от |correct|); (4) обе ветки один DCF@11%.",
      "hints": {},
      "conditional_exhibits": [],
@@ -26760,7 +26779,8 @@
       2,
       3
      ],
-     "produces": "escalating NPV −$5,634,935 -> SKIP"
+     "produces": "escalating NPV −$5,634,935 -> SKIP",
+     "candidate_md_en": "Escalating NPV."
     },
     {
      "step": 5,
@@ -41871,17 +41891,17 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit ex1",
+     "title": "Exhibit 1 — экономика единицы товара и пошлина",
      "reveal": "auto",
      "triggers": [],
      "body_md": "```\nЕДИНИЦА ТОВАРА, $\n\nцена            ████████████████████ 720\nсебестоимость   █████████████ 486\n                       из неё импорт  65%\n\nимпортная пошлина на импортную часть   18%\nобъём 2,400,000 единиц в год\n\nэластичность спроса по категории          −0.8\n```\n\n> **Правило совета:** категория остаётся в ведении коммерческой дирекции, пока годовой эффект пошлины не превышает **$60,000,000**. Выше этой величины вопрос выносится на совет как решение о локализации, а не о цене.",
      "render": null,
-     "title_en": "Exhibit ex1",
+     "title_en": "Exhibit 1 — unit economics and the import duty",
      "body_md_en": "```\nUNIT OF GOODS, $\n\nprice       ████████████████████ 720\nunit cost   █████████████ 486\n                   of it imported  65%\n\nimport duty on the imported part   18%\nvolume 2,400,000 units a year\n\ndemand elasticity for the category          −0.8\n```\n\n> **Board rule:** the category stays with the commercial directorate as long as the annual effect of the duty does not exceed **$60,000,000**. Above that figure the question goes to the board as a decision about localisation, not about price."
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — конкурент с локальной сборкой и перекрёстная эластичность",
      "reveal": "on_request",
      "triggers": [
       "конкуренты",
@@ -41891,7 +41911,7 @@
      ],
      "body_md": "> Конкурент с локальной сборкой держит **31%** рынка, пошлину не платит и цену не меняет.\n> Перекрёстная эластичность спроса по ОТНОСИТЕЛЬНОЙ цене: **−2.6**.\n\n*Эластичность категории (−0.8) описывает реакцию на подорожание всего рынка. Здесь дорожает не рынок, а мы.*",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — the locally assembled competitor and cross-elasticity",
      "body_md_en": "> A competitor with local assembly holds **31%** of the market, pays no duty and does not change its price.\n> Cross-elasticity of demand with respect to RELATIVE price: **−2.6**.\n\n*The category elasticity (−0.8) describes the reaction to the whole market getting dearer. Here it is not the market that is getting dearer, it is us.*",
      "triggers_en": [
       "competitors",
@@ -42031,17 +42051,17 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit ex1",
+     "title": "Exhibit 1 — два источника питания для площадки 400 МВт",
      "reveal": "auto",
      "triggers": [],
      "body_md": "```\nДВА ИСТОЧНИКА ДЛЯ ПЛОЩАДКИ 400 МВт, $ ЗА МВт·ч\n\nсетевой тариф    ████████████████ 78\nсвоя генерация   ██████████ 51\n\nкапитальные затраты $612M · срок 15 лет\nстоимость капитала 10% · загрузка 92%\n```",
      "render": null,
-     "title_en": "Exhibit ex1",
+     "title_en": "Exhibit 1 — two power sources for the 400 MW site",
      "body_md_en": "```\nTWO SOURCES FOR A 400 MW SITE, $ PER MWh\n\ngrid tariff      ████████████████ 78\nown generation   ██████████ 51\n\ncapital cost $612M · term 15 years\ncost of capital 10% · utilisation 92%\n```"
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — обязательства перед сетью при собственной генерации",
      "reveal": "on_request",
      "triggers": [
       "подключение",
@@ -42051,7 +42071,7 @@
      ],
      "body_md": "> Собственная генерация **не освобождает** от договора с сетью: сеть обязана держать\n> резервную мощность на все 400 МВт и берёт **$4,100 за МВт в месяц**.\n> Очередь на технологическое присоединение — **3 года**.",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — grid obligations under own generation",
      "body_md_en": "> Own generation **does not release** the site from the grid contract: the grid is obliged to hold\n> reserve capacity for all 400 MW and charges **$4,100 per MW a month**.\n> The queue for grid connection is **3 years**.",
      "triggers_en": [
       "connection",
@@ -42349,17 +42369,17 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit ex1",
+     "title": "Exhibit 1 — две меры в одном масштабе, $B",
      "reveal": "auto",
      "triggers": [],
      "body_md": "```\nДВЕ МЕРЫ В ОДНОМ МАСШТАБЕ, $B\n\nвариант A · срезать капитальные расходы отрасли   ██████████████ 14.8\nвариант B · срезать топливные субсидии населению  █████████ 9.6\n\nдобыча 2,100,000 барр./сут · доля государства в барреле 62%\n```\n\n*Ни одна из двух мер не несёт своей полной цены в смете: у варианта A это потеря будущих нефтяных доходов, у варианта B — рост потребительских цен. Единого горизонта сравнения двух мер комитет не задал.*",
      "render": null,
-     "title_en": "Exhibit ex1",
+     "title_en": "Exhibit 1 — two measures on one scale, $B",
      "body_md_en": "```\nTWO MEASURES ON ONE SCALE, $B\n\noption A · cut the industry's capital spending   ██████████████ 14.8\noption B · cut fuel subsidies to households      █████████ 9.6\n\noutput 2,100,000 bbl/day · the state's share in a barrel 62%\n```\n\n*Neither of the two measures carries its full price in the estimate: for option A this is the loss of future oil revenues, for option B the rise in consumer prices. The committee has set no common horizon for comparing the two.*"
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — горизонт оценки и темп падения добычи",
      "reveal": "on_request",
      "triggers": [
       "последствия",
@@ -42369,7 +42389,7 @@
      ],
      "body_md": "```\nA: без капекса темп естественного падения добычи растёт с 4.0% до 9.1% в год\n   цена меры оценивается на горизонте 5 лет по рыночной цене барреля\nB: 74% срезанной субсидии попадает в потребительские цены;\n   потребительские расходы $310B, текущая инфляция 6.1%\n```",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — the valuation horizon and the decline rate",
      "body_md_en": "```\nA: without capex the natural decline rate rises from 4.0% to 9.1% a year\n   the price of the measure is valued over 5 years at the market barrel price\nB: 74% of the subsidy cut passes into consumer prices;\n   consumer spending $310B, current inflation 6.1%\n```",
      "triggers_en": [
       "consequences",
@@ -42507,17 +42527,17 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit ex1",
+     "title": "Exhibit 1 — поток судозаходов и перевалка",
      "reveal": "auto",
      "triggers": [],
      "body_md": "```\nПОТОК СУДОЗАХОДОВ\n\nсейчас        1,840 заходов в год ───► 4,600 TEU на заход ───► $186 за TEU перевалки\nпредложение    +420 заходов ─────────► того же тарифа\n```",
      "render": null,
-     "title_en": "Exhibit ex1",
+     "title_en": "Exhibit 1 — vessel calls and throughput",
      "body_md_en": "```\nFLOW OF PORT CALLS\n\nnow          1,840 calls a year ───► 4,600 TEU per call ───► $186 per TEU handled\nproposal      +420 calls ─────────► at the same rate\n```"
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — причальные часы и время стоянки",
      "reveal": "on_request",
      "triggers": [
       "причал",
@@ -42527,7 +42547,7 @@
      ],
      "body_md": "```\nпричальных часов в году          30,240\nсредняя стоянка текущего судна     14.2 ч\nсредняя стоянка нового судна       21.6 ч   (суда крупнее)\n```\n\n*Выручка причального часа при текущем типе судна: **$60,254** (4,600 TEU × $186 ÷ 14.2 ч). Линии текущего типа стоят в листе ожидания на **320 дополнительных заходов в год** — этот спрос подтверждён заявками и не зависит от предложения новых маршрутов.*",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — berth hours and turnaround time",
      "body_md_en": "```\nberth hours in the year            30,240\naverage berth time, current ship     14.2 h\naverage berth time, new ship         21.6 h   (bigger ships)\n```\n\n*Revenue per berth hour with the current type of ship: **$60,254** (4,600 TEU × $186 ÷ 14.2 h). Lines of the current type are on the waiting list for **320 additional calls a year** — this demand is confirmed by applications and does not depend on the offer of new routes.*",
      "triggers_en": [
       "berth",
@@ -42654,12 +42674,12 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit ex1",
+     "title": "Exhibit 1 — пик продаж: два источника прогноза",
      "reveal": "auto",
      "triggers": [],
      "body_md": "```\nПИК ПРОДАЖ — ДВА ИСТОЧНИКА В ОДНОМ ЛИСТЕ\n\nпервый путь · прогноз коммерческой службы продавца\n         ──────────────────────────────────────────────►  $3,400M/год\n\nвторой путь · данные дистрибуции, всё биллинговано\n         пациентов на терапии       212,000\n         цена курса в год           $11,900\n         приверженность терапии     71%\n         ──────────────────────────────────────────────►  ?\n\n```",
      "render": null,
-     "title_en": "Exhibit ex1",
+     "title_en": "Exhibit 1 — peak sales: two forecast sources",
      "body_md_en": "```\nPEAK SALES — TWO SOURCES ON ONE SHEET\n\nfirst route · the seller's commercial forecast\n         ──────────────────────────────────────────────►  $3,400M/year\n\nsecond route · distribution data, everything billed\n         patients on therapy       212,000\n         price of a course a year  $11,900\n         adherence to therapy      71%\n         ──────────────────────────────────────────────►  ?\n\n```"
     },
     {
@@ -43733,7 +43753,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — условия резервной мощности и кто за неё платит",
      "reveal": "on_request",
      "triggers": [
       "резерв",
@@ -43743,7 +43763,7 @@
      ],
      "body_md": "| Позиция | Условие |\n|---|---|\n| Обязательство сети | держать резервную мощность на **весь заявленный пик**, а не на среднюю |\n| Стоимость держания резерва | **$6,800 за МВт в месяц** |\n| Кто платит сегодня | распределяется на **бытовой** тариф |\n| Надбавка, которую обсуждает правление | **$0.005 за кВт·ч** |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — reserve capacity terms and who pays for it",
      "body_md_en": "| Item | Term |\n|---|---|\n| The grid's obligation | to hold reserve capacity for the **whole declared peak**, not for the average |\n| Cost of holding the reserve | **$6,800 per MW a month** |\n| Who pays today | spread onto the **household** tariff |\n| The uplift the board is discussing | **$0.005 per kWh** |",
      "triggers_en": [
       "reserve",
@@ -43918,7 +43938,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — куда ушли заявки после моратория",
      "reveal": "on_request",
      "triggers": [
       "что стало с очередью",
@@ -43927,7 +43947,7 @@
      ],
      "body_md": "| Наблюдение | Значение |\n|---|---|\n| Заявки, отклонённые мораторием в A | перешли в **B**, ближайший по логистике и сети |\n| Очередь на присоединение в B | выросла в **2.7 раза**: 14 → **37.8 мес** |\n| Очередь в C | **не изменилась** — 11 мес |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — where the applications went after the moratorium",
      "body_md_en": "| Observation | Value |\n|---|---|\n| Applications rejected by the moratorium in A | moved to **B**, the nearest on logistics and grid |\n| The connection queue in B | grew **2.7 times over**: 14 → **37.8 months** |\n| The queue in C | **unchanged** — 11 months |",
      "triggers_en": [
       "what happened to the queue",
@@ -44075,7 +44095,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — цена часов дефицита",
      "reveal": "on_request",
      "triggers": [
       "что происходит в дефицитные часы",
@@ -44084,7 +44104,7 @@
      ],
      "body_md": "| Параметр | Значение |\n|---|---|\n| Цена в часы дефицита | **$2.80 за кВт·ч** |\n| Число таких часов за год | **40** |\n| Можно ли остановить нагрузку | нет — контракт требует доступности 100% |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — pricing in the scarcity hours",
      "body_md_en": "| Parameter | Value |\n|---|---|\n| The price in the scarcity hours | **$2.80 per kWh** |\n| Number of such hours in the year | **40** |\n| Can the load be stopped | no — the contract requires 100% availability |",
      "triggers_en": [
       "what happens in scarcity hours",
@@ -44245,7 +44265,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — этапы испытаний и сертификации турбин",
      "reveal": "on_request",
      "triggers": [
       "что ещё в цикле",
@@ -44255,7 +44275,7 @@
      ],
      "body_md": "| Этап | Условие |\n|---|---|\n| Испытание под полной нагрузкой | **обязательно** для каждой турбины, сертификация |\n| Испытательных стендов | **2** |\n| Длительность одного испытания | **21 сутки** |\n| Стоимость одного нового стенда | **$96M** |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — turbine testing and certification stages",
      "body_md_en": "| Stage | Term |\n|---|---|\n| Full load test | **mandatory** for every turbine, certification |\n| Test stands | **2** |\n| Duration of one test | **21 days** |\n| Cost of one new stand | **$96M** |",
      "triggers_en": [
       "what else is in the cycle",
@@ -44404,7 +44424,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — выручка и маржа по сроку жизни клиента",
      "reveal": "on_request",
      "triggers": [
       "из кого состоит инференс",
@@ -44414,7 +44434,7 @@
      ],
      "body_md": "| Клиенты инференса по сроку жизни | Выручка | Маржа |\n|---|---|---|\n| до 6 месяцев | $310M | 34.0% |\n| 6–18 месяцев | $245M | 58.0% |\n| 18+ месяцев | $305M | 79.0% |\n| **Сводно** | **$860M** | **56.8%** |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — revenue and margin by customer tenure",
      "body_md_en": "| Inference customers by lifetime | Revenue | Margin |\n|---|---|---|\n| up to 6 months | $310M | 34.0% |\n| 6–18 months | $245M | 58.0% |\n| 18+ months | $305M | 79.0% |\n| **In total** | **$860M** | **56.8%** |",
      "triggers_en": [
       "what makes up inference",
@@ -44721,7 +44741,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — управленческая справка против аудированной отчётности",
      "reveal": "on_request",
      "triggers": [
       "что за обратная надбавка",
@@ -44731,7 +44751,7 @@
      ],
      "body_md": "| Строка, $M | Управленческая справка | Аудированная отчётность |\n|---|---|---|\n| Выручка | 980.0 | 980.0 |\n| Себестоимость | 656.6 | 656.6 |\n| Коммерческие и АУП | 168.0 | 168.0 |\n| Аренда площадок | 24.0 | 24.0 |\n| Сервисные платежи материнской компании | **добавлены обратно, +45.0** | **не добавляются** |\n| **EBITDA** | **176.4** | **131.4** |\n| Что стоит за платежами | закупки, ИТ и качество для Northline оказывает материнская компания | после продажи покупатель обеспечивает их сам или покупает у продавца |\n| Правило договора купли-продажи | — | **цена считается по аудированной отчётности** |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — management pack against audited accounts",
      "body_md_en": "| Line, $M | Management memo | Audited accounts |\n|---|---|---|\n| Revenue | 980.0 | 980.0 |\n| Cost of sales | 656.6 | 656.6 |\n| Selling and admin | 168.0 | 168.0 |\n| Site rent | 24.0 | 24.0 |\n| Service payments to the parent company | **added back, +45.0** | **not added back** |\n| **EBITDA** | **176.4** | **131.4** |\n| What stands behind the payments | procurement, IT and quality for Northline are provided by the parent company | after the sale the buyer provides them itself or buys them from the seller |\n| The rule of the sale and purchase agreement | — | **the price is counted on the audited accounts** |",
      "triggers_en": [
       "what is this reverse premium",
@@ -44893,7 +44913,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — хронология утечки переговоров в прессу",
      "reveal": "on_request",
      "triggers": [
       "почему росла цена",
@@ -44904,7 +44924,7 @@
      ],
      "body_md": "| Факт | Значение |\n|---|---|\n| Первые сообщения в прессе о переговорах | **день −42**, за шесть недель до объявления |\n| Медианная цена за 30 дней ДО этих сообщений | **$33.20** — «невозмущённая цена» |\n| Цена за день до объявления | $40.00 |\n| Конвенция 1: премия к цене за день до объявления | применяется в раскрытии сделки и биржевой практике |\n| Конвенция 2: премия к невозмущённой цене | применяется в заключении о справедливости цены |\n| Комментарий | обе конвенции защитимы; выбор определяется тем, **на какой вопрос** отвечают |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — the timeline of the leak to the press",
      "body_md_en": "| Fact | Value |\n|---|---|\n| First press reports of the talks | **day −42**, six weeks before the announcement |\n| Median price over the 30 days BEFORE those reports | **$33.20** — the \"unaffected price\" |\n| Price on the day before the announcement | $40.00 |\n| Convention 1: premium to the price on the day before the announcement | used in deal disclosure and in exchange practice |\n| Convention 2: premium to the unaffected price | used in the fairness opinion |\n| Comment | both conventions are defensible; the choice is settled by **which question** they answer |",
      "triggers_en": [
       "why the price grew",
@@ -45068,7 +45088,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — формулировки договора об earn-out",
      "reveal": "on_request",
      "triggers": [
       "как считается показатель",
@@ -45078,7 +45098,7 @@
      ],
      "body_md": "| Условие договора об earn-out | Формулировка |\n|---|---|\n| Показатель | выручка Ostrek за календарный 2027 год |\n| Шкала | ноль при **$600.0M** и ниже · полная выплата **$180.0M** при **$640.0M** и выше · линейно между |\n| Метод расчёта | **«в соответствии с учётной политикой, действовавшей на дату подписания»** |\n| Комментарий сторон | пункт внесён продавцом, чтобы покупатель не смог занизить показатель сменой политики |\n| Что делает переход на брутто | увеличивает признанную выручку; денежные поступления, цены и маржа по этим услугам остаются прежними |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — the earn-out clauses",
      "body_md_en": "| Term of the earn-out agreement | Wording |\n|---|---|\n| Measure | Ostrek's revenue for calendar year 2027 |\n| Scale | zero at **$600.0M** and below · full payment **$180.0M** at **$640.0M** and above · linear between |\n| Method of calculation | **\"in accordance with the accounting policy in force at the date of signing\"** |\n| The parties' comment | the clause was put in by the seller so that the buyer could not understate the measure by changing the policy |\n| What the move to gross does | it increases recognised revenue; the cash receipts, the prices and the margin on these services stay as they were |",
      "triggers_en": [
       "how is the metric calculated",
@@ -45228,7 +45248,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — коридор сделок и медианы по типам активов",
      "reveal": "on_request",
      "triggers": [
       "по каким мультиплам торгуются такие активы",
@@ -45238,7 +45258,7 @@
      ],
      "body_md": "| Тип актива | Коридор сделок 2024–2026 | Медиана |\n|---|---|---|\n| Патентно защищённые портфели | 11.0–12.4× | **11.6×** |\n| **Беспатентные (дженериковые) портфели** | **5.6–6.4×** | **6.0×** |\n\n| Условие | Значение |\n|---|---|\n| Практика продавца | периметр обсуждаем: линия C выделена в отдельное юрлицо |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — deal corridors and medians by asset type",
      "body_md_en": "| Type of asset | Deal range 2024–2026 | Median |\n|---|---|---|\n| Patent-protected portfolios | 11.0–12.4× | **11.6×** |\n| **Off-patent (generic) portfolios** | **5.6–6.4×** | **6.0×** |\n\n| Term | Value |\n|---|---|\n| The seller's practice | the perimeter is negotiable: line C is carved into a separate legal entity |",
      "triggers_en": [
       "at what multiples such assets trade",
@@ -45400,7 +45420,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — функции центра и что с ними будет при разделении",
      "reveal": "on_request",
      "triggers": [
       "что будет с центром",
@@ -45410,7 +45430,7 @@
      ],
      "body_md": "| Функция центра | Годовые затраты | Что происходит при разделении |\n|---|---|---|\n| Финансы и отчётность | 84.0 | **дублируется полностью** |\n| ИТ и данные | 71.0 | **дублируется полностью** |\n| Комплаенс и юристы | 58.0 | **дублируется полностью** |\n| Закупки | 39.0 | **дублируется на 40%** = 15.6 |\n| Казначейство, связи с инвесторами | 58.0 | **дублируется на 20%** = 11.6 |\n| **Итого** | **310.0** | **213.0 + 15.6 + 11.6 = 240.2, то есть 77.48%** |\n| Разовые затраты на разделение | **520.0** | юристы, ИТ-разделение, налоги, ребрендинг |\n\n| Условие | Значение |\n|---|---|\n| Две конвенции оценки центра | **разнесённые** (управленческий учёт) против **избегаемых** (что реально исчезнет) — обе применяются |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — corporate functions and what happens on separation",
      "body_md_en": "| Centre function | Annual cost | What happens on a separation |\n|---|---|---|\n| Finance and reporting | 84.0 | **fully duplicated** |\n| IT and data | 71.0 | **fully duplicated** |\n| Compliance and legal | 58.0 | **fully duplicated** |\n| Procurement | 39.0 | **duplicated by 40%** = 15.6 |\n| Treasury, investor relations | 58.0 | **duplicated by 20%** = 11.6 |\n| **Total** | **310.0** | **213.0 + 15.6 + 11.6 = 240.2, that is 77.48%** |\n| One-off costs of the separation | **520.0** | lawyers, IT separation, taxes, rebranding |\n\n| Term | Value |\n|---|---|\n| Two conventions for valuing the centre | **allocated** (management accounting) against **avoidable** (what actually disappears) — both are used |",
      "triggers_en": [
       "what happens to the centre",
@@ -45572,7 +45592,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — главный конкурент и его производственная база",
      "reveal": "on_request",
      "triggers": [
       "кто ещё платит пошлину",
@@ -45582,7 +45602,7 @@
      ],
      "body_md": "| Наблюдение | Значение |\n|---|---|\n| Главный конкурент | **Kraftsman Pro**, производство внутри страны |\n| Попадает ли он под пошлину | **нет** |\n| Его заявленная ценовая политика на второе полугодие | **без изменений** |\n| Эластичность −1.4 замерена | при **синхронном** движении цен на рынке |\n| Эластичность нашего объёма при **неподвижной** цене конкурента | **−4.2** |\n| Доля Kraftsman Pro в тех же каналах | сопоставима с нашей |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — the main competitor and its production base",
      "body_md_en": "| Observation | Value |\n|---|---|\n| The main competitor | **Kraftsman Pro**, production inside the country |\n| Does the duty apply to it | **no** |\n| Its stated pricing policy for the second half | **unchanged** |\n| The elasticity of −1.4 was measured | with prices in the market moving **in step** |\n| The elasticity of our volume with the competitor's price **standing still** | **−4.2** |\n| Kraftsman Pro's share in the same channels | comparable with ours |",
      "triggers_en": [
       "who else pays the duty",
@@ -45744,7 +45764,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — на чём держится ставка 25%",
      "reveal": "on_request",
      "triggers": [
       "как долго действует ставка",
@@ -45754,7 +45774,7 @@
      ],
      "body_md": "| Условие | Значение |\n|---|---|\n| Ставка 25% установлена | торговым соглашением с оговоркой о пересмотре |\n| Дата ближайшего пересмотра | **через 2 года** |\n| Базовый сценарий переговорной команды | ставка снижается до **10%** |\n| Что происходит с экономией | она пропорциональна ставке: **$34.4M** в год после пересмотра |\n| Может ли завод быть перенесён обратно | нет, оборудование специализированное |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — what the 25% rate rests on",
      "body_md_en": "| Term | Value |\n|---|---|\n| The 25% rate is set | by a trade agreement with a review clause |\n| Date of the nearest review | **in 2 years** |\n| The negotiating team's base case | the rate falls to **10%** |\n| What happens to the saving | it is proportional to the rate: **$34.4M** a year after the review |\n| Can the plant be moved back | no, the equipment is specialised |",
      "triggers_en": [
       "how long does the rate hold",
@@ -45917,7 +45937,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — база расчёта доли по регламенту",
      "reveal": "on_request",
      "triggers": [
       "как регламент считает долю",
@@ -45927,7 +45947,7 @@
      ],
      "body_md": "| Правило регламента | Формулировка |\n|---|---|\n| База расчёта доли | **цена сделки**, а не себестоимость производства |\n| Что засчитывается как местное | закупки у местных поставщиков; собственная сборка и труд в зачёт НЕ идут |\n| Импортное содержание субпоставщиков | **вычитается**: для этой товарной категории «накопление» запрещено |\n| Импорт внутри местных закупок | **$4,300** на машину |\n| Периодичность подтверждения | ежегодно, с правом ретроспективной проверки за три года |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — the regulation's basis for the share",
      "body_md_en": "| Rule of the regulation | Wording |\n|---|---|\n| Base for the share | the **transaction price**, not the production cost |\n| What counts as local | purchases from local suppliers; own assembly and labour do NOT count |\n| Imported content of sub-suppliers | **is deducted**: for this product category \"cumulation\" is forbidden |\n| Imports inside the local purchases | **$4,300** per car |\n| Frequency of confirmation | annually, with a right of retrospective audit over three years |",
      "triggers_en": [
       "how does the regulation calculate the share",
@@ -46076,7 +46096,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — месячные продажи и запас",
      "reveal": "on_request",
      "triggers": [
       "как посчитаны недели",
@@ -46086,7 +46106,7 @@
      ],
      "body_md": "| Строка | Значение |\n|---|---|\n| Продажи в месяц, по цене продажи | $52.0M |\n| Себестоимость продаж в месяц | $52.0M × (1 − 30%) = **$36.4M** |\n| Недель в месяце | 52 / 12 = **4.3333** |\n| Себестоимость продаж в неделю | **$8.4M** |\n| Запас на складе, по себестоимости | $168.0M |\n| Как посчитаны «14.0 недель» в отчёте | $168.0M ÷ ($52.0M ÷ 4.3333) — **по цене продажи** |\n| Правило учёта | запас и себестоимость продаж измеряются в одних единицах — по себестоимости |\n| Глубина уценки после ввода пошлины | **22%** — среднее по трём предыдущим вводам пошлины в категории |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — monthly sales and inventory",
      "body_md_en": "| Line | Value |\n|---|---|\n| Sales a month, at selling price | $52.0M |\n| Cost of sales a month | $52.0M × (1 − 30%) = **$36.4M** |\n| Weeks in a month | 52 / 12 = **4.3333** |\n| Cost of sales a week | **$8.4M** |\n| Stock in the warehouse, at cost | $168.0M |\n| How the \"14.0 weeks\" in the report were counted | $168.0M ÷ ($52.0M ÷ 4.3333) — **at selling price** |\n| Accounting rule | stock and cost of sales are measured in the same units — at cost |\n| Depth of the markdown after the duty comes in | **22%** — the average over the three previous duty introductions in the category |",
      "triggers_en": [
       "how were the weeks calculated",
@@ -46248,7 +46268,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — когорты подписчиков и отток при потере прав",
      "reveal": "on_request",
      "triggers": [
       "кто именно уйдёт",
@@ -46258,7 +46278,7 @@
      ],
      "body_md": "| Когорта по дате подписки | Размер | Отток при потере прав |\n|---|---|---|\n| Подписались в **неделю старта сезона** | **3.1M** | **74%** |\n| Все остальные | **15.3M** | **6%** |\n| Итого | 18.4M | |\n\n| Условие | Значение |\n|---|---|\n| Как измерен отток | по трём предыдущим случаям потери спортивных прав в отрасли |\n| Что было в анкете сезонной когорты | 63% из них назвали лигу главной причиной — почти вдвое чаще среднего |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — subscriber cohorts and churn if the rights are lost",
      "body_md_en": "| Cohort by date of subscription | Size | Churn if the rights are lost |\n|---|---|---|\n| Subscribed in the **week the season started** | **3.1M** | **74%** |\n| All the rest | **15.3M** | **6%** |\n| Total | 18.4M | |\n\n| Term | Value |\n|---|---|\n| How the churn was measured | on the three previous cases of sports rights being lost in the industry |\n| What the season cohort's answers showed | 63% of them named the league as the main reason — almost twice as often as the average |",
      "triggers_en": [
       "who exactly will leave",
@@ -46421,7 +46441,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — что платится по абонементу независимо от прихода",
      "reveal": "on_request",
      "triggers": [
       "из чего складываются $76",
@@ -46432,7 +46452,7 @@
      ],
      "body_md": "| Строка | Значение |\n|---|---|\n| Билет | **$52.00** — по абонементу платится независимо от прихода |\n| Траты на месте (питание, атрибутика) | **$24.00** — платит только пришедший |\n| Правило учёта | билет считается по **проданному**, траты на месте — по **турникету** |\n| Матчей, распроданных полностью | **5 из 19** |\n| Как продаются новые места | **поматчево, а не абонементом**: купивший приходит, поэтому по ним обе части идут вместе |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — what a season ticket pays for regardless of attendance",
      "body_md_en": "| Line | Value |\n|---|---|\n| Ticket | **$52.00** — on a season pass it is paid whether or not the holder comes |\n| Spend on site (food, merchandise) | **$24.00** — only the one who comes pays it |\n| Accounting rule | the ticket is counted on what is **sold**, spend on site on the **gate** |\n| Matches sold out completely | **5 of 19** |\n| How the new seats are sold | **per match, not as a season pass**: the buyer comes, so for them both parts go together |",
      "triggers_en": [
       "what makes up the $76",
@@ -46608,7 +46628,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — группы фильмов и сборы",
      "reveal": "on_request",
      "triggers": [
       "как распределены сборы",
@@ -46618,7 +46638,7 @@
      ],
      "body_md": "| Группа фильмов | Штук | Сборы каждого |\n|---|---|---|\n| Массовые релизы | **8** | **$36.0M** |\n| Крупные релизы | **2** | **$140.0M** |\n| Тентполы | **2** | **$600.0M** |\n\n| Условие | Значение |\n|---|---|\n| Сходимость средней | (8×36.0 + 2×140.0 + 2×600.0) / 12 = **$147.33M** |\n| Известны ли группы до релиза | да: бюджет, франшиза, звёзды, дата — портфель планируется за 18 месяцев |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — film groups and box office",
      "body_md_en": "| Group of films | Number | Box office of each |\n|---|---|---|\n| Wide releases | **8** | **$36.0M** |\n| Major releases | **2** | **$140.0M** |\n| Tentpoles | **2** | **$600.0M** |\n\n| Term | Value |\n|---|---|\n| The average checks out | (8×36.0 + 2×140.0 + 2×600.0) / 12 = **$147.33M** |\n| Are the groups known before release | yes: budget, franchise, stars, date — the portfolio is planned 18 months ahead |",
      "triggers_en": [
       "how are the levies allocated",
@@ -46780,7 +46800,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — доля стриминга в роялти и её рост",
      "reveal": "on_request",
      "triggers": [
       "структура роялти",
@@ -46790,7 +46810,7 @@
      ],
      "body_md": "| Наблюдение | Значение |\n|---|---|\n| Доля стриминга в роялти | **78%**, растёт на **1.2 п.п.** в год |\n| Доля топ-3 песен | **19%** роялти · их затухание **2.6%** в год |\n| Остальные 409 песен | 81% роялти · затухание **1.86%** в год |\n| Число песен в каталоге | 412 |\n| Обсуждаемый регуляторный пересмотр ставки | срез до **5%** от нынешней ставки роялти |\n| Средний возраст песни | 14 лет — период резкого падения пройден |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — streaming's share of royalties and its growth",
      "body_md_en": "| Observation | Value |\n|---|---|\n| Streaming's share of royalties | **78%**, growing **1.2 p.p.** a year |\n| Share of the top-3 songs | **19%** of royalties · their decay **2.6%** a year |\n| The other 409 songs | 81% of royalties · decay **1.86%** a year |\n| Songs in the catalogue | 412 |\n| The regulatory review of the rate under discussion | a cut of up to **5%** off the present royalty rate |\n| Average age of a song | 14 years — the period of sharp decline is past |",
      "triggers_en": [
       "royalty structure",
@@ -46952,7 +46972,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — на кого распространяется требование регулятора",
      "reveal": "on_request",
      "triggers": [
       "что делают конкуренты",
@@ -46962,7 +46982,7 @@
      ],
      "body_md": "| Наблюдение | Значение |\n|---|---|\n| Требование накрывает | **все банки того же уровня**, не только нас |\n| Объявлено к сокращению тремя конкурентами | **$9.4B** корпоративного портфеля, начиная с этого года |\n| Доля высвобожденного спроса, исторически приходящая к нам | **38%** |\n| Средний вес риска по корпоративному кредиту | 100% |\n| Когда это произойдёт | **до** вступления требования, а не после |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — who the regulator's requirement covers",
      "body_md_en": "| Observation | Value |\n|---|---|\n| The requirement covers | **all banks of the same tier**, not only us |\n| Announced for reduction by three competitors | **$9.4B** of corporate book, starting this year |\n| Share of the released demand that historically comes to us | **38%** |\n| Average risk weight on a corporate loan | 100% |\n| When this will happen | **before** the requirement comes in, not after |",
      "triggers_en": [
       "what are competitors doing",
@@ -47124,7 +47144,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — смена правила признания перестраховочных возмещений",
      "reveal": "on_request",
      "triggers": [
       "как признаются возмещения",
@@ -47134,7 +47154,7 @@
      ],
      "body_md": "| Правило | Было | Стало |\n|---|---|---|\n| Признание перестраховочных возмещений | в год **выплаты** | в год **события** |\n| Дата решения регулятора | — | **применяется ретроспективно** ко всем открытым периодам |\n\n| Условие | Значение |\n|---|---|\n| Когда произошли катастрофические события | **до начала трёхлетнего окна** |\n| Период признания возмещений | предыдущий отчётный период, **$103.0M** |\n| Можно ли пересобрать окно | нет: предыдущий период закрыт и отчётность подана |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — the change in recognising reinsurance recoveries",
      "body_md_en": "| Rule | Before | After |\n|---|---|---|\n| Recognition of reinsurance recoveries | in the year of **payment** | in the year of the **event** |\n| Date of the regulator's decision | — | **applies retrospectively** to all open periods |\n\n| Term | Value |\n|---|---|\n| When the catastrophe events happened | **before the three-year window opened** |\n| Period in which the recoveries are recognised | the previous reporting period, **$103.0M** |\n| Can the window be reassembled | no: the previous period is closed and the accounts are filed |",
      "triggers_en": [
       "how are reimbursements recognised",
@@ -47296,7 +47316,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — шесть лет наблюдений за возвратами",
      "reveal": "on_request",
      "triggers": [
       "что было в другие годы",
@@ -47306,7 +47326,7 @@
      ],
      "body_md": "| Наблюдение за шесть лет | Значение |\n|---|---|\n| Лет без особых событий | **4** — возвраты около 0.04% оборота |\n| Лет с **каскадом** | **2** |\n| Что такое каскад | уход крупного подписочного мерчанта: возвраты выставляет вся его клиентская база сразу, а взыскать с ушедшего нечего |\n| Средний размер каскада | **$612.0M** |\n| Частота | **раз в 3.2 года** — оценка перестраховщика по отраслевой статистике, не по нашим шести годам |\n| Заложен ли каскад в 0.04% | **нет**: последний год был без событий |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — six years of chargeback observations",
      "body_md_en": "| Observation over six years | Value |\n|---|---|\n| Years without special events | **4** — chargebacks around 0.04% of turnover |\n| Years with a **cascade** | **2** |\n| What a cascade is | a large subscription merchant goes under: its whole customer base files chargebacks at once, and there is nothing to recover from the one that has gone |\n| Average size of a cascade | **$612.0M** |\n| Frequency | **once in 3.2 years** — the reinsurer's estimate on industry statistics, not on our six years |\n| Is a cascade inside the 0.04% | **no**: the last year was without events |",
      "triggers_en": [
       "what was it in other years",
@@ -47468,7 +47488,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — две конвенции оценки и кто их применяет",
      "reveal": "on_request",
      "triggers": [
       "как оценивается портфель",
@@ -47478,7 +47498,7 @@
      ],
      "body_md": "| Конвенция оценки | Как считается | Кто применяет |\n|---|---|---|\n| По модели | дисконтирование договорных потоков по ставке выдачи | отчётность фонда, расчёт вознаграждения управляющего |\n| **По последней сделке** | цена сопоставимых кредитов в недавних сделках на вторичном рынке | оценка обеспечения кредиторами, независимый оценщик |\n\n| Условие | Значение |\n|---|---|\n| Дисконт в последних сделках по сопоставимым | **8.5%** |\n| Комментарий | обе конвенции применяются и обе защитимы; выбор определяется тем, **на чей вопрос** отвечают |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — two valuation conventions and who applies them",
      "body_md_en": "| Valuation convention | How it is counted | Who applies it |\n|---|---|---|\n| On the model | contractual flows discounted at the origination rate | the fund's accounts, the calculation of the manager's fee |\n| **On the last trade** | the price of comparable loans in recent secondary market trades | lenders' valuation of collateral, the independent valuer |\n\n| Term | Value |\n|---|---|\n| The discount in the latest trades in comparables | **8.5%** |\n| Comment | both conventions are used and both are defensible; the choice is settled by **whose question** they answer |",
      "triggers_en": [
       "how is the portfolio valued",
@@ -47640,7 +47660,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — воронка пациентов по ступеням терапии",
      "reveal": "on_request",
      "triggers": [
       "на ком измерена приверженность",
@@ -47650,7 +47670,7 @@
      ],
      "body_md": "| Ступень | Значение |\n|---|---|\n| Начали терапию | 184,000 |\n| **Дошли до второго рецепта** | **52%** — их курс и составляет выручку ex1 |\n| Приверженность среди дошедших до второго рецепта | **78%** — это и есть цифра из ex1 |\n| Приверженность по **всей начавшей когорте** | **41%** |\n| Программа поддержки (напоминания, координатор, доставка) | стоимость **$24.0M** в год |\n| Доля доходящих до второго рецепта с программой | **66%** |\n| Валовая маржа препарата | 55% |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — the patient funnel by therapy stage",
      "body_md_en": "| Step | Value |\n|---|---|\n| Started therapy | 184,000 |\n| **Reached a second script** | **52%** — it is their course that makes up the revenue in ex1 |\n| Adherence among those who reached a second script | **78%** — that is exactly the figure in ex1 |\n| Adherence across the **whole starting cohort** | **41%** |\n| Support programme (reminders, a coordinator, delivery) | cost **$24.0M** a year |\n| Share reaching a second script with the programme | **66%** |\n| Gross margin on the drug | 55% |",
      "triggers_en": [
       "on whom was adherence measured",
@@ -47812,7 +47832,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — два источника доли рынка и их охват",
      "reveal": "on_request",
      "triggers": [
       "откуда доля",
@@ -47822,7 +47842,7 @@
      ],
      "body_md": "| Источник | Что меряет | Охват |\n|---|---|---|\n| Панельная оценка доли | доля упаковок в выборке аптек, экстраполяция на рынок | 1,900 аптек из 61,000 |\n| **Данные аптечных отпусков** | фактически отпущенные упаковки, и наши, и чужие | сплошной, все каналы |\n| Всего отпущено по молекуле | **14.6M** | |\n\n| Условие | Значение |\n|---|---|\n| Наших рецептов по отпускам | **4.1M** |\n| Правило отрасли при расхождении | **сплошное бьёт оценённое**: панель экстраполирует с выборки, отпуски считаются целиком |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — two sources of market share and their coverage",
      "body_md_en": "| Source | What it measures | Coverage |\n|---|---|---|\n| Panel estimate of share | the share of packs in a sample of pharmacies, extrapolated to the market | 1,900 pharmacies out of 61,000 |\n| **Pharmacy dispensing data** | packs actually dispensed, both ours and others' | complete, all channels |\n| Total dispensed for the molecule | **14.6M** | |\n\n| Term | Value |\n|---|---|\n| Our scripts on the dispensing data | **4.1M** |\n| The industry rule when they diverge | **complete beats estimated**: the panel extrapolates from a sample, dispensing is counted in full |",
      "triggers_en": [
       "where the share comes from",
@@ -47984,7 +48004,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — этапы операции и обязательные звенья",
      "reveal": "on_request",
      "triggers": [
       "что происходит после операции",
@@ -47994,7 +48014,7 @@
      ],
      "body_md": "| Этап | Условие |\n|---|---|\n| Послеоперационная палата | **обязательна** для каждой плановой операции |\n| Коек в палате | **14** |\n| Оборотов койки в сутки | **4.4** |\n| Стоимость одной новой койки с оснащением | **$0.52M** |\n| Можно ли выписать, минуя палату | нет, требование стандарта |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — surgical stages and the mandatory links",
      "body_md_en": "| Stage | Term |\n|---|---|\n| The recovery ward | **mandatory** for every elective operation |\n| Beds in the ward | **14** |\n| Bed turns a day | **4.4** |\n| Cost of one new bed with equipment | **$0.52M** |\n| Can a patient be discharged bypassing the ward | no, a requirement of the standard |",
      "triggers_en": [
       "what happens after the operation",
@@ -48156,7 +48176,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — убыточные точки: сколько из них спутники якорных",
      "reveal": "on_request",
      "triggers": [
       "чем отличаются убыточные точки",
@@ -48166,7 +48186,7 @@
      ],
      "body_md": "| Наблюдение | Значение |\n|---|---|\n| Из 380 убыточных являются **спутниками** якорных точек | **214** |\n| Что делает спутник | принимает первичный рецепт и направляет повторные в якорь |\n| Доля прибыли якорных, зависящая от потока спутников | **62%** |\n| Доля этого потока, уходящая к конкуренту при закрытии спутника | **60%** |\n| Остальные убыточные точки | **166**, самостоятельные, потока в якорь не дают |\n| Как распределён убыток $212.0M | **поровну на точку**: спутники и самостоятельные одного формата и сопоставимы по площади и аренде |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — loss-making sites: how many are satellites of anchors",
      "body_md_en": "| Observation | Value |\n|---|---|\n| Of the 380 loss-making, **satellites** of anchor outlets | **214** |\n| What a satellite does | it takes the first script and sends the repeats to the anchor |\n| Share of the anchors' profit that depends on the satellite flow | **62%** |\n| Share of that flow that goes to a competitor when a satellite closes | **60%** |\n| The other loss-making outlets | **166**, standalone, they give the anchor no flow |\n| How the $212.0M loss is spread | **equally per outlet**: satellites and standalone are of one format and comparable on floor area and rent |",
      "triggers_en": [
       "how do the loss-making stores differ",
@@ -48328,7 +48348,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — сколько покупатель бренда тратит в магазине",
      "reveal": "on_request",
      "triggers": [
       "кто покупает бренд",
@@ -48338,7 +48358,7 @@
      ],
      "body_md": "| Наблюдение | Значение |\n|---|---|\n| Покупатель бренда тратит в магазине | в **7.4 раза** больше, чем в этой категории |\n| Валовая маржа остальной корзины | **21.5%** |\n| Доля покупателей бренда, уходящих **из магазина совсем** при делистинге | **31%** — замер по трём прошлым делистингам в сети |\n| Что происходит с остальными 69% | переходят на собственную марку, корзина сохраняется |\n| Держат ли конкуренты этот бренд | да, в шаговой доступности |\n| Что предлагает поставщик за сохранение полки | **+4.5 пункта** к марже бренда |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — what a brand buyer spends in the store",
      "body_md_en": "| Observation | Value |\n|---|---|\n| A buyer of the brand spends in the store | **7.4 times** more than in this category |\n| Gross margin on the rest of the basket | **21.5%** |\n| Share of the brand's buyers who leave **the store altogether** on a delisting | **31%** — measured on three past delistings in the chain |\n| What happens to the other 69% | they move to the private label, the basket is kept |\n| Do competitors stock this brand | yes, within walking distance |\n| What the supplier offers to keep the shelf | **+4.5 points** on the brand's margin |",
      "triggers_en": [
       "who buys the brand",
@@ -48500,7 +48520,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — чем отвечает главный конкурент",
      "reveal": "on_request",
      "triggers": [
       "что сделает конкурент",
@@ -48510,7 +48530,7 @@
      ],
      "body_md": "| Наблюдение | Значение |\n|---|---|\n| Чем отвечает главный конкурент | **не скоростью, а ассортиментом**: у него склад втрое больше |\n| Прирост его конверсии от расширения ассортимента | **+17%** |\n| Доля наших заказов, уходящая при его ответе | **13%** |\n| Предел скорости конкурента | его сеть складов не позволяет уйти ниже 25 минут без нового капитала |\n| Наш вариант расширения ассортимента | **$2.4M** в год, даёт **+15%** заказов |\n| Что показал тест «+24%» | тест шёл четыре недели, конкурент за это время не реагировал |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — how the main competitor responds",
      "body_md_en": "| Observation | Value |\n|---|---|\n| How the main competitor answers | **not with speed but with range**: its warehouse is three times bigger |\n| The uplift in its conversion from widening the range | **+17%** |\n| Share of our orders lost when it answers | **13%** |\n| The competitor's limit on speed | its warehouse network cannot go below 25 minutes without new capital |\n| Our option for widening the range | **$2.4M** a year, gives **+15%** of orders |\n| What the \"+24%\" test showed | the test ran four weeks, and the competitor did not react in that time |",
      "triggers_en": [
       "what will the competitor do",
@@ -48672,7 +48692,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — структура чашки и чека: что изменилось",
      "reveal": "on_request",
      "triggers": [
       "что ещё изменилось",
@@ -48684,7 +48704,7 @@
      ],
      "body_md": "| Статья | Было | Стало |\n|---|---|---|\n| Оплата труда на чашку (внутри прочих переменных) | **$1.02** | **+9%** |\n| Доля еды в чеке | **34%** | **21%** |\n| Чашек продано | 412.0M | **412.0M — без изменений** |\n| Валовая маржа еды | 62% | 62% |\n| Валовая маржа напитков | 71% | 71% |\n| Аренда и прочие постоянные | без изменений | без изменений |\n\n*Доля еды считается от всего чека. Выручка напитков не изменилась.*",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — cup and basket structure: what changed",
      "body_md_en": "| Item | Before | After |\n|---|---|---|\n| Labour per cup (inside other variable) | **$1.02** | **+9%** |\n| Food's share of the bill | **34%** | **21%** |\n| Cups sold | 412.0M | **412.0M — unchanged** |\n| Gross margin on food | 62% | 62% |\n| Gross margin on beverages | 71% | 71% |\n| Rent and other fixed | unchanged | unchanged |\n\n*Food's share is counted off the whole bill. Beverage revenue has not changed.*",
      "triggers_en": [
       "what else changed",
@@ -48849,7 +48869,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — кто платит сбор за возврат по нормативу",
      "reveal": "on_request",
      "triggers": [
       "как учитывается сбор",
@@ -48859,7 +48879,7 @@
      ],
      "body_md": "| Условие норматива | Формулировка |\n|---|---|\n| Кто платит сбор | продавец, **за каждую единицу возврата** |\n| Периодичность | **ежегодно**, пока действует норматив |\n| Срок действия норматива | бессрочный, пересмотр ставки не раньше чем через шесть лет |\n| Как сбор отражён в бюджете текущего года | одной строкой $48.84M — как эффект введения норматива |\n| Отражён ли он в модели инвестиционных решений | **нет**, модель построена на бюджете года |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — who pays the returns levy under the regulation",
      "body_md_en": "| Condition of the rule | Wording |\n|---|---|\n| Who pays the charge | the seller, **for every unit returned** |\n| Frequency | **annually**, as long as the rule is in force |\n| Term of the rule | indefinite, the rate not to be reviewed for at least six years |\n| How the charge sits in this year's budget | as one line, $48.84M — as the effect of the rule coming in |\n| Is it in the model for investment decisions | **no**, the model is built on the year's budget |",
      "triggers_en": [
       "how is the levy accounted for",
@@ -49008,7 +49028,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — численность смены и условия площадки",
      "reveal": "on_request",
      "triggers": [
       "коллективный договор",
@@ -49018,7 +49038,7 @@
      ],
      "body_md": "| Условие | Значение |\n|---|---|\n| Численность в смене-эквиваленте | **1,200 человек** |\n| Коллективный договор гарантирует занятость | **85%** нынешней численности до истечения срока |\n| Срок договора | дольше горизонта оценки проекта |\n| Средние затраты на человека в год | **$118,000** |\n| Условие гарантии | зарплата платится независимо от того, есть ли для человека работа |\n| Состав фонда на операциях | $157.44M против $141.60M штата: разница **$15.84M** — подрядчики в пиковые смены |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — shift headcount and site conditions",
      "body_md_en": "| Term | Value |\n|---|---|\n| Headcount in shift-equivalent | **1,200 people** |\n| The collective agreement guarantees employment for | **85%** of the present headcount until it expires |\n| Term of the agreement | longer than the project's horizon |\n| Average cost per person a year | **$118,000** |\n| Condition of the guarantee | the wage is paid whether or not there is work for the person |\n| What the labour on the moves is made of | $157.44M against $141.60M of payroll: the difference **$15.84M** is contractors on peak shifts |",
      "triggers_en": [
       "collective agreement",
@@ -49180,7 +49200,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — маршруты, где обе дороги ходят уже сейчас",
      "reveal": "on_request",
      "triggers": [
       "где мерили",
@@ -49190,7 +49210,7 @@
      ],
      "body_md": "| Наблюдение | Значение |\n|---|---|\n| Маршрутов, где **обе дороги ходят уже сейчас** | **96** |\n| Где оценщик делал замер | **только на них** |\n| Экономия на маршруте, где ходит **одна** дорога | **$0.85M** — по трём сопоставимым слияниям |\n| Маршрутов без пересечения | **118** |\n| Состав экономии на пересекающемся маршруте | тяга, бригады, диспетчеризация, порожний пробег |\n| Состав экономии на непересекающемся | только закупки и администрирование |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — routes where both railways already run",
      "body_md_en": "| Observation | Value |\n|---|---|\n| Routes where **both railways already run** | **96** |\n| Where the valuer took the measure | **only on those** |\n| Saving on a route where **one** railway runs | **$0.85M** — on three comparable mergers |\n| Routes without an overlap | **118** |\n| What the saving on an overlapping route is made of | traction, crews, dispatching, empty running |\n| On a non-overlapping route | only procurement and administration |",
      "triggers_en": [
       "where was it measured",
@@ -49353,7 +49373,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — срок действия субсидии",
      "reveal": "on_request",
      "triggers": [
       "сколько действует субсидия",
@@ -49363,7 +49383,7 @@
      ],
      "body_md": "| Условие | Значение |\n|---|---|\n| Срок действия субсидии | **2 года**, продление не предусмотрено |\n| Сколько занимает полная замена парка | **4 года** — ограничение поставщика и сервисной сети |\n| Сколько машин успеваем в окне субсидии | **470 из 940** |\n| Доплата после окончания субсидии | **$54,000** на машину |\n| Что происходит с машинами третьего и четвёртого года | покупаются по полной цене, субсидия к ним не применяется |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — the subsidy window",
      "body_md_en": "| Term | Value |\n|---|---|\n| Term of the subsidy | **2 years**, no extension provided for |\n| How long a full replacement of the fleet takes | **4 years** — a constraint of the supplier and the service network |\n| How many trucks fit inside the subsidy window | **470 of 940** |\n| Extra to pay after the subsidy ends | **$54,000** per truck |\n| What happens to the trucks of the third and fourth year | they are bought at full price, the subsidy does not apply to them |",
      "triggers_en": [
       "how long the subsidy runs",
@@ -49526,7 +49546,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — доля дальних пассажиров, прилетающих с региональных",
      "reveal": "on_request",
      "triggers": [
       "откуда пассажиры дальних",
@@ -49536,7 +49556,7 @@
      ],
      "body_md": "| Наблюдение | Значение |\n|---|---|\n| Доля пассажиров дальних рейсов, прилетающих с региональных | **29%** |\n| Сколько таких пассажиров останется, если регионалку закрыть | **34%** — остальные полетят через хаб конкурента |\n| Маршрутов, дающих подвоз на дальние | **18 из 46** |\n| Остальные | **28**, подвоза не дают — точка-точка внутри региона |\n| Как распределён убыток $84.0M | поровну на маршрут: сопоставимый флот и частота |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — the share of long-haul passengers fed by regional flights",
      "body_md_en": "| Observation | Value |\n|---|---|\n| Share of long-haul passengers arriving off regional flights | **29%** |\n| How many of those passengers stay if the regional network closes | **34%** — the rest will fly through a competitor's hub |\n| Routes that feed the long-haul | **18 of 46** |\n| The rest | **28**, they feed nothing — point to point inside the region |\n| How the $84.0M loss is spread | equally per route: comparable fleet and frequency |",
      "triggers_en": [
       "where the long-haul passengers come from",
@@ -49698,7 +49718,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — какие печи принимают RDF и до какой доли",
      "reveal": "on_request",
      "triggers": [
       "нормативы выбросов",
@@ -49709,7 +49729,7 @@
      ],
      "body_md": "| Условие | Значение |\n|---|---|\n| Печь с кальцинатором (A, B) принимает RDF | до **45%** тепловой нагрузки |\n| Мокрая печь (C, D) по нормативу выбросов | до **12%** тепловой нагрузки |\n| Зольность RDF снижает выпуск печи | на **0.10 пункта на каждый пункт** доли RDF |\n| Вклад тонны клинкера в покрытие, **за вычетом топлива** | **$18.60** |\n| Система подачи только на печи A и B | **$31.0M** |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — which kilns take RDF and up to what share",
      "body_md_en": "| Term | Value |\n|---|---|\n| A kiln with a calciner (A, B) takes RDF | up to **45%** of the heat load |\n| A wet kiln (C, D), on the emissions standard | up to **12%** of the heat load |\n| The ash content of RDF cuts a kiln's output | by **0.10 of a point for every point** of RDF share |\n| Contribution of a tonne of clinker, **net of fuel** | **$18.60** |\n| Feed system for kilns A and B only | **$31.0M** |",
      "triggers_en": [
       "emission norms",
@@ -49873,7 +49893,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — собственный флот и условия фрахта",
      "reveal": "on_request",
      "triggers": [
       "флот",
@@ -49885,7 +49905,7 @@
      ],
      "body_md": "| Условие | Значение |\n|---|---|\n| Барж в собственности | **2** |\n| Барж в тайм-чартере | **2** |\n| Итого доступный флот | **4** |\n| Грузоподъёмность баржи | **4,500 тонн** |\n| Рейсов на баржу в год | **96** |\n| Новая баржа: цена и срок постройки | **$18.5M**, **26 месяцев**, свободных на рынке нет |\n| Штраф за недобор законтрактованного объёма | **$3.10** за тонну |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — the owned fleet and charter terms",
      "body_md_en": "| Term | Value |\n|---|---|\n| Barges owned | **2** |\n| Barges on time charter | **2** |\n| Total fleet available | **4** |\n| Barge capacity | **4,500 tonnes** |\n| Voyages per barge a year | **96** |\n| A new barge: price and build time | **$18.5M**, **26 months**, none free on the market |\n| Penalty for falling short of the contracted volume | **$3.10** per tonne |",
      "triggers_en": [
       "fleet",
@@ -50051,7 +50071,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — установленная мощность охлаждения",
      "reveal": "on_request",
      "triggers": [
       "охлаждение",
@@ -50062,7 +50082,7 @@
      ],
      "body_md": "| Условие | Значение |\n|---|---|\n| Установленная мощность охлаждения | **31.0 МВт** |\n| Разрешённый водозабор | **4,104 м³/сут** |\n| Расход воды на МВт при текущей технологии | **152 м³/сут** |\n| Восемь сделок, где продаваемая мощность равна подведённой | **$10.40M** за МВт |\n| Сделка X: подведено / продаётся | **38.0 / 22.0 МВт** — **$6.02M** за подведённый МВт |\n| Сделка Y: подведено / продаётся | **44.0 / 26.0 МВт** — **$6.15M** за подведённый МВт |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — installed cooling capacity",
      "body_md_en": "| Term | Value |\n|---|---|\n| Installed cooling capacity | **31.0 MW** |\n| Permitted water withdrawal | **4,104 m³/day** |\n| Water use per MW on the current technology | **152 m³/day** |\n| The eight deals where the capacity sold equals the capacity brought in | **$10.40M** per MW |\n| Deal X: brought in / sold | **38.0 / 22.0 MW** — **$6.02M** per MW brought in |\n| Deal Y: brought in / sold | **44.0 / 26.0 MW** — **$6.15M** per MW brought in |",
      "triggers_en": [
       "cooling",
@@ -50227,7 +50247,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — доля промышленных абонентов в биллинговом объёме",
      "reveal": "on_request",
      "triggers": [
       "промышленные абоненты",
@@ -50237,7 +50257,7 @@
      ],
      "body_md": "| Условие | Значение |\n|---|---|\n| Доля промышленных абонентов в биллинговом объёме | **34%** |\n| Что обязал их тот же пересмотр норматива | поставить локальную предочистку **до начала следующего года**; срок — 1 января 2027 года, он ещё не наступил, установки не запущены — объём этого года не снижен |\n| Насколько падает их сброс после предочистки | на **62%** |\n| Зависит ли предочистка от решения о тарифе | нет: её требует норматив |\n| Меняется ли инфильтрация | нет: она не зависит от абонентов |\n| Число промышленных абонентов | **26** |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — industrial customers' share of billed volume",
      "body_md_en": "| Term | Value |\n|---|---|\n| Industrial customers' share of the billed volume | **34%** |\n| What the same revision of the standard obliged them to do | install local pre-treatment **before the start of next year**; the deadline is 1 January 2027, it has not yet come, the units are not running — this year's volume is not reduced |\n| How far their discharge falls after pre-treatment | by **62%** |\n| Does the pre-treatment depend on the tariff decision | no: the standard requires it |\n| Does the infiltration change | no: it does not depend on the customers |\n| Number of industrial customers | **26** |",
      "triggers_en": [
       "industrial customers",
@@ -50400,7 +50420,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — приростная часть ставки общезаводских",
      "reveal": "on_request",
      "triggers": [
       "из чего состоит ставка общезаводских",
@@ -50410,7 +50430,7 @@
      ],
      "body_md": "| Условие | Значение |\n|---|---|\n| Приростная часть ставки общезаводских | **2.9 пункта** — контроль качества и метрология под новый стандарт |\n| Не двигающаяся часть ставки | **8.9 пункта** — амортизация действующих зданий, содержание территории, центральная служба |\n| Итого ставка | **11.8 пункта** |\n| Цех под проект | строится только под этот сегмент, другими линиями не используется |\n| Лучший альтернативный проект портфеля | эффект **$9.10M** в год, оценён приростным методом |\n| Что говорит регламент комитета | для решений о входе применяется приростная оценка |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — the incremental part of the plant overhead rate",
      "body_md_en": "| Term | Value |\n|---|---|\n| Incremental part of the plant overhead rate | **2.9 points** — quality control and metrology for the new standard |\n| The part of the rate that does not move | **8.9 points** — depreciation of the existing buildings, upkeep of the site, the central service |\n| Total rate | **11.8 points** |\n| The shop for the project | is built for this segment only, no other line uses it |\n| The best alternative project in the portfolio | effect **$9.10M** a year, valued on the incremental method |\n| What the committee's rules say | for entry decisions the incremental valuation applies |",
      "triggers_en": [
       "what makes up the plant overhead rate",
@@ -50574,7 +50594,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — печи: мощность, загрузка, свободный объём",
      "reveal": "on_request",
      "triggers": [
       "печи",
@@ -50585,7 +50605,7 @@
      ],
      "body_md": "| Печь | Мощность | Загрузка | Свободно |\n|---|---|---|---|\n| A — янтарное стекло | **420 млн** | 68% | **134.4 млн** |\n| B — зелёное стекло | **310 млн** | 92% | **24.8 млн** |\n| C — бесцветное стекло | **260 млн** | 80% | **52.0 млн** |\n| Итого | **990 млн** | | **211.2 млн** |\n\n| Условие | Значение |\n|---|---|\n| Печь варит | **один цвет за кампанию** |\n| Переход на другой цвет | **6 суток** простоя и **4.2 млн** бутылок брака |\n| Вклад янтарной бутылки | **$0.039** |\n| Свободная мощность янтарной печи | не законтрактована: спроса на янтарь сверх текущего нет |\n| Свободная мощность бесцветной печи | законтрактована опционом действующего заказчика на весь год: перевод невозможен |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — furnaces: capacity, load, free volume",
      "body_md_en": "| Furnace | Capacity | Utilisation | Free |\n|---|---|---|---|\n| A — amber glass | **420 million** | 68% | **134.4 million** |\n| B — green glass | **310 million** | 92% | **24.8 million** |\n| C — flint glass | **260 million** | 80% | **52.0 million** |\n| Total | **990 million** | | **211.2 million** |\n\n| Term | Value |\n|---|---|\n| A furnace melts | **one colour per campaign** |\n| A change to another colour | **6 days** of downtime and **4.2 million** bottles of scrap |\n| Contribution of an amber bottle | **$0.039** |\n| The free capacity of the amber furnace | is not contracted: there is no demand for amber beyond the current one |\n| The free capacity of the flint furnace | is contracted under a live customer's option for the whole year: no changeover is possible |",
      "triggers_en": [
       "furnaces",
@@ -50749,7 +50769,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — доля двух крупнейших конкурентов",
      "reveal": "on_request",
      "triggers": [
       "конкуренты",
@@ -50759,7 +50779,7 @@
      ],
      "body_md": "| Условие | Значение |\n|---|---|\n| Доля двух крупнейших конкурентов | **51%** рынка |\n| Их поведение по прайсам за последние шесть лет | выравнивали цену вслед за лидером в течение **30 дней**, все шесть раз |\n| Доля посевных площадей под фермерским пересевом | **61%** |\n| Доля площадей под сертифицированными семенами | **39%** |\n| Чем ограничен прирост доли | той частью рынка, которая цену не выравнивает |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — the two largest competitors' share",
      "body_md_en": "| Term | Value |\n|---|---|\n| Share of the two largest competitors | **51%** of the market |\n| How they have behaved on price lists over the last six years | they matched the leader's price within **30 days**, all six times |\n| Share of sown area under farm-saved seed | **61%** |\n| Share of area under certified seed | **39%** |\n| What limits the gain in share | the part of the market that does not match price |",
      "triggers_en": [
       "competitors",
@@ -50922,7 +50942,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — переналадка кильблоков между заказами",
      "reveal": "on_request",
      "triggers": [
       "переналадка",
@@ -50933,7 +50953,7 @@
      ],
      "body_md": "| Условие | Значение |\n|---|---|\n| Переналадка кильблоков между заказами | **19 суток** — разная ширина корпуса |\n| Судно A обязано выйти из дока | к дню **120** окна: судно стоит в чартере |\n| Штраф за срыв чартера судна A | **$9.2M** |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — keel-block changeover between orders",
      "body_md_en": "| Term | Value |\n|---|---|\n| Resetting the keel blocks between orders | **19 days** — different hull widths |\n| Ship A must be out of the dock | by day **120** of the window: the ship is on charter |\n| Penalty for breaking ship A's charter | **$9.2M** |",
      "triggers_en": [
       "changeover",
@@ -51097,7 +51117,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — парк лифтов в надзорном реестре",
      "reveal": "on_request",
      "triggers": [
       "откуда расхождение парка",
@@ -51107,7 +51127,7 @@
      ],
      "body_md": "| Строка | Лифтов |\n|---|---|\n| В надзорном реестре за 12 месяцев | **36,850** |\n| Здания сезонной эксплуатации: цикл проверки **18 месяцев** | **3,910** |\n| Договоры расторгнуты, но остались в клиентской базе продавца | **440** |\n| Итого договоров у продавца | **41,200** |\n\n| Условие | Значение |\n|---|---|\n| Обслуживаются ли сезонные объекты | да, по действующим договорам |\n| По какому признаку объект попадает в 12-месячный реестр | по дате последней надзорной проверки |\n| Маржа обслуживания сезонного объекта | равна круглогодичной: договор годовой, регламент тот же |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — the lift fleet on the inspection register",
      "body_md_en": "| Line | Lifts |\n|---|---|\n| In the 12-month safety register | **36,850** |\n| Seasonally used buildings: inspection cycle **18 months** | **3,910** |\n| Contracts terminated but still in the seller's customer base | **440** |\n| Total contracts at the seller | **41,200** |\n\n| Term | Value |\n|---|---|\n| Are the seasonal sites maintained | yes, under live contracts |\n| What puts a site into the 12-month register | the date of the last safety inspection |\n| Maintenance margin on a seasonal site | equal to the year-round one: the contract is annual, the schedule the same |",
      "triggers_en": [
       "where the fleet discrepancy comes from",
@@ -51271,7 +51291,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — кому и когда разослан опрос удержания",
      "reveal": "on_request",
      "triggers": [
       "как проводился опрос",
@@ -51282,7 +51302,7 @@
      ],
      "body_md": "| Условие | Значение |\n|---|---|\n| Кому разослан опрос удержания | по **действующей клиентской базе на дату опроса** |\n| База рассылки опроса | клиенты, **действующие на дату рассылки** |\n| Ушли ДО рассылки и в опрос не попали | **240** точек |\n| Ушли ПОСЛЕ рассылки и в опросе отразились | **114** точек |\n| Точек поставки по бухгалтерии на конец периода | **2,486** |\n| Ушло фактически (240 + 114) | **354** точки = 12.46% |\n| Кому принадлежат ушедшие точки | **47 юрлицам** из 610 = 7.70% юрлиц |\n| Доля этих юрлиц в выручке | **21.8%** |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — who received the retention survey, and when",
      "body_md_en": "| Term | Value |\n|---|---|\n| Who the retention survey went to | the **live customer base at the date of the survey** |\n| The mailing base for the survey | customers **live at the date of the mailing** |\n| Left BEFORE the mailing and did not reach the survey | **240** points |\n| Left AFTER the mailing and showed up in the survey | **114** points |\n| Delivery points in the accounts at the end of the period | **2,486** |\n| Actually left (240 + 114) | **354** points = 12.46% |\n| Who the lost points belong to | **47 legal entities** out of 610 = 7.70% of entities |\n| Those entities' share of revenue | **21.8%** |",
      "triggers_en": [
       "how was the survey conducted",
@@ -51446,7 +51466,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — выход товарной крошки на линии",
      "reveal": "on_request",
      "triggers": [
       "что происходит с сырьём дальше",
@@ -51456,7 +51476,7 @@
      ],
      "body_md": "| Условие | Значение |\n|---|---|\n| Выход товарной крошки на нашей линии | **62%** массы сырья |\n| Выход на лучших линиях отрасли | **71%** |\n| Цена товарной крошки | **$310** за тонну |\n| Цена остатка, уходящего на топливо | **$38** за тонну |\n| Модернизация грохота и сепаратора | **$9.4M**, выводит выход на уровень лучших линий |\n| Инвестиционный барьер совета | окупаемость не более **3 лет** |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — saleable crumb yield on the line",
      "body_md_en": "| Term | Value |\n|---|---|\n| Yield of saleable crumb on our line | **62%** of the mass of raw material |\n| Yield on the best lines in the industry | **71%** |\n| Price of saleable crumb | **$310** per tonne |\n| Price of the residue that goes to fuel | **$38** per tonne |\n| Upgrading the screen and the separator | **$9.4M**, brings the yield to the level of the best lines |\n| The board's investment bar | payback of no more than **3 years** |",
      "triggers_en": [
       "what happens to the raw material next",
@@ -51619,7 +51639,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — площадки под якорным контрактом",
      "reveal": "on_request",
      "triggers": [
       "структура портфеля",
@@ -51629,7 +51649,7 @@
      ],
      "body_md": "| Условие | Значение |\n|---|---|\n| Площадок под якорным контрактом на 6 лет | **62** — расторжению не подлежат |\n| Их выручка | **$7.90M** |\n| Демонтаж оборудования и рекультивация участка | **$41,000** на площадку |\n| Штраф за досрочное расторжение аренды | **14 месяцев** аренды |\n| Инвестиционный барьер совета | окупаемость не более **3 лет** |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — sites under the anchor contract",
      "body_md_en": "| Term | Value |\n|---|---|\n| Sites under a 6-year anchor contract | **62** — they cannot be terminated |\n| Their revenue | **$7.90M** |\n| Dismantling the equipment and restoring the plot | **$41,000** per site |\n| Penalty for early termination of the lease | **14 months** of rent |\n| The board's investment bar | payback of no more than **3 years** |",
      "triggers_en": [
       "portfolio structure",
@@ -51793,7 +51813,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — лист ожидания на полную плату",
      "reveal": "on_request",
      "triggers": [
       "спрос",
@@ -51803,7 +51823,7 @@
      ],
      "body_md": "| Условие | Значение |\n|---|---|\n| Лист ожидания на **полную** плату | **812 семей** |\n| Из 639 пришедших по скидке уже стояли в этом листе | **431** |\n| Срок действия скидки по договору | до выпуска ребёнка, **до 4 лет** |\n| Можно ли отменить скидку раньше | нет: условие входит в договор с семьёй |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — the full-fee waiting list",
      "body_md_en": "| Term | Value |\n|---|---|\n| Waiting list at the **full** fee | **812 families** |\n| Of the 639 who come on the discount, already on that list | **431** |\n| Term of the discount under the contract | until the child leaves, **up to 4 years** |\n| Can the discount be cancelled earlier | no: the term is part of the contract with the family |",
      "triggers_en": [
       "demand",
@@ -51966,7 +51986,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — контракт с дистрибьютором материалов",
      "reveal": "on_request",
      "triggers": [
       "договор с дистрибьютором",
@@ -51975,7 +51995,7 @@
      ],
      "body_md": "| Условие | Значение |\n|---|---|\n| Контракт с дистрибьютором материалов | **take-or-pay $23.40M в год**, срок **3 года** |\n| Горизонт оценки сделки | **3 года** |\n| Фактическая потребность в материалах после падения приёмов | **$23.06M** |\n| Правило при расхождении сводной строки и разбивки | применяется **разбивка по группам**: сводная считалась до перевода группы C на новый договор |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — the materials distributor contract",
      "body_md_en": "| Condition | Value |\n|---|---|\n| Contract with the materials distributor | **take-or-pay $23.40M a year**, term **3 years** |\n| Horizon of the valuation | **3 years** |\n| Actual requirement for materials after the fall in visits | **$23.06M** |\n| Rule where the summary line and the breakdown disagree | the **breakdown by group** applies: the summary was calculated before group C moved to the new contract |",
      "triggers_en": [
       "contract with the distributor",
@@ -52137,7 +52157,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — эластичность спроса на плановые приёмы",
      "reveal": "on_request",
      "triggers": [
       "чувствительность к цене",
@@ -52146,7 +52166,7 @@
      ],
      "body_md": "| Условие | Значение |\n|---|---|\n| Эластичность спроса на плановые приёмы | **−1.6** — цены сравниваются онлайн до записи |\n| Эластичность спроса на экстренные приёмы | **−0.1** |\n| Доля экстренных визитов от клиентов с плановой историей в этой клинике | **71%** |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — demand elasticity for elective visits",
      "body_md_en": "| Condition | Value |\n|---|---|\n| Elasticity of demand for scheduled visits | **−1.6** — prices are compared online before booking |\n| Elasticity of demand for emergency visits | **−0.1** |\n| Share of emergency visits from clients with a scheduled history at this clinic | **71%** |",
      "triggers_en": [
       "sensitivity to price",
@@ -52308,7 +52328,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — мощности по узлам переработки",
      "reveal": "on_request",
      "triggers": [
       "фасовка",
@@ -52318,7 +52338,7 @@
      ],
      "body_md": "| Узел | Мощность |\n|---|---|\n| Обжарка | **41,000 т** в год |\n| Фасовка в вентилируемый пакет | **29,000 т** в год |\n| Склад зелёного зерна | **2,600 т** единовременно, **11 оборотов** в год |\n\n| Условие | Значение |\n|---|---|\n| Расширение фасовки | **$7.8M**, мощность после — **36,000 т** |\n| Расширение склада зелёного зерна | **$4.1M**, вместимость после — **3,300 т** (36,300 т в год) |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — capacity by processing stage",
      "body_md_en": "| Node | Capacity |\n|---|---|\n| Roasting | **41,000 t** a year |\n| Packing into a valved bag | **29,000 t** a year |\n| Green bean warehouse | **2,600 t** at a time, **11 turns** a year |\n\n| Condition | Value |\n|---|---|\n| Expanding the packing | **$7.8M**, capacity after — **36,000 t** |\n| Expanding the green bean warehouse | **$4.1M**, capacity after — **3,300 t** (36,300 t a year) |",
      "triggers_en": [
       "pack size",
@@ -52481,7 +52501,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — номерной фонд до реновации",
      "reveal": "on_request",
      "triggers": [
       "что ещё изменила реновация",
@@ -52490,7 +52510,7 @@
      ],
      "body_md": "| Условие | Значение |\n|---|---|\n| Номерной фонд до реновации | **18,400** |\n| Номерной фонд после | **21,600** |\n| Входят ли новые номера в базу заполняемости | да, с даты ввода |\n| На что начисляется роялти | на **номерную выручку**, знаменателя не имеет |\n| На что считается RevPAR | на **доступный номер** |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — room stock before the refurbishment",
      "body_md_en": "| Condition | Value |\n|---|---|\n| Room stock before the refurbishment | **18,400** |\n| Room stock after | **21,600** |\n| Do the new rooms enter the occupancy base | yes, from the date they open |\n| What the royalty is charged on | on **rooms revenue**, which has no denominator |\n| What RevPAR is measured on | on the **available room** |",
      "triggers_en": [
       "what else did the renovation change",
@@ -52653,7 +52673,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — условия досрочного возврата аренды",
      "reveal": "on_request",
      "triggers": [
       "условия досрочного расторжения",
@@ -52663,7 +52683,7 @@
      ],
      "body_md": "| Условие | Значение |\n|---|---|\n| Доля оставшегося срока аренды, оплачиваемая при возврате | **85%** |\n| Отстой возвращаемого вагона до конца срока договора | **$1,750** на вагон в год |\n| Ставка субаренды третьей стороне | **$10,200** на вагон в год |\n| Оставшийся срок договоров аренды | **4 года** |\n| Кто платит ремонт при субаренде | субарендатор |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — terms of early lease surrender",
      "body_md_en": "| Condition | Value |\n|---|---|\n| Share of the remaining lease term payable on return | **85%** |\n| Storage of a returned wagon to the end of the agreement | **$1,750** per wagon a year |\n| Sub-lease rate to a third party | **$10,200** per wagon a year |\n| Remaining term of the lease agreements | **4 years** |\n| Who pays for repair under a sub-lease | the sub-lessee |",
      "triggers_en": [
       "early termination conditions",
@@ -52826,7 +52846,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — лучи и загрузка по зонам",
      "reveal": "on_request",
      "triggers": [
       "лучи",
@@ -52836,7 +52856,7 @@
      ],
      "body_md": "| Зона | Лучей | Загрузка |\n|---|---|---|\n| Густонаселённые | **12** | **94%** |\n| Пригород | **19** | **78%** |\n| Редконаселённые | **23** | **46%** |\n| Итого | **54** | |\n\n| Условие | Значение |\n|---|---|\n| Ёмкость на один луч | **90.0 Гбит/с** |\n| Переносится ли ёмкость между лучами | **нет**: луч светит в свою зону |\n| Где стоит неудовлетворённый спрос | в густонаселённых зонах |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — beams and utilisation by zone",
      "body_md_en": "| Zone | Beams | Utilisation |\n|---|---|---|\n| Densely populated | **12** | **94%** |\n| Suburban | **19** | **78%** |\n| Sparsely populated | **23** | **46%** |\n| Total | **54** | |\n\n| Condition | Value |\n|---|---|\n| Capacity of one beam | **90.0 Gbit/s** |\n| Is capacity transferable between beams | **no**: a beam shines into its own zone |\n| Where the unmet demand stands | in the densely populated zones |",
      "triggers_en": [
       "spokes",
@@ -53000,7 +53020,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — что открывается на месте закрытых точек",
      "reveal": "on_request",
      "triggers": [
       "независимые шиномонтажи",
@@ -53009,7 +53029,7 @@
      ],
      "body_md": "| Условие | Значение |\n|---|---|\n| Доля закрытых точек, на месте которых в течение года открывается независимый шиномонтаж | **71%** |\n| Что происходит со спросом района при таком открытии | остаётся на месте: перетока в нашу соседнюю точку нет |\n| Почему место занимают | аренда освобождается, а спрос никуда не уходит |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — what opens where the sites close",
      "body_md_en": "| Condition | Value |\n|---|---|\n| Share of closed outlets on whose site an independent tyre shop opens within a year | **71%** |\n| What happens to demand in the district when one opens | it stays where it is: there is no spill-over to our neighbouring outlet |\n| Why the site is taken | the lease is freed up and the demand does not go anywhere |",
      "triggers_en": [
       "independent tyre shops",
@@ -53171,7 +53191,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — окно для монтажа досветки",
      "reveal": "on_request",
      "triggers": [
       "межцикловое окно",
@@ -53181,7 +53201,7 @@
      ],
      "body_md": "| Условие | Значение |\n|---|---|\n| Монтаж досветки возможен | только в межцикловое окно, ближайшее через **9 месяцев** |\n| Цикл культуры от посадки до последнего сбора | **11 месяцев** |\n| Срок заказа рассады до посадки | **5 месяцев** |\n| Первый урожай с досветкой | через **2 года** |\n| Можно ли расторгнуть контракт досрочно | нет |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — the window for installing supplementary lighting",
      "body_md_en": "| Condition | Value |\n|---|---|\n| Installing the lighting is possible | only in the window between cycles, the next one in **9 months** |\n| Cycle of the crop from planting to the last harvest | **11 months** |\n| Lead time for ordering seedlings before planting | **5 months** |\n| First harvest with the lighting | in **2 years** |\n| Can the contract be terminated early | no |",
      "triggers_en": [
       "inter-cycle window",
@@ -53344,7 +53364,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — фактический расход краски на объекте",
      "reveal": "on_request",
      "triggers": [
       "расход на объекте",
@@ -53354,7 +53374,7 @@
      ],
      "body_md": "| Условие | Значение |\n|---|---|\n| Фактический расход нашей краски на объекте | **0.17 л/м²** |\n| Фактический расход краски конкурента | **0.14 л/м²** |\n| По какому расходу считается тендер | по **фактическому**, замеренному на объекте |\n| Почему у конкурента факт равен паспорту | его система наносится валиком, потерь на распыл нет; мы наносим безвоздушным распылением |\n| Политика закупок клиента | контракт получает дешевейший по стоимости покрытия квадратного метра |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — actual paint consumption on site",
      "body_md_en": "| Condition | Value |\n|---|---|\n| Actual consumption of our paint on site | **0.17 l/m²** |\n| Actual consumption of the competitor's paint | **0.14 l/m²** |\n| Which consumption the tender is measured on | on the **actual** one, measured on site |\n| Why the competitor's actual equals its datasheet | its system is applied by roller, with no losses to overspray; we apply by airless spray |\n| The client's procurement policy | the contract goes to the cheapest by cost of coating a square metre |",
      "triggers_en": [
       "spend at the site",
@@ -53517,7 +53537,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — темп устаревания карты",
      "reveal": "on_request",
      "triggers": [
       "устаревание",
@@ -53527,7 +53547,7 @@
      ],
      "body_md": "| Условие | Значение |\n|---|---|\n| Устаревание карты | **5%** годной доли в год |\n| Годная доля, при которой заказчик принимает | не ниже **92%** |\n| Цикл продаж от готовности до контракта | **14 месяцев** |\n| На сколько коридоров делится сеть | **6** |\n| Когда замерена заявленная годная доля 100% | **сразу после обновления** |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — the rate at which the map goes stale",
      "body_md_en": "| Condition | Value |\n|---|---|\n| Ageing of the map | **5%** of the usable share a year |\n| Usable share at which the customer accepts | not below **92%** |\n| Sales cycle from readiness to contract | **14 months** |\n| How many corridors the network splits into | **6** |\n| When the stated usable share of 100% was measured | **immediately after the update** |",
      "triggers_en": [
       "obsolescence",
@@ -53690,7 +53710,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — эластичность спроса на зарядку по тарифу",
      "reveal": "on_request",
      "triggers": [
       "чувствительность к тарифу",
@@ -53700,7 +53720,7 @@
      ],
      "body_md": "| Условие | Значение |\n|---|---|\n| Эластичность спроса на зарядку по тарифу | **−0.9** |\n| Время подключения порта | **31%** календарного времени = 2,716 ч на порт |\n| Доля этого времени, когда идёт зарядка | **62%** = 1,684 ч |\n| Доля времени подключения, когда машина стоит уже заряженной | **38%** |\n| Доля простоя, приходящаяся на часы пик | **68%** — свободных портов на площадке нет, машина уезжает незаряженной |\n| Две конвенции загрузки | «время подключения» и «время зарядки» — тариф берётся за кВт·ч, то есть только за вторую |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — charging demand elasticity to the tariff",
      "body_md_en": "| Condition | Value |\n|---|---|\n| Elasticity of demand for charging to the tariff | **−0.9** |\n| Time a charge point is connected | **31%** of calendar time = 2,716 h per point |\n| Share of that time when charging is actually happening | **62%** = 1,684 h |\n| Share of the connected time when the car stands already charged | **38%** |\n| Share of that idle time falling in the peak hours | **68%** — there are no free points on the site and the car drives away uncharged |\n| The two conventions of utilisation | \"time connected\" and \"time charging\" — the tariff is per kWh, that is, for the second only |",
      "triggers_en": [
       "sensitivity to tariff",
@@ -53863,7 +53883,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — балансовая стоимость и ёмкость соседнего города",
      "reveal": "on_request",
      "triggers": [
       "балансовая стоимость",
@@ -53873,7 +53893,7 @@
      ],
      "body_md": "| Условие | Значение |\n|---|---|\n| Балансовая стоимость единицы | **$310** |\n| Свободная ёмкость по разрешению соседнего города | **3,100** самокатов |\n| Тариф перевозчика при партии свыше двух тысяч единиц | не растёт; при удвоении до **$168** вариант всё равно считается |\n| Вклад $260 в соседнем городе | замерен по действующему там парку оператора, не перенесён из исходного |\n| Меняется ли остаточный срок службы при перевозке | нет |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — book value and the neighbouring city's headroom",
      "body_md_en": "| Condition | Value |\n|---|---|\n| Book value of a unit | **$310** |\n| Free capacity under the neighbouring city's permit | **3,100** scooters |\n| The carrier's tariff on a lot above two thousand units | does not rise; even if it doubled to **$168** the option still works out |\n| The contribution of $260 in the neighbouring city | measured on the operator's fleet already working there, not carried over from the original one |\n| Does the remaining service life change on the move | no |",
      "triggers_en": [
       "balance sheet value",
@@ -54036,7 +54056,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — зоны: доля пашни, охват страхованием, убыточность",
      "reveal": "on_request",
      "triggers": [
       "охват по зонам",
@@ -54046,7 +54066,7 @@
      ],
      "body_md": "| Зона | Доля пашни страны | Застраховано площадей зоны | Убыточность зоны |\n|---|---|---|---|\n| Низкий риск | 62% | 9% | 31% |\n| Средний риск | 24% | 28% | 66% |\n| Высокий риск | 14% | 71% | 126% |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — zones: arable share, insured share, loss ratio",
      "body_md_en": "| Zone | Share of the country's arable land | Area of the zone insured | Loss ratio of the zone |\n|---|---|---|---|\n| Low risk | 62% | 9% | 31% |\n| Medium risk | 24% | 28% | 66% |\n| High risk | 14% | 71% | 126% |",
      "triggers_en": [
       "coverage by zone",
@@ -54209,7 +54229,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — плечо доставки и плотность маршрутов",
      "reveal": "on_request",
      "triggers": [
       "маршруты",
@@ -54219,7 +54239,7 @@
      ],
      "body_md": "| Плечо доставки | Значение |\n|---|---|\n| Наших маршрутов в неделю в этом регионе | **2,140** |\n| Сокращение пробега на маршрут при отгрузке со склада цели | **31 км** |\n| Полная стоимость километра рефрижератора | **$1.94** |\n| Рабочих недель в году | **52** |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — delivery leg and route density",
      "body_md_en": "| Delivery leg | Value |\n|---|---|\n| Our routes a week in this region | **2,140** |\n| Reduction in mileage per route when shipping from the target's warehouse | **31 km** |\n| Full cost of a refrigerated kilometre | **$1.94** |\n| Working weeks in a year | **52** |",
      "triggers_en": [
       "routes",
@@ -54383,7 +54403,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — контракт на электроэнергию",
      "reveal": "on_request",
      "triggers": [
       "контракт на электроэнергию",
@@ -54393,7 +54413,7 @@
      ],
      "body_md": "| Контракт на электроэнергию | Значение |\n|---|---|\n| Форма | PPA **take-or-pay** |\n| Обязательный годовой платёж | **$28.50M** |\n| Осталось до конца обязательства | **4 года** |\n| Фактическая потребность при сниженном выпуске | **$20.53M** |\n| Перепродажа неиспользованного объёма | невозможна: точка поставки привязана к заводу |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — the power contract",
      "body_md_en": "| Electricity contract | Value |\n|---|---|\n| Form | PPA **take-or-pay** |\n| Compulsory annual payment | **$28.50M** |\n| Left until the end of the obligation | **4 years** |\n| Actual requirement at the reduced output | **$20.53M** |\n| Resale of the unused volume | impossible: the delivery point is tied to the plant |",
      "triggers_en": [
       "electricity contract",
@@ -54569,7 +54589,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — отливки: объём, формо-часы, масса",
      "reveal": "on_request",
      "triggers": [
       "формо-часы",
@@ -54579,7 +54599,7 @@
      ],
      "body_md": "| Отливка | Штук в год | Формо-часов на штуку | Масса штуки, т |\n|---|---|---|---|\n| Лёгкая | 19,400 | 0.9 | 0.34 |\n| Тяжёлая | 9,800 | 1.6 | 1.85 |\n\n**Годовой фонд формовочной линии — 41,600 формо-часов.**",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — castings: volume, mould-hours, weight",
      "body_md_en": "| Casting | Units a year | Mould-hours per unit | Weight of a unit, t |\n|---|---|---|---|\n| Light | 19,400 | 0.9 | 0.34 |\n| Heavy | 9,800 | 1.6 | 1.85 |\n\n**The annual fund of the moulding line is 41,600 mould-hours.**",
      "triggers_en": [
       "mould-hours",
@@ -54744,7 +54764,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — запас пропускной способности по звеньям цепочки",
      "reveal": "on_request",
      "triggers": [
       "пропускная способность",
@@ -54754,7 +54774,7 @@
      ],
      "body_md": "| Звено цепочки | Запас пропускной способности |\n|---|---|\n| Производство | 26% |\n| Склад и комплектация | 12% |\n| Доставка до дилера | 7% |\n\nПрирост +18% замерен в двух регионах на этапе их запуска, когда доставка там\nработала с большим запасом; сейчас регионов с таким запасом в сети нет.",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — headroom by link in the chain",
      "body_md_en": "| Link in the chain | Headroom in throughput |\n|---|---|\n| Production | 26% |\n| Warehouse and picking | 12% |\n| Delivery to the dealer | 7% |\n\nThe +18% uplift was measured in two regions at the stage when they were being\nlaunched, when delivery there was working with plenty of headroom; there are no\nregions with that much headroom in the network now.",
      "triggers_en": [
       "throughput",
@@ -54917,7 +54937,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — проектная мощность завода фракционирования",
      "reveal": "on_request",
      "triggers": [
       "завод фракционирования",
@@ -54928,7 +54948,7 @@
      ],
      "body_md": "| Завод фракционирования | Значение |\n|---|---|\n| Проектная мощность | **1,480 тыс. литров в год** |\n| Фактическая переработка | **1,050.8 тыс. литров в год** |\n| Из ставки $74 — реагенты и расходные материалы | **$16 на литр** |\n| Из ставки $74 — содержание мощностей и амортизация | **$58 на литр** |\n| Ставка рассчитана делением годовых затрат завода | на фактическую переработку |\n| Плата донору в сопоставимых метро после входа конкурента | **$78 на литр** |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — the fractionation plant's design capacity",
      "body_md_en": "| Fractionation plant | Value |\n|---|---|\n| Design capacity | **1,480 thousand litres a year** |\n| Actual throughput | **1,050.8 thousand litres a year** |\n| Of the $74 rate — reagents and consumables | **$16 per litre** |\n| Of the $74 rate — upkeep of capacity and depreciation | **$58 per litre** |\n| The rate is calculated by dividing the plant's annual costs | by actual throughput |\n| Payment to the donor in comparable metros after a competitor entered | **$78 per litre** |",
      "triggers_en": [
       "fractionation plant",
@@ -55092,7 +55112,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — результаты пилота в двух рынках",
      "reveal": "on_request",
      "triggers": [
       "пилот",
@@ -55102,7 +55122,7 @@
      ],
      "body_md": "| Пилот в двух рынках, год | Значение |\n|---|---|\n| Падение числа невозвратов, замер по клиентам, оставшимся в пуле | **38%** |\n| Доля рейсов, ушедшая на одноразовый паллет (пилот, в пересчёте на сеть) | **14%** |\n| Невозвраты по клиенту | пропорциональны числу его рейсов |\n| Оговорка о наилучшей цене в договорах трёх крупнейших клиентов | публикация нового тарифного условия пересчитывает их тариф **с начала договорного года** |\n| Разовый эффект такого пересчёта | **$0.86M** |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — pilot results in two markets",
      "body_md_en": "| Pilot in two markets, one year | Value |\n|---|---|\n| Fall in the number of non-returns, measured on clients who stayed in the pool | **38%** |\n| Share of trips that moved to a one-way pallet (pilot, restated to the network) | **14%** |\n| Non-returns by client | proportional to the number of his trips |\n| Most-favoured-price clause in the agreements of the three largest clients | publishing a new tariff condition restates their tariff **from the start of the contract year** |\n| One-off effect of that restatement | **$0.86M** |",
      "triggers_en": [
       "pilot",
@@ -55265,7 +55285,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — где замеряется размерная доля улова",
      "reveal": "on_request",
      "triggers": [
       "как снимаются карточки",
@@ -55275,7 +55295,7 @@
      ],
      "body_md": "| Источник размерной доли | Значение |\n|---|---|\n| Карточки сортировки завода — точка замера | после отвода мелкой рыбы в блок |\n| Карточки сортировки завода — доля не легче 340 г | **71%** |\n| Съёмка при выгрузке судна — точка замера | до разделения потока |\n| Съёмка при выгрузке судна — доля не легче 340 г | **44%** |\n| Правило компании при расхождении источников | берётся источник, замеренный **до** разделения потока |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — where the size mix of the catch is measured",
      "body_md_en": "| Source of the size share | Value |\n|---|---|\n| The plant's grading cards — point of measurement | after the small fish is diverted into the block |\n| The plant's grading cards — share not lighter than 340 g | **71%** |\n| The survey at vessel discharge — point of measurement | before the flow is split |\n| The survey at vessel discharge — share not lighter than 340 g | **44%** |\n| The company's rule where sources disagree | the source measured **before** the flow is split is taken |",
      "triggers_en": [
       "how are the cards collected",
@@ -55438,7 +55458,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit ex2",
+     "title": "Exhibit 2 — затраты на замену белья и срок службы комплекта",
      "reveal": "on_request",
      "triggers": [
       "структура затрат",
@@ -55448,7 +55468,7 @@
      ],
      "body_md": "| Затраты | Значение |\n|---|---|\n| Замена белья | **$26.90M** = 21.0% выручки |\n| Средний срок службы комплекта | **68 стирок** |\n| Отраслевой ориентир | **92 стирки** |\n| Доля списаний из-за утраты на площадке клиента | **61%** |\n| Доля списаний из-за износа ткани | 39% |",
      "render": null,
-     "title_en": "Exhibit ex2",
+     "title_en": "Exhibit 2 — linen replacement cost and set life",
      "body_md_en": "| Costs | Value |\n|---|---|\n| Replacement of linen | **$26.90M** = 21.0% of revenue |\n| Average life of a set | **68 washes** |\n| Industry benchmark | **92 washes** |\n| Share of write-offs due to loss at the client's site | **61%** |\n| Share of write-offs due to wear of the fabric | 39% |",
      "triggers_en": [
       "cost structure",

@@ -3295,74 +3295,88 @@
   },
   {
    "id": "CM-043",
-   "title": "Efficiency Project Payback",
+   "title": "Six Years in the Cellar",
    "difficulty": "Hard",
    "type": "Trap",
-   "focus": "F18(c)+F06(b)",
+   "focus": "F24(a) streams that start on different dates",
    "time": "8 min",
    "render": "table(5) · reveal(3)",
-   "prompt": "Mendrio evaluates a $600,000 efficiency project. Accounting profit $300,000/year → \"payback 2 years.\" But it ties up an extra $120,000/year in working capital. What's the cash-based payback, and which should drive the decision?",
+   "prompt": "Wine & Co. is a niche red-wine maker in the San Francisco Bay area. It has just acquired 12 acres outside the city and will plant the whole plot with one grape — Merlot or Bordeaux, not both. Merlot must sit in the cellar 6 years before a single bottle can be sold; Bordeaux must sit 12. Costs are incurred only in the years revenue is realised, so neither line spends anything while its wine is ageing. Which grape should Wine & Co. plant?",
    "exhibit": {
     "type": "table",
     "header": [
      "Item",
-     "Value"
+     "Merlot",
+     "Bordeaux"
     ],
     "rows": [
      [
-      "Investment",
-      "$600,000"
+      "Land planted, at 1,000 kg of grapes per acre per year",
+      "12 acres",
+      "12 acres"
      ],
      [
-      "Annual accounting profit",
-      "$300,000"
+      "Wine per kg of grapes",
+      "2 litres",
+      "1 litre"
      ],
      [
-      "Annual extra WC tied",
-      "$120,000"
+      "Price per litre",
+      "$20",
+      "$40"
+     ],
+     [
+      "Profit margin",
+      "10%",
+      "15%"
+     ],
+     [
+      "Years in the cellar before any revenue",
+      "6",
+      "12"
      ]
     ]
    },
    "step_prompts": [
-    "Accounting payback.",
-    "Annual cash generated (after WC).",
-    "Cash payback — which of the two paybacks should drive the decision?"
+    "Annual profit for each wine.",
+    "Wine & Co. uses a 12% cost of capital. What is each wine's stream of profit worth as of the year that wine's revenue begins?",
+    "Which grape should Wine & Co. plant?"
    ],
-   "company": "Mendrio",
-   "industry": "Wholesale-distribution",
+   "company": "Wine & Co.",
+   "industry": "Wine (CPG)",
    "checklist": {
-    "en": "(1) accounting payback 2.0; (2) annual cash $180,000; (3) cash payback 3.33 years, ±0.01; (4) conclusion: decide on cash payback.",
-    "ru": "(1) accounting payback 2.0; (2) annual cash $180,000; (3) cash payback 3.33 года, ±0.01; (4) вывод: решать по cash payback."
+    "en": "(1) annual profit derived for both wines from acreage, yield per kg, price per litre and margin - not asserted; (2) revenue is computed on both lines and the two are stated to be equal before margins are applied; (3) each wine's whole stream of profit is valued, not a single year of it; (4) the two figures finally set against each other are shown to be comparable, and the candidate states on what basis; (5) verdict names one grape and says whether it agrees with the annual-profit ranking. Bonus, not required for credit: storage and inventory cost over the ageing years, sensitivity to the rate, and the opportunity cost of the land named as factors the numbers do not carry.",
+    "ru": "(1) годовая прибыль выведена для обоих вин из площади, выхода с килограмма, цены за литр и маржи - не объявлена; (2) выручка посчитана на обеих линиях, и их равенство названо до применения маржи; (3) оценён весь поток прибыли каждого вина, а не один его год; (4) две величины, которые в итоге ставятся друг против друга, показаны как сопоставимые, и кандидат называет основание сопоставимости; (5) вердикт называет один сорт и говорит, совпадает ли он с ранжированием по годовой прибыли. Bonus, not required for credit: затраты на хранение и запасы за годы выдержки, чувствительность к ставке и альтернативная стоимость земли названы как факторы, которых числа не несут."
    },
    "reference": {
-    "en": "- Step 1. Accounting payback = 600,000/300,000 = **2.0 years**.\n- Step 2. Annual cash = profit − WC-drag = 300,000 − 120,000 = **$180,000**.\n- Step 3. Cash payback = 600,000/180,000 = **3.33 years**. The profit-based payback flatters: the project ties up $120k in WC every year, so the real cash payback is 1.33 years longer. Decide on cash payback.",
-    "ru": "- Шаг 1. Accounting payback = 600,000/300,000 = **2.0 года**.\n- Шаг 2. Annual cash = profit − WC-drag = 300,000 − 120,000 = **$180,000**.\n- Шаг 3. Cash payback = 600,000/180,000 = **3.33 года**. Прибыльный payback приукрашивает: проект ежегодно связывает $120k в WC, поэтому реальная окупаемость по кэшу на 1.33 года дольше. Решение — по cash payback."
+    "en": "Source: Kellogg Consulting Club Casebook 2012, Case 22 \"Wine & Co.\", pp. 166-170. Taken from those pages: 12 acres and 1,000 kg of grapes per acre per year; Merlot 2 litres/kg at $20 per litre and Bordeaux 1 litre/kg at $40 per litre; margins 10% and 15%; the printed revenue of $480,000 for both wines and the printed annual profits \"$72,000 for Bordeaux vs. $48,000 for Merlot\"; ageing of 6 years for Merlot and 12 for Bordeaux; the 12% rate (the book releases it only on request); costs incurred only when revenue is realised; the perpetuity values $400,000 in year 6 and $600,000 in year 12; the year-6 figure of $300,000 for Bordeaux, obtained in the book by the Rule of 72; and the verdict — manufacture Merlot.\n\n- Step 1. Grapes: 12 x 1,000 = 12,000 kg a year, the same for either grape. Merlot revenue = 12,000 x 2 x 20 = $480,000. Bordeaux revenue = 12,000 x 1 x 40 = $480,000 — identical, and the book says so. Annual profit: Merlot 480,000 x 10% = **$48,000**; Bordeaux 480,000 x 15% = **$72,000**. Cross-check: revenue x margin = profit holds on both lines. On this line Bordeaux is ahead by 72,000 / 48,000 = 1.5, i.e. 50% (built).\n- Step 2. Once a line starts selling it sells for ever, and costs arrive only with revenue, so each line is a level stream from its own first year. At 12%: Merlot, as of year 6, 48,000 / 0.12 = **$400,000**. Bordeaux, as of year 12, 72,000 / 0.12 = **$600,000**. Set side by side, Bordeaux still looks better — and that is the trap, because $400,000 is a year-6 number and $600,000 is a year-12 number.\n- Step 3. Bring Bordeaux back to year 6, the six-year gap between the two start dates. Rule of 72: 72 / 12 = 6 years to double, so a sum standing six years further out is worth half of itself here — 600,000 / (1.12^6) ≈ 600,000 / 2 = **$300,000**, the figure the book prints. Rounding named: 1.12^6 = 1.97382, so the unrounded value is 600,000 / 1.97382 = $303,979 (built, rounded to the dollar; the book's $300,000 is the Rule-of-72 approximation). $303,979 is still far below $400,000, so the verdict does not hang on the approximation.\n- Verdict. Measured as of the same year, Merlot $400,000 beats Bordeaux $300,000 by $100,000 — Merlot is 400,000 / 300,000 = 1.333, i.e. 33.3% higher (built). The ranking reverses: the grape with the **lower** annual profit is the one to plant. Wine & Co. should manufacture Merlot. Read it as two multipliers on one base: the fatter margin multiplies Bordeaux by 72,000 / 48,000 = 1.5, and the six extra years in the cellar multiply it by 0.5 at 12%. Together 1.5 x 0.5 = 0.75, so Bordeaux lands at three quarters of Merlot - 300,000 / 400,000 = 0.75 - and the halving outweighs the 1.5x by a quarter of Merlot's value.",
+    "ru": "Source: Kellogg Consulting Club Casebook 2012, Case 22 «Wine & Co.», стр. 166-170. Со страниц взято: 12 акров и 1 000 кг винограда с акра в год; Merlot 2 литра с кг по $20 за литр и Bordeaux 1 литр с кг по $40 за литр; маржа 10% и 15%; напечатанная выручка $480,000 у обоих вин и напечатанная годовая прибыль «$72,000 for Bordeaux vs. $48,000 for Merlot»; выдержка 6 лет у Merlot и 12 лет у Bordeaux; ставка 12% (книга выдаёт её только по запросу); затраты возникают только тогда, когда возникает выручка; значения вечной ренты $400,000 в году 6 и $600,000 в году 12; величина $300,000 для Bordeaux в году 6, полученная в книге по правилу 72; и вывод книги — производить Merlot.\n\n- Шаг 1. Виноград: 12 x 1 000 = 12 000 кг в год, одинаково для обоих сортов. Выручка Merlot = 12 000 x 2 x 20 = $480,000. Выручка Bordeaux = 12 000 x 1 x 40 = $480,000 — одна и та же, и книга это фиксирует. Годовая прибыль: Merlot 480,000 x 10% = **$48,000**; Bordeaux 480,000 x 15% = **$72,000**. Перекрёстная сверка: выручка x маржа = прибыль сходится на обеих линиях. На этой строке Bordeaux впереди в 72,000 / 48,000 = 1.5 раза, то есть на 50% (ПОСТРОЕНО).\n- Шаг 2. Как только линия начинает продавать, она продаёт бесконечно, а затраты приходят только вместе с выручкой — значит каждая линия есть ровный поток от своего первого года. При 12%: Merlot на год 6 — 48,000 / 0.12 = **$400,000**. Bordeaux на год 12 — 72,000 / 0.12 = **$600,000**. Поставленные рядом, эти числа снова отдают победу Bordeaux — и в этом ловушка: $400,000 относится к году 6, а $600,000 — к году 12.\n- Шаг 3. Переносим Bordeaux на год 6, разрыв между датами старта — шесть лет. Правило 72: 72 / 12 = 6 лет на удвоение, поэтому сумма, стоящая на шесть лет дальше, стоит здесь половину себя: 600,000 / (1.12^6) ≈ 600,000 / 2 = **$300,000** — ровно та величина, которую печатает книга. Округление называю явно: 1.12^6 = 1.97382, поэтому неокруглённое значение равно 600,000 / 1.97382 = $303,979 (ПОСТРОЕНО, округлено до доллара; книжные $300,000 — приближение по правилу 72). $303,979 всё равно намного ниже $400,000, поэтому вывод не держится на приближении.\n- Вердикт. На одну и ту же дату Merlot $400,000 обходит Bordeaux $300,000 на $100,000 — Merlot выше в 400,000 / 300,000 = 1.333 раза, то есть на 33.3% (ПОСТРОЕНО). Ранг переворачивается: сажать надо сорт с **меньшей** годовой прибылью. Wine & Co. следует производить Merlot. Читается как два множителя на одной базе: более жирная маржа умножает Bordeaux на 72,000 / 48,000 = 1.5, а шесть лишних лет в погребе умножают его на 0.5 при ставке 12%. Вместе 1.5 x 0.5 = 0.75, то есть Bordeaux приходит к трём четвертям Merlot — 300,000 / 400,000 = 0.75 — и деление пополам перевешивает множитель 1.5 на четверть стоимости Merlot."
    },
    "provoked": {
-    "en": "accounting payback ignores WC-drag; the cash horizon is longer.",
-    "ru": "accounting payback игнорирует WC-drag; кэш-горизонт длиннее."
+    "en": "ranks the two wines by annual profit — $72,000 against $48,000 — and reads the 6 and 12 years as background colour; valuing each stream as of its own starting year, $600,000 against $400,000, repeats the same error with bigger numbers and feels rigorous.",
+    "ru": "ранжирует вина по годовой прибыли — $72,000 против $48,000 — и читает 6 и 12 лет как фон; оценка каждого потока на его собственный год старта, $600,000 против $400,000, повторяет ту же ошибку более крупными числами и при этом ощущается строгой."
    },
    "family_h25": "F2",
    "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
-    "naive": "считает срок возврата по учётной прибыли, не вычитая замороженный оборотный капитал",
-    "correct": "считает срок возврата по денежному потоку после вычета прироста оборотного капитала",
-    "why": "часть прибыли оседает в дебиторке и запасах и потому не возвращает вложенные деньги",
-    "code": "MECH-24-прибыль-вместо-денег",
+    "naive": "сравнивает два проекта по годовой прибыли, хотя их потоки начинаются в разные годы",
+    "correct": "приводит оба потока к одной дате и сравнивает приведённые величины",
+    "why": "более поздний старт съедает преимущество в годовой прибыли через дисконтирование",
+    "code": "MECH-114-сравнение-потоков-с-разных-дат",
     "code2": []
    },
-   "family_note": "круг 103: сам проект ежегодно замораживает $120k в обороте, поэтому вложенное возвращается из $180k денег, а не из $300k учётной прибыли"
+   "family_note": "F2, а не F1: что именно неверно — база, по которой считают, или поправка второго порядка поверх верной базы? — здесь база верна. Годовая прибыль каждой линии посчитана на правильной выручке (12 000 кг x выход x цена) и на правильной марже, и обе величины напечатаны в книге; чинить в базе нечего. Неверно только то, что две верные величины сравниваются без приведения к общей дате, а это поправка второго порядка поверх верной базы. Обратная доточка — F1, а не F2, стояла бы, если бы сама годовая прибыль считалась не на той базе: например, маржа бралась бы от объёма в литрах, а не от выручки, или выручка считалась бы с акра вместо всех двенадцати. Тогда ремонт шёл бы в знаменателе базы, и второй порядок не ставился бы вовсе."
   },
   {
    "id": "CM-044",
-   "title": "Simple Seats",
+   "title": "One Model, One Customer",
    "difficulty": "Easy",
    "type": "Clean",
-   "focus": "F01(c)",
+   "focus": "F25(a) a closed year counted at its own price",
    "time": "3 min",
    "render": "table(3) · input",
-   "prompt": "Ulvrex SaaS: $25/seat recurring revenue, $5 variable, $120,000 fixed. How many seats to break even?",
+   "prompt": "Dark Sky is a small manufacturer of unmanned data collection aircraft. It sells one model, the Assessor, to a single customer - the U.S. Military - and the Assessor has been its only source of revenue throughout the past decade, at a price that has not moved in that time. Sales have stagnated and the client wants to grow. The supply contract is up for renegotiation, and the Military has agreed to a 10% Assessor price increase; the sales forecast built on the agreed price runs from next year. Dark Sky's 2010 results are in. Before the growth conversation starts, size the base: how many Assessors did Dark Sky sell in 2010?",
    "exhibit": {
     "type": "table",
     "header": [
@@ -3371,45 +3385,45 @@
     ],
     "rows": [
      [
-      "Recurring revenue / seat",
-      "$25"
+      "Assessor revenue",
+      "$5,000k"
      ],
      [
-      "Variable / seat",
-      "$5"
+      "Assessor price per aircraft",
+      "$100,000"
      ],
      [
-      "Fixed",
-      "$120,000"
+      "Agreed Assessor price after renegotiation",
+      "$110,000"
      ]
     ]
    },
    "step_prompts": [
-    "Breakeven seats."
+    "Assessors sold in 2010."
    ],
-   "company": "Ulvrex",
-   "industry": "SaaS",
+   "company": "Dark Sky Co.",
+   "industry": "Aerospace & Defense",
    "checklist": {
-    "en": "(1) CM/seat $20; (2) breakeven 6,000 seats, exact; (3) last mile — how many to sell to reach zero.",
-    "ru": "(1) CM/seat $20; (2) breakeven 6,000 seats, exact; (3) last mile — сколько продать для нуля."
+    "en": "(1) one figure for 2010 given in aircraft, not in dollars; (2) the arithmetic shown rather than asserted - a revenue divided by a price per aircraft, with the unit of the result named and the thousands in the revenue line handled explicitly; (3) last mile - says what the count is and is not evidence of before it is carried into the growth conversation: it sizes one year of a single-product, single-customer business, and it says nothing yet about profit or about what next year will look like. Bonus, not required for credit: names the year from which the agreed price starts to work and what it changes in that year.",
+    "ru": "(1) одно число за 2010 год, названное в аппаратах, а не в долларах; (2) арифметика показана, а не объявлена — выручка, делённая на цену за аппарат, с названной единицей результата и с явно снятыми тысячами в строке выручки; (3) last mile — сказано, доказательством чего это число является и чем не является, прежде чем нести его в разговор о росте: оно измеряет один год бизнеса с одним продуктом и одним заказчиком и пока не говорит ничего ни о прибыли, ни о том, каким будет следующий год. Bonus, not required for credit: назвать год, с которого согласованная цена начинает работать, и что она меняет в этом году."
    },
    "reference": {
-    "en": "- CM/seat = 25 − 5 = $20. Breakeven = 120,000/20 = **6,000 seats**. Direct calculation, no steps/tiers (Easy).\n\nThe verdict moves one parameter to a point: contribution margin 25 - 5 = $20 per seat, breakeven 120,000 / 20 = 6,000 seats. The second lever is the $120,000 of fixed cost, which the calculation treats as given, and the record supplies its own magnitude — the variable cost is 5 / 25 = 20% of the recurring revenue per seat, read straight off the two price lines. Move both by that 20%: margin 20 x 0.8 = $16 per seat, fixed 120,000 x 1.2 = $144,000, breakeven 144,000 / 16 = 9,000 seats — 3,000 seats above the answer, +50.0%. What survives: the form of the answer, which is the whole point of an entry-level question — the threshold is fixed cost divided by margin, so it scales inversely with margin and proportionally with fixed cost, and the direction is never in doubt. What does not survive: 6,000 seats quoted as a plan number. It is the value of the threshold when both inputs sit exactly where they are printed, and a 20% move on each — a move the record's own cost structure supplies — puts the requirement half again higher.",
-    "ru": "- CM/seat = 25 − 5 = $20. Breakeven = 120,000/20 = **6,000 seats**. Прямой расчёт, без ступеней (Easy).\n\nВердикт сводит один параметр в точку: контрибуционная маржа 25 - 5 = $20 на место, breakeven 120,000 / 20 = 6,000 seats. Второй рычаг — те самые $120,000 постоянных, которые расчёт принимает как данность, а величину сдвига даёт сама запись: переменные затраты составляют 5 / 25 = 20% выручки на место, это читается прямо с двух ценовых строк. Двигаем оба на эти 20%: маржа 20 x 0.8 = $16 на место, постоянные 120,000 x 1.2 = $144,000, breakeven 144,000 / 16 = 9,000 seats — на 3,000 мест выше ответа, то есть +50.0%. Что остаётся: форма ответа, ради которой входной вопрос и существует — порог есть постоянные, делённые на маржу, он обратно пропорционален марже и прямо пропорционален постоянным, и направление сомнению не подлежит. Что не остаётся: 6,000 seats в качестве плановой цифры. Это значение порога ровно при тех входах, что напечатаны, а сдвиг каждого на 20% — сдвиг, который даёт сама структура затрат записи — поднимает требование в полтора раза."
+    "en": "- Units sold in 2010 = 5,000,000 / 100,000 = **50 aircraft** - the book prints \"$5,000k / $100k/unit = 50 units\". One division, no tiers (Easy).\n- The $110,000 is next year's price: the increase is only agreed, and Exhibit 2 heads it \"New Product Sales Forecast, 2011\". Two printed figures confirm it: 100,000 x 1.10 = 110,000, and the book's next-year line, 50 aircraft at $5,500,000, is 50 x 110,000 - the count crosses over unchanged, only the price moves.\n- The false alarm: 5,000,000 / 110,000 = 45.4545..., about 45.45 aircraft - not a whole airframe, and a fall in a year the chart shows flat. The error is the price step read backwards, 1 / 1.1 = 0.9091, leaving the count 9.09% short. A price agreed for the next period does not rewrite a year already closed.\n\nSource: Kellogg-2012, Dark Sky Co., pp. 153-159 (Case 20). Printed there: the constant $100,000 unit price, sole-product revenue (p. 154); the agreed 10% increase and \"$110,000 per aircraft\" (p. 155); \"$5,000k / $100k/unit = 50 units\" and \"No new product = 50 aircraft, $5,500,000\" (p. 156); the heading \"New Product Sales Forecast, 2011\" (Exhibit 2, p. 159). Built here, not printed in the book: 45.4545... rounded to 45.45; 1 / 1.1 = 0.9091, i.e. 9.09%; and the checks 100,000 x 1.10 = 110,000 and 50 x 110,000 = 5,500,000.",
+    "ru": "- Продано аппаратов в 2010 = 5,000,000 / 100,000 = **50 аппаратов** — книга печатает «$5,000k / $100k/unit = 50 units». Одно деление (Easy).\n- $110,000 — цена следующего года: повышение пока только согласовано, и Exhibit 2 несёт её под заголовком «New Product Sales Forecast, 2011». Подтверждают два напечатанных числа: 100,000 x 1.10 = 110,000, и строка книги на следующий год, 50 аппаратов на $5,500,000, есть 50 x 110,000 — количество переходит неизменным, двигается цена.\n- Ложная тревога: 5,000,000 / 110,000 = 45.4545..., около 45.45 аппарата — не целый планер и падение в году, где график ровен. Ошибка — ценовой шаг, прочитанный назад: 1 / 1.1 = 0.9091, счёт занижен на 9.09%. Согласованная на следующий период цена закрытый год не переписывает.\n\nSource: Kellogg-2012, Dark Sky Co., pp. 153-159 (Case 20). Напечатано там: неизменная цена $100,000 за аппарат, выручка от одного продукта (с. 154); согласованное повышение 10% и «$110,000 per aircraft» (с. 155); «$5,000k / $100k/unit = 50 units» и «No new product = 50 aircraft, $5,500,000» (с. 156); заголовок «New Product Sales Forecast, 2011» (Exhibit 2, с. 159). ПОСТРОЕНО здесь, в книге не напечатано: 45.4545..., округлённое до 45.45; 1 / 1.1 = 0.9091, то есть 9.09%; и сверки 100,000 x 1.10 = 110,000 и 50 x 110,000 = 5,500,000."
    },
    "provoked": {
-    "en": "minor — confusing recurring revenue with the full price / forgetting VC.",
-    "ru": "мелкая — перепутать recurring revenue с полной ценой/забыть VC."
+    "en": "minor - reaching for $110,000 as the price now on the table, the newer of the two and the one the prompt talks about, and reporting the year just closed as 45.45 aircraft, or rounding it to 45 to make it an airframe.",
+    "ru": "мелкая — потянуться за $110,000 как за ценой, которая сейчас на столе: более новой из двух и той, о которой говорит вводная, — и объявить только что закрытый год как 45.45 аппарата или округлить до 45, чтобы получился планер."
    },
    "family_h25": "F0",
    "family_src": "clean",
    "family_conf": "высокая",
-   "family_note": "круг 104: решением дева слот переведён в Clean. Три довода: F0 в cm стоит у шести слотов, пять из них Clean и только CM-044 ломал соответствие; эталон сам говорит «прямой расчёт, без ступеней»; provoked описывает невнимательность, а не построенную ловушку, к которой кандидат приходит разумным ходом. Ловушку дописывать не стали — слот работает.",
+   "family_note": "F0, а не F1: различающий вопрос — есть ли в самих данных дефект, из-за которого верный ход требует поправки? Здесь дефекта нет. Всё, что нужно, чтобы отнести каждую цену к своему периоду, стоит в фактах вводной и не противоречит само себе: цена не двигалась весь тот десяток лет, в котором заработана выручка, повышение пока только согласовано, а построенный на нём прогноз продаж относится к следующему году. Значит выручка закрытого года и цена, действовавшая в нём, стоят на одной базе, их частное и есть ответ, а согласованная цена — настоящая величина операции, просто отвечающая на другой год. Чинить нечего: кандидат разводит периоды чтением вводной, а не ремонтом испорченной строки. Тревога ложная — поправку «привести к актуальной цене» он придумывает сам. Обратная доточка: если бы вводная не говорила, что цена держалась неизменной, или если бы часть года уже шла по новой цене, принадлежность $100,000 закрытому году не была бы установлена, база счёта оказалась бы смешанной и верный ход потребовал бы взвешенной цены — вот тогда это F1, и F0 не ставился бы. Решение дева круга 104 (Clean, а значит F0) не переоткрывается; гейт единого словаря требует F0 ровно у Clean.",
    "mehanizm": {
-    "naive": "берёт всю повторяющуюся выручку на место как маржу, не вычитая переменные затраты обслуживания",
-    "correct": "берёт как маржу разность повторяющейся выручки на место и переменных затрат обслуживания",
-    "why": "часть выручки уходит на обслуживание и не доходит до покрытия постоянных затрат",
-    "code": "MECH-25-выручка-вместо-вклада",
+    "naive": "пересчитывает уже закрытый период по цене, о которой договорились на следующий",
+    "correct": "считает закрытый период по цене, которая в нём действовала, а согласованную цену относит к периоду её действия",
+    "why": "согласованное изменение вступает в силу с назначенного периода и прошлого не переписывает",
+    "code": "MECH-126-будущее-изменение-к-закрытому-периоду",
     "code2": []
    }
   },
