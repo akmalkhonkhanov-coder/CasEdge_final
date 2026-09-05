@@ -35,6 +35,26 @@ const CAT_TOTAL    = CAT_PER_SITE * SITE_COUNT;   // 30
    Слово владельца по вопросу 3 переключает ровно эту константу. */
 const SHOW_SORT_ACCURACY = false;
 
+/* РЫЧАГ ОТ КРАСНОГО Г-нов-2 (тривиальность Инсайта, порог 0.50).
+ * Замер круга 139 на боевом банке: запас всего 2.9 п.п. Новый банк партий
+ * с чуть более просторными участками уводит фазу за порог. Лекарство измерено,
+ * а не названо: раскрываемое окно расширяется на N единиц в каждую сторону.
+ * Окно остаётся ИСТИННЫМ — диапазон участка лежит ВНУТРИ раскрытого, поэтому
+ * правило ключа («попал в раскрытое окно → Next годен») не ломается.
+ *
+ *   расширение   p_подсказка   подъём   запас до 0.50
+ *       0           47.1 %      1.89×      2.9 п.п.   ← сейчас
+ *      +1           35.2 %      1.41×     14.8 п.п.   ← лекарство
+ *      +2           30.1 %      1.20×     19.9 п.п.
+ *      +3           27.5 %      1.10×     22.5 п.п.   подсказка почти пуста
+ *
+ * ПРАВИЛО ОСТАНОВКИ: при красном гейте ставить 1, гнать гейт заново. Если
+ * и на 1 красно — расширять дальше НЕЛЬЗЯ: при +3 подъём 1.10×, подсказка
+ * перестаёт быть подсказкой, и лечится уже не Инсайт, а банк партий, который
+ * выдал участки, где одна ось решает. Тогда красный гейт отклоняет БАНК.
+ */
+const INSIGHT_WIDEN = 0;
+
 /* Детерминированный ГСЧ от id партии. Раздача и ось Инсайта НЕ хранятся
    в токене — они выводятся заново при каждой регидратации. Токен носит только
    то, что сделал игрок (см. шапку seawolf-session.js). */
@@ -220,7 +240,9 @@ class SeaWolfSession {
   insightAt(si) {
     if (si >= SITE_COUNT - 1) return null;
     const attr = this.insightAxes[si];
-    return { attr, range: this.game.sites[si + 1].ranges[attr].slice() };
+    const r = this.game.sites[si + 1].ranges[attr];
+    const w = INSIGHT_WIDEN;
+    return { attr, range: [Math.max(1, r[0] - w), Math.min(10, r[1] + w)] };
   }
 
   /** Фаза внутри площадки. Обзор идёт ПЕРВЫМ и только если есть что обозревать. */
@@ -528,5 +550,5 @@ function pick(batch, { level, seenIds = [] } = {}) {
 
 module.exports = { SeaWolfSession, pick, scoreTrio, validTrios, bestAhead, ATTRS, LEVEL_NOTE,
                    LEVELS_IN_BATCH, TIMER_MS, L,
-                   CAT_BANK, CAT_PER_SITE, CAT_TOTAL, SHOW_SORT_ACCURACY,
+                   CAT_BANK, CAT_PER_SITE, CAT_TOTAL, SHOW_SORT_ACCURACY, INSIGHT_WIDEN,
                    dealCategorization, fitsSite, sortKey, mulberry32, seedFrom };
