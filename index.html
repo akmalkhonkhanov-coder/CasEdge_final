@@ -1614,6 +1614,10 @@
     .rk-fb.naive { color: var(--accent-amber); }
     .rk-fb.bad { color: var(--error); }
     .rk-blank { width: 92px; background: var(--sv-fill); border: none; border-bottom: 2px solid var(--sv-line); color: var(--on-dark); padding: 3px 6px; font-size: 14px; font-family: var(--mono); text-align: center; }
+    /* 05.09.2026 dev. Ширина 92px рассчитана на число. Вариант выпадающего
+       списка — фраза («the fares given away against the tariff board»), и в 92px
+       она обрезалась многоточием, то есть кандидат не видел, что выбирает. */
+    .rk-blank-sel { width: auto; max-width: 340px; font-family: inherit; text-align: left; padding: 3px 4px; }
     .rk-blank.correct { border-bottom-color: var(--accent-teal); color: var(--accent-teal); }
     .rk-blank.naive { border-bottom-color: var(--accent-amber); }
     .rk-blank.wrong { border-bottom-color: var(--error); }
@@ -6745,7 +6749,22 @@ function rkReport(inner, foot) {
          кнопки Check. Убраны: отчёт заполняется молча, разбор в конце. */
       const fid = 'w:' + b.key;
       const val = solve.rkVals[fid] == null ? '' : solve.rkVals[fid];
-      const inputHtml = `<input class="rk-blank" value="${esc(String(val))}" placeholder="[${esc(b.key)}]" oninput="solve.rkVals['${fid}']=this.value">`;
+      /* 05.09.2026 dev, живой прогон Redrock владельцем не состоялся четыре круга,
+         прошёл я — и на первой же игре наткнулся. Дырка d1 объявлена в данных как
+         `"input": "dropdown"` со списком `options`, а рисовалась ТЕКСТОВЫМ полем:
+         кандидат должен был угадать дословную формулировку варианта, которого ему
+         не показали, и проверялась она посимвольно. Ответить честно нельзя.
+         Класс тот же, что у счётчика игр и у ветки DRILL: оба конца сделаны верно,
+         провода между ними нет. Данные знали про dropdown с самого начала, и
+         РИСОВАЛКА ВСТРОЕННЫХ КЕЙСОВ (renderReportWritten, ветка b.isQual) умеет
+         его рисовать — не умела только эта. 57 игр из 57, по одной дырке в каждой. */
+      const opts = Array.isArray(b.options) ? b.options : null;
+      const inputHtml = (opts && opts.length)
+        ? `<select class="rk-blank rk-blank-sel" onchange="solve.rkVals['${fid}']=this.value">`
+          + `<option value=""${val ? '' : ' selected'}>\u2014 select \u2014</option>`
+          + opts.map(o => `<option value="${esc(String(o))}"${String(o) === String(val) ? ' selected' : ''}>${esc(String(o))}</option>`).join('')
+          + `</select>`
+        : `<input class="rk-blank" value="${esc(String(val))}" placeholder="[${esc(b.key)}]" oninput="solve.rkVals['${fid}']=this.value">`;
       tmpl = tmpl.split('[' + b.key + ']').join(inputHtml);
     });
     inner.innerHTML =
@@ -6765,7 +6784,17 @@ function rkReport(inner, foot) {
      полей: убран. В настоящей игре выбор графика — три карточки и переход
      дальше, без оценки. */
   const chosen = solve.rkVals['g:type'] || '';
-  const cards = REDROCK_CHART_TYPES.map(ct =>
+  /* 05.09.2026 цех игр, круг 145. Обратный конец того же провода, что у дырки d1.
+     Каждая игра ОБЪЯВЛЯЕТ свои три варианта графика (report.graph_selection.options),
+     сервер их честно отдаёт (redrock-session.js:429) — а клиент выбрасывал объявление
+     и рисовал девять карточек из собственной константы. Последствия замерены:
+     57 игр из 57 показывали не тот список; в 48 объявленный вариант вообще
+     отсутствовал среди девяти («Combo» против «Combo (bar + line)», «Stacked bar»
+     нет вовсе); в 7 играх правильный ответ выбрать было НЕЛЬЗЯ — проверка
+     посимвольная (gradeExact), и верный выбор отмечался неверным.
+     Константа остаётся откатом на случай, если данные молчат: орган не должен исчезать. */
+  const типы = (Array.isArray(gs.options) && gs.options.length) ? gs.options : REDROCK_CHART_TYPES;
+  const cards = типы.map(ct =>
     `<div class="sv-gcard ${chosen === ct ? 'sel' : ''}"
       onclick="solve.rkVals['g:type']='${esc(ct)}';renderSolve()">${esc(ct)}</div>`).join('');
   inner.innerHTML =
