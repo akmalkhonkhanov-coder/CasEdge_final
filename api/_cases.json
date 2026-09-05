@@ -11286,7 +11286,7 @@
     {
      "step": 2,
      "label": "Промежуточный расчёт",
-     "candidate_md": "Work out what the 40 MW campus earns in a year, and what the numbers say about entering on Finance's budget.",
+     "candidate_md": "Посчитай, сколько кампус на **40 MW** зарабатывает за год, и что эти числа говорят о входе по бюджету Finance.",
      "interviewer_md": "```python\nannual_revenue = 40_000 kW * 0.90 * $245 * 12       # = $105,840,000\nannual_opex    = 40 MW * $1,520,000                 # = $ 60,800,000\nannual_profit  = 105_840_000 - 60_800_000           # = $ 45,040,000\n```\n\n**EBITDA-маржа 42.6%** — нормально для колокации.\n\n### 🔻 NAIVE — capex по историческим костам\n\n```python\nnaive_capex = 40 * 9_000_000                        # = $360,000,000\nnaive_npv   = 45_040_000/0.10 - 360_000_000\n# = +$90,400,000  ->  ENTER\n```\n\n---",
      "hints": {
       "L1": "Бюджет финансов покрывает ту мощность, экономику которой ты считаешь?",
@@ -11297,7 +11297,8 @@
      "hints_en": {
       "L1": "Does the finance budget cover the capacity whose economics you are counting?",
       "L2": "Set the campus's annual result against the sum finance is ready to put in before you conclude on entry."
-     }
+     },
+     "candidate_md_en": "Work out what the 40 MW campus earns in a year, and what the numbers say about entering on Finance's budget."
     },
     {
      "step": 3,
@@ -11326,14 +11327,15 @@
     {
      "step": 5,
      "label": "Explain (2 мин): чего не купить за деньги  (2 min)",
-     "candidate_md": "**Q:** *Corevault has the capital. Why can't it just outspend the queue?*",
+     "candidate_md": "**Q:** *У Corevault есть капитал. Почему нельзя просто перекупить очередь?*",
      "interviewer_md": "```python\n# A competitor who applied 2 years ago energises in 2 years, not 4.\ncompetitor_npv = (45_040_000/0.10)/1.10**2 - 639_540_000   # = -$267,308,595\nvalue_of_2yr_head_start = -267_308_595 - (-331_910_740)    # = $64,602,145\n```\n\n**Позиция в очереди, взятая двумя годами раньше, стоит $64.6 миллиона.**\n\nИ её **нельзя купить**. Очередь — по дате заявки, не по цене. Конкурент, подавшийся в 2023-м, выйдет раньше нас независимо от того, сколько у нас капитала.\n\n📖 **Партнёрский приём:** цифра говорит «дорого». Чего цифра не видит — **в этом бизнесе дефицитен не капитал, а время**, а время не торгуется.\n\n---",
      "hints": {},
      "conditional_exhibits": [],
      "depends_on": [
       3,
       4
-     ]
+     ],
+     "candidate_md_en": "**Q:** *Corevault has the capital. Why can't it just outspend the queue?*"
     },
     {
      "step": 6,
@@ -11361,7 +11363,7 @@
     {
      "step": 8,
      "label": "Partner-level Pyramid",
-     "candidate_md": "Corevault's CEO has two minutes before the board. What's your recommendation?",
+     "candidate_md": "У CEO Corevault две минуты перед советом директоров. Какая твоя рекомендация?",
      "interviewer_md": "> **We recommend Corevault does not build in this metro — the NPV is minus $332 million, and no single line item explains it.**\n>\n> Three facts. First, the budget is built from a campus we constructed four years ago at $9.0 million per MW, but that campus can no longer be built at that price: power equipment has repriced 2.15x on the GPU shortage, and the weighted replacement cost is **$15.99 million per MW** — the capex is $640 million, not $360 million. Second, the grid connection queue for loads above 30 MW runs **four years**, and it is allocated by application date — it is not transferable and it cannot be bought. Capex is committed at FID; revenue begins at energisation. Third, discounting four years of delay against a $640 million commitment gives a present value of **minus $332 million**.\n>\n> **A competitor who joined the queue two years ago holds a $64.6 million asset that no amount of our capital can acquire.**\n>\n> Two risks. Internally, our budgeting convention anchors on historical build cost, and this is the second-largest capital decision in the pipeline — the same anchor is presumably distorting the others. Externally, the transformer shortage may ease, and we modelled it: even at a power index of 1.40 the NPV is minus $256 million — the repricing is worth $279.5 million of the $422 million swing and the four-year queue a further $142.8 million, so removing either one on its own still leaves us negative.\n>\n> Next steps. Within 60 days, re-baseline capex against a current-market quote per MW for this metro — power, shell, land — because $279.5 million of the $422 million swing is the stale $9.0 million per MW benchmark against $142.8 million for the queue. Neither leg is survivable alone: a site that already holds a connection still leaves us at minus $189 million, and the historical benchmark with the queue intact still leaves us at minus $52 million, so screen for **existing grid connections** or for operators already holding queue positions only against a capex number we have re-based. In parallel, ask the transmission operator for the queue time on a load below the 30 MW threshold — exhibit B gives four years for loads above 30 MW and says nothing below it, so a 15 MW phased build is a hypothesis we cannot yet price; if a sub-threshold connection energises materially sooner, we enter small and grow into the position rather than waiting four years for a campus we cannot energise.",
      "hints": {},
      "conditional_exhibits": [],
@@ -11371,7 +11373,8 @@
       5,
       6,
       7
-     ]
+     ],
+     "candidate_md_en": "Corevault's CEO has two minutes before the board. What's your recommendation?"
     },
     {
      "step": 9,
@@ -14354,7 +14357,7 @@
     },
     {
      "id": "ex2",
-     "title": "Exhibit — Load factor head, Load factor back",
+     "title": "Exhibit — Load factor head и Load factor back по группам лейнов",
      "reveal": "auto",
      "triggers": [],
      "body_md": "| Группа | Load factor **head** | Load factor **back** |\n|---|---|---|\n| Core | **62%** | **18%** *(без thin-грузов)* |\n| Regional | 51% | 26% |\n| **Thin** | 41% | 12% |",
@@ -14410,7 +14413,8 @@
        ]
       ]
      },
-     "body_md_en": "| Group | Load factor **head** | Load factor **back** |\n|---|---|---|\n| Core | **62%** | **18%** *(without thin freight)* |\n| Regional | 51% | 26% |\n| **Thin** | 41% | 12% |"
+     "body_md_en": "| Group | Load factor **head** | Load factor **back** |\n|---|---|---|\n| Core | **62%** | **18%** *(without thin freight)* |\n| Regional | 51% | 26% |\n| **Thin** | 41% | 12% |",
+     "title_en": "Exhibit — Load factor head, Load factor back"
     }
    ],
    "steps": [
@@ -14509,7 +14513,7 @@
    "exhibits": [
     {
      "id": "exA",
-     "title": "blended service P&L, $M",
+     "title": "blended P&L сервиса, $M",
      "reveal": "auto",
      "triggers": [],
      "body_md": "| | 3 года назад | Сейчас |\n|---|---|---|\n| Revenue | 33.1 | 34.2 |\n| Labor | 15.0 | 16.1 |\n| Parts | 8.1 | 11.9 |\n| Overhead | 3.0 | 3.1 |\n| **Margin** | **21.1%** *(7.0/33.1)* | **9.1%** *(3.1/34.2)* |",
@@ -14585,7 +14589,8 @@
        ]
       ]
      },
-     "body_md_en": "| | 3 years ago | Now |\n|---|---|---|\n| Revenue | 33.1 | 34.2 |\n| Labor | 15.0 | 16.1 |\n| Parts | 8.1 | 11.9 |\n| Overhead | 3.0 | 3.1 |\n| **Margin** | **21.1%** *(7.0/33.1)* | **9.1%** *(3.1/34.2)* |"
+     "body_md_en": "| | 3 years ago | Now |\n|---|---|---|\n| Revenue | 33.1 | 34.2 |\n| Labor | 15.0 | 16.1 |\n| Parts | 8.1 | 11.9 |\n| Overhead | 3.0 | 3.1 |\n| **Margin** | **21.1%** *(7.0/33.1)* | **9.1%** *(3.1/34.2)* |",
+     "title_en": "blended service P&L, $M"
     },
     {
      "id": "exB",
@@ -21344,7 +21349,7 @@
    "exhibits": [
     {
      "id": "ex_larkhill",
-     "title": "Exhibit — Larkhill: asset structure & ask",
+     "title": "Exhibit — Larkhill: структура активов и запрошенная цена",
      "reveal": "on_request",
      "triggers": [
       "структура активов",
@@ -21404,7 +21409,8 @@
       "how were the contracts valued",
       "balance sheet value",
       "balance sheet"
-     ]
+     ],
+     "title_en": "Exhibit — Larkhill: asset structure & ask"
     }
    ],
    "steps": [
@@ -21522,7 +21528,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — Kestermere fund economics",
+     "title": "Exhibit — экономика фонда Kestermere",
      "reveal": "on_request",
      "triggers": [
       "AUM",
@@ -21590,11 +21596,12 @@
       "how much we earn",
       "current revenue",
       "numbers"
-     ]
+     ],
+     "title_en": "Exhibit — Kestermere fund economics"
     },
     {
      "id": "ex2",
-     "title": "Exhibit — Regulatory framework (retail funds)",
+     "title": "Exhibit — регуляторный framework (розничные фонды)",
      "reveal": "on_request",
      "triggers": [
       "cap",
@@ -21625,7 +21632,8 @@
       "numbers",
       "what happens if we raise"
      ],
-     "body_md_en": "> **Value-for-money framework — retail funds**\n>\n> Cap on retail management fees: **0.90%**.\n>\n> Breaching it triggers:\n> - fee rollback to the old level for the reporting year;\n> - one-off remediation cost $1.9M;\n> - reputational AUM outflow 8% (permanent)."
+     "body_md_en": "> **Value-for-money framework — retail funds**\n>\n> Cap on retail management fees: **0.90%**.\n>\n> Breaching it triggers:\n> - fee rollback to the old level for the reporting year;\n> - one-off remediation cost $1.9M;\n> - reputational AUM outflow 8% (permanent).",
+     "title_en": "Exhibit — Regulatory framework (retail funds)"
     }
    ],
    "steps": [
@@ -21734,7 +21742,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit A — Cost per tonne by mine",
+     "title": "Exhibit A — Cost per tonne по шахтам",
      "reveal": "on_request",
      "triggers": [
       "cost per tonne",
@@ -21767,7 +21775,8 @@
       "fixed disappears",
       "avoidable",
       "overhead stays"
-     ]
+     ],
+     "title_en": "Exhibit A — Cost per tonne by mine"
     }
    ],
    "steps": [
@@ -22146,7 +22155,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — Racket unit economics",
+     "title": "Exhibit — юнит-экономика ракетки",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -22212,11 +22221,12 @@
       "prices",
       "numbers",
       "racket economics"
-     ]
+     ],
+     "title_en": "Exhibit — Racket unit economics"
     },
     {
      "id": "ex2",
-     "title": "DTC cost per unit (on request)",
+     "title": "DTC: затраты на единицу (по запросу)",
      "reveal": "on_request",
      "triggers": [
       "DTC cost",
@@ -22271,7 +22281,8 @@
       "returns",
       "net contribution"
      ],
-     "body_md_en": "| DTC cost line | $ per unit |\n|---|---|\n| Fulfilment and shipping | 14.00 |\n| Returns | 19.00 |\n| Payment processing (3% of $180) | 5.40 |\n| Platform and site operations | 8.50 |\n| Customer acquisition cost | 41.00 |"
+     "body_md_en": "| DTC cost line | $ per unit |\n|---|---|\n| Fulfilment and shipping | 14.00 |\n| Returns | 19.00 |\n| Payment processing (3% of $180) | 5.40 |\n| Platform and site operations | 8.50 |\n| Customer acquisition cost | 41.00 |",
+     "title_en": "DTC cost per unit (on request)"
     }
    ],
    "steps": [
@@ -22382,7 +22393,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit 1 — Port throughput & contribution",
+     "title": "Exhibit 1 — throughput и contribution по портам",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -22466,11 +22477,12 @@
       "port volume",
       "by port",
       "numbers"
-     ]
+     ],
+     "title_en": "Exhibit 1 — Port throughput & contribution"
     },
     {
      "id": "ex2",
-     "title": "Exhibit 2 — Incumbent lock-in by port",
+     "title": "Exhibit 2 — lock-in инкумбентов по портам",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -22497,7 +22509,8 @@
       "what share will we win",
       "competition",
       "numbers"
-     ]
+     ],
+     "title_en": "Exhibit 2 — Incumbent lock-in by port"
     }
    ],
    "steps": [
@@ -22593,7 +22606,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — Warehouse energy profile",
+     "title": "Exhibit — энергопрофиль складов",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -22667,7 +22680,8 @@
       "tariffs",
       "numbers",
       "energy consumption"
-     ]
+     ],
+     "title_en": "Exhibit — Warehouse energy profile"
     }
    ],
    "steps": [
@@ -22765,7 +22779,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — Channel P&L ($M)",
+     "title": "Exhibit — P&L по каналам ($M)",
      "reveal": "on_request",
      "triggers": [
       "contribution",
@@ -22837,7 +22851,8 @@
       "by segment",
       "Grocery/Discount breakdown",
       "numbers"
-     ]
+     ],
+     "title_en": "Exhibit — Channel P&L ($M)"
     }
    ],
    "steps": [
@@ -22935,7 +22950,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — Target & Tandora economics",
+     "title": "Exhibit — экономика таргета и Tandora",
      "reveal": "on_request",
      "triggers": [
       "commissary",
@@ -23013,7 +23028,8 @@
       "overhead Tandora",
       "numbers",
       "target economics"
-     ]
+     ],
+     "title_en": "Exhibit — Target & Tandora economics"
     },
     {
      "id": "ex2",
@@ -23154,7 +23170,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — Automation proposal",
+     "title": "Exhibit — предложение по автоматизации",
      "reveal": "on_request",
      "triggers": [
       "capex",
@@ -23218,11 +23234,12 @@
       "project parameters",
       "numbers",
       "savings"
-     ]
+     ],
+     "title_en": "Exhibit — Automation proposal"
     },
     {
      "id": "ex2",
-     "title": "Exhibit — Technology lifecycle",
+     "title": "Exhibit — жизненный цикл технологии",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -23261,11 +23278,12 @@
       "platform obsolescence",
       "horizon",
       "how many years the saving lasts"
-     ]
+     ],
+     "title_en": "Exhibit — Technology lifecycle"
     },
     {
      "id": "ex_shape",
-     "title": "Exhibit — Savings stream over time",
+     "title": "Exhibit — поток экономии во времени",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -23298,7 +23316,8 @@
       "service life",
       "will become obsolete",
       "numbers"
-     ]
+     ],
+     "title_en": "Exhibit — Savings stream over time"
     }
    ],
    "steps": [
@@ -23407,7 +23426,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — Build vs Buy (forward-looking)",
+     "title": "Exhibit — BUILD против BUY (forward-looking)",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -23434,7 +23453,8 @@
       "cost structure",
       "numbers",
       "what else needs to be invested"
-     ]
+     ],
+     "title_en": "Exhibit — Build vs Buy (forward-looking)"
     }
    ],
    "steps": [
@@ -23573,7 +23593,7 @@
    "exhibits": [
     {
      "id": "ex_demand",
-     "title": "Exhibit — How does membership respond to price?",
+     "title": "Exhibit — как число членов реагирует на цену?",
      "reveal": "on_request",
      "triggers": [
       "эластичность",
@@ -23598,7 +23618,8 @@
       "churn on a price increase",
       "demand response",
       "members leave"
-     ]
+     ],
+     "title_en": "Exhibit — How does membership respond to price?"
     }
    ],
    "steps": [
@@ -23716,7 +23737,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — Subscriber acquisition",
+     "title": "Exhibit — Subscriber acquisition: привлечение подписчиков",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -23772,11 +23793,12 @@
       "inflow",
       "base growth",
       "numbers"
-     ]
+     ],
+     "title_en": "Exhibit — Subscriber acquisition"
     },
     {
      "id": "ex2",
-     "title": "Exhibit — Retention",
+     "title": "Exhibit — retention",
      "reveal": "on_request",
      "triggers": [
       "churn",
@@ -23802,11 +23824,12 @@
       "how much leaves",
       "retention",
       "numbers"
-     ]
+     ],
+     "title_en": "Exhibit — Retention"
     },
     {
      "id": "ex_shape",
-     "title": "Exhibit — Where does the subscriber base head?",
+     "title": "Exhibit — куда идёт база подписчиков?",
      "reveal": "on_request",
      "triggers": [
       "churn",
@@ -23836,7 +23859,8 @@
       "how much leaves",
       "retention",
       "numbers"
-     ]
+     ],
+     "title_en": "Exhibit — Where does the subscriber base head?"
     }
    ],
    "steps": [
@@ -23952,7 +23976,7 @@
    "exhibits": [
     {
      "id": "ex_events",
-     "title": "Exhibit A — Off-season events: revenue & costs (per event type)",
+     "title": "Exhibit A — события межсезонья: выручка и затраты (по типу события)",
      "reveal": "on_request",
      "triggers": [
       "данные по событиям",
@@ -23996,7 +24020,8 @@
       "event cost structure",
       "cost structure"
      ],
-     "body_md_en": "| Event type | Revenue | Marginal cost |\n|---|---|---|\n| Concerts | $380,000 | $210,000 |\n| College games | $160,000 | $95,000 |\n| Corporate events | $240,000 | $130,000 |\n\n*Allocated arena lease: $140,000 per event (accounting allocation of the fixed lease).*"
+     "body_md_en": "| Event type | Revenue | Marginal cost |\n|---|---|---|\n| Concerts | $380,000 | $210,000 |\n| College games | $160,000 | $95,000 |\n| Corporate events | $240,000 | $130,000 |\n\n*Allocated arena lease: $140,000 per event (accounting allocation of the fixed lease).*",
+     "title_en": "Exhibit A — Off-season events: revenue & costs (per event type)"
     }
    ],
    "steps": [
@@ -24100,7 +24125,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — Test mix shift",
+     "title": "Exhibit — сдвиг микса тестов",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -24127,7 +24152,8 @@
       "volumes",
       "by test type",
       "numbers"
-     ]
+     ],
+     "title_en": "Exhibit — Test mix shift"
     }
    ],
    "steps": [
@@ -24540,7 +24566,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — Per-store economics",
+     "title": "Exhibit — экономика точки",
      "reveal": "on_request",
      "triggers": [
       "capex открытия",
@@ -24612,7 +24638,8 @@
       "revenue/costs of the site",
       "numbers",
       "store economics"
-     ]
+     ],
+     "title_en": "Exhibit — Per-store economics"
     }
    ],
    "steps": [
@@ -24717,7 +24744,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — Current revenue model",
+     "title": "Exhibit — текущая модель дохода",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -24781,11 +24808,12 @@
       "deal volume",
       "current income",
       "numbers"
-     ]
+     ],
+     "title_en": "Exhibit — Current revenue model"
     },
     {
      "id": "ex2",
-     "title": "Exhibit — Client reaction estimate",
+     "title": "Exhibit — оценка реакции клиентов",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -24812,7 +24840,8 @@
       "customer reaction",
       "will clients leave",
       "numbers"
-     ]
+     ],
+     "title_en": "Exhibit — Client reaction estimate"
     }
    ],
    "steps": [
@@ -24928,7 +24957,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — Make vs Buy (per tonne)",
+     "title": "Exhibit — make против buy (на тонну)",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -24992,11 +25021,12 @@
       "production data",
       "costs",
       "numbers"
-     ]
+     ],
+     "title_en": "Exhibit — Make vs Buy (per tonne)"
     },
     {
      "id": "ex2",
-     "title": "Exhibit — Fixed cost breakdown",
+     "title": "Exhibit — состав fixed cost",
      "reveal": "on_request",
      "triggers": [
       "avoidable",
@@ -25023,7 +25053,8 @@
       "fixed structure",
       "numbers",
       "what disappears on the switch"
-     ]
+     ],
+     "title_en": "Exhibit — Fixed cost breakdown"
     }
    ],
    "steps": [
@@ -25140,7 +25171,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — Entry economics",
+     "title": "Exhibit — экономика входа",
      "reveal": "on_request",
      "triggers": [
       "capex",
@@ -25204,11 +25235,12 @@
       "margin",
       "numbers",
       "entry economics"
-     ]
+     ],
+     "title_en": "Exhibit — Entry economics"
     },
     {
      "id": "ex2",
-     "title": "Exhibit — Anchor contract horizon",
+     "title": "Exhibit — горизонт якорного контракта",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -25235,11 +25267,12 @@
       "how long is the anchor",
       "how many years of margin",
       "numbers"
-     ]
+     ],
+     "title_en": "Exhibit — Anchor contract horizon"
     },
     {
      "id": "ex_shape",
-     "title": "Exhibit — Margin stream over years 1–8",
+     "title": "Exhibit — поток маржи за годы 1–8",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -25268,7 +25301,8 @@
       "how long is the anchor",
       "how many years of margin",
       "numbers"
-     ]
+     ],
+     "title_en": "Exhibit — Margin stream over years 1–8"
     }
    ],
    "steps": [
@@ -25384,7 +25418,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — Deal & synergy headline",
+     "title": "Exhibit — сделка и заявленная синергия",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -25456,11 +25490,12 @@
       "synergy",
       "numbers",
       "deal economics"
-     ]
+     ],
+     "title_en": "Exhibit — Deal & synergy headline"
     },
     {
      "id": "ex2",
-     "title": "Exhibit — Costs to achieve",
+     "title": "Exhibit — costs to achieve",
      "reveal": "on_request",
      "triggers": [
       "costs to achieve",
@@ -25487,11 +25522,12 @@
       "integration cost",
       "numbers",
       "what does it cost to realise the synergy"
-     ]
+     ],
+     "title_en": "Exhibit — Costs to achieve"
     },
     {
      "id": "ex_shape",
-     "title": "Exhibit — Net synergy stream over 10 years",
+     "title": "Exhibit — поток чистой синергии за 10 лет",
      "reveal": "on_request",
      "triggers": [
       "costs to achieve",
@@ -25522,7 +25558,8 @@
       "integration cost",
       "numbers",
       "what does it cost to realise the synergy"
-     ]
+     ],
+     "title_en": "Exhibit — Net synergy stream over 10 years"
     }
    ],
    "steps": [
@@ -25638,7 +25675,7 @@
    "exhibits": [
     {
      "id": "ex_routes",
-     "title": "Exhibit — Revenue & cost by route type ($M)",
+     "title": "Exhibit — выручка и затраты по типу маршрута ($M)",
      "reveal": "on_request",
      "triggers": [
       "разбивка по маршрутам",
@@ -25692,7 +25729,8 @@
       "which route is loss-making",
       "margin breakdown"
      ],
-     "body_md_en": "| Route type | Revenue, $M | Cost, $M |\n|---|---|---|\n| Longhaul | 420 | 340 |\n| Regional | 180 | 171 |\n| Shorthaul | 240 | 258 |\n\n*Blended: revenue 840, cost 769.*"
+     "body_md_en": "| Route type | Revenue, $M | Cost, $M |\n|---|---|---|\n| Longhaul | 420 | 340 |\n| Regional | 180 | 171 |\n| Shorthaul | 240 | 258 |\n\n*Blended: revenue 840, cost 769.*",
+     "title_en": "Exhibit — Revenue & cost by route type ($M)"
     }
    ],
    "steps": [
@@ -25810,7 +25848,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — Milk pricing",
+     "title": "Exhibit — ценообразование по молоку",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -25882,11 +25920,12 @@
       "milk",
       "current price",
       "numbers"
-     ]
+     ],
+     "title_en": "Exhibit — Milk pricing"
     },
     {
      "id": "ex2",
-     "title": "Exhibit — Basket economics",
+     "title": "Exhibit — экономика корзины",
      "reveal": "on_request",
      "triggers": [
       "basket",
@@ -25914,7 +25953,8 @@
       "shopper churn",
       "numbers",
       "what else do they buy"
-     ]
+     ],
+     "title_en": "Exhibit — Basket economics"
     }
    ],
    "steps": [
@@ -26017,7 +26057,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — In-house vs outsource",
+     "title": "Exhibit — in-house против аутсорсинга",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -26081,11 +26121,12 @@
       "outsource",
       "servicing costs",
       "numbers"
-     ]
+     ],
+     "title_en": "Exhibit — In-house vs outsource"
     },
     {
      "id": "ex2",
-     "title": "Exhibit — Fixed cost breakdown",
+     "title": "Exhibit — состав fixed cost",
      "reveal": "on_request",
      "triggers": [
       "avoidable",
@@ -26112,7 +26153,8 @@
       "fixed structure",
       "numbers",
       "what disappears on outsourcing"
-     ]
+     ],
+     "title_en": "Exhibit — Fixed cost breakdown"
     }
    ],
    "steps": [
@@ -26229,7 +26271,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — City fundamentals",
+     "title": "Exhibit — фундаментальные показатели городов",
      "reveal": "on_request",
      "triggers": [
       "ADR",
@@ -26311,11 +26353,12 @@
       "rooms",
       "by city",
       "numbers"
-     ]
+     ],
+     "title_en": "Exhibit — City fundamentals"
     },
     {
      "id": "ex2",
-     "title": "Exhibit — Capex & operating cost",
+     "title": "Exhibit — capex и operating cost",
      "reveal": "on_request",
      "triggers": [
       "ROIC",
@@ -26391,7 +26434,8 @@
       "return on capital",
       "build cost",
       "numbers"
-     ]
+     ],
+     "title_en": "Exhibit — Capex & operating cost"
     }
    ],
    "steps": [
@@ -26494,7 +26538,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — Line P&L ($M)",
+     "title": "Exhibit — P&L по линиям ($M)",
      "reveal": "on_request",
      "triggers": [
       "P&L линий",
@@ -26546,11 +26590,12 @@
       "line data",
       "by line",
       "numbers"
-     ]
+     ],
+     "title_en": "Exhibit — Line P&L ($M)"
     },
     {
      "id": "ex2",
-     "title": "Exhibit — Investment income (float)",
+     "title": "Exhibit — инвестиционный доход от float",
      "reveal": "on_request",
      "triggers": [
       "contribution",
@@ -26579,7 +26624,8 @@
       "overhead avoidable",
       "long-term reserves",
       "numbers"
-     ]
+     ],
+     "title_en": "Exhibit — Investment income (float)"
     }
    ],
    "steps": [
@@ -26695,7 +26741,7 @@
    "exhibits": [
     {
      "id": "ex_escalation",
-     "title": "Exhibit — Projected revenue vs operating cost, years 1–8 ($M)",
+     "title": "Exhibit — прогноз выручки против operating cost, годы 1–8 ($M)",
      "reveal": "on_request",
      "triggers": [
       "инфляция затрат",
@@ -26724,7 +26770,8 @@
       "cost escalation",
       "rent escalators",
       "costs by year"
-     ]
+     ],
+     "title_en": "Exhibit — Projected revenue vs operating cost, years 1–8 ($M)"
     }
    ],
    "steps": [
@@ -26842,7 +26889,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — Chip pricing",
+     "title": "Exhibit — ценообразование по чипу",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -26898,11 +26945,12 @@
       "unit cost",
       "price",
       "numbers"
-     ]
+     ],
+     "title_en": "Exhibit — Chip pricing"
     },
     {
      "id": "ex2",
-     "title": "Exhibit — Replacement cost",
+     "title": "Exhibit — replacement cost",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -26929,7 +26977,8 @@
       "how much it costs to buy now",
       "current chip price",
       "numbers"
-     ]
+     ],
+     "title_en": "Exhibit — Replacement cost"
     }
    ],
    "steps": [
@@ -27032,7 +27081,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — Project status & offer",
+     "title": "Exhibit — статус проекта и предложение",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -27106,11 +27155,12 @@
       "sale price",
       "numbers",
       "what has already been spent"
-     ]
+     ],
+     "title_en": "Exhibit — Project status & offer"
     },
     {
      "id": "ex2",
-     "title": "Exhibit — Offer composition",
+     "title": "Exhibit — состав предложения",
      "reveal": "on_request",
      "triggers": [
       "data",
@@ -27139,7 +27189,8 @@
       "is everything handed over",
       "grid connection",
       "numbers"
-     ]
+     ],
+     "title_en": "Exhibit — Offer composition"
     }
    ],
    "steps": [
@@ -27269,7 +27320,7 @@
    "exhibits": [
     {
      "id": "ex1",
-     "title": "Exhibit — New vertical economics",
+     "title": "Exhibit — экономика новой вертикали",
      "reveal": "on_request",
      "triggers": [
       "capex разработки",
@@ -27341,7 +27392,8 @@
       "revenue/costs of the vertical",
       "numbers",
       "economics"
-     ]
+     ],
+     "title_en": "Exhibit — New vertical economics"
     }
    ],
    "steps": [
