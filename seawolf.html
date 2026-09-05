@@ -688,8 +688,13 @@ async function authToken(){
         return await window.parent.swAuthToken(); }catch(e){}
  return null}
 async function api(action,payload){
- const t=await authToken();
- const h={'content-type':'application/json'}; if(t)h['Authorization']='Bearer '+t;
+ /* Круг 141, живой стенд: здесь стояло `const t=await authToken()`, и этот `t`
+    ЗАТЕНЯЛ функцию перевода t() из строки 380 на всю функцию api(). Все четыре
+    сообщения об ошибке ниже — «сессия истекла», «слишком часто», два про ответ
+    сервера — вызывали не перевод, а строку токена, и человек вместо объяснения
+    видел «t is not a function». Найдено браузером на стенде, не чтением. */
+ const tok=await authToken();
+ const h={'content-type':'application/json'}; if(tok)h['Authorization']='Bearer '+tok;
  const r=await fetch(EP,{method:'POST',headers:h,
    /* Круг 72, находка dev'а: язык не доезжал до ручки вовсе — см. sfl.NEW.html. */
    body:JSON.stringify(Object.assign({action:action,token:TOKEN,seenIds:P.seen,

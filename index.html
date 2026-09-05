@@ -10286,10 +10286,17 @@ Return ONLY valid JSON (no markdown, no backticks). All five scores are 1.0-10.0
     let cur = 0;
     const valEl = document.getElementById('ring-val');
     const step = overall / 22;
-    const t = setInterval(() => {
+    /* 05.09.2026 dev. Здесь стояло `const t = setInterval(...)` - ручка таймера
+       закрывала переводчик t() верхнего уровня, и три строки ниже
+       t('fb.verdict.hire') падало с «t is not a function». Заголовок вердикта
+       не рисовался ни при одном балле от 5.0 и выше. Тот же класс, что убил
+       разбор SFL в круге 125 и сообщения об ошибке Sea Wolf в круге 141.
+       Найдено гейтом gate_shadowed_handle после того, как цех игр показал живым
+       прогоном, что гейт не видел теней ЛОКАЛЬНОЙ КОНСТАНТОЙ - только параметром. */
+    const tm = setInterval(() => {
       cur = Math.min(cur + step, overall);
       if (valEl) valEl.textContent = cur.toFixed(1);
-      if (cur >= overall) { clearInterval(t); if (valEl) valEl.textContent = overall.toFixed(1); }
+      if (cur >= overall) { clearInterval(tm); if (valEl) valEl.textContent = overall.toFixed(1); }
     }, 28);
 
     const heading = overall >= 8.5 ? t('fb.verdict.strong')
