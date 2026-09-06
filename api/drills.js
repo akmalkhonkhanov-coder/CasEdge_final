@@ -136,7 +136,7 @@ RESPONSE FORMAT (strict JSON): {"pass":true,"coaching":"1-2 sentences IN ENGLISH
 // kill fails as hard as a miss); each kill needs a correct, distinct reason.
 const BR_GRADER_SYSTEM = `You are a strict but fair MBB brainstorm/creativity-drill grader. You receive the case QUESTION, the FACTS given to the candidate, the grading REGISTERS (answer key: LOAD, COVER, DEAD — written in Russian), and the candidate's IDEA LIST (written in English). If a CULL block is present you also receive the client team's ideas, the new fact, the reference KILL-SET, and the candidate's CULL answer. Return ONLY JSON, no preamble, no markdown.
 
-MATCH BY MEANING across languages: the key is Russian, the answer English — accept any idea/branch that means the same thing; never demand the Russian wording.
+MATCH BY MEANING across languages: the key and the candidate's answer may be in DIFFERENT languages, in either direction — accept any idea/branch that means the same thing, and never demand the wording of either side.
 
 GRADE IN THIS ORDER (all applicable gates must pass):
 1. GATE-3: at least 3 ideas that are genuinely tied to the slot's facts. Fewer → FAIL.
@@ -786,7 +786,12 @@ export default async function handler(req, res) {
         logGrade('cull_reveal', d, userId, null);
         return res.status(200).json({
           stage: 'cull',
-          cull: { new_fact: c.new_fact || '', team_ideas: c.team_ideas || [] },
+          /* 06.09.2026, dev, находка цеха дриллов (круг 132). Второй ход уходил
+             кандидату БЕЗ ruField: он играл первый ход по-русски и получал
+             второй по-английски — 20 новых фактов и 126 идей команды клиента.
+             Провод тот же, что у вопроса: `_ru`-близнец, если он непустой. */
+          cull: { new_fact: ruField(c, 'new_fact', aiLang) || '',
+                  team_ideas: ruField(c, 'team_ideas', aiLang) || [] },
           move1Answer: String(body.answer || '')   // echoed back so the client returns it with the cull move
         });
       }
