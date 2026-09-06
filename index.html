@@ -6778,6 +6778,7 @@ function rkReport(inner, foot) {
       <button class="sv-next" onclick="rkSubmitFields([${wids}]).then(function(){ solve.reportStep='graph';renderSolve() })">Choose the chart &rarr;</button>`;
     return;
   }
+  if (step === 'visual' && rep.graph_selection && rep.graph_selection.visual) return rkReportVisual(inner, foot);
   const gs = rep.graph_selection || {};
   /* Выбор графика раньше проверялся кнопками «Check chart» и «Check» и печатал
      «✓ Right chart» / «✗ Reconsider — line». Тот же вердикт по ходу, что и у
@@ -6809,7 +6810,107 @@ function rkReport(inner, foot) {
       </div>
     </div>`;
   foot.innerHTML = `<button class="sv-back" onclick="solve.reportStep='written';renderSolve()">&larr; Back</button>
-    <button class="sv-next" onclick="rkSubmitFields(['g:type','g:justify']).then(function(){ solve.phase='cases';solve.qIndex=0;renderSolve() })">Go to cases &rarr;</button>`;
+    <button class="sv-next" onclick="rkSubmitFields(['g:type','g:justify']).then(function(){ rkAfterGraph() })">${(solve.game.report&&solve.game.report.graph_selection&&solve.game.report.graph_selection.visual)?'Build the chart &rarr;':'Go to cases &rarr;'}</button>`;
+}
+
+/* ── VISUAL REPORT ─────────────────────────────────────────────────────────
+   Третья часть отчёта, снятая с живой игры (круг 158, кейс Ecotopia): у них
+   Report из трёх шагов — Written Report → Graph Selection → Visual Report, и в
+   последнем кандидат СТРОИТ выбранный график, вписывая значения руками или
+   перетаскивая их из журнала. У нас было два шага из трёх.
+
+   Данные — не выдуманные: `graph_selection.visual` собран из ЭКЗИБИТА той же
+   игры, на который указывает описание графика (_m/сборка_визуального_отчёта.py,
+   55 игр из 57, значений вне экзибита 0). Две игры без графика — там экзибит
+   карта, числовых рядов нет вовсе; для них шаг пропускается, как и раньше. */
+function rkAfterGraph() {
+  const v = solve.game.report && solve.game.report.graph_selection && solve.game.report.graph_selection.visual;
+  if (v) { solve.reportStep = 'visual'; renderSolve(); }
+  else { solve.phase = 'cases'; solve.qIndex = 0; renderSolve(); }
+}
+function rkVisualVals(v) {
+  const out = [];
+  v.series.forEach((s, si) => v.categories.forEach((c, ci) => {
+    const raw = solve.rkVals['v:' + si + ':' + ci];
+    out.push(raw === undefined || raw === '' ? null : Number(String(raw).replace(/[^0-9.\-]/g, '')));
+  }));
+  return out;
+}
+function rkVisualChartSVG(v) {
+  const тип = String(solve.rkVals['g:type'] || 'Bar').toLowerCase();
+  const vals = rkVisualVals(v), n = v.categories.length, m = v.series.length;
+  const есть = vals.filter(x => x !== null && !isNaN(x));
+  const max = есть.length ? Math.max.apply(null, есть.concat([1])) : 1;
+  const W = 560, H = 220, padL = 44, padR = 16, padT = 14, padB = 34;
+  const pw = W - padL - padR, ph = H - padT - padB;
+  const цвет = i => i === 0 ? 'var(--accent-teal)' : 'var(--accent-amber)';
+  let svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(v.title)}">`;
+  for (let i = 0; i <= 4; i++) {
+    const y = padT + ph - (i / 4) * ph;
+    svg += `<line x1="${padL}" y1="${y.toFixed(1)}" x2="${W - padR}" y2="${y.toFixed(1)}" stroke="var(--sv-line-soft)" stroke-width="1"/>`;
+    svg += `<text x="${padL - 6}" y="${(y + 4).toFixed(1)}" text-anchor="end" font-size="9.5" fill="var(--on-dark-soft)">${Math.round(max * i / 4)}</text>`;
+  }
+  const at = (si, ci) => { const x = vals[si * n + ci]; return (x === null || isNaN(x)) ? null : x };
+  if (тип.indexOf('pie') === 0) {
+    const сумма = есть.reduce((a, b) => a + b, 0) || 1;
+    let угол = -Math.PI / 2, cx = W / 2, cy = padT + ph / 2, r = Math.min(ph, pw) / 2 - 4;
+    v.categories.forEach((c, ci) => {
+      const x = at(0, ci); if (x === null) return;
+      const a2 = угол + 2 * Math.PI * (x / сумма);
+      const p = [cx + r * Math.cos(угол), cy + r * Math.sin(угол), cx + r * Math.cos(a2), cy + r * Math.sin(a2)];
+      svg += `<path d="M${cx} ${cy} L${p[0].toFixed(1)} ${p[1].toFixed(1)} A${r} ${r} 0 ${(a2 - угол) > Math.PI ? 1 : 0} 1 ${p[2].toFixed(1)} ${p[3].toFixed(1)} Z" fill="${ci % 2 ? 'var(--accent-amber)' : 'var(--accent-teal)'}" opacity="${0.55 + 0.15 * ci}"/>`;
+      угол = a2;
+    });
+  } else if (тип.indexOf('line') === 0 || тип.indexOf('combo') === 0) {
+    for (let si = 0; si < m; si++) {
+      const точки = [];
+      for (let ci = 0; ci < n; ci++) {
+        const x = at(si, ci); if (x === null) continue;
+        точки.push([padL + (n === 1 ? pw / 2 : (ci / (n - 1)) * pw), padT + ph - (x / max) * ph]);
+      }
+      if (точки.length > 1) svg += `<polyline points="${точки.map(p => p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' ')}" fill="none" stroke="${цвет(si)}" stroke-width="2.5"/>`;
+      точки.forEach(p => svg += `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="3.5" fill="${цвет(si)}"/>`);
+    }
+  } else {
+    const slot = pw / n, bw = Math.min(30, (slot * 0.7) / m);
+    for (let ci = 0; ci < n; ci++) for (let si = 0; si < m; si++) {
+      const x = at(si, ci); if (x === null) continue;
+      const h = (x / max) * ph;
+      const bx = padL + ci * slot + slot / 2 - (m * bw) / 2 + si * bw;
+      svg += `<rect x="${bx.toFixed(1)}" y="${(padT + ph - h).toFixed(1)}" width="${(bw - 3).toFixed(1)}" height="${h.toFixed(1)}" rx="3" fill="${цвет(si)}" opacity="0.9"/>`;
+    }
+  }
+  v.categories.forEach((c, ci) => {
+    const x = padL + (n === 1 ? pw / 2 : (тип.indexOf('line') === 0 || тип.indexOf('combo') === 0 ? (ci / Math.max(1, n - 1)) * pw : ci * (pw / n) + (pw / n) / 2));
+    svg += `<text x="${x.toFixed(1)}" y="${(H - padB + 16).toFixed(1)}" text-anchor="middle" font-size="10" fill="var(--on-dark-soft)">${esc(c)}</text>`;
+  });
+  return svg + '</svg>';
+}
+function rkReportVisual(inner, foot) {
+  const v = solve.game.report.graph_selection.visual;
+  const строки = v.series.map((s, si) =>
+    `<div class="rk-field-l" style="margin-top:14px;">${esc(s.label)}</div>
+     <div class="rk-row" style="flex-wrap:wrap;gap:10px;">` +
+    v.categories.map((c, ci) => {
+      const id = 'v:' + si + ':' + ci, val = solve.rkVals[id] == null ? '' : solve.rkVals[id];
+      return `<span class="rk-linechip">${esc(c)}: <input class="sv-numin" style="width:96px" id="in-${id}" value="${esc(String(val))}" placeholder="number"
+                oninput="solve.rkVals['${id}']=this.value;rkRedrawChart()"></span>`;
+    }).join('') + `</div>`).join('');
+  inner.innerHTML =
+    `<div class="sv-layout-main">
+      <div class="sv-h">Visual report</div>
+      <div class="rk-note">Build the chart you chose: type the figures or drag them from the journal.</div>
+      <div class="sv-q-text">${rkMd(v.title)}</div>
+      <div id="rkChart" class="rk-mini" style="margin:14px 0;padding:10px;">${rkVisualChartSVG(v)}</div>
+      ${строки}
+    </div>`;
+  foot.innerHTML = `<button class="sv-back" onclick="solve.reportStep='graph';renderSolve()">&larr; Back</button>
+    <button class="sv-next" onclick="solve.phase='cases';solve.qIndex=0;renderSolve()">Go to cases &rarr;</button>`;
+}
+/* перерисовка без пересборки экрана: иначе поле теряет фокус на каждой цифре */
+function rkRedrawChart() {
+  const v = solve.game.report.graph_selection.visual, el = document.getElementById('rkChart');
+  if (v && el) el.innerHTML = rkVisualChartSVG(v);
 }
 
 /* ── CASES ────────────────────────────────────────────────────────────────── */
