@@ -407,6 +407,29 @@ class SeaWolfSession {
     return { attr, range: [Math.max(1, r[0] - w), Math.min(10, r[1] + w)] };
   }
 
+  /** Что дало объявление на ПРЕДЫДУЩЕЙ площадке. Круг 163, заказ dev: три экрана
+      объявления подряд не должны быть тремя одинаковыми стенами, а разной их
+      делает не украшение, а СОБСТВЕННАЯ история кандидата.
+      Наружу уходит только прошлое: та шестёрка уже была у него на экране,
+      будущего здесь нет (правило Г6). */
+  chrPrev(si) {
+    if (si <= 0) return null;
+    const d = this.decl[si - 1];
+    if (!Array.isArray(d)) return null;
+    const s = this.game.sites[si - 1], six = s.start;
+    if (!d.length) return { site: si, skipped: true, items: [] };
+    return { site: si, skipped: false, items: d.map(name => {
+      const i = ATTRS.indexOf(name);
+      if (i >= 0) {
+        const [lo, hi] = s.ranges[name];
+        return { name, kind: 'attr', range: [lo, hi], of: six.length,
+                 hits: six.filter(m => m[1][i] >= lo && m[1][i] <= hi).length };
+      }
+      return { name, kind: 'trait', of: six.length,
+               hits: six.filter(m => m[2] === name).length };
+    }) };
+  }
+
   /** Фаза внутри площадки. Обзор идёт ПЕРВЫМ и только если есть что обозревать. */
   sitePhase() {
     if (this.finished) return 'done';
@@ -502,7 +525,8 @@ class SeaWolfSession {
          кандидат видит (по ним он и выбирает галочки), шестёрку — ещё нет.
          Иначе объявление превращается в выбор задним числом. */
       pool: ph === 'chr' ? [] : this.pool().map(m => ({ name: m[0], a: m[1], trait: m[2] })),
-      chr: ph === 'chr' ? { pick: CHR_PICK, attrs: ATTRS.slice(), traits: TRAITS.slice() } : null,
+      chr: ph === 'chr' ? { pick: CHR_PICK, attrs: ATTRS.slice(), traits: TRAITS.slice(),
+                            prev: this.chrPrev(si) } : null,
       round: this.round, roundsTotal: ROUNDS,
       offers: (!this.finished && ph !== 'chr' && this.round < ROUNDS)
         ? s.rounds[this.round].map(m => ({ name: m[0], a: m[1], trait: m[2] })) : null,

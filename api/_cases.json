@@ -11664,7 +11664,7 @@
     },
     {
      "id": "exB",
-     "title": "линейный график: berth slots at Marquee Port, by season week",
+     "title": "линейный график: причальные слоты в Marquee Port по неделям сезона",
      "reveal": "auto",
      "triggers": [],
      "body_md": "> **Недели 1–6 и 21–26** *(плечо, 12 недель)*: Carnivia получала **1 слот в неделю**\n> **Недели 7–20** *(пик, 14 недель)*: порт насыщен инкумбентами — Carnivia получает **1 слот через неделю**\n>\n> *Замечание: заход в Marquee Port — это всё торговое предложение маршрута. Рейс без него — не этот продукт.*",
@@ -14209,7 +14209,7 @@
     {
      "step": 2,
      "label": "F5: противоречие в exhibit  (4 min)",
-     "candidate_md": "**Q:** *The CFO says labor is killing margins. Read the two margin columns.*\n\nДанные — в exA (структура сети) и ex2 (маржа по форматам).",
+     "candidate_md": "**Q:** *Финдиректор говорит, что маржу убивает труд. Прочитай две колонки маржи.*\n\nДанные — в exA (структура сети) и ex2 (маржа по форматам).",
      "interviewer_md": "**Pass if ALL:** (1) reads the two margin columns and states that within each format margin barely moved: company-owned **10.5% → 10.2%** and franchised **82% → 81%** — no format shows a labor-cost signature; (2) identifies the mix shift as the contradiction: company-owned stores go **120 → 310** while franchised go **480 → 290** — **190** franchises bought back — and a company-owned store carries full revenue of **$2,400,000** against a franchise fee line of **$160,000**, so the revenue denominator changes composition entirely; (3) states the consequence for the CFO's ask explicitly: the blended fall of **25.6% → 14.4%** (11.2 pp) cannot be a rate story when rate moved ~**0.3 pp** inside the formats, so an **$11 million** labor programme is aimed at the wrong driver.\n\n**Fail if:** the candidate accepts the labor diagnosis and starts sizing labor savings, or observes only that \"blended margin fell\" without separating the mix effect from the rate effect using the two margin columns.\n\n📖 **Внутри форматов маржа почти не двинулась**: 10.5→10.2 и 82→81. Grillson's **выкупила 190 франшиз** (тренд «контроль клиентского опыта»). Собственный ресторан несёт полную выручку и полные косты (низкий %), франшиза — только fee (82%). Знаменатель взорвался.",
      "hints": {},
      "conditional_exhibits": [],
@@ -14663,7 +14663,7 @@
     {
      "step": 3,
      "label": "F7: САМООПРОВЕРЖЕНИЕ  (5 min)",
-     "candidate_md": "> **Q:** *You are about to commit $38M on a 7% margin business. What kills this?*\n\nВыдвини три сильнейших возражения сам и посчитай каждое.",
+     "candidate_md": "> **Q:** *Ты готов вложить $38M в бизнес с маржой 7%. Что его убивает?*\n\nВыдвини три сильнейших возражения сам и посчитай каждое.",
      "interviewer_md": "**Ответ.** Кандидат обязан **сам** выдвинуть возражения. Три сильнейших — и все считаются ([9]: Python):\n| Возражение | NPV | Вердикт |\n|---|---|---|\n| **[1] MLR 86%** (медкосты бегут на 2pp горячее) | **+$163,446,813** | реально, маржа 7→5%, держится |\n| **[2] Ramp 40k/55k/64k** вместо мгновенных 64k | **+$219,859,919** | держится |\n| **[3] Star-rating haircut −5% премии yr1–2** (новый план) | **+$178,491,654** | держится |\n| **ВСЕ ТРИ ВМЕСТЕ** | **+$97,912,929** | **ДЕРЖИТСЯ** |\n\n**Ловушка [3].** Наивная подстановка режет вместе с премией и прибыль: 826 × 0.95 = 785/чел. Но 84% MLR и 9% admin — доли от премии только в базовом сценарии; сами косты — это $9,912 медицинских плюс $1,062 admin = **$10,974/чел**, и от прайса они не зависят. При премии $11,210 остаётся **$236/чел**, а MLR подскакивает до 9,912/11,210 = **88.4%** (всё ещё ниже breakeven-MLR 90.06% из шага sensitivity). Отсюда **$178,491,654**, а не $239,438,167. В комбинации с MLR 86% медкосты 0.86 × 11,800 = $10,148 плюс admin $1,062 = ровно $11,210 — годы 1–2 дают **ноль** прибыли, дальше 64,000 × 590 = $37,760,000/год: NPV = 37,760,000 × (5.334926 − 1.735537) − 38,000,000 = **$97,912,929**. Вердикт ENTER выживает во всех четырёх сценариях.",
      "hints": {
       "L1": "Ты назвал три возражения — какое из них посчитано, а какое проговорено?",
@@ -16307,7 +16307,7 @@
     {
      "step": 2,
      "label": "F5: противоречие  (4 min)",
-     "candidate_md": "Here's the same aligner data, split by segment. What jumps out at you — before you run any numbers?\n\nДанные — в exA.",
+     "candidate_md": "Вот те же данные по элайнерам, разрезанные по сегментам. Что бросается в глаза — до того как ты что-то посчитаешь?\n\nДанные — в exA.",
      "interviewer_md": "**Pass if ALL:** (1) spots the composition difference: scanners sit in **urban** clinics — **84%** of scanner clinics are urban against only **10%** of non-scanner clinics — so the two groups are not comparable; (2) states the **within-segment** lift instead of the blended gap: **+1.9** in urban (**15.8 vs 13.9**) and **+2.1** in suburban (**8.4 vs 6.3**), not **7.5**, and can verify the blend (0.84×15.8 + 0.16×8.4 = 14.62 ≈ 14.6; 0.10×13.9 + 0.90×6.3 = 7.06 ≈ 7.1); (3) names the mechanism explicitly — scanners went into **urban flagships** with a young, affluent patient base, so **14.6 vs 7.1 is a difference in clientele, not in equipment** (selection, not causation).\n\n**Fail if:** candidate carries the blended **7.5** uplift onto the remaining **350** clinics, or says \"there may be some selection bias\" without producing the +1.9 / +2.1 within-segment numbers.\n\n📖 Сканеры ставили в **urban-флагманы** — молодая платёжеспособная демография. Внутри сегмента лифт не 7.5, а **+1.9 (urban)** и **+2.1 (suburban)** старта/мес. Разница 14.6 vs 7.1 — это разница **клиентуры**, не техники.",
      "hints": {},
      "conditional_exhibits": [],
@@ -17055,7 +17055,7 @@
     {
      "step": 2,
      "label": "H2: churn  (3 min)",
-     "candidate_md": "So — does H2 survive that?\n\nДанные — в exA.",
+     "candidate_md": "Итак — переживает ли это H2?\n\nДанные — в exA.",
      "interviewer_md": "**Pass if ALL:** (1) works the **delta**, not the level — retention moved 91.0% → 90.6%, i.e. **0.4pp** of the book left, which is the only churn that can explain a change in blended spread; (2) reads the second line as the decisive one: the departed accounts ran a spread of **27.9%**, essentially the book average, so their exit is close to mix-neutral — losing average-margin clients cannot move the blend; (3) states the conclusion in scale terms: 0.4pp of clients at a normal spread moves blended spread by **hundredths of a point** against the −2.5pp to be explained — **H2 is rejected**.\n\n**Fail if:** the candidate treats falling retention as confirmation of H2 (\"clients are leaving, so churn is the story\"), or calls the 0.4pp material without comparing the leavers' 27.9% spread to the book, or hedges with \"we'd need more data\" when the exhibit already closes the hypothesis.",
      "hints": {
       "L1": "Разрыв в спреде — это изменение цен или изменение состава книги?",
@@ -22655,7 +22655,7 @@
       "свести баланс и рынок",
       "оценочный мост"
      ],
-     "body_md": "```\nBook value                                              $3,500M\n  │\n  ├─ Spectrum uplift (2,000 × 1.10 − 2,000)      +$200M   ███\n  │\n  ├─ Towers write-down (1,200 × 50% obsolete)    −$600M   ████████████\n  │\n  ├─ Other assets (at book)                          $0   \n  │\n  ▼\nRealisable value                                        $3,100M\n                                                        vs ask $3,200M\n```\n**Restrictions attaching to the assets**\n\n| Asset | Book | Restriction |\n|---|---|---|\n| Spectrum | $2,000M | продление лицензии через 6 лет; capex рефарминга не в балансе |\n| Towers | $1,200M | 50% не сдаётся; снос $40M при отказе |\n| Other | $300M | оборотный капитал, реализуем по балансу |\n\n*Обесценение вышек — не бухгалтерская переоценка, а физическая непригодность под 5G-плотность.*",
+     "body_md": "```\nБалансовая стоимость                                    $3,500M\n  │\n  ├─ Прирост по спектру (2,000 × 1.10 − 2,000)   +$200M   ███\n  │\n  ├─ Списание вышек (1,200 × 50% непригодны)     −$600M   ████████████\n  │\n  ├─ Прочие активы (по балансу)                      $0   \n  │\n  ▼\nРеализуемая стоимость                                   $3,100M\n                                                        против запроса $3,200M\n```\n**Ограничения, привязанные к активам**\n\n| Актив | Баланс | Ограничение |\n|---|---|---|\n| Спектр | $2,000M | продление лицензии через 6 лет; capex рефарминга не в балансе |\n| Вышки | $1,200M | 50% не сдаётся; снос $40M при отказе |\n| Прочее | $300M | оборотный капитал, реализуем по балансу |\n\n*Обесценение вышек — не бухгалтерская переоценка, а физическая непригодность под 5G-плотность.*",
      "render": null,
      "render_omitted": {
       "reason": "prose_data",
@@ -24280,7 +24280,7 @@
       "avoidable",
       "overhead остаётся"
      ],
-     "body_md": "Cost per tonne by mine — ▇ variable (cash) · ▒ allocated fixed\n\n```\nNorthseam  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▒▒▒▒▒▒▒▒▒▒▒\n           var $41/т · fixed alloc $22/т · AVG total $63/т · output 3.0 Mt\nDeepcut    ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▒▒▒▒▒\n           var $47/т · fixed alloc $9/т · AVG total $56/т · output 2.5 Mt\nRidgeline  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▒▒▒▒▒▒▒▒▒▒▒▒▒\n           var $38/т · fixed alloc $26/т · AVG total $64/т · output 2.0 Mt\n```\n\n*Длина полосы пропорциональна стоимости тонны.*",
+     "body_md": "Затраты на тонну по шахтам — ▇ переменные (кэш) · ▒ разнесённые постоянные\n\n```\nNorthseam  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▒▒▒▒▒▒▒▒▒▒▒\n           перем. $41/т · разнес. пост. $22/т · ИТОГО в среднем $63/т · выпуск 3.0 Mt\nDeepcut    ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▒▒▒▒▒\n           перем. $47/т · разнес. пост. $9/т · ИТОГО в среднем $56/т · выпуск 2.5 Mt\nRidgeline  ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▒▒▒▒▒▒▒▒▒▒▒▒▒\n           перем. $38/т · разнес. пост. $26/т · ИТОГО в среднем $64/т · выпуск 2.0 Mt\n```\n\n*Длина полосы пропорциональна стоимости тонны.*",
      "render": null,
      "render_omitted": {
       "reason": "prose_data",
