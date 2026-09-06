@@ -318,7 +318,12 @@
       // uiLang едет на сервер ради одного экрана - отказа по исчерпанному плану.
       // Источник один, он в index.html; здесь только пересылка.
       var ui = (typeof window.caseedgeUiLang === 'function') ? window.caseedgeUiLang() : 'en';
-      return fetch('/api/drills', { method: 'POST', headers: headers, body: JSON.stringify(Object.assign({}, payload, { uiLang: ui })) });
+      /* 06.09.2026, dev. Ось языка САМОГО вопроса. До сегодня клиент её не слал
+         вовсе, и сервер отдавал вопрос всегда по-английски — переводить дриллы
+         было некуда. Источник тот же, что у кейсов: state.aiLang. */
+      var st = (typeof state !== 'undefined' && state) ? state : {};
+      var ai = st.aiLang === 'ru' ? 'ru' : 'en';
+      return fetch('/api/drills', { method: 'POST', headers: headers, body: JSON.stringify(Object.assign({}, payload, { uiLang: ui, aiLang: ai })) });
     }).then(function (r) { return r.json().catch(function () { return {}; }); });
   }
 

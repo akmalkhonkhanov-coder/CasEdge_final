@@ -2449,7 +2449,7 @@
       </div>
       <div class="faq-item">
         <div class="faq-q" data-i18n="faq.q5">What languages are supported?</div>
-        <div class="faq-a" data-i18n="faq.a5">Cases, drills and games are conducted in English only - exactly as in a real MBB interview. The interface and the post-answer feedback can be set to English or Russian.</div>
+        <div class="faq-a" data-i18n="faq.a5">A real MBB interview can be run in English or in Russian, and so can a case here - you choose before you start. Drills and the assessment games are English. The interface and the post-answer feedback are set separately, English or Russian.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q" data-i18n="faq.q6">Is my progress saved?</div>
@@ -3856,7 +3856,17 @@ const state = {
      оставлено константой, а не удалено: его читают девять мест, и константа
      держит их честными без девяти правок. 'same' у fbLang теперь означает
      «как интерфейс»: язык партии константа, и следовать ей нечему. */
-  aiLang: 'en',
+  /* 06.09.2026 dev. РУССКОЕ ВЕДЕНИЕ КЕЙСА ВКЛЮЧЕНО ОБРАТНО. 25.08.2026 поле было
+     прибито константой 'en', потому что русской стороны у библиотеки почти не было:
+     кандидат получил бы русский бриф и английские вопросы — шов хуже честного
+     английского. Сегодня цех кейсов закрыл перевод: 400 кейсов из 400, полей
+     стороны кандидата 4952, с русским словом 4946; шесть оставшихся — заголовки,
+     целиком состоящие из терминов глоссария («contribution per unit»), которым
+     перевод не нужен. Дыр нет, шва нет, константу снимаю.
+     ВАЖНО: ось касается ТОЛЬКО кейсов. Дриллы и игры Solve остаются английскими —
+     их материал английский, и это решение владельца. Дриллы берут язык из
+     langInstruction(), которая ведение не трогает. */
+  aiLang: (function(){ try { return localStorage.getItem('caseedge_ailang') === 'ru' ? 'ru' : 'en' } catch(e) { return 'en' } })(),
   fbLang: localStorage.getItem('caseedge_fblang') || 'same',
   uiLang: localStorage.getItem('caseedge_uilang') || 'en',
 };
@@ -3874,9 +3884,9 @@ window.caseedgeFbLang = function () {
 
 const LANG_NAMES = { en: 'English', ru: 'Russian (Русский)' };
 function setAiLang(code) {
-  /* 25.08.2026. Ведение зафиксировано английским; функция оставлена,
-     чтобы старые вызовы не падали, но язык не меняет. */
-  state.aiLang = 'en';
+  /* 06.09.2026. Функция снова МЕНЯЕТ язык ведения кейса: перевод закрыт,
+     держать её пустышкой больше не за чем. */
+  state.aiLang = (code === 'ru') ? 'ru' : 'en';
   /* 24.08.2026, dev. Список кейсов кэшируется на весь сеанс, а отрасль в нём
      теперь ЗАВИСИТ ОТ ЯЗЫКА. Без сброса кандидат, сменивший язык кейса,
      видел бы отрасли на прежнем — то есть кэш пережил бы причину, по которой
@@ -3981,6 +3991,9 @@ const I18N = {
     'setup.t.price.d': "Optimal price strategy",
     'setup.t.rnd': "Random Case",
     'setup.t.rnd.d': "Let the AI surprise you",
+    'diff.hard': "Hard", 'diff.medium': "Medium", 'diff.easy': "Easy",
+    'caselib.min': "min", 'caselib.steps': "steps", 'caselib.done': "done",
+    'caselib.case1': "case", 'caselib.caseN': "cases",
     'setup.lib': "Choose a case from the library",
     'setup.loading': "Loading the case library…",
     'fb.complete': "Session Complete",
@@ -4085,7 +4098,7 @@ const I18N = {
     'faq.q4': 'Which firms and case types are covered?',
     'faq.a4': 'Cases follow real MBB patterns across firms (McKinsey, BCG, Bain) and types - profitability, market entry, M&A, pricing, market sizing, and more. Drills cover six distinct skills tested in real interviews.',
     'faq.q5': 'What languages are supported?',
-    'faq.a5': 'Cases, drills and games are conducted in English only - exactly as in a real MBB interview. The interface and the post-answer feedback can be set to English or Russian.',
+    'faq.a5': 'A real MBB interview can be run in English or in Russian, and so can a case here - you choose before you start. Drills and the assessment games are English. The interface and the post-answer feedback are set separately, English or Russian.',
     'faq.q6': 'Is my progress saved?',
     'faq.a6': 'Yes - your progress is saved on your device, and account-based cloud sync keeps it consistent across all your devices.',
     'nav.contact': 'Contact',
@@ -4273,8 +4286,8 @@ const I18N = {
     'terms.h8': 'Contact', 'terms.p8': 'Questions about these terms? Reach us at support@casedge.io.',
     'lang.settings': 'Language settings',
     'lang.interface': 'Interface language',
-    'lang.casedrill': 'Cases, drills and games',
-    'lang.enonly': 'English only. The case, the drill and the Solve games are conducted in English - that is the language of the real MBB interview, and practising in it is part of the preparation. Your interface and your feedback stay in the language you pick.',
+    'lang.caselang': 'Case language',
+    'lang.caselang.hint': 'A real case interview may be run in either language, so the library is available in both - all 400 cases. Drills and the Solve games stay in English: that is the language of their material and of the real test.',
     'lang.feedback': 'Feedback language',
     'lang.same': 'As interface',
     'lang.done': 'Done',
@@ -4478,6 +4491,9 @@ const I18N = {
     'setup.t.price.d': "Оптимальная ценовая стратегия",
     'setup.t.rnd': "Случайный кейс",
     'setup.t.rnd.d': "Пусть AI выберет за тебя",
+    'diff.hard': "Сложный", 'diff.medium': "Средний", 'diff.easy': "Лёгкий",
+    'caselib.min': "мин", 'caselib.steps': "шагов", 'caselib.done': "пройден",
+    'caselib.case1': "кейс", 'caselib.caseN': "кейсов",
     'setup.lib': "Выбери кейс из библиотеки",
     'setup.loading': "Загружаю библиотеку кейсов…",
     'fb.complete': "Сессия завершена",
@@ -4581,7 +4597,7 @@ const I18N = {
     'faq.q4': 'Какие фирмы и типы кейсов покрыты?',
     'faq.a4': 'Кейсы следуют реальным паттернам MBB по фирмам (McKinsey, BCG, Bain) и типам - прибыльность, выход на рынок, M&A, ценообразование, оценка рынка и другие. Дриллы покрывают шесть отдельных навыков, которые проверяют на реальных интервью.',
     'faq.q5': 'Какие языки поддерживаются?',
-    'faq.a5': 'Кейсы, дриллы и игры ведутся только по-английски - как на настоящем интервью в MBB. По-русски выбираются интерфейс и разбор после ответа.',
+    'faq.a5': 'Настоящее интервью в MBB может идти на английском или на русском - и кейс здесь тоже: язык выбирается до начала. Дриллы и игры-ассессменты идут по-английски. Интерфейс и разбор после ответа выбираются отдельно.',
     'faq.q6': 'Сохраняется ли мой прогресс?',
     'faq.a6': 'Да - прогресс сохраняется на твоём устройстве, а синхронизация через аккаунт держит его одинаковым на всех устройствах.',
     'nav.contact': 'Контакты',
@@ -4773,8 +4789,8 @@ const I18N = {
     'terms.h8': 'Контакты', 'terms.p8': 'Вопросы по условиям? Пишите на support@casedge.io.',
     'lang.settings': 'Настройки языка',
     'lang.interface': 'Язык интерфейса',
-    'lang.casedrill': 'Кейсы, дриллы и игры',
-    'lang.enonly': 'Только английский. Сам кейс, дрилл и игры Solve идут по-английски - это язык настоящего интервью MBB, и тренировка на нём часть подготовки. Интерфейс и разбор остаются на выбранном тобой языке.',
+    'lang.caselang': 'Язык кейса',
+    'lang.caselang.hint': 'Настоящее кейс-интервью можно проходить на любом из двух языков, поэтому библиотека доступна на обоих - все 400 кейсов. Дриллы и игры Solve остаются английскими: это язык их материала и язык настоящего испытания.',
     'lang.feedback': 'Язык разбора',
     'lang.same': 'Как интерфейс',
     'lang.done': 'Готово',
@@ -4947,9 +4963,74 @@ const TYPE_KEY = {
   'Case Math': 'drillcard.math.name', 'Chart Interpretation': 'drillcard.chart.name',
   'Brainstorm': 'drillcard.brainstorm.name', 'Synthesis': 'drillcard.synthesis.name'
 };
+/* 06.09.2026 dev. В библиотеке 63 разных case_type, и почти все — составные
+   («Regulation / Supply chain»). Класть 63 ключа в оба словаря бессмысленно:
+   цех заведёт 64-й, и он молча встанет по-английски. Переводим ПОЛОВИНАМИ —
+   их 47, и любая новая комбинация уже известных половин переведётся сама.
+   Незнакомая половина печатается как есть: карточка не ломается никогда. */
+const TYPE_HALF_RU = {
+  'Pricing': 'Ценообразование',
+  'Profitability': 'Прибыльность',
+  'Cost Reduction': 'Снижение затрат',
+  'Growth Strategy': 'Стратегия роста',
+  'M&A': 'M&A',
+  'Market Entry': 'Выход на рынок',
+  'Investment': 'Инвестиции',
+  'Operations': 'Операции',
+  'Growth': 'Рост',
+  'Cost': 'Затраты',
+  'Contracts': 'Контракты',
+  'Contract': 'Контракт',
+  'Decision': 'Решение',
+  'Regulation': 'Регулирование',
+  'Go-No-Go': 'Идти или нет',
+  'Strategy': 'Стратегия',
+  'Capital allocation': 'Распределение капитала',
+  'Risk': 'Риск',
+  'Network': 'Сеть',
+  'Retail': 'Розница',
+  'Manufacturing': 'Производство',
+  'Marketing': 'Маркетинг',
+  'New Product': 'Новый продукт',
+  'Sustainability': 'Устойчивое развитие',
+  'Financial services': 'Финансовые услуги',
+  'Supply chain': 'Цепочка поставок',
+  'Supply Chain': 'Цепочка поставок',
+  'Asset decision': 'Решение по активу',
+  'Make or buy': 'Своими силами или закупка',
+  'Capital markets': 'Рынки капитала',
+  'Unit economics': 'Юнит-экономика',
+  'HR': 'Персонал',
+  'Procurement': 'Закупки',
+  'Distribution': 'Дистрибуция',
+  'Insurance': 'Страхование',
+  'Service': 'Сервис',
+  'Services': 'Услуги',
+  'E-commerce': 'Электронная торговля',
+  'Logistics': 'Логистика',
+  'Franchising': 'Франчайзинг',
+  'Legal': 'Юридический блок',
+  'Education': 'Образование',
+  'Transport': 'Транспорт',
+  'Healthcare': 'Здравоохранение',
+  'Finance': 'Финансы',
+  'Food Service': 'Общественное питание',
+  'Marketplace': 'Маркетплейс'
+};
+/* Трудность на карточке библиотеки печаталась сырой: «Hard» рядом с русской
+   отраслью. Значений всего три, словарь дешевле поля в данных. */
+const DIFF_KEY = { 'Hard': 'diff.hard', 'Medium': 'diff.medium', 'Easy': 'diff.easy' };
+function diffLabel(raw) {
+  const k = DIFF_KEY[String(raw || '').replace(/\*/g, '').trim()];
+  return k ? t(k) : (raw == null ? '' : String(raw));
+}
 function typeLabel(raw) {
   const k = TYPE_KEY[raw];
-  return k ? t(k) : (raw == null ? '' : String(raw));
+  if (k) return t(k);
+  const сырое = raw == null ? '' : String(raw).trim();
+  if (!сырое) return '';
+  if ((state.uiLang || 'en') !== 'ru') return сырое;
+  return сырое.split('/').map(x => x.trim()).map(x => TYPE_HALF_RU[x] || x).join(' / ');
 }
 function setTypePill(id, raw) {
   const el = document.getElementById(id); if (!el) return;
@@ -5042,6 +5123,13 @@ function openLangMenu() {
   });
   document.querySelectorAll('#langOptsFb .lang-opt').forEach((b, i) => {
     b.classList.toggle('sel', ['same','en','ru'][i] === state.fbLang);
+  });
+  /* 06.09.2026. Строку языка КЕЙСА вернули в модалку — надо и подсвечивать
+     текущий выбор. Без этой строки орган есть, а состояние к нему не подключено:
+     кандидат открывает настройки и не видит, какой язык у него стоит. Ровно тот
+     класс, что мы весь день ловим в играх и кейсах. */
+  document.querySelectorAll('#langOptsAi .lang-opt').forEach((b, i) => {
+    b.classList.toggle('sel', ['en','ru'][i] === state.aiLang);
   });
   document.getElementById('langModal').classList.add('show');
 }
@@ -8805,16 +8893,17 @@ function renderCaseLibrary(all) {
     const done = seen.has(('case #' + c.id).toLowerCase()) || seen.has((c.title || '').toLowerCase());
     return `<button class="firm-card caselib-card" style="width:100%;text-align:left;cursor:pointer;" onclick="startLibraryCase(${c.id})" aria-pressed="false">
       <div style="flex:1;min-width:0;">
-        <div class="firm-name">${esc(c.title)}${done ? ' <span style="color:var(--accent-teal);font-size:11px;opacity:.85;">✓ done</span>' : ''}</div>
-        <div class="firm-desc">${esc(c.case_type)} · ${esc(c.industry)} · ${esc(c.difficulty)} · ~${esc(String(c.est_minutes || '-'))} min · ${esc(String(c.steps))} steps</div>
+        <div class="firm-name">${esc(c.title)}${done ? ' <span style="color:var(--accent-teal);font-size:11px;opacity:.85;">✓ ' + esc(t('caselib.done')) + '</span>' : ''}</div>
+        <div class="firm-desc">${esc(typeLabel(c.case_type))} · ${esc(c.industry)} · ${esc(diffLabel(c.difficulty))} · ~${esc(String(c.est_minutes || '-'))} ${esc(t('caselib.min'))} · ${esc(String(c.steps))} ${esc(t('caselib.steps'))}</div>
       </div>
       <div class="firm-check" style="opacity:1;background:transparent;">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
       </div>
     </button>`;
   }).join('');
-  if (countEl) countEl.textContent = cases.length + ' case' + (cases.length === 1 ? '' : 's') +
-    (cases.length < all.length ? ' · ' + state.caseType : '');
+  if (countEl) countEl.textContent = cases.length + ' ' +
+    t(cases.length === 1 ? 'caselib.case1' : 'caselib.caseN') +
+    (cases.length < all.length ? ' · ' + typeLabel(state.caseType) : '');
 }
 
 async function startLibraryCase(caseId) {
@@ -11116,8 +11205,12 @@ document.addEventListener('keydown', e => {
       <button class="lang-opt" onclick="pickUiLang('en')">English</button>
       <button class="lang-opt" onclick="pickUiLang('ru')">Русский</button>
     </div>
-    <div class="lm-sub" data-i18n="lang.casedrill">Cases, drills and games</div>
-    <div class="help-hint" data-i18n="lang.enonly">English only. The case, the drill and the Solve games are conducted in English - that is the language of the real MBB interview, and practising in it is part of the preparation. Your interface and your feedback stay in the language you pick.</div>
+    <div class="lm-sub" data-i18n="lang.caselang">Case language</div>
+    <div class="lang-opts" id="langOptsAi">
+      <button class="lang-opt" onclick="pickAiLang('en')">English</button>
+      <button class="lang-opt" onclick="pickAiLang('ru')">Русский</button>
+    </div>
+    <div class="help-hint" data-i18n="lang.caselang.hint">A real case interview may be run in either language, so the library is available in both - all 400 cases. Drills and the Solve games stay in English: that is the language of their material and of the real test.</div>
     <div class="lm-sub" data-i18n="lang.feedback">Feedback language</div>
     <div class="lang-opts" id="langOptsFb">
       <button class="lang-opt" onclick="pickFbLang('same')" data-i18n="lang.same">Same</button>
