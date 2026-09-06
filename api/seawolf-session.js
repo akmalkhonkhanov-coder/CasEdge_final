@@ -90,7 +90,11 @@ function readToken(tok) {
 function rehydrate(st) {
   const game = GAMES.find(g => String(g.id) === String(st.g));
   if (!game) return null;
-  const s = new SeaWolfSession(game, { now: st.t });
+  /* Объявленные в фазе Characteristics атрибуты живут в токене (st.a) и едут
+     в сессию при КАЖДОЙ регидратации: обогащение выводится из них засеянным
+     ГСЧ заново, как и раздача категоризации. Сама раздача в токен не кладётся —
+     иначе токен носил бы содержимое будущих карточек (правило Г6). */
+  const s = new SeaWolfSession(game, { now: st.t, attrs: Array.isArray(st.a) ? st.a : [] });
   const ch = Array.isArray(st.c) ? st.c : [[], [], []];
   const tr = Array.isArray(st.s) ? st.s : [null, null, null];
   const at = Array.isArray(st.m) ? st.m : [null, null, null];
@@ -224,8 +228,12 @@ export default async function handler(req, res) {
       if (!LEVELS_IN_BATCH.includes(level)) return res.status(400).json({ error: { message: 'Unknown level.' } });
       const got = pickGame(level, seen);
       if (!got) return res.status(400).json({ error: { message: 'Level is empty.' } });
+      /* Фаза Characteristics: кандидат объявляет атрибуты ДО выдачи пула.
+         Пустой список — фаза пропущена, партия идёт как прежде. Чужие имена
+         движок отбрасывает сам; больше трёх не бывает по числу атрибутов. */
+      const attrs = Array.isArray(body.attrs) ? body.attrs.filter(a => typeof a === 'string').slice(0, 3) : [];
       const st = { g: got.game.id, t: Date.now(), c: [[], [], []], s: [null, null, null], m: [null, null, null],
-                   k: [[], [], []], r: [[], [], []] };
+                   k: [[], [], []], r: [[], [], []], a: attrs };
       const s = rehydrate(st);
       // A level played to the end starts a second lap, and that is announced in
       // words: a repeat you were warned about is a repeat; a silent one reads as

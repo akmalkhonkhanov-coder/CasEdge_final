@@ -2279,109 +2279,111 @@
   },
   {
    "id": "CI-021",
-   "title": "Fewer, Bigger",
+   "title": "Leader in Casual Footwear",
    "type": "Chart Interpretation",
    "clean": false,
-   "prompt": "The board is alarmed: our market share fell five points in two years. How worried should they be?",
+   "prompt": "The plan for next year opens with one line: we are the leader in a flat U.S. casual footwear market, so every extra dollar has to come out of a competitor. Read the exhibits and tell me what you would say about that line at the board meeting.",
    "exhibit": {
-    "title": "Exhibit A — Subscriber revenue bridge, FY2022 → FY2024 ($M)",
-    "parts": [
+    "title": null,
+    "blocks": [
      {
-      "type": "ascii",
-      "lines": [
-       "FY2022  ████████████████████████  1,260",
-       "          Postpaid net adds     ███ +168",
-       "          Prepaid migration     █▌  +84",
-       "          ARPU uplift           ▊   +42",
-       "          Churn                 █▌  −84",
-       "FY2024  ██████████████████████████  1,470"
-      ],
-      "blank_before": 1
+      "title": "Exhibit 1 — Salty Sole Shoe Co., income statement extract, 2009E ($M)",
+      "parts": [
+       {
+        "type": "table",
+        "header": [
+         "Line",
+         "2009E"
+        ],
+        "rows": [
+         [
+          "Sales",
+          "61.00"
+         ],
+         [
+          "Discounts",
+          "(0.61)"
+         ],
+         [
+          "**Net sales**",
+          "**60.39**"
+         ]
+        ],
+        "blank_before": 1
+       },
+       {
+        "type": "text",
+        "lines": [
+         "*All figures in $ millions. Net sales = sales less discounts.*"
+        ],
+        "blank_before": 1,
+        "blank_after": 1
+       }
+      ]
      },
      {
-      "type": "table",
-      "header": [
-       "Metric",
-       "FY2022",
-       "FY2023",
-       "FY2024"
-      ],
-      "rows": [
-       [
-        "Our revenue, $M",
-        "1,260",
-        "1,372",
-        "1,470"
-       ],
-       [
-        "Market, $M",
-        "4,200",
-        "4,900",
-        "5,880"
-       ],
-       [
-        "Share, %",
-        "30.0",
-        "28.0",
-        "25.0"
-       ],
-       [
-        "Subscribers, M",
-        "8.4",
-        "8.9",
-        "9.2"
-       ],
-       [
-        "ARPU, $/month *(derived)*",
-        "—",
-        "—",
-        "13.32"
-       ],
-       [
-        "Churn, %/yr",
-        "18.0",
-        "16.5",
-        "15.1"
-       ]
-      ],
-      "blank_before": 1
-     },
-     {
-      "type": "text",
-      "lines": [
-       "*Note: ARPU is a derived figure (revenue ÷ subscribers ÷ 12), rounded to the cent.*"
-      ],
-      "blank_before": 1,
-      "blank_after": 1
+      "title": "Exhibit 2 — U.S. Casual Footwear Market Size and Share",
+      "parts": [
+       {
+        "type": "table",
+        "header": [
+         "Metric",
+         "2006",
+         "2007",
+         "2008",
+         "2009"
+        ],
+        "rows": [
+         [
+          "Market size, $B",
+          "56",
+          "58",
+          "57",
+          "58"
+         ]
+        ],
+        "blank_before": 1
+       },
+       {
+        "type": "text",
+        "lines": [
+         "*Note in the plan: Salty Sole is the leader of the U.S. casual footwear market, with a share of more than 35%. The market is not growing.*"
+        ],
+        "blank_before": 1,
+        "blank_after": 1
+       }
+      ]
      }
     ]
    },
    "exhibit_mode": "E-before",
-   "time": "3 min",
+   "time": "4 min",
    "step_prompts": [],
    "checklist": {
-    "en": "Credit if ALL: (1) converts the share question into dollars before answering — revenue rose from $1,260M in FY2022 to $1,470M in FY2024, +$210M or +16.67%, and subscribers rose from 8.4M to 9.2M, so the business grew while the share fell; (2) states the arithmetic cause: the denominator moved, not the numerator — the market went from $4,200M to $5,880M, +40.00%, against our +16.67%, and 1,260 / 4,200 = 30.00% while 1,470 / 5,880 = 25.00%; (3) uses percentage points for the share move — a fall of 5 percentage points, not 5% — and does not describe the share fall as a loss of customers or revenue; (4) reads the bridge as structure, not just as a total: postpaid net adds of +$168M and prepaid migration of +$84M together cover the -$84M churn drag by a factor of 3.00, so retention is not the binding problem; (5) reframes the board's concern as a growth-rate question rather than a loss question — we are growing, but the market is growing faster by a factor of 2.40 — and does not conclude that competitors are simply stronger. Bonus, not required for credit: notes that churn improved for three straight years, 18.0% to 15.1%, which contradicts any customer-loss reading; or sizes the gap by holding share flat — 30.00% of $5,880M would be $1,764M against the actual $1,470M, a shortfall of $294M.",
-    "ru": "Засчитывать, если ВСЁ: (1) переводит вопрос о доле в деньги, прежде чем отвечать: выручка выросла с $1,260M в FY2022 до $1,470M в FY2024 — рост на +$210M, или +16.67%, — а число абонентов выросло с 8.4M до 9.2M, значит, бизнес рос, пока доля падала; (2) называет арифметическую причину: сдвинулся знаменатель, а не числитель — рынок ушёл с $4,200M на $5,880M, +40.00%, против наших +16.67%, и 1,260 / 4,200 = 30.00%, тогда как 1,470 / 5,880 = 25.00%; (3) меряет сдвиг доли в п.п. — падение на 5 п.п., а не на 5% — и не описывает падение доли как потерю клиентов или выручки; (4) читает мост как структуру, а не только как итог: чистые подключения postpaid на +$168M и миграция с prepaid на +$84M вместе перекрывают вычет churn в -$84M в 3.00 раза, значит, удержание — не то ограничение, которое реально связывает; (5) переформулирует тревогу совета директоров как вопрос о темпе роста, а не как вопрос о потере — мы растём, но рынок растёт быстрее нас в 2.40 раза — и не заключает, что конкуренты попросту сильнее. Бонус, для зачёта не обязателен: отмечает, что churn снижался три года подряд, с 18.0% до 15.1%, что противоречит любому прочтению про потерю клиентов; или измеряет разрыв, удержав долю неизменной, — 30.00% от $5,880M дали бы $1,764M против фактических $1,470M, то есть недобор в $294M."
+    "en": "Credit if ALL: (1) converts the 35% claim into money against the printed market before drawing any conclusion from it — 0.35 x $57B = $19.95B — and sets that beside the client's own 2009E net sales of $60.39M, a factor of 330.35, or reaches the same mismatch from the other side, 60.39 / 57,000 = 0.106% against the claimed 35%, or 60.39 / 0.35 = $172.54M against the printed $57B; (2) states in words that the share and the market size are therefore measured on different sets, so the pair cannot both describe one market; (3) refuses to build the growth answer on the pair — does not accept \"the market is flat, so growth must be taken from competitors\" as established — and names what is blocked: no share-gain target can be set until one denominator is fixed; (4) demands the missing definition as the next step: which market the 35% was taken on, and our net sales expressed as a share of that same market; (5) does not repair the mismatch by inventing a figure that is not on either page, and does not treat the gap as rounding or as a mismatch of years. CREDIT DOES NOT REQUIRE CHOOSING WHICH OF THE TWO FIGURES IS WRONG: naming the mismatch in numbers and demanding a single denominator is the full requirement, and a candidate who stops exactly there passes. A candidate who resolves it as two different markets — 35% of a narrow category, $57B of all U.S. casual footwear — has given the reading the book itself carries and passes as well. Bonus, not required for credit: shows the conclusion does not depend on the year picked, 0.35 x $56B = $19.6B and 0.35 x $58B = $20.3B, factors of 324.56 and 336.15 against $60.39M; or anchors on the counted figure and says why — net sales is built on the page as $61.00M less $0.61M of discounts, 1.00% of sales, while the 35% is a claimed position; or notes that the market moves only $56B to $58B across four years, which supports the \"not growing\" note but says nothing about our share.",
+    "ru": "Засчитывать, если ВСЁ: (1) переводит заявленные 35% в деньги против напечатанного рынка ДО любого вывода из них — 0.35 x $57B = $19.95B — и ставит результат рядом с собственными чистыми продажами клиента 2009E в $60.39M, отношение 330.35; либо приходит к тому же несовпадению с другой стороны: 60.39 / 57,000 = 0.106% против заявленных 35%, либо 60.39 / 0.35 = $172.54M против напечатанных $57B; (2) проговаривает словами, что доля и размер рынка измерены, следовательно, на разных множествах, и одну и ту же пару рынков эта пара цифр описывать не может; (3) отказывается строить ответ о росте на этой паре — не принимает «рынок не растёт, значит, рост надо отбирать у конкурентов» как установленное — и называет, что именно заблокировано: цель по приросту доли поставить нельзя, пока не зафиксирован один знаменатель; (4) требует недостающее определение следующим шагом: на каком рынке брали 35% и как наши чистые продажи выражаются как доля того же самого рынка; (5) не чинит несовпадение цифрой, которой нет ни на одной из страниц, и не сводит разрыв к округлению или к несовпадению годов. ЗАЧЁТ НЕ ТРЕБУЕТ ВЫБОРА, КАКАЯ ИЗ ДВУХ ЦИФР НЕВЕРНА: назвать несовпадение числами и потребовать один знаменатель — это полное требование, и кандидат, остановившийся ровно здесь, проходит. Кандидат, разрешивший это как два разных рынка — 35% узкой категории против $57B всей casual footwear в США, — дал прочтение, которое несёт сама книга, и тоже проходит. Бонус, для зачёта не обязателен: показывает, что вывод не зависит от выбранного года, 0.35 x $56B = $19.6B и 0.35 x $58B = $20.3B, то есть отношения 324.56 и 336.15 против $60.39M; либо опирается на счётную цифру и объясняет почему — чистые продажи собраны на странице как $61.00M минус скидки $0.61M, 1.00% от продаж, тогда как 35% это заявленная позиция; либо отмечает, что рынок за четыре года ходит только между $56B и $58B, что подтверждает запись «не растёт», но о нашей доле не говорит ничего."
    },
    "reference": {
-    "en": "- Naive: share fell from 30.0% to 25.0% in two years, so the business is shrinking and customers are walking. A five-point drop reads as an emergency, and the bridge sitting above the table reinforces it by putting a churn bar on the page.\n- Correct: nothing was lost. Revenue went from $1,260M to $1,470M, a gain of $210M or +16.67%, and the subscriber count went from 8.4M to 9.2M. Both the money and the customers moved in the right direction across exactly the period the board is alarmed about.\n- The share fell because the denominator moved. The market grew from $4,200M to $5,880M, +40.00%, while we grew +16.67%. Run it either way and the shares come out as stated: 1,260 / 4,200 = 30.00% and 1,470 / 5,880 = 25.00%. A ratio can fall with a rising numerator whenever the denominator rises faster, and that is the whole of what happened here.\n- Say the unit correctly. Share moved 30.0% to 25.0%, which is a fall of 5 percentage points. Calling it a 5% fall names a different and far smaller event — a 5% relative decline off 30.0% would have left share at 28.5%, not 25.0%.\n- The bridge answers the retention question before it is asked. Postpaid net adds contribute +$168M and prepaid migration +$84M, against a churn drag of -$84M: the two positives cover the drag by a factor of 3.00, and ARPU uplift adds a further +$42M on top. Churn is also falling year on year, 18.0% to 15.1%. Whatever is wrong, it is not that customers are leaving.\n- Note what the bridge cannot show. It decomposes the change in revenue, which is the quantity that grew, while the board asked about share, which is the quantity that fell. Reading the bridge alone would leave the alarm unexplained no matter how carefully each bar is added up; the resolution only appears once the market row underneath is brought into the same sentence as our revenue row.\n- Last mile: share fell 5 percentage points while revenue rose $210M, so the alarm is about a relative metric in a market that is expanding. Tell the board they are not losing the business, they are being outpaced — the market grew faster than we did by a factor of 2.40 — and hold share at 30.00% of the FY2024 market of $5,880M and we would have booked $1,764M rather than $1,470M: the gap is $294M, 20.00% of the actual $1,470M. That is the number worth debating, and the question to take to the next meeting is whether closing it is worth what it would cost in acquisition spend and in the churn we have spent three years bringing down.",
-    "ru": "- Наивное прочтение: доля упала с 30.0% до 25.0% за два года, значит, бизнес сжимается и клиенты уходят. Падение на пять пунктов читается как аварийная ситуация, а мост, стоящий над таблицей, только усиливает это впечатление, поставив на страницу столбик churn.\n- Верно: не потеряно ничего. Выручка выросла с $1,260M до $1,470M — это прирост $210M, или +16.67%, — а число абонентов выросло с 8.4M до 9.2M. И деньги, и клиенты двигались в правильную сторону ровно в тот период, из-за которого встревожен совет директоров.\n- Доля упала потому, что сдвинулся знаменатель. Рынок вырос с $4,200M до $5,880M, +40.00%, а мы выросли на +16.67%. Считай в любом порядке — доли получаются ровно те, что напечатаны: 1,260 / 4,200 = 30.00% и 1,470 / 5,880 = 25.00%. Отношение может падать при растущем числителе всякий раз, когда знаменатель растёт быстрее, и здесь произошло ровно это и ничего больше.\n- Назови единицу правильно. Доля сдвинулась с 30.0% до 25.0% — это падение на 5 п.п. Если назвать это падением на 5%, речь пойдёт о другом и куда более мелком событии: относительное снижение на 5% от 30.0% оставило бы долю на 28.5%, а не на 25.0%.\n- Мост отвечает на вопрос об удержании ещё до того, как его задали. Чистые подключения postpaid дают +$168M, миграция с prepaid — +$84M, против них стоит вычет churn в -$84M: два плюса перекрывают этот вычет в 3.00 раза, а рост ARPU добавляет сверху ещё +$42M. Сам churn при этом снижается год к году, с 18.0% до 15.1%. Что бы ни было не так, дело не в том, что клиенты уходят.\n- Заметь, чего мост показать не может. Он раскладывает изменение выручки — величины, которая выросла, — а совет директоров спрашивал про долю, то есть про величину, которая упала. Одно только чтение моста оставило бы тревогу без объяснения, как аккуратно ни складывай каждый столбик; развязка появляется лишь тогда, когда строка рынка снизу попадает в одну фразу со строкой нашей выручки.\n- Последняя миля: доля упала на 5 п.п., пока выручка выросла на $210M, значит, тревога вызвана относительным показателем на растущем рынке. Скажи совету директоров, что бизнес они не теряют — их обгоняют: рынок рос быстрее нас в 2.40 раза. И дальше: удержи мы долю на 30.00% рынка FY2024 в $5,880M, мы записали бы $1,764M вместо $1,470M — разрыв составляет $294M, или 20.00% от фактических $1,470M. Вот число, которое стоит обсуждать, а на следующую встречу нужно нести вопрос, окупится ли закрытие этого разрыва тем, во что оно обойдётся в затратах на привлечение и в churn, который мы три года снижали."
+    "en": "- Naive: the opening line reads as sound strategy. We are the leader, our share is above 35%, the market sits between $56B and $58B and is not growing, so the only place another dollar can come from is a competitor. Nothing in that sentence looks like arithmetic, so it is accepted as a premise and the discussion moves straight on to how to take share.\n- Correct: put the claim into money before accepting it. A 35% share of a $57B market is 0.35 x $57B = $19.95B of sales. The financial page in the same pack shows 2009E net sales of $60.39M — sales of $61.00M less $0.61M of discounts, discounts running at 1.00% of sales. $19.95B against $60.39M is a factor of 330.35. Both figures are printed in the same pack, and they cannot both be measured on the same set of buyers.\n- Run it the other way and the gap comes back as a share. Our own net sales measured against the printed market are 60.39 / 57,000 = 0.106%, not 35%. Or hold the 35% and solve for the market instead: a company that truly holds 35% while booking $60.39M of net sales leads a market worth 60.39 / 0.35 = $172.54M, not $57B.\n- Picking a different year does not rescue the pair. The series reads $56B, $58B, $57B, $58B across 2006-2009; take the lowest and 35% is 0.35 x $56B = $19.6B, take the highest and it is 0.35 x $58B = $20.3B. The choice moves the answer by $0.7B and leaves the factor against $60.39M between 324.56 and 336.15. This is not a rounding question and not a year-matching question.\n- What the two numbers most likely are: a share measured on one market and a size measured on another — 35% of a narrow category the company leads, $57B of all U.S. casual footwear. That reading is available and it is the first one to test, but it is a hypothesis about definitions, not something either page states. The alternative — that one of the two figures is simply wrong — is equally live on this evidence, and nothing printed decides between them. Say which readings are open; do not pick one silently.\n- If you must lean on one figure, lean on the counted one. Net sales is a line from the accounts, built in front of you as $61.00M less $0.61M; the 35% is a claimed position in a market someone else sized. Counted beats declared, so anchor on $60.39M and send the share back for the definition of the market it was taken on. That is a rule you can defend out loud, which is what the client needs from you here — not a guess about which page is at fault.\n- Last mile: the opening line cannot carry the plan, because the share and the market size inside it are measured on different populations — 0.35 x $57B = $19.95B against actual net sales of $60.39M, a factor of 330.35. No growth conclusion follows until one denominator is named: define the market we actually serve, express $60.39M as a share of that market, and only then set a share-gain target. Ask for the definition sitting behind the 35% before the meeting. If it turns out to be a category worth around $172.54M, the plan is about a different business from the $57B one on the page, and the moves for taking share in it are different too.\n\n- [BUILD] Reviewer note, not for the candidate. Both figures stand in the book exactly as printed here: Exhibit 2 \"U.S. Casual Footwear Market Size and Share\" gives $56B / $58B / $57B / $58B for 2006-2009 plus the note that the client leads with a share above 35% and the market is not growing; Exhibit 1 gives 2009E Sales 61.00, discounts 0.61, Net Sales 60.39 ($M). The slot never asks the candidate to call the book wrong — the candidate-facing text calls the line a note in the plan. Derived here and nowhere else: 0.35 x 57 = 19.95 ($B); 19,950 / 60.39 = 330.35; 60.39 / 57,000 = 0.106%; 60.39 / 0.35 = 172.54 ($M); 0.35 x 56 = 19.6 and 0.35 x 58 = 20.3, hence 19,600 / 60.39 = 324.56 and 20,300 / 60.39 = 336.15; 0.61 / 61.00 = 1.00%. H25 F10 admission, both conditions: the contradiction is computable by the candidate from printed numbers only, and the resolution rule is declared and professionally defensible — counted beats declared, so net sales anchors and the share goes back for its denominator. Credit deliberately does not depend on choosing which figure is wrong, because nothing printed decides that; it depends on naming the mismatch in numbers and refusing a share conclusion until one denominator is fixed.\n\n- Source: Kellogg Consulting Club Casebook 2012, Case 25 \"Salty Sole Shoe Co.\", pp. 186-192",
+    "ru": "- Наивное прочтение: первая строка плана звучит как здравая стратегия. Мы лидер, доля выше 35%, рынок стоит между $56B и $58B и не растёт, значит, лишний доллар взять больше неоткуда, кроме как у конкурента. Арифметики в этой фразе на вид нет, поэтому её принимают как посылку и сразу переходят к тому, как отбирать долю.\n- Верно: переведи заявление в деньги, прежде чем принимать. 35% рынка в $57B — это 0.35 x $57B = $19.95B продаж. Финансовая страница того же пакета показывает чистые продажи 2009E = $60.39M: продажи $61.00M минус скидки $0.61M, то есть скидки идут на уровне 1.00% от продаж. $19.95B против $60.39M — отношение 330.35. Обе цифры напечатаны в одном пакете, и обе не могут быть измерены на одном и том же множестве покупателей.\n- Посчитай в обратную сторону — разрыв возвращается уже как доля. Наши собственные чистые продажи против напечатанного рынка: 60.39 / 57,000 = 0.106%, а не 35%. Либо удержи 35% и найди рынок: компания, которая действительно держит 35% при чистых продажах $60.39M, лидирует на рынке в 60.39 / 0.35 = $172.54M, а не в $57B.\n- Выбор другого года пару не спасает. Ряд читается как $56B, $58B, $57B, $58B за 2006-2009; возьми наименьшее — 35% это 0.35 x $56B = $19.6B, возьми наибольшее — 0.35 x $58B = $20.3B. Выбор сдвигает ответ на $0.7B и оставляет отношение к $60.39M в диапазоне от 324.56 до 336.15. Это не вопрос округления и не вопрос сопоставления годов.\n- Чем эти два числа, скорее всего, являются: доля измерена на одном рынке, размер — на другом. 35% — это узкая категория, которую компания возглавляет, $57B — вся casual footwear в США. Такое прочтение доступно, и проверять надо первым делом его, но это гипотеза об определениях, а не то, что написано хоть на одной из страниц. Второй вариант — одна из двух цифр просто неверна — на этих данных ровно так же жив, и ничто напечатанное между ними не выбирает. Назови оба открытых прочтения; не выбирай одно молча.\n- Если опереться надо на одну цифру, опирайся на счётную. Чистые продажи — строка отчётности, собранная у тебя на глазах как $61.00M минус $0.61M; 35% — заявленная позиция на рынке, который померил кто-то другой. Счётное бьёт заявленное, поэтому якорь — $60.39M, а долю отправь обратно за определением рынка, на котором её брали. Это правило можно защитить вслух, и именно оно нужно клиенту здесь — а не догадка о том, какая из страниц виновата.\n- Последняя миля: первая строка плана его не выдерживает, потому что доля и размер рынка внутри неё измерены на разных совокупностях: 0.35 x $57B = $19.95B против фактических чистых продаж $60.39M, отношение 330.35. Никакой вывод о росте не следует, пока не назван один знаменатель: определи рынок, который мы на самом деле обслуживаем, вырази $60.39M как долю этого рынка и только после этого ставь цель по приросту доли. До встречи запроси определение, стоящее за 35%. Если это окажется категория примерно на $172.54M, план описывает другой бизнес, а не тот, что на $57B со страницы, и ходы для отъёма доли в нём тоже другие.\n\n- [BUILD] Замечание ревьюеру, кандидату не показывается. Обе цифры стоят в книге ровно так, как напечатаны здесь: Exhibit 2 «U.S. Casual Footwear Market Size and Share» даёт $56B / $58B / $57B / $58B за 2006-2009 плюс запись о том, что клиент — лидер с долей выше 35% и что рынок не растёт; Exhibit 1 даёт 2009E Sales 61.00, скидки 0.61, Net Sales 60.39 ($ млн). Слот нигде не просит кандидата назвать книгу ошибочной — в видимом тексте это записка в плане. Выведено здесь и больше нигде: 0.35 x 57 = 19.95 ($B); 19,950 / 60.39 = 330.35; 60.39 / 57,000 = 0.106%; 60.39 / 0.35 = 172.54 ($M); 0.35 x 56 = 19.6 и 0.35 x 58 = 20.3, отсюда 19,600 / 60.39 = 324.56 и 20,300 / 60.39 = 336.15; 0.61 / 61.00 = 1.00%. Допуск F10 по Н25, оба условия: противоречие вычислимо кандидатом только из напечатанного, и правило разрешения объявлено и профессионально защитимо — счётное бьёт заявленное, поэтому якорем идут чистые продажи, а доля уходит обратно за своим знаменателем. Зачёт намеренно не зависит от того, какую из двух цифр кандидат объявит неверной, потому что напечатанное этого не решает; он зависит от того, названо ли несовпадение числами и отказался ли кандидат от вывода о доле до фиксации одного знаменателя.\n\n- Источник: Kellogg Consulting Club Casebook 2012, Case 25 «Salty Sole Shoe Co.», pp. 186-192"
    },
    "provoked": {
-    "ru": "Ты прочитал падение доли с 30.0 до 25.0 как потерю выручки и клиентов и не перевёл долю в деньги — выручка выросла с 1,260 до 1,470.",
-    "en": "You read the share fall from 30.0 to 25.0 as lost revenue and customers without converting share into dollars — revenue rose from 1,260 to 1,470."
+    "ru": "Ты принял строку про лидерство как посылку и ни разу не поставил 35% рядом с размером рынка — 0.35 x $57B это $19.95B против чистых продаж $60.39M.",
+    "en": "You took the leader line as a premise and never set the 35% next to the market size — 0.35 x $57B is $19.95B against net sales of $60.39M."
    },
-   "family_h25": "F1",
+   "family_h25": "F10",
    "family_src": "тело",
    "family_conf": "высокая",
+   "family_note": "F10 по Н25, оба условия допуска на месте: противоречие вычислимо кандидатом из напечатанного одной операцией — 0.35 x $57B = $19.95B против чистых продаж $60.39M, отношение 330.35, — и правило разрешения объявлено и профессионально защитимо: счётная строка отчётности бьёт заявленную позицию, поэтому якорь $60.39M, а 35% уходит обратно за определением своего рынка. НЕ F1 «подмена базы»: там верный знаменатель на экране ЕСТЬ и ошибка кандидата в том, что он взял не тот из напечатанных (CI-002: 25% и 28% надо считать от $200M и $180M, обе базы даны). Здесь подходящего знаменателя на экране нет ни одного: к 35% не подходит $57B, а рынок, к которому 35% подходит, 60.39 / 0.35 = $172.54M, в экзибитах не напечатан. Пересчётом слот не закрывается — он закрывается требованием определения. НЕ F6 «рамка меняется задним числом»: второго прохода нет и ничто не выясняется позже. Обе величины стоят рядом с первой секунды, экзибит отдаётся целиком (E-before), и несовместимость видна тем же самым умножением, с которого кандидат начал бы любой ход по этому пакету. Не близнец CI-038 (F5, два источника): там расхождение измеряется процентами, оба источника остаются пригодными, и ход — приписать каждому вопросу свой источник; здесь обе величины из одного пакета, разрыв в 330 раз, и на этой паре не решается ни один вопрос, пока знаменатель не назван.",
    "mehanizm": {
-    "naive": "читает падение доли рынка как потерю выручки и клиентов",
-    "correct": "переводит долю в деньги и сравнивает собственный темп с темпом рынка",
-    "why": "доля падает при растущем числителе, если знаменатель растёт быстрее",
+    "naive": "принимает пару «доля 35%» и «рынок $57B» как описание одного рынка и строит на ней вывод о том, откуда брать рост",
+    "correct": "переводит долю в деньги, ставит результат рядом с собственными чистыми продажами и требует один знаменатель до любого вывода о доле",
+    "why": "0.35 x $57B = $19.95B против чистых продаж $60.39M — разрыв в 330.35 раза, значит две величины измерены на разных множествах",
     "src": "выведено из checklist",
-    "code": "MECH-99-доля-вместо-денег",
+    "code": "MECH-325-доля-и-размер-из-разных-рынков",
     "code2": []
-   }
+   },
+   "twin_of": "CI-027"
   },
   {
    "id": "CI-022",

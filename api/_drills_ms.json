@@ -67,10 +67,10 @@
   },
   {
    "id": "MS-002",
-   "title": "The Rinse Cycle",
+   "title": "The Maintenance Round",
    "difficulty": "Medium",
    "type": "Trap",
-   "focus": "M08(a) люди vs домохозяйства",
+   "focus": "M31(a) пересекающиеся сегменты",
    "time": "5 min",
    "render": {
     "exhibits": [],
@@ -78,53 +78,54 @@
      "input_number"
     ]
    },
-   "prompt": "Estimate the annual US market for automatic dishwasher detergent.",
+   "prompt": "A lift-maintenance firm is sizing the annual market for lift maintenance contracts in one country. The national safety authority keeps a register of every lift in service in the country; it lists 210,000 of them, and the law requires each to be held under a maintenance contract. An independent maintainer charges $2,000 a lift a year. Four manufacturers dominate installation, and their association reports 150,000 lifts of their own build still in service and held on the manufacturer's own contract, at $2,600 a lift a year. Estimate the annual market in dollars.",
    "exhibit": null,
    "step_prompts": [
     "Segment the market and state the counting base explicitly (people / households / firms / installed base) with a one-line hypothesis.",
-    "Name each anchor as a number before computing (k=3 estimate-anchors).",
+    "Name each anchor as a number before computing (k=4 estimate-anchors).",
     "Compute the estimate along the main chain and state the market size in $.",
     "Triangulate with an independent second path (a different data source, not the same chain reordered) and reconcile — gap should be within ~2×; name the more reliable path with justification.",
-    "Sanity-check: normalize per capita / per household aloud and give a plausibility verdict.",
-    "Last mile: conclusion in terms of market share and the feasibility of entry."
+    "Sanity-check: normalize per capita / per unit aloud and give a plausibility verdict.",
+    "Last mile: what the figure means for where the firm can win contracts."
    ],
    "checklist": {
-    "en": "- GATE: result ∈ [$3.03B, $27.3B]\n- P1: counting base named explicitly (households) and justified by the nature of the product\n- P2: 3 anchors as numbers before calculating\n- P3: second path (per-unit: households with a machine 70% · 5 cycles/week · 52 · $0.25/tablet = $5,915,000,000, ratio 1.54×) within 2× + most reliable one chosen\n- P4: translation into a decision\n- S: \"$9.1B / 130M hh ≈ $70 per household per year ≈ $6/month\" → does it reconcile with pack price and wash frequency",
-    "ru": "- GATE: результат ∈ [$3.03B, $27.3B]\n- P1: база счёта названа явно (домохозяйства) и обоснована природой товара\n- P2: 3 якоря числом до расчёта\n- P3: второй путь (штучный: домохозяйств с машиной 70% · 5 циклов/нед · 52 · $0.25/таблетка = $5,915,000,000, ratio 1.54×) в пределах 2× + выбор надёжнейшего\n- P4: перевод в решение\n- S: «$9.1B / 130M дх ≈ $70 на домохозяйство в год ≈ $6/мес» → сходится ли с ценой упаковки и частотой стирок"
+    "en": "- GATE: result ∈ [$170,000,000, $1,530,000,000]\n- P1: **the two lines are refused as two segments, because the register holds every lift in service and the 150,000 are therefore inside the 210,000, not beside them** — the universe is split into 150,000 on the manufacturer's contract and the 60,000 left to the independents; adding 210,000 × $2,000 to 150,000 × $2,600 = P1 not credited, and so is answering on either line alone\n- P2: 4 anchors as numbers before the calculation\n- P3: second path from a different source (lift technicians × maintenance revenue each), ratio ∈ [1.05×, 2.00×] (reference 1.10×) + the more reliable path named\n- P4: translated into a decision — the pool open to an independent is 60,000 lifts and $120,000,000, not 210,000 lifts and $420,000,000, so volume has to be taken off manufacturer contracts rather than off unserved lifts\n- S: $510,000,000 / 210,000 = $2,429 a lift, sitting between the printed $2,000 and $2,600; the summed figure gives $3,857 a lift, above both, which no lift holding one contract can pay — naming that contradiction is the credit",
+    "ru": "- GATE: результат ∈ [$170,000,000, $1,530,000,000]\n- P1: **две строки отвергнуты как два сегмента, потому что реестр держит каждый лифт в эксплуатации и 150,000 поэтому лежат внутри 210,000, а не рядом с ними** — универсум разбит на 150,000 на контракте изготовителя и 60,000, остающиеся независимым; сложение 210,000 × $2,000 и 150,000 × $2,600 = P1 не зачтён, как и ответ по одной строке в отдельности\n- P2: 4 якоря числом до расчёта\n- P3: второй путь из другого источника (лифтовые техники × выручка обслуживания на каждого), ratio ∈ [1.05×, 2.00×] (эталон 1.10×) + назван надёжнейший путь\n- P4: перевод в решение — независимому открыт пул в 60,000 лифтов и $120,000,000, а не 210,000 лифтов и $420,000,000, поэтому объём берётся с контрактов изготовителя, а не с необслуживаемых лифтов\n- S: $510,000,000 / 210,000 = $2,429 на лифт, между напечатанными $2,000 и $2,600; сложенная величина даёт $3,857 на лифт, выше обеих, чего лифт с одним контрактом заплатить не может — зачёт даётся за названное противоречие"
    },
    "reference": {
-    "en": "Allowed anchors (revealed on request, not upfront):\n  • US households: ~130M [A1]\n  • Average household income: ~$70,000 [A2]\n  • Share of income on this category: ~0.1% [A4]\n\nReference chain:\nmarket = 130_000_000 * 70_000 * D('0.001')   # 9,100,000,000\n\nReference answer: $9,100,000,000 · Corridor: [$3,033,333,333 … $27,300,000,000]",
-    "ru": "Разрешённые якоря (раскрываются по запросу, не вперёд):\n  • Домохозяйств в США: ~130M [A1]\n  • Средний доход домохозяйства: ~$70,000 [A2]\n  • Доля дохода на эту категорию: ~0.1% [A4]\n\nЭталонная цепочка:\nmarket = 130_000_000 * 70_000 * D('0.001')   # 9,100,000,000\n\nЭталон: $9,100,000,000 · Коридор: [$3,033,333,333 … $27,300,000,000]"
+    "en": "The market is $510,000,000 a year: the register covers every lift in service, so the 150,000 sit inside the 210,000, not beside it.\nAllowed anchors (revealed on request, not upfront):\n  • Lifts on the safety register: 210,000 [A3]\n  • Lifts of the four makers' build, in service on the maker's contract: 150,000 [A3]\n  • Contracts a lift a year: independent $2,000 · manufacturer $2,600 [A5]\n  • *Second path:* technicians 3,400 [A3] · maintenance revenue per technician a year $165,000 [A3]\n\nReference chain:\nmaker  = 150_000 * 2_600                    # 390,000,000\nrest   = (210_000 - 150_000) * 2_000        # 120,000,000  60,000 lifts to the independents\nmarket = maker + rest                       # 510,000,000  <- market\nnaive  = 210_000 * 2_000 + 150_000 * 2_600  # 810,000,000  <- the two lines added\ngap    = naive - market                     # 300,000,000 = 150,000 x $2,000 counted twice\nalt    = 3_400 * 165_000                    # 561,000,000  <- second path, workforce\nratio  = alt / market                       # 1.10\n\nAdding the lines overstates the market by $300,000,000, that is 1.59x, and the sum contradicts itself: $810,000,000 over 210,000 lifts is $3,857 a lift a year, above the dearer contract, while a lift carries one. The answer normalises to $2,429, between the two prices and near the top: five lifts in seven are on the maker's contract. Second path: 62 lifts a technician. Keep path one: the register is counted, not estimated.\n\nReference answer: $510,000,000 · Corridor: [$170,000,000 … $1,530,000,000]\n\n[BUILD] The rows are not two markets: one is the universe, the other part of it, and the join is one inference from printed words — the register holds every lift in service; the 150,000 are in service. The gate does not separate ($810,000,000 falls inside); P1 and S do, S mechanically. Credit 210,000 split into 150,000 + 60,000; refuse the sum.",
+    "ru": "Рынок — $510,000,000 в год: реестр покрывает каждый лифт в эксплуатации, поэтому 150,000 лежат внутри 210,000, а не рядом.\nРазрешённые якоря (выдаются по запросу, не сразу):\n  • Лифтов в реестре безопасности: 210,000 [A3]\n  • Лифтов четырёх изготовителей, в эксплуатации на контракте изготовителя: 150,000 [A3]\n  • Контракт на лифт в год: независимый $2,000 · изготовитель $2,600 [A5]\n  • *Второй путь:* техников 3,400 [A3] · выручка обслуживания на техника в год $165,000 [A3]\n\nЭталонная цепочка:\nmaker  = 150_000 * 2_600                    # 390,000,000\nrest   = (210_000 - 150_000) * 2_000        # 120,000,000  60,000 лифтов независимым\nmarket = maker + rest                       # 510,000,000  <- рынок\nnaive  = 210_000 * 2_000 + 150_000 * 2_600  # 810,000,000  <- две строки, сложенные вместе\ngap    = naive - market                     # 300,000,000 = 150,000 x $2,000 посчитаны дважды\nalt    = 3_400 * 165_000                    # 561,000,000  <- второй путь, персонал\nratio  = alt / market                       # 1.10\n\nСложение строк завышает рынок на $300,000,000, то есть в 1.59x, и сумма противоречит сама себе: $810,000,000 на 210,000 лифтов дают $3,857 на лифт в год, выше более дорогого контракта, тогда как на лифте он один. Ответ нормируется в $2,429 — между двумя ценами и ближе к верху: пять лифтов из семи на контракте изготовителя. Второй путь: 62 лифта на техника. Оставляем первый путь: реестр посчитан, а не оценён.\n\nЭталон: $510,000,000 · Коридор: [$170,000,000 … $1,530,000,000]\n\n[BUILD] Строки — не два рынка: одна есть универсум, вторая его часть, и связка берётся одним выводом из напечатанных слов: реестр держит каждый лифт в эксплуатации, а 150,000 — в эксплуатации. Гейт пути не разводит ($810,000,000 попадает внутрь); разводят P1 и S, причём S механически. Зачёт за разбиение 210,000 на 150,000 + 60,000; сумма не зачитывается."
    },
    "provoked": {
-    "en": "counting by people (330M × spend per person). A dishwasher is a **household asset**, not a person's; counting by heads overstates the base by ~2.5× and breaks the very logic of the purchase.",
-    "ru": "считать по людям (330M × расход на человека). Посудомоечная машина — **актив домохозяйства**, а не человека; счёт по головам завышает базу в ~2.5× и ломает саму логику покупки."
+    "en": "the register and the makers' association are two different institutions publishing two different counts at two different prices, and that is exactly what a segmented market looks like on paper. Nothing is labelled an overlap. The line saying the register covers every lift in service reads as a note on how strict the rule is, not as the sentence that puts the 150,000 inside the 210,000 — and the cost of missing it is $300,000,000 on a market of $510,000,000.",
+    "ru": "реестр и ассоциация изготовителей — два разных учреждения, публикующих два разных счёта по двум разным ценам, и на бумаге это выглядит ровно как сегментированный рынок. Пересечение нигде не подписано. Строка о том, что реестр покрывает каждый лифт в эксплуатации, читается как замечание о строгости правила, а не как предложение, которое кладёт 150,000 внутрь 210,000, — и цена пропуска составляет $300,000,000 на рынке в $510,000,000."
    },
    "steps": [
     {
      "prompt": "Final market-size estimate, $",
      "kind": "number",
-     "answer": "9100000000",
-     "tolerance": "corridor [$3,033,333,333 … $27,300,000,000]"
+     "answer": "510000000",
+     "tolerance": "corridor [$170,000,000 … $1,530,000,000]"
     },
     {
      "prompt": "Independent second-path triangulation + one-sentence recommendation",
      "kind": "text",
-     "answer": "reference answer $9,100,000,000; second path within ~2×",
+     "answer": "reference answer $510,000,000; second path within ~2×",
      "tolerance": "judged"
     }
    ],
-   "family_h25": "F1",
+   "family_h25": "F11",
    "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
-    "naive": "считает базу по числу людей там, где покупаемый объект принадлежит домохозяйству",
-    "correct": "считает базу по числу домохозяйств и умножает на расход одного домохозяйства",
-    "why": "актив общий для всех живущих вместе, поэтому счёт по головам завышает число покупок",
-    "code": "MECH-50-единица-базы",
+    "naive": "складывает две выданные строки как два сегмента рынка: весь реестр по цене независимого подрядчика плюс парк изготовителей по цене изготовителя",
+    "correct": "берёт реестр за универсум и делит его на непересекающиеся части: 150,000 лифтов на контракте изготовителя и 60,000 остатка, приходящиеся независимым",
+    "why": "реестр покрывает каждый лифт в эксплуатации, поэтому 150,000 лежат внутри 210,000, а не рядом, и в сумме оплачиваются дважды",
+    "code": "MECH-330-две-строки-одно-множество",
     "code2": []
    },
-   "family_note": "круг 103: расход на порошок снят с домохозяйства, а наивный путь прикладывает его к 330M человек — посудомойка общий актив, база = 130M дх"
+   "family_note": "F11 «одно множество под двумя ярлыками»: две выданные строки описывают пересекающиеся совокупности, и MECE нарушена ВНУТРИ данных, а не между данными и решением. Пересечение выводимо из самого текста одним шагом: тело печатает «a register of every lift in service in the country; it lists 210,000 of them» и «150,000 lifts of their own build still in service» — обе строки говорят о лифтах в эксплуатации, значит вторая содержится в первой. Внешнего знания не требуется. Цена ошибки названа числом: сумма даёт $810,000,000 против $510,000,000, завышение $300,000,000 = ровно 150,000 × $2,000, то есть 1.59x. НЕ F1 «подмена базы»: там величина честно посчитана на одной совокупности, а решают по другой, и лечится это пересчётом на верную базу. Здесь каждая из двух величин посчитана на своей собственной верной базе и по своей верной цене — 150,000 × $2,600 и 60,000 × $2,000 обе входят в эталон без изменений; порча возникает только в момент сложения, и лечится она арифметикой множеств (универсум минус пересечение), а не сменой базы. НЕ F6 «рамка меняется задним числом»: оба определения напечатаны в первой же вводной, ни одно из них дальше не переопределяется, второго прохода и позднего уточнения нет; расхождение существует в один момент времени внутри выданной записи, а не между двумя её шагами. Разведение с носителями F11 в корпусе: MS-009 «Filters at Scale» — там один физический поток, посчитанный с двух концов вертикальной цепочки, промпт сам объявляет сложение («A colleague adds both figures») и верный ход состоит в том, чтобы ВЗЯТЬ ОДНУ ВЕТВЬ; здесь сложение не объявлено, совокупности горизонтальные, а верный ход есть РАЗНОСТЬ МНОЖЕСТВ 210,000 − 150,000 = 60,000 и раздельная цена на каждой части. MS-022 и MS-038 — там пересечение живёт во втором пути триангуляции (мнимая независимость), а не в первичных данных; здесь второй путь независим по построению (ремонтный персонал), и пересекаются именно выданные строки. MS-026 — там частное цели на долю верно при любом рынке, множеств нет вовсе.",
+   "twin_of": "MS-009"
   },
   {
    "id": "MS-003",
@@ -375,7 +376,7 @@
    "title": "Payroll for the Mid-Market",
    "difficulty": "Medium",
    "type": "Trap",
-   "focus": "M11(a) B2B sizing",
+   "focus": "B2B software sizing where a stated go-to-market condition, not a number, sets the base",
    "time": "6 min",
    "render": {
     "exhibits": [],
@@ -383,7 +384,7 @@
      "input_number"
     ]
    },
-   "prompt": "Estimate the annual market for payroll-processing software sold to mid-sized companies in one country.",
+   "prompt": "A payroll-software vendor is writing its board plan and wants the annual size of the market it can sell into, in one large developed country. The product is a per-employee-per-month subscription built for mid-sized employers - companies of roughly 100 to 1,000 people. The vendor has no direct sales force: every contract it has ever signed arrived through the outside accounting firm that already runs the employer's payroll, and the board has decided not to build a direct channel this cycle. Estimate the annual market, in dollars per year.",
    "exhibit": null,
    "step_prompts": [
     "Segment the market and state the counting base explicitly (people / households / firms / installed base) with a one-line hypothesis.",
@@ -394,44 +395,42 @@
     "Last mile: conclusion about the addressable segment and entry."
    ],
    "checklist": {
-    "en": "- GATE: result ∈ [$540M, $4.86B]\n- P1: base = firms, named explicitly; non-addressable share cut off\n- P2: 3 anchors as numbers before calculating\n- P3: second path (bottom-up: workers × price per payroll run per month) ≤2× + choice\n- P4: translation into a decision\n- S: \"$1.62B / 45,000 firms ≈ $36k per firm per year\" → is it plausible at a $120k spend",
-    "ru": "- GATE: результат ∈ [$540M, $4.86B]\n- P1: база = фирмы, названа явно; отсечена неадресуемая доля\n- P2: 3 якоря числом до расчёта\n- P3: второй путь (снизу: работников × цена за расчёт в месяц) ≤2× + выбор\n- P4: перевод в решение\n- S: «$1.62B / 45,000 фирм ≈ $36k на фирму в год» → правдоподобно ли при расходе $120k"
+    "en": "- GATE: ∈ [$0.72B, $1.68B]\n- P1: **the standing condition from the prompt is applied - the base is mid-market employees whose payroll an outside accounting firm already runs, not every mid-market employee; an answer at or above $3.6B means it was walked past**\n- P2: 3 anchors as numbers before the calculation, each defended in one phrase\n- P3: the share of mid-market payroll administered by an outside accounting firm is NAMED as a quantity that follows from no anchor and is marked either as a request to the client or as an assumption to verify; a share filled in silently does not earn the cut\n- P4: second path independent, ratio ∈ [1.05×, 2.00×] (reference 1.67×) + choice of the most reliable, the uncut-to-cut gap named as a number (3.00×, $2.4B), and translated into a decision\n- S: sanity line - $36,000 a year per reachable 300-person employer, checked against the cost of one in-house payroll clerk",
+    "ru": "- GATE: ∈ [$0.72млрд, $1.68млрд]\n- P1: **условие из текста задачи применено - база это сотрудники средних компаний, чей расчёт зарплаты ведёт внешняя бухгалтерская фирма, а не все сотрудники среднего сегмента; ответ $3.6млрд и выше означает, что условие пройдено мимо**\n- P2: 3 якоря числами до расчёта, каждый обоснован одной фразой\n- P3: доля среднего сегмента, чей расчёт зарплаты ведёт внешняя бухгалтерия, НАЗВАНА как величина, которую нельзя вывести ни из одного якоря, и помечена как запрос к клиенту либо как допущение к проверке; молча подставленная доля отрез не засчитывает\n- P4: второй путь независим, отношение ∈ [1.05×, 2.00×] (эталон 1.67×) + выбор более надёжного, разрыв «без отреза / с отрезом» назван числом (3.00×, $2.4млрд) и переведён в решение\n- S: строка здравого смысла - $36,000 в год с доступного работодателя на 300 человек, сверено со стоимостью одного штатного расчётчика"
    },
    "reference": {
-    "en": "Allowed anchors (revealed on request, not upfront):\n  • Mid-sized companies: ~45,000 [A3]\n  • Payroll spend per year: ~$120,000 [A3]\n  • Share outsourced to software/service: ~30% [A4]\n\nReference chain:\nmarket = 45_000 * 120_000 * D('0.30')     # 1,620,000,000\n\nReference answer: $1,620,000,000 · Corridor: [$540,000,000 … $4,860,000,000]",
-    "ru": "Разрешённые якоря (раскрываются по запросу, не вперёд):\n  • Компаний среднего размера: ~45,000 [A3]\n  • Расход на расчёт зарплаты в год: ~$120,000 [A3]\n  • Доля, отдаваемая на аутсорс/софт: ~30% [A4]\n\nЭталонная цепочка:\nmarket = 45_000 * 120_000 * D('0.30')     # 1,620,000,000\n\nЭталон: $1,620,000,000 · Коридор: [$540,000,000 … $4,860,000,000]"
+    "en": "Allowed anchors (revealed on request, not upfront):\n  • employed workforce ~150,000,000 [A1] - about 330M people, roughly half hold a paid job\n  • share of employment at firms of 100-1,000 people ~20% [A2] - the mid band is the thinnest of three, employment concentrates in very large firms\n  • price ~$10 per employee per month = $120 per year [A3] - a coffee per person per month\n  • employer firms ~6,000,000 [A4] - businesses with at least one employee, not the ~30M that includes sole proprietors\n  • share of mid-market payroll administered by an outside accounting firm ~1/3 [A5] - client-side figure: under 100 employees outsourcing is the norm, over 1,000 payroll is in-house, the 100-1,000 band sits between\n  • employer firms inside that band ~1% [A6] - nearly every employer is under 20 people\n  • average headcount in the band ~300 [A7] - skewed to its floor, far below the 550 midpoint\n\nPath A, employment: 150,000,000 * 0.20 = 30,000,000; * 120 = 3,600,000,000 uncut; / 3 = 10,000,000 * 120 = 1,200,000,000\nPath B, firms: 6,000,000 * 0.01 = 60,000 * 300 = 18,000,000; * 120 = 2,160,000,000 uncut; / 3 = 6,000,000 * 120 = 720,000,000\n\nGap 1,200,000,000 / 720,000,000 = 1.67x: quote A, a share of employment moves slowly, while B rests on a mean headcount in a skewed band - 300 to 400 moves it a third. Uncut vs cut 3,600,000,000 / 1,200,000,000 = 3.00x: $2,400,000,000 a year outside the accounting-firm channel, the price of no direct channel.\n\nReference answer: $1,200,000,000 per year · Corridor ±40% [$720,000,000, $1,680,000,000], declared narrower than standard /3…×3 [$400,000,000 … $3,600,000,000], whose ceiling passes the uncut 3,600,000,000.\n\nSanity: $1,200,000,000 / ~33,000 reachable employers of ~300 people = ~$36,000 a year each, one junior payroll clerk's salary.\n\n[BUILD] Cutting condition: prompt words only, in no anchor and in no step prompt; [A5] follows from no other anchor.",
+    "ru": "Разрешённые якоря (выдаются по запросу, не заранее):\n  • занятые ~150,000,000 [A1] - около 330М человек, примерно половина работает\n  • доля занятости в компаниях 100-1,000 человек ~20% [A2] - средняя полоса самая тонкая из трёх, головы концентрируются у очень крупных работодателей\n  • цена ~$10 на сотрудника в месяц = $120 в год [A3] - кофе на человека в месяц\n  • компаний-работодателей ~6,000,000 [A4] - те, у кого есть хотя бы один наёмный, а не ~30М вместе с самозанятыми\n  • доля среднего сегмента, чей расчёт зарплаты ведёт внешняя бухгалтерская фирма ~1/3 [A5] - величина со стороны клиента: до 100 сотрудников аутсорсинг норма, выше 1,000 расчёт держат внутри, полоса 100-1,000 между ними\n  • работодателей в этой полосе ~1% [A6] - почти все работодатели меньше 20 человек\n  • средняя численность в полосе ~300 [A7] - смещена к нижней границе, сильно ниже середины 550\n\nA, занятость: 150,000,000 * 0.20 = 30,000,000; * 120 = 3,600,000,000 без отреза; / 3 = 10,000,000 * 120 = 1,200,000,000\nB, компании: 6,000,000 * 0.01 = 60,000 * 300 = 18,000,000; * 120 = 2,160,000,000 без отреза; / 3 = 6,000,000 * 120 = 720,000,000\n\nРасхождение 1,200,000,000 / 720,000,000 = 1.67x: брать A, доля занятости меняется медленно, а B стоит на средней численности смещённой полосы - с 300 на 400 едет на треть. Без отреза / с отрезом 3,600,000,000 / 1,200,000,000 = 3.00x: $2,400,000,000 в год вне канала бухгалтерских фирм - цена отказа от прямого канала.\n\nЭталон: $1,200,000,000 в год · Коридор ±40% [$720,000,000, $1,680,000,000], объявлен уже стандартного /3…×3 [$400,000,000 … $3,600,000,000], верх которого пропускает ответ без отреза 3,600,000,000.\n\nЗдравый смысл: $1,200,000,000 / ~33,000 доступных работодателей по ~300 = ~$36,000 в год, зарплата младшего расчётчика.\n\n[BUILD] Режущее условие: только слова задачи, ни якоря, ни шага; [A5] не выводится из других."
    },
    "provoked": {
-    "en": "coming in from population/number of employed (\"N workers × price per payroll run\"). The buyer here is a **firm**, not a worker; counting from population loses the fact that the decision and budget belong to the company, and does not allow cutting off the share that stays in-house.",
-    "ru": "зайти от населения/числа занятых («N работников × цена за расчёт»). Покупатель здесь — **фирма**, а не работник; счёт от населения теряет то, что решение и бюджет принадлежат компании, и не даёт отсечь долю, которая остаётся in-house."
+    "en": "About 150 million people work in the country. Roughly a fifth of them are at companies of 100 to 1,000 people, so 30 million employees. Payroll software runs about $10 per employee per month, which is $120 a year each. So the market is 30,000,000 × $120 = $3.6 billion a year, and the vendor's job is to take share of it.",
+    "ru": "В стране работает около 150 млн человек. Примерно пятая часть из них - в компаниях от 100 до 1,000 человек, то есть 30 млн сотрудников. Подписка стоит около $10 на сотрудника в месяц, то есть $120 в год. Значит рынок = 30,000,000 × $120 = $3.6 млрд в год, и задача поставщика - взять из него долю."
    },
    "steps": [
     {
      "prompt": "Final market-size estimate, $",
      "kind": "number",
-     "answer": "1620000000",
-     "tolerance": "corridor [$540,000,000 … $4,860,000,000]"
+     "answer": "1200000000",
+     "tolerance": "corridor [$720,000,000 … $1,680,000,000]"
     },
     {
      "prompt": "Independent second-path triangulation + one-sentence recommendation",
      "kind": "text",
-     "answer": "reference answer $1,620,000,000; second path within ~2×",
+     "answer": "reference answer $1,200,000,000; second path within ~2×",
      "tolerance": "judged"
     }
    ],
-   "family_h25": "F1",
+   "family_h25": "F4",
    "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
-    "naive": "считает базу от числа занятых людей там, где покупатель — организация",
-    "correct": "считает базу от числа организаций, отсекая долю функции, оставляемую внутри",
-    "why": "бюджет и решение о покупке принадлежат организации, а не отдельному работнику",
-    "code": "MECH-50-единица-базы",
-    "code2": [
-     "MECH-52-непросеянная-база"
-    ]
+    "naive": "умножает всех сотрудников полосы 100-1,000 на цену подписки и называет произведение рынком, не применяя напечатанное словами условие выхода на клиента",
+    "correct": "режет базу до той доли полосы, чей расчёт зарплаты уже ведёт внешняя бухгалтерская фирма, и называет эту долю величиной, которая не выводится ни из одного якоря",
+    "why": "условие канала напечатано словами, а не числом, поэтому база выглядит полной, тогда как поставщику доступна её треть",
+    "code": "MECH-328-условие-клиента-не-в-числах",
+    "code2": []
    },
-   "family_note": "круг 103: расход $120k в год напечатан на фирму, а наивный путь прикладывает цену к числу занятых — покупатель организация, база = 45,000 фирм"
+   "family_note": "F4, неназванное ограничение. Решает условие, напечатанное СЛОВАМИ в тексте задачи: у поставщика нет прямых продаж, все контракты приходят через внешнюю бухгалтерскую фирму, ведущую расчёт зарплаты клиента, и прямого канала в этом цикле не будет. Ни в одном числе этого условия нет. РАЗЛИЧАЮЩИЙ ВОПРОС F4↔F1: после того как ограничение названо, разбор НЕ закрывается. Назвать канал мало: чтобы ветка «насколько канал режет рынок» вообще оценивалась, кандидат обязан НАЗВАТЬ как недостающий один конкретный факт — долю среднего сегмента, чей расчёт зарплаты ведёт внешняя бухгалтерская фирма, а не собственный расчётный отдел (~1/3, [A5]) — и пометить её как запрос к клиенту либо как допущение к проверке. Это величина со стороны клиента: она не выводится ни из числа занятых, ни из доли полосы 100-1,000, ни из цены, и ни один взрослый не назовёт её без справочника. В F1 было бы достаточно назвать подмену базы — и счёт закрывается теми же числами, что уже есть на столе. Здесь без этого факта на столе нет ничего, чем можно отрезать. Цена пропуска названа числом: $3,600,000,000 против $1,200,000,000, то есть 3.00× или $2,400,000,000 в год. Поле заполнено по телу (Н25.10): условие стоит в prompt, не стоит ни в одном step_prompts, требование назвать и пометить эту долю стоит только в checklist P3."
   },
   {
    "id": "MS-008",
@@ -1231,7 +1230,7 @@
    "title": "Second Owner",
    "difficulty": "Medium",
    "type": "Trap",
-   "focus": "M03(c) первичный vs вторичный рынок",
+   "focus": "M30(a) минимум цепочки вместо спроса",
    "time": "6 min",
    "render": {
     "exhibits": [],
@@ -1239,7 +1238,7 @@
      "input_number"
     ]
    },
-   "prompt": "Estimate the annual US market for **used** passenger cars, in dollars.",
+   "prompt": "A group that owns used-car dealerships across the United States is writing next year's plan; it lists three moves: 50% more sales staff, two more display lots per store, and a larger advertising budget. Estimate, in dollars, the annual volume of used cars retailed through the country's franchised dealer network, and price the plan against your estimate.",
    "exhibit": null,
    "step_prompts": [
     "Segment the market and state the counting base explicitly (people / households / firms / installed base) with a one-line hypothesis.",
@@ -1247,45 +1246,46 @@
     "Compute the estimate along the main chain and state the market size in $.",
     "Triangulate with an independent second path (a different data source, not the same chain reordered) and reconcile — gap should be within ~2×; name the more reliable path with justification.",
     "Sanity-check: normalize per capita / per household aloud and give a plausibility verdict.",
-    "Last mile: what the size of the secondary market means for the entry strategy."
+    "Last mile: what the figure means for the group's plan for next year."
    ],
    "checklist": {
-    "en": "- GATE: ∈ [$235B, $2.12T]\n- P1: **base named explicitly — the fleet and its turnover, not new production** (counting from production = P1 not credited)\n- P2: 3 anchors as numbers before the calculation\n- P3: second path independent (from dealers), ratio ∈ [1.05×, 2.00×] (reference 1.80×) + choice of the most reliable\n- P4: translated into a decision\n- S: \"14% of the fleet per year = a car changes owner once every 7 years; over a 20-year lifespan that's ~3 owners\" → does it reconcile",
-    "ru": "- GATE: ∈ [$235B, $2.12T]\n- P1: **база названа явно — парк и его оборачиваемость, а не выпуск новых** (счёт от выпуска = P1 не зачтён)\n- P2: 3 якоря числом до расчёта\n- P3: второй путь независим (от дилеров), ratio ∈ [1.05×, 2.00×] (эталон 1.80×) + выбор надёжнейшего\n- P4: перевод в решение\n- S: «14% парка в год = машина меняет владельца раз в 7 лет; при сроке жизни 20 лет это ~3 владельца» → сходится ли"
+    "en": "- GATE: ∈ [$168.75B, $1,518.75B]\n- P1: **base named explicitly** — franchised US dealerships, unit = one used car retailed, period = one year\n- P2: 3 anchors as numbers before the calculation — 330,000,000 people [A1], 250 operating days [A3], $25,000 per car [A5]\n- P3: second path independent, ratio ∈ [1.05×, 2.00×] (reference 1.47×: $506.25B built on bays against $343.41B built on technicians)\n- P4: translated into a decision BY METHOD — the store is built as a chain of ceilings, the minimum is taken, each of the three moves in the plan is priced against the binding link, the delta is named as a number, and the link whose expansion does move the delta is named. The figures in `reference` are the benchmark, not the pass condition: another defensible set of ceilings passes if the minimum and the delta are computed consistently on it\n- S: sanity line — the throughput answer is checked against demand estimated on a base independent of the store chain (fleet, replacement rate, franchised share), both figures are stated as numbers and compared, and the smaller of the two is named as what sets the market. The figures in `reference` are the benchmark, not the pass condition: another defensible demand estimate passes if the comparison is carried out on it",
+    "ru": "- GATE: ∈ [$168.75B, $1,518.75B]\n- P1: **база названа явно** — франшизные точки США, единица — одна подержанная машина в розницу, период — год\n- P2: 3 якоря числами до расчёта — 330,000,000 человек [A1], 250 рабочих дней [A3], $25,000 за машину [A5]\n- P3: второй путь независим, отношение ∈ [1.05×, 2.00×] (эталон 1.47×: $506.25B по боксам против $343.41B по механикам)\n- P4: переведено в решение МЕТОДОМ — точка собрана как цепочка потолков, взят минимум, каждый из трёх ходов плана оценён против связывающего звена, дельта названа числом, и названо звено, расширение которого дельту двигает. Числа из `reference` — эталон, а не условие зачёта: другой защитимый набор потолков засчитывается, если минимум и дельта посчитаны по нему последовательно\n- S: строка здравого смысла — ответ по мощности сверен со спросом, оценённым на базе, независимой от цепочки точек (парк, частота смены, доля франшизы), обе величины названы числами и сопоставлены, и меньшая из них названа тем, что задаёт рынок. Числа из `reference` — эталон, а не условие зачёта: другая защитимая оценка спроса засчитывается, если сравнение проведено по ней"
    },
    "reference": {
-    "en": "Allowed anchors (revealed on request, not upfront):\n  • Passenger car fleet: ~280M [A1]\n  • Share of the fleet changing owner per year: ~14% [A3]\n  • Average transaction price: ~$18,000 [A5]\n\nReference chain:\nmarket = 280_000_000 * D('0.14') * 18_000      # 705,600,000,000\n\nReference answer: $705,600,000,000 · Corridor: [$235,200,000,000 … $2,116,800,000,000]",
-    "ru": "Разрешённые якоря (раскрываются по запросу, не вперёд):\n  • Парк легковых авто: ~280M [A1]\n  • Доля парка, меняющая владельца за год: ~14% [A3]\n  • Средняя цена сделки: ~$18,000 [A5]\n\nЭталонная цепочка:\nmarket = 280_000_000 * D('0.14') * 18_000      # 705,600,000,000\n\nЭталон: $705,600,000,000 · Коридор: [$235,200,000,000 … $2,116,800,000,000]"
+    "en": "Allowed anchors (revealed on request, not upfront):\n  • US population ~330,000,000 [A1] - an adult names it from memory\n  • service-department days ~250 [A3] - five days, fifty weeks, holidays out\n  • price of a late-model used car ~$25,000 [A5] - a three-year-old goes for half a new one at ~$50,000\n\nBase: franchised US dealerships, one used car retailed, one year. Stores: one per ~18,000 people - a town of twenty thousand supports one; 330,000,000 / 18,000 -> 18,000.\n\nFour stages, each with a ceiling:\n  acquisition ~2,000 - trade-ins plus auction, supply is not the limit\n  reconditioning 3 bays * 250 [A3] * 1.5 = 1,125 - a quarter of a twelve-bay lane, three cars per two bay-days\n  display 250 on the lot * 5 turns = 1,250 - a store turns inventory five times a year\n  selling 12 sellers * 10 a month * 12 = 1,440 - a working seller closes ten a month\n  per_store = min(2000, 1125, 1250, 1440) = 1,125, reconditioning; 18,000 * 1,125 * 25,000 = 506,250,000,000\n\nReference answer: $506,250,000,000 (20,250,000 cars) · Corridor: [$168.75B, $1,518.75B]\n\nSecond path, people not bays: ~1 technician per 400 people, 330,000,000 / 400 = 825,000; 5% recondition used cars = 41,250; 250 * 8 / 6 = 333 each -> 13,736,250 cars, $343.41B; ratio 1.47x. Quote the bay route: a bay is countable on a walk-through.\n\nThree moves: +50% sellers -> 2,160; two more lots -> 1,750; advertising no ceiling; per_store = min(2000, 1125, 1750, 2160) = 1,125 before and after: $506.25B both times, delta 0 cars, $0.\n\nWhat moves it: a fourth recon bay -> 4 * 250 * 1.5 = 1,500, per_store = min(2000, 1500, 1250, 1440) = 1,250 -> $562.5B, +11.1%, because the ceiling moves to the lot; infinite bays still give 1,250, so the minimum of the chain sets the answer.\n\nSanity: 264,000,000 vehicles (330,000,000 * 0.8) / 6 = 44,000,000 changes a year, 55% franchised = 24,200,000 cars: $605B of demand against $506.25B of throughput, 3,950,000 cars short of a windshield.",
+    "ru": "Разрешённые якоря (открываются по запросу, не вперёд):\n  • население США ~330,000,000 [A1] - взрослый называет его по памяти\n  • рабочих дней сервисного цеха ~250 [A3] - пять дней, пятьдесят недель, без праздников\n  • цена подержанной машины ~$25,000 [A5] - трёхлетняя стоит половину новой при ~$50,000\n\nБаза: франшизные точки США, одна подержанная машина в розницу, год. Точек: одна на ~18,000 - городок на двадцать тысяч держит одну; 330,000,000 / 18,000 -> 18,000.\n\nЧетыре участка, у каждого потолок:\n  закупка ~2,000 - trade-in плюс аукцион, предложение не связывает\n  подготовка 3 бокса * 250 [A3] * 1.5 = 1,125 - четверть двенадцатибоксового цеха, три машины за два бокс-дня\n  площадка 250 машин * 5 оборотов = 1,250 - склад оборачивается пять раз в год\n  продажи 12 продавцов * 10 в месяц * 12 = 1,440 - продавец закрывает десять в месяц\n  per_store = min(2000, 1125, 1250, 1440) = 1,125, подготовка; 18,000 * 1,125 * 25,000 = 506,250,000,000\n\nЭталонный ответ: $506,250,000,000 (20,250,000 машин) · Коридор: [$168.75B, $1,518.75B]\n\nВторой путь, люди вместо боксов: ~1 слесарь на 400, 330,000,000 / 400 = 825,000; 5% готовят подержанные = 41,250; 250 * 8 / 6 = 333 -> 13,736,250 машин, $343.41B; отношение 1.47x. Брать боксовый: бокс виден при обходе.\n\nТри хода: +50% продавцов -> 2,160; две площадки -> 1,750; реклама не трогает потолок; per_store = min(2000, 1125, 1750, 2160) = 1,125 до и после: $506.25B в обоих случаях, дельта 0 машин и $0.\n\nДвигает число: четвёртый бокс подготовки -> 4 * 250 * 1.5 = 1,500, per_store = min(2000, 1500, 1250, 1440) = 1,250 -> $562.5B, +11.1%: потолок уходит на площадку; бесконечные боксы дают те же 1,250, ответ задаёт минимум цепочки.\n\nЗдравый смысл: парк 264,000,000 (330,000,000 * 0.8) / 6 = 44,000,000 смен в год, 55% франшизы = 24,200,000 машин: $605B спроса против $506.25B мощности, 3,950,000 машин не доезжают."
    },
    "provoked": {
-    "en": "counting the secondary market from **new-car production** (\"sold 15M new → used roughly the same\"). The secondary market is fed not by production but by **fleet turnover**: one car changes owner 3–4 times over its life, so there are many times more transactions than new cars. The naive path understates by several times.",
-    "ru": "считать вторичный рынок от **выпуска новых** авто («продали 15M новых → б/у примерно столько же»). Вторичный рынок питается не выпуском, а **оборачиваемостью парка**: один автомобиль за жизнь меняет владельца 3–4 раза, поэтому сделок кратно больше, чем новых машин. Наивный путь занижает в разы."
+    "en": "You added salespeople, lots and advertising and your number did not move: 20,250,000 cars and $506,250,000,000 before, 20,250,000 cars and $506,250,000,000 after. Say what is holding it, and say what the three moves bought.",
+    "ru": "Ты добавил продавцов, площадки и рекламу, а число не сдвинулось: 20,250,000 машин и $506,250,000,000 до, 20,250,000 машин и $506,250,000,000 после. Назови, что его держит, и назови, что купили эти три хода."
    },
    "steps": [
     {
      "prompt": "Final market-size estimate, $",
      "kind": "number",
-     "answer": "705600000000",
-     "tolerance": "corridor [$235,200,000,000 … $2,116,800,000,000]"
+     "answer": "506250000000",
+     "tolerance": "corridor [$168,750,000,000 … $1,518,750,000,000]"
     },
     {
      "prompt": "Independent second-path triangulation + one-sentence recommendation",
      "kind": "text",
-     "answer": "reference answer $705,600,000,000; second path within ~2×",
+     "answer": "reference answer $506,250,000,000; second path within ~2×",
      "tolerance": "judged"
     }
    ],
-   "family_h25": "F1",
+   "family_h25": "F14",
    "family_src": "тело",
    "family_conf": "высокая",
    "mehanizm": {
-    "naive": "оценивает число сделок вторичного рынка от объёма выпуска новых единиц",
-    "correct": "оценивает от размера парка и числа смен владельца за срок службы единицы",
-    "why": "одна единица за срок службы перепродаётся несколько раз",
-    "code": "MECH-48-запас-и-поток",
+    "naive": "добавляет продавцов, площадки и рекламу и отчитывается большим числом, потому что сайзинг построен на покупателях, а не на том, сколько точки способны пропустить",
+    "correct": "собирает точку как цепочку из четырёх потолков, берёт минимум и оценивает каждый предложенный ход против этого минимума",
+    "why": "per_store = min(2000, 1125, 1250, 1440) = 1,125 и до, и после трёх ходов — 20,250,000 машин и $506,250,000,000 в обоих случаях, дельта ровно ноль",
+    "code": "MECH-329-узкое-место-цепочки",
     "code2": []
    },
-   "family_note": "круг 103: число сделок берут с базы выпуска новых машин, а сделки живут на базе парка 280M × 14% оборота — одна машина за жизнь меняет владельца 3–4 раза"
+   "family_note": "F14 по Н25 — система по слабейшему звену. Все четыре звена лежат внутри контура группы: она нанимает продавцов, строит площадки, покупает рекламу, ставит боксы. Нажать МОЖНО на любое, и три нажатия из четырёх дают ровно ноль: min(2000, 1125, 1250, 1440) = 1,125 до и min(2000, 1125, 1750, 2160) = 1,125 после, то есть 20,250,000 машин и $506,250,000,000 в обоих случаях, дельта 0 машин и $0. НЕ F9 «видимый драйвер не рычаг»: там величина лежит ВНЕ контура клиента и нажать на неё нельзя вовсе — ставка регулятора, цена сырья, погода. Здесь рычаг физически доступен, бюджет на него есть, ход исполним — и эффект нулевой, потому что не он задаёт минимум. Различающий вопрос звучит так: «может ли клиент вообще подвинуть эту величину?» — F9 отвечает «нет», F14 отвечает «да, и это ничего не меняет». НЕ MS-028 «запас против потока»: ответ здесь не получается переводом парка в поток. Поток посчитан отдельно и намеренно НЕ является ответом: 264,000,000 парка дают 44,000,000 смен владельца в год и 24,200,000 через франшизный канал, то есть $605,000,000,000 готового спроса против $506,250,000,000 ответа; разрыв в 3,950,000 машин и есть доказательство, что головным числом идёт минимум цепочки, а не поток. НЕ F4 «неназванное ограничение»: ограничение не спрятано в договоре или регламенте и никем не выдаётся — кандидат выводит его из собственных допущений о том, как устроена точка. Крайности прогнаны и уточнили формулировку: при бесконечных боксах ответ растёт всего на 11.1% до $562,500,000,000, а не до спроса, поэтому причина записана как минимум цепочки, а не как отдельное звено.",
+   "twin_of": "MS-049"
   },
   {
    "id": "MS-022",

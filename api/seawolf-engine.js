@@ -217,9 +217,84 @@ function bestAhead(site, prefix) {
   return { best, bestPath };
 }
 
+/* ─────────────────── ФАЗА CHARACTERISTICS · обогащение пула ────────────────
+   Заказ владельца (через dev, круг 153): «в реальной игре это есть, обязательно
+   добавить». Правило НЕ придумано — оно выведено замером PrepMatter
+   (05_документы/Р3_ОТВЕТ_Characteristics.md, 13 прогонов, 39 участков,
+   702 значения):
+
+     объявленный галочкой атрибут тянет стартовый пул к диапазону, который
+     требует УЧАСТОК по этому атрибуту, ~1.6x против случайности (z = +7.77);
+     необъявленный не тянет (z = +0.49); ползунок не значит НИЧЕГО — в плече B,
+     где окно выставлено мимо участка, попаданий в СВОЁ окно меньше случайного
+     (z = -4.45). Тьюториал игры обещает обратное, и он неверен.
+
+   ПОЧЕМУ НЕ КОПИЯ ОДИН-В-ОДИН. У нас есть то, чего нет у оригинала: банк
+   ПРЕДПОСЧИТАН, и профиль уровня стоит на числе стопроцентных трио лучшей
+   ветки. Замер круга 155 (_m/замер_обогащения_Ц.py, свой перебор 81 ветка x
+   120 троек): прямое обогащение выводит 43% раздач за коридор уровня —
+   Ассессмент с его 1-2 решениями доходил до 6, то есть переставал быть
+   калибровочным. Поэтому раздача ПРИНИМАЕТСЯ ТОЛЬКО В КОРИДОРЕ своего уровня.
+
+   Калибровка там же: вход 2.6x после отбора даёт на экране 1.62x — ровно
+   оригинальные 40.6% против случайных 25.1%. Вход 1.6x давал бы 1.34x.  */
+const ENRICH_PULL  = 2.6;     // вес подходящему микробу при наборе стартовой шестёрки
+const ENRICH_TRIES = 25;      // попыток попасть в коридор уровня, дальше — откат
+const LEVEL_BAND = { 'Лёгкий': [21, 30], 'Средний': [8, 20], 'Сложный': [3, 7], 'Ассессмент': [1, 2] };
+
+/** микроб подходит, если по КАЖДОМУ объявленному атрибуту он в диапазоне УЧАСТКА */
+function microbeFits(m, site, attrs) {
+  for (const a of attrs) {
+    const i = ATTRS.indexOf(a);
+    if (i < 0) continue;
+    const [lo, hi] = site.ranges[a];
+    if (!(m[1][i] >= lo && m[1][i] <= hi)) return false;
+  }
+  return true;
+}
+
+/** одна раздача: шестёрка старта с тягой к подходящим, остальные 12 — по раундам */
+function dealEnriched(site, attrs, rnd) {
+  const all = site.start.concat(site.rounds.reduce((a, r) => a.concat(r), []));
+  const w = all.map(m => (microbeFits(m, site, attrs) ? ENRICH_PULL : 1));
+  const rest = all.slice(), weights = w.slice(), start = [];
+  for (let k = 0; k < 6; k++) {
+    let sum = 0; for (const x of weights) sum += x;
+    let mark = rnd() * sum, i = 0;
+    for (; i < weights.length; i++) { mark -= weights[i]; if (mark <= 0) break; }
+    if (i >= rest.length) i = rest.length - 1;
+    start.push(rest.splice(i, 1)[0]); weights.splice(i, 1);
+  }
+  const rounds = [];
+  for (let r = 0; r < ROUNDS; r++) rounds.push(rest.slice(3 * r, 3 * r + 3));
+  return Object.assign({}, site, { start, rounds });
+}
+
+/** Обогащённый участок или ИСХОДНЫЙ, если коридор не взят за ENRICH_TRIES попыток.
+    Откат честный и объявленный: лучше повторить прежнюю раздачу, чем выдать
+    партию, чья сложность не та, что обещает уровень. */
+function enrichSite(site, attrs, level, gameId, si) {
+  if (!Array.isArray(attrs) || !attrs.length) return site;
+  const band = LEVEL_BAND[level];
+  if (!band) return site;
+  const rnd = mulberry32(seedFrom('chr:' + gameId + ':' + si + ':' + attrs.slice().sort().join(',')));
+  for (let t = 0; t < ENRICH_TRIES; t++) {
+    const cand = dealEnriched(site, attrs, rnd);
+    const b = bestAhead(cand, []).best;
+    if (b >= band[0] && b <= band[1]) return cand;
+  }
+  return site;
+}
+
 /* ---------- сессия ---------- */
 class SeaWolfSession {
   constructor(game, opts = {}) {
+    /* Объявленные в фазе Characteristics атрибуты. Пустой список = фаза
+       пропущена, участки берутся как есть — прежнее поведение, байт в байт. */
+    this.attrs = Array.isArray(opts.attrs) ? opts.attrs.filter(a => ATTRS.indexOf(a) >= 0) : [];
+    game = this.attrs.length
+      ? Object.assign({}, game, { sites: game.sites.map((s, i) => enrichSite(s, this.attrs, game.level, game.id, i)) })
+      : game;
     this.game = game;                     // серверные данные, наружу не отдаются
     // уровень без калибровочной строки — отказ, а не пустое место на экране:
     // именно так «undefined» трижды доезжал до кандидата незамеченным
@@ -560,4 +635,6 @@ function pick(batch, { level, seenIds = [] } = {}) {
 module.exports = { SeaWolfSession, pick, scoreTrio, validTrios, bestAhead, ATTRS, LEVEL_NOTE,
                    LEVELS_IN_BATCH, TIMER_MS, L,
                    CAT_BANK, CAT_PER_SITE, CAT_TOTAL, SHOW_SORT_ACCURACY, INSIGHT_WIDEN,
-                   dealCategorization, fitsSite, sortKey, mulberry32, seedFrom };
+                   dealCategorization, fitsSite, sortKey, mulberry32, seedFrom,
+                   enrichSite, dealEnriched, microbeFits, bestAhead,
+                   ENRICH_PULL, ENRICH_TRIES, LEVEL_BAND };

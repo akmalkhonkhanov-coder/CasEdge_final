@@ -739,11 +739,11 @@
   },
   {
    "id": "CM-009",
-   "title": "Discount Math",
-   "difficulty": "Easy",
+   "title": "Money Back With A Gain",
+   "difficulty": "Hard",
    "type": "Trap",
-   "focus": "F11(a) revenue vs contribution",
-   "time": "4 min",
+   "focus": "F14(c) whole-period gain vs annual return",
+   "time": "6 min",
    "render": {
     "exhibits": [
      "table"
@@ -752,98 +752,150 @@
      "input_number"
     ]
    },
-   "prompt": "Sudsford's detergent: price $5.00, variable cost $3.50, volume 100,000 units/mo. Marketing proposes a permanent 10% price cut, forecasting +15% volume: \"Revenue grows 3.5% — the discount pays for itself.\" A skeptic suspects an error inflating the total. Validate: is the total correct, or is there a hidden flaw?",
+   "prompt": "A private equity fund owns Salty Sole Shoe Co. and expects to sell it in 2012. The deal model below prices both ends of the trade off the same 6.50x multiple. An associate has drafted the return line of the investment committee memo: \"We paid 111.64 and we expect 127.73, so the deal returns 14.4% — the fund gets its money back with a gain.\" The partner will not sign the memo until that line has been checked against the model. Is 14.4% the figure the committee should see?",
    "exhibit": {
     "type": "table",
     "header": [
-     "Metric",
-     "Now",
-     "Proposed"
+     "Line, $M",
+     "2006A",
+     "2007A",
+     "2008A",
+     "2009E",
+     "2010E",
+     "2011E",
+     "2012E"
     ],
     "rows": [
      [
-      "Price, $",
-      "5.00",
-      "4.50"
+      "Purchase / Sale Price",
+      "—",
+      "111.64",
+      "—",
+      "—",
+      "—",
+      "—",
+      "127.73"
      ],
      [
-      "Volume, units/mo",
-      "100,000",
-      "115,000"
+      "Sale Multiple",
+      "6.50x",
+      "6.50x",
+      "6.50x",
+      "6.50x",
+      "6.50x",
+      "6.50x",
+      "6.50x"
      ],
      [
-      "Variable cost, $/unit",
-      "3.50",
-      "3.50"
+      "EBITDA",
+      "9.75",
+      "17.18",
+      "14.70",
+      "15.20",
+      "15.69",
+      "17.18",
+      "19.65"
+     ],
+     [
+      "Note: interim Purchase / Sale Price figures for 2008A-2011E are withheld",
+      "—",
+      "—",
+      "—",
+      "—",
+      "—",
+      "—",
+      "—"
+     ],
+     [
+      "Note: acquisition occurred on December 31, 2006",
+      "—",
+      "—",
+      "—",
+      "—",
+      "—",
+      "—",
+      "—"
      ]
     ]
    },
    "step_prompts": [
-    "Revenue check → contribution check → volume needed to break even on contribution."
+    "Check the return line in the memo against the model and state the figure the committee should see.",
+    "Last mile: the committee asks whether this is a good outcome for the fund. Answer with your number and say what the associate's line got wrong."
    ],
    "checklist": {
-    "en": "Credit if ALL: (1) contribution $115,000 (−23.3%) exact; (2) breakeven volume 150,000 (+50%) exact; (3) the recommendation reasoned on contribution, not revenue.",
-    "ru": "(1) contribution $115,000 (−23.3%), tolerance: exact; (2) breakeven-объём 150,000 (+50%), tolerance: exact; (3) вывод: скидка НЕ окупается, порог назван."
+    "en": "Credit if ALL: (1) the two prices are placed in time before they are divided — the entry stands in the 2007 column, the exit in 2012E, and the note \"acquisition occurred on December 31, 2006\" fixes the purchase at a year end, so five whole annual steps separate them; naming 14.4% without ever saying what period it covers = not credited; (2) 127.73 / 111.64 = 1.1441 reproduced and labelled for what it is — the whole-period money multiple of 1.14x, or a whole-period gain of +14.4% — and not as the deal's return rate; (3) the annual return computed as 1.1441^(1/5) − 1 = 2.7%, tolerance: ±0.1pp; (4) the size of the error named — the whole-period figure stands 5.3x above the annual one; (5) the verdict given on the annual number: 2.7% a year on a five-year hold of illiquid, levered equity is a failed deal, and the memo line must read \"1.14x over five years, 2.7% a year\". Credit is not withheld from an answer built the way the model builds it: a candidate who works in multiples (1.14x) throughout and annualises only at the end has the book's own answer and is credited in full. Bonus, not required: both prices reproduced off the printed multiple — 6.50 x 19.65 = 127.73 and 111.64 / 6.50 = 17.18, the printed 2007 EBITDA; or the observation that the 2011E EBITDA is that same 17.18, so an exit one year early at the same multiple hands back the entry price.",
+    "ru": "Засчитывать, если ВСЁ: (1) две цены расставлены во времени до того, как их поделили, — вход стоит в колонке 2007, выход — в 2012E, а примечание «acquisition occurred on December 31, 2006» закрепляет покупку на конец года, то есть их разводят пять целых годовых шагов; названные 14.4% без указания срока = не зачтено; (2) 127.73 / 111.64 = 1.1441 воспроизведено и названо тем, что оно есть, — кратностью за весь срок 1.14x или приростом за весь срок +14.4%, — а не ставкой доходности сделки; (3) годовая доходность посчитана как 1.1441^(1/5) − 1 = 2.7%, tolerance: ±0.1pp; (4) назван масштаб ошибки — величина за весь срок стоит в 5.3 раза выше годовой; (5) вердикт вынесен по годовому числу: 2.7% в год на пятилетнем владении неликвидным и заёмным капиталом — проваленная сделка, а строка мемо обязана читаться как «1.14x за пять лет, 2.7% в год». Ответ, построенный так, как строит сама модель, засчитывается полностью: кандидат, который ведёт счёт в кратностях (1.14x) и приводит к году лишь в конце, даёт ответ книги и зачтён. Бонус, не обязателен: обе цены воспроизведены по напечатанному мультипликатору — 6.50 x 19.65 = 127.73 и 111.64 / 6.50 = 17.18, напечатанная EBITDA 2007; либо замечено, что EBITDA 2011E есть те же 17.18, поэтому выход на год раньше при том же мультипликаторе возвращает цену входа."
    },
    "reference": {
-    "en": "- Revenue: 500,000 → 517,500 (**+3.5%**) — the marketing claim is true on revenue.\n- Contribution: (5.00−3.50)×100k = $150,000 → (4.50−3.50)×115k = **$115,000** (**−23.3%**) once you net against variable cost. Unit margin is squeezed 1.50 → 1.00 (−33%); +15% volume does not come close to covering it.\n- Breakeven volume: 150,000/1.00 = **150,000 units = +50%** on today.\n- Decide on contribution, not on revenue — the discount that looks good on revenue is bad on contribution. Reject it, or find +50% volume from a real driver.\n\nOne base for all four numbers: one month of the detergent line at the record's current 100,000 units, held in all four cells: the +15% volume the discount is forecast to buy is the consequence of the price cut, not a second parameter, so it is kept out of the count and the two prices per unit are moved independently. The count is monthly contribution dollars, (price less variable cost) times 100,000 units. Lever 1 — selling price per unit, the permanent 10% cut marketing proposes: $5 → $4.5. Lever 2 — variable cost per unit, the one line the record freezes at $3.50 in both columns: $3.5 → $4.5. Base case 150,000; lever 1 alone 100,000; lever 2 alone 50,000; both together 0 (no interaction term). What survives is the test itself: judge the discount on contribution, not on the true but irrelevant +3.5% revenue growth. On today's 100,000 units the cut alone takes contribution from $150,000 to $100,000, a third of it, and the volume that would hold contribution flat is 150,000 units, +50%, not the +15% marketing forecasts. What does not survive is reading the surviving $100,000 as room to absorb anything else: the record freezes variable cost at $3.50, and if input cost rose to the $4.50 the discounted price would charge, the cut leaves exactly zero contribution, while at today's $5.00 price the same cost move alone still costs $100,000. The two moves are additive per unit — no cross term — so a cushion read off the price lever cannot also pay for the cost lever. Scope: of the two per-unit parameters moved in this pair — price and variable cost — at the record's 100,000 units; the volume response the discount is forecast to buy is deliberately held still and is not judged here.",
-    "ru": "- Выручка: 500,000 → 517,500 (**+3.5%**) — заявление маркетинга по выручке верно.\n- Contribution: (5.00−3.50)×100k = $150,000 → (4.50−3.50)×115k = **$115,000** (**−23.3%**), как только вычтем переменную себестоимость. Маржа на единицу сжимается 1.50 → 1.00 (−33%); прирост объёма в +15% этого сжатия и близко не покрывает.\n- Объём breakeven: 150,000/1.00 = **150,000 единиц = +50%** к сегодняшнему уровню.\n- Решать по contribution, а не по выручке: скидка, которая хорошо выглядит на выручке, плоха на contribution. Отклонить её или найти +50% объёма от реального драйвера.\n\nОдна база для всех четырёх чисел: один месяц линии моющих средств при нынешних 100,000 единицах записи, удержанных неизменными во всех четырёх клетках: +15% объёма, которые скидка по прогнозу должна принести, — это следствие снижения цены, а не второй параметр, поэтому в Счёт они не входят, а две цены за единицу двигаются независимо. Счёт — это месячный contribution в долларах, (цена минус переменная себестоимость) × 100,000 единиц. Рычаг 1 — цена продажи за единицу, постоянное снижение на 10%, которое предлагает маркетинг: $5 → $4.5. Рычаг 2 — переменная себестоимость за единицу, единственная строка, которую запись фиксирует на $3.50 в обеих колонках: $3.5 → $4.5. Базовый случай 150,000; только рычаг 1 — 100,000; только рычаг 2 — 50,000; оба вместе — 0 (слагаемого взаимодействия нет). Что переживает проверку — это сам тест: судить скидку по contribution, а не по верному, но не относящемуся к делу росту выручки в +3.5%. На сегодняшних 100,000 единицах одно только снижение уводит contribution со $150,000 до $100,000, на треть, а объём, при котором contribution не изменится, — это 150,000 единиц, +50%, а не те +15%, которые прогнозирует маркетинг. Что не переживает проверку — это прочтение оставшихся $100,000 как запаса, которым можно покрыть что-то ещё: запись фиксирует переменную себестоимость на $3.50, и если стоимость входящего сырья поднимется до тех $4.50, которые берёт цена со скидкой, снижение оставит ровно нулевой contribution, тогда как при сегодняшней цене $5.00 то же движение себестоимости само по себе всё равно обходится в $100,000. Два движения складываются на единицу — перекрёстного члена нет, — поэтому запас, снятый с ценового рычага, не может заодно оплатить и рычаг себестоимости. Периметр: среди двух параметров на единицу, сдвинутых в этой паре, — цены и переменной себестоимости — при 100,000 единицах записи; отклик объёма, который скидка по прогнозу должна принести, намеренно оставлен неподвижным и здесь не оценивается."
+    "en": "- Naive: both prices are printed, so divide. 127.73 / 111.64 = 1.1441, i.e. **+14.4%**, and the memo reads \"money back with a gain\". Both prices are right and so is the division; the error is handing the answer over as a rate.\n- The tell is in the column headings and the note: the entry stands in the 2007 column, the exit in 2012E, and \"acquisition occurred on December 31, 2006\" fixes the purchase at a year end. The prices are five whole annual steps apart, and 14.4% belongs to all five together.\n- Correct: the same two numbers, folded by the operator the period demands. 1.1441^(1/5) - 1 = **2.73% a year**, exactly the **2.7%** the model prints on its Return on Investment line for 2012E. Nothing in the set changed - same entry, same exit, same five years - only the operation, and the answer moved **5.3-fold**. The fifth root spreads one gain over five compounding years, so a whole-period figure always stands several times above its annual one: 14.4% does not overstate the gain, it changes the unit.\n- The model is sound, so the data is not to blame: 6.50 x 19.65 = 127.725 -> 127.73 is the exit and 111.64 / 6.50 = 17.1754 -> 17.18 the 2007 EBITDA - both ends are the multiple laid on the printed EBITDA line.\n- Last mile: the committee must see 2.7% a year, and the memo line must read \"1.14x over five years, 2.7% a year\". On illiquid, levered equity that is a failed deal - the fund tied money up for five years to earn a yield that needed no buyout.\n\nOne base for all four numbers: the same deal over the same five-year hold, both ends re-priced off the printed 6.50x multiple and EBITDA line, the period held still. The count is the annual return, (exit price / entry price)^(1/5) - 1, in percent. Lever 1 - the exit is struck at the model's own 2011E price instead of the 2012E one: 127.73 -> 111.64. Lever 2 - the entry is struck on the 2006A EBITDA the fund was buying on December 31, 2006: 111.64 -> 6.50 x 9.75 = 63.375. Base case 2.729; lever 1 alone 0.000; lever 2 alone 15.047; both together 11.990 (interaction -0.327). What survives is the operation: however the ends are re-priced, five steps still fold by a fifth root and never by a plain ratio, and the 5.3-fold gap between 14.4% and 2.7% belongs to the arithmetic, not to these prices. What does not survive is the verdict on the deal, decided by which year's EBITDA the multiple is laid on: the entry priced on 2006A turns 2.7% a year into 15.0%, while exiting a year early at the model's own 2011E price - 111.64, the very figure paid at entry - hands back what it paid and no more, 0.000% a year. Scope: among the two endpoint prices re-set off the printed multiple and EBITDA line; the five-year period, the multiple and the EBITDA figures are held still.\nSource: Kellogg Consulting Club Casebook 2012, Case 25 \"Salty Sole Shoe Co.\", pp. 186-192",
+    "ru": "- Наивный ход: обе цены напечатаны, значит, делим одну на другую. 127.73 / 111.64 = 1.1441, то есть **+14.4%**, и строка мемо читается как «деньги вернули с плюсом». Обе цены верны, и деление верно; ошибка — выдавать ответ за ставку.\n- Признак стоит в заголовках колонок и в примечании: вход стоит в колонке 2007, выход — в 2012E, а «acquisition occurred on December 31, 2006» закрепляет покупку на конец года. Цены разведены пятью целыми годовыми шагами, и 14.4% принадлежат всем пяти сразу.\n- Верно: те же два числа, свёрнутые тем оператором, которого требует срок. 1.1441^(1/5) − 1 = **2.73% в год**, ровно те **2.7%**, которые модель печатает в строке Return on Investment за 2012E. В множестве ничего не менялось — тот же вход, тот же выход, те же пять лет, — менялась операция, а ответ сдвинулся в **5.3 раза**. Корень пятой степени раскладывает один прирост на пять сложных годов, поэтому величина за весь срок всегда в несколько раз выше годовой: 14.4% не завышают прирост, они меняют единицу.\n- Модель сошлась, и данные не виноваты: 6.50 x 19.65 = 127.725 -> 127.73 — цена выхода, а 111.64 / 6.50 = 17.1754 -> 17.18 — EBITDA 2007; оба конца есть мультипликатор, положенный на строку EBITDA.\n- Последняя миля: комитет обязан увидеть 2.7% в год, а строка мемо обязана читаться как «1.14x за пять лет, 2.7% в год». На неликвидном и заёмном капитале это проваленная сделка: фонд связал деньги на пять лет ради доходности, ради которой выкуп не нужен.\n\nОдна база для всех четырёх чисел: та же сделка на том же пятилетнем сроке владения, оба конца которой переоценены по напечатанному мультипликатору 6.50x и напечатанной строке EBITDA, а срок удержан неподвижным. Счёт — годовая доходность, (цена выхода / цена входа)^(1/5) − 1, в процентах. Рычаг 1 — выход считан по собственной цене модели за 2011E вместо 2012E: 127.73 -> 111.64. Рычаг 2 — вход считан по EBITDA 2006A, которую фонд покупал 31 декабря 2006 года: 111.64 -> 6.50 x 9.75 = 63.375. Базовый случай 2.729; только рычаг 1 — 0.000; только рычаг 2 — 15.047; оба вместе — 11.990 (взаимодействие −0.327). Что переживает проверку — это операция: как бы ни переоценили концы, пять шагов всё равно сворачиваются корнем пятой степени, а не простым отношением, разрыв в 5.3 раза между 14.4% и 2.7% принадлежит арифметике, а не этим ценам. Что не переживает проверку — это вердикт по сделке, который решается тем, на EBITDA какого года ложится мультипликатор: вход, оценённый по 2006A, превращает 2.7% в год в 15.0%, а выход на год раньше по собственной цене модели за 2011E — 111.64, ровно той величине, что уплачена на входе, — возвращает уплаченное и ничего сверх, 0.000% в год. Периметр: среди двух концевых цен, пересчитанных по напечатанному мультипликатору и строке EBITDA; пятилетний срок, мультипликатор и EBITDA удержаны неподвижными.\nSource: Kellogg Consulting Club Casebook 2012, Case 25 «Salty Sole Shoe Co.», pp. 186-192"
    },
    "provoked": {
-    "en": "the discount is judged on revenue change instead of contribution.",
-    "ru": "«окупаемость» скидки проверена по revenue вместо contribution."
+    "en": "a gain measured across the whole holding period is reported as the deal's return, with nothing done to bring it to a per-year figure.",
+    "ru": "прирост, измеренный за весь срок владения, выдан за доходность сделки, ничем не приведённую к году."
    },
    "steps": [
     {
-     "prompt": "Contribution effect + breakeven volume",
+     "prompt": "Annual return on the deal, %",
+     "kind": "number",
+     "answer": "2.7",
+     "tolerance": "±0.1pp"
+    },
+    {
+     "prompt": "Verdict for the committee + what the memo's 14.4% got wrong",
      "kind": "text",
-     "answer": "115000 (-23.3%); 150000 (+50%)",
+     "answer": "2.7% a year over five years — a failed deal; 14.4% is the whole-period gain (1.14x) reported as a rate, 5.3x the annual figure",
      "tolerance": "exact"
     }
    ],
-   "family_h25": "F1",
+   "family_h25": "F13",
    "family_src": "тело",
    "family_conf": "высокая",
    "levers": {
-    "base": "one month of the detergent line at the record's current 100,000 units, held in all four cells: the +15% volume the discount is forecast to buy is the consequence of the price cut, not a second parameter, so it is kept out of the count and the two prices per unit are moved independently",
-    "metric": "monthly contribution dollars, (price less variable cost) times 100,000 units",
+    "base": "the same deal over the same five-year hold, both ends re-priced off the printed 6.50x multiple and EBITDA line, the period held still",
+    "metric": "the annual return, (exit price / entry price)^(1/5) - 1, in percent",
     "lever1": {
-     "name": "selling price per unit, the permanent 10% cut marketing proposes",
-     "from": 5,
-     "to": 4.5,
-     "unit": "$",
+     "name": "the exit is struck at the model's own 2011E price instead of the 2012E one",
+     "from": 127.73,
+     "to": 111.64,
+     "unit": "$M",
+     "exchange": true,
      "src": "exhibit.rows[0]",
-     "quote_from": "Price, $ || 5.00",
-     "quote_to": "Price, $ || 4.50"
+     "quote_from": "Purchase / Sale Price || 2012E || 127.73",
+     "quote_to": "Purchase / Sale Price || 2011E || 111.64 (книга Exhibit #1 стр.191; ячейка скрыта в экзибите слота, см. сноску)"
     },
     "lever2": {
-     "name": "variable cost per unit, the one line the record freezes at $3.50 in both columns",
-     "from": 3.5,
-     "to": 4.5,
-     "unit": "$",
+     "name": "the entry is struck on the 2006A EBITDA the fund was buying on December 31, 2006",
+     "from": 111.64,
+     "to": 63.375,
+     "unit": "$M",
      "exchange": true,
-     "src": "exhibit.rows[2]",
-     "quote_from": "Variable cost, $/unit || 3.50",
-     "quote_to": "Price, $ || 4.50"
+     "src": "exhibit.rows[0]",
+     "quote_from": "Purchase / Sale Price || 2007 || 111.64",
+     "quote_to": "EBITDA || 2006A || 9.75 x Sale Multiple 6.50x"
     },
     "result": {
-     "base_case": 150000,
-     "alone1": 100000,
-     "alone2": 50000,
-     "both": 0,
-     "interaction": 0
+     "base_case": 2.729,
+     "alone1": 0.0,
+     "alone2": 15.047,
+     "both": 11.99,
+     "interaction": -0.327
     },
-    "verdict": "What survives is the test itself: judge the discount on contribution, not on the true but irrelevant +3.5% revenue growth. On today's 100,000 units the cut alone takes contribution from $150,000 to $100,000, a third of it, and the volume that would hold contribution flat is 150,000 units, +50%, not the +15% marketing forecasts. What does not survive is reading the surviving $100,000 as room to absorb anything else: the record freezes variable cost at $3.50, and if input cost rose to the $4.50 the discounted price would charge, the cut leaves exactly zero contribution, while at today's $5.00 price the same cost move alone still costs $100,000. The two moves are additive per unit — no cross term — so a cushion read off the price lever cannot also pay for the cost lever.",
-    "verdict_scope": "of the two per-unit parameters moved in this pair — price and variable cost — at the record's 100,000 units; the volume response the discount is forecast to buy is deliberately held still and is not judged here"
+    "verdict": "What survives is the operation: however the ends are re-priced, five steps still fold by a fifth root and never by a plain ratio, and the 5.3-fold gap between 14.4% and 2.7% belongs to the arithmetic, not to these prices. What does not survive is the verdict on the deal, decided by which year's EBITDA the multiple is laid on: the entry priced on 2006A turns 2.7% a year into 15.0%, while exiting a year early at the model's own 2011E price - 111.64, the very figure paid at entry - hands back what it paid and no more, 0.000% a year.",
+    "verdict_scope": "among the two endpoint prices re-set off the printed multiple and EBITDA line; the five-year period, the multiple and the EBITDA figures are held still"
    },
    "mehanizm": {
-    "naive": "оценивает окупаемость скидки по изменению выручки вместо изменения вклада на покрытие",
-    "correct": "оценивает окупаемость скидки по изменению вклада, умножая маржу после скидки на новый объём",
-    "why": "скидка вычитается из маржи целиком, поэтому доля потери во вкладе больше, чем в выручке",
-    "code": "MECH-25-выручка-вместо-вклада",
+    "naive": "делит прирост цены на цену покупки и выдаёт полученную величину за доходность сделки, не приведя её к году",
+    "correct": "сворачивает отношение цены выхода к цене входа корнем по числу лет владения и называет годовую доходность",
+    "why": "один и тот же прирост, растянутый на несколько сложных лет, даёт годовую ставку в несколько раз ниже цельного процента, поэтому процент за срок и процент в год — разные единицы",
+    "code": "MECH-324-простой-возврат-вместо-годового",
     "code2": []
    },
-   "family_note": "круг 103: скидка $0.50 вычитается целиком из маржи $1.50, поэтому судить надо по contribution (−23.3%), а не по выручке (+3.5%)"
+   "family_note": "Круг 126, разметка по словарю v3 (круг 110), источник — тело.\n\nF13, не F1. Множество ВЕРНОЕ и не подменялось: те же две напечатанные цены 111.64 и 127.73 и те же пять годовых шагов; знаменатель менять не надо — цена входа и есть та база, на которую считается доходность. Неверна ОПЕРАЦИЯ над этим множеством: тождество (простое отношение) там, где требуется корень пятой степени, сворачивающий пять шагов в один. Различающий вопрос F13 отвечен «да»: та же величина на ТОМ ЖЕ множестве другим оператором даёт 2.7% вместо 14.4%, разрыв в 5.3 раза. Против правила разрешения из v3 («честная статистика другого множества = F1»): 14.4% действительно честная величина, но измерена она на ТОМ ЖЕ множестве, а не на другой совокупности — второго периметра, по которому «решают», здесь нет вовсе, и именно это держит слот в F13, а не в F1.\n\nF13, не F15. F15 — это когда округление на промежуточном шаге переносит результат через порог решения, и её различающий вопрос «меньше ли расстояние до порога, чем шаг округления?» здесь отвечен «нет». Два кандидатских ответа стоят в 5.3 раза друг от друга, а не в десятых пункта; никакое округление правдоподобного размера не сводит 14.4% к 2.7% и не меняет вердикт. Точность здесь ничего не решает — решает выбор оператора.",
+   "twin_of": [
+    "CM-016",
+    "CM-031"
+   ]
   },
   {
    "id": "CM-010",
