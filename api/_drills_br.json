@@ -199,7 +199,7 @@
     "code": "MECH-08-среднее-вместо-распределения",
     "code2": []
    },
-   "twin_of": "BR-036"
+   "twin_of": null
   },
   {
    "id": "BR-005",
@@ -1464,11 +1464,8 @@
     "code2": [
      "MECH-65-база-меняется-от-меры"
     ],
-    "seam": true,
-    "seam_участники": [
-     "BR-029",
-     "BR-036"
-    ]
+    "seam": false,
+    "seam_участники": null
    }
   },
   {
@@ -1708,7 +1705,7 @@
     },
     "grader": "### Grader\n- **load_syn:** the last few points · costs the most · asymmetr · 30 out of 33 · disproportionate · the penalty is cheaper · pushing does not pay\n- **cover.A (recovery stages):** optical sort · manual picking · flotat · fines fraction\n- **cover.B (input stream):** separate collection · stream quality · districts · contaminat\n- **cover.C (regulatory routes):** deferral · perimeter of the calculation · contractor · penalty\n- **dead.D1:** add shifts · just more people\n- **dead.D2:** new plant · a second site\n- **dead.D3:** challenge the target · court · lobby\n\n---\n\n---\n\n---"
    },
-   "family_h25": "F2",
+   "family_h25": "F7",
    "family_src": "тело",
    "family_conf": "высокая",
    "reference": {
@@ -1721,7 +1718,8 @@
     "why": "почти достигнутая цель провоцирует дожимать, тогда как дожим дороже платы за недостижение",
     "code": "MECH-78-ступенчатая-стоимость-мер",
     "code2": []
-   }
+   },
+   "family_note": "круг 128: метка изменена по СЛЕПОМУ ЧТЕНИЮ трёх независимых чтецов в чистом контексте (разметка из тел вырезана, порядок перемешан, 22 слота: 17 кандидатов и 5 контролей). Правилось только то, где трое единогласны И файл с ними расходится. Прежняя метка F2 стояла по ФОРМЕ «первый шаг верен, ответ неверен», а не по механике — см. СЛОВАРЬ_v6 §дефект 1. Согласие чтецов: шаг «порождён или забыли» 21 из 22 = 95%, шаг «какая семья» 15 из 22 = 68%."
   },
   {
    "id": "BR-035",

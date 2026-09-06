@@ -754,7 +754,28 @@ function firmStyle(firm) {
    а ведение - свойство продукта, а не пожелание запроса.
    Что ОСТАЛОСЬ на выборе кандидата: оболочка (uiLang) и РАЗБОР (fbLang).
    Разбор кейса собирает клиент своим вызовом, ось fbLang туда и уходит. */
+/* 06.09.2026 dev. ЯЗЫК ВЕДЕНИЯ КЕЙСА СНОВА ВЫБИРАЕТ КАНДИДАТ.
+   25.08.2026 константа была поставлена сознательно: русской стороны у библиотеки
+   почти не было, и выбор «русский» дал бы кандидату русский бриф с английскими
+   вопросами — шов хуже честного английского. 06.09.2026 цех кейсов закрыл
+   перевод: 400 кейсов из 400, полей стороны кандидата 4952, с русским словом
+   4946; шесть оставшихся — заголовки целиком из терминов глоссария
+   («contribution per unit»), которым перевод не нужен. Шва больше нет.
+
+   Владелец: настоящее кейс-интервью проходят на русском ИЛИ на английском,
+   по выбору кандидата, и продукт обязан давать тот же выбор.
+
+   ГРАНИЦА, КОТОРАЯ ОСТАЁТСЯ: ось касается ТОЛЬКО кейсов. Дриллы и игры Solve
+   ведутся по-английски — их материал английский, и это отдельное решение
+   владельца, не тронутое здесь. Дриллы берут язык из langInstruction() в
+   клиенте, сюда не заходят.
+
+   Константа оставлена как ЗНАЧЕНИЕ ПО УМОЛЧАНИЮ: клиент, который поля не
+   пришлёт, получает английское ведение ровно как раньше. */
 const CONDUCT_LANG = 'en';
+function conductLang(body) {
+  return String((body && body.lang) || '').toLowerCase() === 'ru' ? 'ru' : CONDUCT_LANG;
+}
 
 /* ───────────────────────── hint gating ───────────────────────────────────────
    attemptCount is the number of failed attempts on the CURRENT step.
@@ -1325,7 +1346,7 @@ export default async function handler(req, res) {
 
     // 4) list action — no model call, meta only.
     if (body.action === 'list') {
-      return res.status(200).json({ cases: listCases(CONDUCT_LANG) });
+      return res.status(200).json({ cases: listCases(conductLang(body)) });
     }
 
     // 4b) pick action — adaptive auto-selection, no model call, meta only.
@@ -1335,7 +1356,7 @@ export default async function handler(req, res) {
         level: body.level,
         seenIds: body.seenIds,
         rand: Math.random(),
-        lang: CONDUCT_LANG
+        lang: conductLang(body)
       }));
     }
 
@@ -1438,7 +1459,7 @@ export default async function handler(req, res) {
        ровно как раньше — старые клиенты и повторы не ломаются. */
     const wantStream = body.stream === true || body.stream === 1;
     const focusKey = ['structure','quant','logic','comm','ownership'].includes(body.focusDimension) ? body.focusDimension : null;
-    const lang = CONDUCT_LANG;   // ведение фиксировано, см. объявление константы
+    const lang = conductLang(body);   // язык ведения выбирает кандидат, см. объявление выше
 
     // Interviewee-led (BCG/Bain on a graph-ready case): the candidate drives, the
     // engine holds only real dependencies. Everything else (McKinsey, or any case
