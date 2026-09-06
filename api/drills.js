@@ -165,22 +165,43 @@ function drillById(id) {
 // reference are server-only. For E-after drills the exhibit itself is WITHHELD
 // until the candidate has submitted a tree (revealed=true) — the whole point is
 // that the data breaks the framework they already built.
-function sanitizeDrill(d, index, total, revealed) {
+/* 06.09.2026, dev. ЯЗЫК САМОГО ВОПРОСА.
+   Кейсы с круга 72 ведутся на языке кандидата (ось aiLang). У дриллов такой
+   оси не было вовсе: `reference` и `checklist` парные {en,ru} и идут по fbLang,
+   а САМ ВОПРОС — простые строки, всегда английские. Переводить их было НЕКУДА:
+   поле с русским текстом никто бы не прочитал.
+   Контракт: у любого видимого поля может появиться близнец с суффиксом `_ru`
+   (`title_ru`, `prompt_ru`, `facts_ru`, `exhibit_ru`, `step_prompts_ru`,
+   `company_ru`, `industry_ru`). При lang==='ru' берётся близнец, если он
+   непустой; иначе — базовое поле. Английский путь не меняется ни на байт,
+   слот без перевода остаётся играбельным, и перевод включается послотно. */
+function ruField(d, field, lang) {
+  if (lang === 'ru') {
+    const v = d[field + '_ru'];
+    const пусто = v === undefined || v === null || v === '' ||
+                  (Array.isArray(v) && !v.length) ||
+                  (v && typeof v === 'object' && !Array.isArray(v) && !Object.keys(v).length);
+    if (!пусто) return v;
+  }
+  return d[field];
+}
+
+function sanitizeDrill(d, index, total, revealed, lang) {
   // Brainstorm (BR): qualitative idea-generation. Client sees prompt + facts. The
   // `key` (LOAD/COVER/DEAD/grader) is server-only. CULL slots are two-move: the
   // client team's idea list + the new fact are WITHHELD until the candidate has
   // submitted their own idea list (revealed only in the grade response). NO exhibits.
   if (d.type === 'Brainstorm') {
     return {
-      id: d.id, title: d.title, type: d.type,   // difficulty (tier) withheld — see NO-SPOILER note below
-      company: d.company || null, industry: d.industry || null, time: d.time,
-      prompt: d.prompt, facts: d.facts || [],
+      id: d.id, title: ruField(d, 'title', lang), type: d.type,   // difficulty (tier) withheld — see NO-SPOILER note below
+      company: ruField(d, 'company', lang) || null, industry: ruField(d, 'industry', lang) || null, time: d.time,
+      prompt: ruField(d, 'prompt', lang), facts: ruField(d, 'facts', lang) || [],
       cull: !!d.cull,            // client shows a 2nd-move ("cull") screen when true
       index: index, total: total
     };
   }
   const isAfter = d.exhibit_mode === 'E-after';
-  const exhibit = (isAfter && !revealed) ? null : (d.exhibit || null);
+  const exhibit = (isAfter && !revealed) ? null : (ruField(d, 'exhibit', lang) || null);
   // NO-SPOILER (2026-07-25): `difficulty` (tier) and `focus` are NOT sent. focus
   // names the trap mechanism outright ("F05(A) PERPETUITY VS DECAY") and tier
   // primes the candidate — both used to render as chips above the prompt. `type`
@@ -196,13 +217,13 @@ function sanitizeDrill(d, index, total, revealed) {
   const branch = String(d.type || '').replace(/[*_`~]/g, '').trim() === 'Structuring'
     ? 'Structuring' : 'Drill';
   return {
-    id: d.id, title: d.title, type: branch,
+    id: d.id, title: ruField(d, 'title', lang), type: branch,
     time: d.time,
-    prompt: d.prompt,
+    prompt: ruField(d, 'prompt', lang),
     exhibit: exhibit,
     exhibit_mode: d.exhibit_mode || null,   // client gates the E-after flow on this
     exhibit_withheld: (isAfter && !revealed) || false,
-    step_prompts: d.step_prompts || [],
+    step_prompts: ruField(d, 'step_prompts', lang) || [],
     index: index, total: total
   };
 }
@@ -220,7 +241,7 @@ function sanitizeDrill(d, index, total, revealed) {
    ПРЕДОХРАНИТЕЛЬ: если близнецы съели ВЕСЬ остаток, выдаём как раньше.
    Пустой экран хуже знакомого слота, и «библиотека кончилась» здесь было бы
    ложью - слоты есть. */
-function nextDrill(doneIds, data) {
+function nextDrill(doneIds, data, lang) {
   const done = new Set(Array.isArray(doneIds) ? doneIds : []);
   const list = (data || DRILLS_CM).drills || [];
   /* 28.08.2026, круг 105 цеха дриллов. Одна ссылка на слот покрывает одно
@@ -260,7 +281,7 @@ function nextDrill(doneIds, data) {
     idx = list.indexOf(свежий || остаток[0]);
   }
   if (idx < 0) return null;                 // all done
-  return sanitizeDrill(list[idx], idx + 1, list.length);
+  return sanitizeDrill(list[idx], idx + 1, list.length, false, lang);
 }
 
 /* ───────────────────────── infra (shared pattern) ────────────────────────── */
@@ -710,15 +731,18 @@ export default async function handler(req, res) {
 
     const body = req.body || {};
 
+    // ось языка САМОГО вопроса — та же, что у кейсов (aiLang), см. ruField выше
+    const aiLang = String(body.aiLang || '').toLowerCase() === 'ru' ? 'ru' : 'en';
+
     if (body.action === 'list' || body.action === 'next') {
       const lib = libData(body);
       if (!lib) return res.status(400).json({ error: { message: 'Unknown drill set.' } });
       if (body.action === 'list') {
         // difficulty/focus withheld here too — otherwise one `list` call hands over
         // the tier and trap mechanism of every drill in the set.
-        return res.status(200).json({ drills: (lib.drills || []).map(d => ({ id: d.id, title: d.title })) });
+        return res.status(200).json({ drills: (lib.drills || []).map(d => ({ id: d.id, title: ruField(d, 'title', aiLang) })) });
       }
-      return res.status(200).json({ drill: nextDrill(body.doneIds, lib) });   // null when the set is exhausted
+      return res.status(200).json({ drill: nextDrill(body.doneIds, lib, aiLang) });   // null when the set is exhausted
     }
     if (body.action === 'grade') {
 

@@ -90,11 +90,17 @@ function readToken(tok) {
 function rehydrate(st) {
   const game = GAMES.find(g => String(g.id) === String(st.g));
   if (!game) return null;
-  /* Объявленные в фазе Characteristics атрибуты живут в токене (st.a) и едут
-     в сессию при КАЖДОЙ регидратации: обогащение выводится из них засеянным
-     ГСЧ заново, как и раздача категоризации. Сама раздача в токен не кладётся —
-     иначе токен носил бы содержимое будущих карточек (правило Г6). */
-  const s = new SeaWolfSession(game, { now: st.t, attrs: Array.isArray(st.a) ? st.a : [] });
+  /* Объявленное в фазе Characteristics живёт в токене (st.a) и едет в сессию при
+     КАЖДОЙ регидратации: обогащение выводится из него засеянным ГСЧ заново, как
+     и раздача категоризации. Сама раздача в токен не кладётся — иначе токен нёс
+     бы содержимое будущих карточек (правило Г6).
+     С круга 162 st.a — ТРИ списка, по одному на площадку (null = ещё не
+     объявлено). Плоский список старого токена движок читает как «то же самое на
+     все три»: партии, начатые до выкатки, доигрываются. */
+  const плоский = Array.isArray(st.a) && st.a.every(x => typeof x === 'string');
+  const s = new SeaWolfSession(game, { now: st.t,
+    decl:  плоский ? null : (Array.isArray(st.a) ? st.a : null),
+    attrs: плоский ? st.a : null });
   const ch = Array.isArray(st.c) ? st.c : [[], [], []];
   const tr = Array.isArray(st.s) ? st.s : [null, null, null];
   const at = Array.isArray(st.m) ? st.m : [null, null, null];
@@ -120,7 +126,7 @@ function stateOf(s, st, submittedAt) {
     const i = s.finished ? 2 : s.siteIndex - 1;
     if (i >= 0 && i < 3) m[i] = submittedAt;
   }
-  return { g: st.g, t: st.t, c: s.choices, s: s.treatments, m, k: s.catActs, r: s.revActs };
+  return { g: st.g, t: st.t, c: s.choices, s: s.treatments, m, k: s.catActs, r: s.revActs, a: s.decl };
 }
 // Everything the result screen needs that view() does not carry.
 function withTotals(s, view) {
@@ -228,12 +234,13 @@ export default async function handler(req, res) {
       if (!LEVELS_IN_BATCH.includes(level)) return res.status(400).json({ error: { message: 'Unknown level.' } });
       const got = pickGame(level, seen);
       if (!got) return res.status(400).json({ error: { message: 'Level is empty.' } });
-      /* Фаза Characteristics: кандидат объявляет атрибуты ДО выдачи пула.
-         Пустой список — фаза пропущена, партия идёт как прежде. Чужие имена
-         движок отбрасывает сам; больше трёх не бывает по числу атрибутов. */
-      const attrs = Array.isArray(body.attrs) ? body.attrs.filter(a => typeof a === 'string').slice(0, 3) : [];
+      /* Фаза Characteristics с круга 162 идёт ВНУТРИ партии, перед каждой из трёх
+         площадок (action='declare'), поэтому pick объявления больше не ждёт.
+         Старый клиент мог прислать attrs при старте — принимаем как объявление
+         ПЕРВОЙ площадки, чтобы выкатка не ломала открытые вкладки. */
+      const attrs = Array.isArray(body.attrs) ? body.attrs.filter(a => typeof a === 'string').slice(0, 7) : [];
       const st = { g: got.game.id, t: Date.now(), c: [[], [], []], s: [null, null, null], m: [null, null, null],
-                   k: [[], [], []], r: [[], [], []], a: attrs };
+                   k: [[], [], []], r: [[], [], []], a: [attrs.length ? attrs : null, null, null] };
       const s = rehydrate(st);
       // A level played to the end starts a second lap, and that is announced in
       // words: a repeat you were warned about is a repeat; a silent one reads as
@@ -283,6 +290,22 @@ export default async function handler(req, res) {
        Права НЕ списываем: расход привязан к первому ходу партии (action=choose),
        и он идемпотентен по ключу 'seawolf:<id>'. Категоризация идёт РАНЬШЕ
        добора, и если списать здесь тоже — партия съест две попытки вместо одной. */
+    /* ── объявление на текущей площадке ─────────────────────────────────────
+       Принимается ТОЛЬКО в фазе 'chr' и ТОЛЬКО для текущей площадки: индекс
+       берётся из сессии, а не из тела запроса, иначе кандидат объявлял бы
+       галочки на площадку, пул которой уже у него на экране. Пустой список —
+       осознанный пропуск шага, он тоже объявление и тоже закрывает фазу. */
+    if (action === 'declare') {
+      const decl = Array.isArray(body.decl) ? body.decl.filter(a => typeof a === 'string').slice(0, 7) : [];
+      if (s.finished || s.expired()) return res.status(200).json({ token: body.token, view: withTotals(s, s.view(Date.now(), lang)) });
+      /* Повтор того же хода при моргнувшей связи не ошибка — отдаём текущий вид. */
+      if (s.sitePhase() !== 'chr') return res.status(200).json({ token: body.token, view: withTotals(s, s.view(Date.now(), lang)) });
+      let view;
+      try { view = s.declare(decl, Date.now(), lang); }
+      catch (e) { return res.status(400).json({ error: { message: 'Bad declaration.' } }); }
+      return res.status(200).json({ token: makeToken(stateOf(s, st)), view: withTotals(s, view) });
+    }
+
     if (action === 'sort' || action === 'review') {
       const a = body.act;
       if (typeof a !== 'string') return res.status(400).json({ error: { message: 'Bad act.' } });

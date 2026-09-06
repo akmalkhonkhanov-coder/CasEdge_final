@@ -242,6 +242,74 @@ const ENRICH_PULL  = 2.6;     // вес подходящему микробу п
 const ENRICH_TRIES = 25;      // попыток попасть в коридор уровня, дальше — откат
 const LEVEL_BAND = { 'Лёгкий': [21, 30], 'Средний': [8, 20], 'Сложный': [3, 7], 'Ассессмент': [1, 2] };
 
+/* ── ФАЗА CHARACTERISTICS · ЕДИНАЯ ТАБЛИЦА ВЕСОВ · круг 161 ─────────────────
+   Слева — что кандидат объявил галочкой, справа — во сколько раз тяжелее
+   становится микроб при наборе стартовой шестёрки. Таблица ОДНА и лежит здесь:
+   перенастройка обязана стоить одну строку, а не обход кода.
+
+   Значения ВХОДНЫЕ. Что они дают НА ЭКРАНЕ — замерено калибровкой
+   (06_Обмен/ЦЕХ_ИГР/02_движок/_m/калибровка_весов_характеристик.js) на живом
+   банке, ЧЕРЕЗ enrichSite, то есть уже после отбора по коридору уровня.
+
+   ОТКУДА ЗАКАЗ. Замер PrepMatter круга 160 (48 участков, 288 микробов):
+   галочка на признаке тянет пул к объявленному, 1.26x, z=+3.64; сам участок
+   признаки НЕ тянет. Разбивка по роли объявленного признака: совпал с Desired
+   +58%, нейтральный +18%, совпал с Undesired +16%. Разрыв не доказан (z≈1.4),
+   и dev решил (письмо круга 161) не тратить круг на его доказательство:
+   тренажёр обязан различать умение от случая, даже если оригинал не различает.
+   Поэтому вес зависит от роли, и 1.6 не равно 1.2 — это и есть смысл фазы. */
+const TRAITS = Array.from(new Set(CAT_BANK.map(m => m[2])));
+const CHR_PICK = 2;           // ровно две галочки из семи (3 атрибута + 4 признака)
+const CHR_W = {
+  attr:          2.6,   // атрибут: диапазон УЧАСТКА        → на экране 1.62 (круг 157)
+  traitDesired:  2.2,   // признак = Desired участка        → на экране 1.59 (калибровка 161)
+  traitOther:    1.6    // признак нейтральный или Undesired → на экране 1.25 (калибровка 161)
+};
+
+/** Вес микроба при объявленном наборе. Атрибут и признак считаются одинаково —
+    произведением по объявленному, поэтому две галочки складываются, а не спорят. */
+function chrWeight(m, site, decl) {
+  let w = 1;
+  for (const d of decl) {
+    const i = ATTRS.indexOf(d);
+    if (i >= 0) {
+      const [lo, hi] = site.ranges[d];
+      if (m[1][i] >= lo && m[1][i] <= hi) w *= CHR_W.attr;
+      continue;
+    }
+    if (TRAITS.indexOf(d) < 0) continue;                 // чужое имя — не вес, а мусор
+    if (m[2] === d) w *= (d === site.desired ? CHR_W.traitDesired : CHR_W.traitOther);
+  }
+  return w;
+}
+/** Объявленное, очищенное от чужих имён и обрезанное до двух галочек. */
+function chrClean(list) {
+  if (!Array.isArray(list)) return [];
+  const out = [];
+  for (const d of list) {
+    if (typeof d !== 'string') continue;
+    if (ATTRS.indexOf(d) < 0 && TRAITS.indexOf(d) < 0) continue;
+    if (out.indexOf(d) < 0) out.push(d);
+  }
+  return out.slice(0, CHR_PICK);
+}
+
+/** Три списка объявленного. Плоский старый список размножается на все площадки. */
+function normDecl(decl, attrs) {
+  if (Array.isArray(decl)) {
+    const out = [];
+    for (let i = 0; i < SITE_COUNT; i++) out.push(Array.isArray(decl[i]) ? chrClean(decl[i]) : null);
+    return out;
+  }
+  if (Array.isArray(attrs) && attrs.length) { const c = chrClean(attrs); return [c, c, c]; }
+  return [null, null, null];
+}
+/** Участок si с учётом объявленного на нём. Не объявлено или пусто — как есть. */
+function enrichAt(sess, site, si) {
+  const d = sess.decl[si];
+  return (Array.isArray(d) && d.length) ? enrichSite(site, d, sess.game.level, sess.game.id, si) : site;
+}
+
 /** микроб подходит, если по КАЖДОМУ объявленному атрибуту он в диапазоне УЧАСТКА */
 function microbeFits(m, site, attrs) {
   for (const a of attrs) {
@@ -256,7 +324,7 @@ function microbeFits(m, site, attrs) {
 /** одна раздача: шестёрка старта с тягой к подходящим, остальные 12 — по раундам */
 function dealEnriched(site, attrs, rnd) {
   const all = site.start.concat(site.rounds.reduce((a, r) => a.concat(r), []));
-  const w = all.map(m => (microbeFits(m, site, attrs) ? ENRICH_PULL : 1));
+  const w = all.map(m => chrWeight(m, site, attrs));
   const rest = all.slice(), weights = w.slice(), start = [];
   for (let k = 0; k < 6; k++) {
     let sum = 0; for (const x of weights) sum += x;
@@ -274,7 +342,8 @@ function dealEnriched(site, attrs, rnd) {
     Откат честный и объявленный: лучше повторить прежнюю раздачу, чем выдать
     партию, чья сложность не та, что обещает уровень. */
 function enrichSite(site, attrs, level, gameId, si) {
-  if (!Array.isArray(attrs) || !attrs.length) return site;
+  attrs = chrClean(attrs);
+  if (!attrs.length) return site;
   const band = LEVEL_BAND[level];
   if (!band) return site;
   const rnd = mulberry32(seedFrom('chr:' + gameId + ':' + si + ':' + attrs.slice().sort().join(',')));
@@ -289,13 +358,22 @@ function enrichSite(site, attrs, level, gameId, si) {
 /* ---------- сессия ---------- */
 class SeaWolfSession {
   constructor(game, opts = {}) {
-    /* Объявленные в фазе Characteristics атрибуты. Пустой список = фаза
-       пропущена, участки берутся как есть — прежнее поведение, байт в байт. */
-    this.attrs = Array.isArray(opts.attrs) ? opts.attrs.filter(a => ATTRS.indexOf(a) >= 0) : [];
-    game = this.attrs.length
-      ? Object.assign({}, game, { sites: game.sites.map((s, i) => enrichSite(s, this.attrs, game.level, game.id, i)) })
-      : game;
+    /* Объявленное в фазе Characteristics: ДВЕ галочки из семи — атрибуты и
+       признаки вперемешку. Пустой список = фаза пропущена, участки берутся как
+       есть, байт в байт. До круга 161 этот фильтр пропускал ТОЛЬКО атрибуты и
+       молча выбрасывал признаки: экран мог их предложить, а движок бы их не
+       увидел — ровно тот класс «оба конца сделаны верно, провода нет». */
+    /* ОБЪЯВЛЕНИЕ ПО ПЛОЩАДКАМ, круг 162. В оригинале фаза идёт перед КАЖДОЙ из
+       трёх площадок, поэтому объявленное — три списка, а не один:
+         null  площадка ещё не объявлена → её фаза «chr», пул наружу не уходит
+         []    кандидат пропустил шаг    → участок берётся как есть, байт в байт
+         [..]  две галочки из семи       → участок обогащается по таблице CHR_W
+       СТАРЫЙ плоский opts.attrs (одно объявление на партию) читается как
+       «то же самое на все три»: токены, выданные до этого круга, живы. */
+    this.decl = normDecl(opts.decl, opts.attrs);
     this.game = game;                     // серверные данные, наружу не отдаются
+    this._raw = game.sites;               // исходные участки: обогащение считается от них
+    this.game = Object.assign({}, game, { sites: game.sites.map((s, i) => enrichAt(this, s, i)) });
     // уровень без калибровочной строки — отказ, а не пустое место на экране:
     // именно так «undefined» трижды доезжал до кандидата незамеченным
     if (!LEVEL_NOTE[game.level]) throw new Error(`нет калибровочной строки для уровня «${game.level}»`);
@@ -333,9 +411,25 @@ class SeaWolfSession {
   sitePhase() {
     if (this.finished) return 'done';
     const si = this.siteIndex;
+    /* Фаза объявления идёт ПЕРВОЙ на площадке — раньше обзора и категоризации,
+       как в оригинале. Пока она не пройдена, пул площадки наружу не уходит:
+       иначе кандидат увидел бы шестёрку ДО того, как объявил галочки, и
+       объявление превратилось бы в выбор задним числом. */
+    if (this.decl[si] === null) return 'chr';
     if (this.revActs[si].length < this.forwarded[si].length) return 'review';
     if (this.catActs[si].length < CAT_PER_SITE) return 'categorize';
     return this.round < ROUNDS ? 'prospect' : 'treatment';
+  }
+
+  /** Объявление на ТЕКУЩЕЙ площадке. Пустой список — осознанный пропуск шага. */
+  declare(list, now, lang) {
+    if (this.sitePhase() !== 'chr') throw new Error('not in chr');
+    const si = this.siteIndex;
+    this.decl[si] = chrClean(list);
+    const sites = this.game.sites.slice();
+    sites[si] = enrichAt(this, this._raw[si], si);
+    this.game = Object.assign({}, this.game, { sites });
+    return this.view(now ?? Date.now(), lang);
   }
 
   /** Счётчики трёх корзин текущей площадки. Оставленные на обзоре входят
@@ -404,9 +498,13 @@ class SeaWolfSession {
       cat,
       insight: this.finished ? null : this.insightAt(si),
       site: { ranges: s.ranges, desired: s.desired, undesired: s.undesired },
-      pool: this.pool().map(m => ({ name: m[0], a: m[1], trait: m[2] })),
+      /* В фазе объявления пул и раунд наружу НЕ уходят: требования площадки
+         кандидат видит (по ним он и выбирает галочки), шестёрку — ещё нет.
+         Иначе объявление превращается в выбор задним числом. */
+      pool: ph === 'chr' ? [] : this.pool().map(m => ({ name: m[0], a: m[1], trait: m[2] })),
+      chr: ph === 'chr' ? { pick: CHR_PICK, attrs: ATTRS.slice(), traits: TRAITS.slice() } : null,
       round: this.round, roundsTotal: ROUNDS,
-      offers: (!this.finished && this.round < ROUNDS)
+      offers: (!this.finished && ph !== 'chr' && this.round < ROUNDS)
         ? s.rounds[this.round].map(m => ({ name: m[0], a: m[1], trait: m[2] })) : null,
       scores: this.results.map(r => (r ? r.percent : null))
     };
@@ -637,4 +735,5 @@ module.exports = { SeaWolfSession, pick, scoreTrio, validTrios, bestAhead, ATTRS
                    CAT_BANK, CAT_PER_SITE, CAT_TOTAL, SHOW_SORT_ACCURACY, INSIGHT_WIDEN,
                    dealCategorization, fitsSite, sortKey, mulberry32, seedFrom,
                    enrichSite, dealEnriched, microbeFits, bestAhead,
-                   ENRICH_PULL, ENRICH_TRIES, LEVEL_BAND };
+                   ENRICH_PULL, ENRICH_TRIES, LEVEL_BAND,
+                   TRAITS, CHR_W, CHR_PICK, chrWeight, chrClean };
