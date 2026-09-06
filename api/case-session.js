@@ -227,6 +227,20 @@ function lib() {
    отраслевую метку) и `triggers` (431 единица). Оба поля читались СЫРЫМИ:
    англоязычный кандидат видел русскую отрасль на карточке, а модель ждала
    от него русскую фразу, чтобы выдать экзибит. Везде enField. */
+/* 06.09.2026, dev, по просьбе цеха кейсов (круг 75 §7.2). Сборка карточки
+   экзибита лежала замыканием внутри handler и потому не бралась прогоном:
+   гейт обходом накрывал список кейсов, но не карточку экзибита — а это ровно
+   то место, где кандидат видит таблицу и график. Вынесено наружу без единого
+   изменения поведения: handler зовёт ту же функцию. */
+export function exhibitCard(ex, lang) {
+  return ex ? {
+    id: ex.id,
+    title: enField(ex, 'title', lang),
+    render: enField(ex, 'render', lang) || null,
+    body_md: ex.render ? null : (enField(ex, 'body_md', lang) || null)
+  } : null;
+}
+
 export function listCases(lang) {
   const { data } = lib();
   // тот же фильтр, что и в автоподборе: Easy не показываем и в ручном списке
@@ -1816,12 +1830,7 @@ export default async function handler(req, res) {
     /* Карточку кандидат ВИДИТ. Если партия идёт по-английски, а у экзибита
        есть переведённая сторона — на карточке должна стоять она, иначе модель
        говорит по-английски, а картинка остаётся русской. */
-    const cardOf = (ex) => ex ? {
-      id: ex.id,
-      title: enField(ex, 'title', lang),
-      render: enField(ex, 'render', lang) || null,
-      body_md: ex.render ? null : (enField(ex, 'body_md', lang) || null)
-    } : null;
+    const cardOf = (ex) => exhibitCard(ex, lang);
     const exhibitCards = parsed.revealedExhibits
       .filter(id => !priorSet.has(id))
       .map(id => {
