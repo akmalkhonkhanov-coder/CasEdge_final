@@ -138,19 +138,22 @@ const CAT_ACTIONS = ['current', 'next', 'return'];
    (по нему цех группирует наборы); переводится только печатаемое значение.
    22.08.2026: до этого дня весь текст ниже уезжал кандидату по-русски всегда,
    включая англоязычного и платящего, и стоял он на ПЕРВОМ экране после входа. */
+/* Круг 169: формулировка «валидных решений» заменена на «решений, достающих потолок
+   участка». На банке с потолком 100 это одно и то же число, но на участке с потолком
+   ниже 100 старый текст был ложью: валидным там не является ни одно трио. */
 const LEVEL_NOTE = {
   'Лёгкий': {
-    ru: '⚠ Тренировочный режим. На этом уровне валидных решений 21–30 из 120 — примерно в 15 раз просторнее реального ассессмента McKinsey, где их 1–2 из 120. Уровень учит порядку ходов, а не жёсткости отбора.',
-    en: '⚠ Practice mode. At this level 21-30 of the 120 combinations are valid — roughly 15 times roomier than the real McKinsey assessment, where 1-2 of 120 are. The level teaches the order of moves, not the hardness of the screen.' },
+    ru: '⚠ Тренировочный режим. На этом уровне решений, достающих потолок участка, 21–30 из 120 — примерно в 15 раз просторнее реального ассессмента McKinsey, где их 1–2 из 120. Уровень учит порядку ходов, а не жёсткости отбора.',
+    en: '⚠ Practice mode. At this level 21-30 of the 120 combinations reach the site ceiling — roughly 15 times roomier than the real McKinsey assessment, where 1-2 of 120 are. The level teaches the order of moves, not the hardness of the screen.' },
   'Средний': {
-    ru: '⚠ Тренировочный режим. На этом уровне валидных решений 8–20 из 120 — примерно в 8 раз просторнее реального ассессмента McKinsey, где их 1–2 из 120. Уровень учит порядку ходов, а не жёсткости отбора.',
-    en: '⚠ Practice mode. At this level 8-20 of the 120 combinations are valid — roughly 8 times roomier than the real McKinsey assessment, where 1-2 of 120 are. The level teaches the order of moves, not the hardness of the screen.' },
+    ru: '⚠ Тренировочный режим. На этом уровне решений, достающих потолок участка, 8–20 из 120 — примерно в 8 раз просторнее реального ассессмента McKinsey, где их 1–2 из 120. Уровень учит порядку ходов, а не жёсткости отбора.',
+    en: '⚠ Practice mode. At this level 8-20 of the 120 combinations reach the site ceiling — roughly 8 times roomier than the real McKinsey assessment, where 1-2 of 120 are. The level teaches the order of moves, not the hardness of the screen.' },
   'Сложный': {
-    ru: '⚠ Тренировочный режим, самый плотный из доступных. На этом уровне валидных решений 3–7 из 120; на реальном ассессменте McKinsey — 1–2 из 120. Разрыв уже небольшой, но он есть: на отборе права на второй заход у тебя нет.',
-    en: '⚠ Practice mode, the densest available. At this level 3-7 of the 120 combinations are valid; on the real McKinsey assessment 1-2 of 120. The gap is small now, but it is there: on the screen you get no second run.' },
+    ru: '⚠ Тренировочный режим, самый плотный из доступных. На этом уровне решений, достающих потолок участка, 3–7 из 120; на реальном ассессменте McKinsey — 1–2 из 120. Разрыв уже небольшой, но он есть: на отборе права на второй заход у тебя нет.',
+    en: '⚠ Practice mode, the densest available. At this level 3-7 of the 120 combinations reach the site ceiling; on the real McKinsey assessment 1-2 of 120. The gap is small now, but it is there: on the screen you get no second run.' },
   'Ассессмент': {
-    ru: '● Калибровочный режим. Валидных решений 1–2 из 120 — это плотность реального отбора McKinsey, а не тренажёрная. Сюда заходят по своей воле и без адаптации: уровень не подстроится под тебя, как на настоящем ассессменте.',
-    en: '● Calibration mode. 1-2 valid solutions of 120 — the density of the real McKinsey screen, not a trainer one. You come here by choice and without adaptation: the level will not adjust to you, exactly as on the real assessment.' }
+    ru: '● Калибровочный режим. Решений, достающих потолок участка, 1–2 из 120 — это плотность реального отбора McKinsey, а не тренажёрная. Сюда заходят по своей воле и без адаптации: уровень не подстроится под тебя, как на настоящем ассессменте.',
+    en: '● Calibration mode. 1-2 of the 120 combinations reach the site ceiling — the density of the real McKinsey screen, not a trainer one. You come here by choice and without adaptation: the level will not adjust to you, exactly as on the real assessment.' }
 };
 
 /* Выбор стороны. Владелец выбора языка в проекте один — refusalLang() в
@@ -202,6 +205,47 @@ function validTrios(pool, site) {
 }
 
 /** максимум валидных трио при идеальной доигровке из префикса выборов */
+/**
+ * ПОТОЛОК УЧАСТКА · круг 169.
+ *
+ * ЧЕМ КУПЛЕН. Владелец, сравнивая наш Sea Wolf с реальной игрой: «в реальной игре
+ * ты иногда тоже не сможешь набрать все 100%, потому что тебе игра сама даёт только
+ * 80%». Замер банка подтвердил, что у нас потолок 100 на всех 510 участках, то есть
+ * мы учим рефлексу, которого экзамен не подтверждает.
+ *
+ * ЧТО СЧИТАЕТ. Тот же перебор, что `bestAhead` (81 ветвь добора × тройки пула), но
+ * другая свёртка: максимальный процент, достижимый на участке при идеальной игре,
+ * и сколько трио этот максимум достают. `bestAhead` — частный случай при ceiling=100.
+ *
+ * ЗАЧЕМ ОТДЕЛЬНО ОТ bestAhead. Сложность уровня меряется числом лучших решений;
+ * пока потолок везде 100, «лучшее» и «стопроцентное» — одно и то же слово. Как
+ * только потолок участка может быть ниже, эти два понятия расходятся, и коридор
+ * уровня обязан считать трио НА ПОТОЛКЕ, иначе участок с потолком 80 даёт ноль
+ * стопроцентных трио и выпадает из коридора собственного уровня.
+ */
+function ceilingAhead(site) {
+  /* `path` возвращается по той же причине, что и `bestPath` у bestAhead: чтобы
+     проверяющий мог ПРОЙТИ веткой, достающей потолок, а не гадать, какая это. */
+  let ceiling = 0, count = 0, bestPath = null;
+  const rec = (path) => {
+    if (path.length === ROUNDS) {
+      const pool = site.start.concat(path.map((o, r) => site.rounds[r][o]));
+      const combos = pool.length === 10 ? C3_10 : combos3(pool.length);
+      let best = 0, n = 0;
+      for (const [i, j, k] of combos) {
+        const p = scoreTrio([pool[i], pool[j], pool[k]], site).percent;
+        if (p > best) { best = p; n = 1; } else if (p === best) n++;
+      }
+      if (best > ceiling) { ceiling = best; count = n; bestPath = path.slice(); }
+      else if (best === ceiling && n > count) { count = n; bestPath = path.slice(); }
+      return;
+    }
+    for (let o = 0; o < 3; o++) rec(path.concat(o));
+  };
+  rec([]);
+  return { ceiling, count, path: bestPath };
+}
+
 function bestAhead(site, prefix) {
   let best = 0, bestPath = null;
   const rec = (path) => {
@@ -349,8 +393,22 @@ function enrichSite(site, attrs, level, gameId, si) {
   const rnd = mulberry32(seedFrom('chr:' + gameId + ':' + si + ':' + attrs.slice().sort().join(',')));
   for (let t = 0; t < ENRICH_TRIES; t++) {
     const cand = dealEnriched(site, attrs, rnd);
-    const b = bestAhead(cand, []).best;
-    if (b >= band[0] && b <= band[1]) return cand;
+    /* Круг 169: коридор уровня считает трио, ДОСТАЮЩИЕ ПОТОЛОК участка, а не
+       стопроцентные. На банке с потолком 100 это то же число до единицы — гейт
+       _m/169_гейт_потолок_модель.js проверяет совпадение на всех 510 участках.
+
+       И ВТОРОЕ УСЛОВИЕ, без которого первое ломает фазу. Потолок — свойство УЧАСТКА,
+       которое задал автор банка, а не результат галочек кандидата. Считая только
+       `count`, обогащение начало выпускать раздачи с УПАВШИМ потолком: трио на 80 %
+       много, коридор пройден, а стопроцентного решения на участке больше нет. Тогда
+       разбор честно скажет «идеального решения здесь не было» — и это будет ложь,
+       потому что до объявления оно было. Кандидат снижал бы себе максимум галочкой и
+       узнавал бы, что так и было задумано.
+       Поймал это не автор правки, а стоявший гейт различения (проверка 3, «коридор
+       уровня цел во всех плечах»): 0 вне коридора до правки, 2 после. */
+    const c = ceilingAhead(cand);
+    if (c.ceiling >= ceilingAhead(site).ceiling &&
+        c.count >= band[0] && c.count <= band[1]) return cand;
   }
   return site;
 }
@@ -659,6 +717,9 @@ class SeaWolfSession {
        */
       const got = this.results[si] ? this.results[si].percent : 0;
       const timedOut = !!(this.results[si] && this.results[si].timeout);
+      /* Круг 169: потолок участка — максимум, достижимый ЗДЕСЬ при идеальной игре.
+         Считается до вердиктов, потому что от него зависит, какой из них правдив. */
+      const ceil = ceilingAhead(site);
       let verdict;
       if (timedOut && !mine) verdict = { kind: 'notPlayed',
         head: L({ ru: 'Участок не сдан — кончилось время.',
@@ -670,20 +731,45 @@ class SeaWolfSession {
                   en: `Lost in the draft, round ${lost.round}.` }, lang),
         body: L({ ru: `Взял ${lost.took.name} — стопроцентных решений осталось ${lost.priceTo}. ${lost.should.name} оставлял ${lost.priceFrom}.`,
                   en: `You took ${lost.took.name} — 100% solutions left: ${lost.priceTo}. ${lost.should.name} would have left ${lost.priceFrom}.` }, lang) };
-      /* Ветка `ceiling` («решения не было изначально») удалена цехом игр, круг 9:
-         она недостижима по построению, и это доказано перебором, а не рассуждением —
-         6075 исходов (25 наборов × 81 ветка × 3 участка), `ceiling` не выпал ни разу.
-         У сертифицированного набора `bestAhead(site, [])` ≥ 1 по коридору Г1, значит
-         пул мог закрыться только чьим-то ходом, и тогда выставляется `lost`.
-         Вердикт, который игрок не может увидеть, — мёртвая ветка, делающая вид,
-         что живая. */
+      /* ВЕТКА `ceiling` ВЕРНУЛАСЬ · круг 169. Читающему: не удаляй её снова.
+         В круге 9 она была удалена как недостижимая, и рассуждение было верным ДЛЯ
+         ТОГО банка: у сертифицированного набора `bestAhead(site, []) >= 1`, значит
+         стопроцентное решение существовало всегда, и пул мог закрыться только ходом
+         игрока. Перебор 6075 исходов это подтвердил.
+         Неверной была не логика, а мир. Владелец, играя в оригинал: «в реальной игре
+         ты иногда тоже не сможешь набрать все 100%, потому что тебе игра сама даёт
+         только 80%». Замер нашего банка (_m/169_замер_потолка_участка.js) дал 0 из 510
+         участков с потолком ниже 100 — то есть мы учили рефлексу, которого экзамен не
+         подтверждает, и ветка была мертва не по природе, а из-за однообразия данных.
+         Пока в банке нет участков с потолком ниже 100, ветка доказывается фикстурами
+         (_m/169_гейт_разбора_потолка.js), а не живой партией, и гейт банка честно
+         печатает «в живом банке 0» кодом 1. Удалять ветку из-за того, что она не
+         выпадает на текущем банке, — значит повторить круг 9. */
+      else if (ceil.ceiling < 100) verdict = got >= ceil.ceiling
+        ? { kind: 'ceiling', reached: true,
+            head: L({ ru: `Идеального решения здесь не было. Твой максимум — ${ceil.ceiling}%, и ты его собрал.`,
+                      en: `There was no perfect solution here. Your ceiling was ${ceil.ceiling}%, and you reached it.` }, lang),
+            body: L({ ru: `Участок не давал ста процентов ни на одной ветке добора: лучшее, что здесь существует, — ${ceil.ceiling}%, и таких трио ${ceil.count}. Ошибки нет.`,
+                      en: `No draft path on this site reached 100%: the best that exists here is ${ceil.ceiling}%, and ${ceil.count} ${ceil.count === 1 ? 'trio reaches' : 'trios reach'} it. There is no error.` }, lang) }
+        : { kind: 'ceiling', reached: false,
+            head: L({ ru: `Идеального решения здесь не было — максимум ${ceil.ceiling}%. Ты сдал ${got}%.`,
+                      en: `There was no perfect solution here — the ceiling was ${ceil.ceiling}%. You submitted ${got}%.` }, lang),
+            body: L({ ru: `Сто процентов на этом участке недостижимы ни на одной ветке добора, так что ${100 - ceil.ceiling} процентов ты не терял. Терял ты ${ceil.ceiling - got}: разбор ниже показывает где.`,
+                      en: `100% is unreachable on this site on any draft path, so ${100 - ceil.ceiling} points were never yours to lose. The ${ceil.ceiling - got} you did lose are shown below.` }, lang) };
       else if (got === 100) verdict = { kind: 'clean',
         head: L({ ru: 'Участок закрыт на 100%.', en: 'Site closed at 100%.' }, lang),
         body: kept === 4
           ? L({ ru: 'И все четыре хода держали максимальный запас — это чистая игра на доборе.',
                 en: 'And all four moves held the maximum margin — that is clean drafting.' }, lang)
-          : L({ ru: `Но запас ты срезал: лучших ходов ${kept} из 4. На ассессменте, где решений 1–2 из 120, такой ход и есть проигрыш.`,
-                en: `But you cut your own margin: best moves ${kept} of 4. On an assessment, where 1-2 of 120 solve it, that move is the loss.` }, lang) };
+          : L({ ru: `Но запас ты срезал: лучших ходов ${kept} из 4. На ассессменте, где решений на потолке 1–2 из 120, такой ход и есть проигрыш.`,
+                en: `But you cut your own margin: best moves ${kept} of 4. On an assessment, where 1-2 of 120 reach the ceiling, that move is the loss.` }, lang) };
+      /* ОХРАНА · круг 169. `notFound` — хвост цепочки, и до этого круга в него падало
+         всё, что не таймаут, не потеря на доборе и не сотня. На участке с потолком
+         ниже 100 он печатал «решение у тебя было» рядом с «0 трио давали 100%» —
+         заголовок и текст противоречили друг другу, и заголовок был ложью. Нашёл dev
+         живой партией, круг 169; цех до этого читал только ветку `lost` и объявил
+         молчание про весь разбор. Теперь ветка выше перехватывает этот случай, а здесь
+         стоит утверждение о том, что стопроцентные трио действительно были. */
       else verdict = { kind: 'notFound',
         head: L({ ru: 'Решение у тебя было — ты его не собрал.',
                   en: 'The solution was there — you did not assemble it.' }, lang),
@@ -754,7 +840,7 @@ function pick(batch, { level, seenIds = [] } = {}) {
   return pool[0];
 }
 
-module.exports = { SeaWolfSession, pick, scoreTrio, validTrios, bestAhead, ATTRS, LEVEL_NOTE,
+module.exports = { SeaWolfSession, pick, scoreTrio, validTrios, bestAhead, ceilingAhead, ATTRS, LEVEL_NOTE,
                    LEVELS_IN_BATCH, TIMER_MS, L,
                    CAT_BANK, CAT_PER_SITE, CAT_TOTAL, SHOW_SORT_ACCURACY, INSIGHT_WIDEN,
                    dealCategorization, fitsSite, sortKey, mulberry32, seedFrom,
