@@ -5212,13 +5212,39 @@ window.addEventListener('popstate', function (e) {
 // On first load, honor a deep-link hash if one was given (e.g. someone opens
 // cas-edge-final.vercel.app/#privacy directly - Paddle's verification bot does
 // exactly this for Terms/Privacy). Falls back to landing otherwise.
+/* ДЕФЕКТ, НАЙДЕННЫЙ НА ПРОДЕ 07.09.2026, И ПРАВИЛО ПРОТИВ НЕГО.
+   Экран показывается вызовом showScreen, но НАПОЛНЯЕТСЯ своей функцией входа:
+   goToProgress() зовёт renderProgress(), openCaseLibrary() тянет 396 кейсов,
+   openGameIntro() готовит игру. Deep-link звал showScreen НАПРЯМУЮ, минуя их, и
+   показывал пустую оболочку. Замерено в браузере, не рассуждением:
+     #caselib  — навсегда «Загружаю библиотеку кейсов…», НИ ОДНОГО запроса к api
+     #seawolf  — чёрный экран: 0 символов текста, 0 кнопок, шапки нет, выхода нет
+     #sfl      — то же
+     #progress — шапка есть, счётчиков нет
+   Кнопка «назад» браузера этим НЕ болеет: там экран уже наполнен и живёт в DOM.
+   Болеет ровно первая загрузка по адресу — F5, закладка, восстановление вкладки.
+
+   ПРАВИЛО. Экран открывается ссылкой либо (а) если он самодостаточен — весь текст
+   лежит в разметке, ничего дозагружать не надо, либо (б) если у него есть функция
+   входа и её честно вызвать. Всё остальное уходит на лендинг.
+   Список БЕЛЫЙ, а не чёрный: забытый экран уводит на лендинг — безвредно;
+   лишний в списке показывает пустоту — то, что мы и чиним. */
+const DEEP_STATIC = ['landing','faq','contact','cookies','privacy','terms','refund','pricing','auth'];
+const DEEP_ENTRY = {
+  progress: function () { if (typeof goToProgress === 'function') goToProgress(); },
+  caselib:  function () { if (typeof openCaseLibrary === 'function') openCaseLibrary(); },
+  mode:     function () { if (typeof goToMode === 'function') goToMode(); }
+};
 window.addEventListener('DOMContentLoaded', function () {
   const requestedId = (location.hash || '').replace('#', '');
-  const targetId = (requestedId && document.getElementById('screen-' + requestedId)) ? requestedId : 'landing';
+  const есть = requestedId && document.getElementById('screen-' + requestedId);
+  const своя = есть && Object.prototype.hasOwnProperty.call(DEEP_ENTRY, requestedId);
+  const targetId = (есть && (DEEP_STATIC.indexOf(requestedId) >= 0 || своя)) ? requestedId : 'landing';
   try {
     history.replaceState({ screen: targetId }, '', '#' + targetId);
   } catch (e) { /* sandbox blocks this - safe to ignore */ }
-  if (targetId !== 'landing') showScreen(targetId, true);
+  if (своя && targetId === requestedId) { try { DEEP_ENTRY[requestedId](); } catch (e) { showScreen('landing', true); } }
+  else if (targetId !== 'landing') showScreen(targetId, true);
   // Onboarding is no longer auto-shown on landing (it hurt first impression).
   // The modal is still available on demand via openOnboarding(); content is preserved.
   // Record this visit AFTER a tick, so the "welcome back" banner can read the
