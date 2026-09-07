@@ -2725,16 +2725,16 @@
     {
      "ranges": {
       "Permeability": [
-       10,
-       10
+       5,
+       6
       ],
       "Size": [
        10,
        10
       ],
       "Density": [
-       2,
-       5
+       10,
+       10
       ]
      },
      "desired": "Hydrophilic",
@@ -2915,16 +2915,16 @@
      ],
      "meta": {
       "trap_round": null,
-      "deciding_attr": "Permeability",
+      "deciding_attr": "Size",
       "banned": 6,
-      "alive_share": 77,
+      "alive_share": 65,
       "width": [
+       2,
        1,
-       1,
-       4
+       1
       ],
       "ceiling": 60,
-      "best_at_ceiling": 18
+      "best_at_ceiling": 8
      }
     },
     {
@@ -9144,8 +9144,8 @@
        5
       ],
       "Size": [
-       1,
-       1
+       2,
+       5
       ],
       "Density": [
        10,
@@ -9330,15 +9330,15 @@
      ],
      "meta": {
       "trap_round": 4,
-      "deciding_attr": "Size",
+      "deciding_attr": "Density",
       "banned": 5,
       "alive_share": 67,
       "width": [
        4,
-       1,
+       4,
        1
       ],
-      "ceiling": 60,
+      "ceiling": 80,
       "best_at_ceiling": 13
      }
     }
@@ -11214,8 +11214,8 @@
     {
      "ranges": {
       "Permeability": [
-       3,
-       6
+       2,
+       4
       ],
       "Size": [
        1,
@@ -11403,17 +11403,17 @@
       ]
      ],
      "meta": {
-      "trap_round": null,
+      "trap_round": 2,
       "deciding_attr": "Size",
       "banned": 5,
-      "alive_share": 70,
+      "alive_share": 67,
       "width": [
-       4,
+       3,
        1,
        4
       ],
       "ceiling": 80,
-      "best_at_ceiling": 13
+      "best_at_ceiling": 10
      }
     },
     {
@@ -17217,8 +17217,8 @@
        10
       ],
       "Size": [
-       2,
-       5
+       3,
+       4
       ],
       "Density": [
        5,
@@ -17402,17 +17402,17 @@
       ]
      ],
      "meta": {
-      "trap_round": null,
+      "trap_round": 4,
       "deciding_attr": "Permeability",
       "banned": 3,
-      "alive_share": 78,
+      "alive_share": 67,
       "width": [
        1,
-       4,
+       2,
        4
       ],
       "ceiling": 80,
-      "best_at_ceiling": 12
+      "best_at_ceiling": 8
      }
     }
    ]
@@ -19287,12 +19287,12 @@
     {
      "ranges": {
       "Permeability": [
-       2,
-       5
+       1,
+       1
       ],
       "Size": [
-       10,
-       10
+       5,
+       6
       ],
       "Density": [
        2,
@@ -19476,17 +19476,17 @@
       ]
      ],
      "meta": {
-      "trap_round": 4,
-      "deciding_attr": "Size",
+      "trap_round": null,
+      "deciding_attr": "Permeability",
       "banned": 6,
       "alive_share": 67,
       "width": [
-       4,
        1,
+       2,
        4
       ],
       "ceiling": 80,
-      "best_at_ceiling": 10
+      "best_at_ceiling": 9
      }
     },
     {
@@ -22392,7 +22392,7 @@
     {
      "ranges": {
       "Permeability": [
-       3,
+       4,
        6
       ],
       "Size": [
@@ -22584,9 +22584,9 @@
       "trap_round": null,
       "deciding_attr": "Size",
       "banned": 6,
-      "alive_share": 68,
+      "alive_share": 63,
       "width": [
-       4,
+       3,
        1,
        4
       ],
@@ -23423,7 +23423,7 @@
     {
      "ranges": {
       "Permeability": [
-       6,
+       7,
        9
       ],
       "Size": [
@@ -23612,17 +23612,17 @@
       ]
      ],
      "meta": {
-      "trap_round": null,
+      "trap_round": 4,
       "deciding_attr": "Size",
       "banned": 4,
-      "alive_share": 70,
+      "alive_share": 67,
       "width": [
-       4,
+       3,
        1,
        4
       ],
       "ceiling": 80,
-      "best_at_ceiling": 14
+      "best_at_ceiling": 10
      }
     }
    ]
@@ -31711,12 +31711,12 @@
        9
       ],
       "Size": [
-       10,
-       10
-      ],
-      "Density": [
        5,
        8
+      ],
+      "Density": [
+       1,
+       1
       ]
      },
      "desired": "Bioluminescence",
@@ -31896,17 +31896,17 @@
       ]
      ],
      "meta": {
-      "trap_round": null,
-      "deciding_attr": "Size",
+      "trap_round": 1,
+      "deciding_attr": "Density",
       "banned": 5,
-      "alive_share": 83,
+      "alive_share": 67,
       "width": [
        4,
-       1,
-       4
+       4,
+       1
       ],
       "ceiling": 80,
-      "best_at_ceiling": 13
+      "best_at_ceiling": 8
      }
     },
     {
@@ -34396,16 +34396,16 @@
     {
      "ranges": {
       "Permeability": [
-       5,
-       8
+       10,
+       10
       ],
       "Size": [
        10,
        10
       ],
       "Density": [
-       10,
-       10
+       2,
+       4
       ]
      },
      "desired": "Heat Resistant",
@@ -34585,17 +34585,17 @@
       ]
      ],
      "meta": {
-      "trap_round": null,
-      "deciding_attr": "Size",
+      "trap_round": 2,
+      "deciding_attr": "Permeability",
       "banned": 6,
-      "alive_share": 89,
+      "alive_share": 33,
       "width": [
-       4,
        1,
-       1
+       1,
+       3
       ],
       "ceiling": 60,
-      "best_at_ceiling": 17
+      "best_at_ceiling": 10
      }
     },
     {
@@ -35843,16 +35843,16 @@
     {
      "ranges": {
       "Permeability": [
-       10,
-       10
-      ],
-      "Size": [
        4,
        7
       ],
+      "Size": [
+       3,
+       4
+      ],
       "Density": [
-       6,
-       9
+       10,
+       10
       ]
      },
      "desired": "Bioluminescence",
@@ -36032,17 +36032,17 @@
       ]
      ],
      "meta": {
-      "trap_round": null,
-      "deciding_attr": "Permeability",
+      "trap_round": 4,
+      "deciding_attr": "Density",
       "banned": 5,
-      "alive_share": 78,
+      "alive_share": 67,
       "width": [
-       1,
        4,
-       4
+       2,
+       1
       ],
       "ceiling": 80,
-      "best_at_ceiling": 15
+      "best_at_ceiling": 9
      }
     }
    ]
@@ -37917,8 +37917,8 @@
     {
      "ranges": {
       "Permeability": [
-       2,
-       5
+       8,
+       10
       ],
       "Size": [
        10,
@@ -38109,14 +38109,14 @@
       "trap_round": null,
       "deciding_attr": "Size",
       "banned": 3,
-      "alive_share": 73,
+      "alive_share": 67,
       "width": [
-       4,
+       3,
        1,
        4
       ],
       "ceiling": 80,
-      "best_at_ceiling": 18
+      "best_at_ceiling": 9
      }
     },
     {
@@ -48267,12 +48267,12 @@
        4
       ],
       "Size": [
-       7,
-       9
-      ],
-      "Density": [
        10,
        10
+      ],
+      "Density": [
+       4,
+       6
       ]
      },
      "desired": "Pressure Resistant",
@@ -48453,16 +48453,16 @@
      ],
      "meta": {
       "trap_round": null,
-      "deciding_attr": "Density",
+      "deciding_attr": "Size",
       "banned": 7,
-      "alive_share": 78,
+      "alive_share": 65,
       "width": [
        3,
-       3,
-       1
+       1,
+       3
       ],
       "ceiling": 80,
-      "best_at_ceiling": 7
+      "best_at_ceiling": 5
      }
     }
    ]
@@ -60691,8 +60691,8 @@
        1
       ],
       "Density": [
-       6,
-       9
+       3,
+       4
       ]
      },
      "desired": "Heat Resistant",
@@ -60875,14 +60875,14 @@
       "trap_round": null,
       "deciding_attr": "Size",
       "banned": 5,
-      "alive_share": 68,
+      "alive_share": 62,
       "width": [
        4,
        1,
-       4
+       2
       ],
       "ceiling": 80,
-      "best_at_ceiling": 12
+      "best_at_ceiling": 10
      }
     }
    ]
@@ -77254,7 +77254,7 @@
       ],
       "Density": [
        6,
-       8
+       7
       ]
      },
      "desired": "Hydrophilic",
@@ -77437,11 +77437,11 @@
       "trap_round": null,
       "deciding_attr": "Permeability",
       "banned": 6,
-      "alive_share": 70,
+      "alive_share": 67,
       "width": [
        1,
        3,
-       3
+       2
       ],
       "ceiling": 80,
       "best_at_ceiling": 4
@@ -79313,11 +79313,11 @@
     {
      "ranges": {
       "Permeability": [
-       1,
-       2
+       5,
+       5
       ],
       "Size": [
-       8,
+       10,
        10
       ],
       "Density": [
@@ -79502,17 +79502,17 @@
       ]
      ],
      "meta": {
-      "trap_round": 1,
-      "deciding_attr": "Permeability",
+      "trap_round": null,
+      "deciding_attr": "Size",
       "banned": 4,
-      "alive_share": 33,
+      "alive_share": 56,
       "width": [
-       2,
-       3,
+       1,
+       1,
        3
       ],
       "ceiling": 80,
-      "best_at_ceiling": 4
+      "best_at_ceiling": 3
      }
     }
    ]
@@ -96080,16 +96080,16 @@
     {
      "ranges": {
       "Permeability": [
-       1,
-       1
+       6,
+       6
       ],
       "Size": [
        10,
        10
       ],
       "Density": [
-       1,
-       3
+       10,
+       10
       ]
      },
      "desired": "Heat Resistant",
@@ -96269,14 +96269,14 @@
       ]
      ],
      "meta": {
-      "trap_round": 3,
-      "deciding_attr": "Permeability",
+      "trap_round": null,
+      "deciding_attr": "Size",
       "banned": 5,
-      "alive_share": 33,
+      "alive_share": 56,
       "width": [
        1,
        1,
-       3
+       1
       ],
       "ceiling": 60,
       "best_at_ceiling": 5
@@ -104158,11 +104158,11 @@
       ],
       "Size": [
        1,
-       3
+       1
       ],
       "Density": [
-       10,
-       10
+       6,
+       6
       ]
      },
      "desired": "Bioluminescence",
@@ -104343,16 +104343,16 @@
      ],
      "meta": {
       "trap_round": null,
-      "deciding_attr": "Density",
+      "deciding_attr": "Size",
       "banned": 4,
-      "alive_share": 56,
+      "alive_share": 67,
       "width": [
        3,
-       3,
+       1,
        1
       ],
       "ceiling": 80,
-      "best_at_ceiling": 6
+      "best_at_ceiling": 3
      }
     }
    ]
