@@ -2449,7 +2449,7 @@
       </div>
       <div class="faq-item">
         <div class="faq-q" data-i18n="faq.q5">What languages are supported?</div>
-        <div class="faq-a" data-i18n="faq.a5">A real MBB interview can be run in English or in Russian, and so can a case here - you choose before you start. Drills and the assessment games are English. The interface and the post-answer feedback are set separately, English or Russian.</div>
+        <div class="faq-a" data-i18n="faq.a5">A real MBB interview can be run in English or in Russian, and so can a case or a drill here - you choose before you start: 400 cases and 315 drills exist in both. The assessment games stay in English. The interface and the post-answer feedback are set separately.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q" data-i18n="faq.q6">Is my progress saved?</div>
@@ -3863,9 +3863,11 @@ const state = {
      стороны кандидата 4952, с русским словом 4946; шесть оставшихся — заголовки,
      целиком состоящие из терминов глоссария («contribution per unit»), которым
      перевод не нужен. Дыр нет, шва нет, константу снимаю.
-     ВАЖНО: ось касается ТОЛЬКО кейсов. Дриллы и игры Solve остаются английскими —
-     их материал английский, и это решение владельца. Дриллы берут язык из
-     langInstruction(), которая ведение не трогает. */
+     06.09.2026, вечер: ось касается КЕЙСОВ И ДРИЛЛОВ. Цех дриллов закрыл перевод
+     в тот же день — 315 упражнений из 315, 1219 полей, — и клиент дриллов шлёт
+     aiLang серверу, а `ruField` в api/drills.js отдаёт русскую сторону вопроса,
+     фактов, таблицы, шагов и второго хода. Игры Solve остаются английскими:
+     их материал английский, и это решение владельца. */
   aiLang: (function(){ try { return localStorage.getItem('caseedge_ailang') === 'ru' ? 'ru' : 'en' } catch(e) { return 'en' } })(),
   fbLang: localStorage.getItem('caseedge_fblang') || 'same',
   uiLang: localStorage.getItem('caseedge_uilang') || 'en',
@@ -4098,7 +4100,7 @@ const I18N = {
     'faq.q4': 'Which firms and case types are covered?',
     'faq.a4': 'Cases follow real MBB patterns across firms (McKinsey, BCG, Bain) and types - profitability, market entry, M&A, pricing, market sizing, and more. Drills cover six distinct skills tested in real interviews.',
     'faq.q5': 'What languages are supported?',
-    'faq.a5': 'A real MBB interview can be run in English or in Russian, and so can a case here - you choose before you start. Drills and the assessment games are English. The interface and the post-answer feedback are set separately, English or Russian.',
+    'faq.a5': 'A real MBB interview can be run in English or in Russian, and so can a case or a drill here - you choose before you start: 400 cases and 315 drills exist in both. The assessment games stay in English. The interface and the post-answer feedback are set separately.',
     'faq.q6': 'Is my progress saved?',
     'faq.a6': 'Yes - your progress is saved on your device, and account-based cloud sync keeps it consistent across all your devices.',
     'nav.contact': 'Contact',
@@ -4286,8 +4288,8 @@ const I18N = {
     'terms.h8': 'Contact', 'terms.p8': 'Questions about these terms? Reach us at support@casedge.io.',
     'lang.settings': 'Language settings',
     'lang.interface': 'Interface language',
-    'lang.caselang': 'Case language',
-    'lang.caselang.hint': 'A real case interview may be run in either language, so the library is available in both - all 400 cases. Drills and the Solve games stay in English: that is the language of their material and of the real test.',
+    'lang.caselang': 'Case and drill language',
+    'lang.caselang.hint': 'A real case interview may be run in either language, so both the case library and the drills are available in both - 400 cases and 315 drills. The Solve games stay in English: that is the language of the real test.',
     'lang.feedback': 'Feedback language',
     'lang.same': 'As interface',
     'lang.done': 'Done',
@@ -4597,7 +4599,7 @@ const I18N = {
     'faq.q4': 'Какие фирмы и типы кейсов покрыты?',
     'faq.a4': 'Кейсы следуют реальным паттернам MBB по фирмам (McKinsey, BCG, Bain) и типам - прибыльность, выход на рынок, M&A, ценообразование, оценка рынка и другие. Дриллы покрывают шесть отдельных навыков, которые проверяют на реальных интервью.',
     'faq.q5': 'Какие языки поддерживаются?',
-    'faq.a5': 'Настоящее интервью в MBB может идти на английском или на русском - и кейс здесь тоже: язык выбирается до начала. Дриллы и игры-ассессменты идут по-английски. Интерфейс и разбор после ответа выбираются отдельно.',
+    'faq.a5': 'Настоящее интервью в MBB может идти на английском или на русском - и кейс, и дрилл здесь тоже: язык выбирается до начала, 400 кейсов и 315 дриллов есть на обоих. Игры-ассессменты идут по-английски. Интерфейс и разбор после ответа выбираются отдельно.',
     'faq.q6': 'Сохраняется ли мой прогресс?',
     'faq.a6': 'Да - прогресс сохраняется на твоём устройстве, а синхронизация через аккаунт держит его одинаковым на всех устройствах.',
     'nav.contact': 'Контакты',
@@ -4789,8 +4791,8 @@ const I18N = {
     'terms.h8': 'Контакты', 'terms.p8': 'Вопросы по условиям? Пишите на support@casedge.io.',
     'lang.settings': 'Настройки языка',
     'lang.interface': 'Язык интерфейса',
-    'lang.caselang': 'Язык кейса',
-    'lang.caselang.hint': 'Настоящее кейс-интервью можно проходить на любом из двух языков, поэтому библиотека доступна на обоих - все 400 кейсов. Дриллы и игры Solve остаются английскими: это язык их материала и язык настоящего испытания.',
+    'lang.caselang': 'Язык кейса и дрилла',
+    'lang.caselang.hint': 'Настоящее кейс-интервью можно проходить на любом из двух языков, поэтому и библиотека кейсов, и дриллы доступны на обоих - 400 кейсов и 315 дриллов. Игры Solve остаются английскими: это язык настоящего испытания.',
     'lang.feedback': 'Язык разбора',
     'lang.same': 'Как интерфейс',
     'lang.done': 'Готово',
@@ -11205,12 +11207,12 @@ document.addEventListener('keydown', e => {
       <button class="lang-opt" onclick="pickUiLang('en')">English</button>
       <button class="lang-opt" onclick="pickUiLang('ru')">Русский</button>
     </div>
-    <div class="lm-sub" data-i18n="lang.caselang">Case language</div>
+    <div class="lm-sub" data-i18n="lang.caselang">Case and drill language</div>
     <div class="lang-opts" id="langOptsAi">
       <button class="lang-opt" onclick="pickAiLang('en')">English</button>
       <button class="lang-opt" onclick="pickAiLang('ru')">Русский</button>
     </div>
-    <div class="help-hint" data-i18n="lang.caselang.hint">A real case interview may be run in either language, so the library is available in both - all 400 cases. Drills and the Solve games stay in English: that is the language of their material and of the real test.</div>
+    <div class="help-hint" data-i18n="lang.caselang.hint">A real case interview may be run in either language, so both the case library and the drills are available in both - 400 cases and 315 drills. The Solve games stay in English: that is the language of the real test.</div>
     <div class="lm-sub" data-i18n="lang.feedback">Feedback language</div>
     <div class="lang-opts" id="langOptsFb">
       <button class="lang-opt" onclick="pickFbLang('same')" data-i18n="lang.same">Same</button>
