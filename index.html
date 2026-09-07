@@ -3725,7 +3725,9 @@ async function callAI(system, messages, model) {
 
   // Map errors to clear, non-technical messages (and never leak server internals).
   let msg;
-  if (res.status === 401) msg = 'Your session expired. Please sign in again to continue.';
+  /* 06.09.2026, dev: «истекла» неверно, когда входа не было вовсе — а это самый
+     частый случай: игру открыли по прямой ссылке в браузере без входа. */
+  if (res.status === 401) msg = 'You are not signed in, or the session expired. Sign in and open this again.';
   else if (res.status === 429) msg = 'You are going a little fast. Please wait a moment and try again.';
   else if (res.status === 413) msg = 'That request was too large. Try shortening your answer.';
   else if (res.status >= 500) msg = 'The grader is busy right now. Please try again in a moment.';
@@ -3822,7 +3824,9 @@ async function callCaseSession(payload) {
   if (res.status >= 200 && res.status < 300) return res.data;
 
   let msg;
-  if (res.status === 401) msg = 'Your session expired. Please sign in again to continue.';
+  /* 06.09.2026, dev: «истекла» неверно, когда входа не было вовсе — а это самый
+     частый случай: игру открыли по прямой ссылке в браузере без входа. */
+  if (res.status === 401) msg = 'You are not signed in, or the session expired. Sign in and open this again.';
   else if (res.status === 429) msg = 'You are going a little fast. Please wait a moment and try again.';
   else if (res.status === 413) msg = 'That request was too large. Try shortening your answer.';
   else if (res.status >= 500) msg = 'The interviewer is busy right now. Please try again in a moment.';
