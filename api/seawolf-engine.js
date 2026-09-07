@@ -391,6 +391,9 @@ function enrichSite(site, attrs, level, gameId, si) {
   const band = LEVEL_BAND[level];
   if (!band) return site;
   const rnd = mulberry32(seedFrom('chr:' + gameId + ':' + si + ':' + attrs.slice().sort().join(',')));
+  /* Потолок ИСХОДНОГО участка не меняется от попытки к попытке — считаем его один раз
+     до цикла, а не заново на каждой из ENRICH_TRIES раздач (круг 170, заказ dev). */
+  const потолокУчастка = ceilingAhead(site).ceiling;
   for (let t = 0; t < ENRICH_TRIES; t++) {
     const cand = dealEnriched(site, attrs, rnd);
     /* Круг 169: коридор уровня считает трио, ДОСТАЮЩИЕ ПОТОЛОК участка, а не
@@ -407,7 +410,7 @@ function enrichSite(site, attrs, level, gameId, si) {
        Поймал это не автор правки, а стоявший гейт различения (проверка 3, «коридор
        уровня цел во всех плечах»): 0 вне коридора до правки, 2 после. */
     const c = ceilingAhead(cand);
-    if (c.ceiling >= ceilingAhead(site).ceiling &&
+    if (c.ceiling >= потолокУчастка &&
         c.count >= band[0] && c.count <= band[1]) return cand;
   }
   return site;
