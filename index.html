@@ -10476,24 +10476,37 @@ Return ONLY valid JSON (no markdown, no backticks). All five scores are 1.0-10.0
     // or hits a transient overload - a SECOND full attempt (a fresh serverless
     // invocation with a fresh 60s budget) rescues nearly all of those. Only
     // after two failed attempts do we show the error state.
-    let raw;
+    /* ПОЧЕМУ РАЗБОР ЧИТАЕТСЯ ВНУТРИ ЦИКЛА, А НЕ ПОСЛЕ НЕГО. 07.09.2026, dev.
+       Прежде второй заход спасал ТОЛЬКО от пустого ответа. Если модель отвечала
+       текстом, но не разбираемым JSON, `JSON.parse` кидал исключение уже ЗА циклом,
+       ловил его внешний catch — и кандидат терял разбор кейса целиком, хотя рядом
+       лежал готовый механизм второй попытки. Пустоте второй шанс дали, кривизне нет,
+       а для человека это один и тот же случай: «партнёр не написал мне разбор».
+       Замер 12 прогонов живьём: пустых 0, неразобранных 0 — случай редкий. Но цена
+       его — весь разбор, то есть главный товар, и стоит он одного лишнего вызова.
+       Разбор ответа теперь часть попытки: не разобралось — идём на второй заход. */
+    // Модель временами заворачивает JSON в ```json … ``` вопреки запрету. Снимаем
+    // заборы и режем по крайним скобкам: работает и с забором, и без него.
+    const разобрать = (сырое) => {
+      if (!сырое || !сырое.trim()) return null;
+      let clean = сырое.replace(/```json/gi, '').replace(/```/g, '').trim();
+      const _s = clean.indexOf('{'), _e = clean.lastIndexOf('}');
+      if (_s >= 0 && _e > _s) clean = clean.slice(_s, _e + 1);
+      try { return JSON.parse(clean); } catch (e) { return null; }
+    };
+    let raw, d = null;
     for (let attempt = 1; attempt <= 2; attempt++) {
       try {
         raw = await callAI(EVAL_SYSTEM + langInstruction(), [
           { role: 'user', content: `Evaluate this ${evalCtx}:\n\n${transcript}${timingNote}` }
         ], 'claude-sonnet-5');
-        if (raw && raw.trim()) break;
+        d = разобрать(raw);
+        if (d) break;
       } catch (e) { if (attempt === 2) throw e; }
       if (attempt === 1) await new Promise(r => setTimeout(r, 1200));
     }
     if (!raw || !raw.trim()) throw new Error('empty grader reply');
-    // The model intermittently wraps its JSON in ```json … ``` fences despite
-    // being told not to. Strip all fences, then slice to the outermost braces
-    // so parsing is robust whether or not it fenced (and ignores any stray prose).
-    let clean = raw.replace(/```json/gi, '').replace(/```/g, '').trim();
-    const _s = clean.indexOf('{'), _e = clean.lastIndexOf('}');
-    if (_s >= 0 && _e > _s) clean = clean.slice(_s, _e + 1);
-    const d = JSON.parse(clean);
+    if (!d) throw new Error('grader reply is not JSON');
     stopFeedbackLoading();
 
     /* 28.08.2026, поймано владельцем на живом кейсе: общий балл 4.5 при
