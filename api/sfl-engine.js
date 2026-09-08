@@ -40,6 +40,16 @@ function pickRu(obj, field, lang) {
   return obj[field];
 }
 
+/** Реплика хода на нужной стороне. Единственная точка выбора: и разбор, и ручка
+ *  `consequence` зовут её, а не читают `a.fb` напрямую. Партия, восстановленная из
+ *  токена, проигрывается заново, поэтому `fbSrc` там есть; для старой записи без него
+ *  возвращается прежняя строка — молчать здесь нельзя, но и падать не за что. */
+function fbText(a, lang) {
+  if (!a) return null;
+  if (a.fbSrc && a.fbSrc.o) return pickRu(a.fbSrc.o, a.fbSrc.f, lang);
+  return a.fb === undefined ? null : a.fb;
+}
+
 function rankShare(answer, key) {
   if (!Array.isArray(answer) || answer.length !== key.length) return 0;
   if (new Set(answer).size !== key.length || !answer.every(x => key.includes(x))) return 0;
@@ -144,18 +154,24 @@ class SFLSession {
     if (this.startedAt === null) this.begin(now);
     if (this.expired(now)) { this._timeout(); throw new Error('время вышло'); }
     const s = this.step();
-    let share, choice, fb;
+    let share, choice, fb, fbSrc;
+    /* ПРОВОД ЯЗЫКА · круг 174. Реплика выбиралась ЗДЕСЬ, при ответе, а язык известен
+       только в момент выдачи (reveal(lang) и ручка consequence). Поэтому запоминается
+       не строка, а ИСТОЧНИК — объект и поле, — и сторона выбирается тем же pickRu, что
+       и `why`. Поле `fb` остаётся английской строкой: его читают приборы цеха, и менять
+       его смысл ради провода значило бы чинить одно, ломая другое. */
     if (s.type === 'rank') {
       share = rankShare(payload, s.key);
       choice = Array.isArray(payload) ? payload.slice() : null;
-      fb = share >= 0.99 ? s.feedback.top : share >= 0.5 ? s.feedback.mid : s.feedback.low;
+      const lvl = share >= 0.99 ? 'top' : share >= 0.5 ? 'mid' : 'low';
+      fb = s.feedback[lvl]; fbSrc = { o: s.feedback, f: lvl };
     } else {
       const o = s.options.find(x => x.id === payload);
       if (!o) throw new Error('нет такого варианта');
-      share = o.share; choice = o.id; fb = o.fb;
+      share = o.share; choice = o.id; fb = o.fb; fbSrc = { o, f: 'fb' };
       if (o.next) this.branch = o.next;    // алмаз: ветка выбирается ходом кандидата
     }
-    this.answers.push({ n: s.n, trait: s.trait, sub: s.sub, choice, share, fb,
+    this.answers.push({ n: s.n, trait: s.trait, sub: s.sub, choice, share, fb, fbSrc,
                         priorityTag: s.priorityTag || null, variant: s._variant || null,
                         ms: now - this.stepStartedAt });
     this.stepStartedAt = now;
@@ -285,13 +301,15 @@ class SFLSession {
         } else {
           const set = st.variants ? (st.variants[a.variant] || st.variants[Object.keys(st.variants)[0]]).options : st.options;
           const b = set.find(o => o.share === 1.0);
-          if (b) best = { text: b.text, why: b.fb, mine: a.choice === b.id };
+          /* `text` — игровой текст варианта, он остаётся английским: это язык
+             испытания. Переводится только объяснение — `fb` сильного хода. */
+          if (b) best = { text: b.text, why: pickRu(b, 'fb', lang), mine: a.choice === b.id };
         }
         return {
           n: a.n, trait: a.trait, choice: a.choice, share: a.share, skipped: !!a.skipped,
           sub: a.sub.map(([name, w]) => ({ name, got: +(w * a.share).toFixed(2), max: w })),
           feedback: a.skipped ? L({ ru: 'Шаг пропущен — 0 из возможного. Пропуск здесь считается ответом «не решил».',
-                                    en: 'Step skipped — 0 out of the possible. A skip counts here as “did not solve”.' }, lang) : a.fb,
+                                    en: 'Step skipped — 0 out of the possible. A skip counts here as “did not solve”.' }, lang) : fbText(a, lang),
           best,
           ms: a.ms, variant: a.variant, priorityTag: a.priorityTag
         };
@@ -302,4 +320,4 @@ class SFLSession {
   }
 }
 
-module.exports = { SFLSession, TRAITS, SHARES, rankShare };
+module.exports = { SFLSession, TRAITS, SHARES, rankShare, fbText, pickRu };

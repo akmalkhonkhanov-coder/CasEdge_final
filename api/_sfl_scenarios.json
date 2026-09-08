@@ -64,7 +64,10 @@
      "top": "Your order puts a working hypothesis first. That is what keeps measurement finite: you look for the water you expect to find, and you notice fast when you are wrong.",
      "mid": "Your order is workable but spends early time on inputs before the team has a direction to test them against.",
      "low": "Your order gathers input and alignment before establishing an analytical direction. Without an initial hypothesis, measurement expands to fill the whole eighteen months."
-    }
+    },
+    "_top_ru": "Твой порядок ставит рабочую гипотезу первой. Именно это удерживает замеры в конечных границах: ты ищешь ту воду, которую ожидаешь найти, и быстро замечаешь, когда ошибся.",
+    "_mid_ru": "Порядок рабочий, но раннее время уходит на сбор входных данных до того, как у команды появилось направление, против которого их проверять.",
+    "_low_ru": "Твой порядок собирает данные и согласия до того, как задано аналитическое направление. Без начальной гипотезы замеры разрастаются на все восемнадцать месяцев."
    },
    {
     "n": 2,
@@ -87,25 +90,29 @@
       "id": "a",
       "text": "You treat the note as one hypothesis among several and design your first week to test it against two other candidate explanations.",
       "share": 1,
-      "fb": "You gave the note the weight it can carry — a lead, not a finding. Testing it beside two rivals is what makes the first week decisive rather than confirmatory."
+      "fb": "You gave the note the weight it can carry — a lead, not a finding. Testing it beside two rivals is what makes the first week decisive rather than confirmatory.",
+      "_fb_ru": "Ты дал записке ровно тот вес, который она выдерживает: это зацепка, а не находка. Проверка рядом с двумя конкурирующими объяснениями и делает первую неделю решающей, а не подтверждающей."
      },
      {
       "id": "b",
       "text": "You accept the note and focus the team's first week on the paper mill, taking the officer's read as the best local knowledge available on day two.",
       "share": 0.2,
-      "fb": "A two-page note without measurements moved your whole week. If the officer is right you saved days; if wrong, you will find out only after the first week is gone."
+      "fb": "A two-page note without measurements moved your whole week. If the officer is right you saved days; if wrong, you will find out only after the first week is gone.",
+      "_fb_ru": "Двухстраничная записка без единого замера развернула всю твою неделю. Если инженер прав — ты выиграл дни; если нет — узнаешь об этом, когда неделя уже потрачена."
      },
      {
       "id": "c",
       "text": "You set the note aside and continue with the plan you had before it arrived.",
       "share": 0.4,
-      "fb": "Ignoring a local expert's read costs you the cheapest lead you had. Steadiness is not the same as deafness."
+      "fb": "Ignoring a local expert's read costs you the cheapest lead you had. Steadiness is not the same as deafness.",
+      "_fb_ru": "Игнорируя прочтение местного эксперта, ты теряешь самую дешёвую зацепку из тех, что у тебя были. Хладнокровие — это не то же самое, что глухота."
      },
      {
       "id": "d",
       "text": "You ask the officer for the underlying measurements before you decide anything, since a claim this specific is either well founded or quickly disproved.",
       "share": 0.6,
-      "fb": "Asking for the data is right, but you stopped there: the week ran on while you waited for an answer that may not exist."
+      "fb": "Asking for the data is right, but you stopped there: the week ran on while you waited for an answer that may not exist.",
+      "_fb_ru": "Запросить данные — верно, но ты на этом остановился: неделя шла, пока ты ждал ответа, которого может не существовать."
      }
     ]
    },
@@ -130,25 +137,29 @@
       "id": "a",
       "text": "You take the boundary meter as the anchor and treat the plant reports as a decomposition to be corrected.",
       "share": 1,
-      "fb": "One measured total and eleven self-reported parts: the total is the anchor, the parts are the estimate. That ordering resolves the conflict without new equipment."
+      "fb": "One measured total and eleven self-reported parts: the total is the anchor, the parts are the estimate. That ordering resolves the conflict without new equipment.",
+      "_fb_ru": "Один измеренный итог и одиннадцать заявленных частей: итог — якорь, части — оценка. Такой порядок снимает противоречие без новых приборов."
      },
      {
       "id": "b",
       "text": "You average the two figures to get a working number. The truth is unlikely to sit at either extreme and the board needs one line to plan against.",
       "share": 0,
-      "fb": "Averaging a measurement with an estimate produces a number that describes neither. The gap was the finding; the average deletes it."
+      "fb": "Averaging a measurement with an estimate produces a number that describes neither. The gap was the finding; the average deletes it.",
+      "_fb_ru": "Среднее между замером и оценкой даёт число, которое не описывает ни то, ни другое. Расхождение и было находкой — среднее её стирает."
      },
      {
       "id": "c",
       "text": "You commission new meters at all eleven plants before drawing any conclusion, on the view that a gap this large cannot be argued about until both sides of it are measured the same way.",
       "share": 0.4,
-      "fb": "Correct eventually, but it buys certainty with months you do not have. The anchor was already on site."
+      "fb": "Correct eventually, but it buys certainty with months you do not have. The anchor was already on site.",
+      "_fb_ru": "В итоге верно, но точность куплена месяцами, которых у тебя нет. Якорь уже был на площадке."
      },
      {
       "id": "d",
       "text": "You treat the two unmetered plants as the whole explanation of the gap: they are the only users nobody can put a figure on, and the gap has to sit somewhere.",
       "share": 0.2,
-      "fb": "Two unmetered plants are the obvious suspect, and that is exactly why it deserves a check before it becomes the answer."
+      "fb": "Two unmetered plants are the obvious suspect, and that is exactly why it deserves a check before it becomes the answer.",
+      "_fb_ru": "Два цеха без счётчиков — очевидный подозреваемый, и именно поэтому его стоит проверить, прежде чем он станет ответом."
      }
     ]
    },
@@ -175,21 +186,24 @@
       "text": "You size all three roughly first, then go deep only on the largest.",
       "share": 1,
       "next": "B1a",
-      "fb": "Rough sizing before depth is what makes four weeks enough. You bought the right to ignore two of the three."
+      "fb": "Rough sizing before depth is what makes four weeks enough. You bought the right to ignore two of the three.",
+      "_fb_ru": "Грубая оценка размеров раньше глубины — вот что делает четыре недели достаточными. Ты купил право не заниматься двумя из трёх."
      },
      {
       "id": "b",
       "text": "You start with the leaking loop because it is the easiest to investigate.",
       "share": 0.2,
       "next": "B1b",
-      "fb": "Ease of investigation is not size of prize. You may spend the four weeks on the smallest of the three."
+      "fb": "Ease of investigation is not size of prize. You may spend the four weeks on the smallest of the three.",
+      "_fb_ru": "Удобство исследования — не то же самое, что размер приза. Есть риск потратить четыре недели на самый малый из трёх."
      },
      {
       "id": "c",
       "text": "You spend the four weeks agreeing an access and sampling protocol with the two plant operators before any measurement, and let the loop repair be scoped in the meantime.",
       "share": 0.4,
       "next": "B1b",
-      "fb": "Access has to be agreed and it is not four weeks of work. A protocol is a permission to start, and you have spent the period that was for starting on obtaining it."
+      "fb": "Access has to be agreed and it is not four weeks of work. A protocol is a permission to start, and you have spent the period that was for starting on obtaining it.",
+      "_fb_ru": "Доступ нужно согласовывать, и это не четыре недели работы. Протокол — это разрешение начать, а ты потратил на его получение тот срок, который был отведён на начало."
      }
     ]
    },
@@ -216,19 +230,22 @@
         "id": "a",
         "text": "You fold the cooling change into each plant's already-scheduled maintenance window, since a shutdown nobody has to grant is a shutdown that happens, even though part of the saving lands four months later.",
         "share": 1,
-        "fb": "Four months of delay bought you the shutdown you were never going to be granted separately. That is trading the right variable."
+        "fb": "Four months of delay bought you the shutdown you were never going to be granted separately. That is trading the right variable.",
+        "_fb_ru": "Четыре месяца отсрочки купили тебе остановку, которой отдельно тебе бы никогда не дали. Это обмен по верной переменной."
        },
        {
         "id": "b",
         "text": "You propose a separate shutdown as soon as one can be arranged, so the saving lands in this financial year rather than the next, and the target stops depending on a schedule you do not control.",
         "share": 0.4,
-        "fb": "The saving is real and the plan is clean, but you are spending the goodwill of the two plants you will need most for eighteen months."
+        "fb": "The saving is real and the plan is clean, but you are spending the goodwill of the two plants you will need most for eighteen months.",
+        "_fb_ru": "Экономия настоящая и план чистый, но ты тратишь расположение тех двух цехов, которые понадобятся тебе больше всех ближайшие восемнадцать месяцев."
        },
        {
         "id": "c",
         "text": "You drop the cooling option as too disruptive and look for savings elsewhere, on the view that a measure the plants will fight is a measure that arrives two years late.",
         "share": 0.2,
-        "fb": "You removed two thirds of the prize because the first version of the plan was uncomfortable."
+        "fb": "You removed two thirds of the prize because the first version of the plan was uncomfortable.",
+        "_fb_ru": "Ты убрал две трети приза, потому что первая версия плана оказалась неудобной."
        }
       ]
      },
@@ -239,19 +256,22 @@
         "id": "a",
         "text": "You present the loop as a first step and state that the main driver has not yet been sized.",
         "share": 1,
-        "fb": "Naming what you have not done is what keeps a partial answer usable. The board can now decide with the gap in view."
+        "fb": "Naming what you have not done is what keeps a partial answer usable. The board can now decide with the gap in view.",
+        "_fb_ru": "Назвать то, чего ты не сделал, — вот что оставляет частичный ответ пригодным. Совет теперь решает, видя разрыв."
        },
        {
         "id": "b",
         "text": "You present the loop repair as the recommendation and leave the sizing question for later.",
         "share": 0,
-        "fb": "A tenth of the gap presented as the answer will be read as the answer. That is how a board approves a plan that cannot reach its target."
+        "fb": "A tenth of the gap presented as the answer will be read as the answer. That is how a board approves a plan that cannot reach its target.",
+        "_fb_ru": "Десятая часть разрыва, поданная как ответ, будет прочитана как ответ. Так совет и утверждает план, который не может достичь своей цели."
        },
        {
         "id": "c",
         "text": "You ask to postpone the board meeting until the sizing is done.",
         "share": 0.4,
-        "fb": "Honest, but it spends the operator's calendar to fix your sequencing."
+        "fb": "Honest, but it spends the operator's calendar to fix your sequencing.",
+        "_fb_ru": "Честно, но ты тратишь календарь оператора на то, чтобы починить собственную последовательность шагов."
        }
       ]
      }
@@ -278,19 +298,22 @@
       "id": "a",
       "text": "You ask her to walk the room through what changed, and check her point against the boundary meter that evening, since the room has just been told the number is wrong.",
       "share": 1,
-      "fb": "You did two things at once: made the room hear the quietest useful voice, and tested what it said. Either alone would have been half the move."
+      "fb": "You did two things at once: made the room hear the quietest useful voice, and tested what it said. Either alone would have been half the move.",
+      "_fb_ru": "Ты сделал две вещи разом: заставил зал услышать самый тихий полезный голос и проверил то, что он сказал. Любое из двух по отдельности было бы половиной хода."
      },
      {
       "id": "b",
       "text": "You thank her and note the point for the technical session, so the meeting keeps its agenda and the operator does not watch your team argue about measurement in front of him.",
       "share": 0.4,
-      "fb": "The agenda survived and the lead cooled. In a room that did not react, 'later' usually means never."
+      "fb": "The agenda survived and the lead cooled. In a room that did not react, 'later' usually means never.",
+      "_fb_ru": "Повестка уцелела, зацепка остыла. В зале, который не отреагировал, «позже» обычно значит «никогда»."
      },
      {
       "id": "c",
       "text": "You ask the plant managers whether that is true, since they run the cycles daily and nobody has yet asked the people whose shifts the number comes from.",
       "share": 0.2,
-      "fb": "You handed the question to the people with the least incentive to confirm it, in front of the person who raised it."
+      "fb": "You handed the question to the people with the least incentive to confirm it, in front of the person who raised it.",
+      "_fb_ru": "Ты отдал вопрос тем, у кого меньше всего причин его подтвердить, — и сделал это при том, кто его поднял."
      }
     ]
    },
@@ -315,25 +338,29 @@
       "id": "a",
       "text": "You propose the tariff with a quota set per unit of production and a technical support fund for plants below a size threshold.",
       "share": 1,
-      "fb": "You kept the instrument the finance director needs and removed the failure mode the officer named. Both objections were about the same design, not about each other."
+      "fb": "You kept the instrument the finance director needs and removed the failure mode the officer named. Both objections were about the same design, not about each other.",
+      "_fb_ru": "Ты сохранил прибор, нужный финансовому директору, и убрал тот отказ, который назвал инженер. Оба возражения были об одной и той же конструкции, а не друг о друге."
      },
      {
       "id": "b",
       "text": "You back the tariff exactly as proposed, on the view that the smallest plants are not material to a 30% target and that carving out exceptions in the first month teaches everyone to ask for one.",
       "share": 0.2,
-      "fb": "They are not material to the number and they are decisive to whether the park accepts it."
+      "fb": "They are not material to the number and they are decisive to whether the park accepts it.",
+      "_fb_ru": "Для числа они несущественны — и решают, примет ли парк это число вообще."
      },
      {
       "id": "c",
       "text": "You drop the tariff and propose voluntary reduction targets instead.",
       "share": 0,
-      "fb": "Voluntary targets against a licensed cut in eighteen months is not a trade-off, it is a postponement."
+      "fb": "Voluntary targets against a licensed cut in eighteen months is not a trade-off, it is a postponement.",
+      "_fb_ru": "Добровольные цели против лицензионного сокращения через восемнадцать месяцев — это не компромисс, это отсрочка."
      },
      {
       "id": "d",
       "text": "You ask the operator to decide between the two positions.",
       "share": 0.4,
-      "fb": "Escalating a design question as a political one is how teams hand back the part of the work they were hired for."
+      "fb": "Escalating a design question as a political one is how teams hand back the part of the work they were hired for.",
+      "_fb_ru": "Поднимать инженерный вопрос как политический — так команды возвращают заказчику ровно ту часть работы, ради которой их наняли."
      }
     ]
    },
@@ -360,21 +387,24 @@
       "text": "You keep the 30% plan and add a check, which measures would still be worth starting now if the cut became 40%, because that list is the same under both numbers.",
       "share": 1,
       "next": "B2a",
-      "fb": "You did not re-plan for a draft, and you did not ignore it. Testing the current plan against the harsher world costs a day and buys the decision either way."
+      "fb": "You did not re-plan for a draft, and you did not ignore it. Testing the current plan against the harsher world costs a day and buys the decision either way.",
+      "_fb_ru": "Ты не стал перекраивать план ради черновика и не стал его игнорировать. Проверка нынешнего плана против более жёсткого мира стоит день и покупает решение при любом исходе."
      },
      {
       "id": "b",
       "text": "You re-plan for 40% now, to be safe, on the view that a plan built to the harder number survives the licence being read strictly and the easier one does not.",
       "share": 0.2,
       "next": "B2b",
-      "fb": "A draft moved your target by a third. If the consultation softens it, you will have spent the park's credibility on a number nobody asked for."
+      "fb": "A draft moved your target by a third. If the consultation softens it, you will have spent the park's credibility on a number nobody asked for.",
+      "_fb_ru": "Черновик сдвинул твою цель на треть. Если консультации её смягчат, ты потратишь доверие парка на число, которого никто не просил."
      },
      {
       "id": "c",
       "text": "You continue with the 30% plan and revisit it when the rule is final, on the view that re-planning against a draft spends real weeks against a number that may never arrive.",
       "share": 0.4,
       "next": "B2b",
-      "fb": "Reasonable, but three months of consultation is exactly the window in which cheap optionality is bought."
+      "fb": "Reasonable, but three months of consultation is exactly the window in which cheap optionality is bought.",
+      "_fb_ru": "Разумно, но три месяца консультаций — это ровно то окно, в котором дешёвая свобода манёвра и покупается."
      }
     ]
    },
@@ -401,19 +431,22 @@
         "id": "a",
         "text": "You ask him what evidence would change his mind, and offer to run that test on his terms at your cost.",
         "share": 1,
-        "fb": "You cannot instruct him, so you bought the only thing that moves someone you do not control: a test he chose the terms of."
+        "fb": "You cannot instruct him, so you bought the only thing that moves someone you do not control: a test he chose the terms of.",
+        "_fb_ru": "Приказать ему ты не можешь, поэтому купил единственное, что двигает человека вне твоей власти: проверку, условия которой он выбрал сам."
        },
        {
         "id": "b",
         "text": "You ask the park operator to require the change through the licence agreement. The mandate exists precisely so that one plant cannot hold the target hostage to its own reading of the data.",
         "share": 0.2,
-        "fb": "You converted an engineering disagreement into a contractual one with the manager you need for eighteen months."
+        "fb": "You converted an engineering disagreement into a contractual one with the manager you need for eighteen months.",
+        "_fb_ru": "Ты превратил инженерное разногласие в договорное — с тем управляющим, который нужен тебе все восемнадцать месяцев."
        },
        {
         "id": "c",
         "text": "You re-plan the target without his plant.",
         "share": 0.4,
-        "fb": "Removing the largest plant from the plan removes the plan."
+        "fb": "Removing the largest plant from the plan removes the plan.",
+        "_fb_ru": "Убрать из плана самый крупный цех — значит убрать сам план."
        }
       ]
      },
@@ -424,19 +457,22 @@
         "id": "a",
         "text": "You tell them that the licensed number is 30%, that a draft exists, and which measures are unaffected either way, since those are the ones they can start today.",
         "share": 1,
-        "fb": "Uncertainty stated precisely is workable; uncertainty implied is paralysing. You gave them the part of the plan that does not depend on the answer."
+        "fb": "Uncertainty stated precisely is workable; uncertainty implied is paralysing. You gave them the part of the plan that does not depend on the answer.",
+        "_fb_ru": "Неопределённость, названная точно, рабочая; неопределённость, оставленная в намёках, парализует. Ты отдал им ту часть плана, которая от ответа не зависит."
        },
        {
         "id": "b",
         "text": "You tell them to plan for 40% so that nobody is caught out later, and take the view that a team asked twice for the same plan will trust the second number less than the first.",
         "share": 0.2,
-        "fb": "You asked for commitment to a number that does not exist yet, from people whose trust is the scarce resource here."
+        "fb": "You asked for commitment to a number that does not exist yet, from people whose trust is the scarce resource here.",
+        "_fb_ru": "Ты попросил обязательства под число, которого ещё не существует, у людей, чьё доверие здесь и есть дефицитный ресурс."
        },
        {
         "id": "c",
         "text": "You tell them the target is 30% and say nothing about the draft, since a draft that may never be issued is not a number a delivery team can act on.",
         "share": 0,
-        "fb": "They will read the draft next week. What you save today in simplicity you pay back in credibility."
+        "fb": "They will read the draft next week. What you save today in simplicity you pay back in credibility.",
+        "_fb_ru": "Черновик они прочтут на следующей неделе. То, что ты сегодня выигрываешь в простоте, ты вернёшь доверием."
        }
       ]
      }
@@ -463,19 +499,22 @@
       "id": "a",
       "text": "You convert everything to one unit and one period, then check the three largest plants by hand, because the file will be quoted at the board and nobody there will re-do the arithmetic.",
       "share": 1,
-      "fb": "Normalise, then hand-check the part that carries the answer. The hand-check is what separates a clean file from a correct one."
+      "fb": "Normalise, then hand-check the part that carries the answer. The hand-check is what separates a clean file from a correct one.",
+      "_fb_ru": "Сначала привести к одному виду, потом руками проверить ту часть, на которой держится ответ. Ручная проверка и отличает чистый файл от верного."
      },
      {
       "id": "b",
       "text": "You normalise everything to one unit and one period and use the result as it comes, since eleven files reconciled by hand is a fortnight you do not have and the errors should wash out across plants.",
       "share": 0.6,
-      "fb": "Right shape, no verification. Unit conversion errors survive normalisation and look tidy afterwards."
+      "fb": "Right shape, no verification. Unit conversion errors survive normalisation and look tidy afterwards.",
+      "_fb_ru": "Форма верная, проверки нет. Ошибки перевода единиц переживают нормализацию и после неё выглядят опрятно."
      },
      {
       "id": "c",
       "text": "You use only the three plants that report in a usable format. A comparison built on numbers you have had to reconstruct is one the operator can dismantle in a meeting.",
       "share": 0.2,
-      "fb": "You selected the data by convenience of format, which has nothing to do with where the water is."
+      "fb": "You selected the data by convenience of format, which has nothing to do with where the water is.",
+      "_fb_ru": "Ты отобрал данные по удобству формата, а формат не имеет никакого отношения к тому, где находится вода."
      }
     ]
    },
@@ -500,25 +539,29 @@
       "id": "a",
       "text": "You start the 24 points now and keep a named workstream on the remaining 6 with a date to review.",
       "share": 1,
-      "fb": "Starting what is agreed while the gap stays visible and owned is the difference between a phased plan and an unfinished one."
+      "fb": "Starting what is agreed while the gap stays visible and owned is the difference between a phased plan and an unfinished one.",
+      "_fb_ru": "Начать согласованное, пока разрыв остаётся видимым и у него есть хозяин, — вот чем поэтапный план отличается от незаконченного."
      },
      {
       "id": "b",
       "text": "You wait until the full 30 points are designed, so implementation starts once and the operator is not asked to approve the same programme twice.",
       "share": 0.2,
-      "fb": "You are holding eighteen months of schedule hostage to the last fifth of the answer."
+      "fb": "You are holding eighteen months of schedule hostage to the last fifth of the answer.",
+      "_fb_ru": "Ты держишь восемнадцать месяцев графика заложником последней пятой части ответа."
      },
      {
       "id": "c",
       "text": "You start the 24 and present them as the plan, on the view that a plan with a hole named in it invites the authority to fill the hole for you.",
       "share": 0,
-      "fb": "Six points quietly dropped is how a plan meets its milestones and misses its target."
+      "fb": "Six points quietly dropped is how a plan meets its milestones and misses its target.",
+      "_fb_ru": "Шесть пунктов, тихо снятых, — так план выполняет свои вехи и промахивается мимо цели."
      },
      {
       "id": "d",
       "text": "You start the 24 points and ask the operator to negotiate the remaining 6 with the authority, on the view that a gap named in a licence is a legal question rather than an engineering one.",
       "share": 0.4,
-      "fb": "Possible, but you handed away the part of the problem you were closest to solving."
+      "fb": "Possible, but you handed away the part of the problem you were closest to solving.",
+      "_fb_ru": "Возможно, но ты отдал ту часть задачи, к решению которой был ближе всего."
      }
     ]
    },
@@ -545,14 +588,16 @@
       "text": "You spend them on the last 6, because that is the part the board cannot check for itself.",
       "share": 1,
       "next": "B3a",
-      "fb": "You spent the scarce days where the decision actually hangs. Agreed measures defend themselves; the gap does not."
+      "fb": "You spent the scarce days where the decision actually hangs. Agreed measures defend themselves; the gap does not.",
+      "_fb_ru": "Ты потратил дефицитные дни там, где решение действительно висит. Согласованные меры защищают себя сами, разрыв — нет."
      },
      {
       "id": "b",
       "text": "You spend them on tightening the 24, because that is what the paper mostly contains.",
       "share": 0.4,
       "next": "B3b",
-      "fb": "You improved the part that was already accepted, and left the contested part as it was."
+      "fb": "You improved the part that was already accepted, and left the contested part as it was.",
+      "_fb_ru": "Ты улучшил ту часть, которую уже приняли, и оставил спорную часть как была."
      }
     ]
    },
@@ -579,19 +624,22 @@
         "id": "a",
         "text": "You propose it with an explicit fallback each plant can trigger alone, and say what the fallback costs.",
         "share": 1,
-        "fb": "You priced the dependency instead of hiding it. That is what lets two reluctant plants sign the same page."
+        "fb": "You priced the dependency instead of hiding it. That is what lets two reluctant plants sign the same page.",
+        "_fb_ru": "Ты оценил зависимость вместо того, чтобы её прятать. Это и позволяет двум неохотным цехам подписать одну страницу."
        },
        {
         "id": "b",
         "text": "You propose it on technical merit and let the plants work out the scheduling between them.",
         "share": 0.2,
-        "fb": "The technical case was never the obstacle. You left the actual decision to the two parties least able to make it together."
+        "fb": "The technical case was never the obstacle. You left the actual decision to the two parties least able to make it together.",
+        "_fb_ru": "Техническая сторона никогда не была препятствием. Ты оставил само решение двум сторонам, которые меньше всего способны принять его вместе."
        },
        {
         "id": "c",
         "text": "You drop it and present the plan as 24 points with a gap.",
         "share": 0.4,
-        "fb": "Honest, but you spent five days finding an option and then declined to put it on the table."
+        "fb": "Honest, but you spent five days finding an option and then declined to put it on the table.",
+        "_fb_ru": "Честно, но ты потратил пять дней на поиск варианта, а потом отказался вынести его на стол."
        }
       ]
      },
@@ -602,19 +650,22 @@
         "id": "a",
         "text": "You answer that 24 points are designed and 6 are not, name the two candidates you would test first, and ask for four weeks, because a dated gap is a plan and an undated one is a hole.",
         "share": 1,
-        "fb": "Asked directly, you answered directly and turned the gap into a request. That is recoverable; a hedge would not have been."
+        "fb": "Asked directly, you answered directly and turned the gap into a request. That is recoverable; a hedge would not have been.",
+        "_fb_ru": "Тебя спросили прямо — ты ответил прямо и превратил разрыв в запрос. Это поправимо; уклончивый ответ поправим не был бы."
        },
        {
         "id": "b",
         "text": "You say the remaining 6 points will come from measures still being finalised, since naming an unfinished list in a licence report is how a soft commitment becomes a hard one.",
         "share": 0,
-        "fb": "A phrase in place of an answer, in the one meeting where the gap was visible anyway."
+        "fb": "A phrase in place of an answer, in the one meeting where the gap was visible anyway.",
+        "_fb_ru": "Оборот речи вместо ответа — на единственной встрече, где разрыв и так был виден."
        },
        {
         "id": "c",
         "text": "You say that 24 points are the realistic ceiling and that the target itself should be renegotiated. A plan presented as complete when it is not is the one that fails in public eighteen months from now.",
         "share": 0.2,
-        "fb": "You proposed changing the target in the twelfth week, on the strength of not having looked at the last fifth."
+        "fb": "You proposed changing the target in the twelfth week, on the strength of not having looked at the last fifth.",
+        "_fb_ru": "Ты предложил менять цель на двенадцатой неделе, опираясь на то, что не заглянул в последнюю пятую часть."
        }
       ]
      }

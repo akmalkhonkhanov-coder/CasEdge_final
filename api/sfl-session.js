@@ -33,7 +33,7 @@
 //
 // Actions: state · start · begin · view · answer · reveal
 
-const { SFLSession } = require('./sfl-engine.js');
+const { SFLSession, fbText } = require('./sfl-engine.js');
 const TOKEN = require('./sfl-token.js');
 const SCENARIOS = require('./_sfl_scenarios.json');
 
@@ -233,7 +233,10 @@ export default async function handler(req, res) {
       const a = s.answers[before];
       const next = { ...st, picks: st.picks.concat([{ c: body.answer, ms: spent }]) };
       return res.status(200).json({
-        token: encodeState(next), view, consequence: (a && a.fb) || null
+        /* ПРОВОД ЯЗЫКА · круг 174. Ручка отдавала `a.fb` — английскую строку, выбранную
+           в момент ответа, когда язык ещё неизвестен. Реплика после хода — это учитель,
+           а не экзамен, и она обязана говорить на языке кандидата. */
+        token: encodeState(next), view, consequence: fbText(a, lang) || null
       });
     }
 

@@ -79313,8 +79313,8 @@
     {
      "ranges": {
       "Permeability": [
-       5,
-       5
+       8,
+       9
       ],
       "Size": [
        10,
@@ -79505,14 +79505,14 @@
       "trap_round": null,
       "deciding_attr": "Size",
       "banned": 4,
-      "alive_share": 56,
+      "alive_share": 36,
       "width": [
-       1,
+       2,
        1,
        3
       ],
       "ceiling": 80,
-      "best_at_ceiling": 3
+      "best_at_ceiling": 5
      }
     }
    ]
@@ -96080,8 +96080,8 @@
     {
      "ranges": {
       "Permeability": [
-       6,
-       6
+       3,
+       4
       ],
       "Size": [
        10,
@@ -96269,17 +96269,17 @@
       ]
      ],
      "meta": {
-      "trap_round": null,
+      "trap_round": 4,
       "deciding_attr": "Size",
       "banned": 5,
-      "alive_share": 56,
+      "alive_share": 26,
       "width": [
-       1,
+       2,
        1,
        1
       ],
       "ceiling": 60,
-      "best_at_ceiling": 5
+      "best_at_ceiling": 4
      }
     }
    ]
@@ -104153,16 +104153,16 @@
     {
      "ranges": {
       "Permeability": [
-       3,
-       5
+       10,
+       10
       ],
       "Size": [
-       1,
-       1
+       8,
+       9
       ],
       "Density": [
-       6,
-       6
+       2,
+       4
       ]
      },
      "desired": "Bioluminescence",
@@ -104343,16 +104343,16 @@
      ],
      "meta": {
       "trap_round": null,
-      "deciding_attr": "Size",
+      "deciding_attr": "Permeability",
       "banned": 4,
-      "alive_share": 67,
+      "alive_share": 56,
       "width": [
-       3,
        1,
-       1
+       2,
+       3
       ],
       "ceiling": 80,
-      "best_at_ceiling": 3
+      "best_at_ceiling": 5
      }
     }
    ]
