@@ -2866,7 +2866,10 @@
     "feedback": {
      "top": "Your order starts the one measurement that cannot be repeated. Everything else on this list can be re-decided next year; the drained state cannot be re-created once the water comes up.",
      "mid": "Your order is workable and it spends part of the only year in which the baseline exists on work that will still be available afterwards.",
-     "low": "Your order settles design and contracts first. If the drains go in before a full year of baseline, the units are unverifiable and the whole project is a land improvement with no buyer."
+     "low": "Your order settles design and contracts first. If the drains go in before a full year of baseline, the units are unverifiable and the whole project is a land improvement with no buyer.",
+     "_top_ru": "Твой порядок начинается с единственного замера, который нельзя повторить. Всё остальное в списке можно перерешить через год; осушённое состояние не воссоздать, когда вода поднимется.",
+     "_mid_ru": "Порядок рабочий, и часть единственного года, в котором базовая линия вообще существует, уходит на работу, которая никуда не денется и потом.",
+     "_low_ru": "Твой порядок сначала закрывает проект и договоры. Если канавы засыплют раньше, чем пройдёт полный год базовой линии, единицы непроверяемы, и весь проект — это улучшение земли без покупателя."
     }
    },
    {
@@ -2890,25 +2893,29 @@
       "id": "a",
       "share": 1,
       "text": "You probe depth on a fresh grid tied to satellite positioning and use the old map only to decide where the grid needs to be denser.",
-      "fb": "Depth drives the whole carbon estimate, and a forty-metre error that wanders is not a correction you can apply. The old map keeps its one remaining use, which is telling you where the bog is complicated."
+      "fb": "Depth drives the whole carbon estimate, and a forty-metre error that wanders is not a correction you can apply. The old map keeps its one remaining use, which is telling you where the bog is complicated.",
+      "_fb_ru": "Глубина задаёт всю оценку углерода, а ошибка в сорок метров, которая ещё и гуляет, — не та поправка, которую можно применить. За старой картой остаётся её единственное оставшееся применение: она говорит, где болото устроено сложно."
      },
      {
       "id": "b",
       "share": 0.6,
       "text": "You georeference the old map against the fixed features that can still be identified and probe only where the correction leaves the greatest uncertainty, on the view that a survey walked by people who knew the ground is worth rescuing.",
-      "fb": "Rescuing it is reasonable and the residual error stays unknown exactly where no feature survives, which tends to be the deep middle. You will be probing the edges and estimating the core."
+      "fb": "Rescuing it is reasonable and the residual error stays unknown exactly where no feature survives, which tends to be the deep middle. You will be probing the edges and estimating the core.",
+      "_fb_ru": "Спасать её разумно, и остаточная ошибка остаётся неизвестной ровно там, где не уцелело ни одного ориентира, — а это, как правило, глубокая середина. Ты будешь щупать края и оценивать ядро."
      },
      {
       "id": "c",
       "share": 0.2,
       "text": "You apply an average forty-metre buffer to the mapped boundaries and carry the uncertainty into the estimate as a stated margin.",
-      "fb": "The error does not point one way, so an average buffer is a number that describes none of the actual displacements. A stated margin around a meaningless correction is still meaningless."
+      "fb": "The error does not point one way, so an average buffer is a number that describes none of the actual displacements. A stated margin around a meaningless correction is still meaningless.",
+      "_fb_ru": "Ошибка не смещена в одну сторону, поэтому средний буфер — число, не описывающее ни одного из настоящих смещений. Заявленный допуск вокруг бессмысленной поправки остаётся бессмысленным."
      },
      {
       "id": "d",
       "share": 0.4,
       "text": "You commission an airborne survey of the whole estate, on the view that four thousand hectares of hand probing is a season of work you do not have.",
-      "fb": "It is fast and it measures the surface. Peat depth is the distance to the mineral floor underneath, and that is the number the estimate needs."
+      "fb": "It is fast and it measures the surface. Peat depth is the distance to the mineral floor underneath, and that is the number the estimate needs.",
+      "_fb_ru": "Быстро — и меряет поверхность. Глубина торфа — это расстояние до минерального дна под ним, и оценке нужно именно оно."
      }
     ]
    },
@@ -2933,25 +2940,29 @@
       "id": "a",
       "share": 1,
       "text": "You say that grazing at some level is part of keeping the bog in the condition the credits are sold on, and put that in the agreement as an obligation on the estate rather than a permission to the tenants.",
-      "fb": "He asked whether he is a tenant or a leftover. Writing the grazing into the estate's own obligations answers it with something he can hold, and it happens to be true: wet bog left entirely ungrazed does not stay in the state the buyer paid for."
+      "fb": "He asked whether he is a tenant or a leftover. Writing the grazing into the estate's own obligations answers it with something he can hold, and it happens to be true: wet bog left entirely ungrazed does not stay in the state the buyer paid for.",
+      "_fb_ru": "Он спросил, арендатор он или остаток. Записать выпас в собственные обязательства поместья — значит ответить тем, что можно взять в руки, и это к тому же правда: мокрое болото, оставленное совсем без выпаса, не держится в том состоянии, за которое заплатил покупатель."
      },
      {
       "id": "b",
       "share": 0.4,
       "text": "You say the estate has no intention of ending the tenancies and that the families have been here longer than anyone on the current board, on the view that a straight assurance from the person in the room is worth more than a clause.",
-      "fb": "Intention is exactly what he is asking about, and intention is what changes when the board does. He wanted the answer in a form that survives you."
+      "fb": "Intention is exactly what he is asking about, and intention is what changes when the board does. He wanted the answer in a form that survives you.",
+      "_fb_ru": "Намерение — ровно то, о чём он спрашивает, и намерение меняется вместе с советом. Он хотел ответ в форме, которая переживёт тебя."
      },
      {
       "id": "c",
       "share": 0.6,
       "text": "You offer to write a minimum grazing area into the tenancy agreements for the length of the crediting period.",
-      "fb": "A floor in the tenancy is real protection and it is also a minimum, which is the number the estate will move towards. You answered the fear and named the ceiling in the same sentence."
+      "fb": "A floor in the tenancy is real protection and it is also a minimum, which is the number the estate will move towards. You answered the fear and named the ceiling in the same sentence.",
+      "_fb_ru": "Нижняя граница в договоре аренды — настоящая защита, и она же минимум, к которому поместье будет двигаться. Ты ответил на страх и назвал потолок одной фразой."
      },
      {
       "id": "d",
       "share": 0,
       "text": "You say that grazing intensity after rewetting is a question for the hydrologists and will be settled by what the bog can carry.",
-      "fb": "You have referred a question about his family's future to a technical process he has no part in, which is precisely the shape of the thing he was afraid of."
+      "fb": "You have referred a question about his family's future to a technical process he has no part in, which is precisely the shape of the thing he was afraid of.",
+      "_fb_ru": "Ты отправил вопрос о будущем его семьи в технический процесс, в котором ему нет места, — а это в точности та форма, которой он и боялся."
      }
     ]
    },
@@ -2978,21 +2989,24 @@
       "share": 1,
       "next": "B1a",
       "text": "You settle the verification standard and its measurement specification first and build the network to it, since a reading taken to no standard is not a reading.",
-      "fb": "A network installed to no specification measures a year to nobody's satisfaction, and six weeks is recoverable inside a twelve-month baseline. You spent the preparation on the thing that decides whether the rest counts."
+      "fb": "A network installed to no specification measures a year to nobody's satisfaction, and six weeks is recoverable inside a twelve-month baseline. You spent the preparation on the thing that decides whether the rest counts.",
+      "_fb_ru": "Сеть, поставленная без спецификации, меряет год так, что это никого не устроит, а шесть недель внутри двенадцатимесячной базовой линии наверстываются. Ты потратил подготовку на то, что решает, засчитается ли всё остальное."
      },
      {
       "id": "b",
       "share": 0.6,
       "next": "B1b",
       "text": "You install a provisional network now to whatever specification is most likely, so that nothing is lost if the dry spell comes early, and align it to the standard once chosen.",
-      "fb": "Catching an early dry spell is worth real money and re-aligning a network mid-year means the two halves of the record were taken differently. That is a question the verifier will ask about the summer specifically."
+      "fb": "Catching an early dry spell is worth real money and re-aligning a network mid-year means the two halves of the record were taken differently. That is a question the verifier will ask about the summer specifically.",
+      "_fb_ru": "Поймать раннюю засуху стоит настоящих денег, а переставить сеть посреди года — значит, что две половины записи сделаны по-разному. Об этом проверяющий спросит именно про лето."
      },
      {
       "id": "c",
       "share": 0.2,
       "next": "B1b",
       "text": "You install the network to the specification the estate's previous restoration used on the neighbouring lowland bog, since a specification a verifier has already accepted is safer than one still being argued about.",
-      "fb": "That specification was written for lowland raised bog and this site is blanket peat on a slope. The difference is that the provisional route commits to aligning with the standard once it is chosen, while you have adopted a finished answer from somewhere else and will not be checking it again."
+      "fb": "That specification was written for lowland raised bog and this site is blanket peat on a slope. The difference is that the provisional route commits to aligning with the standard once it is chosen, while you have adopted a finished answer from somewhere else and will not be checking it again.",
+      "_fb_ru": "Та спецификация писалась для низинного верхового болота, а здесь покровный торф на склоне. Разница в том, что временный маршрут обязуется сойтись со стандартом, когда его выберут, а ты взял готовый ответ со стороны и перепроверять его не собираешься."
      }
     ]
    },
@@ -3019,19 +3033,22 @@
         "id": "a",
         "share": 1,
         "text": "You pay for relief shepherding for the four weeks and put the keeper on daily manual readings.",
-        "fb": "Manual readings are less precise and they exist, which is the whole difference. Buying the shepherding is what makes the ask possible rather than a favour he will remember."
+        "fb": "Manual readings are less precise and they exist, which is the whole difference. Buying the shepherding is what makes the ask possible rather than a favour he will remember.",
+        "_fb_ru": "Ручные замеры менее точны — и они существуют, в этом вся разница. Оплатить пастуший труд — вот что превращает просьбу в возможную, а не в одолжение, которое он запомнит."
        },
        {
         "id": "b",
         "text": "You accept the gap and note it in the methodology. Two wells out of a full network is a small proportion.",
         "share": 0.2,
-        "fb": "It is a small proportion of the wells and the whole of the dry spell. A verifier reading this will ask precisely about the weeks you cannot show."
+        "fb": "It is a small proportion of the wells and the whole of the dry spell. A verifier reading this will ask precisely about the weeks you cannot show.",
+        "_fb_ru": "Это малая доля скважин и вся засуха целиком. Проверяющий, читая это, спросит ровно про те недели, которые ты не можешь показать."
        },
        {
         "id": "c",
         "text": "You interpolate the missing weeks from the neighbouring wells once the loggers are back, and document the method.",
         "share": 0.4,
-        "fb": "Defensible arithmetic on a normal question and a weak answer on this one: you would be modelling the extreme from the ordinary, which is backwards."
+        "fb": "Defensible arithmetic on a normal question and a weak answer on this one: you would be modelling the extreme from the ordinary, which is backwards.",
+        "_fb_ru": "Защитимая арифметика для обычного вопроса и слабый ответ для этого: ты будешь моделировать крайность по обыденности, а это задом наперёд."
        }
       ]
      },
@@ -3042,19 +3059,22 @@
         "id": "a",
         "share": 1,
         "text": "You re-probe the points carrying most weight in the estimate first, since the estimate moves with the deep peat, and finish the margins after the summer.",
-        "fb": "Not every point moves the number by the same amount, and the ones that do are a minority. Ordering the re-probing by influence is what makes two jobs fit into one summer."
+        "fb": "Not every point moves the number by the same amount, and the ones that do are a minority. Ordering the re-probing by influence is what makes two jobs fit into one summer.",
+        "_fb_ru": "Не каждая точка двигает число одинаково, и те, что двигают, — меньшинство. Отсортировать перепромер по влиянию — вот что вмещает две работы в одно лето."
        },
        {
         "id": "b",
         "share": 0.4,
         "text": "You bring in a second team to re-probe everything at once, on the view that a partially compliant network is a network the verifier can reject entirely.",
-        "fb": "Rejection risk is real and a second team walking the same ground as the readings crew is how a dry-spell record acquires disturbance artefacts."
+        "fb": "Rejection risk is real and a second team walking the same ground as the readings crew is how a dry-spell record acquires disturbance artefacts.",
+        "_fb_ru": "Риск отказа настоящий, а вторая бригада, ходящая по той же земле, что и команда замеров, — это и есть способ получить артефакты нарушения в записи по засухе."
        },
        {
         "id": "c",
         "share": 0,
         "text": "You record the depths you have as compliant, since the difference falls inside what the tolerance was probably meant to exclude.",
-        "fb": "You have decided what a tolerance was probably meant to exclude, on your own project, about your own data."
+        "fb": "You have decided what a tolerance was probably meant to exclude, on your own project, about your own data.",
+        "_fb_ru": "Ты сам решил, что допуск, вероятно, имел в виду исключить, — на своём проекте, по своим данным."
        }
       ]
      }
@@ -3081,25 +3101,29 @@
       "id": "a",
       "share": 1,
       "text": "You take the causeway and put the extra cost to the board as the price of the tenants' agreement rather than as an engineering premium.",
-      "fb": "Naming that extra third as relationship cost rather than construction cost is what lets the board judge it correctly. Full blocking would have saved the money and started a thirty-year scheme by cutting five families off from their own hill."
+      "fb": "Naming that extra third as relationship cost rather than construction cost is what lets the board judge it correctly. Full blocking would have saved the money and started a thirty-year scheme by cutting five families off from their own hill.",
+      "_fb_ru": "Назвать эту лишнюю треть стоимостью отношений, а не стройки, — вот что позволяет совету оценить её верно. Сплошная перекрышка сэкономила бы деньги и начала бы тридцатилетнюю схему с того, что отрезала пять семей от их собственного холма."
      },
      {
       "id": "b",
       "share": 0.6,
       "text": "You take full blocking and offer to fund a new track around the edge of the bog on higher ground.",
-      "fb": "A perimeter track is a real answer and it is a second consent, a second construction season and a longer journey every day for thirty years."
+      "fb": "A perimeter track is a real answer and it is a second consent, a second construction season and a longer journey every day for thirty years.",
+      "_fb_ru": "Дорога по периметру — настоящий ответ, и это второе согласование, второй строительный сезон и более длинный путь каждый день на тридцать лет вперёд."
      },
      {
       "id": "c",
       "share": 0.2,
       "text": "You take full blocking, on the view that the hydrological outcome is identical and the estate is not obliged to fund a preference.",
-      "fb": "The outcome is identical to the bog and not to the people who cross it, and their agreement is a project input you have already spent months buying."
+      "fb": "The outcome is identical to the bog and not to the people who cross it, and their agreement is a project input you have already spent months buying.",
+      "_fb_ru": "Для болота результат тот же, а для тех, кто через него ходит, — нет, и их согласие ты покупал месяцами: это вход проекта."
      },
      {
       "id": "d",
       "text": "You put both designs to the tenants and let them choose, including the cost difference.",
       "share": 0.4,
-      "fb": "Handing them the choice is generous and it hands them a cost decision that belongs to the estate. They will choose the one that suits them and you will have agreed to it by default."
+      "fb": "Handing them the choice is generous and it hands them a cost decision that belongs to the estate. They will choose the one that suits them and you will have agreed to it by default.",
+      "_fb_ru": "Отдать им выбор щедро — и заодно отдать им решение о затратах, которое принадлежит поместью. Они выберут то, что удобно им, а ты согласишься с этим по умолчанию."
      }
     ]
    },
@@ -3124,25 +3148,29 @@
       "id": "a",
       "text": "You ask the four who signed what they think would move him, and let one of them approach him first.",
       "share": 1,
-      "fb": "The four know things about him that you never will, and an approach from a neighbour is not the same conversation as an approach from the estate. It also tests whether the four are actually with you."
+      "fb": "The four know things about him that you never will, and an approach from a neighbour is not the same conversation as an approach from the estate. It also tests whether the four are actually with you.",
+      "_fb_ru": "Четверо знают о нём то, чего ты не узнаешь никогда, и подход соседа — не тот же разговор, что подход поместья. Заодно проверяется, действительно ли эти четверо с тобой."
      },
      {
       "id": "b",
       "text": "You raise the offer to him alone until it is accepted, and keep the figure confidential.",
       "share": 0,
-      "fb": "The figure will not stay confidential in a glen with five farms, and the four who signed first will have learned exactly what signing early is worth."
+      "fb": "The figure will not stay confidential in a glen with five farms, and the four who signed first will have learned exactly what signing early is worth.",
+      "_fb_ru": "Сумма не останется конфиденциальной в долине с пятью хозяйствами, а те четверо, кто подписал первым, узнают, чего именно стоит ранняя подпись."
      },
      {
       "id": "c",
       "text": "You redesign the scheme around his block, accepting a smaller credited area and a weaker hydrological case.",
       "share": 0.4,
-      "fb": "A real fallback and an expensive one: you have made one holdout the designer of the project, and the next negotiation starts from that fact."
+      "fb": "A real fallback and an expensive one: you have made one holdout the designer of the project, and the next negotiation starts from that fact.",
+      "_fb_ru": "Настоящий запасной вариант и дорогой: ты сделал одного отказника проектировщиком проекта, и следующие переговоры начнутся с этого факта."
      },
      {
       "id": "d",
       "text": "You pause the negotiation and go back once the baseline year is complete, since the deadline for works is still two years away.",
       "share": 0.6,
-      "fb": "Time genuinely helps here and it is not free: every month he stays outside, the four inside wonder what he is holding out for."
+      "fb": "Time genuinely helps here and it is not free: every month he stays outside, the four inside wonder what he is holding out for.",
+      "_fb_ru": "Время здесь действительно помогает, и оно не бесплатно: каждый месяц, что он стоит снаружи, четверо внутри думают, ради чего он держится."
      }
     ]
    },
@@ -3169,21 +3197,24 @@
       "text": "You answer on the science: a year earlier means blocking the drains before the baseline year closes, which makes the units unverifiable and worth nothing to either party.",
       "share": 1,
       "next": "B2a",
-      "fb": "The offer is generous and it asks you to end the measurement three months early, which leaves the baseline without the autumn it needs to close. Explaining why their own units would fail verification is the version of no that keeps the contract."
+      "fb": "The offer is generous and it asks you to end the measurement three months early, which leaves the baseline without the autumn it needs to close. Explaining why their own units would fail verification is the version of no that keeps the contract.",
+      "_fb_ru": "Предложение щедрое, и оно просит закончить замеры на три месяца раньше, что оставляет базовую линию без осени, которая нужна ей, чтобы закрыться. Объяснить, почему их же единицы не пройдут проверку, — та версия «нет», которая сохраняет контракт."
      },
      {
       "id": "b",
       "text": "You answer on the commercial terms: you would need the premium plus the cost of a shortened, weaker baseline priced in, and put a number on it.",
       "share": 0.6,
       "next": "B2b",
-      "fb": "Treating it as a price question keeps the conversation open and concedes that the baseline is negotiable, which it is not. You may get a number you cannot deliver against."
+      "fb": "Treating it as a price question keeps the conversation open and concedes that the baseline is negotiable, which it is not. You may get a number you cannot deliver against.",
+      "_fb_ru": "Разговор о цене держит дверь открытой и заодно признаёт, что базовая линия обсуждаема, — а она не обсуждаема. Можно получить число, под которое нечего поставить."
      },
      {
       "id": "c",
       "text": "You accept in principle and work out afterwards how much of the baseline year can be salvaged. A buyer at this size does not come back a second time to be told no.",
       "share": 0.2,
       "next": "B2b",
-      "fb": "You have agreed to a date before knowing whether the thing you would deliver on it exists."
+      "fb": "You have agreed to a date before knowing whether the thing you would deliver on it exists.",
+      "_fb_ru": "Ты согласился на дату, не зная, существует ли то, что ты к ней предъявишь."
      }
     ]
    },
@@ -3210,19 +3241,22 @@
         "id": "a",
         "text": "You re-scope the whole project on the measured figure and take the smaller number to the board with the reason it is smaller.",
         "share": 1,
-        "fb": "You measured your own bog precisely so that you would not have to use somebody else's. Using it now, including when it disappoints, is the only reason the measurement had value."
+        "fb": "You measured your own bog precisely so that you would not have to use somebody else's. Using it now, including when it disappoints, is the only reason the measurement had value.",
+        "_fb_ru": "Ты точно измерил своё болото ровно затем, чтобы не пользоваться чужим. Пользоваться своим и тогда, когда оно разочаровывает, — единственная причина, по которой замер вообще чего-то стоил."
        },
        {
         "id": "b",
         "text": "You present both figures and let the board decide which to plan against.",
         "share": 0.2,
-        "fb": "One of the two is a measurement of this land and the other is a measurement of different land. That is not a choice, and offering it as one moves your judgement onto people with less information."
+        "fb": "One of the two is a measurement of this land and the other is a measurement of different land. That is not a choice, and offering it as one moves your judgement onto people with less information.",
+        "_fb_ru": "Одно из двух — измерение этой земли, другое — измерение другой земли. Это не выбор, а предлагая его как выбор, ты перекладываешь своё суждение на людей, знающих меньше."
        },
        {
         "id": "c",
         "text": "You commission a review of whether the measurement under-reads on shallow upland peat before re-scoping.",
         "share": 0.4,
-        "fb": "A fair question that you are asking only because the answer was unwelcome. Had the number come out high, the review would not have been commissioned."
+        "fb": "A fair question that you are asking only because the answer was unwelcome. Had the number come out high, the review would not have been commissioned.",
+        "_fb_ru": "Справедливый вопрос, который ты задаёшь только потому, что ответ оказался неудобным. Выйди число высоким — никакой пересмотр бы не заказывали."
        }
       ]
      },
@@ -3233,19 +3267,22 @@
         "id": "a",
         "text": "You put the two mismatches, different peat and a superseded standard, to their team and ask for a precedent that matches on both.",
         "share": 1,
-        "fb": "Three precedents that match on neither dimension are not three precedents. Asking for one that matches puts the burden where it belongs and does it without calling anybody dishonest."
+        "fb": "Three precedents that match on neither dimension are not three precedents. Asking for one that matches puts the burden where it belongs and does it without calling anybody dishonest.",
+        "_fb_ru": "Три прецедента, не совпадающие ни по одному измерению, — это не три прецедента. Попросить тот, который совпадает, — значит вернуть бремя туда, где ему место, и сделать это, никого не назвав нечестным."
        },
        {
         "id": "b",
         "text": "You take the assessment to your own verifier and ask whether they would accept it.",
         "share": 0.6,
-        "fb": "The verifier's answer is the one that counts and you have skipped a step: you are asking them to referee an argument you have not yet made to the other side."
+        "fb": "The verifier's answer is the one that counts and you have skipped a step: you are asking them to referee an argument you have not yet made to the other side.",
+        "_fb_ru": "Считается ответ проверяющего, а ты пропустил шаг: просишь их рассудить спор, который другой стороне ещё не изложил."
        },
        {
         "id": "c",
         "text": "You accept the assessment, since their technical team has more carbon-market experience than yours.",
         "share": 0,
-        "fb": "Their technical team is also paid by the party who wants the earlier date, and the citations they chose are the evidence of that."
+        "fb": "Their technical team is also paid by the party who wants the earlier date, and the citations they chose are the evidence of that.",
+        "_fb_ru": "Их технической команде платит та же сторона, которой нужна ранняя дата, и выбранные ими ссылки — доказательство этого."
        }
       ]
      }
@@ -3272,19 +3309,22 @@
       "id": "a",
       "text": "You propose a floor plus a share: a fixed minimum the families can farm against, with upside if prices hold, because they cannot carry a price they do not set.",
       "share": 1,
-      "fb": "The board's fear is prices falling and the families' fear is income they cannot plan against. A floor with a share answers both, and neither of them had to lose the argument."
+      "fb": "The board's fear is prices falling and the families' fear is income they cannot plan against. A floor with a share answers both, and neither of them had to lose the argument.",
+      "_fb_ru": "Страх совета — падение цен, страх семей — доход, который нельзя планировать. Нижняя граница с долей отвечает обоим, и никому не пришлось проиграть спор."
      },
      {
       "id": "b",
       "text": "You accept revenue share. The board is carrying the capital and the families gain from the upside.",
       "share": 0.2,
-      "fb": "You have moved the price risk onto five farms with no way to hedge it, in exchange for an upside they cannot borrow against."
+      "fb": "You have moved the price risk onto five farms with no way to hedge it, in exchange for an upside they cannot borrow against.",
+      "_fb_ru": "Ты переложил ценовой риск на пять хозяйств, у которых нет способа его захеджировать, в обмен на прибыль, под которую они не смогут занять."
      },
      {
       "id": "c",
       "text": "You hold out for fixed payments, since that is what the families were offered and the estate should not renegotiate after agreement.",
       "share": 0.6,
-      "fb": "Keeping your word matters and here it forecloses a structure that could have paid them more. The board asked a legitimate question and got a refusal instead of an alternative."
+      "fb": "Keeping your word matters and here it forecloses a structure that could have paid them more. The board asked a legitimate question and got a refusal instead of an alternative.",
+      "_fb_ru": "Держать слово важно, и здесь это закрывает структуру, которая могла бы принести им больше. Совет задал законный вопрос и получил отказ вместо альтернативы."
      }
     ]
    },
@@ -3309,25 +3349,29 @@
       "id": "a",
       "text": "You prepare the deed now and get the families' signatures before the machines arrive, leaving the board's to follow.",
       "share": 1,
-      "fb": "Agreement given in a quiet month is a different thing from agreement asked for while diggers are on the hill. You take the half that decays and leave the half that does not: a board changes its mind less than households watching their grazing disappear."
+      "fb": "Agreement given in a quiet month is a different thing from agreement asked for while diggers are on the hill. You take the half that decays and leave the half that does not: a board changes its mind less than households watching their grazing disappear.",
+      "_fb_ru": "Согласие, данное в тихий месяц, — совсем не то же, что согласие, которое просят, когда экскаваторы уже на холме. Ты берёшь ту половину, которая портится, и оставляешь ту, которая нет: совет меняет мнение реже, чем семьи, глядящие, как исчезает их выпас."
      },
      {
       "id": "b",
       "text": "You prepare the deed now and hold it unsigned until the board can sign at the same sitting.",
       "share": 0.6,
-      "fb": "Tidy, and it keeps both signatures for a month in which only one of them is at risk. The paperwork is right and the sequencing is backwards."
+      "fb": "Tidy, and it keeps both signatures for a month in which only one of them is at risk. The paperwork is right and the sequencing is backwards.",
+      "_fb_ru": "Аккуратно — и обе подписи откладываются на месяц, в котором под риском только одна из них. Бумага верная, последовательность обратная."
      },
      {
       "id": "c",
       "text": "You put the week into the works and prepare the deed after the board sits.",
       "share": 0.4,
-      "fb": "The works are what the week was for, and you will be asking for signatures with the machines already working. Whatever was agreed will not be agreed on the same terms by then."
+      "fb": "The works are what the week was for, and you will be asking for signatures with the machines already working. Whatever was agreed will not be agreed on the same terms by then.",
+      "_fb_ru": "Работы и были смыслом этой недели, а подписи ты будешь просить, когда машины уже работают. Что бы ни было согласовано, к тому моменту это будет согласовано на других условиях."
      },
      {
       "id": "d",
       "text": "You ask the families to confirm the terms by email now and prepare the deed later.",
       "share": 0.2,
-      "fb": "An email confirms that they agreed; it does not bind anyone, and it is the form of asking that tells people the agreement was never serious."
+      "fb": "An email confirms that they agreed; it does not bind anyone, and it is the form of asking that tells people the agreement was never serious.",
+      "_fb_ru": "Письмо подтверждает, что они согласились; оно никого не связывает, и сама эта форма просьбы сообщает людям, что соглашение всерьёз не воспринимали."
      }
     ]
    },
@@ -3354,21 +3398,24 @@
       "text": "You bring the archaeologist and the tenants on site, and redesign that compartment around the structure with both of them present.",
       "share": 1,
       "next": "B3a",
-      "fb": "The find belongs to the glen before it belongs to the schedule, and designing around it in the open turns a stoppage into the one part of this project the families will show their children."
+      "fb": "The find belongs to the glen before it belongs to the schedule, and designing around it in the open turns a stoppage into the one part of this project the families will show their children.",
+      "_fb_ru": "Находка принадлежит долине раньше, чем графику, и обойти её открыто — значит превратить остановку в ту единственную часть проекта, которую семьи покажут своим детям."
      },
      {
       "id": "b",
       "text": "You apply for the consent to record and remove, which the law allows once the structure is documented, and keep the compartment in the scheme.",
       "share": 0.6,
       "next": "B3b",
-      "fb": "Lawful, funded and quick, and it treats a shieling as an obstacle in a compartment. That is a defensible position you will be defending for the rest of the project."
+      "fb": "Lawful, funded and quick, and it treats a shieling as an obstacle in a compartment. That is a defensible position you will be defending for the rest of the project.",
+      "_fb_ru": "Законно, оплачено и быстро — и относится к пастушьей хижине как к препятствию в квадрате. Это защитимая позиция, которую ты будешь защищать до конца проекта."
      },
      {
       "id": "c",
       "text": "You drop the compartment from the scheme entirely and re-cut the boundary around it.",
       "share": 0.4,
       "next": "B3b",
-      "fb": "Simple and it costs credited area you negotiated for months to assemble, for a structure that could have been designed around rather than excluded."
+      "fb": "Simple and it costs credited area you negotiated for months to assemble, for a structure that could have been designed around rather than excluded.",
+      "_fb_ru": "Просто, и стоит зачитываемой площади, которую ты месяцами собирал по кускам, ради постройки, которую можно было обойти, а не исключать."
      }
     ]
    },
@@ -3395,19 +3442,22 @@
         "id": "a",
         "text": "You disclose the change to the verifier and the buyer before verification starts, since a deviation they find themselves is a different document.",
         "share": 1,
-        "fb": "A documented deviation disclosed early is a variation; the same deviation found during verification is a question about everything else you did not mention."
+        "fb": "A documented deviation disclosed early is a variation; the same deviation found during verification is a question about everything else you did not mention.",
+        "_fb_ru": "Задокументированное отклонение, раскрытое рано, — это изменение к проекту; то же отклонение, найденное при проверке, — вопрос обо всём остальном, о чём ты не упомянул."
        },
        {
         "id": "b",
         "text": "You disclose it to the verifier, since they are the party who signs, and tell the buyer once the units are issued.",
         "share": 0.4,
-        "fb": "The verifier will accept it and the buyer will learn that you choose who to tell and when. That is the fact they will carry into the next contract."
+        "fb": "The verifier will accept it and the buyer will learn that you choose who to tell and when. That is the fact they will carry into the next contract.",
+        "_fb_ru": "Проверяющий это примет, а покупатель узнает, что ты сам выбираешь, кому и когда сказать. Именно этот факт он унесёт в следующий контракт."
        },
        {
         "id": "c",
         "text": "You treat the compartment as within tolerance of the consented design. The hydrological outcome is unchanged.",
         "share": 0,
-        "fb": "You have made the tolerance judgement yourself, on your own project, on the one point where the drawing and the ground disagree."
+        "fb": "You have made the tolerance judgement yourself, on your own project, on the one point where the drawing and the ground disagree.",
+        "_fb_ru": "Ты сам вынес суждение о допуске — на своём проекте, по той единственной точке, где чертёж и земля расходятся."
        }
       ]
      },
@@ -3418,19 +3468,22 @@
         "id": "a",
         "text": "You go to the two families first, before answering the paper, and ask what they would want said.",
         "share": 1,
-        "fb": "Whatever you say publicly, they will be asked about it in the same shop tomorrow. Letting them shape the answer is the only version where the second article is better than the first."
+        "fb": "Whatever you say publicly, they will be asked about it in the same shop tomorrow. Letting them shape the answer is the only version where the second article is better than the first.",
+        "_fb_ru": "Что бы ты ни сказал публично, завтра их спросят об этом в той же лавке. Дать им сформировать ответ — единственная версия, при которой вторая статья лучше первой."
        },
        {
         "id": "b",
         "text": "You issue a factual statement setting out the consent, the recording work and the archaeologist's involvement.",
         "share": 0.6,
-        "fb": "Accurate, complete and addressed to the wrong audience: the buyer will be satisfied and the glen will read it as the estate explaining itself to somebody else."
+        "fb": "Accurate, complete and addressed to the wrong audience: the buyer will be satisfied and the glen will read it as the estate explaining itself to somebody else.",
+        "_fb_ru": "Точно, полно и адресовано не той аудитории: покупатель будет удовлетворён, а долина прочтёт это как объяснения поместья перед кем-то другим."
        },
        {
         "id": "c",
         "text": "You brief the buyer directly and let the local story run its course.",
         "share": 0.2,
-        "fb": "You have protected the contract and left the people whose land this is to read about themselves. The buyer's next question will be whether the tenants are with you."
+        "fb": "You have protected the contract and left the people whose land this is to read about themselves. The buyer's next question will be whether the tenants are with you.",
+        "_fb_ru": "Ты защитил контракт и оставил людей, чья это земля, читать о себе. Следующий вопрос покупателя будет о том, с тобой ли арендаторы."
        }
       ]
      }
