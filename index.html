@@ -4297,6 +4297,8 @@ const I18N = {
     'rk.rv.show': 'Show Analysis breakdown', 'rk.rv.none': 'No breakdown recorded for this game.',
     'rk.rv.trap': 'Trap', 'rk.rv.carried': 'Carried', 'rk.rv.answer': 'Answer',
     'rk.rv.journal': 'Research Journal', 'rk.rv.collection': 'collection', 'rk.rv.head': 'Analysis breakdown',
+    'rk.rv.head.cases': 'Cases breakdown', 'rk.rv.head.tacts': 'Training breakdown', 'rk.rv.tact': 'Training',
+    'rk.rv.yours': 'You answered', 'rk.rv.st.ok': 'correct', 'rk.rv.st.trap': 'trap hit', 'rk.rv.st.miss': 'missed',
     'sv.writtenReport': 'Written Report', 'sv.graphSelection': 'Graph Selection', 'sv.visualReport': 'Visual Report',
     'sv.nextGraph': 'Next: Graph Selection →', 'sv.nextVisual': 'Next: Visual Report →', 'sv.goToCases': 'Go to Cases →',
     'sv.nextCase': 'Next case', 'sv.submitResults': 'Submit & see results', 'sv.of': 'of',
@@ -4797,6 +4799,8 @@ const I18N = {
     'rk.rv.show': 'Показать разбор Анализа', 'rk.rv.none': 'Разбор по этой игре не записан.',
     'rk.rv.trap': 'Ловушка', 'rk.rv.carried': 'Унесено дальше', 'rk.rv.answer': 'Ответ',
     'rk.rv.journal': 'Журнал исследования', 'rk.rv.collection': 'сбор', 'rk.rv.head': 'Разбор Анализа',
+    'rk.rv.head.cases': 'Разбор Cases', 'rk.rv.head.tacts': 'Разбор Training', 'rk.rv.tact': 'Такт',
+    'rk.rv.yours': 'Твой ответ', 'rk.rv.st.ok': 'верно', 'rk.rv.st.trap': 'встал в ловушку', 'rk.rv.st.miss': 'мимо',
     'sv.writtenReport': 'Текстовый отчёт', 'sv.graphSelection': 'Выбор графика', 'sv.visualReport': 'Визуальный отчёт',
     'sv.nextGraph': 'Далее: выбор графика →', 'sv.nextVisual': 'Далее: визуальный отчёт →', 'sv.goToCases': 'К кейсам →',
     'sv.nextCase': 'Следующий кейс', 'sv.submitResults': 'Завершить и увидеть результат', 'sv.of': 'из',
@@ -7139,9 +7143,7 @@ function rkReviewHTML() {
   if (!solve.rkReview.length) return '<div class="rk-note">'+t('rk.rv.none')+'</div>';
   const rows = solve.rkReview.map(r => {
     const st = solve.rkGraded['a:' + r.key] || '';
-    const tag = st === 'correct' ? '<span class="rk-rv-ok"><b>correct</b></span>'
-      : st === 'naive' ? '<span class="rk-rv-trap"><b>trap hit</b></span>'
-      : st ? '<span class="rk-rv-miss"><b>missed</b></span>' : '';
+    const tag = rkStatusTag(st);
     const trap = (r.trap === null || r.trap === undefined) ? '' :
       `<div class="rk-rv-line"><span>${t('rk.rv.trap')}</span> <b>${esc(String(r.trap))}</b>${r.lesson ? ' ' + rkInline(r.lesson) : ''}</div>`;
     // Путь ошибки сбора: не «неверно», а где именно кандидат свернул.
@@ -7158,7 +7160,7 @@ function rkReviewHTML() {
       : (ct === null || ct === undefined) ? '' : chainOne(ct, cl);
     return `<div class="rk-rv-item">
         <div class="rk-rv-head">Q${esc(String(r.q))} <span class="rk-rv-key">${esc(String(r.key))}</span> ${tag}</div>
-        <div class="rk-rv-line"><span>Answer</span> <b>${esc(String(r.answer))}</b></div>
+        <div class="rk-rv-line"><span>${t('rk.rv.answer')}</span> <b>${esc(String(r.answer))}</b></div>
         ${trap}
         ${chain}
       </div>`;
@@ -7167,12 +7169,74 @@ function rkReviewHTML() {
   // Сводка сбора: сколько рабочих величин кандидат утащил в журнал и сколько
   // взял шума. Пропущенные и лишние печатаются явкой, а не одним процентом.
   const jhtml = !js ? '' : `<div class="rk-rv-item">
-      <div class="rk-rv-head">Research Journal <span class="rk-rv-key">collection</span></div>
+      <div class="rk-rv-head">${t('rk.rv.journal')} <span class="rk-rv-key">${t('rk.rv.collection')}</span></div>
       <div class="rk-rv-line"><span>Working</span> <b>${js.neededTaken}/${js.neededTotal}</b> figures that actually feed the analysis</div>
       <div class="rk-rv-line"><span>Noise</span> <b>${js.noiseTaken}</b> collected${js.noise && js.noise.length ? ': ' + esc(js.noise.join(', ')) : ''}</div>
       ${js.missed && js.missed.length ? `<div class="rk-rv-line"><span>Missed</span> ${esc(js.missed.join(', '))}</div>` : ''}
     </div>`;
-  return `<div class="rk-rv"><div class="rk-rv-title">Analysis breakdown</div>${jhtml}${rows}</div>`;
+  return `<div class="rk-rv"><div class="rk-rv-title">${t('rk.rv.head')}</div>${jhtml}${rows}</div>`;
+}
+
+/* ── ОБЩИЙ ТЕГ СТАТУСА ──────────────────────────────────────────────────────
+   Один вид у всех трёх секций разбора. Слова переведены: ключи rk.rv.st.*
+   лежали в обоих словарях с круга 92, а разбор печатал английские литералы
+   мимо них — кандидат на русском экране читал «trap hit». */
+function rkStatusTag(st) {
+  if (st === 'correct') return `<span class="rk-rv-ok"><b>${t('rk.rv.st.ok')}</b></span>`;
+  if (st === 'naive')   return `<span class="rk-rv-trap"><b>${t('rk.rv.st.trap')}</b></span>`;
+  if (st && st !== 'ungraded') return `<span class="rk-rv-miss"><b>${t('rk.rv.st.miss')}</b></span>`;
+  return '';
+}
+
+/* ── РАЗБОР CASES И TRAINING ────────────────────────────────────────────────
+   Круг 180. До этого круга шесть Cases и тридцать два training-такта кандидат
+   разбирал вслепую: экран результата печатал «Cases 4/6» и ни строки объяснения,
+   а Training не считался вообще. 369 объяснений (naive_reason) лежали в банке,
+   ручка отдавала их на оценку, rkMeta их хранил — и никто их не печатал.
+
+   Сервер тут НЕ НУЖЕН: всё уже на клиенте с момента оценки поля.
+     solve.rkGraded[id]        статус
+     solve.rkMeta[id].correct  верный ответ
+     solve.rkMeta[id].naiveReason  почему наивный ход неверен (на языке кандидата)
+     solve.rkVals[id]          что кандидат ввёл
+   Поэтому правка живёт в одном файле и не трогает ручку.
+
+   Печатаем ТОЛЬКО на экране результата. По ходу игры вердикт молчит — договор
+   строки 6755 и круга 178 (`_naive_reason_ru` в RK_SERVER_KEYS) не нарушается. */
+function rkSectionRows(items) {
+  return items.map(x => {
+    const st = solve.rkGraded[x.id] || '';
+    if (!st) return '';
+    const m = (solve.rkMeta && solve.rkMeta[x.id]) || {};
+    const дал = solve.rkVals[x.id];
+    const свой = (дал === null || дал === undefined || String(дал).trim() === '')
+      ? '' : `<div class="rk-rv-line"><span>${t('rk.rv.yours')}</span> <b>${esc(String(дал))}</b></div>`;
+    const верно = (m.correct === null || m.correct === undefined) ? '' :
+      `<div class="rk-rv-line"><span>${t('rk.rv.answer')}</span> <b>${esc(String(m.correct))}</b></div>`;
+    // Причина печатается только там, где сервер её прислал, — то есть только
+    // когда кандидат встал именно в наивную ловушку. На «просто неверно»
+    // объяснения в банке нет, и выдумывать его нечем.
+    const почему = m.naiveReason ? `<div class="rk-rv-line rk-rv-chain"><span>${t('rk.rv.trap')}</span> ${rkInline(String(m.naiveReason))}</div>` : '';
+    return `<div class="rk-rv-item">
+        <div class="rk-rv-head">${esc(x.title)} <span class="rk-rv-key">${esc(x.id)}</span> ${rkStatusTag(st)}</div>
+        ${свой}${верно}${почему}
+      </div>`;
+  }).join('');
+}
+
+function rkCasesReviewHTML() {
+  const g = solve.game || {};
+  const кейсы = (g.cases || []).map((c, i) => ({ id: 'c:' + c.c, title: 'Case ' + (i + 1) + (c.kind ? ' · ' + c.kind : '') }));
+  // Такты висят под своими родителями и живут в rkTacts, а не в game: до сдачи
+  // родителя сервер их не присылал. Порядок — порядок родителей на экране.
+  const такты = [];
+  Object.keys(solve.rkTacts || {}).forEach(род => {
+    (solve.rkTacts[род] || []).forEach(tt => такты.push({ id: tt.id, title: t('rk.rv.tact') + ' · ' + род }));
+  });
+  const rc = rkSectionRows(кейсы), rt = rkSectionRows(такты);
+  if (!rc && !rt) return '';
+  return (rc ? `<div class="rk-rv"><div class="rk-rv-title">${t('rk.rv.head.cases')}</div>${rc}</div>` : '')
+       + (rt ? `<div class="rk-rv"><div class="rk-rv-title">${t('rk.rv.head.tacts')}</div>${rt}</div>` : '');
 }
 
 function rkResult(inner, foot) {
@@ -7203,6 +7267,7 @@ function rkResult(inner, foot) {
       <div class="rk-res-table">${rows}</div>
       ${naive ? '<div class="rk-note rk-amber">Naïve traps are the core Redrock test - each one is a specific mis-step the real assessment penalises. Review the correct figures before the next game.</div>' : ''}
       ${rkReviewHTML()}
+      ${rkCasesReviewHTML()}
       <div class="gi-actions" style="margin-top:22px;">
         <button class="gi-start" onclick="startRedrock()">Next game &rarr;</button>
         <button class="gi-back" style="margin-top:10px;" onclick="showScreen('mode')">Back to menu</button>
