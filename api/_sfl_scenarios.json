@@ -63,11 +63,11 @@
     "feedback": {
      "top": "Your order puts a working hypothesis first. That is what keeps measurement finite: you look for the water you expect to find, and you notice fast when you are wrong.",
      "mid": "Your order is workable but spends early time on inputs before the team has a direction to test them against.",
-     "low": "Your order gathers input and alignment before establishing an analytical direction. Without an initial hypothesis, measurement expands to fill the whole eighteen months."
-    },
-    "_top_ru": "Твой порядок ставит рабочую гипотезу первой. Именно это удерживает замеры в конечных границах: ты ищешь ту воду, которую ожидаешь найти, и быстро замечаешь, когда ошибся.",
-    "_mid_ru": "Порядок рабочий, но раннее время уходит на сбор входных данных до того, как у команды появилось направление, против которого их проверять.",
-    "_low_ru": "Твой порядок собирает данные и согласия до того, как задано аналитическое направление. Без начальной гипотезы замеры разрастаются на все восемнадцать месяцев."
+     "low": "Your order gathers input and alignment before establishing an analytical direction. Without an initial hypothesis, measurement expands to fill the whole eighteen months.",
+     "_top_ru": "Твой порядок ставит рабочую гипотезу первой. Именно это удерживает замеры в конечных границах: ты ищешь ту воду, которую ожидаешь найти, и быстро замечаешь, когда ошибся.",
+     "_mid_ru": "Порядок рабочий, но раннее время уходит на сбор входных данных до того, как у команды появилось направление, против которого их проверять.",
+     "_low_ru": "Твой порядок собирает данные и согласия до того, как задано аналитическое направление. Без начальной гипотезы замеры разрастаются на все восемнадцать месяцев."
+    }
    },
    {
     "n": 2,
@@ -797,7 +797,10 @@
     "feedback": {
      "top": "Your order starts the two clocks you do not control — the approval question and the eight-month consultation — before the work you can compress. That is sequencing by lead time rather than by logic.",
      "mid": "Your order is defensible but spends early weeks on work you could have done later, while the eight-month consultation period sits untouched.",
-     "low": "Your order does the analysis first and the fixed-duration items last. The archive and the supply question will still be there in month six; the eight months will not."
+     "low": "Your order does the analysis first and the fixed-duration items last. The archive and the supply question will still be there in month six; the eight months will not.",
+     "_top_ru": "Твой порядок запускает двое часов, которыми ты не управляешь, — вопрос о согласовании и восьмимесячные консультации — раньше той работы, которую можно сжать. Это последовательность по срокам поставки, а не по логике анализа.",
+     "_mid_ru": "Порядок защитим, но ранние недели уходят на работу, которую можно было сделать позже, пока восьмимесячные консультации стоят нетронутыми.",
+     "_low_ru": "Твой порядок делает анализ первым, а вещи с жёсткой длительностью — последними. Архив и вопрос по поставке никуда не денутся к шестому месяцу; восемь месяцев — денутся."
     }
    },
    {
@@ -821,25 +824,29 @@
       "id": "a",
       "text": "You put the three of them in one room and leave with a written note of who decides what, signed the same day.",
       "share": 1,
-      "fb": "One room and one signed note cost you an afternoon and removed the failure mode that kills projects like this in month twenty. Decision rights are cheapest to fix while nothing is yet at stake."
+      "fb": "One room and one signed note cost you an afternoon and removed the failure mode that kills projects like this in month twenty. Decision rights are cheapest to fix while nothing is yet at stake.",
+      "_fb_ru": "Одна встреча и одна подписанная записка стоили тебе половины дня и убрали тот отказ, который убивает такие проекты на двадцатом месяце. Права решения дешевле всего чинить, пока на кону ещё ничего нет."
      },
      {
       "id": "b",
       "text": "You work with the managing director, since the utility owns the asset, and keep the other two informed.",
       "share": 0.2,
-      "fb": "You picked the most convenient of three claimants. The other two will discover their authority at the moment you need the money, and they will be right."
+      "fb": "You picked the most convenient of three claimants. The other two will discover their authority at the moment you need the money, and they will be right.",
+      "_fb_ru": "Ты выбрал самого удобного из трёх претендентов. Двое других обнаружат свои полномочия ровно в тот момент, когда тебе понадобятся деньги, — и будут правы."
      },
      {
       "id": "c",
       "text": "You send all three a memo setting out your reading of who decides what and ask for objections.",
       "share": 0.6,
-      "fb": "A memo puts the question on the table without forcing an answer. Silence from a claimant is not agreement, and you will be reading it as one for the next two years."
+      "fb": "A memo puts the question on the table without forcing an answer. Silence from a claimant is not agreement, and you will be reading it as one for the next two years.",
+      "_fb_ru": "Записка кладёт вопрос на стол, не вынуждая ответа. Молчание претендента — не согласие, а ты будешь читать его как согласие ближайшие два года."
      },
      {
       "id": "d",
       "text": "You proceed with the analysis and settle the approval question once the options are clear.",
       "share": 0,
-      "fb": "Leaving decision rights until the options are ready means the first real decision of the project is also the first argument about who is entitled to make it."
+      "fb": "Leaving decision rights until the options are ready means the first real decision of the project is also the first argument about who is entitled to make it.",
+      "_fb_ru": "Оставить права решения до готовности вариантов — значит сделать первое настоящее решение проекта и первым спором о том, кто вправе его принимать."
      }
     ]
    },
@@ -864,25 +871,29 @@
       "id": "a",
       "text": "You reconcile the three renumbered substations against billing records before using any figure from before the reorganisation.",
       "share": 1,
-      "fb": "Nine per cent is either a real efficiency gain or three substations counted twice, and the plant you size depends on which. Reconciling first makes the whole twelve-year series usable rather than merely available."
+      "fb": "Nine per cent is either a real efficiency gain or three substations counted twice, and the plant you size depends on which. Reconciling first makes the whole twelve-year series usable rather than merely available.",
+      "_fb_ru": "Девять процентов — это либо настоящий рост эффективности, либо три подстанции, посчитанные дважды, и от этого зависит мощность, которую ты закладываешь. Свести противоречие первым — значит сделать весь двенадцатилетний ряд пригодным, а не просто доступным."
      },
      {
       "id": "b",
       "text": "You use only the last six years, which are clean, and take the view that a series you can defend line by line is worth more than a longer one you would have to explain every time it is questioned.",
       "share": 0.6,
-      "fb": "Six clean years beat twelve dirty ones. You have also thrown away the only period in the record containing a winter colder than anything in your remaining sample."
+      "fb": "Six clean years beat twelve dirty ones. You have also thrown away the only period in the record containing a winter colder than anything in your remaining sample.",
+      "_fb_ru": "Шесть чистых лет лучше двенадцати грязных. Заодно ты выбросил единственный отрезок записи, где была зима холоднее всего, что осталось в твоей выборке."
      },
      {
       "id": "c",
       "text": "You read the nine per cent as evidence that demand is easing and size the new plant accordingly.",
       "share": 0,
-      "fb": "You have sized a twenty-year asset on a number that a clerical renumbering would explain entirely. If it is an artefact, the flats are cold in February."
+      "fb": "You have sized a twenty-year asset on a number that a clerical renumbering would explain entirely. If it is an artefact, the flats are cold in February.",
+      "_fb_ru": "Ты задал мощность актива на двадцать лет по числу, которое целиком объясняется канцелярской перенумерацией. Если это артефакт — в феврале квартиры холодные."
      },
      {
       "id": "d",
       "text": "You ask the metering team to confirm the fall and carry on in parallel.",
       "share": 0.4,
-      "fb": "Asking is right and carrying on is right, but you did not say what you would do if the answer came back bad — so it will arrive too late to change anything."
+      "fb": "Asking is right and carrying on is right, but you did not say what you would do if the answer came back bad — so it will arrive too late to change anything.",
+      "_fb_ru": "Спросить — верно, и продолжать работу — верно, но ты не сказал, что сделаешь, если ответ придёт плохим. Значит он придёт слишком поздно, чтобы что-то изменить."
      }
     ]
    },
@@ -909,21 +920,24 @@
       "text": "You open the consultation now on the question of principle, that the tariff has to change, and bring the mix in as it firms up, since the eight months run whether you use them or not.",
       "share": 1,
       "next": "B1a",
-      "fb": "You started the eight-month clock with the part that is already true. The mix can arrive during the consultation; the eight months cannot be bought back at any price."
+      "fb": "You started the eight-month clock with the part that is already true. The mix can arrive during the consultation; the eight months cannot be bought back at any price.",
+      "_fb_ru": "Ты запустил восьмимесячные часы той частью, которая уже верна. Состав источников успеет прийти внутри консультаций; восемь месяцев не выкупить ни за какие деньги."
      },
      {
       "id": "b",
       "text": "You hold the consultation until the mix is decided, so the associations receive one clear proposal rather than a moving one they have to keep re-reading.",
       "share": 0.2,
       "next": "B1b",
-      "fb": "One clear proposal is worth a great deal, and you have spent months you do not have to avoid a conversation you could have opened with what you already knew."
+      "fb": "One clear proposal is worth a great deal, and you have spent months you do not have to avoid a conversation you could have opened with what you already knew.",
+      "_fb_ru": "Одно ясное предложение стоит многого, а ты потратил месяцы, которых у тебя нет, чтобы избежать разговора, который мог начать тем, что уже знал."
      },
      {
       "id": "c",
       "text": "You ask the city to seek a legal shortening of the consultation period, on the view that eight months of process against a two-year build is the constraint worth attacking first.",
       "share": 0,
       "next": "B1b",
-      "fb": "You spent political capital trying to move a fixed constraint instead of working inside it. The answer will arrive months from now and it will be no."
+      "fb": "You spent political capital trying to move a fixed constraint instead of working inside it. The answer will arrive months from now and it will be no.",
+      "_fb_ru": "Ты потратил политический капитал на попытку сдвинуть жёсткое ограничение вместо работы внутри него. Ответ придёт через месяцы, и это будет «нет»."
      }
     ]
    },
@@ -950,19 +964,22 @@
         "id": "a",
         "text": "You give the range, name what would put the answer at each end, and say when you will narrow it, since a number invented tonight is the one the room will hold you to in a year.",
         "share": 1,
-        "fb": "A named range with named drivers is an answer. Withholding it would have been heard as knowing the number and hiding it, which is the more expensive mistake here."
+        "fb": "A named range with named drivers is an answer. Withholding it would have been heard as knowing the number and hiding it, which is the more expensive mistake here.",
+        "_fb_ru": "Названный диапазон с названными драйверами — это ответ. Отказ его дать прозвучал бы как «знает число и прячет», а это ошибка дороже."
        },
        {
         "id": "b",
         "text": "You give the lower end. The cheaper mix is still available and a number that frightens the room tonight is one you spend the next year walking back.",
         "share": 0,
-        "fb": "Twelve per cent is now the number in the room. Every point above it will be read as a broken promise rather than as a modelling result."
+        "fb": "Twelve per cent is now the number in the room. Every point above it will be read as a broken promise rather than as a modelling result.",
+        "_fb_ru": "Двенадцать процентов теперь — то число, которое в зале. Каждый пункт сверху будет прочитан как нарушенное обещание, а не как результат модели."
        },
        {
         "id": "c",
         "text": "You say you cannot give a number until the mix is chosen, on the view that a figure quoted at a public meeting becomes the promise everything afterwards is measured against.",
         "share": 0.4,
-        "fb": "Technically correct and politically costly: you convened a public meeting and arrived at it with nothing you were willing to say."
+        "fb": "Technically correct and politically costly: you convened a public meeting and arrived at it with nothing you were willing to say.",
+        "_fb_ru": "Технически верно и политически дорого: ты созвал публичную встречу и пришёл на неё без единой фразы, которую готов произнести."
        }
       ]
      },
@@ -973,19 +990,22 @@
         "id": "a",
         "text": "You go to the associations with the shortfall stated and ask them to agree the compressed timetable in writing.",
         "share": 1,
-        "fb": "Asking them to own the compression is the only version of this that survives a challenge, because the people entitled to object have put their names to not objecting."
+        "fb": "Asking them to own the compression is the only version of this that survives a challenge, because the people entitled to object have put their names to not objecting.",
+        "_fb_ru": "Попросить их взять сжатие сроков на себя — единственная версия, которая переживёт оспаривание: те, кто вправе возразить, подписались под тем, что не возражают."
        },
        {
         "id": "b",
         "text": "You run the full standard process and accept that the permit deadline is missed by a month.",
         "share": 0.4,
-        "fb": "A month past the permit is not a schedule variance, it is a month with no lawful heat source. Someone else will discover that in November."
+        "fb": "A month past the permit is not a schedule variance, it is a month with no lawful heat source. Someone else will discover that in November.",
+        "_fb_ru": "Месяц после разрешения — это не отклонение от графика, это месяц без законного источника тепла. Кто-то другой обнаружит это в ноябре."
        },
        {
         "id": "c",
         "text": "You start the compressed process and deal with a challenge if one comes.",
         "share": 0.2,
-        "fb": "One association out of ninety can stop this, and you have handed each of them both a reason and a right to do it."
+        "fb": "One association out of ninety can stop this, and you have handed each of them both a reason and a right to do it.",
+        "_fb_ru": "Одно товарищество из девяноста может это остановить, а ты дал каждому из них и причину, и право это сделать."
        }
       ]
      }
@@ -1012,25 +1032,29 @@
       "id": "a",
       "text": "You take biomass for the first winters and design the site so the heat pump array can replace it later.",
       "share": 1,
-      "fb": "The operating premium buys the one thing that cannot be bought later, which is heat in the first winter. Designing for the swap keeps the cheaper answer alive instead of trading it away."
+      "fb": "The operating premium buys the one thing that cannot be bought later, which is heat in the first winter. Designing for the swap keeps the cheaper answer alive instead of trading it away.",
+      "_fb_ru": "Надбавка к эксплуатации покупает то единственное, чего потом не купишь, — тепло в первую зиму. Конструкция под замену оставляет дешёвый вариант живым, а не разменивает его."
      },
      {
       "id": "b",
       "text": "You take the heat pump array and ask the network operator to accelerate the connection.",
       "share": 0.2,
-      "fb": "Your plan now depends on another organisation beating its own guarantee, and their incentive to do that is nothing at all."
+      "fb": "Your plan now depends on another organisation beating its own guarantee, and their incentive to do that is nothing at all.",
+      "_fb_ru": "Твой план теперь зависит от того, что другая организация перевыполнит собственную гарантию, а стимула делать это у неё ровно никакого."
      },
      {
       "id": "c",
       "text": "You take biomass and close the question, so that the whole organisation stops re-litigating the supply decision and starts on the twenty-four months of work that actually have to happen.",
       "share": 0.4,
-      "fb": "The right first move, made irreversible for no reason. In ten years the operating premium is the largest single line in the budget and nobody can remember why."
+      "fb": "The right first move, made irreversible for no reason. In ten years the operating premium is the largest single line in the budget and nobody can remember why.",
+      "_fb_ru": "Верный первый ход, сделанный необратимым без всякой причины. Через десять лет надбавка к эксплуатации — самая крупная строка бюджета, и никто уже не помнит почему."
      },
      {
       "id": "d",
       "text": "You keep both options open until the network operator confirms.",
       "share": 0.6,
-      "fb": "Optionality is worth paying for up to a point, and past that point it is a way of not deciding. With fifteen months of build ahead of you, you are past it."
+      "fb": "Optionality is worth paying for up to a point, and past that point it is a way of not deciding. With fifteen months of build ahead of you, you are past it.",
+      "_fb_ru": "За свободу манёвра стоит платить до определённого предела, а дальше это способ не решать. С пятнадцатью месяцами стройки впереди ты этот предел прошёл."
      }
     ]
    },
@@ -1055,19 +1079,22 @@
       "id": "a",
       "text": "You test whether phasing works financially, and if it does, you arrange for it to arrive as their proposal rather than yours, because a concession they own is one they defend to the other seventy-nine.",
       "share": 1,
-      "fb": "A concession that arrives as their idea survives being challenged in public. You also established it was affordable before you owed anybody anything."
+      "fb": "A concession that arrives as their idea survives being challenged in public. You also established it was affordable before you owed anybody anything.",
+      "_fb_ru": "Уступка, пришедшая как их собственная идея, переживает публичное оспаривание. Заодно ты убедился, что она по карману, раньше, чем кому-то что-то задолжал."
      },
      {
       "id": "b",
       "text": "You accept the phasing on the spot to lock in a third of the vote, on the view that a block which has voted together on every previous tariff question will not be won twice.",
       "share": 0.2,
-      "fb": "You bought a third of the vote with a promise you have not costed, and the other two thirds have just learned what a private conversation with you is worth."
+      "fb": "You bought a third of the vote with a promise you have not costed, and the other two thirds have just learned what a private conversation with you is worth.",
+      "_fb_ru": "Ты купил треть голосов обещанием, которое не посчитал, а остальные две трети только что узнали, чего стоит приватный разговор с тобой."
      },
      {
       "id": "c",
       "text": "You decline, because a private arrangement with a block would look like one.",
       "share": 0.4,
-      "fb": "Even-handedness is a real value, and you have spent your cheapest route to a majority buying it at full price."
+      "fb": "Even-handedness is a real value, and you have spent your cheapest route to a majority buying it at full price.",
+      "_fb_ru": "Равное отношение ко всем — настоящая ценность, и ты потратил самый дешёвый путь к большинству, купив её по полной цене."
      }
     ]
    },
@@ -1094,21 +1121,24 @@
       "text": "You keep the contract running and spend two weeks securing a second supplier at a worse price, because the cost of the worse price is smaller than one cold week.",
       "share": 1,
       "next": "B2a",
-      "fb": "You bought insurance while it was still cheap and without stopping anything that was working. The worse price is what certainty costs at the moment you still have a choice."
+      "fb": "You bought insurance while it was still cheap and without stopping anything that was working. The worse price is what certainty costs at the moment you still have a choice.",
+      "_fb_ru": "Ты купил страховку, пока она была дешёвой, и не остановил ничего из того, что работало. Худшая цена — это и есть стоимость определённости в момент, когда выбор ещё есть."
      },
      {
       "id": "b",
       "text": "You terminate and re-tender the fuel contract immediately, on the view that a supplier who misses on the first winter will miss on the fifth.",
       "share": 0.2,
       "next": "B2b",
-      "fb": "A parent in administration is a warning, not a default. You have paid for a re-tender and thrown away a supplier who is still delivering on time, on the strength of a headline."
+      "fb": "A parent in administration is a warning, not a default. You have paid for a re-tender and thrown away a supplier who is still delivering on time, on the strength of a headline.",
+      "_fb_ru": "Банкротство материнской компании — предупреждение, а не дефолт. Ты заплатил за новый тендер и выбросил поставщика, который всё ещё поставляет в срок, — на основании заголовка."
      },
      {
       "id": "c",
       "text": "You continue as planned and monitor the administration closely, since the subsidiary is trading, delivering on time, and holds the only contract priced inside your business case.",
       "share": 0.4,
       "next": "B2b",
-      "fb": "Monitoring is not a plan. If the subsidiary is sold in month sixteen you will be tendering for fuel in the same quarter you are commissioning the boiler."
+      "fb": "Monitoring is not a plan. If the subsidiary is sold in month sixteen you will be tendering for fuel in the same quarter you are commissioning the boiler.",
+      "_fb_ru": "Наблюдение — не план. Если дочернюю компанию продадут на шестнадцатом месяце, ты будешь проводить топливный тендер в том же квартале, в котором вводишь котельную."
      }
     ]
    },
@@ -1135,19 +1165,22 @@
         "id": "a",
         "text": "You ask for the regional winter subset before signing and treat the headline figure as unusable until you have it.",
         "share": 1,
-        "fb": "A figure averaged over the wrong population is not a conservative estimate — it is a different question answered confidently. The subset you asked for is the only one your winters live in."
+        "fb": "A figure averaged over the wrong population is not a conservative estimate — it is a different question answered confidently. The subset you asked for is the only one your winters live in.",
+        "_fb_ru": "Средняя по неверной совокупности — не консервативная оценка, а уверенный ответ на другой вопрос. Запрошенная тобой подвыборка — единственная, в которой живут твои зимы."
        },
        {
         "id": "b",
         "text": "You accept the quoted figure and add a penalty clause for missed deliveries.",
         "share": 0.4,
-        "fb": "A penalty converts a supply failure into money, and money does not heat a flat in January."
+        "fb": "A penalty converts a supply failure into money, and money does not heat a flat in January.",
+        "_fb_ru": "Штраф превращает срыв поставки в деньги, а деньги не греют квартиру в январе."
        },
        {
         "id": "c",
         "text": "You accept the figure as it stands, since it has been audited.",
         "share": 0,
-        "fb": "Audited means the arithmetic was checked, not that the population behind it resembles yours."
+        "fb": "Audited means the arithmetic was checked, not that the population behind it resembles yours.",
+        "_fb_ru": "«Аудировано» значит, что проверили арифметику, а не что совокупность за ней похожа на твою."
        }
       ]
      },
@@ -1158,19 +1191,22 @@
         "id": "a",
         "text": "You re-test under load before accepting or rejecting the unit, since the test week that produced the number never put the unit under one.",
         "share": 1,
-        "fb": "Cycling depresses measured efficiency, so the test answered a question you did not ask. One week of re-testing decides how a twenty-year asset is operated."
+        "fb": "Cycling depresses measured efficiency, so the test answered a question you did not ask. One week of re-testing decides how a twenty-year asset is operated.",
+        "_fb_ru": "Работа циклами занижает измеренную эффективность, значит тест ответил на вопрос, которого ты не задавал. Неделя повторных испытаний решает, как будут эксплуатировать актив двадцать лет."
        },
        {
         "id": "b",
         "text": "You accept the two-point shortfall and adjust the fuel budget. Two points is inside the noise of any single test week and the schedule has none to give.",
         "share": 0.2,
-        "fb": "You have written a permanent line into the operating budget on the strength of a single unrepresentative week."
+        "fb": "You have written a permanent line into the operating budget on the strength of a single unrepresentative week.",
+        "_fb_ru": "Ты вписал постоянную строку в эксплуатационный бюджет на основании одной непредставительной недели."
        },
        {
         "id": "c",
         "text": "You reject the unit and invoke the performance guarantee now, on the view that a shortfall accepted at commissioning is a shortfall you own for the whole twenty-year life of the asset.",
         "share": 0.4,
-        "fb": "Invoking a guarantee on a contested measurement starts a dispute you may well lose, in the one quarter you cannot afford to be in it."
+        "fb": "Invoking a guarantee on a contested measurement starts a dispute you may well lose, in the one quarter you cannot afford to be in it.",
+        "_fb_ru": "Требовать гарантию по спорному измерению — значит начать спор, который вполне можешь проиграть, ровно в том квартале, когда не можешь себе его позволить."
        }
       ]
      }
@@ -1197,19 +1233,22 @@
       "id": "a",
       "text": "You take the grant and put the deferred increase in front of the associations before the vote, not after it, because they will find it in year three either way.",
       "share": 1,
-      "fb": "The money is worth having, and the deferral is only a trap if it arrives as a surprise. Showing it before the vote turns it into a choice they made rather than a bill they were sent."
+      "fb": "The money is worth having, and the deferral is only a trap if it arrives as a surprise. Showing it before the vote turns it into a choice they made rather than a bill they were sent.",
+      "_fb_ru": "Деньги стоит взять, а отсрочка становится ловушкой только тогда, когда приходит внезапно. Показать её до голосования — значит превратить в их выбор, а не в счёт, который им прислали."
      },
      {
       "id": "b",
       "text": "You take the grant and present the flat first two years, since that is what the associations are being asked to vote on and the later path can be explained when it arrives.",
       "share": 0,
-      "fb": "You have described the half of the condition that helps you. The other half arrives in year three with your signature on it and nobody else's."
+      "fb": "You have described the half of the condition that helps you. The other half arrives in year three with your signature on it and nobody else's.",
+      "_fb_ru": "Ты описал ту половину условия, которая тебе помогает. Вторая придёт на третий год с твоей подписью и ничьей больше."
      },
      {
       "id": "c",
       "text": "You decline the grant to keep the tariff path simple, since a single increase the associations can understand is easier to vote for than a smaller one that grows again in year three.",
       "share": 0.4,
-      "fb": "Simplicity is worth something, and here you have paid a fifth of the capital cost to buy it."
+      "fb": "Simplicity is worth something, and here you have paid a fifth of the capital cost to buy it.",
+      "_fb_ru": "Простота чего-то стоит, и здесь ты заплатил за неё пятую часть капитальных затрат."
      }
     ]
    },
@@ -1234,25 +1273,29 @@
       "id": "a",
       "share": 1,
       "text": "You book the window after next for the grid connection and put the freed weeks into the easement and the fuel contract.",
-      "fb": "Three of these dates are yours and one belongs to somebody else's calendar — and the borrowed one is the only date that moves without moving commissioning. Choosing the later window is a decision with a date on it; the other three then fit in eight weeks."
+      "fb": "Three of these dates are yours and one belongs to somebody else's calendar — and the borrowed one is the only date that moves without moving commissioning. Choosing the later window is a decision with a date on it; the other three then fit in eight weeks.",
+      "_fb_ru": "Три из этих сроков твои, а один принадлежит чужому календарю — и именно заимствованный сдвигается, не сдвигая ввод в эксплуатацию. Выбор более позднего окна — решение с датой; остальные три после него укладываются в восемь недель."
      },
      {
       "id": "b",
       "share": 0.6,
       "text": "You spend the eight weeks on the easement and on getting the grid connection application ready for the coming window, and leave the fuel contract and the communications plan to the final months.",
-      "fb": "Both of those carry somebody else's clock and you have handled them properly. What you have pushed into the final months is the pair that decides commissioning and the vote: an unsigned supply contract stops the plant exactly as an unsettled easement does, and the associations meet the plan when there is no time left to change it."
+      "fb": "Both of those carry somebody else's clock and you have handled them properly. What you have pushed into the final months is the pair that decides commissioning and the vote: an unsigned supply contract stops the plant exactly as an unsettled easement does, and the associations meet the plan when there is no time left to change it.",
+      "_fb_ru": "Обе эти вещи идут по чужим часам, и с ними ты обошёлся правильно. Но в последние месяцы ты задвинул пару, которая решает ввод и голосование: неподписанный договор поставки останавливает станцию ровно так же, как неулаженный сервитут, а товарищества встречают план тогда, когда менять его уже некогда."
      },
      {
       "id": "c",
       "share": 0.4,
       "text": "You ask the city for two more people for the eight weeks and hold all four items on the dates they carry now.",
-      "fb": "Two people found, cleared and briefed inside eight weeks are two people useful in the last three. Asking for capacity works when the ask comes before the crunch; this one arrives inside it, and the four dates do not move meanwhile."
+      "fb": "Two people found, cleared and briefed inside eight weeks are two people useful in the last three. Asking for capacity works when the ask comes before the crunch; this one arrives inside it, and the four dates do not move meanwhile.",
+      "_fb_ru": "Двое найденных, проверенных и введённых в курс за восемь недель — это двое полезных в последние три месяца. Просьба о людях работает, когда приходит до аврала; эта приходит внутри него, а четыре срока тем временем не двигаются."
      },
      {
       "id": "d",
       "share": 0.2,
       "text": "You hand the easement to the city legal department and keep the other three in the team. The land question is theirs to begin with.",
-      "fb": "It is their land question and it is your commissioning date. The city's lawyers work a queue with no commissioning date in it, and unlike the network operator they have no window you can book — you have put a blocker into a line with no number on it."
+      "fb": "It is their land question and it is your commissioning date. The city's lawyers work a queue with no commissioning date in it, and unlike the network operator they have no window you can book — you have put a blocker into a line with no number on it.",
+      "_fb_ru": "Земельный вопрос их, а дата ввода твоя. Юристы города работают с очередью, в которой нет твоей даты ввода, и, в отличие от сетевого оператора, у них нет окна, которое можно забронировать: ты поставил блокирующий пункт в очередь без номера."
      }
     ]
    },
@@ -1279,21 +1322,24 @@
       "text": "You ask for the derogation and publish the reason and the exact end date at the same time, since an exception with a date on it is the only kind a city can defend.",
       "share": 1,
       "next": "B3a",
-      "fb": "The derogation was the only option that keeps the flats warm. Publishing the end date alongside it is what stops a four-week exception from quietly becoming a precedent."
+      "fb": "The derogation was the only option that keeps the flats warm. Publishing the end date alongside it is what stops a four-week exception from quietly becoming a precedent.",
+      "_fb_ru": "Отступление от норматива было единственным вариантом, оставляющим квартиры тёплыми. Публикация даты его окончания — то, что не даёт четырёхнедельному исключению тихо стать прецедентом."
      },
      {
       "id": "b",
       "text": "You ask for the derogation and keep it quiet to avoid embarrassing the city, since the deputy mayor is spending his own credit to get it for you.",
       "share": 0.2,
       "next": "B3b",
-      "fb": "A quiet exception is one leak away from being the story, and at that point it stops being a contingency and becomes a concealment."
+      "fb": "A quiet exception is one leak away from being the story, and at that point it stops being a contingency and becomes a concealment.",
+      "_fb_ru": "Тихое исключение — в одной утечке от того, чтобы стать новостью, и с этого момента оно перестаёт быть запасным планом и становится сокрытием."
      },
      {
       "id": "c",
       "text": "You refuse the derogation and compress commissioning into the two months that remain, on the view that a city which breaks its own emissions pledge the first time it is inconvenient will not be believed the next time.",
       "share": 0,
       "next": "B3b",
-      "fb": "You protected an annual pledge by putting an untested boiler into February with nothing behind it."
+      "fb": "You protected an annual pledge by putting an untested boiler into February with nothing behind it.",
+      "_fb_ru": "Ты защитил годовое обещание, поставив в февраль непроверенный котёл и ничего за ним."
      }
     ]
    },
@@ -1320,19 +1366,22 @@
         "id": "a",
         "text": "You spend the week on the load test and hand over on the published date.",
         "share": 1,
-        "fb": "That week was already paid for politically. Spending it on the test is the difference between a handover and a handover that holds in February."
+        "fb": "That week was already paid for politically. Spending it on the test is the difference between a handover and a handover that holds in February.",
+        "_fb_ru": "Та неделя политически уже оплачена. Потратить её на испытание — вот разница между передачей объекта и передачей, которая держится в феврале."
        },
        {
         "id": "b",
         "text": "You hand over early to show that the exception was shorter than the one you asked for, since the political credit from returning unused time is the thing that makes the next request possible.",
         "share": 0.4,
-        "fb": "An early handover is a good headline and a poor engineering decision. You have given back the only slack anybody was ever going to grant you."
+        "fb": "An early handover is a good headline and a poor engineering decision. You have given back the only slack anybody was ever going to grant you.",
+        "_fb_ru": "Досрочная передача — хороший заголовок и плохое инженерное решение. Ты вернул единственный запас, который тебе вообще собирались дать."
        },
        {
         "id": "c",
         "text": "You spend the week on the test and ask for a further two weeks to be safe.",
         "share": 0,
-        "fb": "Asking twice turns a bounded exception into an open-ended one, and the second request is the one that gets refused in public."
+        "fb": "Asking twice turns a bounded exception into an open-ended one, and the second request is the one that gets refused in public.",
+        "_fb_ru": "Просить дважды — значит превратить ограниченное исключение в бессрочное, и отказ на вторую просьбу будет публичным."
        }
       ]
      },
@@ -1343,19 +1392,22 @@
         "id": "a",
         "text": "You keep the commissioning team on site through the first cold snap and say publicly that you are doing so.",
         "share": 1,
-        "fb": "Proving the unit in the weather it was bought for is the test you skipped, and doing it with the team on site converts an exposure into a plan people can see."
+        "fb": "Proving the unit in the weather it was bought for is the test you skipped, and doing it with the team on site converts an exposure into a plan people can see.",
+        "_fb_ru": "Проверить агрегат в ту погоду, ради которой его купили, — это и есть пропущенное испытание, а провести его с бригадой на площадке значит превратить уязвимость в план, который людям видно."
        },
        {
         "id": "b",
         "text": "You release the commissioning team on schedule and rely on the maintenance contract.",
         "share": 0.2,
-        "fb": "A maintenance contract promises a response within hours. Hours into a heat failure during a cold snap, this is already a public event."
+        "fb": "A maintenance contract promises a response within hours. Hours into a heat failure during a cold snap, this is already a public event.",
+        "_fb_ru": "Договор на обслуживание обещает реакцию в течение часов. Через часы после отказа отопления в мороз это уже публичное событие."
        },
        {
         "id": "c",
         "text": "You keep the team on site and say nothing, so as not to signal doubt.",
         "share": 0.4,
-        "fb": "The precaution is right and the silence wastes it: nobody gives you credit for covering a risk they were never told about."
+        "fb": "The precaution is right and the silence wastes it: nobody gives you credit for covering a risk they were never told about.",
+        "_fb_ru": "Предосторожность верная, а молчание её обесценивает: никто не зачтёт тебе закрытый риск, о котором ему не сказали."
        }
       ]
      }
@@ -1433,7 +1485,10 @@
     "feedback": {
      "top": "Your order starts the eight-week clock that every other answer waits on. Nothing downstream can be decided while the sediment is an open question, and the window will not move to accommodate the delay.",
      "mid": "Your order is workable, but it does useful work in a sequence where the laboratory result is still pending — and that result can invalidate it.",
-     "low": "Your order leaves the survey until after the direction is set. If the sediment comes back contaminated, the plan you built in the meantime is the wrong plan and the window has moved closer."
+     "low": "Your order leaves the survey until after the direction is set. If the sediment comes back contaminated, the plan you built in the meantime is the wrong plan and the window has moved closer.",
+     "_top_ru": "Твой порядок запускает восьминедельные часы, которых ждёт любой другой ответ. Пока состав грунта — открытый вопрос, ниже по цепочке решить нельзя ничего, а окно не сдвинется, чтобы вместить задержку.",
+     "_mid_ru": "Порядок рабочий, но полезная работа делается в последовательности, где результат лаборатории ещё не пришёл, — а он может её обесценить.",
+     "_low_ru": "Твой порядок оставляет обследование на потом, когда направление уже задано. Если грунт вернётся загрязнённым, построенный тем временем план окажется не тем, а окно станет ближе."
     }
    },
    {
@@ -1457,25 +1512,29 @@
       "id": "a",
       "text": "You go to him the same week, say that he should have heard it from the port, and ask what he needs to see before anything is announced.",
       "share": 1,
-      "fb": "Naming the failure yourself is what stops it becoming the story. You also converted an ambush into a standing channel, which is the only thing that will hold when the disposal figure arrives."
+      "fb": "Naming the failure yourself is what stops it becoming the story. You also converted an ambush into a standing channel, which is the only thing that will hold when the disposal figure arrives.",
+      "_fb_ru": "Назвать провал самому — вот что не даёт ему стать новостью. Заодно ты превратил засаду в постоянный канал связи, и только он выдержит, когда придёт цифра по вывозу."
      },
      {
       "id": "b",
       "text": "You issue a correction explaining that no decision has been taken, that consultation was always planned for a later stage, and that the newsletter drew conclusions the port had not reached.",
       "share": 0.2,
-      "fb": "Everything in the statement is true and none of it answers his objection, which was about being told last rather than about the timetable."
+      "fb": "Everything in the statement is true and none of it answers his objection, which was about being told last rather than about the timetable.",
+      "_fb_ru": "Всё в заявлении правда, и ничто в нём не отвечает на его возражение: оно было о том, что ему сказали последним, а не о графике."
      },
      {
       "id": "c",
       "text": "You invite the co-op onto the project steering group so they see everything as it happens.",
       "share": 0.6,
-      "fb": "Access is real and it is generous, and it also hands them a seat before you know what the sediment contains. You may be inviting them to watch you discover very bad news."
+      "fb": "Access is real and it is generous, and it also hands them a seat before you know what the sediment contains. You may be inviting them to watch you discover very bad news.",
+      "_fb_ru": "Доступ настоящий и щедрый — и он же сажает их за стол раньше, чем ты знаешь, что в грунте. Возможно, ты пригласил их смотреть, как узнаёшь очень плохие новости."
      },
      {
       "id": "d",
       "text": "You let it pass and focus on the survey. The substance has not changed and the newsletter will be forgotten.",
       "share": 0,
-      "fb": "The first thing the co-op learned about this project is that they learn about it from strangers, and nothing since has contradicted that."
+      "fb": "The first thing the co-op learned about this project is that they learn about it from strangers, and nothing since has contradicted that.",
+      "_fb_ru": "Первое, что кооператив узнал об этом проекте, — что узнаёт он о нём от посторонних, и с тех пор ничто этого не опровергло."
      }
     ]
    },
@@ -1500,25 +1559,29 @@
       "id": "a",
       "text": "You treat the old survey as evidence about the outer channel only, and design the new sampling around the basin it never covered.",
       "share": 1,
-      "fb": "Nine clean readings are nine clean readings about the places they were taken. The value of the old survey is that it tells you where you do not need to look twice."
+      "fb": "Nine clean readings are nine clean readings about the places they were taken. The value of the old survey is that it tells you where you do not need to look twice.",
+      "_fb_ru": "Девять чистых замеров — это девять чистых замеров о тех местах, где их брали. Ценность старого обследования в том, что оно говорит, где смотреть второй раз не нужно."
      },
      {
       "id": "b",
       "text": "You treat the old survey as a reasonable baseline and sample lightly to confirm it, keeping the laboratory bill down.",
       "share": 0.2,
-      "fb": "You are confirming a result in the one area where it was never in doubt, and skipping the area where the whole question lives."
+      "fb": "You are confirming a result in the one area where it was never in doubt, and skipping the area where the whole question lives.",
+      "_fb_ru": "Ты подтверждаешь результат ровно там, где он и не вызывал сомнений, и пропускаешь ту зону, в которой весь вопрос и живёт."
      },
      {
       "id": "c",
       "text": "You discard the eleven-year-old survey entirely as too old to carry any weight and sample the whole channel from scratch, on the view that a defensible plan cannot rest on readings taken before the works upstream closed.",
       "share": 0.4,
-      "fb": "Defensible, and it spends laboratory weeks re-establishing something you already know. Age makes a survey less reliable; it does not make it worthless."
+      "fb": "Defensible, and it spends laboratory weeks re-establishing something you already know. Age makes a survey less reliable; it does not make it worthless.",
+      "_fb_ru": "Защитимо, и при этом лабораторные недели тратятся на подтверждение того, что ты уже знаешь. Возраст делает обследование менее надёжным, а не бесполезным."
      },
      {
       "id": "d",
       "text": "You ask the environmental regulator which sampling plan they would accept, and follow it.",
       "share": 0.6,
-      "fb": "Their plan will certainly be accepted, which is worth a lot. It will also be built for their question rather than yours, and yours is where the six-fold cost sits."
+      "fb": "Their plan will certainly be accepted, which is worth a lot. It will also be built for their question rather than yours, and yours is where the six-fold cost sits.",
+      "_fb_ru": "Их план наверняка примут, и это дорогого стоит. Он же будет построен под их вопрос, а не под твой, — а именно в твоём сидит шестикратная разница в стоимости."
      }
     ]
    },
@@ -1545,21 +1608,24 @@
       "text": "You spend the eight weeks designing the disposal route for the contaminated case, since that is the branch that can stop the project on cost.",
       "share": 1,
       "next": "B1a",
-      "fb": "You prepared the expensive branch while it was still free to prepare. If the result comes back clean you have lost eight weeks of a plan you no longer need; if it comes back dirty you have the only eight weeks that existed."
+      "fb": "You prepared the expensive branch while it was still free to prepare. If the result comes back clean you have lost eight weeks of a plan you no longer need; if it comes back dirty you have the only eight weeks that existed.",
+      "_fb_ru": "Ты подготовил дорогую ветку, пока подготовка была бесплатной. Придёт чистый результат — потеряешь восемь недель плана, который больше не нужен; придёт грязный — у тебя будут единственные восемь недель, которые вообще существовали."
      },
      {
       "id": "b",
       "text": "You spend the eight weeks with the shipping lines, pinning down exactly what draught they need and by when, since the target itself is still an assumption.",
       "share": 0.6,
       "next": "B1b",
-      "fb": "The whole project rests on a number nobody has verified, and you went and verified it. It is real work on the right question — it is simply not the question that can kill the budget."
+      "fb": "The whole project rests on a number nobody has verified, and you went and verified it. It is real work on the right question — it is simply not the question that can kill the budget.",
+      "_fb_ru": "Весь проект стоит на числе, которое никто не проверял, — и ты пошёл и проверил. Это настоящая работа по верному вопросу; просто не по тому, который может убить бюджет."
      },
      {
       "id": "c",
       "text": "You spend the eight weeks building the funding case for the dredging budget so the request is ready whichever way the laboratory reports, taking the draught target from what the shipping lines have already told the port.",
       "share": 0.2,
       "next": "B1b",
-      "fb": "A funding case built before the disposal branch is priced leaves out the largest number in it, and the draught figure you borrowed is the one nobody has tested. Eight weeks produced a document that has to be rewritten twice."
+      "fb": "A funding case built before the disposal branch is priced leaves out the largest number in it, and the draught figure you borrowed is the one nobody has tested. Eight weeks produced a document that has to be rewritten twice.",
+      "_fb_ru": "Заявка на финансирование, собранная до оценки ветки с вывозом, не содержит самого крупного числа в ней, а взятая взаймы осадка — та самая, которую никто не проверял. Восемь недель дали документ, который придётся переписать дважды."
      }
     ]
    },
@@ -1586,19 +1652,22 @@
         "id": "a",
         "text": "You pay the fee and book the capacity, and say at the board that it is insurance you may waste.",
         "share": 1,
-        "fb": "The fee buys the only capacity that exists at a moment when it is still available. Calling it insurance rather than a plan is what keeps the board's trust when the result comes back clean and the money is gone."
+        "fb": "The fee buys the only capacity that exists at a moment when it is still available. Calling it insurance rather than a plan is what keeps the board's trust when the result comes back clean and the money is gone.",
+        "_fb_ru": "Плата покупает единственную мощность, которая существует, в момент, когда она ещё свободна. Назвать это страховкой, а не планом, — вот что сохраняет доверие совета, когда результат приходит чистым, а деньги потрачены."
        },
        {
         "id": "b",
         "text": "You wait for the laboratory result before committing money to a problem that may not exist.",
         "share": 0.2,
-        "fb": "Perfectly prudent, and the capacity is not reserved for your convenience. If the result is bad you will be looking for a site that has just been taken."
+        "fb": "Perfectly prudent, and the capacity is not reserved for your convenience. If the result is bad you will be looking for a site that has just been taken.",
+        "_fb_ru": "Совершенно разумно, и площадка резервируется не ради твоего удобства. Если результат окажется плохим, ты будешь искать полигон, который только что заняли."
        },
        {
         "id": "c",
         "text": "You ask the operator to hold it informally on the strength of the relationship.",
         "share": 0.4,
-        "fb": "An informal hold is worth exactly what the next paying customer offers for it, and you will find that out on the worst possible day."
+        "fb": "An informal hold is worth exactly what the next paying customer offers for it, and you will find that out on the worst possible day.",
+        "_fb_ru": "Неформальная бронь стоит ровно столько, сколько предложит следующий платящий клиент, и узнаешь ты это в самый неподходящий день."
        }
       ]
      },
@@ -1609,19 +1678,22 @@
         "id": "a",
         "text": "You re-scope around the deeper requirement and put the extra cost in front of the board with the re-routing risk beside it.",
         "share": 1,
-        "fb": "The number that matters is the one that keeps the customer who is leaving. Putting the cost and the risk on the same page is what lets the board decide rather than react."
+        "fb": "The number that matters is the one that keeps the customer who is leaving. Putting the cost and the risk on the same page is what lets the board decide rather than react.",
+        "_fb_ru": "Значимое число — то, которое удерживает уходящего клиента. Стоимость и риск на одной странице — вот что позволяет совету решать, а не реагировать."
        },
        {
         "id": "b",
         "text": "You keep the original scope, since it satisfies one line fully and the other nearly.",
         "share": 0,
-        "fb": "The line it nearly satisfies is the line that has already said it will leave. A plan that misses its only binding customer has no purpose."
+        "fb": "The line it nearly satisfies is the line that has already said it will leave. A plan that misses its only binding customer has no purpose.",
+        "_fb_ru": "Линия, которую он почти устраивает, уже сказала, что уходит. План, промахивающийся мимо единственного связывающего клиента, не имеет смысла."
        },
        {
         "id": "c",
         "text": "You ask the deeper line to confirm the requirement in writing before changing anything.",
         "share": 0.6,
-        "fb": "Getting it in writing is right and it costs you two weeks of a fourteen-week window. Worth it once — not worth it for every number in the project."
+        "fb": "Getting it in writing is right and it costs you two weeks of a fourteen-week window. Worth it once — not worth it for every number in the project.",
+        "_fb_ru": "Получить письменно — верно, и это стоит две недели из четырнадцатинедельного окна. Один раз оправдано; для каждого числа в проекте — нет."
        }
       ]
      }
@@ -1648,25 +1720,29 @@
       "id": "a",
       "text": "You put the single winter forward with the contingency named and a stated trigger for when it would be drawn.",
       "share": 1,
-      "fb": "A contingency with a named trigger is a decision the board can take; a contingency without one is a blank cheque they will refuse. Same money, different question."
+      "fb": "A contingency with a named trigger is a decision the board can take; a contingency without one is a blank cheque they will refuse. Same money, different question.",
+      "_fb_ru": "Резерв с названным условием срабатывания — это решение, которое совет может принять; резерв без него — незаполненный чек, от которого откажутся. Те же деньги, другой вопрос."
      },
      {
       "id": "b",
       "text": "You propose the two-winter version, since it fits inside approvals the finance director already grants and gets a dredger into the water this year rather than into a board argument.",
       "share": 0.4,
-      "fb": "It will be approved, and it also means the departing shipping line watches a second winter go by before the channel reaches the depth it asked for."
+      "fb": "It will be approved, and it also means the departing shipping line watches a second winter go by before the channel reaches the depth it asked for.",
+      "_fb_ru": "Утвердят, и это же значит, что уходящая судоходная линия смотрит, как проходит вторая зима, прежде чем канал получит запрошенную глубину."
      },
      {
       "id": "c",
       "text": "You propose the single winter and leave the contingency out of the paper to avoid a fight you might lose.",
       "share": 0,
-      "fb": "The fight is not avoided, only postponed to the point where the money is needed and the board learns it was never asked for."
+      "fb": "The fight is not avoided, only postponed to the point where the money is needed and the board learns it was never asked for.",
+      "_fb_ru": "Спор не снят, а отложен до момента, когда деньги нужны, а совет узнаёт, что их вообще не просили."
      },
      {
       "id": "d",
       "text": "You ask the finance director privately what would have to be true for her to approve the contingency, and build the paper around her answer.",
       "share": 0.6,
-      "fb": "The right conversation, and it makes the proposal hers as much as yours. It also risks producing a paper shaped to what she will approve rather than to what the channel needs."
+      "fb": "The right conversation, and it makes the proposal hers as much as yours. It also risks producing a paper shaped to what she will approve rather than to what the channel needs.",
+      "_fb_ru": "Верный разговор, и он делает предложение её в той же мере, что и твоим. Он же рискует породить бумагу, скроенную под то, что она утвердит, а не под то, что нужно каналу."
      }
     ]
    },
@@ -1691,19 +1767,22 @@
       "id": "a",
       "text": "You commission independent plume modelling with the co-op choosing one of the two modellers, and agree in advance what result would mean stopping.",
       "share": 1,
-      "fb": "Letting them pick a modeller costs you nothing and buys the one thing you cannot buy later, which is that they believe the answer. Agreeing the stopping rule before the number arrives is what makes it a rule rather than an argument."
+      "fb": "Letting them pick a modeller costs you nothing and buys the one thing you cannot buy later, which is that they believe the answer. Agreeing the stopping rule before the number arrives is what makes it a rule rather than an argument.",
+      "_fb_ru": "Дать им выбрать расчётчика не стоит тебе ничего и покупает то, чего потом не купишь: они поверят ответу. Договориться о правиле остановки до появления числа — вот что делает его правилом, а не предметом спора."
      },
      {
       "id": "b",
       "text": "You offer compensation for the affected season, priced from their own landings records, so that the cost of the plume falls on the port rather than on sixty boats.",
       "share": 0.4,
-      "fb": "Money for a lost season is fair and it settles the wrong dispute: they are telling you the ground may not come back, and you have answered as if it certainly will."
+      "fb": "Money for a lost season is fair and it settles the wrong dispute: they are telling you the ground may not come back, and you have answered as if it certainly will.",
+      "_fb_ru": "Деньги за потерянный сезон — справедливо, и они улаживают не тот спор: тебе говорят, что грунт может не вернуться, а ты отвечаешь так, будто он вернётся наверняка."
      },
      {
       "id": "c",
       "text": "You point out that the modelling the regulator requires will settle the question anyway, and wait for it rather than running a second study the co-op did not ask for.",
       "share": 0.2,
-      "fb": "The regulator's model will be technically sound and, to sixty skippers, it will be the port's model presented by the port's regulator."
+      "fb": "The regulator's model will be technically sound and, to sixty skippers, it will be the port's model presented by the port's regulator.",
+      "_fb_ru": "Модель регулятора будет технически безупречной и для шестидесяти капитанов останется моделью порта, поданной регулятором порта."
      }
     ]
    },
@@ -1730,21 +1809,24 @@
       "text": "You plan for the contaminated case and commission a second laboratory, so the plan is not waiting on the appeal.",
       "share": 1,
       "next": "B2a",
-      "fb": "You took the expensive reading seriously and tested it at the same time, which is the only version of this that costs weeks rather than a window."
+      "fb": "You took the expensive reading seriously and tested it at the same time, which is the only version of this that costs weeks rather than a window.",
+      "_fb_ru": "Ты отнёсся к дорогому замеру всерьёз и одновременно его проверил — единственная версия, которая стоит недель, а не окна."
      },
      {
       "id": "b",
       "text": "You accept the result as given and re-plan the whole project around contaminated disposal, since an appeal can outlast the window.",
       "share": 0.6,
       "next": "B2b",
-      "fb": "Decisive and defensible, and you have accepted a six-fold cost on a reading that sits close enough to the line to be worth one challenge."
+      "fb": "Decisive and defensible, and you have accepted a six-fold cost on a reading that sits close enough to the line to be worth one challenge.",
+      "_fb_ru": "Решительно и защитимо, и ты принял шестикратную стоимость по замеру, который лежит достаточно близко к границе, чтобы стоить одной перепроверки."
      },
      {
       "id": "c",
       "text": "You challenge the reading first and hold the plan until the second opinion arrives.",
       "share": 0.2,
       "next": "B2a",
-      "fb": "The challenge is reasonable; stopping the plan for it is not. If the second laboratory agrees with the first, you have bought certainty with the weeks you needed to act on it."
+      "fb": "The challenge is reasonable; stopping the plan for it is not. If the second laboratory agrees with the first, you have bought certainty with the weeks you needed to act on it.",
+      "_fb_ru": "Оспорить разумно; останавливать ради этого план — нет. Если вторая лаборатория согласится с первой, ты купил определённость теми неделями, которые нужны были, чтобы действовать."
      }
     ]
    },
@@ -1771,19 +1853,22 @@
         "id": "a",
         "text": "You put both results and both methods to the regulator and ask which method governs, rather than choosing the answer you prefer.",
         "share": 1,
-        "fb": "Two accredited results disagreeing is a question about method, not about truth, and only the regulator can close it. Choosing for yourself would have made every later number arguable."
+        "fb": "Two accredited results disagreeing is a question about method, not about truth, and only the regulator can close it. Choosing for yourself would have made every later number arguable.",
+        "_fb_ru": "Два аккредитованных результата, расходящихся между собой, — это вопрос о методе, а не об истине, и закрыть его может только регулятор. Выбрав сам, ты сделал бы спорным каждое следующее число."
        },
        {
         "id": "b",
         "text": "You use the lower result. It is the more recent of the two and equally accredited.",
         "share": 0,
-        "fb": "Recency is not a tie-breaker between methods, and a disposal plan built on the cheaper of two contested readings will be challenged by the first person who wants it stopped."
+        "fb": "Recency is not a tie-breaker between methods, and a disposal plan built on the cheaper of two contested readings will be challenged by the first person who wants it stopped.",
+        "_fb_ru": "Свежесть — не способ разрешить спор между методами, а план вывоза, построенный на более дешёвом из двух спорных замеров, оспорит первый же, кто захочет его остановить."
        },
        {
         "id": "c",
         "text": "You commission a third laboratory to break the tie.",
         "share": 0.4,
-        "fb": "A third opinion produces a majority and not an answer: if it uses a third method you now have three results and the same open question, several weeks later."
+        "fb": "A third opinion produces a majority and not an answer: if it uses a third method you now have three results and the same open question, several weeks later.",
+        "_fb_ru": "Третье мнение даёт большинство, а не ответ: если метод окажется третьим, у тебя будет три результата и тот же открытый вопрос, только несколькими неделями позже."
        }
       ]
      },
@@ -1794,19 +1879,22 @@
         "id": "a",
         "text": "You re-plan for twelve weeks immediately and identify what comes out of scope, before a single contract is signed against the old dates.",
         "share": 1,
-        "fb": "The window is the one input in this project that nobody negotiates. Re-planning against it while you still have a choice about what to drop is the difference between a decision and an announcement."
+        "fb": "The window is the one input in this project that nobody negotiates. Re-planning against it while you still have a choice about what to drop is the difference between a decision and an announcement.",
+        "_fb_ru": "Окно — единственный вход в этом проекте, о котором никто не договаривается. Перепланировать под него, пока у тебя ещё есть выбор, чем пожертвовать, — это разница между решением и объявлением."
        },
        {
         "id": "b",
         "text": "You ask the fisheries authority to reconsider the later opening, given the port's economic case.",
         "share": 0.2,
-        "fb": "The dates are set by spawning, not by the port's calendar, and asking for an exception is how you spend the goodwill you will need for the plume conversation."
+        "fb": "The dates are set by spawning, not by the port's calendar, and asking for an exception is how you spend the goodwill you will need for the plume conversation.",
+        "_fb_ru": "Сроки задаёт нерест, а не календарь порта, и просьба об исключении — способ потратить то расположение, которое понадобится тебе в разговоре о мутности."
        },
        {
         "id": "c",
         "text": "You hold the twelve-week problem until the disposal contract is signed, so that you re-plan once rather than twice.",
         "share": 0.4,
-        "fb": "Sensible sequencing in a project that had time. Here you would be signing a contract priced against fourteen weeks of work you no longer have."
+        "fb": "Sensible sequencing in a project that had time. Here you would be signing a contract priced against fourteen weeks of work you no longer have.",
+        "_fb_ru": "Разумная последовательность для проекта, у которого есть время. Здесь ты подпишешь контракт, посчитанный под четырнадцать недель работы, которых у тебя больше нет."
        }
       ]
      }
@@ -1833,19 +1921,22 @@
       "id": "a",
       "text": "You put the method to the co-op before you price it, and let their response decide whether it stays in the tender, since a saving they find out about afterwards costs more than it ever saved.",
       "share": 1,
-      "fb": "The saving is real and it is not yours to bank quietly: the cost of the heavier plume lands on sixty boats. Asking first is also the only version where the saving survives being discovered."
+      "fb": "The saving is real and it is not yours to bank quietly: the cost of the heavier plume lands on sixty boats. Asking first is also the only version where the saving survives being discovered.",
+      "_fb_ru": "Экономия настоящая, и тихо положить её себе нельзя: за более плотную мутность платят шестьдесят лодок. Спросить первым — ещё и единственная версия, при которой экономия переживёт своё обнаружение."
      },
      {
       "id": "b",
       "text": "You take the cheaper method: the licence permits it, the plume modelling will cover it, and a fifth off the dredging is real money back to the port.",
       "share": 0,
-      "fb": "You have used the co-op's agreement to a process as agreement to an outcome they were never shown. The first skipper who reads the tender will say so publicly, and be right."
+      "fb": "You have used the co-op's agreement to a process as agreement to an outcome they were never shown. The first skipper who reads the tender will say so publicly, and be right.",
+      "_fb_ru": "Ты выдал согласие кооператива на процесс за согласие с результатом, которого им никто не показывал. Первый же капитан, прочитавший тендер, скажет это вслух — и будет прав."
      },
      {
       "id": "c",
       "text": "You reject the cheaper method outright to protect a relationship you have spent three months building, and take the higher price as the cost of not reopening the plume question.",
       "share": 0.4,
-      "fb": "Protective and it spends a fifth of the dredging budget on a conversation you did not have. They might have accepted it for a share of the saving."
+      "fb": "Protective and it spends a fifth of the dredging budget on a conversation you did not have. They might have accepted it for a share of the saving.",
+      "_fb_ru": "Осторожно, и на этом уходит пятая часть бюджета дноуглубления — ценой разговора, которого ты не провёл. Возможно, они согласились бы за долю в экономии."
      }
     ]
    },
@@ -1870,25 +1961,29 @@
       "id": "a",
       "text": "You finish the disposal contract and the berth schedule, and give the plume monitoring plan and the communications pack a working draft.",
       "share": 1,
-      "fb": "You sorted by what physically stops the first day of dredging. Monitoring and communications can be improved during the window; a dredger with nowhere to put the spoil cannot."
+      "fb": "You sorted by what physically stops the first day of dredging. Monitoring and communications can be improved during the window; a dredger with nowhere to put the spoil cannot.",
+      "_fb_ru": "Ты отсортировал по тому, что физически останавливает первый день работ. Мониторинг и связь можно улучшать внутри окна; земснаряд, которому некуда девать грунт, — нельзя."
      },
      {
       "id": "b",
       "text": "You finish the plume monitoring plan and the communications pack, and give the disposal contract and the berth schedule a working draft.",
       "share": 0.4,
-      "fb": "The political risk is real and it is not what stops the dredger. You are defending a position that can still be argued during the window, at the cost of two that cannot."
+      "fb": "The political risk is real and it is not what stops the dredger. You are defending a position that can still be argued during the window, at the cost of two that cannot.",
+      "_fb_ru": "Политический риск настоящий, и не он останавливает земснаряд. Ты защищаешь позицию, которую ещё можно отстаивать внутри окна, ценой двух, которые отстаивать будет негде."
      },
      {
       "id": "c",
       "text": "You finish the disposal contract and the communications pack, and leave the berth schedule to the terminal operator.",
       "share": 0.6,
-      "fb": "A reasonable split, and the berth schedule is the one item where the other party has no reason to hurry: their berths are working today."
+      "fb": "A reasonable split, and the berth schedule is the one item where the other party has no reason to hurry: their berths are working today.",
+      "_fb_ru": "Разумное деление, и график причалов — единственный пункт, где у другой стороны нет причин спешить: их причалы работают уже сегодня."
      },
      {
       "id": "d",
       "text": "You spend the six weeks pressing the disposal operator for a better rate rather than signing at the one you have, and leave the other three at the working drafts you hold.",
       "share": 0.2,
-      "fb": "A rate can be re-opened after the window; the window cannot be moved. Six weeks later there is a better number, no signature, and nobody has closed a berth for a dredger that cannot start without both."
+      "fb": "A rate can be re-opened after the window; the window cannot be moved. Six weeks later there is a better number, no signature, and nobody has closed a berth for a dredger that cannot start without both.",
+      "_fb_ru": "Ставку можно пересмотреть после окна; окно сдвинуть нельзя. Через шесть недель есть цифра получше, подписи нет, и никто не закрыл причал ради земснаряда, который без обоих не начнёт."
      }
     ]
    },
@@ -1915,21 +2010,24 @@
       "text": "You buy the time from the schedule: a second shift, funded from the money the project already holds against exactly this.",
       "share": 1,
       "next": "B3a",
-      "fb": "This is what the contingency was described for, and drawing it exactly as described is what makes the next one grantable. You bought time with money, which is the trade this project can afford."
+      "fb": "This is what the contingency was described for, and drawing it exactly as described is what makes the next one grantable. You bought time with money, which is the trade this project can afford.",
+      "_fb_ru": "Ровно ради этого резерв и описывался, а взять его точно так, как описано, — вот что делает следующий резерв получаемым. Ты купил время деньгами, и такой обмен этот проект может себе позволить."
      },
      {
       "id": "b",
       "text": "You buy the time from the scope: drop the shallowest section, which serves the smaller of the two shipping lines, and finish the rest inside the window.",
       "share": 0.6,
       "next": "B3b",
-      "fb": "A clean trade and a real loss. You protected the customer who was leaving by disappointing the one who was staying, and that is a choice the board should have made rather than heard about."
+      "fb": "A clean trade and a real loss. You protected the customer who was leaving by disappointing the one who was staying, and that is a choice the board should have made rather than heard about.",
+      "_fb_ru": "Чистый размен и настоящая потеря. Ты защитил уходящего клиента, разочаровав того, кто оставался, — и это выбор, который совет должен был сделать, а не услышать о нём."
      },
      {
       "id": "c",
       "text": "You absorb the four days and accept finishing four days into the closed window, on the view that nobody counts the last week.",
       "share": 0,
       "next": "B3b",
-      "fb": "The window is set by spawning and enforced by the authority that also licenses your next one. Four quiet days is how a port loses the following winter."
+      "fb": "The window is set by spawning and enforced by the authority that also licenses your next one. Four quiet days is how a port loses the following winter.",
+      "_fb_ru": "Окно задаёт нерест, а следит за ним тот же орган, который выдаёт лицензию на следующее. Четыре тихих дня — так порт теряет следующую зиму."
      }
     ]
    },
@@ -1956,19 +2054,22 @@
         "id": "a",
         "text": "You stop the night shift for one tide, go out with two skippers and the monitoring team, and look at it.",
         "share": 1,
-        "fb": "One tide is a cheap price for the difference between a disputed instrument and a shared observation. Whatever the buoys say afterwards, they will now be saying it to people who were there."
+        "fb": "One tide is a cheap price for the difference between a disputed instrument and a shared observation. Whatever the buoys say afterwards, they will now be saying it to people who were there.",
+        "_fb_ru": "Один прилив — дешёвая цена за разницу между спорным прибором и общим наблюдением. Что бы ни показали буи потом, теперь они говорят это тем, кто был на месте."
        },
        {
         "id": "b",
         "text": "You send them the buoy data, which is the agreed measure and shows nothing outside the envelope.",
         "share": 0.2,
-        "fb": "The agreed measure is agreed until it contradicts what people can see with their own eyes at night, and then it is the port's instrument."
+        "fb": "The agreed measure is agreed until it contradicts what people can see with their own eyes at night, and then it is the port's instrument.",
+        "_fb_ru": "Согласованный показатель согласован ровно до того момента, когда противоречит тому, что люди видят своими глазами ночью, — и тогда он становится прибором порта."
        },
        {
         "id": "c",
         "text": "You continue and log the observation for the post-project review.",
         "share": 0,
-        "fb": "A logged observation is a record that you were told and continued, which is exactly how it will be read at the licence hearing for the next window."
+        "fb": "A logged observation is a record that you were told and continued, which is exactly how it will be read at the licence hearing for the next window.",
+        "_fb_ru": "Занесённое в журнал наблюдение — это запись о том, что тебе сказали, а ты продолжил, и ровно так её прочтут на слушании по лицензии для следующего окна."
        }
       ]
      },
@@ -1979,19 +2080,22 @@
         "id": "a",
         "text": "You answer that it was, explain the four lost days and the window, and put a dated commitment for their section in the next window on the table.",
         "share": 1,
-        "fb": "They already know the answer; the only question is whether they hear it from you. A dated commitment turns a betrayal into a sequence, and a sequence can be lived with."
+        "fb": "They already know the answer; the only question is whether they hear it from you. A dated commitment turns a betrayal into a sequence, and a sequence can be lived with.",
+        "_fb_ru": "Ответ они и так знают; вопрос только в том, услышат ли его от тебя. Обязательство с датой превращает предательство в последовательность, а с последовательностью можно жить."
        },
        {
         "id": "b",
         "text": "You answer that the scope was reduced for operational reasons inside the window and that no customer was prioritised.",
         "share": 0,
-        "fb": "One customer was prioritised, the decision was correct, and this sentence turns a defensible choice into something that looks like a lie the moment anyone compares the charts."
+        "fb": "One customer was prioritised, the decision was correct, and this sentence turns a defensible choice into something that looks like a lie the moment anyone compares the charts.",
+        "_fb_ru": "Одного клиента поставили в приоритет, решение было верным — и эта фраза превращает защитимый выбор в то, что выглядит ложью, стоит кому-нибудь сравнить карты."
        },
        {
         "id": "c",
         "text": "You say the sequencing decision sits with the board and refer them to it.",
         "share": 0.4,
-        "fb": "Technically accurate, and it tells a customer who asked you a direct question that you would rather not be the one answering it."
+        "fb": "Technically accurate, and it tells a customer who asked you a direct question that you would rather not be the one answering it.",
+        "_fb_ru": "Технически точно, и клиенту, задавшему прямой вопрос, это сообщает: отвечать на него ты предпочёл бы не сам."
        }
       ]
      }
@@ -2068,7 +2172,10 @@
     "feedback": {
      "top": "Your order starts with the only party that can actually replace a chiller, and the survey rides along with the same visits. Everything else in this project is faster than four hundred conversations.",
      "mid": "Your order is defensible, but it puts analysis ahead of the four hundred visits that set the true length of the project.",
-     "low": "Your order settles the company's position before anyone has asked a farmer anything. You will be defending a number to your board that nobody outside the building has agreed to."
+     "low": "Your order settles the company's position before anyone has asked a farmer anything. You will be defending a number to your board that nobody outside the building has agreed to.",
+     "_top_ru": "Твой порядок начинается с той стороны, которая единственная может реально заменить холодильник, а обследование едет теми же визитами. Всё остальное в этом проекте быстрее, чем четыреста разговоров.",
+     "_mid_ru": "Порядок защитим, но ставит анализ впереди четырёхсот визитов, которые и задают настоящую длину проекта.",
+     "_low_ru": "Твой порядок закрепляет позицию компании раньше, чем кто-либо спросил хоть одного фермера. Ты будешь защищать перед советом число, с которым за пределами офиса никто не согласился."
     }
    },
    {
@@ -2092,25 +2199,29 @@
       "id": "a",
       "text": "You train the eleven buyers to run the conversation on their existing rounds, and go with each of them once, since the visit already happens.",
       "share": 1,
-      "fb": "Four hundred farms are unreachable to you and routine to them. Riding along once with each buyer is what stops the training becoming a form that gets filled in the van afterwards."
+      "fb": "Four hundred farms are unreachable to you and routine to them. Riding along once with each buyer is what stops the training becoming a form that gets filled in the van afterwards.",
+      "_fb_ru": "Четыреста хозяйств недостижимы для тебя и обыденны для них. Проехать по разу с каждым закупщиком — вот что не даёт обучению превратиться в анкету, которую заполняют потом в машине."
      },
      {
       "id": "b",
       "text": "You hire a survey firm to cover all four hundred farms in six weeks, so the data arrives fast, uniform and in one format rather than eleven.",
       "share": 0.4,
-      "fb": "Six weeks and clean data is a real advantage, and a stranger with a clipboard gets a different answer from a farm than the buyer who has been coming for nine years."
+      "fb": "Six weeks and clean data is a real advantage, and a stranger with a clipboard gets a different answer from a farm than the buyer who has been coming for nine years.",
+      "_fb_ru": "Шесть недель и чистые данные — настоящее преимущество, а незнакомец с планшетом получает от хозяйства другой ответ, чем закупщик, который ездит туда девять лет."
      },
      {
       "id": "c",
       "text": "You send the buyers a questionnaire to hand out, since they are already going anyway and their time is expensive.",
       "share": 0.2,
-      "fb": "A questionnaire handed over in a doorway measures who fills in questionnaires. The point of using the buyers was the conversation, not the delivery."
+      "fb": "A questionnaire handed over in a doorway measures who fills in questionnaires. The point of using the buyers was the conversation, not the delivery.",
+      "_fb_ru": "Анкета, отданная на пороге, измеряет тех, кто заполняет анкеты. Смысл использовать закупщиков был в разговоре, а не в доставке бумаги."
      },
      {
       "id": "d",
       "text": "You start with the sixty largest farms yourself, since they carry most of the volume, and reach the rest later.",
       "share": 0.6,
-      "fb": "Sensible triage on volume, and the failure that spoils a lorry is just as likely in a small chiller. You have covered the tonnage and not the risk."
+      "fb": "Sensible triage on volume, and the failure that spoils a lorry is just as likely in a small chiller. You have covered the tonnage and not the risk.",
+      "_fb_ru": "Разумная сортировка по объёму, и отказ, который губит целую фуру, ровно так же вероятен в маленьком холодильнике. Ты закрыл тоннаж и не закрыл риск."
      }
     ]
    },
@@ -2135,25 +2246,29 @@
       "id": "a",
       "text": "You treat sticker-sourced answers as unknown and have the buyers photograph nameplates on the next round.",
       "share": 1,
-      "fb": "A sticker records what someone believed at installation; a nameplate records what is in the unit. Turning a soft answer into a missing one is what keeps the count honest as it grows."
+      "fb": "A sticker records what someone believed at installation; a nameplate records what is in the unit. Turning a soft answer into a missing one is what keeps the count honest as it grows.",
+      "_fb_ru": "Наклейка фиксирует то, во что верили при установке; шильдик — то, что стоит в агрегате. Превратить мягкий ответ в отсутствующий — вот что держит счёт честным по мере его роста."
      },
      {
       "id": "b",
       "text": "You accept the reported figures and apply the seven per cent unknown rate to the remaining three hundred as a planning assumption.",
       "share": 0.2,
-      "fb": "You have carried forward a proportion drawn from answers you were just told are unreliable, which makes the projection confident and wrong in the same step."
+      "fb": "You have carried forward a proportion drawn from answers you were just told are unreliable, which makes the projection confident and wrong in the same step.",
+      "_fb_ru": "Ты перенёс дальше долю, взятую из ответов, о которых тебе только что сказали, что они ненадёжны, — и одним движением сделал прогноз уверенным и неверным."
      },
      {
       "id": "c",
       "text": "You send a technician to re-verify a sample of twenty of the sixty-one compliant answers before deciding what to do about the rest.",
       "share": 0.6,
-      "fb": "A sample tells you how wrong the stickers are, which is worth knowing. It also costs a technician's fortnight to measure an error you can simply eliminate on the next visit."
+      "fb": "A sample tells you how wrong the stickers are, which is worth knowing. It also costs a technician's fortnight to measure an error you can simply eliminate on the next visit.",
+      "_fb_ru": "Выборка скажет, насколько врут наклейки, и это стоит знать. Она же стоит двух недель работы техника ради измерения ошибки, которую можно просто убрать на следующем визите."
      },
      {
       "id": "d",
       "text": "You drop the self-reported data entirely and put a technician on every farm, on the view that a question about equipment deserves an answer from somebody who can open the unit.",
       "share": 0.4,
-      "fb": "Four hundred technician visits is the most accurate survey nobody will finish in time, and it takes the buyers out of a conversation the project needs them inside."
+      "fb": "Four hundred technician visits is the most accurate survey nobody will finish in time, and it takes the buyers out of a conversation the project needs them inside.",
+      "_fb_ru": "Четыреста визитов техника — самое точное обследование, которое никто не успеет закончить, и оно же выводит закупщиков из разговора, где они проекту нужны."
      }
     ]
    },
@@ -2180,21 +2295,24 @@
       "text": "You develop farm-level replacement: a financed swap of each non-compliant unit, priced so the repayment sits below what the farm already spends on running the old one.",
       "share": 1,
       "next": "B1a",
-      "fb": "Replacement keeps the cold chain where it is and asks each farm for a decision it can afford on its own terms. Pricing against their current running cost is what turns an obligation into an offer."
+      "fb": "Replacement keeps the cold chain where it is and asks each farm for a decision it can afford on its own terms. Pricing against their current running cost is what turns an obligation into an offer.",
+      "_fb_ru": "Замена оставляет холодовую цепь там, где она есть, и просит у каждого хозяйства решение, посильное на его условиях. Расчёт против их нынешних эксплуатационных затрат превращает обязанность в предложение."
      },
      {
       "id": "b",
       "text": "You develop shared cooling: four regional chilled hubs owned by the distributor, with farms delivering warm and the company taking the refrigerant problem in-house.",
       "share": 0.6,
       "next": "B1b",
-      "fb": "Taking the problem in-house solves compliance for four hundred farms in four buildings, which is a genuinely different answer. It also moves cost, risk and an extra handling step onto the company."
+      "fb": "Taking the problem in-house solves compliance for four hundred farms in four buildings, which is a genuinely different answer. It also moves cost, risk and an extra handling step onto the company.",
+      "_fb_ru": "Забрать задачу к себе — значит закрыть требования для четырёхсот хозяйств в четырёх зданиях, и это по-настоящему другой ответ. Он же переносит на компанию затраты, риск и лишнюю перевалку."
      },
      {
       "id": "c",
       "text": "You spend the quarter costing the penalty for missing the phase-down, so the board can compare compliance with the price of not complying, and leave the hub outline standing as the alternative.",
       "share": 0.2,
       "next": "B1b",
-      "fb": "The phase-down is a date in law, not a tariff the company can elect to pay. You spent the only quarter you had developing an option the board cannot take, and the outline went up unexamined."
+      "fb": "The phase-down is a date in law, not a tariff the company can elect to pay. You spent the only quarter you had developing an option the board cannot take, and the outline went up unexamined.",
+      "_fb_ru": "Сокращение хладагента — дата в законе, а не тариф, который компания вправе оплатить. Ты потратил единственный квартал на вариант, который совет принять не может, и общая схема ушла наверх непроверенной."
      }
     ]
    },
@@ -2221,19 +2339,22 @@
         "id": "a",
         "text": "You publish the offer for the farms it works for and say that a hundred and forty need a different answer you have not found yet.",
         "share": 1,
-        "fb": "Shipping the part that works starts two hundred and sixty upgrades this year. Naming the gap yourself is what stops those hundred and forty finding out by applying and being refused."
+        "fb": "Shipping the part that works starts two hundred and sixty upgrades this year. Naming the gap yourself is what stops those hundred and forty finding out by applying and being refused.",
+        "_fb_ru": "Отгрузить ту часть, которая работает, — значит запустить двести шестьдесят замен уже в этом году. Назвать разрыв самому — вот что не даёт тем ста сорока узнать о нём, подав заявку и получив отказ."
        },
        {
         "id": "b",
         "text": "You hold the offer until the arithmetic works for every farm on the list, so that nobody is told in writing that they do not qualify for the company's own programme.",
         "share": 0.4,
-        "fb": "Fair in intent, and it costs the farms who could have started a year of the three you have. Waiting for a universal answer is a decision about them made without them."
+        "fb": "Fair in intent, and it costs the farms who could have started a year of the three you have. Waiting for a universal answer is a decision about them made without them.",
+        "_fb_ru": "По намерению честно, а по цене — год из трёх, что у тебя есть, отнятый у хозяйств, которые могли начать. Ждать универсального ответа — это решение о них, принятое без них."
        },
        {
         "id": "c",
         "text": "You stretch the repayment period until the arithmetic works for the smallest farm, and apply the same terms to everybody.",
         "share": 0.2,
-        "fb": "The arithmetic now works because the debt outlives the equipment. You have solved the presentation of the problem and lengthened the problem itself."
+        "fb": "The arithmetic now works because the debt outlives the equipment. You have solved the presentation of the problem and lengthened the problem itself.",
+        "_fb_ru": "Арифметика теперь сходится, потому что долг переживает оборудование. Ты решил подачу проблемы и удлинил саму проблему."
        }
       ]
      },
@@ -2244,19 +2365,22 @@
         "id": "a",
         "text": "You put the hubs forward as a change to what the company is, not as a compliance measure, and ask the board to decide on that basis.",
         "share": 1,
-        "fb": "A permanent fifth of operating profit is a decision about the business model, and framing it as a refrigerant project would get it approved by people answering a smaller question."
+        "fb": "A permanent fifth of operating profit is a decision about the business model, and framing it as a refrigerant project would get it approved by people answering a smaller question.",
+        "_fb_ru": "Постоянная пятая часть операционной прибыли — это решение о бизнес-модели, а подать его как проект по хладагенту значило бы получить одобрение от людей, отвечающих на вопрос поменьше."
        },
        {
         "id": "b",
         "text": "You present the hubs as the compliance solution with the cost shown in the appendix. Compliance is not optional.",
         "share": 0,
-        "fb": "Compliance is not optional and this particular route to it very much is. The appendix is where a decision goes to be approved without being taken."
+        "fb": "Compliance is not optional and this particular route to it very much is. The appendix is where a decision goes to be approved without being taken.",
+        "_fb_ru": "Соблюдение требований не опционально, а вот этот конкретный путь к нему — очень даже. Приложение — то место, куда решение отправляют, чтобы его утвердили, не приняв."
        },
        {
         "id": "c",
         "text": "You propose two hubs instead of four, covering the densest half of the farms, and revisit the rest later.",
         "share": 0.6,
-        "fb": "Halving the commitment while the model is unproven is a real answer. It also leaves half the farms with the original problem and the company with a second decision it has not framed."
+        "fb": "Halving the commitment while the model is unproven is a real answer. It also leaves half the farms with the original problem and the company with a second decision it has not framed.",
+        "_fb_ru": "Урезать обязательство вдвое, пока модель не проверена, — настоящий ответ. Он же оставляет половину хозяйств с исходной проблемой, а компанию — со вторым решением, которое она ещё не сформулировала."
        }
       ]
      }
@@ -2283,19 +2407,22 @@
       "id": "a",
       "text": "You tie the subsidy to the equipment rather than the relationship: repayable in full if the farm sells the unit or leaves, because the money is for the unit.",
       "share": 1,
-      "fb": "The board's real interest is not being funded and then abandoned, and that interest survives without an exclusivity clause. You protected the money and left the farm its second buyer."
+      "fb": "The board's real interest is not being funded and then abandoned, and that interest survives without an exclusivity clause. You protected the money and left the farm its second buyer.",
+      "_fb_ru": "Настоящий интерес совета — не профинансировать и остаться ни с чем, и этот интерес защищён без оговорки об эксклюзивности. Ты защитил деньги и оставил хозяйству второго покупателя."
      },
      {
       "id": "b",
       "text": "You accept exclusivity, since the company is putting up the capital and has a right to secure the supply it is paying to protect.",
       "share": 0.2,
-      "fb": "The clause is defensible and the farms most able to refuse it are the ones carrying the most volume. You will lose the argument with exactly the suppliers you cannot replace."
+      "fb": "The clause is defensible and the farms most able to refuse it are the ones carrying the most volume. You will lose the argument with exactly the suppliers you cannot replace.",
+      "_fb_ru": "Оговорка защитима, и отказаться от неё легче всего тем, кто везёт наибольший объём. Ты проиграешь этот спор ровно тем поставщикам, которых не заменишь."
      },
      {
       "id": "c",
       "text": "You argue against attaching any condition at all, since the phase-down is a problem the whole supply chain shares and every clause you add is a reason for a farm to wait another year.",
       "share": 0.4,
-      "fb": "Uptake matters, and a subsidy with no strings is a grant the board did not agree to make. You are asking them to trust four hundred parties they have no relationship with."
+      "fb": "Uptake matters, and a subsidy with no strings is a grant the board did not agree to make. You are asking them to trust four hundred parties they have no relationship with.",
+      "_fb_ru": "Охват важен, а субсидия без условий — это грант, которого совет не одобрял. Ты просишь их довериться четырёмстам сторонам, с которыми у них нет никаких отношений."
      }
     ]
    },
@@ -2320,25 +2447,29 @@
       "id": "a",
       "text": "You answer that the concern is reasonable, give the number of farms below the affordability line, and say what you have and have not solved for them.",
       "share": 1,
-      "fb": "The room went quiet because the accusation matched their arithmetic. Giving them the number you already know is the only answer that is not a reassurance, and reassurance is what they were expecting."
+      "fb": "The room went quiet because the accusation matched their arithmetic. Giving them the number you already know is the only answer that is not a reassurance, and reassurance is what they were expecting.",
+      "_fb_ru": "Зал затих, потому что обвинение сошлось с их собственной арифметикой. Дать им число, которое ты уже знаешь, — единственный ответ, который не является успокаиванием, а именно успокаивания они и ждали."
      },
      {
       "id": "b",
       "text": "You explain that the phase-down is regulatory, applies to everyone equally, and is entirely outside the company's control.",
       "share": 0.2,
-      "fb": "Every word is accurate and it answers a question about the regulation while they asked a question about you."
+      "fb": "Every word is accurate and it answers a question about the regulation while they asked a question about you.",
+      "_fb_ru": "Каждое слово точно, и это ответ на вопрос о регулировании, тогда как спросили о тебе."
      },
      {
       "id": "c",
       "text": "You commit on the spot, in front of the whole room, that no farm will be dropped for having a non-compliant chiller.",
       "share": 0.6,
-      "fb": "The commitment is the right instinct and you have just made it for a company whose board has not agreed it. A promise you cannot bank is worth one meeting."
+      "fb": "The commitment is the right instinct and you have just made it for a company whose board has not agreed it. A promise you cannot bank is worth one meeting.",
+      "_fb_ru": "Обязательство — верный инстинкт, и ты только что взял его за компанию, совет которой этого не одобрял. Обещание, которое нельзя обналичить, стоит одной встречи."
      },
      {
       "id": "d",
       "text": "You take the point away and offer to come back to the region with a specific answer for farms under the line.",
       "share": 0.4,
-      "fb": "Returning with an answer is better than improvising one, and leaving the room without saying anything true today means the accusation stands until you come back."
+      "fb": "Returning with an answer is better than improvising one, and leaving the room without saying anything true today means the accusation stands until you come back.",
+      "_fb_ru": "Вернуться с ответом лучше, чем сочинить его на месте, и уйти, не сказав сегодня ничего правдивого, — значит оставить обвинение в силе до своего возвращения."
      }
     ]
    },
@@ -2365,21 +2496,24 @@
       "text": "You answer on the merits of your own offer, setting out what it gives a farm that theirs does not, and put the two side by side for the farms to read.",
       "share": 1,
       "next": "B2a",
-      "fb": "A comparison the farm can check itself is the only response that survives their announcement being better than yours in one respect. You also stopped competing on the single dimension where you cannot win."
+      "fb": "A comparison the farm can check itself is the only response that survives their announcement being better than yours in one respect. You also stopped competing on the single dimension where you cannot win.",
+      "_fb_ru": "Сравнение, которое хозяйство может проверить само, — единственный ответ, переживающий тот факт, что их объявление в чём-то одном лучше твоего. Заодно ты перестал соревноваться на том единственном измерении, где выиграть не можешь."
      },
      {
       "id": "b",
       "text": "You go to the board for authority to match the unconditional terms before any farm decides, since the first mover sets what the rest expect.",
       "share": 0.6,
       "next": "B2b",
-      "fb": "Matching is a legitimate answer and it is a different game: you are now bidding for suppliers rather than solving a phase-down, and the bidding has no natural end."
+      "fb": "Matching is a legitimate answer and it is a different game: you are now bidding for suppliers rather than solving a phase-down, and the bidding has no natural end.",
+      "_fb_ru": "Сравняться — законный ответ и другая игра: теперь ты торгуешься за поставщиков, а не решаешь задачу сокращения хладагента, и у этих торгов нет естественного конца."
      },
      {
       "id": "c",
       "text": "You wait to see how many farms actually take the competitor's offer before responding. An announcement is not a signed agreement and nobody has counted the takers yet.",
       "share": 0.2,
       "next": "B2b",
-      "fb": "By the time the number is known, the farms who moved have moved, and you will be responding to a fact instead of a choice."
+      "fb": "By the time the number is known, the farms who moved have moved, and you will be responding to a fact instead of a choice.",
+      "_fb_ru": "К моменту, когда число станет известно, ушедшие хозяйства уже уйдут, и ты будешь отвечать на факт вместо того, чтобы отвечать на выбор."
      }
     ]
    },
@@ -2406,19 +2540,22 @@
         "id": "a",
         "text": "You check how the assignment was actually done before concluding anything about visits, because a gap that size usually means the groups differ.",
         "share": 1,
-        "fb": "A fifty-point gap is too large for the visit alone, and the likeliest explanation is that the buyers went to the farms they expected to say yes. Checking the assignment costs a day and decides where the next year's effort goes."
+        "fb": "A fifty-point gap is too large for the visit alone, and the likeliest explanation is that the buyers went to the farms they expected to say yes. Checking the assignment costs a day and decides where the next year's effort goes.",
+        "_fb_ru": "Разрыв в пятьдесят пунктов слишком велик для одного визита, и самое вероятное объяснение — закупщики поехали к тем, кто и так скажет «да». Проверка распределения стоит день и решает, куда пойдут усилия следующего года."
        },
        {
         "id": "b",
         "text": "You take the result at face value and move the whole rollout to in-person visits, since a gap this wide makes the self-reported figures look unusable.",
         "share": 0.2,
-        "fb": "You have committed eleven buyers for a year on the strength of a comparison that was never a comparison."
+        "fb": "You have committed eleven buyers for a year on the strength of a comparison that was never a comparison.",
+        "_fb_ru": "Ты занял одиннадцать закупщиков на год, опираясь на сравнение, которое сравнением никогда не было."
        },
        {
         "id": "c",
         "text": "You run the postal group again with a better letter, since the difference may be the writing rather than the channel.",
         "share": 0.4,
-        "fb": "The letter may well be part of it, and testing it before you know whether the groups were comparable means a good result will be just as unreadable as this one."
+        "fb": "The letter may well be part of it, and testing it before you know whether the groups were comparable means a good result will be just as unreadable as this one.",
+        "_fb_ru": "Письмо вполне может быть частью дела, и проверять его, не зная, сопоставимы ли группы, — значит получить хороший результат, столь же нечитаемый, как этот."
        }
       ]
      },
@@ -2429,19 +2566,22 @@
         "id": "a",
         "text": "You flag that the retention figure came from farms never at risk, since a model answers only the question its inputs asked.",
         "share": 1,
-        "fb": "A business case that answers itself is worse than no business case, because it will be quoted for years. The farms who were always staying cannot tell you what retention costs."
+        "fb": "A business case that answers itself is worse than no business case, because it will be quoted for years. The farms who were always staying cannot tell you what retention costs.",
+        "_fb_ru": "Обоснование, которое отвечает само себе, хуже, чем никакого: его будут цитировать годами. Хозяйства, которые и так оставались, не могут сказать тебе, сколько стоит удержание."
        },
        {
         "id": "b",
         "text": "You let the model stand. The number is genuine, came from real farms, and re-running it costs a month the competitor is spending on the same suppliers.",
         "share": 0,
-        "fb": "The number is genuine about a population that is not the one in question, and your name is on the input."
+        "fb": "The number is genuine about a population that is not the one in question, and your name is on the input.",
+        "_fb_ru": "Число подлинное — про совокупность, которая не та, о которой речь, и на этом входе стоит твоё имя."
        },
        {
         "id": "c",
         "text": "You add a sensitivity range around the retention figure so that the board can see how much of the case rests on that single number holding.",
         "share": 0.6,
-        "fb": "A range is honest arithmetic on a dishonest population. It shows how wrong the answer could be without saying that the question was asked of the wrong farms."
+        "fb": "A range is honest arithmetic on a dishonest population. It shows how wrong the answer could be without saying that the question was asked of the wrong farms.",
+        "_fb_ru": "Диапазон — честная арифметика по нечестной совокупности. Он показывает, насколько ответ может быть неверен, и не говорит, что вопрос задали не тем хозяйствам."
        }
       ]
      }
@@ -2468,25 +2608,29 @@
       "id": "a",
       "text": "You take the buy-out to the board as the cost of the position the company has held with these farms since the programme began.",
       "share": 1,
-      "fb": "The programme has run on the understanding that it was not pushing these farms out, and a tenth of the budget is what that understanding costs. Naming it as the price of a position already taken is what gets it approved."
+      "fb": "The programme has run on the understanding that it was not pushing these farms out, and a tenth of the budget is what that understanding costs. Naming it as the price of a position already taken is what gets it approved.",
+      "_fb_ru": "Программа шла на понимании, что она не выталкивает эти хозяйства, и десятая часть бюджета — цена этого понимания. Назвать её ценой уже занятой позиции — вот что даёт её утвердить."
      },
      {
       "id": "b",
       "text": "You drop the ninety, since four per cent of volume is recoverable and a tenth of the budget is not.",
       "share": 0,
-      "fb": "Four per cent of volume in one region is most of one region's farms, and the phase-down will have done exactly what the farmer said it would."
+      "fb": "Four per cent of volume in one region is most of one region's farms, and the phase-down will have done exactly what the farmer said it would.",
+      "_fb_ru": "Четыре процента объёма в одном регионе — это большинство хозяйств этого региона, и сокращение хладагента сделает ровно то, о чём говорил фермер."
      },
      {
       "id": "c",
       "text": "You buy out the forty largest of the ninety and let the rest lapse.",
       "share": 0.4,
-      "fb": "It halves the bill and it also selects by size for the first time in the programme — after two years of insisting that size was not the criterion."
+      "fb": "It halves the bill and it also selects by size for the first time in the programme — after two years of insisting that size was not the criterion.",
+      "_fb_ru": "Счёт уменьшается вдвое, и впервые за программу отбор идёт по размеру — после двух лет утверждений, что размер не критерий."
      },
      {
       "id": "d",
       "text": "You ask the regulator whether a short extension is available for farms below a size threshold, since the phase-down was written for industrial refrigeration rather than for four hundred smallholdings.",
       "share": 0.6,
-      "fb": "Worth asking, and the answer arrives on the regulator's timetable rather than yours. It is a good second move and a poor first one."
+      "fb": "Worth asking, and the answer arrives on the regulator's timetable rather than yours. It is a good second move and a poor first one.",
+      "_fb_ru": "Спросить стоит, и ответ придёт по календарю регулятора, а не по твоему. Это хороший второй ход и плохой первый."
      }
     ]
    },
@@ -2511,25 +2655,29 @@
       "id": "a",
       "text": "You keep technician sign-off on the refrigerant handover and take the farm's own form for the rest of the installation.",
       "share": 1,
-      "fb": "You split the sign-off along the line the regulator actually reads. The document it audits keeps a qualified signature, the part nobody audits gets the cheap process, and the installer has the relief he asked for."
+      "fb": "You split the sign-off along the line the regulator actually reads. The document it audits keeps a qualified signature, the part nobody audits gets the cheap process, and the installer has the relief he asked for.",
+      "_fb_ru": "Ты разделил подписи по той линии, которую регулятор действительно читает. Документ, который он проверяет, сохраняет квалифицированную подпись, часть, которую никто не проверяет, получает дешёвую процедуру, а монтажник — то облегчение, о котором просил."
      },
      {
       "id": "b",
       "text": "You keep technician sign-off on everything and accept that the last farms run into the harvest fortnight.",
       "share": 0.6,
-      "fb": "Clean and expensive. Every certificate is worth what it says, and you have moved the finish into the two weeks when nobody on a farm has time for you."
+      "fb": "Clean and expensive. Every certificate is worth what it says, and you have moved the finish into the two weeks when nobody on a farm has time for you.",
+      "_fb_ru": "Чисто и дорого. Каждый сертификат стоит того, что в нём написано, и ты сдвинул финиш в те две недели, когда на хозяйстве ни у кого нет на тебя времени."
      },
      {
       "id": "c",
       "text": "You accept the farm's own form for everything, since the regulator has never asked for the certificate.",
       "share": 0.4,
-      "fb": "Never asked is not the same as will not ask, and refrigerant handover is exactly where an audit starts. You traded the one document that gets read."
+      "fb": "Never asked is not the same as will not ask, and refrigerant handover is exactly where an audit starts. You traded the one document that gets read.",
+      "_fb_ru": "«Никогда не спрашивали» — не то же самое, что «не спросят», а передача хладагента ровно там, где начинается проверка. Ты разменял единственный документ, который читают."
      },
      {
       "id": "d",
       "text": "You accept the farm's own form and add a sample audit of one farm in ten after the deadline.",
       "share": 0.2,
-      "fb": "A sample after the date tells you how many are wrong when it is too late to be right. The audit is real work with no route back to compliance."
+      "fb": "A sample after the date tells you how many are wrong when it is too late to be right. The audit is real work with no route back to compliance.",
+      "_fb_ru": "Выборка после срока скажет, сколько сделано неверно, когда исправлять уже поздно. Аудит — настоящая работа без пути назад к соблюдению требований."
      }
     ]
    },
@@ -2556,21 +2704,24 @@
       "text": "You go to the farms and ask which of them can take an installation during harvest, and build the schedule from who volunteers.",
       "share": 1,
       "next": "B3a",
-      "fb": "The farms know their own fortnight better than any scheduler, and asking turns an imposition into a queue. It also surfaces the ones who genuinely cannot, before the installer arrives to find nobody home."
+      "fb": "The farms know their own fortnight better than any scheduler, and asking turns an imposition into a queue. It also surfaces the ones who genuinely cannot, before the installer arrives to find nobody home.",
+      "_fb_ru": "Хозяйства знают свои две недели лучше любого планировщика, и вопрос превращает навязывание в очередь. Заодно всплывают те, кто действительно не может, — до того, как монтажник приедет и никого не застанет."
      },
      {
       "id": "b",
       "text": "You add a second installation crew for the final six weeks, funded from the contingency, so harvest can be worked around entirely.",
       "share": 0.6,
       "next": "B3b",
-      "fb": "Money for time is the cleanest trade available here and it is not free: a crew hired for six weeks arrives without the relationships the first one built over two years."
+      "fb": "Money for time is the cleanest trade available here and it is not free: a crew hired for six weeks arrives without the relationships the first one built over two years.",
+      "_fb_ru": "Деньги за время — самый чистый размен из доступных здесь, и он не бесплатный: бригада, нанятая на шесть недель, приезжает без тех отношений, которые первая строила два года."
      },
      {
       "id": "c",
       "text": "You instruct the installer to work through harvest and notify the farms of their appointed slots.",
       "share": 0,
       "next": "B3b",
-      "fb": "Two years of asking, and the last six weeks tell the farms what the relationship was actually worth."
+      "fb": "Two years of asking, and the last six weeks tell the farms what the relationship was actually worth.",
+      "_fb_ru": "Два года разговоров — и последние шесть недель сообщают хозяйствам, чего эти отношения стоили на самом деле."
      }
     ]
    },
@@ -2597,19 +2748,22 @@
         "id": "a",
         "text": "You disclose the eleven to the regulator before the deadline, with the dates they will be completed and why.",
         "share": 1,
-        "fb": "A disclosed shortfall with a date is a compliance conversation; the same shortfall found in an audit is an enforcement one. Eleven farms is small enough to be forgiven and large enough not to hide."
+        "fb": "A disclosed shortfall with a date is a compliance conversation; the same shortfall found in an audit is an enforcement one. Eleven farms is small enough to be forgiven and large enough not to hide.",
+        "_fb_ru": "Заявленное самим отставание с датой — это разговор о соблюдении требований; то же отставание, найденное проверкой, — разговор о взыскании. Одиннадцать хозяйств — достаточно мало, чтобы простить, и достаточно много, чтобы не спрятать."
        },
        {
         "id": "b",
         "text": "You suspend purchasing from the eleven on the deadline and resume once they are converted.",
         "share": 0.2,
-        "fb": "You have made eleven long-standing suppliers carry the consequence of a schedule they offered to accommodate, and every other farm in the region will hear about it."
+        "fb": "You have made eleven long-standing suppliers carry the consequence of a schedule they offered to accommodate, and every other farm in the region will hear about it.",
+        "_fb_ru": "Ты заставил одиннадцать давних поставщиков нести последствия графика, под который они сами предложили подстроиться, и об этом услышит каждое хозяйство в регионе."
        },
        {
         "id": "c",
         "text": "You complete the programme, report full compliance, and finish the eleven quietly in the weeks after.",
         "share": 0,
-        "fb": "The report is false on the day it is signed, and the eleven farms are witnesses to that fact for as long as the paperwork exists."
+        "fb": "The report is false on the day it is signed, and the eleven farms are witnesses to that fact for as long as the paperwork exists.",
+        "_fb_ru": "Отчёт ложен в день подписания, и одиннадцать хозяйств — свидетели этого ровно столько, сколько существует бумага."
        }
       ]
      },
@@ -2620,19 +2774,22 @@
         "id": "a",
         "text": "You stop signing off the programme, have the manufacturer define what identifies an untested unit, and re-test everything that fits.",
         "share": 1,
-        "fb": "“Cannot say which” is not a small subset of the problem, it is the whole of it. Letting the manufacturer set the identifying test is how the retest becomes finite instead of four hundred."
+        "fb": "“Cannot say which” is not a small subset of the problem, it is the whole of it. Letting the manufacturer set the identifying test is how the retest becomes finite instead of four hundred.",
+        "_fb_ru": "«Не могут сказать, в каких именно» — это не маленькая часть проблемы, это вся она. Дать производителю задать опознающий тест — вот что делает повторную проверку конечной вместо четырёхсот."
        },
        {
         "id": "b",
         "text": "You re-test a representative sample of the batch and, if it passes, sign off the programme on the strength of it rather than holding four hundred farms for a fault nobody has seen.",
         "share": 0.4,
-        "fb": "A passing sample tells you the failure is not universal. It does not tell any individual farm that the unit in their yard was tested, and that is the question they will ask in August."
+        "fb": "A passing sample tells you the failure is not universal. It does not tell any individual farm that the unit in their yard was tested, and that is the question they will ask in August.",
+        "_fb_ru": "Прошедшая выборка говорит, что отказ не всеобщий. Она не говорит ни одному конкретному хозяйству, что проверяли агрегат в его дворе, — а спросят они в августе именно об этом."
        },
        {
         "id": "c",
         "text": "You sign off on the deadline and schedule the retests as post-installation maintenance. The units are installed and the compliance date is the thing the regulator counts.",
         "share": 0,
-        "fb": "You have converted a known defect into a maintenance item on your own authority, and dated the signature before the check."
+        "fb": "You have converted a known defect into a maintenance item on your own authority, and dated the signature before the check.",
+        "_fb_ru": "Ты своей властью превратил известный дефект в пункт техобслуживания и поставил в подписи дату раньше проверки."
        }
       ]
      }
