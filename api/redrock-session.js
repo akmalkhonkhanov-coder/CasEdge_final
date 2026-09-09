@@ -37,6 +37,27 @@ function rkMsg(key, body) {
   const pair = RK_MSG[key] || {};
   return pair[refusalLang(body)] || pair.en || '';
 }
+/* ПРОВОД ЯЗЫКА РАЗБОРА · круг 178.
+   Игра — экзамен и идёт по-английски; разбор — учитель и говорит на языке кандидата.
+   Русская пара лежит рядом с английской строкой по конвенции `_поле_ru` — той же,
+   которой уже живут SFL (`_why_ru`, `_fb_ru`) и Sea Wolf. Ни одно поле не
+   переименовывается: английская строка остаётся на месте и остаётся предметом сверки.
+
+   МАССИВЫ. `chain_lesson` бывает массивом, и его элементы отбираются ПО ИНДЕКСАМ тех
+   путей, которые кандидат реально прошёл. Русский массив другой длины сдвинул бы урок
+   на чужой путь — молча и правдоподобно. Поэтому пара принимается только при равной
+   длине; иначе возвращается английская, и гейт перевода это увидит как непереведённое,
+   а не как совпадение. */
+function rkPick(obj, field, lang) {
+  if (!obj) return null;
+  const en = obj[field];
+  if (String(lang) !== 'ru') return en;
+  const ru = obj['_' + field + '_ru'];
+  if (Array.isArray(en)) return (Array.isArray(ru) && ru.length === en.length) ? ru : en;
+  if (typeof ru === 'string' ? ru.trim() !== '' : ru != null) return ru;
+  return en;
+}
+
 const GAMES_DATA = require('./redrock-games.json');
 
 const FALLBACK_ORIGIN = 'https://cas-edge-final.vercel.app';
@@ -121,7 +142,8 @@ function fieldMap(game) {
 // `training` — такты: их условие несёт величину, которой в вопросе ещё не было.
 // Уехав в браузер целиком, такт выдаёт и ответ, и то, что кандидату предстоит
 // считать дальше. Наружу он уходит по одному и только после оценки родителя.
-const RK_SERVER_KEYS = ['answer', 'naive', 'naive_reason', 'justify_rubric', 'distractors', 'hidden', 'collect', 'role', 'used_in', 'chain', 'training'];
+const RK_SERVER_KEYS = ['answer', 'naive', 'naive_reason', '_naive_reason_ru', 'justify_rubric',
+  'distractors', 'hidden', 'collect', 'role', 'used_in', 'chain', 'training'];
 function rkDeepStrip(v) {
   if (Array.isArray(v)) return v.map(rkDeepStrip);
   if (v && typeof v === 'object') {
@@ -441,7 +463,7 @@ function num(v) {
 }
 function round2(x, d) { const f = Math.pow(10, d == null ? 2 : d); return Math.round((x + Number.EPSILON) * f) / f; }
 
-function gradeNumeric(rec, value) {
+function gradeNumeric(rec, value, lang) {
   const v = round2(num(value), rec.round);
   if (!isFinite(v)) return { status: 'wrong', feedback: 'Enter a number.' };
   const ans = round2(num(rec.answer), rec.round);
@@ -449,7 +471,7 @@ function gradeNumeric(rec, value) {
   if (Math.abs(v - ans) <= tol) return { status: 'correct', correctAnswer: rec.answer };
   if (rec.naive != null) {
     const nv = round2(num(rec.naive), rec.round);
-    if (isFinite(nv) && Math.abs(v - nv) <= tol) return { status: 'naive', correctAnswer: rec.answer, naiveReason: rec.naive_reason || '' };
+    if (isFinite(nv) && Math.abs(v - nv) <= tol) return { status: 'naive', correctAnswer: rec.answer, naiveReason: rkPick(rec, 'naive_reason', lang) || '' };
   }
   return { status: 'wrong', correctAnswer: rec.answer };
 }
@@ -458,10 +480,10 @@ function normExact(s) {
   // trim, collapse whitespace, drop surrounding punctuation, case-insensitive.
   return String(s == null ? '' : s).trim().toLowerCase().replace(/\s+/g, ' ').replace(/^[\s"'(.]+|[\s"').:;,]+$/g, '');
 }
-function gradeExact(rec, value) {
+function gradeExact(rec, value, lang) {
   const v = normExact(value);
   if (v && v === normExact(rec.answer)) return { status: 'correct', correctAnswer: rec.answer };
-  if (rec.naive != null && v && v === normExact(rec.naive)) return { status: 'naive', correctAnswer: rec.answer, naiveReason: rec.naive_reason || '' };
+  if (rec.naive != null && v && v === normExact(rec.naive)) return { status: 'naive', correctAnswer: rec.answer, naiveReason: rkPick(rec, 'naive_reason', lang) || '' };
   return { status: 'wrong', correctAnswer: rec.answer };
 }
 
@@ -595,9 +617,11 @@ function rkTicketValid(userId, gameId, fieldId, got) {
      пропущено ВСЁ        → все строки: ни один путь не пройден, но каждая
                             показывает, что дал бы один спасённый чип
    Класс SUB (одиночный chip + decoy) не трогается: там путь один. */
-function rkWalkedPaths(game, r, took) {
+function rkWalkedPaths(game, r, took, lang) {
   let ct = (r.chain_trap === undefined ? null : r.chain_trap);
-  let cl = r.chain_lesson || '';
+  /* Сторона выбирается ЗДЕСЬ, до отбора по индексам: отбирать сначала, а переводить
+     потом — значит переводить уже урезанный массив и терять соответствие индексов. */
+  let cl = rkPick(r, 'chain_lesson', lang) || '';
   const link = (Array.isArray(game.chain) ? game.chain : []).find(l => l.field === r.key);
   if (!link || !Array.isArray(link.chips) || !Array.isArray(ct)) return { ct, cl };
   const missed = link.chips.filter(id => !took.has(String(id)));
@@ -699,8 +723,8 @@ export default async function handler(req, res) {
       const fid = String(body.fieldId);
       let out;
       if (rec.input === 'justify') out = await gradeGraphJustify(rec, body.value);
-      else if (rec.input === 'numeric') out = gradeNumeric(rec, body.value);
-      else out = gradeExact(rec, body.value); // dropdown | choice
+      else if (rec.input === 'numeric') out = gradeNumeric(rec, body.value, refusalLang(body));
+      else out = gradeExact(rec, body.value, refusalLang(body)); // dropdown | choice
       // Билет на разбор выдаётся ТОЛЬКО аналитическим полям и ТОЛЬКО когда поле
       // действительно оценено (ungraded — это несостоявшаяся сдача, не сдача).
       if (fid.indexOf('a:') === 0 && out && out.status && out.status !== 'ungraded') {
@@ -759,11 +783,11 @@ export default async function handler(req, res) {
       return res.status(200).json({
         journal: journal,
         review: rev.map(r => {
-          const w = rkWalkedPaths(g, r, took);
+          const w = rkWalkedPaths(g, r, took, refusalLang(body));
           return {
             q: r.q, key: r.key, answer: r.answer,
             trap: (r.trap === undefined ? null : r.trap),
-            lesson: r.lesson || '',
+            lesson: rkPick(r, 'lesson', refusalLang(body)) || '',
             // Сквозная цепь (долг dev №3). Кандидат, собравший не тот чип, получает
             // ДРУГОЕ число и доносит его до отчёта. Без этой строки он видит голое
             // «неверно» и не узнаёт, что свернул ещё на экране сбора.
