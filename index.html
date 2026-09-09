@@ -373,6 +373,27 @@
     .nav-link:hover { color: var(--on-dark); background: rgba(128,128,128,.1); }
     .nav-link.active { color: var(--coral); }
     @media (max-width: 560px) { .nav-link { padding: 7px 8px; font-size: 13px; } }
+
+    /* ШАПКА ЛЕНДИНГА НА ТЕЛЕФОНЕ · 08.09.2026, dev.
+       Найдено скриншотом в 390px, а НЕ замером: программная проверка сказала
+       «горизонтальной прокрутки нет» и была формально права — у body стоит
+       overflow-x: clip, то есть лишнее не прокручивается, а ОТРЕЗАЕТСЯ. На 375 и
+       390 пикселях (самые ходовые телефоны) пункт FAQ кончался на 421-м пикселе,
+       а правее него — переключатель языка и кнопка «Начать». То есть покупатель,
+       открывший сайт с телефона, физически не мог начать: главная кнопка была за
+       краем экрана, и никакого бургер-меню в файле нет вовсе.
+       Урок себе: «прокрутки нет» и «всё поместилось» — разные утверждения.
+
+       Правка минимальная и лечит вред, а не переделывает дизайн: до 560px ссылки
+       на разделы уходят (они дублируются якорями ниже по странице), а язык и
+       «Начать» остаются. Полноценное мобильное меню — отдельная работа. */
+    @media (max-width: 560px) {
+      .cl-nav-links { display: none !important; }
+      .cl-container { gap: 12px; }
+    }
+    @media (max-width: 380px) {
+      .cl-lang-btn { padding: 6px 8px; }
+    }
     .lang-btn {
       background: none; border: 1px solid rgba(128,128,128,.25); cursor: pointer;
       font-family: inherit; font-size: 13px; color: var(--on-dark-soft);
@@ -478,7 +499,25 @@
       display: none; align-items: center; gap: 16px; flex-wrap: wrap;
     }
     [data-theme="light"] .cookie-banner { border-color: rgba(31,41,55,.14); box-shadow: 0 12px 40px rgba(31,41,55,.15); }
-    .cookie-banner.show { display: flex; animation: fadeUp .4s ease both; }
+    /* ПЛАШКА COOKIE УЕЗЖАЛА ВПРАВО · 08.09.2026, dev. Найдено скриншотом телефона.
+       Плашка центрируется парой `left:50%` + `transform: translateX(-50%)`. Анимация
+       fadeUp задаёт СВОЙ transform (translateY), а `both` оставляет её последний кадр
+       навсегда — и он ЗАМЕЩАЕТ горизонтальное смещение целиком. Плашка вставала левым
+       краем в середину экрана: на мониторе 1440px это просто «не по центру» и никто не
+       замечал, а на телефоне 390px правый край уходил на 553-й пиксель — текст,
+       ссылка на политику и кнопка согласия оказывались за экраном, и закрыть плашку
+       было нечем. Класс: одно свойство, записанное в двух местах, и последнее молча
+       побеждает. Своя анимация, которая несёт центрирование в каждом кадре. */
+    @keyframes cookieUp {
+      from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+    .cookie-banner.show { display: flex; animation: cookieUp .4s ease both; }
+    @media (max-width: 560px) {
+      .cookie-banner { flex-direction: column; align-items: stretch; gap: 12px; }
+      .cookie-actions { justify-content: stretch; }
+      .cookie-actions .cookie-btn, .cookie-actions .cookie-btn-ghost { flex: 1; }
+    }
     .cookie-text { font-size: 13px; color: var(--on-dark-soft); line-height: 1.5; flex: 1; min-width: 220px; }
     .cookie-text a { color: #5db8a6; cursor: pointer; text-decoration: underline; }
     .cookie-btn {
@@ -5949,6 +5988,12 @@ function goToMode() { showScreen('mode'); }
 // СОДЕРЖАНИЕ ассессмента (сама легенда кейса) остаётся английским, потому что
 // на настоящем интервью оно английское. Поэтому story и title не переводятся,
 // а объяснение формата - переводится.
+/* Единственное место, где живёт длительность партии Redrock: и таймер, и подпись
+   «Время» на экране интро берут число отсюда. Объявлено ДО GAME_INTROS намеренно —
+   объект интро вычисляется на загрузке, и const ниже по файлу упал бы в мёртвой зоне.
+   Гейт gate_таймер_обещан_верно.mjs следит, чтобы подпись и таймер не разъехались. */
+const RK_MINUTES = 35;
+
 const GAME_INTROS = {
   solve: {
     eyebrow: {ru:'Ассессмент в стиле McKinsey', en:'McKinsey-style assessment'},
@@ -5966,7 +6011,7 @@ const GAME_INTROS = {
       ['4',{ru:'<b>Cases</b> - реши короткий отдельный мини-кейс со своим экзибитом.',
             en:'<b>Cases</b> - solve a short standalone mini-case with its own exhibit.'}],
     ],
-    meta: [[{ru:'Время',en:'Time'},{ru:'35 мин',en:'35 min'}],
+    meta: [[{ru:'Время',en:'Time'},{ru:RK_MINUTES+' мин',en:RK_MINUTES+' min'}],
            [{ru:'Фаз',en:'Phases'},'4'],
            [{ru:'Оценка',en:'Scoring'},{ru:'Автоматическая',en:'Auto-graded'}]],
     note: {ru:'Оригинальный сценарий (Calder Sound Fishery). Формат повторяет настоящий ассессмент, содержание наше собственное. Ответы принимаются с допуском 1%.',
@@ -6534,7 +6579,15 @@ async function startRedrock() {
     rkVals: {}, rkGraded: {}, rkMeta: {}, rkTacts: {}, revealed: [],
     rkTickets: {}, rkReview: null, rkReviewBusy: false,
     journal: [], calcLog: [],
-    limitS: (game.est_minutes || 30) * 60, timerId: null, startMs: null
+    /* ТАЙМЕР REDROCK · 08.09.2026, dev. Экран интро обещает «Время 35 мин» на обоих
+       языках, а здесь стояло 30 — и это НЕ запасной вариант, а единственный: ни у
+       одного из 57 наборов Redrock поля est_minutes нет вовсе, значит все 57 партий
+       шли по тридцать минут. Кандидат раскладывал темп на 35 и получал стоп на 30.
+       Тридцать пять — не догадка: 30 (Sea Wolf) + 35 (Redrock) + 20 (SFL) = 85, а
+       именно 85-минутную версию ассессмента лендинг называет полной. Два места
+       говорят 35, одно — 30, и это одно было умолчанием, то есть догадкой по своей
+       природе. Число теперь одно на весь продукт: RK_MINUTES. */
+    limitS: (game.est_minutes || RK_MINUTES) * 60, timerId: null, startMs: null
   };
   svCalcExpr = '';
   try { const cd = document.getElementById('svCalcDisp'); if (cd) cd.textContent = '0'; const cl = document.getElementById('svCalcLog'); if (cl) cl.innerHTML = ''; const cc = document.getElementById('svCalc'); if (cc) cc.classList.remove('show'); } catch (e) {}
