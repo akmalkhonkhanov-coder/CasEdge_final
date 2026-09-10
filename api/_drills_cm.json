@@ -6234,7 +6234,7 @@
           ],
           [
             "Handling fee per package",
-            "collected from the customer on every package today · payable to Danny's on every package if distribution moves out"
+            "$1 · collected from the customer on every package today · payable to Danny's on every package if distribution moves out"
           ]
         ]
       },
@@ -6317,7 +6317,7 @@
           ],
           [
             "Сбор за обработку посылки",
-            "сегодня взимается с покупателя с каждой посылки · при выносе дистрибуции подлежит уплате Danny's с каждой посылки"
+            "$1 · сегодня взимается с покупателя с каждой посылки · при выносе дистрибуции подлежит уплате Danny's с каждой посылки"
           ]
         ]
       },
@@ -6346,7 +6346,7 @@
           "input_number"
         ]
       },
-      "prompt": "A private equity firm is looking at Plastic World, a plastic packaging manufacturer. The owners want $25m and the offer is final. Product mix has not changed in recent years, products are top quality, customers are loyal, and two years ago the company invested further in equipment for product innovation. The three-year P&L is below. Sales fell while volume grew — explain what actually moved, in dollars.",
+      "prompt": "A private equity firm is looking at Plastic World, a plastic packaging manufacturer. The owners want $25m and the offer is final. Product mix has not changed in recent years, products are top quality, customers are loyal, and two years ago the company invested further in equipment for product innovation. The three-year P&L is below. Sales fell while volume grew — explain what actually moved, in dollars. The sales force is compensated on market share. The product line runs to 350 sets of molds. Peer data shows every competitor in the industry is profitable, and a sensitivity analysis values the company at the $25m asked once the profit margin reaches 0%, and at $40m at the industry average margin.",
       "exhibit": {
         "type": "table",
         "header": [
@@ -6467,7 +6467,7 @@
         "code2": []
       },
       "title_ru": "Окончательное предложение",
-      "prompt_ru": "Фонд прямых инвестиций смотрит на Plastic World, производителя пластиковой упаковки. Владельцы хотят $25 млн, и предложение окончательное. Продуктовый микс за последние годы не менялся, продукция высшего качества, клиенты лояльны, а два года назад компания дополнительно вложилась в оборудование для продуктовых новинок. Ниже — P&L за три года. Продажи упали, а объём вырос — объясни, что на самом деле сдвинулось, в долларах.",
+      "prompt_ru": "Фонд прямых инвестиций смотрит на Plastic World, производителя пластиковой упаковки. Владельцы хотят $25 млн, и предложение окончательное. Продуктовый микс за последние годы не менялся, продукция высшего качества, клиенты лояльны, а два года назад компания дополнительно вложилась в оборудование для продуктовых новинок. Ниже — P&L за три года. Продажи упали, а объём вырос — объясни, что на самом деле сдвинулось, в долларах. Отдел продаж премируется за долю рынка. Продуктовая линейка держит 350 комплектов пресс-форм. Данные по конкурентам показывают, что прибыльны все игроки отрасли, а анализ чувствительности оценивает компанию в запрошенные $25m при выходе маржи на 0% и в $40m при среднеотраслевой марже.",
       "exhibit_ru": {
         "type": "table",
         "header": [

@@ -266,7 +266,8 @@
       "C",
       "D"
      ],
-     "naive_reason": "ranks the wells by the highest single reading 52 instead of by the max - min spread"
+     "naive_reason": "ranks the wells by the highest single reading 52 instead of by the max - min spread",
+     "_naive_reason_ru": "скважины ранжированы по наибольшему единичному замеру 52, а не по разбросу «макс − мин»"
     },
     {
      "c": 2,
@@ -276,7 +277,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 540,
-     "naive_reason": "repeats −180 absolute"
+     "naive_reason": "repeats −180 absolute",
+     "_naive_reason_ru": "повторено −180 в абсолюте"
     },
     {
      "c": 3,
@@ -290,7 +292,8 @@
       "Moss",
       "Heath"
      ],
-     "naive_reason": "ranks by the at-risk rate alone, taking Heath's 25%, though Heath's 80 x 25% = 20 loses on absolute counts"
+     "naive_reason": "ranks by the at-risk rate alone, taking Heath's 25%, though Heath's 80 x 25% = 20 loses on absolute counts",
+     "_naive_reason_ru": "ранжировано по одной доле риска, взяты 25% у Heath, — хотя 80 × 25% = 20 у Heath проигрывают по абсолютному счёту"
     },
     {
      "c": 4,
@@ -300,7 +303,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 17.26,
-     "naive_reason": "divides the 63 flagged days by the 365-day calendar year rather than by the 180 monitoring days of the season"
+     "naive_reason": "divides the 63 flagged days by the 365-day calendar year rather than by the 180 monitoring days of the season",
+     "_naive_reason_ru": "63 отмеченных дня поделены на календарный год в 365 дней, а не на 180 дней наблюдений за сезон"
     },
     {
      "c": 5,
@@ -312,7 +316,8 @@
       "9:10",
       "6:5"
      ],
-     "naive_reason": "uses Reed's pre-move 40, giving 36:40 = 9:10, instead of the 30 left after the 6 and 4 are moved out"
+     "naive_reason": "uses Reed's pre-move 40, giving 36:40 = 9:10, instead of the 30 left after the 6 and 4 are moved out",
+     "_naive_reason_ru": "взяты 40 у Reed до перевода, отсюда 36:40 = 9:10, вместо 30, оставшихся после вывода 6 и 4"
     },
     {
      "c": 6,
@@ -322,7 +327,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 23.5,
-     "naive_reason": "divides by the 2 printed values, (40+7)/2 = 23.50, ignoring the stated convention that the N/A row counts as 0 across all 3 types"
+     "naive_reason": "divides by the 2 printed values, (40+7)/2 = 23.50, ignoring the stated convention that the N/A row counts as 0 across all 3 types",
+     "_naive_reason_ru": "поделено на 2 напечатанных значения, (40+7)/2 = 23,50, — без учёта объявленного правила: строка «нет данных» считается нулём по всем 3 типам"
     }
    ],
    "analysis_review": [
@@ -692,7 +698,8 @@
       "C",
       "D"
      ],
-     "naive_reason": "ranks the loggers by the single highest reading, C 70, instead of by range, where C spans only 70-30 = 40"
+     "naive_reason": "ranks the loggers by the single highest reading, C 70, instead of by range, where C spans only 70-30 = 40",
+     "_naive_reason_ru": "лесовозы ранжированы по одному наибольшему замеру, C 70, а не по размаху, где C укладывается всего в 70−30 = 40"
     },
     {
      "c": 2,
@@ -702,7 +709,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 120,
-     "naive_reason": "repeats the absolute drop of -40 (160-40=120)"
+     "naive_reason": "repeats the absolute drop of -40 (160-40=120)",
+     "_naive_reason_ru": "повторено абсолютное падение −40 (160−40 = 120)"
     },
     {
      "c": 3,
@@ -714,7 +722,8 @@
       "Wrasse",
       "Trigger"
      ],
-     "naive_reason": "ranks by the at-risk rate alone, taking Trigger's 25%, though Trigger's 64 x 25% = 16 trails the top count x rate product"
+     "naive_reason": "ranks by the at-risk rate alone, taking Trigger's 25%, though Trigger's 64 x 25% = 16 trails the top count x rate product",
+     "_naive_reason_ru": "ранжировано по одной доле риска, взяты 25% у Trigger, — хотя 64 × 25% = 16 у Trigger отстают от лучшего произведения «счёт × доля»"
     },
     {
      "c": 4,
@@ -724,7 +733,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 14.79,
-     "naive_reason": "divides the 54 alert days by the 365-day calendar, 54/365 = 14.79%, not by the 150 days the survey season ran"
+     "naive_reason": "divides the 54 alert days by the 365-day calendar, 54/365 = 14.79%, not by the 150 days the survey season ran",
+     "_naive_reason_ru": "54 дня тревог поделены на календарные 365, 54/365 = 14,79%, а не на 150 дней, что шёл сезон наблюдений"
     },
     {
      "c": 5,
@@ -736,7 +746,8 @@
       "15:22",
       "5:6"
      ],
-     "naive_reason": "keeps Seagrass at 44 and ignores the 6 and 2 moved out, giving 30:44 = 15:22 instead of 30:36"
+     "naive_reason": "keeps Seagrass at 44 and ignores the 6 and 2 moved out, giving 30:44 = 15:22 instead of 30:36",
+     "_naive_reason_ru": "Seagrass оставлен на 44, а выведенные 6 и 2 не учтены, отсюда 30:44 = 15:22 вместо 30:36"
     },
     {
      "c": 6,
@@ -746,7 +757,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 17.5,
-     "naive_reason": "divides by the 2 printed values, (28+7)/2 = 17.50, ignoring the stated convention that the N/A row counts as 0 across all 3 genera"
+     "naive_reason": "divides by the 2 printed values, (28+7)/2 = 17.50, ignoring the stated convention that the N/A row counts as 0 across all 3 genera",
+     "_naive_reason_ru": "поделено на 2 напечатанных значения, (28+7)/2 = 17,50, — без учёта объявленного правила: строка «нет данных» считается нулём по всем 3 родам"
     }
    ],
    "analysis_review": [
@@ -1107,7 +1119,8 @@
       "C",
       "D"
      ],
-     "naive_reason": "picks A for its single highest reading of 50 rather than the widest range, where A spans only 50-22 = 28"
+     "naive_reason": "picks A for its single highest reading of 50 rather than the widest range, where A spans only 50-22 = 28",
+     "_naive_reason_ru": "A выбран за один наибольший замер в 50, а не за самый широкий размах, — а укладывается A всего в 50−22 = 28"
     },
     {
      "c": 2,
@@ -1117,7 +1130,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 40,
-     "naive_reason": "repeats the absolute drop of -20 kt"
+     "naive_reason": "repeats the absolute drop of -20 kt",
+     "_naive_reason_ru": "повторено абсолютное падение −20 кт"
     },
     {
      "c": 3,
@@ -1129,7 +1143,8 @@
       "Perch",
       "Burbot"
      ],
-     "naive_reason": "ranks by the at-risk rate alone, taking Burbot's 25%, though Burbot's 60 x 25% = 15 loses on absolute counts"
+     "naive_reason": "ranks by the at-risk rate alone, taking Burbot's 25%, though Burbot's 60 x 25% = 15 loses on absolute counts",
+     "_naive_reason_ru": "ранжировано по одной доле риска, взяты 25% у Burbot, — хотя 60 × 25% = 15 у Burbot проигрывают по абсолютному счёту"
     },
     {
      "c": 4,
@@ -1139,7 +1154,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 20.55,
-     "naive_reason": "divides the 75 over-limit days by the 365-day calendar year instead of by the 250 sampling days"
+     "naive_reason": "divides the 75 over-limit days by the 365-day calendar year instead of by the 250 sampling days",
+     "_naive_reason_ru": "75 дней с превышением поделены на календарный год в 365 дней вместо 250 дней отбора проб"
     },
     {
      "c": 5,
@@ -1151,7 +1167,8 @@
       "9:10",
       "9:8"
      ],
-     "naive_reason": "uses Sedge's opening 50 rather than the post-transfer 40, giving 45:50 = 9:10 instead of pairing Reed's 45 with the post-move count"
+     "naive_reason": "uses Sedge's opening 50 rather than the post-transfer 40, giving 45:50 = 9:10 instead of pairing Reed's 45 with the post-move count",
+     "_naive_reason_ru": "взяты стартовые 50 у Sedge, а не 40 после перевода, отсюда 45:50 = 9:10 вместо того, чтобы поставить 45 у Reed против счёта после перевода"
     },
     {
      "c": 6,
@@ -1161,7 +1178,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 18.5,
-     "naive_reason": "divides by the 2 printed values, (32+5)/2 = 18.50, ignoring the stated convention that the N/A row counts as 0 across all 3 types"
+     "naive_reason": "divides by the 2 printed values, (32+5)/2 = 18.50, ignoring the stated convention that the N/A row counts as 0 across all 3 types",
+     "_naive_reason_ru": "поделено на 2 напечатанных значения, (32+5)/2 = 18,50, — без учёта объявленного правила: строка «нет данных» считается нулём по всем 3 типам"
     }
    ],
    "analysis_review": [
@@ -1478,7 +1496,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 40,
-     "naive_reason": "divides the fixed $8,640,000 by the $90 price, 96,000/240,000 = 40%, ignoring the $30 variable cost each slot carries"
+     "naive_reason": "divides the fixed $8,640,000 by the $90 price, 96,000/240,000 = 40%, ignoring the $30 variable cost each slot carries",
+     "_naive_reason_ru": "постоянные $8 640 000 поделены на цену $90, 96 000/240 000 = 40%, — без учёта переменных $30, которые несёт каждое место"
     },
     {
      "c": 2,
@@ -1488,7 +1507,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 96.67,
-     "naive_reason": "takes the simple average of the three prices, (60+90+140)/3=96.67"
+     "naive_reason": "takes the simple average of the three prices, (60+90+140)/3=96.67",
+     "_naive_reason_ru": "взято простое среднее трёх цен, (60+90+140)/3 = 96,67"
     },
     {
      "c": 3,
@@ -1498,7 +1518,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 18000,
-     "naive_reason": "ignores the 20% discount and charges the full $90, 200x$90 = 18,000"
+     "naive_reason": "ignores the 20% discount and charges the full $90, 200x$90 = 18,000",
+     "_naive_reason_ru": "скидка 20% не учтена, взяты полные $90, 200 × $90 = 18 000"
     },
     {
      "c": 4,
@@ -1511,7 +1532,8 @@
       "B",
       "C"
      ],
-     "naive_reason": "highest price $900"
+     "naive_reason": "highest price $900",
+     "_naive_reason_ru": "наибольшая цена $900"
     },
     {
      "c": 5,
@@ -1521,7 +1543,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 3,
-     "naive_reason": "divides the peak quarter 900 by the trough quarter 300 instead of by the 600 quarterly average"
+     "naive_reason": "divides the peak quarter 900 by the trough quarter 300 instead of by the 600 quarterly average",
+     "_naive_reason_ru": "пиковый квартал 900 поделён на провальный 300 вместо среднего за квартал 600"
     },
     {
      "c": 6,
@@ -1531,7 +1554,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 2,
-     "naive_reason": "adds the percentages +12 − 10 = 2"
+     "naive_reason": "adds the percentages +12 − 10 = 2",
+     "_naive_reason_ru": "проценты сложены: +12 − 10 = 2"
     }
    ],
    "analysis_review": [
@@ -1872,7 +1896,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 29.63,
-     "naive_reason": "divides fixed $96,000 by the $45 price instead of by the $33 contribution before spreading over 7,200 seats"
+     "naive_reason": "divides fixed $96,000 by the $45 price instead of by the $33 contribution before spreading over 7,200 seats",
+     "_naive_reason_ru": "постоянные $96 000 поделены на цену $45, а не на вклад $33, и лишь потом разнесены на 7 200 мест"
     },
     {
      "c": 2,
@@ -1882,7 +1907,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 56.67,
-     "naive_reason": "takes the simple average of the three prices (35+55+80)/3 = 56.67"
+     "naive_reason": "takes the simple average of the three prices (35+55+80)/3 = 56.67",
+     "_naive_reason_ru": "взято простое среднее трёх цен, (35+55+80)/3 = 56,67"
     },
     {
      "c": 3,
@@ -1892,7 +1918,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 900,
-     "naive_reason": "ignores the 15% discount and charges 20×$45=900"
+     "naive_reason": "ignores the 15% discount and charges 20×$45=900",
+     "_naive_reason_ru": "скидка 15% не учтена, взято 20 × $45 = 900"
     },
     {
      "c": 4,
@@ -1905,7 +1932,8 @@
       "B",
       "C"
      ],
-     "naive_reason": "highest price $760"
+     "naive_reason": "highest price $760",
+     "_naive_reason_ru": "наибольшая цена $760"
     },
     {
      "c": 5,
@@ -1915,7 +1943,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 2.57,
-     "naive_reason": "divides the 770 peak quarter by the 300 trough, 770/300 = 2.57, instead of by the 550 four-quarter average"
+     "naive_reason": "divides the 770 peak quarter by the 300 trough, 770/300 = 2.57, instead of by the 550 four-quarter average",
+     "_naive_reason_ru": "пиковый квартал 770 поделён на провальный 300, 770/300 = 2,57, вместо среднего за четыре квартала 550"
     },
     {
      "c": 6,
@@ -1925,7 +1954,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 2,
-     "naive_reason": "adds the two percentages, +10-8 = 2%"
+     "naive_reason": "adds the two percentages, +10-8 = 2%",
+     "_naive_reason_ru": "два процента сложены, +10 − 8 = 2%"
     }
    ],
    "analysis_review": [
@@ -2070,7 +2100,8 @@
      "calc": "2000-1300=700",
      "naive_src": "input",
      "naive_read": "chip:s7",
-     "unit": "people"
+     "unit": "people",
+     "_naive_reason_ru": "дан счёт самой группы, а НЕ остаток: вопрос — про тех, кто в неё не входит"
     }
    ]
   },
@@ -2293,7 +2324,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 22.5,
-     "naive_reason": "divides the fixed cost by the $32 check instead of the $18 contribution, covering only 6,075 of the 27,000 covers"
+     "naive_reason": "divides the fixed cost by the $32 check instead of the $18 contribution, covering only 6,075 of the 27,000 covers",
+     "_naive_reason_ru": "постоянные затраты поделены на чек $32, а не на вклад $18, отчего покрыто лишь 6 075 из 27 000 посещений"
     },
     {
      "c": 2,
@@ -2303,7 +2335,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 31,
-     "naive_reason": "takes the simple average of the three prices, (18+30+45)/3 = 31"
+     "naive_reason": "takes the simple average of the three prices, (18+30+45)/3 = 31",
+     "_naive_reason_ru": "взято простое среднее трёх цен, (18+30+45)/3 = 31"
     },
     {
      "c": 3,
@@ -2313,7 +2346,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 1280,
-     "naive_reason": "ignores the 15% discount and bills 40 covers at the list $32 = 1,280"
+     "naive_reason": "ignores the 15% discount and bills 40 covers at the list $32 = 1,280",
+     "_naive_reason_ru": "скидка 15% не учтена, 40 посещений выставлены по прайсовым $32 = 1 280"
     },
     {
      "c": 4,
@@ -2326,7 +2360,8 @@
       "B",
       "C"
      ],
-     "naive_reason": "highest price $700"
+     "naive_reason": "highest price $700",
+     "_naive_reason_ru": "наибольшая цена $700"
     },
     {
      "c": 5,
@@ -2336,7 +2371,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 2.46,
-     "naive_reason": "divides the peak quarter 640 by the trough quarter 260 instead of by the 450 quarterly average"
+     "naive_reason": "divides the peak quarter 640 by the trough quarter 260 instead of by the 450 quarterly average",
+     "_naive_reason_ru": "пиковый квартал 640 поделён на провальный 260 вместо среднего за квартал 450"
     },
     {
      "c": 6,
@@ -2346,7 +2382,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 3,
-     "naive_reason": "nets the two percentage moves, +8 − 5 = 3%, instead of compounding them: 1.08 × 0.95 − 1 = 2.6%"
+     "naive_reason": "nets the two percentage moves, +8 − 5 = 3%, instead of compounding them: 1.08 × 0.95 − 1 = 2.6%",
+     "_naive_reason_ru": "два процентных хода свёрнуты вычитанием, +8 − 5 = 3%, вместо перемножения: 1,08 × 0,95 − 1 = 2,6%"
     }
    ],
    "analysis_review": [
@@ -2496,7 +2533,8 @@
      "form": "percent",
      "naive_src": "calc",
      "naive_calc": "(3600-2400)/3600=33.3333%",
-     "unit": "%"
+     "unit": "%",
+     "_naive_reason_ru": "разрыв поделён на больший квартал; рост меряется ОТ того квартала, с которого начинается, а это меньший"
     },
     {
      "from": "q1a",
@@ -2516,7 +2554,8 @@
      "calc": "3600-2160=1440",
      "naive_src": "input",
      "naive_read": "chip:s8",
-     "unit": "people"
+     "unit": "people",
+     "_naive_reason_ru": "дан счёт самой группы, а НЕ остаток: вопрос — про тех, кто в неё не входит"
     }
    ]
   },
@@ -2816,7 +2855,8 @@
       "Year 3",
       "never"
      ],
-     "naive_reason": "reads the with-restock line, which starts at 150,000 and only falls, so it never meets the 175,000 kelp ceiling"
+     "naive_reason": "reads the with-restock line, which starts at 150,000 and only falls, so it never meets the 175,000 kelp ceiling",
+     "_naive_reason_ru": "прочитана строка с подсадкой: она стартует со 150 000 и только падает, а потому потолка водорослей в 175 000 не достигает никогда"
     },
     {
      "c": 2,
@@ -2826,7 +2866,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 22155,
-     "naive_reason": "interpolates the neighbouring cells, (21,000+23,310)/2 = 22,155"
+     "naive_reason": "interpolates the neighbouring cells, (21,000+23,310)/2 = 22,155",
+     "_naive_reason_ru": "взята середина между соседними клетками, (21 000+23 310)/2 = 22 155"
     },
     {
      "c": 3,
@@ -2839,7 +2880,8 @@
       "Diving",
       "Trapping"
      ],
-     "naive_reason": "picks the cheapest method, Trapping at $3,000, ignoring the bycatch cap of 5 that its 8 breaks"
+     "naive_reason": "picks the cheapest method, Trapping at $3,000, ignoring the bycatch cap of 5 that its 8 breaks",
+     "_naive_reason_ru": "выбран самый дешёвый способ, отлов за $3 000, — без учёта потолка прилова в 5, который его 8 пробивают"
     },
     {
      "c": 4,
@@ -2852,7 +2894,8 @@
       "Mid",
       "South"
      ],
-     "naive_reason": "ranks by the widest absolute drop, North's 60,000 - 48,000 = 12,000 urchins, not by the drop as a share of each zone's start"
+     "naive_reason": "ranks by the widest absolute drop, North's 60,000 - 48,000 = 12,000 urchins, not by the drop as a share of each zone's start",
+     "_naive_reason_ru": "ранжировано по самому широкому абсолютному падению, 60 000 − 48 000 = 12 000 морских ежей у North, а не по падению как доле от старта каждой зоны"
     },
     {
      "c": 5,
@@ -2865,7 +2908,8 @@
       "Mid",
       "South"
      ],
-     "naive_reason": "ranks the regions on the %-decline column alone, where Mid 35 leads, ignoring the water-clarity gain in the index"
+     "naive_reason": "ranks the regions on the %-decline column alone, where Mid 35 leads, ignoring the water-clarity gain in the index",
+     "_naive_reason_ru": "районы ранжированы по одной колонке падения в процентах, где Mid 35 впереди, — без учёта прибавки за прозрачность воды в индексе"
     },
     {
      "c": 6,
@@ -2878,7 +2922,8 @@
       "B",
       "C"
      ],
-     "naive_reason": "picks C for its 40 units, the largest count"
+     "naive_reason": "picks C for its 40 units, the largest count",
+     "_naive_reason_ru": "C выбран за свои 40 единиц, наибольший счёт"
     }
    ],
    "analysis_review": [
@@ -3089,7 +3134,8 @@
      "calc": "3*5000=15000 · 15000+15000=30000 · 30000+15000=45000 · 15000+30000+45000=90000",
      "naive_src": "calc",
      "naive_calc": "3*5000=15000 · 15000+15000=30000 · 30000+15000=45000 · 45000+45000=90000 · 90000+45000=135000",
-     "unit": "$"
+     "unit": "$",
+     "_naive_reason_ru": "взят разрыв последнего года окна и умножен на три; внутри окна разрыв растёт (3, 6, 9 пунктов), поэтому ряд надо складывать, а не брать последний год трижды"
     }
    ]
   },
@@ -3384,7 +3430,8 @@
       "Year 3",
       "never"
      ],
-     "naive_reason": "reads the with-biocontrol row, which only falls from 600 ha and never reaches the 720 ha threshold, not the no-control row"
+     "naive_reason": "reads the with-biocontrol row, which only falls from 600 ha and never reaches the 720 ha threshold, not the no-control row",
+     "_naive_reason_ru": "прочитана строка с биоконтролем — она только падает с 600 га и порога в 720 га не достигает вовсе, — а не строка без контроля"
     },
     {
      "c": 2,
@@ -3394,7 +3441,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 364.5,
-     "naive_reason": "interpolates the neighbouring cells (330+399)/2 = 364.5"
+     "naive_reason": "interpolates the neighbouring cells (330+399)/2 = 364.5",
+     "_naive_reason_ru": "взята середина между соседними клетками, (330+399)/2 = 364,5"
     },
     {
      "c": 3,
@@ -3407,7 +3455,8 @@
       "Weevil",
       "Herbicide"
      ],
-     "naive_reason": "picks the cheapest option, Herbicide at $3,200, ignoring the eco-risk cap of 4 that its risk score of 7 breaks"
+     "naive_reason": "picks the cheapest option, Herbicide at $3,200, ignoring the eco-risk cap of 4 that its risk score of 7 breaks",
+     "_naive_reason_ru": "выбран самый дешёвый вариант, гербицид за $3 200, — без учёта потолка экориска в 4, который его оценка 7 пробивает"
     },
     {
      "c": 4,
@@ -3420,7 +3469,8 @@
       "Cove",
       "West"
      ],
-     "naive_reason": "ranks by absolute loss, East -16,000 beating the -8,400 elsewhere, instead of by rate, where East's 16,000/80,000 is only 20.0%"
+     "naive_reason": "ranks by absolute loss, East -16,000 beating the -8,400 elsewhere, instead of by rate, where East's 16,000/80,000 is only 20.0%",
+     "_naive_reason_ru": "ранжировано по абсолютной потере, где East с −16 000 бьёт −8 400 у остальных, а не по доле, — а по доле 16 000/80 000 у East это всего 20,0%"
     },
     {
      "c": 5,
@@ -3433,7 +3483,8 @@
       "East",
       "West"
      ],
-     "naive_reason": "ranks on the %-decline alone, West's 35, dropping the dissolved-oxygen gain that leaves West's index at just 35+4 = 39"
+     "naive_reason": "ranks on the %-decline alone, West's 35, dropping the dissolved-oxygen gain that leaves West's index at just 35+4 = 39",
+     "_naive_reason_ru": "ранжировано по одному падению в процентах, 35 у West, — и потеряна прибавка за растворённый кислород, с которой индекс West составляет всего 35+4 = 39"
     },
     {
      "c": 6,
@@ -3446,7 +3497,8 @@
       "B",
       "C"
      ],
-     "naive_reason": "picks C for its 30 units"
+     "naive_reason": "picks C for its 30 units",
+     "_naive_reason_ru": "C выбран за свои 30 единиц"
     }
    ],
    "analysis_review": [
@@ -3656,7 +3708,8 @@
      "calc": "2*3000=6000 · 6000+6000=12000 · 12000+6000=18000 · 18000+6000=24000 · 12000+18000+24000=54000",
      "naive_src": "calc",
      "naive_calc": "2*3000=6000 · 6000+6000=12000 · 12000+6000=18000 · 18000+6000=24000 · 24000+24000=48000 · 48000+24000=72000",
-     "unit": "$"
+     "unit": "$",
+     "_naive_reason_ru": "взят разрыв последнего года окна и умножен на три; внутри окна разрыв растёт (4, 6, 8 пунктов), поэтому ряд надо складывать, а не брать последний год трижды"
     },
     {
      "from": "q4a",
@@ -3676,7 +3729,8 @@
      ],
      "mech": "E3 · годовой темп в долях базы, а не остатка",
      "form": "percent",
-     "unit": "%"
+     "unit": "%",
+     "_naive_reason_ru": "годовой шаг померен против того, что ОСТАЁТСЯ в конце пятилетнего окна, а не против базы, на которой ставка и объявлена"
     }
    ]
   },
@@ -4004,7 +4058,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 2700,
-     "naive_reason": "applies the 15% royalty to the $18,000M GDP base, giving 2,700"
+     "naive_reason": "applies the 15% royalty to the $18,000M GDP base, giving 2,700",
+     "_naive_reason_ru": "роялти 15% применены к базе ВВП в $18 000 млн, отсюда 2 700"
     },
     {
      "c": 2,
@@ -4014,7 +4069,8 @@
      "round": 1,
      "tolerance": 0.01,
      "naive": 441.9,
-     "naive_reason": "sums all ten years of revenue, $1,473M x 0.30 = 441.9"
+     "naive_reason": "sums all ten years of revenue, $1,473M x 0.30 = 441.9",
+     "_naive_reason_ru": "сложена выручка всех десяти лет, $1 473 млн × 0,30 = 441,9"
     },
     {
      "c": 3,
@@ -4024,7 +4080,8 @@
      "round": 1,
      "tolerance": 0.01,
      "naive": 28.8,
-     "naive_reason": "reports the gross credit revenue $28.8M and never subtracts the $22M program cost the surplus is defined net of"
+     "naive_reason": "reports the gross credit revenue $28.8M and never subtracts the $22M program cost the surplus is defined net of",
+     "_naive_reason_ru": "показана валовая выручка по кредитам $28,8 млн, а затраты программы $22 млн, за вычетом которых излишек и определён, так и не вычтены"
     },
     {
      "c": 4,
@@ -4036,7 +4093,8 @@
       "Year 3",
       "Year 4"
      ],
-     "naive_reason": "reads the threshold as ≤1.50% and stops at Year 3's exact 129/8,600=1.50%"
+     "naive_reason": "reads the threshold as ≤1.50% and stops at Year 3's exact 129/8,600=1.50%",
+     "_naive_reason_ru": "порог прочитан как ≤1,50%, и счёт остановлен на ровных 129/8 600 = 1,50% года 3"
     },
     {
      "c": 5,
@@ -4046,7 +4104,8 @@
      "round": 1,
      "tolerance": 0.01,
      "naive": 39.6,
-     "naive_reason": "applies the 22% marginal rate to the whole $180M, 39.6"
+     "naive_reason": "applies the 22% marginal rate to the whole $180M, 39.6",
+     "_naive_reason_ru": "предельная ставка 22% применена ко всем $180 млн, 39,6"
     },
     {
      "c": 6,
@@ -4059,7 +4118,8 @@
       "B",
       "C"
      ],
-     "naive_reason": "picks mix A because it is the largest share of the nursery planting, 45% against B 35% and C 20%; the question asks which allocation buys the most hectares, and at $6,000/ha option C covers 25,000 ha against A's 20,000"
+     "naive_reason": "picks mix A because it is the largest share of the nursery planting, 45% against B 35% and C 20%; the question asks which allocation buys the most hectares, and at $6,000/ha option C covers 25,000 ha against A's 20,000",
+     "_naive_reason_ru": "смесь A выбрана за наибольшую долю посадки в питомнике, 45% против 35% у B и 20% у C; вопрос — какое распределение покупает больше гектаров, а по $6 000 за га вариант C накрывает 25 000 га против 20 000 у A"
     }
    ],
    "analysis_review": [
@@ -4286,7 +4346,8 @@
      ],
      "mech": "S · итог на гектар, а не на растение",
      "form": "number",
-     "unit": "kg per ha per year"
+     "unit": "kg per ha per year",
+     "_naive_reason_ru": "итог поделён на число саженцев, а не на гектары; так выходит приживаемость одного саженца, а это другая величина, чем приживаемость одного гектара земли"
     }
    ]
   },
@@ -4510,7 +4571,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 82500,
-     "naive_reason": "reports the covered 82,500 households instead of subtracting them from the 150,000 total to get the unserved gap"
+     "naive_reason": "reports the covered 82,500 households instead of subtracting them from the 150,000 total to get the unserved gap",
+     "_naive_reason_ru": "показаны охваченные 82 500 домохозяйств вместо того, чтобы вычесть их из общих 150 000 и получить неохваченный остаток"
     },
     {
      "c": 2,
@@ -4520,7 +4582,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 47.27,
-     "naive_reason": "divides the $3,900,000 by the 82,500 covered households, 3,900,000/82,500 = $47.27, rather than by the 990,000 outage-days avoided"
+     "naive_reason": "divides the $3,900,000 by the 82,500 covered households, 3,900,000/82,500 = $47.27, rather than by the 990,000 outage-days avoided",
+     "_naive_reason_ru": "$3 900 000 поделены на 82 500 охваченных домохозяйств, 3 900 000/82 500 = $47,27, а не на 990 000 предотвращённых дней отключений"
     },
     {
      "c": 3,
@@ -4530,7 +4593,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 4500000,
-     "naive_reason": "applies the full 75% coverage, 0.75×150,000×$40=4,500,000"
+     "naive_reason": "applies the full 75% coverage, 0.75×150,000×$40=4,500,000",
+     "_naive_reason_ru": "применён полный охват 75%, 0,75 × 150 000 × $40 = 4 500 000"
     },
     {
      "c": 4,
@@ -4543,7 +4607,8 @@
       "North",
       "Mid"
      ],
-     "naive_reason": "ranks by total outage-days, North's 90,000, instead of by the outage-days each $1M of budget buys"
+     "naive_reason": "ranks by total outage-days, North's 90,000, instead of by the outage-days each $1M of budget buys",
+     "_naive_reason_ru": "ранжировано по общему числу дней отключений, 90 000 у North, а не по дням, которые покупает каждый $1 млн бюджета"
     },
     {
      "c": 5,
@@ -4561,7 +4626,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 24.07,
-     "naive_reason": "carries the $3,900,000 first-year cost computed at 55% adoption as if fixed and divides it by the $16,200,000 full-adoption saving"
+     "naive_reason": "carries the $3,900,000 first-year cost computed at 55% adoption as if fixed and divides it by the $16,200,000 full-adoption saving",
+     "_naive_reason_ru": "затраты первого года $3 900 000, посчитанные при подключении 55%, взяты как постоянные и поделены на экономию $16 200 000 при полном подключении"
     }
    ],
    "analysis_review": [
@@ -4696,7 +4762,8 @@
      "form": "percent",
      "naive_src": "calc",
      "naive_calc": "3900000-600000=3300000 · 600000/3300000=18.1818%",
-     "unit": "%"
+     "unit": "%",
+     "_naive_reason_ru": "постоянные затраты поделены на переменную часть, а не на полные затраты первого года; доля берётся от целого"
     }
    ]
   },
@@ -4963,7 +5030,8 @@
       "C",
       "D"
      ],
-     "naive_reason": "ranks the gauges by the single highest reading 52 rather than by the spread between each gauge's high and low"
+     "naive_reason": "ranks the gauges by the single highest reading 52 rather than by the spread between each gauge's high and low",
+     "_naive_reason_ru": "посты ранжированы по одному наибольшему замеру 52, а не по разбросу между максимумом и минимумом каждого поста"
     },
     {
      "c": 2,
@@ -4973,7 +5041,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 510,
-     "naive_reason": "repeats the absolute drop of -170 (680-170=510)"
+     "naive_reason": "repeats the absolute drop of -170 (680-170=510)",
+     "_naive_reason_ru": "повторено абсолютное падение −170 (680−170 = 510)"
     },
     {
      "c": 3,
@@ -4987,7 +5056,8 @@
       "Aster",
       "Sea-lavender"
      ],
-     "naive_reason": "ranks by the at-risk rate alone, taking Sea-lavender's 25%, though 100 x 25% = 25 trails the top count x rate product"
+     "naive_reason": "ranks by the at-risk rate alone, taking Sea-lavender's 25%, though 100 x 25% = 25 trails the top count x rate product",
+     "_naive_reason_ru": "ранжировано по одной доле риска, взяты 25% у Sea-lavender, — хотя 100 × 25% = 25 отстают от лучшего произведения «счёт × доля»"
     },
     {
      "c": 4,
@@ -4997,7 +5067,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 24.66,
-     "naive_reason": "divides the 90 flooded days by the 365-day calendar, 90/365 = 24.66%, not by the 200 days the season runs"
+     "naive_reason": "divides the 90 flooded days by the 365-day calendar, 90/365 = 24.66%, not by the 200 days the season runs",
+     "_naive_reason_ru": "90 дней подтопления поделены на календарные 365, 90/365 = 24,66%, а не на 200 дней, что идёт сезон"
     },
     {
      "c": 5,
@@ -5009,7 +5080,8 @@
       "22:25",
       "1:1"
      ],
-     "naive_reason": "uses the pre-transfer figures 44:50 = 22:25 and ignores the 4 and 2 moved out of Reed before the ratio is formed"
+     "naive_reason": "uses the pre-transfer figures 44:50 = 22:25 and ignores the 4 and 2 moved out of Reed before the ratio is formed",
+     "_naive_reason_ru": "взяты цифры до перевода, 44:50 = 22:25, и не учтены 4 и 2, выведенные из Reed до того, как складывается отношение"
     },
     {
      "c": 6,
@@ -5019,7 +5091,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 28.5,
-     "naive_reason": "misses the printed convention N/A = 0, average over all 3: divides (48+9) by the two filled cells, 28.5"
+     "naive_reason": "misses the printed convention N/A = 0, average over all 3: divides (48+9) by the two filled cells, 28.5",
+     "_naive_reason_ru": "пропущено напечатанное правило «нет данных = 0, среднее по всем 3»: (48+9) поделено на две заполненные клетки, 28,5"
     }
    ],
    "analysis_review": [
@@ -5138,7 +5211,8 @@
      ],
      "mech": "M · на пункт приходится потерянное, а не всё",
      "form": "number",
-     "unit": "ha per point"
+     "unit": "ha per point",
+     "_naive_reason_ru": "по процентным пунктам разнесён весь марш десятилетней давности, а разносить надо только потерянную площадь"
     }
    ]
   },
@@ -5405,7 +5479,8 @@
       "C",
       "D"
      ],
-     "naive_reason": "ranks by the highest single reading, C's 66, rather than by range, where C's 66-28 = 38 trails the widest well"
+     "naive_reason": "ranks by the highest single reading, C's 66, rather than by range, where C's 66-28 = 38 trails the widest well",
+     "_naive_reason_ru": "ранжировано по одному наибольшему замеру, 66 у C, а не по размаху, — а по размаху 66−28 = 38 у C отстаёт от самой широкой скважины"
     },
     {
      "c": 2,
@@ -5415,7 +5490,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 120,
-     "naive_reason": "repeats the absolute drop of -40"
+     "naive_reason": "repeats the absolute drop of -40",
+     "_naive_reason_ru": "повторено абсолютное падение −40"
     },
     {
      "c": 3,
@@ -5429,7 +5505,8 @@
       "Acacia",
       "Cactus"
      ],
-     "naive_reason": "picks the highest at-risk rate, Cactus 25%, ignoring counts, where 80 x 25% = 20 trails the top count x rate product"
+     "naive_reason": "picks the highest at-risk rate, Cactus 25%, ignoring counts, where 80 x 25% = 20 trails the top count x rate product",
+     "_naive_reason_ru": "взята наибольшая доля риска, 25% у Cactus, — без учёта счёта, а по счёту 80 × 25% = 20 отстаёт от лучшего произведения «счёт × доля»"
     },
     {
      "c": 4,
@@ -5439,7 +5516,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 12.05,
-     "naive_reason": "divides the 44 below-safe days by the 365-day calendar year instead of by the 160-day season"
+     "naive_reason": "divides the 44 below-safe days by the 365-day calendar year instead of by the 160-day season",
+     "_naive_reason_ru": "44 дня ниже безопасного уровня поделены на календарный год в 365 дней вместо сезона в 160 дней"
     },
     {
      "c": 5,
@@ -5451,7 +5529,8 @@
       "18:17",
       "6:7"
      ],
-     "naive_reason": "uses the pre-transfer counts 36:42 = 6:7 instead of re-forming the ratio after the 5 and 3 move out of Scrub"
+     "naive_reason": "uses the pre-transfer counts 36:42 = 6:7 instead of re-forming the ratio after the 5 and 3 move out of Scrub",
+     "_naive_reason_ru": "взяты счёты до перевода, 36:42 = 6:7, вместо того чтобы сложить отношение заново после вывода 5 и 3 из Scrub"
     },
     {
      "c": 6,
@@ -5461,7 +5540,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 18,
-     "naive_reason": "divides the Edge column by the 2 printed rows, (30+6+0)/2 = 18, ignoring the printed N/A as a zero third row the div-3 rule counts"
+     "naive_reason": "divides the Edge column by the 2 printed rows, (30+6+0)/2 = 18, ignoring the printed N/A as a zero third row the div-3 rule counts",
+     "_naive_reason_ru": "колонка Edge поделена на 2 напечатанные строки, (30+6+0)/2 = 18, — а напечатанное «нет данных» и есть нулевая третья строка, которую правило деления на 3 считает"
     }
    ],
    "analysis_review": [
@@ -5823,7 +5903,8 @@
       "C",
       "D"
      ],
-     "naive_reason": "ranks by the highest single reading, C's 53, rather than by range, where C's 53-25 = 28 trails the widest gauge"
+     "naive_reason": "ranks by the highest single reading, C's 53, rather than by range, where C's 53-25 = 28 trails the widest gauge",
+     "_naive_reason_ru": "ранжировано по одному наибольшему замеру, 53 у C, а не по размаху, — а по размаху 53−25 = 28 у C отстаёт от самого широкого поста"
     },
     {
      "c": 2,
@@ -5833,7 +5914,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 42,
-     "naive_reason": "repeats the absolute drop of -14"
+     "naive_reason": "repeats the absolute drop of -14",
+     "_naive_reason_ru": "повторено абсолютное падение −14"
     },
     {
      "c": 3,
@@ -5845,7 +5927,8 @@
       "Liana",
       "Fern"
      ],
-     "naive_reason": "picks the highest at-risk rate, Liana 25%, ignoring counts, where 60 x 25% = 15 trails the top count x rate product"
+     "naive_reason": "picks the highest at-risk rate, Liana 25%, ignoring counts, where 60 x 25% = 15 trails the top count x rate product",
+     "_naive_reason_ru": "взята наибольшая доля риска, 25% у Liana, — без учёта счёта, а по счёту 60 × 25% = 15 отстаёт от лучшего произведения «счёт × доля»"
     },
     {
      "c": 4,
@@ -5855,7 +5938,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 23.01,
-     "naive_reason": "divides the 84 mist days by the 365-day calendar year instead of by the 240 days of the season"
+     "naive_reason": "divides the 84 mist days by the 365-day calendar year instead of by the 240 days of the season",
+     "_naive_reason_ru": "84 туманных дня поделены на календарный год в 365 дней вместо 240 дней сезона"
     },
     {
      "c": 5,
@@ -5867,7 +5951,8 @@
       "15:13",
       "15:16"
      ],
-     "naive_reason": "uses the pre-transfer counts 45:48 = 15:16 instead of re-forming the ratio after the 6 and 3 move out of Understory"
+     "naive_reason": "uses the pre-transfer counts 45:48 = 15:16 instead of re-forming the ratio after the 6 and 3 move out of Understory",
+     "_naive_reason_ru": "взяты счёты до перевода, 45:48 = 15:16, вместо того чтобы сложить отношение заново после вывода 6 и 3 из Understory"
     },
     {
      "c": 6,
@@ -5877,7 +5962,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 21.5,
-     "naive_reason": "divides the Ridge column by the 2 printed rows, (36+7+0)/2 = 21.5, ignoring the N/A = 0 convention and the divide-by-3 rule"
+     "naive_reason": "divides the Ridge column by the 2 printed rows, (36+7+0)/2 = 21.5, ignoring the N/A = 0 convention and the divide-by-3 rule",
+     "_naive_reason_ru": "колонка Ridge поделена на 2 напечатанные строки, (36+7+0)/2 = 21,5, — без правила «нет данных = 0» и без деления на 3"
     }
    ],
    "analysis_review": [
@@ -6193,7 +6279,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 37.5,
-     "naive_reason": "divides fixed $540,000 by the $80 rate instead of by the $50 contribution before spreading over 18,000 berth-nights"
+     "naive_reason": "divides fixed $540,000 by the $80 rate instead of by the $50 contribution before spreading over 18,000 berth-nights",
+     "_naive_reason_ru": "постоянные $540 000 поделены на ставку $80, а не на вклад $50, и лишь потом разнесены на 18 000 судо-ночей"
     },
     {
      "c": 2,
@@ -6203,7 +6290,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 96.67,
-     "naive_reason": "takes the simple average of the three rates, (50+90+150)/3 = 96.67"
+     "naive_reason": "takes the simple average of the three rates, (50+90+150)/3 = 96.67",
+     "_naive_reason_ru": "взято простое среднее трёх ставок, (50+90+150)/3 = 96,67"
     },
     {
      "c": 3,
@@ -6213,7 +6301,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 36000,
-     "naive_reason": "ignores the 15% discount: 15 × 30 × $80 = 36,000"
+     "naive_reason": "ignores the 15% discount: 15 × 30 × $80 = 36,000",
+     "_naive_reason_ru": "скидка 15% не учтена: 15 × 30 × $80 = 36 000"
     },
     {
      "c": 4,
@@ -6226,7 +6315,8 @@
       "B",
       "C"
      ],
-     "naive_reason": "highest price $950"
+     "naive_reason": "highest price $950",
+     "_naive_reason_ru": "наибольшая цена $950"
     },
     {
      "c": 5,
@@ -6236,7 +6326,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 3.33,
-     "naive_reason": "divides the 1,000 peak quarter by the 300 trough, 1,000/300 = 3.33, instead of by the 650 four-quarter average"
+     "naive_reason": "divides the 1,000 peak quarter by the 300 trough, 1,000/300 = 3.33, instead of by the 650 four-quarter average",
+     "_naive_reason_ru": "пиковый квартал 1 000 поделён на провальный 300, 1 000/300 = 3,33, вместо среднего за четыре квартала 650"
     },
     {
      "c": 6,
@@ -6246,7 +6337,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 5,
-     "naive_reason": "adds the two percentages, +15-10 = 5%, instead of compounding 1.15 x 0.90 and netting off 1"
+     "naive_reason": "adds the two percentages, +15-10 = 5%, instead of compounding 1.15 x 0.90 and netting off 1",
+     "_naive_reason_ru": "два процента сложены, +15 − 10 = 5%, вместо перемножения 1,15 × 0,90 и вычета единицы"
     }
    ],
    "analysis_review": [
@@ -6617,7 +6709,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 34,
-     "naive_reason": "divides the fixed cost by the $60 price instead of the $36 contribution, filling only 4,590 of the 13,500 capsule-days"
+     "naive_reason": "divides the fixed cost by the $60 price instead of the $36 contribution, filling only 4,590 of the 13,500 capsule-days",
+     "_naive_reason_ru": "постоянные затраты поделены на цену $60, а не на вклад $36, отчего заполнено лишь 4 590 из 13 500 капсуло-суток"
     },
     {
      "c": 2,
@@ -6627,7 +6720,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 68.33,
-     "naive_reason": "takes the simple average of the three prices, (40+65+100)/3=68.33"
+     "naive_reason": "takes the simple average of the three prices, (40+65+100)/3=68.33",
+     "_naive_reason_ru": "взято простое среднее трёх цен, (40+65+100)/3 = 68,33"
     },
     {
      "c": 3,
@@ -6637,7 +6731,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 14400,
-     "naive_reason": "ignores the 15% discount and bills the full $60, 12x20x$60 = 14,400"
+     "naive_reason": "ignores the 15% discount and bills the full $60, 12x20x$60 = 14,400",
+     "_naive_reason_ru": "скидка 15% не учтена, выставлены полные $60, 12 × 20 × $60 = 14 400"
     },
     {
      "c": 4,
@@ -6650,7 +6745,8 @@
       "B",
       "C"
      ],
-     "naive_reason": "highest price $820"
+     "naive_reason": "highest price $820",
+     "_naive_reason_ru": "наибольшая цена $820"
     },
     {
      "c": 5,
@@ -6660,7 +6756,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 3,
-     "naive_reason": "divides the peak quarter 900 by the trough quarter 300 instead of by the 570 quarterly average"
+     "naive_reason": "divides the peak quarter 900 by the trough quarter 300 instead of by the 570 quarterly average",
+     "_naive_reason_ru": "пиковый квартал 900 поделён на провальный 300 вместо среднего за квартал 570"
     },
     {
      "c": 6,
@@ -6670,7 +6767,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 2,
-     "naive_reason": "adds the percentages +6 − 4 = 2"
+     "naive_reason": "adds the percentages +6 − 4 = 2",
+     "_naive_reason_ru": "проценты сложены: +6 − 4 = 2"
     }
    ],
    "analysis_review": [
@@ -6813,7 +6911,8 @@
      "form": "percent",
      "naive_src": "calc",
      "naive_calc": "(2800-1800)/2800=35.7143%",
-     "unit": "%"
+     "unit": "%",
+     "_naive_reason_ru": "разрыв поделён на больший квартал; рост меряется ОТ того квартала, с которого начинается, а это меньший"
     },
     {
      "from": "q1a",
@@ -6833,7 +6932,8 @@
      "calc": "2800-1960=840",
      "naive_src": "input",
      "naive_read": "chip:s7",
-     "unit": "people"
+     "unit": "people",
+     "_naive_reason_ru": "дан счёт самой группы, а НЕ остаток: вопрос — про тех, кто в неё не входит"
     }
    ]
   },
@@ -7127,7 +7227,8 @@
       "Year 3",
       "never"
      ],
-     "naive_reason": "uses trapped series"
+     "naive_reason": "uses trapped series",
+     "_naive_reason_ru": "взят ряд с отловом"
     },
     {
      "c": 2,
@@ -7137,7 +7238,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 14155,
-     "naive_reason": "interpolates the neighbours (13,000+15,310)/2 = 14,155"
+     "naive_reason": "interpolates the neighbours (13,000+15,310)/2 = 14,155",
+     "_naive_reason_ru": "взята середина между соседями, (13 000+15 310)/2 = 14 155"
     },
     {
      "c": 3,
@@ -7150,7 +7252,8 @@
       "Baiting",
       "Poison"
      ],
-     "naive_reason": "picks the cheapest option, Poison at $2,800, ignoring the bycatch cap of 5 that its score of 8 breaks"
+     "naive_reason": "picks the cheapest option, Poison at $2,800, ignoring the bycatch cap of 5 that its score of 8 breaks",
+     "_naive_reason_ru": "выбран самый дешёвый вариант, яд за $2 800, — без учёта потолка прилова в 5, который его оценка 8 пробивает"
     },
     {
      "c": 4,
@@ -7163,7 +7266,8 @@
       "South",
       "Mid"
      ],
-     "naive_reason": "ranks by absolute drop, North's -10,000"
+     "naive_reason": "ranks by absolute drop, North's -10,000",
+     "_naive_reason_ru": "ранжировано по абсолютному падению, −10 000 у North"
     },
     {
      "c": 5,
@@ -7176,7 +7280,8 @@
       "North",
       "Mid"
      ],
-     "naive_reason": "ranks on the %-decline term alone, where Mid led at (18,000-11,700)/18,000 = 35%, not on the printed priority index totals"
+     "naive_reason": "ranks on the %-decline term alone, where Mid led at (18,000-11,700)/18,000 = 35%, not on the printed priority index totals",
+     "_naive_reason_ru": "ранжировано по одному слагаемому — падению в процентах, где Mid шёл первым с (18 000−11 700)/18 000 = 35%, — а не по напечатанным итогам индекса приоритета"
     },
     {
      "c": 6,
@@ -7189,7 +7294,8 @@
       "B",
       "C"
      ],
-     "naive_reason": "picks B for its 40 units, the largest count"
+     "naive_reason": "picks B for its 40 units, the largest count",
+     "_naive_reason_ru": "B выбран за свои 40 единиц, наибольший счёт"
     }
    ],
    "analysis_review": [
@@ -7391,7 +7497,8 @@
      "calc": "40/2=20.0",
      "naive_src": "window",
      "naive_calc": "32/2=16.0",
-     "unit": "years"
+     "unit": "years",
+     "_naive_reason_ru": "на ставку поделено то, что ОСТАЁТСЯ в последнем году графика, а не уровень на старте; вопрос — про время от начала ряда"
     },
     {
      "from": "q4b",
@@ -7412,7 +7519,8 @@
      "calc": "2*4000=8000 · 8000+8000=16000 · 16000+8000=24000 · 24000+8000=32000 · 8000+16000+24000+32000=80000",
      "naive_src": "calc",
      "naive_calc": "2*4000=8000 · 8000+8000=16000 · 16000+8000=24000 · 24000+8000=32000 · 32000+32000=64000 · 64000+32000=96000 · 96000+32000=128000",
-     "unit": "$"
+     "unit": "$",
+     "_naive_reason_ru": "взят разрыв последнего года окна и умножен на число лет; внутри окна разрыв растёт (2, 4, 6, 8 пунктов), поэтому ряд надо складывать, а не брать последний год четырежды"
     }
    ]
   },
@@ -7706,7 +7814,8 @@
       "Year 3",
       "never"
      ],
-     "naive_reason": "reads the with-raptors row, 200,000 falling to 153,590 and never near 240,000"
+     "naive_reason": "reads the with-raptors row, 200,000 falling to 153,590 and never near 240,000",
+     "_naive_reason_ru": "прочитана строка с хищными птицами, где 200 000 падают до 153 590 и к 240 000 не подходят никогда"
     },
     {
      "c": 2,
@@ -7716,7 +7825,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 24310,
-     "naive_reason": "interpolates between the neighbouring cells, (22,000+26,620)/2=24,310"
+     "naive_reason": "interpolates between the neighbouring cells, (22,000+26,620)/2=24,310",
+     "_naive_reason_ru": "взята середина между соседними клетками, (22 000+26 620)/2 = 24 310"
     },
     {
      "c": 3,
@@ -7729,7 +7839,8 @@
       "Pesticide",
       "Fungal"
      ],
-     "naive_reason": "picks the cheapest option, Pesticide at $3,000, ignoring the eco-risk ceiling of 5 that its risk score of 9 breaks"
+     "naive_reason": "picks the cheapest option, Pesticide at $3,000, ignoring the eco-risk ceiling of 5 that its risk score of 9 breaks",
+     "_naive_reason_ru": "выбран самый дешёвый вариант, пестицид за $3 000, — без учёта потолка экориска в 5, который его оценка 9 пробивает"
     },
     {
      "c": 4,
@@ -7742,7 +7853,8 @@
       "East",
       "Cove"
      ],
-     "naive_reason": "ranks by absolute loss, East −14,000"
+     "naive_reason": "ranks by absolute loss, East −14,000",
+     "_naive_reason_ru": "ранжировано по абсолютной потере, −14 000 у East"
     },
     {
      "c": 5,
@@ -7755,7 +7867,8 @@
       "Cove",
       "West"
      ],
-     "naive_reason": "ranks on the %-decline term alone, where West led at (22,000-14,300)/22,000 = 35%, not on the printed priority index totals"
+     "naive_reason": "ranks on the %-decline term alone, where West led at (22,000-14,300)/22,000 = 35%, not on the printed priority index totals",
+     "_naive_reason_ru": "ранжировано по одному слагаемому — падению в процентах, где West шёл первым с (22 000−14 300)/22 000 = 35%, — а не по напечатанным итогам индекса приоритета"
     },
     {
      "c": 6,
@@ -7768,7 +7881,8 @@
       "B",
       "C"
      ],
-     "naive_reason": "ranks by unit count, C's 35 units, instead of by total effect, where C's 35x140 = 4,900 trails the strongest option"
+     "naive_reason": "ranks by unit count, C's 35 units, instead of by total effect, where C's 35x140 = 4,900 trails the strongest option",
+     "_naive_reason_ru": "ранжировано по числу единиц, 35 у C, а не по общему действию, — а по нему 35 × 140 = 4 900 у C отстаёт от сильнейшего варианта"
     }
    ],
    "analysis_review": [
@@ -7968,7 +8082,8 @@
      "calc": "50/3=16.6667",
      "naive_src": "window",
      "naive_calc": "38/3=12.6667",
-     "unit": "years"
+     "unit": "years",
+     "_naive_reason_ru": "на ставку поделено то, что ОСТАЁТСЯ в последнем году графика, а не уровень на старте; вопрос — про время от начала ряда"
     }
    ]
   },
@@ -8296,7 +8411,8 @@
      "round": 1,
      "tolerance": 0.01,
      "naive": 2400,
-     "naive_reason": "applies the 10% royalty to GDP of $24,000M"
+     "naive_reason": "applies the 10% royalty to GDP of $24,000M",
+     "_naive_reason_ru": "роялти 10% применены к ВВП в $24 000 млн"
     },
     {
      "c": 2,
@@ -8306,7 +8422,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 118.95,
-     "naive_reason": "sums all ten years of volume, 3,965k m³ → $118.95M"
+     "naive_reason": "sums all ten years of volume, 3,965k m³ → $118.95M",
+     "_naive_reason_ru": "сложен объём всех десяти лет, 3 965 тыс. м³ → $118,95 млн"
     },
     {
      "c": 3,
@@ -8316,7 +8433,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 15,
-     "naive_reason": "treats the $15M credit revenue as the surplus, ignoring the $10M program cost that must be netted off it"
+     "naive_reason": "treats the $15M credit revenue as the surplus, ignoring the $10M program cost that must be netted off it",
+     "_naive_reason_ru": "выручка по кредитам $15 млн принята за излишек, — без вычета затрат программы $10 млн, которые обязаны из неё уйти"
     },
     {
      "c": 4,
@@ -8328,7 +8446,8 @@
       "Year 3",
       "Year 4"
      ],
-     "naive_reason": "reads 'below 0.40%' as 'at or below' and accepts Year 3's 0.40"
+     "naive_reason": "reads 'below 0.40%' as 'at or below' and accepts Year 3's 0.40",
+     "_naive_reason_ru": "«ниже 0,40%» прочитано как «0,40% и ниже», и год 3 с его 0,40 принят"
     },
     {
      "c": 5,
@@ -8338,7 +8457,8 @@
      "round": 1,
      "tolerance": 0.01,
      "naive": 13.5,
-     "naive_reason": "applies the 18% top rate to the whole $75M = 13.5"
+     "naive_reason": "applies the 18% top rate to the whole $75M = 13.5",
+     "_naive_reason_ru": "верхняя ставка 18% применена ко всем $75 млн = 13,5"
     },
     {
      "c": 6,
@@ -8351,7 +8471,8 @@
       "B",
       "C"
      ],
-     "naive_reason": "picks B for the highest cost per hectare, $7,500, though $150M buys only 20,000 ha there, fewer than the cheapest option delivers"
+     "naive_reason": "picks B for the highest cost per hectare, $7,500, though $150M buys only 20,000 ha there, fewer than the cheapest option delivers",
+     "_naive_reason_ru": "B выбран за наибольшую цену гектара, $7 500, — хотя $150 млн покупают там лишь 20 000 га, меньше, чем даёт самый дешёвый вариант"
     }
    ],
    "analysis_review": [
@@ -8881,7 +9002,8 @@
      "round": 1,
      "tolerance": 0.01,
      "naive": 18,
-     "naive_reason": "reports the royalty rate, 18%, instead of the royalty itself: 0.18 × $140M = $25.2M"
+     "naive_reason": "reports the royalty rate, 18%, instead of the royalty itself: 0.18 × $140M = $25.2M",
+     "_naive_reason_ru": "показана ставка роялти, 18%, вместо самого роялти: 0,18 × $140 млн = $25,2 млн"
     },
     {
      "c": 2,
@@ -8891,7 +9013,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 394.8,
-     "naive_reason": "counts all 10 years, 2,820 kt × $400 × 0.35=394.8"
+     "naive_reason": "counts all 10 years, 2,820 kt × $400 × 0.35=394.8",
+     "_naive_reason_ru": "посчитаны все 10 лет, 2 820 кт × $400 × 0,35 = 394,8"
     },
     {
      "c": 3,
@@ -8901,7 +9024,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 11.03,
-     "naive_reason": "stops at the credit revenue of $11.03M and never nets off the $8M program cost, leaving 11.03"
+     "naive_reason": "stops at the credit revenue of $11.03M and never nets off the $8M program cost, leaving 11.03",
+     "_naive_reason_ru": "счёт остановлен на выручке по кредитам $11,03 млн, и затраты программы $8 млн так и не вычтены — остаётся 11,03"
     },
     {
      "c": 4,
@@ -8913,7 +9037,8 @@
       "Year 7",
       "Year 6"
      ],
-     "naive_reason": "counts Year 6 at exactly 1.00% as clearing the bar, though the test is the first share strictly below 1.00%"
+     "naive_reason": "counts Year 6 at exactly 1.00% as clearing the bar, though the test is the first share strictly below 1.00%",
+     "_naive_reason_ru": "год 6 с ровным 1,00% засчитан как прошедший планку, — а проверяется первая доля строго ниже 1,00%"
     },
     {
      "c": 5,
@@ -8923,7 +9048,8 @@
      "round": 1,
      "tolerance": 0.01,
      "naive": 33.6,
-     "naive_reason": "applies the 24% top rate to the whole $140M, giving 33.6"
+     "naive_reason": "applies the 24% top rate to the whole $140M, giving 33.6",
+     "_naive_reason_ru": "верхняя ставка 24% применена ко всем $140 млн, отсюда 33,6"
     },
     {
      "c": 6,
@@ -8936,7 +9062,8 @@
       "B",
       "C"
      ],
-     "naive_reason": "picks the highest cost per hectare, B's $5,000 buying only 24,000 ha, mistaking the priciest plan for the one covering most hectares"
+     "naive_reason": "picks the highest cost per hectare, B's $5,000 buying only 24,000 ha, mistaking the priciest plan for the one covering most hectares",
+     "_naive_reason_ru": "взята наибольшая цена гектара, $5 000 у B, покупающие лишь 24 000 га: самый дорогой план принят за тот, что накрывает больше всего гектаров"
     }
    ],
    "analysis_review": [
@@ -9164,7 +9291,8 @@
      ],
      "mech": "S · итог на гектар, а не на растение",
      "form": "number",
-     "unit": "kg per ha per year"
+     "unit": "kg per ha per year",
+     "_naive_reason_ru": "итог поделён на число саженцев, а не на гектары; так выходит приживаемость одного саженца, а это другая величина, чем приживаемость одного гектара земли"
     }
    ]
   },
@@ -9388,7 +9516,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 78000,
-     "naive_reason": "reads off the coverage itself, 78,000"
+     "naive_reason": "reads off the coverage itself, 78,000",
+     "_naive_reason_ru": "прочитан сам охват, 78 000"
     },
     {
      "c": 2,
@@ -9398,7 +9527,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 35.13,
-     "naive_reason": "divides the $2,740,000 by the 78,000 households reached instead of by the 390,000 diagnoses delivered"
+     "naive_reason": "divides the $2,740,000 by the 78,000 households reached instead of by the 390,000 diagnoses delivered",
+     "_naive_reason_ru": "$2 740 000 поделены на 78 000 охваченных домохозяйств вместо 390 000 проведённых диагностик"
     },
     {
      "c": 3,
@@ -9408,7 +9538,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 3060000,
-     "naive_reason": "prices the whole 85% coverage, 0.85x120,000x$30 = 3,060,000"
+     "naive_reason": "prices the whole 85% coverage, 0.85x120,000x$30 = 3,060,000",
+     "_naive_reason_ru": "оценён весь охват в 85%, 0,85 × 120 000 × $30 = 3 060 000"
     },
     {
      "c": 4,
@@ -9420,7 +9551,8 @@
       "South",
       "North"
      ],
-     "naive_reason": "picks the region with the most diagnoses, North 96,000, ignoring cost, where 96,000/$2.6M = 36,923 per $M trails the best ratio"
+     "naive_reason": "picks the region with the most diagnoses, North 96,000, ignoring cost, where 96,000/$2.6M = 36,923 per $M trails the best ratio",
+     "_naive_reason_ru": "выбран район с наибольшим числом диагностик, North 96 000, — без учёта затрат, а с ними 96 000/$2,6 млн = 36 923 на млн отстают от лучшего отношения"
     },
     {
      "c": 5,
@@ -9438,7 +9570,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 38.06,
-     "naive_reason": "divides the full cost $2,740,000 by the maximum saving $7,200,000=38.06%"
+     "naive_reason": "divides the full cost $2,740,000 by the maximum saving $7,200,000=38.06%",
+     "_naive_reason_ru": "полные затраты $2 740 000 поделены на предельную экономию $7 200 000 = 38,06%"
     }
    ],
    "analysis_review": [
@@ -9573,7 +9706,8 @@
      "form": "percent",
      "naive_src": "calc",
      "naive_calc": "2740000-400000=2340000 · 400000/2340000=17.0940%",
-     "unit": "%"
+     "unit": "%",
+     "_naive_reason_ru": "постоянные затраты поделены на переменную часть, а не на полные затраты первого года; доля берётся от целого"
     }
    ]
   },
@@ -9843,7 +9977,8 @@
       "C",
       "D"
      ],
-     "naive_reason": "ranks the gauges by the single highest reading, A 54, instead of by range, where A spans only 54-28 = 26"
+     "naive_reason": "ranks the gauges by the single highest reading, A 54, instead of by range, where A spans only 54-28 = 26",
+     "_naive_reason_ru": "посты ранжированы по одному наибольшему замеру, A 54, а не по размаху, — а укладывается A всего в 54−28 = 26"
     },
     {
      "c": 2,
@@ -9853,7 +9988,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 300,
-     "naive_reason": "repeats the absolute drop of -100 (400-100=300)"
+     "naive_reason": "repeats the absolute drop of -100 (400-100=300)",
+     "_naive_reason_ru": "повторено абсолютное падение −100 (400−100 = 300)"
     },
     {
      "c": 3,
@@ -9867,7 +10003,8 @@
       "Iris",
       "Samphire"
      ],
-     "naive_reason": "picks the highest at-risk rate, Iris at 25%, ignoring counts, where Iris's 90 x 25% = 22.5 trails the top count x rate product"
+     "naive_reason": "picks the highest at-risk rate, Iris at 25%, ignoring counts, where Iris's 90 x 25% = 22.5 trails the top count x rate product",
+     "_naive_reason_ru": "взята наибольшая доля риска, 25% у Iris, — без учёта счёта, а по счёту 90 × 25% = 22,5 отстаёт от лучшего произведения «счёт × доля»"
     },
     {
      "c": 4,
@@ -9877,7 +10014,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 19.73,
-     "naive_reason": "divides the 72 over-limit days by the 365-day calendar, 72/365 = 19.73%, not by the 180 days the season runs"
+     "naive_reason": "divides the 72 over-limit days by the 365-day calendar, 72/365 = 19.73%, not by the 180 days the season runs",
+     "_naive_reason_ru": "72 дня с превышением поделены на календарные 365, 72/365 = 19,73%, а не на 180 дней, что идёт сезон"
     },
     {
      "c": 5,
@@ -9889,7 +10027,8 @@
       "20:23",
       "20:19"
      ],
-     "naive_reason": "uses Scrub's opening 46 rather than the post-transfer 38, giving 40:46 = 20:23 instead of pairing Flat's 40 with the post-move count"
+     "naive_reason": "uses Scrub's opening 46 rather than the post-transfer 38, giving 40:46 = 20:23 instead of pairing Flat's 40 with the post-move count",
+     "_naive_reason_ru": "взяты стартовые 46 у Scrub, а не 38 после перевода, отсюда 40:46 = 20:23 вместо того, чтобы поставить 40 у Flat против счёта после перевода"
     },
     {
      "c": 6,
@@ -9899,7 +10038,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 26,
-     "naive_reason": "divides the North column by the 2 printed values, (44+8)/2 = 26, ignoring the N/A = 0 convention and the average over 3 types"
+     "naive_reason": "divides the North column by the 2 printed values, (44+8)/2 = 26, ignoring the N/A = 0 convention and the average over 3 types",
+     "_naive_reason_ru": "колонка North поделена на 2 напечатанных значения, (44+8)/2 = 26, — без правила «нет данных = 0» и без среднего по 3 типам"
     }
    ],
    "analysis_review": [
@@ -10266,7 +10406,8 @@
       "C",
       "D"
      ],
-     "naive_reason": "ranks by the highest single reading, C's 55, rather than by range, where C's 55-26 = 29 trails the widest gauge"
+     "naive_reason": "ranks by the highest single reading, C's 55, rather than by range, where C's 55-26 = 29 trails the widest gauge",
+     "_naive_reason_ru": "ранжировано по одному наибольшему замеру, 55 у C, а не по размаху, — а по размаху 55−26 = 29 у C отстаёт от самого широкого поста"
     },
     {
      "c": 2,
@@ -10276,7 +10417,8 @@
      "round": 1,
      "tolerance": 0.01,
      "naive": 39,
-     "naive_reason": "repeats the absolute drop of -13"
+     "naive_reason": "repeats the absolute drop of -13",
+     "_naive_reason_ru": "повторено абсолютное падение −13"
     },
     {
      "c": 3,
@@ -10288,7 +10430,8 @@
       "Kelp",
       "Sponge"
      ],
-     "naive_reason": "picks the highest at-risk rate, Sponge 25%, ignoring counts, where 60 x 25% = 15 trails the top count x rate product"
+     "naive_reason": "picks the highest at-risk rate, Sponge 25%, ignoring counts, where 60 x 25% = 15 trails the top count x rate product",
+     "_naive_reason_ru": "взята наибольшая доля риска, 25% у Sponge, — без учёта счёта, а по счёту 60 × 25% = 15 отстаёт от лучшего произведения «счёт × доля»"
     },
     {
      "c": 4,
@@ -10298,7 +10441,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 23.01,
-     "naive_reason": "divides the 84 over-limit days by the 365-day calendar, 84/365 = 23.01%, not by the 240 days the season runs"
+     "naive_reason": "divides the 84 over-limit days by the 365-day calendar, 84/365 = 23.01%, not by the 240 days the season runs",
+     "_naive_reason_ru": "84 дня с превышением поделены на календарные 365, 84/365 = 23,01%, а не на 240 дней, что идёт сезон"
     },
     {
      "c": 5,
@@ -10310,7 +10454,8 @@
       "8:9",
       "16:15"
      ],
-     "naive_reason": "uses the pre-transfer counts 48:54 = 8:9 instead of re-forming the ratio after the 4 and 5 move out of Sand"
+     "naive_reason": "uses the pre-transfer counts 48:54 = 8:9 instead of re-forming the ratio after the 4 and 5 move out of Sand",
+     "_naive_reason_ru": "взяты счёты до перевода, 48:54 = 8:9, вместо того чтобы сложить отношение заново после вывода 4 и 5 из Sand"
     },
     {
      "c": 6,
@@ -10320,7 +10465,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 22,
-     "naive_reason": "divides only the two printed rows, (38+6)/2 = 22, dropping the N/A row the rule counts as zero and the divide-by-three convention"
+     "naive_reason": "divides only the two printed rows, (38+6)/2 = 22, dropping the N/A row the rule counts as zero and the divide-by-three convention",
+     "_naive_reason_ru": "поделены только две напечатанные строки, (38+6)/2 = 22, — потеряна строка «нет данных», которую правило считает нулём, и само деление на три"
     }
    ],
    "analysis_review": [
@@ -10660,7 +10806,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 20,
-     "naive_reason": "divides fixed $1,152,000 by the $60 ticket instead of by the $40 contribution before spreading over 96,000 seats"
+     "naive_reason": "divides fixed $1,152,000 by the $60 ticket instead of by the $40 contribution before spreading over 96,000 seats",
+     "_naive_reason_ru": "постоянные $1 152 000 поделены на билет $60, а не на вклад $40, и лишь потом разнесены на 96 000 мест"
     },
     {
      "c": 2,
@@ -10670,7 +10817,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 75,
-     "naive_reason": "averages the three posted rates unweighted, 225/3 = 75, instead of weighting each rate by its seat count over the 8,000 seats"
+     "naive_reason": "averages the three posted rates unweighted, 225/3 = 75, instead of weighting each rate by its seat count over the 8,000 seats",
+     "_naive_reason_ru": "три объявленные ставки усреднены без весов, 225/3 = 75, вместо взвешивания каждой ставки по числу её мест внутри 8 000"
     },
     {
      "c": 3,
@@ -10680,7 +10828,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 30000,
-     "naive_reason": "ignores the 15% discount and bills the full $60, 500x$60 = 30,000"
+     "naive_reason": "ignores the 15% discount and bills the full $60, 500x$60 = 30,000",
+     "_naive_reason_ru": "скидка 15% не учтена, выставлены полные $60, 500 × $60 = 30 000"
     },
     {
      "c": 4,
@@ -10693,7 +10842,8 @@
       "B",
       "C"
      ],
-     "naive_reason": "highest price $110"
+     "naive_reason": "highest price $110",
+     "_naive_reason_ru": "наибольшая цена $110"
     },
     {
      "c": 5,
@@ -10703,7 +10853,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 3.57,
-     "naive_reason": "divides the 5,000 peak quarter by the 1,400 trough, 5,000/1,400 = 3.57, instead of by the 3,100 four-quarter average"
+     "naive_reason": "divides the 5,000 peak quarter by the 1,400 trough, 5,000/1,400 = 3.57, instead of by the 3,100 four-quarter average",
+     "_naive_reason_ru": "пиковый квартал 5 000 поделён на провальный 1 400, 5 000/1 400 = 3,57, вместо среднего за четыре квартала 3 100"
     },
     {
      "c": 6,
@@ -10713,7 +10864,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 4,
-     "naive_reason": "adds the percentages +12 − 8 = 4"
+     "naive_reason": "adds the percentages +12 − 8 = 4",
+     "_naive_reason_ru": "проценты сложены: +12 − 8 = 4"
     }
    ],
    "analysis_review": [
@@ -11129,7 +11281,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 51,
-     "naive_reason": "divides the fixed cost by the $24 ticket instead of the $15 contribution, filling 11,475 of the 22,500 seat-days"
+     "naive_reason": "divides the fixed cost by the $24 ticket instead of the $15 contribution, filling 11,475 of the 22,500 seat-days",
+     "_naive_reason_ru": "постоянные затраты поделены на билет $24, а не на вклад $15, отчего заполнено 11 475 из 22 500 место-дней"
     },
     {
      "c": 2,
@@ -11139,7 +11292,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 32.67,
-     "naive_reason": "takes the simple average (18+30+50)/3 = 32.67"
+     "naive_reason": "takes the simple average (18+30+50)/3 = 32.67",
+     "_naive_reason_ru": "взято простое среднее, (18+30+50)/3 = 32,67"
     },
     {
      "c": 3,
@@ -11149,7 +11303,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 960,
-     "naive_reason": "ignores the 15% discount and charges 40×$24=960"
+     "naive_reason": "ignores the 15% discount and charges 40×$24=960",
+     "_naive_reason_ru": "скидка 15% не учтена, взято 40 × $24 = 960"
     },
     {
      "c": 4,
@@ -11162,7 +11317,8 @@
       "B",
       "C"
      ],
-     "naive_reason": "highest price $650"
+     "naive_reason": "highest price $650",
+     "_naive_reason_ru": "наибольшая цена $650"
     },
     {
      "c": 5,
@@ -11172,7 +11328,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 2.55,
-     "naive_reason": "divides the peak 560 by the trough 220 = 2.55"
+     "naive_reason": "divides the peak 560 by the trough 220 = 2.55",
+     "_naive_reason_ru": "пик 560 поделён на провал 220 = 2,55"
     },
     {
      "c": 6,
@@ -11182,7 +11339,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 3,
-     "naive_reason": "adds the percentages +8 − 5 = 3"
+     "naive_reason": "adds the percentages +8 − 5 = 3",
+     "_naive_reason_ru": "проценты сложены: +8 − 5 = 3"
     }
    ],
    "analysis_review": [
@@ -11356,7 +11514,8 @@
      "calc": "3000-1950=1050",
      "naive_src": "input",
      "naive_read": "chip:s9",
-     "unit": "people"
+     "unit": "people",
+     "_naive_reason_ru": "дан счёт самой группы, а НЕ остаток: вопрос — про тех, кто в неё не входит"
     }
    ]
   },
@@ -11577,7 +11736,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 36,
-     "naive_reason": "divides the fixed cost by the $70 price instead of the $42 contribution, filling 5,832 of the 16,200 unit-days"
+     "naive_reason": "divides the fixed cost by the $70 price instead of the $42 contribution, filling 5,832 of the 16,200 unit-days",
+     "_naive_reason_ru": "постоянные затраты поделены на цену $70, а не на вклад $42, отчего заполнено 5 832 из 16 200 единице-суток"
     },
     {
      "c": 2,
@@ -11587,7 +11747,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 86.67,
-     "naive_reason": "takes the simple average (45+75+140)/3 = 86.67"
+     "naive_reason": "takes the simple average (45+75+140)/3 = 86.67",
+     "_naive_reason_ru": "взято простое среднее, (45+75+140)/3 = 86,67"
     },
     {
      "c": 3,
@@ -11597,7 +11758,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 1400,
-     "naive_reason": "ignores the 15% discount and charges 20×$70=1,400"
+     "naive_reason": "ignores the 15% discount and charges 20×$70=1,400",
+     "_naive_reason_ru": "скидка 15% не учтена, взято 20 × $70 = 1 400"
     },
     {
      "c": 4,
@@ -11610,7 +11772,8 @@
       "B",
       "C"
      ],
-     "naive_reason": "highest price $760"
+     "naive_reason": "highest price $760",
+     "_naive_reason_ru": "наибольшая цена $760"
     },
     {
      "c": 5,
@@ -11620,7 +11783,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 2.8,
-     "naive_reason": "divides the peak 840 by the trough 300 = 2.80"
+     "naive_reason": "divides the peak 840 by the trough 300 = 2.80",
+     "_naive_reason_ru": "пик 840 поделён на провал 300 = 2,80"
     },
     {
      "c": 6,
@@ -11630,7 +11794,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 4,
-     "naive_reason": "adds the percentages +10 − 6 = 4"
+     "naive_reason": "adds the percentages +10 − 6 = 4",
+     "_naive_reason_ru": "проценты сложены: +10 − 6 = 4"
     }
    ],
    "analysis_review": [
@@ -11773,7 +11938,8 @@
      "calc": "2400-1680=720",
      "naive_src": "input",
      "naive_read": "chip:s7",
-     "unit": "people"
+     "unit": "people",
+     "_naive_reason_ru": "дан счёт самой группы, а НЕ остаток: вопрос — про тех, кто в неё не входит"
     }
    ]
   },
@@ -12114,7 +12280,8 @@
       "Year 4",
       "never"
      ],
-     "naive_reason": "uses the harvested series"
+     "naive_reason": "uses the harvested series",
+     "_naive_reason_ru": "взят ряд с изъятием"
     },
     {
      "c": 2,
@@ -12124,7 +12291,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 15691,
-     "naive_reason": "interpolates between the neighbouring cells, (14,200 + 17,182)/2 = 15,691, instead of applying the printed 30,000 - 0.2 x 71,900"
+     "naive_reason": "interpolates between the neighbouring cells, (14,200 + 17,182)/2 = 15,691, instead of applying the printed 30,000 - 0.2 x 71,900",
+     "_naive_reason_ru": "взята середина между соседними клетками, (14 200 + 17 182)/2 = 15 691, вместо напечатанной формулы 30 000 − 0,2 × 71 900"
     },
     {
      "c": 3,
@@ -12137,7 +12305,8 @@
       "Poison",
       "Baiting"
      ],
-     "naive_reason": "picks the cheapest option, Poison at $2,900, ignoring the bycatch ceiling of 5 that its score of 8 breaks"
+     "naive_reason": "picks the cheapest option, Poison at $2,900, ignoring the bycatch ceiling of 5 that its score of 8 breaks",
+     "_naive_reason_ru": "выбран самый дешёвый вариант, яд за $2 900, — без учёта потолка прилова в 5, который его оценка 8 пробивает"
     },
     {
      "c": 4,
@@ -12150,7 +12319,8 @@
       "North",
       "Cove"
      ],
-     "naive_reason": "ranks by absolute loss, North −12,000"
+     "naive_reason": "ranks by absolute loss, North −12,000",
+     "_naive_reason_ru": "ранжировано по абсолютной потере, −12 000 у North"
     },
     {
      "c": 5,
@@ -12163,7 +12333,8 @@
       "Cove",
       "Mid"
      ],
-     "naive_reason": "ranks on the %-decline term alone, where Mid led at (20,000-13,000)/20,000 = 35%, not on the printed priority index totals"
+     "naive_reason": "ranks on the %-decline term alone, where Mid led at (20,000-13,000)/20,000 = 35%, not on the printed priority index totals",
+     "_naive_reason_ru": "ранжировано по одному слагаемому — падению в процентах, где Mid шёл первым с (20 000−13 000)/20 000 = 35%, — а не по напечатанным итогам индекса приоритета"
     },
     {
      "c": 6,
@@ -12173,7 +12344,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 12000000,
-     "naive_reason": "carries the full 20,000 removal across all 5 steps, 100,000x$120 = 12,000,000, instead of 2x20,000 + 3x15,000 = 85,000 removed"
+     "naive_reason": "carries the full 20,000 removal across all 5 steps, 100,000x$120 = 12,000,000, instead of 2x20,000 + 3x15,000 = 85,000 removed",
+     "_naive_reason_ru": "полное изъятие в 20 000 протянуто через все 5 шагов, 100 000 × $120 = 12 000 000, вместо изъятых 2×20 000 + 3×15 000 = 85 000"
     }
    ],
    "analysis_review": [
@@ -12389,7 +12561,8 @@
      "calc": "45/2=22.5",
      "naive_src": "window",
      "naive_calc": "35/2=17.5",
-     "unit": "years"
+     "unit": "years",
+     "_naive_reason_ru": "на ставку поделено то, что ОСТАЁТСЯ в последнем году графика, а не уровень на старте; вопрос — про время от начала ряда"
     }
    ]
   },
@@ -12691,7 +12864,8 @@
       "Year 3",
       "never"
      ],
-     "naive_reason": "reads the with-cull series 120,000 down to 92,154, which never reaches 140,000, instead of the no-cull series"
+     "naive_reason": "reads the with-cull series 120,000 down to 92,154, which never reaches 140,000, instead of the no-cull series",
+     "_naive_reason_ru": "прочитан ряд с выбраковкой, со 120 000 до 92 154, который до 140 000 не доходит никогда, — а не ряд без выбраковки"
     },
     {
      "c": 2,
@@ -12701,7 +12875,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 18586,
-     "naive_reason": "interpolates between the neighbouring cells, (17,200 + 19,972)/2 = 18,586, instead of applying the printed 40,000 - 0.2 x 107,400"
+     "naive_reason": "interpolates between the neighbouring cells, (17,200 + 19,972)/2 = 18,586, instead of applying the printed 40,000 - 0.2 x 107,400",
+     "_naive_reason_ru": "взята середина между соседними клетками, (17 200 + 19 972)/2 = 18 586, вместо напечатанной формулы 40 000 − 0,2 × 107 400"
     },
     {
      "c": 3,
@@ -12714,7 +12889,8 @@
       "Netting",
       "Poison"
      ],
-     "naive_reason": "picks the cheapest option, Poison at $3,100, ignoring the bycatch ceiling of 5 that its score of 9 breaks"
+     "naive_reason": "picks the cheapest option, Poison at $3,100, ignoring the bycatch ceiling of 5 that its score of 9 breaks",
+     "_naive_reason_ru": "выбран самый дешёвый вариант, яд за $3 100, — без учёта потолка прилова в 5, который его оценка 9 пробивает"
     },
     {
      "c": 4,
@@ -12727,7 +12903,8 @@
       "Mid",
       "Cove"
      ],
-     "naive_reason": "ranks by absolute loss, North −16,000"
+     "naive_reason": "ranks by absolute loss, North −16,000",
+     "_naive_reason_ru": "ранжировано по абсолютной потере, −16 000 у North"
     },
     {
      "c": 5,
@@ -12740,7 +12917,8 @@
       "Mid",
       "Cove"
      ],
-     "naive_reason": "ranks on the %-decline term alone, where Mid led at (24,000-15,600)/24,000 = 35%, not on the printed priority index totals"
+     "naive_reason": "ranks on the %-decline term alone, where Mid led at (24,000-15,600)/24,000 = 35%, not on the printed priority index totals",
+     "_naive_reason_ru": "ранжировано по одному слагаемому — падению в процентах, где Mid шёл первым с (24 000−15 600)/24 000 = 35%, — а не по напечатанным итогам индекса приоритета"
     },
     {
      "c": 6,
@@ -12753,7 +12931,8 @@
       "B",
       "C"
      ],
-     "naive_reason": "ranks by unit count, C's 40 units, instead of by total effect, where C's 40x130 = 5,200 trails the strongest option"
+     "naive_reason": "ranks by unit count, C's 40 units, instead of by total effect, where C's 40x130 = 5,200 trails the strongest option",
+     "_naive_reason_ru": "ранжировано по числу единиц, 40 у C, а не по общему действию, — а по нему 40 × 130 = 5 200 у C отстаёт от сильнейшего варианта"
     }
    ],
    "analysis_review": [
@@ -12944,7 +13123,8 @@
      "calc": "55/4=13.75",
      "naive_src": "window",
      "naive_calc": "39/4=9.75",
-     "unit": "years"
+     "unit": "years",
+     "_naive_reason_ru": "на ставку поделено то, что ОСТАЁТСЯ в последнем году графика, а не уровень на старте; вопрос — про время от начала ряда"
     },
     {
      "from": "q4b",
@@ -12965,7 +13145,8 @@
      "calc": "4*7000=28000 · 28000+28000=56000 · 56000+28000=84000 · 84000+28000=112000 · 28000+56000+84000+112000=280000",
      "naive_src": "calc",
      "naive_calc": "4*7000=28000 · 28000+28000=56000 · 56000+28000=84000 · 84000+28000=112000 · 112000+112000=224000 · 224000+112000=336000 · 336000+112000=448000",
-     "unit": "$"
+     "unit": "$",
+     "_naive_reason_ru": "взят разрыв последнего года окна и умножен на число лет; внутри окна разрыв растёт (4, 8, 12, 16 пунктов), поэтому ряд надо складывать, а не брать последний год четырежды"
     }
    ]
   },
@@ -13251,7 +13432,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 4.99,
-     "naive_reason": "applies the 12% royalty to the headline $41.6M, giving 4.99"
+     "naive_reason": "applies the 12% royalty to the headline $41.6M, giving 4.99",
+     "_naive_reason_ru": "роялти 12% применены к заголовочным $41,6 млн, отсюда 4,99"
     },
     {
      "c": 2,
@@ -13261,7 +13443,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 46.7,
-     "naive_reason": "prices all 2,335 kt at the $80 spot for $186.8M, then reinvests 25%, 0.25 x $186.8M = 46.7, ignoring the fixed-price offtake"
+     "naive_reason": "prices all 2,335 kt at the $80 spot for $186.8M, then reinvests 25%, 0.25 x $186.8M = 46.7, ignoring the fixed-price offtake",
+     "_naive_reason_ru": "все 2 335 кт оценены по споту $80, отсюда $186,8 млн, и от них взяты 25% на реинвестиции, 0,25 × $186,8 млн = 46,7, — без учёта отбора по твёрдой цене"
     },
     {
      "c": 3,
@@ -13271,7 +13454,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 31.2,
-     "naive_reason": "omits the 0"
+     "naive_reason": "omits the 0",
+     "_naive_reason_ru": "пропущен 0"
     },
     {
      "c": 4,
@@ -13283,7 +13467,8 @@
       "Year 7",
       "Year 6"
      ],
-     "naive_reason": "counts Year 6 at exactly 1.00% as clearing the bar, though the test is the first share strictly below 1.00%"
+     "naive_reason": "counts Year 6 at exactly 1.00% as clearing the bar, though the test is the first share strictly below 1.00%",
+     "_naive_reason_ru": "год 6 с ровным 1,00% засчитан как прошедший планку, — а проверяется первая доля строго ниже 1,00%"
     },
     {
      "c": 5,
@@ -13293,7 +13478,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 7.07,
-     "naive_reason": "applies the 20% top rate to the whole $35.36M, giving 7.07"
+     "naive_reason": "applies the 20% top rate to the whole $35.36M, giving 7.07",
+     "_naive_reason_ru": "верхняя ставка 20% применена ко всем $35,36 млн, отсюда 7,07"
     },
     {
      "c": 6,
@@ -13306,7 +13492,8 @@
       "B",
       "C"
      ],
-     "naive_reason": "highest cost/ha $6,000 → 20,000 ha"
+     "naive_reason": "highest cost/ha $6,000 → 20,000 ha",
+     "_naive_reason_ru": "наибольшая цена гектара $6 000 → 20 000 га"
     }
    ],
    "analysis_review": [
@@ -13847,7 +14034,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 1350,
-     "naive_reason": "applies the 15% royalty to Year-10 GDP of $9,000M, giving 1,350"
+     "naive_reason": "applies the 15% royalty to Year-10 GDP of $9,000M, giving 1,350",
+     "_naive_reason_ru": "роялти 15% применены к ВВП года 10 в $9 000 млн, отсюда 1 350"
     },
     {
      "c": 2,
@@ -13857,7 +14045,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 168.75,
-     "naive_reason": "sums all ten years, 2,250 kt giving $562.5Mx0.30 = 168.75"
+     "naive_reason": "sums all ten years, 2,250 kt giving $562.5Mx0.30 = 168.75",
+     "_naive_reason_ru": "сложены все десять лет, 2 250 кт дают $562,5 млн × 0,30 = 168,75"
     },
     {
      "c": 3,
@@ -13867,7 +14056,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 9.9,
-     "naive_reason": "reports the gross credit revenue $9.90M and never subtracts the $9M program cost the question asks to net off"
+     "naive_reason": "reports the gross credit revenue $9.90M and never subtracts the $9M program cost the question asks to net off",
+     "_naive_reason_ru": "показана валовая выручка по кредитам $9,90 млн, а затраты программы $9 млн, которые вопрос велит вычесть, так и не вычтены"
     },
     {
      "c": 4,
@@ -13879,7 +14069,8 @@
       "Year 4",
       "Year 5"
      ],
-     "naive_reason": "reads 'below 1.00%' as ≤ and stops at Year 4's exact 1.00%"
+     "naive_reason": "reads 'below 1.00%' as ≤ and stops at Year 4's exact 1.00%",
+     "_naive_reason_ru": "«ниже 1,00%» прочитано как «1,00% и ниже», и счёт остановлен на ровном 1,00% года 4"
     },
     {
      "c": 5,
@@ -13889,7 +14080,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 16.5,
-     "naive_reason": "applies the 22% top rate to the whole $75M, 16.5"
+     "naive_reason": "applies the 22% top rate to the whole $75M, 16.5",
+     "_naive_reason_ru": "верхняя ставка 22% применена ко всем $75 млн, 16,5"
     },
     {
      "c": 6,
@@ -13902,7 +14094,8 @@
       "B",
       "C"
      ],
-     "naive_reason": "picks the highest cost per hectare, A at $6,000, which turns the $150M into just 25,000 ha instead of maximising hectares"
+     "naive_reason": "picks the highest cost per hectare, A at $6,000, which turns the $150M into just 25,000 ha instead of maximising hectares",
+     "_naive_reason_ru": "взята наибольшая цена гектара, $6 000 у A, которая превращает $150 млн всего в 25 000 га вместо того, чтобы взять гектаров как можно больше"
     }
    ],
    "analysis_review": [
@@ -14129,7 +14322,8 @@
      ],
      "mech": "R · отношение вкладов двух групп",
      "form": "number",
-     "unit": "kg of A per kg of C"
+     "unit": "kg of A per kg of C",
+     "_naive_reason_ru": "сравниваются две доли состава, а не приживаемости; приживаемость группы — это её доля, умноженная на её собственную ставку, а ставки разные"
     }
    ]
   },
@@ -14353,7 +14547,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 63000,
-     "naive_reason": "reports the coverage itself, 90,000x0.70 = 63,000"
+     "naive_reason": "reports the coverage itself, 90,000x0.70 = 63,000",
+     "_naive_reason_ru": "показан сам охват, 90 000 × 0,70 = 63 000"
     },
     {
      "c": 2,
@@ -14363,7 +14558,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 32.94,
-     "naive_reason": "divides the $2,075,000 by the 63,000 connected households, 2,075,000/63,000 = $32.94, rather than by the 378,000 sessions delivered"
+     "naive_reason": "divides the $2,075,000 by the 63,000 connected households, 2,075,000/63,000 = $32.94, rather than by the 378,000 sessions delivered",
+     "_naive_reason_ru": "$2 075 000 поделены на 63 000 подключённых домохозяйств, 2 075 000/63 000 = $32,94, а не на 378 000 проведённых сеансов"
     },
     {
      "c": 3,
@@ -14373,7 +14569,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 2025000,
-     "naive_reason": "costs the full 90% coverage, 0.90 × 90,000 × $25 = 2,025,000"
+     "naive_reason": "costs the full 90% coverage, 0.90 × 90,000 × $25 = 2,025,000",
+     "_naive_reason_ru": "оценён весь охват в 90%, 0,90 × 90 000 × $25 = 2 025 000"
     },
     {
      "c": 4,
@@ -14385,7 +14582,8 @@
       "North",
       "South"
      ],
-     "naive_reason": "ranks by total sessions, North's 80,000"
+     "naive_reason": "ranks by total sessions, North's 80,000",
+     "_naive_reason_ru": "ранжировано по общему числу сеансов, 80 000 у North"
     },
     {
      "c": 5,
@@ -14403,7 +14601,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 9.26,
-     "naive_reason": "divides the fixed $500,000 by the $5,400,000 gross saving, ignoring the $2,250,000 connection cost that scales with adoption"
+     "naive_reason": "divides the fixed $500,000 by the $5,400,000 gross saving, ignoring the $2,250,000 connection cost that scales with adoption",
+     "_naive_reason_ru": "постоянные $500 000 поделены на валовую экономию $5 400 000, — без затрат на подключение $2 250 000, которые растут вместе с охватом"
     }
    ],
    "analysis_review": [
@@ -14541,7 +14740,8 @@
      "form": "percent",
      "naive_src": "calc",
      "naive_calc": "2075000-500000=1575000 · 500000/1575000=31.7460%",
-     "unit": "%"
+     "unit": "%",
+     "_naive_reason_ru": "постоянные затраты поделены на переменную часть, а не на полные затраты первого года; доля берётся от целого"
     }
    ]
   },
@@ -14811,7 +15011,8 @@
       "C",
       "D"
      ],
-     "naive_reason": "ranks by the maximum reading, C's 52, instead of by range, where C spans only 52-24 = 28"
+     "naive_reason": "ranks by the maximum reading, C's 52, instead of by range, where C spans only 52-24 = 28",
+     "_naive_reason_ru": "ранжировано по наибольшему замеру, 52 у C, а не по размаху, — а укладывается C всего в 52−24 = 28"
     },
     {
      "c": 2,
@@ -14821,7 +15022,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 288,
-     "naive_reason": "repeats the absolute drop of −96 (480→384) giving 288"
+     "naive_reason": "repeats the absolute drop of −96 (480→384) giving 288",
+     "_naive_reason_ru": "повторено абсолютное падение −96 (480 → 384), отсюда 288"
     },
     {
      "c": 3,
@@ -14835,7 +15037,8 @@
       "Blackfly",
       "Beetle"
      ],
-     "naive_reason": "picks Beetle for the highest at-risk share, 25%, without multiplying by count, where 96 x 0.25 = 24 trails the top product"
+     "naive_reason": "picks Beetle for the highest at-risk share, 25%, without multiplying by count, where 96 x 0.25 = 24 trails the top product",
+     "_naive_reason_ru": "Beetle выбран за наибольшую долю риска, 25%, без умножения на счёт, — а с ним 96 × 0,25 = 24 отстают от лучшего произведения"
     },
     {
      "c": 4,
@@ -14845,7 +15048,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 13.97,
-     "naive_reason": "divides the 51 below-limit days by the 365-day calendar year instead of by the 170 survey days"
+     "naive_reason": "divides the 51 below-limit days by the 365-day calendar year instead of by the 170 survey days",
+     "_naive_reason_ru": "51 день ниже предела поделён на календарный год в 365 дней вместо 170 дней наблюдений"
     },
     {
      "c": 5,
@@ -14857,7 +15061,8 @@
       "21:19",
       "21:23"
      ],
-     "naive_reason": "uses Pool's pre-move 46, giving 42:46 = 21:23, instead of the 38 left after the 5 and 3 are moved out"
+     "naive_reason": "uses Pool's pre-move 46, giving 42:46 = 21:23, instead of the 38 left after the 5 and 3 are moved out",
+     "_naive_reason_ru": "взяты 46 у Pool до перевода, отсюда 42:46 = 21:23, вместо 38, оставшихся после вывода 5 и 3"
     },
     {
      "c": 6,
@@ -14867,7 +15072,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 27.5,
-     "naive_reason": "divides the Riffle column by the 2 printed rows, (48+7+0)/2 = 27.5, ignoring the printed N/A as a zero third row the div-3 rule counts"
+     "naive_reason": "divides the Riffle column by the 2 printed rows, (48+7+0)/2 = 27.5, ignoring the printed N/A as a zero third row the div-3 rule counts",
+     "_naive_reason_ru": "колонка Riffle поделена на 2 напечатанные строки, (48+7+0)/2 = 27,5, — а напечатанное «нет данных» и есть нулевая третья строка, которую правило деления на 3 считает"
     }
    ],
    "analysis_review": [
@@ -15234,7 +15440,8 @@
       "C",
       "D"
      ],
-     "naive_reason": "ranks by the highest single reading, C's 58, rather than by range, where C spans only 58-28 = 30"
+     "naive_reason": "ranks by the highest single reading, C's 58, rather than by range, where C spans only 58-28 = 30",
+     "_naive_reason_ru": "ранжировано по одному наибольшему замеру, 58 у C, а не по размаху, — а укладывается C всего в 58−28 = 30"
     },
     {
      "c": 2,
@@ -15244,7 +15451,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 33,
-     "naive_reason": "repeats the absolute drop of -11"
+     "naive_reason": "repeats the absolute drop of -11",
+     "_naive_reason_ru": "повторено абсолютное падение −11"
     },
     {
      "c": 3,
@@ -15256,7 +15464,8 @@
       "Sponge",
       "Eelgrass"
      ],
-     "naive_reason": "picks the highest at-risk rate, Sponge's 25%, ignoring counts: 96 x 25% = 24 individuals, fewer than a larger population yields"
+     "naive_reason": "picks the highest at-risk rate, Sponge's 25%, ignoring counts: 96 x 25% = 24 individuals, fewer than a larger population yields",
+     "_naive_reason_ru": "взята наибольшая доля риска, 25% у Sponge, — без учёта счёта: 96 × 25% = 24 особи, меньше, чем даёт более многочисленная популяция"
     },
     {
      "c": 4,
@@ -15266,7 +15475,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 24.11,
-     "naive_reason": "divides the 88 below-limit days by the 365-day calendar, 88/365 = 24.11%, not by the 220 days the season runs"
+     "naive_reason": "divides the 88 below-limit days by the 365-day calendar, 88/365 = 24.11%, not by the 220 days the season runs",
+     "_naive_reason_ru": "88 дней ниже предела поделены на календарные 365, 88/365 = 24,11%, а не на 220 дней, что идёт сезон"
     },
     {
      "c": 5,
@@ -15278,7 +15488,8 @@
       "8:9",
       "8:11"
      ],
-     "naive_reason": "uses the pre-transfer counts 40:55 = 8:11 instead of pairing Eelgrass's 40 with Sand's count after the +6 & +4 move"
+     "naive_reason": "uses the pre-transfer counts 40:55 = 8:11 instead of pairing Eelgrass's 40 with Sand's count after the +6 & +4 move",
+     "_naive_reason_ru": "взяты счёты до перевода, 40:55 = 8:11, вместо того чтобы поставить 40 у Eelgrass против счёта Sand после перевода +6 и +4"
     },
     {
      "c": 6,
@@ -15288,7 +15499,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 23.5,
-     "naive_reason": "divides only the two printed rows, (42+5)/2 = 23.5, dropping the N/A row the rule counts as zero and the divide-by-three convention"
+     "naive_reason": "divides only the two printed rows, (42+5)/2 = 23.5, dropping the N/A row the rule counts as zero and the divide-by-three convention",
+     "_naive_reason_ru": "поделены только две напечатанные строки, (42+5)/2 = 23,5, — потеряна строка «нет данных», которую правило считает нулём, и само деление на три"
     }
    ],
    "analysis_review": [
@@ -15658,7 +15870,8 @@
       "C",
       "D"
      ],
-     "naive_reason": "ranks by the highest single reading, A's 54, rather than by range, where A spans only 54-26 = 28"
+     "naive_reason": "ranks by the highest single reading, A's 54, rather than by range, where A spans only 54-26 = 28",
+     "_naive_reason_ru": "ранжировано по одному наибольшему замеру, 54 у A, а не по размаху, — а укладывается A всего в 54−26 = 28"
     },
     {
      "c": 2,
@@ -15668,7 +15881,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 140,
-     "naive_reason": "repeats the absolute drop of -30"
+     "naive_reason": "repeats the absolute drop of -30",
+     "_naive_reason_ru": "повторено абсолютное падение −30"
     },
     {
      "c": 3,
@@ -15682,7 +15896,8 @@
       "Iris",
       "Bulrush"
      ],
-     "naive_reason": "picks the highest at-risk rate, Bulrush 25%, ignoring counts, where 96 x 25% = 24 trails the top count x rate product"
+     "naive_reason": "picks the highest at-risk rate, Bulrush 25%, ignoring counts, where 96 x 25% = 24 trails the top count x rate product",
+     "_naive_reason_ru": "взята наибольшая доля риска, 25% у Bulrush, — без учёта счёта, а по счёту 96 × 25% = 24 отстаёт от лучшего произведения «счёт × доля»"
     },
     {
      "c": 4,
@@ -15692,7 +15907,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 24.66,
-     "naive_reason": "divides the 90 over-limit days by the 365-day calendar year instead of by the 200 days of the season"
+     "naive_reason": "divides the 90 over-limit days by the 365-day calendar year instead of by the 200 days of the season",
+     "_naive_reason_ru": "90 дней с превышением поделены на календарный год в 365 дней вместо 200 дней сезона"
     },
     {
      "c": 5,
@@ -15704,7 +15920,8 @@
       "9:11",
       "1:1"
      ],
-     "naive_reason": "uses the pre-transfer counts 36:44 = 9:11 instead of pairing Marsh's 36 with Reed's count after the +5 & +3 move"
+     "naive_reason": "uses the pre-transfer counts 36:44 = 9:11 instead of pairing Marsh's 36 with Reed's count after the +5 & +3 move",
+     "_naive_reason_ru": "взяты счёты до перевода, 36:44 = 9:11, вместо того чтобы поставить 36 у Marsh против счёта Reed после перевода +5 и +3"
     },
     {
      "c": 6,
@@ -15714,7 +15931,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 18.5,
-     "naive_reason": "divides the East column by the 2 printed rows, (32+5+0)/2 = 18.5, ignoring the printed N/A as a zero third row the div-3 rule counts"
+     "naive_reason": "divides the East column by the 2 printed rows, (32+5+0)/2 = 18.5, ignoring the printed N/A as a zero third row the div-3 rule counts",
+     "_naive_reason_ru": "колонка East поделена на 2 напечатанные строки, (32+5+0)/2 = 18,5, — а напечатанное «нет данных» и есть нулевая третья строка, которую правило деления на 3 считает"
     }
    ],
    "analysis_review": [
@@ -16078,7 +16296,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 20,
-     "naive_reason": "divides the fixed $475,200 by the $220 posted rate, 2,160/10,800 = 20%, ignoring the $100 variable cost each room-night carries"
+     "naive_reason": "divides the fixed $475,200 by the $220 posted rate, 2,160/10,800 = 20%, ignoring the $100 variable cost each room-night carries",
+     "_naive_reason_ru": "постоянные $475 200 поделены на объявленную ставку $220, 2 160/10 800 = 20%, — без учёта переменных $100, которые несёт каждая номеро-ночь"
     },
     {
      "c": 2,
@@ -16088,7 +16307,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 286.67,
-     "naive_reason": "takes the simple average of the three rates, (180+260+420)/3=286.67"
+     "naive_reason": "takes the simple average of the three rates, (180+260+420)/3=286.67",
+     "_naive_reason_ru": "взято простое среднее трёх ставок, (180+260+420)/3 = 286,67"
     },
     {
      "c": 3,
@@ -16098,7 +16318,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 22000,
-     "naive_reason": "ignores the 20% discount and bills the full $220, 25x4x$220 = 22,000"
+     "naive_reason": "ignores the 20% discount and bills the full $220, 25x4x$220 = 22,000",
+     "_naive_reason_ru": "скидка 20% не учтена, выставлены полные $220, 25 × 4 × $220 = 22 000"
     },
     {
      "c": 4,
@@ -16111,7 +16332,8 @@
       "B",
       "C"
      ],
-     "naive_reason": "picks the highest sticker price $800 instead of the widest price-minus-cost contribution"
+     "naive_reason": "picks the highest sticker price $800 instead of the widest price-minus-cost contribution",
+     "_naive_reason_ru": "взята наибольшая ценниковая цена $800 вместо самого широкого вклада «цена минус затраты»"
     },
     {
      "c": 5,
@@ -16121,7 +16343,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 3.3,
-     "naive_reason": "divides the peak quarter 990 by the trough quarter 300 instead of by the 600 quarterly average"
+     "naive_reason": "divides the peak quarter 990 by the trough quarter 300 instead of by the 600 quarterly average",
+     "_naive_reason_ru": "пиковый квартал 990 поделён на провальный 300 вместо среднего за квартал 600"
     },
     {
      "c": 6,
@@ -16131,7 +16354,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 161568,
-     "naive_reason": "takes 8% of the headline $2,019,600 = 161,568"
+     "naive_reason": "takes 8% of the headline $2,019,600 = 161,568",
+     "_naive_reason_ru": "взято 8% от заголовочных $2 019 600 = 161 568"
     }
    ],
    "analysis_review": [
@@ -16337,7 +16561,8 @@
      "form": "percent",
      "naive_src": "calc",
      "naive_calc": "(2700-1800)/2700=33.3333%",
-     "unit": "%"
+     "unit": "%",
+     "_naive_reason_ru": "разрыв поделён на больший квартал; рост меряется ОТ того квартала, с которого начинается, а это меньший"
     },
     {
      "from": "q1a",
@@ -16357,7 +16582,8 @@
      "calc": "2700-1890=810",
      "naive_src": "input",
      "naive_read": "chip:s13",
-     "unit": "people"
+     "unit": "people",
+     "_naive_reason_ru": "дан счёт самой группы, а НЕ остаток: вопрос — про тех, кто в неё не входит"
     }
    ]
   },
@@ -16579,7 +16805,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 48,
-     "naive_reason": "divides the fixed $291,600 by the $75 rent rather than the $45 contribution, filling 3,888 of the 8,100 stall-days and understating break-even"
+     "naive_reason": "divides the fixed $291,600 by the $75 rent rather than the $45 contribution, filling 3,888 of the 8,100 stall-days and understating break-even",
+     "_naive_reason_ru": "постоянные $291 600 поделены на аренду $75, а не на вклад $45, отчего заполнено 3 888 из 8 100 место-дней, и точка безубыточности занижена"
     },
     {
      "c": 2,
@@ -16589,7 +16816,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 95,
-     "naive_reason": "takes the simple average of the three rents, (50+85+150)/3 = 95"
+     "naive_reason": "takes the simple average of the three rents, (50+85+150)/3 = 95",
+     "_naive_reason_ru": "взято простое среднее трёх ставок аренды, (50+85+150)/3 = 95"
     },
     {
      "c": 3,
@@ -16599,7 +16827,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 9000,
-     "naive_reason": "ignores the 15% discount: 12 × 10 × $75 = 9,000"
+     "naive_reason": "ignores the 15% discount: 12 × 10 × $75 = 9,000",
+     "_naive_reason_ru": "скидка 15% не учтена: 12 × 10 × $75 = 9 000"
     },
     {
      "c": 4,
@@ -16612,7 +16841,8 @@
       "B",
       "C"
      ],
-     "naive_reason": "picks the top sticker price $720 rather than the widest price-minus-cost gap"
+     "naive_reason": "picks the top sticker price $720 rather than the widest price-minus-cost gap",
+     "_naive_reason_ru": "взята верхняя ценниковая цена $720 вместо самого широкого разрыва «цена минус затраты»"
     },
     {
      "c": 5,
@@ -16622,7 +16852,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 2.53,
-     "naive_reason": "divides the 760 peak quarter by the 300 trough, 760/300 = 2.53, instead of by the 500 four-quarter average"
+     "naive_reason": "divides the 760 peak quarter by the 300 trough, 760/300 = 2.53, instead of by the 500 four-quarter average",
+     "_naive_reason_ru": "пиковый квартал 760 поделён на провальный 300, 760/300 = 2,53, вместо среднего за четыре квартала 500"
     },
     {
      "c": 6,
@@ -16632,7 +16863,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 5,
-     "naive_reason": "adds the two percentages, +12-7 = 5%, instead of compounding 1.12 x 0.93 and subtracting the base"
+     "naive_reason": "adds the two percentages, +12-7 = 5%, instead of compounding 1.12 x 0.93 and subtracting the base",
+     "_naive_reason_ru": "два процента сложены, +12 − 7 = 5%, вместо перемножения 1,12 × 0,93 и вычета базы"
     }
    ],
    "analysis_review": [
@@ -16770,7 +17002,8 @@
      "form": "percent",
      "naive_src": "calc",
      "naive_calc": "2000/1500=133.3333%",
-     "unit": "%"
+     "unit": "%",
+     "_naive_reason_ru": "дано ОТНОШЕНИЕ двух кварталов, а не рост; рост — это отношение минус сто процентов"
     }
    ]
   },
@@ -17092,7 +17325,8 @@
       "never",
       "Year 3"
      ],
-     "naive_reason": "uses culled series"
+     "naive_reason": "uses culled series",
+     "_naive_reason_ru": "взят ряд с выбраковкой"
     },
     {
      "c": 2,
@@ -17102,7 +17336,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 17879,
-     "naive_reason": "interpolates between the neighbouring cells, (15,800 + 19,958)/2 = 17,879, instead of applying the printed 40,000 - 0.2 x 111,100"
+     "naive_reason": "interpolates between the neighbouring cells, (15,800 + 19,958)/2 = 17,879, instead of applying the printed 40,000 - 0.2 x 111,100",
+     "_naive_reason_ru": "взята середина между соседними клетками, (15 800 + 19 958)/2 = 17 879, вместо напечатанной формулы 40 000 − 0,2 × 111 100"
     },
     {
      "c": 3,
@@ -17115,7 +17350,8 @@
       "Shooting",
       "Poison"
      ],
-     "naive_reason": "picks the cheapest method, Poison at $3,000, ignoring the bycatch cap of 5 that its 9 breaks"
+     "naive_reason": "picks the cheapest method, Poison at $3,000, ignoring the bycatch cap of 5 that its 9 breaks",
+     "_naive_reason_ru": "выбран самый дешёвый способ, яд за $3 000, — без учёта потолка прилова в 5, который его 9 пробивают"
     },
     {
      "c": 4,
@@ -17128,7 +17364,8 @@
       "Mid",
       "Cove"
      ],
-     "naive_reason": "ranks by the absolute drop, North's -11,000"
+     "naive_reason": "ranks by the absolute drop, North's -11,000",
+     "_naive_reason_ru": "ранжировано по абсолютному падению, −11 000 у North"
     },
     {
      "c": 5,
@@ -17141,7 +17378,8 @@
       "Mid",
       "Cove"
      ],
-     "naive_reason": "repeats the answer to the previous question: Mid wins on percentage decline alone, but the priority index adds the heath-clarity gain and Cove's 45 beats Mid's 40"
+     "naive_reason": "repeats the answer to the previous question: Mid wins on percentage decline alone, but the priority index adds the heath-clarity gain and Cove's 45 beats Mid's 40",
+     "_naive_reason_ru": "повторён ответ на предыдущий вопрос: по одному падению в процентах впереди Mid, но индекс приоритета добавляет прибавку за прозрачность пустоши, и 45 у Cove бьют 40 у Mid"
     },
     {
      "c": 6,
@@ -17154,7 +17392,8 @@
       "B",
       "C"
      ],
-     "naive_reason": "ranks by unit count, B's 40 units, instead of by total effect, where B's 40x130 = 5,200 trails the strongest option"
+     "naive_reason": "ranks by unit count, B's 40 units, instead of by total effect, where B's 40x130 = 5,200 trails the strongest option",
+     "_naive_reason_ru": "ранжировано по числу единиц, 40 у B, а не по общему действию, — а по нему 40 × 130 = 5 200 у B отстаёт от сильнейшего варианта"
     }
    ],
    "analysis_review": [
@@ -17363,7 +17602,8 @@
      "calc": "48/3=16.0",
      "naive_src": "window",
      "naive_calc": "36/3=12.0",
-     "unit": "years"
+     "unit": "years",
+     "_naive_reason_ru": "на ставку поделено то, что ОСТАЁТСЯ в последнем году графика, а не уровень на старте; вопрос — про время от начала ряда"
     }
    ]
   },
@@ -17590,7 +17830,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 1080,
-     "naive_reason": "applies the 12% royalty to the $9,000M GDP base, giving 1,080"
+     "naive_reason": "applies the 12% royalty to the $9,000M GDP base, giving 1,080",
+     "_naive_reason_ru": "роялти 12% применены к базе ВВП в $9 000 млн, отсюда 1 080"
     },
     {
      "c": 2,
@@ -17600,7 +17841,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 40,
-     "naive_reason": "pools Y1+Y2 volumes"
+     "naive_reason": "pools Y1+Y2 volumes",
+     "_naive_reason_ru": "объёмы года 1 и года 2 сложены в один"
     },
     {
      "c": 3,
@@ -17610,7 +17852,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 60,
-     "naive_reason": "reports the Specialty volume share, 60 of 100 kt, as its revenue share, ignoring its higher $3,800 price per tonne"
+     "naive_reason": "reports the Specialty volume share, 60 of 100 kt, as its revenue share, ignoring its higher $3,800 price per tonne",
+     "_naive_reason_ru": "доля Specialty по объёму, 60 из 100 кт, показана как её доля в выручке, — без учёта её более высокой цены $3 800 за тонну"
     },
     {
      "c": 4,
@@ -17620,7 +17863,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 360,
-     "naive_reason": "projects the blended $3,000→$3,600 trend — the mix-shift error cascades into a $80M overstatement"
+     "naive_reason": "projects the blended $3,000→$3,600 trend — the mix-shift error cascades into a $80M overstatement",
+     "_naive_reason_ru": "продлён смешанный тренд $3 000 → $3 600 — ошибка со сдвигом состава разрастается в завышение на $80 млн"
     },
     {
      "c": 5,
@@ -17630,7 +17874,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 60,
-     "naive_reason": "applies the 20% top rate to the whole $300M, 60"
+     "naive_reason": "applies the 20% top rate to the whole $300M, 60",
+     "_naive_reason_ru": "верхняя ставка 20% применена ко всем $300 млн, 60"
     },
     {
      "c": 6,
@@ -17643,7 +17888,8 @@
       "B",
       "C"
      ],
-     "naive_reason": "picks the highest cost per hectare, A at $6,000, which turns the $120M into just 20,000 ha instead of maximising hectares"
+     "naive_reason": "picks the highest cost per hectare, A at $6,000, which turns the $120M into just 20,000 ha instead of maximising hectares",
+     "_naive_reason_ru": "взята наибольшая цена гектара, $6 000 у A, которая превращает $120 млн всего в 20 000 га вместо того, чтобы взять гектаров как можно больше"
     }
    ],
    "analysis_review": [
@@ -18076,7 +18322,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 4.17,
-     "naive_reason": "divides the $2,000,000 by the uniform 480,000 planned sessions, 2,000,000/480,000 = $4.17, not by the 390,000 sessions actually delivered"
+     "naive_reason": "divides the $2,000,000 by the uniform 480,000 planned sessions, 2,000,000/480,000 = $4.17, not by the 390,000 sessions actually delivered",
+     "_naive_reason_ru": "$2 000 000 поделены на ровные 480 000 запланированных сеансов, 2 000 000/480 000 = $4,17, а не на 390 000 сеансов, проведённых на деле"
     },
     {
      "c": 2,
@@ -18086,7 +18333,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 0.42,
-     "naive_reason": "uses the uniform $4,800,000 saving"
+     "naive_reason": "uses the uniform $4,800,000 saving",
+     "_naive_reason_ru": "взята ровная экономия $4 800 000"
     },
     {
      "c": 3,
@@ -18096,7 +18344,8 @@
      "round": 1,
      "tolerance": 0.01,
      "naive": "any effect > 0 is worth it",
-     "naive_reason": "treats any positive effect as worth funding and never sets a bar; the expansion breaks even only at $25 ÷ $10 = 2.5 sessions per household, and Tier 3 runs 2"
+     "naive_reason": "treats any positive effect as worth funding and never sets a bar; the expansion breaks even only at $25 ÷ $10 = 2.5 sessions per household, and Tier 3 runs 2",
+     "_naive_reason_ru": "любой положительный эффект принят за достойный денег, и планка не поставлена вовсе; расширение выходит в ноль только при $25 ÷ $10 = 2,5 сеанса на домохозяйство, а ярус 3 идёт по 2"
     },
     {
      "c": 4,
@@ -18117,7 +18366,8 @@
       "Mid",
       "South"
      ],
-     "naive_reason": "ranks by total sessions, North's 120,000, instead of by the sessions each $1M of budget buys"
+     "naive_reason": "ranks by total sessions, North's 120,000, instead of by the sessions each $1M of budget buys",
+     "_naive_reason_ru": "ранжировано по общему числу сеансов, 120 000 у North, а не по сеансам, которые покупает каждый $1 млн бюджета"
     },
     {
      "c": 6,
@@ -18127,7 +18377,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 2250000,
-     "naive_reason": "prices the whole 90,000 connections at $25 instead of only the 30,000 added above the 60,000 already served"
+     "naive_reason": "prices the whole 90,000 connections at $25 instead of only the 30,000 added above the 60,000 already served",
+     "_naive_reason_ru": "по $25 оценены все 90 000 подключений вместо одних лишь 30 000, добавленных сверх 60 000 уже охваченных"
     }
    ],
    "analysis_review": [
@@ -18298,7 +18549,8 @@
      "mech": "J · стоимость программы на обслуживаемого",
      "form": "dollars",
      "naive_calc": "500000/60000=8.3333",
-     "unit": "$ per household"
+     "unit": "$ per household",
+     "_naive_reason_ru": "на каждое охваченное домохозяйство отнесены только постоянные затраты, а его собственное подключение не учтено; затраты на домохозяйство — это все затраты, поделённые на домохозяйства, а не одна постоянная часть"
     }
    ]
   },
@@ -18528,7 +18780,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 66000,
-     "naive_reason": "reports the covered 66,000 households instead of subtracting them from the 110,000 total to get the unserved gap"
+     "naive_reason": "reports the covered 66,000 households instead of subtracting them from the 110,000 total to get the unserved gap",
+     "_naive_reason_ru": "показаны охваченные 66 000 домохозяйств вместо того, чтобы вычесть их из общих 110 000 и получить неохваченный остаток"
     },
     {
      "c": 2,
@@ -18538,7 +18791,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 36.82,
-     "naive_reason": "divides the $2,430,000 cost by the 66,000 covered households instead of by the 594,000 illness cases avoided"
+     "naive_reason": "divides the $2,430,000 cost by the 66,000 covered households instead of by the 594,000 illness cases avoided",
+     "_naive_reason_ru": "затраты $2 430 000 поделены на 66 000 охваченных домохозяйств вместо 594 000 предотвращённых случаев болезни"
     },
     {
      "c": 3,
@@ -18548,7 +18802,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 4752000,
-     "naive_reason": "stops at the gross $4,752,000 benefit and leaves the 66,000 x $5 = $330,000 of recurring maintenance unsubtracted"
+     "naive_reason": "stops at the gross $4,752,000 benefit and leaves the 66,000 x $5 = $330,000 of recurring maintenance unsubtracted",
+     "_naive_reason_ru": "счёт остановлен на валовой выгоде $4 752 000, а текущее обслуживание 66 000 × $5 = $330 000 так и не вычтено"
     },
     {
      "c": 4,
@@ -18560,7 +18815,8 @@
       "North",
       "South"
      ],
-     "naive_reason": "ranks by total cases, North's 160,000"
+     "naive_reason": "ranks by total cases, North's 160,000",
+     "_naive_reason_ru": "ранжировано по общему числу случаев, 160 000 у North"
     },
     {
      "c": 5,
@@ -18570,7 +18826,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 2640000,
-     "naive_reason": "prices the whole 80% coverage, 0.8x110,000x$30 = 2,640,000"
+     "naive_reason": "prices the whole 80% coverage, 0.8x110,000x$30 = 2,640,000",
+     "_naive_reason_ru": "оценён весь охват в 80%, 0,8 × 110 000 × $30 = 2 640 000"
     },
     {
      "c": 6,
@@ -18580,7 +18837,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 6.11,
-     "naive_reason": "divides the fixed $450,000 by the full net saving 110,000 x 67, ignoring the $30 stove cost that scales with adoption"
+     "naive_reason": "divides the fixed $450,000 by the full net saving 110,000 x 67, ignoring the $30 stove cost that scales with adoption",
+     "_naive_reason_ru": "постоянные $450 000 поделены на всю чистую экономию 110 000 × 67, — без затрат на печь $30, которые растут вместе с охватом"
     }
    ],
    "analysis_review": [
@@ -18731,7 +18989,8 @@
      ],
      "mech": "F · структура затрат: доля постоянной части",
      "form": "percent",
-     "unit": "%"
+     "unit": "%",
+     "_naive_reason_ru": "постоянные затраты поделены на печную часть, а не на полные затраты первого года; доля берётся от целого"
     }
    ]
   },
@@ -18912,7 +19171,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 13.16,
-     "naive_reason": "divides the 1,000 km2 remainder by the 7,600 km2 managed area rather than by the 8,000 km2 total range"
+     "naive_reason": "divides the 1,000 km2 remainder by the 7,600 km2 managed area rather than by the 8,000 km2 total range",
+     "_naive_reason_ru": "остаток в 1 000 км² поделён на управляемую площадь 7 600 км², а не на весь ареал в 8 000 км²"
     },
     {
      "c": 2,
@@ -18924,7 +19184,8 @@
       "Forest",
       "Alpine"
      ],
-     "naive_reason": "picks the largest zone"
+     "naive_reason": "picks the largest zone",
+     "_naive_reason_ru": "выбрана самая большая зона"
     },
     {
      "c": 3,
@@ -18938,7 +19199,8 @@
       "Meadow",
       "Reserve"
      ],
-     "naive_reason": "picks the highest at-risk rate, Wetland at 40%, ignoring parcels, where Wetland's 12 x 40% = 4.8 trails the top count x rate product"
+     "naive_reason": "picks the highest at-risk rate, Wetland at 40%, ignoring parcels, where Wetland's 12 x 40% = 4.8 trails the top count x rate product",
+     "_naive_reason_ru": "взята наибольшая доля риска, 40% у Wetland, — без учёта участков, а с ними 12 × 40% = 4,8 у Wetland отстают от лучшего произведения «счёт × доля»"
     },
     {
      "c": 4,
@@ -18950,7 +19212,8 @@
       "12 : 7",
       "27 : 11"
      ],
-     "naive_reason": "reads the ratio before the reclassification, 2,400:1,400 = 12:7, instead of after it, 2,700:1,100 = 27:11"
+     "naive_reason": "reads the ratio before the reclassification, 2,400:1,400 = 12:7, instead of after it, 2,700:1,100 = 27:11",
+     "_naive_reason_ru": "прочитано отношение до переклассификации, 2 400:1 400 = 12:7, а не после неё, 2 700:1 100 = 27:11"
     },
     {
      "c": 5,
@@ -18960,7 +19223,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 133.33,
-     "naive_reason": "takes the relative difference, (1,400-600)/600 = 133.33%, instead of subtracting the two zone shares in percentage points"
+     "naive_reason": "takes the relative difference, (1,400-600)/600 = 133.33%, instead of subtracting the two zone shares in percentage points",
+     "_naive_reason_ru": "взята относительная разница, (1 400−600)/600 = 133,33%, вместо вычитания двух долей зон в процентных пунктах"
     },
     {
      "c": 6,
@@ -18970,7 +19234,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 30,
-     "naive_reason": "divides by the total 8,000, giving 2,400/8,000 = 30%, though this question names the managed 7,600 base with the Reserve excluded"
+     "naive_reason": "divides by the total 8,000, giving 2,400/8,000 = 30%, though this question names the managed 7,600 base with the Reserve excluded",
+     "_naive_reason_ru": "поделено на все 8 000, отсюда 2 400/8 000 = 30%, — а этот вопрос называет управляемую базу 7 600 с исключённым Reserve"
     }
    ],
    "analysis_review": [
@@ -19130,7 +19395,8 @@
      "form": "ratio",
      "naive_src": "calc",
      "naive_calc": "3200/100=32 · 2400/100=24",
-     "unit": "x : y"
+     "unit": "x : y",
+     "_naive_reason_ru": "сокращено на круглую сотню вместо общего делителя; простейший вид требует наибольшего общего делителя"
     }
    ]
   },
@@ -19343,7 +19609,8 @@
       "C",
       "D"
      ],
-     "naive_reason": "picks the biggest absolute drop, 800 - 512 = 288, instead of the steepest percentage decline"
+     "naive_reason": "picks the biggest absolute drop, 800 - 512 = 288, instead of the steepest percentage decline",
+     "_naive_reason_ru": "взято наибольшее абсолютное падение, 800 − 512 = 288, а не самое крутое падение в процентах"
     },
     {
      "c": 2,
@@ -19353,7 +19620,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 300,
-     "naive_reason": "repeats −100 absolute"
+     "naive_reason": "repeats −100 absolute",
+     "_naive_reason_ru": "повторено −100 в абсолюте"
     },
     {
      "c": 3,
@@ -19363,7 +19631,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 256,
-     "naive_reason": "repeats the last decade's absolute drop 640 - 512 = 128 twice instead of applying the same per-decade rate to each new base"
+     "naive_reason": "repeats the last decade's absolute drop 640 - 512 = 128 twice instead of applying the same per-decade rate to each new base",
+     "_naive_reason_ru": "абсолютное падение прошлого десятилетия 640 − 512 = 128 повторено дважды вместо того, чтобы применить ту же ставку за десятилетие к каждой новой базе"
     },
     {
      "c": 4,
@@ -19375,7 +19644,8 @@
       "decade 2",
       "decade 3"
      ],
-     "naive_reason": "repeats the absolute drop of −128 (640→512), giving 384 then 256 under 300 by decade 2, instead of ×0.8 to 327.68"
+     "naive_reason": "repeats the absolute drop of −128 (640→512), giving 384 then 256 under 300 by decade 2, instead of ×0.8 to 327.68",
+     "_naive_reason_ru": "повторено абсолютное падение −128 (640 → 512), отсюда 384, затем 256 — ниже 300 уже ко второму десятилетию, — вместо умножения на 0,8 до 327,68"
     },
     {
      "c": 5,
@@ -19387,7 +19657,8 @@
       "32 : 27",
       "4 : 3"
      ],
-     "naive_reason": "uses the pre-decline 400 : 300"
+     "naive_reason": "uses the pre-decline 400 : 300",
+     "_naive_reason_ru": "взято 400 : 300 до падения"
     },
     {
      "c": 6,
@@ -19397,7 +19668,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 50,
-     "naive_reason": "repeats the absolute drop of 128 twice, 512-256=256, giving 256/512=50%"
+     "naive_reason": "repeats the absolute drop of 128 twice, 512-256=256, giving 256/512=50%",
+     "_naive_reason_ru": "абсолютное падение 128 повторено дважды, 512 − 256 = 256, отсюда 256/512 = 50%"
     }
    ],
    "analysis_review": [
@@ -19734,7 +20006,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 7.5,
-     "naive_reason": "averages the four per-hectare indices (6 + 4 + 2 + 18)/4 instead of weighting each index by its habitat area"
+     "naive_reason": "averages the four per-hectare indices (6 + 4 + 2 + 18)/4 instead of weighting each index by its habitat area",
+     "_naive_reason_ru": "четыре индекса на гектар усреднены, (6 + 4 + 2 + 18)/4, вместо взвешивания каждого индекса по площади его местообитания"
     },
     {
      "c": 2,
@@ -19744,7 +20017,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 70,
-     "naive_reason": "uses the area share of the two types, 700/1,000 = 70%"
+     "naive_reason": "uses the area share of the two types, 700/1,000 = 70%",
+     "_naive_reason_ru": "взята доля площади двух типов, 700/1 000 = 70%"
     },
     {
      "c": 3,
@@ -19758,7 +20032,8 @@
       "Lichen",
       "Aster"
      ],
-     "naive_reason": "picks the highest at-risk rate, Lichen's 25%, ignoring counts: 96 x 25% = 24 individuals, fewer than a larger population yields"
+     "naive_reason": "picks the highest at-risk rate, Lichen's 25%, ignoring counts: 96 x 25% = 24 individuals, fewer than a larger population yields",
+     "_naive_reason_ru": "взята наибольшая доля риска, 25% у Lichen, — без учёта счёта: 96 × 25% = 24 особи, меньше, чем даёт более многочисленная популяция"
     },
     {
      "c": 4,
@@ -19770,7 +20045,8 @@
       "4 : 3",
       "23 : 12"
      ],
-     "naive_reason": "uses the pre-move areas 400:300=4:3 instead of the post-move 460:240=23:12"
+     "naive_reason": "uses the pre-move areas 400:300=4:3 instead of the post-move 460:240=23:12",
+     "_naive_reason_ru": "взяты площади до перевода, 400:300 = 4:3, вместо площадей после него, 460:240 = 23:12"
     },
     {
      "c": 5,
@@ -19780,7 +20056,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 0,
-     "naive_reason": "treats the two as equal"
+     "naive_reason": "treats the two as equal",
+     "_naive_reason_ru": "оба приняты за равные"
     },
     {
      "c": 6,
@@ -19792,7 +20069,8 @@
       "rises",
       "falls"
      ],
-     "naive_reason": "treats the loss of 200 ha of Scree as pulling the weighted index down, though its index 2 sits below the 5.5 mean"
+     "naive_reason": "treats the loss of 200 ha of Scree as pulling the weighted index down, though its index 2 sits below the 5.5 mean",
+     "_naive_reason_ru": "потеря 200 га Scree принята за то, что тянет взвешенный индекс вниз, — а её индекс 2 стоит ниже среднего 5,5"
     }
    ],
    "analysis_review": [
@@ -20129,7 +20407,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 0,
-     "naive_reason": "treats all $57M as recurring"
+     "naive_reason": "treats all $57M as recurring",
+     "_naive_reason_ru": "все $57 млн приняты за повторяющиеся"
     },
     {
      "c": 2,
@@ -20139,7 +20418,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 28.5,
-     "naive_reason": "uses the reported profit $57M over $200M = 28.5"
+     "naive_reason": "uses the reported profit $57M over $200M = 28.5",
+     "_naive_reason_ru": "взята заявленная прибыль $57 млн против $200 млн = 28,5"
     },
     {
      "c": 3,
@@ -20149,7 +20429,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 42.5,
-     "naive_reason": "uses the reported profit, (57-40)/40 = +42.5%, instead of the underlying 35 against the same 40 base"
+     "naive_reason": "uses the reported profit, (57-40)/40 = +42.5%, instead of the underlying 35 against the same 40 base",
+     "_naive_reason_ru": "взята заявленная прибыль, (57 − 40)/40 = +42,5%, вместо базовых 35 против той же базы 40"
     },
     {
      "c": 4,
@@ -20159,7 +20440,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 456,
-     "naive_reason": "multiplies the 8x multiple by the reported $57M, 8 x 57 = $456M, carrying the one-off $22M revaluation gain into the base"
+     "naive_reason": "multiplies the 8x multiple by the reported $57M, 8 x 57 = $456M, carrying the one-off $22M revaluation gain into the base",
+     "_naive_reason_ru": "множитель 8× умножен на заявленные $57 млн, 8 × 57 = $456 млн, и разовая переоценка на $22 млн унесена в базу"
     },
     {
      "c": 5,
@@ -20169,7 +20451,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 81.23,
-     "naive_reason": "extrapolates reported profit 57 at the reported growth 42.5%, 57 x 1.425, ignoring the $11M recurrence the question sets"
+     "naive_reason": "extrapolates reported profit 57 at the reported growth 42.5%, 57 x 1.425, ignoring the $11M recurrence the question sets",
+     "_naive_reason_ru": "заявленная прибыль 57 продлена по заявленному росту 42,5%, 57 × 1,425, — без повторяющихся $11 млн, которые задаёт вопрос"
     },
     {
      "c": 6,
@@ -20182,7 +20465,8 @@
       "B",
       "C"
      ],
-     "naive_reason": "picks B, the reported headline $57M, for the multiple, carrying the non-recurring $22M revaluation gain into the valuation base"
+     "naive_reason": "picks B, the reported headline $57M, for the multiple, carrying the non-recurring $22M revaluation gain into the valuation base",
+     "_naive_reason_ru": "для множителя взят B, заголовочные $57 млн, и неповторяющаяся переоценка на $22 млн унесена в базу оценки"
     }
    ],
    "analysis_review": [
@@ -20320,7 +20604,8 @@
      ],
      "mech": "P · результат года к своему же сдвигу за год",
      "form": "number",
-     "unit": "times"
+     "unit": "times",
+     "_naive_reason_ru": "прочитана строка разовой части разбивки вместо заявленного итога; обе стоят в одной колонке одной таблицы, через строку друг от друга"
     }
    ]
   },
@@ -20521,7 +20806,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 0,
-     "naive_reason": "assumes the base is sticky"
+     "naive_reason": "assumes the base is sticky",
+     "_naive_reason_ru": "принято, что база не осыпается"
     },
     {
      "c": 2,
@@ -20531,7 +20817,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 24,
-     "naive_reason": "uses the 12,000 gross adds over the 50,000 base = 24"
+     "naive_reason": "uses the 12,000 gross adds over the 50,000 base = 24",
+     "_naive_reason_ru": "взяты 12 000 валовых подключений против базы 50 000 = 24"
     },
     {
      "c": 3,
@@ -20541,7 +20828,8 @@
      "round": 1,
      "tolerance": 0.01,
      "naive": "indefinite",
-     "naive_reason": "reads the subscription as open-ended and never applies churn; average lifetime is 1 ÷ 0.20 = 5 years"
+     "naive_reason": "reads the subscription as open-ended and never applies churn; average lifetime is 1 ÷ 0.20 = 5 years",
+     "_naive_reason_ru": "подписка прочитана как бессрочная, и отток не применён вовсе; средний срок жизни — 1 ÷ 0,20 = 5 лет"
     },
     {
      "c": 4,
@@ -20551,7 +20839,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 3,
-     "naive_reason": "divides CAC by monthly revenue, $90/($360/12)=3.0 months"
+     "naive_reason": "divides CAC by monthly revenue, $90/($360/12)=3.0 months",
+     "_naive_reason_ru": "CAC поделён на месячную выручку, $90/($360/12) = 3,0 месяца"
     },
     {
      "c": 5,
@@ -20561,7 +20850,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 5000,
-     "naive_reason": "counts only the 5,000 net gain the base needs, leaving the 10,000 churned subscribers unreplaced"
+     "naive_reason": "counts only the 5,000 net gain the base needs, leaving the 10,000 churned subscribers unreplaced",
+     "_naive_reason_ru": "посчитан только чистый прирост в 5 000, нужный базе, а 10 000 ушедших подписчиков остались незамещёнными"
     },
     {
      "c": 6,
@@ -20571,7 +20861,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 4320000,
-     "naive_reason": "counts only the 12,000 adds' revenue"
+     "naive_reason": "counts only the 12,000 adds' revenue",
+     "_naive_reason_ru": "посчитана выручка одних лишь 12 000 подключений"
     }
    ],
    "analysis_review": [
@@ -20899,7 +21190,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 20000,
-     "naive_reason": "0.4 × 50,000"
+     "naive_reason": "0.4 × 50,000",
+     "_naive_reason_ru": "0,4 × 50 000"
     },
     {
      "c": 2,
@@ -20909,7 +21201,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 8000,
-     "naive_reason": "interpolates 9,600↔? / applies flat rate proportionally"
+     "naive_reason": "interpolates 9,600↔? / applies flat rate proportionally",
+     "_naive_reason_ru": "взята середина между 9 600 и соседом / ставка применена ровной долей"
     },
     {
      "c": 3,
@@ -20919,7 +21212,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 0,
-     "naive_reason": "treats the naive 24,000 quota as itself sustainable, so 24,000 − 24,000 = 0"
+     "naive_reason": "treats the naive 24,000 quota as itself sustainable, so 24,000 − 24,000 = 0",
+     "_naive_reason_ru": "наивная квота в 24 000 принята за устойчивую сама по себе, отсюда 24 000 − 24 000 = 0"
     },
     {
      "c": 4,
@@ -20929,7 +21223,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 40,
-     "naive_reason": "equates the sustainable rate with the growth rate r=40%"
+     "naive_reason": "equates the sustainable rate with the growth rate r=40%",
+     "_naive_reason_ru": "устойчивая ставка приравнена к ставке роста r = 40%"
     },
     {
      "c": 5,
@@ -20939,7 +21234,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 60000,
-     "naive_reason": "treats a fished-down stock as static at 60,000 and ignores the 9,600 t of recruitment that the zero-harvest year adds on top"
+     "naive_reason": "treats a fished-down stock as static at 60,000 and ignores the 9,600 t of recruitment that the zero-harvest year adds on top",
+     "_naive_reason_ru": "выловленный запас принят за неподвижные 60 000, — без 9 600 т пополнения, которые год без промысла добавляет сверху"
     },
     {
      "c": 6,
@@ -20952,7 +21248,8 @@
       "B",
       "C"
      ],
-     "naive_reason": "picks the largest quota 12,000 t for this year, ignoring the stock collapse it forces next year"
+     "naive_reason": "picks the largest quota 12,000 t for this year, ignoring the stock collapse it forces next year",
+     "_naive_reason_ru": "взята наибольшая квота этого года, 12 000 т, — без учёта обвала запаса, к которому она принуждает в следующем"
     }
    ],
    "analysis_review": [
@@ -21338,7 +21635,8 @@
       "collapse",
       "never exceeds"
      ],
-     "naive_reason": "reads the recruit inflows as unchecked growth"
+     "naive_reason": "reads the recruit inflows as unchecked growth",
+     "_naive_reason_ru": "приток пополнения прочитан как ничем не сдерживаемый рост"
     },
     {
      "c": 2,
@@ -21348,7 +21646,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 30000,
-     "naive_reason": "applies the 30% recruit rate to the pre-cull 100,000 adults instead of the thinned adult count two years earlier"
+     "naive_reason": "applies the 30% recruit rate to the pre-cull 100,000 adults instead of the thinned adult count two years earlier",
+     "_naive_reason_ru": "ставка пополнения 30% применена к 100 000 взрослых до выбраковки вместо прореженного счёта взрослых двумя годами раньше"
     },
     {
      "c": 3,
@@ -21361,7 +21660,8 @@
       "Contraception",
       "Fencing"
      ],
-     "naive_reason": "picks the cheapest option, Contraception at $3,000, ignoring the welfare-score cap of 5 that its score of 8 breaks"
+     "naive_reason": "picks the cheapest option, Contraception at $3,000, ignoring the welfare-score cap of 5 that its score of 8 breaks",
+     "_naive_reason_ru": "выбран самый дешёвый вариант, контрацепция за $3 000, — без учёта потолка по благополучию в 5, который его оценка 8 пробивает"
     },
     {
      "c": 4,
@@ -21374,7 +21674,8 @@
       "North",
       "Glen"
      ],
-     "naive_reason": "ranks by absolute drop, North's -11,000"
+     "naive_reason": "ranks by absolute drop, North's -11,000",
+     "_naive_reason_ru": "ранжировано по абсолютному падению, −11 000 у North"
     },
     {
      "c": 5,
@@ -21387,7 +21688,8 @@
       "Glen",
       "Mid"
      ],
-     "naive_reason": "ranks on the %-decline term alone, where Mid led at (20,000-13,000)/20,000 = 35%, not on the printed priority index totals"
+     "naive_reason": "ranks on the %-decline term alone, where Mid led at (20,000-13,000)/20,000 = 35%, not on the printed priority index totals",
+     "_naive_reason_ru": "ранжировано по одному слагаемому — падению в процентах, где Mid шёл первым с (20 000−13 000)/20 000 = 35%, — а не по напечатанным итогам индекса приоритета"
     },
     {
      "c": 6,
@@ -21397,7 +21699,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 3445000,
-     "naive_reason": "uses the net herd change, (100,000-31,100)×$50=3,445,000"
+     "naive_reason": "uses the net herd change, (100,000-31,100)×$50=3,445,000",
+     "_naive_reason_ru": "взято чистое изменение стада, (100 000 − 31 100) × $50 = 3 445 000"
     }
    ],
    "analysis_review": [
@@ -21761,7 +22064,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 8.4,
-     "naive_reason": "charges 12% on the double-counted $40M raw plus $30M refined = 8.4"
+     "naive_reason": "charges 12% on the double-counted $40M raw plus $30M refined = 8.4",
+     "_naive_reason_ru": "12% начислены на дважды посчитанные $40 млн сырья плюс $30 млн переработки = 8,4"
     },
     {
      "c": 2,
@@ -21773,7 +22077,8 @@
       "refining always adds value",
       "nothing"
      ],
-     "naive_reason": "compares the $300/t refined price with $80/t raw ore, ignoring the 3:1 feed that sets the break-even at $30M/300,000 = $100/t"
+     "naive_reason": "compares the $300/t refined price with $80/t raw ore, ignoring the 3:1 feed that sets the break-even at $30M/300,000 = $100/t",
+     "_naive_reason_ru": "цена переработки $300/т сравнена с ценой сырой руды $80/т, — без учёта подачи 3:1, которая ставит точку безубыточности на $30 млн/300 000 = $100/т"
     },
     {
      "c": 3,
@@ -21783,7 +22088,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 300,
-     "naive_reason": "takes the $300/t refined sale price as the value-add, instead of netting the $80/t raw ore price off the $100/t refined value"
+     "naive_reason": "takes the $300/t refined sale price as the value-add, instead of netting the $80/t raw ore price off the $100/t refined value",
+     "_naive_reason_ru": "продажная цена переработки $300/т взята за добавленную стоимость вместо того, чтобы вычесть цену сырой руды $80/т из стоимости переработки $100/т"
     },
     {
      "c": 4,
@@ -21793,7 +22099,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 30,
-     "naive_reason": "reports the gross refined export revenue, $30M, instead of the net gain: the refinery lifts exports from $40M to $46M, and $6M − $5M of smelting cost leaves $1M"
+     "naive_reason": "reports the gross refined export revenue, $30M, instead of the net gain: the refinery lifts exports from $40M to $46M, and $6M − $5M of smelting cost leaves $1M",
+     "_naive_reason_ru": "показана валовая экспортная выручка переработки, $30 млн, вместо чистой прибавки: завод поднимает экспорт с $40 млн до $46 млн, и из $6 млн минус $5 млн затрат на плавку остаётся $1 млн"
     },
     {
      "c": 5,
@@ -21803,7 +22110,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 17.5,
-     "naive_reason": "carries the pre-smelter raw $70M instead of the realized $46M, taking 25% x 70 = 17.5 off the wrong base"
+     "naive_reason": "carries the pre-smelter raw $70M instead of the realized $46M, taking 25% x 70 = 17.5 off the wrong base",
+     "_naive_reason_ru": "унесены дозаводские сырьевые $70 млн вместо фактических $46 млн, и 25% × 70 = 17,5 взяты не от той базы"
     },
     {
      "c": 6,
@@ -21813,7 +22121,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 500000,
-     "naive_reason": "treats each tonne of ore as one tonne of metal, reporting all 500,000 t as refined output and ignoring the 3:1 feed ratio"
+     "naive_reason": "treats each tonne of ore as one tonne of metal, reporting all 500,000 t as refined output and ignoring the 3:1 feed ratio",
+     "_naive_reason_ru": "каждая тонна руды принята за тонну металла, все 500 000 т показаны как выпуск переработки, — без учёта подачи 3:1"
     }
    ],
    "analysis_review": [
@@ -22258,7 +22567,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 56000,
-     "naive_reason": "reports the coverage itself, 80,000x0.70 = 56,000"
+     "naive_reason": "reports the coverage itself, 80,000x0.70 = 56,000",
+     "_naive_reason_ru": "показан сам охват, 80 000 × 0,70 = 56 000"
     },
     {
      "c": 2,
@@ -22268,7 +22578,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 1.24,
-     "naive_reason": "divides the $2,080,000 cost by the 1,680,000 person-level cases from Q2 instead of the 336,000 household-level cases, understating cost per case"
+     "naive_reason": "divides the $2,080,000 cost by the 1,680,000 person-level cases from Q2 instead of the 336,000 household-level cases, understating cost per case",
+     "_naive_reason_ru": "затраты $2 080 000 поделены на 1 680 000 случаев в пересчёте на человека из вопроса 2 вместо 336 000 случаев на домохозяйство, отчего затраты на случай занижены"
     },
     {
      "c": 3,
@@ -22278,7 +22589,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 12000,
-     "naive_reason": "multiplies the 6 cases per household by the 5 people in it as well as by 400 households"
+     "naive_reason": "multiplies the 6 cases per household by the 5 people in it as well as by 400 households",
+     "_naive_reason_ru": "6 случаев на домохозяйство умножены и на 5 человек в нём, и на 400 домохозяйств"
     },
     {
      "c": 4,
@@ -22290,7 +22602,8 @@
       "North",
       "South"
      ],
-     "naive_reason": "picks the region with the most cases, North 120,000, ignoring cost, where 120,000/$2.4M = 50,000 per $M trails the best ratio"
+     "naive_reason": "picks the region with the most cases, North 120,000, ignoring cost, where 120,000/$2.4M = 50,000 per $M trails the best ratio",
+     "_naive_reason_ru": "выбран район с наибольшим числом случаев, North 120 000, — без учёта затрат, а с ними 120 000/$2,4 млн = 50 000 на млн отстают от лучшего отношения"
     },
     {
      "c": 5,
@@ -22300,7 +22613,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 2160000,
-     "naive_reason": "costs the full 90% coverage, 0.9×80,000×$30=2,160,000"
+     "naive_reason": "costs the full 90% coverage, 0.9×80,000×$30=2,160,000",
+     "_naive_reason_ru": "оценён весь охват в 90%, 0,9 × 80 000 × $30 = 2 160 000"
     },
     {
      "c": 6,
@@ -22310,7 +22624,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 10.42,
-     "naive_reason": "divides the $400,000 fixed cost by the gross saving 80,000 x 6 x $8, ignoring the $30 latrine cost per household"
+     "naive_reason": "divides the $400,000 fixed cost by the gross saving 80,000 x 6 x $8, ignoring the $30 latrine cost per household",
+     "_naive_reason_ru": "постоянные $400 000 поделены на валовую экономию 80 000 × 6 × $8, — без затрат на уборную $30 на домохозяйство"
     }
    ],
    "analysis_review": [
@@ -22456,7 +22771,8 @@
      "form": "percent",
      "naive_src": "calc",
      "naive_calc": "2080000-400000=1680000 · 400000/1680000=23.8095%",
-     "unit": "%"
+     "unit": "%",
+     "_naive_reason_ru": "постоянные затраты поделены на переменную часть, а не на полные затраты первого года; доля берётся от целого"
     }
    ]
   },
@@ -22687,7 +23003,8 @@
       "North",
       "South"
      ],
-     "naive_reason": "ranks by the smaller budget, South's $1.6M, instead of cases delivered per $M, where South returns only 31,250"
+     "naive_reason": "ranks by the smaller budget, South's $1.6M, instead of cases delivered per $M, where South returns only 31,250",
+     "_naive_reason_ru": "ранжировано по меньшему бюджету, $1,6 млн у South, а не по случаям на млн, — а по ним South отдаёт всего 31 250"
     },
     {
      "c": 3,
@@ -22699,7 +23016,8 @@
       "South",
       "North"
      ],
-     "naive_reason": "compares total spend with overhead, South's $2.2M looking lower, instead of cost per case, where South runs $44.00 each"
+     "naive_reason": "compares total spend with overhead, South's $2.2M looking lower, instead of cost per case, where South runs $44.00 each",
+     "_naive_reason_ru": "общие расходы сравнены с накладными, отчего $2,2 млн у South выглядят ниже, — а не затраты на случай, по которым South идёт по $44,00 за каждый"
     },
     {
      "c": 4,
@@ -22711,7 +23029,8 @@
       "North",
       "South"
      ],
-     "naive_reason": "inverts the ratio, ranking households per case 0.25 vs 0.20 to pick South"
+     "naive_reason": "inverts the ratio, ranking households per case 0.25 vs 0.20 to pick South",
+     "_naive_reason_ru": "отношение перевёрнуто: ранжировано по домохозяйствам на случай, 0,25 против 0,20, отсюда и выбран South"
     },
     {
      "c": 5,
@@ -22723,7 +23042,8 @@
       "South",
       "North"
      ],
-     "naive_reason": "picks the zone with the smaller total budget, $1.6M against $2.0M, instead of the lower cost per case even after the 20% case cut"
+     "naive_reason": "picks the zone with the smaller total budget, $1.6M against $2.0M, instead of the lower cost per case even after the 20% case cut",
+     "_naive_reason_ru": "выбрана зона с меньшим общим бюджетом, $1,6 млн против $2,0 млн, а не с меньшими затратами на случай — даже после срезки случаев на 20%"
     },
     {
      "c": 6,
@@ -22735,7 +23055,8 @@
       "North",
       "South"
      ],
-     "naive_reason": "picks South on total dollars alone, $1.6M against $2.0M, though every per-case and per-household metric runs the other way"
+     "naive_reason": "picks South on total dollars alone, $1.6M against $2.0M, though every per-case and per-household metric runs the other way",
+     "_naive_reason_ru": "South выбран по одним общим долларам, $1,6 млн против $2,0 млн, — хотя всякая мера на случай и на домохозяйство говорит обратное"
     }
    ],
    "analysis_review": [
@@ -23057,7 +23378,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 0,
-     "naive_reason": "treats the designations as disjoint, so the naive sum 6,500 is read as the true area and the overlap becomes 0"
+     "naive_reason": "treats the designations as disjoint, so the naive sum 6,500 is read as the true area and the overlap becomes 0",
+     "_naive_reason_ru": "статусы приняты за непересекающиеся, наивная сумма 6 500 прочитана как настоящая площадь, и пересечение обратилось в 0"
     },
     {
      "c": 2,
@@ -23067,7 +23389,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 33.33,
-     "naive_reason": "takes the whole Access area, 2,000/6,000 = 33.33%, without first removing the 800 km2 shared with Conservation"
+     "naive_reason": "takes the whole Access area, 2,000/6,000 = 33.33%, without first removing the 800 km2 shared with Conservation",
+     "_naive_reason_ru": "взята вся площадь Access, 2 000/6 000 = 33,33%, — без вычета 800 км², общих с Conservation"
     },
     {
      "c": 3,
@@ -23081,7 +23404,8 @@
       "Overlap",
       "Undesig"
      ],
-     "naive_reason": "picks the highest at-risk rate, Overlap 40%, ignoring parcels, where 12 x 40% = 4.8 trails the top count x rate product"
+     "naive_reason": "picks the highest at-risk rate, Overlap 40%, ignoring parcels, where 12 x 40% = 4.8 trails the top count x rate product",
+     "_naive_reason_ru": "взята наибольшая доля риска, 40% у Overlap, — без учёта участков, а с ними 12 × 40% = 4,8 отстают от лучшего произведения «счёт × доля»"
     },
     {
      "c": 4,
@@ -23093,7 +23417,8 @@
       "2 : 1",
       "3000:1500"
      ],
-     "naive_reason": "leaves the ratio unsimplified at 3,000 : 1,500 instead of reducing it to 2 : 1"
+     "naive_reason": "leaves the ratio unsimplified at 3,000 : 1,500 instead of reducing it to 2 : 1",
+     "_naive_reason_ru": "отношение оставлено несокращённым, 3 000 : 1 500, вместо приведения к 2 : 1"
     },
     {
      "c": 5,
@@ -23103,7 +23428,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 33.33,
-     "naive_reason": "uses the pre-reclass 2,000"
+     "naive_reason": "uses the pre-reclass 2,000",
+     "_naive_reason_ru": "взяты 2 000 до переклассификации"
     },
     {
      "c": 6,
@@ -23113,7 +23439,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 6500,
-     "naive_reason": "adds only the headline designations 3,000 + 2,000 + 1,500, counting the 800 km2 overlap twice and leaving out the 300 km2 undesignated"
+     "naive_reason": "adds only the headline designations 3,000 + 2,000 + 1,500, counting the 800 km2 overlap twice and leaving out the 300 km2 undesignated",
+     "_naive_reason_ru": "сложены одни заголовочные статусы, 3 000 + 2 000 + 1 500: пересечение в 800 км² посчитано дважды, а 300 км² без статуса потеряны"
     }
    ],
    "analysis_review": [
@@ -23470,7 +23797,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 600,
-     "naive_reason": "takes the 600-ha gap as tonnes and forgets the 18 t/ha yield"
+     "naive_reason": "takes the 600-ha gap as tonnes and forgets the 18 t/ha yield",
+     "_naive_reason_ru": "разрыв в 600 га взят как тонны, и урожайность 18 т/га забыта"
     },
     {
      "c": 2,
@@ -23480,7 +23808,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 3395520,
-     "naive_reason": "shifts the tonnage toward the higher-priced Table grade instead of toward Industrial as the case states"
+     "naive_reason": "shifts the tonnage toward the higher-priced Table grade instead of toward Industrial as the case states",
+     "_naive_reason_ru": "тоннаж сдвинут в сторону более дорогого сорта Table, — а по условию сдвиг идёт в сторону Industrial"
     },
     {
      "c": 3,
@@ -23490,7 +23819,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 12,
-     "naive_reason": "quotes the per-tonne harvest cost and ignores the fixed cost spread over the same tonnes"
+     "naive_reason": "quotes the per-tonne harvest cost and ignores the fixed cost spread over the same tonnes",
+     "_naive_reason_ru": "названа стоимость сбора на тонну, — а постоянные затраты, разнесённые на те же тонны, не учтены"
     },
     {
      "c": 4,
@@ -23500,7 +23830,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 70000,
-     "naive_reason": "divides the fixed cost by the $12 harvest cost rather than by the contribution each tonne leaves"
+     "naive_reason": "divides the fixed cost by the $12 harvest cost rather than by the contribution each tonne leaves",
+     "_naive_reason_ru": "постоянные затраты поделены на стоимость сбора $12, а не на вклад, который оставляет каждая тонна"
     },
     {
      "c": 5,
@@ -23510,7 +23841,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 3240000,
-     "naive_reason": "applies the $50 price to the whole harvest; only the 30% Table share is repriced"
+     "naive_reason": "applies the $50 price to the whole harvest; only the 30% Table share is repriced",
+     "_naive_reason_ru": "цена $50 применена ко всему урожаю; переоценивается только доля Table в 30%"
     },
     {
      "c": 6,
@@ -23524,7 +23856,8 @@
      "naive": "$1/t off harvest cost",
      "naive_reason": "counts only the dollar saved on every tonne already harvested and misses that the extra tonnes carry the same price: +5% adds 3,240 t worth $45.20 each against $12 to harvest, $107,568, while the dollar off saves $64,800",
      "round": 0,
-     "tolerance": 0
+     "tolerance": 0,
+     "_naive_reason_ru": "посчитан один сэкономленный доллар на каждой уже собранной тонне, и упущено, что добавочные тонны несут ту же цену: +5% дают 3 240 т по $45,20 против $12 за сбор, это $107 568, тогда как доллар скидки экономит $64 800"
     }
    ],
    "analysis_review": [
@@ -23557,10 +23890,10 @@
      "key": "q3",
      "answer": 2928960,
      "trap": 4017600,
-     "lesson": "prices the whole harvest at the Table price",
+     "lesson": "prices the whole harvest at the Table price; only 30% of the tonnage earns it",
      "chain_trap": 3417120,
      "chain_lesson": "priced a harvest sized off the 4,200-ha licence ceiling: the area error is carried into revenue",
-     "_lesson_ru": "весь урожай оценён по цене Table",
+     "_lesson_ru": "весь урожай оценён по цене Table — а зарабатывают её лишь 30% тоннажа",
      "_chain_lesson_ru": "оценён урожай, посчитанный от потолка лицензии в 4 200 га: ошибка в площади ушла в выручку"
     },
     {
@@ -23934,7 +24267,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 13.68,
-     "naive_reason": "divides the increase by this season's landings; growth is measured against the season it grew from"
+     "naive_reason": "divides the increase by this season's landings; growth is measured against the season it grew from",
+     "_naive_reason_ru": "прирост поделён на выгрузки этого сезона; рост меряется против того сезона, из которого он вырос"
     },
     {
      "c": 2,
@@ -23944,7 +24278,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 1116250,
-     "naive_reason": "moves the extra tonnage to the cheaper domestic fee; the shift is toward the $34 export fee"
+     "naive_reason": "moves the extra tonnage to the cheaper domestic fee; the shift is toward the $34 export fee",
+     "_naive_reason_ru": "добавочный тоннаж переведён на более дешёвый внутренний сбор; сдвиг идёт в сторону экспортного сбора $34"
     },
     {
      "c": 3,
@@ -23954,7 +24289,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 8,
-     "naive_reason": "quotes the variable cost and ignores the fixed cost spread over the same tonnes"
+     "naive_reason": "quotes the variable cost and ignores the fixed cost spread over the same tonnes",
+     "_naive_reason_ru": "названы переменные затраты, — а постоянные, разнесённые на те же тонны, не учтены"
     },
     {
      "c": 4,
@@ -23964,7 +24300,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 65000,
-     "naive_reason": "divides the fixed cost by the $8 variable cost rather than by what each tonne contributes"
+     "naive_reason": "divides the fixed cost by the $8 variable cost rather than by what each tonne contributes",
+     "_naive_reason_ru": "постоянные затраты поделены на переменные $8, а не на то, что вносит каждая тонна"
     },
     {
      "c": 5,
@@ -23974,7 +24311,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 712500,
-     "naive_reason": "applies the $15 fee to every tonne; only the 40% domestic share is repriced"
+     "naive_reason": "applies the $15 fee to every tonne; only the 40% domestic share is repriced",
+     "_naive_reason_ru": "сбор $15 применён к каждой тонне; переоценивается только внутренняя доля в 40%"
     },
     {
      "c": 6,
@@ -23984,7 +24322,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 2942,
-     "naive_reason": "divides by the export fee itself and rounds up; a switched tonne adds only the GAP between the two fees"
+     "naive_reason": "divides by the export fee itself and rounds up; a switched tonne adds only the GAP between the two fees",
+     "_naive_reason_ru": "поделено на сам экспортный сбор и округлено вверх; переведённая тонна добавляет только РАЗНИЦУ между двумя сборами"
     }
    ],
    "analysis_review": [
@@ -24015,10 +24354,10 @@
      "key": "q3",
      "answer": 1330000,
      "trap": 1615000,
-     "lesson": "charges the export fee on every tonne",
+     "lesson": "charges the export fee on every tonne; only 60% of the landings pay it",
      "chain_trap": 1148000,
      "chain_lesson": "priced a season sized off last season's landings",
-     "_lesson_ru": "экспортный сбор начислен на каждую тонну",
+     "_lesson_ru": "экспортный сбор начислен на каждую тонну — а платят его лишь 60% выгрузок",
      "_chain_lesson_ru": "оценён сезон, размер которого взят от выгрузок прошлого сезона"
     },
     {
@@ -24382,7 +24721,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 566.67,
-     "naive_reason": "divides lettable by the non-lettable remainder instead of by the whole building"
+     "naive_reason": "divides lettable by the non-lettable remainder instead of by the whole building",
+     "_naive_reason_ru": "сдаваемая площадь поделена на несдаваемый остаток вместо всего здания"
     },
     {
      "c": 2,
@@ -24392,7 +24732,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 1440,
-     "naive_reason": "applies the vacancy to the gross building; cores were never lettable to begin with"
+     "naive_reason": "applies the vacancy to the gross building; cores were never lettable to begin with",
+     "_naive_reason_ru": "пустующая доля применена к валовому зданию; ядра и не были сдаваемыми с самого начала"
     },
     {
      "c": 3,
@@ -24402,7 +24743,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 6,
-     "naive_reason": "quotes the service rate and ignores the fixed cost spread over the same metres"
+     "naive_reason": "quotes the service rate and ignores the fixed cost spread over the same metres",
+     "_naive_reason_ru": "названа эксплуатационная ставка, — а постоянные затраты, разнесённые на те же метры, не учтены"
     },
     {
      "c": 4,
@@ -24412,7 +24754,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 27.23,
-     "naive_reason": "covers only the fixed cost and forgets the service cost the estate pays whatever the occupancy"
+     "naive_reason": "covers only the fixed cost and forgets the service cost the estate pays whatever the occupancy",
+     "_naive_reason_ru": "покрыты только постоянные затраты, и забыты эксплуатационные, которые комплекс платит при любой заполняемости"
     },
     {
      "c": 5,
@@ -24422,7 +24765,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 3672000,
-     "naive_reason": "prices the whole lettable area, not the occupied part"
+     "naive_reason": "prices the whole lettable area, not the occupied part",
+     "_naive_reason_ru": "оценена вся сдаваемая площадь, а не занятая часть"
     },
     {
      "c": 6,
@@ -24432,7 +24776,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 248400,
-     "naive_reason": "lets every converted metre; the estate's occupancy applies to new space too"
+     "naive_reason": "lets every converted metre; the estate's occupancy applies to new space too",
+     "_naive_reason_ru": "сданы все переустроенные метры; заполняемость комплекса действует и на новую площадь"
     }
    ],
    "analysis_review": [
@@ -24452,10 +24797,10 @@
      "key": "q2",
      "answer": 3884976,
      "trap": 323748,
-     "lesson": "quotes one month as the year",
+     "lesson": "quotes one month as the year; the rate is per month",
      "chain_trap": 4570560,
      "chain_lesson": "a rent roll built on gross floor area",
-     "_lesson_ru": "один месяц выдан за год",
+     "_lesson_ru": "один месяц выдан за год — ставка помесячная",
      "_chain_lesson_ru": "арендная ведомость построена на валовой площади"
     },
     {
@@ -24827,7 +25172,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 42000,
-     "naive_reason": "takes the gap between the two headline counts and forgets that 100,000 of the dispatched bricks were never Vetra's"
+     "naive_reason": "takes the gap between the two headline counts and forgets that 100,000 of the dispatched bricks were never Vetra's",
+     "_naive_reason_ru": "взят разрыв между двумя заголовочными счётами, и забыто, что 100 000 отгруженных кирпичей никогда не были кирпичами Vetra"
     },
     {
      "c": 2,
@@ -24837,7 +25183,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 49476,
-     "naive_reason": "prices the bricks that switch grade at the facing rate and forgets they stop earning the common one"
+     "naive_reason": "prices the bricks that switch grade at the facing rate and forgets they stop earning the common one",
+     "_naive_reason_ru": "кирпич, меняющий сорт, оценён по лицевой ставке, и забыто, что зарабатывать по обычной он перестаёт"
     },
     {
      "c": 3,
@@ -24847,7 +25194,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 0.21,
-     "naive_reason": "answers with the rate the kiln charges per brick; the fixed line lands on those same bricks"
+     "naive_reason": "answers with the rate the kiln charges per brick; the fixed line lands on those same bricks",
+     "_naive_reason_ru": "ответом дана ставка, которую печь берёт за кирпич; постоянная строка ложится на эти же кирпичи"
     },
     {
      "c": 4,
@@ -24857,7 +25205,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 340518,
-     "naive_reason": "divides the fixed cost by the whole price and forgets that every brick also costs $0.21 to fire"
+     "naive_reason": "divides the fixed cost by the whole price and forgets that every brick also costs $0.21 to fire",
+     "_naive_reason_ru": "постоянные затраты поделены на всю цену, и забыто, что каждый кирпич стоит ещё $0,21 обжига"
     },
     {
      "c": 5,
@@ -24871,7 +25220,8 @@
      "naive": "Buying in 100,000 more Sarel bricks",
      "naive_reason": "bought-in bricks need no kiln time, so the trade looks free; on these terms it earns $8,000 against $25,400 from the works' own bricks",
      "round": 0,
-     "tolerance": 0
+     "tolerance": 0,
+     "_naive_reason_ru": "покупному кирпичу печь не нужна, и размен выглядит бесплатным; на этих условиях он приносит $8 000 против $25 400 от собственного кирпича завода"
     },
     {
      "c": 6,
@@ -24881,7 +25231,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 93.33,
-     "naive_reason": "judges the kilns by the gate, and the gate counts bricks they never fired"
+     "naive_reason": "judges the kilns by the gate, and the gate counts bricks they never fired",
+     "_naive_reason_ru": "печи судятся по проходной, а проходная считает кирпич, который они не обжигали"
     }
    ],
    "analysis_review": [
@@ -24912,10 +25263,10 @@
      "key": "q3",
      "answer": 370272,
      "trap": 494760,
-     "lesson": "puts the facing price on every brick",
+     "lesson": "puts the facing price on every brick, though facing is barely a third of the kiln",
      "chain_trap": 389760,
      "chain_lesson": "a revenue built on bought-in bricks the works does not sell as its own",
-     "_lesson_ru": "цена лицевого кирпича поставлена на каждый кирпич",
+     "_lesson_ru": "цена лицевого кирпича поставлена на каждый кирпич — а лицевой едва треть обжига",
      "_chain_lesson_ru": "выручка построена на покупном кирпиче, который завод не продаёт как свой"
     },
     {
@@ -25315,7 +25666,8 @@
      "prompt": "Crossing point — in which month did staffing first reach or pass the level the season averaged?",
      "answer": 4,
      "naive": 5,
-     "naive_reason": "crosses at the mid-point between the average and the closing register; the line to reach is the season's own average"
+     "naive_reason": "crosses at the mid-point between the average and the closing register; the line to reach is the season's own average",
+     "_naive_reason_ru": "переход взят на середине между средним и закрывающим табелем; линия, до которой надо дойти, — собственное среднее сезона"
     },
     {
      "c": 2,
@@ -25325,7 +25677,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 2268000,
-     "naive_reason": "bills the operatives who move at the night rate and forgets they stop earning the day rate"
+     "naive_reason": "bills the operatives who move at the night rate and forgets they stop earning the day rate",
+     "_naive_reason_ru": "переходящие рабочие выставлены по ночной ставке, и забыто, что дневную они зарабатывать перестают"
     },
     {
      "c": 3,
@@ -25335,7 +25688,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 6900,
-     "naive_reason": "answers with the running rate; the fixed line lands on the same operatives and has to be spread over them"
+     "naive_reason": "answers with the running rate; the fixed line lands on the same operatives and has to be spread over them",
+     "_naive_reason_ru": "ответом дана текущая ставка; постоянная строка ложится на тех же рабочих и обязана быть разнесена по ним"
     },
     {
      "c": 4,
@@ -25345,7 +25699,8 @@
      "round": 0,
      "tolerance": 0.01,
      "naive": 438,
-     "naive_reason": "divides the fixed line by the whole billing rate and forgets each operative costs $6,900 to run"
+     "naive_reason": "divides the fixed line by the whole billing rate and forgets each operative costs $6,900 to run",
+     "_naive_reason_ru": "постоянная строка поделена на всю ставку выставления, и забыто, что каждый рабочий стоит $6 900 содержания"
     },
     {
      "c": 5,
@@ -25355,7 +25710,8 @@
      "round": 2,
      "tolerance": 0.01,
      "naive": 8.79,
-     "naive_reason": "puts the rise on the night shift alone; it lands on every operative on contract"
+     "naive_reason": "puts the rise on the night shift alone; it lands on every operative on contract",
+     "_naive_reason_ru": "надбавка положена на одну ночную смену; она ложится на каждого рабочего по контракту"
     },
     {
      "c": 6,
@@ -25369,7 +25725,8 @@
      "naive": "200 more on days",
      "round": 0,
      "tolerance": 0,
-     "naive_reason": "takes the bigger headcount for the bigger gain; each night operative leaves $5,700 against $2,500 on days"
+     "naive_reason": "takes the bigger headcount for the bigger gain; each night operative leaves $5,700 against $2,500 on days",
+     "_naive_reason_ru": "взята бо́льшая численность ради большего выигрыша; каждый ночной рабочий оставляет $5 700 против $2 500 у дневного"
     }
    ],
    "analysis_review": [
@@ -25389,10 +25746,10 @@
      "key": "q2",
      "answer": 630,
      "trap": 672,
-     "lesson": "carries the same mid-point into the second shift",
+     "lesson": "carries the same mid-point into the second shift: a rising line has an average and an end point, and they are not two readings of one number",
      "chain_trap": 714,
      "chain_lesson": "the same closing register carried into the second shift",
-     "_lesson_ru": "та же середина унесена во вторую смену",
+     "_lesson_ru": "та же середина унесена во вторую смену: у растущей линии есть среднее и есть конечная точка, и это не два прочтения одного числа",
      "_chain_lesson_ru": "тот же закрывающий табель унесён во вторую смену"
     },
     {
@@ -25400,10 +25757,10 @@
      "key": "q3",
      "answer": 18936000,
      "trap": 22680000,
-     "lesson": "bills every operative at the night rate",
+     "lesson": "bills every operative at the night rate, though night work is barely a third of the contract",
      "chain_trap": 21460800,
      "chain_lesson": "billings raised on staff the season never actually carried",
-     "_lesson_ru": "каждый рабочий выставлен по ночной ставке",
+     "_lesson_ru": "каждый рабочий выставлен по ночной ставке — а ночная работа едва треть контракта",
      "_chain_lesson_ru": "счета выставлены на штат, которого сезон на деле не нёс"
     },
     {
@@ -25781,7 +26138,8 @@
      "prompt": "Empty running — counting the runs back, the fleet covered 1,610,000 km in all. How many of those kilometres earned nothing?",
      "answer": 370000,
      "naive": 1610000,
-     "naive_reason": "answers with everything the trucks ran; the runs back are the part of it that no one pays for"
+     "naive_reason": "answers with everything the trucks ran; the runs back are the part of it that no one pays for",
+     "_naive_reason_ru": "ответом дано всё, что прошли грузовики; ходы обратно — та их часть, за которую никто не платит"
     },
     {
      "c": 2,
@@ -25795,7 +26153,8 @@
      ],
      "answer": "Cut empty running by a quarter",
      "naive": "Lift the rate by 2 cents",
-     "naive_reason": "a rate rise touches every earning kilometre and looks wider; the empty quarter is bigger because those kilometres burn fuel and bill nothing"
+     "naive_reason": "a rate rise touches every earning kilometre and looks wider; the empty quarter is bigger because those kilometres burn fuel and bill nothing",
+     "_naive_reason_ru": "прибавка к ставке касается каждого зарабатывающего километра и выглядит шире; порожняя четверть больше, потому что эти километры жгут топливо и не выставляют ничего"
     },
     {
      "c": 3,
@@ -25805,7 +26164,8 @@
      "prompt": "Revenue per tonne — what did the season's haulage earn for each tonne carried?",
      "answer": 27.31,
      "naive": 93.25,
-     "naive_reason": "divides the season's revenue by a single quarter's tonnes; the revenue was earned across all four"
+     "naive_reason": "divides the season's revenue by a single quarter's tonnes; the revenue was earned across all four",
+     "_naive_reason_ru": "выручка сезона поделена на тонны одного квартала; заработана она за все четыре"
     },
     {
      "c": 4,
@@ -25815,7 +26175,8 @@
      "prompt": "Fuel on earning work — at $0.34 a kilometre, what did fuel cost on the kilometres that carried a load?",
      "answer": 421600,
      "naive": 547400,
-     "naive_reason": "fuels the whole 1,610,000 km; the question asks only about the kilometres that were paid for"
+     "naive_reason": "fuels the whole 1,610,000 km; the question asks only about the kilometres that were paid for",
+     "_naive_reason_ru": "топливо посчитано на все 1 610 000 км; вопрос — только про километры, за которые заплатили"
     },
     {
      "c": 5,
@@ -25829,7 +26190,8 @@
      ],
      "answer": "End the empty running",
      "naive": "Carry 5% more kilometres",
-     "naive_reason": "more work sounds like the bigger move; the runs back burn fuel and bill nothing, and there are six times as many of those kilometres as 5% would add"
+     "naive_reason": "more work sounds like the bigger move; the runs back burn fuel and bill nothing, and there are six times as many of those kilometres as 5% would add",
+     "_naive_reason_ru": "больше работы звучит как больший ход; ходы обратно жгут топливо и не выставляют ничего, а таких километров вшестеро больше, чем добавили бы 5%"
     },
     {
      "c": 6,
@@ -25839,7 +26201,8 @@
      "prompt": "All-in cost per earning kilometre — take the haulage cost plus fuel on all 1,610,000 km, and spread it over the kilometres that carried a load.",
      "answer": 1.79,
      "naive": 1.38,
-     "naive_reason": "spreads the all-in cost over every kilometre run; only the carried ones bring the money to cover it"
+     "naive_reason": "spreads the all-in cost over every kilometre run; only the carried ones bring the money to cover it",
+     "_naive_reason_ru": "полные затраты разнесены на каждый пройденный километр; деньги, которыми их покрывают, приносят только гружёные"
     }
    ],
    "analysis_review": [
@@ -25848,8 +26211,8 @@
      "key": "q1",
      "answer": 84000,
      "trap": 24600,
-     "lesson": "quotes the busiest quarter as the season",
-     "_lesson_ru": "самый загруженный квартал выдан за сезон"
+     "lesson": "quotes the busiest quarter as the season; all four quarters carried freight",
+     "_lesson_ru": "самый загруженный квартал выдан за сезон — груз везли все четыре квартала"
     },
     {
      "q": 2,
@@ -26268,7 +26631,8 @@
      "prompt": "Empty seats — the boats offered 74,000 crossings this season. How many of them sailed without paying?",
      "answer": 12000,
      "naive": 62000,
-     "naive_reason": "answers with the crossings that paid; the question asks how many of the offered ones did not"
+     "naive_reason": "answers with the crossings that paid; the question asks how many of the offered ones did not",
+     "_naive_reason_ru": "ответом даны оплаченные рейсы; вопрос — сколько из предложенных оплачены не были"
     },
     {
      "c": 2,
@@ -26278,7 +26642,8 @@
      "prompt": "Tariff gap — the board fare is $21.00. Across the season, how much revenue did the concessions give away?",
      "answer": 161200,
      "naive": 2.6,
-     "naive_reason": "answers with the gap on a single crossing; the season carried that gap on every paying one"
+     "naive_reason": "answers with the gap on a single crossing; the season carried that gap on every paying one",
+     "_naive_reason_ru": "ответом дан разрыв на одном рейсе; сезон нёс этот разрыв на каждом оплаченном"
     },
     {
      "c": 3,
@@ -26292,7 +26657,8 @@
      ],
      "answer": "The fares given away",
      "naive": "Fuel and crew on the unpaid crossings",
-     "naive_reason": "empty seats look like the obvious waste; the concession on every paying crossing runs past what the empty ones burn"
+     "naive_reason": "empty seats look like the obvious waste; the concession on every paying crossing runs past what the empty ones burn",
+     "_naive_reason_ru": "пустые места выглядят очевидной потерей; уступка на каждом оплаченном рейсе обходит то, что жгут пустые"
     },
     {
      "c": 4,
@@ -26302,7 +26668,8 @@
      "prompt": "Everything in — the operator also pays $88,000 of harbour dues that sit outside the cost lines above. What share of revenue is left once they are paid?",
      "answer": 4.17,
      "naive": 4.35,
-     "naive_reason": "measures what is left against what was spent; the question asks its share of revenue"
+     "naive_reason": "measures what is left against what was spent; the question asks its share of revenue",
+     "_naive_reason_ru": "остаток померен против потраченного; вопрос — про его долю в выручке"
     },
     {
      "c": 5,
@@ -26316,7 +26683,8 @@
      ],
      "answer": "Take $60,000 off the fixed cost",
      "naive": "Fill 6,000 unpaid crossings",
-     "naive_reason": "filling seats reads as growth; at the fare this season collected a filled crossing leaves $8.80, and six thousand of them fall short of the cut"
+     "naive_reason": "filling seats reads as growth; at the fare this season collected a filled crossing leaves $8.80, and six thousand of them fall short of the cut",
+     "_naive_reason_ru": "заполнить места читается как рост; по цене, которую сезон собрал на деле, заполненный рейс оставляет $8,80, и шесть тысяч таких до срезки не дотягивают"
     },
     {
      "c": 6,
@@ -26330,7 +26698,8 @@
      ],
      "answer": "The charter hire",
      "naive": "Fuel and crew on the paying crossings",
-     "naive_reason": "nine dollars sixty on every crossing feels like it must outrun a single printed line; this season it did not, and it only fails to by a margin the crossing count decides"
+     "naive_reason": "nine dollars sixty on every crossing feels like it must outrun a single printed line; this season it did not, and it only fails to by a margin the crossing count decides",
+     "_naive_reason_ru": "девять долларов шестьдесят на каждом рейсе кажутся обязанными обойти одну напечатанную строку; в этом сезоне не обошли — и не обходят ровно на ту величину, которую решает число рейсов"
     }
    ],
    "analysis_review": [
@@ -26347,7 +26716,7 @@
      "key": "q2",
      "answer": 1140800,
      "trap": 1554000,
-     "lesson": "takes both numbers off the screen",
+     "lesson": "takes both numbers off the screen; neither is what was sold",
      "chain_trap": [
       1302000,
       1361600
@@ -26356,7 +26725,7 @@
       "carried the crossing count but not the fare: prices the season at the tariff board, and the season sold for less",
       "carried the fare but not the crossing count: prices every crossing the boats offered, and not all of them paid"
      ],
-     "_lesson_ru": "оба числа взяты прямо с экрана",
+     "_lesson_ru": "оба числа взяты прямо с экрана — а продано не то и не другое",
      "_chain_lesson_ru": [
       "унесено число рейсов, но не цена билета: сезон оценён по тарифной доске, а продался он дешевле",
       "унесена цена билета, но не число рейсов: оценён каждый рейс, который суда предложили, — а платили не за все"
