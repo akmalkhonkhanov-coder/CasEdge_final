@@ -696,7 +696,7 @@ async function gradeDrill(d, answer, fbLang) {
     '\n' + exhibitTxt +
     '\nSTEPS ASKED: ' + (d.step_prompts || []).join(' | ') +
     '\nPASS CHECKLIST: ' + (d.checklist && (d.checklist.en || d.checklist.ru) || '') +   /* 04.09.2026 dev, находка цеха дриллов круг 118: ветка DRILL была единственной без отката на ru. Слот, написанный только по-русски, отдал бы грейдеру ПУСТОЙ чеклист, и он судил бы ни против чего. Сегодня таких слотов 0, правка на будущее. */
-    '\nREFERENCE SOLUTION: ' + (d.reference && d.reference.en || '') +
+    '\nREFERENCE SOLUTION: ' + (d.reference && (d.reference.en || d.reference.ru) || '') +   /* 11.09.2026 dev, находка цехов дриллов круг 149 и ревью круга 150: соседняя строка 698 получила откат на ru 04.09, а эта осталась без него. Ветка DRILL (cm/ms/st) отдавала бы грейдеру ПУСТОЙ эталон на слоте, написанном только по-русски. Сегодня таких слотов 0 (проверено обходом 315 слотов, обе половины непустые) - правка на будущее, симметрично 698. */
     '\nCANDIDATE ANSWER: ' + String(answer || '');
   const j = await graderJSON(DRILL_GRADER_SYSTEM, u + fbDirective(fbLang), 600);
   return j || { graded: false, coaching: 'Could not grade — please try again.' };
