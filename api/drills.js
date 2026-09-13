@@ -544,7 +544,11 @@ Return: {"pass": boolean, "coaching": "1-2 sentences naming what was missed or w
    Материал правит цех — это их 103 места. Здесь СЕТЬ: движок не должен
    зависеть от того, что цех никогда не оступится. Тот же принцип, что
    у scrubPrompt в Redrock. */
-const REF_INTERNAL = /\[(?:DUP|BUILD)\]/;
+/* 11.09.2026 dev, находки цехов дриллов кругов 148-150. БЫЛО /\[(?:DUP|BUILD)\]/ —
+   метка ловилась только ГОЛОЙ. Всё, что с запятой, двоеточием, тире или словом внутри
+   («[BUILD, from the printed figures]», «[BUILT - ...]», «[READING]», «[BUILD: 3 + 14x10]»),
+   проходило мимо и ДОЕЗЖАЛО ДО КАНДИДАТА дословно — шесть слотов. Теперь семейство. */
+const REF_INTERNAL = /\[(?:DUP|BUILD|BUILT|READING)\b[^\]]*\]/;
 const REF_LABEL = /\*{0,2}\[(?:TWO LEVERS|ONE LEVER)\]\*{0,2}\s*/g;
 
 /* ССЫЛКА НА КНИГУ В ЭТАЛОНЕ - 01.09.2026, dev.
@@ -598,12 +602,27 @@ function refIsTable(p) {
 function refStartsList(p) {
   return /^\s*(?:[-*+]\s|\d+[.)]\s|#{1,6}\s|>)/.test(String(p));
 }
+/* 11.09.2026 dev. ДВЕ ПРАВКИ, обе куплены находками цеха дриллов:
+
+   1. СНЯТИЕ ПОСТРОЧНОЕ, А НЕ АБЗАЦЕМ. Блок выбрасывался ЦЕЛИКОМ, если метка
+      встречалась в нём где угодно. В CM-033 и CI-029 весь разбор написан ОДНИМ
+      абзацем без пустых строк, метка стоит предпоследней строкой — и вместе с ней
+      улетал весь разбор: кандидат получал reference пустым (5436 -> 0 символов).
+      Теперь блок считается служебным ТОЛЬКО если метка стоит в его ПЕРВОЙ непустой
+      строке (конвенция цеха: метка ведёт свой абзац). Иначе уходят ровно строки
+      с меткой, а текст вокруг остаётся.
+   2. ЗАПРЕТ НА ПУСТОТУ. Непустой вход не имеет права дать пустой выход: если так
+      вышло, снимаем только строки с меткой и говорим об этом в лог. Молча отдать
+      кандидату пустой разбор — хуже, чем оставить служебную строку. */
 function scrubReference(v) {
   if (typeof v !== 'string' || !v) return v;
+  const строкиБезМетки = t => t.split('\n').filter(l => !REF_INTERNAL.test(l)).join('\n');
+  const ведётМетка = b => { const l = b.split('\n').find(x => x.trim()); return l !== undefined && REF_INTERNAL.test(l); };
   const parts = refBlocks(v);
   const keep = [];
   for (let i = 0; i < parts.length;) {
     if (REF_INTERNAL.test(parts[i])) {
+      if (!ведётМетка(parts[i])) { keep.push(строкиБезМетки(parts[i])); i++; continue; }
       i++;
       // пустые куски между абзацем и блоком кода — артефакт нарезки
       let j = i; while (j < parts.length && parts[j].trim() === '') j++;
@@ -624,7 +643,13 @@ function scrubReference(v) {
     }
     keep.push(parts[i]); i++;
   }
-  return refDropSource(keep.join('\n\n')).replace(REF_LABEL, '').replace(/\n{3,}/g, '\n\n').trim();
+  const итог = refDropSource(keep.join('\n\n')).replace(REF_LABEL, '').replace(/\n{3,}/g, '\n\n').trim();
+  if (v.trim() && !итог) {
+    const запас = refDropSource(строкиБезМетки(v)).replace(REF_LABEL, '').replace(/\n{3,}/g, '\n\n').trim();
+    console.log('drills scrub_reference_empty', 'вход', v.length, 'выход 0 · отдан запас', запас.length);
+    return запас;
+  }
+  return итог;
 }
 function scrubReferencePair(r) {
   if (!r || typeof r !== 'object') return r;
