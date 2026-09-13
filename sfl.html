@@ -576,7 +576,7 @@ function scr_rev(){
     <div class="lab">${t('sfl_66')} · ${t('sfl_65')} · ${s.ms?Math.round(s.ms/1000)+t('sfl_71'):'—'} ${t('sfl_68')}</div>
     <div class="fb">${md(s.feedback)}</div>
     ${s.best?(s.best.mine
-      ? `<div class="best"><span class="b"></span><span class="ok">${t('sfl_69')}</span></div>`
+      ? `<div class="best"><span class="b"></span><span class="ok">${t('sfl_69')}</span>${s.best.why?`<br><span class="dim">${md(s.best.why)}</span>`:''}</div>`
       : `<div class="best"><span class="b"></span><span><b>${t('sfl_70')}</b> ${md(s.best.text)}${s.best.why?`<br><span class="dim">${md(s.best.why)}</span>`:''}</span></div>`):''}
   </div>`).join('')}`;
  return h}
