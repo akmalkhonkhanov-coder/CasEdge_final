@@ -388,6 +388,21 @@ const LABEL_SPOILER = /(?<![\p{L}\p{N}_])(?:наив[\p{L}]*|naive|correct|ве�
 // Метка вида «CORRECT: сегментированное повышение» не чинится вырезанием слова:
 // остаток И ЕСТЬ ответ. Такая метка целиком заменяется нейтральной.
 const LABEL_VERDICT = /^\s*(?:CORRECT|ВЕРНО)\b\s*[:—–-]?/iu;
+/* 13.09.2026 dev, заказ 97-А.2 цеха кейсов. Метка уезжает модели в меню шагов,
+   в «ALREADY ESTABLISHED» и в «CURRENT STEP». safeLabel чистил наив/naive/
+   CORRECT/ВЕРНО и коды [MM][HU][OD][CB] — и не чистил ЧЕТЫРЁХ форм авторской
+   разметки. Замер по 2 912 меткам обеих раскладок:
+     «ТВИСТ: закрыть East?»            15 — называет твист ДО того, как кандидат дошёл
+     «F6: кандидат обязан спросить…»   21 — называет проверяемое действие
+     код F5/F6/F7 отдельным куском     25
+     авторский чек «[9]», «[9b]»       17
+   Форма «ТВИСТ: <ответ>» не чинится вырезанием слова — остаток И ЕСТЬ ответ,
+   поэтому она в ВЕРДИКТНОМ списке и заменяет метку целиком, как `CORRECT:`. */
+/* БЕЗ \b перед двоеточием: в JS-регексе кириллица не является \w, и границы
+   слова между «ТВИСТ» и «:» не возникает — ровно та беда, что уже описана в этом
+   файле у HOLD_RE. Первая редакция этой строки её повторила, и поймал прогон. */
+const LABEL_VERDICT_2 = /^\s*(?:ТВИСТ|TWIST)\s*[:—–-]/iu;
+const LABEL_AUTHOR = /(?<![\p{L}\p{N}_])(?:F\d{1,2}|\[\d{1,2}[a-z]?\])(?![\p{L}\p{N}])/iu;
 
 /* 3) safeProduces(): `step.produces` едет модели ДВАЖДЫ и оба раза в блоках,
       которые она пересказывает вслух — «ALREADY ESTABLISHED» после закрытия шага
@@ -416,10 +431,38 @@ function safeProduces(s) {
     .trim();
   return cleaned || 'результат шага установлен';
 }
+/* 14.09.2026 dev, круг 99 цеха кейсов. МЕХАНИКА БЕЗ НОСИТЕЛЯ В ДАННЫХ ЖИВЁТ ДО
+   ПЕРВОЙ ЧИСТКИ ТОГО ПОЛЯ, ГДЕ ОНА СЛУЧАЙНО ЗАПИСАНА. Семейства F6/F7 — шаг
+   существует, только если кандидат спросит сам, — носителя не имели: ни поля,
+   ни флага, только текст метки. А метку чистит safeLabel. Замерено на мастере
+   549846c4: из двенадцати таких меток ОДНА уже стирается сегодня —
+   «ТВИСТ: F6, очередь на сеть» уходит в вердиктную ветку и приезжает модели
+   как «Analysis (5 min)». Не «однажды», а сейчас.
+   Здесь заводится провод: поле `on_request: true` на шаге. Данные его пока не
+   несут (цех ставит флаг после этой выкатки), поэтому сегодня функция молчит на
+   всех 2 912 шагах — это ожидаемо и проверяется гейтом gate_on_request_носитель,
+   который краснеет, если метка НАЗЫВАЕТ ТРЕБУЕМЫЙ ХОД, а флага нет. Объявление
+   без сторожа — это то, на чём я горел в круге 96. */
+function onRequestNote(s, lang) {
+  if (!s || s.on_request !== true) return '';
+  return lang === 'ru'
+    ? '\n[ПО ЗАПРОСУ: этот шаг существует, только если кандидат спросит об этом сам. Не предлагай его и не подсказывай тему — если кандидат не спросит, шаг просто не происходит.]'
+    : '\n[ON REQUEST: this step exists only if the candidate asks for it themselves. Do not offer it and do not hint at the topic — if they never ask, the step simply does not happen.]';
+}
 function safeLabel(label) {
   let t = String(label || '').replace(/^[#\s\p{Emoji_Presentation}\p{So}*_]+/u, '').replace(LABEL_MARKER, '').trim();
   const tailOf = x => (x.match(/\((?:[^()]*\bmin\b[^()]*)\)\s*$/i) || [''])[0];
-  if (LABEL_VERDICT.test(t)) {
+  /* Чистим ТОЛЬКО если есть что чистить: первая редакция схлопывала двойные
+     пробелы ВСЕГДА и меняла 1252 метки из 2912 — вместо семидесяти восьми, ради
+     которых правка делалась. Правка, задевающая в шестнадцать раз больше, чем
+     объявлено, — это не правка, а переписывание корпуса из движка. */
+  if (LABEL_AUTHOR.test(t)) {
+    t = t.replace(new RegExp(LABEL_AUTHOR.source, 'giu'), ' ')
+         .replace(/\s{2,}/g, ' ')
+         .replace(/^[\s:—–·|-]+/, '')
+         .trim();
+  }
+  if (LABEL_VERDICT.test(t) || LABEL_VERDICT_2.test(t)) {
     const tl = tailOf(t);
     return ('Analysis' + (tl ? ' ' + tl : '')).trim();
   }
@@ -434,6 +477,19 @@ function safeLabel(label) {
     .replace(/\s{2,}/g, ' ')
     .trim();
   return ((kept || 'Analysis') + (tail ? ' ' + tail : '')).trim();
+}
+/* 13.09.2026 dev, заказ 97-А.1. Прежде пустой `prompt_md` молча подменялся
+   полем `header_md` — и модель получила бы авторскую спеку («Твист: закрытие
+   завода не убирает кост, а триггерит его») КАК СЦЕНАРИЙ КЕЙСА, обязанный быть
+   пересказанным кандидату. Сегодня пустых prompt_md в корпусе 0 из 400, и
+   потому беда не видна: это спящий носитель со ВЗВЕДЁННЫМ проводом.
+   Запасного варианта больше нет. Пустой промпт — громкая беда, а не тихая
+   подмена: партия останавливается, и это видно сразу. */
+function ПУСТОЙ_ПРОМПТ(caseObj) {
+  const id = (caseObj && caseObj.id) || '?';
+  try { console.error('cases prompt_md_empty case=' + id); } catch (e) {}
+  return '[CASE PROMPT MISSING — do not invent it. Tell the candidate the case is '
+       + 'unavailable and end the session.]';
 }
 const HAS_CYR = /[а-яА-ЯёЁ]/;
 /* 21.08.2026. Пометка выдавалась БЕЗ ОГЛЯДКИ НА ЯЗЫК ПАРТИИ: русскому
@@ -581,7 +637,12 @@ export function unseenKeyFigures({ caseObj, doneSteps, revealedSet, reply, candi
   const done = new Set((Array.isArray(doneSteps) ? doneSteps : []).map(Number));
   const shown = new Set(revealedSet instanceof Set ? revealedSet : (revealedSet || []));
 
-  let seen = String(caseObj.prompt_md || caseObj.header_md || '') + ' '
+  /* 13.09.2026 dev, заказ 97-А.1 цеха кейсов. `header_md` УБРАН из запасного
+     варианта. Это не пустое поле: 234 384 знака авторского учёта — «T/C: Trap
+     (не показывать кандидату)», тип наивной ошибки, описание твиста. Здесь оно
+     попадало в `seen`, то есть авторский текст засчитывался за УВИДЕННОЕ
+     кандидатом и мог погасить защиту секрета. Провод перерезан. */
+  let seen = String(caseObj.prompt_md || '') + ' '
            + String(candidateText || '') + ' ' + String(priorAssistantText || '');
   for (const ex of (caseObj.exhibits || [])) {
     const gated = Array.isArray(ex.triggers) ? ex.triggers.length > 0 : ex.reveal !== 'auto';
@@ -1104,7 +1165,7 @@ FIRM STYLE: ${firmStyle(firm)}
 CASE: "${enField(caseObj, 'title', lang)}" — ${caseObj.case_type} · ${enField(caseObj, 'industry', lang)} · ${caseObj.difficulty}
 
 CASE PROMPT (the scenario):
-${enField(caseObj, 'prompt_md', lang) || enField(caseObj, 'header_md', lang) || ''}`;
+${enField(caseObj, 'prompt_md', lang) || ПУСТОЙ_ПРОМПТ(caseObj)}`;
 
   const doneText = done.size
     ? `\n\n════ ALREADY ESTABLISHED (do not re-ask; these numbers/insights are known) ════\n` +
@@ -1115,7 +1176,7 @@ ${enField(caseObj, 'prompt_md', lang) || enField(caseObj, 'header_md', lang) || 
     ? `\n\n════ AVAILABLE NOW — the candidate may take ANY of these, in ANY order ════
 Each block is one analysis the candidate can legitimately do next. Grade whichever they actually pursue against its ANSWER KEY. NEVER read a key aloud.\n\n` +
       unlocked.map(n => { const s = byNum.get(n) || {};
-        return `— STEP ${n} — "${safeLabel(s.label)}" (yields: ${safeProduces(s.produces)||'—'})\nQUESTION IF THEY GO HERE:\n${enField(s, 'candidate_md', lang) || safeLabel(s.label) || ''}${stepLangNote(enField(s, 'candidate_md', lang), lang)}\nANSWER KEY (hidden — grade against this):\n${s.interviewer_md || '(no explicit key — grade with MBB rigor for this step type)'}`;
+        return `— STEP ${n} — "${safeLabel(s.label)}" (yields: ${safeProduces(s.produces)||'—'})${onRequestNote(s, lang)}\nQUESTION IF THEY GO HERE:\n${enField(s, 'candidate_md', lang) || safeLabel(s.label) || ''}${stepLangNote(enField(s, 'candidate_md', lang), lang)}\nANSWER KEY (hidden — grade against this):\n${s.interviewer_md || '(no explicit key — grade with MBB rigor for this step type)'}`;
       }).join('\n\n')
     : '';
 
@@ -1131,7 +1192,7 @@ Each block is one analysis the candidate can legitimately do next. Grade whichev
            меняет 799 меток из 2912, из них 257 несут открытый вердикт, в 242
            кейсах из 400. Класс тот же, что у d1 и у счётчика игр: защита
            написана верно и не подключена в одной из точек. */
-        return `- Step ${n} "${safeLabel(s.label)}" — unlocks once these are established: ${need.map(d=>`Step ${d}`).join(', ')}. If the candidate jumps here, don't reject them — note briefly what they need first and let them get it, or answer what can be answered without the missing piece.`; }).join('\n')
+        return `- Step ${n} "${safeLabel(s.label)}"${onRequestNote(s, lang)} — unlocks once these are established: ${need.map(d=>`Step ${d}`).join(', ')}. If the candidate jumps here, don't reject them — note briefly what they need first and let them get it, or answer what can be answered without the missing piece.`; }).join('\n')
     : '';
 
   const ex = exhibitsBlock(caseObj, revealedSet, lang);
@@ -1206,13 +1267,13 @@ FIRM STYLE: ${firmStyle(firm)}
 CASE: "${enField(caseObj, 'title', lang)}" — ${caseObj.case_type} · ${enField(caseObj, 'industry', lang)} · ${caseObj.difficulty}
 
 CASE PROMPT (the scenario):
-${enField(caseObj, 'prompt_md', lang) || enField(caseObj, 'header_md', lang) || ''}`;
+${enField(caseObj, 'prompt_md', lang) || ПУСТОЙ_ПРОМПТ(caseObj)}`;
 
   const answerKey =
 `\n\n════ ANSWER KEY FOR THE CURRENT STEP — NEVER READ THIS ALOUD ════
 This is grading material only. NEVER quote, paraphrase, summarise, or hand any of it to the candidate. If the step text below happens to contain the model answer or a python/solution block, speak ONLY the question part — never the solution.
 
-CURRENT STEP ${idx + 1} of ${steps.length} — "${safeLabel(step.label)}"
+CURRENT STEP ${idx + 1} of ${steps.length} — "${safeLabel(step.label)}"${onRequestNote(step, lang)}
 QUESTION TO ASK THE CANDIDATE:
 ${enField(step, 'candidate_md', lang) || safeLabel(step.label) || ''}${stepLangNote(enField(step, 'candidate_md', lang), lang)}
 
