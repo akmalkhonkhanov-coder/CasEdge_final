@@ -81,6 +81,11 @@ function gameById(id) {
 // поле может висеть несколько тактов, а `from` у них общий.
 function trainingId(t, i) { return 't:' + String(t.from || '?') + ':' + i; }
 
+/* 20.09.2026, круг 218 цеха игр. `rkPick` ищет в ЗАПИСИ поле `_naive_reason_ru`,
+   а клала запись только английское. Проверено живым вызовом: 337 полей кейсов и
+   32 поля тактов отдавали кандидату английский разбор наива при `lang='ru'`.
+   Русский разбор в БАНКЕ был — до читателя не доходил ни разу.
+   Класс: прибор (и я) мерил единицу банка, а не единицу читателя. */
 function fieldMap(game) {
   const m = new Map();
   const add = (id, rec) => m.set(id, rec);
@@ -89,7 +94,7 @@ function fieldMap(game) {
     for (const p of (q.parts || [])) {
       add('a:' + p.key, {
         input: p.input || 'numeric', answer: p.answer, naive: p.naive,
-        naive_reason: p.naive_reason, options: p.options || null,
+        naive_reason: p.naive_reason, _naive_reason_ru: p._naive_reason_ru, options: p.options || null,
         round: (p.round == null ? 2 : p.round), tolerance: (p.tolerance == null ? 0.01 : p.tolerance)
       });
     }
@@ -98,7 +103,7 @@ function fieldMap(game) {
   const rep = game.report || {};
   for (const b of ((rep.written && rep.written.blanks) || [])) {
     add('w:' + b.key, {
-      input: b.input || 'numeric', answer: b.answer, naive: b.naive, naive_reason: b.naive_reason,
+      input: b.input || 'numeric', answer: b.answer, naive: b.naive, naive_reason: b.naive_reason, _naive_reason_ru: b._naive_reason_ru,
       options: b.options || null, round: (b.round == null ? 2 : b.round), tolerance: (b.tolerance == null ? 0.01 : b.tolerance)
     });
   }
@@ -109,7 +114,7 @@ function fieldMap(game) {
   }
   // Report — visual report fields
   for (const f of ((rep.visual_report && rep.visual_report.fields) || [])) {
-    add('v:' + f.key, { input: f.input || 'numeric', answer: f.answer, naive: f.naive, naive_reason: f.naive_reason,
+    add('v:' + f.key, { input: f.input || 'numeric', answer: f.answer, naive: f.naive, naive_reason: f.naive_reason, _naive_reason_ru: f._naive_reason_ru,
       options: f.options || null, round: (f.round == null ? 2 : f.round), tolerance: (f.tolerance == null ? 0.01 : f.tolerance) });
   }
   // Training-такт (долг dev №4). Те же данные, другая величина: такт висит на
@@ -118,13 +123,13 @@ function fieldMap(game) {
   // у тактов нет и быть не должно.
   (game.training || []).forEach((t, i) => {
     add(trainingId(t, i), {
-      input: t.input || 'numeric', answer: t.answer, naive: t.naive, naive_reason: t.naive_reason,
+      input: t.input || 'numeric', answer: t.answer, naive: t.naive, naive_reason: t.naive_reason, _naive_reason_ru: t._naive_reason_ru,
       options: t.options || null, round: (t.round == null ? 2 : t.round), tolerance: (t.tolerance == null ? 0.01 : t.tolerance)
     });
   });
   // Cases 1–6
   for (const c of (game.cases || [])) {
-    add('c:' + c.c, { input: c.input || 'numeric', answer: c.answer, naive: c.naive, naive_reason: c.naive_reason,
+    add('c:' + c.c, { input: c.input || 'numeric', answer: c.answer, naive: c.naive, naive_reason: c.naive_reason, _naive_reason_ru: c._naive_reason_ru,
       options: c.options || null, round: (c.round == null ? 2 : c.round), tolerance: (c.tolerance == null ? 0.01 : c.tolerance) });
   }
   return m;
@@ -207,6 +212,15 @@ function rkParenIsComment(inner) {
   return false;
 }
 
+/* 20.09.2026. Слово «naive» САМО называет ловушку — скраб гасит его в промптах
+   шагом 0b. Экран Visual report отдаёт ЧЕТЫРЕ новые строки, и они обязаны идти
+   через то же гашение: моя же батарея покраснела на заголовке игры 46
+   («the naive cull-only path») в первом же прогоне после правки.
+   Выражение ОДНО на файл — не копия: разойдутся, и гаситься будет по-разному. */
+const RK_TELL = /\bnaïve\b|\bnaive\b/gi;
+function rkNoTell(v) {
+  return typeof v === 'string' ? v.replace(RK_TELL, '').replace(/\s{2,}/g, ' ').trim() : v;
+}
 function rkScrubOnce(p, secretVals, opts, mode) {
   let s = String(p == null ? '' : p);
   /* 0a. a question-form prompt's stem ends at its last "?"; anything after is
@@ -244,7 +258,7 @@ function rkScrubOnce(p, secretVals, opts, mode) {
   if (qm >= 0 && qm < s.length - 1 && tail0a.indexOf('|') < 0
       && (tail0a.match(/\d[\d.,]*/g) || []).length < 3) s = s.slice(0, qm + 1);
   // 0b. neutralise the "naive" tell (the word itself flags which value is the trap)
-  s = s.replace(/\bnaïve\b|\bnaive\b/gi, '').replace(/\s{2,}/g, ' ');
+  s = s.replace(RK_TELL, '').replace(/\s{2,}/g, ' ');
   // 1. cut the interviewer solution cascade (Step 1/2, decompose, Answer:)
   const cut = re => { const m = s.match(re); if (m && m.index != null) s = s.slice(0, m.index); };
   cut(/\s*[-–—]?\s*\*?\s*Step\s*\d/i);   // " - *Step 1 (headline)…"
@@ -448,10 +462,21 @@ function sanitizeGame(game, revealedSet) {
          Прогоняем через тот же скраб, что и остальные 602 промпта; ключ —
          правильный вариант ответа. Изменяет ровно 1 промпт из 57, и ровно
          снятием этого слова. */
-      graph_selection: rep.graph_selection ? { prompt: scrubPrompt(rep.graph_selection.prompt, [rep.graph_selection.answer], rep.graph_selection.options || []), options: rep.graph_selection.options || [] } : null,
+      /* 20.09.2026, круг 218 цеха игр. Клиент строит экран Visual report по
+         `graph_selection.visual`, ручка его не отдавала — экран был мёртв у 55 игр
+         из 57, кнопка всегда говорила «Go to cases». Отдаём БЕЗ `series[].values`:
+         это ровно те числа, которые кандидат обязан ввести сам; график клиент
+         рисует из введённого (`rkVisualVals`), а не из банка. */
+      graph_selection: rep.graph_selection ? { prompt: scrubPrompt(rep.graph_selection.prompt, [rep.graph_selection.answer], rep.graph_selection.options || []), options: rep.graph_selection.options || [],
+        visual: rep.graph_selection.visual ? {
+          title: rkNoTell(rep.graph_selection.visual.title),
+          source: rkNoTell(rep.graph_selection.visual.source),
+          categories: (rep.graph_selection.visual.categories || []).map(rkNoTell),
+          series: (rep.graph_selection.visual.series || []).map(x => ({ label: rkNoTell(x.label) }))
+        } : null } : null,
       visual_report: rep.visual_report ? { fields: (rep.visual_report.fields || []).map(f => ({ key: f.key, input: f.input || 'numeric', options: f.options || null })) } : null
     },
-    cases: (game.cases || []).map(c => ({ c: c.c, kind: c.kind, prompt: scrubPrompt(c.prompt, [c.answer, c.naive], c.options || null, 'case'), input: c.input || 'numeric', options: c.options || null }))
+    cases: (game.cases || []).map(c => ({ c: c.c, kind: c.kind, prompt: scrubPrompt(c.prompt, [c.answer, c.naive], c.options || null, 'case'), input: c.input || 'numeric', options: c.options || null, unit: c.unit || null }))   /* `unit` читает index.html:7105; в банке его нет ни у одного из 342 кейсов, но ветка обязана существовать, а не молчать */
   };
 }
 

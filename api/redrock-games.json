@@ -225,7 +225,7 @@
      ],
      "answer": "Line",
      "visual": {
-      "title": "Show how water-table depth at the wet and dry microsites moves month by month across the s",
+      "title": "Show how water-table depth at the wet and dry microsites moves month by month across the season",
       "source": "ex2",
       "categories": [
        "Dec",
@@ -1135,7 +1135,7 @@
     },
     {
      "c": 3,
-     "prompt": "Composition count×% — which fish species has the most expected at-risk individuals (count × risk)? | Species | Perch | Pike | Roach | Char | Burbot | |---|---|---|---|---|---| | Count | 300 | 90 | 150 | 120 | 60 | | At-risk % | 8% | 20% | 10% | 15% | 25% | · Pike 18 · Roach 15 · Char 18 · Burbot 15",
+     "prompt": "Composition count×% — which fish species has the most expected at-risk individuals (count × risk)? | Species | Perch | Pike | Roach | Char | Burbot | |---|---|---|---|---|---| | Count | 300 | 90 | 150 | 120 | 60 | | At-risk % | 8% | 20% | 10% | 15% | 25% |",
      "input": "choice",
      "answer": "Perch",
      "naive": "Burbot",
@@ -2816,7 +2816,7 @@
      ],
      "answer": "Line",
      "visual": {
-      "title": "Show the sea-urchin population year by year under restocking against the no-intervention p",
+      "title": "Show the sea-urchin population year by year under restocking against the no-intervention path",
       "source": "ex1",
       "categories": [
        "1",
@@ -2871,7 +2871,7 @@
     },
     {
      "c": 3,
-     "prompt": "Multi-criteria selection — pick the removal method minimizing $/1,000 removed with bycatch ≤ 5: Diving $4,200 (bycatch 2) · Trapping $3,000 (bycatch 8) · Quicklime $3,600 (bycatch 4). ($3,600). ($3,000, but bycatch 8 > 5)",
+     "prompt": "Multi-criteria selection — pick the removal method minimizing $/1,000 removed with bycatch no higher than 5. Diving costs $4,200 at bycatch 2; Trapping $3,000 at bycatch 8; Quicklime $3,600 at bycatch 4.",
      "input": "choice",
      "answer": "Quicklime",
      "naive": "Trapping",
@@ -3446,7 +3446,7 @@
     },
     {
      "c": 3,
-     "prompt": "Multi-criteria selection — minimize $/1,000 ha cleared with eco-risk ≤ 4: Manual $5,000 (risk 2) · Herbicide $3,200 (risk 7) · Weevil $3,800 (risk 3). ($3,800). ($3,200, risk 7 > 4)",
+     "prompt": "Multi-criteria selection — minimize $/1,000 ha cleared with eco-risk no higher than 4. Manual costs $5,000 at risk 2; Herbicide $3,200 at risk 7; Weevil $3,800 at risk 3.",
      "input": "choice",
      "answer": "Weevil",
      "naive": "Herbicide",
@@ -3957,7 +3957,7 @@
        "round": 1,
        "tolerance": 0.01,
        "naive": 48,
-       "naive_reason": "omits 0"
+       "naive_reason": "omits the 0.6 impact factor and credits the full 600,000 t at $80"
       }
      ]
     }
@@ -4182,8 +4182,8 @@
      "key": "q4",
      "answer": 28.8,
      "trap": 48,
-     "lesson": "omits 0",
-     "_lesson_ru": "пропущен 0"
+     "lesson": "omits the 0.6 impact factor and credits the full 600,000 t at $80",
+     "_lesson_ru": "пропущен множитель 0,6: все 600 000 т зачтены по $80"
     }
    ],
    "collect": [
@@ -5438,7 +5438,7 @@
      ],
      "answer": "Line",
      "visual": {
-      "title": "Show how shallow-well and deep-well borehole temperature move month by month through the s",
+      "title": "Show how shallow-well and deep-well borehole temperature move month by month through the season",
       "source": "ex2",
       "categories": [
        "Dec",
@@ -5919,7 +5919,7 @@
     },
     {
      "c": 3,
-     "prompt": "Composition count×% — most expected at-risk plants? | Group | Fern | Orchid | Bromeliad | Moss | Liana | |---|---|---|---|---|---| | Count | 300 | 90 | 150 | 120 | 60 | | At-risk % | 8% | 22% | 10% | 15% | 25% | · Orchid 19.8 · Bromeliad 15 · Moss 18 · Liana 15",
+     "prompt": "Composition count×% — most expected at-risk plants? | Group | Fern | Orchid | Bromeliad | Moss | Liana | |---|---|---|---|---|---| | Count | 300 | 90 | 150 | 120 | 60 | | At-risk % | 8% | 22% | 10% | 15% | 25% |",
      "input": "choice",
      "answer": "Fern",
      "naive": "Liana",
@@ -8310,7 +8310,7 @@
        "round": 0,
        "tolerance": 0.01,
        "naive": 30,
-       "naive_reason": "omits 0"
+       "naive_reason": "omits the 0.5 impact factor and credits the full 500,000 m³ at $60"
       }
      ]
     }
@@ -8535,8 +8535,8 @@
      "key": "q4",
      "answer": 15,
      "trap": 30,
-     "lesson": "omits 0",
-     "_lesson_ru": "пропущен 0"
+     "lesson": "omits the 0.5 impact factor and credits the full 500,000 m³ at $60",
+     "_lesson_ru": "пропущен множитель 0,5: все 500 000 м³ зачтены по $60"
     }
    ],
    "collect": [
@@ -8901,7 +8901,7 @@
        "round": 2,
        "tolerance": 0.01,
        "naive": 15.75,
-       "naive_reason": "omits 0"
+       "naive_reason": "omits the 0.7 impact factor and credits the full 350,000 t at $45"
       }
      ]
     }
@@ -9126,8 +9126,8 @@
      "key": "q4",
      "answer": 11.03,
      "trap": 15.75,
-     "lesson": "omits 0",
-     "_lesson_ru": "пропущен 0"
+     "lesson": "omits the 0.7 impact factor and credits the full 350,000 t at $45",
+     "_lesson_ru": "пропущен множитель 0,7: все 350 000 т зачтены по $45"
     }
    ],
    "collect": [
@@ -9936,7 +9936,7 @@
      ],
      "answer": "Line",
      "visual": {
-      "title": "Show how brine-pool salinity at the two logging pools moves month by month across the seas",
+      "title": "Show how brine-pool salinity at the two logging pools moves month by month across the season",
       "source": "ex2",
       "categories": [
        "Dec",
@@ -10365,7 +10365,7 @@
      ],
      "answer": "Line",
      "visual": {
-      "title": "Show how turbidity at the fjord head and at the mouth moves month by month through the sea",
+      "title": "Show how turbidity at the fjord head and at the mouth moves month by month through the season",
       "source": "ex2",
       "categories": [
        "Dec",
@@ -10422,7 +10422,7 @@
     },
     {
      "c": 3,
-     "prompt": "Composition count×% — most expected at-risk species? | Group | Kelp | Wrack | Urchin | Anemone | Sponge | |---|---|---|---|---|---| | Count | 300 | 90 | 150 | 120 | 60 | | At-risk % | 8% | 22% | 10% | 15% | 25% | · Wrack 19.8 · Urchin 15 · Anemone 18 · Sponge 15",
+     "prompt": "Composition count×% — most expected at-risk species? | Group | Kelp | Wrack | Urchin | Anemone | Sponge | |---|---|---|---|---|---| | Count | 300 | 90 | 150 | 120 | 60 | | At-risk % | 8% | 22% | 10% | 15% | 25% |",
      "input": "choice",
      "answer": "Kelp",
      "naive": "Sponge",
@@ -12241,7 +12241,7 @@
      ],
      "answer": "Line",
      "visual": {
-      "title": "Show the seal population year by year under the harvest program against the no-harvest pat",
+      "title": "Show the seal population year by year under the harvest program against the no-harvest path",
       "source": "ex1",
       "categories": [
        "1",
@@ -13321,7 +13321,7 @@
        "round": 2,
        "tolerance": 0.01,
        "naive": 0.98,
-       "naive_reason": "uses headline $41"
+       "naive_reason": "uses the headline $41.60M instead of the realized 35.36"
       }
      ]
     },
@@ -13448,14 +13448,14 @@
     },
     {
      "c": 3,
-     "prompt": "Offset Year-10 impact → 520,000 t × 0.5 = 260,000 × $60. (volume × credit, omits the 0.5 impact)",
+     "prompt": "Offset Year-10 impact — Year-10 volume is 520,000 t, half of it counts as offset impact, and each offset tonne earns $60. What is the Year-10 offset revenue, in $M?",
      "input": "numeric",
      "answer": 15.6,
      "round": 2,
      "tolerance": 0.01,
      "naive": 31.2,
-     "naive_reason": "omits the 0",
-     "_naive_reason_ru": "пропущен 0"
+     "naive_reason": "omits the 0.5 impact factor and credits the full 520,000 t at $60",
+     "_naive_reason_ru": "пропущен множитель 0,5: все 520 000 т зачтены по $60"
     },
     {
      "c": 4,
@@ -13483,7 +13483,7 @@
     },
     {
      "c": 6,
-     "prompt": "Fund allocation ($/ha) — $120M: A $3,000 · B $4,000 · C $6,000. (highest cost/ha $6,000 → 20,000 ha)",
+     "prompt": "Fund allocation ($/ha) — $120M: A $3,000 · B $4,000 · C $6,000.",
      "input": "choice",
      "answer": "A",
      "naive": "C",
@@ -13523,8 +13523,8 @@
      "key": "q3",
      "answer": 0.83,
      "trap": 0.98,
-     "lesson": "uses headline $41",
-     "_lesson_ru": "взяты заголовочные $41"
+     "lesson": "uses the headline $41.60M instead of the realized 35.36",
+     "_lesson_ru": "взяты заголовочные $41,60 млн вместо реализованных 35,36"
     },
     {
      "q": 4,
@@ -13933,7 +13933,7 @@
        "round": 2,
        "tolerance": 0.01,
        "naive": 16.5,
-       "naive_reason": "omits 0"
+       "naive_reason": "omits the 0.6 impact factor and credits the full 300,000 t at $55"
       }
      ]
     }
@@ -14158,8 +14158,8 @@
      "key": "q4",
      "answer": 9.9,
      "trap": 16.5,
-     "lesson": "omits 0",
-     "_lesson_ru": "пропущен 0"
+     "lesson": "omits the 0.6 impact factor and credits the full 300,000 t at $55",
+     "_lesson_ru": "пропущен множитель 0,6: все 300 000 т зачтены по $55"
     }
    ],
    "collect": [
@@ -14970,7 +14970,7 @@
      ],
      "answer": "Line",
      "visual": {
-      "title": "Show how dissolved oxygen at the two logging stations moves month by month across the seas",
+      "title": "Show how dissolved oxygen at the two logging stations moves month by month across the season",
       "source": "ex2",
       "categories": [
        "Dec",
@@ -15399,7 +15399,7 @@
      ],
      "answer": "Line",
      "visual": {
-      "title": "Show how water clarity in the inner and outer sound moves month by month through the seaso",
+      "title": "Show how water clarity in the inner and outer sound moves month by month through the season",
       "source": "ex2",
       "categories": [
        "Dec",
@@ -15456,7 +15456,7 @@
     },
     {
      "c": 3,
-     "prompt": "Composition count×% — most expected at-risk species? | Group | Eelgrass | Wrack | Urchin | Anemone | Sponge | |---|---|---|---|---|---| | Count | 320 | 100 | 160 | 130 | 96 | | At-risk % | 8% | 20% | 9% | 15% | 25% | · Wrack 20 · Urchin 14.4 · Anemone 19.5 · Sponge 24",
+     "prompt": "Composition count×% — most expected at-risk species? | Group | Eelgrass | Wrack | Urchin | Anemone | Sponge | |---|---|---|---|---|---| | Count | 320 | 100 | 160 | 130 | 96 | | At-risk % | 8% | 20% | 9% | 15% | 25% |",
      "input": "choice",
      "answer": "Eelgrass",
      "naive": "Sponge",
@@ -17127,7 +17127,7 @@
    "analysis": [
     {
      "q": 1,
-     "prompt": "(a) Rabbits removed per year. (b) Earliest year the culled population falls to ≤ 100,000 [Year 4 / Year 5 / Year 6] . (round-number anchor: 100,210 ≈ 100,000, missing that it is still above)",
+     "prompt": "(a) Rabbits removed per year. (b) Earliest year the culled population falls to ≤ 100,000 [Year 4 / Year 5 / Year 6] .",
      "parts": [
       {
        "key": "q1a",
@@ -18190,7 +18190,7 @@
     },
     {
      "q": 4,
-     "prompt": "Should the program expand to the low-need Tier 3 (+30,000 households)? - *Marginal benefit:* 30,000 × 2 sessions × $10. - *Marginal cost:*. - Answer: No — do NOT expand (net −$150,000; the marginal households run only 2 sessions/yr, below what their connection costs)",
+     "prompt": "Should the program expand to the low-need Tier 3 (+30,000 households)? - *Marginal benefit:* 30,000 × 2 sessions × $10. - *Marginal cost:* 30,000 households × the per-household connection cost from the brief. - Answer: No — do NOT expand (net −$150,000; the marginal households run only 2 sessions/yr, below what their connection costs)",
      "parts": [
       {
        "key": "q4a",
@@ -18349,7 +18349,7 @@
     },
     {
      "c": 4,
-     "prompt": "Effect sensitivity (decision reverses) — how many sessions a year would Tier-3 households have to run for the call to reverse? Marginal benefit is 30,000 × sessions × $10. The call hinges on the marginal effect, not the pilot average",
+     "prompt": "Effect sensitivity (decision reverses) — marginal benefit runs at 30,000 households times sessions times $10 a year. How many sessions a year would Tier-3 households have to run for the call to reverse?",
      "input": "numeric",
      "answer": 3,
      "round": 0,
@@ -19176,7 +19176,7 @@
     },
     {
      "c": 2,
-     "prompt": "Closest to a quarter — which single zone is nearest to one-quarter (2,000 km²) of the range? Forest 2,400 (diff 400) beats Meadow 1,400 (600) and Alpine 3,200 (1,200). (picks the largest zone)",
+     "prompt": "Closest to a quarter — which single zone is nearest to one-quarter (2,000 km²) of the range? (picks the largest zone)",
      "input": "choice",
      "answer": "Forest",
      "naive": "Alpine",
@@ -19228,7 +19228,7 @@
     },
     {
      "c": 6,
-     "prompt": "Share of managed area — Forest as a share of the managed 7,600 (Reserve excluded, by definition of \"managed\") → 2,400/7,600. (÷ total 8,000 — here the managed base is the correct one, reversing the Q1 trap so the candidate must read which base the question names)",
+     "prompt": "Share of managed area — the managed area is 7,600 km², with the Reserve excluded by the definition of \"managed\". What share of that managed area is Forest?",
      "input": "numeric",
      "answer": 31.58,
      "round": 2,
@@ -19972,7 +19972,7 @@
      ],
      "answer": "Pie",
      "visual": {
-      "title": "Show how the 1,000 ha of highland splits across the four habitat types in this single surv",
+      "title": "Show how the 1,000 ha of highland splits across the four habitat types in this single survey",
       "source": "ex1",
       "categories": [
        "Area (ha)",
@@ -20000,7 +20000,7 @@
    "cases": [
     {
      "c": 1,
-     "prompt": "Weighted after an index change — if Bog's index rises to 18: weighted → (2,400+1,200+400+1,800)/1,000. (simple average (6+4+2+18)/4)",
+     "prompt": "Weighted after an index change — if Bog's index rises to 18, what is the area-weighted index across the four habitats?",
      "input": "numeric",
      "answer": 5.8,
      "round": 2,
@@ -20833,7 +20833,7 @@
     },
     {
      "c": 4,
-     "prompt": "CAC payback — $90 ÷",
+     "prompt": "CAC payback — how many months does the $90 CAC take to repay, at the yearly ARPU and the gross margin given in the brief?",
      "input": "numeric",
      "answer": 4.29,
      "round": 2,
@@ -20844,7 +20844,7 @@
     },
     {
      "c": 5,
-     "prompt": "Gross adds to grow 10% — to grow the base 10% (+5,000 net) you must also replace 10,000 churn gross adds. (forgets churn must be backfilled)",
+     "prompt": "Gross adds to grow 10% — the base has to grow 10% net over the year, and the year's churn of 10,000 subscribers has to be replaced as well. How many gross adds does that take?",
      "input": "numeric",
      "answer": 15000,
      "round": 0,
@@ -21588,7 +21588,7 @@
      ]
     },
     "graph_selection": {
-     "prompt": "Show the adult herd year by year on the naive cull-only path against the realized path with recruits.",
+     "prompt": "Show the adult herd year by year on the cull-only path against the realized path with recruits.",
      "options": [
       "Bar",
       "Combo",
@@ -21596,7 +21596,7 @@
      ],
      "answer": "Line",
      "visual": {
-      "title": "Show the adult herd year by year on the naive cull-only path against the realized path wit",
+      "title": "Show the adult herd year by year on the cull-only path against the realized path with recruits",
       "source": "ex1",
       "categories": [
        "1",
@@ -22033,7 +22033,7 @@
      ],
      "answer": "Bar",
      "visual": {
-      "title": "Compare export revenue from raw ore, refined metal and the total before and after the smel",
+      "title": "Compare export revenue from raw ore, refined metal and the total before and after the smelter",
       "source": "ex1",
       "categories": [
        "Raw ore exported"
@@ -23824,7 +23824,7 @@
     },
     {
      "c": 4,
-     "prompt": "Break-even — $840,000 fixed, $12/t harvest cost, blended price $45.20/t. How many tonnes must the works land to cover the fixed cost? Round up to a whole tonne.",
+     "prompt": "Break-even — $840,000 fixed, $12/t harvest cost, blended price $45.20/t. Rounding up to a whole tonne, how many tonnes must the works land to cover the fixed cost?",
      "input": "numeric",
      "answer": 25302,
      "round": 0,
@@ -24316,7 +24316,7 @@
     },
     {
      "c": 6,
-     "prompt": "Switching — export pays $34/t and domestic $19/t. How many tonnes must move from domestic to export to add $100,000 of handling revenue? Round up.",
+     "prompt": "Switching — export pays $34/t and domestic $19/t. Rounding up to a whole tonne, how many tonnes must move from domestic to export to add $100,000 of handling revenue?",
      "input": "numeric",
      "answer": 6667,
      "round": 0,
@@ -25199,7 +25199,7 @@
     },
     {
      "c": 4,
-     "prompt": "Break-even — fixed cost $158,000, firing $0.21/brick, blended revenue $0.464/brick. How many bricks must the kilns fire to cover the season? Round up to a whole brick.",
+     "prompt": "Break-even — fixed cost $158,000, firing $0.21/brick, blended revenue $0.464/brick. Rounding up to a whole brick, how many bricks must the kilns fire to cover the season?",
      "input": "numeric",
      "answer": 622048,
      "round": 0,
@@ -25693,7 +25693,7 @@
     },
     {
      "c": 4,
-     "prompt": "Break-even — billings run at a blended $10,520 an operative against $6,900 of running cost each. How many operatives cover the $4,600,000 fixed line? Round up to a whole operative.",
+     "prompt": "Break-even — billings run at a blended $10,520 an operative against $6,900 of running cost each. Rounding up to a whole operative, how many operatives cover the $4,600,000 fixed line?",
      "input": "numeric",
      "answer": 1271,
      "round": 0,
