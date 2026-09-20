@@ -384,6 +384,27 @@
   var S = { done: [], drill: null, lib: 'cm', move1: null };
   function cfg() { return LIBS[S.lib] || LIBS.cm; }
   function loadDone() { try { S.done = JSON.parse(localStorage.getItem(cfg().doneKey) || '[]'); } catch (e) { S.done = []; } }
+  /* 20.09.2026, dev, круг 186 цеха дриллов. Близнец МЕЖДУ БИБЛИОТЕКАМИ не прятался
+     никогда, и причина была не в движке: `nextDrill` считает спрятанное по общему
+     списку `doneIds`, а клиент слал список ОДНОЙ библиотеки — у каждой свой doneKey
+     в localStorage. Один книжный кейс, разложенный на ci и cm (CI-021 / CM-009),
+     кандидат встречал дважды, и спрятать его было нечем.
+     Шлём ОБЪЕДИНЕНИЕ всех шести списков. Своя библиотека не страдает: чужие id
+     в её списке слотов не встречаются, а значит на выбор «следующего» не влияют;
+     влияют они ровно на одно — на twin_of, который на чужой id и ссылается.
+     Обе стороны пары обязаны нести twin_of: прячет та библиотека, что объявила. */
+  function doneEverywhere() {
+    var out = [], k;
+    for (k in LIBS) {
+      if (!Object.prototype.hasOwnProperty.call(LIBS, k)) continue;
+      try {
+        var a = JSON.parse(localStorage.getItem(LIBS[k].doneKey) || '[]');
+        if (Array.isArray(a)) { for (var i = 0; i < a.length; i++) if (out.indexOf(a[i]) < 0) out.push(a[i]); }
+      } catch (e) {}
+    }
+    for (var j = 0; j < S.done.length; j++) if (out.indexOf(S.done[j]) < 0) out.push(S.done[j]);
+    return out;
+  }
   function saveDone(id) { if (S.done.indexOf(id) < 0) S.done.push(id); try { localStorage.setItem(cfg().doneKey, JSON.stringify(S.done)); } catch (e) {} }
 
   /* ---------- flow ---------- */
@@ -409,7 +430,7 @@
     var pr = E('cmProg'); if (pr) pr.textContent = cmL({en:'Loading…',ru:'Загружаю…'});
     var pick={ru:'подбираю задачу',en:'picking a drill'};
     iz(threadHTML(cmL(pick))); threadRun([[0,pick]]);
-    api({ action: 'next', doneIds: S.done, set: cfg().set }).then(function (r) {
+    api({ action: 'next', doneIds: doneEverywhere(), set: cfg().set }).then(function (r) {
       if (r && r.error) { if (w) w.innerHTML = '<div class="cm-card"><div class="cm-title">' + esc2(cfg().rec) + '</div><div class="cm-prompt">' + W_("loadFail") + '</div></div>'; return; }
       var d = r && r.drill;
       if (!d) {   // all done → recycle
