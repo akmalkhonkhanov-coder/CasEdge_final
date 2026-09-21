@@ -2848,7 +2848,7 @@
       <div class="prog-stats-grid" id="progStatsGrid">
         <div class="prog-stat">
           <div class="prog-stat-num" id="progTotalCases">0</div>
-          <div class="prog-stat-lbl" data-i18n="prog.stat.cases">Cases completed</div>
+          <div class="prog-stat-lbl" data-i18n="prog.stat.cases">Cases started</div>
         </div>
         <div class="prog-stat">
           <div class="prog-stat-num" id="progTotalDrills">0</div>
@@ -4056,9 +4056,12 @@ const I18N = {
     'chat.qa.math': "Walk through math",
     'chat.qa.math.txt': "Let me walk through the calculation step by step.",
     'fb.scoring': "Scoring your case…",
+    'fb.insuff.title': "Not enough to evaluate",
+    'fb.insuff.sub': "Give it a real attempt to get scored",
+    'fb.insuff.body': "You ended the session before working through the problem, so there's nothing to score yet. <br><br>To get real partner-level feedback, walk through the case or drill: state your approach, ask for data, do the math, and give a recommendation. Then end the session and you'll get a full scorecard based on what you actually did.",
     'chat.placeholder': "Share your thinking…",
     'prog.overall': "Your level (last {n}): {avg}/10  ·  Target for {firm}: {target} on every dimension",
-    'prog.stat.cases': "Cases completed",
+    'prog.stat.cases': "Cases started",
     'prog.stat.drills': "Drills completed",
     'prog.stat.games': "Games played",
     'prog.stat.streak': "Day streak",
@@ -4558,9 +4561,12 @@ const I18N = {
     'chat.qa.math': "Пройти счёт",
     'chat.qa.math.txt': "Пройду расчёт по шагам.",
     'fb.scoring': "Считаем твой кейс…",
+    'fb.insuff.title': "Оценивать пока нечего",
+    'fb.insuff.sub': "Пройди кейс по-настоящему - тогда будет оценка",
+    'fb.insuff.body': "Ты завершил сессию раньше, чем начал решать задачу, поэтому оценивать пока нечего. <br><br>Чтобы получить разбор уровня партнёра, пройди кейс или дрилл: назови подход, запроси данные, посчитай и дай рекомендацию. Потом заверши сессию - и получишь полный скоркард по тому, что ты сделал.",
     'chat.placeholder': "Изложи свою мысль…",
     'prog.overall': "Твой уровень (последние {n}): {avg}/10  ·  Цель для {firm}: {target} по каждому измерению",
-    'prog.stat.cases': "Кейсов пройдено",
+    'prog.stat.cases': "Кейсов начато",
     'prog.stat.drills': "Дриллов пройдено",
     'prog.stat.games': "Игр сыграно",
     'prog.stat.streak': "Дней подряд",
@@ -6002,14 +6008,16 @@ const GAME_INTROS = {
   solve: {
     eyebrow: {ru:'Ассессмент в стиле McKinsey', en:'McKinsey-style assessment'},
     title: 'Solve Game',
-    story: 'You\u2019ve been brought in as an analyst for the Calder Sound marine authority. Three commercial fish species in the sound are under pressure, and the regulator must decide how much catch is sustainable before the next season opens. The data is messy and the clock is ticking \u2014 your job is to turn the survey numbers into defensible figures the board can act on.',
-    lead: {ru:'Это повторение ассессмента McKinsey Solve - игры на решение задач по данным. Ты проходишь сценарий экосистемы в четыре фазы и вводишь числовые ответы, которые сверяются с проверенным решением.',
-           en:'This mirrors the McKinsey Solve assessment - a data-driven problem-solving game. You work through an ecosystem scenario in four phases, entering numeric answers that are graded against a verified solution.'},
+    /* 21.09.2026: «ситуация» Calder Sound стояла над ВСЕМИ играми лобби, а выпадал,
+       например, «Running on Empty» про автоперевозчика. Сюжет у каждой игры свой — здесь его нет. */
+    story: '',
+    lead: {ru:'Это повторение ассессмента McKinsey Solve - игры на решение задач по данным. Ты проходишь сценарий на данных в четыре фазы и вводишь числовые ответы, которые сверяются с проверенным решением.',
+           en:'This mirrors the McKinsey Solve assessment - a data-driven problem-solving game. You work through a data scenario in four phases, entering numeric answers that are graded against a verified solution.'},
     steps: [
       ['1',{ru:'<b>Study</b> - прочитай сценарий и подставь в текст недостающие числа, опираясь на экзибит.',
             en:'<b>Study</b> - read the scenario and fill the missing figures into the text, using the exhibit data.'}],
-      ['2',{ru:'<b>Analysis</b> - ответь на числовые вопросы: площади, темпы роста и кто вырос быстрее всех.',
-            en:'<b>Analysis</b> - answer numeric questions: areas, growth rates, and which entity grew fastest.'}],
+      ['2',{ru:'<b>Analysis</b> - ответь на числовые вопросы по экзибитам.',
+            en:'<b>Analysis</b> - answer numeric questions from the exhibits.'}],
       ['3',{ru:'<b>Report</b> - выбери тип графика, который лучше всего показывает разбивку.',
             en:'<b>Report</b> - choose the chart type that best visualises the breakdown.'}],
       ['4',{ru:'<b>Cases</b> - реши короткий отдельный мини-кейс со своим экзибитом.',
@@ -6018,8 +6026,8 @@ const GAME_INTROS = {
     meta: [[{ru:'Время',en:'Time'},{ru:RK_MINUTES+' мин',en:RK_MINUTES+' min'}],
            [{ru:'Фаз',en:'Phases'},'4'],
            [{ru:'Оценка',en:'Scoring'},{ru:'Автоматическая',en:'Auto-graded'}]],
-    note: {ru:'Оригинальный сценарий (Calder Sound Fishery). Формат повторяет настоящий ассессмент, содержание наше собственное. Ответы принимаются с допуском 1%.',
-           en:'Original scenario (Calder Sound Fishery). The format mirrors the real assessment; the content is our own. Answers are checked within a 1% tolerance.'},
+    note: {ru:'Оригинальные сценарии. Формат повторяет настоящий ассессмент, содержание наше собственное. Ответы принимаются с допуском 1%.',
+           en:'Original scenarios. The format mirrors the real assessment; the content is our own. Answers are checked within a 1% tolerance.'},
     start: 'startSolveChoose',
   },
   bcg: {
@@ -6982,7 +6990,7 @@ function rkReport(inner, foot) {
       <div class="rk-gcards">${cards}</div>
       <div class="rk-field-l" style="margin-top:18px;">Justify your choice (one line):</div>
       <div class="rk-row">
-        <input class="sv-numin rk-wide" id="in-g:justify" value="${esc(String(solve.rkVals['g:justify'] || ''))}" placeholder="e.g. two series over time → line"
+        <input class="sv-numin rk-wide" id="in-g:justify" value="${esc(String(solve.rkVals['g:justify'] || ''))}" placeholder="one line: what the reader must see, and why this type shows it"
           oninput="solve.rkVals['g:justify']=this.value">
       </div>
     </div>`;
@@ -8536,6 +8544,8 @@ function saveProgress(p) {
 }
 // Call when a session finishes. type='case' or a drill type name. score optional (0-100).
 // dims optional: { structure, quant, logic, comm, ownership } each 1-10.
+/* 21.09.2026: кейс считается в момент СТАРТА (брошенный тоже), поэтому подпись
+   счётчика - «Кейсов начато» / «Cases started», а не «пройдено». */
 function recordSession(kind, label, score, dims) {
   const p = loadProgress();
   // 2026-07-27: игры (BCG Chat Game / McKinsey Solve) не считались НИГДЕ.
@@ -10480,11 +10490,12 @@ function showInsufficientFeedback() {
   if (valEl) valEl.textContent = '-';
   const arc = document.getElementById('ring-arc');
   if (arc) arc.style.strokeDashoffset = 439.82; // empty ring
-  setText('score-title', 'Not enough to evaluate');
-  setText('score-sub', 'Give it a real attempt to get scored');
+  // 21.09.2026: строки были зашиты по-английски и в русском интерфейсе шли как есть
+  setText('score-title', t('fb.insuff.title'));
+  setText('score-sub', t('fb.insuff.sub'));
   ['structure','quant','logic','comm','ownership'].forEach(k => setMetric(k, null));
   const fbEl = document.getElementById('fb-text');
-  if (fbEl) fbEl.innerHTML = `You ended the session before working through the problem, so there's nothing to score yet. <br><br>To get real partner-level feedback, walk through the case or drill: state your approach, ask for data, do the math, and give a recommendation. Then end the session and you'll get a full scorecard based on what you actually did.`;
+  if (fbEl) fbEl.innerHTML = t('fb.insuff.body');
 }
 
 /* ────────────────────────────────────────────────────

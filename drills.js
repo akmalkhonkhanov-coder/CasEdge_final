@@ -59,6 +59,10 @@
 .cm-fb.ok { background:rgba(95,191,107,.10); border:1px solid rgba(95,191,107,.4); color:#7fd68e; }
 .cm-fb.no { background:rgba(232,124,124,.10); border:1px solid rgba(232,124,124,.4); color:#ef9a9a; }
 .cm-fb b { color:var(--on-dark,#faf9f5); }
+/* 21.09.2026: цвета вердикта подбирались под тёмную тему; на светлой «Не засчитано»
+   шло бледно-розовым по розовому и почти не читалось (замер на проде). */
+html[data-theme="light"] .cm-fb.ok, [data-theme="light"] .cm-fb.ok { color:#2f6f3a; }
+html[data-theme="light"] .cm-fb.no, [data-theme="light"] .cm-fb.no { color:#9e3a33; }
 .cm-ref { background:var(--surface-dark-elevated,#16241f); border:1px solid var(--sv-line,rgba(31,41,55,.10)); border-radius:12px; padding:15px 16px; margin:0 0 16px; }
 .cm-ref-h { font-size:12.5px; font-weight:600; letter-spacing:.01em; color:var(--coral,#5db8a6); margin-bottom:8px; }
 .cm-ref-body { font-size:13.8px; line-height:1.65; color:var(--on-dark,#faf9f5); } .cm-ref-body b { color:var(--on-dark,#faf9f5); }
@@ -163,6 +167,17 @@
     var t = String(prov == null ? '' : prov).trim();
     t = t.replace(/^=\s*/, '').replace(/^\*\*[A-ZА-Я]?\d{1,2}\*\*\s*[—\-–:.]?\s*/, '');
     return t.replace(/^\.\s*$/, '').trim();
+  }
+
+  /* 21.09.2026, dev, замер на проде (CI «Three Points of Share»): ответ засчитан,
+     а под ним — «Наивный ход: Ты прочитал рост доли как рост в деньгах». В 23
+     слотах (22 CI, 1 MS) поле написано во втором лице и после зачёта обвиняет
+     кандидата в том, чего он не делал. После зачёта такой текст не показываем;
+     после незачёта — как прежде. */
+  function trapShown(prov, ok) {
+    var t = trapText(prov);
+    if (!t) return false;
+    return !(ok && /^\s*(?:Ты|You)\b/.test(t));
   }
 
   function md(s) {
@@ -362,7 +377,14 @@
       }).join('');
     }
     if (ex.parts) return (ex.title ? '<div class="cm-exh-sub">' + esc2(ex.title) + '</div>' : '') + partsHTML(ex.parts);
-    return ex.rows ? tableHTML(ex) : '';
+    /* 21.09.2026, dev. Легаси-таблица (ST) несёт `title` и `note`, и клиент молча
+       выбрасывал оба. В 14 слотах ST сноска — это и есть ключ (Quiet Quarter:
+       правило допуска с Q4 Y1), а эталон потом ссылается на «сноску», которой
+       кандидат не видел. Сноска и заголовок выводятся рядом с таблицей. */
+    if (!ex.rows) return '';
+    return (ex.title ? '<div class="cm-exh-sub">' + esc2(ex.title) + '</div>' : '') +
+      tableHTML(ex) +
+      (ex.note ? '<div class="cm-exh-note">' + mdi(ex.note) + '</div>' : '');
   }
   function hasExhibit(ex) {
     return !!(ex && (ex.rows || (ex.parts && ex.parts.length) || (ex.blocks && ex.blocks.length)));
@@ -550,7 +572,7 @@
       }
       var ref = L(r.reference); var prov = L(r.provoked);
       feed('<div class="cm-ref"><div class="cm-ref-h">' + W_("refSol") + '</div><div class="cm-ref-body">' + md(ref || '') + '</div>' +
-           (trapText(prov) ? '<div class="cm-trap"><b>' + W_("trap") + ':</b> ' + md(trapText(prov)) + '</div>' : '') + '</div>');
+           (trapShown(prov, ok) ? '<div class="cm-trap"><b>' + W_("trap") + ':</b> ' + md(trapText(prov)) + '</div>' : '') + '</div>');
       saveDone(d.id);
       // Record this rep in the shared Progress tracker (Drills completed + "Case Math" by-type + streak, synced to cloud).
       try { if (typeof recordSession === 'function') recordSession('drill', cfg().rec); } catch (e) {}
@@ -570,7 +592,7 @@
     feed('<div class="cm-fb ' + (ok ? 'ok' : 'no') + '">' + (ok ? '<b>' + W_("pass") + '</b> ' : '<b>' + W_("fail") + '</b> ') + esc2(r.coaching || '') + '</div>');
     var ref = L(r.reference), prov = L(r.provoked);
     if (ref) feed('<div class="cm-ref"><div class="cm-ref-h">' + W_("refAns") + '</div><div class="cm-ref-body">' + md(ref) + '</div>' +
-                  (trapText(prov) ? '<div class="cm-trap"><b>' + W_("trap") + ':</b> ' + md(trapText(prov)) + '</div>' : '') + '</div>');
+                  (trapShown(prov, ok) ? '<div class="cm-trap"><b>' + W_("trap") + ':</b> ' + md(trapText(prov)) + '</div>' : '') + '</div>');
     saveDone(d.id);
     try { if (typeof recordSession === 'function') recordSession('drill', cfg().rec); } catch (e) {}
     nextButton();
