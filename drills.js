@@ -1,931 +1,623 @@
-// CasEdge — Case Math Drills server endpoint. Owns the curated drill library
-// AND all grading, so answer keys / checklists / reference solutions never reach
-// the browser. Mirrors api/casey.js security: locked CORS, Supabase bearer
-// verification, shared per-user rate limit, body limits, upstream timeout,
-// no error leakage.
-//
-// Actions:
-//   next  → {doneIds:[...]} → next unsanitized-of-keys drill in sequence
-//           {id,title,difficulty,type,focus,time,prompt,exhibit,step_prompts,index,total}
-//   grade → {drillId, answer} → {pass, coaching, reference:{en,ru}, provoked:{en,ru}}
+/* CasEdge — Case Math Drills (curated). Self-injecting, self-contained.
+   Thin client: the drill library, answer keys, checklists and reference
+   solutions live server-side in /api/drills. The browser receives only the
+   prompt + exhibit + step prompts, and per graded answer a verdict + the
+   bilingual reference. Bilingual EN/RU via state.aiLang. */
+(function () {
+  "use strict";
 
-const { verifyUserCached, rateLimitedScoped } = require('./_auth.js');
-const { checkAndConsume, refusalMessage, refusalLang } = require('./_entitlements.js');
-const DRILLS_CM = require('./_drills_cm.json');
-const DRILLS_MS = require('./_drills_ms.json');
-const DRILLS_ST = require('./_drills_st.json');
-const DRILLS_BR = require('./_drills_br.json');
-const DRILLS_CI = require('./_drills_ci.json');
-const DRILLS_SY = require('./_drills_sy.json');
-// Curated libraries share one endpoint. Client passes set:'ms' (Market Sizing),
-// set:'st' (Structuring), set:'br' (Brainstorm), else Case Math. IDs are
-// disjoint (CM-*/MS-*/ST-*/BR-*).
-// An unknown `set` used to fall through to Case Math silently: a typo in the
-// client, or a sixth type shipped before the server knew about it, would serve
-// CM drills under a Structuring label and the candidate would never know why.
-// Unknown now returns null and the handler answers with an error.
-// Null-prototype map on purpose: a plain object literal would answer to
-// `set:'toString'` or `set:'__proto__'` with something inherited from
-// Object.prototype — truthy, not a function, 500 on the endpoint.
-const DRILL_SETS = Object.assign(Object.create(null), {
-  cm: () => DRILLS_CM, ms: () => DRILLS_MS, st: () => DRILLS_ST, br: () => DRILLS_BR, ci: () => DRILLS_CI,
-  sy: () => DRILLS_SY
-});
-function libData(body) {
-  const s = (body && body.set) || 'cm';
-  const get = typeof s === 'string' ? DRILL_SETS[s] : null;
-  if (typeof get !== 'function') { console.error('drills: unknown set', JSON.stringify(s).slice(0, 40)); return null; }
-  return get();
-}
+  /* ---------- inject CSS + screen ---------- */
+  var CSS = `
+/* 2026-07-27: --ink — цвет ТЕКСТА НА СВЕТЛОМ. В тёмной теме (она по умолчанию)
+   --ink = #141413, а фон экрана --surface-dark = #181715: чёрным по чёрному.
+   Экран строился под светлую тему. Текст на тёмных поверхностях берёт --on-dark. */
+#screen-cmdrill { position:fixed; inset:0; z-index:50; height:100vh; height:100dvh; overflow:hidden; background:var(--surface-dark); display:none; flex-direction:column; }
+#screen-cmdrill.active { display:flex; }
+#cmFeed { flex:1; overflow-y:auto; padding:22px 16px 28px; display:flex; flex-direction:column; }
+/* A drill is not a chat. The feed used to stretch full height with the card
+   pinned top and the answer box pinned bottom, leaving ~150px of dead space
+   between the question and where you answer it. margin auto centres the
+   card while it is shorter than the feed and falls back to normal top-anchored
+   scrolling the moment the content grows past it. */
+.cm-wrap { margin:auto auto; width:100%; }
+.cm-wrap { max-width:760px; }
+.cm-top { display:flex; align-items:center; gap:12px; padding:12px 16px; border-bottom:1px solid var(--sv-line,rgba(31,41,55,.12)); background:var(--surface-dark-elevated,#fbf8f2); }
+.cm-top .cm-x { background:none; border:none; font-size:22px; line-height:1; color:var(--on-dark-soft,#5b6472); cursor:pointer; }
+.cm-top .cm-lbl { font-size:13px; font-weight:700; color:var(--on-dark,#faf9f5); }
+.cm-top .cm-prog { margin-left:14px; font-size:12px; color:var(--on-dark-soft,#9db3ad); }
+/* SOFT TIMER: counts up, shows the drill's own budget, and never interrupts.
+   The chip promised "6 MIN" with no clock at all — pressure is half of what an
+   interview tests, but a timer that cuts you off mid-answer just teaches you to
+   abandon drills. It turns amber past budget and the elapsed time is sent with
+   the answer, so the telemetry can eventually say "passes, but never in time". */
+.cm-timer { font-size:12px; font-variant-numeric:tabular-nums; color:var(--on-dark-soft,#9db3ad); margin-left:14px; }
+.cm-timer.over { color:#c98a3a; font-weight:700; }
+.cm-card { background:var(--surface-dark-elevated,#16241f); border:1px solid var(--sv-line,rgba(255,255,255,.08)); border-radius:14px; padding:18px; margin:0 0 16px; }
+.cm-meta { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px; }
+.cm-tag { font-size:12px; font-weight:600; letter-spacing:.01em; padding:4px 11px; border-radius:999px; background:rgba(93,184,166,.12); color:var(--coral,#5db8a6); }
+.cm-tag.trap { background:rgba(232,124,124,.12); color:#ef9a9a; } .cm-tag.clean { background:rgba(95,191,107,.14); color:#7fd68e; }
+.cm-title { font-size:18px; font-weight:800; color:var(--on-dark,#faf9f5); margin:0 0 10px; }
+.cm-prompt { font-size:15px; line-height:1.65; color:var(--on-dark,#faf9f5); } .cm-prompt b { color:var(--on-dark,#faf9f5); }
+.cm-exh { margin:16px 0 6px; }
+.cm-exh-name { font-size:12.5px; font-weight:600; letter-spacing:.01em; color:var(--coral,#5db8a6); margin-bottom:8px; }
+.cm-tbl { width:100%; border-collapse:collapse; font-size:13.5px; }
+.cm-tbl th, .cm-tbl td { padding:8px 10px; border-bottom:1px solid var(--sv-line,rgba(31,41,55,.10)); color:var(--on-dark,#faf9f5); text-align:left; }
+.cm-tbl th { font-weight:600; color:var(--on-dark-soft,#6b7c76); font-size:12.5px; letter-spacing:.01em; }
+.cm-tbl td:not(:first-child), .cm-tbl th:not(:first-child) { text-align:right; font-variant-numeric:tabular-nums; }
+.cm-steps { margin:14px 0 0; padding:12px 14px; background:rgba(93,184,166,.06); border-radius:10px; }
+.cm-steps .cm-sh { font-size:12.5px; font-weight:600; letter-spacing:.01em; color:var(--on-dark-soft,#6b7c76); margin-bottom:6px; }
+.cm-steps ol { margin:0; padding-left:20px; } .cm-steps li { font-size:14px; line-height:1.55; color:var(--on-dark,#faf9f5); margin:2px 0; }
+#cmInput { border-top:1px solid var(--sv-line,rgba(31,41,55,.12)); background:var(--surface-dark-elevated,#fbf8f2); padding:14px 16px; }
+.cm-iz { max-width:760px; margin:0 auto; }
+.cm-ta { width:100%; min-height:88px; max-height:44vh; resize:vertical; overflow-y:auto; background:var(--surface-dark-soft,#efe9dd); border:1.5px solid var(--sv-line,rgba(31,41,55,.16)); border-radius:12px; padding:12px 14px; color:var(--on-dark,#faf9f5); font-size:15px; font-family:inherit; line-height:1.5; box-sizing:border-box; }
+.cm-ta:focus { outline:none; border-color:var(--coral,#5db8a6); }
+.cm-row { display:flex; justify-content:space-between; align-items:center; margin-top:10px; gap:10px; }
+.cm-hint { font-size:12.5px; color:var(--on-dark-soft,#9db3ad); }
+.cm-btn { background:var(--coral,#5db8a6); color:#04201b; border:none; border-radius:11px; padding:12px 24px; font-size:14.5px; font-weight:700; cursor:pointer; }
+.cm-btn:disabled { opacity:.45; cursor:default; } .cm-btn.ghost { background:transparent; color:var(--coral,#5db8a6); border:1.5px solid rgba(93,184,166,.45); }
+.cm-fb { border-radius:12px; padding:13px 15px; margin:0 0 16px; font-size:14px; line-height:1.6; }
+.cm-fb.ok { background:rgba(95,191,107,.10); border:1px solid rgba(95,191,107,.4); color:#7fd68e; }
+.cm-fb.no { background:rgba(232,124,124,.10); border:1px solid rgba(232,124,124,.4); color:#ef9a9a; }
+.cm-fb b { color:var(--on-dark,#faf9f5); }
+/* 21.09.2026: цвета вердикта подбирались под тёмную тему; на светлой «Не засчитано»
+   шло бледно-розовым по розовому и почти не читалось (замер на проде). */
+html[data-theme="light"] .cm-fb.ok, [data-theme="light"] .cm-fb.ok { color:#2f6f3a; }
+html[data-theme="light"] .cm-fb.no, [data-theme="light"] .cm-fb.no { color:#9e3a33; }
+.cm-ref { background:var(--surface-dark-elevated,#16241f); border:1px solid var(--sv-line,rgba(31,41,55,.10)); border-radius:12px; padding:15px 16px; margin:0 0 16px; }
+.cm-ref-h { font-size:12.5px; font-weight:600; letter-spacing:.01em; color:var(--coral,#5db8a6); margin-bottom:8px; }
+.cm-ref-body { font-size:13.8px; line-height:1.65; color:var(--on-dark,#faf9f5); } .cm-ref-body b { color:var(--on-dark,#faf9f5); }
+.cm-ref-body p { margin:0 0 7px; } .cm-ref-body p:last-child { margin:0; }
+/* Таблица разбора. Раньше её не было вовсе: авторы писали таблицу markdown,
+   а рендер печатал пайпы текстом. Стиль тихий - разбор читают, а не любуются. */
+.cm-tbl { width:100%; border-collapse:collapse; margin:4px 0 8px; font-size:13.2px; }
+.cm-tbl th { text-align:left; font-weight:600; color:var(--on-dark-soft,#b8c4bf); padding:5px 10px 5px 0; border-bottom:1px solid var(--sv-line,rgba(255,255,255,.12)); white-space:nowrap; }
+.cm-tbl td { padding:6px 10px 6px 0; border-bottom:1px solid var(--sv-line,rgba(255,255,255,.06)); vertical-align:top; color:var(--on-dark,#faf9f5); }
+.cm-tbl tr:last-child td { border-bottom:0; }
+.cm-tbl td:first-child { color:var(--on-dark-soft,#b8c4bf); white-space:nowrap; width:1%; }
+.cm-exh-sub { font-size:12.5px; font-weight:700; color:var(--on-dark,#faf9f5); margin:12px 0 6px; }
+.cm-exh-sub:first-child { margin-top:0; }
+/* ASCII-графики CI нарисованы пробелами: любой перенос ломает картинку.
+   Моноширинный шрифт + горизонтальный скролл вместо переноса. */
+.cm-ascii { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:12px; line-height:1.45;
+  white-space:pre; overflow-x:auto; margin:8px 0; padding:10px 12px; border-radius:8px;
+  background:rgba(93,184,166,.06); color:var(--on-dark,#faf9f5); }
+.cm-exh-note { font-size:13px; line-height:1.6; color:var(--on-dark,#faf9f5); margin:8px 0; }
+/* Ожидание грейдера - самое долгое место дрилла. Три точки молчат; нитка идёт
+   и называет этап. Подписи по тому, что грейдер делает по порядку. */
+.cm-thread { display:inline-flex; align-items:center; gap:11px; }
+.cm-thread svg { width:44px; height:23px; flex-shrink:0; overflow:visible; }
+.cm-thread path { fill:none; stroke:var(--coral,#5db8a6); stroke-width:2.6; stroke-linecap:round; stroke-linejoin:round;
+  stroke-dasharray:26 100; animation:cmwrite 1.9s cubic-bezier(.5,.05,.5,.95) infinite; }
+.cm-thread path.ghost { opacity:.16; animation:none; stroke-dasharray:none; }
+@keyframes cmwrite { 0%{stroke-dashoffset:100;} 100%{stroke-dashoffset:-26;} }
+.cm-thread-l span { display:inline-block; animation:cmfade .5s ease both; }
+@keyframes cmfade { from{opacity:0;transform:translateY(3px);} to{opacity:1;transform:none;} }
+.cm-trap { font-size:12.5px; color:var(--on-dark-soft,#8fa39d); font-style:italic; margin-top:10px; }
+`;
+  var SCREEN = `<div class="cm-top">
+    <button class="cm-x" onclick="CaseMathDrills.exit()" title="Exit">&times;</button>
+    <span class="cm-lbl" id="cmLbl">Case Math · Drills</span>
+    <span style="flex:1"></span>
+    <span class="cm-timer" id="cmTimer"></span>
+    <span class="cm-prog" id="cmProg"></span>
+  </div>
+  <div id="cmFeed"><div class="cm-wrap" id="cmWrap"></div></div>
+  <div id="cmInput" style="display:none"><div class="cm-iz" id="cmIz"></div></div>`;
 
-const FALLBACK_ORIGIN = 'https://cas-edge-final.vercel.app';
-const GRADER_MODEL = 'claude-sonnet-5';
-const MAX_BODY_BYTES = 200 * 1024;
-const RATE_LIMIT = 40;
-const RATE_WINDOW_MS = 60 * 1000;
-const AUTH_TIMEOUT_MS = 8 * 1000;
-
-/* ───────────────────────── telemetry ─────────────────────────────────────── */
-// One-line JSON to stdout → Vercel runtime logs. Server-side ONLY: nothing here
-// is ever added to a response body, so the candidate never sees tier/echelon.
-// Outcomes are logged SEPARATELY and must never be collapsed:
-//   grade_pass     — graded, candidate met the checklist
-//   grade_fail     — graded, candidate missed it        (a real signal about the drill)
-//   grade_unscored — grader hiccup, no verdict rendered (a signal about US, not them)
-// Mixing unscored into fail is what makes a drill look "too hard" when the
-// grader was simply failing to return JSON.
-const crypto = require('crypto');
-function userTag(userId) {
-  try { return crypto.createHash('sha256').update(String(userId)).digest('hex').slice(0, 12); }
-  catch (e) { return 'anon'; }
-}
-function logGrade(ev, d, userId, t0, extra) {
-  try {
-    console.log('CASEDGE_TELEMETRY ' + JSON.stringify({
-      ev: ev,                                  // grade_pass | grade_fail | grade_unscored | cull_reveal
-      set: (d && d.id || '').split('-')[0].toLowerCase() || null,
-      drill: d && d.id || null,
-      type: d && d.type || null,
-      difficulty: d && d.difficulty || null,   // server-side label; hidden from the candidate
-      echelon: !!(d && d.echelon),             // server-side tier flag; hidden from the candidate
-      user: userTag(userId),
-      ms: t0 ? (Date.now() - t0) : null,          // grader latency
-      spent_ms: Number.isFinite(Number(extra && extra.spent_ms)) ? Number(extra.spent_ms) : null,
-      ...(extra || {})
-    }));
-  } catch (e) { /* telemetry must never break a grade */ }
-}
-
-// FEEDBACK LANGUAGE (2026-07-25): the three grader prompts hardcode "coaching IN
-// ENGLISH". The product lets a candidate run the case in English and take the
-// debrief in Russian (fbLang) — understanding your own mistake is easier in your
-// own language. This directive overrides the prompt's default for that field only;
-// the VERDICT and the rubric are language-independent.
-function fbDirective(fbLang) {
-  return fbLang === 'ru'
-    ? '\n\nFEEDBACK LANGUAGE — OVERRIDES THE FORMAT LINE BELOW/ABOVE: write the `coaching` field in RUSSIAN. Keep every number, unit and proper name exactly as given. Grade by the same standard — the language of the note must not soften the verdict.'
-    : '';
-}
-
-/* ───────────────────────── grader system prompt ──────────────────────────── */
-const DRILL_GRADER_SYSTEM = `You are a strict but fair BCG case-math drill grader. You are given a drill PROMPT, its EXHIBIT data, a PASS CHECKLIST (the exact criteria that must all be met), a reference SOLUTION, and the candidate's ANSWER. Decide pass/fail against the checklist and give 1-2 sentences of coaching. Return ONLY JSON, no preamble, no markdown.
-
-RULES:
-1. Pass ONLY if every checklist item is satisfied by the candidate's answer (meaning, not exact wording). Case-math is about the right number AND the right reasoning. An item the checklist itself marks as optional - a clause opening "Bonus", "Bonus, not required", "not required for credit" or the same words in Russian - is NOT part of the pass bar. Credit it as a strength when the candidate reaches it; never fail an answer for its absence. Every item the checklist does not so mark stays mandatory.
-2. Numbers: accept the candidate's number if it matches the checklist target within the stated tolerance (exact unless the checklist says +/-x). Numbers spoken in any form count; ignore currency symbols and thousands separators.
-3. This is a TRAP drill family: the checklist usually distinguishes the naive answer from the correct one. If the candidate gives the naive number as their answer, that is a FAIL even if the arithmetic is internally correct.
-4. For CLEAN drills the correct move is to confirm no error / no flip — inventing a reversal that is not in the data is a FAIL.
-5. Do NOT penalize grammar, spelling, or brevity. Penalize only missing or wrong required content.
-
-RESPONSE FORMAT (strict JSON): {"pass":true,"coaching":"1-2 sentences IN ENGLISH: what was right/missing and the one thing to fix. Specific, cite the key number."}\n\nVOICE (2026-08-28, dev): the candidate never sees the trainer's machinery. In the coaching field do NOT name internal register codes (COVER, DECOY, ME, ORDER, DRIVE, LOAD, DEAD, CULL, s0, build), the checklist's own codes (GATE, P1, P2, P3, P4, S:), or the taxonomy labels Clean and Trap, and do NOT use the words slot / drill / exercise / checklist / register, or any field name of this engine. Say WHAT was missing in the language of the case itself. NEVER name or hint at the source of the drill — no casebook, school, publication, page or section reference — even if the answer key you were given contains one; the candidate must never learn where the material comes from.`;
-
-// Structuring (ST) is qualitative — there is no single number. It is graded on
-// five registers: COVER (required branches, judged by MEANING not label), DECOY
-// (reflexive branches that must NOT be developed first), ME (branch pairs that
-// cannot stand together), DRIVE (what to measure), ORDER (defensible starting
-// branch). There is NO canonical tree — many MECE trees are valid; the only
-// objective failure is a MISSING required branch (per the casebook grounding).
-const ST_GRADER_SYSTEM = `You are a strict but fair MBB structuring-drill grader. The candidate was given an anchor question and asked to build a MECE issue tree — NOT to solve the case. You are given the grading REGISTERS (the answer key) and the candidate's TREE. Return ONLY JSON, no preamble, no markdown.
-
-HOW TO GRADE (in priority order):
-1. COVER is the core. Every required branch must be present in the candidate's tree BY MEANING — accept synonyms and rephrasings, never demand the exact label. A tree that MISSES a required branch FAILS, no matter how clean the rest is. This is the one objective failure mode.
-2. DECOY: mentioning a decoy branch is NOT penalised. It fails ORDER only if the candidate makes a decoy their FIRST branch to develop / their lead hypothesis.
-3. ME: the matrix flags pairs that must not be merged. FAIL only on the status the library actually writes as hard: **direct violation**. Every other status it writes — partial, absorption, conflation risk, duplicate, shared, opposition — is a WARNING, never a fail. The pair may be decoy-to-branch or branch-to-branch; in this library the hard marks sit on decoy-to-branch. Do not invent a status: if the pair carries no status you were given, it is not a fail.
-4. ORDER: a defensible start is any branch justified by a real criterion (size of effect, speed to check, cost of data). Starting on a decoy is an ORDER defect. Not stating any criterion is a coaching note, not a fail.
-5. DRIVE: for each branch the key names WHAT WOULD BE MEASURED under it. A branch stated as a heading with nothing measurable under it is a coaching note — name the metric the candidate should have put there. DRIVE never decides pass/fail on its own.
-6. Do NOT reward tree LENGTH or generic templates (e.g. a blank "profitability = revenue − cost" with no tailoring). Reward branches tailored to THIS company and question.
-
-PASS = all COVER branches present (by meaning) AND no decoy developed first AND no hard ME violation.
-
-RESPONSE FORMAT (strict JSON): {"pass":true,"coaching":"1-2 sentences IN ENGLISH: name which required branch (if any) was missed, or the decoy/ME slip, and the single most valuable fix. Be specific to this case."}\n\nVOICE (2026-08-28, dev): the candidate never sees the trainer's machinery. In the coaching field do NOT name internal register codes (COVER, DECOY, ME, ORDER, DRIVE, LOAD, DEAD, CULL, s0, build), the checklist's own codes (GATE, P1, P2, P3, P4, S:), or the taxonomy labels Clean and Trap, and do NOT use the words slot / drill / exercise / checklist / register, or any field name of this engine. Say WHAT was missing in the language of the case itself. NEVER name or hint at the source of the drill — no casebook, school, publication, page or section reference — even if the answer key you were given contains one; the candidate must never learn where the material comes from.`;
-
-// Brainstorm (BR) — creativity/idea-generation. The candidate produces a flat list
-// of options for a case question. Graded on registers, NOT on volume:
-//   LOAD  = the one load-bearing idea; if it is missing the slot FAILS regardless.
-//   COVER = required axes (2–4); fewer than 2 axes covered = FAIL.
-//   DEAD  = reflexive branches the slot's facts kill; naming one FIRST or SECOND
-//           without dismissing it = an ORDER defect (FAIL). Naming it later, or
-//           naming + dismissing it with a reason, is fine.
-//   GATE-3 = fewer than 3 fact-linked ideas = FAIL.
-// The answer key (LOAD/COVER/DEAD, and the CULL kill-set) is written in RUSSIAN;
-// the candidate answers in ENGLISH. MATCH BY MEANING across languages — never
-// require the Russian wording. Volume never earns credit.
-// Two-move CULL slots: after the idea list, the candidate is shown the client
-// team's idea list + a NEW FACT and must name exactly which team ideas the fact
-// KILLS, with a reason. The kill-set must match the reference EXACTLY (an extra
-// kill fails as hard as a miss); each kill needs a correct, distinct reason.
-const BR_GRADER_SYSTEM = `You are a strict but fair MBB brainstorm/creativity-drill grader. You receive the case QUESTION, the FACTS given to the candidate, the grading REGISTERS (answer key: LOAD, COVER, DEAD — written in Russian), and the candidate's IDEA LIST (written in English). If a CULL block is present you also receive the client team's ideas, the new fact, the reference KILL-SET, and the candidate's CULL answer. Return ONLY JSON, no preamble, no markdown.
-
-MATCH BY MEANING across languages: the key and the candidate's answer may be in DIFFERENT languages, in either direction — accept any idea/branch that means the same thing, and never demand the wording of either side.
-
-GRADE IN THIS ORDER (all applicable gates must pass):
-1. GATE-3: at least 3 ideas that are genuinely tied to the slot's facts. Fewer → FAIL.
-2. LOAD (gate): the load-bearing idea must be present by meaning. Missing → FAIL no matter how long the list.
-3. DEAD-ORDER: if the candidate leads with a DEAD branch (their 1st or 2nd idea) and does NOT dismiss it, that is an ORDER defect → FAIL. A DEAD branch named later, or named and explicitly dismissed with a valid reason, is NOT a defect.
-4. COVER: at least 2 of the required axes must be covered by meaning. Fewer → FAIL.
-5. VOLUME EARNS NOTHING: do not reward a longer list. Six ideas and three ideas with the same coverage and LOAD named score identically.
-5b. FIGURES: if an idea rests on a number that contradicts the FACTS — wrong by an order of magnitude, a share above 100%, a quantity larger than the stock it is drawn from — name it in the coaching. This is NOT a gate: this drill grades the generation of ideas, not arithmetic. Do not fail an otherwise covering list for it.
-6. CULL (only if a CULL block is present): the candidate must name EXACTLY the reference kill-set (by meaning of which team ideas die), each with a correct and distinct reason. An extra kill fails as hard as a miss; a wrong reason on any kill = FAIL.
-
-PASS = every applicable gate passes.
-
-RESPONSE FORMAT (strict JSON): {"pass":true,"coaching":"1-2 sentences IN ENGLISH: name the missing LOAD / uncovered axis / DEAD-order slip / CULL miss, and the single most valuable fix. Be specific to this case.","model":"1-2 sentences IN ENGLISH stating the load-bearing idea and the axes a strong answer covers — the takeaway. Never output Russian."}\n\nVOICE (2026-08-28, dev): the candidate never sees the trainer's machinery. In the coaching field do NOT name internal register codes (COVER, DECOY, ME, ORDER, DRIVE, LOAD, DEAD, CULL, s0, build), the checklist's own codes (GATE, P1, P2, P3, P4, S:), or the taxonomy labels Clean and Trap, and do NOT use the words slot / drill / exercise / checklist / register, or any field name of this engine. Say WHAT was missing in the language of the case itself. NEVER name or hint at the source of the drill — no casebook, school, publication, page or section reference — even if the answer key you were given contains one; the candidate must never learn where the material comes from.`;
-
-/* ───────────────────────── library ───────────────────────────────────────── */
-let _byId = null;
-function drillById(id) {
-  // one combined map across all libraries — ids are disjoint (CM-*/MS-*/ST-*)
-  if (!_byId) { _byId = new Map(); for (const src of [DRILLS_CM, DRILLS_MS, DRILLS_ST, DRILLS_BR, DRILLS_CI, DRILLS_SY]) for (const d of (src.drills || [])) _byId.set(d.id, d); }
-  return _byId.get(id);
-}
-
-// Client-safe view: prompt / exhibit / step prompts / meta — NO checklist,
-// reference, provoked, key registers, or step answers.
-// ST drills: the `key` registers (COVER/ME/DRIVE/ORDER/DECOY), anchor_metric and
-// reference are server-only. For E-after drills the exhibit itself is WITHHELD
-// until the candidate has submitted a tree (revealed=true) — the whole point is
-// that the data breaks the framework they already built.
-/* 06.09.2026, dev. ЯЗЫК САМОГО ВОПРОСА.
-   Кейсы с круга 72 ведутся на языке кандидата (ось aiLang). У дриллов такой
-   оси не было вовсе: `reference` и `checklist` парные {en,ru} и идут по fbLang,
-   а САМ ВОПРОС — простые строки, всегда английские. Переводить их было НЕКУДА:
-   поле с русским текстом никто бы не прочитал.
-   Контракт: у любого видимого поля может появиться близнец с суффиксом `_ru`
-   (`title_ru`, `prompt_ru`, `facts_ru`, `exhibit_ru`, `step_prompts_ru`,
-   `company_ru`, `industry_ru`). При lang==='ru' берётся близнец, если он
-   непустой; иначе — базовое поле. Английский путь не меняется ни на байт,
-   слот без перевода остаётся играбельным, и перевод включается послотно. */
-function ruField(d, field, lang) {
-  if (lang === 'ru') {
-    const v = d[field + '_ru'];
-    const пусто = v === undefined || v === null || v === '' ||
-                  (Array.isArray(v) && !v.length) ||
-                  (v && typeof v === 'object' && !Array.isArray(v) && !Object.keys(v).length);
-    if (!пусто) return v;
+  function inject() {
+    if (!document.getElementById('screen-cmdrill')) {
+      var st = document.createElement('style'); st.textContent = CSS; document.head.appendChild(st);
+      var d = document.createElement('div'); d.id = 'screen-cmdrill'; d.className = 'screen';
+      d.setAttribute('data-screen-label', 'Case Math Drills'); d.innerHTML = SCREEN;
+      document.body.appendChild(d);
+    }
   }
-  return d[field];
-}
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', inject); else inject();
 
-/* 21.09.2026, dev: см. refHouseStyle — служебное «(k=N estimate-anchors)» в условии шага MS. */
-function stepHouseStyle(arr) {
-  if (!Array.isArray(arr)) return arr;
-  return arr.map(x => typeof x !== 'string' ? x : x
-    .replace(/\(k=(\d+) estimate-anchors\)/g, '($1 anchors)')
-    .replace(/\(k=(\d+) (якоря|якорей) оценки\)/g, '($1 $2)'));
-}
-
-function sanitizeDrill(d, index, total, revealed, lang) {
-  // Brainstorm (BR): qualitative idea-generation. Client sees prompt + facts. The
-  // `key` (LOAD/COVER/DEAD/grader) is server-only. CULL slots are two-move: the
-  // client team's idea list + the new fact are WITHHELD until the candidate has
-  // submitted their own idea list (revealed only in the grade response). NO exhibits.
-  if (d.type === 'Brainstorm') {
-    return {
-      id: d.id, title: ruField(d, 'title', lang), type: d.type,   // difficulty (tier) withheld — see NO-SPOILER note below
-      company: ruField(d, 'company', lang) || null, industry: ruField(d, 'industry', lang) || null, time: d.time,
-      prompt: ruField(d, 'prompt', lang), facts: ruField(d, 'facts', lang) || [],
-      cull: !!d.cull,            // client shows a 2nd-move ("cull") screen when true
-      index: index, total: total
+  /* ---------- helpers ---------- */
+  function E(id) { return document.getElementById(id); }
+  function esc2(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  /* 28.08.2026, по замеру цеха дриллов. Три места рисовали разметку своей
+     копией одной и той же строки, и ни одно не знало одиночного *…*: кандидат
+     читал звёздочки в reference (205 кусков в 61 слоте), в provoked (28 в 14)
+     и в текстовых строках экзибита. Разметка теперь в одном помощнике.
+     Курсив нарочно узкий: открывающая звёздочка не может стоять после буквы
+     или цифры, а содержимое не может начинаться или кончаться пробелом -
+     иначе «3*4*5» и маркер сноски «Revenue*» стали бы курсивом. */
+  function inl(s) {
+    return esc2(s)
+      .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
+      .replace(/(^|[^*\w])\*([^\s*][^*\n]*?[^\s*]|[^\s*])\*(?![*\w])/g, '$1<i>$2</i>')
+      .replace(/`(.+?)`/g, '<code>$1</code>');
+  }
+  // Inline markdown for list items — same escaping as md(), but no <p> wrapper.
+  function mdi(s) { return inl(s); }
+  /* Разбор дрилла авторы пишут таблицей markdown, а md() таблиц не знал —
+     кандидат читал на экране «| поле | текст |» и строку из дефисов. Найдено
+     игрой, а не чтением: сыграл SY-001 на проде и увидел пайпы. Чиню здесь,
+     а не в телах: поле одно, тел сорок один, и в остальных пяти библиотеках
+     таблицы появятся ровно так же. */
+  function mdTable(block) {
+    var rows = block.split('\n').filter(function (r) { return r.trim().indexOf('|') === 0 || r.indexOf('|') >= 0; });
+    if (rows.length < 2) return null;
+    var isSep = function (r) { return /^\s*\|?[\s:|-]+\|[\s:|-]*$/.test(r) && r.indexOf('-') >= 0; };
+    if (!isSep(rows[1])) return null;
+    var cells = function (r) {
+      return r.replace(/^\s*\|/, '').replace(/\|\s*$/, '').split('|').map(function (c) { return c.trim(); });
     };
+    var head = cells(rows[0]);
+    var body = rows.slice(2).filter(function (r) { return r.indexOf('|') >= 0; }).map(cells);
+    var inline = inl;
+    var html = '<table class="cm-tbl"><thead><tr>' + head.map(function (h) { return '<th>' + inline(h) + '</th>'; }).join('') + '</tr></thead><tbody>';
+    body.forEach(function (r) { html += '<tr>' + r.map(function (c) { return '<td>' + inline(c) + '</td>'; }).join('') + '</tr>'; });
+    return html + '</tbody></table>';
   }
-  const isAfter = d.exhibit_mode === 'E-after';
-  const exhibit = (isAfter && !revealed) ? null : (ruField(d, 'exhibit', lang) || null);
-  // NO-SPOILER (2026-07-25): `difficulty` (tier) and `focus` are NOT sent. focus
-  // names the trap mechanism outright ("F05(A) PERPETUITY VS DECAY") and tier
-  // primes the candidate — both used to render as chips above the prompt. `type`
-  // still ships because the client branches on Structuring/Brainstorm, but it is
-  // no longer displayed.
-  // NO-SPOILER, second pass (2026-07-26): `type` on CM/MS carries the literal
-  // values 'Trap' / 'Clean'. Shipping it told the candidate, on every single
-  // slot, whether a trap is present at all — a bigger giveaway than the tier and
-  // focus chips already withheld above. The client only ever compares type
-  // against 'Structuring' and 'Brainstorm', so everything else goes out as a
-  // neutral branch token. The trim also kills stray markdown in the data
-  // ('**Clean**' in 5 CM slots), which would otherwise defeat any type match.
-  const branch = String(d.type || '').replace(/[*_`~]/g, '').trim() === 'Structuring'
-    ? 'Structuring' : 'Drill';
-  return {
-    id: d.id, title: ruField(d, 'title', lang), type: branch,
-    time: d.time,
-    prompt: ruField(d, 'prompt', lang),
-    exhibit: exhibit,
-    exhibit_mode: d.exhibit_mode || null,   // client gates the E-after flow on this
-    exhibit_withheld: (isAfter && !revealed) || false,
-    step_prompts: stepHouseStyle(ruField(d, 'step_prompts', lang) || []),
-    index: index, total: total
+
+  /* 19.08.2026, куплено живым прогоном дрилла CI-001 на проде.
+     Поле `provoked` печаталось через esc2 - без markdown, тогда как соседний
+     `reference` в той же карточке идёт через md. Кандидат читал буквально
+     «Ловушка: = **D3** — считает 510/1,600…»: звёздочки на экране, а `D3` -
+     внутренняя метка реестра наивных ошибок, которая ему ничего не говорит.
+     Замер по шести библиотекам: 89 слотов из 302 печатали `**`, а 40 слотов CI
+     несли ТОЛЬКО метку («= **D2**.») и больше ничего - целая строка экрана,
+     не сообщавшая кандидату ни одного факта.
+     Метка снимается, остаток печатается разметкой; если после метки пусто -
+     строка не печатается вовсе. Тела дриллов при этом не трогаются. */
+  function trapText(prov) {
+    var t = String(prov == null ? '' : prov).trim();
+    t = t.replace(/^=\s*/, '').replace(/^\*\*[A-ZА-Я]?\d{1,2}\*\*\s*[—\-–:.]?\s*/, '');
+    return t.replace(/^\.\s*$/, '').trim();
+  }
+
+  /* 21.09.2026, dev, замер на проде (CI «Three Points of Share»): ответ засчитан,
+     а под ним — «Наивный ход: Ты прочитал рост доли как рост в деньгах». В 23
+     слотах (22 CI, 1 MS) поле написано во втором лице и после зачёта обвиняет
+     кандидата в том, чего он не делал. После зачёта такой текст не показываем;
+     после незачёта — как прежде. */
+  function trapShown(prov, ok) {
+    var t = trapText(prov);
+    if (!t) return false;
+    return !(ok && /^\s*(?:Ты|You)\b/.test(t));
+  }
+
+  function md(s) {
+    return String(s == null ? '' : s).split(/\n{2,}/).map(function (p) {
+      var t = mdTable(p);
+      if (t) return t;
+      var e = inl(p);
+      return '<p>' + e.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+  }
+  // Which language the FEEDBACK side speaks. The product has three independent
+  // axes — uiLang (chrome), aiLang (the case/drill itself), fbLang (feedback and
+  // debrief). Reference solutions and the "provoked" note are feedback, so they
+  // follow fbLang; 'same' means follow the case language. Before 2026-07-25 this
+  // read aiLang only, so "case in English, debrief in Russian" was silently ignored.
+  function fbCode() {
+    var st = (typeof state !== 'undefined' && state) ? state : {};
+    var fb = st.fbLang && st.fbLang !== 'same' ? st.fbLang : st.aiLang;
+    return fb === 'ru' ? 'ru' : 'en';
+  }
+  function L(v) {
+    if (v && typeof v === 'object' && ('en' in v || 'ru' in v)) {
+      var lang = fbCode();
+      // Fall through on an ABSENT *or EMPTY* side. An empty string used to count as
+      // a valid translation, so a one-sided payload ({en:'…', ru:''} — every BR
+      // model answer) rendered a headed block with no body, or no block at all.
+      var pick = v[lang];
+      if (typeof pick === 'string' ? pick.trim() : pick != null) return pick;
+      var alt = lang === 'ru' ? v.en : v.ru;
+      if (typeof alt === 'string' ? alt.trim() : alt != null) return alt;
+      return '';
+    }
+    return v;
+  }
+  /* ---------- soft timer ---------- */
+  var T = { t0: 0, budget: 0, tick: null };
+  function budgetMs(t) {                       // "6 min" / "7 MIN" → ms, 0 if absent
+    var m = /(\d+(?:\.\d+)?)/.exec(String(t || ''));
+    return m ? Math.round(parseFloat(m[1]) * 60000) : 0;
+  }
+  function fmt(ms) {
+    var s2 = Math.floor(ms / 1000);
+    return Math.floor(s2 / 60) + ':' + ('0' + (s2 % 60)).slice(-2);
+  }
+  function timerStart(timeStr) {
+    timerStop();
+    T.t0 = Date.now(); T.budget = budgetMs(timeStr);
+    var el = E('cmTimer'); if (!el) return;
+    function paint() {
+      var d = Date.now() - T.t0;
+      el.textContent = fmt(d) + (T.budget ? ' / ' + fmt(T.budget) : '');
+      el.classList.toggle('over', !!T.budget && d > T.budget);
+    }
+    paint(); T.tick = setInterval(paint, 1000);
+  }
+  function timerStop() { if (T.tick) { clearInterval(T.tick); T.tick = null; } }
+  function elapsedMs() { return T.t0 ? (Date.now() - T.t0) : null; }
+
+  // The answer box used to sit at a fixed 4 lines: a long answer scrolled inside
+  // it and you could no longer see the start of your own reasoning. You reread
+  // your answer before you hand it over — that is the point of the drill.
+  function autoGrow(el) {
+    if (!el) return;
+    function fit() { el.style.height = 'auto'; el.style.height = Math.max(88, el.scrollHeight + 2) + 'px'; }
+    el.addEventListener('input', fit); fit();
+  }
+
+  // Нитка ожидания. Первая подпись держится дольше: если ответ пришёл быстро,
+  // кандидат не увидит мельтешения. Последняя не сменяется - «почти готово»
+  // было бы обещанием, которого никто не давал.
+  function cmL(v){ var l=(typeof state!=='undefined'&&state&&state.uiLang==='ru')?'ru':'en'; return (v&&typeof v==='object')?(v[l]||v.en):v; }
+  /* Подписи интерфейса дрилла. Держим в одном месте и на двух языках: экран,
+     который кричит капслоком и говорит «Grader hiccup», читается как студенческий
+     проект, а не как тренажёр, за который платят. */
+  var W = {
+    given:    {ru:'Дано',                   en:'Given'},
+    solve:    {ru:'Что нужно посчитать',    en:'What to work out'},
+    exhibit:  {ru:'Экзибит',                en:'Exhibit'},
+    exLocked: {ru:'Экзибит пока закрыт',    en:'Exhibit withheld'},
+    exOpened: {ru:'Экзибит открыт',         en:'Exhibit released'},
+    exHint:   {ru:'Сначала построй дерево. Данные выдаются после того, как ты зафиксировал структуру — смысл в том, выдержит ли она встречу с ними.',
+               en:'Build your tree first. The data is released only after you commit — the point is whether your structure survives contact with it.'},
+    pass:     {ru:'Засчитано.',             en:'Passed.'},
+    fail:     {ru:'Не засчитано.',          en:'Not yet.'},
+    refSol:   {ru:'Эталонный разбор',       en:'Reference solution'},
+    refAns:   {ru:'Эталонный ответ',        en:'Model answer'},
+    /* 28.08.2026, по замеру цеха дриллов. Заголовок обещал ЛОВУШКУ, а поле
+       `provoked` несёт наивный ход, который слот провоцирует, - у пяти слотов
+       cm ловушки по построению нет, и заголовок там врал. Ловушка всегда
+       наивный ход, обратное неверно, поэтому честное имя - наивный ход. */
+    trap:     {ru:'Наивный ход',            en:'The naive move'},
+    newFact:  {ru:'Новый факт',             en:'A new fact'},
+    teamSaid: {ru:'Команда клиента предложила', en:'The client team proposed'},
+    twist:    {ru:'Теперь поворот.',        en:'Now the twist.'},
+    twistSub: {ru:'Появился новый факт. Твой список уже сдан — посмотрим, что из него уцелеет.',
+               en:'A new fact has landed. Your list is already in — let us see what survives it.'},
+    done:     {ru:'Библиотека пройдена',    en:'Library complete'},
+    doneSub:  {ru:'Ты прошёл все задачи этого набора. Начинаем сначала — вторым проходом задачи читаются иначе.',
+               en:'You have worked through every drill in this set. Starting again — a second pass reads differently.'},
+    conn:     {ru:'Не удалось связаться с сервером.', en:'Could not reach the server.'},
+    connSub:  {ru:'Попробуй ещё раз.',      en:'Please try again.'},
+    ungraded: {ru:'Оценка не сформировалась. Ответ сохранён — отправь его ещё раз.',
+               en:'The answer was not scored. Your text is kept — send it again.'},
+    submit:   {ru:'Ответить',               en:'Submit'},
+    nextD:    {ru:'Следующая задача',       en:'Next drill'},
+    skip:     {ru:'Пропустить',             en:'Skip'},
+    cullBtn:  {ru:'Ответить',               en:'Submit'},
+    loadFail: {ru:'Задача не загрузилась. Проверь, что ты вошёл в аккаунт, и попробуй снова.',
+               en:'The drill did not load. Check that you are signed in and try again.'},
+    grading:  {ru:'Оцениваю',               en:'Grading'}
   };
-}
+  function W_(k){ return cmL(W[k]); }
 
-/* 28.08.2026, по замеру цеха дриллов (круг 104). Сверка тел нашла 22 пары
-   полных близнецов и 71 пару частичных: кандидат, прошедший первый слот,
-   на втором не думает - он УЗНАЁТ. Полных пар цех переписывает; частичные
-   переписывать дорого и не всегда нужно - достаточно не давать их подряд.
+  var CM_STEPS = [[0,{ru:'читаю твой ответ',en:'reading your answer'}],[2800,{ru:'сверяю с эталоном',en:'comparing with the model answer'}],
+    [6500,{ru:'считаю, где потеряно',en:'working out where it was lost'}],[11000,{ru:'пишу разбор',en:'writing the debrief'}]];
+  var _cmT = null;
+  function threadHTML(first) {
+    return '<span class="cm-thread"><svg viewBox="0 0 46 24"><path class="ghost" pathLength="100" d="M2 15 C5 5, 13 4, 14 12 C15 20, 8 21, 10 12 C12 4, 20 3, 21 12 C22 20, 15 21, 17 12 C19 4, 27 3, 28 12 C29 20, 22 21, 24 12 C26 5, 34 6, 38 13 C40 17, 42 18, 44 17"/><path pathLength="100" d="M2 15 C5 5, 13 4, 14 12 C15 20, 8 21, 10 12 C12 4, 20 3, 21 12 C22 20, 15 21, 17 12 C19 4, 27 3, 28 12 C29 20, 22 21, 24 12 C26 5, 34 6, 38 13 C40 17, 42 18, 44 17"/></svg>' +
+           '<span class="cm-hint cm-thread-l" id="cmThreadL"><span>' + first + '</span></span></span>';
+  }
+  function threadRun(steps) {
+    if (_cmT) { clearTimeout(_cmT); _cmT = null; }
+    var t0 = Date.now();
+    (function paint() {
+      var l = E('cmThreadL'); if (!l) return;
+      var gone = Date.now() - t0, cur = steps[0], next = null;
+      for (var i = 0; i < steps.length; i++) {
+        if (gone >= steps[i][0]) cur = steps[i]; else { next = steps[i]; break; }
+      }
+      if (l.getAttribute('data-at') !== String(cur[0])) {
+        l.setAttribute('data-at', String(cur[0]));
+        l.innerHTML = '<span>' + cmL(cur[1]) + '</span>';
+      }
+      if (next) _cmT = setTimeout(paint, next[0] - gone);
+    })();
+  }
+  function threadStop() { if (_cmT) { clearTimeout(_cmT); _cmT = null; } }
 
-   Контракт: у ОДНОГО слота пары стоит `twin_of: "<id второго>"`. Пока второй
-   слот пройден и библиотека не прокручена заново, первый не выдаётся.
-   Правило одностороннее по данным, но двустороннее по действию: спрятать
-   достаточно одного из пары, чтобы они не встретились в одном проходе.
+  function scrollFeed() { var f = E('cmFeed'); if (f) setTimeout(function () { f.scrollTop = f.scrollHeight; }, 40); }
 
-   ПРЕДОХРАНИТЕЛЬ: если близнецы съели ВЕСЬ остаток, выдаём как раньше.
-   Пустой экран хуже знакомого слота, и «библиотека кончилась» здесь было бы
-   ложью - слоты есть. */
-function nextDrill(doneIds, data, lang) {
-  const done = new Set(Array.isArray(doneIds) ? doneIds : []);
-  const list = (data || DRILLS_CM).drills || [];
-  /* 28.08.2026, круг 105 цеха дриллов. Одна ссылка на слот покрывает одно
-     ребро, а в плотной группе (пять слотов br, девять пар) рёбер больше,
-     чем слотов: четыре пары оставались открытыми. `twin_of` принимает
-     СПИСОК - и класс закрывается целиком, а не на эти четыре пары. */
-  const twinsOf = d => {
-    const t = d && d.twin_of;
-    return t == null ? [] : (Array.isArray(t) ? t : [t]);
+  function freshToken() {
+    if (typeof sb === 'undefined' || !sb) return Promise.resolve(null);
+    return sb.auth.getSession().then(function (r) {
+      var s = r && r.data && r.data.session;
+      if (s && s.expires_at && (s.expires_at * 1000 - Date.now() < 60000)) return sb.auth.refreshSession().then(function (rr) { return (rr && rr.data && rr.data.session) || s; });
+      return s;
+    }).then(function (s) { return s ? s.access_token : null; }).catch(function () { return null; });
+  }
+  function api(payload) {
+    return freshToken().then(function (token) {
+      var headers = { 'Content-Type': 'application/json' };
+      if (token) headers['Authorization'] = 'Bearer ' + token;
+      // uiLang едет на сервер ради одного экрана - отказа по исчерпанному плану.
+      // Источник один, он в index.html; здесь только пересылка.
+      var ui = (typeof window.caseedgeUiLang === 'function') ? window.caseedgeUiLang() : 'en';
+      /* 06.09.2026, dev. Ось языка САМОГО вопроса. До сегодня клиент её не слал
+         вовсе, и сервер отдавал вопрос всегда по-английски — переводить дриллы
+         было некуда. Источник тот же, что у кейсов: state.aiLang. */
+      var st = (typeof state !== 'undefined' && state) ? state : {};
+      var ai = st.aiLang === 'ru' ? 'ru' : 'en';
+      return fetch('/api/drills', { method: 'POST', headers: headers, body: JSON.stringify(Object.assign({}, payload, { uiLang: ui, aiLang: ai })) });
+    }).then(function (r) { return r.json().catch(function () { return {}; }); });
+  }
+
+  // Cells carry the same inline markup as prose: [BOLD] marks the load-bearing
+  // number. Rendering cells with esc2() alone printed `**1,600**` literally to
+  // the candidate — 179 cells across ST and CI. mdi() escapes first, so this is
+  // no less safe than esc2; it just also honours ** and `.
+  function tableHTML(ex) {
+    var h = '<table class="cm-tbl"><thead><tr>' + (ex.header || []).map(function (c) { return '<th>' + mdi(c) + '</th>'; }).join('') + '</tr></thead><tbody>';
+    h += (ex.rows || []).map(function (row) { return '<tr>' + row.map(function (c) { return '<td>' + mdi(c) + '</td>'; }).join('') + '</tr>'; }).join('');
+    return h + '</tbody></table>';
+  }
+
+  // Two exhibit shapes live in the libraries:
+  //   legacy  {header, rows}                     — CM / MS / ST
+  //   parts   {title, parts:[{type,…}]}          — CI, where one exhibit is a
+  //           sequence of blocks: `table`, `text` (markdown lines) and `ascii`
+  //           (a drawn chart that MUST keep its own spacing — hence <pre>).
+  // Anything unknown is skipped rather than dumped raw: a chart the candidate
+  // cannot read is worse than no chart.
+  function partsHTML(parts) {
+    var out = '';
+    (parts || []).forEach(function (p) {
+      if (!p) return;
+      if (p.type === 'table') out += tableHTML(p);
+      else if (p.type === 'ascii') out += '<pre class="cm-ascii">' + esc2((p.lines || []).join('\n')) + '</pre>';
+      else if (p.type === 'text') out += '<div class="cm-exh-note">' + (p.lines || []).map(mdi).join('<br>') + '</div>';
+    });
+    return out;
+  }
+  function exhibitHTML(ex) {
+    if (!ex) return '';
+    if (ex.blocks) {                       // multi-exhibit slot: Exhibit A / B / C
+      return (ex.blocks || []).map(function (b) {
+        return (b && b.title ? '<div class="cm-exh-sub">' + esc2(b.title) + '</div>' : '') + partsHTML(b && b.parts);
+      }).join('');
+    }
+    if (ex.parts) return (ex.title ? '<div class="cm-exh-sub">' + esc2(ex.title) + '</div>' : '') + partsHTML(ex.parts);
+    /* 21.09.2026, dev. Легаси-таблица (ST) несёт `title` и `note`, и клиент молча
+       выбрасывал оба. В 14 слотах ST сноска — это и есть ключ (Quiet Quarter:
+       правило допуска с Q4 Y1), а эталон потом ссылается на «сноску», которой
+       кандидат не видел. Сноска и заголовок выводятся рядом с таблицей. */
+    if (!ex.rows) return '';
+    return (ex.title ? '<div class="cm-exh-sub">' + esc2(ex.title) + '</div>' : '') +
+      tableHTML(ex) +
+      (ex.note ? '<div class="cm-exh-note">' + mdi(ex.note) + '</div>' : '');
+  }
+  function hasExhibit(ex) {
+    return !!(ex && (ex.rows || (ex.parts && ex.parts.length) || (ex.blocks && ex.blocks.length)));
+  }
+
+  /* ---------- libraries ---------- */
+  // Two curated libraries share this one thin client. 'cm' = Case Math (default),
+  // 'ms' = Market Sizing. The server picks the library from the `set` field.
+  var LIBS = {
+    cm: { set: 'cm', label: 'Case Math · Drills',      rec: 'Case Math',     doneKey: 'casedge_cmdrills_done', complete: 'every Case Math drill in this batch' },
+    ms: { set: 'ms', label: 'Market Sizing · Drills',  rec: 'Market Sizing', doneKey: 'casedge_msdrills_done', complete: 'every Market Sizing drill in this batch' },
+    st: { set: 'st', label: 'Structuring · Drills',    rec: 'Structuring',   doneKey: 'casedge_stdrills_done', complete: 'every Structuring drill in this batch' },
+    br: { set: 'br', label: 'Brainstorm · Drills',     rec: 'Brainstorm',    doneKey: 'casedge_brdrills_done', complete: 'every Brainstorm drill in this batch' },
+    ci: { set: 'ci', label: 'Chart Interpretation · Drills', rec: 'Chart Interpretation', doneKey: 'casedge_cidrills_done', complete: 'every Chart Interpretation drill in this batch' },
+    sy: { set: 'sy', label: 'Synthesis · Drills',      rec: 'Synthesis',     doneKey: 'casedge_sydrills_done', complete: 'every Synthesis drill in this batch' }
   };
-  const hidden = new Set();
-  for (const d of list) {
-    for (const t of twinsOf(d)) {
-      if (done.has(t)) hidden.add(d.id);            // пройден второй - прячем первый
-      if (done.has(d.id)) hidden.add(t);            // и наоборот
+
+  /* ---------- state ---------- */
+  var S = { done: [], drill: null, lib: 'cm', move1: null };
+  function cfg() { return LIBS[S.lib] || LIBS.cm; }
+  function loadDone() { try { S.done = JSON.parse(localStorage.getItem(cfg().doneKey) || '[]'); } catch (e) { S.done = []; } }
+  /* 20.09.2026, dev, круг 186 цеха дриллов. Близнец МЕЖДУ БИБЛИОТЕКАМИ не прятался
+     никогда, и причина была не в движке: `nextDrill` считает спрятанное по общему
+     списку `doneIds`, а клиент слал список ОДНОЙ библиотеки — у каждой свой doneKey
+     в localStorage. Один книжный кейс, разложенный на ci и cm (CI-021 / CM-009),
+     кандидат встречал дважды, и спрятать его было нечем.
+     Шлём ОБЪЕДИНЕНИЕ всех шести списков. Своя библиотека не страдает: чужие id
+     в её списке слотов не встречаются, а значит на выбор «следующего» не влияют;
+     влияют они ровно на одно — на twin_of, который на чужой id и ссылается.
+     Обе стороны пары обязаны нести twin_of: прячет та библиотека, что объявила. */
+  function doneEverywhere() {
+    var out = [], k;
+    for (k in LIBS) {
+      if (!Object.prototype.hasOwnProperty.call(LIBS, k)) continue;
+      try {
+        var a = JSON.parse(localStorage.getItem(LIBS[k].doneKey) || '[]');
+        if (Array.isArray(a)) { for (var i = 0; i < a.length; i++) if (out.indexOf(a[i]) < 0) out.push(a[i]); }
+      } catch (e) {}
     }
+    for (var j = 0; j < S.done.length; j++) if (out.indexOf(S.done[j]) < 0) out.push(S.done[j]);
+    return out;
   }
-  let idx = list.findIndex(d => !done.has(d.id) && !hidden.has(d.id));
-  /* 02.09.2026, находка цеха дриллов. Контракт близнеца не убирает повтор, а
-     ОТКЛАДЫВАЕТ его: спрятанные слоты копятся и вываливаются в конце прохода
-     пачкой, а внутри пачки они как раз родственные - их для того и прятали.
-     Замер по боевому проходу: 30 повторов механики на 315 выдач (окно 10),
-     из них 17 - в последних десяти выдачах, то есть 57% повторов создаёт
-     сама защита на 19% прохода.
-     Порядок в файле тут не помогает: перестановка даёт 30 -> 31 (мерил цех).
-     Поэтому в запасной ветке берём не первый по файлу, а первый, чья механика
-     не встречалась в последних пяти выданных. Если такого нет - первый по файлу,
-     как раньше: пустого экрана эта правка создать не может. */
-  if (idx < 0) {
-    const остаток = list.filter(d => !done.has(d.id));
-    if (!остаток.length) return null;
-    const кодОт = d => ((d && d.mehanizm) || {}).code || '';
-    const поId = new Map(list.map(d => [d.id, d]));
-    const хвост = (Array.isArray(doneIds) ? doneIds : []).slice(-5)
-      .map(id => кодОт(поId.get(id))).filter(Boolean);
-    const свежий = остаток.find(d => { const c = кодОт(d); return !c || !хвост.includes(c); });
-    idx = list.indexOf(свежий || остаток[0]);
+  function saveDone(id) { if (S.done.indexOf(id) < 0) S.done.push(id); try { localStorage.setItem(cfg().doneKey, JSON.stringify(S.done)); } catch (e) {} }
+
+  /* ---------- flow ---------- */
+  function open(lib) {
+    S.lib = LIBS[lib] ? lib : 'cm';
+    inject();
+    var lbl = E('cmLbl'); if (lbl) lbl.textContent = cfg().label;
+    if (typeof showScreen === 'function') showScreen('cmdrill');
+    loadDone();
+    var w = E('cmWrap'); if (w) w.innerHTML = '';
+    izHide();
+    loadNext();
   }
-  if (idx < 0) return null;                 // all done
-  return sanitizeDrill(list[idx], idx + 1, list.length, false, lang);
-}
+  function exit() { if (typeof showScreen === 'function') showScreen('mode'); }
 
-/* ───────────────────────── infra (shared pattern) ────────────────────────── */
-async function fetchWithTimeout(url, options, timeoutMs) {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeoutMs);
-  try { return await fetch(url, { ...options, signal: controller.signal }); }
-  finally { clearTimeout(timer); }
-}
-const sleep = ms => new Promise(r => setTimeout(r, ms));
-const RETRIABLE_STATUS = new Set([429, 500, 502, 503, 529]);
-// `deadlineAt` (ms epoch) bounds the WHOLE retry sequence. Without it, retries
-// multiply the per-attempt timeout — 3 x 45s would blow the 60s function limit
-// and turn a soft "could not grade, try again" into a hard gateway timeout.
-// Each attempt is clamped to whatever time is left, and a retry is only started
-// if a meaningful attempt still fits.
-const MIN_ATTEMPT_MS = 8000;
-async function fetchAnthropicWithRetry(url, options, timeoutMs, maxRetries, deadlineAt) {
-  let lastErr, lastResp;
-  const left = () => (deadlineAt ? deadlineAt - Date.now() : Infinity);
-  // The guard is on TIME LEFT, never on the caller's per-attempt timeout: a
-  // caller that legitimately asks for short attempts must still get its retries.
-  const room = () => Math.min(timeoutMs, Math.max(0, left()));
-  for (let attempt = 0; attempt <= maxRetries; attempt++) {
-    if (attempt > 0) {
-      const back = Math.min(700 * Math.pow(2, attempt - 1), 4000);
-      if (left() < back + Math.min(MIN_ATTEMPT_MS, timeoutMs)) break;
-      await sleep(back);
-    }
-    const budget = room();
-    if (attempt > 0 && budget < Math.min(MIN_ATTEMPT_MS, timeoutMs)) break;
-    try {
-      const resp = await fetchWithTimeout(url, options, budget || timeoutMs);
-      lastResp = resp;
-      if (RETRIABLE_STATUS.has(resp.status) && attempt < maxRetries) continue;
-      return resp;
-    } catch (e) { lastErr = e; if (attempt >= maxRetries) break; }
-  }
-  if (lastResp) return lastResp;
-  if (lastErr) throw lastErr;
-  throw new Error('upstream unavailable');
-}
-async function rateLimited(userId, sbUrl, sbKey, token) {
-  /* Ключ счётчика разведён по ручкам — см. api/_auth.js. До этого все
-     восемь ручек делили одну строку, и порог 6 у транскрипции вместе
-     с окном 300 секунд действовал на всех. */
-  return rateLimitedScoped({ userId, scope: 'drills', limit: RATE_LIMIT,
-    windowSeconds: RATE_WINDOW_MS / 1000, sbUrl, sbKey, token, timeoutMs: AUTH_TIMEOUT_MS });
-}
+  function iz(html) { var z = E('cmInput'), i = E('cmIz'); if (!z || !i) return; z.style.display = 'block'; i.innerHTML = html; }
+  function izHide() { var z = E('cmInput'); if (z) z.style.display = 'none'; }
+  function feed(html) { var w = E('cmWrap'); if (!w) return; var d = document.createElement('div'); d.innerHTML = html; w.appendChild(d.firstElementChild || d); scrollFeed(); }
 
-// One bounded model call + a single truncation retry inside a hard deadline.
-async function graderJSON(system, userText, maxTokens) {
-  const T0 = Date.now();
-  const BUDGET_MS = 52 * 1000;
-  /* УПРАВЛЕНИЕ РАЗМЫШЛЕНИЕМ У ГРЕЙДЕРА.
-     Замер на проде 07.08: разбор дрилла отдаётся за 7.7-9.2 секунды при выходе
-     624-700 токенов. Видимый разбор — это полторы сотни слов, то есть примерно
-     200 токенов; остальные 400-500 уходят в размышление, которым здесь никто
-     не управлял. В case-session лесенка режимов стоит с 29.07 и работает,
-     в грейдере дриллов её просто не было.
-     Ставим ту же лесенку: adaptive+effort:low → adaptive → без управления,
-     со спуском по отказу апстрима. Меньше скрытых токенов — быстрее ответ
-     кандидату и дешевле ход. Качество разбора это не трогает: чек-лист,
-     эталон и правила остаются те же, меняется бюджет размышления. */
-  const MODES = [
-    { thinking: { type: 'adaptive' }, output_config: { effort: 'low' } },
-    { thinking: { type: 'adaptive' } },
-    null
-  ];
-  let _mode = 0;
-  const call = (mt, timeoutMs) => fetchAnthropicWithRetry('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': process.env.ANTHROPIC_API_KEY,
-      'anthropic-version': '2023-06-01',
-      'anthropic-beta': 'prompt-caching-2024-07-31'
-    },
-    // Системный блок разбора одинаков для всего набора и переезжает по сети
-    // на каждую проверку. Помечаем его кешем: содержание не меняется, значит
-    // платить за него как за новый вход незачем. На качество не влияет вовсе —
-    // модель получает тот же текст, меняется только цена его доставки.
-    // (Блоки короче 1024 токенов апстрим просто не кеширует, и это безопасно:
-    // пометка на коротком блоке ничего не ломает, она молча не срабатывает.)
-    body: JSON.stringify(Object.assign({ model: GRADER_MODEL, max_tokens: mt,
-      system: [{ type: 'text', text: system, cache_control: { type: 'ephemeral' } }],
-      messages: [{ role: 'user', content: userText }] }, MODES[_mode] || {}))
-    // maxRetries was 0 here, which made the whole RETRIABLE_STATUS branch in
-    // fetchAnthropicWithRetry dead code (`attempt < maxRetries` is never true at
-    // 0). A 429/529 from upstream came straight back and was then treated as
-    // "the model wrote bad JSON". Two attempts with backoff is what the helper
-    // was written for.
-  }, timeoutMs, 2, T0 + BUDGET_MS);
-  const textOf = dd => (dd && Array.isArray(dd.content)) ? dd.content.filter(b => b && b.type === 'text' && typeof b.text === 'string').map(b => b.text).join('\n') : '';
-  const parse = t => { try { const m = String(t || '').match(/\{[\s\S]*\}/); return m ? JSON.parse(m[0]) : null; } catch (e) { return null; } };
-  let resp = await call(maxTokens, 45 * 1000);
-  /* Спуск по лесенке: апстрим отвергает форму — пробуем следующую, но только
-     если он жалуется именно на управление размышлением. Иначе это не наш случай
-     и повтор только тратит бюджет. */
-  while (resp && resp.status === 400 && _mode < MODES.length - 1) {
-    const txt = await resp.clone().text().catch(() => '');
-    if (!/thinking|output_config|effort/i.test(txt)) break;
-    console.error('drills grader: mode', _mode, 'rejected -', txt.slice(0, 140));
-    _mode++;
-    resp = await call(maxTokens, 45 * 1000);
-  }
-  // The first response's status was never checked: an error body has no
-  // `content` array, so textOf() returned '' and parse('') returned null — a
-  // transport failure and an unparseable answer were the same event. They need
-  // opposite responses, so they are separated here.
-  if (resp.status < 200 || resp.status >= 300) {
-    let body = '';
-    try { body = JSON.stringify(await resp.json()).slice(0, 300); } catch (e) { /* keep */ }
-    console.error('drills grader upstream non-2xx', resp.status, body);
-    return null;                       // do NOT re-ask with double max_tokens
-  }
-  let data = await resp.json();
-  /* Расход разбора не логировался вовсе: телеметрия писала только ms, поэтому
-     на вопрос «сколько стоит дрилл» ответа не существовало. Пишем то же, что
-     пишет case-session, и теми же именами, чтобы два эндпоинта считались одним
-     запросом к логам. Имени дрилла тут нет намеренно: в graderJSON его в
-     области видимости не существует, и первая версия этой строки ссылалась на
-     несуществующую переменную — то есть падала бы на каждом разборе. Дрилл
-     виден в соседней строке CASEDGE_TELEMETRY того же запроса. */
-  if (data && data.usage) {
-    const u = data.usage;
-    console.log('drills usage', JSON.stringify({
-      in: u.input_tokens, out: u.output_tokens,
-      cache_read: u.cache_read_input_tokens, cache_write: u.cache_creation_input_tokens,
-      stop: data.stop_reason, mode: _mode, ms: Date.now() - T0 }));
-  }
-  let parsed = parse(textOf(data));
-  // Retry once inside the deadline on truncation OR unparseable output. This
-  // path is for a MODEL problem only — doubling max_tokens against a rate limit
-  // makes the rate limit worse, which is why the non-2xx case returns above.
-  const needsRetry = !parsed || (data && data.stop_reason === 'max_tokens');
-  const timeLeft = BUDGET_MS - (Date.now() - T0);
-  if (needsRetry && timeLeft > 12 * 1000) {
-    try { const r2 = await call(Math.min(maxTokens * 2, 2000), timeLeft - 2000); if (r2.status === 200) { const d2 = await r2.json(); const p2 = parse(textOf(d2)); if (p2) parsed = p2; } } catch (e) { /* keep */ }
-  }
-  if (!parsed) console.error('drills grader unparseable after retry', String(textOf(data) || '').slice(0, 200));
-  return parsed;
-}
-
-/* 27.08.2026, dev. Один и тот же класс третий раз: регистры ST (26.08),
-   лестница подсказок кейса (27.08), теперь BR и SY. Регистр, которого в слоте
-   нет, уезжал грейдеру ЗАГОЛОВКОМ И ПУСТОТОЙ, а пустота читается как «требований
-   нет». Помощник теперь один на все три библиотеки, чтобы четвёртого раза
-   не было: новый регистр в любой из них получает защиту даром. */
-const REGISTERS = {
-  Brainstorm:  ['load', 'cover', 'dead', 'grader'],
-  Structuring: ['cover', 'decoy', 'me', 'drive', 'order'],
-  Synthesis:   ['naive', 'decoy', 'support', 'risks', 'next'],
-};
-/* Подполя `key`, которые движок читает ОТДЕЛЬНО (не через reg) и которые поэтому
-   не считаются чужими. Всё, чего нет ни здесь, ни в REGISTERS, материал носит
-   зря: до грейдера оно не доезжает. */
-const REG_EXTRA = { Brainstorm: ['cull'], Structuring: [], Synthesis: [] };
-/* Третий список, заведён 27.08.2026 по вопросу цеха дриллов. REG_EXTRA объявляет
-   поле ЧИТАЕМЫМ отдельно (единственный житель - `cull` у Brainstorm). Положить
-   туда `build` значило бы сказать «читается» там, где читателя нет вовсе, и
-   заглушить телеметрию, ничего не починив.
-   REG_INTERNAL говорит ровно то, что есть: объявленный внутренний блок автора
-   с владельцем; движок его не читает и не обязан. Телеметрия печатает такие
-   имена ОТДЕЛЬНО от чужих, чтобы сигнал «имя, которого никто не ждал» остался
-   живым, а шум по 39 слотам ушёл. */
-const REG_INTERNAL = { Brainstorm: ['me'], Structuring: [], Synthesis: ['build'] };
-function reg(k, name) {
-  const v = k && k[name];
-  if (typeof v === 'string' && v.trim()) return v;
-  return '(NOT SUPPLIED - this register is missing from the slot. Absence is NOT '
-       + '"no requirement": do not invent one and do not score this register at all.)';
-}
-/* Печатает в лог ДВА факта: какого требуемого регистра в слоте нет и какое имя
-   слот несёт мимо движка. Второе - зеркало первого, и его нельзя увидеть,
-   читая только код. */
-function regTelemetry(type, d, k) {
-  const req = REGISTERS[type] || [];
-  const known = new Set(req.concat(REG_EXTRA[type] || []));
-  const internalSet = new Set(REG_INTERNAL[type] || []);
-  const missing = req.filter(n => !(typeof k[n] === 'string' && k[n].trim()));
-  const names = Object.keys(k || {}).filter(n => !known.has(n));
-  const internal = names.filter(n => internalSet.has(n));
-  const alien = names.filter(n => !internalSet.has(n));
-  if (missing.length || alien.length || internal.length) {
-    try { console.log('CASEDGE_TELEMETRY ' + JSON.stringify({ ev: 'register_gap', lib: type, drill: d.id, missing, alien, internal })); } catch (e) {}
-  }
-}
-
-// Brainstorm (BR): grade the idea list (and, for CULL slots, the cull answer) by
-// meaning against LOAD/COVER/DEAD (+ kill-set). `cullAnswer` is null on single-move
-// (non-CULL) slots and on the interim move-1 reveal.
-async function gradeBR(d, answer, cullAnswer, fbLang) {
-  const k = d.key || {};
-  regTelemetry('Brainstorm', d, k);
-  let u = 'CASE QUESTION: ' + d.prompt +
-    '\n\nFACTS GIVEN TO CANDIDATE:\n- ' + (d.facts || []).join('\n- ') +
-    '\n\n--- GRADING REGISTERS (answer key, RUSSIAN — match by meaning) ---' +
-    '\nLOAD (load-bearing idea, gate):\n' + reg(k, 'load') +
-    '\n\nCOVER (required axes, ≥2):\n' + reg(k, 'cover') +
-    '\n\nDEAD (branches the facts kill):\n' + reg(k, 'dead') +
-    '\n\nGRADER SYNONYMS:\n' + reg(k, 'grader') +
-    '\n\n--- CANDIDATE IDEA LIST ---\n' + String(answer || '');
-  if (d.cull && k.cull && cullAnswer != null) {
-    const c = k.cull;
-    u += '\n\n--- SECOND MOVE (CULL) ---' +
-      '\nNEW FACT shown to candidate: ' + (c.new_fact || '') +
-      '\nCLIENT TEAM IDEAS (numbered):\n' + (c.team_ideas || []).map((t, i) => (i + 1) + '. ' + t).join('\n') +
-      '\nREFERENCE KILL-SET (team-idea numbers that the new fact kills): {' + (c.killed || []).join(', ') + '}' +
-      '\nPER-IDEA REFERENCE + reasons:\n' + (c.peridea_raw || '') +
-      '\n\n--- CANDIDATE CULL ANSWER (which team ideas die + why) ---\n' + String(cullAnswer || '');
-  }
-  const j = await graderJSON(BR_GRADER_SYSTEM, u + fbDirective(fbLang), 800);
-  return j || { graded: false, coaching: 'Could not grade — please try again.' };
-}
-
-// CI (Chart Interpretation): the skill is reading an exhibit, not arithmetic.
-// A candidate who restates the chart correctly has done nothing — the pass is
-// the ONE insight, its business implication and the next check. The checklist
-// is the contract; the reference is the model answer.
-const CI_GRADER_SYSTEM = `You are a strict but fair MBB chart-interpretation drill grader. You receive the drill PROMPT, the EXHIBIT (tables, drawn charts and footnotes), a PASS CHECKLIST (the exact criteria, all of which must be met), a reference SOLUTION, and the candidate's ANSWER. Return ONLY JSON, no preamble, no markdown.
-
-GRADE THE READING, NOT THE PROSE. Describing what the chart shows is not an insight. Pass requires: the load-bearing insight named, the business implication stated, and — where the checklist asks for it — the next check or the number that settles it.
-An item the checklist itself marks as optional - a clause opening "Bonus", "Bonus, not required", "not required for credit" or the same words in Russian - is NOT part of the pass bar. Credit it as a strength when the candidate reaches it; never fail an answer for its absence. Every item the checklist does not so mark stays mandatory.
-A candidate who reaches the same insight by a different route PASSES. A candidate who lands on the naive reading the exhibit is built to provoke FAILS, however fluent the writing.
-Never invent a number that is not in the exhibit. If the candidate quotes a number that is not there, that is a fail with the reason named.
-
-Return: {"pass": boolean, "coaching": "1-2 sentences naming what was missed or what was strong"}\n\nVOICE (2026-08-28, dev): the candidate never sees the trainer's machinery. In the coaching field do NOT name internal register codes (COVER, DECOY, ME, ORDER, DRIVE, LOAD, DEAD, CULL, s0, build), the checklist's own codes (GATE, P1, P2, P3, P4, S:), or the taxonomy labels Clean and Trap, and do NOT use the words slot / drill / exercise / checklist / register, or any field name of this engine. Say WHAT was missing in the language of the case itself. NEVER name or hint at the source of the drill — no casebook, school, publication, page or section reference — even if the answer key you were given contains one; the candidate must never learn where the material comes from.`;
-
-// SY (Synthesis): the candidate reads someone else's record and delivers a
-// verdict. The skill graded here is Minto, and it is graded FIRST: a correct
-// conclusion built up to at the end is a fail, because on the interview the
-// partner has stopped listening by then. The `key` registers (naive, decoy,
-// support, risks, next, build) are server-only.
-const SY_GRADER_SYSTEM = `You are a strict but fair MBB synthesis drill grader. You receive the drill PROMPT, the RECORD the candidate had to read, an answer KEY (the naive read the record provokes, the decoy fact, the facts that actually carry the answer, the risks, the next step), a PASS CHECKLIST (every item must be met), a reference SOLUTION, and the candidate's ANSWER. Return ONLY JSON, no preamble, no markdown.
-
-CONCLUSION FIRST IS A HARD GATE. The candidate's first sentence must BE the recommendation - an action verb with a subject ("We recommend X", "BuildCo should Y"). A correct conclusion that arrives after the supporting facts FAILS, and the coaching must say so in those words. This is the single most expensive habit on a real interview and it is not negotiable here.
-Then: does the answer name the figure that decides it? Does it drop, or explicitly set aside, the decoy the record is built around? Does it carry at least the risks and next step the checklist asks for?
-An item the checklist itself marks as optional - a clause opening "Bonus", "Bonus, not required", "not required for credit" or the same words in Russian - is NOT part of the pass bar. Credit it as a strength when the candidate reaches it; never fail an answer for its absence. Every item the checklist does not so mark stays mandatory.
-A candidate who reaches the same verdict by a different route PASSES. A candidate who lands on the naive read PASSES NOTHING, however fluent.
-
-FIGURES MUST AGREE WITH THE RECORD. Check every number the candidate states against the RECORD above. A figure that contradicts the record — wrong by an order of magnitude, a share above 100%, a quantity larger than the stock it is drawn from — is a defect and must be named in the coaching. When the contradicting figure is the one the recommendation RESTS ON, that is a FAIL: naming the deciding figure is the point of this drill, and a deciding figure that cannot be true names nothing. A stray slip in a supporting sentence is a coaching note, not a fail.
-You yourself must never invent a number that is not in the record.
-
-Return: {"pass": boolean, "coaching": "1-2 sentences naming what was missed or what was strong"}\n\nVOICE (2026-08-28, dev): the candidate never sees the trainer's machinery. In the coaching field do NOT name internal register codes (COVER, DECOY, ME, ORDER, DRIVE, LOAD, DEAD, CULL, s0, build), the checklist's own codes (GATE, P1, P2, P3, P4, S:), or the taxonomy labels Clean and Trap, and do NOT use the words slot / drill / exercise / checklist / register, or any field name of this engine. Say WHAT was missing in the language of the case itself. NEVER name or hint at the source of the drill — no casebook, school, publication, page or section reference — even if the answer key you were given contains one; the candidate must never learn where the material comes from.`;
-
-/* ─────────────────── СЛУЖЕБНЫЕ БЛОКИ ЦЕХА В ЭТАЛОНЕ ────────────────────────
-   24.08.2026, находка цеха дриллов. `reference` возвращается кандидату ДОСЛОВНО
-   после каждой оценённой попытки, и вместе с решением он читал внутренние
-   блоки цеха. Замер по боевым мастерам: 206 вхождений в пяти библиотеках
-   из шести — [DUP] (спор «не близнец ли слот»), [BUILD] (доказательство
-   собранного числа, вместе с питоновским кодом), [TWO LEVERS], [ONE LEVER].
-
-   Правило РАЗНОЕ, потому что классы разные, и это видно по материалу:
-     · [DUP] и [BUILD] — сам ТЕКСТ внутренний. Режем абзац целиком, вместе
-       с прилипшим блоком кода.
-     · [TWO LEVERS] и [ONE LEVER] — текст ПОЛЕЗНЫЙ (разбор чувствительности),
-       внутренний только ярлык. Снимаем ярлык, текст остаётся.
-
-   Материал правит цех — это их 103 места. Здесь СЕТЬ: движок не должен
-   зависеть от того, что цех никогда не оступится. Тот же принцип, что
-   у scrubPrompt в Redrock. */
-/* 11.09.2026 dev, находки цехов дриллов кругов 148-150. БЫЛО /\[(?:DUP|BUILD)\]/ —
-   метка ловилась только ГОЛОЙ. Всё, что с запятой, двоеточием, тире или словом внутри
-   («[BUILD, from the printed figures]», «[BUILT - ...]», «[READING]», «[BUILD: 3 + 14x10]»),
-   проходило мимо и ДОЕЗЖАЛО ДО КАНДИДАТА дословно — шесть слотов. Теперь семейство. */
-const REF_INTERNAL = /\[(?:DUP|BUILD|BUILT|READING)\b[^\]]*\]/;
-const REF_LABEL = /\*{0,2}\[(?:TWO LEVERS|ONE LEVER)\]\*{0,2}\s*/g;
-
-/* ССЫЛКА НА КНИГУ В ЭТАЛОНЕ - 01.09.2026, dev.
-   Двадцать слотов из 315 несут в ЭТАЛОНЕ строку «**Source:** <книга>, <кейс>,
-   стр. NN-MM» вместе с числами книги, а эталон уходит кандидату ДОСЛОВНО после
-   каждой оценённой попытки. Кандидат узнаёт, из какого кейса какого кейсбука
-   собран слот, и заходит в этот кейс с готовым ответом - ровно тот вред, ради
-   которого у цеха дриллов есть норма Н25.7. Среди названных - живые кейсы
-   владельца (Hooville College в ST-050).
-   Замер до правки: 20 слотов · SY 16 · ST 2 · BR 1 · CM 1.
-
-   Режем СТРОКОЙ, а не абзацем, потому что блок встречается в трёх видах:
-     1  своим абзацем                       (SY-041 и большинство)
-     2  последним пунктом списка «- **Source:**»  (CM-051 - весь эталон там
-        ОДИН абзац, и срез абзацем стёр бы эталон целиком)
-     3  приклеенным через <br><br> к концу абзаца (SY-049, SY-055)
-   В SY-041 после блока идёт ПОЛЕЗНЫЙ абзац - поэтому «резать до конца строки»
-   нельзя было заменить на «резать до конца текста».
-   Это СЕТЬ. Материал правит цех; движок не должен зависеть от того, что цех
-   никогда не оступится. Тот же принцип, что у scrubPrompt в Redrock. */
-const REF_SRC_BR = /(?:<br\s*\/?>\s*)+\*{0,2}(?:Source|Источник):\*{0,2}[^\n]*/g;
-const REF_SRC_LINE = /^[ \t]*(?:[-*\u2022]|\d+[.)])?[ \t]*\*{0,2}(?:Source|Источник):/;
-function refDropSource(s) {
-  const noBr = s.replace(REF_SRC_BR, '');
-  return noBr.split('\n').filter(l => !REF_SRC_LINE.test(l)).join('\n');
-}
-
-function refBlocks(s) {
-  // абзацы, но огороженный блок кода — ОДИН неделимый кусок
-  const out = []; let pos = 0;
-  const fence = /```[\s\S]*?```/g; let m;
-  while ((m = fence.exec(s)) !== null) {
-    for (const p of s.slice(pos, m.index).split('\n\n')) out.push(p);
-    out.push(m[0]); pos = m.index + m[0].length;
-  }
-  for (const p of s.slice(pos).split('\n\n')) out.push(p);
-  return out;
-}
-/* 25.08.2026, dev. Дыра, найденную цехом дриллов в круге 84 и подтверждённую
-   их прогоном: блок [DUP] состоит из ТРЁХ кусков — заголовок, markdown-таблица
-   сравнения с чужими слотами, хвост «In (a)…». Правило перешагивало ограду
-   кода и НЕ перешагивало таблицу, поэтому кандидат получал голую таблицу,
-   сравнивающую его слот с ST-010 и ST-020, которых он не видел.
-   Материал цех уже почистил; сеть чинится здесь, чтобы следующий такой блок
-   не проехал наполовину. Хвост глотается ТОЛЬКО если была таблица и следующий
-   кусок не список и не заголовок — иначе съелся бы полезный разбор. */
-function refIsTable(p) {
-  const ls = String(p).split('\n').map(x => x.trim()).filter(Boolean);
-  return ls.length >= 2 && ls.every(l => l.startsWith('|'));
-}
-function refStartsList(p) {
-  return /^\s*(?:[-*+]\s|\d+[.)]\s|#{1,6}\s|>)/.test(String(p));
-}
-/* 11.09.2026 dev. ДВЕ ПРАВКИ, обе куплены находками цеха дриллов:
-
-   1. СНЯТИЕ ПОСТРОЧНОЕ, А НЕ АБЗАЦЕМ. Блок выбрасывался ЦЕЛИКОМ, если метка
-      встречалась в нём где угодно. В CM-033 и CI-029 весь разбор написан ОДНИМ
-      абзацем без пустых строк, метка стоит предпоследней строкой — и вместе с ней
-      улетал весь разбор: кандидат получал reference пустым (5436 -> 0 символов).
-      Теперь блок считается служебным ТОЛЬКО если метка стоит в его ПЕРВОЙ непустой
-      строке (конвенция цеха: метка ведёт свой абзац). Иначе уходят ровно строки
-      с меткой, а текст вокруг остаётся.
-   2. ЗАПРЕТ НА ПУСТОТУ. Непустой вход не имеет права дать пустой выход: если так
-      вышло, снимаем только строки с меткой и говорим об этом в лог. Молча отдать
-      кандидату пустой разбор — хуже, чем оставить служебную строку. */
-
-/* 21.09.2026, dev. КУХНЯ АВТОРА НА ЭКРАНЕ КАНДИДАТА — замер на живом проде.
-   Прошёл по одному дриллу каждой библиотеки и увидел в эталоне то, что писалось
-   для автора, а не для кандидата:
-     MS (56 из 56)  «Allowed anchors (revealed on request, not upfront)», метки [A1],
-                    цепочка сырым питоном: users = 320_000_000 * D('0.10') # 32,000,000;
-                    в условии шага — «(k=5 estimate-anchors)»
-     ST (48 из 50)  «**Top echelon: YES.**», «E-after breaks the tree…»
-     SY (21 из 56)  шапка таблицы «| field | text |» / «| поле | текст |»
-   Банки закрыты и запечатаны, поэтому правится выход, как и у остальных сетей в
-   этом файле. Смысл эталона не трогается: снимаются ярлыки, питон переводится
-   в строку «users = 320,000,000 × 0.10 = 32,000,000». */
-function refNum(t) {
-  return String(t).replace(/\b\d{1,3}(?:_\d{3})+\b/g, m => m.replace(/_/g, ','));
-}
-function refCodeLine(line) {
-  const m = /^(\s*)([A-Za-z_][\w]*)\s*=\s*(.+?)\s*#\s*(.+?)\s*$/.exec(line);
-  if (!m) return line;
-  const expr = refNum(m[3].replace(/D\(\s*'([^']*)'\s*\)/g, '$1')).replace(/\s*\*\s*/g, ' × ').replace(/\s+\/\s+/g, ' / ');
-  let tail = m[4].trim();
-  if (/^[$\d]/.test(tail)) tail = '= ' + tail; else tail = '— ' + tail;
-  return m[1] + m[2] + ' = ' + expr + ' ' + tail;
-}
-function refHouseStyle(t) {
-  if (typeof t !== 'string' || !t) return t;
-  let s = t
-    .replace(/^\s*Allowed anchors(?:\s*\([^)\n]*\))?:/m, 'Anchors used:')
-    .replace(/^\s*Разрешённые якоря(?:\s*\([^)\n]*\))?:/m, 'Якоря эталона:')
-    .replace(/\s*\[A\d+\]/g, '')
-    .replace(/\*\*(?:Top echelon|Верхний эшелон):\s*(?:YES|NO|ДА|НЕТ)\.?\*\*\s*/g, '')
-    .replace(/(^|\n)\s*[—–-]\s*(?:by construction|по построению)[.,]?\s*([a-zа-яё]?)/g, (m0, a, b) => a + b.toUpperCase())
-    .replace(/\s*(?:An honest|Честный) \*\*Easy\*\*\.?/g, '')
-    .replace(/\bE-after\b/g, 'The late exhibit').replace(/\bE-before\b/g, 'The exhibit')
-    .replace(/^\|\s*field\s*\|\s*text\s*\|/m, '| Part | Reference |')
-    .replace(/^\|\s*поле\s*\|\s*текст\s*\|/m, '| Часть | Эталон |');
-  // «The late exhibit» внутри русского текста звучит чужим — русская сторона по-русски
-  if (/[а-яё]/i.test(s)) s = s.replace(/The late exhibit/g, 'Поздний экзибит').replace(/The exhibit\b/g, 'Экзибит');
-  s = s.split('\n').map(refCodeLine).join('\n');
-  // строка, от которой после снятия ярлыка осталась одна пунктуация, уходит
-  s = s.split('\n').filter(l => !/^\s*[—–.,:;-]*\s*$/.test(l) || l === '').join('\n');
-  return s.replace(/\n{3,}/g, '\n\n').trim();
-}
-
-function scrubReference(v) {
-  if (typeof v !== 'string' || !v) return v;
-  const строкиБезМетки = t => t.split('\n').filter(l => !REF_INTERNAL.test(l)).join('\n');
-  const ведётМетка = b => { const l = b.split('\n').find(x => x.trim()); return l !== undefined && REF_INTERNAL.test(l); };
-  const parts = refBlocks(v);
-  const keep = [];
-  for (let i = 0; i < parts.length;) {
-    if (REF_INTERNAL.test(parts[i])) {
-      if (!ведётМетка(parts[i])) { keep.push(строкиБезМетки(parts[i])); i++; continue; }
-      i++;
-      // пустые куски между абзацем и блоком кода — артефакт нарезки
-      let j = i; while (j < parts.length && parts[j].trim() === '') j++;
-      while (j < parts.length && parts[j].trimStart().startsWith('```')) {
-        i = j + 1; j = i;
-        while (j < parts.length && parts[j].trim() === '') j++;
+  function loadNext() {
+    var w = E('cmWrap'); if (w) w.innerHTML = '';
+    izHide();
+    var pr = E('cmProg'); if (pr) pr.textContent = cmL({en:'Loading…',ru:'Загружаю…'});
+    var pick={ru:'подбираю задачу',en:'picking a drill'};
+    iz(threadHTML(cmL(pick))); threadRun([[0,pick]]);
+    api({ action: 'next', doneIds: doneEverywhere(), set: cfg().set }).then(function (r) {
+      if (r && r.error) { if (w) w.innerHTML = '<div class="cm-card"><div class="cm-title">' + esc2(cfg().rec) + '</div><div class="cm-prompt">' + W_("loadFail") + '</div></div>'; return; }
+      var d = r && r.drill;
+      if (!d) {   // all done → recycle
+        S.done = []; try { localStorage.removeItem(cfg().doneKey); } catch (e) {}
+        feed('<div class="cm-card"><div class="cm-title">' + W_("done") + '</div><div class="cm-prompt">' + W_("doneSub") + '</div></div>');
+        return void setTimeout(loadNext, 900);
       }
-      let ate = false;
-      if (j < parts.length && refIsTable(parts[j])) {
-        i = j + 1; ate = true; j = i;
-        while (j < parts.length && parts[j].trim() === '') j++;
-      }
-      if (ate && j < parts.length && parts[j].trim() &&
-          !refStartsList(parts[j]) && !refIsTable(parts[j])) {
-        i = j + 1;
-      }
-      continue;
-    }
-    keep.push(parts[i]); i++;
+      S.drill = d;
+      renderDrill(d);
+    }).catch(function () { if (w) w.innerHTML = '<div class="cm-card"><div class="cm-title">' + esc2(cfg().rec) + '</div><div class="cm-prompt">' + W_("loadFail") + '</div></div>'; });
   }
-  const итог = refDropSource(keep.join('\n\n')).replace(REF_LABEL, '').replace(/\n{3,}/g, '\n\n').trim();
-  if (v.trim() && !итог) {
-    const запас = refDropSource(строкиБезМетки(v)).replace(REF_LABEL, '').replace(/\n{3,}/g, '\n\n').trim();
-    console.log('drills scrub_reference_empty', 'вход', v.length, 'выход 0 · отдан запас', запас.length);
-    return refHouseStyle(запас);
+
+  function renderDrill(d) {
+    var pr = E('cmProg'); if (pr) pr.textContent = cmL({en:'Drill ',ru:'Задача '}) + d.index + ' / ' + d.total;
+    // NO-SPOILER META (2026-07-25): the candidate used to see Trap/Clean, the
+    // difficulty tier and the `focus` code (e.g. "F05(A) PERPETUITY VS DECAY").
+    // Each one hands over the answer before a single number is written: "Trap"
+    // says do not take the obvious route, and `focus` names the exact mechanism.
+    // Real interviews label nothing. Only the time budget survives.
+    var html = '<div class="cm-card">' +
+      '<div class="cm-meta">' +
+        (d.time ? '<span class="cm-tag">' + esc2(d.time) + '</span>' : '') +
+      '</div>' +
+      '<div class="cm-title">' + esc2(d.title || 'Drill') + '</div>' +
+      '<div class="cm-prompt">' + md(d.prompt || '') + '</div>' +
+      ((d.facts && d.facts.length) ? '<div class="cm-steps"><div class="cm-sh">' + W_("given") + '</div><ul>' + d.facts.map(function (s) { return '<li>' + mdi(s) + '</li>'; }).join('') + '</ul></div>' : '') +
+      (hasExhibit(d.exhibit) ? '<div class="cm-exh"><div class="cm-exh-name">' + W_("exhibit") + '</div>' + exhibitHTML(d.exhibit) + '</div>' : '') +
+      (d.exhibit_withheld ? '<div class="cm-steps"><div class="cm-sh">' + W_("exLocked") + '</div><div class="cm-hint">' + W_("exHint") + '</div></div>' : '') +
+      ((d.step_prompts && d.step_prompts.length) ? '<div class="cm-steps"><div class="cm-sh">' + W_("solve") + '</div><ol>' + d.step_prompts.map(function (s) { return '<li>' + mdi(s) + '</li>'; }).join('') + '</ol></div>' : '') +
+      '</div>';
+    feed(html);
+    var isST = (d.type || '') === 'Structuring';
+    var isBR = (d.type || '') === 'Brainstorm';
+    var isCI = S.lib === 'ci';
+    // Synthesis branches on the LIBRARY, not on d.type: the server sanitises
+    // every type except 'Structuring' down to the neutral token 'Drill', so a
+    // check against 'Synthesis' here would never fire and the slot would
+    // silently take the Case Math placeholder - "show your numbers" on a drill
+    // where nothing is counted.
+    var isSY = S.lib === 'sy';
+    // Заглушка поля ответа и подсказка под ним — самый читаемый текст экрана:
+    // кандидат смотрит на них, пока думает. До 2026-08-01 они были только
+    // по-английски, и на русском интерфейсе экран говорил на двух языках сразу.
+    var PH = {
+      sy: {en:'The record is someone else\'s work. Give your verdict first, then the facts that carry it, the risks, and the next step.',
+           ru:'Это чужая работа. Сначала вывод, затем факты, которые его держат, риски и следующий шаг.'},
+      br: {en:'List your options — one per line. Tie each to a fact. Lead with the load-bearing idea, not a reflex.',
+           ru:'Перечисли варианты — по одному в строке. Каждый привяжи к факту. Первым — несущий, а не рефлекторный.'},
+      st: {en:'Build your MECE tree: name each top branch and one line on why it belongs. State which branch you attack first and your criterion.',
+           ru:'Построй MECE-дерево: назови верхние ветки и по строке, почему каждая нужна. Скажи, с какой начинаешь и по какому критерию.'},
+      ci: {en:'Read the exhibit: the one insight that matters, what it implies for the business, and the next thing you would check.',
+           ru:'Прочитай экзибит: один значимый вывод, что он означает для бизнеса и что проверишь следующим.'},
+      cm: {en:'Show your numbers and your one-sentence recommendation…',
+           ru:'Покажи расчёт и рекомендацию одной фразой…'}
+    };
+    var HINT = {
+      sy: {en:'Conclusion first. Name the figure that decides it, and say which fact in the record does not matter.',
+           ru:'Вывод первым. Назови цифру, которая его решает, и скажи, какой факт здесь не важен.'},
+      brC:{en:'Give your options; a new fact will then test them.',
+           ru:'Дай варианты — затем их проверит новый факт.'},
+      br: {en:'Options tied to the facts — quality over volume.',
+           ru:'Варианты, привязанные к фактам, — качество важнее количества.'},
+      st: {en:'List your branches (MECE), justify each, and pick a defensible starting branch.',
+           ru:'Назови ветки (MECE), обоснуй каждую и выбери ветку, с которой начнёшь.'},
+      ci: {en:'Do not describe the chart — extract the insight, tie it to a business implication, name the next check.',
+           ru:'Не описывай график — вытащи вывод, свяжи его с бизнесом, назови следующую проверку.'},
+      cm: {en:'Give the number(s) the drill asks for, then your read of the trap.',
+           ru:'Дай запрошенные числа, затем свой разбор ловушки.'}
+    };
+    var phK = isSY ? 'sy' : isBR ? 'br' : isST ? 'st' : isCI ? 'ci' : 'cm';
+    var ph = cmL(PH[phK]);
+    var hint = cmL(HINT[(isBR && d.cull) ? 'brC' : phK]);
+    iz('<textarea class="cm-ta" id="cmTa" placeholder="' + esc2(ph) + '"></textarea>' +
+       '<div class="cm-row"><span class="cm-hint">' + esc2(hint) + '</span>' +
+       '<button class="cm-btn" id="cmSubmit" onclick="CaseMathDrills._submit()">' + W_("submit") + '</button></div>');
+    timerStart(d.time);
+    setTimeout(function () { var el = E('cmTa'); if (el) { el.focus(); autoGrow(el); } }, 60);
   }
-  return refHouseStyle(итог);
-}
-function scrubReferencePair(r) {
-  if (!r || typeof r !== 'object') return r;
-  return { en: scrubReference(r.en || ''), ru: scrubReference(r.ru || '') };
-}
 
-async function gradeDrill(d, answer, fbLang) {
-  if (d.type === 'Synthesis') {
-    const k = d.key || {};
-    regTelemetry('Synthesis', d, k);
-    const u = 'PROMPT: ' + d.prompt +
-      '\nRECORD: ' + JSON.stringify(d.exhibit || {}) +
-      '\n\n--- ANSWER KEY (server-only) ---' +
-      '\nNAIVE READ: ' + reg(k, 'naive') +
-      '\nDECOY: ' + reg(k, 'decoy') +
-      '\nSUPPORT: ' + reg(k, 'support') +
-      '\nRISKS: ' + reg(k, 'risks') +
-      '\nNEXT STEP: ' + reg(k, 'next') +
-      '\n\nPASS CHECKLIST: ' + (d.checklist && (d.checklist.en || d.checklist.ru) || '') +
-      '\nREFERENCE SOLUTION: ' + (d.reference && (d.reference.en || d.reference.ru) || '') +
-      '\nCANDIDATE ANSWER: ' + String(answer || '');
-    const j = await graderJSON(SY_GRADER_SYSTEM, u + fbDirective(fbLang), 900);   // 700 упиралось в потолок: повтор стоил +7.5 с
-    return j || { graded: false, coaching: 'Could not grade — please try again.' };
-  }
-  // CI: exhibit is a `parts` sequence, not header/rows — serialise it whole.
-  if (d.type === 'Chart Interpretation') {
-    const u = 'PROMPT: ' + d.prompt +
-      '\nEXHIBIT: ' + JSON.stringify(d.exhibit || {}) +
-      '\nPASS CHECKLIST: ' + (d.checklist && (d.checklist.en || d.checklist.ru) || '') +
-      '\nREFERENCE SOLUTION: ' + (d.reference && (d.reference.en || d.reference.ru) || '') +
-      '\nCANDIDATE ANSWER: ' + String(answer || '');
-    const j = await graderJSON(CI_GRADER_SYSTEM, u + fbDirective(fbLang), 700);
-    return j || { graded: false, coaching: 'Could not grade — please try again.' };
-  }
-  // ST (Structuring): grade the candidate's tree against the five registers.
-/* 27.08.2026, dev. ЧЕМ КУПЛЕНО: круг 85 цеха дриллов. У ST-049 содержимое
-   регистра ORDER лежало под именем `start`, которого грейдер не знает, а DRIVE
-   не было вовсе. Промпт собирался как `(k.order || '')` — то есть строка
-   «ORDER (defensible starts):» и ПУСТОТА следом. Модель читала пустоту как
-   «требований нет» и ставила зачёт. Слот год судился по трём регистрам из пяти,
-   и ни один гейт этого не видел, потому что ошибки не было: было молчание.
-   Теперь отсутствие регистра ОБЪЯВЛЯЕТСЯ грейдеру словами, а не пустотой,
-   и уходит в телеметрию. Условие PASS не меняется. */
-  if (d.type === 'Structuring' && d.key) {
-    const k = d.key;
-    const exhibitTxt = d.exhibit ? ('EXHIBIT (visible to candidate for this grade):\n' + JSON.stringify({ title: d.exhibit.title, header: d.exhibit.header, rows: d.exhibit.rows, note: d.exhibit.note })) : 'EXHIBIT: none / withheld';
-    const u = 'ANCHOR QUESTION: ' + d.prompt +
-      '\n\n--- GRADING REGISTERS (answer key) ---' +
-      '\nCOVER (required branches):\n' + reg(k, 'cover') +
-      '\n\nDECOY (reflexive branches — must not lead):\n' + reg(k, 'decoy') +
-      '\n\nME (incompatible pairs):\n' + reg(k, 'me') +
-      /* 23.08.2026, dev. Находка цеха дриллов: регистр DRIVE объявлен в комментарии
-         выше и заполнен у 49 слотов из 50, но до грейдера не доходил ВООБЩЕ.
-         Дерево из одних заголовков проходило так же, как дерево с метриками.
-         Отдаём регистр грейдеру, но УСЛОВИЕ PASS НЕ МЕНЯЕМ: иначе сложность
-         50 слотов сдвинется одним ходом и без замера. */
-      '\n\nDRIVE (what to measure under each branch):\n' + reg(k, 'drive') +
-      '\n\nORDER (defensible starts):\n' + reg(k, 'order') +
-      '\n\n' + exhibitTxt +
-      '\n\n--- CANDIDATE TREE ---\n' + String(answer || '');
-    regTelemetry('Structuring', d, k);
-    const j = await graderJSON(ST_GRADER_SYSTEM, u + fbDirective(fbLang), 800);
-    // graderJSON null = the model didn't return parseable JSON. Return graded:false
-    // (NEUTRAL) rather than pass:false so a grader hiccup is not shown as a candidate FAIL.
-    return j || { graded: false, coaching: 'Could not grade — please try again.' };
-  }
-  const exhibitTxt = d.exhibit ? ('EXHIBIT ' + JSON.stringify({ title: d.exhibit.title, header: d.exhibit.header, rows: d.exhibit.rows, note: d.exhibit.note })) : 'EXHIBIT: none';
-  const u = 'PROMPT: ' + d.prompt +
-    '\n' + exhibitTxt +
-    '\nSTEPS ASKED: ' + (d.step_prompts || []).join(' | ') +
-    '\nPASS CHECKLIST: ' + (d.checklist && (d.checklist.en || d.checklist.ru) || '') +   /* 04.09.2026 dev, находка цеха дриллов круг 118: ветка DRILL была единственной без отката на ru. Слот, написанный только по-русски, отдал бы грейдеру ПУСТОЙ чеклист, и он судил бы ни против чего. Сегодня таких слотов 0, правка на будущее. */
-    '\nREFERENCE SOLUTION: ' + (d.reference && (d.reference.en || d.reference.ru) || '') +   /* 11.09.2026 dev, находка цехов дриллов круг 149 и ревью круга 150: соседняя строка 698 получила откат на ru 04.09, а эта осталась без него. Ветка DRILL (cm/ms/st) отдавала бы грейдеру ПУСТОЙ эталон на слоте, написанном только по-русски. Сегодня таких слотов 0 (проверено обходом 315 слотов, обе половины непустые) - правка на будущее, симметрично 698. */
-    '\nCANDIDATE ANSWER: ' + String(answer || '');
-  const j = await graderJSON(DRILL_GRADER_SYSTEM, u + fbDirective(fbLang), 600);
-  return j || { graded: false, coaching: 'Could not grade — please try again.' };
-}
-
-/* ───────────────────────── handler ───────────────────────────────────────── */
-export default async function handler(req, res) {
-  const origin = process.env.ALLOWED_ORIGIN || FALLBACK_ORIGIN;
-  res.setHeader('Access-Control-Allow-Origin', origin);
-  res.setHeader('Vary', 'Origin');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  if (req.method === 'OPTIONS') return res.status(200).end();
-  if (req.method !== 'POST') return res.status(405).json({ error: { message: 'Method not allowed' } });
-
-  try {
-    const auth = req.headers['authorization'] || req.headers['Authorization'] || '';
-    const token = auth.startsWith('Bearer ') ? auth.slice(7) : null;
-    if (!token) return res.status(401).json({ error: { message: 'Authentication required.' } });
-    const sbUrl = process.env.SUPABASE_URL, sbKey = process.env.SUPABASE_ANON_KEY;
-    if (!sbUrl || !sbKey) return res.status(500).json({ error: { message: 'Server auth not configured.' } });
-
-    const raw = JSON.stringify(req.body || {});
-    if (raw.length > MAX_BODY_BYTES) return res.status(413).json({ error: { message: 'Request too large.' } });
-
-    // Одна проверка сессии на всё приложение — ./_auth.js, с кешем на инстанс.
-    // Раньше каждый вызов ходил в /auth/v1/user по сети; на тёплом инстансе
-    // повторная проверка того же токена теперь не идёт в сеть вовсе.
-    const user = await verifyUserCached(token, AUTH_TIMEOUT_MS);
-    if (!user) return res.status(401).json({ error: { message: 'Invalid or expired session.' } });
-    const userId = user.id;
-
-    const body = req.body || {};
-
-    // ось языка САМОГО вопроса — та же, что у кейсов (aiLang), см. ruField выше
-    const aiLang = String(body.aiLang || '').toLowerCase() === 'ru' ? 'ru' : 'en';
-
-    if (body.action === 'list' || body.action === 'next') {
-      const lib = libData(body);
-      if (!lib) return res.status(400).json({ error: { message: 'Unknown drill set.' } });
-      if (body.action === 'list') {
-        // difficulty/focus withheld here too — otherwise one `list` call hands over
-        // the tier and trap mechanism of every drill in the set.
-        return res.status(200).json({ drills: (lib.drills || []).map(d => ({ id: d.id, title: ruField(d, 'title', aiLang) })) });
-      }
-      return res.status(200).json({ drill: nextDrill(body.doneIds, lib, aiLang) });   // null when the set is exhausted
-    }
-    if (body.action === 'grade') {
-
-    /* 23.08.2026, dev. ПУСТОЙ ХОД. Клиент отправлял пустую строку, и она шла
-       ДАЛЬШЕ: право списывалось, модель звалась, кандидат получал разбор
-       на ничто. Отбой стоит ДО checkAndConsume и ДО любого обращения к модели —
-       иначе пустой ход стоит попытки. */
-    {
-      const stage = body.stage === 'cull';
-      const said = stage ? body.answer : (body.answer != null ? body.answer : body.move1Answer);
-      if (said == null || String(said).trim() === '') {
-        return res.status(400).json({ error: { message: 'Empty answer.', code: 'empty_answer' } });
-      }
-    }
-
-    /* ПРАВА. Списываем ПОСЛЕ того, как человек начал работать, и ровно один раз
-       на дрилл: ключ расхода идемпотентен, поэтому обрыв связи, перезагрузка
-       и повтор того же хода попытку не съедают. Сбой базы пускает (решение
-       владельца 09.08.2026) и печатает строку в лог. */
-    {
-      const ent = await checkAndConsume({ kind: 'drills', ref: 'drill:' + String(body.drillId), sbUrl, sbKey, token });
-      if (!ent.allowed) return res.status(402).json({
-        error: { message: refusalMessage('drills', refusalLang(body)), code: 'entitlement_exhausted' },
-        entitlement: { kind: 'drills', remaining: 0, cap: ent.cap, used: ent.used }
-      });
-    }
-      const d = drillById(body.drillId);
-      if (!d) return res.status(400).json({ error: { message: 'Unknown drill.' } });
-      // client sends its resolved feedback language; anything but 'ru' means English
-      const fbLang = body.fbLang === 'ru' ? 'ru' : 'en';
-      // how long the candidate actually took (soft timer, client-reported).
-      // Bounded: a bad client must not be able to write junk into the logs.
-      const spentMs = Number.isFinite(Number(body.elapsedMs)) && Number(body.elapsedMs) >= 0
-        ? Math.min(Number(body.elapsedMs), 4 * 60 * 60 * 1000) : null;
-
-      // Brainstorm two-move CULL: MOVE 1 reveals the client team's ideas + the new
-      // fact (no grading, no LLM, no rate-limit) so the fact can break the list the
-      // candidate just built. The candidate then submits the CULL answer (stage:'cull').
-      if (d.type === 'Brainstorm' && d.cull && body.stage !== 'cull') {
-        const c = (d.key && d.key.cull) || {};
-        logGrade('cull_reveal', d, userId, null);
-        return res.status(200).json({
-          stage: 'cull',
-          /* 06.09.2026, dev, находка цеха дриллов (круг 132). Второй ход уходил
-             кандидату БЕЗ ruField: он играл первый ход по-русски и получал
-             второй по-английски — 20 новых фактов и 126 идей команды клиента.
-             Провод тот же, что у вопроса: `_ru`-близнец, если он непустой. */
-          cull: { new_fact: ruField(c, 'new_fact', aiLang) || '',
-                  team_ideas: ruField(c, 'team_ideas', aiLang) || [] },
-          move1Answer: String(body.answer || '')   // echoed back so the client returns it with the cull move
-        });
-      }
-
-      if (await rateLimited(userId, sbUrl, sbKey, token)) {
-        return res.status(429).json({ error: { message: 'Too many requests. Please slow down.' } });
-      }
-
-      // Brainstorm final grade: single-move slots grade the idea list; CULL slots
-      // grade the idea list (move1Answer) + the cull answer together in one call.
-      if (d.type === 'Brainstorm') {
-        const ideaList = d.cull ? body.move1Answer : body.answer;
-        const cullAns = d.cull ? body.answer : null;
-        const t0 = Date.now();
-        const rb = await gradeBR(d, ideaList, cullAns, fbLang);
-        if (rb && rb.graded === false) {
-          logGrade('grade_unscored', d, userId, t0, { stage: d.cull ? 'cull' : 'single', spent_ms: spentMs });
-          return res.status(200).json({ graded: false, coaching: rb.coaching || 'Could not grade — please try again.' });
-        }
-        logGrade(rb.pass ? 'grade_pass' : 'grade_fail', d, userId, t0, { stage: d.cull ? 'cull' : 'single', spent_ms: spentMs });
-        // РАЗБОР BR. Раньше сюда уходил ТОЛЬКО ответ модели (rb.model): текст,
-        // который никем не проверен и на каждом прогоне другой. Теперь источник —
-        // поле `reference` слота, а модель остаётся страховкой, пока цех дриллов
-        // дописывает поле по всем сорока девяти. Строка в лог помечает слоты,
-        // где поля ещё нет: по ней видно остаток конверсии.
-        const brRef = (d.reference && (d.reference.en || d.reference.ru)) ? d.reference : null;
-        if (!brRef) console.log('drills br_reference_missing', d.id);
-        return res.status(200).json({
-          pass: !!rb.pass,
-          coaching: rb.coaching || '',
-          reference: scrubReferencePair(brRef) || { en: rb.model || '', ru: '' }
-        });
-      }
-
-      const t0 = Date.now();
-      const r = await gradeDrill(d, body.answer, fbLang);
-      // grader hiccup → tell the client to let the candidate retry, NOT mark it failed/done.
+  function _submit() {
+    var el = E('cmTa'); if (!el) return; var answer = el.value.trim(); if (!answer) return;
+    var b = E('cmSubmit'); if (b) b.disabled = true;
+    var spent = elapsedMs(); timerStop();
+    iz(threadHTML(cmL(CM_STEPS[0][1]))); threadRun(CM_STEPS);
+    var d = S.drill;
+    api({ action: 'grade', drillId: d.id, answer: answer, set: cfg().set, fbLang: fbCode(), elapsedMs: spent }).then(function (r) {
+      if (r && r.error) { feed('<div class="cm-fb no"><b>' + W_("conn") + '</b> ' + esc2(r.error.message || W_("connSub")) + '</div>'); return void nextButton(); }
+      // grader hiccup (couldn't parse a verdict) — NOT a fail. Let the candidate resubmit,
+      // keep their answer, don't mark the drill done.
       if (r && r.graded === false) {
-        logGrade('grade_unscored', d, userId, t0, { spent_ms: spentMs });
-        return res.status(200).json({ graded: false, coaching: r.coaching || 'Could not grade — please try again.' });
+        iz('<div class="cm-hint" style="margin-bottom:8px;">' + W_("ungraded") + '</div>' +
+           '<textarea class="cm-ta" id="cmTa">' + esc2(answer) + '</textarea>' +
+           '<div class="cm-row"><span class="cm-hint"></span><button class="cm-btn" id="cmSubmit" onclick="CaseMathDrills._submit()">' + W_("submit") + '</button></div>');
+        return;
       }
-      logGrade(r.pass ? 'grade_pass' : 'grade_fail', d, userId, t0, { spent_ms: spentMs });
-      // ST E-after: reveal the exhibit only now (after the tree is submitted), so
-      // the candidate can see how the data breaks their framework, then refine.
-      const revealExhibit = (d.type === 'Structuring' && d.exhibit_mode === 'E-after' && d.exhibit) ? d.exhibit : null;
-      return res.status(200).json({
-        pass: !!r.pass,
-        coaching: r.coaching || '',
-        reference: scrubReferencePair(d.reference) || { en: '', ru: '' },
-        provoked: d.provoked || { en: '', ru: '' },
-        exhibit: revealExhibit,
-        exhibit_mode: d.exhibit_mode || null
-      });
-    }
-
-    return res.status(400).json({ error: { message: 'Unknown action.' } });
-  } catch (err) {
-    console.error('CasEdge Drills error:', err);
-    return res.status(500).json({ error: { message: 'Something went wrong. Please try again.' } });
+      // Brainstorm two-move CULL: the server withheld the client team's ideas + the
+      // new fact until now. Show them, keep the candidate's idea list, and ask which
+      // ideas the new fact kills — the whole point is the fact breaking their list.
+      if (r && r.stage === 'cull') {
+        S.move1 = r.move1Answer != null ? r.move1Answer : answer;
+        feed('<div class="cm-fb ok" style="background:rgba(93,184,166,.10);border-color:rgba(93,184,166,.4);color:var(--on-dark,#faf9f5)"><b>' + W_("twist") + '</b> ' + W_("twistSub") + '</div>');
+        feed('<div class="cm-ref"><div class="cm-ref-h">' + W_("newFact") + '</div><div class="cm-ref-body">' + md(r.cull && r.cull.new_fact || '') + '</div></div>');
+        var teams = (r.cull && r.cull.team_ideas) || [];
+        feed('<div class="cm-steps"><div class="cm-sh">' + W_("teamSaid") + '</div><ol>' + teams.map(function (t) { return '<li>' + esc2(t) + '</li>'; }).join('') + '</ol></div>');
+        iz('<textarea class="cm-ta" id="cmCull" placeholder="Which of these ideas does the new fact kill? Give the numbers and, for each, why it dies. Naming a survivor as killed fails as hard as a miss."></textarea>' +
+           '<div class="cm-row"><span class="cm-hint">Name exactly the ideas the fact kills — with a reason for each.</span>' +
+           '<button class="cm-btn" id="cmCullBtn" onclick="BrainstormDrills._submitCull()">' + W_("cullBtn") + '</button></div>');
+        setTimeout(function () { var el = E('cmCull'); if (el) { el.focus(); autoGrow(el); } }, 60);
+        return;
+      }
+      var ok = !!r.pass;
+      feed('<div class="cm-fb ' + (ok ? 'ok' : 'no') + '">' + (ok ? '<b>' + W_("pass") + '</b> ' : '<b>' + W_("fail") + '</b> ') + esc2(r.coaching || '') + '</div>');
+      // ST E-after: the exhibit is released only now — show it before the debrief
+      // so the candidate sees how the data breaks (or confirms) the tree they built.
+      if (hasExhibit(r.exhibit)) {
+        feed('<div class="cm-exh"><div class="cm-exh-name">' + W_("exOpened") + '</div>' + exhibitHTML(r.exhibit) + '</div>');
+      }
+      var ref = L(r.reference); var prov = L(r.provoked);
+      feed('<div class="cm-ref"><div class="cm-ref-h">' + W_("refSol") + '</div><div class="cm-ref-body">' + md(ref || '') + '</div>' +
+           (trapShown(prov, ok) ? '<div class="cm-trap"><b>' + W_("trap") + ':</b> ' + md(trapText(prov)) + '</div>' : '') + '</div>');
+      saveDone(d.id);
+      // Record this rep in the shared Progress tracker (Drills completed + "Case Math" by-type + streak, synced to cloud).
+      try { if (typeof recordSession === 'function') recordSession('drill', cfg().rec); } catch (e) {}
+      nextButton();
+    }).catch(function () { feed('<div class="cm-fb no"><b>' + W_("conn") + '</b> ' + W_("connSub") + '</div>'); nextButton(); });
   }
-}
+
+  // Final debrief shared by single-move slots and the CULL second move.
+  function _renderFinal(d, r) {
+    if (r && r.error) { feed('<div class="cm-fb no"><b>' + W_("conn") + '</b> ' + esc2(r.error.message || W_("connSub")) + '</div>'); return void nextButton(); }
+    if (r && r.graded === false) {
+      iz('<div class="cm-hint" style="margin-bottom:8px;">' + W_("ungraded") + '</div>' +
+         '<div class="cm-row" style="justify-content:flex-end"><button class="cm-btn" onclick="BrainstormDrills._next()">' + W_("skip") + ' →</button></div>');
+      return;
+    }
+    var ok = !!r.pass;
+    feed('<div class="cm-fb ' + (ok ? 'ok' : 'no') + '">' + (ok ? '<b>' + W_("pass") + '</b> ' : '<b>' + W_("fail") + '</b> ') + esc2(r.coaching || '') + '</div>');
+    var ref = L(r.reference), prov = L(r.provoked);
+    if (ref) feed('<div class="cm-ref"><div class="cm-ref-h">' + W_("refAns") + '</div><div class="cm-ref-body">' + md(ref) + '</div>' +
+                  (trapShown(prov, ok) ? '<div class="cm-trap"><b>' + W_("trap") + ':</b> ' + md(trapText(prov)) + '</div>' : '') + '</div>');
+    saveDone(d.id);
+    try { if (typeof recordSession === 'function') recordSession('drill', cfg().rec); } catch (e) {}
+    nextButton();
+  }
+
+  function _submitCull() {
+    var el = E('cmCull'); if (!el) return; var cull = el.value.trim(); if (!cull) return;
+    var b = E('cmCullBtn'); if (b) b.disabled = true;
+    iz(threadHTML(cmL(CM_STEPS[0][1]))); threadRun(CM_STEPS);
+    var d = S.drill;
+    api({ action: 'grade', drillId: d.id, set: cfg().set, stage: 'cull', answer: cull, move1Answer: S.move1, fbLang: fbCode(), elapsedMs: elapsedMs() })
+      .then(function (r) { _renderFinal(d, r); })
+      .catch(function () { feed('<div class="cm-fb no"><b>' + W_("conn") + '</b> ' + W_("connSub") + '</div>'); nextButton(); });
+  }
+
+  function nextButton() {
+    threadStop();
+    iz('<div class="cm-row" style="justify-content:flex-end"><button class="cm-btn" onclick="CaseMathDrills._next()">' + W_("nextD") + ' →</button></div>');
+  }
+  function _next() { S.move1 = null; loadNext(); }
+
+  window.CaseMathDrills = { open: function () { return open('cm'); }, exit: exit, _submit: _submit, _next: _next };
+  window.MarketSizingDrills = { open: function () { return open('ms'); }, exit: exit, _submit: _submit, _next: _next };
+  window.StructuringDrills = { open: function () { return open('st'); }, exit: exit, _submit: _submit, _next: _next };
+  window.BrainstormDrills = { open: function () { return open('br'); }, exit: exit, _submit: _submit, _submitCull: _submitCull, _next: _next };
+  window.ChartDrills = { open: function () { return open('ci'); }, exit: exit, _submit: _submit, _next: _next };
+  window.SynthesisDrills = { open: function () { return open('sy'); }, exit: exit, _submit: _submit, _next: _next };
+})();
