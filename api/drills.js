@@ -186,6 +186,14 @@ function ruField(d, field, lang) {
   return d[field];
 }
 
+/* 21.09.2026, dev: см. refHouseStyle — служебное «(k=N estimate-anchors)» в условии шага MS. */
+function stepHouseStyle(arr) {
+  if (!Array.isArray(arr)) return arr;
+  return arr.map(x => typeof x !== 'string' ? x : x
+    .replace(/\(k=(\d+) estimate-anchors\)/g, '($1 anchors)')
+    .replace(/\(k=(\d+) (якоря|якорей) оценки\)/g, '($1 $2)'));
+}
+
 function sanitizeDrill(d, index, total, revealed, lang) {
   // Brainstorm (BR): qualitative idea-generation. Client sees prompt + facts. The
   // `key` (LOAD/COVER/DEAD/grader) is server-only. CULL slots are two-move: the
@@ -223,7 +231,7 @@ function sanitizeDrill(d, index, total, revealed, lang) {
     exhibit: exhibit,
     exhibit_mode: d.exhibit_mode || null,   // client gates the E-after flow on this
     exhibit_withheld: (isAfter && !revealed) || false,
-    step_prompts: ruField(d, 'step_prompts', lang) || [],
+    step_prompts: stepHouseStyle(ruField(d, 'step_prompts', lang) || []),
     index: index, total: total
   };
 }
@@ -614,6 +622,49 @@ function refStartsList(p) {
    2. ЗАПРЕТ НА ПУСТОТУ. Непустой вход не имеет права дать пустой выход: если так
       вышло, снимаем только строки с меткой и говорим об этом в лог. Молча отдать
       кандидату пустой разбор — хуже, чем оставить служебную строку. */
+
+/* 21.09.2026, dev. КУХНЯ АВТОРА НА ЭКРАНЕ КАНДИДАТА — замер на живом проде.
+   Прошёл по одному дриллу каждой библиотеки и увидел в эталоне то, что писалось
+   для автора, а не для кандидата:
+     MS (56 из 56)  «Allowed anchors (revealed on request, not upfront)», метки [A1],
+                    цепочка сырым питоном: users = 320_000_000 * D('0.10') # 32,000,000;
+                    в условии шага — «(k=5 estimate-anchors)»
+     ST (48 из 50)  «**Top echelon: YES.**», «E-after breaks the tree…»
+     SY (21 из 56)  шапка таблицы «| field | text |» / «| поле | текст |»
+   Банки закрыты и запечатаны, поэтому правится выход, как и у остальных сетей в
+   этом файле. Смысл эталона не трогается: снимаются ярлыки, питон переводится
+   в строку «users = 320,000,000 × 0.10 = 32,000,000». */
+function refNum(t) {
+  return String(t).replace(/\b\d{1,3}(?:_\d{3})+\b/g, m => m.replace(/_/g, ','));
+}
+function refCodeLine(line) {
+  const m = /^(\s*)([A-Za-z_][\w]*)\s*=\s*(.+?)\s*#\s*(.+?)\s*$/.exec(line);
+  if (!m) return line;
+  const expr = refNum(m[3].replace(/D\(\s*'([^']*)'\s*\)/g, '$1')).replace(/\s*\*\s*/g, ' × ').replace(/\s+\/\s+/g, ' / ');
+  let tail = m[4].trim();
+  if (/^[$\d]/.test(tail)) tail = '= ' + tail; else tail = '— ' + tail;
+  return m[1] + m[2] + ' = ' + expr + ' ' + tail;
+}
+function refHouseStyle(t) {
+  if (typeof t !== 'string' || !t) return t;
+  let s = t
+    .replace(/^\s*Allowed anchors(?:\s*\([^)\n]*\))?:/m, 'Anchors used:')
+    .replace(/^\s*Разрешённые якоря(?:\s*\([^)\n]*\))?:/m, 'Якоря эталона:')
+    .replace(/\s*\[A\d+\]/g, '')
+    .replace(/\*\*(?:Top echelon|Верхний эшелон):\s*(?:YES|NO|ДА|НЕТ)\.?\*\*\s*/g, '')
+    .replace(/(^|\n)\s*[—–-]\s*(?:by construction|по построению)[.,]?\s*([a-zа-яё]?)/g, (m0, a, b) => a + b.toUpperCase())
+    .replace(/\s*(?:An honest|Честный) \*\*Easy\*\*\.?/g, '')
+    .replace(/\bE-after\b/g, 'The late exhibit').replace(/\bE-before\b/g, 'The exhibit')
+    .replace(/^\|\s*field\s*\|\s*text\s*\|/m, '| Part | Reference |')
+    .replace(/^\|\s*поле\s*\|\s*текст\s*\|/m, '| Часть | Эталон |');
+  // «The late exhibit» внутри русского текста звучит чужим — русская сторона по-русски
+  if (/[а-яё]/i.test(s)) s = s.replace(/The late exhibit/g, 'Поздний экзибит').replace(/The exhibit\b/g, 'Экзибит');
+  s = s.split('\n').map(refCodeLine).join('\n');
+  // строка, от которой после снятия ярлыка осталась одна пунктуация, уходит
+  s = s.split('\n').filter(l => !/^\s*[—–.,:;-]*\s*$/.test(l) || l === '').join('\n');
+  return s.replace(/\n{3,}/g, '\n\n').trim();
+}
+
 function scrubReference(v) {
   if (typeof v !== 'string' || !v) return v;
   const строкиБезМетки = t => t.split('\n').filter(l => !REF_INTERNAL.test(l)).join('\n');
@@ -647,9 +698,9 @@ function scrubReference(v) {
   if (v.trim() && !итог) {
     const запас = refDropSource(строкиБезМетки(v)).replace(REF_LABEL, '').replace(/\n{3,}/g, '\n\n').trim();
     console.log('drills scrub_reference_empty', 'вход', v.length, 'выход 0 · отдан запас', запас.length);
-    return запас;
+    return refHouseStyle(запас);
   }
-  return итог;
+  return refHouseStyle(итог);
 }
 function scrubReferencePair(r) {
   if (!r || typeof r !== 'object') return r;
@@ -695,7 +746,7 @@ async function gradeDrill(d, answer, fbLang) {
    и уходит в телеметрию. Условие PASS не меняется. */
   if (d.type === 'Structuring' && d.key) {
     const k = d.key;
-    const exhibitTxt = d.exhibit ? ('EXHIBIT (visible to candidate for this grade):\n' + JSON.stringify({ header: d.exhibit.header, rows: d.exhibit.rows })) : 'EXHIBIT: none / withheld';
+    const exhibitTxt = d.exhibit ? ('EXHIBIT (visible to candidate for this grade):\n' + JSON.stringify({ title: d.exhibit.title, header: d.exhibit.header, rows: d.exhibit.rows, note: d.exhibit.note })) : 'EXHIBIT: none / withheld';
     const u = 'ANCHOR QUESTION: ' + d.prompt +
       '\n\n--- GRADING REGISTERS (answer key) ---' +
       '\nCOVER (required branches):\n' + reg(k, 'cover') +
@@ -716,7 +767,7 @@ async function gradeDrill(d, answer, fbLang) {
     // (NEUTRAL) rather than pass:false so a grader hiccup is not shown as a candidate FAIL.
     return j || { graded: false, coaching: 'Could not grade — please try again.' };
   }
-  const exhibitTxt = d.exhibit ? ('EXHIBIT ' + JSON.stringify({ header: d.exhibit.header, rows: d.exhibit.rows })) : 'EXHIBIT: none';
+  const exhibitTxt = d.exhibit ? ('EXHIBIT ' + JSON.stringify({ title: d.exhibit.title, header: d.exhibit.header, rows: d.exhibit.rows, note: d.exhibit.note })) : 'EXHIBIT: none';
   const u = 'PROMPT: ' + d.prompt +
     '\n' + exhibitTxt +
     '\nSTEPS ASKED: ' + (d.step_prompts || []).join(' | ') +

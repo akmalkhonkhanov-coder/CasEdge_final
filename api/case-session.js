@@ -603,6 +603,53 @@ export function foreignFigures(reply, candidateText) {
   return bad;
 }
 
+/* ВЫДУМАННЫЕ ЧИСЛА. 21.09.2026, dev, замер на живом проде, кейс #18.
+ *
+ * Кандидат спросил, из чего сложена EBITDA $140M, — это данные шага 3, который
+ * ещё закрыт. Интервьюер ответил сам: «субсидия $22M», «разовая продажа
+ * контракта на лом $8M», «аналитики ждут на 12% ниже пика». В кейсе субсидия
+ * $22.7M, продажа ЗЕМЛИ $18.4M, реверс резерва $9.1M, запасы $6.8M, а про пик
+ * цикла нет ни слова. Верным было одно число из пяти. Запрет «NEVER invent»
+ * стоит в промпте первой строкой и проиграл.
+ *
+ * Правило переносится в код. Разрешено любое число, которое есть в материале
+ * кейса (условие, экзибиты, вопросы и ключи шагов, обе языковые стороны) или
+ * в репликах разговора. Всё остальное — выдумка. Однозначные не считаются,
+ * как и в foreignFigures: «two levers», «3 lines» ничего не утверждают.
+ * header_md и qa_checks_md не берутся: это учёт автора, не материал кейса. */
+export function inventedFigures(reply, caseObj, msgs) {
+  const grab = (t) => {
+    const out = new Set();
+    const re = /\d[\d.,\s\u00a0]*/g;
+    let m;
+    while ((m = re.exec(String(t || ''))) !== null) {
+      const raw = m[0].replace(/[\s\u00a0,]/g, '').replace(/\.+$/, '');
+      if (!raw) continue;
+      const digits = raw.replace(/[^0-9]/g, '');
+      if (digits.replace(/^0+/, '').length < 2) continue;
+      out.add(String(parseFloat(raw)));
+    }
+    return out;
+  };
+  const c = caseObj || {};
+  /* строки собираются как есть, не через JSON.stringify: в JSON перенос строки
+     становится «\\n», и «12\n13» склеивалось бы иначе, чем в живом ответе */
+  const parts = [];
+  const walk = (o) => {
+    if (o == null) return;
+    if (typeof o === 'string' || typeof o === 'number') { parts.push(String(o)); return; }
+    if (Array.isArray(o)) { o.forEach(walk); return; }
+    if (typeof o === 'object') Object.values(o).forEach(walk);
+  };
+  walk([c.prompt_md, c.prompt_md_en, c.exhibits, c.steps]);
+  let corpus = parts.join('\n');
+  for (const x of (Array.isArray(msgs) ? msgs : [])) if (x) corpus += ' ' + String(x.content || '');
+  const ok = grab(corpus);
+  const bad = [];
+  for (const v of grab(reply)) if (!ok.has(v)) bad.push(v);
+  return bad;
+}
+
 /* ЧИСЛА, КОТОРЫЕ КАНДИДАТ ЕЩЁ НЕ ЗАРАБОТАЛ.
    Замер на проде 09.08, кейс #243: на запрос данных интервьюер выдал готовый
    результат кейса — $14.07M против $5.30M, — то есть ответ, ради которого
@@ -747,6 +794,21 @@ function caseGates(caseObj, lang) {
    Правило одно: партия идёт НЕ по-русски и английская сторона непуста — берём
    её; иначе исходник. Ни одного поля не переименовано и ничего не удалено,
    поэтому русская партия не меняется вовсе. */
+/* 21.09.2026, dev. Служебный id экзибита в условии кейса.
+   В 218 кейсах условие кончается фразой «The data is in ex1» / «Данные — в ex1»:
+   это адрес для автора, а модель читает условие вслух — и кандидат видел на
+   экране «ex1». Замер на проде: #287 и #194, оба раза дословно. Корпус закрыт и
+   запечатан package_sha256, поэтому правится не банк, а место, где условие
+   уходит модели: ex1 → «Exhibit 1» / «экзибит 1». Ничего больше не трогается. */
+function humanExRefs(text, lang) {
+  if (typeof text !== 'string' || !text) return text;
+  if (String(lang) === 'ru') {
+    return text.replace(/(^|[\s(«])в ex(\d+)\b/g, (m, a, n) => a + 'в экзибите ' + n)
+               .replace(/\bex(\d+)\b/g, (m, n) => 'экзибит ' + n);
+  }
+  return text.replace(/\bex(\d+)\b/g, (m, n) => 'Exhibit ' + n);
+}
+
 function enField(obj, field, lang) {
   if (!obj) return '';
   if (String(lang) !== 'ru') {
@@ -1165,7 +1227,7 @@ FIRM STYLE: ${firmStyle(firm)}
 CASE: "${enField(caseObj, 'title', lang)}" — ${caseObj.case_type} · ${enField(caseObj, 'industry', lang)} · ${caseObj.difficulty}
 
 CASE PROMPT (the scenario):
-${enField(caseObj, 'prompt_md', lang) || ПУСТОЙ_ПРОМПТ(caseObj)}`;
+${humanExRefs(enField(caseObj, 'prompt_md', lang), lang) || ПУСТОЙ_ПРОМПТ(caseObj)}`;
 
   const doneText = done.size
     ? `\n\n════ ALREADY ESTABLISHED (do not re-ask; these numbers/insights are known) ════\n` +
@@ -1267,7 +1329,7 @@ FIRM STYLE: ${firmStyle(firm)}
 CASE: "${enField(caseObj, 'title', lang)}" — ${caseObj.case_type} · ${enField(caseObj, 'industry', lang)} · ${caseObj.difficulty}
 
 CASE PROMPT (the scenario):
-${enField(caseObj, 'prompt_md', lang) || ПУСТОЙ_ПРОМПТ(caseObj)}`;
+${humanExRefs(enField(caseObj, 'prompt_md', lang), lang) || ПУСТОЙ_ПРОМПТ(caseObj)}`;
 
   const answerKey =
 `\n\n════ ANSWER KEY FOR THE CURRENT STEP — NEVER READ THIS ALOUD ════
@@ -1687,7 +1749,10 @@ export default async function handler(req, res) {
         if (clientMsgs[i] && clientMsgs[i].role === 'user') return String(clientMsgs[i].content || '');
       return '';
     })();
-    let holding = firstAttempt, heldText = '';
+    /* 21.09.2026: придерживается КАЖДЫЙ ответ, а не только разбор первой ошибки —
+       иначе выдуманное число уходит кандидату раньше, чем его можно поймать
+       (см. inventedFigures). Цена — ответ приходит целиком, а не по буквам. */
+    let holding = true, heldText = '';
     if (wantStream && response.status >= 200 && response.status < 300 && response.body) {
       const filter = createMarkerFilter();
       const reader = response.body.getReader();
@@ -1712,11 +1777,7 @@ export default async function handler(req, res) {
               if (holding) {
                 heldText += safe;
                 // вердикт стоит в самом начале ответа — как только он виден, решаем
-                const vm = streamedText.match(/<verdict>\s*(pass|retry)\s*<\/verdict>/i);
-                if (vm && vm[1].toLowerCase() !== 'retry') {
-                  holding = false;
-                  if (heldText) { openSse(); sseSend({ t: heldText }); heldText = ''; }
-                }
+                /* ранний выпуск по вердикту pass снят 21.09: проверка выдумки идёт на всём ответе */
               } else if (safe) { openSse(); sseSend({ t: safe }); }
             } else if (ev.type === 'message_start' && ev.message && ev.message.usage) {
               /* Вход и кеш приходят ТОЛЬКО в message_start; в message_delta их нет.
@@ -1760,17 +1821,30 @@ export default async function handler(req, res) {
        победы: вторая неудача означает, что случай не берётся правилом, и тогда
        честнее отдать как есть, чем крутить деньги кандидата в цикле. */
     if (holding && heldText) {
-      const bad = foreignFigures(heldText, lastCandidateText);
+      /* Две проверки, одна переписка. Первая ступень (разбор первой ошибки) судится
+         прежним правилом «ни одного числа, которого кандидат не писал». Любой
+         другой ход — новым: «ни одного числа, которого нет в кейсе». */
+      const hintTurn = firstAttempt && !/<verdict>\s*pass\s*<\/verdict>/i.test(streamedText);
+      let bad = hintTurn ? foreignFigures(heldText, lastCandidateText) : [];
+      const kind = bad.length ? 'hint' : 'invented';
+      if (!bad.length) bad = inventedFigures(heldText, caseObj, clientMsgs);
       if (bad.length) {
-        console.log('case-session hint leak', JSON.stringify({
+        console.log(kind === 'hint' ? 'case-session hint leak' : 'case-session invented figures', JSON.stringify({
           build: BUILD, case: caseObj.id, figures: bad.slice(0, 4) }));
         try {
-          const strict = built.volatile
-            + '\n\nYOUR PREVIOUS ATTEMPT AT THIS REPLY WAS REJECTED. It contained the figure '
-            + bad.slice(0, 3).join(', ') + ', which the candidate never wrote. That names the row '
-            + 'they missed, which is the answer. Ask a SHORTER, VAGUER question that contains NO '
-            + 'figure at all and points only at their own claim. Keep the verdict marker.';
-          const rb = JSON.stringify({ model: CASE_MODEL, max_tokens: 300,
+          const strict = built.volatile + (kind === 'hint'
+            ? '\n\nYOUR PREVIOUS ATTEMPT AT THIS REPLY WAS REJECTED. It contained the figure '
+              + bad.slice(0, 3).join(', ') + ', which the candidate never wrote. That names the row '
+              + 'they missed, which is the answer. Ask a SHORTER, VAGUER question that contains NO '
+              + 'figure at all and points only at their own claim. Keep the verdict marker.'
+            : '\n\nYOUR PREVIOUS ATTEMPT AT THIS REPLY WAS REJECTED. It stated the figure '
+              + bad.slice(0, 3).join(', ') + ', which does not exist anywhere in this case. You must '
+              + 'NEVER invent a number. If the candidate asked for data that belongs to a step that is '
+              + 'not open yet, do not answer it with numbers: say it comes a little later and point them '
+              + 'to what they need to do first. Otherwise write the same reply again using ONLY figures '
+              + 'that appear in the case material above or in the candidate\'s own messages. Keep every '
+              + 'marker you would have used.');
+          const rb = JSON.stringify({ model: CASE_MODEL, max_tokens: kind === 'hint' ? 300 : 800,
             system: [{ type: 'text', text: built.stable, cache_control: { type: 'ephemeral' } }],
             messages: convo.concat([{ role: 'user', content: [{ type: 'text', text: strict }] }]) });
           // без stream и без ретраев: ход короткий, а ждать кандидат уже ждёт
@@ -1797,8 +1871,8 @@ export default async function handler(req, res) {
             if (txt) {
               const f2 = createMarkerFilter();
               const visible = (f2.push(txt) + f2.flush()).trim();
-              const still = foreignFigures(visible, lastCandidateText);
-              console.log('case-session hint rewrite', JSON.stringify({
+              const still = kind === 'hint' ? foreignFigures(visible, lastCandidateText) : inventedFigures(visible, caseObj, clientMsgs);
+              console.log('case-session ' + kind + ' rewrite', JSON.stringify({
                 build: BUILD, case: caseObj.id, ok: still.length === 0 }));
               if (visible) { streamedText = txt; heldText = visible; }
             }

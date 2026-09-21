@@ -389,7 +389,17 @@ function rkNumForms(val) {
   }
   return [...new Set(out)].filter(Boolean);
 }
+/* 21.09.2026, dev. Игры 53–59 несут в вопросах служебную ссылку автора «(ex1)»,
+   «(ex2)». Экспонаты на экране номеров не имеют, поэтому кандидат видел
+   непонятный ярлык, и только. Ссылка снимается на выходе, после скраба, —
+   сам скраб не тронут. Замер на проде: Running on Empty, Q1–Q3. */
+function rkStripExRef(t) {
+  return typeof t === 'string' ? t.replace(/\s*\(ex\d+\)/g, '') : t;
+}
 function scrubPrompt(p, secretVals, opts, ctx) {
+  return rkStripExRef(scrubPromptCore(p, secretVals, opts, ctx));
+}
+function scrubPromptCore(p, secretVals, opts, ctx) {
   const strict = rkScrubOnce(p, secretVals, opts);
   /* Лестница только для КЕЙСОВ. На экране Анализа есть экспонаты - промпт без
      цифр там нормален, данные берутся из таблицы. На экране кейсов экспонатов
