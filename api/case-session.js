@@ -232,13 +232,46 @@ function lib() {
    гейт обходом накрывал список кейсов, но не карточку экзибита — а это ровно
    то место, где кандидат видит таблицу и график. Вынесено наружу без единого
    изменения поведения: handler зовёт ту же функцию. */
+/* 21.09.2026, dev, замер на живом проде (кейс #31). Карточка экзибита с
+   `render` рисует ТОЛЬКО таблицу/график, а body_md при этом обнуляется. Строка
+   под таблицей — «NOI $12,300,000 · cap rate 7.8% · просят $168,000,000» —
+   пропадала, и интервьюер отвечал «всё уже в экзибите», которого кандидат не
+   видел. Замер по банку: 80 экзибитов в 73 кейсах теряли несущие числа (в #19 —
+   итог сети и сноска о 14 месяцах Мирабада, то есть сама ловушка).
+   Теперь предложения тела, где есть число, которого нет в render, едут
+   кандидату приметкой под карточкой (render.note — клиент её уже рисует). */
+export function exhibitMissingProse(body, render) {
+  if (!body || !render) return '';
+  const norm = t => new Set((String(t).match(/\d[\d,.]*\d|\d/g) || [])
+    .map(x => x.replace(/,/g, '')).filter(x => x.replace(/\./g, '').length >= 2));
+  const inRender = norm(JSON.stringify(render));
+  const prose = String(body).split('\n')
+    .filter(l => l.trim() && !/^\s*[|#]/.test(l))
+    .join(' ')
+    .replace(/\*\*|[*_`]/g, '').replace(/^\s*>\s*/, '').replace(/\s>\s/g, ' ')
+    .replace(/["“”«»]/g, '').replace(/\s+/g, ' ').trim();
+  if (!prose) return '';
+  const sentences = prose.split(/(?<=[.!?…])\s+(?=[A-ZА-ЯЁ«(])|\s+·\s+/);
+  const keep = sentences.filter(snt => [...norm(snt)].some(n => !inRender.has(n)));
+  return keep.join(' · ').trim();
+}
+
 export function exhibitCard(ex, lang) {
-  return ex ? {
+  if (!ex) return null;
+  let render = enField(ex, 'render', lang) || null;
+  if (render && typeof render === 'object') {
+    const missing = exhibitMissingProse(enField(ex, 'body_md', lang), render);
+    if (missing) {
+      const prev = typeof render.note === 'string' ? render.note : '';
+      render = Object.assign({}, render, { note: prev ? prev + ' · ' + missing : missing });
+    }
+  }
+  return {
     id: ex.id,
     title: enField(ex, 'title', lang),
-    render: enField(ex, 'render', lang) || null,
+    render,
     body_md: ex.render ? null : (enField(ex, 'body_md', lang) || null)
-  } : null;
+  };
 }
 
 export function listCases(lang) {

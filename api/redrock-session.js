@@ -393,6 +393,21 @@ function rkNumForms(val) {
    «(ex2)». Экспонаты на экране номеров не имеют, поэтому кандидат видел
    непонятный ярлык, и только. Ссылка снимается на выходе, после скраба, —
    сам скраб не тронут. Замер на проде: Running on Empty, Q1–Q3. */
+/* 27.09.2026, dev, по находке цеха игр (#49 Q2) и обходу всех choice-вопросов
+   Analysis. Скраб режет числа, но слово-ответ и разбор после вопроса оставлял:
+   «Which zone to fund first? North» (#49), «…? Meadow 2,400 · Heath 1,200 · …»
+   (#42), «…? Marginal benefit: 30,000 × 2 × $10…» (#38). У вопроса с выбором всё
+   после последнего «?» — разбор, а не условие: снимается. Три экрана из 32. */
+function rkChoiceStem(q, text) {
+  if (typeof text !== 'string') return text;
+  const hasChoice = ((q && q.parts) || []).some(p => p && Array.isArray(p.options) && p.options.length);
+  if (!hasChoice) return text;
+  const i = text.lastIndexOf('?');
+  return (i >= 0 && text.slice(i + 1).trim()) ? text.slice(0, i + 1) : text;
+}
+function rkStripAuthorAside(t) {
+  return typeof t === 'string' ? t.replace(/\s*[⟨〈][^⟩〉]{0,80}[⟩〉]/g, '') : t;
+}
 function rkStripExRef(t) {
   return typeof t === 'string' ? t.replace(/\s*\(ex\d+\)/g, '') : t;
 }
@@ -450,14 +465,17 @@ function sanitizeGame(game, revealedSet) {
     id: game.id, title: game.title, world: game.world, family: game.family,
     difficulty: game.difficulty, est_minutes: game.est_minutes,
     objective: game.objective,
-    study_md: (game.collect && game.collect.length) ? markStudy(game.study_md, game.collect) : game.study_md,
+    /* 21.09.2026 dev: в игре #49 в тексте сценария стояла авторская ремарка
+       ⟨may or may not matter⟩ — кандидат видел её на экране. Скобки ⟨…⟩ служебные,
+       снимаются на выдаче. */
+    study_md: rkStripAuthorAside((game.collect && game.collect.length) ? markStudy(game.study_md, game.collect) : game.study_md),
     // роли тут нет и быть не может: только чем можно двигать по экрану
     chips: (game.collect || []).map(c => ({ id: c.id, text: c.text })),
     // distractors are SERVER-ONLY (their whole point is the Research Journal
     // filtering task) — never label them for the client.
     exhibits: (game.exhibits || []).map(ex => sanitizeExhibit(ex, revealedSet)),
     analysis: (game.analysis || []).map(q => ({
-      q: q.q, prompt: scrubPrompt(q.prompt, (q.parts || []).flatMap(p => [p.answer, p.naive])),
+      q: q.q, prompt: rkChoiceStem(q, scrubPrompt(q.prompt, (q.parts || []).flatMap(p => [p.answer, p.naive]))),
       parts: (q.parts || []).map(p => ({ key: p.key, label: p.label, input: p.input || 'numeric', unit: p.unit || null, options: p.options || null }))
     })),
     report: {

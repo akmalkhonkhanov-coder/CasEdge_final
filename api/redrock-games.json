@@ -137,6 +137,7 @@
      "parts": [
       {
        "key": "q3a",
+       "label": "Sphagnum reduction, %",
        "input": "numeric",
        "answer": 25,
        "round": 2,
@@ -144,6 +145,7 @@
       },
       {
        "key": "q3b",
+       "label": "Bog area reduction, %",
        "input": "numeric",
        "answer": 20,
        "round": 2,
@@ -569,6 +571,7 @@
      "parts": [
       {
        "key": "q3a",
+       "label": "Live-coral reduction, %",
        "input": "numeric",
        "answer": 20,
        "round": 2,
@@ -576,6 +579,7 @@
       },
       {
        "key": "q3b",
+       "label": "Live coral in a decade, %",
        "input": "numeric",
        "answer": 32,
        "round": 2,
@@ -990,6 +994,7 @@
      "parts": [
       {
        "key": "q3a",
+       "label": "Whitefish reduction, %",
        "input": "numeric",
        "answer": 25,
        "round": 2,
@@ -997,6 +1002,7 @@
       },
       {
        "key": "q3b",
+       "label": "Ice-cover reduction, %",
        "input": "numeric",
        "answer": 20,
        "round": 2,
@@ -1345,6 +1351,7 @@
      "parts": [
       {
        "key": "q1a",
+       "label": "Q3 international share, %",
        "input": "numeric",
        "answer": 60,
        "round": 2,
@@ -1352,6 +1359,7 @@
       },
       {
        "key": "q1b",
+       "label": "Q4 international share, %",
        "input": "numeric",
        "answer": 55,
        "round": 2,
@@ -1745,6 +1753,7 @@
      "parts": [
       {
        "key": "q1a",
+       "label": "Q3 member share, %",
        "input": "numeric",
        "answer": 65,
        "round": 2,
@@ -1752,6 +1761,7 @@
       },
       {
        "key": "q1b",
+       "label": "Q4 member share, %",
        "input": "numeric",
        "answer": 60,
        "round": 2,
@@ -2173,6 +2183,7 @@
      "parts": [
       {
        "key": "q1a",
+       "label": "Q3 member share, %",
        "input": "numeric",
        "answer": 60,
        "round": 2,
@@ -2180,6 +2191,7 @@
       },
       {
        "key": "q1b",
+       "label": "Q4 member share, %",
        "input": "numeric",
        "answer": 55,
        "round": 2,
@@ -2675,6 +2687,7 @@
      "parts": [
       {
        "key": "q1a",
+       "label": "Urchins removed per year",
        "input": "numeric",
        "answer": 20000,
        "round": 0,
@@ -2682,6 +2695,7 @@
       },
       {
        "key": "q1b",
+       "label": "First year at/below threshold",
        "input": "choice",
        "answer": "Year 6",
        "naive": "Year 5",
@@ -2695,6 +2709,7 @@
       },
       {
        "key": "q1c",
+       "label": "Population in that year",
        "input": "numeric",
        "answer": 119475,
        "round": 0,
@@ -2723,6 +2738,7 @@
      "parts": [
       {
        "key": "q3a",
+       "label": "Total kelp recovery, pp",
        "input": "numeric",
        "answer": 14,
        "round": 0,
@@ -2730,6 +2746,7 @@
       },
       {
        "key": "q3b",
+       "label": "Reef-fish index, Year 5",
        "input": "numeric",
        "answer": 37000,
        "round": 0,
@@ -2745,6 +2762,7 @@
      "parts": [
       {
        "key": "q4a",
+       "label": "Kelp cover at Year 5, %",
        "input": "numeric",
        "answer": 33,
        "round": 0,
@@ -2754,6 +2772,7 @@
       },
       {
        "key": "q4b",
+       "label": "Revenue foregone, $",
        "input": "numeric",
        "answer": 60000,
        "round": 0,
@@ -3256,6 +3275,7 @@
      "parts": [
       {
        "key": "q1a",
+       "label": "Hyacinth cleared per year, ha",
        "input": "numeric",
        "answer": 90,
        "round": 0,
@@ -3263,6 +3283,7 @@
       },
       {
        "key": "q1b",
+       "label": "First year at/below threshold",
        "input": "choice",
        "answer": "Year 5",
        "naive": "Year 4",
@@ -3298,6 +3319,7 @@
      "parts": [
       {
        "key": "q3a",
+       "label": "Total open-water recovery, pp",
        "input": "numeric",
        "answer": 8,
        "round": 0,
@@ -3305,6 +3327,7 @@
       },
       {
        "key": "q3b",
+       "label": "Waterfowl count, Year 5",
        "input": "numeric",
        "answer": 15200,
        "round": 0,
@@ -3320,6 +3343,7 @@
      "parts": [
       {
        "key": "q4a",
+       "label": "Open water at Year 5, %",
        "input": "numeric",
        "answer": 22,
        "round": 0,
@@ -3329,6 +3353,7 @@
       },
       {
        "key": "q4b",
+       "label": "Ferry revenue foregone, $",
        "input": "numeric",
        "answer": 24000,
        "round": 0,
@@ -3878,6 +3903,7 @@
      "parts": [
       {
        "key": "q2a",
+       "label": "Export revenue Y1, $M",
        "input": "numeric",
        "answer": 120,
        "round": 0,
@@ -3885,6 +3911,7 @@
       },
       {
        "key": "q2b",
+       "label": "Export revenue Y10, $M",
        "input": "numeric",
        "answer": 180,
        "round": 0,
@@ -3892,6 +3919,7 @@
       },
       {
        "key": "q2c",
+       "label": "GDP Y1, $B",
        "input": "numeric",
        "answer": 6,
        "round": 0,
@@ -3899,6 +3927,7 @@
       },
       {
        "key": "q2d",
+       "label": "GDP Y10, $B",
        "input": "numeric",
        "answer": 18,
        "round": 0,
@@ -3906,6 +3935,7 @@
       },
       {
        "key": "q2e",
+       "label": "Share of GDP: rises or falls",
        "input": "choice",
        "answer": "falls",
        "naive": "rises",
@@ -3917,6 +3947,7 @@
       },
       {
        "key": "q2f",
+       "label": "Export share of GDP Y1, %",
        "input": "numeric",
        "answer": 2,
        "round": 2,
@@ -3924,6 +3955,7 @@
       },
       {
        "key": "q2g",
+       "label": "Export share of GDP Y10, %",
        "input": "numeric",
        "answer": 1,
        "round": 2,
@@ -4469,6 +4501,7 @@
      "parts": [
       {
        "key": "q4a",
+       "label": "Annual saving, $",
        "input": "numeric",
        "answer": 8910000,
        "round": 0,
@@ -4478,6 +4511,7 @@
       },
       {
        "key": "q4b",
+       "label": "Payback, years",
        "input": "numeric",
        "answer": 0.44,
        "round": 2,
@@ -4901,6 +4935,7 @@
      "parts": [
       {
        "key": "q3a",
+       "label": "Marsh area reduction, %",
        "input": "numeric",
        "answer": 20,
        "round": 2,
@@ -4908,6 +4943,7 @@
       },
       {
        "key": "q3b",
+       "label": "Sparrow pairs reduction, %",
        "input": "numeric",
        "answer": 25,
        "round": 2,
@@ -5350,6 +5386,7 @@
      "parts": [
       {
        "key": "q3a",
+       "label": "Aquifer reduction, %",
        "input": "numeric",
        "answer": 20,
        "round": 2,
@@ -5357,6 +5394,7 @@
       },
       {
        "key": "q3b",
+       "label": "Aquifer level in a decade",
        "input": "numeric",
        "answer": 38.4,
        "round": 2,
@@ -5774,6 +5812,7 @@
      "parts": [
       {
        "key": "q3a",
+       "label": "Canopy reduction, %",
        "input": "numeric",
        "answer": 20,
        "round": 2,
@@ -5781,6 +5820,7 @@
       },
       {
        "key": "q3b",
+       "label": "Epiphyte species reduction, %",
        "input": "numeric",
        "answer": 25,
        "round": 2,
@@ -6128,6 +6168,7 @@
      "parts": [
       {
        "key": "q1a",
+       "label": "Q3 transient share, %",
        "input": "numeric",
        "answer": 65,
        "round": 2,
@@ -6135,6 +6176,7 @@
       },
       {
        "key": "q1b",
+       "label": "Q4 transient share, %",
        "input": "numeric",
        "answer": 60,
        "round": 2,
@@ -6558,6 +6600,7 @@
      "parts": [
       {
        "key": "q1a",
+       "label": "Q3 member share, %",
        "input": "numeric",
        "answer": 70,
        "round": 2,
@@ -6565,6 +6608,7 @@
       },
       {
        "key": "q1b",
+       "label": "Q4 member share, %",
        "input": "numeric",
        "answer": 60,
        "round": 2,
@@ -7054,6 +7098,7 @@
      "parts": [
       {
        "key": "q1a",
+       "label": "Crabs removed per year",
        "input": "numeric",
        "answer": 14000,
        "round": 0,
@@ -7061,6 +7106,7 @@
       },
       {
        "key": "q1b",
+       "label": "First year at/below threshold",
        "input": "choice",
        "answer": "Year 5",
        "naive": "Year 4",
@@ -7095,6 +7141,7 @@
      "parts": [
       {
        "key": "q3a",
+       "label": "Total mangrove recovery, pp",
        "input": "numeric",
        "answer": 9,
        "round": 0,
@@ -7102,6 +7149,7 @@
       },
       {
        "key": "q3b",
+       "label": "Nursery-fish index",
        "input": "numeric",
        "answer": 17700,
        "round": 0,
@@ -7117,6 +7165,7 @@
      "parts": [
       {
        "key": "q4a",
+       "label": "Cover at Year 5, %",
        "input": "numeric",
        "answer": 32,
        "round": 0,
@@ -7126,6 +7175,7 @@
       },
       {
        "key": "q4b",
+       "label": "Revenue foregone, $",
        "input": "numeric",
        "answer": 32000,
        "round": 0,
@@ -7641,6 +7691,7 @@
      "parts": [
       {
        "key": "q1a",
+       "label": "Locusts removed per year",
        "input": "numeric",
        "answer": 30000,
        "round": 0,
@@ -7648,6 +7699,7 @@
       },
       {
        "key": "q1b",
+       "label": "First year at/below threshold",
        "input": "choice",
        "answer": "Year 7",
        "naive": "Year 5",
@@ -7682,6 +7734,7 @@
      "parts": [
       {
        "key": "q3a",
+       "label": "Total grassland recovery, pp",
        "input": "numeric",
        "answer": 14,
        "round": 0,
@@ -7689,6 +7742,7 @@
       },
       {
        "key": "q3b",
+       "label": "Antelope index",
        "input": "numeric",
        "answer": 30600,
        "round": 0,
@@ -7704,6 +7758,7 @@
      "parts": [
       {
        "key": "q4a",
+       "label": "Cover at Year 5, %",
        "input": "numeric",
        "answer": 38,
        "round": 0,
@@ -7713,6 +7768,7 @@
       },
       {
        "key": "q4b",
+       "label": "Revenue foregone, $",
        "input": "numeric",
        "answer": 72000,
        "round": 0,
@@ -8231,6 +8287,7 @@
      "parts": [
       {
        "key": "q2a",
+       "label": "Export revenue Y1, $M",
        "input": "numeric",
        "answer": 45,
        "round": 0,
@@ -8238,6 +8295,7 @@
       },
       {
        "key": "q2b",
+       "label": "Export revenue Y10, $M",
        "input": "numeric",
        "answer": 75,
        "round": 0,
@@ -8245,6 +8303,7 @@
       },
       {
        "key": "q2c",
+       "label": "GDP Y1, $B",
        "input": "numeric",
        "answer": 10,
        "round": 0,
@@ -8252,6 +8311,7 @@
       },
       {
        "key": "q2d",
+       "label": "GDP Y10, $B",
        "input": "numeric",
        "answer": 24,
        "round": 0,
@@ -8259,6 +8319,7 @@
       },
       {
        "key": "q2e",
+       "label": "Share of GDP: rises or falls",
        "input": "choice",
        "answer": "falls",
        "naive": "rises",
@@ -8270,6 +8331,7 @@
       },
       {
        "key": "q2f",
+       "label": "Export share of GDP Y1, %",
        "input": "numeric",
        "answer": 0.45,
        "round": 2,
@@ -8277,6 +8339,7 @@
       },
       {
        "key": "q2g",
+       "label": "Export share of GDP Y10, %",
        "input": "numeric",
        "answer": 0.31,
        "round": 2,
@@ -8822,6 +8885,7 @@
      "parts": [
       {
        "key": "q2a",
+       "label": "Export revenue Y1, $M",
        "input": "numeric",
        "answer": 80,
        "round": 0,
@@ -8829,6 +8893,7 @@
       },
       {
        "key": "q2b",
+       "label": "Export revenue Y10, $M",
        "input": "numeric",
        "answer": 140,
        "round": 0,
@@ -8836,6 +8901,7 @@
       },
       {
        "key": "q2c",
+       "label": "GDP Y1, $B",
        "input": "numeric",
        "answer": 5,
        "round": 0,
@@ -8843,6 +8909,7 @@
       },
       {
        "key": "q2d",
+       "label": "GDP Y10, $B",
        "input": "numeric",
        "answer": 16,
        "round": 0,
@@ -8850,6 +8917,7 @@
       },
       {
        "key": "q2e",
+       "label": "Share of GDP: rises or falls",
        "input": "choice",
        "answer": "falls",
        "naive": "rises",
@@ -8861,6 +8929,7 @@
       },
       {
        "key": "q2f",
+       "label": "Export share of GDP Y1, %",
        "input": "numeric",
        "answer": 1.6,
        "round": 2,
@@ -8868,6 +8937,7 @@
       },
       {
        "key": "q2g",
+       "label": "Export share of GDP Y10, %",
        "input": "numeric",
        "answer": 0.88,
        "round": 2,
@@ -9414,6 +9484,7 @@
      "parts": [
       {
        "key": "q4a",
+       "label": "Annual saving, $",
        "input": "numeric",
        "answer": 4680000,
        "round": 0,
@@ -9423,6 +9494,7 @@
       },
       {
        "key": "q4b",
+       "label": "Payback, years",
        "input": "numeric",
        "answer": 0.59,
        "round": 2,
@@ -9846,6 +9918,7 @@
      "parts": [
       {
        "key": "q3a",
+       "label": "Playa area reduction, %",
        "input": "numeric",
        "answer": 20,
        "round": 2,
@@ -9855,6 +9928,7 @@
       },
       {
        "key": "q3b",
+       "label": "Flamingo reduction, %",
        "input": "numeric",
        "answer": 30,
        "round": 2,
@@ -10277,6 +10351,7 @@
      "parts": [
       {
        "key": "q3a",
+       "label": "Kelp reduction, %",
        "input": "numeric",
        "answer": 20,
        "round": 2,
@@ -10284,6 +10359,7 @@
       },
       {
        "key": "q3b",
+       "label": "Cod reduction, %",
        "input": "numeric",
        "answer": 25,
        "round": 2,
@@ -10634,6 +10710,7 @@
      "parts": [
       {
        "key": "q1a",
+       "label": "Q3 season-holder share, %",
        "input": "numeric",
        "answer": 60,
        "round": 2,
@@ -10641,6 +10718,7 @@
       },
       {
        "key": "q1b",
+       "label": "Q4 season-holder share, %",
        "input": "numeric",
        "answer": 55,
        "round": 2,
@@ -10669,6 +10747,7 @@
      "parts": [
       {
        "key": "q3a",
+       "label": "Revenue at walk-up price, $",
        "input": "numeric",
        "answer": 5184000,
        "round": 0,
@@ -10676,6 +10755,7 @@
       },
       {
        "key": "q3b",
+       "label": "Realized revenue per event, $",
        "input": "numeric",
        "answer": 324000,
        "round": 0,
@@ -10683,6 +10763,7 @@
       },
       {
        "key": "q3c",
+       "label": "Realized season revenue, $",
        "input": "numeric",
        "answer": 3888000,
        "round": 0,
@@ -10698,6 +10779,7 @@
      "parts": [
       {
        "key": "q4a",
+       "label": "Low-season revenue, $",
        "input": "numeric",
        "answer": 806400,
        "round": 0,
@@ -10705,6 +10787,7 @@
       },
       {
        "key": "q4b",
+       "label": "Peak above low season, %",
        "input": "numeric",
        "answer": 382.14,
        "round": 2,
@@ -11130,6 +11213,7 @@
      "parts": [
       {
        "key": "q1a",
+       "label": "Q3 member share, %",
        "input": "numeric",
        "answer": 65,
        "round": 2,
@@ -11137,6 +11221,7 @@
       },
       {
        "key": "q1b",
+       "label": "Q4 member share, %",
        "input": "numeric",
        "answer": 60,
        "round": 2,
@@ -11585,6 +11670,7 @@
      "parts": [
       {
        "key": "q1a",
+       "label": "Q3 annual-member share, %",
        "input": "numeric",
        "answer": 70,
        "round": 2,
@@ -11592,6 +11678,7 @@
       },
       {
        "key": "q1b",
+       "label": "Q4 annual-member share, %",
        "input": "numeric",
        "answer": 65,
        "round": 2,
@@ -12079,6 +12166,7 @@
      "parts": [
       {
        "key": "q1a",
+       "label": "Removed per year, full rate",
        "input": "numeric",
        "answer": 20000,
        "round": 0,
@@ -12086,6 +12174,7 @@
       },
       {
        "key": "q1b",
+       "label": "Removed per year, reduced",
        "input": "numeric",
        "answer": 15000,
        "round": 0,
@@ -12093,6 +12182,7 @@
       },
       {
        "key": "q1c",
+       "label": "Population, Year 4",
        "input": "numeric",
        "answer": 71900,
        "round": 0,
@@ -12100,6 +12190,7 @@
       },
       {
        "key": "q1d",
+       "label": "Population, Year 5",
        "input": "numeric",
        "answer": 64090,
        "round": 0,
@@ -12107,6 +12198,7 @@
       },
       {
        "key": "q1e",
+       "label": "Population, Year 6",
        "input": "numeric",
        "answer": 55499,
        "round": 0,
@@ -12114,6 +12206,7 @@
       },
       {
        "key": "q1f",
+       "label": "First year at/below threshold",
        "input": "choice",
        "answer": "Year 6",
        "naive": "Year 5",
@@ -12148,6 +12241,7 @@
      "parts": [
       {
        "key": "q3a",
+       "label": "Total cod-bank recovery, pp",
        "input": "numeric",
        "answer": 11,
        "round": 0,
@@ -12155,6 +12249,7 @@
       },
       {
        "key": "q3b",
+       "label": "Cod-recruitment index",
        "input": "numeric",
        "answer": 22750,
        "round": 0,
@@ -12170,6 +12265,7 @@
      "parts": [
       {
        "key": "q4a",
+       "label": "Cover at Year 6, %",
        "input": "numeric",
        "answer": 35,
        "round": 0,
@@ -12179,6 +12275,7 @@
       },
       {
        "key": "q4b",
+       "label": "Revenue foregone, $",
        "input": "numeric",
        "answer": 50000,
        "round": 0,
@@ -12683,6 +12780,7 @@
      "parts": [
       {
        "key": "q1a",
+       "label": "Goats removed per year",
        "input": "numeric",
        "answer": 18000,
        "round": 0,
@@ -12690,6 +12788,7 @@
       },
       {
        "key": "q1b",
+       "label": "First year at/below threshold",
        "input": "choice",
        "answer": "Year 5",
        "naive": "Year 4",
@@ -12704,6 +12803,7 @@
       },
       {
        "key": "q1c",
+       "label": "Year 4 minus threshold",
        "input": "numeric",
        "answer": 140,
        "round": 0,
@@ -12732,6 +12832,7 @@
      "parts": [
       {
        "key": "q3a",
+       "label": "Total scrub recovery, pp",
        "input": "numeric",
        "answer": 13,
        "round": 0,
@@ -12739,6 +12840,7 @@
       },
       {
        "key": "q3b",
+       "label": "Seabird index",
        "input": "numeric",
        "answer": 34550,
        "round": 0,
@@ -12754,6 +12856,7 @@
      "parts": [
       {
        "key": "q4a",
+       "label": "Cover at Year 5, %",
        "input": "numeric",
        "answer": 39,
        "round": 0,
@@ -12763,6 +12866,7 @@
       },
       {
        "key": "q4b",
+       "label": "Revenue foregone, $",
        "input": "numeric",
        "answer": 112000,
        "round": 0,
@@ -13294,6 +13398,7 @@
      "parts": [
       {
        "key": "q2a",
+       "label": "Revenue at spot price, $M",
        "input": "numeric",
        "answer": 41.6,
        "round": 2,
@@ -13301,6 +13406,7 @@
       },
       {
        "key": "q2b",
+       "label": "Realized Year-10 revenue, $M",
        "input": "numeric",
        "answer": 35.36,
        "round": 2,
@@ -13854,6 +13960,7 @@
      "parts": [
       {
        "key": "q2a",
+       "label": "Export revenue Y1, $M",
        "input": "numeric",
        "answer": 37.5,
        "round": 2,
@@ -13861,6 +13968,7 @@
       },
       {
        "key": "q2b",
+       "label": "Export revenue Y10, $M",
        "input": "numeric",
        "answer": 75,
        "round": 2,
@@ -13868,6 +13976,7 @@
       },
       {
        "key": "q2c",
+       "label": "GDP Y1, $M",
        "input": "numeric",
        "answer": 3000,
        "round": 0,
@@ -13875,6 +13984,7 @@
       },
       {
        "key": "q2d",
+       "label": "GDP Y10, $M",
        "input": "numeric",
        "answer": 9000,
        "round": 0,
@@ -13882,6 +13992,7 @@
       },
       {
        "key": "q2e",
+       "label": "Share of GDP: rises or falls",
        "input": "choice",
        "answer": "falls",
        "naive": "rises",
@@ -13893,6 +14004,7 @@
       },
       {
        "key": "q2f",
+       "label": "Export share of GDP Y1, %",
        "input": "numeric",
        "answer": 1.25,
        "round": 2,
@@ -13900,6 +14012,7 @@
       },
       {
        "key": "q2g",
+       "label": "Export share of GDP Y10, %",
        "input": "numeric",
        "answer": 0.83,
        "round": 2,
@@ -14445,6 +14558,7 @@
      "parts": [
       {
        "key": "q4a",
+       "label": "Annual saving, $",
        "input": "numeric",
        "answer": 3780000,
        "round": 0,
@@ -14454,6 +14568,7 @@
       },
       {
        "key": "q4b",
+       "label": "Payback, years",
        "input": "numeric",
        "answer": 0.55,
        "round": 2,
@@ -14880,6 +14995,7 @@
      "parts": [
       {
        "key": "q3a",
+       "label": "Flat area reduction, %",
        "input": "numeric",
        "answer": 20,
        "round": 2,
@@ -14889,6 +15005,7 @@
       },
       {
        "key": "q3b",
+       "label": "Wader pairs reduction, %",
        "input": "numeric",
        "answer": 12.5,
        "round": 2,
@@ -15309,6 +15426,7 @@
      "parts": [
       {
        "key": "q3a",
+       "label": "Eelgrass reduction, %",
        "input": "numeric",
        "answer": 20,
        "round": 2,
@@ -15318,6 +15436,7 @@
       },
       {
        "key": "q3b",
+       "label": "Scallop beds reduction, %",
        "input": "numeric",
        "answer": 25,
        "round": 2,
@@ -15739,6 +15858,7 @@
      "parts": [
       {
        "key": "q3a",
+       "label": "Reedbed reduction, %",
        "input": "numeric",
        "answer": 15,
        "round": 2,
@@ -15748,6 +15868,7 @@
       },
       {
        "key": "q3b",
+       "label": "Bittern reduction, %",
        "input": "numeric",
        "answer": 20,
        "round": 2,
@@ -16131,6 +16252,7 @@
      "parts": [
       {
        "key": "q1a",
+       "label": "Q3 loyalty-member share, %",
        "input": "numeric",
        "answer": 70,
        "round": 2,
@@ -16138,6 +16260,7 @@
       },
       {
        "key": "q1b",
+       "label": "Q4 loyalty-member share, %",
        "input": "numeric",
        "answer": 60,
        "round": 2,
@@ -16166,6 +16289,7 @@
      "parts": [
       {
        "key": "q3a",
+       "label": "Revenue at posted rate, $",
        "input": "numeric",
        "answer": 2019600,
        "round": 0,
@@ -16173,6 +16297,7 @@
       },
       {
        "key": "q3b",
+       "label": "Realized peak revenue, $",
        "input": "numeric",
        "answer": 1436211,
        "round": 0,
@@ -16188,6 +16313,7 @@
      "parts": [
       {
        "key": "q4a",
+       "label": "Low-season revenue, $",
        "input": "numeric",
        "answer": 491400,
        "round": 0,
@@ -16195,6 +16321,7 @@
       },
       {
        "key": "q4b",
+       "label": "Peak above low season, %",
        "input": "numeric",
        "answer": 192.27,
        "round": 2,
@@ -16654,6 +16781,7 @@
      "parts": [
       {
        "key": "q1a",
+       "label": "Q3 anchor-tenant share, %",
        "input": "numeric",
        "answer": 65,
        "round": 2,
@@ -16661,6 +16789,7 @@
       },
       {
        "key": "q1b",
+       "label": "Q4 anchor-tenant share, %",
        "input": "numeric",
        "answer": 60,
        "round": 2,
@@ -17131,6 +17260,7 @@
      "parts": [
       {
        "key": "q1a",
+       "label": "Rabbits removed per year",
        "input": "numeric",
        "answer": 22000,
        "round": 0,
@@ -17138,6 +17268,7 @@
       },
       {
        "key": "q1b",
+       "label": "First year at/below threshold",
        "input": "choice",
        "answer": "Year 5",
        "naive": "Year 4",
@@ -17151,6 +17282,7 @@
       },
       {
        "key": "q1c",
+       "label": "Population, Year 4",
        "input": "numeric",
        "answer": 100210,
        "round": 0,
@@ -17158,6 +17290,7 @@
       },
       {
        "key": "q1d",
+       "label": "Year 4 minus threshold",
        "input": "numeric",
        "answer": 210,
        "round": 0,
@@ -17165,6 +17298,7 @@
       },
       {
        "key": "q1e",
+       "label": "Population, Year 5",
        "input": "numeric",
        "answer": 88231,
        "round": 0,
@@ -17193,6 +17327,7 @@
      "parts": [
       {
        "key": "q3a",
+       "label": "Total heath recovery, pp",
        "input": "numeric",
        "answer": 13,
        "round": 0,
@@ -17200,6 +17335,7 @@
       },
       {
        "key": "q3b",
+       "label": "Stonechat index",
        "input": "numeric",
        "answer": 30850,
        "round": 0,
@@ -17215,6 +17351,7 @@
      "parts": [
       {
        "key": "q4a",
+       "label": "Cover at Year 5, %",
        "input": "numeric",
        "answer": 36,
        "round": 0,
@@ -17224,6 +17361,7 @@
       },
       {
        "key": "q4b",
+       "label": "Revenue foregone, $",
        "input": "numeric",
        "answer": 96000,
        "round": 0,
@@ -18152,6 +18290,7 @@
      "parts": [
       {
        "key": "q2a",
+       "label": "Saving at pilot usage, $",
        "input": "numeric",
        "answer": 4800000,
        "round": 0,
@@ -18159,6 +18298,7 @@
       },
       {
        "key": "q2b",
+       "label": "Realized sessions per year",
        "input": "numeric",
        "answer": 390000,
        "round": 0,
@@ -18166,6 +18306,7 @@
       },
       {
        "key": "q2c",
+       "label": "Realized annual saving, $",
        "input": "numeric",
        "answer": 3900000,
        "round": 0,
@@ -18194,6 +18335,7 @@
      "parts": [
       {
        "key": "q4a",
+       "label": "Sessions per Tier-3 household",
        "input": "numeric",
        "answer": 2,
        "round": 0,
@@ -18201,6 +18343,7 @@
       },
       {
        "key": "q4b",
+       "label": "Marginal benefit, $",
        "input": "numeric",
        "answer": 600000,
        "round": 0,
@@ -18208,6 +18351,7 @@
       },
       {
        "key": "q4c",
+       "label": "Marginal cost, $",
        "input": "numeric",
        "answer": 750000,
        "round": 0,
@@ -18215,6 +18359,7 @@
       },
       {
        "key": "q4d",
+       "label": "Expand to Tier 3?",
        "input": "choice",
        "answer": "No",
        "naive": "Yes",
@@ -18226,6 +18371,7 @@
       },
       {
        "key": "q4e",
+       "label": "Cost–benefit gap, $",
        "input": "numeric",
        "answer": 150000,
        "round": 0,
@@ -18678,6 +18824,7 @@
      "parts": [
       {
        "key": "q4a",
+       "label": "Gross annual saving, $",
        "input": "numeric",
        "answer": 4752000,
        "round": 0,
@@ -18685,6 +18832,7 @@
       },
       {
        "key": "q4b",
+       "label": "Net annual benefit, $",
        "input": "numeric",
        "answer": 4422000,
        "round": 0,
@@ -19503,6 +19651,7 @@
      "parts": [
       {
        "key": "q4a",
+       "label": "Snowpack reduction, %",
        "input": "numeric",
        "answer": 20,
        "round": 2,
@@ -19512,6 +19661,7 @@
       },
       {
        "key": "q4b",
+       "label": "Snowpack in a decade",
        "input": "numeric",
        "answer": 76.8,
        "round": 2,
@@ -20239,6 +20389,7 @@
      "parts": [
       {
        "key": "q1a",
+       "label": "Reported profit change, $M",
        "input": "numeric",
        "answer": 17,
        "round": 0,
@@ -20246,6 +20397,7 @@
       },
       {
        "key": "q1b",
+       "label": "Reported profit change, %",
        "input": "numeric",
        "answer": 42.5,
        "round": 2,
@@ -20259,6 +20411,7 @@
      "parts": [
       {
        "key": "q2a",
+       "label": "Reported profit change, %",
        "input": "numeric",
        "answer": 42.5,
        "round": 2,
@@ -20266,6 +20419,7 @@
       },
       {
        "key": "q2b",
+       "label": "One-off gain, $M",
        "input": "numeric",
        "answer": 22,
        "round": 0,
@@ -20273,6 +20427,7 @@
       },
       {
        "key": "q2c",
+       "label": "Underlying Y2 profit, $M",
        "input": "numeric",
        "answer": 35,
        "round": 0,
@@ -20280,6 +20435,7 @@
       },
       {
        "key": "q2d",
+       "label": "Underlying profit improved?",
        "input": "choice",
        "answer": "No",
        "naive": "Yes",
@@ -20657,6 +20813,7 @@
      "parts": [
       {
        "key": "q1a",
+       "label": "Net subscriber growth",
        "input": "numeric",
        "answer": 2000,
        "round": 0,
@@ -20664,6 +20821,7 @@
       },
       {
        "key": "q1b",
+       "label": "Ending subscriber base",
        "input": "numeric",
        "answer": 52000,
        "round": 0,
@@ -21440,6 +21598,7 @@
      "parts": [
       {
        "key": "q1a",
+       "label": "Adults removed per year",
        "input": "numeric",
        "answer": 40000,
        "round": 0,
@@ -21447,6 +21606,7 @@
       },
       {
        "key": "q1b",
+       "label": "Herd, Year 4",
        "input": "numeric",
        "answer": 67000,
        "round": 0,
@@ -21454,6 +21614,7 @@
       },
       {
        "key": "q1c",
+       "label": "Herd, Year 5",
        "input": "numeric",
        "answer": 51000,
        "round": 0,
@@ -21461,6 +21622,7 @@
       },
       {
        "key": "q1d",
+       "label": "Herd, Year 6",
        "input": "numeric",
        "answer": 31100,
        "round": 0,
@@ -21468,6 +21630,7 @@
       },
       {
        "key": "q1e",
+       "label": "First year at/below threshold",
        "input": "choice",
        "answer": "Year 6",
        "naive": "Year 3",
@@ -21503,6 +21666,7 @@
      "parts": [
       {
        "key": "q3a",
+       "label": "Total heath recovery, pp",
        "input": "numeric",
        "answer": 18,
        "round": 0,
@@ -21510,6 +21674,7 @@
       },
       {
        "key": "q3b",
+       "label": "Grouse index",
        "input": "numeric",
        "answer": 27200,
        "round": 0,
@@ -21525,6 +21690,7 @@
      "parts": [
       {
        "key": "q4a",
+       "label": "Heath cover at Year 6, %",
        "input": "numeric",
        "answer": 40,
        "round": 0,
@@ -21534,6 +21700,7 @@
       },
       {
        "key": "q4b",
+       "label": "Revenue foregone, $",
        "input": "numeric",
        "answer": 90000,
        "round": 0,
@@ -21925,6 +22092,7 @@
      "parts": [
       {
        "key": "q2a",
+       "label": "Refined-metal revenue, $M",
        "input": "numeric",
        "answer": 30,
        "round": 0,
@@ -21932,6 +22100,7 @@
       },
       {
        "key": "q2b",
+       "label": "Raw-ore revenue lost, $M",
        "input": "numeric",
        "answer": 24,
        "round": 0,
@@ -21939,6 +22108,7 @@
       },
       {
        "key": "q2c",
+       "label": "Total export revenue now, $M",
        "input": "numeric",
        "answer": 46,
        "round": 0,
@@ -22465,6 +22635,7 @@
      "parts": [
       {
        "key": "q4a",
+       "label": "Annual saving, $",
        "input": "numeric",
        "answer": 2688000,
        "round": 0,
@@ -22474,6 +22645,7 @@
       },
       {
        "key": "q4b",
+       "label": "Payback, years",
        "input": "numeric",
        "answer": 0.77,
        "round": 2,
@@ -22830,6 +23002,7 @@
      "parts": [
       {
        "key": "q1a",
+       "label": "North: cost per case, $",
        "input": "numeric",
        "answer": 25,
        "round": 2,
@@ -22837,6 +23010,7 @@
       },
       {
        "key": "q1b",
+       "label": "South: cost per case, $",
        "input": "numeric",
        "answer": 32,
        "round": 2,
@@ -22867,6 +23041,7 @@
      "parts": [
       {
        "key": "q3a",
+       "label": "North, with overhead, $/case",
        "input": "numeric",
        "answer": 32.5,
        "round": 2,
@@ -22874,6 +23049,7 @@
       },
       {
        "key": "q3b",
+       "label": "South, with overhead, $/case",
        "input": "numeric",
        "answer": 44,
        "round": 2,
@@ -22887,6 +23063,7 @@
      "parts": [
       {
        "key": "q4a",
+       "label": "North: cases per household",
        "input": "numeric",
        "answer": 5,
        "round": 2,
@@ -22894,6 +23071,7 @@
       },
       {
        "key": "q4b",
+       "label": "South: cases per household",
        "input": "numeric",
        "answer": 4,
        "round": 2,
@@ -23269,6 +23447,7 @@
      "parts": [
       {
        "key": "q2a",
+       "label": "Area in both zones, km²",
        "input": "numeric",
        "answer": 800,
        "round": 0,
@@ -23276,6 +23455,7 @@
       },
       {
        "key": "q2b",
+       "label": "Share of whole range, %",
        "input": "numeric",
        "answer": 13.33,
        "round": 2,
@@ -23653,6 +23833,7 @@
      "parts": [
       {
        "key": "q2a",
+       "label": "Industrial grade, tonnes",
        "input": "numeric",
        "answer": 45360,
        "round": 0,
@@ -23660,6 +23841,7 @@
       },
       {
        "key": "q2b",
+       "label": "Table grade, tonnes",
        "input": "numeric",
        "answer": 19440,
        "round": 0,
@@ -23690,6 +23872,7 @@
      "parts": [
       {
        "key": "q4a",
+       "label": "Season cost, $",
        "input": "numeric",
        "answer": 1617600,
        "round": 0,
@@ -23699,6 +23882,7 @@
       },
       {
        "key": "q4b",
+       "label": "Margin, % of revenue",
        "input": "numeric",
        "answer": 44.77,
        "round": 2,
@@ -24119,6 +24303,7 @@
      "parts": [
       {
        "key": "q3",
+       "label": "Season handling revenue, $",
        "input": "numeric",
        "answer": 1330000,
        "round": 0,
@@ -24128,6 +24313,7 @@
       },
       {
        "key": "q3b",
+       "label": "Higher earner after shift",
        "input": "choice",
        "options": [
         "Domestic",
@@ -24145,6 +24331,7 @@
      "parts": [
       {
        "key": "q4a",
+       "label": "Season cost, $",
        "input": "numeric",
        "answer": 900000,
        "round": 0,
@@ -24154,6 +24341,7 @@
       },
       {
        "key": "q4b",
+       "label": "Margin, % of handling revenue",
        "input": "numeric",
        "answer": 32.33,
        "round": 2,
@@ -24600,6 +24788,7 @@
      "parts": [
       {
        "key": "q3a",
+       "label": "Annual cost, $",
        "input": "numeric",
        "answer": 1241800,
        "round": 2,
@@ -24609,6 +24798,7 @@
       },
       {
        "key": "q3b",
+       "label": "Margin, % of rent roll",
        "input": "numeric",
        "answer": 68.04,
        "round": 2,
@@ -25045,6 +25235,7 @@
      "parts": [
       {
        "key": "q4a",
+       "label": "Season cost, $",
        "input": "numeric",
        "answer": 325580,
        "round": 2,
@@ -25054,6 +25245,7 @@
       },
       {
        "key": "q4b",
+       "label": "Margin, % of revenue",
        "input": "numeric",
        "answer": 12.07,
        "round": 2,
@@ -25547,6 +25739,7 @@
      "parts": [
       {
        "key": "q4a",
+       "label": "Season cost, $",
        "input": "numeric",
        "answer": 17020000,
        "round": 2,
@@ -25556,6 +25749,7 @@
       },
       {
        "key": "q4b",
+       "label": "Margin, % of billings",
        "input": "numeric",
        "answer": 10.12,
        "round": 2,
@@ -26034,6 +26228,7 @@
      "parts": [
       {
        "key": "q4a",
+       "label": "Profit before fuel, $",
        "input": "numeric",
        "answer": 621200,
        "round": 2,
@@ -26043,6 +26238,7 @@
       },
       {
        "key": "q4b",
+       "label": "Profit, % of revenue",
        "input": "numeric",
        "answer": 27.08,
        "round": 2,
@@ -26492,6 +26688,7 @@
      "parts": [
       {
        "key": "q4a",
+       "label": "Profit, % of revenue",
        "input": "numeric",
        "answer": 11.89,
        "round": 2,
@@ -26511,6 +26708,7 @@
       },
       {
        "key": "q4b",
+       "label": "Profit per paying crossing, $",
        "input": "numeric",
        "answer": 2.19,
        "round": 2,
