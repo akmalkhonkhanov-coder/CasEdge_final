@@ -256,6 +256,34 @@ export function exhibitMissingProse(body, render) {
   return keep.join(' · ').trim();
 }
 
+/* 29.09.2026, dev, сплошной обход 400 кейсов. В заголовках карточек экзибитов
+   стояли пометки автора: «(on request)» / «(по запросу)» — 84, «TABLE» /
+   «ТАБЛИЦА» — 34, «Block 1 (straight away) —» — 10, «(prose)» / «(проза)» / «(auto)».
+   Строчная первая буква поднимается: заголовок стоит под ярлыком отдельной
+   строкой. Кандидат видел их над
+   таблицей (живой #31: «Block 1 (straight away) — rent roll TABLE»). Снимаются
+   на выдаче, текст заголовка остаётся. */
+export function cleanExhibitTitle(t) {
+  if (typeof t !== 'string') return t;
+  return t
+    .replace(/\s*\((?:on request|straight away|по запросу|сразу|prose|проза|auto)\)/gi, '')
+    .replace(/([—–-])\s*(?:TABLE|ТАБЛИЦА)\s*:\s*/g, '$1 ')
+    .replace(/\s*(?<!\p{L})(?:TABLE|ТАБЛИЦА)(?!\p{L})/gu, '')
+    .replace(/^(?:Block|Блок)\s*\d+\s*[—–-]\s*(\p{Ll}?)/u, (m, c) => c.toUpperCase())
+    .replace(/\s{2,}/g, ' ')
+    .replace(/\s+:/g, ':')
+    .replace(/^[\s—–:-]+|[\s—–:-]+$/g, '')
+    .replace(/^\p{Ll}/u, c => c.toUpperCase());
+}
+
+/* 29.09.2026: то же для текстовых карточек — «### Block 1 (straight away)» в
+   заголовке тела (#17, #24) и «ex1»/«ex2» внутри текста (#224, #240). */
+export function cleanExhibitBody(b, lang) {
+  if (typeof b !== 'string' || !b) return b;
+  const withHeads = b.replace(/^(#{1,6}\s*)(.*)$/gm, (m, h, t) => h + cleanExhibitTitle(t));
+  return humanExRefs(withHeads, lang);
+}
+
 export function exhibitCard(ex, lang) {
   if (!ex) return null;
   let render = enField(ex, 'render', lang) || null;
@@ -265,12 +293,18 @@ export function exhibitCard(ex, lang) {
       const prev = typeof render.note === 'string' ? render.note : '';
       render = Object.assign({}, render, { note: prev ? prev + ' · ' + missing : missing });
     }
+    if (render.title != null) {
+      const rt = render.title;
+      render = Object.assign({}, render, { title: (rt && typeof rt === 'object')
+        ? Object.fromEntries(Object.entries(rt).map(([k, v]) => [k, cleanExhibitTitle(v)]))
+        : cleanExhibitTitle(rt) });
+    }
   }
   return {
     id: ex.id,
-    title: enField(ex, 'title', lang),
+    title: cleanExhibitTitle(enField(ex, 'title', lang)),
     render,
-    body_md: ex.render ? null : (enField(ex, 'body_md', lang) || null)
+    body_md: ex.render ? null : (cleanExhibitBody(enField(ex, 'body_md', lang), lang) || null)
   };
 }
 
@@ -871,13 +905,13 @@ function exhibitsBlock(caseObj, revealedSet, lang) {
       ? `\nThis exhibit is DISPLAYED TO THE CANDIDATE AS A VISUAL CHART/TABLE by the app the moment it is revealed. Do NOT retype its rows/numbers — introduce it in one short sentence and let the visual speak. You may quote individual numbers later when discussing their analysis.`
       : `\nThis exhibit is DISPLAYED TO THE CANDIDATE AS A DATA CARD by the app the moment it is revealed, with its layout preserved exactly. Do NOT retype, re-align, summarise or paraphrase its body — you would drop lines. Introduce it in one short sentence and let the card speak. You may quote individual numbers later when discussing their analysis.`;
     if (!gate) {
-      stableShown.push(`EXHIBIT id="${ex.id}" — "${enField(ex, 'title', lang)}" (available to share):${appNote}\n${enField(ex, 'body_md', lang) || ''}`);
+      stableShown.push(`EXHIBIT id="${ex.id}" — "${cleanExhibitTitle(enField(ex, 'title', lang))}" (available to share):${appNote}\n${enField(ex, 'body_md', lang) || ''}`);
     } else if (revealedSet.has(ex.id)) {
-      volatile.push(`EXHIBIT id="${ex.id}" — "${enField(ex, 'title', lang)}" (revealed — already shown to the candidate as a card; refer to it, do not retype it):\n${enField(ex, 'body_md', lang) || ''}`);
+      volatile.push(`EXHIBIT id="${ex.id}" — "${cleanExhibitTitle(enField(ex, 'title', lang))}" (revealed — already shown to the candidate as a card; refer to it, do not retype it):\n${enField(ex, 'body_md', lang) || ''}`);
     } else {
       const triggers = Array.from(gate);
       volatile.push(
-        `HIDDEN EXHIBIT id="${ex.id}" — "${enField(ex, 'title', lang)}"\n` +
+        `HIDDEN EXHIBIT id="${ex.id}" — "${cleanExhibitTitle(enField(ex, 'title', lang))}"\n` +
         `Do NOT mention or describe this exhibit's contents unless the candidate explicitly asks about: ` +
         `${triggers.length ? triggers.map(t => `"${t}"`).join(', ') : 'the specific data it contains'}.\n` +
         `If (and only if) they ask, BEGIN your reply with the marker <reveal>${ex.id}</reveal> and then present it.\n` +

@@ -412,7 +412,19 @@ function rkStripExRef(t) {
   return typeof t === 'string' ? t.replace(/\s*\(ex\d+\)/g, '') : t;
 }
 function scrubPrompt(p, secretVals, opts, ctx) {
-  return rkStripExRef(scrubPromptCore(p, secretVals, opts, ctx));
+  return rkDropSpoilerHeading(rkStripExRef(scrubPromptCore(p, secretVals, opts, ctx)));
+}
+/* 29.09.2026, dev, сплошной обход 57 игр. Мини-кейс #37 c4 начинался заголовком
+   «Simpson trap payoff — …»: название ловушки на экране до решения. Заголовок до
+   « — », в котором названа ловушка, снимается; сам вопрос остаётся. */
+function rkDropSpoilerHeading(t) {
+  if (typeof t !== 'string') return t;
+  const i = t.indexOf(' — ');
+  if (i < 0 || i > 60) return t;
+  const head = t.slice(0, i);
+  if (!/\b(simpson|paradox|trap|naive|reversal|pitfall)\b/i.test(head)) return t;
+  const rest = t.slice(i + 3);
+  return rest.charAt(0).toUpperCase() + rest.slice(1);
 }
 function scrubPromptCore(p, secretVals, opts, ctx) {
   const strict = rkScrubOnce(p, secretVals, opts);
